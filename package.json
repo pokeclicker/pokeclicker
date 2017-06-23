@@ -1,0 +1,23 @@
+{
+  "name": "pokeclicker",
+  "version": "0.0.1",
+  "description": "PokéClicker repository",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ishadijcks/pokeclicker.git"
+  },
+  "author": "IshaD",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ishadijcks/pokeclicker/issues"
+  },
+  "homepage": "https://github.com/Ishadijcks/pokeclicker#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-gh-pages": "^0.5.4"
+  }
+}
