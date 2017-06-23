@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "skipLibCheck": true,
+    "out": "script.min.js",
+    "sourceMap": true
+  },
+  "compileOnSave": false,
+  "exclude": [
+    "node",
+    "node_modules",
+    "build",
+    "src/libs",
+    "src/specs"
+  ]
+}

@@ -1,5 +1,14 @@
-var gulp        = require('gulp');
-var deploy      = require('gulp-gh-pages');
+const gulp = require('gulp');
+const tslint = require('gulp-tslint');
+const changed = require('gulp-changed');
+const minifyHtml = require('gulp-minify-html');
+const concat = require('gulp-concat');
+const autoprefix = require('gulp-autoprefixer');
+const minifyCSS = require('gulp-minify-css');
+const typescript = require('gulp-typescript');
+const browserSync = require('browser-sync');
+const del = require('del');
+const runSequence = require('run-sequence');
 
 /**
  * Push build to gh-pages
@@ -7,4 +16,99 @@ var deploy      = require('gulp-gh-pages');
 gulp.task('deploy', function () {
     return gulp.src("./dist/**/*")
         .pipe(deploy())
+});
+
+const srcs = {
+    buildArtefacts: 'build/**/*',
+    scripts: 'src/scripts/**/*.ts',
+    html: ['src/*.html', 'src/templates/*.html'],
+    styles: 'src/styles/**/*.css',
+    assets: 'src/assets/**/*',
+    libs: []
+};
+
+
+const dests = {
+    base: 'build',
+    libs: 'build/libs/',
+    assets: 'build/assets/',
+    scripts: 'build/scripts/',
+    styles: 'build/styles/',
+    githubPages: 'docs/'
+};
+
+gulp.task('copy', function () {
+    return gulp.src(srcs.libs)
+        .pipe(gulp.dest(dests.libs))
+        .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('assets', function () {
+    return gulp.src(srcs.assets)
+        .pipe(changed(dests.assets))
+        .pipe(gulp.dest(dests.assets))
+        .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('browserSync', () => {
+    browserSync({
+        server: {
+            baseDir: dests.base
+        }
+    });
+});
+
+gulp.task('html', function () {
+    const htmlDest = './build';
+
+    return gulp.src(srcs.html)
+        .pipe(changed(dests.base))
+        .pipe(minifyHtml())
+        .pipe(gulp.dest(htmlDest))
+        .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('scripts', function () {
+    let tsProject = typescript.createProject('tsconfig.json');
+    return tsProject.src()
+        .pipe(tsProject())
+        .pipe(gulp.dest(dests.scripts))
+        .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('styles', function () {
+    return gulp.src(srcs.styles)
+        .pipe(concat('styles.min.css'))
+        .pipe(autoprefix('last 2 versions'))
+        .pipe(minifyCSS())
+        .pipe(gulp.dest(dests.styles))
+        .pipe(browserSync.reload({stream: true}));
+});
+
+gulp.task('cleanWebsite', function () {
+    return del([dests.githubPages]);
+});
+
+gulp.task('clean', () => {
+    return del([dests.base]);
+});
+
+gulp.task('copyWebsite', function () {
+    gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
+});
+
+gulp.task('build', ['copy', 'assets', 'html', 'scripts', 'styles', 'website']);
+
+gulp.task('website', done => {
+    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', () => done());
+});
+
+gulp.task('default', function (done) {
+    runSequence('clean', 'build', 'browserSync', () => {
+        gulp.watch(srcs.html, ['html']);
+        gulp.watch(srcs.assets, ['assets']);
+        gulp.watch(srcs.scripts, ['scripts']);
+        gulp.watch(srcs.styles, ['styles']);
+        done();
+    });
 });
