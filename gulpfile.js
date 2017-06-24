@@ -9,6 +9,7 @@ const typescript = require('gulp-typescript');
 const browserSync = require('browser-sync');
 const del = require('del');
 const runSequence = require('run-sequence');
+const bsConfig = require("gulp-bootstrap-configurator");
 
 /**
  * Push build to gh-pages
@@ -50,7 +51,7 @@ gulp.task('assets', function () {
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('browserSync', () => {
+gulp.task('browserSync', function(){
     browserSync({
         server: {
             baseDir: dests.base
@@ -89,7 +90,7 @@ gulp.task('cleanWebsite', function () {
     return del([dests.githubPages]);
 });
 
-gulp.task('clean', () => {
+gulp.task('clean', function() {
     return del([dests.base]);
 });
 
@@ -97,14 +98,14 @@ gulp.task('copyWebsite', function () {
     gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
 });
 
-gulp.task('build', ['copy', 'assets', 'html', 'scripts', 'styles', 'website']);
+gulp.task('build', ['copy', 'assets', 'html', 'scripts', 'styles']);
 
 gulp.task('website', done => {
     runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', () => done());
 });
 
 gulp.task('default', function (done) {
-    runSequence('clean', 'build', 'browserSync', () => {
+    runSequence('clean', 'build', 'browserSync', function(){
         gulp.watch(srcs.html, ['html']);
         gulp.watch(srcs.assets, ['assets']);
         gulp.watch(srcs.scripts, ['scripts']);
