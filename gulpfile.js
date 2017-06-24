@@ -1,4 +1,5 @@
 const gulp = require('gulp');
+const file = require('gulp-file');
 const tslint = require('gulp-tslint');
 const changed = require('gulp-changed');
 const minifyHtml = require('gulp-minify-html');
@@ -41,6 +42,12 @@ const dests = {
     styles: 'build/styles/',
     githubPages: 'docs/'
 };
+
+gulp.task('cname', function() {
+    const str = "www.pokeclicker.com";
+    return file('CNAME', str, { src: true })
+        .pipe(gulp.dest('docs/'));
+});
 
 gulp.task('copy', function () {
     return gulp.src(srcs.libs)
@@ -105,7 +112,7 @@ gulp.task('copyWebsite', function () {
 gulp.task('build', ['copy', 'assets', 'html', 'scripts', 'styles']);
 
 gulp.task('website', done => {
-    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', () => done());
+    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', () => done());
 });
 
 gulp.task('default', function (done) {
