@@ -25,7 +25,11 @@ const srcs = {
     html: ['src/*.html', 'src/templates/*.html'],
     styles: 'src/styles/**/*.css',
     assets: 'src/assets/**/*',
-    libs: []
+    libs: [ 'node_modules/bootstrap/dist/js/bootstrap.min.js',
+            'node_modules/bootstrap/dist/css/bootstrap.min.css',
+            'node_modules/jquery/dist/jquery.min.js',
+            'node_modules/tether/dist/js/tether.min.js'
+    ]
 };
 
 
@@ -51,7 +55,7 @@ gulp.task('assets', function () {
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('browserSync', function(){
+gulp.task('browserSync', function () {
     browserSync({
         server: {
             baseDir: dests.base
@@ -90,7 +94,7 @@ gulp.task('cleanWebsite', function () {
     return del([dests.githubPages]);
 });
 
-gulp.task('clean', function() {
+gulp.task('clean', function () {
     return del([dests.base]);
 });
 
@@ -105,7 +109,7 @@ gulp.task('website', done => {
 });
 
 gulp.task('default', function (done) {
-    runSequence('clean', 'build', 'browserSync', function(){
+    runSequence('clean', 'build', 'browserSync', function () {
         gulp.watch(srcs.html, ['html']);
         gulp.watch(srcs.assets, ['assets']);
         gulp.watch(srcs.scripts, ['scripts']);

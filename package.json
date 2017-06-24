@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/Ishadijcks/pokeclicker#readme",
   "devDependencies": {
-    "bootstrap": "^3.3.7",
     "browser-sync": "^2.17.3",
     "del": "^2.2.2",
     "es6-promise": "^4.0.5",
@@ -43,6 +42,7 @@
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
     "jquery": "^3.2.1",
-    "knockout": "^3.4.2"
+    "knockout": "^3.4.2",
+    "tether": "^1.4.0"
   }
 }
