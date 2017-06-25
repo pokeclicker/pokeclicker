@@ -3,6 +3,14 @@ namespace gameConstants {
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
     export const FARM_TICK = 1000;
+
+
+    // Shinies
+    export const SHINY_CHANCE_BATTLE = 8192;
+    export const SHINY_CHANCE_DUNGEON = 4096;
+    export const SHINY_CHANCE_BREEDING = 4096;
+    export const SHINY_CHANCE_SAFARI = 2048;
+
     export enum GameStates {
         paused = 0,
         fighting = 1,

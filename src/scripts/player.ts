@@ -43,6 +43,6 @@ class player {
     }
     private static _money: number;
     private static _dungeonTokens: number;
-    private static _caughtPokemonList;
+    private static _caughtPokemonList = [];
 
 }
