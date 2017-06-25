@@ -7,8 +7,9 @@ interface enemyPokemonInterface {
     catchRate: number;
     exp: number;
     money: number;
+    shiny: boolean;
 
     isAlive(): boolean;
     defeat(): any;
-    damage(): void;
+    damage(damage:number): void;
 }

@@ -1,15 +1,5 @@
 import PokemonTypes = gameConstants.PokemonType;
-class battlePokemon implements enemyPokemonInterface{
-    isAlive(): boolean {
-        return undefined;
-    }
-
-    defeat(): any {
-        return undefined;
-    }
-
-    damage(): void {
-    }
+class battlePokemon implements enemyPokemonInterface {
     name: string;
     type1: gameConstants.PokemonType;
     type2: gameConstants.PokemonType;
@@ -18,6 +8,7 @@ class battlePokemon implements enemyPokemonInterface{
     catchRate: number;
     exp: number;
     money: number;
+    shiny: boolean;
 
     /**
      * In case you want to manually create a Pokémon instead of generating it from the route number
@@ -29,7 +20,7 @@ class battlePokemon implements enemyPokemonInterface{
      * @param exp base exp reward for defeating this Pokémon
      * @param money exp base exp reward for defeating this Pokémon
      */
-    constructor(name: string, type1: gameConstants.PokemonType, type2: gameConstants.PokemonType, maxHealth: number, catchRate: number, exp: number, money: number) {
+    constructor(name: string, type1: gameConstants.PokemonType, type2: gameConstants.PokemonType, maxHealth: number, catchRate: number, exp: number, money: number, shiny:boolean) {
         this.name = name;
         this.type1 = type1;
         this.type2 = type2;
@@ -38,6 +29,21 @@ class battlePokemon implements enemyPokemonInterface{
         this.catchRate = catchRate;
         this.exp = exp;
         this.money = money;
+        this.shiny = shiny;
     }
 
+    public isAlive(): boolean {
+        return this.health > 0;
+    }
+
+    public defeat(): any {
+        return undefined;
+    }
+
+    public damage(damage: number): void {
+        this.health = Math.max(0, this.health - damage);
+        if (!this.isAlive()) {
+            this.defeat();
+        }
+    }
 }

@@ -4,4 +4,16 @@ class Battle {
     public defeatPokemon(){
 
     }
+
+    public generateNewEnemy(){
+
+    }
+
+    public throwPokeball(){
+
+    }
+
+    public catch(){
+
+    }
 }
