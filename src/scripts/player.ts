@@ -1,7 +1,4 @@
 class player {
-    money: number;
-    dungeonTokens: number;
-
 
     public static calculateAttack(): number {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
@@ -32,4 +29,20 @@ class player {
         // TODO Calculate catch time by checking upgrades and multipliers.
         return 2000;
     }
+
+    public static get money(): number {
+        return this._money;
+    }
+
+    public static get dungeonTokens(): number {
+        return this._dungeonTokens;
+    }
+
+    public static get caughtPokemonList() {
+        return this._caughtPokemonList;
+    }
+    private static _money: number;
+    private static _dungeonTokens: number;
+    private static _caughtPokemonList;
+
 }
