@@ -1,4 +1,7 @@
-var pokemonList = [
+const pokemonMap :{[name : string] : object } = {};
+const pokemonMapId : {[id : number] : object} = {};
+
+const pokemonList = [
     {
         "id": 1,
         "name": "Bulbasaur",
@@ -2019,3 +2022,9 @@ var pokemonList = [
         "eggCycles": 120
     }
 ];
+
+for(let i = 0; i < pokemonList.length; i++){
+    let p = pokemonList[i];
+    pokemonMap[p["name"]] = p;
+    pokemonMapId[i+1] = p;
+}
