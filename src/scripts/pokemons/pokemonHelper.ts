@@ -3,11 +3,7 @@
 class PokemonHelper {
 
     public static findPokemonByName(name:string){
-        for(let i = 0; i< pokemonList.length; i++){
-            if(pokemonList[i].name == name){
-                return pokemonList[i];
-            }
-        }
+        return pokemonMap[name];
     }
 
     public static typeStringToId(id:string){
