@@ -1,10 +1,10 @@
 /**
  * Created by dennis on 26-06-17.
  */
-interface pokemonInterface{
+interface pokemonInterface {
     name: string;
-    id : number;
+    id: number;
     type1: PokemonTypes;
     type2: PokemonTypes;
-    shiny : boolean;
+    shiny?: boolean;
 }
