@@ -52,5 +52,13 @@ namespace gameConstants {
         "Dark" = 16,
         "Fairy" = 17,
     }
+
+    export enum LevelType {
+        "slow",
+        "medium slow",
+        "medium",
+        "medium fast",
+        "fast"
+    }
 }
 

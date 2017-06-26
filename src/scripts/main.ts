@@ -1,4 +1,4 @@
-///<reference path="battle/routeHelper.ts"/>
+///<reference path="wildBattle/routeHelper.ts"/>
 
 document.addEventListener("DOMContentLoaded", function (event) {
     let game: Game = new Game();
