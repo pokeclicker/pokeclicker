@@ -1,5 +1,5 @@
 class Battle {
-    enemyPokemon: wildPokemon;
+    enemyPokemon: battlePokemon;
 
     public defeatPokemon(){
 

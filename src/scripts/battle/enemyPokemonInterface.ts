@@ -1,13 +1,9 @@
-interface enemyPokemonInterface {
-    name: string;
-    type1: PokemonTypes;
-    type2: PokemonTypes;
+interface enemyPokemonInterface extends pokemonInterface{
     health: number;
     maxHealth: number;
     catchRate: number;
     exp: number;
     money: number;
-    shiny: boolean;
 
     isAlive(): boolean;
     defeat(): any;

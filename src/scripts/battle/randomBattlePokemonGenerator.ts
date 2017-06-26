@@ -3,7 +3,7 @@
 
 class randomBattlePokemonGenerator {
 
-    public static generate(route: number, region: gameConstants.Regions): wildPokemon {
+    public static generate(route: number, region: gameConstants.Regions): battlePokemon {
         if (route > 25) {
             return null;
         }
@@ -28,7 +28,7 @@ class randomBattlePokemonGenerator {
         let deviation = Math.floor(Math.random() * 51) - 25;
         let money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
         let shiny:boolean = this.generateShiny();
-        return new wildPokemon(name, type1, type2, maxHealth, catchRate, exp, money, shiny);
+        return new battlePokemon(name, type1, type2, maxHealth, catchRate, exp, money, shiny);
     }
 
     public static generateShiny(): boolean {

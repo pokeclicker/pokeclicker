@@ -1,6 +1,7 @@
 import PokemonTypes = gameConstants.PokemonType;
-class wildPokemon implements enemyPokemonInterface {
+class battlePokemon implements enemyPokemonInterface {
     name: string;
+    id: number;
     type1: gameConstants.PokemonType;
     type2: gameConstants.PokemonType;
     health: number;
@@ -13,15 +14,18 @@ class wildPokemon implements enemyPokemonInterface {
     /**
      * In case you want to manually create a Pokémon instead of generating it from the route number
      * @param name Pokémon name
+     * @param id Pokémon
      * @param type1 First type of the Pokémon
      * @param type2 Second type of the Pokémon
      * @param maxHealth max health that the Pokémon can have
      * @param catchRate base chance of catching this Pokémon
      * @param exp base exp reward for defeating this Pokémon
      * @param money exp base exp reward for defeating this Pokémon
+     * @param shiny
      */
-    constructor(name: string, type1: gameConstants.PokemonType, type2: gameConstants.PokemonType, maxHealth: number, catchRate: number, exp: number, money: number, shiny:boolean) {
+    constructor(name: string, id: number, type1: gameConstants.PokemonType, type2: gameConstants.PokemonType, maxHealth: number, catchRate: number, exp: number, money: number, shiny: boolean) {
         this.name = name;
+        this.id = id;
         this.type1 = type1;
         this.type2 = type2;
         this.health = maxHealth;
