@@ -6,6 +6,12 @@
  */
 class pokemonFactory {
 
+    /**
+     * Generate a wild pokemon based on route, region and the dataList.
+     * @param route route that the player is on.
+     * @param region region that the player is in.
+     * @returns {any}
+     */
     public static generateWildPokemon(route: number, region: GameConstants.Region): battlePokemon {
         if (route > 25) {
             return null;
@@ -37,7 +43,14 @@ class pokemonFactory {
         return new battlePokemon(name, id, type1, type2, maxHealth, route * 2, catchRate, exp, money, shiny);
     }
 
+    /**
+     * Calculate if a shiny has spawned.
+     * @param chance Base chance, should be from GameConstants.SHINY_CHANCE.*
+     * @returns {boolean}
+     */
     public static generateShiny(chance: number): boolean {
+
+        // TODO Factor in oak item
         // if(isActive("Shiny Charm")){
         //     chance /= getOakItemBonus("Shiny Charm");
         // }
@@ -51,6 +64,12 @@ class pokemonFactory {
         return false;
     }
 
+    /**
+     * Generate a trainer pokemon based on gymName, index and the dataList.
+     * @param gymName name of the gym that the player is fighting.
+     * @param index index of the pokémon that is being generated.
+     * @returns {any}
+     */
     public static generateTrainerPokemon(gymName: string, index: number): battlePokemon {
         let gym = gymList[gymName];
         let pokemon = gym.pokemons[index];

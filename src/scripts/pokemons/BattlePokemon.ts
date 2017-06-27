@@ -19,6 +19,7 @@ class battlePokemon implements enemyPokemonInterface {
      * @param type1 First type of the Pokémon
      * @param type2 Second type of the Pokémon
      * @param maxHealth max health that the Pokémon can have
+     * @param level level is 2 times the current route
      * @param catchRate base chance of catching this Pokémon
      * @param exp base exp reward for defeating this Pokémon
      * @param money exp base exp reward for defeating this Pokémon
@@ -42,14 +43,11 @@ class battlePokemon implements enemyPokemonInterface {
         return this.health > 0;
     }
 
-    public defeat(): any {
-        return undefined;
-    }
-
+    /**
+     * Lost health without
+     * @param damage
+     */
     public damage(damage: number): void {
         this.health = Math.max(0, this.health - damage);
-        if (!this.isAlive()) {
-            this.defeat();
-        }
     }
 }

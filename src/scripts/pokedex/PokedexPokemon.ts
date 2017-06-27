@@ -1,6 +1,3 @@
-/**
- * Created by dennis on 26-06-17.
- */
 class pokedexPokemon implements pokemonInterface {
     name: string;
     id: number;

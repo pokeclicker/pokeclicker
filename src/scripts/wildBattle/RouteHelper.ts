@@ -1,6 +1,16 @@
 ///<reference path="PokemonsPerRoute.ts"/>
 
+/**
+ * Helper class to retrieve information from PokemonsPerRoute
+ */
 class RouteHelper {
+    /**
+     * Retrieves a list of all Pokémon that can be caught on that route.
+     * @param route
+     * @param region
+     * @param includeWater
+     * @returns {string[]} list of all Pokémons that can be caught
+     */
     public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeWater: boolean = false): string[] {
         // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
         if (route > GameConstants.RegionRoute[region]) {
@@ -14,16 +24,21 @@ class RouteHelper {
         }
     }
 
+    /**
+     * Checks if all Pokémons on this route are caught by the player.
+     * @param route
+     * @param region
+     * @param includeShiny
+     * @param includeWater
+     * @returns {boolean} true if all Pokémon on this route are caught.
+     */
     public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean = false, includeWater: boolean = false) {
 
         let possiblePokemon: string[] = this.getAvailablePokemonList(route, region, includeWater);
-
-
         for (let i = 0; i < possiblePokemon.length; i++) {
-            // TODO fix if alreadyCaught is implemented
-            // if (!alreadyCaught(possiblePokemon[i])) {
-            //     return false;
-            // }
+            if (!Player.alreadyCaughtPokemon(possiblePokemon[i])) {
+                return false;
+            }
         }
         return true;
     }

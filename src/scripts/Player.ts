@@ -1,3 +1,7 @@
+/**
+ * Information about the player.
+ * All player variables need to be saved.
+ */
 class Player {
     private static _money: number;
     private static _dungeonTokens: number;
@@ -10,8 +14,15 @@ class Player {
     private static _notCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Masterball;
     private static _alreadyCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Pokeball;
 
-    public static calculatePokemonAttack(): number {
+    /**
+     * Calculate the attack of all your Pokémon
+     * @param type1
+     * @param type2 types of the enemy we're calculating damage against.
+     * @returns {number} damage to be done.
+     */
+    public static calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
+        // TODO factor in types
         return 1;
     }
 
@@ -40,6 +51,12 @@ class Player {
         return 2000;
     }
 
+    /**
+     * Checks the players preferences to see what pokéball needs to be used on the next throw.
+     * Checks from the players pref to the most basic ball to see if the player has any.
+     * @param alreadyCaught if the pokémon is already caught.
+     * @returns {GameConstants.Pokeball} pokéball to use.
+     */
     // TODO better name
     public static whichBallToUse(alreadyCaught:boolean): GameConstants.Pokeball{
         let pref: GameConstants.Pokeball;
@@ -49,7 +66,7 @@ class Player {
             pref = this._notCaughtBallSelection;
         }
 
-        let use: GameConstants.Pokeball;
+        let use: GameConstants.Pokeball.Pokeball;
 
         for(let i: number = pref; i>= 0; i--){
             console.log(i);
@@ -61,6 +78,12 @@ class Player {
         return use;
     }
 
+
+    /**
+     * Loops through the caughtPokemonList to check if the pokémon is already caight
+     * @param pokemonName name to search for.
+     * @returns {boolean}
+     */
     public static alreadyCaughtPokemon(pokemonName:string){
         for(let i:number = 0; i<this.caughtPokemonList.length; i++){
             if(this.caughtPokemonList[i].name == pokemonName){

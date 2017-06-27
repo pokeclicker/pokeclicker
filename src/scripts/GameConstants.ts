@@ -1,3 +1,7 @@
+/**
+ * Contains all game constants for easy access.
+ */
+
 namespace GameConstants {
     export const TICK_TIME = 10;
     export const BATTLE_TICK = 1000;

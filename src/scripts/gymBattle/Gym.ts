@@ -2,6 +2,11 @@
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 
 import PokemonType = GameConstants.PokemonType;
+
+
+/**
+ * Gym class.
+ */
 class Gym {
     leaderName: string;
     town: string;
@@ -21,6 +26,10 @@ class Gym {
     }
 }
 
+/**
+ * Data list that contains all gyms, accessible by townName.
+ * @type {{}}
+ */
 const gymList: { [townName: string]: Gym } = {};
 gymList["Pewter City"] = new Gym(
     "Brock",

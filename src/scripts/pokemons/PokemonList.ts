@@ -1,6 +1,16 @@
+/**
+ * Pokémon data, accessible by name or id.
+ * @type {{}}
+ */
+
 const pokemonMap :{[name : string] : object } = {};
 const pokemonMapId : {[id : number] : object} = {};
 
+
+
+/**
+ * Datalist that contains all Pokémon data
+ */
 const pokemonList = [
     {
         "id": 1,
@@ -2023,8 +2033,10 @@ const pokemonList = [
     }
 ];
 
+// TODO move to its own initialize method that gets called on game start.
 for(let i = 0; i < pokemonList.length; i++){
     let p = pokemonList[i];
     pokemonMap[p["name"]] = p;
     pokemonMapId[i+1] = p;
 }
+

@@ -1,12 +1,17 @@
 ///<reference path="wildBattle/RouteHelper.ts"/>
 ///<reference path="Battle.ts"/>
 
+/**
+ * Start the game when all html elements are loaded.
+ */
 document.addEventListener("DOMContentLoaded", function (event) {
     let game: Game = new Game();
     game.start()
 });
 
-
+/**
+ * Main game class.
+ */
 class Game {
     interval;
     undergroundCounter: number;
