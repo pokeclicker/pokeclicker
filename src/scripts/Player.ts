@@ -19,7 +19,7 @@ class Player {
     });
 
     public static pokemonAttackObservable : KnockoutComputed<number> = ko.computed(function () {
-        return Player.calculatePokemonAttack(null, null);
+        return Player.calculatePokemonAttack(PokemonType.None, PokemonType.None);
     });
 
     /**
