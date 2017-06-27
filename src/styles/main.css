@@ -1,7 +1,21 @@
-.strokeme {
+@font-face {
+    font-family: pokemonFont;
+    font-stretch: ultra-condensed;
+    src: url(../assets/fonts/pokemon.ttf);
+}
+
+.hoi {
     color: white;
     text-shadow: -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+}
+
+.dropdown-item {
+    font-family: pokemonFont, "Helvetica Neue", sans-serif;
+}
+
+.dropdown-toggle {
+    font-family: pokemonFont, "Helvetica Neue", sans-serif;
 }

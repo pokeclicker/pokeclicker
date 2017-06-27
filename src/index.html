@@ -23,59 +23,46 @@
 </head>
 <body style="background-image: url('assets/images/background.png')">
 
+<div class="dropdown clearfix" style="position:absolute; right:0; top:0">
+    <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">Start
+        Menu
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-menu-right">
+        <li>
+            <button class="dropdown-item" href="#">Pokedex</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Stats</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Subreddit</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Save</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Achievements</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Changelog</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Key Items</button>
+        </li>
+    </ul>
+</div>
 
-<div class="row">
-    <div class="col-md-4 offset-md-4" style="text-align: center">
+<div class="container">
+    <div class="row justify-content-lg-center">
         <h1>Header met logo'tje</h1>
 
     </div>
 
-    <div class="dropdown clearfix" style="position:absolute; right:0; top:0">
-        <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">Start Menu
-            <span class="caret"></span></button>
-        <ul class="dropdown-menu dropdown-menu-right">
-            <li>
-                <button class="dropdown-item" href="#">Pokedex</button>
-            </li>
-            <li>
-                <button class="dropdown-item" href="#">Stats</button>
-            </li>
-            <li>
-                <button class="dropdown-item" href="#">Subreddit</button>
-            </li>
-            <li>
-                <button class="dropdown-item" href="#">Save</button>
-            </li>
-            <li>
-                <button class="dropdown-item" href="#">Achievements</button>
-            </li>
-            <li>
-                <button class="dropdown-item" href="#">Changelog</button>
-            </li>
-            <li>
-                <button class="dropdown-item" href="#">Key Items</button>
-            </li>
-        </ul>
-    </div>
-</div>
 
+    <row class="row justify-content-lg-center" style="text-align: center">
 
-<div class="container col-md-10 offset-md-1">
-    <row class="row justify-content-md-center" style="text-align: center">
-        <div class="col">
-            <div style="background-color: white; min-height: 180px">
-                <h2>Pokeball management</h2>
-            </div>
-
-            <div style="background-color: #1aff00; min-height: 350px">
-                <h2>Pokemon list</h2>
-            </div>
-
-            <div style="background-color: #ffe463; min-height: 250px">
-                <h2>Upgrades</h2>
-            </div>
-        </div>
-        <div class="col-6">
+        <!--The next two divs switch around on large screens-->
+        <div class="col-md-6 push-md-3">
             <div style="background-color: #ff1fd7; min-height: 230px">
                 <h2>Battle window</h2>
             </div>
@@ -84,7 +71,21 @@
                 <h2>Map</h2>
             </div>
         </div>
-        <div class="col">
+
+        <div class="col-md-3 pull-md-6">
+            <div style="background-color: white; min-height: 180px">
+                <h2>Pokeball management</h2>
+            </div>
+
+            <div style="background-color: #1aff00; min-height: 350px">
+                <h2>Pokemon list</h2>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-md-3">
             <div style="background-color: red; min-height: 150px">
                 <h2>Oak Items</h2>
             </div>
@@ -93,6 +94,9 @@
                 <h2>Current quest counter</h2>
             </div>
 
+            <div style="background-color: #ffe463; min-height: 250px">
+                <h2>Upgrades</h2>
+            </div>
         </div>
 
     </row>
