@@ -3,11 +3,12 @@
     src: url(../assets/fonts/firered.ttf);
 }
 
-body{
-    background: url('../assets/images/background.png') center;
+body {
+    background: url('../assets/images/background.png') top;
+    background-size: cover;
 }
 
-.hoi {
+.black-border {
     color: white;
     text-shadow: -1px -1px 0 #000,
     1px -1px 0 #000,
@@ -30,4 +31,14 @@ body{
 
 .dropdown-toggle {
     font-family: pokemonFont, "Helvetica Neue", sans-serif;
+}
+
+.page-item .card {
+    border-radius: 0;
+    min-height: 50px;
+}
+
+.card span {
+    line-height: 50px;
+    text-align: left;
 }
