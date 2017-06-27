@@ -11,6 +11,9 @@ It contains all knowledge needed to help out in the development.
 
 # Developer instructions
 
+## Git Flow
+We are working with [Git Flow](https://jeffkreeftmeijer.com/2010/why-arent-you-using-git-flow/). This means all branches that cover features should be called "feature/xyz" and all branches covering fixes "bugfix/xyz"
+
 ## Naming conventions
 All typescript file names should be [lower camelCase](https://en.wikipedia.org/wiki/Camel_case)
 
