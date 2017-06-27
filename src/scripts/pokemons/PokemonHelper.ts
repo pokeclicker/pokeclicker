@@ -1,4 +1,4 @@
-///<reference path="pokemonList.ts"/>
+///<reference path="PokemonList.ts"/>
 
 class PokemonHelper {
 
@@ -7,11 +7,11 @@ class PokemonHelper {
     }
 
     public static typeStringToId(id:string){
-        return gameConstants.PokemonType[id];
+        return GameConstants.PokemonType[id];
     }
 
     public static typeIdToString(id:number){
-        return gameConstants.PokemonType[id];
+        return GameConstants.PokemonType[id];
     }
 
 }

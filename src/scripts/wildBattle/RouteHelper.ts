@@ -1,9 +1,9 @@
-///<reference path="pokemonsPerRoute.ts"/>
+///<reference path="PokemonsPerRoute.ts"/>
 
 class RouteHelper {
-    public static getAvailablePokemonList(route: number, region: gameConstants.Regions, includeWater: boolean = false): string[] {
+    public static getAvailablePokemonList(route: number, region: GameConstants.Regions, includeWater: boolean = false): string[] {
         // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
-        if (route > gameConstants.RegionRoutes[region]) {
+        if (route > GameConstants.RegionRoutes[region]) {
             route = 1;
         }
         let possiblePokemons = pokemonsPerRoute[region][route];
@@ -14,7 +14,7 @@ class RouteHelper {
         }
     }
 
-    public static routeCompleted(route: number, region: gameConstants.Regions, includeShiny: boolean = false, includeWater: boolean = false) {
+    public static routeCompleted(route: number, region: GameConstants.Regions, includeShiny: boolean = false, includeWater: boolean = false) {
 
         let possiblePokemon: string[] = this.getAvailablePokemonList(route, region, includeWater);
 

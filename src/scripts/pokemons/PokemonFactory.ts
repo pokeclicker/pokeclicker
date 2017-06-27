@@ -1,12 +1,12 @@
-///<reference path="pokemonHelper.ts"/>
-///<reference path="battlePokemon.ts"/>
+///<reference path="PokemonHelper.ts"/>
+///<reference path="BattlePokemon.ts"/>
 
 /**
  * Created by dennis on 27-06-17.
  */
 class pokemonFactory {
 
-    public static generateWildPokemon(route: number, region: gameConstants.Regions): battlePokemon {
+    public static generateWildPokemon(route: number, region: GameConstants.Regions): battlePokemon {
         if (route > 25) {
             return null;
         }
@@ -24,7 +24,7 @@ class pokemonFactory {
         }
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
-        let maxHealth: number = Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) * Math.pow(player.caughtPokemonList.length - 1, 1.2) / 12), 1.15)), 20) || 20;
+        let maxHealth: number = Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) * Math.pow(Player.caughtPokemonList.length - 1, 1.2) / 12), 1.15)), 20) || 20;
 
         let catchVariation = Math.floor(Math.random() * 7 - 3);
 
@@ -33,7 +33,7 @@ class pokemonFactory {
 
         let deviation = Math.floor(Math.random() * 51) - 25;
         let money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
-        let shiny: boolean = this.generateShiny(gameConstants.SHINY_CHANCE_BATTLE);
+        let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new battlePokemon(name, id, type1, type2, maxHealth, route * 2, catchRate, exp, money, shiny);
     }
 
@@ -62,7 +62,7 @@ class pokemonFactory {
             type2 = PokemonType.None;
         }
         let exp = 0;
-        let shiny = this.generateShiny(gameConstants.SHINY_CHANCE_BATTLE);
+        let shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new battlePokemon(pokemon.name, basePokemon["id"], type1, type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny)
     }
 

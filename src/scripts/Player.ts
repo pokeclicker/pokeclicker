@@ -1,6 +1,6 @@
-class player {
+class Player {
 
-    public static calculateAttack(): number {
+    public static calculatePokemonAttack(): number {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
         return 1;
     }
@@ -45,4 +45,7 @@ class player {
     private static _dungeonTokens: number;
     private static _caughtPokemonList = [];
 
+    static gainMoney(money: number) {
+
+    }
 }

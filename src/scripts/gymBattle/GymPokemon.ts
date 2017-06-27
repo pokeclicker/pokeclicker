@@ -1,4 +1,4 @@
-class gymPokemon{
+class GymPokemon{
     name: string;
     maxHealth : number;
     level : number;

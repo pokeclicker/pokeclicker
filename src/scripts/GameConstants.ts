@@ -1,4 +1,4 @@
-namespace gameConstants {
+namespace GameConstants {
     export const TICK_TIME = 10;
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
@@ -12,11 +12,12 @@ namespace gameConstants {
     export const SHINY_CHANCE_SAFARI = 2048;
 
     export enum GameStates {
-        paused = 0,
-        fighting = 1,
-        gym = 2,
-        dungeon = 3,
-        safari = 4,
+        idle = 0,
+        paused = 1,
+        fighting = 2,
+        gym = 3,
+        dungeon = 4,
+        safari = 5,
     }
 
     export enum Regions {

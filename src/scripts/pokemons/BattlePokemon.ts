@@ -1,9 +1,9 @@
-import PokemonTypes = gameConstants.PokemonType;
+import PokemonTypes = GameConstants.PokemonType;
 class battlePokemon implements enemyPokemonInterface {
     name: string;
     id: number;
-    type1: gameConstants.PokemonType;
-    type2: gameConstants.PokemonType;
+    type1: GameConstants.PokemonType;
+    type2: GameConstants.PokemonType;
     health: number;
     maxHealth: number;
     level: number;
@@ -24,7 +24,7 @@ class battlePokemon implements enemyPokemonInterface {
      * @param money exp base exp reward for defeating this Pokémon
      * @param shiny
      */
-    constructor(name: string, id: number, type1: gameConstants.PokemonType, type2: gameConstants.PokemonType, maxHealth: number, level: number, catchRate: number, exp: number, money: number, shiny: boolean) {
+    constructor(name: string, id: number, type1: GameConstants.PokemonType, type2: GameConstants.PokemonType, maxHealth: number, level: number, catchRate: number, exp: number, money: number, shiny: boolean) {
         this.name = name;
         this.id = id;
         this.type1 = type1;
