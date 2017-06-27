@@ -6,6 +6,7 @@ class battlePokemon implements enemyPokemonInterface {
     type2: gameConstants.PokemonType;
     health: number;
     maxHealth: number;
+    level: number;
     catchRate: number;
     exp: number;
     money: number;
@@ -23,13 +24,14 @@ class battlePokemon implements enemyPokemonInterface {
      * @param money exp base exp reward for defeating this Pokémon
      * @param shiny
      */
-    constructor(name: string, id: number, type1: gameConstants.PokemonType, type2: gameConstants.PokemonType, maxHealth: number, catchRate: number, exp: number, money: number, shiny: boolean) {
+    constructor(name: string, id: number, type1: gameConstants.PokemonType, type2: gameConstants.PokemonType, maxHealth: number, level: number, catchRate: number, exp: number, money: number, shiny: boolean) {
         this.name = name;
         this.id = id;
         this.type1 = type1;
         this.type2 = type2;
         this.health = maxHealth;
         this.maxHealth = maxHealth;
+        this.level = level;
         this.catchRate = catchRate;
         this.exp = exp;
         this.money = money;

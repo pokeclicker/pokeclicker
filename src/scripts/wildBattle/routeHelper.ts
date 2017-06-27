@@ -2,7 +2,7 @@
 
 class RouteHelper {
     public static getAvailablePokemonList(route: number, region: gameConstants.Regions, includeWater: boolean = false): string[] {
-        // If the route is somehow higher than allowed, use the first route to generate Pokémon
+        // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
         if (route > gameConstants.RegionRoutes[region]) {
             route = 1;
         }

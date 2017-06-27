@@ -2,7 +2,7 @@
 
 class PokemonHelper {
 
-    public static findPokemonByName(name:string){
+    public static getPokemonByName(name:string){
         return pokemonMap[name];
     }
 

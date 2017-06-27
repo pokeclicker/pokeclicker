@@ -32,7 +32,7 @@ class Game {
         if(this.battleCounter > gameConstants.BATTLE_TICK){
             this.battleCounter = 0;
         }
-        console.log(randomBattlePokemonGenerator.generate(1, gameConstants.Regions.kanto));
+        console.log(pokemonFactory.generateWildPokemon(1, gameConstants.Regions.kanto));
     }
 
     save() {
