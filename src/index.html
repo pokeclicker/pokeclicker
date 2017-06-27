@@ -7,6 +7,9 @@
     <script src="libs/jquery.min.js"></script>
 
 
+    <!--Knockout-->
+    <script src="libs/knockout-latest.js"></script>
+
     <!--Minified scripts-->
     <script src="scripts/script.min.js"></script>
 
@@ -63,8 +66,26 @@
 
         <!--The next two divs switch around on large screens-->
         <div class="col-md-6 push-md-3">
-            <div class="page-item" style="background-color: #ff1fd7; min-height: 230px">
-                <h2>Battle window</h2>
+            <div class="page-item" style="background-color: white">
+                <div class="card">
+                    <span>Money: <span data-bind="text: Player.money">todo</span></span>
+                </div>
+
+                <div>
+                    <h2 style="min-height: 180px">Battle window</h2>
+
+                </div>
+
+                <div class="card">
+                    <table width="100%">
+                        <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                data-bind="text: Player.clickAttackObservable"></span></span></td>
+                        <td width="50%"><span style="display: inline;">Click Attack: <span
+                                data-bind="text: Player.pokemonAttackObservable"></span></span>
+                        </td>
+                    </table>
+                </div>
+
             </div>
 
             <div class="page-item" style="background-color: green; min-height: 350px">

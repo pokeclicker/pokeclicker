@@ -1,12 +1,11 @@
 ///<reference path="wildBattle/RouteHelper.ts"/>
 ///<reference path="Battle.ts"/>
-
 /**
  * Start the game when all html elements are loaded.
  */
 document.addEventListener("DOMContentLoaded", function (event) {
     let game: Game = new Game();
-    game.start()
+    game.start();
 });
 
 /**
@@ -42,7 +41,6 @@ class Game {
         if (Battle.counter > GameConstants.BATTLE_TICK) {
             Battle.tick();
         }
-
     }
 
     save() {
