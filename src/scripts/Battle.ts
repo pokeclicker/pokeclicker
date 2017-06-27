@@ -1,3 +1,5 @@
+///<reference path="pokemons/PokemonFactory.ts"/>
+
 /**
  * Handles all logic related to battling
  */
