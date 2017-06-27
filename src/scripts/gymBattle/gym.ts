@@ -1,6 +1,4 @@
-/**
- * Created by dennis on 26-06-17.
- */
+import PokemonType = gameConstants.PokemonType;
 class gym {
     leaderName: string;
     town: string;
@@ -21,4 +19,5 @@ class gym {
 }
 
 const gymList: { [townName: string]: gym } = {};
-gymList["Pewter City"] = new gym("Brock", "Pewter City", null, "Boulder", 250, 0);
+let pewList = [];
+gymList["Pewter City"] = new gym("Brock", "Pewter City",pewList , "Boulder", 250, 0);

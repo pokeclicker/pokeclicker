@@ -1,9 +1,8 @@
-/**
- * Created by dennis on 26-06-17.
- */
 class gymPokemonGenerator {
 
-    public static generate(gymName : string, index : number) {
+    public static generate(gymName : string, index : number) : battlePokemon {
         let gym = gymList[gymName];
+        let pokemons = gym.pokemons;
+        return null;
     }
 }

@@ -33,8 +33,9 @@ namespace gameConstants {
 
 
     export enum PokemonType {
+        "None" = -1,
         "Normal" = 0,
-        "Fight" = 1,
+        "Fighting" = 1,
         "Flying" = 2,
         "Poison" = 3,
         "Ground" = 4,
@@ -51,7 +52,6 @@ namespace gameConstants {
         "Dragon" = 15,
         "Dark" = 16,
         "Fairy" = 17,
-        "None" = 18,
     }
 
     export enum LevelType {
