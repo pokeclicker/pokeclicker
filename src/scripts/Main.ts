@@ -5,9 +5,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let game: Game = new Game();
     game.start()
 });
+
+
 class Game {
-    interval: number;
-    battleCounter: number;
+    interval;
     undergroundCounter: number;
     farmCounter: number;
 
@@ -16,8 +17,11 @@ class Game {
     }
 
     start() {
+        Player.route = 1;
+        Player.region = GameConstants.Region.kanto;
         this.load();
-        this.interval = setInterval(this.gameTick(), GameConstants.TICK_TIME);
+        this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
+        console.log("started");
     }
 
     stop() {
@@ -26,15 +30,14 @@ class Game {
 
     gameTick() {
         // Update tick counters
-        this.battleCounter += GameConstants.TICK_TIME;
+        Battle.counter += GameConstants.TICK_TIME;
         this.undergroundCounter += GameConstants.TICK_TIME;
         this.farmCounter += GameConstants.TICK_TIME;
 
-        if(this.battleCounter > GameConstants.BATTLE_TICK){
-            this.battleCounter = 0;
-            Battle.turn();
+        if (Battle.counter > GameConstants.BATTLE_TICK) {
+            Battle.tick();
         }
-        console.log(pokemonFactory.generateWildPokemon(1, GameConstants.Regions.kanto));
+
     }
 
     save() {
@@ -42,6 +45,6 @@ class Game {
     }
 
     load() {
-
+        Battle.generateNewEnemy();
     }
 }

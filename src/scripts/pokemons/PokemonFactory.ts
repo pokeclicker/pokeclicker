@@ -6,7 +6,7 @@
  */
 class pokemonFactory {
 
-    public static generateWildPokemon(route: number, region: GameConstants.Regions): battlePokemon {
+    public static generateWildPokemon(route: number, region: GameConstants.Region): battlePokemon {
         if (route > 25) {
             return null;
         }
@@ -51,7 +51,7 @@ class pokemonFactory {
         return false;
     }
 
-    public static generateGymPokemon(gymName: string, index: number): battlePokemon {
+    public static generateTrainerPokemon(gymName: string, index: number): battlePokemon {
         let gym = gymList[gymName];
         let pokemon = gym.pokemons[index];
         let basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
@@ -61,7 +61,7 @@ class pokemonFactory {
         if (type2 == null) {
             type2 = PokemonType.None;
         }
-        let exp = 0;
+        let exp: number = basePokemon["exp"] * 1.5;
         let shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new battlePokemon(pokemon.name, basePokemon["id"], type1, type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny)
     }
