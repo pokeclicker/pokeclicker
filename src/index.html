@@ -5,9 +5,7 @@
 
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
-    
-    <!--Minified styles-->
-    <link href="styles/styles.min.css" rel="stylesheet">
+
 
     <!--Minified scripts-->
     <script src="scripts/script.min.js"></script>
@@ -15,47 +13,93 @@
     <!--Tether-->
     <script src="libs/tether.min.js"></script>
 
-
     <!--Bootstrap-->
     <link href="libs/bootstrap.min.css" rel="stylesheet">
     <script src="libs/bootstrap.min.js"></script>
 
+    <!--Minified styles-->
+    <link href="styles/styles.min.css" rel="stylesheet">
+
 </head>
-<body style="background-image: url('assets/images/background.png')">
+<body>
+
+<div class="dropdown clearfix" style="position:absolute; right:0; top:0">
+    <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">Start
+        Menu
+        <span class="caret"></span></button>
+    <ul class="dropdown-menu dropdown-menu-right">
+        <li>
+            <button class="dropdown-item" href="#">Pokedex</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Stats</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Subreddit</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Save</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Achievements</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Changelog</button>
+        </li>
+        <li>
+            <button class="dropdown-item" href="#">Key Items</button>
+        </li>
+    </ul>
+</div>
+
 <div class="container">
-    <row class="row justify-content-md-center">
-        <div class="col-sm-12" style="text-align: center">
-            <h1 class="strokeme">Pok&eacute;Clicker 1.0 is currently under development!</h1>
-        </div>
-    </row>
+    <div class="row justify-content-lg-center">
+        <h1>Pokeclicker</h1>
 
-    <row class="row">
-        <div class="col-sm-8 offset-sm-2" style="text-align: center">
-            <a target="_blank" href="http://ishadijcks.github.io"><img style="width:100%"
-                                                                       src="assets/images/pokeclickerlogo.png"></a>
-        </div>
-    </row>
-
-    <row class="row justify-content-md-center">
-        <div class="col-sm-12" style="text-align: center">
-            <h1 class="strokeme">You can still play version 0.93 <a target="_blank" href="http://ishadijcks.github.io">here</a>
-            </h1>
-        </div>
-    </row>
+    </div>
 
 
-    <row class="row justify-content-md-center">
-        <div class="col-sm-12" style="text-align: center">
-            <h1 class="strokeme">Subscribe to the subreddit to stay notified of the development process!</h1>
-        </div>
-    </row>
+    <div class="row justify-content-lg-center" style="text-align: center">
 
-    <row class="row justify-content-md-center">
-        <div class="col-sm-4" style="text-align: center">
-            <a target="_blank" href="http://www.reddit.com/r/pokeclicker"><img style="width:50%"
-                                                                               src="https://cdn.worldvectorlogo.com/logos/reddit-2.svg"></a>
+        <!--The next two divs switch around on large screens-->
+        <div class="col-md-6 push-md-3">
+            <div class="page-item" style="background-color: #ff1fd7; min-height: 230px">
+                <h2>Battle window</h2>
+            </div>
+
+            <div class="page-item" style="background-color: green; min-height: 350px">
+                <h2>Map</h2>
+            </div>
         </div>
-    </row>
+
+        <div class="col-md-3 pull-md-6">
+            <div class="page-item" style="background-color: white; min-height: 180px">
+                <h2>Pokeball management</h2>
+            </div>
+
+            <div class="page-item" style="background-color: #1aff00; min-height: 350px">
+                <h2>Pokemon list</h2>
+            </div>
+
+
+        </div>
+
+
+        <div class="col-md-3">
+            <div class="page-item" style="background-color: red; min-height: 150px">
+                <h2>Oak Items</h2>
+            </div>
+
+            <div class="page-item" style="background-color: deepskyblue; min-height: 100px">
+                <h2>Current quest counter</h2>
+            </div>
+
+            <div class="page-item" style="background-color: #ffe463; min-height: 250px">
+                <h2>Upgrades</h2>
+            </div>
+        </div>
+
+    </div>
 </div>
 </body>
 </html>

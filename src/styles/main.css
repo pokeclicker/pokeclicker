@@ -1,7 +1,33 @@
-.strokeme {
+@font-face {
+    font-family: pokemonFont;
+    src: url(../assets/fonts/firered.ttf);
+}
+
+body{
+    background: url('../assets/images/background.png') center;
+}
+
+.borderText {
     color: white;
     text-shadow: -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+}
+
+.dropdown-menu {
+    border: 1px solid black;
+}
+
+.page-item {
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+.dropdown-item {
+    font-family: pokemonFont, "Helvetica Neue", sans-serif;
+}
+
+.dropdown-toggle {
+    font-family: pokemonFont, "Helvetica Neue", sans-serif;
 }
