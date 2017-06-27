@@ -11,7 +11,7 @@ namespace GameConstants {
     export const SHINY_CHANCE_BREEDING = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
 
-    export enum GameStates {
+    export enum GameState {
         idle = 0,
         paused = 1,
         fighting = 2,
@@ -20,13 +20,21 @@ namespace GameConstants {
         safari = 5,
     }
 
-    export enum Regions {
+    export enum Pokeball {
+        "None" = -1,
+        "Pokeball" = 0,
+        "Greatball" = 1,
+        "Ultraball" = 2,
+        "Masterball" = 3,
+    }
+
+    export enum Region {
         kanto = 0,
         johto = 1,
         hoenn = 2
     }
 
-    export const RegionRoutes = {
+    export const RegionRoute = {
         0: 25,
         1: 0,
         2: 0
