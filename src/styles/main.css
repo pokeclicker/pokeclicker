@@ -35,10 +35,10 @@ body {
 
 .page-item .card {
     border-radius: 0;
-    min-height: 50px;
+    min-height: 40px;
 }
 
 .card span {
-    line-height: 50px;
+    line-height: 40px;
     text-align: left;
 }
