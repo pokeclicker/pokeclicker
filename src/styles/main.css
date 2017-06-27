@@ -39,6 +39,7 @@ body {
 }
 
 .card span {
+    margin-left: 5px;
     line-height: 40px;
     text-align: left;
 }
