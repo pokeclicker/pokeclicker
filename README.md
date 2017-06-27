@@ -11,6 +11,9 @@ It contains all knowledge needed to help out in the development.
 
 # Developer instructions
 
+## Naming conventions
+All typescript file names should be [lower camelCase](https://en.wikipedia.org/wiki/Camel_case)
+
 ## Building from Source
 
 First make sure you have git and npm available as command-line utilities (so you should install Git and NodeJS if you don't have them already).
@@ -24,7 +27,8 @@ Open a command line interface in the directory that contains this README file, a
 Then finally, run the following command in the command line interface to start a browser running PokéClicker.
 - gulp
 
-Changes to the sourcecode will automatically cause the browser to refresh.
+Changes to the sourcecode will automatically cause the browser to refresh. 
+This means you don't need to compile TypeScript yourself. Gulp will do this for you :thumbsup:
 
 
 ## Deploying a new version to Github Pages
