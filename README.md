@@ -12,7 +12,7 @@ It contains all knowledge needed to help out in the development.
 # Developer instructions
 
 ## Naming conventions
-All file and class names should be [upper CamelCase](https://en.wikipedia.org/wiki/Camel_case). Function names should be lower camelCase.
+All typescript file names should be [lower camelCase](https://en.wikipedia.org/wiki/Camel_case)
 
 ## Building from Source
 
