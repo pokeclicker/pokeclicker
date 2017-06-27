@@ -7,6 +7,9 @@
     <script src="libs/jquery.min.js"></script>
 
 
+    <!--Knockout-->
+    <script src="libs/knockout-latest.js"></script>
+
     <!--Minified scripts-->
     <script src="scripts/script.min.js"></script>
 
@@ -65,7 +68,7 @@
         <div class="col-md-6 push-md-3">
             <div class="page-item" style="background-color: white">
                 <div class="card">
-                    <span>Currency</span>
+                    <span>Money: <span data-bind="text: money">todo</span></span>
                 </div>
 
                 <div>
@@ -74,7 +77,13 @@
                 </div>
 
                 <div class="card">
-                    <span>Battle stats</span>
+                    <table width="100%">
+                        <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                data-bind="text: clickAttack">0</span></span></td>
+                        <td width="50%"><span style="display: inline;">Click Attack: <span
+                                data-bind="text: pokemonAttack"></span></span>
+                        </td>
+                    </table>
                 </div>
 
             </div>

@@ -1,12 +1,12 @@
 ///<reference path="wildBattle/RouteHelper.ts"/>
 ///<reference path="Battle.ts"/>
-
+///<reference path="PlayerView.ts"/>
 /**
  * Start the game when all html elements are loaded.
  */
 document.addEventListener("DOMContentLoaded", function (event) {
     let game: Game = new Game();
-    game.start()
+    game.start();
 });
 
 /**
