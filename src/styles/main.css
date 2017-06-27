@@ -7,7 +7,7 @@ body{
     background: url('../assets/images/background.png') center;
 }
 
-.hoi {
+.borderText {
     color: white;
     text-shadow: -1px -1px 0 #000,
     1px -1px 0 #000,
