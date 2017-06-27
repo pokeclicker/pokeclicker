@@ -1,7 +1,12 @@
 @font-face {
     font-family: pokemonFont;
-    font-stretch: ultra-condensed;
-    src: url(../assets/fonts/pokemon.ttf);
+    src: url(../assets/fonts/firered.ttf);
+}
+
+body{
+    background-image: url('../assets/images/background.png');
+
+    background-position: center;
 }
 
 .hoi {
@@ -10,6 +15,15 @@
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
+}
+
+.dropdown-menu {
+    border: 1px solid black;
+}
+
+.page-item {
+    margin-bottom: 10px;
+    border: 1px solid black;
 }
 
 .dropdown-item {
