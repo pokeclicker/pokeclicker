@@ -4,9 +4,7 @@
 }
 
 body{
-    background-image: url('../assets/images/background.png');
-
-    background-position: center;
+    background: url('../assets/images/background.png') center;
 }
 
 .hoi {
