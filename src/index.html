@@ -68,7 +68,7 @@
         <div class="col-md-6 push-md-3">
             <div class="page-item" style="background-color: white">
                 <div class="card">
-                    <span>Money: <span data-bind="text: money">todo</span></span>
+                    <span>Money: <span data-bind="text: Player.money">todo</span></span>
                 </div>
 
                 <div>
@@ -79,9 +79,9 @@
                 <div class="card">
                     <table width="100%">
                         <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                data-bind="text: clickAttack">0</span></span></td>
+                                data-bind="text: Player.clickAttackObservable"></span></span></td>
                         <td width="50%"><span style="display: inline;">Click Attack: <span
-                                data-bind="text: pokemonAttack"></span></span>
+                                data-bind="text: Player.pokemonAttackObservable"></span></span>
                         </td>
                     </table>
                 </div>

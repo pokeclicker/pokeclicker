@@ -1,6 +1,5 @@
 ///<reference path="wildBattle/RouteHelper.ts"/>
 ///<reference path="Battle.ts"/>
-///<reference path="PlayerView.ts"/>
 /**
  * Start the game when all html elements are loaded.
  */
@@ -42,7 +41,6 @@ class Game {
         if (Battle.counter > GameConstants.BATTLE_TICK) {
             Battle.tick();
         }
-
     }
 
     save() {

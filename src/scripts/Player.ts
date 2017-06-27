@@ -3,16 +3,24 @@
  * All player variables need to be saved.
  */
 class Player {
-    private static _money: number;
+    private static _money: KnockoutObservable<number> = ko.observable(0);
     private static _dungeonTokens: number;
     private static _caughtPokemonList = [];
-    private static _route:number;
+    private static _route: number;
     private static _region: GameConstants.Region;
-    private static _pokeballs: number[] = [3,2,4,1];
+    private static _pokeballs: number[] = [3, 2, 4, 1];
 
     // TODO Eh not a big fan of this name.
     private static _notCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Masterball;
     private static _alreadyCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Pokeball;
+
+    public static clickAttackObservable : KnockoutComputed<number> = ko.computed(function () {
+        return Player.calculateClickAttack()
+    });
+
+    public static pokemonAttackObservable : KnockoutComputed<number> = ko.computed(function () {
+        return Player.calculatePokemonAttack(null, null);
+    });
 
     /**
      * Calculate the attack of all your Pokémon
@@ -28,7 +36,7 @@ class Player {
 
     public static calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
-        return 1;
+        return 2;
     }
 
     public static calculateMoneyMultiplier(): number {
@@ -46,7 +54,7 @@ class Player {
         return 1;
     }
 
-    public static calculateCatchTime(): number{
+    public static calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
         return 2000;
     }
@@ -58,9 +66,9 @@ class Player {
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
     // TODO better name
-    public static whichBallToUse(alreadyCaught:boolean): GameConstants.Pokeball{
+    public static whichBallToUse(alreadyCaught: boolean): GameConstants.Pokeball {
         let pref: GameConstants.Pokeball;
-        if(alreadyCaught){
+        if (alreadyCaught) {
             pref = this._alreadyCaughtBallSelection;
         } else {
             pref = this._notCaughtBallSelection;
@@ -68,9 +76,9 @@ class Player {
 
         let use: GameConstants.Pokeball.Pokeball;
 
-        for(let i: number = pref; i>= 0; i--){
+        for (let i: number = pref; i >= 0; i--) {
             console.log(i);
-            if(this._pokeballs[i] > 0){
+            if (this._pokeballs[i] > 0) {
                 use = i;
                 break;
             }
@@ -84,9 +92,9 @@ class Player {
      * @param pokemonName name to search for.
      * @returns {boolean}
      */
-    public static alreadyCaughtPokemon(pokemonName:string){
-        for(let i:number = 0; i<this.caughtPokemonList.length; i++){
-            if(this.caughtPokemonList[i].name == pokemonName){
+    public static alreadyCaughtPokemon(pokemonName: string) {
+        for (let i: number = 0; i < this.caughtPokemonList.length; i++) {
+            if (this.caughtPokemonList[i].name == pokemonName) {
                 return true;
             }
         }
@@ -94,7 +102,7 @@ class Player {
     }
 
     static gainMoney(money: number) {
-        // TODO add money multipliers
+        this._money(this._money() + money);
     }
 
     static gainExp(exp: number) {
@@ -102,7 +110,7 @@ class Player {
     }
 
     public static get money(): number {
-        return this._money;
+        return this._money();
     }
 
     public static get dungeonTokens(): number {
@@ -131,3 +139,6 @@ class Player {
 
 
 }
+$(document).ready(function () {
+    ko.applyBindings(Player);
+});

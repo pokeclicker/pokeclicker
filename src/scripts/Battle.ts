@@ -17,7 +17,7 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
-        this.enemyPokemon.damage(Player.calculatePokemonAttack(this.enemyPokemon.type1, this.enemyPokemon.type2))
+        this.enemyPokemon.damage(Player.calculatePokemonAttack(this.enemyPokemon.type1, this.enemyPokemon.type2));
         if (!this.enemyPokemon.isAlive()) {
             this.defeatPokemon();
         }
@@ -27,7 +27,7 @@ class Battle {
      * Attacks with clicks and checks if the enemy is defeated.
      */
     public static clickAttack() {
-        this.enemyPokemon.damage(Player.calculateClickAttack())
+        this.enemyPokemon.damage(Player.calculateClickAttack());
         if (!this.enemyPokemon.isAlive()) {
             this.defeatPokemon();
         }
