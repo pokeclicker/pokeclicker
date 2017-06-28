@@ -12,7 +12,7 @@ class pokemonFactory {
      * @param region region that the player is in.
      * @returns {any}
      */
-    public static generateWildPokemon(route: number, region: GameConstants.Region): battlePokemon {
+    public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
         if (route > 25) {
             return null;
         }
@@ -40,7 +40,7 @@ class pokemonFactory {
         let deviation = Math.floor(Math.random() * 51) - 25;
         let money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
         let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        return new battlePokemon(name, id, type1, type2, maxHealth, route * 2, catchRate, exp, money, shiny);
+        return new BattlePokemon(name, id, type1, type2, maxHealth, route * 2, catchRate, exp, money, shiny);
     }
 
     /**
@@ -70,7 +70,7 @@ class pokemonFactory {
      * @param index index of the pokémon that is being generated.
      * @returns {any}
      */
-    public static generateTrainerPokemon(gymName: string, index: number): battlePokemon {
+    public static generateTrainerPokemon(gymName: string, index: number): BattlePokemon {
         let gym = gymList[gymName];
         let pokemon = gym.pokemons[index];
         let basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
@@ -82,7 +82,7 @@ class pokemonFactory {
         }
         let exp: number = basePokemon["exp"] * 1.5;
         let shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        return new battlePokemon(pokemon.name, basePokemon["id"], type1, type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny)
+        return new BattlePokemon(pokemon.name, basePokemon["id"], type1, type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny)
     }
 
 
