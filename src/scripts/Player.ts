@@ -107,7 +107,7 @@ class Player {
     }
 
     public static hasBadge(badge: GameConstants.Badge) {
-        if (badge == undefined) {
+        if (badge == undefined || GameConstants.Badge.None) {
             return true;
         }
         for (let i = 0; i < this._gymBadges.length; i++) {

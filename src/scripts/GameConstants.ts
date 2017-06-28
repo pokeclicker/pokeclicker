@@ -128,7 +128,7 @@ namespace GameConstants {
         }
     };
 
-    export const routeGymRequirements = {
+    export const routeBadgeRequirements = {
         0: {
             3: GameConstants.Badge.Boulder,
             5: GameConstants.Badge.Cascade,
