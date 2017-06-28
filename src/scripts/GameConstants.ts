@@ -44,6 +44,21 @@ namespace GameConstants {
         2: 0
     };
 
+    export enum Badge {
+        "Boulder" = 1,
+        "Cascade" = 2,
+        "Thunder" = 3,
+        "Rainbow" = 4,
+        "Soul" = 5,
+        "Marsh" = 6,
+        "Volcano" = 7,
+        "Earth" = 8,
+        "Lorelei" = 9,
+        "Bruno" = 10,
+        "Agatha" = 11,
+        "Lance" = 12,
+        "Champion" = 13,
+    }
 
     export enum PokemonType {
         "None" = -1,
