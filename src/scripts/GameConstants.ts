@@ -45,6 +45,7 @@ namespace GameConstants {
     };
 
     export enum Badge {
+        "None" = 0,
         "Boulder" = 1,
         "Cascade" = 2,
         "Thunder" = 3,
