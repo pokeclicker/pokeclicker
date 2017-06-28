@@ -9,7 +9,7 @@ class Player {
     private static _dungeonTokens: number = 0;
     private static _caughtPokemonList = [];
     private static _route: number = 1;
-    private static _routeKills: number[] = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(Number.prototype.valueOf,0);
+    private static _routeKills: number[] = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(Number.prototype.valueOf, 0);
     private static _routeKillsNeeded: number = 10;
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
     private static _gymBadges: GameConstants.Badge[] = [GameConstants.Badge.Boulder];
@@ -19,11 +19,11 @@ class Player {
     private static _notCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Masterball;
     private static _alreadyCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Pokeball;
 
-    public static clickAttackObservable : KnockoutComputed<number> = ko.computed(function () {
+    public static clickAttackObservable: KnockoutComputed<number> = ko.computed(function () {
         return Player.calculateClickAttack()
     });
 
-    public static pokemonAttackObservable : KnockoutComputed<number> = ko.computed(function () {
+    public static pokemonAttackObservable: KnockoutComputed<number> = ko.computed(function () {
         return Player.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
     });
 
@@ -106,9 +106,12 @@ class Player {
         return false;
     }
 
-    public static hasBadge(badge:GameConstants.Badge){
-        for(let i = 0; i<this._gymBadges.length; i++ ){
-            if(this._gymBadges[i] == badge){
+    public static hasBadge(badge: GameConstants.Badge) {
+        if (badge == undefined) {
+            return true;
+        }
+        for (let i = 0; i < this._gymBadges.length; i++) {
+            if (this._gymBadges[i] == badge) {
                 return true;
             }
         }
