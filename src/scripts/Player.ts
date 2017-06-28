@@ -1,4 +1,3 @@
-import Types = GameConstants.PokemonType;
 /**
  * Information about the player.
  * All player variables need to be saved.
@@ -20,7 +19,7 @@ class Player {
     });
 
     public static pokemonAttackObservable : KnockoutComputed<number> = ko.computed(function () {
-        return Player.calculatePokemonAttack(Types.None, Types.None);
+        return Player.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
     });
 
     /**
@@ -29,7 +28,7 @@ class Player {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public static calculatePokemonAttack(type1: PokemonType, type2: PokemonType): number {
+    public static calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
         // TODO factor in types
         return 1;
