@@ -1,5 +1,5 @@
 import PokemonTypes = GameConstants.PokemonType;
-class battlePokemon implements enemyPokemonInterface {
+class BattlePokemon implements enemyPokemonInterface {
     name: string;
     id: number;
     type1: GameConstants.PokemonType;

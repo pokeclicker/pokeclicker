@@ -1,4 +1,4 @@
-class pokedexPokemon implements pokemonInterface {
+class PokedexPokemon implements pokemonInterface {
     name: string;
     id: number;
     type1: GameConstants.PokemonType;
