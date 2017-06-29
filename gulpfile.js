@@ -82,7 +82,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('scripts', function () {
-    let tsProject = typescript.createProject('tsconfig.json');
+    var tsProject = typescript.createProject('tsconfig.json');
     return tsProject.src()
         .pipe(tsProject())
         .pipe(gulp.dest(dests.scripts))
