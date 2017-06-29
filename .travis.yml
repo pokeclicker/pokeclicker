@@ -1,4 +1,7 @@
 language: node_js
+cache:
+  directories:
+    - node_modules
 before_install:
 - chmod a+x ./install.sh
 install:
