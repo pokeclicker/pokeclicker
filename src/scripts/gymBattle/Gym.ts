@@ -32,7 +32,6 @@ class Gym {
 
 /**
  * Data list that contains all gyms, accessible by townName.
- * @type {{}}
  */
 const gymList: {[townName: string]: Gym} = {};
 gymList["Pewter City"] = new Gym(

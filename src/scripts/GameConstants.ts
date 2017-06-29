@@ -3,10 +3,14 @@
  */
 
 namespace GameConstants {
+
+    // Ticks
     export const TICK_TIME = 10;
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
     export const FARM_TICK = 1000;
+
+    export const AMOUNT_OF_POKEMONS = 151;
 
 
     // Shinies
@@ -30,6 +34,13 @@ namespace GameConstants {
         "Greatball" = 1,
         "Ultraball" = 2,
         "Masterball" = 3,
+    }
+
+    export enum PokeballCatchBonus {
+        "Pokeball" = 0,
+        "Greatball" = 5,
+        "Ultraball" = 10,
+        "Masterball" = 100,
     }
 
     export enum Region {

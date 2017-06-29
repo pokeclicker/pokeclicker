@@ -4,8 +4,11 @@
  * Start the game when all html elements are loaded.
  */
 document.addEventListener("DOMContentLoaded", function (event) {
+
     let game: Game = new Game();
     game.start();
+    ko.applyBindings(Game);
+
 });
 
 /**
@@ -21,7 +24,6 @@ class Game {
     }
 
     start() {
-        Player.route = 1;
         Player.region = GameConstants.Region.kanto;
         this.load();
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);

@@ -1,6 +1,6 @@
 interface enemyPokemonInterface extends pokemonInterface {
-    health: number;
-    maxHealth: number;
+    health: number | KnockoutObservable<number>;
+    maxHealth: number | KnockoutObservable<number>;
     level: number;
     catchRate: number;
     exp: number;

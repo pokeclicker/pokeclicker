@@ -1,9 +1,9 @@
 class RouteRequirement {
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
-        if (!isNaN(route) && !(route == Player.route)) {
+        if (!isNaN(route) && !(route == Player.route())) {
             if (this.accessToRoute(route, region)) {
-                Player.route = route;
+                Player.route(route);
             }
             else {
                 console.log("You don't have access to that route yet.");

@@ -1,18 +1,19 @@
 import PokemonTypes = GameConstants.PokemonType;
+
 class BattlePokemon implements enemyPokemonInterface {
-    name: string;
-    id: number;
+    name: KnockoutObservable<string>;
+    id: KnockoutObservable<number>;
     type1: GameConstants.PokemonType;
     type2: GameConstants.PokemonType;
-    health: number;
-    maxHealth: number;
+    health: KnockoutObservable<number>;
+    maxHealth: KnockoutObservable<number>;
+    healthPercentage: KnockoutObservable<number>;
     level: number;
     catchRate: number;
     exp: number;
     money: number;
     shiny: boolean;
-
-    /**
+        /**
      * In case you want to manually create a Pokémon instead of generating it from the route number
      * @param name Pokémon name
      * @param id Pokémon
@@ -26,12 +27,13 @@ class BattlePokemon implements enemyPokemonInterface {
      * @param shiny
      */
     constructor(name: string, id: number, type1: GameConstants.PokemonType, type2: GameConstants.PokemonType, maxHealth: number, level: number, catchRate: number, exp: number, money: number, shiny: boolean) {
-        this.name = name;
-        this.id = id;
+        this.name = ko.observable(name);
+        this.id = ko.observable(id);
         this.type1 = type1;
         this.type2 = type2;
-        this.health = maxHealth;
-        this.maxHealth = maxHealth;
+        this.health = ko.observable(maxHealth);
+        this.maxHealth = ko.observable(maxHealth);
+        this.healthPercentage = ko.observable(100);
         this.level = level;
         this.catchRate = catchRate;
         this.exp = exp;
@@ -40,7 +42,7 @@ class BattlePokemon implements enemyPokemonInterface {
     }
 
     public isAlive(): boolean {
-        return this.health > 0;
+        return this.health() > 0;
     }
 
     /**
@@ -48,6 +50,11 @@ class BattlePokemon implements enemyPokemonInterface {
      * @param damage
      */
     public damage(damage: number): void {
-        this.health = Math.max(0, this.health - damage);
+        this.health(Math.max(0, this.health() - damage));
+        this.healthPercentage(Math.floor(this.health()/this.maxHealth()*100));
     }
+
+
 }
+
+
