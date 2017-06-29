@@ -6,4 +6,3 @@ install:
 - ./install.sh
 script:
 - ./build.sh
-sudo: required
