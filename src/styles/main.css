@@ -8,6 +8,12 @@ body {
     background-size: cover;
 }
 
+@media (min-width: 1200px) {
+    .container {
+        width: 70%;
+    }
+}
+
 .borderText {
     color: white;
     text-shadow: -1px -1px 0 #000,
