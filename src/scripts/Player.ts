@@ -3,7 +3,7 @@
  * All player variables need to be saved.
  */
 class Player {
-    private static _money: KnockoutObservable<number> = ko.observable("hi");
+    private static _money: KnockoutObservable<number> = ko.observable(0);
     private static _dungeonTokens: number;
     private static _caughtPokemonList = [];
     private static _route: number;
