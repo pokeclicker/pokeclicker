@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
-echo "installing npm"
+echo "running npm install"
 npm install -g typescript
 npm install
+echo "finished npm install"
