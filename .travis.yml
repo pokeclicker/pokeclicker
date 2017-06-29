@@ -5,4 +5,4 @@ before_install:
 install:
 - ./install.sh
 script:
-- ./build.sh
+- tsc
