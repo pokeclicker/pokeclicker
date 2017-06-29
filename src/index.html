@@ -74,15 +74,17 @@
                 <div>
                     <div class="col-lg-12" style="display: block;">
                         Route <span data-bind="text: Player.route">number</span><br>
+                        <span data-bind="text: Player.routeKillsObservable">kills</span>/<span
+                            data-bind="text: Player.routeKillsNeeded">killsneeded</span><br>
                         <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span><br>
                         <img data-bind="attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
 
                         <div class="progress">
-
-                            <div id="deze"
-                                 class="progress-bar bg-danger" role="progressbar"
+                            <div class="progress-bar bg-danger" role="progressbar"
                                  data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
-                                 aria-valuemin="0" aria-valuemax="100"></div>
+                                 aria-valuemin="0" aria-valuemax="100">
+
+                            </div>
                         </div>
 
 

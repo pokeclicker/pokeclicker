@@ -5,12 +5,13 @@
 
 class Player {
 
+
     private static _money: KnockoutObservable<number> = ko.observable(0);
     private static _dungeonTokens: number = 0;
     private static _caughtPokemonList: CaughtPokemon[] = [];
     private static _route: KnockoutObservable<number> = ko.observable(2);
-    private static _routeKills: number[] = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(Number.prototype.valueOf, 0);
-    private static _routeKillsNeeded: number = 10;
+    private static _routeKills: KnockoutObservable<number[]> = ko.observable(Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(Number.prototype.valueOf, 0));
+    private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
     private static _gymBadges: GameConstants.Badge[] = [GameConstants.Badge.Boulder];
     private static _pokeballs: number[] = [0, 0, 0, 0];
@@ -26,6 +27,14 @@ class Player {
     public static pokemonAttackObservable: KnockoutComputed<number> = ko.computed(function () {
         return Player.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
     });
+
+    public static routeKillsObservable: KnockoutComputed<number> = ko.computed(function () {
+        return Player.routeKills()[Player.route()];
+    });
+
+    public static addRouteKill(){
+        Player.routeKills()[Player.route()]++
+    }
 
     /**
      * Calculate the attack of all your Pokémon
@@ -132,8 +141,24 @@ class Player {
         // TODO add exp multipliers
     }
 
+    static get routeKills(): KnockoutObservable<number[]> {
+        return this._routeKills;
+    }
+
+    static set routeKills(value: KnockoutObservable<number[]>) {
+        this._routeKills = value;
+    }
+
     static usePokeball(pokeBall:GameConstants.Pokeball) : void{
         this._pokeballs[pokeBall]--;
+    }
+
+    static get routeKillsNeeded(): KnockoutObservable<number> {
+        return this._routeKillsNeeded;
+    }
+
+    static set routeKillsNeeded(value: KnockoutObservable<number>) {
+        this._routeKillsNeeded = value;
     }
 
     static get route(): KnockoutObservable<number> {
@@ -170,22 +195,6 @@ class Player {
 
     static set pokeballs(value: number[]) {
         this._pokeballs = value;
-    }
-
-    static get routeKills(): number[] {
-        return this._routeKills;
-    }
-
-    static set routeKills(value: number[]) {
-        this._routeKills = value;
-    }
-
-    static get routeKillsNeeded(): number {
-        return this._routeKillsNeeded;
-    }
-
-    static set routeKillsNeeded(value: number) {
-        this._routeKillsNeeded = value;
     }
 
     static get gymBadges(): GameConstants.Badge[] {
