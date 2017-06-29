@@ -1,1 +1,3 @@
-#!/usr/bin/env bash
+/usr/bin/env sh
+echo "compiling typescript"
+tsc

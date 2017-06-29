@@ -1,5 +1,9 @@
 language: node_js
+before_install:
+- chmod a+x ./install.sh
+- chmod a+x ./build.sh
 install:
 - ./install.sh
 script:
 - ./build.sh
+sudo: required
