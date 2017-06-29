@@ -11,12 +11,12 @@ class Gym {
     leaderName: string;
     town: string;
     pokemons: GymPokemon[];
-    badgeReward: string;
+    badgeReward: GameConstants.Badge;
     moneyReward: number;
-    badgeReq: number;
+    badgeReq: GameConstants.Badge;
 
 
-    constructor(leaderName: string, town: string, pokemons: GymPokemon[], badgeReward: string, moneyReward: number, badgeReq: number) {
+    constructor(leaderName: string, town: string, pokemons: GymPokemon[], badgeReward: GameConstants.Badge, moneyReward: number, badgeReq: GameConstants.Badge) {
         this.leaderName = leaderName;
         this.town = town;
         this.pokemons = pokemons;
@@ -24,29 +24,34 @@ class Gym {
         this.moneyReward = moneyReward;
         this.badgeReq = badgeReq;
     }
+
+    public isUnlocked(): boolean {
+        return Player.hasBadge(this.badgeReq);
+    }
 }
 
 /**
  * Data list that contains all gyms, accessible by townName.
  * @type {{}}
  */
-const gymList: { [townName: string]: Gym } = {};
+const gymList: {[townName: string]: Gym} = {};
 gymList["Pewter City"] = new Gym(
     "Brock",
     "Pewter City",
     [new GymPokemon("Geodude", 550, 12),
         new GymPokemon("Onix", 1110, 14)],
-    "Boulder",
+    GameConstants.Badge.Boulder,
     250,
-    0);
+    GameConstants.Badge.None);
+
 gymList["Cerulean City"] = new Gym(
     "Misty",
     "Celadon City",
     [new GymPokemon("Staryu", 4000, 18),
         new GymPokemon("Starmie", 6000, 21)],
-    "Cascade",
+    GameConstants.Badge.Cascade,
     500,
-    1
+    GameConstants.Badge.Boulder
 );
 gymList["Vermillion City"] = new Gym(
     "Lt. Surge",
@@ -54,9 +59,9 @@ gymList["Vermillion City"] = new Gym(
     [new GymPokemon("Voltorb", 9780, 21),
         new GymPokemon("Pikachu", 13040, 18),
         new GymPokemon("Raichu", 14775, 24)],
-    "Thunder",
+    GameConstants.Badge.Thunder,
     1000,
-    2
+    GameConstants.Badge.Cascade
 );
 gymList["Celadon City"] = new Gym(
     "Erika",
@@ -64,9 +69,9 @@ gymList["Celadon City"] = new Gym(
     [new GymPokemon("Victreebel", 17830, 29),
         new GymPokemon("Tangela", 20210, 24),
         new GymPokemon("Vileplume", 21400, 29)],
-    "Rainbow",
+    GameConstants.Badge.Rainbow,
     1500,
-    3
+    GameConstants.Badge.Thunder
 );
 gymList["Saffron City"] = new Gym(
     "Sabrina",
@@ -75,9 +80,9 @@ gymList["Saffron City"] = new Gym(
         new GymPokemon("Mr. Mime", 18340, 37),
         new GymPokemon("Venomoth", 19870, 38),
         new GymPokemon("Alakazam", 21400, 43)],
-    "Marsh",
+    GameConstants.Badge.Soul,
     2500,
-    4
+    GameConstants.Badge.Rainbow
 );
 gymList["Fuchsia City"] = new Gym(
     "Koga",
@@ -86,9 +91,9 @@ gymList["Fuchsia City"] = new Gym(
         new GymPokemon("Muk", 24000, 37),
         new GymPokemon("Koffing", 26667, 38),
         new GymPokemon("Weezing", 30000, 43)],
-    "Marsh",
+    GameConstants.Badge.Marsh,
     3500,
-    5
+    GameConstants.Badge.Soul
 );
 gymList["Cinnabar Island City"] = new Gym(
     "Blaine",
@@ -97,9 +102,9 @@ gymList["Cinnabar Island City"] = new Gym(
         new GymPokemon("Ponyta", 30960, 40),
         new GymPokemon("Rapidash", 34060, 42),
         new GymPokemon("Arcanine", 37155, 47)],
-    "Volcano",
+    GameConstants.Badge.Volcano,
     5000,
-    6
+    GameConstants.Badge.Marsh
 );
 gymList["Viridian City"] = new Gym(
     "Giovanni",
@@ -109,9 +114,9 @@ gymList["Viridian City"] = new Gym(
         new GymPokemon("Nidoqueen", 29960, 44),
         new GymPokemon("Nidoking", 32452, 45),
         new GymPokemon("Rhydon", 34950, 50)],
-    "Earth",
+    GameConstants.Badge.Earth,
     6000,
-    7
+    GameConstants.Badge.Volcano,
 );
 gymList["Lorelei"] = new Gym(
     "Elite Lorelei",
@@ -121,9 +126,9 @@ gymList["Lorelei"] = new Gym(
         new GymPokemon("Slowbro", 35950, 52),
         new GymPokemon("Jynx", 38510, 54),
         new GymPokemon("Lapras", 44182, 54),],
-    "E1",
+    GameConstants.Badge.Lorelei,
     7500,
-    8
+    GameConstants.Badge.Earth,
 );
 gymList["Bruno"] = new Gym(
     "Elite Bruno",
@@ -133,9 +138,9 @@ gymList["Bruno"] = new Gym(
         new GymPokemon("Hitmonlee", 37660, 53),
         new GymPokemon("Onix", 40010, 54),
         new GymPokemon("Machamp", 42360, 56),],
-    "E2",
+    GameConstants.Badge.Bruno,
     7500,
-    9
+    GameConstants.Badge.Lorelei
 );
 gymList["Agatha"] = new Gym(
     "Elite Agatha",
@@ -145,9 +150,9 @@ gymList["Agatha"] = new Gym(
         new GymPokemon("Haunter", 48950, 53),
         new GymPokemon("Arbok", 41241, 56),
         new GymPokemon("Gengar", 45824, 58),],
-    "E3",
+    GameConstants.Badge.Agatha,
     7500,
-    10
+    GameConstants.Badge.Bruno
 );
 gymList["Lance"] = new Gym(
     "Elite Lance",
@@ -157,8 +162,8 @@ gymList["Lance"] = new Gym(
         new GymPokemon("Dragonair", 41160, 54),
         new GymPokemon("Aerodactyl", 43540, 58),
         new GymPokemon("Dragonite", 45610, 60),],
-    "E4",
+    GameConstants.Badge.Lance,
     7500,
-    11
+    GameConstants.Badge.Agatha
 );
 //TODO make champion Gym

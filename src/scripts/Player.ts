@@ -3,22 +3,27 @@
  * All player variables need to be saved.
  */
 class Player {
+
+
     private static _money: KnockoutObservable<number> = ko.observable(0);
-    private static _dungeonTokens: number;
+    private static _dungeonTokens: number = 0;
     private static _caughtPokemonList = [];
-    private static _route: number;
-    private static _region: GameConstants.Region;
-    private static _pokeballs: number[] = [3, 2, 4, 1];
+    private static _route: number = 1;
+    private static _routeKills: number[] = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(Number.prototype.valueOf, 0);
+    private static _routeKillsNeeded: number = 10;
+    private static _region: GameConstants.Region = GameConstants.Region.kanto;
+    private static _gymBadges: GameConstants.Badge[] = [GameConstants.Badge.Boulder];
+    private static _pokeballs: number[] = [0, 0, 0, 0];
 
     // TODO Eh not a big fan of this name.
     private static _notCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Masterball;
     private static _alreadyCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Pokeball;
 
-    public static clickAttackObservable : KnockoutComputed<number> = ko.computed(function () {
+    public static clickAttackObservable: KnockoutComputed<number> = ko.computed(function () {
         return Player.calculateClickAttack()
     });
 
-    public static pokemonAttackObservable : KnockoutComputed<number> = ko.computed(function () {
+    public static pokemonAttackObservable: KnockoutComputed<number> = ko.computed(function () {
         return Player.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
     });
 
@@ -101,6 +106,18 @@ class Player {
         return false;
     }
 
+    public static hasBadge(badge: GameConstants.Badge) {
+        if (badge == undefined || GameConstants.Badge.None) {
+            return true;
+        }
+        for (let i = 0; i < this._gymBadges.length; i++) {
+            if (this._gymBadges[i] == badge) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     static gainMoney(money: number) {
         this._money(this._money() + money);
     }
@@ -137,7 +154,37 @@ class Player {
         this._region = value;
     }
 
+    static get pokeballs(): number[] {
+        return this._pokeballs;
+    }
 
+    static set pokeballs(value: number[]) {
+        this._pokeballs = value;
+    }
+
+    static get routeKills(): number[] {
+        return this._routeKills;
+    }
+
+    static set routeKills(value: number[]) {
+        this._routeKills = value;
+    }
+
+    static get routeKillsNeeded(): number {
+        return this._routeKillsNeeded;
+    }
+
+    static set routeKillsNeeded(value: number) {
+        this._routeKillsNeeded = value;
+    }
+
+    static get gymBadges(): GameConstants.Badge[] {
+        return this._gymBadges;
+    }
+
+    static set gymBadges(value: GameConstants.Badge[]) {
+        this._gymBadges = value;
+    }
 }
 $(document).ready(function () {
     ko.applyBindings(Player);
