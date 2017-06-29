@@ -12,8 +12,8 @@ class RouteRequirement {
     };
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        if (!Player.hasBadge(GameConstants.routeGymRequirements[region][route])) {
-            console.log("Missing badge: " + GameConstants.routeGymRequirements[region][route]));
+        if (!Player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
+            console.log("Missing badge: " + GameConstants.routeBadgeRequirements[region][route]);
             return false;
         }
         let reqList = GameConstants.routeRequirements[region][route];
