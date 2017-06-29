@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 echo "compiling typescript"
-tsc
+gulp
 exit 0
