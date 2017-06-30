@@ -77,14 +77,14 @@
                         <span data-bind="text: Player.routeKillsObservable">kills</span>/<span
                             data-bind="text: Player.routeKillsNeeded">killsneeded</span><br>
                         <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span><br>
-                        <div data-bind="click: Battle.clickAttack()">
+                        <div style="height: 96px;">
 
-                            <div data-bind="ifnot: Battle.catching">
-                                <img height="96px" id="enemy" data-bind="attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                            <div data-bind="ifnot: Battle.catching, click: Battle.clickAttack()">
+                                <img id="enemy" data-bind="attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
                             </div>
 
                             <div data-bind="if: Battle.catching">
-                                <img height="96px" data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
+                                <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
                             </div>
 
 
