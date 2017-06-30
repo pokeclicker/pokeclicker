@@ -8,7 +8,7 @@ class Player {
 
     private static _money: KnockoutObservable<number> = ko.observable(0);
     private static _dungeonTokens: number = 0;
-    private static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray();
+    private static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray<CaughtPokemon>();
     private static _route: KnockoutObservable<number> = ko.observable(2);
     private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function(){return ko.observable(0)});
     private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
