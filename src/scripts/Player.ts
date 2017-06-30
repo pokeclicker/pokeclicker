@@ -8,7 +8,7 @@ class Player {
 
     private static _money: KnockoutObservable<number> = ko.observable(0);
     private static _dungeonTokens: number = 0;
-    private static _caughtPokemonList: CaughtPokemon[] = [];
+    private static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray();
     private static _route: KnockoutObservable<number> = ko.observable(2);
     private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function(){return ko.observable(0)});
     private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
@@ -121,7 +121,7 @@ class Player {
     public static capturePokemon(pokemonName:string, shiny:boolean = false){
         if(!this.alreadyCaughtPokemon(pokemonName)){
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonName, false, 0, 0);
-            this.caughtPokemonList.push(caughtPokemon);
+            this._caughtPokemonList.push(caughtPokemon);
         }
     }
 
@@ -183,7 +183,7 @@ class Player {
     }
 
     public static get caughtPokemonList() {
-        return this._caughtPokemonList;
+        return this._caughtPokemonList();
     }
 
     static get region(): GameConstants.Region {
