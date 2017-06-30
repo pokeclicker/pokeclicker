@@ -45,7 +45,12 @@ class Player {
     public static calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
         // TODO factor in types
-        return 4;
+        // TODO start at 0
+        let attack = 5;
+        attack += this.caughtPokemonList.length;
+        console.log("attack = " + attack);
+
+        return attack;
     }
 
     public static calculateClickAttack(): number {
