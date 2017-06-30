@@ -3,8 +3,8 @@
   src: url(../assets/fonts/firered.ttf);
 }
 
-@tablePaddingWidth: 0.3rem;
-@tablePaddingHeight: 0.2rem;
+@tablePadding: 0.25rem;
+@tablePaddingWidth: @tablePadding;
 
 body {
   background: url('../assets/images/background.png') top;
@@ -62,15 +62,18 @@ body {
   margin: -7px 0 -7px -7px;
 }
 
-#pokemonList th {
-  padding: @tablePaddingHeight @tablePaddingWidth;
-}
-
-#pokemonList td {
-  padding: @tablePaddingHeight @tablePaddingWidth;
-}
 
 #pokemonList {
+
+  th{
+    vertical-align: middle;
+    padding:  0 @tablePaddingWidth;
+  }
+
+  td {
+    vertical-align: middle;
+    padding:  0 @tablePaddingWidth;
+  }
 
   td:first-child {
     width: 60%;
@@ -81,6 +84,7 @@ body {
   }
   th {
     text-align: center;
+    vertical-align: middle;
   }
 }
 
