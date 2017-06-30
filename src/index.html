@@ -79,8 +79,8 @@
                         <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span><br>
                         <div style="height: 96px;">
 
-                            <div data-bind="ifnot: Battle.catching, click: Battle.clickAttack()">
-                                <img id="enemy" data-bind="attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                            <div data-bind="ifnot: Battle.catching">
+                                <img id="enemy" data-bind="click: Battle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
                             </div>
 
                             <div data-bind="if: Battle.catching">
