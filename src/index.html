@@ -80,11 +80,11 @@
                         <div data-bind="click: Battle.clickAttack()">
 
                             <div data-bind="ifnot: Battle.catching">
-                                <img id="enemy" data-bind="attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                                <img height="96px" id="enemy" data-bind="attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
                             </div>
 
                             <div data-bind="if: Battle.catching">
-                                <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
+                                <img height="96px" data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
                             </div>
 
 
