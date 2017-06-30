@@ -14,12 +14,8 @@ body {
     }
 }
 
-.borderText {
-    color: white;
-    text-shadow: -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
+.card {
+    border: 0;
 }
 
 .dropdown-menu {
@@ -28,7 +24,8 @@ body {
 
 .page-item {
     margin-bottom: 10px;
-    border: 1px solid black;
+    border: 1px solid #7f7f7f;
+    border-radius: 2px;
 }
 
 .dropdown-item {
@@ -51,6 +48,34 @@ body {
 }
 
 .table {
-    font-size: 14px;
+    font-size: 13px;
     margin-bottom: 0;
+}
+
+.smallImage {
+    max-height: 40px;
+    height: auto;
+    width: auto;
+    margin: -7px 0 -7px -7px;
+}
+
+#pokemonList th {
+    padding: 0.3rem;
+}
+#pokemonList td {
+    padding: 0.2rem 0.2rem;
+}
+
+
+#pokemonList td:first-child {
+    width: 60%;
+    text-align: left;
+}
+
+#pokemonList th:first-child {
+    text-align: left;
+}
+
+#pokemonList th {
+    text-align: center;
 }
