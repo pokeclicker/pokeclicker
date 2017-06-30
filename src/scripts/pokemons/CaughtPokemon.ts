@@ -23,7 +23,7 @@ class CaughtPokemon  {
             case GameConstants.LevelType.mediumslow:
                 let y;
                 for (let x = 1; x <= 100; x++){
-                    y=6/5*Math.pow(x, 3)-15*Math.pow(x, 2)+100*x-140
+                    y=6/5*Math.pow(x, 3)-15*Math.pow(x, 2)+100*x-140;
                     if (this.exp >= y){
                         level = x
                     } else {

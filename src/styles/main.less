@@ -1,81 +1,86 @@
 @font-face {
-    font-family: pokemonFont;
-    src: url(../assets/fonts/firered.ttf);
+  font-family: pokemonFont;
+  src: url(../assets/fonts/firered.ttf);
 }
 
+@tablePaddingWidth: 0.3rem;
+@tablePaddingHeight: 0.2rem;
+
 body {
-    background: url('../assets/images/background.png') top;
-    background-size: cover;
+  background: url('../assets/images/background.png') top;
+  background-size: cover;
 }
 
 @media (min-width: 1200px) {
-    .container {
-        width: 70%;
-    }
+  .container {
+    width: 70%;
+  }
 }
 
 .card {
-    border: 0;
+  border: 0;
 }
 
 .dropdown-menu {
-    border: 1px solid black;
+  border: 1px solid black;
 }
 
 .page-item {
-    margin-bottom: 10px;
-    border: 1px solid #7f7f7f;
-    border-radius: 2px;
+  margin-bottom: 10px;
+  border: 1px solid #7f7f7f;
+  border-radius: 2px;
 }
 
 .dropdown-item {
-    font-family: pokemonFont, "Helvetica Neue", sans-serif;
+  font-family: pokemonFont, "Helvetica Neue", sans-serif;
 }
 
 .dropdown-toggle {
-    font-family: pokemonFont, "Helvetica Neue", sans-serif;
+  font-family: pokemonFont, "Helvetica Neue", sans-serif;
 }
 
 .page-item .card {
-    border-radius: 0;
-    min-height: 40px;
+  border-radius: 0;
+  min-height: 40px;
 }
 
 .card span {
-    margin-left: 5px;
-    line-height: 40px;
-    text-align: left;
+  margin-left: 5px;
+  line-height: 40px;
+  text-align: left;
 }
 
 .table {
-    font-size: 13px;
-    margin-bottom: 0;
+  font-size: 13px;
+  margin-bottom: 0;
 }
 
 .smallImage {
-    max-height: 40px;
-    height: auto;
-    width: auto;
-    margin: -7px 0 -7px -7px;
+  max-height: 40px;
+  height: auto;
+  width: auto;
+  margin: -7px 0 -7px -7px;
 }
 
 #pokemonList th {
-    padding: 0.3rem;
+  padding: @tablePaddingHeight @tablePaddingWidth;
 }
+
 #pokemonList td {
-    padding: 0.2rem 0.2rem;
+  padding: @tablePaddingHeight @tablePaddingWidth;
 }
 
+#pokemonList {
 
-#pokemonList td:first-child {
+  td:first-child {
     width: 60%;
     text-align: left;
-}
-
-#pokemonList th:first-child {
+  }
+  th:first-child {
     text-align: left;
+  }
+  th {
+    text-align: center;
+  }
 }
 
-#pokemonList th {
-    text-align: center;
-}
