@@ -1,8 +1,10 @@
+///<reference path="pokemons/PokemonFactory.ts"/>
+
 /**
  * Handles all logic related to battling
  */
 class Battle {
-    static enemyPokemon: battlePokemon;
+    static enemyPokemon: BattlePokemon;
     static counter: number = 0;
 
     /**

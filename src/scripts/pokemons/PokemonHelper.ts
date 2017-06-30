@@ -1,4 +1,5 @@
 ///<reference path="PokemonList.ts"/>
+///<reference path="../GameConstants.ts"/>
 
 class PokemonHelper {
 

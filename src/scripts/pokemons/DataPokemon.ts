@@ -1,7 +1,7 @@
 /**
  * Created by dennis on 26-06-17.
  */
-class dataPokemon implements pokemonInterface {
+class DataPokemon implements pokemonInterface {
     id: number;
     name: string;
     catchRate: number;
