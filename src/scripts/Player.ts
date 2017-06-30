@@ -9,6 +9,7 @@ class Player {
     private static _money: KnockoutObservable<number> = ko.observable(0);
     private static _dungeonTokens: number = 0;
     private static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray<CaughtPokemon>();
+    private static _caughtShinyList: KnockoutObservableArray<string> = ko.observableArray<string>();
     private static _route: KnockoutObservable<number> = ko.observable(2);
     private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function(){return ko.observable(0)});
     private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
@@ -118,6 +119,15 @@ class Player {
         return false;
     }
 
+    public static alreadyCaughtPokemonShiny(pokemonName: string) {
+        for (let i: number = 0; i < this.caughtPokemonList.length; i++) {
+            if (this.caughtShinyList()[i] == pokemonName) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static capturePokemon(pokemonName:string, shiny:boolean = false){
         if(!this.alreadyCaughtPokemon(pokemonName)){
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonName, false, 0, 0);
@@ -217,5 +227,14 @@ class Player {
     static set shinyList(value: boolean[]) {
         this._shinyList = value;
     }
+
+    static get caughtShinyList(): KnockoutObservableArray<string> {
+        return this._caughtShinyList;
+    }
+
+    static set caughtShinyList(value: KnockoutObservableArray<string>) {
+        this._caughtShinyList = value;
+    }
+
 }
 

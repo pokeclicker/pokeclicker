@@ -1,6 +1,8 @@
-class RouteRequirement {
+class MapHelper {
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
+        console.log("called");
+        console.log(region);
         if (!isNaN(route) && !(route == Player.route())) {
             if (this.accessToRoute(route, region)) {
                 Player.route(route);
@@ -30,5 +32,17 @@ class RouteRequirement {
         }
         return true;
     };
+
+    public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<KnockoutObservable<string>> {
+        return ko.computed(function () {
+            if (Player.route() == route && Player.region == region) {
+                return ko.observable(GameConstants.RouteCssClass[GameConstants.RouteCssClass.currentRoute]);
+            }
+            if (MapHelper.accessToRoute(route, region)) {
+                return ko.observable(GameConstants.RouteCssClass[GameConstants.RouteCssClass.unlockedRoute]);
+            }
+            return ko.observable(GameConstants.RouteCssClass[GameConstants.RouteCssClass.lockedRoute]);
+        });
+    }
 
 }

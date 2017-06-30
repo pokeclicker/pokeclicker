@@ -28,6 +28,12 @@ namespace GameConstants {
         safari = 5,
     }
 
+    export enum RouteCssClass{
+        "lockedRoute" = 0,
+        "currentRoute" = 1,
+        "unlockedRoute" = 2
+    }
+
     export enum Pokeball {
         "None" = -1,
         "Pokeball" = 0,

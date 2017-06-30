@@ -14,6 +14,18 @@ body {
     }
 }
 
+.currentRoute{
+    fill: #55ff00;
+}
+
+.unlockedRoute{
+    fill: #ffd60d;
+}
+
+.lockedRoute{
+    fill: #ff2f39;
+}
+
 .borderText {
     color: white;
     text-shadow: -1px -1px 0 #000,

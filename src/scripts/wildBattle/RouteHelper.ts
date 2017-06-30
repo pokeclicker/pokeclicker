@@ -32,15 +32,22 @@ class RouteHelper {
      * @param includeWater
      * @returns {boolean} true if all Pokémon on this route are caught.
      */
-    public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean = false, includeWater: boolean = false) {
 
-        let possiblePokemon: string[] = this.getAvailablePokemonList(route, region, includeWater);
-        for (let i = 0; i < possiblePokemon.length; i++) {
-            if (!Player.alreadyCaughtPokemon(possiblePokemon[i])) {
-                return false;
+    // public static routeKillsObservable: KnockoutComputed<number> = ko.computed(function () {
+    //     return Player.routeKills[Player.route()]();
+    // });
+
+    public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean, includeWater: boolean): boolean {
+            let possiblePokemon: string[] = RouteHelper.getAvailablePokemonList(route, region, includeWater);
+            for (let i = 0; i < possiblePokemon.length; i++) {
+                if (!Player.alreadyCaughtPokemon(possiblePokemon[i])) {
+                    return false;
+                }
+                if(includeShiny && !Player.alreadyCaughtPokemonShiny((possiblePokemon[i]))){
+                        return false;
+                }
             }
-        }
-        return true;
+            return true;
     }
 
 
