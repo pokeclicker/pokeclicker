@@ -2,20 +2,21 @@
  * Information about the player.
  * All player variables need to be saved.
  */
+
 class Player {
 
 
     private static _money: KnockoutObservable<number> = ko.observable(0);
     private static _dungeonTokens: number = 0;
-    private static _caughtPokemonList = [];
-    private static _route: number = 1;
-    private static _routeKills: number[] = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(Number.prototype.valueOf, 0);
-    private static _routeKillsNeeded: number = 10;
+    private static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray<CaughtPokemon>();
+    private static _route: KnockoutObservable<number> = ko.observable(2);
+    private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function(){return ko.observable(0)});
+    private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
     private static _gymBadges: GameConstants.Badge[] = [GameConstants.Badge.Boulder];
     private static _pokeballs: number[] = [0, 0, 0, 0];
+    private static _shinyList: boolean[] =  Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
 
-    // TODO Eh not a big fan of this name.
     private static _notCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Masterball;
     private static _alreadyCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Pokeball;
 
@@ -27,6 +28,14 @@ class Player {
         return Player.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
     });
 
+    public static routeKillsObservable: KnockoutComputed<number> = ko.computed(function () {
+        return Player.routeKills[Player.route()]();
+    });
+
+    public static addRouteKill(){
+        Player.routeKills[Player.route()](Player.routeKills[Player.route()]()+1)
+    }
+
     /**
      * Calculate the attack of all your Pokémon
      * @param type1
@@ -36,7 +45,12 @@ class Player {
     public static calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
         // TODO factor in types
-        return 1;
+        // TODO start at 0
+        let attack = 5;
+        attack += this.caughtPokemonList.length;
+        console.log("attack = " + attack);
+
+        return attack;
     }
 
     public static calculateClickAttack(): number {
@@ -70,8 +84,7 @@ class Player {
      * @param alreadyCaught if the pokémon is already caught.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    // TODO better name
-    public static whichBallToUse(alreadyCaught: boolean): GameConstants.Pokeball {
+    public static calculatePokeballToUse(alreadyCaught: boolean): GameConstants.Pokeball {
         let pref: GameConstants.Pokeball;
         if (alreadyCaught) {
             pref = this._alreadyCaughtBallSelection;
@@ -82,7 +95,6 @@ class Player {
         let use: GameConstants.Pokeball.Pokeball;
 
         for (let i: number = pref; i >= 0; i--) {
-            console.log(i);
             if (this._pokeballs[i] > 0) {
                 use = i;
                 break;
@@ -106,6 +118,13 @@ class Player {
         return false;
     }
 
+    public static capturePokemon(pokemonName:string, shiny:boolean = false){
+        if(!this.alreadyCaughtPokemon(pokemonName)){
+            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonName, false, 0, 0);
+            this._caughtPokemonList.push(caughtPokemon);
+        }
+    }
+
     public static hasBadge(badge: GameConstants.Badge) {
         if (badge == undefined || GameConstants.Badge.None) {
             return true;
@@ -119,11 +138,40 @@ class Player {
     }
 
     static gainMoney(money: number) {
-        this._money(this._money() + money);
+        // TODO add money multipliers
+        this._money(Math.floor(this._money() + money));
     }
 
     static gainExp(exp: number) {
         // TODO add exp multipliers
+    }
+
+    static get routeKills(): Array<KnockoutObservable<number>> {
+        return this._routeKills;
+    }
+
+    static set routeKills(value: Array<KnockoutObservable<number>>) {
+        this._routeKills = value;
+    }
+
+    static usePokeball(pokeBall:GameConstants.Pokeball) : void{
+        this._pokeballs[pokeBall]--;
+    }
+
+    static get routeKillsNeeded(): KnockoutObservable<number> {
+        return this._routeKillsNeeded;
+    }
+
+    static set routeKillsNeeded(value: KnockoutObservable<number>) {
+        this._routeKillsNeeded = value;
+    }
+
+    static get route(): KnockoutObservable<number> {
+        return this._route;
+    }
+
+    static set route(value: KnockoutObservable<number>) {
+        this._route = value;
     }
 
     public static get money(): number {
@@ -135,15 +183,7 @@ class Player {
     }
 
     public static get caughtPokemonList() {
-        return this._caughtPokemonList;
-    }
-
-    static get route(): number {
-        return this._route;
-    }
-
-    static set route(value: number) {
-        this._route = value;
+        return this._caughtPokemonList();
     }
 
     static get region(): GameConstants.Region {
@@ -162,22 +202,6 @@ class Player {
         this._pokeballs = value;
     }
 
-    static get routeKills(): number[] {
-        return this._routeKills;
-    }
-
-    static set routeKills(value: number[]) {
-        this._routeKills = value;
-    }
-
-    static get routeKillsNeeded(): number {
-        return this._routeKillsNeeded;
-    }
-
-    static set routeKillsNeeded(value: number) {
-        this._routeKillsNeeded = value;
-    }
-
     static get gymBadges(): GameConstants.Badge[] {
         return this._gymBadges;
     }
@@ -185,7 +209,13 @@ class Player {
     static set gymBadges(value: GameConstants.Badge[]) {
         this._gymBadges = value;
     }
+
+    static get shinyList(): boolean[] {
+        return this._shinyList;
+    }
+
+    static set shinyList(value: boolean[]) {
+        this._shinyList = value;
+    }
 }
-$(document).ready(function () {
-    ko.applyBindings(Player);
-});
+

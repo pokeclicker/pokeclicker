@@ -4,8 +4,9 @@
  * Handles all logic related to battling
  */
 class Battle {
-    static enemyPokemon: BattlePokemon;
+    static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
     static counter: number = 0;
+    static catching: KnockoutObservable<boolean> = ko.observable(false);
 
     /**
      * Probably not needed right now, but might be if we add more logic to a gameTick.
@@ -19,8 +20,11 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
-        this.enemyPokemon.damage(Player.calculatePokemonAttack(this.enemyPokemon.type1, this.enemyPokemon.type2));
-        if (!this.enemyPokemon.isAlive()) {
+        if (!this.enemyPokemon().isAlive()) {
+            return;
+        }
+        this.enemyPokemon().damage(Player.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
+        if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
     }
@@ -29,8 +33,11 @@ class Battle {
      * Attacks with clicks and checks if the enemy is defeated.
      */
     public static clickAttack() {
-        this.enemyPokemon.damage(Player.calculateClickAttack());
-        if (!this.enemyPokemon.isAlive()) {
+        if (!this.enemyPokemon().isAlive()) {
+            return;
+        }
+        this.enemyPokemon().damage(Player.calculateClickAttack());
+        if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
     }
@@ -39,15 +46,25 @@ class Battle {
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon() {
-        Player.gainMoney(this.enemyPokemon.money);
-        Player.gainExp(this.enemyPokemon.exp);
+        Player.gainMoney(this.enemyPokemon().money);
+        Player.gainExp(this.enemyPokemon().exp);
+        Player.addRouteKill();
+        let alreadyCaught: boolean = Player.alreadyCaughtPokemon(this.enemyPokemon().name());
+        let pokeBall: GameConstants.Pokeball = Player.calculatePokeballToUse(alreadyCaught);
 
-        let alreadyCaught: boolean = Player.alreadyCaughtPokemon(this.enemyPokemon.name);
-        if (Player.whichBallToUse(alreadyCaught) !== GameConstants.Pokeball.None) {
-            this.throwPokeball()
+        if (pokeBall !== GameConstants.Pokeball.None) {
+            this.throwPokeball(pokeBall);
+            console.log("asdasd");
+            Battle.catching(true);
+            setTimeout(this.generateNewEnemy,
+                Player.calculateCatchTime()
+            )
+            ;
+
+        } else {
+            this.generateNewEnemy();
         }
 
-        this.generateNewEnemy();
     }
 
     /**
@@ -55,19 +72,20 @@ class Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        this.counter = 0;
-        this.enemyPokemon = pokemonFactory.generateWildPokemon(Player.route, Player.region);
+        Battle.catching(false);
+        Battle.counter = 0;
+        Battle.enemyPokemon(pokemonFactory.generateWildPokemon(Player.route(), Player.region));
     }
 
-    public static throwPokeball() {
-        // TODO remove a Pokéball from the inventory
+    public static throwPokeball(pokeBall: GameConstants.Pokeball) {
+        Player.usePokeball(pokeBall);
         let chance: number = Math.floor(Math.random() * 100 + 1);
-        if (chance <= this.enemyPokemon.catchRate) {
-            this.catchPokemon();
+        if (chance <= this.enemyPokemon().catchRate) {
+            this.catchPokemon(this.enemyPokemon().name());
         }
     }
 
-    public static catchPokemon() {
-        // TODO actually capture a Pokémon
+    public static catchPokemon(pokemonName: string) {
+        Player.capturePokemon(pokemonName);
     }
 }
