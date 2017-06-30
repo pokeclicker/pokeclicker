@@ -73,7 +73,7 @@ class Battle {
      */
     public static generateNewEnemy() {
         Battle.catching(false);
-        this.counter = 0;
+        Battle.counter = 0;
         Battle.enemyPokemon(pokemonFactory.generateWildPokemon(Player.route(), Player.region));
     }
 
