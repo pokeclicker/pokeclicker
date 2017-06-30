@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Ishadijcks/pokeclicker.svg?branch=develop)](https://travis-ci.org/Ishadijcks/pokeclicker)
 # PokéClicker
 A game about catching Pokémon, defeating gym leaders, and watching numbers get bigger.
 
