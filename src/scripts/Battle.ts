@@ -6,6 +6,7 @@
 class Battle {
     static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
     static counter: number = 0;
+    static catching: KnockoutObservable<boolean> = ko.observable(false);
 
     /**
      * Probably not needed right now, but might be if we add more logic to a gameTick.
@@ -19,6 +20,9 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
+        if (!this.enemyPokemon().isAlive()) {
+            return;
+        }
         this.enemyPokemon().damage(Player.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
@@ -29,6 +33,9 @@ class Battle {
      * Attacks with clicks and checks if the enemy is defeated.
      */
     public static clickAttack() {
+        if (!this.enemyPokemon().isAlive()) {
+            return;
+        }
         this.enemyPokemon().damage(Player.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
@@ -44,11 +51,20 @@ class Battle {
         Player.addRouteKill();
         let alreadyCaught: boolean = Player.alreadyCaughtPokemon(this.enemyPokemon().name());
         let pokeBall: GameConstants.Pokeball = Player.calculatePokeballToUse(alreadyCaught);
+
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.throwPokeball(pokeBall);
+            console.log("asdasd");
+            Battle.catching(true);
+            setTimeout(this.generateNewEnemy,
+                Player.calculateCatchTime()
+            )
+            ;
+
+        } else {
+            this.generateNewEnemy();
         }
 
-        this.generateNewEnemy();
     }
 
     /**
@@ -56,8 +72,9 @@ class Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
+        Battle.catching(false);
         this.counter = 0;
-        this.enemyPokemon(pokemonFactory.generateWildPokemon(Player.route(), Player.region));
+        Battle.enemyPokemon(pokemonFactory.generateWildPokemon(Player.route(), Player.region));
     }
 
     public static throwPokeball(pokeBall: GameConstants.Pokeball) {
@@ -68,7 +85,7 @@ class Battle {
         }
     }
 
-    public static catchPokemon(pokemonName:string) {
+    public static catchPokemon(pokemonName: string) {
         Player.capturePokemon(pokemonName);
     }
 }

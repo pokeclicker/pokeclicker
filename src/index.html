@@ -77,8 +77,18 @@
                         <span data-bind="text: Player.routeKillsObservable">kills</span>/<span
                             data-bind="text: Player.routeKillsNeeded">killsneeded</span><br>
                         <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span><br>
-                        <img data-bind="attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                        <div data-bind="click: Battle.clickAttack()">
 
+                            <div data-bind="ifnot: Battle.catching">
+                                <img id="enemy" data-bind="attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                            </div>
+
+                            <div data-bind="if: Battle.catching">
+                                <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
+                            </div>
+
+
+                        </div>
                         <div class="progress">
                             <div class="progress-bar bg-danger" role="progressbar"
                                  data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
