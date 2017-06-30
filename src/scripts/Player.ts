@@ -10,7 +10,7 @@ class Player {
     private static _dungeonTokens: number = 0;
     private static _caughtPokemonList: CaughtPokemon[] = [];
     private static _route: KnockoutObservable<number> = ko.observable(2);
-    private static _routeKills: KnockoutObservable<number[]> = ko.observable(Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(Number.prototype.valueOf, 0));
+    private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function(){return ko.observable(0)});
     private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
     private static _gymBadges: GameConstants.Badge[] = [GameConstants.Badge.Boulder];
@@ -29,11 +29,11 @@ class Player {
     });
 
     public static routeKillsObservable: KnockoutComputed<number> = ko.computed(function () {
-        return Player.routeKills()[Player.route()];
+        return Player.routeKills[Player.route()]();
     });
 
     public static addRouteKill(){
-        Player.routeKills()[Player.route()]++
+        Player.routeKills[Player.route()](Player.routeKills[Player.route()]()+1)
     }
 
     /**
@@ -141,11 +141,11 @@ class Player {
         // TODO add exp multipliers
     }
 
-    static get routeKills(): KnockoutObservable<number[]> {
+    static get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
 
-    static set routeKills(value: KnockoutObservable<number[]>) {
+    static set routeKills(value: Array<KnockoutObservable<number>>) {
         this._routeKills = value;
     }
 
