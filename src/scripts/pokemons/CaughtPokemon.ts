@@ -5,14 +5,14 @@ class CaughtPokemon {
     name: string;
     evolved: boolean;
     attackBonus: number;
-    exp: number;
+    exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>
 
     constructor(nm: string, ev: boolean, atBo: number, xp: number) {
         this.name = nm;
         this.evolved = ev;
         this.attackBonus = atBo;
-        this.exp = xp;
+        this.exp = ko.observable(xp);
         this.levelObservable = ko.computed(() => {return PokemonHelper.calculateLevel(this)});
     }
 }
