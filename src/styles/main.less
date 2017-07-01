@@ -5,6 +5,7 @@
 
 @tablePadding: 0.25rem;
 @tablePaddingWidth: @tablePadding;
+@smallFont: 14px;
 
 body {
   background: url('../assets/images/background.png') top;
@@ -15,10 +16,6 @@ body {
   .container {
     width: 70%;
   }
-}
-
-.card {
-  border: 0;
 }
 
 .dropdown-menu {
@@ -51,24 +48,19 @@ body {
 }
 
 .table {
-  font-size: 13px;
+  font-size: @smallFont;
   margin-bottom: 0;
 }
 
 .smallImage {
-  max-height: 40px;
+  max-height: 48px;
   height: auto;
   width: auto;
-  margin: -7px 0 -7px -7px;
+  margin: -12px -12px -12px -12px;
 }
 
 
 #pokemonList {
-
-  th{
-    vertical-align: middle;
-    padding:  0 @tablePaddingWidth;
-  }
 
   td {
     vertical-align: middle;
@@ -84,6 +76,7 @@ body {
   }
   th {
     text-align: center;
+    padding:  0 @tablePaddingWidth;
     vertical-align: middle;
   }
 }
