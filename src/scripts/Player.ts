@@ -12,7 +12,7 @@ class Player {
     private static _caughtShinyList: KnockoutObservableArray<string> = ko.observableArray<string>();
     private static _route: KnockoutObservable<number> = ko.observable(1);
     private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function(){return ko.observable(0)});
-    private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
+    private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(1);
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
     private static _gymBadges: GameConstants.Badge[] = [GameConstants.Badge.Boulder];
     private static _pokeballs: number[] = [0, 0, 0, 0];
@@ -30,7 +30,7 @@ class Player {
     });
 
     public static routeKillsObservable: KnockoutComputed<number> = ko.computed(function () {
-        return Player.routeKills[Player.route()]();
+        return Math.min(Player.routeKillsNeeded(),Player.routeKills[Player.route()]());
     });
 
     public static addRouteKill(){
