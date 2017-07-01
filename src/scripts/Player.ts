@@ -123,7 +123,7 @@ class Player {
     public static capturePokemon(pokemonName: string, shiny: boolean = false) {
         if (!Player.alreadyCaughtPokemon(pokemonName)) {
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonName, false, 0, 0);
-            Player.caughtPokemonList.push(caughtPokemon);
+            Player._caughtPokemonList.push(caughtPokemon);
         }
     }
 
