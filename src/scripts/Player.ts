@@ -10,7 +10,7 @@ class Player {
     private static _dungeonTokens: number = 0;
     private static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray<CaughtPokemon>();
     private static _caughtShinyList: KnockoutObservableArray<string> = ko.observableArray<string>();
-    private static _route: KnockoutObservable<number> = ko.observable(2);
+    private static _route: KnockoutObservable<number> = ko.observable(1);
     private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function(){return ko.observable(0)});
     private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
@@ -49,8 +49,6 @@ class Player {
         // TODO start at 0
         let attack = 5;
         attack += this.caughtPokemonList.length;
-        console.log("attack = " + attack);
-
         return attack;
     }
 

@@ -14,6 +14,7 @@ class MapHelper {
     };
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
+        console.log("Checking route: " + route);
         if (!Player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
             console.log("Missing badge: " + GameConstants.routeBadgeRequirements[region][route]);
             return false;
@@ -25,11 +26,14 @@ class MapHelper {
         }
         for (let i = 0; i < reqList.length; i++) {
             let route: number = reqList[i];
-            if (Player.routeKills[route] < Player.routeKillsNeeded) {
+
+            if (Player.routeKills[route]() < Player.routeKillsNeeded()) {
                 console.log("Not enough kills on route: " + route);
                 return false
             }
         }
+
+        console.log("Access");
         return true;
     };
 
