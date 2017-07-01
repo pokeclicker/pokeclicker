@@ -16,3 +16,4 @@ class CaughtPokemon {
         this.levelObservable = ko.computed(() => {return PokemonHelper.calculateLevel(this)});
     }
 }
+
