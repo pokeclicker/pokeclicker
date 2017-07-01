@@ -26,7 +26,6 @@ class MapHelper {
         }
         for (let i = 0; i < reqList.length; i++) {
             let route: number = reqList[i];
-
             if (Player.routeKills[route]() < Player.routeKillsNeeded()) {
                 console.log("Not enough kills on route: " + route);
                 return false

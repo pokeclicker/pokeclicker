@@ -14,7 +14,7 @@ class Player {
     private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function(){return ko.observable(0)});
     private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(1);
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
-    private static _gymBadges: GameConstants.Badge[] = [GameConstants.Badge.Boulder];
+    private static _gymBadges: GameConstants.Badge[] = [];
     private static _pokeballs: number[] = [0, 0, 0, 0];
     private static _shinyList: boolean[] =  Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
 
@@ -47,7 +47,7 @@ class Player {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
         // TODO factor in types
         // TODO start at 0
-        let attack = 5;
+        let attack = 10005;
         attack += this.caughtPokemonList.length;
         return attack;
     }
@@ -74,7 +74,7 @@ class Player {
 
     public static calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
-        return 2000;
+        return 10;
     }
 
     /**

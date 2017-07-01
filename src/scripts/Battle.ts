@@ -54,7 +54,6 @@ class Battle {
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.throwPokeball(pokeBall);
-            console.log("asdasd");
             Battle.catching(true);
             setTimeout(this.generateNewEnemy,
                 Player.calculateCatchTime()
