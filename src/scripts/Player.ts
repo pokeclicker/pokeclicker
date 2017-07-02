@@ -32,9 +32,11 @@ class Player {
         return Player.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
     });
 
-    public static routeKillsObservable: KnockoutComputed<number> = ko.computed(function () {
-        return Math.min(Player.routeKillsNeeded(),Player.routeKills[Player.route()]());
-    });
+    public static routeKillsObservable(route: number): KnockoutComputed<number> {
+        return ko.computed(function () {
+            return Math.min(Player.routeKillsNeeded(),Player.routeKills[route]());
+        });
+    }
 
     public static addRouteKill() {
         Player.routeKills[Player.route()](Player.routeKills[Player.route()]() + 1)
