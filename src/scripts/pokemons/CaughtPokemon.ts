@@ -9,9 +9,9 @@ class CaughtPokemon {
     exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
 
-    constructor(id : number, nm: string, ev: boolean, atBo: number, xp: number) {
-        this.id = id;
-        this.name = nm;
+    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number) {
+        this.id = pokemonData.id;
+        this.name = pokemonData.name;
         this.evolved = ev;
         this.attackBonus = ko.observable(atBo);
         this.exp = ko.observable(xp);

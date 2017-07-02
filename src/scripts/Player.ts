@@ -120,9 +120,10 @@ class Player {
         return false;
     }
 
-    public static capturePokemon(id: number, pokemonName: string, shiny: boolean = false) {
+    public static capturePokemon(pokemonName: string, shiny: boolean = false) {
         if (!Player.alreadyCaughtPokemon(pokemonName)) {
-            let caughtPokemon: CaughtPokemon = new CaughtPokemon(id, pokemonName, false, 0, 0);
+            let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
+            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             Player._caughtPokemonList.push(caughtPokemon);
         }
     }
