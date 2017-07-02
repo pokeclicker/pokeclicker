@@ -85,6 +85,6 @@ class Battle {
     }
 
     public static catchPokemon() {
-        Player.capturePokemon(Battle.enemyPokemon().id(), this.enemyPokemon().name());
+        Player.capturePokemon(this.enemyPokemon().name());
     }
 }
