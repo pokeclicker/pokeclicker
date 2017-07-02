@@ -49,7 +49,9 @@ class Player {
         // TODO factor in types
         // TODO start at 0
         let attack = 5;
-        attack += this.caughtPokemonList.length;
+        for (let pokemon of this.caughtPokemonList){
+            attack += pokemon.attack();
+        }
 
         return attack;
     }
