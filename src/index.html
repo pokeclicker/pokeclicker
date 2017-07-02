@@ -68,13 +68,13 @@
 </div>
 
 <div class="container">
-    <div class="row justify-content-lg-center">
+    <div class="row justify-content-md-center">
         <h1>Pokeclicker</h1>
 
     </div>
 
 
-    <div class="row justify-content-lg-center" style="text-align: center">
+    <div class="row justify-content-md-center" style="text-align: center">
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <div class="col-md-6 push-md-3">
@@ -84,7 +84,7 @@
                 </div>
 
                 <div>
-                    <div class="col-lg-12" style="display: block;">
+                    <div class="col-md-12" style="display: block;">
                         Route <span data-bind="text: Player.route">number</span><br>
                         <span data-bind="text: Player.routeKillsObservable">kills</span>/<span
                             data-bind="text: Player.routeKillsNeeded">killsneeded</span><br>
@@ -120,11 +120,14 @@
 
                 <div class="card">
                     <table width="100%">
-                        <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                data-bind="text: Player.pokemonAttackObservable"></span></span></td>
-                        <td width="50%"><span style="display: inline;">Click Attack: <span
-                                data-bind="text: Player.clickAttackObservable"></span></span>
-                        </td>
+                        <tr>
+                            <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                    data-bind="text: Player.pokemonAttackObservable"></span></span></td>
+                            <td width="50%"><span style="display: inline;">Click Attack: <span
+                                    data-bind="text: Player.clickAttackObservable"></span></span>
+                            </td>
+                        </tr>
+
                     </table>
                 </div>
 
