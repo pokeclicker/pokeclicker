@@ -6,10 +6,10 @@
     <script type="text/html" id="pokemonListTemplate">
         <tr>
             <td>
-                <img class="smallImage" data-bind="attr:{ src: '/assets/images/pokemon/' + $data.id() + '.png' }"/>
+                <img class="smallImage" data-bind="attr:{ src: '/assets/images/pokemon/' + $data.id + '.png' }"/>
                 <span data-bind="text: name">Name</span>
             </td>
-            <td data-bind="text: attackBonus">fdsf</td>
+            <td data-bind="text: attack">fdsf</td>
             <td data-bind="text: levelObservable">fdsfs</td>
         </tr>
     </script>
@@ -502,8 +502,8 @@
                     <thead>
                     <tr>
                         <th style="margin-left: 9px;">Name</th>
-                        <th>Attack</th>
-                        <th>Level</th>
+                        <th>Atk</th>
+                        <th>Lvl</th>
                     </tr>
                     </thead>
                     <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: Player._caughtPokemonList}">
