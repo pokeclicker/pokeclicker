@@ -10,6 +10,7 @@ class CaughtPokemon {
     attackBonus: KnockoutObservable<number>;
     exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
+    evolver: KnockoutSubscription
 
     constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number) {
         this.id = pokemonData.id;
@@ -20,5 +21,15 @@ class CaughtPokemon {
         this.levelObservable = ko.computed(() => {return PokemonHelper.calculateLevel(this)});
         this.baseAttack = pokemonData.attack
         this.attack = ko.computed(() => {return PokemonHelper.calculateAttack(this.baseAttack, this.attackBonus(), this.levelObservable())})
+
+        if (pokemonData.evoLevel && !this.evolved) {
+            this.evolver = this.levelObservable.subscribe(() => {
+                if (this.levelObservable() >= pokemonData.evoLevel) {
+                    Player.capturePokemon(pokemonData.evolution, false);
+                    this.evolved = true;
+                    this.evolver.dispose();
+                }
+            })
+        }
     }
 }
