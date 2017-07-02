@@ -4,6 +4,8 @@
 class CaughtPokemon {
     id: number;
     name: string;
+    baseAttack: number;
+    attack: KnockoutComputed<number>;
     evolved: boolean;
     attackBonus: KnockoutObservable<number>;
     exp: KnockoutObservable<number>;
@@ -16,6 +18,7 @@ class CaughtPokemon {
         this.attackBonus = ko.observable(atBo);
         this.exp = ko.observable(xp);
         this.levelObservable = ko.computed(() => {return PokemonHelper.calculateLevel(this)});
+        this.baseAttack = pokemonData.attack
+        this.attack = ko.computed(() => {return PokemonHelper.calculateAttack(this.baseAttack, this.attackBonus(), this.levelObservable())})
     }
 }
-
