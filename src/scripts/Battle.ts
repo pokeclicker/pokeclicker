@@ -80,11 +80,11 @@ class Battle {
         Player.usePokeball(pokeBall);
         let chance: number = Math.floor(Math.random() * 100 + 1);
         if (chance <= this.enemyPokemon().catchRate) {
-            this.catchPokemon(this.enemyPokemon().name());
+            this.catchPokemon(this.enemyPokemon().id(), this.enemyPokemon().name());
         }
     }
 
-    public static catchPokemon(pokemonName: string) {
-        Player.capturePokemon(pokemonName);
+    public static catchPokemon(id : number, pokemonName: string) {
+        Player.capturePokemon(id, pokemonName);
     }
 }

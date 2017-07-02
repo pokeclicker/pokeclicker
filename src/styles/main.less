@@ -1,0 +1,99 @@
+@font-face {
+  font-family: pokemonFont;
+  src: url(../assets/fonts/firered.ttf);
+}
+
+@tablePadding: 0.3rem;
+@tablePaddingWidth: @tablePadding;
+@smallFont: 14px;
+
+body {
+  background: url('../assets/images/background.png') top;
+  background-size: cover;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 70%;
+  }
+}
+
+.currentRoute{
+  fill: #55ff00;
+}
+
+.unlockedRoute{
+  fill: #fcb612;
+}
+
+.lockedRoute{
+  fill: #ff2f39;
+}
+
+
+
+.dropdown-menu {
+  border: 1px solid black;
+}
+
+.page-item {
+  margin-bottom: 10px;
+  border: 1px solid #7f7f7f;
+  border-radius: 2px;
+}
+
+.dropdown-item {
+  font-family: pokemonFont, "Helvetica Neue", sans-serif;
+}
+
+.dropdown-toggle {
+  font-family: pokemonFont, "Helvetica Neue", sans-serif;
+}
+
+.page-item .card {
+  border-radius: 0;
+  min-height: 40px;
+}
+
+.card span {
+  margin-left: 5px;
+  line-height: 40px;
+  text-align: left;
+}
+
+.table {
+  font-size: @smallFont;
+  margin-bottom: 0;
+}
+
+.smallImage {
+  max-height: 56px;
+  height: auto;
+  width: auto;
+  margin: -10px -12px -12px -16px;
+}
+
+#pokemonList {
+
+  span {
+    vertical-align: middle;
+  }
+  td {
+    vertical-align: middle;
+    padding: 0 @tablePaddingWidth;
+  }
+
+  td:first-child {
+    width: 60%;
+    text-align: left;
+  }
+  th:first-child {
+    text-align: left;
+  }
+  th {
+    text-align: center;
+    padding: 0 @tablePaddingWidth;
+    vertical-align: middle;
+  }
+}
+

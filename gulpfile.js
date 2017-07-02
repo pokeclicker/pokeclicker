@@ -11,6 +11,7 @@ const browserSync = require('browser-sync');
 const del = require('del');
 const runSequence = require('run-sequence');
 const bsConfig = require("gulp-bootstrap-configurator");
+const less = require('gulp-less');
 
 /**
  * Push build to gh-pages
@@ -24,7 +25,7 @@ const srcs = {
     buildArtefacts: 'build/**/*',
     scripts: 'src/scripts/**/*.ts',
     html: ['src/*.html', 'src/templates/*.html'],
-    styles: 'src/styles/**/*.css',
+    styles: 'src/styles/**/*.less',
     assets: 'src/assets/**/*',
     libs: [ 'node_modules/bootstrap/dist/js/bootstrap.min.js',
             'node_modules/bootstrap/dist/css/bootstrap.min.css',
@@ -91,6 +92,7 @@ gulp.task('scripts', function () {
 
 gulp.task('styles', function () {
     return gulp.src(srcs.styles)
+        .pipe(less())
         .pipe(concat('styles.min.css'))
         .pipe(autoprefix('last 2 versions'))
         .pipe(minifyCSS())

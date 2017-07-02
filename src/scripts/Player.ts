@@ -8,15 +8,18 @@ class Player {
 
     private static _money: KnockoutObservable<number> = ko.observable(0);
     private static _dungeonTokens: number = 0;
-    private static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray<CaughtPokemon>();
     private static _caughtShinyList: KnockoutObservableArray<string> = ko.observableArray<string>();
     private static _route: KnockoutObservable<number> = ko.observable(1);
-    private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function(){return ko.observable(0)});
-    private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(1);
+    public static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray<CaughtPokemon>();
+    private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function () {
+        return ko.observable(0)
+    });
+    private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
+
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
     private static _gymBadges: GameConstants.Badge[] = [];
     private static _pokeballs: number[] = [0, 0, 0, 0];
-    private static _shinyList: boolean[] =  Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
+    private static _shinyList: boolean[] = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
 
     private static _notCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Masterball;
     private static _alreadyCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Pokeball;
@@ -33,8 +36,8 @@ class Player {
         return Math.min(Player.routeKillsNeeded(),Player.routeKills[Player.route()]());
     });
 
-    public static addRouteKill(){
-        Player.routeKills[Player.route()](Player.routeKills[Player.route()]()+1)
+    public static addRouteKill() {
+        Player.routeKills[Player.route()](Player.routeKills[Player.route()]() + 1)
     }
 
     /**
@@ -54,7 +57,7 @@ class Player {
 
     public static calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
-        return 2;
+        return 10;
     }
 
     public static calculateMoneyMultiplier(): number {
@@ -109,8 +112,9 @@ class Player {
      * @returns {boolean}
      */
     public static alreadyCaughtPokemon(pokemonName: string) {
-        for (let i: number = 0; i < this.caughtPokemonList.length; i++) {
-            if (this.caughtPokemonList[i].name == pokemonName) {
+        console.log(Player.caughtPokemonList);
+        for (let i: number = 0; i < Player.caughtPokemonList.length; i++) {
+            if (Player.caughtPokemonList[i].name == pokemonName) {
                 return true;
             }
         }
@@ -126,10 +130,10 @@ class Player {
         return false;
     }
 
-    public static capturePokemon(pokemonName:string, shiny:boolean = false){
-        if(!this.alreadyCaughtPokemon(pokemonName)){
-            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonName, false, 0, 0);
-            this._caughtPokemonList.push(caughtPokemon);
+    public static capturePokemon(id: number, pokemonName: string, shiny: boolean = false) {
+        if (!Player.alreadyCaughtPokemon(pokemonName)) {
+            let caughtPokemon: CaughtPokemon = new CaughtPokemon(id, pokemonName, false, 0, 0);
+            Player._caughtPokemonList.push(caughtPokemon);
         }
     }
 
@@ -162,7 +166,7 @@ class Player {
         this._routeKills = value;
     }
 
-    static usePokeball(pokeBall:GameConstants.Pokeball) : void{
+    static usePokeball(pokeBall: GameConstants.Pokeball): void {
         this._pokeballs[pokeBall]--;
     }
 
