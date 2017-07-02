@@ -125,7 +125,7 @@ class Player {
     }
 
     public static alreadyCaughtPokemonShiny(pokemonName: string) {
-        for (let i: number = 0; i < this.caughtPokemonList.length; i++) {
+        for (let i: number = 0; i < this.caughtShinyList().length; i++) {
             if (this.caughtShinyList()[i] == pokemonName) {
                 return true;
             }
