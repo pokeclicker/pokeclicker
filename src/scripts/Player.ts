@@ -17,7 +17,7 @@ class Player {
     private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
 
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
-    private static _gymBadges: GameConstants.Badge[] = [];
+    private static _gymBadges: KnockoutObservableArray<GameConstants.Badge> = ko.observableArray<GameConstants.Badge>();
     private static _pokeballs: number[] = [0, 0, 0, 0];
     private static _shinyList: boolean[] = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
 
@@ -147,8 +147,8 @@ class Player {
         if (badge == undefined || GameConstants.Badge.None) {
             return true;
         }
-        for (let i = 0; i < this._gymBadges.length; i++) {
-            if (this._gymBadges[i] == badge) {
+        for (let i = 0; i < this._gymBadges().length; i++) {
+            if (this._gymBadges()[i] == badge) {
                 return true;
             }
         }
@@ -229,11 +229,11 @@ class Player {
     }
 
     static get gymBadges(): GameConstants.Badge[] {
-        return this._gymBadges;
+        return this._gymBadges();
     }
 
     static set gymBadges(value: GameConstants.Badge[]) {
-        this._gymBadges = value;
+        this._gymBadges(value);
     }
 
     static get shinyList(): boolean[] {
