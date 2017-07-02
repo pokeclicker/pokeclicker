@@ -3,6 +3,16 @@
 <head>
     <title>Pokeclicker</title>
     <link href="/assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
+    <script type="text/html" id="pokemonListTemplate">
+        <tr>
+            <td>
+                <img class="smallImage" data-bind="attr:{ src: '/assets/images/pokemon/' + $data.id() + '.png' }"/>
+                <span data-bind="text: $data.name">Name</span>
+            </td>
+            <td data-bind="text: $data.attackBonus">fdsf</td>
+            <td data-bind="text: $data.levelObservable">fdsfs</td>
+        </tr>
+</script>
 
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
@@ -23,6 +33,7 @@
 
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -139,15 +150,8 @@
                         <th>Level</th>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: Player._caughtPokemonList">
-                    <tr>
-                        <td data-bind="text: name">
-                            Name
-                            <!--<img class="smallImage" data-bind="attr:{ src: '/assets/images/pokemon/' + 1 + '.png' }" src="">-->
-                        </td>
-                        <td data-bind="text: attackBonus"></td>
-                        <td data-bind="text: levelObservable"></td>
-                    </tr>
+                    <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: Player._caughtPokemonList}">
+
                     </tbody>
                 </table>
             </div>
