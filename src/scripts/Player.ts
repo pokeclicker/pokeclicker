@@ -56,7 +56,7 @@ class Player {
 
     public static calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
-        return 2;
+        return 10;
     }
 
     public static calculateMoneyMultiplier(): number {
@@ -120,9 +120,9 @@ class Player {
         return false;
     }
 
-    public static capturePokemon(pokemonName: string, shiny: boolean = false) {
+    public static capturePokemon(id: number, pokemonName: string, shiny: boolean = false) {
         if (!Player.alreadyCaughtPokemon(pokemonName)) {
-            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonName, false, 0, 0);
+            let caughtPokemon: CaughtPokemon = new CaughtPokemon(id, pokemonName, false, 0, 0);
             Player._caughtPokemonList.push(caughtPokemon);
         }
     }
