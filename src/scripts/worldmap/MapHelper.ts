@@ -5,7 +5,9 @@ class MapHelper {
         console.log(region);
         if (!isNaN(route) && !(route == Player.route())) {
             if (this.accessToRoute(route, region)) {
+                $("[data-route='" + Player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute')
                 Player.route(route);
+                $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute')
             }
             else {
                 console.log("You don't have access to that route yet.");
@@ -38,7 +40,7 @@ class MapHelper {
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
         return ko.computed(function () {
-            if (Player.route() == route && Player.region == region) {
+            if (Player.route.peek() == route && Player.region == region) {
                 return "currentRoute";
             }
             if (MapHelper.accessToRoute(route, region)) {
