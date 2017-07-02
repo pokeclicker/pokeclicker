@@ -49,7 +49,9 @@ class Player {
         // TODO factor in types
         // TODO start at 0
         let attack = 5;
-        attack += this.caughtPokemonList.length;
+        for (let pokemon of this.caughtPokemonList){
+            attack += pokemon.attack();
+        }
 
         return attack;
     }
@@ -120,9 +122,10 @@ class Player {
         return false;
     }
 
-    public static capturePokemon(id: number, pokemonName: string, shiny: boolean = false) {
+    public static capturePokemon(pokemonName: string, shiny: boolean = false) {
         if (!Player.alreadyCaughtPokemon(pokemonName)) {
-            let caughtPokemon: CaughtPokemon = new CaughtPokemon(id, pokemonName, false, 0, 0);
+            let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
+            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             Player._caughtPokemonList.push(caughtPokemon);
         }
     }
@@ -144,8 +147,16 @@ class Player {
         this._money(Math.floor(this._money() + money));
     }
 
-    static gainExp(exp: number) {
+    static gainExp(exp: number, level: number, trainer: boolean) {
         // TODO add exp multipliers
+        let trainerBonus = trainer ? 1.5 : 1;
+        let expTotal = Math.floor(exp * level * trainerBonus / 9);
+
+        for (let pokemon of this._caughtPokemonList()) {
+            if (pokemon.levelObservable() < (this.gymBadges.length + 2) * 10) {
+                pokemon.exp(pokemon.exp() + expTotal);
+            }
+        }
     }
 
     static get routeKills(): Array<KnockoutObservable<number>> {

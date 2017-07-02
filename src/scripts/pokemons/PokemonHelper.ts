@@ -50,4 +50,8 @@ class PokemonHelper {
         return Math.max(1, Math.min(100, Math.floor(level)));
     }
 
+    public static calculateAttack(attackBase: number, attackBonus: number, level: number): number {
+        return Math.max(1, Math.floor((attackBase + attackBonus) * level / 100))
+    }
+
 }

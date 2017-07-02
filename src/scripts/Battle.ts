@@ -47,7 +47,7 @@ class Battle {
      */
     public static defeatPokemon() {
         Player.gainMoney(this.enemyPokemon().money);
-        Player.gainExp(this.enemyPokemon().exp);
+        Player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         Player.addRouteKill();
         let alreadyCaught: boolean = Player.alreadyCaughtPokemon(this.enemyPokemon().name());
         let pokeBall: GameConstants.Pokeball = Player.calculatePokeballToUse(alreadyCaught);
@@ -81,11 +81,11 @@ class Battle {
         Player.usePokeball(pokeBall);
         let chance: number = Math.floor(Math.random() * 100 + 1);
         if (chance <= this.enemyPokemon().catchRate) {
-            this.catchPokemon(this.enemyPokemon().id(), this.enemyPokemon().name());
+            this.catchPokemon(this.enemyPokemon().name());
         }
     }
 
-    public static catchPokemon(id : number, pokemonName: string) {
-        Player.capturePokemon(id, pokemonName);
+    public static catchPokemon(pokemonName: string) {
+        Player.capturePokemon(pokemonName);
     }
 }
