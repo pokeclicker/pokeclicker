@@ -36,15 +36,15 @@ class MapHelper {
         return true;
     };
 
-    public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<KnockoutObservable<string>> {
+    public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
         return ko.computed(function () {
             if (Player.route() == route && Player.region == region) {
-                return ko.observable(GameConstants.RouteCssClass[GameConstants.RouteCssClass.currentRoute]);
+                return "currentRoute";
             }
             if (MapHelper.accessToRoute(route, region)) {
-                return ko.observable(GameConstants.RouteCssClass[GameConstants.RouteCssClass.unlockedRoute]);
+                return "unlockedRoute";
             }
-            return ko.observable(GameConstants.RouteCssClass[GameConstants.RouteCssClass.lockedRoute]);
+            return "lockedRoute";
         });
     }
 
