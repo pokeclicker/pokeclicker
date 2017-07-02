@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     let game: Game = new Game();
     game.start();
     ko.applyBindings(Game);
-
 });
 
 /**

@@ -2,7 +2,17 @@
 <html>
 <head>
     <title>Pokeclicker</title>
-    <link href="/assets/images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link href="/assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
+    <script type="text/html" id="pokemonListTemplate">
+        <tr>
+            <td>
+                <img class="smallImage" data-bind="attr:{ src: '/assets/images/pokemon/' + $data.id() + '.png' }"/>
+                <span data-bind="text: name">Name</span>
+            </td>
+            <td data-bind="text: attackBonus">fdsf</td>
+            <td data-bind="text: levelObservable">fdsfs</td>
+        </tr>
+    </script>
 
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
@@ -23,6 +33,7 @@
 
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
+
 
 </head>
 <body>
@@ -81,7 +92,8 @@
                         <div style="height: 96px;">
 
                             <div data-bind="ifnot: Battle.catching">
-                                <img id="enemy" data-bind="click: Battle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                                <img id="enemy"
+                                     data-bind="click: Battle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
                             </div>
 
                             <div data-bind="if: Battle.catching">
@@ -129,8 +141,19 @@
                 <h2>Pokeball management</h2>
             </div>
 
-            <div class="page-item" style="background-color: #1aff00; min-height: 350px">
-                <h2>Pokemon list</h2>
+            <div class="page-item" style="background-color: white">
+                <table id="pokemonList" class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th style="margin-left: 9px;">Name</th>
+                        <th>Attack</th>
+                        <th>Level</th>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: Player._caughtPokemonList}">
+
+                    </tbody>
+                </table>
             </div>
 
 

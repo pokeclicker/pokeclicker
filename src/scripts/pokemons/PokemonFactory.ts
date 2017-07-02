@@ -21,26 +21,20 @@ class pokemonFactory {
         let rand: number = Math.floor(Math.random() * pokemonList.length);
         let name: string = pokemonList[rand];
         let basePokemon = PokemonHelper.getPokemonByName(name);
-        let id = basePokemon["id"];
-
-        let type1: PokemonTypes = PokemonHelper.typeStringToId(basePokemon["type"][0]);
-        let type2: PokemonTypes = PokemonHelper.typeStringToId(basePokemon["type"][1]);
-        if (type2 == null) {
-            type2 = PokemonType.None;
-        }
+        let id = basePokemon.id;
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
         let maxHealth: number = Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) * Math.pow(Player.caughtPokemonList.length - 1, 1.2) / 12), 1.15)), 20) || 20;
 
         let catchVariation = Math.floor(Math.random() * 7 - 3);
 
-        let catchRate: number = Math.floor(Math.pow(basePokemon["catchRate"], 0.75)) + catchVariation;
-        let exp: number = basePokemon["exp"];
+        let catchRate: number = Math.floor(Math.pow(basePokemon.catchRate, 0.75)) + catchVariation;
+        let exp: number = basePokemon.exp;
 
         let deviation = Math.floor(Math.random() * 51) - 25;
         let money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
         let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        return new BattlePokemon(name, id, type1, type2, maxHealth, route * 2, catchRate, exp, money, shiny);
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, route * 2, catchRate, exp, money, shiny);
     }
 
     /**
@@ -75,14 +69,9 @@ class pokemonFactory {
         let pokemon = gym.pokemons[index];
         let basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
-        let type1: PokemonTypes = PokemonHelper.typeStringToId(basePokemon["type"][0]);
-        let type2: PokemonTypes = PokemonHelper.typeStringToId(basePokemon["type"][1]);
-        if (type2 == null) {
-            type2 = PokemonType.None;
-        }
-        let exp: number = basePokemon["exp"] * 1.5;
+        let exp: number = basePokemon.exp * 1.5;
         let shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        return new BattlePokemon(pokemon.name, basePokemon["id"], type1, type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny)
+        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny)
     }
 
 

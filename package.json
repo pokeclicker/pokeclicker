@@ -29,6 +29,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-file": "^0.3.0",
     "gulp-file-include": "^1.0.0",
+    "gulp-less": "^3.3.2",
     "gulp-minify-css": "^1.2.1",
     "gulp-minify-html": "^1.0.4",
     "gulp-size": "^2.0.0",
