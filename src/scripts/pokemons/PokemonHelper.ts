@@ -19,4 +19,35 @@ class PokemonHelper {
         return GameConstants.PokemonType[id];
     }
 
+    public static calculateLevel(pokemon: CaughtPokemon): number {
+        let level;
+        switch (PokemonHelper.getPokemonByName(pokemon.name).levelType) {
+            case GameConstants.LevelType.slow:
+                level = Math.pow(pokemon.exp() * 4 / 5, 1 / 3);
+                break;
+            case GameConstants.LevelType.mediumslow:
+                let y;
+                for (let x = 1; x <= 100; x++) {
+                    y = 6 / 5 * Math.pow(x, 3) - 15 * Math.pow(x, 2) + 100 * x - 140;
+                    if (pokemon.exp >= y) {
+                        level = x
+                    } else {
+                        break;
+                    }
+                }
+                break;
+            case GameConstants.LevelType.mediumfast:
+                level = Math.pow(pokemon.exp(), 1 / 3);
+                break;
+            case GameConstants.LevelType.fast:
+                level = Math.pow(pokemon.exp() * 5 / 4, 1 / 3);
+                break;
+            default:
+                level = Math.pow(30 * pokemon.exp(), 0.475) / (6 * Math.sqrt(5));
+                break;
+        }
+        level = Math.min(level, (Player.gymBadges.length + 2) * 10);
+        return Math.max(1, Math.min(100, Math.floor(level)));
+    }
+
 }
