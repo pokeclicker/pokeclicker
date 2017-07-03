@@ -5,9 +5,10 @@ class MapHelper {
         console.log(region);
         if (!isNaN(route) && !(route == Player.route())) {
             if (this.accessToRoute(route, region)) {
-                $("[data-route='" + Player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute')
+                $("[data-route='" + Player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 Player.route(route);
                 $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute')
+                Battle.generateNewEnemy();
             }
             else {
                 console.log("You don't have access to that route yet.");
