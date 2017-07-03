@@ -304,7 +304,7 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money","_dungeonTokens","_caughtShinyList","_route","_caughtPokemonList","_routeKills","_region","_gymBadges","_pokeballs","_shinyList","_notCaughtBallSelection","_alreadyCaughtBallSelection"]
+        let keep = ["_money","_dungeonTokens","_caughtShinyList","_route","_caughtPokemonList","_routeKills","_routeKillsNeeded","_region","_gymBadges","_pokeballs","_shinyList","_notCaughtBallSelection","_alreadyCaughtBallSelection"]
         let plainJS = ko.toJS(this)
         return Save.filter(plainJS, keep)
     }
