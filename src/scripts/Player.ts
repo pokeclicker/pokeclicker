@@ -8,14 +8,16 @@ class Player {
 
     private static _money: KnockoutObservable<number> = ko.observable(0);
     private static _dungeonTokens: number = 0;
+    private static _caughtShinyList: KnockoutObservableArray<string> = ko.observableArray<string>();
+    private static _route: KnockoutObservable<number> = ko.observable(1);
     public static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray<CaughtPokemon>();
-    private static _route: KnockoutObservable<number> = ko.observable(2);
     private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function () {
         return ko.observable(0)
     });
     private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
+
     private static _region: GameConstants.Region = GameConstants.Region.kanto;
-    private static _gymBadges: GameConstants.Badge[] = [GameConstants.Badge.Boulder];
+    private static _gymBadges: KnockoutObservableArray<GameConstants.Badge> = ko.observableArray<GameConstants.Badge>();
     private static _pokeballs: number[] = [0, 0, 0, 0];
     private static _shinyList: boolean[] = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
 
@@ -30,9 +32,11 @@ class Player {
         return Player.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
     });
 
-    public static routeKillsObservable: KnockoutComputed<number> = ko.computed(function () {
-        return Player.routeKills[Player.route()]();
-    });
+    public static routeKillsObservable(route: number): KnockoutComputed<number> {
+        return ko.computed(function () {
+            return Math.min(Player.routeKillsNeeded(),Player.routeKills[route]());
+        });
+    }
 
     public static addRouteKill() {
         Player.routeKills[Player.route()](Player.routeKills[Player.route()]() + 1)
@@ -78,7 +82,7 @@ class Player {
 
     public static calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
-        return 2000;
+        return 10;
     }
 
     /**
@@ -122,6 +126,15 @@ class Player {
         return false;
     }
 
+    public static alreadyCaughtPokemonShiny(pokemonName: string) {
+        for (let i: number = 0; i < this.caughtShinyList().length; i++) {
+            if (this.caughtShinyList()[i] == pokemonName) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static capturePokemon(pokemonName: string, shiny: boolean = false) {
         if (!Player.alreadyCaughtPokemon(pokemonName)) {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
@@ -134,8 +147,8 @@ class Player {
         if (badge == undefined || GameConstants.Badge.None) {
             return true;
         }
-        for (let i = 0; i < this._gymBadges.length; i++) {
-            if (this._gymBadges[i] == badge) {
+        for (let i = 0; i < this._gymBadges().length; i++) {
+            if (this._gymBadges()[i] == badge) {
                 return true;
             }
         }
@@ -216,11 +229,11 @@ class Player {
     }
 
     static get gymBadges(): GameConstants.Badge[] {
-        return this._gymBadges;
+        return this._gymBadges();
     }
 
     static set gymBadges(value: GameConstants.Badge[]) {
-        this._gymBadges = value;
+        this._gymBadges(value);
     }
 
     static get shinyList(): boolean[] {
@@ -230,5 +243,14 @@ class Player {
     static set shinyList(value: boolean[]) {
         this._shinyList = value;
     }
+
+    static get caughtShinyList(): KnockoutObservableArray<string> {
+        return this._caughtShinyList;
+    }
+
+    static set caughtShinyList(value: KnockoutObservableArray<string>) {
+        this._caughtShinyList = value;
+    }
+
 }
 

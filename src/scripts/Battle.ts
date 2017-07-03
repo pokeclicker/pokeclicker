@@ -53,7 +53,6 @@ class Battle {
         let pokeBall: GameConstants.Pokeball = Player.calculatePokeballToUse(alreadyCaught);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
-            console.log("asdasd");
             Battle.catching(true);
             setTimeout(
                 () => {
@@ -84,11 +83,11 @@ class Battle {
         Player.usePokeball(pokeBall);
         let chance: number = Math.floor(Math.random() * 100 + 1);
         if (chance <= this.enemyPokemon().catchRate) {
-            this.catchPokemon(this.enemyPokemon().name());
+            this.catchPokemon();
         }
     }
 
-    public static catchPokemon(pokemonName: string) {
-        Player.capturePokemon(pokemonName);
+    public static catchPokemon() {
+        Player.capturePokemon(this.enemyPokemon().name());
     }
 }

@@ -1,9 +1,14 @@
-class RouteRequirement {
+class MapHelper {
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
+        console.log("called");
+        console.log(region);
         if (!isNaN(route) && !(route == Player.route())) {
             if (this.accessToRoute(route, region)) {
+                $("[data-route='" + Player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 Player.route(route);
+                $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute')
+                Battle.generateNewEnemy();
             }
             else {
                 console.log("You don't have access to that route yet.");
@@ -12,6 +17,7 @@ class RouteRequirement {
     };
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
+        console.log("Checking route: " + route);
         if (!Player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
             console.log("Missing badge: " + GameConstants.routeBadgeRequirements[region][route]);
             return false;
@@ -23,12 +29,26 @@ class RouteRequirement {
         }
         for (let i = 0; i < reqList.length; i++) {
             let route: number = reqList[i];
-            if (Player.routeKills[route] < Player.routeKillsNeeded) {
+            if (Player.routeKillsObservable(route)() < Player.routeKillsNeeded()) {
                 console.log("Not enough kills on route: " + route);
                 return false
             }
         }
+
+        console.log("Access");
         return true;
     };
+
+    public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
+        return ko.computed(function () {
+            if (Player.route.peek() == route && Player.region == region) {
+                return "currentRoute";
+            }
+            if (MapHelper.accessToRoute(route, region)) {
+                return "unlockedRoute";
+            }
+            return "lockedRoute";
+        });
+    }
 
 }
