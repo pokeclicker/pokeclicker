@@ -282,5 +282,11 @@ class Player {
         this._notCaughtBallSelection = value;
     }
 
+    public toJSON() {
+        let keep = ["_money","_dungeonTokens","_caughtShinyList","_route","_caughtPokemonList","_routeKills","_region","_gymBadges","_pokeballs","_shinyList","_notCaughtBallSelection","_alreadyCaughtBallSelection"]
+        let plainJS = ko.toJS(this)
+        return Save.filter(plainJS, keep)
+    }
+
 }
 

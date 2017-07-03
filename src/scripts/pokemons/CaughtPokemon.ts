@@ -32,4 +32,11 @@ class CaughtPokemon {
             })
         }
     }
+
+    public toJSON() {
+        let keep, plainJS;
+        keep = ["id", "name", "evolved", "attackBonus", "exp", "baseAttack"];
+        plainJS = ko.toJS(this)
+        return Save.filter(plainJS, keep)
+    }
 }
