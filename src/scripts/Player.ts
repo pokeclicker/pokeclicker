@@ -23,7 +23,6 @@ class Player {
 
     private static _notCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Masterball;
     private static _alreadyCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Pokeball;
-
     public static clickAttackObservable: KnockoutComputed<number> = ko.computed(function () {
         return Player.calculateClickAttack()
     });
@@ -57,12 +56,12 @@ class Player {
             attack += pokemon.attack();
         }
 
-        return attack;
+        return attack + 1000;
     }
 
     public static calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
-        return 10;
+        return 1000;
     }
 
     public static calculateMoneyMultiplier(): number {
@@ -117,7 +116,6 @@ class Player {
      * @returns {boolean}
      */
     public static alreadyCaughtPokemon(pokemonName: string) {
-        console.log(Player.caughtPokemonList);
         for (let i: number = 0; i < Player.caughtPokemonList.length; i++) {
             if (Player.caughtPokemonList[i].name == pokemonName) {
                 return true;

@@ -78,7 +78,7 @@
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <div class="col-md-6 push-md-3">
-            <div class="page-item" style="background-color: white">
+            <div class="page-item" style="background-color: white" id="routeBattleView">
                 <div class="card">
                     <span>Money: <span data-bind="text: Player.money">todo</span></span>
                 </div>
@@ -130,7 +130,8 @@
 
             </div>
 
-            <div class="page-item no-select" style="background-color: green; min-height: 350px">
+            <div class="page-item" data-bind="if: Game.gameState.gym" style="background-color: white; min-height: 100px;" id="townView"></div>
+            <div class="page-item no-select">
                 <svg  id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
                     <defs>
                         <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%" y2="100%">
@@ -366,7 +367,7 @@
                         <path d="M 70 108.39 L 78.29 100.1 L 89.71 100.1 L 98 108.39 L 98 119.81 L 89.71 128.1 L 78.29 128.1 L 70 119.81 Z"
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
                         </path>
-                        <path class="city" id="Pewter City"
+                        <path class="city" id="Pewter City" data-bind="click:function(){MapHelper.moveToTown('Pewter City')}"
                               d="M 72.8 109.53 L 79.43 102.9 L 88.57 102.9 L 95.2 109.53 L 95.2 118.67 L 88.57 125.3 L 79.43 125.3 L 72.8 118.67 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                               stroke-miterlimit="10" stroke-width="1.4"></path>
