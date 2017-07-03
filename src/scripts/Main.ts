@@ -6,6 +6,7 @@
 document.addEventListener("DOMContentLoaded", function (event) {
 
     let game: Game = new Game();
+    DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
     game.start();
     ko.applyBindings(Game);
 });

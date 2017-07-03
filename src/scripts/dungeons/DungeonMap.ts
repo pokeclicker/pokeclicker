@@ -1,15 +1,15 @@
 class DungeonMap {
     size: number;
-    map: DungeonTile[][];
-    playerPosition: Point;
+    board: KnockoutObservable<DungeonTile[][]>;
+    playerPosition: KnockoutObservable<Point>;
 
 
     constructor(size: number) {
         this.size = size;
-        this.map = this.generateMap();
+        this.board = ko.observable(this.generateMap());
 
-        this.playerPosition = new Point(Math.floor(size / 2), size - 1);
-        this.map[this.playerPosition.y][this.playerPosition.x].isVisible = true;
+        this.playerPosition = ko.observable(new Point(Math.floor(size / 2), size - 1));
+        this.board()[this.playerPosition().y][this.playerPosition().x].isVisible = true;
     }
 
     public moveToCoordinates(x:number, y:number){
@@ -19,10 +19,10 @@ class DungeonMap {
     public moveToTile(point:Point){
         console.log(this.hasAccesToTile(point));
         if(this.hasAccesToTile(point)){
-            this.map[this.playerPosition.y][this.playerPosition.x].hasPlayer = false;
-            this.playerPosition = point;
-            this.map[this.playerPosition.y][this.playerPosition.x].hasPlayer = true;
-            this.map[this.playerPosition.y][this.playerPosition.x].isVisible = true;
+            this.board()[this.playerPosition().y][this.playerPosition().x].hasPlayer = false;
+            this.playerPosition(point);
+            this.board()[this.playerPosition().y][this.playerPosition().x].hasPlayer = true;
+            this.board()[this.playerPosition().y][this.playerPosition().x].isVisible = true;
         }
     }
 
@@ -33,23 +33,23 @@ class DungeonMap {
         }
 
         // If the point is visible, we can move there.
-        if(this.map[point.y][point.x].isVisible){
+        if(this.board()[point.y][point.x].isVisible){
             return true;
         }
 
-        if(point.y < this.size-1 &&this.map[point.y+1][point.x].isVisible){
+        if(point.y < this.size-1 &&this.board()[point.y+1][point.x].isVisible){
             return true;
         }
 
-        if(point.y > 0 && this.map[point.y-1][point.x].isVisible){
+        if(point.y > 0 && this.board()[point.y-1][point.x].isVisible){
             return true;
         }
 
-        if(point.x < this.size-1 && this.map[point.y][point.x+1].isVisible){
+        if(point.x < this.size-1 && this.board()[point.y][point.x+1].isVisible){
             return true;
         }
 
-        if(point.x > 0 && this.map[point.y][point.x-1].isVisible){
+        if(point.x > 0 && this.board()[point.y][point.x-1].isVisible){
             return true;
         }
 
