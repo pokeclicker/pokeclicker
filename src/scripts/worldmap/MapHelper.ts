@@ -5,7 +5,9 @@ class MapHelper {
         console.log(region);
         if (!isNaN(route) && !(route == Player.route())) {
             if (this.accessToRoute(route, region)) {
+                $("[data-route='" + Player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute')
                 Player.route(route);
+                $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute')
             }
             else {
                 console.log("You don't have access to that route yet.");
@@ -26,7 +28,7 @@ class MapHelper {
         }
         for (let i = 0; i < reqList.length; i++) {
             let route: number = reqList[i];
-            if (Player.routeKills[route]() < Player.routeKillsNeeded()) {
+            if (Player.routeKillsObservable(route)() < Player.routeKillsNeeded()) {
                 console.log("Not enough kills on route: " + route);
                 return false
             }
@@ -36,15 +38,15 @@ class MapHelper {
         return true;
     };
 
-    public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<KnockoutObservable<string>> {
+    public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
         return ko.computed(function () {
-            if (Player.route() == route && Player.region == region) {
-                return ko.observable(GameConstants.RouteCssClass[GameConstants.RouteCssClass.currentRoute]);
+            if (Player.route.peek() == route && Player.region == region) {
+                return "currentRoute";
             }
             if (MapHelper.accessToRoute(route, region)) {
-                return ko.observable(GameConstants.RouteCssClass[GameConstants.RouteCssClass.unlockedRoute]);
+                return "unlockedRoute";
             }
-            return ko.observable(GameConstants.RouteCssClass[GameConstants.RouteCssClass.lockedRoute]);
+            return "lockedRoute";
         });
     }
 
