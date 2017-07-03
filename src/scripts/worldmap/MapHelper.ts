@@ -1,9 +1,9 @@
-import GameState = GameConstants.GameState;
 class MapHelper {
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
         if (!isNaN(route) && !(route == Player.route())) {
             if (this.accessToRoute(route, region)) {
+                Game.gameState(GameConstants.GameState.fighting);
                 $("[data-route='" + Player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 Player.route(route);
                 $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
@@ -57,7 +57,7 @@ class MapHelper {
 
     public static moveToTown(townName: string) {
         if(MapHelper.accessToTown(townName)) {
-            Game.gameState = GameState.paused;
+            Game.gameState(GameConstants.GameState.town)
         }
     };
 

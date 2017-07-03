@@ -18,7 +18,7 @@ class Game {
     undergroundCounter: number;
     farmCounter: number;
 
-    public static gameState;
+    public static gameState : KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
     constructor() {
 
@@ -29,7 +29,6 @@ class Game {
         this.load();
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
         console.log("started");
-        Game.gameState = GameState.fighting;
     }
 
     stop() {

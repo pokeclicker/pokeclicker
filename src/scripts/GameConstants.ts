@@ -26,6 +26,7 @@ namespace GameConstants {
         gym = 3,
         dungeon = 4,
         safari = 5,
+        town = 6,
     }
 
     export enum Pokeball {

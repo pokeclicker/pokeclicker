@@ -17,7 +17,6 @@
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
 
-
     <!--Knockout-->
     <script src="libs/knockout-latest.js"></script>
 
@@ -33,7 +32,6 @@
 
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
-
 
 </head>
 <body>
@@ -73,66 +71,74 @@
 
     </div>
 
-
     <div class="row justify-content-lg-center" style="text-align: center">
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <div class="col-md-6 push-md-3">
-            <div class="page-item" style="background-color: white" id="routeBattleView">
-                <div class="card">
-                    <span>Money: <span data-bind="text: Player.money">todo</span></span>
-                </div>
-
-                <div>
-                    <div class="col-lg-12" style="display: block;">
-                        Route <span data-bind="text: Player.route">number</span><br>
-                        <span data-bind="text: Player.routeKillsObservable(Player.route())">kills</span>/<span
-                            data-bind="text: Player.routeKillsNeeded">killsneeded</span><br>
-                        <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span><br>
-                        <div style="height: 96px;">
-                            <div data-bind="ifnot: Battle.catching">
-                                <img id="enemy"
-                                     data-bind="click: Battle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
-                            </div>
-
-                            <div data-bind="if: Battle.catching">
-                                <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
-                            </div>
-
-
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar"
-                                 data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
-                                 aria-valuemin="0" aria-valuemax="100">
-
-                            </div>
-                        </div>
-
-
+            <div id="interactionView" class="page-item" style="background-color: white">
+                <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting"
+                     id="routeBattleView">
+                    <div class="card">
+                        <span>Money: <span data-bind="text: Player.money">todo</span></span>
                     </div>
 
-                    <span data-bind="text: Battle.enemyPokemon().health">health</span>/<span
-                        data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
+                    <div>
+                        <div class="col-lg-12" style="display: block;">
+                            Route <span data-bind="text: Player.route">number</span><br>
+                            <span data-bind="text: Player.routeKillsObservable(Player.route())">kills</span>/<span
+                                data-bind="text: Player.routeKillsNeeded">killsneeded</span><br>
+                            <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span><br>
+                            <div style="height: 96px;">
+                                <div data-bind="ifnot: Battle.catching">
+                                    <img id="enemy"
+                                         data-bind="click: Battle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                                </div>
+
+                                <div data-bind="if: Battle.catching">
+                                    <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
+                                </div>
+
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" role="progressbar"
+                                     data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
+                                     aria-valuemin="0" aria-valuemax="100">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span data-bind="text: Battle.enemyPokemon().health">health</span>/<span
+                            data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
+                    </div>
+
+                    <div class="card">
+                        <table width="100%">
+                            <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                    data-bind="text: Player.pokemonAttackObservable"></span></span></td>
+                            <td width="50%"><span style="display: inline;">Click Attack: <span
+                                    data-bind="text: Player.clickAttackObservable"></span></span>
+                            </td>
+                        </table>
+                    </div>
                 </div>
 
+                <div data-bind="if: Game.gameState() == GameConstants.GameState.town" id="townView">
+                    <div style="min-height: 100px;">
+                        <h2>Town</h2>
+                    </div>
 
-                <div class="card">
-                    <table width="100%">
-                        <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                data-bind="text: Player.pokemonAttackObservable"></span></span></td>
-                        <td width="50%"><span style="display: inline;">Click Attack: <span
-                                data-bind="text: Player.clickAttackObservable"></span></span>
-                        </td>
-                    </table>
                 </div>
 
+                <div data-bind="if: Game.gameState() == GameConstants.GameState.gym" id="gymView">
+                    <div style="min-height: 100px;"></div>
 
+                </div>
             </div>
 
-            <div class="page-item" data-bind="if: Game.gameState.gym" style="background-color: white; min-height: 100px;" id="townView"></div>
             <div class="page-item no-select">
-                <svg  id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
+                <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
                     <defs>
                         <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%" y2="100%">
                             <stop offset="0%" style="stop-color:#F8CECC"></stop>
@@ -147,16 +153,20 @@
                         <image height="420.7" width="651" xlink:href="assets/images/kanto.png"></image>
 
                         <!--Route 1-->
-                        <g transform="rotate(90,83.65,263.2)" data-bind="click:function(){ MapHelper.moveToRoute(1, 0); } ">
-                            <rect data-route='1' data-bind="attr: { class: MapHelper.calculateRouteCssClass(1,0)() }" height="28"
+                        <g transform="rotate(90,83.65,263.2)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(1, 0); } ">
+                            <rect data-route='1' data-bind="attr: { class: MapHelper.calculateRouteCssClass(1,0)() }"
+                                  height="28"
                                   width="80.1"
                                   x="51.3" y="250.2"></rect>
                             <text font-size="13px" x="82.3" y="268.2">1</text>
                         </g>
 
                         <!--Route 2-->
-                        <g transform="rotate(90,83.65,263.2)" data-bind="click:function(){ MapHelper.moveToRoute(2, 0); } ">
-                            <rect data-route='2' data-bind="attr: { class: MapHelper.calculateRouteCssClass(2,0)() }" height="28"
+                        <g transform="rotate(90,83.65,263.2)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(2, 0); } ">
+                            <rect data-route='2' data-bind="attr: { class: MapHelper.calculateRouteCssClass(2,0)() }"
+                                  height="28"
                                   width="120.1"
                                   x="-70" y="250.2"></rect>
                             <text font-size="13px" x="5" y="268.2">2</text>
@@ -164,7 +174,8 @@
 
                         <!--Route 3-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(3, 0); } ">
-                            <rect data-route='3' data-bind="attr: { class: MapHelper.calculateRouteCssClass(3,0)() }" height="28"
+                            <rect data-route='3' data-bind="attr: { class: MapHelper.calculateRouteCssClass(3,0)() }"
+                                  height="28"
                                   width="112.1"
                                   x="92.3" y="100.1"></rect>
                             <text x="140" y="120.1">3</text>
@@ -180,7 +191,8 @@
                         </g>
 
                         <!--Route 5-->
-                        <g transform = "rotate(90,31.5,9.5)" data-bind="click:function(){ MapHelper.moveToRoute(5, 0); } ">
+                        <g transform="rotate(90,31.5,9.5)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(5, 0); } ">
                             <rect data-route='5' data-bind="attr: { class: MapHelper.calculateRouteCssClass(5,0)() }"
                                   height="28"
                                   width="70"
@@ -189,7 +201,8 @@
                         </g>
 
                         <!--Route 6-->
-                        <g transform = "rotate(90,31.5,9.5)" data-bind="click:function(){ MapHelper.moveToRoute(6, 0); } ">
+                        <g transform="rotate(90,31.5,9.5)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(6, 0); } ">
                             <rect data-route='6' data-bind="attr: { class: MapHelper.calculateRouteCssClass(6,0)() }"
                                   height="28"
                                   width="70"
@@ -199,7 +212,8 @@
 
                         <!--Route 7-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(7, 0); } ">
-                            <rect data-route='7' data-bind="attr: { class: MapHelper.calculateRouteCssClass(7,0)() }" height="28"
+                            <rect data-route='7' data-bind="attr: { class: MapHelper.calculateRouteCssClass(7,0)() }"
+                                  height="28"
                                   width="112.1"
                                   x="345.3" y="152.1"></rect>
                             <text x="395.3" y="173.1">7</text>
@@ -207,7 +221,8 @@
 
                         <!--Route 8-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(8, 0); } ">
-                            <rect data-route='8' data-bind="attr: { class: MapHelper.calculateRouteCssClass(8,0)() }" height="28"
+                            <rect data-route='8' data-bind="attr: { class: MapHelper.calculateRouteCssClass(8,0)() }"
+                                  height="28"
                                   width="90.1"
                                   x="270.3" y="152.1"></rect>
                             <text x="304.3" y="172.1">8</text>
@@ -215,32 +230,35 @@
 
                         <!--Route 9-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(9, 0); } ">
-                            <rect data-route='9' data-bind="attr: { class: MapHelper.calculateRouteCssClass(9,0)() }" height="28"
+                            <rect data-route='9' data-bind="attr: { class: MapHelper.calculateRouteCssClass(9,0)() }"
+                                  height="28"
                                   width="112.1"
                                   x="345.3" y="72.8"></rect>
                             <text x="395.3" y="92.8">9</text>
                         </g>
 
                         <!--Route 10-->
-                        <g  data-bind="click:function(){ MapHelper.moveToRoute(10, 0); } ">
+                        <g data-bind="click:function(){ MapHelper.moveToRoute(10, 0); } ">
                             <rect data-route='10' data-bind="attr: { class: MapHelper.calculateRouteCssClass(10,0)() }"
                                   height="28"
                                   width="90"
-                                  transform = "rotate(90,31.5,9.5)"
+                                  transform="rotate(90,31.5,9.5)"
                                   x="95" y="-430"></rect>
                             <text x="449" y="142">10</text>
                         </g>
 
                         <!--Route 11-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(11, 0); } ">
-                            <rect data-route='11' data-bind="attr: { class: MapHelper.calculateRouteCssClass(11,0)() }" height="28"
+                            <rect data-route='11' data-bind="attr: { class: MapHelper.calculateRouteCssClass(11,0)() }"
+                                  height="28"
                                   width="99.3"
                                   x="345.3" y="231.8"></rect>
                             <text x="395.3" y="252.8">11</text>
                         </g>
 
                         <!--Route 12-->
-                        <g transform = "rotate(90,31.5,9.5)" data-bind="click:function(){ MapHelper.moveToRoute(12, 0); } ">
+                        <g transform="rotate(90,31.5,9.5)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(12, 0); } ">
                             <rect data-route='12' data-bind="attr: { class: MapHelper.calculateRouteCssClass(12,0)() }"
                                   height="28"
                                   width="82"
@@ -249,7 +267,8 @@
                         </g>
 
                         <!--Route 13-->
-                        <g transform = "rotate(90,31.5,9.5)" data-bind="click:function(){ MapHelper.moveToRoute(13, 0); } ">
+                        <g transform="rotate(90,31.5,9.5)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(13, 0); } ">
                             <rect data-route='13' data-bind="attr: { class: MapHelper.calculateRouteCssClass(13,0)() }"
                                   height="28"
                                   width="56"
@@ -259,7 +278,8 @@
 
                         <!--Route 14-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(14, 0); } ">
-                            <rect data-route='14' data-bind="attr: { class: MapHelper.calculateRouteCssClass(14,0)() }" height="28"
+                            <rect data-route='14' data-bind="attr: { class: MapHelper.calculateRouteCssClass(14,0)() }"
+                                  height="28"
                                   width="80.3"
                                   x="363.3" y="287"></rect>
                             <text x="393.3" y="305.8">14</text>
@@ -267,7 +287,8 @@
 
                         <!--Route 15-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(15, 0); } ">
-                            <rect data-route='15' data-bind="attr: { class: MapHelper.calculateRouteCssClass(15,0)() }" height="28"
+                            <rect data-route='15' data-bind="attr: { class: MapHelper.calculateRouteCssClass(15,0)() }"
+                                  height="28"
                                   width="101.3"
                                   x="290.3" y="314"></rect>
                             <text x="338.3" y="333">15</text>
@@ -275,14 +296,16 @@
 
                         <!--Route 16-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(16, 0); } ">
-                            <rect data-route='16' data-bind="attr: { class: MapHelper.calculateRouteCssClass(16,0)() }" height="28"
+                            <rect data-route='16' data-bind="attr: { class: MapHelper.calculateRouteCssClass(16,0)() }"
+                                  height="28"
                                   width="130.1"
                                   x="148.3" y="152.1"></rect>
                             <text x="200.3" y="172.1">16</text>
                         </g>
 
                         <!--Route 17-->
-                        <g transform = "rotate(90,31.5,9.5)" data-bind="click:function(){ MapHelper.moveToRoute(17, 0); } ">
+                        <g transform="rotate(90,31.5,9.5)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(17, 0); } ">
                             <rect data-route='17' data-bind="attr: { class: MapHelper.calculateRouteCssClass(17,0)() }"
                                   height="28"
                                   width="137"
@@ -292,22 +315,26 @@
 
                         <!--Route 18-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(18, 0); } ">
-                            <rect data-route='18' data-bind="attr: { class: MapHelper.calculateRouteCssClass(18,0)() }" height="28"
+                            <rect data-route='18' data-bind="attr: { class: MapHelper.calculateRouteCssClass(18,0)() }"
+                                  height="28"
                                   width="145.3"
                                   x="148.3" y="314"></rect>
                             <text x="190.3" y="333">18</text>
                         </g>
 
                         <!--Route 19-->
-                        <g transform="rotate(90,83.65,263.2)" data-bind="click:function(){ MapHelper.moveToRoute(19, 0); } ">
-                            <rect data-route='19' data-bind="attr: { class: MapHelper.calculateRouteCssClass(19,0)() }" height="28"
+                        <g transform="rotate(90,83.65,263.2)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(19, 0); } ">
+                            <rect data-route='19' data-bind="attr: { class: MapHelper.calculateRouteCssClass(19,0)() }"
+                                  height="28"
                                   width="64"
                                   x="151.3" y="35.2"></rect>
                         </g>
 
                         <!--Route 19-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(19, 0); } ">
-                            <rect data-route='19' data-bind="attr: { class: MapHelper.calculateRouteCssClass(19,0)() }" height="28"
+                            <rect data-route='19' data-bind="attr: { class: MapHelper.calculateRouteCssClass(19,0)() }"
+                                  height="28"
                                   width="105.3"
                                   x="188.3" y="367"></rect>
                             <text x="235.3" y="387">19</text>
@@ -315,15 +342,18 @@
 
                         <!--Route 20-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(20, 0); } ">
-                            <rect data-route='20' data-bind="attr: { class: MapHelper.calculateRouteCssClass(20,0)() }" height="28"
+                            <rect data-route='20' data-bind="attr: { class: MapHelper.calculateRouteCssClass(20,0)() }"
+                                  height="28"
                                   width="99"
                                   x="90.3" y="367"></rect>
                             <text x="129.3" y="387">20</text>
                         </g>
 
                         <!--Route 21-->
-                        <g transform="rotate(90,83.65,263.2)" data-bind="click:function(){ MapHelper.moveToRoute(21, 0); } ">
-                            <rect data-route='21' data-bind="attr: { class: MapHelper.calculateRouteCssClass(21,0)() }" height="28"
+                        <g transform="rotate(90,83.65,263.2)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(21, 0); } ">
+                            <rect data-route='21' data-bind="attr: { class: MapHelper.calculateRouteCssClass(21,0)() }"
+                                  height="28"
                                   width="80.1"
                                   x="121.3" y="250.2"></rect>
                             <text transform="rotate(-90,166.65,263.2)" font-size="12px" x="158.3" y="268.2">21</text>
@@ -331,23 +361,26 @@
 
                         <!--Route 22-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(22, 0); } ">
-                            <rect data-route='22' data-bind="attr: { class: MapHelper.calculateRouteCssClass(22,0)() }" height="28"
+                            <rect data-route='22' data-bind="attr: { class: MapHelper.calculateRouteCssClass(22,0)() }"
+                                  height="28"
                                   width="75"
                                   x="15.3" y="205"></rect>
                             <text x="39.3" y="225">22</text>
                         </g>
 
                         <!--Route 23-->
-                        <g transform="rotate(90,83.65,263.2)" data-bind="click:function(){ MapHelper.moveToRoute(23, 0); } ">
-                            <rect data-route='23' data-bind="attr: { class: MapHelper.calculateRouteCssClass(23,0)() }" height="28"
+                        <g transform="rotate(90,83.65,263.2)"
+                           data-bind="click:function(){ MapHelper.moveToRoute(23, 0); } ">
+                            <rect data-route='23' data-bind="attr: { class: MapHelper.calculateRouteCssClass(23,0)() }"
+                                  height="28"
                                   width="116"
                                   x="-90" y="304"></rect>
                             <text x="-25" y="323">23</text>
                         </g>
 
                         <!--Route 24-->
-                        <g  data-bind="click:function(){ MapHelper.moveToRoute(24, 0); } ">
-                            <rect data-route='24' transform = "rotate(90,31.5,9.5)"
+                        <g data-bind="click:function(){ MapHelper.moveToRoute(24, 0); } ">
+                            <rect data-route='24' transform="rotate(90,31.5,9.5)"
                                   data-bind="attr: { class: MapHelper.calculateRouteCssClass(24,0)() }"
                                   height="28"
                                   width="40"
@@ -357,17 +390,18 @@
 
                         <!--Route 25-->
                         <g data-bind="click:function(){ MapHelper.moveToRoute(25, 0); } ">
-                            <rect data-route='25' data-bind="attr: { class: MapHelper.calculateRouteCssClass(25,0)() }" height="28"
+                            <rect data-route='25' data-bind="attr: { class: MapHelper.calculateRouteCssClass(25,0)() }"
+                                  height="28"
                                   width="83"
                                   x="337" y="18"></rect>
                             <text x="369" y="38">25</text>
                         </g>
 
-
                         <path d="M 70 108.39 L 78.29 100.1 L 89.71 100.1 L 98 108.39 L 98 119.81 L 89.71 128.1 L 78.29 128.1 L 70 119.81 Z"
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
                         </path>
-                        <path class="city" id="Pewter City" data-bind="click:function(){MapHelper.moveToTown('Pewter City')}"
+                        <path class="city" id="Pewter City"
+                              data-bind="click:function(){MapHelper.moveToTown('Pewter City')}"
                               d="M 72.8 109.53 L 79.43 102.9 L 88.57 102.9 L 95.2 109.53 L 95.2 118.67 L 88.57 125.3 L 79.43 125.3 L 72.8 118.67 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                               stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -486,8 +520,6 @@
                         <rect class="city" id="Power Plant" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" height="12.6"
                               stroke="#6c8ebf" width="12.6" x="452.9" y="105"></rect>
 
-
-
                     </g>
                 </svg>
             </div>
@@ -513,9 +545,7 @@
                 </table>
             </div>
 
-
         </div>
-
 
         <div class="col-md-3">
             <div class="page-item" style="background-color: red; min-height: 150px">
