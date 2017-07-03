@@ -3,9 +3,12 @@
 /**
  * Start the game when all html elements are loaded.
  */
+declare var player;
+
+
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    let game: Game = new Game();
+    var game: Game = new Game();
     game.start();
     ko.applyBindings(Game);
 });
@@ -19,11 +22,11 @@ class Game {
     farmCounter: number;
 
     constructor() {
-
+        (<any>window).player = new Player();
     }
 
     start() {
-        Player.region = GameConstants.Region.kanto;
+        player.region = GameConstants.Region.kanto;
         this.load();
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
         console.log("started");

@@ -1,45 +1,59 @@
 /**
- * Information about the player.
- * All player variables need to be saved.
+ * Information about the this.
+ * All this variables need to be saved.
  */
 
 class Player {
 
-
-    private static _money: KnockoutObservable<number> = ko.observable(0);
-    private static _dungeonTokens: number = 0;
-    private static _caughtShinyList: KnockoutObservableArray<string> = ko.observableArray<string>();
-    private static _route: KnockoutObservable<number> = ko.observable(1);
-    public static _caughtPokemonList: KnockoutObservableArray<CaughtPokemon> = ko.observableArray<CaughtPokemon>();
-    private static _routeKills: Array<KnockoutObservable<number>> = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function () {
-        return ko.observable(0)
-    });
+    private _money: KnockoutObservable<number>;
+    private _dungeonTokens: KnockoutObservable<number>;
+    private _caughtShinyList: KnockoutObservableArray<string>;
+    private _route: KnockoutObservable<number>;
+    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
+    private _routeKills: Array<KnockoutObservable<number>>;
     private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
+    private _region: GameConstants.Region;
+    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
+    private _pokeballs: number[];
+    private _shinyList: boolean[];
+    private _notCaughtBallSelection: GameConstants.Pokeball;
+    private _alreadyCaughtBallSelection: GameConstants.Pokeball;
 
-    private static _region: GameConstants.Region = GameConstants.Region.kanto;
-    private static _gymBadges: KnockoutObservableArray<GameConstants.Badge> = ko.observableArray<GameConstants.Badge>();
-    private static _pokeballs: number[] = [0, 0, 0, 0];
-    private static _shinyList: boolean[] = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
+    public clickAttackObservable: KnockoutComputed<number>;
 
-    private static _notCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Masterball;
-    private static _alreadyCaughtBallSelection: GameConstants.Pokeball = GameConstants.Pokeball.Pokeball;
+    public pokemonAttackObservable: KnockoutComputed<number>;
 
-    public static clickAttackObservable: KnockoutComputed<number> = ko.computed(function () {
-        return Player.calculateClickAttack()
-    });
-
-    public static pokemonAttackObservable: KnockoutComputed<number> = ko.computed(function () {
-        return Player.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
-    });
-
-    public static routeKillsObservable(route: number): KnockoutComputed<number> {
+    public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
-            return Math.min(Player.routeKillsNeeded(),Player.routeKills[route]());
-        });
+            return Math.min(Player.routeKillsNeeded,this.routeKills[route]());
+        }, this);
     }
 
-    public static addRouteKill() {
-        Player.routeKills[Player.route()](Player.routeKills[Player.route()]() + 1)
+    constructor() {
+        this._money = ko.observable(0);
+        this._dungeonTokens = ko.observable(0);
+        this._caughtShinyList = ko.observableArray<string>();
+        this._route = ko.observable(1);
+        this._caughtPokemonList = ko.observableArray<CaughtPokemon>();
+        this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function () {
+            return ko.observable(0)
+        });
+        this._region = GameConstants.Region.kanto;
+        this._gymBadges = ko.observableArray<GameConstants.Badge>();
+        this._pokeballs = [0, 0, 0, 0];
+        this._shinyList = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
+        this._notCaughtBallSelection = GameConstants.Pokeball.Masterball;
+        this._alreadyCaughtBallSelection = GameConstants.Pokeball.Pokeball;
+        this.clickAttackObservable = ko.computed(function () {
+            return this.calculateClickAttack()
+        }, this);
+        this.pokemonAttackObservable = ko.computed(function () {
+            return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
+        }, this);
+    }
+
+    public addRouteKill() {
+        this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
     /**
@@ -48,7 +62,7 @@ class Player {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public static calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
+    public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
         // TODO factor in types
         // TODO start at 0
@@ -60,41 +74,41 @@ class Player {
         return attack;
     }
 
-    public static calculateClickAttack(): number {
+    public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
         return 10;
     }
 
-    public static calculateMoneyMultiplier(): number {
+    public calculateMoneyMultiplier(): number {
         // TODO Calculate money multiplier by checking upgrades and multipliers.
         return 1;
     }
 
-    public static calculateExpMultiplier(): number {
+    public calculateExpMultiplier(): number {
         // TODO Calculate exp multiplier by checking upgrades and multipliers.
         return 1;
     }
 
-    public static calculateDungeonTokenMultiplier(): number {
+    public calculateDungeonTokenMultiplier(): number {
         // TODO Calculate dungeon token multiplier by checking upgrades and multipliers.
         return 1;
     }
 
-    public static calculateCatchTime(): number {
+    public calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
         return 10;
     }
 
     /**
-     * Checks the players preferences to see what pokéball needs to be used on the next throw.
-     * Checks from the players pref to the most basic ball to see if the player has any.
+     * Checks the thiss preferences to see what pokéball needs to be used on the next throw.
+     * Checks from the thiss pref to the most basic ball to see if the this has any.
      * @param alreadyCaught if the pokémon is already caught.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public static calculatePokeballToUse(alreadyCaught: boolean): GameConstants.Pokeball {
+    public calculatePokeballToUse(alreadyCaught: boolean): GameConstants.Pokeball {
         let pref: GameConstants.Pokeball;
         if (alreadyCaught) {
-            pref = this._alreadyCaughtBallSelection;
+            pref = this.alreadyCaughtBallSelection;
         } else {
             pref = this._notCaughtBallSelection;
         }
@@ -116,17 +130,17 @@ class Player {
      * @param pokemonName name to search for.
      * @returns {boolean}
      */
-    public static alreadyCaughtPokemon(pokemonName: string) {
-        console.log(Player.caughtPokemonList);
-        for (let i: number = 0; i < Player.caughtPokemonList.length; i++) {
-            if (Player.caughtPokemonList[i].name == pokemonName) {
+    public alreadyCaughtPokemon(pokemonName: string) {
+        console.log(this.caughtPokemonList);
+        for (let i: number = 0; i < this.caughtPokemonList.length; i++) {
+            if (this.caughtPokemonList[i].name == pokemonName) {
                 return true;
             }
         }
         return false;
     }
 
-    public static alreadyCaughtPokemonShiny(pokemonName: string) {
+    public alreadyCaughtPokemonShiny(pokemonName: string) {
         for (let i: number = 0; i < this.caughtShinyList().length; i++) {
             if (this.caughtShinyList()[i] == pokemonName) {
                 return true;
@@ -135,15 +149,15 @@ class Player {
         return false;
     }
 
-    public static capturePokemon(pokemonName: string, shiny: boolean = false) {
-        if (!Player.alreadyCaughtPokemon(pokemonName)) {
+    public capturePokemon(pokemonName: string, shiny: boolean = false) {
+        if (!this.alreadyCaughtPokemon(pokemonName)) {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
-            Player._caughtPokemonList.push(caughtPokemon);
+            this._caughtPokemonList.push(caughtPokemon);
         }
     }
 
-    public static hasBadge(badge: GameConstants.Badge) {
+    public hasBadge(badge: GameConstants.Badge) {
         if (badge == undefined || GameConstants.Badge.None) {
             return true;
         }
@@ -155,12 +169,12 @@ class Player {
         return false;
     }
 
-    static gainMoney(money: number) {
+    public gainMoney(money: number) {
         // TODO add money multipliers
         this._money(Math.floor(this._money() + money));
     }
 
-    static gainExp(exp: number, level: number, trainer: boolean) {
+    public gainExp(exp: number, level: number, trainer: boolean) {
         // TODO add exp multipliers
         let trainerBonus = trainer ? 1.5 : 1;
         let expTotal = Math.floor(exp * level * trainerBonus / 9);
@@ -172,84 +186,100 @@ class Player {
         }
     }
 
-    static get routeKills(): Array<KnockoutObservable<number>> {
+    get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
 
-    static set routeKills(value: Array<KnockoutObservable<number>>) {
+    set routeKills(value: Array<KnockoutObservable<number>>) {
         this._routeKills = value;
     }
 
-    static usePokeball(pokeBall: GameConstants.Pokeball): void {
+    public usePokeball(pokeBall: GameConstants.Pokeball): void {
         this._pokeballs[pokeBall]--;
     }
 
-    static get routeKillsNeeded(): KnockoutObservable<number> {
-        return this._routeKillsNeeded;
+    static get routeKillsNeeded(): number {
+        return this._routeKillsNeeded();
     }
 
-    static set routeKillsNeeded(value: KnockoutObservable<number>) {
-        this._routeKillsNeeded = value;
+    static set routeKillsNeeded(value: number) {
+        this._routeKillsNeeded(value);
     }
 
-    static get route(): KnockoutObservable<number> {
+    get route(): KnockoutObservable<number> {
         return this._route;
     }
 
-    static set route(value: KnockoutObservable<number>) {
+    set route(value: KnockoutObservable<number>) {
         this._route = value;
     }
 
-    public static get money(): number {
+    get money(): number {
         return this._money();
     }
 
-    public static get dungeonTokens(): number {
+    get dungeonTokens(): KnockoutObservable<number> {
         return this._dungeonTokens;
     }
 
-    public static get caughtPokemonList() {
+    get caughtPokemonList() {
         return this._caughtPokemonList();
     }
 
-    static get region(): GameConstants.Region {
+    get region(): GameConstants.Region {
         return this._region;
     }
 
-    static set region(value: GameConstants.Region) {
+    set region(value: GameConstants.Region) {
         this._region = value;
     }
 
-    static get pokeballs(): number[] {
+    get pokeballs(): number[] {
         return this._pokeballs;
     }
 
-    static set pokeballs(value: number[]) {
+    set pokeballs(value: number[]) {
         this._pokeballs = value;
     }
 
-    static get gymBadges(): GameConstants.Badge[] {
+    get gymBadges(): GameConstants.Badge[] {
         return this._gymBadges();
     }
 
-    static set gymBadges(value: GameConstants.Badge[]) {
+    set gymBadges(value: GameConstants.Badge[]) {
         this._gymBadges(value);
     }
 
-    static get shinyList(): boolean[] {
+    get shinyList(): boolean[] {
         return this._shinyList;
     }
 
-    static set shinyList(value: boolean[]) {
+    set shinyList(value: boolean[]) {
         this._shinyList = value;
     }
 
-    static get caughtShinyList(): KnockoutObservableArray<string> {
+    get caughtShinyList(): KnockoutObservableArray<string> {
         return this._caughtShinyList;
     }
 
-    static set caughtShinyList(value: KnockoutObservableArray<string>) {
+    set caughtShinyList(value: KnockoutObservableArray<string>) {
         this._caughtShinyList = value;
+    }
+
+    get alreadyCaughtBallSelection(): GameConstants.Pokeball {
+        return this._alreadyCaughtBallSelection;
+    }
+
+    set alreadyCaughtBallSelection(value: GameConstants.Pokeball) {
+        this._alreadyCaughtBallSelection = value;
+    }
+
+    get notCaughtBallSelection(): GameConstants.Pokeball {
+        return this._notCaughtBallSelection;
+    }
+
+    set notCaughtBallSelection(value: GameConstants.Pokeball) {
+        this._notCaughtBallSelection = value;
     }
 
 }

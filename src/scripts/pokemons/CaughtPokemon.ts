@@ -25,7 +25,7 @@ class CaughtPokemon {
         if (pokemonData.evoLevel && !this.evolved) {
             this.evolver = this.levelObservable.subscribe(() => {
                 if (this.levelObservable() >= pokemonData.evoLevel) {
-                    Player.capturePokemon(pokemonData.evolution, false);
+                    player.capturePokemon(pokemonData.evolution, false);
                     this.evolved = true;
                     this.evolver.dispose();
                 }
