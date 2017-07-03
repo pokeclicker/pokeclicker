@@ -19,6 +19,17 @@ namespace GameConstants {
     export const SHINY_CHANCE_BREEDING = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
 
+    // Dungeons
+    export const DUNGEON_TIME_LIMIT = 600;
+    export const DUNGEON_SIZE = 5;
+
+    export enum DungeonTile {
+        empty,
+        enemy,
+        chest,
+        boss,
+    }
+
     export enum GameState {
         idle = 0,
         paused = 1,

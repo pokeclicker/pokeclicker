@@ -117,7 +117,6 @@ class Player {
      * @returns {boolean}
      */
     public static alreadyCaughtPokemon(pokemonName: string) {
-        console.log(Player.caughtPokemonList);
         for (let i: number = 0; i < Player.caughtPokemonList.length; i++) {
             if (Player.caughtPokemonList[i].name == pokemonName) {
                 return true;

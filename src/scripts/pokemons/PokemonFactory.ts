@@ -74,5 +74,28 @@ class pokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny)
     }
 
+    public static generateDungeonPokemon(gymName: string, index: number): BattlePokemon {
+        let gym = gymList[gymName];
+        let pokemon = gym.pokemons[index];
+        let basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
+
+        let exp: number = basePokemon.exp * 1.5;
+        let shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny)
+    }
+
+    public static generateDungeonBoss(bossPokemon: DungeonBossPokemon, chestsOpened: number ): BattlePokemon {
+        let name: string = bossPokemon.name;
+        let basePokemon = PokemonHelper.getPokemonByName(name);
+        let id = basePokemon.id;
+        let maxHealth:number = Math.floor(bossPokemon.baseHealth * (1+(chestsOpened/5)));
+        let catchVariation = Math.floor(Math.random() * 7 - 3);
+        let catchRate: number = Math.floor(Math.pow(basePokemon.catchRate, 0.75)) + catchVariation;
+        let exp: number = basePokemon.exp;
+        let money: number = 0;
+        let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, money, shiny);
+    }
+
 
 }
