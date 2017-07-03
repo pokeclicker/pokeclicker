@@ -1,17 +1,25 @@
 class Save {
 
+    static counter: number = 0;
+
     public static store(player: Player) {
         let json = JSON.stringify(player);
-        localStorage.setItem("player", json)
+        localStorage.setItem("player", json);
+        this.counter = 0;
     }
 
     public static load(): Player {
-        let saved = JSON.parse(localStorage.getItem("player"));
+        let saved = localStorage.getItem("player");
         if (saved) {
-            return new Player(saved);
+            return new Player(JSON.parse(saved));
         } else {
             return new Player()
         }
+    }
+
+    public static reset(): void {
+        localStorage.setItem("player", null);
+        location.reload()
     }
 
     public static filter(object: any, keep: string[]): Object {

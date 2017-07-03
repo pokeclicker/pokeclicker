@@ -41,9 +41,15 @@ class Game {
         Battle.counter += GameConstants.TICK_TIME;
         this.undergroundCounter += GameConstants.TICK_TIME;
         this.farmCounter += GameConstants.TICK_TIME;
+        Save.counter += GameConstants.TICK_TIME;
 
         if (Battle.counter > GameConstants.BATTLE_TICK) {
             Battle.tick();
+        }
+
+        if (Save.counter > GameConstants.SAVE_TICK) {
+            Save.store(player);
+            console.log("Game saved");
         }
     }
 
