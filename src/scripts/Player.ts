@@ -1,6 +1,6 @@
 /**
- * Information about the this.
- * All this variables need to be saved.
+ * Information about the player.
+ * All player variables need to be saved.
  */
 
 class Player {
@@ -119,15 +119,15 @@ class Player {
     }
 
     /**
-     * Checks the thiss preferences to see what pokéball needs to be used on the next throw.
-     * Checks from the thiss pref to the most basic ball to see if the this has any.
+     * Checks the players preferences to see what pokéball needs to be used on the next throw.
+     * Checks from the players pref to the most basic ball to see if the player has any.
      * @param alreadyCaught if the pokémon is already caught.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
     public calculatePokeballToUse(alreadyCaught: boolean): GameConstants.Pokeball {
         let pref: GameConstants.Pokeball;
         if (alreadyCaught) {
-            pref = this.alreadyCaughtBallSelection;
+            pref = this._alreadyCaughtBallSelection;
         } else {
             pref = this._notCaughtBallSelection;
         }

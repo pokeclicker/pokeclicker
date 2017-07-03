@@ -8,7 +8,7 @@ declare var player;
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    var game: Game = new Game();
+    let game: Game = new Game();
     game.start();
     ko.applyBindings(Game);
 });
