@@ -64,7 +64,51 @@
         <li>
             <button class="dropdown-item" href="#">Key Items</button>
         </li>
+        <li>
+            <button onClick="$('#donateModal').modal('toggle');" class="dropdown-item" href="#">Donate</button>
+        </li>
+
+
     </ul>
+</div>
+
+
+<div id="donateModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Donate!</h4>
+            </div>
+            <div class="modal-body">
+                      <span>As game developers who do not charge any money for their game, and are very much opposed to advertisements, it is difficult to make money.
+             We devote our time to creating games that can stay free of ads, forever.
+        With the buttons below, you can show your support and make sure we keep developing awesome games for you!</span>
+                <br><br>
+                Please leave a message after donating, so we can contact and thank you!
+                <br><br>
+
+                <div class="row justify-content-lg-center" style="text-align: center">
+                <button class="btn btn-success donate-button">€1<br><img src="assets/images/pokemon/1.png"></button>
+                <button class="btn btn-danger donate-button">€3<br><img src="assets/images/pokemon/4.png"></button>
+                <button class="btn btn-primary donate-button">€5<br><img src="assets/images/pokemon/7.png"></button>
+                <button class="btn btn-warning donate-button">€10<br><img src="assets/images/pokemon/25.png"></button>
+                <button class="btn btn-info donate-button">€20<br><img src="assets/images/pokemon/151.png"></button>
+                </div>
+                <!--<form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">-->
+
+                    <!--<input type="hidden" name="cmd" value="_s-xclick">-->
+                    <!--<input type="hidden" name="hosted_button_id" value="MR8497BXE7P3A">-->
+                    <!--<input type="image" src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online!">-->
+                    <!--<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">-->
+                <!--</form>-->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+
+    </div>
 </div>
 
 <div class="container">
@@ -98,8 +142,6 @@
                             <div data-bind="if: Battle.catching">
                                 <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
                             </div>
-
-
                         </div>
                         <div class="progress">
                             <div class="progress-bar bg-danger" role="progressbar"
