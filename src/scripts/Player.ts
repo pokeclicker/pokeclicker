@@ -11,7 +11,7 @@ class Player {
     private _route: KnockoutObservable<number>;
     private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
     private _routeKills: Array<KnockoutObservable<number>>;
-    private static _routeKillsNeeded: KnockoutObservable<number> = ko.observable(10);
+    private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: GameConstants.Region;
     private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
     private _pokeballs: number[];
@@ -25,7 +25,7 @@ class Player {
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
-            return Math.min(Player.routeKillsNeeded,this.routeKills[route]());
+            return Math.min(this.routeKillsNeeded,this.routeKills[route]());
         }, this);
     }
 
@@ -41,6 +41,7 @@ class Player {
             });
             this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
             this._routeKills = savedPlayer._routeKills.map( (killsOnRoute) => { return ko.observable(killsOnRoute) } );
+            this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded);
             this._region = savedPlayer._region;
             this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
             this._pokeballs = savedPlayer._pokeballs;
@@ -56,6 +57,7 @@ class Player {
             this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function () {
                 return ko.observable(0)
             });
+            this._routeKillsNeeded = ko.observable(10);
             this._region = GameConstants.Region.kanto;
             this._gymBadges = ko.observableArray<GameConstants.Badge>();
             this._pokeballs = [0, 0, 0, 0];
@@ -217,11 +219,11 @@ class Player {
         this._pokeballs[pokeBall]--;
     }
 
-    static get routeKillsNeeded(): number {
+    get routeKillsNeeded(): number {
         return this._routeKillsNeeded();
     }
 
-    static set routeKillsNeeded(value: number) {
+    set routeKillsNeeded(value: number) {
         this._routeKillsNeeded(value);
     }
 
