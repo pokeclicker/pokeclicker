@@ -29,21 +29,40 @@ class Player {
         }, this);
     }
 
-    constructor() {
-        this._money = ko.observable(0);
-        this._dungeonTokens = ko.observable(0);
-        this._caughtShinyList = ko.observableArray<string>();
-        this._route = ko.observable(1);
-        this._caughtPokemonList = ko.observableArray<CaughtPokemon>();
-        this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function () {
-            return ko.observable(0)
-        });
-        this._region = GameConstants.Region.kanto;
-        this._gymBadges = ko.observableArray<GameConstants.Badge>();
-        this._pokeballs = [0, 0, 0, 0];
-        this._shinyList = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
-        this._notCaughtBallSelection = GameConstants.Pokeball.Masterball;
-        this._alreadyCaughtBallSelection = GameConstants.Pokeball.Pokeball;
+    constructor(savedPlayer?) {
+        if (savedPlayer){
+            this._money = ko.observable(savedPlayer._money);
+            this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens);
+            this._caughtShinyList = ko.observableArray(savedPlayer._caughtShinyList);
+            this._route = ko.observable(savedPlayer._route);
+            let tmpCaughtList = savedPlayer._caughtPokemonList.map( (pokemon) => {
+                let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp)
+                return tmp
+            });
+            this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
+            this._routeKills = savedPlayer._routeKills.map( (killsOnRoute) => { return ko.observable(killsOnRoute) } );
+            this._region = savedPlayer._region;
+            this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
+            this._pokeballs = savedPlayer._pokeballs;
+            this._shinyList = savedPlayer._shinyList.map( (bool) => { return ko.observable(bool) } );
+            this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection
+            this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection
+        } else {
+            this._money = ko.observable(0);
+            this._dungeonTokens = ko.observable(0);
+            this._caughtShinyList = ko.observableArray<string>();
+            this._route = ko.observable(1);
+            this._caughtPokemonList = ko.observableArray<CaughtPokemon>();
+            this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function () {
+                return ko.observable(0)
+            });
+            this._region = GameConstants.Region.kanto;
+            this._gymBadges = ko.observableArray<GameConstants.Badge>();
+            this._pokeballs = [0, 0, 0, 0];
+            this._shinyList = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
+            this._notCaughtBallSelection = GameConstants.Pokeball.Masterball;
+            this._alreadyCaughtBallSelection = GameConstants.Pokeball.Pokeball;
+        }
         this.clickAttackObservable = ko.computed(function () {
             return this.calculateClickAttack()
         }, this);

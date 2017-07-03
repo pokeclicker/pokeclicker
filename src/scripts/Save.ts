@@ -5,6 +5,15 @@ class Save {
         localStorage.setItem("player", json)
     }
 
+    public static load(): Player {
+        let saved = JSON.parse(localStorage.getItem("player"));
+        if (saved) {
+            return new Player(saved);
+        } else {
+            return new Player()
+        }
+    }
+
     public static filter(object: any, keep: string[]): Object {
         let filtered = {}, prop;
         for (prop in object) {

@@ -46,7 +46,6 @@ class PokemonHelper {
                 level = Math.pow(30 * pokemon.exp(), 0.475) / (6 * Math.sqrt(5));
                 break;
         }
-        level = Math.min(level, (player.gymBadges.length + 2) * 10);
         return Math.max(1, Math.min(100, Math.floor(level)));
     }
 

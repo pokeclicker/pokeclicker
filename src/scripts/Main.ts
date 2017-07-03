@@ -22,7 +22,7 @@ class Game {
     farmCounter: number;
 
     constructor() {
-        (<any>window).player = new Player();
+        (<any>window).player = Save.load();
     }
 
     start() {
