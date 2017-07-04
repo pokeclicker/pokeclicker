@@ -57,7 +57,9 @@ class MapHelper {
 
     public static moveToTown(townName: string) {
         if(MapHelper.accessToTown(townName)) {
-            Game.gameState(GameConstants.GameState.town)
+            Game.gameState(GameConstants.GameState.town);
+            $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
+            player.route(0);
         }
     };
 
