@@ -58,7 +58,7 @@ class PokemonHelper {
         if (pokemon.shiny) {
             src += "shiny";
         }
-        src += "pokemon/" + pokemon.id() + ".png";
+        src += "pokemon/" + pokemon.id + ".png";
         return src;
     }
 
