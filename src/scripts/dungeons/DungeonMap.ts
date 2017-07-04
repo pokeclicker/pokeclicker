@@ -13,6 +13,7 @@ class DungeonMap {
     }
 
     public moveToCoordinates(x:number, y:number){
+        console.log("Trying to move to: (" + x + "," + y + ")" );
         this.moveToTile(new Point(x, y));
     }
 

@@ -10,15 +10,15 @@ class DungeonTile {
         this.type = type;
     }
 
-    public calculateCssClass() {
+    public calculateCssClass(): KnockoutComputed<string> {
         return ko.computed(function () {
             if (!this.isVisible) {
-                return "tile-invisible";
+                return "tile tile-invisible";
             }
             if (this.hasPlayer) {
-                return "tile-player";
+                return "tile tile-player";
             }
-            return "tile-" + this.type;
+            return "tile tile-" + this.type;
         });
     }
 }
