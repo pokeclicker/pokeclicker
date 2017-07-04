@@ -189,49 +189,62 @@
                                          data-bind="click: Battle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
                                 </div>
 
-                            <div data-bind="if: Battle.catching">
-                                <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
+                                <div data-bind="if: Battle.catching">
+                                    <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
+                                </div>
+
                             </div>
-
-
-                        </div>
-                        <div class="progress">
-                            <div class="progress-bar bg-danger" role="progressbar"
-                                 data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
-                                 aria-valuemin="0" aria-valuemax="100">
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" role="progressbar"
+                                     data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
+                                     aria-valuemin="0" aria-valuemax="100">
 
                                 </div>
                             </div>
 
-
-                    </div>
+                        </div>
 
                         <span data-bind="text: Battle.enemyPokemon().health">health</span>/<span
                             data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
                     </div>
 
-
-                <div class="card">
-                    <table width="100%">
-                        <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                data-bind="text: player.pokemonAttackObservable"></span></span></td>
-                        <td width="50%"><span style="display: inline;">Click Attack: <span
-                                data-bind="text: player.clickAttackObservable"></span></span>
-                        </td>
-                    </table>
-                </div>
-
-
-            </div>
-
-                <div data-bind="if: Game.gameState() == GameConstants.GameState.town" id="townView">
-                    <div style="min-height: 100px;">
-                        <h2>Town</h2>
+                    <div class="card">
+                        <table width="100%">
+                            <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                    data-bind="text: player.pokemonAttackObservable"></span></span></td>
+                            <td width="50%"><span style="display: inline;">Click Attack: <span
+                                    data-bind="text: player.clickAttackObservable"></span></span>
+                            </td>
+                        </table>
                     </div>
 
                 </div>
 
-                <div data-bind="if: Game.gameState() == GameConstants.GameState.gym" id="gymView">
+                <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
+                     class="justify-content-lg-center no-gutters">
+                    <h2 data-bind="text: player.town().name()">Town Name</h2>
+                    <div class="row justify-content-lg-center no-gutters" style="min-height: 100px;">
+                        <div class="col no-gutters">
+                            <ul class="nav flex-lg-column">
+                                <li class="nav-item" data-bind="if:player.town().gym">
+                                    <a class="nav-link" href="#">Gym</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-7 no-gutters">
+
+                            <img class="townImage"
+                                 data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
+                        </div>
+
+                        <div class="col no-gutters">
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="gymView" data-bind="if: Game.gameState() == GameConstants.GameState.gym">
                     <div style="min-height: 100px;"></div>
 
                 </div>
@@ -625,6 +638,7 @@
             </div>
         </div>
 
+        <!--left column-->
         <div class="col-md-3 pull-md-6">
             <div class="page-item" style="background-color: white; min-height: 180px">
                 <h2>Pokeball management</h2>
