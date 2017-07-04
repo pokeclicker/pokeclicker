@@ -37,7 +37,7 @@ class Player {
             this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
             this._route = ko.observable(savedPlayer._route);
             let tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp)
+                let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp);
                 return tmp
             });
             this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
@@ -51,7 +51,7 @@ class Player {
             this._shinyList = savedPlayer._shinyList.map((bool) => {
                 return ko.observable(bool)
             });
-            this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection
+            this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection;
             this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection
         } else {
             this._money = ko.observable(0);
@@ -309,8 +309,8 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_shinyList", "_notCaughtBallSelection", "_alreadyCaughtBallSelection"]
-        let plainJS = ko.toJS(this)
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_shinyList", "_notCaughtBallSelection", "_alreadyCaughtBallSelection"];
+        let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
 
