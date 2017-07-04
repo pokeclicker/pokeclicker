@@ -6,7 +6,7 @@
     <script type="text/html" id="pokemonListTemplate">
         <tr>
             <td>
-                <img class="smallImage" data-bind="attr:{ src: '/assets/images/pokemon/' + $data.id + '.png' }"/>
+                <img class="smallImage" data-bind="attr:{ src: PokemonHelper.getImage($data) }"/>
                 <span data-bind="text: name">Name</span>
             </td>
             <td data-bind="text: attack">fdsf</td>

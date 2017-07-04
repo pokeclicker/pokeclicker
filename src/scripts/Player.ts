@@ -36,7 +36,7 @@ class Player {
             this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
             this._route = ko.observable(savedPlayer._route);
             let tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp);
+                let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp, pokemon.shiny);
                 return tmp
             });
             this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
@@ -177,7 +177,7 @@ class Player {
     public capturePokemon(pokemonName: string, shiny: boolean = false) {
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
-            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
+            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0, shiny);
             this._caughtPokemonList.push(caughtPokemon);
         }
     }
