@@ -36,7 +36,7 @@ class Player {
             this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
             this._route = ko.observable(savedPlayer._route);
             let tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp, pokemon.shiny);
+                let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp);
                 return tmp
             });
             this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
