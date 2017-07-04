@@ -7,17 +7,15 @@ class CaughtPokemon {
     baseAttack: number;
     attack: KnockoutComputed<number>;
     evolved: boolean;
-    shiny: boolean;
     attackBonus: KnockoutObservable<number>;
     exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
     evolver: KnockoutSubscription
 
-    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number, shiny: boolean) {
+    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number) {
         this.id = pokemonData.id;
         this.name = pokemonData.name;
         this.evolved = ev;
-        this.shiny = shiny;
         this.attackBonus = ko.observable(atBo);
         this.exp = ko.observable(xp);
         this.levelObservable = ko.computed(() => {return PokemonHelper.calculateLevel(this)});
@@ -37,7 +35,7 @@ class CaughtPokemon {
 
     public toJSON() {
         let keep, plainJS;
-        keep = ["name", "evolved", "attackBonus", "exp", "shiny"];
+        keep = ["name", "evolved", "attackBonus", "exp"];
         plainJS = ko.toJS(this)
         return Save.filter(plainJS, keep)
     }

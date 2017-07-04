@@ -175,33 +175,14 @@ class Player {
     }
 
     public capturePokemon(pokemonName: string, shiny: boolean = false) {
-        let capture = false;
-
         if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
-            capture = true;
             this._caughtShinyList.push(pokemonName);
-            this.releasePokemon(pokemonName);
         }
         if (!this.alreadyCaughtPokemon(pokemonName)) {
-            capture = true;
-        }
-
-        if (capture) {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
-            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0, shiny);
+            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
         }
-    }
-
-    public releasePokemon(pokemonName: string) {
-        for (let i=0; i< this._caughtPokemonList().length; i++) {
-            let pokemon = this._caughtPokemonList()[i];
-            if (pokemon.name == pokemonName) {
-                this._caughtPokemonList.splice(i, 1);
-                return true;
-            }
-        }
-        return false
     }
 
     public hasBadge(badge: GameConstants.Badge) {
