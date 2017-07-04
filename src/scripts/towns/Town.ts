@@ -14,6 +14,10 @@ class Town {
         this._dungeon = ko.observable(dungeon);
     }
 
+    public startGym() {
+
+    }
+
 
     get name(): KnockoutObservable<string> {
         return this._name;

@@ -169,6 +169,7 @@
     <div class="row justify-content-lg-center" style="text-align: center">
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
+        <!--Middle column-->
         <div class="col-md-6 push-md-3">
             <div id="interactionView" class="page-item" style="background-color: white">
                 <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting"
@@ -222,17 +223,23 @@
 
                 <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
                      class="justify-content-lg-center no-gutters">
-                    <h2 data-bind="text: player.town().name()">Town Name</h2>
                     <div class="row justify-content-lg-center no-gutters" style="min-height: 100px;">
                         <div class="col no-gutters">
-                            <ul class="nav flex-lg-column">
+                            <ul class="nav flex-lg-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
-                                    <a class="nav-link" href="#">Gym</a>
+                                    <button class="btn btn-secondary" data-bind="click: player.town().startGym()">Gym
+                                    </button>
+                                </li>
+                                <li class="nav-item" data-bind="if:player.town().shop">
+                                    <a class="nav-link" href="#">Shop</a>
+                                </li>
+                                <li class="nav-item" data-bind="if:player.town().dungeon">
+                                    <a class="nav-link" href="#">Dungeon</a>
                                 </li>
                             </ul>
                         </div>
                         <div class="col-7 no-gutters">
-
+                            <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
                             <img class="townImage"
                                  data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
                         </div>
@@ -661,6 +668,7 @@
 
         </div>
 
+        <!--Right column-->
         <div class="col-md-3">
             <div class="page-item" style="background-color: red; min-height: 150px">
                 <h2>Oak Items</h2>
