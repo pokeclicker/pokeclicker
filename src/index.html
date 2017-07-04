@@ -79,14 +79,14 @@
                 <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting"
                      id="routeBattleView">
                     <div class="card">
-                        <span>Money: <span data-bind="text: Player.money">todo</span></span>
+                        <span>Money: <span data-bind="text: player.money">todo</span></span>
                     </div>
 
                     <div>
                         <div class="col-lg-12" style="display: block;">
-                            Route <span data-bind="text: Player.route">number</span><br>
-                            <span data-bind="text: Player.routeKillsObservable(Player.route())">kills</span>/<span
-                                data-bind="text: Player.routeKillsNeeded">killsneeded</span><br>
+                            Route <span data-bind="text: player.route">number</span><br>
+                            <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
+                                data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span><br>
                             <div style="height: 96px;">
                                 <div data-bind="ifnot: Battle.catching">
@@ -116,9 +116,9 @@
                     <div class="card">
                         <table width="100%">
                             <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                    data-bind="text: Player.pokemonAttackObservable"></span></span></td>
+                                    data-bind="text: player.pokemonAttackObservable"></span></span></td>
                             <td width="50%"><span style="display: inline;">Click Attack: <span
-                                    data-bind="text: Player.clickAttackObservable"></span></span>
+                                    data-bind="text: player.clickAttackObservable"></span></span>
                             </td>
                         </table>
                     </div>
@@ -539,7 +539,7 @@
                         <th>Lvl</th>
                     </tr>
                     </thead>
-                    <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: Player._caughtPokemonList}">
+                    <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: player._caughtPokemonList}">
 
                     </tbody>
                 </table>
