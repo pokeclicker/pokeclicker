@@ -4,7 +4,7 @@
 /**
  * Created by dennis on 27-06-17.
  */
-class pokemonFactory {
+class PokemonFactory {
 
     /**
      * Generate a wild pokemon based on route, region and the dataList.

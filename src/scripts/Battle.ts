@@ -76,7 +76,7 @@ class Battle {
     public static generateNewEnemy() {
         Battle.catching(false);
         Battle.counter = 0;
-        Battle.enemyPokemon(pokemonFactory.generateWildPokemon(player.route(), player.region));
+        Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
     }
 
     public static throwPokeball(pokeBall: GameConstants.Pokeball) {
