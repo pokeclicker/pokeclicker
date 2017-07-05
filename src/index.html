@@ -107,7 +107,10 @@
                     </form>
 
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn btn-primary donate-button">€5<br><img src="assets/images/pokemon/7.png">
+                        <button data-html="true"
+                                title="Don't let the PokéDex order fool you, Charmander is and will always be the best starter. -Isha"
+                                class="btn btn-primary donate-button">€5<br><img src="assets/images/pokemon/7.png">
+
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="VHFSUMCRY8PJU">
@@ -150,6 +153,9 @@
 
                 </div>
 
+                <div class="row justify-content-sm-center" style="text-align: center">
+                    <p class="text-muted" style="font-size:8px">*note you don't actually get the Pokémon</p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
