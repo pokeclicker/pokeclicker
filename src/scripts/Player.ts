@@ -108,7 +108,7 @@ class Player {
 
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
-        return 1000;
+        return 500;
     }
 
     public calculateMoneyMultiplier(): number {

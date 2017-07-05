@@ -187,7 +187,7 @@
                             <div style="height: 96px;">
                                 <div data-bind="ifnot: Battle.catching">
                                     <img id="enemy"
-                                         data-bind="click: Battle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                                         data-bind="click: function() {Battle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
                                 </div>
 
                                 <div data-bind="if: Battle.catching">
@@ -262,7 +262,7 @@
                                     <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
                                     <div style="height: 96px;">
                                         <img id="gymEnemy"
-                                             data-bind="click: GymBattle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id() + '.png' }"/>
+                                             data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id() + '.png' }"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="display: grid;">
