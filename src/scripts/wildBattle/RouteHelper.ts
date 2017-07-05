@@ -36,10 +36,10 @@ class RouteHelper {
     public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean, includeWater: boolean): boolean {
         let possiblePokemon: string[] = RouteHelper.getAvailablePokemonList(route, region, includeWater);
         for (let i = 0; i < possiblePokemon.length; i++) {
-            if (!Player.alreadyCaughtPokemon(possiblePokemon[i])) {
+            if (!player.alreadyCaughtPokemon(possiblePokemon[i])) {
                 return false;
             }
-            if (includeShiny && !Player.alreadyCaughtPokemonShiny((possiblePokemon[i]))) {
+            if (includeShiny && !player.alreadyCaughtPokemonShiny((possiblePokemon[i]))) {
                 return false;
             }
         }

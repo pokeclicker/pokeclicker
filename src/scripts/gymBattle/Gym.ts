@@ -26,7 +26,7 @@ class Gym {
     }
 
     public isUnlocked(): boolean {
-        return Player.hasBadge(this.badgeReq);
+        return player.hasBadge(this.badgeReq);
     }
 }
 
