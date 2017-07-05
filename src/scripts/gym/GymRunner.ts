@@ -18,7 +18,6 @@ class GymRunner {
     }
 
     public static tick() {
-        console.log(this.timeLeft());
         if (this.timeLeft() < 0) {
             GymRunner.gymLost();
         }
