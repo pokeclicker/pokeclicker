@@ -252,16 +252,33 @@
                 </div>
 
                 <div id="gymView" data-bind="if: Game.gameState() == GameConstants.GameState.gym">
-                    id="gymBattleView">
                     <div>
                         <div class="col-lg-12" style="display: block;">
-                            Route <span data-bind="text: player.route">number</span><br>
-                            <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
-                                data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
-                            <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
-                            <div style="height: 96px;">
-                                <img id="gymEnemy"
-                                     data-bind="click: GymBattle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id() + '.png' }"/>
+                            <div class="row">
+                                <div class="col-sm-4 offset-sm-4">
+                                    <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
+                                    <div style="height: 96px;">
+                                        <img id="gymEnemy"
+                                             data-bind="click: GymBattle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id() + '.png' }"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3" style="display: grid;">
+                                    <span data-bind="text: GymBattle.gym.leaderName">Leader</span>
+                                    <div class="gymPokeballList">
+                                        <span data-bind="foreach: new Array(GymBattle.pokemonsUndefeatedComputable())"><img
+                                                class="gymPokeball" src="assets/images/gyms/pokeball.png"></span>
+                                        <span data-bind="foreach: new Array(GymBattle.pokemonsDefeatedComputable())"><img
+                                                class="gymPokeball gymPokeballDefeated"
+                                                src="assets/images/gyms/pokeball.png"></span>
+                                    </div>
+
+                                    <div>
+                                        <img height="56px" id="gymLeader"
+                                             data-bind="attr:{ src: '/assets/images/gyms/' + GymBattle.gym.leaderName + '.png'}">
+
+                                    </div>
+
+                                </div>
                             </div>
                             <div class="progress">
                                 <div class="progress-bar bg-danger" role="progressbar"

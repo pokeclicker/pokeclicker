@@ -102,7 +102,8 @@ class Player {
             attack += pokemon.attack();
         }
 
-        return attack;
+        // return attack;
+        return 0;
     }
 
     public calculateClickAttack(): number {
@@ -218,13 +219,16 @@ class Player {
     }
 
     public startGym() {
-        if (this.town() != null) {
-            GymBattle.gym = player.town()._gym();
+        if (this.town() != null && this.town().gym() != null) {
+            let gym: Gym = this.town().gym();
+            GymBattle.gym = gym;
             GymBattle.index(0);
             GymBattle.timeLeft(GameConstants.GYM_TIME);
-            GymBattle.generateNewEnemy();
+            GymBattle.totalPokemons(gym.pokemons.length);
 
             Game.gameState(GameConstants.GameState.gym);
+            GymBattle.generateNewEnemy();
+
         }
     }
 

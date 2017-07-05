@@ -1,17 +1,13 @@
 /**
  * Created by dennis on 05-07-17.
  */
-class GymBattle {
+class GymBattle extends Battle {
 
     static gym: Gym;
-    static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
-    static counter: number = 0;
     static index: KnockoutObservable<number> = ko.observable(0);
+    static totalPokemons: KnockoutObservable<number> = ko.observable(0);
     static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
 
-    /**
-     * Probably not needed right now, but might be if we add more logic to a gameTick.
-     */
     public static tick() {
         if (this.timeLeft() < 0) {
             player.gymLost();
@@ -22,33 +18,7 @@ class GymBattle {
     }
 
     /**
-     * Attacks with Pokémon and checks if the enemy is defeated.
-     */
-    public static pokemonAttack() {
-        if (!this.enemyPokemon().isAlive()) {
-            return;
-        }
-        this.enemyPokemon().damage(player.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
-        if (!this.enemyPokemon().isAlive()) {
-            this.defeatPokemon();
-        }
-    }
-
-    /**
-     * Attacks with clicks and checks if the enemy is defeated.
-     */
-    public static clickAttack() {
-        if (!this.enemyPokemon().isAlive()) {
-            return;
-        }
-        this.enemyPokemon().damage(player.calculateClickAttack());
-        if (!this.enemyPokemon().isAlive()) {
-            this.defeatPokemon();
-        }
-    }
-
-    /**
-     * Award the player with money and exp, and throw a Pokéball if applicable
+     * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
         player.gainMoney(this.enemyPokemon().money);
@@ -70,4 +40,12 @@ class GymBattle {
         this.counter = 0;
         this.enemyPokemon(pokemonFactory.generateTrainerPokemon(this.gym.town, this.index()));
     }
+
+    public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.computed(function () {
+        return GymBattle.index();
+    });
+
+    public static pokemonsUndefeatedComputable: KnockoutComputed<number> = ko.computed(function () {
+        return GymBattle.totalPokemons() - GymBattle.index();
+    })
 }
