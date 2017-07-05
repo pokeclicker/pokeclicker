@@ -102,7 +102,7 @@ class Player {
             attack += pokemon.attack();
         }
 
-        return attack + 1000;
+        return attack;
     }
 
     public calculateClickAttack(): number {
@@ -215,6 +215,26 @@ class Player {
                 pokemon.exp(pokemon.exp() + expTotal);
             }
         }
+    }
+
+    public startGym() {
+        if (this.town() != null) {
+            GymBattle.gym = player.town()._gym();
+            GymBattle.index(0);
+            GymBattle.timeLeft(GameConstants.GYM_TIME);
+            GymBattle.generateNewEnemy();
+
+            Game.gameState(GameConstants.GameState.gym);
+        }
+    }
+
+    public gymLost() {
+        Game.gameState(GameConstants.GameState.town);
+    }
+
+    public gymWon(gym: Gym) {
+        this.gainMoney(gym.moneyReward);
+        Game.gameState(GameConstants.GameState.town);
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {

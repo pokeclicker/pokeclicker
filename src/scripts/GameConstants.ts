@@ -10,6 +10,7 @@ namespace GameConstants {
     export const UNDERGROUND_TICK = 1000;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
+    export const GYM_TIME = 30000;
 
     export const AMOUNT_OF_POKEMONS = 151;
 

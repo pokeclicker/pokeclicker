@@ -227,7 +227,7 @@
                         <div class="col no-gutters">
                             <ul class="nav flex-lg-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
-                                    <button class="btn btn-secondary" data-bind="click: player.town().startGym()">Gym
+                                    <button class="btn btn-secondary" onclick="player.startGym()">Gym
                                     </button>
                                 </li>
                                 <li class="nav-item" data-bind="if:player.town().shop">
@@ -252,7 +252,40 @@
                 </div>
 
                 <div id="gymView" data-bind="if: Game.gameState() == GameConstants.GameState.gym">
-                    <div style="min-height: 100px;"></div>
+                    id="gymBattleView">
+                    <div>
+                        <div class="col-lg-12" style="display: block;">
+                            Route <span data-bind="text: player.route">number</span><br>
+                            <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
+                                data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
+                            <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
+                            <div style="height: 96px;">
+                                <img id="gymEnemy"
+                                     data-bind="click: GymBattle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id() + '.png' }"/>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-danger" role="progressbar"
+                                     data-bind="attr:{ style: 'width:' + GymBattle.enemyPokemon().healthPercentage() + '%' }"
+                                     aria-valuemin="0" aria-valuemax="100">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <span data-bind="text: GymBattle.enemyPokemon().health">health</span>/<span
+                            data-bind="text: GymBattle.enemyPokemon().maxHealth">maxHealth</span>
+                    </div>
+
+                    <div class="card">
+                        <table width="100%">
+                            <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                    data-bind="text: player.pokemonAttackObservable"></span></span></td>
+                            <td width="50%"><span style="display: inline;">Click Attack: <span
+                                    data-bind="text: player.clickAttackObservable"></span></span>
+                            </td>
+                        </table>
+                    </div>
 
                 </div>
             </div>

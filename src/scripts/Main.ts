@@ -50,6 +50,14 @@ class Game {
                 if (Battle.counter > GameConstants.BATTLE_TICK) {
                     Battle.tick();
                 }
+                break;
+            }
+            case GameConstants.GameState.gym: {
+                GymBattle.counter += GameConstants.TICK_TIME;
+                if (GymBattle.counter > GameConstants.BATTLE_TICK) {
+                    GymBattle.tick();
+                }
+                break;
             }
         }
 
