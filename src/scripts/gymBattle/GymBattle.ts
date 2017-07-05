@@ -9,6 +9,7 @@ class GymBattle extends Battle {
     static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
 
     public static tick() {
+        console.log("gym time left: " + this.timeLeft());
         if (this.timeLeft() < 0) {
             player.gymLost();
         }
