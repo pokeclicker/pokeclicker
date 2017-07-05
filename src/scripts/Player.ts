@@ -54,7 +54,7 @@ class Player {
             });
             this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection;
             this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection
-            this._sortOption = ko.observable(savedPlayer._sortOption)
+            this._sortOption = ko.observable(GameConstants.SortOptionsEnum[GameConstants.SortOptionsEnum[savedPlayer._sortOption]])
             this._sortDirection = ko.observable(savedPlayer._sortDirection)
         } else {
             this._money = ko.observable(0);
@@ -72,7 +72,7 @@ class Player {
             this._shinyList = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
             this._notCaughtBallSelection = GameConstants.Pokeball.Masterball;
             this._alreadyCaughtBallSelection = GameConstants.Pokeball.Pokeball;
-            this._sortOption = ko.observable("id");
+            this._sortOption = ko.observable(GameConstants.SortOptionsEnum.id);
             this._sortDirection = ko.observable("ascending")
         }
         this.clickAttackObservable = ko.computed(function () {
