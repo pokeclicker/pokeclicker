@@ -19,6 +19,7 @@ class Player {
     private _notCaughtBallSelection: GameConstants.Pokeball;
     private _alreadyCaughtBallSelection: GameConstants.Pokeball;
     private _sortOption: KnockoutObservable<string>;
+    private _sortDirection: KnockoutObservable<string>;
 
     public clickAttackObservable: KnockoutComputed<number>;
 
@@ -54,6 +55,7 @@ class Player {
             this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection;
             this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection
             this._sortOption = ko.observable(savedPlayer._sortOption)
+            this._sortDirection = ko.observable(savedPlayer._sortDirection)
         } else {
             this._money = ko.observable(0);
             this._dungeonTokens = ko.observable(0);
@@ -71,6 +73,7 @@ class Player {
             this._notCaughtBallSelection = GameConstants.Pokeball.Masterball;
             this._alreadyCaughtBallSelection = GameConstants.Pokeball.Pokeball;
             this._sortOption = ko.observable("id");
+            this._sortDirection = ko.observable("ascending")
         }
         this.clickAttackObservable = ko.computed(function () {
             return this.calculateClickAttack()
@@ -220,7 +223,8 @@ class Player {
 
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.computed(function() {
-            return this._caughtPokemonList().sort(PokemonHelper.compareBy(player._sortOption()))
+            let direction = (player._sortDirection() == "ascending") ? 1 : -1;
+            return this._caughtPokemonList().sort(PokemonHelper.compareBy(player._sortOption(), direction))
         }, this);
     }
 
