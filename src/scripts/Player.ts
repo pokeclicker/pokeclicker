@@ -175,13 +175,14 @@ class Player {
     }
 
     public capturePokemon(pokemonName: string, shiny: boolean = false) {
-        if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
-            this._caughtShinyList.push(pokemonName);
-        }
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
+        }
+        if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
+            this._caughtShinyList.push(pokemonName);
+            Save.store(player);
         }
     }
 
