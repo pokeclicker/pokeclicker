@@ -180,6 +180,10 @@ class Player {
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
         }
+        if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
+            this._caughtShinyList.push(pokemonName);
+            Save.store(player);
+        }
     }
 
     public hasBadge(badge: GameConstants.Badge) {
