@@ -4,7 +4,7 @@
 class GymRunner {
 
     static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
-
+    static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
     public static startGym(gym: Gym) {
         Game.gameState(GameConstants.GameState.idle);
 
@@ -18,10 +18,12 @@ class GymRunner {
     }
 
     public static tick() {
+        console.log(this.timeLeft());
         if (this.timeLeft() < 0) {
             GymRunner.gymLost();
         }
         this.timeLeft(this.timeLeft() - GameConstants.GYM_TICK);
+        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100))
     }
 
     public static gymLost() {
@@ -32,4 +34,9 @@ class GymRunner {
         player.gainMoney(gym.moneyReward);
         Game.gameState(GameConstants.GameState.town);
     }
+
+    public static timeLeftSeconds = ko.computed(function () {
+        return Math.ceil(GymRunner.timeLeft() / 10) / 10;
+    })
+
 }

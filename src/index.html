@@ -223,7 +223,7 @@
 
                 <!--TownView-->
                 <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
-                     class="justify-content-lg-center no-gutters">
+                     class="justify-content-lg-center no-gutters no-select">
                     <div class="row justify-content-lg-center no-gutters" style="min-height: 100px;">
                         <div class="col no-gutters">
                             <ul class="nav flex-lg-column featureList">
@@ -242,7 +242,7 @@
                         </div>
                         <div class="col-7 no-gutters">
                             <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
-                            <img class="townImage" src=""
+                            <img class="townImage no-select" src=""
                                  data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
                         </div>
 
@@ -257,11 +257,19 @@
                 <div id="gymView" data-bind="if: Game.gameState() == GameConstants.GameState.gym">
                     <div>
                         <div class="col-lg-12" style="display: block;">
+
+                            <div id="gymTimer" class="progress">
+                                <div class="progress-bar" role="progressbar"
+                                     data-bind="text: GymRunner.timeLeftSeconds(), attr:{ style: 'width:' + GymRunner.timeLeftPercentage() + '%' }"
+                                     aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-sm-4 offset-sm-4">
                                     <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
                                     <div style="height: 96px;">
-                                        <img id="gymEnemy"
+                                        <img id="gymEnemy" src=""
                                              data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id() + '.png' }"/>
                                     </div>
                                 </div>
@@ -295,6 +303,7 @@
 
                         <span data-bind="text: GymBattle.enemyPokemon().health">health</span>/<span
                             data-bind="text: GymBattle.enemyPokemon().maxHealth">maxHealth</span>
+
                     </div>
 
                     <div class="card">
