@@ -15,7 +15,7 @@ namespace GameConstants {
 
 
     // Shinies
-    export const SHINY_CHANCE_BATTLE = 8192;
+    export const SHINY_CHANCE_BATTLE = 2;
     export const SHINY_CHANCE_DUNGEON = 4096;
     export const SHINY_CHANCE_BREEDING = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;

@@ -121,7 +121,7 @@ class Player {
 
     public calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
-        return 10;
+        return 0;
     }
 
     /**
