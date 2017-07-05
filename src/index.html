@@ -616,13 +616,11 @@
             </div>
 
             <div class="page-item" style="background-color: white">
-                <select data-bind="value: player._sortOption">
-                    <option> Sort by... </option>
-                    <option value ="id">Pokedex #</option>
-                    <option value ="name">Name</option>
-                    <option value ="attack">Attack</option>
-                    <option value ="levelObservable">Level</option>
-                    <option value ="shiny">Shiny</option>
+                <select data-bind="options: GameConstants.SortOptions,
+                                   optionsText: 'optionText',
+                                   optionsValue: 'optionValue',
+                                   value: player._sortOption,
+                                   optionsCaption: 'Sort By...'">
                 </select>
                 <select data-bind="value: player._sortDirection">
                     <option value="ascending">Ascending</option>

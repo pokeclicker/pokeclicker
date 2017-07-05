@@ -18,7 +18,7 @@ class Player {
     private _shinyList: boolean[];
     private _notCaughtBallSelection: GameConstants.Pokeball;
     private _alreadyCaughtBallSelection: GameConstants.Pokeball;
-    private _sortOption: KnockoutObservable<string>;
+    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDirection: KnockoutObservable<string>;
 
     public clickAttackObservable: KnockoutComputed<number>;
@@ -224,7 +224,7 @@ class Player {
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.computed(function() {
             let direction = (player._sortDirection() == "ascending") ? 1 : -1;
-            return this._caughtPokemonList().sort(PokemonHelper.compareBy(player._sortOption(), direction))
+            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], direction))
         }, this);
     }
 
