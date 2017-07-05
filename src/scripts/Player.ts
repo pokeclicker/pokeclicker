@@ -18,6 +18,7 @@ class Player {
     private _shinyList: boolean[];
     private _notCaughtBallSelection: GameConstants.Pokeball;
     private _alreadyCaughtBallSelection: GameConstants.Pokeball;
+    private _sortOption: KnockoutObservable<string>;
 
     public clickAttackObservable: KnockoutComputed<number>;
 
@@ -52,6 +53,7 @@ class Player {
             });
             this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection;
             this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection
+            this._sortOption = ko.observable(savedPlayer._sortOption)
         } else {
             this._money = ko.observable(0);
             this._dungeonTokens = ko.observable(0);
@@ -68,6 +70,7 @@ class Player {
             this._shinyList = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
             this._notCaughtBallSelection = GameConstants.Pokeball.Masterball;
             this._alreadyCaughtBallSelection = GameConstants.Pokeball.Pokeball;
+            this._sortOption = ko.observable("id");
         }
         this.clickAttackObservable = ko.computed(function () {
             return this.calculateClickAttack()
@@ -215,6 +218,14 @@ class Player {
         }
     }
 
+    public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
+        return ko.computed(function() {
+            return this._caughtPokemonList().sort(PokemonHelper.compareBy(player._sortOption()))
+        }, this);
+    }
+
+    
+
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -312,7 +323,7 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_shinyList", "_notCaughtBallSelection", "_alreadyCaughtBallSelection"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_shinyList", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

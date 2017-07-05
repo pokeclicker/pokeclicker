@@ -616,6 +616,14 @@
             </div>
 
             <div class="page-item" style="background-color: white">
+                <select data-bind="value: player._sortOption">
+                    <option> Sort by... </option>
+                    <option value ="id">Pokedex #</option>
+                    <option value ="name">Name</option>
+                    <option value ="attack">Attack</option>
+                    <option value ="levelObservable">Level</option>
+                    <option value ="shiny">Shiny</option>
+                </select>
                 <table id="pokemonList" class="table table-striped table-hover">
                     <thead>
                     <tr>
@@ -624,7 +632,7 @@
                         <th>Lvl</th>
                     </tr>
                     </thead>
-                    <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: player._caughtPokemonList}">
+                    <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: player.sortedPokemonList()}">
 
                     </tbody>
                 </table>
