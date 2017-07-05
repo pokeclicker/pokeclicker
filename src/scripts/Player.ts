@@ -121,7 +121,7 @@ class Player {
 
     public calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
-        return 10;
+        return 0;
     }
 
     /**
@@ -175,6 +175,9 @@ class Player {
     }
 
     public capturePokemon(pokemonName: string, shiny: boolean = false) {
+        if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
+            this._caughtShinyList.push(pokemonName);
+        }
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);

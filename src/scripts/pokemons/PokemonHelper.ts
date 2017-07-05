@@ -53,4 +53,13 @@ class PokemonHelper {
         return Math.max(1, Math.floor((attackBase + attackBonus) * level / 100))
     }
 
+    public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
+        let src = "/assets/images/";
+        if (shiny) {
+            src += "shiny";
+        }
+        src += "pokemon/" + pokemon.id + ".png";
+        return src;
+    }
+
 }

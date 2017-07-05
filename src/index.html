@@ -6,7 +6,7 @@
     <script type="text/html" id="pokemonListTemplate">
         <tr>
             <td>
-                <img class="smallImage" data-bind="attr:{ src: '/assets/images/pokemon/' + $data.id + '.png' }"/>
+                <img class="smallImage" data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"/>
                 <span data-bind="text: name">Name</span>
             </td>
             <td data-bind="text: attack">fdsf</td>
@@ -190,7 +190,7 @@
                         <div style="height: 96px;">
                             <div data-bind="ifnot: Battle.catching">
                                 <img id="enemy"
-                                     data-bind="click: Battle.clickAttack(), attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                                     data-bind="click: Battle.clickAttack(), attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"/>
                             </div>
 
                             <div data-bind="if: Battle.catching">
