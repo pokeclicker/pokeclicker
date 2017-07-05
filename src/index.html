@@ -221,13 +221,15 @@
 
                 </div>
 
+                <!--TownView-->
                 <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
                      class="justify-content-lg-center no-gutters">
                     <div class="row justify-content-lg-center no-gutters" style="min-height: 100px;">
                         <div class="col no-gutters">
                             <ul class="nav flex-lg-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
-                                    <button class="btn btn-secondary" onclick="player.startGym()">Gym
+                                    <button class="btn btn-secondary" onclick="GymRunner.startGym(player.town().gym())">
+                                        Gym
                                     </button>
                                 </li>
                                 <li class="nav-item" data-bind="if:player.town().shop">
@@ -240,7 +242,7 @@
                         </div>
                         <div class="col-7 no-gutters">
                             <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
-                            <img class="townImage"
+                            <img class="townImage" src=""
                                  data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
                         </div>
 
@@ -251,6 +253,7 @@
 
                 </div>
 
+                <!--GymView-->
                 <div id="gymView" data-bind="if: Game.gameState() == GameConstants.GameState.gym">
                     <div>
                         <div class="col-lg-12" style="display: block;">
@@ -273,7 +276,7 @@
                                     </div>
 
                                     <div>
-                                        <img height="56px" id="gymLeader"
+                                        <img height="56px" id="gymLeader" src=""
                                              data-bind="attr:{ src: '/assets/images/gyms/' + GymBattle.gym.leaderName + '.png'}">
 
                                     </div>

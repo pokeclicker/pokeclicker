@@ -57,6 +57,7 @@ class Game {
                 if (GymBattle.counter > GameConstants.BATTLE_TICK) {
                     GymBattle.tick();
                 }
+                GymRunner.tick();
                 break;
             }
         }

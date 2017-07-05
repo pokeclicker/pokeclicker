@@ -6,17 +6,6 @@ class GymBattle extends Battle {
     static gym: Gym;
     static index: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(0);
-    static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
-
-    public static tick() {
-        console.log("gym time left: " + this.timeLeft());
-        if (this.timeLeft() < 0) {
-            player.gymLost();
-        }
-        this.timeLeft(this.timeLeft() - GameConstants.TICK_TIME);
-        this.counter = 0;
-        this.pokemonAttack();
-    }
 
     /**
      * Award the player with exp, and go to the next pokemon
@@ -27,7 +16,7 @@ class GymBattle extends Battle {
         this.index(this.index() + 1);
 
         if (this.index() >= this.gym.pokemons.length) {
-            player.gymWon(this.gym)
+            GymRunner.gymWon(this.gym)
         } else {
             this.generateNewEnemy();
         }
