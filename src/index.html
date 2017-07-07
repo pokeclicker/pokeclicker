@@ -277,15 +277,15 @@
                                     <span data-bind="text: GymBattle.gym.leaderName">Leader</span>
                                     <div class="gymPokeballList">
                                         <span data-bind="foreach: new Array(GymBattle.pokemonsUndefeatedComputable())"><img
-                                                class="gymPokeball" src="assets/images/gyms/pokeball.png"></span>
+                                                class="gymPokeball" src="assets/images/gymLeaders/pokeball.png"></span>
                                         <span data-bind="foreach: new Array(GymBattle.pokemonsDefeatedComputable())"><img
                                                 class="gymPokeball gymPokeballDefeated"
-                                                src="assets/images/gyms/pokeball.png"></span>
+                                                src="assets/images/gymLeaders/pokeball.png"></span>
                                     </div>
 
                                     <div>
                                         <img height="56px" id="gymLeader" src=""
-                                             data-bind="attr:{ src: '/assets/images/gyms/' + GymBattle.gym.leaderName + '.png'}">
+                                             data-bind="attr:{ src: '/assets/images/gymLeaders/' + GymBattle.gym.leaderName + '.png'}">
 
                                     </div>
 
@@ -745,6 +745,29 @@
             </div>
         </div>
 
+        <!-- Receive gym badge Modal -->
+        <div class="modal fade" id="receiveBadgeModal" tabindex="-1" role="dialog"
+             aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src=""
+                                 data-bind="attr:{ src: '/assets/images/gymLeaders/' + GymRunner.gymObservable().leaderName + '.png'}">
+                            <h5 class="modal-title" id="receiveBadgeModalLabel"
+                                data-bind="text: GymRunner.gymObservable().leaderName">Modal title</h5>
+
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p data-bind="text: GymRunner.gymObservable().rewardMessage"></p>
+                        <img src="" width="56px"
+                             data-bind="attr:{ src: '/assets/images/badges/' + GymRunner.gymObservable().leaderName + '.png'}">
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

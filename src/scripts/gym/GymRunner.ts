@@ -3,8 +3,11 @@
  */
 class GymRunner {
 
-    static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
-    static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
+    public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
+    public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
+
+    public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList["Pewter City"]);
+
     public static startGym(gym: Gym) {
         Game.gameState(GameConstants.GameState.idle);
 
@@ -30,7 +33,12 @@ class GymRunner {
     }
 
     public static gymWon(gym: Gym) {
+        this.gymObservable(gym);
         player.gainMoney(gym.moneyReward);
+        player.gainBadge(gym.badgeReward);
+
+        $('#receiveBadgeModal').modal('show');
+
         Game.gameState(GameConstants.GameState.town);
     }
 
