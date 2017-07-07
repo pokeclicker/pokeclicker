@@ -35,10 +35,11 @@ class GymRunner {
     public static gymWon(gym: Gym) {
         this.gymObservable(gym);
         player.gainMoney(gym.moneyReward);
-        player.gainBadge(gym.badgeReward);
 
-        $('#receiveBadgeModal').modal('show');
-
+        if (!player.hasBadge(gym.badgeReward)) {
+            player.gainBadge(gym.badgeReward);
+            $('#receiveBadgeModal').modal('show');
+        }
         Game.gameState(GameConstants.GameState.town);
     }
 

@@ -223,9 +223,7 @@ class Player {
     }
 
     public gainBadge(badge: GameConstants.Badge) {
-        if (!this.hasBadge(badge)) {
-            this._gymBadges.push(badge);
-        }
+        this._gymBadges.push(badge);
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
