@@ -62,9 +62,9 @@ class PokemonHelper {
         return src;
     }
 
-    public static compareBy(property: string, direction: number): (a: CaughtPokemon, b: CaughtPokemon) => number {
+    public static compareBy(property: string, direction: boolean): (a: CaughtPokemon, b: CaughtPokemon) => number {
         return function(a, b) {
-            let _a, _b, res;
+            let _a, _b, res, dir = (direction) ? -1 : 1;
 
             //Convert to plain JS so that observables don't need to be accessed with brackets
             _a = ko.toJS(a);
@@ -93,7 +93,7 @@ class PokemonHelper {
                 res = 0
             }
 
-            return res * direction;
+            return res * dir;
         }
     }
 

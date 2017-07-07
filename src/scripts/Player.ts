@@ -19,7 +19,7 @@ class Player {
     private _notCaughtBallSelection: GameConstants.Pokeball;
     private _alreadyCaughtBallSelection: GameConstants.Pokeball;
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
-    private _sortDirection: KnockoutObservable<string>;
+    private _sortDescending: KnockoutObservable<boolean>;
 
     public clickAttackObservable: KnockoutComputed<number>;
 
@@ -55,7 +55,7 @@ class Player {
             this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection;
             this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection
             this._sortOption = ko.observable(GameConstants.SortOptionsEnum[GameConstants.SortOptionsEnum[savedPlayer._sortOption]])
-            this._sortDirection = ko.observable(savedPlayer._sortDirection)
+            this._sortDescending = ko.observable(savedPlayer._sortDescending)
         } else {
             this._money = ko.observable(0);
             this._dungeonTokens = ko.observable(0);
@@ -73,7 +73,7 @@ class Player {
             this._notCaughtBallSelection = GameConstants.Pokeball.Masterball;
             this._alreadyCaughtBallSelection = GameConstants.Pokeball.Pokeball;
             this._sortOption = ko.observable(GameConstants.SortOptionsEnum.id);
-            this._sortDirection = ko.observable("ascending")
+            this._sortDescending = ko.observable(true)
         }
         this.clickAttackObservable = ko.computed(function () {
             return this.calculateClickAttack()
@@ -223,8 +223,7 @@ class Player {
 
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.computed(function() {
-            let direction = (player._sortDirection() == "ascending") ? 1 : -1;
-            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], direction))
+            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
         }, this);
     }
 

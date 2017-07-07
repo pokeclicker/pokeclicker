@@ -622,10 +622,10 @@
                                    value: player._sortOption,
                                    optionsCaption: 'Sort By...'">
                 </select>
-                <select data-bind="value: player._sortDirection">
-                    <option value="ascending">Ascending</option>
-                    <option value="descending">Descending</option>
-                </select>
+                <p>
+                    Reverse 
+                    <input type='checkbox' data-bind="checked: player._sortDescending" />
+                </p>
                 <table id="pokemonList" class="table table-striped table-hover">
                     <thead>
                     <tr>
