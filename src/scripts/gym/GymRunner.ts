@@ -43,7 +43,7 @@ class GymRunner {
     }
 
     public static timeLeftSeconds = ko.computed(function () {
-        return Math.ceil(GymRunner.timeLeft() / 10) / 10;
+        return (Math.ceil(GymRunner.timeLeft() / 10) / 10).toFixed(1);
     })
 
 }

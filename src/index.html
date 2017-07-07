@@ -196,7 +196,7 @@
                                 <div data-bind="ifnot: Battle.catching">
                                     <img id="enemy"
                                          data-bind="click: function() {Battle.clickAttack()}, attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
-                                     src=""/>
+                                         src=""/>
                                 </div>
 
                                 <div data-bind="if: Battle.catching">
@@ -222,12 +222,12 @@
                         <table width="100%">
                             <tr>
 
-                            <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                    data-bind="text: player.pokemonAttackObservable"></span></span></td>
-                            <td width="50%"><span style="display: inline;">Click Attack: <span
-                                    data-bind="text: player.clickAttackObservable"></span></span>
-                            </td>
-                        </tr>
+                                <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                        data-bind="text: player.pokemonAttackObservable"></span></span></td>
+                                <td width="50%"><span style="display: inline;">Click Attack: <span
+                                        data-bind="text: player.clickAttackObservable"></span></span>
+                                </td>
+                            </tr>
                         </table>
                     </div>
 
@@ -282,7 +282,7 @@
                                     <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
                                     <div style="height: 96px;">
                                         <img id="gymEnemy" src=""
-                                             data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id() + '.png' }"/>
+                                             data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="display: grid;">
@@ -320,11 +320,15 @@
 
                     <div class="card">
                         <table width="100%">
-                            <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                    data-bind="text: player.pokemonAttackObservable"></span></span></td>
-                            <td width="50%"><span style="display: inline;">Click Attack: <span
-                                    data-bind="text: player.clickAttackObservable"></span></span>
-                            </td>
+                            <tr>
+
+                                <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                        data-bind="text: player.pokemonAttackObservable"></span></span></td>
+                                <td width="50%"><span style="display: inline;">Click Attack: <span
+                                        data-bind="text: player.clickAttackObservable"></span></span>
+                                </td>
+                            </tr>
+
                         </table>
                     </div>
 
