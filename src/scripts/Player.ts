@@ -102,8 +102,8 @@ class Player {
             attack += pokemon.attack();
         }
 
-        // return attack;
-        return 0;
+        return attack;
+        // return 0;
     }
 
     public calculateClickAttack(): number {
