@@ -66,6 +66,10 @@ namespace GameConstants {
         2: 0
     };
 
+    export function randomIntBetween(min:number, max:number){
+        return Math.floor(Math.random() * max) + min;
+    }
+
     export enum Badge {
         "None" = 0,
         "Boulder" = 1,

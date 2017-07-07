@@ -79,18 +79,18 @@
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <div class="col-md-6 push-md-3">
             <div class="page-item" style="background-color: white">
-                <div class="dungeon-board">
+                <div class="dungeon">
                     <div class="card">
                         <span data-bind="text: DungeonRunner.dungeon.dungeonName()"></span>
                     </div>
-
-                    <div data-bind="foreach: DungeonRunner.map.board()">
-                        <div class="row justify-content-sm-center" data-bind="foreach: $data">
-                            <div data-bind=" click: DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()), attr: { class: $data.calculateCssClass()}" >
+                    <div class="row">
+                        <div class="col-lg-4 offset-lg-7 col-sm-6 offset-sm-5 dungeon-board" data-bind="foreach: DungeonRunner.map.board()">
+                            <div class="row" data-bind="foreach: $data">
+                                <div data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}">
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="page-item" style="background-color: white">

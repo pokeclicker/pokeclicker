@@ -9,21 +9,36 @@ class DungeonMap {
         this.board = ko.observable(this.generateMap());
 
         this.playerPosition = ko.observable(new Point(Math.floor(size / 2), size - 1));
+
+        // Move the boss if it spawns on the player.
+        if( this.board()[this.playerPosition().y][this.playerPosition().x].type == GameConstants.DungeonTile.boss){
+            console.log("Boss moved");
+            this.board()[this.playerPosition().y][this.playerPosition().x].type = GameConstants.DungeonTile.enemy;
+            let newX = GameConstants.randomIntBetween(0,size-2);
+            let newY = GameConstants.randomIntBetween(0,size-2);
+            this.board()[newY][newX].type = GameConstants.DungeonTile.boss;
+            this.board()[newY][newX].calculateCssClass();
+        }
         this.board()[this.playerPosition().y][this.playerPosition().x].isVisible = true;
+        this.board()[this.playerPosition().y][this.playerPosition().x].hasPlayer = true;
+        this.board()[this.playerPosition().y][this.playerPosition().x].calculateCssClass();
     }
+
+
 
     public moveToCoordinates(x:number, y:number){
         console.log("Trying to move to: (" + x + "," + y + ")" );
         this.moveToTile(new Point(x, y));
     }
-
     public moveToTile(point:Point){
-        console.log(this.hasAccesToTile(point));
         if(this.hasAccesToTile(point)){
+            console.log("allowed");
             this.board()[this.playerPosition().y][this.playerPosition().x].hasPlayer = false;
+            this.board()[this.playerPosition().y][this.playerPosition().x].calculateCssClass();
             this.playerPosition(point);
             this.board()[this.playerPosition().y][this.playerPosition().x].hasPlayer = true;
             this.board()[this.playerPosition().y][this.playerPosition().x].isVisible = true;
+            this.board()[this.playerPosition().y][this.playerPosition().x].calculateCssClass();
         }
     }
 
@@ -53,11 +68,8 @@ class DungeonMap {
         if(point.x > 0 && this.board()[point.y][point.x-1].isVisible){
             return true;
         }
-
         return false;
-
     }
-
 
     public generateMap() {
         // Fill mapList with required Tiles
