@@ -66,7 +66,6 @@ class Game {
 
         if (Save.counter > GameConstants.SAVE_TICK) {
             Save.store(player);
-            console.log("Game saved");
         }
     }
 

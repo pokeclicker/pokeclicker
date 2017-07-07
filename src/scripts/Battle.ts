@@ -49,7 +49,7 @@ class Battle {
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.addRouteKill();
-        let alreadyCaught: boolean = player.alreadyCaughtPokemon(this.enemyPokemon().name());
+        let alreadyCaught: boolean = player.alreadyCaughtPokemon(this.enemyPokemon().name);
         let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
@@ -76,7 +76,7 @@ class Battle {
     public static generateNewEnemy() {
         Battle.catching(false);
         Battle.counter = 0;
-        Battle.enemyPokemon(pokemonFactory.generateWildPokemon(player.route(), player.region));
+        Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
     }
 
     public static throwPokeball(pokeBall: GameConstants.Pokeball) {
@@ -88,6 +88,6 @@ class Battle {
     }
 
     public static catchPokemon() {
-        player.capturePokemon(this.enemyPokemon().name());
+        player.capturePokemon(this.enemyPokemon().name, this.enemyPokemon().shiny);
     }
 }

@@ -6,6 +6,7 @@ class Save {
         let json = JSON.stringify(player);
         localStorage.setItem("player", json);
         this.counter = 0;
+        console.log("Game saved")
     }
 
     public static load(): Player {

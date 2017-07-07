@@ -6,7 +6,9 @@
     <script type="text/html" id="pokemonListTemplate">
         <tr>
             <td>
-                <img class="smallImage" data-bind="attr:{ src: '/assets/images/pokemon/' + $data.id + '.png' }"/>
+                <img class="smallImage"
+                     data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
+                     src=""/>
                 <span data-bind="text: name">Name</span>
             </td>
             <td data-bind="text: attack">fdsf</td>
@@ -107,7 +109,10 @@
                     </form>
 
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn btn-primary donate-button">€5<br><img src="assets/images/pokemon/7.png">
+                        <button data-html="true"
+                                title="Don't let the PokéDex order fool you, Charmander is and will always be the best starter. -Isha"
+                                class="btn btn-primary donate-button">€5<br><img src="assets/images/pokemon/7.png">
+
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="VHFSUMCRY8PJU">
@@ -150,6 +155,9 @@
 
                 </div>
 
+                <div class="row justify-content-sm-center" style="text-align: center">
+                    <p class="text-muted" style="font-size:8px">*note you don't actually get the Pokémon</p>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -170,7 +178,7 @@
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <!--Middle column-->
-        <div class="col-md-6 push-md-3">
+        <div class="col-lg-6 push-lg-3">
             <div id="interactionView" class="page-item" style="background-color: white">
                 <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting"
                      id="routeBattleView">
@@ -187,11 +195,12 @@
                             <div style="height: 96px;">
                                 <div data-bind="ifnot: Battle.catching">
                                     <img id="enemy"
-                                         data-bind="click: function() {Battle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + Battle.enemyPokemon().id() + '.png' }"/>
+                                         data-bind="click: function() {Battle.clickAttack()}, attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
+                                     src=""/>
                                 </div>
 
                                 <div data-bind="if: Battle.catching">
-                                    <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
+                                    <img data-bind="attr:{ src: '/assets/images/pokeball.png' }" src=""/>
                                 </div>
 
                             </div>
@@ -211,11 +220,14 @@
 
                     <div class="card">
                         <table width="100%">
+                            <tr>
+
                             <td width="50%"><span style="display: inline;">Pokémon Attack: <span
                                     data-bind="text: player.pokemonAttackObservable"></span></span></td>
                             <td width="50%"><span style="display: inline;">Click Attack: <span
                                     data-bind="text: player.clickAttackObservable"></span></span>
                             </td>
+                        </tr>
                         </table>
                     </div>
 
@@ -708,7 +720,7 @@
         </div>
 
         <!--left column-->
-        <div class="col-md-3 pull-md-6">
+        <div class="col-lg-3 pull-lg-6">
             <div class="page-item" style="background-color: white; min-height: 180px">
                 <h2>Pokeball management</h2>
             </div>
@@ -731,7 +743,7 @@
         </div>
 
         <!--Right column-->
-        <div class="col-md-3">
+        <div class="col-lg-3">
             <div class="page-item" style="background-color: red; min-height: 150px">
                 <h2>Oak Items</h2>
             </div>
