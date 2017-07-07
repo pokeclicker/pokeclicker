@@ -15,7 +15,6 @@ class Player {
     private _region: GameConstants.Region;
     private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
     private _pokeballs: number[];
-    private _shinyList: boolean[];
     private _notCaughtBallSelection: GameConstants.Pokeball;
     private _alreadyCaughtBallSelection: GameConstants.Pokeball;
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
@@ -34,53 +33,30 @@ class Player {
     }
 
     constructor(savedPlayer?) {
-        if (savedPlayer) {
-            this._money = ko.observable(savedPlayer._money);
-            this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens);
-            this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
-            if (savedPlayer._route < 1) {
-                this._route = ko.observable(1);
-            } else {
-                this._route = ko.observable(savedPlayer._route);
-            }
-            let tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
+        savedPlayer = savedPlayer || {};
+        let tmpCaughtList = [];
+        this._money = ko.observable(savedPlayer._money || 0);
+        this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
+        this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
+        this._route = ko.observable(savedPlayer._route || 1);
+        if (savedPlayer._caughtPokemonList) {
+            tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
                 let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp);
                 return tmp
             });
-            this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
-            this._routeKills = savedPlayer._routeKills.map((killsOnRoute) => {
-                return ko.observable(killsOnRoute)
-            });
-            this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded);
-            this._region = savedPlayer._region;
-            this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
-            this._pokeballs = savedPlayer._pokeballs;
-            this._shinyList = savedPlayer._shinyList.map((bool) => {
-                return ko.observable(bool)
-            });
-            this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection;
-            this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection
-            this._sortOption = ko.observable(GameConstants.SortOptionsEnum[GameConstants.SortOptionsEnum[savedPlayer._sortOption]])
-            this._sortDescending = ko.observable(savedPlayer._sortDescending)
-        } else {
-            this._money = ko.observable(0);
-            this._dungeonTokens = ko.observable(0);
-            this._caughtShinyList = ko.observableArray<string>();
-            this._route = ko.observable(1);
-            this._caughtPokemonList = ko.observableArray<CaughtPokemon>();
-            this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function () {
-                return ko.observable(0)
-            });
-            this._routeKillsNeeded = ko.observable(10);
-            this._region = GameConstants.Region.kanto;
-            this._gymBadges = ko.observableArray<GameConstants.Badge>();
-            this._pokeballs = [0, 0, 0, 0];
-            this._shinyList = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
-            this._notCaughtBallSelection = GameConstants.Pokeball.Masterball;
-            this._alreadyCaughtBallSelection = GameConstants.Pokeball.Pokeball;
-            this._sortOption = ko.observable(GameConstants.SortOptionsEnum.id);
-            this._sortDescending = ko.observable(true)
         }
+        this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
+        this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function (val, index) {
+            return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
+        });
+        this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
+        this._region = savedPlayer._region || GameConstants.Region.kanto;
+        this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
+        this._pokeballs = savedPlayer._pokeballs || [0, 0, 0, 0];
+        this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection || GameConstants.Pokeball.Masterball;
+        this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection || GameConstants.Pokeball.Pokeball;
+        this._sortOption = ko.observable(savedPlayer._sortOption || GameConstants.SortOptionsEnum.id);
+        this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : true)
         this.clickAttackObservable = ko.computed(function () {
             return this.calculateClickAttack()
         }, this);
@@ -302,14 +278,6 @@ class Player {
         this._gymBadges(value);
     }
 
-    get shinyList(): boolean[] {
-        return this._shinyList;
-    }
-
-    set shinyList(value: boolean[]) {
-        this._shinyList = value;
-    }
-
     get caughtShinyList(): KnockoutObservableArray<string> {
         return this._caughtShinyList;
     }
@@ -343,7 +311,7 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_shinyList", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDirection"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_shinyList", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
