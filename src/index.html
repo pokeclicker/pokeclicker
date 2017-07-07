@@ -710,6 +710,16 @@
             </div>
 
             <div class="page-item" style="background-color: white">
+                <select data-bind="options: GameConstants.SortOptions,
+                                   optionsText: 'optionText',
+                                   optionsValue: 'optionValue',
+                                   value: player._sortOption,
+                                   optionsCaption: 'Sort By...'">
+                </select>
+                <p>
+                    Reverse 
+                    <input type='checkbox' data-bind="checked: player._sortDescending" />
+                </p>
                 <table id="pokemonList" class="table table-striped table-hover">
                     <thead>
                     <tr>
@@ -718,7 +728,7 @@
                         <th>Lvl</th>
                     </tr>
                     </thead>
-                    <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: player._caughtPokemonList}">
+                    <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: player.sortedPokemonList()}">
 
                     </tbody>
                 </table>

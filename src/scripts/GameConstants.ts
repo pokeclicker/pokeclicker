@@ -53,6 +53,31 @@ namespace GameConstants {
         hoenn = 2
     }
 
+    export enum SortOptionsEnum {
+        "id" = 0,
+        "name" = 1,
+        "attack" = 2,
+        "levelObservable" = 3,
+        "shiny" = 4
+    }
+
+    class Option {
+        optionText: String;
+        optionValue: GameConstants.SortOptionsEnum;
+        constructor(text, value) {
+            this.optionText = text;
+            this.optionValue = value;
+        }
+    }
+
+    export const SortOptions = [
+        new Option("Pokedex #", GameConstants.SortOptionsEnum.id),
+        new Option("Name", GameConstants.SortOptionsEnum.name),
+        new Option("Attack", GameConstants.SortOptionsEnum.attack),
+        new Option("Level", GameConstants.SortOptionsEnum.levelObservable),
+        new Option("Shiny", GameConstants.SortOptionsEnum.shiny),
+    ]
+
     export const RegionRoute = {
         0: 25,
         1: 0,

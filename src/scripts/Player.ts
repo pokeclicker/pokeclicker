@@ -18,6 +18,8 @@ class Player {
     private _shinyList: boolean[];
     private _notCaughtBallSelection: GameConstants.Pokeball;
     private _alreadyCaughtBallSelection: GameConstants.Pokeball;
+    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
+    private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
 
     public clickAttackObservable: KnockoutComputed<number>;
@@ -58,6 +60,8 @@ class Player {
             });
             this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection;
             this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection
+            this._sortOption = ko.observable(GameConstants.SortOptionsEnum[GameConstants.SortOptionsEnum[savedPlayer._sortOption]])
+            this._sortDescending = ko.observable(savedPlayer._sortDescending)
         } else {
             this._money = ko.observable(0);
             this._dungeonTokens = ko.observable(0);
@@ -74,6 +78,8 @@ class Player {
             this._shinyList = Array.apply(null, Array(GameConstants.AMOUNT_OF_POKEMONS)).map(Boolean.prototype.valueOf, false);
             this._notCaughtBallSelection = GameConstants.Pokeball.Masterball;
             this._alreadyCaughtBallSelection = GameConstants.Pokeball.Pokeball;
+            this._sortOption = ko.observable(GameConstants.SortOptionsEnum.id);
+            this._sortDescending = ko.observable(true)
         }
         this.clickAttackObservable = ko.computed(function () {
             return this.calculateClickAttack()
@@ -222,6 +228,12 @@ class Player {
         }
     }
 
+    public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
+        return ko.computed(function() {
+            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
+        }, this);
+    }
+
     public gainBadge(badge: GameConstants.Badge) {
         this._gymBadges.push(badge);
     }
@@ -331,7 +343,7 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_shinyList", "_notCaughtBallSelection", "_alreadyCaughtBallSelection"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_shinyList", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDirection"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
