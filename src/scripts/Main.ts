@@ -3,6 +3,9 @@
 /**
  * Start the game when all html elements are loaded.
  */
+declare var player;
+
+
 document.addEventListener("DOMContentLoaded", function (event) {
 
     let game: Game = new Game();
@@ -19,12 +22,14 @@ class Game {
     undergroundCounter: number;
     farmCounter: number;
 
-    constructor() {
+    public static gameState : KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
+    constructor() {
+        (<any>window).player = Save.load();
     }
 
     start() {
-        Player.region = GameConstants.Region.kanto;
+        player.region = GameConstants.Region.kanto;
         this.load();
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
         console.log("started");
@@ -36,12 +41,32 @@ class Game {
 
     gameTick() {
         // Update tick counters
-        Battle.counter += GameConstants.TICK_TIME;
         this.undergroundCounter += GameConstants.TICK_TIME;
         this.farmCounter += GameConstants.TICK_TIME;
+        Save.counter += GameConstants.TICK_TIME;
 
-        if (Battle.counter > GameConstants.BATTLE_TICK) {
-            Battle.tick();
+        switch (Game.gameState()) {
+            case GameConstants.GameState.fighting: {
+                Battle.counter += GameConstants.TICK_TIME;
+                if (Battle.counter > GameConstants.BATTLE_TICK) {
+                    Battle.tick();
+                }
+                break;
+            }
+            case GameConstants.GameState.gym: {
+                GymBattle.counter += GameConstants.TICK_TIME;
+                if (GymBattle.counter > GameConstants.BATTLE_TICK) {
+                    GymBattle.tick();
+                }
+                GymRunner.tick();
+                break;
+            }
+        }
+
+
+
+        if (Save.counter > GameConstants.SAVE_TICK) {
+            Save.store(player);
         }
     }
 

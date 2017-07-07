@@ -16,6 +16,43 @@ body {
   }
 }
 
+.pageItemTitle {
+  position: absolute;
+  width: 100%;
+  color: black;
+  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.3px;
+  -webkit-text-stroke-color: black;
+}
+
+.donate-button {
+  margin: 5px;
+  cursor: pointer;
+}
+
+.donate-button-mew {
+  background-color: #bd6dd1;
+  border-color: #bd6dd1;
+  color:white;
+}
+
+.donate-button-mew:hover {
+  background-color: #a34eb8;
+  border-color: #a34eb8;
+}
+
+.donate-button-unown {
+  background-color: #858585;
+  border-color: #858585;
+  color:white;
+}
+
+.donate-button-unown:hover {
+  background-color: #616161;
+  border-color: #616161;
+  color:white;
+}
+
 .dropdown-menu {
   border: 1px solid black;
 }
@@ -79,4 +116,29 @@ body {
     padding: 0 @tablePaddingWidth;
     vertical-align: middle;
   }
+}
+
+.hidden {
+  display: none;
+}
+
+/* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
+.no-select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                        not supported by any browser */
+}
+
+img {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Chrome/Safari/Opera */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
+                        not supported by any browser */
 }

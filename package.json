@@ -43,6 +43,7 @@
     "typescript": "^2.1.4"
   },
   "dependencies": {
+    "@types/bootstrap": "^3.3.34",
     "@types/knockout": "^3.4.41",
     "bootstrap": "^4.0.0-alpha.6",
     "jquery": "^3.2.1",

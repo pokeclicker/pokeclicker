@@ -1,8 +1,8 @@
 import PokemonTypes = GameConstants.PokemonType;
 
 class BattlePokemon implements enemyPokemonInterface {
-    name: KnockoutObservable<string>;
-    id: KnockoutObservable<number>;
+    name: string;
+    id: number;
     type1: GameConstants.PokemonType;
     type2: GameConstants.PokemonType;
     health: KnockoutObservable<number>;
@@ -27,8 +27,8 @@ class BattlePokemon implements enemyPokemonInterface {
      * @param shiny
      */
     constructor(name: string, id: number, type1: GameConstants.PokemonType, type2: GameConstants.PokemonType, maxHealth: number, level: number, catchRate: number, exp: number, money: number, shiny: boolean) {
-        this.name = ko.observable(name);
-        this.id = ko.observable(id);
+        this.name = name;
+        this.id = id;
         this.type1 = type1;
         this.type2 = type2;
         this.health = ko.observable(maxHealth);

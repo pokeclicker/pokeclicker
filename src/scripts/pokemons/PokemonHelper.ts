@@ -46,12 +46,20 @@ class PokemonHelper {
                 level = Math.pow(30 * pokemon.exp(), 0.475) / (6 * Math.sqrt(5));
                 break;
         }
-        level = Math.min(level, (Player.gymBadges.length + 2) * 10);
         return Math.max(1, Math.min(100, Math.floor(level)));
     }
 
     public static calculateAttack(attackBase: number, attackBonus: number, level: number): number {
         return Math.max(1, Math.floor((attackBase + attackBonus) * level / 100))
+    }
+
+    public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
+        let src = "/assets/images/";
+        if (shiny) {
+            src += "shiny";
+        }
+        src += "pokemon/" + pokemon.id + ".png";
+        return src;
     }
 
 }
