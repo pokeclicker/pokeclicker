@@ -6,7 +6,9 @@
     <script type="text/html" id="pokemonListTemplate">
         <tr>
             <td>
-                <img class="smallImage" data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"/>
+                <img class="smallImage"
+                     data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
+                     src=""/>
                 <span data-bind="text: name">Name</span>
             </td>
             <td data-bind="text: attack">fdsf</td>
@@ -175,7 +177,7 @@
     <div class="row justify-content-lg-center" style="text-align: center">
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
-        <div class="col-md-6 push-md-3">
+        <div class="col-lg-6 push-lg-3">
             <div class="page-item" style="background-color: white">
                 <div class="card">
                     <span>Money: <span data-bind="text: player.money">todo</span></span>
@@ -610,7 +612,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 pull-md-6">
+        <div class="col-lg-3 pull-lg-6">
             <div class="page-item" style="background-color: white; min-height: 180px">
                 <h2>Pokeball management</h2>
             </div>
@@ -632,7 +634,7 @@
 
         </div>
 
-        <div class="col-md-3">
+        <div class="col-lg-3">
             <div class="page-item" style="background-color: red; min-height: 150px">
                 <h2>Oak Items</h2>
             </div>
