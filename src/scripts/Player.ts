@@ -56,7 +56,7 @@ class Player {
         this._notCaughtBallSelection = savedPlayer._notCaughtBallSelection || GameConstants.Pokeball.Masterball;
         this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection || GameConstants.Pokeball.Pokeball;
         this._sortOption = ko.observable(savedPlayer._sortOption || GameConstants.SortOptionsEnum.id);
-        this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : true)
+        this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false)
         this.clickAttackObservable = ko.computed(function () {
             return this.calculateClickAttack()
         }, this);
