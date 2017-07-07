@@ -192,11 +192,12 @@
                         <div style="height: 96px;">
                             <div data-bind="ifnot: Battle.catching">
                                 <img id="enemy"
-                                     data-bind="click: Battle.clickAttack(), attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"/>
+                                     data-bind="click: Battle.clickAttack(), attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
+                                     src=""/>
                             </div>
 
                             <div data-bind="if: Battle.catching">
-                                <img data-bind="attr:{ src: '/assets/images/pokeball.png' }"/>
+                                <img data-bind="attr:{ src: '/assets/images/pokeball.png' }" src=""/>
                             </div>
                         </div>
                         <div class="progress">
@@ -215,11 +216,14 @@
 
                 <div class="card">
                     <table width="100%">
-                        <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                data-bind="text: player.pokemonAttackObservable"></span></span></td>
-                        <td width="50%"><span style="display: inline;">Click Attack: <span
-                                data-bind="text: player.clickAttackObservable"></span></span>
-                        </td>
+                        <tr>
+
+                            <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                    data-bind="text: player.pokemonAttackObservable"></span></span></td>
+                            <td width="50%"><span style="display: inline;">Click Attack: <span
+                                    data-bind="text: player.clickAttackObservable"></span></span>
+                            </td>
+                        </tr>
                     </table>
                 </div>
 
