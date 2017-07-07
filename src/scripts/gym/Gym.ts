@@ -31,6 +31,8 @@ class Gym {
     }
 }
 
+//TODO add all rewardMessages
+
 /**
  * Data list that contains all gymLeaders, accessible by townName.
  */

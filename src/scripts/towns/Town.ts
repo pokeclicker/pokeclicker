@@ -37,4 +37,5 @@ class Town {
 
 const TownList: { [name: string]: Town } = {};
 
+//TODO Add all towns
 TownList["Pewter City"] = new Town("Pewter City", [2]);
