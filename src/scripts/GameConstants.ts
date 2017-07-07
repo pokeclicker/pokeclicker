@@ -10,6 +10,8 @@ namespace GameConstants {
     export const UNDERGROUND_TICK = 1000;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
+    export const GYM_TIME = 3000;
+    export const GYM_TICK = 1;
 
     export const AMOUNT_OF_POKEMONS = 151;
 
@@ -27,6 +29,7 @@ namespace GameConstants {
         gym = 3,
         dungeon = 4,
         safari = 5,
+        town = 6,
     }
 
     export enum Pokeball {

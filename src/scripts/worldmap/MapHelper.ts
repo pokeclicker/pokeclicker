@@ -1,13 +1,12 @@
 class MapHelper {
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
-        console.log("called");
-        console.log(region);
         if (!isNaN(route) && !(route == player.route())) {
             if (this.accessToRoute(route, region)) {
+                Game.gameState(GameConstants.GameState.fighting);
                 $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 player.route(route);
-                $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute')
+                $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
                 Battle.generateNewEnemy();
             }
             else {
@@ -17,25 +16,19 @@ class MapHelper {
     };
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        console.log("Checking route: " + route);
         if (!player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
-            console.log("Missing badge: " + GameConstants.routeBadgeRequirements[region][route]);
             return false;
         }
         let reqList = GameConstants.routeRequirements[region][route];
         if (reqList == undefined) {
-            console.log("No route requirements");
             return true;
         }
         for (let i = 0; i < reqList.length; i++) {
             let route: number = reqList[i];
             if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
-                console.log("Not enough kills on route: " + route);
                 return false
             }
         }
-
-        console.log("Access");
         return true;
     };
 
@@ -50,5 +43,28 @@ class MapHelper {
             return "lockedRoute";
         });
     }
+
+    public static accessToTown(townName:string) : boolean {
+        let town = TownList[townName];
+        for(let i of town.reqRoutes) {
+            if(player.routeKills[i] < player.routeKillsNeeded[i]) {
+                return false;
+            }
+        }
+        console.log("Access to town " + townName);
+        return true;
+    };
+
+    public static moveToTown(townName: string) {
+        if(MapHelper.accessToTown(townName)) {
+            $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
+            player.route(0);
+            player.town = ko.observable(TownList[townName]);
+            console.log("set town to " + player.town());
+
+            //this should happen last, so all the values all set beforehand
+            Game.gameState(GameConstants.GameState.town);
+        }
+    };
 
 }
