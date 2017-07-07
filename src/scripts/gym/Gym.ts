@@ -53,7 +53,7 @@ gymList["Cerulean City"] = new Gym(
     GameConstants.Badge.Cascade,
     500,
     GameConstants.Badge.Boulder,
-    "Wow! You're too much!\nYou can have the Cascadebadge to show you beat me."
+    "Wow! You're too much! You can have the Cascadebadge to show you beat me."
 );
 gymList["Vermillion City"] = new Gym(
     "Lt. Surge",
