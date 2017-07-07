@@ -5,11 +5,11 @@ class DungeonBattle extends Battle {
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon() {
-        Player.gainMoney(this.enemyPokemon().money);
-        Player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
-        Player.addRouteKill();
-        let alreadyCaught: boolean = Player.alreadyCaughtPokemon(this.enemyPokemon().name());
-        let pokeBall: GameConstants.Pokeball = Player.calculatePokeballToUse(alreadyCaught);
+        player.gainMoney(this.enemyPokemon().money);
+        player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        player.addRouteKill();
+        let alreadyCaught: boolean = player.alreadyCaughtPokemon(this.enemyPokemon().name);
+        let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             Battle.catching(true);
@@ -17,7 +17,7 @@ class DungeonBattle extends Battle {
                 () => {
                     this.throwPokeball(pokeBall);
                 },
-                Player.calculateCatchTime()
+                player.calculateCatchTime()
             )
             ;
 
