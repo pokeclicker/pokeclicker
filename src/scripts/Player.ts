@@ -18,10 +18,12 @@ class Player {
     private _shinyList: boolean[];
     private _notCaughtBallSelection: GameConstants.Pokeball;
     private _alreadyCaughtBallSelection: GameConstants.Pokeball;
+    private _town: KnockoutObservable<Town>;
 
     public clickAttackObservable: KnockoutComputed<number>;
 
     public pokemonAttackObservable: KnockoutComputed<number>;
+
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -34,7 +36,11 @@ class Player {
             this._money = ko.observable(savedPlayer._money);
             this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens);
             this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
-            this._route = ko.observable(savedPlayer._route);
+            if (savedPlayer._route < 1) {
+                this._route = ko.observable(1);
+            } else {
+                this._route = ko.observable(savedPlayer._route);
+            }
             let tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
                 let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp);
                 return tmp
@@ -96,12 +102,13 @@ class Player {
             attack += pokemon.attack();
         }
 
-        return attack;
+        // return attack;
+        return 0;
     }
 
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
-        return 10;
+        return 500;
     }
 
     public calculateMoneyMultiplier(): number {
@@ -215,6 +222,10 @@ class Player {
         }
     }
 
+    public gainBadge(badge: GameConstants.Badge) {
+        this._gymBadges.push(badge);
+    }
+
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -309,6 +320,14 @@ class Player {
 
     set notCaughtBallSelection(value: GameConstants.Pokeball) {
         this._notCaughtBallSelection = value;
+    }
+
+    get town(): KnockoutObservable<Town> {
+        return this._town;
+    }
+
+    set town(value: KnockoutObservable<Town>) {
+        this._town = value;
     }
 
     public toJSON() {
