@@ -11,38 +11,48 @@ class DungeonMap {
         this.playerPosition = ko.observable(new Point(Math.floor(size / 2), size - 1));
 
         // Move the boss if it spawns on the player.
-        if( this.board()[this.playerPosition().y][this.playerPosition().x].type == GameConstants.DungeonTile.boss){
-            console.log("Boss moved");
-            this.board()[this.playerPosition().y][this.playerPosition().x].type = GameConstants.DungeonTile.enemy;
+        if( this.currentTile().type == GameConstants.DungeonTile.boss){
+            this.currentTile().type = GameConstants.DungeonTile.empty;
             let newX = GameConstants.randomIntBetween(0,size-2);
             let newY = GameConstants.randomIntBetween(0,size-2);
             this.board()[newY][newX].type = GameConstants.DungeonTile.boss;
             this.board()[newY][newX].calculateCssClass();
         }
-        this.board()[this.playerPosition().y][this.playerPosition().x].isVisible = true;
-        this.board()[this.playerPosition().y][this.playerPosition().x].hasPlayer = true;
-        this.board()[this.playerPosition().y][this.playerPosition().x].calculateCssClass();
+        this.currentTile().isVisible = true;
+        this.currentTile().type = GameConstants.DungeonTile.empty;
+        this.currentTile().hasPlayer = true;
+        this.currentTile().calculateCssClass();
     }
 
 
 
     public moveToCoordinates(x:number, y:number){
-        console.log("Trying to move to: (" + x + "," + y + ")" );
         this.moveToTile(new Point(x, y));
     }
+
     public moveToTile(point:Point){
         if(this.hasAccesToTile(point)){
-            console.log("allowed");
-            this.board()[this.playerPosition().y][this.playerPosition().x].hasPlayer = false;
-            this.board()[this.playerPosition().y][this.playerPosition().x].calculateCssClass();
+            this.currentTile().hasPlayer = false;
+            this.currentTile().calculateCssClass();
             this.playerPosition(point);
-            this.board()[this.playerPosition().y][this.playerPosition().x].hasPlayer = true;
-            this.board()[this.playerPosition().y][this.playerPosition().x].isVisible = true;
-            this.board()[this.playerPosition().y][this.playerPosition().x].calculateCssClass();
+            this.currentTile().hasPlayer = true;
+            this.currentTile().isVisible = true;
+            this.currentTile().calculateCssClass();
+            if(this.currentTile().type == GameConstants.DungeonTile.enemy){
+                DungeonBattle.generateNewEnemy();
+            }
+
         }
     }
 
+    public currentTile() : DungeonTile {
+        return this.board()[this.playerPosition().y][this.playerPosition().x];
+    }
+
     public hasAccesToTile(point:Point){
+        if(DungeonRunner.fighting()){
+            return false;
+        }
         //If any of the adjacent Tiles is visited, it's a valid Tile.
         if(point.x < 0 || point.x >= this.size || point.y < 0 || point.y >= this.size){
             return false
