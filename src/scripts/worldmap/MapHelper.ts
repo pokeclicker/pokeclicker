@@ -47,7 +47,7 @@ class MapHelper {
     public static accessToTown(townName:string) : boolean {
         let town = TownList[townName];
         for(let i of town.reqRoutes) {
-            if(player.routeKills[i] < player.routeKillsNeeded[i]) {
+            if (player.routeKills[i]() < player.routeKillsNeeded) {
                 return false;
             }
         }
@@ -57,11 +57,11 @@ class MapHelper {
 
     public static moveToTown(townName: string) {
         if(MapHelper.accessToTown(townName)) {
+            Game.gameState(GameConstants.GameState.idle);
             $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
             player.route(0);
             player.town = ko.observable(TownList[townName]);
             console.log("set town to " + player.town());
-
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
         }

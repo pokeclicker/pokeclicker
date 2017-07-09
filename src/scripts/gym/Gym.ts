@@ -49,7 +49,7 @@ gymList["Pewter City"] = new Gym(
 
 gymList["Cerulean City"] = new Gym(
     "Misty",
-    "Celadon City",
+    "Cerulean City",
     [new GymPokemon("Staryu", 4000, 18),
         new GymPokemon("Starmie", 6000, 21)],
     GameConstants.Badge.Cascade,
