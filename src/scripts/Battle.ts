@@ -74,7 +74,6 @@ class Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        Battle.catching(false);
         Battle.counter = 0;
         Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
     }
@@ -84,7 +83,9 @@ class Battle {
         let chance: number = Math.floor(Math.random() * 100 + 1);
         if (chance <= this.enemyPokemon().catchRate) {
             this.catchPokemon();
+
         }
+        Battle.catching(false);
     }
 
     public static catchPokemon() {
