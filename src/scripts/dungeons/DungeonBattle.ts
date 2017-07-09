@@ -8,6 +8,10 @@ class DungeonBattle extends Battle {
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.addRouteKill();
+        DungeonRunner.fighting(false);
+        DungeonRunner.map.currentTile().type = GameConstants.DungeonTile.empty;
+        DungeonRunner.map.currentTile().calculateCssClass();
+
         let alreadyCaught: boolean = player.alreadyCaughtPokemon(this.enemyPokemon().name);
         let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught);
 
@@ -23,6 +27,20 @@ class DungeonBattle extends Battle {
 
         }
 
+    }
+
+    public static generateNewEnemy() {
+        DungeonRunner.fighting(true);
+        DungeonBattle.catching(false);
+        DungeonBattle.counter = 0;
+        DungeonBattle.enemyPokemon(PokemonFactory.generateDungeonPokemon(DungeonRunner.dungeon.pokemonList,DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level));
+    }
+
+    public static generateNewBoss() {
+        DungeonRunner.fighting(true);
+        DungeonBattle.catching(false);
+        DungeonBattle.counter = 0;
+        DungeonBattle.enemyPokemon(PokemonFactory.generateDungeonBoss(DungeonRunner.dungeon.bossList,DungeonRunner.chestsOpened));
     }
 
 }

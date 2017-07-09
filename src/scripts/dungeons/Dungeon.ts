@@ -5,7 +5,7 @@
  */
 class Dungeon {
 
-    dungeonName: KnockoutObservable<string>;
+    name: KnockoutObservable<string> = ko.observable("");
     pokemonList: string[];
     baseHealth: number;
     bossList: DungeonBossPokemon[];
@@ -16,7 +16,7 @@ class Dungeon {
 
 
     constructor(dungeonName: string, pokemonList: string[], baseHealth: number, bossList: DungeonBossPokemon[], tokenCost: number, badgeReq: GameConstants.Badge, itemRoute: number, level: number) {
-        this.dungeonName = ko.observable(dungeonName);
+        this.name = ko.observable(dungeonName);
         this.pokemonList = pokemonList;
         this.baseHealth = baseHealth;
         this.bossList = bossList;
@@ -33,7 +33,7 @@ class Dungeon {
 }
 
 /**
- * Data list that contains all dungeons, accessible by dungeonName.
+ * Data list that contains all dungeons, accessible by name.
  */
 
 // TODO add all dungeons
