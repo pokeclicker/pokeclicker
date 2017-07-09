@@ -1,0 +1,21 @@
+///<reference path="PokemonLeague.ts"/>
+class IndigoPlateau extends PokemonLeague {
+
+
+    constructor(shop?: Shop) {
+        super("Indigo Plateau", [23], shop);
+        this.gym(null);
+        this.gymList = ko.observableArray<KnockoutObservable<Gym>>();
+        this.gymList.push(ko.observable(gymList["Lorelei"]));
+        this.gymList.push(ko.observable(gymList["Bruno"]));
+        this.gymList.push(ko.observable(gymList["Agatha"]));
+        this.gymList.push(ko.observable(gymList["Lance"]));
+
+
+        //todo add champion
+    }
+
+
+}
+//TODO move this to town class
+TownList["Indigo Plateau"] = new IndigoPlateau();

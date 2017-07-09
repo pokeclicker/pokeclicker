@@ -51,7 +51,6 @@ class MapHelper {
                 return false;
             }
         }
-        console.log("Access to town " + townName);
         return true;
     };
 

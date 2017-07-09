@@ -48,12 +48,7 @@ TownList["Cinnabar Island"] = new Town("Cinnabar Island", [20]);
 TownList["Viridian City"] = new Town("Viridian City", [1]);
 TownList["Pallet Town"] = new Town("Pallet Town", []);
 TownList["Lavender Town"] = new Town("Lavender Town", [7, 10]);
-TownList["Indigo Plateau"] = new Town("Indigo Plateau", [23]);
-TownList["Elite Lorelei"] = new Town("Elite Lorelei", []);
-TownList["Elite Bruno"] = new Town("Elite Bruno", []);
-TownList["Elite Agatha"] = new Town("Elite Agatha", []);
-TownList["Elite Lance"] = new Town("Elite Lance", []);
-TownList["Champion"] = new Town("Champion", []);
+
 
 //Dungeons
 TownList["Viridian Forest"] = new Town("Viridian Forest", [1]);
