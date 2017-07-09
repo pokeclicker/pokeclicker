@@ -8,6 +8,8 @@ namespace GameConstants {
     export const TICK_TIME = 10;
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
+    export const DUNGEON_TICK = 10;
+    export const DUNGEON_TIME = 3000;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
@@ -23,7 +25,7 @@ namespace GameConstants {
     export const SHINY_CHANCE_SAFARI = 2048;
 
     // Dungeons
-    export const DUNGEON_TIME_LIMIT = 600;
+    export const DUNGEON_TIME_LIMIT = 60000;
     export const DUNGEON_SIZE = 5;
 
     export enum DungeonTile {
