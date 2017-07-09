@@ -62,4 +62,39 @@ class PokemonHelper {
         return src;
     }
 
+    public static compareBy(property: string, direction: boolean): (a: CaughtPokemon, b: CaughtPokemon) => number {
+        return function(a, b) {
+            let _a, _b, res, dir = (direction) ? -1 : 1;
+
+            //Convert to plain JS so that observables don't need to be accessed with brackets
+            _a = ko.toJS(a);
+            _b = ko.toJS(b);
+
+            //CaughtPokemon doesn't have shiny property, create one for comparison if needed
+            if (property == "shiny") {
+                _a.shiny = Number(player.alreadyCaughtPokemonShiny(a.name));
+                _b.shiny = Number(player.alreadyCaughtPokemonShiny(b.name));
+            }
+
+
+            //Compare by provided property 
+            if (_a[property] == _b[property]) {
+                //If they are equal according to provided property, sort by id
+                if (_a.id < _b.id) {
+                    return -1;
+                } else if (_a.id > _b.id) {
+                    return 1;
+                }
+            } else if (_a[property] < _b[property]){
+                res = -1;
+            } else if (_a[property] > _b[property]) {
+                res = 1;
+            } else {
+                res = 0
+            }
+
+            return res * dir;
+        }
+    }
+
 }
