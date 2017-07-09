@@ -128,7 +128,7 @@ gymList["Viridian City"] = new Gym(
     GameConstants.Badge.Volcano,
     "Ha! That was a truly intense fight. You have won! As proof, here is the EarthBadge!"
 );
-gymList["Lorelei"] = new Gym(
+gymList["Elite Lorelei"] = new Gym(
     "Elite Lorelei",
     "Indigo Plateau Gym",
     [new GymPokemon("Dewgong", 30810, 52),
@@ -141,7 +141,7 @@ gymList["Lorelei"] = new Gym(
     GameConstants.Badge.Earth,
     "...Things shouldn't be this way!"
 );
-gymList["Bruno"] = new Gym(
+gymList["Elite Bruno"] = new Gym(
     "Elite Bruno",
     "Indigo Plateau Gym",
     [new GymPokemon("Onix", 32950, 51),
@@ -154,7 +154,7 @@ gymList["Bruno"] = new Gym(
     GameConstants.Badge.Lorelei,
     "Why? How could I lose?"
 );
-gymList["Agatha"] = new Gym(
+gymList["Elite Agatha"] = new Gym(
     "Elite Agatha",
     "Indigo Plateau Gym",
     [new GymPokemon("Gengar", 35045, 54),
@@ -167,7 +167,7 @@ gymList["Agatha"] = new Gym(
     GameConstants.Badge.Bruno,
     "Oh, my! You're something special, child!"
 );
-gymList["Lance"] = new Gym(
+gymList["Elite Lance"] = new Gym(
     "Elite Lance",
     "Indigo Plateau Gym",
     [new GymPokemon("Gyarados", 37320, 56),

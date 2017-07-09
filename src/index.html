@@ -231,6 +231,16 @@
                      class="justify-content-lg-center no-gutters no-select">
                     <div class="row justify-content-lg-center no-gutters" style="min-height: 100px;">
                         <div class="col no-gutters">
+                            <div data-bind="if: player.town() instanceof PokemonLeague">
+                                <ul class="nav flex-lg-column featureList pokemonLeagueList"
+                                    data-bind="foreach: player.town().gymList">
+                                    <li class="nav-item">
+                                        <button class="btn btn-secondary" data-bind="text: $data.leaderName">
+                                            E4 Leader
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
                             <ul class="nav flex-lg-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
                                     <button class="btn btn-secondary" onclick="GymRunner.startGym(player.town().gym())">
@@ -238,10 +248,14 @@
                                     </button>
                                 </li>
                                 <li class="nav-item" data-bind="if:player.town().shop">
-                                    <a class="nav-link" href="#">Shop</a>
+                                    <button class="btn btn-secondary">
+                                        Shop
+                                    </button>
                                 </li>
                                 <li class="nav-item" data-bind="if:player.town().dungeon">
-                                    <a class="nav-link" href="#">Dungeon</a>
+                                    <button class="btn btn-secondary">
+                                        Dungeon
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -727,8 +741,8 @@
                                    optionsCaption: 'Sort By...'">
                 </select>
                 <p>
-                    Reverse 
-                    <input type='checkbox' data-bind="checked: player._sortDescending" />
+                    Reverse
+                    <input type='checkbox' data-bind="checked: player._sortDescending"/>
                 </p>
                 <table id="pokemonList" class="table table-striped table-hover">
                     <thead>

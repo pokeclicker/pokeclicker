@@ -6,11 +6,10 @@ class IndigoPlateau extends PokemonLeague {
         super("Indigo Plateau", [23], shop);
         this.gym(null);
         this.gymList = ko.observableArray<KnockoutObservable<Gym>>();
-        this.gymList.push(ko.observable(gymList["Lorelei"]));
-        this.gymList.push(ko.observable(gymList["Bruno"]));
-        this.gymList.push(ko.observable(gymList["Agatha"]));
-        this.gymList.push(ko.observable(gymList["Lance"]));
-
+        this.gymList.push(ko.observable(gymList["Elite Lorelei"]));
+        this.gymList.push(ko.observable(gymList["Elite Bruno"]));
+        this.gymList.push(ko.observable(gymList["Elite Agatha"]));
+        this.gymList.push(ko.observable(gymList["Elite Lance"]));
 
         //todo add champion
     }

@@ -60,7 +60,7 @@ class MapHelper {
             $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
             player.route(0);
             player.town = ko.observable(TownList[townName]);
-            console.log("set town to " + player.town());
+            console.log("set town to " + player.town().name());
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
         }
