@@ -130,7 +130,7 @@ gymList["Viridian City"] = new Gym(
 );
 gymList["Elite Lorelei"] = new Gym(
     "Elite Lorelei",
-    "Indigo Plateau Gym",
+    "Elite Lorelei",
     [new GymPokemon("Dewgong", 30810, 52),
         new GymPokemon("Cloyster", 33380, 51),
         new GymPokemon("Slowbro", 35950, 52),
@@ -143,7 +143,7 @@ gymList["Elite Lorelei"] = new Gym(
 );
 gymList["Elite Bruno"] = new Gym(
     "Elite Bruno",
-    "Indigo Plateau Gym",
+    "Elite Bruno",
     [new GymPokemon("Onix", 32950, 51),
         new GymPokemon("Hitmonchan", 35300, 53),
         new GymPokemon("Hitmonlee", 37660, 53),
@@ -156,7 +156,7 @@ gymList["Elite Bruno"] = new Gym(
 );
 gymList["Elite Agatha"] = new Gym(
     "Elite Agatha",
-    "Indigo Plateau Gym",
+    "Elite Agatha",
     [new GymPokemon("Gengar", 35045, 54),
         new GymPokemon("Golbat", 36660, 54),
         new GymPokemon("Haunter", 48950, 53),
@@ -169,7 +169,7 @@ gymList["Elite Agatha"] = new Gym(
 );
 gymList["Elite Lance"] = new Gym(
     "Elite Lance",
-    "Indigo Plateau Gym",
+    "Elite Lance",
     [new GymPokemon("Gyarados", 37320, 56),
         new GymPokemon("Dragonair", 39390, 54),
         new GymPokemon("Dragonair", 41160, 54),

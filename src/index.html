@@ -235,7 +235,8 @@
                                 <ul class="nav flex-lg-column featureList pokemonLeagueList"
                                     data-bind="foreach: player.town().gymList">
                                     <li class="nav-item">
-                                        <button class="btn btn-secondary" data-bind="text: $data.leaderName">
+                                        <button class="btn btn-secondary"
+                                                data-bind="text: $data.leaderName, click: function() {GymRunner.startGym($data)}">
                                             E4 Leader
                                         </button>
                                     </li>
@@ -791,7 +792,7 @@
                     </div>
                     <div class="modal-body">
                         <p data-bind="text: GymRunner.gymObservable().defeatMessage"></p>
-                        <img src="" width="56px"
+                        <img src="" width="56px" onerror="this.style.display= 'none'"
                              data-bind="attr:{ src: '/assets/images/badges/' + GymRunner.gymObservable().leaderName + '.png'}">
 
                     </div>
