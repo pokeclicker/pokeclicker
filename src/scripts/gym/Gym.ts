@@ -14,7 +14,7 @@ class Gym {
     badgeReward: GameConstants.Badge;
     moneyReward: number;
     badgeReq: GameConstants.Badge;
-    rewardMessage: string;
+    defeatMessage: string;
 
     constructor(leaderName: string, town: string, pokemons: GymPokemon[], badgeReward: GameConstants.Badge, moneyReward: number, badgeReq: GameConstants.Badge, rewardMessage: string) {
         this.leaderName = leaderName;
@@ -23,7 +23,7 @@ class Gym {
         this.badgeReward = badgeReward;
         this.moneyReward = moneyReward;
         this.badgeReq = badgeReq;
-        this.rewardMessage = rewardMessage;
+        this.defeatMessage = rewardMessage;
     }
 
     public isUnlocked(): boolean {
@@ -45,7 +45,7 @@ gymList["Pewter City"] = new Gym(
     GameConstants.Badge.Boulder,
     250,
     GameConstants.Badge.None,
-    "I took you for granted, and so I lost. As proof of your victory, I confer on you this...the official Pokémon League Boulderbadge!");
+    "I took you for granted, and so I lost. As proof of your victory, I confer on you this...the official Pokémon League BoulderBadge.");
 
 gymList["Cerulean City"] = new Gym(
     "Misty",
@@ -55,7 +55,7 @@ gymList["Cerulean City"] = new Gym(
     GameConstants.Badge.Cascade,
     500,
     GameConstants.Badge.Boulder,
-    "Wow! You're too much! You can have the Cascadebadge to show you beat me."
+    "Wow! You're too much, all right! You can have the CascadeBadge to show that you beat me."
 );
 gymList["Vermillion City"] = new Gym(
     "Lt. Surge",
@@ -66,7 +66,7 @@ gymList["Vermillion City"] = new Gym(
     GameConstants.Badge.Thunder,
     1000,
     GameConstants.Badge.Cascade,
-    ""
+    "Now that's a shocker! You're the real deal, kid! Fine, then, take the ThunderBadge!"
 );
 gymList["Celadon City"] = new Gym(
     "Erika",
@@ -77,7 +77,7 @@ gymList["Celadon City"] = new Gym(
     GameConstants.Badge.Rainbow,
     1500,
     GameConstants.Badge.Thunder,
-    ""
+    "Oh! I concede defeat. You are remarkably strong. I must confer on you the RainbowBadge."
 );
 gymList["Saffron City"] = new Gym(
     "Sabrina",
@@ -86,10 +86,10 @@ gymList["Saffron City"] = new Gym(
         new GymPokemon("Mr. Mime", 18340, 37),
         new GymPokemon("Venomoth", 19870, 38),
         new GymPokemon("Alakazam", 21400, 43)],
-    GameConstants.Badge.Soul,
+    GameConstants.Badge.Marsh,
     2500,
     GameConstants.Badge.Rainbow,
-    ""
+    "This loss shocks me! But a loss is a loss. I admit I didn't work hard enough to win. You earned the MarshBadge."
 );
 gymList["Fuchsia City"] = new Gym(
     "Koga",
@@ -98,10 +98,10 @@ gymList["Fuchsia City"] = new Gym(
         new GymPokemon("Muk", 24000, 37),
         new GymPokemon("Koffing", 26667, 38),
         new GymPokemon("Weezing", 30000, 43)],
-    GameConstants.Badge.Marsh,
-    3500,
     GameConstants.Badge.Soul,
-    ""
+    3500,
+    GameConstants.Badge.Marsh,
+    "Humph! You have proven your worth! Here! Take the SoulBadge!"
 );
 gymList["Cinnabar Island City"] = new Gym(
     "Blaine",
@@ -113,7 +113,7 @@ gymList["Cinnabar Island City"] = new Gym(
     GameConstants.Badge.Volcano,
     5000,
     GameConstants.Badge.Marsh,
-    ""
+    "I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge."
 );
 gymList["Viridian City"] = new Gym(
     "Giovanni",
@@ -126,7 +126,7 @@ gymList["Viridian City"] = new Gym(
     GameConstants.Badge.Earth,
     6000,
     GameConstants.Badge.Volcano,
-    ""
+    "Ha! That was a truly intense fight. You have won! As proof, here is the EarthBadge!"
 );
 gymList["Lorelei"] = new Gym(
     "Elite Lorelei",
@@ -139,7 +139,7 @@ gymList["Lorelei"] = new Gym(
     GameConstants.Badge.Lorelei,
     7500,
     GameConstants.Badge.Earth,
-    ""
+    "...Things shouldn't be this way!"
 );
 gymList["Bruno"] = new Gym(
     "Elite Bruno",
@@ -152,7 +152,7 @@ gymList["Bruno"] = new Gym(
     GameConstants.Badge.Bruno,
     7500,
     GameConstants.Badge.Lorelei,
-    ""
+    "Why? How could I lose?"
 );
 gymList["Agatha"] = new Gym(
     "Elite Agatha",
@@ -165,7 +165,7 @@ gymList["Agatha"] = new Gym(
     GameConstants.Badge.Agatha,
     7500,
     GameConstants.Badge.Bruno,
-    ""
+    "Oh, my! You're something special, child!"
 );
 gymList["Lance"] = new Gym(
     "Elite Lance",
@@ -178,6 +178,6 @@ gymList["Lance"] = new Gym(
     GameConstants.Badge.Lance,
     7500,
     GameConstants.Badge.Agatha,
-    ""
+    "That’s it! I hate to admit it, but you are a Pokémon master!"
 );
 //TODO make champion Gym
