@@ -9,7 +9,7 @@ class DungeonBattle extends Battle {
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.addRouteKill();
         DungeonRunner.fighting(false);
-        DungeonRunner.map.currentTile().type = GameConstants.DungeonTile.empty;
+        DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
         let alreadyCaught: boolean = player.alreadyCaughtPokemon(this.enemyPokemon().name);

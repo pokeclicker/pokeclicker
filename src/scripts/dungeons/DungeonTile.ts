@@ -1,14 +1,13 @@
 class DungeonTile {
     isVisible: boolean;
     hasPlayer: boolean;
-    type: GameConstants.DungeonTile;
+    type: KnockoutObservable<GameConstants.DungeonTile>;
     cssClass: KnockoutObservable<string>;
-
 
     constructor(type: GameConstants.DungeonTile) {
         this.isVisible = false;
         this.hasPlayer = false;
-        this.type = type;
+        this.type = ko.observable(type);
         this.cssClass = ko.observable("");
         this.calculateCssClass();
     }
@@ -24,6 +23,6 @@ class DungeonTile {
             return;
         }
         console.log(this.type);
-        this.cssClass("tile tile-" + GameConstants.DungeonTile[this.type]);
+        this.cssClass("tile tile-" + GameConstants.DungeonTile[this.type()]);
     }
 }

@@ -11,15 +11,15 @@ class DungeonMap {
         this.playerPosition = ko.observable(new Point(Math.floor(size / 2), size - 1));
 
         // Move the boss if it spawns on the player.
-        if( this.currentTile().type == GameConstants.DungeonTile.boss){
-            this.currentTile().type = GameConstants.DungeonTile.empty;
+        if( this.currentTile().type() == GameConstants.DungeonTile.boss){
+            this.currentTile().type(GameConstants.DungeonTile.empty);
             let newX = GameConstants.randomIntBetween(0,size-2);
             let newY = GameConstants.randomIntBetween(0,size-2);
-            this.board()[newY][newX].type = GameConstants.DungeonTile.boss;
+            this.board()[newY][newX].type(GameConstants.DungeonTile.boss);
             this.board()[newY][newX].calculateCssClass();
         }
         this.currentTile().isVisible = true;
-        this.currentTile().type = GameConstants.DungeonTile.empty;
+        this.currentTile().type(GameConstants.DungeonTile.empty);
         this.currentTile().hasPlayer = true;
         this.currentTile().calculateCssClass();
     }
@@ -38,7 +38,7 @@ class DungeonMap {
             this.currentTile().hasPlayer = true;
             this.currentTile().isVisible = true;
             this.currentTile().calculateCssClass();
-            if(this.currentTile().type == GameConstants.DungeonTile.enemy){
+            if(this.currentTile().type() == GameConstants.DungeonTile.enemy){
                 DungeonBattle.generateNewEnemy();
             }
 

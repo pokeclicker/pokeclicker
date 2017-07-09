@@ -240,9 +240,11 @@
                                     <div class="progress-bar bg-danger" role="progressbar"
                                          data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%' }"
                                          aria-valuemin="0" aria-valuemax="100">
-
                                     </div>
                                 </div>
+                            </div>
+                            <div data-bind="if: DungeonRunner.map.currentTile().type() == GameConstants.DungeonTile.chest">
+                                <img data-bind= "click: function(){DungeonRunner.openChest()}" class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
                             </div>
                         </div>
                         <div data-bind="if: DungeonRunner.fighting()">
