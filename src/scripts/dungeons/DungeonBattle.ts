@@ -1,15 +1,13 @@
 class DungeonBattle extends Battle {
 
-
     /**
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon() {
-
+        DungeonRunner.fighting(false);
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.addRouteKill();
-        DungeonRunner.fighting(false);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
@@ -17,7 +15,8 @@ class DungeonBattle extends Battle {
         let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
-            Battle.catching(true);
+            DungeonBattle.pokeball = ko.observable(pokeBall);
+            DungeonBattle.catching(true);
             setTimeout(
                 () => {
                     this.throwPokeball(pokeBall);
@@ -34,16 +33,16 @@ class DungeonBattle extends Battle {
 
     public static generateNewEnemy() {
         DungeonRunner.fighting(true);
-        DungeonBattle.catching(false);
-        DungeonBattle.counter = 0;
-        DungeonBattle.enemyPokemon(PokemonFactory.generateDungeonPokemon(DungeonRunner.dungeon.pokemonList,DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level));
+        this.catching(false);
+        this.counter = 0;
+        this.enemyPokemon(PokemonFactory.generateDungeonPokemon(DungeonRunner.dungeon.pokemonList,DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level));
     }
 
     public static generateNewBoss() {
         DungeonRunner.fighting(true);
-        DungeonBattle.catching(false);
-        DungeonBattle.counter = 0;
-        DungeonBattle.enemyPokemon(PokemonFactory.generateDungeonBoss(DungeonRunner.dungeon.bossList,DungeonRunner.chestsOpened));
+        this.catching(false);
+        this.counter = 0;
+        this.enemyPokemon(PokemonFactory.generateDungeonBoss(DungeonRunner.dungeon.bossList,DungeonRunner.chestsOpened));
     }
 
 }

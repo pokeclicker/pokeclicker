@@ -44,10 +44,8 @@ class DungeonMap {
     }
 
     public showChestTiles() {
-        console.log("Showing chests...");
         for (let i = 0; i < this.board().length; i++) {
             for (let j = 0; j < this.board()[i].length; j++) {
-                console.log(this.board()[i][j].type());
                 if (this.board()[i][j].type() == GameConstants.DungeonTile.chest) {
                     this.board()[i][j].isVisible = true;
                     this.board()[i][j].calculateCssClass()
@@ -57,7 +55,6 @@ class DungeonMap {
     }
 
     public showAllTiles() {
-        console.log("Showing all...");
         for (let i = 0; i < this.board().length; i++) {
             for (let j = 0; j < this.board()[i].length; j++) {
                 this.board()[i][j].isVisible = true;
@@ -106,7 +103,7 @@ class DungeonMap {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.chest));
         }
 
-        for (let i: number = 0; i < this.size * 2; i++) {
+        for (let i: number = 0; i < this.size * 2 + 3; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy));
         }
 

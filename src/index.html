@@ -243,7 +243,7 @@
                                 </div>
                             </div>
 
-                            <div data-bind="if: DungeonRunner.fighting()">
+                            <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span><br>
                                 <div style="height: 96px;">
                                     <div data-bind="ifnot: DungeonBattle.catching">
@@ -252,7 +252,8 @@
                                              src=""/>
                                     </div>
                                     <div data-bind="if: DungeonBattle.catching">
-                                        <img data-bind="attr:{ src: '/assets/images/pokeball.png' }" src=""/>
+                                        <img data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
+                                             src=""/>
                                     </div>
                                 </div>
                                 <div class="progress">
