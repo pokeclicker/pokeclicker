@@ -235,8 +235,11 @@
                                 <ul class="nav flex-lg-column featureList pokemonLeagueList"
                                     data-bind="foreach: player.town().gymList">
                                     <li class="nav-item">
-                                        <button class="btn btn-secondary"
-                                                data-bind="text: $data.leaderName, click: function() {GymRunner.startGym($data)}">
+                                        <button
+                                                data-bind="text: $data.leaderName,
+                                                           disable: !Gym.isUnlocked($data),
+                                                           click: function() {GymRunner.startGym($data)},
+                                                           attr: { class: Gym.calculateCssClass($data)}">
                                             E4 Leader
                                         </button>
                                     </li>

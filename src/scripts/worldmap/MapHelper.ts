@@ -34,7 +34,7 @@ class MapHelper {
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
         return ko.computed(function () {
-            if (player.route.peek() == route && player.region == region) {
+            if (player.route() == route && player.region == region) {
                 return "currentRoute";
             }
             if (MapHelper.accessToRoute(route, region)) {

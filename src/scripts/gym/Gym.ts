@@ -138,7 +138,7 @@ gymList["Viridian City"] = new Gym(
     "Ha! That was a truly intense fight. You have won! As proof, here is the EarthBadge!"
 );
 gymList["Elite Lorelei"] = new Gym(
-    "Elite Lorelei",
+    "Lorelei",
     "Elite Lorelei",
     [new GymPokemon("Dewgong", 30810, 52),
         new GymPokemon("Cloyster", 33380, 51),
@@ -151,7 +151,7 @@ gymList["Elite Lorelei"] = new Gym(
     "...Things shouldn't be this way!"
 );
 gymList["Elite Bruno"] = new Gym(
-    "Elite Bruno",
+    "Bruno",
     "Elite Bruno",
     [new GymPokemon("Onix", 32950, 51),
         new GymPokemon("Hitmonchan", 35300, 53),
@@ -164,7 +164,7 @@ gymList["Elite Bruno"] = new Gym(
     "Why? How could I lose?"
 );
 gymList["Elite Agatha"] = new Gym(
-    "Elite Agatha",
+    "Agatha",
     "Elite Agatha",
     [new GymPokemon("Gengar", 35045, 54),
         new GymPokemon("Golbat", 36660, 54),
@@ -177,7 +177,7 @@ gymList["Elite Agatha"] = new Gym(
     "Oh, my! You're something special, child!"
 );
 gymList["Elite Lance"] = new Gym(
-    "Elite Lance",
+    "Lance",
     "Elite Lance",
     [new GymPokemon("Gyarados", 37320, 56),
         new GymPokemon("Dragonair", 39390, 54),
