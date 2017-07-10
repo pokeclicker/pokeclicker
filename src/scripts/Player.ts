@@ -50,7 +50,6 @@ class Player {
     }
 
     public usePokeball(ball: GameConstants.Pokeball): void {
-        console.log(ball);
         this._pokeballs[ball](this._pokeballs[ball]() -1)
     }
 
@@ -164,9 +163,6 @@ class Player {
                 break;
             }
         }
-        console.log("Use:" + use);
-        console.log("Pref:" + pref);
-
         return use;
     }
 

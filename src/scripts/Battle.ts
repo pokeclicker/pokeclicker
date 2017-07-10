@@ -7,7 +7,7 @@ class Battle {
     static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
     static counter: number = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
-
+    static pokeball: KnockoutObservable<GameConstants.Pokeball>;
     /**
      * Probably not needed right now, but might be if we add more logic to a gameTick.
      */
@@ -53,6 +53,7 @@ class Battle {
         let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
+            Battle.pokeball = ko.observable(pokeBall);
             Battle.catching(true);
             setTimeout(
                 () => {
