@@ -68,7 +68,7 @@ class DungeonMap {
     }
 
     public hasAccesToTile(point: Point) {
-        if (DungeonRunner.fighting()) {
+        if (DungeonRunner.fighting() || DungeonBattle.catching()) {
             return false;
         }
         //If any of the adjacent Tiles is visited, it's a valid Tile.
