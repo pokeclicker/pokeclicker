@@ -231,17 +231,37 @@
                      class="justify-content-lg-center no-gutters no-select">
                     <div class="row justify-content-lg-center no-gutters" style="min-height: 100px;">
                         <div class="col no-gutters">
+                            <div data-bind="if: player.town() instanceof PokemonLeague">
+                                <ul class="nav flex-lg-column featureList pokemonLeagueList"
+                                    data-bind="foreach: player.town().gymList">
+                                    <li class="nav-item">
+                                        <button
+                                                data-bind="text: $data.leaderName,
+                                                           disable: !Gym.isUnlocked($data),
+                                                           click: function() {GymRunner.startGym($data)},
+                                                           attr: { class: Gym.calculateCssClass($data)}">
+                                            E4 Leader
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
                             <ul class="nav flex-lg-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
-                                    <button class="btn btn-secondary" onclick="GymRunner.startGym(player.town().gym())">
+                                    <button data-bind="disable: !Gym.isUnlocked(player.town().gym()),
+                                                       attr: { class: Gym.calculateCssClass(player.town().gym()) }"
+                                            onclick="GymRunner.startGym(player.town().gym())">
                                         Gym
                                     </button>
                                 </li>
                                 <li class="nav-item" data-bind="if:player.town().shop">
-                                    <a class="nav-link" href="#">Shop</a>
+                                    <button class="btn btn-secondary">
+                                        Shop
+                                    </button>
                                 </li>
                                 <li class="nav-item" data-bind="if:player.town().dungeon">
-                                    <a class="nav-link" href="#">Dungeon</a>
+                                    <button class="btn btn-secondary">
+                                        Dungeon
+                                    </button>
                                 </li>
                             </ul>
                         </div>
@@ -587,6 +607,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
                         </path>
                         <path class="city" id="Viridian City"
+                              data-bind="click:function(){MapHelper.moveToTown('Viridian City')}"
                               d="M 72.8 216.63 L 79.43 210 L 88.57 210 L 95.2 216.63 L 95.2 225.77 L 88.57 232.4 L 79.43 232.4 L 72.8 225.77 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                               stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -594,6 +615,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
                                       "1.4"></path>
                         <path class="city" id="Pallet Town"
+                              data-bind="click:function(){MapHelper.moveToTown('Pallet Town')}"
                               d="M 72.1 297.83 L 78.73 291.2 L 87.87 291.2 L 94.5 297.83 L 94.5 306.97 L 87.87 313.6 L 78.73 313.6 L 72.1 306.97 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                               stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -601,6 +623,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
                               stroke-width="1.4"></path>
                         <path class="city" id="Saffron City"
+                              data-bind="click:function(){MapHelper.moveToTown('Saffron City')}"
                               d="M 340.9 162.73 L 347.53 156.1 L 356.67 156.1 L 363.3 162.73 L 363.3 171.87 L 356.67 178.5 L 347.53 178.5 L 340.9 171.87 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
                                       "#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -608,6 +631,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
                               stroke-width="1.4"></path>
                         <path class="city" id="Celadon City"
+                              data-bind="click:function(){MapHelper.moveToTown('Celadon City')}"
                               d="M 256.9 162.73 L 263.53 156.1 L 272.67 156.1 L 279.3 162.73 L 279.3 171.87 L 272.67 178.5 L 263.53 178.5 L 256.9 171.87 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
                                       "#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -615,6 +639,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
                               stroke-width="1.4"></path>
                         <path class="city" id="Vermillion City"
+                              data-bind="click:function(){MapHelper.moveToTown('Vermillion City')}"
                               d="M 339.5 242.53 L 346.13 235.9 L 355.27 235.9 L 361.9 242.53 L 361.9 251.67 L 355.27 258.3 L 346.13 258.3 L 339.5 251.67 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
                                       "#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -622,6 +647,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
                         </path>
                         <path class="city" id="Indigo Plateau"
+                              data-bind="click:function(){MapHelper.moveToTown('Indigo Plateau')}"
                               d="M 18.9 82.23 L 25.53 75.6 L 34.67 75.6 L 41.3 82.23 L 41.3 91.37 L 34.67 98 L 25.53 98 L 18.9 91.37 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                               stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -629,6 +655,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
                                       "1.4"></path>
                         <path class="city" id="Cerulean City"
+                              data-bind="click:function(){MapHelper.moveToTown('Cerulean City')}"
                               d="M 340.9 80.83 L 347.53 74.2 L 356.67 74.2 L 363.3 80.83 L 363.3 89.97 L 356.67 96.6 L 347.53 96.6 L 340.9 89.97 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                               stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -636,6 +663,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
                               stroke-width="1.4"></path>
                         <path class="city" id="Lavender Town"
+                              data-bind="click:function(){MapHelper.moveToTown('Lavender Town')}"
                               d="M 448 164.13 L 454.63 157.5 L 463.77 157.5 L 470.4 164.13 L 470.4 173.27 L 463.77 179.9 L 454.63 179.9 L 448 173.27 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                               stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -646,6 +674,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
                                       "1.4"></path>
                         <path class="city" id="Fuchsia City"
+                              data-bind="click:function(){MapHelper.moveToTown('Fuchsia City')}"
                               d="M 287 324.43 L 293.63 317.8 L 302.77 317.8 L 309.4 324.43 L 309.4 333.57 L 302.77 340.2 L 293.63 340.2 L 287 333.57 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                               stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -656,6 +685,7 @@
                               fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
                         </path>
                         <path class="city" id="Cinnabar Island"
+                              data-bind="click:function(){MapHelper.moveToTown('Cinnabar Island')}"
                               d="M 72.8 376.93 L 79.43 370.3 L 88.57 370.3 L 95.2 376.93 L 95.2 386.07 L 88.57 392.7 L 79.43 392.7 L 72.8 386.07 Z"
                               fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                               stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -717,8 +747,8 @@
                                    optionsCaption: 'Sort By...'">
                 </select>
                 <p>
-                    Reverse 
-                    <input type='checkbox' data-bind="checked: player._sortDescending" />
+                    Reverse
+                    <input type='checkbox' data-bind="checked: player._sortDescending"/>
                 </p>
                 <table id="pokemonList" class="table table-striped table-hover">
                     <thead>
@@ -766,7 +796,7 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <p data-bind="text: GymRunner.gymObservable().rewardMessage"></p>
+                        <p data-bind="text: GymRunner.gymObservable().defeatMessage"></p>
                         <img src="" width="56px"
                              data-bind="attr:{ src: '/assets/images/badges/' + GymRunner.gymObservable().leaderName + '.png'}">
 

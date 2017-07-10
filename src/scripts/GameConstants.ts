@@ -133,6 +133,7 @@ namespace GameConstants {
 
     // Map navigation
     export const AMOUNT_OF_ROUTES = 25;
+    export const AMOUNT_OF_ROUTES_KANTO = 25;
 
     /**
      * Each route contains a list of routenumbers that need to be completed
