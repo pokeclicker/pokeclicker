@@ -112,9 +112,9 @@ gymList["Fuchsia City"] = new Gym(
     GameConstants.Badge.Marsh,
     "Humph! You have proven your worth! Here! Take the SoulBadge!"
 );
-gymList["Cinnabar Island City"] = new Gym(
+gymList["Cinnabar Island"] = new Gym(
     "Blaine",
-    "Cinnabar Island City",
+    "Cinnabar Island",
     [new GymPokemon("Growlithe", 27870, 42),
         new GymPokemon("Ponyta", 30960, 40),
         new GymPokemon("Rapidash", 34060, 42),

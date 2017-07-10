@@ -43,11 +43,11 @@ TownList["Cerulean City"] = new Town("Cerulean City", [4]);
 TownList["Vermillion City"] = new Town("Vermillion City", [6]);
 TownList["Celadon City"] = new Town("Celadon City", [8]);
 TownList["Saffron City"] = new Town("Saffron City", [5]);
-TownList["Fuchsia City"] = new Town("Fuchsia City", [18, 15]);
+TownList["Fuchsia City"] = new Town("Fuchsia City", [18]);
 TownList["Cinnabar Island"] = new Town("Cinnabar Island", [20]);
 TownList["Viridian City"] = new Town("Viridian City", [1]);
 TownList["Pallet Town"] = new Town("Pallet Town", []);
-TownList["Lavender Town"] = new Town("Lavender Town", [7, 10]);
+TownList["Lavender Town"] = new Town("Lavender Town", [10]);
 
 
 //Dungeons

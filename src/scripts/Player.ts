@@ -46,7 +46,7 @@ class Player {
             });
         }
         this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
-        this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES)).map(function (val, index) {
+        this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
