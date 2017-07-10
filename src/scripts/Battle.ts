@@ -50,7 +50,7 @@ class Battle {
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.addRouteKill();
         let alreadyCaught: boolean = player.alreadyCaughtPokemon(this.enemyPokemon().name);
-        let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught);
+        let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught, this.enemyPokemon().shiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             Battle.pokeball = ko.observable(pokeBall);
