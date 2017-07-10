@@ -52,13 +52,13 @@ TownList["Lavender Town"] = new Town("Lavender Town", [10]);
 
 //Dungeons
 TownList["Viridian Forest"] = new Town("Viridian Forest", [1], null, dungeonList["Viridian Forest"]);
-TownList["Digletts Cave"] = new Town("Digletts Cave", [1]);
-TownList["Mt. Moon"] = new Town("Mt. Moon", [3]);
-TownList["Rock Tunnel"] = new Town("Rock Tunnel", [9]);
-TownList["Power Plant"] = new Town("Power Plant", [9]);
-TownList["Pokemon Tower"] = new Town("Pokemon Tower", [7, 10]);
-TownList["Seafoam Islands"] = new Town("Seafoam Islands", [19]);
-TownList["Victory Road"] = new Town("Victory Road", [22]);
-TownList["Cerulean Cave"] = new Town("Cerulean Cave", [4]);
-TownList["Pokemon Mansion"] = new Town("Pokemon Mansion", [20]);
+TownList["Digletts Cave"] = new Town("Digletts Cave", [1], null, dungeonList["Digletts Cave"]);
+TownList["Mt. Moon"] = new Town("Mt. Moon", [3], null, dungeonList["Mt. Moon"]);
+TownList["Rock Tunnel"] = new Town("Rock Tunnel", [9], null, dungeonList["Rock Tunnel"]);
+TownList["Power Plant"] = new Town("Power Plant", [9], null, dungeonList["Power Plant"]);
+TownList["Pokemon Tower"] = new Town("Pokemon Tower", [7, 10], null, dungeonList["Pokemon Tower"]);
+TownList["Seafoam Islands"] = new Town("Seafoam Islands", [19], null, dungeonList["Seafoam Islands"]);
+TownList["Victory Road"] = new Town("Victory Road", [22], null, dungeonList["Victory Road"]);
+TownList["Cerulean Cave"] = new Town("Cerulean Cave", [4], null, dungeonList["Cerulean Cave"]);
+TownList["Pokemon Mansion"] = new Town("Pokemon Mansion", [20], null, dungeonList["Pokemon Mansion"]);
 
