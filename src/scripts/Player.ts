@@ -52,6 +52,7 @@ class Player {
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._region = savedPlayer._region || GameConstants.Region.kanto;
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
+        this._gymBadges.push(GameConstants.Badge.None);
         this._pokeballs = savedPlayer._pokeballs || [0, 0, 0, 0];
         this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? savedPlayer._notCaughtBallSelection : GameConstants.Pokeball.Masterball;
         this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection || GameConstants.Pokeball.Pokeball;
