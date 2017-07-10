@@ -35,7 +35,7 @@ class Dungeon {
 
 
     private calculateAllPokemonNames() {
-        this.allPokemonNames = this.pokemonList;
+        this.allPokemonNames = JSON.parse(JSON.stringify(this.pokemonList));
         for (let i = 0; i < this.bossList.length; i++) {
             this.allPokemonNames.push(this.bossList[i].name);
         }
