@@ -33,7 +33,13 @@ class Player {
     }
 
     constructor(savedPlayer?) {
+        let saved: boolean = savedPlayer;
         savedPlayer = savedPlayer || {};
+
+        //TODO remove before merge
+        savedPlayer = {};
+        saved = false;
+
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
@@ -66,7 +72,11 @@ class Player {
         this.pokemonAttackObservable = ko.computed(function () {
             return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
         }, this);
-        this._town = ko.observable(TownList["Pallet Town"])
+        this._town = ko.observable(TownList["Pallet Town"]);
+
+        if (!saved) {
+            StartSequenceRunner.start()
+        }
     }
 
     public addRouteKill() {
