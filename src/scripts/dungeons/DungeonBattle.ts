@@ -17,15 +17,19 @@ class DungeonBattle extends Battle {
         if (pokeBall !== GameConstants.Pokeball.None) {
             DungeonBattle.pokeball = ko.observable(pokeBall);
             DungeonBattle.catching(true);
-            setTimeout(
-                () => {
-                    this.throwPokeball(pokeBall);
-                },
-                player.calculateCatchTime()
-            );
+            if (DungeonRunner.fightingBoss()) {
+                this.throwPokeball(pokeBall);
+            } else {
+                setTimeout(
+                    () => {
+                        this.throwPokeball(pokeBall);
+                    },
+                    player.calculateCatchTime()
+                );
+            }
         }
 
-        if(DungeonRunner.fightingBoss()){
+        if (DungeonRunner.fightingBoss()) {
             DungeonRunner.fightingBoss(false);
             DungeonRunner.dungeonWon();
         }
@@ -35,14 +39,14 @@ class DungeonBattle extends Battle {
         DungeonRunner.fighting(true);
         this.catching(false);
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateDungeonPokemon(DungeonRunner.dungeon.pokemonList,DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level));
+        this.enemyPokemon(PokemonFactory.generateDungeonPokemon(DungeonRunner.dungeon.pokemonList, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level));
     }
 
     public static generateNewBoss() {
         DungeonRunner.fighting(true);
         this.catching(false);
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateDungeonBoss(DungeonRunner.dungeon.bossList,DungeonRunner.chestsOpened));
+        this.enemyPokemon(PokemonFactory.generateDungeonBoss(DungeonRunner.dungeon.bossList, DungeonRunner.chestsOpened));
     }
 
 }
