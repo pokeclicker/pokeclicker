@@ -78,12 +78,7 @@ class DungeonMap {
         if (point.x < 0 || point.x >= this.size || point.y < 0 || point.y >= this.size) {
             return false
         }
-
-        // If the point is visible, we can move there.
-        if (this.board()[point.y][point.x].isVisible) {
-            return true;
-        }
-
+        
         if (point.y < this.size - 1 && this.board()[point.y + 1][point.x].isVisible) {
             return true;
         }
