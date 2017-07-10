@@ -36,7 +36,7 @@ class Dungeon {
 
     private calculateAllPokemonNames() {
         this.allPokemonNames = this.pokemonList;
-        for(let i = 0; i<this.bossList.length; i++){
+        for (let i = 0; i < this.bossList.length; i++) {
             this.allPokemonNames.push(this.bossList[i].name);
         }
     }
@@ -48,14 +48,72 @@ class Dungeon {
 
 // TODO add all dungeons
 const dungeonList: {[dungeonName: string]: Dungeon} = {};
-dungeonList["Viridian Forest"] = new Dungeon(
-    "Viridian Forest",
+dungeonList["Viridian Forest"] = new Dungeon("Viridian Forest",
     ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"],
-    12,
+    102,
     [new DungeonBossPokemon("Pikachu", 510, 7)],
-    50,
-    GameConstants.Badge.None,
-    1,
-    5);
+    50, GameConstants.Badge.None, 1, 5
+);
 
+dungeonList["Digletts Cave"] = new Dungeon("Digletts Cave",
+    ["Diglett"],
+    1208,
+    [new DungeonBossPokemon("Dugtrio", 6040, 31)],
+    95, GameConstants.Badge.Boulder, 2, 22
+);
 
+dungeonList["Mt. Moon"] = new Dungeon("Mt. Moon",
+    ["Sandshrew", "Clefairy", "Zubat", "Paras", "Geodude", "Pidgeotto"],
+    834,
+    [new DungeonBossPokemon("Kabuto", 4170, 12), new DungeonBossPokemon("Omanyte", 4170, 12)],
+    75, GameConstants.Badge.Rainbow, 4, 10
+);
+
+dungeonList["Rock Tunnel"] = new Dungeon("Rock Tunnel",
+    ["Zubat", "Geodude", "Machop"],
+    4117,
+    [new DungeonBossPokemon("Onix", 20585, 17)],
+    500, GameConstants.Badge.Cascade, 5, 15
+);
+
+dungeonList["Power Plant"] = new Dungeon("Power Plant",
+    ["Pikachu", "Raichu", "Magnemite", "Magneton", "Grimer", "Muk", "Electrode"],
+    13507,
+    [new DungeonBossPokemon("Zapdos", 101302, 50), new DungeonBossPokemon("Electabuzz", 67535, 35)],
+    1000, GameConstants.Badge.Cascade, 8, 25
+);
+
+dungeonList["Pokemon Tower"] = new Dungeon("Pokemon Tower",
+    ["Gastly", "Haunter", "Cubone"],
+    7523,
+    [new DungeonBossPokemon("Marowak", 37615, 30)],
+    750, GameConstants.Badge.Cascade, 10, 20
+);
+
+dungeonList["Seafoam Islands"] = new Dungeon("Seafoam Islands",
+    ["Zubat", "Golbat", "Psyduck", "Golduck", "Slowpoke", "Slowbro", "Shellder", "Krabby", "Horsea", "Staryu"],
+    17226,
+    [new DungeonBossPokemon("Articuno", 129195, 50), new DungeonBossPokemon("Seel", 86130, 35)],
+    1250, GameConstants.Badge.Soul, 15, 30
+);
+
+dungeonList["Pokemon Mansion"] = new Dungeon("Pokemon Mansion",
+    ["Growlithe", "Vulpix", "Grimer", "Muk", "Koffing", "Weezing"],
+    17760,
+    [new DungeonBossPokemon("Magmar", 88800, 40)],
+    1500, GameConstants.Badge.Soul, 16, 35
+);
+
+dungeonList["Victory Road"] = new Dungeon("Victory Road",
+    ["Zubat", "Golbat", "Machop", "Geodude", "Graveler", "Onix", "Marowak", "Venomoth"],
+    24595,
+    [new DungeonBossPokemon("Moltres", 184462, 50), new DungeonBossPokemon("Machoke", 122975, 42)],
+    2000, GameConstants.Badge.Earth, 20, 40
+);
+
+dungeonList["Cerulean Cave"] = new Dungeon("Cerulean Cave",
+    ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"],
+    28735,
+    [new DungeonBossPokemon("Mewtwo", 215512, 70), new DungeonBossPokemon("Rhydon", 143675, 60)],
+    2500, GameConstants.Badge.Earth, 20, 55
+);
