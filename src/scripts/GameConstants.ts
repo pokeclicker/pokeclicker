@@ -27,6 +27,8 @@ namespace GameConstants {
     // Dungeons
     export const DUNGEON_TIME_LIMIT = 60000;
     export const DUNGEON_SIZE = 5;
+    export const DUNGEON_CHEST_SHOW = 2;
+    export const DUNGEON_MAP_SHOW = 4;
 
     export enum DungeonTile {
         empty,

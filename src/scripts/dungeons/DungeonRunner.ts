@@ -40,6 +40,12 @@ class DungeonRunner {
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         // TODO add loot
+        if(DungeonRunner.chestsOpened == GameConstants.DUNGEON_CHEST_SHOW){
+            DungeonRunner.map.showChestTiles();
+        }
+        if(DungeonRunner.chestsOpened == GameConstants.DUNGEON_MAP_SHOW){
+            DungeonRunner.map.showAllTiles();
+        }
     }
 
     private static dungeonLost() {

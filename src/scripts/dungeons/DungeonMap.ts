@@ -11,10 +11,10 @@ class DungeonMap {
         this.playerPosition = ko.observable(new Point(Math.floor(size / 2), size - 1));
 
         // Move the boss if it spawns on the player.
-        if( this.currentTile().type() == GameConstants.DungeonTile.boss){
+        if (this.currentTile().type() == GameConstants.DungeonTile.boss) {
             this.currentTile().type(GameConstants.DungeonTile.empty);
-            let newX = GameConstants.randomIntBetween(0,size-2);
-            let newY = GameConstants.randomIntBetween(0,size-2);
+            let newX = GameConstants.randomIntBetween(0, size - 2);
+            let newY = GameConstants.randomIntBetween(0, size - 2);
             this.board()[newY][newX].type(GameConstants.DungeonTile.boss);
             this.board()[newY][newX].calculateCssClass();
         }
@@ -25,57 +25,78 @@ class DungeonMap {
     }
 
 
-
-    public moveToCoordinates(x:number, y:number){
+    public moveToCoordinates(x: number, y: number) {
         this.moveToTile(new Point(x, y));
     }
 
-    public moveToTile(point:Point){
-        if(this.hasAccesToTile(point)){
+    public moveToTile(point: Point) {
+        if (this.hasAccesToTile(point)) {
             this.currentTile().hasPlayer = false;
             this.currentTile().calculateCssClass();
             this.playerPosition(point);
             this.currentTile().hasPlayer = true;
             this.currentTile().isVisible = true;
             this.currentTile().calculateCssClass();
-            if(this.currentTile().type() == GameConstants.DungeonTile.enemy){
+            if (this.currentTile().type() == GameConstants.DungeonTile.enemy) {
                 DungeonBattle.generateNewEnemy();
             }
-
         }
     }
 
-    public currentTile() : DungeonTile {
+    public showChestTiles() {
+        console.log("Showing chests...");
+        for (let i = 0; i < this.board().length; i++) {
+            for (let j = 0; j < this.board()[i].length; j++) {
+                console.log(this.board()[i][j].type());
+                if (this.board()[i][j].type() == GameConstants.DungeonTile.chest) {
+                    this.board()[i][j].isVisible = true;
+                    this.board()[i][j].calculateCssClass()
+                }
+            }
+        }
+    }
+
+    public showAllTiles() {
+        console.log("Showing all...");
+        for (let i = 0; i < this.board().length; i++) {
+            for (let j = 0; j < this.board()[i].length; j++) {
+                this.board()[i][j].isVisible = true;
+                this.board()[i][j].calculateCssClass()
+            }
+        }
+    }
+
+    public currentTile(): DungeonTile {
         return this.board()[this.playerPosition().y][this.playerPosition().x];
     }
 
-    public hasAccesToTile(point:Point){
-        if(DungeonRunner.fighting()){
+    public hasAccesToTile(point: Point) {
+        if (DungeonRunner.fighting()) {
             return false;
         }
         //If any of the adjacent Tiles is visited, it's a valid Tile.
-        if(point.x < 0 || point.x >= this.size || point.y < 0 || point.y >= this.size){
+        if (point.x < 0 || point.x >= this.size || point.y < 0 || point.y >= this.size) {
             return false
         }
 
         // If the point is visible, we can move there.
-        if(this.board()[point.y][point.x].isVisible){
+        if (this.board()[point.y][point.x].isVisible) {
             return true;
         }
 
-        if(point.y < this.size-1 &&this.board()[point.y+1][point.x].isVisible){
+        if (point.y < this.size - 1 && this.board()[point.y + 1][point.x].isVisible) {
             return true;
         }
 
-        if(point.y > 0 && this.board()[point.y-1][point.x].isVisible){
+        if (point.y > 0 && this.board()[point.y - 1][point.x].isVisible) {
             return true;
         }
 
-        if(point.x < this.size-1 && this.board()[point.y][point.x+1].isVisible){
+        if (point.x < this.size - 1 && this.board()[point.y][point.x + 1].isVisible) {
             return true;
         }
 
-        if(point.x > 0 && this.board()[point.y][point.x-1].isVisible){
+        if (point.x > 0 && this.board()[point.y][point.x - 1].isVisible) {
             return true;
         }
         return false;
