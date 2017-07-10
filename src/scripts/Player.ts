@@ -37,31 +37,27 @@ class Player {
             return this._pokeballs[ball]();
         }, this);
     }
-    public setAlreadyCaughtBallSelection(ball : GameConstants.Pokeball){
+
+    public setAlreadyCaughtBallSelection(ball: GameConstants.Pokeball) {
         this._alreadyCaughtBallSelection(ball);
     }
 
-    public setNotCaughtBallSelection(ball : GameConstants.Pokeball){
+    public setNotCaughtBallSelection(ball: GameConstants.Pokeball) {
         this._notCaughtBallSelection(ball);
     }
 
-    public gainPokeballs(ball : GameConstants.Pokeball, amount:number){
+    public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
         this._pokeballs[ball](this._pokeballs[ball]() + amount)
     }
 
     public usePokeball(ball: GameConstants.Pokeball): void {
-        this._pokeballs[ball](this._pokeballs[ball]() -1)
+        this._pokeballs[ball](this._pokeballs[ball]() - 1)
     }
 
 
     constructor(savedPlayer?) {
-        let saved: boolean = savedPlayer;
+        let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
-
-        //TODO remove before merge
-        savedPlayer = {};
-        saved = false;
-
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
@@ -98,8 +94,12 @@ class Player {
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
 
-        if (!saved) {
-            StartSequenceRunner.start()
+        //TODO remove before deployment
+        console.log(saved);
+        if (!debug) {
+            if (!saved) {
+                StartSequenceRunner.start()
+            }
         }
     }
 
@@ -117,7 +117,7 @@ class Player {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
         // TODO factor in types
         // TODO start at 0
-        let attack = 5;
+        let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
             attack += pokemon.attack();
         }
@@ -158,7 +158,7 @@ class Player {
      * @param shiny if the pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public calculatePokeballToUse(alreadyCaught: boolean, shiny:boolean): GameConstants.Pokeball {
+    public calculatePokeballToUse(alreadyCaught: boolean, shiny: boolean): GameConstants.Pokeball {
         let pref: GameConstants.Pokeball;
         if (alreadyCaught) {
             pref = this._alreadyCaughtBallSelection();
@@ -167,7 +167,7 @@ class Player {
         }
 
         // Always throw the highest available Pokéball at shinies
-        if(shiny){
+        if (shiny) {
             pref = GameConstants.Pokeball.Masterball;
         }
 

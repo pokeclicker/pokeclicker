@@ -198,7 +198,8 @@
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
-                                    <img data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }" src=""/>
+                                    <img data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
+                                         src=""/>
                                 </div>
                             </div>
                             <div class="progress">
@@ -737,7 +738,7 @@
         <div class="col-lg-3 pull-lg-6">
             <div class="page-item" style="background-color: white; min-height: 180px">
                 <div class="row justify-content-sm-center">
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <span>Caught Pokémon</span>
                         <table class="table pokeball-table borderless">
                             <tr>
@@ -889,6 +890,9 @@
                             A world of dreams and adventures with Pokémon awaits! Let's go!
                         </p>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -905,24 +909,53 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <p>Oh No! We got ambushed by these pokémon!<br>
+                        <p id="pickStarterModalText">Oh No! We got ambushed by these pokémon!<br>
                             I can only hold off two! Pick the one you want to fight!</p>
                         <div class="row">
                             <div class="col-lg-8 offset-lg-2">
                                 <div class="row">
 
                                     <div class="col">
-                                        <input type="image" src="assets/images/pokemon/1.png">
+                                        <input type="image" src="assets/images/pokemon/1.png"
+                                               onclick="StartSequenceRunner.pickStarter(Starter.Bulbasaur)">
                                     </div>
                                     <div class="col">
-                                        <input type="image" src="assets/images/pokemon/4.png">
+                                        <input type="image" src="assets/images/pokemon/4.png"
+                                               onclick="StartSequenceRunner.pickStarter(Starter.Charmander)">
                                     </div>
                                     <div class="col">
-                                        <input type="image" src="assets/images/pokemon/7.png">
+                                        <input type="image" src="assets/images/pokemon/7.png"
+                                               onclick="StartSequenceRunner.pickStarter(Starter.Squirtle)">
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Starter Caught Modal-->
+        <div class="modal" id="starterCaughtModal" tabindex="-1" role="dialog"
+             aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src="assets/images/oak.png">
+                            <h5 class="modal-title" id="starterCaughtModalLabel">Professor Oak</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Hm! Excellent! You have caught your first pokémon!<br>
+                            This is where your journey begins. <br>
+                            You can progress to the next route after you have defeated 10 pokémon.
+
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
                     </div>
                 </div>
             </div>
