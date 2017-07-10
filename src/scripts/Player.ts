@@ -14,9 +14,9 @@ class Player {
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: GameConstants.Region;
     private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
-    private _pokeballs: number[];
-    private _notCaughtBallSelection: GameConstants.Pokeball;
-    private _alreadyCaughtBallSelection: GameConstants.Pokeball;
+    private _pokeballs: Array<KnockoutObservable<number>>;
+    private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
@@ -31,6 +31,28 @@ class Player {
             return Math.min(this.routeKillsNeeded, this.routeKills[route]());
         }, this);
     }
+
+    public pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
+        return ko.computed(function () {
+            return this._pokeballs[ball]();
+        }, this);
+    }
+    public setAlreadyCaughtBallSelection(ball : GameConstants.Pokeball){
+        this._alreadyCaughtBallSelection(ball);
+    }
+
+    public setNotCaughtBallSelection(ball : GameConstants.Pokeball){
+        this._notCaughtBallSelection(ball);
+    }
+
+    public gainPokeballs(ball : GameConstants.Pokeball, amount:number){
+        this._pokeballs[ball](this._pokeballs[ball]() + amount)
+    }
+
+    public usePokeball(ball: GameConstants.Pokeball): void {
+        this._pokeballs[ball](this._pokeballs[ball]() -1)
+    }
+
 
     constructor(savedPlayer?) {
         let saved: boolean = savedPlayer;
@@ -58,12 +80,14 @@ class Player {
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._region = savedPlayer._region || GameConstants.Region.kanto;
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
+        this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
+            return ko.observable(savedPlayer._pokeballs ? (savedPlayer._pokeballs[index] || 1000) : 1000)
+        });
+        this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._notCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
+        this._alreadyCaughtBallSelection = typeof(savedPlayer._alreadyCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._alreadyCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
         if (this._gymBadges().length == 0) {
             this._gymBadges.push(GameConstants.Badge.None)
         }
-        this._pokeballs = savedPlayer._pokeballs || [0, 0, 0, 0];
-        this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? savedPlayer._notCaughtBallSelection : GameConstants.Pokeball.Masterball;
-        this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection || GameConstants.Pokeball.Pokeball;
         this._sortOption = ko.observable(savedPlayer._sortOption || GameConstants.SortOptionsEnum.id);
         this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false)
         this.clickAttackObservable = ko.computed(function () {
@@ -124,27 +148,33 @@ class Player {
 
     public calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
-        return 10;
+        return 2000;
     }
 
     /**
      * Checks the players preferences to see what pokéball needs to be used on the next throw.
      * Checks from the players pref to the most basic ball to see if the player has any.
      * @param alreadyCaught if the pokémon is already caught.
+     * @param shiny if the pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public calculatePokeballToUse(alreadyCaught: boolean): GameConstants.Pokeball {
+    public calculatePokeballToUse(alreadyCaught: boolean, shiny:boolean): GameConstants.Pokeball {
         let pref: GameConstants.Pokeball;
         if (alreadyCaught) {
-            pref = this._alreadyCaughtBallSelection;
+            pref = this._alreadyCaughtBallSelection();
         } else {
-            pref = this._notCaughtBallSelection;
+            pref = this._notCaughtBallSelection();
         }
 
-        let use: GameConstants.Pokeball.Pokeball;
+        // Always throw the highest available Pokéball at shinies
+        if(shiny){
+            pref = GameConstants.Pokeball.Masterball;
+        }
+
+        let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
 
         for (let i: number = pref; i >= 0; i--) {
-            if (this._pokeballs[i] > 0) {
+            if (this._pokeballs[i]() > 0) {
                 use = i;
                 break;
             }
@@ -235,10 +265,6 @@ class Player {
         this._routeKills = value;
     }
 
-    public usePokeball(pokeBall: GameConstants.Pokeball): void {
-        this._pokeballs[pokeBall]--;
-    }
-
     get routeKillsNeeded(): number {
         return this._routeKillsNeeded();
     }
@@ -275,14 +301,6 @@ class Player {
         this._region = value;
     }
 
-    get pokeballs(): number[] {
-        return this._pokeballs;
-    }
-
-    set pokeballs(value: number[]) {
-        this._pokeballs = value;
-    }
-
     get gymBadges(): GameConstants.Badge[] {
         return this._gymBadges();
     }
@@ -297,22 +315,6 @@ class Player {
 
     set caughtShinyList(value: KnockoutObservableArray<string>) {
         this._caughtShinyList = value;
-    }
-
-    get alreadyCaughtBallSelection(): GameConstants.Pokeball {
-        return this._alreadyCaughtBallSelection;
-    }
-
-    set alreadyCaughtBallSelection(value: GameConstants.Pokeball) {
-        this._alreadyCaughtBallSelection = value;
-    }
-
-    get notCaughtBallSelection(): GameConstants.Pokeball {
-        return this._notCaughtBallSelection;
-    }
-
-    set notCaughtBallSelection(value: GameConstants.Pokeball) {
-        this._notCaughtBallSelection = value;
     }
 
     get town(): KnockoutObservable<Town> {
