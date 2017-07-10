@@ -95,7 +95,6 @@ class Player {
         this._town = ko.observable(TownList["Pallet Town"]);
 
         //TODO remove before deployment
-        console.log(saved);
         if (!debug) {
             if (!saved) {
                 StartSequenceRunner.start()

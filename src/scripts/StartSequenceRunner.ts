@@ -18,7 +18,6 @@ class StartSequenceRunner {
     public static pickStarter(s: Starter) {
         this.starter = s;
         $('#pickStarterModal').modal('hide');
-        console.log(Starter[this.starter]);
         let dataPokemon = PokemonHelper.getPokemonByName(Starter[this.starter]);
         let shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
 
