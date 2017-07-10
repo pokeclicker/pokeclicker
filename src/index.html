@@ -194,13 +194,13 @@
                                 <span data-bind="if: (!RouteHelper.routeCompleted(player.route(), player.region, true) && RouteHelper.routeCompleted(player.route(), player.region, false))">
                                 <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
                                      src="assets/images/pokeball/Pokeball-small.png"/>
-                            </span>
+                                </span>
 
                                 <!--If all Pokémon on the route are caught shiny-->
                                 <span data-bind="if: RouteHelper.routeCompleted(player.route(), player.region, true)">
                                 <img title="You have captured all Pokémon shiny on this route!"
                                      class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"/>
-                            </span>
+                                </span>
 
                                 <br>
                                 <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
