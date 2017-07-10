@@ -13,6 +13,7 @@ class Dungeon {
     badgeReq: GameConstants.Badge;
     itemRoute: number;
     level: number;
+    allPokemonNames: string[];
 
 
     constructor(dungeonName: string, pokemonList: string[], baseHealth: number, bossList: DungeonBossPokemon[], tokenCost: number, badgeReq: GameConstants.Badge, itemRoute: number, level: number) {
@@ -24,11 +25,20 @@ class Dungeon {
         this.badgeReq = badgeReq;
         this.itemRoute = itemRoute;
         this.level = level;
+        this.calculateAllPokemonNames();
     }
 
 
     public isUnlocked(): boolean {
         return player.hasBadge(this.badgeReq);
+    }
+
+
+    private calculateAllPokemonNames() {
+        this.allPokemonNames = this.pokemonList;
+        for(let i = 0; i<this.bossList.length; i++){
+            this.allPokemonNames.push(this.bossList[i].name);
+        }
     }
 }
 

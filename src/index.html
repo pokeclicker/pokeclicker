@@ -244,7 +244,14 @@
                                 </div>
                             </div>
                             <div data-bind="if: DungeonRunner.map.currentTile().type() == GameConstants.DungeonTile.chest">
-                                <img data-bind= "click: function(){DungeonRunner.openChest()}" class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
+                                <img data-bind="click: function(){DungeonRunner.openChest()}" class="dungeon-chest"
+                                     src="assets/images/dungeons/chest.png"/>
+                            </div>
+
+                            <div data-bind="if: (DungeonRunner.map.currentTile().type() == GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss())">
+                                <button class="btn btn-danger dungeon-boss-button"
+                                        data-bind="click: function(){DungeonRunner.startBossFight()}">Start Bossfight
+                                </button>
                             </div>
                         </div>
                         <div data-bind="if: DungeonRunner.fighting()">
@@ -276,7 +283,7 @@
                 <!--TownView-->
                 <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
                      class="justify-content-lg-center no-gutters no-select">
-                    <div class="row justify-content-lg-center no-gutters" style="min-height: 100px;">
+                    <div class="row justify-content-lg-center no-gutters" style="min-height: 100px">
                         <div class="col no-gutters">
                             <ul class="nav flex-lg-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
@@ -293,6 +300,7 @@
                                         Dungeon
                                     </button>
                                 </li>
+                                </li>
                             </ul>
                         </div>
                         <div class="col-7 no-gutters">
@@ -301,7 +309,25 @@
                                  data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
                         </div>
                         <div class="col no-gutters">
+
                         </div>
+
+
+                    </div>
+                    <div class="card">
+
+                        <!--Display all available Pokémon in this dungeon-->
+                        <ul class="list-inline" data-bind="foreach: player.town().dungeon().allPokemonNames">
+                            <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
+                                <img class="dungeon-pokemon-preview"
+                                     data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                            </li>
+                            <li class="list-inline-item"
+                                data-bind="ifnot: player.alreadyCaughtPokemon($data)">
+                                <img class="dungeon-pokemon-preview dungeon-pokemon-locked"
+                                     data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
@@ -372,8 +398,8 @@
                         <div class="card">
                             <span data-bind="text: DungeonRunner.dungeon.name()"></span>
                         </div>
-                        <div class="row">
-                            <div class="col-lg-4 offset-lg-7 col-sm-6 offset-sm-5 dungeon-board"
+                        <div class="row justify-content-sm-center">
+                            <div class="dungeon-board"
                                  data-bind="foreach: DungeonRunner.map.board()">
                                 <div class="row" data-bind="foreach: $data">
                                     <div data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}">
