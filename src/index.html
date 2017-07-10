@@ -244,7 +244,9 @@
                             </div>
                             <ul class="nav flex-lg-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
-                                    <button class="btn btn-secondary" onclick="GymRunner.startGym(player.town().gym())">
+                                    <button data-bind="disable: !Gym.isUnlocked(player.town().gym()),
+                                                       attr: { class: Gym.calculateCssClass(player.town().gym()) }"
+                                            onclick="GymRunner.startGym(player.town().gym())">
                                         Gym
                                     </button>
                                 </li>

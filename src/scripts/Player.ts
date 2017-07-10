@@ -52,7 +52,9 @@ class Player {
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._region = savedPlayer._region || GameConstants.Region.kanto;
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
-        this._gymBadges.push(GameConstants.Badge.None);
+        if (this._gymBadges().length == 0) {
+            this._gymBadges.push(GameConstants.Badge.None)
+        }
         this._pokeballs = savedPlayer._pokeballs || [0, 0, 0, 0];
         this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? savedPlayer._notCaughtBallSelection : GameConstants.Pokeball.Masterball;
         this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection || GameConstants.Pokeball.Pokeball;
@@ -64,6 +66,7 @@ class Player {
         this.pokemonAttackObservable = ko.computed(function () {
             return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
         }, this);
+        this._town = ko.observable(TownList["Pallet Town"])
     }
 
     public addRouteKill() {
@@ -206,13 +209,13 @@ class Player {
     }
 
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
-        return ko.computed(function() {
+        return ko.computed(function () {
             return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
         }, this);
     }
 
     public gainBadge(badge: GameConstants.Badge) {
-        this._gymBadges.push(badge);
+        this._gymBadges().push(badge);
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {

@@ -26,8 +26,17 @@ class Gym {
         this.defeatMessage = rewardMessage;
     }
 
-    public isUnlocked(): boolean {
-        return player.hasBadge(this.badgeReq);
+    public static isUnlocked(gym: Gym): boolean {
+        return player.hasBadge(gym.badgeReq);
+    }
+
+    public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
+        return ko.computed(function () {
+            if (player.hasBadge(gym.badgeReward)) {
+                return "btn btn-success"
+            }
+            return "btn btn-secondary"
+        });
     }
 }
 
@@ -36,7 +45,7 @@ class Gym {
 /**
  * Data list that contains all gymLeaders, accessible by townName.
  */
-const gymList: {[townName: string]: Gym} = {};
+const gymList: { [townName: string]: Gym } = {};
 gymList["Pewter City"] = new Gym(
     "Brock",
     "Pewter City",
@@ -112,7 +121,7 @@ gymList["Cinnabar Island City"] = new Gym(
         new GymPokemon("Arcanine", 37155, 47)],
     GameConstants.Badge.Volcano,
     5000,
-    GameConstants.Badge.Marsh,
+    GameConstants.Badge.Soul,
     "I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge."
 );
 gymList["Viridian City"] = new Gym(

@@ -9,7 +9,8 @@ class GymRunner {
     public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList["Pewter City"]);
 
     public static startGym(gym: Gym) {
-        if (gym.isUnlocked()) {
+        this.gymObservable(gym);
+        if (Gym.isUnlocked(gym)) {
             Game.gameState(GameConstants.GameState.idle);
 
             GymBattle.gym = gym;
@@ -18,6 +19,8 @@ class GymRunner {
             GymRunner.timeLeft(GameConstants.GYM_TIME);
             Game.gameState(GameConstants.GameState.gym);
             GymBattle.generateNewEnemy();
+        } else {
+            console.log("gym " + gym.town + " is locked")
         }
     }
 
@@ -36,11 +39,11 @@ class GymRunner {
     public static gymWon(gym: Gym) {
         this.gymObservable(gym);
         player.gainMoney(gym.moneyReward);
-
         if (!player.hasBadge(gym.badgeReward)) {
             player.gainBadge(gym.badgeReward);
             $('#receiveBadgeModal').modal('show');
         }
+        player.town(TownList[gym.town]);
         Game.gameState(GameConstants.GameState.town);
     }
 
