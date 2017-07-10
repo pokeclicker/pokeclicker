@@ -187,7 +187,19 @@
                     </div>
                     <div>
                         <div class="col-lg-12" style="display: block;">
-                            Route <span data-bind="text: player.route">number</span><br>
+                            Route <span data-bind="text: player.route">number</span>
+
+                            <!--If all Pokémon on the route are caught-->
+                            <span data-bind="if: (!RouteHelper.routeCompleted(player.route(), player.region, true) && RouteHelper.routeCompleted(player.route(), player.region, false))">
+                                <img title="You have captured all Pokémon on this route" class="pokeball-smallest" src="assets/images/pokeball/Pokeball-small.png"/>
+                            </span>
+
+                            <!--If all Pokémon on the route are caught shiny-->
+                            <span data-bind="if: RouteHelper.routeCompleted(player.route(), player.region, true)">
+                                <img title="You have captured all Pokémon shiny on this route" class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                            </span>
+
+                            <br>
                             <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
                                 data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span><br>
@@ -198,7 +210,8 @@
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
-                                    <img data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }" src=""/>
+                                    <img data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
+                                         src=""/>
                                 </div>
                             </div>
                             <div class="progress">
