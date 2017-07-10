@@ -65,4 +65,13 @@ class MapHelper {
         }
     };
 
+    public static updateAllRoutes(){
+        for(let i = 0; i<GameConstants.AMOUNT_OF_ROUTES_KANTO; i++){
+            // TODO fix for multiple regions
+            if(MapHelper.accessToRoute(i,GameConstants.Region.kanto)){
+                $("[data-route='" + i + "']").removeClass('currentRoute').removeClass('lockedRoute').addClass('unlockedRoute');
+            }
+        }
+    }
+
 }

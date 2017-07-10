@@ -44,6 +44,7 @@ class GymRunner {
             $('#receiveBadgeModal').modal('show');
         }
         player.town(TownList[gym.town]);
+        MapHelper.updateAllRoutes();
         Game.gameState(GameConstants.GameState.town);
     }
 
