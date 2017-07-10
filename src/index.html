@@ -706,7 +706,61 @@
         <!--left column-->
         <div class="col-lg-3 pull-lg-6">
             <div class="page-item" style="background-color: white; min-height: 180px">
-                <h2>Pokeball management</h2>
+                <div class="row justify-content-sm-center">
+                    <div class="col-sm-8">
+                        <span>Caught Pokémon</span>
+                        <table class="table pokeball-table borderless">
+                            <tr>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/pokeball.png"
+                                         data-bind="click: player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball), css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/greatball.png"
+                                         data-bind="click: player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball), css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/ultraball.png"
+                                         data-bind="click: player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball), css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/masterball.png"
+                                         data-bind="click: player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball), css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <span>New Pokémon</span>
+                        <table class="table pokeball-table borderless">
+                            <tr>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/pokeball.png"
+                                         data-bind="click: player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball), css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/greatball.png"
+                                         data-bind="click: player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball), css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/ultraball.png"
+                                         data-bind="click: player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball), css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/masterball.png"
+                                         data-bind="click: player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball), css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td><span data-bind="text: player.pokeballsObservable(0)"></span></td>
+                                <td><span data-bind="text: player.pokeballsObservable(1)"></span></td>
+                                <td><span data-bind="text: player.pokeballsObservable(2)"></span></td>
+                                <td><span data-bind="text: player.pokeballsObservable(3)"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
             </div>
 
             <div class="page-item" style="background-color: white">
@@ -717,8 +771,8 @@
                                    optionsCaption: 'Sort By...'">
                 </select>
                 <p>
-                    Reverse 
-                    <input type='checkbox' data-bind="checked: player._sortDescending" />
+                    Reverse
+                    <input type='checkbox' data-bind="checked: player._sortDescending"/>
                 </p>
                 <table id="pokemonList" class="table table-striped table-hover">
                     <thead>
