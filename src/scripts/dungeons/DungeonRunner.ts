@@ -10,6 +10,7 @@ class DungeonRunner {
     public static chestsOpened: number;
     public static loot: string[];
     public static currentTileType;
+    public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
 
     public static initializeDungeon(dungeon) {
         DungeonRunner.dungeon = dungeon;
@@ -19,10 +20,10 @@ class DungeonRunner {
         DungeonRunner.pokemonDefeated = 0;
         DungeonRunner.chestsOpened = 0;
         DungeonRunner.loot = [];
-        DungeonRunner.fighting(false);
         DungeonRunner.currentTileType = ko.computed(function () {
             return DungeonRunner.map.currentTile().type;
         });
+        DungeonRunner.fightingBoss(false);
         Game.gameState(GameConstants.GameState.dungeon);
     }
 
@@ -35,7 +36,6 @@ class DungeonRunner {
     }
 
     public static openChest(){
-        console.log("Chest opened");
         DungeonRunner.chestsOpened++;
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
@@ -48,9 +48,22 @@ class DungeonRunner {
         }
     }
 
+    public static startBossFight(){
+        DungeonRunner.fightingBoss(true);
+        DungeonBattle.generateNewBoss();
+    }
+
+
     private static dungeonLost() {
         Game.gameState(GameConstants.GameState.town);
         console.log("You lost... loser!");
     }
+
+    public static dungeonWon() {
+        Game.gameState(GameConstants.GameState.town);
+        // TODO award loot with a special screen
+        console.log("You lost... loser!");
+    }
+
 
 }

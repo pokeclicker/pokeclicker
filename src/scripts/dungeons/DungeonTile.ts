@@ -14,7 +14,6 @@ class DungeonTile {
 
     public calculateCssClass() {
         if (!this.isVisible) {
-            console.log("invisible");
             this.cssClass("tile tile-invisible");
             return;
         }

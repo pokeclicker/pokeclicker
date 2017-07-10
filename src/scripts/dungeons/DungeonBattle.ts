@@ -5,6 +5,7 @@ class DungeonBattle extends Battle {
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon() {
+
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.addRouteKill();
@@ -22,11 +23,13 @@ class DungeonBattle extends Battle {
                     this.throwPokeball(pokeBall);
                 },
                 player.calculateCatchTime()
-            )
-            ;
-
+            );
         }
 
+        if(DungeonRunner.fightingBoss()){
+            DungeonRunner.fightingBoss(false);
+            DungeonRunner.dungeonWon();
+        }
     }
 
     public static generateNewEnemy() {

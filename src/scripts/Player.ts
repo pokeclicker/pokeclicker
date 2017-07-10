@@ -103,7 +103,7 @@ class Player {
         }
 
         // return attack;
-        return 0;
+        return 10;
     }
 
     public calculateClickAttack(): number {
@@ -128,7 +128,7 @@ class Player {
 
     public calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
-        return 10;
+        return 2000;
     }
 
     /**
@@ -163,7 +163,6 @@ class Player {
      * @returns {boolean}
      */
     public alreadyCaughtPokemon(pokemonName: string) {
-        console.log(this.caughtPokemonList);
         for (let i: number = 0; i < this.caughtPokemonList.length; i++) {
             if (this.caughtPokemonList[i].name == pokemonName) {
                 return true;
