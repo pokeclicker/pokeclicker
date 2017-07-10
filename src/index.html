@@ -198,7 +198,7 @@
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
-                                    <img data-bind="attr:{ src: '/assets/images/pokeball.png' }" src=""/>
+                                    <img data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }" src=""/>
                                 </div>
                             </div>
                             <div class="progress">
@@ -736,7 +736,70 @@
         <!--left column-->
         <div class="col-lg-3 pull-lg-6">
             <div class="page-item" style="background-color: white; min-height: 180px">
-                <h2>Pokeball management</h2>
+                <div class="row justify-content-sm-center">
+                    <div class="col-sm-8">
+                        <span>Caught Pokémon</span>
+                        <table class="table pokeball-table borderless">
+                            <tr>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/None.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.None}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/Pokeball-small.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/Greatball-small.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/Ultraball-small.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/Masterball-small.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
+                                </td>
+                            </tr>
+
+                        </table>
+                        <span>New Pokémon</span>
+                        <table class="table pokeball-table borderless">
+                            <tr>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/None.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.None}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/Pokeball-small.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/Greatball-small.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/Ultraball-small.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/Masterball-small.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td><span data-bind="text: player.pokeballsObservable(0)"></span></td>
+                                <td><span data-bind="text: player.pokeballsObservable(1)"></span></td>
+                                <td><span data-bind="text: player.pokeballsObservable(2)"></span></td>
+                                <td><span data-bind="text: player.pokeballsObservable(3)"></span></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
             </div>
 
             <div class="page-item" style="background-color: white">
