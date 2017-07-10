@@ -742,6 +742,10 @@
                         <table class="table pokeball-table borderless">
                             <tr>
                                 <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/none.png"
+                                         data-bind="click: player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None), css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.None}"/>
+                                </td>
+                                <td>
                                     <img class="pokeball-small" src="assets/images/pokeball/pokeball.png"
                                          data-bind="click: player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball), css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
                                 </td>
@@ -764,6 +768,10 @@
                         <table class="table pokeball-table borderless">
                             <tr>
                                 <td>
+                                    <img class="pokeball-small" src="assets/images/pokeball/none.png"
+                                         data-bind="click: player.setNotCaughtBallSelection(GameConstants.Pokeball.None), css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.None}"/>
+                                </td>
+                                <td>
                                     <img class="pokeball-small" src="assets/images/pokeball/pokeball.png"
                                          data-bind="click: player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball), css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
                                 </td>
@@ -782,6 +790,7 @@
                             </tr>
 
                             <tr>
+                                <td></td>
                                 <td><span data-bind="text: player.pokeballsObservable(0)"></span></td>
                                 <td><span data-bind="text: player.pokeballsObservable(1)"></span></td>
                                 <td><span data-bind="text: player.pokeballsObservable(2)"></span></td>

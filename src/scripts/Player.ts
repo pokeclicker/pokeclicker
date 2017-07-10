@@ -78,14 +78,11 @@ class Player {
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
             return ko.observable(savedPlayer._pokeballs ? (savedPlayer._pokeballs[index] || 0) : 0)
         });
-        this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._notCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Masterball);
+        this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._notCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
         this._alreadyCaughtBallSelection = ko.observable(savedPlayer._alreadyCaughtBallSelection) || ko.observable(GameConstants.Pokeball.Pokeball);
         if (this._gymBadges().length == 0) {
             this._gymBadges.push(GameConstants.Badge.None)
         }
-        this._pokeballs = savedPlayer._pokeballs || [0, 0, 0, 0];
-        this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? savedPlayer._notCaughtBallSelection : GameConstants.Pokeball.Masterball;
-        this._alreadyCaughtBallSelection = savedPlayer._alreadyCaughtBallSelection || GameConstants.Pokeball.Pokeball;
         this._sortOption = ko.observable(savedPlayer._sortOption || GameConstants.SortOptionsEnum.id);
         this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false)
         this.clickAttackObservable = ko.computed(function () {
