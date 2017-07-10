@@ -51,7 +51,7 @@ TownList["Lavender Town"] = new Town("Lavender Town", [10]);
 
 
 //Dungeons
-TownList["Viridian Forest"] = new Town("Viridian Forest", [1]);
+TownList["Viridian Forest"] = new Town("Viridian Forest", [1], null, dungeonList["Viridian Forest"]);
 TownList["Digletts Cave"] = new Town("Digletts Cave", [1]);
 TownList["Mt. Moon"] = new Town("Mt. Moon", [3]);
 TownList["Rock Tunnel"] = new Town("Rock Tunnel", [9]);
