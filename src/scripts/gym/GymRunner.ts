@@ -9,15 +9,16 @@ class GymRunner {
     public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList["Pewter City"]);
 
     public static startGym(gym: Gym) {
-        Game.gameState(GameConstants.GameState.idle);
+        if (gym.isUnlocked()) {
+            Game.gameState(GameConstants.GameState.idle);
 
-        GymBattle.gym = gym;
-        GymBattle.index(0);
-        GymBattle.totalPokemons(gym.pokemons.length);
-        GymRunner.timeLeft(GameConstants.GYM_TIME);
-        Game.gameState(GameConstants.GameState.gym);
-        GymBattle.generateNewEnemy();
-
+            GymBattle.gym = gym;
+            GymBattle.index(0);
+            GymBattle.totalPokemons(gym.pokemons.length);
+            GymRunner.timeLeft(GameConstants.GYM_TIME);
+            Game.gameState(GameConstants.GameState.gym);
+            GymBattle.generateNewEnemy();
+        }
     }
 
     public static tick() {
