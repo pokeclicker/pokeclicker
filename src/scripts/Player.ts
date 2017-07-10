@@ -78,7 +78,7 @@ class Player {
             return ko.observable(savedPlayer._pokeballs ? (savedPlayer._pokeballs[index] || 0) : 0)
         });
         this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._notCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
-        this._alreadyCaughtBallSelection = ko.observable(savedPlayer._alreadyCaughtBallSelection) || ko.observable(GameConstants.Pokeball.Pokeball);
+        this._alreadyCaughtBallSelection = typeof(savedPlayer._alreadyCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._alreadyCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
         if (this._gymBadges().length == 0) {
             this._gymBadges.push(GameConstants.Badge.None)
         }
