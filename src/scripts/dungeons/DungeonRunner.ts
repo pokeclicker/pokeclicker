@@ -1,9 +1,9 @@
 class DungeonRunner {
 
     public static dungeon: Dungeon;
-    public static timeLimit: KnockoutObservable<number>;
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.DUNGEON_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
+
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
     public static pokemonDefeated: number;
@@ -14,8 +14,7 @@ class DungeonRunner {
 
     public static initializeDungeon(dungeon) {
         DungeonRunner.dungeon = dungeon;
-        DungeonRunner.timeLeft = ko.observable(GameConstants.DUNGEON_TIME_LIMIT);
-        DungeonRunner.timeLimit = ko.observable(GameConstants.DUNGEON_TIME_LIMIT);
+        DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE);
         DungeonRunner.pokemonDefeated = 0;
         DungeonRunner.chestsOpened = 0;
@@ -29,7 +28,7 @@ class DungeonRunner {
 
     public static tick() {
         if (this.timeLeft() < 0) {
-            DungeonRunner.dungeonLost();
+            this.dungeonLost();
         }
         this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
         this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100))
@@ -62,8 +61,12 @@ class DungeonRunner {
     public static dungeonWon() {
         Game.gameState(GameConstants.GameState.town);
         // TODO award loot with a special screen
-        console.log("You lost... loser!");
+        console.log("You won... winner!");
     }
+
+    public static timeLeftSeconds = ko.computed(function () {
+        return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
+    })
 
 
 }
