@@ -191,18 +191,34 @@
 
                             <!--If all Pokémon on the route are caught-->
                             <span data-bind="if: (!RouteHelper.routeCompleted(player.route(), player.region, true) && RouteHelper.routeCompleted(player.route(), player.region, false))">
-                                <img title="You have captured all Pokémon on this route" class="pokeball-smallest" src="assets/images/pokeball/Pokeball-small.png"/>
+                                <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                                     src="assets/images/pokeball/Pokeball-small.png"/>
                             </span>
 
                             <!--If all Pokémon on the route are caught shiny-->
                             <span data-bind="if: RouteHelper.routeCompleted(player.route(), player.region, true)">
-                                <img title="You have captured all Pokémon shiny on this route" class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                                <img title="You have captured all Pokémon shiny on this route!"
+                                     class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                             </span>
 
                             <br>
                             <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
                                 data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
-                            <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span><br>
+                            <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span>
+
+                            <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
+                            <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
+                                <img title="You have captured this Pokémon!" class="pokeball-smallest"
+                                     src="assets/images/pokeball/Pokeball-small.png"/>
+                            </span>
+
+                            <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
+                            <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
+                                <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
+                                     src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                            </span>
+
+                            <br>
                             <div style="height: 96px;">
                                 <div data-bind="ifnot: Battle.catching">
                                     <img id="enemy"
