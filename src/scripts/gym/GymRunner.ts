@@ -9,15 +9,19 @@ class GymRunner {
     public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList["Pewter City"]);
 
     public static startGym(gym: Gym) {
-        Game.gameState(GameConstants.GameState.idle);
+        this.gymObservable(gym);
+        if (Gym.isUnlocked(gym)) {
+            Game.gameState(GameConstants.GameState.idle);
 
-        GymBattle.gym = gym;
-        GymBattle.index(0);
-        GymBattle.totalPokemons(gym.pokemons.length);
-        GymRunner.timeLeft(GameConstants.GYM_TIME);
-        Game.gameState(GameConstants.GameState.gym);
-        GymBattle.generateNewEnemy();
-
+            GymBattle.gym = gym;
+            GymBattle.index(0);
+            GymBattle.totalPokemons(gym.pokemons.length);
+            GymRunner.timeLeft(GameConstants.GYM_TIME);
+            Game.gameState(GameConstants.GameState.gym);
+            GymBattle.generateNewEnemy();
+        } else {
+            console.log("gym " + gym.leaderName + " is locked")
+        }
     }
 
     public static tick() {
@@ -35,11 +39,12 @@ class GymRunner {
     public static gymWon(gym: Gym) {
         this.gymObservable(gym);
         player.gainMoney(gym.moneyReward);
-
         if (!player.hasBadge(gym.badgeReward)) {
             player.gainBadge(gym.badgeReward);
             $('#receiveBadgeModal').modal('show');
         }
+        player.town(TownList[gym.town]);
+        MapHelper.updateAllRoutes();
         Game.gameState(GameConstants.GameState.town);
     }
 
