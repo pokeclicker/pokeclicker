@@ -20,7 +20,7 @@ class GymRunner {
             Game.gameState(GameConstants.GameState.gym);
             GymBattle.generateNewEnemy();
         } else {
-            console.log("gym " + gym.town + " is locked")
+            console.log("gym " + gym.leaderName + " is locked")
         }
     }
 
