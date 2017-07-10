@@ -32,7 +32,6 @@ class Game {
         player.region = GameConstants.Region.kanto;
         this.load();
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
-        console.log("started");
     }
 
     stop() {

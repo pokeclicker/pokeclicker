@@ -34,7 +34,7 @@ class MapHelper {
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
         return ko.computed(function () {
-            if (player.route.peek() == route && player.region == region) {
+            if (player.route() == route && player.region == region) {
                 return "currentRoute";
             }
             if (MapHelper.accessToRoute(route, region)) {
@@ -47,24 +47,31 @@ class MapHelper {
     public static accessToTown(townName:string) : boolean {
         let town = TownList[townName];
         for(let i of town.reqRoutes) {
-            if(player.routeKills[i] < player.routeKillsNeeded[i]) {
+            if (player.routeKills[i]() < player.routeKillsNeeded) {
                 return false;
             }
         }
-        console.log("Access to town " + townName);
         return true;
     };
 
     public static moveToTown(townName: string) {
         if(MapHelper.accessToTown(townName)) {
+            Game.gameState(GameConstants.GameState.idle);
             $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
             player.route(0);
-            player.town = ko.observable(TownList[townName]);
-            console.log("set town to " + player.town());
-
+            player.town(TownList[townName]);
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
         }
     };
+
+    public static updateAllRoutes(){
+        for(let i = 0; i<GameConstants.AMOUNT_OF_ROUTES_KANTO; i++){
+            // TODO fix for multiple regions
+            if(MapHelper.accessToRoute(i,GameConstants.Region.kanto)){
+                $("[data-route='" + i + "']").removeClass('currentRoute').removeClass('lockedRoute').addClass('unlockedRoute');
+            }
+        }
+    }
 
 }

@@ -68,6 +68,31 @@ namespace GameConstants {
         hoenn = 2
     }
 
+    export enum SortOptionsEnum {
+        "id" = 0,
+        "name" = 1,
+        "attack" = 2,
+        "levelObservable" = 3,
+        "shiny" = 4
+    }
+
+    class Option {
+        optionText: String;
+        optionValue: GameConstants.SortOptionsEnum;
+        constructor(text, value) {
+            this.optionText = text;
+            this.optionValue = value;
+        }
+    }
+
+    export const SortOptions = [
+        new Option("Pokedex #", GameConstants.SortOptionsEnum.id),
+        new Option("Name", GameConstants.SortOptionsEnum.name),
+        new Option("Attack", GameConstants.SortOptionsEnum.attack),
+        new Option("Level", GameConstants.SortOptionsEnum.levelObservable),
+        new Option("Shiny", GameConstants.SortOptionsEnum.shiny),
+    ]
+
     export const RegionRoute = {
         0: 25,
         1: 0,
@@ -127,6 +152,7 @@ namespace GameConstants {
 
     // Map navigation
     export const AMOUNT_OF_ROUTES = 25;
+    export const AMOUNT_OF_ROUTES_KANTO = 25;
 
     /**
      * Each route contains a list of routenumbers that need to be completed
@@ -144,7 +170,7 @@ namespace GameConstants {
             8: [5, 6, 7],
             9: [4],
             10: [9],
-            11: [6, 12],
+            11: [6],
             12: [7, 10, 11],
             13: [11, 12],
             14: [13],
@@ -170,9 +196,10 @@ namespace GameConstants {
             8: GameConstants.Badge.Thunder,
             9: GameConstants.Badge.Cascade,
             11: GameConstants.Badge.Thunder,
-            13: GameConstants.Badge.Soul,
-            16: GameConstants.Badge.Soul,
-            19: GameConstants.Badge.Marsh,
+            12: GameConstants.Badge.Marsh,
+            13: GameConstants.Badge.Marsh,
+            16: GameConstants.Badge.Marsh,
+            19: GameConstants.Badge.Soul,
             21: GameConstants.Badge.Volcano,
             22: GameConstants.Badge.Earth,
             24: GameConstants.Badge.Cascade,
