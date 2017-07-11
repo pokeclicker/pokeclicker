@@ -22,6 +22,15 @@ namespace GameConstants {
     export const SHINY_CHANCE_BREEDING = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
 
+    /**
+     * idle: The game is not doing anything, the battle view isn't shown
+     * paused: The battle view is shown, but there are no game ticks
+     * fighting: On a route and battling a pokemon
+     * gym: Battling a gym
+     * dungeon: Exploring a dungeon
+     * safari: Exploring the safari zone
+     * town: In a town/pre-dungeon, town view is not shown
+     */
     export enum GameState {
         idle = 0,
         paused = 1,
