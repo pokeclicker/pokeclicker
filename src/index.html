@@ -287,7 +287,8 @@
                                     </button>
                                 </li>
                                 <li class="nav-item" data-bind="if:player.town().shop">
-                                    <button class="btn btn-secondary">
+                                    <button class="btn btn-secondary"
+                                            onclick="ShopHandler.showShop(player.town().shop())">
                                         Shop
                                     </button>
                                 </li>
@@ -365,6 +366,15 @@
                         </table>
                     </div>
 
+                </div>
+
+                <!--ShopView-->
+                <div id="shopView" data-bind="if: Game.gameState() == GameConstants.GameState.shop">
+                    <!--<ul data-bind="foreach: player.town().shop.items">-->
+                    <!--<li>-->
+                    <!--<button data-bind="text: $data.name">ItemName</button>-->
+                    <!--</li>-->
+                    <!--</ul>-->
                 </div>
             </div>
 

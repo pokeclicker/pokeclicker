@@ -1,10 +1,17 @@
+///<reference path="../shop/Shop.ts"/>
+///<reference path="../items/Pokeball.ts"/>
+///<reference path="../items/BattleItem.ts"/>
+///<reference path="../items/Berry.ts"/>
+///<reference path="../items/EnergyRestore.ts"/>
+///<reference path="../items/EvolutionStone.ts"/>
+///<reference path="../items/PokeBlock.ts"/>
+///<reference path="../items/Vitamin.ts"/>
 class Town {
     private _name: KnockoutObservable<string>;
     private _gym?: KnockoutObservable<Gym>;
     private _shop?: KnockoutObservable<Shop>;
     private _dungeon?: KnockoutObservable<Dungeon>;
     private _reqRoutes: number[];
-
 
     constructor(name: string, routes: number[], shop?: Shop, dungeon?: Dungeon) {
         this._name = ko.observable(name);
@@ -38,7 +45,7 @@ class Town {
 const TownList: { [name: string]: Town } = {};
 
 //TODO Add all towns
-TownList["Pewter City"] = new Town("Pewter City", [2]);
+TownList["Pewter City"] = new Town("Pewter City", [2], new Shop([new Pokeball(GameConstants.Pokeball.Pokeball), new BattleItem(GameConstants.BattleItemType.xClick)]));
 TownList["Cerulean City"] = new Town("Cerulean City", [4]);
 TownList["Vermillion City"] = new Town("Vermillion City", [6]);
 TownList["Celadon City"] = new Town("Celadon City", [8]);
@@ -48,7 +55,6 @@ TownList["Cinnabar Island"] = new Town("Cinnabar Island", [20]);
 TownList["Viridian City"] = new Town("Viridian City", [1]);
 TownList["Pallet Town"] = new Town("Pallet Town", []);
 TownList["Lavender Town"] = new Town("Lavender Town", [10]);
-
 
 //Dungeons
 TownList["Viridian Forest"] = new Town("Viridian Forest", [1]);

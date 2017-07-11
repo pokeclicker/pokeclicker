@@ -2,6 +2,7 @@ abstract class Item {
     name: KnockoutObservable<string>;
     basePrice: number;
     priceMultiplier: number;
+    type: any;
 
     constructor(name: string, basePrice: number, priceMultiplier: number) {
         this.name = ko.observable(name);

@@ -2,7 +2,9 @@ class Vitamin extends Item {
 
     type: GameConstants.VitaminType;
 
-    constructor(name: string, basePrice: number, priceMultiplier: number, type: GameConstants.VitaminType) {
+    constructor(type: GameConstants.VitaminType) {
+        let basePrice = 0;
+        let priceMultiplier = 1;
         super(name, basePrice, priceMultiplier);
         this.type = type;
     }

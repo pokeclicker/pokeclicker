@@ -1,12 +1,12 @@
-/**
- * Created by dennis on 11-07-17.
- */
+///<reference path="Item.ts"/>
 class EnergyRestore extends Item {
 
     type: GameConstants.EnergyRestoreSize;
 
-    constructor(name: string, basePrice: number, priceMultiplier: number, type: GameConstants.EnergyRestoreSize) {
-        super(name, basePrice, priceMultiplier);
+    constructor(type: GameConstants.EnergyRestoreSize) {
+        let basePrice = 100;
+        let priceMultiplier = 1;
+        super(GameConstants.EnergyRestoreSize[type], basePrice, priceMultiplier);
         this.type = type;
     }
 

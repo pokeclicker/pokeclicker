@@ -1,9 +1,12 @@
+///<reference path="Item.ts"/>
 class EvolutionStone extends Item {
 
     type: GameConstants.StoneType;
 
-    constructor(name: string, basePrice: number, priceMultiplier: number, type: GameConstants.StoneType) {
-        super(name, basePrice, priceMultiplier);
+    constructor(type: GameConstants.StoneType) {
+        let basePrice = 0;
+        let priceMultiplier = 1;
+        super(GameConstants.StoneType[type], basePrice, priceMultiplier);
         this.type = type;
     }
 

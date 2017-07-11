@@ -38,6 +38,7 @@ namespace GameConstants {
         dungeon = 4,
         safari = 5,
         town = 6,
+        shop = 7,
     }
 
     export enum Pokeball {
@@ -258,9 +259,9 @@ namespace GameConstants {
     }
 
     export enum EnergyRestoreSize {
-        Small,
-        Medium,
-        Large
+        SmallRestore,
+        MediumRestore,
+        LargeRestore
     }
 }
 
