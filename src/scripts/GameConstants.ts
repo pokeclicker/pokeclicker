@@ -54,11 +54,15 @@ namespace GameConstants {
         "Masterball" = 3,
     }
 
-    export enum PokeballCatchBonus {
-        "Pokeball" = 0,
-        "Greatball" = 5,
-        "Ultraball" = 10,
-        "Masterball" = 100,
+    export const PokeballCatchBonus = [
+        0,
+        5,
+        10,
+        100,
+    ];
+
+    export function getCatchBonus(ball:GameConstants.Pokeball) {
+        return GameConstants.PokeballCatchBonus[ball];
     }
 
     export enum Region {
