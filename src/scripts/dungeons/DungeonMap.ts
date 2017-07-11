@@ -29,6 +29,22 @@ class DungeonMap {
         this.moveToTile(new Point(x, y));
     }
 
+    public moveUp() {
+        this.moveToCoordinates(this.playerPosition().x, this.playerPosition().y - 1);
+    }
+
+    public moveRight() {
+        this.moveToCoordinates(this.playerPosition().x + 1, this.playerPosition().y);
+    }
+
+    public moveDown() {
+        this.moveToCoordinates(this.playerPosition().x, this.playerPosition().y + 1);
+    }
+
+    public moveLeft() {
+        this.moveToCoordinates(this.playerPosition().x - 1, this.playerPosition().y);
+    }
+    
     public moveToTile(point: Point) {
         if (this.hasAccesToTile(point)) {
             this.currentTile().hasPlayer = false;

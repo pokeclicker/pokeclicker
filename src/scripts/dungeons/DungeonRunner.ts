@@ -35,6 +35,10 @@ class DungeonRunner {
     }
 
     public static openChest(){
+        if(DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest){
+            return;
+        }
+
         DungeonRunner.chestsOpened++;
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
@@ -48,6 +52,10 @@ class DungeonRunner {
     }
 
     public static startBossFight(){
+        if(DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.boss || DungeonRunner.fightingBoss()){
+            return;
+        }
+
         DungeonRunner.fightingBoss(true);
         DungeonBattle.generateNewBoss();
     }
