@@ -49,6 +49,12 @@ namespace GameConstants {
         "Masterball" = 3,
     }
 
+    export enum Currency {
+        money,
+        questpoint,
+        dungeontoken,
+    }
+
     export const PokeballCatchBonus = [
         0,
         5,

@@ -6,15 +6,15 @@ class EvolutionStone extends Item {
     constructor(type: GameConstants.StoneType) {
         let basePrice = 0;
         let priceMultiplier = 1;
-        super(GameConstants.StoneType[type], basePrice, priceMultiplier);
+        super(GameConstants.StoneType[type], basePrice, priceMultiplier, GameConstants.Currency.money);
         this.type = type;
     }
 
-    public onBuy() {
+    public buy() {
         this.priceMultiplier++;
     }
 
-    public onUse() {
+    public use() {
         switch (this.type) {
             case GameConstants.StoneType.Fire: {
                 break;

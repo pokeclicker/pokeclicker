@@ -5,14 +5,14 @@ class PokeBlock extends Item {
     constructor(color: GameConstants.PokeBlockColor) {
         let basePrice = 0;
         let priceMultiplier = 1;
-        super(name, basePrice, priceMultiplier);
+        super(name, basePrice, priceMultiplier, GameConstants.Currency.money);
         this.type = color;
     }
 
-    onBuy() {
+    buy() {
     }
 
-    onUse() {
+    use() {
     }
 
 }

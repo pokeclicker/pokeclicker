@@ -63,7 +63,12 @@ class Player {
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
-        this._route = ko.observable(savedPlayer._route || 1);
+        if (savedPlayer._route == null || savedPlayer._route == 0) {
+            this._route = ko.observable(1);
+        } else {
+            this._route = ko.observable(savedPlayer._route)
+        }
+
         if (savedPlayer._caughtPokemonList) {
             tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
                 let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp);
@@ -234,6 +239,16 @@ class Player {
     public gainMoney(money: number) {
         // TODO add money multipliers
         this._money(Math.floor(this._money() + money));
+    }
+
+    public hasMoney(money: number) {
+        return this._money() >= money;
+    }
+
+    public payMoney(money: number) {
+        if (this.hasMoney(money)) {
+            this._money(Math.floor(this._money() - money));
+        }
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {

@@ -89,7 +89,8 @@
                 <div class="row justify-content-sm-center" style="text-align: center">
 
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn btn-success donate-button clickable">€1<br><img src="assets/images/pokemon/1.png">
+                        <button class="btn btn-success donate-button clickable">€1<br><img
+                                src="assets/images/pokemon/1.png">
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="YP9SQ748NN5EW">
@@ -99,7 +100,8 @@
                     </form>
 
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn btn-danger donate-button clickable">€3<br><img src="assets/images/pokemon/4.png">
+                        <button class="btn btn-danger donate-button clickable">€3<br><img
+                                src="assets/images/pokemon/4.png">
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="MR8497BXE7P3A">
@@ -111,7 +113,8 @@
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
                         <button data-html="true"
                                 title="Don't let the PokéDex order fool you, Charmander is and will always be the best starter. -Isha"
-                                class="btn btn-primary donate-button clickable">€5<br><img src="assets/images/pokemon/7.png">
+                                class="btn btn-primary donate-button clickable">€5<br><img
+                                src="assets/images/pokemon/7.png">
 
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
@@ -124,7 +127,8 @@
 
                 <div class="row justify-content-sm-center" style="text-align: center">
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn btn-warning donate-button clickable">€10<br><img src="assets/images/pokemon/25.png">
+                        <button class="btn btn-warning donate-button clickable">€10<br><img
+                                src="assets/images/pokemon/25.png">
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="N7NMLXFQDPPC6">
@@ -180,6 +184,7 @@
         <!--Middle column-->
         <div class="col-lg-6 push-lg-3">
             <div id="interactionView" class="page-item" style="background-color: white">
+                <!--RouteBattleView-->
                 <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.paused"
                      id="routeBattleView">
                     <div class="card">
@@ -245,7 +250,7 @@
                         <span data-bind="text: Battle.enemyPokemon().health">health</span><span>/</span>
                         <!---->
                         <span
-                            data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
+                                data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
                     </div>
                     <div class="card">
                         <table width="100%">
@@ -371,12 +376,56 @@
                 </div>
 
                 <!--ShopView-->
-                <div id="shopView" data-bind="if: Game.gameState() == GameConstants.GameState.shop">
-                    <!--<ul data-bind="foreach: player.town().shop.items">-->
-                    <!--<li>-->
-                    <!--<button data-bind="text: $data.name">ItemName</button>-->
-                    <!--</li>-->
-                    <!--</ul>-->
+                <div id="shopView"
+                     data-bind="if: Game.gameState() == GameConstants.GameState.shop">
+                    <div class="card">
+                        <span>Money: <span data-bind="text: player.money">todo</span></span>
+                    </div>
+                    <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
+                        <div class="col-sm-3">
+                            <div
+                                    data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
+                                <img src="" height="36px"
+                                     data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
+                                <p data-bind="text: name">Item Name</p>
+                                <p>
+                                    <img src=""
+                                         data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
+                                    <span data-bind="text: price()">Price</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-11 col-sm-10 col-md-11">
+                            <div class="input-group" style="margin-bottom: 6px">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger"
+                                            onclick="ShopHandler.resetAmount()">1</button>
+                                </span>
+                                <input id="amountOfItems" type="number" class="form-control form-control-number"
+                                       value="1" min="1" required name="amountOfItems">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary smallButton smallFont" type="button"
+                                            onclick="ShopHandler.increaseAmount(10)">+10</button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary smallButton smallFont"
+                                            type="button"
+                                            onclick="ShopHandler.increaseAmount(100)">+100</button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary smallButton smallFont"
+                                            type="button"
+                                            onclick="ShopHandler.increaseAmount(1000)">+1000</button>
+                                </span>
+                                <span class="input-group-btn" style="float: right;">
+                                    <button class="btn btn-success">Buy</button>
+                                    </span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -791,19 +840,23 @@
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.None}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Pokeball-small.png"
+                                    <img class="pokeball-small clickable"
+                                         src="assets/images/pokeball/Pokeball-small.png"
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Greatball-small.png"
+                                    <img class="pokeball-small clickable"
+                                         src="assets/images/pokeball/Greatball-small.png"
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Ultraball-small.png"
+                                    <img class="pokeball-small clickable"
+                                         src="assets/images/pokeball/Ultraball-small.png"
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Masterball-small.png"
+                                    <img class="pokeball-small clickable"
+                                         src="assets/images/pokeball/Masterball-small.png"
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
                                 </td>
                             </tr>
@@ -817,19 +870,23 @@
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.None}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Pokeball-small.png"
+                                    <img class="pokeball-small clickable"
+                                         src="assets/images/pokeball/Pokeball-small.png"
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Greatball-small.png"
+                                    <img class="pokeball-small clickable"
+                                         src="assets/images/pokeball/Greatball-small.png"
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Ultraball-small.png"
+                                    <img class="pokeball-small clickable"
+                                         src="assets/images/pokeball/Ultraball-small.png"
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Masterball-small.png"
+                                    <img class="pokeball-small clickable"
+                                         src="assets/images/pokeball/Masterball-small.png"
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
                                 </td>
                             </tr>
