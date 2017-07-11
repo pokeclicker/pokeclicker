@@ -195,5 +195,12 @@ namespace GameConstants {
             24: GameConstants.Badge.Cascade,
         }
     };
+
+    export enum Starter {
+        "None" = -1,
+        "Bulbasaur" = 0,
+        "Charmander" = 1,
+        "Squirtle" = 2,
+    }
 }
 

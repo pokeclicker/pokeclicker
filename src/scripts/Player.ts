@@ -20,6 +20,7 @@ class Player {
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
+    private _starter: GameConstants.Starter;
 
     public clickAttackObservable: KnockoutComputed<number>;
 
@@ -93,6 +94,7 @@ class Player {
             return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
+        this._starter = savedPlayer._starter || GameConstants.Starter.None;
 
         //TODO remove before deployment
         if (!debug) {
@@ -324,8 +326,16 @@ class Player {
         this._town = value;
     }
 
+    get starter(): GameConstants.Starter {
+        return this._starter;
+    }
+
+    set starter(value: GameConstants.Starter) {
+        this._starter = value;
+    }
+
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

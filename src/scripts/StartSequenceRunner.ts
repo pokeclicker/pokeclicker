@@ -1,13 +1,4 @@
-enum Starter {
-    "None" = -1,
-    "Bulbasaur" = 0,
-    "Charmander" = 1,
-    "Squirtle" = 2,
-}
-
 class StartSequenceRunner {
-
-    public static starter: Starter = Starter.None;
 
     public static start() {
         Game.gameState(GameConstants.GameState.paused);
@@ -15,10 +6,10 @@ class StartSequenceRunner {
 
     }
 
-    public static pickStarter(s: Starter) {
-        this.starter = s;
+    public static pickStarter(s: GameConstants.Starter) {
+        player.starter = s;
         $('#pickStarterModal').modal('hide');
-        let dataPokemon = PokemonHelper.getPokemonByName(Starter[this.starter]);
+        let dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[player.starter]);
         let shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
 
         Game.gameState(GameConstants.GameState.fighting);
@@ -59,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 
     $('#pickStarterModal').on('hidden.bs.modal', function () {
-        if (StartSequenceRunner.starter == Starter.None) {
+        if (player.starter == GameConstants.Starter.None) {
             $('#pickStarterModalText').text("I can't hold them off both! Please pick the pokémon you want to fight");
             $('#pickStarterModal').modal('show');
         }
