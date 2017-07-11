@@ -332,13 +332,23 @@
                                         Shop
                                     </button>
                                 </li>
-                                <li class="nav-item" data-bind="if:player.town().dungeon">
+                                <div data-bind="if:player.town().dungeon()" >
+                                <li class="nav-item" data-bind="if: player.town() instanceof DungeonTown">
                                     <button class="btn btn-secondary"
                                             onclick="DungeonRunner.initializeDungeon(player.town().dungeon())">
-                                        Dungeon
+                                        Start<br>
+                                        <span data-bind="text: player.town().dungeon().tokenCost"></span> tokens
                                     </button>
                                 </li>
+
+                                <li class="nav-item" data-bind="if:(!(player.town() instanceof DungeonTown) && player.town() instanceof Town)">
+                                    <button class="btn btn-secondary"
+                                            onclick="MapHelper.moveToTown(player.town().dungeon().name())">
+                                        <span data-bind="text: player.town().dungeon().name()"></span>
+                                    </button>
                                 </li>
+
+                                </div>
                             </ul>
                         </div>
                         <div class="col-7 no-gutters">
@@ -352,7 +362,7 @@
 
 
                     </div>
-                    <div data-bind="if: player.town().dungeon()">
+                    <div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
                         <div class="card">
                             <!--Display all available Pokémon in this dungeon-->
                             <ul class="list-inline" data-bind="foreach: player.town().dungeon().allPokemonNames">
@@ -855,7 +865,7 @@
                                   height="12.6" stroke="#6c8ebf" width="12.6" x="77.7" y="157.5"></rect>
 
                             <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="181.3" y="374.5"></rect>
-                            <rect data-bind="click:function(){MapHelper.moveToTown('Seafom Islands')}" class="city"
+                            <rect data-bind="click:function(){MapHelper.moveToTown('Seafoam Islands')}" class="city"
                                   id="Seafoam Islands" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                   height="12.6" stroke="#6c8ebf" width="12.6" x="182.7" y="375.9"></rect>
 

@@ -79,7 +79,7 @@ dungeonList["Rock Tunnel"] = new Dungeon("Rock Tunnel",
 dungeonList["Power Plant"] = new Dungeon("Power Plant",
     ["Pikachu", "Raichu", "Magnemite", "Magneton", "Grimer", "Muk", "Electrode"],
     13507,
-    [new DungeonBossPokemon("Zapdos", 101302, 50), new DungeonBossPokemon("Electabuzz", 67535, 35)],
+    [new DungeonBossPokemon("Electabuzz", 67535, 35), new DungeonBossPokemon("Zapdos", 101302, 50)],
     1000, GameConstants.Badge.Cascade, 8, 25
 );
 
@@ -93,7 +93,7 @@ dungeonList["Pokemon Tower"] = new Dungeon("Pokemon Tower",
 dungeonList["Seafoam Islands"] = new Dungeon("Seafoam Islands",
     ["Zubat", "Golbat", "Psyduck", "Golduck", "Slowpoke", "Slowbro", "Shellder", "Krabby", "Horsea", "Staryu"],
     17226,
-    [new DungeonBossPokemon("Articuno", 129195, 50), new DungeonBossPokemon("Seel", 86130, 35)],
+    [new DungeonBossPokemon("Seel", 86130, 35), new DungeonBossPokemon("Articuno", 129195, 50)],
     1250, GameConstants.Badge.Soul, 15, 30
 );
 
@@ -107,13 +107,13 @@ dungeonList["Pokemon Mansion"] = new Dungeon("Pokemon Mansion",
 dungeonList["Victory Road"] = new Dungeon("Victory Road",
     ["Zubat", "Golbat", "Machop", "Geodude", "Graveler", "Onix", "Marowak", "Venomoth"],
     24595,
-    [new DungeonBossPokemon("Moltres", 184462, 50), new DungeonBossPokemon("Machoke", 122975, 42)],
+    [new DungeonBossPokemon("Machoke", 122975, 42), new DungeonBossPokemon("Moltres", 184462, 50)],
     2000, GameConstants.Badge.Earth, 20, 40
 );
 
 dungeonList["Cerulean Cave"] = new Dungeon("Cerulean Cave",
     ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"],
     28735,
-    [new DungeonBossPokemon("Mewtwo", 215512, 70), new DungeonBossPokemon("Rhydon", 143675, 60)],
+    [new DungeonBossPokemon("Rhydon", 143675, 60),new DungeonBossPokemon("Mewtwo", 215512, 70)],
     2500, GameConstants.Badge.Earth, 20, 55
 );
