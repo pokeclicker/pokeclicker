@@ -11,6 +11,9 @@ class GymRunner {
     public static startGym(gym: Gym) {
         this.gymObservable(gym);
         if (Gym.isUnlocked(gym)) {
+            if (gym instanceof Champion) {
+                gym.setPokemon(player.starter);
+            }
             Game.gameState(GameConstants.GameState.idle);
 
             GymBattle.gym = gym;
