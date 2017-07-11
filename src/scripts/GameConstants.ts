@@ -15,7 +15,6 @@ namespace GameConstants {
 
     export const AMOUNT_OF_POKEMONS = 151;
 
-
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
@@ -56,7 +55,7 @@ namespace GameConstants {
         100,
     ];
 
-    export function getCatchBonus(ball:GameConstants.Pokeball) {
+    export function getCatchBonus(ball: GameConstants.Pokeball) {
         return GameConstants.PokeballCatchBonus[ball];
     }
 
@@ -77,6 +76,7 @@ namespace GameConstants {
     class Option {
         optionText: String;
         optionValue: GameConstants.SortOptionsEnum;
+
         constructor(text, value) {
             this.optionText = text;
             this.optionValue = value;
@@ -205,6 +205,62 @@ namespace GameConstants {
         "Bulbasaur" = 0,
         "Charmander" = 1,
         "Squirtle" = 2,
+    }
+
+    //
+    // export enum BattleItem {
+    //     'xAttack' = 0,
+    //     'xClick' = 1,
+    //     'xExp' = 2,
+    //     'XToken' = 3,
+    //     'xItem' = 4
+    // }
+
+    export enum StoneType {
+        Fire,
+        Water,
+        Thunder,
+        Leaf,
+        Moon,
+        Sun,
+    }
+
+    export enum BattleItemType {
+        xAttack,
+        xClick,
+        xExp,
+        XToken,
+        xItem
+    }
+
+    export enum BerryType {
+        Cheri,
+        Chesto,
+        Pecha,
+        Rawst,
+        Aspear,
+        Leppa,
+        Oran
+    }
+
+    export enum PokeBlockColor {
+        Black,
+        Red,
+        Gold,
+        Purple,
+        Gray,
+        White
+    }
+
+    export enum VitaminType {
+        Protein,
+        RareCandy
+    }
+
+    export enum EnergyRestoreSize {
+        Small,
+        Medium,
+        Large
     }
 }
 
