@@ -76,6 +76,10 @@ class PokemonHelper {
                 _b.shiny = Number(player.alreadyCaughtPokemonShiny(b.name));
             }
 
+            if( property == "attack" || property == "levelObservable" || property == "shiny"){
+                dir *= -1;
+            }
+
 
             //Compare by provided property 
             if (_a[property] == _b[property]) {
