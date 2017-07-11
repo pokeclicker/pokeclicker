@@ -17,3 +17,8 @@ class BattleItem extends Item {
     }
 }
 
+ItemList['xAttack'] = new BattleItem(GameConstants.BattleItemType.xAttack);
+ItemList['xClick'] = new BattleItem(GameConstants.BattleItemType.xClick);
+ItemList['xExp'] = new BattleItem(GameConstants.BattleItemType.xExp);
+ItemList['XToken'] = new BattleItem(GameConstants.BattleItemType.XToken);
+ItemList['xItem'] = new BattleItem(GameConstants.BattleItemType.xItem);

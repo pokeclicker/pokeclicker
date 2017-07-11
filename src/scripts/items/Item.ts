@@ -18,4 +18,14 @@ abstract class Item {
 
     abstract use();
 
+    increasePriceMultiplier() {
+        this.priceMultiplier *= 1.05;
+    }
+
+    decreasePriceMultiplier() {
+        this.priceMultiplier /= 1.05;
+    }
+
 }
+
+const ItemList: { [name: string]: Item } = {};

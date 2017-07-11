@@ -17,3 +17,9 @@ class PokeBlock extends Item {
 
 }
 
+ItemList['Black'] = new PokeBlock(GameConstants.PokeBlockColor.Black);
+ItemList['Red'] = new PokeBlock(GameConstants.PokeBlockColor.Red);
+ItemList['Gold'] = new PokeBlock(GameConstants.PokeBlockColor.Gold);
+ItemList['Purple'] = new PokeBlock(GameConstants.PokeBlockColor.Purple);
+ItemList['Gray'] = new PokeBlock(GameConstants.PokeBlockColor.Gray);
+ItemList['White'] = new PokeBlock(GameConstants.PokeBlockColor.White);

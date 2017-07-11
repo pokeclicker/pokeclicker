@@ -2,6 +2,7 @@ class ShopHandler {
     static shopObservable: KnockoutObservable<Shop> = ko.observable(new Shop([]));
     static selected: KnockoutObservable<number> = ko.observable(-1);
 
+
     public static showShop(shop: Shop) {
         Game.gameState(GameConstants.GameState.idle);
 
@@ -21,6 +22,7 @@ class ShopHandler {
         if (player.hasMoney(item.price())) {
             player.payMoney(item.price());
             item.buy();
+            item.increasePriceMultiplier();
         } else {
             //TODO make alert that shows you don't have enough money
         }

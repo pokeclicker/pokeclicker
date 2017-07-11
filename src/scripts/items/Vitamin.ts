@@ -15,3 +15,6 @@ class Vitamin extends Item {
     use() {
     }
 }
+
+ItemList['RareCandy'] = new Vitamin(GameConstants.VitaminType.RareCandy);
+ItemList['Protein'] = new Vitamin(GameConstants.VitaminType.Protein);

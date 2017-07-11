@@ -39,4 +39,10 @@ class EvolutionStone extends Item {
 
 }
 
+ItemList['Fire'] = new EvolutionStone(GameConstants.StoneType.Fire);
+ItemList['Water'] = new EvolutionStone(GameConstants.StoneType.Water);
+ItemList['Thunder'] = new EvolutionStone(GameConstants.StoneType.Thunder);
+ItemList['Leaf'] = new EvolutionStone(GameConstants.StoneType.Leaf);
+ItemList['Moon'] = new EvolutionStone(GameConstants.StoneType.Moon);
+ItemList['Sun'] = new EvolutionStone(GameConstants.StoneType.Sun);
 
