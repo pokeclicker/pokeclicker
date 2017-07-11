@@ -11,7 +11,37 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     let game: Game = new Game();
     game.start();
+
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    ko.bindingHandlers.tooltip = {
+        init: function(element, valueAccessor) {
+            var local = ko.utils.unwrapObservable(valueAccessor()),
+                options = {};
+
+            ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+            ko.utils.extend(options, local);
+
+            $(element).tooltip(options);
+
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                // $(element).tooltip("destroy");
+            });
+        },
+        options: {
+            placement: "bottom",
+            trigger: "click"
+        }
+    };
+
     ko.applyBindings(Game);
+
+
+
+
+
 });
 
 /**
@@ -31,6 +61,7 @@ class Game {
     start() {
         player.region = GameConstants.Region.kanto;
         this.load();
+        OakItemRunner.initialize();
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
     }
 

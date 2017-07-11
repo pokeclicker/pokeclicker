@@ -21,6 +21,7 @@ class Player {
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
     private _starter: GameConstants.Starter;
+    private _oakItemExp: Array<KnockoutObservable<number>>;
 
     public clickAttackObservable: KnockoutComputed<number>;
 
@@ -74,6 +75,9 @@ class Player {
         this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
+        this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
+            return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
+        });
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._region = savedPlayer._region || GameConstants.Region.kanto;
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
@@ -86,7 +90,7 @@ class Player {
             this._gymBadges.push(GameConstants.Badge.None)
         }
         this._sortOption = ko.observable(savedPlayer._sortOption || GameConstants.SortOptionsEnum.id);
-        this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false)
+        this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
         this.clickAttackObservable = ko.computed(function () {
             return this.calculateClickAttack()
         }, this);
@@ -106,6 +110,31 @@ class Player {
 
     public addRouteKill() {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
+    }
+
+
+
+    public calculateOakItemSlots():KnockoutObservable<number> {
+        let total = 0;
+        if(this.caughtPokemonList.length > GameConstants.OAKITEM_FIRST_UNLOCK){
+            total++;
+        }
+        if(this.caughtPokemonList.length > GameConstants.OAKITEM_SECOND_UNLOCK){
+            total++;
+        }
+
+        if(this.caughtPokemonList.length > GameConstants.OAKITEM_THIRD_UNLOCK){
+            total++;
+        }
+        return ko.observable(total);
+}
+
+    public gainOakItemExp(item: GameConstants.OakItem, amount: number) {
+        this.oakItemExp[item](this.oakItemExp[item]() + amount)
+    }
+
+    public getOakItemExp(item: GameConstants.OakItem): number {
+        return this.oakItemExp[item]();
     }
 
     /**
@@ -236,6 +265,16 @@ class Player {
         this._money(Math.floor(this._money() + money));
     }
 
+    public hasMoney(money: number) {
+        return this._money() >= money;
+    }
+
+    public payMoney(money: number) {
+        if (this.hasMoney(money)) {
+            this._money(Math.floor(this._money() - money));
+        }
+    }
+
     public gainExp(exp: number, level: number, trainer: boolean) {
         // TODO add exp multipliers
         let trainerBonus = trainer ? 1.5 : 1;
@@ -332,6 +371,14 @@ class Player {
 
     set starter(value: GameConstants.Starter) {
         this._starter = value;
+    }
+
+    get oakItemExp(): Array<KnockoutObservable<number>> {
+        return this._oakItemExp;
+    }
+
+    set oakItemExp(value: Array<KnockoutObservable<number>>) {
+        this._oakItemExp = value;
     }
 
     public toJSON() {

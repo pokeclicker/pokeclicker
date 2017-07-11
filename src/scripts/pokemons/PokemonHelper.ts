@@ -21,7 +21,9 @@ class PokemonHelper {
 
     public static calculateLevel(pokemon: CaughtPokemon): number {
         let level;
+        console.log("start");
         switch (PokemonHelper.getPokemonByName(pokemon.name).levelType) {
+
             case GameConstants.LevelType.slow:
                 level = Math.pow(pokemon.exp() * 4 / 5, 1 / 3);
                 break;
@@ -46,6 +48,7 @@ class PokemonHelper {
                 level = Math.pow(30 * pokemon.exp(), 0.475) / (6 * Math.sqrt(5));
                 break;
         }
+        console.log("end" + pokemon.name);
         return Math.max(1, Math.min(100, Math.floor(level)));
     }
 
