@@ -180,7 +180,7 @@
         <!--Middle column-->
         <div class="col-lg-6 push-lg-3">
             <div id="interactionView" class="page-item" style="background-color: white">
-                <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting"
+                <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.paused"
                      id="routeBattleView">
                     <div class="card">
                         <span>Money: <span data-bind="text: player.money">todo</span></span>
