@@ -27,7 +27,14 @@ body {
 
 .donate-button {
   margin: 5px;
-  cursor: pointer;
+}
+
+button {
+  cursor:pointer;
+}
+
+body:hover {
+  cursor: default;
 }
 
 .donate-button-mew {
@@ -149,6 +156,17 @@ body {
                         not supported by any browser */
 }
 
+img {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
 img {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Chrome/Safari/Opera */
