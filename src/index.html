@@ -187,7 +187,8 @@
                     </div>
                     <div>
                         <div class="col-lg-12" style="display: block;">
-                            Route <span data-bind="text: player.route">number</span>
+                            <span>Route</span>
+                            <span data-bind="text: player.route">number</span>
 
                             <!--If all Pokémon on the route are caught-->
                             <span data-bind="if: (!RouteHelper.routeCompleted(player.route(), player.region, true) && RouteHelper.routeCompleted(player.route(), player.region, false))">
@@ -202,7 +203,7 @@
                             </span>
 
                             <br>
-                            <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
+                            <span data-bind="text: player.routeKillsObservable(player.route())">kills</span><span>/</span><span
                                 data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span>
 
@@ -238,7 +239,9 @@
                                 </div>
                             </div>
                         </div>
-                        <span data-bind="text: Battle.enemyPokemon().health">health</span>/<span
+                        <span data-bind="text: Battle.enemyPokemon().health">health</span><span>/</span>
+                        <!---->
+                        <span
                             data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
                     </div>
                     <div class="card">
@@ -346,7 +349,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span data-bind="text: GymBattle.enemyPokemon().health">health</span>/<span
+                        <span data-bind="text: GymBattle.enemyPokemon().health">health</span><span>/</span><span
                             data-bind="text: GymBattle.enemyPokemon().maxHealth">maxHealth</span>
                     </div>
                     <div class="card">
