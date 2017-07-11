@@ -261,11 +261,11 @@
 
                 <!--TownView-->
                 <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
-                     class="justify-content-lg-center no-gutters no-select">
-                    <div class="row justify-content-lg-center no-gutters" style="min-height: 100px;">
+                     class="justify-content-center no-gutters no-select">
+                    <div class="row justify-content-center no-gutters" style="min-height: 100px;">
                         <div class="col no-gutters">
                             <div data-bind="if: player.town() instanceof PokemonLeague">
-                                <ul class="nav flex-lg-column featureList pokemonLeagueList"
+                                <ul class="nav flex-sm-column featureList pokemonLeagueList"
                                     data-bind="foreach: player.town().gymList">
                                     <li class="nav-item">
                                         <button
@@ -278,7 +278,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <ul class="nav flex-lg-column featureList">
+                            <ul class="nav flex-sm-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
                                     <button data-bind="disable: !Gym.isUnlocked(player.town().gym()),
                                                        attr: { class: Gym.calculateCssClass(player.town().gym()) }"
