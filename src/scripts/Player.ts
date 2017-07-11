@@ -20,6 +20,7 @@ class Player {
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
+    private _starter: GameConstants.Starter;
 
     public clickAttackObservable: KnockoutComputed<number>;
 
@@ -37,24 +38,26 @@ class Player {
             return this._pokeballs[ball]();
         }, this);
     }
-    public setAlreadyCaughtBallSelection(ball : GameConstants.Pokeball){
+
+    public setAlreadyCaughtBallSelection(ball: GameConstants.Pokeball) {
         this._alreadyCaughtBallSelection(ball);
     }
 
-    public setNotCaughtBallSelection(ball : GameConstants.Pokeball){
+    public setNotCaughtBallSelection(ball: GameConstants.Pokeball) {
         this._notCaughtBallSelection(ball);
     }
 
-    public gainPokeballs(ball : GameConstants.Pokeball, amount:number){
+    public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
         this._pokeballs[ball](this._pokeballs[ball]() + amount)
     }
 
     public usePokeball(ball: GameConstants.Pokeball): void {
-        this._pokeballs[ball](this._pokeballs[ball]() -1)
+        this._pokeballs[ball](this._pokeballs[ball]() - 1)
     }
 
 
     constructor(savedPlayer?) {
+        let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
@@ -90,7 +93,15 @@ class Player {
         this.pokemonAttackObservable = ko.computed(function () {
             return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
         }, this);
-        this._town = ko.observable(TownList["Pallet Town"])
+        this._town = ko.observable(TownList["Pallet Town"]);
+        this._starter = savedPlayer._starter || GameConstants.Starter.None;
+
+        //TODO remove before deployment
+        if (!debug) {
+            if (!saved) {
+                StartSequenceRunner.start()
+            }
+        }
     }
 
     public addRouteKill() {
@@ -107,7 +118,7 @@ class Player {
         // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
         // TODO factor in types
         // TODO start at 0
-        let attack = 5;
+        let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
             attack += pokemon.attack();
         }
@@ -148,7 +159,7 @@ class Player {
      * @param shiny if the pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public calculatePokeballToUse(alreadyCaught: boolean, shiny:boolean): GameConstants.Pokeball {
+    public calculatePokeballToUse(alreadyCaught: boolean, shiny: boolean): GameConstants.Pokeball {
         let pref: GameConstants.Pokeball;
         if (alreadyCaught) {
             pref = this._alreadyCaughtBallSelection();
@@ -157,7 +168,7 @@ class Player {
         }
 
         // Always throw the highest available Pokéball at shinies
-        if(shiny){
+        if (shiny) {
             pref = GameConstants.Pokeball.Masterball;
         }
 
@@ -315,8 +326,16 @@ class Player {
         this._town = value;
     }
 
+    get starter(): GameConstants.Starter {
+        return this._starter;
+    }
+
+    set starter(value: GameConstants.Starter) {
+        this._starter = value;
+    }
+
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

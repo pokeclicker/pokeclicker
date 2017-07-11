@@ -36,7 +36,7 @@
     <link href="styles/styles.min.css" rel="stylesheet">
 
 </head>
-<body>
+<body class="no-select">
 
 <div class="dropdown clearfix" style="position:absolute; right:0; top:0">
     <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">Start
@@ -89,7 +89,7 @@
                 <div class="row justify-content-sm-center" style="text-align: center">
 
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn btn-success donate-button">€1<br><img src="assets/images/pokemon/1.png">
+                        <button class="btn btn-success donate-button clickable">€1<br><img src="assets/images/pokemon/1.png">
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="YP9SQ748NN5EW">
@@ -99,7 +99,7 @@
                     </form>
 
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn btn-danger donate-button">€3<br><img src="assets/images/pokemon/4.png">
+                        <button class="btn btn-danger donate-button clickable">€3<br><img src="assets/images/pokemon/4.png">
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="MR8497BXE7P3A">
@@ -111,7 +111,7 @@
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
                         <button data-html="true"
                                 title="Don't let the PokéDex order fool you, Charmander is and will always be the best starter. -Isha"
-                                class="btn btn-primary donate-button">€5<br><img src="assets/images/pokemon/7.png">
+                                class="btn btn-primary donate-button clickable">€5<br><img src="assets/images/pokemon/7.png">
 
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
@@ -124,7 +124,7 @@
 
                 <div class="row justify-content-sm-center" style="text-align: center">
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn btn-warning donate-button">€10<br><img src="assets/images/pokemon/25.png">
+                        <button class="btn btn-warning donate-button clickable">€10<br><img src="assets/images/pokemon/25.png">
                         </button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="N7NMLXFQDPPC6">
@@ -134,7 +134,7 @@
                     </form>
 
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn donate-button-mew donate-button">€20<br><img
+                        <button class="btn donate-button-mew donate-button clickable">€20<br><img
                                 src="assets/images/pokemon/151.png"></button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="HJHXNGD3H5BH6">
@@ -144,7 +144,7 @@
                     </form>
 
                     <form target="_blank" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-                        <button class="btn btn-default donate-button-unown donate-button">Custom<br><img
+                        <button class="btn btn-default donate-button-unown donate-button clickable">Custom<br><img
                                 src="assets/images/pokemon/unown.png"></button>
                         <input type="hidden" name="cmd" value="_s-xclick">
                         <input type="hidden" name="hosted_button_id" value="XKQMADJLWZZC8">
@@ -160,7 +160,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default clickable" data-dismiss="modal">Close</button>
             </div>
 
         </div>
@@ -181,17 +181,36 @@
         <div class="col-lg-6 push-lg-3">
             <div id="interactionView" class="page-item" style="background-color: white">
                 <!--Use the base battle layout for fighting and dungeons.-->
-                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.dungeon)"
+                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.dungeon || Game.gameState() == GameConstants.GameState.paused)"
                      id="routeBattleView">
                     <div class="card">
                         <span>Money: <span data-bind="text: player.money">todo</span></span>
                     </div>
                     <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting">
                         <div style="height: 190px; display: block;" class="col-lg-12">
-
-                            Route <span data-bind="text: player.route">number</span><br>
+                    <div>
+                        <div class="col-lg-12" style="display: block;">
+                            <div data-bind="if: player.caughtPokemonList.length > 0">
+                                                   Route <span data-bind="text: player.route">number</span><br>
                             <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
                                 data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
+                                <!--If all Pokémon on the route are caught-->
+                                <span data-bind="if: (!RouteHelper.routeCompleted(player.route(), player.region, true) && RouteHelper.routeCompleted(player.route(), player.region, false))">
+                                <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                                     src="assets/images/pokeball/Pokeball-small.png"/>
+                                </span>
+
+                                <!--If all Pokémon on the route are caught shiny-->
+                                <span data-bind="if: RouteHelper.routeCompleted(player.route(), player.region, true)">
+                                <img title="You have captured all Pokémon shiny on this route!"
+                                     class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                                </span>
+
+                                <br>
+                                <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
+                                    data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
+                            </div>
+
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span>
 
                             <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
@@ -209,8 +228,9 @@
                             <br>
                             <div style="height: 96px;">
                                 <div data-bind="ifnot: Battle.catching">
-                                    <img id="enemy"
-                                         data-bind="click: function() {Battle.clickAttack()}, attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
+                                    <img class="clickable" id="enemy"
+                                         data-bind="click: function() {Battle.clickAttack()},
+                                                    attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
@@ -226,7 +246,9 @@
                                 </div>
                             </div>
                         </div>
-                        <span data-bind="text: Battle.enemyPokemon().health">health</span>/<span
+                        <span data-bind="text: Battle.enemyPokemon().health">health</span><span>/</span>
+                        <!---->
+                        <span
                             data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
                     </div>
 
@@ -302,11 +324,11 @@
 
                 <!--TownView-->
                 <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
-                     class="justify-content-lg-center no-gutters no-select">
-                    <div class="row justify-content-lg-center no-gutters" style="min-height: 100px">
+                     class="justify-content-center no-gutters no-select">
+                    <div class="row justify-content-center no-gutters" style="min-height: 100px;">
                         <div class="col no-gutters">
                             <div data-bind="if: player.town() instanceof PokemonLeague">
-                                <ul class="nav flex-lg-column featureList pokemonLeagueList"
+                                <ul class="nav flex-sm-column featureList pokemonLeagueList"
                                     data-bind="foreach: player.town().gymList">
                                     <li class="nav-item">
                                         <button
@@ -319,7 +341,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <ul class="nav flex-lg-column featureList">
+                            <ul class="nav flex-sm-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
                                     <button data-bind="disable: !Gym.isUnlocked(player.town().gym()),
                                                        attr: { class: Gym.calculateCssClass(player.town().gym()) }"
@@ -393,7 +415,7 @@
                             <div class="row">
                                 <div class="col-sm-4 offset-sm-4">
                                     <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
-                                    <div style="height: 96px;">
+                                    <div class="clickable" style="height: 96px;">
                                         <img id="gymEnemy" src=""
                                              data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
                                     </div>
@@ -422,7 +444,7 @@
                                 </div>
                             </div>
                         </div>
-                        <span data-bind="text: GymBattle.enemyPokemon().health">health</span>/<span
+                        <span data-bind="text: GymBattle.enemyPokemon().health">health</span><span>/</span><span
                             data-bind="text: GymBattle.enemyPokemon().maxHealth">maxHealth</span>
                     </div>
                     <div class="card">
@@ -901,28 +923,28 @@
         <div class="col-lg-3 pull-lg-6">
             <div class="page-item" style="background-color: white; min-height: 180px">
                 <div class="row justify-content-sm-center">
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <span>Caught Pokémon</span>
                         <table class="table pokeball-table borderless">
                             <tr>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/None.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.None}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/Pokeball-small.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Pokeball-small.png"
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/Greatball-small.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Greatball-small.png"
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/Ultraball-small.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Ultraball-small.png"
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/Masterball-small.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Masterball-small.png"
                                          data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
                                 </td>
                             </tr>
@@ -932,23 +954,23 @@
                         <table class="table pokeball-table borderless">
                             <tr>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/None.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.None}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/Pokeball-small.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Pokeball-small.png"
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/Greatball-small.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Greatball-small.png"
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/Ultraball-small.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Ultraball-small.png"
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
                                 </td>
                                 <td>
-                                    <img class="pokeball-small" src="assets/images/pokeball/Masterball-small.png"
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Masterball-small.png"
                                          data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
                                 </td>
                             </tr>
@@ -975,7 +997,7 @@
                 </select>
                 <p>
                     Reverse
-                    <input type='checkbox' data-bind="checked: player._sortDescending"/>
+                    <input class="clickable" type='checkbox' data-bind="checked: player._sortDescending"/>
                 </p>
                 <table id="pokemonList" class="table table-striped table-hover">
                     <thead>
@@ -1027,6 +1049,142 @@
                         <img src="" width="56px"
                              data-bind="attr:{ src: '/assets/images/badges/' + GymRunner.gymObservable().leaderName + '.png'}">
 
+                    </div>
+                    <div data-bind="if: !(GymRunner.gymObservable() instanceof Champion)">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    <div data-bind="if: GymRunner.gymObservable() instanceof Champion">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                    onclick="$('#hallOfFameModal').modal('show')">
+                                Next
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Sequence Modal-->
+        <div class="modal" id="startSequenceModal" tabindex="-1" role="dialog"
+             aria-labelledby="startSequenceModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src="assets/images/oak.png">
+                            <h5 class="modal-title" id="startSequenceModalLabel">Professor Oak</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p>Hello, there! Glad to meet you! Welcome to the world of Pokémon!<br>
+                            My name is Oak. People affectionately refer to me as the Pokémon Professor.<br>
+                            This world… …is inhabited far and wide by creatures called Pokémon!<br>
+                            For some people, Pokémon are pets. Other use them for battling.<br>
+                            As for myself… I study Pokémon as a profession.<br>
+                            However, your own very Pokémon legend is about to unfold!<br>
+                            A world of dreams and adventures with Pokémon awaits! Let's go!
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pick Starter Modal-->
+        <div class="modal" id="pickStarterModal" tabindex="-1" role="dialog"
+             aria-labelledby="pickStarterModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src="assets/images/oak.png">
+                            <h5 class="modal-title" id="pickStarterModalLabel">Professor Oak</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p id="pickStarterModalText">Oh No! We got ambushed by these pokémon!<br>
+                            I can only hold off two! Pick the one you want to fight!</p>
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2">
+                                <div class="row">
+
+                                    <div class="col">
+                                        <input class="image-starter" type="image" src="assets/images/pokemon/1.png"
+                                               onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Bulbasaur)">
+                                    </div>
+                                    <div class="col">
+                                        <input class="image-starter" type="image" src="assets/images/pokemon/4.png"
+                                               onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Charmander)">
+                                    </div>
+                                    <div class="col">
+                                        <input class="image-starter" type="image" src="assets/images/pokemon/7.png"
+                                               onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Squirtle)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>You can click on it to inflict damage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Starter Caught Modal-->
+        <div class="modal" id="starterCaughtModal" tabindex="-1" role="dialog"
+             aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src="assets/images/oak.png">
+                            <h5 class="modal-title" id="starterCaughtModalLabel">Professor Oak</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Hm! Excellent! You have caught your first pokémon!<br>
+                            This is where your journey begins. <br>
+                            You can progress to the next route after you have defeated 10 pokémon.
+
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hall of Fame Modal -->
+        <div class="modal fade" id="hallOfFameModal" tabindex="-1" role="dialog"
+             aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src=""
+                                 data-bind="attr:{ src: '/assets/images/oak.png'}">
+                            <h5 class="modal-title" id="hallOfFameModalLabel">Professor Oak</h5>
+
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            So, you won! Congratulations! You're the new Pokémon League champion! You've grown up so
+                            much since you first left with <span
+                                data-bind="text: GameConstants.Starter[player.starter]">starter</span>! You have worked
+                            hard to become the new League Champion!
+                        </p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>

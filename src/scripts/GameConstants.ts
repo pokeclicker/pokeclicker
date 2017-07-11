@@ -36,6 +36,17 @@ namespace GameConstants {
         boss,
     }
 
+    /**
+     * idle: The game is not doing anything, the battle view isn't shown
+     * paused: The battle view is shown, but there are no game ticks
+     * fighting: On a route and battling a pokemon
+     * gym: Battling a gym
+     * dungeon: Exploring a dungeon
+     * safari: Exploring the safari zone
+     * town: In a town/pre-dungeon, town view is not shown
+     */
+
+
     export enum GameState {
         idle = 0,
         paused = 1,
@@ -208,5 +219,12 @@ namespace GameConstants {
             24: GameConstants.Badge.Cascade,
         }
     };
+
+    export enum Starter {
+        "None" = -1,
+        "Bulbasaur" = 0,
+        "Charmander" = 1,
+        "Squirtle" = 2,
+    }
 }
 

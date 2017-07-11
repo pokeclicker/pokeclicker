@@ -31,7 +31,14 @@ body {
 
 .donate-button {
   margin: 5px;
-  cursor: pointer;
+}
+
+button {
+  cursor:pointer;
+}
+
+body:hover {
+  cursor: default;
 }
 
 .donate-button-mew {
@@ -84,6 +91,18 @@ body {
   margin-left: 5px;
   line-height: 40px;
   text-align: left;
+
+  span {
+    margin-left: 0;
+  }
+}
+
+.image-starter{
+  border:1px solid white;
+}
+
+.image-starter:hover{
+  border:1px solid #1d93d1;
 }
 
 .table {
@@ -100,7 +119,7 @@ body {
 
 .pokemon-list-container {
   max-height: 515px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 #pokemonList {
@@ -142,6 +161,17 @@ body {
 }
 
 img {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+img {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Chrome/Safari/Opera */
   -moz-user-select: none; /* Firefox */
@@ -149,4 +179,9 @@ img {
   user-select: none;
   /* Non-prefixed version, currently
                         not supported by any browser */
+}
+
+.featureList .btn {
+  padding: 6px;
+  white-space: normal;
 }
