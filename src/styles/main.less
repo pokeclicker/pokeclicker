@@ -87,6 +87,18 @@ body:hover {
   margin-left: 5px;
   line-height: 40px;
   text-align: left;
+
+  span {
+    margin-left: 0;
+  }
+}
+
+.image-starter{
+  border:1px solid white;
+}
+
+.image-starter:hover{
+  border:1px solid #1d93d1;
 }
 
 .table {
@@ -103,7 +115,7 @@ body:hover {
 
 .pokemon-list-container {
   max-height: 515px;
-  overflow: scroll;
+  overflow: auto;
 }
 
 #pokemonList {
@@ -163,4 +175,9 @@ img {
   user-select: none;
   /* Non-prefixed version, currently
                         not supported by any browser */
+}
+
+.featureList .btn {
+  padding: 6px;
+  white-space: normal;
 }
