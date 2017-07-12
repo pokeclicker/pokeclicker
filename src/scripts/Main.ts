@@ -8,7 +8,7 @@ const debug = false;
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
-
+    OakItemRunner.initialize();
     let game: Game = new Game();
     game.start();
 
@@ -60,7 +60,6 @@ class Game {
 
     start() {
         player.region = GameConstants.Region.kanto;
-        OakItemRunner.initialize();
         this.load();
 
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
