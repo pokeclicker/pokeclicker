@@ -7,7 +7,6 @@ class OakItem {
     public expGain: number;
     public level: KnockoutObservable<number>;
     public isActive: KnockoutObservable<boolean>;
-
     public id: GameConstants.OakItem;
 
 
@@ -21,6 +20,10 @@ class OakItem {
         this.level = ko.observable(0);
         this.id = GameConstants.OakItem[name];
         this.isActive = ko.observable(false);
+    }
+
+    public isUnlocked():boolean{
+        return player.caughtPokemonList.length >= this.unlockReq;
     }
 
     public expPercentage(): number {

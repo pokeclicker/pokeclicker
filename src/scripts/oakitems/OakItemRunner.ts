@@ -2,10 +2,12 @@ class OakItemRunner {
 
     public static oakItemList: KnockoutObservable<OakItem>[];
     public static blankOakItem: OakItem = new OakItem(" ", Number.MAX_VALUE, "", 0, 0, 0);
-    public static inspectedItem: KnockoutObservable<OakItem> = ko.observable(OakItemRunner.blankOakItem);
-    public static selectedItem:  KnockoutObservable<OakItem> = ko.observable(OakItemRunner.blankOakItem);
+    public static inspectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2))
+    public static selectedItem:  KnockoutObservable<OakItem> = ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2))
     public static initialize() {
         OakItemRunner.oakItemList = [];
+
+        // TODO implement their functionality!
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Amulet Coin", 40, "Gain more coins from battling", 25, 5, 1)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Poison Barb", 50, "Clicks do more damage", 25, 5, 3)));
@@ -14,6 +16,8 @@ class OakItemRunner {
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Shiny Charm", 80, "Encounter more shinies", 50, 100, 150)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Blaze Cassette", 90, "Hatch eggs faster", 50, 10, 10)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Cell Battery", 100, "Regenerate more mining energy", 25, 5, 4)));
+        let item: OakItem = OakItemRunner.getOakItemByName("Magic Ball");
+        OakItemRunner.selectedItem(item);
     }
 
     public static hover(name:string){
@@ -25,8 +29,9 @@ class OakItemRunner {
     }
 
     public static click(name:string){
-        OakItemRunner.selectedItem(OakItemRunner.getOakItemByName(name));
-        OakItemRunner.getOakItemByName(name).use();
+        let item: OakItem = OakItemRunner.getOakItemByName(name);
+        OakItemRunner.selectedItem(item);
+        OakItemRunner.activateOakItem(item.id);
     }
 
     public static getOakItemByName(name:string): OakItem{
@@ -41,24 +46,16 @@ class OakItemRunner {
         if (player.calculateOakItemSlots()() == 1) {
             OakItemRunner.deactivateAllOakItems();
             OakItemRunner.oakItemList[id]().isActive(true);
-            player.oakItemsEquipped.push(OakItemRunner.oakItemList[id].name);
         }
-
-        else if (player.oakItemSlots == 2) {
+        else {
             if (OakItemRunner.oakItemList[id]().isActive()) {
                 OakItemRunner.oakItemList[id]().isActive(false);
-                for (let i = 0; i < player.oakItemsEquipped.length; i++) {
-                    if (player.oakItemsEquipped[i] === OakItemRunner.oakItemList[id].name) {
-                        player.oakItemsEquipped.splice(i, 1);
-                        i--;
-                    }
-                }
+
             } else {
-                if (OakItemRunner.getTotalActiveOakItems() < player.oakItemSlots) {
+                if (OakItemRunner.getTotalActiveOakItems() < player.calculateOakItemSlots()()) {
                     OakItemRunner.oakItemList[id]().isActive(true);
-                    player.oakItemsEquipped.push(OakItemRunner.oakItemList[id].name);
                 } else {
-                    console.log("You can only have " + player.calculateOakItemSlots()() + " Oak items active at the same time", "error");
+                    console.log("You can only have " + player.calculateOakItemSlots()() + " Oak items active at the same time");
                 }
             }
         }
@@ -67,7 +64,7 @@ class OakItemRunner {
     public static getTotalActiveOakItems() {
         let count = 0;
         for (let i = 0; i < OakItemRunner.oakItemList.length; i++) {
-            if (OakItemRunner.oakItemList[i]().isActive(true)) {
+            if (OakItemRunner.oakItemList[i]().isActive()) {
                 count++;
             }
         }
@@ -81,23 +78,19 @@ class OakItemRunner {
         player.oakItemsEquipped = [];
     }
 
-    public static isActive(oakItemName) {
+    public static isActive(oakItemName) :boolean{
         for (let i = 0; i < OakItemRunner.oakItemList.length; i++) {
-            if (OakItemRunner.oakItemList[i].name == oakItemName) {
-                return OakItemRunner.oakItemList[i].active;
+            if (OakItemRunner.oakItemList[i]().name() == oakItemName) {
+                return OakItemRunner.oakItemList[i]().isActive();
             }
         }
     }
 
-
-
-    public alreadyOakItem(name) {
-        for (var i = 0; i < OakItemRunner.oakItemList.length; i++) {
-            if (OakItemRunner.oakItemList[i].name == name) {
-                return true;
+    public static isUnlocked(oakItemName) :boolean{
+        for (let i = 0; i < OakItemRunner.oakItemList.length; i++) {
+            if (OakItemRunner.oakItemList[i]().name() == oakItemName) {
+                return OakItemRunner.oakItemList[i]().isUnlocked();
             }
         }
-        return false;
     }
-
 }

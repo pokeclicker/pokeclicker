@@ -22,7 +22,7 @@ class Player {
     private _town: KnockoutObservable<Town>;
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
-
+    private _oakItemsEquipped: KnockoutObservableArray<string>;
     public clickAttackObservable: KnockoutComputed<number>;
 
     public pokemonAttackObservable: KnockoutComputed<number>;
@@ -78,6 +78,7 @@ class Player {
         this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
         });
+        this._oakItemsEquipped = ko.observableArray<string>(savedPlayer._oakItemsEquipped);
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._region = savedPlayer._region || GameConstants.Region.kanto;
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
@@ -363,6 +364,14 @@ class Player {
 
     set town(value: KnockoutObservable<Town>) {
         this._town = value;
+    }
+
+    get oakItemsEquipped(): KnockoutObservableArray<string> {
+        return this._oakItemsEquipped;
+    }
+
+    set oakItemsEquipped(value: KnockoutObservableArray<string>) {
+        this._oakItemsEquipped = value;
     }
 
     get starter(): GameConstants.Starter {
