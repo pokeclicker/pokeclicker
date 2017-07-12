@@ -417,8 +417,8 @@
                                             onclick="ShopHandler.increaseAmount(100)">+100</button>
                                 </span>
                                 <span class="input-group-btn" style="float: right;">
-                                    <button class="btn btn-success"
-                                            data-bind="text: ShopHandler.totalPrice">Buy</button>
+                                    <button data-bind="text: ShopHandler.totalPrice, attr: {class: ShopHandler.calculateButtonCss()}"
+                                            onclick="ShopHandler.buyItem()">Buy</button>
                                     </span>
                             </div>
                         </div>

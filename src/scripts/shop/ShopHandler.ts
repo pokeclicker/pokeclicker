@@ -3,7 +3,6 @@ class ShopHandler {
     static selected: KnockoutObservable<number> = ko.observable(0);
     static amount: KnockoutObservable<number> = ko.observable(1);
     static totalPrice: KnockoutComputed<number> = ko.computed(function () {
-        console.log("change");
         let item: Item = ShopHandler.shopObservable().items()[ShopHandler.selected()];
         if (item == null) {
             return 0;
@@ -30,7 +29,7 @@ class ShopHandler {
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
         if (player.hasMoney(this.totalPrice())) {
-            player.payMoney(item.price());
+            player.payMoney(this.totalPrice());
             item.buy(this.amount());
             item.increasePriceMultiplier(this.amount());
         } else {
@@ -55,6 +54,14 @@ class ShopHandler {
             return "shopItem clickable btn shopItemSelected"
         } else {
             return "shopItem clickable btn"
+        }
+    }
+
+    public static calculateButtonCss(): string {
+        if (player.hasMoney(ShopHandler.totalPrice())) {
+            return "btn btn-success"
+        } else {
+            return "btn btn-danger"
         }
     }
 }
