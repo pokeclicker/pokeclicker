@@ -19,13 +19,13 @@ abstract class Item {
     abstract use();
 
     increasePriceMultiplier(n = 1) {
-        console.log("increasing by" + n);
         this.priceMultiplier = this.priceMultiplier * Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, n);
-        console.log(this.priceMultiplier);
+        this.price(Math.round(this.basePrice * this.priceMultiplier));
     }
 
     decreasePriceMultiplier(n = 1) {
-        this.priceMultiplier = this.priceMultiplier / Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, n);
+        this.priceMultiplier = Math.max(1, this.priceMultiplier / Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, n));
+        this.price(Math.round(this.basePrice * this.priceMultiplier));
     }
 
 }
