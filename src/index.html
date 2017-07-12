@@ -915,12 +915,9 @@
                                 <span data-bind="text: OakItemRunner.inspectedItem().description"></span>
                             </div>
                         </div>
-                        <div class="row justify-content-sm-center no-gutters">
 
-                            <div class="col">
-                                Lvl.<span data-bind="text: OakItemRunner.inspectedItem().level()"></span>
-                            </div>
-                            <div class="col">
+                        <div class="row justify-content-sm-center">
+                            <div class="col-sm-11 col-md-8">
                                 <div class="progress" style="margin-top: 12px"
                                      data-bind="value: 'exp', tooltip: { title: OakItemRunner.inspectedItem().expProgress, trigger: 'hover' }">
                                     <div class="progress-bar bg-success" role="progressbar"
@@ -938,6 +935,13 @@
 
                                 </div>
                             </div>
+                        </div>
+                        <div class="row justify-content-sm-center no-gutters">
+
+                            <div class="col">
+                                Lvl.<span data-bind="text: OakItemRunner.inspectedItem().level()"></span>
+                            </div>
+
                             <div class="col">
                                 Bonus: <span data-bind="text: OakItemRunner.inspectedItem().calculateBonus()"></span>%
                             </div>
