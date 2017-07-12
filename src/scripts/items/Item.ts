@@ -40,22 +40,6 @@ abstract class Item {
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.name()]));
     }
 
-    public static initializeMultipliers(): { [name: string]: number } {
-        let res = {};
-        for (let obj in ItemList) {
-            res[obj] = 1;
-        }
-        return res;
-    }
-
-    public static initializeItemlist(): { [name: string]: number } {
-        let res = {};
-        for (let obj in ItemList) {
-            res[obj] = 0;
-        }
-        return res;
-    }
-
 }
 
 const ItemList: { [name: string]: Item } = {};
