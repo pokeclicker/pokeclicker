@@ -8,7 +8,7 @@ class OakItemRunner {
         OakItemRunner.oakItemList = [];
 
         // TODO implement their functionality!
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 100)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Amulet Coin", 40, "Gain more coins from battling", 25, 5, 1)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Poison Barb", 50, "Clicks do more damage", 25, 5, 3)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Exp Share", 60, "Gain more exp from battling", 15, 3, 1)));
@@ -32,6 +32,10 @@ class OakItemRunner {
         let item: OakItem = OakItemRunner.getOakItemByName(name);
         OakItemRunner.selectedItem(item);
         OakItemRunner.activateOakItem(item.id);
+    }
+
+    public static use(name:string){
+        OakItemRunner.getOakItemByName(name).use();
     }
 
     public static getOakItemByName(name:string): OakItem{

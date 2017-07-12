@@ -238,6 +238,7 @@ class Player {
     }
 
     public capturePokemon(pokemonName: string, shiny: boolean = false) {
+        OakItemRunner.use("Magic Ball");
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);

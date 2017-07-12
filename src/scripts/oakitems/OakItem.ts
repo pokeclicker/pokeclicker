@@ -45,7 +45,7 @@ class OakItem {
     }
 
     public use() {
-        if (this.isMaxLevel() || !this.isActive) {
+        if (this.isMaxLevel() || !this.isActive()) {
             return;
         }
         let expGain = Math.min(this.maxExp() - player.getOakItemExp(this.id), this.expGain);
