@@ -250,9 +250,7 @@ class Player {
 
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
-            console.log("sorting");
             return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
-            //return this._caughtPokemonList()
         }, this).extend({rateLimit: player.calculateCatchTime()})
     }
 
