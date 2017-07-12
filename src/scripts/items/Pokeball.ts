@@ -11,6 +11,8 @@ class Pokeball extends Item {
 
     buy() {
         player.gainPokeballs(this.type, 1);
+        console.log(player.itemMultipliers["Pokeball"])
+
     }
 
     use() {

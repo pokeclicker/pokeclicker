@@ -22,6 +22,7 @@ class Player {
     private _town: KnockoutObservable<Town>;
     private _starter: GameConstants.Starter;
     private _itemList: { [name: string]: number };
+    private _itemMultipliers: { [name: string]: number };
 
     public clickAttackObservable: KnockoutComputed<number>;
 
@@ -100,6 +101,7 @@ class Player {
         this._town = ko.observable(TownList["Pallet Town"]);
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || {};
+        this._itemMultipliers = savedPlayer._itemMultipliers || Item.initializeMultipliers();
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -363,8 +365,23 @@ class Player {
         this._itemList[itemname] -= amount;
     }
 
+    public lowerItemMultipliers() {
+        for (let obj in ItemList) {
+            let item = ItemList[obj];
+            item.decreasePriceMultiplier();
+        }
+    }
+
+    get itemMultipliers(): { [p: string]: number } {
+        return this._itemMultipliers;
+    }
+
+    set itemMultipliers(value: { [p: string]: number }) {
+        this._itemMultipliers = value;
+    }
+
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_itemList"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_itemList", "_itemMultipliers"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

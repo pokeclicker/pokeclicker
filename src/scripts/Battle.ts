@@ -68,6 +68,10 @@ class Battle {
             this.generateNewEnemy();
         }
 
+        player.lowerItemMultipliers();
+        console.log(player.itemMultipliers["Pokeball"])
+
+
     }
 
     /**
