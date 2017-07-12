@@ -381,24 +381,9 @@
                     <div class="card">
                         <span>Money: <span data-bind="text: player.money">todo</span></span>
                     </div>
-                    <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
-                        <div class="col-sm-3">
-                            <div
-                                    data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
-                                <img src="" height="36px"
-                                     data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
-                                <p data-bind="text: name">Item Name</p>
-                                <p>
-                                    <img src=""
-                                         data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
-                                    <span data-bind="text: ShopHandler.totalPrice">Price</span>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row justify-content-center">
                         <div class="col-11 col-sm-10 col-md-11">
-                            <div class="input-group" style="margin-bottom: 6px">
+                            <div class="input-group" style="margin-bottom: 6px; margin-top: 6px">
                                 <span class="input-group-btn">
                                     <button class="btn btn-danger"
                                             onclick="ShopHandler.resetAmount()">1</button>
@@ -423,7 +408,21 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
+                        <div class="col-sm-3">
+                            <div
+                                    data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
+                                <img src="" height="36px"
+                                     data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
+                                <p data-bind="text: name">Item Name</p>
+                                <p>
+                                    <img src=""
+                                         data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
+                                    <span data-bind="text: ShopHandler.totalPrice">Price</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 

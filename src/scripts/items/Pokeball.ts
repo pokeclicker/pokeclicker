@@ -19,7 +19,7 @@ class Pokeball extends Item {
     }
 }
 
-ItemList[GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]] = new Pokeball(GameConstants.Pokeball.Pokeball);
-ItemList["Greatball"] = new Pokeball(GameConstants.Pokeball.Pokeball);
-ItemList["Ultraball"] = new Pokeball(GameConstants.Pokeball.Pokeball);
-ItemList["Masterball"] = new Pokeball(GameConstants.Pokeball.Pokeball);
+ItemList["Pokeball"] = new Pokeball(GameConstants.Pokeball.Pokeball);
+ItemList["Greatball"] = new Pokeball(GameConstants.Pokeball.Greatball);
+ItemList["Ultraball"] = new Pokeball(GameConstants.Pokeball.Ultraball);
+ItemList["Masterball"] = new Pokeball(GameConstants.Pokeball.Masterball);
