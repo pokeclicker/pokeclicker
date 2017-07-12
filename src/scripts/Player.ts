@@ -149,7 +149,7 @@ class Player {
 
     public calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
-        return 2000;
+        return 20;
     }
 
     /**
@@ -249,9 +249,9 @@ class Player {
     }
 
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
-        return ko.computed(function () {
+        return ko.pureComputed(function () {
             return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
-        }, this);
+        }, this).extend({rateLimit: player.calculateCatchTime()})
     }
 
     public gainBadge(badge: GameConstants.Badge) {
