@@ -46,8 +46,8 @@ class ShopHandler {
     }
 
     public static increaseAmount(n: number) {
-        let input = $("input[name='amountOfItems']");
-        let newVal = parseInt(input.val().toString()) + n;
+        let input = $("input[name='amountOfItems']") ;
+        let newVal = (parseInt(input.val().toString()) || 0) + n;
         input.val(newVal).change();
     }
 
