@@ -8,6 +8,8 @@ namespace GameConstants {
     export const TICK_TIME = 10;
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
+    export const DUNGEON_TIME = 6000;
+    export const DUNGEON_TICK = 1;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
@@ -41,6 +43,18 @@ namespace GameConstants {
         "Shiny Charm",
         "Blaze Cassette",
         "Cell Battery",
+    }
+
+    // Dungeons
+    export const DUNGEON_SIZE = 5;
+    export const DUNGEON_CHEST_SHOW = 2;
+    export const DUNGEON_MAP_SHOW = 4;
+
+    export enum DungeonTile {
+        empty,
+        enemy,
+        chest,
+        boss,
     }
 
     /**
@@ -117,6 +131,10 @@ namespace GameConstants {
         1: 0,
         2: 0
     };
+
+    export function randomIntBetween(min:number, max:number){
+        return Math.floor(Math.random() * max) + min;
+    }
 
     export enum Badge {
         "None" = 0,

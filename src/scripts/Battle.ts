@@ -76,12 +76,12 @@ class Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        Battle.catching(false);
         Battle.counter = 0;
         Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
     }
 
     public static throwPokeball(pokeBall: GameConstants.Pokeball) {
+        console.log("ThrowPokeball");
         player.usePokeball(pokeBall);
         let pokeballBonus = GameConstants.getCatchBonus(pokeBall);
         let oakBonus = OakItemRunner.isActive("Magic Ball") ? OakItemRunner.calculateBonus("Magic Ball") : 0;
@@ -89,7 +89,9 @@ class Battle {
         let chance: number = Math.floor(Math.random() * 100) - pokeballBonus - oakBonus;
         if (chance <= this.enemyPokemon().catchRate) {
             this.catchPokemon();
+
         }
+        this.catching(false);
     }
 
     public static catchPokemon() {
