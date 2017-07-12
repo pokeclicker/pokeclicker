@@ -43,16 +43,13 @@ class PokemonFactory {
      * @returns {boolean}
      */
     public static generateShiny(chance: number): boolean {
-
-        // TODO Factor in oak item
-        // if(isActive("Shiny Charm")){
-        //     chance /= getOakItemBonus("Shiny Charm");
-        // }
+        chance = OakItemRunner.isActive("Shiny Charm") ? chance/(1+OakItemRunner.calculateBonus("Shiny Charm")/100) : chance;
 
         let rand: number = Math.floor(Math.random() * chance) + 1;
 
         if (rand <= 1) {
             console.log("Shiny!!!");
+            OakItemRunner.use("Shiny Charm");
             return true;
         }
         return false;

@@ -159,7 +159,8 @@ class Player {
 
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
-        return 111111111500;
+        let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? OakItemRunner.calculateBonus("PoisonBarb") : 1;
+        return 111111111500 * oakItemBonus;
     }
 
     public calculateMoneyMultiplier(): number {
@@ -263,8 +264,10 @@ class Player {
     }
 
     public gainMoney(money: number) {
+        OakItemRunner.use("Amulet Coin");
         // TODO add money multipliers
-        this._money(Math.floor(this._money() + money));
+        let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? OakItemRunner.calculateBonus("Amulet Coin") : 1;
+        this._money(Math.floor(this._money() + money*oakItemBonus));
     }
 
     public hasMoney(money: number) {
@@ -278,9 +281,11 @@ class Player {
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {
+        OakItemRunner.use("Exp Share");
         // TODO add exp multipliers
         let trainerBonus = trainer ? 1.5 : 1;
-        let expTotal = Math.floor(exp * level * trainerBonus / 9);
+        let oakItemBonus = OakItemRunner.isActive("Exp Share") ? OakItemRunner.calculateBonus("Exp Share") : 1;
+        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus / 9);
 
         for (let pokemon of this._caughtPokemonList()) {
             if (pokemon.levelObservable() < (this.gymBadges.length + 2) * 10) {

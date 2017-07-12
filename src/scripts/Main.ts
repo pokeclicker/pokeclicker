@@ -60,8 +60,9 @@ class Game {
 
     start() {
         player.region = GameConstants.Region.kanto;
-        this.load();
         OakItemRunner.initialize();
+        this.load();
+
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
     }
 

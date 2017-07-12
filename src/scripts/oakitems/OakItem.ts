@@ -31,7 +31,10 @@ class OakItem {
     }
 
     public expProgress(): string {
-        return OakItemRunner.selectedItem().getNormalizedPlayerExp() + "/" +  OakItemRunner.selectedItem().getNormalizedRequiredExp();
+        if(OakItemRunner.selectedItem().canUpgrade()) {
+            return "Cost: " + GameConstants.OAKITEM_MONEY_COST[OakItemRunner.selectedItem().level()];
+        }
+        return OakItemRunner.selectedItem().getNormalizedPlayerExp() + "/" + OakItemRunner.selectedItem().getNormalizedRequiredExp();
     }
 
     public getNormalizedPlayerExp(){
