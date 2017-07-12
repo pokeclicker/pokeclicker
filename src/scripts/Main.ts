@@ -53,6 +53,7 @@ class Game {
 
     constructor() {
         (<any>window).player = Save.load();
+        KeyItemHandler.initialize();
     }
 
     start() {
