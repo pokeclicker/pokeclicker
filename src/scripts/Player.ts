@@ -286,16 +286,6 @@ class Player {
         }
     }
 
-    public hasMoney(money: number) {
-        return this._money() >= money;
-    }
-
-    public payMoney(money: number) {
-        if (this.hasMoney(money)) {
-            this._money(Math.floor(this._money() - money));
-        }
-    }
-
     public gainExp(exp: number, level: number, trainer: boolean) {
         OakItemRunner.use("Exp Share");
         // TODO add exp multipliers
