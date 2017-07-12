@@ -53,7 +53,6 @@ TownList["Viridian City"] = new Town("Viridian City", [1]);
 TownList["Pallet Town"] = new Town("Pallet Town", []);
 TownList["Lavender Town"] = new Town("Lavender Town", [10], null, dungeonList["Pokemon Tower"]);
 
-
 //Dungeons
 TownList["Viridian Forest"] = new DungeonTown("Viridian Forest", [1], null, dungeonList["Viridian Forest"]);
 TownList["Digletts Cave"] = new DungeonTown("Digletts Cave", [1], null, dungeonList["Digletts Cave"]);
@@ -65,4 +64,3 @@ TownList["Seafoam Islands"] = new DungeonTown("Seafoam Islands", [19], null, dun
 TownList["Victory Road"] = new DungeonTown("Victory Road", [22], null, dungeonList["Victory Road"]);
 TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], null, dungeonList["Cerulean Cave"]);
 TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], null, dungeonList["Pokemon Mansion"]);
-

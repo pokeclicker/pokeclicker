@@ -23,6 +23,9 @@ class Player {
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
+    private _eggList: Egg[];
+    private _eggSlots: number;
+
     public clickAttackObservable: KnockoutComputed<number>;
 
     public pokemonAttackObservable: KnockoutComputed<number>;
@@ -101,6 +104,8 @@ class Player {
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
+        this._eggList = savedPlayer._eggList || [];
+        this._eggSlots = savedPlayer._eggSlots || 1;
 
         //TODO remove before deployment
         if (!debug) {
@@ -397,8 +402,24 @@ class Player {
         this._oakItemExp = value;
     }
 
+    get eggList(): Egg[] {
+        return this._eggList;
+    }
+
+    set eggList(value: Egg[]) {
+        this._eggList = value;
+    }
+
+    get eggSlots(): number {
+        return this._eggSlots;
+    }
+
+    set eggSlots(value: number) {
+        this._eggSlots = value;
+    }
+
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_eggList"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
