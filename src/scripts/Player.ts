@@ -22,7 +22,7 @@ class Player {
     private _town: KnockoutObservable<Town>;
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
-    private _oakItemsEquipped: KnockoutObservableArray<string>;
+    private _oakItemsEquipped: string[];
     public clickAttackObservable: KnockoutComputed<number>;
 
     public pokemonAttackObservable: KnockoutComputed<number>;
@@ -75,11 +75,11 @@ class Player {
         this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
-        console.log(savedPlayer._oakItemExp);
+
         this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
         });
-        this._oakItemsEquipped = ko.observableArray<string>(savedPlayer._oakItemsEquipped);
+        this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._region = savedPlayer._region || GameConstants.Region.kanto;
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
@@ -373,11 +373,12 @@ class Player {
         this._town = value;
     }
 
-    get oakItemsEquipped(): KnockoutObservableArray<string> {
+
+    get oakItemsEquipped(): string[] {
         return this._oakItemsEquipped;
     }
 
-    set oakItemsEquipped(value: KnockoutObservableArray<string>) {
+    set oakItemsEquipped(value: string[]) {
         this._oakItemsEquipped = value;
     }
 
@@ -398,7 +399,7 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

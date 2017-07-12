@@ -31,6 +31,12 @@ class OakItemRunner {
         OakItemRunner.selectedItem(item);
     }
 
+    public static loadOakItems(){
+        for( let i = 0; i< player._oakItemsEquipped.length; i++){
+            OakItemRunner.activateOakItem(OakItemRunner.getOakItemByName(player._oakItemsEquipped[i]).id);
+        }
+    }
+
     public static hover(name:string){
         OakItemRunner.inspectedItem(OakItemRunner.getOakItemByName(name));
     }
@@ -61,6 +67,15 @@ class OakItemRunner {
         }
     }
 
+    public static setOakItemsEquipped() {
+        player._oakItemsEquipped = [];
+        for (let i = 0; i < OakItemRunner.oakItemList.length; i++) {
+            if (OakItemRunner.oakItemList[i]().isActive()) {
+                player._oakItemsEquipped.push(OakItemRunner.oakItemList[i]().name());
+            }
+        }
+    }
+
     public static activateOakItem(id) {
         if (player.calculateOakItemSlots()() == 1) {
             OakItemRunner.deactivateAllOakItems();
@@ -78,6 +93,7 @@ class OakItemRunner {
                 }
             }
         }
+        OakItemRunner.setOakItemsEquipped();
     }
 
     public static getTotalActiveOakItems() {
