@@ -1,15 +1,29 @@
+///<reference path="../shop/ShopHandler.ts"/>
 abstract class Item {
     name: KnockoutObservable<string>;
     basePrice: number;
     type: any;
     currency: GameConstants.Currency;
     price: KnockoutObservable<number>;
+    totalPrice: KnockoutComputed<number>;
 
     constructor(name: string, basePrice: number, priceMultiplier: number, currency: GameConstants.Currency) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
         this.price = ko.observable(this.basePrice);
+        this.totalPrice = ko.computed(function () {
+            let amount: number;
+            if (ShopHandler == null) {
+                amount = 1;
+            } else {
+                amount = ShopHandler.amount();
+            }
+            console.log(basePrice);
+            let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
+            console.log(res);
+            return Math.floor(res);
+        }, this)
     }
 
     abstract buy(n: number);
