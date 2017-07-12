@@ -390,8 +390,8 @@
                                 </span>
                                 <input id="amountOfItems" type="number" class="form-control form-control-number"
                                        value="1" min="1" required name="amountOfItems"
-                                       oninput="ShopHandler.amount(parseInt($(this).val().toString()));"
-                                       onchange="ShopHandler.amount(parseInt($(this).val().toString()));">
+                                       oninput="ShopHandler.amount(parseInt($(this).val().toString()) || 0);"
+                                       onchange="ShopHandler.amount(parseInt($(this).val().toString()) || 0);">
                                 <span class="input-group-btn">
                                     <button class="btn btn-secondary smallButton smallFont" type="button"
                                             onclick="ShopHandler.increaseAmount(10)">+10</button>
