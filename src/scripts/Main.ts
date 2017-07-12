@@ -8,9 +8,35 @@ const debug = false;
 
 
 document.addEventListener("DOMContentLoaded", function (event) {
-
+    OakItemRunner.initialize();
     let game: Game = new Game();
+    // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
     game.start();
+
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    ko.bindingHandlers.tooltip = {
+        init: function(element, valueAccessor) {
+            var local = ko.utils.unwrapObservable(valueAccessor()),
+                options = {};
+
+            ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+            ko.utils.extend(options, local);
+
+            $(element).tooltip(options);
+
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                // $(element).tooltip("destroy");
+            });
+        },
+        options: {
+            placement: "bottom",
+            trigger: "click"
+        }
+    };
+
     ko.applyBindings(Game);
     ko.options.deferUpdates = true;
 });
@@ -32,6 +58,7 @@ class Game {
     start() {
         player.region = GameConstants.Region.kanto;
         this.load();
+
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
     }
 
@@ -61,6 +88,14 @@ class Game {
                 GymRunner.tick();
                 break;
             }
+            case GameConstants.GameState.dungeon: {
+                DungeonBattle.counter += GameConstants.TICK_TIME;
+                if (DungeonBattle.counter > GameConstants.BATTLE_TICK) {
+                    DungeonBattle.tick();
+                }
+                DungeonRunner.tick();
+                break;
+            }
         }
 
 
@@ -75,6 +110,7 @@ class Game {
     }
 
     load() {
+        OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
     }
 }

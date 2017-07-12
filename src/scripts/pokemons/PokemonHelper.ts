@@ -22,6 +22,7 @@ class PokemonHelper {
     public static calculateLevel(pokemon: CaughtPokemon): number {
         let level;
         switch (PokemonHelper.getPokemonByName(pokemon.name).levelType) {
+
             case GameConstants.LevelType.slow:
                 level = Math.pow(pokemon.exp() * 4 / 5, 1 / 3);
                 break;
@@ -63,7 +64,7 @@ class PokemonHelper {
     }
 
     public static compareBy(property: string, direction: boolean): (a: CaughtPokemon, b: CaughtPokemon) => number {
-        return function(a, b) {
+        return function (a, b) {
             let _a, _b, res, dir = (direction) ? -1 : 1;
 
             //Convert to plain JS so that observables don't need to be accessed with brackets
@@ -76,7 +77,7 @@ class PokemonHelper {
                 _b.shiny = Number(player.alreadyCaughtPokemonShiny(b.name));
             }
 
-            if( property == "attack" || property == "levelObservable" || property == "shiny"){
+            if (property == "attack" || property == "levelObservable" || property == "shiny") {
                 dir *= -1;
             }
 
@@ -89,7 +90,7 @@ class PokemonHelper {
                 } else if (_a.id > _b.id) {
                     return 1;
                 }
-            } else if (_a[property] < _b[property]){
+            } else if (_a[property] < _b[property]) {
                 res = -1;
             } else if (_a[property] > _b[property]) {
                 res = 1;

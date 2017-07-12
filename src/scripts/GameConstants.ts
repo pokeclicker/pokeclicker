@@ -8,6 +8,8 @@ namespace GameConstants {
     export const TICK_TIME = 10;
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
+    export const DUNGEON_TIME = 6000;
+    export const DUNGEON_TICK = 1;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
@@ -23,6 +25,39 @@ namespace GameConstants {
 
     export const ITEM_PRICE_MULTIPLIER = 1.02;
     export const ITEM_PRICE_DEDUCT = 0.003;
+
+
+    // Oak items
+    export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000,20000, Number.MAX_VALUE];
+    export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
+    export const AMOUNT_OF_OAKITEMS = 8;
+    export const OAKITEM_MAX_LEVEL = 5;
+    export const OAKITEM_FIRST_UNLOCK = 30;
+    export const OAKITEM_SECOND_UNLOCK = 60;
+    export const OAKITEM_THIRD_UNLOCK = 100;
+
+    export enum OakItem {
+        "Magic Ball" = 0,
+        "Amulet Coin",
+        "Poison Barb",
+        "Exp Share",
+        "Plant Grower",
+        "Shiny Charm",
+        "Blaze Cassette",
+        "Cell Battery",
+    }
+
+    // Dungeons
+    export const DUNGEON_SIZE = 5;
+    export const DUNGEON_CHEST_SHOW = 2;
+    export const DUNGEON_MAP_SHOW = 4;
+
+    export enum DungeonTile {
+        empty,
+        enemy,
+        chest,
+        boss,
+    }
 
     /**
      * idle: The game is not doing anything, the battle view isn't shown
@@ -106,6 +141,10 @@ namespace GameConstants {
         1: 0,
         2: 0
     };
+
+    export function randomIntBetween(min:number, max:number){
+        return Math.floor(Math.random() * max) + min;
+    }
 
     export enum Badge {
         "None" = 0,
