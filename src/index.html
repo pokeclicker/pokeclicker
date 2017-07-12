@@ -405,6 +405,7 @@
                                 </span>
                                 <input id="amountOfItems" type="number" class="form-control form-control-number"
                                        value="1" min="1" required name="amountOfItems"
+                                       oninput="ShopHandler.amount(parseInt($(this).val().toString()));"
                                        onchange="ShopHandler.amount(parseInt($(this).val().toString()));">
                                 <span class="input-group-btn">
                                     <button class="btn btn-secondary smallButton smallFont" type="button"
