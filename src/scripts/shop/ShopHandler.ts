@@ -32,7 +32,7 @@ class ShopHandler {
         if (player.hasMoney(this.totalPrice())) {
             player.payMoney(item.price());
             item.buy(this.amount());
-            item.increasePriceMultiplier();
+            item.increasePriceMultiplier(this.amount());
         } else {
             //TODO make alert that shows you don't have enough money
         }

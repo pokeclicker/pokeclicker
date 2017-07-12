@@ -19,7 +19,7 @@ abstract class Item {
     abstract use();
 
     increasePriceMultiplier(n: number = 1) {
-        this.priceMultiplier *= GameConstants.ITEM_PRICE_MULTIPLIER;
+        this.priceMultiplier = this.priceMultiplier * Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, n);
     }
 
     decreasePriceMultiplier() {
