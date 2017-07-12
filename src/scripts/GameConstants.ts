@@ -256,15 +256,6 @@ namespace GameConstants {
         "Squirtle" = 2,
     }
 
-    //
-    // export enum BattleItem {
-    //     'xAttack' = 0,
-    //     'xClick' = 1,
-    //     'xExp' = 2,
-    //     'XToken' = 3,
-    //     'xItem' = 4
-    // }
-
     export enum StoneType {
         Fire,
         Water,
