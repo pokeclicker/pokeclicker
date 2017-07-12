@@ -391,7 +391,7 @@
                                 <p>
                                     <img src=""
                                          data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
-                                    <span data-bind="text: price()">Price</span>
+                                    <span data-bind="text: ShopHandler.totalPrice">Price</span>
                                 </p>
                             </div>
                         </div>
@@ -417,7 +417,7 @@
                                             onclick="ShopHandler.increaseAmount(100)">+100</button>
                                 </span>
                                 <span class="input-group-btn" style="float: right;">
-                                    <button data-bind="text: ShopHandler.totalPrice, attr: {class: ShopHandler.calculateButtonCss()}"
+                                    <button data-bind="attr: {class: ShopHandler.calculateButtonCss()}"
                                             onclick="ShopHandler.buyItem()">Buy</button>
                                     </span>
                             </div>
