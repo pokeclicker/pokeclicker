@@ -25,7 +25,9 @@ class ShopHandler {
     }
 
     public static buyItem() {
-
+        if (this.amount() < 1) {
+            return;
+        }
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
         if (player.hasMoney(this.totalPrice())) {
@@ -58,10 +60,10 @@ class ShopHandler {
     }
 
     public static calculateButtonCss(): string {
-        if (player.hasMoney(ShopHandler.totalPrice())) {
-            return "btn btn-success"
-        } else {
+        if (!player.hasMoney(ShopHandler.totalPrice()) || this.amount() < 1) {
             return "btn btn-danger"
+        } else {
+            return "btn btn-success"
         }
     }
 }

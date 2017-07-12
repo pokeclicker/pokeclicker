@@ -18,12 +18,14 @@ abstract class Item {
 
     abstract use();
 
-    increasePriceMultiplier(n: number = 1) {
+    increasePriceMultiplier(n = 1) {
+        console.log("increasing by" + n);
         this.priceMultiplier = this.priceMultiplier * Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, n);
+        console.log(this.priceMultiplier);
     }
 
-    decreasePriceMultiplier() {
-        this.priceMultiplier /= GameConstants.ITEM_PRICE_MULTIPLIER;
+    decreasePriceMultiplier(n = 1) {
+        this.priceMultiplier = this.priceMultiplier / Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, n);
     }
 
 }
