@@ -2,13 +2,13 @@ class OakItemRunner {
 
     public static oakItemList: KnockoutObservable<OakItem>[];
     public static blankOakItem: OakItem = new OakItem(" ", Number.MAX_VALUE, "", 0, 0, 0);
-    public static inspectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2))
-    public static selectedItem:  KnockoutObservable<OakItem> = ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2))
+    public static inspectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2));
+    public static selectedItem:  KnockoutObservable<OakItem> = ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2));
     public static initialize() {
         OakItemRunner.oakItemList = [];
 
 
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 1000)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Amulet Coin", 40, "Gain more coins from battling", 25, 5, 1)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Poison Barb", 50, "Clicks do more damage", 25, 5, 3)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Exp Share", 60, "Gain more exp from battling", 15, 3, 1)));

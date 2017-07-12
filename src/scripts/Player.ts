@@ -75,6 +75,7 @@ class Player {
         this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
+        console.log(savedPlayer._oakItemExp);
         this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
         });
@@ -117,14 +118,14 @@ class Player {
 
     public calculateOakItemSlots():KnockoutObservable<number> {
         let total = 0;
-        if(this.caughtPokemonList.length > GameConstants.OAKITEM_FIRST_UNLOCK){
+        if(this.caughtPokemonList.length >= GameConstants.OAKITEM_FIRST_UNLOCK){
             total++;
         }
-        if(this.caughtPokemonList.length > GameConstants.OAKITEM_SECOND_UNLOCK){
+        if(this.caughtPokemonList.length >= GameConstants.OAKITEM_SECOND_UNLOCK){
             total++;
         }
 
-        if(this.caughtPokemonList.length > GameConstants.OAKITEM_THIRD_UNLOCK){
+        if(this.caughtPokemonList.length >= GameConstants.OAKITEM_THIRD_UNLOCK){
             total++;
         }
         return ko.observable(total);
@@ -397,7 +398,7 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter, _oakItemExp"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
