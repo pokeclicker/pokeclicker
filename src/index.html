@@ -404,7 +404,8 @@
                                             onclick="ShopHandler.resetAmount()">1</button>
                                 </span>
                                 <input id="amountOfItems" type="number" class="form-control form-control-number"
-                                       value="1" min="1" required name="amountOfItems">
+                                       value="1" min="1" required name="amountOfItems"
+                                       onchange="ShopHandler.amount(parseInt($(this).val().toString()));">
                                 <span class="input-group-btn">
                                     <button class="btn btn-secondary smallButton smallFont" type="button"
                                             onclick="ShopHandler.increaseAmount(10)">+10</button>
@@ -414,13 +415,9 @@
                                             type="button"
                                             onclick="ShopHandler.increaseAmount(100)">+100</button>
                                 </span>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-secondary smallButton smallFont"
-                                            type="button"
-                                            onclick="ShopHandler.increaseAmount(1000)">+1000</button>
-                                </span>
                                 <span class="input-group-btn" style="float: right;">
-                                    <button class="btn btn-success">Buy</button>
+                                    <button class="btn btn-success"
+                                            data-bind="text: ShopHandler.totalPrice">Buy</button>
                                     </span>
                             </div>
                         </div>

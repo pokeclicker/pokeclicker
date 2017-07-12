@@ -14,16 +14,16 @@ abstract class Item {
         this.price = ko.observable(this.basePrice * this.priceMultiplier);
     }
 
-    abstract buy();
+    abstract buy(n: number);
 
     abstract use();
 
-    increasePriceMultiplier() {
-        this.priceMultiplier *= 1.05;
+    increasePriceMultiplier(n: number = 1) {
+        this.priceMultiplier *= GameConstants.ITEM_PRICE_MULTIPLIER;
     }
 
     decreasePriceMultiplier() {
-        this.priceMultiplier /= 1.05;
+        this.priceMultiplier /= GameConstants.ITEM_PRICE_MULTIPLIER;
     }
 
 }

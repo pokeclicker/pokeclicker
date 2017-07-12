@@ -4,14 +4,34 @@ class EvolutionStone extends Item {
     type: GameConstants.StoneType;
 
     constructor(type: GameConstants.StoneType) {
-        let basePrice = 0;
+        let basePrice = 2500;
+        switch (type) {
+            case GameConstants.StoneType.Fire: {
+                break;
+            }
+            case GameConstants.StoneType.Water: {
+                break;
+            }
+            case GameConstants.StoneType.Thunder: {
+                break;
+            }
+            case GameConstants.StoneType.Leaf: {
+                break;
+            }
+            case GameConstants.StoneType.Moon: {
+                break;
+            }
+            case GameConstants.StoneType.Sun: {
+                break;
+            }
+        }
         let priceMultiplier = 1;
         super(GameConstants.StoneType[type], basePrice, priceMultiplier, GameConstants.Currency.money);
         this.type = type;
     }
 
-    public buy() {
-        this.priceMultiplier++;
+    public buy(n: number) {
+        player.gainItem(GameConstants.StoneType[this.type], n)
     }
 
     public use() {

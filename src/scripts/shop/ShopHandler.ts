@@ -1,7 +1,16 @@
 class ShopHandler {
     static shopObservable: KnockoutObservable<Shop> = ko.observable(new Shop([]));
-    static selected: KnockoutObservable<number> = ko.observable(-1);
-
+    static selected: KnockoutObservable<number> = ko.observable(0);
+    static amount: KnockoutObservable<number> = ko.observable(1);
+    static totalPrice: KnockoutComputed<number> = ko.computed(function () {
+        console.log("change");
+        let item: Item = ShopHandler.shopObservable().items()[ShopHandler.selected()];
+        if (item == null) {
+            return 0;
+        }
+        let res = (item.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, ShopHandler.amount()))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
+        return Math.floor(res);
+    });
 
     public static showShop(shop: Shop) {
         Game.gameState(GameConstants.GameState.idle);
@@ -16,12 +25,13 @@ class ShopHandler {
         this.selected(i);
     }
 
-    public static buyItem(i: number) {
-        let item: Item = this.shopObservable().items()[i];
+    public static buyItem() {
 
-        if (player.hasMoney(item.price())) {
+        let item: Item = this.shopObservable().items()[ShopHandler.selected()];
+
+        if (player.hasMoney(this.totalPrice())) {
             player.payMoney(item.price());
-            item.buy();
+            item.buy(this.amount());
             item.increasePriceMultiplier();
         } else {
             //TODO make alert that shows you don't have enough money
@@ -31,13 +41,13 @@ class ShopHandler {
 
     public static resetAmount() {
         let input = $("input[name='amountOfItems']");
-        input.val(1).change()
+        input.val(1).change();
     }
 
     public static increaseAmount(n: number) {
         let input = $("input[name='amountOfItems']");
-        let currentVal: number = parseInt(input.val().toString());
-        input.val(currentVal + n).change()
+        let newVal = parseInt(input.val().toString()) + n;
+        input.val(newVal).change();
     }
 
     public static calculateCss(i: number): string {

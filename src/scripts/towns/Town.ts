@@ -45,7 +45,7 @@ class Town {
 const TownList: { [name: string]: Town } = {};
 
 //TODO Add all towns
-TownList["Pewter City"] = new Town("Pewter City", [2], new Shop([new Pokeball(GameConstants.Pokeball.Pokeball), new Pokeball(GameConstants.Pokeball.Greatball)]));
+TownList["Pewter City"] = new Town("Pewter City", [2], new Shop([ItemList[GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]]]));
 TownList["Cerulean City"] = new Town("Cerulean City", [4]);
 TownList["Vermillion City"] = new Town("Vermillion City", [6]);
 TownList["Celadon City"] = new Town("Celadon City", [8]);
