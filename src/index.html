@@ -279,8 +279,9 @@
                                             </div>
                                         </div>
                                         <div class="progress">
-                                            <div class="progress-bar bg-danger" role="progressbar"
-                                                 data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%' }"
+                                            <div class="progress-bar" role="progressbar"
+                                                 data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'},
+css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
                                                  aria-valuemin="0" aria-valuemax="100">
                                             </div>
                                         </div>
