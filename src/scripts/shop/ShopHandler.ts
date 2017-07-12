@@ -13,11 +13,15 @@ class ShopHandler {
 
     public static showShop(shop: Shop) {
         Game.gameState(GameConstants.GameState.idle);
-
         this.shopObservable(shop);
 
-        Game.gameState(GameConstants.GameState.shop);
+        //sets all prices correctly
+        for (let i = 0; i < shop.items().length; i++) {
+            let item: Item = shop.items()[i];
+            item.price(Math.round(item.basePrice * player.itemMultipliers[item.name()]));
+        }
 
+        Game.gameState(GameConstants.GameState.shop);
     }
 
     public static setSelected(i: number) {
@@ -46,7 +50,7 @@ class ShopHandler {
     }
 
     public static increaseAmount(n: number) {
-        let input = $("input[name='amountOfItems']") ;
+        let input = $("input[name='amountOfItems']");
         let newVal = (parseInt(input.val().toString()) || 0) + n;
         input.val(newVal).change();
     }
