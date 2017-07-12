@@ -942,69 +942,61 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                     </div>
                 </div>
 
-                <!--left column-->
-                <div class="col-lg-3 pull-lg-6">
-                    <div class="page-item" style="background-color: white; min-height: 180px">
-                        <div class="row justify-content-sm-center">
-                            <div class="col-sm-10">
-                                <span>Caught Pokémon</span>
-                                <table class="table pokeball-table borderless">
-                                    <tr>
-                                        <td>
-                                            <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
-                                                 data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.None}"/>
-                                        </td>
-                                        <td>
-                                            <img class="pokeball-small clickable"
-                                                 src="assets/images/pokeball/Pokeball-small.png"
-                                                 data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
-                                        </td>
-                                        <td>
-                                            <img class="pokeball-small clickable"
-                                                 src="assets/images/pokeball/Greatball-small.png"
-                                                 data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
-                                        </td>
-                                        <td>
-                                            <img class="pokeball-small clickable"
-                                                 src="assets/images/pokeball/Ultraball-small.png"
-                                                 data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
-                                        </td>
-                                        <td>
-                                            <img class="pokeball-small clickable"
-                                                 src="assets/images/pokeball/Masterball-small.png"
-                                                 data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
-                                        </td>
-                                    </tr>
+        <!--left column-->
+        <div class="col-lg-3 pull-lg-6">
+            <div class="page-item" style="background-color: white; min-height: 180px">
+                <div class="row justify-content-sm-center">
+                    <div class="col-sm-10">
+                        <span>Caught Pokémon</span>
+                        <table class="table pokeball-table borderless">
+                            <tr>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.None}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Pokeball-small.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Greatball-small.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Ultraball-small.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Masterball-small.png"
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
+                                </td>
+                            </tr>
 
-                                </table>
-                                <span>New Pokémon</span>
-                                <table class="table pokeball-table borderless">
-                                    <tr>
-                                        <td>
-                                            <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
-                                                 data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.None}"/>
-                                        </td>
-                                        <td>
-                                            <img class="pokeball-small clickable"
-                                                 src="assets/images/pokeball/Pokeball-small.png"
-                                                 data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
-                                        </td>
-                                        <td>
-                                            <img class="pokeball-small clickable"
-                                                 src="assets/images/pokeball/Greatball-small.png"
-                                                 data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
-                                        </td>
-                                        <td>
-                                            <img class="pokeball-small clickable"
-                                                 src="assets/images/pokeball/Ultraball-small.png"
-                                                 data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
-                                        </td>
-                                        <td>
-                                            <img class="pokeball-small clickable"
-                                                 src="assets/images/pokeball/Masterball-small.png"
-                                                 data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
-                                        </td>
-                                    </tr>
+                        </table>
+                        <span>New Pokémon</span>
+                        <table class="table pokeball-table borderless">
+                            <tr>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.None}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Pokeball-small.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Greatball-small.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Ultraball-small.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
+                                </td>
+                                <td>
+                                    <img class="pokeball-small clickable" src="assets/images/pokeball/Masterball-small.png"
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
+                                </td>
+                            </tr>
 
                                     <tr>
                                         <td></td>
@@ -1046,20 +1038,101 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
 
                 </div>
 
-                <!--Right column-->
-                <div class="col-lg-3">
-                    <div class="page-item" style="background-color: red; min-height: 150px">
-                        <h2>Oak Items</h2>
+        <!--Right column-->
+        <div class="col-lg-3">
+            <div class="page-item" style="background-color: white;">
+                <div class="card">
+                    <span style="text-align:center" data-bind="text: OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()">asd</span>
+                </div>
+                <div class="row justify-content-sm-center" data-bind="foreach: OakItemRunner.oakItemList">
+                    <div>
+                        <div>
+                            <img class="clickable" src=""
+                                 data-bind="attr:{ src: '/assets/images/oakitems/' + $data.name() + '.png'},
+                                  css: {'oak-item-small-selected': OakItemRunner.isActive($data.name()),
+                                        'oak-item-small': !OakItemRunner.isActive($data.name()),
+                                        'oak-item-locked': !OakItemRunner.isUnlocked($data.name())
+
+                                        },
+                                 event: {
+                                    mouseover: function(){OakItemRunner.hover($data.name())},
+                                    click: function(){OakItemRunner.click($data.name())},
+                                    mouseout : function(){OakItemRunner.hoverRelease()}
+                                    }">
+                        </div>
+
                     </div>
 
-                    <div class="page-item" style="background-color: deepskyblue; min-height: 100px">
-                        <h2>Current quest counter</h2>
-                    </div>
+                </div>
 
-                    <div class="page-item" style="background-color: #ffe463; min-height: 250px">
-                        <h2>Upgrades</h2>
+                <div class="card oak-item-info">
+                    <div data-bind="if: OakItemRunner.inspectedItem().isUnlocked()">
+                        <div class="row justify-content-sm-center">
+                            <div style="height:20px;" class="col">
+                                <b><span data-bind="text: OakItemRunner.inspectedItem().name()"></span></b>
+                            </div>
+                        </div>
+                        <div class="row justify-content-sm-center">
+                            <div class="col">
+                                <span data-bind="text: OakItemRunner.inspectedItem().description"></span>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-sm-center">
+                            <div class="col-sm-11 col-md-8">
+                                <div class="progress" style="margin-top: 12px"
+                                     data-bind="value: 'exp', tooltip: { title: OakItemRunner.inspectedItem().expProgress, trigger: 'hover' }">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                         data-bind="attr:{ style: 'width:' + OakItemRunner.inspectedItem().expPercentage() + '%' }"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        <div data-bind="if:OakItemRunner.inspectedItem().canUpgradeExp(),
+                                                    disable: !OakItemRunner.inspectedItem().canUpgradeMoney()">
+                                            <div class="btn-default"
+                                                 data-bind="click: function(){OakItemRunner.inspectedItem().upgrade()}">
+                                                Upgrade!
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row justify-content-sm-center no-gutters">
+
+                            <div class="col">
+                                Lvl.<span data-bind="text: OakItemRunner.inspectedItem().level()"></span>
+                            </div>
+
+                            <div class="col">
+                                Bonus: <span data-bind="text: OakItemRunner.inspectedItem().calculateBonus()"></span>%
+                            </div>
+                        </div>
+                    </div>
+                    <div data-bind="ifnot: OakItemRunner.inspectedItem().isUnlocked()">
+
+                        <div class="row justify-content-sm-center">
+                            <div style="height:20px;" class="col">
+                                <b><span data-bind="text: OakItemRunner.inspectedItem().name()"></span></b>
+                            </div>
+                        </div>
+
+                        <div style="min-height:80px; vertical-align: center">
+                            Capture<span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span> Pokémon to
+                            unlock!
+                        </div>
                     </div>
                 </div>
+
+
+            <div class="page-item" style="background-color: deepskyblue; min-height: 100px">
+                <h2>Current quest counter</h2>
+            </div>
+
+            <div class="page-item" style="background-color: #ffe463; min-height: 250px">
+                <h2>Upgrades</h2>
+            </div>
+        </div>
 
                 <!-- Receive gym badge Modal -->
                 <div class="modal fade" id="receiveBadgeModal" tabindex="-1" role="dialog"

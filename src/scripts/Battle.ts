@@ -36,6 +36,7 @@ class Battle {
         if (!this.enemyPokemon().isAlive()) {
             return;
         }
+        OakItemRunner.use("Poison Barb");
         this.enemyPokemon().damage(player.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
@@ -80,10 +81,10 @@ class Battle {
     }
 
     public static throwPokeball(pokeBall: GameConstants.Pokeball) {
-        console.log("ThrowPokeball");
         player.usePokeball(pokeBall);
         let pokeballBonus = GameConstants.getCatchBonus(pokeBall);
-        let chance: number = Math.floor(Math.random() * 100) - pokeballBonus;
+        let oakBonus = OakItemRunner.isActive("Magic Ball") ? OakItemRunner.calculateBonus("Magic Ball") : 0;
+        let chance: number = Math.floor(Math.random() * 100) - pokeballBonus - oakBonus;
         if (chance <= this.enemyPokemon().catchRate) {
             this.catchPokemon();
 

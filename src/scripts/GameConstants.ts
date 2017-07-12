@@ -24,6 +24,27 @@ namespace GameConstants {
     export const SHINY_CHANCE_BREEDING = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
 
+
+    // Oak items
+    export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000,20000, Number.MAX_VALUE];
+    export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
+    export const AMOUNT_OF_OAKITEMS = 8;
+    export const OAKITEM_MAX_LEVEL = 5;
+    export const OAKITEM_FIRST_UNLOCK = 30;
+    export const OAKITEM_SECOND_UNLOCK = 60;
+    export const OAKITEM_THIRD_UNLOCK = 100;
+
+    export enum OakItem {
+        "Magic Ball" = 0,
+        "Amulet Coin",
+        "Poison Barb",
+        "Exp Share",
+        "Plant Grower",
+        "Shiny Charm",
+        "Blaze Cassette",
+        "Cell Battery",
+    }
+
     // Dungeons
     export const DUNGEON_SIZE = 5;
     export const DUNGEON_CHEST_SHOW = 2;
@@ -45,8 +66,6 @@ namespace GameConstants {
      * safari: Exploring the safari zone
      * town: In a town/pre-dungeon, town view is not shown
      */
-
-
     export enum GameState {
         idle = 0,
         paused = 1,
