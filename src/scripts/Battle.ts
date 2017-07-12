@@ -67,11 +67,7 @@ class Battle {
         } else {
             this.generateNewEnemy();
         }
-
         player.lowerItemMultipliers();
-        console.log(player.itemMultipliers["Pokeball"])
-
-
     }
 
     /**
