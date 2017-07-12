@@ -160,7 +160,7 @@ class Player {
 
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
-        let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? OakItemRunner.calculateBonus("PoisonBarb") : 1;
+        let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? OakItemRunner.calculateBonus("Poison Barb") : 1;
         return 111111111500 * oakItemBonus;
     }
 
