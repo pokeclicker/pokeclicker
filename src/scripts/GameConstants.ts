@@ -22,6 +22,7 @@ namespace GameConstants {
     export const SHINY_CHANCE_SAFARI = 2048;
 
     export const ITEM_PRICE_MULTIPLIER = 1.02;
+    export const ITEM_PRICE_DEDUCT = 0.003;
 
     /**
      * idle: The game is not doing anything, the battle view isn't shown

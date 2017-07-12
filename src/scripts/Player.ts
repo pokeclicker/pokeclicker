@@ -100,7 +100,7 @@ class Player {
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
-        this._itemList = savedPlayer._itemList || {};
+        this._itemList = savedPlayer._itemList || Item.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Item.initializeMultipliers();
         //TODO remove before deployment
         if (!debug) {
