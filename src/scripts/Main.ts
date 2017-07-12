@@ -10,6 +10,7 @@ const debug = false;
 document.addEventListener("DOMContentLoaded", function (event) {
 
     let game: Game = new Game();
+    // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
     game.start();
     ko.applyBindings(Game);
     ko.options.deferUpdates = true;
@@ -59,6 +60,14 @@ class Game {
                     GymBattle.tick();
                 }
                 GymRunner.tick();
+                break;
+            }
+            case GameConstants.GameState.dungeon: {
+                DungeonBattle.counter += GameConstants.TICK_TIME;
+                if (DungeonBattle.counter > GameConstants.BATTLE_TICK) {
+                    DungeonBattle.tick();
+                }
+                DungeonRunner.tick();
                 break;
             }
         }

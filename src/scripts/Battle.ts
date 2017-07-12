@@ -75,18 +75,20 @@ class Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        Battle.catching(false);
         Battle.counter = 0;
         Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
     }
 
     public static throwPokeball(pokeBall: GameConstants.Pokeball) {
+        console.log("ThrowPokeball");
         player.usePokeball(pokeBall);
         let pokeballBonus = GameConstants.getCatchBonus(pokeBall);
         let chance: number = Math.floor(Math.random() * 100) - pokeballBonus;
         if (chance <= this.enemyPokemon().catchRate) {
             this.catchPokemon();
+
         }
+        this.catching(false);
     }
 
     public static catchPokemon() {

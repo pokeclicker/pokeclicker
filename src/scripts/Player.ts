@@ -123,13 +123,13 @@ class Player {
             attack += pokemon.attack();
         }
 
-        return attack;
-        // return 0;
+        // return attack;
+        return 10;
     }
 
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
-        return 111111111500;
+        return 5000;
     }
 
     public calculateMoneyMultiplier(): number {

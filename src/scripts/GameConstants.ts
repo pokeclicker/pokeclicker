@@ -8,6 +8,8 @@ namespace GameConstants {
     export const TICK_TIME = 10;
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
+    export const DUNGEON_TIME = 6000;
+    export const DUNGEON_TICK = 1;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
@@ -22,6 +24,18 @@ namespace GameConstants {
     export const SHINY_CHANCE_BREEDING = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
 
+    // Dungeons
+    export const DUNGEON_SIZE = 5;
+    export const DUNGEON_CHEST_SHOW = 2;
+    export const DUNGEON_MAP_SHOW = 4;
+
+    export enum DungeonTile {
+        empty,
+        enemy,
+        chest,
+        boss,
+    }
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks
@@ -31,6 +45,8 @@ namespace GameConstants {
      * safari: Exploring the safari zone
      * town: In a town/pre-dungeon, town view is not shown
      */
+
+
     export enum GameState {
         idle = 0,
         paused = 1,
@@ -96,6 +112,10 @@ namespace GameConstants {
         1: 0,
         2: 0
     };
+
+    export function randomIntBetween(min:number, max:number){
+        return Math.floor(Math.random() * max) + min;
+    }
 
     export enum Badge {
         "None" = 0,
