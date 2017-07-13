@@ -116,17 +116,20 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
-    public hasKeyItem(name :string){
-        for(let i = 0; i<this._keyItems().length; i++){
-            if(this._keyItems()[i] == name){
+    public hasKeyItem(name: string) {
+        console.log("Name: " + name);
+        for (let i = 0; i < this._keyItems().length; i++) {
+            if (this._keyItems()[i] == name) {
                 return true;
             }
         }
         return false;
     }
 
-    public gainKeyItem(name : string){
-        this._keyItems().push(name);
+    public gainKeyItem(name: string) {
+        if (!this.hasKeyItem(name)) {
+            this._keyItems().push(name);
+        }
     }
 
     public calculateOakItemSlots(): KnockoutObservable<number> {
@@ -412,7 +415,7 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_keyItems"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
