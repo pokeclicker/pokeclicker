@@ -1,7 +1,6 @@
 ///<reference path="PokemonLeague.ts"/>
 class IndigoPlateau extends PokemonLeague {
 
-
     constructor(shop?: Shop) {
         super("Indigo Plateau", [23], shop);
         this.gym(null);
@@ -14,7 +13,6 @@ class IndigoPlateau extends PokemonLeague {
 
         //todo add champion
     }
-
 
 }
 //TODO move this to town class

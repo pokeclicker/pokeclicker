@@ -3,9 +3,8 @@
 /**
  * Start the game when all html elements are loaded.
  */
-declare var player;
+let player;
 const debug = false;
-
 
 document.addEventListener("DOMContentLoaded", function (event) {
     OakItemRunner.initialize();
@@ -13,13 +12,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
     // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
     game.start();
 
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('[data-toggle="tooltip"]').tooltip();
     });
 
     ko.bindingHandlers.tooltip = {
-        init: function(element, valueAccessor) {
-            var local = ko.utils.unwrapObservable(valueAccessor()),
+        init: function (element, valueAccessor) {
+            let local = ko.utils.unwrapObservable(valueAccessor()),
                 options = {};
 
             ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
@@ -27,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
             $(element).tooltip(options);
 
-            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
                 // $(element).tooltip("destroy");
             });
         },
@@ -49,7 +48,7 @@ class Game {
     undergroundCounter: number;
     farmCounter: number;
 
-    public static gameState : KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
+    public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
     constructor() {
         (<any>window).player = Save.load();
@@ -101,8 +100,6 @@ class Game {
                 break;
             }
         }
-
-
 
         if (Save.counter > GameConstants.SAVE_TICK) {
             Save.store(player);

@@ -10,7 +10,7 @@ class CaughtPokemon {
     attackBonus: KnockoutObservable<number>;
     exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
-    evolver: KnockoutSubscription
+    evolver: KnockoutSubscription;
 
     constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number) {
         this.id = pokemonData.id;
@@ -18,9 +18,13 @@ class CaughtPokemon {
         this.evolved = ev;
         this.attackBonus = ko.observable(atBo);
         this.exp = ko.observable(xp);
-        this.levelObservable = ko.computed(() => {return PokemonHelper.calculateLevel(this)});
-        this.baseAttack = pokemonData.attack
-        this.attack = ko.computed(() => {return PokemonHelper.calculateAttack(this.baseAttack, this.attackBonus(), this.levelObservable())})
+        this.levelObservable = ko.computed(() => {
+            return PokemonHelper.calculateLevel(this);
+        });
+        this.baseAttack = pokemonData.attack;
+        this.attack = ko.computed(() => {
+            return PokemonHelper.calculateAttack(this.baseAttack, this.attackBonus(), this.levelObservable());
+        });
 
         if (pokemonData.evoLevel && !this.evolved) {
             this.evolver = this.levelObservable.subscribe(() => {
@@ -29,14 +33,14 @@ class CaughtPokemon {
                     this.evolved = true;
                     this.evolver.dispose();
                 }
-            })
+            });
         }
     }
 
     public toJSON() {
         let keep, plainJS;
         keep = ["name", "evolved", "attackBonus", "exp"];
-        plainJS = ko.toJS(this)
-        return Save.filter(plainJS, keep)
+        plainJS = ko.toJS(this);
+        return Save.filter(plainJS, keep);
     }
 }

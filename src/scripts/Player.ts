@@ -74,8 +74,7 @@ class Player {
 
         if (savedPlayer._caughtPokemonList) {
             tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp);
-                return tmp
+                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp)
             });
         }
         this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
@@ -400,7 +399,6 @@ class Player {
     set town(value: KnockoutObservable<Town>) {
         this._town = value;
     }
-
 
     get oakItemsEquipped(): string[] {
         return this._oakItemsEquipped;

@@ -3,7 +3,6 @@
 
 import PokemonType = GameConstants.PokemonType;
 
-
 /**
  * Gym class.
  */

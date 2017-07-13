@@ -64,7 +64,6 @@ class DungeonRunner {
         DungeonBattle.generateNewBoss();
     }
 
-
     private static dungeonLost() {
         Game.gameState(GameConstants.GameState.town);
         console.log("You lost... loser!");
@@ -79,6 +78,5 @@ class DungeonRunner {
     public static timeLeftSeconds = ko.computed(function () {
         return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
     })
-
 
 }

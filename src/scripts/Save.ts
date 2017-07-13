@@ -23,10 +23,9 @@ class Save {
         location.reload()
     }
 
-
     /** Filters an object by property names
-     * @param     object : The object you want to filter
-     * @param       keep : An array of property names that should be kept
+     * @param     object : any The object you want to filter
+     * @param       keep : string[] An array of property names that should be kept
      * @returns {Object} : The original object with only the specified properties
      */
     public static filter(object: any, keep: string[]): Object {
