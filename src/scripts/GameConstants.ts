@@ -17,12 +17,14 @@ namespace GameConstants {
 
     export const AMOUNT_OF_POKEMONS = 151;
 
-
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
     export const SHINY_CHANCE_BREEDING = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
+
+    export const ITEM_PRICE_MULTIPLIER = 1.02;
+    export const ITEM_PRICE_DEDUCT = 0.003;
 
 
     // Oak items
@@ -74,6 +76,7 @@ namespace GameConstants {
         dungeon = 4,
         safari = 5,
         town = 6,
+        shop = 7,
     }
 
     export enum Pokeball {
@@ -84,6 +87,12 @@ namespace GameConstants {
         "Masterball" = 3,
     }
 
+    export enum Currency {
+        money,
+        questpoint,
+        dungeontoken,
+    }
+
     export const PokeballCatchBonus = [
         0,
         5,
@@ -91,7 +100,7 @@ namespace GameConstants {
         100,
     ];
 
-    export function getCatchBonus(ball:GameConstants.Pokeball) {
+    export function getCatchBonus(ball: GameConstants.Pokeball) {
         return GameConstants.PokeballCatchBonus[ball];
     }
 
@@ -112,6 +121,7 @@ namespace GameConstants {
     class Option {
         optionText: String;
         optionValue: GameConstants.SortOptionsEnum;
+
         constructor(text, value) {
             this.optionText = text;
             this.optionValue = value;
@@ -244,6 +254,53 @@ namespace GameConstants {
         "Bulbasaur" = 0,
         "Charmander" = 1,
         "Squirtle" = 2,
+    }
+
+    export enum StoneType {
+        Fire,
+        Water,
+        Thunder,
+        Leaf,
+        Moon,
+        Sun,
+    }
+
+    export enum BattleItemType {
+        xAttack,
+        xClick,
+        xExp,
+        XToken,
+        xItem
+    }
+
+    export enum BerryType {
+        Cheri,
+        Chesto,
+        Pecha,
+        Rawst,
+        Aspear,
+        Leppa,
+        Oran
+    }
+
+    export enum PokeBlockColor {
+        Black,
+        Red,
+        Gold,
+        Purple,
+        Gray,
+        White
+    }
+
+    export enum VitaminType {
+        Protein,
+        RareCandy
+    }
+
+    export enum EnergyRestoreSize {
+        SmallRestore,
+        MediumRestore,
+        LargeRestore
     }
 }
 

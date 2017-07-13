@@ -68,7 +68,7 @@ class Battle {
         } else {
             this.generateNewEnemy();
         }
-
+        player.lowerItemMultipliers();
     }
 
     /**
