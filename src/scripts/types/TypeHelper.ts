@@ -43,23 +43,24 @@ class TypeHelper {
         let defendType2 = GameConstants.PokemonType[d2];
 
         console.log(attackType1);
-
+        console.log(defendType1);
         let list = player._shards;
         //TODO factor in shard value
         let m1 = this.typeMatrix[attackType1][defendType1];
         m1 += list[attackType1][this.valueToType(m1)];
 
-        let m2 = 1;
-        if (a2 != -1) {
+        let m2 = 1, m3 = 1, m4 = 1;
+        if (d2 != -1) {
             m2 = this.typeMatrix[attackType1][defendType2];
             m2 += list[attackType1][this.valueToType(m2)];
         }
 
-        let m3 = this.typeMatrix[attackType2][defendType1];
-        m3 += list[attackType2][this.valueToType(m3)];
+        if (a2 != -1) {
+            m2 = this.typeMatrix[attackType2][defendType1];
+            m3 += list[attackType2][this.valueToType(m3)];
+        }
 
-        let m4 = 1;
-        if (d2 != -1) {
+        if (a2 != -1 && d2 != -1) {
             let m4 = this.typeMatrix[attackType2][defendType2];
             m4 += list[attackType2][this.valueToType(m4)];
         }
@@ -81,6 +82,13 @@ class TypeHelper {
                 return GameConstants.TypeEffectiveness.Normal;
             case GameConstants.TypeEffectivenessValue.Very :
                 return GameConstants.TypeEffectiveness.Very;
+        }
+    }
+
+    public static test() {
+        let val = this.getAttackModifier(GameConstants.PokemonType.Water, GameConstants.PokemonType.None, GameConstants.PokemonType.Fire, GameConstants.PokemonType.None);
+        if (val == 2) {
+            throw new Error("val was " + val);
         }
     }
 }

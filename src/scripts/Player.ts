@@ -184,9 +184,9 @@ class Player {
             } else {
                 let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
-                console.log(attack);
             }
         }
+        console.log(attack);
 
         // return attack;
         return attack;
@@ -195,7 +195,7 @@ class Player {
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
-        return Math.floor(Math.pow(this.caughtPokemonList.length + 1,1.4) * oakItemBonus);
+        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
     }
 
     public calculateMoneyMultiplier(): number {
@@ -278,7 +278,7 @@ class Player {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
-            if(!supressNotification) {
+            if (!supressNotification) {
                 Notifier.notify("You have captured " + pokemonName, GameConstants.NotificationOption.success)
             }
         }
