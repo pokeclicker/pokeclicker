@@ -526,7 +526,18 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                         <div class="col-11 col-sm-10 col-md-11">
                             <div class="input-group" style="margin-bottom: 6px; margin-top: 6px">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-danger"
+                                    <button class="btn btn-secondary smallButton smallFont" type="button"
+                                            onclick="ShopHandler.increaseAmount(-100)">-100
+                                    </button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary smallButton smallFont"
+                                            type="button"
+                                            onclick="ShopHandler.increaseAmount(-10)">-10
+                                    </button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger smallButton smallFont"
                                             onclick="ShopHandler.resetAmount()">1
                                     </button>
                                 </span>
