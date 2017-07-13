@@ -7,7 +7,6 @@ class KeyItemHandler {
     public static initialize() {
         KeyItemHandler.keyItemList = [];
 
-        // TODO obtain after the tutorial
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Teachy tv", "A television set that is tuned to a program with useful tips for novice TRAINERS")));
 
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Coin case", "A case for holding money. It can hold up to 1,000,000 coins")));
@@ -16,7 +15,8 @@ class KeyItemHandler {
             return player.routeKillsObservable(1)() > player.routeKillsNeeded -1;
         })));
 
-
+        // TODO obtain somewhere at the start
+        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Factory key", "This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13.")));
 
         // TODO obtain somewhere at the start
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Dungeon ticket", "This ticket grants access to all dungeons in the Kanto region")));
