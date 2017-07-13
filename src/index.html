@@ -341,7 +341,7 @@
                 <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
                      class="justify-content-center no-gutters no-select">
                     <div class="row justify-content-center no-gutters" style="min-height: 100px;">
-                        <div class="col no-gutters">
+                        <div class="col no-gutters" style="padding-top: 20px">
                             <div data-bind="if: player.town() instanceof PokemonLeague">
                                 <ul class="nav flex-sm-column featureList pokemonLeagueList"
                                     data-bind="foreach: player.town().gymList">
@@ -396,7 +396,6 @@
                                  data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
                         </div>
                         <div class="col no-gutters"></div>
-
                     </div>
                     <div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
                         <div class="card">
@@ -562,6 +561,7 @@
                 </div>
             </div>
 
+            <!-- Map -->
             <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
                     Game.gameState() == GameConstants.GameState.shop)">
                 <div class="page-item no-select">
@@ -1012,8 +1012,9 @@
 
                             <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="343.6"
                                   y="109.3"></rect>
-                            <rect class="city" id="Day Care Center" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
-                                  height="12.6" stroke="#6c8ebf" width="12.6" x="345" y="110.7"></rect>
+                            <rect class="city" id="Pokemon Day Care" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                  height="12.6" stroke="#6c8ebf" width="12.6" x="345" y="110.7"
+                                  data-bind="click:function(){BreedingHelper.openBreedingModal()}"></rect>
                         </g>
                     </svg>
                 </div>
@@ -1404,6 +1405,61 @@
                 </div>
             </div>
         </div>
+
+        <!-- Breeding Modal-->
+        <div class="modal" id="breedingModal" tabindex="-1" role="dialog"
+             aria-labelledby="breedingModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src="assets/images/oak.png">
+                            <h5 class="modal-title" id="breedingModalLabel">Day Care Old Man</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            This is the Pokémon Day Care Center. You can trade your <br>
+                            level 100 pokémon for an egg of the same pokémon.<br>
+                            Hatched pokémon have a higher chance of becoming shiny!
+                        </p>
+                        <div data-bind="if: player.canBreedPokemon()">
+                            <p>
+                                Pick a pokémon below to breed them:
+                            </p>
+
+                            <div class="row col-lg-10 col-md-12 offset-lg-1 offset-md-0 col-sm-12 offset-sm-0"
+                                 style="padding-right: 0"
+                                 data-bind="foreach: player.maxLevelPokemonList()">
+                                <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
+                                    <button class="btn btn-secondary smallButton list-group-item-action"
+                                            data-bind="click: function() {BreedingHelper.gainPokemonEgg($data.name)}">
+                                        <img class="smallImage"
+                                             data-bind="attr:{ src: '/assets/images/pokemon/' + id +'.png' }"
+                                             src=""/>
+                                        <span data-bind="text: name" style="margin-left: 20px">Name</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div data-bind="if: !player.hasMaxLevelPokemon()">
+                            <p>
+                                Unfortunately, you don't have any pokémon of level 100
+                            </p>
+                        </div>
+                        <div data-bind="if: !player.hasFreeEggSlot()">
+                            <p>
+                                Unfortunately, you don't have any free eggslots
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 </body>

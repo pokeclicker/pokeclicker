@@ -23,8 +23,8 @@ class Player {
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
-    private _eggList: Egg[];
-    private _eggSlots: number;
+    private _eggList: KnockoutObservableArray<Egg>;
+    private _eggSlots: KnockoutObservable<number>;
 
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
@@ -112,8 +112,8 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
-        this._eggList = savedPlayer._eggList || [];
-        this._eggSlots = savedPlayer._eggSlots || 1;
+        this._eggList = ko.observableArray(savedPlayer._eggList != null ? savedPlayer._eggList : []);
+        this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
 
         //TODO remove before deployment
         if (!debug) {
@@ -312,6 +312,26 @@ class Player {
         }, this).extend({rateLimit: player.calculateCatchTime()})
     }
 
+    public maxLevelPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
+        return ko.pureComputed(function () {
+            return this._caughtPokemonList().filter((pokemon) => {
+                return pokemon.levelObservable() == 100;
+            })
+        }, this)
+    }
+
+    public canBreedPokemon(): boolean {
+        return this.hasMaxLevelPokemon() && this.hasFreeEggSlot();
+    }
+
+    public hasMaxLevelPokemon(): boolean {
+        return this.maxLevelPokemonList()().length > 0;
+    }
+
+    public hasFreeEggSlot(): boolean {
+        return this._eggList().length < this._eggSlots();
+    }
+
     public gainBadge(badge: GameConstants.Badge) {
         this._gymBadges().push(badge);
     }
@@ -440,24 +460,16 @@ class Player {
         this._itemMultipliers = value;
     }
 
-    get eggList(): Egg[] {
+    get eggList(): KnockoutObservableArray<Egg> {
         return this._eggList;
     }
 
-    set eggList(value: Egg[]) {
-        this._eggList = value;
-    }
-
-    get eggSlots(): number {
+    get eggSlots(): KnockoutObservable<number> {
         return this._eggSlots;
     }
 
-    set eggSlots(value: number) {
-        this._eggSlots = value;
-    }
-
     public gainEggSlot() {
-        this._eggSlots++;
+        this._eggSlots(this._eggSlots() + 1);
     }
 
     public toJSON() {

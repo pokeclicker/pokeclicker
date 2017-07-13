@@ -37,7 +37,7 @@ namespace GameConstants {
     export const OAKITEM_THIRD_UNLOCK = 100;
 
     // Breeding
-    export const BREEDING_AMOUNT = 10;
+    export const BREEDING_AMOUNT = 1;
 
     export enum OakItem {
         "Magic Ball" = 0,

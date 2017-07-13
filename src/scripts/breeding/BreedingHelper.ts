@@ -3,6 +3,11 @@
  */
 class BreedingHelper {
 
+    public static openBreedingModal() {
+        Game.gameState(GameConstants.GameState.paused);
+        $('#breedingModal').modal('show')
+    }
+
     public static progressEggs() {
         let amount = GameConstants.BREEDING_AMOUNT;
         if (OakItemRunner.isActive("Blaze Casette")) {
@@ -16,14 +21,21 @@ class BreedingHelper {
         }
     }
 
-    public static createEgg(pokemonName: string): Egg {
+    public static gainPokemonEgg(name: string) {
+        let egg = this.createEgg(name);
+
+        $('#breedingModal').modal('hide');
+
+    }
+
+    public static createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
         let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
-        return new Egg(this.getSteps(dataPokemon.eggCycles), pokemonName, GameConstants.EggType.Pokemon);
+        return new Egg(this.getSteps(dataPokemon.eggCycles), pokemonName, type);
     }
 
     public static createTypedEgg(type: GameConstants.EggType): Egg {
         let name = HatchList[type][Math.floor(Math.random() * HatchList[type].length)];
-        return BreedingHelper.createEgg(name);
+        return BreedingHelper.createEgg(name, type);
     }
 
     public static createRandomEgg(): Egg {
@@ -48,3 +60,11 @@ HatchList[GameConstants.EggType.Fight] = ["Hitmonlee", "Hitmonchan", "Machop", "
 HatchList[GameConstants.EggType.Electric] = ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"];
 HatchList[GameConstants.EggType.Dragon] = ["Dratini", "Dragonair", "Dragonite"];
 HatchList[GameConstants.EggType.Pokemon] = [];
+
+document.addEventListener("DOMContentLoaded", function (event) {
+
+    $('#breedingModal').on('hide.bs.modal', function () {
+        Game.gameState(GameConstants.GameState.fighting);
+    });
+
+});
