@@ -195,7 +195,7 @@ namespace GameConstants {
         "Poison" = 7,
         "Ground" = 8,
         "Flying" = 9,
-        "Psychich" = 10,
+        "Psychic" = 10,
         "Bug" = 11,
         "Rock" = 12,
         "Ghost" = 13,

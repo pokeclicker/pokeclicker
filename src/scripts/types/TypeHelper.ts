@@ -42,26 +42,24 @@ class TypeHelper {
         let defendType1 = GameConstants.PokemonType[d1];
         let defendType2 = GameConstants.PokemonType[d2];
 
-        console.log(attackType1);
-        console.log(defendType1);
         let list = player._shards;
         //TODO factor in shard value
-        let m1 = this.typeMatrix[attackType1][defendType1];
+        let m1 = TypeHelper.typeMatrix[attackType1][defendType1];
         m1 += list[attackType1][this.valueToType(m1)];
 
         let m2 = 1, m3 = 1, m4 = 1;
         if (d2 != -1) {
-            m2 = this.typeMatrix[attackType1][defendType2];
+            m2 = TypeHelper.typeMatrix[attackType1][defendType2];
             m2 += list[attackType1][this.valueToType(m2)];
         }
 
         if (a2 != -1) {
-            m2 = this.typeMatrix[attackType2][defendType1];
+            m2 = TypeHelper.typeMatrix[attackType2][defendType1];
             m3 += list[attackType2][this.valueToType(m3)];
         }
 
         if (a2 != -1 && d2 != -1) {
-            let m4 = this.typeMatrix[attackType2][defendType2];
+            let m4 = TypeHelper.typeMatrix[attackType2][defendType2];
             m4 += list[attackType2][this.valueToType(m4)];
         }
 
