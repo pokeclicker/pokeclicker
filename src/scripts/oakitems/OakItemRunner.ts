@@ -48,7 +48,9 @@ class OakItemRunner {
     public static click(name: string) {
         let item: OakItem = OakItemRunner.getOakItemByName(name);
         OakItemRunner.selectedItem(item);
-        OakItemRunner.activateOakItem(item.id);
+        if(item.isUnlocked()) {
+            OakItemRunner.activateOakItem(item.id);
+        }
     }
 
     public static use(name: string) {
