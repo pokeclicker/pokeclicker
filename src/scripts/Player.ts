@@ -195,7 +195,7 @@ class Player {
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
-        return 111111111500 * oakItemBonus;
+        return Math.floor(Math.pow(this.caughtPokemonList.length + 1,1.4) * oakItemBonus);
     }
 
     public calculateMoneyMultiplier(): number {
@@ -215,7 +215,7 @@ class Player {
 
     public calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
-        return 20;
+        return 1250;
     }
 
     /**
@@ -272,12 +272,15 @@ class Player {
         return false;
     }
 
-    public capturePokemon(pokemonName: string, shiny: boolean = false) {
+    public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
         OakItemRunner.use("Magic Ball");
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
+            if(!supressNotification) {
+                Notifier.notify("You have captured " + pokemonName, GameConstants.NotificationOption.success)
+            }
         }
         if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
             this._caughtShinyList.push(pokemonName);

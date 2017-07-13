@@ -66,13 +66,13 @@ class DungeonRunner {
 
     private static dungeonLost() {
         Game.gameState(GameConstants.GameState.town);
-        console.log("You lost... loser!");
+        Notifier.notify("You could not complete the dungeon in time", GameConstants.NotificationOption.danger);
     }
 
     public static dungeonWon() {
         Game.gameState(GameConstants.GameState.town);
         // TODO award loot with a special screen
-        console.log("You won... winner!");
+        Notifier.notify("You have successfully completed the dungeon", GameConstants.NotificationOption.success);
     }
 
     public static timeLeftSeconds = ko.computed(function () {

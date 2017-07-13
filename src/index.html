@@ -32,6 +32,10 @@
     <link href="libs/bootstrap.min.css" rel="stylesheet">
     <script src="libs/bootstrap.min.js"></script>
 
+    <!--Notify-->
+    <script src="libs/bootstrap-notify.min.js"></script>
+
+
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
@@ -446,8 +450,7 @@
                             </div>
                             <ul class="nav flex-sm-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
-                                    <button data-bind="disable: !Gym.isUnlocked(player.town().gym()),
-                                                       attr: { class: Gym.calculateCssClass(player.town().gym()) }"
+                                    <button data-bind="attr: { class: Gym.calculateCssClass(player.town().gym()) }"
                                             onclick="GymRunner.startGym(player.town().gym())">
                                         Gym
                                     </button>
@@ -1405,8 +1408,8 @@
                     <div class="modal-body">
                         <p id="pickStarterModalText">Oh No! We got ambushed by these pokémon!<br>
                             I can only hold off two! Pick the one you want to fight!</p>
-                        <div class="row">
-                            <div class="col-lg-8 offset-lg-2">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
                                 <div class="row">
 
                                     <div class="col">
@@ -1452,8 +1455,8 @@
                             To help you on you journey, I will give you these <b>Key items</b>!<br>
                             You can view all your <b>Key items</b> in the start menu.<br>
                         </p>
-                        <div class="row">
-                            <div class="col-sm-3 offset-sm-1">
+                        <div class="row justify-content-center">
+                            <div class="col-sm-3">
                                 <img
                                         title="A television set that is tuned to a program with useful tips for novice TRAINERS"
                                         class="key-item"

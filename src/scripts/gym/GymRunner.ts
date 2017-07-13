@@ -23,7 +23,8 @@ class GymRunner {
             Game.gameState(GameConstants.GameState.gym);
             GymBattle.generateNewEnemy();
         } else {
-            console.log("gym " + gym.leaderName + " is locked")
+            Notifier.notify(gym.leaderName + " thinks you are not a worthy opponent yet...", GameConstants.NotificationOption.danger);
+            Notifier.notify("Perhaps you should fight another gymleader first?", GameConstants.NotificationOption.info);
         }
     }
 
@@ -36,14 +37,17 @@ class GymRunner {
     }
 
     public static gymLost() {
+        Notifier.notify("It appears you are not strong enough to defeat " + player.town().gym().leaderName, GameConstants.NotificationOption.danger);
         Game.gameState(GameConstants.GameState.town);
     }
 
     public static gymWon(gym: Gym) {
+        Notifier.notify("Congratulations, you defeated " + player.town().gym().leaderName + "!", GameConstants.NotificationOption.success);
         this.gymObservable(gym);
         player.gainMoney(gym.moneyReward);
         if (!player.hasBadge(gym.badgeReward)) {
             player.gainBadge(gym.badgeReward);
+
             $('#receiveBadgeModal').modal('show');
         }
         player.town(TownList[gym.town]);
@@ -56,3 +60,16 @@ class GymRunner {
     })
 
 }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+
+    $('#receiveBadgeModal').on('hidden.bs.modal', function () {
+       if(player.town().gym().badgeReward == GameConstants.Badge.Boulder){
+           player.gainKeyItem("Dungeon ticket");
+       }
+       if(player.town().gym().badgeReward == GameConstants.Badge.Soul){
+           player.gainKeyItem("Safari ticket");
+       }
+
+    });
+});
