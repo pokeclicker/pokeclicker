@@ -41,7 +41,8 @@
 <div class="dropdown clearfix" style="position:absolute; right:0; top:0">
     <button class="btn btn-secondary dropdown-toggle float-right" type="button" data-toggle="dropdown">Start
         Menu
-        <span class="caret"></span></button>
+        <span class="caret"></span>
+    </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
             <button class="dropdown-item" href="#">Pokedex</button>
@@ -78,9 +79,11 @@
                 <h4 class="modal-title">Donate!</h4>
             </div>
             <div class="modal-body">
-                <span>As game developers who do not charge any money for their game, and are very much opposed to advertisements, it is difficult to make money.
+                <span>As game developers who do not charge any money for their game, and are very much opposed to
+                    advertisements, it is difficult to make money.
                     We devote our time to creating games that can stay free of ads, forever.
-                    With the buttons below, you can show your support and make sure we keep developing awesome games for you!
+                    With the buttons below, you can show your support and make sure we keep developing awesome games for
+                    you!
                 </span>
                 <br><br>
                 <span>Please leave a message after donating, so we can contact and thank you!</span>
@@ -175,35 +178,38 @@
 <div class="container">
     <div class="row justify-content-lg-center">
         <h1>Pokeclicker</h1>
-
     </div>
-
     <div class="row justify-content-lg-center" style="text-align: center">
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <!--Middle column-->
         <div class="col-lg-6 push-lg-3">
             <div id="interactionView" class="page-item" style="background-color: white">
+                <!--RouteBattleView-->
                 <!--Use the base battle layout for fighting and dungeons.-->
                 <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.dungeon || Game.gameState() == GameConstants.GameState.paused)"
                      id="routeBattleView">
                     <div class="card">
-                        <span>Money: <span data-bind="text: player.money">todo</span></span>
+                        <span>Money:
+                            <span data-bind="text: player.money">todo</span>
+                        </span>
                     </div>
                     <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting">
                         <div style="height: 190px; display: block;" class="col-lg-12">
                             <div class="col-lg-12" style="display: block;">
-                                Route <span data-bind="text: player.route">number</span>
+                                Route
+                                <span data-bind="text: player.route">number</span>
                                 <!--If all Pokémon on the route are caught-->
                                 <span data-bind="if: (!RouteHelper.routeCompleted(player.route(), player.region, true) && RouteHelper.routeCompleted(player.route(), player.region, false))">
-                                <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
-                                     src="assets/images/pokeball/Pokeball-small.png"/>
+                                    <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-small.png"/>
                                 </span>
 
                                 <!--If all Pokémon on the route are caught shiny-->
                                 <span data-bind="if: RouteHelper.routeCompleted(player.route(), player.region, true)">
-                                <img title="You have captured all Pokémon shiny on this route!"
-                                     class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                                    <img title="You have captured all Pokémon shiny on this route!"
+                                         class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                                 </span>
 
                                 <br>
@@ -215,9 +221,9 @@
 
                             <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
                             <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
-                                        <img title="You have captured this Pokémon!" class="pokeball-smallest"
-                                             src="assets/images/pokeball/Pokeball-small.png"/>
-                                    </span>
+                                <img title="You have captured this Pokémon!" class="pokeball-smallest"
+                                     src="assets/images/pokeball/Pokeball-small.png"/>
+                            </span>
 
                             <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
                             <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
@@ -266,7 +272,8 @@
                             </div>
 
                             <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
-                                <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span><br>
+                                <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
+                                <br>
                                 <div style="height: 96px;">
                                     <div data-bind="ifnot: DungeonBattle.catching">
                                         <img id="dungeonEnemy"
@@ -280,8 +287,7 @@
                                 </div>
                                 <div class="progress">
                                     <div class="progress-bar" role="progressbar"
-                                         data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'},
-css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
+                                         data-bind="attr:{ style: 'width:' + DungeonBattle.enemyPokemon().healthPercentage() + '%'}, css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunner.fightingBoss()}"
                                          aria-valuemin="0" aria-valuemax="100">
                                     </div>
                                 </div>
@@ -310,15 +316,21 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                         </div>
                     </div>
 
-                    <!--End of switch-->
                     <div class="card">
                         <table width="100%">
                             <tr>
 
-                                <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                        data-bind="text: player.pokemonAttackObservable"></span></span></td>
-                                <td width="50%"><span style="display: inline;">Click Attack: <span
-                                        data-bind="text: player.clickAttackObservable"></span></span>
+                                <td width="50%">
+                                    <span style="display: inline;">Pokémon Attack:
+                                        <span
+                                                data-bind="text: player.pokemonAttackObservable"></span>
+                                    </span>
+                                </td>
+                                <td width="50%">
+                                    <span style="display: inline;">Click Attack:
+                                        <span
+                                                data-bind="text: player.clickAttackObservable"></span>
+                                    </span>
                                 </td>
                             </tr>
                         </table>
@@ -353,8 +365,8 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                                     </button>
                                 </li>
                                 <li class="nav-item" data-bind="if:player.town().shop">
-                                    <button class="btn btn-secondary">
-                                        Shop
+                                    <button class="btn btn-secondary"
+                                            onclick="ShopHandler.showShop(player.town().shop())">Shop
                                     </button>
                                 </li>
                                 <div data-bind="if:player.town().dungeon()">
@@ -383,9 +395,7 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                             <img class="townImage no-select" src=""
                                  data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
                         </div>
-                        <div class="col no-gutters">
-
-                        </div>
+                        <div class="col no-gutters"></div>
 
                     </div>
                     <div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
@@ -465,6 +475,72 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                     </div>
 
                 </div>
+                <!--ShopView-->
+                <div id="shopView"
+                     data-bind="if: Game.gameState() == GameConstants.GameState.shop">
+                    <div class="card">
+                        <span>Money:
+                            <span data-bind="text: player.money">todo</span>
+                        </span>
+                    </div>
+                    <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
+                        <div class="col-sm-3">
+                            <div
+                                    data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
+                                <img src="" height="36px"
+                                     data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
+                                <p data-bind="text: name">Item Name</p>
+                                <p>
+                                    <img src=""
+                                         data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
+                                    <span data-bind="text: totalPrice">Price</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-11 col-sm-10 col-md-11">
+                            <div class="input-group" style="margin-bottom: 6px; margin-top: 6px">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary smallButton smallFont" type="button"
+                                            onclick="ShopHandler.increaseAmount(-100)">-100
+                                    </button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary smallButton smallFont"
+                                            type="button"
+                                            onclick="ShopHandler.increaseAmount(-10)">-10
+                                    </button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-danger smallButton smallFont"
+                                            onclick="ShopHandler.resetAmount()">1
+                                    </button>
+                                </span>
+                                <input id="amountOfItems" type="number" class="form-control form-control-number"
+                                       value="1" min="1" required name="amountOfItems"
+                                       oninput="ShopHandler.amount(parseInt($(this).val().toString()) || 0);"
+                                       onchange="ShopHandler.amount(parseInt($(this).val().toString()) || 0);">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary smallButton smallFont" type="button"
+                                            onclick="ShopHandler.increaseAmount(10)">+10
+                                    </button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-secondary smallButton smallFont"
+                                            type="button"
+                                            onclick="ShopHandler.increaseAmount(100)">+100
+                                    </button>
+                                </span>
+                                <span class="input-group-btn" style="float: right;">
+                                    <button data-bind="attr: {class: ShopHandler.calculateButtonCss()}"
+                                            onclick="ShopHandler.buyItem()">Buy
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
@@ -486,8 +562,8 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                 </div>
             </div>
 
-            <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town)"
-            >
+            <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
+                    Game.gameState() == GameConstants.GameState.shop)">
                 <div class="page-item no-select">
                     <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
                         <defs>
@@ -938,6 +1014,7 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                     </svg>
                 </div>
             </div>
+
         </div>
 
         <!--left column-->
@@ -1006,10 +1083,18 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
 
                             <tr>
                                 <td></td>
-                                <td><span data-bind="text: player.pokeballsObservable(0)"></span></td>
-                                <td><span data-bind="text: player.pokeballsObservable(1)"></span></td>
-                                <td><span data-bind="text: player.pokeballsObservable(2)"></span></td>
-                                <td><span data-bind="text: player.pokeballsObservable(3)"></span></td>
+                                <td>
+                                    <span data-bind="text: player.pokeballsObservable(0)"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: player.pokeballsObservable(1)"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: player.pokeballsObservable(2)"></span>
+                                </td>
+                                <td>
+                                    <span data-bind="text: player.pokeballsObservable(3)"></span>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -1049,7 +1134,9 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
             <div class="page-item" style="background-color: white;">
                 <div class="card">
                     <span style="text-align:center"
-                          data-bind="text: OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()">asd</span>
+                          data-bind="text: OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()">
+                        asd
+                    </span>
                 </div>
                 <div class="row justify-content-sm-center" data-bind="foreach: OakItemRunner.oakItemList">
                     <div>
@@ -1076,7 +1163,9 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                     <div data-bind="if: OakItemRunner.inspectedItem().isUnlocked()">
                         <div class="row justify-content-sm-center">
                             <div style="height:20px;" class="col">
-                                <b><span data-bind="text: OakItemRunner.inspectedItem().name()"></span></b>
+                                <b>
+                                    <span data-bind="text: OakItemRunner.inspectedItem().name()"></span>
+                                </b>
                             </div>
                         </div>
                         <div class="row justify-content-sm-center">
@@ -1107,11 +1196,14 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                         <div class="row justify-content-sm-center no-gutters">
 
                             <div class="col">
-                                Lvl.<span data-bind="text: OakItemRunner.inspectedItem().level()"></span>
+                                Lvl.
+                                <span data-bind="text: OakItemRunner.inspectedItem().level()"></span>
                             </div>
 
                             <div class="col">
-                                Bonus: <span data-bind="text: OakItemRunner.inspectedItem().calculateBonus()"></span>%
+                                Bonus:
+                                <span data-bind="text: OakItemRunner.inspectedItem().calculateBonus()"></span>
+                                %
                             </div>
                         </div>
                     </div>
@@ -1119,12 +1211,16 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
 
                         <div class="row justify-content-sm-center">
                             <div style="height:20px;" class="col">
-                                <b><span data-bind="text: OakItemRunner.inspectedItem().name()"></span></b>
+                                <b>
+                                    <span data-bind="text: OakItemRunner.inspectedItem().name()"></span>
+                                </b>
                             </div>
                         </div>
 
                         <div style="min-height:80px; vertical-align: center">
-                            Capture<span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span> Pokémon to
+                            Capture
+                            <span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span>
+                            Pokémon to
                             unlock!
                         </div>
                     </div>

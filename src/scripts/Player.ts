@@ -23,10 +23,12 @@ class Player {
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
+    private _itemList: { [name: string]: number };
+    private _itemMultipliers: { [name: string]: number };
+
     public clickAttackObservable: KnockoutComputed<number>;
 
     public pokemonAttackObservable: KnockoutComputed<number>;
-
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -56,7 +58,6 @@ class Player {
         this._pokeballs[ball](this._pokeballs[ball]() - 1)
     }
 
-
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
@@ -64,7 +65,12 @@ class Player {
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
-        this._route = ko.observable(savedPlayer._route || 1);
+        if (savedPlayer._route == null || savedPlayer._route == 0) {
+            this._route = ko.observable(1);
+        } else {
+            this._route = ko.observable(savedPlayer._route)
+        }
+
         if (savedPlayer._caughtPokemonList) {
             tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
                 let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp);
@@ -101,7 +107,8 @@ class Player {
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
-
+        this._itemList = savedPlayer._itemList || Save.initializeItemlist();
+        this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -213,7 +220,6 @@ class Player {
         }
         return use;
     }
-
 
     /**
      * Loops through the caughtPokemonList to check if the pokémon is already caight
@@ -397,8 +403,39 @@ class Player {
         this._oakItemExp = value;
     }
 
+    get itemList(): { [p: string]: number } {
+        return this._itemList;
+    }
+
+    set itemList(value: { [p: string]: number }) {
+        this._itemList = value;
+    }
+
+    public gainItem(itemName: string, amount: number) {
+        this._itemList[itemName] += amount;
+    }
+
+    public loseItem(itemname: string, amount: number) {
+        this._itemList[itemname] -= amount;
+    }
+
+    public lowerItemMultipliers() {
+        for (let obj in ItemList) {
+            let item = ItemList[obj];
+            item.decreasePriceMultiplier();
+        }
+    }
+
+    get itemMultipliers(): { [p: string]: number } {
+        return this._itemMultipliers;
+    }
+
+    set itemMultipliers(value: { [p: string]: number }) {
+        this._itemMultipliers = value;
+    }
+
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_itemList", "_itemMultipliers"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
