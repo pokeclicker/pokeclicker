@@ -123,7 +123,7 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
-    public hasKeyItem(name: string) {
+    public hasKeyItem(name: string) :boolean {
         for (let i = 0; i < this._keyItems().length; i++) {
             if (this._keyItems()[i] == name) {
                 return true;
@@ -131,6 +131,8 @@ class Player {
         }
         return false;
     }
+
+
 
     public gainKeyItem(name: string, supressModal? :boolean) {
         if (!this.hasKeyItem(name)) {
