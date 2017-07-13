@@ -13,6 +13,10 @@ class DungeonRunner {
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
 
     public static initializeDungeon(dungeon) {
+        if (!dungeon.isUnlocked()) {
+            return false;
+        }
+
         DungeonRunner.dungeon = dungeon;
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE);
@@ -34,8 +38,8 @@ class DungeonRunner {
         this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100))
     }
 
-    public static openChest(){
-        if(DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest){
+    public static openChest() {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest) {
             return;
         }
 
@@ -43,16 +47,16 @@ class DungeonRunner {
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         // TODO add loot
-        if(DungeonRunner.chestsOpened == GameConstants.DUNGEON_CHEST_SHOW){
+        if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_CHEST_SHOW) {
             DungeonRunner.map.showChestTiles();
         }
-        if(DungeonRunner.chestsOpened == GameConstants.DUNGEON_MAP_SHOW){
+        if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_MAP_SHOW) {
             DungeonRunner.map.showAllTiles();
         }
     }
 
-    public static startBossFight(){
-        if(DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.boss || DungeonRunner.fightingBoss()){
+    public static startBossFight() {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.boss || DungeonRunner.fightingBoss()) {
             return;
         }
 

@@ -26,8 +26,9 @@ class Player {
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
 
+    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
-
+    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
@@ -89,6 +90,7 @@ class Player {
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._region = savedPlayer._region || GameConstants.Region.kanto;
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
+        this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
             return ko.observable(savedPlayer._pokeballs ? (savedPlayer._pokeballs[index] || 1000) : 1000)
         });
@@ -121,6 +123,27 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
+    public hasKeyItem(name: string) :boolean {
+        for (let i = 0; i < this._keyItems().length; i++) {
+            if (this._keyItems()[i] == name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+    public gainKeyItem(name: string, supressModal? :boolean) {
+        if (!this.hasKeyItem(name)) {
+            this.recentKeyItem(name);
+            if(!supressModal) {
+                $("#keyItemModal").modal('show');
+            }
+            this._keyItems().push(name);
+            KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
+        }
+    }
 
     public calculateOakItemSlots(): KnockoutObservable<number> {
         let total = 0;
@@ -435,7 +458,7 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_itemList", "_itemMultipliers"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_itemList", "_itemMultipliers", "_keyItems"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
