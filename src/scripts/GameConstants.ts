@@ -31,8 +31,8 @@ namespace GameConstants {
     export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
     export const AMOUNT_OF_OAKITEMS = 8;
     export const OAKITEM_MAX_LEVEL = 5;
-    export const OAKITEM_FIRST_UNLOCK = 30;
-    export const OAKITEM_SECOND_UNLOCK = 60;
+    export const OAKITEM_FIRST_UNLOCK = 20;
+    export const OAKITEM_SECOND_UNLOCK = 50;
     export const OAKITEM_THIRD_UNLOCK = 100;
 
     export enum OakItem {

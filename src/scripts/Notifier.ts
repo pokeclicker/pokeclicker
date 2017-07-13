@@ -14,7 +14,7 @@ class Notifier {
             position: null,
             type: GameConstants.NotificationOption[type],
             allow_dismiss: true,
-            newest_on_top: false,
+            newest_on_top: true,
             showProgressbar: false,
             placement: {
                 from: "top",
