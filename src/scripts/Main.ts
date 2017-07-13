@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     };
 
-    ko.applyBindings(Game);
+    ko.applyBindings(game);
     ko.options.deferUpdates = true;
 });
 
