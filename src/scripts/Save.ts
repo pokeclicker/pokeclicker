@@ -39,4 +39,19 @@ class Save {
         return filtered
     }
 
+    public static initializeMultipliers(): { [name: string]: number } {
+        let res = {};
+        for (let obj in ItemList) {
+            res[obj] = 1;
+        }
+        return res;
+    }
+
+    public static initializeItemlist(): { [name: string]: number } {
+        let res = {};
+        for (let obj in ItemList) {
+            res[obj] = 0;
+        }
+        return res;
+    }
 }
