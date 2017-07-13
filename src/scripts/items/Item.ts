@@ -19,9 +19,7 @@ abstract class Item {
             } else {
                 amount = ShopHandler.amount();
             }
-            console.log(basePrice);
             let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
-            console.log(res);
             return Math.floor(res);
         }, this)
     }
