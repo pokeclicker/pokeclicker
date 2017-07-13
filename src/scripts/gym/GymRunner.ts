@@ -37,10 +37,12 @@ class GymRunner {
     }
 
     public static gymLost() {
+        Notifier.notify("It appears you are not strong enough to defeat " + player.town().gym().leaderName, GameConstants.NotificationOption.danger);
         Game.gameState(GameConstants.GameState.town);
     }
 
     public static gymWon(gym: Gym) {
+        Notifier.notify("Congratulations, you defeated " + player.town().gym().leaderName + "!", GameConstants.NotificationOption.success);
         this.gymObservable(gym);
         player.gainMoney(gym.moneyReward);
         if (!player.hasBadge(gym.badgeReward)) {
