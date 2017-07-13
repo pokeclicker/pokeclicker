@@ -63,7 +63,7 @@
             <button class="dropdown-item" href="#">Changelog</button>
         </li>
         <li>
-            <button class="dropdown-item" href="#">Key Items</button>
+            <button onClick="$('#showKeyitemsModal').modal('toggle');" class="dropdown-item">Key Items</button>
         </li>
         <li>
             <button onClick="$('#donateModal').modal('toggle');" class="dropdown-item" href="#">Donate</button>
@@ -174,6 +174,93 @@
 
     </div>
 </div>
+
+<!-- Get Keyitem modal-->
+<div class="modal" id="keyItemModal" tabindex="-1" role="dialog"
+     aria-labelledby="keyItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header">
+                <div style="width: 100%;">
+                    <img src="assets/images/oak.png">
+                    <h5 class="modal-title" id="keyItemModalLabel">New key item!</h5>
+                </div>
+            </div>
+            <div class="modal-body">
+                <h5><b>Congratulations!</b></h5>
+                <span>You have gained a</span><br>
+                <img
+                        class="key-item"
+                        data-bind="attr:{ title: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name(),  src: 'assets/images/keyitems/' + KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name() + '.png'}"
+                        src=""/><br>
+                <span data-bind="text: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name()">Name</span><br>
+                <span data-bind="text: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).description()">Description</span>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Show keyitems modal-->
+<div class="modal" id="showKeyitemsModal" tabindex="-1" role="dialog"
+     aria-labelledby="showKeyitemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header">
+                <div style="width: 100%;">
+                    <img src="assets/images/oak.png">
+                    <h5 class="modal-title" id="showKeyitemModalLabel">Key items</h5>
+                </div>
+            </div>
+            <div class="modal-body">
+
+                <div class="page-item" style="background-color: white;">
+
+                    <div class="row justify-content-sm-center" data-bind="foreach: KeyItemHandler.keyItemList">
+                            <div class="col-sm-2">
+                                <img class="clickable key-item" src=""
+                                     data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
+                                  css: {'oak-item-locked': !player.hasKeyItem($data.name())
+
+                                        },
+                                 event: {
+                                    mouseover: function(){KeyItemHandler.hover($data.name())},
+                                    click: function(){KeyItemHandler.click($data.name())},
+                                    mouseout : function(){KeyItemHandler.hoverRelease()}
+                                    }">
+                            </div>
+                    </div>
+
+                    <div class="card oak-item-info" style="height:90px">
+                        <div data-bind="if: KeyItemHandler.inspectedItem() !== null">
+                            <div class="row justify-content-sm-center">
+                                <div style="height: 20px" class="col-sm-11">
+                                    <b><span data-bind="text: KeyItemHandler.inspectedItem().name()"></span></b>
+                                </div>
+                            </div>
+                            <div class="row justify-content-sm-center">
+                                <div class="col-sm-11">
+                                    <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
+                                        <p style="margin-top: 5px" data-bind="text: KeyItemHandler.inspectedItem().description"></p>
+                                    </div>
+                                    <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
+                                        <p style="margin-top: 5px" >?????</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
 
 <div class="container">
     <div class="row justify-content-lg-center">
