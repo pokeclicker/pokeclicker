@@ -3,10 +3,10 @@ class OakItemRunner {
     public static oakItemList: KnockoutObservable<OakItem>[];
     public static blankOakItem: OakItem = new OakItem(" ", Number.MAX_VALUE, "", 0, 0, 0);
     public static inspectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2));
-    public static selectedItem:  KnockoutObservable<OakItem> = ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2));
+    public static selectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2));
+
     public static initialize() {
         OakItemRunner.oakItemList = [];
-
 
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Magic Ball", 30, "Gives a bonus to your catchrate", 5, 1, 2)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Amulet Coin", 40, "Gain more coins from battling", 25, 5, 1)));
@@ -31,37 +31,37 @@ class OakItemRunner {
         OakItemRunner.selectedItem(item);
     }
 
-    public static loadOakItems(){
-        for( let i = 0; i< player._oakItemsEquipped.length; i++){
+    public static loadOakItems() {
+        for (let i = 0; i < player._oakItemsEquipped.length; i++) {
             OakItemRunner.activateOakItem(OakItemRunner.getOakItemByName(player._oakItemsEquipped[i]).id);
         }
     }
 
-    public static hover(name:string){
+    public static hover(name: string) {
         OakItemRunner.inspectedItem(OakItemRunner.getOakItemByName(name));
     }
 
-    public static hoverRelease(){
+    public static hoverRelease() {
         OakItemRunner.inspectedItem(OakItemRunner.selectedItem());
     }
 
-    public static click(name:string){
+    public static click(name: string) {
         let item: OakItem = OakItemRunner.getOakItemByName(name);
         OakItemRunner.selectedItem(item);
         OakItemRunner.activateOakItem(item.id);
     }
 
-    public static use(name:string){
+    public static use(name: string) {
         OakItemRunner.getOakItemByName(name).use();
     }
 
-    public static calculateBonus(name:string): number{
+    public static calculateBonus(name: string): number {
         return OakItemRunner.getOakItemByName(name).calculateBonus()();
     }
 
-    public static getOakItemByName(name:string): OakItem{
-        for(let i = 0 ; i<OakItemRunner.oakItemList.length; i++){
-            if(OakItemRunner.oakItemList[i]().name() == name){
+    public static getOakItemByName(name: string): OakItem {
+        for (let i = 0; i < OakItemRunner.oakItemList.length; i++) {
+            if (OakItemRunner.oakItemList[i]().name() == name) {
                 return OakItemRunner.oakItemList[i]();
             }
         }
@@ -113,7 +113,7 @@ class OakItemRunner {
         player.oakItemsEquipped = [];
     }
 
-    public static isActive(oakItemName) :boolean{
+    public static isActive(oakItemName): boolean {
         for (let i = 0; i < OakItemRunner.oakItemList.length; i++) {
             if (OakItemRunner.oakItemList[i]().name() == oakItemName) {
                 return OakItemRunner.oakItemList[i]().isActive();
@@ -121,7 +121,7 @@ class OakItemRunner {
         }
     }
 
-    public static isUnlocked(oakItemName) :boolean{
+    public static isUnlocked(oakItemName): boolean {
         for (let i = 0; i < OakItemRunner.oakItemList.length; i++) {
             if (OakItemRunner.oakItemList[i]().name() == oakItemName) {
                 return OakItemRunner.oakItemList[i]().isUnlocked();

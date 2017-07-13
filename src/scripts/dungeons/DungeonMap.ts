@@ -3,7 +3,6 @@ class DungeonMap {
     board: KnockoutObservable<DungeonTile[][]>;
     playerPosition: KnockoutObservable<Point>;
 
-
     constructor(size: number) {
         this.size = size;
         this.board = ko.observable(this.generateMap());
@@ -24,7 +23,6 @@ class DungeonMap {
         this.currentTile().calculateCssClass();
     }
 
-
     public moveToCoordinates(x: number, y: number) {
         this.moveToTile(new Point(x, y));
     }
@@ -44,7 +42,7 @@ class DungeonMap {
     public moveLeft() {
         this.moveToCoordinates(this.playerPosition().x - 1, this.playerPosition().y);
     }
-    
+
     public moveToTile(point: Point) {
         if (this.hasAccesToTile(point)) {
             this.currentTile().hasPlayer = false;
@@ -91,7 +89,7 @@ class DungeonMap {
         if (point.x < 0 || point.x >= this.size || point.y < 0 || point.y >= this.size) {
             return false
         }
-        
+
         if (point.y < this.size - 1 && this.board()[point.y + 1][point.x].isVisible) {
             return true;
         }
@@ -137,7 +135,6 @@ class DungeonMap {
         }
         return map;
     }
-
 
     /**
      * Shuffles array in place.

@@ -26,9 +26,8 @@ namespace GameConstants {
     export const ITEM_PRICE_MULTIPLIER = 1.02;
     export const ITEM_PRICE_DEDUCT = 0.003;
 
-
     // Oak items
-    export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000,20000, Number.MAX_VALUE];
+    export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
     export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
     export const AMOUNT_OF_OAKITEMS = 8;
     export const OAKITEM_MAX_LEVEL = 5;
@@ -134,7 +133,7 @@ namespace GameConstants {
         new Option("Attack", GameConstants.SortOptionsEnum.attack),
         new Option("Level", GameConstants.SortOptionsEnum.levelObservable),
         new Option("Shiny", GameConstants.SortOptionsEnum.shiny),
-    ]
+    ];
 
     export const RegionRoute = {
         0: 25,
@@ -142,7 +141,7 @@ namespace GameConstants {
         2: 0
     };
 
-    export function randomIntBetween(min:number, max:number){
+    export function randomIntBetween(min: number, max: number) {
         return Math.floor(Math.random() * max) + min;
     }
 

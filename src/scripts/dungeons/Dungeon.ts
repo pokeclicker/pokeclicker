@@ -15,7 +15,6 @@ class Dungeon {
     level: number;
     allPokemonNames: string[];
 
-
     constructor(dungeonName: string, pokemonList: string[], baseHealth: number, bossList: DungeonBossPokemon[], tokenCost: number, badgeReq: GameConstants.Badge, itemRoute: number, level: number) {
         this.name = ko.observable(dungeonName);
         this.pokemonList = pokemonList;
@@ -27,7 +26,6 @@ class Dungeon {
         this.level = level;
         this.calculateAllPokemonNames();
     }
-
 
     public isUnlocked(): boolean {
         if(!player.hasBadge(this.badgeReq)){
@@ -42,7 +40,6 @@ class Dungeon {
         return true;
     }
 
-
     private calculateAllPokemonNames() {
         this.allPokemonNames = JSON.parse(JSON.stringify(this.pokemonList));
         for (let i = 0; i < this.bossList.length; i++) {
@@ -56,7 +53,7 @@ class Dungeon {
  */
 
 // TODO add all dungeons
-const dungeonList: {[dungeonName: string]: Dungeon} = {};
+const dungeonList: { [dungeonName: string]: Dungeon } = {};
 dungeonList["Viridian Forest"] = new Dungeon("Viridian Forest",
     ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"],
     102,
@@ -123,6 +120,6 @@ dungeonList["Victory Road"] = new Dungeon("Victory Road",
 dungeonList["Cerulean Cave"] = new Dungeon("Cerulean Cave",
     ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"],
     28735,
-    [new DungeonBossPokemon("Rhydon", 143675, 60),new DungeonBossPokemon("Mewtwo", 215512, 70)],
+    [new DungeonBossPokemon("Rhydon", 143675, 60), new DungeonBossPokemon("Mewtwo", 215512, 70)],
     2500, GameConstants.Badge.Earth, 20, 55
 );
