@@ -8,23 +8,39 @@ class BreedingHelper {
         $('#breedingModal').modal('show')
     }
 
-    public static progressEggs() {
-        let amount = GameConstants.BREEDING_AMOUNT;
+    public static progressEggs(amount: number) {
         if (OakItemRunner.isActive("Blaze Casette")) {
             amount *= OakItemRunner.calculateBonus("Blaze Casette")
         }
         for (let egg of player.eggList) {
             egg.steps += amount;
+            if (OakItemRunner.isActive("Shiny Charm")) {
+                egg.shinySteps += amount;
+            }
             if (egg.steps >= egg.totalSteps) {
                 //TODO hatch
             }
         }
     }
 
-    public static gainPokemonEgg(name: string) {
-        let egg = this.createEgg(name);
+    public static gainPokemonEgg(pokemon: CaughtPokemon) {
+        let egg = this.createEgg(pokemon.name);
+        pokemon.breeding(true);
 
         $('#breedingModal').modal('hide');
+
+    }
+
+    public static hatchPokemonEgg(egg: Egg) {
+        let pokemon;
+        for (let obj of player._caughtPokemonList()) {
+            if (obj.name == egg.pokemon) {
+                pokemon = obj;
+                break;
+            }
+        }
+
+        //TODO hatch egg
 
     }
 
