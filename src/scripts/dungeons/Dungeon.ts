@@ -28,7 +28,16 @@ class Dungeon {
     }
 
     public isUnlocked(): boolean {
-        return player.hasBadge(this.badgeReq);
+        if(!player.hasBadge(this.badgeReq)){
+            console.log("You need the " + this.badgeReq + " badge to access this dungeon");
+            return false;
+        }
+
+        if(!player.hasKeyItem("Dungeon ticket")){
+            console.log("You need the Dungeon ticket to access dungeons");
+            return false
+        }
+        return true;
     }
 
     private calculateAllPokemonNames() {

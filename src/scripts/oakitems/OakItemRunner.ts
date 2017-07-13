@@ -15,7 +15,7 @@ class OakItemRunner {
 
         // TODO implement use!
         // TODO implement functionality
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem("Plant Grower", 70, "Makes your berries grow faster", 25, 5, 1)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem("Sprayduck", 70, "Makes your berries grow faster", 25, 5, 1)));
 
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Shiny Charm", 80, "Encounter more shinies", 50, 100, 150)));
 

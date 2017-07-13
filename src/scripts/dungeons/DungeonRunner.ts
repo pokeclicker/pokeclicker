@@ -13,6 +13,10 @@ class DungeonRunner {
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
 
     public static initializeDungeon(dungeon) {
+        if (!dungeon.isUnlocked()) {
+            return false;
+        }
+
         DungeonRunner.dungeon = dungeon;
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE);

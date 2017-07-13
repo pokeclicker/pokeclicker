@@ -51,6 +51,7 @@ class MapHelper {
                 return false;
             }
         }
+
         return true;
     };
 
