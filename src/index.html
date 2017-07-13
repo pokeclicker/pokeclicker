@@ -212,17 +212,17 @@
                                          src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                                 </span>
 
-                                        <br>
-                                        <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
-                                            data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
-                                    </div>
+                                <br>
+                                <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
+                                    data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
+                            </div>
 
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span>
 
                             <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
                             <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
                                 <img title="You have captured this Pokémon!" class="pokeball-smallest"
-                                             src="assets/images/pokeball/Pokeball-small.png"/>
+                                     src="assets/images/pokeball/Pokeball-small.png"/>
                             </span>
 
                             <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
@@ -249,27 +249,27 @@
                                      data-bind="attr:{ style: 'width:' + Battle.enemyPokemon().healthPercentage() + '%' }"
                                      aria-valuemin="0" aria-valuemax="100">
 
-                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <span data-bind="text: Battle.enemyPokemon().health">health</span><span>/</span>
+                        <!---->
+                        <span
+                                data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
+                    </div>
+
+                    <!--If the player is in a dungeon-->
+                    <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
+                        <div style="height: 170px" class="col-lg-12" style="display: block;">
+                            <div>
+                                <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span><br>
+                                <div id="dungeonTimer" class="progress">
+                                    <div class="progress-bar" role="progressbar"
+                                         data-bind="text: DungeonRunner.timeLeftSeconds(), attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' }"
+                                         aria-valuemin="0" aria-valuemax="100">
                                     </div>
                                 </div>
-                                <span data-bind="text: Battle.enemyPokemon().health">health</span><span>/</span>
-                                <!---->
-                                <span
-                                        data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
                             </div>
-
-                            <!--If the player is in a dungeon-->
-                            <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
-                                <div style="height: 170px" class="col-lg-12" style="display: block;">
-                                    <div>
-                                        <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span><br>
-                                        <div id="dungeonTimer" class="progress">
-                                            <div class="progress-bar" role="progressbar"
-                                                 data-bind="text: DungeonRunner.timeLeftSeconds(), attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' }"
-                                                 aria-valuemin="0" aria-valuemax="100">
-                                            </div>
-                                        </div>
-                                    </div>
 
                             <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
@@ -299,38 +299,38 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                                      src="assets/images/dungeons/chest.png"/>
                             </div>
 
-                                    <div data-bind="if: (DungeonRunner.map.currentTile().type() == GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss())">
-                                        <button class="btn btn-danger dungeon-boss-button"
-                                                data-bind="click: function(){DungeonRunner.startBossFight()}">Start
-                                            Bossfight
-                                        </button>
-                                    </div>
-                                </div>
-                                <div data-bind="if: DungeonRunner.fighting()">
-                                    <div style="height: 30px">
-                                        <span data-bind="text: DungeonBattle.enemyPokemon().health">health</span>/<span
-                                            data-bind="text: DungeonBattle.enemyPokemon().maxHealth">maxHealth</span>
-                                    </div>
-                                </div>
-                                <div data-bind="ifnot: DungeonRunner.fighting()">
-                                    <div style="height: 30px"></div>
-                                </div>
+                            <div data-bind="if: (DungeonRunner.map.currentTile().type() == GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss())">
+                                <button class="btn btn-danger dungeon-boss-button"
+                                        data-bind="click: function(){DungeonRunner.startBossFight()}">Start
+                                    Bossfight
+                                </button>
                             </div>
+                        </div>
+                        <div data-bind="if: DungeonRunner.fighting()">
+                            <div style="height: 30px">
+                                <span data-bind="text: DungeonBattle.enemyPokemon().health">health</span>/<span
+                                    data-bind="text: DungeonBattle.enemyPokemon().maxHealth">maxHealth</span>
+                            </div>
+                        </div>
+                        <div data-bind="ifnot: DungeonRunner.fighting()">
+                            <div style="height: 30px"></div>
+                        </div>
+                    </div>
 
-                            <div class="card">
-                                <table width="100%">
-                                    <tr>
+                    <div class="card">
+                        <table width="100%">
+                            <tr>
 
                                 <td width="50%">
                                     <span style="display: inline;">Pokémon Attack:
                                         <span
-                                        data-bind="text: player.pokemonAttackObservable"></span>
+                                                data-bind="text: player.pokemonAttackObservable"></span>
                                     </span>
                                 </td>
                                 <td width="50%">
                                     <span style="display: inline;">Click Attack:
                                         <span
-                                        data-bind="text: player.clickAttackObservable"></span>
+                                                data-bind="text: player.clickAttackObservable"></span>
                                     </span>
                                 </td>
                             </tr>
@@ -361,94 +361,94 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                                 <li class="nav-item" data-bind="if:player.town().gym">
                                     <button data-bind="disable: !Gym.isUnlocked(player.town().gym()),
                                                        attr: { class: Gym.calculateCssClass(player.town().gym()) }"
-                                                    onclick="GymRunner.startGym(player.town().gym())">
-                                                Gym
-                                            </button>
-                                        </li>
-                                        <li class="nav-item" data-bind="if:player.town().shop">
-                                            <button class="btn btn-secondary"
-                                                onclick="ShopHandler.showShop(player.town().shop())">Shop
-                                            </button>
-                                        </li>
-                                        <div data-bind="if:player.town().dungeon()">
-                                            <li class="nav-item" data-bind="if: player.town() instanceof DungeonTown">
-                                                <button class="btn btn-secondary"
-                                                        onclick="DungeonRunner.initializeDungeon(player.town().dungeon())">
-                                                    Start<br>
-                                                    <span data-bind="text: player.town().dungeon().tokenCost"></span>
-                                                    tokens
-                                                </button>
-                                            </li>
+                                            onclick="GymRunner.startGym(player.town().gym())">
+                                        Gym
+                                    </button>
+                                </li>
+                                <li class="nav-item" data-bind="if:player.town().shop">
+                                    <button class="btn btn-secondary"
+                                            onclick="ShopHandler.showShop(player.town().shop())">Shop
+                                    </button>
+                                </li>
+                                <div data-bind="if:player.town().dungeon()">
+                                    <li class="nav-item" data-bind="if: player.town() instanceof DungeonTown">
+                                        <button class="btn btn-secondary"
+                                                onclick="DungeonRunner.initializeDungeon(player.town().dungeon())">
+                                            Start<br>
+                                            <span data-bind="text: player.town().dungeon().tokenCost"></span>
+                                            tokens
+                                        </button>
+                                    </li>
 
-                                            <li class="nav-item"
-                                                data-bind="if:(!(player.town() instanceof DungeonTown) && player.town() instanceof Town)">
-                                                <button class="btn btn-secondary"
-                                                        onclick="MapHelper.moveToTown(player.town().dungeon().name())">
-                                                    <span data-bind="text: player.town().dungeon().name()"></span>
-                                                </button>
-                                            </li>
-
-                                        </div>
-                                    </ul>
-                                </div>
-                                <div class="col-7 no-gutters">
-                                    <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
-                                    <img class="townImage no-select" src=""
-                                         data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
-                                </div>
-                                <div class="col no-gutters"></div>
+                                    <li class="nav-item"
+                                        data-bind="if:(!(player.town() instanceof DungeonTown) && player.town() instanceof Town)">
+                                        <button class="btn btn-secondary"
+                                                onclick="MapHelper.moveToTown(player.town().dungeon().name())">
+                                            <span data-bind="text: player.town().dungeon().name()"></span>
+                                        </button>
+                                    </li>
 
                                 </div>
-                            <div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
-                                <div class="card">
-                                    <!--Display all available Pokémon in this dungeon-->
-                                    <ul class="list-inline"
-                                        data-bind="foreach: player.town().dungeon().allPokemonNames">
-                                        <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
-                                            <img class="dungeon-pokemon-preview"
-                                                 data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
-                                        </li>
-                                        <li class="list-inline-item"
-                                            data-bind="ifnot: player.alreadyCaughtPokemon($data)">
-                                            <img class="dungeon-pokemon-preview dungeon-pokemon-locked"
-                                                 data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
-                                        </li>
-                                    </ul>
+                            </ul>
+                        </div>
+                        <div class="col-7 no-gutters">
+                            <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
+                            <img class="townImage no-select" src=""
+                                 data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
+                        </div>
+                        <div class="col no-gutters"></div>
+
+                    </div>
+                    <div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
+                        <div class="card">
+                            <!--Display all available Pokémon in this dungeon-->
+                            <ul class="list-inline"
+                                data-bind="foreach: player.town().dungeon().allPokemonNames">
+                                <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
+                                    <img class="dungeon-pokemon-preview"
+                                         data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                                </li>
+                                <li class="list-inline-item"
+                                    data-bind="ifnot: player.alreadyCaughtPokemon($data)">
+                                    <img class="dungeon-pokemon-preview dungeon-pokemon-locked"
+                                         data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--GymView-->
+                <div id="gymView" data-bind="if: Game.gameState() == GameConstants.GameState.gym">
+                    <div>
+                        <div class="col-lg-12" style="display: block;">
+                            <div id="gymTimer" class="progress">
+                                <div class="progress-bar" role="progressbar"
+                                     data-bind="text: GymRunner.timeLeftSeconds(), attr:{ style: 'width:' + GymRunner.timeLeftPercentage() + '%' }"
+                                     aria-valuemin="0" aria-valuemax="100">
                                 </div>
                             </div>
-                        </div>
-
-                        <!--GymView-->
-                        <div id="gymView" data-bind="if: Game.gameState() == GameConstants.GameState.gym">
-                            <div>
-                                <div class="col-lg-12" style="display: block;">
-                                    <div id="gymTimer" class="progress">
-                                        <div class="progress-bar" role="progressbar"
-                                             data-bind="text: GymRunner.timeLeftSeconds(), attr:{ style: 'width:' + GymRunner.timeLeftPercentage() + '%' }"
-                                             aria-valuemin="0" aria-valuemax="100">
-                                        </div>
+                            <div class="row">
+                                <div class="col-sm-4 offset-sm-4">
+                                    <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
+                                    <div class="clickable" style="height: 96px;">
+                                        <img id="gymEnemy" src=""
+                                             data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-sm-4 offset-sm-4">
-                                            <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
-                                            <div class="clickable" style="height: 96px;">
-                                                <img id="gymEnemy" src=""
-                                                     data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-3" style="display: grid;">
-                                            <span data-bind="text: GymBattle.gym.leaderName">Leader</span>
-                                            <div class="gymPokeballList">
+                                </div>
+                                <div class="col-sm-3" style="display: grid;">
+                                    <span data-bind="text: GymBattle.gym.leaderName">Leader</span>
+                                    <div class="gymPokeballList">
                                         <span data-bind="foreach: new Array(GymBattle.pokemonsUndefeatedComputable())"><img
                                                 class="gymPokeball" src="assets/images/gymLeaders/pokeball.png"></span>
-                                                <span data-bind="foreach: new Array(GymBattle.pokemonsDefeatedComputable())"><img
-                                                        class="gymPokeball gymPokeballDefeated"
-                                                        src="assets/images/gymLeaders/pokeball.png"></span>
-                                            </div>
-                                            <div>
-                                                <img height="56px" id="gymLeader" src=""
-                                                     data-bind="attr:{ src: '/assets/images/gymLeaders/' + GymBattle.gym.leaderName + '.png'}">
-                                            </div>
+                                        <span data-bind="foreach: new Array(GymBattle.pokemonsDefeatedComputable())"><img
+                                                class="gymPokeball gymPokeballDefeated"
+                                                src="assets/images/gymLeaders/pokeball.png"></span>
+                                    </div>
+                                    <div>
+                                        <img height="56px" id="gymLeader" src=""
+                                             data-bind="attr:{ src: '/assets/images/gymLeaders/' + GymBattle.gym.leaderName + '.png'}">
+                                    </div>
 
                                 </div>
                             </div>
@@ -457,27 +457,28 @@ css: { 'healthbar-boss': DungeonRunner.fightingBoss(), 'bg-danger': !DungeonRunn
                                      data-bind="attr:{ style: 'width:' + GymBattle.enemyPokemon().healthPercentage() + '%' }"
                                      aria-valuemin="0" aria-valuemax="100">
 
-                                        </div>
-                                    </div>
                                 </div>
-                                <span data-bind="text: GymBattle.enemyPokemon().health">health</span><span>/</span><span
-                                    data-bind="text: GymBattle.enemyPokemon().maxHealth">maxHealth</span>
                             </div>
-                            <div class="card">
-                                <table width="100%">
-                                    <tr>
-                                        <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                                                data-bind="text: player.pokemonAttackObservable"></span></span></td>
-                                        <td width="50%"><span style="display: inline;">Click Attack: <span
-                                                data-bind="text: player.clickAttackObservable"></span></span>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-
                         </div>
-        <!--ShopView-->            <divid="shopView"
-data-bind="if: Game.gameState() == GameConstants.GameState.shop">
+                        <span data-bind="text: GymBattle.enemyPokemon().health">health</span><span>/</span><span
+                            data-bind="text: GymBattle.enemyPokemon().maxHealth">maxHealth</span>
+                    </div>
+                    <div class="card">
+                        <table width="100%">
+                            <tr>
+                                <td width="50%"><span style="display: inline;">Pokémon Attack: <span
+                                        data-bind="text: player.pokemonAttackObservable"></span></span></td>
+                                <td width="50%"><span style="display: inline;">Click Attack: <span
+                                        data-bind="text: player.clickAttackObservable"></span></span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <!--ShopView-->
+                <div id="shopView"
+                     data-bind="if: Game.gameState() == GameConstants.GameState.shop">
                     <div class="card">
                         <span>Money:
                             <span data-bind="text: player.money">todo</span>
@@ -543,43 +544,43 @@ data-bind="if: Game.gameState() == GameConstants.GameState.shop">
                 </div>
             </div>
 
-                    <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
-                        <div class="page-item no-select" style="background-color: white">
-                            <div class="dungeon">
-                                <div class="card">
-                                    <span data-bind="text: DungeonRunner.dungeon.name()"></span>
-                                </div>
-                                <div class="row justify-content-sm-center">
-                                    <div class="dungeon-board"
-                                         data-bind="foreach: DungeonRunner.map.board()">
-                                        <div class="row" data-bind="foreach: $data">
-                                            <div data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}">
-                                            </div>
-                                        </div>
+            <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
+                <div class="page-item no-select" style="background-color: white">
+                    <div class="dungeon">
+                        <div class="card">
+                            <span data-bind="text: DungeonRunner.dungeon.name()"></span>
+                        </div>
+                        <div class="row justify-content-sm-center">
+                            <div class="dungeon-board"
+                                 data-bind="foreach: DungeonRunner.map.board()">
+                                <div class="row" data-bind="foreach: $data">
+                                    <div data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}">
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
+            <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
                     Game.gameState() == GameConstants.GameState.shop)">
-                        <div class="page-item no-select">
-                            <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
-                                <defs>
-                                    <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%"
-                                                    y2="100%">
-                                        <stop offset="0%" style="stop-color:#F8CECC"></stop>
-                                        <stop offset="100%" style="stop-color:#EA583B"></stop>
-                                    </lineargradient>
-                                    <lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%"
-                                                    y2="100%">
-                                        <stop offset="0%" style="stop-color:#DAE8FC"></stop>
-                                        <stop offset="100%" style="stop-color:#7EA6E0"></stop>
-                                    </lineargradient>
-                                </defs>
-                                <g transform="translate(-1,-1)">
-                                    <image height="420.7" width="651" xlink:href="assets/images/kanto.png"></image>
+                <div class="page-item no-select">
+                    <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
+                        <defs>
+                            <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%"
+                                            y2="100%">
+                                <stop offset="0%" style="stop-color:#F8CECC"></stop>
+                                <stop offset="100%" style="stop-color:#EA583B"></stop>
+                            </lineargradient>
+                            <lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%"
+                                            y2="100%">
+                                <stop offset="0%" style="stop-color:#DAE8FC"></stop>
+                                <stop offset="100%" style="stop-color:#7EA6E0"></stop>
+                            </lineargradient>
+                        </defs>
+                        <g transform="translate(-1,-1)">
+                            <image height="420.7" width="651" xlink:href="assets/images/kanto.png"></image>
 
                             <!--Route 1-->
                             <g transform="rotate(90,83.65,263.2)"
@@ -1237,171 +1238,171 @@ data-bind="if: Game.gameState() == GameConstants.GameState.shop">
 
         </div>
 
-                <!-- Receive gym badge Modal -->
-                <div class="modal fade" id="receiveBadgeModal" tabindex="-1" role="dialog"
-                     aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div style="width: 100%;">
-                                    <img src=""
-                                         data-bind="attr:{ src: '/assets/images/gymLeaders/' + GymRunner.gymObservable().leaderName + '.png'}">
-                                    <h5 class="modal-title" id="receiveBadgeModalLabel"
-                                        data-bind="text: GymRunner.gymObservable().leaderName">Modal title</h5>
-
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <p data-bind="text: GymRunner.gymObservable().defeatMessage"></p>
-                                <img src="" width="56px"
-                                     data-bind="attr:{ src: '/assets/images/badges/' + GymRunner.gymObservable().leaderName + '.png'}">
-
-                            </div>
-                            <div data-bind="if: !(GymRunner.gymObservable() instanceof Champion)">
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                            <div data-bind="if: GymRunner.gymObservable() instanceof Champion">
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                                            onclick="$('#hallOfFameModal').modal('show')">
-                                        Next
-                                    </button>
-                                </div>
-                            </div>
+        <!-- Receive gym badge Modal -->
+        <div class="modal fade" id="receiveBadgeModal" tabindex="-1" role="dialog"
+             aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src=""
+                                 data-bind="attr:{ src: '/assets/images/gymLeaders/' + GymRunner.gymObservable().leaderName + '.png'}">
+                            <h5 class="modal-title" id="receiveBadgeModalLabel"
+                                data-bind="text: GymRunner.gymObservable().leaderName">Modal title</h5>
 
                         </div>
                     </div>
-                </div>
+                    <div class="modal-body">
+                        <p data-bind="text: GymRunner.gymObservable().defeatMessage"></p>
+                        <img src="" width="56px"
+                             data-bind="attr:{ src: '/assets/images/badges/' + GymRunner.gymObservable().leaderName + '.png'}">
 
-                <!-- Start Sequence Modal-->
-                <div class="modal" id="startSequenceModal" tabindex="-1" role="dialog"
-                     aria-labelledby="startSequenceModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div style="width: 100%;">
-                                    <img src="assets/images/oak.png">
-                                    <h5 class="modal-title" id="startSequenceModalLabel">Professor Oak</h5>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <p>Hello, there! Glad to meet you! Welcome to the world of Pokémon!<br>
-                                    My name is Oak. People affectionately refer to me as the Pokémon Professor.<br>
-                                    This world… …is inhabited far and wide by creatures called Pokémon!<br>
-                                    For some people, Pokémon are pets. Other use them for battling.<br>
-                                    As for myself… I study Pokémon as a profession.<br>
-                                    However, your own very Pokémon legend is about to unfold!<br>
-                                    A world of dreams and adventures with Pokémon awaits! Let's go!
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
-                            </div>
+                    </div>
+                    <div data-bind="if: !(GymRunner.gymObservable() instanceof Champion)">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
-                </div>
-
-                <!-- Pick Starter Modal-->
-                <div class="modal" id="pickStarterModal" tabindex="-1" role="dialog"
-                     aria-labelledby="pickStarterModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div style="width: 100%;">
-                                    <img src="assets/images/oak.png">
-                                    <h5 class="modal-title" id="pickStarterModalLabel">Professor Oak</h5>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <p id="pickStarterModalText">Oh No! We got ambushed by these pokémon!<br>
-                                    I can only hold off two! Pick the one you want to fight!</p>
-                                <div class="row">
-                                    <div class="col-lg-8 offset-lg-2">
-                                        <div class="row">
-
-                                            <div class="col">
-                                                <input class="image-starter" type="image"
-                                                       src="assets/images/pokemon/1.png"
-                                                       onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Bulbasaur)">
-                                            </div>
-                                            <div class="col">
-                                                <input class="image-starter" type="image"
-                                                       src="assets/images/pokemon/4.png"
-                                                       onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Charmander)">
-                                            </div>
-                                            <div class="col">
-                                                <input class="image-starter" type="image"
-                                                       src="assets/images/pokemon/7.png"
-                                                       onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Squirtle)">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <p>You can click on it to inflict damage</p>
-                            </div>
+                    <div data-bind="if: GymRunner.gymObservable() instanceof Champion">
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                    onclick="$('#hallOfFameModal').modal('show')">
+                                Next
+                            </button>
                         </div>
                     </div>
+
                 </div>
+            </div>
+        </div>
 
-                <!-- Starter Caught Modal-->
-                <div class="modal" id="starterCaughtModal" tabindex="-1" role="dialog"
-                     aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div style="width: 100%;">
-                                    <img src="assets/images/oak.png">
-                                    <h5 class="modal-title" id="starterCaughtModalLabel">Professor Oak</h5>
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <p>
-                                    Hm! Excellent! You have caught your first pokémon!<br>
-                                    This is where your journey begins. <br>
-                                    You can progress to the next route after you have defeated 10 pokémon.
-
-                                </p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
-                            </div>
+        <!-- Start Sequence Modal-->
+        <div class="modal" id="startSequenceModal" tabindex="-1" role="dialog"
+             aria-labelledby="startSequenceModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src="assets/images/oak.png">
+                            <h5 class="modal-title" id="startSequenceModalLabel">Professor Oak</h5>
                         </div>
                     </div>
-                </div>
-
-                <!-- Hall of Fame Modal -->
-                <div class="modal fade" id="hallOfFameModal" tabindex="-1" role="dialog"
-                     aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <div style="width: 100%;">
-                                    <img src=""
-                                         data-bind="attr:{ src: '/assets/images/oak.png'}">
-                                    <h5 class="modal-title" id="hallOfFameModalLabel">Professor Oak</h5>
-
-                                </div>
-                            </div>
-                            <div class="modal-body">
-                                <p>
-                                    So, you won! Congratulations! You're the new Pokémon League champion! You've grown
-                                    up so
-                                    much since you first left with <span
-                                        data-bind="text: GameConstants.Starter[player.starter]">starter</span>! You have
-                                    worked
-                                    hard to become the new League Champion!
-                                </p>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            </div>
-                        </div>
+                    <div class="modal-body">
+                        <p>Hello, there! Glad to meet you! Welcome to the world of Pokémon!<br>
+                            My name is Oak. People affectionately refer to me as the Pokémon Professor.<br>
+                            This world… …is inhabited far and wide by creatures called Pokémon!<br>
+                            For some people, Pokémon are pets. Other use them for battling.<br>
+                            As for myself… I study Pokémon as a profession.<br>
+                            However, your own very Pokémon legend is about to unfold!<br>
+                            A world of dreams and adventures with Pokémon awaits! Let's go!
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
                     </div>
                 </div>
             </div>
-        </div></div>
+        </div>
+
+        <!-- Pick Starter Modal-->
+        <div class="modal" id="pickStarterModal" tabindex="-1" role="dialog"
+             aria-labelledby="pickStarterModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src="assets/images/oak.png">
+                            <h5 class="modal-title" id="pickStarterModalLabel">Professor Oak</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p id="pickStarterModalText">Oh No! We got ambushed by these pokémon!<br>
+                            I can only hold off two! Pick the one you want to fight!</p>
+                        <div class="row">
+                            <div class="col-lg-8 offset-lg-2">
+                                <div class="row">
+
+                                    <div class="col">
+                                        <input class="image-starter" type="image"
+                                               src="assets/images/pokemon/1.png"
+                                               onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Bulbasaur)">
+                                    </div>
+                                    <div class="col">
+                                        <input class="image-starter" type="image"
+                                               src="assets/images/pokemon/4.png"
+                                               onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Charmander)">
+                                    </div>
+                                    <div class="col">
+                                        <input class="image-starter" type="image"
+                                               src="assets/images/pokemon/7.png"
+                                               onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Squirtle)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>You can click on it to inflict damage</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Starter Caught Modal-->
+        <div class="modal" id="starterCaughtModal" tabindex="-1" role="dialog"
+             aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src="assets/images/oak.png">
+                            <h5 class="modal-title" id="starterCaughtModalLabel">Professor Oak</h5>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            Hm! Excellent! You have caught your first pokémon!<br>
+                            This is where your journey begins. <br>
+                            You can progress to the next route after you have defeated 10 pokémon.
+
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hall of Fame Modal -->
+        <div class="modal fade" id="hallOfFameModal" tabindex="-1" role="dialog"
+             aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div style="width: 100%;">
+                            <img src=""
+                                 data-bind="attr:{ src: '/assets/images/oak.png'}">
+                            <h5 class="modal-title" id="hallOfFameModalLabel">Professor Oak</h5>
+
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            So, you won! Congratulations! You're the new Pokémon League champion! You've grown
+                            up so
+                            much since you first left with <span
+                                data-bind="text: GameConstants.Starter[player.starter]">starter</span>! You have
+                            worked
+                            hard to become the new League Champion!
+                        </p>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
