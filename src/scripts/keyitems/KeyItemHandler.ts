@@ -1,6 +1,8 @@
 class KeyItemHandler {
 
     public static keyItemList: KnockoutObservable<KeyItem>[];
+    public static inspectedItem: KnockoutObservable<KeyItem> = ko.observable(null);
+    public static selectedItem:  KnockoutObservable<KeyItem> = ko.observable(null);
 
     public static initialize() {
         KeyItemHandler.keyItemList = [];
@@ -8,8 +10,9 @@ class KeyItemHandler {
         // TODO obtain after the tutorial
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Teachy tv", "A television set that is tuned to a program with useful tips for novice TRAINERS")));
 
-        // TODO obtain after the tutorial
-        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Town map", "A very convenient map that can be viewed anytime. It even shows you your present location in the region")));
+        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Town map", "A very convenient map that can be viewed anytime. It even shows you your present location in the region", function(){
+            return player.routeKillsObservable(1)() > player.routeKillsNeeded -1;
+        })));
 
         // TODO obtain somewhere at the start
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Dungeon ticket", "This ticket grants access to all dungeons in the Kanto region")));
@@ -39,6 +42,30 @@ class KeyItemHandler {
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Shard case", "A case specifically designed for holding shards", function () {
             return false;
         })));
+
+        let item: KeyItem = KeyItemHandler.getKeyItemByName("Teachy tv");
+        KeyItemHandler.selectedItem(item);
+    }
+
+    public static getKeyItemByName(name:string): KeyItem{
+        for(let i = 0 ; i<KeyItemHandler.keyItemList.length; i++){
+            if(KeyItemHandler.keyItemList[i]().name() == name){
+                return KeyItemHandler.keyItemList[i]();
+            }
+        }
+    }
+
+    public static hover(name:string){
+        KeyItemHandler.inspectedItem(KeyItemHandler.getKeyItemByName(name));
+    }
+
+    public static hoverRelease(){
+        KeyItemHandler.inspectedItem(KeyItemHandler.selectedItem());
+    }
+
+    public static click(name:string){
+        let item: KeyItem = KeyItemHandler.getKeyItemByName(name);
+        KeyItemHandler.selectedItem(item);
     }
 
 

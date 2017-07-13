@@ -25,7 +25,7 @@ class Player {
     private _oakItemsEquipped: string[];
     private _keyItems: KnockoutObservableArray<string>;
     public clickAttackObservable: KnockoutComputed<number>;
-
+    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
 
 
@@ -117,7 +117,6 @@ class Player {
     }
 
     public hasKeyItem(name: string) {
-        console.log("Name: " + name);
         for (let i = 0; i < this._keyItems().length; i++) {
             if (this._keyItems()[i] == name) {
                 return true;
@@ -128,6 +127,9 @@ class Player {
 
     public gainKeyItem(name: string) {
         if (!this.hasKeyItem(name)) {
+            this.recentKeyItem(name);
+            // TODO open modal
+            $("#keyItemModal").modal('show');
             this._keyItems().push(name);
         }
     }
