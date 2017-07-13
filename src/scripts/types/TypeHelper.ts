@@ -82,11 +82,4 @@ class TypeHelper {
                 return GameConstants.TypeEffectiveness.Very;
         }
     }
-
-    public static test() {
-        let val = this.getAttackModifier(GameConstants.PokemonType.Water, GameConstants.PokemonType.None, GameConstants.PokemonType.Fire, GameConstants.PokemonType.None);
-        if (val == 2) {
-            throw new Error("val was " + val);
-        }
-    }
 }
