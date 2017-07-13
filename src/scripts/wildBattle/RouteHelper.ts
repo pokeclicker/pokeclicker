@@ -46,5 +46,4 @@ class RouteHelper {
         return true;
     }
 
-
 }

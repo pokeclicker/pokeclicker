@@ -8,6 +8,7 @@ class Battle {
     static counter: number = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static pokeball: KnockoutObservable<GameConstants.Pokeball>;
+
     /**
      * Probably not needed right now, but might be if we add more logic to a gameTick.
      */

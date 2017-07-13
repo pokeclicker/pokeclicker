@@ -34,8 +34,8 @@ class DungeonRunner {
         this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100))
     }
 
-    public static openChest(){
-        if(DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest){
+    public static openChest() {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest) {
             return;
         }
 
@@ -43,23 +43,22 @@ class DungeonRunner {
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         // TODO add loot
-        if(DungeonRunner.chestsOpened == GameConstants.DUNGEON_CHEST_SHOW){
+        if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_CHEST_SHOW) {
             DungeonRunner.map.showChestTiles();
         }
-        if(DungeonRunner.chestsOpened == GameConstants.DUNGEON_MAP_SHOW){
+        if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_MAP_SHOW) {
             DungeonRunner.map.showAllTiles();
         }
     }
 
-    public static startBossFight(){
-        if(DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.boss || DungeonRunner.fightingBoss()){
+    public static startBossFight() {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.boss || DungeonRunner.fightingBoss()) {
             return;
         }
 
         DungeonRunner.fightingBoss(true);
         DungeonBattle.generateNewBoss();
     }
-
 
     private static dungeonLost() {
         Game.gameState(GameConstants.GameState.town);
@@ -75,6 +74,5 @@ class DungeonRunner {
     public static timeLeftSeconds = ko.computed(function () {
         return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
     })
-
 
 }
