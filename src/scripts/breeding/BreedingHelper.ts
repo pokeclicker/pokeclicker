@@ -24,7 +24,14 @@ class BreedingHelper {
 
     public static createTypedEgg(type: GameConstants.EggType): Egg {
         let name = HatchList[type][Math.floor(Math.random() * HatchList[type].length)];
+        console.log("name = " + name);
         return this.createEgg(name);
+    }
+
+    public static createRandomEgg(): Egg {
+        let type = Math.floor(Math.random() * (Object.keys(HatchList).length - 1));
+        console.log(type);
+        return this.createTypedEgg(type);
     }
 
     public static getSteps = function (pokemonName) {

@@ -4,7 +4,9 @@
 class PokemonHelper {
 
     public static getPokemonByName(name: string): DataPokemon {
+        console.log(name);
         let basePokemon = pokemonMap[name];
+        console.log("base = " + basePokemon);
         let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
         let evoLevel = basePokemon["evoLevel"] || 101;
         let eggCycles: number = basePokemon["eggCycles"] || 20;

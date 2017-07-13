@@ -418,6 +418,10 @@ class Player {
         this._eggSlots = value;
     }
 
+    public gainEggSlot() {
+        this._eggSlots++;
+    }
+
     public toJSON() {
         let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_eggList"];
         let plainJS = ko.toJS(this);
