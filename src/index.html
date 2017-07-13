@@ -198,7 +198,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -220,9 +220,9 @@
                 <div class="page-item" style="background-color: white;">
 
                     <div class="row justify-content-sm-center" data-bind="foreach: KeyItemHandler.keyItemList">
-                            <div class="col-sm-2">
-                                <img class="clickable key-item" src=""
-                                     data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
+                        <div class="col-sm-2">
+                            <img class="clickable key-item" src=""
+                                 data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
                                   css: {'oak-item-locked': !player.hasKeyItem($data.name())
 
                                         },
@@ -231,7 +231,7 @@
                                     click: function(){KeyItemHandler.click($data.name())},
                                     mouseout : function(){KeyItemHandler.hoverRelease()}
                                     }">
-                            </div>
+                        </div>
                     </div>
 
                     <div class="card oak-item-info" style="height:90px">
@@ -244,10 +244,11 @@
                             <div class="row justify-content-sm-center">
                                 <div class="col-sm-11">
                                     <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
-                                        <p style="margin-top: 5px" data-bind="text: KeyItemHandler.inspectedItem().description"></p>
+                                        <p style="margin-top: 5px"
+                                           data-bind="text: KeyItemHandler.inspectedItem().description"></p>
                                     </div>
                                     <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
-                                        <p style="margin-top: 5px" >?????</p>
+                                        <p style="margin-top: 5px">?????</p>
                                     </div>
                                 </div>
                             </div>
@@ -1305,8 +1306,7 @@
                         </div>
 
                         <div style="min-height:80px; vertical-align: center">
-                            Capture
-                            <span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span>
+                            Capture<span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span>
                             Pokémon to
                             unlock!
                         </div>
@@ -1447,9 +1447,29 @@
                         <p>
                             Hm! Excellent! You have caught your first pokémon!<br>
                             This is where your journey begins. <br>
-                            You can progress to the next route after you have defeated 10 pokémon.
-
+                            You can progress to the next route after you have defeated 10 pokémon.<br>
+                            To help you on you journey, I will give you these <b>Key items</b>!<br>
+                            You can view all your <b>Key items</b> in the start menu.<br>
                         </p>
+                        <div class="row">
+                                <div class="col-sm-3 offset-sm-3">
+                                    <img
+                                            title="A television set that is tuned to a program with useful tips for novice TRAINERS"
+                                            class="key-item"
+                                            src="assets/images/keyitems/Teachy%20tv.png"/>
+                                    <br>
+                                    <p>Teachy tv</p>
+                                </div>
+                                <div class="col-sm-3">
+                                    <img
+                                            title="A case for holding money. It can hold up to 1,000,000 coins"
+                                            class="key-item"
+                                            src="assets/images/keyitems/Coin%20case.png"/>
+                                    <br>
+                                    <p>Coin case</p>
+                                </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Next</button>
