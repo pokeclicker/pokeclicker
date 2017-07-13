@@ -132,11 +132,13 @@ class Player {
         return false;
     }
 
-    public gainKeyItem(name: string) {
+    public gainKeyItem(name: string, supressModal? :boolean) {
         if (!this.hasKeyItem(name)) {
             this.recentKeyItem(name);
             // TODO open modal
-            $("#keyItemModal").modal('show');
+            if(!supressModal) {
+                $("#keyItemModal").modal('show');
+            }
             this._keyItems().push(name);
         }
     }
