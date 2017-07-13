@@ -94,7 +94,6 @@ class OakItem {
 
             }
         }
-        console.log("Setting level: " + level);
         this.level(level);
         return level;
     }

@@ -10,7 +10,7 @@ class MapHelper {
                 Game.gameState(GameConstants.GameState.fighting);
             }
             else {
-                console.log("You don't have access to that route yet.");
+                Notifier.notify("You don't have access to that route yet.", GameConstants.NotificationOption.info);
             }
         }
     };

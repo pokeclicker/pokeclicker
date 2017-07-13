@@ -27,12 +27,14 @@ class ShopHandler {
         }
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
+        let multiple = this.amount() > 1 ? "s" : "";
         if (player.hasMoney(item.totalPrice())) {
             player.payMoney(item.totalPrice());
             item.buy(this.amount());
             item.increasePriceMultiplier(this.amount());
+            Notifier.notify("You bought " + this.amount() + " "  + item.name() + multiple, GameConstants.NotificationOption.success)
         } else {
-            //TODO make alert that shows you don't have enough money
+            Notifier.notify("You don't have enough money to buy " + this.amount() + " "  + item.name() + multiple, GameConstants.NotificationOption.danger)
         }
 
     }
