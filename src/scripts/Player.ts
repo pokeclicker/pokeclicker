@@ -124,7 +124,7 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
-    public hasKeyItem(name: string) :boolean {
+    public hasKeyItem(name: string): boolean {
         for (let i = 0; i < this._keyItems().length; i++) {
             if (this._keyItems()[i] == name) {
                 return true;
@@ -133,12 +133,10 @@ class Player {
         return false;
     }
 
-
-
-    public gainKeyItem(name: string, supressModal? :boolean) {
+    public gainKeyItem(name: string, supressModal?: boolean) {
         if (!this.hasKeyItem(name)) {
             this.recentKeyItem(name);
-            if(!supressModal) {
+            if (!supressModal) {
                 $("#keyItemModal").modal('show');
             }
             this._keyItems().push(name);
@@ -181,11 +179,17 @@ class Player {
         // TODO start at 0
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
-            attack += pokemon.attack();
+            if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
+                attack += pokemon.attack();
+            } else {
+                let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
+                console.log(attack);
+            }
         }
 
         // return attack;
-        return 10;
+        return attack;
     }
 
     public calculateClickAttack(): number {

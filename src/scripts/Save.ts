@@ -55,9 +55,8 @@ class Save {
     }
 
     public static initializeShards(): Array<Array<number>> {
-        console.log("init shards");
         let res = [];
-        for (let item in GameConstants.Type) {
+        for (let item in GameConstants.PokemonType) {
             if (!isNaN(Number(item))) {
                 res[item] = [];
                 res[item][GameConstants.TypeEffectiveness.Immune] = 0;

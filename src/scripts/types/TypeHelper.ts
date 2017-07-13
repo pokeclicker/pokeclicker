@@ -31,22 +31,44 @@ class TypeHelper {
     ];
     //@formatter:on
 
-    public static getAttackModifier(attackType1: number, attackType2: number, defendType1: number, defendType2: number): number {
+    public static getAttackModifier(a1: GameConstants.PokemonType, a2: GameConstants.PokemonType, d1: GameConstants.PokemonType, d2: GameConstants.PokemonType): number {
+
+        if (a1 == GameConstants.PokemonType.None || d1 == GameConstants.PokemonType.None) {
+            return 1;
+        }
+
+        let attackType1 = GameConstants.PokemonType[a1];
+        let attackType2 = GameConstants.PokemonType[a2];
+        let defendType1 = GameConstants.PokemonType[d1];
+        let defendType2 = GameConstants.PokemonType[d2];
+
+        console.log(attackType1);
+
         let list = player._shards;
+        //TODO factor in shard value
         let m1 = this.typeMatrix[attackType1][defendType1];
         m1 += list[attackType1][this.valueToType(m1)];
-        let m2 = this.typeMatrix[attackType1][defendType2];
-        m2 += list[attackType1][this.valueToType(m2)];
+
+        let m2 = 1;
+        if (a2 != -1) {
+            m2 = this.typeMatrix[attackType1][defendType2];
+            m2 += list[attackType1][this.valueToType(m2)];
+        }
+
         let m3 = this.typeMatrix[attackType2][defendType1];
         m3 += list[attackType2][this.valueToType(m3)];
-        let m4 = this.typeMatrix[attackType2][defendType2];
-        m4 += list[attackType2][this.valueToType(m4)];
 
-        return m1 + m2 + m3 + m4;
+        let m4 = 1;
+        if (d2 != -1) {
+            let m4 = this.typeMatrix[attackType2][defendType2];
+            m4 += list[attackType2][this.valueToType(m4)];
+        }
+
+        return m1 * m2 * m3 * m4;
     }
 
-    public static typeToValue(type: GameConstants.TypeEffectiveness) {
-
+    public static typeToValue(type: GameConstants.TypeEffectiveness): GameConstants.TypeEffectivenessValue {
+        return GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectivenessValue[type]];
     }
 
     public static valueToType(value: GameConstants.TypeEffectivenessValue): GameConstants.TypeEffectiveness {

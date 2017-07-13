@@ -92,10 +92,6 @@ namespace GameConstants {
         dungeontoken,
     }
 
-    export enum Type {
-        "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"
-    }
-
     export enum TypeEffectiveness {
         Immune,
         NotVery,
