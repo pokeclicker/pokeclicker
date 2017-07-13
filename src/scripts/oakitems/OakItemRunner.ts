@@ -89,7 +89,7 @@ class OakItemRunner {
                 if (OakItemRunner.getTotalActiveOakItems() < player.calculateOakItemSlots()()) {
                     OakItemRunner.oakItemList[id]().isActive(true);
                 } else {
-                    console.log("You can only have " + player.calculateOakItemSlots()() + " Oak items active at the same time");
+                    Notifier.notify("You can only have " + player.calculateOakItemSlots()() + " Oak items active at the same time", GameConstants.NotificationOption.warning);
                 }
             }
         }

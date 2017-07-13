@@ -48,7 +48,7 @@ class PokemonFactory {
         let rand: number = Math.floor(Math.random() * chance) + 1;
 
         if (rand <= 1) {
-            console.log("Shiny!!!");
+            Notifier.notify("You encounter a shiny Pokémon...", GameConstants.NotificationOption.warning);
             OakItemRunner.use("Shiny Charm");
             return true;
         }

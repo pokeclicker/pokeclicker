@@ -51,6 +51,13 @@ namespace GameConstants {
     export const DUNGEON_CHEST_SHOW = 2;
     export const DUNGEON_MAP_SHOW = 4;
 
+    export enum NotificationOption {
+        info,
+        success,
+        warning,
+        danger
+    }
+
     export enum DungeonTile {
         empty,
         enemy,

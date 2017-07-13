@@ -23,7 +23,8 @@ class GymRunner {
             Game.gameState(GameConstants.GameState.gym);
             GymBattle.generateNewEnemy();
         } else {
-            console.log("gym " + gym.leaderName + " is locked")
+            Notifier.notify(gym.leaderName + " thinks you are not a worthy opponent yet...", GameConstants.NotificationOption.danger);
+            Notifier.notify("Perhaps you should fight another gymleader first?", GameConstants.NotificationOption.info);
         }
     }
 
@@ -61,10 +62,7 @@ class GymRunner {
 document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
-        console.log("here");
-        console.log(player.town().gym());
        if(player.town().gym().badgeReward == GameConstants.Badge.Boulder){
-           console.log("Trying to give");
            player.gainKeyItem("Dungeon ticket");
        }
        if(player.town().gym().badgeReward == GameConstants.Badge.Soul){

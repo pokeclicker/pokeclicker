@@ -32,6 +32,10 @@
     <link href="libs/bootstrap.min.css" rel="stylesheet">
     <script src="libs/bootstrap.min.js"></script>
 
+    <!--Notify-->
+    <script src="libs/bootstrap-notify.min.js"></script>
+
+
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
@@ -446,8 +450,7 @@
                             </div>
                             <ul class="nav flex-sm-column featureList">
                                 <li class="nav-item" data-bind="if:player.town().gym">
-                                    <button data-bind="disable: !Gym.isUnlocked(player.town().gym()),
-                                                       attr: { class: Gym.calculateCssClass(player.town().gym()) }"
+                                    <button data-bind="attr: { class: Gym.calculateCssClass(player.town().gym()) }"
                                             onclick="GymRunner.startGym(player.town().gym())">
                                         Gym
                                     </button>
