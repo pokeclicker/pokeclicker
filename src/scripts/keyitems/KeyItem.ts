@@ -13,12 +13,8 @@ class KeyItem {
             return;
         }
         this.unlockReq = ko.computed<boolean>(unlockReq);
-
-            console.log("Add subscription");
             this.unlocker = this.unlockReq.subscribe(() => {
-                console.log("Triggered");
                 if (this.unlockReq()) {
-                    console.log("Achieved: " + this.name());
                     player.gainKeyItem(this.name());
                     this.unlocker.dispose();
                 }

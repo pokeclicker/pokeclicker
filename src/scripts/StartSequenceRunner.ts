@@ -57,8 +57,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 
     $('#starterCaughtModal').on('hidden.bs.modal', function () {
-        player.gainKeyItem("Teachy tv", true);
-        player.gainKeyItem("Coin case tv", true);
         Save.store(player);
         Game.gameState(GameConstants.GameState.fighting);
 

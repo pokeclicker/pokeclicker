@@ -59,6 +59,14 @@ class KeyItemHandler {
         }
     }
 
+    public static getKeyItemObservableByName(name:string): KnockoutObservable<KeyItem>{
+        for(let i = 0 ; i<KeyItemHandler.keyItemList.length; i++){
+            if(KeyItemHandler.keyItemList[i]().name() == name){
+                return KeyItemHandler.keyItemList[i];
+            }
+        }
+    }
+
     public static hover(name:string){
         KeyItemHandler.inspectedItem(KeyItemHandler.getKeyItemByName(name));
     }

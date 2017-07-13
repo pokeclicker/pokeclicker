@@ -26,7 +26,7 @@ class Player {
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
 
-    private _keyItems: KnockoutObservableArray<string>;
+    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
     public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
@@ -135,11 +135,11 @@ class Player {
     public gainKeyItem(name: string, supressModal? :boolean) {
         if (!this.hasKeyItem(name)) {
             this.recentKeyItem(name);
-            // TODO open modal
             if(!supressModal) {
                 $("#keyItemModal").modal('show');
             }
             this._keyItems().push(name);
+            KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
         }
     }
 
