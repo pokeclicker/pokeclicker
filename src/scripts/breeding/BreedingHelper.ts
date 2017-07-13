@@ -18,28 +18,24 @@ class BreedingHelper {
 
     public static createEgg(pokemonName: string): Egg {
         let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
-
         return new Egg(this.getSteps(dataPokemon.eggCycles), pokemonName, GameConstants.EggType.Pokemon);
     }
 
     public static createTypedEgg(type: GameConstants.EggType): Egg {
         let name = HatchList[type][Math.floor(Math.random() * HatchList[type].length)];
-        console.log("name = " + name);
-        return this.createEgg(name);
+        return BreedingHelper.createEgg(name);
     }
 
     public static createRandomEgg(): Egg {
         let type = Math.floor(Math.random() * (Object.keys(HatchList).length - 1));
-        console.log(type);
-        return this.createTypedEgg(type);
+        return BreedingHelper.createTypedEgg(type);
     }
 
-    public static getSteps = function (pokemonName) {
-        let pokemon = PokemonHelper.getPokemonByName(pokemonName);
-        if (pokemon.eggCycles === undefined) {
+    public static getSteps = function (eggCycles: number) {
+        if (eggCycles === undefined) {
             return 500;
         } else {
-            return pokemon.eggCycles * 40;
+            return eggCycles * 40;
         }
     }
 }
