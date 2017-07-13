@@ -186,9 +186,7 @@ class Player {
                 attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
             }
         }
-        console.log(attack);
 
-        // return attack;
         return attack;
     }
 
