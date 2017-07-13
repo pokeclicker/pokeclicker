@@ -24,7 +24,7 @@ class PokemonFactory {
         let id = basePokemon.id;
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
-        let maxHealth: number = Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) * Math.pow(player.caughtPokemonList.length - 1, 1.2) / 12), 1.15)), 20) || 20;
+        let maxHealth: number = Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15)), 20) || 20;
 
         let catchVariation = Math.floor(Math.random() * 7 - 3);
 

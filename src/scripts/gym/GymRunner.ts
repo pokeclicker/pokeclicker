@@ -44,6 +44,7 @@ class GymRunner {
         player.gainMoney(gym.moneyReward);
         if (!player.hasBadge(gym.badgeReward)) {
             player.gainBadge(gym.badgeReward);
+
             $('#receiveBadgeModal').modal('show');
         }
         player.town(TownList[gym.town]);
@@ -56,3 +57,19 @@ class GymRunner {
     })
 
 }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+
+    $('#receiveBadgeModal').on('hidden.bs.modal', function () {
+        console.log("here");
+        console.log(player.town().gym());
+       if(player.town().gym().badgeReward == GameConstants.Badge.Boulder){
+           console.log("Trying to give");
+           player.gainKeyItem("Dungeon ticket");
+       }
+       if(player.town().gym().badgeReward == GameConstants.Badge.Soul){
+           player.gainKeyItem("Safari ticket");
+       }
+
+    });
+});

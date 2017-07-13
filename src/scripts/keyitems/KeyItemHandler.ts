@@ -20,7 +20,6 @@ class KeyItemHandler {
         // TODO obtain somewhere at the start
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Factory key", "This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13")));
 
-        // TODO obtain somewhere at the start
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Dungeon ticket", "This ticket grants access to all dungeons in the Kanto region")));
 
         // TODO obtain somewhere at the start
@@ -29,9 +28,7 @@ class KeyItemHandler {
         // TODO obtain after the first Pokémon is lvl 100
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Mystery egg", "A mysterious Egg obtained from Mr. Pokémon. What is in the Egg is unknown")));
 
-        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Safari ticket", "This ticket grants access to the Safari Zone in Fuchsia City", function () {
-            return player.hasBadge(GameConstants.Badge.Soul);
-        })));
+        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Safari ticket", "This ticket grants access to the Safari Zone in Fuchsia City")));
 
         // TODO obtain when the player has 10 seeds
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Wailmer pail", "This is a tool for watering Berries you planted to make them grow more quickly", function () {

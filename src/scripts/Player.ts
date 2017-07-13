@@ -184,13 +184,13 @@ class Player {
         }
 
         // return attack;
-        return 10;
+        return attack;
     }
 
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
-        return 111111111500 * oakItemBonus;
+        return Math.pow((this.caughtPokemonList.length + 1),2) * oakItemBonus;
     }
 
     public calculateMoneyMultiplier(): number {
@@ -210,7 +210,7 @@ class Player {
 
     public calculateCatchTime(): number {
         // TODO Calculate catch time by checking upgrades and multipliers.
-        return 20;
+        return 1000;
     }
 
     /**
