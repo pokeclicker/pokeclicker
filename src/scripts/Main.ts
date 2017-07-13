@@ -56,6 +56,7 @@ class Game {
         KeyItemHandler.initialize();
         player.gainKeyItem("Coin case", true);
         player.gainKeyItem("Teachy tv", true);
+        player.gainKeyItem("Pokeball bag", true);
     }
 
     start() {
