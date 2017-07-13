@@ -25,6 +25,7 @@ class Player {
     private _oakItemsEquipped: string[];
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
+    private _shards: Array<Array<number>>;
 
     private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
@@ -110,6 +111,7 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
+        this._shards = savedPlayer._shards || Save.initializeShards();
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -455,8 +457,16 @@ class Player {
         this._itemMultipliers = value;
     }
 
+    get shards(): Array<Array<number>> {
+        return this._shards;
+    }
+
+    set shards(value: Array<Array<number>>) {
+        this._shards = value;
+    }
+
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_itemList", "_itemMultipliers", "_keyItems"];
+        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_itemList", "_itemMultipliers", "_keyItems", "_shards"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

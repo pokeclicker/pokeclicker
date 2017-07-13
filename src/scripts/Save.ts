@@ -53,4 +53,20 @@ class Save {
         }
         return res;
     }
+
+    public static initializeShards(): Array<Array<number>> {
+        console.log("init shards");
+        let res = [];
+        for (let item in GameConstants.Type) {
+            if (!isNaN(Number(item))) {
+                res[item] = [];
+                res[item][GameConstants.TypeEffectiveness.Immune] = 0;
+                res[item][GameConstants.TypeEffectiveness.NotVery] = 0;
+                res[item][GameConstants.TypeEffectiveness.Normal] = 0;
+                res[item][GameConstants.TypeEffectiveness.Very] = 0;
+            }
+        }
+
+        return res;
+    }
 }

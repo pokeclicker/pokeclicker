@@ -92,6 +92,24 @@ namespace GameConstants {
         dungeontoken,
     }
 
+    export enum Type {
+        "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy"
+    }
+
+    export enum TypeEffectiveness {
+        Immune,
+        NotVery,
+        Normal,
+        Very
+    }
+
+    export enum TypeEffectivenessValue {
+        Immune = 0,
+        NotVery = 0.5,
+        Normal = 1,
+        Very = 2
+    }
+
     export const PokeballCatchBonus = [
         0,
         5,
