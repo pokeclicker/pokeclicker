@@ -42,7 +42,7 @@ class TypeHelper {
         let defendType1 = GameConstants.PokemonType[d1];
         let defendType2 = GameConstants.PokemonType[d2];
 
-        let list = player._shards;
+        let list = player.shardUpgrades;
         //TODO factor in shard value
         let m1 = TypeHelper.typeMatrix[attackType1][defendType1];
         m1 += list[attackType1][this.valueToType(m1)];
