@@ -122,7 +122,7 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
-    public hasKeyItem(name: string) :boolean {
+    public hasKeyItem(name: string): boolean {
         for (let i = 0; i < this._keyItems().length; i++) {
             if (this._keyItems()[i] == name) {
                 return true;
@@ -131,12 +131,10 @@ class Player {
         return false;
     }
 
-
-
-    public gainKeyItem(name: string, supressModal? :boolean) {
+    public gainKeyItem(name: string, supressModal?: boolean) {
         if (!this.hasKeyItem(name)) {
             this.recentKeyItem(name);
-            if(!supressModal) {
+            if (!supressModal) {
                 $("#keyItemModal").modal('show');
             }
             this._keyItems().push(name);
@@ -189,7 +187,7 @@ class Player {
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
-        return Math.floor(Math.pow(this.caughtPokemonList.length + 1,1.4) * oakItemBonus);
+        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
     }
 
     public calculateMoneyMultiplier(): number {
@@ -272,7 +270,7 @@ class Player {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
-            if(!supressNotification) {
+            if (!supressNotification) {
                 Notifier.notify("You have captured " + pokemonName, GameConstants.NotificationOption.success)
             }
         }
@@ -459,7 +457,26 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_itemList", "_itemMultipliers", "_keyItems"];
+        let keep = ["_money",
+            "_dungeonTokens",
+            "_caughtShinyList",
+            "_route",
+            "_caughtPokemonList",
+            "_routeKills",
+            "_routeKillsNeeded",
+            "_region",
+            "_gymBadges",
+            "_pokeballs",
+            "_notCaughtBallSelection",
+            "_alreadyCaughtBallSelection",
+            "_sortOption",
+            "_sortDescending",
+            "_starter",
+            "_oakItemExp",
+            "_oakItemsEquipped",
+            "_itemList",
+            "_itemMultipliers",
+            "_keyItems"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
