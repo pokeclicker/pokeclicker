@@ -122,7 +122,7 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
-    public hasKeyItem(name: string) :boolean {
+    public hasKeyItem(name: string): boolean {
         for (let i = 0; i < this._keyItems().length; i++) {
             if (this._keyItems()[i] == name) {
                 return true;
@@ -131,12 +131,10 @@ class Player {
         return false;
     }
 
-
-
-    public gainKeyItem(name: string, supressModal? :boolean) {
+    public gainKeyItem(name: string, supressModal?: boolean) {
         if (!this.hasKeyItem(name)) {
             this.recentKeyItem(name);
-            if(!supressModal) {
+            if (!supressModal) {
                 $("#keyItemModal").modal('show');
             }
             this._keyItems().push(name);
@@ -189,7 +187,7 @@ class Player {
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
-        return Math.floor(Math.pow(this.caughtPokemonList.length + 1,1.4) * oakItemBonus);
+        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
     }
 
     public calculateMoneyMultiplier(): number {
@@ -207,8 +205,24 @@ class Player {
         return 1;
     }
 
-    public calculateCatchTime(): number {
-        // TODO Calculate catch time by checking upgrades and multipliers.
+    public calculateCatchTime(caughtYet?: boolean): number {
+        let ball: GameConstants.Pokeball = this._alreadyCaughtBallSelection();
+        if (!caughtYet) {
+            ball = this._notCaughtBallSelection();
+        }
+
+        console.log(GameConstants.Pokeball[ball]);
+
+        switch (ball) {
+            case GameConstants.Pokeball.None || GameConstants.Pokeball.Pokeball:
+                return 1250;
+            case GameConstants.Pokeball.Greatball:
+                return 1000;
+            case GameConstants.Pokeball.Ultraball:
+                return 750;
+            case GameConstants.Pokeball.Masterball:
+                return 500;
+        }
         return 1250;
     }
 
@@ -272,7 +286,7 @@ class Player {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
-            if(!supressNotification) {
+            if (!supressNotification) {
                 Notifier.notify("You have captured " + pokemonName, GameConstants.NotificationOption.success)
             }
         }
