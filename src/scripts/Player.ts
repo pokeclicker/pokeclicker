@@ -205,12 +205,7 @@ class Player {
         return 1;
     }
 
-    public calculateCatchTime(caughtYet?: boolean): number {
-        let ball: GameConstants.Pokeball = this._alreadyCaughtBallSelection();
-        if (!caughtYet) {
-            ball = this._notCaughtBallSelection();
-        }
-
+    public calculateCatchTime(ball?: GameConstants.Pokeball): number {
         switch (ball) {
             case GameConstants.Pokeball.Pokeball:
                 return 1250;
@@ -221,7 +216,7 @@ class Player {
             case GameConstants.Pokeball.Masterball:
                 return 500;
             default:
-                return 0;
+                return 1250;
         }
     }
 
