@@ -205,9 +205,26 @@ class Player {
         return 1;
     }
 
-    public calculateCatchTime(): number {
-        // TODO Calculate catch time by checking upgrades and multipliers.
-        return 1250;
+    public calculateCatchTime(caughtYet?: boolean): number {
+        let ball: GameConstants.Pokeball = this._alreadyCaughtBallSelection();
+        if (!caughtYet) {
+            ball = this._notCaughtBallSelection();
+        }
+
+        console.log(GameConstants.Pokeball[ball]);
+
+        switch (ball) {
+            case GameConstants.Pokeball.Pokeball:
+                return 1250;
+            case GameConstants.Pokeball.Greatball:
+                return 1000;
+            case GameConstants.Pokeball.Ultraball:
+                return 750;
+            case GameConstants.Pokeball.Masterball:
+                return 500;
+            default:
+                return 0;
+        }
     }
 
     /**

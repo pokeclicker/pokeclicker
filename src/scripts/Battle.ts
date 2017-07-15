@@ -62,7 +62,7 @@ class Battle {
                     this.throwPokeball(pokeBall);
                     this.generateNewEnemy();
                 },
-                player.calculateCatchTime()
+                player.calculateCatchTime(player.alreadyCaughtPokemon(this.enemyPokemon().name))
             )
             ;
 
