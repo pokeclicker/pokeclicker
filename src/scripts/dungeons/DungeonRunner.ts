@@ -65,6 +65,7 @@ class DungeonRunner {
     }
 
     private static dungeonLost() {
+        DungeonRunner.fighting(false);
         Game.gameState(GameConstants.GameState.town);
         Notifier.notify("You could not complete the dungeon in time", GameConstants.NotificationOption.danger);
     }
@@ -78,5 +79,10 @@ class DungeonRunner {
     public static timeLeftSeconds = ko.computed(function () {
         return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
     })
+
+    public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
+        let possiblePokemon: string[] = dungeon.allPokemonNames;
+        return RouteHelper.listCompleted(possiblePokemon, includeShiny);
+    }
 
 }

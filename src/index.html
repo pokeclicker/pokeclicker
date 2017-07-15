@@ -354,7 +354,20 @@
                     <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
                         <div class="col-lg-12" style="display: block; height: 170px">
                             <div>
-                                <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span><br>
+                                <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span>
+                                <!--If all Pokémon on the route are caught-->
+                                <span data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
+                                    <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-small.png"/>
+                                </span>
+
+                                <!--If all Pokémon on the route are caught shiny-->
+                                <span data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true)">
+                                    <img title="You have captured all Pokémon shiny on this route!"
+                                         class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                                </span>
+                                <br>
                                 <div id="dungeonTimer" class="progress">
                                     <div class="progress-bar" role="progressbar"
                                          data-bind="text: DungeonRunner.timeLeftSeconds(), attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' }"
@@ -365,6 +378,19 @@
 
                             <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
+
+                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
+                                <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
+                                    <img title="You have captured this Pokémon!" class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-small.png"/>
+                                </span>
+
+                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
+                                <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
+                                    <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                                </span>
+
                                 <br>
                                 <div style="height: 96px;">
                                     <div data-bind="ifnot: DungeonBattle.catching">
