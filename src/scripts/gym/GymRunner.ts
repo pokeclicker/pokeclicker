@@ -37,7 +37,7 @@ class GymRunner {
     }
 
     public static gymLost() {
-        Notifier.notify("It appears you are not strong enough to defeat " + player.town().gym().leaderName, GameConstants.NotificationOption.danger);
+        Notifier.notify("It appears you are not strong enough to defeat " + GymBattle.gym.leaderName, GameConstants.NotificationOption.danger);
         Game.gameState(GameConstants.GameState.town);
     }
 
