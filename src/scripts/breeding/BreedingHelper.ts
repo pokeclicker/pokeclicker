@@ -14,12 +14,20 @@ class BreedingHelper {
         }
         amount = Math.round(amount);
         for (let egg of player.eggList()) {
+            if (egg.notified) {
+                continue;
+            }
             egg.steps += amount;
             if (OakItemRunner.isActive("Shiny Charm")) {
                 egg.shinySteps += amount;
             }
             if (egg.steps >= egg.totalSteps) {
-                //TODO hatch
+                if (egg.type == GameConstants.EggType.Pokemon) {
+                    $.notify(egg.pokemon + " is ready to hatch!");
+                } else {
+                    $.notify("An egg is ready to hatch!")
+                }
+                egg.notified = true;
             }
         }
     }

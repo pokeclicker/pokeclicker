@@ -4,6 +4,7 @@ class Egg {
     shinySteps: number;
     pokemon: string;
     type: GameConstants.EggType;
+    notified: boolean;
 
     constructor(totalSteps: number, pokemon: string, type: GameConstants.EggType) {
         this.totalSteps = totalSteps;
@@ -11,5 +12,6 @@ class Egg {
         this.shinySteps = 0;
         this.pokemon = pokemon;
         this.type = type;
+        this.notified = false;
     }
 }
