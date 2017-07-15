@@ -64,10 +64,10 @@ class GymRunner {
 document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
-       if(player.town().gym().badgeReward == GameConstants.Badge.Boulder){
+       if(GymBattle.gym.badgeReward == GameConstants.Badge.Boulder){
            player.gainKeyItem("Dungeon ticket");
        }
-       if(player.town().gym().badgeReward == GameConstants.Badge.Soul){
+       if(GymBattle.gym.badgeReward == GameConstants.Badge.Soul){
            player.gainKeyItem("Safari ticket");
        }
 
