@@ -12,7 +12,8 @@ class BreedingHelper {
         if (OakItemRunner.isActive("Blaze Casette")) {
             amount *= OakItemRunner.calculateBonus("Blaze Casette")
         }
-        for (let egg of player.eggList) {
+        amount = Math.round(amount);
+        for (let egg of player.eggList()) {
             egg.steps += amount;
             if (OakItemRunner.isActive("Shiny Charm")) {
                 egg.shinySteps += amount;
@@ -24,8 +25,13 @@ class BreedingHelper {
     }
 
     public static gainPokemonEgg(pokemon: CaughtPokemon) {
+        if (!player.hasFreeEggSlot()) {
+            $.notify("You don't have any free egg slots");
+            return;
+        }
         let egg = this.createEgg(pokemon.name);
         pokemon.breeding(true);
+        player.eggList.push(egg);
 
         $('#breedingModal').modal('hide');
 

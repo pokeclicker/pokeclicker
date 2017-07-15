@@ -8,6 +8,7 @@ class DungeonBattle extends Battle {
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.addRouteKill();
+        BreedingHelper.progressEggs(Math.floor(Math.sqrt(DungeonRunner.dungeon.itemRoute)));
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
