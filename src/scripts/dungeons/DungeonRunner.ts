@@ -65,6 +65,7 @@ class DungeonRunner {
     }
 
     private static dungeonLost() {
+        DungeonRunner.fighting(false);
         Game.gameState(GameConstants.GameState.town);
         Notifier.notify("You could not complete the dungeon in time", GameConstants.NotificationOption.danger);
     }
