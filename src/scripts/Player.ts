@@ -214,7 +214,7 @@ class Player {
         console.log(GameConstants.Pokeball[ball]);
 
         switch (ball) {
-            case GameConstants.Pokeball.None || GameConstants.Pokeball.Pokeball:
+            case GameConstants.Pokeball.Pokeball:
                 return 1250;
             case GameConstants.Pokeball.Greatball:
                 return 1000;
@@ -222,8 +222,9 @@ class Player {
                 return 750;
             case GameConstants.Pokeball.Masterball:
                 return 500;
+            default:
+                return 0;
         }
-        return 1250;
     }
 
     /**
