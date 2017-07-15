@@ -25,7 +25,7 @@ class DungeonBattle extends Battle {
                     () => {
                         this.throwPokeball(pokeBall);
                     },
-                    player.calculateCatchTime()
+                    player.calculateCatchTime(pokeBall)
                 );
             }
         }
