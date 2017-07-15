@@ -29,7 +29,7 @@ class Dungeon {
 
     public isUnlocked(): boolean {
         if(!player.hasBadge(this.badgeReq)){
-            Notifier.notify("You need the " + this.badgeReq + " badge to access this dungeon", GameConstants.NotificationOption.danger);
+            Notifier.notify("You need the " + GameConstants.Badge[this.badgeReq] + " badge to access this dungeon", GameConstants.NotificationOption.danger);
             return false;
         }
 
