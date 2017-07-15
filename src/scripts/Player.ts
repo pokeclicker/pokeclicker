@@ -498,8 +498,7 @@ class Player {
             "_itemList",
             "_itemMultipliers",
             "_keyItems",
-            "_shardUpgrades",
-            "_shardsCollected"];
+            "_shardUpgrades", "_shardsCollected"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
