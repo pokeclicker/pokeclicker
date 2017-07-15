@@ -365,6 +365,19 @@
 
                             <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
+
+                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
+                                <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
+                                    <img title="You have captured this Pokémon!" class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-small.png"/>
+                                </span>
+
+                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
+                                <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
+                                    <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                                </span>
+
                                 <br>
                                 <div style="height: 96px;">
                                     <div data-bind="ifnot: DungeonBattle.catching">
