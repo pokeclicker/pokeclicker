@@ -211,8 +211,6 @@ class Player {
             ball = this._notCaughtBallSelection();
         }
 
-        console.log(GameConstants.Pokeball[ball]);
-
         switch (ball) {
             case GameConstants.Pokeball.Pokeball:
                 return 1250;
