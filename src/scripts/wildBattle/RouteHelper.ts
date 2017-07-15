@@ -38,11 +38,6 @@ class RouteHelper {
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 
-    public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
-        let possiblePokemon: string[] = dungeon.allPokemonNames;
-        return RouteHelper.listCompleted(possiblePokemon, includeShiny);
-    }
-
     private static listCompleted(possiblePokemon: string[], includeShiny: boolean) {
         for (let i = 0; i < possiblePokemon.length; i++) {
             if (!player.alreadyCaughtPokemon(possiblePokemon[i])) {

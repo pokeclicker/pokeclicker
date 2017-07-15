@@ -80,4 +80,9 @@ class DungeonRunner {
         return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
     })
 
+    public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
+        let possiblePokemon: string[] = dungeon.allPokemonNames;
+        return RouteHelper.listCompleted(possiblePokemon, includeShiny);
+    }
+
 }

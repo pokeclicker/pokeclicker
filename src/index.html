@@ -356,13 +356,13 @@
                             <div>
                                 <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span>
                                 <!--If all Pokémon on the route are caught-->
-                                <span data-bind="if: (!RouteHelper.dungeonCompleted(DungeonRunner.dungeon, true) && RouteHelper.dungeonCompleted(DungeonRunner.dungeon, false))">
+                                <span data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
                                     <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
                                          src="assets/images/pokeball/Pokeball-small.png"/>
                                 </span>
 
                                 <!--If all Pokémon on the route are caught shiny-->
-                                <span data-bind="if: RouteHelper.dungeonCompleted(DungeonRunner.dungeon, true)">
+                                <span data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true)">
                                     <img title="You have captured all Pokémon shiny on this route!"
                                          class="pokeball-smallest"
                                          src="assets/images/pokeball/Pokeball-shiny-small.png"/>
