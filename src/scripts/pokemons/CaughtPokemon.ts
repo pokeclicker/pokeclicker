@@ -27,9 +27,6 @@ class CaughtPokemon {
             return PokemonHelper.calculateAttack(this.baseAttack, this.attackBonus(), this.levelObservable());
         });
 
-        this.levelObservable = ko.computed(() => {return PokemonHelper.calculateLevel(this)});
-        this.baseAttack = pokemonData.attack
-        this.attack = ko.computed(() => {return PokemonHelper.calculateAttack(this.baseAttack, this.attackBonus(), this.levelObservable())})
         this.breeding = ko.observable(false);
         if (pokemonData.evoLevel && !this.evolved) {
             this.evolver = this.levelObservable.subscribe(() => {
