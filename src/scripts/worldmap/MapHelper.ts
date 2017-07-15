@@ -10,7 +10,7 @@ class MapHelper {
                 Game.gameState(GameConstants.GameState.fighting);
             }
             else {
-                console.log("You don't have access to that route yet.");
+                Notifier.notify("You don't have access to that route yet.", GameConstants.NotificationOption.info);
             }
         }
     };
@@ -44,18 +44,19 @@ class MapHelper {
         });
     }
 
-    public static accessToTown(townName:string) : boolean {
+    public static accessToTown(townName: string): boolean {
         let town = TownList[townName];
-        for(let i of town.reqRoutes) {
+        for (let i of town.reqRoutes) {
             if (player.routeKills[i]() < player.routeKillsNeeded) {
                 return false;
             }
         }
+
         return true;
     };
 
     public static moveToTown(townName: string) {
-        if(MapHelper.accessToTown(townName)) {
+        if (MapHelper.accessToTown(townName)) {
             Game.gameState(GameConstants.GameState.idle);
             $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
             player.route(0);
@@ -65,10 +66,10 @@ class MapHelper {
         }
     };
 
-    public static updateAllRoutes(){
-        for(let i = 0; i<GameConstants.AMOUNT_OF_ROUTES_KANTO; i++){
+    public static updateAllRoutes() {
+        for (let i = 0; i < GameConstants.AMOUNT_OF_ROUTES_KANTO; i++) {
             // TODO fix for multiple regions
-            if(MapHelper.accessToRoute(i,GameConstants.Region.kanto)){
+            if (MapHelper.accessToRoute(i, GameConstants.Region.kanto)) {
                 $("[data-route='" + i + "']").removeClass('currentRoute').removeClass('lockedRoute').addClass('unlockedRoute');
             }
         }

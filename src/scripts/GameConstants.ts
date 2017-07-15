@@ -26,14 +26,13 @@ namespace GameConstants {
     export const ITEM_PRICE_MULTIPLIER = 1.02;
     export const ITEM_PRICE_DEDUCT = 0.003;
 
-
     // Oak items
-    export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000,20000, Number.MAX_VALUE];
+    export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
     export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
     export const AMOUNT_OF_OAKITEMS = 8;
     export const OAKITEM_MAX_LEVEL = 5;
-    export const OAKITEM_FIRST_UNLOCK = 30;
-    export const OAKITEM_SECOND_UNLOCK = 60;
+    export const OAKITEM_FIRST_UNLOCK = 20;
+    export const OAKITEM_SECOND_UNLOCK = 50;
     export const OAKITEM_THIRD_UNLOCK = 100;
 
     // Breeding
@@ -44,7 +43,7 @@ namespace GameConstants {
         "Amulet Coin",
         "Poison Barb",
         "Exp Share",
-        "Plant Grower",
+        "Sprayduck",
         "Shiny Charm",
         "Blaze Cassette",
         "Cell Battery",
@@ -54,6 +53,13 @@ namespace GameConstants {
     export const DUNGEON_SIZE = 5;
     export const DUNGEON_CHEST_SHOW = 2;
     export const DUNGEON_MAP_SHOW = 4;
+
+    export enum NotificationOption {
+        info,
+        success,
+        warning,
+        danger
+    }
 
     export enum DungeonTile {
         empty,
@@ -137,7 +143,7 @@ namespace GameConstants {
         new Option("Attack", GameConstants.SortOptionsEnum.attack),
         new Option("Level", GameConstants.SortOptionsEnum.levelObservable),
         new Option("Shiny", GameConstants.SortOptionsEnum.shiny),
-    ]
+    ];
 
     export const RegionRoute = {
         0: 25,
@@ -145,8 +151,8 @@ namespace GameConstants {
         2: 0
     };
 
-    export function randomIntBetween(min:number, max:number){
-        return Math.floor(Math.random() * max) + min;
+    export function randomIntBetween(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     export enum Badge {

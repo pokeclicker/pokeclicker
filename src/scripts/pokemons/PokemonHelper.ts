@@ -81,8 +81,7 @@ class PokemonHelper {
                 dir *= -1;
             }
 
-
-            //Compare by provided property 
+            //Compare by provided property
             if (_a[property] == _b[property]) {
                 //If they are equal according to provided property, sort by id
                 if (_a.id < _b.id) {

@@ -29,8 +29,9 @@ class Player {
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
 
+    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
-
+    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
@@ -76,8 +77,7 @@ class Player {
 
         if (savedPlayer._caughtPokemonList) {
             tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                let tmp = new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp);
-                return tmp
+                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp)
             });
         }
         this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
@@ -92,6 +92,7 @@ class Player {
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._region = savedPlayer._region || GameConstants.Region.kanto;
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
+        this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
             return ko.observable(savedPlayer._pokeballs ? (savedPlayer._pokeballs[index] || 1000) : 1000)
         });
@@ -127,6 +128,25 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
+    public hasKeyItem(name: string): boolean {
+        for (let i = 0; i < this._keyItems().length; i++) {
+            if (this._keyItems()[i] == name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public gainKeyItem(name: string, supressModal?: boolean) {
+        if (!this.hasKeyItem(name)) {
+            this.recentKeyItem(name);
+            if (!supressModal) {
+                $("#keyItemModal").modal('show');
+            }
+            this._keyItems().push(name);
+            KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
+        }
+    }
 
     public calculateOakItemSlots(): KnockoutObservable<number> {
         let total = 0;
@@ -167,13 +187,13 @@ class Player {
         }
 
         // return attack;
-        return 10;
+        return attack;
     }
 
     public calculateClickAttack(): number {
         // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
-        return 111111111500 * oakItemBonus;
+        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
     }
 
     public calculateMoneyMultiplier(): number {
@@ -191,9 +211,26 @@ class Player {
         return 1;
     }
 
-    public calculateCatchTime(): number {
-        // TODO Calculate catch time by checking upgrades and multipliers.
-        return 20;
+    public calculateCatchTime(caughtYet?: boolean): number {
+        let ball: GameConstants.Pokeball = this._alreadyCaughtBallSelection();
+        if (!caughtYet) {
+            ball = this._notCaughtBallSelection();
+        }
+
+        console.log(GameConstants.Pokeball[ball]);
+
+        switch (ball) {
+            case GameConstants.Pokeball.Pokeball:
+                return 1250;
+            case GameConstants.Pokeball.Greatball:
+                return 1000;
+            case GameConstants.Pokeball.Ultraball:
+                return 750;
+            case GameConstants.Pokeball.Masterball:
+                return 500;
+            default:
+                return 0;
+        }
     }
 
     /**
@@ -250,12 +287,15 @@ class Player {
         return false;
     }
 
-    public capturePokemon(pokemonName: string, shiny: boolean = false) {
+    public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
         OakItemRunner.use("Magic Ball");
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
+            if (!supressNotification) {
+                Notifier.notify("You have captured " + pokemonName, GameConstants.NotificationOption.success)
+            }
         }
         if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
             this._caughtShinyList.push(pokemonName);
@@ -404,7 +444,6 @@ class Player {
         this._town = value;
     }
 
-
     get oakItemsEquipped(): string[] {
         return this._oakItemsEquipped;
     }
@@ -473,7 +512,28 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money", "_dungeonTokens", "_caughtShinyList", "_route", "_caughtPokemonList", "_routeKills", "_routeKillsNeeded", "_region", "_gymBadges", "_pokeballs", "_notCaughtBallSelection", "_alreadyCaughtBallSelection", "_sortOption", "_sortDescending", "_starter", "_oakItemExp", "_oakItemsEquipped", "_itemList", "_itemMultipliers", "_eggList", "_eggSlots"];
+        let keep = ["_money",
+            "_dungeonTokens",
+            "_caughtShinyList",
+            "_route",
+            "_caughtPokemonList",
+            "_routeKills",
+            "_routeKillsNeeded",
+            "_region",
+            "_gymBadges",
+            "_pokeballs",
+            "_notCaughtBallSelection",
+            "_alreadyCaughtBallSelection",
+            "_sortOption",
+            "_sortDescending",
+            "_starter",
+            "_oakItemExp",
+            "_oakItemsEquipped",
+            "_itemList",
+            "_itemMultipliers",
+            "_keyItems",
+            "_eggList",
+            "_eggSlots"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

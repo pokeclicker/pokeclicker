@@ -3,7 +3,6 @@
 
 import PokemonType = GameConstants.PokemonType;
 
-
 /**
  * Gym class.
  */
@@ -49,8 +48,8 @@ const gymList: { [townName: string]: Gym } = {};
 gymList["Pewter City"] = new Gym(
     "Brock",
     "Pewter City",
-    [new GymPokemon("Geodude", 550, 12),
-        new GymPokemon("Onix", 1110, 14)],
+    [new GymPokemon("Geodude", 770, 12),
+        new GymPokemon("Onix", 1554, 14)],
     GameConstants.Badge.Boulder,
     250,
     GameConstants.Badge.None,
@@ -60,7 +59,7 @@ gymList["Cerulean City"] = new Gym(
     "Misty",
     "Cerulean City",
     [new GymPokemon("Staryu", 4000, 18),
-        new GymPokemon("Starmie", 6000, 21)],
+        new GymPokemon("Starmie", 6400, 21)],
     GameConstants.Badge.Cascade,
     500,
     GameConstants.Badge.Boulder,

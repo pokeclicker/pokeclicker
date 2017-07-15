@@ -13,7 +13,8 @@ class BattlePokemon implements enemyPokemonInterface {
     exp: number;
     money: number;
     shiny: boolean;
-        /**
+
+    /**
      * In case you want to manually create a Pokémon instead of generating it from the route number
      * @param name Pokémon name
      * @param id Pokémon
@@ -51,9 +52,8 @@ class BattlePokemon implements enemyPokemonInterface {
      */
     public damage(damage: number): void {
         this.health(Math.max(0, this.health() - damage));
-        this.healthPercentage(Math.floor(this.health()/this.maxHealth()*100));
+        this.healthPercentage(Math.floor(this.health() / this.maxHealth() * 100));
     }
-
 
 }
 

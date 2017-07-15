@@ -9,7 +9,6 @@ class OakItem {
     public isActive: KnockoutObservable<boolean>;
     public id: GameConstants.OakItem;
 
-
     constructor(name: string, unlockReq: number, description: string, baseBonus: number, stepBonus: number, expGain: number) {
         this.name = ko.observable(name);
         this.unlockReq = unlockReq;
@@ -22,7 +21,7 @@ class OakItem {
         this.isActive = ko.observable(false);
     }
 
-    public isUnlocked():boolean{
+    public isUnlocked(): boolean {
         return player.caughtPokemonList.length >= this.unlockReq;
     }
 
@@ -31,18 +30,18 @@ class OakItem {
     }
 
     public expProgress(): string {
-        if(OakItemRunner.selectedItem().canUpgrade()) {
+        if (OakItemRunner.selectedItem().canUpgrade()) {
             return "Cost: " + GameConstants.OAKITEM_MONEY_COST[OakItemRunner.selectedItem().level()];
         }
         return OakItemRunner.selectedItem().getNormalizedPlayerExp() + "/" + OakItemRunner.selectedItem().getNormalizedRequiredExp();
     }
 
-    public getNormalizedPlayerExp(){
+    public getNormalizedPlayerExp() {
         let previousExp = GameConstants.OAKITEM_XP_REQUIREMENT[this.level() - 1] || 0;
         return player.getOakItemExp(this.id) - previousExp;
     }
 
-    public getNormalizedRequiredExp(){
+    public getNormalizedRequiredExp() {
         let previousExp = GameConstants.OAKITEM_XP_REQUIREMENT[this.level() - 1] || 0;
         return GameConstants.OAKITEM_XP_REQUIREMENT[this.level()] - previousExp;
     }
@@ -95,7 +94,6 @@ class OakItem {
 
             }
         }
-        console.log("Setting level: " + level);
         this.level(level);
         return level;
     }
