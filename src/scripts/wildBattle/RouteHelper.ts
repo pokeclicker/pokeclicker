@@ -35,19 +35,15 @@ class RouteHelper {
 
     public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean, includeWater: boolean): boolean {
         let possiblePokemon: string[] = RouteHelper.getAvailablePokemonList(route, region, includeWater);
-        for (let i = 0; i < possiblePokemon.length; i++) {
-            if (!player.alreadyCaughtPokemon(possiblePokemon[i])) {
-                return false;
-            }
-            if (includeShiny && !player.alreadyCaughtPokemonShiny((possiblePokemon[i]))) {
-                return false;
-            }
-        }
-        return true;
+        return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
         let possiblePokemon: string[] = dungeon.allPokemonNames;
+        return RouteHelper.listCompleted(possiblePokemon, includeShiny);
+    }
+
+    private static listCompleted(possiblePokemon: string[], includeShiny: boolean) {
         for (let i = 0; i < possiblePokemon.length; i++) {
             if (!player.alreadyCaughtPokemon(possiblePokemon[i])) {
                 return false;
