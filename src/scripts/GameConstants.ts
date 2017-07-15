@@ -40,7 +40,7 @@ namespace GameConstants {
         "Amulet Coin",
         "Poison Barb",
         "Exp Share",
-        "Plant Grower",
+        "Sprayduck",
         "Shiny Charm",
         "Blaze Cassette",
         "Cell Battery",
