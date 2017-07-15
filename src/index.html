@@ -354,7 +354,20 @@
                     <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
                         <div class="col-lg-12" style="display: block; height: 170px">
                             <div>
-                                <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span><br>
+                                <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span>
+                                <!--If all Pokémon on the route are caught-->
+                                <span data-bind="if: (!RouteHelper.dungeonCompleted(DungeonRunner.dungeon, true) && RouteHelper.dungeonCompleted(DungeonRunner.dungeon, false))">
+                                    <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-small.png"/>
+                                </span>
+
+                                <!--If all Pokémon on the route are caught shiny-->
+                                <span data-bind="if: RouteHelper.dungeonCompleted(DungeonRunner.dungeon, true)">
+                                    <img title="You have captured all Pokémon shiny on this route!"
+                                         class="pokeball-smallest"
+                                         src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                                </span>
+                                <br>
                                 <div id="dungeonTimer" class="progress">
                                     <div class="progress-bar" role="progressbar"
                                          data-bind="text: DungeonRunner.timeLeftSeconds(), attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' }"
