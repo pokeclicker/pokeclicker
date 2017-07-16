@@ -70,6 +70,9 @@
             <button onClick="$('#showKeyitemsModal').modal('toggle');" class="dropdown-item">Key Items</button>
         </li>
         <li>
+            <button class="dropdown-item" onClick="$('#mineModal').modal('toggle');">Underground</button>
+        </li>
+        <li>
             <button onClick="$('#donateModal').modal('toggle');" class="dropdown-item" href="#">Donate</button>
         </li>
 
@@ -264,6 +267,58 @@
         </div>
     </div>
 
+</div>
+
+<div aria-labelledby="myModalLabel" class="modal fade noselect" id="mineModal" role="dialog" style="cursor:default" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
+                        <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a></li>
+                        <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#upgrades">Upgrades</a></li>
+                        <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#dailyDeals">Daily deals</a></li>
+                        <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
+                        <p><span id="diamondCounter">x</span> <img src='assets/images/underground/diamond.png'></p>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div id="dig" class="tab-pane fade in active">
+                    <div class="modal-body"  style="width: 80%;margin: auto;">
+                        <div class='row' style="text-align:center;">
+                            <div class='progress' style="margin-bottom:10px">
+                                <div id='mineEnergyBar' class='progress-bar progress-bar-warning' role='progressbar' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100' style='width:80%'>
+                                </div>
+                            </div>
+                            <span id='energyDisplay' style='color:black;'>1/2</span>
+                        </div>
+                        <div id="mineBody"></div>
+
+                    </div>
+                </div>
+                <div id="treasures" class="tab-pane fade">
+                    <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;"></div>
+                </div>
+                <div id="upgrades" class="tab-pane fade">
+                    <div class="modal-body" id="upgradesBody" style="width: 80%;margin: auto;"></div>
+                </div>
+                <div id="help" class="tab-pane fade">
+                    <div class="modal-body" id="helpBody" style="width: 80%;margin: auto;">
+                        <h4>In the underground you can mine for hidden treasures.</h4>
+                        <h4>Select the Hammer or the Chisel and click on the wall.</h4>
+                        <h4>The Hammer is better for large areas, while the Chisel is better for small areas.</h4>
+                        <h4>Sell your treasures for shards or diamonds!</h4>
+                        <h4>You can use your diamonds to buy all kinds of upgrades!</h4>
+                        <h4>Every day you can trade your found items.</h4>
+                        <h4>Check the Daily Deals tab!</h4>
+                    </div>
+                </div>
+                <div id="dailyDeals" class="tab-pane fade">
+                    <div class="modal-body" id="dailyDealsBody" style="width: 80%;margin: auto;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 
