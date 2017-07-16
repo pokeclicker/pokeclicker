@@ -117,7 +117,7 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
-        this._eggList = ko.observableArray(savedPlayer._eggList != null ? savedPlayer._eggList : []);
+        this._eggList = ko.observableArray(savedPlayer._eggList != null ? savedPlayer._eggList : [null, null, null, null]);
         this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
 
         //TODO remove before deployment
@@ -366,7 +366,23 @@ class Player {
     }
 
     public hasFreeEggSlot(): boolean {
-        return this._eggList().length < this._eggSlots();
+        let counter = 0;
+        for (let egg of this._eggList()) {
+            if (egg !== null) {
+                counter++;
+            }
+        }
+        return counter < this._eggSlots();
+    }
+
+    public gainEgg(e: Egg) {
+        for (let i = 0; i < this._eggList().length; i++) {
+            if (this._eggList()[i] == null) {
+                this._eggList().splice(i, 1, e);
+                return;
+            }
+        }
+        console.log("Error: Could not place egg " + e);
     }
 
     public gainBadge(badge: GameConstants.Badge) {

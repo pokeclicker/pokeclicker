@@ -13,15 +13,16 @@ class BreedingHelper {
             amount *= OakItemRunner.calculateBonus("Blaze Casette")
         }
         amount = Math.round(amount);
-        for (let egg of player.eggList()) {
-            if (egg.notified) {
+        for (let obj of player.eggList()) {
+            let egg: Egg = obj;
+            if (egg == null || egg.notified) {
                 continue;
             }
-            egg.steps += amount;
+            egg.steps(egg.steps() + amount);
             if (OakItemRunner.isActive("Shiny Charm")) {
                 egg.shinySteps += amount;
             }
-            if (egg.steps >= egg.totalSteps) {
+            if (egg.steps() >= egg.totalSteps) {
                 if (egg.type == GameConstants.EggType.Pokemon) {
                     $.notify(egg.pokemon + " is ready to hatch!");
                 } else {
@@ -39,7 +40,7 @@ class BreedingHelper {
         }
         let egg = this.createEgg(pokemon.name);
         pokemon.breeding(true);
-        player.eggList.push(egg);
+        player.gainEgg(egg);
 
         $('#breedingModal').modal('hide');
 
