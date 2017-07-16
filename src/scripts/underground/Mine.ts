@@ -4,6 +4,7 @@ class Mine {
     public static itemsFound: KnockoutObservable<number>;
     public static itemsBuried: number;
     public static rewardNumbers: Array<number>;
+    public static toolSelected: GameConstants.MineTool = GameConstants.MineTool["Chisel"];
 
     public static loadMine() {
         let tmpGrid = [];
