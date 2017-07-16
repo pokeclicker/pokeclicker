@@ -1,5 +1,5 @@
 class Mine {
-    public static grid: Array<Array<number>>;
+    public static grid: Array<Array<KnockoutObservable<number>>>;
     public static rewardGrid: Array<Array<any>>;
     public static itemsFound: KnockoutObservable<number>;
     public static itemsBuried: number;
@@ -14,7 +14,7 @@ class Mine {
             let row = [];
             let rewardRow = [];
             for(let j = 0; j<GameConstants.Mine.sizeX; j++){
-                row.push(Math.min(5, Math.max(1, Math.floor(Math.random()*2+Math.random()*3)+1)));
+                row.push(ko.observable(Math.min(5, Math.max(1, Math.floor(Math.random()*2+Math.random()*3)+1))));
                 rewardRow.push(0);
             }
             tmpGrid.push(row);
@@ -92,7 +92,7 @@ class Mine {
         } else {
             Mine.chisel(i,j);
         }
-        Underground.showMine();
+        //Underground.showMine();
         //checkItemsRevealed();
         //showCurMine();
     }
@@ -105,10 +105,10 @@ class Mine {
             let hasMined = false;
             for(let i = -1; i < 2; i++){
                 for(let j = -1; j < 2; j++){
-                    if(Mine.grid[Mine.normalizeY(x+i)][Mine.normalizeX(y+j)] > 0){
+                    if(Mine.grid[Mine.normalizeY(x+i)][Mine.normalizeX(y+j)]() > 0){
                         hasMined = true;
                     }
-                    Mine.grid[Mine.normalizeY(x+i)][Mine.normalizeX(y+j)] = Math.max(0, Mine.grid[Mine.normalizeY(x+i)][Mine.normalizeX(y+j)]-1);
+                    Mine.grid[Mine.normalizeY(x+i)][Mine.normalizeX(y+j)]( Math.max(0, Mine.grid[Mine.normalizeY(x+i)][Mine.normalizeX(y+j)]()-1) );
                 }
             }
             if(hasMined) {
@@ -118,9 +118,9 @@ class Mine {
     }
 
     private static chisel(x: number, y: number) {
-        if(Mine.grid[x][y] > 0) {
+        if(Mine.grid[x][y]() > 0) {
             if (player.mineEnergy >= GameConstants.CHISEL_ENERGY) {
-                Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)] = Math.max(0, Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)] - 2);
+                Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)]( Math.max(0, Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)]() - 2) );
                 player.mineEnergy -= GameConstants.CHISEL_ENERGY;
             }
         }
