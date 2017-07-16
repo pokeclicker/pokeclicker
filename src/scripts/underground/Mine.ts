@@ -37,6 +37,7 @@ class Mine {
         }
 
         Mine.loadingNewLayer = false;
+        Underground.showMine();
     }
 
     private static getRandomCoord(max: number): number {
@@ -180,6 +181,6 @@ class Mine {
         player._mineLayersCleared++;
         ko.cleanNode(document.getElementById("mineModal"))
         Mine.loadMine();
-        Underground.showMine();
+        ko.applyBindings(Mine, document.getElementById("mineModal"))
     }
 }

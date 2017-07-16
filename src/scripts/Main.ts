@@ -8,6 +8,7 @@ const debug = false;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     OakItemRunner.initialize();
+    UndergroundItem.initialize();
     let game: Game = new Game();
     // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
     game.start();
@@ -115,5 +116,6 @@ class Game {
     load() {
         OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
+        Mine.loadMine();
     }
 }

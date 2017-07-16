@@ -23,7 +23,6 @@ class Underground {
         html +=     "<h3 data-bind='text: Mine.itemsFound()+" + '"/"' + "+Mine.itemsBuried+" + '" items found"' + "'></h3>";
         html += "</div>";
         $("#mineBody").html(html);
-        ko.applyBindings(Underground, document.getElementById("mineModal"))
         $("#energyDisplay").html(Math.floor(player.mineEnergy) + "/" + player.maxMineEnergy + " <img src='assets/images/underground/flash.png'> (next: " + Underground.energyTick + "s)");
         $("#mineEnergyBar").width( player.mineEnergy/player.maxMineEnergy*100 + "%");
         $("#diamondCounter").html(player.mineCoins);
