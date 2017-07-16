@@ -3,7 +3,7 @@
  */
 class Underground {
     public static itemSelected;
-    public static energyTick: number;
+    public static energyTick: KnockoutObservable<number> = ko.observable(60);
 
     public static showMine() {
         let html = "";
@@ -23,7 +23,6 @@ class Underground {
         html +=     "<h3 data-bind='text: Mine.itemsFound()+" + '"/"' + "+Mine.itemsBuried+" + '" items found"' + "'></h3>";
         html += "</div>";
         $("#mineBody").html(html);
-        $("#energyDisplay").html(Math.floor(player.mineEnergy) + "/" + player.maxMineEnergy + " <img src='assets/images/underground/flash.png'> (next: " + Underground.energyTick + "s)");
         $("#mineEnergyBar").width( player.mineEnergy/player.maxMineEnergy*100 + "%");
         $("#diamondCounter").html(player.mineCoins);
     }

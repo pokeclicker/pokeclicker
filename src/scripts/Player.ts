@@ -26,6 +26,7 @@ class Player {
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
     private _mineEnergy: KnockoutObservable<number>;
+    private _maxMineEnergy: KnockoutObservable<number>;
     private _mineInventory: Array<Object>;
 
     private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
@@ -113,6 +114,7 @@ class Player {
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
         this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50);
+        this._maxMineEnergy = ko.observable(savedPlayer._maxMineEnergy || 50);
         this._mineInventory = savedPlayer._mineInventory || [];
         //TODO remove before deployment
         if (!debug) {
@@ -509,6 +511,7 @@ class Player {
             "_itemMultipliers",
             "_keyItems",
             "_mineEnergy",
+            "_maxMineEnergy",
             "_mineInventory"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
