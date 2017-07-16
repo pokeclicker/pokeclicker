@@ -496,6 +496,10 @@ class Player {
         return this._eggList;
     }
 
+    set eggList(value: KnockoutObservableArray<Egg>) {
+        this._eggList = value;
+    }
+
     get eggSlots(): KnockoutObservable<number> {
         return this._eggSlots;
     }

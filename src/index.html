@@ -1352,8 +1352,13 @@
                     <h2>Current quest counter</h2>
                 </div>
 
-                <div class="page-item" style="background-color: #ffe463; min-height: 250px">
-                    <h2>Upgrades</h2>
+                <!-- Egg Slots/Breeding-->
+                <div class="page-item" data-bind="if: player.hasKeyItem('Mystery Egg')">
+                    <div class="row" data-bind="foreach: player.eggList">
+                        <div class="col">
+                            <p data-bind="text: pokemon">Name</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -1554,7 +1559,7 @@
         </div>
 
         <!-- Breeding Modal-->
-        <div class="modal" id="breedingModal" tabindex="-1" role="dialog"
+        <div class="modal fade" id="breedingModal" tabindex="-1" role="dialog"
              aria-labelledby="breedingModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
