@@ -26,6 +26,7 @@ class Player {
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
     private _mineEnergy: KnockoutObservable<number>;
+    private _mineInventory: Array<Object>;
 
     private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
@@ -111,7 +112,8 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
-        this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50)
+        this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50);
+        this._mineInventory = savedPlayer._mineInventory || [];
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -345,6 +347,15 @@ class Player {
         this._gymBadges().push(badge);
     }
 
+    public mineInventoryIndex(id: number): number {
+        for( let i = 0; i<player._mineInventory.length; i++){
+            if(player._mineInventory[i].id === id){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -497,7 +508,8 @@ class Player {
             "_itemList",
             "_itemMultipliers",
             "_keyItems",
-            "_mineEnergy"];
+            "_mineEnergy",
+            "_mineInventory"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

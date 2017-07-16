@@ -10,6 +10,8 @@ class Mine {
         let tmpGrid = [];
         let tmpRewardGrid = [];
         Mine.rewardNumbers = [];
+        Mine.itemsFound = ko.observable(0);
+        Mine.itemsBuried = 0;
         for( let i = 0; i<GameConstants.Mine.sizeY; i++){
             let row = [];
             let rewardRow = [];
@@ -132,5 +134,34 @@ class Mine {
 
     private static normalizeY(y: number): number {
         return Math.min(GameConstants.Mine.sizeY-1, Math.max(0, y));
+    }
+
+    public static checkItemsRevealed() {
+        for(let i = 0; i<Mine.rewardNumbers.length; i++){
+            if(Mine.checkItemRevealed(Mine.rewardNumbers[i])){
+                Underground.gainMineItem(Mine.rewardNumbers[i]);
+                Mine.itemsFound(Mine.itemsFound()+1);
+                Mine.rewardNumbers.splice(i,1);
+                i--;
+                //$.notify("You dug an item", "success");
+                //player.curMine.totalItemsFound++;
+            }
+        }
+        //checkMineCompleted();
+    }
+
+    public static checkItemRevealed(id: number) {
+        for(let i = 0; i<GameConstants.Mine.sizeX; i++){
+            for(let j = 0; j<GameConstants.Mine.sizeY; j++){
+                if(Mine.rewardGrid[j][i] != 0){
+                    if(Mine.rewardGrid[j][i].value == id){
+                        if(Mine.rewardGrid[j][i].revealed === 0){
+                            return false
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 }
