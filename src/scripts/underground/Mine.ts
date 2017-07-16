@@ -4,7 +4,7 @@ class Mine {
     public static itemsFound: KnockoutObservable<number>;
     public static itemsBuried: number;
     public static rewardNumbers: Array<number>;
-    public static toolSelected: GameConstants.MineTool = GameConstants.MineTool["Chisel"];
+    public static toolSelected: KnockoutObservable<GameConstants.MineTool> = ko.observable(GameConstants.MineTool["Chisel"]);
     private static loadingNewLayer: boolean = true
 
     public static loadMine() {
@@ -92,7 +92,7 @@ class Mine {
     }
 
     public static click(i: number, j: number) {
-        if (GameConstants.MineTool[Mine.toolSelected] == "Hammer") {
+        if (GameConstants.MineTool[Mine.toolSelected()] == "Hammer") {
             Mine.hammer(i,j);
         } else {
             Mine.chisel(i,j);
