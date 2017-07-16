@@ -26,6 +26,12 @@ namespace GameConstants {
     export const ITEM_PRICE_MULTIPLIER = 1.02;
     export const ITEM_PRICE_DEDUCT = 0.003;
 
+    //Underground
+    export const Mine = {
+        "sizeY": 12,
+        "sizeX": 25
+    }
+
     // Oak items
     export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
     export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];

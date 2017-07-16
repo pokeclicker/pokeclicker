@@ -1,22 +1,22 @@
 class UndergroundItem {
     public name: string;
     public id: number;
-    public shape: Array<Array<number>>;
+    public space: Array<Array<number>>;
     public value: number;
     public valueType: string;
 
     public static list: Array<UndergroundItem> = [];
 
-    constructor(name: string, id: number, shape: Array<Array<number>>, value: number = 1, valueType: string = "Diamonds") {
+    constructor(name: string, id: number, space: Array<Array<number>>, value: number = 1, valueType: string = "Diamonds") {
         this.name = name;
         this.id = id;
-        this.shape = shape;
+        this.space = space;
         this.value = value;
         this.valueType = valueType;
     }
 
-    private static addItem(name, id, shape, ...rest) {
-        UndergroundItem.list.push(new UndergroundItem(name, id, shape, ...rest))
+    private static addItem(name, id, space, ...rest) {
+        UndergroundItem.list.push(new UndergroundItem(name, id, space, ...rest))
     }
 
     public static initialize() {
@@ -68,6 +68,11 @@ class UndergroundItem {
         this.addItem("Toxic Plate", 43, [[43,43,43,43], [43,43,43,43], [43,43,43,43]], 25, "poison");
         this.addItem("Zap Plate", 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]], 25, "electric");
         this.addItem("Pixie Plate", 45, [[45,45,45,45], [45,45,45,45], [45,45,45,45]], 25, "fairy");
+    }
+
+    public static getRandomItem(): UndergroundItem {
+        let i = Math.floor(Math.random()*(UndergroundItem.list.length));
+        return UndergroundItem.list[i] || UndergroundItem.list[0];
     }
 
 }
