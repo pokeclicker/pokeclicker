@@ -4,6 +4,7 @@
 class Underground {
     public static itemSelected;
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
+    public static counter: number = 0;
 
     public static showMine() {
         let html = "";
@@ -84,6 +85,18 @@ class Underground {
             if (item.id == id) {
                 return item;
             }
+        }
+    }
+
+    public static gainEnergy() {
+        let multiplier = 1;
+        if(OakItemRunner.isActive("Cell Battery")){
+            multiplier = OakItemRunner.calculateBonus("Cell Battery");
+        }
+        player._mineEnergy( Math.min(player._maxMineEnergy(), player._mineEnergy() + (multiplier*player._mineEnergyGain)) );
+        if(player._mineEnergy() === player._maxMineEnergy()){
+            //$.notify("Your mining energy has reached maximum capacity!", "success");
+            //notifyMe("You mining energy has reached maximum capacity!");
         }
     }
 }

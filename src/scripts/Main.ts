@@ -77,6 +77,7 @@ class Game {
         this.undergroundCounter += GameConstants.TICK_TIME;
         this.farmCounter += GameConstants.TICK_TIME;
         Save.counter += GameConstants.TICK_TIME;
+        Underground.counter += GameConstants.TICK_TIME;
 
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
@@ -106,6 +107,15 @@ class Game {
 
         if (Save.counter > GameConstants.SAVE_TICK) {
             Save.store(player);
+        }
+
+        if (Underground.counter > GameConstants.UNDERGROUND_TICK) {
+            Underground.energyTick( Math.max(0, Underground.energyTick() - 1) );
+            if (Underground.energyTick() == 0) {
+                Underground.gainEnergy();
+                Underground.energyTick(60);
+            }
+            Underground.counter = 0;
         }
     }
 
