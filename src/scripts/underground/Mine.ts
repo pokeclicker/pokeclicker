@@ -5,6 +5,7 @@ class Mine {
     public static itemsBuried: number;
     public static rewardNumbers: Array<number>;
     public static toolSelected: GameConstants.MineTool = GameConstants.MineTool["Chisel"];
+    private static loadingNewLayer: boolean = true
 
     public static loadMine() {
         let tmpGrid = [];
@@ -34,6 +35,8 @@ class Mine {
                 Mine.addReward(x,y,item);
             }
         }
+
+        Mine.loadingNewLayer = false;
     }
 
     private static getRandomCoord(max: number): number {
@@ -145,9 +148,9 @@ class Mine {
                 i--;
                 //$.notify("You dug an item", "success");
                 //player.curMine.totalItemsFound++;
+                Mine.checkCompleted();
             }
         }
-        //checkMineCompleted();
     }
 
     public static checkItemRevealed(id: number) {
@@ -163,5 +166,20 @@ class Mine {
             }
         }
         return true;
+    }
+
+    private static checkCompleted() {
+        if (Mine.itemsFound() >= Mine.itemsBuried) {
+            setTimeout(Mine.completed, 1500);
+            Mine.loadingNewLayer = true;
+        }
+    }
+
+    private static completed() {
+        //$.notify("You dig deeper...", "");
+        player._mineLayersCleared++;
+        ko.cleanNode(document.getElementById("mineModal"))
+        Mine.loadMine();
+        Underground.showMine();
     }
 }
