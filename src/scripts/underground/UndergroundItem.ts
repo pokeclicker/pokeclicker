@@ -75,4 +75,8 @@ class UndergroundItem {
         return UndergroundItem.list[i] || UndergroundItem.list[0];
     }
 
+    public static isMineEgg(name: string): boolean {
+        return false
+    }
+
 }

@@ -77,7 +77,7 @@ class Underground {
             }
             player._mineInventory.push(tempItem);
         } else {
-            player._mineInventory[index].amount++;
+            player._mineInventory()[index].amount++;
         }
     }
 

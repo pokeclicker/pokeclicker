@@ -28,7 +28,7 @@ class Player {
     private _mineEnergy: KnockoutObservable<number>;
     private _maxMineEnergy: KnockoutObservable<number>;
     private _mineEnergyGain: number;
-    private _mineInventory: Array<Object>;
+    private _mineInventory: KnockoutObservableArray<Object>;
     private _diamonds: KnockoutObservable<number>;
 
     private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
@@ -118,7 +118,7 @@ class Player {
         this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50);
         this._maxMineEnergy = ko.observable(savedPlayer._maxMineEnergy || 50);
         this._mineEnergyGain = savedPlayer._mineEnergyGain || 3;
-        this._mineInventory = savedPlayer._mineInventory || [];
+        this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
         this._diamonds = ko.observable(savedPlayer._diamonds || 0);
         //TODO remove before deployment
         if (!debug) {
@@ -355,7 +355,7 @@ class Player {
 
     public mineInventoryIndex(id: number): number {
         for( let i = 0; i<player._mineInventory.length; i++){
-            if(player._mineInventory[i].id === id){
+            if(player._mineInventory()[i].id === id){
                 return i;
             }
         }

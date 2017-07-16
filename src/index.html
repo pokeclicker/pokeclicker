@@ -16,6 +16,23 @@
         </tr>
     </script>
 
+    <script type="text/html" id="treasureListTemplate">
+        <tr>
+            <td class='vertical-middle'>
+                <img class='mineInventoryItem' data-bind='attr:{ src: "assets/images/underground/"+id+".png" }'>
+                <span data-bind='text: "("+amount+")"'></span>
+            </td>
+            <td class='vertical-middle' data-bind='text: name'></td>
+            <!-- ko if: UndergroundItem.isMineEgg(name) -->
+
+            <!-- /ko -->
+            <!-- ko ifnot: UndergroundItem.isMineEgg(name) -->
+            <td class='vertical-middle' data-bind='text: value + " " + valueType'></td>
+            <td></td>
+            <!-- /ko -->
+        </tr>
+    </script>
+
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
 
@@ -301,7 +318,13 @@
                     </div>
                 </div>
                 <div id="treasures" class="tab-pane fade">
-                    <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;"></div>
+                    <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;">
+                        <table class='table'>
+                            <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player._mineInventory()}">>
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div id="upgrades" class="tab-pane fade">
                     <div class="modal-body" id="upgradesBody" style="width: 80%;margin: auto;"></div>
