@@ -85,4 +85,52 @@ class Mine {
         Mine.itemsBuried++;
         Mine.rewardNumbers.push(reward.id);
     }
+
+    public static click(i: number, j: number) {
+        if (GameConstants.MineTool[Mine.toolSelected] == "Hammer") {
+            Mine.hammer(i,j);
+        } else {
+            Mine.chisel(i,j);
+        }
+        Underground.showMine();
+        //checkItemsRevealed();
+        //showCurMine();
+    }
+
+    private static hammer(x: number, y: number) {
+        if(player.mineEnergy >= GameConstants.HAMMER_ENERGY){
+            if(x < 0 || y < 0){
+                return;
+            }
+            let hasMined = false;
+            for(let i = -1; i < 2; i++){
+                for(let j = -1; j < 2; j++){
+                    if(Mine.grid[Mine.normalizeY(x+i)][Mine.normalizeX(y+j)] > 0){
+                        hasMined = true;
+                    }
+                    Mine.grid[Mine.normalizeY(x+i)][Mine.normalizeX(y+j)] = Math.max(0, Mine.grid[Mine.normalizeY(x+i)][Mine.normalizeX(y+j)]-1);
+                }
+            }
+            if(hasMined) {
+                player.mineEnergy -= GameConstants.HAMMER_ENERGY;
+            }
+        }
+    }
+
+    private static chisel(x: number, y: number) {
+        if(Mine.grid[x][y] > 0) {
+            if (player.mineEnergy >= GameConstants.CHISEL_ENERGY) {
+                Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)] = Math.max(0, Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)] - 2);
+                player.mineEnergy -= GameConstants.CHISEL_ENERGY;
+            }
+        }
+    }
+
+    private static normalizeX(x: number): number {
+        return Math.min(GameConstants.Mine.sizeX-1, Math.max(0, x));
+    }
+
+    private static normalizeY(y: number): number {
+        return Math.min(GameConstants.Mine.sizeY-1, Math.max(0, y));
+    }
 }

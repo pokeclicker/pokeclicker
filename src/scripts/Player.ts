@@ -25,6 +25,7 @@ class Player {
     private _oakItemsEquipped: string[];
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
+    private _mineEnergy: KnockoutObservable<number>;
 
     private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
@@ -110,6 +111,7 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
+        this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50)
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -466,6 +468,14 @@ class Player {
         this._itemMultipliers = value;
     }
 
+    get mineEnergy() {
+        return this._mineEnergy();
+    }
+
+    set mineEnergy(n: number) {
+        this._mineEnergy(n);
+    }
+
     public toJSON() {
         let keep = ["_money",
             "_dungeonTokens",
@@ -486,7 +496,8 @@ class Player {
             "_oakItemsEquipped",
             "_itemList",
             "_itemMultipliers",
-            "_keyItems"];
+            "_keyItems",
+            "_mineEnergy"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

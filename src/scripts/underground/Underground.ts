@@ -36,3 +36,9 @@ class Underground {
         }
     }
 }
+
+$(document).ready(function(){
+    $("body").on('click', '.mineSquare', function(){
+        Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
+    })
+})
