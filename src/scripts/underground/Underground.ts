@@ -40,10 +40,8 @@ class Underground {
             return "col-sm-1 rock" + Math.max(Mine.grid[i][j](), 0) + " mineSquare " + GameConstants.MineTool[Mine.toolSelected] + "Selected";
         }, this, {
             disposeWhen: function() {
-                console.log(i,j);
                 if (Mine.grid[i][j]() == 0) {
-                    if (Mine.rewardGrid[i][j] != 0) {
-                        console.log("reward")
+                    if (Mine.rewardGrid[i][j] != 0 && Mine.rewardGrid[i][j].revealed != 1) {
                         Mine.rewardGrid[i][j].revealed = 1;
                         $("div[data-i="+i+"][data-j="+j+"]").replaceWith("<img src='assets/images/underground/"+ Mine.rewardGrid[i][j].value + "/" + Mine.rewardGrid[i][j].value + "-" + Mine.rewardGrid[i][j].y + "-" + Mine.rewardGrid[i][j].x + ".png' class='col-sm-1 mineReward mineSquare "+ GameConstants.MineTool[Mine.toolSelected] + "Selected' data-i='" + i + "' data-j='" + j + "'>")
                         Mine.checkItemsRevealed();

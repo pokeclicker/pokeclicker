@@ -45,7 +45,6 @@ class Mine {
     }
 
     private static canAddReward(x: number, y: number, reward: UndergroundItem): boolean {
-        console.log(reward)
         if(Mine.alreadyHasRewardId(reward.id)){
             return false;
         }
