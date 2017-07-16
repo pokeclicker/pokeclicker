@@ -24,7 +24,7 @@ class Underground {
         html +=     "<h3 data-bind='text: Mine.itemsFound()+" + '"/"' + "+Mine.itemsBuried+" + '" items found"' + "'></h3>";
         html += "</div>";
         $("#mineBody").html(html);
-        $("#mineEnergyBar").width( player.mineEnergy/player.maxMineEnergy*100 + "%");
+        //$("#mineEnergyBar").width( player.mineEnergy/player.maxMineEnergy*100 + "%");
         $("#diamondCounter").html(player.mineCoins);
     }
 

@@ -286,8 +286,8 @@
                 <div id="dig" class="tab-pane fade in active show">
                     <div class="modal-body"  style="width: 80%;margin: auto;">
                         <div class='row' style="text-align:center;">
-                            <div class='progress' style="margin-bottom:10px">
-                                <div id='mineEnergyBar' class='progress-bar progress-bar-warning' role='progressbar' aria-valuenow='70' aria-valuemin='0' aria-valuemax='100' style='width:80%'>
+                            <div class='progress'>
+                                <div id='mineEnergyBar' class='progress-bar' role='progressbar' aria-valuemin='0' aria-valuemax='100' data-bind="style: { width: player._mineEnergy()/player._maxMineEnergy()*100 + '%' }">
                                 </div>
                             </div>
                             <span id='energyDisplay' style='color:black;'>
