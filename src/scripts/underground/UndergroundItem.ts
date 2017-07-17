@@ -7,7 +7,7 @@ class UndergroundItem {
 
     public static list: Array<UndergroundItem> = [];
 
-    constructor(name: string, id: number, space: Array<Array<number>>, value: number = 1, valueType: string = "Diamonds") {
+    constructor(name: string, id: number, space: Array<Array<number>>, value: number = 1, valueType: string = "Diamond") {
         this.name = name;
         this.id = id;
         this.space = space;
@@ -81,6 +81,16 @@ class UndergroundItem {
 
     public isStone(): boolean {
         return (GameConstants.EvoStones.indexOf(this.name) > -1)
+    }
+
+    public static getFullResourceName(valuetype: string, amt: number): string {
+        if (valuetype != "Diamond") {
+            valuetype += " shard";
+        }
+        if (amt > 1) {
+            valuetype += "s";
+        }
+        return valuetype;
     }
 
 }

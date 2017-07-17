@@ -27,8 +27,10 @@
 
             <!-- /ko -->
             <!-- ko ifnot: UndergroundItem.isMineEgg(name) -->
-            <td class='vertical-middle' data-bind='text: value + " " + valueType'></td>
-            <td></td>
+            <td class='vertical-middle' data-bind='text: value + " " + UndergroundItem.getFullResourceName(valueType, value)'></td>
+            <td class='vertical-middle'>
+                <button class='btn btn-success tooltipRightMine' data-bind='click: function(){ Underground.sellMineItem(id) }, css: { disabled: amount() <= 0 }'>Sell</button>
+            </td>
             <!-- /ko -->
         </tr>
     </script>

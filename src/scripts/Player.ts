@@ -508,6 +508,14 @@ class Player {
         this._mineEnergy(n);
     }
 
+    get diamonds() {
+        return this._diamonds();
+    }
+
+    set diamonds(n: number) {
+        this._diamonds(n);
+    }
+
     public toJSON() {
         let keep = ["_money",
             "_dungeonTokens",

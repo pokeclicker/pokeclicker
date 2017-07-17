@@ -101,6 +101,29 @@ class Underground {
             //notifyMe("You mining energy has reached maximum capacity!");
         }
     }
+
+    public static sellMineItem(id: number) {
+        for (let i=0; i<player._mineInventory().length; i++) {
+            let item = player._mineInventory()[i]
+            if (item.id == id) {
+                if (item.amount() > 0) {
+                    let amt = item.amount()
+                    player._mineInventory()[i].amount(amt - 1);
+                    Underground.gainProfit(item.value, item.valueType);
+                    return;
+                }
+            }
+        }
+    }
+
+    private static gainProfit(value: number, valueType: string) {
+        switch (valueType) {
+            case "Diamond":
+                player.diamonds += value;
+            default:
+                //player.gainShards()
+        }
+    }
 }
 
 $(document).ready(function(){
