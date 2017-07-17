@@ -49,6 +49,16 @@ class DailyDeal {
         return false;
     }
 
+    public static canUse(index) {
+        let deal = DailyDeal.list[index];
+        let index = player.mineInventoryIndex(deal.item1.id)
+        if (index > -1) {
+            return player._mineInventory()[index].amount >= deal.amount1;
+        } else {
+            return false
+        }
+    }
+
     public static use(index) {
         console.log(DailyDeal.list[index]);
     }
