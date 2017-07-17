@@ -320,7 +320,7 @@
                 <div id="treasures" class="tab-pane fade">
                     <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;">
                         <table class='table'>
-                            <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player._mineInventory()}">>
+                            <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player._mineInventory()}">
 
                             </tbody>
                         </table>
@@ -347,6 +347,7 @@
                                 <tr>
                                     <td class='vertical-middle'>
                                         <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item1.id+".png"}'>
+                                        <span data-bind='text: "(" + player.getUndergroundItemAmount(item1.id) + ")"'>
                                     </td>
                                     <td class='vertical-middle' data-bind='text: item1.name'></td>
                                     <td class='vertical-middle' data-bind='text: amount1'></td>

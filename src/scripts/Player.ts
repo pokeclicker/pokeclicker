@@ -367,6 +367,16 @@ class Player {
         return -1;
     }
 
+    public getUndergroundItemAmount(id: number) {
+        console.log(id)
+        let index = this.mineInventoryIndex(id);
+        if (index > -1){
+            return player._mineInventory.peek()[index].amount();
+        } else {
+            return 0;
+        }
+    }
+
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
