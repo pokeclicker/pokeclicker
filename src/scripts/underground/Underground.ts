@@ -57,7 +57,7 @@ class Underground {
         return "col-sm-1 mineReward mineSquare "+GameConstants.MineTool[Mine.toolSelected()]+"Selected";
     });
 
-    public static gainMineItem(id: number) {
+    public static gainMineItem(id: number, num: number = 1) {
         let index = player.mineInventoryIndex(id);
         let item = Underground.getMineItemById(id);
         /*
@@ -70,14 +70,14 @@ class Underground {
 
             var tempItem = {
                 name: item.name,
-                amount: 1,
+                amount: num,
                 id: id,
                 value: item.value,
                 valueType: item.valueType
             }
             player._mineInventory.push(tempItem);
         } else {
-            player._mineInventory()[index].amount++;
+            player._mineInventory()[index].amount += num;
         }
     }
 

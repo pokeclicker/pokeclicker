@@ -357,7 +357,7 @@
                                         <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item2.id+".png"}'>
                                     </td>
                                     <td class='vertical-middle'>
-                                        <button class='btn btn-info' data-bind="click: DailyDeal.use($index()), css: { disabled: !DailyDeal.canUse($index()) }">Trade</button>
+                                        <button class='btn btn-info' data-bind="click: function(){DailyDeal.use($index())}, css: { disabled: !DailyDeal.canUse($index()) }">Trade</button>
                                     </td>
                                 </tr>
                             </tbody>

@@ -356,7 +356,7 @@ class Player {
     }
 
     public mineInventoryIndex(id: number): number {
-        for( let i = 0; i<player._mineInventory.length; i++){
+        for( let i = 0; i<player._mineInventory().length; i++){
             if(player._mineInventory()[i].id === id){
                 return i;
             }
