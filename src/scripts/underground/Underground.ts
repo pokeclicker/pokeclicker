@@ -70,14 +70,15 @@ class Underground {
 
             var tempItem = {
                 name: item.name,
-                amount: num,
+                amount: ko.observable(num),
                 id: id,
                 value: item.value,
                 valueType: item.valueType
             }
             player._mineInventory.push(tempItem);
         } else {
-            player._mineInventory()[index].amount += num;
+            let amt = player._mineInventory()[index].amount()
+            player._mineInventory()[index].amount(amt + num);
         }
     }
 

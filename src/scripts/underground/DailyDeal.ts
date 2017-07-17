@@ -53,7 +53,7 @@ class DailyDeal {
         let deal = DailyDeal.list[i];
         let index = player.mineInventoryIndex(deal.item1.id)
         if (index > -1) {
-            return player._mineInventory()[index].amount >= deal.amount1;
+            return player._mineInventory()[index].amount() >= deal.amount1;
         } else {
             return false
         }
@@ -63,7 +63,8 @@ class DailyDeal {
         let deal = DailyDeal.list[i];
         let item1Index = player.mineInventoryIndex(deal.item1.id)
         if (DailyDeal.canUse(i)) {
-            player._mineInventory()[item1Index].amount -= deal.amount1;
+            let amt = player._mineInventory()[item1Index].amount()
+            player._mineInventory()[item1Index].amount(amt - deal.amount1);
             Underground.gainMineItem(deal.item2.id, deal.amount2)
         }
     }

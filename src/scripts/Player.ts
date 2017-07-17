@@ -28,7 +28,7 @@ class Player {
     private _mineEnergy: KnockoutObservable<number>;
     private _maxMineEnergy: KnockoutObservable<number>;
     private _mineEnergyGain: number;
-    private _mineInventory: KnockoutObservableArray<Object>;
+    private _mineInventory: KnockoutObservableArray<any>;
     private _diamonds: KnockoutObservable<number>;
     private _maxDailyDeals: number;
 
@@ -120,6 +120,9 @@ class Player {
         this._maxMineEnergy = ko.observable(savedPlayer._maxMineEnergy || 50);
         this._mineEnergyGain = savedPlayer._mineEnergyGain || 3;
         this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
+        for (let item of this._mineInventory()) {
+            item.amount = ko.observable(item.amount);
+        }
         this._diamonds = ko.observable(savedPlayer._diamonds || 0);
         this._maxDailyDeals = savedPlayer._maxDailyDeals || 3;
         //TODO remove before deployment

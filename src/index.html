@@ -20,7 +20,7 @@
         <tr>
             <td class='vertical-middle'>
                 <img class='mineInventoryItem' data-bind='attr:{ src: "assets/images/underground/"+id+".png" }'>
-                <span data-bind='text: "("+amount+")"'></span>
+                <span data-bind='text: "("+$data.amount()+")"'></span>
             </td>
             <td class='vertical-middle' data-bind='text: name'></td>
             <!-- ko if: UndergroundItem.isMineEgg(name) -->
