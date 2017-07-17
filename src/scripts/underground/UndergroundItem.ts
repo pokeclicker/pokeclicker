@@ -79,4 +79,8 @@ class UndergroundItem {
         return false
     }
 
+    public isStone(): boolean {
+        return (GameConstants.EvoStones.indexOf(this.name) > -1)
+    }
+
 }

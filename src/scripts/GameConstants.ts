@@ -40,6 +40,14 @@ namespace GameConstants {
         "Hammer" = 1,
     }
 
+    export const EvoStones = [
+        "Fire Stone",
+        "Water Stone",
+        "Thunder Stone",
+        "Leaf Stone",
+        "Moon Stone"
+    ]
+
     // Oak items
     export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
     export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
