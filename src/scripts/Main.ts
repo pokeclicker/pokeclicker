@@ -127,5 +127,6 @@ class Game {
         OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
         Mine.loadMine();
+        DailyDeal.generateDeals(player._maxDailyDeals, new Date());
     }
 }

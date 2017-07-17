@@ -341,7 +341,28 @@
                     </div>
                 </div>
                 <div id="dailyDeals" class="tab-pane fade">
-                    <div class="modal-body" id="dailyDealsBody" style="width: 80%;margin: auto;"></div>
+                    <div class="modal-body" id="dailyDealsBody" style="width: 80%;margin: auto;">
+                        <table class='table'>
+                            <tbody data-bind='foreach: DailyDeal.list'>
+                                <tr>
+                                    <td class='vertical-middle'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item1.id+".png"}'>
+                                    </td>
+                                    <td class='vertical-middle' data-bind='text: item1.name'></td>
+                                    <td class='vertical-middle' data-bind='text: amount1'></td>
+                                    <td class='vertical-middle'><img src='assets/images/underground/rightArrow.png'></td>
+                                    <td class='vertical-middle' data-bind='text: item2.name'></td>
+                                    <td class='vertical-middle' data-bind='text: amount2'></td>
+                                    <td class='vertical-middle'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item2.id+".png"}'>
+                                    </td>
+                                    <td class='vertical-middle'>
+                                        <button class='btn btn-info' data-bind="click: DailyDeal.use($index())">Trade</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

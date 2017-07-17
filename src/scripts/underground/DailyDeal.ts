@@ -21,8 +21,8 @@ class DailyDeal {
         return Math.floor(3 * SeededRand.next()) + 1;
     }
 
-    public static generateDeals(maxDeals: number) {
-        SeededRand.seedWithDate(new Date());
+    public static generateDeals(maxDeals: number, date: Date) {
+        SeededRand.seedWithDate(date);
         
         for (let i=0; i<maxDeals; i++) {
             let deal = new DailyDeal();
@@ -47,5 +47,9 @@ class DailyDeal {
             }
         }
         return false;
+    }
+
+    public static use(index) {
+        console.log(DailyDeal.list[index]);
     }
 }

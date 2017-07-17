@@ -30,6 +30,7 @@ class Player {
     private _mineEnergyGain: number;
     private _mineInventory: KnockoutObservableArray<Object>;
     private _diamonds: KnockoutObservable<number>;
+    private _maxDailyDeals: number;
 
     private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
@@ -120,6 +121,7 @@ class Player {
         this._mineEnergyGain = savedPlayer._mineEnergyGain || 3;
         this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
         this._diamonds = ko.observable(savedPlayer._diamonds || 0);
+        this._maxDailyDeals = savedPlayer._maxDailyDeals || 3;
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -517,7 +519,8 @@ class Player {
             "_mineEnergy",
             "_maxMineEnergy",
             "_mineEnergyGain",
-            "_mineInventory"];
+            "_mineInventory",
+            "_maxDailyDeals"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
