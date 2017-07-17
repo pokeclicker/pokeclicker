@@ -92,7 +92,7 @@ class Underground {
     public static gainEnergy() {
         let multiplier = 1;
         if(OakItemRunner.isActive("Cell Battery")){
-            multiplier = OakItemRunner.calculateBonus("Cell Battery");
+            multiplier += (OakItemRunner.calculateBonus("Cell Battery") / 100);
         }
         player._mineEnergy( Math.min(player._maxMineEnergy(), player._mineEnergy() + (multiplier*player._mineEnergyGain)) );
         if(player._mineEnergy() === player._maxMineEnergy()){

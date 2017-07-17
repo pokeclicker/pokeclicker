@@ -308,7 +308,7 @@
                                 </div>
                             </div>
                             <span id='energyDisplay' style='color:black;'>
-                                <span data-bind='text: player.mineEnergy'></span>/<span data-bind='text: player._maxMineEnergy'></span>
+                                <span data-bind='text: Math.floor(player.mineEnergy)'></span>/<span data-bind='text: player._maxMineEnergy'></span>
                                 <img src='assets/images/underground/flash.png'>
                                 (next: <span data-bind='text: Underground.energyTick'></span>s)
                             </span>
