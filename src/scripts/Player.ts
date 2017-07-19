@@ -189,7 +189,9 @@ class Player {
         // TODO start at 0
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
-            attack += pokemon.attack();
+            if (!pokemon.breeding()){
+                attack += pokemon.attack();
+            }
         }
 
         // return attack;
