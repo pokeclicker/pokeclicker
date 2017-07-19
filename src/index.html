@@ -1521,6 +1521,41 @@
                 </div>
             </div>
         </div>
+
+        <!-- Shards Modal -->
+        <div aria-labelledby="myModalLabel" class="modal fade" id="shardModal" role="dialog" tabindex="-1">
+            <div class="modal-dialog" id="shardModalDialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" >Shards</h4>
+                    </div>
+                    <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
+                        <h3 data-bind="text: GameConstants.PokemonType[$index()]"></h3>
+                        <table class='table' data-bind='foreach: $data'>
+                            <tr>
+                                <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
+                                <td width='50%'>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar"
+                                             data-bind="attr:{ style: 'width:' + ($data * 10) + '%' }"
+                                             aria-valuemin="0" aria-valuemax="100">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] + ($data * GameConstants.SHARD_UPGRADE_STEP)).toFixed(1)'></td>
+                                <td>
+                                    <button class='btn'
+                                        data-bind='click: function(){player.buyShardUpgrade($parentContext.$index(), $index())},
+                                        css: {disabled: !player.canBuyShardUpgrade($parentContext.$index(), $index())}'>
+                                        Buy
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
