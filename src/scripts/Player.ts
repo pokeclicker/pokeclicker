@@ -341,7 +341,9 @@ class Player {
     }
 
     public canBuyShardUpgrade(typeNum: number, effectNum: number): boolean {
-        return this._shardsCollected[typeNum] >= this.getShardUpgradeCost(typeNum, effectNum);
+        let lessThanMax = this._shardUpgrades[typeNum][effectNum] < GameConstants.MAX_SHARD_UPGRADES;
+        let hasEnoughShards = this._shardsCollected[typeNum] >= this.getShardUpgradeCost(typeNum, effectNum);
+        return lessThanMax && hasEnoughShards;
     }
 
     public getShardUpgradeCost(typeNum: number, effectNum: number): number {

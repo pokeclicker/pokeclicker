@@ -68,6 +68,7 @@ namespace GameConstants {
     //Shards
     export const SHARD_UPGRADE_COST = 500;
     export const SHARD_UPGRADE_STEP = 0.1;
+    export const MAX_SHARD_UPGRADES = 10;
 
     /**
      * idle: The game is not doing anything, the battle view isn't shown
