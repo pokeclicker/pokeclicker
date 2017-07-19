@@ -74,7 +74,9 @@ class BreedingHelper {
 
     public static createRandomEgg(): Egg {
         let type = Math.floor(Math.random() * (Object.keys(HatchList).length - 1));
-        return BreedingHelper.createTypedEgg(type);
+        let egg = BreedingHelper.createTypedEgg(type);
+        egg.type = GameConstants.EggType.Mystery;
+        return egg;
     }
 
     public static getSteps = function (eggCycles: number) {
@@ -87,7 +89,7 @@ class BreedingHelper {
 
     public static getEggImage(egg: Egg): string {
         let eggType = GameConstants.EggType[egg.type].toLowerCase();
-        if (eggType == "Pokemon") {
+        if (eggType == "pokemon") {
             let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
             eggType = String(dataPokemon.type1).toLowerCase();
         }
@@ -102,7 +104,6 @@ HatchList[GameConstants.EggType.Grass] = ["Bulbasaur", "Oddish", "Tangela", "Bel
 HatchList[GameConstants.EggType.Fight] = ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"];
 HatchList[GameConstants.EggType.Electric] = ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"];
 HatchList[GameConstants.EggType.Dragon] = ["Dratini", "Dragonair", "Dragonite"];
-HatchList[GameConstants.EggType.Pokemon] = [];
 
 document.addEventListener("DOMContentLoaded", function (event) {
 

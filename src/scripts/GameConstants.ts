@@ -320,6 +320,7 @@ namespace GameConstants {
         Electric,
         Dragon,
         Pokemon,
+        Mystery,
     }
 }
 
