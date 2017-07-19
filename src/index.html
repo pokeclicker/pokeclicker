@@ -4,6 +4,19 @@
     <title>Pokeclicker</title>
     <link href="/assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
+        <!-- ko if: BreedingHelper.isEgg($data) -->
+        <tr>
+            <td>
+                <!--img class="smallImage"
+                     data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
+                     src=""/-->
+                <span data-bind="text: pokemon">Name</span>
+            </td>
+            <td data-bind="text: progress">fdsf</td>
+            <td data-bind="text: type">fdsfs</td>
+        </tr>
+        <!-- /ko -->
+        <!-- ko if: !BreedingHelper.isEgg($data) && !$data.breeding() -->
         <tr>
             <td>
                 <img class="smallImage"
@@ -14,6 +27,7 @@
             <td data-bind="text: attack">fdsf</td>
             <td data-bind="text: levelObservable">fdsfs</td>
         </tr>
+        <!-- /ko -->
     </script>
 
     <!--jQuery-->
@@ -1360,7 +1374,7 @@
             </div>
 
             <!-- Egg Slots/Breeding-->
-            <div data-bind="if: player.hasKeyItem('Mystery Egg')">
+            <div data-bind="if: player.hasKeyItem('Mystery egg')">
                 <div class="page-item">
                     <div class="row no-gutters" data-bind="foreach: player.eggList">
                         <div class="col" data-bind="visible: $index() < player.eggSlots()">

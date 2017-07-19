@@ -46,14 +46,17 @@ class BreedingHelper {
 
     }
 
-    public static hatchPokemonEgg(egg: Egg) {
-        let pokemon;
-        for (let obj of player._caughtPokemonList()) {
-            if (obj.name == egg.pokemon) {
-                pokemon = obj;
-                break;
+    public static hatchPokemonEgg(index: number) {
+        let egg = player._eggList()[index];
+        for (let i=0; i<player._caughtPokemonList().length; i++) {
+            if (player._caughtPokemonList()[i].name == egg.pokemon) {
+                player._caughtPokemonList()[i].exp(0);
+
+                player._eggList()[index] = null;
+                player._caughtPokemonList()[i].breeding(false);
+                return
             }
-        }
+        } 
 
         //TODO hatch egg
 
@@ -80,6 +83,10 @@ class BreedingHelper {
         } else {
             return eggCycles * 40;
         }
+    }
+
+    public static isEgg(obj: any): boolean {
+        return obj instanceof Egg
     }
 }
 

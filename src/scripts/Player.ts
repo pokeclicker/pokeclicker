@@ -65,7 +65,7 @@ class Player {
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
-        let tmpCaughtList = [];
+        let tmpCaughtList = [], tmpEggList = [null, null, null, null];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
@@ -77,7 +77,7 @@ class Player {
 
         if (savedPlayer._caughtPokemonList) {
             tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp)
+                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp, pokemon.breeding)
             });
         }
         this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
@@ -117,7 +117,16 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
-        this._eggList = ko.observableArray(savedPlayer._eggList != null ? savedPlayer._eggList : [null, null, null, null]);
+        if (savedPlayer._eggList) {
+            tmpEggList = savedPlayer._eggList.map((egg) => {
+                if (egg == null) {
+                    return null;
+                } else {
+                    return new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified)
+                }
+            })
+        }
+        this._eggList = ko.observableArray(tmpEggList);
         this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
 
         //TODO remove before deployment
@@ -345,7 +354,9 @@ class Player {
 
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
-            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
+            let eggs = this._eggList().filter((egg) => {return egg});
+            let pokemons = this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
+            return [...eggs, ...pokemons];
         }, this).extend({rateLimit: player.calculateCatchTime()})
     }
 

@@ -13,7 +13,7 @@ class CaughtPokemon {
     evolver: KnockoutSubscription;
     breeding: KnockoutObservable<boolean>;
 
-    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number) {
+    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number, breeding: boolean = false) {
         this.id = pokemonData.id;
         this.name = pokemonData.name;
         this.evolved = ev;
@@ -27,7 +27,7 @@ class CaughtPokemon {
             return PokemonHelper.calculateAttack(this.baseAttack, this.attackBonus(), this.levelObservable());
         });
 
-        this.breeding = ko.observable(false);
+        this.breeding = ko.observable(breeding);
         if (pokemonData.evoLevel && !this.evolved) {
             this.evolver = this.levelObservable.subscribe(() => {
                 if (this.levelObservable() >= pokemonData.evoLevel) {
@@ -42,7 +42,7 @@ class CaughtPokemon {
 
     public toJSON() {
         let keep, plainJS;
-        keep = ["name", "evolved", "attackBonus", "exp"];
+        keep = ["name", "evolved", "attackBonus", "exp", "breeding"];
         plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep);
     }

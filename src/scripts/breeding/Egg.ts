@@ -7,13 +7,13 @@ class Egg {
     notified: boolean;
     progress: KnockoutComputed<number>;
 
-    constructor(totalSteps: number, pokemon: string, type: GameConstants.EggType) {
+    constructor(totalSteps: number, pokemon: string, type: GameConstants.EggType, steps: number = 0, shinySteps: number = 0, notified: boolean = false) {
         this.totalSteps = totalSteps;
-        this.steps = ko.observable(0);
-        this.shinySteps = 0;
+        this.steps = ko.observable(steps);
+        this.shinySteps = shinySteps;
         this.pokemon = pokemon;
         this.type = type;
-        this.notified = false;
+        this.notified = notified;
         this.progress = ko.computed(function () {
             console.log(this.steps() / this.totalSteps);
             return this.steps() / this.totalSteps * 100;
