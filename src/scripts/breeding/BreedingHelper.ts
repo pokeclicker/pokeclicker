@@ -86,7 +86,7 @@ class BreedingHelper {
     }
 
     public static getEggImage(egg: Egg): string {
-        let eggType = GameConstants.EggType[egg.type];
+        let eggType = GameConstants.EggType[egg.type].toLowerCase();
         if (eggType == "Pokemon") {
             let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
             eggType = String(dataPokemon.type1).toLowerCase();
