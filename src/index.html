@@ -1533,15 +1533,18 @@
                         <h4 class="modal-title" >Shards</h4>
                     </div>
                     <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
-                        <h3 data-bind="text: GameConstants.PokemonType[$index()] + ' (' + player._shardsCollected[$index()]() + ')'"></h3>
+                        <h3>
+                            <span data-bind="text: GameConstants.PokemonType[$index()] + ' ' + player._shardsCollected[$index()]()"></span>
+                            <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }' />
+                        </h3>
                         <table class='table' data-bind='foreach: $data'>
                             <tr>
                                 <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                                 <td width='50%'>
                                     <div class="progress">
-                                        <div role="progressbar"
-                                             data-bind="attr:{ style: 'width:' + ($data * 10) + '%' },
-                                                        css: 'progress-bar ' + GameConstants.PokemonType[$parentContext.$index()]"
+                                        <div class='progress-bar' role="progressbar"
+                                             data-bind="style: { width: ($data * 10) + '%',
+                                                               'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
                                              aria-valuemin="0" aria-valuemax="100">
                                         </div>
                                     </div>

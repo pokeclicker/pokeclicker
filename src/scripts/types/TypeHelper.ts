@@ -82,4 +82,25 @@ class TypeHelper {
                 return GameConstants.TypeEffectiveness.Very;
         }
     }
+
+    public static readonly typeColors = [
+        "595c3b", // Normal
+        "b10818", // Fire
+        "294a94", // Water
+        "b57b31", // Electric
+        "4a944a", // Grass
+        "42a59c", // Ice
+        "b54a4a", // Fighting
+        "7b42c6", // Poison
+        "946b4a", // Ground
+        "218cb5", // Flying
+        "ce6363", // Psychic
+        "8cb521", // Bug
+        "a58c4a", // Rock
+        "605a72", // Ghost
+        "8c424a", // Dragon
+        "4a6b84", // Dark
+        "737373", // Steel
+        "d694ce"  // Fairy
+    ]
 }
