@@ -102,5 +102,26 @@ class TypeHelper {
         "4a6b84", // Dark
         "737373", // Steel
         "d694ce"  // Fairy
-    ]
+    ];
+
+    public static readonly typeColorsLocked = [
+        "9da07d", // Normal
+        "f85858", // Fire
+        "6b94ff", // Water
+        "ffc663", // Electric
+        "73e763", // Grass
+        "b5efef", // Ice
+        "e78c6b", // Fighting
+        "c684ff", // Poison
+        "cead7b", // Ground
+        "4ac6ff", // Flying
+        "ffb5ad", // Psychic
+        "cef77b", // Bug
+        "d6bd94", // Rock
+        "948cad", // Ghost
+        "ce6363", // Dragon
+        "7394b5", // Dark
+        "aaaaaa", // Steel
+        "ffc6e7"  // Fairy
+    ];
 }

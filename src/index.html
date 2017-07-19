@@ -1541,7 +1541,7 @@
                             <tr>
                                 <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                                 <td width='50%'>
-                                    <div class="progress">
+                                    <div class="progress" data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
                                         <div class='progress-bar' role="progressbar"
                                              data-bind="style: { width: ($data * 10) + '%',
                                                                'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
