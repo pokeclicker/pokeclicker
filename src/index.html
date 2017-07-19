@@ -1366,11 +1366,17 @@
                         <div class="col-sm-6" data-bind="visible: $index() < player.eggSlots()">
                             <div data-bind="if: $data !== null">
                                 <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}' />
-                                <div class="progress" style="width: 80%">
+                                <div class="progress" style="width: 80%" data-bind='if: progress() < 100'>
                                     <div class="progress-bar bg-success" role="progressbar"
                                          data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
                                          aria-valuemin="0" aria-valuemax="100">
                                     </div>
+                                </div>
+                                <div data-bind='if: progress() >= 100'>
+                                    <button class='btn btn-primary' 
+                                            data-bind='click: function(){BreedingHelper.hatchPokemonEgg($index())}'>
+                                        Hatch!
+                                    </button>
                                 </div>
                             </div>
                             <div data-bind="if: $data === null">

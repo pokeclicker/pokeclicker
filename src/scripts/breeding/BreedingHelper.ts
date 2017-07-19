@@ -48,18 +48,18 @@ class BreedingHelper {
 
     public static hatchPokemonEgg(index: number) {
         let egg = player._eggList[index]();
+        let shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BREEDING);
+
         for (let i=0; i<player._caughtPokemonList().length; i++) {
             if (player._caughtPokemonList()[i].name == egg.pokemon) {
-                player._caughtPokemonList()[i].exp(0);
-
-                player._eggList[index](null);
-                player._caughtPokemonList()[i].breeding(false);
-                return
+                if (player._caughtPokemonList()[i].breeding) {
+                    player._caughtPokemonList()[i].exp(0);
+                    player._caughtPokemonList()[i].breeding(false);
+                }
             }
-        } 
-
-        //TODO hatch egg
-
+        }
+        player.capturePokemon(egg.pokemon, shiny);
+        player._eggList[index](null);
     }
 
     public static createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
