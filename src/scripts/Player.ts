@@ -330,9 +330,13 @@ class Player {
         }
     }
 
-    public gainShards(type: string, amount: number)  {
-        let typeNum = GameConstants.PokemonType[type];
-        player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + amount);
+    public gainShards(pokemon: BattlePokemon)  {
+        let typeNum = GameConstants.PokemonType[pokemon.type1];
+        player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+        if (pokemon.type2 != GameConstants.PokemonType.None) {
+            typeNum = GameConstants.PokemonType[pokemon.type2];
+            player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+        }
     }
 
     public buyShardUpgrade(typeNum: number, effectNum: number) {

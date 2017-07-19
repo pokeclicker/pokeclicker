@@ -70,6 +70,10 @@ namespace GameConstants {
     export const SHARD_UPGRADE_STEP = 0.1;
     export const MAX_SHARD_UPGRADES = 10;
 
+    export const DUNGEON_SHARDS = 3;
+    export const DUNGEON_BOSS_SHARDS = 20;
+    export const GYM_SHARDS = 5;
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks
