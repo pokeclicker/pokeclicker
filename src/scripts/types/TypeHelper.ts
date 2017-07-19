@@ -48,17 +48,17 @@ class TypeHelper {
         m1 += (list[attackType1][this.valueToType(m1)]() * GameConstants.SHARD_UPGRADE_STEP);
 
         let m2 = 1, m3 = 1, m4 = 1;
-        if (d2 != -1) {
+        if (d2 != GameConstants.PokemonType.None) {
             m2 = TypeHelper.typeMatrix[attackType1][defendType2];
             m2 += (list[attackType1][this.valueToType(m2)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
-        if (a2 != -1) {
+        if (a2 != GameConstants.PokemonType.None) {
             m3 = TypeHelper.typeMatrix[attackType2][defendType1];
             m3 += (list[attackType2][this.valueToType(m3)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
-        if (a2 != -1 && d2 != -1) {
+        if (a2 != GameConstants.PokemonType.None && d2 != GameConstants.PokemonType.None) {
             let m4 = TypeHelper.typeMatrix[attackType2][defendType2];
             m4 += (list[attackType2][this.valueToType(m4)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
