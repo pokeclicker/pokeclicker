@@ -65,6 +65,10 @@ namespace GameConstants {
         boss,
     }
 
+    //Shards
+    export const SHARD_UPGRADE_COST = 500;
+    export const SHARD_UPGRADE_STEP = 0.1;
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks

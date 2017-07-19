@@ -333,6 +333,27 @@ class Player {
         player._shardsCollected[typeNum] += amount;
     }
 
+    public buyShardUpgrade(type: string, effectiveness: string) {
+        if (this.canBuyShardUpgrade(type, effectiveness)) {
+            let typeNum = GameConstants.PokemonType[type];
+            let effectNum = GameConstants.TypeEffectiveness[effectiveness];
+            this._shardsCollected[typeNum] -= this.getShardUpgradeCost(type, effectiveness)
+            this._shardUpgrades[typeNum][effectNum] += 1
+        }
+    }
+
+    public canBuyShardUpgrade(type: string, effectiveness: string): boolean {
+        let typeNum = GameConstants.PokemonType[type];
+        return this._shardsCollected[typeNum] >= this.getShardUpgradeCost(type, effectiveness);
+    }
+
+    public getShardUpgradeCost(type: string, effectiveness: string): number {
+        let typeNum = GameConstants.PokemonType[type];
+        let effectNum = GameConstants.TypeEffectiveness[effectiveness];
+        let cost = (this._shardUpgrades[typeNum][effectNum] + 1) * GameConstants.SHARD_UPGRADE_COST;
+        return cost;
+    }
+
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
             return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
