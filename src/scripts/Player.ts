@@ -354,9 +354,7 @@ class Player {
 
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
-            let eggs = this._eggList().filter((egg) => {return egg});
-            let pokemons = this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
-            return [...eggs, ...pokemons];
+            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
         }, this).extend({rateLimit: player.calculateCatchTime()})
     }
 

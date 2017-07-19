@@ -4,20 +4,7 @@
     <title>Pokeclicker</title>
     <link href="/assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
-        <!-- ko if: BreedingHelper.isEgg($data) -->
-        <tr>
-            <td>
-                <!--img class="smallImage"
-                     data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
-                     src=""/-->
-                <span data-bind="text: pokemon">Name</span>
-            </td>
-            <td data-bind="text: progress">fdsf</td>
-            <td data-bind="text: type">fdsfs</td>
-        </tr>
-        <!-- /ko -->
-        <!-- ko if: !BreedingHelper.isEgg($data) && !$data.breeding() -->
-        <tr>
+        <tr data-bind='if: !$data.breeding()'>
             <td>
                 <img class="smallImage"
                      data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
@@ -27,7 +14,6 @@
             <td data-bind="text: attack">fdsf</td>
             <td data-bind="text: levelObservable">fdsfs</td>
         </tr>
-        <!-- /ko -->
     </script>
 
     <!--jQuery-->
@@ -1384,10 +1370,8 @@
                                     <div class="progress-bar bg-success" role="progressbar"
                                          data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
                                          aria-valuemin="0" aria-valuemax="100">
-
                                     </div>
                                 </div>
-
                             </div>
                             <div data-bind="if: $data === null">
                                 <button class="btn btn-seconday">Add Egg</button>

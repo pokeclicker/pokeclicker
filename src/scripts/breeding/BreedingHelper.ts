@@ -85,10 +85,6 @@ class BreedingHelper {
         }
     }
 
-    public static isEgg(obj: any): boolean {
-        return obj instanceof Egg
-    }
-
     public static getEggImage(egg: Egg): string {
         let eggType = GameConstants.EggType[egg.type];
         if (eggType == "Pokemon") {
