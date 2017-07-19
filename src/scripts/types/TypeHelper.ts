@@ -54,7 +54,7 @@ class TypeHelper {
         }
 
         if (a2 != -1) {
-            m2 = TypeHelper.typeMatrix[attackType2][defendType1];
+            m3 = TypeHelper.typeMatrix[attackType2][defendType1];
             m3 += (list[attackType2][this.valueToType(m3)] * GameConstants.SHARD_UPGRADE_STEP);
         }
 
