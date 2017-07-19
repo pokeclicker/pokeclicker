@@ -113,7 +113,7 @@ class Player {
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
         this._shardUpgrades = savedPlayer._shardUpgrades || Save.initializeShards();
-        this._shardsCollected = savedPlayer._shardsCollected || new Array<number>(18);
+        this._shardsCollected = savedPlayer._shardsCollected || Array.apply(null, Array<number>(18)).map(Number.prototype.valueOf, 0);
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -326,6 +326,11 @@ class Player {
                 pokemon.exp(pokemon.exp() + expTotal);
             }
         }
+    }
+
+    public gainShards(type: string, amount: number)  {
+        let typeNum = GameConstants.PokemonType[type];
+        player._shardsCollected[typeNum] += amount;
     }
 
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {

@@ -7,6 +7,11 @@ class DungeonBattle extends Battle {
         DungeonRunner.fighting(false);
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        let shardAmount = DungeonRunner.fightingBoss() ? 20 : 3;
+        player.gainShards(this.enemyPokemon().type1, shardAmount);
+        if (this.enemyPokemon().type2 != -1) {
+            player.gainShards(this.enemyPokemon().type2, shardAmount);
+        }
         player.addRouteKill();
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
