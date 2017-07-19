@@ -1530,7 +1530,7 @@
                         <h4 class="modal-title" >Shards</h4>
                     </div>
                     <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
-                        <h3 data-bind="text: GameConstants.PokemonType[$index()]"></h3>
+                        <h3 data-bind="text: GameConstants.PokemonType[$index()] + ' (' + player._shardsCollected[$index()]() + ')'"></h3>
                         <table class='table' data-bind='foreach: $data'>
                             <tr>
                                 <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
@@ -1542,12 +1542,12 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] + ($data * GameConstants.SHARD_UPGRADE_STEP)).toFixed(1)'></td>
+                                <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] + ($data * GameConstants.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                                 <td>
-                                    <button class='btn'
+                                    <button class='btn btn-primary'
                                         data-bind='click: function(){player.buyShardUpgrade($parentContext.$index(), $index())},
-                                        css: {disabled: !player.canBuyShardUpgrade($parentContext.$index(), $index())}'>
-                                        Buy
+                                        css: {disabled: !player.canBuyShardUpgrade($parentContext.$index(), $index())},
+                                        text: "Buy (" + player.getShardUpgradeCost($parentContext.$index(), $index()) + ")"'>
                                     </button>
                                 </td>
                             </tr>
