@@ -23,7 +23,7 @@ class Player {
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
-    private _eggList: KnockoutObservableArray<Egg>;
+    private _eggList: Array<KnockoutObservable<Egg|void>>;
     private _eggSlots: KnockoutObservable<number>;
 
     private _itemList: { [name: string]: number };
@@ -65,7 +65,7 @@ class Player {
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
-        let tmpCaughtList = [], tmpEggList = [null, null, null, null];
+        let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
@@ -117,16 +117,9 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
-        if (savedPlayer._eggList) {
-            tmpEggList = savedPlayer._eggList.map((egg) => {
-                if (egg == null) {
-                    return null;
-                } else {
-                    return new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified)
-                }
-            })
-        }
-        this._eggList = ko.observableArray(tmpEggList);
+        this._eggList = savedPlayer._eggList.map((egg) => {
+            return ko.observable( egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null )
+        })
         this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
 
         //TODO remove before deployment
@@ -376,8 +369,8 @@ class Player {
 
     public hasFreeEggSlot(): boolean {
         let counter = 0;
-        for (let egg of this._eggList()) {
-            if (egg !== null) {
+        for (let egg of this._eggList) {
+            if (egg() !== null) {
                 counter++;
             }
         }
@@ -385,9 +378,9 @@ class Player {
     }
 
     public gainEgg(e: Egg) {
-        for (let i = 0; i < this._eggList().length; i++) {
-            if (this._eggList()[i] == null) {
-                this._eggList().splice(i, 1, e);
+        for (let i = 0; i < this._eggList.length; i++) {
+            if (this._eggList[i]() == null) {
+                this._eggList[i](e);
                 return;
             }
         }
@@ -521,11 +514,11 @@ class Player {
         this._itemMultipliers = value;
     }
 
-    get eggList(): KnockoutObservableArray<Egg> {
+    get eggList(): Array<KnockoutObservable<Egg|void>> {
         return this._eggList;
     }
 
-    set eggList(value: KnockoutObservableArray<Egg>) {
+    set eggList(value: Array<KnockoutObservable<Egg|void>>) {
         this._eggList = value;
     }
 

@@ -13,8 +13,8 @@ class BreedingHelper {
             amount *= OakItemRunner.calculateBonus("Blaze Casette")
         }
         amount = Math.round(amount);
-        for (let obj of player.eggList()) {
-            let egg: Egg = obj;
+        for (let obj of player.eggList) {
+            let egg: Egg = obj();
             if (egg == null || egg.notified) {
                 continue;
             }
@@ -47,12 +47,12 @@ class BreedingHelper {
     }
 
     public static hatchPokemonEgg(index: number) {
-        let egg = player._eggList()[index];
+        let egg = player._eggList[index]();
         for (let i=0; i<player._caughtPokemonList().length; i++) {
             if (player._caughtPokemonList()[i].name == egg.pokemon) {
                 player._caughtPokemonList()[i].exp(0);
 
-                player._eggList()[index] = null;
+                player._eggList[index](null);
                 player._caughtPokemonList()[i].breeding(false);
                 return
             }
@@ -89,7 +89,7 @@ class BreedingHelper {
         let eggType = GameConstants.EggType[egg.type];
         if (eggType == "Pokemon") {
             let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
-            eggType = dataPokemon.type1.toLowerCase();
+            eggType = String(dataPokemon.type1).toLowerCase();
         }
         return "assets/images/breeding/egg" + eggType + ".png";
     }
