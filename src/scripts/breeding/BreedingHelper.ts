@@ -88,6 +88,15 @@ class BreedingHelper {
     public static isEgg(obj: any): boolean {
         return obj instanceof Egg
     }
+
+    public static getEggImage(egg: Egg): string {
+        let eggType = GameConstants.EggType[egg.type];
+        if (eggType == "Pokemon") {
+            let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
+            eggType = dataPokemon.type1.toLowerCase();
+        }
+        return "assets/images/breeding/egg" + eggType + ".png";
+    }
 }
 
 const HatchList: { [name: number]: string[] } = {};
