@@ -1536,8 +1536,9 @@
                                 <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                                 <td width='50%'>
                                     <div class="progress">
-                                        <div class="progress-bar" role="progressbar"
-                                             data-bind="attr:{ style: 'width:' + ($data * 10) + '%' }"
+                                        <div role="progressbar"
+                                             data-bind="attr:{ style: 'width:' + ($data * 10) + '%' },
+                                                        css: 'progress-bar ' + GameConstants.PokemonType[$parentContext.$index()]"
                                              aria-valuemin="0" aria-valuemax="100">
                                         </div>
                                     </div>
