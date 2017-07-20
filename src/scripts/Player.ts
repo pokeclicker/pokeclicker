@@ -357,7 +357,7 @@ class Player {
     public maxLevelPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
             return this._caughtPokemonList().filter((pokemon) => {
-                return pokemon.levelObservable() == 100;
+                return pokemon.levelObservable() == 100 && !pokemon.breeding();
             })
         }, this)
     }
