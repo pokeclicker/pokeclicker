@@ -41,6 +41,7 @@ class BreedingHelper {
         let egg = this.createEgg(pokemon.name);
         pokemon.breeding(true);
         player.gainEgg(egg);
+        pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
 
         $('#breedingModal').modal('hide');
 
@@ -53,7 +54,7 @@ class BreedingHelper {
 
         for (let i=0; i<player._caughtPokemonList().length; i++) {
             if (player._caughtPokemonList()[i].name == egg.pokemon) {
-                if (player._caughtPokemonList()[i].breeding) {
+                if (player._caughtPokemonList()[i].breeding()) {
                     player._caughtPokemonList()[i].exp(0);
                     player._caughtPokemonList()[i].breeding(false);
                 }

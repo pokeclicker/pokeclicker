@@ -51,7 +51,9 @@ class PokemonHelper {
     }
 
     public static calculateAttack(attackBase: number, attackBonus: number, level: number): number {
-        return Math.max(1, Math.floor((attackBase + attackBonus) * level / 100))
+        let attackBonusMultiplier = 1 + ( attackBonus / 100 );
+        let levelMultiplier = level / 100;
+        return Math.max(1, Math.floor(attackBase * attackBonusMultiplier * levelMultiplier));
     }
 
     public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
