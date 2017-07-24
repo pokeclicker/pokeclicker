@@ -67,10 +67,10 @@ class Save {
             for (let item in GameConstants.PokemonType) {
                 if (!isNaN(Number(item))) {
                     res[item] = [];
-                    res[item][GameConstants.TypeEffectiveness.Immune] = 0;
-                    res[item][GameConstants.TypeEffectiveness.NotVery] = 0;
-                    res[item][GameConstants.TypeEffectiveness.Normal] = 0;
-                    res[item][GameConstants.TypeEffectiveness.Very] = 0;
+                    res[item][GameConstants.TypeEffectiveness.Immune] = ko.observable(0);
+                    res[item][GameConstants.TypeEffectiveness.NotVery] = ko.observable(0);
+                    res[item][GameConstants.TypeEffectiveness.Normal] = ko.observable(0);
+                    res[item][GameConstants.TypeEffectiveness.Very] = ko.observable(0);
                 }
             }
         }
