@@ -605,7 +605,7 @@ class Player {
             "_itemMultipliers",
             "_keyItems",
             "_eggList",
-            "_eggSlots"
+            "_eggSlots",
             "_shardUpgrades",
             "_shardsCollected"
         ];
