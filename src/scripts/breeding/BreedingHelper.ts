@@ -24,9 +24,9 @@ class BreedingHelper {
             }
             if (egg.steps() >= egg.totalSteps) {
                 if (egg.type == GameConstants.EggType.Pokemon) {
-                    $.notify(egg.pokemon + " is ready to hatch!");
+                    Notifier.notify(egg.pokemon + " is ready to hatch!", GameConstants.NotificationOption.success);
                 } else {
-                    $.notify("An egg is ready to hatch!")
+                    Notifier.notify("An egg is ready to hatch!", GameConstants.NotificationOption.success);
                 }
                 egg.notified = true;
             }
@@ -35,7 +35,7 @@ class BreedingHelper {
 
     public static gainPokemonEgg(pokemon: CaughtPokemon) {
         if (!player.hasFreeEggSlot()) {
-            $.notify("You don't have any free egg slots");
+            Notifier.notify("You don't have any free egg slots", GameConstants.NotificationOption.warning);
             return;
         }
         let egg = this.createEgg(pokemon.name);
