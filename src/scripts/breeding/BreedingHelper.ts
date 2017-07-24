@@ -114,7 +114,7 @@ HatchList[GameConstants.EggType.Dragon] = ["Dratini", "Dragonair", "Dragonite"];
 document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#breedingModal').on('hide.bs.modal', function () {
-        MapHelper.moveToRoute(5, GameConstants.Region.kanto);
+        Game.gameState(GameConstants.GameState.fighting);
     });
 
 });
