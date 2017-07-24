@@ -4,8 +4,12 @@
 class BreedingHelper {
 
     public static openBreedingModal() {
-        Game.gameState(GameConstants.GameState.paused);
-        $('#breedingModal').modal('show')
+        if (player.hasKeyItem("Mystery egg")) {
+            Game.gameState(GameConstants.GameState.paused);
+            $('#breedingModal').modal('show');
+        } else {
+            Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
+        }
     }
 
     public static progressEggs(amount: number) {
