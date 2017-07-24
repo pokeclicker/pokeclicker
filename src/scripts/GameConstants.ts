@@ -69,6 +69,15 @@ namespace GameConstants {
         boss,
     }
 
+    //Shards
+    export const SHARD_UPGRADE_COST = 500;
+    export const SHARD_UPGRADE_STEP = 0.1;
+    export const MAX_SHARD_UPGRADES = 10;
+
+    export const DUNGEON_SHARDS = 3;
+    export const DUNGEON_BOSS_SHARDS = 20;
+    export const GYM_SHARDS = 5;
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks
@@ -101,6 +110,20 @@ namespace GameConstants {
         money,
         questpoint,
         dungeontoken,
+    }
+
+    export enum TypeEffectiveness {
+        Immune,
+        NotVery,
+        Normal,
+        Very
+    }
+
+    export enum TypeEffectivenessValue {
+        Immune = 0,
+        NotVery = 0.5,
+        Normal = 1,
+        Very = 2
     }
 
     export const PokeballCatchBonus = [
@@ -176,22 +199,22 @@ namespace GameConstants {
     export enum PokemonType {
         "None" = -1,
         "Normal" = 0,
-        "Fighting" = 1,
-        "Flying" = 2,
-        "Poison" = 3,
-        "Ground" = 4,
-        "Rock" = 5,
-        "Bug" = 6,
-        "Ghost" = 7,
-        "Steel" = 8,
-        "Fire" = 9,
-        "Water" = 10,
-        "Grass" = 11,
-        "Electric" = 12,
-        "Psychic" = 13,
-        "Ice" = 14,
-        "Dragon" = 15,
-        "Dark" = 16,
+        "Fire" = 1,
+        "Water" = 2,
+        "Electric" = 3,
+        "Grass" = 4,
+        "Ice" = 5,
+        "Fighting" = 6,
+        "Poison" = 7,
+        "Ground" = 8,
+        "Flying" = 9,
+        "Psychic" = 10,
+        "Bug" = 11,
+        "Rock" = 12,
+        "Ghost" = 13,
+        "Dragon" = 14,
+        "Dark" = 15,
+        "Steel" = 16,
         "Fairy" = 17,
     }
 
