@@ -50,6 +50,7 @@ class Battle {
     public static defeatPokemon() {
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        player.gainShards(this.enemyPokemon());
         player.addRouteKill();
         let alreadyCaught: boolean = player.alreadyCaughtPokemon(this.enemyPokemon().name);
         let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught, this.enemyPokemon().shiny);

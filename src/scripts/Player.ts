@@ -25,6 +25,8 @@ class Player {
     private _oakItemsEquipped: string[];
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
+    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
+    private _shardsCollected: Array<KnockoutObservable<number>>;
 
     private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
@@ -114,6 +116,10 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
+        this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
+        this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
+            return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
+        });
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -176,20 +182,21 @@ class Player {
      * @returns {number} damage to be done.
      */
     public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
-        // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
-        // TODO factor in types
-        // TODO start at 0
+        // TODO Calculate pokemon attack by checking upgrades and multipliers.
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
-            attack += pokemon.attack();
+            if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
+                attack += pokemon.attack();
+            } else {
+                let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
+            }
         }
 
-        // return attack;
-        return attack;
+        return Math.round(attack);
     }
 
     public calculateClickAttack(): number {
-        // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
         return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
     }
@@ -337,6 +344,33 @@ class Player {
         }
     }
 
+    public gainShards(pokemon: BattlePokemon)  {
+        let typeNum = GameConstants.PokemonType[pokemon.type1];
+        player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+        if (pokemon.type2 != GameConstants.PokemonType.None) {
+            typeNum = GameConstants.PokemonType[pokemon.type2];
+            player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+        }
+    }
+
+    public buyShardUpgrade(typeNum: number, effectNum: number) {
+        if (this.canBuyShardUpgrade(typeNum, effectNum)) {
+            this._shardsCollected[typeNum](this._shardsCollected[typeNum]() - this.getShardUpgradeCost(typeNum, effectNum));
+            this._shardUpgrades[typeNum][effectNum](this._shardUpgrades[typeNum][effectNum]() + 1);
+        }
+    }
+
+    public canBuyShardUpgrade(typeNum: number, effectNum: number): boolean {
+        let lessThanMax = this._shardUpgrades[typeNum][effectNum]() < GameConstants.MAX_SHARD_UPGRADES;
+        let hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
+        return lessThanMax && hasEnoughShards;
+    }
+
+    public getShardUpgradeCost(typeNum: number, effectNum: number): number {
+        let cost = (this._shardUpgrades[typeNum][effectNum]() + 1) * GameConstants.SHARD_UPGRADE_COST;
+        return cost;
+    }
+
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
             return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
@@ -470,6 +504,22 @@ class Player {
         this._itemMultipliers = value;
     }
 
+    get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
+        return this._shardUpgrades;
+    }
+
+    set shardUpgrades(value: Array<Array<KnockoutObservable<number>>>) {
+        this._shardUpgrades = value;
+    }
+
+    get shardsCollected(): Array<KnockoutObservable<number>> {
+        return this._shardsCollected;
+    }
+
+    set shardsCollected(value: Array<KnockoutObservable<number>>) {
+        this._shardsCollected = value;
+    }
+
     public toJSON() {
         let keep = ["_money",
             "_dungeonTokens",
@@ -490,7 +540,8 @@ class Player {
             "_oakItemsEquipped",
             "_itemList",
             "_itemMultipliers",
-            "_keyItems"];
+            "_keyItems",
+            "_shardUpgrades", "_shardsCollected"];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }

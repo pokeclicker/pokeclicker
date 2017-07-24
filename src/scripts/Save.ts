@@ -53,4 +53,29 @@ class Save {
         }
         return res;
     }
+
+    public static initializeShards(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {
+        let res;
+        if (saved) {
+            res = saved.map((type) => {
+                return type.map((effectiveness) => {
+                    return ko.observable(effectiveness)
+                })
+            });
+        } else {
+            res = [];
+            for (let item in GameConstants.PokemonType) {
+                if (!isNaN(Number(item))) {
+                    res[item] = [];
+                    res[item][GameConstants.TypeEffectiveness.Immune] = ko.observable(0);
+                    res[item][GameConstants.TypeEffectiveness.NotVery] = ko.observable(0);
+                    res[item][GameConstants.TypeEffectiveness.Normal] = ko.observable(0);
+                    res[item][GameConstants.TypeEffectiveness.Very] = ko.observable(0);
+                }
+            }
+        }
+
+        return res;
+    }
+
 }

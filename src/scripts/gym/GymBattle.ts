@@ -13,6 +13,7 @@ class GymBattle extends Battle {
     public static defeatPokemon() {
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        player.gainShards(this.enemyPokemon());
         this.index(this.index() + 1);
 
         if (this.index() >= this.gym.pokemons.length) {
