@@ -4,7 +4,7 @@
     <title>Pokeclicker</title>
     <link href="/assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
-        <tr data-bind='if: !$data.breeding()'>
+        <tr data-bind='ifnot: $data.breeding()'>
             <td>
                 <img class="smallImage"
                      data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
@@ -1622,12 +1622,12 @@
                         </div>
                     </div>
                 </div>
-                <div data-bind="if: !player.hasMaxLevelPokemon()">
+                <div data-bind="ifnot: player.hasMaxLevelPokemon()">
                     <p>
                         Unfortunately, you don't have any pokémon of level 100
                     </p>
                 </div>
-                <div data-bind="if: !player.hasFreeEggSlot()">
+                <div data-bind="ifnot: player.hasFreeEggSlot()">
                     <p>
                         Unfortunately, you don't have any free eggslots
                     </p>
