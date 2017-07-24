@@ -23,6 +23,9 @@ class Player {
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
+    private _eggList: Array<KnockoutObservable<Egg|void>>;
+    private _eggSlots: KnockoutObservable<number>;
+
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
@@ -76,7 +79,7 @@ class Player {
 
         if (savedPlayer._caughtPokemonList) {
             tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp)
+                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp, pokemon.breeding)
             });
         }
         this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
@@ -116,6 +119,11 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
+        savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
+        this._eggList = savedPlayer._eggList.map((egg) => {
+            return ko.observable( egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null )
+        });
+        this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
         this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
         this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
@@ -185,11 +193,13 @@ class Player {
         // TODO Calculate pokemon attack by checking upgrades and multipliers.
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
-            if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
-                attack += pokemon.attack();
-            } else {
-                let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-                attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
+            if (!pokemon.breeding()){
+                if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
+                    attack += pokemon.attack();
+                } else {
+                    let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                    attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
+                }
             }
         }
 
@@ -373,8 +383,44 @@ class Player {
 
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
-            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
+            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
         }, this).extend({rateLimit: player.calculateCatchTime()})
+    }
+
+    public maxLevelPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
+        return ko.pureComputed(function () {
+            return this._caughtPokemonList().filter((pokemon) => {
+                return pokemon.levelObservable() == 100 && !pokemon.breeding();
+            })
+        }, this)
+    }
+
+    public canBreedPokemon(): boolean {
+        return this.hasMaxLevelPokemon() && this.hasFreeEggSlot();
+    }
+
+    public hasMaxLevelPokemon(): boolean {
+        return this.maxLevelPokemonList()().length > 0;
+    }
+
+    public hasFreeEggSlot(): boolean {
+        let counter = 0;
+        for (let egg of this._eggList) {
+            if (egg() !== null) {
+                counter++;
+            }
+        }
+        return counter < this._eggSlots();
+    }
+
+    public gainEgg(e: Egg) {
+        for (let i = 0; i < this._eggList.length; i++) {
+            if (this._eggList[i]() == null) {
+                this._eggList[i](e);
+                return;
+            }
+        }
+        console.log("Error: Could not place egg " + e);
     }
 
     public gainBadge(badge: GameConstants.Badge) {
@@ -504,6 +550,22 @@ class Player {
         this._itemMultipliers = value;
     }
 
+    get eggList(): Array<KnockoutObservable<Egg|void>> {
+        return this._eggList;
+    }
+
+    set eggList(value: Array<KnockoutObservable<Egg|void>>) {
+        this._eggList = value;
+    }
+
+    get eggSlots(): KnockoutObservable<number> {
+        return this._eggSlots;
+    }
+
+    public gainEggSlot() {
+        this._eggSlots(this._eggSlots() + 1);
+    }
+
     get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
         return this._shardUpgrades;
     }
@@ -521,7 +583,8 @@ class Player {
     }
 
     public toJSON() {
-        let keep = ["_money",
+        let keep = [
+            "_money",
             "_dungeonTokens",
             "_caughtShinyList",
             "_route",
@@ -541,7 +604,11 @@ class Player {
             "_itemList",
             "_itemMultipliers",
             "_keyItems",
-            "_shardUpgrades", "_shardsCollected"];
+            "_eggList",
+            "_eggSlots",
+            "_shardUpgrades",
+            "_shardsCollected"
+        ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
