@@ -10,7 +10,7 @@ class BreedingHelper {
 
     public static progressEggs(amount: number) {
         if (OakItemRunner.isActive("Blaze Casette")) {
-            amount *= OakItemRunner.calculateBonus("Blaze Casette")
+            amount *= (1 + OakItemRunner.calculateBonus("Poison Barb") / 100)
         }
         amount = Math.round(amount);
         for (let obj of player.eggList) {
