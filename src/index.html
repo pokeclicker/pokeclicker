@@ -1363,7 +1363,7 @@
             </div>
 
             <!-- Egg Slots/Breeding-->
-            <div data-bind="if: player.hasKeyItem('Mystery egg')">
+            <div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
                 <div class="page-item">
                     <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
                         <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()">
