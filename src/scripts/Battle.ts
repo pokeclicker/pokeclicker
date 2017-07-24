@@ -50,6 +50,7 @@ class Battle {
     public static defeatPokemon() {
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        player.gainShards(this.enemyPokemon());
         player.addRouteKill();
         BreedingHelper.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
         let alreadyCaught: boolean = player.alreadyCaughtPokemon(this.enemyPokemon().name);
