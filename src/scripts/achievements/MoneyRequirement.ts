@@ -1,6 +1,6 @@
-///<reference path="Property.ts"/>
+///<reference path="Requirement.ts"/>
 
-class MoneyProperty extends Requirement{
+class MoneyRequirement extends Requirement{
     constructor( requiredValue:number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(requiredValue, type);
     }

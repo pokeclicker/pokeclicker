@@ -1,6 +1,6 @@
-///<reference path="Property.ts"/>
+///<reference path="Requirement.ts"/>
 
-class CaughtPokemonProperty extends Requirement {
+class CaughtPokemonRequirement extends Requirement {
     constructor(value: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, type);
     }

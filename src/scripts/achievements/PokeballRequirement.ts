@@ -1,6 +1,6 @@
-///<reference path="Property.ts"/>
+///<reference path="Requirement.ts"/>
 
-class PokeballProperty extends Requirement {
+class PokeballRequirement extends Requirement {
     private pokeball: GameConstants.Pokeball;
 
     constructor(value: number, pokeball: GameConstants.Pokeball, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
