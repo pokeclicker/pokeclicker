@@ -23,14 +23,21 @@ class Player {
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
+    private _eggList: Array<KnockoutObservable<Egg|void>>;
+    private _eggSlots: KnockoutObservable<number>;
+
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
+    
     private _mineEnergy: KnockoutObservable<number>;
     private _maxMineEnergy: KnockoutObservable<number>;
     private _mineEnergyGain: number;
     private _mineInventory: KnockoutObservableArray<any>;
     private _diamonds: KnockoutObservable<number>;
     private _maxDailyDeals: number;
+
+    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
+    private _shardsCollected: Array<KnockoutObservable<number>>;
 
     private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
@@ -80,7 +87,7 @@ class Player {
 
         if (savedPlayer._caughtPokemonList) {
             tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp)
+                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp, pokemon.breeding)
             });
         }
         this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
@@ -97,7 +104,11 @@ class Player {
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
-            return ko.observable(savedPlayer._pokeballs ? (savedPlayer._pokeballs[index] || 1000) : 1000)
+            let amt = 1000;
+            if (savedPlayer._pokeballs && typeof savedPlayer._pokeballs[index] == 'number') {
+                amt = savedPlayer._pokeballs[index];
+            }
+            return ko.observable(amt);
         });
         this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._notCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
         this._alreadyCaughtBallSelection = typeof(savedPlayer._alreadyCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._alreadyCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
@@ -125,6 +136,15 @@ class Player {
         }
         this._diamonds = ko.observable(savedPlayer._diamonds || 0);
         this._maxDailyDeals = savedPlayer._maxDailyDeals || 3;
+        savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
+        this._eggList = savedPlayer._eggList.map((egg) => {
+            return ko.observable( egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null )
+        });
+        this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
+        this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
+        this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
+            return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
+        });
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -187,20 +207,23 @@ class Player {
      * @returns {number} damage to be done.
      */
     public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
-        // TODO Calculate pokemon attack by checking the caught list, upgrades and multipliers.
-        // TODO factor in types
-        // TODO start at 0
+        // TODO Calculate pokemon attack by checking upgrades and multipliers.
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
-            attack += pokemon.attack();
+            if (!pokemon.breeding()){
+                if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
+                    attack += pokemon.attack();
+                } else {
+                    let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                    attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
+                }
+            }
         }
 
-        // return attack;
-        return attack;
+        return Math.round(attack);
     }
 
     public calculateClickAttack(): number {
-        // TODO Calculate click attack by checking the caught list size, upgrades and multipliers.
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
         return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
     }
@@ -348,10 +371,73 @@ class Player {
         }
     }
 
+    public gainShards(pokemon: BattlePokemon)  {
+        let typeNum = GameConstants.PokemonType[pokemon.type1];
+        player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+        if (pokemon.type2 != GameConstants.PokemonType.None) {
+            typeNum = GameConstants.PokemonType[pokemon.type2];
+            player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+        }
+    }
+
+    public buyShardUpgrade(typeNum: number, effectNum: number) {
+        if (this.canBuyShardUpgrade(typeNum, effectNum)) {
+            this._shardsCollected[typeNum](this._shardsCollected[typeNum]() - this.getShardUpgradeCost(typeNum, effectNum));
+            this._shardUpgrades[typeNum][effectNum](this._shardUpgrades[typeNum][effectNum]() + 1);
+        }
+    }
+
+    public canBuyShardUpgrade(typeNum: number, effectNum: number): boolean {
+        let lessThanMax = this._shardUpgrades[typeNum][effectNum]() < GameConstants.MAX_SHARD_UPGRADES;
+        let hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
+        return lessThanMax && hasEnoughShards;
+    }
+
+    public getShardUpgradeCost(typeNum: number, effectNum: number): number {
+        let cost = (this._shardUpgrades[typeNum][effectNum]() + 1) * GameConstants.SHARD_UPGRADE_COST;
+        return cost;
+    }
+
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
-            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()))
+            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
         }, this).extend({rateLimit: player.calculateCatchTime()})
+    }
+
+    public maxLevelPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
+        return ko.pureComputed(function () {
+            return this._caughtPokemonList().filter((pokemon) => {
+                return pokemon.levelObservable() == 100 && !pokemon.breeding();
+            })
+        }, this)
+    }
+
+    public canBreedPokemon(): boolean {
+        return this.hasMaxLevelPokemon() && this.hasFreeEggSlot();
+    }
+
+    public hasMaxLevelPokemon(): boolean {
+        return this.maxLevelPokemonList()().length > 0;
+    }
+
+    public hasFreeEggSlot(): boolean {
+        let counter = 0;
+        for (let egg of this._eggList) {
+            if (egg() !== null) {
+                counter++;
+            }
+        }
+        return counter < this._eggSlots();
+    }
+
+    public gainEgg(e: Egg) {
+        for (let i = 0; i < this._eggList.length; i++) {
+            if (this._eggList[i]() == null) {
+                this._eggList[i](e);
+                return;
+            }
+        }
+        console.log("Error: Could not place egg " + e);
     }
 
     public gainBadge(badge: GameConstants.Badge) {
@@ -516,8 +602,41 @@ class Player {
         this._diamonds(n);
     }
 
+    get eggList(): Array<KnockoutObservable<Egg|void>> {
+        return this._eggList;
+    }
+
+    set eggList(value: Array<KnockoutObservable<Egg|void>>) {
+        this._eggList = value;
+    }
+
+    get eggSlots(): KnockoutObservable<number> {
+        return this._eggSlots;
+    }
+
+    public gainEggSlot() {
+        this._eggSlots(this._eggSlots() + 1);
+    }
+
+    get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
+        return this._shardUpgrades;
+    }
+
+    set shardUpgrades(value: Array<Array<KnockoutObservable<number>>>) {
+        this._shardUpgrades = value;
+    }
+
+    get shardsCollected(): Array<KnockoutObservable<number>> {
+        return this._shardsCollected;
+    }
+
+    set shardsCollected(value: Array<KnockoutObservable<number>>) {
+        this._shardsCollected = value;
+    }
+
     public toJSON() {
-        let keep = ["_money",
+        let keep = [
+            "_money",
             "_dungeonTokens",
             "_caughtShinyList",
             "_route",
@@ -541,7 +660,12 @@ class Player {
             "_maxMineEnergy",
             "_mineEnergyGain",
             "_mineInventory",
-            "_maxDailyDeals"];
+            "_maxDailyDeals",
+            "_eggList",
+            "_eggSlots",
+            "_shardUpgrades",
+            "_shardsCollected"
+        ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
