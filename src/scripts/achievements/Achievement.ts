@@ -21,6 +21,14 @@ class Achievement {
         }
     }
 
+    public getProgress(){
+        return this.isCompleted() ? this.property.requiredValue: this.property.getProgress();
+    }
+
+    public getProgressPercentage(){
+        return this.isCompleted() ? "100.0" : this.property.getProgressPercentage();
+    }
+
     public isCompleted() {
         return this.unlocked || this.property.isCompleted();
     }

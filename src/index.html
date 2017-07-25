@@ -20,8 +20,8 @@
         <tr data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }">
             <td><span data-bind="text: name">Name</span></td>
             <td data-bind="text: description">Description</td>
-            <td><span data-bind="text: property.getProgress()">1</span>/<span data-bind="text: property.requiredValue">2</span></td>
-            <td><span data-bind="text: property.getProgressPercentage()"></span>%</td>
+            <td><span data-bind="text: getProgress()">1</span>/<span data-bind="text: property.requiredValue">2</span></td>
+            <td><span data-bind="text: getProgressPercentage()"></span>%</td>
 
             <td>+<span data-bind="text: bonus"><Bonus></Bonus></span>%</td>
         </tr>
