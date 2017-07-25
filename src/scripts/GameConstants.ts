@@ -52,6 +52,8 @@ namespace GameConstants {
     export const DUNGEON_MAP_SHOW = 4;
 
     // Achievements
+    export const ACHIEVEMENT_TICK = 1000;
+
     export enum AchievementOption {
         less,
         equal,

@@ -49,6 +49,7 @@ class Game {
     interval;
     undergroundCounter: number;
     farmCounter: number;
+    public static achievementCounter: number = 0;
 
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
@@ -76,7 +77,15 @@ class Game {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
         this.farmCounter += GameConstants.TICK_TIME;
+        Game.achievementCounter += GameConstants.TICK_TIME;
+        if(Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK){
+            Game.achievementCounter = 0;
+            console.log("checking");
+            AchievementHandler.checkAchievements();
+        }
         Save.counter += GameConstants.TICK_TIME;
+
+
 
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
