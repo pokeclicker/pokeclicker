@@ -367,6 +367,20 @@ namespace GameConstants {
         Dragon,
         Pokemon,
         Mystery,
+        Fossil,
+    }
+
+    export const FossilToPokemon = {
+        "Helix Fossil": "Omanyte",
+        "Dome Fossil": "Kabuto",
+        "Old Amber": "Aerodactyl",
+    }
+
+    //Used for image name
+    export const PokemonToFossil = {
+        "Omanyte": "helix",
+        "Kabuto": "dome",
+        "Aerodactyl": "amber",
     }
 }
 

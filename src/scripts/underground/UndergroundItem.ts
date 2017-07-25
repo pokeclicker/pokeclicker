@@ -20,9 +20,9 @@ class UndergroundItem {
     }
 
     public static initialize() {
-        this.addItem("Helix Fossil", 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]], 0);
-        this.addItem("Dome Fossil", 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]], 0);
-        this.addItem("Old Amber", 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 0);
+        this.addItem("Helix Fossil", 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]], 0, "Mine Egg");
+        this.addItem("Dome Fossil", 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]], 0, "Mine Egg");
+        this.addItem("Old Amber", 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 0, "Mine Egg");
         // this.addItem("Root Fossil", 4, [[0,0,4,4,4], [0,0,4,4,4], [4,0,0,4,4], [4,4,4,4,4], [0,4,4,4,0]], 3);
         // this.addItem("Claw Fossil", 5, [[5,5,5,0,0], [5,5,5,5,0], [0,5,5,5,5], [0,0,0,5,5]], 3);
         // this.addItem("Armor Fossil", 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
@@ -73,10 +73,6 @@ class UndergroundItem {
     public static getRandomItem(): UndergroundItem {
         let i = Math.floor(Math.random()*(UndergroundItem.list.length));
         return UndergroundItem.list[i] || UndergroundItem.list[0];
-    }
-
-    public static isMineEgg(name: string): boolean {
-        return false
     }
 
     public isStone(): boolean {

@@ -23,10 +23,14 @@
                 <span data-bind='text: "("+$data.amount()+")"'></span>
             </td>
             <td class='vertical-middle' data-bind='text: name'></td>
-            <!-- ko if: UndergroundItem.isMineEgg(name) -->
-
+            <!-- ko if: valueType == "Mine Egg" -->
+            <td></td>
+            <td>
+                <button class='btn btn-success' data-bind='click: function(){ Underground.sellMineItem(id) },
+                                                           css: { disabled: amount() <= 0 || !player.hasFreeEggSlot() }'>Breed</button>
+            </td>
             <!-- /ko -->
-            <!-- ko ifnot: UndergroundItem.isMineEgg(name) -->
+            <!-- ko ifnot: valueType == "Mine Egg" -->
             <td class='vertical-middle' data-bind='text: value + " " + UndergroundItem.getFullResourceName(valueType, value)'></td>
             <td class='vertical-middle'>
                 <button class='btn btn-success tooltipRightMine' data-bind='click: function(){ Underground.sellMineItem(id) }, css: { disabled: amount() <= 0 }'>Sell</button>

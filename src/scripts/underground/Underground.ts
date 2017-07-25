@@ -109,17 +109,20 @@ class Underground {
                 if (item.amount() > 0) {
                     let amt = item.amount()
                     player._mineInventory()[i].amount(amt - 1);
-                    Underground.gainProfit(item.value, item.valueType);
+                    Underground.gainProfit(item);
                     return;
                 }
             }
         }
     }
 
-    private static gainProfit(value: number, valueType: string) {
-        switch (valueType) {
+    private static gainProfit(item: UndergroundItem) {
+        switch (item.valueType) {
             case "Diamond":
-                player.diamonds += value;
+                player.diamonds += item.value;
+                break
+            case "Mine Egg":
+                player.gainEgg(BreedingHelper.createFossilEgg(item.name));
             default:
                 //player.gainShards()
         }
