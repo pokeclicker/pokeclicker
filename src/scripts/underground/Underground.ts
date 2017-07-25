@@ -124,7 +124,9 @@ class Underground {
             case "Mine Egg":
                 player.gainEgg(BreedingHelper.createFossilEgg(item.name));
             default:
-                //player.gainShards()
+                let type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1) //Capitalizes string
+                let typeNum = GameConstants.PokemonType[type];
+                player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + GameConstants.PLATE_VALUE);
         }
     }
 }
