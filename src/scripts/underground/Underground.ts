@@ -129,10 +129,27 @@ class Underground {
                 player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + GameConstants.PLATE_VALUE);
         }
     }
+
+    public static openUndergroundModal() {
+        if (player.hasKeyItem("Explorer kit")) {
+            Game.gameState(GameConstants.GameState.paused);
+            $('#mineModal').modal('show');
+        } else {
+            Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
+        }
+    }
 }
 
 $(document).ready(function(){
     $("body").on('click', '.mineSquare', function(){
         Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
     })
+
+    $('#mineModal').on('hide.bs.modal', function () {
+        if (player.route() == 11) {
+            Game.gameState(GameConstants.GameState.fighting);
+        } else {
+            MapHelper.moveToRoute(11, GameConstants.Region.kanto);
+        }
+    });
 })

@@ -36,7 +36,7 @@ class KeyItemHandler {
         })));
 
         // TODO buy for 100 quest points
-        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Explorer kit", "A bag filled with convenient tools for exploring. It provides access to the Underground in the Sinnoh region")));
+        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Explorer kit", "A bag filled with convenient tools for exploring. It provides access to the Underground")));
 
         // TODO buy for 500 quest points
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Event calendar", "This calendar will keep you up to date on the latest events")));
