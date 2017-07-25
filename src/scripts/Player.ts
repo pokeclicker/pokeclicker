@@ -28,7 +28,7 @@ class Player {
 
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
-    
+
     private _mineEnergy: KnockoutObservable<number>;
     private _maxMineEnergy: KnockoutObservable<number>;
     private _mineEnergyGain: number;
@@ -661,6 +661,7 @@ class Player {
             "_mineEnergyGain",
             "_mineInventory",
             "_maxDailyDeals",
+            "_diamonds",
             "_eggList",
             "_eggSlots",
             "_shardUpgrades",
