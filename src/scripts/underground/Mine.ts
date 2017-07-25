@@ -182,4 +182,27 @@ class Mine {
         Mine.loadMine();
         ko.applyBindings(Mine, document.getElementById("mineModal"))
     }
+
+    public static loadSavedMine(mine) {
+        this.grid = mine.grid.map((row) => { return row.map((num) => { return ko.observable(num) }) });
+        this.rewardGrid = mine.rewardGrid;
+        this.itemsFound = ko.observable(mine.itemsFound);
+        this.itemsBuried = mine.itemsBuried;
+        this.rewardNumbers = mine.rewardNumbers;
+        this.loadingNewLayer = false;
+
+        Underground.showMine();
+    }
+
+    public static serialize() {
+        let mine = {
+            grid: this.grid,
+            rewardGrid: this.rewardGrid,
+            itemsFound: this.itemsFound,
+            itemsBuried: this.itemsBuried,
+            rewardNumbers: this.rewardNumbers
+        }
+
+        return ko.toJSON(mine);
+    }
 }
