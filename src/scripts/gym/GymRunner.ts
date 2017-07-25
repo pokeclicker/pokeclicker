@@ -48,7 +48,7 @@ class GymRunner {
         if (!player.hasBadge(gym.badgeReward)) {
             player.gainBadge(gym.badgeReward);
 
-            $('#receiveBadgeModal').modal('show');
+            ($ as any)('#receiveBadgeModal').modal('show');
         }
         player.town(TownList[gym.town]);
         MapHelper.updateAllRoutes();
@@ -63,7 +63,7 @@ class GymRunner {
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    $('#receiveBadgeModal').on('hidden.bs.modal', function () {
+    ($ as any)('#receiveBadgeModal').on('hidden.bs.modal', function () {
        if(GymBattle.gym.badgeReward == GameConstants.Badge.Boulder){
            player.gainKeyItem("Dungeon ticket");
        }

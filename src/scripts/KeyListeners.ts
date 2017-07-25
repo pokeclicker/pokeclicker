@@ -1,4 +1,4 @@
-$(document).on("keydown", function (e) {
+($ as any)(document).on("keydown", function (e) {
     let keyCode = e.keyCode;
 
     if (Game.gameState() == GameConstants.GameState.dungeon) {

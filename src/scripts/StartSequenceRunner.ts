@@ -2,13 +2,13 @@ class StartSequenceRunner {
 
     public static start() {
         Game.gameState(GameConstants.GameState.paused);
-        $('#startSequenceModal').modal('show');
+        ($ as any)('#startSequenceModal').modal('show');
 
     }
 
     public static pickStarter(s: GameConstants.Starter) {
         player.starter = s;
-        $('#pickStarterModal').modal('hide');
+        ($ as any)('#pickStarterModal').modal('hide');
         let dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[player.starter]);
         let shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
 
@@ -37,25 +37,25 @@ class StartSequenceRunner {
     public static showCaughtMessage() {
         player.routeKills[1](0);
         Game.gameState(GameConstants.GameState.paused);
-        $('#starterCaughtModal').modal('show');
+        ($ as any)('#starterCaughtModal').modal('show');
     }
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    $('#startSequenceModal').on('hidden.bs.modal', function () {
-        $('#pickStarterModal').modal('show');
+    ($ as any)('#startSequenceModal').on('hidden.bs.modal', function () {
+        ($ as any)('#pickStarterModal').modal('show');
 
     });
 
-    $('#pickStarterModal').on('hidden.bs.modal', function () {
+    ($ as any)('#pickStarterModal').on('hidden.bs.modal', function () {
         if (player.starter == GameConstants.Starter.None) {
-            $('#pickStarterModalText').text("I can't hold them off both! Please pick the pokémon you want to fight");
-            $('#pickStarterModal').modal('show');
+            ($ as any)('#pickStarterModalText').text("I can't hold them off both! Please pick the pokémon you want to fight");
+            ($ as any)('#pickStarterModal').modal('show');
         }
     });
 
-    $('#starterCaughtModal').on('hidden.bs.modal', function () {
+    ($ as any)('#starterCaughtModal').on('hidden.bs.modal', function () {
         Save.store(player);
         Game.gameState(GameConstants.GameState.fighting);
 

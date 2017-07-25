@@ -9,11 +9,10 @@ const debug = false;
 document.addEventListener("DOMContentLoaded", function (event) {
     OakItemRunner.initialize();
     let game: Game = new Game();
-    // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
     game.start();
 
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
+    ($ as any)(document).ready(function () {
+        ($ as any)('[data-toggle="tooltip"]').tooltip();
     });
 
     Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
             ko.utils.extend(options, local);
 
-            $(element).tooltip(options);
+            ($ as any)(element).tooltip(options);
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
                 // $(element).tooltip("destroy");

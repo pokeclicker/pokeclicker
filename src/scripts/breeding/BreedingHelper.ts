@@ -6,7 +6,7 @@ class BreedingHelper {
     public static openBreedingModal() {
         if (player.hasKeyItem("Mystery egg")) {
             Game.gameState(GameConstants.GameState.paused);
-            $('#breedingModal').modal('show');
+            ($ as any)('#breedingModal').modal('show');
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
@@ -47,7 +47,7 @@ class BreedingHelper {
         player.gainEgg(egg);
         pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
 
-        $('#breedingModal').modal('hide');
+        ($ as any)('#breedingModal').modal('hide');
 
     }
 
@@ -113,7 +113,7 @@ HatchList[GameConstants.EggType.Dragon] = ["Dratini", "Dragonair", "Dragonite"];
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    $('#breedingModal').on('hide.bs.modal', function () {
+    ($ as any)('#breedingModal').on('hide.bs.modal', function () {
         if (player.route() == 5) {
             Game.gameState(GameConstants.GameState.fighting);
         } else {

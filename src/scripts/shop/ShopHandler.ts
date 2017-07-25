@@ -40,12 +40,12 @@ class ShopHandler {
     }
 
     public static resetAmount() {
-        let input = $("input[name='amountOfItems']");
+        let input = ($ as any)("input[name='amountOfItems']");
         input.val(1).change();
     }
 
     public static increaseAmount(n: number) {
-        let input = $("input[name='amountOfItems']");
+        let input = ($ as any)("input[name='amountOfItems']");
         let newVal = (parseInt(input.val().toString()) || 0) + n;
         input.val(newVal > 1 ? newVal : 1).change();
     }
