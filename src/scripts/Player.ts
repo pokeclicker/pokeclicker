@@ -153,7 +153,7 @@ class Player {
         if (!this.hasKeyItem(name)) {
             this.recentKeyItem(name);
             if (!supressModal) {
-                ($ as any)("#keyItemModal").modal('show');
+                $("#keyItemModal").modal('show');
             }
             this._keyItems().push(name);
             KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();

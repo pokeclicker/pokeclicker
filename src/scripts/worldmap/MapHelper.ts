@@ -3,9 +3,9 @@ class MapHelper {
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
         if (!isNaN(route) && !(route == player.route())) {
             if (this.accessToRoute(route, region)) {
-                ($ as any)("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
+                $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 player.route(route);
-                ($ as any)("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
+                $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
                 Battle.generateNewEnemy();
                 Game.gameState(GameConstants.GameState.fighting);
             }
@@ -58,7 +58,7 @@ class MapHelper {
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
             Game.gameState(GameConstants.GameState.idle);
-            ($ as any)("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
+            $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
             player.route(0);
             player.town(TownList[townName]);
             //this should happen last, so all the values all set beforehand
@@ -70,7 +70,7 @@ class MapHelper {
         for (let i = 0; i < GameConstants.AMOUNT_OF_ROUTES_KANTO; i++) {
             // TODO fix for multiple regions
             if (MapHelper.accessToRoute(i, GameConstants.Region.kanto)) {
-                ($ as any)("[data-route='" + i + "']").removeClass('currentRoute').removeClass('lockedRoute').addClass('unlockedRoute');
+                $("[data-route='" + i + "']").removeClass('currentRoute').removeClass('lockedRoute').addClass('unlockedRoute');
             }
         }
     }

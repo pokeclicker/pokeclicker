@@ -3,8 +3,8 @@
  * @type {{}}
  */
 
-const pokemonMap: { [name: string]: any } = {};
-const pokemonMapId: { [id: number]: any } = {};
+const pokemonMap: { [name: string]: object } = {};
+const pokemonMapId: { [id: number]: object } = {};
 
 /**
  * Datalist that contains all Pokémon data
