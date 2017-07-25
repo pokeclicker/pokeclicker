@@ -16,6 +16,17 @@
         </tr>
     </script>
 
+    <script type="text/html" id="achievementListTemplate">
+        <tr data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }">
+            <td><span data-bind="text: name">Name</span></td>
+            <td data-bind="text: description">Description</td>
+            <td><span data-bind="text: property.getProgress()">1</span>/<span data-bind="text: property.requiredValue">2</span></td>
+            <td><span data-bind="text: property.getProgressPercentage()"></span>%</td>
+
+            <td>+<span data-bind="text: bonus"><Bonus></Bonus></span>%</td>
+        </tr>
+    </script>
+
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
 
@@ -60,7 +71,7 @@
             <button class="dropdown-item" href="#">Save</button>
         </li>
         <li>
-            <button class="dropdown-item" href="#">Achievements</button>
+            <button onClick="$('#achievementsModal').modal('show')" class="dropdown-item" href="#">Achievements</button>
         </li>
         <li>
             <button class="dropdown-item" href="#">Changelog</button>
@@ -1401,6 +1412,26 @@
             </div>
         </div>
 
+        <!-- Achievements Modal -->
+        <div class="modal  fade" id="achievementsModal" tabindex="-1" role="dialog"
+             aria-labelledby="AchievementsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        Achievements
+                    </div>
+                    <div class="modal-body">
+                        <table id="achievementList" class="table table-hover">
+                            <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.achievementList}">
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
         <!-- Start Sequence Modal-->
         <div class="modal" id="startSequenceModal" tabindex="-1" role="dialog"
              aria-labelledby="startSequenceModalLabel" aria-hidden="true">
@@ -1562,18 +1593,19 @@
             <div class="modal-dialog" id="shardModalDialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" >Shards</h4>
+                        <h4 class="modal-title">Shards</h4>
                     </div>
                     <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
                         <h3>
                             <span data-bind="text: GameConstants.PokemonType[$index()] + ' ' + player._shardsCollected[$index()]()"></span>
-                            <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }' />
+                            <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
                         </h3>
                         <table class='table' data-bind='foreach: $data'>
                             <tr>
                                 <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                                 <td width='50%'>
-                                    <div class="progress" data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
+                                    <div class="progress"
+                                         data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
                                         <div class='progress-bar' role="progressbar"
                                              data-bind="style: { width: ($data * 10) + '%',
                                                                'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
@@ -1587,7 +1619,7 @@
                                 <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] + ($data * GameConstants.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                                 <td>
                                     <button class='btn btn-primary'
-                                        data-bind='click: function(){player.buyShardUpgrade($parentContext.$index(), $index())},
+                                            data-bind='click: function(){player.buyShardUpgrade($parentContext.$index(), $index())},
                                         css: {disabled: !player.canBuyShardUpgrade($parentContext.$index(), $index())},
                                         text: "Buy (" + player.getShardUpgradeCost($parentContext.$index(), $index()) + ")"'>
                                     </button>
