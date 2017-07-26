@@ -28,8 +28,6 @@ class Player {
     private _eggList: Array<KnockoutObservable<Egg|void>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private _itemList: { [name: string]: number };
-    private _itemMultipliers: { [name: string]: number };
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
 
@@ -611,7 +609,7 @@ class Player {
             "_itemMultipliers",
             "_keyItems",
             "_shardUpgrades", "_shardsCollected",
-            "achievementsCompleted"];
+            "achievementsCompleted",
             "_eggList",
             "_eggSlots",
             "_shardUpgrades",
