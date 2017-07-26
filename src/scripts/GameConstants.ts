@@ -289,21 +289,33 @@ namespace GameConstants {
         "Squirtle" = 2,
     }
 
+    export const ItemPrice = {
+        "Pokeball": 100,
+        "Greatball": 500,
+        "Ultraball": 2000,
+        "Masterball": 10000,
+        "xAttack": 600,
+        "xClick": 400,
+        "xExp": 8000,
+        "Token_collector": 1000,
+        "Item_magnet": 1500,
+    };
+
     export enum StoneType {
-        Fire,
-        Water,
-        Thunder,
-        Leaf,
-        Moon,
-        Sun,
+        Fire_stone,
+        Water_stone,
+        Thunder_stone,
+        Leaf_stone,
+        Moon_stone,
+        Sun_stone,
     }
 
     export enum BattleItemType {
         xAttack,
         xClick,
         xExp,
-        XToken,
-        xItem
+        Token_collector,
+        Item_magnet
     }
 
     export enum BerryType {
