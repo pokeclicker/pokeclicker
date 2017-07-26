@@ -39,6 +39,9 @@ namespace GameConstants {
     export const BREEDING_AMOUNT = 1;
     export const BREEDING_ATTACK_BONUS = 25;
 
+    // Farm
+    export const AMOUNT_OF_BERRIES = 8;
+
     export enum OakItem {
         "Magic Ball" = 0,
         "Amulet Coin",

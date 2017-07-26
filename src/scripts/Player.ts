@@ -26,8 +26,8 @@ class Player {
     private _eggList: Array<KnockoutObservable<Egg|void>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private _itemList: { [name: string]: number };
-    private _itemMultipliers: { [name: string]: number };
+    private _itemList: {[name: string]: number};
+    private _itemMultipliers: {[name: string]: number};
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
 
@@ -35,6 +35,11 @@ class Player {
     public clickAttackObservable: KnockoutComputed<number>;
     public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
+
+    public plotList: KnockoutObservable<Plot>[];
+    public farmPoints: KnockoutObservable<number>;
+    public seedList: KnockoutObservable<number>[];
+    public berryList: KnockoutObservable<number>[];
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -121,13 +126,23 @@ class Player {
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
         savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
         this._eggList = savedPlayer._eggList.map((egg) => {
-            return ko.observable( egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null )
+            return ko.observable(egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null)
         });
         this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
         this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
         this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
+
+        this.farmPoints = ko.observable(savedPlayer.farmPoints || 0);
+        this.seedList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES + 1)).map(function (val, index) {
+            return ko.observable(savedPlayer.seedList ? (savedPlayer.seedList[index] || 0) : 0)
+        });
+        this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES + 1)).map(function (val, index) {
+            return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
+        });
+        this.plotList = savedPlayer.plotList || Save.initializePlots();
+
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -193,7 +208,7 @@ class Player {
         // TODO Calculate pokemon attack by checking upgrades and multipliers.
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
-            if (!pokemon.breeding()){
+            if (!pokemon.breeding()) {
                 if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
                     attack += pokemon.attack();
                 } else {
@@ -340,6 +355,10 @@ class Player {
         }
     }
 
+    public gainFarmPoints(points: number) {
+        this.farmPoints(Math.floor(this.farmPoints() + points));
+    }
+
     public gainExp(exp: number, level: number, trainer: boolean) {
         OakItemRunner.use("Exp Share");
         // TODO add exp multipliers
@@ -354,7 +373,7 @@ class Player {
         }
     }
 
-    public gainShards(pokemon: BattlePokemon)  {
+    public gainShards(pokemon: BattlePokemon) {
         let typeNum = GameConstants.PokemonType[pokemon.type1];
         player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
         if (pokemon.type2 != GameConstants.PokemonType.None) {
@@ -519,11 +538,11 @@ class Player {
         this._oakItemExp = value;
     }
 
-    get itemList(): { [p: string]: number } {
+    get itemList(): {[p: string]: number} {
         return this._itemList;
     }
 
-    set itemList(value: { [p: string]: number }) {
+    set itemList(value: {[p: string]: number}) {
         this._itemList = value;
     }
 
@@ -542,11 +561,11 @@ class Player {
         }
     }
 
-    get itemMultipliers(): { [p: string]: number } {
+    get itemMultipliers(): {[p: string]: number} {
         return this._itemMultipliers;
     }
 
-    set itemMultipliers(value: { [p: string]: number }) {
+    set itemMultipliers(value: {[p: string]: number}) {
         this._itemMultipliers = value;
     }
 

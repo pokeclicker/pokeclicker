@@ -38,7 +38,7 @@ class Save {
         return filtered
     }
 
-    public static initializeMultipliers(): { [name: string]: number } {
+    public static initializeMultipliers(): {[name: string]: number} {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = 1;
@@ -46,12 +46,21 @@ class Save {
         return res;
     }
 
-    public static initializeItemlist(): { [name: string]: number } {
+    public static initializeItemlist(): {[name: string]: number} {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = 0;
         }
         return res;
+    }
+
+    public static initializePlots() {
+        let plotList = [];
+        plotList.push(new Plot(true, 0, 0, false, null, 0));
+        for (let i = 1; i < 25; i++) {
+            plotList.push(new Plot(false, 0, 0, false, null, 0));
+        }
+        return plotList;
     }
 
     public static initializeShards(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {
