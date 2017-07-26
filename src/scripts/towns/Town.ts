@@ -61,7 +61,7 @@ TownList["Vermillion City"] = new Town("Vermillion City", [6], VermillionCitySho
 // let CeladonCityShop = new Shop(["eevee", "porygon", "jynx", "mrMime", "lickitung"]);
 TownList["Celadon City"] = new Town("Celadon City", [8]);
 
-let SaffronCityShop = new Shop(["Moon_stone", "xClick", "Leaf_stone", "Fighting_egg"]);
+let SaffronCityShop = new Shop(["Moon_stone", "xClick", "Leaf_stone", "Fight_egg"]);
 TownList["Saffron City"] = new Town("Saffron City", [5], SaffronCityShop);
 
 let FuchsiaCityShop = new Shop(["Trade_stone", "xExp", "Dragon_egg"]);
@@ -70,12 +70,12 @@ TownList["Fuchsia City"] = new Town("Fuchsia City", [18], FuchsiaCityShop);
 let CinnabarIslandShop = new Shop(["Fire_stone", "Fire_egg"]);
 TownList["Cinnabar Island"] = new Town("Cinnabar Island", [20], CinnabarIslandShop, dungeonList["Pokemon Mansion"]);
 
-let ViridianCityShop = new Shop(["xAttack", "xClick", "randomEgg"]);
+let ViridianCityShop = new Shop(["xAttack", "xClick", "Mystery_egg"]);
 TownList["Viridian City"] = new Town("Viridian City", [1], ViridianCityShop);
 
 TownList["Pallet Town"] = new Town("Pallet Town", []);
 
-let LavenderTownShop = new Shop(["Item_magnet", "Lucky Incense", "grassEgg"]);
+let LavenderTownShop = new Shop(["Item_magnet", "Lucky_incense", "Grass_egg"]);
 TownList["Lavender Town"] = new Town("Lavender Town", [10], LavenderTownShop, dungeonList["Pokemon Tower"]);
 
 //Dungeons
