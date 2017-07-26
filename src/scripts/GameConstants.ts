@@ -35,6 +35,10 @@ namespace GameConstants {
     export const OAKITEM_SECOND_UNLOCK = 50;
     export const OAKITEM_THIRD_UNLOCK = 100;
 
+    // Breeding
+    export const BREEDING_AMOUNT = 1;
+    export const BREEDING_ATTACK_BONUS = 25;
+
     export enum OakItem {
         "Magic Ball" = 0,
         "Amulet Coin",
@@ -339,6 +343,17 @@ namespace GameConstants {
         SmallRestore,
         MediumRestore,
         LargeRestore
+    }
+
+    export enum EggType {
+        Fire,
+        Water,
+        Grass,
+        Fight,
+        Electric,
+        Dragon,
+        Pokemon,
+        Mystery,
     }
 }
 
