@@ -5,7 +5,7 @@ class Notifier {
             // options
             icon: 'glyphicon glyphicon-warning-sign',
             title: '',
-            message: message,
+            message: GameConstants.humanifyString(message),
             url: '',
             target: ''
         },{
