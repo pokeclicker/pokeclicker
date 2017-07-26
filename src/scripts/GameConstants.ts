@@ -137,6 +137,10 @@ namespace GameConstants {
         return GameConstants.PokeballCatchBonus[ball];
     }
 
+    export function humanifyString(str:string){
+        return str.split('_').join(' ');
+    }
+
     export enum Region {
         kanto = 0,
         johto = 1,
