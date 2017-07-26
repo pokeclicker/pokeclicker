@@ -4,7 +4,7 @@ class BattleItem extends Item {
     type: GameConstants.BattleItemType;
 
     constructor(type: GameConstants.BattleItemType) {
-        let basePrice = 0;
+        let basePrice = 1000;
 
         switch (type) {
             case GameConstants.BattleItemType.xAttack:
@@ -21,6 +21,9 @@ class BattleItem extends Item {
                 break;
             case GameConstants.BattleItemType.Item_magnet:
                 basePrice = GameConstants.ItemPrice.Item_magnet;
+                break;
+            case GameConstants.BattleItemType.Lucky_incense:
+                basePrice = GameConstants.ItemPrice.Lucky_incense;
                 break;
         }
 
@@ -41,3 +44,4 @@ ItemList['xClick'] = new BattleItem(GameConstants.BattleItemType.xClick);
 ItemList['xExp'] = new BattleItem(GameConstants.BattleItemType.xExp);
 ItemList['Token_collector'] = new BattleItem(GameConstants.BattleItemType.Token_collector);
 ItemList['Item_magnet'] = new BattleItem(GameConstants.BattleItemType.Item_magnet);
+ItemList['Lucky_incense'] = new BattleItem(GameConstants.BattleItemType.Lucky_incense);

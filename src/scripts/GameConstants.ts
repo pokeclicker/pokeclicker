@@ -300,9 +300,10 @@ namespace GameConstants {
         "Masterball": 10000,
         "xAttack": 600,
         "xClick": 400,
-        "xExp": 8000,
+        "xExp": 800,
         "Token_collector": 1000,
         "Item_magnet": 1500,
+        "Lucky_incense": 2000,
     };
 
     export enum StoneType {
@@ -319,7 +320,8 @@ namespace GameConstants {
         xClick,
         xExp,
         Token_collector,
-        Item_magnet
+        Item_magnet,
+        Lucky_incense
     }
 
     export enum BerryType {
@@ -351,6 +353,18 @@ namespace GameConstants {
         MediumRestore,
         LargeRestore
     }
+
+    export enum EggItemType {
+        Fire_egg,
+        Water_egg,
+        Grass_egg,
+        Fight_egg,
+        Electric_egg,
+        Dragon_egg,
+        Pokemon_egg,
+        Mystery_egg,
+    }
+
 
     export enum EggType {
         Fire,
