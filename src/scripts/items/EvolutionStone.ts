@@ -34,6 +34,9 @@ class EvolutionStone extends Item {
             case GameConstants.StoneType.Sun_stone: {
                 break;
             }
+            case GameConstants.StoneType.Trade_stone: {
+                break;
+            }
         }
     }
 
@@ -45,4 +48,5 @@ ItemList['Thunder_stone'] = new EvolutionStone(GameConstants.StoneType.Thunder_s
 ItemList['Leaf_stone'] = new EvolutionStone(GameConstants.StoneType.Leaf_stone);
 ItemList['Moon_stone'] = new EvolutionStone(GameConstants.StoneType.Moon_stone);
 ItemList['Sun_stone'] = new EvolutionStone(GameConstants.StoneType.Sun_stone);
+ItemList['Trade_stone'] = new EvolutionStone(GameConstants.StoneType.Trade_stone);
 

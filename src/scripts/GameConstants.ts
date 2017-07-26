@@ -313,6 +313,7 @@ namespace GameConstants {
         Leaf_stone,
         Moon_stone,
         Sun_stone,
+        Trade_stone
     }
 
     export enum BattleItemType {
