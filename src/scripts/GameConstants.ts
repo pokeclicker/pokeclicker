@@ -21,6 +21,7 @@ namespace GameConstants {
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
     export const SHINY_CHANCE_BREEDING = 4096;
+    export const SHINY_CHANCE_SHOP = 2048;
     export const SHINY_CHANCE_SAFARI = 2048;
 
     export const ITEM_PRICE_MULTIPLIER = 1.02;
@@ -137,7 +138,7 @@ namespace GameConstants {
         return GameConstants.PokeballCatchBonus[ball];
     }
 
-    export function humanifyString(str:string){
+    export function humanifyString(str: string) {
         return str.split('_').join(' ');
     }
 
@@ -304,6 +305,11 @@ namespace GameConstants {
         "Token_collector": 1000,
         "Item_magnet": 1500,
         "Lucky_incense": 2000,
+        "Eevee": 5000,
+        "Porygon": 2000,
+        "Jynx": 2500,
+        "Mr_Mime": 1500,
+        "Lickitung": 1000,
     };
 
     export enum StoneType {
@@ -325,57 +331,65 @@ namespace GameConstants {
         Lucky_incense
     }
 
-    export enum BerryType {
-        Cheri,
-        Chesto,
-        Pecha,
-        Rawst,
-        Aspear,
-        Leppa,
-        Oran
-    }
+    export enum PokemonItemType {
+        "Eevee",
+        "Porygon",
+        "Jynx",
+        "Mr_Mime",
+        "Lickitung"
+}
 
-    export enum PokeBlockColor {
-        Black,
-        Red,
-        Gold,
-        Purple,
-        Gray,
-        White
-    }
+export enum BerryType {
+    Cheri,
+    Chesto,
+    Pecha,
+    Rawst,
+    Aspear,
+    Leppa,
+    Oran
+}
 
-    export enum VitaminType {
-        Protein,
-        RareCandy
-    }
+export enum PokeBlockColor {
+    Black,
+    Red,
+    Gold,
+    Purple,
+    Gray,
+    White
+}
 
-    export enum EnergyRestoreSize {
-        SmallRestore,
-        MediumRestore,
-        LargeRestore
-    }
+export enum VitaminType {
+    Protein,
+    RareCandy
+}
 
-    export enum EggItemType {
-        Fire_egg,
-        Water_egg,
-        Grass_egg,
-        Fight_egg,
-        Electric_egg,
-        Dragon_egg,
-        Pokemon_egg,
-        Mystery_egg,
-    }
+export enum EnergyRestoreSize {
+    SmallRestore,
+    MediumRestore,
+    LargeRestore
+}
+
+export enum EggItemType {
+    Fire_egg,
+    Water_egg,
+    Grass_egg,
+    Fight_egg,
+    Electric_egg,
+    Dragon_egg,
+    Pokemon_egg,
+    Mystery_egg,
+}
 
 
-    export enum EggType {
-        Fire,
-        Water,
-        Grass,
-        Fight,
-        Electric,
-        Dragon,
-        Pokemon,
-        Mystery,
-    }
+export enum EggType {
+    Fire,
+    Water,
+    Grass,
+    Fight,
+    Electric,
+    Dragon,
+    Pokemon,
+    Mystery,
+}
 }
 
