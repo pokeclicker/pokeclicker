@@ -177,7 +177,7 @@ class Mine {
 
     private static completed() {
         //$.notify("You dig deeper...", "");
-        player._mineLayersCleared++;
+        player._statistics.mineLayersCleared(player._statistics.mineLayersCleared()+1);
         ko.cleanNode(document.getElementById("mineModal"))
         Mine.loadMine();
         ko.applyBindings(Mine, document.getElementById("mineModal"))

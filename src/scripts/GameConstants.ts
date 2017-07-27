@@ -35,6 +35,8 @@ namespace GameConstants {
     export const HAMMER_ENERGY = 3;
     export const CHISEL_ENERGY = 1;
 
+    export const MAX_MINE_ENERGY = 150;
+
     export enum MineTool {
         "Chisel" = 0,
         "Hammer" = 1,

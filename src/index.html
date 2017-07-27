@@ -1750,7 +1750,29 @@
                     </div>
                 </div>
                 <div id="upgrades" class="tab-pane fade">
-                    <div class="modal-body" id="upgradesBody" style="width: 80%;margin: auto;"></div>
+                    <div class="modal-body" id="upgradesBody" style="width: 80%;margin: auto;">
+                        <table class='table'>
+                            <tbody>
+                                <tr>
+                                    <td class='vertical-middle' data-bind='text: "Max Energy: " + player._maxMineEnergy()'></td>
+                                    <td class='vertical-middle'>(+10)</td>
+                                    <td class='vertical-middle' data-bind='text: player._maxMineEnergy() < GameConstants.MAX_MINE_ENERGY ? Underground.getMaxEnergyUpgradeCost() + " diamonds" : ""'></td>
+                                    <td class='vertical-middle'>
+                                        <button class='btn btn-success'
+                                                data-bind='css: { disabled: player._maxMineEnergy() >= GameConstants.MAX_MINE_ENERGY },
+                                                           text: player._maxMineEnergy() < GameConstants.MAX_MINE_ENERGY ? "Upgrade" : "Max"'>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class='vertical-middle'></td>
+                                    <td class='vertical-middle'></td>
+                                    <td class='vertical-middle'></td>
+                                    <td class='vertical-middle'></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div id="help" class="tab-pane fade">
                     <div class="modal-body" id="helpBody" style="width: 80%;margin: auto;">
