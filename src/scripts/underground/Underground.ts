@@ -95,7 +95,7 @@ class Underground {
         if(OakItemRunner.isActive("Cell Battery")){
             multiplier += (OakItemRunner.calculateBonus("Cell Battery") / 100);
         }
-        player._mineEnergy( Math.min(player._maxMineEnergy(), player._mineEnergy() + (multiplier*player._mineEnergyGain)) );
+        player._mineEnergy( Math.min(player._maxMineEnergy(), player._mineEnergy() + (multiplier*player.mineEnergyGain)) );
         if(player._mineEnergy() === player._maxMineEnergy()){
             //$.notify("Your mining energy has reached maximum capacity!", "success");
             //notifyMe("You mining energy has reached maximum capacity!");

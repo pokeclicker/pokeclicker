@@ -31,10 +31,12 @@ class Player {
 
     private _mineEnergy: KnockoutObservable<number>;
     private _maxMineEnergy: KnockoutObservable<number>;
-    private _mineEnergyGain: number;
+    private _mineEnergyGain: KnockoutObservable<number>;
     private _mineInventory: KnockoutObservableArray<any>;
     private _diamonds: KnockoutObservable<number>;
-    private _maxDailyDeals: number;
+    private _maxDailyDeals: KnockoutObservable<number>;
+    private _maxUndergroundItems: KnockoutObservable<number>;
+    private _mineEnergyRegenTime: KnockoutObservable<number>;
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
@@ -129,13 +131,15 @@ class Player {
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
         this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50);
         this._maxMineEnergy = ko.observable(savedPlayer._maxMineEnergy || 50);
-        this._mineEnergyGain = savedPlayer._mineEnergyGain || 3;
+        this._mineEnergyGain = ko.observable(savedPlayer._mineEnergyGain || 3);
         this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
         for (let item of this._mineInventory()) {
             item.amount = ko.observable(item.amount);
         }
         this._diamonds = ko.observable(savedPlayer._diamonds || 0);
-        this._maxDailyDeals = savedPlayer._maxDailyDeals || 3;
+        this._maxDailyDeals = ko.observable(savedPlayer._maxDailyDeals || 3);
+        this._maxUndergroundItems = ko.observable(savedPlayer._maxUndergroundItems || 3);
+        this._mineEnergyRegenTime = ko.observable(savedPlayer._mineEnergyRegenTime || 60);
         savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
         this._eggList = savedPlayer._eggList.map((egg) => {
             return ko.observable( egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null )
@@ -602,6 +606,46 @@ class Player {
         this._diamonds(n);
     }
 
+    get maxMineEnergy() {
+        return this._maxMineEnergy();
+    }
+
+    set maxMineEnergy(n: number) {
+        this._maxMineEnergy(n);
+    }
+
+    get maxUndergroundItems() {
+        return this._maxUndergroundItems();
+    }
+
+    set maxUndergroundItems(n: number) {
+        this._maxUndergroundItems(n);
+    }
+
+    get mineEnergyGain() {
+        return this._mineEnergyGain();
+    }
+
+    set mineEnergyGain(n: number) {
+        this._mineEnergyGain(n);
+    }
+
+    get mineEnergyRegenTime() {
+        return this._mineEnergyRegenTime();
+    }
+
+    set mineEnergyRegenTime(n: number) {
+        this._mineEnergyRegenTime(n);
+    }
+
+    get maxDailyDeals() {
+        return this._maxDailyDeals();
+    }
+
+    set maxDailyDeals(n: number) {
+        this._maxDailyDeals(n);
+    }
+
     get eggList(): Array<KnockoutObservable<Egg|void>> {
         return this._eggList;
     }
@@ -662,6 +706,8 @@ class Player {
             "_mineInventory",
             "_maxDailyDeals",
             "_diamonds",
+            "_maxUndergroundItems",
+            "_mineEnergyRegenTime",
             "_eggList",
             "_eggSlots",
             "_shardUpgrades",

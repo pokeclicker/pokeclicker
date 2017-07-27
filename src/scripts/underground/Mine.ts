@@ -26,7 +26,7 @@ class Mine {
         Mine.grid = tmpGrid;
         Mine.rewardGrid = tmpRewardGrid;
         
-        for( let i = 0; i<3; i++){ //TODO: add maxUndergroundItems to player and use it here
+        for( let i = 0; i<player._maxUndergroundItems(); i++){
             let x = Mine.getRandomCoord(GameConstants.Mine.sizeX);
             let y = Mine.getRandomCoord(GameConstants.Mine.sizeY);
             let item = UndergroundItem.getRandomItem();

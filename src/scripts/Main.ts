@@ -113,7 +113,7 @@ class Game {
             Underground.energyTick( Math.max(0, Underground.energyTick() - 1) );
             if (Underground.energyTick() == 0) {
                 Underground.gainEnergy();
-                Underground.energyTick(60);
+                Underground.energyTick(player._mineEnergyRegenTime());
             }
             Underground.counter = 0;
         }
@@ -127,6 +127,7 @@ class Game {
         OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
         Save.loadMine();
-        DailyDeal.generateDeals(player._maxDailyDeals, new Date());
+        Underground.energyTick(player._mineEnergyRegenTime())
+        DailyDeal.generateDeals(player.maxDailyDeals, new Date());
     }
 }
