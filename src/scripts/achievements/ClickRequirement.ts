@@ -6,6 +6,6 @@ class ClickRequirement extends Requirement{
     }
 
     public getProgress(){
-        return Math.min(statistics.clicks, this.value);
+        return Math.min(Statistics.clicks, this.value);
     }
 }
