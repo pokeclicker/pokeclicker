@@ -60,12 +60,12 @@ class Underground {
     public static gainMineItem(id: number, num: number = 1) {
         let index = player.mineInventoryIndex(id);
         let item = Underground.getMineItemById(id);
-        /*
-        if(mineItemIsStone(item.name)){
-            gainItemByName(item.name);
+        
+        if(item.isStone()){
+            //gainItemByName(item.name);
             return;
         }
-        */
+        
         if( index == -1){
 
             var tempItem = {
