@@ -140,10 +140,6 @@ class Underground {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
     }
-
-    public static getMaxEnergyUpgradeCost() {
-        return 10;
-    }
 }
 
 $(document).ready(function(){

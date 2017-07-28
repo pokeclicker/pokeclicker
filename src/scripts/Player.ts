@@ -458,7 +458,6 @@ class Player {
     }
 
     public getUndergroundItemAmount(id: number) {
-        console.log(id)
         let index = this.mineInventoryIndex(id);
         if (index > -1){
             return player._mineInventory.peek()[index].amount();
