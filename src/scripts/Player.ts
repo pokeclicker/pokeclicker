@@ -130,16 +130,16 @@ class Player {
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
         this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50);
-        this._maxMineEnergy = ko.observable(savedPlayer._maxMineEnergy || 50);
-        this._mineEnergyGain = ko.observable(savedPlayer._mineEnergyGain || 3);
+        this._maxMineEnergy = ko.observable(savedPlayer._maxMineEnergy || GameConstants.MineUpgradesInitialValues.maxMineEnergy);
+        this._mineEnergyGain = ko.observable(savedPlayer._mineEnergyGain || GameConstants.MineUpgradesInitialValues.mineEnergyGain);
         this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
         for (let item of this._mineInventory()) {
             item.amount = ko.observable(item.amount);
         }
         this._diamonds = ko.observable(savedPlayer._diamonds || 0);
-        this._maxDailyDeals = ko.observable(savedPlayer._maxDailyDeals || 3);
-        this._maxUndergroundItems = ko.observable(savedPlayer._maxUndergroundItems || 3);
-        this._mineEnergyRegenTime = ko.observable(savedPlayer._mineEnergyRegenTime || 60);
+        this._maxDailyDeals = ko.observable(savedPlayer._maxDailyDeals || GameConstants.MineUpgradesInitialValues.maxDailyDeals);
+        this._maxUndergroundItems = ko.observable(savedPlayer._maxUndergroundItems || GameConstants.MineUpgradesInitialValues.maxUndergroundItems);
+        this._mineEnergyRegenTime = ko.observable(savedPlayer._mineEnergyRegenTime || GameConstants.MineUpgradesInitialValues.mineEnergyRegenTime);
         savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
         this._eggList = savedPlayer._eggList.map((egg) => {
             return ko.observable( egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null )
