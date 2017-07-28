@@ -97,8 +97,7 @@ class Underground {
         }
         player._mineEnergy( Math.min(player._maxMineEnergy(), player._mineEnergy() + (multiplier*player.mineEnergyGain)) );
         if(player._mineEnergy() === player._maxMineEnergy()){
-            //$.notify("Your mining energy has reached maximum capacity!", "success");
-            //notifyMe("You mining energy has reached maximum capacity!");
+            Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
         }
     }
 

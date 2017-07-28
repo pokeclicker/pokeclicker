@@ -146,7 +146,7 @@ class Mine {
                 Mine.itemsFound(Mine.itemsFound()+1);
                 Mine.rewardNumbers.splice(i,1);
                 i--;
-                //$.notify("You dug an item", "success");
+                Notifier.notify("You dug an item", GameConstants.NotificationOption.success);
                 //player.curMine.totalItemsFound++;
                 Mine.checkCompleted();
             }
@@ -176,8 +176,7 @@ class Mine {
     }
 
     private static completed() {
-        //$.notify("You dig deeper...", "");
-        player._statistics.mineLayersCleared(player._statistics.mineLayersCleared()+1);
+        Notifier.notify("You dig deeper...", GameConstants.NotificationOption.info);
         ko.cleanNode(document.getElementById("mineModal"))
         Mine.loadMine();
         ko.applyBindings(Mine, document.getElementById("mineModal"))
