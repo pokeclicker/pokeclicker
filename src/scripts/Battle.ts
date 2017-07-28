@@ -38,7 +38,7 @@ class Battle {
             return;
         }
         OakItemRunner.use("Poison Barb");
-        Statistics.clicks++
+        incrementObservable(Statistics.Clicks)
         this.enemyPokemon().damage(player.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
@@ -49,7 +49,7 @@ class Battle {
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon() {
-        statistics.pokemonDefeated++
+        incrementObservable(Statistics.pokemonDefeated);
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.gainShards(this.enemyPokemon());
@@ -92,7 +92,7 @@ class Battle {
         let chance: number = Math.floor(Math.random() * 100) - pokeballBonus - oakBonus;
         if (chance <= this.enemyPokemon().catchRate) {
             this.catchPokemon();
-            statistics.pokemonCaptured++
+            incrementObservable(Statistics.pokemonCaptured);
 
         }
         this.catching(false);
