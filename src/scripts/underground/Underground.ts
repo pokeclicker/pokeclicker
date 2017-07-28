@@ -29,7 +29,7 @@ class Underground {
     private static mineSquare(amount: number, i: number, j: number): string {
         if(Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() === 0){
             Mine.rewardGrid[i][j].revealed = 1;
-            return "<img src='assets/images/underground/"+ Mine.rewardGrid[i][j].value + "/" + Mine.rewardGrid[i][j].value + "-" + Mine.rewardGrid[i][j].y + "-" + Mine.rewardGrid[i][j].x + ".png' class='col-sm-1 mineReward mineSquare "+ GameConstants.MineTool[Mine.toolSelected()] + "Selected' data-i='" + i + "' data-j='" + j + "'>";
+            return "<img src='assets/images/underground/"+ Mine.rewardGrid[i][j].value + "/" + Mine.rewardGrid[i][j].value + "-" + Mine.rewardGrid[i][j].y + "-" + Mine.rewardGrid[i][j].x + ".png' data-bind='css: Underground.rewardCssClass' data-i='" + i + "' data-j='" + j + "'>";
         } else {
             return "<div data-bind='css: Underground.calculateCssClass(" + i +"," + j + ")()' data-i='" + i + "' data-j='" + j + "'></div>";
         }
