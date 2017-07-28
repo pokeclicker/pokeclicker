@@ -143,10 +143,10 @@ class Mine {
         for(let i = 0; i<Mine.rewardNumbers.length; i++){
             if(Mine.checkItemRevealed(Mine.rewardNumbers[i])){
                 Underground.gainMineItem(Mine.rewardNumbers[i]);
+                Notifier.notify("You found a " + Underground.getMineItemById(Mine.rewardNumbers[i]).name, GameConstants.NotificationOption.success);
                 Mine.itemsFound(Mine.itemsFound()+1);
                 Mine.rewardNumbers.splice(i,1);
                 i--;
-                Notifier.notify("You dug an item", GameConstants.NotificationOption.success);
                 //player.curMine.totalItemsFound++;
                 Mine.checkCompleted();
             }

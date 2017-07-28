@@ -66,7 +66,7 @@ class DailyDeal {
             let amt = player._mineInventory()[item1Index].amount()
             player._mineInventory()[item1Index].amount(amt - deal.amount1);
             Underground.gainMineItem(deal.item2.id, deal.amount2)
-            player._statistics.dailyDealsUsed(player._statistics.dailyDealsUsed()+1);
+            //player._statistics.dailyDealsUsed(player._statistics.dailyDealsUsed()+1);
         }
     }
 }

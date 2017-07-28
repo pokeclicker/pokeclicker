@@ -82,7 +82,7 @@ class Underground {
         }
     }
 
-    private static getMineItemById(id: number): UndergroundItem {
+    public static getMineItemById(id: number): UndergroundItem {
         for (let item of UndergroundItem.list) {
             if (item.id == id) {
                 return item;
@@ -91,13 +91,15 @@ class Underground {
     }
 
     public static gainEnergy() {
-        let multiplier = 1;
-        if(OakItemRunner.isActive("Cell Battery")){
-            multiplier += (OakItemRunner.calculateBonus("Cell Battery") / 100);
-        }
-        player._mineEnergy( Math.min(player._maxMineEnergy(), player._mineEnergy() + (multiplier*player.mineEnergyGain)) );
-        if(player._mineEnergy() === player._maxMineEnergy()){
-            Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
+        if (player._mineEnergy() < player._maxMineEnergy()) {
+            let multiplier = 1;
+            if(OakItemRunner.isActive("Cell Battery")){
+                multiplier += (OakItemRunner.calculateBonus("Cell Battery") / 100);
+            }
+            player._mineEnergy( Math.min(player._maxMineEnergy(), player._mineEnergy() + (multiplier*player.mineEnergyGain)) );
+            if(player._mineEnergy() === player._maxMineEnergy()){
+                Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
+            }
         }
     }
 
