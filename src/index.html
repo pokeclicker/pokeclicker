@@ -17,7 +17,7 @@
     </script>
 
     <script type="text/html" id="treasureListTemplate">
-        <tr>
+        <tr data-bind='if: amount() > 0'>
             <td class='vertical-middle'>
                 <img class='mineInventoryItem' data-bind='attr:{ src: "assets/images/underground/"+id+".png" }'>
                 <span data-bind='text: "("+$data.amount()+")"'></span>
