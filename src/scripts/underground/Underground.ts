@@ -124,6 +124,7 @@ class Underground {
                 break
             case "Mine Egg":
                 player.gainEgg(BreedingHelper.createFossilEgg(item.name));
+                break
             default:
                 let type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1) //Capitalizes string
                 let typeNum = GameConstants.PokemonType[type];
