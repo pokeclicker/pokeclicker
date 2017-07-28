@@ -83,6 +83,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Masterball 5", "Get 10,000 Masterballs", new PokeballRequirement(10000, GameConstants.Pokeball.Masterball), 0.40);
         AchievementHandler.addAchievement("Masterball 6", "Get 100,000 Masterballs", new PokeballRequirement(100000, GameConstants.Pokeball.Masterball), 0.50);
 
+        AchievementHandler.addAchievement("Click 1", "Click 10 Times", new ClickRequirement(10, 1), 0.02);
+        AchievementHandler.addAchievement("Clcik 2", "Click 100 Times", new ClickRequirement(100, 1), 0.05);
+        AchievementHandler.addAchievement("Click 3", "Click 1000 Times", new ClickRequirement(1000, 1), 0.10);
+        AchievementHandler.addAchievement("Click 4", "Click 10000 Times", new ClickRequirement(10000, 1), 0.25);
+        
         AchievementHandler.addAchievement("Route 1-1", "Get 100 kills on route 1", new RouteKillRequirement(100, 1), 0.02);
         AchievementHandler.addAchievement("Route 1-2", "Get 1000 kills on route 1", new RouteKillRequirement(1000, 1), 0.05);
         AchievementHandler.addAchievement("Route 1-3", "Get 10000 kills on route 1", new RouteKillRequirement(1000, 1), 0.10);
