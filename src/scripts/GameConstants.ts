@@ -78,6 +78,12 @@ namespace GameConstants {
     export const DUNGEON_BOSS_SHARDS = 20;
     export const GYM_SHARDS = 5;
 
+    //Safari
+    export const Safari = {
+        "SizeY": 12,
+        "SizeX": 25,
+    }
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks
