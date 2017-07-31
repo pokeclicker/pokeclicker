@@ -34,6 +34,12 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Money 5", "Obtain 1,000,000 Pokédollars", new MoneyRequirement(1000000), 0.25);
         AchievementHandler.addAchievement("Money 6", "Obtain 10,000,000 Pokédollars", new MoneyRequirement(10000000), 0.5);
         
+        AchievementHandler.addAchievement("Money 1", "Obtain 100 Dungeon Tokens", new MoneyRequirement(100), 0.05);
+        AchievementHandler.addAchievement("Money 2", "Obtain 1000 Dungeon Tokens", new MoneyRequirement(1000), 0.10);
+        AchievementHandler.addAchievement("Money 3", "Obtain 10,000 Dungeon Tokens", new MoneyRequirement(10000), 0.15);
+        AchievementHandler.addAchievement("Money 4", "Obtain 100,000 Dungeon Tokens", new MoneyRequirement(100000), 0.20);
+        AchievementHandler.addAchievement("Money 5", "Obtain 1,000,000 Dungeon Tokens", new MoneyRequirement(1000000), 0.25);
+        
         AchievementHandler.addAchievement("Capture 1", "Capture 100 Pokemon", new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement("Capture 2", "Capture 1000 Pokemon", new CapturedRequirement(1000), 0.10);
         AchievementHandler.addAchievement("Capture 3", "Capture 10,000 Pokemon", new CapturedRequirement(10000), 0.15);
