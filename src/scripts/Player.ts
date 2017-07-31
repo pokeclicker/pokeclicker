@@ -23,11 +23,11 @@ class Player {
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
+    private _itemList: {[name: string]: number};
+    private _itemMultipliers: {[name: string]: number};
     private _eggList: Array<KnockoutObservable<Egg|void>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private _itemList: { [name: string]: number };
-    private _itemMultipliers: { [name: string]: number };
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
 
@@ -35,6 +35,7 @@ class Player {
     public clickAttackObservable: KnockoutComputed<number>;
     public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
+    public achievementsCompleted: {[name: string]: boolean};
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -125,6 +126,9 @@ class Player {
         });
         this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
         this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
+
+        this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
+
         this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
@@ -354,7 +358,7 @@ class Player {
         }
     }
 
-    public gainShards(pokemon: BattlePokemon)  {
+    public gainShards(pokemon: BattlePokemon) {
         let typeNum = GameConstants.PokemonType[pokemon.type1];
         player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
         if (pokemon.type2 != GameConstants.PokemonType.None) {
@@ -519,11 +523,11 @@ class Player {
         this._oakItemExp = value;
     }
 
-    get itemList(): { [p: string]: number } {
+    get itemList(): {[p: string]: number} {
         return this._itemList;
     }
 
-    set itemList(value: { [p: string]: number }) {
+    set itemList(value: {[p: string]: number}) {
         this._itemList = value;
     }
 
@@ -542,11 +546,11 @@ class Player {
         }
     }
 
-    get itemMultipliers(): { [p: string]: number } {
+    get itemMultipliers(): {[p: string]: number} {
         return this._itemMultipliers;
     }
 
-    set itemMultipliers(value: { [p: string]: number }) {
+    set itemMultipliers(value: {[p: string]: number}) {
         this._itemMultipliers = value;
     }
 
@@ -604,6 +608,8 @@ class Player {
             "_itemList",
             "_itemMultipliers",
             "_keyItems",
+            "_shardUpgrades", "_shardsCollected",
+            "achievementsCompleted",
             "_eggList",
             "_eggSlots",
             "_shardUpgrades",
