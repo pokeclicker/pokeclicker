@@ -40,6 +40,12 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Token 4", "Obtain 100,000 Dungeon Tokens", new TokenRequirement(100000), 0.20);
         AchievementHandler.addAchievement("Token 5", "Obtain 1,000,000 Dungeon Tokens", new TokenRequirement(1000000), 0.25);
         
+        AchievementHandler.addAchievement("Attack 1", "Have 100 Attack", new AttackRequirement(100), 0.05);
+        AchievementHandler.addAchievement("Attack 2", "Have 1000 Attack", new AttackRequirement(1000), 0.10);
+        AchievementHandler.addAchievement("Attack 3", "Have 5000 Attack", new AttackRequirement(5000), 0.15);
+        AchievementHandler.addAchievement("Attack 4", "Have 10,000 Attack", new AttackRequirement(10000), 0.20);
+        AchievementHandler.addAchievement("Attack 5", "Have 25,000 Attack", new AttackRequirement(25000), 0.25);
+        
         AchievementHandler.addAchievement("Diamond 1", "Obtain 100 Diamonds", new DiamondRequirement(100), 0.05);
         AchievementHandler.addAchievement("Diamond 2", "Obtain 1000 Diamonds", new DiamondRequirement(1000), 0.15);
         AchievementHandler.addAchievement("Diamond 3", "Obtain 10,000 Diamonds", new DiamondRequirement(10000), 0.25);
