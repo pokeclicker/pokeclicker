@@ -34,11 +34,15 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Money 5", "Obtain 1,000,000 Pokédollars", new MoneyRequirement(1000000), 0.25);
         AchievementHandler.addAchievement("Money 6", "Obtain 10,000,000 Pokédollars", new MoneyRequirement(10000000), 0.5);
         
-        AchievementHandler.addAchievement("Money 1", "Obtain 100 Dungeon Tokens", new MoneyRequirement(100), 0.05);
-        AchievementHandler.addAchievement("Money 2", "Obtain 1000 Dungeon Tokens", new MoneyRequirement(1000), 0.10);
-        AchievementHandler.addAchievement("Money 3", "Obtain 10,000 Dungeon Tokens", new MoneyRequirement(10000), 0.15);
-        AchievementHandler.addAchievement("Money 4", "Obtain 100,000 Dungeon Tokens", new MoneyRequirement(100000), 0.20);
-        AchievementHandler.addAchievement("Money 5", "Obtain 1,000,000 Dungeon Tokens", new MoneyRequirement(1000000), 0.25);
+        AchievementHandler.addAchievement("Token 1", "Obtain 100 Dungeon Tokens", new TokenRequirement(100), 0.05);
+        AchievementHandler.addAchievement("Token 2", "Obtain 1000 Dungeon Tokens", new TokenRequirement(1000), 0.10);
+        AchievementHandler.addAchievement("Token 3", "Obtain 10,000 Dungeon Tokens", new TokenRequirement(10000), 0.15);
+        AchievementHandler.addAchievement("Token 4", "Obtain 100,000 Dungeon Tokens", new TokenRequirement(100000), 0.20);
+        AchievementHandler.addAchievement("Token 5", "Obtain 1,000,000 Dungeon Tokens", new TokenRequirement(1000000), 0.25);
+        
+        AchievementHandler.addAchievement("Diamond 1", "Obtain 100 Diamonds", new DiamondRequirement(100), 0.05);
+        AchievementHandler.addAchievement("Diamond 2", "Obtain 1000 Diamonds", new DiamondRequirement(1000), 0.15);
+        AchievementHandler.addAchievement("Diamond 3", "Obtain 10,000 Diamonds", new DiamondRequirement(10000), 0.25);
         
         AchievementHandler.addAchievement("Capture 1", "Capture 100 Pokemon", new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement("Capture 2", "Capture 1000 Pokemon", new CapturedRequirement(1000), 0.10);
@@ -46,11 +50,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Capture 4", "Capture 100,000 Pokemon", new CapturedRequirement(100000), 0.25);
         AchievementHandler.addAchievement("Capture 5", "Capture 1,000,000 Pokemon", new CapturedRequirement(1000000), 0.50);
 
-        AchievementHandler.addAchievement("Defeat 1", "Defeat 100 Pokemon", new CapturedRequirement(100), 0.05);
-        AchievementHandler.addAchievement("Defeat 2", "Defeat 1000 Pokemon", new CapturedRequirement(1000), 0.10);
-        AchievementHandler.addAchievement("Defeat 3", "Defeat 10,000 Pokemon", new CapturedRequirement(10000), 0.15);
-        AchievementHandler.addAchievement("Defeat 4", "Defeat 100,000 Pokemon", new CapturedRequirement(100000), 0.25);
-        AchievementHandler.addAchievement("Defeat 5", "Defeat 1,000,000 Pokemon", new CapturedRequirement(1000000), 0.50);
+        AchievementHandler.addAchievement("Defeat 1", "Defeat 100 Pokemon", new DefeatedRequirement(100), 0.05);
+        AchievementHandler.addAchievement("Defeat 2", "Defeat 1000 Pokemon", new DefeatdRequirement(1000), 0.10);
+        AchievementHandler.addAchievement("Defeat 3", "Defeat 10,000 Pokemon", new DefeatedRequirement(10000), 0.15);
+        AchievementHandler.addAchievement("Defeat 4", "Defeat 100,000 Pokemon", new DefeatedRequirement(100000), 0.25);
+        AchievementHandler.addAchievement("Defeat 5", "Defeat 1,000,000 Pokemon", new DefeatedRequirement(1000000), 0.50);
         
         AchievementHandler.addAchievement("Pokemons 1", "Capture your first Pokémon", new CaughtPokemonRequirement(1), 0.01);
         AchievementHandler.addAchievement("Pokemons 2", "Capture 10 unique Pokémons", new CaughtPokemonRequirement(10), 0.02);
@@ -106,10 +110,6 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Click 3", "Click 1000 Times", new ClickRequirement(1000, 1), 0.10);
         AchievementHandler.addAchievement("Click 4", "Click 10000 Times", new ClickRequirement(10000, 1), 0.25);
         
-        AchievementHandler.addAchievement("Route 1-1", "Get 100 kills on route 1", new RouteKillRequirement(100, 1), 0.02);
-        AchievementHandler.addAchievement("Route 1-2", "Get 1000 kills on route 1", new RouteKillRequirement(1000, 1), 0.05);
-        AchievementHandler.addAchievement("Route 1-3", "Get 10000 kills on route 1", new RouteKillRequirement(1000, 1), 0.10);
-
         AchievementHandler.addAchievement("Route 1-1", "Get 100 kills on route 1", new RouteKillRequirement(100, 1), 0.02);
         AchievementHandler.addAchievement("Route 1-2", "Get 1000 kills on route 1", new RouteKillRequirement(1000, 1), 0.05);
         AchievementHandler.addAchievement("Route 1-3", "Get 10000 kills on route 1", new RouteKillRequirement(1000, 1), 0.10);
