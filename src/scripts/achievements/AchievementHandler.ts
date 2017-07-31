@@ -13,7 +13,7 @@ class AchievementHandler {
     }
 
     public static addAchievement(name: string, description: string, property: Requirement, bonus: number) {
-        let unlocked: boolean = player.achievementsCompleted[name] == true;
+        let unlocked: boolean = player.achievementsCompleted[name];
         AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, unlocked));
     }
 
