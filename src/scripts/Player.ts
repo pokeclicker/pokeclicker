@@ -743,7 +743,10 @@ class Player {
             "_eggSlots",
             "_shardUpgrades",
             "_shardsCollected",
-            "achievementsCompleted"
+            "achievementsCompleted",
+            "farmPoints",
+            "seedList",
+            "berryList"
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
