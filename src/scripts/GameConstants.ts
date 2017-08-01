@@ -43,7 +43,7 @@ namespace GameConstants {
         "mineEnergyGain": 17,
         "mineEnergyRegenTime": 20,
         "maxDailyDeals": 2
-    }
+    };
 
     export const MineUpgradesInitialValues = {
         "maxMineEnergy": 50,
@@ -51,7 +51,7 @@ namespace GameConstants {
         "mineEnergyGain": 3,
         "mineEnergyRegenTime": 60,
         "maxDailyDeals": 3
-    }
+    };
 
     export enum MineTool {
         "Chisel" = 0,
@@ -385,59 +385,75 @@ namespace GameConstants {
         "Jynx",
         "Mr_Mime",
         "Lickitung"
-}
+    }
 
-export enum BerryType {
-    Cheri,
-    Chesto,
-    Pecha,
-    Rawst,
-    Aspear,
-    Leppa,
-    Oran
-}
+    export enum BerryType {
+        Cheri,
+        Chesto,
+        Pecha,
+        Rawst,
+        Aspear,
+        Leppa,
+        Oran
+    }
 
-export enum PokeBlockColor {
-    Black,
-    Red,
-    Gold,
-    Purple,
-    Gray,
-    White
-}
+    export enum PokeBlockColor {
+        Black,
+        Red,
+        Gold,
+        Purple,
+        Gray,
+        White
+    }
 
-export enum VitaminType {
-    Protein,
-    RareCandy
-}
+    export enum VitaminType {
+        Protein,
+        RareCandy
+    }
 
-export enum EnergyRestoreSize {
-    SmallRestore,
-    MediumRestore,
-    LargeRestore
-}
+    export enum EnergyRestoreSize {
+        SmallRestore,
+        MediumRestore,
+        LargeRestore
+    }
 
-export enum EggItemType {
-    Fire_egg,
-    Water_egg,
-    Grass_egg,
-    Fight_egg,
-    Electric_egg,
-    Dragon_egg,
-    Pokemon_egg,
-    Mystery_egg,
-}
+    export enum EggItemType {
+        Fire_egg,
+        Water_egg,
+        Grass_egg,
+        Fight_egg,
+        Electric_egg,
+        Dragon_egg,
+        Pokemon_egg,
+        Mystery_egg,
+    }
 
 
-export enum EggType {
-    Fire,
-    Water,
-    Grass,
-    Fight,
-    Electric,
-    Dragon,
-    Pokemon,
-    Mystery,
-}
+    export enum EggType {
+        Fire,
+        Water,
+        Grass,
+        Fight,
+        Electric,
+        Dragon,
+        Pokemon,
+        Mystery,
+        Fossil
+    }
+
+
+    export const FossilToPokemon = {
+        "Helix Fossil": "Omanyte",
+        "Dome Fossil": "Kabuto",
+        "Old Amber": "Aerodactyl",
+    }
+
+    //Used for image name
+    export const PokemonToFossil = {
+        "Omanyte": "helix",
+        "Kabuto": "dome",
+        "Aerodactyl": "amber",
+
+    }
 }
 
