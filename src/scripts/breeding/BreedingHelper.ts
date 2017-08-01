@@ -85,6 +85,11 @@ class BreedingHelper {
         return egg;
     }
 
+    public static createFossilEgg(fossil: string): Egg {
+        let pokemonName = GameConstants.FossilToPokemon[fossil];
+        return BreedingHelper.createEgg(pokemonName, GameConstants.EggType.Fossil);
+    }
+
     public static getSteps = function (eggCycles: number) {
         if (eggCycles === undefined) {
             return 500;
@@ -98,6 +103,8 @@ class BreedingHelper {
         if (eggType == "pokemon") {
             let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
             eggType = String(dataPokemon.type1).toLowerCase();
+        } else if (eggType == "fossil") {
+            eggType = GameConstants.PokemonToFossil[egg.pokemon];
         }
         return "assets/images/breeding/egg" + eggType + ".png";
     }

@@ -14,6 +14,7 @@ namespace GameConstants {
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
     export const GYM_TICK = 1;
+    export const ACHIEVEMENT_TICK = 1000;
 
     export const AMOUNT_OF_POKEMONS = 151;
 
@@ -26,6 +27,46 @@ namespace GameConstants {
 
     export const ITEM_PRICE_MULTIPLIER = 1.02;
     export const ITEM_PRICE_DEDUCT = 0.003;
+
+    //Underground
+    export const Mine = {
+        "sizeY": 12,
+        "sizeX": 25
+    }
+
+    export const HAMMER_ENERGY = 3;
+    export const CHISEL_ENERGY = 1;
+
+    export const MaxUpgrades = {
+        "maxMineEnergy": 10,
+        "maxUndergroundItems": 7,
+        "mineEnergyGain": 17,
+        "mineEnergyRegenTime": 20,
+        "maxDailyDeals": 2
+    }
+
+    export const MineUpgradesInitialValues = {
+        "maxMineEnergy": 50,
+        "maxUndergroundItems": 3,
+        "mineEnergyGain": 3,
+        "mineEnergyRegenTime": 60,
+        "maxDailyDeals": 3
+    }
+
+    export enum MineTool {
+        "Chisel" = 0,
+        "Hammer" = 1,
+    }
+
+    export const EvoStones = [
+        "Fire Stone",
+        "Water Stone",
+        "Thunder Stone",
+        "Leaf Stone",
+        "Moon Stone"
+    ];
+
+    export const PLATE_VALUE = 25;
 
     // Oak items
     export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
@@ -55,6 +96,13 @@ namespace GameConstants {
     export const DUNGEON_SIZE = 5;
     export const DUNGEON_CHEST_SHOW = 2;
     export const DUNGEON_MAP_SHOW = 4;
+
+    // Achievements
+    export enum AchievementOption {
+        less,
+        equal,
+        more,
+    }
 
     export enum NotificationOption {
         info,
