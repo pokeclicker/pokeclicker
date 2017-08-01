@@ -50,12 +50,14 @@ class Game {
     interval;
     undergroundCounter: number;
     farmCounter: number;
+    public static achievementCounter: number = 0;
 
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
     constructor() {
         (<any>window).player = Save.load();
         KeyItemHandler.initialize();
+        AchievementHandler.initialize();
         player.gainKeyItem("Coin case", true);
         player.gainKeyItem("Teachy tv", true);
         player.gainKeyItem("Pokeball bag", true);
@@ -76,8 +78,16 @@ class Game {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
         this.farmCounter += GameConstants.TICK_TIME;
+        Game.achievementCounter += GameConstants.TICK_TIME;
+        if(Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK){
+            Game.achievementCounter = 0;
+            console.log("checking");
+            AchievementHandler.checkAchievements();
+        }
         Save.counter += GameConstants.TICK_TIME;
         Underground.counter += GameConstants.TICK_TIME;
+
+
 
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
