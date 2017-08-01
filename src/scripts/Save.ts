@@ -5,6 +5,7 @@ class Save {
     public static store(player: Player) {
         let json = JSON.stringify(player);
         localStorage.setItem("player", json);
+        localStorage.setItem("mine", Mine.serialize());
         this.counter = 0;
         console.log("Game saved")
     }
@@ -15,6 +16,15 @@ class Save {
             return new Player(JSON.parse(saved));
         } else {
             return new Player()
+        }
+    }
+
+    public static loadMine() {
+        let mine = localStorage.getItem("mine");
+        if (mine) {
+            Mine.loadSavedMine(JSON.parse(mine));
+        } else {
+            Mine.loadMine();
         }
     }
 
