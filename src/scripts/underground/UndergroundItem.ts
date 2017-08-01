@@ -51,23 +51,23 @@ class UndergroundItem {
         this.addItem("Icy Rock", 27, [[27,27,27], [27,27,27], [27,27,27]], 2);
         this.addItem("Damp Rock", 28, [[28,28,28], [28,28,28], [28,0,28]], 2);
 
-        this.addItem("Draco Plate", 29, [[29,29,29,29], [29,29,29,29], [29,29,29,29]], 25, "dragon");
-        this.addItem("Dread Plate", 30, [[30,30,30,30], [30,30,30,30], [30,30,30,30]], 25, "dark");
-        this.addItem("Earth Plate", 31, [[31,31,31,31], [31,31,31,31], [31,31,31,31]], 25, "ground");
-        this.addItem("Fist Plate", 32, [[32,32,32,32], [32,32,32,32], [32,32,32,32]], 25, "fighting");
-        this.addItem("Flame Plate", 33, [[33,33,33,33], [33,33,33,33], [33,33,33,33]], 25, "fire");
-        this.addItem("Icicle Plate", 34, [[34,34,34,34], [34,34,34,34], [34,34,34,34]], 25, "ice");
-        this.addItem("Insect Plate", 35, [[35,35,35,35], [35,35,35,35], [35,35,35,35]], 25, "bug");
-        this.addItem("Iron Plate", 36, [[36,36,36,36], [36,36,36,36], [36,36,36,36]], 25, "steel");
-        this.addItem("Meadow Plate", 37, [[37,37,37,37], [37,37,37,37], [37,37,37,37]], 25, "grass");
-        this.addItem("Mind Plate", 38, [[38,38,38,38], [38,38,38,38], [38,38,38,38]], 25, "psychic");
-        this.addItem("Sky Plate", 39, [[39,39,39,39], [39,39,39,39], [39,39,39,39]], 25, "flying");
-        this.addItem("Splash Plate", 40, [[40,40,40,40], [40,40,40,40], [40,40,40,40]], 25, "water");
-        this.addItem("Spooky Plate", 41, [[41,41,41,41], [41,41,41,41], [41,41,41,41]], 25, "ghost");
-        this.addItem("Stone Plate", 42, [[42,42,42,42], [42,42,42,42], [42,42,42,42]], 25, "rock");
-        this.addItem("Toxic Plate", 43, [[43,43,43,43], [43,43,43,43], [43,43,43,43]], 25, "poison");
-        this.addItem("Zap Plate", 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]], 25, "electric");
-        this.addItem("Pixie Plate", 45, [[45,45,45,45], [45,45,45,45], [45,45,45,45]], 25, "fairy");
+        this.addItem("Draco Plate", 29, [[29,29,29,29], [29,29,29,29], [29,29,29,29]], 100, "dragon");
+        this.addItem("Dread Plate", 30, [[30,30,30,30], [30,30,30,30], [30,30,30,30]], 100, "dark");
+        this.addItem("Earth Plate", 31, [[31,31,31,31], [31,31,31,31], [31,31,31,31]], 100, "ground");
+        this.addItem("Fist Plate", 32, [[32,32,32,32], [32,32,32,32], [32,32,32,32]], 100, "fighting");
+        this.addItem("Flame Plate", 33, [[33,33,33,33], [33,33,33,33], [33,33,33,33]], 100, "fire");
+        this.addItem("Icicle Plate", 34, [[34,34,34,34], [34,34,34,34], [34,34,34,34]], 100, "ice");
+        this.addItem("Insect Plate", 35, [[35,35,35,35], [35,35,35,35], [35,35,35,35]], 100, "bug");
+        this.addItem("Iron Plate", 36, [[36,36,36,36], [36,36,36,36], [36,36,36,36]], 100, "steel");
+        this.addItem("Meadow Plate", 37, [[37,37,37,37], [37,37,37,37], [37,37,37,37]], 100, "grass");
+        this.addItem("Mind Plate", 38, [[38,38,38,38], [38,38,38,38], [38,38,38,38]], 100, "psychic");
+        this.addItem("Sky Plate", 39, [[39,39,39,39], [39,39,39,39], [39,39,39,39]], 100, "flying");
+        this.addItem("Splash Plate", 40, [[40,40,40,40], [40,40,40,40], [40,40,40,40]], 100, "water");
+        this.addItem("Spooky Plate", 41, [[41,41,41,41], [41,41,41,41], [41,41,41,41]], 100, "ghost");
+        this.addItem("Stone Plate", 42, [[42,42,42,42], [42,42,42,42], [42,42,42,42]], 100, "rock");
+        this.addItem("Toxic Plate", 43, [[43,43,43,43], [43,43,43,43], [43,43,43,43]], 100, "poison");
+        this.addItem("Zap Plate", 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]], 100, "electric");
+        this.addItem("Pixie Plate", 45, [[45,45,45,45], [45,45,45,45], [45,45,45,45]], 100, "fairy");
     }
 
     public static getRandomItem(): UndergroundItem {
