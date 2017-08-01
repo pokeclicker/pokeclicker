@@ -8,6 +8,7 @@ const debug = false;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     OakItemRunner.initialize();
+    UndergroundItem.initialize();
     let game: Game = new Game();
     // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
     game.start();
@@ -84,6 +85,7 @@ class Game {
             AchievementHandler.checkAchievements();
         }
         Save.counter += GameConstants.TICK_TIME;
+        Underground.counter += GameConstants.TICK_TIME;
 
 
 
@@ -116,6 +118,15 @@ class Game {
         if (Save.counter > GameConstants.SAVE_TICK) {
             Save.store(player);
         }
+
+        if (Underground.counter > GameConstants.UNDERGROUND_TICK) {
+            Underground.energyTick( Math.max(0, Underground.energyTick() - 1) );
+            if (Underground.energyTick() == 0) {
+                Underground.gainEnergy();
+                Underground.energyTick(player._mineEnergyRegenTime());
+            }
+            Underground.counter = 0;
+        }
     }
 
     save() {
@@ -125,5 +136,8 @@ class Game {
     load() {
         OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
+        Save.loadMine();
+        Underground.energyTick(player._mineEnergyRegenTime())
+        DailyDeal.generateDeals(player.maxDailyDeals, new Date());
     }
 }

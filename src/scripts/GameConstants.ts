@@ -27,6 +27,46 @@ namespace GameConstants {
     export const ITEM_PRICE_MULTIPLIER = 1.02;
     export const ITEM_PRICE_DEDUCT = 0.003;
 
+    //Underground
+    export const Mine = {
+        "sizeY": 12,
+        "sizeX": 25
+    }
+
+    export const HAMMER_ENERGY = 3;
+    export const CHISEL_ENERGY = 1;
+
+    export const MaxUpgrades = {
+        "maxMineEnergy": 10,
+        "maxUndergroundItems": 7,
+        "mineEnergyGain": 17,
+        "mineEnergyRegenTime": 20,
+        "maxDailyDeals": 2
+    }
+
+    export const MineUpgradesInitialValues = {
+        "maxMineEnergy": 50,
+        "maxUndergroundItems": 3,
+        "mineEnergyGain": 3,
+        "mineEnergyRegenTime": 60,
+        "maxDailyDeals": 3
+    }
+
+    export enum MineTool {
+        "Chisel" = 0,
+        "Hammer" = 1,
+    }
+
+    export const EvoStones = [
+        "Fire Stone",
+        "Water Stone",
+        "Thunder Stone",
+        "Leaf Stone",
+        "Moon Stone"
+    ];
+
+    export const PLATE_VALUE = 25;
+
     // Oak items
     export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
     export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
@@ -353,6 +393,20 @@ namespace GameConstants {
         Dragon,
         Pokemon,
         Mystery,
+        Fossil,
+    }
+
+    export const FossilToPokemon = {
+        "Helix Fossil": "Omanyte",
+        "Dome Fossil": "Kabuto",
+        "Old Amber": "Aerodactyl",
+    }
+
+    //Used for image name
+    export const PokemonToFossil = {
+        "Omanyte": "helix",
+        "Kabuto": "dome",
+        "Aerodactyl": "amber",
     }
 }
 

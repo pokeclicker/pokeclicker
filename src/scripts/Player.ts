@@ -23,10 +23,20 @@ class Player {
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
-    private _itemList: {[name: string]: number};
-    private _itemMultipliers: {[name: string]: number};
     private _eggList: Array<KnockoutObservable<Egg|void>>;
     private _eggSlots: KnockoutObservable<number>;
+
+    private _itemList: { [name: string]: number };
+    private _itemMultipliers: { [name: string]: number };
+
+    private _mineEnergy: KnockoutObservable<number>;
+    private _maxMineEnergy: KnockoutObservable<number>;
+    private _mineEnergyGain: KnockoutObservable<number>;
+    private _mineInventory: KnockoutObservableArray<any>;
+    private _diamonds: KnockoutObservable<number>;
+    private _maxDailyDeals: KnockoutObservable<number>;
+    private _maxUndergroundItems: KnockoutObservable<number>;
+    private _mineEnergyRegenTime: KnockoutObservable<number>;
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
@@ -120,6 +130,17 @@ class Player {
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
+        this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50);
+        this._maxMineEnergy = ko.observable(savedPlayer._maxMineEnergy || GameConstants.MineUpgradesInitialValues.maxMineEnergy);
+        this._mineEnergyGain = ko.observable(savedPlayer._mineEnergyGain || GameConstants.MineUpgradesInitialValues.mineEnergyGain);
+        this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
+        for (let item of this._mineInventory()) {
+            item.amount = ko.observable(item.amount);
+        }
+        this._diamonds = ko.observable(savedPlayer._diamonds || 0);
+        this._maxDailyDeals = ko.observable(savedPlayer._maxDailyDeals || GameConstants.MineUpgradesInitialValues.maxDailyDeals);
+        this._maxUndergroundItems = ko.observable(savedPlayer._maxUndergroundItems || GameConstants.MineUpgradesInitialValues.maxUndergroundItems);
+        this._mineEnergyRegenTime = ko.observable(savedPlayer._mineEnergyRegenTime || GameConstants.MineUpgradesInitialValues.mineEnergyRegenTime);
         savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
         this._eggList = savedPlayer._eggList.map((egg) => {
             return ko.observable( egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null )
@@ -147,6 +168,15 @@ class Player {
     public hasKeyItem(name: string): boolean {
         for (let i = 0; i < this._keyItems().length; i++) {
             if (this._keyItems()[i] == name) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public hasMineItems(){
+        for( let i = 0; i< this._mineInventory().length; i++){
+            if(this._mineInventory()[i].amount() > 0){
                 return true;
             }
         }
@@ -431,6 +461,24 @@ class Player {
         this._gymBadges().push(badge);
     }
 
+    public mineInventoryIndex(id: number): number {
+        for( let i = 0; i<player._mineInventory().length; i++){
+            if(player._mineInventory()[i].id === id){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public getUndergroundItemAmount(id: number) {
+        let index = this.mineInventoryIndex(id);
+        if (index > -1){
+            return player._mineInventory.peek()[index].amount();
+        } else {
+            return 0;
+        }
+    }
+
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -554,6 +602,62 @@ class Player {
         this._itemMultipliers = value;
     }
 
+    get mineEnergy() {
+        return this._mineEnergy();
+    }
+
+    set mineEnergy(n: number) {
+        this._mineEnergy(n);
+    }
+
+    get diamonds() {
+        return this._diamonds();
+    }
+
+    set diamonds(n: number) {
+        this._diamonds(n);
+    }
+
+    get maxMineEnergy() {
+        return this._maxMineEnergy();
+    }
+
+    set maxMineEnergy(n: number) {
+        this._maxMineEnergy(n);
+    }
+
+    get maxUndergroundItems() {
+        return this._maxUndergroundItems();
+    }
+
+    set maxUndergroundItems(n: number) {
+        this._maxUndergroundItems(n);
+    }
+
+    get mineEnergyGain() {
+        return this._mineEnergyGain();
+    }
+
+    set mineEnergyGain(n: number) {
+        this._mineEnergyGain(n);
+    }
+
+    get mineEnergyRegenTime() {
+        return this._mineEnergyRegenTime();
+    }
+
+    set mineEnergyRegenTime(n: number) {
+        this._mineEnergyRegenTime(n);
+    }
+
+    get maxDailyDeals() {
+        return this._maxDailyDeals();
+    }
+
+    set maxDailyDeals(n: number) {
+        this._maxDailyDeals(n);
+    }
+
     get eggList(): Array<KnockoutObservable<Egg|void>> {
         return this._eggList;
     }
@@ -608,12 +712,19 @@ class Player {
             "_itemList",
             "_itemMultipliers",
             "_keyItems",
-            "_shardUpgrades", "_shardsCollected",
-            "achievementsCompleted",
+            "_mineEnergy",
+            "_maxMineEnergy",
+            "_mineEnergyGain",
+            "_mineInventory",
+            "_maxDailyDeals",
+            "_diamonds",
+            "_maxUndergroundItems",
+            "_mineEnergyRegenTime",
             "_eggList",
             "_eggSlots",
             "_shardUpgrades",
-            "_shardsCollected"
+            "_shardsCollected",
+            "achievementsCompleted"
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
