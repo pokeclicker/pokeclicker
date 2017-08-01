@@ -1784,11 +1784,16 @@
                 </div>
                 <div id="treasures" class="tab-pane fade">
                     <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;">
-                        <table class='table'>
-                            <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player._mineInventory()}">
+                        <div data-bind="if: player.hasMineItems()">
+                            <table class='table'>
+                                <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player._mineInventory()}">
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div data-bind="ifnot:player.hasMineItems()">
+                            You don't have any treasures yet...
+                        </div>
                     </div>
                 </div>
                 <div id="upgrades" class="tab-pane fade">

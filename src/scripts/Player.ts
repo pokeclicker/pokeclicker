@@ -174,6 +174,15 @@ class Player {
         return false;
     }
 
+    public hasMineItems(){
+        for( let i = 0; i< this._mineInventory().length; i++){
+            if(this._mineInventory()[i].amount() > 0){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public gainKeyItem(name: string, supressModal?: boolean) {
         if (!this.hasKeyItem(name)) {
             this.recentKeyItem(name);
