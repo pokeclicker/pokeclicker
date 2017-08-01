@@ -68,13 +68,13 @@ class Underground {
         
         if( index == -1){
 
-            var tempItem = {
+            let tempItem = {
                 name: item.name,
                 amount: ko.observable(num),
                 id: id,
                 value: item.value,
                 valueType: item.valueType
-            }
+            };
             player._mineInventory.push(tempItem);
         } else {
             let amt = player._mineInventory()[index].amount()
@@ -105,10 +105,10 @@ class Underground {
 
     public static sellMineItem(id: number) {
         for (let i=0; i<player._mineInventory().length; i++) {
-            let item = player._mineInventory()[i]
+            let item = player._mineInventory()[i];
             if (item.id == id) {
                 if (item.amount() > 0) {
-                    let amt = item.amount()
+                    let amt = item.amount();
                     player._mineInventory()[i].amount(amt - 1);
                     Underground.gainProfit(item);
                     return;
@@ -121,12 +121,12 @@ class Underground {
         switch (item.valueType) {
             case "Diamond":
                 player.diamonds += item.value;
-                break
+                break;
             case "Mine Egg":
                 player.gainEgg(BreedingHelper.createFossilEgg(item.name));
-                break
+                break;
             default:
-                let type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1) //Capitalizes string
+                let type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
                 let typeNum = GameConstants.PokemonType[type];
                 player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + GameConstants.PLATE_VALUE);
         }
@@ -145,7 +145,7 @@ class Underground {
 $(document).ready(function(){
     $("body").on('click', '.mineSquare', function(){
         Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
-    })
+    });
 
     $('#mineModal').on('hide.bs.modal', function () {
         if (player.route() == 11) {
@@ -154,4 +154,4 @@ $(document).ready(function(){
             MapHelper.moveToRoute(11, GameConstants.Region.kanto);
         }
     });
-})
+});

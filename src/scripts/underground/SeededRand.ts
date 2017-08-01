@@ -10,7 +10,6 @@ class SeededRand {
     }
 
     public static seedWithDate(d: Date) {
-        let dateSeed = Number((d.getFullYear() - 1900)*d.getDate() + 1000*d.getMonth() + 100000*d.getDate());
-        this.state = dateSeed;
+        this.state = Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
     }
 }
