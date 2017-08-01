@@ -5,28 +5,8 @@ class EvolutionStone extends Item {
 
     constructor(type: GameConstants.StoneType) {
         let basePrice = 2500;
-        switch (type) {
-            case GameConstants.StoneType.Fire: {
-                break;
-            }
-            case GameConstants.StoneType.Water: {
-                break;
-            }
-            case GameConstants.StoneType.Thunder: {
-                break;
-            }
-            case GameConstants.StoneType.Leaf: {
-                break;
-            }
-            case GameConstants.StoneType.Moon: {
-                break;
-            }
-            case GameConstants.StoneType.Sun: {
-                break;
-            }
-        }
         let priceMultiplier = 1;
-        super(GameConstants.StoneType[type], basePrice, priceMultiplier, GameConstants.Currency.money);
+        super(GameConstants.StoneType[type], basePrice, priceMultiplier, GameConstants.Currency.questpoint);
         this.type = type;
     }
 
@@ -36,22 +16,25 @@ class EvolutionStone extends Item {
 
     public use() {
         switch (this.type) {
-            case GameConstants.StoneType.Fire: {
+            case GameConstants.StoneType.Fire_stone: {
                 break;
             }
-            case GameConstants.StoneType.Water: {
+            case GameConstants.StoneType.Water_stone: {
                 break;
             }
-            case GameConstants.StoneType.Thunder: {
+            case GameConstants.StoneType.Thunder_stone: {
                 break;
             }
-            case GameConstants.StoneType.Leaf: {
+            case GameConstants.StoneType.Leaf_stone: {
                 break;
             }
-            case GameConstants.StoneType.Moon: {
+            case GameConstants.StoneType.Moon_stone: {
                 break;
             }
-            case GameConstants.StoneType.Sun: {
+            case GameConstants.StoneType.Sun_stone: {
+                break;
+            }
+            case GameConstants.StoneType.Trade_stone: {
                 break;
             }
         }
@@ -59,10 +42,11 @@ class EvolutionStone extends Item {
 
 }
 
-ItemList['Fire'] = new EvolutionStone(GameConstants.StoneType.Fire);
-ItemList['Water'] = new EvolutionStone(GameConstants.StoneType.Water);
-ItemList['Thunder'] = new EvolutionStone(GameConstants.StoneType.Thunder);
-ItemList['Leaf'] = new EvolutionStone(GameConstants.StoneType.Leaf);
-ItemList['Moon'] = new EvolutionStone(GameConstants.StoneType.Moon);
-ItemList['Sun'] = new EvolutionStone(GameConstants.StoneType.Sun);
+ItemList['Fire_stone'] = new EvolutionStone(GameConstants.StoneType.Fire_stone);
+ItemList['Water_stone'] = new EvolutionStone(GameConstants.StoneType.Water_stone);
+ItemList['Thunder_stone'] = new EvolutionStone(GameConstants.StoneType.Thunder_stone);
+ItemList['Leaf_stone'] = new EvolutionStone(GameConstants.StoneType.Leaf_stone);
+ItemList['Moon_stone'] = new EvolutionStone(GameConstants.StoneType.Moon_stone);
+ItemList['Sun_stone'] = new EvolutionStone(GameConstants.StoneType.Sun_stone);
+ItemList['Trade_stone'] = new EvolutionStone(GameConstants.StoneType.Trade_stone);
 

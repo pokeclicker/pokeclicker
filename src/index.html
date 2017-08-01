@@ -644,7 +644,7 @@
                                     data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
                                 <img src="" height="36px"
                                      data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
-                                <p data-bind="text: name">Item Name</p>
+                                <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
                                 <p>
                                     <img src=""
                                          data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">

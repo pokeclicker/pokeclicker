@@ -22,6 +22,7 @@ namespace GameConstants {
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
     export const SHINY_CHANCE_BREEDING = 4096;
+    export const SHINY_CHANCE_SHOP = 2048;
     export const SHINY_CHANCE_SAFARI = 2048;
 
     export const ITEM_PRICE_MULTIPLIER = 1.02;
@@ -42,7 +43,7 @@ namespace GameConstants {
         "mineEnergyGain": 17,
         "mineEnergyRegenTime": 20,
         "maxDailyDeals": 2
-    }
+    };
 
     export const MineUpgradesInitialValues = {
         "maxMineEnergy": 50,
@@ -50,7 +51,7 @@ namespace GameConstants {
         "mineEnergyGain": 3,
         "mineEnergyRegenTime": 60,
         "maxDailyDeals": 3
-    }
+    };
 
     export enum MineTool {
         "Chisel" = 0,
@@ -183,6 +184,10 @@ namespace GameConstants {
 
     export function getCatchBonus(ball: GameConstants.Pokeball) {
         return GameConstants.PokeballCatchBonus[ball];
+    }
+
+    export function humanifyString(str: string) {
+        return str.split('_').join(' ');
     }
 
     export enum Region {
@@ -337,21 +342,49 @@ namespace GameConstants {
         "Squirtle" = 2,
     }
 
+    export const ItemPrice = {
+        "Pokeball": 100,
+        "Greatball": 500,
+        "Ultraball": 2000,
+        "Masterball": 10000,
+        "xAttack": 600,
+        "xClick": 400,
+        "xExp": 800,
+        "Token_collector": 1000,
+        "Item_magnet": 1500,
+        "Lucky_incense": 2000,
+        "Eevee": 5000,
+        "Porygon": 2000,
+        "Jynx": 2500,
+        "Mr_Mime": 1500,
+        "Lickitung": 1000,
+    };
+
     export enum StoneType {
-        Fire,
-        Water,
-        Thunder,
-        Leaf,
-        Moon,
-        Sun,
+        Fire_stone,
+        Water_stone,
+        Thunder_stone,
+        Leaf_stone,
+        Moon_stone,
+        Sun_stone,
+        Trade_stone
     }
 
     export enum BattleItemType {
         xAttack,
         xClick,
         xExp,
-        XToken,
-        xItem
+        Token_collector,
+        Item_magnet,
+        Lucky_incense
+    }
+
+    export enum PokemonItemType {
+        "Eevee",
+        "Porygon",
+        "Jynx",
+        "Mr_Mime",
+        "Lickitung"
     }
 
     export enum BerryType {
@@ -384,6 +417,18 @@ namespace GameConstants {
         LargeRestore
     }
 
+    export enum EggItemType {
+        Fire_egg,
+        Water_egg,
+        Grass_egg,
+        Fight_egg,
+        Electric_egg,
+        Dragon_egg,
+        Pokemon_egg,
+        Mystery_egg,
+    }
+
+
     export enum EggType {
         Fire,
         Water,
@@ -393,8 +438,9 @@ namespace GameConstants {
         Dragon,
         Pokemon,
         Mystery,
-        Fossil,
+        Fossil
     }
+
 
     export const FossilToPokemon = {
         "Helix Fossil": "Omanyte",
@@ -407,6 +453,7 @@ namespace GameConstants {
         "Omanyte": "helix",
         "Kabuto": "dome",
         "Aerodactyl": "amber",
+
     }
 }
 
