@@ -16,24 +16,43 @@ body {
   }
 }
 
+.pokemon-font {
+  font-family: pokemonFont, "Helvetica Neue", sans-serif;
+}
+
+.smallButton {
+  padding: 7px;
+}
+
+.smallFont {
+  font-size: @smallFont;
+}
+
 .pageItemTitle {
   position: absolute;
   width: 100%;
   color: black;
-  -webkit-text-fill-color: white; /* Will override color (regardless of order) */
+  -webkit-text-fill-color: white; /* Will override type (regardless of order) */
   -webkit-text-stroke-width: 1.3px;
   -webkit-text-stroke-color: black;
 }
 
 .donate-button {
   margin: 5px;
+}
+
+button {
   cursor: pointer;
+}
+
+body:hover {
+  cursor: default;
 }
 
 .donate-button-mew {
   background-color: #bd6dd1;
   border-color: #bd6dd1;
-  color:white;
+  color: white;
 }
 
 .donate-button-mew:hover {
@@ -44,13 +63,13 @@ body {
 .donate-button-unown {
   background-color: #858585;
   border-color: #858585;
-  color:white;
+  color: white;
 }
 
 .donate-button-unown:hover {
   background-color: #616161;
   border-color: #616161;
-  color:white;
+  color: white;
 }
 
 .dropdown-menu {
@@ -80,6 +99,18 @@ body {
   margin-left: 5px;
   line-height: 40px;
   text-align: left;
+
+  span {
+    margin-left: 0;
+  }
+}
+
+.image-starter {
+  border: 1px solid white;
+}
+
+.image-starter:hover {
+  border: 1px solid #1d93d1;
 }
 
 .table {
@@ -94,8 +125,12 @@ body {
   margin: -10px -12px -12px -16px;
 }
 
-#pokemonList {
+.pokemon-list-container {
+  max-height: 515px;
+  overflow: auto;
+}
 
+#pokemonList {
   span {
     vertical-align: middle;
   }
@@ -134,6 +169,18 @@ body {
 }
 
 img {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+img {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Chrome/Safari/Opera */
   -moz-user-select: none; /* Firefox */
@@ -141,4 +188,21 @@ img {
   user-select: none;
   /* Non-prefixed version, currently
                         not supported by any browser */
+}
+
+.featureList .btn {
+  padding: 6px;
+  white-space: normal;
+}
+
+.oak-item-info {
+  height: 160px;
+}
+
+.vertical-middle {
+  vertical-align: middle !important;
+}
+
+.modal {
+  text-align: center;
 }

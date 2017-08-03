@@ -22,6 +22,7 @@ class PokemonHelper {
     public static calculateLevel(pokemon: CaughtPokemon): number {
         let level;
         switch (PokemonHelper.getPokemonByName(pokemon.name).levelType) {
+
             case GameConstants.LevelType.slow:
                 level = Math.pow(pokemon.exp() * 4 / 5, 1 / 3);
                 break;
@@ -50,7 +51,9 @@ class PokemonHelper {
     }
 
     public static calculateAttack(attackBase: number, attackBonus: number, level: number): number {
-        return Math.max(1, Math.floor((attackBase + attackBonus) * level / 100))
+        let attackBonusMultiplier = 1 + ( attackBonus / 100 );
+        let levelMultiplier = level / 100;
+        return Math.max(1, Math.floor(attackBase * attackBonusMultiplier * levelMultiplier));
     }
 
     public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
@@ -63,7 +66,7 @@ class PokemonHelper {
     }
 
     public static compareBy(property: string, direction: boolean): (a: CaughtPokemon, b: CaughtPokemon) => number {
-        return function(a, b) {
+        return function (a, b) {
             let _a, _b, res, dir = (direction) ? -1 : 1;
 
             //Convert to plain JS so that observables don't need to be accessed with brackets
@@ -76,8 +79,11 @@ class PokemonHelper {
                 _b.shiny = Number(player.alreadyCaughtPokemonShiny(b.name));
             }
 
+            if (property == "attack" || property == "levelObservable" || property == "shiny") {
+                dir *= -1;
+            }
 
-            //Compare by provided property 
+            //Compare by provided property
             if (_a[property] == _b[property]) {
                 //If they are equal according to provided property, sort by id
                 if (_a.id < _b.id) {
@@ -85,7 +91,7 @@ class PokemonHelper {
                 } else if (_a.id > _b.id) {
                     return 1;
                 }
-            } else if (_a[property] < _b[property]){
+            } else if (_a[property] < _b[property]) {
                 res = -1;
             } else if (_a[property] > _b[property]) {
                 res = 1;

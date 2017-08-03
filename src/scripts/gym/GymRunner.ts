@@ -9,15 +9,23 @@ class GymRunner {
     public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList["Pewter City"]);
 
     public static startGym(gym: Gym) {
-        Game.gameState(GameConstants.GameState.idle);
+        this.gymObservable(gym);
+        if (Gym.isUnlocked(gym)) {
+            if (gym instanceof Champion) {
+                gym.setPokemon(player.starter);
+            }
+            Game.gameState(GameConstants.GameState.idle);
 
-        GymBattle.gym = gym;
-        GymBattle.index(0);
-        GymBattle.totalPokemons(gym.pokemons.length);
-        GymRunner.timeLeft(GameConstants.GYM_TIME);
-        Game.gameState(GameConstants.GameState.gym);
-        GymBattle.generateNewEnemy();
-
+            GymBattle.gym = gym;
+            GymBattle.index(0);
+            GymBattle.totalPokemons(gym.pokemons.length);
+            GymRunner.timeLeft(GameConstants.GYM_TIME);
+            Game.gameState(GameConstants.GameState.gym);
+            GymBattle.generateNewEnemy();
+        } else {
+            Notifier.notify(gym.leaderName + " thinks you are not a worthy opponent yet...", GameConstants.NotificationOption.danger);
+            Notifier.notify("Perhaps you should fight another gymleader first?", GameConstants.NotificationOption.info);
+        }
     }
 
     public static tick() {
@@ -29,17 +37,21 @@ class GymRunner {
     }
 
     public static gymLost() {
+        Notifier.notify("It appears you are not strong enough to defeat " + GymBattle.gym.leaderName, GameConstants.NotificationOption.danger);
         Game.gameState(GameConstants.GameState.town);
     }
 
     public static gymWon(gym: Gym) {
+        Notifier.notify("Congratulations, you defeated " + GymBattle.gym.leaderName + "!", GameConstants.NotificationOption.success);
         this.gymObservable(gym);
         player.gainMoney(gym.moneyReward);
-
         if (!player.hasBadge(gym.badgeReward)) {
             player.gainBadge(gym.badgeReward);
+
             $('#receiveBadgeModal').modal('show');
         }
+        player.town(TownList[gym.town]);
+        MapHelper.updateAllRoutes();
         Game.gameState(GameConstants.GameState.town);
     }
 
@@ -48,3 +60,16 @@ class GymRunner {
     })
 
 }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+
+    $('#receiveBadgeModal').on('hidden.bs.modal', function () {
+       if(GymBattle.gym.badgeReward == GameConstants.Badge.Boulder){
+           player.gainKeyItem("Dungeon ticket");
+       }
+       if(GymBattle.gym.badgeReward == GameConstants.Badge.Soul){
+           player.gainKeyItem("Safari ticket");
+       }
+
+    });
+});

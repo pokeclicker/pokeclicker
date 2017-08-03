@@ -24,7 +24,7 @@ class PokemonFactory {
         let id = basePokemon.id;
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
-        let maxHealth: number = Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) * Math.pow(player.caughtPokemonList.length - 1, 1.2) / 12), 1.15)), 20) || 20;
+        let maxHealth: number = Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15)), 20) || 20;
 
         let catchVariation = Math.floor(Math.random() * 7 - 3);
 
@@ -43,16 +43,13 @@ class PokemonFactory {
      * @returns {boolean}
      */
     public static generateShiny(chance: number): boolean {
-
-        // TODO Factor in oak item
-        // if(isActive("Shiny Charm")){
-        //     chance /= getOakItemBonus("Shiny Charm");
-        // }
+        chance = OakItemRunner.isActive("Shiny Charm") ? chance / (1 + OakItemRunner.calculateBonus("Shiny Charm") / 100) : chance;
 
         let rand: number = Math.floor(Math.random() * chance) + 1;
 
         if (rand <= 1) {
-            console.log("Shiny!!!");
+            Notifier.notify("You encounter a shiny Pokémon...", GameConstants.NotificationOption.warning);
+            OakItemRunner.use("Shiny Charm");
             return true;
         }
         return false;
@@ -71,8 +68,36 @@ class PokemonFactory {
 
         let exp: number = basePokemon.exp * 1.5;
         let shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny)
+        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny, GameConstants.GYM_SHARDS)
     }
 
+    public static generateDungeonPokemon(pokemonList: string[], chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
+        let random: number = GameConstants.randomIntBetween(0, pokemonList.length - 1);
+        let name = pokemonList[random];
+        let basePokemon = PokemonHelper.getPokemonByName(name);
+        let id = basePokemon.id;
+        let maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
+        let catchVariation = Math.floor(Math.random() * 7 - 3);
+        let catchRate: number = Math.floor(Math.pow(basePokemon.catchRate, 0.75)) + catchVariation;
+        let exp: number = basePokemon.exp;
+        let money: number = 0;
+        let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, GameConstants.DUNGEON_SHARDS);
+    }
+
+    public static generateDungeonBoss(bossPokemonList: DungeonBossPokemon[], chestsOpened: number): BattlePokemon {
+        let random: number = GameConstants.randomIntBetween(0, bossPokemonList.length - 1);
+        let bossPokemon = bossPokemonList[random];
+        let name: string = bossPokemon.name;
+        let basePokemon = PokemonHelper.getPokemonByName(name);
+        let id = basePokemon.id;
+        let maxHealth: number = Math.floor(bossPokemon.baseHealth * (1 + (chestsOpened / 5)));
+        let catchVariation = Math.floor(Math.random() * 7 - 3);
+        let catchRate: number = Math.floor(Math.pow(basePokemon.catchRate, 0.75)) + catchVariation;
+        let exp: number = basePokemon.exp;
+        let money: number = 0;
+        let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, money, shiny, GameConstants.DUNGEON_BOSS_SHARDS);
+    }
 
 }

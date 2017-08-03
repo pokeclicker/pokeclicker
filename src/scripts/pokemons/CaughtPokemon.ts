@@ -10,33 +10,40 @@ class CaughtPokemon {
     attackBonus: KnockoutObservable<number>;
     exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
-    evolver: KnockoutSubscription
+    evolver: KnockoutSubscription;
+    breeding: KnockoutObservable<boolean>;
 
-    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number) {
+    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number, breeding: boolean = false) {
         this.id = pokemonData.id;
         this.name = pokemonData.name;
         this.evolved = ev;
         this.attackBonus = ko.observable(atBo);
         this.exp = ko.observable(xp);
-        this.levelObservable = ko.computed(() => {return PokemonHelper.calculateLevel(this)});
-        this.baseAttack = pokemonData.attack
-        this.attack = ko.computed(() => {return PokemonHelper.calculateAttack(this.baseAttack, this.attackBonus(), this.levelObservable())})
+        this.levelObservable = ko.computed(() => {
+            return PokemonHelper.calculateLevel(this);
+        });
+        this.baseAttack = pokemonData.attack;
+        this.attack = ko.computed(() => {
+            return PokemonHelper.calculateAttack(this.baseAttack, this.attackBonus(), this.levelObservable());
+        });
 
+        this.breeding = ko.observable(breeding);
         if (pokemonData.evoLevel && !this.evolved) {
             this.evolver = this.levelObservable.subscribe(() => {
                 if (this.levelObservable() >= pokemonData.evoLevel) {
-                    player.capturePokemon(pokemonData.evolution, false);
+                    Notifier.notify("Your " + pokemonData.name + " has evolved into a " + pokemonData.evolution, GameConstants.NotificationOption.success);
+                    player.capturePokemon(pokemonData.evolution, false, true);
                     this.evolved = true;
                     this.evolver.dispose();
                 }
-            })
+            });
         }
     }
 
     public toJSON() {
         let keep, plainJS;
-        keep = ["name", "evolved", "attackBonus", "exp"];
-        plainJS = ko.toJS(this)
-        return Save.filter(plainJS, keep)
+        keep = ["name", "evolved", "attackBonus", "exp", "breeding"];
+        plainJS = ko.toJS(this);
+        return Save.filter(plainJS, keep);
     }
 }

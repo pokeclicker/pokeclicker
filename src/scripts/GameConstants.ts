@@ -8,20 +8,134 @@ namespace GameConstants {
     export const TICK_TIME = 10;
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
+    export const DUNGEON_TIME = 6000;
+    export const DUNGEON_TICK = 1;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
     export const GYM_TICK = 1;
+    export const ACHIEVEMENT_TICK = 1000;
 
     export const AMOUNT_OF_POKEMONS = 151;
-
 
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
     export const SHINY_CHANCE_BREEDING = 4096;
+    export const SHINY_CHANCE_SHOP = 2048;
     export const SHINY_CHANCE_SAFARI = 2048;
 
+    export const ITEM_PRICE_MULTIPLIER = 1.02;
+    export const ITEM_PRICE_DEDUCT = 0.003;
+
+    //Underground
+    export const Mine = {
+        "sizeY": 12,
+        "sizeX": 25
+    }
+
+    export const HAMMER_ENERGY = 3;
+    export const CHISEL_ENERGY = 1;
+
+    export const MaxUpgrades = {
+        "maxMineEnergy": 10,
+        "maxUndergroundItems": 7,
+        "mineEnergyGain": 17,
+        "mineEnergyRegenTime": 20,
+        "maxDailyDeals": 2
+    };
+
+    export const MineUpgradesInitialValues = {
+        "maxMineEnergy": 50,
+        "maxUndergroundItems": 3,
+        "mineEnergyGain": 3,
+        "mineEnergyRegenTime": 60,
+        "maxDailyDeals": 3
+    };
+
+    export enum MineTool {
+        "Chisel" = 0,
+        "Hammer" = 1,
+    }
+
+    export const EvoStones = [
+        "Fire Stone",
+        "Water Stone",
+        "Thunder Stone",
+        "Leaf Stone",
+        "Moon Stone"
+    ];
+
+    export const PLATE_VALUE = 25;
+
+    // Oak items
+    export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
+    export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
+    export const AMOUNT_OF_OAKITEMS = 8;
+    export const OAKITEM_MAX_LEVEL = 5;
+    export const OAKITEM_FIRST_UNLOCK = 20;
+    export const OAKITEM_SECOND_UNLOCK = 50;
+    export const OAKITEM_THIRD_UNLOCK = 100;
+
+    // Breeding
+    export const BREEDING_AMOUNT = 1;
+    export const BREEDING_ATTACK_BONUS = 25;
+
+    export enum OakItem {
+        "Magic Ball" = 0,
+        "Amulet Coin",
+        "Poison Barb",
+        "Exp Share",
+        "Sprayduck",
+        "Shiny Charm",
+        "Blaze Cassette",
+        "Cell Battery",
+    }
+
+    // Dungeons
+    export const DUNGEON_SIZE = 5;
+    export const DUNGEON_CHEST_SHOW = 2;
+    export const DUNGEON_MAP_SHOW = 4;
+
+    // Achievements
+    export enum AchievementOption {
+        less,
+        equal,
+        more,
+    }
+
+    export enum NotificationOption {
+        info,
+        success,
+        warning,
+        danger
+    }
+
+    export enum DungeonTile {
+        empty,
+        enemy,
+        chest,
+        boss,
+    }
+
+    //Shards
+    export const SHARD_UPGRADE_COST = 500;
+    export const SHARD_UPGRADE_STEP = 0.1;
+    export const MAX_SHARD_UPGRADES = 10;
+
+    export const DUNGEON_SHARDS = 3;
+    export const DUNGEON_BOSS_SHARDS = 20;
+    export const GYM_SHARDS = 5;
+
+    /**
+     * idle: The game is not doing anything, the battle view isn't shown
+     * paused: The battle view is shown, but there are no game ticks
+     * fighting: On a route and battling a pokemon
+     * gym: Battling a gym
+     * dungeon: Exploring a dungeon
+     * safari: Exploring the safari zone
+     * town: In a town/pre-dungeon, town view is not shown
+     */
     export enum GameState {
         idle = 0,
         paused = 1,
@@ -30,6 +144,7 @@ namespace GameConstants {
         dungeon = 4,
         safari = 5,
         town = 6,
+        shop = 7,
     }
 
     export enum Pokeball {
@@ -40,11 +155,39 @@ namespace GameConstants {
         "Masterball" = 3,
     }
 
-    export enum PokeballCatchBonus {
-        "Pokeball" = 0,
-        "Greatball" = 5,
-        "Ultraball" = 10,
-        "Masterball" = 100,
+    export enum Currency {
+        money,
+        questpoint,
+        dungeontoken,
+    }
+
+    export enum TypeEffectiveness {
+        Immune,
+        NotVery,
+        Normal,
+        Very
+    }
+
+    export enum TypeEffectivenessValue {
+        Immune = 0,
+        NotVery = 0.5,
+        Normal = 1,
+        Very = 2
+    }
+
+    export const PokeballCatchBonus = [
+        0,
+        5,
+        10,
+        100,
+    ];
+
+    export function getCatchBonus(ball: GameConstants.Pokeball) {
+        return GameConstants.PokeballCatchBonus[ball];
+    }
+
+    export function humanifyString(str: string) {
+        return str.split('_').join(' ');
     }
 
     export enum Region {
@@ -64,6 +207,7 @@ namespace GameConstants {
     class Option {
         optionText: String;
         optionValue: GameConstants.SortOptionsEnum;
+
         constructor(text, value) {
             this.optionText = text;
             this.optionValue = value;
@@ -76,13 +220,17 @@ namespace GameConstants {
         new Option("Attack", GameConstants.SortOptionsEnum.attack),
         new Option("Level", GameConstants.SortOptionsEnum.levelObservable),
         new Option("Shiny", GameConstants.SortOptionsEnum.shiny),
-    ]
+    ];
 
     export const RegionRoute = {
         0: 25,
         1: 0,
         2: 0
     };
+
+    export function randomIntBetween(min: number, max: number) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
 
     export enum Badge {
         "None" = 0,
@@ -104,22 +252,22 @@ namespace GameConstants {
     export enum PokemonType {
         "None" = -1,
         "Normal" = 0,
-        "Fighting" = 1,
-        "Flying" = 2,
-        "Poison" = 3,
-        "Ground" = 4,
-        "Rock" = 5,
-        "Bug" = 6,
-        "Ghost" = 7,
-        "Steel" = 8,
-        "Fire" = 9,
-        "Water" = 10,
-        "Grass" = 11,
-        "Electric" = 12,
-        "Psychic" = 13,
-        "Ice" = 14,
-        "Dragon" = 15,
-        "Dark" = 16,
+        "Fire" = 1,
+        "Water" = 2,
+        "Electric" = 3,
+        "Grass" = 4,
+        "Ice" = 5,
+        "Fighting" = 6,
+        "Poison" = 7,
+        "Ground" = 8,
+        "Flying" = 9,
+        "Psychic" = 10,
+        "Bug" = 11,
+        "Rock" = 12,
+        "Ghost" = 13,
+        "Dragon" = 14,
+        "Dark" = 15,
+        "Steel" = 16,
         "Fairy" = 17,
     }
 
@@ -133,6 +281,7 @@ namespace GameConstants {
 
     // Map navigation
     export const AMOUNT_OF_ROUTES = 25;
+    export const AMOUNT_OF_ROUTES_KANTO = 25;
 
     /**
      * Each route contains a list of routenumbers that need to be completed
@@ -150,7 +299,7 @@ namespace GameConstants {
             8: [5, 6, 7],
             9: [4],
             10: [9],
-            11: [6, 12],
+            11: [6],
             12: [7, 10, 11],
             13: [11, 12],
             14: [13],
@@ -176,13 +325,135 @@ namespace GameConstants {
             8: GameConstants.Badge.Thunder,
             9: GameConstants.Badge.Cascade,
             11: GameConstants.Badge.Thunder,
-            13: GameConstants.Badge.Soul,
-            16: GameConstants.Badge.Soul,
-            19: GameConstants.Badge.Marsh,
+            12: GameConstants.Badge.Marsh,
+            13: GameConstants.Badge.Marsh,
+            16: GameConstants.Badge.Marsh,
+            19: GameConstants.Badge.Soul,
             21: GameConstants.Badge.Volcano,
             22: GameConstants.Badge.Earth,
             24: GameConstants.Badge.Cascade,
         }
     };
+
+    export enum Starter {
+        "None" = -1,
+        "Bulbasaur" = 0,
+        "Charmander" = 1,
+        "Squirtle" = 2,
+    }
+
+    export const ItemPrice = {
+        "Pokeball": 100,
+        "Greatball": 500,
+        "Ultraball": 2000,
+        "Masterball": 10000,
+        "xAttack": 600,
+        "xClick": 400,
+        "xExp": 800,
+        "Token_collector": 1000,
+        "Item_magnet": 1500,
+        "Lucky_incense": 2000,
+        "Eevee": 5000,
+        "Porygon": 2000,
+        "Jynx": 2500,
+        "Mr_Mime": 1500,
+        "Lickitung": 1000,
+    };
+
+    export enum StoneType {
+        Fire_stone,
+        Water_stone,
+        Thunder_stone,
+        Leaf_stone,
+        Moon_stone,
+        Sun_stone,
+        Trade_stone
+    }
+
+    export enum BattleItemType {
+        xAttack,
+        xClick,
+        xExp,
+        Token_collector,
+        Item_magnet,
+        Lucky_incense
+    }
+
+    export enum PokemonItemType {
+        "Eevee",
+        "Porygon",
+        "Jynx",
+        "Mr_Mime",
+        "Lickitung"
+    }
+
+    export enum BerryType {
+        Cheri,
+        Chesto,
+        Pecha,
+        Rawst,
+        Aspear,
+        Leppa,
+        Oran
+    }
+
+    export enum PokeBlockColor {
+        Black,
+        Red,
+        Gold,
+        Purple,
+        Gray,
+        White
+    }
+
+    export enum VitaminType {
+        Protein,
+        RareCandy
+    }
+
+    export enum EnergyRestoreSize {
+        SmallRestore,
+        MediumRestore,
+        LargeRestore
+    }
+
+    export enum EggItemType {
+        Fire_egg,
+        Water_egg,
+        Grass_egg,
+        Fight_egg,
+        Electric_egg,
+        Dragon_egg,
+        Pokemon_egg,
+        Mystery_egg,
+    }
+
+
+    export enum EggType {
+        Fire,
+        Water,
+        Grass,
+        Fight,
+        Electric,
+        Dragon,
+        Pokemon,
+        Mystery,
+        Fossil
+    }
+
+
+    export const FossilToPokemon = {
+        "Helix Fossil": "Omanyte",
+        "Dome Fossil": "Kabuto",
+        "Old Amber": "Aerodactyl",
+    }
+
+    //Used for image name
+    export const PokemonToFossil = {
+        "Omanyte": "helix",
+        "Kabuto": "dome",
+        "Aerodactyl": "amber",
+
+    }
 }
 
