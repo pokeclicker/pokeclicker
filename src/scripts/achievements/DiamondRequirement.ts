@@ -1,6 +1,6 @@
 ///<reference path="Requirement.ts"/>
 
-class HatchedRequirement extends Requirement{
+class DiamondRequirement extends Requirement{
     constructor( value:number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, type);
     }
