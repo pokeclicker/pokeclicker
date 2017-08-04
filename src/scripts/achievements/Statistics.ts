@@ -9,4 +9,7 @@ class Statistics {
     public digItems: KnockoutObservable<number>;
     public digDeeper: KnockoutObservable<number>;
 
+    incrementObservable(obs, amt: number = 1) {
+    obs(obs() + amt);
+    }
 }
