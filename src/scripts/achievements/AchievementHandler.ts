@@ -57,7 +57,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Capture 5", "Capture 1,000,000 Pokemon", new CapturedRequirement(1000000), 0.50);
 
         AchievementHandler.addAchievement("Defeat 1", "Defeat 100 Pokemon", new DefeatedRequirement(100), 0.05);
-        AchievementHandler.addAchievement("Defeat 2", "Defeat 1000 Pokemon", new DefeatdRequirement(1000), 0.10);
+        AchievementHandler.addAchievement("Defeat 2", "Defeat 1000 Pokemon", new DefeatedRequirement(1000), 0.10);
         AchievementHandler.addAchievement("Defeat 3", "Defeat 10,000 Pokemon", new DefeatedRequirement(10000), 0.15);
         AchievementHandler.addAchievement("Defeat 4", "Defeat 100,000 Pokemon", new DefeatedRequirement(100000), 0.25);
         AchievementHandler.addAchievement("Defeat 5", "Defeat 1,000,000 Pokemon", new DefeatedRequirement(1000000), 0.50);
