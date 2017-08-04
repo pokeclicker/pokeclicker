@@ -6,6 +6,6 @@ class CapturedRequirement extends Requirement{
     }
 
     public getProgress(){
-        return Math.min(Statistics.pokemonCaptured, this.value);
+        return Math.min(Statistics.pokemonCaptured(), this.value);
     }
 }
