@@ -1,6 +1,9 @@
 @import "variables.less";
 
+@pokedexEntryBorderRadius: 6px;
+
 .pokedexEntry {
+  border-radius: @pokedexEntryBorderRadius;
   list-style-type: none;
   margin: 12px;
 
@@ -15,7 +18,10 @@
     left: 0;
     right: 0;
     font-size: 14px;
+  }
 
+  span:first-child::before {
+    content: '#';
   }
 }
 
