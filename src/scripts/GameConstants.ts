@@ -17,6 +17,7 @@ namespace GameConstants {
     export const ACHIEVEMENT_TICK = 1000;
 
     export const AMOUNT_OF_POKEMONS = 151;
+    export const AMOUNT_OF_BADGES = 8;
 
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
@@ -246,7 +247,7 @@ namespace GameConstants {
         "Bruno" = 10,
         "Agatha" = 11,
         "Lance" = 12,
-        "Champion" = 13,
+        "Champion" = 13
     }
 
     export enum PokemonType {
