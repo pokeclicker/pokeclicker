@@ -74,6 +74,12 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
+    <script type="text/javascript">
+        $(function () {
+            $('#pokedexModal').modal('show');
+        })
+    </script>
+
 </head>
 <body class="no-select">
 
@@ -84,7 +90,7 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
-            <button class="dropdown-item" href="#">Pokedex</button>
+            <button class="dropdown-item" onclick="$('#pokedexModal').modal('show');">Pokedex</button>
         </li>
         <li>
             <button class="dropdown-item" href="#">Stats</button>
@@ -1489,7 +1495,6 @@
     </div>
 </div>
 
-
 <!-- Start Sequence Modal-->
 <div class="modal" id="startSequenceModal" tabindex="-1" role="dialog"
      aria-labelledby="startSequenceModalLabel" aria-hidden="true">
@@ -1861,6 +1866,44 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pokedex Modal-->
+<div class="modal fade noselect" id="pokedexModal" tabindex="-1" role="dialog"
+     aria-labelledby="pokedexModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link active" href="#tab1" data-toggle="tab">Pokédex</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#tab2" data-toggle="tab">Badges</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <ul class="row justify-content-center" data-bind="foreach: pokemonList"
+                                style="max-width: 100%;">
+                                <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
+                                    data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
+                                    <span style="top: 0;" data-bind="text: $data.id">number</span>
+                                    <img src="" width="80px"
+                                         data-bind="attr:{ src: PokemonHelper.getImage($data, false)}">
+                                    <span style="bottom: 0;" data-bind="text: $data.name">name</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <p>Data 2</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
