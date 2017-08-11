@@ -15,7 +15,6 @@ class Egg {
         this.type = type;
         this.notified = notified;
         this.progress = ko.computed(function () {
-            console.log(this.steps() / this.totalSteps);
             return this.steps() / this.totalSteps * 100;
         }, this);
     }

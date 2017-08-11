@@ -81,7 +81,6 @@ class Game {
         Game.achievementCounter += GameConstants.TICK_TIME;
         if(Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK){
             Game.achievementCounter = 0;
-            console.log("checking");
             AchievementHandler.checkAchievements();
         }
         Save.counter += GameConstants.TICK_TIME;
