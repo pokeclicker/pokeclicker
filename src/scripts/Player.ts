@@ -10,71 +10,6 @@ class Player {
     private _caughtShinyList: KnockoutObservableArray<string>;
     private _route: KnockoutObservable<number>;
     private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
-    private _routeKills: Array<KnockoutObservable<number>>;
-    private _routeKillsNeeded: KnockoutObservable<number>;
-    private _region: GameConstants.Region;
-    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
-    private _pokeballs: Array<KnockoutObservable<number>>;
-    private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
-    private _sortDescending: KnockoutObservable<boolean>;
-    private _town: KnockoutObservable<Town>;
-    private _starter: GameConstants.Starter;
-    private _oakItemExp: Array<KnockoutObservable<number>>;
-    private _oakItemsEquipped: string[];
-    private _eggList: Array<KnockoutObservable<Egg|void>>;
-    private _eggSlots: KnockoutObservable<number>;
-
-    private _itemList: { [name: string]: number };
-    private _itemMultipliers: { [name: string]: number };
-
-    private _mineEnergy: KnockoutObservable<number>;
-    private _maxMineEnergy: KnockoutObservable<number>;
-    private _mineEnergyGain: KnockoutObservable<number>;
-    private _mineInventory: KnockoutObservableArray<any>;
-    private _diamonds: KnockoutObservable<number>;
-    private _maxDailyDeals: KnockoutObservable<number>;
-    private _maxUndergroundItems: KnockoutObservable<number>;
-    private _mineEnergyRegenTime: KnockoutObservable<number>;
-
-    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
-    private _shardsCollected: Array<KnockoutObservable<number>>;
-
-    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
-    public clickAttackObservable: KnockoutComputed<number>;
-    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
-    public pokemonAttackObservable: KnockoutComputed<number>;
-    public achievementsCompleted: {[name: string]: boolean};
-
-    public routeKillsObservable(route: number): KnockoutComputed<number> {
-        return ko.computed(function () {
-            return Math.min(this.routeKillsNeeded, this.routeKills[route]());
-        }, this);
-    }
-
-    public pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
-        return ko.computed(function () {
-            return this._pokeballs[ball]();
-        }, this);
-    }
-
-    public setAlreadyCaughtBallSelection(ball: GameConstants.Pokeball) {
-        this._alreadyCaughtBallSelection(ball);
-    }
-
-    public setNotCaughtBallSelection(ball: GameConstants.Pokeball) {
-        this._notCaughtBallSelection(ball);
-    }
-
-    public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
-        this._pokeballs[ball](this._pokeballs[ball]() + amount)
-    }
-
-    public usePokeball(ball: GameConstants.Pokeball): void {
-        this._pokeballs[ball](this._pokeballs[ball]() - 1)
-    }
-
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
@@ -97,6 +32,9 @@ class Player {
         this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
+
+        this._defeatedAmount = savedPlayer._defeatedAmount || Array(pokemonList.length + 1);
+        this._caughtAmount = savedPlayer._caughtAmount || Array(pokemonList.length + 1);
 
         this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
@@ -159,6 +97,76 @@ class Player {
                 StartSequenceRunner.start()
             }
         }
+    }
+
+    private _defeatedAmount: Array<number>;
+    private _routeKills: Array<KnockoutObservable<number>>;
+    private _routeKillsNeeded: KnockoutObservable<number>;
+    private _region: GameConstants.Region;
+    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
+    private _pokeballs: Array<KnockoutObservable<number>>;
+    private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
+    private _sortDescending: KnockoutObservable<boolean>;
+    private _town: KnockoutObservable<Town>;
+    private _starter: GameConstants.Starter;
+    private _oakItemExp: Array<KnockoutObservable<number>>;
+    private _oakItemsEquipped: string[];
+    private _eggList: Array<KnockoutObservable<Egg | void>>;
+    private _eggSlots: KnockoutObservable<number>;
+
+    private _itemList: { [name: string]: number };
+    private _itemMultipliers: { [name: string]: number };
+
+    private _mineEnergy: KnockoutObservable<number>;
+    private _maxMineEnergy: KnockoutObservable<number>;
+    private _mineEnergyGain: KnockoutObservable<number>;
+    private _mineInventory: KnockoutObservableArray<any>;
+    private _diamonds: KnockoutObservable<number>;
+    private _maxDailyDeals: KnockoutObservable<number>;
+    private _maxUndergroundItems: KnockoutObservable<number>;
+    private _mineEnergyRegenTime: KnockoutObservable<number>;
+
+    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
+    private _shardsCollected: Array<KnockoutObservable<number>>;
+
+    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
+    public clickAttackObservable: KnockoutComputed<number>;
+    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
+    public pokemonAttackObservable: KnockoutComputed<number>;
+    public achievementsCompleted: { [name: string]: boolean };
+
+    public routeKillsObservable(route: number): KnockoutComputed<number> {
+        return ko.computed(function () {
+            return Math.min(this.routeKillsNeeded, this.routeKills[route]());
+        }, this);
+    }
+
+    public pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
+        return ko.computed(function () {
+            return this._pokeballs[ball]();
+        }, this);
+    }
+
+    public setAlreadyCaughtBallSelection(ball: GameConstants.Pokeball) {
+        this._alreadyCaughtBallSelection(ball);
+    }
+
+    public setNotCaughtBallSelection(ball: GameConstants.Pokeball) {
+        this._notCaughtBallSelection(ball);
+    }
+
+    public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
+        this._pokeballs[ball](this._pokeballs[ball]() + amount)
+    }
+
+    public usePokeball(ball: GameConstants.Pokeball): void {
+        this._pokeballs[ball](this._pokeballs[ball]() - 1)
+    }
+
+    get defeatedAmount(): Array<number> {
+        return this._defeatedAmount;
     }
 
     public addRouteKill() {
@@ -429,6 +437,12 @@ class Player {
         }, this)
     }
 
+    private _caughtAmount: Array<number>;
+
+    get caughtAmount(): Array<number> {
+        return this._caughtAmount;
+    }
+
     public canBreedPokemon(): boolean {
         return this.hasMaxLevelPokemon() && this.hasFreeEggSlot();
     }
@@ -697,6 +711,8 @@ class Player {
             "_caughtShinyList",
             "_route",
             "_caughtPokemonList",
+            "_defeatedAmount",
+            "_caughtAmount",
             "_routeKills",
             "_routeKillsNeeded",
             "_region",
