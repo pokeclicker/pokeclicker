@@ -93,6 +93,9 @@
             <button class="dropdown-item" onclick="$('#pokedexModal').modal('show');">Pokedex</button>
         </li>
         <li>
+            <button class="dropdown-item">Badge Case</button>
+        </li>
+        <li>
             <button class="dropdown-item" href="#">Stats</button>
         </li>
         <li>
@@ -1877,36 +1880,25 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="tabbable">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item"><a class="nav-link active" href="#tab1" data-toggle="tab">Pokédex</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#tab2" data-toggle="tab">Badges</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab1">
-                            <ul class="row justify-content-center" data-bind="foreach: pokemonList"
-                                style="max-width: 100%;">
-                                <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
-                                    data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
+                <div>
+                    <ul class="row justify-content-center" data-bind="foreach: pokemonList"
+                        style="max-width: 100%; padding:0; margin:0;">
+                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
+                            data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                     <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;"
                                           data-bind="text: $data.id">number</span>
-                                    <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
-                                        <img src="" width="80px"
-                                             data-bind="attr:{ src: PokemonHelper.getImage($data, false)}">
-                                        <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
-                                              data-bind="text: $data.name">name</span>
-                                    </div>
-                                    <div data-bind="ifnot: PokedexHelper.pokemonSeen($data.id)">
-                                        <img src="" width="80px" class="pokemon-not-seen"
-                                             data-bind="attr:{ src: PokemonHelper.getImage($data, false)}">
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab-pane" id="tab2">
-                            <p>Data 2</p>
-                        </div>
-                    </div>
+                            <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
+                                <img src="" width="80px"
+                                     data-bind="attr:{ src: PokemonHelper.getImage($data, false)}">
+                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
+                                      data-bind="text: $data.name">name</span>
+                            </div>
+                            <div data-bind="ifnot: PokedexHelper.pokemonSeen($data.id)">
+                                <img src="" width="80px" class="pokemon-not-seen"
+                                     data-bind="attr:{ src: PokemonHelper.getImage($data, false)}">
+                            </div>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
