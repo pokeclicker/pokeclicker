@@ -363,7 +363,7 @@
 
                             <br>
                             <div style="height: 96px;">
-                                <div data-bind="ifnot: Battle.catching" style="height: 100%;">
+                                <div data-bind="ifnot: Battle.catching">
                                     <span class="pokemon-helper"></span>
                                     <img class="clickable" id="enemy"
                                          data-bind="click: function() {Battle.clickAttack()},
@@ -433,6 +433,7 @@
                                 <br>
                                 <div style="height: 96px;">
                                     <div data-bind="ifnot: DungeonBattle.catching">
+                                        <span class="pokemon-helper"></span>
                                         <img id="dungeonEnemy"
                                              data-bind="click: function() {DungeonBattle.clickAttack()}, attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny, true) }"
                                              src=""/>
