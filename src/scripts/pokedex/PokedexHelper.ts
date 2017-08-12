@@ -4,6 +4,9 @@ class PokedexHelper {
     public static getBackgroundColors(name: string): string {
         let pokemon = PokemonHelper.getPokemonByName(name);
 
+        if (!PokedexHelper.pokemonSeen(pokemon.id)()) {
+            return "grey"
+        }
         if (pokemon.type2 == PokemonType.None) {
             return TypeColor[pokemon.type1];
         }
@@ -15,7 +18,9 @@ class PokedexHelper {
      * @param {number} id
      * @returns {boolean}
      */
-    public static pokemonSeen(id: number): boolean {
-        return player.defeatedAmount[id] > 0 || player.caughtAmount[id] > 0;
+    public static pokemonSeen(id: number): KnockoutComputed<boolean> {
+        return ko.computed(function () {
+            return player.defeatedAmount[id] > 0 || player.caughtAmount[id] > 0;
+        })
     }
 }

@@ -33,8 +33,8 @@ class Player {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
 
-        this._defeatedAmount = savedPlayer._defeatedAmount || Array(pokemonList.length + 1);
-        this._caughtAmount = savedPlayer._caughtAmount || Array(pokemonList.length + 1);
+        this._defeatedAmount = savedPlayer._defeatedAmount || Array.apply(null, Array(pokemonList.length + 1)).map(Number.prototype.valueOf, 0);
+        this._caughtAmount = savedPlayer._caughtAmount || Array.apply(null, Array(pokemonList.length + 1)).map(Number.prototype.valueOf, 0);
 
         this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
