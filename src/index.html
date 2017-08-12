@@ -434,7 +434,7 @@
                                 <div style="height: 96px;">
                                     <div data-bind="ifnot: DungeonBattle.catching">
                                         <img id="dungeonEnemy"
-                                             data-bind="click: function() {DungeonBattle.clickAttack()}, attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
+                                             data-bind="click: function() {DungeonBattle.clickAttack()}, attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny, true) }"
                                              src=""/>
                                     </div>
                                     <div data-bind="if: DungeonBattle.catching">
