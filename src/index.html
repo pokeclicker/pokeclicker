@@ -363,10 +363,11 @@
 
                             <br>
                             <div style="height: 96px;">
-                                <div data-bind="ifnot: Battle.catching">
+                                <div data-bind="ifnot: Battle.catching" style="height: 100%;">
+                                    <span class="pokemon-helper"></span>
                                     <img class="clickable" id="enemy"
                                          data-bind="click: function() {Battle.clickAttack()},
-                                                    attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
+                                                    attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny, true) }"
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
@@ -586,8 +587,9 @@
                                 <div class="col-sm-4 offset-sm-4">
                                     <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
                                     <div class="clickable" style="height: 96px;">
+                                        <span class="pokemon-helper"></span>
                                         <img id="gymEnemy" src=""
-                                             data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
+                                             data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: PokemonHelper.getImage(GymBattle.enemyPokemon(), false, true) }"/>
                                     </div>
                                 </div>
                                 <div class="col-sm-3" style="display: grid;">
