@@ -56,12 +56,16 @@ class PokemonHelper {
         return Math.max(1, Math.floor(attackBase * attackBonusMultiplier * levelMultiplier));
     }
 
-    public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
+    public static getImage(pokemon: pokemonInterface, shiny: boolean, animated: boolean = false): string {
         let src = "/assets/images/";
         if (shiny) {
             src += "shiny";
         }
-        src += "pokemon/" + pokemon.id + ".png";
+        if (animated) {
+            src += "pokemon/animated/" + pokemon.id + ".gif";
+        } else {
+            src += "pokemon/" + pokemon.id + ".png";
+        }
         return src;
     }
 
