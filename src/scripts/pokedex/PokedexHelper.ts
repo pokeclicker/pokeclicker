@@ -20,7 +20,8 @@ class PokedexHelper {
      */
     public static pokemonSeen(id: number): KnockoutComputed<boolean> {
         return ko.computed(function () {
-            return player.defeatedAmount[id] > 0 || player.caughtAmount[id] > 0;
+            return player.defeatedAmount[id]() > 0 || player.caughtAmount[id]() > 0;
         })
     }
+
 }
