@@ -33,6 +33,7 @@ class CaughtPokemon {
                 if (this.levelObservable() >= pokemonData.evoLevel) {
                     Notifier.notify("Your " + pokemonData.name + " has evolved into a " + pokemonData.evolution, GameConstants.NotificationOption.success);
                     player.capturePokemon(pokemonData.evolution, false, true);
+                    player.caughtAmount[pokemonData.id](player._caughtAmount[pokemonData.id]() + 1);
                     this.evolved = true;
                     this.evolver.dispose();
                 }

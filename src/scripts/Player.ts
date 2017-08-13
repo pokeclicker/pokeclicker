@@ -317,8 +317,8 @@ class Player {
 
     public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
         OakItemRunner.use("Magic Ball");
+        let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
         if (!this.alreadyCaughtPokemon(pokemonName)) {
-            let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
             if (!supressNotification) {
@@ -329,6 +329,7 @@ class Player {
             this._caughtShinyList.push(pokemonName);
             Save.store(player);
         }
+        player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
     }
 
     public hasBadge(badge: GameConstants.Badge) {
