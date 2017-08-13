@@ -108,6 +108,7 @@ class Player {
     get defeatedAmount(): Array<KnockoutObservable<number>> {
         return this._defeatedAmount;
     }
+
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: GameConstants.Region;
@@ -298,12 +299,8 @@ class Player {
      * @returns {boolean}
      */
     public alreadyCaughtPokemon(pokemonName: string) {
-        for (let i: number = 0; i < this.caughtPokemonList.length; i++) {
-            if (this.caughtPokemonList[i].name == pokemonName) {
-                return true;
-            }
-        }
-        return false;
+        let id = PokemonHelper.getPokemonByName(pokemonName).id;
+        return player.caughtAmount[id]() > 0;
     }
 
     public alreadyCaughtPokemonShiny(pokemonName: string) {

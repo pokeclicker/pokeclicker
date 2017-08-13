@@ -39,6 +39,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     };
 
+    PokedexHelper.populateTypeFilters();
+    PokedexHelper.updateList();
+
     ko.applyBindings(game);
     ko.options.deferUpdates = true;
 });
