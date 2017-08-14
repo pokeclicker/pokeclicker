@@ -72,6 +72,7 @@ class Battle {
             this.generateNewEnemy();
         }
         player.lowerItemMultipliers();
+        player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
     }
 
     /**
@@ -90,7 +91,6 @@ class Battle {
         let chance: number = Math.floor(Math.random() * 100) - pokeballBonus - oakBonus;
         if (chance <= this.enemyPokemon().catchRate) {
             this.catchPokemon();
-
         }
         this.catching(false);
     }

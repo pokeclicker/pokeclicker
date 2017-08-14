@@ -1,0 +1,32 @@
+@import "variables.less";
+
+@pokedexEntryBorderRadius: 6px;
+
+.pokedexEntry {
+  border-radius: @pokedexEntryBorderRadius;
+  list-style-type: none;
+  margin: 12px;
+
+  img {
+    padding: 16px 0;
+  }
+
+  span {
+    position: absolute;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    left: 0;
+    right: 0;
+    font-size: 14px;
+  }
+
+  span:first-child::before {
+    content: '#';
+  }
+}
+
+.pokemon-not-seen {
+  -webkit-filter: brightness(0%); /* Safari 6.0 - 9.0 */
+  filter: brightness(0%);
+  opacity: 0.6;
+}
