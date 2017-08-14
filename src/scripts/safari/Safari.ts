@@ -89,5 +89,25 @@ class Safari {
         }
     }
 
+    static show() {
+        let html = "";
+
+        for (let i=0; i<this.grid.length; i++) {
+            html += "<div class='row'>";
+            for (let j=0; j<this.grid[0].length; j++) {
+                html += Safari.square(i, j);
+            }
+            html += "</div>";
+        }
+
+        $("#safariBody").html(html);
+    }
+
+    private static square(i: number, j: number): string {
+        let img = 'assets/images/safari/' + this.grid[i][j] + '.png';
+        let divId = "safari-" + j + "-" + i;
+
+        return "<div id='" + divId + "' style=background-image:url('" + img + "') class='col-sm-1 safariSquare'></div>"
+    }
 
 }
