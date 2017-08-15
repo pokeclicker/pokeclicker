@@ -7,7 +7,7 @@ $(document).ready(function() {
                 e.preventDefault();
                 Safari.move(dir);
             }
-            if (keyCode = 32) { // space
+            if (keyCode == 32) { // space
                 e.preventDefault();
             }
         }
