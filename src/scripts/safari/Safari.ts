@@ -143,7 +143,6 @@ class Safari {
     }
 
     public static move(dir: string) {
-        console.log("moving " + dir)
         if(!Safari.walking && !Safari.isMoving) {
             Safari.queue = [];
             Safari.walking = true;
@@ -181,8 +180,6 @@ class Safari {
             x: Safari.playerXY.x + directionOffset.x,
             y: Safari.playerXY.y + directionOffset.y
         };
-
-        console.log(newPos)
 
         if (Safari.canMove(newPos.x, newPos.y)) {
             let next = $(`#safari-${newPos.x}-${newPos.y}`).offset();

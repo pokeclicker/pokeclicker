@@ -18,7 +18,7 @@ class SafariPokemon implements pokemonInterface {
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
         this.baseCatchFactor = data.catchRate * 100/1275;
-        this.baseEscapeFactor = 10;
+        this.baseEscapeFactor = 40;
         this.angry = 0;
         this.eating = 0;
     }

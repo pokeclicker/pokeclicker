@@ -65,13 +65,13 @@ class SafariBattle {
 
                     setTimeout(function () {
                         var random = Math.random();
-                        var index = Math.floor( (1 - Math.max( random, SafariBattle.enemy.catchFactor*1275/(100*100) )) /(1 - SafariBattle.enemy.catchFactor*1275/(100*100))*3);
+                        var index = Math.floor( (1 - Math.max( random, SafariBattle.enemy.catchFactor/(100) )) /(1 - SafariBattle.enemy.catchFactor/(100))*3);
                         if (index != 0) {
                             SafariBattle.startRoll(index);
                         }
 
                         setTimeout(function(){
-                            if (random*100 < SafariBattle.enemy.catchFactor*1275/100){
+                            if (random*100 < SafariBattle.enemy.catchFactor){
                                 SafariBattle.capturePokemon();
                                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)')
                                 setTimeout(function(){
@@ -172,15 +172,16 @@ class SafariBattle {
 
     private static enemyTurn() {
         // Enemy turn to flee;
-        console.log("Enemy turn");
         let random = Math.floor(Math.random()*100);
-        if( random < 5*SafariBattle.enemy.escapeFactor){
+        if( random < SafariBattle.enemy.escapeFactor){
             SafariBattle.text(SafariBattle.enemy.name + " has fled.");
             setTimeout(SafariBattle.endBattle, 1000);
         } else if(SafariBattle.enemy.eating > 0) {
             SafariBattle.text(SafariBattle.enemy.name + " is eating.");
         } else if(SafariBattle.enemy.angry > 0) {
-            SafariBattle.text(SafariBattle.enemy.name + " is watching carefully.");
+            SafariBattle.text(SafariBattle.enemy.name + " is angry!");
+        } else {
+            SafariBattle.text(SafariBattle.enemy.name + " is watching carefully...");
         }
         SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating-1);
         SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry-1);
@@ -188,8 +189,8 @@ class SafariBattle {
             SafariBattle.text("What will you do?");
             SafariBattle.busy = false;
         }, 1500);
-        console.log(SafariBattle.enemy.catchFactor*1275/100);
-        console.log(SafariBattle.enemy.escapeFactor*5 + "%");
+        console.log(`Catch chance: ${SafariBattle.enemy.catchFactor}%`);
+        console.log(`Escape chance: ${SafariBattle.enemy.escapeFactor}%`);
     }
 
     private static endBattle() {
