@@ -86,6 +86,7 @@ namespace GameConstants {
 
     export const SAFARI_PLAYER_X = 13;
     export const SAFARI_PLAYER_Y = 20;
+    export const SAFARI_BATTLE_CHANCE = 5;
 
     export const LEGAL_WALK_BLOCKS = [
         0,
@@ -104,7 +105,16 @@ namespace GameConstants {
         22,
         23,
         24
-    ]
+    ];
+
+    export const SAFARI_POKEMON = [
+        "Pinsir",
+        "Scyther",
+        "Rhyhorn",
+        "Kangaskhan",
+        "Tauros",
+        "Exeggcute"
+    ];
 
     /**
      * idle: The game is not doing anything, the battle view isn't shown

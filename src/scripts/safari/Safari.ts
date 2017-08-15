@@ -8,6 +8,8 @@ class Safari {
     static queue: Array<string> = [];
     private static playerXY = {"x": 0, "y": 0};
     private static origin;
+    static inBattle: boolean = false;
+    static balls: number = 30;
 
     public static load() {
         this.grid = [];
@@ -200,9 +202,9 @@ class Safari {
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
             $('#sprite').animate(offset, 250, "linear", function() {
-                //checkBattle();
+                Safari.checkBattle();
                 Safari.isMoving = false;
-                if(Safari.walking){ if (/*!checkBattle() && */Safari.queue[0]){Safari.step(Safari.queue[0])} }
+                if(Safari.walking){ if (!Safari.checkBattle() && Safari.queue[0]){Safari.step(Safari.queue[0])} }
             });
         } else {
             $("#sprite").css("background", "url('assets/images/safari/walk"+direction+".png')");
@@ -269,6 +271,18 @@ class Safari {
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
+    }
+
+    private static checkBattle(): boolean {
+        let battle = false
+        if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
+            battle = Math.random() * GameConstants.SAFARI_BATTLE_CHANCE <= 1;
+        }
+        if(battle){
+            SafariBattle.load();
+            return true;
+        }
+        return false;
     }
 }
 
