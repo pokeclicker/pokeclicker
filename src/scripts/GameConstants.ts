@@ -87,6 +87,25 @@ namespace GameConstants {
     export const SAFARI_PLAYER_X = 13;
     export const SAFARI_PLAYER_Y = 20;
 
+    export const LEGAL_WALK_BLOCKS = [
+        0,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+    ]
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks

@@ -205,7 +205,7 @@ class Safari {
                 if(Safari.walking){ if (/*!checkBattle() && */Safari.queue[0]){Safari.step(Safari.queue[0])} }
             });
         } else {
-            $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
+            $("#sprite").css("background", "url('assets/images/safari/walk"+direction+".png')");
             setTimeout(function(){
                 Safari.walking = false;
                 Safari.isMoving = false;
@@ -230,8 +230,13 @@ class Safari {
         return {x: x, y: y};
     }
 
-    private static canMove(i: number, j: number): boolean {
-        return true;
+    private static canMove(x: number, y: number): boolean {
+        for(let i = 0; i<GameConstants.LEGAL_WALK_BLOCKS.length; i++){
+            if(Safari.grid[y] && Safari.grid[y][x] === GameConstants.LEGAL_WALK_BLOCKS[i]){
+                return true;
+            }
+        }
+        return false;
     }
 
     private static setNextDirection(direction: string) {
