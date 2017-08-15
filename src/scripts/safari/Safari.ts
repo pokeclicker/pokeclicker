@@ -1,11 +1,18 @@
 class Safari {
     static grid: Array<Array<number>>;
     static player: Point = new Point(12, 20);
+    static lastDirection: string = "up";
+    static nextDirection: string;
+    static walking: boolean = false;
+    static isMoving: boolean = false;
+    static queue: Array<string> = [];
+    private static playerXY = {"x": 0, "y": 0};
+    private static origin;
 
     public static load() {
         this.grid = [];
-        this.player.x = 12;
-        this.player.y = 20;
+        this.playerXY.x = 12;
+        this.playerXY.y = 20;
         for( let i = 0; i<GameConstants.Safari.SizeY; i++){
             let row = Array.apply(null, Array(GameConstants.Safari.SizeX)).map(Number.prototype.valueOf, 0);
             this.grid.push(row);
@@ -35,7 +42,8 @@ class Safari {
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
-        //showSafari();
+        
+        Safari.show();
     }
 
     private static addRandomBody(body: SafariBody) {
@@ -101,6 +109,8 @@ class Safari {
         }
 
         $("#safariBody").html(html);
+
+        Safari.addPlayer(GameConstants.SAFARI_PLAYER_X, GameConstants.SAFARI_PLAYER_Y);
     }
 
     private static square(i: number, j: number): string {
@@ -108,6 +118,143 @@ class Safari {
         let divId = "safari-" + j + "-" + i;
 
         return "<div id='" + divId + "' style=background-image:url('" + img + "') class='col-sm-1 safariSquare'></div>"
+    }
+
+    private static addPlayer(i: number, j: number) {
+        let topLeft = $(`#safari-0-0`).offset();
+        let offset = {
+            top: 32*j + topLeft.top,
+            left: 32*i + topLeft.left
+        };
+        $("#safariBody").append("<div id='sprite'></div>");
+        $("#sprite").css('background',  "url('assets/images/safari/walk" + Safari.lastDirection + ".png')");
+        $("#sprite").css('position', 'absolute');
+        $("#sprite").offset( offset );
+        Safari.playerXY.x = i;
+        Safari.playerXY.y = j;
+        Safari.origin = offset;
+    }
+
+    public static move(dir: string) {
+        if(!Safari.walking && !Safari.isMoving) {
+            Safari.queue = [];
+            Safari.walking = true;
+            Safari.queue.unshift(dir);
+            Safari.startMoving(dir);
+        } else {
+            if(dir) {
+                Safari.setNextDirection(dir)
+            }
+        }
+    }
+
+    private static startMoving(dir: string) {
+        Safari.nextDirection = dir;
+
+        if(!Safari.isMoving) {
+            //let frame = 0;
+            let origin = $("#safari-12-20").offset();
+
+            let element = document.querySelector('#sprite');
+            /*
+            sprite = new Motio(element, {
+                fps: 8,
+                frames: 4
+            }).on('frame', function() {
+                if (sprite.frame%2 == 0) {
+                    sprite.pause();
+                    safari.frame = sprite.frame;
+                }
+            });
+            if (safari.frame == 2) {
+                sprite.to(2, true, function(){safariStep(direction)});
+            }
+            */
+            Safari.step(dir);
+        }
+    }
+
+    private static step(direction: string) {
+        Safari.lastDirection = direction;
+
+        //sprite.toggle();
+        let directionOffset = Safari.directionToXY(direction);
+
+        Safari.isMoving = true;
+
+        let newPos = {
+            x: Safari.playerXY.x + directionOffset.x,
+            y: Safari.playerXY.y + directionOffset.y
+        };
+
+        console.log(newPos)
+
+        if (Safari.canMove(newPos.x, newPos.y)) {
+            let next = $(`#safari-${newPos.x}-${newPos.y}`).offset();
+            let offset = {
+                top: next.top,
+                left: next.left
+            }
+
+            $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
+            Safari.playerXY.x = newPos.x;
+            Safari.playerXY.y = newPos.y;
+            $('#sprite').animate(offset, 250, "linear", function() {
+                //checkBattle();
+                Safari.isMoving = false;
+                if(Safari.walking){ if (/*!checkBattle() && */Safari.queue[0]){Safari.step(Safari.queue[0])} }
+            });
+        } else {
+            $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
+            setTimeout(function(){
+                Safari.walking = false;
+                Safari.isMoving = false;
+                if(Safari.queue[0]){
+                    Safari.isMoving = true;
+                    Safari.walking = true;
+                    Safari.step(Safari.queue[0]);
+                }
+            }, 250);
+        }
+    }
+
+    private static directionToXY(dir: string) {
+        let x = 0;
+        let y = 0;
+        switch (dir) {
+            case "left": x=-1;break;
+            case "up": y=1;break;
+            case "right": x=1;break;
+            case "down": y=-1;break;
+        }
+        return {x: x, y: y};
+    }
+
+    private static canMove(i: number, j: number): boolean {
+        return true;
+    }
+
+    private static setNextDirection(direction: string) {
+        if(direction != Safari.lastDirection){
+            if (Safari.queue[0] != direction) {
+                if (Safari.queue.length == 1){
+                    Safari.queue.unshift(direction);
+                } else {
+                    Safari.queue[0] = direction;
+                }
+            };
+            Safari.nextDirection = direction;
+            Safari.walking = true;
+        }
+    }
+
+    public static stop(dir: string) {
+        for (let i=0; i<Safari.queue.length; i++) {
+            if (Safari.queue[i] == dir) {
+                Safari.queue.splice(i, 1);
+            }
+        }
+        if (!Safari.queue[0]){ Safari.walking = false };
     }
 
 }

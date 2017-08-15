@@ -84,6 +84,9 @@ namespace GameConstants {
         "SizeX": 25,
     }
 
+    export const SAFARI_PLAYER_X = 13;
+    export const SAFARI_PLAYER_Y = 20;
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks
@@ -351,6 +354,17 @@ namespace GameConstants {
         Dragon,
         Pokemon,
         Mystery,
+    }
+
+    export const KeyToDirection = {
+        37: "left",
+        38: "up",
+        39: "right",
+        40: "down",
+        65: "left", //a
+        68: "right", //d
+        83: "down", //s
+        87: "up", //w
     }
 }
 
