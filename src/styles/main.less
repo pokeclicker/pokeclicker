@@ -199,6 +199,25 @@ img {
   height: 160px;
 }
 
+.vertical-middle {
+  vertical-align: middle !important;
+}
+
 .modal {
   text-align: center;
+}
+
+.badgeEntry {
+  list-style-type: none;
+
+  p::after {
+    content: ' Badge';
+  }
+}
+
+.badge-not-acquired {
+
+  -webkit-filter: grayscale(70%) contrast(3%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(70%) contrast(3%);
+
 }

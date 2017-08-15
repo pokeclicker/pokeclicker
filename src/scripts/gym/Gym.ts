@@ -37,6 +37,16 @@ class Gym {
             return "btn btn-secondary"
         });
     }
+
+    public static getLeaderByBadge(badge: GameConstants.Badge): string {
+        for (let item in gymList) {
+            let gym = gymList[item];
+            if (GameConstants.Badge[gym.badgeReward] == GameConstants.Badge[GameConstants.Badge[badge]]) {
+                return gym.leaderName;
+            }
+        }
+        return "Brock";
+    }
 }
 
 //TODO add all rewardMessages

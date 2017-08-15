@@ -8,6 +8,7 @@ const debug = false;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     OakItemRunner.initialize();
+    UndergroundItem.initialize();
     let game: Game = new Game();
     // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
     game.start();
@@ -38,6 +39,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     };
 
+    PokedexHelper.populateTypeFilters();
+    PokedexHelper.updateList();
+
     ko.applyBindings(game);
     ko.options.deferUpdates = true;
 });
@@ -49,12 +53,14 @@ class Game {
     interval;
     undergroundCounter: number;
     farmCounter: number;
+    public static achievementCounter: number = 0;
 
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
     constructor() {
         (<any>window).player = Save.load();
         KeyItemHandler.initialize();
+        AchievementHandler.initialize();
         player.gainKeyItem("Coin case", true);
         player.gainKeyItem("Teachy tv", true);
         player.gainKeyItem("Pokeball bag", true);
@@ -75,7 +81,15 @@ class Game {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
         this.farmCounter += GameConstants.TICK_TIME;
+        Game.achievementCounter += GameConstants.TICK_TIME;
+        if(Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK){
+            Game.achievementCounter = 0;
+            AchievementHandler.checkAchievements();
+        }
         Save.counter += GameConstants.TICK_TIME;
+        Underground.counter += GameConstants.TICK_TIME;
+
+
 
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
@@ -106,6 +120,15 @@ class Game {
         if (Save.counter > GameConstants.SAVE_TICK) {
             Save.store(player);
         }
+
+        if (Underground.counter > GameConstants.UNDERGROUND_TICK) {
+            Underground.energyTick( Math.max(0, Underground.energyTick() - 1) );
+            if (Underground.energyTick() == 0) {
+                Underground.gainEnergy();
+                Underground.energyTick(player._mineEnergyRegenTime());
+            }
+            Underground.counter = 0;
+        }
     }
 
     save() {
@@ -116,5 +139,8 @@ class Game {
         OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
         Safari.load();
+        Save.loadMine();
+        Underground.energyTick(player._mineEnergyRegenTime())
+        DailyDeal.generateDeals(player.maxDailyDeals, new Date());
     }
 }
