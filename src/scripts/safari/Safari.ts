@@ -8,8 +8,8 @@ class Safari {
     static queue: Array<string> = [];
     private static playerXY = {"x": 0, "y": 0};
     private static origin;
-    static inBattle: boolean = false;
-    static balls: number = 30;
+    static inBattle: KnockoutObservable<boolean> = ko.observable(false);
+    static balls: KnockoutObservable<number> = ko.observable(30);
 
     public static load() {
         this.grid = [];
@@ -110,7 +110,8 @@ class Safari {
             html += "</div>";
         }
 
-        $("#safariBody").html(html);
+        $("#safariBattleBody").hide();
+        $("#safariBody").html(html).show();
 
         Safari.addPlayer(GameConstants.SAFARI_PLAYER_X, GameConstants.SAFARI_PLAYER_Y);
     }
@@ -138,6 +139,7 @@ class Safari {
     }
 
     public static move(dir: string) {
+        console.log("moving " + dir)
         if(!Safari.walking && !Safari.isMoving) {
             Safari.queue = [];
             Safari.walking = true;

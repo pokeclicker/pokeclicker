@@ -4,10 +4,10 @@ class SafariPokemon implements pokemonInterface {
     type1: PokemonTypes;
     type2: PokemonTypes;
     shiny: boolean;
-    catchFactor: number;
-    escapeFactor: number;
-    angry: boolean;
-    eating: boolean;
+    baseCatchFactor: number;
+    baseEscapeFactor: number;
+    angry: number;
+    eating: number;
 
     constructor(name: string) {
         let data = PokemonHelper.getPokemonByName(name);
@@ -17,9 +17,31 @@ class SafariPokemon implements pokemonInterface {
         this.type1 = data.type1;
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
-        this.catchFactor = data.catchRate * 100/1275;
-        this.escapeFactor = 10;
-        this.angry = false;
-        this.eating = false;
+        this.baseCatchFactor = data.catchRate * 100/1275;
+        this.baseEscapeFactor = 10;
+        this.angry = 0;
+        this.eating = 0;
     }
+
+    public get catchFactor(): number {
+        if(this.eating > 0) {
+            return this.baseCatchFactor / 2;
+        }
+        if(this.angry > 0) {
+            return this.baseCatchFactor * 2;
+        }
+
+        return this.baseCatchFactor;
+    }
+
+    public get escapeFactor(): number {
+        if(this.eating > 0) {
+            return this.baseEscapeFactor / 4;
+        }
+        if(this.angry > 0) {
+            return this.baseEscapeFactor * 2;
+        }
+
+        return this.baseEscapeFactor;
+        }
 }

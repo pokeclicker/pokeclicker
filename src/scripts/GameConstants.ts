@@ -116,6 +116,14 @@ namespace GameConstants {
         "Exeggcute"
     ];
 
+    export const SAFARI_CATCH_MESSAGES = [
+        "Oh, no!<br>The Pokemon broke free!",
+        "Aww! It appeared to be caught!",
+        "Aargh! Almost had it!",
+        "Shoot! It was so close, too!"
+    ];
+
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks

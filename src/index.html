@@ -1692,7 +1692,31 @@
             <div class="modal-header">
                 <h4 style='text-align:center' class="modal-title">Safari Zone</h4>
             </div>
-            <div class="modal-body" id="safariBody" style="width: 80%;margin: auto;">
+            <div class="modal-body" style="width: 80%;margin: auto;">
+                <div id="safariBody">
+                </div>
+                <div id="safariBattleBody" data-bind="if: Safari.inBattle">
+                    <div class='row safariEnemyRow'>
+                        <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind='attr: { src: "assets/images/pokemon/" + SafariBattle.enemy.id + ".png" }'></div>
+                    </div>
+                    <div class='row'>
+                        <div class='col-sm-2 offset-sm-3'>
+                           <img id='safariPlayer' src='assets/images/safari/playerBack.png'>
+                        </div>
+                    </div>
+
+                    <div id='battleConsole' class='row'>
+                        <div class='col-sm-6'>
+                            <h3 id='safariBattleText' data-bind='html: SafariBattle.text'></h3>
+                        </div>
+                        <div class='row col-sm-4 offset-sm-2 safariOptions'>
+                            <div class='col-sm-6 safariOption'><button onClick='SafariBattle.throwBall()' class='btn btn-info safariButton' data-bind='text: "Ball (" + Safari.balls() + ")"'></button></div>
+                            <div class='col-sm-6 safariOption'><button onClick='SafariBattle.throwBait()' class='btn btn-info safariButton'>Bait</button></div>
+                            <div class='col-sm-6 safariOption'><button onClick='SafariBattle.throwRock()' class='btn btn-info safariButton'>Rock</button></div>
+                            <div class='col-sm-6 safariOption'><button onClick='SafariBattle.run()' class='btn btn-info safariButton'>Run</button></div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
