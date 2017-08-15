@@ -115,5 +115,6 @@ class Game {
     load() {
         OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
+        Safari.load();
     }
 }

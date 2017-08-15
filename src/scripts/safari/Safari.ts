@@ -257,4 +257,20 @@ class Safari {
         if (!Safari.queue[0]){ Safari.walking = false };
     }
 
+    public static openModal() {
+        if (player.hasKeyItem("Safari ticket")) {
+            Game.gameState(GameConstants.GameState.safari);
+            $('#safariModal').modal('show');
+        } else {
+            Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
+        }
+    }
 }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+
+    $('#safariModal').on('hide.bs.modal', function () {
+        MapHelper.moveToTown("Fuchsia City");
+    });
+
+});
