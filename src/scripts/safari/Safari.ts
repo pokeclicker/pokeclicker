@@ -18,6 +18,7 @@ class Safari {
         this.grid = [];
         this.playerXY.x = 12;
         this.playerXY.y = 20;
+        Safari.lastDirection = "up";
         for( let i = 0; i<GameConstants.Safari.SizeY; i++){
             let row = Array.apply(null, Array(GameConstants.Safari.SizeX)).map(Number.prototype.valueOf, 0);
             this.grid.push(row);
@@ -116,7 +117,7 @@ class Safari {
         $("#safariBattleBody").hide();
         $("#safariBody").html(html).show();
 
-        Safari.addPlayer(GameConstants.SAFARI_PLAYER_X, GameConstants.SAFARI_PLAYER_Y);
+        Safari.addPlayer(Math.floor(GameConstants.Safari.SizeX - 1)/2, GameConstants.Safari.SizeY - 1);
     }
 
     private static square(i: number, j: number): string {
@@ -129,7 +130,7 @@ class Safari {
     private static addPlayer(i: number, j: number) {
         let topLeft = $(`#safari-0-0`).offset();
         let offset = {
-            top: 32*j + topLeft.top + 12,
+            top: 32*j + topLeft.top,
             left: 32*i + topLeft.left
         };
         $("#safariBody").append("<div id='sprite'></div>");

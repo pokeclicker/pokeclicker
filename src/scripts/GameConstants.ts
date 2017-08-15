@@ -80,12 +80,10 @@ namespace GameConstants {
 
     //Safari
     export const Safari = {
-        "SizeY": 25,
+        "SizeY": 21,
         "SizeX": 25,
     }
-
-    export const SAFARI_PLAYER_X = 13;
-    export const SAFARI_PLAYER_Y = 20;
+    
     export const SAFARI_BATTLE_CHANCE = 5;
 
     export const LEGAL_WALK_BLOCKS = [

@@ -1693,9 +1693,11 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <p style='margin-bottom: 0' data-bind='text: "Balls: " + Safari.balls()'></p>
                 <h4 style='text-align:center' class="modal-title">Safari Zone</h4>
+                <button class='btn btn-primary' onclick='$("#safariModal").modal("toggle")'>Leave</button>
             </div>
-            <div class="modal-body" style="width: 80%;margin: auto;">
+            <div class="modal-body">
                 <div id="safariBody">
                 </div>
                 <div id="safariBattleBody" data-bind="if: Safari.inBattle">
