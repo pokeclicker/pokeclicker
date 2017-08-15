@@ -13,17 +13,12 @@ class SafariBattle {
     }
 
     public static load() {
-        SafariBattle.enemy = SafariBattle.generateEnemy();
+        SafariBattle.enemy = SafariPokemon.random();
         Safari.inBattle(true);
         Notifier.notify("Battle", GameConstants.NotificationOption.info);
         SafariBattle.showBattleBars();
         SafariBattle.text("What will you do?");
         SafariBattle.escapeAttempts = 0;
-    }
-
-    private static generateEnemy(): SafariPokemon {
-        let enemyName = GameConstants.SAFARI_POKEMON[Math.floor(Math.random() * GameConstants.SAFARI_POKEMON.length)]
-        return new SafariPokemon(enemyName);
     }
 
     private static showBattleBars() {
@@ -65,9 +60,9 @@ class SafariBattle {
 
                     setTimeout(function () {
                         var random = Math.random();
-                        var index = Math.floor( (1 - Math.max( random, SafariBattle.enemy.catchFactor/(100) )) /(1 - SafariBattle.enemy.catchFactor/(100))*3);
+                        var index = Math.floor( (1 - Math.max( random, SafariBattle.enemy.catchFactor/(100) )) /(1 - SafariBattle.enemy.catchFactor/(100))*4);
                         if (index != 0) {
-                            SafariBattle.startRoll(index);
+                            SafariBattle.startRoll(Math.min(3, index));
                         }
 
                         setTimeout(function(){

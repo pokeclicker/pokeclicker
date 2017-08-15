@@ -155,15 +155,6 @@ namespace GameConstants {
         24
     ];
 
-    export const SAFARI_POKEMON = [
-        "Pinsir",
-        "Scyther",
-        "Rhyhorn",
-        "Kangaskhan",
-        "Tauros",
-        "Exeggcute"
-    ];
-
     export const SAFARI_CATCH_MESSAGES = [
         "Oh, no!<br>The Pokemon broke free!",
         "Aww! It appeared to be caught!",

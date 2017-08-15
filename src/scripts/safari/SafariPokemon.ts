@@ -9,6 +9,18 @@ class SafariPokemon implements pokemonInterface {
     angry: number;
     eating: number;
 
+    // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
+    static readonly list = [
+        { name: "Pinsir", weight: 2 },
+        { name: "Scyther", weight: 2 },
+        { name: "Rhyhorn", weight: 3 },
+        { name: "Kangaskhan", weight: 2 },
+        { name: "Tauros", weight: 2 },
+        { name: "Exeggcute", weight: 4 }
+    ];
+
+    static readonly listWeight = SafariPokemon.list.reduce((sum:number, pokemon) => {return sum += pokemon.weight}, 0);
+
     constructor(name: string) {
         let data = PokemonHelper.getPokemonByName(name);
 
@@ -43,5 +55,16 @@ class SafariPokemon implements pokemonInterface {
         }
 
         return this.baseEscapeFactor;
+    }
+
+    public static random() {
+        let rand = Math.random() * SafariPokemon.listWeight;
+        let i = 0;
+        for (let pokemon of SafariPokemon.list) {
+            i += pokemon.weight;
+            if (rand < i) {
+                return new SafariPokemon(pokemon.name);
+            }
         }
+    }
 }
