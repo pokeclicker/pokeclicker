@@ -1,6 +1,15 @@
 class FarmRunner {
     public static curBerry: Berry;
 
+    public static openFarmModal() {
+        $('#farmModal').modal('show');
+    }
+
+    public static accessToFarm() {
+        //TODO implement
+        return true;
+    }
+
     public static tick() {
         for (let i = 0; i < 25; i++) {
             player.plotList[i].timeLeft = Math.max(0, player.plotList[i].timeLeft - 1);

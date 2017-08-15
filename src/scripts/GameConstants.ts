@@ -34,6 +34,8 @@ namespace GameConstants {
         "sizeX": 25
     }
 
+    export const AMOUNT_OF_PLOTS = 25;
+
     export const HAMMER_ENERGY = 3;
     export const CHISEL_ENERGY = 1;
 
@@ -148,6 +150,7 @@ namespace GameConstants {
         safari = 5,
         town = 6,
         shop = 7,
+        farm = 8,
     }
 
     export enum Pokeball {

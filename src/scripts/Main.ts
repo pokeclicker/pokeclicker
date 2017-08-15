@@ -87,8 +87,6 @@ class Game {
         Save.counter += GameConstants.TICK_TIME;
         Underground.counter += GameConstants.TICK_TIME;
 
-
-
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
                 Battle.counter += GameConstants.TICK_TIME;
@@ -126,6 +124,10 @@ class Game {
                 Underground.energyTick(player._mineEnergyRegenTime());
             }
             Underground.counter = 0;
+        }
+
+        if (this.farmCounter > GameConstants.FARM_TICK) {
+            FarmRunner.tick();
         }
     }
 

@@ -48,7 +48,7 @@ class Save {
         return filtered
     }
 
-    public static initializeMultipliers(): {[name: string]: number} {
+    public static initializeMultipliers(): { [name: string]: number } {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = 1;
@@ -56,7 +56,7 @@ class Save {
         return res;
     }
 
-    public static initializeItemlist(): {[name: string]: number} {
+    public static initializeItemlist(): { [name: string]: number } {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = 0;
@@ -64,12 +64,14 @@ class Save {
         return res;
     }
 
-    public static initializePlots() {
-        let plotList = [];
-        plotList.push(new Plot(true, 0, 0, false, null, 0));
-        for (let i = 1; i < 25; i++) {
-            plotList.push(new Plot(false, 0, 0, false, null, 0));
-        }
+    public static initializePlots(): Array<KnockoutObservable<Plot>> {
+        let plotList: Array<KnockoutObservable<Plot>>;
+        plotList = Array.apply(null, Array(GameConstants.AMOUNT_OF_PLOTS)).map(function (val, index) {
+            if (index == 0) {
+                return ko.observable(new Plot(true, 0, 0, false, null, 0));
+            }
+            return ko.observable(new Plot(false, 0, 0, false, null, 0))
+        });
         return plotList;
     }
 

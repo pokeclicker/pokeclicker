@@ -717,6 +717,19 @@
                 </div>
             </div>
 
+            <div data-bind="if: Game.gameState() == GameConstants.GameState.farm"
+                 class="justify-content-center no-gutters no-select row">
+                <div class="col-4">
+                    <ul id="berryList" data-bind="foreach: player.seedList">
+                        <li data-bind="text: GameConstants.BerryType[$index()]"></li>
+                    </ul>
+                </div>
+
+                <div class="col-8">
+
+                </div>
+            </div>
+
             <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
                 <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
                     Game.gameState() == GameConstants.GameState.shop)">
@@ -1488,7 +1501,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Start Sequence Modal-->
 <div class="modal" id="startSequenceModal" tabindex="-1" role="dialog"
