@@ -123,7 +123,7 @@ class Safari {
     private static addPlayer(i: number, j: number) {
         let topLeft = $(`#safari-0-0`).offset();
         let offset = {
-            top: 32*j + topLeft.top,
+            top: 32*j + topLeft.top + 12,
             left: 32*i + topLeft.left
         };
         $("#safariBody").append("<div id='sprite'></div>");
@@ -192,11 +192,11 @@ class Safari {
         if (Safari.canMove(newPos.x, newPos.y)) {
             let next = $(`#safari-${newPos.x}-${newPos.y}`).offset();
             let offset = {
-                top: next.top,
-                left: next.left
+                top: `+=${directionOffset.y * 32}`,
+                left: `+=${directionOffset.x * 32}`
             }
 
-            $(".sprite").css("background", "url('images/safari/walk"+direction+".png')");
+            $("#sprite").css("background", "url('assets/images/safari/walk"+direction+".png')");
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
             $('#sprite').animate(offset, 250, "linear", function() {
@@ -223,9 +223,9 @@ class Safari {
         let y = 0;
         switch (dir) {
             case "left": x=-1;break;
-            case "up": y=1;break;
+            case "up": y=-1;break;
             case "right": x=1;break;
-            case "down": y=-1;break;
+            case "down": y=1;break;
         }
         return {x: x, y: y};
     }
