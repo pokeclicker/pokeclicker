@@ -363,3 +363,7 @@ Array.prototype.equals = function (array) {
     }
     return true;
 }
+
+interface Array<T> {
+    equals(array: Array<T>): boolean;
+}
