@@ -1,3 +1,5 @@
+/// <reference path="../../libs/motio.d.ts" />
+
 class Safari {
     static grid: Array<Array<number>>;
     static player: Point = new Point(12, 20);
@@ -10,6 +12,7 @@ class Safari {
     private static origin;
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
     static balls: KnockoutObservable<number> = ko.observable(30);
+    static sprite: Motio;
 
     public static load() {
         this.grid = [];
@@ -156,32 +159,19 @@ class Safari {
         Safari.nextDirection = dir;
 
         if(!Safari.isMoving) {
-            //let frame = 0;
             let origin = $("#safari-12-20").offset();
-
-            let element = document.querySelector('#sprite');
-            /*
-            sprite = new Motio(element, {
-                fps: 8,
-                frames: 4
-            }).on('frame', function() {
-                if (sprite.frame%2 == 0) {
-                    sprite.pause();
-                    safari.frame = sprite.frame;
-                }
-            });
-            if (safari.frame == 2) {
-                sprite.to(2, true, function(){safariStep(direction)});
+            if (Safari.sprite.frame == 2) {
+                Safari.sprite.to(0, true, function(){Safari.step(dir)});
+            } else {
+                Safari.step(dir);
             }
-            */
-            Safari.step(dir);
         }
     }
 
     private static step(direction: string) {
         Safari.lastDirection = direction;
 
-        //sprite.toggle();
+        Safari.sprite.toggle();
         let directionOffset = Safari.directionToXY(direction);
 
         Safari.isMoving = true;
@@ -280,7 +270,7 @@ class Safari {
         if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
             battle = Math.random() * GameConstants.SAFARI_BATTLE_CHANCE <= 1;
         }
-        if(battle){
+        if(battle && !Safari.inBattle()){
             SafariBattle.load();
             return true;
         }
@@ -294,4 +284,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
         MapHelper.moveToTown("Fuchsia City");
     });
 
+    $('#safariModal').on('shown.bs.modal', function () {
+        let element = document.querySelector('#sprite');
+        Safari.sprite = new Motio(element, {
+            fps: 8,
+            frames: 4
+        }).on('frame', function() {
+            if (Safari.sprite.frame%2 == 0) {
+                Safari.sprite.pause();
+            }
+        });
+    });
 });
