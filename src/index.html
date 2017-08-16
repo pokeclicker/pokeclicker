@@ -705,7 +705,8 @@
                 <div id="farmView" data-bind="if: Game.gameState() == GameConstants.GameState.farm"
                      class="justify-content-center no-select row">
                     <div class="col-sm-4 col-md-3 col-lg-4">
-                        <ul id="seedList" data-bind="foreach: player.seedList" class="list-group">
+                        <ul id="seedList" data-bind="foreach: player.seedList" class="list-group"
+                            style="margin-bottom: 5px;">
                             <li class="list-group-item list-group-item-action seed-list-item"
                                 data-bind="click: function() {FarmRunner.curBerry = BerryList[GameConstants.BerryType[$index()]]}">
                                 <img src="" width="24px"
@@ -715,11 +716,18 @@
                             </li>
                         </ul>
 
+                        <div class="row">
+                            <div class="col-sm-12 col-6">
+                                <button class="btn btn-primary btn-sm farm-button">Plant All</button>
+                            </div>
+                            <div class="col-sm-12 col-6">
+                                <button class="btn btn-success btn-sm farm-button">Harvest All</button>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="col-sm-8 col-md-9 col-lg-8">
+                    <div class="col-sm-8 col-md-9 col-lg-8" style="padding-left: 0">
                         <div id="plotList" data-bind="foreach: player.plotList">
-                            <div class="plot">
+                            <div class="plot" data-bind="css :{plotLocked : !isUnlocked}">
                                 <div class="plot-content">
 
                                     <div data-bind="">
