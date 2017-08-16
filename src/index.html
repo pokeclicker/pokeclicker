@@ -74,6 +74,10 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
+    <script type="text/javascript">
+        $(Game.gameState((GameConstants.GameState.farm)))
+    </script>
+
 </head>
 <body class="no-select">
 
@@ -696,6 +700,27 @@
                         </div>
                     </div>
                 </div>
+
+                <!--Farm View-->
+                <div data-bind="if: Game.gameState() == GameConstants.GameState.farm"
+                     class="justify-content-center no-gutters no-select row">
+                    <div class="col-sm-3 col-md-2">
+                        <h5>Seeds</h5>
+                        <ul id="seedList" data-bind="foreach: player.seedList" class="list-group">
+                            <li class="list-group-item list-group-item-action seed-list-item"
+                                data-bind="click: function() {FarmRunner.curBerry = BerryList[GameConstants.BerryType[$index()]]}">
+                                <img src="" width="24px"
+                                     data-bind="attr:{ src: '/assets/images/berries/' + GameConstants.BerryType[$index()] + '.png'}">
+                                <span data-bind="text: GameConstants.BerryType[$index()]"></span>
+                                <span class="seedAmount" data-bind="text: player.seedList[$index()]()"></span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-sm-9 col-md-10">
+
+                    </div>
+                </div>
             </div>
 
             <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
@@ -717,22 +742,9 @@
                 </div>
             </div>
 
-            <div data-bind="if: Game.gameState() == GameConstants.GameState.farm"
-                 class="justify-content-center no-gutters no-select row">
-                <div class="col-4">
-                    <ul id="berryList" data-bind="foreach: player.seedList">
-                        <li data-bind="text: GameConstants.BerryType[$index()]"></li>
-                    </ul>
-                </div>
-
-                <div class="col-8">
-
-                </div>
-            </div>
-
             <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
                 <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
-                    Game.gameState() == GameConstants.GameState.shop)">
+                    Game.gameState() == GameConstants.GameState.shop || Game.gameState() == GameConstants.GameState.farm)">
                     <div class="page-item no-select">
                         <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
                             <defs>

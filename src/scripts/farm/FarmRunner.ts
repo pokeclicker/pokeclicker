@@ -1,5 +1,5 @@
 class FarmRunner {
-    public static curBerry: Berry;
+    public static curBerry: Berry = BerryList["Cheri"];
 
     public static openFarmModal() {
         $('#farmModal').modal('show');
@@ -56,3 +56,12 @@ class FarmRunner {
     }
 
 }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+    let seedList = $('#seedList');
+    seedList.children().get(0).className += " active"
+    seedList.find("li").click(function () {
+        $(this).parent().children().removeClass("active");
+        $(this).addClass("active");
+    });
+});

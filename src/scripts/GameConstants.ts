@@ -34,8 +34,6 @@ namespace GameConstants {
         "sizeX": 25
     }
 
-    export const AMOUNT_OF_PLOTS = 25;
-
     export const HAMMER_ENERGY = 3;
     export const CHISEL_ENERGY = 1;
 
@@ -85,6 +83,7 @@ namespace GameConstants {
 
     // Farm
     export const AMOUNT_OF_BERRIES = 8;
+    export const AMOUNT_OF_PLOTS = 25;
 
     export enum OakItem {
         "Magic Ball" = 0,
@@ -400,7 +399,8 @@ namespace GameConstants {
         Rawst,
         Aspear,
         Leppa,
-        Oran
+        Oran,
+        Sitrus
     }
 
     export enum PokeBlockColor {
