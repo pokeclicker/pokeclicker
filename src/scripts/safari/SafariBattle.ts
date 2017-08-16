@@ -46,6 +46,7 @@ class SafariBattle {
         if(!SafariBattle.busy) {
             SafariBattle.busy = true;
             Safari.balls(Safari.balls()-1);
+            let gameOver = Safari.balls() == 0;
             SafariBattle.text("You throw a ball...");
             let enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
@@ -71,14 +72,16 @@ class SafariBattle {
                                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)')
                                 setTimeout(function(){
                                     p.remove();
-                                    SafariBattle.endBattle();
+                                    gameOver ? SafariBattle.gameOver() : SafariBattle.endBattle();
                                 }, 2000);
                             } else {
                                 $('#safariEnemy > img').css('opacity', '1');
                                 $('#safariEnemy').removeClass('safariCapture');
                                 SafariBattle.text(GameConstants.SAFARI_CATCH_MESSAGES[index]);
                                 p.remove();
-                                setTimeout(SafariBattle.enemyTurn, 1000);
+                                setTimeout( function() {
+                                    gameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
+                                }, 1000);
                             }
                         }, (200 + 1200*index));
                     }, 1700);
@@ -193,6 +196,15 @@ class SafariBattle {
         SafariBattle.busy = false;
         $("#safariBattleBody").hide();
         $("#safariBody").show();
+    }
+
+    private static gameOver() {
+        SafariBattle.text(GameConstants.SAFARI_OUT_OF_BALLS);
+        setTimeout(function() {
+            Safari.inBattle(false);
+            SafariBattle.busy = false;
+            $("#safariModal").modal('toggle');
+        }, 2000);
     }
 
     private static dropParticle(html: string, pos, target, time: number = 2, top, persistentParticle: boolean = false) {

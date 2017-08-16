@@ -162,6 +162,8 @@ namespace GameConstants {
         "Shoot! It was so close, too!"
     ];
 
+    export const SAFARI_OUT_OF_BALLS = "Game Over!<br>You have run out of safari balls to use."
+
 
     /**
      * idle: The game is not doing anything, the battle view isn't shown
