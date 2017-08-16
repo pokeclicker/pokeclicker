@@ -729,10 +729,15 @@
                         <div id="plotList" data-bind="foreach: player.plotList">
                             <div class="plot" data-bind="css :{plotLocked : !isUnlocked}">
                                 <div class="plot-content">
-
-                                    <div data-bind="">
+                                    <div class="plotImage">
                                         <img style="width: 100%" src="assets/images/farm/soil.png">
-
+                                        <div class="plotButton" data-bind="ifnot: $data.isEmpty">
+                                            <img src=""
+                                                 data-bind="attr:{ src: FarmRunner.getImage($data)}">
+                                        </div>
+                                        <div class="plotButton"
+                                             data-bind="if: $data.isEmpty, click: function(){FarmRunner.plant($index())}">
+                                        </div>
                                     </div>
                                 </div>
                             </div>

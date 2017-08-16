@@ -47,7 +47,7 @@ class Player {
     public pokemonAttackObservable: KnockoutComputed<number>;
     public achievementsCompleted: {[name: string]: boolean};
 
-    public plotList: Array<KnockoutObservable<Plot>>;
+    public plotList: KnockoutObservableArray<KnockoutObservable<Plot>>;
     public farmPoints: KnockoutObservable<number>;
     public seedList: KnockoutObservable<number>[];
     public berryList: KnockoutObservable<number>[];
