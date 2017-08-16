@@ -702,23 +702,33 @@
                 </div>
 
                 <!--Farm View-->
-                <div data-bind="if: Game.gameState() == GameConstants.GameState.farm"
-                     class="justify-content-center no-gutters no-select row">
-                    <div class="col-sm-3 col-md-2">
-                        <h5>Seeds</h5>
+                <div id="farmView" data-bind="if: Game.gameState() == GameConstants.GameState.farm"
+                     class="justify-content-center no-select row">
+                    <div class="col-sm-4 col-md-3 col-lg-4">
                         <ul id="seedList" data-bind="foreach: player.seedList" class="list-group">
                             <li class="list-group-item list-group-item-action seed-list-item"
                                 data-bind="click: function() {FarmRunner.curBerry = BerryList[GameConstants.BerryType[$index()]]}">
                                 <img src="" width="24px"
-                                     data-bind="attr:{ src: '/assets/images/berries/' + GameConstants.BerryType[$index()] + '.png'}">
+                                     data-bind="attr:{ src: '/assets/images/items/' + GameConstants.BerryType[$index()] + '.png'}">
                                 <span data-bind="text: GameConstants.BerryType[$index()]"></span>
                                 <span class="seedAmount" data-bind="text: player.seedList[$index()]()"></span>
                             </li>
                         </ul>
+
                     </div>
 
-                    <div class="col-sm-9 col-md-10">
+                    <div class="col-sm-8 col-md-9 col-lg-8">
+                        <div id="plotList" data-bind="foreach: player.plotList">
+                            <div class="plot">
+                                <div class="plot-content">
 
+                                    <div data-bind="">
+                                        <img style="width: 100%" src="assets/images/farm/soil.png">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

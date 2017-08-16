@@ -1,7 +1,18 @@
 @padding: 3px;
 
+#farmView {
+  margin: 0 !important;
+}
+
+#seedList {
+  padding-top: 15px;
+}
 .seed-list-item {
   padding: @padding;
+
+  :first-child {
+    margin-right: 3px;
+  }
 }
 
 .seedAmount {
@@ -11,4 +22,34 @@
   :active {
     background-color: lightgray;
   }
+}
+
+.plot {
+  position: relative;
+  float: left;
+  width: 20%;
+  padding-bottom: 20%;
+  overflow: hidden;
+
+  :hover {
+    filter: brightness(95%);
+    -webkit-filter: brightness(95%);
+  }
+}
+
+.plot-locked {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.plot-content {
+  position: absolute;
+  height: 95%;
+  width: 95%;
+  padding: 1.25%;
+}
+
+#plotList {
+  padding-top: 15px;
+  padding-left: 0;
 }
