@@ -36,14 +36,15 @@ class SafariPokemon implements pokemonInterface {
     }
 
     public get catchFactor(): number {
+        let catchF = this.baseCatchFactor;
         if(this.eating > 0) {
-            return this.baseCatchFactor / 2;
+            catchF /= 2;
         }
         if(this.angry > 0) {
-            return this.baseCatchFactor * 2;
+            catchF *= 2;
         }
 
-        return this.baseCatchFactor;
+        return Math.min(100, catchF);
     }
 
     public get escapeFactor(): number {

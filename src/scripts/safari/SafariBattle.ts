@@ -60,10 +60,11 @@ class SafariBattle {
                     p.addClass('bounce');
 
                     setTimeout(function () {
-                        var random = Math.random();
-                        var index = Math.floor( (1 - Math.max( random, SafariBattle.enemy.catchFactor/(100) )) /(1 - SafariBattle.enemy.catchFactor/(100))*4);
+                        let random = Math.random();
+                        let catchF = SafariBattle.enemy.catchFactor / 100;
+                        let index = catchF == 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
                         if (index != 0) {
-                            SafariBattle.startRoll(Math.min(3, index));
+                            SafariBattle.startRoll(index);
                         }
 
                         setTimeout(function(){
