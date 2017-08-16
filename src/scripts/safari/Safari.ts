@@ -19,6 +19,7 @@ class Safari {
         this.playerXY.x = 12;
         this.playerXY.y = 20;
         Safari.lastDirection = "up";
+        Safari.inBattle(false);
         for( let i = 0; i<GameConstants.Safari.SizeY; i++){
             let row = Array.apply(null, Array(GameConstants.Safari.SizeX)).map(Number.prototype.valueOf, 0);
             this.grid.push(row);

@@ -2021,6 +2021,10 @@
                 <div id="safariBattleBody" data-bind="if: Safari.inBattle">
                     <div class='row safariEnemyRow'>
                         <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind='attr: { src: "assets/images/pokemon/" + SafariBattle.enemy.id + ".png" }'></div>
+                        <div id='safariEnemyName' class='col-sm-2'>
+                            <img class='pokeball-smallest' data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }' />
+                            <p data-bind='text: SafariBattle.enemy.name'></p>
+                        </div>
                     </div>
                     <div class='row'>
                         <div class='col-sm-2 offset-sm-3'>
