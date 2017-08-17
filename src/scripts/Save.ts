@@ -104,13 +104,14 @@ class Save {
     }
 
     public static convertShinies(list: Array<string>) {
-        console.log(list);
         for (let pokemon of list) {
             let shiny = parseInt(pokemon['shiny']);
-            if (shiny == 1) {
+            let name = pokemon['name'];
+            if (shiny == 1 && player.convertedShinyList().indexOf(name) == -1 && player.caughtShinyList.indexOf(name) == -1) {
                 player.convertedShinyList.push(pokemon['name'])
             }
         }
+        Notifier.notify("Success! You can pick up your shinies from Oak's lab", GameConstants.NotificationOption.success)
     }
 }
 
