@@ -3,6 +3,7 @@ class Save {
     static counter: number = 0;
 
     public static store(player: Player) {
+        //TODO encode in base-64
         let json = JSON.stringify(player);
         localStorage.setItem("player", json);
         localStorage.setItem("mine", Mine.serialize());
@@ -88,4 +89,17 @@ class Save {
         return res;
     }
 
+    public static loadFromTextArea() {
+        let json = $('#loadTextArea').val().toString();
+        let player = new Player(JSON.parse(json));
+        Save.store(player);
+        location.reload()
+    }
+
 }
+
+document.addEventListener("DOMContentLoaded", function (event) {
+    $('#saveModal').on('show.bs.modal', function () {
+        $('#saveTextArea').text(JSON.stringify(player));
+    });
+});

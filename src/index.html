@@ -74,6 +74,13 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
+    <script type="text/javascript">
+        //TODO remove
+        $(function () {
+            $('#saveModal').modal('show')
+        });
+    </script>
+
 </head>
 <body class="no-select">
 
@@ -96,7 +103,7 @@
             <a class="dropdown-item" href="https://pokeclicker.reddit.com" target="_blank">Subreddit</a>
         </li>
         <li>
-            <button class="dropdown-item" href="#">Save</button>
+            <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
         </li>
         <li>
             <a class="dropdown-item" href="#achievementsModal" data-toggle="modal">Achievements</a>
@@ -1873,12 +1880,6 @@
      aria-labelledby="pokedexModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4>Pokédex</h4>
-                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#pokedex-collapse">
-                    filter
-                </button>
-            </div>
             <div class="modal-body">
 
                 <div class="collapse" id="pokedex-collapse">
@@ -1989,6 +1990,52 @@
                                data-bind="text: $data">name</p>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Save Modal-->
+<div class="modal fade noselect" id="saveModal" tabindex="-1" role="dialog"
+     aria-labelledby="saveModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="tabbable"> <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link active" href="#saveTab1" data-toggle="tab">Export
+                            Save</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab2" data-toggle="tab">Import Save</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab3" data-toggle="tab">Reset</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="saveTab1">
+                            <div class="container">
+                                <p>Save this string in a textfile on your computer:</p>
+                                <textarea id="saveTextArea" class="saveTextArea"
+                                          onclick="this.focus();this.select()"></textarea>
+
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="saveTab2">
+                            <div class="container">
+                                <p>Paste your savefile here:</p>
+                                <textarea id="loadTextArea" class="saveTextArea"></textarea>
+                                <button style="float: right;" class="btn btn-success" onclick="Save.loadFromTextArea()">
+                                    Load
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="saveTab3">
+                            <h3 style="color:red">You do not get any rewards for resetting your savefile</h3>
+                            <button class="btn btn-danger" onClick="Save.reset()">Reset</button>
+                        </div>
                     </div>
                 </div>
             </div>
