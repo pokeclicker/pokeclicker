@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pokeclicker</title>
+    <title>Pokéclicker</title>
     <link href="/assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
         <tr data-bind='ifnot: $data.breeding()'>
@@ -91,7 +91,7 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
-            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokedex</a>
+            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokédex</a>
         </li>
         <li>
             <a class="dropdown-item" href="#badgeCaseModal" data-toggle="modal">Badge Case</a>
@@ -317,7 +317,7 @@
 
 <div class="container">
     <div class="row justify-content-lg-center">
-        <h1>Pokeclicker</h1>
+        <h1>Pokéclicker</h1>
     </div>
     <div class="row justify-content-lg-center" style="text-align: center">
 
@@ -2007,12 +2007,13 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <div class="tabbable"> <!-- Only required for left/right tabs -->
+                <div class="tabbable">
                     <ul class="nav nav-tabs">
                         <li class="nav-item"><a class="nav-link active" href="#saveTab1" data-toggle="tab">Export
                             Save</a></li>
                         <li class="nav-item"><a class="nav-link" href="#saveTab2" data-toggle="tab">Import Save</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#saveTab3" data-toggle="tab">Reset</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab3" data-toggle="tab">Converter</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab4" data-toggle="tab">Reset</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="saveTab1">
@@ -2033,7 +2034,17 @@
                             </div>
                         </div>
                         <div class="tab-pane" id="saveTab3">
-                            <h3 style="color:red">You do not get any rewards for resetting your savefile</h3>
+                            <div class="container">
+                                <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
+                                <textarea id="convertTextArea" class="saveTextArea"></textarea>
+                                <button style="float: right;" class="btn btn-success" onclick="Save.convert()">
+                                    Convert
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="saveTab4">
+                            <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
+                                savefile</h3>
                             <button class="btn btn-danger" onClick="Save.reset()">Reset</button>
                         </div>
                     </div>

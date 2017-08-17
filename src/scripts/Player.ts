@@ -10,7 +10,6 @@ class Player {
     private _caughtShinyList: KnockoutObservableArray<string>;
     private _route: KnockoutObservable<number>;
     private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
-
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
@@ -95,6 +94,7 @@ class Player {
         this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
+        this._convertedShinyList = ko.observableArray<string>(savedPlayer._convertedShinyList);
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -102,6 +102,8 @@ class Player {
             }
         }
     }
+
+    private _convertedShinyList: KnockoutObservableArray<string>;
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
@@ -714,6 +716,10 @@ class Player {
         this._shardsCollected = value;
     }
 
+    get convertedShinyList(): KnockoutObservableArray<string> {
+        return this._convertedShinyList;
+    }
+
     public toJSON() {
         let keep = [
             "_money",
@@ -750,7 +756,8 @@ class Player {
             "_eggSlots",
             "_shardUpgrades",
             "_shardsCollected",
-            "achievementsCompleted"
+            "achievementsCompleted",
+            "_convertedShinyList"
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

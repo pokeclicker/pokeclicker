@@ -96,6 +96,22 @@ class Save {
         location.reload()
     }
 
+    public static convert() {
+        let base64 = $('#convertTextArea').val().toString();
+        let json = atob(base64);
+        let p = JSON.parse(json);
+        Save.convertShinies(p.caughtPokemonList);
+    }
+
+    public static convertShinies(list: Array<string>) {
+        console.log(list);
+        for (let pokemon of list) {
+            let shiny = parseInt(pokemon['shiny']);
+            if (shiny == 1) {
+                player.convertedShinyList.push(pokemon['name'])
+            }
+        }
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
