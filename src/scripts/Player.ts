@@ -103,6 +103,12 @@ class Player {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
 
+        this._defeatedAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
+            return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0)
+        });
+        this._caughtAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
+            return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0)
+        });
         this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
         });
@@ -176,6 +182,77 @@ class Player {
         }
     }
 
+    private _defeatedAmount: Array<KnockoutObservable<number>>;
+
+    get defeatedAmount(): Array<KnockoutObservable<number>> {
+        return this._defeatedAmount;
+    }
+
+    private _routeKills: Array<KnockoutObservable<number>>;
+    private _routeKillsNeeded: KnockoutObservable<number>;
+    private _region: GameConstants.Region;
+    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
+    private _pokeballs: Array<KnockoutObservable<number>>;
+    private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
+    private _sortDescending: KnockoutObservable<boolean>;
+    private _town: KnockoutObservable<Town>;
+    private _starter: GameConstants.Starter;
+    private _oakItemExp: Array<KnockoutObservable<number>>;
+    private _oakItemsEquipped: string[];
+    private _eggList: Array<KnockoutObservable<Egg | void>>;
+    private _eggSlots: KnockoutObservable<number>;
+
+    private _itemList: { [name: string]: number };
+    private _itemMultipliers: { [name: string]: number };
+
+    private _mineEnergy: KnockoutObservable<number>;
+    private _maxMineEnergy: KnockoutObservable<number>;
+    private _mineEnergyGain: KnockoutObservable<number>;
+    private _mineInventory: KnockoutObservableArray<any>;
+    private _diamonds: KnockoutObservable<number>;
+    private _maxDailyDeals: KnockoutObservable<number>;
+    private _maxUndergroundItems: KnockoutObservable<number>;
+    private _mineEnergyRegenTime: KnockoutObservable<number>;
+
+    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
+    private _shardsCollected: Array<KnockoutObservable<number>>;
+
+    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
+    public clickAttackObservable: KnockoutComputed<number>;
+    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
+    public pokemonAttackObservable: KnockoutComputed<number>;
+    public achievementsCompleted: { [name: string]: boolean };
+
+    public routeKillsObservable(route: number): KnockoutComputed<number> {
+        return ko.computed(function () {
+            return Math.min(this.routeKillsNeeded, this.routeKills[route]());
+        }, this);
+    }
+
+    public pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
+        return ko.computed(function () {
+            return this._pokeballs[ball]();
+        }, this);
+    }
+
+    public setAlreadyCaughtBallSelection(ball: GameConstants.Pokeball) {
+        this._alreadyCaughtBallSelection(ball);
+    }
+
+    public setNotCaughtBallSelection(ball: GameConstants.Pokeball) {
+        this._notCaughtBallSelection(ball);
+    }
+
+    public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
+        this._pokeballs[ball](this._pokeballs[ball]() + amount)
+    }
+
+    public usePokeball(ball: GameConstants.Pokeball): void {
+        this._pokeballs[ball](this._pokeballs[ball]() - 1)
+    }
+
     public addRouteKill() {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
@@ -189,13 +266,8 @@ class Player {
         return false;
     }
 
-    public hasMineItems(){
-        for( let i = 0; i< this._mineInventory().length; i++){
-            if(this._mineInventory()[i].amount() > 0){
-                return true;
-            }
-        }
-        return false;
+    set defeatedAmount(value: Array<KnockoutObservable<number>>) {
+        this._defeatedAmount = value;
     }
 
     public gainKeyItem(name: string, supressModal?: boolean) {
@@ -232,28 +304,7 @@ class Player {
         return this.oakItemExp[item]();
     }
 
-    /**
-     * Calculate the attack of all your Pokémon
-     * @param type1
-     * @param type2 types of the enemy we're calculating damage against.
-     * @returns {number} damage to be done.
-     */
-    public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
-        // TODO Calculate pokemon attack by checking upgrades and multipliers.
-        let attack = 0;
-        for (let pokemon of this.caughtPokemonList) {
-            if (!pokemon.breeding()) {
-                if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
-                    attack += pokemon.attack();
-                } else {
-                    let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-                    attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
-                }
-            }
-        }
-
-        return Math.round(attack);
-    }
+    private _caughtAmount: Array<KnockoutObservable<number>>;
 
     public calculateClickAttack(): number {
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
@@ -327,12 +378,8 @@ class Player {
      * @returns {boolean}
      */
     public alreadyCaughtPokemon(pokemonName: string) {
-        for (let i: number = 0; i < this.caughtPokemonList.length; i++) {
-            if (this.caughtPokemonList[i].name == pokemonName) {
-                return true;
-            }
-        }
-        return false;
+        let id = PokemonHelper.getPokemonByName(pokemonName).id;
+        return player.caughtAmount[id]() > 0;
     }
 
     public alreadyCaughtPokemonShiny(pokemonName: string) {
@@ -346,8 +393,8 @@ class Player {
 
     public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
         OakItemRunner.use("Magic Ball");
+        let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
         if (!this.alreadyCaughtPokemon(pokemonName)) {
-            let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
             if (!supressNotification) {
@@ -358,6 +405,7 @@ class Player {
             this._caughtShinyList.push(pokemonName);
             Save.store(player);
         }
+        player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
     }
 
     public hasBadge(badge: GameConstants.Badge) {
@@ -448,6 +496,22 @@ class Player {
         }, this)
     }
 
+    get caughtAmount(): Array<KnockoutObservable<number>> {
+        return this._caughtAmount;
+    }
+
+    set caughtAmount(value: Array<KnockoutObservable<number>>) {
+        this._caughtAmount = value;
+    }
+
+    get itemList(): { [p: string]: number } {
+        return this._itemList;
+    }
+
+    set itemList(value: { [p: string]: number }) {
+        this._itemList = value;
+    }
+
     public canBreedPokemon(): boolean {
         return this.hasMaxLevelPokemon() && this.hasFreeEggSlot();
     }
@@ -480,22 +544,12 @@ class Player {
         this._gymBadges().push(badge);
     }
 
-    public mineInventoryIndex(id: number): number {
-        for( let i = 0; i<player._mineInventory().length; i++){
-            if(player._mineInventory()[i].id === id){
-                return i;
-            }
-        }
-        return -1;
+    get itemMultipliers(): { [p: string]: number } {
+        return this._itemMultipliers;
     }
 
-    public getUndergroundItemAmount(id: number) {
-        let index = this.mineInventoryIndex(id);
-        if (index > -1){
-            return player._mineInventory.peek()[index].amount();
-        } else {
-            return 0;
-        }
+    set itemMultipliers(value: { [p: string]: number }) {
+        this._itemMultipliers = value;
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
@@ -590,12 +644,12 @@ class Player {
         this._oakItemExp = value;
     }
 
-    get itemList(): {[p: string]: number} {
-        return this._itemList;
+    get eggList(): Array<KnockoutObservable<Egg | void>> {
+        return this._eggList;
     }
 
-    set itemList(value: {[p: string]: number}) {
-        this._itemList = value;
+    set eggList(value: Array<KnockoutObservable<Egg | void>>) {
+        this._eggList = value;
     }
 
     public gainItem(itemName: string, amount: number) {
@@ -613,12 +667,36 @@ class Player {
         }
     }
 
-    get itemMultipliers(): {[p: string]: number} {
-        return this._itemMultipliers;
+    public hasMineItems() {
+        for (let i = 0; i < this._mineInventory().length; i++) {
+            if (this._mineInventory()[i].amount() > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    set itemMultipliers(value: {[p: string]: number}) {
-        this._itemMultipliers = value;
+    /**
+     * Calculate the attack of all your Pokémon
+     * @param type1
+     * @param type2 types of the enemy we're calculating damage against.
+     * @returns {number} damage to be done.
+     */
+    public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
+        // TODO Calculate pokemon attack by checking upgrades and multipliers.
+        let attack = 0;
+        for (let pokemon of this.caughtPokemonList) {
+            if (!pokemon.breeding()) {
+                if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
+                    attack += pokemon.attack();
+                } else {
+                    let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                    attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
+                }
+            }
+        }
+
+        return Math.round(attack);
     }
 
     get mineEnergy() {
@@ -677,12 +755,22 @@ class Player {
         this._maxDailyDeals(n);
     }
 
-    get eggList(): Array<KnockoutObservable<Egg|void>> {
-        return this._eggList;
+    public mineInventoryIndex(id: number): number {
+        for (let i = 0; i < player._mineInventory().length; i++) {
+            if (player._mineInventory()[i].id === id) {
+                return i;
+            }
+        }
+        return -1;
     }
 
-    set eggList(value: Array<KnockoutObservable<Egg|void>>) {
-        this._eggList = value;
+    public getUndergroundItemAmount(id: number) {
+        let index = this.mineInventoryIndex(id);
+        if (index > -1) {
+            return player._mineInventory.peek()[index].amount();
+        } else {
+            return 0;
+        }
     }
 
     get eggSlots(): KnockoutObservable<number> {
@@ -716,6 +804,8 @@ class Player {
             "_caughtShinyList",
             "_route",
             "_caughtPokemonList",
+            "_defeatedAmount",
+            "_caughtAmount",
             "_routeKills",
             "_routeKillsNeeded",
             "_region",

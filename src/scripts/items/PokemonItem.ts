@@ -34,7 +34,6 @@ class PokemonItem extends Item {
     }
 
     buy() {
-        console.log(this.name());
         if (this.name() == "Mr_Mime") {
             player.capturePokemon("Mr. Mime", PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP))
         } else {
