@@ -29,8 +29,8 @@ class Pokeball extends Item {
         this.type = type;
     }
 
-    buy() {
-        player.gainPokeballs(this.type, 1);
+    buy(amt) {
+        player.gainPokeballs(this.type, amt);
     }
 
     use() {
