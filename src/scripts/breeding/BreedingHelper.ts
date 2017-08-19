@@ -65,6 +65,7 @@ class BreedingHelper {
             }
         }
         player.capturePokemon(egg.pokemon, shiny);
+        player.eggsHatched++;
         player._eggList[index](null);
     }
 

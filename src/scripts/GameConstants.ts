@@ -129,8 +129,12 @@ namespace GameConstants {
     export const GYM_SHARDS = 5;
 
     //Quests
+
+    // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
+    //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
     export const DEFEAT_POKEMONS_BASE_REWARD = 1;
     export const GAIN_MONEY_BASE_REWARD = 0.0017; // Dimava
+    export const HATCH_EGGS_BASE_REWARD = 33;     // Dimava
 
     /**
      * idle: The game is not doing anything, the battle view isn't shown

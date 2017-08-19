@@ -95,6 +95,8 @@ class Player {
         this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
+
+        this._eggsHatched = ko.observable(savedPlayer._eggsHatched || 0);
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -124,6 +126,7 @@ class Player {
     private _oakItemsEquipped: string[];
     private _eggList: Array<KnockoutObservable<Egg | void>>;
     private _eggSlots: KnockoutObservable<number>;
+    private _eggsHatched: KnockoutObservable<number>;
 
     private _itemList: { [name: string]: number };
     private _itemMultipliers: { [name: string]: number };
@@ -714,6 +717,14 @@ class Player {
         this._shardsCollected = value;
     }
 
+    get eggsHatched(): number {
+        return this._eggsHatched();
+    }
+
+    set eggsHatched(value: number) {
+        this._eggsHatched(value);
+    }
+
     public toJSON() {
         let keep = [
             "_money",
@@ -748,6 +759,7 @@ class Player {
             "_mineEnergyRegenTime",
             "_eggList",
             "_eggSlots",
+            "_eggsHatched",
             "_shardUpgrades",
             "_shardsCollected",
             "achievementsCompleted"
