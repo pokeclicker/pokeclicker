@@ -128,6 +128,9 @@ namespace GameConstants {
     export const DUNGEON_BOSS_SHARDS = 20;
     export const GYM_SHARDS = 5;
 
+    //Quests
+    export const DEFEAT_POKEMONS_BASE_REWARD = 1;
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks
