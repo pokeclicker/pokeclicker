@@ -771,6 +771,7 @@ class Player {
             "achievementsCompleted",
             "farmPoints",
             "seedList",
+            "plotList",
             "berryList"
         ];
         let plainJS = ko.toJS(this);
