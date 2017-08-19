@@ -29,7 +29,7 @@ class Save {
             + currentdate.getFullYear() + " @ "
             + currentdate.getHours() + ":"
             + currentdate.getMinutes();
-        let filename = "Pokeclicker save - " + datetime;
+        let filename = "Pokeclicker save - " + datetime + '.pokeclicker';
         element.setAttribute('download', filename);
 
         element.style.display = 'none';

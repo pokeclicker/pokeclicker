@@ -2019,13 +2019,14 @@
                         <div class="tab-pane active" id="saveTab1">
                             <div class="container">
                                 <br>
-                               <button class="btn btn-info" onClick= Save.download()>Download save</button>
+                                <button class="btn btn-info" onClick=Save.download()>Download save</button>
                             </div>
                         </div>
                         <div class="tab-pane" id="saveTab2">
                             <div class="container">
                                 <br>
-                                <input type="file" id="input" onchange=Save.loadFromFile(this.files[0])>
+                                <input type="file" id="input" accept=".pokeclicker"
+                                       onchange=Save.loadFromFile(this.files[0])>
                             </div>
                         </div>
                         <div class="tab-pane" id="saveTab3">
