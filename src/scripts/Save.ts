@@ -3,8 +3,8 @@ class Save {
     static counter: number = 0;
 
     public static store(player: Player) {
-        //TODO encode in base-64
-        let json = JSON.stringify(player);
+
+        let json = btoa(JSON.stringify(player));
         localStorage.setItem("player", json);
         localStorage.setItem("mine", Mine.serialize());
         this.counter = 0;
@@ -13,11 +13,31 @@ class Save {
 
     public static load(): Player {
         let saved = localStorage.getItem("player");
-        if (saved) {
+        if (saved !== "null") {
             return new Player(JSON.parse(saved));
         } else {
             return new Player()
         }
+    }
+
+    public static download() {
+        let element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(btoa(JSON.stringify(player))));
+        let currentdate = new Date();
+        let datetime = "" + currentdate.getDate() + "/"
+            + (currentdate.getMonth() + 1) + "/"
+            + currentdate.getFullYear() + " @ "
+            + currentdate.getHours() + ":"
+            + currentdate.getMinutes();
+        let filename = "Pokeclicker save - " + datetime;
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
     }
 
     public static loadMine() {
@@ -49,7 +69,7 @@ class Save {
         return filtered
     }
 
-    public static initializeMultipliers(): { [name: string]: number } {
+    public static initializeMultipliers(): {[name: string]: number} {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = 1;
@@ -57,7 +77,7 @@ class Save {
         return res;
     }
 
-    public static initializeItemlist(): { [name: string]: number } {
+    public static initializeItemlist(): {[name: string]: number} {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = 0;
@@ -89,11 +109,25 @@ class Save {
         return res;
     }
 
-    public static loadFromTextArea() {
-        let json = $('#loadTextArea').val().toString();
-        let player = new Player(JSON.parse(json));
-        Save.store(player);
-        location.reload()
+    public static loadFromFile(file) {
+        testing = file;
+        let fr = new FileReader();
+        fr.readAsText(testing);
+
+        setTimeout(function () {
+            try {
+                let decoded = atob(fr.result);
+                JSON.parse(decoded);
+                if (decoded) {
+                    localStorage.setItem("player", decoded);
+                    location.reload();
+                } else {
+                    Notifier.notify("This is not a valid decoded savefile", GameConstants.NotificationOption.danger);
+                }
+            } catch (err) {
+                Notifier.notify("This is not a valid savefile", GameConstants.NotificationOption.danger);
+            }
+        }, 1000);
     }
 
     public static convert() {
@@ -125,3 +159,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
         $('#saveTextArea').text(JSON.stringify(player));
     });
 });
+
+let testing;

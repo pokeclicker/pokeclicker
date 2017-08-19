@@ -2018,19 +2018,14 @@
                     <div class="tab-content">
                         <div class="tab-pane active" id="saveTab1">
                             <div class="container">
-                                <p>Save this string in a textfile on your computer:</p>
-                                <textarea id="saveTextArea" class="saveTextArea"
-                                          onclick="this.focus();this.select()"></textarea>
-
+                                <br>
+                               <button class="btn btn-info" onClick= Save.download()>Download save</button>
                             </div>
                         </div>
                         <div class="tab-pane" id="saveTab2">
                             <div class="container">
-                                <p>Paste your savefile here:</p>
-                                <textarea id="loadTextArea" class="saveTextArea"></textarea>
-                                <button style="float: right;" class="btn btn-success" onclick="Save.loadFromTextArea()">
-                                    Load
-                                </button>
+                                <br>
+                                <input type="file" id="input" onchange=Save.loadFromFile(this.files[0])>
                             </div>
                         </div>
                         <div class="tab-pane" id="saveTab3">
