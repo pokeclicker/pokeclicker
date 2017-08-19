@@ -64,14 +64,28 @@ class Save {
         return res;
     }
 
-    public static initializePlots(): KnockoutObservableArray<KnockoutObservable<Plot>> {
+    public static initializePlots(saved?: Array<any>): KnockoutObservableArray<KnockoutObservable<Plot>> {
         let plotList: Array<KnockoutObservable<Plot>>;
-        plotList = Array.apply(null, Array(GameConstants.AMOUNT_OF_PLOTS)).map(function (val, index) {
-            if (index == 0) {
-                return ko.observable(new Plot(true, 0, 0, false, null, 0));
-            }
-            return ko.observable(new Plot(false, 0, 0, false, null, 0))
-        });
+        if (saved) {
+            plotList = saved.map((p) => {
+                let berry;
+                if (p.berry){
+                    console.log(p.berry)
+                    berry = new Berry(p.berry.type, p.berry.harvestTime, p.berry.moneyValue, p.berry.farmValue);
+                } else {
+                    berry = null;
+                }
+                let plot = new Plot(p.isUnlocked, p.exp, p.level, p.boosted, berry, p.timeLeft);
+                return ko.observable(plot)
+            })
+        } else {
+            plotList = Array.apply(null, Array(GameConstants.AMOUNT_OF_PLOTS)).map(function (val, index) {
+                if (index == 0) {
+                    return ko.observable(new Plot(true, 0, 0, false, null, 0));
+                }
+                return ko.observable(new Plot(false, 0, 0, false, null, 0))
+            });
+        }
         return ko.observableArray(plotList);
     }
 

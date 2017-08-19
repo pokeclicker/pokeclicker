@@ -172,7 +172,7 @@ class Player {
         this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
         });
-        this.plotList = savedPlayer.plotList || Save.initializePlots();
+        this.plotList = Save.initializePlots(savedPlayer.plotList);
 
         //TODO remove before deployment
         if (!debug) {
