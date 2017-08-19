@@ -13,6 +13,8 @@ class Player {
 
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
+
+        this._lastSeen = savedPlayer._lastSeen || 0
         savedPlayer = savedPlayer || {};
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
@@ -97,6 +99,22 @@ class Player {
         });
 
         this._eggsHatched = ko.observable(savedPlayer._eggsHatched || 0);
+
+        let today = new Date();
+        let lastSeen = new Date(this._lastSeen);
+        if (today.toLocaleDateString() == lastSeen.toLocaleDateString()) {
+            this.questRefreshes = savedPlayer.questRefreshes;
+            if (savedPlayer.completedQuestList) {
+                this.completedQuestList = savedPlayer.completedQuestList.map((bool) => {return ko.observable(bool)});
+            } else {
+                this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+            }
+        } else {
+            this.questRefreshes = 0;
+            this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+        }
+        this.questXP = ko.observable(savedPlayer.questXP)
+
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -148,6 +166,11 @@ class Player {
     public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
     public achievementsCompleted: { [name: string]: boolean };
+
+    public completedQuestList: Array<KnockoutObservable<boolean>>;
+    public questRefreshes: number;
+    public questXP: KnockoutObservable<number>;
+    public _lastSeen: number;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -762,7 +785,10 @@ class Player {
             "_eggsHatched",
             "_shardUpgrades",
             "_shardsCollected",
-            "achievementsCompleted"
+            "achievementsCompleted",
+            "completedQuestList",
+            "questRefreshes",
+            "questXP",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

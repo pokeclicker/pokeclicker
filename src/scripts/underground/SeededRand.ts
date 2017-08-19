@@ -12,4 +12,16 @@ class SeededRand {
     public static seedWithDate(d: Date) {
         this.state = Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
     }
+
+    public static seed(state: number) {
+        this.state = state;
+    }
+
+    public static intBetween(min: number, max: number): number {
+        return Math.floor( (max-min) * SeededRand.next() + min )
+    }
+
+    public static fromArray<T>(arr: Array<T>): T {
+        return arr[SeededRand.intBetween(0, arr.length)]
+    }
 }

@@ -1,6 +1,6 @@
 /// <reference path="Quest.ts" />
 
-class HatchEggQuest extends Quest implements QuestInterface {
+class HatchEggsQuest extends Quest implements QuestInterface {
     amount: number;
 
     constructor(amount: number) {

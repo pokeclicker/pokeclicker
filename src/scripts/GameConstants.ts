@@ -136,6 +136,14 @@ namespace GameConstants {
     export const GAIN_MONEY_BASE_REWARD = 0.0017; // Dimava
     export const HATCH_EGGS_BASE_REWARD = 33;     // Dimava
 
+    export const QuestTypes = [
+        "DefeatPokemons",
+        "GainMoney",
+        "HatchEggs",
+    ];
+
+    export const QUESTS_PER_SET = 10;
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks
