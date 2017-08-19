@@ -10,6 +10,10 @@ class FarmRunner {
         return true;
     }
 
+    public static isEmpty(index:number){
+        return player.plotList()[index]().isEmpty();
+    }
+
     public static tick() {
         for (let i = 0; i < 25; i++) {
             player.plotList[i]().timeLeft = Math.max(0, player.plotList[i]().timeLeft - 1);
@@ -29,13 +33,20 @@ class FarmRunner {
     }
 
     public static plant(plotId) {
-        if (player.plotList[plotId]().isEmpty()) {
-            console.log("planting on " + plotId);
-            player.plotList[plotId]().berry(FarmRunner.curBerry);
-            player.plotList[plotId]().timeLeft(FarmRunner.curBerry.harvestTime);
-        } else {
+
+        if (!player.plotList()[plotId]().isEmpty()) {
             console.log("Full");
+            return;
         }
+
+        if (!player.plotList()[plotId]().isUnlocked) {
+            console.log("Locked");
+            return;
+        }
+            console.log("planting on " + plotId);
+            player.plotList()[plotId]().berry(FarmRunner.curBerry);
+            player.plotList()[plotId]().timeLeft(FarmRunner.curBerry.harvestTime);
+
     }
 
     public static harvest(plotId) {
