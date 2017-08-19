@@ -101,17 +101,22 @@ class Save {
         let json = atob(base64);
         let p = JSON.parse(json);
         Save.convertShinies(p.caughtPokemonList);
+        $('#saveModal').modal('hide')
     }
 
     public static convertShinies(list: Array<string>) {
+        let converted = [];
         for (let pokemon of list) {
             let shiny = parseInt(pokemon['shiny']);
             let name = pokemon['name'];
-            if (shiny == 1 && player.convertedShinyList().indexOf(name) == -1 && player.caughtShinyList.indexOf(name) == -1) {
-                player.convertedShinyList.push(pokemon['name'])
+            if (shiny == 1 && player.caughtShinyList.indexOf(name) == -1) {
+                player.caughtShinyList().push(pokemon['name']);
+                converted.push(pokemon['name']);
             }
         }
-        Notifier.notify("Success! You can pick up your shinies from Oak's lab", GameConstants.NotificationOption.success)
+        if (converted.length > 0) {
+            Notifier.notify("You have gained the following shinies: " + converted, GameConstants.NotificationOption.success)
+        }
     }
 }
 
