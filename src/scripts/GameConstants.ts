@@ -130,6 +130,7 @@ namespace GameConstants {
 
     //Quests
     export const DEFEAT_POKEMONS_BASE_REWARD = 1;
+    export const GAIN_MONEY_BASE_REWARD = 0.0017; // Dimava
 
     /**
      * idle: The game is not doing anything, the battle view isn't shown

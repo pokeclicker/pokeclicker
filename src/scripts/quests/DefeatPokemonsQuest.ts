@@ -19,7 +19,7 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
             return Math.min(1, (player.routeKills[this.route]() - initialKills) / this.killsNeeded);
         }, this);
         this.isCompleted = ko.computed(function() {
-            return player.routeKills[this.route]() > initialKills + this.killsNeeded;
+            return this.progress() == 1;
         }, this);
     }
 
