@@ -4,7 +4,7 @@ class Save {
 
     public static store(player: Player) {
 
-        let json = btoa(JSON.stringify(player));
+        let json = JSON.stringify(player);
         localStorage.setItem("player", json);
         localStorage.setItem("mine", Mine.serialize());
         this.counter = 0;
