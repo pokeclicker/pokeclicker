@@ -748,6 +748,10 @@ class Player {
         this._eggsHatched(value);
     }
 
+    get questLevel(): number {
+        return 1;
+    }
+
     public toJSON() {
         let keep = [
             "_money",
@@ -789,6 +793,7 @@ class Player {
             "completedQuestList",
             "questRefreshes",
             "questXP",
+            "_lastSeen",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

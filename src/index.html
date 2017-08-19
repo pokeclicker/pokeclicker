@@ -2047,5 +2047,34 @@
     </div>
 </div>
 
+<!-- Quests Modal-->
+<div class="modal noselect" id="QuestModal" tabindex="-1" role="dialog" aria-labelledby="QuestModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Quests</h4>
+            </div>
+            <div class="modal-body" data-bind='foreach: QuestHelper.questList'>
+                <div class='row justify-content-between quest'>
+                    <p class='col-7' data-bind='text: description'></p>
+                    <p class='col-1' data-bind='text: pointsReward'></p>
+                    <div class='col-2'>
+                        <button class='btn btn-primary' data-bind='visible: !$data.claimed(), click: beginQuest'>Start</button>
+                        <button class='btn btn-primary' data-bind='visible: !$data.claimed() && ($data.isCompleted && $data.isCompleted()),
+                                                                   click: $data.claimReward;player.completedQuestList[$index](true)'>Claim Reward</button>
+                        <p data-bind='visible: $data.claimed()'>Completed</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()' data-bind='text: "Refresh"'></button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
