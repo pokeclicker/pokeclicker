@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pokeclicker</title>
+    <title>Pokéclicker</title>
     <link href="/assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
         <tr data-bind='ifnot: $data.breeding()'>
@@ -84,7 +84,7 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
-            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokedex</a>
+            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokédex</a>
         </li>
         <li>
             <a class="dropdown-item" href="#badgeCaseModal" data-toggle="modal">Badge Case</a>
@@ -96,7 +96,7 @@
             <a class="dropdown-item" href="https://pokeclicker.reddit.com" target="_blank">Subreddit</a>
         </li>
         <li>
-            <button class="dropdown-item" href="#">Save</button>
+            <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
         </li>
         <li>
             <a class="dropdown-item" href="#achievementsModal" data-toggle="modal">Achievements</a>
@@ -310,7 +310,7 @@
 
 <div class="container">
     <div class="row justify-content-lg-center">
-        <h1>Pokeclicker</h1>
+        <h1>Pokéclicker</h1>
     </div>
     <div class="row justify-content-lg-center" style="text-align: center">
 
@@ -1873,12 +1873,6 @@
      aria-labelledby="pokedexModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4>Pokédex</h4>
-                <button class="btn btn-secondary" type="button" data-toggle="collapse" data-target="#pokedex-collapse">
-                    filter
-                </button>
-            </div>
             <div class="modal-body">
 
                 <div class="collapse" id="pokedex-collapse">
@@ -1989,6 +1983,59 @@
                                data-bind="text: $data">name</p>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Save Modal-->
+<div class="modal fade noselect" id="saveModal" tabindex="-1" role="dialog"
+     aria-labelledby="saveModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link active" href="#saveTab1" data-toggle="tab">Export
+                            Save</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab2" data-toggle="tab">Import Save</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab3" data-toggle="tab">Converter</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab4" data-toggle="tab">Reset</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="saveTab1">
+                            <div class="container">
+                                <br>
+                                <button class="btn btn-info" onClick=Save.download()>Download save</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="saveTab2">
+                            <div class="container">
+                                <br>
+                                <input type="file" id="input" accept=".pokeclicker"
+                                       onchange=Save.loadFromFile(this.files[0])>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="saveTab3">
+                            <div class="container">
+                                <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
+                                <textarea id="convertTextArea" class="saveTextArea"></textarea>
+                                <button style="float: right;" class="btn btn-success" onclick="Save.convert()">
+                                    Convert
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="saveTab4">
+                            <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
+                                savefile</h3>
+                            <button class="btn btn-danger" onClick="Save.reset()">Reset</button>
+                        </div>
                     </div>
                 </div>
             </div>
