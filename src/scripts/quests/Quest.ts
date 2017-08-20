@@ -22,12 +22,17 @@ abstract class Quest {
 
     claimReward() {
         if (this.isCompleted()) {
-            player.questXP += this.xpReward;
             player.questPoints += this.pointsReward;
             console.log(`Gained ${this.pointsReward} quest points and ${this.xpReward} xp points`);
             this.claimed(true);
             player.currentQuest(null);
             player.completedQuestList[this.index](true);
+            let oldLevel = player.questLevel;
+            player.questXP += this.xpReward;
+            if (oldLevel < player.questLevel) {
+                Notifier.notify("Your quest level has increased!", GameConstants.NotificationOption.success);
+                QuestHelper.refreshQuests(true);
+            }
         } else {
             console.log("Quest not yet completed");
         }
