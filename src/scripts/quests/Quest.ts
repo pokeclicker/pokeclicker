@@ -9,6 +9,7 @@ abstract class Quest {
     claimed: KnockoutObservable<boolean>;
     questFocus: KnockoutObservable<any>;
     initial: KnockoutObservable<any>;
+    notified: boolean;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -16,10 +17,13 @@ abstract class Quest {
         this.xpReward = pointsReward/10;
         this.claimed = ko.observable(false);
         this.initial = ko.observable(null);
+        this.notified = false;
     }
 
     claimReward() {
         if (this.isCompleted()) {
+            player.questXP += this.xpReward;
+            player.questPoints += this.pointsReward;
             console.log(`Gained ${this.pointsReward} quest points and ${this.xpReward} xp points`);
             this.claimed(true);
             player.currentQuest(null);
@@ -50,7 +54,11 @@ abstract class Quest {
             }
         }, this);
         this.isCompleted = ko.computed(function() {
-            return this.progress() == 1;
+            let completed = this.progress() == 1;
+            if (completed && !this.notified) {
+                Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success)
+            }
+            return completed
         }, this);
     }
 

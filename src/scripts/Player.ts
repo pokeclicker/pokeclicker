@@ -116,7 +116,8 @@ class Player {
             this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
             this.currentQuest = ko.observable(null);
         }
-        this.questXP = ko.observable(savedPlayer.questXP);
+        this._questXP = ko.observable(savedPlayer._questXP || 0);
+        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
 
         this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
 
@@ -175,7 +176,8 @@ class Player {
 
     public completedQuestList: Array<KnockoutObservable<boolean>>;
     public questRefreshes: number;
-    public questXP: KnockoutObservable<number>;
+    public _questPoints: KnockoutObservable<number>;
+    public _questXP: KnockoutObservable<number>;
     public _lastSeen: number;
     public currentQuest: KnockoutObservable<any>;
     private _shinyCatches: KnockoutObservable<number>;
@@ -772,11 +774,27 @@ class Player {
     }
 
     get shinyCatches(): number {
-        return this._shinyCatches()
+        return this._shinyCatches();
     }
 
     set shinyCatches(value: number) {
-        this._shinyCatches(value)
+        this._shinyCatches(value);
+    }
+
+    get questXP(): number {
+        return this._questXP();
+    }
+
+    set questXP(value: number) {
+        this._questXP(value);
+    }
+
+    get questPoints(): number {
+        return this._questPoints();
+    }
+
+    set questPoints(value: number) {
+        this._questPoints(value);
     }
 
     public toJSON() {
@@ -820,7 +838,8 @@ class Player {
             "achievementsCompleted",
             "completedQuestList",
             "questRefreshes",
-            "questXP",
+            "_questXP",
+            "_questPoints",
             "_lastSeen",
             "currentQuest",
             "_shinyCatches",

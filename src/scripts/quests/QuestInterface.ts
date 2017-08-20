@@ -4,6 +4,7 @@ interface QuestInterface {
     isCompleted: KnockoutComputed<boolean>;  // True when quest requirements have been fulfilled
     claimed: KnockoutObservable<boolean>;    // True when reward has been claimed
     initial: any;                            // Value of questFocus when quest was started
+    notified: boolean;                       // If player has been notified of completion
 
     // Required in new quest type
     questFocus: KnockoutObservable<any>;     // Variable to watch, call this.createProgressObservables() after setting
