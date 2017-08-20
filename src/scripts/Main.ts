@@ -141,6 +141,7 @@ class Game {
         Save.loadMine();
         Underground.energyTick(player._mineEnergyRegenTime())
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());
-        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
+        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
+        QuestHelper.loadCurrentQuest(player.currentQuest());
     }
 }

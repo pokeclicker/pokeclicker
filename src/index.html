@@ -1401,6 +1401,8 @@
                 </div>
 
             </div>
+
+            <!-- Current Quest -->
             <div class="page-item" style="background-color: white; min-height: 100px">
                 <button class='btn btn-primary' 
                         data-bind='visible: !player.currentQuest(),
@@ -1408,16 +1410,16 @@
                                    click: function(){$("#QuestModal").modal("show")}'>
                 </button>
                 <div data-bind='if: player.currentQuest()'>
-                    <p data-bind='text: player.currentQuest().description'></p>
-                    <div class="progress" data-bind='if: !player.currentQuest().isCompleted()'>
+                    <p data-bind='text: QuestHelper.questList()[player.currentQuest().index].description'></p>
+                    <div class="progress" data-bind='if: !QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
                         <div class="progress-bar bg-success" role="progressbar"
-                             data-bind="attr:{ style: 'width:' + (player.currentQuest().progress() * 100) + '%' }"
+                             data-bind="attr:{ style: 'width:' + (QuestHelper.questList()[player.currentQuest().index].progress() * 100) + '%' }"
                              aria-valuemin="0" aria-valuemax="100">
                         </div>
                     </div>
-                    <div data-bind='if: player.currentQuest().isCompleted()'>
+                    <div data-bind='if: QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
                         <button class='btn btn-primary'
-                                data-bind='click: function(){player.currentQuest().claimReward()}'>
+                                data-bind='click: function(){QuestHelper.questList()[player.currentQuest().index].claimReward()}'>
                             Claim
                         </button>
                     </div>

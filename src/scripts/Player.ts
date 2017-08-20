@@ -109,12 +109,13 @@ class Player {
             } else {
                 this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
             }
+            this.currentQuest = ko.observable(savedPlayer.currentQuest);
         } else {
             this.questRefreshes = 0;
             this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+            this.currentQuest = ko.observable(null);
         }
         this.questXP = ko.observable(savedPlayer.questXP);
-        this.currentQuest = ko.observable(null);
 
         //TODO remove before deployment
         if (!debug) {
@@ -172,7 +173,7 @@ class Player {
     public questRefreshes: number;
     public questXP: KnockoutObservable<number>;
     public _lastSeen: number;
-    public currentQuest: KnockoutObservable<Quest>;
+    public currentQuest: KnockoutObservable<any>;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -796,6 +797,7 @@ class Player {
             "questRefreshes",
             "questXP",
             "_lastSeen",
+            "currentQuest",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

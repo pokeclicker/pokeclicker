@@ -28,7 +28,10 @@ abstract class Quest {
     beginQuest() {
         if (!player.currentQuest()){
             this.initial(this.questFocus());
-            player.currentQuest(this);
+            player.currentQuest({
+                index: this.index,
+                initial: this.initial()
+            });
         } else {
             console.log("You have already started a quest");
         }

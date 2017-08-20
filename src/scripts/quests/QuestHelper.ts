@@ -38,4 +38,10 @@ class QuestHelper{
         player.questRefreshes++;
         QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
     }
+
+    public static loadCurrentQuest(saved) {
+        if (saved !== null) {
+            QuestHelper.questList()[saved.index].initial(saved.initial)
+        }
+    }
 }
