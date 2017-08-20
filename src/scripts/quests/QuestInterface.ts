@@ -1,4 +1,5 @@
 interface QuestInterface {
+    index: number;                           // Index in Quest set
     description: string;                     // Short description of how to complete the quest
     pointsReward: number;                    // Quest points rewarded for completion
     xpReward: number;                        // Questing xp points gained for completion

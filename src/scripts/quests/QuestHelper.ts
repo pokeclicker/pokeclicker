@@ -13,24 +13,24 @@ class QuestHelper{
 
         for (let i=0; i<GameConstants.QUESTS_PER_SET; i++) {
             let type = SeededRand.fromArray(GameConstants.QuestTypes);
-            let quest = QuestHelper.random(type);
+            let quest = QuestHelper.random(type, i);
             QuestHelper.questList.push(quest);
         }
     }
 
-    public static random(type: string) {
+    public static random(type: string, index: number) {
         let amount, route;
         switch (type) {
             case "DefeatPokemons":
                 route = SeededRand.intBetween(1, 25);
                 amount = SeededRand.intBetween(100, 500);
-                return new DefeatPokemonsQuest(route, amount);
+                return new DefeatPokemonsQuest(index, route, amount);
             case "GainMoney":
                 amount = SeededRand.intBetween(20000, 60000);
-                return new GainMoneyQuest(amount);
+                return new GainMoneyQuest(index, amount);
             case "HatchEggs":
                 amount = SeededRand.intBetween(1, 30);
-                return new HatchEggsQuest(amount);
+                return new HatchEggsQuest(index, amount);
         }
     }
 
