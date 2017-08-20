@@ -29,15 +29,28 @@ class QuestHelper{
         }
     }
 
-    public static refreshQuests() {
-        player.questRefreshes++;
+    public static refreshQuests(free: boolean = false) {
+        if (free || player.money >= QuestHelper.getRefreshCost()) {
+            if (!free) {
+                player._money(player._money() - QuestHelper.getRefreshCost());
+            }
+            player.questRefreshes++;
 
-        // Empty quest list and reset compeleted quests
-        QuestHelper.questList.splice(0,GameConstants.QUESTS_PER_SET);
-        for (let elem of player.completedQuestList) {
-            elem(false);
+            // Empty quest list and reset compeleted quests
+            QuestHelper.questList.splice(0,GameConstants.QUESTS_PER_SET);
+            for (let elem of player.completedQuestList) {
+                elem(false);
+            }
+            QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
+        } else {
+            Notifier.notify("You can't afford to do that!", GameConstants.NotificationOption.danger);
         }
-        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
+    }
+
+    // Returns 0 when all quests are complete, ~1 million when none are
+    public static getRefreshCost(): number {
+        let notComplete = player.completedQuestList.filter((elem) => {return !elem()}).length;
+        return Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1))
     }
 
     public static loadCurrentQuest(saved) {
