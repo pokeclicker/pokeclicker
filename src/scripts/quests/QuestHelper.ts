@@ -63,4 +63,22 @@ class QuestHelper{
             QuestHelper.questList()[saved.index].initial(saved.initial)
         }
     }
+
+    // 1000 xp needed to reach level 2, amount needed for next level increases by 20% of previous level
+    public static levelToXP(level: number): number {
+        if (level >= 2) {
+            // Sum of geometric series
+            let a = 1000, r = 1.2, n = level - 1;
+            let sum = a * (Math.pow(r, n) - 1) / (r - 1);
+            return Math.ceil(sum);
+        } else {
+            return 0;
+        }
+    }
+
+    public static xpToLevel(xp: number): number {
+        let sum = xp, a = 1000, r = 1.2;
+        let n = Math.log(1 + ((r - 1) * sum) / a) / Math.log(r);
+        return Math.floor(n + 1);
+    }
 }

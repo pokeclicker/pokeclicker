@@ -770,7 +770,14 @@ class Player {
     }
 
     get questLevel(): number {
-        return 1;
+        return QuestHelper.xpToLevel(player.questXP);
+    }
+
+    public percentToNextQuestLevel(): number {
+        let current = this.questLevel;
+        let requiredForCurrent = QuestHelper.levelToXP(current);
+        let requiredForNext = QuestHelper.levelToXP(current + 1);
+        return 100 * (this.questXP - requiredForCurrent) / (requiredForNext - requiredForCurrent);
     }
 
     get shinyCatches(): number {

@@ -2074,6 +2074,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Quests</h4>
+                <div class='col-6'>
+                    <div data-bind='text: "Lvl. "+player.questLevel'></div>
+                    <div class="progress" style='height: 5px'>
+                        <div class="progress-bar bg-info" role="progressbar"
+                             data-bind="attr:{ style: 'width:' + player.percentToNextQuestLevel() + '%' }"
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+                <p id='questPoints' data-bind='text: "Quest Points: " + player._questPoints()'></p>
             </div>
             <div class="modal-body">
                 <div id='questHead' class='row justify-content-between'>
