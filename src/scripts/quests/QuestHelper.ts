@@ -29,6 +29,8 @@ class QuestHelper{
             case "MineLayers":
                 amount = SeededRand.intBetween(1,3);
                 return new MineLayersQuest(amount);
+            case "CatchShinies":
+                return new CatchShiniesQuest(1);
         }
     }
 

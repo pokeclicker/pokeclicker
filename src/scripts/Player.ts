@@ -118,6 +118,8 @@ class Player {
         }
         this.questXP = ko.observable(savedPlayer.questXP);
 
+        this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
+
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -176,6 +178,7 @@ class Player {
     public questXP: KnockoutObservable<number>;
     public _lastSeen: number;
     public currentQuest: KnockoutObservable<any>;
+    private _shinyCatches: KnockoutObservable<number>;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -356,6 +359,9 @@ class Player {
         if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
             this._caughtShinyList.push(pokemonName);
             Save.store(player);
+        }
+        if (shiny) {
+            player.shinyCatches++;
         }
         player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
     }
@@ -765,6 +771,14 @@ class Player {
         return 1;
     }
 
+    get shinyCatches(): number {
+        return this._shinyCatches()
+    }
+
+    set shinyCatches(value: number) {
+        this._shinyCatches(value)
+    }
+
     public toJSON() {
         let keep = [
             "_money",
@@ -809,6 +823,7 @@ class Player {
             "questXP",
             "_lastSeen",
             "currentQuest",
+            "_shinyCatches",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
