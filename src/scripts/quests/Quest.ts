@@ -1,5 +1,6 @@
 abstract class Quest {
     index: number;
+    amount: number
     description: string;
     pointsReward: number;
     xpReward: number;
@@ -9,8 +10,10 @@ abstract class Quest {
     questFocus: KnockoutObservable<any>;
     initial: KnockoutObservable<any>;
 
-    constructor(i) {
-        this.index = i;
+    constructor(amount: number, pointsReward: number) {
+        this.amount = amount;
+        this.pointsReward = pointsReward;
+        this.xpReward = pointsReward/10;
         this.claimed = ko.observable(false);
         this.initial = ko.observable(null);
     }

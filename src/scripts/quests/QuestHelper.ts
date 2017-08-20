@@ -8,6 +8,7 @@ class QuestHelper{
         for (let i=0; i<GameConstants.QUESTS_PER_SET; i++) {
             let type = SeededRand.fromArray(GameConstants.QuestTypes);
             let quest = QuestHelper.random(type, i);
+            quest.index = i;
             QuestHelper.questList.push(quest);
         }
     }
@@ -18,13 +19,13 @@ class QuestHelper{
             case "DefeatPokemons":
                 route = SeededRand.intBetween(1, 25);
                 amount = SeededRand.intBetween(100, 500);
-                return new DefeatPokemonsQuest(index, route, amount);
+                return new DefeatPokemonsQuest(route, amount);
             case "GainMoney":
                 amount = SeededRand.intBetween(20000, 60000);
-                return new GainMoneyQuest(index, amount);
+                return new GainMoneyQuest(amount);
             case "HatchEggs":
                 amount = SeededRand.intBetween(1, 30);
-                return new HatchEggsQuest(index, amount);
+                return new HatchEggsQuest(amount);
         }
     }
 
