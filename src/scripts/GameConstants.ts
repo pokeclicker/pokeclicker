@@ -132,7 +132,7 @@ namespace GameConstants {
 
     // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
     //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
-    const questBase = 1;
+    const questBase = 1; // change this to scale all quest points
     export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
     export const GAIN_MONEY_BASE_REWARD      = questBase * 0.0017;  // Dimava
     export const HATCH_EGGS_BASE_REWARD      = questBase * 33;      // Dimava
