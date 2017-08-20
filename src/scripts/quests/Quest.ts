@@ -1,10 +1,12 @@
 abstract class Quest {
-    description: string;                     // Short description of how to complete the quest
-    pointsReward: number;                    // Quest points rewarded for completion
-    xpReward: number;                        // Questing xp points gained for completion
-    progress: KnockoutComputed<number>;      // A number between 0 and 1 representing the progress
-    isCompleted: KnockoutComputed<boolean>;  // True when quest requirements have been fulfilled
+    description: string;
+    pointsReward: number;
+    xpReward: number;
+    progress: KnockoutComputed<number>;
+    isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
+    questFocus: KnockoutObservable<any>;
+    initial: any;
 
     constructor() {
         this.claimed = ko.observable(false);
@@ -17,5 +19,19 @@ abstract class Quest {
         } else {
             console.log("Quest not yet completed");
         }
+    }
+
+    beginQuest() {
+        this.initial = this.questFocus();
+        this.createProgressObservables();
+    }
+
+    protected createProgressObservables() {
+        this.progress = ko.computed(function() {
+            return Math.min(1, ( this.questFocus() - this.initial) / this.amount);
+        }, this);
+        this.isCompleted = ko.computed(function() {
+            return this.progress() == 1;
+        }, this);
     }
 }

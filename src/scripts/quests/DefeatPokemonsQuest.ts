@@ -2,7 +2,7 @@
 
 class DefeatPokemonsQuest extends Quest implements QuestInterface {
     private route: number;
-    private killsNeeded: number;
+    private amount: number;
 
     constructor(route: number, killsNeeded: number) {
         super();
@@ -10,17 +10,8 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
         this.pointsReward = DefeatPokemonsQuest.calcReward(route, killsNeeded);
         this.xpReward = Math.ceil(killsNeeded / 10);
         this.route = route;
-        this.killsNeeded = killsNeeded;
-    }
-
-    beginQuest() {
-        let initialKills = player.routeKills[this.route]();
-        this.progress = ko.computed(function(){
-            return Math.min(1, (player.routeKills[this.route]() - initialKills) / this.killsNeeded);
-        }, this);
-        this.isCompleted = ko.computed(function() {
-            return this.progress() == 1;
-        }, this);
+        this.amount = killsNeeded;
+        this.questFocus = player.routeKills[this.route];
     }
 
     private static calcReward(route: number, killsNeeded: number): number {
