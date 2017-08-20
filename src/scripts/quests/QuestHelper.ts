@@ -26,6 +26,9 @@ class QuestHelper{
             case "HatchEggs":
                 amount = SeededRand.intBetween(1, 30);
                 return new HatchEggsQuest(amount);
+            case "MineLayers":
+                amount = SeededRand.intBetween(1,3);
+                return new MineLayersQuest(amount);
         }
     }
 

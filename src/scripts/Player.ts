@@ -85,6 +85,7 @@ class Player {
         this._maxDailyDeals = ko.observable(savedPlayer._maxDailyDeals || GameConstants.MineUpgradesInitialValues.maxDailyDeals);
         this._maxUndergroundItems = ko.observable(savedPlayer._maxUndergroundItems || GameConstants.MineUpgradesInitialValues.maxUndergroundItems);
         this._mineEnergyRegenTime = ko.observable(savedPlayer._mineEnergyRegenTime || GameConstants.MineUpgradesInitialValues.mineEnergyRegenTime);
+        this._mineLayersCleared = ko.observable(savedPlayer._mineLayersCleared || 0);
         savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
         this._eggList = savedPlayer._eggList.map((egg) => {
             return ko.observable(egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null)
@@ -159,6 +160,7 @@ class Player {
     private _maxDailyDeals: KnockoutObservable<number>;
     private _maxUndergroundItems: KnockoutObservable<number>;
     private _mineEnergyRegenTime: KnockoutObservable<number>;
+    private _mineLayersCleared: KnockoutObservable<number>;
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
@@ -719,6 +721,14 @@ class Player {
         }
     }
 
+    get mineLayersCleared(): number {
+        return this._mineLayersCleared();
+    }
+
+    set mineLayersCleared(value: number) {
+        this._mineLayersCleared(value);
+    }
+
     get eggSlots(): KnockoutObservable<number> {
         return this._eggSlots;
     }
@@ -787,6 +797,7 @@ class Player {
             "_diamonds",
             "_maxUndergroundItems",
             "_mineEnergyRegenTime",
+            "_mineLayersCleared",
             "_eggList",
             "_eggSlots",
             "_eggsHatched",

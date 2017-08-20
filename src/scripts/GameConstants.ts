@@ -132,14 +132,17 @@ namespace GameConstants {
 
     // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
     //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
-    export const DEFEAT_POKEMONS_BASE_REWARD = 1;
-    export const GAIN_MONEY_BASE_REWARD = 0.0017; // Dimava
-    export const HATCH_EGGS_BASE_REWARD = 33;     // Dimava
+    const questBase = 1;
+    export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
+    export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017; // Dimava
+    export const HATCH_EGGS_BASE_REWARD = questBase * 33;     // Dimava
+    export const MINE_LAYERS_BASE_REWARD = questBase * 720;   // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
 
     export const QuestTypes = [
         "DefeatPokemons",
         "GainMoney",
         "HatchEggs",
+        "MineLayers",
     ];
 
     export const QUESTS_PER_SET = 10;

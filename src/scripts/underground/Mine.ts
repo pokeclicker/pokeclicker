@@ -176,6 +176,7 @@ class Mine {
         ko.cleanNode(document.getElementById("mineBody"));
         Mine.loadMine();
         ko.applyBindings(Mine, document.getElementById("mineBody"));
+        player.mineLayersCleared++;
     }
 
     public static loadSavedMine(mine) {
