@@ -2080,12 +2080,12 @@
                     <p class='col-7' data-bind='text: description'></p>
                     <p class='col-1' data-bind='text: pointsReward'></p>
                     <div class='col-2'>
-                        <button class='btn btn-primary' data-bind='visible: !player.currentQuest() && !$data.claimed(),
+                        <button class='btn btn-primary' data-bind='visible: !player.currentQuest() && !player.completedQuestList[index](),
                                                                    click: function(){$data.beginQuest();$("#QuestModal").modal("hide")}'>Start</button>
                         <button class='btn btn-primary' data-bind='visible: player.currentQuest() && (player.currentQuest().index == $data.index) && $data.isCompleted(),
                                                                    click: $data.claimReward;player.completedQuestList[$index](true)'>Claim Reward</button>
                         <p data-bind='visible: $data.inProgress(), text: progress'></p>
-                        <p data-bind='visible: $data.claimed()'>Completed</p>
+                        <p data-bind='visible: player.completedQuestList[index]()'>Completed</p>
                     </div>
                 </div>
             </div>

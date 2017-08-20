@@ -5,12 +5,6 @@ class QuestHelper{
         console.log(level, refreshes, d)
         SeededRand.seed(Number( level * (d.getFullYear() + refreshes * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate()))
 
-        // Empty quest list and reset compeleted quests
-        QuestHelper.questList.splice(0,GameConstants.QUESTS_PER_SET);
-        for (let elem of player.completedQuestList) {
-            elem(false);
-        }
-
         for (let i=0; i<GameConstants.QUESTS_PER_SET; i++) {
             let type = SeededRand.fromArray(GameConstants.QuestTypes);
             let quest = QuestHelper.random(type, i);
@@ -36,6 +30,12 @@ class QuestHelper{
 
     public static refreshQuests() {
         player.questRefreshes++;
+
+        // Empty quest list and reset compeleted quests
+        QuestHelper.questList.splice(0,GameConstants.QUESTS_PER_SET);
+        for (let elem of player.completedQuestList) {
+            elem(false);
+        }
         QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
     }
 

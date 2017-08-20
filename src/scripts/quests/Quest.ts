@@ -20,6 +20,7 @@ abstract class Quest {
             console.log(`Gained ${this.pointsReward} quest points and ${this.xpReward} xp points`);
             this.claimed(true);
             player.currentQuest(null);
+            player.completedQuestList[this.index](true);
         } else {
             console.log("Quest not yet completed");
         }
