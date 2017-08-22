@@ -40,15 +40,18 @@ class QuestHelper{
                 player._money(player._money() - QuestHelper.getRefreshCost());
             }
             player.questRefreshes++;
-
-            // Empty quest list and reset compeleted quests
-            QuestHelper.questList.splice(0,GameConstants.QUESTS_PER_SET);
-            for (let elem of player.completedQuestList) {
-                elem(false);
-            }
+            QuestHelper.clearQuests();
             QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
         } else {
             Notifier.notify("You can't afford to do that!", GameConstants.NotificationOption.danger);
+        }
+    }
+
+    public static clearQuests() {
+        // Empty quest list and reset compeleted quests
+        QuestHelper.questList.splice(0,GameConstants.QUESTS_PER_SET);
+        for (let elem of player.completedQuestList) {
+            elem(false);
         }
     }
 

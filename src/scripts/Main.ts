@@ -118,6 +118,15 @@ class Game {
         }
 
         if (Save.counter > GameConstants.SAVE_TICK) {
+            let now = new Date();
+            if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
+                player.questRefreshes = 0;
+                QuestHelper.clearQuests();
+                QuestHelper.generateQuests(player.questLevel, player.questRefreshes, now);
+                DailyDeal.generateDeals(player.maxDailyDeals, now);
+                Notifier.notify("It's a new day! Your quests and underground deals have been updated.", GameConstants.NotificationOption.info);
+            }
+            player._lastSeen = Date.now()
             Save.store(player);
         }
 

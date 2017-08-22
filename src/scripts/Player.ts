@@ -121,6 +121,7 @@ class Player {
 
         this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
 
+        this._lastSeen = Date.now();
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {

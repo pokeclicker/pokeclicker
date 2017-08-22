@@ -3,7 +3,6 @@ class Save {
     static counter: number = 0;
 
     public static store(player: Player) {
-        player._lastSeen = Date.now()
         let json = JSON.stringify(player);
         localStorage.setItem("player", json);
         localStorage.setItem("mine", Mine.serialize());
