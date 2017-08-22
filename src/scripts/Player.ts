@@ -14,8 +14,8 @@ class Player {
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
 
-        this._lastSeen = savedPlayer._lastSeen || 0
         savedPlayer = savedPlayer || {};
+        this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
