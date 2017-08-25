@@ -35,7 +35,7 @@ class QuestHelper{
     }
 
     public static refreshQuests(free: boolean = false) {
-        if (free || player.money >= QuestHelper.getRefreshCost()) {
+        if (free || QuestHelper.canAffordRefresh()) {
             if (!free) {
                 player._money(player._money() - QuestHelper.getRefreshCost());
             }
@@ -45,6 +45,10 @@ class QuestHelper{
         } else {
             Notifier.notify("You can't afford to do that!", GameConstants.NotificationOption.danger);
         }
+    }
+
+    public static canAffordRefresh(): boolean {
+        return player.money >= QuestHelper.getRefreshCost();
     }
 
     public static clearQuests() {

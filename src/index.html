@@ -2119,8 +2119,10 @@
             <div class="modal-footer">
                 <div id='refreshQuests'>
                     <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()'
-                            data-bind='text: "Refresh"'></button>
-                    <p data-bind='text: "Cost: " + QuestHelper.getRefreshCost()'></p>
+                            data-bind='text: "Refresh",
+                                       enable: QuestHelper.canAffordRefresh()'></button>
+                    <p data-bind='text: "Cost: " + QuestHelper.getRefreshCost(),
+                                  css: { "text-danger": !QuestHelper.canAffordRefresh() }'></p>
                 </div>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
