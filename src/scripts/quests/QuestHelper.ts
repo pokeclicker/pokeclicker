@@ -31,6 +31,10 @@ class QuestHelper{
                 return new MineLayersQuest(amount);
             case "CatchShinies":
                 return new CatchShiniesQuest(1);
+            case "DefeatGym":
+                let gymIndex = SeededRand.intBetween(0, GameConstants.Gyms.length);
+                amount = SeededRand.intBetween(20, 100);
+                return new DefeatGymQuest(gymIndex, amount);
         }
     }
 

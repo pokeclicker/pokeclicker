@@ -145,6 +145,7 @@ namespace GameConstants {
         "HatchEggs",
         "MineLayers",
         "CatchShinies",
+        "DefeatGym",
     ];
 
     export const QUESTS_PER_SET = 10;
@@ -496,4 +497,21 @@ namespace GameConstants {
         "Aerodactyl": "amber",
 
     }
+
+    // For random quest, name matches entry in gymList (created in Gym.ts)
+    export const Gyms = [
+        "Pewter City",
+        "Cerulean City",
+        "Vermillion City",
+        "Celadon City",
+        "Saffron City",
+        "Fuchsia City",
+        "Cinnabar Island",
+        "Viridian City",
+        "Elite Lorelei",
+        "Elite Bruno",
+        "Elite Agatha",
+        "Elite Lance",
+        "Champion Blue"
+    ]
 }

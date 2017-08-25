@@ -100,6 +100,9 @@ class Player {
         });
 
         this._eggsHatched = ko.observable(savedPlayer._eggsHatched || 0);
+        this.gymDefeats = Array.apply(null, Array(GameConstants.Gyms.length)).map(function (val, index) {
+            return ko.observable(savedPlayer.kantoGymDefeats ? (savedPlayer.kantoGymDefeats[index] || 0) : 0)
+        });
 
         let today = new Date();
         let lastSeen = new Date(this._lastSeen);
@@ -182,6 +185,7 @@ class Player {
     public _lastSeen: number;
     public currentQuest: KnockoutObservable<any>;
     private _shinyCatches: KnockoutObservable<number>;
+    public gymDefeats: Array<KnockoutObservable<number>>;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -851,6 +855,7 @@ class Player {
             "_lastSeen",
             "currentQuest",
             "_shinyCatches",
+            "gymDefeats",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
