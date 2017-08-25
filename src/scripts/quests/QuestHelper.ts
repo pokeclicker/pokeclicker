@@ -32,7 +32,7 @@ class QuestHelper{
             case "CatchShinies":
                 return new CatchShiniesQuest(1);
             case "DefeatGym":
-                let gymIndex = SeededRand.intBetween(0, GameConstants.Gyms.length);
+                let gymIndex = SeededRand.intBetween(0, GameConstants.Gyms.length - 1);
                 amount = SeededRand.intBetween(20, 100);
                 return new DefeatGymQuest(gymIndex, amount);
         }

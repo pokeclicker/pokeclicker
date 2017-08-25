@@ -18,10 +18,10 @@ class SeededRand {
     }
 
     public static intBetween(min: number, max: number): number {
-        return Math.floor( (max-min) * SeededRand.next() + min )
+        return Math.floor( (max-min + 1) * SeededRand.next() + min )
     }
 
     public static fromArray<T>(arr: Array<T>): T {
-        return arr[SeededRand.intBetween(0, arr.length)]
+        return arr[SeededRand.intBetween(0, arr.length - 1)]
     }
 }
