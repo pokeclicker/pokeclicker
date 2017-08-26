@@ -2,7 +2,11 @@ class FarmRunner {
     public static curBerry: Berry = BerryList["Cheri"];
 
     public static openFarmModal() {
-        $('#farmModal').modal('show');
+        if (FarmRunner.accessToFarm()) {
+            $('#farmModal').modal('show');
+        } else {
+            Notifier.notify("You don't have access to this location yet", GameConstants.NotificationOption.warning);
+        }
     }
 
     public static accessToFarm() {
@@ -10,13 +14,13 @@ class FarmRunner {
         return true;
     }
 
-    public static isEmpty(index:number){
+    public static isEmpty(index: number) {
         return player.plotList()[index]().isEmpty();
     }
 
     public static tick() {
         for (let i = 0; i < 25; i++) {
-            player.plotList[i]().timeLeft = Math.max(0, player.plotList[i]().timeLeft - 1);
+            player.plotList()[i]().timeLeft(Math.max(0, player.plotList()[i]().timeLeft() - 1));
         }
     }
 
@@ -43,9 +47,9 @@ class FarmRunner {
             console.log("Locked");
             return;
         }
-            console.log("planting on " + plotId);
-            player.plotList()[plotId]().berry(FarmRunner.curBerry);
-            player.plotList()[plotId]().timeLeft(FarmRunner.curBerry.harvestTime);
+        console.log("planting on " + plotId);
+        player.plotList()[plotId]().berry(FarmRunner.curBerry);
+        player.plotList()[plotId]().timeLeft(FarmRunner.curBerry.harvestTime);
 
     }
 
@@ -64,11 +68,14 @@ class FarmRunner {
     }
 
     public static gainBerryByName(berryname: string, amount: number = 1) {
-        player.berryList()
+        player.berryList(player.berryList()[GameConstants.BerryType[berryname]] + amount);
     }
 
     public static getImage(plot: Plot) {
-        return "assets/images/pokemon/3.png"
+        if (plot.getStage() <= 1) {
+            return "assets/images/farm/AllTreeSeedIII.png"
+        }
+        return "assets/images/farm/" + GameConstants.BerryType[plot.berry().type] + "Tree" + GameConstants.PlotStage[plot.getStage()] + "III.png";
     }
 }
 

@@ -20,7 +20,7 @@ class Plot {
     }
 
     public getStage() {
-        return 5 - Math.ceil(5 * this.timeLeft() / this.berry().harvestTime);
+        return 4 - Math.ceil(4 * this.timeLeft() / this.berry().harvestTime);
     }
 
 }

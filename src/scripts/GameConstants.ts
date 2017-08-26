@@ -86,6 +86,14 @@ namespace GameConstants {
     export const AMOUNT_OF_BERRIES = 8;
     export const AMOUNT_OF_PLOTS = 25;
 
+    export enum PlotStage {
+        Seed,
+        Sprout,
+        Taller,
+        Bloom,
+        Berry
+    }
+
     export enum OakItem {
         "Magic Ball" = 0,
         "Amulet Coin",
