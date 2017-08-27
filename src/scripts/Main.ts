@@ -148,13 +148,15 @@ class Game {
         $('path, rect').hover(function () {
             let id = $(this).attr('id');
             if (id && id != 'mapTooltipWrapper') {
-                $('#mapTooltip').text(id);
-                let width = document.getElementById('mapTooltip').getBoundingClientRect().width * 1.10;
-                $('#mapTooltipWrapper').attr('width', width)
+                let tooltip = $('#mapTooltip');
+                tooltip.text(id);
+                tooltip.css('visibility', 'visible')
+
             }
         }, function () {
-            $('#mapTooltip').text('');
-            $('#mapTooltipWrapper').attr('width', 0)
+            let tooltip = $('#mapTooltip');
+            tooltip.text('');
+            tooltip.css('visibility', 'hidden')
         });
     }
 }

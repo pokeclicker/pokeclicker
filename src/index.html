@@ -723,6 +723,7 @@
             <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
                 <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
                     Game.gameState() == GameConstants.GameState.shop)">
+                    <p id="mapTooltip" style="visibility: hidden;"></p>
                     <div class="page-item no-select">
                         <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
                             <defs>
@@ -740,12 +741,6 @@
 
                             <g transform="translate(-1,-1)">
                                 <image height="420.7" width="651" xlink:href="assets/images/kanto.png"></image>
-                                <g>
-                                    <rect height="36" width="0" x="0" y="0" fill="#dddddd" stroke="black"
-                                          fill-opacity="0.9"
-                                          id="mapTooltipWrapper"></rect>
-                                    <text x="5" y="25" id="mapTooltip"></text>
-                                </g>
 
                                 <!--Route 1-->
                                 <g transform="rotate(90,83.65,263.2)"

@@ -8,6 +8,7 @@ class MapHelper {
                 $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
                 Battle.generateNewEnemy();
                 Game.gameState(GameConstants.GameState.fighting);
+                Game.applyRouteBindings();
             }
             else {
                 Notifier.notify("You don't have access to that route yet.", GameConstants.NotificationOption.warning);
