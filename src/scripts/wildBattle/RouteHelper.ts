@@ -17,6 +17,9 @@ class RouteHelper {
             route = 1;
         }
         let possiblePokemons = pokemonsPerRoute[region][route];
+        if (possiblePokemons == null) {
+            return [];
+        }
         if (includeWater || possiblePokemons.land.length == 0) {
             return possiblePokemons.land.concat(possiblePokemons.water);
         } else {
