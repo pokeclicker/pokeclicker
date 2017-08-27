@@ -232,7 +232,7 @@ class Player {
 
     public calculateClickAttack(): number {
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
-        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
+        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.45) * oakItemBonus);
     }
 
     public calculateMoneyMultiplier(): number {
