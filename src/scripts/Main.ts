@@ -155,7 +155,6 @@ class Game {
         }, function () {
             $('#mapTooltip').text('');
             $('#mapTooltipWrapper').attr('width', 0)
-
         });
     }
 }
