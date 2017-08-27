@@ -6,6 +6,6 @@ class AttackRequirement extends Requirement{
     }
 
     public getProgress(){
-        return Math.min(player.pokemonAttackObservable, this.requiredValue);
+        return Math.min(player.pokemonAttackObservable(), this.requiredValue);
     }
 }
