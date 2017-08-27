@@ -36,6 +36,7 @@ class Player {
     public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
     public achievementsCompleted: {[name: string]: boolean};
+    public statistics: Statistics;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -615,7 +616,8 @@ class Player {
             "_eggList",
             "_eggSlots",
             "_shardUpgrades",
-            "_shardsCollected"
+            "_shardsCollected",
+            "statistics",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
