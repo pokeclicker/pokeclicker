@@ -348,6 +348,10 @@ class Player {
         this._money(Math.floor(this._money() + money * oakItemBonus));
     }
 
+    public gainDungeonTokens(tokens: number) {
+        this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens ));
+    }
+
     public hasMoney(money: number) {
         return this._money() >= money;
     }
