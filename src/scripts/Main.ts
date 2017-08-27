@@ -149,7 +149,7 @@ class Game {
             let id = $(this).attr('id');
             if (id && id != 'mapTooltipWrapper') {
                 $('#mapTooltip').text(id);
-                let width = document.getElementById('mapTooltip').getBoundingClientRect().width + 45;
+                let width = document.getElementById('mapTooltip').getBoundingClientRect().width * 1.10;
                 $('#mapTooltipWrapper').attr('width', width)
             }
         }, function () {
