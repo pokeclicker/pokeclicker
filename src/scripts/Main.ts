@@ -45,14 +45,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     ko.applyBindings(game);
     ko.options.deferUpdates = true;
 
-    $('path, rect').hover(function () {
-        let id = $(this).attr('id');
-        if (id && id != 'mapTooltipWrapper') {
-            $('#mapTooltip').text(id);
-            let width = document.getElementById('mapTooltip').getBoundingClientRect().width + 45;
-            $('#mapTooltipWrapper').attr('width', width)
-        }
-    });
+    Game.applyRouteBindings();
 
 });
 
@@ -149,5 +142,16 @@ class Game {
         Save.loadMine();
         Underground.energyTick(player._mineEnergyRegenTime())
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());
+    }
+
+    static applyRouteBindings() {
+        $('path, rect').mouseenter(function () {
+            let id = $(this).attr('id');
+            if (id && id != 'mapTooltipWrapper') {
+                $('#mapTooltip').text(id);
+                let width = document.getElementById('mapTooltip').getBoundingClientRect().width + 45;
+                $('#mapTooltipWrapper').attr('width', width)
+            }
+        });
     }
 }

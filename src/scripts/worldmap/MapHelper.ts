@@ -63,6 +63,7 @@ class MapHelper {
             player.town(TownList[townName]);
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
+            Game.applyRouteBindings();
         }
     };
 
