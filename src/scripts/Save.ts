@@ -85,7 +85,7 @@ class Save {
         return res;
     }
 
-    public static initializePlots(saved?: Array<any>): KnockoutObservableArray<KnockoutObservable<Plot>> {
+    public static initializePlots(saved?: Array<any>): KnockoutObservable<Plot>[] {
         let plotList: Array<KnockoutObservable<Plot>>;
         if (saved) {
             plotList = saved.map((p) => {
@@ -107,7 +107,7 @@ class Save {
                 return ko.observable(new Plot(false, 0, 0, false, null, 0))
             });
         }
-        return ko.observableArray(plotList);
+        return plotList;
     }
 
     public static initializeShards(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {

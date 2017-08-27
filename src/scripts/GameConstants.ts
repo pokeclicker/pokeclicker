@@ -489,4 +489,6 @@ namespace GameConstants {
         "Aerodactyl": "amber",
 
     }
+
+
 }

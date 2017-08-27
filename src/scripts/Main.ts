@@ -144,4 +144,6 @@ class Game {
         Underground.energyTick(player._mineEnergyRegenTime())
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());
     }
+
 }
+

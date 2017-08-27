@@ -74,9 +74,6 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
-    <script type="text/javascript">
-        $(Game.gameState((GameConstants.GameState.farm)))
-    </script>
 
 </head>
 <body class="no-select">
@@ -703,10 +700,11 @@
                         </div>
                     </div>
                 </div>
-
                 <!--Farm View-->
                 <div id="farmView" data-bind="if: Game.gameState() == GameConstants.GameState.farm"
                      class="justify-content-center no-select row">
+
+
                     <div class="col-sm-4 col-md-3 col-lg-4">
                         <ul id="seedList" data-bind="foreach: player.seedList" class="list-group"
                             style="margin-bottom: 5px;">
@@ -721,10 +719,14 @@
 
                         <div class="row">
                             <div class="col-sm-12 col-6">
-                                <button class="btn btn-primary btn-sm farm-button" data-bind="click: function(){FarmRunner.plantAll()}">Plant All</button>
+                                <button class="btn btn-primary btn-sm farm-button"
+                                        data-bind="click: function(){FarmRunner.plantAll()}">Plant All
+                                </button>
                             </div>
                             <div class="col-sm-12 col-6">
-                                <button class="btn btn-success btn-sm farm-button" data-bind="click: function(){FarmRunner.harvestAll()}">Harvest All</button>
+                                <button class="btn btn-success btn-sm farm-button"
+                                        data-bind="click: function(){FarmRunner.harvestAll()}">Harvest All
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -733,14 +735,21 @@
                             <div class="plot" data-bind="css :{plotLocked : !isUnlocked}">
                                 <div class="plot-content">
                                     <div class="plotImage">
+                                        <span data-bind="text: FarmRunner.isEmpty($index())()">asd</span>
                                         <img style="width: 100%" src="assets/images/farm/soil.png">
-                                        <div class="plotButton" data-bind="ifnot: $data.isEmpty">
-                                            <img width="100%" height="100%" style="max-width: 100%; max-height: 100%"
-                                                 src=""
-                                                 data-bind="attr:{ src: FarmRunner.getImage($data)}">
+                                        <div data-bind="ifnot:FarmRunner.isEmpty($index())()">
+                                            <div class="plotButton"
+                                                 data-bind="tooltip: {title: '' + $data.formattedTimeLeft(), trigger: 'hover'}">
+                                                <img width="100%" height="100%"
+                                                     style="max-width: 100%; max-height: 100%"
+                                                     src=""
+                                                     data-bind="attr:{ src: FarmRunner.getImage($data)}">
+                                            </div>
                                         </div>
-                                        <div class="plotButton"
-                                             data-bind="if: $data.isEmpty, click: function(){FarmRunner.plant($index())}">
+                                        <div data-bind="if:FarmRunner.isEmpty($index())()">
+                                            <div class="plotButton"
+                                                 data-bind="click: function(){FarmRunner.plant($index())}">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
