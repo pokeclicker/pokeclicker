@@ -6,6 +6,6 @@ class TokenRequirement extends Requirement{
     }
 
     public getProgress(){
-        return Math.min(player._dungeonTokens, this.value);
+        return Math.min(player._dungeonTokens, this.requiredValue);
     }
 }

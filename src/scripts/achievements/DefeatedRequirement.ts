@@ -6,6 +6,6 @@ class DefeatedRequirement extends Requirement{
     }
 
     public getProgress(){
-        return Math.min(Statistics.pokemonDefeated, this.value);
+        return Math.min(player.statistics.pokemonDefeated, this.requiredValue);
     }
 }

@@ -6,6 +6,6 @@ class DiamondRequirement extends Requirement{
     }
 
     public getProgress(){
-        return Math.min(player._diamonds, this.value);
+        return Math.min(player._diamonds, this.requiredValue);
     }
 }
