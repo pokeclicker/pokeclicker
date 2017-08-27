@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Pokeclicker</title>
+    <title>Pokéclicker</title>
     <link href="/assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
         <tr data-bind='ifnot: $data.breeding()'>
@@ -84,31 +84,34 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-right">
         <li>
-            <button class="dropdown-item" href="#">Pokedex</button>
+            <a class="dropdown-item" href="#pokedexModal" data-toggle="modal">Pokédex</a>
+        </li>
+        <li>
+            <a class="dropdown-item" href="#badgeCaseModal" data-toggle="modal">Badge Case</a>
         </li>
         <li>
             <button class="dropdown-item" href="#">Stats</button>
         </li>
         <li>
-            <button class="dropdown-item" href="#">Subreddit</button>
+            <a class="dropdown-item" href="https://pokeclicker.reddit.com" target="_blank">Subreddit</a>
         </li>
         <li>
-            <button class="dropdown-item" href="#">Save</button>
+            <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
         </li>
         <li>
-            <button onClick="$('#achievementsModal').modal('show')" class="dropdown-item" href="#">Achievements</button>
+            <a class="dropdown-item" href="#achievementsModal" data-toggle="modal">Achievements</a>
         </li>
         <li>
             <button class="dropdown-item" href="#">Changelog</button>
         </li>
         <li>
-            <button onClick="$('#shardModal').modal('show')" class="dropdown-item" href="#">Shards</button>
+            <a class="dropdown-item" href="#shardModal" data-toggle="modal">Shards</a>
         </li>
         <li>
-            <button onClick="$('#showKeyitemsModal').modal('toggle');" class="dropdown-item">Key Items</button>
+            <a class="dropdown-item" href="#showKeyitemsModal" data-toggle="modal">Key Items</a>
         </li>
         <li>
-            <button onClick="$('#donateModal').modal('toggle');" class="dropdown-item" href="#">Donate</button>
+            <a class="dropdown-item" href="#donateModal" data-toggle="modal">Donate</a>
         </li>
 
     </ul>
@@ -306,8 +309,8 @@
 </div>
 
 <div class="container">
-    <div class="row justify-content-lg-center">
-        <h1>Pokeclicker</h1>
+    <div class="row justify-content-center">
+        <h1>Pokéclicker</h1>
     </div>
     <div class="row justify-content-lg-center" style="text-align: center">
 
@@ -1489,7 +1492,6 @@
     </div>
 </div>
 
-
 <!-- Start Sequence Modal-->
 <div class="modal" id="startSequenceModal" tabindex="-1" role="dialog"
      aria-labelledby="startSequenceModalLabel" aria-hidden="true">
@@ -1861,6 +1863,185 @@
                         </table>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pokedex Modal-->
+<div class="modal noselect" id="pokedexModal" tabindex="-1" role="dialog"
+     aria-labelledby="pokedexModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+
+                <div class="collapse" id="pokedex-collapse">
+                    <div class="container" style="border-bottom: 1px solid #eceeef">
+
+                        <!--Name-->
+                        <div class="form-group row">
+                            <div class="col-sm-2">
+                                <label class="col-form-label">Name</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
+                                       oninput="PokedexHelper.updateList()"
+                                >
+                            </div>
+
+                        </div>
+
+                        <!--Types-->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="pokedex-filter-type1">Type:</label>
+                            <div class="col-sm-10">
+                                <select id="pokedex-filter-type1" class="custom-select float-left"
+                                        oninput="PokedexHelper.updateList()" style="margin-right: 8px">
+                                    <option value="-1" selected>All</option>
+                                </select>
+                                <label class="sr-only" for="pokedex-filter-type2">Type</label>
+                                <select id="pokedex-filter-type2" class="custom-select float-left"
+                                        oninput="PokedexHelper.updateList()">
+                                    <option value="-1" selected>All</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <!--Caught-->
+                            <div class="col-sm-2 offset-sm-2">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="pokedex-filter-caught"
+                                           value="false" onclick="PokedexHelper.updateList()"> Caught
+                                </label>
+                            </div>
+                            <!--Shiny-->
+                            <div class="col-sm-2">
+                                <label class="form-check-label">
+                                    <input class="form-check-input" type="checkbox" id="pokedex-filter-shiny"
+                                           value="false" onclick="PokedexHelper.updateList()"> Shiny
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div>
+                    <ul class="row justify-content-center" data-bind="foreach: PokedexHelper.filteredList()"
+                        style="max-width: 100%; padding:0; margin:0;">
+                        <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
+                            data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
+                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;"
+                                          data-bind="text: $data.id">number</span>
+                            <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
+                                <img src="" width="80px"
+                                     data-bind="attr:{ src: PokemonHelper.getImage($data, false)}">
+                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
+                                      data-bind="text: $data.name">name</span>
+                            </div>
+                            <div data-bind="ifnot: PokedexHelper.pokemonSeen($data.id)">
+                                <img src="" width="80px" class="pokemon-not-seen"
+                                     data-bind="attr:{src: PokemonHelper.getImage($data, false)}">
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Badge Case Modal-->
+<div class="modal fade noselect" id="badgeCaseModal" tabindex="-1" role="dialog"
+     aria-labelledby="badgeCaseModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Badge Case</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row no-gutters justify-content-center"
+                     data-bind="foreach: new Array(GameConstants.AMOUNT_OF_BADGES)">
+                    <div class="col-sm-3 col-md-3 col-lg-3 badgeEntry">
+                        <div data-bind="with: GameConstants.Badge[$index() + 1]">
+
+                            <div data-bind="if: player.hasBadge(GameConstants.Badge[$data])">
+                                <img src=""
+                                     data-bind="attr:{ src: 'assets/images/badges/'+ Gym.getLeaderByBadge($data) +'.png'}">
+
+                            </div>
+                            <div data-bind="ifnot: player.hasBadge(GameConstants.Badge[$data])">
+                                <img src="" width="80px" class="badge-not-acquired"
+                                     data-bind="attr:{ src: 'assets/images/badges/'+ Gym.getLeaderByBadge($data) +'.png'}">
+                            </div>
+                            <p style="bottom: 0;"
+                               data-bind="text: $data">name</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Save Modal-->
+<div class="modal fade noselect" id="saveModal" tabindex="-1" role="dialog"
+     aria-labelledby="saveModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link active" href="#saveTab1" data-toggle="tab">Export
+                            Save</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab2" data-toggle="tab">Import Save</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab3" data-toggle="tab">Converter</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveTab4" data-toggle="tab">Reset</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="saveTab1">
+                            <div class="container">
+                                <br>
+                                <button class="btn btn-info" onClick=Save.download()>Download save</button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="saveTab2">
+                            <div class="container">
+                                <br>
+                                <input type="file" id="input" accept=".pokeclicker"
+                                       onchange=Save.loadFromFile(this.files[0])>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="saveTab3">
+                            <div class="container">
+                                <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
+                                <textarea id="convertTextArea" class="saveTextArea"></textarea>
+                                <button style="float: right;" class="btn btn-success" onclick="Save.convert()">
+                                    Convert
+                                </button>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="saveTab4">
+                            <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
+                                savefile</h3>
+                            <button class="btn btn-danger" onClick="Save.reset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

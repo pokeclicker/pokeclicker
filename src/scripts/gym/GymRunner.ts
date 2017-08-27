@@ -23,8 +23,7 @@ class GymRunner {
             Game.gameState(GameConstants.GameState.gym);
             GymBattle.generateNewEnemy();
         } else {
-            Notifier.notify(gym.leaderName + " thinks you are not a worthy opponent yet...", GameConstants.NotificationOption.danger);
-            Notifier.notify("Perhaps you should fight another gymleader first?", GameConstants.NotificationOption.info);
+            Notifier.notify(gym.leaderName + " does not deem you a worthy opponent yet...<br>Perhaps you can convince her with more gym badges", GameConstants.NotificationOption.danger);
         }
     }
 
