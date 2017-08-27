@@ -49,6 +49,7 @@ class Battle {
      */
     public static defeatPokemon() {
         player.gainMoney(this.enemyPokemon().money);
+        player.gainDungeonTokens(Math.floor(this.enemyPokemon().level/2));
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.gainShards(this.enemyPokemon());
         player.addRouteKill();
