@@ -7,16 +7,13 @@ class Player {
 
     private _money: KnockoutObservable<number>;
     private _dungeonTokens: KnockoutObservable<number>;
-    private _caughtShinyList: KnockoutObservableArray<string>;
-    private _route: KnockoutObservable<number>;
-    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
-
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
+        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         if (savedPlayer._route == null || savedPlayer._route == 0) {
             this._route = ko.observable(1);
@@ -102,6 +99,12 @@ class Player {
             }
         }
     }
+
+    private _caughtShinyList: KnockoutObservableArray<string>;
+    private _route: KnockoutObservable<number>;
+    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
+
+    private _questPoints: KnockoutObservable<number>;
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
@@ -505,6 +508,10 @@ class Player {
         return this._dungeonTokens;
     }
 
+    get questPoints(): KnockoutObservable<number> {
+        return this._questPoints;
+    }
+
     get caughtPokemonList() {
         return this._caughtPokemonList();
     }
@@ -722,6 +729,7 @@ class Player {
         let keep = [
             "_money",
             "_dungeonTokens",
+            "_questPoints",
             "_caughtShinyList",
             "_route",
             "_caughtPokemonList",
