@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         let id = $(this).attr('id');
         if (id && id != 'mapTooltipWrapper') {
             $('#mapTooltip').text(id);
-            let width = document.getElementById('mapTooltip').getBoundingClientRect().width + 40;
+            let width = document.getElementById('mapTooltip').getBoundingClientRect().width + 45;
             $('#mapTooltipWrapper').attr('width', width)
         }
     });
