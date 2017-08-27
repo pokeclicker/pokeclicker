@@ -54,12 +54,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     });
 
-    // $('rect').hover(function () {
-    //     let id = $(this).attr('id');
-    //     if (id) {
-    //         $('#mapTooltip').text(id);
-    //     }
-    // });
 });
 
 /**
