@@ -9,4 +9,21 @@ class Statistics {
     public digItems: KnockoutObservable<number>;
     public digDeeper: KnockoutObservable<number>;
 
+    constructor(saved = {}) {
+        let props = [
+            "clicks",
+            "hatchedEggs",
+            "pokemonCaptured",
+            "pokemonDefeated",
+            "gymsDefeated",
+            "dungeonsCleared",
+            "digItems",
+            "digDeeper",
+        ];
+
+        for (let prop of props) {
+            this[prop] = ko.observable(saved[prop] || 0)
+        }
+    }
+
 }

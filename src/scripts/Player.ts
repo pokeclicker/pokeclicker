@@ -132,6 +132,8 @@ class Player {
         this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
+
+        this.statistics = new Statistics(savedPlayer.statistics);
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
