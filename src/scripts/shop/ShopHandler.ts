@@ -31,6 +31,7 @@ class ShopHandler {
             if (player.hasMoney(item.totalPrice())) {
                 player.payMoney(item.totalPrice());
                 item.buy(this.amount());
+                item.increasePriceMultiplier(this.amount());
                 Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
             } else {
                 Notifier.notify("You don't have enough money to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)

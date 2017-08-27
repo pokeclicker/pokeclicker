@@ -37,7 +37,7 @@ abstract class Item {
     }
 
     decreasePriceMultiplier(n = 1) {
-        player.itemMultipliers[this.name()] = Math.max(1, player.itemMultipliers[this.name()] - GameConstants.ITEM_PRICE_DEDUCT);
+        player.itemMultipliers[this.name()] = Math.max(1, player.itemMultipliers[this.name()] - n * GameConstants.ITEM_PRICE_DEDUCT);
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.name()]));
     }
 

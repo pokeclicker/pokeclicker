@@ -232,7 +232,7 @@ class Player {
 
     public calculateClickAttack(): number {
         let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
-        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.45) * oakItemBonus);
+        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
     }
 
     public calculateMoneyMultiplier(): number {
@@ -470,10 +470,6 @@ class Player {
 
     get itemMultipliers(): { [p: string]: number } {
         return this._itemMultipliers;
-    }
-
-    set itemMultipliers(value: { [p: string]: number }) {
-        this._itemMultipliers = value;
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
