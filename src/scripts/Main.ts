@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 class Game {
     interval;
     undergroundCounter: number;
-    farmCounter: number;
+    farmCounter: number = 0;
     public static achievementCounter: number = 0;
 
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
@@ -80,7 +80,7 @@ class Game {
     gameTick() {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
-        this.farmCounter += GameConstants.TICK_TIME;
+        FarmRunner.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if(Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK){
             Game.achievementCounter = 0;
@@ -128,7 +128,7 @@ class Game {
             Underground.counter = 0;
         }
 
-        if (this.farmCounter > GameConstants.FARM_TICK) {
+        if (FarmRunner.counter > GameConstants.FARM_TICK) {
             FarmRunner.tick();
         }
     }

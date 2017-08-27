@@ -20,6 +20,9 @@ class Plot {
     }
 
     public getStage() {
+        if(this.berry() == null){
+            return 1;
+        }
         return 4 - Math.ceil(4 * this.timeLeft() / this.berry().harvestTime);
     }
 

@@ -1,5 +1,6 @@
 class FarmRunner {
     public static curBerry: Berry = BerryList["Cheri"];
+    public static counter: number = 0;
 
     public static openFarmModal() {
         if (FarmRunner.accessToFarm()) {
@@ -18,20 +19,37 @@ class FarmRunner {
         return player.plotList()[index]().isEmpty();
     }
 
+
     public static tick() {
+        this.counter = 0;
         for (let i = 0; i < 25; i++) {
             player.plotList()[i]().timeLeft(Math.max(0, player.plotList()[i]().timeLeft() - 1));
         }
+        if (Game.gameState() == GameConstants.GameState.farm) {
+
+            Game.gameState(GameConstants.GameState.idle);
+            Game.gameState(GameConstants.GameState.farm);
+        }
+
+
+            let seedList = $('#seedList');
+            seedList.children().get(FarmRunner.curBerry.type).className += " active"
+            seedList.find("li").click(function () {
+                $(this).parent().children().removeClass("active");
+                $(this).addClass("active");
+            });
+
     }
 
     public static plantAll() {
-        for (let i = 0; i < player.plotList.length; i++) {
+        for (let i = 0; i < player.plotList().length; i++) {
             FarmRunner.plant(i);
         }
     }
 
     public static harvestAll() {
-        for (let i = 0; i < player.plotList.length; i++) {
+        console.log("Harvesting all");
+        for (let i = 0; i < player.plotList().length; i++) {
             FarmRunner.harvest(i);
         }
     }
@@ -54,17 +72,19 @@ class FarmRunner {
     }
 
     public static harvest(plotId) {
-        if (player.plotList[plotId]().berry() !== null && player.plotList[plotId]().timeLeft <= 0) {
+        console.log("Harvesting plot: " + plotId);
+        if (player.plotList()[plotId]().berry() !== null && player.plotList()[plotId]().timeLeft() <= 0) {
+
             FarmRunner.gainPlotExp(plotId);
-            player.gainFarmPoints(player.plotList[plotId]().berry().farmValue);
-            player.plotList[plotId]().berry = null;
+            player.gainFarmPoints(player.plotList()[plotId]().berry().farmValue);
+            player.plotList()[plotId]().berry(null);
         } else {
             console.log("Not ready");
         }
     }
 
     public static gainPlotExp(plotId) {
-        player.plotList[plotId]().exp += player.plotList[plotId]().berry().farmValue;
+        player.plotList()[plotId]().exp += player.plotList()[plotId]().berry().farmValue;
     }
 
     public static gainBerryByName(berryname: string, amount: number = 1) {
@@ -78,6 +98,7 @@ class FarmRunner {
         return "assets/images/farm/" + GameConstants.BerryType[plot.berry().type] + "Tree" + GameConstants.PlotStage[plot.getStage()] + "III.png";
     }
 }
+
 
 document.addEventListener("DOMContentLoaded", function (event) {
     let seedList = $('#seedList');
