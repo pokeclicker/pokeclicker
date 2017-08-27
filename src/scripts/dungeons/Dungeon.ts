@@ -72,7 +72,7 @@ dungeonList["Mt. Moon"] = new Dungeon("Mt. Moon",
     ["Sandshrew", "Clefairy", "Zubat", "Paras", "Geodude", "Pidgeotto"],
     834,
     [new DungeonBossPokemon("Kabuto", 4170, 12), new DungeonBossPokemon("Omanyte", 4170, 12)],
-    75, GameConstants.Badge.Rainbow, 4, 10
+    75, GameConstants.Badge.Boulder, 4, 10
 );
 
 dungeonList["Rock Tunnel"] = new Dungeon("Rock Tunnel",

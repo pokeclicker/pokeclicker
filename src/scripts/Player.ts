@@ -46,7 +46,7 @@ class Player {
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
-            let amt = 1000;
+            let amt = index == 0 ? 50 : 0;
             if (savedPlayer._pokeballs && typeof savedPlayer._pokeballs[index] == 'number') {
                 amt = savedPlayer._pokeballs[index];
             }
@@ -470,10 +470,6 @@ class Player {
 
     get itemMultipliers(): { [p: string]: number } {
         return this._itemMultipliers;
-    }
-
-    set itemMultipliers(value: { [p: string]: number }) {
-        this._itemMultipliers = value;
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {

@@ -15,8 +15,8 @@ class IndigoPlateau extends PokemonLeague {
     }
 
 }
-//TODO move this to town class
-TownList["Indigo Plateau"] = new IndigoPlateau();
+
+TownList["Indigo Plateau"] = new IndigoPlateau(new Shop(["Ultraball"]));
 TownList["Elite Lorelei"] = TownList["Indigo Plateau"];
 TownList["Elite Bruno"] = TownList["Indigo Plateau"];
 TownList["Elite Agatha"] = TownList["Indigo Plateau"];

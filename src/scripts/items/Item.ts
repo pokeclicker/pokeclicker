@@ -19,6 +19,9 @@ abstract class Item {
             } else {
                 amount = ShopHandler.amount();
             }
+            if (this.name() == "Pokeball") {
+                return this.price() * amount;
+            }
             let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
             return Math.floor(res);
         }, this)
@@ -34,7 +37,7 @@ abstract class Item {
     }
 
     decreasePriceMultiplier(n = 1) {
-        player.itemMultipliers[this.name()] = Math.max(1, player.itemMultipliers[this.name()] - GameConstants.ITEM_PRICE_DEDUCT);
+        player.itemMultipliers[this.name()] = Math.max(1, player.itemMultipliers[this.name()] - n * GameConstants.ITEM_PRICE_DEDUCT);
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.name()]));
     }
 

@@ -9,7 +9,7 @@ class EggItem extends Item {
         this.type = type;
     }
 
-    buy() {
+    buy(amt: number) {
     }
 
     use() {
