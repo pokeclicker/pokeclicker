@@ -13,7 +13,7 @@ class AchievementHandler {
     }
 
     public static addAchievement(name: string, description: string, property: Requirement, bonus: number) {
-        let unlocked: boolean = player.achievementsCompleted[name] == true;
+        let unlocked: boolean = player.achievementsCompleted[name];
         AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, unlocked));
     }
 
@@ -115,82 +115,82 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Clcik 2", "Click 100 Times", new ClickRequirement(100, 1), 0.05);
         AchievementHandler.addAchievement("Click 3", "Click 1000 Times", new ClickRequirement(1000, 1), 0.10);
         AchievementHandler.addAchievement("Click 4", "Click 10000 Times", new ClickRequirement(10000, 1), 0.25);
-        
+
         AchievementHandler.addAchievement("Route 1-1", "Get 100 kills on route 1", new RouteKillRequirement(100, 1), 0.02);
         AchievementHandler.addAchievement("Route 1-2", "Get 1000 kills on route 1", new RouteKillRequirement(1000, 1), 0.05);
-        AchievementHandler.addAchievement("Route 1-3", "Get 10000 kills on route 1", new RouteKillRequirement(1000, 1), 0.10);
+        AchievementHandler.addAchievement("Route 1-3", "Get 10000 kills on route 1", new RouteKillRequirement(10000, 1), 0.10);
         AchievementHandler.addAchievement("Route 2-1", "Get 100 kills on route 2", new RouteKillRequirement(100, 2), 0.02);
         AchievementHandler.addAchievement("Route 2-2", "Get 1000 kills on route 2", new RouteKillRequirement(1000, 2), 0.05);
-        AchievementHandler.addAchievement("Route 2-3", "Get 10000 kills on route 2", new RouteKillRequirement(1000, 2), 0.10);
+        AchievementHandler.addAchievement("Route 2-3", "Get 10000 kills on route 2", new RouteKillRequirement(10000, 2), 0.10);
         AchievementHandler.addAchievement("Route 3-1", "Get 100 kills on route 3", new RouteKillRequirement(100, 3), 0.02);
         AchievementHandler.addAchievement("Route 3-2", "Get 1000 kills on route 3", new RouteKillRequirement(1000, 3), 0.05);
-        AchievementHandler.addAchievement("Route 3-3", "Get 10000 kills on route 3", new RouteKillRequirement(1000, 3), 0.10);
+        AchievementHandler.addAchievement("Route 3-3", "Get 10000 kills on route 3", new RouteKillRequirement(10000, 3), 0.10);
         AchievementHandler.addAchievement("Route 4-1", "Get 100 kills on route 4", new RouteKillRequirement(100, 4), 0.02);
         AchievementHandler.addAchievement("Route 4-2", "Get 1000 kills on route 4", new RouteKillRequirement(1000, 4), 0.05);
-        AchievementHandler.addAchievement("Route 4-3", "Get 10000 kills on route 4", new RouteKillRequirement(1000, 4), 0.10);
+        AchievementHandler.addAchievement("Route 4-3", "Get 10000 kills on route 4", new RouteKillRequirement(10000, 4), 0.10);
         AchievementHandler.addAchievement("Route 5-1", "Get 100 kills on route 5", new RouteKillRequirement(100, 5), 0.02);
         AchievementHandler.addAchievement("Route 5-2", "Get 1000 kills on route 5", new RouteKillRequirement(1000, 5), 0.05);
-        AchievementHandler.addAchievement("Route 5-3", "Get 10000 kills on route 5", new RouteKillRequirement(1000, 5), 0.10);
+        AchievementHandler.addAchievement("Route 5-3", "Get 10000 kills on route 5", new RouteKillRequirement(10000, 5), 0.10);
         AchievementHandler.addAchievement("Route 6-1", "Get 100 kills on route 6", new RouteKillRequirement(100, 6), 0.02);
         AchievementHandler.addAchievement("Route 6-2", "Get 1000 kills on route 6", new RouteKillRequirement(1000, 6), 0.05);
-        AchievementHandler.addAchievement("Route 6-3", "Get 10000 kills on route 6", new RouteKillRequirement(1000, 6), 0.10);
+        AchievementHandler.addAchievement("Route 6-3", "Get 10000 kills on route 6", new RouteKillRequirement(10000, 6), 0.10);
         AchievementHandler.addAchievement("Route 7-1", "Get 100 kills on route 7", new RouteKillRequirement(100, 7), 0.02);
         AchievementHandler.addAchievement("Route 7-2", "Get 1000 kills on route 7", new RouteKillRequirement(1000, 7), 0.05);
-        AchievementHandler.addAchievement("Route 7-3", "Get 10000 kills on route 7", new RouteKillRequirement(1000, 7), 0.10);
+        AchievementHandler.addAchievement("Route 7-3", "Get 10000 kills on route 7", new RouteKillRequirement(10000, 7), 0.10);
         AchievementHandler.addAchievement("Route 8-1", "Get 100 kills on route 8", new RouteKillRequirement(100, 8), 0.02);
         AchievementHandler.addAchievement("Route 8-2", "Get 1000 kills on route 8", new RouteKillRequirement(1000, 8), 0.05);
-        AchievementHandler.addAchievement("Route 8-3", "Get 10000 kills on route 8", new RouteKillRequirement(1000, 8), 0.10);
+        AchievementHandler.addAchievement("Route 8-3", "Get 10000 kills on route 8", new RouteKillRequirement(10000, 8), 0.10);
         AchievementHandler.addAchievement("Route 9-1", "Get 100 kills on route 9", new RouteKillRequirement(100, 9), 0.02);
         AchievementHandler.addAchievement("Route 9-2", "Get 1000 kills on route 9", new RouteKillRequirement(1000, 9), 0.05);
-        AchievementHandler.addAchievement("Route 9-3", "Get 10000 kills on route 9", new RouteKillRequirement(1000, 9), 0.10);
+        AchievementHandler.addAchievement("Route 9-3", "Get 10000 kills on route 9", new RouteKillRequirement(10000, 9), 0.10);
         AchievementHandler.addAchievement("Route 10-1", "Get 100 kills on route 10", new RouteKillRequirement(100, 10), 0.02);
         AchievementHandler.addAchievement("Route 10-2", "Get 1000 kills on route 10", new RouteKillRequirement(1000, 10), 0.05);
-        AchievementHandler.addAchievement("Route 10-3", "Get 10000 kills on route 10", new RouteKillRequirement(1000, 10), 0.10);
+        AchievementHandler.addAchievement("Route 10-3", "Get 10000 kills on route 10", new RouteKillRequirement(10000, 10), 0.10);
         AchievementHandler.addAchievement("Route 11-1", "Get 100 kills on route 11", new RouteKillRequirement(100, 11), 0.02);
         AchievementHandler.addAchievement("Route 11-2", "Get 1000 kills on route 11", new RouteKillRequirement(1000, 11), 0.05);
-        AchievementHandler.addAchievement("Route 11-3", "Get 10000 kills on route 11", new RouteKillRequirement(1000, 11), 0.10);
+        AchievementHandler.addAchievement("Route 11-3", "Get 10000 kills on route 11", new RouteKillRequirement(10000, 11), 0.10);
         AchievementHandler.addAchievement("Route 12-1", "Get 100 kills on route 12", new RouteKillRequirement(100, 12), 0.02);
         AchievementHandler.addAchievement("Route 12-2", "Get 1000 kills on route 12", new RouteKillRequirement(1000, 12), 0.05);
-        AchievementHandler.addAchievement("Route 12-3", "Get 10000 kills on route 12", new RouteKillRequirement(1000, 12), 0.10);
+        AchievementHandler.addAchievement("Route 12-3", "Get 10000 kills on route 12", new RouteKillRequirement(10000, 12), 0.10);
         AchievementHandler.addAchievement("Route 13-1", "Get 100 kills on route 13", new RouteKillRequirement(100, 13), 0.02);
         AchievementHandler.addAchievement("Route 13-2", "Get 1000 kills on route 13", new RouteKillRequirement(1000, 13), 0.05);
-        AchievementHandler.addAchievement("Route 13-3", "Get 10000 kills on route 13", new RouteKillRequirement(1000, 13), 0.10);
+        AchievementHandler.addAchievement("Route 13-3", "Get 10000 kills on route 13", new RouteKillRequirement(10000, 13), 0.10);
         AchievementHandler.addAchievement("Route 14-1", "Get 100 kills on route 14", new RouteKillRequirement(100, 14), 0.02);
         AchievementHandler.addAchievement("Route 414-2", "Get 1000 kills on route 14", new RouteKillRequirement(1000, 14), 0.05);
-        AchievementHandler.addAchievement("Route 14-3", "Get 10000 kills on route 14", new RouteKillRequirement(1000, 14), 0.10);
+        AchievementHandler.addAchievement("Route 14-3", "Get 10000 kills on route 14", new RouteKillRequirement(10000, 14), 0.10);
         AchievementHandler.addAchievement("Route 15-1", "Get 100 kills on route 15", new RouteKillRequirement(100, 15), 0.02);
         AchievementHandler.addAchievement("Route 15-2", "Get 1000 kills on route 15", new RouteKillRequirement(1000, 15), 0.05);
-        AchievementHandler.addAchievement("Route 15-3", "Get 10000 kills on route 15", new RouteKillRequirement(1000, 15), 0.10);
+        AchievementHandler.addAchievement("Route 15-3", "Get 10000 kills on route 15", new RouteKillRequirement(10000, 15), 0.10);
         AchievementHandler.addAchievement("Route 16-1", "Get 100 kills on route 16", new RouteKillRequirement(100, 16), 0.02);
         AchievementHandler.addAchievement("Route 16-2", "Get 1000 kills on route 16", new RouteKillRequirement(1000, 16), 0.05);
-        AchievementHandler.addAchievement("Route 16-3", "Get 10000 kills on route 16", new RouteKillRequirement(1000, 16), 0.10);
+        AchievementHandler.addAchievement("Route 16-3", "Get 10000 kills on route 16", new RouteKillRequirement(10000, 16), 0.10);
         AchievementHandler.addAchievement("Route 17-1", "Get 100 kills on route 17", new RouteKillRequirement(100, 17), 0.02);
         AchievementHandler.addAchievement("Route 17-2", "Get 1000 kills on route 17", new RouteKillRequirement(1000, 17), 0.05);
-        AchievementHandler.addAchievement("Route 17-3", "Get 10000 kills on route 17", new RouteKillRequirement(1000, 17), 0.10);
+        AchievementHandler.addAchievement("Route 17-3", "Get 10000 kills on route 17", new RouteKillRequirement(10000, 17), 0.10);
         AchievementHandler.addAchievement("Route 18-1", "Get 100 kills on route 18", new RouteKillRequirement(100, 18), 0.02);
         AchievementHandler.addAchievement("Route 18-2", "Get 1000 kills on route 18", new RouteKillRequirement(1000, 18), 0.05);
-        AchievementHandler.addAchievement("Route 18-3", "Get 10000 kills on route 18", new RouteKillRequirement(1000, 18), 0.10);
+        AchievementHandler.addAchievement("Route 18-3", "Get 10000 kills on route 18", new RouteKillRequirement(10000, 18), 0.10);
         AchievementHandler.addAchievement("Route 19-1", "Get 100 kills on route 19", new RouteKillRequirement(100, 19), 0.02);
         AchievementHandler.addAchievement("Route 19-2", "Get 1000 kills on route 19", new RouteKillRequirement(1000, 19), 0.05);
-        AchievementHandler.addAchievement("Route 19-3", "Get 10000 kills on route 19", new RouteKillRequirement(1000, 19), 0.10);
+        AchievementHandler.addAchievement("Route 19-3", "Get 10000 kills on route 19", new RouteKillRequirement(10000, 19), 0.10);
         AchievementHandler.addAchievement("Route 20-1", "Get 100 kills on route 20", new RouteKillRequirement(100, 20), 0.02);
         AchievementHandler.addAchievement("Route 20-2", "Get 1000 kills on route 20", new RouteKillRequirement(1000, 20), 0.05);
-        AchievementHandler.addAchievement("Route 20-3", "Get 10000 kills on route 20", new RouteKillRequirement(1000, 20), 0.10);
+        AchievementHandler.addAchievement("Route 20-3", "Get 10000 kills on route 20", new RouteKillRequirement(10000, 20), 0.10);
         AchievementHandler.addAchievement("Route 21-1", "Get 100 kills on route 21", new RouteKillRequirement(100, 21), 0.02);
         AchievementHandler.addAchievement("Route 21-2", "Get 1000 kills on route 21", new RouteKillRequirement(1000, 21), 0.05);
-        AchievementHandler.addAchievement("Route 21-3", "Get 10000 kills on route 21", new RouteKillRequirement(1000, 21), 0.10);
+        AchievementHandler.addAchievement("Route 21-3", "Get 10000 kills on route 21", new RouteKillRequirement(10000, 21), 0.10);
         AchievementHandler.addAchievement("Route 22-1", "Get 100 kills on route 22", new RouteKillRequirement(100, 22), 0.02);
         AchievementHandler.addAchievement("Route 22-2", "Get 1000 kills on route 22", new RouteKillRequirement(1000, 22), 0.05);
-        AchievementHandler.addAchievement("Route 22-3", "Get 10000 kills on route 22", new RouteKillRequirement(1000, 22), 0.10);
+        AchievementHandler.addAchievement("Route 22-3", "Get 10000 kills on route 22", new RouteKillRequirement(10000, 22), 0.10);
         AchievementHandler.addAchievement("Route 23-1", "Get 100 kills on route 23", new RouteKillRequirement(100, 23), 0.02);
         AchievementHandler.addAchievement("Route 23-2", "Get 1000 kills on route 23", new RouteKillRequirement(1000, 23), 0.05);
-        AchievementHandler.addAchievement("Route 23-3", "Get 10000 kills on route 23", new RouteKillRequirement(1000, 23), 0.10);
+        AchievementHandler.addAchievement("Route 23-3", "Get 10000 kills on route 23", new RouteKillRequirement(10000, 23), 0.10);
         AchievementHandler.addAchievement("Route 24-1", "Get 100 kills on route 24", new RouteKillRequirement(100, 24), 0.02);
         AchievementHandler.addAchievement("Route 24-2", "Get 1000 kills on route 24", new RouteKillRequirement(1000, 24), 0.05);
-        AchievementHandler.addAchievement("Route 24-3", "Get 10000 kills on route 24", new RouteKillRequirement(1000, 24), 0.10);
+        AchievementHandler.addAchievement("Route 24-3", "Get 10000 kills on route 24", new RouteKillRequirement(10000, 24), 0.10);
         AchievementHandler.addAchievement("Route 25-1", "Get 100 kills on route 25", new RouteKillRequirement(100, 25), 0.02);
         AchievementHandler.addAchievement("Route 25-2", "Get 1000 kills on route 25", new RouteKillRequirement(1000, 25), 0.05);
-        AchievementHandler.addAchievement("Route 25-3", "Get 10000 kills on route 25", new RouteKillRequirement(1000, 25), 0.10);
+        AchievementHandler.addAchievement("Route 25-3", "Get 10000 kills on route 25", new RouteKillRequirement(10000, 25), 0.10);
 
     }
 }

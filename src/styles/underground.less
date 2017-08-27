@@ -1,0 +1,88 @@
+#mineModal {
+    .modal-dialog {
+        overflow-x: visible;
+        max-width: none;
+        width: 1032px
+    }
+
+    ul.nav {
+        width: 100%;
+    }
+
+    .progress {
+        margin-bottom: 10px;
+        width: 100%;
+    }
+}
+
+.mineInventoryItem {
+    width: 50px;
+}
+
+.rock5 {
+    background-image: url('../assets/images/underground/rock5.png');
+}
+
+.rock4 {
+    background-image: url('../assets/images/underground/rock4.png');
+}
+
+.rock3 {
+    background-image: url('../assets/images/underground/rock3.png');
+}
+
+.rock2 {
+    background-image: url('../assets/images/underground/rock2.png');
+}
+
+.rock1 {
+    background-image: url('../assets/images/underground/rock1.png');
+}
+
+.rock0 {
+    background-image: url('../assets/images/underground/rock0.png');
+}
+
+.mineReward {
+    background-image: url('../assets/images/underground/rock0.png');
+}
+
+.mineSquare {
+    height:32px;
+    width:32px !important;
+    margin: 0px !important;
+    padding:0px !important;
+    text-align: center;
+    max-width: 32px !important;
+}
+.mineSquare:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.rock1:hover:after,
+.rock2:hover:after,
+.rock3:hover:after,
+.rock4:hover:after,
+.rock5:hover:after,
+.hammerSelected.mineSquare:hover:after
+{
+    border: 1px solid red;
+}
+
+img.hammerSelected.mineReward:hover {
+    outline: 1px solid red;
+    z-index: 1;
+}
+
+.HammerSelected {
+    cursor:url('../assets/images/underground/hammer.png'),auto;
+}
+
+.ChiselSelected {
+    cursor: url('../assets/images/underground/chissel.png'), auto;
+}

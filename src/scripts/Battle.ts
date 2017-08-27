@@ -74,6 +74,7 @@ class Battle {
             this.generateNewEnemy();
         }
         player.lowerItemMultipliers();
+        player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
     }
 
     /**
@@ -93,7 +94,6 @@ class Battle {
         if (chance <= this.enemyPokemon().catchRate) {
             this.catchPokemon();
             GameHelper.incrementObservable(player.statistics.pokemonCaptured);
-
         }
         this.catching(false);
     }
