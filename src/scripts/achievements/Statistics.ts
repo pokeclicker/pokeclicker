@@ -6,8 +6,8 @@ class Statistics {
     public pokemonDefeated: KnockoutObservable<number>;
     public gymsDefeated: KnockoutObservableArray<number>;
     public dungeonsCleared: KnockoutObservableArray<number>
-    public digItems: KnockoutObservable<number>;
-    public digDeeper: KnockoutObservable<number>;
+    public digItems: KnockoutObservable<number>; // Total treasure found in underground
+    public digDeeper: KnockoutObservable<number>; // Total underground layers completed
 
     constructor(saved = {}) {
         let props = [

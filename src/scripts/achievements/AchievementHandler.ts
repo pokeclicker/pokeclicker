@@ -49,6 +49,17 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Diamond 1", "Obtain 100 Diamonds", new DiamondRequirement(100), 0.05);
         AchievementHandler.addAchievement("Diamond 2", "Obtain 1000 Diamonds", new DiamondRequirement(1000), 0.15);
         AchievementHandler.addAchievement("Diamond 3", "Obtain 10,000 Diamonds", new DiamondRequirement(10000), 0.25);
+
+        AchievementHandler.addAchievement("Dig Items 1", "Dig up 1 item", new DigItemsRequirement(1), 0.01);
+        AchievementHandler.addAchievement("Dig Items 2", "Dig up 10 items", new DigItemsRequirement(10), 0.01);
+        AchievementHandler.addAchievement("Dig Items 3", "Dig up 100 items", new DigItemsRequirement(100), 0.01);
+        AchievementHandler.addAchievement("Dig Items 4", "Dig up 1000 items", new DigItemsRequirement(1000), 0.01);
+        AchievementHandler.addAchievement("Dig Items 5", "Dig up 10000 items", new DigItemsRequirement(10000), 0.01);
+
+        AchievementHandler.addAchievement("Dig Deeper 1", "Dig deeper 1 time", new DigDeeperRequirement(1), 0.01);
+        AchievementHandler.addAchievement("Dig Deeper 2", "Dig deeper 10 times", new DigDeeperRequirement(10), 0.01);
+        AchievementHandler.addAchievement("Dig Deeper 3", "Dig deeper 100 times", new DigDeeperRequirement(100), 0.01);
+        AchievementHandler.addAchievement("Dig Deeper 4", "Dig deeper 1000 times", new DigDeeperRequirement(1000), 0.01);
         
         AchievementHandler.addAchievement("Capture 1", "Capture 100 Pokemon", new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement("Capture 2", "Capture 1000 Pokemon", new CapturedRequirement(1000), 0.10);
@@ -83,10 +94,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Shiny 9", "Complete the Kanto Pokédex shiny!", new ShinyPokemonRequirement(151), 1.50);
 
         AchievementHandler.addAchievement("Hatch 1", "Hatch 1 egg", new HatchRequirement(1), 0.01);
-        AchievementHandler.addAchievement("Hatch 10", "Hatch 10 eggs", new HatchRequirement(10), 0.01);
-        AchievementHandler.addAchievement("Hatch 100", "Hatch 100 eggs", new HatchRequirement(100), 0.01);
-        AchievementHandler.addAchievement("Hatch 1000", "Hatch 1000 eggs", new HatchRequirement(1000), 0.01);
-        AchievementHandler.addAchievement("Hatch 10000", "Hatch 10000 eggs", new HatchRequirement(10000), 0.01);
+        AchievementHandler.addAchievement("Hatch 2", "Hatch 10 eggs", new HatchRequirement(10), 0.01);
+        AchievementHandler.addAchievement("Hatch 3", "Hatch 100 eggs", new HatchRequirement(100), 0.01);
+        AchievementHandler.addAchievement("Hatch 4", "Hatch 1000 eggs", new HatchRequirement(1000), 0.01);
+        AchievementHandler.addAchievement("Hatch 5", "Hatch 10000 eggs", new HatchRequirement(10000), 0.01);
 
         AchievementHandler.addAchievement("Pokeball 1", "Get your first Pokéball", new PokeballRequirement(1, GameConstants.Pokeball.Pokeball), 0.01);
         AchievementHandler.addAchievement("Pokeball 2", "Get 10 Pokéballs", new PokeballRequirement(10, GameConstants.Pokeball.Pokeball), 0.03);
