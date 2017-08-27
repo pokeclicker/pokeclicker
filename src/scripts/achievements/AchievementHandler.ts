@@ -82,6 +82,11 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Shiny 8", "Capture 100 unique Shinies", new ShinyPokemonRequirement(100), 0.60);
         AchievementHandler.addAchievement("Shiny 9", "Complete the Kanto Pokédex shiny!", new ShinyPokemonRequirement(151), 1.50);
 
+        AchievementHandler.addAchievement("Hatch 1", "Hatch 1 egg", new HatchRequirement(1), 0.01);
+        AchievementHandler.addAchievement("Hatch 10", "Hatch 10 eggs", new HatchRequirement(10), 0.01);
+        AchievementHandler.addAchievement("Hatch 100", "Hatch 100 eggs", new HatchRequirement(100), 0.01);
+        AchievementHandler.addAchievement("Hatch 1000", "Hatch 1000 eggs", new HatchRequirement(1000), 0.01);
+        AchievementHandler.addAchievement("Hatch 10000", "Hatch 10000 eggs", new HatchRequirement(10000), 0.01);
 
         AchievementHandler.addAchievement("Pokeball 1", "Get your first Pokéball", new PokeballRequirement(1, GameConstants.Pokeball.Pokeball), 0.01);
         AchievementHandler.addAchievement("Pokeball 2", "Get 10 Pokéballs", new PokeballRequirement(10, GameConstants.Pokeball.Pokeball), 0.03);
