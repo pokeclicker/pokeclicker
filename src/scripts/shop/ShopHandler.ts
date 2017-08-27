@@ -27,15 +27,16 @@ class ShopHandler {
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
         let multiple = this.amount() > 1 ? "s" : "";
-        if (player.hasMoney(item.totalPrice())) {
-            player.payMoney(item.totalPrice());
-            item.buy(this.amount());
-            if (item.name() != "Pokeball") {
-                item.increasePriceMultiplier(this.amount());
+        if (item.currency == GameConstants.Currency.money) {
+            if (player.hasMoney(item.totalPrice())) {
+                player.payMoney(item.totalPrice());
+                item.buy(this.amount());
+                Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
+            } else {
+                Notifier.notify("You don't have enough money to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
             }
-            Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
-        } else {
-            Notifier.notify("You don't have enough money to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
+        } else if (item.currency == GameConstants.Currency.questpoint) {
+            //TODO add questpoint methods
         }
 
     }
