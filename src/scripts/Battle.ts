@@ -93,7 +93,6 @@ class Battle {
         let chance: number = Math.floor(Math.random() * 100) - pokeballBonus - oakBonus;
         if (chance <= this.enemyPokemon().catchRate) {
             this.catchPokemon();
-            GameHelper.incrementObservable(player.statistics.pokemonCaptured);
         }
         this.catching(false);
     }

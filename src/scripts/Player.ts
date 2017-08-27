@@ -330,6 +330,7 @@ class Player {
             Save.store(player);
         }
         player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
+        GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
 
     public hasBadge(badge: GameConstants.Badge) {
