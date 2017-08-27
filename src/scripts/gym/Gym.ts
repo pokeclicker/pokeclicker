@@ -1,8 +1,6 @@
 ///<reference path="GymPokemon.ts"/>
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 
-import PokemonType = GameConstants.PokemonType;
-
 /**
  * Gym class.
  */
@@ -69,7 +67,7 @@ gymList["Cerulean City"] = new Gym(
     "Misty",
     "Cerulean City",
     [new GymPokemon("Staryu", 4000, 18),
-        new GymPokemon("Starmie", 6400, 21)],
+        new GymPokemon("Starmie", 6800, 21)],
     GameConstants.Badge.Cascade,
     500,
     GameConstants.Badge.Boulder,
@@ -78,9 +76,9 @@ gymList["Cerulean City"] = new Gym(
 gymList["Vermillion City"] = new Gym(
     "Lt. Surge",
     "Vermillion City",
-    [new GymPokemon("Voltorb", 9780, 21),
-        new GymPokemon("Pikachu", 13040, 18),
-        new GymPokemon("Raichu", 14775, 24)],
+    [new GymPokemon("Voltorb", 10780, 21),
+        new GymPokemon("Pikachu", 13540, 18),
+        new GymPokemon("Raichu", 15675, 24)],
     GameConstants.Badge.Thunder,
     1000,
     GameConstants.Badge.Cascade,
@@ -89,9 +87,9 @@ gymList["Vermillion City"] = new Gym(
 gymList["Celadon City"] = new Gym(
     "Erika",
     "Celadon City",
-    [new GymPokemon("Victreebel", 17830, 29),
-        new GymPokemon("Tangela", 20210, 24),
-        new GymPokemon("Vileplume", 21400, 29)],
+    [new GymPokemon("Victreebel", 20830, 29),
+        new GymPokemon("Tangela", 25210, 24),
+        new GymPokemon("Vileplume", 28400, 29)],
     GameConstants.Badge.Rainbow,
     1500,
     GameConstants.Badge.Thunder,
@@ -100,10 +98,10 @@ gymList["Celadon City"] = new Gym(
 gymList["Saffron City"] = new Gym(
     "Sabrina",
     "Saffron City",
-    [new GymPokemon("Kadabra", 16810, 38),
-        new GymPokemon("Mr. Mime", 18340, 37),
-        new GymPokemon("Venomoth", 19870, 38),
-        new GymPokemon("Alakazam", 21400, 43)],
+    [new GymPokemon("Kadabra", 28810, 38),
+        new GymPokemon("Mr. Mime", 30340, 37),
+        new GymPokemon("Venomoth", 30870, 38),
+        new GymPokemon("Alakazam", 36400, 43)],
     GameConstants.Badge.Marsh,
     2500,
     GameConstants.Badge.Rainbow,
