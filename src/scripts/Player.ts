@@ -350,6 +350,7 @@ class Player {
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
         this._money(Math.floor(this._money() + money * oakItemBonus));
+        GameHelper.incrementObservable(this.statistics.totalMoney, money);
     }
 
     public hasMoney(money: number) {

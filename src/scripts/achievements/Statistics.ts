@@ -8,6 +8,7 @@ class Statistics {
     public dungeonsCleared: KnockoutObservableArray<number>
     public digItems: KnockoutObservable<number>; // Total treasure found in underground
     public digDeeper: KnockoutObservable<number>; // Total underground layers completed
+    public totalMoney: KnockoutObservable<number>;
 
     constructor(saved = {}) {
         let props = [
@@ -19,6 +20,7 @@ class Statistics {
             "dungeonsCleared",
             "digItems",
             "digDeeper",
+            "totalMoney",
         ];
 
         for (let prop of props) {
