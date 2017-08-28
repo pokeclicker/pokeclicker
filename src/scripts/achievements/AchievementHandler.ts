@@ -3,6 +3,7 @@
 class AchievementHandler {
 
     public static achievementList: Achievement[] = [];
+    private static maxBonus: number;
 
     public static checkAchievements() {
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
@@ -23,6 +24,24 @@ class AchievementHandler {
             sum += AchievementHandler.achievementList[i].bonus;
         }
         return sum;
+    }
+
+    public static bonusUnlocked(): number {
+        let sum = 0;
+        for (let achievement of AchievementHandler.achievementList) {
+            if (achievement.isCompleted()) {
+                sum += achievement.bonus;
+            }
+        }
+        return sum;
+    }
+
+    public static achievementBonus(): number  {
+        return AchievementHandler.bonusUnlocked() / AchievementHandler.maxBonus;
+    }
+
+    public static achievementBonusPercent(): string {
+        return (100 * AchievementHandler.achievementBonus()).toFixed(2) + "%";
     }
 
     public static initialize() {
@@ -219,6 +238,9 @@ class AchievementHandler {
                 AchievementHandler.addAchievement(`${GameConstants.Dungeons[i]} ${j+1}`, `Clear ${Math.pow(10, j)} times`, new ClearDungeonRequirement(Math.pow(10, j), i), 0.01)
             }
         }
+
+
+        AchievementHandler.maxBonus = AchievementHandler.calculateMaxBonus();
 
     }
 }
