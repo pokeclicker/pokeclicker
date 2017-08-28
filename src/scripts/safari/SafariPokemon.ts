@@ -11,12 +11,22 @@ class SafariPokemon implements pokemonInterface {
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
     static readonly list = [
-        { name: "Pinsir", weight: 2 },
-        { name: "Scyther", weight: 2 },
-        { name: "Rhyhorn", weight: 3 },
-        { name: "Kangaskhan", weight: 2 },
-        { name: "Tauros", weight: 2 },
-        { name: "Exeggcute", weight: 4 }
+        { name: "Nidoran(F)", weight: 15 },
+        { name: "Nidorina", weight: 10 },
+        { name: "Nidoran(M)", weight: 25 },
+        { name: "Nidorino", weight: 10 },
+        { name: "Exeggcute", weight: 20 },
+        { name: "Paras", weight: 5 },
+        { name: "Parasect", weight: 15 },
+        { name: "Rhyhorn", weight: 10 },
+        { name: "Chansey", weight: 4 },
+        { name: "Scyther", weight: 4 },
+        { name: "Pinsir", weight: 4 },
+        { name: "Kangaskhan", weight: 15 },
+        { name: "Tauros", weight: 10 },
+        { name: "Cubone", weight: 10 },
+        { name: "Marowak", weight: 5 },
+        { name: "Tangela", weight: 4 },
     ];
 
     static readonly listWeight = SafariPokemon.list.reduce((sum:number, pokemon) => {return sum += pokemon.weight}, 0);
