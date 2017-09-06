@@ -318,13 +318,13 @@
         <!--Middle column-->
         <div class="col-lg-6 push-lg-3">
             <div id="interactionView" class="page-item" style="background-color: white">
-                <!--RouteBattleView-->
-                <!--Use the base battle layout for fighting and dungeons.-->
-                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.dungeon || Game.gameState() == GameConstants.GameState.paused || Game.gameState() == GameConstants.GameState.town)"
-                     id="routeBattleView">
 
-                    <div class="card"
-                         data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.dungeon || Game.gameState() == GameConstants.GameState.paused || Game.gameState() == GameConstants.GameState.town)">
+                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting ||
+                                     Game.gameState() == GameConstants.GameState.dungeon ||
+                                     Game.gameState() == GameConstants.GameState.paused ||
+                                     Game.gameState() == GameConstants.GameState.town ||
+                                     Game.gameState() == GameConstants.GameState.shop)">
+                    <div class="card">
                         <table width="100%">
                             <tr>
                                 <td width="33.33%">
@@ -348,6 +348,12 @@
                             </tr>
                         </table>
                     </div>
+                </div>
+
+                <!--RouteBattleView-->
+                <!--Use the base battle layout for fighting and dungeons.-->
+                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.dungeon || Game.gameState() == GameConstants.GameState.paused || Game.gameState() == GameConstants.GameState.town)"
+                     id="routeBattleView">
 
                     <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting">
                         <div style="height: 190px; display: block;" class="col-lg-12">
@@ -659,33 +665,6 @@
                 <!--ShopView-->
                 <div id="shopView"
                      data-bind="if: Game.gameState() == GameConstants.GameState.shop">
-                    <div class="card">
-                        <table width="100%">
-                            <tr>
-                                <td width="33.33%">
-                                    <span style="display: inline;"><img title="Money"
-                                                                        src="assets/images/currency/money.png">
-                                        <span
-                                                data-bind="text: player.money"></span>
-                                    </span>
-                                </td>
-                                <td width="33.33%">
-                                    <span style="display: inline;"><img title="Dungeon Tokens"
-                                                                        src="assets/images/currency/dungeonToken.png">
-                                        <span
-                                                data-bind="text: player.dungeonTokens">Not yet</span>
-                                    </span>
-                                </td>
-                                <td width="33.33%">
-                                    <span style="display: inline;"><img title="Quest points"
-                                                                        src="assets/images/currency/questPoint.png">
-                                        <span
-                                                data-bind="text: player.questPoints">Not yet</span>
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </div>
                     <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
                         <div class="col-sm-3">
                             <div
