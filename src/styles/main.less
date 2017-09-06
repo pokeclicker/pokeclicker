@@ -129,8 +129,14 @@ body:hover {
 }
 
 .pokemon-list-container {
-  max-height: 515px;
+  max-height: 300px;
   overflow: auto;
+}
+
+@media (min-width: 992px) {
+  .pokemon-list-container {
+    max-height: 400px;
+  }
 }
 
 #pokemonList {
