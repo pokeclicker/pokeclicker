@@ -12,7 +12,6 @@ class GymBattle extends Battle {
      */
     public static defeatPokemon() {
         player.gainMoney(this.enemyPokemon().money);
-        player.gainDungeonTokens(Math.floor(this.enemyPokemon().level/2));
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         BreedingHelper.progressEggs(Math.floor(Math.sqrt(this.gym.badgeReq * 3 + 1)));
         player.gainShards(this.enemyPokemon());
