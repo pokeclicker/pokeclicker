@@ -25,8 +25,9 @@ class KeyItemHandler {
         // TODO obtain somewhere at the start
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Holo caster", "A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others")));
 
-        // TODO obtain after the first Pokémon is lvl 100
-        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Mystery egg", "A mysterious Egg obtained from Mr. Pokémon. What is in the Egg is unknown")));
+        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Mystery egg", "A mysterious Egg obtained from Mr. Pokémon. What is in the Egg is unknown", function () {
+            return player.maxLevelPokemonList()().length > 0;
+        })));
 
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Safari ticket", "This ticket grants access to the Safari Zone in Fuchsia City")));
 
