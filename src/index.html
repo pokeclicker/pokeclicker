@@ -536,9 +536,7 @@
                      class="justify-content-center no-gutters no-select">
 
                     <div data-bind="if:player.town().dungeon()">
-                        <img style="float:right;margin-right:10px;margin-top:10px;"
-                             data-bind="tooltip: { title: 'Dungeons contain unique Pokémon and hidden treasures. Navigate with WASD and Space or by clicking on the rooms. Defeat the final boss to complete the dungeon.', trigger: 'hover', placement:'right' }"
-                             src="assets/images/questionmark.png">
+b
                     </div>
 
                     <div data-bind="ifnot:player.town().dungeon()">
@@ -1466,9 +1464,10 @@
             <div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
                 <div class="page-item">
                     <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
-                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()">
+                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()" style="border: 1px solid black;">
                             <div data-bind="if: $data !== null">
                                 <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
+
                                 <div class="progress" data-bind='if: progress() < 100,
                                                                  tooltip: {title: ko.pureComputed(function(){return Math.floor(progress()) + "%"}), trigger: "hover"}'>
                                     <div class="progress-bar bg-success" role="progressbar"
