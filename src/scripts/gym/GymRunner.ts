@@ -27,6 +27,10 @@ class GymRunner {
         }
     }
 
+    public static startCountdown() {
+
+    }
+
     public static tick() {
         if (this.timeLeft() < 0) {
             GymRunner.gymLost();
