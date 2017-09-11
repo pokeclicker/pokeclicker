@@ -256,8 +256,13 @@
         <div class="modal-content" style="text-align: center">
             <div class="modal-header">
                 <div style="width: 100%;">
+                    <img style="float:right;margin-right:10px;"
+                         data-bind="tooltip: { title: 'An overview of all Key items you have collected so far. Click on a key item to get more information.', trigger: 'hover', placement:'right' }"
+                         src="assets/images/questionmark.png">
+
                     <img src="assets/images/oak.png">
                     <h5 class="modal-title" id="showKeyitemModalLabel">Key items</h5>
+
                 </div>
             </div>
             <div class="modal-body">
@@ -526,8 +531,20 @@
                 </div>
 
                 <!--TownView-->
+
                 <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
                      class="justify-content-center no-gutters no-select">
+
+                    <div data-bind="if:player.town().dungeon()">
+b
+                    </div>
+
+                    <div data-bind="ifnot:player.town().dungeon()">
+                        <img style="float:right;margin-right:10px;margin-top:10px;"
+                             data-bind="tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'right' }"
+                             src="assets/images/questionmark.png">
+                    </div>
+
                     <div class="row justify-content-center no-gutters" style="min-height: 100px;">
                         <div class="col no-gutters">
                             <div data-bind="if: player.town() instanceof PokemonLeague">
@@ -1225,6 +1242,9 @@
                                 <td>Caught</td>
                                 <td>#</td>
                                 <td>New</td>
+                                <td><img
+                                        data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon', trigger: 'hover', placement:'right' }"
+                                        src="assets/images/questionmark.png"></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -1337,10 +1357,16 @@
         <div class="col-lg-3">
             <div class="page-item" style="background-color: white;">
                 <div class="card">
-                    <span style="text-align:center"
-                          data-bind="text: OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()">
+                    <div>
+                        <span style="text-align:center"
+                              data-bind="text: OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()">
                         asd
-                    </span>
+                        </span>
+                        <span style="float:right; margin-right: 10px;">
+                            <img data-bind="tooltip: { title: 'Activate Oak items to gain unique bonuses. When an Oak item has gained enough experience you can level it up with money to boost its effect.', trigger: 'hover', placement:'right' }"
+                                 src="assets/images/questionmark.png">
+                        </span>
+                    </div>
                 </div>
                 <div class="row justify-content-sm-center" data-bind="foreach: OakItemRunner.oakItemList">
                     <div>
@@ -1438,9 +1464,10 @@
             <div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
                 <div class="page-item">
                     <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
-                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()">
+                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()" style="border: 1px solid black;">
                             <div data-bind="if: $data !== null">
                                 <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
+
                                 <div class="progress" data-bind='if: progress() < 100,
                                                                  tooltip: {title: ko.pureComputed(function(){return Math.floor(progress()) + "%"}), trigger: "hover"}'>
                                     <div class="progress-bar bg-success" role="progressbar"
@@ -1509,6 +1536,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 Achievements
+                <img style="float:right;margin-right:10px;"
+                     data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% more money and xp from all sources.', trigger: 'hover', placement:'right' }"
+                     src="assets/images/questionmark.png">
+
             </div>
             <div class="modal-body">
                 <table id="achievementList" class="table table-hover">
@@ -1683,6 +1714,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Shards</h4>
+                <img style="float:right;margin-right:10px;"
+                     data-bind="tooltip: { title: 'Use shards to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get shards based on its type. ', trigger: 'hover', placement:'right' }"
+                     src="assets/images/questionmark.png">
+
             </div>
             <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
                 <h3>
@@ -1853,12 +1888,9 @@
                     <div class="modal-body" id="helpBody" style="width: 80%;margin: auto;">
                         <h4>In the underground you can mine for hidden treasures.</h4>
                         <h4>Select the Hammer or the Chisel and click on the wall.</h4>
-                        <h4>The Hammer is better for large areas, while the Chisel is better for small
-                            areas.</h4>
                         <h4>Sell your treasures for shards or diamonds!</h4>
-                        <h4>You can use your diamonds to buy all kinds of upgrades!</h4>
-                        <h4>Every day you can trade your found items.</h4>
-                        <h4>Check the Daily Deals tab!</h4>
+                        <h4>You can use your diamonds to buy all kinds of upgrades that will help you explore the underground even further!</h4>
+                        <h4>In the Daily deals tab you can trade your items.</h4>
                     </div>
                 </div>
                 <div id="dailyDeals" class="tab-pane fade">
