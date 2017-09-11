@@ -19,12 +19,13 @@ class GymRunner {
             GymBattle.gym = gym;
             GymBattle.totalPokemons(gym.pokemons.length);
             Game.gameState(GameConstants.GameState.gym);
-            $('#gymCountdownView').css('visibility', 'visible');
+            GymRunner.timeLeft(GameConstants.GYM_TIME);
+
             setTimeout(function () {
                 GymRunner.timeLeft(GameConstants.GYM_TIME);
                 GymBattle.index(0);
                 GymBattle.generateNewEnemy();
-                $('#gymCountdownView').css('visibility', 'hidden');
+                $('#gymCountdownView').fadeOut(300);
             }, GameConstants.GYM_COUNTDOWN)
         } else {
             Notifier.notify(gym.leaderName + " does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges", GameConstants.NotificationOption.danger);
