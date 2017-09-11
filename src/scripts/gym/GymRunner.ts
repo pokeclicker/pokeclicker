@@ -17,18 +17,18 @@ class GymRunner {
             Game.gameState(GameConstants.GameState.idle);
 
             GymBattle.gym = gym;
-            GymBattle.index(0);
             GymBattle.totalPokemons(gym.pokemons.length);
-            GymRunner.timeLeft(GameConstants.GYM_TIME);
             Game.gameState(GameConstants.GameState.gym);
-            GymBattle.generateNewEnemy();
+            $('#gymCountdownView').css('visibility', 'visible');
+            setTimeout(function () {
+                GymRunner.timeLeft(GameConstants.GYM_TIME);
+                GymBattle.index(0);
+                GymBattle.generateNewEnemy();
+                $('#gymCountdownView').css('visibility', 'hidden');
+            }, GameConstants.GYM_COUNTDOWN)
         } else {
-            Notifier.notify(gym.leaderName + " does not deem you a worthy opponent yet...<br>Perhaps you can convince her with more gym badges", GameConstants.NotificationOption.danger);
+            Notifier.notify(gym.leaderName + " does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges", GameConstants.NotificationOption.danger);
         }
-    }
-
-    public static startCountdown() {
-
     }
 
     public static tick() {
@@ -67,12 +67,12 @@ class GymRunner {
 document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
-       if(GymBattle.gym.badgeReward == GameConstants.Badge.Boulder){
-           player.gainKeyItem("Dungeon ticket");
-       }
-       if(GymBattle.gym.badgeReward == GameConstants.Badge.Soul){
-           player.gainKeyItem("Safari ticket");
-       }
+        if (GymBattle.gym.badgeReward == GameConstants.Badge.Boulder) {
+            player.gainKeyItem("Dungeon ticket");
+        }
+        if (GymBattle.gym.badgeReward == GameConstants.Badge.Soul) {
+            player.gainKeyItem("Safari ticket");
+        }
 
     });
 });
