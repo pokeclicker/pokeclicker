@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
 
     ko.bindingHandlers.tooltip = {
-        init: function (element, valueAccessor) {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             let local = ko.utils.unwrapObservable(valueAccessor()),
                 options = {};
 
@@ -32,21 +32,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
             ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
                 $(element).tooltip("dispose");
             });
-        },
-        update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+
             if (bindingContext.$data instanceof Plot) {
-                console.log(FarmRunner.getTooltipLabel(bindingContext.$index()));
+                console.log(ko.utils.unwrapObservable(valueAccessor()));
                 $(element).hover(function () {
                     $(this).data('to', setInterval(function () {
                         $(element).tooltip('hide')
                             .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
                             .tooltip('show');
-                    }, 1000));
+                    }, 500));
                 }, function () {
                     clearInterval($(this).data('to'));
-                })
-
+                });
             }
+
         },
         options: {
             placement: "bottom",
