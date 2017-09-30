@@ -700,62 +700,7 @@
                         </div>
                     </div>
                 </div>
-                <!--Farm View-->
-                <div id="farmView" data-bind="if: Game.gameState() == GameConstants.GameState.farm"
-                     class="justify-content-center no-select row">
 
-
-                    <div class="col-sm-4 col-md-3 col-lg-4">
-                        <ul id="seedList" data-bind="foreach: player.seedList" class="list-group"
-                            style="margin-bottom: 5px;">
-                            <li class="list-group-item list-group-item-action seed-list-item"
-                                data-bind="click: function() {FarmRunner.curBerry = BerryList[GameConstants.BerryType[$index()]]}">
-                                <img src="" width="24px"
-                                     data-bind="attr:{ src: '/assets/images/items/' + GameConstants.BerryType[$index()] + '.png'}">
-                                <span data-bind="text: GameConstants.BerryType[$index()]"></span>
-                                <span class="seedAmount" data-bind="text: player.seedList[$index()]()"></span>
-                            </li>
-                        </ul>
-
-                        <div class="row">
-                            <div class="col-sm-12 col-6">
-                                <button class="btn btn-primary btn-sm farm-button"
-                                        data-bind="click: function(){FarmRunner.plantAll()}">Plant All
-                                </button>
-                            </div>
-                            <div class="col-sm-12 col-6">
-                                <button class="btn btn-success btn-sm farm-button"
-                                        data-bind="click: function(){FarmRunner.harvestAll()}">Harvest All
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-8 col-md-9 col-lg-8" style="padding-left: 0">
-                        <div id="plotList" data-bind="foreach: player.plotList">
-                            <div class="plot" data-bind="css :{plotLocked : !isUnlocked}">
-                                <div class="plot-content">
-                                    <div class="plotImage">
-                                        <img style="width: 100%" src="assets/images/farm/soil.png">
-                                        <div data-bind="ifnot:FarmRunner.isEmpty($index())()">
-                                            <div class="plotButton"
-                                                 data-bind="click: function(){FarmRunner.harvest($index())}, tooltip: {title: FarmRunner.getPlot($index()).formattedTimeLeft, trigger: 'hover'}">
-                                                <img width="100%" height="100%"
-                                                     style="max-width: 100%; max-height: 100%"
-                                                     src=""
-                                                     data-bind="attr:{ src: FarmRunner.getImage($data)}">
-                                            </div>
-                                        </div>
-                                        <div data-bind="if:FarmRunner.isEmpty($index())()">
-                                            <div class="plotButton"
-                                                 data-bind="click: function(){FarmRunner.plant($index())}">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
             <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
@@ -2092,6 +2037,78 @@
                             <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
                                 savefile</h3>
                             <button class="btn btn-danger" onClick="Save.reset()">Reset</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Farm Modal-->
+<div class="modal fade noselect" id="farmModal" tabindex="-1" role="dialog"
+     aria-labelledby="farmModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Farm</h4>
+            </div>
+            <div class="modal-body">
+                <div id="farmView"
+                     class="justify-content-center no-select row">
+
+                    <div class="col-sm-4 col-md-3 col-lg-4">
+                        <ul id="seedList" data-bind="foreach: player.seedList" class="list-group"
+                            style="margin-bottom: 5px;">
+                            <li class="list-group-item list-group-item-action seed-list-item"
+                                data-bind="click: function() {FarmRunner.curBerry = BerryList[GameConstants.BerryType[$index()]]}">
+                                <img src="" width="24px"
+                                     data-bind="attr:{ src: '/assets/images/items/' + GameConstants.BerryType[$index()] + '.png'}">
+                                <span data-bind="text: GameConstants.BerryType[$index()]"></span>
+                                <span class="seedAmount" data-bind="text: player.seedList[$index()]()"></span>
+                            </li>
+                        </ul>
+
+                        <div class="row">
+                            <div class="col-sm-12 col-6">
+                                <button class="btn btn-primary btn-sm farm-button"
+                                        data-bind="click: function(){FarmRunner.plantAll()}">Plant All
+                                </button>
+                            </div>
+                            <div class="col-sm-12 col-6">
+                                <button class="btn btn-success btn-sm farm-button"
+                                        data-bind="click: function(){FarmRunner.harvestAll()}">Harvest All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-8 col-md-9 col-lg-8" style="padding-left: 0">
+                        <div id="plotList" data-bind="foreach: player.plotList">
+                            <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked()}">
+                                <div class="plot-content">
+                                    <div class="plotImage">
+                                        <img style="width: 100%" src="assets/images/farm/soil.png">
+                                        <div data-bind="ifnot:FarmRunner.isEmpty($index())()">
+                                            <div class="plotButton"
+                                                 data-bind="click: function(){FarmRunner.harvest($index())}, tooltip: {title: FarmRunner.getPlot($index()).formattedTimeLeft, trigger: 'hover'}">
+                                                <img width="100%" height="100%"
+                                                     style="max-width: 100%; max-height: 100%"
+                                                     src=""
+                                                     data-bind="attr:{ src: FarmRunner.getImage($data)}">
+                                            </div>
+                                        </div>
+                                        <div data-bind="if:FarmRunner.isEmpty($index())()">
+                                            <div class="plotButton"
+                                                 data-bind="click: function(){FarmRunner.plant($index())}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

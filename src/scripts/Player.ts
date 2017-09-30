@@ -716,6 +716,19 @@ class Player {
         this._eggSlots(this._eggSlots() + 1);
     }
 
+    public unlockPlot() {
+        let i = 0;
+        while (i < this.plotList.length && this.plotList[i]().isUnlocked()) {
+            i++;
+        }
+        if (i == this.plotList.length) {
+            return;
+        }
+
+        console.log(i);
+        this.plotList[i]().isUnlocked(true);
+    }
+
     get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
         return this._shardUpgrades;
     }

@@ -91,7 +91,6 @@ class Save {
             plotList = saved.map((p) => {
                 let berry;
                 if (p.berry){
-                    console.log(p.berry)
                     berry = new Berry(p.berry.type, p.berry.harvestTime, p.berry.moneyValue, p.berry.farmValue);
                 } else {
                     berry = null;

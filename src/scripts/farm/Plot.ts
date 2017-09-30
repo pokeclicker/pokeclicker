@@ -1,5 +1,5 @@
 class Plot {
-    public isUnlocked: boolean;
+    public isUnlocked: KnockoutObservable<boolean>;
     public exp: number;
     public level: number;
     public boosted: boolean;
@@ -9,7 +9,7 @@ class Plot {
     public isEmpty: KnockoutComputed<boolean>;
 
     constructor(isUnlocked: boolean, exp: number, level: number, boosted: boolean, berry: Berry, timeLeft: number) {
-        this.isUnlocked = isUnlocked;
+        this.isUnlocked = ko.observable(isUnlocked);
         this.exp = exp;
         this.level = level;
         this.boosted = boosted;

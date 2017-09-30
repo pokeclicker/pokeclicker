@@ -158,7 +158,6 @@ namespace GameConstants {
         safari = 5,
         town = 6,
         shop = 7,
-        farm = 8,
     }
 
     export enum Pokeball {
