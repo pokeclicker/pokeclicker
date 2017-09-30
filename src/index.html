@@ -2061,6 +2061,7 @@
                 <div id="farmView"
                      class="justify-content-center no-select row">
 
+
                     <div class="col-sm-4 col-md-3 col-lg-4">
                         <ul id="seedList" data-bind="foreach: player.seedList" class="list-group"
                             style="margin-bottom: 5px;">
@@ -2094,7 +2095,7 @@
                                         <img style="width: 100%" src="assets/images/farm/soil.png">
                                         <div data-bind="ifnot:FarmRunner.isEmpty($index())()">
                                             <div class="plotButton"
-                                                 data-bind="click: function(){FarmRunner.harvest($index())}, tooltip: {title: FarmRunner.getPlot($index()).formattedTimeLeft, trigger: 'hover'}">
+                                                 data-bind="click: function(){FarmRunner.harvest($index())}, tooltip: {title: FarmRunner.getPlot($index()).formattedTimeLeft, trigger: 'hover', animation: false}">
                                                 <img width="100%" height="100%"
                                                      style="max-width: 100%; max-height: 100%"
                                                      src=""

@@ -30,8 +30,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
             $(element).tooltip(options);
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-                // $(element).tooltip("destroy");
+                $(element).tooltip("dispose");
             });
+        },
+        update: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+            if (bindingContext.$data instanceof Plot) {
+                console.log(FarmRunner.getTooltipLabel(bindingContext.$index()));
+                $(element).hover(function () {
+                    $(this).data('to', setInterval(function () {
+                        $(element).tooltip('hide')
+                            .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
+                            .tooltip('show');
+                    }, 1000));
+                }, function () {
+                    clearInterval($(this).data('to'));
+                })
+
+            }
         },
         options: {
             placement: "bottom",
@@ -82,7 +97,7 @@ class Game {
         this.undergroundCounter += GameConstants.TICK_TIME;
         FarmRunner.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
-        if(Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK){
+        if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
             Game.achievementCounter = 0;
             AchievementHandler.checkAchievements();
         }
@@ -120,7 +135,7 @@ class Game {
         }
 
         if (Underground.counter > GameConstants.UNDERGROUND_TICK) {
-            Underground.energyTick( Math.max(0, Underground.energyTick() - 1) );
+            Underground.energyTick(Math.max(0, Underground.energyTick() - 1));
             if (Underground.energyTick() == 0) {
                 Underground.gainEnergy();
                 Underground.energyTick(player._mineEnergyRegenTime());

@@ -5,7 +5,7 @@ class Plot {
     public boosted: boolean;
     public berry: KnockoutObservable<Berry>;
     public timeLeft: KnockoutObservable<number>;
-    public formattedTimeLeft: KnockoutObservable<string>;
+    public formattedTimeLeft: KnockoutComputed<string>;
     public isEmpty: KnockoutComputed<boolean>;
 
     constructor(isUnlocked: boolean, exp: number, level: number, boosted: boolean, berry: Berry, timeLeft: number) {
@@ -15,7 +15,10 @@ class Plot {
         this.boosted = boosted;
         this.berry = ko.observable(berry);
         this.timeLeft = ko.observable(timeLeft);
-        this.formattedTimeLeft = ko.observable(GameConstants.formatTime(this.timeLeft()));
+        //this.formattedTimeLeft = ko.observable(GameConstants.formatTime(this.timeLeft()));
+        this.formattedTimeLeft = ko.computed(function () {
+            return GameConstants.formatTime(this.timeLeft());
+        }, this);
         this.isEmpty = ko.computed(function () {
             return this.berry() == null;
         }, this);
