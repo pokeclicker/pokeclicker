@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
             });
 
             if (bindingContext.$data instanceof Plot) {
-                console.log(ko.utils.unwrapObservable(valueAccessor()));
                 $(element).hover(function () {
                     $(this).data('to', setInterval(function () {
                         $(element).tooltip('hide')
