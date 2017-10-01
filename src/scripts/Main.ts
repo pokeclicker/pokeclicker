@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                         $(element).tooltip('hide')
                             .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
                             .tooltip('show');
-                    }, 500));
+                    }, 100));
                 }, function () {
                     clearInterval($(this).data('to'));
                 });

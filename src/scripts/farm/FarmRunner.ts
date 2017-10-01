@@ -47,6 +47,14 @@ class FarmRunner {
         }, this);
     }
 
+    public static hasBerry(type: GameConstants.BerryType, amount: number = 1) {
+        return (player.berryList[type]() - amount) > 0;
+    }
+
+    public static removeBerry(type: GameConstants.BerryType, amount: number = 1) {
+        player.berryList[type](player.berryList[type]() - amount);
+    }
+
     public static plant(plotId) {
         let plot = this.getPlot(plotId);
         if (!plot.isEmpty()) {
@@ -58,6 +66,12 @@ class FarmRunner {
             console.log("Locked");
             return;
         }
+
+        if (!this.hasBerry(FarmRunner.curBerry.type)) {
+            console.log("No berries left");
+            return;
+        }
+        FarmRunner.removeBerry(FarmRunner.curBerry.type);
         console.log("planting on " + plotId);
         plot.berry(FarmRunner.curBerry);
         plot.timeLeft(FarmRunner.curBerry.harvestTime);
@@ -71,6 +85,7 @@ class FarmRunner {
 
             FarmRunner.gainPlotExp(plotId);
             player.gainFarmPoints(plot.berry().farmValue);
+            FarmRunner.gainBerryById(plot.berry().type);
             console.log("Got: " + GameConstants.BerryType[plot.berry().type]);
             plot.berry(null);
 
@@ -83,8 +98,12 @@ class FarmRunner {
         this.getPlot(plotId).exp += this.getPlot(plotId).berry().farmValue;
     }
 
-    public static gainBerryByName(berryname: string, amount: number = 1) {
-        player.berryList(player.berryList()[GameConstants.BerryType[berryname]] + amount);
+    public static gainBerryByName(berryName: string, amount: number = 1) {
+        player.berryList[GameConstants.BerryType[berryName]](player.berryList[GameConstants.BerryType[berryName]]() + amount);
+    }
+
+    public static gainBerryById(berryType: number, amount: number = 1) {
+        player.berryList[berryType](player.berryList[berryType]() + amount);
     }
 
     public static getTooltipLabel(plotId) {

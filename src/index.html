@@ -2063,14 +2063,14 @@
 
 
                     <div class="col-sm-4 col-md-3 col-lg-4">
-                        <ul id="seedList" data-bind="foreach: player.seedList" class="list-group"
+                        <ul id="seedList" data-bind="foreach: player.berryList" class="list-group"
                             style="margin-bottom: 5px;">
                             <li class="list-group-item list-group-item-action seed-list-item"
                                 data-bind="click: function() {FarmRunner.curBerry = BerryList[GameConstants.BerryType[$index()]]}">
                                 <img src="" width="24px"
                                      data-bind="attr:{ src: '/assets/images/items/' + GameConstants.BerryType[$index()] + '.png'}">
                                 <span data-bind="text: GameConstants.BerryType[$index()]"></span>
-                                <span class="seedAmount" data-bind="text: player.seedList[$index()]()"></span>
+                                <span class="seedAmount" data-bind="text: player.berryList[$index()]()"></span>
                             </li>
                         </ul>
 

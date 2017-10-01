@@ -49,7 +49,6 @@ class Player {
 
     public plotList: KnockoutObservable<Plot>[];
     public farmPoints: KnockoutObservable<number>;
-    public seedList: KnockoutObservable<number>[];
     public berryList: KnockoutObservable<number>[];
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
@@ -166,9 +165,6 @@ class Player {
         });
 
         this.farmPoints = ko.observable(savedPlayer.farmPoints || 0);
-        this.seedList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
-            return ko.observable(savedPlayer.seedList ? (savedPlayer.seedList[index] || 0) : 0)
-        });
         this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
         });
@@ -724,8 +720,6 @@ class Player {
         if (i == this.plotList.length) {
             return;
         }
-
-        console.log(i);
         this.plotList[i]().isUnlocked(true);
     }
 
@@ -783,7 +777,6 @@ class Player {
             "_shardsCollected",
             "achievementsCompleted",
             "farmPoints",
-            "seedList",
             "plotList",
             "berryList"
         ];
