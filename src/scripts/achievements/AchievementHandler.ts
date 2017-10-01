@@ -3,7 +3,28 @@
 class AchievementHandler {
 
     public static achievementList: Achievement[] = [];
+    public static navigateIndex: KnockoutObservable = ko.observable(0);
     private static maxBonus: number;
+
+    public static navigateRight() {
+        if (AchievementHandler.navigateIndex() < AchievementHandler.getNumberOfTabs()) {
+            AchievementHandler.navigateIndex(AchievementHandler.navigateIndex() + 1);
+        }
+    }
+
+    public static navigateLeft() {
+        if (AchievementHandler.navigateIndex() > 0) {
+            AchievementHandler.navigateIndex(AchievementHandler.navigateIndex() - 1);
+        }
+    }
+
+    public static getNumberOfTabs() {
+        return Math.floor(AchievementHandler.achievementList.length / 10);
+    }
+
+    public static getAchievementListWithIndex(index: number) {
+        return AchievementHandler.achievementList.slice(index, index + 10);
+    }
 
     public static checkAchievements() {
         for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
@@ -36,7 +57,7 @@ class AchievementHandler {
         return sum;
     }
 
-    public static achievementBonus(): number  {
+    public static achievementBonus(): number {
         return AchievementHandler.bonusUnlocked() / AchievementHandler.maxBonus;
     }
 
@@ -52,19 +73,19 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Money 4", "Obtain 100,000 Pokédollars", new MoneyRequirement(100000), 0.20);
         AchievementHandler.addAchievement("Money 5", "Obtain 1,000,000 Pokédollars", new MoneyRequirement(1000000), 0.25);
         AchievementHandler.addAchievement("Money 6", "Obtain 10,000,000 Pokédollars", new MoneyRequirement(10000000), 0.5);
-        
+
         AchievementHandler.addAchievement("Token 1", "Obtain 100 Dungeon Tokens", new TokenRequirement(100), 0.05);
         AchievementHandler.addAchievement("Token 2", "Obtain 1000 Dungeon Tokens", new TokenRequirement(1000), 0.10);
         AchievementHandler.addAchievement("Token 3", "Obtain 10,000 Dungeon Tokens", new TokenRequirement(10000), 0.15);
         AchievementHandler.addAchievement("Token 4", "Obtain 100,000 Dungeon Tokens", new TokenRequirement(100000), 0.20);
         AchievementHandler.addAchievement("Token 5", "Obtain 1,000,000 Dungeon Tokens", new TokenRequirement(1000000), 0.25);
-        
+
         AchievementHandler.addAchievement("Attack 1", "Have 100 Attack", new AttackRequirement(100), 0.05);
         AchievementHandler.addAchievement("Attack 2", "Have 1000 Attack", new AttackRequirement(1000), 0.10);
         AchievementHandler.addAchievement("Attack 3", "Have 5000 Attack", new AttackRequirement(5000), 0.15);
         AchievementHandler.addAchievement("Attack 4", "Have 10,000 Attack", new AttackRequirement(10000), 0.20);
         AchievementHandler.addAchievement("Attack 5", "Have 25,000 Attack", new AttackRequirement(25000), 0.25);
-        
+
         AchievementHandler.addAchievement("Diamond 1", "Obtain 100 Diamonds", new DiamondRequirement(100), 0.05);
         AchievementHandler.addAchievement("Diamond 2", "Obtain 1000 Diamonds", new DiamondRequirement(1000), 0.15);
         AchievementHandler.addAchievement("Diamond 3", "Obtain 10,000 Diamonds", new DiamondRequirement(10000), 0.25);
@@ -79,7 +100,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Dig Deeper 2", "Dig deeper 10 times", new DigDeeperRequirement(10), 0.01);
         AchievementHandler.addAchievement("Dig Deeper 3", "Dig deeper 100 times", new DigDeeperRequirement(100), 0.01);
         AchievementHandler.addAchievement("Dig Deeper 4", "Dig deeper 1000 times", new DigDeeperRequirement(1000), 0.01);
-        
+
         AchievementHandler.addAchievement("Capture 1", "Capture 100 Pokemon", new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement("Capture 2", "Capture 1000 Pokemon", new CapturedRequirement(1000), 0.10);
         AchievementHandler.addAchievement("Capture 3", "Capture 10,000 Pokemon", new CapturedRequirement(10000), 0.15);
@@ -91,7 +112,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Defeat 3", "Defeat 10,000 Pokemon", new DefeatedRequirement(10000), 0.15);
         AchievementHandler.addAchievement("Defeat 4", "Defeat 100,000 Pokemon", new DefeatedRequirement(100000), 0.25);
         AchievementHandler.addAchievement("Defeat 5", "Defeat 1,000,000 Pokemon", new DefeatedRequirement(1000000), 0.50);
-        
+
         AchievementHandler.addAchievement("Pokemons 1", "Capture your first Pokémon", new CaughtPokemonRequirement(1), 0.01);
         AchievementHandler.addAchievement("Pokemons 2", "Capture 10 unique Pokémons", new CaughtPokemonRequirement(10), 0.02);
         AchievementHandler.addAchievement("Pokemons 3", "Capture 20 unique Pokémons", new CaughtPokemonRequirement(20), 0.03);
@@ -227,15 +248,15 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Route 25-2", "Get 1000 kills on route 25", new RouteKillRequirement(1000, 25), 0.05);
         AchievementHandler.addAchievement("Route 25-3", "Get 10000 kills on route 25", new RouteKillRequirement(10000, 25), 0.10);
 
-        for ( let i=0; i<GameConstants.Gyms.length; i++ ) {
-            for ( let j=0; j<4; j++ ) {
-                AchievementHandler.addAchievement(`${GameConstants.Gyms[i]} Gym ${j+1}`, `Clear ${Math.pow(10, j)} times`, new ClearGymRequirement(Math.pow(10, j), i), 0.01)
+        for (let i = 0; i < GameConstants.Gyms.length; i++) {
+            for (let j = 0; j < 4; j++) {
+                AchievementHandler.addAchievement(`${GameConstants.Gyms[i]} Gym ${j + 1}`, `Clear ${Math.pow(10, j)} times`, new ClearGymRequirement(Math.pow(10, j), i), 0.01)
             }
         }
 
-        for ( let i=0; i<GameConstants.Dungeons.length; i++ ) {
-            for ( let j=0; j<4; j++ ) {
-                AchievementHandler.addAchievement(`${GameConstants.Dungeons[i]} ${j+1}`, `Clear ${Math.pow(10, j)} times`, new ClearDungeonRequirement(Math.pow(10, j), i), 0.01)
+        for (let i = 0; i < GameConstants.Dungeons.length; i++) {
+            for (let j = 0; j < 4; j++) {
+                AchievementHandler.addAchievement(`${GameConstants.Dungeons[i]} ${j + 1}`, `Clear ${Math.pow(10, j)} times`, new ClearDungeonRequirement(Math.pow(10, j), i), 0.01)
             }
         }
 
