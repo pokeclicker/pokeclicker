@@ -1,9 +1,11 @@
 class FarmRunner {
     public static curBerry: Berry = BerryList["Cheri"];
     public static counter: number = 0;
+    public static plotPrice: KnockoutObservable<number> = ko.observable(10);
 
     public static openFarmModal() {
         if (FarmRunner.accessToFarm()) {
+            this.plotPrice(this.computePlotPrice());
             $('#farmModal').modal('show');
         } else {
             Notifier.notify("You don't have access to this location yet", GameConstants.NotificationOption.warning);
@@ -24,6 +26,25 @@ class FarmRunner {
 
     }
 
+    public static computePlotPrice(): number {
+        let i = 0;
+        while (player.plotList[i]().isUnlocked()) {
+            i++;
+        }
+        return 10 * Math.floor(Math.pow(i, 1.6));
+    }
+
+    public static unlockPlot() {
+        if (this.hasEnoughFarmPoints()) {
+            player.unlockPlot();
+            this.plotPrice(this.computePlotPrice());
+        }
+    }
+
+    public static hasEnoughFarmPoints() {
+        return player.farmPoints() >= this.plotPrice();
+    }
+
     public static getPlot(plotId: number) {
         return player.plotList[plotId]();
     }
@@ -35,7 +56,6 @@ class FarmRunner {
     }
 
     public static harvestAll() {
-        console.log("Harvesting all");
         for (let i = 0; i < player.plotList.length; i++) {
             FarmRunner.harvest(i);
         }
@@ -48,7 +68,7 @@ class FarmRunner {
     }
 
     public static hasBerry(type: GameConstants.BerryType, amount: number = 1) {
-        return (player.berryList[type]() - amount) > 0;
+        return (player.berryList[type]() - amount) >= 0;
     }
 
     public static removeBerry(type: GameConstants.BerryType, amount: number = 1) {
@@ -58,39 +78,29 @@ class FarmRunner {
     public static plant(plotId) {
         let plot = this.getPlot(plotId);
         if (!plot.isEmpty()) {
-            console.log("Full");
             return;
         }
 
         if (!plot.isUnlocked()) {
-            console.log("Locked");
             return;
         }
 
         if (!this.hasBerry(FarmRunner.curBerry.type)) {
-            console.log("No berries left");
             return;
         }
         FarmRunner.removeBerry(FarmRunner.curBerry.type);
-        console.log("planting on " + plotId);
         plot.berry(FarmRunner.curBerry);
         plot.timeLeft(FarmRunner.curBerry.harvestTime);
 
     }
 
     public static harvest(plotId) {
-        console.log("Harvesting plot: " + plotId);
         let plot = this.getPlot(plotId);
         if (plot.berry() !== null && plot.timeLeft() <= 0) {
-
             FarmRunner.gainPlotExp(plotId);
             player.gainFarmPoints(plot.berry().farmValue);
             FarmRunner.gainBerryById(plot.berry().type);
-            console.log("Got: " + GameConstants.BerryType[plot.berry().type]);
             plot.berry(null);
-
-        } else {
-            console.log("Not ready");
         }
     }
 

@@ -74,7 +74,6 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
-
 </head>
 <body class="no-select">
 
@@ -2056,13 +2055,24 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Farm</h4>
+                <button class="btn btn-success" onclick="FarmRunner.unlockPlot()"
+                        data-bind="css: { disabled: !FarmRunner.hasEnoughFarmPoints()}">
+                    <span>Unlock new plot (</span>
+                    <!--TODO add farm points image-->
+                    <img src="assets/images/currency/money.png">
+                    <span data-bind="text: FarmRunner.plotPrice() + ' )'"></span>
+                </button>
             </div>
             <div class="modal-body">
                 <div id="farmView"
                      class="justify-content-center no-select row">
 
-
                     <div class="col-sm-4 col-md-3 col-lg-4">
+                        <div class="col-sm-12">
+                            <!--TODO add farm currency image-->
+                            <img src="assets/images/currency/money.png">
+                            <span data-bind="text: ' ' + player.farmPoints()"></span>
+                        </div>
                         <ul id="seedList" data-bind="foreach: player.berryList" class="list-group"
                             style="margin-bottom: 5px;">
                             <li class="list-group-item list-group-item-action seed-list-item"
