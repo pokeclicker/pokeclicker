@@ -35,13 +35,14 @@ class FarmRunner {
     }
 
     public static unlockPlot() {
-        if (this.hasEnoughFarmPoints()) {
+        if (this.canBuyPlot()) {
             player.unlockPlot();
+            player.farmPoints(player.farmPoints() - this.plotPrice());
             this.plotPrice(this.computePlotPrice());
         }
     }
 
-    public static hasEnoughFarmPoints() {
+    public static canBuyPlot() {
         return player.farmPoints() >= this.plotPrice();
     }
 
@@ -99,7 +100,8 @@ class FarmRunner {
         if (plot.berry() !== null && plot.timeLeft() <= 0) {
             FarmRunner.gainPlotExp(plotId);
             player.gainFarmPoints(plot.berry().farmValue);
-            FarmRunner.gainBerryById(plot.berry().type);
+            FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
+            player.gainMoney(plot.berry().moneyValue);
             plot.berry(null);
         }
     }
