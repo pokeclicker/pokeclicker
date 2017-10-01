@@ -14,7 +14,7 @@ class PokemonFactory {
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
         if (route > 25 || route == 0) {
-            return null;
+            return new BattlePokemon("Rattata", 19, GameConstants.PokemonType.Psychic, GameConstants.PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
 
         let pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);

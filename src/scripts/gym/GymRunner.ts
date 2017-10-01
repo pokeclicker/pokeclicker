@@ -18,6 +18,7 @@ class GymRunner {
 
             GymBattle.gym = gym;
             GymBattle.totalPokemons(gym.pokemons.length);
+            GymBattle.generateNewEnemy();
             Game.gameState(GameConstants.GameState.gym);
             GymRunner.timeLeft(GameConstants.GYM_TIME);
 
