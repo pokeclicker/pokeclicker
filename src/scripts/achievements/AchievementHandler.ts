@@ -3,7 +3,7 @@
 class AchievementHandler {
 
     public static achievementList: Achievement[] = [];
-    public static navigateIndex: KnockoutObservable = ko.observable(0);
+    public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     private static maxBonus: number;
 
     public static navigateRight() {
