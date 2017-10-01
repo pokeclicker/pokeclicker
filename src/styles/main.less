@@ -96,13 +96,16 @@ body:hover {
 }
 
 .card span {
-  margin-left: 5px;
   line-height: 40px;
   text-align: left;
 
   span {
     margin-left: 0;
   }
+}
+
+.dungeon .card span {
+  margin-left: 5px;
 }
 
 .image-starter {
@@ -126,8 +129,14 @@ body:hover {
 }
 
 .pokemon-list-container {
-  max-height: 515px;
+  max-height: 300px;
   overflow: auto;
+}
+
+@media (min-width: 992px) {
+  .pokemon-list-container {
+    max-height: 400px;
+  }
 }
 
 #pokemonList {
@@ -219,7 +228,6 @@ img {
 
   -webkit-filter: grayscale(70%) contrast(3%); /* Safari 6.0 - 9.0 */
   filter: grayscale(70%) contrast(3%);
-
 }
 
 .saveTextArea {

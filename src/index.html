@@ -256,8 +256,13 @@
         <div class="modal-content" style="text-align: center">
             <div class="modal-header">
                 <div style="width: 100%;">
+                    <img style="float:right;margin-right:10px;"
+                         data-bind="tooltip: { title: 'An overview of all Key items you have collected so far. Click on a key item to get more information.', trigger: 'hover', placement:'right' }"
+                         src="assets/images/questionmark.png">
+
                     <img src="assets/images/oak.png">
                     <h5 class="modal-title" id="showKeyitemModalLabel">Key items</h5>
+
                 </div>
             </div>
             <div class="modal-body">
@@ -318,15 +323,43 @@
         <!--Middle column-->
         <div class="col-lg-6 push-lg-3">
             <div id="interactionView" class="page-item" style="background-color: white">
+
+                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting ||
+                                     Game.gameState() == GameConstants.GameState.dungeon ||
+                                     Game.gameState() == GameConstants.GameState.paused ||
+                                     Game.gameState() == GameConstants.GameState.town ||
+                                     Game.gameState() == GameConstants.GameState.shop)">
+                    <div class="card">
+                        <table width="100%">
+                            <tr>
+                                <td width="33.33%">
+                                    <span style="display: inline;">
+                                        <img title="Money" src="assets/images/currency/money.png">
+                                        <span data-bind="text: player.money"></span>
+                                    </span>
+                                </td>
+                                <td width="33.33%">
+                                    <span style="display: inline;">
+                                        <img title="Dungeon Tokens" src="assets/images/currency/dungeonToken.png">
+                                        <span data-bind="text: player.dungeonTokens">Not yet</span>
+                                    </span>
+                                </td>
+                                <td width="33.33%">
+                                    <span style="display: inline;">
+                                        <img title="Quest points" src="assets/images/currency/questPoint.png">
+                                        <span data-bind="text: player.questPoints">Not yet</span>
+                                    </span>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
                 <!--RouteBattleView-->
                 <!--Use the base battle layout for fighting and dungeons.-->
-                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.dungeon || Game.gameState() == GameConstants.GameState.paused)"
+                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.dungeon || Game.gameState() == GameConstants.GameState.paused || Game.gameState() == GameConstants.GameState.town)"
                      id="routeBattleView">
-                    <div class="card">
-                        <span>Money:
-                            <span data-bind="text: player.money">todo</span>
-                        </span>
-                    </div>
+
                     <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting">
                         <div style="height: 190px; display: block;" class="col-lg-12">
                             <div class="col-lg-12" style="display: block;">
@@ -373,7 +406,7 @@
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
-                                    <img data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
+                                    <img class="pokeball-animated" data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
                                          src=""/>
                                 </div>
                             </div>
@@ -440,7 +473,7 @@
                                              src=""/>
                                     </div>
                                     <div data-bind="if: DungeonBattle.catching">
-                                        <img data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
+                                        <img class="pokeball-animated" data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
                                              src=""/>
                                     </div>
                                 </div>
@@ -474,31 +507,44 @@
                             <div style="height: 30px"></div>
                         </div>
                     </div>
+                    <div data-bind="ifnot: Game.gameState() == GameConstants.GameState.town">
+                        <div class="card">
+                            <table width="100%">
+                                <tr>
 
-                    <div class="card">
-                        <table width="100%">
-                            <tr>
-
-                                <td width="50%">
+                                    <td width="50%">
                                     <span style="display: inline;">Pokémon Attack:
                                         <span
                                                 data-bind="text: player.pokemonAttackObservable"></span>
                                     </span>
-                                </td>
-                                <td width="50%">
+                                    </td>
+                                    <td width="50%">
                                     <span style="display: inline;">Click Attack:
                                         <span
                                                 data-bind="text: player.clickAttackObservable"></span>
                                     </span>
-                                </td>
-                            </tr>
-                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
                 <!--TownView-->
+
                 <div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
                      class="justify-content-center no-gutters no-select">
+
+                    <div data-bind="if:player.town().dungeon()">
+b
+                    </div>
+
+                    <div data-bind="ifnot:player.town().dungeon()">
+                        <img style="float:right;margin-right:10px;margin-top:10px;"
+                             data-bind="tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'right' }"
+                             src="assets/images/questionmark.png">
+                    </div>
+
                     <div class="row justify-content-center no-gutters" style="min-height: 100px;">
                         <div class="col no-gutters">
                             <div data-bind="if: player.town() instanceof PokemonLeague">
@@ -636,11 +682,6 @@
                 <!--ShopView-->
                 <div id="shopView"
                      data-bind="if: Game.gameState() == GameConstants.GameState.shop">
-                    <div class="card">
-                        <span>Money:
-                            <span data-bind="text: player.money">todo</span>
-                        </span>
-                    </div>
                     <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
                         <div class="col-sm-3">
                             <div
@@ -649,7 +690,7 @@
                                      data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
                                 <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
                                 <p>
-                                    <img src=""
+                                    <img src="" class="currencyImage"
                                          data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
                                     <span data-bind="text: totalPrice">Price</span>
                                 </p>
@@ -723,6 +764,7 @@
             <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
                 <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
                     Game.gameState() == GameConstants.GameState.shop)">
+                    <p id="mapTooltip" style="visibility: hidden;"></p>
                     <div class="page-item no-select">
                         <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
                             <defs>
@@ -737,6 +779,7 @@
                                     <stop offset="100%" style="stop-color:#7EA6E0"></stop>
                                 </lineargradient>
                             </defs>
+
                             <g transform="translate(-1,-1)">
                                 <image height="420.7" width="651" xlink:href="assets/images/kanto.png"></image>
 
@@ -1087,6 +1130,7 @@
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="456.4"
                                       y="166.6"></rect>
                                 <rect class="city" id="Pokemon Tower" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      data-bind="click:function(){MapHelper.moveToTown('Lavender Town')}"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="457.8" y="168"></rect>
                                 <path d="M 284.2 323.29 L 292.49 315 L 303.91 315 L 312.2 323.29 L 312.2 334.71 L 303.91 343 L 292.49 343 L 284.2 334.71 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
@@ -1111,11 +1155,13 @@
                                       y="379.4"></rect>
                                 <rect class="city" id="Pokemon Mansion"
                                       fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      data-bind="click:function(){MapHelper.moveToTown('Cinnabar Island')}"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="82.6" y="380.8"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="349.3"
                                       y="83.3"></rect>
                                 <rect class="city" id="Cerulean Cave" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      data-bind="click:function(){MapHelper.moveToTown('Cerulean City')}"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="350.7" y="84.7"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="22.4"
@@ -1196,6 +1242,9 @@
                                 <td>Caught</td>
                                 <td>#</td>
                                 <td>New</td>
+                                <td><img
+                                        data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon', trigger: 'hover', placement:'right' }"
+                                        src="assets/images/questionmark.png"></td>
                             </tr>
                             </thead>
                             <tbody>
@@ -1308,10 +1357,16 @@
         <div class="col-lg-3">
             <div class="page-item" style="background-color: white;">
                 <div class="card">
-                    <span style="text-align:center"
-                          data-bind="text: OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()">
+                    <div>
+                        <span style="text-align:center"
+                              data-bind="text: OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()">
                         asd
-                    </span>
+                        </span>
+                        <span style="float:right; margin-right: 10px;">
+                            <img data-bind="tooltip: { title: 'Activate Oak items to gain unique bonuses. When an Oak item has gained enough experience you can level it up with money to boost its effect.', trigger: 'hover', placement:'right' }"
+                                 src="assets/images/questionmark.png">
+                        </span>
+                    </div>
                 </div>
                 <div class="row justify-content-sm-center" data-bind="foreach: OakItemRunner.oakItemList">
                     <div>
@@ -1409,9 +1464,10 @@
             <div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
                 <div class="page-item">
                     <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
-                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()">
+                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()" style="border: 1px solid black;">
                             <div data-bind="if: $data !== null">
                                 <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
+
                                 <div class="progress" data-bind='if: progress() < 100,
                                                                  tooltip: {title: ko.pureComputed(function(){return Math.floor(progress()) + "%"}), trigger: "hover"}'>
                                     <div class="progress-bar bg-success" role="progressbar"
@@ -1480,7 +1536,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 Achievements
+
                 <span data-bind='text: "Total Bonus: " + AchievementHandler.achievementBonusPercent()'></span>
+                <img style="float:right;margin-right:10px;"
+                     data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% more money and xp from all sources.', trigger: 'hover', placement:'right' }"
+                     src="assets/images/questionmark.png">
+
             </div>
             <div class="modal-body">
                 <table id="achievementList" class="table table-hover">
@@ -1655,6 +1716,10 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">Shards</h4>
+                <img style="float:right;margin-right:10px;"
+                     data-bind="tooltip: { title: 'Use shards to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get shards based on its type. ', trigger: 'hover', placement:'right' }"
+                     src="assets/images/questionmark.png">
+
             </div>
             <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
                 <h3>
@@ -1825,12 +1890,9 @@
                     <div class="modal-body" id="helpBody" style="width: 80%;margin: auto;">
                         <h4>In the underground you can mine for hidden treasures.</h4>
                         <h4>Select the Hammer or the Chisel and click on the wall.</h4>
-                        <h4>The Hammer is better for large areas, while the Chisel is better for small
-                            areas.</h4>
                         <h4>Sell your treasures for shards or diamonds!</h4>
-                        <h4>You can use your diamonds to buy all kinds of upgrades!</h4>
-                        <h4>Every day you can trade your found items.</h4>
-                        <h4>Check the Daily Deals tab!</h4>
+                        <h4>You can use your diamonds to buy all kinds of upgrades that will help you explore the underground even further!</h4>
+                        <h4>In the Daily deals tab you can trade your items.</h4>
                     </div>
                 </div>
                 <div id="dailyDeals" class="tab-pane fade">
@@ -1874,43 +1936,51 @@
      aria-labelledby="pokedexModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+            <div class="modal-header">
+                <h4 style="margin-bottom: 0">Pokédex</h4>
+                <button style="float:right;" class="btn btn-secondary" type="button" data-toggle="collapse"
+                        data-target="#pokedex-collapse" aria-expanded="false" aria-controls="pokedex-collapse">
+                    Filters
+                </button>
+            </div>
             <div class="modal-body">
 
                 <div class="collapse" id="pokedex-collapse">
-                    <div class="container" style="border-bottom: 1px solid #eceeef">
+                    <div class="container-fluid" style="border-bottom: 1px solid #eceeef">
+                        <div class="row justify-content-center">
 
-                        <!--Name-->
-                        <div class="form-group row">
-                            <div class="col-sm-2">
-                                <label class="col-form-label">Name</label>
+                            <!--Name-->
+                            <div class="form-group row col-sm-10 col-lg-6">
+                                <label class="col-2 col-form-label">Name</label>
+                                <div class="col-10">
+                                    <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
+                                           oninput="PokedexHelper.updateList()">
+                                </div>
                             </div>
-                            <div class="col-sm-4">
-                                <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
-                                       oninput="PokedexHelper.updateList()"
-                                >
-                            </div>
 
-                        </div>
-
-                        <!--Types-->
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label" for="pokedex-filter-type1">Type:</label>
-                            <div class="col-sm-10">
-                                <select id="pokedex-filter-type1" class="custom-select float-left"
-                                        oninput="PokedexHelper.updateList()" style="margin-right: 8px">
-                                    <option value="-1" selected>All</option>
-                                </select>
+                            <!--Types-->
+                            <div class="form-group row col-sm-10 col-lg-6">
+                                <label class="col-2 col-form-label" for="pokedex-filter-type1">Type</label>
+                                <div class="col-5">
+                                    <select id="pokedex-filter-type1" class="custom-select"
+                                            oninput="PokedexHelper.updateList()" style="margin-right: 8px">
+                                        <option value="-1" selected>All</option>
+                                    </select>
+                                </div>
                                 <label class="sr-only" for="pokedex-filter-type2">Type</label>
-                                <select id="pokedex-filter-type2" class="custom-select float-left"
-                                        oninput="PokedexHelper.updateList()">
-                                    <option value="-1" selected>All</option>
-                                </select>
+                                <div class="col-5">
+                                    <select id="pokedex-filter-type2" class="custom-select"
+                                            oninput="PokedexHelper.updateList()">
+                                        <option value="-1" selected>All</option>
+                                    </select>
+                                </div>
                             </div>
+
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row justify-content-center">
                             <!--Caught-->
-                            <div class="col-sm-2 offset-sm-2">
+                            <div class="col-sm-2">
                                 <label class="form-check-label">
                                     <input class="form-check-input" type="checkbox" id="pokedex-filter-caught"
                                            value="false" onclick="PokedexHelper.updateList()"> Caught
@@ -2019,7 +2089,7 @@
                         <div class="tab-pane" id="saveTab2">
                             <div class="container">
                                 <br>
-                                <input type="file" id="input" accept=".pokeclicker"
+                                <input type="file" id="input" accept=".txt"
                                        onchange=Save.loadFromFile(this.files[0])>
                             </div>
                         </div>

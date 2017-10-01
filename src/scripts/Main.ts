@@ -44,6 +44,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     ko.applyBindings(game);
     ko.options.deferUpdates = true;
+
+    Game.applyRouteBindings();
+
 });
 
 /**
@@ -82,14 +85,12 @@ class Game {
         this.undergroundCounter += GameConstants.TICK_TIME;
         this.farmCounter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
-        if(Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK){
+        if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
             Game.achievementCounter = 0;
             AchievementHandler.checkAchievements();
         }
         Save.counter += GameConstants.TICK_TIME;
         Underground.counter += GameConstants.TICK_TIME;
-
-
 
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
@@ -122,7 +123,7 @@ class Game {
         }
 
         if (Underground.counter > GameConstants.UNDERGROUND_TICK) {
-            Underground.energyTick( Math.max(0, Underground.energyTick() - 1) );
+            Underground.energyTick(Math.max(0, Underground.energyTick() - 1));
             if (Underground.energyTick() == 0) {
                 Underground.gainEnergy();
                 Underground.energyTick(player._mineEnergyRegenTime());
@@ -141,5 +142,21 @@ class Game {
         Save.loadMine();
         Underground.energyTick(player._mineEnergyRegenTime())
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());
+    }
+
+    static applyRouteBindings() {
+        $('path, rect').hover(function () {
+            let id = $(this).attr('id');
+            if (id && id != 'mapTooltipWrapper') {
+                let tooltip = $('#mapTooltip');
+                tooltip.text(id);
+                tooltip.css('visibility', 'visible')
+
+            }
+        }, function () {
+            let tooltip = $('#mapTooltip');
+            tooltip.text('');
+            tooltip.css('visibility', 'hidden')
+        });
     }
 }
