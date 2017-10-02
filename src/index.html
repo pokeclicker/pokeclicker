@@ -1535,17 +1535,32 @@ b
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                Achievements
-                <img style="float:right;margin-right:10px;"
-                     data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% more money and xp from all sources.', trigger: 'hover', placement:'right' }"
-                     src="assets/images/questionmark.png">
+                <h5>Achievements</h5>
+                <h5 style="display: inline" data-bind="text: 'Total Bonus: ' + AchievementHandler.achievementBonusPercent(), tooltip: { title: 'As you earn achievements, you gain up to 100% more money and xp from all sources.', trigger: 'hover', placement:'right' }"></h5>
 
             </div>
             <div class="modal-body">
-                <table id="achievementList" class="table table-hover">
-                    <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.achievementList}">
+                <table id="" class="table table-hover">
+                    <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.getAchievementListWithIndex(10*AchievementHandler.navigateIndex())}">
                     </tbody>
                 </table>
+            </div>
+
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-secondary" onclick="AchievementHandler.navigateLeft()"
+                        data-bind=" css: {disabled: AchievementHandler.navigateIndex() == 0}">
+                    <img src="assets/images/leftarrow.png">
+                </button>
+                <div data-bind="text: AchievementHandler.navigateIndex()+1 + '/' + (AchievementHandler.getNumberOfTabs()+1)"></div>
+
+
+
+                <button class="btn btn-secondary" onclick="AchievementHandler.navigateRight()"
+                        data-bind=" css: {disabled: AchievementHandler.navigateIndex() ==  AchievementHandler.getNumberOfTabs()}">
+                    <img src="assets/images/rightarrow.png">
+                </button>
+
+
             </div>
 
         </div>
