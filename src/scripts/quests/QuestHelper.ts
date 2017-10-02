@@ -20,6 +20,9 @@ class QuestHelper{
                 route = SeededRand.intBetween(1, 25);
                 amount = SeededRand.intBetween(100, 500);
                 return new DefeatPokemonsQuest(route, amount);
+            case "CapturePokemons":
+                amount = SeededRand.intBetween(100, 500);
+                return new CapturePokemonsQuest(amount);
             case "GainMoney":
                 amount = SeededRand.intBetween(20000, 60000);
                 return new GainMoneyQuest(amount);
