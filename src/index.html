@@ -1058,85 +1058,107 @@ b
                                 <path d="M 70 108.39 L 78.29 100.1 L 89.71 100.1 L 98 108.39 L 98 119.81 L 89.71 128.1 L 78.29 128.1 L 70 119.81 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
                                 </path>
-                                <path class="city" id="Pewter City"
-                                      data-bind="click:function(){MapHelper.moveToTown('Pewter City')}"
+                                <path class="city" data-town="Pewter City"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Pewter City')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Pewter City')() }"
                                       d="M 72.8 109.53 L 79.43 102.9 L 88.57 102.9 L 95.2 109.53 L 95.2 118.67 L 88.57 125.3 L 79.43 125.3 L 72.8 118.67 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                                       stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <path d="M 70 215.49 L 78.29 207.2 L 89.71 207.2 L 98 215.49 L 98 226.91 L 89.71 235.2 L 78.29 235.2 L 70 226.91 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
                                 </path>
-                                <path class="city" id="Viridian City"
-                                      data-bind="click:function(){MapHelper.moveToTown('Viridian City')}"
+                                <path class="city" data-town="Viridian City"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Viridian City')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Viridian City')() }"
                                       d="M 72.8 216.63 L 79.43 210 L 88.57 210 L 95.2 216.63 L 95.2 225.77 L 88.57 232.4 L 79.43 232.4 L 72.8 225.77 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                                       stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <path d="M 69.3 296.69 L 77.59 288.4 L 89.01 288.4 L 97.3 296.69 L 97.3 308.11 L 89.01 316.4 L 77.59 316.4 L 69.3 308.11 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
                                               "1.4"></path>
-                                <path class="city" id="Pallet Town"
-                                      data-bind="click:function(){MapHelper.moveToTown('Pallet Town')}"
+                                <path class="city" data-town="Pallet Town"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Pallet Town')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Pallet Town')() }"
                                       d="M 72.1 297.83 L 78.73 291.2 L 87.87 291.2 L 94.5 297.83 L 94.5 306.97 L 87.87 313.6 L 78.73 313.6 L 72.1 306.97 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                                       stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <path d="M 338.1 161.59 L 346.39 153.3 L 357.81 153.3 L 366.1 161.59 L 366.1 173.01 L 357.81 181.3 L 346.39 181.3 L 338.1 173.01 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
                                       stroke-width="1.4"></path>
-                                <path class="city" id="Saffron City"
-                                      data-bind="click:function(){MapHelper.moveToTown('Saffron City')}"
+                                <path class="city" data-town="Saffron City"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Saffron City')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Saffron City')() }"
                                       d="M 340.9 162.73 L 347.53 156.1 L 356.67 156.1 L 363.3 162.73 L 363.3 171.87 L 356.67 178.5 L 347.53 178.5 L 340.9 171.87 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
                                               "#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <path d="M 254.1 161.59 L 262.39 153.3 L 273.81 153.3 L 282.1 161.59 L 282.1 173.01 L 273.81 181.3 L 262.39 181.3 L 254.1 173.01 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
                                       stroke-width="1.4"></path>
-                                <path class="city" id="Celadon City"
-                                      data-bind="click:function(){MapHelper.moveToTown('Celadon City')}"
+                                <path class="city" data-town="Celadon City"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Celadon City')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Celadon City')() }"
                                       d="M 256.9 162.73 L 263.53 156.1 L 272.67 156.1 L 279.3 162.73 L 279.3 171.87 L 272.67 178.5 L 263.53 178.5 L 256.9 171.87 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
                                               "#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <path d="M 336.7 241.39 L 344.99 233.1 L 356.41 233.1 L 364.7 241.39 L 364.7 252.81 L 356.41 261.1 L 344.99 261.1 L 336.7 252.81 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
                                       stroke-width="1.4"></path>
-                                <path class="city" id="Vermillion City"
-                                      data-bind="click:function(){MapHelper.moveToTown('Vermillion City')}"
+                                <path class="city" data-town="Vermillion City"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Vermillion City')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Vermillion City')() }"
                                       d="M 339.5 242.53 L 346.13 235.9 L 355.27 235.9 L 361.9 242.53 L 361.9 251.67 L 355.27 258.3 L 346.13 258.3 L 339.5 251.67 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke=
                                               "#b85450" stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <path d="M 16.1 81.09 L 24.39 72.8 L 35.81 72.8 L 44.1 81.09 L 44.1 92.51 L 35.81 100.8 L 24.39 100.8 L 16.1 92.51 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
                                 </path>
-                                <path class="city" id="Indigo Plateau"
-                                      data-bind="click:function(){MapHelper.moveToTown('Indigo Plateau')}"
+                                <path class="city" data-town="Indigo Plateau"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Indigo Plateau')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Indigo Plateau')() }"
                                       d="M 18.9 82.23 L 25.53 75.6 L 34.67 75.6 L 41.3 82.23 L 41.3 91.37 L 34.67 98 L 25.53 98 L 18.9 91.37 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                                       stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <path d="M 338.1 79.69 L 346.39 71.4 L 357.81 71.4 L 366.1 79.69 L 366.1 91.11 L 357.81 99.4 L 346.39 99.4 L 338.1 91.11 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
                                               "1.4"></path>
-                                <path class="city" id="Cerulean City"
-                                      data-bind="click:function(){MapHelper.moveToTown('Cerulean City')}"
+                                <path class="city" data-town="Cerulean City"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Cerulean City')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Cerulean City')() }"
                                       d="M 340.9 80.83 L 347.53 74.2 L 356.67 74.2 L 363.3 80.83 L 363.3 89.97 L 356.67 96.6 L 347.53 96.6 L 340.9 89.97 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                                       stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <path d="M 445.2 162.99 L 453.49 154.7 L 464.91 154.7 L 473.2 162.99 L 473.2 174.41 L 464.91 182.7 L 453.49 182.7 L 445.2 174.41 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10"
                                       stroke-width="1.4"></path>
-                                <path class="city" id="Lavender Town"
-                                      data-bind="click:function(){MapHelper.moveToTown('Lavender Town')}"
+                                <path class="city" data-town="Lavender Town"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Lavender Town')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Lavender Town')() }"
                                       d="M 448 164.13 L 454.63 157.5 L 463.77 157.5 L 470.4 164.13 L 470.4 173.27 L 463.77 179.9 L 454.63 179.9 L 448 173.27 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                                       stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="456.4"
                                       y="166.6"></rect>
-                                <rect class="city" id="Pokemon Tower" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
-                                      data-bind="click:function(){MapHelper.moveToTown('Lavender Town')}"
+                                <rect class="city" data-town="Pokemon Tower" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Lavender Town')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Lavender Town')() }"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="457.8" y="168"></rect>
                                 <path d="M 284.2 323.29 L 292.49 315 L 303.91 315 L 312.2 323.29 L 312.2 334.71 L 303.91 343 L 292.49 343 L 284.2 334.71 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width=
                                               "1.4"></path>
-                                <path class="city" id="Fuchsia City"
-                                      data-bind="click:function(){MapHelper.moveToTown('Fuchsia City')}"
+                                <path class="city" data-town="Fuchsia City"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Fuchsia City')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Fuchsia City')() }"
                                       d="M 287 324.43 L 293.63 317.8 L 302.77 317.8 L 309.4 324.43 L 309.4 333.57 L 302.77 340.2 L 293.63 340.2 L 287 333.57 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                                       stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -1146,55 +1168,73 @@ b
                                 <path d="M 70 375.79 L 78.29 367.5 L 89.71 367.5 L 98 375.79 L 98 387.21 L 89.71 395.5 L 78.29 395.5 L 70 387.21 Z"
                                       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
                                 </path>
-                                <path class="city" id="Cinnabar Island"
-                                      data-bind="click:function(){MapHelper.moveToTown('Cinnabar Island')}"
+                                <path class="city" data-town="Cinnabar Island"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Cinnabar Island')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Cinnabar Island')() }"
                                       d="M 72.8 376.93 L 79.43 370.3 L 88.57 370.3 L 95.2 376.93 L 95.2 386.07 L 88.57 392.7 L 79.43 392.7 L 72.8 386.07 Z"
                                       fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
                                       stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="81.2"
                                       y="379.4"></rect>
-                                <rect class="city" id="Pokemon Mansion"
+                                <rect class="city" data-town="Pokemon Mansion"
                                       fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
-                                      data-bind="click:function(){MapHelper.moveToTown('Cinnabar Island')}"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Cinnabar Island')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Cinnabar Island')() }"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="82.6" y="380.8"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="349.3"
                                       y="83.3"></rect>
-                                <rect class="city" id="Cerulean Cave" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
-                                      data-bind="click:function(){MapHelper.moveToTown('Cerulean City')}"
+                                <rect class="city" data-town="Cerulean Cave" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      data-bind="
+                                      click:function(){MapHelper.moveToTown('Cerulean City')},
+                                      attr: { class: MapHelper.calculateTownCssClass('Cerulean City')() }"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="350.7" y="84.7"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="22.4"
                                       y="109.9"></rect>
-                                <rect data-bind="click:function(){MapHelper.moveToTown('Victory Road')}" class="city"
-                                      id="Victory Road" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                <rect data-bind="
+                                click:function(){MapHelper.moveToTown('Victory Road')},
+                                attr: { class: MapHelper.calculateTownCssClass('Victory Road')() }" 
+                                class="city"
+                                data-town="Victory Road" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="23.8" y="111.3"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="76.3"
                                       y="133"></rect>
-                                <rect data-bind="click:function(){MapHelper.moveToTown('Digletts Cave')}"
+                                <rect data-bind="
+                                click:function(){MapHelper.moveToTown('Digletts Cave')},
+                                attr: { class: MapHelper.calculateTownCssClass('Digletts Cave')() }"
                                       class="city"
-                                      id="Digletts Cave" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      data-town="Digletts Cave" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="77.7" y="134.4"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="76.3"
                                       y="156.1"></rect>
-                                <rect data-bind="click:function(){MapHelper.moveToTown('Viridian Forest')}"
+                                <rect data-bind="
+                                click:function(){MapHelper.moveToTown('Viridian Forest')},
+                                attr: { class: MapHelper.calculateTownCssClass('Viridian Forest')() }"
                                       class="city"
-                                      id="Viridian Forest" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      data-town="Viridian Forest" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="77.7" y="157.5"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="181.3"
                                       y="374.5"></rect>
-                                <rect data-bind="click:function(){MapHelper.moveToTown('Seafoam Islands')}"
+                                <rect data-bind="
+                                click:function(){MapHelper.moveToTown('Seafoam Islands')},
+                                attr: { class: MapHelper.calculateTownCssClass('Seafoam Islands')() }"
                                       class="city"
-                                      id="Seafoam Islands" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      data-town="Seafoam Islands" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="182.7" y="375.9"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="210"
                                       y="79.1"></rect>
-                                <rect data-bind="click:function(){MapHelper.moveToTown('Mt. Moon')}" class="city"
-                                      id="Mt. Moon" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                <rect data-bind="
+                                click:function(){MapHelper.moveToTown('Mt. Moon')},
+                                attr: { class: MapHelper.calculateTownCssClass('Mt. Moon')() }" 
+                                class="city"
+                                data-town="Mt. Moon" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6"
                                       stroke="#6c8ebf" width="12.6" x="211.4" y="80.5"></rect>
 
@@ -1203,24 +1243,29 @@ b
                                  -->
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="451.5"
                                       y="79.1"></rect>
-                                <rect data-bind="click:function(){MapHelper.moveToTown('Rock Tunnel')}" class="city"
-                                      id="Rock Tunnel" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                <rect data-bind="
+                                click:function(){MapHelper.moveToTown('Rock Tunnel')},
+                                attr: { class: MapHelper.calculateTownCssClass('Rock Tunnel')() }"
+                                 class="city"
+                                data-town="Rock Tunnel" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6"
                                       stroke="#6c8ebf" width="12.6" x="452.9" y="80.5"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="451.5"
                                       y="103.6"></rect>
-                                <rect data-bind="click:function(){MapHelper.moveToTown('Power Plant')}" class="city"
-                                      id="Power Plant" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                <rect data-bind="
+                                click:function(){MapHelper.moveToTown('Power Plant')},
+                                attr: { class: MapHelper.calculateTownCssClass('Power Plant')() }" class="city"
+                                data-town="Power Plant" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6"
                                       stroke="#6c8ebf" width="12.6" x="452.9" y="105"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="343.6"
                                       y="109.3"></rect>
-                                <rect class="city" id="Pokemon Day Care" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                <rect class="city" data-town="Pokemon Day Care" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="345" y="110.7"
                                       data-bind="click:function(){BreedingHelper.openBreedingModal()}"></rect>
-                                <rect class="city" id="Underground Entrance"
+                                <rect class="city" data-town="Underground Entrance"
                                       fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="380" y="240.7"
                                       data-bind="click:function(){Underground.openUndergroundModal()}"></rect>

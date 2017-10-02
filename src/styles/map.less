@@ -21,6 +21,23 @@ g > text {
 
 }
 
+.city {
+  fill: url(#mx-gradient-f8cecc-1-ea583b-1-s-0);
+  stroke: #b85450;
+
+  &.currentTown {
+    fill: #55ff00;
+  }
+
+  &.unlockedTown {
+    fill: #fcb612;
+  }
+
+  &.lockedTown {
+    fill: url(#mx-gradient-f8cecc-1-ea583b-1-s-0);
+  }
+}
+
 #mapTooltip {
   position: absolute;
   font-size: 13px;
