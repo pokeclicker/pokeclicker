@@ -66,6 +66,7 @@ class Player {
             return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
+        this._currentTown = ko.observable("");
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
@@ -124,6 +125,7 @@ class Player {
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
+    private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
@@ -557,6 +559,14 @@ class Player {
 
     set town(value: KnockoutObservable<Town>) {
         this._town = value;
+    }
+
+    get currentTown(): KnockoutObservable<string> {
+        return this._currentTown;
+    }
+
+    set currentTown(value: KnockoutObservable<string>) {
+        this._currentTown = value;
     }
 
     get oakItemsEquipped(): string[] {
