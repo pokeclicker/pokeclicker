@@ -364,6 +364,16 @@ class Player {
         return this._money() >= money;
     }
 
+    public hasQuestPoints(questPoints: number) {
+        return this._questPoints() >= questPoints;
+    }
+
+    public payQuestPoints(questPoints: number) {
+        if (this.hasQuestPoints(questPoints)) {
+            this._questPoints(Math.floor(this.questPoints() - questPoints));
+        }
+    }
+
     public payMoney(money: number) {
         if (this.hasMoney(money)) {
             this._money(Math.floor(this._money() - money));
