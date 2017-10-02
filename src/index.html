@@ -1575,27 +1575,7 @@ b
 </div>
 
 <!-- Achievements Modal -->
-<div class="modal  fade" id="achievementsModal" tabindex="-1" role="dialog"
-     aria-labelledby="AchievementsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                Achievements
-                <img style="float:right;margin-right:10px;"
-                     data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% more money and xp from all sources.', trigger: 'hover', placement:'right' }"
-                     src="assets/images/questionmark.png">
-
-            </div>
-            <div class="modal-body">
-                <table id="achievementList" class="table table-hover">
-                    <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.achievementList}">
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-    </div>
-</div>
+@import "achievements.html" 
 
 <!-- Start Sequence Modal-->
 <div class="modal" id="startSequenceModal" tabindex="-1" role="dialog"
