@@ -1,4 +1,4 @@
-class KeyItem extends Item {
+class buyKeyItem extends Item {
     
         type: GameConstants.KeyItemType;
     
@@ -17,4 +17,4 @@ class KeyItem extends Item {
     }
     
     
-    ItemList['Dungeon_ticket'] = new KeyItem(GameConstants.KeyItemType.Dungeon_ticket);
+    ItemList['Dungeon_ticket'] = new buyKeyItem(GameConstants.KeyItemType.Dungeon_ticket);
