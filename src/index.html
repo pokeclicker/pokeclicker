@@ -108,7 +108,7 @@
             <a class="dropdown-item" href="#shardModal" data-toggle="modal">Shards</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#showKeyitemsModal" data-toggle="modal">Key Items</a>
+            <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Bag</a>
         </li>
         <li>
             <a class="dropdown-item" href="#donateModal" data-toggle="modal">Donate</a>
@@ -249,31 +249,86 @@
     </div>
 </div>
 
-<!-- Show keyitems modal-->
-<div class="modal" id="showKeyitemsModal" tabindex="-1" role="dialog"
-     aria-labelledby="showKeyitemModalLabel" aria-hidden="true">
+<!-- Show Items modal-->
+<div class="modal" id="showItemsModal" tabindex="-1" role="dialog"
+     aria-labelledby="showItemModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="text-align: center">
             <div class="modal-header">
-                <div style="width: 100%;">
-                    <img style="float:right;margin-right:10px;"
-                         data-bind="tooltip: { title: 'An overview of all Key items you have collected so far. Click on a key item to get more information.', trigger: 'hover', placement:'right' }"
-                         src="assets/images/questionmark.png">
 
-                    <img src="assets/images/oak.png">
-                    <h5 class="modal-title" id="showKeyitemModalLabel">Key items</h5>
+                <ul style="width:100%" class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#items">Evolution stones</a>
+                    </li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
+                </ul>
 
-                </div>
+
             </div>
-            <div class="modal-body">
 
-                <div class="page-item" style="background-color: white;">
+            <div class="tab-content">
+                <div id="items" class="tab-pane fade in active show">
+                    <div class="modal-body">
 
-                    <div class="row no-gutters justify-content-sm-center"
-                         data-bind="foreach: KeyItemHandler.keyItemList">
-                        <div class="col-sm-2">
-                            <img class="clickable key-item" src=""
-                                 data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
+                        <div class="page-item" style="background-color: white;">
+
+                            <div class="row no-gutters justify-content-sm-center">
+
+
+                                <div class="cc-selector">
+                                    <input checked="checked" id="visa" type="radio" name="credit-card" value="visa" />
+                                    <label class="drinkcard-cc visa" for="visa"></label>
+                                    <input id="mastercard" type="radio" name="credit-card" value="mastercard" />
+                                    <label class="drinkcard-cc mastercard"for="mastercard"></label>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col"><img src="assets/images/items/Fire_stone.png">
+                                        <div data-bind="text: player._itemList['Fire_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Water_stone.png">
+                                        <div data-bind="text: player._itemList['Water_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Leaf_stone.png">
+                                        <div data-bind="text: player._itemList['Leaf_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Thunder_stone.png">
+                                        <div data-bind="text: player._itemList['Thunder_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Moon_stone.png">
+                                        <div data-bind="text: player._itemList['Moon_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Trade_stone.png">
+                                        <div data-bind="text: player._itemList['Trade_stone']"></div>
+                                    </div>
+
+                                </div>
+                                <div class="row justify-content-center">
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="keyItems" class="tab-pane fade">
+                    <div class="modal-body">
+                        <div style="width: 100%;">
+                            <img style="float:right;margin-right:10px;margin-top:10px"
+                                 data-bind="tooltip: { title: 'An overview of all Key items you have collected so far. Click on a key item to get more information.', trigger: 'hover', placement:'right' }"
+                                 src="assets/images/questionmark.png">
+
+
+                        </div>
+                        <div class="page-item" style="background-color: white;">
+
+                            <div class="row no-gutters justify-content-sm-center"
+                                 data-bind="foreach: KeyItemHandler.keyItemList">
+                                <div class="col-sm-2">
+                                    <img class="clickable key-item" src=""
+                                         data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
                                   css: {'oak-item-locked': !player.hasKeyItem($data.name())
 
                                         },
@@ -282,28 +337,30 @@
                                     click: function(){KeyItemHandler.click($data.name())},
                                     mouseout : function(){KeyItemHandler.hoverRelease()}
                                     }">
-                        </div>
-                    </div>
-
-                    <div class="card oak-item-info" style="height:90px">
-                        <div data-bind="if: KeyItemHandler.inspectedItem() !== null">
-                            <div class="row justify-content-sm-center">
-                                <div style="height: 20px" class="col-sm-11">
-                                    <b><span data-bind="text: KeyItemHandler.inspectedItem().name()"></span></b>
-                                </div>
-                            </div>
-                            <div class="row justify-content-sm-center">
-                                <div class="col-sm-11">
-                                    <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
-                                        <p style="margin-top: 5px"
-                                           data-bind="text: KeyItemHandler.inspectedItem().description"></p>
-                                    </div>
-                                    <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
-                                        <p style="margin-top: 5px">?????</p>
-                                    </div>
                                 </div>
                             </div>
 
+                            <div class="card oak-item-info" style="height:90px">
+                                <div data-bind="if: KeyItemHandler.inspectedItem() !== null">
+                                    <div class="row justify-content-sm-center">
+                                        <div style="height: 20px" class="col-sm-11">
+                                            <b><span data-bind="text: KeyItemHandler.inspectedItem().name()"></span></b>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-sm-center">
+                                        <div class="col-sm-11">
+                                            <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
+                                                <p style="margin-top: 5px"
+                                                   data-bind="text: KeyItemHandler.inspectedItem().description"></p>
+                                            </div>
+                                            <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
+                                                <p style="margin-top: 5px">?????</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -406,7 +463,8 @@
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
-                                    <img class="pokeball-animated" data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
+                                    <img class="pokeball-animated"
+                                         data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
                                          src=""/>
                                 </div>
                             </div>
@@ -473,7 +531,8 @@
                                              src=""/>
                                     </div>
                                     <div data-bind="if: DungeonBattle.catching">
-                                        <img class="pokeball-animated" data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
+                                        <img class="pokeball-animated"
+                                             data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
                                              src=""/>
                                     </div>
                                 </div>
@@ -536,7 +595,7 @@
                      class="justify-content-center no-gutters no-select">
 
                     <div data-bind="if:player.town().dungeon()">
-b
+                        b
                     </div>
 
                     <div data-bind="ifnot:player.town().dungeon()">
@@ -1464,7 +1523,8 @@ b
             <div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
                 <div class="page-item">
                     <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
-                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()" style="border: 1px solid black;">
+                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()"
+                             style="border: 1px solid black;">
                             <div data-bind="if: $data !== null">
                                 <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
 
@@ -1889,7 +1949,8 @@ b
                         <h4>In the underground you can mine for hidden treasures.</h4>
                         <h4>Select the Hammer or the Chisel and click on the wall.</h4>
                         <h4>Sell your treasures for shards or diamonds!</h4>
-                        <h4>You can use your diamonds to buy all kinds of upgrades that will help you explore the underground even further!</h4>
+                        <h4>You can use your diamonds to buy all kinds of upgrades that will help you explore the
+                            underground even further!</h4>
                         <h4>In the Daily deals tab you can trade your items.</h4>
                     </div>
                 </div>
