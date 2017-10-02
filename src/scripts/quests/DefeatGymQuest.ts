@@ -5,7 +5,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         super(amount, DefeatGymQuest.calcReward(gymIndex, amount));
         let gymTown = GameConstants.Gyms[gymIndex];
         this.description = DefeatGymQuest.getDescription(gymTown, amount);
-        this.questFocus = player.gymDefeats[gymIndex];
+        this.questFocus = player.statistics.gymsDefeated[gymIndex];
         this.createProgressObservables();
     }
 

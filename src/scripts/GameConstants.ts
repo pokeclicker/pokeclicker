@@ -139,6 +139,8 @@ namespace GameConstants {
     export const MINE_LAYERS_BASE_REWARD     = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
     export const SHINY_BASE_REWARD           = questBase * 6000;    // Dimava
 
+    export const ACTIVE_QUEST_MULTIPLIER     = 4;
+
     export const QuestTypes = [
         "DefeatPokemons",
         "GainMoney",
@@ -146,6 +148,7 @@ namespace GameConstants {
         "MineLayers",
         "CatchShinies",
         "DefeatGym",
+        "DefeatDungeon",
     ];
 
     export const QUESTS_PER_SET = 10;

@@ -135,8 +135,6 @@ class Player {
     private _route: KnockoutObservable<number>;
     private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
 
-    private _questPoints: KnockoutObservable<number>;
-
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
     get defeatedAmount(): Array<KnockoutObservable<number>> {
@@ -550,10 +548,6 @@ class Player {
 
     get dungeonTokens(): KnockoutObservable<number> {
         return this._dungeonTokens;
-    }
-
-    get questPoints(): KnockoutObservable<number> {
-        return this._questPoints;
     }
 
     get caughtPokemonList() {

@@ -4,7 +4,7 @@ class HatchEggsQuest extends Quest implements QuestInterface {
     constructor(amount: number) {
         super(amount, Math.ceil(amount * GameConstants.HATCH_EGGS_BASE_REWARD));
         this.description = `Hatch ${amount} Eggs`;
-        this.questFocus = player._eggsHatched;
+        this.questFocus = player.statistics.hatchedEggs;
         this.createProgressObservables();
     }
 }
