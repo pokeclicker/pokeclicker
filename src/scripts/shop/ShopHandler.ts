@@ -37,12 +37,17 @@ class ShopHandler {
             } else {
                 Notifier.notify("You don't have enough money to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
             }
-        } else if (item.currency == GameConstants.Currency.questpoint) {
+        } else if (item.currency == GameConstants.Currency.questpoint) { 
             if (player.hasQuestPoints(item.totalPrice())) {
                 player.payQuestPoints(item.totalPrice());
-                item.buy(this.amount());
-                item.increasePriceMultiplier(this.amount());
-                Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
+                if(item.name() =="Dungeon_ticket"){
+                    player.gainKeyItem("Dungeon ticket");
+                    ShopHandler.showShop(player.town().shop())
+                }else{
+                    item.buy(this.amount());
+                    item.increasePriceMultiplier(this.amount());
+                    Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
+                }             
             } else {
                 Notifier.notify("You don't have enough quest points to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
             }
@@ -59,6 +64,16 @@ class ShopHandler {
         let input = $("input[name='amountOfItems']");
         let newVal = (parseInt(input.val().toString()) || 0) + n;
         input.val(newVal > 1 ? newVal : 1).change();
+    }
+
+    public static ownKeyItem(name: string): boolean {
+
+        console.log(name);
+        if(name =='Dungeon_ticket' && player.hasKeyItem('Dungeon ticket')){
+            return false;
+        }else{
+            return true;
+        }
     }
 
     public static calculateCss(i: number): string {
