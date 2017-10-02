@@ -10,7 +10,7 @@ class Berry extends Item {
         this.type = type;
     }
 
-    buy() {
+    buy(amt: number) {
     }
 
     use() {

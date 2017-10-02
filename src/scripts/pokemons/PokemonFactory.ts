@@ -13,7 +13,7 @@ class PokemonFactory {
      * @returns {any}
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
-        if (route > 25) {
+        if (route > 25 || route == 0) {
             return null;
         }
 

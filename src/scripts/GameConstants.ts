@@ -513,5 +513,18 @@ namespace GameConstants {
         "Elite Agatha",
         "Elite Lance",
         "Champion Blue"
-    ]
+    ];
+
+    export const Dungeons = [
+        "Viridian Forest",
+        "Digletts Cave",
+        "Mt. Moon",
+        "Rock Tunnel",
+        "Power Plant",
+        "Pokemon Tower",
+        "Seafoam Islands",
+        "Pokemon Mansion",
+        "Victory Road",
+        "Cerulean Cave"
+    ];
 }

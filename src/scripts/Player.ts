@@ -7,10 +7,6 @@ class Player {
 
     private _money: KnockoutObservable<number>;
     private _dungeonTokens: KnockoutObservable<number>;
-    private _caughtShinyList: KnockoutObservableArray<string>;
-    private _route: KnockoutObservable<number>;
-    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
-
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
 
@@ -19,6 +15,7 @@ class Player {
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
+        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         if (savedPlayer._route == null || savedPlayer._route == 0) {
             this._route = ko.observable(1);
@@ -51,14 +48,14 @@ class Player {
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
-            let amt = 1000;
+            let amt = index == 0 ? 50 : 0;
             if (savedPlayer._pokeballs && typeof savedPlayer._pokeballs[index] == 'number') {
                 amt = savedPlayer._pokeballs[index];
             }
             return ko.observable(amt);
         });
         this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._notCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
-        this._alreadyCaughtBallSelection = typeof(savedPlayer._alreadyCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._alreadyCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
+        this._alreadyCaughtBallSelection = typeof(savedPlayer._alreadyCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._alreadyCaughtBallSelection) : ko.observable(GameConstants.Pokeball.None);
         if (this._gymBadges().length == 0) {
             this._gymBadges.push(GameConstants.Badge.None)
         }
@@ -125,6 +122,7 @@ class Player {
         this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
 
         this._lastSeen = Date.now();
+        this.statistics = new Statistics(savedPlayer.statistics);
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -132,6 +130,12 @@ class Player {
             }
         }
     }
+
+    private _caughtShinyList: KnockoutObservableArray<string>;
+    private _route: KnockoutObservable<number>;
+    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
+
+    private _questPoints: KnockoutObservable<number>;
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
@@ -177,6 +181,7 @@ class Player {
     public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
     public achievementsCompleted: { [name: string]: boolean };
+    public statistics: Statistics;
 
     public completedQuestList: Array<KnockoutObservable<boolean>>;
     public questRefreshes: number;
@@ -371,6 +376,7 @@ class Player {
             player.shinyCatches++;
         }
         player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
+        GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
 
     public hasBadge(badge: GameConstants.Badge) {
@@ -390,6 +396,11 @@ class Player {
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
         this._money(Math.floor(this._money() + money * oakItemBonus));
+        GameHelper.incrementObservable(this.statistics.totalMoney, money);
+    }
+
+    public gainDungeonTokens(tokens: number) {
+        this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens ));
     }
 
     public hasMoney(money: number) {
@@ -509,10 +520,6 @@ class Player {
         return this._itemMultipliers;
     }
 
-    set itemMultipliers(value: { [p: string]: number }) {
-        this._itemMultipliers = value;
-    }
-
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -543,6 +550,10 @@ class Player {
 
     get dungeonTokens(): KnockoutObservable<number> {
         return this._dungeonTokens;
+    }
+
+    get questPoints(): KnockoutObservable<number> {
+        return this._questPoints;
     }
 
     get caughtPokemonList() {
@@ -813,6 +824,7 @@ class Player {
         let keep = [
             "_money",
             "_dungeonTokens",
+            "_questPoints",
             "_caughtShinyList",
             "_route",
             "_caughtPokemonList",
@@ -856,6 +868,7 @@ class Player {
             "currentQuest",
             "_shinyCatches",
             "gymDefeats",
+            "statistics",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

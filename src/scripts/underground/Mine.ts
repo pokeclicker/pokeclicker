@@ -142,6 +142,7 @@ class Mine {
                 Underground.gainMineItem(Mine.rewardNumbers[i]);
                 Notifier.notify("You found a " + Underground.getMineItemById(Mine.rewardNumbers[i]).name, GameConstants.NotificationOption.success);
                 Mine.itemsFound(Mine.itemsFound() + 1);
+                GameHelper.incrementObservable(player.statistics.digItems);
                 Mine.rewardNumbers.splice(i, 1);
                 i--;
                 Mine.checkCompleted();
@@ -168,6 +169,7 @@ class Mine {
         if (Mine.itemsFound() >= Mine.itemsBuried) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
+            GameHelper.incrementObservable(player.statistics.digDeeper)
         }
     }
 

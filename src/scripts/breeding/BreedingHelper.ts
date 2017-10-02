@@ -67,6 +67,7 @@ class BreedingHelper {
         player.capturePokemon(egg.pokemon, shiny);
         player.eggsHatched++;
         player._eggList[index](null);
+        GameHelper.incrementObservable(player.statistics.hatchedEggs);
     }
 
     public static createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
