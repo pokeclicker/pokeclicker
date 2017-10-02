@@ -87,7 +87,7 @@ class ShopHandler {
     public static calculateButtonCss(): string {
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
-        if (!player.hasMoney(item.totalPrice()) || this.amount() < 1) {
+        if (item && !player.hasMoney(item.totalPrice()) || this.amount() < 1) {
             return "btn btn-danger smallButton smallFont"
         } else {
             return "btn btn-success smallButton smallFont"
