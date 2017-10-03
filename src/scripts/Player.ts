@@ -404,7 +404,7 @@ class Player {
 
     public payQuestPoints(questPoints: number) {
         if (this.hasQuestPoints(questPoints)) {
-            this._questPoints(Math.floor(this.questPoints() - questPoints));
+            this._questPoints(Math.floor(this.questPoints - questPoints));
         }
     }
 
