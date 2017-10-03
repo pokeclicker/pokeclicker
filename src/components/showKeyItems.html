@@ -3,7 +3,7 @@
      aria-labelledby="showItemModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content" style="text-align: center">
-            <div class="modal-header">
+            <div class="modal-header" style="border-bottom: none !important">
 
                 <ul style="width:100%" class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#items">Evolution stones</a>
@@ -20,37 +20,102 @@
 
                         <div class="page-item" style="background-color: white;">
 
-                            <div class="row no-gutters justify-content-sm-center">
-
-
-
-                                <div class="row justify-content-center">
-                                    <div class="col"><img src="assets/images/items/Fire_stone.png">
+                            <div class="row no-gutters justify-content-sm-center" style="padding:15px;">
+                                <div class="row col-lg-9 col-sm-11">
+                                    <div class="col"
+                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() == 'Fire_stone'}, click: function(){ ItemHandler.stoneSelected('Fire_stone'); ItemHandler.pokemonSelected('')}">
+                                        <img
+                                                src="assets/images/items/Fire_stone.png">
                                         <div data-bind="text: player._itemList['Fire_stone']"></div>
                                     </div>
-                                    <div class="col"><img src="assets/images/items/Water_stone.png">
+                                    <div class="col"
+                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() == 'Water_stone'}, click: function(){ ItemHandler.stoneSelected('Water_stone'); ItemHandler.pokemonSelected('')}">
+                                        <img src="assets/images/items/Water_stone.png">
                                         <div data-bind="text: player._itemList['Water_stone']"></div>
                                     </div>
-                                    <div class="col"><img src="assets/images/items/Leaf_stone.png">
+                                    <div class="col"
+                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() == 'Leaf_stone'}, click: function(){ ItemHandler.stoneSelected('Leaf_stone'); ItemHandler.pokemonSelected('')}">
+                                        <img src="assets/images/items/Leaf_stone.png">
                                         <div data-bind="text: player._itemList['Leaf_stone']"></div>
                                     </div>
-                                    <div class="col"><img src="assets/images/items/Thunder_stone.png">
+                                    <div class="col"
+                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() == 'Thunder_stone'}, click: function(){ ItemHandler.stoneSelected('Thunder_stone'); ItemHandler.pokemonSelected('')}">
+                                        <img src="assets/images/items/Thunder_stone.png">
                                         <div data-bind="text: player._itemList['Thunder_stone']"></div>
                                     </div>
-                                    <div class="col"><img src="assets/images/items/Moon_stone.png">
+                                    <div class="col"
+                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() == 'Moon_stone'}, click: function(){ ItemHandler.stoneSelected('Moon_stone'); ItemHandler.pokemonSelected('')}">
+                                        <img src="assets/images/items/Moon_stone.png">
                                         <div data-bind="text: player._itemList['Moon_stone']"></div>
                                     </div>
-                                    <div class="col"><img src="assets/images/items/Trade_stone.png">
+                                    <div class="col"
+                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() == 'Trade_stone'}, click: function(){ ItemHandler.stoneSelected('Trade_stone'); ItemHandler.pokemonSelected('')}">
+                                        <img src="assets/images/items/Trade_stone.png">
                                         <div data-bind="text: player._itemList['Trade_stone']"></div>
                                     </div>
-
                                 </div>
-                                <div class="row justify-content-center">
-                                </div>
-
-
                             </div>
-                        </div>
+
+
+                            <div class="row no-gutters justify-content-sm-center" style="padding:15px">
+                                <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0"
+                                     style="padding-right: 0"
+                                     data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(ItemHandler.stoneSelected())">
+                                    <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
+
+                                        <button class="btn btn-secondary smallButton list-group-item-action"
+                                                data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() == name}">
+                                            <img class="smallImage"
+                                                 data-bind="attr:{ src: '/assets/images/pokemon/' + id +'.png' }"
+                                                 src=""/>
+                                            <span data-bind="text: name" style="margin-left: 20px">Name</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row no-gutters justify-content-sm-center">
+                                <div class="row justify-content-center" style="padding:15px;">
+                                    <div class="col">
+                                        <button class="btn btn-secondary amount-button list-group-item-action"
+                                                data-bind="click: function() {ItemHandler.amountSelected(1)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() == 1}">
+                                            <span>1</span>
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-secondary amount-button list-group-item-action"
+                                                data-bind="click: function() {ItemHandler.amountSelected(10)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() == 10}">
+                                            <span>10</span>
+                                        </button>
+                                    </div>
+                                    <div class="col">
+                                        <button class="btn btn-secondary amount-button list-group-item-action"
+                                                data-bind="click: function() {ItemHandler.amountSelected(100)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() == 100}">
+                                            <span>100</span>
+                                        </button>
+                                    </div>
+                                    <div class="col" style="text-align: center">
+                                        <button class="btn btn-secondary amount-button list-group-item-action"
+                                                data-bind="click: function() {ItemHandler.amountSelected(1000)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() == 1000}">
+                                            <span>1000</span>
+                                        </button>
+                                    </div>
+                                    <div class="col" style="text-align: center">
+                                        <button class="btn btn-secondary amount-button list-group-item-action"
+                                                data-bind="click: function() {ItemHandler.amountSelected(Infinity)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() == Infinity}">
+                                            <span>Until shiny</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row no-gutters justify-content-sm-center">
+                                <div class="row justify-content-center" style="padding:15px;">
+                                    <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
+                                </div>
+                            </div>
+                       </div>
                     </div>
                 </div>
 

@@ -1,6 +1,8 @@
 class ItemHandler {
 
-    public static itemSelected: string = "Fire_stone";
+    public static stoneSelected: KnockoutObservable<string> = ko.observable("Fire_stone");
+    public static pokemonSelected: KnockoutObservable<string> = ko.observable("");
+    public static amountSelected: KnockoutObservable<number> = ko.observable(1);
     static amount: KnockoutObservable<number> = ko.observable(1);
 
     public static useItem(name:string){
@@ -19,5 +21,17 @@ class ItemHandler {
         input.val(newVal > 1 ? newVal : 1).change();
     }
 
+    public static useStones(){
+        if(this.pokemonSelected() == ""){
+            Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
+            return
+        }
+
+        console.log("using");
+        let amount = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()].amount);
+        for(let i = 0; i< amount; i++){
+            (ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())
+        }
+    }
 
 }
