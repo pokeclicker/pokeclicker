@@ -66,6 +66,7 @@ class Player {
             return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
+        this._currentTown = ko.observable("");
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
@@ -92,6 +93,8 @@ class Player {
         this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
+
+        this.statistics = new Statistics(savedPlayer.statistics);
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -122,6 +125,7 @@ class Player {
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
+    private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
@@ -148,6 +152,7 @@ class Player {
     public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
     public achievementsCompleted: { [name: string]: boolean };
+    public statistics: Statistics;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -330,6 +335,7 @@ class Player {
             Save.store(player);
         }
         player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
+        GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
 
     public hasBadge(badge: GameConstants.Badge) {
@@ -349,6 +355,7 @@ class Player {
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
         this._money(Math.floor(this._money() + money * oakItemBonus));
+        GameHelper.incrementObservable(this.statistics.totalMoney, money);
     }
 
     public gainDungeonTokens(tokens: number) {
@@ -552,6 +559,14 @@ class Player {
 
     set town(value: KnockoutObservable<Town>) {
         this._town = value;
+    }
+
+    get currentTown(): KnockoutObservable<string> {
+        return this._currentTown;
+    }
+
+    set currentTown(value: KnockoutObservable<string>) {
+        this._currentTown = value;
     }
 
     get oakItemsEquipped(): string[] {
@@ -768,7 +783,8 @@ class Player {
             "_eggSlots",
             "_shardUpgrades",
             "_shardsCollected",
-            "achievementsCompleted"
+            "statistics",
+            "achievementsCompleted",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

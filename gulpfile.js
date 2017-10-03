@@ -12,6 +12,7 @@ const del = require('del');
 const runSequence = require('run-sequence');
 const bsConfig = require("gulp-bootstrap-configurator");
 const less = require('gulp-less');
+const gulpImport = require('gulp-html-import');
 
 /**
  * Push build to gh-pages
@@ -73,6 +74,13 @@ gulp.task('browserSync', function () {
     });
 });
 
+gulp.task('import', function () {
+    const htmlDest = './build';
+    gulp.src('./src/index.html')
+        .pipe(gulpImport('./src/components/'))
+        .pipe(gulp.dest(htmlDest)); 
+})
+
 gulp.task('html', function () {
     const htmlDest = './build';
 
@@ -113,7 +121,7 @@ gulp.task('copyWebsite', function () {
     gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
 });
 
-gulp.task('build', ['copy', 'assets', 'html', 'scripts', 'styles']);
+gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles']);
 
 gulp.task('website', done => {
     runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', () => done());
