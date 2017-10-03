@@ -1171,61 +1171,7 @@
 @import "save.html"
 
 <!-- Quests Modal-->
-<div class="modal noselect fade" id="QuestModal" tabindex="-1" role="dialog" aria-labelledby="QuestModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4>Quests</h4>
-                <div class='col-6'>
-                    <div data-bind='text: "Lvl. "+player.questLevel'></div>
-                    <div class="progress" style='height: 5px'>
-                        <div class="progress-bar bg-info" role="progressbar"
-                             data-bind="attr:{ style: 'width:' + player.percentToNextQuestLevel() + '%' }"
-                             aria-valuemin="0" aria-valuemax="100">
-                        </div>
-                    </div>
-                </div>
-                <p id='questPoints' data-bind='text: "Quest Points: " + player._questPoints()'></p>
-            </div>
-            <div class="modal-body">
-                <div id='questHead' class='row justify-content-between'>
-                    <h5 class='col-5 offset-2' style="text-align: left">Description</h5>
-                    <h5 class='col-2'>Reward</h5>
-                    <p class='col-2'></p>
-                </div>
-                <div data-bind='foreach: QuestHelper.questList'>
-                    <div class='row justify-content-between quest'>
-                        <span class='col-5 offset-2 questDescription' data-bind='text: description'></span>
-                        <span class='col-2 questReward' data-bind='text: pointsReward'></span>
-                        <div class='col-2'>
-                            <button class='btn btn-primary btn-sm' data-bind='visible: !player.currentQuest() && !player.completedQuestList[index](),
-                                                                       click: function(){$data.beginQuest();$("#QuestModal").modal("hide")}'>
-                                Start
-                            </button>
-                            <button class='btn btn-primary' data-bind='visible: player.currentQuest() && (player.currentQuest().index == $data.index) && $data.isCompleted(),
-                                                                       click: $data.claimReward;player.completedQuestList[$index](true)'>
-                                Claim Reward
-                            </button>
-                            <p data-bind='visible: $data.inProgress(), text: progress'></p>
-                            <p data-bind='visible: player.completedQuestList[index]()'>Completed</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <div id='refreshQuests'>
-                    <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()'
-                            data-bind='text: "Refresh",
-                                       enable: QuestHelper.canAffordRefresh()'></button>
-                    <p data-bind='text: "Cost: " + QuestHelper.getRefreshCost(),
-                                  css: { "text-danger": !QuestHelper.canAffordRefresh() }'></p>
-                </div>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
+@import "quests.html"
 
 </body>
 </html>
