@@ -5,6 +5,7 @@ class MapHelper {
             if (this.accessToRoute(route, region)) {
                 $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 player.route(route);
+                player.currentTown("");
                 $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
                 Battle.generateNewEnemy();
                 Game.gameState(GameConstants.GameState.fighting);
@@ -45,6 +46,18 @@ class MapHelper {
         });
     }
 
+    public static calculateTownCssClass(town: string): KnockoutComputed<string> {
+        return ko.computed(function () {
+            if (player.currentTown() == town) {
+                return "city currentTown";
+            }
+            if (MapHelper.accessToTown(town)) {
+                return "city unlockedTown";
+            }
+            return "city lockedTown";
+        });
+    }
+
     public static accessToTown(townName: string): boolean {
         let town = TownList[townName];
         for (let i of town.reqRoutes) {
@@ -59,9 +72,10 @@ class MapHelper {
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
             Game.gameState(GameConstants.GameState.idle);
-            $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
+            $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute'); //pretty sure any jquery in typescript does not work fyi
             player.route(0);
             player.town(TownList[townName]);
+            player.currentTown(townName);
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
             Game.applyRouteBindings();

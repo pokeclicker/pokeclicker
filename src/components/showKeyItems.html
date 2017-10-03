@@ -1,0 +1,62 @@
+<div class="modal" id="showKeyitemsModal" tabindex="-1" role="dialog"
+aria-labelledby="showKeyitemModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg" role="document">
+   <div class="modal-content" style="text-align: center">
+       <div class="modal-header">
+           <div style="width: 100%;">
+               <img style="float:right;margin-right:10px;"
+                    data-bind="tooltip: { title: 'An overview of all Key items you have collected so far. Click on a key item to get more information.', trigger: 'hover', placement:'right' }"
+                    src="assets/images/questionmark.png">
+
+               <img src="assets/images/oak.png">
+               <h5 class="modal-title" id="showKeyitemModalLabel">Key items</h5>
+
+           </div>
+       </div>
+       <div class="modal-body">
+
+           <div class="page-item" style="background-color: white;">
+
+               <div class="row no-gutters justify-content-sm-center"
+                    data-bind="foreach: KeyItemHandler.keyItemList">
+                   <div class="col-sm-2">
+                       <img class="clickable key-item" src=""
+                            data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
+                             css: {'oak-item-locked': !player.hasKeyItem($data.name())
+
+                                   },
+                            event: {
+                               mouseover: function(){KeyItemHandler.hover($data.name())},
+                               click: function(){KeyItemHandler.click($data.name())},
+                               mouseout : function(){KeyItemHandler.hoverRelease()}
+                               }">
+                   </div>
+               </div>
+
+               <div class="card oak-item-info" style="height:90px">
+                   <div data-bind="if: KeyItemHandler.inspectedItem() !== null">
+                       <div class="row justify-content-sm-center">
+                           <div style="height: 20px" class="col-sm-11">
+                               <b><span data-bind="text: KeyItemHandler.inspectedItem().name()"></span></b>
+                           </div>
+                       </div>
+                       <div class="row justify-content-sm-center">
+                           <div class="col-sm-11">
+                               <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
+                                   <p style="margin-top: 5px"
+                                      data-bind="text: KeyItemHandler.inspectedItem().description"></p>
+                               </div>
+                               <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
+                                   <p style="margin-top: 5px">?????</p>
+                               </div>
+                           </div>
+                       </div>
+
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+</div>

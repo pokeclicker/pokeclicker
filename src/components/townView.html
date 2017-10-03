@@ -1,0 +1,87 @@
+<div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
+class="justify-content-center no-gutters no-select">
+
+<div data-bind="if:player.town().dungeon()">
+</div>
+
+<div data-bind="ifnot:player.town().dungeon()">
+   <img style="float:right;margin-right:10px;margin-top:10px;"
+        data-bind="tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'right' }"
+        src="assets/images/questionmark.png">
+</div>
+
+<div class="row justify-content-center no-gutters" style="min-height: 100px;">
+   <div class="col no-gutters">
+       <div data-bind="if: player.town() instanceof PokemonLeague">
+           <ul class="nav flex-sm-column featureList pokemonLeagueList"
+               data-bind="foreach: player.town().gymList">
+               <li class="nav-item">
+                   <button
+                           data-bind="text: $data.leaderName,
+                                      disable: !Gym.isUnlocked($data),
+                                      click: function() {GymRunner.startGym($data)},
+                                      attr: { class: Gym.calculateCssClass($data)}">
+                       E4 Leader
+                   </button>
+               </li>
+           </ul>
+       </div>
+       <ul class="nav flex-sm-column featureList">
+           <li class="nav-item" data-bind="if:player.town().gym">
+               <button data-bind="attr: { class: Gym.calculateCssClass(player.town().gym()) }"
+                       onclick="GymRunner.startGym(player.town().gym())">
+                   Gym
+               </button>
+           </li>
+           <li class="nav-item" data-bind="if:player.town().shop">
+               <button class="btn btn-secondary"
+                       onclick="ShopHandler.showShop(player.town().shop())">Shop
+               </button>
+           </li>
+           <div data-bind="if:player.town().dungeon()">
+               <li class="nav-item" data-bind="if: player.town() instanceof DungeonTown">
+                   <button class="btn btn-secondary"
+                           onclick="DungeonRunner.initializeDungeon(player.town().dungeon())">
+                       Start<br>
+                       <span data-bind="text: player.town().dungeon().tokenCost"></span>
+                       tokens
+                   </button>
+               </li>
+
+               <li class="nav-item"
+                   data-bind="if:(!(player.town() instanceof DungeonTown) && player.town() instanceof Town)">
+                   <button class="btn btn-secondary"
+                           onclick="MapHelper.moveToTown(player.town().dungeon().name())">
+                       <span data-bind="text: player.town().dungeon().name()"></span>
+                   </button>
+               </li>
+
+           </div>
+       </ul>
+   </div>
+   <div class="col-7 no-gutters">
+       <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
+       <img class="townImage no-select" src=""
+            data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
+   </div>
+   <div class="col no-gutters"></div>
+
+</div>
+<div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
+   <div class="card">
+       <!--Display all available Pokémon in this dungeon-->
+       <ul class="list-inline"
+           data-bind="foreach: player.town().dungeon().allPokemonNames">
+           <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
+               <img class="dungeon-pokemon-preview" src=""
+                    data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+           </li>
+           <li class="list-inline-item"
+               data-bind="ifnot: player.alreadyCaughtPokemon($data)">
+               <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src=""
+                    data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+           </li>
+       </ul>
+   </div>
+</div>
+</div>

@@ -146,7 +146,7 @@ class Game {
 
     static applyRouteBindings() {
         $('path, rect').hover(function () {
-            let id = $(this).attr('id');
+            let id = $(this).attr('data-town');
             if (id && id != 'mapTooltipWrapper') {
                 let tooltip = $('#mapTooltip');
                 tooltip.text(id);
