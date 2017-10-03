@@ -1,62 +1,113 @@
-<div class="modal" id="showKeyitemsModal" tabindex="-1" role="dialog"
-aria-labelledby="showKeyitemModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content" style="text-align: center">
-       <div class="modal-header">
-           <div style="width: 100%;">
-               <img style="float:right;margin-right:10px;"
-                    data-bind="tooltip: { title: 'An overview of all Key items you have collected so far. Click on a key item to get more information.', trigger: 'hover', placement:'right' }"
-                    src="assets/images/questionmark.png">
+<!-- Show Items modal-->
+<div class="modal" id="showItemsModal" tabindex="-1" role="dialog"
+     aria-labelledby="showItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header">
 
-               <img src="assets/images/oak.png">
-               <h5 class="modal-title" id="showKeyitemModalLabel">Key items</h5>
+                <ul style="width:100%" class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#items">Evolution stones</a>
+                    </li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
+                </ul>
 
-           </div>
-       </div>
-       <div class="modal-body">
 
-           <div class="page-item" style="background-color: white;">
+            </div>
 
-               <div class="row no-gutters justify-content-sm-center"
-                    data-bind="foreach: KeyItemHandler.keyItemList">
-                   <div class="col-sm-2">
-                       <img class="clickable key-item" src=""
-                            data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
-                             css: {'oak-item-locked': !player.hasKeyItem($data.name())
+            <div class="tab-content">
+                <div id="items" class="tab-pane fade in active show">
+                    <div class="modal-body">
 
-                                   },
-                            event: {
-                               mouseover: function(){KeyItemHandler.hover($data.name())},
-                               click: function(){KeyItemHandler.click($data.name())},
-                               mouseout : function(){KeyItemHandler.hoverRelease()}
-                               }">
-                   </div>
-               </div>
+                        <div class="page-item" style="background-color: white;">
 
-               <div class="card oak-item-info" style="height:90px">
-                   <div data-bind="if: KeyItemHandler.inspectedItem() !== null">
-                       <div class="row justify-content-sm-center">
-                           <div style="height: 20px" class="col-sm-11">
-                               <b><span data-bind="text: KeyItemHandler.inspectedItem().name()"></span></b>
-                           </div>
-                       </div>
-                       <div class="row justify-content-sm-center">
-                           <div class="col-sm-11">
-                               <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
-                                   <p style="margin-top: 5px"
-                                      data-bind="text: KeyItemHandler.inspectedItem().description"></p>
-                               </div>
-                               <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
-                                   <p style="margin-top: 5px">?????</p>
-                               </div>
-                           </div>
-                       </div>
+                            <div class="row no-gutters justify-content-sm-center">
 
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
-</div>
+
+
+                                <div class="row justify-content-center">
+                                    <div class="col"><img src="assets/images/items/Fire_stone.png">
+                                        <div data-bind="text: player._itemList['Fire_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Water_stone.png">
+                                        <div data-bind="text: player._itemList['Water_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Leaf_stone.png">
+                                        <div data-bind="text: player._itemList['Leaf_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Thunder_stone.png">
+                                        <div data-bind="text: player._itemList['Thunder_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Moon_stone.png">
+                                        <div data-bind="text: player._itemList['Moon_stone']"></div>
+                                    </div>
+                                    <div class="col"><img src="assets/images/items/Trade_stone.png">
+                                        <div data-bind="text: player._itemList['Trade_stone']"></div>
+                                    </div>
+
+                                </div>
+                                <div class="row justify-content-center">
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="keyItems" class="tab-pane fade">
+                    <div class="modal-body">
+                        <div style="width: 100%;">
+                            <img style="float:right;margin-right:10px;margin-top:10px"
+                                 data-bind="tooltip: { title: 'An overview of all Key items you have collected so far. Click on a key item to get more information.', trigger: 'hover', placement:'right' }"
+                                 src="assets/images/questionmark.png">
+
+
+                        </div>
+                        <div class="page-item" style="background-color: white;">
+
+                            <div class="row no-gutters justify-content-sm-center"
+                                 data-bind="foreach: KeyItemHandler.keyItemList">
+                                <div class="col-sm-2">
+                                    <img class="clickable key-item" src=""
+                                         data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
+                                  css: {'oak-item-locked': !player.hasKeyItem($data.name())
+
+                                        },
+                                 event: {
+                                    mouseover: function(){KeyItemHandler.hover($data.name())},
+                                    click: function(){KeyItemHandler.click($data.name())},
+                                    mouseout : function(){KeyItemHandler.hoverRelease()}
+                                    }">
+                                </div>
+                            </div>
+
+                            <div class="card oak-item-info" style="height:90px">
+                                <div data-bind="if: KeyItemHandler.inspectedItem() !== null">
+                                    <div class="row justify-content-sm-center">
+                                        <div style="height: 20px" class="col-sm-11">
+                                            <b><span data-bind="text: KeyItemHandler.inspectedItem().name()"></span></b>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-sm-center">
+                                        <div class="col-sm-11">
+                                            <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
+                                                <p style="margin-top: 5px"
+                                                   data-bind="text: KeyItemHandler.inspectedItem().description"></p>
+                                            </div>
+                                            <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
+                                                <p style="margin-top: 5px">?????</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
