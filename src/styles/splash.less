@@ -1,0 +1,50 @@
+.loader {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: url('../assets/images/background.png') top;
+  background-size: cover;
+  z-index: 9999;
+}
+
+.loader-wrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.loader-pokeball {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -48px;
+  margin-left: -48px;
+  animation-name: loader;
+  animation-duration: 1500ms;
+  animation-timing-function: ease-in-out;
+}
+
+.loader-title {
+  animation-name: title-move-up;
+  animation-duration: 1s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes loader {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes title-move-up {
+  from {
+    margin-top: 20%;
+  }
+  to {
+    margin-top: 0;
+  }
+}
