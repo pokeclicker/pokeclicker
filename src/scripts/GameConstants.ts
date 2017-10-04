@@ -20,6 +20,10 @@ namespace GameConstants {
     export const AMOUNT_OF_POKEMONS = 151;
     export const AMOUNT_OF_BADGES = 8;
 
+    export const MEW_CHANCE_ROUTE_1 = 8192
+    export const MEW_CHANCE_ROUTE_25 = 4096
+    export const MEW_CHANCE_DIFF = MEW_CHANCE_ROUTE_1 - MEW_CHANCE_ROUTE_25
+
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
@@ -476,4 +480,33 @@ namespace GameConstants {
         "Aerodactyl": "amber",
 
     }
+
+    export const Gyms = [
+        "Pewter City",
+        "Cerulean City",
+        "Vermillion City",
+        "Celadon City",
+        "Saffron City",
+        "Fuchsia City",
+        "Cinnabar Island",
+        "Viridian City",
+        "Elite Lorelei",
+        "Elite Bruno",
+        "Elite Agatha",
+        "Elite Lance",
+        "Champion Blue"
+    ];
+
+    export const Dungeons = [
+        "Viridian Forest",
+        "Digletts Cave",
+        "Mt. Moon",
+        "Rock Tunnel",
+        "Power Plant",
+        "Pokemon Tower",
+        "Seafoam Islands",
+        "Pokemon Mansion",
+        "Victory Road",
+        "Cerulean Cave"
+    ];
 }

@@ -1,0 +1,60 @@
+<div id="shopView"
+data-bind="if: Game.gameState() == GameConstants.GameState.shop">
+<div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
+   <div class="col-sm-3">
+       <div
+               data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
+           <img src="" height="36px"
+                data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
+           <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
+           <p>
+               <img src="" class="currencyImage"
+                    data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
+               <span data-bind="text: totalPrice">Price</span>
+           </p>
+       </div>
+   </div>
+</div>
+<div class="row justify-content-center">
+   <div class="col-11 col-sm-10 col-md-11">
+       <div class="input-group" style="margin-bottom: 6px; margin-top: 6px">
+           <span class="input-group-btn">
+               <button class="btn btn-secondary smallButton smallFont" type="button"
+                       onclick="ShopHandler.increaseAmount(-100)">-100
+               </button>
+           </span>
+           <span class="input-group-btn">
+               <button class="btn btn-secondary smallButton smallFont"
+                       type="button"
+                       onclick="ShopHandler.increaseAmount(-10)">-10
+               </button>
+           </span>
+           <span class="input-group-btn">
+               <button class="btn btn-danger smallButton smallFont"
+                       onclick="ShopHandler.resetAmount()">1
+               </button>
+           </span>
+           <input id="amountOfItems" type="number" class="form-control form-control-number"
+                  value="1" min="1" required name="amountOfItems"
+                  oninput="ShopHandler.amount(parseInt($(this).val().toString()) || 0);"
+                  onchange="ShopHandler.amount(parseInt($(this).val().toString()) || 0);" title="">
+           <span class="input-group-btn">
+               <button class="btn btn-secondary smallButton smallFont" type="button"
+                       onclick="ShopHandler.increaseAmount(10)">+10
+               </button>
+           </span>
+           <span class="input-group-btn">
+               <button class="btn btn-secondary smallButton smallFont"
+                       type="button"
+                       onclick="ShopHandler.increaseAmount(100)">+100
+               </button>
+           </span>
+           <span class="input-group-btn" style="float: right;">
+               <button data-bind="attr: {class: ShopHandler.calculateButtonCss()}"
+                       onclick="ShopHandler.buyItem()">Buy
+               </button>
+           </span>
+       </div>
+   </div>
+</div>
+</div>

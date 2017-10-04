@@ -6,6 +6,6 @@ class MoneyRequirement extends Requirement{
     }
 
     public getProgress(){
-        return Math.min(player.money, this.requiredValue);
+        return Math.min(player.statistics.totalMoney(), this.requiredValue);
     }
 }
