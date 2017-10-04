@@ -26,6 +26,9 @@ class QuestHelper{
             case "GainMoney":
                 amount = SeededRand.intBetween(20000, 60000);
                 return new GainMoneyQuest(amount);
+            case "GainTokens":
+                amount = SeededRand.intBetween(1000, 8000);
+                return new GainTokensQuest(amount);
             case "HatchEggs":
                 amount = SeededRand.intBetween(1, 30);
                 return new HatchEggsQuest(amount);

@@ -9,6 +9,7 @@ class Statistics {
     public digItems: KnockoutObservable<number>; // Total treasure found in underground
     public digDeeper: KnockoutObservable<number>; // Total underground layers completed
     public totalMoney: KnockoutObservable<number>;
+    public totalTokens: KnockoutObservable<number>;
     public pokeballsUsed: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
@@ -26,6 +27,7 @@ class Statistics {
             "digItems",
             "digDeeper",
             "totalMoney",
+            "totalTokens",
         ];
 
         let arrayObservables = [
