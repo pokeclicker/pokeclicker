@@ -14,7 +14,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         if (gymTown.indexOf("Elite") == -1 && gymTown.indexOf("Champion") == -1) {
             desc += "gym ";
         }
-        desc += `${amount} times`;
+        desc += `${amount} times.`;
         return desc;
     }
 
