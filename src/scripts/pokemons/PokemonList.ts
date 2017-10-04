@@ -2028,6 +2028,1455 @@ const pokemonList = [
         "levelType": "mediumslow",
         "exp": 270,
         "eggCycles": 120
+    },
+    {
+      "id": "152",
+      "name": "Chikorita",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "16",
+      "type": [
+        "Grass"
+      ],
+      "attack": "49",
+      "levelType": "mediumslow",
+      "exp": "64",
+      "eggCycles": "20"
+    },
+    {
+      "id": "153",
+      "name": "Bayleef",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "32",
+      "type": [
+        "Grass"
+      ],
+      "attack": "62",
+      "levelType": "mediumslow",
+      "exp": "142",
+      "eggCycles": "20"
+    },
+    {
+      "id": "154",
+      "name": "Meganium",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Grass"
+      ],
+      "attack": "82",
+      "levelType": "mediumslow",
+      "exp": "236",
+      "eggCycles": "20"
+    },
+    {
+      "id": "155",
+      "name": "Cyndaquil",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "14",
+      "type": [
+        "Fire"
+      ],
+      "attack": "52",
+      "levelType": "mediumslow",
+      "exp": "62",
+      "eggCycles": "20"
+    },
+    {
+      "id": "156",
+      "name": "Quilava",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "36",
+      "type": [
+        "Fire"
+      ],
+      "attack": "64",
+      "levelType": "mediumslow",
+      "exp": "142",
+      "eggCycles": "20"
+    },
+    {
+      "id": "157",
+      "name": "Typhlosion",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Fire"
+      ],
+      "attack": "84",
+      "levelType": "mediumslow",
+      "exp": "240",
+      "eggCycles": "20"
+    },
+    {
+      "id": "158",
+      "name": "Totodile",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "18",
+      "type": [
+        "Water"
+      ],
+      "attack": "65",
+      "levelType": "mediumslow",
+      "exp": "63",
+      "eggCycles": "20"
+    },
+    {
+      "id": "159",
+      "name": "Croconaw",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "30",
+      "type": [
+        "Water"
+      ],
+      "attack": "80",
+      "levelType": "mediumslow",
+      "exp": "142",
+      "eggCycles": "20"
+    },
+    {
+      "id": "160",
+      "name": "Feraligatr",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water"
+      ],
+      "attack": "105",
+      "levelType": "mediumslow",
+      "exp": "239",
+      "eggCycles": "20"
+    },
+    {
+      "id": "161",
+      "name": "Sentret",
+      "catchRate": "255",
+      "evolution": "",
+      "evoLevel": "15",
+      "type": [
+        "Normal"
+      ],
+      "attack": "46",
+      "levelType": "mediumfast",
+      "exp": "43",
+      "eggCycles": "15"
+    },
+    {
+      "id": "162",
+      "name": "Furret",
+      "catchRate": "90",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal"
+      ],
+      "attack": "76",
+      "levelType": "mediumfast",
+      "exp": "145",
+      "eggCycles": "15"
+    },
+    {
+      "id": "163",
+      "name": "Hoothoot",
+      "catchRate": "255",
+      "evolution": "",
+      "evoLevel": "20",
+      "type": [
+        "Normal",
+        "Flying"
+      ],
+      "attack": "30",
+      "levelType": "mediumfast",
+      "exp": "52",
+      "eggCycles": "15"
+    },
+    {
+      "id": "164",
+      "name": "Noctowl",
+      "catchRate": "90",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal",
+        "Flying"
+      ],
+      "attack": "50",
+      "levelType": "mediumfast",
+      "exp": "158",
+      "eggCycles": "15"
+    },
+    {
+      "id": "165",
+      "name": "Ledyba",
+      "catchRate": "255",
+      "evolution": "",
+      "evoLevel": "18",
+      "type": [
+        "Bug",
+        "Flying"
+      ],
+      "attack": "20",
+      "levelType": "fast",
+      "exp": "53",
+      "eggCycles": "15"
+    },
+    {
+      "id": "166",
+      "name": "Ledian",
+      "catchRate": "90",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Bug",
+        "Flying"
+      ],
+      "attack": "35",
+      "levelType": "fast",
+      "exp": "137",
+      "eggCycles": "15"
+    },
+    {
+      "id": "167",
+      "name": "Spinarak",
+      "catchRate": "255",
+      "evolution": "",
+      "evoLevel": "22",
+      "type": [
+        "Bug",
+        "Poison"
+      ],
+      "attack": "60",
+      "levelType": "fast",
+      "exp": "50",
+      "eggCycles": "15"
+    },
+    {
+      "id": "168",
+      "name": "Ariados",
+      "catchRate": "90",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Bug",
+        "Poison"
+      ],
+      "attack": "90",
+      "levelType": "fast",
+      "exp": "140",
+      "eggCycles": "15"
+    },
+    {
+      "id": "169",
+      "name": "Crobat",
+      "catchRate": "90",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Poison",
+        "Flying"
+      ],
+      "attack": "90",
+      "levelType": "mediumfast",
+      "exp": "241",
+      "eggCycles": "15"
+    },
+    {
+      "id": "170",
+      "name": "Chinchou",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "27",
+      "type": [
+        "Water",
+        "Electric"
+      ],
+      "attack": "38",
+      "levelType": "slow",
+      "exp": "66",
+      "eggCycles": "20"
+    },
+    {
+      "id": "171",
+      "name": "Lanturn",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water",
+        "Electric"
+      ],
+      "attack": "58",
+      "levelType": "slow",
+      "exp": "161",
+      "eggCycles": "20"
+    },
+    {
+      "id": "172",
+      "name": "Pichu",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Electric"
+      ],
+      "attack": "40",
+      "levelType": "mediumfast",
+      "exp": "41",
+      "eggCycles": "10"
+    },
+    {
+      "id": "173",
+      "name": "Cleffa",
+      "catchRate": "150",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Fairy"
+      ],
+      "attack": "25",
+      "levelType": "fast",
+      "exp": "44",
+      "eggCycles": "10"
+    },
+    {
+      "id": "174",
+      "name": "Igglybuff",
+      "catchRate": "170",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal",
+        "Fairy"
+      ],
+      "attack": "30",
+      "levelType": "fast",
+      "exp": "42",
+      "eggCycles": "10"
+    },
+    {
+      "id": "175",
+      "name": "Togepi",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Fairy"
+      ],
+      "attack": "20",
+      "levelType": "fast",
+      "exp": "49",
+      "eggCycles": "10"
+    },
+    {
+      "id": "176",
+      "name": "Togetic",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Fairy",
+        "Flying"
+      ],
+      "attack": "40",
+      "levelType": "fast",
+      "exp": "142",
+      "eggCycles": "10"
+    },
+    {
+      "id": "177",
+      "name": "Natu",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "25",
+      "type": [
+        "Psychic",
+        "Flying"
+      ],
+      "attack": "50",
+      "levelType": "mediumfast",
+      "exp": "64",
+      "eggCycles": "20"
+    },
+    {
+      "id": "178",
+      "name": "Xatu",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Psychic",
+        "Flying"
+      ],
+      "attack": "75",
+      "levelType": "mediumfast",
+      "exp": "165",
+      "eggCycles": "20"
+    },
+    {
+      "id": "179",
+      "name": "Mareep",
+      "catchRate": "235",
+      "evolution": "",
+      "evoLevel": "15",
+      "type": [
+        "Electric"
+      ],
+      "attack": "40",
+      "levelType": "mediumslow",
+      "exp": "56",
+      "eggCycles": "20"
+    },
+    {
+      "id": "180",
+      "name": "Flaaffy",
+      "catchRate": "120",
+      "evolution": "",
+      "evoLevel": "30",
+      "type": [
+        "Electric"
+      ],
+      "attack": "55",
+      "levelType": "mediumslow",
+      "exp": "128",
+      "eggCycles": "20"
+    },
+    {
+      "id": "181",
+      "name": "Ampharos",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Electric"
+      ],
+      "attack": "75",
+      "levelType": "mediumslow",
+      "exp": "230",
+      "eggCycles": "20"
+    },
+    {
+      "id": "182",
+      "name": "Bellossom",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Grass"
+      ],
+      "attack": "80",
+      "levelType": "mediumslow",
+      "exp": "221",
+      "eggCycles": "20"
+    },
+    {
+      "id": "183",
+      "name": "Marill",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "18",
+      "type": [
+        "Water",
+        "Fairy"
+      ],
+      "attack": "20",
+      "levelType": "fast",
+      "exp": "88",
+      "eggCycles": "10"
+    },
+    {
+      "id": "184",
+      "name": "Azumarill",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water",
+        "Fairy"
+      ],
+      "attack": "50",
+      "levelType": "fast",
+      "exp": "189",
+      "eggCycles": "10"
+    },
+    {
+      "id": "185",
+      "name": "Sudowoodo",
+      "catchRate": "65",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Rock"
+      ],
+      "attack": "100",
+      "levelType": "mediumfast",
+      "exp": "144",
+      "eggCycles": "20"
+    },
+    {
+      "id": "186",
+      "name": "Politoed",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water"
+      ],
+      "attack": "75",
+      "levelType": "mediumslow",
+      "exp": "225",
+      "eggCycles": "20"
+    },
+    {
+      "id": "187",
+      "name": "Hoppip",
+      "catchRate": "255",
+      "evolution": "",
+      "evoLevel": "18",
+      "type": [
+        "Grass",
+        "Flying"
+      ],
+      "attack": "35",
+      "levelType": "mediumslow",
+      "exp": "50",
+      "eggCycles": "20"
+    },
+    {
+      "id": "188",
+      "name": "Skiploom",
+      "catchRate": "120",
+      "evolution": "",
+      "evoLevel": "27",
+      "type": [
+        "Grass",
+        "Flying"
+      ],
+      "attack": "45",
+      "levelType": "mediumslow",
+      "exp": "119",
+      "eggCycles": "20"
+    },
+    {
+      "id": "189",
+      "name": "Jumpluff",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Grass",
+        "Flying"
+      ],
+      "attack": "55",
+      "levelType": "mediumslow",
+      "exp": "207",
+      "eggCycles": "20"
+    },
+    {
+      "id": "190",
+      "name": "Aipom",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal"
+      ],
+      "attack": "70",
+      "levelType": "fast",
+      "exp": "72",
+      "eggCycles": "20"
+    },
+    {
+      "id": "191",
+      "name": "Sunkern",
+      "catchRate": "235",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Grass"
+      ],
+      "attack": "30",
+      "levelType": "mediumslow",
+      "exp": "36",
+      "eggCycles": "20"
+    },
+    {
+      "id": "192",
+      "name": "Sunflora",
+      "catchRate": "120",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Grass"
+      ],
+      "attack": "75",
+      "levelType": "mediumslow",
+      "exp": "149",
+      "eggCycles": "20"
+    },
+    {
+      "id": "193",
+      "name": "Yanma",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Bug",
+        "Flying"
+      ],
+      "attack": "65",
+      "levelType": "mediumfast",
+      "exp": "78",
+      "eggCycles": "20"
+    },
+    {
+      "id": "194",
+      "name": "Wooper",
+      "catchRate": "255",
+      "evolution": "",
+      "evoLevel": "20",
+      "type": [
+        "Water",
+        "Ground"
+      ],
+      "attack": "45",
+      "levelType": "mediumfast",
+      "exp": "42",
+      "eggCycles": "20"
+    },
+    {
+      "id": "195",
+      "name": "Quagsire",
+      "catchRate": "90",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water",
+        "Ground"
+      ],
+      "attack": "85",
+      "levelType": "mediumfast",
+      "exp": "151",
+      "eggCycles": "20"
+    },
+    {
+      "id": "196",
+      "name": "Espeon",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Psychic"
+      ],
+      "attack": "65",
+      "levelType": "mediumfast",
+      "exp": "184",
+      "eggCycles": "35"
+    },
+    {
+      "id": "197",
+      "name": "Umbreon",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Dark"
+      ],
+      "attack": "65",
+      "levelType": "mediumfast",
+      "exp": "184",
+      "eggCycles": "35"
+    },
+    {
+      "id": "198",
+      "name": "Murkrow",
+      "catchRate": "30",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Dark",
+        "Flying"
+      ],
+      "attack": "85",
+      "levelType": "mediumslow",
+      "exp": "81",
+      "eggCycles": "20"
+    },
+    {
+      "id": "199",
+      "name": "Slowking",
+      "catchRate": "70",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water",
+        "Psychic"
+      ],
+      "attack": "75",
+      "levelType": "mediumfast",
+      "exp": "172",
+      "eggCycles": "20"
+    },
+    {
+      "id": "200",
+      "name": "Misdreavus",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Ghost"
+      ],
+      "attack": "60",
+      "levelType": "fast",
+      "exp": "87",
+      "eggCycles": "25"
+    },
+    {
+      "id": "201",
+      "name": "Unown",
+      "catchRate": "225",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Psychic"
+      ],
+      "attack": "72",
+      "levelType": "mediumfast",
+      "exp": "118",
+      "eggCycles": "40"
+    },
+    {
+      "id": "202",
+      "name": "Wobbuffet",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Psychic"
+      ],
+      "attack": "33",
+      "levelType": "mediumfast",
+      "exp": "142",
+      "eggCycles": "20"
+    },
+    {
+      "id": "203",
+      "name": "Girafarig",
+      "catchRate": "60",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal",
+        "Psychic"
+      ],
+      "attack": "80",
+      "levelType": "mediumfast",
+      "exp": "159",
+      "eggCycles": "20"
+    },
+    {
+      "id": "204",
+      "name": "Pineco",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "31",
+      "type": [
+        "Bug"
+      ],
+      "attack": "65",
+      "levelType": "mediumfast",
+      "exp": "58",
+      "eggCycles": "20"
+    },
+    {
+      "id": "205",
+      "name": "Forretress",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Bug",
+        "Steel"
+      ],
+      "attack": "90",
+      "levelType": "mediumfast",
+      "exp": "163",
+      "eggCycles": "20"
+    },
+    {
+      "id": "206",
+      "name": "Dunsparce",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal"
+      ],
+      "attack": "70",
+      "levelType": "mediumfast",
+      "exp": "145",
+      "eggCycles": "20"
+    },
+    {
+      "id": "207",
+      "name": "Gligar",
+      "catchRate": "60",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Ground",
+        "Flying"
+      ],
+      "attack": "75",
+      "levelType": "mediumslow",
+      "exp": "86",
+      "eggCycles": "20"
+    },
+    {
+      "id": "208",
+      "name": "Steelix",
+      "catchRate": "25",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Steel",
+        "Ground"
+      ],
+      "attack": "85",
+      "levelType": "mediumfast",
+      "exp": "179",
+      "eggCycles": "25"
+    },
+    {
+      "id": "209",
+      "name": "Snubbull",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "23",
+      "type": [
+        "Fairy"
+      ],
+      "attack": "80",
+      "levelType": "fast",
+      "exp": "60",
+      "eggCycles": "20"
+    },
+    {
+      "id": "210",
+      "name": "Granbull",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Fairy"
+      ],
+      "attack": "120",
+      "levelType": "fast",
+      "exp": "158",
+      "eggCycles": "20"
+    },
+    {
+      "id": "211",
+      "name": "Qwilfish",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water",
+        "Poison"
+      ],
+      "attack": "95",
+      "levelType": "mediumfast",
+      "exp": "88",
+      "eggCycles": "20"
+    },
+    {
+      "id": "212",
+      "name": "Scizor",
+      "catchRate": "25",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Bug",
+        "Steel"
+      ],
+      "attack": "130",
+      "levelType": "mediumfast",
+      "exp": "175",
+      "eggCycles": "25"
+    },
+    {
+      "id": "213",
+      "name": "Shuckle",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Bug",
+        "Rock"
+      ],
+      "attack": "10",
+      "levelType": "mediumslow",
+      "exp": "177",
+      "eggCycles": "20"
+    },
+    {
+      "id": "214",
+      "name": "Heracross",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Bug",
+        "Fighting"
+      ],
+      "attack": "125",
+      "levelType": "slow",
+      "exp": "175",
+      "eggCycles": "25"
+    },
+    {
+      "id": "215",
+      "name": "Sneasel",
+      "catchRate": "60",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Dark",
+        "Ice"
+      ],
+      "attack": "95",
+      "levelType": "mediumslow",
+      "exp": "86",
+      "eggCycles": "20"
+    },
+    {
+      "id": "216",
+      "name": "Teddiursa",
+      "catchRate": "120",
+      "evolution": "",
+      "evoLevel": "30",
+      "type": [
+        "Normal"
+      ],
+      "attack": "80",
+      "levelType": "mediumfast",
+      "exp": "66",
+      "eggCycles": "20"
+    },
+    {
+      "id": "217",
+      "name": "Ursaring",
+      "catchRate": "60",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal"
+      ],
+      "attack": "130",
+      "levelType": "mediumfast",
+      "exp": "175",
+      "eggCycles": "20"
+    },
+    {
+      "id": "218",
+      "name": "Slugma",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "38",
+      "type": [
+        "Fire"
+      ],
+      "attack": "40",
+      "levelType": "mediumfast",
+      "exp": "50",
+      "eggCycles": "20"
+    },
+    {
+      "id": "219",
+      "name": "Magcargo",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Fire",
+        "Rock"
+      ],
+      "attack": "50",
+      "levelType": "mediumfast",
+      "exp": "151",
+      "eggCycles": "20"
+    },
+    {
+      "id": "220",
+      "name": "Swinub",
+      "catchRate": "225",
+      "evolution": "",
+      "evoLevel": "33",
+      "type": [
+        "Ice",
+        "Ground"
+      ],
+      "attack": "50",
+      "levelType": "slow",
+      "exp": "50",
+      "eggCycles": "20"
+    },
+    {
+      "id": "221",
+      "name": "Piloswine",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Ice",
+        "Ground"
+      ],
+      "attack": "100",
+      "levelType": "slow",
+      "exp": "158",
+      "eggCycles": "20"
+    },
+    {
+      "id": "222",
+      "name": "Corsola",
+      "catchRate": "60",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water",
+        "Rock"
+      ],
+      "attack": "55",
+      "levelType": "fast",
+      "exp": "144",
+      "eggCycles": "20"
+    },
+    {
+      "id": "223",
+      "name": "Remoraid",
+      "catchRate": "190",
+      "evolution": "",
+      "evoLevel": "25",
+      "type": [
+        "Water"
+      ],
+      "attack": "65",
+      "levelType": "mediumfast",
+      "exp": "60",
+      "eggCycles": "20"
+    },
+    {
+      "id": "224",
+      "name": "Octillery",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water"
+      ],
+      "attack": "105",
+      "levelType": "mediumfast",
+      "exp": "168",
+      "eggCycles": "20"
+    },
+    {
+      "id": "225",
+      "name": "Delibird",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Ice",
+        "Flying"
+      ],
+      "attack": "55",
+      "levelType": "fast",
+      "exp": "116",
+      "eggCycles": "20"
+    },
+    {
+      "id": "226",
+      "name": "Mantine",
+      "catchRate": "25",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water",
+        "Flying"
+      ],
+      "attack": "40",
+      "levelType": "slow",
+      "exp": "170",
+      "eggCycles": "25"
+    },
+    {
+      "id": "227",
+      "name": "Skarmory",
+      "catchRate": "25",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Steel",
+        "Flying"
+      ],
+      "attack": "80",
+      "levelType": "slow",
+      "exp": "163",
+      "eggCycles": "25"
+    },
+    {
+      "id": "228",
+      "name": "Houndour",
+      "catchRate": "120",
+      "evolution": "",
+      "evoLevel": "24",
+      "type": [
+        "Dark",
+        "Fire"
+      ],
+      "attack": "60",
+      "levelType": "slow",
+      "exp": "66",
+      "eggCycles": "20"
+    },
+    {
+      "id": "229",
+      "name": "Houndoom",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Dark",
+        "Fire"
+      ],
+      "attack": "90",
+      "levelType": "slow",
+      "exp": "175",
+      "eggCycles": "20"
+    },
+    {
+      "id": "230",
+      "name": "Kingdra",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water",
+        "Dragon"
+      ],
+      "attack": "95",
+      "levelType": "mediumfast",
+      "exp": "243",
+      "eggCycles": "20"
+    },
+    {
+      "id": "231",
+      "name": "Phanpy",
+      "catchRate": "120",
+      "evolution": "",
+      "evoLevel": "25",
+      "type": [
+        "Ground"
+      ],
+      "attack": "60",
+      "levelType": "mediumfast",
+      "exp": "66",
+      "eggCycles": "20"
+    },
+    {
+      "id": "232",
+      "name": "Donphan",
+      "catchRate": "60",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Ground"
+      ],
+      "attack": "120",
+      "levelType": "mediumfast",
+      "exp": "175",
+      "eggCycles": "20"
+    },
+    {
+      "id": "233",
+      "name": "Porygon2",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal"
+      ],
+      "attack": "80",
+      "levelType": "mediumfast",
+      "exp": "180",
+      "eggCycles": "20"
+    },
+    {
+      "id": "234",
+      "name": "Stantler",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal"
+      ],
+      "attack": "95",
+      "levelType": "slow",
+      "exp": "163",
+      "eggCycles": "20"
+    },
+    {
+      "id": "235",
+      "name": "Smeargle",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal"
+      ],
+      "attack": "20",
+      "levelType": "fast",
+      "exp": "88",
+      "eggCycles": "20"
+    },
+    {
+      "id": "236",
+      "name": "Tyrogue",
+      "catchRate": "75",
+      "evolution": "",
+      "evoLevel": "20",
+      "type": [
+        "Fighting"
+      ],
+      "attack": "35",
+      "levelType": "mediumfast",
+      "exp": "42",
+      "eggCycles": "25"
+    },
+    {
+      "id": "237",
+      "name": "Hitmontop",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Fighting"
+      ],
+      "attack": "95",
+      "levelType": "mediumfast",
+      "exp": "159",
+      "eggCycles": "25"
+    },
+    {
+      "id": "238",
+      "name": "Smoochum",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "30",
+      "type": [
+        "Ice",
+        "Psychic"
+      ],
+      "attack": "30",
+      "levelType": "mediumfast",
+      "exp": "61",
+      "eggCycles": "25"
+    },
+    {
+      "id": "239",
+      "name": "Elekid",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "30",
+      "type": [
+        "Electric"
+      ],
+      "attack": "63",
+      "levelType": "mediumfast",
+      "exp": "72",
+      "eggCycles": "25"
+    },
+    {
+      "id": "240",
+      "name": "Magby",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "30",
+      "type": [
+        "Fire"
+      ],
+      "attack": "75",
+      "levelType": "mediumfast",
+      "exp": "73",
+      "eggCycles": "25"
+    },
+    {
+      "id": "241",
+      "name": "Miltank",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal"
+      ],
+      "attack": "80",
+      "levelType": "slow",
+      "exp": "172",
+      "eggCycles": "20"
+    },
+    {
+      "id": "242",
+      "name": "Blissey",
+      "catchRate": "30",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Normal"
+      ],
+      "attack": "10",
+      "levelType": "fast",
+      "exp": "608",
+      "eggCycles": "40"
+    },
+    {
+      "id": "243",
+      "name": "Raikou",
+      "catchRate": "3",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Electric"
+      ],
+      "attack": "85",
+      "levelType": "slow",
+      "exp": "261",
+      "eggCycles": "80"
+    },
+    {
+      "id": "244",
+      "name": "Entei",
+      "catchRate": "3",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Fire"
+      ],
+      "attack": "115",
+      "levelType": "slow",
+      "exp": "261",
+      "eggCycles": "80"
+    },
+    {
+      "id": "245",
+      "name": "Suicune",
+      "catchRate": "3",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Water"
+      ],
+      "attack": "75",
+      "levelType": "slow",
+      "exp": "261",
+      "eggCycles": "80"
+    },
+    {
+      "id": "246",
+      "name": "Larvitar",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "30",
+      "type": [
+        "Rock",
+        "Ground"
+      ],
+      "attack": "64",
+      "levelType": "slow",
+      "exp": "60",
+      "eggCycles": "40"
+    },
+    {
+      "id": "247",
+      "name": "Pupitar",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "55",
+      "type": [
+        "Rock",
+        "Ground"
+      ],
+      "attack": "84",
+      "levelType": "slow",
+      "exp": "144",
+      "eggCycles": "40"
+    },
+    {
+      "id": "248",
+      "name": "Tyranitar",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Rock",
+        "Dark"
+      ],
+      "attack": "134",
+      "levelType": "slow",
+      "exp": "270",
+      "eggCycles": "40"
+    },
+    {
+      "id": "249",
+      "name": "Lugia",
+      "catchRate": "3",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Psychic",
+        "Flying"
+      ],
+      "attack": "90",
+      "levelType": "slow",
+      "exp": "306",
+      "eggCycles": "120"
+    },
+    {
+      "id": "250",
+      "name": "Ho-Oh",
+      "catchRate": "3",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Fire",
+        "Flying"
+      ],
+      "attack": "130",
+      "levelType": "slow",
+      "exp": "306",
+      "eggCycles": "120"
+    },
+    {
+      "id": "251",
+      "name": "Celebi",
+      "catchRate": "45",
+      "evolution": "",
+      "evoLevel": "",
+      "type": [
+        "Psychic",
+        "Grass"
+      ],
+      "attack": "100",
+      "levelType": "mediumslow",
+      "exp": "270",
+      "eggCycles": "120"
     }
 ];
 
