@@ -17,8 +17,8 @@ class Statistics {
     private static readonly arraySizes = {
         "gymsDefeated": GameConstants.Gyms.length,
         "dungeonsCleared": GameConstants.Dungeons.length,
-        "pokeballsUsed": 4,
-        "totalShards": 18,
+        "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,// remove "None" pokeball type
+        "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,// remove "None" pokemon type
         "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
     }
 
