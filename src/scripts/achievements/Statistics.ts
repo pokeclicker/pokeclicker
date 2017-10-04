@@ -12,12 +12,14 @@ class Statistics {
     public totalTokens: KnockoutObservable<number>;
     public pokeballsUsed: Array<KnockoutObservable<number>>;
     public totalShards: Array<KnockoutObservable<number>>;
+    public oakItemUses: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
         "gymsDefeated": GameConstants.Gyms.length,
         "dungeonsCleared": GameConstants.Dungeons.length,
         "pokeballsUsed": 4,
         "totalShards": 18,
+        "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
     }
 
     constructor(saved = {}) {
@@ -37,6 +39,7 @@ class Statistics {
             "dungeonsCleared",
             "pokeballsUsed",
             "totalShards",
+            "oakItemUses",
         ]
 
         for (let prop of observables) {

@@ -5,4 +5,8 @@ class GameHelper {
         obs(obs() + amt);
     }
 
+    public static enumLength(enumerable): number {
+        return Object.keys(enumerable).length / 2;
+    }
+
 }

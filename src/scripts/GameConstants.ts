@@ -140,6 +140,7 @@ namespace GameConstants {
     export const HATCH_EGGS_BASE_REWARD      = questBase * 33;      // Dimava
     export const MINE_LAYERS_BASE_REWARD     = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
     export const SHINY_BASE_REWARD           = questBase * 6000;    // Dimava
+    export const USE_OAK_ITEM_BASE_REWARD    = GameConstants.DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
 
     export const ACTIVE_QUEST_MULTIPLIER     = 4;
 
@@ -155,6 +156,7 @@ namespace GameConstants {
         "DefeatGym",
         "DefeatDungeon",
         "UsePokeball",
+        "UseOakItem",
     ];
 
     export const QUESTS_PER_SET = 10;
