@@ -29,6 +29,19 @@ class QuestHelper{
             case "GainTokens":
                 amount = SeededRand.intBetween(1000, 8000);
                 return new GainTokensQuest(amount);
+            case "GainShards":
+                let possibleTypes = [
+                    GameConstants.PokemonType.Normal,
+                    GameConstants.PokemonType.Poison,
+                    GameConstants.PokemonType.Water,
+                    GameConstants.PokemonType.Grass,
+                    GameConstants.PokemonType.Flying,
+                    GameConstants.PokemonType.Fire,
+                    GameConstants.PokemonType.Fighting,
+                ];
+                let type = SeededRand.fromArray(possibleTypes);
+                amount = SeededRand.intBetween(200, 600);
+                return new GainShardsQuest(type, amount);
             case "HatchEggs":
                 amount = SeededRand.intBetween(1, 30);
                 return new HatchEggsQuest(amount);

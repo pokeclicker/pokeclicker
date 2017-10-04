@@ -148,6 +148,7 @@ namespace GameConstants {
         "CapturePokemons",
         "GainMoney",
         "GainTokens",
+        "GainShards",
         "HatchEggs",
         "MineLayers",
         "CatchShinies",
