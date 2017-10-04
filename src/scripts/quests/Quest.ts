@@ -13,7 +13,7 @@ abstract class Quest {
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
-        let randomPointBonus = 0.9 + SeededRand.next() * 0.2 // random between 0.9 and 1.1
+        let randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
         this.pointsReward = Math.ceil(pointsReward * randomPointBonus);
         this.xpReward = pointsReward/10;
         this.claimed = ko.observable(false);
