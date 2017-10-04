@@ -2,8 +2,8 @@ class QuestHelper{
     public static questList: KnockoutObservableArray<Quest> = ko.observableArray();
 
     public static generateQuests(level: number, refreshes: number, d: Date) {
-        console.log(level, refreshes, d)
-        SeededRand.seed(Number( level * (d.getFullYear() + refreshes * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate()))
+        console.log(level, refreshes, d);
+        SeededRand.seed(Number( level * (d.getFullYear() + refreshes * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate()));
 
         for (let i=0; i<GameConstants.QUESTS_PER_SET; i++) {
             let type = SeededRand.fromArray(GameConstants.QuestTypes);
@@ -63,7 +63,7 @@ class QuestHelper{
     }
 
     public static clearQuests() {
-        // Empty quest list and reset compeleted quests
+        // Empty quest list and reset completed quests
         QuestHelper.questList.splice(0,GameConstants.QUESTS_PER_SET);
         for (let elem of player.completedQuestList) {
             elem(false);
