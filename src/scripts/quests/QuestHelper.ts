@@ -138,4 +138,18 @@ class QuestHelper{
     public static quitQuest() {
         QuestHelper.questList()[player.currentQuest().index].quit();
     }
+
+    public static checkCompletedSet() {
+        for (let questCompleted of player.completedQuestList) {
+            if (!questCompleted()) {
+                return;
+            }
+        }
+        //Only reachable if all quests are completed
+        QuestHelper.getCompletionReward();
+    }
+
+    private static getCompletionReward() {
+        console.log("All quests Completed!")
+    }
 }

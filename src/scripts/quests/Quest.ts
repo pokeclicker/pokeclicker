@@ -30,6 +30,7 @@ abstract class Quest {
             player.completedQuestList[this.index](true);
             let oldLevel = player.questLevel;
             player.questXP += this.xpReward;
+            QuestHelper.checkCompletedSet();
             if (oldLevel < player.questLevel) {
                 Notifier.notify("Your quest level has increased!", GameConstants.NotificationOption.success);
                 QuestHelper.refreshQuests(true);
