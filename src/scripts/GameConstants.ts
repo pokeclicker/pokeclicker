@@ -19,6 +19,10 @@ namespace GameConstants {
     export const AMOUNT_OF_POKEMONS = 151;
     export const AMOUNT_OF_BADGES = 8;
 
+    export const MEW_CHANCE_ROUTE_1 = 8192
+    export const MEW_CHANCE_ROUTE_25 = 4096
+    export const MEW_CHANCE_DIFF = MEW_CHANCE_ROUTE_1 - MEW_CHANCE_ROUTE_25
+
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
