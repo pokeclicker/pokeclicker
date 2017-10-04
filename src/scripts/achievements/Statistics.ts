@@ -9,10 +9,12 @@ class Statistics {
     public digItems: KnockoutObservable<number>; // Total treasure found in underground
     public digDeeper: KnockoutObservable<number>; // Total underground layers completed
     public totalMoney: KnockoutObservable<number>;
+    public pokeballsUsed: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
         "gymsDefeated": GameConstants.Gyms.length,
         "dungeonsCleared": GameConstants.Dungeons.length,
+        "pokeballsUsed": 4,
     }
 
     constructor(saved = {}) {
@@ -29,6 +31,7 @@ class Statistics {
         let arrayObservables = [
             "gymsDefeated",
             "dungeonsCleared",
+            "pokeballsUsed",
         ]
 
         for (let prop of observables) {

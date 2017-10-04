@@ -209,6 +209,7 @@ class Player {
 
     public usePokeball(ball: GameConstants.Pokeball): void {
         this._pokeballs[ball](this._pokeballs[ball]() - 1)
+        GameHelper.incrementObservable(this.statistics.pokeballsUsed[ball]);
     }
 
     public addRouteKill() {

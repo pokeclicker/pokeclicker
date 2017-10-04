@@ -151,6 +151,7 @@ namespace GameConstants {
         "CatchShinies",
         "DefeatGym",
         "DefeatDungeon",
+        "UsePokeball",
     ];
 
     export const QUESTS_PER_SET = 10;
