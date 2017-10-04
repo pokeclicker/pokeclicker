@@ -602,8 +602,8 @@ const pokemonList = [
         "id": 44,
         "name": "Gloom",
         "catchRate": 120,
-        "evolution": "Vileplume",
-        "evoLevel": "Leaf Stone",
+        "evolution": "Vileplume, Bellossom",
+        "evoLevel": "Leaf Stone, Sun Stone",
         "type": [
             "Grass",
             "Poison"
@@ -1297,6 +1297,8 @@ const pokemonList = [
         "id": 95,
         "name": "Onix",
         "catchRate": 45,
+        "evolution" : "Steelix",
+        "evoLevel" : "Metal Coat",
         "type": [
             "Rock",
             "Ground"
@@ -1532,6 +1534,8 @@ const pokemonList = [
         "id": 113,
         "name": "Chansey",
         "catchRate": 30,
+        "evolution" : "Blissey",
+        "evoLevel" : "100",
         "type": [
             "Normal"
         ],
@@ -1582,6 +1586,8 @@ const pokemonList = [
         "id": 117,
         "name": "Seadra",
         "catchRate": 75,
+        "evolution" : "Kingdra",
+        "evoLevel" : "Dragon Scale",
         "type": [
             "Water"
         ],
@@ -1660,6 +1666,8 @@ const pokemonList = [
         "id": 123,
         "name": "Scyther",
         "catchRate": 45,
+        "evolution": "Scizor",
+        "evoLevel": "Metal Coat",
         "type": [
             "Bug",
             "Flying"
@@ -1786,8 +1794,8 @@ const pokemonList = [
         "id": 133,
         "name": "Eevee",
         "catchRate": 45,
-        "evolution": "Vaporeon, Jolteon, Flareon",
-        "evoLevel": "Water Stone, Thunder Stone, Fire Stone",
+        "evolution": "Vaporeon, Jolteon, Flareon, Espeon, Umbreon",
+        "evoLevel": "Water Stone, Thunder Stone, Fire Stone, Time Stone, Time Stone",
         "type": [
             "Normal"
         ],
@@ -1836,6 +1844,8 @@ const pokemonList = [
         "id": 137,
         "name": "Porygon",
         "catchRate": 45,
+        "evolution": "Porygon2",
+        "evoLevel" : "Up-Grade",
         "type": [
             "Normal"
         ],
@@ -2033,7 +2043,7 @@ const pokemonList = [
       "id": "152",
       "name": "Chikorita",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Bayleef",
       "evoLevel": "16",
       "type": [
         "Grass"
@@ -2047,7 +2057,7 @@ const pokemonList = [
       "id": "153",
       "name": "Bayleef",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Meganium",
       "evoLevel": "32",
       "type": [
         "Grass"
@@ -2061,8 +2071,6 @@ const pokemonList = [
       "id": "154",
       "name": "Meganium",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Grass"
       ],
@@ -2075,7 +2083,7 @@ const pokemonList = [
       "id": "155",
       "name": "Cyndaquil",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Quilava",
       "evoLevel": "14",
       "type": [
         "Fire"
@@ -2089,7 +2097,7 @@ const pokemonList = [
       "id": "156",
       "name": "Quilava",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Typhlosion",
       "evoLevel": "36",
       "type": [
         "Fire"
@@ -2103,8 +2111,6 @@ const pokemonList = [
       "id": "157",
       "name": "Typhlosion",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Fire"
       ],
@@ -2117,7 +2123,7 @@ const pokemonList = [
       "id": "158",
       "name": "Totodile",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Croconaw",
       "evoLevel": "18",
       "type": [
         "Water"
@@ -2131,7 +2137,7 @@ const pokemonList = [
       "id": "159",
       "name": "Croconaw",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Feraligatr",
       "evoLevel": "30",
       "type": [
         "Water"
@@ -2145,8 +2151,6 @@ const pokemonList = [
       "id": "160",
       "name": "Feraligatr",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water"
       ],
@@ -2159,7 +2163,7 @@ const pokemonList = [
       "id": "161",
       "name": "Sentret",
       "catchRate": "255",
-      "evolution": "",
+      "evolution": "Furret",
       "evoLevel": "15",
       "type": [
         "Normal"
@@ -2173,8 +2177,6 @@ const pokemonList = [
       "id": "162",
       "name": "Furret",
       "catchRate": "90",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal"
       ],
@@ -2187,7 +2189,7 @@ const pokemonList = [
       "id": "163",
       "name": "Hoothoot",
       "catchRate": "255",
-      "evolution": "",
+      "evolution": "Noctowl",
       "evoLevel": "20",
       "type": [
         "Normal",
@@ -2202,8 +2204,6 @@ const pokemonList = [
       "id": "164",
       "name": "Noctowl",
       "catchRate": "90",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal",
         "Flying"
@@ -2217,7 +2217,7 @@ const pokemonList = [
       "id": "165",
       "name": "Ledyba",
       "catchRate": "255",
-      "evolution": "",
+      "evolution": "Ledian",
       "evoLevel": "18",
       "type": [
         "Bug",
@@ -2232,8 +2232,6 @@ const pokemonList = [
       "id": "166",
       "name": "Ledian",
       "catchRate": "90",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Bug",
         "Flying"
@@ -2247,7 +2245,7 @@ const pokemonList = [
       "id": "167",
       "name": "Spinarak",
       "catchRate": "255",
-      "evolution": "",
+      "evolution": "Ariados",
       "evoLevel": "22",
       "type": [
         "Bug",
@@ -2262,8 +2260,6 @@ const pokemonList = [
       "id": "168",
       "name": "Ariados",
       "catchRate": "90",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Bug",
         "Poison"
@@ -2277,8 +2273,6 @@ const pokemonList = [
       "id": "169",
       "name": "Crobat",
       "catchRate": "90",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Poison",
         "Flying"
@@ -2292,7 +2286,7 @@ const pokemonList = [
       "id": "170",
       "name": "Chinchou",
       "catchRate": "190",
-      "evolution": "",
+      "evolution": "Lanturn",
       "evoLevel": "27",
       "type": [
         "Water",
@@ -2307,8 +2301,6 @@ const pokemonList = [
       "id": "171",
       "name": "Lanturn",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water",
         "Electric"
@@ -2322,8 +2314,8 @@ const pokemonList = [
       "id": "172",
       "name": "Pichu",
       "catchRate": "190",
-      "evolution": "",
-      "evoLevel": "",
+      "evolution": "Pikachu",
+      "evoLevel": "100",
       "type": [
         "Electric"
       ],
@@ -2336,8 +2328,8 @@ const pokemonList = [
       "id": "173",
       "name": "Cleffa",
       "catchRate": "150",
-      "evolution": "",
-      "evoLevel": "",
+      "evolution": "Clefairy",
+      "evoLevel": "100",
       "type": [
         "Fairy"
       ],
@@ -2350,8 +2342,8 @@ const pokemonList = [
       "id": "174",
       "name": "Igglybuff",
       "catchRate": "170",
-      "evolution": "",
-      "evoLevel": "",
+      "evolution": "Jigglypuff",
+      "evoLevel": "100",
       "type": [
         "Normal",
         "Fairy"
@@ -2365,8 +2357,8 @@ const pokemonList = [
       "id": "175",
       "name": "Togepi",
       "catchRate": "190",
-      "evolution": "",
-      "evoLevel": "",
+      "evolution": "Togetic",
+      "evoLevel": "100",
       "type": [
         "Fairy"
       ],
@@ -2379,8 +2371,6 @@ const pokemonList = [
       "id": "176",
       "name": "Togetic",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Fairy",
         "Flying"
@@ -2394,7 +2384,7 @@ const pokemonList = [
       "id": "177",
       "name": "Natu",
       "catchRate": "190",
-      "evolution": "",
+      "evolution": "Xatu",
       "evoLevel": "25",
       "type": [
         "Psychic",
@@ -2409,8 +2399,6 @@ const pokemonList = [
       "id": "178",
       "name": "Xatu",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Psychic",
         "Flying"
@@ -2424,7 +2412,7 @@ const pokemonList = [
       "id": "179",
       "name": "Mareep",
       "catchRate": "235",
-      "evolution": "",
+      "evolution": "Flaaffy",
       "evoLevel": "15",
       "type": [
         "Electric"
@@ -2438,7 +2426,7 @@ const pokemonList = [
       "id": "180",
       "name": "Flaaffy",
       "catchRate": "120",
-      "evolution": "",
+      "evolution": "Ampharos",
       "evoLevel": "30",
       "type": [
         "Electric"
@@ -2452,8 +2440,6 @@ const pokemonList = [
       "id": "181",
       "name": "Ampharos",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Electric"
       ],
@@ -2466,8 +2452,6 @@ const pokemonList = [
       "id": "182",
       "name": "Bellossom",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Grass"
       ],
@@ -2480,7 +2464,7 @@ const pokemonList = [
       "id": "183",
       "name": "Marill",
       "catchRate": "190",
-      "evolution": "",
+      "evolution": "Azumarill",
       "evoLevel": "18",
       "type": [
         "Water",
@@ -2495,8 +2479,6 @@ const pokemonList = [
       "id": "184",
       "name": "Azumarill",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water",
         "Fairy"
@@ -2510,8 +2492,6 @@ const pokemonList = [
       "id": "185",
       "name": "Sudowoodo",
       "catchRate": "65",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Rock"
       ],
@@ -2524,8 +2504,6 @@ const pokemonList = [
       "id": "186",
       "name": "Politoed",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water"
       ],
@@ -2538,7 +2516,7 @@ const pokemonList = [
       "id": "187",
       "name": "Hoppip",
       "catchRate": "255",
-      "evolution": "",
+      "evolution": "Skiploom",
       "evoLevel": "18",
       "type": [
         "Grass",
@@ -2553,7 +2531,7 @@ const pokemonList = [
       "id": "188",
       "name": "Skiploom",
       "catchRate": "120",
-      "evolution": "",
+      "evolution": "Jumpluff",
       "evoLevel": "27",
       "type": [
         "Grass",
@@ -2568,8 +2546,6 @@ const pokemonList = [
       "id": "189",
       "name": "Jumpluff",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Grass",
         "Flying"
@@ -2583,8 +2559,6 @@ const pokemonList = [
       "id": "190",
       "name": "Aipom",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal"
       ],
@@ -2597,7 +2571,7 @@ const pokemonList = [
       "id": "191",
       "name": "Sunkern",
       "catchRate": "235",
-      "evolution": "",
+      "evolution": "Sunflora",
       "evoLevel": "",
       "type": [
         "Grass"
@@ -2611,8 +2585,6 @@ const pokemonList = [
       "id": "192",
       "name": "Sunflora",
       "catchRate": "120",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Grass"
       ],
@@ -2625,8 +2597,6 @@ const pokemonList = [
       "id": "193",
       "name": "Yanma",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Bug",
         "Flying"
@@ -2640,7 +2610,7 @@ const pokemonList = [
       "id": "194",
       "name": "Wooper",
       "catchRate": "255",
-      "evolution": "",
+      "evolution": "Quagsire",
       "evoLevel": "20",
       "type": [
         "Water",
@@ -2655,8 +2625,6 @@ const pokemonList = [
       "id": "195",
       "name": "Quagsire",
       "catchRate": "90",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water",
         "Ground"
@@ -2670,8 +2638,6 @@ const pokemonList = [
       "id": "196",
       "name": "Espeon",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Psychic"
       ],
@@ -2684,8 +2650,6 @@ const pokemonList = [
       "id": "197",
       "name": "Umbreon",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Dark"
       ],
@@ -2698,8 +2662,6 @@ const pokemonList = [
       "id": "198",
       "name": "Murkrow",
       "catchRate": "30",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Dark",
         "Flying"
@@ -2713,8 +2675,6 @@ const pokemonList = [
       "id": "199",
       "name": "Slowking",
       "catchRate": "70",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water",
         "Psychic"
@@ -2728,8 +2688,6 @@ const pokemonList = [
       "id": "200",
       "name": "Misdreavus",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Ghost"
       ],
@@ -2742,8 +2700,6 @@ const pokemonList = [
       "id": "201",
       "name": "Unown",
       "catchRate": "225",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Psychic"
       ],
@@ -2756,8 +2712,6 @@ const pokemonList = [
       "id": "202",
       "name": "Wobbuffet",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Psychic"
       ],
@@ -2770,8 +2724,6 @@ const pokemonList = [
       "id": "203",
       "name": "Girafarig",
       "catchRate": "60",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal",
         "Psychic"
@@ -2785,7 +2737,7 @@ const pokemonList = [
       "id": "204",
       "name": "Pineco",
       "catchRate": "190",
-      "evolution": "",
+      "evolution": "Forretress",
       "evoLevel": "31",
       "type": [
         "Bug"
@@ -2799,8 +2751,6 @@ const pokemonList = [
       "id": "205",
       "name": "Forretress",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Bug",
         "Steel"
@@ -2814,8 +2764,6 @@ const pokemonList = [
       "id": "206",
       "name": "Dunsparce",
       "catchRate": "190",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal"
       ],
@@ -2828,8 +2776,6 @@ const pokemonList = [
       "id": "207",
       "name": "Gligar",
       "catchRate": "60",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Ground",
         "Flying"
@@ -2843,8 +2789,6 @@ const pokemonList = [
       "id": "208",
       "name": "Steelix",
       "catchRate": "25",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Steel",
         "Ground"
@@ -2858,7 +2802,7 @@ const pokemonList = [
       "id": "209",
       "name": "Snubbull",
       "catchRate": "190",
-      "evolution": "",
+      "evolution": "Granbull",
       "evoLevel": "23",
       "type": [
         "Fairy"
@@ -2872,8 +2816,6 @@ const pokemonList = [
       "id": "210",
       "name": "Granbull",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Fairy"
       ],
@@ -2886,8 +2828,6 @@ const pokemonList = [
       "id": "211",
       "name": "Qwilfish",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water",
         "Poison"
@@ -2901,8 +2841,6 @@ const pokemonList = [
       "id": "212",
       "name": "Scizor",
       "catchRate": "25",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Bug",
         "Steel"
@@ -2916,8 +2854,6 @@ const pokemonList = [
       "id": "213",
       "name": "Shuckle",
       "catchRate": "190",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Bug",
         "Rock"
@@ -2931,8 +2867,6 @@ const pokemonList = [
       "id": "214",
       "name": "Heracross",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Bug",
         "Fighting"
@@ -2946,8 +2880,6 @@ const pokemonList = [
       "id": "215",
       "name": "Sneasel",
       "catchRate": "60",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Dark",
         "Ice"
@@ -2961,7 +2893,7 @@ const pokemonList = [
       "id": "216",
       "name": "Teddiursa",
       "catchRate": "120",
-      "evolution": "",
+      "evolution": "Ursaring",
       "evoLevel": "30",
       "type": [
         "Normal"
@@ -2975,8 +2907,6 @@ const pokemonList = [
       "id": "217",
       "name": "Ursaring",
       "catchRate": "60",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal"
       ],
@@ -2989,7 +2919,7 @@ const pokemonList = [
       "id": "218",
       "name": "Slugma",
       "catchRate": "190",
-      "evolution": "",
+      "evolution": "Magcargo",
       "evoLevel": "38",
       "type": [
         "Fire"
@@ -3003,8 +2933,6 @@ const pokemonList = [
       "id": "219",
       "name": "Magcargo",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Fire",
         "Rock"
@@ -3018,7 +2946,7 @@ const pokemonList = [
       "id": "220",
       "name": "Swinub",
       "catchRate": "225",
-      "evolution": "",
+      "evolution": "Piloswine",
       "evoLevel": "33",
       "type": [
         "Ice",
@@ -3033,8 +2961,6 @@ const pokemonList = [
       "id": "221",
       "name": "Piloswine",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Ice",
         "Ground"
@@ -3048,8 +2974,6 @@ const pokemonList = [
       "id": "222",
       "name": "Corsola",
       "catchRate": "60",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water",
         "Rock"
@@ -3063,7 +2987,7 @@ const pokemonList = [
       "id": "223",
       "name": "Remoraid",
       "catchRate": "190",
-      "evolution": "",
+      "evolution": "Octillery",
       "evoLevel": "25",
       "type": [
         "Water"
@@ -3077,8 +3001,6 @@ const pokemonList = [
       "id": "224",
       "name": "Octillery",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water"
       ],
@@ -3091,8 +3013,6 @@ const pokemonList = [
       "id": "225",
       "name": "Delibird",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Ice",
         "Flying"
@@ -3106,8 +3026,6 @@ const pokemonList = [
       "id": "226",
       "name": "Mantine",
       "catchRate": "25",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water",
         "Flying"
@@ -3121,8 +3039,6 @@ const pokemonList = [
       "id": "227",
       "name": "Skarmory",
       "catchRate": "25",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Steel",
         "Flying"
@@ -3136,7 +3052,7 @@ const pokemonList = [
       "id": "228",
       "name": "Houndour",
       "catchRate": "120",
-      "evolution": "",
+      "evolution": "Houndoom",
       "evoLevel": "24",
       "type": [
         "Dark",
@@ -3151,8 +3067,6 @@ const pokemonList = [
       "id": "229",
       "name": "Houndoom",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Dark",
         "Fire"
@@ -3166,8 +3080,6 @@ const pokemonList = [
       "id": "230",
       "name": "Kingdra",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water",
         "Dragon"
@@ -3181,7 +3093,7 @@ const pokemonList = [
       "id": "231",
       "name": "Phanpy",
       "catchRate": "120",
-      "evolution": "",
+      "evolution": "Donphan",
       "evoLevel": "25",
       "type": [
         "Ground"
@@ -3195,8 +3107,6 @@ const pokemonList = [
       "id": "232",
       "name": "Donphan",
       "catchRate": "60",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Ground"
       ],
@@ -3209,8 +3119,6 @@ const pokemonList = [
       "id": "233",
       "name": "Porygon2",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal"
       ],
@@ -3223,8 +3131,6 @@ const pokemonList = [
       "id": "234",
       "name": "Stantler",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal"
       ],
@@ -3237,8 +3143,6 @@ const pokemonList = [
       "id": "235",
       "name": "Smeargle",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal"
       ],
@@ -3251,8 +3155,8 @@ const pokemonList = [
       "id": "236",
       "name": "Tyrogue",
       "catchRate": "75",
-      "evolution": "",
-      "evoLevel": "20",
+      "evolution": "Hitmonlee, Hitmonchan, Hitmontop",
+      "evoLevel": "20, 20, 20",
       "type": [
         "Fighting"
       ],
@@ -3265,8 +3169,6 @@ const pokemonList = [
       "id": "237",
       "name": "Hitmontop",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Fighting"
       ],
@@ -3279,7 +3181,7 @@ const pokemonList = [
       "id": "238",
       "name": "Smoochum",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Jynx",
       "evoLevel": "30",
       "type": [
         "Ice",
@@ -3294,7 +3196,7 @@ const pokemonList = [
       "id": "239",
       "name": "Elekid",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Electabuzz",
       "evoLevel": "30",
       "type": [
         "Electric"
@@ -3308,7 +3210,7 @@ const pokemonList = [
       "id": "240",
       "name": "Magby",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Magmar",
       "evoLevel": "30",
       "type": [
         "Fire"
@@ -3322,8 +3224,6 @@ const pokemonList = [
       "id": "241",
       "name": "Miltank",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal"
       ],
@@ -3336,8 +3236,6 @@ const pokemonList = [
       "id": "242",
       "name": "Blissey",
       "catchRate": "30",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Normal"
       ],
@@ -3350,8 +3248,6 @@ const pokemonList = [
       "id": "243",
       "name": "Raikou",
       "catchRate": "3",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Electric"
       ],
@@ -3364,8 +3260,6 @@ const pokemonList = [
       "id": "244",
       "name": "Entei",
       "catchRate": "3",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Fire"
       ],
@@ -3378,8 +3272,6 @@ const pokemonList = [
       "id": "245",
       "name": "Suicune",
       "catchRate": "3",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Water"
       ],
@@ -3392,7 +3284,7 @@ const pokemonList = [
       "id": "246",
       "name": "Larvitar",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Pupitar",
       "evoLevel": "30",
       "type": [
         "Rock",
@@ -3407,7 +3299,7 @@ const pokemonList = [
       "id": "247",
       "name": "Pupitar",
       "catchRate": "45",
-      "evolution": "",
+      "evolution": "Tyranitar",
       "evoLevel": "55",
       "type": [
         "Rock",
@@ -3422,8 +3314,6 @@ const pokemonList = [
       "id": "248",
       "name": "Tyranitar",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Rock",
         "Dark"
@@ -3437,8 +3327,6 @@ const pokemonList = [
       "id": "249",
       "name": "Lugia",
       "catchRate": "3",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Psychic",
         "Flying"
@@ -3452,8 +3340,6 @@ const pokemonList = [
       "id": "250",
       "name": "Ho-Oh",
       "catchRate": "3",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Fire",
         "Flying"
@@ -3467,8 +3353,6 @@ const pokemonList = [
       "id": "251",
       "name": "Celebi",
       "catchRate": "45",
-      "evolution": "",
-      "evoLevel": "",
       "type": [
         "Psychic",
         "Grass"
