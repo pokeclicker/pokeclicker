@@ -4,12 +4,17 @@
  * Start the game when all html elements are loaded.
  */
 let player;
-const debug = false;
+const debug = true;
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    setTimeout(function () {
-        $('.loader').fadeOut("slow")
-    }, 3000);
+    if(debug){
+            $('.loader').hide("fast")
+
+    } else {
+        setTimeout(function () {
+            $('.loader').fadeOut("slow")
+        }, 3000);
+    }
     OakItemRunner.initialize();
     UndergroundItem.initialize();
     let game: Game = new Game();
