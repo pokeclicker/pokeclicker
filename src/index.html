@@ -1086,7 +1086,8 @@
                     <div class="row justify-content-center">
                         <div class="col-10">
                             <div class="progress"
-                                 data-bind='if: !QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
+                                 data-bind='if: !QuestHelper.questList()[player.currentQuest().index].isCompleted(),
+                                            tooltip: {title: ko.pureComputed(function(){return Math.floor(QuestHelper.questList()[player.currentQuest().index].progress() * 100) + "%"}), trigger: "hover"}'>
                                 <div class="progress-bar bg-success" role="progressbar"
                                      data-bind="attr:{ style: 'width:' + (QuestHelper.questList()[player.currentQuest().index].progress() * 100) + '%' }"
                                      aria-valuemin="0" aria-valuemax="100">
