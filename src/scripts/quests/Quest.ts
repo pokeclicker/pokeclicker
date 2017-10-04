@@ -51,6 +51,11 @@ abstract class Quest {
         }
     }
 
+    quit() {
+        this.initial(null);
+        player.currentQuest(null);
+    }
+
     protected createProgressObservables() {
         this.progress = ko.computed(function() {
             if (this.initial() !== null) {

@@ -71,6 +71,7 @@ class MapHelper {
 
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
+            //console.log($("[data-town]"));
             Game.gameState(GameConstants.GameState.idle);
             $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute'); //pretty sure any jquery in typescript does not work fyi
             player.route(0);

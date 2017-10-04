@@ -99,4 +99,8 @@ class QuestHelper{
         let n = Math.log(1 + ((r - 1) * sum) / a) / Math.log(r);
         return Math.floor(n + 1);
     }
+
+    public static quitQuest() {
+        QuestHelper.questList()[player.currentQuest().index].quit();
+    }
 }
