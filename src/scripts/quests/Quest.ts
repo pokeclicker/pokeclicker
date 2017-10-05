@@ -5,6 +5,7 @@ abstract class Quest {
     pointsReward: number;
     xpReward: number;
     progress: KnockoutComputed<number>;
+    progressText: KnockoutComputed<string>;
     isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
     questFocus: KnockoutObservable<any>;
@@ -65,6 +66,14 @@ abstract class Quest {
                 return 0;
             }
         }, this);
+
+        this.progressText = ko.computed(function() {
+            if (this.initial() !== null) {
+                return "" + Math.min((this.questFocus() - this.initial()), this.amount) +"/" +  this.amount;
+            } else {
+                return "0/"+this.amount;
+            }
+        }, this);
         this.isCompleted = ko.computed(function() {
             let completed = this.progress() == 1;
             if (completed && !this.notified) {
@@ -73,6 +82,8 @@ abstract class Quest {
             return completed
         }, this);
     }
+
+
 
     inProgress() {
         return ko.computed(() => {
