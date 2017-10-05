@@ -18,10 +18,14 @@ class MapHelper {
     };
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        if (!player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
+        if (GameConstants.routeBadgeRequirements[region] == undefined || !player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
             return false;
         }
-        let reqList = GameConstants.routeRequirements[region][route];
+        let regionReqLists = GameConstants.routeRequirements[region];
+        if (regionReqLists == undefined) {
+            return false;
+        }
+        let reqList = regionReqLists[route];
         if (reqList == undefined) {
             return true;
         }
