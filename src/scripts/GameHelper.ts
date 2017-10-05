@@ -13,7 +13,7 @@ class GameHelper {
         let hours = Math.floor( milliseconds / GameHelper.MS_IN_HOUR );
         milliseconds -= hours * GameHelper.MS_IN_HOUR;
         let minutes = Math.floor( milliseconds / GameHelper.MS_IN_MIN );
-        return `${hours}:${minutes}`;
+        return `${hours}:${GameHelper.twoDigitNumber(minutes)}`;
     });
 
     public static incrementObservable(obs: KnockoutObservable<number>, amt: number = 1) {
@@ -40,6 +40,12 @@ class GameHelper {
         tomorrow.setSeconds(0);
         tomorrow.setMilliseconds(0);
         return tomorrow;
+    }
+
+    private static twoDigitNumber(n: number): string {
+        // For use in clocks / showing time
+        // Turns 4 into 04, does nothing to 23, turns 173 into 73
+        return (`0${n}`).slice(-2);
     }
 
 }
