@@ -233,9 +233,6 @@ const pokemonsPerRoute = {
             headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         }
     },
-    1: {
-
-    },
     2: {
         
     }

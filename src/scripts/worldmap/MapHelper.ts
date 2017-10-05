@@ -5,6 +5,7 @@ class MapHelper {
             if (this.accessToRoute(route, region)) {
                 $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 player.route(route);
+                player.region = region;
                 player.currentTown("");
                 $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
                 Battle.generateNewEnemy();
@@ -18,6 +19,9 @@ class MapHelper {
     };
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
+        if (region == GameConstants.Region.johto) { // Unlock all of johto for testing
+            return true
+        }
         if (GameConstants.routeBadgeRequirements[region] == undefined || !player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
             return false;
         }
