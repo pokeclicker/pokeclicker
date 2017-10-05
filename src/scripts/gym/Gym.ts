@@ -197,3 +197,101 @@ gymList["Elite Lance"] = new Gym(
     "That’s it! I hate to admit it, but you are a Pokémon master!"
 );
 //TODO make champion Gym
+
+//Johto Gyms
+
+
+gymList["Violet City"] = new Gym(
+    "Falkner",
+    "Violet City",
+    [new GymPokemon("Pidgey", 4000, 9),
+        new GymPokemon("Pidgeotto", 6800, 13)],
+    GameConstants.Badge.Zephyr,
+    500,
+    GameConstants.Badge.Lance,
+    "TODO"
+);
+
+gymList["Azalea Town"] = new Gym(
+    "Bugsy",
+    "Azalea Town",
+    [new GymPokemon("Metapod", 4000, 15),
+        new GymPokemon("Kakuna", 6800, 15),
+        new GymPokemon("Scyther", 7000, 17)],
+    GameConstants.Badge.Hive,
+    500,
+    GameConstants.Badge.Zephyr,
+    "TODO"
+);
+
+gymList["Goldenrod City"] = new Gym(
+    "Whitney",
+    "Goldenrod City",
+    [new GymPokemon("Clefairy", 4000, 17),
+        new GymPokemon("Miltank", 6800, 19)],
+    GameConstants.Badge.Plain,
+    500,
+    GameConstants.Badge.Hive,
+    "TODO"
+);
+
+gymList["Ecruteak City"] = new Gym(
+    "Morty",
+    "Ecruteak City",
+    [new GymPokemon("Gastly", 4000, 21),
+        new GymPokemon("Haunter", 6800, 21),
+        new GymPokemon("Haunter", 6800, 23),
+        new GymPokemon("Gengar", 6800, 25)],
+    GameConstants.Badge.Fog,
+    500,
+    GameConstants.Badge.Plain,
+    "TODO"
+);
+
+gymList["Cianwood City"] = new Gym(
+    "Chuck",
+    "Cianwood City",
+    [new GymPokemon("Primeape", 4000, 29),
+        new GymPokemon("Poliwrath", 6800, 31)],
+    GameConstants.Badge.Storm,
+    500,
+    GameConstants.Badge.Fog,
+    "TODO"
+);
+
+gymList["Olivine City"] = new Gym(
+    "Jasmine",
+    "Olivine City",
+    [new GymPokemon("Magnemite", 4000, 30),
+        new GymPokemon("Magnemite", 6800, 30),
+        new GymPokemon("Steelix", 6800, 35)],
+    GameConstants.Badge.Mineral,
+    500,
+    GameConstants.Badge.Storm,
+    "TODO"
+);
+
+gymList["Mahogany Town"] = new Gym(
+    "Pryce",
+    "Mahogany Town",
+    [new GymPokemon("Seel", 4000, 30),
+        new GymPokemon("Dewgong", 6800, 32),
+        new GymPokemon("Piloswine", 6800, 34)],
+    GameConstants.Badge.Glacier,
+    500,
+    GameConstants.Badge.Mineral,
+    "TODO"
+);
+
+gymList["Blackthorn City"] = new Gym(
+    "Clair",
+    "Blackthorn City",
+    [new GymPokemon("Dragonair", 4000, 38),
+        new GymPokemon("Dragonair", 6800, 38),
+        new GymPokemon("Gyarados", 6800, 38),
+        new GymPokemon("Kingdra", 6800, 74)],
+    GameConstants.Badge.Rising,
+    500,
+    GameConstants.Badge.Glacier,
+    "TODO"
+);
