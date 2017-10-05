@@ -258,7 +258,7 @@ namespace GameConstants {
 
     export const RegionRoute = {
         0: 25,
-        1: 0,
+        1: 48,
         2: 0
     };
 

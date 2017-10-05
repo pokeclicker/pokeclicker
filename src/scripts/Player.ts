@@ -44,7 +44,9 @@ class Player {
         });
         this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        this._region = savedPlayer._region || GameConstants.Region.kanto;
+        console.log(savedPlayer._region);
+        this._region = ko.observable(savedPlayer._region || GameConstants.Region.kanto);
+        console.log(this.region)
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
@@ -138,7 +140,7 @@ class Player {
 
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
-    private _region: GameConstants.Region;
+    private _region: KnockoutObservable<GameConstants.Region>;
     private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
     private _pokeballs: Array<KnockoutObservable<number>>;
     private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
@@ -562,11 +564,11 @@ class Player {
     }
 
     get region(): GameConstants.Region {
-        return this._region;
+        return this._region();
     }
 
     set region(value: GameConstants.Region) {
-        this._region = value;
+        this._region(value);
     }
 
     get gymBadges(): GameConstants.Badge[] {

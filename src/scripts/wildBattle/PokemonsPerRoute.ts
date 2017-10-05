@@ -105,6 +105,12 @@ const pokemonsPerRoute = {
             land: ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto", "Oddish", "Venonat", "Abra", "Bellsprout"],
             water: ["Poliwag", "Goldeen", "Psyduck", "Krabby"]
         }
+    },
+    1: {
+
+    },
+    2: {
+        
     }
 };
 
