@@ -335,7 +335,7 @@ namespace GameConstants {
     }
 
     // Map navigation
-    export const AMOUNT_OF_ROUTES = 25;
+    export const AMOUNT_OF_ROUTES = 48;
     export const AMOUNT_OF_ROUTES_KANTO = 25;
 
     /**
