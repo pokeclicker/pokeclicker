@@ -2048,7 +2048,7 @@ const pokemonList = [
       "type": [
         "Grass"
       ],
-      "attack": "49",
+      "attack": "65",
       "levelType": "mediumslow",
       "exp": "64",
       "eggCycles": "20"
@@ -2062,7 +2062,7 @@ const pokemonList = [
       "type": [
         "Grass"
       ],
-      "attack": "62",
+      "attack": "80",
       "levelType": "mediumslow",
       "exp": "142",
       "eggCycles": "20"
@@ -2074,7 +2074,7 @@ const pokemonList = [
       "type": [
         "Grass"
       ],
-      "attack": "82",
+      "attack": "100",
       "levelType": "mediumslow",
       "exp": "236",
       "eggCycles": "20"
@@ -2102,7 +2102,7 @@ const pokemonList = [
       "type": [
         "Fire"
       ],
-      "attack": "64",
+      "attack": "65",
       "levelType": "mediumslow",
       "exp": "142",
       "eggCycles": "20"
@@ -2114,7 +2114,7 @@ const pokemonList = [
       "type": [
         "Fire"
       ],
-      "attack": "84",
+      "attack": "85",
       "levelType": "mediumslow",
       "exp": "240",
       "eggCycles": "20"
@@ -2195,7 +2195,7 @@ const pokemonList = [
         "Normal",
         "Flying"
       ],
-      "attack": "30",
+      "attack": "56",
       "levelType": "mediumfast",
       "exp": "52",
       "eggCycles": "15"
@@ -2208,7 +2208,7 @@ const pokemonList = [
         "Normal",
         "Flying"
       ],
-      "attack": "50",
+      "attack": "96",
       "levelType": "mediumfast",
       "exp": "158",
       "eggCycles": "15"
@@ -2223,7 +2223,7 @@ const pokemonList = [
         "Bug",
         "Flying"
       ],
-      "attack": "20",
+      "attack": "80",
       "levelType": "fast",
       "exp": "53",
       "eggCycles": "15"
@@ -2236,7 +2236,7 @@ const pokemonList = [
         "Bug",
         "Flying"
       ],
-      "attack": "35",
+      "attack": "110",
       "levelType": "fast",
       "exp": "137",
       "eggCycles": "15"
@@ -2292,7 +2292,7 @@ const pokemonList = [
         "Water",
         "Electric"
       ],
-      "attack": "38",
+      "attack": "56",
       "levelType": "slow",
       "exp": "66",
       "eggCycles": "20"
@@ -2305,7 +2305,7 @@ const pokemonList = [
         "Water",
         "Electric"
       ],
-      "attack": "58",
+      "attack": "76",
       "levelType": "slow",
       "exp": "161",
       "eggCycles": "20"
@@ -2333,7 +2333,7 @@ const pokemonList = [
       "type": [
         "Fairy"
       ],
-      "attack": "25",
+      "attack": "55",
       "levelType": "fast",
       "exp": "44",
       "eggCycles": "10"
@@ -2362,7 +2362,7 @@ const pokemonList = [
       "type": [
         "Fairy"
       ],
-      "attack": "20",
+      "attack": "65",
       "levelType": "fast",
       "exp": "49",
       "eggCycles": "10"
@@ -2375,7 +2375,7 @@ const pokemonList = [
         "Fairy",
         "Flying"
       ],
-      "attack": "40",
+      "attack": "105",
       "levelType": "fast",
       "exp": "142",
       "eggCycles": "10"
@@ -2417,7 +2417,7 @@ const pokemonList = [
       "type": [
         "Electric"
       ],
-      "attack": "40",
+      "attack": "45",
       "levelType": "mediumslow",
       "exp": "56",
       "eggCycles": "20"
@@ -2431,7 +2431,7 @@ const pokemonList = [
       "type": [
         "Electric"
       ],
-      "attack": "55",
+      "attack": "60",
       "levelType": "mediumslow",
       "exp": "128",
       "eggCycles": "20"
@@ -2443,7 +2443,7 @@ const pokemonList = [
       "type": [
         "Electric"
       ],
-      "attack": "75",
+      "attack": "110",
       "levelType": "mediumslow",
       "exp": "230",
       "eggCycles": "20"
@@ -2455,7 +2455,7 @@ const pokemonList = [
       "type": [
         "Grass"
       ],
-      "attack": "80",
+      "attack": "100",
       "levelType": "mediumslow",
       "exp": "221",
       "eggCycles": "20"
@@ -2470,7 +2470,7 @@ const pokemonList = [
         "Water",
         "Fairy"
       ],
-      "attack": "20",
+      "attack": "50",
       "levelType": "fast",
       "exp": "88",
       "eggCycles": "10"
@@ -2483,7 +2483,7 @@ const pokemonList = [
         "Water",
         "Fairy"
       ],
-      "attack": "50",
+      "attack": "80",
       "levelType": "fast",
       "exp": "189",
       "eggCycles": "10"
@@ -2507,7 +2507,7 @@ const pokemonList = [
       "type": [
         "Water"
       ],
-      "attack": "75",
+      "attack": "100",
       "levelType": "mediumslow",
       "exp": "225",
       "eggCycles": "20"
@@ -2522,7 +2522,7 @@ const pokemonList = [
         "Grass",
         "Flying"
       ],
-      "attack": "35",
+      "attack": "55",
       "levelType": "mediumslow",
       "exp": "50",
       "eggCycles": "20"
@@ -2537,7 +2537,7 @@ const pokemonList = [
         "Grass",
         "Flying"
       ],
-      "attack": "45",
+      "attack": "65",
       "levelType": "mediumslow",
       "exp": "119",
       "eggCycles": "20"
@@ -2550,7 +2550,7 @@ const pokemonList = [
         "Grass",
         "Flying"
       ],
-      "attack": "55",
+      "attack": "95",
       "levelType": "mediumslow",
       "exp": "207",
       "eggCycles": "20"
@@ -2588,7 +2588,7 @@ const pokemonList = [
       "type": [
         "Grass"
       ],
-      "attack": "75",
+      "attack": "85",
       "levelType": "mediumslow",
       "exp": "149",
       "eggCycles": "20"
@@ -2641,7 +2641,7 @@ const pokemonList = [
       "type": [
         "Psychic"
       ],
-      "attack": "65",
+      "attack": "95",
       "levelType": "mediumfast",
       "exp": "184",
       "eggCycles": "35"
@@ -2653,7 +2653,7 @@ const pokemonList = [
       "type": [
         "Dark"
       ],
-      "attack": "65",
+      "attack": "130",
       "levelType": "mediumfast",
       "exp": "184",
       "eggCycles": "35"
@@ -2679,7 +2679,7 @@ const pokemonList = [
         "Water",
         "Psychic"
       ],
-      "attack": "75",
+      "attack": "110",
       "levelType": "mediumfast",
       "exp": "172",
       "eggCycles": "20"
@@ -2691,7 +2691,7 @@ const pokemonList = [
       "type": [
         "Ghost"
       ],
-      "attack": "60",
+      "attack": "85",
       "levelType": "fast",
       "exp": "87",
       "eggCycles": "25"
@@ -2715,7 +2715,7 @@ const pokemonList = [
       "type": [
         "Psychic"
       ],
-      "attack": "33",
+      "attack": "58",
       "levelType": "mediumfast",
       "exp": "142",
       "eggCycles": "20"
@@ -2793,7 +2793,7 @@ const pokemonList = [
         "Steel",
         "Ground"
       ],
-      "attack": "85",
+      "attack": "125",
       "levelType": "mediumfast",
       "exp": "179",
       "eggCycles": "25"
@@ -2845,7 +2845,7 @@ const pokemonList = [
         "Bug",
         "Steel"
       ],
-      "attack": "130",
+      "attack": "150",
       "levelType": "mediumfast",
       "exp": "175",
       "eggCycles": "25"
@@ -2858,7 +2858,7 @@ const pokemonList = [
         "Bug",
         "Rock"
       ],
-      "attack": "10",
+      "attack": "230",
       "levelType": "mediumslow",
       "exp": "177",
       "eggCycles": "20"
@@ -2871,7 +2871,7 @@ const pokemonList = [
         "Bug",
         "Fighting"
       ],
-      "attack": "125",
+      "attack": "185",
       "levelType": "slow",
       "exp": "175",
       "eggCycles": "25"
@@ -2937,7 +2937,7 @@ const pokemonList = [
         "Fire",
         "Rock"
       ],
-      "attack": "50",
+      "attack": "80",
       "levelType": "mediumfast",
       "exp": "151",
       "eggCycles": "20"
@@ -2978,7 +2978,7 @@ const pokemonList = [
         "Water",
         "Rock"
       ],
-      "attack": "55",
+      "attack": "95",
       "levelType": "fast",
       "exp": "144",
       "eggCycles": "20"
@@ -3030,7 +3030,7 @@ const pokemonList = [
         "Water",
         "Flying"
       ],
-      "attack": "40",
+      "attack": "140",
       "levelType": "slow",
       "exp": "170",
       "eggCycles": "25"
@@ -3122,7 +3122,7 @@ const pokemonList = [
       "type": [
         "Normal"
       ],
-      "attack": "80",
+      "attack": "95",
       "levelType": "mediumfast",
       "exp": "180",
       "eggCycles": "20"
@@ -3146,7 +3146,7 @@ const pokemonList = [
       "type": [
         "Normal"
       ],
-      "attack": "20",
+      "attack": "45",
       "levelType": "fast",
       "exp": "88",
       "eggCycles": "20"
@@ -3172,7 +3172,7 @@ const pokemonList = [
       "type": [
         "Fighting"
       ],
-      "attack": "95",
+      "attack": "110",
       "levelType": "mediumfast",
       "exp": "159",
       "eggCycles": "25"
@@ -3187,7 +3187,7 @@ const pokemonList = [
         "Ice",
         "Psychic"
       ],
-      "attack": "30",
+      "attack": "65",
       "levelType": "mediumfast",
       "exp": "61",
       "eggCycles": "25"
@@ -3239,7 +3239,7 @@ const pokemonList = [
       "type": [
         "Normal"
       ],
-      "attack": "10",
+      "attack": "135",
       "levelType": "fast",
       "exp": "608",
       "eggCycles": "40"
@@ -3251,7 +3251,7 @@ const pokemonList = [
       "type": [
         "Electric"
       ],
-      "attack": "85",
+      "attack": "100",
       "levelType": "slow",
       "exp": "261",
       "eggCycles": "80"
@@ -3275,7 +3275,7 @@ const pokemonList = [
       "type": [
         "Water"
       ],
-      "attack": "75",
+      "attack": "115",
       "levelType": "slow",
       "exp": "261",
       "eggCycles": "80"
@@ -3318,7 +3318,7 @@ const pokemonList = [
         "Rock",
         "Dark"
       ],
-      "attack": "134",
+      "attack": "164",
       "levelType": "slow",
       "exp": "270",
       "eggCycles": "40"
@@ -3331,7 +3331,7 @@ const pokemonList = [
         "Psychic",
         "Flying"
       ],
-      "attack": "90",
+      "attack": "154",
       "levelType": "slow",
       "exp": "306",
       "eggCycles": "120"
@@ -3344,7 +3344,7 @@ const pokemonList = [
         "Fire",
         "Flying"
       ],
-      "attack": "130",
+      "attack": "154",
       "levelType": "slow",
       "exp": "306",
       "eggCycles": "120"
