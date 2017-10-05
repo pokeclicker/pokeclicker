@@ -91,6 +91,7 @@ class Game {
         }
         Save.counter += GameConstants.TICK_TIME;
         Underground.counter += GameConstants.TICK_TIME;
+        GameHelper.counter += GameConstants.TICK_TIME;
 
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
@@ -139,6 +140,10 @@ class Game {
                 Underground.energyTick(player._mineEnergyRegenTime());
             }
             Underground.counter = 0;
+        }
+
+        if (GameHelper.counter > 60 * 1000) {
+            GameHelper.updateTime();
         }
     }
 
