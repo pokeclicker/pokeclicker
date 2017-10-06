@@ -37,17 +37,13 @@ class ShopHandler {
             } else {
                 Notifier.notify("You don't have enough money to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
             }
-        } else if (item.currency == GameConstants.Currency.questpoint) { 
+        } else if (item.currency == GameConstants.Currency.questpoint) {
             if (player.hasQuestPoints(item.totalPrice())) {
                 player.payQuestPoints(item.totalPrice());
-                if(item.name() =="Dungeon_ticket"){
-                    player.gainKeyItem("Dungeon ticket");
-                    ShopHandler.showShop(player.town().shop())
-                }else{
-                    item.buy(this.amount());
-                    item.increasePriceMultiplier(this.amount());
-                    Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
-                }             
+                item.buy(this.amount());
+                item.increasePriceMultiplier(this.amount());
+                ShopHandler.showShop(player.town().shop());
+                Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success) 
             } else {
                 Notifier.notify("You don't have enough quest points to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
             }
@@ -67,11 +63,10 @@ class ShopHandler {
     }
 
     public static ownKeyItem(name: string): boolean {
-
-        console.log(name);
-        if(name =='Dungeon_ticket' && player.hasKeyItem('Dungeon ticket')){
+        let keyItem = GameConstants.KeyItemType[name];
+        if( keyItem != undefined && player.hasKeyItem(name.replace("_", " ")) ) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }

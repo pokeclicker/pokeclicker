@@ -7,9 +7,11 @@ class buyKeyItem extends Item {
             let priceMultiplier = 1;
             super(GameConstants.KeyItemType[type], basePrice, priceMultiplier, GameConstants.Currency.questpoint);
             this.type = type;
+            this.totalPrice = ko.observable(this.basePrice);
         }
     
         buy(amt: number) {
+            player.gainKeyItem(GameConstants.KeyItemType[this.type].replace("_", " "))
         }
     
         use() {
