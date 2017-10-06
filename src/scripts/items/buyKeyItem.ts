@@ -7,7 +7,7 @@ class buyKeyItem extends Item {
             let priceMultiplier = 1;
             super(GameConstants.KeyItemType[type], basePrice, priceMultiplier, GameConstants.Currency.questpoint);
             this.type = type;
-            this.totalPrice = ko.observable(this.basePrice);
+            this.totalPrice = ko.computed(function(){return this.basePrice}, this);
         }
     
         buy(amt: number) {
