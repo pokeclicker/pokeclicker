@@ -10,6 +10,7 @@ class buyKeyItem extends Item {
         }
     
         buy(amt: number) {
+            player.gainKeyItem(GameConstants.KeyItemType[this.type].replace("_", " "))
         }
     
         use() {
