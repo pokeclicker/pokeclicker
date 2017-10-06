@@ -280,7 +280,19 @@ namespace GameConstants {
         "Bruno" = 10,
         "Agatha" = 11,
         "Lance" = 12,
-        "Champion" = 13
+        "Champion" = 13,
+        "Zephyr" = 14,
+        "Hive" = 15,
+        "Plain" = 16,
+        "Fog" = 17,
+        "Storm" = 18,
+        "Mineral" = 19,
+        "Glacier" = 20,
+        "Rising" = 21,
+        "Will" = 22,
+        "Koga" = 23,
+        "Bruno2" = 24,
+        "Karen" = 25
     }
 
     export enum PokemonType {
