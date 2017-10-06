@@ -209,7 +209,7 @@ gymList["Violet City"] = new Gym(
     GameConstants.Badge.Zephyr,
     500,
     GameConstants.Badge.Lance,
-    "TODO"
+    "...For pity's sake! My dad's cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge."
 );
 
 gymList["Azalea Town"] = new Gym(
@@ -221,7 +221,7 @@ gymList["Azalea Town"] = new Gym(
     GameConstants.Badge.Hive,
     500,
     GameConstants.Badge.Zephyr,
-    "TODO"
+    "Whoa, amazing! You're an expert on Pokémon! My research isn't complete yet. OK, you win. Take this Hive Badge."
 );
 
 gymList["Goldenrod City"] = new Gym(
@@ -232,7 +232,7 @@ gymList["Goldenrod City"] = new Gym(
     GameConstants.Badge.Plain,
     500,
     GameConstants.Badge.Hive,
-    "TODO"
+    "...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here's the Plain Badge."
 );
 
 gymList["Ecruteak City"] = new Gym(
@@ -245,7 +245,7 @@ gymList["Ecruteak City"] = new Gym(
     GameConstants.Badge.Fog,
     500,
     GameConstants.Badge.Plain,
-    "TODO"
+    "I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge.."
 );
 
 gymList["Cianwood City"] = new Gym(
@@ -256,7 +256,7 @@ gymList["Cianwood City"] = new Gym(
     GameConstants.Badge.Storm,
     500,
     GameConstants.Badge.Fog,
-    "TODO"
+    "Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I'm going to train 24 hours a day!"
 );
 
 gymList["Olivine City"] = new Gym(
@@ -268,7 +268,7 @@ gymList["Olivine City"] = new Gym(
     GameConstants.Badge.Mineral,
     500,
     GameConstants.Badge.Storm,
-    "TODO"
+    "...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge."
 );
 
 gymList["Mahogany Town"] = new Gym(
@@ -280,7 +280,7 @@ gymList["Mahogany Town"] = new Gym(
     GameConstants.Badge.Glacier,
     500,
     GameConstants.Badge.Mineral,
-    "TODO"
+    "I am impressed by your prowess. With your strong will, I know you will overcome all life's obstacles. You are worthy of this Glacier Badge!"
 );
 
 gymList["Blackthorn City"] = new Gym(
@@ -289,9 +289,63 @@ gymList["Blackthorn City"] = new Gym(
     [new GymPokemon("Dragonair", 4000, 38),
         new GymPokemon("Dragonair", 6800, 38),
         new GymPokemon("Gyarados", 6800, 38),
-        new GymPokemon("Kingdra", 6800, 74)],
+        new GymPokemon("Kingdra", 6800, 41)],
     GameConstants.Badge.Rising,
     500,
     GameConstants.Badge.Glacier,
-    "TODO"
+    "Here, this is the RisingBadge... Hurry up! Take it!"
+);
+
+//Johto Elite 4
+gymList["Elite Will"] = new Gym(
+    "Will",
+    "Elite Will",
+    [new GymPokemon("Xatu", 45330, 40),
+        new GymPokemon("Jynx", 48300, 41),
+        new GymPokemon("Exeggcutor", 52000, 41),
+        new GymPokemon("Slobro", 57000, 41),
+        new GymPokemon("Xatu", 60250, 42),],
+    GameConstants.Badge.Will,
+    7500,
+    GameConstants.Badge.Rising,
+    "Even though I was defeated, I won't change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four."
+);
+gymList["Elite Koga"] = new Gym(
+    "Koga",
+    "Elite Koga",
+    [new GymPokemon("Ariados", 45330, 40),
+        new GymPokemon("Venomoth", 48300, 41),
+        new GymPokemon("Forretress", 52000, 43),
+        new GymPokemon("Muk", 57000, 42),
+        new GymPokemon("Crobat", 60250, 44),],
+    GameConstants.Badge.Koga,
+    7500,
+    GameConstants.Badge.Will,
+    "I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!"
+);
+gymList["Elite Bruno2"] = new Gym(
+    "Bruno2",
+    "Elite Bruno2",
+    [new GymPokemon("Hitmontop", 45330, 42),
+        new GymPokemon("Hitmonlee", 48300, 42),
+        new GymPokemon("Hitmonchan", 52000, 42),
+        new GymPokemon("Onix", 57000, 43),
+        new GymPokemon("Machamp", 60250, 46),],
+    GameConstants.Badge.Bruno2,
+    7500,
+    GameConstants.Badge.Koga,
+    "Having lost, I have no right to say anything… Go face your next challenge!"
+);
+gymList["Elite Karen"] = new Gym(
+    "Karen",
+    "Elite Karen",
+    [new GymPokemon("Umbreon", 48300, 42),
+        new GymPokemon("Vileplume", 52000, 42),
+        new GymPokemon("Gengar", 57000, 45),
+        new GymPokemon("Murkrow", 60250, 44),
+        new GymPokemon("Houndoom", 66000, 47),],
+    GameConstants.Badge.Karen,
+    7500,
+    GameConstants.Badge.Bruno2,
+    "Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what's important. Go on — — the Champion is waiting."
 );
