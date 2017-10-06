@@ -63,11 +63,10 @@ class ShopHandler {
     }
 
     public static ownKeyItem(name: string): boolean {
-
-        console.log(name);
-        if(name =='Dungeon_ticket' && player.hasKeyItem('Dungeon ticket')){
+        let keyItem = GameConstants.KeyItemType[name];
+        if( keyItem != undefined && player.hasKeyItem(name.replace("_", " ")) ) {
             return false;
-        }else{
+        } else {
             return true;
         }
     }
