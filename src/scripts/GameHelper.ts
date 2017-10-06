@@ -16,6 +16,14 @@ class GameHelper {
         return `${hours}:${GameHelper.twoDigitNumber(minutes)}`;
     });
 
+    public static formattedLetterTimeUntilTomorrow: KnockoutComputed<string> = ko.computed(function() {
+        let milliseconds = GameHelper.msUntilTomorrow();
+        let hours = Math.floor( milliseconds / GameHelper.MS_IN_HOUR );
+        milliseconds -= hours * GameHelper.MS_IN_HOUR;
+        let minutes = Math.floor( milliseconds / GameHelper.MS_IN_MIN );
+        return `${hours}h${GameHelper.twoDigitNumber(minutes)}m`;
+    });
+
     public static incrementObservable(obs: KnockoutObservable<number>, amt: number = 1) {
         obs(obs() + amt);
     }
