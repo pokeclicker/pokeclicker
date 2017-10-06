@@ -86,6 +86,7 @@ class QuestHelper{
                 player._money(player._money() - QuestHelper.getRefreshCost());
             }
             player.questRefreshes++;
+            QuestHelper.quitQuest();
             QuestHelper.clearQuests();
             QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
         } else {
@@ -136,7 +137,9 @@ class QuestHelper{
     }
 
     public static quitQuest() {
-        QuestHelper.questList()[player.currentQuest().index].quit();
+        if (player.currentQuest()) {
+            QuestHelper.questList()[player.currentQuest().index].quit();
+        }
     }
 
     public static checkCompletedSet() {
