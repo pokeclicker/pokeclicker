@@ -68,6 +68,7 @@ class MapHelper {
 
     public static accessToTown(townName: string): boolean {
         let town = TownList[townName];
+        if (!town) { return false }
         for (let i of town.reqRoutes) {
             if (player.routeKills[i]() < player.routeKillsNeeded) {
                 return false;
