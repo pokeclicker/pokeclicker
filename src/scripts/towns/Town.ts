@@ -88,3 +88,24 @@ TownList["Seafoam Islands"] = new DungeonTown("Seafoam Islands", [19], null, dun
 TownList["Victory Road"] = new DungeonTown("Victory Road", [22], null, dungeonList["Victory Road"]);
 TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], null, dungeonList["Cerulean Cave"]);
 TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], null, dungeonList["Pokemon Mansion"]);
+
+//Johto Towns
+TownList["New Bark Town"] = new Town("New Bark Town", []);
+
+TownList["Cherrygrove City"] = new Town("Cherrygrove City", [29]);
+
+TownList["Violet City"] = new Town("Violet City", [31]);
+
+TownList["Azalea Town"] = new Town("Violet City", [33]);
+
+TownList["Goldenrod City"] = new Town("Goldenrod City", [34]);
+
+TownList["Ecruteak City"] = new Town("Ecruteak City", [37]);
+
+TownList["Olivine City"] = new Town("Olivine City", [39]);
+
+TownList["Cianwood City"] = new Town("Cianwood City", [41]);
+
+TownList["Mahogany Town"] = new Town("Mahogany Town", [42]);
+
+TownList["Blackthorn City"] = new Town("Blackthorn City", [44]);
