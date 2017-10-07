@@ -48,6 +48,7 @@ class DungeonTown extends Town {
 
 const TownList: { [name: string]: Town } = {};
 
+//Kanto Towns
 let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp"]);
 TownList["Pewter City"] = new Town("Pewter City", [2], PewterCityShop);
 
@@ -77,7 +78,7 @@ TownList["Pallet Town"] = new Town("Pallet Town", []);
 let LavenderTownShop = new Shop(["Greatball", "Item_magnet", "Lucky_incense", "Grass_egg"]);
 TownList["Lavender Town"] = new Town("Lavender Town", [10], LavenderTownShop, dungeonList["Pokemon Tower"]);
 
-//Dungeons
+//Kanto Dungeons
 TownList["Viridian Forest"] = new DungeonTown("Viridian Forest", [1], null, dungeonList["Viridian Forest"]);
 TownList["Digletts Cave"] = new DungeonTown("Digletts Cave", [1], null, dungeonList["Digletts Cave"]);
 TownList["Mt. Moon"] = new DungeonTown("Mt. Moon", [3], null, dungeonList["Mt. Moon"]);
@@ -109,3 +110,16 @@ TownList["Cianwood City"] = new Town("Cianwood City", [41]);
 TownList["Mahogany Town"] = new Town("Mahogany Town", [42]);
 
 TownList["Blackthorn City"] = new Town("Blackthorn City", [44]);
+
+//Johto Dungeons
+TownList["Sprout Tower"] = new DungeonTown("Sprout Tower", [31], null, dungeonList["Sprout Tower"]);
+TownList["Union Cave"] = new DungeonTown("Union Cave", [32], null, dungeonList["Union Cave"]);
+TownList["Slowpoke Well"] = new DungeonTown("Slowpoke Well", [33], null, dungeonList["Slowpoke Well"]);
+TownList["Ilex Forest"] = new DungeonTown("Ilex Forest", [33], null, dungeonList["Ilex Forest"]);
+TownList["Burned Tower"] = new DungeonTown("Burned Tower", [37], null, dungeonList["Burned Tower"]);
+TownList["Tin Tower"] = new DungeonTown("Tin Tower", [37], null, dungeonList["Tin Tower"]);
+TownList["Lighthouse"] = new DungeonTown("Lighthouse", [39], null, dungeonList["Lighthouse"]);
+TownList["Whirl Islands"] = new DungeonTown("Whirl Islands", [41], null, dungeonList["Whirl Islands"]);
+TownList["Mt Mortar"] = new DungeonTown("Mt Mortar", [42], null, dungeonList["Mt Mortar"]);
+TownList["Dark Cave"] = new DungeonTown("Dark Cave", [45], null, dungeonList["Dark Cave"]);
+TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], null, dungeonList["Mt Silver"]);
