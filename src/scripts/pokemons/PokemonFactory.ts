@@ -13,7 +13,7 @@ class PokemonFactory {
      * @returns {any}
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
-        if (!PokemonFactory.validRoute(route, region)) {
+        if (!MapHelper.validRoute(route, region)) {
             return null;
         }
 
@@ -35,15 +35,6 @@ class PokemonFactory {
         let money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
         let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, route * 2, catchRate, exp, money, shiny);
-    }
-
-    public static validRoute(route: number, region: GameConstants.Region): boolean {
-        switch (region) {
-            case GameConstants.Region.kanto:
-                return route > 0 && route < 26;
-            case GameConstants.Region.johto:
-                return route > 25 && route < 49;
-        }
     }
 
     public static routeHealth(route: number): number {

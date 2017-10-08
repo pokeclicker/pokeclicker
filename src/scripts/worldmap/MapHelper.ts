@@ -101,4 +101,13 @@ class MapHelper {
         }
     }
 
+    public static validRoute(route: number, region: GameConstants.Region): boolean {
+        switch (region) {
+            case GameConstants.Region.kanto:
+                return route > 0 && route < 26;
+            case GameConstants.Region.johto:
+                return route > 25 && route < 49;
+        }
+    }
+
 }
