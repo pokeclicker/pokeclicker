@@ -121,5 +121,6 @@ TownList["Tin Tower"] = new DungeonTown("Tin Tower", [37], null, dungeonList["Ti
 TownList["Lighthouse"] = new DungeonTown("Lighthouse", [39], null, dungeonList["Lighthouse"]);
 TownList["Whirl Islands"] = new DungeonTown("Whirl Islands", [41], null, dungeonList["Whirl Islands"]);
 TownList["Mt Mortar"] = new DungeonTown("Mt Mortar", [42], null, dungeonList["Mt Mortar"]);
+TownList["Ice Path"] = new DungeonTown("Ice Path", [44], null, dungeonList["Ice Path"]);
 TownList["Dark Cave"] = new DungeonTown("Dark Cave", [45], null, dungeonList["Dark Cave"]);
 TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], null, dungeonList["Mt Silver"]);
