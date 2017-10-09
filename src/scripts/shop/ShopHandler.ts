@@ -37,7 +37,7 @@ class ShopHandler {
             } else {
                 Notifier.notify("You don't have enough money to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
             }
-        } else if (item.currency == GameConstants.Currency.questpoint) {
+        } else if (item.currency == GameConstants.Currency.questPoint) {
             if (player.hasQuestPoints(item.totalPrice())) {
                 player.payQuestPoints(item.totalPrice());
                 item.buy(this.amount());
