@@ -21,6 +21,10 @@ class MapHelper {
         if (!player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
             return false;
         }
+        let dungeonReq = GameConstants.routeDungeonRequirements[region][route];
+        if (dungeonReq !== undefined && 1 > player.statistics.dungeonsCleared[GameConstants.Dungeons.indexOf(dungeonReq)]()) {
+            return false;
+        }
         let reqList = GameConstants.routeRequirements[region][route];
         if (reqList == undefined) {
             return true;
