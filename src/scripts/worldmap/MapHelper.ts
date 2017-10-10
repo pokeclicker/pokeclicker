@@ -17,14 +17,16 @@ class MapHelper {
         }
     };
 
-    public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        if (!player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
-            return false;
-        }
+    private static hasBadgeReq(route, region) {
+        return player.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
+    }
+
+    private static hasDungeonReq(route, region) {
         let dungeonReq = GameConstants.routeDungeonRequirements[region][route];
-        if (dungeonReq !== undefined && 1 > player.statistics.dungeonsCleared[GameConstants.Dungeons.indexOf(dungeonReq)]()) {
-            return false;
-        }
+        return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[GameConstants.Dungeons.indexOf(dungeonReq)]();
+    }
+
+    private static hasRouteKillReq(route, region) {
         let reqList = GameConstants.routeRequirements[region][route];
         if (reqList == undefined) {
             return true;
@@ -36,6 +38,10 @@ class MapHelper {
             }
         }
         return true;
+    }
+
+    public static accessToRoute = function (route: number, region: GameConstants.Region) {
+        return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
     };
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
