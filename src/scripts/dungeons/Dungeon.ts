@@ -121,5 +121,5 @@ dungeonList["Cerulean Cave"] = new Dungeon("Cerulean Cave",
     ["Arbok", "Raichu", "Sandslash", "Golbat", "Parasect", "Venomoth", "Kadabra", "Magneton", "Dodrio", "Hypno", "Ditto", "Wigglytuff", "Electrode", "Marowak", "Chansey"],
     28735,
     [new DungeonBossPokemon("Rhydon", 143675, 60), new DungeonBossPokemon("Mewtwo", 215512, 70)],
-    2500, GameConstants.Badge.Earth, 20, 55
+    2500, GameConstants.Badge.Champion, 20, 55
 );

@@ -12,13 +12,15 @@ class Town {
     private _shop?: KnockoutObservable<Shop>;
     private _dungeon?: KnockoutObservable<Dungeon>;
     private _reqRoutes: number[];
+    private dungeonReq: string; // Dungeon that must be completed to access town
 
-    constructor(name: string, routes: number[], shop?: Shop, dungeon?: Dungeon) {
+    constructor(name: string, routes: number[], shop?: Shop, dungeon?: Dungeon, dungeonReq?: string) {
         this._name = ko.observable(name);
         this._gym = ko.observable(gymList[name]);
         this._reqRoutes = routes;
         this._shop = ko.observable(shop);
         this._dungeon = ko.observable(dungeon);
+        this.dungeonReq = dungeonReq;
     }
 
     get name(): KnockoutObservable<string> {
@@ -40,9 +42,41 @@ class Town {
     get dungeon(): KnockoutObservable<Dungeon> {
         return this._dungeon;
     }
+
+    public hasRouteReq() {
+        for (let i of this.reqRoutes) {
+            if (player.routeKills[i]() < player.routeKillsNeeded) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public hasDungeonReq() {
+        if (this.dungeonReq != undefined) {
+            return 0 < player.statistics.dungeonsCleared[GameConstants.Dungeons.indexOf(this.dungeonReq)]();
+        } else {
+            return true;
+        }
+    }
+
+    public isUnlocked() {
+        return this.hasRouteReq() && this.hasDungeonReq();
+    }
 }
 
 class DungeonTown extends Town {
+    private badgeReq: GameConstants.Badge;
+
+    constructor(name: string, routes: number[], badge?: GameConstants.Badge) {
+        super(name, routes, null, dungeonList[name]);
+        this.badgeReq = badge;
+    }
+
+    public isUnlocked() {
+        return (this.hasRouteReq() && player.hasBadge(this.badgeReq));
+    }
 
 }
 
@@ -78,13 +112,13 @@ let LavenderTownShop = new Shop(["Greatball", "Item_magnet", "Lucky_incense", "G
 TownList["Lavender Town"] = new Town("Lavender Town", [10], LavenderTownShop, dungeonList["Pokemon Tower"]);
 
 //Dungeons
-TownList["Viridian Forest"] = new DungeonTown("Viridian Forest", [1], null, dungeonList["Viridian Forest"]);
-TownList["Digletts Cave"] = new DungeonTown("Digletts Cave", [1], null, dungeonList["Digletts Cave"]);
-TownList["Mt. Moon"] = new DungeonTown("Mt. Moon", [3], null, dungeonList["Mt. Moon"]);
-TownList["Rock Tunnel"] = new DungeonTown("Rock Tunnel", [9], null, dungeonList["Rock Tunnel"]);
-TownList["Power Plant"] = new DungeonTown("Power Plant", [9], null, dungeonList["Power Plant"]);
-TownList["Pokemon Tower"] = new DungeonTown("Pokemon Tower", [10], null, dungeonList["Pokemon Tower"]);
-TownList["Seafoam Islands"] = new DungeonTown("Seafoam Islands", [19], null, dungeonList["Seafoam Islands"]);
-TownList["Victory Road"] = new DungeonTown("Victory Road", [22], null, dungeonList["Victory Road"]);
-TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], null, dungeonList["Cerulean Cave"]);
-TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], null, dungeonList["Pokemon Mansion"]);
+TownList["Viridian Forest"] = new DungeonTown("Viridian Forest", [1]);
+TownList["Digletts Cave"] = new DungeonTown("Digletts Cave", [1], GameConstants.Badge.Boulder);
+TownList["Mt. Moon"] = new DungeonTown("Mt. Moon", [3], GameConstants.Badge.Boulder);
+TownList["Rock Tunnel"] = new DungeonTown("Rock Tunnel", [9], GameConstants.Badge.Cascade);
+TownList["Power Plant"] = new DungeonTown("Power Plant", [9], GameConstants.Badge.Cascade);
+TownList["Pokemon Tower"] = new DungeonTown("Pokemon Tower", [10], GameConstants.Badge.Cascade);
+TownList["Seafoam Islands"] = new DungeonTown("Seafoam Islands", [19], GameConstants.Badge.Soul);
+TownList["Victory Road"] = new DungeonTown("Victory Road", [22], GameConstants.Badge.Earth);
+TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], GameConstants.Badge.Champion);
+TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], GameConstants.Badge.Soul);

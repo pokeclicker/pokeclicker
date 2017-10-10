@@ -60,13 +60,7 @@ class MapHelper {
 
     public static accessToTown(townName: string): boolean {
         let town = TownList[townName];
-        for (let i of town.reqRoutes) {
-            if (player.routeKills[i]() < player.routeKillsNeeded) {
-                return false;
-            }
-        }
-
-        return true;
+        return town.isUnlocked();
     };
 
     public static moveToTown(townName: string) {
@@ -79,6 +73,8 @@ class MapHelper {
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
             Game.applyRouteBindings();
+        } else {
+            Notifier.notify("You don't have access to that location yet.", GameConstants.NotificationOption.warning);
         }
     };
 
