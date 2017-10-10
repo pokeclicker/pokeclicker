@@ -361,6 +361,13 @@ namespace GameConstants {
         }
     };
 
+    export const routeDungeonRequirements = {
+        0: {
+            4: "Mt. Moon",
+            20: "Seafoam Islands",
+        }
+    }
+
     export enum Starter {
         "None" = -1,
         "Bulbasaur" = 0,
