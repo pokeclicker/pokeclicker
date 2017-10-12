@@ -7,6 +7,13 @@ let player;
 const debug = false;
 
 document.addEventListener("DOMContentLoaded", function (event) {
+    if (debug) {
+        $('.loader').hide("fast")
+    } else {
+        setTimeout(function () {
+            $('.loader').fadeOut("slow")
+        }, 2600);
+    }
     OakItemRunner.initialize();
     UndergroundItem.initialize();
     let game: Game = new Game();
