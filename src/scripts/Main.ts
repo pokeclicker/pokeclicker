@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
 
-    ko.bindingHandlers.tooltip = {
+    (ko as any).bindingHandlers.tooltip = {
         init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             let local = ko.utils.unwrapObservable(valueAccessor()),
                 options = {};
