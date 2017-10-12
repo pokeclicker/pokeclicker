@@ -97,16 +97,11 @@ class FarmRunner {
     public static harvest(plotId) {
         let plot = this.getPlot(plotId);
         if (plot.berry() !== null && plot.timeLeft() <= 0) {
-            FarmRunner.gainPlotExp(plotId);
             player.gainFarmPoints(plot.berry().farmValue);
             FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
             player.gainMoney(plot.berry().moneyValue);
             plot.berry(null);
         }
-    }
-
-    public static gainPlotExp(plotId) {
-        this.getPlot(plotId).exp += this.getPlot(plotId).berry().farmValue;
     }
 
     public static gainBerryByName(berryName: string, amount: number = 1) {
