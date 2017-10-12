@@ -64,11 +64,7 @@ class ShopHandler {
 
     public static ownKeyItem(name: string): boolean {
         let keyItem = GameConstants.KeyItemType[name];
-        if( keyItem != undefined && player.hasKeyItem(name.replace("_", " ")) ) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(keyItem != undefined && player.hasKeyItem(name.replace("_", " ")));
     }
 
     public static calculateCss(i: number): string {
