@@ -7,7 +7,7 @@ class PokedexHelper {
         if (!PokedexHelper.pokemonSeen(pokemon.id)()) {
             return "grey"
         }
-        if (pokemon.type2 == PokemonType.None) {
+        if (pokemon.type2 == GameConstants.PokemonType.None) {
             return TypeColor[pokemon.type1];
         }
         return 'linear-gradient(90deg,' + TypeColor[pokemon.type1] + ' 50%, ' + TypeColor[pokemon.type2] + ' 50%)';

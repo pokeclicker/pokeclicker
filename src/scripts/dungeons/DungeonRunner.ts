@@ -16,8 +16,13 @@ class DungeonRunner {
         if (!dungeon.isUnlocked()) {
             return false;
         }
-
         DungeonRunner.dungeon = dungeon;
+
+        if (!DungeonRunner.hasEnoughTokens()) {
+            Notifier.notify("You don't have enough dungeon tokens", GameConstants.NotificationOption.danger);
+            return false;
+        }
+        DungeonRunner.payTokens();
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE);
         DungeonRunner.pokemonDefeated = 0;
@@ -71,6 +76,7 @@ class DungeonRunner {
     }
 
     public static dungeonWon() {
+        GameHelper.incrementObservable(player.statistics.dungeonsCleared[GameConstants.Dungeons.indexOf(DungeonRunner.dungeon.name())]);
         Game.gameState(GameConstants.GameState.town);
         // TODO award loot with a special screen
         Notifier.notify("You have successfully completed the dungeon", GameConstants.NotificationOption.success);
@@ -83,6 +89,14 @@ class DungeonRunner {
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
         let possiblePokemon: string[] = dungeon.allPokemonNames;
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
+    }
+
+    public static hasEnoughTokens() {
+        return player.dungeonTokens() >= DungeonRunner.dungeon.tokenCost;
+    }
+
+    public static payTokens() {
+        player.dungeonTokens(player.dungeonTokens() - DungeonRunner.dungeon.tokenCost);
     }
 
 }

@@ -7,84 +7,15 @@ class Player {
 
     private _money: KnockoutObservable<number>;
     private _dungeonTokens: KnockoutObservable<number>;
-    private _caughtShinyList: KnockoutObservableArray<string>;
-    private _route: KnockoutObservable<number>;
-    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
-    private _routeKills: Array<KnockoutObservable<number>>;
-    private _routeKillsNeeded: KnockoutObservable<number>;
-    private _region: GameConstants.Region;
-    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
-    private _pokeballs: Array<KnockoutObservable<number>>;
-    private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
-    private _sortDescending: KnockoutObservable<boolean>;
-    private _town: KnockoutObservable<Town>;
-    private _starter: GameConstants.Starter;
-    private _oakItemExp: Array<KnockoutObservable<number>>;
-    private _oakItemsEquipped: string[];
-    private _eggList: Array<KnockoutObservable<Egg|void>>;
-    private _eggSlots: KnockoutObservable<number>;
-
-    private _itemList: { [name: string]: number };
-    private _itemMultipliers: { [name: string]: number };
-
-    private _mineEnergy: KnockoutObservable<number>;
-    private _maxMineEnergy: KnockoutObservable<number>;
-    private _mineEnergyGain: KnockoutObservable<number>;
-    private _mineInventory: KnockoutObservableArray<any>;
-    private _diamonds: KnockoutObservable<number>;
-    private _maxDailyDeals: KnockoutObservable<number>;
-    private _maxUndergroundItems: KnockoutObservable<number>;
-    private _mineEnergyRegenTime: KnockoutObservable<number>;
-
-    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
-    private _shardsCollected: Array<KnockoutObservable<number>>;
-
-    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
-    public clickAttackObservable: KnockoutComputed<number>;
-    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
-    public pokemonAttackObservable: KnockoutComputed<number>;
-    public achievementsCompleted: {[name: string]: boolean};
-
-    public plotList: KnockoutObservable<Plot>[];
-    public farmPoints: KnockoutObservable<number>;
-    public berryList: KnockoutObservable<number>[];
-
-    public routeKillsObservable(route: number): KnockoutComputed<number> {
-        return ko.computed(function () {
-            return Math.min(this.routeKillsNeeded, this.routeKills[route]());
-        }, this);
-    }
-
-    public pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
-        return ko.computed(function () {
-            return this._pokeballs[ball]();
-        }, this);
-    }
-
-    public setAlreadyCaughtBallSelection(ball: GameConstants.Pokeball) {
-        this._alreadyCaughtBallSelection(ball);
-    }
-
-    public setNotCaughtBallSelection(ball: GameConstants.Pokeball) {
-        this._notCaughtBallSelection(ball);
-    }
-
-    public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
-        this._pokeballs[ball](this._pokeballs[ball]() + amount)
-    }
-
-    public usePokeball(ball: GameConstants.Pokeball): void {
-        this._pokeballs[ball](this._pokeballs[ball]() - 1)
-    }
-
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
+
         savedPlayer = savedPlayer || {};
+        this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
+        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         if (savedPlayer._route == null || savedPlayer._route == 0) {
             this._route = ko.observable(1);
@@ -117,14 +48,14 @@ class Player {
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
-            let amt = 1000;
+            let amt = index == 0 ? 50 : 0;
             if (savedPlayer._pokeballs && typeof savedPlayer._pokeballs[index] == 'number') {
                 amt = savedPlayer._pokeballs[index];
             }
             return ko.observable(amt);
         });
         this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._notCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
-        this._alreadyCaughtBallSelection = typeof(savedPlayer._alreadyCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._alreadyCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
+        this._alreadyCaughtBallSelection = typeof(savedPlayer._alreadyCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._alreadyCaughtBallSelection) : ko.observable(GameConstants.Pokeball.None);
         if (this._gymBadges().length == 0) {
             this._gymBadges.push(GameConstants.Badge.None)
         }
@@ -137,6 +68,7 @@ class Player {
             return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
+        this._currentTown = ko.observable("");
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
         this._itemList = savedPlayer._itemList || Save.initializeItemlist();
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
@@ -164,6 +96,29 @@ class Player {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
 
+        let today = new Date();
+        let lastSeen = new Date(this._lastSeen);
+        if (today.toLocaleDateString() == lastSeen.toLocaleDateString()) {
+            this.questRefreshes = savedPlayer.questRefreshes;
+            if (savedPlayer.completedQuestList) {
+                this.completedQuestList = savedPlayer.completedQuestList.map((bool) => {return ko.observable(bool)});
+            } else {
+                this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+            }
+            this.currentQuest = ko.observable(savedPlayer.currentQuest);
+        } else {
+            this.questRefreshes = 0;
+            this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+            this.currentQuest = ko.observable(null);
+        }
+        this._questXP = ko.observable(savedPlayer._questXP || 0);
+        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
+
+        this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
+
+        this._lastSeen = Date.now();
+        this.statistics = new Statistics(savedPlayer.statistics);
+
         this.farmPoints = ko.observable(savedPlayer.farmPoints || 0);
         this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
@@ -178,10 +133,94 @@ class Player {
         }
     }
 
+    private _caughtShinyList: KnockoutObservableArray<string>;
+    private _route: KnockoutObservable<number>;
+    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
+
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
     get defeatedAmount(): Array<KnockoutObservable<number>> {
         return this._defeatedAmount;
+    }
+
+    private _routeKills: Array<KnockoutObservable<number>>;
+    private _routeKillsNeeded: KnockoutObservable<number>;
+    private _region: GameConstants.Region;
+    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
+    private _pokeballs: Array<KnockoutObservable<number>>;
+    private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
+    private _sortDescending: KnockoutObservable<boolean>;
+    private _town: KnockoutObservable<Town>;
+    private _currentTown: KnockoutObservable<string>;
+    private _starter: GameConstants.Starter;
+    private _oakItemExp: Array<KnockoutObservable<number>>;
+    private _oakItemsEquipped: string[];
+    private _eggList: Array<KnockoutObservable<Egg | void>>;
+    private _eggSlots: KnockoutObservable<number>;
+
+    private _itemList: { [name: string]: number };
+    private _itemMultipliers: { [name: string]: number };
+
+    private _mineEnergy: KnockoutObservable<number>;
+    private _maxMineEnergy: KnockoutObservable<number>;
+    private _mineEnergyGain: KnockoutObservable<number>;
+    private _mineInventory: KnockoutObservableArray<any>;
+    private _diamonds: KnockoutObservable<number>;
+    private _maxDailyDeals: KnockoutObservable<number>;
+    private _maxUndergroundItems: KnockoutObservable<number>;
+    private _mineEnergyRegenTime: KnockoutObservable<number>;
+
+    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
+    private _shardsCollected: Array<KnockoutObservable<number>>;
+
+    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
+    public clickAttackObservable: KnockoutComputed<number>;
+    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
+    public pokemonAttackObservable: KnockoutComputed<number>;
+    public achievementsCompleted: { [name: string]: boolean };
+    public statistics: Statistics;
+
+    public completedQuestList: Array<KnockoutObservable<boolean>>;
+    public questRefreshes: number;
+    public _questPoints: KnockoutObservable<number>;
+    public _questXP: KnockoutObservable<number>;
+    public _lastSeen: number;
+    public currentQuest: KnockoutObservable<any>;
+    private _shinyCatches: KnockoutObservable<number>;
+
+    public plotList: KnockoutObservable<Plot>[];
+    public farmPoints: KnockoutObservable<number>;
+    public berryList: KnockoutObservable<number>[];
+
+    public routeKillsObservable(route: number): KnockoutComputed<number> {
+        return ko.computed(function () {
+            return Math.min(this.routeKillsNeeded, this.routeKills[route]());
+        }, this);
+    }
+
+    public pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
+        return ko.computed(function () {
+            return this._pokeballs[ball]();
+        }, this);
+    }
+
+    public setAlreadyCaughtBallSelection(ball: GameConstants.Pokeball) {
+        this._alreadyCaughtBallSelection(ball);
+    }
+
+    public setNotCaughtBallSelection(ball: GameConstants.Pokeball) {
+        this._notCaughtBallSelection(ball);
+    }
+
+    public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
+        this._pokeballs[ball](this._pokeballs[ball]() + amount)
+    }
+
+    public usePokeball(ball: GameConstants.Pokeball): void {
+        this._pokeballs[ball](this._pokeballs[ball]() - 1)
+        GameHelper.incrementObservable(this.statistics.pokeballsUsed[ball]);
     }
 
     public addRouteKill() {
@@ -336,7 +375,11 @@ class Player {
             this._caughtShinyList.push(pokemonName);
             Save.store(player);
         }
+        if (shiny) {
+            player.shinyCatches++;
+        }
         player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
+        GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
 
     public hasBadge(badge: GameConstants.Badge) {
@@ -356,10 +399,26 @@ class Player {
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
         this._money(Math.floor(this._money() + money * oakItemBonus));
+        GameHelper.incrementObservable(this.statistics.totalMoney, money);
+    }
+
+    public gainDungeonTokens(tokens: number) {
+        this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens ));
+        GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
     }
 
     public hasMoney(money: number) {
         return this._money() >= money;
+    }
+
+    public hasQuestPoints(questPoints: number) {
+        return this._questPoints() >= questPoints;
+    }
+
+    public payQuestPoints(questPoints: number) {
+        if (this.hasQuestPoints(questPoints)) {
+            this._questPoints(Math.floor(this.questPoints - questPoints));
+        }
     }
 
     public payMoney(money: number) {
@@ -389,9 +448,11 @@ class Player {
     public gainShards(pokemon: BattlePokemon) {
         let typeNum = GameConstants.PokemonType[pokemon.type1];
         player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
         if (pokemon.type2 != GameConstants.PokemonType.None) {
             typeNum = GameConstants.PokemonType[pokemon.type2];
             player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
         }
     }
 
@@ -479,10 +540,6 @@ class Player {
         return this._itemMultipliers;
     }
 
-    set itemMultipliers(value: { [p: string]: number }) {
-        this._itemMultipliers = value;
-    }
-
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -549,6 +606,14 @@ class Player {
 
     set town(value: KnockoutObservable<Town>) {
         this._town = value;
+    }
+
+    get currentTown(): KnockoutObservable<string> {
+        return this._currentTown;
+    }
+
+    set currentTown(value: KnockoutObservable<string>) {
+        this._currentTown = value;
     }
 
     get oakItemsEquipped(): string[] {
@@ -739,10 +804,46 @@ class Player {
         this._shardsCollected = value;
     }
 
+    get questLevel(): number {
+        return QuestHelper.xpToLevel(player.questXP);
+    }
+
+    public percentToNextQuestLevel(): number {
+        let current = this.questLevel;
+        let requiredForCurrent = QuestHelper.levelToXP(current);
+        let requiredForNext = QuestHelper.levelToXP(current + 1);
+        return 100 * (this.questXP - requiredForCurrent) / (requiredForNext - requiredForCurrent);
+    }
+
+    get shinyCatches(): number {
+        return this._shinyCatches();
+    }
+
+    set shinyCatches(value: number) {
+        this._shinyCatches(value);
+    }
+
+    get questXP(): number {
+        return this._questXP();
+    }
+
+    set questXP(value: number) {
+        this._questXP(value);
+    }
+
+    get questPoints(): number {
+        return this._questPoints();
+    }
+
+    set questPoints(value: number) {
+        this._questPoints(value);
+    }
+
     public toJSON() {
         let keep = [
             "_money",
             "_dungeonTokens",
+            "_questPoints",
             "_caughtShinyList",
             "_route",
             "_caughtPokemonList",
@@ -771,10 +872,21 @@ class Player {
             "_diamonds",
             "_maxUndergroundItems",
             "_mineEnergyRegenTime",
+            "_mineLayersCleared",
             "_eggList",
             "_eggSlots",
             "_shardUpgrades",
             "_shardsCollected",
+            "achievementsCompleted",
+            "completedQuestList",
+            "questRefreshes",
+            "_questXP",
+            "_questPoints",
+            "_lastSeen",
+            "currentQuest",
+            "_shinyCatches",
+            "gymDefeats",
+            "statistics",
             "achievementsCompleted",
             "farmPoints",
             "plotList",

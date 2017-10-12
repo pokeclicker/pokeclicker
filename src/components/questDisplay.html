@@ -1,0 +1,43 @@
+<div class="page-item" style="background-color: white; min-height: 100px">
+    <br>
+    <button style="vertical-align: middle;" class='btn btn-primary'
+            data-bind='visible: !player.currentQuest(),
+                                   text: "New Quest",
+                                   click: function(){$("#QuestModal").modal("show")}'>
+    </button>
+    <div data-bind='if: player.currentQuest()'>
+        <p data-bind='text: QuestHelper.questList()[player.currentQuest().index].description'></p>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <div class="progress"
+                     data-bind='tooltip: {title: ko.pureComputed(function(){return QuestHelper.questList()[player.currentQuest().index].progressText()}), trigger: "hover"}'>
+                    <div class="progress-bar bg-success" role="progressbar"
+                         data-bind="attr:{ style: 'width:' + (QuestHelper.questList()[player.currentQuest().index].progress() * 100) + '%' }"
+                         aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                </div>
+                <div>
+                                <span data-bind='if: QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
+                                    <button class='btn btn-sm btn-success'
+                                            data-bind='click: function(){QuestHelper.questList()[player.currentQuest().index].claimReward()}'>
+                                        Claim
+                                    </button>
+                                </span>
+                    <span>
+                                    <button class='btn btn-sm btn-primary' style="margin:5px"
+                                            data-bind='click: function(){$("#QuestModal").modal("show")}'>
+                                        Questlist
+                                    </button>
+                                </span>
+                    <span data-bind='if: !QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
+                                    <button class='btn btn-sm btn-danger' style="margin:5px"
+                                            data-bind='click: function(){QuestHelper.quitQuest()}'>
+                                        Quit
+                                    </button>
+                                </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

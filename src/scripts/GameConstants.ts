@@ -19,6 +19,10 @@ namespace GameConstants {
     export const AMOUNT_OF_POKEMONS = 151;
     export const AMOUNT_OF_BADGES = 8;
 
+    export const MEW_CHANCE_ROUTE_1 = 8192
+    export const MEW_CHANCE_ROUTE_25 = 4096
+    export const MEW_CHANCE_DIFF = MEW_CHANCE_ROUTE_1 - MEW_CHANCE_ROUTE_25
+
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
@@ -140,6 +144,39 @@ namespace GameConstants {
     export const DUNGEON_BOSS_SHARDS = 20;
     export const GYM_SHARDS = 5;
 
+    //Quests
+
+    // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
+    //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
+    const questBase = 1; // change this to scale all quest points
+    export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
+    export const CAPTURE_POKEMONS_BASE_REWARD = GameConstants.DEFEAT_POKEMONS_BASE_REWARD / 0.8; // Defeat reward divided by chance to catch (guessed)
+    export const GAIN_MONEY_BASE_REWARD      = questBase * 0.0017;  // Dimava
+    export const GAIN_TOKENS_BASE_REWARD     = CAPTURE_POKEMONS_BASE_REWARD / 13 // <route number> tokens gained for every capture
+    export const HATCH_EGGS_BASE_REWARD      = questBase * 33;      // Dimava
+    export const MINE_LAYERS_BASE_REWARD     = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
+    export const SHINY_BASE_REWARD           = questBase * 6000;    // Dimava
+    export const USE_OAK_ITEM_BASE_REWARD    = GameConstants.DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
+
+    export const ACTIVE_QUEST_MULTIPLIER     = 4;
+
+    export const QuestTypes = [
+        "DefeatPokemons",
+        "CapturePokemons",
+        "GainMoney",
+        "GainTokens",
+        "GainShards",
+        "HatchEggs",
+        "MineLayers",
+        "CatchShinies",
+        "DefeatGym",
+        "DefeatDungeon",
+        "UsePokeball",
+        "UseOakItem",
+    ];
+
+    export const QUESTS_PER_SET = 10;
+
     /**
      * idle: The game is not doing anything, the battle view isn't shown
      * paused: The battle view is shown, but there are no game ticks
@@ -170,7 +207,7 @@ namespace GameConstants {
 
     export enum Currency {
         money,
-        questpoint,
+        questPoint,
         dungeontoken,
     }
 
@@ -390,6 +427,13 @@ namespace GameConstants {
         }
     };
 
+    export const routeDungeonRequirements = {
+        0: {
+            4: "Mt. Moon",
+            20: "Seafoam Islands",
+        }
+    }
+
     export enum Starter {
         "None" = -1,
         "Bulbasaur" = 0,
@@ -510,5 +554,33 @@ namespace GameConstants {
 
     }
 
+    // For random quest, name matches entry in gymList (created in Gym.ts)
+    export const Gyms = [
+        "Pewter City",
+        "Cerulean City",
+        "Vermillion City",
+        "Celadon City",
+        "Saffron City",
+        "Fuchsia City",
+        "Cinnabar Island",
+        "Viridian City",
+        "Elite Lorelei",
+        "Elite Bruno",
+        "Elite Agatha",
+        "Elite Lance",
+        "Champion Blue"
+    ];
 
+    export const Dungeons = [
+        "Viridian Forest",
+        "Digletts Cave",
+        "Mt. Moon",
+        "Rock Tunnel",
+        "Power Plant",
+        "Pokemon Tower",
+        "Seafoam Islands",
+        "Pokemon Mansion",
+        "Victory Road",
+        "Cerulean Cave"
+    ];
 }

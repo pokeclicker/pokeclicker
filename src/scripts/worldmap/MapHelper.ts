@@ -5,9 +5,11 @@ class MapHelper {
             if (this.accessToRoute(route, region)) {
                 $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 player.route(route);
+                player.currentTown("");
                 $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
                 Battle.generateNewEnemy();
                 Game.gameState(GameConstants.GameState.fighting);
+                Game.applyRouteBindings();
             }
             else {
                 Notifier.notify("You don't have access to that route yet.", GameConstants.NotificationOption.warning);
@@ -15,10 +17,16 @@ class MapHelper {
         }
     };
 
-    public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        if (!player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
-            return false;
-        }
+    private static hasBadgeReq(route, region) {
+        return player.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
+    }
+
+    private static hasDungeonReq(route, region) {
+        let dungeonReq = GameConstants.routeDungeonRequirements[region][route];
+        return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[GameConstants.Dungeons.indexOf(dungeonReq)]();
+    }
+
+    private static hasRouteKillReq(route, region) {
         let reqList = GameConstants.routeRequirements[region][route];
         if (reqList == undefined) {
             return true;
@@ -30,6 +38,10 @@ class MapHelper {
             }
         }
         return true;
+    }
+
+    public static accessToRoute = function (route: number, region: GameConstants.Region) {
+        return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
     };
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
@@ -44,25 +56,36 @@ class MapHelper {
         });
     }
 
+    public static calculateTownCssClass(town: string): KnockoutComputed<string> {
+        return ko.computed(function () {
+            if (player.currentTown() == town) {
+                return "city currentTown";
+            }
+            if (MapHelper.accessToTown(town)) {
+                return "city unlockedTown";
+            }
+            return "city lockedTown";
+        });
+    }
+
     public static accessToTown(townName: string): boolean {
         let town = TownList[townName];
-        for (let i of town.reqRoutes) {
-            if (player.routeKills[i]() < player.routeKillsNeeded) {
-                return false;
-            }
-        }
-
-        return true;
+        return town.isUnlocked();
     };
 
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
+            //console.log($("[data-town]"));
             Game.gameState(GameConstants.GameState.idle);
-            $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
+            $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute'); //pretty sure any jquery in typescript does not work fyi
             player.route(0);
             player.town(TownList[townName]);
+            player.currentTown(townName);
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
+            Game.applyRouteBindings();
+        } else {
+            Notifier.notify("You don't have access to that location yet.", GameConstants.NotificationOption.warning);
         }
     };
 
