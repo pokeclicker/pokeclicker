@@ -56,4 +56,13 @@ class GameHelper {
         return (`0${n}`).slice(-2);
     }
 
+    public static getIndexFromDistribution(a: number[]) {
+        let rand = Math.random();
+        for (let i = 0; i < a.length; i++) {
+            if (rand <= a[i]) {
+                return i;
+            }
+        }
+    }
+
 }

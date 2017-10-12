@@ -5,6 +5,7 @@
  */
 class Battle {
     static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
+
     static counter: number = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static pokeball: KnockoutObservable<GameConstants.Pokeball>;
@@ -73,6 +74,7 @@ class Battle {
         } else {
             this.generateNewEnemy();
         }
+        this.gainItem();
         player.lowerItemMultipliers();
         player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
     }
@@ -100,5 +102,17 @@ class Battle {
     public static catchPokemon() {
         player.gainDungeonTokens(Math.floor(this.enemyPokemon().level / 2));
         player.capturePokemon(this.enemyPokemon().name, this.enemyPokemon().shiny);
+    }
+
+    static gainItem() {
+        let p = player.route() / 1600 + 0.009375;
+        if (Math.random() < p) {
+            this.getRandomBerry()
+        }
+    }
+
+    public static getRandomBerry() {
+        let i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
+        player.berryList[i](player.berryList[i]() + 1);
     }
 }
