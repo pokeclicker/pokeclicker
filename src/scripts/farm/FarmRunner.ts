@@ -13,8 +13,7 @@ class FarmRunner {
     }
 
     public static accessToFarm() {
-        //TODO implement
-        return true;
+        return MapHelper.accessToRoute(14, 0);
     }
 
     public static tick() {
