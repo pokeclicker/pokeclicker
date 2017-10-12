@@ -5,6 +5,7 @@
  */
 class Battle {
     static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
+
     static counter: number = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static pokeball: KnockoutObservable<GameConstants.Pokeball>;
@@ -38,6 +39,7 @@ class Battle {
             return;
         }
         OakItemRunner.use("Poison Barb");
+        GameHelper.incrementObservable(player.statistics.clicks)
         this.enemyPokemon().damage(player.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
@@ -48,6 +50,7 @@ class Battle {
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon() {
+        GameHelper.incrementObservable(player.statistics.pokemonDefeated);
         player.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.gainShards(this.enemyPokemon());
@@ -71,6 +74,7 @@ class Battle {
         } else {
             this.generateNewEnemy();
         }
+        this.gainItem();
         player.lowerItemMultipliers();
         player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
     }
@@ -96,6 +100,20 @@ class Battle {
     }
 
     public static catchPokemon() {
+        player.gainDungeonTokens(Math.floor(this.enemyPokemon().level / 2));
         player.capturePokemon(this.enemyPokemon().name, this.enemyPokemon().shiny);
+    }
+
+    static gainItem() {
+        let p = player.route() / 1600 + 0.009375;
+        if (Math.random() < p) {
+            this.getRandomBerry()
+        }
+    }
+
+    public static getRandomBerry() {
+        let i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
+        Notifier.notify("You got a " + GameConstants.BerryType[i] + " berry!", GameConstants.NotificationOption.success);
+        player.berryList[i](player.berryList[i]() + 1);
     }
 }

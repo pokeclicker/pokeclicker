@@ -9,7 +9,7 @@ class PokeBlock extends Item {
         this.type = color;
     }
 
-    buy() {
+    buy(amt: number) {
     }
 
     use() {

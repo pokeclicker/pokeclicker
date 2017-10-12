@@ -47,6 +47,9 @@ class OakItem {
     }
 
     public use() {
+        if (this.isActive()){
+            GameHelper.incrementObservable(player.statistics.oakItemUses[this.id]);
+        }
         if (this.isMaxLevel() || !this.isActive()) {
             return;
         }

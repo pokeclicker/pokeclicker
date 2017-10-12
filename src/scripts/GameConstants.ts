@@ -13,11 +13,16 @@ namespace GameConstants {
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
+    export const GYM_COUNTDOWN = 1000;
     export const GYM_TICK = 1;
     export const ACHIEVEMENT_TICK = 1000;
 
     export const AMOUNT_OF_POKEMONS = 151;
     export const AMOUNT_OF_BADGES = 8;
+
+    export const MEW_CHANCE_ROUTE_1 = 8192
+    export const MEW_CHANCE_ROUTE_25 = 4096
+    export const MEW_CHANCE_DIFF = MEW_CHANCE_ROUTE_1 - MEW_CHANCE_ROUTE_25
 
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
@@ -81,6 +86,20 @@ namespace GameConstants {
     // Breeding
     export const BREEDING_AMOUNT = 1;
     export const BREEDING_ATTACK_BONUS = 25;
+
+    // Farm
+    export const AMOUNT_OF_BERRIES = 8;
+    export const AMOUNT_OF_PLOTS = 25;
+
+    export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
+
+    export enum PlotStage {
+        Seed,
+        Sprout,
+        Taller,
+        Bloom,
+        Berry
+    }
 
     export enum OakItem {
         "Magic Ball" = 0,
@@ -164,6 +183,38 @@ namespace GameConstants {
 
     export const SAFARI_OUT_OF_BALLS = "Game Over!<br>You have run out of safari balls to use."
 
+    //Quests
+
+    // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
+    //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
+    const questBase = 1; // change this to scale all quest points
+    export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
+    export const CAPTURE_POKEMONS_BASE_REWARD = GameConstants.DEFEAT_POKEMONS_BASE_REWARD / 0.8; // Defeat reward divided by chance to catch (guessed)
+    export const GAIN_MONEY_BASE_REWARD      = questBase * 0.0017;  // Dimava
+    export const GAIN_TOKENS_BASE_REWARD     = CAPTURE_POKEMONS_BASE_REWARD / 13 // <route number> tokens gained for every capture
+    export const HATCH_EGGS_BASE_REWARD      = questBase * 33;      // Dimava
+    export const MINE_LAYERS_BASE_REWARD     = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
+    export const SHINY_BASE_REWARD           = questBase * 6000;    // Dimava
+    export const USE_OAK_ITEM_BASE_REWARD    = GameConstants.DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
+
+    export const ACTIVE_QUEST_MULTIPLIER     = 4;
+
+    export const QuestTypes = [
+        "DefeatPokemons",
+        "CapturePokemons",
+        "GainMoney",
+        "GainTokens",
+        "GainShards",
+        "HatchEggs",
+        "MineLayers",
+        "CatchShinies",
+        "DefeatGym",
+        "DefeatDungeon",
+        "UsePokeball",
+        "UseOakItem",
+    ];
+
+    export const QUESTS_PER_SET = 10;
 
     /**
      * idle: The game is not doing anything, the battle view isn't shown
@@ -195,7 +246,7 @@ namespace GameConstants {
 
     export enum Currency {
         money,
-        questpoint,
+        questPoint,
         dungeontoken,
     }
 
@@ -226,6 +277,27 @@ namespace GameConstants {
 
     export function humanifyString(str: string) {
         return str.split('_').join(' ');
+    }
+
+    export function formatTime(time) {
+        if (time == 0) {
+            return "Ready"
+        }
+        let sec_num = parseInt('' + time, 10); // don't forget the second param
+        let hours: any = Math.floor(sec_num / 3600);
+        let minutes: any = Math.floor((sec_num - (hours * 3600)) / 60);
+        let seconds: any = sec_num - (hours * 3600) - (minutes * 60);
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        return hours + ':' + minutes + ':' + seconds;
     }
 
     export enum Region {
@@ -394,6 +466,13 @@ namespace GameConstants {
         }
     };
 
+    export const routeDungeonRequirements = {
+        0: {
+            4: "Mt. Moon",
+            20: "Seafoam Islands",
+        }
+    }
+
     export enum Starter {
         "None" = -1,
         "Bulbasaur" = 0,
@@ -453,7 +532,8 @@ namespace GameConstants {
         Rawst,
         Aspear,
         Leppa,
-        Oran
+        Oran,
+        Sitrus
     }
 
     export enum PokeBlockColor {
@@ -485,6 +565,10 @@ namespace GameConstants {
         Dragon_egg,
         Pokemon_egg,
         Mystery_egg,
+    }
+
+    export enum KeyItemType {
+        Dungeon_ticket
     }
 
     export enum EggType {
@@ -523,4 +607,34 @@ namespace GameConstants {
         "Aerodactyl": "amber",
 
     }
+
+    // For random quest, name matches entry in gymList (created in Gym.ts)
+    export const Gyms = [
+        "Pewter City",
+        "Cerulean City",
+        "Vermillion City",
+        "Celadon City",
+        "Saffron City",
+        "Fuchsia City",
+        "Cinnabar Island",
+        "Viridian City",
+        "Elite Lorelei",
+        "Elite Bruno",
+        "Elite Agatha",
+        "Elite Lance",
+        "Champion Blue"
+    ];
+
+    export const Dungeons = [
+        "Viridian Forest",
+        "Digletts Cave",
+        "Mt. Moon",
+        "Rock Tunnel",
+        "Power Plant",
+        "Pokemon Tower",
+        "Seafoam Islands",
+        "Pokemon Mansion",
+        "Victory Road",
+        "Cerulean Cave"
+    ];
 }

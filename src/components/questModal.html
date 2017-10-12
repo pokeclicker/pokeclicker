@@ -1,0 +1,76 @@
+<div class="modal noselect fade" id="QuestModal" tabindex="-1" role="dialog" aria-labelledby="QuestModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <div class="col-2">
+                <h4>Quests</h4>
+                </div>
+                <div class='col-6'>
+                    <div data-bind='text: "Lvl. "+player.questLevel'></div>
+                    <div class="progress" style='height: 5px'>
+                        <div class="progress-bar bg-info" role="progressbar"
+                             data-bind="attr:{ style: 'width:' + player.percentToNextQuestLevel() + '%' }"
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <img src="assets/images/currency/questPoint.png"><span id='questPoints'
+                                                                           data-bind='text: " " +player._questPoints()'></span>
+                </div>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;">
+                    <div>
+                        <table class='table table-hover'>
+                            <thead>
+                            <tr>
+                                <td><h5>Description</h5></td>
+                                <td><h5>Reward</h5></td>
+                                <td><h5>Status</h5></td>
+                            </tr>
+                            </thead>
+                            <tbody data-bind="foreach: QuestHelper.questList" >
+                            <tr>
+                                <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
+                                <td class="align-middle" style="text-align:left"><img src="assets/images/currency/questPoint.png"><span
+                                        data-bind='text: " " + pointsReward'></span></td>
+                                <td class="align-middle">
+                                    <button class='btn btn-primary btn-sm' data-bind='visible: !player.currentQuest() && !player.completedQuestList[index](),
+                                                                       click: function(){$data.beginQuest();$("#QuestModal").modal("hide")}'>
+                                        Start
+                                    </button>
+                                    <button class='btn btn-success' data-bind='visible: player.currentQuest() && (player.currentQuest().index == $data.index) && $data.isCompleted(),
+                                                                       click: $data.claimReward;player.completedQuestList[$index](true)'>
+                                        Claim Reward
+                                    </button>
+                                    <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>
+                                    <span data-bind='visible: player.completedQuestList[index]()'>Completed</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <div id='refreshQuests'>
+                    <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()'
+                            data-bind='text: "Refresh",
+                                       enable: QuestHelper.canAffordRefresh()'></button>
+                    <img src="assets/images/currency/money.png">
+                    <span data-bind='text: Number(QuestHelper.getRefreshCost()).toLocaleString(),
+                                  css: { "text-danger": !QuestHelper.canAffordRefresh() }'></span>
+                    <span class='' data-bind='text: "(Daily refresh in " + GameHelper.formattedLetterTimeUntilTomorrow() + ")"'>
+                    </span>
+                </div>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
