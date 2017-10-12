@@ -82,7 +82,7 @@ class DungeonTown extends Town {
 
 const TownList: { [name: string]: Town } = {};
 
-let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp"]);
+let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp","Dungeon_ticket"]);
 TownList["Pewter City"] = new Town("Pewter City", [2], PewterCityShop);
 
 let CeruleanCityShop = new Shop(["Water_stone", "xAttack"]);

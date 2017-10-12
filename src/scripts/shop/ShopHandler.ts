@@ -42,7 +42,8 @@ class ShopHandler {
                 player.payQuestPoints(item.totalPrice());
                 item.buy(this.amount());
                 item.increasePriceMultiplier(this.amount());
-                Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
+                ShopHandler.showShop(player.town().shop());
+                Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success) 
             } else {
                 Notifier.notify("You don't have enough quest points to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
             }
@@ -61,6 +62,15 @@ class ShopHandler {
         input.val(newVal > 1 ? newVal : 1).change();
     }
 
+    public static ownKeyItem(name: string): boolean {
+        let keyItem = GameConstants.KeyItemType[name];
+        if( keyItem != undefined && player.hasKeyItem(name.replace("_", " ")) ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public static calculateCss(i: number): string {
         if (this.selected() == i) {
             return "shopItem clickable btn shopItemSelected"
@@ -72,7 +82,7 @@ class ShopHandler {
     public static calculateButtonCss(): string {
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
-        if (!player.hasMoney(item.totalPrice()) || this.amount() < 1) {
+        if (item && !player.hasMoney(item.totalPrice()) || this.amount() < 1) {
             return "btn btn-danger smallButton smallFont"
         } else {
             return "btn btn-success smallButton smallFont"
