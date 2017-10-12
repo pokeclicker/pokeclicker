@@ -13,7 +13,7 @@ class FarmRunner {
     }
 
     public static accessToFarm() {
-        return MapHelper.accessToRoute(14, 0);
+        return MapHelper.accessToRoute(14, 0) && player.hasKeyItem("Wailmer pail");
     }
 
     public static tick() {
