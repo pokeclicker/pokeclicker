@@ -17,14 +17,32 @@ class GymRunner {
             Game.gameState(GameConstants.GameState.idle);
 
             GymBattle.gym = gym;
-            GymBattle.index(0);
             GymBattle.totalPokemons(gym.pokemons.length);
-            GymRunner.timeLeft(GameConstants.GYM_TIME);
-            Game.gameState(GameConstants.GameState.gym);
+            GymBattle.index(0);
             GymBattle.generateNewEnemy();
+            Game.gameState(GameConstants.GameState.gym);
+            GymRunner.timeLeft(GameConstants.GYM_TIME);
+            this.resetGif();
+            setTimeout(function () {
+                GymRunner.timeLeft(GameConstants.GYM_TIME);
+                GymBattle.index(0);
+                GymBattle.generateNewEnemy();
+                $('#gymCountdownView').fadeOut(300);
+                let $img = $('#gif-go');
+                $img.hide();
+            }, GameConstants.GYM_COUNTDOWN)
+
         } else {
-            Notifier.notify(gym.leaderName + " does not deem you a worthy opponent yet...<br>Perhaps you can convince her with more gym badges", GameConstants.NotificationOption.danger);
+            Notifier.notify(gym.leaderName + " does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges", GameConstants.NotificationOption.danger);
         }
+    }
+
+    public static resetGif(){
+        let $img = $('#gif-go');
+            $img.show();
+            setTimeout(function() {
+                $img.attr('src', 'assets/gifs/go.gif');
+            }, 0);
     }
 
     public static tick() {
@@ -64,12 +82,12 @@ class GymRunner {
 document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
-       if(GymBattle.gym.badgeReward == GameConstants.Badge.Boulder){
-           player.gainKeyItem("Dungeon ticket");
-       }
-       if(GymBattle.gym.badgeReward == GameConstants.Badge.Soul){
-           player.gainKeyItem("Safari ticket");
-       }
+        if (GymBattle.gym.badgeReward == GameConstants.Badge.Boulder) {
+            player.gainKeyItem("Dungeon ticket");
+        }
+        if (GymBattle.gym.badgeReward == GameConstants.Badge.Soul) {
+            player.gainKeyItem("Safari ticket");
+        }
 
     });
 });

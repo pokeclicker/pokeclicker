@@ -13,6 +13,7 @@ namespace GameConstants {
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
+    export const GYM_COUNTDOWN = 1000;
     export const GYM_TICK = 1;
     export const ACHIEVEMENT_TICK = 1000;
 

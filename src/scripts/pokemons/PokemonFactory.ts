@@ -15,7 +15,7 @@ class PokemonFactory {
     public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
         let name: string;
         if (route > 25 || route == 0) {
-            return null;
+            return new BattlePokemon("Rattata", 19, GameConstants.PokemonType.Psychic, GameConstants.PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
 
         let mewEncounter: boolean = Math.random() < 1 / (GameConstants.MEW_CHANCE_ROUTE_25 + ( GameConstants.MEW_CHANCE_DIFF * (25 - route) / 24 ))
