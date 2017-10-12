@@ -20,7 +20,6 @@ class FarmRunner {
         this.counter = 0;
         for (let i = 0; i < 25; i++) {
             player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - 1));
-            // player.plotList[i]().formattedTimeLeft(GameConstants.formatTime(player.plotList[i]().timeLeft()));
         }
 
     }
