@@ -62,7 +62,7 @@ class SafariBattle {
                     setTimeout(function () {
                         let random = Math.random();
                         let catchF = SafariBattle.enemy.catchFactor / 100;
-                        let index = catchF == 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
+                        let index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
                         if (index != 0) {
                             SafariBattle.startRoll(index);
                         }
@@ -92,6 +92,7 @@ class SafariBattle {
     }
 
     private static startRoll = function(n){
+        if (n == 4) {n--}
         $('#safariBall').addClass('safari-roll-left');
         setTimeout(function(){ SafariBattle.safariRoll(n-1) }, 1200);
     }
