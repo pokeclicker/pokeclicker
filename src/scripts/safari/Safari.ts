@@ -165,7 +165,6 @@ class Safari {
         Safari.nextDirection = dir;
 
         if(!Safari.isMoving) {
-            let origin = $("#safari-12-20").offset();
             if (Safari.sprite.frame == 2) {
                 Safari.sprite.to(0, true, function(){Safari.step(dir)});
             } else {
@@ -271,7 +270,7 @@ class Safari {
     }
 
     private static checkBattle(): boolean {
-        let battle = false
+        let battle = false;
         if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
             battle = Math.random() * GameConstants.SAFARI_BATTLE_CHANCE <= 1;
         }

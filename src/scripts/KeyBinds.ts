@@ -20,7 +20,7 @@ $(document).ready(function() {
             if (dir) {
                 e.preventDefault();
                 Safari.stop(dir);
-            } else if (keyCode = 32) { // space
+            } else if (keyCode == 32) { // space
                 e.preventDefault();
             }
             

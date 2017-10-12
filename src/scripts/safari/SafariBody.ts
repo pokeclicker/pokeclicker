@@ -126,11 +126,6 @@ class SandBody extends SafariBody {
                 if (this.grid[i][j] === this.edgeDetectCheck) {
                     this.grid[i][j] = this.getNumber(this.getTileNeighbours(j, i));
                 }
-                /* else if( type === 'fence') {
-                    if (body[i][j] !== 0) {
-                        body[i][j] = getFenceNumber(getTileNeighbours(j, i, body));
-                    }
-                }*/
             }
         }
     }
@@ -310,8 +305,6 @@ class GrassBody extends SafariBody {
             SafariBody.shuffle(row);
             body.push(row);
         }
-
-        //body = fillHoles(body);
 
         this.grid = body;
         this.fillHoles();
