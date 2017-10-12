@@ -495,6 +495,10 @@ namespace GameConstants {
         Mystery_egg,
     }
 
+    export enum KeyItemType {
+        Dungeon_ticket
+    }
+
     export enum EggType {
         Fire,
         Water,
