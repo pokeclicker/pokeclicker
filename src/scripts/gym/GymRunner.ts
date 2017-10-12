@@ -22,16 +22,27 @@ class GymRunner {
             GymBattle.generateNewEnemy();
             Game.gameState(GameConstants.GameState.gym);
             GymRunner.timeLeft(GameConstants.GYM_TIME);
-
+            this.resetGif();
             setTimeout(function () {
                 GymRunner.timeLeft(GameConstants.GYM_TIME);
                 GymBattle.index(0);
                 GymBattle.generateNewEnemy();
                 $('#gymCountdownView').fadeOut(300);
+                let $img = $('#gif-go');
+                $img.hide();
             }, GameConstants.GYM_COUNTDOWN)
+
         } else {
             Notifier.notify(gym.leaderName + " does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges", GameConstants.NotificationOption.danger);
         }
+    }
+
+    public static resetGif(){
+        let $img = $('#gif-go');
+            $img.show();
+            setTimeout(function() {
+                $img.attr('src', 'assets/gifs/go.gif');
+            }, 0);
     }
 
     public static tick() {
