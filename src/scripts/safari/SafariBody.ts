@@ -53,6 +53,20 @@ abstract class SafariBody {
             a[j] = x;
         }
     }
+
+    public maxY() {
+        return this.grid.length;
+    }
+
+    public maxX() {
+        let max = 0;
+        for (let row of this.grid) {
+            if (row.length > max) {
+                max = row.length;
+            }
+        }
+        return max;
+    }
 }
 
 

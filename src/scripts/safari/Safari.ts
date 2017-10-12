@@ -71,7 +71,12 @@ class Safari {
     }
 
     private static canAddBody(x: number, y: number, body: SafariBody): boolean {
-        if(y+body.grid.length > GameConstants.Safari.SizeY || x+body.grid[0].length > GameConstants.Safari.SizeX){
+        if(
+            x == 0 ||
+            y == 0 ||
+            y+body.maxY() >= GameConstants.Safari.SizeY ||
+            x+body.maxX() >= GameConstants.Safari.SizeX
+        ){
             return false;
         }
         for(let i = 0; i<body.grid.length; i++){
