@@ -87,6 +87,20 @@ namespace GameConstants {
     export const BREEDING_AMOUNT = 1;
     export const BREEDING_ATTACK_BONUS = 25;
 
+    // Farm
+    export const AMOUNT_OF_BERRIES = 8;
+    export const AMOUNT_OF_PLOTS = 25;
+
+    export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
+
+    export enum PlotStage {
+        Seed,
+        Sprout,
+        Taller,
+        Bloom,
+        Berry
+    }
+
     export enum OakItem {
         "Magic Ball" = 0,
         "Amulet Coin",
@@ -227,6 +241,27 @@ namespace GameConstants {
 
     export function humanifyString(str: string) {
         return str.split('_').join(' ');
+    }
+
+    export function formatTime(time) {
+        if (time == 0) {
+            return "Ready"
+        }
+        let sec_num = parseInt('' + time, 10); // don't forget the second param
+        let hours: any = Math.floor(sec_num / 3600);
+        let minutes: any = Math.floor((sec_num - (hours * 3600)) / 60);
+        let seconds: any = sec_num - (hours * 3600) - (minutes * 60);
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        return hours + ':' + minutes + ':' + seconds;
     }
 
     export enum Region {
@@ -461,7 +496,8 @@ namespace GameConstants {
         Rawst,
         Aspear,
         Leppa,
-        Oran
+        Oran,
+        Sitrus
     }
 
     export enum PokeBlockColor {
