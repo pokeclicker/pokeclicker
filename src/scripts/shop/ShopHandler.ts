@@ -5,6 +5,7 @@ class ShopHandler {
     static amount: KnockoutObservable<number> = ko.observable(1);
 
     public static showShop(shop: Shop) {
+        ShopHandler.amount(1);
         Game.gameState(GameConstants.GameState.idle);
         this.shopObservable(shop);
 
