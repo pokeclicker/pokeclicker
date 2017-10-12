@@ -9,7 +9,9 @@ class Player {
     private _dungeonTokens: KnockoutObservable<number>;
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
+
         savedPlayer = savedPlayer || {};
+        this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
@@ -94,6 +96,27 @@ class Player {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
 
+        let today = new Date();
+        let lastSeen = new Date(this._lastSeen);
+        if (today.toLocaleDateString() == lastSeen.toLocaleDateString()) {
+            this.questRefreshes = savedPlayer.questRefreshes;
+            if (savedPlayer.completedQuestList) {
+                this.completedQuestList = savedPlayer.completedQuestList.map((bool) => {return ko.observable(bool)});
+            } else {
+                this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+            }
+            this.currentQuest = ko.observable(savedPlayer.currentQuest);
+        } else {
+            this.questRefreshes = 0;
+            this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+            this.currentQuest = ko.observable(null);
+        }
+        this._questXP = ko.observable(savedPlayer._questXP || 0);
+        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
+
+        this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
+
+        this._lastSeen = Date.now();
         this.statistics = new Statistics(savedPlayer.statistics);
         //TODO remove before deployment
         if (!debug) {
@@ -106,8 +129,6 @@ class Player {
     private _caughtShinyList: KnockoutObservableArray<string>;
     private _route: KnockoutObservable<number>;
     private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
-
-    private _questPoints: KnockoutObservable<number>;
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
@@ -154,6 +175,14 @@ class Player {
     public achievementsCompleted: { [name: string]: boolean };
     public statistics: Statistics;
 
+    public completedQuestList: Array<KnockoutObservable<boolean>>;
+    public questRefreshes: number;
+    public _questPoints: KnockoutObservable<number>;
+    public _questXP: KnockoutObservable<number>;
+    public _lastSeen: number;
+    public currentQuest: KnockoutObservable<any>;
+    private _shinyCatches: KnockoutObservable<number>;
+
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
             return Math.min(this.routeKillsNeeded, this.routeKills[route]());
@@ -180,6 +209,7 @@ class Player {
 
     public usePokeball(ball: GameConstants.Pokeball): void {
         this._pokeballs[ball](this._pokeballs[ball]() - 1)
+        GameHelper.incrementObservable(this.statistics.pokeballsUsed[ball]);
     }
 
     public addRouteKill() {
@@ -334,6 +364,9 @@ class Player {
             this._caughtShinyList.push(pokemonName);
             Save.store(player);
         }
+        if (shiny) {
+            player.shinyCatches++;
+        }
         player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
         GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
@@ -360,6 +393,7 @@ class Player {
 
     public gainDungeonTokens(tokens: number) {
         this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens ));
+        GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
     }
 
     public hasMoney(money: number) {
@@ -372,7 +406,7 @@ class Player {
 
     public payQuestPoints(questPoints: number) {
         if (this.hasQuestPoints(questPoints)) {
-            this._questPoints(Math.floor(this.questPoints() - questPoints));
+            this._questPoints(Math.floor(this.questPoints - questPoints));
         }
     }
 
@@ -399,9 +433,11 @@ class Player {
     public gainShards(pokemon: BattlePokemon) {
         let typeNum = GameConstants.PokemonType[pokemon.type1];
         player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
         if (pokemon.type2 != GameConstants.PokemonType.None) {
             typeNum = GameConstants.PokemonType[pokemon.type2];
             player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
         }
     }
 
@@ -519,10 +555,6 @@ class Player {
 
     get dungeonTokens(): KnockoutObservable<number> {
         return this._dungeonTokens;
-    }
-
-    get questPoints(): KnockoutObservable<number> {
-        return this._questPoints;
     }
 
     get caughtPokemonList() {
@@ -746,6 +778,41 @@ class Player {
         this._shardsCollected = value;
     }
 
+    get questLevel(): number {
+        return QuestHelper.xpToLevel(player.questXP);
+    }
+
+    public percentToNextQuestLevel(): number {
+        let current = this.questLevel;
+        let requiredForCurrent = QuestHelper.levelToXP(current);
+        let requiredForNext = QuestHelper.levelToXP(current + 1);
+        return 100 * (this.questXP - requiredForCurrent) / (requiredForNext - requiredForCurrent);
+    }
+
+    get shinyCatches(): number {
+        return this._shinyCatches();
+    }
+
+    set shinyCatches(value: number) {
+        this._shinyCatches(value);
+    }
+
+    get questXP(): number {
+        return this._questXP();
+    }
+
+    set questXP(value: number) {
+        this._questXP(value);
+    }
+
+    get questPoints(): number {
+        return this._questPoints();
+    }
+
+    set questPoints(value: number) {
+        this._questPoints(value);
+    }
+
     public toJSON() {
         let keep = [
             "_money",
@@ -779,12 +846,21 @@ class Player {
             "_diamonds",
             "_maxUndergroundItems",
             "_mineEnergyRegenTime",
+            "_mineLayersCleared",
             "_eggList",
             "_eggSlots",
             "_shardUpgrades",
             "_shardsCollected",
-            "statistics",
             "achievementsCompleted",
+            "completedQuestList",
+            "questRefreshes",
+            "_questXP",
+            "_questPoints",
+            "_lastSeen",
+            "currentQuest",
+            "_shinyCatches",
+            "gymDefeats",
+            "statistics",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

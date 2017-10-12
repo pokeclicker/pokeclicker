@@ -91,6 +91,7 @@ class Game {
         }
         Save.counter += GameConstants.TICK_TIME;
         Underground.counter += GameConstants.TICK_TIME;
+        GameHelper.counter += GameConstants.TICK_TIME;
 
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
@@ -119,6 +120,16 @@ class Game {
         }
 
         if (Save.counter > GameConstants.SAVE_TICK) {
+            let now = new Date();
+            if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
+                player.questRefreshes = 0;
+                QuestHelper.quitQuest();
+                QuestHelper.clearQuests();
+                QuestHelper.generateQuests(player.questLevel, player.questRefreshes, now);
+                DailyDeal.generateDeals(player.maxDailyDeals, now);
+                Notifier.notify("It's a new day! Your quests and underground deals have been updated.", GameConstants.NotificationOption.info);
+            }
+            player._lastSeen = Date.now()
             Save.store(player);
         }
 
@@ -129,6 +140,10 @@ class Game {
                 Underground.energyTick(player._mineEnergyRegenTime());
             }
             Underground.counter = 0;
+        }
+
+        if (GameHelper.counter > 60 * 1000) {
+            GameHelper.updateTime();
         }
     }
 
@@ -142,6 +157,8 @@ class Game {
         Save.loadMine();
         Underground.energyTick(player._mineEnergyRegenTime())
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());
+        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
+        QuestHelper.loadCurrentQuest(player.currentQuest());
     }
 
     static applyRouteBindings() {
