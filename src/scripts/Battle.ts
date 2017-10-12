@@ -113,6 +113,7 @@ class Battle {
 
     public static getRandomBerry() {
         let i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
+        Notifier.notify("You got a " + GameConstants.BerryType[i] + " berry!", GameConstants.NotificationOption.success);
         player.berryList[i](player.berryList[i]() + 1);
     }
 }
