@@ -15,7 +15,7 @@ class Statistics {
     public oakItemUses: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
-        "gymsDefeated": GameConstants.Gyms.length,
+        "gymsDefeated": GameConstants.KantoGyms.length + GameConstants.JohtoGyms.length,
         "dungeonsCleared": GameConstants.Dungeons.length,
         "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,// remove "None" pokeball type
         "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,// remove "None" pokemon type
@@ -51,6 +51,20 @@ class Statistics {
                 return ko.observable(saved[array] ? saved[array][index] || 0 : 0)
             })
         }
+    }
+
+    public static getGymIndex(gym: string, region: GameConstants.Region) {
+        let index;
+        switch (region) {
+            case 0:
+                index = GameConstants.KantoGyms.indexOf(gym);
+                break;
+            case 1:
+                index = GameConstants.KantoGyms.length;
+                index += GameConstants.JohtoGyms.indexOf(gym);
+                break;
+        }
+        return index;
     }
 
 }

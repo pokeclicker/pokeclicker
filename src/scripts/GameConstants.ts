@@ -172,7 +172,7 @@ namespace GameConstants {
         "HatchEggs",
         "MineLayers",
         "CatchShinies",
-        "DefeatGym",
+        "DefeatKantoGym",
         "DefeatDungeon",
         "UsePokeball",
         "UseOakItem",
@@ -599,7 +599,7 @@ namespace GameConstants {
     }
 
     // For random quest, name matches entry in gymList (created in Gym.ts)
-    export const Gyms = [
+    export const KantoGyms = [
         "Pewter City",
         "Cerulean City",
         "Vermillion City",
@@ -612,7 +612,22 @@ namespace GameConstants {
         "Elite Bruno",
         "Elite Agatha",
         "Elite Lance",
-        "Champion Blue"
+        "Champion Blue",
+    ];
+
+    export const JohtoGyms = [
+        "Violet City",
+        "Azalea Town",
+        "Goldenrod City",
+        "Ecruteak City",
+        "Cianwood City",
+        "Olivine City",
+        "Mahogany Town",
+        "Blackthorn City",
+        "Elite Will",
+        "Elite Koga",
+        "Elite Bruno2",
+        "Elite Karen",
     ];
 
     export const Dungeons = [
