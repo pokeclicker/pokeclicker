@@ -4,7 +4,7 @@
             <div class="modal-header">
                 <p style='margin-bottom: 0' data-bind='text: "Balls: " + Safari.balls()'></p>
                 <h4 style='text-align:center' class="modal-title">Safari Zone</h4>
-                <button class='btn btn-primary' onclick='$("#safariModal").modal("toggle")' data-bind='css: { disabled: Safari.inBattle }' >Leave</button>
+                <button class='btn btn-primary' onclick='if(!Safari.inBattle()){$("#safariModal").modal("toggle")}' data-bind='css: { disabled: Safari.inBattle }' >Leave</button>
             </div>
             <div class="modal-body">
                 <div id="safariBody">
