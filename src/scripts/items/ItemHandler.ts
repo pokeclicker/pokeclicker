@@ -24,12 +24,13 @@ class ItemHandler {
     public static useStones(){
         if(this.pokemonSelected() == ""){
             Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
-            return
+            return;
         }
 
-        console.log("using");
-        let amount = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()].amount);
+        let amount = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]);
         for(let i = 0; i< amount; i++){
+            console.log("go");
+            player.itemList[this.stoneSelected()]--;
             (ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())
         }
     }

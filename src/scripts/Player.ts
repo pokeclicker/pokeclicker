@@ -350,6 +350,8 @@ class Player {
         return false;
     }
 
+
+
     public gainMoney(money: number) {
         OakItemRunner.use("Amulet Coin");
         // TODO add money multipliers
