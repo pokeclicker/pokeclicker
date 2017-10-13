@@ -132,60 +132,75 @@ const pokemonsPerRoute = {
         }
     },
     1: {
+        26: {
+            land: ["Raticate", "Arbok", "Sandslash", "Ponyta", "Doduo", "Dodrio", "Quagsire"],
+            water: ["Tentacool", "Tentacruel", "Magikarp", "Shellder", "Chinchou", "Lanturn"],
+            headbutt: ["Exeggcute", "Hoothoot", "Ledyba", "Spinarak", "Pineco"]
+        },
+        27: {
+            land: ["Raticate", "Arbok", "Sandslash", "Ponyta", "Doduo", "Dodrio", "Quagsire"],
+            water: ["Tentacool", "Tentacruel", "Magikarp", "Shellder", "Chinchou", "Lanturn"],
+            headbutt: ["Exeggcute", "Hoothoot", "Ledyba", "Spinarak", "Pineco"]
+        },
+        28: {
+            land: ["Ponyta", "Tangela", "Donphan", "Ursaring", "Rapidash", "Doduo", "Dodrio", "Sneasel"],
+            water: ["Poliwag", "Poliwhirl", "Magikarp"],
+            headbutt: ["Natu", "Aipom", "Heracross"]
+        }
         29: {
-            land: ["Pidgey", "Rattata","Sentret","Hoothoot","Hoppip"],
+            land: ["Pidgey", "Rattata","Sentret","Hoothoot"],
             water: [],
-            headbutt: ["Spearow","Exeggcute","Ledyba","Spinarak","Aipom","Hoothoot","Pineco","Heracross"]
+            headbutt: ["Exeggcute","Ledyba","Spinarak","Hoothoot","Pineco"]
         },
         30: {
-            land: ["Pidgey", "Rattata","Caterpie","Metapod","Weedle","Kakuna","Zubat","Poliwag","Hoothoot","Ledyba","Spinarak","Hoppip"],
+            land: ["Pidgey", "Rattata","Caterpie","Metapod","Weedle","Kakuna","Zubat","Hoothoot","Ledyba","Spinarak"],
             water: ["Poliwag","Poliwhirl","Magikarp"],
-            headbutt: ["Spearow","Exeggcute","Hoothoot","Ledyba","Spinarak","Aipom","Pineco","Heracross"]
+            headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
         31: {
-            land: ["Pidgey", "Rattata","Caterpie","Metapod","Weedle","Kakuna","Zubat","Poliwag","Hoothoot","Ledyba","Spinarak","Hoppip","Bellsprout","Gastly"],
+            land: ["Pidgey", "Rattata","Caterpie","Metapod","Weedle","Kakuna","Zubat","Poliwag","Hoothoot","Ledyba","Spinarak","Bellsprout"],
             water: ["Poliwag","Poliwhirl","Magikarp"],
             headbutt: ["Spearow","Exeggcute","Hoothoot","Ledyba","Spinarak","Aipom","Pineco","Heracross"]
         },
         32: {
-            land: ["Pidgey", "Rattata","Ekans","Zubat","Bellsprout","Gastly","Hoothoot","Mareep","Hoppip","Wooper"],
+            land: ["Rattata","Ekans","Zubat","Bellsprout","Mareep","Hoppip","Wooper"],
             water: ["Tentacool","Tentacruel","Quagsire","Magikarp","Qwilfish"],
-            headbutt: ["Spearow","Ekans","Exeggcute","Hoothoot","Aipom","Pineco","Heracross"]
+            headbutt: ["Exeggcute","Hoothoot","Pineco"]
         },
         33: {
-            land: ["Spearow", "Rattata","Ekans","Zubat","Geodude","Hoppip"],
+            land: ["Spearow", "Rattata","Ekans","Zubat","Hoppip"],
             water: [],
-            headbutt: ["Spearow","Ekans","Aipom","Heracross"]
+            headbutt: ["Spearow","Aipom","Heracross"]
         },
         34: {
-            land: ["Pidgey", "Rattata","Jigglypuff","Abra","Drowzee","Ditto","Hoothoot","Snubbull"],
+            land: ["Rattata","Abra","Drowzee","Ditto"],
             water: ["Tentacool","Tentacruel","Krabby","Magikarp","Staryu","Corsola","Kingler"],
-            headbutt: []
+            headbutt: ["Exeggcute", "Hoothoot", "Ledyba", "Spinarak", "Pineco"]
         },
         35: {
-            land: ["Pidgey", "Rattata"],
-            water: [],
-            headbutt: ["Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
+            land: ["Pidgey", "Nidoran(F)", "Nidoran(M)", "Abra", "Drowzee", "Ditto", "Hoothoot", "Yanma"],
+            water: ["Psyduck", "Golduck", "Poliwag", "Magikarp"],
+            headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
         36: {
-            land: ["Pidgey", "Nidoran(M)","Nidoran(F)","Vulpix","Growlithe","Bellsprout","Gastly","Hoothoot","Ledyba","Spinarak","Stantler"],
+            land: ["Pidgey", "Nidoran(M)","Nidoran(F)","Vulpix","Growlithe","Hoothoot","Stantler"],
             water: [],
-            headbutt: ["Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
+            headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
         37: {
-            land: ["Pidgey", "Pidgeotto","Vulpix","Growlithe","Hoothoot","Noctowl","Ledyba","Ledian","Spinarak","Ariados","Stantler"],
+            land: ["Pidgey", "Pidgeotto","Vulpix","Growlithe","Hoothoot","Ledyba","Spinarak","Stantler"],
             water: [],
-            headbutt: ["Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
+            headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
         38: {
-            land: ["Pidgeotto", "Rattata","Raticate","Meowth","Magnemite","Farfetch'd","Tauros","Noctowl","Snubbull","Miltank"],
+            land: ["Rattata","Raticate","Meowth","Magnemite","Farfetch'd","Tauros","Snubbull","Miltank"],
             water: [],
-            headbutt: ["Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
+            headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
         39: {
-            land: ["Pidgeotto", "Rattata","Raticate","Meowth","Magnemite","Farfetch'd","Tauros","Noctowl","Miltank"],
+            land: ["Rattata","Raticate","Meowth","Magnemite","Farfetch'd","Tauros","Miltank"],
             water: [],
-            headbutt: ["Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
+            headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
         40: {
             land: [],
@@ -194,33 +209,33 @@ const pokemonsPerRoute = {
         },
         41: {
             land: [],
-            water: ["Tentacool","Tentacruel","Mantine","Krabby","Magikarp","Staryu","Corsola","Kingler"],
+            water: ["Tentacool","Tentacruel","Mantine","Magikarp", "Chinchou", "Shellder"],
             headbutt: []
         },
         42: {
-            land: ["Raticate", "Rattata","Spearow","Fearow","Ekans","Arbok","Zubat","Golbat","Mankey","Mareep","Flaaffy","Marill"],
+            land: ["Spearow","Zubat","Mankey","Mareep","Flaaffy"],
             water: ["Goldeen","Seaking","Magikarp"],
-            headbutt: ["Spearow","Ekans","Aipom","Heracross"]
+            headbutt: ["Spearow","Aipom","Heracross"]
         },
         43: {
-            land: ["Pidgeotto", "Raticate","Venonat","Venomoth","Farfetch'd","Sentret","Furret","Noctowl","Mareep","Flaaffy","Girafarig"],
+            land: ["Pidgeotto","Venonat","Noctowl","Mareep","Flaaffy","Girafarig"],
             water: ["Magikarp","Poliwag"],
-            headbutt: ["Spearow","Venonat","Exeggcute","Hoothoot","Aipom","Pineco","Heracross"]
+            headbutt: ["Venonat","Exeggcute","Hoothoot","Pineco"]
         },
         44: {
-            land: ["Poliwag", "Poliwhirl","Bellsprout","Weepinbell","Lickitung","Tangela"],
+            land: ["Bellsprout","Weepinbell","Lickitung","Tangela"],
             water: ["Poliwag","Poliwhirl","Magikarp","Remoraid"],
             headbutt: ["Spearow","Aipom","Heracross"]
         },
         45: {
-            land: ["Geodude", "Graveler","Gligar","Teddiursa","Skarmory","Phanpy","Donphan"],
-            water: ["Magikarp","Dratini","Dragonair"],
-            headbutt: []
+            land: ["Geodude", "Graveler","Gligar","Teddiursa","Skarmory","Phanpy"],
+            water: ["Magikarp","Poliwag"],
+            headbutt: ["Spearow", "Aipom", "Heracross"]
         },
         46: {
-            land: ["Spearow", "Rattata","Jigglypuff","Geodude","Phanpy"],
+            land: ["Spearow", "Rattata","Geodude"],
             water: [],
-            headbutt: []
+            headbutt: ["Spearow", "Aipom", "Heracross"]
         },
         47: {
             land: ["Raticate", "Spearow","Fearow","Gloom","Farfetch'd","Ditto","Noctowl","Miltank"],
