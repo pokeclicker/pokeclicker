@@ -128,9 +128,9 @@ TownList["New Bark Town"] = new Town("New Bark Town", []);
 
 TownList["Cherrygrove City"] = new Town("Cherrygrove City", [29]);
 
-TownList["Violet City"] = new Town("Violet City", [31]);
+TownList["Violet City"] = new Town("Violet City", [31], null, dungeonList["Sprout Tower"]);
 
-TownList["Azalea Town"] = new Town("Azalea Town", [33]);
+TownList["Azalea Town"] = new Town("Azalea Town", [33], null, dungeonList["Slowpoke Well"]);
 
 TownList["Goldenrod City"] = new Town("Goldenrod City", [34]);
 

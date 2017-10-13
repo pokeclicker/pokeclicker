@@ -123,3 +123,80 @@ dungeonList["Cerulean Cave"] = new Dungeon("Cerulean Cave",
     [new DungeonBossPokemon("Rhydon", 143675, 60), new DungeonBossPokemon("Mewtwo", 215512, 70)],
     2500, GameConstants.Badge.Champion, 20, 55
 );
+
+dungeonList["Sprout Tower"] = new Dungeon("Sprout Tower",
+    ["Rattata", "Gastly", "Hoothoot"],
+    28735,
+    [new DungeonBossPokemon("Bellsprout", 2000, 10)],
+    2500, GameConstants.Badge.Champion, 31, 5
+);
+
+dungeonList["Union Cave"] = new Dungeon("Union Cave",
+    ["Rattata", "Sandshrew", "Zubat", "Geodude", "Onix", "Goldeen", "Magikarp"],
+    600,
+    [new DungeonBossPokemon("Wooper", 3000, 14)],
+    3000, GameConstants.Badge.Zephyr, 32, 7
+);
+
+dungeonList["Slowpoke Well"] = new Dungeon("Slowpoke Well",
+    ["Zubat", "Slowpoke"],
+    900,
+    [new DungeonBossPokemon("Slowbro", 4000, 20)],
+    3500, GameConstants.Badge.Zephyr, 33, 12
+);
+
+dungeonList["Ilex Forest"] = new Dungeon("Ilex Forest",
+    ["Caterpie", "Metapod", "Weedle", "Kakuna", "Zubat", "Oddish", "Paras", "Hoothoot"],
+    1200,
+    [new DungeonBossPokemon("Noctowl", 5000, 30), new DungeonBossPokemon("Beedrill", 5000, 30), new DungeonBossPokemon("Butterfree", 5000, 30), new DungeonBossPokemon("Celebi", 300000, 50)],
+    4000, GameConstants.Badge.Hive, 34, 15
+);
+
+dungeonList["Burned Tower"] = new Dungeon("Burned Tower",
+    ["Rattata", "Zubat", "Koffing", "Raticate"],
+    1500,
+    [new DungeonBossPokemon("Golbat", 6000, 35), new DungeonBossPokemon("Weezing", 6000, 35), new DungeonBossPokemon("Suicune", 300000, 50)],
+    4500, GameConstants.Badge.Fog, 37, 20
+);
+
+dungeonList["Tin Tower"] = new Dungeon("Tin Tower",
+    ["Rattata", "Gastly"],
+    1500,
+    [new DungeonBossPokemon("", 6000, 35), new DungeonBossPokemon("Haunter", 6000, 35), new DungeonBossPokemon("Ho-oh", 300000, 70)],
+    4500, GameConstants.Badge.Fog, 37, 20
+);
+
+dungeonList["Whirl Islands"] = new Dungeon("Whirl Islands",
+    ["Zubat", "Golbat", "Seel", "Krabby", "Horsea"],
+    1800,
+    [new DungeonBossPokemon("Dewgong", 7000, 40), new DungeonBossPokemon("Kingler", 7000, 40), new DungeonBossPokemon("Lugia", 300000, 70)],
+    5000, GameConstants.Badge.Storm, 41, 25
+);
+
+dungeonList["Mt Mortar"] = new Dungeon("Mt Mortar",
+    ["Rattata", "Zubat", "Geodude", "Marill", "Raticate", "Golbat", "Graveler"],
+    2100,
+    [new DungeonBossPokemon("Tyrogue", 8000, 45)],
+    5500, GameConstants.Badge.Storm, 42, 30
+);
+
+dungeonList["Ice Path"] = new Dungeon("Ice Path",
+    ["Zubat", "Jynx", "Swinub"],
+    2400,
+    [new DungeonBossPokemon("Delibird", 9000, 50)],
+    6000, GameConstants.Badge.Glacier, 44, 32
+);
+
+dungeonList["Dark Cave"] = new Dungeon("Dark Cave",
+    ["Zubat", "Geodude", "Golbat", "Graveler", "Wobbufet"],
+    3000,
+    [new DungeonBossPokemon("Dunsparce", 10000, 55)],
+    6500, GameConstants.Badge.Rising, 45, 35
+);
+
+dungeonList["Mt Silver"] = new Dungeon("Mt Silver",
+    ["Ponyta", "Doduo", "Tangela", "Sneasel", "Ursaring", "Donphan", "Teddiursa", "Phanpy", "Quagsire", "Misdreavus"],
+    3500,
+    [new DungeonBossPokemon("Larvitar", 12000, 60)],
+    10000, GameConstants.Badge.Karen, 28, 50
+);
