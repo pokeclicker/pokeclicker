@@ -29,7 +29,7 @@ class PokemonItem extends Item {
         }
 
         let priceMultiplier = 1;
-        super(GameConstants.PokemonItemType[pokemon], basePrice, priceMultiplier, GameConstants.Currency.questpoint);
+        super(GameConstants.PokemonItemType[pokemon], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
         this.type = pokemon;
     }
 

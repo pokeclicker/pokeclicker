@@ -13,11 +13,16 @@ namespace GameConstants {
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
+    export const GYM_COUNTDOWN = 1000;
     export const GYM_TICK = 1;
     export const ACHIEVEMENT_TICK = 1000;
 
     export const AMOUNT_OF_POKEMONS = 151;
     export const AMOUNT_OF_BADGES = 8;
+
+    export const MEW_CHANCE_ROUTE_1 = 8192
+    export const MEW_CHANCE_ROUTE_25 = 4096
+    export const MEW_CHANCE_DIFF = MEW_CHANCE_ROUTE_1 - MEW_CHANCE_ROUTE_25
 
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
@@ -81,6 +86,20 @@ namespace GameConstants {
     // Breeding
     export const BREEDING_AMOUNT = 1;
     export const BREEDING_ATTACK_BONUS = 25;
+
+    // Farm
+    export const AMOUNT_OF_BERRIES = 8;
+    export const AMOUNT_OF_PLOTS = 25;
+
+    export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
+
+    export enum PlotStage {
+        Seed,
+        Sprout,
+        Taller,
+        Bloom,
+        Berry
+    }
 
     export enum OakItem {
         "Magic Ball" = 0,
@@ -191,7 +210,7 @@ namespace GameConstants {
 
     export enum Currency {
         money,
-        questpoint,
+        questPoint,
         dungeontoken,
     }
 
@@ -222,6 +241,27 @@ namespace GameConstants {
 
     export function humanifyString(str: string) {
         return str.split('_').join(' ');
+    }
+
+    export function formatTime(time) {
+        if (time == 0) {
+            return "Ready"
+        }
+        let sec_num = parseInt('' + time, 10); // don't forget the second param
+        let hours: any = Math.floor(sec_num / 3600);
+        let minutes: any = Math.floor((sec_num - (hours * 3600)) / 60);
+        let seconds: any = sec_num - (hours * 3600) - (minutes * 60);
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        return hours + ':' + minutes + ':' + seconds;
     }
 
     export enum Region {
@@ -402,6 +442,13 @@ namespace GameConstants {
         }
     };
 
+    export const routeDungeonRequirements = {
+        0: {
+            4: "Mt. Moon",
+            20: "Seafoam Islands",
+        }
+    }
+
     export enum Starter {
         "None" = -1,
         "Bulbasaur" = 0,
@@ -461,7 +508,8 @@ namespace GameConstants {
         Rawst,
         Aspear,
         Leppa,
-        Oran
+        Oran,
+        Sitrus
     }
 
     export enum PokeBlockColor {
@@ -493,6 +541,10 @@ namespace GameConstants {
         Dragon_egg,
         Pokemon_egg,
         Mystery_egg,
+    }
+
+    export enum KeyItemType {
+        Dungeon_ticket
     }
 
     export enum EggType {

@@ -76,6 +76,8 @@
 
 </head>
 <body class="no-select">
+@import "splash.html"
+
 <!-- Game menu-->
 @import "gameMenu.html"
 
@@ -181,7 +183,8 @@
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
-                                    <img class="pokeball-animated" data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
+                                    <img class="pokeball-animated"
+                                         data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
                                          src=""/>
                                 </div>
                             </div>
@@ -248,7 +251,8 @@
                                              src=""/>
                                     </div>
                                     <div data-bind="if: DungeonBattle.catching">
-                                        <img class="pokeball-animated" data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
+                                        <img class="pokeball-animated"
+                                             data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
                                              src=""/>
                                     </div>
                                 </div>
@@ -337,7 +341,7 @@
 
             <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
                 <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
-                    Game.gameState() == GameConstants.GameState.shop)">
+                    Game.gameState() == GameConstants.GameState.shop || Game.gameState() == GameConstants.GameState.farm)">
                     <p id="mapTooltip" style="visibility: hidden;"></p>
                     <div class="page-item no-select">
                         <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
@@ -356,6 +360,7 @@
 
                             @import "KantoSVG.html"
                             @import "JohtoSVG.html"
+
                         </svg>
                     </div>
                 </div>
@@ -579,7 +584,8 @@
                         </div>
 
                         <div style="min-height:80px; vertical-align: center">
-                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span> Pokémon to unlock!
+                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span> Pokémon to
+                            unlock!
                         </div>
                     </div>
                 </div>
@@ -587,47 +593,14 @@
             </div>
 
             <!-- Current Quest -->
-            <div class="page-item" style="background-color: white; min-height: 100px">
-                <button class='btn btn-primary'
-                        data-bind='visible: !player.currentQuest(),
-                                   text: "New Quest",
-                                   click: function(){$("#QuestModal").modal("show")}'>
-                </button>
-                <div data-bind='if: player.currentQuest()'>
-                    <p data-bind='text: QuestHelper.questList()[player.currentQuest().index].description'></p>
-                    <div class="row justify-content-center">
-                        <div class="col-10">
-                            <div class="progress"
-                                 data-bind='if: !QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
-                                <div class="progress-bar bg-success" role="progressbar"
-                                     data-bind="attr:{ style: 'width:' + (QuestHelper.questList()[player.currentQuest().index].progress() * 100) + '%' }"
-                                     aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                            <div>
-                                <span data-bind='if: QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
-                                    <button class='btn btn-primary'
-                                            data-bind='click: function(){QuestHelper.questList()[player.currentQuest().index].claimReward()}'>
-                                        Claim
-                                    </button>
-                                </span>
-                                <span data-bind='if: !QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
-                                    <button class='btn btn-primary'
-                                            data-bind='click: function(){QuestHelper.quitQuest()}'>
-                                        Quit
-                                    </button>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @import "questDisplay.html"
 
             <!-- Egg Slots/Breeding-->
             <div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
                 <div class="page-item">
                     <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
-                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()" style="border: 1px solid black;">
+                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()"
+                             style="border: 1px solid black;">
                             <div data-bind="if: $data !== null">
                                 <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
 
@@ -691,7 +664,10 @@
 @import "save.html"
 
 <!-- Quests Modal-->
-@import "quests.html"
+@import "questModal.html"
+
+<!-- Farm Modal-->
+@import "farmModal.html"
 
 </body>
 </html>

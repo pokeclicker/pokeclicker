@@ -69,8 +69,8 @@ class QuestHelper{
                     GameConstants.OakItem["Amulet Coin"],
                     //GameConstants.OakItem["Poison Barb"],
                     GameConstants.OakItem["Exp Share"],
-                    GameConstants.OakItem["Sprayduck"],
-                    GameConstants.OakItem["Shiny Charm"],
+                    //GameConstants.OakItem["Sprayduck"],
+                    //GameConstants.OakItem["Shiny Charm"],
                     //GameConstants.OakItem["Blaze Cassette"],
                     //GameConstants.OakItem["Cell Battery"],
                 ]
@@ -86,6 +86,7 @@ class QuestHelper{
                 player._money(player._money() - QuestHelper.getRefreshCost());
             }
             player.questRefreshes++;
+            QuestHelper.quitQuest();
             QuestHelper.clearQuests();
             QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
         } else {
@@ -136,6 +137,22 @@ class QuestHelper{
     }
 
     public static quitQuest() {
-        QuestHelper.questList()[player.currentQuest().index].quit();
+        if (player.currentQuest()) {
+            QuestHelper.questList()[player.currentQuest().index].quit();
+        }
+    }
+
+    public static checkCompletedSet() {
+        for (let questCompleted of player.completedQuestList) {
+            if (!questCompleted()) {
+                return;
+            }
+        }
+        //Only reachable if all quests are completed
+        QuestHelper.getCompletionReward();
+    }
+
+    private static getCompletionReward() {
+        console.log("All quests Completed!")
     }
 }

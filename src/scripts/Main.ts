@@ -7,6 +7,13 @@ let player;
 const debug = false;
 
 document.addEventListener("DOMContentLoaded", function (event) {
+    if (debug) {
+        $('.loader').hide("fast")
+    } else {
+        setTimeout(function () {
+            $('.loader').fadeOut("slow")
+        }, 2600);
+    }
     OakItemRunner.initialize();
     UndergroundItem.initialize();
     let game: Game = new Game();
@@ -19,8 +26,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
 
-    ko.bindingHandlers.tooltip = {
-        init: function (element, valueAccessor) {
+    (ko as any).bindingHandlers.tooltip = {
+        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
             let local = ko.utils.unwrapObservable(valueAccessor()),
                 options = {};
 
@@ -30,8 +37,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
             $(element).tooltip(options);
 
             ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-                // $(element).tooltip("destroy");
+                $(element).tooltip("dispose");
             });
+
+            if (bindingContext.$data instanceof Plot) {
+                $(element).hover(function () {
+                    $(this).data('to', setInterval(function () {
+                        $(element).tooltip('hide')
+                            .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
+                            .tooltip('show');
+                    }, 100));
+                }, function () {
+                    clearInterval($(this).data('to'));
+                });
+            }
+
         },
         options: {
             placement: "bottom",
@@ -55,7 +75,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 class Game {
     interval;
     undergroundCounter: number;
-    farmCounter: number;
+    farmCounter: number = 0;
     public static achievementCounter: number = 0;
 
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
@@ -82,7 +102,7 @@ class Game {
     gameTick() {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
-        this.farmCounter += GameConstants.TICK_TIME;
+        FarmRunner.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
             Game.achievementCounter = 0;
@@ -91,6 +111,8 @@ class Game {
         Save.counter += GameConstants.TICK_TIME;
         Underground.counter += GameConstants.TICK_TIME;
 
+
+GameHelper.counter += GameConstants.TICK_TIME;
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
                 Battle.counter += GameConstants.TICK_TIME;
@@ -121,6 +143,7 @@ class Game {
             let now = new Date();
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
                 player.questRefreshes = 0;
+                QuestHelper.quitQuest();
                 QuestHelper.clearQuests();
                 QuestHelper.generateQuests(player.questLevel, player.questRefreshes, now);
                 DailyDeal.generateDeals(player.maxDailyDeals, now);
@@ -137,6 +160,14 @@ class Game {
                 Underground.energyTick(player._mineEnergyRegenTime());
             }
             Underground.counter = 0;
+        }
+
+        if (FarmRunner.counter > GameConstants.FARM_TICK) {
+            FarmRunner.tick();
+        }
+
+        if (GameHelper.counter > 60 * 1000) {
+            GameHelper.updateTime();
         }
     }
 
@@ -169,4 +200,6 @@ class Game {
             tooltip.css('visibility', 'hidden')
         });
     }
+
 }
+

@@ -2,7 +2,7 @@
 class IndigoPlateau extends PokemonLeague {
 
     constructor(shop?: Shop) {
-        super("Indigo Plateau", [23], shop);
+        super("Indigo Plateau", [23], shop, null, "Victory Road");
         this.gym(null);
         this.gymList = ko.observableArray<KnockoutObservable<Gym>>();
         this.gymList.push(ko.observable(gymList["Elite Lorelei"]));

@@ -14,12 +14,18 @@ class PokemonFactory {
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
-            return null;
+            return new BattlePokemon("Rattata", 19, GameConstants.PokemonType.Psychic, GameConstants.PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
-
-        let pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
-        let rand: number = Math.floor(Math.random() * pokemonList.length);
-        let name: string = pokemonList[rand];
+        let name: string;
+        
+        let mewEncounter: boolean = Math.random() < 1 / (GameConstants.MEW_CHANCE_ROUTE_25 + ( GameConstants.MEW_CHANCE_DIFF * (25 - route) / 24 ))
+        if (mewEncounter) {
+            name = "Mew";
+        } else {
+            let pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
+            let rand: number = Math.floor(Math.random() * pokemonList.length);
+            name = pokemonList[rand];
+        }
         let basePokemon = PokemonHelper.getPokemonByName(name);
         let id = basePokemon.id;
 

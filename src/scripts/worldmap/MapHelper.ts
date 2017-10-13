@@ -18,18 +18,17 @@ class MapHelper {
         }
     };
 
-    public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        if (region == GameConstants.Region.johto) { // Unlock all of johto for testing
-            return true
-        }
-        if (GameConstants.routeBadgeRequirements[region] == undefined || !player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
-            return false;
-        }
-        let regionReqLists = GameConstants.routeRequirements[region];
-        if (regionReqLists == undefined) {
-            return false;
-        }
-        let reqList = regionReqLists[route];
+    private static hasBadgeReq(route, region) {
+        return player.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
+    }
+
+    private static hasDungeonReq(route, region) {
+        let dungeonReq = GameConstants.routeDungeonRequirements[region][route];
+        return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[GameConstants.Dungeons.indexOf(dungeonReq)]();
+    }
+
+    private static hasRouteKillReq(route, region) {
+        let reqList = GameConstants.routeRequirements[region][route];
         if (reqList == undefined) {
             return true;
         }
@@ -40,6 +39,11 @@ class MapHelper {
             }
         }
         return true;
+    }
+
+    public static accessToRoute = function (route: number, region: GameConstants.Region) {
+        if (region == 1) {return true}
+        return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
     };
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
@@ -68,14 +72,7 @@ class MapHelper {
 
     public static accessToTown(townName: string): boolean {
         let town = TownList[townName];
-        if (!town) { return false }
-        for (let i of town.reqRoutes) {
-            if (player.routeKills[i]() < player.routeKillsNeeded) {
-                return false;
-            }
-        }
-
-        return true;
+        return town.isUnlocked();
     };
 
     public static moveToTown(townName: string) {
@@ -89,6 +86,8 @@ class MapHelper {
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
             Game.applyRouteBindings();
+        } else {
+            Notifier.notify("You don't have access to that location yet.", GameConstants.NotificationOption.warning);
         }
     };
 

@@ -120,6 +120,13 @@ class Player {
 
         this._lastSeen = Date.now();
         this.statistics = new Statistics(savedPlayer.statistics);
+
+        this.farmPoints = ko.observable(savedPlayer.farmPoints || 0);
+        this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
+            return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
+        });
+        this.plotList = Save.initializePlots(savedPlayer.plotList);
+
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -184,6 +191,10 @@ class Player {
     public _lastSeen: number;
     public currentQuest: KnockoutObservable<any>;
     private _shinyCatches: KnockoutObservable<number>;
+
+    public plotList: KnockoutObservable<Plot>[];
+    public farmPoints: KnockoutObservable<number>;
+    public berryList: KnockoutObservable<number>[];
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -416,6 +427,10 @@ class Player {
         if (this.hasMoney(money)) {
             this._money(Math.floor(this._money() - money));
         }
+    }
+
+    public gainFarmPoints(points: number) {
+        this.farmPoints(Math.floor(this.farmPoints() + points));
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {
@@ -764,6 +779,17 @@ class Player {
         this._eggSlots(this._eggSlots() + 1);
     }
 
+    public unlockPlot() {
+        let i = 0;
+        while (i < this.plotList.length && this.plotList[i]().isUnlocked()) {
+            i++;
+        }
+        if (i == this.plotList.length) {
+            return;
+        }
+        this.plotList[i]().isUnlocked(true);
+    }
+
     get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
         return this._shardUpgrades;
     }
@@ -863,6 +889,10 @@ class Player {
             "_shinyCatches",
             "gymDefeats",
             "statistics",
+            "achievementsCompleted",
+            "farmPoints",
+            "plotList",
+            "berryList"
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
