@@ -1,19 +1,10 @@
 /// <reference path="Quest.ts" />
 
 class DefeatDungeonQuest extends Quest implements QuestInterface {
-    constructor(dungeonIndex: number, region, amount: number) {
-        let dungeon;
-        switch (region) {
-            case 0:
-                dungeon = GameConstants.KantoDungeons[dungeonIndex];
-                break;
-            case 1:
-                dungeon = GameConstants.JohtoDungeons[dungeonIndex];
-                break;
-        }
+    constructor(dungeon: string, amount: number) {
         super(amount, DefeatDungeonQuest.calcReward(dungeon, amount));
         this.description = `Defeat the ${dungeon} dungeon ${amount} times.`;
-        this.questFocus = player.statistics.dungeonsCleared[dungeonIndex];
+        this.questFocus = player.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)];
         this.createProgressObservables();
     }
 
