@@ -17,10 +17,21 @@ class Player {
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._questPoints = ko.observable(savedPlayer._questPoints || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
-        if (savedPlayer._route == null || savedPlayer._route == 0) {
-            this._route = ko.observable(1);
-        } else {
+        this._region = ko.observable(savedPlayer._region);
+        if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
             this._route = ko.observable(savedPlayer._route)
+        } else {
+            switch (savedPlayer._region) {
+                case 0:
+                    this._route = ko.observable(1);
+                    break;
+                case 1:
+                    this._route = ko.observable(29);
+                    break;
+                default:
+                    this._route = ko.observable(1);
+                    this._region = ko.observable(GameConstants.Region.kanto);
+            }
         }
 
         if (savedPlayer._caughtPokemonList) {
@@ -44,9 +55,6 @@ class Player {
         });
         this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        console.log(savedPlayer._region);
-        this._region = ko.observable(savedPlayer._region || GameConstants.Region.kanto);
-        console.log(this.region)
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
