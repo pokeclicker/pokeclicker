@@ -173,7 +173,7 @@ namespace GameConstants {
         "MineLayers",
         "CatchShinies",
         "DefeatKantoGym",
-        "DefeatDungeon",
+        "DefeatKantoDungeon",
         "UsePokeball",
         "UseOakItem",
     ];
@@ -630,7 +630,7 @@ namespace GameConstants {
         "Elite Karen",
     ];
 
-    export const Dungeons = [
+    export const KantoDungeons = [
         "Viridian Forest",
         "Digletts Cave",
         "Mt. Moon",
@@ -642,4 +642,18 @@ namespace GameConstants {
         "Victory Road",
         "Cerulean Cave"
     ];
+
+    export const JohtoDungeons = [
+        "Sprout Tower",
+        "Union Cave",
+        "Slowpoke Well",
+        "Ilex Forest",
+        "Burned Tower",
+        "Tin Tower",
+        "Whirl Islands",
+        "Mt Mortar",
+        "Ice Path",
+        "Dark Cave",
+        "Mt Silver"
+    ]
 }

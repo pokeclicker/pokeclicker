@@ -54,7 +54,7 @@ class Town {
 
     public hasDungeonReq() {
         if (this.dungeonReq != undefined) {
-            return 0 < player.statistics.dungeonsCleared[GameConstants.Dungeons.indexOf(this.dungeonReq)]();
+            return 0 < player.statistics.dungeonsCleared[Statistics.getDungeonIndex(this.dungeonReq)]();
         } else {
             return true;
         }

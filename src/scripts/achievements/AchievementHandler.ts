@@ -254,9 +254,9 @@ class AchievementHandler {
             }
         }
 
-        for (let i = 0; i < GameConstants.Dungeons.length; i++) {
+        for (let i = 0; i < GameConstants.KantoDungeons.length; i++) {
             for (let j = 0; j < 4; j++) {
-                AchievementHandler.addAchievement(`${GameConstants.Dungeons[i]} ${j + 1}`, `Clear ${Math.pow(10, j)} times`, new ClearDungeonRequirement(Math.pow(10, j), i), 0.01)
+                AchievementHandler.addAchievement(`${GameConstants.KantoDungeons[i]} ${j + 1}`, `Clear ${Math.pow(10, j)} times`, new ClearDungeonRequirement(Math.pow(10, j), i), 0.01)
             }
         }
 

@@ -162,7 +162,7 @@ dungeonList["Burned Tower"] = new Dungeon("Burned Tower",
 dungeonList["Tin Tower"] = new Dungeon("Tin Tower",
     ["Rattata", "Gastly"],
     1500,
-    [new DungeonBossPokemon("", 6000, 35), new DungeonBossPokemon("Haunter", 6000, 35), new DungeonBossPokemon("Ho-oh", 300000, 70)],
+    [new DungeonBossPokemon("Raticate", 6000, 35), new DungeonBossPokemon("Haunter", 6000, 35), new DungeonBossPokemon("Ho-Oh", 300000, 70)],
     4500, GameConstants.Badge.Fog, 37, 20
 );
 
@@ -188,7 +188,7 @@ dungeonList["Ice Path"] = new Dungeon("Ice Path",
 );
 
 dungeonList["Dark Cave"] = new Dungeon("Dark Cave",
-    ["Zubat", "Geodude", "Golbat", "Graveler", "Wobbufet"],
+    ["Zubat", "Geodude", "Golbat", "Graveler", "Wobbuffet"],
     3000,
     [new DungeonBossPokemon("Dunsparce", 10000, 55)],
     6500, GameConstants.Badge.Rising, 45, 35

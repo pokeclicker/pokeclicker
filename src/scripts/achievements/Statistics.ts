@@ -16,7 +16,7 @@ class Statistics {
 
     private static readonly arraySizes = {
         "gymsDefeated": GameConstants.KantoGyms.length + GameConstants.JohtoGyms.length,
-        "dungeonsCleared": GameConstants.Dungeons.length,
+        "dungeonsCleared": GameConstants.KantoDungeons.length + GameConstants.JohtoDungeons.length,
         "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,// remove "None" pokeball type
         "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,// remove "None" pokemon type
         "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
@@ -64,6 +64,24 @@ class Statistics {
                 index += GameConstants.JohtoGyms.indexOf(gym);
                 break;
         }
+        return index;
+    }
+
+    public static getDungeonIndex(dungeon: string) {
+        let index;
+        if (GameConstants.KantoDungeons.indexOf(dungeon) > -1) {
+            index = GameConstants.KantoDungeons.indexOf(dungeon)
+            return index;
+        } else {
+            index = GameConstants.KantoDungeons.length;
+        }
+        if (GameConstants.JohtoDungeons.indexOf(dungeon) > -1) {
+            index += GameConstants.JohtoDungeons.indexOf(dungeon)
+            return index;
+        } else {
+            index += GameConstants.JohtoDungeons.length;
+        }
+        console.log("Failed to find dungeon");
         return index;
     }
 
