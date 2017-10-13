@@ -258,7 +258,7 @@ namespace GameConstants {
 
     export const RegionRoute = {
         0: 25,
-        1: 0,
+        1: 48,
         2: 0
     };
 
@@ -347,7 +347,7 @@ namespace GameConstants {
     }
 
     // Map navigation
-    export const AMOUNT_OF_ROUTES = 25;
+    export const AMOUNT_OF_ROUTES = 48;
     export const AMOUNT_OF_ROUTES_KANTO = 25;
 
     /**

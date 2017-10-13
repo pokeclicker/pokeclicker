@@ -5,6 +5,7 @@ class MapHelper {
             if (this.accessToRoute(route, region)) {
                 $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 player.route(route);
+                player.region = region;
                 player.currentTown("");
                 $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
                 Battle.generateNewEnemy();
@@ -18,10 +19,17 @@ class MapHelper {
     };
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        if (!player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
+        if (region == GameConstants.Region.johto) { // Unlock all of johto for testing
+            return true
+        }
+        if (GameConstants.routeBadgeRequirements[region] == undefined || !player.hasBadge(GameConstants.routeBadgeRequirements[region][route])) {
             return false;
         }
-        let reqList = GameConstants.routeRequirements[region][route];
+        let regionReqLists = GameConstants.routeRequirements[region];
+        if (regionReqLists == undefined) {
+            return false;
+        }
+        let reqList = regionReqLists[route];
         if (reqList == undefined) {
             return true;
         }
@@ -60,6 +68,7 @@ class MapHelper {
 
     public static accessToTown(townName: string): boolean {
         let town = TownList[townName];
+        if (!town) { return false }
         for (let i of town.reqRoutes) {
             if (player.routeKills[i]() < player.routeKillsNeeded) {
                 return false;
@@ -89,6 +98,15 @@ class MapHelper {
             if (MapHelper.accessToRoute(i, GameConstants.Region.kanto)) {
                 $("[data-route='" + i + "']").removeClass('currentRoute').removeClass('lockedRoute').addClass('unlockedRoute');
             }
+        }
+    }
+
+    public static validRoute(route: number, region: GameConstants.Region): boolean {
+        switch (region) {
+            case GameConstants.Region.kanto:
+                return route > 0 && route < 26;
+            case GameConstants.Region.johto:
+                return route > 25 && route < 49;
         }
     }
 

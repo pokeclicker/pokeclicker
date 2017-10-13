@@ -168,7 +168,7 @@ const pokemonsPerRoute = {
             headbutt: ["Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
         36: {
-            land: ["Pidgey", "Nidroan(M)","Nidoran(F)","Vulpix","Growlithe","Bellsprout","Gastly","Hoothoot","Ledyba","Spinarak","Stantler"],
+            land: ["Pidgey", "Nidoran(M)","Nidoran(F)","Vulpix","Growlithe","Bellsprout","Gastly","Hoothoot","Ledyba","Spinarak","Stantler"],
             water: [],
             headbutt: ["Caterpie","Metapod","Butterfree","Weedle","Kakuna","Beedrill","Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
@@ -232,6 +232,9 @@ const pokemonsPerRoute = {
             water: [],
             headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         }
+    },
+    2: {
+        
     }
 };
 
