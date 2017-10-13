@@ -454,6 +454,7 @@ namespace GameConstants {
             24: GameConstants.Badge.Cascade,
         },
         1: {
+            28: GameConstants.Badge.Karen,
             32: GameConstants.Badge.Zephyr,
             34: GameConstants.Badge.Hive,
             35: GameConstants.Badge.Plain,
@@ -471,6 +472,8 @@ namespace GameConstants {
             20: "Seafoam Islands",
         },
         1: {
+            33: "Union Cave",
+            34: "Ilex Forest"
         }
     }
 

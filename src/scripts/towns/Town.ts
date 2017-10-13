@@ -140,9 +140,9 @@ TownList["Olivine City"] = new Town("Olivine City", [39]);
 
 TownList["Cianwood City"] = new Town("Cianwood City", [41]);
 
-TownList["Mahogany Town"] = new Town("Mahogany Town", [42]);
+TownList["Mahogany Town"] = new Town("Mahogany Town", [42], null, null, "Mt Mortar");
 
-TownList["Blackthorn City"] = new Town("Blackthorn City", [44]);
+TownList["Blackthorn City"] = new Town("Blackthorn City", [44], null, null, "Ice Path");
 
 TownList["Indigo Plateau 2.0"] = new Town("Indigo Plateau 2.0", [27]);
 
@@ -158,4 +158,4 @@ TownList["Whirl Islands"] = new DungeonTown("Whirl Islands", [41]);
 TownList["Mt Mortar"] = new DungeonTown("Mt Mortar", [42]);
 TownList["Ice Path"] = new DungeonTown("Ice Path", [44]);
 TownList["Dark Cave"] = new DungeonTown("Dark Cave", [45]);
-TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28]);
+TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], GameConstants.Badge.Karen);
