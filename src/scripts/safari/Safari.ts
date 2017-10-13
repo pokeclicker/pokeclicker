@@ -263,7 +263,7 @@ class Safari {
         if (player.hasKeyItem("Safari ticket")) {
             Game.gameState(GameConstants.GameState.safari);
             Safari.load();
-            $('#safariModal').modal('show');
+            $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
