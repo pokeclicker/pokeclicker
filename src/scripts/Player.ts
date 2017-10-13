@@ -543,7 +543,7 @@ class Player {
     }
 
     public gainBadge(badge: GameConstants.Badge) {
-        this._gymBadges().push(badge);
+        this._gymBadges.push(badge);
     }
 
     get itemMultipliers(): { [p: string]: number } {
