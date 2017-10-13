@@ -421,6 +421,19 @@ namespace GameConstants {
             23: [22],
             24: [4],
             25: [24],
+        },
+        1: {
+            30: [29],
+            31: [30],
+            33: [32],
+            36: [35],
+            37: [36],
+            39: [38],
+            40: [39],
+            41: [40],
+            46: [45],
+            26: [46],
+            27: [26],
         }
     };
 
@@ -439,6 +452,16 @@ namespace GameConstants {
             21: GameConstants.Badge.Volcano,
             22: GameConstants.Badge.Earth,
             24: GameConstants.Badge.Cascade,
+        },
+        1: {
+            32: GameConstants.Badge.Zephyr,
+            34: GameConstants.Badge.Hive,
+            35: GameConstants.Badge.Plain,
+            38: GameConstants.Badge.Fog,
+            42: GameConstants.Badge.Mineral,
+            43: GameConstants.Badge.Glacier,
+            44: GameConstants.Badge.Glacier,
+            45: GameConstants.Badge.Rising,
         }
     };
 
@@ -446,6 +469,8 @@ namespace GameConstants {
         0: {
             4: "Mt. Moon",
             20: "Seafoam Islands",
+        },
+        1: {
         }
     }
 

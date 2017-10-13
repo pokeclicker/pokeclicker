@@ -42,7 +42,6 @@ class MapHelper {
     }
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        if (region == 1) {return true}
         return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
     };
 
