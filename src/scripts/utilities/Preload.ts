@@ -3,7 +3,7 @@ class Preload {
     static async preload() {
 
         return new Promise<number>(resolve => {
-            Preload.loadSplashScreen();
+            Preload.loadBackgroundImages();
             Preload.hideSplashScreen();
 
             Preload.loadTownImages();
@@ -12,13 +12,16 @@ class Preload {
     }
 
     static loadTownImages() {
-        $('body').css('background', 'url(/assets/images/background.png) top');
-        $('body').css('background-size', 'cover');
+
     }
 
-    static loadSplashScreen() {
-        $('#loader').css('background', 'url(/assets/images/background.png) top');
-        $('#loader').css('background-size', 'cover');
+    static loadBackgroundImages() {
+        let loader = $('#loader');
+        loader.css('background', 'url(/assets/images/background.png) top');
+        loader.css('background-size', 'cover');
+        let body = $('body');
+        body.css('background', 'url(/assets/images/background.png) top');
+        body.css('background-size', 'cover');
     }
 
     static hideSplashScreen() {
