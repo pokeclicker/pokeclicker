@@ -30,6 +30,8 @@
     "gulp-concat": "^2.6.0",
     "gulp-file": "^0.3.0",
     "gulp-html-import": "^0.0.2",
+    "gulp-inject":"^4.3.0",
+    "gulp-markdown" : "^1.2.0",
     "gulp-file-include": "^1.0.0",
     "gulp-less": "^3.3.2",
     "gulp-minify-css": "^1.2.1",

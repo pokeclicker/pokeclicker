@@ -13,6 +13,9 @@ const runSequence = require('run-sequence');
 const bsConfig = require("gulp-bootstrap-configurator");
 const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
+const markdown = require('gulp-markdown');
+const inject = require('gulp-inject');
+
 
 /**
  * Push build to gh-pages
@@ -75,9 +78,17 @@ gulp.task('browserSync', function () {
 });
 
 gulp.task('import', function () {
+
     const htmlDest = './build';
     gulp.src('./src/index.html')
         .pipe(gulpImport('./src/components/'))
+        .pipe(inject(gulp.src('./src/changelog/*.md')
+        .pipe(markdown()), {
+          starttag: '<!-- inject:head:html -->',
+          transform: function (filePath, file) {
+            return file.contents.toString('utf8')
+          }
+        }))
         .pipe(gulp.dest(htmlDest)); 
 })
 
