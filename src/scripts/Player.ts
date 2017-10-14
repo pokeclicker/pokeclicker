@@ -134,6 +134,7 @@ class Player {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
         });
         this.plotList = Save.initializePlots(savedPlayer.plotList);
+        this.highestRegion = savedPlayer.highestRegion || 0;
 
         //TODO remove before deployment
         if (!debug) {
@@ -203,6 +204,8 @@ class Player {
     public plotList: KnockoutObservable<Plot>[];
     public farmPoints: KnockoutObservable<number>;
     public berryList: KnockoutObservable<number>[];
+
+    private highestRegion: GameConstants.Region;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -849,6 +852,18 @@ class Player {
         this._questPoints(value);
     }
 
+    public ableToTravel() {
+        return this.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[this.highestRegion]
+    }
+
+    public travelToNextRegion() {
+        if (this.ableToTravel()) {
+            this.highestRegion++;
+            MapHelper.moveToTown(GameConstants.StartingTowns[this.highestRegion]);
+            this.region = this.highestRegion;
+        }
+    }
+
     public toJSON() {
         let keep = [
             "_money",
@@ -900,7 +915,8 @@ class Player {
             "achievementsCompleted",
             "farmPoints",
             "plotList",
-            "berryList"
+            "berryList",
+            "highestRegion",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

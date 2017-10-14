@@ -12,6 +12,7 @@ class Town {
     private _dungeon?: KnockoutObservable<Dungeon>;
     private _reqRoutes: number[];
     private dungeonReq: string; // Dungeon that must be completed to access town
+    public startingTown: boolean;
 
     constructor(name: string, routes: number[], shop?: Shop, dungeon?: Dungeon, dungeonReq?: string) {
         this._name = ko.observable(name);
@@ -20,6 +21,7 @@ class Town {
         this._shop = ko.observable(shop);
         this._dungeon = ko.observable(dungeon);
         this.dungeonReq = dungeonReq;
+        this.startingTown = GameConstants.StartingTowns.indexOf(this._name()) > -1
     }
 
     get name(): KnockoutObservable<string> {
