@@ -108,4 +108,21 @@ class MapHelper {
         }
     }
 
+    public static openShipModal() {
+        let openModal = () => {Game.gameState(GameConstants.GameState.idle);$("#ShipModal").modal('show');}
+        switch (player.region) {
+            case 0:
+                if (TownList["Vermillion City"].isUnlocked() && player.highestRegion > 0) {
+                    openModal();
+                    return;
+                }
+            case 1:
+                if (TownList["Olivine City"].isUnlocked()) {
+                    openModal();
+                    return;
+                }
+        }
+        Notifier.notify("You cannot access this dock yet", GameConstants.NotificationOption.warning)
+    }
+
 }
