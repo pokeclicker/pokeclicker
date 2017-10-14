@@ -5,67 +5,68 @@
  */
 let player;
 const debug = false;
+let game;
 
 document.addEventListener("DOMContentLoaded", function (event) {
     if (debug) {
         $('.loader').hide("fast")
     }
-    Preload.loadTownImages();
-    OakItemRunner.initialize();
-    UndergroundItem.initialize();
-    let game: Game = new Game();
-    // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
-    game.start();
+    Preload.preload().then(function () {
 
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
+        OakItemRunner.initialize();
+        UndergroundItem.initialize();
+        game = new Game();
+        // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
+        game.start();
 
-    Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
-    (ko as any).bindingHandlers.tooltip = {
-        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-            let local = ko.utils.unwrapObservable(valueAccessor()),
-                options = {};
+        Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
 
-            ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
-            ko.utils.extend(options, local);
+        (ko as any).bindingHandlers.tooltip = {
+            init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+                let local = ko.utils.unwrapObservable(valueAccessor()),
+                    options = {};
 
-            $(element).tooltip(options);
+                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+                ko.utils.extend(options, local);
 
-            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-                $(element).tooltip("dispose");
-            });
+                $(element).tooltip(options);
 
-            if (bindingContext.$data instanceof Plot) {
-                $(element).hover(function () {
-                    $(this).data('to', setInterval(function () {
-                        $(element).tooltip('hide')
-                            .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
-                            .tooltip('show');
-                    }, 100));
-                }, function () {
-                    clearInterval($(this).data('to'));
+                ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                    $(element).tooltip("dispose");
                 });
+
+                if (bindingContext.$data instanceof Plot) {
+                    $(element).hover(function () {
+                        $(this).data('to', setInterval(function () {
+                            $(element).tooltip('hide')
+                                .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
+                                .tooltip('show');
+                        }, 100));
+                    }, function () {
+                        clearInterval($(this).data('to'));
+                    });
+                }
+
+            },
+            options: {
+                placement: "bottom",
+                trigger: "click"
             }
+        };
 
-        },
-        options: {
-            placement: "bottom",
-            trigger: "click"
-        }
-    };
+        PokedexHelper.populateTypeFilters();
+        PokedexHelper.updateList();
 
-    PokedexHelper.populateTypeFilters();
-    PokedexHelper.updateList();
+        ko.applyBindings(game);
+        ko.options.deferUpdates = true;
 
-    ko.applyBindings(game);
-    ko.options.deferUpdates = true;
-
-    Game.applyRouteBindings();
-
+        Game.applyRouteBindings();
+    });
 });
-
 
 /**
  * Main game class.

@@ -1,9 +1,30 @@
 class Preload {
-    static async loadTownImages() {
-        this.hideSplashScreen();
+
+    static async preload() {
+
+        return new Promise<number>(resolve => {
+            Preload.loadSplashScreen();
+            Preload.hideSplashScreen();
+
+            Preload.loadTownImages();
+            resolve();
+        });
+    }
+
+    static loadTownImages() {
+        $('body').css('background', 'url(/assets/images/background.png) top');
+        $('body').css('background-size', 'cover');
+    }
+
+    static loadSplashScreen() {
+        $('#loader').css('background', 'url(/assets/images/background.png) top');
+        $('#loader').css('background-size', 'cover');
     }
 
     static hideSplashScreen() {
-        $('.loader').fadeOut("slow")
+        setTimeout(function () {
+
+            $('.loader').fadeOut("slow")
+        }, 2600)
     }
 }
