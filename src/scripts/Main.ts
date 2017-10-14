@@ -9,11 +9,8 @@ const debug = false;
 document.addEventListener("DOMContentLoaded", function (event) {
     if (debug) {
         $('.loader').hide("fast")
-    } else {
-        setTimeout(function () {
-            $('.loader').fadeOut("slow")
-        }, 2600);
     }
+    Preload.loadTownImages();
     OakItemRunner.initialize();
     UndergroundItem.initialize();
     let game: Game = new Game();
@@ -69,6 +66,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
 });
 
+
 /**
  * Main game class.
  */
@@ -81,7 +79,7 @@ class Game {
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
     constructor() {
-        (<any>window).player = Save.load();
+        player = Save.load();
         KeyItemHandler.initialize();
         AchievementHandler.initialize();
         player.gainKeyItem("Coin case", true);
@@ -112,8 +110,7 @@ class Game {
         Save.counter += GameConstants.TICK_TIME;
         Underground.counter += GameConstants.TICK_TIME;
 
-
-GameHelper.counter += GameConstants.TICK_TIME;
+        GameHelper.counter += GameConstants.TICK_TIME;
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
                 Battle.counter += GameConstants.TICK_TIME;
