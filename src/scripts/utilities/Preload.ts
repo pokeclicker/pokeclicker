@@ -11,6 +11,7 @@ class Preload {
     public static load(skipWait: boolean = false) {
         if (skipWait) {
             return new Promise(resolve => {
+                //If you want to skip waiting, resolve immediately
                 resolve();
                 Preload.loadSplashScreen();
                 Preload.loadSplashScreen();
@@ -28,7 +29,7 @@ class Preload {
                     Preload.loadBackground(),
                     Preload.loadMap(),
                     Preload.loadTowns(),
-                    Preload.loadPokemon(),
+                    // Preload.loadPokemon(),
                     Preload.minimumTime()
                 ]).then(() => {
                     resolve();
