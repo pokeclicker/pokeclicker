@@ -74,6 +74,24 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
+    <style>
+        .loader {
+            position: fixed;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #79c9fa;
+            background-size: cover;
+            z-index: 9999;
+        }
+
+        .loader-wrapper {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+    </style>
+
 </head>
 <body class="no-select">
 @import "splash.html"
@@ -359,7 +377,7 @@
                             </defs>
 
                             <g transform="translate(-1,-1)">
-                                <image height="420.7" width="651" xlink:href="assets/images/kanto.png"></image>
+                                <image id="mapImage" height="420.7" width="651"></image>
 
                                 <!--Route 1-->
                                 <g transform="rotate(90,83.65,263.2)"

@@ -8,16 +8,11 @@ const debug = false;
 let game;
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    if (debug) {
-        $('.loader').hide("fast")
-    }
-    Preload.preload().then(function () {
-
+    Preload.load(debug).then(function () {
         OakItemRunner.initialize();
         UndergroundItem.initialize();
         game = new Game();
         // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
-        game.start();
 
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip();
@@ -65,6 +60,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         ko.options.deferUpdates = true;
 
         Game.applyRouteBindings();
+        Preload.hideSplashScreen();
+        game.start();
+
     });
 });
 
@@ -86,12 +84,12 @@ class Game {
         player.gainKeyItem("Coin case", true);
         player.gainKeyItem("Teachy tv", true);
         player.gainKeyItem("Pokeball bag", true);
+        player.region = GameConstants.Region.kanto;
+        this.load();
     }
 
     start() {
-        player.region = GameConstants.Region.kanto;
-        this.load();
-
+        console.log("game started");
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
     }
 
