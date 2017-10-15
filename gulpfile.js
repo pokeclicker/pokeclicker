@@ -13,6 +13,10 @@ const runSequence = require('run-sequence');
 const bsConfig = require("gulp-bootstrap-configurator");
 const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
+const markdown = require('gulp-markdown');
+const inject = require('gulp-inject');
+const gSort = require("gulp-sort");
+
 
 /**
  * Push build to gh-pages
@@ -28,12 +32,12 @@ const srcs = {
     html: ['src/*.html', 'src/templates/*.html', 'src/components/*.html'],
     styles: 'src/styles/**/*.less',
     assets: 'src/assets/**/*',
-    libs: [ 'node_modules/bootstrap/dist/js/bootstrap.min.js',
-            'node_modules/bootstrap/dist/css/bootstrap.min.css',
-            'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/tether/dist/js/tether.min.js',
-            'node_modules/knockout/build/output/knockout-latest.js',
-            'node_modules/bootstrap-notify/bootstrap-notify.min.js'
+    libs: ['node_modules/bootstrap/dist/js/bootstrap.min.js',
+        'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/tether/dist/js/tether.min.js',
+        'node_modules/knockout/build/output/knockout-latest.js',
+        'node_modules/bootstrap-notify/bootstrap-notify.min.js'
     ]
 };
 
@@ -47,9 +51,9 @@ const dests = {
     githubPages: 'docs/'
 };
 
-gulp.task('cname', function() {
+gulp.task('cname', function () {
     const str = "www.pokeclicker.com";
-    return file('CNAME', str, { src: true })
+    return file('CNAME', str, {src: true})
         .pipe(gulp.dest('docs/'));
 });
 
@@ -75,10 +79,18 @@ gulp.task('browserSync', function () {
 });
 
 gulp.task('import', function () {
+
     const htmlDest = './build';
     gulp.src('./src/index.html')
         .pipe(gulpImport('./src/components/'))
-        .pipe(gulp.dest(htmlDest)); 
+        .pipe(inject(gulp.src('./src/assets/changelog/*.md').pipe(gSort({asc: false}))
+            .pipe(markdown()), {
+            starttag: '<!-- inject:head:html -->',
+            transform: function (filePath, file) {
+                return file.contents.toString('utf8')
+            }
+        }))
+        .pipe(gulp.dest(htmlDest));
 })
 
 gulp.task('html', function () {
