@@ -16,6 +16,7 @@ const gulpImport = require('gulp-html-import');
 const markdown = require('gulp-markdown');
 const inject = require('gulp-inject');
 const gSort = require("gulp-sort");
+const glob = require("glob");
 
 
 /**
@@ -79,11 +80,12 @@ gulp.task('browserSync', function () {
 });
 
 gulp.task('import', function () {
+    let recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-5);
 
     const htmlDest = './build';
     gulp.src('./src/index.html')
         .pipe(gulpImport('./src/components/'))
-        .pipe(inject(gulp.src('./src/assets/changelog/*.md').pipe(gSort({asc: false}))
+        .pipe(inject(gulp.src(recentChangelogs).pipe(gSort({asc: false}))
         .pipe(markdown()), {
           starttag: '<!-- inject:head:html -->',
           transform: function (filePath, file) {
