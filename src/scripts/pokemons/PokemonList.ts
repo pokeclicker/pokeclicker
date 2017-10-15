@@ -1535,7 +1535,7 @@ const pokemonList = [
         "name": "Chansey",
         "catchRate": 30,
         "evolution" : "Blissey",
-        "evoLevel" : "100",
+        "evoLevel" : 100,
         "type": [
             "Normal"
         ],
@@ -2315,7 +2315,7 @@ const pokemonList = [
       "name": "Pichu",
       "catchRate": "190",
       "evolution": "Pikachu",
-      "evoLevel": "100",
+      "evoLevel": 100,
       "type": [
         "Electric"
       ],
@@ -2329,7 +2329,7 @@ const pokemonList = [
       "name": "Cleffa",
       "catchRate": "150",
       "evolution": "Clefairy",
-      "evoLevel": "100",
+      "evoLevel": 100,
       "type": [
         "Fairy"
       ],
@@ -2343,7 +2343,7 @@ const pokemonList = [
       "name": "Igglybuff",
       "catchRate": "170",
       "evolution": "Jigglypuff",
-      "evoLevel": "100",
+      "evoLevel": 100,
       "type": [
         "Normal",
         "Fairy"
@@ -2358,7 +2358,7 @@ const pokemonList = [
       "name": "Togepi",
       "catchRate": "190",
       "evolution": "Togetic",
-      "evoLevel": "100",
+      "evoLevel": 100,
       "type": [
         "Fairy"
       ],

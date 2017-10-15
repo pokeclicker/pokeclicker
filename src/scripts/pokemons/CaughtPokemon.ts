@@ -12,6 +12,7 @@ class CaughtPokemon {
     levelObservable: KnockoutComputed<number>;
     evolver: KnockoutSubscription;
     breeding: KnockoutObservable<boolean>;
+    evoRegion: GameConstants.Region;
 
     constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number, breeding: boolean = false) {
         this.id = pokemonData.id;
@@ -28,9 +29,11 @@ class CaughtPokemon {
         });
 
         this.breeding = ko.observable(breeding);
-        if (pokemonData.evoLevel && !this.evolved) {
+        if (typeof pokemonData.evoLevel == "number" && !this.evolved) {
+            console.log(pokemonData.name, pokemonData.evolution);
+            this.evoRegion = PokemonHelper.calcNativeRegion(pokemonData.evolution);
             this.evolver = this.levelObservable.subscribe(() => {
-                if (this.levelObservable() >= pokemonData.evoLevel) {
+                if (this.levelObservable() >= pokemonData.evoLevel && player.highestRegion >= this.evoRegion) {
                     Notifier.notify("Your " + pokemonData.name + " has evolved into a " + pokemonData.evolution, GameConstants.NotificationOption.success);
                     player.capturePokemon(pokemonData.evolution, false, true);
                     player.caughtAmount[pokemonData.id](player._caughtAmount[pokemonData.id]() + 1);
