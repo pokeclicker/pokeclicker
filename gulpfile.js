@@ -15,6 +15,7 @@ const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
 const markdown = require('gulp-markdown');
 const inject = require('gulp-inject');
+const gSort = require("gulp-sort");
 
 
 /**
@@ -82,7 +83,7 @@ gulp.task('import', function () {
     const htmlDest = './build';
     gulp.src('./src/index.html')
         .pipe(gulpImport('./src/components/'))
-        .pipe(inject(gulp.src('./src/changelog/*.md')
+        .pipe(inject(gulp.src('./src/assets/changelog/*.md').pipe(gSort({asc: false}))
         .pipe(markdown()), {
           starttag: '<!-- inject:head:html -->',
           transform: function (filePath, file) {
