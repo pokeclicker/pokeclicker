@@ -1186,16 +1186,25 @@
         muc_show_join_leave : false,
         muc_domain : "conference.localhoststudios.com",
         auto_join_rooms : [{'jid': 'pokeclicker@conference.localhoststudios.com' }],
+        use_vcards : false,
         visible_toolbar_buttons : {
             call: false,
             clear: false,
             emoji: true,
-            toggle_occupants: true
+            toggle_occupants: false
         }
      });    
 </script>
 </html>
 
 <style>
-    #chatrooms form {display:none !important;}
+    #chatrooms form, .occupants, #converse-roster {display:none !important;}
+    .chat-area {min-width:100% !important;}
+    #controlbox {width:300px !important;}
+    .flyout.box-flyout {width:300px !important;}
+    #converse-register .input-group span {display:none !important;}
+    #available-chatrooms dt {display:none !important;}
+    .open-rooms-list.rooms-list-container {display:none !important;}
+    .change-xmpp-status-message.icon-pencil {display:none !important;}
+    #conversejs {font-family: pokemonFont !important; font-size:14px !important;}
 </style>
