@@ -33,9 +33,7 @@ const srcs = {
             'node_modules/jquery/dist/jquery.min.js',
             'node_modules/tether/dist/js/tether.min.js',
             'node_modules/knockout/build/output/knockout-latest.js',
-            'node_modules/bootstrap-notify/bootstrap-notify.min.js',
-            'src/libs/converse.css',
-            'src/libs/converse.js'
+            'node_modules/bootstrap-notify/bootstrap-notify.min.js'
     ]
 };
 
