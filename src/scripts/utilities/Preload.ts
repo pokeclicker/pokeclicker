@@ -18,8 +18,6 @@ class Preload {
                 Preload.loadBackground();
                 Preload.loadMap();
                 Preload.loadTowns();
-                Preload.loadPokemon();
-                Preload.minimumTime();
                 Preload.hideSplashScreen(true);
             })
         } else {
