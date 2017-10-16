@@ -81,7 +81,7 @@ class Statistics {
         } else {
             index += GameConstants.JohtoDungeons.length;
         }
-        console.log("Failed to find dungeon");
+        console.log("Failed to find dungeon", dungeon);
         return index;
     }
 

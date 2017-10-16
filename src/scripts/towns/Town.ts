@@ -81,7 +81,7 @@ class DungeonTown extends Town {
 
 }
 
-const TownList: { [name: string]: Town } = {};
+const TownList: { [name: string]: Town | PokemonLeague } = {};
 
 //Kanto Towns
 let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp","Dungeon_ticket"]);
@@ -145,8 +145,6 @@ TownList["Cianwood City"] = new Town("Cianwood City", [41]);
 TownList["Mahogany Town"] = new Town("Mahogany Town", [42], null, null, "Mt Mortar");
 
 TownList["Blackthorn City"] = new Town("Blackthorn City", [44], null, null, "Ice Path");
-
-TownList["Indigo Plateau 2.0"] = new Town("Indigo Plateau 2.0", [27]);
 
 //Johto Dungeons
 TownList["Sprout Tower"] = new DungeonTown("Sprout Tower", [31]);

@@ -1,4 +1,5 @@
 ///<reference path="PokemonLeague.ts"/>
+/*
 class IndigoPlateau extends PokemonLeague {
 
     constructor(shop?: Shop) {
@@ -15,10 +16,13 @@ class IndigoPlateau extends PokemonLeague {
     }
 
 }
+*/
 
-TownList["Indigo Plateau"] = new IndigoPlateau(new Shop(["Ultraball"]));
+
+/*
 TownList["Elite Lorelei"] = TownList["Indigo Plateau"];
 TownList["Elite Bruno"] = TownList["Indigo Plateau"];
 TownList["Elite Agatha"] = TownList["Indigo Plateau"];
 TownList["Elite Lance"] = TownList["Indigo Plateau"];
 TownList["Champion Blue"] = TownList["Indigo Plateau"];
+*/
