@@ -104,7 +104,6 @@ class PokemonHelper {
     }
 
     public static calcNativeRegion(pokemonName: string) {
-        console.log(pokemonName);
         let id = PokemonHelper.getPokemonByName(pokemonName).id;
         if (id > 251) {
             return GameConstants.Region.hoenn;

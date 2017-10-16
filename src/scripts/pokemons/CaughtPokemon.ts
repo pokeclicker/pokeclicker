@@ -30,7 +30,6 @@ class CaughtPokemon {
 
         this.breeding = ko.observable(breeding);
         if (typeof pokemonData.evoLevel == "number" && !this.evolved) {
-            console.log(pokemonData.name, pokemonData.evolution);
             this.evoRegion = PokemonHelper.calcNativeRegion(pokemonData.evolution);
             this.evolver = this.levelObservable.subscribe(() => {
                 if (this.levelObservable() >= pokemonData.evoLevel && player.highestRegion >= this.evoRegion) {
