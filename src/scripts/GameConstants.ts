@@ -455,7 +455,7 @@ namespace GameConstants {
             24: GameConstants.Badge.Cascade,
         },
         1: {
-            28: GameConstants.Badge.Karen,
+            28: GameConstants.Badge.JohtoChampion,
             32: GameConstants.Badge.Zephyr,
             34: GameConstants.Badge.Hive,
             35: GameConstants.Badge.Plain,
