@@ -349,3 +349,16 @@ gymList["Elite Karen"] = new Gym(
     GameConstants.Badge.Bruno2,
     "Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what's important. Go on — — the Champion is waiting."
 );
+gymList["Champion Lance"] = new Gym(
+    "Lance",
+    "Champion Lance",
+    [new GymPokemon("Gyarados", 58300, 44),
+        new GymPokemon("Dragonite", 62000, 49),
+        new GymPokemon("Dragonite", 64000, 49),
+        new GymPokemon("Aerodactyl", 60250, 48),
+        new GymPokemon("Dragonite", 70000, 50),],
+    GameConstants.Badge.JohtoChampion,
+    7500,
+    GameConstants.Badge.Karen,
+    "…It's over. But it's an odd feeling. I’m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!"
+);

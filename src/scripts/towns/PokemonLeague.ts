@@ -22,6 +22,6 @@ let indigoPlateauGyms = ["Elite Lorelei", "Elite Bruno", "Elite Agatha", "Elite 
 TownList["Indigo Plateau"] = new PokemonLeague("Indigo Plateau", [23], new Shop(["Ultraball"]), "Victory Road", indigoPlateauGyms);
 (<PokemonLeague>TownList["Indigo Plateau"]).setupGymTowns();
 
-let indigoPlateau2Gyms = ["Elite Will", "Elite Koga", "Elite Bruno2", "Elite Karen"];
+let indigoPlateau2Gyms = ["Elite Will", "Elite Koga", "Elite Bruno2", "Elite Karen", "Champion Lance"];
 TownList["Indigo Plateau 2.0"] = new PokemonLeague("Indigo Plateau 2.0", [27], null, null, indigoPlateau2Gyms);
 (<PokemonLeague>TownList["Indigo Plateau 2.0"]).setupGymTowns();

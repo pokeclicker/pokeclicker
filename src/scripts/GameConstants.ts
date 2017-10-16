@@ -332,7 +332,8 @@ namespace GameConstants {
         "Will" = 22,
         "Koga" = 23,
         "Bruno2" = 24,
-        "Karen" = 25
+        "Karen" = 25,
+        "JohtoChampion" = 26,
     }
 
     export enum PokemonType {
@@ -631,6 +632,7 @@ namespace GameConstants {
         "Elite Koga",
         "Elite Bruno2",
         "Elite Karen",
+        "Champion Lance"
     ];
 
     export const KantoDungeons = [
