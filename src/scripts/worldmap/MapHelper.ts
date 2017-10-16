@@ -125,4 +125,16 @@ class MapHelper {
         Notifier.notify("You cannot access this dock yet", GameConstants.NotificationOption.warning)
     }
 
+    public static ableToTravel() {
+        return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.highestRegion]
+    }
+
+    public static travelToNextRegion() {
+        if (MapHelper.ableToTravel()) {
+            player.highestRegion++;
+            MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion]);
+            player.region = player.highestRegion;
+        }
+    }
+
 }

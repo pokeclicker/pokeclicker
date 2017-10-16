@@ -864,18 +864,6 @@ class Player {
         this._questPoints(value);
     }
 
-    public ableToTravel() {
-        return this.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[this.highestRegion]
-    }
-
-    public travelToNextRegion() {
-        if (this.ableToTravel()) {
-            this.highestRegion++;
-            MapHelper.moveToTown(GameConstants.StartingTowns[this.highestRegion]);
-            this.region = this.highestRegion;
-        }
-    }
-
     public toJSON() {
         let keep = [
             "_money",
