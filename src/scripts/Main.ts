@@ -5,68 +5,65 @@
  */
 let player;
 const debug = false;
+let game;
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    if (debug) {
-        $('.loader').hide("fast")
-    } else {
-        setTimeout(function () {
-            $('.loader').fadeOut("slow")
-        }, 2600);
-    }
-    OakItemRunner.initialize();
-    UndergroundItem.initialize();
-    let game: Game = new Game();
-    // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
-    game.start();
+    Preload.load(debug).then(function () {
+        OakItemRunner.initialize();
+        UndergroundItem.initialize();
+        game = new Game();
+        // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
 
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
 
-    Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
+        Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
 
-    (ko as any).bindingHandlers.tooltip = {
-        init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
-            let local = ko.utils.unwrapObservable(valueAccessor()),
-                options = {};
+        (ko as any).bindingHandlers.tooltip = {
+            init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+                let local = ko.utils.unwrapObservable(valueAccessor()),
+                    options = {};
 
-            ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
-            ko.utils.extend(options, local);
+                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+                ko.utils.extend(options, local);
 
-            $(element).tooltip(options);
+                $(element).tooltip(options);
 
-            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-                $(element).tooltip("dispose");
-            });
-
-            if (bindingContext.$data instanceof Plot) {
-                $(element).hover(function () {
-                    $(this).data('to', setInterval(function () {
-                        $(element).tooltip('hide')
-                            .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
-                            .tooltip('show');
-                    }, 100));
-                }, function () {
-                    clearInterval($(this).data('to'));
+                ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                    $(element).tooltip("dispose");
                 });
+
+                if (bindingContext.$data instanceof Plot) {
+                    $(element).hover(function () {
+                        $(this).data('to', setInterval(function () {
+                            $(element).tooltip('hide')
+                                .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
+                                .tooltip('show');
+                        }, 100));
+                    }, function () {
+                        clearInterval($(this).data('to'));
+                    });
+                }
+
+            },
+            options: {
+                placement: "bottom",
+                trigger: "click"
             }
+        };
 
-        },
-        options: {
-            placement: "bottom",
-            trigger: "click"
-        }
-    };
+        PokedexHelper.populateTypeFilters();
+        PokedexHelper.updateList();
 
-    PokedexHelper.populateTypeFilters();
-    PokedexHelper.updateList();
+        ko.applyBindings(game);
+        ko.options.deferUpdates = true;
 
-    ko.applyBindings(game);
-    ko.options.deferUpdates = true;
+        Game.applyRouteBindings();
+        Preload.hideSplashScreen();
+        game.start();
 
-    Game.applyRouteBindings();
-
+    });
 });
 
 /**
@@ -81,17 +78,17 @@ class Game {
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
     constructor() {
-        (<any>window).player = Save.load();
+        player = Save.load();
         KeyItemHandler.initialize();
         AchievementHandler.initialize();
         player.gainKeyItem("Coin case", true);
         player.gainKeyItem("Teachy tv", true);
         player.gainKeyItem("Pokeball bag", true);
+        this.load();
     }
 
     start() {
-        this.load();
-
+        console.log("game started");
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
     }
 
@@ -111,8 +108,7 @@ class Game {
         Save.counter += GameConstants.TICK_TIME;
         Underground.counter += GameConstants.TICK_TIME;
 
-
-GameHelper.counter += GameConstants.TICK_TIME;
+        GameHelper.counter += GameConstants.TICK_TIME;
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
                 Battle.counter += GameConstants.TICK_TIME;

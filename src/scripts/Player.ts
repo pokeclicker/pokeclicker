@@ -790,6 +790,18 @@ class Player {
         this._eggSlots(this._eggSlots() + 1);
     }
 
+    public nextEggSlotCost() {
+        return BreedingHelper.getEggSlotCost(this._eggSlots() + 1);
+    }
+
+    public buyEggSlot() {
+        let cost = this.nextEggSlotCost();
+        if (this.questPoints >= cost) {
+            this.questPoints -= cost;
+            this.gainEggSlot();
+        }
+    }
+
     public unlockPlot() {
         let i = 0;
         while (i < this.plotList.length && this.plotList[i]().isUnlocked()) {

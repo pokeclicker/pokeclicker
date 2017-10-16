@@ -74,6 +74,24 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
+    <style>
+        .loader {
+            position: fixed;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #79c9fa;
+            background-size: cover;
+            z-index: 9999;
+        }
+
+        .loader-wrapper {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+    </style>
+
 </head>
 <body class="no-select">
 @import "splash.html"
@@ -596,32 +614,7 @@
             @import "questDisplay.html"
 
             <!-- Egg Slots/Breeding-->
-            <div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
-                <div class="page-item">
-                    <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
-                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()"
-                             style="border: 1px solid black;">
-                            <div data-bind="if: $data !== null">
-                                <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
-
-                                <div class="progress" data-bind='if: progress() < 100,
-                                                                 tooltip: {title: ko.pureComputed(function(){return Math.floor(progress()) + "%"}), trigger: "hover"}'>
-                                    <div class="progress-bar bg-success" role="progressbar"
-                                         data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
-                                         aria-valuemin="0" aria-valuemax="100">
-                                    </div>
-                                </div>
-                                <div data-bind='if: progress() >= 100'>
-                                    <button class='btn btn-primary'
-                                            data-bind='click: function(){BreedingHelper.hatchPokemonEgg($index())}'>
-                                        Hatch!
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @import "breedingDisplay.html"
         </div>
 
     </div>
@@ -632,6 +625,9 @@
 
 <!-- Achievements Modal -->
 @import "achievements.html"
+
+<!-- Changelog Modal -->
+@import "changelog.html"
 
 <!-- Start Sequence Modal-->
 @import "startSequence.html"
