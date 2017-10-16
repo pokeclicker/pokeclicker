@@ -153,7 +153,6 @@ TownList["Slowpoke Well"] = new DungeonTown("Slowpoke Well", [33]);
 TownList["Ilex Forest"] = new DungeonTown("Ilex Forest", [33]);
 TownList["Burned Tower"] = new DungeonTown("Burned Tower", [37]);
 TownList["Tin Tower"] = new DungeonTown("Tin Tower", [37]);
-TownList["Lighthouse"] = new DungeonTown("Lighthouse", [39]);
 TownList["Whirl Islands"] = new DungeonTown("Whirl Islands", [41]);
 TownList["Mt Mortar"] = new DungeonTown("Mt Mortar", [42]);
 TownList["Ice Path"] = new DungeonTown("Ice Path", [44]);
