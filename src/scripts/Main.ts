@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     Preload.load(debug).then(function () {
         OakItemRunner.initialize();
         UndergroundItem.initialize();
+        RewardTable.initialize();
         game = new Game();
         // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
 

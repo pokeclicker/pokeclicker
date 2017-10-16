@@ -591,4 +591,34 @@ namespace GameConstants {
         "Victory Road",
         "Cerulean Cave"
     ];
+
+    export const rewardTableData = {
+        "TableA" : {
+            "always": [
+                {"name": "BerryA", "minAmount": 1, "maxAmount": 4}
+            ],
+            "oneof": [
+                {"name": "BerryB" , "weight": 10},
+                {"name": "BerryC" , "weight": 5}
+            ],
+            "anyof": [
+                {"name": "BerryD" , "weight": 10},
+                {"name": "BerryE" , "weight": 5}
+            ]
+        },
+        "TableB" : {
+            "always": [
+                {"name": "TableA" , "table": true}
+            ],
+            "oneof": [
+                {"name": "BerryB" , "weight": 10},
+                {"name": "BerryC" , "weight": 5}
+            ],
+            "anyof": [
+                {"name": "BerryD" , "weight": 10},
+                {"name": "BerryE" , "weight": 5}
+            ]
+        }
+    };
+
 }
