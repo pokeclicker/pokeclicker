@@ -7,7 +7,7 @@ class ItemHandler {
 
     public static useItem(name:string){
         ItemList[name].use();
-        player.itemList[name]--;
+        player.itemList[name](player.itemList[name]-1);
     }
 
     public static resetAmount() {
@@ -26,13 +26,20 @@ class ItemHandler {
             Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
             return;
         }
+        let amount = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
-        let amount = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]);
-        for(let i = 0; i< amount; i++){
-            console.log("go");
-            player.itemList[this.stoneSelected()]--;
-            (ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())
+        if(amount == 0){
+            return;
         }
+
+        for(let i = 0; i< amount; i++){
+            player.itemList[this.stoneSelected()](player.itemList[this.stoneSelected()]()-1);
+            if((ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())){
+                amount = i;
+            }
+        }
+        let multiple = amount == 1 ? "" : "s";
+        Notifier.notify("You used " + amount + " " + this.stoneSelected() + multiple, GameConstants.NotificationOption.success);
     }
 
 }
