@@ -7,10 +7,10 @@ class Player {
 
     private _money: KnockoutObservable<number>;
     private _dungeonTokens: KnockoutObservable<number>;
-
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
+        this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
@@ -104,7 +104,35 @@ class Player {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
 
+        let today = new Date();
+        let lastSeen = new Date(this._lastSeen);
+        if (today.toLocaleDateString() == lastSeen.toLocaleDateString()) {
+            this.questRefreshes = savedPlayer.questRefreshes;
+            if (savedPlayer.completedQuestList) {
+                this.completedQuestList = savedPlayer.completedQuestList.map((bool) => {return ko.observable(bool)});
+            } else {
+                this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+            }
+            this.currentQuest = ko.observable(savedPlayer.currentQuest);
+        } else {
+            this.questRefreshes = 0;
+            this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+            this.currentQuest = ko.observable(null);
+        }
+        this._questXP = ko.observable(savedPlayer._questXP || 0);
+        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
+
+        this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
+
+        this._lastSeen = Date.now();
         this.statistics = new Statistics(savedPlayer.statistics);
+
+        this.farmPoints = ko.observable(savedPlayer.farmPoints || 0);
+        this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
+            return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
+        });
+        this.plotList = Save.initializePlots(savedPlayer.plotList);
+
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -116,8 +144,6 @@ class Player {
     private _caughtShinyList: KnockoutObservableArray<string>;
     private _route: KnockoutObservable<number>;
     private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
-
-    private _questPoints: KnockoutObservable<number>;
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
@@ -164,6 +190,18 @@ class Player {
     public achievementsCompleted: {[name: string]: boolean};
     public statistics: Statistics;
 
+    public completedQuestList: Array<KnockoutObservable<boolean>>;
+    public questRefreshes: number;
+    public _questPoints: KnockoutObservable<number>;
+    public _questXP: KnockoutObservable<number>;
+    public _lastSeen: number;
+    public currentQuest: KnockoutObservable<any>;
+    private _shinyCatches: KnockoutObservable<number>;
+
+    public plotList: KnockoutObservable<Plot>[];
+    public farmPoints: KnockoutObservable<number>;
+    public berryList: KnockoutObservable<number>[];
+
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
             return Math.min(this.routeKillsNeeded, this.routeKills[route]());
@@ -190,6 +228,7 @@ class Player {
 
     public usePokeball(ball: GameConstants.Pokeball): void {
         this._pokeballs[ball](this._pokeballs[ball]() - 1)
+        GameHelper.incrementObservable(this.statistics.pokeballsUsed[ball]);
     }
 
     public addRouteKill() {
@@ -344,6 +383,9 @@ class Player {
             this._caughtShinyList.push(pokemonName);
             Save.store(player);
         }
+        if (shiny) {
+            player.shinyCatches++;
+        }
         player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
         GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
@@ -370,7 +412,8 @@ class Player {
     }
 
     public gainDungeonTokens(tokens: number) {
-        this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens));
+        this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens ));
+        GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
     }
 
     public hasMoney(money: number) {
@@ -383,7 +426,7 @@ class Player {
 
     public payQuestPoints(questPoints: number) {
         if (this.hasQuestPoints(questPoints)) {
-            this._questPoints(Math.floor(this.questPoints() - questPoints));
+            this._questPoints(Math.floor(this.questPoints - questPoints));
         }
     }
 
@@ -391,6 +434,10 @@ class Player {
         if (this.hasMoney(money)) {
             this._money(Math.floor(this._money() - money));
         }
+    }
+
+    public gainFarmPoints(points: number) {
+        this.farmPoints(Math.floor(this.farmPoints() + points));
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {
@@ -410,9 +457,11 @@ class Player {
     public gainShards(pokemon: BattlePokemon) {
         let typeNum = GameConstants.PokemonType[pokemon.type1];
         player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
         if (pokemon.type2 != GameConstants.PokemonType.None) {
             typeNum = GameConstants.PokemonType[pokemon.type2];
             player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
+            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
         }
     }
 
@@ -530,10 +579,6 @@ class Player {
 
     get dungeonTokens(): KnockoutObservable<number> {
         return this._dungeonTokens;
-    }
-
-    get questPoints(): KnockoutObservable<number> {
-        return this._questPoints;
     }
 
     get caughtPokemonList() {
@@ -741,6 +786,29 @@ class Player {
         this._eggSlots(this._eggSlots() + 1);
     }
 
+    public nextEggSlotCost() {
+        return BreedingHelper.getEggSlotCost(this._eggSlots() + 1);
+    }
+
+    public buyEggSlot() {
+        let cost = this.nextEggSlotCost();
+        if (this.questPoints >= cost) {
+            this.questPoints -= cost;
+            this.gainEggSlot();
+        }
+    }
+
+    public unlockPlot() {
+        let i = 0;
+        while (i < this.plotList.length && this.plotList[i]().isUnlocked()) {
+            i++;
+        }
+        if (i == this.plotList.length) {
+            return;
+        }
+        this.plotList[i]().isUnlocked(true);
+    }
+
     get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
         return this._shardUpgrades;
     }
@@ -755,6 +823,41 @@ class Player {
 
     set shardsCollected(value: Array<KnockoutObservable<number>>) {
         this._shardsCollected = value;
+    }
+
+    get questLevel(): number {
+        return QuestHelper.xpToLevel(player.questXP);
+    }
+
+    public percentToNextQuestLevel(): number {
+        let current = this.questLevel;
+        let requiredForCurrent = QuestHelper.levelToXP(current);
+        let requiredForNext = QuestHelper.levelToXP(current + 1);
+        return 100 * (this.questXP - requiredForCurrent) / (requiredForNext - requiredForCurrent);
+    }
+
+    get shinyCatches(): number {
+        return this._shinyCatches();
+    }
+
+    set shinyCatches(value: number) {
+        this._shinyCatches(value);
+    }
+
+    get questXP(): number {
+        return this._questXP();
+    }
+
+    set questXP(value: number) {
+        this._questXP(value);
+    }
+
+    get questPoints(): number {
+        return this._questPoints();
+    }
+
+    set questPoints(value: number) {
+        this._questPoints(value);
     }
 
     public toJSON() {
@@ -790,12 +893,25 @@ class Player {
             "_diamonds",
             "_maxUndergroundItems",
             "_mineEnergyRegenTime",
+            "_mineLayersCleared",
             "_eggList",
             "_eggSlots",
             "_shardUpgrades",
             "_shardsCollected",
+            "achievementsCompleted",
+            "completedQuestList",
+            "questRefreshes",
+            "_questXP",
+            "_questPoints",
+            "_lastSeen",
+            "currentQuest",
+            "_shinyCatches",
+            "gymDefeats",
             "statistics",
             "achievementsCompleted",
+            "farmPoints",
+            "plotList",
+            "berryList"
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
