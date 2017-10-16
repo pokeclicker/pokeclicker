@@ -1,0 +1,34 @@
+<div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
+    <div class="page-item">
+        <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
+            <div class="col-sm-6 eggSlot">
+                <div data-bind="if: $index() == player.eggSlots()">
+                    <p style="margin:2px;">Egg slot</p>
+                    <p style="margin:2px;"><img src="../assets/images/currency/questPoint.png"> <span data-bind='text: player.nextEggSlotCost()'></span></p>
+                    <button class='btn btn-primary' onclick='player.buyEggSlot()'
+                            data-bind='css: {disabled: player.questPoints <= player.nextEggSlotCost()}'>Buy</button>
+                </div>
+                <div data-bind="if: $index() > player.eggSlots()" style="margin-top:44px;">
+                    <img src="../assets/images/breeding/lock.png">
+                </div>
+                <div data-bind="if: $data !== null">
+                    <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
+
+                    <div class="progress" data-bind='if: progress() < 100,
+                                                         tooltip: {title: ko.pureComputed(function(){return Math.floor(progress()) + "%"}), trigger: "hover"}'>
+                        <div class="progress-bar bg-success" role="progressbar"
+                             data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
+                             aria-valuemin="0" aria-valuemax="100">
+                        </div>
+                    </div>
+                    <div data-bind='if: progress() >= 100'>
+                        <button class='btn btn-primary'
+                                data-bind='click: function(){BreedingHelper.hatchPokemonEgg($index())}'>
+                            Hatch!
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

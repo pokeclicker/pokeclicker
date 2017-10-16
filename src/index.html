@@ -1090,32 +1090,7 @@
             @import "questDisplay.html"
 
             <!-- Egg Slots/Breeding-->
-            <div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
-                <div class="page-item">
-                    <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
-                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()"
-                             style="border: 1px solid black;">
-                            <div data-bind="if: $data !== null">
-                                <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
-
-                                <div class="progress" data-bind='if: progress() < 100,
-                                                                 tooltip: {title: ko.pureComputed(function(){return Math.floor(progress()) + "%"}), trigger: "hover"}'>
-                                    <div class="progress-bar bg-success" role="progressbar"
-                                         data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
-                                         aria-valuemin="0" aria-valuemax="100">
-                                    </div>
-                                </div>
-                                <div data-bind='if: progress() >= 100'>
-                                    <button class='btn btn-primary'
-                                            data-bind='click: function(){BreedingHelper.hatchPokemonEgg($index())}'>
-                                        Hatch!
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @import "breedingDisplay.html"
         </div>
 
     </div>
