@@ -21,10 +21,10 @@ class QuestHelper{
                 amount = SeededRand.intBetween(100, 500);
                 return new DefeatPokemonsQuest(route, amount);
             case "CapturePokemons":
-                amount = SeededRand.intBetween(100, 500);
+                amount = SeededRand.intBetween(player.caughtPokemonList.length * .3, player.caughtPokemonList.length * 1.2);
                 return new CapturePokemonsQuest(amount);
             case "GainMoney":
-                amount = SeededRand.intBetween(20000, 60000);
+                amount = SeededRand.intBetween(player.statistics.totalMoney() * .8, player.statistics.totalMoney() * 1.2);
                 return new GainMoneyQuest(amount);
             case "GainTokens":
                 amount = SeededRand.intBetween(1000, 8000);
@@ -43,7 +43,7 @@ class QuestHelper{
                 amount = SeededRand.intBetween(200, 600);
                 return new GainShardsQuest(type, amount);
             case "HatchEggs":
-                amount = SeededRand.intBetween(1, 30);
+                amount = SeededRand.intBetween(player.statistics.hatchedEggs() + 1, player.statistics.hatchedEggs() * 1.5);
                 return new HatchEggsQuest(amount);
             case "MineLayers":
                 amount = SeededRand.intBetween(1,3);
@@ -52,10 +52,23 @@ class QuestHelper{
                 return new CatchShiniesQuest(1);
             case "DefeatGym":
                 let gymIndex = SeededRand.intBetween(0, GameConstants.Gyms.length - 1);
-                amount = SeededRand.intBetween(20, 100);
+                let gym = gymList[GameConstants.Gyms[gymIndex]];
+                let playerDamage = player.pokemonAttackObservable();
+                let attacksToWin = 0;
+                for (let pokemon of gym.pokemons) {
+                    attacksToWin += Math.ceil( pokemon.maxHealth / Math.max(1, playerDamage) );
+                }
+                let minDefeatNum = Math.ceil(1 / attacksToWin * 1000);
+                amount = SeededRand.intBetween(minDefeatNum * .8,minDefeatNum * 1.3);
                 return new DefeatGymQuest(gymIndex, amount);
             case "DefeatDungeon":
-                let dungeonIndex = SeededRand.intBetween(0, GameConstants.Dungeons.length)
+                let dungeonIndex = SeededRand.intBetween(0, GameConstants.Dungeons.length - 1);
+                let dungeon = dungeonList[GameConstants.Dungeons[dungeonIndex]]; 
+                attacksToWin = 0;
+                for (let pokemon of dungeon.bossList) {
+                    attacksToWin += Math.ceil( pokemon.baseHealth / Math.max(1, playerDamage) );
+                }
+                minDefeatNum = Math.ceil(1 / attacksToWin * 1000);
                 amount = SeededRand.intBetween(20, 100);
                 return new DefeatDungeonQuest(dungeonIndex, amount);
             case "UsePokeball":
