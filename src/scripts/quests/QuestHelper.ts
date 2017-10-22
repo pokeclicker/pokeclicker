@@ -62,7 +62,7 @@ class QuestHelper{
                 amount = SeededRand.intBetween(minDefeatNum * .8,minDefeatNum * 1.3);
                 return new DefeatGymQuest(gymIndex, amount);
             case "DefeatDungeon":
-                let dungeonIndex = SeededRand.intBetween(0, GameConstants.Dungeons.length);
+                let dungeonIndex = SeededRand.intBetween(0, GameConstants.Dungeons.length - 1);
                 let dungeon = dungeonList[GameConstants.Dungeons[gymIndex]]; 
                 attacksToWin = 0;
                 for (let pokemon of dungeon.bossList) {
