@@ -13,8 +13,13 @@
                     <div class='row safariEnemyRow'>
                         <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind='attr: { src: "assets/images/pokemon/" + SafariBattle.enemy.id + ".png" }'></div>
                         <div id='safariEnemyName' class='col-sm-2'>
-                            <img class='pokeball-smallest' data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }' />
-                            <p data-bind='text: SafariBattle.enemy.name'></p>
+                            <span>
+                                <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
+                                    <img class='pokeball-smallest'
+                                         data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
+                                </span>
+                                <span data-bind='text: SafariBattle.enemy.name'></span>
+                            </span>
                         </div>
                     </div>
                     <div class='row'>
@@ -25,13 +30,28 @@
 
                     <div id='battleConsole' class='row'>
                         <div class='col-sm-6'>
-                            <h3 id='safariBattleText' data-bind='html: SafariBattle.text'></h3>
+                            <h3 id='safariBattleText' class="centeredBySpan" data-bind='html: SafariBattle.text'></h3>
+                            <span class="centerSpan"></span>
                         </div>
                         <div class='row col-sm-4 offset-sm-2 safariOptions'>
-                            <div class='col-sm-6 safariOption'><button onClick='SafariBattle.throwBall()' class='btn btn-info safariButton' data-bind='text: "Ball (" + Safari.balls() + ")"'></button></div>
-                            <div class='col-sm-6 safariOption'><button onClick='SafariBattle.throwBait()' class='btn btn-info safariButton'>Bait</button></div>
-                            <div class='col-sm-6 safariOption'><button onClick='SafariBattle.throwRock()' class='btn btn-info safariButton'>Rock</button></div>
-                            <div class='col-sm-6 safariOption'><button onClick='SafariBattle.run()' class='btn btn-info safariButton'>Run</button></div>
+                            <div class='col-sm-6 safariOption'>
+                                <button onClick='SafariBattle.throwBall()' class='btn btn-info btn-sm safariButton'
+                                        data-bind='text: "Ball (" + Safari.balls() + ")"'></button>
+                            </div>
+                            <div class='col-sm-6 safariOption'>
+                                <button onClick='SafariBattle.throwBait()' class='btn btn-info btn-sm safariButton'>
+                                    Bait
+                                </button>
+                            </div>
+                            <div class='col-sm-6 safariOption'>
+                                <button onClick='SafariBattle.throwRock()' class='btn btn-info btn-sm safariButton'>
+                                    Rock
+                                </button>
+                            </div>
+                            <div class='col-sm-6 safariOption'>
+                                <button onClick='SafariBattle.run()' class='btn btn-info btn-sm safariButton'>Run
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
