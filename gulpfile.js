@@ -13,6 +13,10 @@ const runSequence = require('run-sequence');
 const bsConfig = require("gulp-bootstrap-configurator");
 const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
+const markdown = require('gulp-markdown');
+const inject = require('gulp-inject');
+const glob = require("glob");
+
 
 /**
  * Push build to gh-pages
@@ -76,9 +80,34 @@ gulp.task('browserSync', function () {
 });
 
 gulp.task('import', function () {
+    let recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-3).reverse();
+
     const htmlDest = './build';
     gulp.src('./src/index.html')
         .pipe(gulpImport('./src/components/'))
+        .pipe(inject(gulp.src(recentChangelogs)
+        .pipe(markdown()), {
+          starttag: '<!-- inject:head:html -->',
+          transform: function (filePath, file) {
+            return file.contents.toString('utf8')
+          }
+        }))
+        .pipe(gulp.dest(htmlDest)); 
+})
+
+
+gulp.task('full-changelog', function () {
+    let recentChangelogs = glob.sync('./src/assets/changelog/*.md').reverse();
+
+    const htmlDest = './build';
+    gulp.src('./src/changelog.html')
+        .pipe(inject(gulp.src(recentChangelogs)
+        .pipe(markdown()), {
+          starttag: '<!-- inject:head:html -->',
+          transform: function (filePath, file) {
+            return file.contents.toString('utf8')
+          }
+        }))
         .pipe(gulp.dest(htmlDest)); 
 })
 
@@ -122,7 +151,7 @@ gulp.task('copyWebsite', function () {
     gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
 });
 
-gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles']);
+gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles','full-changelog']);
 
 gulp.task('website', done => {
     runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', () => done());
