@@ -55,7 +55,7 @@ class QuestHelper{
                 amount = SeededRand.intBetween(20, 100);
                 return new DefeatGymQuest(gymIndex, amount);
             case "DefeatDungeon":
-                let dungeonIndex = SeededRand.intBetween(0, GameConstants.Dungeons.length)
+                let dungeonIndex = SeededRand.intBetween(0, GameConstants.Dungeons.length-1);
                 amount = SeededRand.intBetween(20, 100);
                 return new DefeatDungeonQuest(dungeonIndex, amount);
             case "UsePokeball":
