@@ -3,7 +3,6 @@ class Save {
     static counter: number = 0;
 
     public static store(player: Player) {
-
         let json = JSON.stringify(player);
         localStorage.setItem("player", json);
         localStorage.setItem("mine", Mine.serialize());
@@ -83,6 +82,30 @@ class Save {
             res[obj] = 0;
         }
         return res;
+    }
+
+    public static initializePlots(saved?: Array<any>): KnockoutObservable<Plot>[] {
+        let plotList: Array<KnockoutObservable<Plot>>;
+        if (saved) {
+            plotList = saved.map((p) => {
+                let berry;
+                if (p.berry){
+                    berry = new Berry(p.berry.type, p.berry.harvestTime, p.berry.moneyValue, p.berry.farmValue);
+                } else {
+                    berry = null;
+                }
+                let plot = new Plot(p.isUnlocked, p.exp, p.level, p.boosted, berry, p.timeLeft);
+                return ko.observable(plot)
+            })
+        } else {
+            plotList = Array.apply(null, Array(GameConstants.AMOUNT_OF_PLOTS)).map(function (val, index) {
+                if (index == 0) {
+                    return ko.observable(new Plot(true, 0, 0, false, null, 0));
+                }
+                return ko.observable(new Plot(false, 0, 0, false, null, 0))
+            });
+        }
+        return plotList;
     }
 
     public static initializeShards(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {

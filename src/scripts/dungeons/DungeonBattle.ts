@@ -19,19 +19,17 @@ class DungeonBattle extends Battle {
         if (pokeBall !== GameConstants.Pokeball.None) {
             DungeonBattle.pokeball = ko.observable(pokeBall);
             DungeonBattle.catching(true);
-            if (DungeonRunner.fightingBoss()) {
-                this.throwPokeball(pokeBall);
-            } else {
-                setTimeout(
-                    () => {
-                        this.throwPokeball(pokeBall);
-                    },
-                    player.calculateCatchTime(pokeBall)
-                );
-            }
-        }
-
-        if (DungeonRunner.fightingBoss()) {
+            setTimeout(
+                () => {
+                    this.throwPokeball(pokeBall);
+                    if (DungeonRunner.fightingBoss()) {
+                        DungeonRunner.fightingBoss(false);
+                        DungeonRunner.dungeonWon();
+                    }
+                },
+                player.calculateCatchTime(pokeBall)
+            );
+        } else if (DungeonRunner.fightingBoss()) {
             DungeonRunner.fightingBoss(false);
             DungeonRunner.dungeonWon();
         }

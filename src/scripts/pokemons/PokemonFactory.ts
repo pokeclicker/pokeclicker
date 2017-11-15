@@ -15,7 +15,7 @@ class PokemonFactory {
     public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
         let name: string;
         if (route > 25 || route == 0) {
-            return null;
+            return new BattlePokemon("Rattata", 19, GameConstants.PokemonType.Psychic, GameConstants.PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
 
         let mewEncounter: boolean = Math.random() < 1 / (GameConstants.MEW_CHANCE_ROUTE_25 + ( GameConstants.MEW_CHANCE_DIFF * (25 - route) / 24 ))
@@ -30,7 +30,7 @@ class PokemonFactory {
         let id = basePokemon.id;
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
-        let maxHealth: number = Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15)), 20) || 20;
+        let maxHealth: number = PokemonFactory.routeHealth(route);
 
         let catchVariation = Math.floor(Math.random() * 7 - 3);
 
@@ -41,6 +41,10 @@ class PokemonFactory {
         let money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
         let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, route * 2, catchRate, exp, money, shiny);
+    }
+
+    public static routeHealth(route: number): number {
+        return Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15)), 20) || 20;
     }
 
     /**

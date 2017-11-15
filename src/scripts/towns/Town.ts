@@ -1,7 +1,6 @@
 ///<reference path="../shop/Shop.ts"/>
 ///<reference path="../items/Pokeball.ts"/>
 ///<reference path="../items/BattleItem.ts"/>
-///<reference path="../items/Berry.ts"/>
 ///<reference path="../items/EnergyRestore.ts"/>
 ///<reference path="../items/EvolutionStone.ts"/>
 ///<reference path="../items/PokeBlock.ts"/>
@@ -82,7 +81,7 @@ class DungeonTown extends Town {
 
 const TownList: { [name: string]: Town } = {};
 
-let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp"]);
+let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp","Dungeon_ticket"]);
 TownList["Pewter City"] = new Town("Pewter City", [2], PewterCityShop);
 
 let CeruleanCityShop = new Shop(["Water_stone", "xAttack"]);

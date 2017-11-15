@@ -5,48 +5,65 @@
  */
 let player;
 const debug = false;
+let game;
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    OakItemRunner.initialize();
-    UndergroundItem.initialize();
-    let game: Game = new Game();
-    // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
-    game.start();
+    Preload.load(debug).then(function () {
+        OakItemRunner.initialize();
+        UndergroundItem.initialize();
+        game = new Game();
+        // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
 
-    $(document).ready(function () {
-        $('[data-toggle="tooltip"]').tooltip();
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
+
+        (ko as any).bindingHandlers.tooltip = {
+            init: function (element, valueAccessor, allBindings, viewModel, bindingContext) {
+                let local = ko.utils.unwrapObservable(valueAccessor()),
+                    options = {};
+
+                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+                ko.utils.extend(options, local);
+
+                $(element).tooltip(options);
+
+                ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
+                    $(element).tooltip("dispose");
+                });
+
+                if (bindingContext.$data instanceof Plot) {
+                    $(element).hover(function () {
+                        $(this).data('to', setInterval(function () {
+                            $(element).tooltip('hide')
+                                .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
+                                .tooltip('show');
+                        }, 100));
+                    }, function () {
+                        clearInterval($(this).data('to'));
+                    });
+                }
+
+            },
+            options: {
+                placement: "bottom",
+                trigger: "click"
+            }
+        };
+
+        PokedexHelper.populateTypeFilters();
+        PokedexHelper.updateList();
+
+        ko.applyBindings(game);
+        ko.options.deferUpdates = true;
+
+        Game.applyRouteBindings();
+        Preload.hideSplashScreen();
+        game.start();
+
     });
-
-    Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
-
-    ko.bindingHandlers.tooltip = {
-        init: function (element, valueAccessor) {
-            let local = ko.utils.unwrapObservable(valueAccessor()),
-                options = {};
-
-            ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
-            ko.utils.extend(options, local);
-
-            $(element).tooltip(options);
-
-            ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-                // $(element).tooltip("destroy");
-            });
-        },
-        options: {
-            placement: "bottom",
-            trigger: "click"
-        }
-    };
-
-    PokedexHelper.populateTypeFilters();
-    PokedexHelper.updateList();
-
-    ko.applyBindings(game);
-    ko.options.deferUpdates = true;
-
-    Game.applyRouteBindings();
-
 });
 
 /**
@@ -55,24 +72,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
 class Game {
     interval;
     undergroundCounter: number;
-    farmCounter: number;
+    farmCounter: number = 0;
     public static achievementCounter: number = 0;
 
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
     constructor() {
-        (<any>window).player = Save.load();
+        player = Save.load();
         KeyItemHandler.initialize();
         AchievementHandler.initialize();
         player.gainKeyItem("Coin case", true);
         player.gainKeyItem("Teachy tv", true);
         player.gainKeyItem("Pokeball bag", true);
+        player.region = GameConstants.Region.kanto;
+        this.load();
     }
 
     start() {
-        player.region = GameConstants.Region.kanto;
-        this.load();
-
+        console.log("game started");
         this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
     }
 
@@ -83,7 +100,7 @@ class Game {
     gameTick() {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
-        this.farmCounter += GameConstants.TICK_TIME;
+        FarmRunner.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
             Game.achievementCounter = 0;
@@ -92,6 +109,7 @@ class Game {
         Save.counter += GameConstants.TICK_TIME;
         Underground.counter += GameConstants.TICK_TIME;
 
+        GameHelper.counter += GameConstants.TICK_TIME;
         switch (Game.gameState()) {
             case GameConstants.GameState.fighting: {
                 Battle.counter += GameConstants.TICK_TIME;
@@ -119,6 +137,16 @@ class Game {
         }
 
         if (Save.counter > GameConstants.SAVE_TICK) {
+            let now = new Date();
+            if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
+                player.questRefreshes = 0;
+                QuestHelper.quitQuest();
+                QuestHelper.clearQuests();
+                QuestHelper.generateQuests(player.questLevel, player.questRefreshes, now);
+                DailyDeal.generateDeals(player.maxDailyDeals, now);
+                Notifier.notify("It's a new day! Your quests and underground deals have been updated.", GameConstants.NotificationOption.info);
+            }
+            player._lastSeen = Date.now()
             Save.store(player);
         }
 
@@ -129,6 +157,14 @@ class Game {
                 Underground.energyTick(player._mineEnergyRegenTime());
             }
             Underground.counter = 0;
+        }
+
+        if (FarmRunner.counter > GameConstants.FARM_TICK) {
+            FarmRunner.tick();
+        }
+
+        if (GameHelper.counter > 60 * 1000) {
+            GameHelper.updateTime();
         }
     }
 
@@ -142,6 +178,8 @@ class Game {
         Save.loadMine();
         Underground.energyTick(player._mineEnergyRegenTime())
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());
+        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
+        QuestHelper.loadCurrentQuest(player.currentQuest());
     }
 
     static applyRouteBindings() {
@@ -159,4 +197,6 @@ class Game {
             tooltip.css('visibility', 'hidden')
         });
     }
+
 }
+

@@ -74,8 +74,28 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
+    <style>
+        .loader {
+            position: fixed;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            background-color: #79c9fa;
+            background-size: cover;
+            z-index: 9999;
+        }
+
+        .loader-wrapper {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+    </style>
+
 </head>
 <body class="no-select">
+@import "splash.html"
+
 <!-- Game menu-->
 @import "gameMenu.html"
 
@@ -181,7 +201,8 @@
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
-                                    <img class="pokeball-animated" data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
+                                    <img class="pokeball-animated"
+                                         data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
                                          src=""/>
                                 </div>
                             </div>
@@ -248,7 +269,8 @@
                                              src=""/>
                                     </div>
                                     <div data-bind="if: DungeonBattle.catching">
-                                        <img class="pokeball-animated" data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
+                                        <img class="pokeball-animated"
+                                             data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
                                              src=""/>
                                     </div>
                                 </div>
@@ -337,7 +359,7 @@
 
             <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
                 <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
-                    Game.gameState() == GameConstants.GameState.shop)">
+                    Game.gameState() == GameConstants.GameState.shop || Game.gameState() == GameConstants.GameState.farm)">
                     <p id="mapTooltip" style="visibility: hidden;"></p>
                     <div class="page-item no-select">
                         <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
@@ -355,7 +377,7 @@
                             </defs>
 
                             <g transform="translate(-1,-1)">
-                                <image height="420.7" width="651" xlink:href="assets/images/kanto.png"></image>
+                                <image id="mapImage" height="420.7" width="651"></image>
 
                                 <!--Route 1-->
                                 <g transform="rotate(90,83.65,263.2)"
@@ -721,7 +743,8 @@
                                       stroke-miterlimit="10" stroke-width="1.4"></path>
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="456.4"
                                       y="166.6"></rect>
-                                <rect class="city" data-town="Pokemon Tower" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                <rect class="city" data-town="Pokemon Tower"
+                                      fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       data-bind="
                                       click:function(){MapHelper.moveToTown('Lavender Town')},
                                       attr: { class: MapHelper.calculateTownCssClass('Lavender Town')() }"
@@ -760,7 +783,8 @@
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="349.3"
                                       y="83.3"></rect>
-                                <rect class="city" data-town="Cerulean Cave" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                <rect class="city" data-town="Cerulean Cave"
+                                      fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       data-bind="
                                       click:function(){MapHelper.moveToTown('Cerulean City')},
                                       attr: { class: MapHelper.calculateTownCssClass('Cerulean Cave')() }"
@@ -806,7 +830,7 @@
                                       y="90"></rect>
                                 <rect data-bind="
                                 click:function(){MapHelper.moveToTown('Mt. Moon')},
-                                attr: { class: MapHelper.calculateTownCssClass('Mt. Moon')() }" 
+                                attr: { class: MapHelper.calculateTownCssClass('Mt. Moon')() }"
                                 class="city"
                                 data-town="Mt. Moon" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6"
@@ -820,8 +844,8 @@
                                 <rect data-bind="
                                 click:function(){MapHelper.moveToTown('Rock Tunnel')},
                                 attr: { class: MapHelper.calculateTownCssClass('Rock Tunnel')() }"
-                                 class="city"
-                                data-town="Rock Tunnel" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      class="city"
+                                      data-town="Rock Tunnel" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6"
                                       stroke="#6c8ebf" width="12.6" x="452.9" y="80.5"></rect>
 
@@ -830,19 +854,24 @@
                                 <rect data-bind="
                                 click:function(){MapHelper.moveToTown('Power Plant')},
                                 attr: { class: MapHelper.calculateTownCssClass('Power Plant')() }" class="city"
-                                data-town="Power Plant" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      data-town="Power Plant" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6"
                                       stroke="#6c8ebf" width="12.6" x="452.9" y="105"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="343.6"
                                       y="109.3"></rect>
-                                <rect class="city" data-town="Pokemon Day Care" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                <rect class="city" data-town="Pokemon Day Care"
+                                      fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="345" y="110.7"
                                       data-bind="click:function(){BreedingHelper.openBreedingModal()}"></rect>
                                 <rect class="city" data-town="Underground Entrance"
                                       fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="380" y="240.7"
                                       data-bind="click:function(){Underground.openUndergroundModal()}"></rect>
+                                <rect class="city" data-town="Farm"
+                                      fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      height="12.6" stroke="#6c8ebf" width="12.6" x="373" y="293.7"
+                                      data-bind="click:function(){FarmRunner.openFarmModal()}"></rect>
                             </g>
                         </svg>
                     </div>
@@ -1067,42 +1096,19 @@
                         </div>
 
                         <div style="min-height:80px; vertical-align: center">
-                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span> Pokémon to unlock!
+                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span> Pokémon to
+                            unlock!
                         </div>
                     </div>
                 </div>
 
             </div>
-            <div class="page-item" style="background-color: deepskyblue; min-height: 100px">
-                <h2>Current quest counter</h2>
-            </div>
+
+            <!-- Current Quest -->
+            @import "questDisplay.html"
 
             <!-- Egg Slots/Breeding-->
-            <div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
-                <div class="page-item">
-                    <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
-                        <div class="col-sm-6 eggSlot" data-bind="visible: $index() < player.eggSlots()" style="border: 1px solid black;">
-                            <div data-bind="if: $data !== null">
-                                <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
-
-                                <div class="progress" data-bind='if: progress() < 100,
-                                                                 tooltip: {title: ko.pureComputed(function(){return Math.floor(progress()) + "%"}), trigger: "hover"}'>
-                                    <div class="progress-bar bg-success" role="progressbar"
-                                         data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
-                                         aria-valuemin="0" aria-valuemax="100">
-                                    </div>
-                                </div>
-                                <div data-bind='if: progress() >= 100'>
-                                    <button class='btn btn-primary'
-                                            data-bind='click: function(){BreedingHelper.hatchPokemonEgg($index())}'>
-                                        Hatch!
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @import "breedingDisplay.html"
         </div>
 
     </div>
@@ -1113,6 +1119,9 @@
 
 <!-- Achievements Modal -->
 @import "achievements.html"
+
+<!-- Changelog Modal -->
+@import "changelog.html"
 
 <!-- Start Sequence Modal-->
 @import "startSequence.html"
@@ -1143,6 +1152,12 @@
 
 <!-- Save Modal-->
 @import "save.html"
+
+<!-- Quests Modal-->
+@import "questModal.html"
+
+<!-- Farm Modal-->
+@import "farmModal.html"
 
 </body>
 </html>

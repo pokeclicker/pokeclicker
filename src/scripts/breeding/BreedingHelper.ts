@@ -109,6 +109,10 @@ class BreedingHelper {
         }
         return "assets/images/breeding/egg" + eggType + ".png";
     }
+
+    public static getEggSlotCost(slot: number): number {
+        return 500 * slot;
+    }
 }
 
 const HatchList: { [name: number]: string[] } = {};
