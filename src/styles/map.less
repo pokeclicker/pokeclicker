@@ -1,5 +1,9 @@
 @import "variables.less";
 
+@locked: url(#mx-gradient-f8cecc-1-ea583b-1-s-0);
+@unlocked: #009a40;
+@currentPlace: #55ff00;
+
 .currentRoute {
   fill: #55ff00;
 }
@@ -9,7 +13,7 @@
 }
 
 .lockedRoute {
-  fill: #ff2f39;
+  fill: #c3242c;
 }
 
 #map g g, #map rect, #map path {
@@ -22,28 +26,28 @@ g > text {
 }
 
 .city {
-  fill: url(#mx-gradient-f8cecc-1-ea583b-1-s-0);
+  fill: @locked;
   stroke: #000000;
 
   &.currentTown {
-    fill: #55ff00;
+    fill: @currentPlace;
   }
 
   &.unlockedTown {
-    fill: #d039fc;
+    fill: @unlocked;
   }
 
 }
 
 .dungeon {
-  fill: #8b4513;
+  fill: @locked;
   stroke: #000000;
 
   &.unlockedDungeon {
-    fill: #00602b;
+    fill: @unlocked;
   }
   &.completedDungeon {
-    fill: #00d7d3;
+    fill: #008f3a;
   }
 }
 
