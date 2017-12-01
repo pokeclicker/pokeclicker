@@ -30,6 +30,7 @@ namespace GameConstants {
     export const SHINY_CHANCE_DUNGEON = 4096;
     export const SHINY_CHANCE_BREEDING = 4096;
     export const SHINY_CHANCE_SHOP = 2048;
+    export const SHINY_CHANCE_STONE = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
 
     export const ITEM_PRICE_MULTIPLIER = 1.02;

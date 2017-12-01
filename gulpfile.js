@@ -158,7 +158,7 @@ gulp.task('website', done => {
 
 gulp.task('default', function (done) {
     runSequence('clean', 'build', 'browserSync', function () {
-        gulp.watch(srcs.html, ['import']);
+        gulp.watch(srcs.html, ['import', 'html']);
         gulp.watch(srcs.assets, ['assets']);
         gulp.watch(srcs.scripts, ['scripts']);
         gulp.watch(srcs.styles, ['styles']);

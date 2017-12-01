@@ -76,10 +76,10 @@ class Save {
         return res;
     }
 
-    public static initializeItemlist(): {[name: string]: number} {
+    public static initializeItemlist(): {[name: string]: KnockoutObservable<number>} {
         let res = {};
         for (let obj in ItemList) {
-            res[obj] = 0;
+            res[obj] = ko.observable(0);
         }
         return res;
     }

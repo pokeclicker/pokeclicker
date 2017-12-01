@@ -3,6 +3,15 @@
 
 class PokemonHelper {
 
+    public static getPokemonsWithEvolution(evoType: string) {
+
+        return pokemonList.filter(function (pokemon) {
+            if (pokemon["evoLevel"] !== undefined && ("" + pokemon["evoLevel"]).indexOf(evoType) !== -1) {
+                return true;
+            }
+        });
+    }
+
     public static getPokemonByName(name: string): DataPokemon {
         let basePokemon = pokemonMap[name];
         let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
