@@ -70,6 +70,10 @@ class PokedexHelper {
                 return false;
             }
 
+            if (filter['uncaught'] && player.caughtAmount[pokemon.id]() !== 0) {
+                return false;
+            }
+
             return true;
         });
     }
@@ -82,8 +86,17 @@ class PokedexHelper {
         let type2 = <HTMLSelectElement>document.getElementById('pokedex-filter-type2');
         res['type2'] = type2.options[type2.selectedIndex].value;
         res['caught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-caught')).checked;
+        res['uncaught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-uncaught')).checked;
         res['shiny'] = (<HTMLInputElement> document.getElementById('pokedex-filter-shiny')).checked;
         return res;
     }
 
+    private static getImage(id: number, name: string) {
+        let src = "/assets/images/";
+        if (player.alreadyCaughtPokemonShiny(name)) {
+            src += "shiny";
+        }
+        src += "pokemon/" + id + ".png";
+        return src;
+    }
 }
