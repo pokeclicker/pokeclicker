@@ -149,6 +149,42 @@ namespace GameConstants {
     export const DUNGEON_BOSS_SHARDS = 20;
     export const GYM_SHARDS = 5;
 
+    //Safari
+    export const Safari = {
+        "SizeY": 21,
+        "SizeX": 25,
+    }
+    
+    export const SAFARI_BATTLE_CHANCE = 5;
+
+    export const LEGAL_WALK_BLOCKS = [
+        0,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24
+    ];
+
+    export const SAFARI_CATCH_MESSAGES = [
+        "Oh, no!<br>The Pokemon broke free!",
+        "Aww! It appeared to be caught!",
+        "Aargh! Almost had it!",
+        "Shoot! It was so close, too!"
+    ];
+
+    export const SAFARI_OUT_OF_BALLS = "Game Over!<br>You have run out of safari balls to use."
+
     //Quests
 
     // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
@@ -547,6 +583,17 @@ namespace GameConstants {
         Pokemon,
         Mystery,
         Fossil
+    }
+
+    export const KeyToDirection = {
+        37: "left",
+        38: "up",
+        39: "right",
+        40: "down",
+        65: "left", //a
+        68: "right", //d
+        83: "down", //s
+        87: "up", //w
     }
 
     export const FossilToPokemon = {

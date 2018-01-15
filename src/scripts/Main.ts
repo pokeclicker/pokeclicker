@@ -175,6 +175,7 @@ class Game {
     load() {
         OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
+        Safari.load();
         Save.loadMine();
         Underground.energyTick(player._mineEnergyRegenTime())
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());

@@ -74,6 +74,18 @@ class PokemonHelper {
         return src;
     }
 
+    public static getPokeballImage(pokemonName: string): string {
+        let src = ""
+        if (player.alreadyCaughtPokemon(pokemonName)){
+            src = "/assets/images/pokeball/Pokeball-";
+            if (player.alreadyCaughtPokemonShiny(pokemonName)) {
+                src += "shiny-";
+            }
+            src += "small.png";
+        }
+        return src;
+    }
+
     public static compareBy(property: string, direction: boolean): (a: CaughtPokemon, b: CaughtPokemon) => number {
         return function (a, b) {
             let _a, _b, res, dir = (direction) ? -1 : 1;
