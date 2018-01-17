@@ -80,7 +80,7 @@ gulp.task('browserSync', function () {
 });
 
 gulp.task('import', function () {
-    let recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-3).reverse();
+    var recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-3).reverse();
 
     const htmlDest = './build';
     gulp.src('./src/index.html')
@@ -97,7 +97,7 @@ gulp.task('import', function () {
 
 
 gulp.task('full-changelog', function () {
-    let recentChangelogs = glob.sync('./src/assets/changelog/*.md').reverse();
+    var recentChangelogs = glob.sync('./src/assets/changelog/*.md').reverse();
 
     const htmlDest = './build';
     gulp.src('./src/changelog.html')
@@ -122,7 +122,7 @@ gulp.task('html', function () {
 });
 
 gulp.task('scripts', function () {
-    let tsProject = typescript.createProject('tsconfig.json');
+    var tsProject = typescript.createProject('tsconfig.json');
     return tsProject.src()
         .pipe(tsProject())
         .pipe(gulp.dest(dests.scripts))
