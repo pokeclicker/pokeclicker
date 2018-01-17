@@ -21,10 +21,8 @@ const glob = require("glob");
 /**
  * Push build to gh-pages
  */
-gulp.task('deploy', function () {
-    return gulp.src("./dist/**/*")
-        .pipe(deploy())
-});
+gulp.task('deploy', () => gulp.src("./dist/**/*")
+    .pipe(deploy()));
 
 const srcs = {
     buildArtefacts: 'build/**/*',
@@ -84,9 +82,7 @@ gulp.task('import', () => {
         .pipe(inject(gulp.src(recentChangelogs)
             .pipe(markdown()), {
             starttag: '<!-- inject:head:html -->',
-            transform: function (filePath, file) {
-                return file.contents.toString('utf8')
-            }
+            transform: (filePath, file) => file.contents.toString('utf8')
         }))
         .pipe(gulp.dest(htmlDest));
 });
@@ -100,14 +96,12 @@ gulp.task('full-changelog', () => {
         .pipe(inject(gulp.src(recentChangelogs)
             .pipe(markdown()), {
             starttag: '<!-- inject:head:html -->',
-            transform: function (filePath, file) {
-                return file.contents.toString('utf8')
-            }
+            transform: (filePath, file) => file.contents.toString('utf8')
         }))
         .pipe(gulp.dest(htmlDest));
 });
 
-gulp.task('html', function () {
+gulp.task('html', () => {
     const htmlDest = './build';
 
     return gulp.src(srcs.html)
@@ -137,18 +131,18 @@ gulp.task('cleanWebsite', () => del([dests.githubPages]));
 
 gulp.task('clean', () => del([dests.base]));
 
-gulp.task('copyWebsite', function () {
+gulp.task('copyWebsite', () => {
     gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
 });
 
 gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles', 'full-changelog']);
 
-gulp.task('website', function (done) {
+gulp.task('website', done => {
     runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', () => done());
 });
 
-gulp.task('default', function (done) {
-    runSequence('clean', 'build', 'browserSync', function () {
+gulp.task('default', done => {
+    runSequence('clean', 'build', 'browserSync', () => {
         gulp.watch(srcs.html, ['import', 'html']);
         gulp.watch(srcs.assets, ['assets']);
         gulp.watch(srcs.scripts, ['scripts']);
