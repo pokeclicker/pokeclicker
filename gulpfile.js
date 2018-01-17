@@ -1,21 +1,21 @@
-var gulp = require('gulp');
-var file = require('gulp-file');
-var tslint = require('gulp-tslint');
-var changed = require('gulp-changed');
-var minifyHtml = require('gulp-minify-html');
-var concat = require('gulp-concat');
-var autoprefix = require('gulp-autoprefixer');
-var minifyCSS = require('gulp-minify-css');
-var typescript = require('gulp-typescript');
-var browserSync = require('browser-sync');
-var del = require('del');
-var runSequence = require('run-sequence');
-var bsConfig = require("gulp-bootstrap-configurator");
-var less = require('gulp-less');
-var gulpImport = require('gulp-html-import');
-var markdown = require('gulp-markdown');
-var inject = require('gulp-inject');
-var glob = require("glob");
+const gulp = require('gulp');
+const file = require('gulp-file');
+const tslint = require('gulp-tslint');
+const changed = require('gulp-changed');
+const minifyHtml = require('gulp-minify-html');
+const concat = require('gulp-concat');
+const autoprefix = require('gulp-autoprefixer');
+const minifyCSS = require('gulp-minify-css');
+const typescript = require('gulp-typescript');
+const browserSync = require('browser-sync');
+const del = require('del');
+const runSequence = require('run-sequence');
+const bsConfig = require("gulp-bootstrap-configurator");
+const less = require('gulp-less');
+const gulpImport = require('gulp-html-import');
+const markdown = require('gulp-markdown');
+const inject = require('gulp-inject');
+const glob = require("glob");
 
 
 /**
@@ -26,7 +26,7 @@ gulp.task('deploy', function () {
         .pipe(deploy())
 });
 
-var srcs = {
+const srcs = {
     buildArtefacts: 'build/**/*',
     scripts: 'src/scripts/**/*.ts',
     html: ['src/*.html', 'src/templates/*.html', 'src/components/*.html'],
@@ -43,7 +43,7 @@ var srcs = {
 };
 
 
-var dests = {
+const dests = {
     base: 'build',
     libs: 'build/libs/',
     assets: 'build/assets/',
@@ -53,7 +53,7 @@ var dests = {
 };
 
 gulp.task('cname', function() {
-    var str = "www.pokeclicker.com";
+    const str = "www.pokeclicker.com";
     return file('CNAME', str, { src: true })
         .pipe(gulp.dest('docs/'));
 });
@@ -82,7 +82,7 @@ gulp.task('browserSync', function () {
 gulp.task('import', function () {
     var recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-3).reverse();
 
-    var htmlDest = './build';
+    const htmlDest = './build';
     gulp.src('./src/index.html')
         .pipe(gulpImport('./src/components/'))
         .pipe(inject(gulp.src(recentChangelogs)
@@ -92,14 +92,14 @@ gulp.task('import', function () {
             return file.contents.toString('utf8')
           }
         }))
-        .pipe(gulp.dest(htmlDest)); 
+        .pipe(gulp.dest(htmlDest));
 })
 
 
 gulp.task('full-changelog', function () {
     var recentChangelogs = glob.sync('./src/assets/changelog/*.md').reverse();
 
-    var htmlDest = './build';
+    const htmlDest = './build';
     gulp.src('./src/changelog.html')
         .pipe(inject(gulp.src(recentChangelogs)
         .pipe(markdown()), {
@@ -108,11 +108,11 @@ gulp.task('full-changelog', function () {
             return file.contents.toString('utf8')
           }
         }))
-        .pipe(gulp.dest(htmlDest)); 
+        .pipe(gulp.dest(htmlDest));
 })
 
 gulp.task('html', function () {
-    var htmlDest = './build';
+    const htmlDest = './build';
 
     return gulp.src(srcs.html)
         .pipe(changed(dests.base))

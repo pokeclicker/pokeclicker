@@ -1,6 +1,4 @@
 language: node_js
-version:
-- "node"
 cache:
   directories:
     - node_modules
