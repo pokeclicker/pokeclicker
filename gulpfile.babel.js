@@ -32,13 +32,13 @@ const srcs = {
     html: ['src/*.html', 'src/templates/*.html', 'src/components/*.html'],
     styles: 'src/styles/**/*.less',
     assets: 'src/assets/**/*',
-    libs: [ 'node_modules/bootstrap/dist/js/bootstrap.min.js',
-            'node_modules/bootstrap/dist/css/bootstrap.min.css',
-            'node_modules/jquery/dist/jquery.min.js',
-            'node_modules/tether/dist/js/tether.min.js',
-            'node_modules/knockout/build/output/knockout-latest.js',
-            'node_modules/bootstrap-notify/bootstrap-notify.min.js',
-            'src/libs/*.js'
+    libs: ['node_modules/bootstrap/dist/js/bootstrap.min.js',
+        'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/jquery/dist/jquery.min.js',
+        'node_modules/tether/dist/js/tether.min.js',
+        'node_modules/knockout/build/output/knockout-latest.js',
+        'node_modules/bootstrap-notify/bootstrap-notify.min.js',
+        'src/libs/*.js'
     ]
 };
 
@@ -52,26 +52,22 @@ const dests = {
     githubPages: 'docs/'
 };
 
-gulp.task('cname', function() {
+gulp.task('cname', () => {
     const str = "www.pokeclicker.com";
-    return file('CNAME', str, { src: true })
+    return file('CNAME', str, {src: true})
         .pipe(gulp.dest('docs/'));
 });
 
-gulp.task('copy', function () {
-    return gulp.src(srcs.libs)
-        .pipe(gulp.dest(dests.libs))
-        .pipe(browserSync.reload({stream: true}));
-});
+gulp.task('copy', () => gulp.src(srcs.libs)
+    .pipe(gulp.dest(dests.libs))
+    .pipe(browserSync.reload({stream: true})));
 
-gulp.task('assets', function () {
-    return gulp.src(srcs.assets)
-        .pipe(changed(dests.assets))
-        .pipe(gulp.dest(dests.assets))
-        .pipe(browserSync.reload({stream: true}));
-});
+gulp.task('assets', () => gulp.src(srcs.assets)
+    .pipe(changed(dests.assets))
+    .pipe(gulp.dest(dests.assets))
+    .pipe(browserSync.reload({stream: true})));
 
-gulp.task('browserSync', function () {
+gulp.task('browserSync', () => {
     browserSync({
         server: {
             baseDir: dests.base
@@ -79,37 +75,37 @@ gulp.task('browserSync', function () {
     });
 });
 
-gulp.task('import', function () {
-    var recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-3).reverse();
+gulp.task('import', () => {
+    let recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-3).reverse();
 
     const htmlDest = './build';
     gulp.src('./src/index.html')
         .pipe(gulpImport('./src/components/'))
         .pipe(inject(gulp.src(recentChangelogs)
-        .pipe(markdown()), {
-          starttag: '<!-- inject:head:html -->',
-          transform: function (filePath, file) {
-            return file.contents.toString('utf8')
-          }
+            .pipe(markdown()), {
+            starttag: '<!-- inject:head:html -->',
+            transform: function (filePath, file) {
+                return file.contents.toString('utf8')
+            }
         }))
         .pipe(gulp.dest(htmlDest));
-})
+});
 
 
-gulp.task('full-changelog', function () {
-    var recentChangelogs = glob.sync('./src/assets/changelog/*.md').reverse();
+gulp.task('full-changelog', () => {
+    let recentChangelogs = glob.sync('./src/assets/changelog/*.md').reverse();
 
     const htmlDest = './build';
     gulp.src('./src/changelog.html')
         .pipe(inject(gulp.src(recentChangelogs)
-        .pipe(markdown()), {
-          starttag: '<!-- inject:head:html -->',
-          transform: function (filePath, file) {
-            return file.contents.toString('utf8')
-          }
+            .pipe(markdown()), {
+            starttag: '<!-- inject:head:html -->',
+            transform: function (filePath, file) {
+                return file.contents.toString('utf8')
+            }
         }))
         .pipe(gulp.dest(htmlDest));
-})
+});
 
 gulp.task('html', function () {
     const htmlDest = './build';
@@ -121,42 +117,34 @@ gulp.task('html', function () {
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('scripts', function () {
-    var tsProject = typescript.createProject('tsconfig.json');
+gulp.task('scripts', () => {
+    let tsProject = typescript.createProject('tsconfig.json');
     return tsProject.src()
         .pipe(tsProject())
         .pipe(gulp.dest(dests.scripts))
         .pipe(browserSync.reload({stream: true}));
 });
 
-gulp.task('styles', function () {
-    return gulp.src(srcs.styles)
-        .pipe(less())
-        .pipe(concat('styles.min.css'))
-        .pipe(autoprefix('last 2 versions'))
-        .pipe(minifyCSS())
-        .pipe(gulp.dest(dests.styles))
-        .pipe(browserSync.reload({stream: true}));
-});
+gulp.task('styles', () => gulp.src(srcs.styles)
+    .pipe(less())
+    .pipe(concat('styles.min.css'))
+    .pipe(autoprefix('last 2 versions'))
+    .pipe(minifyCSS())
+    .pipe(gulp.dest(dests.styles))
+    .pipe(browserSync.reload({stream: true})));
 
-gulp.task('cleanWebsite', function () {
-    return del([dests.githubPages]);
-});
+gulp.task('cleanWebsite', () => del([dests.githubPages]));
 
-gulp.task('clean', function () {
-    return del([dests.base]);
-});
+gulp.task('clean', () => del([dests.base]));
 
 gulp.task('copyWebsite', function () {
     gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
 });
 
-gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles','full-changelog']);
+gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles', 'full-changelog']);
 
 gulp.task('website', function (done) {
-    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', function () {
-        return done();
-    });
+    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', () => done());
 });
 
 gulp.task('default', function (done) {
