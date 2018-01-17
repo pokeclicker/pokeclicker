@@ -153,8 +153,10 @@ gulp.task('copyWebsite', function () {
 
 gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles','full-changelog']);
 
-gulp.task('website', done => {
-    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', () => done());
+gulp.task('website', function (done) {
+    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', function () {
+        return done();
+    });
 });
 
 gulp.task('default', function (done) {
