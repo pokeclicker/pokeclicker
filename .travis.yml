@@ -6,5 +6,8 @@ before_install:
 - chmod a+x ./install.sh
 install:
 - ./install.sh
+before_script:
+  - npm install -g gulp-cli
 script:
 - tsc
+- gulp
