@@ -798,8 +798,8 @@
                                 <rect data-bind="
                                 click:function(){MapHelper.moveToTown('Victory Road')},
                                 attr: { class: MapHelper.calculateTownCssClass('Victory Road')() }"
-                                class="city"
-                                data-town="Victory Road" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      class="city"
+                                      data-town="Victory Road" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="23.8" y="111.3"></rect>
 
                                 <rect fill="#ffffff" height="15.4" stroke="none" width="15.4" x="76.3"
@@ -834,8 +834,8 @@
                                 <rect data-bind="
                                 click:function(){MapHelper.moveToTown('Mt. Moon')},
                                 attr: { class: MapHelper.calculateTownCssClass('Mt. Moon')() }"
-                                class="city"
-                                data-town="Mt. Moon" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                      class="city"
+                                      data-town="Mt. Moon" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6"
                                       stroke="#6c8ebf" width="12.6" x="183.5" y="91.5"></rect>
 
@@ -867,7 +867,8 @@
                                       fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="345" y="110.7"
                                       data-bind="click:function(){BreedingHelper.openBreedingModal()}"></rect>
-                                <rect class="city" data-town="Safari Zone" fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+                                <rect class="city" data-town="Safari Zone"
+                                      fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
                                       height="12.6" stroke="#6c8ebf" width="12.6" x="292" y="300.7"
                                       data-bind="click:function(){Safari.openModal()}"></rect>
                                 <rect class="city" data-town="Underground Entrance"
@@ -887,7 +888,9 @@
 
         <!--left column-->
         <div class="col-lg-3 pull-lg-6">
-            <div class="page-item" style="background-color: white; min-height: 180px">
+            <div class="page-item" id="pokeballSelector"
+                 data-bind="visible: player.starter != GameConstants.Starter.None"
+                 style="background-color: white; min-height: 180px">
                 <div class="row justify-content-sm-center">
                     <div class="col-sm-10">
                         <table class="table pokeball-table borderless">
@@ -980,7 +983,8 @@
                 </div>
             </div>
 
-            <div class="page-item pokemon-list-container" style="background-color: white">
+            <div class="page-item pokemon-list-container" id="pokemonListContainer"
+                 data-bind="visible: player.starter != GameConstants.Starter.None" style="background-color: white">
                 <select data-bind="options: GameConstants.SortOptions,
                                    optionsText: 'optionText',
                                    optionsValue: 'optionValue',
