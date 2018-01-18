@@ -2,7 +2,7 @@
     <div class="page-item">
         <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
             <div class="col-sm-6 eggSlot">
-                <div data-bind="if: $index() == player.eggSlots()">
+                <div data-bind="if: $index() === player.eggSlots()">
                     <p style="margin:2px;">Egg slot</p>
                     <p style="margin:2px;"><img src="../assets/images/currency/questPoint.png"> <span data-bind='text: player.nextEggSlotCost()'></span></p>
                     <button class='btn btn-primary' onclick='player.buyEggSlot()'

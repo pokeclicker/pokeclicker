@@ -1,5 +1,5 @@
-<div id="townView" data-bind="if: Game.gameState() == GameConstants.GameState.town"
-class="justify-content-center no-gutters no-select">
+<div id="townView" data-bind="if: Game.gameState() === GameConstants.GameState.town"
+     class="justify-content-center no-gutters no-select">
 
 <div data-bind="if:player.town().dungeon()">
 </div>
