@@ -4,7 +4,7 @@
  * Start the game when all html elements are loaded.
  */
 let player;
-const debug = false;
+const debug = true;
 let game;
 
 document.addEventListener("DOMContentLoaded", function (event) {
@@ -174,6 +174,7 @@ class Game {
     load() {
         OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
+        Safari.load();
         Save.loadMine();
         Underground.energyTick(player._mineEnergyRegenTime())
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());

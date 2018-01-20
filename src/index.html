@@ -45,8 +45,8 @@
             <td class='vertical-middle'>
                 <button class='btn btn-success tooltipRightMine'
                         data-bind='click: function(){ Underground.sellMineItem(id) },
-                                   css: { disabled: amount() <= 0 || (valueType == "Mine Egg" && !player.hasFreeEggSlot()) },
-                                   text: valueType == "Mine Egg" ? "Breed" : "Sell"'>
+                                   css: { disabled: amount() <= 0 || (valueType === "Mine Egg" && !player.hasFreeEggSlot()) },
+                                   text: valueType === "Mine Egg" ? "Breed" : "Sell"'>
                 </button>
             </td>
         </tr>
@@ -70,6 +70,9 @@
 
     <!--Notify-->
     <script src="libs/bootstrap-notify.min.js"></script>
+
+    <!--Motio-->
+    <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
@@ -106,7 +109,7 @@
 @import "getKeyItem.html"
 
 <!-- Show keyitems modal-->
-@import "showKeyItems.html"
+@import "itemModal.html"
 
 <div class="container">
     <div class="row justify-content-center">
@@ -119,11 +122,11 @@
         <div class="col-lg-6 push-lg-3">
             <div id="interactionView" class="page-item" style="background-color: white">
 
-                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting ||
-                                     Game.gameState() == GameConstants.GameState.dungeon ||
-                                     Game.gameState() == GameConstants.GameState.paused ||
-                                     Game.gameState() == GameConstants.GameState.town ||
-                                     Game.gameState() == GameConstants.GameState.shop)">
+                <div data-bind="if: (Game.gameState() === GameConstants.GameState.fighting ||
+                                     Game.gameState() === GameConstants.GameState.dungeon ||
+                                     Game.gameState() === GameConstants.GameState.paused ||
+                                     Game.gameState() === GameConstants.GameState.town ||
+                                     Game.gameState() === GameConstants.GameState.shop)">
                     <div class="card">
                         <table width="100%">
                             <tr>
@@ -152,10 +155,10 @@
 
                 <!--RouteBattleView-->
                 <!--Use the base battle layout for fighting and dungeons.-->
-                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.dungeon || Game.gameState() == GameConstants.GameState.paused || Game.gameState() == GameConstants.GameState.town)"
+                <div data-bind="if: (Game.gameState() === GameConstants.GameState.fighting || Game.gameState() === GameConstants.GameState.dungeon || Game.gameState() === GameConstants.GameState.paused || Game.gameState() === GameConstants.GameState.town)"
                      id="routeBattleView">
 
-                    <div data-bind="if: Game.gameState() == GameConstants.GameState.fighting">
+                    <div data-bind="if: Game.gameState() === GameConstants.GameState.fighting">
                         <div style="height: 190px; display: block;" class="col-lg-12">
                             <div class="col-lg-12" style="display: block;">
                                 Route
@@ -221,7 +224,7 @@
                     </div>
 
                     <!--If the player is in a dungeon-->
-                    <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
+                    <div data-bind="if: Game.gameState() === GameConstants.GameState.dungeon">
                         <div class="col-lg-12" style="display: block; height: 170px">
                             <div>
                                 <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span>
@@ -281,13 +284,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-bind="if: DungeonRunner.map.currentTile().type() == GameConstants.DungeonTile.chest">
+                            <div data-bind="if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest">
                                 <img data-bind="click: function(){DungeonRunner.openChest()}"
                                      class="dungeon-chest"
                                      src="assets/images/dungeons/chest.png"/>
                             </div>
 
-                            <div data-bind="if: (DungeonRunner.map.currentTile().type() == GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss())">
+                            <div data-bind="if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss())">
                                 <button class="btn btn-danger dungeon-boss-button"
                                         data-bind="click: function(){DungeonRunner.startBossFight()}">Start
                                     Bossfight
@@ -304,7 +307,7 @@
                             <div style="height: 30px"></div>
                         </div>
                     </div>
-                    <div data-bind="ifnot: Game.gameState() == GameConstants.GameState.town">
+                    <div data-bind="ifnot: Game.gameState() === GameConstants.GameState.town">
                         <div class="card">
                             <table width="100%">
                                 <tr>
@@ -338,7 +341,7 @@
                 @import "shopView.html"
             </div>
 
-            <div data-bind="if: Game.gameState() == GameConstants.GameState.dungeon">
+            <div data-bind="if: Game.gameState() === GameConstants.GameState.dungeon">
                 <div class="page-item no-select" style="background-color: white">
                     <div class="dungeon">
                         <div class="card">
@@ -358,16 +361,16 @@
             </div>
 
             <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
-                <div data-bind="if: (Game.gameState() == GameConstants.GameState.fighting || Game.gameState() == GameConstants.GameState.gym || Game.gameState() == GameConstants.GameState.town||
-                    Game.gameState() == GameConstants.GameState.shop || Game.gameState() == GameConstants.GameState.farm)">
+                <div data-bind="if: (Game.gameState() === GameConstants.GameState.fighting || Game.gameState() === GameConstants.GameState.gym || Game.gameState() === GameConstants.GameState.town||
+                    Game.gameState() === GameConstants.GameState.shop || Game.gameState() === GameConstants.GameState.farm)">
                     <p id="mapTooltip" style="visibility: hidden;"></p>
                     <div class="page-item no-select">
                         <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
                             <defs>
                                 <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%"
                                                 y2="100%">
-                                    <stop offset="0%" style="stop-color:#F8CECC"></stop>
-                                    <stop offset="100%" style="stop-color:#EA583B"></stop>
+                                    <stop offset="0%" style="stop-color:#909090"></stop>
+                                    <stop offset="100%" style="stop-color:#c1c1c1"></stop>
                                 </lineargradient>
                                 <lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%"
                                                 y2="100%">
@@ -375,10 +378,8 @@
                                     <stop offset="100%" style="stop-color:#7EA6E0"></stop>
                                 </lineargradient>
                             </defs>
-
                             @import "KantoSVG.html"
                             @import "JohtoSVG.html"
-
                         </svg>
                     </div>
                 </div>
@@ -405,19 +406,19 @@
                             <tr>
                                 <td>
                                     <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
-                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.None}"/>
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.None}"/>
                                 </td>
                                 <td></td>
                                 <td>
                                     <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
-                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.None}"/>
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.None}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <img class="pokeball-small clickable"
                                          src="assets/images/pokeball/Pokeball-small.png"
-                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Pokeball}"/>
                                 </td>
                                 <td>
                                     <span data-bind="text: player.pokeballsObservable(0)"></span>
@@ -425,14 +426,14 @@
                                 <td>
                                     <img class="pokeball-small clickable"
                                          src="assets/images/pokeball/Pokeball-small.png"
-                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Pokeball}"/>
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Pokeball}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <img class="pokeball-small clickable"
                                          src="assets/images/pokeball/Greatball-small.png"
-                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Greatball}"/>
                                 </td>
                                 <td>
                                     <span data-bind="text: player.pokeballsObservable(1)"></span>
@@ -440,14 +441,14 @@
                                 <td>
                                     <img class="pokeball-small clickable"
                                          src="assets/images/pokeball/Greatball-small.png"
-                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Greatball}"/>
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Greatball}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <img class="pokeball-small clickable"
                                          src="assets/images/pokeball/Ultraball-small.png"
-                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Ultraball}"/>
                                 </td>
                                 <td>
                                     <span data-bind="text: player.pokeballsObservable(2)"></span>
@@ -455,14 +456,14 @@
                                 <td>
                                     <img class="pokeball-small clickable"
                                          src="assets/images/pokeball/Ultraball-small.png"
-                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Ultraball}"/>
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Ultraball}"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <img class="pokeball-small clickable"
                                          src="assets/images/pokeball/Masterball-small.png"
-                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
+                                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Masterball}"/>
                                 </td>
                                 <td>
                                     <span data-bind="text: player.pokeballsObservable(3)"></span>
@@ -470,7 +471,7 @@
                                 <td>
                                     <img class="pokeball-small clickable"
                                          src="assets/images/pokeball/Masterball-small.png"
-                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._notCaughtBallSelection() == GameConstants.Pokeball.Masterball}"/>
+                                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Masterball}"/>
                                 </td>
                             </tr>
                             </tbody>
@@ -667,6 +668,9 @@
 
 <!-- Ship Modal-->
 @import "shipModal.html"
+
+<!-- Safari Modal -->
+@import "safariModal.html"
 
 </body>
 </html>

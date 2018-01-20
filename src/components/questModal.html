@@ -42,7 +42,7 @@
                                                                        click: function(){$data.beginQuest();$("#QuestModal").modal("hide")}'>
                                         Start
                                     </button>
-                                    <button class='btn btn-success' data-bind='visible: player.currentQuest() && (player.currentQuest().index == $data.index) && $data.isCompleted(),
+                                    <button class='btn btn-success' data-bind='visible: player.currentQuest() && (player.currentQuest().index === $data.index) && $data.isCompleted(),
                                                                        click: $data.claimReward;player.completedQuestList[$index](true)'>
                                         Claim Reward
                                     </button>

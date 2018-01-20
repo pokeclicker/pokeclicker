@@ -10,6 +10,11 @@
     "type": "git",
     "url": "git+https://github.com/Ishadijcks/pokeclicker.git"
   },
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  },
   "author": "IshaD",
   "license": "ISC",
   "bugs": {
@@ -17,11 +22,14 @@
   },
   "homepage": "https://github.com/Ishadijcks/pokeclicker#readme",
   "devDependencies": {
-    "@types/jquery": "^3.2.5",
+    "@types/jquery": "^3.2.18",
+    "babel-core": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-register": "^6.26.0",
     "bootstrap-notify": "^3.1.3",
-    "browser-sync": "^2.17.3",
+    "browser-sync": "^2.23.5",
     "del": "^2.2.2",
-    "es6-promise": "^4.0.5",
+    "es6-promise": "^4.2.2",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-bootstrap-configurator": "^0.4.1",
@@ -29,31 +37,31 @@
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-file": "^0.3.0",
+    "gulp-file-include": "^1.2.0",
     "gulp-html-import": "^0.0.2",
     "gulp-inject": "^4.3.0",
+    "gulp-less": "^3.4.0",
     "gulp-markdown": "^1.2.0",
-    "gulp-file-include": "^1.0.0",
-    "gulp-less": "^3.3.2",
     "gulp-minify-css": "^1.2.1",
     "gulp-minify-html": "^1.0.4",
     "gulp-size": "^2.0.0",
-    "gulp-sourcemaps": "^2.1.1",
+    "gulp-sourcemaps": "^2.6.3",
     "gulp-strip-debug": "^1.0.2",
     "gulp-tslint": "^6.1.2",
-    "gulp-typescript": "^3.0.2",
+    "gulp-typescript": "^3.2.3",
     "gulp-util": "^3.0.7",
     "run-sequence": "^1.1.4",
     "tslint": "^3.15.1",
-    "typescript": "^2.5.1"
+    "typescript": "^2.6.2"
   },
   "dependencies": {
-    "@types/bootstrap": "^3.3.34",
-    "@types/bootstrap-notify": "^3.1.3",
-    "@types/knockout": "^3.4.41",
+    "@types/bootstrap": "^3.3.36",
+    "@types/bootstrap-notify": "^3.1.33",
+    "@types/knockout": "^3.4.47",
     "bootstrap": "4.0.0-alpha.6",
     "glob": "^7.1.2",
     "jquery": "^3.2.1",
     "knockout": "^3.4.2",
-    "tether": "^1.4.0"
+    "tether": "^1.4.3"
   }
 }

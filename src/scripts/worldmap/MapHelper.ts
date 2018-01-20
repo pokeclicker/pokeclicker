@@ -63,9 +63,18 @@ class MapHelper {
                 return "city currentTown";
             }
             if (MapHelper.accessToTown(town)) {
+                if (dungeonList.hasOwnProperty(town)) {
+                    if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
+                        return "dungeon completedDungeon"
+                    }
+                    return "dungeon unlockedDungeon"
+                }
                 return "city unlockedTown";
             }
-            return "city lockedTown";
+            if (dungeonList.hasOwnProperty(town)) {
+                return "dungeon"
+            }
+            return "city";
         });
     }
 

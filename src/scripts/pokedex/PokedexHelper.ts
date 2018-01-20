@@ -48,6 +48,14 @@ class PokedexHelper {
 
     public static getList(): Array<object> {
         let filter = PokedexHelper.getFilters();
+
+        let highestDefeated = 0;
+        pokemonList.filter(function(pokemon){
+            if(player.defeatedAmount[pokemon.id]() != 0 && pokemon.id > highestDefeated) {
+                highestDefeated = pokemon.id;
+            }
+        })
+
         return pokemonList.filter(function (pokemon) {
             if ((filter['name'] || "") != "" && pokemon.name.toLowerCase().indexOf(filter['name'].toLowerCase()) == -1) {
                 return false;
@@ -70,6 +78,14 @@ class PokedexHelper {
                 return false;
             }
 
+            if (filter['uncaught'] && player.caughtAmount[pokemon.id]() !== 0) {
+                return false;
+            }
+
+            if (pokemon.id > highestDefeated) {
+                return false;
+            }
+
             return true;
         });
     }
@@ -82,8 +98,17 @@ class PokedexHelper {
         let type2 = <HTMLSelectElement>document.getElementById('pokedex-filter-type2');
         res['type2'] = type2.options[type2.selectedIndex].value;
         res['caught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-caught')).checked;
+        res['uncaught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-uncaught')).checked;
         res['shiny'] = (<HTMLInputElement> document.getElementById('pokedex-filter-shiny')).checked;
         return res;
     }
 
+    private static getImage(id: number, name: string) {
+        let src = "/assets/images/";
+        if (player.alreadyCaughtPokemonShiny(name)) {
+            src += "shiny";
+        }
+        src += "pokemon/" + id + ".png";
+        return src;
+    }
 }

@@ -346,7 +346,7 @@ const pokemonList = [
         "name": "Pikachu",
         "catchRate": 190,
         "evolution": "Raichu",
-        "evoLevel": "Thunder Stone",
+        "evoLevel": "Thunder_stone",
         "type": [
             "Electric"
         ],
@@ -412,7 +412,7 @@ const pokemonList = [
         "name": "Nidorina",
         "catchRate": 120,
         "evolution": "Nidoqueen",
-        "evoLevel": "Moon Stone",
+        "evoLevel": "Moon_stone",
         "type": [
             "Poison"
         ],
@@ -453,7 +453,7 @@ const pokemonList = [
         "name": "Nidorino",
         "catchRate": 120,
         "evolution": "Nidoking",
-        "evoLevel": "Moon Stone",
+        "evoLevel": "Moon_stone",
         "type": [
             "Poison"
         ],
@@ -480,7 +480,7 @@ const pokemonList = [
         "name": "Clefairy",
         "catchRate": 150,
         "evolution": "Clefable",
-        "evoLevel": "Moon Stone",
+        "evoLevel": "Moon_stone",
         "type": [
             "Fairy"
         ],
@@ -506,7 +506,7 @@ const pokemonList = [
         "name": "Vulpix",
         "catchRate": 190,
         "evolution": "Ninetales",
-        "evoLevel": "Fire Stone",
+        "evoLevel": "Fire_stone",
         "type": [
             "Fire"
         ],
@@ -532,7 +532,7 @@ const pokemonList = [
         "name": "Jigglypuff",
         "catchRate": 170,
         "evolution": "Wigglytuff",
-        "evoLevel": "Moon Stone",
+        "evoLevel": "Moon_stone",
         "type": [
             "Normal",
             "Fairy"
@@ -791,7 +791,7 @@ const pokemonList = [
         "name": "Growlithe",
         "catchRate": 190,
         "evolution": "Arcanine",
-        "evoLevel": "Fire Stone",
+        "evoLevel": "Fire_stone",
         "type": [
             "Fire"
         ],
@@ -831,7 +831,7 @@ const pokemonList = [
         "name": "Poliwhirl",
         "catchRate": 120,
         "evolution": "Poliwrath",
-        "evoLevel": "Water Stone",
+        "evoLevel": "Water_stone",
         "type": [
             "Water"
         ],
@@ -872,7 +872,7 @@ const pokemonList = [
         "name": "Kadabra",
         "catchRate": 100,
         "evolution": "Alakazam",
-        "evoLevel": "Trade Stone",
+        "evoLevel": "Trade_stone",
         "type": [
             "Psychic"
         ],
@@ -912,7 +912,7 @@ const pokemonList = [
         "name": "Machoke",
         "catchRate": 90,
         "evolution": "Machamp",
-        "evoLevel": "Trade Stone",
+        "evoLevel": "Trade_stone",
         "type": [
             "Fighting"
         ],
@@ -953,7 +953,7 @@ const pokemonList = [
         "name": "Weepinbell",
         "catchRate": 120,
         "evolution": "Victreebel",
-        "evoLevel": "Leaf Stone",
+        "evoLevel": "Leaf_stone",
         "type": [
             "Grass",
             "Poison"
@@ -1024,7 +1024,7 @@ const pokemonList = [
         "name": "Graveler",
         "catchRate": 120,
         "evolution": "Golem",
-        "evoLevel": "Trade Stone",
+        "evoLevel": "Trade_stone",
         "type": [
             "Rock",
             "Ground"
@@ -1228,7 +1228,7 @@ const pokemonList = [
         "name": "Shellder",
         "catchRate": 190,
         "evolution": "Cloyster",
-        "evoLevel": "Water Stone",
+        "evoLevel": "Water_stone",
         "type": [
             "Water"
         ],
@@ -1270,7 +1270,7 @@ const pokemonList = [
         "name": "Haunter",
         "catchRate": 90,
         "evolution": "Gengar",
-        "evoLevel": "Trade Stone",
+        "evoLevel": "Trade_stone",
         "type": [
             "Ghost",
             "Poison"
@@ -1391,7 +1391,7 @@ const pokemonList = [
         "name": "Exeggcute",
         "catchRate": 90,
         "evolution": "Exeggutor",
-        "evoLevel": "Leaf Stone",
+        "evoLevel": "Leaf_stone",
         "type": [
             "Grass",
             "Psychic"
@@ -1627,7 +1627,7 @@ const pokemonList = [
         "name": "Staryu",
         "catchRate": 225,
         "evolution": "Starmie",
-        "evoLevel": "Water Stone",
+        "evoLevel": "Water_stone",
         "type": [
             "Water"
         ],

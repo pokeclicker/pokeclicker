@@ -3,6 +3,15 @@
 
 class PokemonHelper {
 
+    public static getPokemonsWithEvolution(evoType: string) {
+
+        return pokemonList.filter(function (pokemon) {
+            if (pokemon["evoLevel"] !== undefined && ("" + pokemon["evoLevel"]).indexOf(evoType) !== -1) {
+                return true;
+            }
+        });
+    }
+
     public static getPokemonByName(name: string): DataPokemon {
         let basePokemon = pokemonMap[name];
         let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
@@ -62,6 +71,18 @@ class PokemonHelper {
             src += "shiny";
         }
         src += "pokemon/" + pokemon.id + ".png";
+        return src;
+    }
+
+    public static getPokeballImage(pokemonName: string): string {
+        let src = ""
+        if (player.alreadyCaughtPokemon(pokemonName)){
+            src = "/assets/images/pokeball/Pokeball-";
+            if (player.alreadyCaughtPokemonShiny(pokemonName)) {
+                src += "shiny-";
+            }
+            src += "small.png";
+        }
         return src;
     }
 

@@ -9,7 +9,6 @@ class Player {
     private _dungeonTokens: KnockoutObservable<number>;
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
-
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
@@ -80,7 +79,16 @@ class Player {
         this._town = ko.observable(TownList["Pallet Town"]);
         this._currentTown = ko.observable("");
         this._starter = savedPlayer._starter || GameConstants.Starter.None;
-        this._itemList = savedPlayer._itemList || Save.initializeItemlist();
+
+        console.log(savedPlayer._itemList);
+
+        this._itemList = Save.initializeItemlist();
+        if (savedPlayer._itemList) {
+            for (let key in savedPlayer._itemList) {
+                this._itemList[key] = ko.observable(savedPlayer._itemList[key]);
+            }
+        }
+
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
         this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50);
         this._maxMineEnergy = ko.observable(savedPlayer._maxMineEnergy || GameConstants.MineUpgradesInitialValues.maxMineEnergy);
@@ -171,8 +179,8 @@ class Player {
     private _eggList: Array<KnockoutObservable<Egg | void>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private _itemList: { [name: string]: number };
-    private _itemMultipliers: { [name: string]: number };
+    private _itemList: {[name: string]: KnockoutObservable<number>};
+    private _itemMultipliers: {[name: string]: number};
 
     private _mineEnergy: KnockoutObservable<number>;
     private _maxMineEnergy: KnockoutObservable<number>;
@@ -190,7 +198,7 @@ class Player {
     public clickAttackObservable: KnockoutComputed<number>;
     public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
-    public achievementsCompleted: { [name: string]: boolean };
+    public achievementsCompleted: {[name: string]: boolean};
     public statistics: Statistics;
 
     public completedQuestList: Array<KnockoutObservable<boolean>>;
@@ -407,6 +415,7 @@ class Player {
         return false;
     }
 
+
     public gainMoney(money: number) {
         OakItemRunner.use("Amulet Coin");
         // TODO add money multipliers
@@ -509,11 +518,11 @@ class Player {
         this._caughtAmount = value;
     }
 
-    get itemList(): { [p: string]: number } {
+    get itemList(): {[p: string]: KnockoutObservable<number>} {
         return this._itemList;
     }
 
-    set itemList(value: { [p: string]: number }) {
+    set itemList(value: {[p: string]: KnockoutObservable<number>}) {
         this._itemList = value;
     }
 
@@ -549,7 +558,7 @@ class Player {
         this._gymBadges.push(badge);
     }
 
-    get itemMultipliers(): { [p: string]: number } {
+    get itemMultipliers(): {[p: string]: number} {
         return this._itemMultipliers;
     }
 
@@ -662,11 +671,11 @@ class Player {
     }
 
     public gainItem(itemName: string, amount: number) {
-        this._itemList[itemName] += amount;
+        this._itemList[itemName](this._itemList[itemName]() + amount);
     }
 
-    public loseItem(itemname: string, amount: number) {
-        this._itemList[itemname] -= amount;
+    public loseItem(itemName: string, amount: number) {
+        this._itemList[itemName](this._itemList[itemName]() - amount);
     }
 
     public lowerItemMultipliers() {
