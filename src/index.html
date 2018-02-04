@@ -378,8 +378,10 @@
                                     <stop offset="100%" style="stop-color:#7EA6E0"></stop>
                                 </lineargradient>
                             </defs>
+
                             @import "KantoSVG.html"
                             @import "JohtoSVG.html"
+
                         </svg>
                     </div>
                 </div>
@@ -388,7 +390,9 @@
 
         <!--left column-->
         <div class="col-lg-3 pull-lg-6">
-            <div class="page-item" style="background-color: white; min-height: 180px">
+            <div class="page-item" id="pokeballSelector"
+                 data-bind="visible: player.starter != GameConstants.Starter.None"
+                 style="background-color: white; min-height: 180px">
                 <div class="row justify-content-sm-center">
                     <div class="col-sm-10">
                         <table class="table pokeball-table borderless">
@@ -481,7 +485,8 @@
                 </div>
             </div>
 
-            <div class="page-item pokemon-list-container" style="background-color: white">
+            <div class="page-item pokemon-list-container" id="pokemonListContainer"
+                 data-bind="visible: player.starter != GameConstants.Starter.None" style="background-color: white">
                 <select data-bind="options: GameConstants.SortOptions,
                                    optionsText: 'optionText',
                                    optionsValue: 'optionValue',
