@@ -26,4 +26,6 @@ $(document).ready(function() {
             
         }
     });
+
+    $("#pokedexModal").on("show.bs.modal", PokedexHelper.updateList)
 })
