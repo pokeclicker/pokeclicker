@@ -37,8 +37,8 @@ namespace GameConstants {
     export const SHINY_CHANCE_STONE = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
 
-    export const ITEM_PRICE_MULTIPLIER = 1.02;
-    export const ITEM_PRICE_DEDUCT = 0.003;
+    export const ITEM_PRICE_MULTIPLIER = 1.01;
+    export const ITEM_PRICE_DEDUCT = 1.008;
 
     //Underground
     export const Mine = {
