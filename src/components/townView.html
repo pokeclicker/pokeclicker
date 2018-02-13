@@ -38,6 +38,11 @@
                        onclick="ShopHandler.showShop(player.town().shop())">Shop
                </button>
            </li>
+           <li class="nav-item" data-bind="if:MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
+               <button class="btn btn-secondary"
+                       onclick="MapHelper.travelToNextRegion()">Go To Next Region
+               </button>
+           </li>
            <div data-bind="if:player.town().dungeon()">
                <li class="nav-item" data-bind="if: player.town() instanceof DungeonTown">
                    <button class="btn btn-secondary"

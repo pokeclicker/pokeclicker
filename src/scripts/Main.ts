@@ -84,7 +84,6 @@ class Game {
         player.gainKeyItem("Coin case", true);
         player.gainKeyItem("Teachy tv", true);
         player.gainKeyItem("Pokeball bag", true);
-        player.region = GameConstants.Region.kanto;
         this.load();
     }
 

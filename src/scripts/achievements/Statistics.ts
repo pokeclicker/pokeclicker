@@ -15,8 +15,8 @@ class Statistics {
     public oakItemUses: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
-        "gymsDefeated": GameConstants.Gyms.length,
-        "dungeonsCleared": GameConstants.Dungeons.length,
+        "gymsDefeated": GameConstants.KantoGyms.length + GameConstants.JohtoGyms.length,
+        "dungeonsCleared": GameConstants.KantoDungeons.length + GameConstants.JohtoDungeons.length,
         "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,// remove "None" pokeball type
         "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,// remove "None" pokemon type
         "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
@@ -51,6 +51,38 @@ class Statistics {
                 return ko.observable(saved[array] ? saved[array][index] || 0 : 0)
             })
         }
+    }
+
+    public static getGymIndex(gym: string, region: GameConstants.Region) {
+        let index;
+        switch (region) {
+            case 0:
+                index = GameConstants.KantoGyms.indexOf(gym);
+                break;
+            case 1:
+                index = GameConstants.KantoGyms.length;
+                index += GameConstants.JohtoGyms.indexOf(gym);
+                break;
+        }
+        return index;
+    }
+
+    public static getDungeonIndex(dungeon: string) {
+        let index;
+        if (GameConstants.KantoDungeons.indexOf(dungeon) > -1) {
+            index = GameConstants.KantoDungeons.indexOf(dungeon)
+            return index;
+        } else {
+            index = GameConstants.KantoDungeons.length;
+        }
+        if (GameConstants.JohtoDungeons.indexOf(dungeon) > -1) {
+            index += GameConstants.JohtoDungeons.indexOf(dungeon)
+            return index;
+        } else {
+            index += GameConstants.JohtoDungeons.length;
+        }
+        console.log("Failed to find dungeon", dungeon);
+        return index;
     }
 
 }

@@ -16,10 +16,21 @@ class Player {
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._questPoints = ko.observable(savedPlayer._questPoints || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
-        if (savedPlayer._route == null || savedPlayer._route == 0) {
-            this._route = ko.observable(1);
-        } else {
+        this._region = ko.observable(savedPlayer._region);
+        if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
             this._route = ko.observable(savedPlayer._route)
+        } else {
+            switch (savedPlayer._region) {
+                case 0:
+                    this._route = ko.observable(1);
+                    break;
+                case 1:
+                    this._route = ko.observable(29);
+                    break;
+                default:
+                    this._route = ko.observable(1);
+                    this._region = ko.observable(GameConstants.Region.kanto);
+            }
         }
 
         if (savedPlayer._caughtPokemonList) {
@@ -43,7 +54,6 @@ class Player {
         });
         this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        this._region = savedPlayer._region || GameConstants.Region.kanto;
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
@@ -132,6 +142,7 @@ class Player {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
         });
         this.plotList = Save.initializePlots(savedPlayer.plotList);
+        this.highestRegion = savedPlayer.highestRegion || 0;
 
         //TODO remove before deployment
         if (!debug) {
@@ -153,7 +164,7 @@ class Player {
 
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
-    private _region: GameConstants.Region;
+    private _region: KnockoutObservable<GameConstants.Region>;
     private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
     private _pokeballs: Array<KnockoutObservable<number>>;
     private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
@@ -201,6 +212,8 @@ class Player {
     public plotList: KnockoutObservable<Plot>[];
     public farmPoints: KnockoutObservable<number>;
     public berryList: KnockoutObservable<number>[];
+
+    private highestRegion: GameConstants.Region;
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -542,7 +555,7 @@ class Player {
     }
 
     public gainBadge(badge: GameConstants.Badge) {
-        this._gymBadges().push(badge);
+        this._gymBadges.push(badge);
     }
 
     get itemMultipliers(): {[p: string]: number} {
@@ -586,11 +599,11 @@ class Player {
     }
 
     get region(): GameConstants.Region {
-        return this._region;
+        return this._region();
     }
 
     set region(value: GameConstants.Region) {
-        this._region = value;
+        this._region(value);
     }
 
     get gymBadges(): GameConstants.Badge[] {
@@ -911,7 +924,8 @@ class Player {
             "achievementsCompleted",
             "farmPoints",
             "plotList",
-            "berryList"
+            "berryList",
+            "highestRegion",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

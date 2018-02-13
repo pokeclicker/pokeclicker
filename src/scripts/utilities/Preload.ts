@@ -103,6 +103,7 @@ class Preload {
     }
 
     private static loadMap() {
+        /*
         return new Promise<number>(resolve => {
             let img = new Image();
             img.onload = () => {
@@ -112,5 +113,6 @@ class Preload {
             };
             img.src = '/assets/images/kanto.png';
         })
+        */
     }
 }

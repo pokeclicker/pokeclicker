@@ -1,11 +1,19 @@
 /// <reference path="Quest.ts" />
 
 class DefeatGymQuest extends Quest implements QuestInterface {
-    constructor(gymIndex: number, amount: number) {
-        super(amount, DefeatGymQuest.calcReward(gymIndex, amount));
-        let gymTown = GameConstants.Gyms[gymIndex];
+    constructor(gymIndex: number, region: GameConstants.Region, amount: number) {
+        let gymTown;
+        switch (region) {
+            case 0:
+                gymTown = GameConstants.KantoGyms[gymIndex];
+                break;
+            case 1:
+                gymTown = GameConstants.JohtoGyms[gymIndex];
+                break;
+        }
+        super(amount, DefeatGymQuest.calcReward(gymTown, amount));
         this.description = DefeatGymQuest.getDescription(gymTown, amount);
-        this.questFocus = player.statistics.gymsDefeated[gymIndex];
+        this.questFocus = player.statistics.gymsDefeated[Statistics.getGymIndex(gymTown, region)];
         this.createProgressObservables();
     }
 
@@ -18,8 +26,8 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         return desc;
     }
 
-    private static calcReward(gymIndex: number, amount: number): number {
-        let gym = gymList[GameConstants.Gyms[gymIndex]];
+    private static calcReward(gymTown: string, amount: number): number {
+        let gym = gymList[gymTown];
         let playerDamage = player.pokemonAttackObservable();
         let attacksToWin = 0;
         for (let pokemon of gym.pokemons) {

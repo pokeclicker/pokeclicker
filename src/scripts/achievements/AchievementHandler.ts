@@ -248,15 +248,15 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Route 25-2", "Get 1000 kills on route 25", new RouteKillRequirement(1000, 25), 0.05);
         AchievementHandler.addAchievement("Route 25-3", "Get 10000 kills on route 25", new RouteKillRequirement(10000, 25), 0.10);
 
-        for (let i = 0; i < GameConstants.Gyms.length; i++) {
+        for (let i = 0; i < GameConstants.KantoGyms.length; i++) {
             for (let j = 0; j < 4; j++) {
-                AchievementHandler.addAchievement(`${GameConstants.Gyms[i]} Gym ${j + 1}`, `Clear ${Math.pow(10, j)} times`, new ClearGymRequirement(Math.pow(10, j), i), 0.01)
+                AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym ${j + 1}`, `Clear ${Math.pow(10, j)} times`, new ClearGymRequirement(Math.pow(10, j), i), 0.01)
             }
         }
 
-        for (let i = 0; i < GameConstants.Dungeons.length; i++) {
+        for (let i = 0; i < GameConstants.KantoDungeons.length; i++) {
             for (let j = 0; j < 4; j++) {
-                AchievementHandler.addAchievement(`${GameConstants.Dungeons[i]} ${j + 1}`, `Clear ${Math.pow(10, j)} times`, new ClearDungeonRequirement(Math.pow(10, j), i), 0.01)
+                AchievementHandler.addAchievement(`${GameConstants.KantoDungeons[i]} ${j + 1}`, `Clear ${Math.pow(10, j)} times`, new ClearDungeonRequirement(Math.pow(10, j), i), 0.01)
             }
         }
 

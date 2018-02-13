@@ -1,0 +1,27 @@
+<div class="modal noselect fade" id="ShipModal" tabindex="-1" role="dialog" aria-labelledby="ShipModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <span>Regional Travel</span>
+            </div>
+            <div class="modal-body">
+                <img src='assets/images/ship.png'>
+                <div style='margin-top:20px'>
+                    <span data-bind='ifnot: player.region == 0'>
+                        <button class='btn btn-primary' onclick='MapHelper.moveToTown("Vermillion City");player.region = 0;$("#ShipModal").modal("hide")'>
+                            Kanto
+                        </button>
+                    </span>
+                    <span data-bind='ifnot: player.region == 1'>
+                        <button class='btn btn-primary' onclick='MapHelper.moveToTown("Olivine City");player.region = 1;$("#ShipModal").modal("hide")'>
+                            Johto
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                
+            </div>
+        </div>
+    </div>
+</div>

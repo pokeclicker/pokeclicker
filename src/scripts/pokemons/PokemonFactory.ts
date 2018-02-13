@@ -13,14 +13,14 @@ class PokemonFactory {
      * @returns {any}
      */
     public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
-        let name: string;
-        if (route > 25 || route == 0) {
+        if (!MapHelper.validRoute(route, region)) {
             return new BattlePokemon("Rattata", 19, GameConstants.PokemonType.Psychic, GameConstants.PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
-
-        let mewEncounter: boolean = Math.random() < 1 / (GameConstants.MEW_CHANCE_ROUTE_25 + ( GameConstants.MEW_CHANCE_DIFF * (25 - route) / 24 ))
-        if (mewEncounter) {
-            name = "Mew";
+        let name: string;
+        
+        if (PokemonFactory.roamingEncounter(route)) {
+            let possible = GameConstants.RoamingPokemon[region];
+            name = possible[Math.floor(Math.random() * possible.length)];
         } else {
             let pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
             let rand: number = Math.floor(Math.random() * pokemonList.length);
@@ -108,6 +108,21 @@ class PokemonFactory {
         let money: number = 0;
         let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, money, shiny, GameConstants.DUNGEON_BOSS_SHARDS);
+    }
+
+    private static roamingEncounter(route): boolean {
+        switch (player.region) {
+            case 0:
+                return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, 25, 1, route);
+            case 1:
+                return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, 46, 26, route);
+            default:
+                return false;
+        }
+    }
+
+    private static roamingChance(max, min, maxRoute, minRoute, curRoute) {
+        return Math.random() < 1 / (max + ( (min - max) * (maxRoute - curRoute) / (maxRoute - minRoute)));
     }
 
 }

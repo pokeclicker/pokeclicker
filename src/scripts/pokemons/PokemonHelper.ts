@@ -15,7 +15,7 @@ class PokemonHelper {
     public static getPokemonByName(name: string): DataPokemon {
         let basePokemon = pokemonMap[name];
         let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
-        let evoLevel = basePokemon["evoLevel"] || 101;
+        let evoLevel = basePokemon["evoLevel"];
         let eggCycles: number = basePokemon["eggCycles"] || 20;
         return new DataPokemon(basePokemon["id"], basePokemon["name"], basePokemon["catchRate"], basePokemon["evolution"], evoLevel, basePokemon["type"][0], type2, basePokemon["attack"], basePokemon["levelType"], basePokemon["exp"], eggCycles);
     }
@@ -121,6 +121,17 @@ class PokemonHelper {
             }
 
             return res * dir;
+        }
+    }
+
+    public static calcNativeRegion(pokemonName: string) {
+        let id = PokemonHelper.getPokemonByName(pokemonName).id;
+        if (id > 251) {
+            return GameConstants.Region.hoenn;
+        } else if (id > 151) {
+            return GameConstants.Region.johto;
+        } else {
+            return GameConstants.Region.kanto;
         }
     }
 

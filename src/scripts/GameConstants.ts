@@ -21,9 +21,13 @@ namespace GameConstants {
     export const AMOUNT_OF_POKEMONS = 151;
     export const AMOUNT_OF_BADGES = 8;
 
-    export const MEW_CHANCE_ROUTE_1 = 8192
-    export const MEW_CHANCE_ROUTE_25 = 4096
-    export const MEW_CHANCE_DIFF = MEW_CHANCE_ROUTE_1 - MEW_CHANCE_ROUTE_25
+    export const ROAMING_MIN_CHANCE = 8192;
+    export const ROAMING_MAX_CHANCE = 4096;
+
+    export const RoamingPokemon = {
+        0: ["Mew"],
+        1: ["Raikou", "Entei"],
+    }
 
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
@@ -210,8 +214,8 @@ namespace GameConstants {
         "HatchEggs",
         "MineLayers",
         "CatchShinies",
-        "DefeatGym",
-        "DefeatDungeon",
+        "DefeatKantoGym",
+        "DefeatKantoDungeon",
         "UsePokeball",
         "UseOakItem",
     ];
@@ -336,7 +340,7 @@ namespace GameConstants {
 
     export const RegionRoute = {
         0: 25,
-        1: 0,
+        1: 48,
         2: 0
     };
 
@@ -358,7 +362,20 @@ namespace GameConstants {
         "Bruno" = 10,
         "Agatha" = 11,
         "Lance" = 12,
-        "Champion" = 13
+        "Champion" = 13,
+        "Zephyr" = 14,
+        "Hive" = 15,
+        "Plain" = 16,
+        "Fog" = 17,
+        "Storm" = 18,
+        "Mineral" = 19,
+        "Glacier" = 20,
+        "Rising" = 21,
+        "Will" = 22,
+        "Koga" = 23,
+        "Bruno2" = 24,
+        "Karen" = 25,
+        "JohtoChampion" = 26,
     }
 
     export enum PokemonType {
@@ -413,7 +430,7 @@ namespace GameConstants {
     }
 
     // Map navigation
-    export const AMOUNT_OF_ROUTES = 25;
+    export const AMOUNT_OF_ROUTES = 48;
     export const AMOUNT_OF_ROUTES_KANTO = 25;
 
     /**
@@ -447,6 +464,19 @@ namespace GameConstants {
             23: [22],
             24: [4],
             25: [24],
+        },
+        1: {
+            30: [29],
+            31: [30],
+            33: [32],
+            36: [35],
+            37: [36],
+            39: [38],
+            40: [39],
+            41: [40],
+            46: [45],
+            26: [46],
+            27: [26],
         }
     };
 
@@ -465,6 +495,17 @@ namespace GameConstants {
             21: GameConstants.Badge.Volcano,
             22: GameConstants.Badge.Earth,
             24: GameConstants.Badge.Cascade,
+        },
+        1: {
+            28: GameConstants.Badge.JohtoChampion,
+            32: GameConstants.Badge.Zephyr,
+            34: GameConstants.Badge.Hive,
+            35: GameConstants.Badge.Plain,
+            38: GameConstants.Badge.Fog,
+            42: GameConstants.Badge.Mineral,
+            43: GameConstants.Badge.Glacier,
+            44: GameConstants.Badge.Glacier,
+            45: GameConstants.Badge.Rising,
         }
     };
 
@@ -472,6 +513,10 @@ namespace GameConstants {
         0: {
             4: "Mt. Moon",
             20: "Seafoam Islands",
+        },
+        1: {
+            33: "Union Cave",
+            34: "Ilex Forest"
         }
     }
 
@@ -611,7 +656,7 @@ namespace GameConstants {
     }
 
     // For random quest, name matches entry in gymList (created in Gym.ts)
-    export const Gyms = [
+    export const KantoGyms = [
         "Pewter City",
         "Cerulean City",
         "Vermillion City",
@@ -624,10 +669,26 @@ namespace GameConstants {
         "Elite Bruno",
         "Elite Agatha",
         "Elite Lance",
-        "Champion Blue"
+        "Champion Blue",
     ];
 
-    export const Dungeons = [
+    export const JohtoGyms = [
+        "Violet City",
+        "Azalea Town",
+        "Goldenrod City",
+        "Ecruteak City",
+        "Cianwood City",
+        "Olivine City",
+        "Mahogany Town",
+        "Blackthorn City",
+        "Elite Will",
+        "Elite Koga",
+        "Elite Bruno2",
+        "Elite Karen",
+        "Champion Lance"
+    ];
+
+    export const KantoDungeons = [
         "Viridian Forest",
         "Digletts Cave",
         "Mt. Moon",
@@ -639,4 +700,28 @@ namespace GameConstants {
         "Victory Road",
         "Cerulean Cave"
     ];
+
+    export const JohtoDungeons = [
+        "Sprout Tower",
+        "Union Cave",
+        "Slowpoke Well",
+        "Ilex Forest",
+        "Burned Tower",
+        "Tin Tower",
+        "Whirl Islands",
+        "Mt Mortar",
+        "Ice Path",
+        "Dark Cave",
+        "Mt Silver"
+    ];
+
+    export const StartingTowns = [
+        "Pallet Town",
+        "New Bark Town",
+    ];
+
+    export const pokemonsNeededToTravel = [
+        151,
+        252, // Should be 251, set to 252 in case gen 3 isn't added before beta
+    ]
 }

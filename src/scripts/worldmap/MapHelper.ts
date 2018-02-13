@@ -5,6 +5,7 @@ class MapHelper {
             if (this.accessToRoute(route, region)) {
                 $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
                 player.route(route);
+                player.region = region;
                 player.currentTown("");
                 $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
                 Battle.generateNewEnemy();
@@ -23,7 +24,7 @@ class MapHelper {
 
     private static hasDungeonReq(route, region) {
         let dungeonReq = GameConstants.routeDungeonRequirements[region][route];
-        return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[GameConstants.Dungeons.indexOf(dungeonReq)]();
+        return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeonReq)]();
     }
 
     private static hasRouteKillReq(route, region) {
@@ -104,6 +105,44 @@ class MapHelper {
             if (MapHelper.accessToRoute(i, GameConstants.Region.kanto)) {
                 $("[data-route='" + i + "']").removeClass('currentRoute').removeClass('lockedRoute').addClass('unlockedRoute');
             }
+        }
+    }
+
+    public static validRoute(route: number, region: GameConstants.Region): boolean {
+        switch (region) {
+            case GameConstants.Region.kanto:
+                return route > 0 && route < 26;
+            case GameConstants.Region.johto:
+                return route > 25 && route < 49;
+        }
+    }
+
+    public static openShipModal() {
+        let openModal = () => {Game.gameState(GameConstants.GameState.idle);$("#ShipModal").modal('show');}
+        switch (player.region) {
+            case 0:
+                if (TownList["Vermillion City"].isUnlocked() && player.highestRegion > 0) {
+                    openModal();
+                    return;
+                }
+            case 1:
+                if (TownList["Olivine City"].isUnlocked()) {
+                    openModal();
+                    return;
+                }
+        }
+        Notifier.notify("You cannot access this dock yet", GameConstants.NotificationOption.warning)
+    }
+
+    public static ableToTravel() {
+        return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.highestRegion]
+    }
+
+    public static travelToNextRegion() {
+        if (MapHelper.ableToTravel()) {
+            player.highestRegion++;
+            MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion]);
+            player.region = player.highestRegion;
         }
     }
 
