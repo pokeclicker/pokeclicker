@@ -50,9 +50,9 @@ class PokedexHelper {
         let filter = PokedexHelper.getFilters();
 
         let highestDefeated = 0;
-        pokemonList.filter(function(pokemon){
-            if(player.defeatedAmount[pokemon.id]() != 0 && pokemon.id > highestDefeated) {
-                highestDefeated = pokemon.id;
+        pokemonList.filter(function (pokemon) {
+            if (player.defeatedAmount[pokemon.id]() != 0 && pokemon.id > highestDefeated) {
+                highestDefeated = parseInt(pokemon.id.toString());
             }
         })
 
