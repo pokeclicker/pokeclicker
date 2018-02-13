@@ -7,6 +7,36 @@ class Player {
 
     private _money: KnockoutObservable<number>;
     private _dungeonTokens: KnockoutObservable<number>;
+
+    public achievementsCompleted: { [name: string]: boolean };
+
+    private _caughtShinyList: KnockoutObservableArray<string>;
+    private _route: KnockoutObservable<number>;
+    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
+
+    private _defeatedAmount: Array<KnockoutObservable<number>>;
+
+    get defeatedAmount(): Array<KnockoutObservable<number>> {
+        return this._defeatedAmount;
+    }
+
+    private _routeKills: Array<KnockoutObservable<number>>;
+    private _routeKillsNeeded: KnockoutObservable<number>;
+    private _region: KnockoutObservable<GameConstants.Region>;
+    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
+    private _pokeballs: Array<KnockoutObservable<number>>;
+    private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
+    private _sortDescending: KnockoutObservable<boolean>;
+    private _town: KnockoutObservable<Town>;
+    private _currentTown: KnockoutObservable<string>;
+    private _starter: GameConstants.Starter;
+    private _oakItemExp: Array<KnockoutObservable<number>>;
+    private _oakItemsEquipped: string[];
+    private _eggList: Array<KnockoutObservable<Egg | void>>;
+    private _eggSlots: KnockoutObservable<number>;
+
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
@@ -119,14 +149,20 @@ class Player {
         if (today.toLocaleDateString() == lastSeen.toLocaleDateString()) {
             this.questRefreshes = savedPlayer.questRefreshes;
             if (savedPlayer.completedQuestList) {
-                this.completedQuestList = savedPlayer.completedQuestList.map((bool) => {return ko.observable(bool)});
+                this.completedQuestList = savedPlayer.completedQuestList.map((bool) => {
+                    return ko.observable(bool)
+                });
             } else {
-                this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+                this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {
+                    return ko.observable(false)
+                });
             }
             this.currentQuest = ko.observable(savedPlayer.currentQuest);
         } else {
             this.questRefreshes = 0;
-            this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {return ko.observable(false)});
+            this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {
+                return ko.observable(false)
+            });
             this.currentQuest = ko.observable(null);
         }
         this._questXP = ko.observable(savedPlayer._questXP || 0);
@@ -152,35 +188,7 @@ class Player {
         }
     }
 
-    private _caughtShinyList: KnockoutObservableArray<string>;
-    private _route: KnockoutObservable<number>;
-    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
-
-    private _defeatedAmount: Array<KnockoutObservable<number>>;
-
-    get defeatedAmount(): Array<KnockoutObservable<number>> {
-        return this._defeatedAmount;
-    }
-
-    private _routeKills: Array<KnockoutObservable<number>>;
-    private _routeKillsNeeded: KnockoutObservable<number>;
-    private _region: KnockoutObservable<GameConstants.Region>;
-    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
-    private _pokeballs: Array<KnockoutObservable<number>>;
-    private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
-    private _sortDescending: KnockoutObservable<boolean>;
-    private _town: KnockoutObservable<Town>;
-    private _currentTown: KnockoutObservable<string>;
-    private _starter: GameConstants.Starter;
-    private _oakItemExp: Array<KnockoutObservable<number>>;
-    private _oakItemsEquipped: string[];
-    private _eggList: Array<KnockoutObservable<Egg | void>>;
-    private _eggSlots: KnockoutObservable<number>;
-
-    private _itemList: {[name: string]: KnockoutObservable<number>};
-    private _itemMultipliers: {[name: string]: number};
+    private _itemList: { [name: string]: KnockoutObservable<number> };
 
     private _mineEnergy: KnockoutObservable<number>;
     private _maxMineEnergy: KnockoutObservable<number>;
@@ -198,7 +206,10 @@ class Player {
     public clickAttackObservable: KnockoutComputed<number>;
     public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
-    public achievementsCompleted: {[name: string]: boolean};
+
+    get itemList(): { [p: string]: KnockoutObservable<number> } {
+        return this._itemList;
+    }
     public statistics: Statistics;
 
     public completedQuestList: Array<KnockoutObservable<boolean>>;
@@ -415,7 +426,6 @@ class Player {
         return false;
     }
 
-
     public gainMoney(money: number) {
         OakItemRunner.use("Amulet Coin");
         // TODO add money multipliers
@@ -424,9 +434,8 @@ class Player {
         GameHelper.incrementObservable(this.statistics.totalMoney, money);
     }
 
-    public gainDungeonTokens(tokens: number) {
-        this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens ));
-        GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
+    set itemList(value: { [p: string]: KnockoutObservable<number> }) {
+        this._itemList = value;
     }
 
     public hasMoney(money: number) {
@@ -518,12 +527,10 @@ class Player {
         this._caughtAmount = value;
     }
 
-    get itemList(): {[p: string]: KnockoutObservable<number>} {
-        return this._itemList;
-    }
+    private _itemMultipliers: { [name: string]: number };
 
-    set itemList(value: {[p: string]: KnockoutObservable<number>}) {
-        this._itemList = value;
+    get itemMultipliers(): { [p: string]: number } {
+        return this._itemMultipliers;
     }
 
     public canBreedPokemon(): boolean {
@@ -558,8 +565,9 @@ class Player {
         this._gymBadges.push(badge);
     }
 
-    get itemMultipliers(): {[p: string]: number} {
-        return this._itemMultipliers;
+    public gainDungeonTokens(tokens: number) {
+        this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens));
+        GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
@@ -704,12 +712,16 @@ class Player {
         // TODO Calculate pokemon attack by checking upgrades and multipliers.
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
+            let multiplier = 1;
+            if (this.region > 0 && GameHelper.isGen1(pokemon.id)) {
+                multiplier = 0.2
+            }
             if (!pokemon.breeding()) {
                 if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
-                    attack += pokemon.attack();
+                    attack += pokemon.attack() * multiplier;
                 } else {
                     let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-                    attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2);
+                    attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
                 }
             }
         }

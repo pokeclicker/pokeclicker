@@ -65,4 +65,8 @@ class GameHelper {
         }
     }
 
+    public static isGen1(id) {
+        return id <= GameConstants.AMOUNT_OF_POKEMONS_GEN1;
+    }
+
 }
