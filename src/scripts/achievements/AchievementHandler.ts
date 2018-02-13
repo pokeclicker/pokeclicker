@@ -168,7 +168,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement("Masterball 6", "Get 100,000 Masterballs", new PokeballRequirement(100000, GameConstants.Pokeball.Masterball), 0.50);
 
         AchievementHandler.addAchievement("Click 1", "Click 10 Times", new ClickRequirement(10, 1), 0.02);
-        AchievementHandler.addAchievement("Clcik 2", "Click 100 Times", new ClickRequirement(100, 1), 0.05);
+        AchievementHandler.addAchievement("Click 2", "Click 100 Times", new ClickRequirement(100, 1), 0.05);
         AchievementHandler.addAchievement("Click 3", "Click 1000 Times", new ClickRequirement(1000, 1), 0.10);
         AchievementHandler.addAchievement("Click 4", "Click 10000 Times", new ClickRequirement(10000, 1), 0.25);
 
