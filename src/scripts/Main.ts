@@ -4,7 +4,7 @@
  * Start the game when all html elements are loaded.
  */
 let player;
-const debug = true;
+const debug = false;
 let game;
 
 document.addEventListener("DOMContentLoaded", function (event) {
