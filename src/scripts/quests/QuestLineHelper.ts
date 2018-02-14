@@ -4,7 +4,11 @@ class QuestLineHelper {
     public static createTutorial() {
         this.tutorial = new QuestLine("Tutorial Quests", "A short set of quests to get you going");
 
-        //dealDamageQuest?
+        //Defeat Starter
+        let defeatStarter = new DefeatPokemonsQuest(1,1);
+        defeatStarter.pointsReward = 10;
+        defeatStarter.description = "Defeat the pokemon. Click to deal damage";
+        this.tutorial.addQuest(defeatStarter);
 
         //Capture 1 pokemon
         let captureOne = new CapturePokemonsQuest(1);
