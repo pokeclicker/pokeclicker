@@ -34,6 +34,6 @@ class QuestLine {
 
     beginQuest(index: number) {
         let quest = this.quests()[index];
-        quest.initial(quest.questFocus);
+        quest.initial(quest.questFocus());
     }
 }
