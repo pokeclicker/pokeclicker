@@ -11,9 +11,10 @@ abstract class Quest {
     questFocus: KnockoutObservable<any>;
     initial: KnockoutObservable<any>;
     notified: boolean;
-    autocomplete: boolean;
+    autoComplete: boolean;
+    autoCompleter: KnockoutSubscription;
 
-    constructor(amount: number, pointsReward: number, autocomplete: boolean = false) {
+    constructor(amount: number, pointsReward: number) {
         this.amount = amount;
         let randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
         this.pointsReward = Math.ceil(pointsReward * randomPointBonus);
@@ -21,7 +22,6 @@ abstract class Quest {
         this.claimed = ko.observable(false);
         this.initial = ko.observable(null);
         this.notified = false;
-        this.autocomplete=autocomplete
     }
 
     claimReward() {
@@ -78,11 +78,8 @@ abstract class Quest {
         }, this);
         this.isCompleted = ko.computed(function() {
             let completed = this.progress() == 1;
-            if (!this.autocomplete && completed && !this.notified) {
+            if (!this.autoComplete && completed && !this.notified) {
                 Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success)
-            }
-            if (this.autocomplete && !this.claimed) {
-                this.claimReward()
             }
             return completed
         }, this);
@@ -90,6 +87,17 @@ abstract class Quest {
 
     complete() {
         this.initial(this.questFocus() - this.amount);
+    }
+
+    createAutoCompleter() {
+        this.autoComplete = true;
+        this.autoCompleter = this.isCompleted.subscribe(() => {
+            if (this.isCompleted()) {
+                this.claimReward();
+                Notifier.notify(`You have completed your quest and gained ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success)
+                this.autoCompleter.dispose();
+            }
+        })
     }
 
     inProgress() {

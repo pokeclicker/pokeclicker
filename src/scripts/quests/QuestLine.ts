@@ -28,7 +28,7 @@ class QuestLine {
     addQuest(quest: Quest) {
         this.totalQuests++;
         quest.index = this.totalQuests;
-        quest.autocomplete = true;
+        quest.createAutoCompleter();
         this.quests.push(quest);
     }
 
@@ -43,6 +43,7 @@ class QuestLine {
         if (typeof state != "undefined") {
             console.log(`beginning at ${index}`)
             for (let i=0; i<index; i++) {
+                this.quests()[i].autoCompleter.dispose();
                 this.quests()[i].complete();
             }
             this.resumeQuest(index, state);
