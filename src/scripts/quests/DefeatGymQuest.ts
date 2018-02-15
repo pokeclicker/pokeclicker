@@ -28,7 +28,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     private static calcReward(gymTown: string, amount: number): number {
         let gym = gymList[gymTown];
-        let playerDamage = player.pokemonAttackObservable();
+        let playerDamage =  player.pokemonAttackObservable();
         let attacksToWin = 0;
         for (let pokemon of gym.pokemons) {
             attacksToWin += Math.ceil( Math.min( 4, pokemon.maxHealth / Math.max(1, playerDamage) ) );
