@@ -210,6 +210,7 @@ class Player {
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
     }
+
     public statistics: Statistics;
 
     public completedQuestList: Array<KnockoutObservable<boolean>>;
@@ -713,7 +714,7 @@ class Player {
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
             let multiplier = 1;
-            if (this.region > 0 && GameHelper.isGen1(pokemon.id)) {
+            if (this.region !== GameHelper.getRegion(pokemon.id)) {
                 multiplier = 0.2
             }
             if (!pokemon.breeding()) {
