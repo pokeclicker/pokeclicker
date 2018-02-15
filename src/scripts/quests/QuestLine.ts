@@ -35,5 +35,24 @@ class QuestLine {
     beginQuest(index: number) {
         let quest = this.quests()[index];
         quest.initial(quest.questFocus());
+        player.tutorialProgress(index);
+        player.tutorialState = quest.initial();
+    }
+
+    resumeAt(index: number, state) {
+        if (typeof state != "undefined") {
+            console.log(`beginning at ${index}`)
+            for (let i=0; i<index; i++) {
+                this.quests()[i].complete();
+            }
+            this.resumeQuest(index, state);
+        } else {
+            this.beginQuest(0);
+        }
+    }
+
+    private resumeQuest(index: number, initial) {
+        let quest = this.quests()[index];
+        quest.initial(initial);
     }
 }

@@ -88,7 +88,9 @@ abstract class Quest {
         }, this);
     }
 
-
+    complete() {
+        this.initial(this.questFocus() - this.amount);
+    }
 
     inProgress() {
         return ko.computed(() => {

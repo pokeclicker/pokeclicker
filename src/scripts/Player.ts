@@ -144,6 +144,9 @@ class Player {
         this.plotList = Save.initializePlots(savedPlayer.plotList);
         this.highestRegion = savedPlayer.highestRegion || 0;
 
+        this.tutorialProgress = ko.observable(savedPlayer.tutorialProgress || 0);
+        this.tutorialState = savedPlayer.tutorialState;
+
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -212,6 +215,9 @@ class Player {
     public plotList: KnockoutObservable<Plot>[];
     public farmPoints: KnockoutObservable<number>;
     public berryList: KnockoutObservable<number>[];
+
+    public tutorialProgress: KnockoutObservable<number>;
+    public tutorialState: any;
 
     private highestRegion: GameConstants.Region;
 
@@ -926,6 +932,8 @@ class Player {
             "plotList",
             "berryList",
             "highestRegion",
+            "tutorialProgress",
+            "tutorialState",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
