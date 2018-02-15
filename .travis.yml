@@ -6,6 +6,7 @@ cache:
     - node_modules
 before_install:
 - chmod a+x ./install.sh
+- chmod a+x ./testDebug.sh
 install:
 - ./install.sh
 before_script:
