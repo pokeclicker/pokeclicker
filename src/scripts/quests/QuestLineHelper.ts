@@ -29,6 +29,9 @@ class QuestLineHelper {
         this.tutorial.addQuest(pewter)
 
         //Buy pokeballs
+        let buyPokeballs = new BuyPokeballsQuest(50,GameConstants.Pokeball.Pokeball,50);
+        buyPokeballs.description = "Buy 50 pokeballs. You can find these in the Pewter City Shop."
+        this.tutorial.addQuest(buyPokeballs);
 
         //Kill 10 on route 3
         let routeThree = new DefeatPokemonsQuest(3, 10);
