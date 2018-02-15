@@ -420,7 +420,7 @@ class Player {
         OakItemRunner.use("Amulet Coin");
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
-        this._money(Math.floor(this._money() + money * oakItemBonus));
+        this._money(Math.floor(this._money() + money * oakItemBonus * (1 + AchievementHandler.achievementBonus()) ));
         GameHelper.incrementObservable(this.statistics.totalMoney, money);
     }
 
@@ -458,7 +458,7 @@ class Player {
         // TODO add exp multipliers
         let trainerBonus = trainer ? 1.5 : 1;
         let oakItemBonus = OakItemRunner.isActive("Exp Share") ? 1 + (OakItemRunner.calculateBonus("Exp Share") / 100) : 1;
-        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus / 9);
+        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9 );
 
         for (let pokemon of this._caughtPokemonList()) {
             if (pokemon.levelObservable() < (this.gymBadges.length + 2) * 10) {
