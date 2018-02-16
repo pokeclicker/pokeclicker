@@ -1,5 +1,7 @@
 class QuestLineHelper {
     public static tutorial: QuestLine;
+    public static tutorialTracker: KnockoutSubscription;
+    public static tutorialCompleter: KnockoutSubscription;
 
     public static createTutorial() {
         this.tutorial = new QuestLine("Tutorial Quests", "A short set of quests to get you going");
@@ -30,6 +32,7 @@ class QuestLineHelper {
 
         //Buy pokeballs
         let buyPokeballs = new BuyPokeballsQuest(50,GameConstants.Pokeball.Pokeball,50);
+        buyPokeballs.pointsReward = 50;
         buyPokeballs.description = "Buy 50 pokeballs. You can find these in the Pewter City Shop."
         this.tutorial.addQuest(buyPokeballs);
 
@@ -37,5 +40,18 @@ class QuestLineHelper {
         let routeThree = new DefeatPokemonsQuest(3, 10);
         routeThree.pointsReward = 100;
         this.tutorial.addQuest(routeThree);
+
+        this.tutorialTracker = this.tutorial.curQuestInitial.subscribe((newInitial)=>{
+            player.tutorialProgress(QuestLineHelper.tutorial.curQuest());
+            player.tutorialState = newInitial;
+        })
+
+        this.tutorialCompleter = this.tutorial.curQuest.subscribe((quest)=>{
+            if (quest == QuestLineHelper.tutorial.totalQuests) {
+                QuestLineHelper.tutorialTracker.dispose();
+                player.tutorialState = null;
+                player.tutorialProgress(quest);
+            }
+        })
     }
 }

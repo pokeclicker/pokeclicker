@@ -3,6 +3,7 @@ class QuestLine {
     description: string;
     quests: KnockoutObservableArray<Quest>;
     curQuest: KnockoutComputed<number>;
+    curQuestInitial: KnockoutObservable<number>;
     totalQuests: number;
 
     autoBegin: KnockoutSubscription;
@@ -17,10 +18,12 @@ class QuestLine {
             return this.quests().map((quest) => {return +quest.isCompleted()})
                                 .reduce( ( acc, iscompleted) => {return acc + iscompleted},0);
         });
+        this.curQuestInitial = ko.observable();
+        this.curQuestInitial.equalityComparer = () => {return false} //Always update subscriptions, even if same data pushed in
 
         this.autoBegin = this.curQuest.subscribe(() => {
             if (this.curQuest() < this.totalQuests) {
-                this.beginQuest(this.curQuest());
+                setTimeout(() => {this.beginQuest(this.curQuest())},2000);
             }
         })
     }
@@ -32,11 +35,13 @@ class QuestLine {
         this.quests.push(quest);
     }
 
-    beginQuest(index: number) {
+    beginQuest(index: number, initial?) {
         let quest = this.quests()[index];
-        quest.initial(quest.questFocus());
-        player.tutorialProgress(index);
-        player.tutorialState = quest.initial();
+        if (typeof initial == "undefined") {
+            initial = quest.questFocus();
+        }
+        quest.initial(initial);
+        this.curQuestInitial(quest.initial());
     }
 
     resumeAt(index: number, state) {
@@ -46,14 +51,11 @@ class QuestLine {
                 this.quests()[i].autoCompleter.dispose();
                 this.quests()[i].complete();
             }
-            this.resumeQuest(index, state);
+            if (index < this.totalQuests) {
+                this.beginQuest(index, state);
+            }
         } else {
             this.beginQuest(0);
         }
-    }
-
-    private resumeQuest(index: number, initial) {
-        let quest = this.quests()[index];
-        quest.initial(initial);
     }
 }
