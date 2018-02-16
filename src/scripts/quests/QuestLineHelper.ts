@@ -7,7 +7,8 @@ class QuestLineHelper {
         this.tutorial = new QuestLine("Tutorial Quests", "A short set of quests to get you going");
 
         //Defeat Starter
-        let defeatStarter = new DefeatPokemonsQuest(1,1);
+        let defeatStarter = new CapturePokemonsQuest(1); 
+        //Capture pokemon because start sequence resets route 1 kills to 0, making this quest think it is incomplete
         defeatStarter.pointsReward = 10;
         defeatStarter.description = "Defeat the pokemon. Click to deal damage";
         this.tutorial.addQuest(defeatStarter);

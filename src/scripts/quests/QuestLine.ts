@@ -3,6 +3,7 @@ class QuestLine {
     description: string;
     quests: KnockoutObservableArray<Quest>;
     curQuest: KnockoutComputed<number>;
+    curQuestObject: KnockoutComputed<any>;
     curQuestInitial: KnockoutObservable<number>;
     totalQuests: number;
 
@@ -21,9 +22,19 @@ class QuestLine {
         this.curQuestInitial = ko.observable();
         this.curQuestInitial.equalityComparer = () => {return false} //Always update subscriptions, even if same data pushed in
 
-        this.autoBegin = this.curQuest.subscribe(() => {
+        this.curQuestObject = ko.computed(() => {
+            this.quests(); //register dependency on this computed so it will update
+            if (this.totalQuests > 0 && this.curQuest() < this.totalQuests) {
+                return this.quests()[this.curQuest()]
+            } else {
+                return {progress: ()=>{return 0}, progressText: ()=>{return ""}}
+            }
+        })
+
+        this.autoBegin = this.curQuest.subscribe((num) => {
+            console.log("curQuest is now",num)
             if (this.curQuest() < this.totalQuests) {
-                setTimeout(() => {this.beginQuest(this.curQuest())},2000);
+                setTimeout(() => {console.log("moving on to",this.curQuest());this.beginQuest(this.curQuest())},2000);
             }
         })
     }
@@ -31,6 +42,7 @@ class QuestLine {
     addQuest(quest: Quest) {
         this.totalQuests++;
         quest.index = this.totalQuests;
+        quest.inQuestLine = true;
         quest.createAutoCompleter();
         this.quests.push(quest);
     }

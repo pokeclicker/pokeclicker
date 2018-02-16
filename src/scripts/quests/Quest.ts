@@ -13,6 +13,7 @@ abstract class Quest {
     notified: boolean;
     autoComplete: boolean;
     autoCompleter: KnockoutSubscription;
+    inQuestLine: boolean
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -30,7 +31,7 @@ abstract class Quest {
             console.log(`Gained ${this.pointsReward} quest points and ${this.xpReward} xp points`);
             this.claimed(true);
             player.currentQuest(null);
-            player.completedQuestList[this.index](true);
+            if (!this.inQuestLine) player.completedQuestList[this.index](true);
             let oldLevel = player.questLevel;
             player.questXP += this.xpReward;
             QuestHelper.checkCompletedSet();
