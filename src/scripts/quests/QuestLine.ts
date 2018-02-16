@@ -25,16 +25,15 @@ class QuestLine {
         this.curQuestObject = ko.computed(() => {
             this.quests(); //register dependency on this computed so it will update
             if (this.totalQuests > 0 && this.curQuest() < this.totalQuests) {
-                return this.quests()[this.curQuest()]
+                return this.quests()[this.curQuest()];
             } else {
                 return {progress: ()=>{return 0}, progressText: ()=>{return ""}}
             }
-        })
+        });
 
         this.autoBegin = this.curQuest.subscribe((num) => {
-            console.log("curQuest is now",num)
             if (this.curQuest() < this.totalQuests) {
-                setTimeout(() => {console.log("moving on to",this.curQuest());this.beginQuest(this.curQuest())},2000);
+                setTimeout(() => {this.beginQuest(this.curQuest())},2000);
             }
         })
     }
@@ -58,7 +57,6 @@ class QuestLine {
 
     resumeAt(index: number, state) {
         if (typeof state != "undefined") {
-            console.log(`beginning at ${index}`)
             for (let i=0; i<index; i++) {
                 this.quests()[i].autoCompleter.dispose();
                 this.quests()[i].complete();

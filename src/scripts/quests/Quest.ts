@@ -80,9 +80,9 @@ abstract class Quest {
         this.isCompleted = ko.computed(function() {
             let completed = this.progress() == 1;
             if (!this.autoComplete && completed && !this.notified) {
-                Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success)
+                Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);
             }
-            return completed
+            return completed;
         }, this);
     }
 
