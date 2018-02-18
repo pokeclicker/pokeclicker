@@ -18,8 +18,10 @@ namespace GameConstants {
     export const ACHIEVEMENT_TICK = 1000;
     export const MIN_LOAD_TIME = 500;
 
-    export const AMOUNT_OF_POKEMONS = 151;
-    export const AMOUNT_OF_BADGES = 8;
+    export const AMOUNT_OF_POKEMONS = 251;
+    export const AMOUNT_OF_POKEMONS_GEN1 = 151;
+    export const AMOUNT_OF_POKEMONS_GEN2 = 251;
+    export const AMOUNT_OF_BADGES = 16;
 
     export const ROAMING_MIN_CHANCE = 8192;
     export const ROAMING_MAX_CHANCE = 4096;

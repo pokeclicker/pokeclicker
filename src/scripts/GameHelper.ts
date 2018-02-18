@@ -5,22 +5,22 @@ class GameHelper {
     public static counter = 0;
     public static currentTime: KnockoutObservable<Date> = ko.observable(new Date());
     public static tomorrow: Date = GameHelper.getTomorrow();
-    public static msUntilTomorrow: KnockoutComputed<number> = ko.computed(function() {
+    public static msUntilTomorrow: KnockoutComputed<number> = ko.computed(function () {
         return Number(GameHelper.tomorrow) - Number(GameHelper.currentTime());
     });
-    public static formattedTimeUntilTomorrow: KnockoutComputed<string> = ko.computed(function() {
+    public static formattedTimeUntilTomorrow: KnockoutComputed<string> = ko.computed(function () {
         let milliseconds = GameHelper.msUntilTomorrow();
-        let hours = Math.floor( milliseconds / GameHelper.MS_IN_HOUR );
+        let hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
         milliseconds -= hours * GameHelper.MS_IN_HOUR;
-        let minutes = Math.floor( milliseconds / GameHelper.MS_IN_MIN );
+        let minutes = Math.floor(milliseconds / GameHelper.MS_IN_MIN);
         return `${hours}:${GameHelper.twoDigitNumber(minutes)}`;
     });
 
-    public static formattedLetterTimeUntilTomorrow: KnockoutComputed<string> = ko.computed(function() {
+    public static formattedLetterTimeUntilTomorrow: KnockoutComputed<string> = ko.computed(function () {
         let milliseconds = GameHelper.msUntilTomorrow();
-        let hours = Math.floor( milliseconds / GameHelper.MS_IN_HOUR );
+        let hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
         milliseconds -= hours * GameHelper.MS_IN_HOUR;
-        let minutes = Math.floor( milliseconds / GameHelper.MS_IN_MIN );
+        let minutes = Math.floor(milliseconds / GameHelper.MS_IN_MIN);
         return `${hours}h${GameHelper.twoDigitNumber(minutes)}m`;
     });
 
@@ -63,6 +63,12 @@ class GameHelper {
                 return i;
             }
         }
+    }
+
+    public static getRegion(id): GameConstants.Region {
+        if (id <= GameConstants.AMOUNT_OF_POKEMONS_GEN1) return GameConstants.Region.kanto;
+        if (id <= GameConstants.AMOUNT_OF_POKEMONS_GEN2) return GameConstants.Region.johto;
+        return GameConstants.Region.hoenn;
     }
 
 }
