@@ -6,9 +6,11 @@ cache:
     - node_modules
 before_install:
 - chmod a+x ./install.sh
+- chmod a+x ./testDebug.sh
 install:
 - ./install.sh
 before_script:
   - npm install -g gulp-cli
 script:
 - gulp build
+- ./testDebug.sh
