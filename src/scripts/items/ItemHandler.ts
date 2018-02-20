@@ -29,6 +29,7 @@ class ItemHandler {
         let amount = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
         if(amount == 0){
+            Notifier.notify("You don't have any stones left...", GameConstants.NotificationOption.danger);
             return;
         }
 
