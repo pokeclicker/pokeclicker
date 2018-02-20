@@ -11,6 +11,9 @@ abstract class Quest {
     questFocus: KnockoutObservable<any>;
     initial: KnockoutObservable<any>;
     notified: boolean;
+    autoComplete: boolean;
+    autoCompleter: KnockoutSubscription;
+    inQuestLine: boolean
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -28,7 +31,7 @@ abstract class Quest {
             console.log(`Gained ${this.pointsReward} quest points and ${this.xpReward} xp points`);
             this.claimed(true);
             player.currentQuest(null);
-            player.completedQuestList[this.index](true);
+            if (!this.inQuestLine) player.completedQuestList[this.index](true);
             let oldLevel = player.questLevel;
             player.questXP += this.xpReward;
             QuestHelper.checkCompletedSet();
@@ -76,14 +79,27 @@ abstract class Quest {
         }, this);
         this.isCompleted = ko.computed(function() {
             let completed = this.progress() == 1;
-            if (completed && !this.notified) {
-                Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success)
+            if (!this.autoComplete && completed && !this.notified) {
+                Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);
             }
-            return completed
+            return completed;
         }, this);
     }
 
+    complete() {
+        this.initial(this.questFocus() - this.amount);
+    }
 
+    createAutoCompleter() {
+        this.autoComplete = true;
+        this.autoCompleter = this.isCompleted.subscribe(() => {
+            if (this.isCompleted()) {
+                this.claimReward();
+                Notifier.notify(`You have completed your quest and gained ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success)
+                this.autoCompleter.dispose();
+            }
+        })
+    }
 
     inProgress() {
         return ko.computed(() => {
