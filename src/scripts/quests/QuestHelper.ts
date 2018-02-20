@@ -83,7 +83,7 @@ class QuestHelper{
     public static refreshQuests(free: boolean = false) {
         if (free || QuestHelper.canAffordRefresh()) {
             if (!free) {
-                player._money(player._money() - QuestHelper.getRefreshCost());
+                player.payMoney(QuestHelper.getRefreshCost())
             }
             player.questRefreshes++;
             QuestHelper.quitQuest();
