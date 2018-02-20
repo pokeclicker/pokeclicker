@@ -35,6 +35,9 @@ class OakItemRunner {
         for (let i = 0; i < player._oakItemsEquipped.length; i++) {
             OakItemRunner.activateOakItem(OakItemRunner.getOakItemByName(player._oakItemsEquipped[i]).id);
         }
+        for(let i = 0; i<OakItemRunner.oakItemList.length; i++){
+            OakItemRunner.oakItemList[i]().calculateLevel();
+        }
     }
 
     public static hover(name: string) {
