@@ -29,26 +29,27 @@ class ShopHandler {
 
         let multiple = this.amount() > 1 ? "s" : "";
 
-        if (item.currency == GameConstants.Currency.money) {
-            if (player.hasMoney(item.totalPrice())) {
-                player.payMoney(item.totalPrice());
-                item.buy(this.amount());
-                item.increasePriceMultiplier(this.amount());
-                Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
-            } else {
-                Notifier.notify("You don't have enough money to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
+        if (player.hasCurrency(item.totalPrice(), item.currency)) {
+            player.payCurrency(item.totalPrice(), item.currency);
+            item.buy(this.amount());
+            item.increasePriceMultiplier(this.amount());
+            Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
+        } else {
+            let curr = "currency";
+            switch (item.currency) {
+                case GameConstants.Currency.money:
+                    curr = "money";
+                    break;
+                case GameConstants.Currency.questPoint:
+                    curr = "quest points";
+                    break;
+                case GameConstants.Currency.dungeontoken:
+                    curr = "dungeon tokens";
+                    break;
             }
-        } else if (item.currency == GameConstants.Currency.questPoint) {
-            if (player.hasQuestPoints(item.totalPrice())) {
-                player.payQuestPoints(item.totalPrice());
-                item.buy(this.amount());
-                item.increasePriceMultiplier(this.amount());
-                ShopHandler.showShop(player.town().shop());
-                Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
-            } else {
-                Notifier.notify("You don't have enough quest points to buy " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.danger)
-            }
+            Notifier.notify(`You don't have enough ${curr} to buy ${this.amount()} ${item.name() + multiple}`, GameConstants.NotificationOption.danger)
         }
+
         ShopHandler.resetAmount();
 
     }
