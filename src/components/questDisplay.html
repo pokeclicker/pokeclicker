@@ -40,12 +40,12 @@
             </div>
         </div>
     </div>
-    <div data-bind='if: (player.tutorialProgress() < 6) && (QuestLineHelper.tutorial.totalQuests > 0) && (QuestLineHelper.tutorial.curQuest() < 6)'>
+    <div data-bind='if: (!player.tutorialComplete()) && (QuestLineHelper.tutorial.totalQuests > 0) && (QuestLineHelper.tutorial.curQuest() < QuestLineHelper.tutorial.totalQuests)'>
         <p data-bind='text: QuestLineHelper.tutorial.curQuestObject().description'></p>
         <div class="row justify-content-center">
             <div class="col-10">
                 <div class="progress"
-                     data-bind='tooltip: {title: QuestLineHelper.tutorial.curQuestObject().progressText(), trigger: "hover"}'>
+                     data-bind='tooltip: {title: ko.pureComputed(function(){return QuestLineHelper.tutorial.curQuestObject().progressText()}), trigger: "hover"}'>
                     <div class="progress-bar bg-success" role="progressbar"
                          data-bind="attr:{ style: 'width:' + (QuestLineHelper.tutorial.curQuestObject().progress() * 100) + '%' }"
                          aria-valuemin="0" aria-valuemax="100">

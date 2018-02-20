@@ -180,7 +180,7 @@ class Game {
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());
         QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
         QuestHelper.loadCurrentQuest(player.currentQuest());
-        if (player.tutorialProgress() < 6) {
+        if (!player.tutorialComplete()) {
             QuestLineHelper.createTutorial();
             QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
         }

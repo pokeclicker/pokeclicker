@@ -146,6 +146,7 @@ class Player {
 
         this.tutorialProgress = ko.observable(savedPlayer.tutorialProgress || 0);
         this.tutorialState = savedPlayer.tutorialState;
+        this.tutorialComplete = ko.observable(!!savedPlayer.tutorialComplete);
 
         //TODO remove before deployment
         if (!debug) {
@@ -218,6 +219,7 @@ class Player {
 
     public tutorialProgress: KnockoutObservable<number>;
     public tutorialState: any;
+    public tutorialComplete: KnockoutObservable<boolean>;
 
     private highestRegion: GameConstants.Region;
 
@@ -934,6 +936,7 @@ class Player {
             "highestRegion",
             "tutorialProgress",
             "tutorialState",
+            "tutorialComplete",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

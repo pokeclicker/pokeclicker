@@ -52,6 +52,7 @@ class QuestLineHelper {
                 QuestLineHelper.tutorialTracker.dispose();
                 player.tutorialState = null;
                 player.tutorialProgress(quest);
+                player.tutorialComplete(true);
             }
         })
     }
