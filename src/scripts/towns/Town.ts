@@ -87,7 +87,7 @@ const TownList: { [name: string]: Town | PokemonLeague } = {};
 let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp","Dungeon_ticket"]);
 TownList["Pewter City"] = new Town("Pewter City", [2], PewterCityShop);
 
-let CeruleanCityShop = new Shop(["Water_stone", "xAttack"]);
+let CeruleanCityShop = new Shop(["Water_stone", "xAttack", "Water_egg"]);
 TownList["Cerulean City"] = new Town("Cerulean City", [4], CeruleanCityShop, dungeonList["Cerulean Cave"]);
 
 let VermillionCityShop = new Shop(["Thunder_stone", "xExp", "Electric_egg"]);
@@ -102,7 +102,7 @@ TownList["Saffron City"] = new Town("Saffron City", [5], SaffronCityShop);
 let FuchsiaCityShop = new Shop(["Ultraball", "Trade_stone", "xExp", "Dragon_egg"]);
 TownList["Fuchsia City"] = new Town("Fuchsia City", [18], FuchsiaCityShop);
 
-let CinnabarIslandShop = new Shop(["Fire_stone", "Fire_egg"]);
+let CinnabarIslandShop = new Shop(["Fire_stone", "Fire_egg", "SmallRestore"]);
 TownList["Cinnabar Island"] = new Town("Cinnabar Island", [20], CinnabarIslandShop, dungeonList["Pokemon Mansion"]);
 
 let ViridianCityShop = new Shop(["xAttack", "xClick", "Mystery_egg"]);
@@ -130,11 +130,13 @@ TownList["New Bark Town"] = new Town("New Bark Town", []);
 
 TownList["Cherrygrove City"] = new Town("Cherrygrove City", [29]);
 
-TownList["Violet City"] = new Town("Violet City", [31], null, dungeonList["Sprout Tower"]);
+let VioletCityShop = new Shop(["MediumRestore"]);
+TownList["Violet City"] = new Town("Violet City", [31], VioletCityShop, dungeonList["Sprout Tower"]);
 
 TownList["Azalea Town"] = new Town("Azalea Town", [33], null, dungeonList["Slowpoke Well"]);
 
-TownList["Goldenrod City"] = new Town("Goldenrod City", [34]);
+let GoldenrodCityShop = new Shop(["Sun_stone"]);
+TownList["Goldenrod City"] = new Town("Goldenrod City", [34], GoldenrodCityShop);
 
 TownList["Ecruteak City"] = new Town("Ecruteak City", [37]);
 
@@ -144,7 +146,8 @@ TownList["Cianwood City"] = new Town("Cianwood City", [41]);
 
 TownList["Mahogany Town"] = new Town("Mahogany Town", [42], null, null, "Mt Mortar");
 
-TownList["Blackthorn City"] = new Town("Blackthorn City", [44], null, null, "Ice Path");
+let BlackthornCityShop = new Shop(["LargeRestore"]);
+TownList["Blackthorn City"] = new Town("Blackthorn City", [44], BlackthornCityShop, null, "Ice Path");
 
 //Johto Dungeons
 TownList["Sprout Tower"] = new DungeonTown("Sprout Tower", [31]);
