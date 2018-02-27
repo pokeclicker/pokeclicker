@@ -54,7 +54,7 @@ class Prestige {
      */
     public static buyUpgrade(upgradeId: number) {
         if(upgradeId == 0){
-
+            return;
         }
         if (this.canBuyUpgrade(upgradeId)) {
             player.prestigeUpgradesBought[upgradeId] = true;
