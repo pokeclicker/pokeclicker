@@ -120,6 +120,12 @@ namespace GameConstants {
         "Cell Battery",
     }
 
+    export enum PrestigeType {
+        "Easy" = 0,
+        "Medium",
+        "Hard"
+    }
+
     // Dungeons
     export const DUNGEON_SIZE = 5;
     export const DUNGEON_CHEST_SHOW = 2;
