@@ -38,13 +38,11 @@ class Prestige {
             }
         }
 
-        console.log(`${x},${y}`)
         let nb1 = this.upgradeLayout[GameConstants.normalize(y + 1, this.upgradeLayout.length-1)][GameConstants.normalize(x, this.upgradeLayout.length-1)];
         let nb2 = this.upgradeLayout[GameConstants.normalize(y - 1, this.upgradeLayout.length-1)][GameConstants.normalize(x, this.upgradeLayout.length-1)];
         let nb3 = this.upgradeLayout[GameConstants.normalize(y, this.upgradeLayout.length-1)][GameConstants.normalize(x + 1, this.upgradeLayout.length-1)];
         let nb4 = this.upgradeLayout[GameConstants.normalize(y, this.upgradeLayout.length-1)][GameConstants.normalize(x - 1, this.upgradeLayout.length-1)];
 
-        console.log(`${nb1}, ${nb2}, ${nb3}, ${nb4}`)
         return this.isUpgradeBought(nb1) || this.isUpgradeBought(nb2) || this.isUpgradeBought(nb3) || this.isUpgradeBought(nb4);
     }
 
