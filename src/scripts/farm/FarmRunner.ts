@@ -55,8 +55,12 @@ class FarmRunner {
     }
 
     public static harvestAll() {
+        let total = 0;
         for (let i = 0; i < player.plotList.length; i++) {
-            FarmRunner.harvest(i);
+            total += FarmRunner.harvest(i, true);
+        }
+        if (total > 0 ){
+            Notifier.notify(`You earn ${total} money from the harvest!`, GameConstants.NotificationOption.success)
         }
     }
 
@@ -93,14 +97,20 @@ class FarmRunner {
 
     }
 
-    public static harvest(plotId) {
+    public static harvest(plotId, all = false) {
         let plot = this.getPlot(plotId);
         if (plot.berry() !== null && plot.timeLeft() <= 0) {
             player.gainFarmPoints(plot.berry().farmValue);
             FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
-            player.gainMoney(plot.berry().moneyValue);
+            let money = plot.berry().moneyValue
+            player.gainMoney(money);
+            if(!all){
+                Notifier.notify(`You earn ${money} money from the harvest!`, GameConstants.NotificationOption.success)
+            }
             plot.berry(null);
+            return money;
         }
+        return 0;
     }
 
     public static gainBerryByName(berryName: string, amount: number = 1) {
