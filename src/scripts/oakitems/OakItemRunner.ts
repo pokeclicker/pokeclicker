@@ -32,8 +32,9 @@ class OakItemRunner {
     }
 
     public static loadOakItems() {
-        for (let i = 0; i < player._oakItemsEquipped.length; i++) {
-            OakItemRunner.activateOakItem(OakItemRunner.getOakItemByName(player._oakItemsEquipped[i]).id);
+        let oakItems = JSON.parse(JSON.stringify(player._oakItemsEquipped))
+        for (let i = 0; i < oakItems.length; i++) {
+            OakItemRunner.activateOakItem(OakItemRunner.getOakItemByName(oakItems[i]).id);
         }
         for(let i = 0; i<OakItemRunner.oakItemList.length; i++){
             OakItemRunner.oakItemList[i]().calculateLevel();
