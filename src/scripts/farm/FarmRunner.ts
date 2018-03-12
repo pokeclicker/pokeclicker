@@ -102,12 +102,13 @@ class FarmRunner {
         if (plot.berry() !== null && plot.timeLeft() <= 0) {
             player.gainFarmPoints(plot.berry().farmValue);
             FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
-            let money = plot.berry().moneyValue
+            let money = plot.berry().moneyValue;
             player.gainMoney(money);
             if(!all){
                 Notifier.notify(`You earn ${money} money from the harvest!`, GameConstants.NotificationOption.success)
             }
             plot.berry(null);
+            OakItemRunner.use("Sprayduck");
             return money;
         }
         return 0;
