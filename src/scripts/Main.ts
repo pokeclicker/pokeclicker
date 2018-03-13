@@ -202,13 +202,8 @@ class Game {
         });
     }
 
-    static updateMoney(previous?: number) {
-        let moneyElement = $("#playerMoney");
-        if (previous) {
-            moneyElement.prop('number', previous).animateNumber({number: player.money});
-        } else {
-            moneyElement.prop('number', moneyElement.text()).animateNumber({number: player.money});
-        }
+    static updateMoney(text: string = $("#playerMoney").text()) {
+        $("#playerMoney").prop('number', text).animateNumber({number: player.money});
     }
 
 
