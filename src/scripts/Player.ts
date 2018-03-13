@@ -448,6 +448,19 @@ class Player {
         this._itemList = value;
     }
 
+    public hasCurrency(amt: number, curr: GameConstants.Currency) : boolean {
+        switch (curr) {
+            case GameConstants.Currency.money:
+                return this.hasMoney(amt);
+            case GameConstants.Currency.questPoint:
+                return this.hasQuestPoints(amt);
+            case GameConstants.Currency.dungeontoken:
+                return this.hasDungeonTokens(amt);
+            default:
+                return false;
+        }
+    }
+
     public hasMoney(money: number) {
         return this._money() >= money;
     }
@@ -456,15 +469,47 @@ class Player {
         return this._questPoints() >= questPoints;
     }
 
-    public payQuestPoints(questPoints: number) {
-        if (this.hasQuestPoints(questPoints)) {
-            this._questPoints(Math.floor(this.questPoints - questPoints));
+    public hasDungeonTokens(tokens: number) {
+        return this._dungeonTokens() >= tokens;
+    }
+
+    public payCurrency(amt: number, curr: GameConstants.Currency) : boolean {
+        switch (curr) {
+            case GameConstants.Currency.money:
+                return this.payMoney(amt);
+            case GameConstants.Currency.questPoint:
+                return this.payQuestPoints(amt);
+            case GameConstants.Currency.dungeontoken:
+                return this.payDungeonTokens(amt);
+            default:
+                return false;
         }
     }
 
-    public payMoney(money: number) {
+    public payQuestPoints(questPoints: number) : boolean {
+        if (this.hasQuestPoints(questPoints)) {
+            this._questPoints(Math.floor(this.questPoints - questPoints));
+            return true;
+        } else {
+            return false
+        }
+    }
+
+    public payMoney(money: number) : boolean {
         if (this.hasMoney(money)) {
             this._money(Math.floor(this._money() - money));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public payDungeonTokens(tokens: number) : boolean {
+        if (this.hasDungeonTokens(tokens)) {
+            this._dungeonTokens(Math.floor(this._dungeonTokens() - tokens));
+            return true;
+        } else {
+            return false;
         }
     }
 
