@@ -93,6 +93,7 @@ class MapHelper {
             player.currentTown(townName);
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
+            Game.updateMoney(player.money);
             Game.applyRouteBindings();
         } else {
             Notifier.notify("You don't have access to that location yet.", GameConstants.NotificationOption.warning);
@@ -143,6 +144,7 @@ class MapHelper {
             player.highestRegion++;
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion]);
             player.region = player.highestRegion;
+            player.updateMoney();
         }
     }
 
