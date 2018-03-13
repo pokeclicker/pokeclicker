@@ -2,12 +2,6 @@
  * Information about the player.
  * All player variables need to be saved.
  */
-interface JQuery {
-    animateNumber(options: object): void;
-}
-
-
-// declare function animateNumber(param1: number, param2: JQuery): void;
 
 class Player {
 
@@ -447,7 +441,7 @@ class Player {
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
         let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
         this._money(this._money() + moneytogain);
-        Game.updateMoney();
+        GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
     }
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
@@ -504,7 +498,6 @@ class Player {
     public payMoney(money: number): boolean {
         if (this.hasMoney(money)) {
             this._money(Math.floor(this._money() - money));
-            Game.updateMoney()
             return true;
         } else {
             return false;

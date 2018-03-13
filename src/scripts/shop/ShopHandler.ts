@@ -15,7 +15,6 @@ class ShopHandler {
         }
 
         Game.gameState(GameConstants.GameState.shop);
-        Game.updateMoney(player.money);
     }
 
     public static setSelected(i: number) {
