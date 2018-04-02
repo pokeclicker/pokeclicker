@@ -7,6 +7,10 @@ let player;
 const debug = false;
 let game;
 
+interface JQuery {
+    animateNumber(options: object): void;
+}
+
 document.addEventListener("DOMContentLoaded", function (event) {
     Preload.load(debug).then(function () {
         OakItemRunner.initialize();
@@ -201,6 +205,11 @@ class Game {
             tooltip.css('visibility', 'hidden')
         });
     }
+
+    static updateMoney(text: string = $("#playerMoney").text()) {
+        $("#playerMoney").prop('number', text).animateNumber({number: player.money});
+    }
+
 
 }
 

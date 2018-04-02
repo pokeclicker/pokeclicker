@@ -441,7 +441,7 @@ class Player {
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
         let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
         this._money(this._money() + moneytogain);
-        GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
+        Game.updateMoney();
     }
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
@@ -498,6 +498,7 @@ class Player {
     public payMoney(money: number): boolean {
         if (this.hasMoney(money)) {
             this._money(Math.floor(this._money() - money));
+            Game.updateMoney();
             return true;
         } else {
             return false;
