@@ -17,7 +17,7 @@ aria-labelledby="saveModalLabel">
                            <button class="btn btn-info" onClick=Save.download()>Download Save</button>
                            <hr>
 
-                           <input type="file" id="input" accept=".txt"
+                           <input type="file" id="input" accept=".txt" style="display:none;"
                                   onchange=Save.loadFromFile(this.files[0])>
                                   <label for="input" class="btn btn-info">Import Save</label>
                                   <hr>
