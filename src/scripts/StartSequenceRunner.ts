@@ -39,7 +39,9 @@ class StartSequenceRunner {
         Game.gameState(GameConstants.GameState.paused);
         $('#starterCaughtModal').modal('show');
         $('#pokeballSelector').css('display', 'block');
-        $('#pokemonListContainer').css('display', 'block')
+        $('#pokemonListContainer').css('display', 'block');
+        $('#oakItemsContainer').css('display','block');
+        $('#questDisplayContainer').css('display','block');
     }
 }
 
