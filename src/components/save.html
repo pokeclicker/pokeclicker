@@ -4,29 +4,29 @@ aria-labelledby="saveModalLabel">
    <div class="modal-content">
        <div class="modal-body">
            <div class="tabbable">
-               <ul class="nav nav-tabs">
-                   <li class="nav-item"><a class="nav-link active" href="#saveTab1" data-toggle="tab">Export
-                       Save</a></li>
-                   <li class="nav-item"><a class="nav-link" href="#saveTab2" data-toggle="tab">Import Save</a></li>
-                   <li class="nav-item"><a class="nav-link" href="#saveTab3" data-toggle="tab">Converter</a></li>
-                   <li class="nav-item"><a class="nav-link" href="#saveTab4" data-toggle="tab">Reset</a></li>
+               <ul class="nav nav-tabs nav-fill">
+                   <li class="nav-item"><a class="nav-link active" href="#saveTab1" data-toggle="tab">Save</a></li>
+                   <li class="nav-item"><a class="nav-link" href="#saveTab2" data-toggle="tab">Converter</a></li>
+
                </ul>
                <div class="tab-content">
                    <div class="tab-pane active" id="saveTab1">
                        <div class="container">
                            <br>
-                           <button class="btn btn-info" onClick=Save.download()>Download save</button>
+
+                           <button class="btn btn-info" onClick=Save.download()>Download Save</button>
+                           <hr>
+
+                           <input type="file" id="input" accept=".txt"
+                                  onchange=Save.loadFromFile(this.files[0])>
+                                  <label for="input" class="btn btn-info">Import Save</label>
+                                  <hr>
+                                  <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
+                                    savefile</h3>
+                                <button class="btn btn-danger" onClick="Save.reset()">Reset</button>
                        </div>
                    </div>
                    <div class="tab-pane" id="saveTab2">
-                       <div class="container">
-                           <br>
-                           <input type="file" id="input" accept=".txt"
-                                  onchange=Save.loadFromFile(this.files[0])>
-                                  <label for="input" class="btn btn-info">Choose File</label>
-                       </div>
-                   </div>
-                   <div class="tab-pane" id="saveTab3">
                        <div class="container">
                            <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
                            <textarea id="convertTextArea" class="saveTextArea"></textarea>
@@ -34,11 +34,6 @@ aria-labelledby="saveModalLabel">
                                Convert
                            </button>
                        </div>
-                   </div>
-                   <div class="tab-pane" id="saveTab4">
-                       <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
-                           savefile</h3>
-                       <button class="btn btn-danger" onClick="Save.reset()">Reset</button>
                    </div>
                </div>
            </div>
