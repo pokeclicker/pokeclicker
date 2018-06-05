@@ -28,19 +28,19 @@ abstract class Quest {
     claimReward() {
         if (this.isCompleted()) {
             player.gainQuestPoints(this.pointsReward);
-            console.log(`Gained ${this.pointsReward} quest points and ${this.xpReward} xp points`);
             this.claimed(true);
             player.currentQuest(null);
             if (!this.inQuestLine) player.completedQuestList[this.index](true);
             let oldLevel = player.questLevel;
             player.questXP += this.xpReward;
+            Notifier.notify(`You have completed your quest and claimed ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);
             QuestHelper.checkCompletedSet();
             if (oldLevel < player.questLevel) {
                 Notifier.notify("Your quest level has increased!", GameConstants.NotificationOption.success);
                 QuestHelper.refreshQuests(true);
             }
         } else {
-            console.log("Quest not yet completed");
+            Notifier.notify("Quest not yet completed", GameConstants.NotificationOption.warning);
         }
     }
 
@@ -52,7 +52,7 @@ abstract class Quest {
                 initial: this.initial()
             });
         } else {
-            console.log("You have already started a quest");
+            Notifier.notify("You have already started a quest", GameConstants.NotificationOption.warning);
         }
     }
 
@@ -104,7 +104,6 @@ abstract class Quest {
         this.autoCompleter = this.isCompleted.subscribe(() => {
             if (this.isCompleted()) {
                 this.claimReward();
-                Notifier.notify(`You have completed your quest and gained ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success)
                 this.autoCompleter.dispose();
             }
         })
