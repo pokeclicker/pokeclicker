@@ -217,7 +217,7 @@ class Game {
         }else{
             pos = {"top":-200, "left":0};
         }
-        
+
         let left= ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
         let place = money.toString().length;
         let multi = 1;
@@ -227,8 +227,8 @@ class Game {
         let ani = '<p class="moneyanimation" style="z-index:50;position:fixed;left:'+left+'px;top:'+pos.top+'px;">+'+money+'</p>';
         $(ani).prependTo('body').animate({
             top: -100,
-            opacity: 0 
-        }, 250 * Math.log(money),"linear",
+            opacity: 0
+        }, 250 * Math.log(money) + 50,"linear",
             function() {
         $(this).remove();
         });
