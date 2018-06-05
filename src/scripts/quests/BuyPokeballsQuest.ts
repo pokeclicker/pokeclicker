@@ -5,6 +5,5 @@ class BuyPokeballsQuest extends Quest implements QuestInterface {
         super(amount, reward);
         this.description = `Buy ${amount} Pokeballs.`;
         this.questFocus = player.statistics.pokeballsBought[ball];
-        this.createProgressObservables();
     }
 }

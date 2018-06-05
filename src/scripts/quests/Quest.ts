@@ -8,7 +8,7 @@ abstract class Quest {
     progressText: KnockoutComputed<string>;
     isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
-    questFocus: KnockoutObservable<any>;
+    private _questFocus: KnockoutObservable<any>;
     initial: KnockoutObservable<any>;
     notified: boolean;
     autoComplete: boolean;
@@ -59,6 +59,15 @@ abstract class Quest {
     quit() {
         this.initial(null);
         player.currentQuest(null);
+    }
+
+    set questFocus(value: KnockoutObservable<any>) {
+        this._questFocus = value;
+        this.createProgressObservables();
+    }
+
+    get questFocus() {
+        return this._questFocus
     }
 
     protected createProgressObservables() {

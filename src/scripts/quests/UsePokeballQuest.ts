@@ -6,6 +6,5 @@ class UsePokeballQuest extends Quest implements QuestInterface {
         super(amount, Math.ceil(amount * (pokeball + 1) * (pokeball + 1) * GameConstants.DEFEAT_POKEMONS_BASE_REWARD));
         this.description = `Use ${amount} ${GameConstants.Pokeball[pokeball]}s.`;
         this.questFocus = player.statistics.pokeballsUsed[pokeball];
-        this.createProgressObservables();
     }
 }
