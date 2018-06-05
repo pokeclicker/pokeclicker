@@ -443,6 +443,7 @@ class Player {
         this._money(this._money() + moneytogain);
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
         Game.updateMoney();
+        Game.animateMoney(moneytogain);
     }
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {

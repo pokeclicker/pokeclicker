@@ -207,9 +207,30 @@ class Game {
     }
 
     static updateMoney(text: string = $("#playerMoney").text()) {
-        $("#playerMoney").prop('number', text).animateNumber({number: player.money});
+        $("#playerMoney").prop('number', player.money);
     }
 
+    static animateMoney(money){
+        let pos = $('#playerMoney').offset();
+        let left= ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
+        var place = money.toString().length;
+        var multi = 1;
+        for(var i = 0; i < place; i++){
+            multi *= 10;
+        }
+        var ani = '<p class="moneyanimation" style="z-index:50;position:fixed;left:'+left+'px;top:'+pos.top+'px;">+'+money+'</p>';
+        $(ani).prependTo('body').animate({
+            top: -100,
+            opacity: 0 
+        }, 250 * Math.log(money),"linear",
+            function() {
+        $(this).remove();
+        });
+    }
+
+    static map (num, in_min, in_max, out_min, out_max) {
+        return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+      }
 
 }
 
