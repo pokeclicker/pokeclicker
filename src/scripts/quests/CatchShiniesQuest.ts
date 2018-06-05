@@ -5,6 +5,5 @@ class CatchShiniesQuest extends Quest implements QuestInterface {
         super(amount, Math.ceil(amount * GameConstants.SHINY_BASE_REWARD));
         this.description = `Catch ${amount} shiny pokemon.`;
         this.questFocus = player._shinyCatches;
-        this.createProgressObservables();
     }
 }
