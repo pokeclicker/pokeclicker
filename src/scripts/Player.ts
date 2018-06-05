@@ -944,6 +944,12 @@ class Player {
         this._questPoints(value);
     }
 
+    public gainQuestPoints(value: number) {
+        player.questPoints += value;
+        GameHelper.incrementObservable(this.statistics.totalQuestPoints, value);
+        Game.animateMoney(value,'playerMoneyQuest');
+    }
+
     public toJSON() {
         let keep = [
             "_money",

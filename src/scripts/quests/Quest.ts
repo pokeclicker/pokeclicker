@@ -27,8 +27,7 @@ abstract class Quest {
 
     claimReward() {
         if (this.isCompleted()) {
-            player.questPoints += this.pointsReward;
-            Game.animateMoney(this.pointsReward,'playerMoneyQuest');
+            player.gainQuestPoints(this.pointsReward);
             console.log(`Gained ${this.pointsReward} quest points and ${this.xpReward} xp points`);
             this.claimed(true);
             player.currentQuest(null);
