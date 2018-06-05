@@ -228,7 +228,7 @@ class Game {
         $(ani).prependTo('body').animate({
             top: -100,
             opacity: 0
-        }, 250 * Math.log(money) + 50,"linear",
+        }, 250 * Math.log(money) + 150,"linear",
             function() {
         $(this).remove();
         });
