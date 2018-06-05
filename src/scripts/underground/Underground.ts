@@ -44,7 +44,7 @@ class Underground {
                     if (Mine.rewardGrid[i][j] != 0 && Mine.rewardGrid[i][j].revealed != 1) {
                         Mine.rewardGrid[i][j].revealed = 1;
                         $("div[data-i="+i+"][data-j="+j+"]").replaceWith("<img src='assets/images/underground/"+ Mine.rewardGrid[i][j].value + "/" + Mine.rewardGrid[i][j].value + "-" + Mine.rewardGrid[i][j].y + "-" + Mine.rewardGrid[i][j].x + ".png' data-bind='css: Underground.rewardCssClass' data-i='" + i + "' data-j='" + j + "'>")
-                        ko.applyBindings(Underground, $("img[data-i="+i+"][data-j="+j+"]")[0])
+                        ko.applyBindings(null, $("img[data-i="+i+"][data-j="+j+"]")[0])
                         Mine.checkItemsRevealed();
                     }
                 }
