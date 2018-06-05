@@ -443,6 +443,7 @@ class Player {
         this._money(this._money() + moneytogain);
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
         Game.updateMoney();
+        Game.animateMoney(moneytogain,'playerMoney');
     }
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
@@ -625,6 +626,7 @@ class Player {
     public gainDungeonTokens(tokens: number) {
         this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens));
         GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
+        Game.animateMoney(tokens,'playerMoneyDungeon');
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {

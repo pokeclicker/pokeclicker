@@ -58,9 +58,6 @@
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
 
-    <!--AnimateNumber-->
-    <script src="libs/jquery.animateNumber.min.js"></script>
-
     <!--Knockout-->
     <script src="libs/knockout-latest.js"></script>
 
@@ -139,19 +136,19 @@
                                 <td width="33.33%">
                                     <span style="display: inline;">
                                         <img title="Money" src="assets/images/currency/money.png">
-                                        <span id="playerMoney">0</span>
+                                        <span id="playerMoney" data-bind="text: player.money">0</span>
                                     </span>
                                 </td>
                                 <td width="33.33%">
                                     <span style="display: inline;">
                                         <img title="Dungeon Tokens" src="assets/images/currency/dungeonToken.png">
-                                        <span data-bind="text: player.dungeonTokens">Not yet</span>
+                                        <span id="playerMoneyDungeon" data-bind="text: player.dungeonTokens">Not yet</span>
                                     </span>
                                 </td>
                                 <td width="33.33%">
                                     <span style="display: inline;">
                                         <img title="Quest points" src="assets/images/currency/questPoint.png">
-                                        <span data-bind="text: player.questPoints">Not yet</span>
+                                        <span id="playerMoneyQuest" data-bind="text: player.questPoints">Not yet</span>
                                     </span>
                                 </td>
                             </tr>
