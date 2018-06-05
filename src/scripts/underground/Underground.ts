@@ -62,7 +62,13 @@ class Underground {
         let item = Underground.getMineItemById(id);
         
         if(item.isStone()){
-            //gainItemByName(item.name);
+            let evostone = ItemList[item.valueType];
+            if (evostone instanceof EvolutionStone) {
+                evostone.buy(num)
+            } else {
+                console.log("Error getting evolution stone",num,id,item)
+                Notifier.notify("Error getting evolution stone",GameConstants.NotificationOption.warning)
+            }
             return;
         }
         
