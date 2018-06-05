@@ -169,6 +169,10 @@ class Game {
         if (GameHelper.counter > 60 * 1000) {
             GameHelper.updateTime();
         }
+
+        if ($('#playerMoney').text() == "0" && player.hasKeyItem("Town Map")){
+            Game.updateMoneyNoAnimate();
+        }
     }
 
     save() {
@@ -188,6 +192,7 @@ class Game {
             QuestLineHelper.createTutorial();
             QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
         }
+        Game.updateMoneyNoAnimate();
     }
 
     static applyRouteBindings() {
@@ -208,6 +213,10 @@ class Game {
 
     static updateMoney(text: string = $("#playerMoney").text()) {
         $("#playerMoney").prop('number', text).animateNumber({number: player.money});
+    }
+
+    static updateMoneyNoAnimate(){
+        $('#playerMoney').text(player.money); 
     }
 
 
