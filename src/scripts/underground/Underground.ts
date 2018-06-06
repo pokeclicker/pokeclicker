@@ -44,7 +44,7 @@ class Underground {
                     if (Mine.rewardGrid[i][j] != 0 && Mine.rewardGrid[i][j].revealed != 1) {
                         Mine.rewardGrid[i][j].revealed = 1;
                         $("div[data-i="+i+"][data-j="+j+"]").replaceWith("<img src='assets/images/underground/"+ Mine.rewardGrid[i][j].value + "/" + Mine.rewardGrid[i][j].value + "-" + Mine.rewardGrid[i][j].y + "-" + Mine.rewardGrid[i][j].x + ".png' data-bind='css: Underground.rewardCssClass' data-i='" + i + "' data-j='" + j + "'>")
-                        ko.applyBindings(Underground, $("img[data-i="+i+"][data-j="+j+"]")[0])
+                        ko.applyBindings(null, $("img[data-i="+i+"][data-j="+j+"]")[0])
                         Mine.checkItemsRevealed();
                     }
                 }
@@ -62,7 +62,13 @@ class Underground {
         let item = Underground.getMineItemById(id);
         
         if(item.isStone()){
-            //gainItemByName(item.name);
+            let evostone = ItemList[item.valueType];
+            if (evostone instanceof EvolutionStone) {
+                evostone.buy(num)
+            } else {
+                console.log("Error getting evolution stone",num,id,item)
+                Notifier.notify("Error getting evolution stone",GameConstants.NotificationOption.warning)
+            }
             return;
         }
         

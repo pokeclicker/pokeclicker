@@ -37,13 +37,13 @@ class UndergroundItem {
         this.addItem("Odd Keystone", 15, [[15,15,15,15], [15,15,15,15], [15,15,15,15], [15,15,15,15]], 6);
         this.addItem("Hard Stone", 16, [[16,16],[16,16]], 4);
 
-        this.addItem("Fire Stone", 17, [[17,17,17], [17,17,17], [17,17,17]]);
-        this.addItem("Water Stone", 18, [[18,18,18], [18,18,18], [18,18,0]]);
-        this.addItem("Thunder Stone", 19, [[0,19,19], [19,19,19], [19,19,0]]);
-        this.addItem("Leaf Stone", 20, [[0,20,0], [20,20,20], [20,20,20], [0,20,0]]);
+        this.addItem("Fire Stone", 17, [[17,17,17], [17,17,17], [17,17,17]], 1, "Fire_stone");
+        this.addItem("Water Stone", 18, [[18,18,18], [18,18,18], [18,18,0]], 1, "Water_stone");
+        this.addItem("Thunder Stone", 19, [[0,19,19], [19,19,19], [19,19,0]], 1, "Thunder_stone");
+        this.addItem("Leaf Stone", 20, [[0,20,0], [20,20,20], [20,20,20], [0,20,0]], 1, "Leaf_stone");
 
-        this.addItem("Moon Stone", 21, [[0,21,21,21], [21,21,21,0]], 4);
-        this.addItem("Sun Stone", 22, [[0,22,0,], [22,22,22], [22,22,22]], 4);
+        this.addItem("Moon Stone", 21, [[0,21,21,21], [21,21,21,0]], 1, "Moon_stone");
+        this.addItem("Sun Stone", 22, [[0,22,0,], [22,22,22], [22,22,22]], 1, "Sun_stone");
         this.addItem("Oval Stone", 23, [[23,23,23], [23,23,23], [23,23,23]], 3);
         this.addItem("Everstone", 24, [[24,24,24], [24,24,24]], 3);
         this.addItem("Smooth Rock", 25, [[25,25,25], [25,25,25], [25,25,25]], 2);

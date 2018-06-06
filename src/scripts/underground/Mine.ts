@@ -177,7 +177,7 @@ class Mine {
         Notifier.notify("You dig deeper...", GameConstants.NotificationOption.info);
         ko.cleanNode(document.getElementById("mineBody"));
         Mine.loadMine();
-        ko.applyBindings(Mine, document.getElementById("mineBody"));
+        ko.applyBindings(null, document.getElementById("mineBody"));
     }
 
     public static loadSavedMine(mine) {
