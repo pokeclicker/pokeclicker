@@ -6,22 +6,38 @@ class RewardTable {
     public anyOf: Reward[];
 
     constructor(name: string, always: Reward[], oneOf: Reward[], anyOf: Reward[]) {
+        this.name = name;
         this.always = always;
         this.oneOf = oneOf;
         this.anyOf = anyOf
     }
 
     public getLoot(): Loot[] {
-        let totalLoot = this.calculateAlwaysLoot().concat(this.calculateOneOfLoot().concat(this.calculateAnyOfLoot()));
-        return this.simplifyLoot(totalLoot);
+
+        let always = this.calculateAlwaysLoot();
+        let oneof = this.calculateOneOfLoot();
+        let anyof = this.calculateAnyOfLoot();
+
+        console.log("Finals:");
+        console.log(always);
+        console.log(oneof);
+        console.log(anyof);
+
+
+        let total = always.concat(oneof).concat(anyof);
+
+        console.log(total);
+
+        return this.simplifyLoot(total);
     }
 
     public calculateAlwaysLoot(): Loot[] {
         let alwaysLoot: Loot[] = [];
+        for (let reward of this.always) {
 
-        for (let key in this.always) {
-            alwaysLoot = alwaysLoot.concat(this.always[key].getLoot());
+            alwaysLoot = alwaysLoot.concat(reward.getLoot());
         }
+
         return alwaysLoot;
     }
 
@@ -35,22 +51,23 @@ class RewardTable {
                 draw -= this.oneOf[i].weight;
             }
         }
+        console.log("This should never happen");
         return [];
     }
 
     public static calculateWeightSum(rewards: Reward[]) {
         let sum = 0;
-        for (let key in rewards) {
-            sum += rewards[key].weight;
+        for (let key of rewards) {
+            sum += key.weight;
         }
         return sum;
     }
 
     public calculateAnyOfLoot(): Loot[] {
         let anyOfLoot: Loot[] = [];
-        for (let key in this.anyOf) {
-            if (GameConstants.randomIntBetween(0, 100) <= this.anyOf[key].weight) {
-                anyOfLoot = anyOfLoot.concat(this.anyOf[key].getLoot())
+        for (let reward of this.anyOf) {
+            if (GameConstants.randomIntBetween(0, 100) <= reward.weight) {
+                anyOfLoot = anyOfLoot.concat(reward.getLoot())
             }
         }
         return anyOfLoot;
@@ -70,16 +87,6 @@ class RewardTable {
         return ret;
     }
 
-    static initialize() {
-        for (let key in GameConstants.rewardTableData) {
-            let table = GameConstants.rewardTableData[key];
-            let always: Reward[] = RewardTable.parseRewards(table["always"]);
-            let oneOf: Reward[] = RewardTable.parseRewards(table["oneof"]);
-            let anyOf: Reward[] = RewardTable.parseRewards(table["anyof"]);
-            rewardTableList[key] = new RewardTable(key, always, oneOf, anyOf);
-        }
-    }
-
     static parseRewards(rewards): Reward[] {
         let ret = [];
 
@@ -90,16 +97,13 @@ class RewardTable {
             let maxAmount = reward.hasOwnProperty("maxAmount") ? reward.maxAmount : 1;
 
             if (reward.hasOwnProperty("table")) {
-                ret.push(new TableReward(reward.name, reward.weight, minAmount, maxAmount));
+                ret.push(new TableReward(reward.name, reward.weight || 1, minAmount, maxAmount));
             } else {
-                ret.push(new PercentReward(reward.name, reward.weight, minAmount, maxAmount))
+                ret.push(new PercentReward(reward.name, reward.weight || 1, minAmount, maxAmount))
             }
         }
         return ret;
     }
 }
-
-const rewardTableList: {[name: string]: any} = {};
-
 
 

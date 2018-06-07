@@ -5,6 +5,6 @@ class TableReward extends Reward {
     }
 
     getLoot(): Loot[] {
-        return rewardTableList[this.name].getLoot();
+        return LootManager.roll(this.name);
     }
 }
