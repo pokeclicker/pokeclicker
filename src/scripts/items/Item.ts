@@ -12,24 +12,26 @@ abstract class Item {
         this.basePrice = basePrice;
         this.currency = currency;
         this.price = ko.observable(this.basePrice);
-        this.totalPrice = name === "Pokeball" ? ko.computed(() => {
-            let amount: number;
-            if (ShopHandler == null) {
-                amount = 1;
-            } else {
-                amount = ShopHandler.amount();
-            }
-            return basePrice * amount;
-        }) : ko.computed(() => {
-            let amount: number;
-            if (ShopHandler == null) {
-                amount = 1;
-            } else {
-                amount = ShopHandler.amount();
-            }
-            let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
-            return Math.floor(res);
-        })
+        this.totalPrice = name === "Pokeball" ?
+            ko.computed(() => {
+                let amount: number;
+                if (ShopHandler == null) {
+                    amount = 1;
+                } else {
+                    amount = ShopHandler.amount();
+                }
+                return basePrice * amount;
+            }) :
+            ko.computed(() => {
+                let amount: number;
+                if (ShopHandler == null) {
+                    amount = 1;
+                } else {
+                    amount = ShopHandler.amount();
+                }
+                let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
+                return Math.floor(res);
+            })
     }
 
     abstract buy(n: number);
