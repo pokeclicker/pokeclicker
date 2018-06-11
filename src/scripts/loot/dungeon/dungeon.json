@@ -1,0 +1,67 @@
+{
+  "small_1" : {
+    "always": [],
+    "oneof": [
+      {"name": "battleItems" , "weight": 10, "table" : true},
+      {"name": "miningItems" , "weight": 3, "table" : true}
+    ],
+    "anyof": []
+  },
+
+  "battleItems" : {
+    "oneof": [
+      {"name": "xClick" , "weight": 10},
+      {"name": "xAttack" , "weight": 9},
+      {"name": "xExp" , "weight": 8},
+      {"name": "Token_collector" , "weight": 7},
+      {"name": "Item_magnet" , "weight": 6},
+      {"name": "Lucky_incense" , "weight": 1}
+    ]
+  },
+
+  "miningItems" : {
+    "oneof": [
+      {"name": "SmallRestore" , "weight": 10},
+      {"name": "MediumRestore" , "weight": 3},
+      {"name": "LargeRestore" , "weight": 1}
+    ]
+  },
+
+  "StoneItems" : {
+    "oneof": [
+      {"name": "Fire_stone" , "weight": 10},
+      {"name": "Water_stone" , "weight": 10},
+      {"name": "Thunder_stone" , "weight": 10},
+      {"name": "Leaf_stone" , "weight": 10},
+      {"name": "Moon_stone" , "weight": 10},
+      {"name": "Sun_stone" , "weight": 10},
+      {"name": "Trade_stone" , "weight": 4}
+    ]
+  },
+
+  "berryItems" : {
+    "oneof": [
+      {"name": "Cheri" , "weight": 10},
+      {"name": "Chesto" , "weight": 9},
+      {"name": "Pecha" , "weight": 9},
+      {"name": "Rawst" , "weight": 7},
+      {"name": "Aspear" , "weight": 7},
+      {"name": "Leppa" , "weight": 5},
+      {"name": "Oran" , "weight": 5},
+      {"name": "Sitrus" , "weight": 3}
+    ]
+  },
+
+  "eggItems" : {
+    "oneof": [
+      {"name": "Fire_egg" , "weight": 9},
+      {"name": "Water_egg" , "weight": 9},
+      {"name": "Grass_egg" , "weight": 9},
+      {"name": "Fight_egg" , "weight": 7},
+      {"name": "Electric_egg" , "weight": 7},
+      {"name": "Dragon_egg" , "weight": 5},
+      {"name": "Pokemon_egg" , "weight": 1},
+      {"name": "Mystery_egg" , "weight": 10}
+    ]
+  }
+}
