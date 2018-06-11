@@ -53,7 +53,7 @@ class BreedingHelper {
 
     public static hatchPokemonEgg(index: number) {
         let egg = player._eggList[index]();
-        let shinyChance = GameConstants.SHINY_CHANCE_BATTLE - ((GameConstants.SHINY_CHANCE_BATTLE - GameConstants.SHINY_CHANCE_BREEDING) * Math.min(1, egg.shinySteps/egg.steps()));
+        let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - ((GameConstants.SHINY_CHANCE_BREEDING - GameConstants.SHINY_CHANCE_BREEDING) * Math.min(1, egg.shinySteps/egg.steps()));
         let shiny = PokemonFactory.generateShiny(shinyChance);
 
         for (let i=0; i<player._caughtPokemonList().length; i++) {
