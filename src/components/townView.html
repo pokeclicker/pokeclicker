@@ -43,6 +43,11 @@
                        onclick="MapHelper.travelToNextRegion()">Go To Next Region
                </button>
            </li>
+           <li class="nav-item" data-bind="if:GameConstants.StartingTowns.indexOf(player.town().name()) > 0">
+            <button class="btn btn-secondary"
+                    onclick="MapHelper.travelToLastRegion()">Go To Last Region
+            </button>
+            </li>
            <div data-bind="if:player.town().dungeon()">
                <li class="nav-item" data-bind="if: player.town() instanceof DungeonTown">
                    <button class="btn btn-secondary"
