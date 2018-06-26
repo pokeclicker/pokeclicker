@@ -135,15 +135,19 @@ class MapHelper {
     }
 
     public static ableToTravel() {
-        return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.highestRegion]
+        return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.region]
     }
 
     public static travelToNextRegion() {
         if (MapHelper.ableToTravel()) {
             player.highestRegion++;
-            MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion]);
-            player.region = player.highestRegion;
+            MapHelper.moveToTown(GameConstants.StartingTowns[player.region+1]);
+            player.region = player.region + 1;
         }
+    }
+    public static travelToLastRegion() {
+        MapHelper.moveToTown(GameConstants.StartingTowns[player.region-1])
+        player.region = player.region - 1
     }
 
 }
