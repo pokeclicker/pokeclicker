@@ -1,117 +1,166 @@
 .safariSquare {
-    height:32px;
-    width:32px !important;
-    max-width: 32px;
-    margin: 0px !important;
-    padding:0px !important;
-    text-align: center;
+  height: 32px;
+  width: 32px !important;
+  max-width: 32px;
+  margin: 0px !important;
+  padding: 0px !important;
+  text-align: center;
 }
 
 #safariModal {
-    .modal-dialog {
-        max-width: none;
-        width: 800px;
-    }
+  .modal-dialog {
+    max-width: none;
+    width: 800px;
+  }
 
-    .modal-body {
-        padding: 0 15px
-    }
+  .modal-body {
+    padding: 0 15px
+  }
 
-    .modal-content {
-        border: none;
-    }
+  .modal-content {
+    border: none;
+  }
 }
 
 #sprite {
-    height: 32px;
-    width: 32px;
+  height: 32px;
+  width: 32px;
 }
 
 .bounce {
   position: relative;
-  display:inline-block;
+  display: inline-block;
   transform: translateY(62px);
-  animation:
-  bounce1 0.64s ease-in-out 0s,
+  animation: bounce1 0.64s ease-in-out 0s,
   bounce2 0.48s ease-in-out 0.64s,
   bounce3 0.32s ease-in-out 1.12s,
   bounce4 0.16s ease-in 1.44s
 }
-@keyframes bounce1{
-  0%{transform: translateY(0px)}
-  50%{transform: translateY(62px)}
-  100%{transform: translateY(22px)}
+
+@keyframes bounce1 {
+  0% {
+    transform: translateY(0px)
+  }
+  50% {
+    transform: translateY(62px)
+  }
+  100% {
+    transform: translateY(22px)
+  }
 }
-@keyframes bounce2{
-  0%{transform: translateY(22px)}
-  50%{transform: translateY(62px)}
-  100%{transform: translateY(47px)}
+
+@keyframes bounce2 {
+  0% {
+    transform: translateY(22px)
+  }
+  50% {
+    transform: translateY(62px)
+  }
+  100% {
+    transform: translateY(47px)
+  }
 }
-@keyframes bounce3{
-  0%{transform: translateY(47px)}
-  50%{transform: translateY(62px)}
-  100%{transform: translateY(57px)}
+
+@keyframes bounce3 {
+  0% {
+    transform: translateY(47px)
+  }
+  50% {
+    transform: translateY(62px)
+  }
+  100% {
+    transform: translateY(57px)
+  }
 }
-@keyframes bounce4{
-  0%{transform: translateY(57px)}
-  50%{transform: translateY(62px)}
-  100%{transform: translateY(62px)}
+
+@keyframes bounce4 {
+  0% {
+    transform: translateY(57px)
+  }
+  50% {
+    transform: translateY(62px)
+  }
+  100% {
+    transform: translateY(62px)
+  }
 }
 
 .safari-roll-left {
-    animation: roll-left 1s ease-in-out 0s;
+  animation: roll-left 1s ease-in-out 0s;
 }
-@keyframes roll-left{
-  0%{transform: rotate(0deg);}
-  50%{transform: rotate(-45deg) translate(-8px, -10px);}
-  100%{transform: rotate(0deg);}
+
+@keyframes roll-left {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-45deg) translate(-8px, -10px);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .safari-roll-right {
-    animation: roll-right 1s ease-in-out;
+  animation: roll-right 1s ease-in-out;
 }
-@keyframes roll-right{
-  0%{transform: rotate(0deg);}
-  50%{transform: rotate(45deg) translate(8px, -10px);}
-  100%{transform: rotate(0deg);}
+
+@keyframes roll-right {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(45deg) translate(8px, -10px);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 
 .pulse {
-    animation-name: pulseAnimation;
-    animation-duration: 350ms;
-    transform-origin: 50% 50%;
-    animation-iteration-count: 2;
-    animation-timing-function: linear;
+  animation-name: pulseAnimation;
+  animation-duration: 350ms;
+  transform-origin: 50% 50%;
+  animation-iteration-count: 2;
+  animation-timing-function: linear;
 }
 
-@keyframes pulseAnimation{
-    0% {transform: scale(1);}
-    45% {transform: scale(1.3);}
-    55% {transform: scale(1.3);}
-    100% {transform: scale(1);}
+@keyframes pulseAnimation {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.3);
+  }
+  55% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 .safariEnemyRow {
-    margin-bottom: 186px;
+  margin-bottom: 186px;
 }
 
 .safariCapture {
-    transform: scale(0.3) translate(-15px, -130px);
+  transform: scale(0.3) translate(-15px, -130px);
 }
 
 #safariEnemy {
-    position: relative;
-    top:15px;
-    transition-duration: 0.75s;
-    transition-timing-function: ease-in;
+  position: relative;
+  top: 15px;
+  transition-duration: 0.75s;
+  transition-timing-function: ease-in;
 }
 
 #battleConsole {
-    background-image: url('../assets/images/safari/battleText.png');
-    background-size: 100%;
-    height:100px;
-    font-family: 'pokefont', Helvetica Neue, serif;
-    color:white;
+  background-image: url('../assets/images/safari/battleText.png');
+  background-size: 100%;
+  height: 100px;
+  font-family: 'pokefont', Helvetica Neue, serif;
+  color: white;
 
   //div:first-child{
   //    display: flex;
@@ -127,44 +176,44 @@
 }
 
 .safariButton {
-    width:100%;
+  width: 100%;
 }
 
 .safariOptions {
-    text-align:center;
+  text-align: center;
   margin-top: 10px;
 }
 
 .safariOption {
-    margin-bottom:5px;
+  margin-bottom: 5px;
 }
 
 .battleBar {
-    width:0%;
-    height: 50px;
-    background-color:black;
-    float:left;
-    display: block;
+  width: 0%;
+  height: 50px;
+  background-color: black;
+  float: left;
+  display: block;
 }
 
-.battleBar:nth-of-type(even){
-    float:right;
+.battleBar:nth-of-type(even) {
+  float: right;
 }
 
 #safariBattleBody {
-    background-image: url('../assets/images/safari/safariBattle.png');
-    background-size: 100% auto;
+  background-image: url('../assets/images/safari/safariBattle.png');
+  background-size: 100% auto;
 }
 
 #safariEnemy img {
-    position: relative;
-    top: 25px;
-    left: -15px;
+  position: relative;
+  top: 25px;
+  left: -15px;
 }
 
 #safariPlayer {
-    position: relative;
-    left: -35px;
+  position: relative;
+  left: -35px;
 }
 
 #safariEnemyName {

@@ -84,7 +84,7 @@ namespace GameConstants {
 
     // Oak items
     export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
-    export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
+    export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
     export const AMOUNT_OF_OAKITEMS = 8;
     export const OAKITEM_MAX_LEVEL = 5;
     export const OAKITEM_FIRST_UNLOCK = 20;

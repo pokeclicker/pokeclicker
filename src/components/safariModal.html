@@ -1,17 +1,22 @@
-<div aria-labelledby="myModalLabel" class="modal fade noselect" id="safariModal" role="dialog" style="cursor:default" tabindex="-1">
+<div aria-labelledby="myModalLabel" class="modal fade noselect" id="safariModal" role="dialog" style="cursor:default"
+     tabindex="-1">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <p style='margin-bottom: 0' data-bind='text: "Balls: " + Safari.balls()'></p>
                 <h4 style='text-align:center' class="modal-title">Safari Zone</h4>
-                <button class='btn btn-primary' onclick='if(!Safari.inBattle()){$("#safariModal").modal("toggle")}' data-bind='css: { disabled: Safari.inBattle }' >Leave</button>
+                <button class='btn btn-primary' onclick='if(!Safari.inBattle()){$("#safariModal").modal("toggle")}'
+                        data-bind='css: { disabled: Safari.inBattle }'>Leave
+                </button>
             </div>
             <div class="modal-body">
                 <div id="safariBody">
                 </div>
                 <div id="safariBattleBody" data-bind="if: Safari.inBattle">
                     <div class='row safariEnemyRow'>
-                        <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind='attr: { src: "assets/images/pokemon/" + SafariBattle.enemy.id + ".png" }'></div>
+                        <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img
+                                data-bind='attr: { src: "assets/images/pokemon/" + SafariBattle.enemy.id + ".png" }'>
+                        </div>
                         <div id='safariEnemyName' class='col-sm-2'>
                             <span>
                                 <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
@@ -24,7 +29,7 @@
                     </div>
                     <div class='row'>
                         <div class='col-sm-2 offset-sm-3'>
-                           <img id='safariPlayer' src='assets/images/safari/playerBack.png'>
+                            <img id='safariPlayer' src='assets/images/safari/playerBack.png'>
                         </div>
                     </div>
 

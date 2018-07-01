@@ -19,9 +19,9 @@ class Statistics {
     private static readonly arraySizes = {
         "gymsDefeated": GameConstants.KantoGyms.length + GameConstants.JohtoGyms.length,
         "dungeonsCleared": GameConstants.KantoDungeons.length + GameConstants.JohtoDungeons.length,
-        "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,// remove "None" pokeball type
+        "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
         "pokeballsBought": GameHelper.enumLength(GameConstants.Pokeball) - 1,
-        "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,// remove "None" pokemon type
+        "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1, // remove "None" pokemon type
         "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
     };
 

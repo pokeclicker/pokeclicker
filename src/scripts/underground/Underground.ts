@@ -12,7 +12,7 @@ class Underground {
         html += "</div>";
         for (let i = 0; i < Mine.grid.length; i++) {
             html += "<div class='row'>";
-            for (var j = 0; j < Mine.grid[0].length; j++) {
+            for (let j = 0; j < Mine.grid[0].length; j++) {
                 html += Underground.mineSquare(Mine.grid[i][j](), i, j);
             }
             html += "</div>";

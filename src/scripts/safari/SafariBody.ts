@@ -7,8 +7,8 @@ abstract class SafariBody {
     }
 
     public getTileNeighbours(x: number, y: number) {
-        let ret = Array<boolean>(4);//["N", "E", "S", "W"]
-        let cross = Array<boolean>(4);//["NE", "SE", "SW", "NW"]
+        let ret = Array<boolean>(4); //["N", "E", "S", "W"]
+        let cross = Array<boolean>(4); //["NE", "SE", "SW", "NW"]
         if (x === 0) {
             ret[3] = false;
         } else {
@@ -121,8 +121,8 @@ class SandBody extends SafariBody {
     }
 
     private edgeDetect() {
-        for (var i = 0; i < this.grid.length; i++) {
-            for (var j = 0; j < this.grid[i].length; j++) {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[i].length; j++) {
                 if (this.grid[i][j] === this.edgeDetectCheck) {
                     this.grid[i][j] = this.getNumber(this.getTileNeighbours(j, i));
                 }
@@ -356,7 +356,7 @@ Array.prototype.equals = function (array) {
     if (this.length != array.length)
         return false;
 
-    for (var i = 0, l = this.length; i < l; i++) {
+    for (let i = 0, l = this.length; i < l; i++) {
         // Check if we have nested arrays
         if (this[i] instanceof Array && array[i] instanceof Array) {
             // recurse into the nested arrays

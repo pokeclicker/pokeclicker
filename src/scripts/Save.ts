@@ -49,7 +49,7 @@ class Save {
     }
 
     public static reset(): void {
-        var confirmDelete = prompt("Are you sure you want reset? If so, type 'DELETE'");
+        let confirmDelete = prompt("Are you sure you want reset? If so, type 'DELETE'");
 
         if (confirmDelete == "DELETE") {
             localStorage.setItem("player", null);

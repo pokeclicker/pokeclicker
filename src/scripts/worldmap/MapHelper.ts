@@ -81,7 +81,7 @@ class MapHelper {
     public static accessToTown(townName: string): boolean {
         let town = TownList[townName];
         return town.isUnlocked();
-    };
+    }
 
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
@@ -97,7 +97,7 @@ class MapHelper {
         } else {
             Notifier.notify("You don't have access to that location yet.", GameConstants.NotificationOption.warning);
         }
-    };
+    }
 
     public static updateAllRoutes() {
         for (let i = 0; i < GameConstants.AMOUNT_OF_ROUTES_KANTO; i++) {

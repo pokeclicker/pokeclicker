@@ -130,6 +130,7 @@ class Safari {
         let img = 'assets/images/safari/' + this.grid[i][j] + '.png';
         let divId = "safari-" + j + "-" + i;
 
+        // noinspection CssUnknownTarget
         return "<div id='" + divId + "' style=background-image:url('" + img + "') class='col-sm-1 safariSquare'></div>";
     }
 
@@ -259,7 +260,6 @@ class Safari {
                     Safari.queue[0] = direction;
                 }
             }
-            ;
             Safari.nextDirection = direction;
             Safari.walking = true;
         }
@@ -274,7 +274,6 @@ class Safari {
         if (!Safari.queue[0]) {
             Safari.walking = false;
         }
-        ;
     }
 
     public static openModal() {

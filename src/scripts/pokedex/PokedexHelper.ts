@@ -27,7 +27,7 @@ class PokedexHelper {
     public static filteredList: KnockoutObservableArray<object> = ko.observableArray([]);
 
     public static populateTypeFilters() {
-        var options = $("#pokedex-filter-type1");
+        let options = $("#pokedex-filter-type1");
         $.each(GameConstants.PokemonType, function () {
             if (isNaN(Number(this)) && this != GameConstants.PokemonType.None) {
                 options.append($("<option />").val(GameConstants.PokemonType[this]).text(this));

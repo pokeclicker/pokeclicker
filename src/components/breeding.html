@@ -1,52 +1,52 @@
 <div class="modal fade" id="breedingModal" tabindex="-1" role="dialog"
-aria-labelledby="breedingModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content">
-       <div class="modal-header">
-           <div style="width: 100%;">
-               <img src="assets/images/oak.png">
-               <h5 class="modal-title" id="breedingModalLabel">Day Care Old Man</h5>
-           </div>
-       </div>
-       <div class="modal-body">
-           <p>
-               This is the Pokémon Day Care Center. You can trade your <br>
-               level 100 pokémon for an egg of the same pokémon.<br>
-               Hatched pokémon have a higher chance of becoming shiny!
-           </p>
-           <div data-bind="if: player.canBreedPokemon()">
-               <p>
-                   Pick a pokémon below to breed them:
-               </p>
+     aria-labelledby="breedingModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div style="width: 100%;">
+                    <img src="assets/images/oak.png">
+                    <h5 class="modal-title" id="breedingModalLabel">Day Care Old Man</h5>
+                </div>
+            </div>
+            <div class="modal-body">
+                <p>
+                    This is the Pokémon Day Care Center. You can trade your <br>
+                    level 100 pokémon for an egg of the same pokémon.<br>
+                    Hatched pokémon have a higher chance of becoming shiny!
+                </p>
+                <div data-bind="if: player.canBreedPokemon()">
+                    <p>
+                        Pick a pokémon below to breed them:
+                    </p>
 
-               <div class="row col-lg-10 col-md-12 offset-lg-1 offset-md-0 col-sm-12 offset-sm-0"
-                    style="padding-right: 0"
-                    data-bind="foreach: player.maxLevelPokemonList()">
-                   <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
-                       <button class="btn btn-secondary smallButton list-group-item-action"
-                               data-bind="click: function() {BreedingHelper.gainPokemonEgg($data)}">
-                           <img class="smallImage"
-                                data-bind="attr:{ src: '/assets/images/pokemon/' + id +'.png' }"
-                                src=""/>
-                           <span data-bind="text: name" style="margin-left: 20px">Name</span>
-                       </button>
-                   </div>
-               </div>
-           </div>
-           <div data-bind="ifnot: player.hasMaxLevelPokemon()">
-               <p>
-                   Unfortunately, you don't have any pokémon of level 100
-               </p>
-           </div>
-           <div data-bind="ifnot: player.hasFreeEggSlot()">
-               <p>
-                   Unfortunately, you don't have any free eggslots
-               </p>
-           </div>
-       </div>
-       <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       </div>
-   </div>
-</div>
+                    <div class="row col-lg-10 col-md-12 offset-lg-1 offset-md-0 col-sm-12 offset-sm-0"
+                         style="padding-right: 0"
+                         data-bind="foreach: player.maxLevelPokemonList()">
+                        <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
+                            <button class="btn btn-secondary smallButton list-group-item-action"
+                                    data-bind="click: function() {BreedingHelper.gainPokemonEgg($data)}">
+                                <img class="smallImage"
+                                     data-bind="attr:{ src: '/assets/images/pokemon/' + id +'.png' }"
+                                     src=""/>
+                                <span data-bind="text: name" style="margin-left: 20px">Name</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div data-bind="ifnot: player.hasMaxLevelPokemon()">
+                    <p>
+                        Unfortunately, you don't have any pokémon of level 100
+                    </p>
+                </div>
+                <div data-bind="ifnot: player.hasFreeEggSlot()">
+                    <p>
+                        Unfortunately, you don't have any free eggslots
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

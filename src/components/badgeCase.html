@@ -1,36 +1,36 @@
 <div class="modal fade noselect" id="badgeCaseModal" tabindex="-1" role="dialog"
-aria-labelledby="badgeCaseModalLabel">
-<div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content">
-       <div class="modal-header">
-           <h4>Badge Case</h4>
-       </div>
-       <div class="modal-body">
-           <div class="row no-gutters justify-content-center"
-                data-bind="foreach: new Array(GameConstants.AMOUNT_OF_BADGES)">
-               <div class="col-sm-3 col-md-3 col-lg-3 badgeEntry">
-                   <div data-bind="with: GameConstants.Badge[$index() + 1]">
+     aria-labelledby="badgeCaseModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Badge Case</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row no-gutters justify-content-center"
+                     data-bind="foreach: new Array(GameConstants.AMOUNT_OF_BADGES)">
+                    <div class="col-sm-3 col-md-3 col-lg-3 badgeEntry">
+                        <div data-bind="with: GameConstants.Badge[$index() + 1]">
 
-                       <div data-bind="if: player.hasBadge(GameConstants.Badge[$data])">
-                           <img src=""
-                                data-bind="attr:{ src: 'assets/images/badges/'+ Gym.getLeaderByBadge($data) +'.png'}">
+                            <div data-bind="if: player.hasBadge(GameConstants.Badge[$data])">
+                                <img src=""
+                                     data-bind="attr:{ src: 'assets/images/badges/'+ Gym.getLeaderByBadge($data) +'.png'}">
 
-                       </div>
-                       <div data-bind="ifnot: player.hasBadge(GameConstants.Badge[$data])">
-                           <img src="" width="80px" class="badge-not-acquired"
-                                data-bind="attr:{ src: 'assets/images/badges/'+ Gym.getLeaderByBadge($data) +'.png'}">
-                       </div>
-                       <p style="bottom: 0;"
-                          data-bind="text: $data">name</p>
-                   </div>
+                            </div>
+                            <div data-bind="ifnot: player.hasBadge(GameConstants.Badge[$data])">
+                                <img src="" width="80px" class="badge-not-acquired"
+                                     data-bind="attr:{ src: 'assets/images/badges/'+ Gym.getLeaderByBadge($data) +'.png'}">
+                            </div>
+                            <p style="bottom: 0;"
+                               data-bind="text: $data">name</p>
+                        </div>
 
-               </div>
-           </div>
-       </div>
+                    </div>
+                </div>
+            </div>
 
-       <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       </div>
-   </div>
-</div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

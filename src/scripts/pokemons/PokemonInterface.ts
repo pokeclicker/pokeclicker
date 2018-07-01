@@ -4,7 +4,7 @@
 interface pokemonInterface {
     name: string;
     id: number;
-    type1: PokemonTypes;
-    type2: PokemonTypes;
+    type1: GameConstants.PokemonType;
+    type2: GameConstants.PokemonType;
     shiny?: boolean;
 }

@@ -233,5 +233,5 @@ class SafariBattle {
             }, time * 1000);
         }
         return p;
-    };
+    }
 }
