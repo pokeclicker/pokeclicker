@@ -4,7 +4,7 @@ class Preload {
         if (fast) {
             $('.loader').hide();
         } else {
-            $('.loader').fadeOut("slow")
+            $('.loader').fadeOut("slow");
         }
     }
 
@@ -19,7 +19,7 @@ class Preload {
                 Preload.loadMap();
                 Preload.loadTowns();
                 Preload.hideSplashScreen(true);
-            })
+            });
         } else {
             return new Promise(resolve => {
                 Promise.all([Preload.loadSplashScreen(),
@@ -98,8 +98,8 @@ class Preload {
         return new Promise<number>(resolve => {
             setTimeout(() => {
                 resolve();
-            }, GameConstants.MIN_LOAD_TIME)
-        })
+            }, GameConstants.MIN_LOAD_TIME);
+        });
     }
 
     private static loadMap() {

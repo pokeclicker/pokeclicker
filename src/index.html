@@ -142,7 +142,8 @@
                                 <td width="33.33%">
                                     <span style="display: inline;">
                                         <img title="Dungeon Tokens" src="assets/images/currency/dungeonToken.png">
-                                        <span id="playerMoneyDungeon" data-bind="text: player.dungeonTokens">Not yet</span>
+                                        <span id="playerMoneyDungeon"
+                                              data-bind="text: player.dungeonTokens">Not yet</span>
                                     </span>
                                 </td>
                                 <td width="33.33%">
@@ -518,8 +519,8 @@
 
         <!--Right column-->
         <div class="col-lg-3">
-            <div class="page-item" id="oakItemsContainer" 
-            data-bind="visible: player.starter != GameConstants.Starter.None" style="background-color: white;">
+            <div class="page-item" id="oakItemsContainer"
+                 data-bind="visible: player.starter != GameConstants.Starter.None" style="background-color: white;">
                 <div class="card">
                     <div>
                         <span style="text-align:center"

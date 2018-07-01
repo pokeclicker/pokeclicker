@@ -14,7 +14,7 @@ class BreedingHelper {
 
     public static progressEggs(amount: number) {
         if (OakItemRunner.isActive("Blaze Casette")) {
-            amount *= (1 + OakItemRunner.calculateBonus("Blaze Casette") / 100)
+            amount *= (1 + OakItemRunner.calculateBonus("Blaze Casette") / 100);
         }
         amount = Math.round(amount);
         for (let obj of player.eggList) {
@@ -53,10 +53,10 @@ class BreedingHelper {
 
     public static hatchPokemonEgg(index: number) {
         let egg = player._eggList[index]();
-        let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps/egg.steps()));
+        let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps()));
         let shiny = PokemonFactory.generateShiny(shinyChance);
 
-        for (let i=0; i<player._caughtPokemonList().length; i++) {
+        for (let i = 0; i < player._caughtPokemonList().length; i++) {
             if (player._caughtPokemonList()[i].name == egg.pokemon) {
                 if (player._caughtPokemonList()[i].breeding()) {
                     player._caughtPokemonList()[i].exp(0);
@@ -97,7 +97,7 @@ class BreedingHelper {
         } else {
             return eggCycles * 40;
         }
-    }
+    };
 
     public static getEggImage(egg: Egg): string {
         let eggType = GameConstants.EggType[egg.type].toLowerCase();

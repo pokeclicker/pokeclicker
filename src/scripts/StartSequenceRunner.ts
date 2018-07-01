@@ -21,14 +21,14 @@ class StartSequenceRunner {
             if (battlePokemon.health() <= 0) {
                 setTimeout(
                     function () {
-                        StartSequenceRunner.showCaughtMessage()
+                        StartSequenceRunner.showCaughtMessage();
                     }, player.calculateCatchTime());
 
                 //reset the function so you don't call it too many times :)
                 //What a beautiful piece of code
                 battlePokemon.isAlive = function () {
                     return false;
-                }
+                };
             }
             return this.health() > 0;
         };
@@ -40,8 +40,8 @@ class StartSequenceRunner {
         $('#starterCaughtModal').modal('show');
         $('#pokeballSelector').css('display', 'block');
         $('#pokemonListContainer').css('display', 'block');
-        $('#oakItemsContainer').css('display','block');
-        $('#questDisplayContainer').css('display','block');
+        $('#oakItemsContainer').css('display', 'block');
+        $('#questDisplayContainer').css('display', 'block');
     }
 }
 

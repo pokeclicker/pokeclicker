@@ -1,8 +1,8 @@
 class SafariPokemon implements pokemonInterface {
     name: string;
     id: number;
-    type1: PokemonTypes;
-    type2: PokemonTypes;
+    type1: GameConstants.PokemonType;
+    type2: GameConstants.PokemonType;
     shiny: boolean;
     baseCatchFactor: number;
     baseEscapeFactor: number;
@@ -11,25 +11,27 @@ class SafariPokemon implements pokemonInterface {
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
     static readonly list = [
-        { name: "Nidoran(F)", weight: 15 },
-        { name: "Nidorina", weight: 10 },
-        { name: "Nidoran(M)", weight: 25 },
-        { name: "Nidorino", weight: 10 },
-        { name: "Exeggcute", weight: 20 },
-        { name: "Paras", weight: 5 },
-        { name: "Parasect", weight: 15 },
-        { name: "Rhyhorn", weight: 10 },
-        { name: "Chansey", weight: 4 },
-        { name: "Scyther", weight: 4 },
-        { name: "Pinsir", weight: 4 },
-        { name: "Kangaskhan", weight: 15 },
-        { name: "Tauros", weight: 10 },
-        { name: "Cubone", weight: 10 },
-        { name: "Marowak", weight: 5 },
-        { name: "Tangela", weight: 4 },
+        {name: "Nidoran(F)", weight: 15},
+        {name: "Nidorina", weight: 10},
+        {name: "Nidoran(M)", weight: 25},
+        {name: "Nidorino", weight: 10},
+        {name: "Exeggcute", weight: 20},
+        {name: "Paras", weight: 5},
+        {name: "Parasect", weight: 15},
+        {name: "Rhyhorn", weight: 10},
+        {name: "Chansey", weight: 4},
+        {name: "Scyther", weight: 4},
+        {name: "Pinsir", weight: 4},
+        {name: "Kangaskhan", weight: 15},
+        {name: "Tauros", weight: 10},
+        {name: "Cubone", weight: 10},
+        {name: "Marowak", weight: 5},
+        {name: "Tangela", weight: 4},
     ];
 
-    static readonly listWeight = SafariPokemon.list.reduce((sum:number, pokemon) => {return sum += pokemon.weight}, 0);
+    static readonly listWeight = SafariPokemon.list.reduce((sum: number, pokemon) => {
+        return sum += pokemon.weight;
+    }, 0);
 
     constructor(name: string) {
         let data = PokemonHelper.getPokemonByName(name);
@@ -39,7 +41,7 @@ class SafariPokemon implements pokemonInterface {
         this.type1 = data.type1;
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
-        this.baseCatchFactor = data.catchRate * 100/1275;
+        this.baseCatchFactor = data.catchRate * 100 / 1275;
         this.baseEscapeFactor = 40;
         this.angry = 0;
         this.eating = 0;
@@ -47,10 +49,10 @@ class SafariPokemon implements pokemonInterface {
 
     public get catchFactor(): number {
         let catchF = this.baseCatchFactor;
-        if(this.eating > 0) {
+        if (this.eating > 0) {
             catchF /= 2;
         }
-        if(this.angry > 0) {
+        if (this.angry > 0) {
             catchF *= 2;
         }
 
@@ -58,10 +60,10 @@ class SafariPokemon implements pokemonInterface {
     }
 
     public get escapeFactor(): number {
-        if(this.eating > 0) {
+        if (this.eating > 0) {
             return this.baseEscapeFactor / 4;
         }
-        if(this.angry > 0) {
+        if (this.angry > 0) {
             return this.baseEscapeFactor * 2;
         }
 

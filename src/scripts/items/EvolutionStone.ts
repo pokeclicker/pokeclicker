@@ -11,14 +11,13 @@ class EvolutionStone extends Item {
     }
 
     public buy(n: number) {
-        player.gainItem(GameConstants.StoneType[this.type], n)
+        player.gainItem(GameConstants.StoneType[this.type], n);
     }
 
 
-
-    public use(pokemon?:string) {
+    public use(pokemon?: string) {
         let shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
-        if(pokemon == "Eevee") {
+        if (pokemon == "Eevee") {
             switch (this.type) {
                 case GameConstants.StoneType.Fire_stone: {
                     player.capturePokemon("Flareon", shiny, false);

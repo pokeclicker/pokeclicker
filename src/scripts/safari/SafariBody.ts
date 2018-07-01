@@ -7,8 +7,8 @@ abstract class SafariBody {
     }
 
     public getTileNeighbours(x: number, y: number) {
-        let ret = Array<boolean>(4);//["N", "E", "S", "W"]
-        let cross = Array<boolean>(4);//["NE", "SE", "SW", "NW"]
+        let ret = Array<boolean>(4); //["N", "E", "S", "W"]
+        let cross = Array<boolean>(4); //["NE", "SE", "SW", "NW"]
         if (x === 0) {
             ret[3] = false;
         } else {
@@ -28,7 +28,7 @@ abstract class SafariBody {
         if (y === this.grid.length - 1) {
             ret[2] = false;
         } else {
-            ret[2] = this.grid[y + 1][x] !== 0 &&this.grid[y + 1][x] !== undefined;
+            ret[2] = this.grid[y + 1][x] !== 0 && this.grid[y + 1][x] !== undefined;
         }
 
         if (ret.equals([true, true, true, true])) {
@@ -74,8 +74,8 @@ class SandBody extends SafariBody {
     edgeDetectCheck: number = 15;
 
     constructor(
-        x: number = SandBody.randomInt(), 
-        y: number = SandBody.randomInt(), 
+        x: number = SandBody.randomInt(),
+        y: number = SandBody.randomInt(),
         type: string = "sand"
     ) {
         super();
@@ -96,33 +96,33 @@ class SandBody extends SafariBody {
             body.push(row);
         }
 
-        let amount = this.type === 'fence' ? 20 : 4
-        for (let i = 0; i<amount; i++){
-            let x = Math.floor(Math.random()*(sizeX-2));
-            let y = Math.floor(Math.random()*(sizeY-2));
-            body = SandBody.addCube(x,y,body);
+        let amount = this.type === 'fence' ? 20 : 4;
+        for (let i = 0; i < amount; i++) {
+            let x = Math.floor(Math.random() * (sizeX - 2));
+            let y = Math.floor(Math.random() * (sizeY - 2));
+            body = SandBody.addCube(x, y, body);
         }
         return body;
     }
 
     private static addCube(x: number, y: number, body: Array<Array<number>>): Array<Array<number>> {
-        if (Math.random() >= 0.5){
-            body[y+2][x] = 15;
-            body[y+2][x+1] = 15;
-            body[y][x+2] = 15;
-            body[y+1][x+2] = 15;
-            body[y+2][x+2] = 15;
+        if (Math.random() >= 0.5) {
+            body[y + 2][x] = 15;
+            body[y + 2][x + 1] = 15;
+            body[y][x + 2] = 15;
+            body[y + 1][x + 2] = 15;
+            body[y + 2][x + 2] = 15;
         }
         body[y][x] = 15;
-        body[y+1][x] = 15;
-        body[y][x+1] = 15;
-        body[y+1][x+1] = 15;
+        body[y + 1][x] = 15;
+        body[y][x + 1] = 15;
+        body[y + 1][x + 1] = 15;
         return body;
     }
 
     private edgeDetect() {
-        for (var i = 0; i < this.grid.length; i++) {
-            for (var j = 0; j < this.grid[i].length; j++) {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[i].length; j++) {
                 if (this.grid[i][j] === this.edgeDetectCheck) {
                     this.grid[i][j] = this.getNumber(this.getTileNeighbours(j, i));
                 }
@@ -133,43 +133,43 @@ class SandBody extends SafariBody {
     getNumber(neighbours): number {
         let plus = neighbours.plus;
         let cross = neighbours.cross;
-        if(plus.equals([false, true, true, false])){
+        if (plus.equals([false, true, true, false])) {
             return 11;
         }
-        if(plus.equals([false, true, true, true])){
+        if (plus.equals([false, true, true, true])) {
             return 12;
         }
-        if(plus.equals([false, false, true, true])){
+        if (plus.equals([false, false, true, true])) {
             return 13;
         }
-        if(plus.equals([true, true, true, false])){
+        if (plus.equals([true, true, true, false])) {
             return 14;
         }
-        if(plus.equals([true, true, true, true])){
-            if(!cross[0]){
+        if (plus.equals([true, true, true, true])) {
+            if (!cross[0]) {
                 return 21;
             }
-            if(!cross[1]){
+            if (!cross[1]) {
                 return 22;
             }
-            if(!cross[2]){
+            if (!cross[2]) {
                 return 23;
             }
-            if(!cross[3]){
+            if (!cross[3]) {
                 return 24;
             }
             return 15;
         }
-        if(plus.equals([true, false, true, true])){
+        if (plus.equals([true, false, true, true])) {
             return 16;
         }
-        if(plus.equals([true, true, false, false])){
+        if (plus.equals([true, true, false, false])) {
             return 17;
         }
-        if(plus.equals([true, true, false, true])){
+        if (plus.equals([true, true, false, true])) {
             return 18;
         }
-        if(plus.equals([true, false, false, true])){
+        if (plus.equals([true, false, false, true])) {
             return 19;
         }
         return 10;
@@ -188,43 +188,43 @@ class FenceBody extends SandBody {
     getNumber(neighbours): number {
         let plus = neighbours.plus;
         let cross = neighbours.cross;
-        if(plus.equals([false, true, true, false])){
+        if (plus.equals([false, true, true, false])) {
             return 25;
         }
-        if(plus.equals([false, true, true, true])){
+        if (plus.equals([false, true, true, true])) {
             return 26;
         }
-        if(plus.equals([false, false, true, true])){
+        if (plus.equals([false, false, true, true])) {
             return 27;
         }
-        if(plus.equals([true, true, true, false])){
+        if (plus.equals([true, true, true, false])) {
             return 28;
         }
-        if(plus.equals([true, true, true, true])){
-            if(!cross[0]){
+        if (plus.equals([true, true, true, true])) {
+            if (!cross[0]) {
                 return 33;
             }
-            if(!cross[1]){
+            if (!cross[1]) {
                 return 34;
             }
-            if(!cross[2]){
+            if (!cross[2]) {
                 return 35;
             }
-            if(!cross[3]){
+            if (!cross[3]) {
                 return 36;
             }
             return 10;
         }
-        if(plus.equals([true, false, true, true])){
+        if (plus.equals([true, false, true, true])) {
             return 29;
         }
-        if(plus.equals([true, true, false, false])){
+        if (plus.equals([true, true, false, false])) {
             return 30;
         }
-        if(plus.equals([true, true, false, true])){
+        if (plus.equals([true, true, false, true])) {
             return 31;
         }
-        if(plus.equals([true, false, false, true])){
+        if (plus.equals([true, false, false, true])) {
             return 32;
         }
         return 10;
@@ -232,10 +232,10 @@ class FenceBody extends SandBody {
 
     private openFence() {
         let options = [26, 28, 29, 31];
-        let pick = options[Math.floor(Math.random()*options.length)];
-        for(let i = 0; i<this.grid.length; i++){
-            for(let j = 0; j<this.grid[0].length; j++){
-                if(this.grid[i][j] === pick){
+        let pick = options[Math.floor(Math.random() * options.length)];
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[0].length; j++) {
+                if (this.grid[i][j] === pick) {
                     this.grid[i][j] = 0;
                 }
             }
@@ -253,29 +253,29 @@ class WaterBody extends SafariBody {
         for (let i = 0; i < y; i++) {
             let row = [];
             for (let j = 0; j < x; j++) {
-                if (i === 0){
-                    if( j === 0){
+                if (i === 0) {
+                    if (j === 0) {
                         row.push(1);
-                    } else if (j < x-1){
-                        row.push(2)
-                    } else if (j === x-1){
-                        row.push(3)
+                    } else if (j < x - 1) {
+                        row.push(2);
+                    } else if (j === x - 1) {
+                        row.push(3);
                     }
-                } else if (i < y - 1){
-                    if( j === 0){
+                } else if (i < y - 1) {
+                    if (j === 0) {
                         row.push(4);
-                    } else if (j < x-1){
-                        row.push(5)
-                    } else if (j === x-1){
-                        row.push(6)
+                    } else if (j < x - 1) {
+                        row.push(5);
+                    } else if (j === x - 1) {
+                        row.push(6);
                     }
-                } else if (i === y - 1){
-                    if( j === 0){
+                } else if (i === y - 1) {
+                    if (j === 0) {
                         row.push(7);
-                    } else if (j < x-1){
-                        row.push(8)
-                    } else if (j === x-1){
-                        row.push(9)
+                    } else if (j < x - 1) {
+                        row.push(8);
+                    } else if (j === x - 1) {
+                        row.push(9);
                     }
                 }
             }
@@ -296,7 +296,7 @@ class GrassBody extends SafariBody {
         for (let i = 0; i < y; i++) {
             let row = [];
             for (let j = 0; j < x; j++) {
-                if(j < x*2/3-1) {
+                if (j < x * 2 / 3 - 1) {
                     row.push(10);
                 } else {
                     row.push(0);
@@ -312,9 +312,9 @@ class GrassBody extends SafariBody {
     }
 
     private fillHoles() {
-        for(let i = 0; i<this.grid.length; i++){
-            for(let j = 0; j<this.grid[0].length; j++){
-                if(this.grid[i][j] === 0) {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[0].length; j++) {
+                if (this.grid[i][j] === 0) {
                     if (i !== 0 && i !== this.grid.length - 1) {
                         if (this.grid[i - 1][j] === 10 && this.grid[i + 1][j] === 10) {
                             this.grid[i][j] = 10;
@@ -324,12 +324,12 @@ class GrassBody extends SafariBody {
             }
         }
 
-        for(let i = 0; i<this.grid.length; i++){
-            for(let j = 0; j<this.grid[0].length; j++){
-                if(this.grid[i][j] === 0) {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[0].length; j++) {
+                if (this.grid[i][j] === 0) {
 
                     if (j !== 0 && j !== this.grid[0].length - 1) {
-                        if (this.grid[i][j-1] === 10 && this.grid[i][j+1] === 10) {
+                        if (this.grid[i][j - 1] === 10 && this.grid[i][j + 1] === 10) {
                             this.grid[i][j] = 10;
                         }
                     }
@@ -342,7 +342,7 @@ class GrassBody extends SafariBody {
 class TreeBody extends SafariBody {
     constructor() {
         super();
-        this.grid = [[37,38,39],[40,41,42],[43,44,45],[46,47,48]];
+        this.grid = [[37, 38, 39], [40, 41, 42], [43, 44, 45], [46, 47, 48]];
         this.type = 'tree';
     }
 }
@@ -356,7 +356,7 @@ Array.prototype.equals = function (array) {
     if (this.length != array.length)
         return false;
 
-    for (var i = 0, l=this.length; i < l; i++) {
+    for (let i = 0, l = this.length; i < l; i++) {
         // Check if we have nested arrays
         if (this[i] instanceof Array && array[i] instanceof Array) {
             // recurse into the nested arrays
@@ -369,7 +369,7 @@ Array.prototype.equals = function (array) {
         }
     }
     return true;
-}
+};
 
 interface Array<T> {
     equals(array: Array<T>): boolean;

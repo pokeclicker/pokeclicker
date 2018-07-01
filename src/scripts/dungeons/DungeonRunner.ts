@@ -40,7 +40,7 @@ class DungeonRunner {
             this.dungeonLost();
         }
         this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100))
+        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
     }
 
     public static openChest() {
@@ -84,7 +84,7 @@ class DungeonRunner {
 
     public static timeLeftSeconds = ko.computed(function () {
         return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
-    })
+    });
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
         let possiblePokemon: string[] = dungeon.allPokemonNames;

@@ -5,7 +5,7 @@ class PokedexHelper {
         let pokemon = PokemonHelper.getPokemonByName(name);
 
         if (!PokedexHelper.pokemonSeen(pokemon.id)()) {
-            return "grey"
+            return "grey";
         }
         if (pokemon.type2 == GameConstants.PokemonType.None) {
             return TypeColor[pokemon.type1];
@@ -21,13 +21,13 @@ class PokedexHelper {
     public static pokemonSeen(id: number): KnockoutComputed<boolean> {
         return ko.computed(function () {
             return player.defeatedAmount[id]() > 0 || player.caughtAmount[id]() > 0;
-        })
+        });
     }
 
     public static filteredList: KnockoutObservableArray<object> = ko.observableArray([]);
 
     public static populateTypeFilters() {
-        var options = $("#pokedex-filter-type1");
+        let options = $("#pokedex-filter-type1");
         $.each(GameConstants.PokemonType, function () {
             if (isNaN(Number(this)) && this != GameConstants.PokemonType.None) {
                 options.append($("<option />").val(GameConstants.PokemonType[this]).text(this));
@@ -54,7 +54,7 @@ class PokedexHelper {
             if (player.defeatedAmount[pokemon.id]() != 0 && pokemon.id > highestDefeated) {
                 highestDefeated = parseInt(pokemon.id.toString());
             }
-        })
+        });
 
         return pokemonList.filter(function (pokemon) {
             if ((filter['name'] || "") != "" && pokemon.name.toLowerCase().indexOf(filter['name'].toLowerCase()) == -1) {

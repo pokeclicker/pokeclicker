@@ -40,7 +40,7 @@ class PokemonHelper {
                 for (let x = 1; x <= 100; x++) {
                     y = 6 / 5 * Math.pow(x, 3) - 15 * Math.pow(x, 2) + 100 * x - 140;
                     if (pokemon.exp >= y) {
-                        level = x
+                        level = x;
                     } else {
                         break;
                     }
@@ -60,7 +60,7 @@ class PokemonHelper {
     }
 
     public static calculateAttack(attackBase: number, attackBonus: number, level: number): number {
-        let attackBonusMultiplier = 1 + ( attackBonus / 100 );
+        let attackBonusMultiplier = 1 + (attackBonus / 100);
         let levelMultiplier = level / 100;
         return Math.max(1, Math.floor(attackBase * attackBonusMultiplier * levelMultiplier));
     }
@@ -75,8 +75,8 @@ class PokemonHelper {
     }
 
     public static getPokeballImage(pokemonName: string): string {
-        let src = ""
-        if (player.alreadyCaughtPokemon(pokemonName)){
+        let src = "";
+        if (player.alreadyCaughtPokemon(pokemonName)) {
             src = "/assets/images/pokeball/Pokeball-";
             if (player.alreadyCaughtPokemonShiny(pokemonName)) {
                 src += "shiny-";
@@ -117,11 +117,11 @@ class PokemonHelper {
             } else if (_a[property] > _b[property]) {
                 res = 1;
             } else {
-                res = 0
+                res = 0;
             }
 
             return res * dir;
-        }
+        };
     }
 
     public static calcNativeRegion(pokemonName: string) {

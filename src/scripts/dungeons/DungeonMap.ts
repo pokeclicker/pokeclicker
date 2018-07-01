@@ -62,7 +62,7 @@ class DungeonMap {
             for (let j = 0; j < this.board()[i].length; j++) {
                 if (this.board()[i][j].type() == GameConstants.DungeonTile.chest) {
                     this.board()[i][j].isVisible = true;
-                    this.board()[i][j].calculateCssClass()
+                    this.board()[i][j].calculateCssClass();
                 }
             }
         }
@@ -72,7 +72,7 @@ class DungeonMap {
         for (let i = 0; i < this.board().length; i++) {
             for (let j = 0; j < this.board()[i].length; j++) {
                 this.board()[i][j].isVisible = true;
-                this.board()[i][j].calculateCssClass()
+                this.board()[i][j].calculateCssClass();
             }
         }
     }
@@ -87,7 +87,7 @@ class DungeonMap {
         }
         //If any of the adjacent Tiles is visited, it's a valid Tile.
         if (point.x < 0 || point.x >= this.size || point.y < 0 || point.y >= this.size) {
-            return false
+            return false;
         }
 
         if (point.y < this.size - 1 && this.board()[point.y + 1][point.x].isVisible) {

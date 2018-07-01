@@ -1,6 +1,6 @@
 class Notifier {
 
-    public static notify(message: string, type: GameConstants.NotificationOption){
+    public static notify(message: string, type: GameConstants.NotificationOption) {
         ($ as any).notify({
             // options
             icon: 'glyphicon glyphicon-warning-sign',
@@ -8,7 +8,7 @@ class Notifier {
             message: GameConstants.humanifyString(message),
             url: '',
             target: ''
-        },{
+        }, {
             // settings
             element: 'body',
             position: null,

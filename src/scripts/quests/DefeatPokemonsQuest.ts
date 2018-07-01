@@ -11,7 +11,7 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
     }
 
     private static calcReward(route: number, killsNeeded: number): number {
-        let attacksPerPokemon = Math.ceil( Math.min( 4, PokemonFactory.routeHealth(route) / Math.max(1, player.pokemonAttackObservable()) ) )
+        let attacksPerPokemon = Math.ceil(Math.min(4, PokemonFactory.routeHealth(route) / Math.max(1, player.pokemonAttackObservable())));
         return Math.ceil(GameConstants.DEFEAT_POKEMONS_BASE_REWARD * attacksPerPokemon * killsNeeded);
     }
 }

@@ -4,7 +4,7 @@
             <div class="modal-header">
 
                 <div class="col-2">
-                <h4>Quests</h4>
+                    <h4>Quests</h4>
                 </div>
                 <div class='col-6'>
                     <div data-bind='text: "Lvl. "+player.questLevel'></div>
@@ -32,10 +32,11 @@
                                 <td><h5>Status</h5></td>
                             </tr>
                             </thead>
-                            <tbody data-bind="foreach: QuestHelper.questList" >
+                            <tbody data-bind="foreach: QuestHelper.questList">
                             <tr>
                                 <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
-                                <td class="align-middle" style="text-align:left"><img src="assets/images/currency/questPoint.png"><span
+                                <td class="align-middle" style="text-align:left"><img
+                                        src="assets/images/currency/questPoint.png"><span
                                         data-bind='text: " " + pointsReward'></span></td>
                                 <td class="align-middle">
                                     <button class='btn btn-primary btn-sm' data-bind='visible: !player.currentQuest() && !player.completedQuestList[index](),
@@ -66,7 +67,8 @@
                     <img src="assets/images/currency/money.png">
                     <span data-bind='text: Number(QuestHelper.getRefreshCost()).toLocaleString(),
                                   css: { "text-danger": !QuestHelper.canAffordRefresh() }'></span>
-                    <span class='' data-bind='text: "(Daily refresh in " + GameHelper.formattedLetterTimeUntilTomorrow() + ")"'>
+                    <span class=''
+                          data-bind='text: "(Daily refresh in " + GameHelper.formattedLetterTimeUntilTomorrow() + ")"'>
                     </span>
                 </div>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

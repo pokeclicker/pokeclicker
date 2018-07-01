@@ -17,7 +17,7 @@ class PokemonFactory {
             return new BattlePokemon("Rattata", 19, GameConstants.PokemonType.Psychic, GameConstants.PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
         let name: string;
-        
+
         if (PokemonFactory.roamingEncounter(route)) {
             let possible = GameConstants.RoamingPokemon[region];
             name = possible[Math.floor(Math.random() * possible.length)];
@@ -78,7 +78,7 @@ class PokemonFactory {
 
         let exp: number = basePokemon.exp * 1.5;
         let shiny = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny, GameConstants.GYM_SHARDS)
+        return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny, GameConstants.GYM_SHARDS);
     }
 
     public static generateDungeonPokemon(pokemonList: string[], chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
@@ -122,7 +122,7 @@ class PokemonFactory {
     }
 
     private static roamingChance(max, min, maxRoute, minRoute, curRoute) {
-        return Math.random() < 1 / (max + ( (min - max) * (maxRoute - curRoute) / (maxRoute - minRoute)));
+        return Math.random() < 1 / (max + ((min - max) * (maxRoute - curRoute) / (maxRoute - minRoute)));
     }
 
 }

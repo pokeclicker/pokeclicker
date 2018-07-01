@@ -31,7 +31,7 @@ abstract class Item {
                 }
                 let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
                 return Math.floor(res);
-            })
+            });
     }
 
     abstract buy(n: number);

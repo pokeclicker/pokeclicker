@@ -59,8 +59,8 @@ class FarmRunner {
         for (let i = 0; i < player.plotList.length; i++) {
             total += FarmRunner.harvest(i, true);
         }
-        if (total > 0 ){
-            Notifier.notify(`You earn ${total} money from the harvest!`, GameConstants.NotificationOption.success)
+        if (total > 0) {
+            Notifier.notify(`You earn ${total} money from the harvest!`, GameConstants.NotificationOption.success);
         }
     }
 
@@ -104,8 +104,8 @@ class FarmRunner {
             FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
             let money = plot.berry().moneyValue;
             player.gainMoney(money);
-            if(!all){
-                Notifier.notify(`You earn ${money} money from the harvest!`, GameConstants.NotificationOption.success)
+            if (!all) {
+                Notifier.notify(`You earn ${money} money from the harvest!`, GameConstants.NotificationOption.success);
             }
             plot.berry(null);
             OakItemRunner.use("Sprayduck");
@@ -129,12 +129,12 @@ class FarmRunner {
             return plot.formattedTimeLeft();
         }
 
-        return "Ready"
+        return "Ready";
     }
 
     public static getImage(plot: Plot) {
         if (plot.getStage() <= 1) {
-            return "assets/images/farm/AllTreeSeedIII.png"
+            return "assets/images/farm/AllTreeSeedIII.png";
         }
         return "assets/images/farm/" + GameConstants.BerryType[plot.berry().type] + "Tree" + GameConstants.PlotStage[plot.getStage()] + "III.png";
     }

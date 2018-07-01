@@ -43,35 +43,35 @@ class SafariBattle {
     }
 
     public static throwBall() {
-        if(!SafariBattle.busy) {
+        if (!SafariBattle.busy) {
             SafariBattle.busy = true;
-            Safari.balls(Safari.balls()-1);
+            Safari.balls(Safari.balls() - 1);
             let gameOver = Safari.balls() == 0;
             SafariBattle.text("You throw a ball...");
             let enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
-            let p = SafariBattle.dropParticle('<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>', $('#safariPlayer').offset(), enemyImg, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
+            let p = SafariBattle.dropParticle('<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>', $('#safariPlayer').offset(), enemyImg, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index', 9999);
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $('#safariEnemy').addClass('safariCapture');
 
-                setTimeout(function() {
+                setTimeout(function () {
                     $('#safariEnemy > img').css('opacity', '0');
                     p.addClass('bounce');
 
                     setTimeout(function () {
                         let random = Math.random();
                         let catchF = SafariBattle.enemy.catchFactor / 100;
-                        let index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
+                        let index = catchF >= 1 ? 3 : Math.floor(4 * (1 - Math.max(random, catchF)) / (1 - catchF));
                         if (index != 0) {
                             SafariBattle.startRoll(index);
                         }
 
-                        setTimeout(function(){
-                            if (random*100 < SafariBattle.enemy.catchFactor){
+                        setTimeout(function () {
+                            if (random * 100 < SafariBattle.enemy.catchFactor) {
                                 SafariBattle.capturePokemon();
                                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
-                                setTimeout(function(){
+                                setTimeout(function () {
                                     p.remove();
                                     gameOver ? SafariBattle.gameOver() : SafariBattle.endBattle();
                                 }, 2000);
@@ -80,29 +80,35 @@ class SafariBattle {
                                 $('#safariEnemy').removeClass('safariCapture');
                                 SafariBattle.text(GameConstants.SAFARI_CATCH_MESSAGES[index]);
                                 p.remove();
-                                setTimeout( function() {
+                                setTimeout(function () {
                                     gameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
                                 }, 1000);
                             }
-                        }, (200 + 1200*index));
+                        }, (200 + 1200 * index));
                     }, 1700);
                 }, 750);
             }, 750);
         }
     }
 
-    private static startRoll = function(n){
-        if (n == 4) {n--}
-        $('#safariBall').addClass('safari-roll-left');
-        setTimeout(function(){ SafariBattle.safariRoll(n-1) }, 1200);
-    }
-
-    private static safariRoll = function(n){
-        if (n != 0){
-            $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
-            setTimeout(function(){SafariBattle.safariRoll(n-1)}, 1200);
+    private static startRoll = function (n) {
+        if (n == 4) {
+            n--;
         }
-    }
+        $('#safariBall').addClass('safari-roll-left');
+        setTimeout(function () {
+            SafariBattle.safariRoll(n - 1);
+        }, 1200);
+    };
+
+    private static safariRoll = function (n) {
+        if (n != 0) {
+            $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
+            setTimeout(function () {
+                SafariBattle.safariRoll(n - 1);
+            }, 1200);
+        }
+    };
 
     private static capturePokemon() {
         SafariBattle.text(`GOTCHA!<br> ${SafariBattle.enemy.name} was caught!`);
@@ -110,21 +116,21 @@ class SafariBattle {
     }
 
     public static throwBait() {
-        if(!SafariBattle.busy){
+        if (!SafariBattle.busy) {
             SafariBattle.busy = true;
             SafariBattle.text("You throw some bait at " + SafariBattle.enemy.name);
-            SafariBattle.enemy.eating = Math.max(SafariBattle.enemy.eating, Math.floor(Math.random()*5 + 2));
+            SafariBattle.enemy.eating = Math.max(SafariBattle.enemy.eating, Math.floor(Math.random() * 5 + 2));
             SafariBattle.enemy.angry = 0;
             let enemy = $('#safariEnemy').offset();
             enemy.left += 30;
             enemy.top += 70;
-            SafariBattle.dropParticle('<img src="../assets/images/safari/bait.png">', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+            SafariBattle.dropParticle('<img src="../assets/images/safari/bait.png">', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
             setTimeout(SafariBattle.enemyTurn, 1500);
         }
     }
 
     public static throwRock() {
-        if(!SafariBattle.busy) {
+        if (!SafariBattle.busy) {
             SafariBattle.busy = true;
             SafariBattle.text("You throw a rock at " + SafariBattle.enemy.name);
             SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Math.floor(Math.random() * 5 + 2));
@@ -132,36 +138,38 @@ class SafariBattle {
             let enemy = $('#safariEnemy').offset();
             enemy.left += 40;
             enemy.top += 10;
-            SafariBattle.dropParticle('<img src="../assets/images/safari/rock.png">', $('#safariPlayer').offset(), enemy, 0.8, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
-            setTimeout(function(){
+            SafariBattle.dropParticle('<img src="../assets/images/safari/rock.png">', $('#safariPlayer').offset(), enemy, 0.8, 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
+            setTimeout(function () {
                 let hitSplash = $('<ptcl>').html("<img src='../assets/images/safari/hit.png'>").children().appendTo('body');
                 hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
-                hitSplash.fadeOut(400, function(){hitSplash.remove();});
-                setTimeout(function(){
+                hitSplash.fadeOut(400, function () {
+                    hitSplash.remove();
+                });
+                setTimeout(function () {
                     let newOffset = {
                         top: enemy.top + 4,
                         left: enemy.left - 20
-                    }
+                    };
                     let ang = $('<ptcl>').html("<img src='../assets/images/safari/angry.png'>").children().appendTo('body');
-                    ang.css('position','absolute').css('z-index', 9999);
+                    ang.css('position', 'absolute').css('z-index', 9999);
                     ang.offset(newOffset);
                     ang.addClass('pulse');
-                    setTimeout(function(){
+                    setTimeout(function () {
                         newOffset.top -= 10;
                         newOffset.left += 60;
                         ang.offset(newOffset);
-                        setTimeout(function(){
+                        setTimeout(function () {
                             ang.remove();
-                        },350);
-                    },350);
-                },300);
-            },800);
+                        }, 350);
+                    }, 350);
+                }, 300);
+            }, 800);
             setTimeout(SafariBattle.enemyTurn, 2000);
         }
     }
 
     public static run() {
-        if(Math.random()*100 < (30 + 15*SafariBattle.escapeAttempts)){
+        if (Math.random() * 100 < (30 + 15 * SafariBattle.escapeAttempts)) {
             SafariBattle.text("You flee.");
             setTimeout(SafariBattle.endBattle, 1500);
         } else {
@@ -172,20 +180,20 @@ class SafariBattle {
 
     private static enemyTurn() {
         // Enemy turn to flee;
-        let random = Math.floor(Math.random()*100);
-        if( random < SafariBattle.enemy.escapeFactor){
+        let random = Math.floor(Math.random() * 100);
+        if (random < SafariBattle.enemy.escapeFactor) {
             SafariBattle.text(SafariBattle.enemy.name + " has fled.");
             setTimeout(SafariBattle.endBattle, 1000);
-        } else if(SafariBattle.enemy.eating > 0) {
+        } else if (SafariBattle.enemy.eating > 0) {
             SafariBattle.text(SafariBattle.enemy.name + " is eating.");
-        } else if(SafariBattle.enemy.angry > 0) {
+        } else if (SafariBattle.enemy.angry > 0) {
             SafariBattle.text(SafariBattle.enemy.name + " is angry!");
         } else {
             SafariBattle.text(SafariBattle.enemy.name + " is watching carefully...");
         }
-        SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating-1);
-        SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry-1);
-        setTimeout(function(){
+        SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating - 1);
+        SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry - 1);
+        setTimeout(function () {
             SafariBattle.text("What will you do?");
             SafariBattle.busy = false;
         }, 1500);
@@ -202,7 +210,7 @@ class SafariBattle {
 
     private static gameOver() {
         SafariBattle.text(GameConstants.SAFARI_OUT_OF_BALLS);
-        setTimeout(function() {
+        setTimeout(function () {
             Safari.inBattle(false);
             SafariBattle.busy = false;
             $("#safariModal").modal('toggle');
@@ -211,19 +219,19 @@ class SafariBattle {
 
     private static dropParticle(html: string, pos, target, time: number = 2, top, persistentParticle: boolean = false) {
         let p = $('<ptcl>').html(html).children().appendTo('body');
-        p.css('position','absolute')
+        p.css('position', 'absolute');
         p.offset(pos);
         if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
-        p[0].style.transition = 'left ' + time + 's linear, top ' + time + 's '+top;
+        p[0].style.transition = 'left ' + time + 's linear, top ' + time + 's ' + top;
         p.offset(target);
         if (!persistentParticle) {
-            setTimeout(function() {
+            setTimeout(function () {
                 p.fadeOut();
             }, time * 1000 - 200);
-            setTimeout(function() {
+            setTimeout(function () {
                 p.remove();
             }, time * 1000);
         }
         return p;
-    };
+    }
 }

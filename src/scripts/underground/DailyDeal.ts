@@ -33,7 +33,7 @@ class DailyDeal {
     }
 
     private isValid(): boolean {
-        return ( (this.item1.name !== this.item2.name) && !DailyDeal.reverseDealExists(this.item1.name, this.item2.name) && !this.item1.isStone() )
+        return ((this.item1.name !== this.item2.name) && !DailyDeal.reverseDealExists(this.item1.name, this.item2.name) && !this.item1.isStone());
     }
 
     private static reverseDealExists(name1: string, name2: string): boolean {
@@ -55,7 +55,7 @@ class DailyDeal {
         if (index > -1) {
             return player._mineInventory()[index].amount() >= deal.amount1;
         } else {
-            return false
+            return false;
         }
     }
 

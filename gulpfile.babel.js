@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const file = require('gulp-file');
-const tslint = require('gulp-tslint');
+const gulpTslint = require('gulp-tslint');
 const changed = require('gulp-changed');
 const minifyHtml = require('gulp-minify-html');
 const concat = require('gulp-concat');
@@ -16,6 +16,7 @@ const gulpImport = require('gulp-html-import');
 const markdown = require('gulp-markdown');
 const inject = require('gulp-inject');
 const glob = require("glob");
+const tslint = require('tslint');
 
 
 /**
@@ -127,6 +128,15 @@ gulp.task('styles', () => gulp.src(srcs.styles)
     .pipe(gulp.dest(dests.styles))
     .pipe(browserSync.reload({stream: true})));
 
+gulp.task('tslint', () => {
+    let program = tslint.Linter.createProgram("./tsconfig.json");
+    return gulp.src(srcs.scripts)
+        .pipe(gulpTslint({
+            program
+        }))
+        .pipe(gulpTslint.report());
+});
+
 gulp.task('cleanWebsite', () => del([dests.githubPages]));
 
 gulp.task('clean', () => del([dests.base]));
@@ -135,7 +145,7 @@ gulp.task('copyWebsite', () => {
     gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
 });
 
-gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles', 'full-changelog']);
+gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'tslint', 'styles', 'full-changelog']);
 
 gulp.task('website', done => {
     runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', () => done());
@@ -145,7 +155,7 @@ gulp.task('default', done => {
     runSequence('clean', 'build', 'browserSync', () => {
         gulp.watch(srcs.html, ['import', 'html']);
         gulp.watch(srcs.assets, ['assets']);
-        gulp.watch(srcs.scripts, ['scripts']);
+        gulp.watch(srcs.scripts, ['scripts', 'tslint']);
         gulp.watch(srcs.styles, ['styles']);
         done();
     });

@@ -7,5 +7,6 @@ interface enemyPokemonInterface extends pokemonInterface {
     money: number;
 
     isAlive(): boolean;
+
     damage(damage: number): void;
 }

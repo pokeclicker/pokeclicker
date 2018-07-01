@@ -1,5 +1,27 @@
 {
   "rules": {
-    "triple-equals": false
+    "triple-equals": false,
+    "semicolon": [
+      true,
+      "always"
+    ],
+    "indent": [
+      true,
+      "spaces",
+      4
+    ],
+    "no-var-keyword": true,
+    "arrow-return-shorthand": true,
+    "whitespace": [
+      true,
+      "check-branch",
+      "check-decl",
+      "check-module",
+      "check-separator",
+      "check-operator",
+      "check-type",
+      "check-type-operator",
+      "check-preblock"
+    ]
   }
 }

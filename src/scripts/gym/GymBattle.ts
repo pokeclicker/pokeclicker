@@ -18,7 +18,7 @@ class GymBattle extends Battle {
         this.index(this.index() + 1);
 
         if (this.index() >= this.gym.pokemons.length) {
-            GymRunner.gymWon(this.gym)
+            GymRunner.gymWon(this.gym);
         } else {
             this.generateNewEnemy();
         }
@@ -39,5 +39,5 @@ class GymBattle extends Battle {
 
     public static pokemonsUndefeatedComputable: KnockoutComputed<number> = ko.computed(function () {
         return GymBattle.totalPokemons() - GymBattle.index();
-    })
+    });
 }

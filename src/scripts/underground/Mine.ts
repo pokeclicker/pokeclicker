@@ -5,7 +5,7 @@ class Mine {
     public static itemsBuried: number;
     public static rewardNumbers: Array<number>;
     public static toolSelected: KnockoutObservable<GameConstants.MineTool> = ko.observable(GameConstants.MineTool["Chisel"]);
-    private static loadingNewLayer: boolean = true
+    private static loadingNewLayer: boolean = true;
 
     public static loadMine() {
         let tmpGrid = [];
@@ -30,7 +30,7 @@ class Mine {
             let x = Mine.getRandomCoord(GameConstants.Mine.sizeX);
             let y = Mine.getRandomCoord(GameConstants.Mine.sizeY);
             let item = UndergroundItem.getRandomItem();
-            let res = Mine.canAddReward(x, y, item)
+            let res = Mine.canAddReward(x, y, item);
             if (res) {
                 Mine.addReward(x, y, item);
             }
@@ -156,7 +156,7 @@ class Mine {
                 if (Mine.rewardGrid[j][i] != 0) {
                     if (Mine.rewardGrid[j][i].value == id) {
                         if (Mine.rewardGrid[j][i].revealed === 0) {
-                            return false
+                            return false;
                         }
                     }
                 }
@@ -169,7 +169,7 @@ class Mine {
         if (Mine.itemsFound() >= Mine.itemsBuried) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
-            GameHelper.incrementObservable(player.statistics.digDeeper)
+            GameHelper.incrementObservable(player.statistics.digDeeper);
         }
     }
 
@@ -183,8 +183,8 @@ class Mine {
     public static loadSavedMine(mine) {
         this.grid = mine.grid.map((row) => {
             return row.map((num) => {
-                return ko.observable(num)
-            })
+                return ko.observable(num);
+            });
         });
         this.rewardGrid = mine.rewardGrid;
         this.itemsFound = ko.observable(mine.itemsFound);
@@ -202,7 +202,7 @@ class Mine {
             itemsFound: this.itemsFound,
             itemsBuried: this.itemsBuried,
             rewardNumbers: this.rewardNumbers
-        }
+        };
 
         return ko.toJSON(mine);
     }

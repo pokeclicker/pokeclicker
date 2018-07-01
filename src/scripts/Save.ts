@@ -7,7 +7,7 @@ class Save {
         localStorage.setItem("player", json);
         localStorage.setItem("mine", Mine.serialize());
         this.counter = 0;
-        console.log("Game saved")
+        console.log("Game saved");
     }
 
     public static load(): Player {
@@ -15,7 +15,7 @@ class Save {
         if (saved !== "null") {
             return new Player(JSON.parse(saved));
         } else {
-            return new Player()
+            return new Player();
         }
     }
 
@@ -49,11 +49,11 @@ class Save {
     }
 
     public static reset(): void {
-        var confirmDelete = prompt("Are you sure you want reset? If so, type 'DELETE'");
+        let confirmDelete = prompt("Are you sure you want reset? If so, type 'DELETE'");
 
-        if(confirmDelete == "DELETE"){
+        if (confirmDelete == "DELETE") {
             localStorage.setItem("player", null);
-            location.reload()
+            location.reload();
         }
 
     }
@@ -67,13 +67,13 @@ class Save {
         let filtered = {}, prop;
         for (prop in object) {
             if (keep.indexOf(prop) > -1) {
-                filtered[prop] = object[prop]
+                filtered[prop] = object[prop];
             }
         }
-        return filtered
+        return filtered;
     }
 
-    public static initializeMultipliers(): {[name: string]: number} {
+    public static initializeMultipliers(): { [name: string]: number } {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = 1;
@@ -81,7 +81,7 @@ class Save {
         return res;
     }
 
-    public static initializeItemlist(): {[name: string]: KnockoutObservable<number>} {
+    public static initializeItemlist(): { [name: string]: KnockoutObservable<number> } {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = ko.observable(0);
@@ -94,20 +94,20 @@ class Save {
         if (saved) {
             plotList = saved.map((p) => {
                 let berry;
-                if (p.berry){
+                if (p.berry) {
                     berry = new Berry(p.berry.type, p.berry.harvestTime, p.berry.moneyValue, p.berry.farmValue);
                 } else {
                     berry = null;
                 }
                 let plot = new Plot(p.isUnlocked, p.exp, p.level, p.boosted, berry, p.timeLeft);
-                return ko.observable(plot)
-            })
+                return ko.observable(plot);
+            });
         } else {
             plotList = Array.apply(null, Array(GameConstants.AMOUNT_OF_PLOTS)).map(function (val, index) {
                 if (index == 0) {
                     return ko.observable(new Plot(true, 0, 0, false, null, 0));
                 }
-                return ko.observable(new Plot(false, 0, 0, false, null, 0))
+                return ko.observable(new Plot(false, 0, 0, false, null, 0));
             });
         }
         return plotList;
@@ -118,8 +118,8 @@ class Save {
         if (saved) {
             res = saved.map((type) => {
                 return type.map((effectiveness) => {
-                    return ko.observable(effectiveness)
-                })
+                    return ko.observable(effectiveness);
+                });
             });
         } else {
             res = [];
@@ -163,7 +163,7 @@ class Save {
         let json = atob(base64);
         let p = JSON.parse(json);
         Save.convertShinies(p.caughtPokemonList);
-        $('#saveModal').modal('hide')
+        $('#saveModal').modal('hide');
     }
 
     public static convertShinies(list: Array<string>) {
@@ -177,7 +177,7 @@ class Save {
             }
         }
         if (converted.length > 0) {
-            Notifier.notify("You have gained the following shinies: " + converted, GameConstants.NotificationOption.success)
+            Notifier.notify("You have gained the following shinies: " + converted, GameConstants.NotificationOption.success);
         }
     }
 }

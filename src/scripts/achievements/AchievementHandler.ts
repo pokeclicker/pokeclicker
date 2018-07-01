@@ -181,9 +181,9 @@ class AchievementHandler {
         }
 
         for (let i = 0; i < GameConstants.KantoGyms.length; i++) {
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym tourist`, `Clear 1 time`, new ClearGymRequirement( 1, i), 0.01);
+            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym tourist`, `Clear 1 time`, new ClearGymRequirement(1, i), 0.01);
             AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym regular`, `Clear 10 times`, new ClearGymRequirement(10, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym ruler`, `Clear 100 times`, new ClearGymRequirement( 100, i), 0.01);
+            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym ruler`, `Clear 100 times`, new ClearGymRequirement(100, i), 0.01);
             AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym owner`, `Clear 1000 times`, new ClearGymRequirement(1000, i), 0.01);
         }
 

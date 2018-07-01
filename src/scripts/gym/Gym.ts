@@ -30,9 +30,9 @@ class Gym {
     public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
         return ko.computed(function () {
             if (player.hasBadge(gym.badgeReward)) {
-                return "btn btn-success"
+                return "btn btn-success";
             }
-            return "btn btn-secondary"
+            return "btn btn-secondary";
         });
     }
 
@@ -151,7 +151,7 @@ gymList["Elite Lorelei"] = new Gym(
         new GymPokemon("Cloyster", 48300, 51),
         new GymPokemon("Slowbro", 52000, 52),
         new GymPokemon("Jynx", 57000, 54),
-        new GymPokemon("Lapras", 60250, 54),],
+        new GymPokemon("Lapras", 60250, 54)],
     GameConstants.Badge.Lorelei,
     7500,
     GameConstants.Badge.Earth,
@@ -164,7 +164,7 @@ gymList["Elite Bruno"] = new Gym(
         new GymPokemon("Hitmonchan", 48300, 53),
         new GymPokemon("Hitmonlee", 52000, 53),
         new GymPokemon("Onix", 57000, 54),
-        new GymPokemon("Machamp", 60250, 56),],
+        new GymPokemon("Machamp", 60250, 56)],
     GameConstants.Badge.Bruno,
     7500,
     GameConstants.Badge.Lorelei,
@@ -177,7 +177,7 @@ gymList["Elite Agatha"] = new Gym(
         new GymPokemon("Golbat", 48300, 54),
         new GymPokemon("Haunter", 52000, 53),
         new GymPokemon("Arbok", 57000, 56),
-        new GymPokemon("Gengar", 60250, 58),],
+        new GymPokemon("Gengar", 60250, 58)],
     GameConstants.Badge.Agatha,
     7500,
     GameConstants.Badge.Bruno,
@@ -190,7 +190,7 @@ gymList["Elite Lance"] = new Gym(
         new GymPokemon("Dragonair", 52000, 54),
         new GymPokemon("Dragonair", 57000, 54),
         new GymPokemon("Aerodactyl", 60250, 58),
-        new GymPokemon("Dragonite", 66000, 60),],
+        new GymPokemon("Dragonite", 66000, 60)],
     GameConstants.Badge.Lance,
     7500,
     GameConstants.Badge.Agatha,
@@ -304,7 +304,7 @@ gymList["Elite Will"] = new Gym(
         new GymPokemon("Jynx", 48300, 41),
         new GymPokemon("Exeggutor", 52000, 41),
         new GymPokemon("Slowbro", 57000, 41),
-        new GymPokemon("Xatu", 60250, 42),],
+        new GymPokemon("Xatu", 60250, 42)],
     GameConstants.Badge.Will,
     7500,
     GameConstants.Badge.Rising,
@@ -317,7 +317,7 @@ gymList["Elite Koga"] = new Gym(
         new GymPokemon("Venomoth", 48300, 41),
         new GymPokemon("Forretress", 52000, 43),
         new GymPokemon("Muk", 57000, 42),
-        new GymPokemon("Crobat", 60250, 44),],
+        new GymPokemon("Crobat", 60250, 44)],
     GameConstants.Badge.Koga,
     7500,
     GameConstants.Badge.Will,
@@ -330,7 +330,7 @@ gymList["Elite Bruno2"] = new Gym(
         new GymPokemon("Hitmonlee", 48300, 42),
         new GymPokemon("Hitmonchan", 52000, 42),
         new GymPokemon("Onix", 57000, 43),
-        new GymPokemon("Machamp", 60250, 46),],
+        new GymPokemon("Machamp", 60250, 46)],
     GameConstants.Badge.Bruno2,
     7500,
     GameConstants.Badge.Koga,
@@ -343,7 +343,7 @@ gymList["Elite Karen"] = new Gym(
         new GymPokemon("Vileplume", 52000, 42),
         new GymPokemon("Gengar", 57000, 45),
         new GymPokemon("Murkrow", 60250, 44),
-        new GymPokemon("Houndoom", 66000, 47),],
+        new GymPokemon("Houndoom", 66000, 47)],
     GameConstants.Badge.Karen,
     7500,
     GameConstants.Badge.Bruno2,
@@ -356,7 +356,7 @@ gymList["Champion Lance"] = new Gym(
         new GymPokemon("Dragonite", 62000, 49),
         new GymPokemon("Dragonite", 64000, 49),
         new GymPokemon("Aerodactyl", 60250, 48),
-        new GymPokemon("Dragonite", 70000, 50),],
+        new GymPokemon("Dragonite", 70000, 50)],
     GameConstants.Badge.JohtoChampion,
     7500,
     GameConstants.Badge.Karen,
