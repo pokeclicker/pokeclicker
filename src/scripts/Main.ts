@@ -149,7 +149,7 @@ class Game {
                 DailyDeal.generateDeals(player.maxDailyDeals, now);
                 Notifier.notify("It's a new day! Your quests and underground deals have been updated.", GameConstants.NotificationOption.info);
             }
-            player._lastSeen = Date.now()
+            player._lastSeen = Date.now();
             Save.store(player);
         }
 
@@ -180,7 +180,7 @@ class Game {
         Battle.generateNewEnemy();
         Safari.load();
         Save.loadMine();
-        Underground.energyTick(player._mineEnergyRegenTime())
+        Underground.energyTick(player._mineEnergyRegenTime());
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());
         QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
         QuestHelper.loadCurrentQuest(player.currentQuest());
@@ -196,13 +196,13 @@ class Game {
             if (id && id != 'mapTooltipWrapper') {
                 let tooltip = $('#mapTooltip');
                 tooltip.text(id);
-                tooltip.css('visibility', 'visible')
+                tooltip.css('visibility', 'visible');
 
             }
         }, function () {
             let tooltip = $('#mapTooltip');
             tooltip.text('');
-            tooltip.css('visibility', 'hidden')
+            tooltip.css('visibility', 'hidden');
         });
     }
 
@@ -210,27 +210,27 @@ class Game {
         $("#playerMoney").prop('number', player.money);
     }
 
-    static animateMoney(money,target){
+    static animateMoney(money, target) {
         let pos;
-        if($('#'+target).offset()){
-            pos = $('#'+target).offset();
-        }else{
-            pos = {"top":-200, "left":0};
+        if ($('#' + target).offset()) {
+            pos = $('#' + target).offset();
+        } else {
+            pos = {"top": -200, "left": 0};
         }
 
-        let left= ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
+        let left = ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
         let place = money.toString().length;
         let multi = 1;
-        for(let i = 0; i < place; i++){
+        for (let i = 0; i < place; i++) {
             multi *= 10;
         }
-        let ani = '<p class="moneyanimation" style="z-index:50;position:fixed;left:'+left+'px;top:'+pos.top+'px;">+'+money+'</p>';
+        let ani = '<p class="moneyanimation" style="z-index:50;position:fixed;left:' + left + 'px;top:' + pos.top + 'px;">+' + money + '</p>';
         $(ani).prependTo('body').animate({
-            top: -100,
-            opacity: 0
-        }, 250 * Math.log(money) + 150,"linear",
-            function() {
-        $(this).remove();
-        });
+                top: -100,
+                opacity: 0
+            }, 250 * Math.log(money) + 150, "linear",
+            function () {
+                $(this).remove();
+            });
     }
 }

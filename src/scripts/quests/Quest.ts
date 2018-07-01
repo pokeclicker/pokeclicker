@@ -1,6 +1,6 @@
 abstract class Quest {
     index: number;
-    amount: number
+    amount: number;
     description: string;
     pointsReward: number;
     xpReward: number;
@@ -13,13 +13,13 @@ abstract class Quest {
     notified: boolean;
     autoComplete: boolean;
     autoCompleter: KnockoutSubscription;
-    inQuestLine: boolean
+    inQuestLine: boolean;
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
         let randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
         this.pointsReward = Math.ceil(pointsReward * randomPointBonus);
-        this.xpReward = pointsReward/10;
+        this.xpReward = pointsReward / 10;
         this.claimed = ko.observable(false);
         this.initial = ko.observable(null);
         this.notified = false;
@@ -45,7 +45,7 @@ abstract class Quest {
     }
 
     beginQuest() {
-        if (!player.currentQuest()){
+        if (!player.currentQuest()) {
             this.initial(this.questFocus());
             player.currentQuest({
                 index: this.index,
@@ -67,26 +67,26 @@ abstract class Quest {
     }
 
     get questFocus() {
-        return this._questFocus
+        return this._questFocus;
     }
 
     protected createProgressObservables() {
-        this.progress = ko.computed(function() {
+        this.progress = ko.computed(function () {
             if (this.initial() !== null) {
-                return Math.min(1, ( this.questFocus() - this.initial()) / this.amount);
+                return Math.min(1, (this.questFocus() - this.initial()) / this.amount);
             } else {
                 return 0;
             }
         }, this);
 
-        this.progressText = ko.computed(function() {
+        this.progressText = ko.computed(function () {
             if (this.initial() !== null) {
-                return "" + Math.min((this.questFocus() - this.initial()), this.amount) +"/" +  this.amount;
+                return "" + Math.min((this.questFocus() - this.initial()), this.amount) + "/" + this.amount;
             } else {
-                return "0/"+this.amount;
+                return "0/" + this.amount;
             }
         }, this);
-        this.isCompleted = ko.computed(function() {
+        this.isCompleted = ko.computed(function () {
             let completed = this.progress() == 1;
             if (!this.autoComplete && completed && !this.notified) {
                 Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);
@@ -106,12 +106,12 @@ abstract class Quest {
                 this.claimReward();
                 this.autoCompleter.dispose();
             }
-        })
+        });
     }
 
     inProgress() {
         return ko.computed(() => {
             return player.currentQuest() && (this.index == player.currentQuest().index) && !this.isCompleted();
-        })
+        });
     }
 }

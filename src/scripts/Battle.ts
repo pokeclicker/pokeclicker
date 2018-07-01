@@ -39,7 +39,7 @@ class Battle {
             return;
         }
         OakItemRunner.use("Poison Barb");
-        GameHelper.incrementObservable(player.statistics.clicks)
+        GameHelper.incrementObservable(player.statistics.clicks);
         this.enemyPokemon().damage(player.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
@@ -107,7 +107,7 @@ class Battle {
     static gainItem() {
         let p = player.route() / 1600 + 0.009375;
         if (Math.random() < p) {
-            this.getRandomBerry()
+            this.getRandomBerry();
         }
     }
 

@@ -23,7 +23,7 @@ class Statistics {
         "pokeballsBought": GameHelper.enumLength(GameConstants.Pokeball) - 1,
         "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,// remove "None" pokemon type
         "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
-    }
+    };
 
     constructor(saved = {}) {
         let observables = [
@@ -45,16 +45,16 @@ class Statistics {
             "pokeballsBought",
             "totalShards",
             "oakItemUses",
-        ]
+        ];
 
         for (let prop of observables) {
-            this[prop] = ko.observable(saved[prop] || 0)
+            this[prop] = ko.observable(saved[prop] || 0);
         }
 
         for (let array of arrayObservables) {
             this[array] = Array.apply(null, Array(Statistics.arraySizes[array])).map((value, index) => {
-                return ko.observable(saved[array] ? saved[array][index] || 0 : 0)
-            })
+                return ko.observable(saved[array] ? saved[array][index] || 0 : 0);
+            });
         }
     }
 
@@ -75,13 +75,13 @@ class Statistics {
     public static getDungeonIndex(dungeon: string) {
         let index;
         if (GameConstants.KantoDungeons.indexOf(dungeon) > -1) {
-            index = GameConstants.KantoDungeons.indexOf(dungeon)
+            index = GameConstants.KantoDungeons.indexOf(dungeon);
             return index;
         } else {
             index = GameConstants.KantoDungeons.length;
         }
         if (GameConstants.JohtoDungeons.indexOf(dungeon) > -1) {
-            index += GameConstants.JohtoDungeons.indexOf(dungeon)
+            index += GameConstants.JohtoDungeons.indexOf(dungeon);
             return index;
         } else {
             index += GameConstants.JohtoDungeons.length;

@@ -35,7 +35,7 @@ class MapHelper {
         for (let i = 0; i < reqList.length; i++) {
             let route: number = reqList[i];
             if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
-                return false
+                return false;
             }
         }
         return true;
@@ -65,14 +65,14 @@ class MapHelper {
             if (MapHelper.accessToTown(town)) {
                 if (dungeonList.hasOwnProperty(town)) {
                     if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
-                        return "dungeon completedDungeon"
+                        return "dungeon completedDungeon";
                     }
-                    return "dungeon unlockedDungeon"
+                    return "dungeon unlockedDungeon";
                 }
                 return "city unlockedTown";
             }
             if (dungeonList.hasOwnProperty(town)) {
-                return "dungeon"
+                return "dungeon";
             }
             return "city";
         });
@@ -118,7 +118,10 @@ class MapHelper {
     }
 
     public static openShipModal() {
-        let openModal = () => {Game.gameState(GameConstants.GameState.idle);$("#ShipModal").modal('show');}
+        let openModal = () => {
+            Game.gameState(GameConstants.GameState.idle);
+            $("#ShipModal").modal('show');
+        };
         switch (player.region) {
             case 0:
                 if (TownList["Vermillion City"].isUnlocked() && player.highestRegion > 0) {
@@ -131,11 +134,11 @@ class MapHelper {
                     return;
                 }
         }
-        Notifier.notify("You cannot access this dock yet", GameConstants.NotificationOption.warning)
+        Notifier.notify("You cannot access this dock yet", GameConstants.NotificationOption.warning);
     }
 
     public static ableToTravel() {
-        return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.highestRegion]
+        return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.highestRegion];
     }
 
     public static travelToNextRegion() {

@@ -29,7 +29,7 @@ namespace GameConstants {
     export const RoamingPokemon = {
         0: ["Mew"],
         1: ["Raikou", "Entei"],
-    }
+    };
 
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
@@ -46,7 +46,7 @@ namespace GameConstants {
     export const Mine = {
         "sizeY": 12,
         "sizeX": 25
-    }
+    };
 
     export const HAMMER_ENERGY = 3;
     export const CHISEL_ENERGY = 1;
@@ -159,8 +159,8 @@ namespace GameConstants {
     export const Safari = {
         "SizeY": 21,
         "SizeX": 25,
-    }
-    
+    };
+
     export const SAFARI_BATTLE_CHANCE = 5;
 
     export const LEGAL_WALK_BLOCKS = [
@@ -189,7 +189,7 @@ namespace GameConstants {
         "Shoot! It was so close, too!"
     ];
 
-    export const SAFARI_OUT_OF_BALLS = "Game Over!<br>You have run out of safari balls to use."
+    export const SAFARI_OUT_OF_BALLS = "Game Over!<br>You have run out of safari balls to use.";
 
     //Quests
 
@@ -198,14 +198,14 @@ namespace GameConstants {
     const questBase = 1; // change this to scale all quest points
     export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
     export const CAPTURE_POKEMONS_BASE_REWARD = GameConstants.DEFEAT_POKEMONS_BASE_REWARD / 0.8; // Defeat reward divided by chance to catch (guessed)
-    export const GAIN_MONEY_BASE_REWARD      = questBase * 0.0017;  // Dimava
-    export const GAIN_TOKENS_BASE_REWARD     = CAPTURE_POKEMONS_BASE_REWARD / 13 // <route number> tokens gained for every capture
-    export const HATCH_EGGS_BASE_REWARD      = questBase * 33;      // Dimava
-    export const MINE_LAYERS_BASE_REWARD     = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
-    export const SHINY_BASE_REWARD           = questBase * 6000;    // Dimava
-    export const USE_OAK_ITEM_BASE_REWARD    = GameConstants.DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
+    export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;  // Dimava
+    export const GAIN_TOKENS_BASE_REWARD = CAPTURE_POKEMONS_BASE_REWARD / 13; // <route number> tokens gained for every capture
+    export const HATCH_EGGS_BASE_REWARD = questBase * 33;      // Dimava
+    export const MINE_LAYERS_BASE_REWARD = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
+    export const SHINY_BASE_REWARD = questBase * 6000;    // Dimava
+    export const USE_OAK_ITEM_BASE_REWARD = GameConstants.DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
 
-    export const ACTIVE_QUEST_MULTIPLIER     = 4;
+    export const ACTIVE_QUEST_MULTIPLIER = 4;
 
     export const QuestTypes = [
         "DefeatPokemons",
@@ -289,7 +289,7 @@ namespace GameConstants {
 
     export function formatTime(time) {
         if (time == 0) {
-            return "Ready"
+            return "Ready";
         }
         let sec_num = parseInt('' + time, 10); // don't forget the second param
         let hours: any = Math.floor(sec_num / 3600);
@@ -520,7 +520,7 @@ namespace GameConstants {
             33: "Union Cave",
             34: "Ilex Forest"
         }
-    }
+    };
 
     export enum Starter {
         "None" = -1,
@@ -641,13 +641,13 @@ namespace GameConstants {
         68: "right", //d
         83: "down", //s
         87: "up", //w
-    }
+    };
 
     export const FossilToPokemon = {
         "Helix Fossil": "Omanyte",
         "Dome Fossil": "Kabuto",
         "Old Amber": "Aerodactyl",
-    }
+    };
 
     //Used for image name
     export const PokemonToFossil = {
@@ -655,7 +655,7 @@ namespace GameConstants {
         "Kabuto": "dome",
         "Aerodactyl": "amber",
 
-    }
+    };
 
     // For random quest, name matches entry in gymList (created in Gym.ts)
     export const KantoGyms = [
@@ -725,5 +725,5 @@ namespace GameConstants {
     export const pokemonsNeededToTravel = [
         151,
         252, // Should be 251, set to 252 in case gen 3 isn't added before beta
-    ]
+    ];
 }

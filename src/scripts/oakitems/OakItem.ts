@@ -47,14 +47,14 @@ class OakItem {
     }
 
     public use() {
-        if (this.isActive()){
+        if (this.isActive()) {
             GameHelper.incrementObservable(player.statistics.oakItemUses[this.id]);
         }
         if (this.isMaxLevel() || !this.isActive()) {
             return;
         }
         let expGain = Math.min(this.maxExp() - player.getOakItemExp(this.id), this.expGain);
-        player.gainOakItemExp(this.id, expGain)
+        player.gainOakItemExp(this.id, expGain);
     }
 
     public upgrade() {
@@ -74,7 +74,7 @@ class OakItem {
     }
 
     public canUpgradeMoney(): boolean {
-        return player.hasMoney(GameConstants.OAKITEM_MONEY_COST[this.level()])
+        return player.hasMoney(GameConstants.OAKITEM_MONEY_COST[this.level()]);
     }
 
     public calculateBonus(): KnockoutComputed<number> {

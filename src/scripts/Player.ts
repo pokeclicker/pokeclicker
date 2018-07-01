@@ -40,7 +40,7 @@ class Player {
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
-        this._lastSeen = savedPlayer._lastSeen || 0
+        this._lastSeen = savedPlayer._lastSeen || 0;
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
@@ -48,7 +48,7 @@ class Player {
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         this._region = ko.observable(savedPlayer._region);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
-            this._route = ko.observable(savedPlayer._route)
+            this._route = ko.observable(savedPlayer._route);
         } else {
             switch (savedPlayer._region) {
                 case 0:
@@ -65,22 +65,22 @@ class Player {
 
         if (savedPlayer._caughtPokemonList) {
             tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp, pokemon.breeding)
+                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp, pokemon.breeding);
             });
         }
         this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
         this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES + 1)).map(function (val, index) {
-            return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
+            return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0);
         });
 
         this._defeatedAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
-            return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0)
+            return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0);
         });
         this._caughtAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
-            return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0)
+            return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0);
         });
         this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
-            return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
+            return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0);
         });
         this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
@@ -96,12 +96,12 @@ class Player {
         this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._notCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
         this._alreadyCaughtBallSelection = typeof(savedPlayer._alreadyCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._alreadyCaughtBallSelection) : ko.observable(GameConstants.Pokeball.None);
         if (this._gymBadges().length == 0) {
-            this._gymBadges.push(GameConstants.Badge.None)
+            this._gymBadges.push(GameConstants.Badge.None);
         }
         this._sortOption = ko.observable(savedPlayer._sortOption || null);
         this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
         this.clickAttackObservable = ko.computed(function () {
-            return this.calculateClickAttack()
+            return this.calculateClickAttack();
         }, this);
         this.pokemonAttackObservable = ko.computed(function () {
             return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
@@ -133,7 +133,7 @@ class Player {
         this._mineEnergyRegenTime = ko.observable(savedPlayer._mineEnergyRegenTime || GameConstants.MineUpgradesInitialValues.mineEnergyRegenTime);
         savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
         this._eggList = savedPlayer._eggList.map((egg) => {
-            return ko.observable(egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null)
+            return ko.observable(egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null);
         });
         this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
         this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
@@ -150,18 +150,18 @@ class Player {
             this.questRefreshes = savedPlayer.questRefreshes;
             if (savedPlayer.completedQuestList) {
                 this.completedQuestList = savedPlayer.completedQuestList.map((bool) => {
-                    return ko.observable(bool)
+                    return ko.observable(bool);
                 });
             } else {
                 this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {
-                    return ko.observable(false)
+                    return ko.observable(false);
                 });
             }
             this.currentQuest = ko.observable(savedPlayer.currentQuest);
         } else {
             this.questRefreshes = 0;
             this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {
-                return ko.observable(false)
+                return ko.observable(false);
             });
             this.currentQuest = ko.observable(null);
         }
@@ -175,7 +175,7 @@ class Player {
 
         this.farmPoints = ko.observable(savedPlayer.farmPoints || 0);
         this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
-            return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
+            return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0);
         });
         this.plotList = Save.initializePlots(savedPlayer.plotList);
         this.highestRegion = savedPlayer.highestRegion || 0;
@@ -187,7 +187,7 @@ class Player {
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
-                StartSequenceRunner.start()
+                StartSequenceRunner.start();
             }
         }
     }
@@ -256,16 +256,16 @@ class Player {
     }
 
     public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
-        this._pokeballs[ball](this._pokeballs[ball]() + amount)
+        this._pokeballs[ball](this._pokeballs[ball]() + amount);
     }
 
     public usePokeball(ball: GameConstants.Pokeball): void {
-        this._pokeballs[ball](this._pokeballs[ball]() - 1)
+        this._pokeballs[ball](this._pokeballs[ball]() - 1);
         GameHelper.incrementObservable(this.statistics.pokeballsUsed[ball]);
     }
 
     public addRouteKill() {
-        this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
+        this.routeKills[this.route()](this.routeKills[this.route()]() + 1);
     }
 
     public hasKeyItem(name: string): boolean {
@@ -308,7 +308,7 @@ class Player {
     }
 
     public gainOakItemExp(item: GameConstants.OakItem, amount: number) {
-        this.oakItemExp[item](this.oakItemExp[item]() + amount)
+        this.oakItemExp[item](this.oakItemExp[item]() + amount);
     }
 
     public getOakItemExp(item: GameConstants.OakItem): number {
@@ -409,7 +409,7 @@ class Player {
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
             if (!supressNotification) {
-                Notifier.notify("You have captured a " + pokemonName, GameConstants.NotificationOption.success)
+                Notifier.notify("You have captured a " + pokemonName, GameConstants.NotificationOption.success);
             }
         }
         if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
@@ -439,11 +439,11 @@ class Player {
         OakItemRunner.use("Amulet Coin");
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
-        let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
+        let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()));
         this._money(this._money() + moneytogain);
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
         Game.updateMoney();
-        Game.animateMoney(moneytogain,'playerMoney');
+        Game.animateMoney(moneytogain, 'playerMoney');
     }
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
@@ -493,7 +493,7 @@ class Player {
             this._questPoints(Math.floor(this.questPoints - questPoints));
             return true;
         } else {
-            return false
+            return false;
         }
     }
 
@@ -537,11 +537,11 @@ class Player {
     public gainShards(pokemon: BattlePokemon) {
         let typeNum = GameConstants.PokemonType[pokemon.type1];
         player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
-        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
+        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward);
         if (pokemon.type2 != GameConstants.PokemonType.None) {
             typeNum = GameConstants.PokemonType[pokemon.type2];
             player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
-            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
+            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward);
         }
     }
 
@@ -566,15 +566,15 @@ class Player {
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
             return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
-        }, this).extend({rateLimit: player.calculateCatchTime()})
+        }, this).extend({rateLimit: player.calculateCatchTime()});
     }
 
     public maxLevelPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
             return this._caughtPokemonList().filter((pokemon) => {
                 return pokemon.levelObservable() == 100 && !pokemon.breeding();
-            })
-        }, this)
+            });
+        }, this);
     }
 
     get caughtAmount(): Array<KnockoutObservable<number>> {
@@ -626,7 +626,7 @@ class Player {
     public gainDungeonTokens(tokens: number) {
         this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens));
         GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
-        Game.animateMoney(tokens,'playerMoneyDungeon');
+        Game.animateMoney(tokens, 'playerMoneyDungeon');
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
@@ -773,7 +773,7 @@ class Player {
         for (let pokemon of this.caughtPokemonList) {
             let multiplier = 1;
             if (this.region !== GameHelper.getRegion(pokemon.id)) {
-                multiplier = 0.2
+                multiplier = 0.2;
             }
             if (!pokemon.breeding()) {
                 if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
@@ -947,7 +947,7 @@ class Player {
     public gainQuestPoints(value: number) {
         player.questPoints += value;
         GameHelper.incrementObservable(this.statistics.totalQuestPoints, value);
-        Game.animateMoney(value,'playerMoneyQuest');
+        Game.animateMoney(value, 'playerMoneyQuest');
     }
 
     public toJSON() {
@@ -1008,7 +1008,7 @@ class Player {
             "tutorialComplete",
         ];
         let plainJS = ko.toJS(this);
-        return Save.filter(plainJS, keep)
+        return Save.filter(plainJS, keep);
     }
 
 }

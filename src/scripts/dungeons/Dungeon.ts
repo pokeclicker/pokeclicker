@@ -28,14 +28,14 @@ class Dungeon {
     }
 
     public isUnlocked(): boolean {
-        if(!player.hasBadge(this.badgeReq)){
+        if (!player.hasBadge(this.badgeReq)) {
             Notifier.notify("You need the " + GameConstants.Badge[this.badgeReq] + " badge to access this dungeon", GameConstants.NotificationOption.danger);
             return false;
         }
 
-        if(!player.hasKeyItem("Dungeon ticket")){
+        if (!player.hasKeyItem("Dungeon ticket")) {
             Notifier.notify("You need the Dungeon ticket to access dungeons", GameConstants.NotificationOption.danger);
-            return false
+            return false;
         }
         return true;
     }

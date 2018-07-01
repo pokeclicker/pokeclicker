@@ -8,17 +8,17 @@ class KeyItem {
         this.name = ko.observable(name);
         this.description = ko.observable(description);
 
-        if(this.isUnlocked() || unlockReq == undefined) {
+        if (this.isUnlocked() || unlockReq == undefined) {
             this.unlockReq = null;
             return;
         }
         this.unlockReq = ko.computed<boolean>(unlockReq);
-            this.unlocker = this.unlockReq.subscribe(() => {
-                if (this.unlockReq()) {
-                    player.gainKeyItem(this.name());
-                    this.unlocker.dispose();
-                }
-            })
+        this.unlocker = this.unlockReq.subscribe(() => {
+            if (this.unlockReq()) {
+                player.gainKeyItem(this.name());
+                this.unlocker.dispose();
+            }
+        });
     }
 
     public isUnlocked(): boolean {

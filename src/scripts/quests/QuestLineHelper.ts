@@ -32,7 +32,7 @@ class QuestLineHelper {
         this.tutorial.addQuest(pewter);
 
         //Buy pokeballs
-        let buyPokeballs = new BuyPokeballsQuest(30,GameConstants.Pokeball.Pokeball,50);
+        let buyPokeballs = new BuyPokeballsQuest(30, GameConstants.Pokeball.Pokeball, 50);
         buyPokeballs.pointsReward = 50;
         buyPokeballs.description = "Buy 30 pokeballs. You can find these in the Pewter City Shop.";
         this.tutorial.addQuest(buyPokeballs);
@@ -42,18 +42,18 @@ class QuestLineHelper {
         routeThree.pointsReward = 100;
         this.tutorial.addQuest(routeThree);
 
-        this.tutorialTracker = this.tutorial.curQuestInitial.subscribe((newInitial)=>{
+        this.tutorialTracker = this.tutorial.curQuestInitial.subscribe((newInitial) => {
             player.tutorialProgress(QuestLineHelper.tutorial.curQuest());
             player.tutorialState = newInitial;
-        })
+        });
 
-        this.tutorialCompleter = this.tutorial.curQuest.subscribe((quest)=>{
+        this.tutorialCompleter = this.tutorial.curQuest.subscribe((quest) => {
             if (quest == QuestLineHelper.tutorial.totalQuests) {
                 QuestLineHelper.tutorialTracker.dispose();
                 player.tutorialState = null;
                 player.tutorialProgress(quest);
                 player.tutorialComplete(true);
             }
-        })
+        });
     }
 }

@@ -21,7 +21,7 @@ class Town {
         this._shop = ko.observable(shop);
         this._dungeon = ko.observable(dungeon);
         this.dungeonReq = dungeonReq;
-        this.startingTown = GameConstants.StartingTowns.indexOf(this._name()) > -1
+        this.startingTown = GameConstants.StartingTowns.indexOf(this._name()) > -1;
     }
 
     get name(): KnockoutObservable<string> {
@@ -84,7 +84,7 @@ class DungeonTown extends Town {
 const TownList: { [name: string]: Town | PokemonLeague } = {};
 
 //Kanto Towns
-let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp","Dungeon_ticket"]);
+let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp", "Dungeon_ticket"]);
 TownList["Pewter City"] = new Town("Pewter City", [2], PewterCityShop);
 
 let CeruleanCityShop = new Shop(["Water_stone", "xAttack", "Water_egg"]);

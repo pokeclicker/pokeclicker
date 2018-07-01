@@ -30,19 +30,19 @@ class GymRunner {
                 $('#gymCountdownView').fadeOut(300);
                 let $img = $('#gif-go');
                 $img.hide();
-            }, GameConstants.GYM_COUNTDOWN)
+            }, GameConstants.GYM_COUNTDOWN);
 
         } else {
             Notifier.notify(gym.leaderName + " does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges", GameConstants.NotificationOption.danger);
         }
     }
 
-    public static resetGif(){
+    public static resetGif() {
         let $img = $('#gif-go');
-            $img.show();
-            setTimeout(function() {
-                $img.attr('src', 'assets/gifs/go.gif');
-            }, 0);
+        $img.show();
+        setTimeout(function () {
+            $img.attr('src', 'assets/gifs/go.gif');
+        }, 0);
     }
 
     public static tick() {
@@ -50,7 +50,7 @@ class GymRunner {
             GymRunner.gymLost();
         }
         this.timeLeft(this.timeLeft() - GameConstants.GYM_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100))
+        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100));
     }
 
     public static gymLost() {
@@ -75,7 +75,7 @@ class GymRunner {
 
     public static timeLeftSeconds = ko.computed(function () {
         return (Math.ceil(GymRunner.timeLeft() / 10) / 10).toFixed(1);
-    })
+    });
 
 }
 
@@ -83,9 +83,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
 
-       if(GymBattle.gym.badgeReward == GameConstants.Badge.Soul){
-           player.gainKeyItem("Safari ticket");
-       }
+        if (GymBattle.gym.badgeReward == GameConstants.Badge.Soul) {
+            player.gainKeyItem("Safari ticket");
+        }
 
     });
 });

@@ -33,7 +33,7 @@ class ShopHandler {
             player.payCurrency(item.totalPrice(), item.currency);
             item.buy(this.amount());
             item.increasePriceMultiplier(this.amount());
-            Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success)
+            Notifier.notify("You bought " + this.amount() + " " + item.name() + multiple, GameConstants.NotificationOption.success);
         } else {
             let curr = "currency";
             switch (item.currency) {
@@ -47,7 +47,7 @@ class ShopHandler {
                     curr = "dungeon tokens";
                     break;
             }
-            Notifier.notify(`You don't have enough ${curr} to buy ${this.amount()} ${item.name() + multiple}`, GameConstants.NotificationOption.danger)
+            Notifier.notify(`You don't have enough ${curr} to buy ${this.amount()} ${item.name() + multiple}`, GameConstants.NotificationOption.danger);
         }
 
         ShopHandler.resetAmount();
@@ -72,9 +72,9 @@ class ShopHandler {
 
     public static calculateCss(i: number): string {
         if (this.selected() == i) {
-            return "shopItem clickable btn shopItemSelected"
+            return "shopItem clickable btn shopItemSelected";
         } else {
-            return "shopItem clickable btn"
+            return "shopItem clickable btn";
         }
     }
 
@@ -82,9 +82,9 @@ class ShopHandler {
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
         if (item && !player.hasCurrency(item.totalPrice(), item.currency) || this.amount() < 1) {
-            return "btn btn-danger smallButton smallFont"
+            return "btn btn-danger smallButton smallFont";
         } else {
-            return "btn btn-success smallButton smallFont"
+            return "btn btn-success smallButton smallFont";
         }
     }
 }

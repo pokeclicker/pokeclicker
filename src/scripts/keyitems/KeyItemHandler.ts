@@ -2,7 +2,7 @@ class KeyItemHandler {
 
     public static keyItemList: KnockoutObservable<KeyItem>[];
     public static inspectedItem: KnockoutObservable<KeyItem> = ko.observable(null);
-    public static selectedItem:  KnockoutObservable<KeyItem> = ko.observable(null);
+    public static selectedItem: KnockoutObservable<KeyItem> = ko.observable(null);
 
     public static initialize() {
         KeyItemHandler.keyItemList = [];
@@ -13,8 +13,8 @@ class KeyItemHandler {
 
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Pokeball bag", "A tiny bag that can hold up to 4 different types of PokéBalls")));
 
-        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Town map", "A very convenient map that can be viewed anytime. It even shows you your present location in the region", function(){
-            return player.routeKillsObservable(1)() > player.routeKillsNeeded -1;
+        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Town map", "A very convenient map that can be viewed anytime. It even shows you your present location in the region", function () {
+            return player.routeKillsObservable(1)() > player.routeKillsNeeded - 1;
         })));
 
         // TODO obtain somewhere at the start
@@ -32,7 +32,7 @@ class KeyItemHandler {
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Safari ticket", "This ticket grants access to the Safari Zone in Fuchsia City")));
 
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Wailmer pail", "This is a tool for watering Berries you planted to make them grow more quickly", function () {
-            return player.berryList[0]() >= 5
+            return player.berryList[0]() >= 5;
         })));
 
         // TODO buy for 100 quest points
@@ -50,31 +50,31 @@ class KeyItemHandler {
         KeyItemHandler.selectedItem(item);
     }
 
-    public static getKeyItemByName(name:string): KeyItem{
-        for(let i = 0 ; i<KeyItemHandler.keyItemList.length; i++){
-            if(KeyItemHandler.keyItemList[i]().name() == name){
+    public static getKeyItemByName(name: string): KeyItem {
+        for (let i = 0; i < KeyItemHandler.keyItemList.length; i++) {
+            if (KeyItemHandler.keyItemList[i]().name() == name) {
                 return KeyItemHandler.keyItemList[i]();
             }
         }
     }
 
-    public static getKeyItemObservableByName(name:string): KnockoutObservable<KeyItem>{
-        for(let i = 0 ; i<KeyItemHandler.keyItemList.length; i++){
-            if(KeyItemHandler.keyItemList[i]().name() == name){
+    public static getKeyItemObservableByName(name: string): KnockoutObservable<KeyItem> {
+        for (let i = 0; i < KeyItemHandler.keyItemList.length; i++) {
+            if (KeyItemHandler.keyItemList[i]().name() == name) {
                 return KeyItemHandler.keyItemList[i];
             }
         }
     }
 
-    public static hover(name:string){
+    public static hover(name: string) {
         KeyItemHandler.inspectedItem(KeyItemHandler.getKeyItemByName(name));
     }
 
-    public static hoverRelease(){
+    public static hoverRelease() {
         KeyItemHandler.inspectedItem(KeyItemHandler.selectedItem());
     }
 
-    public static click(name:string){
+    public static click(name: string) {
         let item: KeyItem = KeyItemHandler.getKeyItemByName(name);
         KeyItemHandler.selectedItem(item);
     }

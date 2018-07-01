@@ -13,7 +13,7 @@ class OakItemRunner {
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Poison Barb", 40, "Clicks do more damage", 25, 5, 3)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Exp Share", 50, "Gain more exp from battling", 15, 3, 1)));
 
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem("Sprayduck", 60, "Makes your berries grow faster", 25, 5, 3    )));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem("Sprayduck", 60, "Makes your berries grow faster", 25, 5, 3)));
 
         OakItemRunner.oakItemList.push(ko.observable(new OakItem("Shiny Charm", 70, "Encounter more shinies", 50, 100, 150)));
 
@@ -30,11 +30,11 @@ class OakItemRunner {
     }
 
     public static loadOakItems() {
-        let oakItems = JSON.parse(JSON.stringify(player._oakItemsEquipped))
+        let oakItems = JSON.parse(JSON.stringify(player._oakItemsEquipped));
         for (let i = 0; i < oakItems.length; i++) {
             OakItemRunner.activateOakItem(OakItemRunner.getOakItemByName(oakItems[i]).id);
         }
-        for(let i = 0; i<OakItemRunner.oakItemList.length; i++){
+        for (let i = 0; i < OakItemRunner.oakItemList.length; i++) {
             OakItemRunner.oakItemList[i]().calculateLevel();
         }
     }
@@ -50,7 +50,7 @@ class OakItemRunner {
     public static click(name: string) {
         let item: OakItem = OakItemRunner.getOakItemByName(name);
         OakItemRunner.selectedItem(item);
-        if(item.isUnlocked()) {
+        if (item.isUnlocked()) {
             OakItemRunner.activateOakItem(item.id);
         }
     }
