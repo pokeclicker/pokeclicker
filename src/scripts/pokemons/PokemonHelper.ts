@@ -30,7 +30,7 @@ class PokemonHelper {
 
     public static calculateLevel(pokemon: CaughtPokemon): number {
         let level;
-        let type = parseInt(GameConstants.LevelType[PokemonHelper.getPokemonByName(pokemon.name).levelType]);
+        let type = GameConstants.LevelType[PokemonHelper.getPokemonByName(pokemon.name).levelType];
         switch (type) {
             case GameConstants.LevelType.slow:
                 level = Math.pow(pokemon.exp() * 4 / 5, 1 / 3);
