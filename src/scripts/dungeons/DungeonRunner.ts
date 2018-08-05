@@ -49,9 +49,12 @@ class DungeonRunner {
         }
 
         DungeonRunner.chestsOpened++;
+        let random: number = GameConstants.randomIntBetween(0, DungeonRunner.dungeon.itemList.length - 1);
+        let input = GameConstants.BattleItemType[DungeonRunner.dungeon.itemList[random]];
+        Notifier.notify('Found 1 ' + input + ' in a dungeon chest', GameConstants.NotificationOption.success);
+        player.gainItem(input, 1);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
-        // TODO add loot
         if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_CHEST_SHOW) {
             DungeonRunner.map.showChestTiles();
         }
@@ -98,5 +101,5 @@ class DungeonRunner {
     public static payTokens() {
         player.dungeonTokens(player.dungeonTokens() - DungeonRunner.dungeon.tokenCost);
     }
-
+    
 }
