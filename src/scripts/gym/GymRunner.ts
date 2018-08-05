@@ -28,8 +28,7 @@ class GymRunner {
                 GymBattle.index(0);
                 GymBattle.generateNewEnemy();
                 $('#gymCountdownView').fadeOut(300);
-                let $img = $('#gif-go');
-                $img.hide();
+                document.getElementById("gif-go").style.display="none";
             }, GameConstants.GYM_COUNTDOWN)
 
         } else {

@@ -120,7 +120,7 @@ class Safari {
             html += "</div>";
         }
 
-        $("#safariBattleBody").hide();
+        document.getElementById("safariBattleBody").style.display="none";
         $("#safariBody").html(html).show();
 
         Safari.addPlayer(Math.floor(GameConstants.Safari.SizeX - 1)/2, GameConstants.Safari.SizeY - 1);

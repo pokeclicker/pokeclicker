@@ -2,7 +2,7 @@ class Preload {
 
     public static hideSplashScreen(fast: boolean = false) {
         if (fast) {
-            $('.loader').hide();
+            document.getElementById(".loader").style.display="none";
         } else {
             $('.loader').fadeOut("slow")
         }

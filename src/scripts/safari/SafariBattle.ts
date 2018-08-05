@@ -38,7 +38,7 @@ class SafariBattle {
     }
 
     private static show() {
-        $("#safariBody").hide();
+        document.getElementById("safariBody").style.display="none";
         $("#safariBattleBody").show();
     }
 
@@ -196,7 +196,7 @@ class SafariBattle {
     private static endBattle() {
         Safari.inBattle(false);
         SafariBattle.busy = false;
-        $("#safariBattleBody").hide();
+        document.getElementById("safariBattleBody").style.display="none";
         $("#safariBody").show();
     }
 
