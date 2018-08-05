@@ -28,7 +28,7 @@ class UndergroundItem {
         // this.addItem("Armor Fossil", 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
         // this.addItem("Skull Fossil", 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]], 3);
         this.addItem("Rare Bone", 8, [[8,0,0,0,0,8], [8,8,8,8,8,8], [8,0,0,0,0,8]], 3);
-        this.addItem("Star Piece", 9, [[0,9,0,], [9,9,9], [0,9,0]], 5);
+        this.addItem("Star Piece", 9, [[0,9,0], [9,9,9], [0,9,0]], 5);
         this.addItem("Revive", 10, [[0,10,0], [10,10,10,], [0,10,0]], 2);
         this.addItem("Max Revive", 11, [[11,11,11], [11,11,11], [11,11,11]], 4);
         this.addItem("Iron Ball", 12, [[12,12,12], [12,12,12], [12,12,12]], 2);
