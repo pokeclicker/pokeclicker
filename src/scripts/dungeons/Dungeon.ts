@@ -7,7 +7,7 @@ class Dungeon {
 
     name: KnockoutObservable<string> = ko.observable("");
     pokemonList: string[];
-    itemList: GameConstants.BattleItemType[]
+    itemList: GameConstants.BattleItemType[];
     baseHealth: number;
     bossList: DungeonBossPokemon[];
     tokenCost: number;
