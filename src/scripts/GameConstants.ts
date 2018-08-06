@@ -10,6 +10,7 @@ namespace GameConstants {
     export const UNDERGROUND_TICK = 1000;
     export const DUNGEON_TIME = 6000;
     export const DUNGEON_TICK = 1;
+    export const EFFECT_ENGINE_TICK = 100;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
@@ -22,6 +23,7 @@ namespace GameConstants {
     export const AMOUNT_OF_POKEMONS_GEN1 = 151;
     export const AMOUNT_OF_POKEMONS_GEN2 = 251;
     export const AMOUNT_OF_BADGES = 16;
+    export const ITEM_USE_TIME = 30;
 
     export const ROAMING_MIN_CHANCE = 8192;
     export const ROAMING_MAX_CHANCE = 4096;

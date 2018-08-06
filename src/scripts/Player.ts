@@ -36,6 +36,7 @@ class Player {
     private _oakItemsEquipped: string[];
     private _eggList: Array<KnockoutObservable<Egg | void>>;
     private _eggSlots: KnockoutObservable<number>;
+    private _effectEngine: string[];
 
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
@@ -83,6 +84,7 @@ class Player {
             return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
         });
         this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
+        this._effectEngine = savedPlayer._effectEngine || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
@@ -440,9 +442,13 @@ class Player {
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
         let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
+        if(this.effectEngine['Lucky_incense']){
+            moneytogain = Math.floor(moneytogain * 1.5);
+        }
         this._money(this._money() + moneytogain);
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
         Game.updateMoney();
+        
         Game.animateMoney(moneytogain,'playerMoney');
     }
 
@@ -713,6 +719,14 @@ class Player {
         this._oakItemsEquipped = value;
     }
 
+    get effectEngine(): string[] {
+        return this._effectEngine;
+    }
+
+    set effectEngine(value: string[]) {
+        this._effectEngine = value;
+    }
+
     get starter(): GameConstants.Starter {
         return this._starter;
     }
@@ -785,7 +799,13 @@ class Player {
             }
         }
 
-        return Math.round(attack);
+        //add item effect bonus here
+        if(this.effectEngine['xAttack']){
+            return Math.round(attack * 1.5);
+        }else{
+            return Math.round(attack);
+        }
+        
     }
 
     get mineEnergy() {
@@ -972,6 +992,7 @@ class Player {
             "_starter",
             "_oakItemExp",
             "_oakItemsEquipped",
+            "_effectEngine",
             "_itemList",
             "_itemMultipliers",
             "_keyItems",

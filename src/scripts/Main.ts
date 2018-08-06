@@ -166,6 +166,13 @@ class Game {
             FarmRunner.tick();
         }
 
+        if (effectEngineRunner.counter > GameConstants.EFFECT_ENGINE_TICK){
+            effectEngineRunner.tick();
+            effectEngineRunner.counter = 0;
+        }else{
+            effectEngineRunner.counter++;
+        }
+
         if (GameHelper.counter > 60 * 1000) {
             GameHelper.updateTime();
         }

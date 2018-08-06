@@ -36,6 +36,7 @@ class BattleItem extends Item {
     }
 
     use() {
+        effectEngineRunner.addEffect(this.name());        
     }
 }
 
