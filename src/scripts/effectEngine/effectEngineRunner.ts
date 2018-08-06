@@ -12,7 +12,7 @@ class effectEngineRunner {
             }
             if(player.effectEngine[item] <= 0){
                 delete player.effectEngine[item];
-                Notifier.notify("The "+item+" has warn off!", GameConstants.NotificationOption.warning);
+                Notifier.notify("The "+item+" has worn off!", GameConstants.NotificationOption.warning);
             }
         }
     }
