@@ -3,10 +3,8 @@ class effectEngineRunner {
 
     public static tick() {
         this.counter = 0;
-        console.log("EFFECT ENGINE TICK RAN", player.effectEngine);    
         
         for(let item in player.effectEngine){
-            console.log(item);
             if(item != 'equals'){
                 player.effectEngine[item] -= 1;
                 let newWidth = player.effectEngine[item] / parseInt($('#'+item+'-meter').attr('maxTime')) * 100;
