@@ -164,8 +164,7 @@
                     <div data-bind="if: Game.gameState() === GameConstants.GameState.fighting">
                         <div style="height: 190px; display: block;" class="col-lg-12">
                             <div class="col-lg-12" style="display: block;">
-                                Route
-                                <span data-bind="text: player.route">number</span>
+                                <span data-bind="text: languages[player._language()].getValue('route', player.route())"></span>
                                 <!--If all Pokémon on the route are caught-->
                                 <span data-bind="if: (!RouteHelper.routeCompleted(player.route(), player.region, true) && RouteHelper.routeCompleted(player.route(), player.region, false))">
                                     <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
@@ -401,9 +400,9 @@
                         <table class="table pokeball-table borderless">
                             <thead>
                             <tr>
-                                <td>Caught</td>
+                                <td data-bind="text:languages[player._language()].getValue('caught')">caught</td>
                                 <td>#</td>
-                                <td>New</td>
+                                <td data-bind="text:languages[player._language()].getValue('new')">new</td>
                                 <td><img
                                         data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon', trigger: 'hover', placement:'right' }"
                                         src="assets/images/questionmark.png"></td>
@@ -491,7 +490,7 @@
             <div class="page-item pokemon-list-container" id="pokemonListContainer"
                  data-bind="visible: player.starter != GameConstants.Starter.None" style="background-color: white">
                 <select data-bind="options: GameConstants.SortOptions,
-                                   optionsText: 'optionText',
+                                   optionsText: function(optionText) {return languages[player._language()].getValue(optionText['optionText'])},
                                    optionsValue: 'optionValue',
                                    value: player._sortOption,
                                    optionsCaption: 'Sort By...'" title="">
@@ -612,8 +611,7 @@
                         </div>
 
                         <div style="min-height:80px; vertical-align: center">
-                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span> Pokémon to
-                            unlock!
+                            <span data-bind="text: languages[player._language()].getValue('oakItemRequirement', OakItemRunner.inspectedItem().unlockReq)">...</span>
                         </div>
                     </div>
                 </div>

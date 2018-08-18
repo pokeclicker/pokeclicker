@@ -5,6 +5,8 @@
 
 class Player {
 
+    public _language : KnockoutObservable<string>;
+
     private _money: KnockoutObservable<number>;
     private _dungeonTokens: KnockoutObservable<number>;
 
@@ -41,6 +43,7 @@ class Player {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
+        this._language = ko.observable(savedPlayer._language || 'english');
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
@@ -950,6 +953,14 @@ class Player {
         Game.animateMoney(value,'playerMoneyQuest');
     }
 
+    get language() : string {
+        return this._language()
+    }
+
+    set language(value:string) {
+        this._language(value)
+    }
+
     public toJSON() {
         let keep = [
             "_money",
@@ -1006,6 +1017,7 @@ class Player {
             "tutorialProgress",
             "tutorialState",
             "tutorialComplete",
+            "_language",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
