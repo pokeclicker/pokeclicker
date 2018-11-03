@@ -203,7 +203,7 @@
                                 <div data-bind="ifnot: Battle.catching">
                                     <img class="clickable" id="enemy"
                                          data-bind="click: function() {Battle.clickAttack()},
-                                                    attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
+                                                    attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny, true) }"
                                          src=""/>
                                 </div>
                                 <div data-bind="if: Battle.catching">
