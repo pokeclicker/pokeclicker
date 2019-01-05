@@ -9,9 +9,11 @@ class effectEngineRunner {
                 player.effectEngine[item] -= 1;
                 let newWidth = player.effectEngine[item] / parseInt($('#'+item+'-meter').attr('maxTime')) * 100;
                 $('#'+item+'-meter').css('width',newWidth + "%");
+                $('#'+item+'-meter').parent().attr('title','Seconds Remaining: ' + player.effectEngine[item] );
             }
             if(player.effectEngine[item] <= 0){
                 delete player.effectEngine[item];
+                $('#'+item+'-meter').parent().removeAttr('title');
                 Notifier.notify("The "+item+" has worn off!", GameConstants.NotificationOption.warning);
             }
         }
