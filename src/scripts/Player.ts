@@ -442,7 +442,7 @@ class Player {
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
         let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
-        if(this.effectEngine['Lucky_incense']){
+        if(this.effectEngine[GameConstants.BattleItemType.Lucky_incense]){
             moneytogain = Math.floor(moneytogain * 1.5);
         }
         this._money(this._money() + moneytogain);
@@ -800,7 +800,7 @@ class Player {
         }
 
         //add item effect bonus here
-        if(this.effectEngine['xAttack']){
+        if(this.effectEngine[GameConstants.BattleItemType.xAttack]){
             return Math.round(attack * 1.5);
         }else{
             return Math.round(attack);
