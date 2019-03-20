@@ -17,11 +17,10 @@ class DungeonBattle extends Battle {
         let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
-            DungeonBattle.pokeball = ko.observable(pokeBall);
-            DungeonBattle.catching(true);
+            this.prepareCatch(pokeBall);
             setTimeout(
                 () => {
-                    this.throwPokeball(pokeBall);
+                    this.attemptCatch();
                     if (DungeonRunner.fightingBoss()) {
                         DungeonRunner.fightingBoss(false);
                         DungeonRunner.dungeonWon();
