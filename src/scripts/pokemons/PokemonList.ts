@@ -1795,7 +1795,7 @@ const pokemonList = [
         "name": "Eevee",
         "catchRate": 45,
         "evolution": "Vaporeon, Jolteon, Flareon, Espeon, Umbreon",
-        "evoLevel": "Water Stone, Thunder Stone, Fire Stone, Time Stone, Time Stone",
+        "evoLevel": "Water_stone, Thunder_stone, Fire_stone, Time Stone, Time Stone",
         "type": [
             "Normal"
         ],
