@@ -22,7 +22,7 @@ class EvolutionStone extends Item {
     }
 
     public static computeEvolution(type: GameConstants.StoneType, pokemon: string): string {
-        if(pokemon == "Eevee") {
+        if (pokemon == "Eevee") {
             switch (type) {
                 case GameConstants.StoneType.Fire_stone: {
                     return "Flareon";
@@ -32,6 +32,15 @@ class EvolutionStone extends Item {
                 }
                 case GameConstants.StoneType.Thunder_stone: {
                     return "Jolteon";
+                }
+            }
+        } else if (pokemon == "Gloom") {
+            switch (type) {
+                case GameConstants.StoneType.Leaf_stone: {
+                    return "Vileplume";
+                }
+                case GameConstants.StoneType.Sun_stone: {
+                    return "Bellossom";
                 }
             }
         }
