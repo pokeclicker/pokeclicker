@@ -350,6 +350,10 @@ namespace GameConstants {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    export function clipNumber(num: number, min: number, max: number) {
+        return Math.min(Math.max(num, min), max);
+    }
+
     export enum Badge {
         "None" = 0,
         "Boulder" = 1,

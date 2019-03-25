@@ -162,7 +162,7 @@
                      id="routeBattleView">
 
                     <div data-bind="if: Game.gameState() === GameConstants.GameState.fighting">
-                        <div style="height: 190px; display: block;" class="col-lg-12">
+                        <div style="height: 220px; display: block;" class="col-lg-12">
                             <div class="col-lg-12" style="display: block;">
                                 Route
                                 <span data-bind="text: player.route">number</span>
@@ -198,18 +198,24 @@
                                      src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                             </span>
 
-                            <br>
-                            <div style="height: 96px;">
+                            <div>
                                 <div data-bind="ifnot: Battle.catching">
                                     <img class="clickable" id="enemy"
                                          data-bind="click: function() {Battle.clickAttack()},
                                                     attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
                                          src=""/>
+                                    <br>
+                                    <span data-bind="text: Battle.enemyPokemon().health">health</span>
+                                    <span>/</span>
+                                    <span data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
                                 </div>
                                 <div data-bind="if: Battle.catching">
                                     <img class="pokeball-animated"
                                          data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
                                          src=""/>
+                                    <br>
+                                    Catch Chance: 
+                                    <span data-bind="text: Battle.catchRateActual()">Catch Rate</span>%
                                 </div>
                             </div>
                             <div class="progress">
@@ -220,15 +226,11 @@
                                 </div>
                             </div>
                         </div>
-                        <span data-bind="text: Battle.enemyPokemon().health">health</span><span>/</span>
-                        <!---->
-                        <span
-                                data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
                     </div>
 
                     <!--If the player is in a dungeon-->
                     <div data-bind="if: Game.gameState() === GameConstants.GameState.dungeon">
-                        <div class="col-lg-12" style="display: block; height: 170px">
+                        <div class="col-lg-12" style="display: block; height: 220px">
                             <div>
                                 <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span>
                                 <!--If all Pokémon on the route are caught-->
@@ -267,17 +269,22 @@
                                          src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                                 </span>
 
-                                <br>
-                                <div style="height: 96px;">
+                                <div>
                                     <div data-bind="ifnot: DungeonBattle.catching">
                                         <img id="dungeonEnemy"
                                              data-bind="click: function() {DungeonBattle.clickAttack()}, attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
                                              src=""/>
+                                        <br>
+                                        <span data-bind="text: DungeonBattle.enemyPokemon().health">health</span>/
+                                        <span data-bind="text: DungeonBattle.enemyPokemon().maxHealth">maxHealth</span>
                                     </div>
                                     <div data-bind="if: DungeonBattle.catching">
                                         <img class="pokeball-animated"
                                              data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
                                              src=""/>
+                                        <br>
+                                        Catch Chance: 
+                                        <span data-bind="text: DungeonBattle.catchRateActual()">Catch Rate</span>%
                                     </div>
                                 </div>
                                 <div class="progress">
@@ -299,15 +306,6 @@
                                     Bossfight
                                 </button>
                             </div>
-                        </div>
-                        <div data-bind="if: DungeonRunner.fighting()">
-                            <div style="height: 30px">
-                                <span data-bind="text: DungeonBattle.enemyPokemon().health">health</span>/<span
-                                    data-bind="text: DungeonBattle.enemyPokemon().maxHealth">maxHealth</span>
-                            </div>
-                        </div>
-                        <div data-bind="ifnot: DungeonRunner.fighting()">
-                            <div style="height: 30px"></div>
                         </div>
                     </div>
                     <div data-bind="ifnot: Game.gameState() === GameConstants.GameState.town">
