@@ -22,31 +22,10 @@ class EvolutionStone extends Item {
     }
 
     public static computeEvolution(type: GameConstants.StoneType, pokemon: string): string {
-        if (pokemon == "Eevee") {
-            switch (type) {
-                case GameConstants.StoneType.Fire_stone: {
-                    return "Flareon";
-                }
-                case GameConstants.StoneType.Water_stone: {
-                    return "Vaporeon";
-                }
-                case GameConstants.StoneType.Thunder_stone: {
-                    return "Jolteon";
-                }
-            }
-        } else if (pokemon == "Gloom") {
-            switch (type) {
-                case GameConstants.StoneType.Leaf_stone: {
-                    return "Vileplume";
-                }
-                case GameConstants.StoneType.Sun_stone: {
-                    return "Bellossom";
-                }
-            }
-        }
-        else {
-            return PokemonHelper.getPokemonByName(pokemon).evolution;
-        }
+        // Assume stones and evolutions in pokemonList are consistent in ordering
+        let pkmObj = PokemonHelper.getPokemonByName(pokemon);
+        let index = ("" + pkmObj.evoLevel).split(", ").indexOf(GameConstants.StoneType[type]);
+        return pkmObj.evolution.split(", ")[index];
     }
 }
 
