@@ -602,7 +602,7 @@ const pokemonList = [
         "id": 44,
         "name": "Gloom",
         "catchRate": 120,
-        "evolution": "Vileplume, ",
+        "evolution": "Vileplume, Bellossom",
         "evoLevel": "Leaf_stone, Sun_stone",
         "type": [
             "Grass",
