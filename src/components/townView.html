@@ -64,29 +64,29 @@
            </div>
        </ul>
    </div>
-   <div class="col-7 no-gutters">
+   <div class="col-6 no-gutters">
        <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
        <img class="townImage no-select" src=""
             data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
    </div>
-   <div class="col no-gutters"></div>
-
-</div>
-<div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
-   <div class="card">
-       <!--Display all available Pokémon in this dungeon-->
-       <ul class="list-inline"
-           data-bind="foreach: player.town().dungeon().allPokemonNames">
-           <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
-               <img class="dungeon-pokemon-preview" src=""
-                    data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
-           </li>
-           <li class="list-inline-item"
-               data-bind="ifnot: player.alreadyCaughtPokemon($data)">
-               <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src=""
-                    data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
-           </li>
-       </ul>
+   <div class="col no-gutters">
+        <div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
+            <div class="card" style="border:none; height:240px; overflow-y: auto">
+                <!--Display all available Pokémon in this dungeon-->
+                <ul class="list-inline"
+                    data-bind="foreach: player.town().dungeon().allPokemonNames">
+                    <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
+                        <img class="dungeon-pokemon-preview" src=""
+                                data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                    </li>
+                    <li class="list-inline-item"
+                        data-bind="ifnot: player.alreadyCaughtPokemon($data)">
+                        <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src=""
+                                data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
    </div>
 </div>
 </div>
