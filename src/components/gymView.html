@@ -1,6 +1,6 @@
 <div id="gymView" data-bind="if: Game.gameState() === GameConstants.GameState.gym">
 
-    <div style="position:relative; height: 220px;">
+    <div style="position:relative">
         <div id="gymCountdownView">
                 <div class="row" style="display: inline-block; vertical-align: middle;">
                     <div class="col-sm-6 offset-sm-3">
@@ -55,16 +55,4 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <table width="100%">
-            <tr>
-                <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                        data-bind="text: player.pokemonAttackObservable"></span></span></td>
-                <td width="50%"><span style="display: inline;">Click Attack: <span
-                        data-bind="text: player.clickAttackObservable"></span></span>
-                </td>
-            </tr>
-        </table>
-    </div>
-
 </div>
