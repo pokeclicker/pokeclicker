@@ -1,19 +1,19 @@
 <div id="shopView"
      data-bind="if: Game.gameState() === GameConstants.GameState.shop">
-<div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
-   <div class="col-sm-3"  data-bind="visible: ShopHandler.ownKeyItem(name())">
-       <div
-               data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
-           <img src="" height="36px"
-                data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
-           <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
-           <p>
-               <img src="" class="currencyImage"
-                    data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
-               <span data-bind="text: totalPrice">Price</span>
-           </p>
-       </div>
-   </div>
+<div style="height: 140px; overflow-x: hidden; overflow-y: auto">
+    <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
+        <div class="col-4 col-md-2" data-bind="visible: ShopHandler.ownKeyItem(name())">
+            <div data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
+                <img src="" height="36px" data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
+                <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
+                <p>
+                    <img src="" class="currencyImage"
+                            data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
+                    <span data-bind="text: totalPrice">Price</span>
+                </p>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="row justify-content-center">
    <div class="col-11 col-sm-10 col-md-11">
