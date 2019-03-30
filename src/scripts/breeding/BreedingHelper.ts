@@ -119,7 +119,7 @@ const HatchList: { [name: number]: string[] } = {};
 HatchList[GameConstants.EggType.Fire] = ["Charmander", "Vulpix", "Growlithe", "Ponyta"];
 HatchList[GameConstants.EggType.Water] = ["Squirtle", "Lapras", "Staryu", "Psyduck"];
 HatchList[GameConstants.EggType.Grass] = ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"];
-HatchList[GameConstants.EggType.Fight] = ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"];
+HatchList[GameConstants.EggType.Fighting] = ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"];
 HatchList[GameConstants.EggType.Electric] = ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"];
 HatchList[GameConstants.EggType.Dragon] = ["Dratini", "Dragonair", "Dragonite"];
 

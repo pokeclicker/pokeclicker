@@ -39,7 +39,7 @@ class EggItem extends Item {
 ItemList['Fire_egg'] = new EggItem(GameConstants.EggItemType.Fire_egg);
 ItemList['Water_egg'] = new EggItem(GameConstants.EggItemType.Water_egg);
 ItemList['Grass_egg'] = new EggItem(GameConstants.EggItemType.Grass_egg);
-ItemList['Fight_egg'] = new EggItem(GameConstants.EggItemType.Fight_egg);
+ItemList['Fighting_egg'] = new EggItem(GameConstants.EggItemType.Fighting_egg);
 ItemList['Electric_egg'] = new EggItem(GameConstants.EggItemType.Electric_egg);
 ItemList['Dragon_egg'] = new EggItem(GameConstants.EggItemType.Dragon_egg);
 ItemList['Pokemon_egg'] = new EggItem(GameConstants.EggItemType.Pokemon_egg);
