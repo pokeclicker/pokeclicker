@@ -10,9 +10,28 @@ class EggItem extends Item {
     }
 
     buy(amt: number) {
+        this._increaseCount(amt);
     }
 
     use() {
+        if (this.type === GameConstants.EggItemType.Pokemon_egg) {
+            return;
+        }
+        if (player.itemList[this.name()]() <= 0) {
+            return;
+        }
+
+        let success: boolean;
+        if (this.type === GameConstants.EggItemType.Mystery_egg) {
+            success = player.gainEgg(BreedingHelper.createRandomEgg());
+        } else {
+            let etype = GameConstants.EggType[GameConstants.EggItemType[this.type].split("_")[0]];
+            success = player.gainEgg(BreedingHelper.createTypedEgg(etype));
+        }
+        
+        if (success) {
+            this._decreaseCount(1);
+        }
     }
 }
 
