@@ -5,7 +5,7 @@ class EggItem extends Item {
     constructor(type: GameConstants.EggItemType) {
         let basePrice = 1000;
         let priceMultiplier = 1;
-        super(GameConstants.EggItemType[type], basePrice, priceMultiplier, GameConstants.Currency.money);
+        super(GameConstants.EggItemType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
         this.type = type;
     }
 
