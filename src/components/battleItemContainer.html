@@ -12,7 +12,7 @@
                                 click: function(){ItemHandler.useItem($data)}
                             },
                             tooltip: {
-                                title: $data.replace(/_/g, ' ') + ' remaining: ' + (+player.itemList[$data]()),
+                                title: ko.pureComputed(function(){return $data.replace(/_/g, ' ') + ' remaining: ' + (+player.itemList[$data]())}),
                                 trigger: 'hover',
                                 placement: 'top',
                             }">
