@@ -17,7 +17,7 @@
                     <div class="progress" data-bind='if: progress() < 100,
                                                          tooltip: {title: ko.pureComputed(function(){return Math.floor(progress()) + "%"}), trigger: "hover"}'>
                         <div class="progress-bar bg-success" role="progressbar"
-                             data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
+                             data-bind="attr:{ style: 'width:' + $data.progress() + '%' }, text: Math.floor($data.progress()) + '%'"
                              aria-valuemin="0" aria-valuemax="100">
                         </div>
                     </div>
