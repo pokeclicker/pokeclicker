@@ -21,11 +21,11 @@
                              aria-valuemin="0" aria-valuemax="100">
                         </div>
                     </div>
-                    <div data-bind='if: progress() >= 100'>
-                        <button class='btn btn-primary'
-                                data-bind='click: function(){BreedingHelper.hatchPokemonEgg($index())}'>
-                            Hatch!
-                        </button>
+                    <div class="progress" data-bind='if: progress() >= 100'>
+                        <div class="progress-bar bg-blue" role="progressbar"
+                        data-bind="attr:{ style: 'width: 100%; cursor: pointer;' }, click: function(){BreedingHelper.hatchPokemonEgg($index())}, text: 'Hatch!'"
+                        aria-valuemin="0" aria-valuemax="100">
+                        </div>
                     </div>
                 </div>
             </div>
