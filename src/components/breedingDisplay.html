@@ -8,7 +8,7 @@
                     <button class='btn btn-primary' onclick='player.buyEggSlot()'
                             data-bind='css: {disabled: player.questPoints <= player.nextEggSlotCost()}'>Buy</button>
                 </div>
-                <div data-bind="if: $index() > player.eggSlots()" style="margin-top:44px;">
+                <div data-bind="if: $index() > player.eggSlots()" style="margin-top: 30px;">
                     <img src="../assets/images/breeding/lock.png">
                 </div>
                 <div data-bind="if: $data !== null">
