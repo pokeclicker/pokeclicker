@@ -28,7 +28,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                            <img class="smallImage"
                                 data-bind="attr:{ src: '/assets/images/' + (player.caughtShinyList().includes(name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"
                                 src=""/>
-                           <span data-bind="text: name" style="margin-left: 20px">Name</span><span data-bind="if: player.caughtShinyList().includes(name)">&nbsp;✨</span>
+                           <span data-bind="text: name" style="margin-left: 20px">Name</span><span style="float:right" data-bind="if: player.caughtShinyList().includes(name)">&nbsp;✨</span>
                        </button>
                    </div>
                </div>
