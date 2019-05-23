@@ -23,14 +23,12 @@ class ItemHandler {
 
     public static useStones(){
         if(this.pokemonSelected() == ""){
-            Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
-            return;
+            return Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
         }
         let amount = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
-        if(amount == 0){
-            Notifier.notify("You don't have any stones left...", GameConstants.NotificationOption.danger);
-            return;
+        if(!amount){
+            return Notifier.notify(`You don't have any ${this.stoneSelected().replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
         }
 
         for(let i = 0; i< amount; i++){
