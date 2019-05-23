@@ -36,7 +36,7 @@ class Player {
     private _oakItemsEquipped: string[];
     private _eggList: Array<KnockoutObservable<Egg | void>>;
     private _eggSlots: KnockoutObservable<number>;
-    private _effectEngine: string[];
+    private _effectEngine: { [name: string]: number };
 
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
@@ -84,7 +84,7 @@ class Player {
             return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
         });
         this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
-        this._effectEngine = savedPlayer._effectEngine || [];
+        this._effectEngine = savedPlayer._effectEngine || {};
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
@@ -732,11 +732,11 @@ class Player {
         this._oakItemsEquipped = value;
     }
 
-    get effectEngine(): string[] {
+    get effectEngine(): { [name: string]: number } {
         return this._effectEngine;
     }
 
-    set effectEngine(value: string[]) {
+    set effectEngine(value: { [name: string]: number }) {
         this._effectEngine = value;
     }
 
