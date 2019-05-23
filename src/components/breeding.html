@@ -26,9 +26,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                        <button class="btn btn-secondary smallButton list-group-item-action"
                                data-bind="click: function() {BreedingHelper.gainPokemonEgg($data)}">
                            <img class="smallImage"
-                                data-bind="attr:{ src: '/assets/images/' + (player._caughtShinyList().includes(name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"
+                                data-bind="attr:{ src: '/assets/images/' + (player.caughtShinyList().includes(name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"
                                 src=""/>
-                           <span data-bind="text: name" style="margin-left: 20px">Name</span>
+                           <span data-bind="text: name" style="margin-left: 20px">Name</span><span data-bind="if: player.caughtShinyList().includes(name)">&nbsp;✨</span>
                        </button>
                    </div>
                </div>
