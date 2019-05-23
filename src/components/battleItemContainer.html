@@ -1,29 +1,22 @@
 <div class="page-item" id="battleItemContainer">
     <div class="card">
-        <div class="row justify-content-sm-center">
+        <div class="row justify-content-sm-center"
+            data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
             <div class="battle-item-small">
-                <img src="assets/images/items/xAttack.png" class="clickable" onclick="ItemHandler.useItem('xAttack')">
-                <div class="meter" id="xAttack-meter"></div>
-            </div>
-            <div class="battle-item-small">
-                <img src="assets/images/items/xClick.png" class="clickable" onclick="ItemHandler.useItem('xClick')">
-                <div class="meter" id="xClick-meter"></div>
-            </div>
-            <div class="battle-item-small">
-                <img src="assets/images/items/xExp.png" class="clickable" onclick="ItemHandler.useItem('xExp')">
-                <div class="meter" id="xExp-meter"></div>
-            </div>
-            <div class="battle-item-small">
-                <img src="assets/images/items/Lucky_incense.png" class="clickable" onclick="ItemHandler.useItem('Lucky_incense')">
-                <div class="meter" id="Lucky_incense-meter"></div>
-            </div>
-            <div class="battle-item-small">
-                <img src="assets/images/items/Token_collector.png" class="clickable" onclick="ItemHandler.useItem('Token_collector')">
-                <div class="meter" id="Token_collector-meter"></div>
-            </div>
-            <div class="battle-item-small">
-                <img src="assets/images/items/Item_magnet.png" class="clickable" onclick="ItemHandler.useItem('Item_magnet')">
-                <div class="meter" id="Item_magnet-meter"></div>
+                <img src="" class="clickable"
+                data-bind="attr:{ src: '/assets/images/items/' + $data + '.png'},
+                            css: {
+                                'battle-item-none': !(+player.itemList[$data]())
+                            },
+                            event: {
+                                click: function(){ItemHandler.useItem($data)}
+                            },
+                            tooltip: {
+                                title: $data.replace(/_/g, ' ') + ' remaining: ' + (+player.itemList[$data]()),
+                                trigger: 'hover',
+                                placement: 'top',
+                            }">
+                <div class="meter" data-bind="attr: {id:$data + '-meter'}"></div>
             </div>
         </div>
 
