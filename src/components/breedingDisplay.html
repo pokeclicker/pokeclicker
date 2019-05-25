@@ -14,11 +14,11 @@
                 <div data-bind="if: $data !== null">
                     <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
 
-                    <div class="progress" data-bind='if: progress() < 100,
-                                                         tooltip: {title: ko.pureComputed(function(){return Math.floor(progress()) + "%"}), trigger: "hover"}'>
+                    <div class="progress" data-bind='if: progress() < 100'>
                         <div class="progress-bar bg-success" role="progressbar"
-                             data-bind="attr:{ style: 'width:' + $data.progress() + '%' }, text: Math.floor($data.progress()) + '%'"
+                             data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
                              aria-valuemin="0" aria-valuemax="100">
+							 <span data-bind="text: Math.floor($data.progress()) + '%'"></span>
                         </div>
                     </div>
                     <div class="progress" data-bind='if: progress() >= 100'>
