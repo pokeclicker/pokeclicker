@@ -25,6 +25,9 @@ class FarmRunner {
     }
 
     public static computePlotPrice(): number {
+        if (this.allPlotsUnlocked()) {
+            return Infinity;
+        }
         let i = 0;
         while (player.plotList[i]().isUnlocked()) {
             i++;
@@ -40,6 +43,10 @@ class FarmRunner {
         }
     }
 
+    public static allPlotsUnlocked() {
+        return player.plotList[player.plotList.length - 1]().isUnlocked();
+    }
+    
     public static canBuyPlot() {
         return player.farmPoints() >= this.plotPrice();
     }
