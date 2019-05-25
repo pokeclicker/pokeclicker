@@ -18,7 +18,7 @@ class FarmRunner {
 
     public static tick() {
         this.counter = 0;
-        for (let i = 0; i < 25; i++) {
+        for (let i = 0; i < player.plotList.length; i++) {
             player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - 1));
         }
 
@@ -48,7 +48,7 @@ class FarmRunner {
     }
     
     public static canBuyPlot() {
-        return player.farmPoints() >= this.plotPrice();
+        return !this.allPlotsUnlocked() && player.farmPoints() >= this.plotPrice();
     }
 
     public static getPlot(plotId: number) {
@@ -67,7 +67,7 @@ class FarmRunner {
             total += FarmRunner.harvest(i, true);
         }
         if (total > 0 ){
-            Notifier.notify(`You earn ${total} money from the harvest!`, GameConstants.NotificationOption.success)
+            Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success)
         }
     }
 
@@ -77,8 +77,8 @@ class FarmRunner {
         }, this);
     }
 
-    public static hasBerry(type: GameConstants.BerryType, amount: number = 1) {
-        return (player.berryList[type]() - amount) >= 0;
+    public static hasBerry(type: GameConstants.BerryType) {
+        return player.berryList[type]() >= 0;
     }
 
     public static removeBerry(type: GameConstants.BerryType, amount: number = 1) {
@@ -112,7 +112,7 @@ class FarmRunner {
             let money = plot.berry().moneyValue;
             player.gainMoney(money);
             if(!all){
-                Notifier.notify(`You earn ${money} money from the harvest!`, GameConstants.NotificationOption.success)
+                Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success)
             }
             plot.berry(null);
             OakItemRunner.use("Sprayduck");
