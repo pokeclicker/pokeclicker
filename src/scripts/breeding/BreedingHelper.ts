@@ -46,9 +46,6 @@ class BreedingHelper {
         pokemon.breeding(true);
         player.gainEgg(egg);
         pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
-
-        $('#breedingModal').modal('hide');
-
     }
 
     public static hatchPokemonEgg(index: number) {
