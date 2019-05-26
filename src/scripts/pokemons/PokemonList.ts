@@ -603,7 +603,7 @@ const pokemonList = [
         "name": "Gloom",
         "catchRate": 120,
         "evolution": "Vileplume, Bellossom",
-        "evoLevel": "Leaf Stone, Sun Stone",
+        "evoLevel": "Leaf_stone, Sun_stone",
         "type": [
             "Grass",
             "Poison"
@@ -1795,7 +1795,7 @@ const pokemonList = [
         "name": "Eevee",
         "catchRate": 45,
         "evolution": "Vaporeon, Jolteon, Flareon, Espeon, Umbreon",
-        "evoLevel": "Water Stone, Thunder Stone, Fire Stone, Time Stone, Time Stone",
+        "evoLevel": "Water_stone, Thunder_stone, Fire_stone, Time_stone, Time_stone",
         "type": [
             "Normal"
         ],
