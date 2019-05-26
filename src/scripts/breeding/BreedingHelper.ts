@@ -13,8 +13,8 @@ class BreedingHelper {
     }
 
     public static progressEggs(amount: number) {
-        if (OakItemRunner.isActive("Blaze Casette")) {
-            amount *= (1 + OakItemRunner.calculateBonus("Blaze Casette") / 100)
+        if (OakItemRunner.isActive("Blaze Cassette")) {
+            amount *= (1 + OakItemRunner.calculateBonus("Blaze Cassette") / 100)
         }
         amount = Math.round(amount);
         for (let obj of player.eggList) {
@@ -46,9 +46,6 @@ class BreedingHelper {
         pokemon.breeding(true);
         player.gainEgg(egg);
         pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
-
-        $('#breedingModal').modal('hide');
-
     }
 
     public static hatchPokemonEgg(index: number) {
@@ -67,6 +64,7 @@ class BreedingHelper {
         player.capturePokemon(egg.pokemon, shiny);
         player._eggList[index](null);
         GameHelper.incrementObservable(player.statistics.hatchedEggs);
+        OakItemRunner.use("Blaze Cassette");
     }
 
     public static createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
