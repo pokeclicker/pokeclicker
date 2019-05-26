@@ -4,12 +4,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Farm</h4>
+                <!-- ko ifnot: FarmRunner.allPlotsUnlocked() -->
                 <button class="btn btn-success" onclick="FarmRunner.unlockPlot()"
                         data-bind="css: { disabled: !FarmRunner.canBuyPlot()}">
                     <span>Unlock new plot (</span>
                     <img src="assets/images/currency/farmPoint.png">
                     <span data-bind="text: FarmRunner.plotPrice() + ' )'"></span>
                 </button>
+                <!-- /ko -->
             </div>
             <div class="modal-body">
                 <div id="farmView"
