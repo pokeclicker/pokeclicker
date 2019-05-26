@@ -2572,7 +2572,7 @@ const pokemonList = [
       "name": "Sunkern",
       "catchRate": 235,
       "evolution": "Sunflora",
-      "evoLevel": "",
+      "evoLevel": "Sun_stone",
       "type": [
         "Grass"
       ],
@@ -3370,4 +3370,3 @@ for (let i = 0; i < pokemonList.length; i++) {
     pokemonMap[p["name"]] = p;
     pokemonMapId[i + 1] = p;
 }
-
