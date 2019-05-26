@@ -78,7 +78,7 @@ class FarmRunner {
     }
 
     public static hasBerry(type: GameConstants.BerryType) {
-        return player.berryList[type]() >= 0;
+        return player.berryList[type]() > 0;
     }
 
     public static removeBerry(type: GameConstants.BerryType, amount: number = 1) {
