@@ -7,6 +7,10 @@ let player;
 const debug = true;
 let game;
 
+interface JQuery {
+    animateNumber(options: object): void;
+}
+
 document.addEventListener("DOMContentLoaded", function (event) {
     $('#PrestigeModal').modal('show');
     Preload.load(debug).then(function () {
@@ -184,6 +188,10 @@ class Game {
         DailyDeal.generateDeals(player.maxDailyDeals, new Date());
         QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
         QuestHelper.loadCurrentQuest(player.currentQuest());
+        if (!player.tutorialComplete()) {
+            QuestLineHelper.createTutorial();
+            QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
+        }
     }
 
     static applyRouteBindings() {
@@ -202,5 +210,31 @@ class Game {
         });
     }
 
-}
+    static updateMoney(text: string = $("#playerMoney").text()) {
+        $("#playerMoney").prop('number', player.money);
+    }
 
+    static animateMoney(money,target){
+        let pos;
+        if($('#'+target).offset()){
+            pos = $('#'+target).offset();
+        }else{
+            pos = {"top":-200, "left":0};
+        }
+
+        let left= ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
+        let place = money.toString().length;
+        let multi = 1;
+        for(let i = 0; i < place; i++){
+            multi *= 10;
+        }
+        let ani = '<p class="moneyanimation" style="z-index:50;position:fixed;left:'+left+'px;top:'+pos.top+'px;">+'+money+'</p>';
+        $(ani).prependTo('body').animate({
+            top: -100,
+            opacity: 0
+        }, 250 * Math.log(money) + 150,"linear",
+            function() {
+        $(this).remove();
+        });
+    }
+}

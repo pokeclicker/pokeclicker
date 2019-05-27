@@ -14,33 +14,19 @@ class EvolutionStone extends Item {
         player.gainItem(GameConstants.StoneType[this.type], n)
     }
 
-
-
     public use(pokemon?:string) {
         let shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
-        if(pokemon == "Eevee") {
-            switch (this.type) {
-                case GameConstants.StoneType.Fire_stone: {
-                    player.capturePokemon("Flareon", shiny, false);
-                    break;
-                }
-                case GameConstants.StoneType.Water_stone: {
-                    player.capturePokemon("Vaporeon", shiny, false);
-                    break;
-                }
-                case GameConstants.StoneType.Thunder_stone: {
-                    player.capturePokemon("Jolteon", shiny, false);
-                    break;
-                }
-            }
-        }
-        else {
-            let evolution: string = PokemonHelper.getPokemonByName(pokemon).evolution;
-            player.capturePokemon(evolution, shiny, false);
-        }
+        let evolution = EvolutionStone.computeEvolution(this.type, pokemon);
+        player.capturePokemon(evolution, shiny, false);
         return shiny;
     }
 
+    public static computeEvolution(type: GameConstants.StoneType, pokemon: string): string {
+        // Assume stones and evolutions in pokemonList are consistent in ordering
+        let pkmObj = PokemonHelper.getPokemonByName(pokemon);
+        let index = ("" + pkmObj.evoLevel).split(", ").indexOf(GameConstants.StoneType[type]);
+        return pkmObj.evolution.split(", ")[index];
+    }
 }
 
 ItemList['Fire_stone'] = new EvolutionStone(GameConstants.StoneType.Fire_stone);

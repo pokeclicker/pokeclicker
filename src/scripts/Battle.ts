@@ -8,6 +8,7 @@ class Battle {
 
     static counter: number = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
+    static catchRateActual: KnockoutObservable<number> = ko.observable(null);
     static pokeball: KnockoutObservable<GameConstants.Pokeball>;
 
     /**
@@ -60,11 +61,10 @@ class Battle {
         let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught, this.enemyPokemon().shiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
-            Battle.pokeball = ko.observable(pokeBall);
-            Battle.catching(true);
+            this.prepareCatch(pokeBall);
             setTimeout(
                 () => {
-                    this.throwPokeball(pokeBall);
+                    this.attemptCatch();
                     this.generateNewEnemy();
                 },
                 player.calculateCatchTime(pokeBall)
@@ -88,15 +88,28 @@ class Battle {
         Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
     }
 
-    public static throwPokeball(pokeBall: GameConstants.Pokeball) {
-        player.usePokeball(pokeBall);
+    protected static calculateActualCatchRate(pokeBall: GameConstants.Pokeball) {
         let pokeballBonus = GameConstants.getCatchBonus(pokeBall);
-        let oakBonus = OakItemRunner.isActive("Magic Ball") ? OakItemRunner.calculateBonus("Magic Ball") : 0;
-        let chance: number = Math.floor(Math.random() * 100) - pokeballBonus - oakBonus;
-        if (chance <= this.enemyPokemon().catchRate) {
+        let oakBonus = OakItemRunner.isActive("Magic Ball") ? 
+            OakItemRunner.calculateBonus("Magic Ball") : 0;
+        let totalChance = this.enemyPokemon().catchRate + pokeballBonus + oakBonus;
+        return totalChance;
+    }
+
+    protected static prepareCatch(pokeBall: GameConstants.Pokeball) {
+        this.pokeball = ko.observable(pokeBall);
+        this.catching(true);
+        this.catchRateActual(this.calculateActualCatchRate(pokeBall));
+        player.usePokeball(pokeBall);
+    }
+
+    protected static attemptCatch() {
+        let random: number = Math.floor(Math.random() * 100);
+        if (random <= this.catchRateActual()) {
             this.catchPokemon();
         }
         this.catching(false);
+        this.catchRateActual(null);
     }
 
     public static catchPokemon() {

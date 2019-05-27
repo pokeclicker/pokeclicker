@@ -2,8 +2,8 @@ class buyKeyItem extends Item {
     
         type: GameConstants.KeyItemType;
     
-        constructor(type: GameConstants.KeyItemType) {
-            let basePrice = 1000;
+        constructor(type: GameConstants.KeyItemType, price: number = 1000) {
+            let basePrice = price;
             let priceMultiplier = 1;
             super(GameConstants.KeyItemType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
             this.type = type;
@@ -19,4 +19,4 @@ class buyKeyItem extends Item {
     }
     
     
-    ItemList['Dungeon_ticket'] = new buyKeyItem(GameConstants.KeyItemType.Dungeon_ticket);
+    ItemList['Dungeon_ticket'] = new buyKeyItem(GameConstants.KeyItemType.Dungeon_ticket, 250);

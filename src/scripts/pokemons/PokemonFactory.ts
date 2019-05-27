@@ -31,10 +31,7 @@ class PokemonFactory {
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
         let maxHealth: number = PokemonFactory.routeHealth(route);
-
-        let catchVariation = Math.floor(Math.random() * 7 - 3);
-
-        let catchRate: number = Math.floor(Math.pow(basePokemon.catchRate, 0.75)) + catchVariation;
+        let catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         let exp: number = basePokemon.exp;
 
         let deviation = Math.floor(Math.random() * 51) - 25;
@@ -87,8 +84,7 @@ class PokemonFactory {
         let basePokemon = PokemonHelper.getPokemonByName(name);
         let id = basePokemon.id;
         let maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
-        let catchVariation = Math.floor(Math.random() * 7 - 3);
-        let catchRate: number = Math.floor(Math.pow(basePokemon.catchRate, 0.75)) + catchVariation;
+        let catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         let exp: number = basePokemon.exp;
         let money: number = 0;
         let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
@@ -102,8 +98,7 @@ class PokemonFactory {
         let basePokemon = PokemonHelper.getPokemonByName(name);
         let id = basePokemon.id;
         let maxHealth: number = Math.floor(bossPokemon.baseHealth * (1 + (chestsOpened / 5)));
-        let catchVariation = Math.floor(Math.random() * 7 - 3);
-        let catchRate: number = Math.floor(Math.pow(basePokemon.catchRate, 0.75)) + catchVariation;
+        let catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         let exp: number = basePokemon.exp;
         let money: number = 0;
         let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
@@ -125,4 +120,9 @@ class PokemonFactory {
         return Math.random() < 1 / (max + ( (min - max) * (maxRoute - curRoute) / (maxRoute - minRoute)));
     }
 
+    private static catchRateHelper(baseCatchRate: number) {
+        let catchVariation = GameConstants.randomIntBetween(-3, 3);
+        let catchRateRaw = Math.floor(Math.pow(baseCatchRate, 0.75)) + catchVariation;
+        return GameConstants.clipNumber(catchRateRaw, 0, 100);
+    }
 }

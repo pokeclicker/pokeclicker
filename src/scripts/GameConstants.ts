@@ -34,7 +34,7 @@ namespace GameConstants {
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
-    export const SHINY_CHANCE_BREEDING = 4096;
+    export const SHINY_CHANCE_BREEDING = 1024;
     export const SHINY_CHANCE_SHOP = 2048;
     export const SHINY_CHANCE_STONE = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
@@ -362,6 +362,10 @@ namespace GameConstants {
 
     export function randomIntBetween(min: number, max: number) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    export function clipNumber(num: number, min: number, max: number) {
+        return Math.min(Math.max(num, min), max);
     }
 
     export enum Badge {

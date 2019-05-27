@@ -27,21 +27,20 @@ class Mine {
         Mine.rewardGrid = tmpRewardGrid;
 
         for (let i = 0; i < player._maxUndergroundItems(); i++) {
-            let x = Mine.getRandomCoord(GameConstants.Mine.sizeX);
-            let y = Mine.getRandomCoord(GameConstants.Mine.sizeY);
             let item = UndergroundItem.getRandomItem();
+            let x = Mine.getRandomCoord(GameConstants.Mine.sizeX, item.space[0].length);
+            let y = Mine.getRandomCoord(GameConstants.Mine.sizeY, item.space.length);
             let res = Mine.canAddReward(x, y, item)
             if (res) {
                 Mine.addReward(x, y, item);
             }
         }
-
         Mine.loadingNewLayer = false;
         Underground.showMine();
     }
 
-    private static getRandomCoord(max: number): number {
-        return Math.floor(Math.random() * (max - 3)) + 1;
+    private static getRandomCoord(max: number, size: number): number {
+        return Math.floor(Math.random() * (max - size - 1)) + 1;
     }
 
     private static canAddReward(x: number, y: number, reward: UndergroundItem): boolean {
@@ -177,7 +176,7 @@ class Mine {
         Notifier.notify("You dig deeper...", GameConstants.NotificationOption.info);
         ko.cleanNode(document.getElementById("mineBody"));
         Mine.loadMine();
-        ko.applyBindings(Mine, document.getElementById("mineBody"));
+        ko.applyBindings(null, document.getElementById("mineBody"));
     }
 
     public static loadSavedMine(mine) {

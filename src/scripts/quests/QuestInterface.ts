@@ -7,7 +7,7 @@ interface QuestInterface {
     notified: boolean;                       // If player has been notified of completion
 
     // Required in new quest type
-    questFocus: KnockoutObservable<any>;     // Variable to watch, call this.createProgressObservables() after setting
+    questFocus: KnockoutObservable<any>;     // Variable to watch
     description: string;                     // Short description of how to complete the quest
     pointsReward: number;                    // Quest points rewarded for completion
     xpReward: number;                        // Questing xp points gained for completion

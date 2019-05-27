@@ -49,8 +49,13 @@ class Save {
     }
 
     public static reset(): void {
-        localStorage.setItem("player", null);
-        location.reload()
+        var confirmDelete = prompt("Are you sure you want reset? If so, type 'DELETE'");
+
+        if(confirmDelete == "DELETE"){
+            localStorage.setItem("player", null);
+            location.reload()
+        }
+
     }
 
     /** Filters an object by property names

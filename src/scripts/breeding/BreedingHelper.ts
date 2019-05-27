@@ -13,8 +13,8 @@ class BreedingHelper {
     }
 
     public static progressEggs(amount: number) {
-        if (OakItemRunner.isActive("Blaze Casette")) {
-            amount *= (1 + OakItemRunner.calculateBonus("Blaze Casette") / 100)
+        if (OakItemRunner.isActive("Blaze Cassette")) {
+            amount *= (1 + OakItemRunner.calculateBonus("Blaze Cassette") / 100)
         }
         amount = Math.round(amount);
         for (let obj of player.eggList) {
@@ -46,14 +46,11 @@ class BreedingHelper {
         pokemon.breeding(true);
         player.gainEgg(egg);
         pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
-
-        $('#breedingModal').modal('hide');
-
     }
 
     public static hatchPokemonEgg(index: number) {
         let egg = player._eggList[index]();
-        let shinyChance = GameConstants.SHINY_CHANCE_BATTLE - ((GameConstants.SHINY_CHANCE_BATTLE - GameConstants.SHINY_CHANCE_BREEDING) * Math.min(1, egg.shinySteps/egg.steps()));
+        let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps/egg.steps()));
         let shiny = PokemonFactory.generateShiny(shinyChance);
 
         for (let i=0; i<player._caughtPokemonList().length; i++) {
@@ -67,6 +64,7 @@ class BreedingHelper {
         player.capturePokemon(egg.pokemon, shiny);
         player._eggList[index](null);
         GameHelper.incrementObservable(player.statistics.hatchedEggs);
+        OakItemRunner.use("Blaze Cassette");
     }
 
     public static createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {

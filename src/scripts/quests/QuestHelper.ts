@@ -2,7 +2,6 @@ class QuestHelper{
     public static questList: KnockoutObservableArray<Quest> = ko.observableArray();
 
     public static generateQuests(level: number, refreshes: number, d: Date) {
-        console.log(level, refreshes, d);
         SeededRand.seed(Number( level * (d.getFullYear() + refreshes * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate()));
 
         for (let i=0; i<GameConstants.QUESTS_PER_SET; i++) {

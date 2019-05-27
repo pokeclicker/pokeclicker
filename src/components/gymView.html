@@ -1,6 +1,6 @@
 <div id="gymView" data-bind="if: Game.gameState() === GameConstants.GameState.gym">
 
-    <div style="position: relative;">
+    <div style="position:relative; height: 220px;">
         <div id="gymCountdownView">
                 <div class="row" style="display: inline-block; vertical-align: middle;">
                     <div class="col-sm-6 offset-sm-3">
@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-sm-4 offset-sm-4">
                     <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
-                    <div class="clickable" style="height: 96px;">
+                    <div class="clickable">
                         <img id="gymEnemy" src=""
                              data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
                     </div>
@@ -41,6 +41,11 @@
 
                 </div>
             </div>
+            <div>
+                <span data-bind="text: GymBattle.enemyPokemon().health">health</span>
+                <span>/</span>
+                <span data-bind="text: GymBattle.enemyPokemon().maxHealth">maxHealth</span>
+            </div>
             <div class="progress">
                 <div class="progress-bar bg-danger" role="progressbar"
                      data-bind="attr:{ style: 'width:' + GymBattle.enemyPokemon().healthPercentage() + '%' }"
@@ -49,8 +54,6 @@
                 </div>
             </div>
         </div>
-        <span data-bind="text: GymBattle.enemyPokemon().health">health</span><span>/</span><span
-            data-bind="text: GymBattle.enemyPokemon().maxHealth">maxHealth</span>
     </div>
     <div class="card">
         <table width="100%">

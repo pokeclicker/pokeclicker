@@ -101,7 +101,7 @@ class Player {
         if (this._gymBadges().length == 0) {
             this._gymBadges.push(GameConstants.Badge.None)
         }
-        this._sortOption = ko.observable(savedPlayer._sortOption || GameConstants.SortOptionsEnum.id);
+        this._sortOption = ko.observable(savedPlayer._sortOption || null);
         this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
         this.clickAttackObservable = ko.computed(function () {
             return this.calculateClickAttack()
@@ -183,6 +183,10 @@ class Player {
         this.plotList = Save.initializePlots(savedPlayer.plotList);
         this.highestRegion = savedPlayer.highestRegion || 0;
 
+        this.tutorialProgress = ko.observable(savedPlayer.tutorialProgress || 0);
+        this.tutorialState = savedPlayer.tutorialState;
+        this.tutorialComplete = ko.observable(!!savedPlayer.tutorialComplete);
+
         //TODO remove before deployment
         if (!debug) {
             if (!saved) {
@@ -227,6 +231,10 @@ class Player {
     public plotList: KnockoutObservable<Plot>[];
     public farmPoints: KnockoutObservable<number>;
     public berryList: KnockoutObservable<number>[];
+
+    public tutorialProgress: KnockoutObservable<number>;
+    public tutorialState: any;
+    public tutorialComplete: KnockoutObservable<boolean>;
 
     private highestRegion: GameConstants.Region;
 
@@ -434,13 +442,28 @@ class Player {
         OakItemRunner.use("Amulet Coin");
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
-        let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()) )
+        let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
         this._money(this._money() + moneytogain);
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
+        Game.updateMoney();
+        Game.animateMoney(moneytogain,'playerMoney');
     }
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
+    }
+
+    public hasCurrency(amt: number, curr: GameConstants.Currency): boolean {
+        switch (curr) {
+            case GameConstants.Currency.money:
+                return this.hasMoney(amt);
+            case GameConstants.Currency.questPoint:
+                return this.hasQuestPoints(amt);
+            case GameConstants.Currency.dungeontoken:
+                return this.hasDungeonTokens(amt);
+            default:
+                return false;
+        }
     }
 
     public hasMoney(money: number) {
@@ -451,15 +474,48 @@ class Player {
         return this._questPoints() >= questPoints;
     }
 
-    public payQuestPoints(questPoints: number) {
-        if (this.hasQuestPoints(questPoints)) {
-            this._questPoints(Math.floor(this.questPoints - questPoints));
+    public hasDungeonTokens(tokens: number) {
+        return this._dungeonTokens() >= tokens;
+    }
+
+    public payCurrency(amt: number, curr: GameConstants.Currency): boolean {
+        switch (curr) {
+            case GameConstants.Currency.money:
+                return this.payMoney(amt);
+            case GameConstants.Currency.questPoint:
+                return this.payQuestPoints(amt);
+            case GameConstants.Currency.dungeontoken:
+                return this.payDungeonTokens(amt);
+            default:
+                return false;
         }
     }
 
-    public payMoney(money: number) {
+    public payQuestPoints(questPoints: number): boolean {
+        if (this.hasQuestPoints(questPoints)) {
+            this._questPoints(Math.floor(this.questPoints - questPoints));
+            return true;
+        } else {
+            return false
+        }
+    }
+
+    public payMoney(money: number): boolean {
         if (this.hasMoney(money)) {
             this._money(Math.floor(this._money() - money));
+            Game.updateMoney();
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public payDungeonTokens(tokens: number): boolean {
+        if (this.hasDungeonTokens(tokens)) {
+            this._dungeonTokens(Math.floor(this._dungeonTokens() - tokens));
+            return true;
+        } else {
+            return false;
         }
     }
 
@@ -472,7 +528,7 @@ class Player {
         // TODO add exp multipliers
         let trainerBonus = trainer ? 1.5 : 1;
         let oakItemBonus = OakItemRunner.isActive("Exp Share") ? 1 + (OakItemRunner.calculateBonus("Exp Share") / 100) : 1;
-        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9 );
+        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
         for (let pokemon of this._caughtPokemonList()) {
             if (pokemon.levelObservable() < (this.gymBadges.length + 2) * 10) {
@@ -573,6 +629,7 @@ class Player {
     public gainDungeonTokens(tokens: number) {
         this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens));
         GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
+        Game.animateMoney(tokens,'playerMoneyDungeon');
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
@@ -890,6 +947,12 @@ class Player {
         this._questPoints(value);
     }
 
+    public gainQuestPoints(value: number) {
+        player.questPoints += value;
+        GameHelper.incrementObservable(this.statistics.totalQuestPoints, value);
+        Game.animateMoney(value,'playerMoneyQuest');
+    }
+
     public toJSON() {
         let keep = [
             "_money",
@@ -943,6 +1006,9 @@ class Player {
             "plotList",
             "berryList",
             "highestRegion",
+            "tutorialProgress",
+            "tutorialState",
+            "tutorialComplete",
         ];
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

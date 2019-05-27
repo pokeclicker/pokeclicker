@@ -31,9 +31,8 @@ class KeyItemHandler {
 
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Safari ticket", "This ticket grants access to the Safari Zone in Fuchsia City")));
 
-        // TODO obtain when the player has 10 seeds
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Wailmer pail", "This is a tool for watering Berries you planted to make them grow more quickly", function () {
-            return false;
+            return player.berryList[0]() >= 5
         })));
 
         // TODO buy for 100 quest points

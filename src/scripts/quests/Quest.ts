@@ -8,9 +8,12 @@ abstract class Quest {
     progressText: KnockoutComputed<string>;
     isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
-    questFocus: KnockoutObservable<any>;
+    private _questFocus: KnockoutObservable<any>;
     initial: KnockoutObservable<any>;
     notified: boolean;
+    autoComplete: boolean;
+    autoCompleter: KnockoutSubscription;
+    inQuestLine: boolean
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
@@ -24,20 +27,20 @@ abstract class Quest {
 
     claimReward() {
         if (this.isCompleted()) {
-            player.questPoints += this.pointsReward;
-            console.log(`Gained ${this.pointsReward} quest points and ${this.xpReward} xp points`);
+            player.gainQuestPoints(this.pointsReward);
             this.claimed(true);
             player.currentQuest(null);
-            player.completedQuestList[this.index](true);
+            if (!this.inQuestLine) player.completedQuestList[this.index](true);
             let oldLevel = player.questLevel;
             player.questXP += this.xpReward;
+            Notifier.notify(`You have completed your quest and claimed ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);
             QuestHelper.checkCompletedSet();
             if (oldLevel < player.questLevel) {
                 Notifier.notify("Your quest level has increased!", GameConstants.NotificationOption.success);
                 QuestHelper.refreshQuests(true);
             }
         } else {
-            console.log("Quest not yet completed");
+            Notifier.notify("Quest not yet completed", GameConstants.NotificationOption.warning);
         }
     }
 
@@ -49,13 +52,22 @@ abstract class Quest {
                 initial: this.initial()
             });
         } else {
-            console.log("You have already started a quest");
+            Notifier.notify("You have already started a quest", GameConstants.NotificationOption.warning);
         }
     }
 
     quit() {
         this.initial(null);
         player.currentQuest(null);
+    }
+
+    set questFocus(value: KnockoutObservable<any>) {
+        this._questFocus = value;
+        this.createProgressObservables();
+    }
+
+    get questFocus() {
+        return this._questFocus
     }
 
     protected createProgressObservables() {
@@ -76,14 +88,26 @@ abstract class Quest {
         }, this);
         this.isCompleted = ko.computed(function() {
             let completed = this.progress() == 1;
-            if (completed && !this.notified) {
-                Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success)
+            if (!this.autoComplete && completed && !this.notified) {
+                Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);
             }
-            return completed
+            return completed;
         }, this);
     }
 
+    complete() {
+        this.initial(this.questFocus() - this.amount);
+    }
 
+    createAutoCompleter() {
+        this.autoComplete = true;
+        this.autoCompleter = this.isCompleted.subscribe(() => {
+            if (this.isCompleted()) {
+                this.claimReward();
+                this.autoCompleter.dispose();
+            }
+        })
+    }
 
     inProgress() {
         return ko.computed(() => {
