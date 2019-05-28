@@ -534,15 +534,15 @@
                     <div>
                         <div>
                             <img class="clickable" src=""
-                                 data-bind="attr:{ src: '/assets/images/oakitems/' + $data.name() + '.png'},
-                                  css: {'oak-item-small-selected': OakItemRunner.isActive($data.name()),
-                                        'oak-item-small': !OakItemRunner.isActive($data.name()),
-                                        'oak-item-locked': !OakItemRunner.isUnlocked($data.name())
+                                 data-bind="attr:{ src: '/assets/images/oakitems/' + $data.displayName() + '.png'},
+                                  css: {'oak-item-small-selected': OakItemRunner.isActive($data.id),
+                                        'oak-item-small': !OakItemRunner.isActive($data.id),
+                                        'oak-item-locked': !OakItemRunner.isUnlocked($data.id)
 
                                         },
                                  event: {
-                                    mouseover: function(){OakItemRunner.hover($data.name())},
-                                    click: function(){OakItemRunner.click($data.name())},
+                                    mouseover: function(){OakItemRunner.hover($data.id)},
+                                    click: function(){OakItemRunner.click($data.id)},
                                     mouseout : function(){OakItemRunner.hoverRelease()}
                                     }">
                         </div>
@@ -556,7 +556,7 @@
                         <div class="row justify-content-sm-center">
                             <div style="height:20px;" class="col">
                                 <b>
-                                    <span data-bind="text: OakItemRunner.inspectedItem().name()"></span>
+                                    <span data-bind="text: OakItemRunner.inspectedItem().displayName()"></span>
                                 </b>
                             </div>
                         </div>

@@ -318,7 +318,7 @@ class Player {
     private _caughtAmount: Array<KnockoutObservable<number>>;
 
     public calculateClickAttack(): number {
-        let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
+        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.PoisonBarb) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.PoisonBarb) / 100) : 1;
         return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
     }
 
@@ -403,7 +403,7 @@ class Player {
     }
 
     public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
-        OakItemRunner.use("Magic Ball");
+        OakItemRunner.use(GameConstants.OakItem.MagicBall);
         let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
@@ -436,9 +436,9 @@ class Player {
     }
 
     public gainMoney(money: number) {
-        OakItemRunner.use("Amulet Coin");
+        OakItemRunner.use(GameConstants.OakItem.AmuletCoin);
         // TODO add money multipliers
-        let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
+        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.AmuletCoin) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.AmuletCoin) / 100) : 1;
         let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
         this._money(this._money() + moneytogain);
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
@@ -521,10 +521,10 @@ class Player {
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {
-        OakItemRunner.use("Exp Share");
+        OakItemRunner.use(GameConstants.OakItem.ExpShare);
         // TODO add exp multipliers
         let trainerBonus = trainer ? 1.5 : 1;
-        let oakItemBonus = OakItemRunner.isActive("Exp Share") ? 1 + (OakItemRunner.calculateBonus("Exp Share") / 100) : 1;
+        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.ExpShare) ? 1 + (OakItemRunner.calculateBonus(GameConstants.OakItem.ExpShare) / 100) : 1;
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
         for (let pokemon of this._caughtPokemonList()) {

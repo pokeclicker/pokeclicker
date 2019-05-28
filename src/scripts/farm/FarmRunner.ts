@@ -115,7 +115,7 @@ class FarmRunner {
                 Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success)
             }
             plot.berry(null);
-            OakItemRunner.use("Sprayduck");
+            OakItemRunner.use(GameConstants.OakItem.Sprayduck);
             return money;
         }
         return 0;
