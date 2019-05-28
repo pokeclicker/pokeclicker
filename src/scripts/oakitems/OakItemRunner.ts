@@ -8,6 +8,7 @@ class OakItemRunner {
     public static initialize() {
         OakItemRunner.oakItemList = [];
 
+        // OakItemRunner.oakItemList must preserve the ordering of items in GameConstants.OakItem enum
         OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.MagicBall, "Magic Ball", 20, "Gives a bonus to your catchrate", 5, 1, 2)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.AmuletCoin, "Amulet Coin", 30, "Gain more coins from battling", 25, 5, 1)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.PoisonBarb, "Poison Barb", 40, "Clicks do more damage", 25, 5, 3)));
@@ -64,11 +65,6 @@ class OakItemRunner {
     }
 
     public static getOakItemObject(id: GameConstants.OakItem): OakItem {
-        // for (let i = 0; i < OakItemRunner.oakItemList.length; i++) {
-        //     if (OakItemRunner.oakItemList[i]().id == id) {
-        //         return OakItemRunner.oakItemList[i]();
-        //     }
-        // }
         return OakItemRunner.oakItemList[id]();
     }
 
