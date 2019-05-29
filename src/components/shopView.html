@@ -7,16 +7,14 @@
            <img src="" height="36px"
                 data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
            <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
-           <p>
-               <div data-bind="if: ShopHandler.itemAvailable($data)">
-               <img src="" class="currencyImage"
-                    data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
-               <span data-bind="text: totalPrice">Price</span>
-                </div>                
-                <div data-bind="ifnot: ShopHandler.itemAvailable($data)">
-                    <span>Sold Out</span>
-                </div>
-           </p>
+           <div data-bind="if: ShopHandler.itemAvailable($data)">
+                <img src="" class="currencyImage"
+                        data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
+                <span data-bind="text: totalPrice">Price</span>
+            </div>
+            <div data-bind="ifnot: ShopHandler.itemAvailable($data)">
+                <span>Sold Out</span>
+            </div>
        </div>
    </div>
 </div>
