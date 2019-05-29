@@ -516,7 +516,7 @@
 
         <!--Right column-->
         <div class="col-lg-3">
-            <div class="page-item" id="oakItemsContainer" 
+            <div class="page-item" id="oakItemsContainer"
             data-bind="visible: player.starter != GameConstants.Starter.None" style="background-color: white;">
                 <div class="card">
                     <div>
@@ -610,7 +610,7 @@
                         </div>
 
                         <div style="min-height:80px; vertical-align: center">
-                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span> Pokémon to
+                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq - player.caughtPokemonList.length"></span> new Pokémon to
                             unlock!
                         </div>
                     </div>
