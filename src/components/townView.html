@@ -33,10 +33,8 @@
                    Gym
                </button>
            </li>
-           <li class="nav-item" data-bind="if:player.town().shop">
-               <button class="btn btn-secondary"
-                       onclick="ShopHandler.showShop(player.town().shop())">Shop
-               </button>
+           <li class="nav-item" data-bind="visible:player.town().shop">
+               <a class="btn btn-secondary" href="#shopModal" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
            </li>
            <li class="nav-item" data-bind="if:MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
                <button class="btn btn-secondary"

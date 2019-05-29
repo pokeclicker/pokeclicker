@@ -6,15 +6,12 @@ class ShopHandler {
 
     public static showShop(shop: Shop) {
         ShopHandler.amount(1);
-        Game.gameState(GameConstants.GameState.idle);
         this.shopObservable(shop);
 
         for (let i = 0; i < shop.items().length; i++) {
             let item: Item = shop.items()[i];
             item.price(Math.round(item.basePrice * player.itemMultipliers[item.name()]));
         }
-
-        Game.gameState(GameConstants.GameState.shop);
     }
 
     public static setSelected(i: number) {
