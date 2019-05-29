@@ -289,6 +289,8 @@ class Player {
             }
             this._keyItems().push(name);
             KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
+            player._keyItems.valueHasMutated();
+
         }
     }
 

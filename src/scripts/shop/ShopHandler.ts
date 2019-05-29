@@ -71,7 +71,6 @@ class ShopHandler {
 
     public static itemAvailable(item: Item): boolean {
         // Key items, when bought, are no longer available for purchase
-        // TODO: When using this function for if/ifnot binding on shopView, the binding does not update
         return !((item instanceof buyKeyItem) && player.hasKeyItem(item.name().replace("_", " ")))
     }
 
