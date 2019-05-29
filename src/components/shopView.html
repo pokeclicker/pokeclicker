@@ -1,16 +1,21 @@
 <div id="shopView"
      data-bind="if: Game.gameState() === GameConstants.GameState.shop">
 <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
-   <div class="col-sm-3"  data-bind="visible: ShopHandler.ownKeyItem(name())">
+   <div class="col-sm-3">
        <div
                data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
            <img src="" height="36px"
                 data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
            <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
            <p>
+               <div data-bind="if: ShopHandler.itemAvailable($data)">
                <img src="" class="currencyImage"
                     data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
                <span data-bind="text: totalPrice">Price</span>
+                </div>                
+                <div data-bind="ifnot: ShopHandler.itemAvailable($data)">
+                    <span>Sold Out</span>
+                </div>
            </p>
        </div>
    </div>
