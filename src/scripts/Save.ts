@@ -23,7 +23,8 @@ class Save {
         let element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(btoa(JSON.stringify(player))));
         let currentdate = new Date();
-        let filename = "PokeClickerSave_" + currentdate.toISOString() + '.txt';
+        let datestr = currentdate.toISOString().replace("T", " ").slice(0, 19);
+        let filename = "PokeClickerSave_" + datestr + '.txt';
         element.setAttribute('download', filename);
 
         element.style.display = 'none';
