@@ -15,8 +15,8 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                    class="key-item"
                    data-bind="attr:{ title: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name(),  src: 'assets/images/keyitems/' + KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name() + '.png'}"
                    src=""/><br>
-           <span data-bind="text: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name()">Name</span><br>
-           <span data-bind="text: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).description()">Description</span>
+           <span><strong data-bind="text: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name()">Name</strong></span><br>
+           <span data-bind="html: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).description()">Description</span>
 
        </div>
        <div class="modal-footer">
