@@ -110,14 +110,14 @@ namespace GameConstants {
     }
 
     export enum OakItem {
-        "Magic Ball" = 0,
-        "Amulet Coin",
-        "Poison Barb",
-        "Exp Share",
-        "Sprayduck",
-        "Shiny Charm",
-        "Blaze Cassette",
-        "Cell Battery",
+        MagicBall = 0,
+        AmuletCoin,
+        PoisonBarb,
+        ExpShare,
+        Sprayduck,
+        ShinyCharm,
+        BlazeCassette,
+        CellBattery,
     }
 
     // Dungeons
