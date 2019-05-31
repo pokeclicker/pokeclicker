@@ -1,13 +1,16 @@
 class ItemHandler {
 
     public static stoneSelected: KnockoutObservable<string> = ko.observable("Fire_stone");
-    public static pokemonSelected: KnockoutObservable<string> = ko.observable("");
+    public static pokemonSelected: KnockoutObservable<string> = ko.observable("Vulpix");
     public static amountSelected: KnockoutObservable<number> = ko.observable(1);
     static amount: KnockoutObservable<number> = ko.observable(1);
 
-    public static useItem(name:string){
-        ItemList[name].use();
-        player.itemList[name](player.itemList[name]-1);
+    public static useItem(name: string){
+        if (!player.itemList[name]())
+          return Notifier.notify(`You don't have any ${name.replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
+
+        player.itemList[name](player.itemList[name]()-1);
+        return ItemList[name].use();
     }
 
     public static resetAmount() {
@@ -23,14 +26,12 @@ class ItemHandler {
 
     public static useStones(){
         if(this.pokemonSelected() == ""){
-            Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
-            return;
+            return Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
         }
         let amount = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
-        if(amount == 0){
-            Notifier.notify("You don't have any stones left...", GameConstants.NotificationOption.danger);
-            return;
+        if(!amount){
+            return Notifier.notify(`You don't have any ${this.stoneSelected().replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
         }
 
         for(let i = 0; i< amount; i++){
