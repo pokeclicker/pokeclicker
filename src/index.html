@@ -99,7 +99,7 @@
     </style>
 
 </head>
-<body class="no-select">
+<body class="no-select" data-bind="css: { 'dark-mode': player.darkMode() }">
 @import "splash.html"
 
 <!-- Game menu-->
@@ -214,7 +214,7 @@
                                          data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
                                          src=""/>
                                     <br>
-                                    Catch Chance: 
+                                    Catch Chance:
                                     <span data-bind="text: Battle.catchRateActual()">Catch Rate</span>%
                                 </div>
                             </div>
@@ -283,7 +283,7 @@
                                              data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
                                              src=""/>
                                         <br>
-                                        Catch Chance: 
+                                        Catch Chance:
                                         <span data-bind="text: DungeonBattle.catchRateActual()">Catch Rate</span>%
                                     </div>
                                 </div>
@@ -516,7 +516,7 @@
 
         <!--Right column-->
         <div class="col-lg-3">
-            <div class="page-item" id="oakItemsContainer" 
+            <div class="page-item" id="oakItemsContainer"
             data-bind="visible: player.starter != GameConstants.Starter.None" style="background-color: white;">
                 <div class="card">
                     <div>

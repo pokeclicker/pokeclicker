@@ -4,7 +4,7 @@
  */
 
 class Player {
-
+    private darkMode: KnockoutObservable<boolean>;
     private _money: KnockoutObservable<number>;
     private _dungeonTokens: KnockoutObservable<number>;
 
@@ -40,6 +40,7 @@ class Player {
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
+        this.darkMode = ko.observable(savedPlayer.darkMode || false);
         this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
         this._money = ko.observable(savedPlayer._money || 0);
@@ -952,6 +953,7 @@ class Player {
 
     public toJSON() {
         let keep = [
+            "darkMode",
             "_money",
             "_dungeonTokens",
             "_questPoints",
@@ -1012,4 +1014,3 @@ class Player {
     }
 
 }
-
