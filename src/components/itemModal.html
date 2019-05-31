@@ -118,12 +118,12 @@
                                     <div class="col" style="text-align: center">
                                         <button class="btn btn-secondary amount-button list-group-item-action"
                                                 data-bind="click: function() {ItemHandler.amountSelected(Infinity)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === Infinity}">
-                                            <span>Until shiny</span>
+                                            <span>All</span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-
+                            <p><b>Evolution stone usage stops when a shiny evolution is encountered</b></p>
                             <div class="row no-gutters justify-content-sm-center">
                                 <div class="row justify-content-center" style="padding:15px;">
                                     <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
