@@ -613,10 +613,11 @@ class Player {
         for (let i = 0; i < this._eggList.length; i++) {
             if (this._eggList[i]() == null) {
                 this._eggList[i](e);
-                return;
+                return true;
             }
         }
-        console.log("Error: Could not place egg " + e);
+        console.log("Error: Could not place " + GameConstants.EggType[e.type] + " Egg");
+        return false;
     }
 
     public gainBadge(badge: GameConstants.Badge) {

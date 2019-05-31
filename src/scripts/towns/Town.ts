@@ -96,7 +96,7 @@ TownList["Vermillion City"] = new Town("Vermillion City", [6], VermillionCitySho
 let CeladonCityShop = new Shop(["Eevee", "Porygon", "Jynx", "Mr. Mime", "Lickitung"]);
 TownList["Celadon City"] = new Town("Celadon City", [8], CeladonCityShop);
 
-let SaffronCityShop = new Shop(["Moon_stone", "xClick", "Leaf_stone", "Fight_egg"]);
+let SaffronCityShop = new Shop(["Moon_stone", "xClick", "Leaf_stone", "Fighting_egg"]);
 TownList["Saffron City"] = new Town("Saffron City", [5], SaffronCityShop);
 
 let FuchsiaCityShop = new Shop(["Ultraball", "Trade_stone", "xExp", "Dragon_egg"]);
