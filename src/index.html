@@ -200,22 +200,27 @@
 
                             <div>
                                 <div data-bind="ifnot: Battle.catching">
-                                    <img class="clickable" id="enemy"
-                                         data-bind="click: function() {Battle.clickAttack()},
-                                                    attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny, true) }"
-                                         src=""/>
-                                    <br>
+                                    <div style="min-height:96px; min-width:96px;" class="row justify-content-center align-items-center">
+                                        <img class="clickable" id="enemy"
+                                             data-bind="click: function() {Battle.clickAttack()},
+                                                        attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny, true) }"
+                                             src=""/>
+                                        <br>
+                                    </div>
                                     <span data-bind="text: Battle.enemyPokemon().health">health</span>
                                     <span>/</span>
                                     <span data-bind="text: Battle.enemyPokemon().maxHealth">maxHealth</span>
                                 </div>
                                 <div data-bind="if: Battle.catching">
-                                    <img class="pokeball-animated"
-                                         data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
-                                         src=""/>
-                                    <br>
-                                    Catch Chance: 
-                                    <span data-bind="text: Battle.catchRateActual()">Catch Rate</span>%
+                                    <div style="min-height:96px; min-width:96px;" class="row justify-content-center align-items-center">
+                                        <img class="pokeball-animated"
+                                             data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
+                                             src=""/>
+                                        <br>
+                                    </div>
+
+                                        Catch Chance:
+                                        <span data-bind="text: Battle.catchRateActual()">Catch Rate</span>%
                                 </div>
                             </div>
                             <div class="progress">
