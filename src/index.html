@@ -534,7 +534,7 @@
                     <div>
                         <div>
                             <img class="clickable" src=""
-                                 data-bind="attr:{ src: '/assets/images/oakitems/' + $data.displayName() + '.png'},
+                                 data-bind="attr:{ src: '/assets/images/oakitems/' + GameConstants.humanifyString(GameConstants.OakItem[$data.id]) + '.png'},
                                   css: {'oak-item-small-selected': OakItemRunner.isActive($data.id),
                                         'oak-item-small': !OakItemRunner.isActive($data.id),
                                         'oak-item-locked': !OakItemRunner.isUnlocked($data.id)
@@ -556,7 +556,7 @@
                         <div class="row justify-content-sm-center">
                             <div style="height:20px;" class="col">
                                 <b>
-                                    <span data-bind="text: OakItemRunner.inspectedItem().displayName()"></span>
+                                    <span data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></span>
                                 </b>
                             </div>
                         </div>
@@ -604,7 +604,7 @@
                         <div class="row justify-content-sm-center">
                             <div style="height:20px;" class="col">
                                 <b>
-                                    <span data-bind="text: OakItemRunner.inspectedItem().displayName()"></span>
+                                    <span data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></span>
                                 </b>
                             </div>
                         </div>

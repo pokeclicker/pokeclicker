@@ -13,8 +13,8 @@ class BreedingHelper {
     }
 
     public static progressEggs(amount: number) {
-        if (OakItemRunner.isActive(GameConstants.OakItem.BlazeCassette)) {
-            amount *= (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.BlazeCassette) / 100)
+        if (OakItemRunner.isActive(GameConstants.OakItem.Blaze_Cassette)) {
+            amount *= (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Blaze_Cassette) / 100)
         }
         amount = Math.round(amount);
         for (let obj of player.eggList) {
@@ -23,7 +23,7 @@ class BreedingHelper {
                 continue;
             }
             egg.steps(egg.steps() + amount);
-            if (OakItemRunner.isActive(GameConstants.OakItem.ShinyCharm)) {
+            if (OakItemRunner.isActive(GameConstants.OakItem.Shiny_Charm)) {
                 egg.shinySteps += amount;
             }
             if (egg.steps() >= egg.totalSteps) {
@@ -64,7 +64,7 @@ class BreedingHelper {
         player.capturePokemon(egg.pokemon, shiny);
         player._eggList[index](null);
         GameHelper.incrementObservable(player.statistics.hatchedEggs);
-        OakItemRunner.use(GameConstants.OakItem.BlazeCassette);
+        OakItemRunner.use(GameConstants.OakItem.Blaze_Cassette);
     }
 
     public static createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
