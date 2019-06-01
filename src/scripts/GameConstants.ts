@@ -547,9 +547,9 @@ namespace GameConstants {
         "Item_magnet": 1500,
         "Lucky_incense": 2000,
 
-        "SmallRestore": 100,
-        "MediumRestore": 100,
-        "LargeRestore": 100,
+        "SmallRestore": 20000,
+        "MediumRestore": 40000,
+        "LargeRestore": 100000,
 
         "PokeBlock": 0,
 
@@ -653,6 +653,12 @@ namespace GameConstants {
         Pokemon,
         Mystery,
         Fossil
+    }
+
+    export const EnergyRestoreEffect = {
+        SmallRestore: 0.1,
+        MediumRestore: 0.2,
+        LargeRestore: 0.5,
     }
 
     export const KeyToDirection = {
