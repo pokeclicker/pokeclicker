@@ -9,7 +9,7 @@ class StartSequenceRunner {
     }
 
     public static pickStarter(s: GameConstants.Starter) {
-        this.starterPicked = s
+        this.starterPicked = s;
         $('#pickStarterModal').modal('hide');
         let dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
         let shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
