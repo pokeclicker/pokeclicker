@@ -34,8 +34,7 @@ class Settings {
             if (this.list[i].name == name) {
                 return this.list[i]
             }
-        }
-        return false;
+        };
     }
 
     static save() {
@@ -54,5 +53,10 @@ Settings.add(
             new GameConstants.Option("Dark Mode", 'dark.css')
         ],
         "default.css",
+    )
+);
+Settings.add(
+    new BooleanSetting("use_pokemon_gifs", "Pokemon Gifs",
+        false,
     )
 );

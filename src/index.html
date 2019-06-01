@@ -6,9 +6,12 @@
     <script type="text/html" id="pokemonListTemplate">
         <tr data-bind='ifnot: $data.breeding()'>
             <td>
+                <div style="max-height:56px; max-width:56px;" class="row justify-content-center align-items-center">
+
                 <img class="smallImage"
-                     data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
+                     data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name), false) }"
                      src=""/>
+                </div>
                 <span data-bind="text: name">Name</span>
             </td>
             <td data-bind="text: attack">Atk</td>
@@ -203,7 +206,7 @@
                                     <div style="min-height:96px; min-width:96px;" class="row justify-content-center align-items-center">
                                         <img class="clickable" id="enemy"
                                              data-bind="click: function() {Battle.clickAttack()},
-                                                        attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny, true) }"
+                                                        attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny, Settings.getSetting('use_pokemon_gifs').value) }"
                                              src=""/>
                                         <br>
                                     </div>
@@ -275,10 +278,12 @@
 
                                 <div>
                                     <div data-bind="ifnot: DungeonBattle.catching">
-                                        <img id="dungeonEnemy"
-                                             data-bind="click: function() {DungeonBattle.clickAttack()}, attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
-                                             src=""/>
-                                        <br>
+                                        <div style="min-height:96px; min-width:96px;" class="row justify-content-center align-items-center">
+                                            <img id="dungeonEnemy"
+                                                 data-bind="click: function() {DungeonBattle.clickAttack()}, attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny, Settings.getSetting('use_pokemon_gifs').value) }"
+                                                 src=""/>
+                                            <br>
+                                        </div>
                                         <span data-bind="text: DungeonBattle.enemyPokemon().health">health</span>/
                                         <span data-bind="text: DungeonBattle.enemyPokemon().maxHealth">maxHealth</span>
                                     </div>
