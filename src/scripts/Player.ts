@@ -186,7 +186,7 @@ class Player {
 
         //TODO remove before deployment
         if (!debug) {
-            if (!saved) {
+            if (this.starter === GameConstants.Starter.None) {
                 StartSequenceRunner.start()
             }
         }
