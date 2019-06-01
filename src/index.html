@@ -99,7 +99,7 @@
     </style>
 
 </head>
-<body class="no-select" data-bind="css: { 'dark-mode': player.darkMode() }">
+<body class="no-select" data-bind="attr: {class: Settings.getSetting('theme').observableValue() }">
 @import "splash.html"
 
 <!-- Game menu-->
