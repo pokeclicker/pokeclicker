@@ -1,7 +1,6 @@
 /// <reference path="Setting.ts" />
 /// <reference path="BooleanSetting.ts"/>
 /// <reference path="MultipleChoiceSetting.ts"/>
-/// <reference path="FreeChoiceSetting.ts"/>
 
 
 class Settings {

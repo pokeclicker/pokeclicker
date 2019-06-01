@@ -1,7 +1,7 @@
 /// <reference path="Setting.ts" />
 
 class BooleanSetting extends Setting {
-    constructor(name: string, displayName:string , defaultValue: boolean) {
+    constructor(name: string, displayName: string, defaultValue: boolean) {
         super(
             name,
             displayName,
@@ -14,7 +14,7 @@ class BooleanSetting extends Setting {
     }
 
     toggle() {
-        if (this.value){
+        if (this.value) {
             this.set(false)
         } else {
             this.set(true)
