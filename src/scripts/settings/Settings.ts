@@ -7,7 +7,7 @@ class Settings {
 
 
     static add(setting: Setting) {
-        if (this.list.indexOf(setting) === -1) {
+        if (!this.getSetting(setting.name)) {
             this.list.push(setting);
         }
     }
