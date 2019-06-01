@@ -112,8 +112,6 @@ class Underground {
     public static gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
         // Restore a percentage of maximum energy
         let gain = this.calculateItemEffect(item);
-        console.log(gain);
-        console.log(item);
         gain = Math.min(gain, player._maxMineEnergy() - player._mineEnergy());
 
         player._mineEnergy(player._mineEnergy() + gain);
