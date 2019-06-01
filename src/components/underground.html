@@ -19,7 +19,22 @@ style="cursor:default" tabindex="-1">
        <div class="tab-content">
            <div id="dig" class="tab-pane fade in active show">
                <div class="modal-body" style="width: 80%;margin: auto;">
-                   <table class='table' style="width:60%; margin: auto">
+
+                   <div class='row' style="text-align:center;">
+                       <div class='progress'>
+                           <div id='mineEnergyBar' class='progress-bar' role='progressbar'
+                                aria-valuemin='0' aria-valuemax='100'
+                                data-bind="style: { width: player._mineEnergy()/player._maxMineEnergy()*100 + '%' }">
+                           </div>
+                       </div>
+                       <span id='energyDisplay' style='color:black;'>
+                           <span data-bind='text: Math.floor(player.mineEnergy)'></span>/<span
+                               data-bind='text: player._maxMineEnergy'></span>
+                           <img src='assets/images/underground/flash.png'>
+                           (next: <span data-bind='text: Underground.energyTick'></span>s)
+                       </span>
+                   </div>
+                   <table class='table table-sm' style="width:60%; margin: auto">
                        <tbody>
                        <tr>
                            <td class='vertical-middle' data-bind='text: player._itemList["SmallRestore"]()'></td>
@@ -77,20 +92,6 @@ style="cursor:default" tabindex="-1">
 
                        </tbody>
                    </table>
-                   <div class='row' style="text-align:center;">
-                       <div class='progress'>
-                           <div id='mineEnergyBar' class='progress-bar' role='progressbar'
-                                aria-valuemin='0' aria-valuemax='100'
-                                data-bind="style: { width: player._mineEnergy()/player._maxMineEnergy()*100 + '%' }">
-                           </div>
-                       </div>
-                       <span id='energyDisplay' style='color:black;'>
-                           <span data-bind='text: Math.floor(player.mineEnergy)'></span>/<span
-                               data-bind='text: player._maxMineEnergy'></span>
-                           <img src='assets/images/underground/flash.png'>
-                           (next: <span data-bind='text: Underground.energyTick'></span>s)
-                       </span>
-                   </div>
                    <div id="mineBody"></div>
                </div>
            </div>
