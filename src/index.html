@@ -218,9 +218,8 @@
                                              src=""/>
                                         <br>
                                     </div>
-
-                                        Catch Chance:
-                                        <span data-bind="text: Battle.catchRateActual()">Catch Rate</span>%
+                                    Catch Chance: 
+                                    <span data-bind="text: Battle.catchRateActual()">Catch Rate</span>%
                                 </div>
                             </div>
                             <div class="progress">
@@ -284,10 +283,12 @@
                                         <span data-bind="text: DungeonBattle.enemyPokemon().maxHealth">maxHealth</span>
                                     </div>
                                     <div data-bind="if: DungeonBattle.catching">
-                                        <img class="pokeball-animated"
-                                             data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
-                                             src=""/>
-                                        <br>
+                                        <div style="min-height:96px; min-width:96px;" class="row justify-content-center align-items-center">
+                                            <img class="pokeball-animated"
+                                                 data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
+                                                 src=""/>
+                                            <br>
+                                        </div>
                                         Catch Chance: 
                                         <span data-bind="text: DungeonBattle.catchRateActual()">Catch Rate</span>%
                                     </div>
