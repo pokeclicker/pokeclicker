@@ -111,8 +111,11 @@ class Underground {
 
     public static gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
         // Restore a percentage of maximum energy
-        let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
-        let gain = Math.min(player._maxMineEnergy() - player._mineEnergy(), effect * player._maxMineEnergy());
+        let gain = this.calculateItemEffect(item);
+        console.log(gain);
+        console.log(item);
+        gain = Math.min(gain, player._maxMineEnergy() - player._mineEnergy());
+
         player._mineEnergy(player._mineEnergy() + gain);
         Notifier.notify("You restored " + gain + " mining energy!", GameConstants.NotificationOption.success);
     }
@@ -157,6 +160,12 @@ class Underground {
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
+    }
+
+    public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {
+        let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
+        return effect * player._maxMineEnergy();
+
     }
 }
 
