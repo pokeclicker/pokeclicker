@@ -64,14 +64,14 @@ class QuestHelper{
                 return new UsePokeballQuest(pokeball, amount);
             case "UseOakItem":
                 let possibleItems = [
-                    GameConstants.OakItem["Magic Ball"],
-                    GameConstants.OakItem["Amulet Coin"],
-                    //GameConstants.OakItem["Poison Barb"],
-                    GameConstants.OakItem["Exp Share"],
-                    //GameConstants.OakItem["Sprayduck"],
-                    //GameConstants.OakItem["Shiny Charm"],
-                    //GameConstants.OakItem["Blaze Cassette"],
-                    //GameConstants.OakItem["Cell Battery"],
+                    GameConstants.OakItem.Magic_Ball,
+                    GameConstants.OakItem.Amulet_Coin,
+                    //GameConstants.OakItem.Poison_Barb,
+                    GameConstants.OakItem.Exp_Share,
+                    //GameConstants.OakItem.Sprayduck,
+                    //GameConstants.OakItem.Shiny_Charm,
+                    //GameConstants.OakItem.Blaze_Cassette,
+                    //GameConstants.OakItem.Cell_Battery,
                 ]
                 let oakItem = SeededRand.fromArray(possibleItems);
                 amount = SeededRand.intBetween(100, 500);

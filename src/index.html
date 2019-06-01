@@ -141,14 +141,14 @@
                                 </td>
                                 <td width="33.33%">
                                     <span style="display: inline;">
-                                        <img title="Dungeon Tokens" src="assets/images/currency/dungeonToken.png">
-                                        <span id="playerMoneyDungeon" data-bind="text: player.dungeonTokens">Not yet</span>
+                                        <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon" src="assets/images/currency/dungeonToken.png">
+                                        <span id="playerMoneyDungeon" data-bind="text: player.dungeonTokens">0</span>
                                     </span>
                                 </td>
                                 <td width="33.33%">
                                     <span style="display: inline;">
                                         <img title="Quest points" src="assets/images/currency/questPoint.png">
-                                        <span id="playerMoneyQuest" data-bind="text: player.questPoints">Not yet</span>
+                                        <span id="playerMoneyQuest" data-bind="text: player.questPoints">0</span>
                                     </span>
                                 </td>
                             </tr>
@@ -516,7 +516,7 @@
 
         <!--Right column-->
         <div class="col-lg-3">
-            <div class="page-item" id="oakItemsContainer" 
+            <div class="page-item" id="oakItemsContainer"
             data-bind="visible: player.starter != GameConstants.Starter.None" style="background-color: white;">
                 <div class="card">
                     <div>
@@ -534,15 +534,15 @@
                     <div>
                         <div>
                             <img class="clickable" src=""
-                                 data-bind="attr:{ src: '/assets/images/oakitems/' + $data.name() + '.png'},
-                                  css: {'oak-item-small-selected': OakItemRunner.isActive($data.name()),
-                                        'oak-item-small': !OakItemRunner.isActive($data.name()),
-                                        'oak-item-locked': !OakItemRunner.isUnlocked($data.name())
+                                 data-bind="attr:{ src: '/assets/images/oakitems/' + GameConstants.humanifyString(GameConstants.OakItem[$data.id]) + '.png'},
+                                  css: {'oak-item-small-selected': OakItemRunner.isActive($data.id),
+                                        'oak-item-small': !OakItemRunner.isActive($data.id),
+                                        'oak-item-locked': !OakItemRunner.isUnlocked($data.id)
 
                                         },
                                  event: {
-                                    mouseover: function(){OakItemRunner.hover($data.name())},
-                                    click: function(){OakItemRunner.click($data.name())},
+                                    mouseover: function(){OakItemRunner.hover($data.id)},
+                                    click: function(){OakItemRunner.click($data.id)},
                                     mouseout : function(){OakItemRunner.hoverRelease()}
                                     }">
                         </div>
@@ -556,7 +556,7 @@
                         <div class="row justify-content-sm-center">
                             <div style="height:20px;" class="col">
                                 <b>
-                                    <span data-bind="text: OakItemRunner.inspectedItem().name()"></span>
+                                    <span data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></span>
                                 </b>
                             </div>
                         </div>
@@ -604,13 +604,13 @@
                         <div class="row justify-content-sm-center">
                             <div style="height:20px;" class="col">
                                 <b>
-                                    <span data-bind="text: OakItemRunner.inspectedItem().name()"></span>
+                                    <span data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></span>
                                 </b>
                             </div>
                         </div>
 
                         <div style="min-height:80px; vertical-align: center">
-                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq"></span> Pokémon to
+                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq - player.caughtPokemonList.length"></span> more unique Pokémon to
                             unlock!
                         </div>
                     </div>

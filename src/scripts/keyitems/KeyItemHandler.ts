@@ -20,7 +20,7 @@ class KeyItemHandler {
         // TODO obtain somewhere at the start
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Factory key", "This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13")));
 
-        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Dungeon ticket", "This ticket grants access to all dungeons in the Kanto region")));
+        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Dungeon ticket", "This ticket grants access to all dungeons in the Kanto region,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon")));
 
         // TODO obtain somewhere at the start
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Holo caster", "A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others")));

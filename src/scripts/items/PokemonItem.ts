@@ -3,31 +3,7 @@ class PokemonItem extends Item {
     type: GameConstants.PokemonItemType;
 
     constructor(pokemon: GameConstants.PokemonItemType) {
-        let basePrice = 0;
-
-        switch (pokemon) {
-            case GameConstants.PokemonItemType.Eevee: {
-                basePrice = GameConstants.ItemPrice.Eevee;
-                break;
-            }
-            case GameConstants.PokemonItemType.Porygon: {
-                basePrice = GameConstants.ItemPrice.Porygon;
-                break;
-            }
-            case GameConstants.PokemonItemType.Jynx: {
-                basePrice = GameConstants.ItemPrice.Jynx;
-                break;
-            }
-            case GameConstants.PokemonItemType.Mr_Mime: {
-                basePrice = GameConstants.ItemPrice.Mr_Mime;
-                break;
-            }
-            case GameConstants.PokemonItemType.Lickitung: {
-                basePrice = GameConstants.ItemPrice.Lickitung;
-                break;
-            }
-        }
-
+        let basePrice = GameConstants.ItemPrice[GameConstants.PokemonItemType[pokemon]];
         let priceMultiplier = 1;
         super(GameConstants.PokemonItemType[pokemon], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
         this.type = pokemon;

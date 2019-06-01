@@ -4,7 +4,7 @@ class EvolutionStone extends Item {
     type: GameConstants.StoneType;
 
     constructor(type: GameConstants.StoneType) {
-        let basePrice = 2500;
+        let basePrice = GameConstants.ItemPrice.EvolutionStone;
         let priceMultiplier = 1;
         super(GameConstants.StoneType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
         this.type = type;
