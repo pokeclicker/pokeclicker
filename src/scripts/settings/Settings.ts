@@ -56,4 +56,3 @@ Settings.add(
         "default.css",
     )
 );
-Settings.add(new BooleanSetting("test", "Do the settings work?", false));
