@@ -109,6 +109,14 @@ class Underground {
         }
     }
 
+    public static gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
+        // Restore a percentage of maximum energy
+        let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
+        let gain = Math.min(player._maxMineEnergy() - player._mineEnergy(), effect * player._maxMineEnergy());
+        player._mineEnergy(player._mineEnergy() + gain);
+        Notifier.notify("You restored " + gain + " mining energy!", GameConstants.NotificationOption.success);
+    }
+
     public static sellMineItem(id: number) {
         for (let i=0; i<player._mineInventory().length; i++) {
             let item = player._mineInventory()[i];
