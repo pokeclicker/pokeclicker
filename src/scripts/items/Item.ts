@@ -38,6 +38,10 @@ abstract class Item {
 
     abstract use();
 
+    isAvailable() : boolean {
+        return true;
+    }
+
     protected _increaseCount(n: number) {
         player.itemList[this.name()](player.itemList[this.name()]() + n);
     }
