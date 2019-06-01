@@ -19,6 +19,27 @@ style="cursor:default" tabindex="-1">
        <div class="tab-content">
            <div id="dig" class="tab-pane fade in active show">
                <div class="modal-body" style="width: 80%;margin: auto;">
+
+                   <table class='table' style="width:50%; margin: auto">
+                       <tbody>
+                           <tr>
+                               <td class='vertical-middle' data-bind='text: player._itemList["SmallRestore"]()'></td>
+                               <td class='vertical-middle'>
+                                   <img class="restore-item" src="assets/images/items/SmallRestore.png"/>
+                               </td>
+                               <td class='vertical-middle'>
+                                    <span>Small Restore </span>
+                               </td>
+                               <td class='vertical-middle'>
+                                   <span>10% energy</span>
+                               </td>
+                               <td class='vertical-middle'>
+                                   <button class='btn btn-success' data-bind="click: function(){  ItemList['SmallRestore'].use();}">Use</button>
+                               </td>
+                           </tr>
+                       </tbody>
+                   </table>
+
                    <div class='row' style="text-align:center;">
                        <div class='progress'>
                            <div id='mineEnergyBar' class='progress-bar' role='progressbar'
