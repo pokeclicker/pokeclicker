@@ -1,20 +1,25 @@
 class Setting {
     name: string;
+    displayName: string;
     options: GameConstants.Option[];
     defaultValue: any;
     value: any;
+    observableValue: KnockoutObservable<any>;
 
     // Leave options array empty to allow all options.
-    constructor(name: string, options: GameConstants.Option[], defaultValue: any) {
+    constructor(name: string, displayName: string, options: GameConstants.Option[], defaultValue: any) {
         this.name = name;
+        this.displayName = displayName;
         this.options = options;
         this.defaultValue = defaultValue;
+        this.observableValue = ko.observable(this.defaultValue);
         this.set(defaultValue);
     }
 
     set(value: any) {
         if (this.validValue(value)) {
             this.value = value;
+            this.observableValue(value);
             console.log("Set " + this.name + " to " + value)
         } else {
             Notifier.notify(value + " is not a valid value for setting " + this.name, GameConstants.NotificationOption.warning)
@@ -38,9 +43,9 @@ class Setting {
         return false;
     }
 
-    isSelected(value: any): KnockoutComputed<boolean>{
-        return ko.computed(function(){
-            return this.value === value;
+    isSelected(value: any): KnockoutComputed<boolean> {
+        return ko.computed(function () {
+            return this.observableValue() === value;
         }, this);
     }
 
