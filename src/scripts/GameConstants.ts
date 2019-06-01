@@ -322,13 +322,13 @@ namespace GameConstants {
         "shiny" = 4
     }
 
-    class Option {
-        optionText: String;
-        optionValue: GameConstants.SortOptionsEnum;
+    export class Option {
+        text: String;
+        value: any;
 
         constructor(text, value) {
-            this.optionText = text;
-            this.optionValue = value;
+            this.text = text;
+            this.value = value;
         }
     }
 
