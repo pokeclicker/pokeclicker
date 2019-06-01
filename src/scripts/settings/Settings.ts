@@ -2,7 +2,6 @@
 /// <reference path="BooleanSetting.ts"/>
 /// <reference path="MultipleChoiceSetting.ts"/>
 
-
 class Settings {
     static list: Setting[] = [];
 
