@@ -11,9 +11,19 @@ class EnergyRestore extends Item {
     }
 
     buy(amt: number) {
+        this._increaseCount(amt);
     }
 
     use() {
+        if (player.itemList[this.name()]() <= 0) {
+            return;
+        }
+        if (player._mineEnergy() === player._maxMineEnergy()) {
+            Notifier.notify("Your mining energy is already full!", GameConstants.NotificationOption.danger);
+            return;
+        }
+        Underground.gainEnergyThroughItem(this.type);
+        this._decreaseCount(1);
     }
 }
 
