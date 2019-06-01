@@ -45,9 +45,7 @@ class Settings {
         for (let i = 0; i < this.list.length; i++) {
             dict[this.list[i].name] = this.list[i].value;
         }
-        console.log(this.list);
-        console.log();
-        return dict;
+        return JSON.stringify(dict);
     }
 }
 

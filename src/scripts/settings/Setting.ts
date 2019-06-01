@@ -20,7 +20,6 @@ class Setting {
         if (this.validValue(value)) {
             this.value = value;
             this.observableValue(value);
-            console.log("Set " + this.name + " to " + value)
         } else {
             Notifier.notify(value + " is not a valid value for setting " + this.name, GameConstants.NotificationOption.warning)
         }
