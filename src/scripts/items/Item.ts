@@ -38,6 +38,18 @@ abstract class Item {
 
     abstract use();
 
+    isAvailable() : boolean {
+        return true;
+    }
+
+    protected _increaseCount(n: number) {
+        player.itemList[this.name()](player.itemList[this.name()]() + n);
+    }
+
+    protected _decreaseCount(n: number) {
+        player.itemList[this.name()](player.itemList[this.name()]() - n);
+    }
+
     increasePriceMultiplier(n = 1) {
         player.itemMultipliers[this.name()] = player.itemMultipliers[this.name()] * Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, n);
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.name()]));

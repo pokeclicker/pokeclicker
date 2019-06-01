@@ -18,22 +18,19 @@ All file and class names should be [upper CamelCase](https://en.wikipedia.org/wi
 ## Building from Source
 
 First make sure you have git and npm available as command-line utilities (so you should install Git and NodeJS if you don't have them already).
-You also need gulp, which you can get from npm by opening the command line interface of your operating system and typing the following command:
-
-- npm install -g gulp
 
 Open a command line interface in the directory that contains this README file, and use the following command to install PokéClicker's other dependencies locally:
 - npm install
 
 Then finally, run the following command in the command line interface to start a browser running PokéClicker.
-- gulp
+- npm start
 
-Changes to the sourcecode will automatically cause the browser to refresh. 
+Changes to the sourcecode will automatically cause the browser to refresh.
 This means you don't need to compile TypeScript yourself. Gulp will do this for you :thumbsup:
 
 
 ## Deploying a new version to Github Pages
 Before deploying, check that the game compiles and starts up without errors. Then run:
-- gulp website
+- npm run website
 
 After this command completes, push the changed files in the 'docs' directory to Github.
