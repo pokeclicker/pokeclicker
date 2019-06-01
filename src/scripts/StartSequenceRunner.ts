@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#pickStarterModal').on('hidden.bs.modal', function () {
         if (StartSequenceRunner.starterPicked == GameConstants.Starter.None) {
-            $('#pickStarterModalText').text("I can't hold them off both! Please pick the pokémon you want to fight");
+            $('#pickStarterModalText').text("I can't hold off all three! Please pick the pokémon you want to fight!");
             $('#pickStarterModal').modal('show');
         }
     });
