@@ -6,12 +6,9 @@
     <script type="text/html" id="pokemonListTemplate">
         <tr data-bind='ifnot: $data.breeding()'>
             <td>
-                <div style="max-height:56px; max-width:56px;" class="row justify-content-center align-items-center">
-
                 <img class="smallImage"
                      data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name), false) }"
                      src=""/>
-                </div>
                 <span data-bind="text: name">Name</span>
             </td>
             <td data-bind="text: attack">Atk</td>
