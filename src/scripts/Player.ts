@@ -187,7 +187,7 @@ class Player {
 
         //TODO remove before deployment
         if (!debug) {
-            if (!saved) {
+            if (this.starter === GameConstants.Starter.None) {
                 StartSequenceRunner.start()
             }
         }
@@ -290,6 +290,8 @@ class Player {
             }
             this._keyItems().push(name);
             KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
+            player._keyItems.valueHasMutated();
+
         }
     }
 

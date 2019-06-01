@@ -16,7 +16,11 @@ class buyKeyItem extends Item {
     
         use() {
         }
-    }
+
+        isAvailable(): boolean {
+            return super.isAvailable() && !player.hasKeyItem(this.name().replace("_", " "));
+        }
+}
     
     
     ItemList['Dungeon_ticket'] = new buyKeyItem(GameConstants.KeyItemType.Dungeon_ticket);
