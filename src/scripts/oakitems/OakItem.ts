@@ -1,6 +1,5 @@
 class OakItem {
     public id: GameConstants.OakItem;
-    public displayName: KnockoutObservable<string>;
     public unlockReq: number;
     public description: KnockoutObservable<string>;
     public baseBonus: number;
@@ -9,9 +8,8 @@ class OakItem {
     public level: KnockoutObservable<number>;
     public isActive: KnockoutObservable<boolean>;
 
-    constructor(id: GameConstants.OakItem, displayName: string, unlockReq: number, description: string, baseBonus: number, stepBonus: number, expGain: number) {
+    constructor(id: GameConstants.OakItem, unlockReq: number, description: string, baseBonus: number, stepBonus: number, expGain: number) {
         this.id = id;
-        this.displayName = ko.observable(displayName);
         this.unlockReq = unlockReq;
         this.description = ko.observable(description);
         this.baseBonus = baseBonus;

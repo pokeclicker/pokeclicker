@@ -2,35 +2,35 @@ class OakItemRunner {
 
     public static oakItemList: KnockoutObservable<OakItem>[];
     // public static blankOakItem: OakItem = new OakItem(" ", Number.MAX_VALUE, "", 0, 0, 0);
-    public static inspectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem(GameConstants.OakItem.MagicBall, "Magic Ball", 20, "Gives a bonus to your catchrate", 5, 1, 2));
-    public static selectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem(GameConstants.OakItem.MagicBall, "Magic Ball", 20, "Gives a bonus to your catchrate", 5, 1, 2));
+    public static inspectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem(GameConstants.OakItem.Magic_Ball, 20, "Gives a bonus to your catchrate", 5, 1, 2));
+    public static selectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem(GameConstants.OakItem.Magic_Ball, 20, "Gives a bonus to your catchrate", 5, 1, 2));
 
     public static initialize() {
         OakItemRunner.oakItemList = [];
 
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.MagicBall, "Magic Ball", 20, "Gives a bonus to your catchrate", 5, 1, 2)));
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.AmuletCoin, "Amulet Coin", 30, "Gain more coins from battling", 25, 5, 1)));
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.PoisonBarb, "Poison Barb", 40, "Clicks do more damage", 25, 5, 3)));
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.ExpShare, "Exp Share", 50, "Gain more exp from battling", 15, 3, 1)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Magic_Ball, 20, "Gives a bonus to your catchrate", 5, 1, 2)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Amulet_Coin, 30, "Gain more coins from battling", 25, 5, 1)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Poison_Barb, 40, "Clicks do more damage", 25, 5, 3)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Exp_Share, 50, "Gain more exp from battling", 15, 3, 1)));
 
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Sprayduck, "Sprayduck", 60, "Makes your berries grow faster", 25, 5, 3    )));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Sprayduck, 60, "Makes your berries grow faster", 25, 5, 3    )));
 
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.ShinyCharm, "Shiny Charm", 70, "Encounter more shinies", 50, 100, 150)));
-
-        // TODO implement use!
-        // TODO implement functionality
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.BlazeCassette, "Blaze Cassette", 80, "Hatch eggs faster", 50, 10, 10)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Shiny_Charm, 70, "Encounter more shinies", 50, 100, 150)));
 
         // TODO implement use!
         // TODO implement functionality
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.CellBattery, "Cell Battery", 90, "Regenerate more mining energy", 25, 5, 4)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Blaze_Cassette, 80, "Hatch eggs faster", 50, 10, 10)));
+
+        // TODO implement use!
+        // TODO implement functionality
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Cell_Battery, 90, "Regenerate more mining energy", 25, 5, 4)));
 
         // OakItemRunner.oakItemList must preserve the ordering of items in GameConstants.OakItem enum
         if (!OakItemRunner.oakItemList.every((f, i)=>f().id==i)) {
             throw new Error("Oak items are out of order!")
         }
 
-        let item: OakItem = OakItemRunner.getOakItemObject(GameConstants.OakItem.MagicBall);
+        let item: OakItem = OakItemRunner.getOakItemObject(GameConstants.OakItem.Magic_Ball);
         OakItemRunner.selectedItem(item);
     }
 
