@@ -49,11 +49,12 @@ class Settings {
 }
 
 Settings.add(
-    new MultipleChoiceSetting("theme", "Theme", "default.css",
+    new MultipleChoiceSetting("theme", "Theme",
         [
             new GameConstants.Option("Default", 'default.css'),
             new GameConstants.Option("Dark Mode", 'dark.css')
-        ]
+        ],
+        "default.css",
     )
 );
 Settings.add(new BooleanSetting("test", "Do the settings work?", false));

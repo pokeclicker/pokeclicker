@@ -1,6 +1,6 @@
-/// <reference path="Setting.ts" />
+/// <reference path="MultipleChoiceSetting.ts" />
 
-class BooleanSetting extends Setting {
+class BooleanSetting extends MultipleChoiceSetting {
     constructor(name: string, displayName: string, defaultValue: boolean) {
         super(
             name,
@@ -14,10 +14,6 @@ class BooleanSetting extends Setting {
     }
 
     toggle() {
-        if (this.value) {
-            this.set(false)
-        } else {
-            this.set(true)
-        }
+        this.set(!this.value);
     }
 }

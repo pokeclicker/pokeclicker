@@ -1,7 +1,7 @@
 /// <reference path="Setting.ts" />
 
 class MultipleChoiceSetting extends Setting {
-    constructor(name: string, displayName: string, defaultValue: any, options: GameConstants.Option[]) {
+    constructor(name: string, displayName: string, options: GameConstants.Option[], defaultValue: any) {
         super(name, displayName, options, defaultValue);
     }
 }
