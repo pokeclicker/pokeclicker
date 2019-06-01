@@ -10,7 +10,7 @@
                         <div data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <div data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('test')}"></div>
                     </div>
 
@@ -25,7 +25,7 @@
 
 <script type="text/html" id="MultipleChoiceSettingTemplate">
     <div class="dropdown">
-        <h3 data-bind="text: $data.name"></h3>
+        <h3 data-bind="text: $data.displayName"></h3>
 
         <div class="btn-group" data-bind="foreach: $data.options">
             <button class="btn btn-primary" data-bind="
