@@ -22,8 +22,12 @@ class Upgrade {
         return this.bonusList[this.level];
     }
 
-    upgradeBonus(){
-        return this.bonusList[this.level + 1] - this.bonusList[this.level];
+    upgradeBonus() {
+        if (this.level < this.maxLevel) {
+
+            return this.bonusList[this.level + 1] - this.bonusList[this.level];
+        }
+        return 0;
     }
 
     canAfford(): boolean {

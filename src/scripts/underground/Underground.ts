@@ -1,4 +1,6 @@
-class Underground {
+class Underground{
+    public static saveKey: string = "underground";
+
     public static itemSelected;
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
     public static counter: number = 0;
@@ -193,6 +195,36 @@ class Underground {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
     }
+
+    static load(saveObject: object): void {
+        if (!saveObject){
+            console.log("Underground not loaded.");
+            console.log(saveObject);
+            return;
+        }
+
+        let upgrades = saveObject['upgrades'];
+        for (let item in Underground.Upgrades) {
+            if (isNaN(Number(item))) {
+                console.log(upgrades[item]);
+                Underground.getUpgrade(Underground.Upgrades.Daily_Deals_Max).level = upgrades[item]
+            }
+        }
+    }
+
+    static save(): object {
+        let save = {};
+        let upgrades = {}
+        for (let item in Underground.Upgrades) {
+            if (isNaN(Number(item))) {
+                upgrades[item] = 2;
+            }
+        }
+        save['upgrades'] = upgrades;
+        return save;
+    }
+
+
 }
 
 $(document).ready(function(){
