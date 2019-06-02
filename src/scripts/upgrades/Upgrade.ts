@@ -43,19 +43,23 @@ class Upgrade {
     }
 
     canAfford(): boolean {
-        return player.canAfford(this.calculateCost())
+        return player.canAfford(this.calculateCost());
     }
 
     // Override in subclass when other requirements exist.
     canBuy(): boolean {
-        return this.level < this.maxLevel && this.canAfford()
+        return this.level < this.maxLevel && this.canAfford();
     }
 
     buy() {
         if (this.canBuy()) {
             player.payCost(this.calculateCost());
-            this.level = this.level + 1;
+            this.levelUp();
         }
+    }
+
+    levelUp() {
+        this.level = this.level + 1;
     }
 
     // Knockout getters/setters

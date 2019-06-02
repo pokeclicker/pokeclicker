@@ -42,8 +42,6 @@ namespace GameConstants {
     export const ITEM_PRICE_MULTIPLIER = 1.01;
     export const ITEM_PRICE_DEDUCT = 1.008;
 
-    export const HAMMER_ENERGY = 3;
-    export const CHISEL_ENERGY = 1;
 
 
     export const EvoStones = [
