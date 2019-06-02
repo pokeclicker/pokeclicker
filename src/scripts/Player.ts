@@ -4,7 +4,6 @@
  */
 
 class Player {
-
     private _money: KnockoutObservable<number>;
     private _dungeonTokens: KnockoutObservable<number>;
 
@@ -1015,4 +1014,3 @@ class Player {
     }
 
 }
-
