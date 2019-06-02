@@ -1,3 +1,4 @@
+///<reference path="upgrades/Upgrade.ts"/>
 /**
  * Information about the player.
  * All player variables need to be saved.
@@ -465,6 +466,10 @@ class Player {
         }
     }
 
+    public canAfford(cost: Cost) {
+        return this.hasCurrency(cost.amount, cost.currency);
+    }
+
     public hasMoney(money: number) {
         return this._money() >= money;
     }
@@ -488,6 +493,10 @@ class Player {
             default:
                 return false;
         }
+    }
+
+    public payCost(cost: Cost): boolean {
+        return this.payCurrency(cost.amount, cost.currency);
     }
 
     public payQuestPoints(questPoints: number): boolean {
