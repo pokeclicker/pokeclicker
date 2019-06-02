@@ -6,12 +6,21 @@ class Upgrade {
     name: any;
     displayName: string;
     maxLevel: number;
-    level: number;
+    _level: KnockoutObservable<number> = ko.observable();
+
     // Optional array of costs
     costList: Cost[] = [];
     // Optional array of benefits
     bonusList: number[] = [];
 
+    constructor(name: any, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[]) {
+        this.name = name;
+        this.displayName = displayName;
+        this.maxLevel = maxLevel;
+        this.level = 1;
+        this.costList = costList;
+        this.bonusList = bonusList;
+    }
 
     calculateCost(): Cost {
         return this.costList[this.level];
@@ -23,11 +32,14 @@ class Upgrade {
     }
 
     upgradeBonus() {
-        if (this.level < this.maxLevel) {
-
+        if (!this.isMaxLevel()) {
             return this.bonusList[this.level + 1] - this.bonusList[this.level];
         }
         return 0;
+    }
+
+    isMaxLevel() {
+        return this.level >= this.maxLevel;
     }
 
     canAfford(): boolean {
@@ -42,16 +54,17 @@ class Upgrade {
     buy() {
         if (this.canBuy()) {
             player.payCost(this.calculateCost());
-            this.level++;
+            this.level = this.level + 1;
         }
     }
 
-    constructor(name: any, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[]) {
-        this.name = name;
-        this.displayName = displayName;
-        this.maxLevel = maxLevel;
-        this.level = 1;
-        this.costList = costList;
-        this.bonusList = bonusList;
+    // Knockout getters/setters
+    get level(): number {
+        return this._level();
     }
+
+    set level(value) {
+        this._level(value);
+    }
+
 }

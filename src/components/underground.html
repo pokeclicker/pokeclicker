@@ -53,24 +53,15 @@ style="cursor:default" tabindex="-1">
            </div>
            <div id="upgrades" class="tab-pane fade">
                <div class="modal-body" id="upgradesBody" style="width: 80%;margin: auto;">
-                   <table class='table'>
-                       <tbody data-bind='foreach: Underground.upgradeList'>
-                       <tr>
-                           <td class='vertical-middle' data-bind='text: displayName + ": " + calculateBonus()'></td>
-                           <td class='vertical-middle'
-                               data-bind='text: level == maxLevel ? "" : "(" + (level > 0 ? "+" : "") + upgradeBonus() + ")"'></td>
-                           <td class='vertical-middle'
-                               data-bind='text: level == maxLevel ? "" : calculateCost().amount + " diamonds"'></td>
-                           <td class='vertical-middle'>
-                               <button class='btn btn-success'
-                                       data-bind='css: { disabled: !canBuy() },
-                                                      text: level == maxLevel ? "Max" : "Upgrade",
-                                                      click: buy()'>
-                               </button>
-                           </td>
-                       </tr>
-                       </tbody>
-                   </table>
+                    <table class='table'>
+                        <tbody>
+                            <tr data-bind="template: { name: 'upgradeTemplate', 'data': {'totalBonus': Underground.getMaxEnergy(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Max)}}"></tr>
+                            <tr data-bind="template: { name: 'upgradeTemplate', 'data': {'totalBonus': Underground.getMaxItems(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Items_Max)}}"></tr>
+                            <tr data-bind="template: { name: 'upgradeTemplate', 'data': {'totalBonus': Underground.getEnergyGain(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Gain)}}"></tr>
+                            <tr data-bind="template: { name: 'upgradeTemplate', 'data': {'totalBonus': Underground.getEnergyRegenTime(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Regen_Time)}}"></tr>
+                            <tr data-bind="template: { name: 'upgradeTemplate', 'data': {'totalBonus': Underground.getDailyDealsMax(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Daily_Deals_Max)}}"></tr>
+                        </tbody>
+                    </table>
                </div>
            </div>
            <div id="help" class="tab-pane fade">
@@ -117,3 +108,18 @@ style="cursor:default" tabindex="-1">
    </div>
 </div>
 </div>
+
+<script type="text/html" id="upgradeTemplate">
+        <td class='vertical-middle' data-bind='text: upgrade.displayName + ": " + totalBonus'></td>
+        <td class='vertical-middle'
+            data-bind='text: upgrade.isMaxLevel() ? "" : "(" + (upgrade.level > 0 ? "+" : "") + upgrade.upgradeBonus() + ")"'></td>
+        <td class='vertical-middle'
+            data-bind='text: upgrade.isMaxLevel() ? "" : upgrade.calculateCost().amount + " diamonds"'></td>
+        <td class='vertical-middle'>
+            <button class='btn btn-success'
+                    data-bind='css: { disabled: !upgrade.canBuy() },
+                                                          text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
+                                                          click: function(){upgrade.buy()}'>
+            </button>
+        </td>
+</script>
