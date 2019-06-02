@@ -568,7 +568,7 @@ namespace GameConstants {
         "EvolutionStone": 2500,
 
         "Dungeon_ticket": 250,
-        "Explorer_kit": 100,
+        "Explorer_kit": 5000,
     };
 
     export enum StoneType {
