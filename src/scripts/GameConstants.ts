@@ -52,12 +52,6 @@ namespace GameConstants {
     export const CHISEL_ENERGY = 1;
 
 
-
-    export enum MineTool {
-        "Chisel" = 0,
-        "Hammer" = 1,
-    }
-
     export const EvoStones = [
         "Fire Stone",
         "Water Stone",

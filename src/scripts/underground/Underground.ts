@@ -54,8 +54,8 @@ class Underground {
         }
 
         html += "<div class='row'>";
-        html +=     "<button onClick='Mine.toolSelected(GameConstants.MineTool.Hammer)' class='btn btn-danger'>Hammer (" + GameConstants.HAMMER_ENERGY + " energy)</button>";
-        html +=     "<button onClick='Mine.toolSelected(GameConstants.MineTool.Chisel)' class='btn btn-info'>Chisel (" + GameConstants.CHISEL_ENERGY + " energy)</button>";
+        html +=     "<button onClick='Mine.toolSelected(Mine.Tool.Hammer)' class='btn btn-danger'>Hammer (" + GameConstants.HAMMER_ENERGY + " energy)</button>";
+        html +=     "<button onClick='Mine.toolSelected(Mine.Tool.Chisel)' class='btn btn-info'>Chisel (" + GameConstants.CHISEL_ENERGY + " energy)</button>";
         html +=     "<h3 data-bind='text: Mine.itemsFound()+" + '"/"' + "+Mine.itemsBuried+" + '" items found"' + "'></h3>";
         html += "</div>";
         $("#mineBody").html(html);
@@ -72,7 +72,7 @@ class Underground {
 
     public static calculateCssClass(i: number, j: number): KnockoutComputed<string> {
         return ko.computed(function() {
-            return "col-sm-1 rock" + Math.max(Mine.grid[i][j](), 0) + " mineSquare " + GameConstants.MineTool[Mine.toolSelected()] + "Selected";
+            return "col-sm-1 rock" + Math.max(Mine.grid[i][j](), 0) + " mineSquare " + Mine.Tool[Mine.toolSelected()] + "Selected";
         }, this, {
             disposeWhen: function() {
                 if (Mine.grid[i][j]() == 0) {
@@ -89,7 +89,7 @@ class Underground {
     }
 
     private static rewardCssClass: KnockoutComputed<string> = ko.pureComputed(function() {
-        return "col-sm-1 mineReward mineSquare "+GameConstants.MineTool[Mine.toolSelected()]+"Selected";
+        return "col-sm-1 mineReward mineSquare "+Mine.Tool[Mine.toolSelected()]+"Selected";
     });
 
     public static gainMineItem(id: number, num: number = 1) {

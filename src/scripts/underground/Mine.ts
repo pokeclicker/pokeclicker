@@ -4,10 +4,11 @@ class Mine {
     public static itemsFound: KnockoutObservable<number>;
     public static itemsBuried: number;
     public static rewardNumbers: Array<number>;
-    public static toolSelected: KnockoutObservable<GameConstants.MineTool> = ko.observable(GameConstants.MineTool["Chisel"]);
+    public static toolSelected: KnockoutObservable<Mine.Tool> = ko.observable(0);
     private static loadingNewLayer: boolean = true
 
     public static loadMine() {
+        this.toolSelected = ko.observable(Mine.Tool["Chisel"]);
         let tmpGrid = [];
         let tmpRewardGrid = [];
         Mine.rewardNumbers = [];
@@ -91,7 +92,7 @@ class Mine {
     }
 
     public static click(i: number, j: number) {
-        if (GameConstants.MineTool[Mine.toolSelected()] == "Hammer") {
+        if (Mine.toolSelected() == Mine.Tool.Hammer) {
             Mine.hammer(i, j);
         } else {
             Mine.chisel(i, j);
@@ -204,5 +205,12 @@ class Mine {
         }
 
         return ko.toJSON(mine);
+    }
+}
+
+namespace Mine {
+    export enum Tool {
+        "Chisel" = 0,
+        "Hammer" = 1,
     }
 }
