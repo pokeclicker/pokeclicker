@@ -3,6 +3,11 @@ class UndergroundUpgrade extends Upgrade {
     constructor(name: Underground.Upgrades, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[]) {
         super(name, displayName, maxLevel, costList, bonusList);
     }
+
+
+    canBuy(): boolean {
+        return super.canBuy() && player.hasKeyItem("Explorer kit");
+    }
 }
 
 
