@@ -122,6 +122,7 @@ class Player {
 
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
 
+        // TODO(@Isha) move to underground classes.
         this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
         for (let item of this._mineInventory()) {
             item.amount = ko.observable(item.amount);
@@ -191,6 +192,7 @@ class Player {
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
 
+    // TODO(@Isha) move to underground classes.
     private _mineInventory: KnockoutObservableArray<any>;
     private _diamonds: KnockoutObservable<number>;
 
@@ -771,6 +773,7 @@ class Player {
         }
     }
 
+    // TODO(@Isha) move to underground classes.
     public hasMineItems() {
         for (let i = 0; i < this._mineInventory().length; i++) {
             if (this._mineInventory()[i].amount() > 0) {
@@ -816,6 +819,7 @@ class Player {
         this._diamonds(n);
     }
 
+    // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
         for (let i = 0; i < player._mineInventory().length; i++) {
             if (player._mineInventory()[i].id === id) {
@@ -825,6 +829,7 @@ class Player {
         return -1;
     }
 
+    // TODO(@Isha) move to underground classes.
     public getUndergroundItemAmount(id: number) {
         let index = this.mineInventoryIndex(id);
         if (index > -1) {
@@ -947,8 +952,10 @@ class Player {
             "_itemList",
             "_itemMultipliers",
             "_keyItems",
+            // TODO(@Isha) remove.
             "_mineInventory",
             "_diamonds",
+            // TODO(@Isha) remove.
             "_mineLayersCleared",
             "_eggList",
             "_eggSlots",
