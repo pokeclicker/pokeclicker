@@ -26,7 +26,7 @@ class Mine {
         Mine.grid = tmpGrid;
         Mine.rewardGrid = tmpRewardGrid;
 
-        for (let i = 0; i < player._maxUndergroundItems(); i++) {
+        for (let i = 0; i < Underground.getMaxItems(); i++) {
             let item = UndergroundItem.getRandomItem();
             let x = Mine.getRandomCoord(GameConstants.Mine.sizeX, item.space[0].length);
             let y = Mine.getRandomCoord(GameConstants.Mine.sizeY, item.space.length);
@@ -99,7 +99,7 @@ class Mine {
     }
 
     private static hammer(x: number, y: number) {
-        if (player.mineEnergy >= GameConstants.HAMMER_ENERGY) {
+        if (Underground.energy() >= GameConstants.HAMMER_ENERGY) {
             if (x < 0 || y < 0) {
                 return;
             }
@@ -113,16 +113,16 @@ class Mine {
                 }
             }
             if (hasMined) {
-                player.mineEnergy -= GameConstants.HAMMER_ENERGY;
+                Underground.energy(Underground.energy() - GameConstants.HAMMER_ENERGY);
             }
         }
     }
 
     private static chisel(x: number, y: number) {
         if (Mine.grid[x][y]() > 0) {
-            if (player.mineEnergy >= GameConstants.CHISEL_ENERGY) {
+            if (Underground.energy() >= GameConstants.CHISEL_ENERGY) {
                 Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)](Math.max(0, Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)]() - 2));
-                player.mineEnergy -= GameConstants.CHISEL_ENERGY;
+                Underground.energy(Underground.energy() - GameConstants.CHISEL_ENERGY);
             }
         }
     }

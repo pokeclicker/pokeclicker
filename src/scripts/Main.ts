@@ -146,7 +146,7 @@ class Game {
                 QuestHelper.quitQuest();
                 QuestHelper.clearQuests();
                 QuestHelper.generateQuests(player.questLevel, player.questRefreshes, now);
-                DailyDeal.generateDeals(player.maxDailyDeals, now);
+                DailyDeal.generateDeals(Underground.getDailyDealsMax(), now);
                 Notifier.notify("It's a new day! Your quests and underground deals have been updated.", GameConstants.NotificationOption.info);
             }
             player._lastSeen = Date.now()
@@ -157,7 +157,7 @@ class Game {
             Underground.energyTick(Math.max(0, Underground.energyTick() - 1));
             if (Underground.energyTick() == 0) {
                 Underground.gainEnergy();
-                Underground.energyTick(player._mineEnergyRegenTime());
+                Underground.energyTick(Underground.getEnergyRegenTime());
             }
             Underground.counter = 0;
         }
@@ -180,8 +180,8 @@ class Game {
         Battle.generateNewEnemy();
         Safari.load();
         Save.loadMine();
-        Underground.energyTick(player._mineEnergyRegenTime())
-        DailyDeal.generateDeals(player.maxDailyDeals, new Date());
+        Underground.energyTick(Underground.getEnergyRegenTime());
+        DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
         QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
         QuestHelper.loadCurrentQuest(player.currentQuest());
         if (!player.tutorialComplete()) {

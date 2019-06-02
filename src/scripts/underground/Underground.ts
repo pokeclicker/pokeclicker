@@ -1,10 +1,45 @@
-/**
- * Created by dennis on 03-07-17.
- */
 class Underground {
     public static itemSelected;
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
     public static counter: number = 0;
+
+    public static energy = ko.observable(50);
+    public static upgradeList: Array<Upgrade> = [];
+
+    static BASE_ENERGY_MAX = 50;
+    static BASE_ITEMS_MAX = 3;
+    static BASE_ENERGY_GAIN = 3;
+    static BASE_ENERGY_REGEN_TIME = 60;
+    static BASE_DAILY_DEALS_MAX = 3;
+
+    public static getMaxEnergy(){
+        return this.BASE_ENERGY_MAX + this.getUpgrade(Underground.Upgrades.Energy_Max).calculateBonus();
+    }
+
+    public static getMaxItems(){
+        return this.BASE_ITEMS_MAX + this.getUpgrade(Underground.Upgrades.Items_Max).calculateBonus();
+    }
+
+    public static getEnergyGain(){
+        return this.BASE_ENERGY_GAIN + this.getUpgrade(Underground.Upgrades.Energy_Gain).calculateBonus();
+    }
+
+    public static getEnergyRegenTime(){
+        return this.BASE_ENERGY_REGEN_TIME - this.getUpgrade(Underground.Upgrades.Energy_Regen_Time).calculateBonus();
+    }
+
+    public static getDailyDealsMax(){
+        return this.BASE_DAILY_DEALS_MAX + this.getUpgrade(Underground.Upgrades.Daily_Deals_Max).calculateBonus();
+    }
+
+
+    static getUpgrade(upgrade: Underground.Upgrades) {
+        for (let i = 0; i < this.upgradeList.length; i++) {
+            if (this.upgradeList[i].name == upgrade){
+                return this.upgradeList[i];
+            }
+        }
+    }
 
     public static showMine() {
         let html = "";
@@ -97,13 +132,13 @@ class Underground {
     }
 
     public static gainEnergy() {
-        if (player._mineEnergy() < player._maxMineEnergy()) {
+        if (this.energy() < this.getMaxEnergy()) {
             let multiplier = 1;
             if(OakItemRunner.isActive(GameConstants.OakItem.Cell_Battery)){
                 multiplier += (OakItemRunner.calculateBonus(GameConstants.OakItem.Cell_Battery) / 100);
             }
-            player._mineEnergy( Math.min(player._maxMineEnergy(), player._mineEnergy() + (multiplier*player.mineEnergyGain)) );
-            if(player._mineEnergy() === player._maxMineEnergy()){
+            this.energy( Math.min(this.getMaxEnergy(), this.energy() + (multiplier*this.getEnergyGain())) );
+            if(this.energy() === this.getMaxEnergy()){
                 Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
             }
         }
@@ -112,8 +147,8 @@ class Underground {
     public static gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
         // Restore a percentage of maximum energy
         let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
-        let gain = Math.min(player._maxMineEnergy() - player._mineEnergy(), effect * player._maxMineEnergy());
-        player._mineEnergy(player._mineEnergy() + gain);
+        let gain = Math.min(this.getMaxEnergy() - this.energy(), effect * this.getMaxEnergy());
+        this.energy(this.energy() + gain);
         Notifier.notify("You restored " + gain + " mining energy!", GameConstants.NotificationOption.success);
     }
 
@@ -173,3 +208,13 @@ $(document).ready(function(){
         }
     });
 });
+
+namespace Underground {
+    export enum Upgrades {
+        Energy_Max,
+        Items_Max,
+        Energy_Gain,
+        Energy_Regen_Time,
+        Daily_Deals_Max
+    }
+}

@@ -51,21 +51,7 @@ namespace GameConstants {
     export const HAMMER_ENERGY = 3;
     export const CHISEL_ENERGY = 1;
 
-    export const MaxUpgrades = {
-        "maxMineEnergy": 10,
-        "maxUndergroundItems": 7,
-        "mineEnergyGain": 17,
-        "mineEnergyRegenTime": 20,
-        "maxDailyDeals": 2
-    };
 
-    export const MineUpgradesInitialValues = {
-        "maxMineEnergy": 50,
-        "maxUndergroundItems": 3,
-        "mineEnergyGain": 3,
-        "mineEnergyRegenTime": 60,
-        "maxDailyDeals": 3
-    };
 
     export enum MineTool {
         "Chisel" = 0,
@@ -256,6 +242,7 @@ namespace GameConstants {
         money,
         questPoint,
         dungeontoken,
+        diamond,
     }
 
     export enum TypeEffectiveness {

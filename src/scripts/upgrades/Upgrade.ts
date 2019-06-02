@@ -3,7 +3,7 @@
 ///<reference path="CostFactory.ts"/>
 
 class Upgrade {
-    name: string;
+    name: any;
     displayName: string;
     maxLevel: number;
     level: number;
@@ -13,15 +13,18 @@ class Upgrade {
     bonusList: number[] = [];
 
 
-    calculateCost() : Cost {
+    calculateCost(): Cost {
         return this.costList[this.level];
     }
 
     // Override with a custom function
-    calculateBonus() : number {
+    calculateBonus(): number {
         return this.bonusList[this.level];
     }
 
+    upgradeBonus(){
+        return this.bonusList[this.level + 1] - this.bonusList[this.level];
+    }
 
     canAfford(): boolean {
         return player.canAfford(this.calculateCost())
@@ -29,16 +32,17 @@ class Upgrade {
 
     // Override in subclass when other requirements exist.
     canBuy(): boolean {
-        return this.canAfford()
+        return this.level < this.maxLevel && this.canAfford()
     }
 
     buy() {
         if (this.canBuy()) {
             player.payCost(this.calculateCost());
+            this.level++;
         }
     }
 
-    constructor(name: string, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[]) {
+    constructor(name: any, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[]) {
         this.name = name;
         this.displayName = displayName;
         this.maxLevel = maxLevel;
