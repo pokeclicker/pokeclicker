@@ -68,7 +68,7 @@ class Upgrade {
     }
 
     set level(value) {
-        this._level(value);
+        this._level(Math.min(value, this.maxLevel));
     }
 
 }

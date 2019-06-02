@@ -193,32 +193,28 @@ class Underground {
     static load(saveObject: object): void {
         if (!saveObject) {
             console.log("Underground not loaded.");
-            console.log(saveObject);
             return;
         }
 
         let upgrades = saveObject['upgrades'];
         for (let item in Underground.Upgrades) {
             if (isNaN(Number(item))) {
-                console.log(upgrades[item]);
-                Underground.getUpgrade(Underground.Upgrades.Daily_Deals_Max).level = upgrades[item]
+                Underground.getUpgrade((<any>Underground.Upgrades)[item]).level = upgrades[item]
             }
         }
     }
 
     static save(): object {
-        let save = {};
-        let upgrades = {}
+        let undergroundSave = {};
+        let upgradesSave = {};
         for (let item in Underground.Upgrades) {
             if (isNaN(Number(item))) {
-                upgrades[item] = 2;
+                upgradesSave[item] = Underground.getUpgrade((<any>Underground.Upgrades)[item]).level;
             }
         }
-        save['upgrades'] = upgrades;
-        return save;
+        undergroundSave['upgrades'] = upgradesSave;
+        return undergroundSave;
     }
-
-
 }
 
 $(document).ready(function () {
