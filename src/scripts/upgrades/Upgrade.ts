@@ -7,19 +7,21 @@ class Upgrade {
     displayName: string;
     maxLevel: number;
     _level: KnockoutObservable<number> = ko.observable();
+    increasing: boolean;
 
     // Optional array of costs
     costList: Cost[] = [];
     // Optional array of benefits
     bonusList: number[] = [];
 
-    constructor(name: any, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[]) {
+    constructor(name: any, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[], increasing = true) {
         this.name = name;
         this.displayName = displayName;
         this.maxLevel = maxLevel;
         this.level = 1;
         this.costList = costList;
         this.bonusList = bonusList;
+        this.increasing = increasing;
     }
 
     calculateCost(): Cost {

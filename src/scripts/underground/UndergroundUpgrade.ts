@@ -1,7 +1,7 @@
 class UndergroundUpgrade extends Upgrade {
 
-    constructor(name: Underground.Upgrades, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[]) {
-        super(name, displayName, maxLevel, costList, bonusList);
+    constructor(name: Underground.Upgrades, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[], increasing = true) {
+        super(name, displayName, maxLevel, costList, bonusList, increasing);
     }
 
 
@@ -40,7 +40,8 @@ Underground.upgradeList.push(
 Underground.upgradeList.push(
     new UndergroundUpgrade(Underground.Upgrades.Energy_Regen_Time, "Energy regen time", 20,
         CostFactory.createArray(GameHelper.createArray(20, 400, 20), GameConstants.Currency.diamond),
-        GameHelper.createArray(0, 20, 1)
+        GameHelper.createArray(0, 20, 1),
+        false
     )
 );
 
