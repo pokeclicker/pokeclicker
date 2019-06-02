@@ -188,7 +188,7 @@ class Player {
 
         //TODO remove before deployment
         if (!debug) {
-            if (!saved) {
+            if (this.starter === GameConstants.Starter.None) {
                 StartSequenceRunner.start()
             }
         }
@@ -291,6 +291,8 @@ class Player {
             }
             this._keyItems().push(name);
             KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
+            player._keyItems.valueHasMutated();
+
         }
     }
 
@@ -320,7 +322,8 @@ class Player {
     private _caughtAmount: Array<KnockoutObservable<number>>;
 
     public calculateClickAttack(): number {
-        let oakItemBonus = OakItemRunner.isActive("Poison Barb") ? (1 + OakItemRunner.calculateBonus("Poison Barb") / 100) : 1;
+        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Poison_Barb) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Poison_Barb) / 100) : 1;
+        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
         let clickAttack = Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
         if(this.effectEngine[GameConstants.BattleItemType.xClick]){
             clickAttack *= 1.5;
@@ -409,7 +412,7 @@ class Player {
     }
 
     public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
-        OakItemRunner.use("Magic Ball");
+        OakItemRunner.use(GameConstants.OakItem.Magic_Ball);
         let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
@@ -442,9 +445,9 @@ class Player {
     }
 
     public gainMoney(money: number) {
-        OakItemRunner.use("Amulet Coin");
+        OakItemRunner.use(GameConstants.OakItem.Amulet_Coin);
         // TODO add money multipliers
-        let oakItemBonus = OakItemRunner.isActive("Amulet Coin") ? (1 + OakItemRunner.calculateBonus("Amulet Coin") / 100) : 1;
+        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Amulet_Coin) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Amulet_Coin) / 100) : 1;
         let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
         if(this.effectEngine[GameConstants.BattleItemType.Lucky_incense]){
             moneytogain = Math.floor(moneytogain * 1.5);
@@ -531,10 +534,10 @@ class Player {
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {
-        OakItemRunner.use("Exp Share");
+        OakItemRunner.use(GameConstants.OakItem.Exp_Share);
         // TODO add exp multipliers
         let trainerBonus = trainer ? 1.5 : 1;
-        let oakItemBonus = OakItemRunner.isActive("Exp Share") ? 1 + (OakItemRunner.calculateBonus("Exp Share") / 100) : 1;
+        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Exp_Share) ? 1 + (OakItemRunner.calculateBonus(GameConstants.OakItem.Exp_Share) / 100) : 1;
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
         if(this.effectEngine[GameConstants.BattleItemType.xExp]){
@@ -627,10 +630,11 @@ class Player {
         for (let i = 0; i < this._eggList.length; i++) {
             if (this._eggList[i]() == null) {
                 this._eggList[i](e);
-                return;
+                return true;
             }
         }
-        console.log("Error: Could not place egg " + e);
+        console.log("Error: Could not place " + GameConstants.EggType[e.type] + " Egg");
+        return false;
     }
 
     public gainBadge(badge: GameConstants.Badge) {
@@ -1055,5 +1059,6 @@ class Player {
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
+
 }
 

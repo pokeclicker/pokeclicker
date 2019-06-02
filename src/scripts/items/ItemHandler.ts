@@ -26,22 +26,27 @@ class ItemHandler {
 
     public static useStones(){
         if(this.pokemonSelected() == ""){
-            return Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
+            Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
+            return;
         }
-        let amount = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
+        let amountTotal = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
-        if(!amount){
-            return Notifier.notify(`You don't have any ${this.stoneSelected().replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
+        if(amountTotal == 0){
+            Notifier.notify("You don't have any stones left...", GameConstants.NotificationOption.danger);
+            return;
         }
 
-        for(let i = 0; i< amount; i++){
+        let amountUsed = 0;
+        for(let i = 0; i< amountTotal; i++){
             player.itemList[this.stoneSelected()](player.itemList[this.stoneSelected()]()-1);
+            amountUsed++;
             if((ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())){
-                amount = i;
+                // Stop when a shiny is encountered
+                break;
             }
         }
-        let multiple = amount == 1 ? "" : "s";
-        Notifier.notify("You used " + amount + " " + this.stoneSelected() + multiple, GameConstants.NotificationOption.success);
+        let multiple = amountUsed == 1 ? "" : "s";
+        Notifier.notify("You used " + amountUsed + " " + this.stoneSelected() + multiple, GameConstants.NotificationOption.success);
     }
 
 }

@@ -24,11 +24,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     data-bind="foreach: player.maxLevelPokemonList()">
                    <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
                        <button class="btn btn-secondary smallButton list-group-item-action"
-                               data-bind="click: function() {BreedingHelper.gainPokemonEgg($data)}">
+                               data-bind="click: function() {$('#breedingModal').modal('hide');BreedingHelper.gainPokemonEgg($data);}">
                            <img class="smallImage"
-                                data-bind="attr:{ src: '/assets/images/pokemon/' + id +'.png' }"
+                                data-bind="attr:{ src: '/assets/images/' + (player.caughtShinyList().includes(name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"
                                 src=""/>
-                           <span data-bind="text: name" style="margin-left: 20px">Name</span>
+                           <span data-bind="text: name" style="margin-left: 20px">Name</span><span style="float:right" data-bind="if: player.caughtShinyList().includes(name)">&nbsp;✨</span>
                        </button>
                    </div>
                </div>
