@@ -18,7 +18,7 @@ class EnergyRestore extends Item {
         if (player.itemList[this.name()]() <= 0) {
             return;
         }
-        if (Underground.energy() === Underground.getMaxEnergy()) {
+        if (Underground.energy === Underground.getMaxEnergy()) {
             Notifier.notify("Your mining energy is already full!", GameConstants.NotificationOption.danger);
             return;
         }

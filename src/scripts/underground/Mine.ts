@@ -101,7 +101,7 @@ class Mine {
     }
 
     private static hammer(x: number, y: number) {
-        if (Underground.energy() >= Underground.HAMMER_ENERGY) {
+        if (Underground.energy >= Underground.HAMMER_ENERGY) {
             if (x < 0 || y < 0) {
                 return;
             }
@@ -115,16 +115,16 @@ class Mine {
                 }
             }
             if (hasMined) {
-                Underground.energy(Underground.energy() - Underground.HAMMER_ENERGY);
+                Underground.energy = Underground.energy - Underground.HAMMER_ENERGY;
             }
         }
     }
 
     private static chisel(x: number, y: number) {
         if (Mine.grid[x][y]() > 0) {
-            if (Underground.energy() >= Underground.CHISEL_ENERGY) {
+            if (Underground.energy >= Underground.CHISEL_ENERGY) {
                 Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)](Math.max(0, Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)]() - 2));
-                Underground.energy(Underground.energy() - Underground.CHISEL_ENERGY);
+                Underground.energy = Underground.energy - Underground.CHISEL_ENERGY;
             }
         }
     }

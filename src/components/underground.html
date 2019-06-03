@@ -23,11 +23,11 @@ style="cursor:default" tabindex="-1">
                        <div class='progress'>
                            <div id='mineEnergyBar' class='progress-bar' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
-                                data-bind="style: { width: Underground.energy()/Underground.getMaxEnergy()*100 + '%' }">
+                                data-bind="style: { width: Underground.energy/Underground.getMaxEnergy()*100 + '%' }">
                            </div>
                        </div>
                        <span id='energyDisplay' style='color:black;'>
-                           <span data-bind='text: Math.floor(Underground.energy())'></span>/<span
+                           <span data-bind='text: Math.floor(Underground.energy)'></span>/<span
                                data-bind='text: Underground.getMaxEnergy()'></span>
                            <img src='assets/images/underground/flash.png'>
                            (next: <span data-bind='text: Underground.energyTick'></span>s)

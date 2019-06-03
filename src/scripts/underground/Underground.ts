@@ -5,7 +5,7 @@ class Underground {
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
     public static counter: number = 0;
 
-    public static energy = ko.observable(50);
+    private static _energy: KnockoutObservable<number> = ko.observable(0);
     public static upgradeList: Array<Upgrade> = [];
 
     public static getMaxEnergy() {
@@ -128,13 +128,13 @@ class Underground {
     }
 
     public static gainEnergy() {
-        if (this.energy() < this.getMaxEnergy()) {
+        if (this.energy < this.getMaxEnergy()) {
             let multiplier = 1;
             if (OakItemRunner.isActive(GameConstants.OakItem.Cell_Battery)) {
                 multiplier += (OakItemRunner.calculateBonus(GameConstants.OakItem.Cell_Battery) / 100);
             }
-            this.energy(Math.min(this.getMaxEnergy(), this.energy() + (multiplier * this.getEnergyGain())));
-            if (this.energy() === this.getMaxEnergy()) {
+            this.energy = Math.min(this.getMaxEnergy(), this.energy + (multiplier * this.getEnergyGain()));
+            if (this.energy === this.getMaxEnergy()) {
                 Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
             }
         }
@@ -143,8 +143,8 @@ class Underground {
     public static gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
         // Restore a percentage of maximum energy
         let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
-        let gain = Math.min(this.getMaxEnergy() - this.energy(), effect * this.getMaxEnergy());
-        this.energy(this.energy() + gain);
+        let gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
+        this.energy = this.energy + gain;
         Notifier.notify("You restored " + gain + " mining energy!", GameConstants.NotificationOption.success);
     }
 
@@ -190,7 +190,7 @@ class Underground {
         }
     }
 
-    static load(saveObject: object): void {
+    public static load(saveObject: object): void {
         if (!saveObject) {
             console.log("Underground not loaded.");
             return;
@@ -199,12 +199,13 @@ class Underground {
         let upgrades = saveObject['upgrades'];
         for (let item in Underground.Upgrades) {
             if (isNaN(Number(item))) {
-                Underground.getUpgrade((<any>Underground.Upgrades)[item]).level = upgrades[item]
+                Underground.getUpgrade((<any>Underground.Upgrades)[item]).level = upgrades[item] || 0;
             }
         }
+        this.energy = saveObject['energy'] || 0;
     }
 
-    static save(): object {
+    public static save(): object {
         let undergroundSave = {};
         let upgradesSave = {};
         for (let item in Underground.Upgrades) {
@@ -213,8 +214,19 @@ class Underground {
             }
         }
         undergroundSave['upgrades'] = upgradesSave;
+        undergroundSave['energy'] = this.energy;
         return undergroundSave;
     }
+
+    // Knockout getters/setters
+    static get energy(): number {
+        return this._energy();
+    }
+
+    static set energy(value) {
+        this._energy(value);
+    }
+
 }
 
 $(document).ready(function () {
