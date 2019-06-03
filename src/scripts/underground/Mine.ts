@@ -6,6 +6,8 @@ class Mine {
     public static itemsFound: KnockoutObservable<number>;
     public static itemsBuried: number;
     public static rewardNumbers: Array<number>;
+
+    // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: KnockoutObservable<Mine.Tool> = ko.observable(0);
     private static loadingNewLayer: boolean = true
 
