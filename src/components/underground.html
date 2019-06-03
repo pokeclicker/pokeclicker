@@ -22,36 +22,7 @@ style="cursor:default" tabindex="-1">
 
                    <table class='table table-sm' style="width:60%; margin: auto">
                        <tbody>
-                           <tr>
-                               <td class="col-md-4">
-                                   <button style="display: inline;" class="btn btn-secondary" data-bind="
-                                   click: function(){  ItemList['SmallRestore'].use();},
-                                   css: { disabled: player._itemList['SmallRestore']() <= 0}"
-                                   >
-                                       <img class="restore-item" src="assets/images/items/SmallRestore.png">
-                                       <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize.SmallRestore) + ' energy'">&nbsp;+? energy</span>
-                                       <span data-bind="text: '(' + player._itemList['SmallRestore']() + ')'">(?)</span>
-                                   </button>
-
-                               <td class="col-md-4">
-                                   <button style="display: inline;" class="btn btn-secondary" data-bind="
-                                   click: function(){  ItemList['MediumRestore'].use();},
-                                   css: { disabled: player._itemList['MediumRestore']() <= 0}"
-                                   >
-                                       <img class="restore-item" src="assets/images/items/MediumRestore.png">
-                                       <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize.MediumRestore) + ' energy'">&nbsp;+? energy</span>
-                                       <span data-bind="text: '(' + player._itemList['MediumRestore']() + ')'">(?)</span>
-                                   </button>
-
-                               <td class="col-md-4">
-                                   <button style="display: inline;" class="btn btn-secondary" data-bind="
-                                   click: function(){  ItemList['LargeRestore'].use();},
-                                   css: { disabled: player._itemList['LargeRestore']() <= 0}"
-                                   >
-                                       <img class="restore-item" src="assets/images/items/LargeRestore.png">
-                                       <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize.LargeRestore) + ' energy'">&nbsp;+? energy</span>
-                                       <span data-bind="text: '(' + player._itemList['LargeRestore']() + ')'">(?)</span>
-                                   </button>
+                           <tr data-bind="template: { name: 'energyRestoreTemplate', foreach: ['SmallRestore','MediumRestore','LargeRestore']}">
                            </tr>
                        </tbody>
                    </table>
@@ -153,3 +124,17 @@ style="cursor:default" tabindex="-1">
    </div>
 </div>
 </div>
+
+<script type="text/html" id="energyRestoreTemplate">
+    <td class="col-md-4">
+        <button style="display: inline;" class="btn btn-secondary" data-bind="
+                                       click: function(){  ItemList[$data].use();},
+                                       css: { disabled: player._itemList[$data]() <= 0}"
+        >
+            <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+            <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data]) + ' energy'">&nbsp;+? energy</span>
+            <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
+        </button>
+    </td>
+</script>
+
