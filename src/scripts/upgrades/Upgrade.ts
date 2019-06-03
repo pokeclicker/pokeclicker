@@ -7,6 +7,9 @@ class Upgrade {
     displayName: string;
     maxLevel: number;
     _level: KnockoutObservable<number> = ko.observable();
+
+    // Describes whether this upgrade increases or decreases a number.
+    // (e.g. power is increasing, time is decreasing).
     increasing: boolean;
 
     // Optional array of costs
