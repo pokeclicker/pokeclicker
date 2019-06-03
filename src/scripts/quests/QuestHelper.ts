@@ -85,7 +85,7 @@ class QuestHelper{
                 player.payMoney(QuestHelper.getRefreshCost())
             }
             player.questRefreshes++;
-            QuestHelper.quitQuest();
+            QuestHelper.quitAllQuests();
             QuestHelper.clearQuests();
             QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
         } else {
@@ -111,9 +111,9 @@ class QuestHelper{
         return Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1))
     }
 
-    public static loadCurrentQuest(saved) {
-        if (saved !== null) {
-            QuestHelper.questList()[saved.index].initial(saved.initial)
+    public static loadCurrentQuests(saved: KnockoutObservableArray<any>) {
+        for (let i = 0; i < saved().length; i++) {
+            QuestHelper.questList()[saved()[i].index].initial(saved()[i].initial());
         }
     }
 
@@ -135,10 +135,32 @@ class QuestHelper{
         return Math.floor(n + 1);
     }
 
-    public static quitQuest() {
-        if (player.currentQuest()) {
-            QuestHelper.questList()[player.currentQuest().index].quit();
+    public static haveFreeQuestSlots(): boolean {
+        return player.currentQuests().length < this.questSlots()();
+    }
+
+    public static onQuest(index: number): KnockoutObservable<boolean> {
+        return ko.observable(player.currentQuests().map(x => x.index).includes(index));
+    }
+
+    public static beginQuest(index: number) {
+        if (this.haveFreeQuestSlots()) {
+            this.questList()[index].beginQuest();
+            player.currentQuests.push({
+                index: index,
+                initial: this.questList()[index].initial(),
+            });
+            player.currentQuests.sort((x, y) => x.index - y.index);
+        } else {
+            Notifier.notify("You cannot start more quests", GameConstants.NotificationOption.danger);
         }
+    }
+
+    public static quitAllQuests() {
+        let questIndexArr = player.currentQuests().map(x => x.index);
+        questIndexArr.forEach(index => {
+            this.questList()[index].exit();
+        });
     }
 
     public static checkCompletedSet() {
@@ -153,5 +175,9 @@ class QuestHelper{
 
     private static getCompletionReward() {
         console.log("All quests Completed!")
+    }
+
+    public static questSlots(): KnockoutObservable<number> {
+        return ko.observable(1);
     }
 }
