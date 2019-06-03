@@ -18,7 +18,7 @@ class Upgrade {
         this.name = name;
         this.displayName = displayName;
         this.maxLevel = maxLevel;
-        this.level = 1;
+        this.level = 0;
         this.costList = costList;
         this.bonusList = bonusList;
         this.increasing = increasing;
