@@ -99,8 +99,8 @@ class Underground {
     public static gainEnergy() {
         if (player._mineEnergy() < player._maxMineEnergy()) {
             let multiplier = 1;
-            if(OakItemRunner.isActive("Cell Battery")){
-                multiplier += (OakItemRunner.calculateBonus("Cell Battery") / 100);
+            if(OakItemRunner.isActive(GameConstants.OakItem.Cell_Battery)){
+                multiplier += (OakItemRunner.calculateBonus(GameConstants.OakItem.Cell_Battery) / 100);
             }
             player._mineEnergy( Math.min(player._maxMineEnergy(), player._mineEnergy() + (multiplier*player.mineEnergyGain)) );
             if(player._mineEnergy() === player._maxMineEnergy()){
@@ -109,33 +109,45 @@ class Underground {
         }
     }
 
+    public static gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
+        // Restore a percentage of maximum energy
+        let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
+        let gain = Math.min(player._maxMineEnergy() - player._mineEnergy(), effect * player._maxMineEnergy());
+        player._mineEnergy(player._mineEnergy() + gain);
+        Notifier.notify("You restored " + gain + " mining energy!", GameConstants.NotificationOption.success);
+    }
+
     public static sellMineItem(id: number) {
         for (let i=0; i<player._mineInventory().length; i++) {
             let item = player._mineInventory()[i];
             if (item.id == id) {
                 if (item.amount() > 0) {
-                    let amt = item.amount();
-                    player._mineInventory()[i].amount(amt - 1);
-                    Underground.gainProfit(item);
+                    let success = Underground.gainProfit(item);
+                    if (success) {
+                        let amt = item.amount();
+                        player._mineInventory()[i].amount(amt - 1);
+                    }
                     return;
                 }
             }
         }
     }
 
-    private static gainProfit(item: UndergroundItem) {
+    private static gainProfit(item: UndergroundItem): boolean {
+        let success = true;
         switch (item.valueType) {
             case "Diamond":
                 player.diamonds += item.value;
                 break;
             case "Mine Egg":
-                player.gainEgg(BreedingHelper.createFossilEgg(item.name));
+                success = player.gainEgg(BreedingHelper.createFossilEgg(item.name));
                 break;
             default:
                 let type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
                 let typeNum = GameConstants.PokemonType[type];
                 player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + GameConstants.PLATE_VALUE);
         }
+        return success;
     }
 
     public static openUndergroundModal() {

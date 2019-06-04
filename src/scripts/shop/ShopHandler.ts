@@ -23,6 +23,10 @@ class ShopHandler {
             return;
         }
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
+        if (!item.isAvailable()) {
+            Notifier.notify(`${item.name()} is sold out!`, GameConstants.NotificationOption.danger)
+            return;
+        }
 
         let multiple = this.amount() > 1 ? "s" : "";
 
@@ -62,11 +66,6 @@ class ShopHandler {
         input.val(newVal > 1 ? newVal : 1).change();
     }
 
-    public static ownKeyItem(name: string): boolean {
-        let keyItem = GameConstants.KeyItemType[name];
-        return !(keyItem != undefined && player.hasKeyItem(name.replace("_", " ")));
-    }
-
     public static calculateCss(i: number): string {
         if (this.selected() == i) {
             return "shopItem clickable btn shopItemSelected"
@@ -78,7 +77,8 @@ class ShopHandler {
     public static calculateButtonCss(): string {
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
-        if (item && !player.hasCurrency(item.totalPrice(), item.currency) || this.amount() < 1) {
+        if (item && !(item.isAvailable() && player.hasCurrency(item.totalPrice(), item.currency))
+                || this.amount() < 1) {
             return "btn btn-danger smallButton smallFont"
         } else {
             return "btn btn-success smallButton smallFont"

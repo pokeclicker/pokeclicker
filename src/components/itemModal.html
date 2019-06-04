@@ -65,9 +65,7 @@
                                         data-bind="if: (player.alreadyCaughtPokemon($data.name))">
                                         <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                                 data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
-                                            <img class="smallImage"
-                                                 data-bind="attr:{ src: '/assets/images/pokemon/' + id +'.png' }"
-                                                 src=""/>
+                                            <img class="smallImage" data-bind="attr:{src: '/assets/images/' + (player.alreadyCaughtPokemonShiny($data.name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                             <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
                                             <span style="float:right; margin-top:8px"
@@ -118,12 +116,12 @@
                                     <div class="col" style="text-align: center">
                                         <button class="btn btn-secondary amount-button list-group-item-action"
                                                 data-bind="click: function() {ItemHandler.amountSelected(Infinity)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === Infinity}">
-                                            <span>Until shiny</span>
+                                            <span>All</span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-
+                            <p><b>Evolution stone usage stops when a shiny evolution is encountered</b></p>
                             <div class="row no-gutters justify-content-sm-center">
                                 <div class="row justify-content-center" style="padding:15px;">
                                     <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>

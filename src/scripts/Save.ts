@@ -6,12 +6,17 @@ class Save {
         let json = JSON.stringify(player);
         localStorage.setItem("player", json);
         localStorage.setItem("mine", Mine.serialize());
+        localStorage.setItem("settings", Settings.save());
         this.counter = 0;
         console.log("Game saved")
     }
 
     public static load(): Player {
         let saved = localStorage.getItem("player");
+
+        let settings = localStorage.getItem("settings");
+        Settings.load(JSON.parse(settings));
+
         if (saved !== "null") {
             return new Player(JSON.parse(saved));
         } else {
@@ -23,12 +28,8 @@ class Save {
         let element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(btoa(JSON.stringify(player))));
         let currentdate = new Date();
-        let datetime = "" + currentdate.getDate() + "/"
-            + (currentdate.getMonth() + 1) + "/"
-            + currentdate.getFullYear() + " @ "
-            + currentdate.getHours() + ":"
-            + currentdate.getMinutes();
-        let filename = "Pokeclicker save - " + datetime + '.txt';
+        let datestr = currentdate.toISOString().replace("T", " ").slice(0, 19);
+        let filename = "PokeClickerSave_" + datestr + '.txt';
         element.setAttribute('download', filename);
 
         element.style.display = 'none';

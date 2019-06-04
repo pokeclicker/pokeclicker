@@ -4,6 +4,8 @@
   "description": "PokéClicker repository",
   "main": "index.js",
   "scripts": {
+    "start": "gulp",
+    "website": "gulp website",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
