@@ -43,7 +43,10 @@
                                 <td class="align-middle">
                                     <button class='btn btn-primary btn-sm' 
                                         data-bind='visible: QuestHelper.haveFreeQuestSlots() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
-                                        click: function(){QuestHelper.beginQuest($data.index);}'>
+                                        click: function(){
+                                            QuestHelper.beginQuest($data.index);
+                                            if (!QuestHelper.haveFreeQuestSlots()) {$("#QuestModal").modal("hide");}
+                                        }'>
                                         Start
                                     </button>
                                     <button class='btn btn-success btn-sm' data-bind='visible: QuestHelper.onQuest($data.index)() && $data.isCompleted(),
