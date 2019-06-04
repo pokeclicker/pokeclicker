@@ -19,7 +19,7 @@ style="background-color: white; min-height: 100px">
                 <div class="col-sm-11 col-md-8">
                     <div class="row" style="margin-bottom: 10px">
                         <div class="col-9" style="padding:0px; margin:0px">
-                            <div class="progress" style="padding:0px; text-align:center" 
+                            <div class="progress" style="margin-top:6px; padding:0px; text-align:center" 
                                 data-bind='tooltip: {title: QuestHelper.questList()[$data.index].progressText, trigger: "hover"}'>
                                 <div class="progress-bar bg-success" role="progressbar" 
                                     data-bind="attr:{style: 'width:' + (QuestHelper.questList()[$data.index].progress() * 100) + '%'}"
@@ -28,7 +28,7 @@ style="background-color: white; min-height: 100px">
                             </div>
                         </div>
                         <div class="col-3">
-                            <button style="margin:0px; padding:0px; min-width:60px"
+                            <button style="margin:0px; padding:0px; height:20px; min-width:60px"
                                     data-bind='
                                         click: function(){QuestHelper.questList()[$data.index].exit();}, 
                                         text: QuestHelper.questList()[$data.index].isCompleted() ? "Claim" : "Quit", 
