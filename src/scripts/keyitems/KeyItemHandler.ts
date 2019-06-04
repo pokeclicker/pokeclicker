@@ -35,7 +35,6 @@ class KeyItemHandler {
             return player.berryList[0]() >= 5
         })));
 
-        // TODO buy for 100 quest points
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Explorer kit", "A bag filled with convenient tools for exploring. It provides access to the Underground")));
 
         // TODO buy for 500 quest points

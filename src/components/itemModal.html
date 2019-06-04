@@ -155,15 +155,15 @@
                                     <div style="height: 20px" class="col-sm-11">
                                         <b><span data-bind="text: KeyItemHandler.inspectedItem().name()"></span></b>
                                     </div>
-                                </div>
-                                <div class="row justify-content-sm-center">
-                                    <div class="col-sm-11">
-                                        <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
-                                            <p style="margin-top: 5px"
-                                               data-bind="text: KeyItemHandler.inspectedItem().description"></p>
-                                        </div>
-                                        <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
-                                            <p style="margin-top: 5px">?????</p>
+                                    <div class="row justify-content-sm-center">
+                                        <div class="col-sm-11">
+                                            <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
+                                                <p style="margin-top: 5px"
+                                                   data-bind="html: KeyItemHandler.inspectedItem().description"></p>
+                                            </div>
+                                            <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
+                                                <p style="margin-top: 5px">?????</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
