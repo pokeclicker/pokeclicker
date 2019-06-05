@@ -3,7 +3,7 @@ style="background-color: white; min-height: 100px">
 
     <!-- Quests header -->
     <h6 style="display:inline">
-        <span class='' data-bind='text: "Quests (" + player.currentQuests().length + "/" + QuestHelper.questSlots()() + ")"'>
+        <span class='' data-bind='text: !player.tutorialComplete() ? "Tutorial Quest" : "Quests (" + player.currentQuests().length + "/" + QuestHelper.questSlots()() + ")"'>
         </span>
     </h6>
     <button class='btn btn-sm btn-primary' style="margin:5px"
