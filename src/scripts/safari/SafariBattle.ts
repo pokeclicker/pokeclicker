@@ -161,12 +161,15 @@ class SafariBattle {
     }
 
     public static run() {
-        if(Math.random()*100 < (30 + 15*SafariBattle.escapeAttempts)){
-            SafariBattle.text("You flee.");
-            setTimeout(SafariBattle.endBattle, 1500);
-        } else {
-            SafariBattle.text("You can't escape...");
-            setTimeout(SafariBattle.enemyTurn, 1000);
+        if (!SafariBattle.busy){
+            SafariBattle.busy = true;
+            if(Math.random()*100 < (30 + 15*SafariBattle.escapeAttempts)){
+                SafariBattle.text("You flee.");
+                setTimeout(SafariBattle.endBattle, 1500);
+            } else {
+                SafariBattle.text("You can't escape...");
+                setTimeout(SafariBattle.enemyTurn, 1000);
+            }
         }
     }
 
