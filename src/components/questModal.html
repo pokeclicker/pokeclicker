@@ -42,10 +42,10 @@
                                         data-bind='text: " " + pointsReward'></span></td>
                                 <td class="align-middle">
                                     <button class='btn btn-primary btn-sm' 
-                                        data-bind='visible: QuestHelper.haveFreeQuestSlots() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
+                                        data-bind='visible: QuestHelper.canStartNewQuest() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
                                         click: function(){
                                             QuestHelper.beginQuest($data.index);
-                                            if (!QuestHelper.haveFreeQuestSlots()) {$("#QuestModal").modal("hide");}
+                                            if (!QuestHelper.canStartNewQuest()) {$("#QuestModal").modal("hide");}
                                         }'>
                                         Start
                                     </button>

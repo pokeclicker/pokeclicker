@@ -135,8 +135,20 @@ class QuestHelper{
         return Math.floor(n + 1);
     }
 
-    public static haveFreeQuestSlots(): boolean {
-        return player.currentQuests().length < this.questSlots()();
+    public static canStartNewQuest(): boolean {
+        // Two conditions for starting new quest:
+        // 1. Current quests not exceed maximum slots
+        // 2. At least one quest is neither completed nor in-progress
+        if (player.currentQuests().length >= this.questSlots()()) {
+            return false;
+        }
+        for (let i = 0; i < QuestHelper.questList().length; i++) {
+            if (!(player.completedQuestList[i]() || QuestHelper.questList()[i].isCompleted() 
+                    || QuestHelper.questList()[i].inProgress()())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static onQuest(index: number): KnockoutObservable<boolean> {
@@ -144,7 +156,7 @@ class QuestHelper{
     }
 
     public static beginQuest(index: number) {
-        if (this.haveFreeQuestSlots()) {
+        if (this.canStartNewQuest()) {
             this.questList()[index].beginQuest();
             player.currentQuests.push({
                 index: index,
