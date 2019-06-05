@@ -50,7 +50,7 @@
                                         Start
                                     </button>
                                     <button class='btn btn-success btn-sm' data-bind='visible: QuestHelper.onQuest($data.index)() && $data.isCompleted(),
-                                                                       click: $data.exit'>
+                                                                       click: $data.endQuest'>
                                         Claim
                                     </button>
                                     <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>

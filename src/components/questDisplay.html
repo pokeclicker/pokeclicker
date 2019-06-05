@@ -31,7 +31,7 @@ style="background-color: white; min-height: 100px">
                     <td width="30%" class="p-2">
                         <button class="btn btn-sm btn-block p-0"
                                 data-bind='
-                                    click: function(){QuestHelper.questList()[$data.index].exit();},
+                                    click: function(){QuestHelper.questList()[$data.index].endQuest();},
                                     text: QuestHelper.questList()[$data.index].isCompleted() ? "Claim" : "Quit",
                                     css: {
                                       "btn-success": QuestHelper.questList()[$data.index].isCompleted(),

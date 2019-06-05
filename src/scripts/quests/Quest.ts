@@ -25,7 +25,7 @@ abstract class Quest {
         this.notified = false;
     }
 
-    exit() {
+    endQuest() {
         if (this.isCompleted()) {
             player.gainQuestPoints(this.pointsReward);
             this.claimed(true);
@@ -90,7 +90,7 @@ abstract class Quest {
         this.autoComplete = true;
         this.autoCompleter = this.isCompleted.subscribe(() => {
             if (this.isCompleted()) {
-                this.exit();
+                this.endQuest();
                 this.autoCompleter.dispose();
             }
         })

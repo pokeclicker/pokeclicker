@@ -159,7 +159,7 @@ class QuestHelper{
     public static quitAllQuests() {
         let questIndexArr = player.currentQuests().map(x => x.index);
         questIndexArr.forEach(index => {
-            this.questList()[index].exit();
+            this.questList()[index].endQuest();
         });
     }
 
