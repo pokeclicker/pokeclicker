@@ -7,7 +7,7 @@ style="background-color: white; min-height: 100px">
         </span>
     </h6>
     <button class='btn btn-sm btn-primary' style="margin:5px"
-            data-bind='click: function(){$("#QuestModal").modal("show")}'>
+            data-bind='visible: player.tutorialComplete(), click: function(){$("#QuestModal").modal("show")}'>
         Quest List
     </button>
 
