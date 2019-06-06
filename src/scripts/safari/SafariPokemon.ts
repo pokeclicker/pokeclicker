@@ -29,7 +29,7 @@ class SafariPokemon implements pokemonInterface {
         { name: "Tangela", weight: 4 },
     ];
 
-    static readonly listWeight = SafariPokemon.list.reduce((sum:number, pokemon) => {return sum += pokemon.weight}, 0);
+    static readonly listWeight = SafariPokemon.list.reduce((sum: number, pokemon) => {return sum += pokemon.weight}, 0);
 
     constructor(name: string) {
         let data = PokemonHelper.getPokemonByName(name);

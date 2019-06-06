@@ -1,7 +1,7 @@
 class TypeHelper {
 
     //@formatter:off
-    public static typeMatrix : Array<Array<number>> = [
+    public static typeMatrix: number[][] = [
         //                E              F
         //                L              I                   P
         // N              E              G    P    G    F    S                   D

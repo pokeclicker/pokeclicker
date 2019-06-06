@@ -86,7 +86,7 @@ class PokemonFactory {
         let maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
         let catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         let exp: number = basePokemon.exp;
-        let money: number = 0;
+        let money = 0;
         let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, GameConstants.DUNGEON_SHARDS);
     }
@@ -100,7 +100,7 @@ class PokemonFactory {
         let maxHealth: number = Math.floor(bossPokemon.baseHealth * (1 + (chestsOpened / 5)));
         let catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         let exp: number = basePokemon.exp;
-        let money: number = 0;
+        let money = 0;
         let shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, money, shiny, GameConstants.DUNGEON_BOSS_SHARDS);
     }

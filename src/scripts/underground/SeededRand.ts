@@ -21,7 +21,7 @@ class SeededRand {
         return Math.floor( (max-min + 1) * SeededRand.next() + min )
     }
 
-    public static fromArray<T>(arr: Array<T>): T {
+    public static fromArray<T>(arr: T[]): T {
         return arr[SeededRand.intBetween(0, arr.length - 1)]
     }
 }

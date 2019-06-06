@@ -4,7 +4,7 @@ class DailyDeal {
     public amount1: number;
     public amount2: number;
 
-    public static list: Array<DailyDeal> = [];
+    public static list: DailyDeal[] = [];
 
     constructor() {
         this.item1 = DailyDeal.randomItem();

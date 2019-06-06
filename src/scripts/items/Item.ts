@@ -38,7 +38,7 @@ abstract class Item {
 
     abstract use();
 
-    isAvailable() : boolean {
+    isAvailable(): boolean {
         return true;
     }
 

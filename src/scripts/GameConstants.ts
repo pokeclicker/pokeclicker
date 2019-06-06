@@ -323,7 +323,7 @@ namespace GameConstants {
     }
 
     export class Option {
-        text: String;
+        text: string;
         value: any;
 
         constructor(text, value) {

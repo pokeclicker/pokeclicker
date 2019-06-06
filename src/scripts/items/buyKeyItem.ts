@@ -1,25 +1,25 @@
 class buyKeyItem extends Item {
     
-        type: GameConstants.KeyItemType;
+    type: GameConstants.KeyItemType;
     
-        constructor(type: GameConstants.KeyItemType) {
-            let basePrice = GameConstants.ItemPrice[GameConstants.KeyItemType[type]];
-            let priceMultiplier = 1;
-            super(GameConstants.KeyItemType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
-            this.type = type;
-            this.totalPrice = ko.computed(function(){return this.basePrice}, this);
-        }
+    constructor(type: GameConstants.KeyItemType) {
+        let basePrice = GameConstants.ItemPrice[GameConstants.KeyItemType[type]];
+        let priceMultiplier = 1;
+        super(GameConstants.KeyItemType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
+        this.type = type;
+        this.totalPrice = ko.computed(function(){return this.basePrice}, this);
+    }
     
-        buy(amt: number) {
-            player.gainKeyItem(GameConstants.KeyItemType[this.type].replace("_", " "))
-        }
+    buy(amt: number) {
+        player.gainKeyItem(GameConstants.KeyItemType[this.type].replace("_", " "))
+    }
     
-        use() {
-        }
+    use() {
+    }
 
-        isAvailable(): boolean {
-            return super.isAvailable() && !player.hasKeyItem(this.name().replace("_", " "));
-        }
+    isAvailable(): boolean {
+        return super.isAvailable() && !player.hasKeyItem(this.name().replace("_", " "));
+    }
 }
     
     

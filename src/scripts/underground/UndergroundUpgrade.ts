@@ -7,7 +7,7 @@ class UndergroundUpgrade {
     baseCost: number;
     initialValue: number;
 
-    static list: Array<UndergroundUpgrade> = []
+    static list: UndergroundUpgrade[] = []
 
     constructor(name, text, step, baseCost) {
         this.name = name;

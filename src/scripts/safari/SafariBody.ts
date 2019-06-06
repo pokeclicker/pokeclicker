@@ -1,5 +1,5 @@
 abstract class SafariBody {
-    grid: Array<Array<number>>;
+    grid: number[][];
     type: string;
 
     constructor() {
@@ -89,7 +89,7 @@ class SandBody extends SafariBody {
         return Math.floor(Math.random() * 3) + 3;
     }
 
-    private generateCube(sizeX: number, sizeY: number): Array<Array<number>> {
+    private generateCube(sizeX: number, sizeY: number): number[][] {
         let body = [];
         for (let i = 0; i < sizeY; i++) {
             let row = Array.apply(null, Array(sizeX)).map(Number.prototype.valueOf, 0);
@@ -105,7 +105,7 @@ class SandBody extends SafariBody {
         return body;
     }
 
-    private static addCube(x: number, y: number, body: Array<Array<number>>): Array<Array<number>> {
+    private static addCube(x: number, y: number, body: number[][]): number[][] {
         if (Math.random() >= 0.5){
             body[y+2][x] = 15;
             body[y+2][x+1] = 15;
@@ -372,5 +372,5 @@ Array.prototype.equals = function (array) {
 }
 
 interface Array<T> {
-    equals(array: Array<T>): boolean;
+    equals(array: T[]): boolean;
 }

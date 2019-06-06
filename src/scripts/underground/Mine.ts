@@ -1,9 +1,9 @@
 class Mine {
-    public static grid: Array<Array<KnockoutObservable<number>>>;
-    public static rewardGrid: Array<Array<any>>;
+    public static grid: KnockoutObservable<number>[][];
+    public static rewardGrid: any[][];
     public static itemsFound: KnockoutObservable<number>;
     public static itemsBuried: number;
-    public static rewardNumbers: Array<number>;
+    public static rewardNumbers: number[];
     public static toolSelected: KnockoutObservable<GameConstants.MineTool> = ko.observable(GameConstants.MineTool["Chisel"]);
     private static loadingNewLayer: boolean = true
 

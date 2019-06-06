@@ -113,11 +113,11 @@ class DungeonMap {
         let mapList: DungeonTile[] = [];
 
         mapList.push(new DungeonTile(GameConstants.DungeonTile.boss));
-        for (let i: number = 0; i < this.size; i++) {
+        for (let i = 0; i < this.size; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.chest));
         }
 
-        for (let i: number = 0; i < this.size * 2 + 3; i++) {
+        for (let i = 0; i < this.size * 2 + 3; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy));
         }
 

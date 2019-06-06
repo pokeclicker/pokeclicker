@@ -14,7 +14,7 @@ class EvolutionStone extends Item {
         player.gainItem(GameConstants.StoneType[this.type], n)
     }
 
-    public use(pokemon?:string) {
+    public use(pokemon?: string) {
         let shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
         let evolution = EvolutionStone.computeEvolution(this.type, pokemon);
         player.capturePokemon(evolution, shiny, false);

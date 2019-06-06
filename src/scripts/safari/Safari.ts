@@ -1,13 +1,13 @@
 /// <reference path="../../libs/motio.d.ts" />
 
 class Safari {
-    static grid: Array<Array<number>>;
+    static grid: number[][];
     static player: Point = new Point(12, 20);
     static lastDirection: string = "up";
     static nextDirection: string;
     static walking: boolean = false;
     static isMoving: boolean = false;
-    static queue: Array<string> = [];
+    static queue: string[] = [];
     private static playerXY = {"x": 0, "y": 0};
     private static origin;
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);

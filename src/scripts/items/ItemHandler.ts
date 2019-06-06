@@ -5,7 +5,7 @@ class ItemHandler {
     public static amountSelected: KnockoutObservable<number> = ko.observable(1);
     static amount: KnockoutObservable<number> = ko.observable(1);
 
-    public static useItem(name:string){
+    public static useItem(name: string){
         ItemList[name].use();
         player.itemList[name](player.itemList[name]-1);
     }

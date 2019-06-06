@@ -1,13 +1,13 @@
 class UndergroundItem {
     public name: string;
     public id: number;
-    public space: Array<Array<number>>;
+    public space: number[][];
     public value: number;
     public valueType: string;
 
-    public static list: Array<UndergroundItem> = [];
+    public static list: UndergroundItem[] = [];
 
-    constructor(name: string, id: number, space: Array<Array<number>>, value: number = 1, valueType: string = "Diamond") {
+    constructor(name: string, id: number, space: number[][], value: number = 1, valueType: string = "Diamond") {
         this.name = name;
         this.id = id;
         this.space = space;
@@ -15,11 +15,11 @@ class UndergroundItem {
         this.valueType = valueType;
     }
 
-    private static addItem(name, id, space, ...rest) {
+    private static addItem(name, id, space, ...rest): void {
         UndergroundItem.list.push(new UndergroundItem(name, id, space, ...rest))
     }
 
-    public static initialize() {
+    public static initialize(): void {
         this.addItem("Helix Fossil", 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]], 0, "Mine Egg");
         this.addItem("Dome Fossil", 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]], 0, "Mine Egg");
         this.addItem("Old Amber", 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 0, "Mine Egg");

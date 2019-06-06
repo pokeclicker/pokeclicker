@@ -46,7 +46,7 @@ class PokedexHelper {
         PokedexHelper.filteredList(PokedexHelper.getList());
     }
 
-    public static getList(): Array<object> {
+    public static getList(): object[] {
         let filter = PokedexHelper.getFilters();
 
         let highestDefeated = 0;

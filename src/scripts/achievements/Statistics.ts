@@ -4,17 +4,17 @@ class Statistics {
     public hatchedEggs: KnockoutObservable<number>;
     public pokemonCaptured: KnockoutObservable<number>;
     public pokemonDefeated: KnockoutObservable<number>;
-    public gymsDefeated: Array<KnockoutObservable<number>>;
-    public dungeonsCleared: Array<KnockoutObservable<number>>;
+    public gymsDefeated: KnockoutObservable<number>[];
+    public dungeonsCleared: KnockoutObservable<number>[];
     public digItems: KnockoutObservable<number>; // Total treasure found in underground
     public digDeeper: KnockoutObservable<number>; // Total underground layers completed
     public totalMoney: KnockoutObservable<number>;
     public totalTokens: KnockoutObservable<number>;
     public totalQuestPoints: KnockoutObservable<number>;
-    public pokeballsUsed: Array<KnockoutObservable<number>>;
-    public pokeballsBought: Array<KnockoutObservable<number>>;
-    public totalShards: Array<KnockoutObservable<number>>;
-    public oakItemUses: Array<KnockoutObservable<number>>;
+    public pokeballsUsed: KnockoutObservable<number>[];
+    public pokeballsBought: KnockoutObservable<number>[];
+    public totalShards: KnockoutObservable<number>[];
+    public oakItemUses: KnockoutObservable<number>[];
 
     private static readonly arraySizes = {
         "gymsDefeated": GameConstants.KantoGyms.length + GameConstants.JohtoGyms.length,

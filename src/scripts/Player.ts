@@ -14,17 +14,17 @@ class Player {
     private _route: KnockoutObservable<number>;
     private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
 
-    private _defeatedAmount: Array<KnockoutObservable<number>>;
+    private _defeatedAmount: KnockoutObservable<number>[];
 
-    get defeatedAmount(): Array<KnockoutObservable<number>> {
+    get defeatedAmount(): KnockoutObservable<number>[] {
         return this._defeatedAmount;
     }
 
-    private _routeKills: Array<KnockoutObservable<number>>;
+    private _routeKills: KnockoutObservable<number>[];
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
     private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
-    private _pokeballs: Array<KnockoutObservable<number>>;
+    private _pokeballs: KnockoutObservable<number>[];
     private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
@@ -32,9 +32,9 @@ class Player {
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
-    private _oakItemExp: Array<KnockoutObservable<number>>;
+    private _oakItemExp: KnockoutObservable<number>[];
     private _oakItemsEquipped: string[];
-    private _eggList: Array<KnockoutObservable<Egg | void>>;
+    private _eggList: KnockoutObservable<Egg | void>[];
     private _eggSlots: KnockoutObservable<number>;
 
     constructor(savedPlayer?) {
@@ -203,8 +203,8 @@ class Player {
     private _maxUndergroundItems: KnockoutObservable<number>;
     private _mineEnergyRegenTime: KnockoutObservable<number>;
 
-    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
-    private _shardsCollected: Array<KnockoutObservable<number>>;
+    private _shardUpgrades: KnockoutObservable<number>[][];
+    private _shardsCollected: KnockoutObservable<number>[];
 
     private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
@@ -217,7 +217,7 @@ class Player {
 
     public statistics: Statistics;
 
-    public completedQuestList: Array<KnockoutObservable<boolean>>;
+    public completedQuestList: KnockoutObservable<boolean>[];
     public questRefreshes: number;
     public _questPoints: KnockoutObservable<number>;
     public _questXP: KnockoutObservable<number>;
@@ -277,7 +277,7 @@ class Player {
         return false;
     }
 
-    set defeatedAmount(value: Array<KnockoutObservable<number>>) {
+    set defeatedAmount(value: KnockoutObservable<number>[]) {
         this._defeatedAmount = value;
     }
 
@@ -317,7 +317,7 @@ class Player {
         return this.oakItemExp[item]();
     }
 
-    private _caughtAmount: Array<KnockoutObservable<number>>;
+    private _caughtAmount: KnockoutObservable<number>[];
 
     public calculateClickAttack(): number {
         let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Poison_Barb) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Poison_Barb) / 100) : 1;
@@ -396,7 +396,7 @@ class Player {
     }
 
     public alreadyCaughtPokemonShiny(pokemonName: string) {
-        for (let i: number = 0; i < this.caughtShinyList().length; i++) {
+        for (let i = 0; i < this.caughtShinyList().length; i++) {
             if (this.caughtShinyList()[i] == pokemonName) {
                 return true;
             }
@@ -565,13 +565,13 @@ class Player {
         return cost;
     }
 
-    public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
+    public sortedPokemonList(): KnockoutComputed<CaughtPokemon[]> {
         return ko.pureComputed(function () {
             return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
         }, this).extend({rateLimit: player.calculateCatchTime()})
     }
 
-    public maxLevelPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
+    public maxLevelPokemonList(): KnockoutComputed<CaughtPokemon[]> {
         return ko.pureComputed(function () {
             return this._caughtPokemonList().filter((pokemon) => {
                 return pokemon.levelObservable() == 100 && !pokemon.breeding();
@@ -579,11 +579,11 @@ class Player {
         }, this)
     }
 
-    get caughtAmount(): Array<KnockoutObservable<number>> {
+    get caughtAmount(): KnockoutObservable<number>[] {
         return this._caughtAmount;
     }
 
-    set caughtAmount(value: Array<KnockoutObservable<number>>) {
+    set caughtAmount(value: KnockoutObservable<number>[]) {
         this._caughtAmount = value;
     }
 
@@ -632,11 +632,11 @@ class Player {
         Game.animateMoney(tokens,'playerMoneyDungeon');
     }
 
-    get routeKills(): Array<KnockoutObservable<number>> {
+    get routeKills(): KnockoutObservable<number>[] {
         return this._routeKills;
     }
 
-    set routeKills(value: Array<KnockoutObservable<number>>) {
+    set routeKills(value: KnockoutObservable<number>[]) {
         this._routeKills = value;
     }
 
@@ -724,19 +724,19 @@ class Player {
         this._starter = value;
     }
 
-    get oakItemExp(): Array<KnockoutObservable<number>> {
+    get oakItemExp(): KnockoutObservable<number>[] {
         return this._oakItemExp;
     }
 
-    set oakItemExp(value: Array<KnockoutObservable<number>>) {
+    set oakItemExp(value: KnockoutObservable<number>[]) {
         this._oakItemExp = value;
     }
 
-    get eggList(): Array<KnockoutObservable<Egg | void>> {
+    get eggList(): KnockoutObservable<Egg | void>[] {
         return this._eggList;
     }
 
-    set eggList(value: Array<KnockoutObservable<Egg | void>>) {
+    set eggList(value: KnockoutObservable<Egg | void>[]) {
         this._eggList = value;
     }
 
@@ -896,19 +896,19 @@ class Player {
         this.plotList[i]().isUnlocked(true);
     }
 
-    get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
+    get shardUpgrades(): KnockoutObservable<number>[][] {
         return this._shardUpgrades;
     }
 
-    set shardUpgrades(value: Array<Array<KnockoutObservable<number>>>) {
+    set shardUpgrades(value: KnockoutObservable<number>[][]) {
         this._shardUpgrades = value;
     }
 
-    get shardsCollected(): Array<KnockoutObservable<number>> {
+    get shardsCollected(): KnockoutObservable<number>[] {
         return this._shardsCollected;
     }
 
-    set shardsCollected(value: Array<KnockoutObservable<number>>) {
+    set shardsCollected(value: KnockoutObservable<number>[]) {
         this._shardsCollected = value;
     }
 

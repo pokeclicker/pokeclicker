@@ -64,7 +64,7 @@ class Save {
      * @param       keep : string[] An array of property names that should be kept
      * @returns {Object} : The original object with only the specified properties
      */
-    public static filter(object: any, keep: string[]): Object {
+    public static filter(object: any, keep: string[]): Record<string, any> {
         let filtered = {}, prop;
         for (prop in object) {
             if (keep.indexOf(prop) > -1) {
@@ -90,8 +90,8 @@ class Save {
         return res;
     }
 
-    public static initializePlots(saved?: Array<any>): KnockoutObservable<Plot>[] {
-        let plotList: Array<KnockoutObservable<Plot>>;
+    public static initializePlots(saved?: any[]): KnockoutObservable<Plot>[] {
+        let plotList: KnockoutObservable<Plot>[];
         if (saved) {
             plotList = saved.map((p) => {
                 let berry;
@@ -114,7 +114,7 @@ class Save {
         return plotList;
     }
 
-    public static initializeShards(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {
+    public static initializeShards(saved?: number[][]): KnockoutObservable<number>[][] {
         let res;
         if (saved) {
             res = saved.map((type) => {
@@ -167,7 +167,7 @@ class Save {
         $('#saveModal').modal('hide')
     }
 
-    public static convertShinies(list: Array<string>) {
+    public static convertShinies(list: string[]) {
         let converted = [];
         for (let pokemon of list) {
             let shiny = parseInt(pokemon['shiny']);

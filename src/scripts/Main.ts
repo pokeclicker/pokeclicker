@@ -229,8 +229,8 @@ class Game {
             top: -100,
             opacity: 0
         }, 250 * Math.log(money) + 150,"linear",
-            function() {
-        $(this).remove();
+        function() {
+            $(this).remove();
         });
     }
 }

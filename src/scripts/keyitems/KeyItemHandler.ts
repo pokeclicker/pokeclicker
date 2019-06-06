@@ -49,7 +49,7 @@ class KeyItemHandler {
         KeyItemHandler.selectedItem(item);
     }
 
-    public static getKeyItemByName(name:string): KeyItem{
+    public static getKeyItemByName(name: string): KeyItem{
         for(let i = 0 ; i<KeyItemHandler.keyItemList.length; i++){
             if(KeyItemHandler.keyItemList[i]().name() == name){
                 return KeyItemHandler.keyItemList[i]();
@@ -57,7 +57,7 @@ class KeyItemHandler {
         }
     }
 
-    public static getKeyItemObservableByName(name:string): KnockoutObservable<KeyItem>{
+    public static getKeyItemObservableByName(name: string): KnockoutObservable<KeyItem>{
         for(let i = 0 ; i<KeyItemHandler.keyItemList.length; i++){
             if(KeyItemHandler.keyItemList[i]().name() == name){
                 return KeyItemHandler.keyItemList[i];
@@ -65,7 +65,7 @@ class KeyItemHandler {
         }
     }
 
-    public static hover(name:string){
+    public static hover(name: string){
         KeyItemHandler.inspectedItem(KeyItemHandler.getKeyItemByName(name));
     }
 
@@ -73,7 +73,7 @@ class KeyItemHandler {
         KeyItemHandler.inspectedItem(KeyItemHandler.selectedItem());
     }
 
-    public static click(name:string){
+    public static click(name: string){
         let item: KeyItem = KeyItemHandler.getKeyItemByName(name);
         KeyItemHandler.selectedItem(item);
     }
