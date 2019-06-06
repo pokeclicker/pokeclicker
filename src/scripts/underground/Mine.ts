@@ -169,7 +169,9 @@ class Mine {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
             GameHelper.incrementObservable(player.statistics.digDeeper)
-            OakItemRunner.use(GameConstants.OakItem.Cell_Battery);
+            if(OakItemRunner.isActive(GameConstants.OakItem.Cell_Battery)){
+              OakItemRunner.use(GameConstants.OakItem.Cell_Battery);
+            }
         }
     }
 
