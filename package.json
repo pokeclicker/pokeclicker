@@ -6,8 +6,9 @@
   "scripts": {
     "start": "gulp",
     "website": "gulp website",
-    "test": "eslint --config ./.eslintrc.js --ext ts ./src/scripts ",
-    "test-fix": "eslint --config ./.eslintrc.js --ext ts --fix ./src/scripts "
+    "test": "eslint --config ./.eslintrc.js --ext ts ./src/scripts",
+    "test-error": "eslint --config ./.eslintrc.js --ext ts --quiet ./src/scripts",
+    "test-fix": "eslint --config ./.eslintrc.js --ext ts --fix ./src/scripts"
   },
   "repository": {
     "type": "git",
@@ -59,7 +60,7 @@
     "natives": "^1.1.6",
     "run-sequence": "^1.1.4",
     "tslint": "^3.15.1",
-    "typescript": "^2.7.1"
+    "typescript": "^3.5.1"
   },
   "dependencies": {
     "@types/bootstrap": "^3.3.37",
