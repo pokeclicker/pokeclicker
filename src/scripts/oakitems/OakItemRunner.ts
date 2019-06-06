@@ -23,7 +23,7 @@ class OakItemRunner {
 
         // TODO implement use!
         // TODO implement functionality
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Cell_Battery, 90, "More passive mining energy regen", 25, 5, 4)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Cell_Battery, 90, "More passive mining energy regen", 25, 5, 50)));
 
         // OakItemRunner.oakItemList must preserve the ordering of items in GameConstants.OakItem enum
         if (!OakItemRunner.oakItemList.every((f, i)=>f().id==i)) {

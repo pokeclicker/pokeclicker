@@ -102,7 +102,7 @@ TownList["Saffron City"] = new Town("Saffron City", [5], SaffronCityShop);
 let FuchsiaCityShop = new Shop(["Ultraball", "Trade_stone", "xExp", "Dragon_egg"]);
 TownList["Fuchsia City"] = new Town("Fuchsia City", [18], FuchsiaCityShop);
 
-let CinnabarIslandShop = new Shop(["Fire_stone", "Fire_egg", "SmallRestore"]);
+let CinnabarIslandShop = new Shop(["Fire_stone", "Fire_egg", "SmallRestore", "Explorer_kit"]);
 TownList["Cinnabar Island"] = new Town("Cinnabar Island", [20], CinnabarIslandShop, dungeonList["Pokemon Mansion"]);
 
 let ViridianCityShop = new Shop(["xAttack", "xClick", "Mystery_egg"]);

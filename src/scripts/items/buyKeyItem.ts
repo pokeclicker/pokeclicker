@@ -23,4 +23,5 @@ class buyKeyItem extends Item {
 }
     
     
-    ItemList['Dungeon_ticket'] = new buyKeyItem(GameConstants.KeyItemType.Dungeon_ticket);
+ItemList['Dungeon_ticket'] = new buyKeyItem(GameConstants.KeyItemType.Dungeon_ticket);
+ItemList['Explorer_kit'] = new buyKeyItem(GameConstants.KeyItemType.Explorer_kit);
