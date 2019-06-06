@@ -163,6 +163,8 @@ namespace GameConstants {
     
     export const SAFARI_BATTLE_CHANCE = 5;
 
+    export const SAFARI_BASE_POKEBALL_COUNT = 30;
+
     export const LEGAL_WALK_BLOCKS = [
         0,
         10,

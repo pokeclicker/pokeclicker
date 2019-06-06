@@ -11,7 +11,7 @@ class Safari {
     private static playerXY = {"x": 0, "y": 0};
     private static origin;
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
-    static balls: KnockoutObservable<number> = ko.observable(30);
+    static balls: KnockoutObservable<number> = ko.observable();
     static sprite: Motio;
 
     public static load() {
@@ -20,6 +20,7 @@ class Safari {
         this.playerXY.y = 20;
         Safari.lastDirection = "up";
         Safari.inBattle(false);
+        Safari.balls(this.calculateStartPokeballs());
         for( let i = 0; i<GameConstants.Safari.SizeY; i++){
             let row = Array.apply(null, Array(GameConstants.Safari.SizeX)).map(Number.prototype.valueOf, 0);
             this.grid.push(row);
@@ -279,6 +280,10 @@ class Safari {
             return true;
         }
         return false;
+    }
+
+    private static calculateStartPokeballs(){
+        return GameConstants.SAFARI_BASE_POKEBALL_COUNT;
     }
 }
 
