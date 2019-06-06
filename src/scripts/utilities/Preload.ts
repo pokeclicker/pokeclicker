@@ -1,6 +1,6 @@
 class Preload {
 
-    public static hideSplashScreen(fast: boolean = false) {
+    public static hideSplashScreen(fast: boolean = false): void {
         if (fast) {
             $('.loader').hide();
         } else {
@@ -102,7 +102,7 @@ class Preload {
         })
     }
 
-    private static loadMap() {
+    private static loadMap(): void {
         /*
         return new Promise<number>(resolve => {
             let img = new Image();
