@@ -1,6 +1,6 @@
 class MapHelper {
 
-    public static moveToRoute = function (route: number, region: GameConstants.Region) {
+    public static moveToRoute = function (route: number, region: GameConstants.Region): void {
         if (!isNaN(route) && !(route == player.route())) {
             if (this.accessToRoute(route, region)) {
                 $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
@@ -18,16 +18,16 @@ class MapHelper {
         }
     };
 
-    private static hasBadgeReq(route, region) {
+    private static hasBadgeReq(route, region): boolean {
         return player.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
     }
 
-    private static hasDungeonReq(route, region) {
+    private static hasDungeonReq(route, region): boolean {
         let dungeonReq = GameConstants.routeDungeonRequirements[region][route];
         return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeonReq)]();
     }
 
-    private static hasRouteKillReq(route, region) {
+    private static hasRouteKillReq(route, region): boolean {
         let reqList = GameConstants.routeRequirements[region][route];
         if (reqList == undefined) {
             return true;
@@ -41,12 +41,12 @@ class MapHelper {
         return true;
     }
 
-    public static accessToRoute = function (route: number, region: GameConstants.Region) {
+    public static accessToRoute = function (route: number, region: GameConstants.Region): boolean {
         return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
     };
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
-        return ko.computed(function () {
+        return ko.computed(function (): string {
             if (player.route() == route && player.region == region) {
                 return "currentRoute";
             }
@@ -58,7 +58,7 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(town: string): KnockoutComputed<string> {
-        return ko.computed(function () {
+        return ko.computed(function (): string {
             if (player.currentTown() == town) {
                 return "city currentTown";
             }
@@ -83,7 +83,7 @@ class MapHelper {
         return town.isUnlocked();
     };
 
-    public static moveToTown(townName: string) {
+    public static moveToTown(townName: string): void {
         if (MapHelper.accessToTown(townName)) {
             //console.log($("[data-town]"));
             Game.gameState(GameConstants.GameState.idle);
@@ -99,7 +99,7 @@ class MapHelper {
         }
     };
 
-    public static updateAllRoutes() {
+    public static updateAllRoutes(): void {
         for (let i = 0; i < GameConstants.AMOUNT_OF_ROUTES_KANTO; i++) {
             // TODO fix for multiple regions
             if (MapHelper.accessToRoute(i, GameConstants.Region.kanto)) {
@@ -117,8 +117,8 @@ class MapHelper {
         }
     }
 
-    public static openShipModal() {
-        let openModal = () => {Game.gameState(GameConstants.GameState.idle);$("#ShipModal").modal('show');}
+    public static openShipModal(): void {
+        let openModal = (): void => {Game.gameState(GameConstants.GameState.idle);$("#ShipModal").modal('show');}
         switch (player.region) {
             case 0:
                 if (TownList["Vermillion City"].isUnlocked() && player.highestRegion > 0) {
@@ -134,11 +134,11 @@ class MapHelper {
         Notifier.notify("You cannot access this dock yet", GameConstants.NotificationOption.warning)
     }
 
-    public static ableToTravel() {
+    public static ableToTravel(): boolean {
         return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.highestRegion]
     }
 
-    public static travelToNextRegion() {
+    public static travelToNextRegion(): void {
         if (MapHelper.ableToTravel()) {
             player.highestRegion++;
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion]);

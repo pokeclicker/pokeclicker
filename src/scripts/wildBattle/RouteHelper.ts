@@ -1,4 +1,4 @@
-///<reference path="PokemonsPerRoute.ts"/>
+//<reference path="PokemonsPerRoute.ts"/>
 
 /**
  * Helper class to retrieve information from PokemonsPerRoute
@@ -41,7 +41,7 @@ class RouteHelper {
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 
-    public static listCompleted(possiblePokemon: string[], includeShiny: boolean) {
+    public static listCompleted(possiblePokemon: string[], includeShiny: boolean): boolean {
         for (let i = 0; i < possiblePokemon.length; i++) {
             if (!player.alreadyCaughtPokemon(possiblePokemon[i])) {
                 return false;
