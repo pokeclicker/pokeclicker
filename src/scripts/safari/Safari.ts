@@ -150,7 +150,7 @@ class Safari {
     }
 
     public static move(dir: string) {
-        if(!Safari.walking && !Safari.isMoving) {
+        if(!Safari.walking && !Safari.isMoving && !Safari.inBattle()) {
             Safari.queue = [];
             Safari.walking = true;
             Safari.queue.unshift(dir);
