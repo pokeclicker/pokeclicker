@@ -43,37 +43,33 @@ class MapHelper {
         return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
     };
 
-    public static calculateRouteCssClass(route: number, region: GameConstants.Region): KnockoutComputed<string> {
-        return ko.computed(function () {
-            if (player.route() == route && player.region == region) {
-                return "currentRoute";
-            }
-            if (MapHelper.accessToRoute(route, region)) {
-                return "unlockedRoute";
-            }
-            return "lockedRoute";
-        });
+    public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
+        if (player.route() == route && player.region == region) {
+            return "currentRoute";
+        }
+        if (MapHelper.accessToRoute(route, region)) {
+            return "unlockedRoute";
+        }
+        return "lockedRoute";
     }
 
     public static calculateTownCssClass(town: string): KnockoutComputed<string> {
-        return ko.computed(function () {
-            if (player.currentTown() == town) {
-                return "city currentTown";
-            }
-            if (MapHelper.accessToTown(town)) {
-                if (dungeonList.hasOwnProperty(town)) {
-                    if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
-                        return "dungeon completedDungeon"
-                    }
-                    return "dungeon unlockedDungeon"
-                }
-                return "city unlockedTown";
-            }
+        if (player.currentTown() == town) {
+            return "city currentTown";
+        }
+        if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
-                return "dungeon"
+                if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
+                    return "dungeon completedDungeon"
+                }
+                return "dungeon unlockedDungeon"
             }
-            return "city";
-        });
+            return "city unlockedTown";
+        }
+        if (dungeonList.hasOwnProperty(town)) {
+            return "dungeon"
+        }
+        return "city";
     }
 
     public static accessToTown(townName: string): boolean {
