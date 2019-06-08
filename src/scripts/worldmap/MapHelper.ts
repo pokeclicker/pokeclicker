@@ -53,7 +53,7 @@ class MapHelper {
         return "lockedRoute";
     }
 
-    public static calculateTownCssClass(town: string): KnockoutComputed<string> {
+    public static calculateTownCssClass(town: string): string {
         if (player.currentTown() == town) {
             return "city currentTown";
         }
