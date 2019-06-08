@@ -3,11 +3,15 @@ class MapHelper {
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
         if (!isNaN(route) && !(route == player.route())) {
             if (this.accessToRoute(route, region)) {
-                $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute');
+                const oldRoute = document.querySelector("[data-route='" + player.route() + "']");
+                oldRoute.classList.remove('currentRoute');
+                oldRoute.classList.add('unlockedRoute');
                 player.route(route);
                 player.region = region;
                 player.currentTown("");
-                $("[data-route='" + route + "']").removeClass('unlockedRoute').addClass('currentRoute');
+                const newRoute = document.querySelector("[data-route='" + route + "']");
+                newRoute.classList.remove('unlockedRoute');
+                newRoute.classList.add('currentRoute');
                 Battle.generateNewEnemy();
                 Game.gameState(GameConstants.GameState.fighting);
                 Game.applyRouteBindings();
