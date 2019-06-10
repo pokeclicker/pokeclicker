@@ -49,8 +49,8 @@ class PokedexHelper {
     public static getList(): Array<object> {
         let filter = PokedexHelper.getFilters();
 
-        const highestDefeated = player.defeatedAmount.reduce((h, p, i)=> p() && i > h ? i : h, 0);
-        const highestCaught = player.caughtPokemonList.reduce((h, p)=> p.id > h ? p.id : h, 0);
+        const highestDefeated = player.defeatedAmount.reduce((highest, pokemon, index)=> pokemon() && index > highest ? index : highest, 0);
+        const highestCaught = player.caughtPokemonList.reduce((highest, pokemon)=> pokemon.id > highest ? pokemon.id : highest, 0);
         const highestDex = Math.max(highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
