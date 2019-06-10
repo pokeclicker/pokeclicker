@@ -49,12 +49,9 @@ class PokedexHelper {
     public static getList(): Array<object> {
         let filter = PokedexHelper.getFilters();
 
-        let highestDefeated = 0;
-        pokemonList.filter(function (pokemon) {
-            if (player.defeatedAmount[pokemon.id]() != 0 && pokemon.id > highestDefeated) {
-                highestDefeated = parseInt(pokemon.id.toString());
-            }
-        })
+        const highestDefeated = player.defeatedAmount.reduce((h, p, i)=> p() && i > h ? i : h, 0);
+        const highestCaught = player.caughtPokemonList.reduce((h, p)=> p.id > h ? p.id : h, 0);
+        const highestDex = Math.max(highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
             if ((filter['name'] || "") != "" && pokemon.name.toLowerCase().indexOf(filter['name'].toLowerCase()) == -1) {
@@ -82,7 +79,7 @@ class PokedexHelper {
                 return false;
             }
 
-            if (pokemon.id > highestDefeated) {
+            if (pokemon.id > highestDex) {
                 return false;
             }
 
