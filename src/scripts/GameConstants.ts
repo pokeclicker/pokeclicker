@@ -564,6 +564,7 @@ namespace GameConstants {
         "Jynx": 2500,
         "Mr_Mime": 1500,
         "Lickitung": 1000,
+        "Togepi": 2500,
 
         // TODO: Set prices for different kinds of eggs and stones
         "Egg": 1000,
@@ -597,7 +598,8 @@ namespace GameConstants {
         "Porygon",
         "Jynx",
         "Mr_Mime",
-        "Lickitung"
+        "Lickitung",
+        "Togepi",
     }
 
     export enum BerryType {
