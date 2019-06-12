@@ -10,7 +10,7 @@ class EggItem extends Item {
     }
 
     buy(amt: number) {
-        this._increaseCount(amt);
+        player.gainItem(this.name(), amt);
     }
 
     use() {
@@ -30,7 +30,7 @@ class EggItem extends Item {
         }
         
         if (success) {
-            this._decreaseCount(1);
+            player.loseItem(this.name(), 1);
         }
     }
 }
