@@ -10,9 +10,6 @@ class BattleItem extends Item {
         this.type = type;
     }
 
-    buy(amt: number) {
-    }
-
     use() {
     }
 }

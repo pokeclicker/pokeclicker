@@ -9,9 +9,6 @@ class Vitamin extends Item {
         this.type = type;
     }
 
-    buy(amt: number) {
-    }
-
     use() {
     }
 }

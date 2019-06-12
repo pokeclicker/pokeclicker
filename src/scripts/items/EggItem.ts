@@ -9,10 +9,6 @@ class EggItem extends Item {
         this.type = type;
     }
 
-    buy(amt: number) {
-        player.gainItem(this.name(), amt);
-    }
-
     use() {
         if (this.type === GameConstants.EggItemType.Pokemon_egg) {
             return;

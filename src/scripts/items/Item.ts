@@ -5,36 +5,59 @@ abstract class Item {
     type: any;
     currency: GameConstants.Currency;
     price: KnockoutObservable<number>;
-    totalPrice: KnockoutComputed<number>;
 
     constructor(name: string, basePrice: number, priceMultiplier: number, currency: GameConstants.Currency) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
         this.price = ko.observable(this.basePrice);
-        this.totalPrice = name === "Pokeball" ?
-            ko.computed(() => {
-                let amount: number;
-                if (ShopHandler == null) {
-                    amount = 1;
-                } else {
-                    amount = ShopHandler.amount();
-                }
-                return basePrice * amount;
-            }) :
-            ko.computed(() => {
-                let amount: number;
-                if (ShopHandler == null) {
-                    amount = 1;
-                } else {
-                    amount = ShopHandler.amount();
-                }
-                let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
-                return Math.floor(res);
-            })
     }
 
-    abstract buy(n: number);
+    totalPrice(amount: number): number {
+        if (this.name() == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
+            return this.price() * amount;
+        } else {
+            let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
+            return Math.floor(res);
+        }
+    }
+
+    buy(n: number) {
+        if (n <= 0) {
+            return;
+        }
+        if (!this.isAvailable()) {
+            Notifier.notify(`${this.name()} is sold out!`, GameConstants.NotificationOption.danger)
+            return;
+        }
+
+        let multiple = n > 1 ? "s" : "";
+
+        if (player.hasCurrency(this.totalPrice(n), this.currency)) {
+            player.payCurrency(this.totalPrice(n), this.currency);
+            this.gain(n);
+            this.increasePriceMultiplier(n);
+            Notifier.notify("You bought " + n + " " + this.name() + multiple, GameConstants.NotificationOption.success)
+        } else {
+            let curr = "currency";
+            switch (this.currency) {
+                case GameConstants.Currency.money:
+                    curr = "money";
+                    break;
+                case GameConstants.Currency.questPoint:
+                    curr = "quest points";
+                    break;
+                case GameConstants.Currency.dungeontoken:
+                    curr = "dungeon tokens";
+                    break;
+            }
+            Notifier.notify(`You don't have enough ${curr} to buy ${n} ${this.name() + multiple}`, GameConstants.NotificationOption.danger)
+        }
+    }
+
+    gain(n: number) {
+        player.gainItem(this.name(), n);
+    }
 
     abstract use();
 

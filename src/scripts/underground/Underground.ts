@@ -64,7 +64,7 @@ class Underground {
         if(item.isStone()){
             let evostone = ItemList[item.valueType];
             if (evostone instanceof EvolutionStone) {
-                evostone.buy(num)
+                evostone.gain(num);
             } else {
                 console.log("Error getting evolution stone",num,id,item)
                 Notifier.notify("Error getting evolution stone",GameConstants.NotificationOption.warning)
