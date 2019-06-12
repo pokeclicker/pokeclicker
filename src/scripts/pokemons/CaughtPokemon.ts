@@ -29,6 +29,7 @@ class CaughtPokemon {
         });
 
         this.breeding = ko.observable(breeding);
+
         if (typeof pokemonData.evoLevel == "number" && !this.evolved) {
             this.evoRegion = PokemonHelper.calcNativeRegion(pokemonData.evolution);
             this.evolver = this.levelObservable.subscribe(() => {
@@ -40,6 +41,10 @@ class CaughtPokemon {
                     this.evolver.dispose();
                 }
             });
+        }
+
+        if (!!pokemonData.evoLevel && pokemonData.evoLevel.constructor === Function && !this.evolved){
+          pokemonData.evoLevel.call(this, pokemonData);
         }
     }
 

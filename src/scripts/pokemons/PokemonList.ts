@@ -3155,8 +3155,19 @@ const pokemonList = [
       "id": 236,
       "name": "Tyrogue",
       "catchRate": 75,
-      "evolution": "Hitmonlee, Hitmonchan, Hitmontop",
-      "evoLevel": "20, 20, 20",
+      "evolution": ["Hitmonlee", "Hitmonchan", "Hitmontop"],
+      "evoLevel": function(data){
+          this.evolver = this.levelObservable.subscribe(() => {
+              if (this.levelObservable() >= 20) {
+                  const evolution = data.evolution[Math.floor(Math.random() * data.evolution.length)];
+                  Notifier.notify("Your " + this.name + " has evolved into a " + evolution, GameConstants.NotificationOption.success);
+                  player.capturePokemon(evolution, false, false);
+                  player.caughtAmount[this.id](player._caughtAmount[this.id]() + 1);
+                  this.evolved = true;
+                  this.evolver.dispose();
+              }
+          });
+      },
       "type": [
         "Fighting"
       ],
