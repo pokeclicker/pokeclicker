@@ -143,7 +143,7 @@ const pokemonsPerRoute = {
             headbutt: ["Exeggcute", "Hoothoot", "Ledyba", "Spinarak", "Pineco"]
         },
         28: {
-            land: ["Ponyta", "Tangela", "Donphan", "Ursaring", "Rapidash", "Doduo", "Dodrio", "Sneasel"],
+            land: ["Ponyta", "Tangela", "Donphan", "Ursaring", "Rapidash", "Doduo", "Dodrio", "Sneasel", "Murkrow", "Sunkern", "Slugma", "Houndour"],
             water: ["Poliwag", "Poliwhirl", "Magikarp"],
             headbutt: ["Natu", "Aipom", "Heracross"]
         },
