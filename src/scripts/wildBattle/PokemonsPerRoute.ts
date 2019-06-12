@@ -183,7 +183,7 @@ const pokemonsPerRoute = {
             headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
         36: {
-            land: ["Pidgey", "Nidoran(M)","Nidoran(F)","Vulpix","Growlithe","Hoothoot","Stantler"],
+            land: ["Pidgey", "Nidoran(M)","Nidoran(F)","Vulpix","Growlithe","Hoothoot","Stantler","Sudowoodo"],
             water: [],
             headbutt: ["Exeggcute","Hoothoot","Ledyba","Spinarak","Pineco"]
         },
