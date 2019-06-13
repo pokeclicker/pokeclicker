@@ -92,7 +92,7 @@ class Battle {
         let pokeballBonus = GameConstants.getCatchBonus(pokeBall);
         let oakBonus = OakItemRunner.isActive(GameConstants.OakItem.Magic_Ball) ? 
             OakItemRunner.calculateBonus(GameConstants.OakItem.Magic_Ball) : 0;
-        let totalChance = this.enemyPokemon().catchRate + pokeballBonus + oakBonus;
+        let totalChance = GameConstants.clipNumber(this.enemyPokemon().catchRate + pokeballBonus + oakBonus, 0, 100);
         return totalChance;
     }
 

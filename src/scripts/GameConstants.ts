@@ -72,14 +72,6 @@ namespace GameConstants {
         "Hammer" = 1,
     }
 
-    export const EvoStones = [
-        "Fire Stone",
-        "Water Stone",
-        "Thunder Stone",
-        "Leaf Stone",
-        "Moon Stone"
-    ];
-
     export const PLATE_VALUE = 25;
 
     // Oak items
