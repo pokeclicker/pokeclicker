@@ -112,7 +112,7 @@ class MapHelper {
     }
 
     public static openShipModal() {
-        let openModal = () => {Game.gameState(GameConstants.GameState.idle);$("#ShipModal").modal('show');}
+        let openModal = () => {$("#ShipModal").modal('show');}
         switch (player.region) {
             case 0:
                 if (TownList["Vermillion City"].isUnlocked() && player.highestRegion > 0) {
