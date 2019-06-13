@@ -45,6 +45,10 @@ class CaughtPokemon {
           this.evolved = false;
         }
 
+        if (this.evolver){
+          this.evolver.dispose();
+        }
+        
         const pokemonData = pokemonMapId[this.id];
 
         // pokemon doesn't have an evolution, is already evolved, or currently breeding

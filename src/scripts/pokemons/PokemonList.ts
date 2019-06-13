@@ -1794,8 +1794,20 @@ const pokemonList = [
         "id": 133,
         "name": "Eevee",
         "catchRate": 45,
-        "evolution": ["Vaporeon", "Jolteon", "Flareon", "Espeon", "Umbreon"],
-        "evoLevel": ["Water_stone", "Thunder_stone", "Fire_stone", "Time_stone", "Time_stone"],
+        "evolution": ["Vaporeon", "Jolteon", "Flareon", ["Espeon", "Umbreon"]],
+        "evoLevel": ["Water_stone", "Thunder_stone", "Fire_stone", function(data){
+            const evolution = data.evolution[3][Math.floor(Math.random() * data.evolution[3].length)];
+            const evoRegion = PokemonHelper.calcNativeRegion(evolution);
+            this.evolver = this.levelObservable.subscribe(() => {
+                if (this.levelObservable() >= 100 && player.highestRegion >= evoRegion) {
+                    Notifier.notify("Your " + this.name + " has evolved into a " + evolution, GameConstants.NotificationOption.success);
+                    player.capturePokemon(evolution, false, false);
+                    player.caughtAmount[this.id](player._caughtAmount[this.id]() + 1);
+                    this.evolved = true;
+                    this.evolver.dispose();
+                }
+            });
+        }],
         "type": [
             "Normal"
         ],
