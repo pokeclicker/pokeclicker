@@ -22,6 +22,10 @@ class KeyItemHandler {
 
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Dungeon ticket", "This ticket grants access to all dungeons in the Kanto region,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon")));
 
+        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Super rod", "The best fishing rod for catching wild water Pokémon", function(){
+            return player.routeKillsObservable(12)() > player.routeKillsNeeded - 1;
+        })));
+
         // TODO obtain somewhere at the start
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Holo caster", "A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others")));
 
