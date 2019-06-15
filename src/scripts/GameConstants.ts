@@ -573,7 +573,11 @@ namespace GameConstants {
         Leaf_stone,
         Moon_stone,
         Sun_stone,
-        Trade_stone
+        Trade_stone,
+        Dragon_scale,
+        Metal_coat,
+        Kings_rock,
+        Upgrade,
     }
 
     export enum BattleItemType {

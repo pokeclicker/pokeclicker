@@ -22,40 +22,11 @@
                         <div class="page-item" style="background-color: white;">
 
                             <div class="row no-gutters justify-content-sm-center" style="padding:15px;">
-                                <div class="row col-lg-9 col-sm-11">
+                                <div class="row col-lg-7 col-sm-11" data-bind="foreach: Array.from(Array(Object.keys(GameConstants.StoneType).length / 2).keys()).map(x=>GameConstants.StoneType[x])">
                                     <div class="col" style="cursor: pointer"
-                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() === 'Fire_stone'}, click: function(){ ItemHandler.stoneSelected('Fire_stone'); ItemHandler.pokemonSelected('')}">
-                                        <img src="assets/images/items/Fire_stone.png">
-                                        <div data-bind="text: player._itemList['Fire_stone']()"></div>
-                                    </div>
-                                    <div class="col" style="cursor: pointer"
-                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() === 'Water_stone'}, click: function(){ ItemHandler.stoneSelected('Water_stone'); ItemHandler.pokemonSelected('')}">
-                                        <img src="assets/images/items/Water_stone.png">
-                                        <div data-bind="text: player._itemList['Water_stone']()"></div>
-                                    </div>
-                                    <div class="col" style="cursor: pointer"
-                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() === 'Leaf_stone'}, click: function(){ ItemHandler.stoneSelected('Leaf_stone'); ItemHandler.pokemonSelected('')}">
-                                        <img src="assets/images/items/Leaf_stone.png">
-                                        <div data-bind="text: player._itemList['Leaf_stone']()"></div>
-                                    </div>
-                                    <div class="col" style="cursor: pointer"
-                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() === 'Thunder_stone'}, click: function(){ ItemHandler.stoneSelected('Thunder_stone'); ItemHandler.pokemonSelected('')}">
-                                        <img src="assets/images/items/Thunder_stone.png">
-                                        <div data-bind="text: player._itemList['Thunder_stone']()"></div>
-                                    </div>
-                                    <div class="col" style="cursor: pointer"
-                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() === 'Moon_stone'}, click: function(){ ItemHandler.stoneSelected('Moon_stone'); ItemHandler.pokemonSelected('')}">
-                                        <img src="assets/images/items/Moon_stone.png">
-                                        <div data-bind="text: player._itemList['Moon_stone']()"></div>
-                                    </div>
-                                    <div class="col" style="cursor: pointer"
-                                         data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() === 'Trade_stone'}, click: function(){ ItemHandler.stoneSelected('Trade_stone'); ItemHandler.pokemonSelected('')}">
-                                        <img src="assets/images/items/Trade_stone.png">
-                                        <div data-bind="text: player._itemList['Trade_stone']()"></div>
-                                    </div>
-                                    <div class="col" style="cursor: pointer" data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() === 'Sun_stone'}, click: function(){ ItemHandler.stoneSelected('Sun_stone'); ItemHandler.pokemonSelected('')}">
-                                        <img src="assets/images/items/Sun_stone_small.png">
-                                        <div data-bind="text: player._itemList['Sun_stone']()"></div>
+                                        data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() === $data}, click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
+                                        <img data-bind="attr:{src: 'assets/images/items/' + $data + '.png'}">
+                                        <div data-bind="text: player._itemList[$data]()"></div>
                                     </div>
                                 </div>
                             </div>
