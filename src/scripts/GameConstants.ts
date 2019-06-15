@@ -732,6 +732,7 @@ namespace GameConstants {
 
     export const JohtoDungeons = [
         "Sprout Tower",
+        "Ruins of Alph",
         "Union Cave",
         "Slowpoke Well",
         "Ilex Forest",
