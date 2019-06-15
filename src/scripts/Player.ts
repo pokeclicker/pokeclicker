@@ -405,6 +405,9 @@ class Player {
     }
 
     public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
+        if (PokemonHelper.calcNativeRegion(pokemonName) > player.highestRegion) {
+            return;
+        }
         OakItemRunner.use(GameConstants.OakItem.Magic_Ball);
         let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
         if (!this.alreadyCaughtPokemon(pokemonName)) {
