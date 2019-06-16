@@ -7,7 +7,7 @@ class PokemonHelper {
 
         return pokemonList.filter(function (pokemon) {
             if (pokemon.evoLevel && pokemon.evoLevel.includes(evoType)) {
-                return true;
+                return !!PokemonHelper.getPokemonByName(pokemon.name).evolutionByIndex(pokemon.evoLevel.indexOf(evoType), true);
             }
         });
     }

@@ -29,6 +29,7 @@ class CaughtPokemon {
         });
 
         this.breeding = ko.observable(breeding);
+        this.evolver = {};
         this.evoTrack();
     }
 
@@ -45,10 +46,6 @@ class CaughtPokemon {
           this.evolved = false;
         }
 
-        if (this.evolver){
-          this.evolver.dispose();
-        }
-        
         const pokemonData = pokemonMapId[this.id];
 
         // pokemon doesn't have an evolution, is already evolved, or currently breeding
@@ -58,21 +55,22 @@ class CaughtPokemon {
 
         pokemonData.evoLevel.forEach((evo, index)=>{
             if (evo.constructor === Number){
-                const evolution = pokemonData.evolution[index]
+                if (this.evolver[index]){
+                  this.evolver[index].dispose();
+                }
+
+                // Get evolutions for current region, else calculate a evolution for any region for when we reach that region
+                const evolution = PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, true) || PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, false);
                 const evoRegion = PokemonHelper.calcNativeRegion(evolution);
-                this.evolver = this.levelObservable.subscribe(() => {
+                this.evolver[index] = this.levelObservable.subscribe(() => {
                     if (this.levelObservable() >= evo && player.highestRegion >= evoRegion) {
                         Notifier.notify("Your " + this.name + " has evolved into a " + evolution, GameConstants.NotificationOption.success);
                         player.capturePokemon(evolution, false, true);
                         player.caughtAmount[this.id](player._caughtAmount[this.id]() + 1);
                         this.evolved = true;
-                        this.evolver.dispose();
+                        this.evolver[index].dispose();
                     }
                 });
-            }
-
-            if (evo.constructor === Function){
-              evo.call(this, pokemonData);
             }
         });
     }
