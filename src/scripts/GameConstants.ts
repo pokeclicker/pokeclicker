@@ -160,7 +160,7 @@ namespace GameConstants {
         "SizeY": 21,
         "SizeX": 25,
     }
-    
+
     export const SAFARI_BATTLE_CHANCE = 5;
 
     export const SAFARI_BASE_POKEBALL_COUNT = 30;
@@ -580,7 +580,8 @@ namespace GameConstants {
         Leaf_stone,
         Moon_stone,
         Sun_stone,
-        Trade_stone
+        Trade_stone,
+        Time_stone,
     }
 
     export enum BattleItemType {

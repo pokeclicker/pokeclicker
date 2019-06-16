@@ -36,3 +36,4 @@ ItemList['Leaf_stone'] = new EvolutionStone(GameConstants.StoneType.Leaf_stone);
 ItemList['Moon_stone'] = new EvolutionStone(GameConstants.StoneType.Moon_stone);
 ItemList['Sun_stone'] = new EvolutionStone(GameConstants.StoneType.Sun_stone);
 ItemList['Trade_stone'] = new EvolutionStone(GameConstants.StoneType.Trade_stone);
+ItemList['Time_stone'] = new EvolutionStone(GameConstants.StoneType.Time_stone);
