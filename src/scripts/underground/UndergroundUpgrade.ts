@@ -1,46 +1,53 @@
-class UndergroundUpgrade {
-    name: string;
-    text: string;
-    maxUses: number;
-    step: number;
-    costStep: number;
-    baseCost: number;
-    initialValue: number;
+class UndergroundUpgrade extends Upgrade {
 
-    static list: Array<UndergroundUpgrade> = []
-
-    constructor(name, text, step, baseCost) {
-        this.name = name;
-        this.text = text;
-        this.maxUses = GameConstants.MaxUpgrades[name];
-        this.step = step;
-        this.baseCost = baseCost;
-        this.initialValue = GameConstants.MineUpgradesInitialValues[name];
+    constructor(name: Underground.Upgrades, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[], increasing = true) {
+        super(name, displayName, maxLevel, costList, bonusList, increasing);
     }
 
-    alreadyMax(): boolean {
-        return player[this.name] == this.initialValue + (this.maxUses * this.step);
-    }
 
-    cost(): number {
-        let timesUpgraded = (player[this.name] - this.initialValue) / this.step;
-        return this.baseCost * (timesUpgraded + 1);
-    }
-
-    canAfford(): boolean {
-        return player.diamonds >= this.cost();
-    }
-
-    buy() {
-        if (!this.alreadyMax() && this.canAfford()) {
-            player.diamonds -= this.cost();
-            player[this.name] += this.step;
-        }
+    canBuy(): boolean {
+        return super.canBuy() && player.hasKeyItem("Explorer kit");
     }
 }
 
-UndergroundUpgrade.list.push(new UndergroundUpgrade("maxMineEnergy", "Max Energy", 10, 50));
-UndergroundUpgrade.list.push(new UndergroundUpgrade("maxUndergroundItems", "Max Items", 1, 200));
-UndergroundUpgrade.list.push(new UndergroundUpgrade("mineEnergyGain", "Energy Gain", 1, 100));
-UndergroundUpgrade.list.push(new UndergroundUpgrade("mineEnergyRegenTime", "Energy Regen Time", -1, 10));
-UndergroundUpgrade.list.push(new UndergroundUpgrade("maxDailyDeals", "Max Daily Deals", 1, 150));
+
+Underground.upgradeList.push(
+    new UndergroundUpgrade(
+        Underground.Upgrades.Energy_Max,
+        "Max Energy",
+        10,
+        CostFactory.createArray(
+            GameHelper.createArray(50, 500, 50), GameConstants.Currency.diamond
+        ),
+        GameHelper.createArray(0, 100, 10)
+    )
+);
+
+Underground.upgradeList.push(
+    new UndergroundUpgrade(Underground.Upgrades.Items_Max, "Max items", 4,
+        CostFactory.createArray(GameHelper.createArray(200, 800, 200), GameConstants.Currency.diamond),
+        GameHelper.createArray(0, 4, 1)
+    )
+);
+
+Underground.upgradeList.push(
+    new UndergroundUpgrade(Underground.Upgrades.Energy_Gain, "Energy restored", 17,
+        CostFactory.createArray(GameHelper.createArray(100, 1700, 100), GameConstants.Currency.diamond),
+        GameHelper.createArray(0, 17, 1)
+    )
+);
+
+Underground.upgradeList.push(
+    new UndergroundUpgrade(Underground.Upgrades.Energy_Regen_Time, "Energy regen time", 20,
+        CostFactory.createArray(GameHelper.createArray(20, 400, 20), GameConstants.Currency.diamond),
+        GameHelper.createArray(0, 20, 1),
+        false
+    )
+);
+
+Underground.upgradeList.push(
+    new UndergroundUpgrade(Underground.Upgrades.Daily_Deals_Max, "Daily deals", 2,
+        CostFactory.createArray(GameHelper.createArray(150, 300, 150), GameConstants.Currency.diamond),
+        GameHelper.createArray(0, 2, 1)
+    )
+);

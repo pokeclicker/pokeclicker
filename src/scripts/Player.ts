@@ -1,3 +1,4 @@
+///<reference path="upgrades/Upgrade.ts"/>
 /**
  * Information about the player.
  * All player variables need to be saved.
@@ -119,17 +120,14 @@ class Player {
         }
 
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
-        this._mineEnergy = ko.observable((typeof savedPlayer._mineEnergy == 'number') ? savedPlayer._mineEnergy : 50);
-        this._maxMineEnergy = ko.observable(savedPlayer._maxMineEnergy || GameConstants.MineUpgradesInitialValues.maxMineEnergy);
-        this._mineEnergyGain = ko.observable(savedPlayer._mineEnergyGain || GameConstants.MineUpgradesInitialValues.mineEnergyGain);
+
+        // TODO(@Isha) move to underground classes.
         this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
         for (let item of this._mineInventory()) {
             item.amount = ko.observable(item.amount);
         }
         this._diamonds = ko.observable(savedPlayer._diamonds || 0);
-        this._maxDailyDeals = ko.observable(savedPlayer._maxDailyDeals || GameConstants.MineUpgradesInitialValues.maxDailyDeals);
-        this._maxUndergroundItems = ko.observable(savedPlayer._maxUndergroundItems || GameConstants.MineUpgradesInitialValues.maxUndergroundItems);
-        this._mineEnergyRegenTime = ko.observable(savedPlayer._mineEnergyRegenTime || GameConstants.MineUpgradesInitialValues.mineEnergyRegenTime);
+
         savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
         this._eggList = savedPlayer._eggList.map((egg) => {
             return ko.observable(egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null)
@@ -193,14 +191,9 @@ class Player {
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
 
-    private _mineEnergy: KnockoutObservable<number>;
-    private _maxMineEnergy: KnockoutObservable<number>;
-    private _mineEnergyGain: KnockoutObservable<number>;
+    // TODO(@Isha) move to underground classes.
     private _mineInventory: KnockoutObservableArray<any>;
     private _diamonds: KnockoutObservable<number>;
-    private _maxDailyDeals: KnockoutObservable<number>;
-    private _maxUndergroundItems: KnockoutObservable<number>;
-    private _mineEnergyRegenTime: KnockoutObservable<number>;
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
@@ -459,9 +452,15 @@ class Player {
                 return this.hasQuestPoints(amt);
             case GameConstants.Currency.dungeontoken:
                 return this.hasDungeonTokens(amt);
+            case GameConstants.Currency.diamond:
+                return this.hasDiamonds(amt);
             default:
                 return false;
         }
+    }
+
+    public canAfford(cost: Cost) {
+        return this.hasCurrency(cost.amount, cost.currency);
     }
 
     public hasMoney(money: number) {
@@ -476,6 +475,10 @@ class Player {
         return this._dungeonTokens() >= tokens;
     }
 
+    public hasDiamonds(diamonds: number) {
+        return this._diamonds() >= diamonds;
+    }
+
     public payCurrency(amt: number, curr: GameConstants.Currency): boolean {
         switch (curr) {
             case GameConstants.Currency.money:
@@ -484,9 +487,15 @@ class Player {
                 return this.payQuestPoints(amt);
             case GameConstants.Currency.dungeontoken:
                 return this.payDungeonTokens(amt);
+            case GameConstants.Currency.diamond:
+                return this.payDiamonds(amt);
             default:
                 return false;
         }
+    }
+
+    public payCost(cost: Cost): boolean {
+        return this.payCurrency(cost.amount, cost.currency);
     }
 
     public payQuestPoints(questPoints: number): boolean {
@@ -511,6 +520,15 @@ class Player {
     public payDungeonTokens(tokens: number): boolean {
         if (this.hasDungeonTokens(tokens)) {
             this._dungeonTokens(Math.floor(this._dungeonTokens() - tokens));
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public payDiamonds(diamonds: number): boolean {
+        if (this.hasDiamonds(diamonds)) {
+            this._diamonds(Math.floor(this._diamonds() - diamonds));
             return true;
         } else {
             return false;
@@ -754,6 +772,7 @@ class Player {
         }
     }
 
+    // TODO(@Isha) move to underground classes.
     public hasMineItems() {
         for (let i = 0; i < this._mineInventory().length; i++) {
             if (this._mineInventory()[i].amount() > 0) {
@@ -790,13 +809,6 @@ class Player {
         return Math.round(attack);
     }
 
-    get mineEnergy() {
-        return this._mineEnergy();
-    }
-
-    set mineEnergy(n: number) {
-        this._mineEnergy(n);
-    }
 
     get diamonds() {
         return this._diamonds();
@@ -806,46 +818,7 @@ class Player {
         this._diamonds(n);
     }
 
-    get maxMineEnergy() {
-        return this._maxMineEnergy();
-    }
-
-    set maxMineEnergy(n: number) {
-        this._maxMineEnergy(n);
-    }
-
-    get maxUndergroundItems() {
-        return this._maxUndergroundItems();
-    }
-
-    set maxUndergroundItems(n: number) {
-        this._maxUndergroundItems(n);
-    }
-
-    get mineEnergyGain() {
-        return this._mineEnergyGain();
-    }
-
-    set mineEnergyGain(n: number) {
-        this._mineEnergyGain(n);
-    }
-
-    get mineEnergyRegenTime() {
-        return this._mineEnergyRegenTime();
-    }
-
-    set mineEnergyRegenTime(n: number) {
-        this._mineEnergyRegenTime(n);
-    }
-
-    get maxDailyDeals() {
-        return this._maxDailyDeals();
-    }
-
-    set maxDailyDeals(n: number) {
-        this._maxDailyDeals(n);
-    }
-
+    // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
         for (let i = 0; i < player._mineInventory().length; i++) {
             if (player._mineInventory()[i].id === id) {
@@ -855,6 +828,7 @@ class Player {
         return -1;
     }
 
+    // TODO(@Isha) move to underground classes.
     public getUndergroundItemAmount(id: number) {
         let index = this.mineInventoryIndex(id);
         if (index > -1) {
@@ -977,14 +951,10 @@ class Player {
             "_itemList",
             "_itemMultipliers",
             "_keyItems",
-            "_mineEnergy",
-            "_maxMineEnergy",
-            "_mineEnergyGain",
+            // TODO(@Isha) remove.
             "_mineInventory",
-            "_maxDailyDeals",
             "_diamonds",
-            "_maxUndergroundItems",
-            "_mineEnergyRegenTime",
+            // TODO(@Isha) remove.
             "_mineLayersCleared",
             "_eggList",
             "_eggSlots",

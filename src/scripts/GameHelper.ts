@@ -71,4 +71,12 @@ class GameHelper {
         return GameConstants.Region.hoenn;
     }
 
+    public static createArray(start: number, max: number, step: number) {
+        let array = [];
+        for (let i = start; i <= max; i += step) {
+            array.push(i);
+        }
+        return array;
+    }
+
 }

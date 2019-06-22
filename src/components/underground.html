@@ -23,12 +23,12 @@ style="cursor:default" tabindex="-1">
                        <div class='progress'>
                            <div id='mineEnergyBar' class='progress-bar' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
-                                data-bind="style: { width: player._mineEnergy()/player._maxMineEnergy()*100 + '%' }">
+                                data-bind="style: { width: Underground.energy/Underground.getMaxEnergy()*100 + '%' }">
                            </div>
                        </div>
                        <span id='energyDisplay' style='color:black;'>
-                           <span data-bind='text: Math.floor(player.mineEnergy)'></span>/<span
-                               data-bind='text: player._maxMineEnergy'></span>
+                           <span data-bind='text: Math.floor(Underground.energy)'></span>/<span
+                               data-bind='text: Underground.getMaxEnergy()'></span>
                            <img src='assets/images/underground/flash.png'>
                            (next: <span data-bind='text: Underground.energyTick'></span>s)
                        </span>
@@ -53,24 +53,20 @@ style="cursor:default" tabindex="-1">
            </div>
            <div id="upgrades" class="tab-pane fade">
                <div class="modal-body" id="upgradesBody" style="width: 80%;margin: auto;">
-                   <table class='table'>
-                       <tbody data-bind='foreach: UndergroundUpgrade.list'>
-                       <tr>
-                           <td class='vertical-middle' data-bind='text: text + ": " + player[name]'></td>
-                           <td class='vertical-middle'
-                               data-bind='text: "(" + (step > 0 ? "+" : "") + step + ")"'></td>
-                           <td class='vertical-middle'
-                               data-bind='text: alreadyMax() ? "" : cost() + " diamonds"'></td>
-                           <td class='vertical-middle'>
-                               <button class='btn btn-success'
-                                       data-bind='css: { disabled: alreadyMax() || !canAfford() },
-                                                      text: alreadyMax() ? "Max" : "Upgrade",
-                                                      click: buy'>
-                               </button>
-                           </td>
-                       </tr>
-                       </tbody>
-                   </table>
+                    <table class='table'>
+                        <tbody>
+                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
+                                'data': {'totalBonus': Underground.getMaxEnergy(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Max)}}"></tr>
+                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
+                                'data': {'totalBonus': Underground.getMaxItems(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Items_Max)}}"></tr>
+                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
+                                'data': {'totalBonus': Underground.getEnergyGain(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Gain)}}"></tr>
+                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
+                                'data': {'totalBonus': Underground.getEnergyRegenTime(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Regen_Time)}}"></tr>
+                            <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
+                            'data': {'totalBonus': Underground.getDailyDealsMax(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Daily_Deals_Max)}}"></tr>
+                        </tbody>
+                    </table>
                </div>
            </div>
            <div id="help" class="tab-pane fade">
@@ -117,3 +113,18 @@ style="cursor:default" tabindex="-1">
    </div>
 </div>
 </div>
+
+<script type="text/html" id="undergroundUpgradeTemplate">
+        <td class='vertical-middle' data-bind='text: upgrade.displayName + ": " + totalBonus'></td>
+        <td class='vertical-middle'
+            data-bind='text: upgrade.isMaxLevel() ? "" : "(" + (upgrade.increasing ? "+" : "-") + upgrade.upgradeBonus() + ")"'></td>
+        <td class='vertical-middle'
+            data-bind='text: upgrade.isMaxLevel() ? "" : upgrade.calculateCost().amount + " diamonds"'></td>
+        <td class='vertical-middle'>
+            <button class='btn btn-success'
+                    data-bind='css: { disabled: !upgrade.canBuy() },
+                                                          text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
+                                                          click: function(){upgrade.buy()}'>
+            </button>
+        </td>
+</script>
