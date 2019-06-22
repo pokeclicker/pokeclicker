@@ -1,10 +1,14 @@
 class Mine {
+    public static sizeX: number = 25;
+    public static sizeY: number = 12;
     public static grid: Array<Array<KnockoutObservable<number>>>;
     public static rewardGrid: Array<Array<any>>;
     public static itemsFound: KnockoutObservable<number>;
     public static itemsBuried: number;
     public static rewardNumbers: Array<number>;
-    public static toolSelected: KnockoutObservable<GameConstants.MineTool> = ko.observable(GameConstants.MineTool["Chisel"]);
+
+    // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
+    public static toolSelected: KnockoutObservable<Mine.Tool> = ko.observable(0);
     private static loadingNewLayer: boolean = true
 
     public static loadMine() {
@@ -13,10 +17,10 @@ class Mine {
         Mine.rewardNumbers = [];
         Mine.itemsFound = ko.observable(0);
         Mine.itemsBuried = 0;
-        for (let i = 0; i < GameConstants.Mine.sizeY; i++) {
+        for (let i = 0; i < this.sizeY; i++) {
             let row = [];
             let rewardRow = [];
-            for (let j = 0; j < GameConstants.Mine.sizeX; j++) {
+            for (let j = 0; j < this.sizeX; j++) {
                 row.push(ko.observable(Math.min(5, Math.max(1, Math.floor(Math.random() * 2 + Math.random() * 3) + 1))));
                 rewardRow.push(0);
             }
@@ -26,10 +30,10 @@ class Mine {
         Mine.grid = tmpGrid;
         Mine.rewardGrid = tmpRewardGrid;
 
-        for (let i = 0; i < player._maxUndergroundItems(); i++) {
+        for (let i = 0; i < Underground.getMaxItems(); i++) {
             let item = UndergroundItem.getRandomItem();
-            let x = Mine.getRandomCoord(GameConstants.Mine.sizeX, item.space[0].length);
-            let y = Mine.getRandomCoord(GameConstants.Mine.sizeY, item.space.length);
+            let x = Mine.getRandomCoord(this.sizeX, item.space[0].length);
+            let y = Mine.getRandomCoord(this.sizeY, item.space.length);
             let res = Mine.canAddReward(x, y, item)
             if (res) {
                 Mine.addReward(x, y, item);
@@ -47,7 +51,7 @@ class Mine {
         if (Mine.alreadyHasRewardId(reward.id)) {
             return false;
         }
-        if (y + reward.space.length >= GameConstants.Mine.sizeY || x + reward.space[0].length >= GameConstants.Mine.sizeX) {
+        if (y + reward.space.length >= this.sizeY || x + reward.space[0].length >= this.sizeX) {
             return false;
         }
         for (let i = 0; i < reward.space.length; i++) {
@@ -91,7 +95,7 @@ class Mine {
     }
 
     public static click(i: number, j: number) {
-        if (GameConstants.MineTool[Mine.toolSelected()] == "Hammer") {
+        if (Mine.toolSelected() == Mine.Tool.Hammer) {
             Mine.hammer(i, j);
         } else {
             Mine.chisel(i, j);
@@ -99,7 +103,7 @@ class Mine {
     }
 
     private static hammer(x: number, y: number) {
-        if (player.mineEnergy >= GameConstants.HAMMER_ENERGY) {
+        if (Underground.energy >= Underground.HAMMER_ENERGY) {
             if (x < 0 || y < 0) {
                 return;
             }
@@ -113,26 +117,26 @@ class Mine {
                 }
             }
             if (hasMined) {
-                player.mineEnergy -= GameConstants.HAMMER_ENERGY;
+                Underground.energy = Underground.energy - Underground.HAMMER_ENERGY;
             }
         }
     }
 
     private static chisel(x: number, y: number) {
         if (Mine.grid[x][y]() > 0) {
-            if (player.mineEnergy >= GameConstants.CHISEL_ENERGY) {
+            if (Underground.energy >= Underground.CHISEL_ENERGY) {
                 Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)](Math.max(0, Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)]() - 2));
-                player.mineEnergy -= GameConstants.CHISEL_ENERGY;
+                Underground.energy = Underground.energy - Underground.CHISEL_ENERGY;
             }
         }
     }
 
     private static normalizeX(x: number): number {
-        return Math.min(GameConstants.Mine.sizeX - 1, Math.max(0, x));
+        return Math.min(this.sizeX - 1, Math.max(0, x));
     }
 
     private static normalizeY(y: number): number {
-        return Math.min(GameConstants.Mine.sizeY - 1, Math.max(0, y));
+        return Math.min(this.sizeY - 1, Math.max(0, y));
     }
 
     public static checkItemsRevealed() {
@@ -150,8 +154,8 @@ class Mine {
     }
 
     public static checkItemRevealed(id: number) {
-        for (let i = 0; i < GameConstants.Mine.sizeX; i++) {
-            for (let j = 0; j < GameConstants.Mine.sizeY; j++) {
+        for (let i = 0; i < this.sizeX; i++) {
+            for (let j = 0; j < this.sizeY; j++) {
                 if (Mine.rewardGrid[j][i] != 0) {
                     if (Mine.rewardGrid[j][i].value == id) {
                         if (Mine.rewardGrid[j][i].revealed === 0) {
@@ -169,6 +173,9 @@ class Mine {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
             GameHelper.incrementObservable(player.statistics.digDeeper)
+            if(OakItemRunner.isActive(GameConstants.OakItem.Cell_Battery)){
+              OakItemRunner.use(GameConstants.OakItem.Cell_Battery);
+            }
         }
     }
 
@@ -204,5 +211,12 @@ class Mine {
         }
 
         return ko.toJSON(mine);
+    }
+}
+
+namespace Mine {
+    export enum Tool {
+        "Chisel" = 0,
+        "Hammer" = 1,
     }
 }
