@@ -19,6 +19,14 @@ style="cursor:default" tabindex="-1">
        <div class="tab-content">
            <div id="dig" class="tab-pane fade in active show">
                <div class="modal-body" style="width: 80%;margin: auto;">
+
+                   <table class='table table-sm' style="width:60%; margin: auto">
+                       <tbody>
+                           <tr data-bind="template: { name: 'energyRestoreTemplate', foreach: ['SmallRestore','MediumRestore','LargeRestore']}">
+                           </tr>
+                       </tbody>
+                   </table>
+
                    <div class='row' style="text-align:center;">
                        <div class='progress'>
                            <div id='mineEnergyBar' class='progress-bar' role='progressbar'
@@ -34,7 +42,6 @@ style="cursor:default" tabindex="-1">
                        </span>
                    </div>
                    <div id="mineBody"></div>
-
                </div>
            </div>
            <div id="treasures" class="tab-pane fade">
@@ -113,6 +120,19 @@ style="cursor:default" tabindex="-1">
    </div>
 </div>
 </div>
+
+<script type="text/html" id="energyRestoreTemplate">
+    <td class="col-md-4">
+        <button style="display: inline;" class="btn btn-secondary" data-bind="
+                                       click: function(){  ItemList[$data].use();},
+                                       css: { disabled: player._itemList[$data]() <= 0}"
+        >
+            <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+            <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data]) + ' energy'">&nbsp;+? energy</span>
+            <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
+        </button>
+    </td>
+</script>
 
 <script type="text/html" id="undergroundUpgradeTemplate">
         <td class='vertical-middle' data-bind='text: upgrade.displayName + ": " + totalBonus'></td>

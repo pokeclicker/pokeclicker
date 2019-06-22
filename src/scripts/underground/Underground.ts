@@ -185,6 +185,11 @@ class Underground {
         }
     }
 
+    public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {
+        let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
+        return effect * player._maxMineEnergy();
+    }
+
     public static load(saveObject: object): void {
         if (!saveObject) {
             console.log("Underground not loaded.");
