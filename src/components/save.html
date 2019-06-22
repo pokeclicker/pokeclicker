@@ -2,32 +2,30 @@
 aria-labelledby="saveModalLabel">
 <div class="modal-dialog modal-lg" role="document">
    <div class="modal-content">
-       <div class="modal-body">
+       <div class="modal-body p-0">
            <div class="tabbable">
                <ul class="nav nav-tabs nav-fill">
-                   <li class="nav-item"><a class="nav-link active" href="#saveTab1" data-toggle="tab">Save</a></li>
-                   <li class="nav-item"><a class="nav-link" href="#saveTab2" data-toggle="tab">Converter</a></li>
-
+                   <li class="nav-item"><a class="nav-link active" href="#saveTab" data-toggle="tab">Save</a></li>
+                   <li class="nav-item"><a class="nav-link" href="#saveConvert" data-toggle="tab">Converter</a></li>
                </ul>
                <div class="tab-content">
-                   <div class="tab-pane active" id="saveTab1">
-                       <div class="container">
-                           <br>
-
+                    <div id="saveTab" class="tab-pane fade in active show">
+                       <div class="page-item m-0 pt-3 pb-3">
                            <button class="btn btn-info" onClick=Save.download()>Download Save</button>
                            <hr>
 
                            <input type="file" id="input" accept=".txt" style="display:none;"
                                   onchange=Save.loadFromFile(this.files[0])>
-                                  <label for="input" class="btn btn-info">Import Save</label>
-                                  <hr>
-                                  <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
-                                    savefile</h3>
-                                <button class="btn btn-danger" onClick="Save.reset()">Reset</button>
+                           <label for="input" class="btn btn-info">Import Save</label>
+                           <hr>
+                           <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
+                            savefile</h3>
+                           <button class="btn btn-danger" onClick="Save.reset()">Reset</button>
                        </div>
                    </div>
-                   <div class="tab-pane" id="saveTab2">
-                       <div class="container">
+
+                   <div id="saveConvert" class="tab-pane fade">
+                       <div class="page-item m-0 pt-3 pb-3">
                            <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
                            <textarea id="convertTextArea" class="saveTextArea"></textarea>
                            <button style="float: right;" class="btn btn-success" onclick="Save.convert()">

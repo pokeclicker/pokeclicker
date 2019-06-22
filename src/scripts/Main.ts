@@ -224,7 +224,7 @@ class Game {
         for(let i = 0; i < place; i++){
             multi *= 10;
         }
-        let ani = '<p class="moneyanimation" style="z-index:50;position:fixed;left:'+left+'px;top:'+pos.top+'px;">+'+money+'</p>';
+        let ani = '<p class="moneyanimation" style="z-index:50;position:absolute;left:'+left+'px;top:'+pos.top+'px;">+'+money+'</p>';
         $(ani).prependTo('body').animate({
             top: -100,
             opacity: 0
