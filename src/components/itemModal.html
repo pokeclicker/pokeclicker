@@ -53,6 +53,10 @@
                                         <img src="assets/images/items/Trade_stone.png">
                                         <div data-bind="text: player._itemList['Trade_stone']()"></div>
                                     </div>
+                                    <div class="col" style="cursor: pointer" data-bind="css:{ 'item-selected': ItemHandler.stoneSelected() === 'Sun_stone'}, click: function(){ ItemHandler.stoneSelected('Sun_stone'); ItemHandler.pokemonSelected('')}">
+                                        <img src="assets/images/items/Sun_stone_small.png">
+                                        <div data-bind="text: player._itemList['Sun_stone']()"></div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -169,7 +173,7 @@
                                         <div class="col-sm-11">
                                             <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
                                                 <p style="margin-top: 5px"
-                                                   data-bind="text: KeyItemHandler.inspectedItem().description"></p>
+                                                   data-bind="html: KeyItemHandler.inspectedItem().description"></p>
                                             </div>
                                             <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
                                                 <p style="margin-top: 5px">?????</p>

@@ -2,8 +2,8 @@ class OakItemRunner {
 
     public static oakItemList: KnockoutObservable<OakItem>[];
     // public static blankOakItem: OakItem = new OakItem(" ", Number.MAX_VALUE, "", 0, 0, 0);
-    public static inspectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem(GameConstants.OakItem.Magic_Ball, 20, "Gives a bonus to your catchrate", 5, 1, 2));
-    public static selectedItem: KnockoutObservable<OakItem> = ko.observable(new OakItem(GameConstants.OakItem.Magic_Ball, 20, "Gives a bonus to your catchrate", 5, 1, 2));
+    public static inspectedItem: KnockoutObservable<OakItem>;
+    public static selectedItem: KnockoutObservable<OakItem>;
 
     public static initialize() {
         OakItemRunner.oakItemList = [];
@@ -23,7 +23,7 @@ class OakItemRunner {
 
         // TODO implement use!
         // TODO implement functionality
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Cell_Battery, 90, "More passive mining energy regen", 25, 5, 4)));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Cell_Battery, 90, "More passive mining energy regen", 25, 5, 50)));
 
         // OakItemRunner.oakItemList must preserve the ordering of items in GameConstants.OakItem enum
         if (!OakItemRunner.oakItemList.every((f, i)=>f().id==i)) {
@@ -31,7 +31,8 @@ class OakItemRunner {
         }
 
         let item: OakItem = OakItemRunner.getOakItemObject(GameConstants.OakItem.Magic_Ball);
-        OakItemRunner.selectedItem(item);
+        OakItemRunner.inspectedItem = ko.observable(item);
+        OakItemRunner.selectedItem = ko.observable(item);
     }
 
     public static loadOakItems() {

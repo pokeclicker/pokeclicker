@@ -8,10 +8,10 @@ class RouteHelper {
      * Retrieves a list of all Pokémon that can be caught on that route.
      * @param route
      * @param region
-     * @param includeWater
+     * @param includeHeadbutt
      * @returns {string[]} list of all Pokémons that can be caught
      */
-    public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeWater: boolean = false): string[] {
+    public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeHeadbutt: boolean = true): string[] {
         // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
         if (route > GameConstants.RegionRoute[region]) {
             route = 1;
@@ -20,11 +20,14 @@ class RouteHelper {
         if (possiblePokemons == null) {
             return ["Rattata"];
         }
-        if (includeWater || possiblePokemons.land.length == 0) {
-            return possiblePokemons.land.concat(possiblePokemons.water);
-        } else {
-            return possiblePokemons.land;
+        let pokemonList = possiblePokemons.land;
+        if (player.hasKeyItem("Super rod") || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.water);
         }
+        if (includeHeadbutt) {
+            pokemonList = pokemonList.concat(possiblePokemons.headbutt);
+        }
+        return pokemonList;
     }
 
     /**
@@ -32,12 +35,12 @@ class RouteHelper {
      * @param route
      * @param region
      * @param includeShiny
-     * @param includeWater
+     * @param includeHeadbutt
      * @returns {boolean} true if all Pokémon on this route are caught.
      */
 
-    public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean, includeWater: boolean): boolean {
-        let possiblePokemon: string[] = RouteHelper.getAvailablePokemonList(route, region, includeWater);
+    public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean, includeHeadbutt: boolean = true): boolean {
+        let possiblePokemon: string[] = RouteHelper.getAvailablePokemonList(route, region, includeHeadbutt);
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 
