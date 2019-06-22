@@ -32,13 +32,13 @@ class Upgrade {
     }
 
     // Override with a custom function
-    calculateBonus(): number {
-        return this.bonusList[this.level];
+    calculateBonus(level: number = this.level): number {
+        return this.bonusList[level];
     }
 
     upgradeBonus() {
         if (!this.isMaxLevel()) {
-            return this.bonusList[this.level + 1] - this.bonusList[this.level];
+            return this.calculateBonus(this.level + 1) - this.calculateBonus(this.level);
         }
         return 0;
     }
