@@ -11,6 +11,7 @@ class Save {
         let saveObject = {};
 
         saveObject[Underground.saveKey] = Underground.save();
+        saveObject[PokeballFactory.saveKey] = PokeballFactory.save();
 
         localStorage.setItem("save", JSON.stringify(saveObject));
 
@@ -29,6 +30,7 @@ class Save {
         if (saveJSON !== null) {
             let saveObject = JSON.parse(saveJSON);
             Underground.load(saveObject[Underground.saveKey]);
+            PokeballFactory.load(saveObject[PokeballFactory.saveKey]);
         }
 
         if (saved !== "null") {

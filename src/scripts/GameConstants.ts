@@ -11,6 +11,7 @@ namespace GameConstants {
     export const DUNGEON_TIME = 6000;
     export const DUNGEON_TICK = 1;
     export const FARM_TICK = 1000;
+    export const POKEBALL_FACTORY_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
     export const GYM_COUNTDOWN = 1000;

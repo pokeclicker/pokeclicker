@@ -1,5 +1,6 @@
 ///<reference path="wildBattle/RouteHelper.ts"/>
 ///<reference path="Battle.ts"/>
+///<reference path="pokeballFactory/PokeballFactory.ts"/>
 /**
  * Start the game when all html elements are loaded.
  */
@@ -104,6 +105,7 @@ class Game {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
         FarmRunner.counter += GameConstants.TICK_TIME;
+        PokeballFactory.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
             Game.achievementCounter = 0;
@@ -164,6 +166,10 @@ class Game {
 
         if (FarmRunner.counter > GameConstants.FARM_TICK) {
             FarmRunner.tick();
+        }
+
+        if (PokeballFactory.counter > GameConstants.POKEBALL_FACTORY_TICK) {
+            PokeballFactory.tick();
         }
 
         if (GameHelper.counter > 60 * 1000) {
