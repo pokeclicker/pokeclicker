@@ -63,6 +63,13 @@ class BreedingHelper {
             }
         }
         player.capturePokemon(egg.pokemon, shiny);
+
+        // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
+        let baseForm = BreedingHelper.calculateBaseForm(egg.pokemon);
+        if (egg.pokemon != baseForm && !player.alreadyCaughtPokemon(baseForm)) {
+            player.capturePokemon(baseForm, false);
+        }
+
         player._eggList[index](null);
         GameHelper.incrementObservable(player.statistics.hatchedEggs);
         OakItemRunner.use(GameConstants.OakItem.Blaze_Cassette);
@@ -111,6 +118,20 @@ class BreedingHelper {
 
     public static getEggSlotCost(slot: number): number {
         return 500 * slot;
+    }
+
+    public static calculateBaseForm(pokemonName: string): string {
+        // Base form of Pokemon depends on which regions players unlocked
+        if (!(pokemonName in pokemonDevolutionMap)) {
+            // No devolutions at all
+            return pokemonName;
+        } else if (PokemonHelper.calcNativeRegion(pokemonDevolutionMap[pokemonName]) > player.highestRegion) {
+            // No further devolutions in current unlocked regions
+            return pokemonName;
+        } else {
+            // Recurse onto its devolution
+            return BreedingHelper.calculateBaseForm(pokemonDevolutionMap[pokemonName]);
+        }
     }
 }
 

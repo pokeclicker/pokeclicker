@@ -24,7 +24,7 @@ class Settings {
         if (setting) {
             setting.set(value);
         } else {
-            Notifier.notify("Setting " + name + " does not exist", GameConstants.NotificationOption.warning);
+            console.log("Setting " + name + " does not exist");
         }
 
     }
@@ -50,9 +50,9 @@ class Settings {
 Settings.add(
     new MultipleChoiceSetting("theme", "Theme",
         [
-            new GameConstants.Option("Default", 'default.css'),
-            new GameConstants.Option("Dark Mode", 'dark.css')
+            new GameConstants.Option("Default", 'theme-default'),
+            new GameConstants.Option("Dark Mode", 'theme-dark')
         ],
-        "default.css",
+        "theme-default",
     )
 );

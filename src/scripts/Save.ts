@@ -7,6 +7,13 @@ class Save {
         localStorage.setItem("player", json);
         localStorage.setItem("mine", Mine.serialize());
         localStorage.setItem("settings", Settings.save());
+
+        let saveObject = {};
+
+        saveObject[Underground.saveKey] = Underground.save();
+
+        localStorage.setItem("save", JSON.stringify(saveObject));
+
         this.counter = 0;
         console.log("Game saved")
     }
@@ -16,6 +23,13 @@ class Save {
 
         let settings = localStorage.getItem("settings");
         Settings.load(JSON.parse(settings));
+
+
+        let saveJSON = localStorage.getItem("save");
+        if (saveJSON !== null) {
+            let saveObject = JSON.parse(saveJSON);
+            Underground.load(saveObject[Underground.saveKey]);
+        }
 
         if (saved !== "null") {
             return new Player(JSON.parse(saved));
