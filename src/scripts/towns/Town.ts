@@ -151,6 +151,7 @@ TownList["Blackthorn City"] = new Town("Blackthorn City", [44], BlackthornCitySh
 
 //Johto Dungeons
 TownList["Sprout Tower"] = new DungeonTown("Sprout Tower", [31]);
+TownList["Ruins of Alph"] = new DungeonTown("Ruins of Alph", [32]);
 TownList["Union Cave"] = new DungeonTown("Union Cave", [32]);
 TownList["Slowpoke Well"] = new DungeonTown("Slowpoke Well", [33]);
 TownList["Ilex Forest"] = new DungeonTown("Ilex Forest", [33]);
