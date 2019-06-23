@@ -10,10 +10,6 @@ class EnergyRestore extends Item {
         this.type = type;
     }
 
-    buy(amt: number) {
-        this._increaseCount(amt);
-    }
-
     use() {
         if (player.itemList[this.name()]() <= 0) {
             return;
@@ -23,7 +19,7 @@ class EnergyRestore extends Item {
             return;
         }
         Underground.gainEnergyThroughItem(this.type);
-        this._decreaseCount(1);
+        player.loseItem(this.name(), 1);
     }
 }
 

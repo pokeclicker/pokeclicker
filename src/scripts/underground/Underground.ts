@@ -94,7 +94,7 @@ class Underground {
 
         if(item.isStone()){
             let evostone: EvolutionStone = ItemList[item.valueType];
-            evostone.buy(num);
+            evostone.gain(num);
             return;
         }
 

@@ -9,7 +9,7 @@ class Pokeball extends Item {
         this.type = type;
     }
 
-    buy(amt: number) {
+    gain(amt: number) {
         player.gainPokeballs(this.type, amt);
         GameHelper.incrementObservable(player.statistics.pokeballsBought[this.type],amt);
     }

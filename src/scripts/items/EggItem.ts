@@ -9,10 +9,6 @@ class EggItem extends Item {
         this.type = type;
     }
 
-    buy(amt: number) {
-        this._increaseCount(amt);
-    }
-
     use() {
         if (this.type === GameConstants.EggItemType.Pokemon_egg) {
             return;
@@ -30,7 +26,7 @@ class EggItem extends Item {
         }
         
         if (success) {
-            this._decreaseCount(1);
+            player.loseItem(this.name(), 1);
         }
     }
 }
