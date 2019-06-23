@@ -10,7 +10,7 @@ class EvolutionStone extends Item {
         this.type = type;
     }
 
-    public buy(n: number) {
+    public gain(n: number) {
         player.gainItem(GameConstants.StoneType[this.type], n)
     }
 

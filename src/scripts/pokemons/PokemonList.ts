@@ -5,6 +5,7 @@
 
 const pokemonMap: { [name: string]: any } = {};
 const pokemonMapId: { [id: number]: any } = {};
+const pokemonDevolutionMap: {[name: string]: string} = {};
 
 /**
  * Datalist that contains all Pokémon data
@@ -3369,4 +3370,7 @@ for (let i = 0; i < pokemonList.length; i++) {
     let p = pokemonList[i];
     pokemonMap[p["name"]] = p;
     pokemonMapId[i + 1] = p;
+    if (p.hasOwnProperty("evolution")) {
+        p["evolution"].split(", ").forEach(x => {pokemonDevolutionMap[x] = p["name"]});        
+    }
 }

@@ -99,7 +99,7 @@
     </style>
 
 </head>
-<body class="no-select">
+<body class="no-select" data-bind="attr: {class: Settings.getSetting('theme').observableValue() }">
 @import "splash.html"
 
 <!-- Game menu-->
@@ -214,7 +214,7 @@
                                          data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
                                          src=""/>
                                     <br>
-                                    Catch Chance: 
+                                    Catch Chance:
                                     <span data-bind="text: Battle.catchRateActual()">Catch Rate</span>%
                                 </div>
                             </div>
@@ -283,7 +283,7 @@
                                              data-bind="attr:{ src: '/assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
                                              src=""/>
                                         <br>
-                                        Catch Chance: 
+                                        Catch Chance:
                                         <span data-bind="text: DungeonBattle.catchRateActual()">Catch Rate</span>%
                                     </div>
                                 </div>
