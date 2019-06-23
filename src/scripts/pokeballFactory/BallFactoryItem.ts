@@ -7,13 +7,11 @@ class BallFactoryItem extends FactoryItem {
 
     constructor(type: GameConstants.Pokeball, timeLeft: number) {
         super(GameConstants.Pokeball[type], timeLeft, 1);
+        this.type = type;
     }
 
     public tick() {
         this.timeLeft -= 1;
-        if (this.timeLeft <= 0) {
-            this.gainItem();
-        }
     }
 
     public gainItem() {

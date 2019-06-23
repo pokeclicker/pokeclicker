@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     Preload.load(debug).then(function () {
         OakItemRunner.initialize();
         UndergroundItem.initialize();
+        PokeballFactory.initialize();
         game = new Game();
         // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
 

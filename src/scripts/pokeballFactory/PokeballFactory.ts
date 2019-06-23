@@ -7,22 +7,35 @@ class PokeballFactory {
 
     public static counter: number = 0;
     public static upgradeList: Array<Upgrade> = [];
-    public static productionLine: FactoryItem[] = [];
+    public static productionLine: BallFactoryItem[] = [];
 
     public static getPokeballTime() {
-        return PokeballFactory.BASE_POKEBALL_TIME + this.getUpgrade(PokeballFactory.Upgrades.Pokeball_Time).calculateBonus();
+        return PokeballFactory.BASE_POKEBALL_TIME - this.getUpgrade(PokeballFactory.Upgrades.Pokeball_Time).calculateBonus();
     }
 
     public static getGreatballTime() {
-        return PokeballFactory.BASE_GREATBALL_TIME + this.getUpgrade(PokeballFactory.Upgrades.Greatball_Time).calculateBonus();
+        return PokeballFactory.BASE_GREATBALL_TIME - this.getUpgrade(PokeballFactory.Upgrades.Greatball_Time).calculateBonus();
     }
 
     public static getUltraballTime() {
-        return PokeballFactory.BASE_ULTRABALL_TIME + this.getUpgrade(PokeballFactory.Upgrades.Ultraball_Time).calculateBonus();
+        return PokeballFactory.BASE_ULTRABALL_TIME - this.getUpgrade(PokeballFactory.Upgrades.Ultraball_Time).calculateBonus();
     }
 
     public static getMasterballTime() {
-        return PokeballFactory.BASE_MASTERBALL_TIME + this.getUpgrade(PokeballFactory.Upgrades.Masterball_Time).calculateBonus();
+        return PokeballFactory.BASE_MASTERBALL_TIME - this.getUpgrade(PokeballFactory.Upgrades.Masterball_Time).calculateBonus();
+    }
+
+    public static getBallTime(ball: GameConstants.Pokeball){
+        switch(ball) {
+            case GameConstants.Pokeball.Pokeball:
+                return this.getPokeballTime();
+            case GameConstants.Pokeball.Greatball:
+                return this.getGreatballTime();
+            case GameConstants.Pokeball.Ultraball:
+                return this.getUltraballTime();
+            case GameConstants.Pokeball.Masterball:
+                return this.getMasterballTime();
+        }
     }
 
     static getUpgrade(upgrade: PokeballFactory.Upgrades) {
@@ -56,6 +69,10 @@ class PokeballFactory {
         this.counter = 0;
         for (let i = 0; i < this.productionLine.length; i++) {
             this.productionLine[i].tick();
+            if( this.productionLine[i].timeLeft <= 0){
+                this.productionLine[i].gainItem();
+                this.productionLine[i].timeLeft = this.getBallTime(this.productionLine[i].type);
+            }
         }
     }
 
@@ -73,8 +90,11 @@ class PokeballFactory {
             }
         }
         let productionLine = saveObject['productionLine'];
-        for (let i = 0; i < productionLine.length; i++){
+        for (let i = 0; i < this.productionLine.length; i++) {
+            console.log(saveObject);
             console.log(productionLine);
+            console.log(this.productionLine[i].name);
+            this.productionLine[i].timeLeft = productionLine[this.productionLine[i].name];
         }
     }
 
