@@ -1,0 +1,75 @@
+<div aria-labelledby="myModalLabel" class="modal fade" id="pokeballFactoryModal" role="dialog" tabindex="-1">
+    <div class="modal-dialog" id="pokeballFactoryModalDialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Pokeball Factory</h4>
+            </div>
+            <div class="modal-body" id="pokeballFactoryBody">
+                <table class='table'>
+                    <tr data-bind="template: { name: 'pokeballFactoryTemplate',
+                                'data': {
+                                    'img': 'assets/images/pokeball/Pokeball-small.png',
+                                    'totalTime': PokeballFactory.getPokeballTime(),
+                                    'class': 'bg-danger',
+                                    'item': PokeballFactory.productionLine[0]
+                                }
+                    }">
+                    </tr>
+
+                    <tr data-bind="template: { name: 'pokeballFactoryTemplate',
+                                'data': {
+                                    'img': 'assets/images/pokeball/Greatball-small.png',
+                                    'totalTime': PokeballFactory.getGreatballTime(),
+                                    'class': 'bg-info',
+                                    'item': PokeballFactory.productionLine[1]
+                                }
+                    }">
+                    </tr>
+
+                    <tr data-bind="template: { name: 'pokeballFactoryTemplate',
+                                'data': {
+                                    'img': 'assets/images/pokeball/Ultraball-small.png',
+                                    'totalTime': PokeballFactory.getUltraballTime(),
+                                    'class': 'bg-warning',
+                                    'item': PokeballFactory.productionLine[2]
+                                }
+                    }">
+                    </tr>
+
+                    <tr data-bind="template: { name: 'pokeballFactoryTemplate',
+                                'data': {
+                                    'img': 'assets/images/pokeball/Masterball-small.png',
+                                    'totalTime': PokeballFactory.getMasterballTime(),
+                                    'class': 'bg-purple',
+                                    'item': PokeballFactory.productionLine[3]
+                                }
+                    }">
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/html" id="pokeballFactoryTemplate">
+    <td class="col-sm-1 vertical-middle">
+        <img class='mineInventoryItem' data-bind='attr:{ src: $data.img }'/>
+
+    </td>
+
+    <td class="col-sm-9 vertical-middle">
+        <div class="progress">
+            <div data-bind="attr: {class: $data.class + ' progress-bar ', style: 'width:' + (($data.totalTime-$data.item.timeLeft)/$data.totalTime * 100) + '%'}">
+            </div>
+        </div>
+    </td>
+    <td class="col-sm-1 vertical-middle">
+        <span data-bind="text: GameConstants.formatTime($data.item.timeLeft)"></span>
+    </td>
+
+    <td class="col-sm-1 vertical-middle">
+        <span data-bind="text: GameConstants.formatTime($data.item.timeLeft)"></span>
+    </td>
+</script>
