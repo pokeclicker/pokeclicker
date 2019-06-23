@@ -9,7 +9,7 @@ class PokemonItem extends Item {
         this.type = pokemon;
     }
 
-    buy() {
+    gain() {
         if (this.name() == "Mr_Mime") {
             player.capturePokemon("Mr. Mime", PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP))
         } else {
@@ -27,3 +27,4 @@ ItemList['Porygon'] = new PokemonItem(GameConstants.PokemonItemType.Porygon);
 ItemList['Jynx'] = new PokemonItem(GameConstants.PokemonItemType.Jynx);
 ItemList['Mr. Mime'] = new PokemonItem(GameConstants.PokemonItemType.Mr_Mime);
 ItemList['Lickitung'] = new PokemonItem(GameConstants.PokemonItemType.Lickitung);
+ItemList['Togepi'] = new PokemonItem(GameConstants.PokemonItemType.Togepi);

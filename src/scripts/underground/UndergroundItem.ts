@@ -76,7 +76,7 @@ class UndergroundItem {
     }
 
     public isStone(): boolean {
-        return (GameConstants.EvoStones.indexOf(this.name) > -1)
+        return ItemList[this.valueType] instanceof EvolutionStone;
     }
 
     public static getFullResourceName(valuetype: string, amt: number): string {

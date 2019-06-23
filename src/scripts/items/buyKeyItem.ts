@@ -7,10 +7,13 @@ class buyKeyItem extends Item {
             let priceMultiplier = 1;
             super(GameConstants.KeyItemType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
             this.type = type;
-            this.totalPrice = ko.computed(function(){return this.basePrice}, this);
+        }
+
+        totalPrice(amt: number) {
+            return this.basePrice;
         }
     
-        buy(amt: number) {
+        gain(amt: number) {
             player.gainKeyItem(GameConstants.KeyItemType[this.type].replace("_", " "))
         }
     
