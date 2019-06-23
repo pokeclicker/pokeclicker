@@ -19,10 +19,6 @@ class PokeballFactoryUpgrade extends Upgrade {
     calculateBonus(level: number = this.level): number {
         return level;
     }
-
-    canBuy(): boolean {
-        return super.canBuy() && player.hasKeyItem("Town Map");
-    }
 }
 
 PokeballFactory.upgradeList.push(

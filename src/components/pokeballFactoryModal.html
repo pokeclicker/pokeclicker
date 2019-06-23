@@ -11,7 +11,8 @@
                                     'img': 'assets/images/pokeball/Pokeball-small.png',
                                     'totalTime': PokeballFactory.getPokeballTime(),
                                     'class': 'bg-danger',
-                                    'item': PokeballFactory.productionLine[0]
+                                    'item': PokeballFactory.productionLine[0],
+                                    'upgrade': PokeballFactory.getUpgrade(PokeballFactory.Upgrades.Pokeball_Time)
                                 }
                     }">
                     </tr>
@@ -21,7 +22,8 @@
                                     'img': 'assets/images/pokeball/Greatball-small.png',
                                     'totalTime': PokeballFactory.getGreatballTime(),
                                     'class': 'bg-info',
-                                    'item': PokeballFactory.productionLine[1]
+                                    'item': PokeballFactory.productionLine[1],
+                                    'upgrade': PokeballFactory.getUpgrade(PokeballFactory.Upgrades.Greatball_Time)
                                 }
                     }">
                     </tr>
@@ -31,7 +33,8 @@
                                     'img': 'assets/images/pokeball/Ultraball-small.png',
                                     'totalTime': PokeballFactory.getUltraballTime(),
                                     'class': 'bg-warning',
-                                    'item': PokeballFactory.productionLine[2]
+                                    'item': PokeballFactory.productionLine[2],
+                                    'upgrade': PokeballFactory.getUpgrade(PokeballFactory.Upgrades.Ultraball_Time)
                                 }
                     }">
                     </tr>
@@ -41,7 +44,8 @@
                                     'img': 'assets/images/pokeball/Masterball-small.png',
                                     'totalTime': PokeballFactory.getMasterballTime(),
                                     'class': 'bg-purple',
-                                    'item': PokeballFactory.productionLine[3]
+                                    'item': PokeballFactory.productionLine[3],
+                                    'upgrade': PokeballFactory.getUpgrade(PokeballFactory.Upgrades.Masterball_Time)
                                 }
                     }">
                     </tr>
@@ -59,17 +63,25 @@
 
     </td>
 
-    <td class="col-sm-9 vertical-middle">
+    <td class="col-sm-7 vertical-middle">
         <div class="progress">
             <div data-bind="attr: {class: $data.class + ' progress-bar ', style: 'width:' + (($data.totalTime-$data.item.timeLeft)/$data.totalTime * 100) + '%'}">
             </div>
         </div>
     </td>
     <td class="col-sm-1 vertical-middle">
-        <span data-bind="text: GameConstants.formatTime($data.item.timeLeft)"></span>
+        <span data-bind="text: GameConstants.formatTime($data.item.timeLeft) + '/' + GameConstants.formatTime($data.totalTime) "></span>
     </td>
 
-    <td class="col-sm-1 vertical-middle">
-        <span data-bind="text: GameConstants.formatTime($data.item.timeLeft)"></span>
+    <td class='col-sm-1 vertical-middle'
+        data-bind='text: $data.upgrade.isMaxLevel() ? "" : ($data.upgrade.increasing ? "+" : "-") + $data.upgrade.upgradeBonus() + " second(s)"'></td>
+    <td class='col-sm-1 vertical-middle'
+        data-bind='text: $data.upgrade.isMaxLevel() ? "" : $data.upgrade.calculateCost().amount + " money"'></td>
+    <td class='col-sm-1 vertical-middle'>
+        <button class='btn btn-success'
+                data-bind='css: { disabled: !$data.upgrade.canBuy() },
+                                                          text: $data.upgrade.isMaxLevel() ? "Max" : "Upgrade",
+                                                          click: function(){$data.upgrade.buy()}'>
+        </button>
     </td>
 </script>
