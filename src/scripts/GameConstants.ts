@@ -547,6 +547,10 @@ namespace GameConstants {
         Moon_stone,
         Sun_stone,
         Trade_stone,
+        Dragon_scale,
+        Metal_coat,
+        Kings_rock,
+        Upgrade,
         Time_stone,
     }
 
