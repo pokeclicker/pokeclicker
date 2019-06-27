@@ -75,6 +75,10 @@ abstract class Item {
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.name()]));
     }
 
+    imageName(): string {
+        return this.name();
+    }
+
 }
 
 const ItemList: { [name: string]: Item } = {};

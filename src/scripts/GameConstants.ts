@@ -603,9 +603,13 @@ namespace GameConstants {
     }
 
     export enum EggItemType {
-        Fire_egg,
-        Water_egg,
-        Grass_egg,
+        Fire_egg_I,
+        Water_egg_I,
+        Grass_egg_I,
+        Fire_egg_II,
+        Water_egg_II,
+        Grass_egg_II,
+        
         Fighting_egg,
         Electric_egg,
         Dragon_egg,
@@ -619,9 +623,12 @@ namespace GameConstants {
     }
 
     export enum EggType {
-        Fire,
-        Water,
-        Grass,
+        Fire_I,
+        Water_I,
+        Grass_I,
+        Fire_II,
+        Water_II,
+        Grass_II,
         Fighting,
         Electric,
         Dragon,

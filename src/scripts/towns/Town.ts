@@ -87,7 +87,7 @@ const TownList: { [name: string]: Town | PokemonLeague } = {};
 let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp","Dungeon_ticket"]);
 TownList["Pewter City"] = new Town("Pewter City", [2], PewterCityShop);
 
-let CeruleanCityShop = new Shop(["Water_stone", "xAttack", "Water_egg"]);
+let CeruleanCityShop = new Shop(["Water_stone", "xAttack", "Water_egg_I"]);
 TownList["Cerulean City"] = new Town("Cerulean City", [4], CeruleanCityShop, dungeonList["Cerulean Cave"]);
 
 let VermillionCityShop = new Shop(["Thunder_stone", "xExp", "Electric_egg"]);
@@ -102,7 +102,7 @@ TownList["Saffron City"] = new Town("Saffron City", [5], SaffronCityShop);
 let FuchsiaCityShop = new Shop(["Ultraball", "Trade_stone", "xExp", "Dragon_egg"]);
 TownList["Fuchsia City"] = new Town("Fuchsia City", [18], FuchsiaCityShop);
 
-let CinnabarIslandShop = new Shop(["Fire_stone", "Fire_egg", "SmallRestore", "Explorer_kit"]);
+let CinnabarIslandShop = new Shop(["Fire_stone", "Fire_egg_I", "SmallRestore", "Explorer_kit"]);
 TownList["Cinnabar Island"] = new Town("Cinnabar Island", [20], CinnabarIslandShop, dungeonList["Pokemon Mansion"]);
 
 let ViridianCityShop = new Shop(["xAttack", "xClick", "Mystery_egg"]);
@@ -110,7 +110,7 @@ TownList["Viridian City"] = new Town("Viridian City", [1], ViridianCityShop);
 
 TownList["Pallet Town"] = new Town("Pallet Town", []);
 
-let LavenderTownShop = new Shop(["Greatball", "Item_magnet", "Lucky_incense", "Grass_egg"]);
+let LavenderTownShop = new Shop(["Greatball", "Item_magnet", "Lucky_incense", "Grass_egg_I"]);
 TownList["Lavender Town"] = new Town("Lavender Town", [10], LavenderTownShop, dungeonList["Pokemon Tower"]);
 
 //Kanto Dungeons
@@ -126,7 +126,8 @@ TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], GameConstants.
 TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], GameConstants.Badge.Soul);
 
 //Johto Towns
-TownList["New Bark Town"] = new Town("New Bark Town", []);
+let NewBarkTownShop = new Shop(["Grass_egg_II", "Fire_egg_II", "Water_egg_II"]);
+TownList["New Bark Town"] = new Town("New Bark Town", [], NewBarkTownShop);
 
 TownList["Cherrygrove City"] = new Town("Cherrygrove City", [29]);
 

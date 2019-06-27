@@ -21,7 +21,7 @@ class EggItem extends Item {
         if (this.type === GameConstants.EggItemType.Mystery_egg) {
             success = player.gainEgg(BreedingHelper.createRandomEgg());
         } else {
-            let etype = GameConstants.EggType[GameConstants.EggItemType[this.type].split("_")[0]];
+            let etype = GameConstants.EggType[GameConstants.EggItemType[this.type].replace("_egg", "")];
             success = player.gainEgg(BreedingHelper.createTypedEgg(etype));
         }
         
@@ -29,12 +29,20 @@ class EggItem extends Item {
             player.loseItem(this.name(), 1);
         }
     }
+
+    imageName(): string {
+        let parts = this.name().split("_");
+        return parts[0] + "_" + parts[1];   // Get rid of the generation number (e.g. I or II) after "egg"
+    }
 }
 
 
-ItemList['Fire_egg'] = new EggItem(GameConstants.EggItemType.Fire_egg);
-ItemList['Water_egg'] = new EggItem(GameConstants.EggItemType.Water_egg);
-ItemList['Grass_egg'] = new EggItem(GameConstants.EggItemType.Grass_egg);
+ItemList['Fire_egg_I'] = new EggItem(GameConstants.EggItemType.Fire_egg_I);
+ItemList['Water_egg_I'] = new EggItem(GameConstants.EggItemType.Water_egg_I);
+ItemList['Grass_egg_I'] = new EggItem(GameConstants.EggItemType.Grass_egg_I);
+ItemList['Fire_egg_II'] = new EggItem(GameConstants.EggItemType.Fire_egg_II);
+ItemList['Water_egg_II'] = new EggItem(GameConstants.EggItemType.Water_egg_II);
+ItemList['Grass_egg_II'] = new EggItem(GameConstants.EggItemType.Grass_egg_II);
 ItemList['Fighting_egg'] = new EggItem(GameConstants.EggItemType.Fighting_egg);
 ItemList['Electric_egg'] = new EggItem(GameConstants.EggItemType.Electric_egg);
 ItemList['Dragon_egg'] = new EggItem(GameConstants.EggItemType.Dragon_egg);

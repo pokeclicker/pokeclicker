@@ -5,7 +5,7 @@
        <div
                data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
            <img src="" height="36px"
-                data-bind="attr:{ src: '/assets/images/items/' + name() + '.png' }">
+                data-bind="attr:{ src: '/assets/images/items/' + imageName() + '.png' }">
            <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
            <div data-bind="if: $data.isAvailable()">
                 <img src="" class="currencyImage"
