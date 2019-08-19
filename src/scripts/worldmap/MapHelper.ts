@@ -54,6 +54,9 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(town: string): string {
+        if (player.hasKeyItem(town)) {
+            return "city unlockedTown";
+        }
         if (player.currentTown() == town) {
             return "city currentTown";
         }
@@ -74,6 +77,7 @@ class MapHelper {
 
     public static accessToTown(townName: string): boolean {
         let town = TownList[townName];
+        if (!town) return false;
         return town.isUnlocked();
     };
 
