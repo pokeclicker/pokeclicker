@@ -61,7 +61,7 @@ gymList["Pewter City"] = new Gym(
     GameConstants.Badge.Boulder,
     250,
     GameConstants.Badge.None,
-    "I took you for granted, and so I lost. As proof of your victory, I confer on you this...the official Pokémon League BoulderBadge.");
+    "I took you for granted, and so I lost. As proof of your victory, I confer on you this...the official Pokémon League Boulder Badge.");
 
 gymList["Cerulean City"] = new Gym(
     "Misty",
@@ -82,7 +82,7 @@ gymList["Vermillion City"] = new Gym(
     GameConstants.Badge.Thunder,
     1000,
     GameConstants.Badge.Cascade,
-    "Now that's a shocker! You're the real deal, kid! Fine, then, take the ThunderBadge!"
+    "Now that's a shocker! You're the real deal, kid! Fine, then, take the Thunder Badge!"
 );
 gymList["Celadon City"] = new Gym(
     "Erika",
@@ -93,7 +93,7 @@ gymList["Celadon City"] = new Gym(
     GameConstants.Badge.Rainbow,
     1500,
     GameConstants.Badge.Thunder,
-    "Oh! I concede defeat. You are remarkably strong. I must confer on you the RainbowBadge."
+    "Oh! I concede defeat. You are remarkably strong. I must confer on you the Rainbow Badge."
 );
 gymList["Saffron City"] = new Gym(
     "Sabrina",
@@ -105,7 +105,7 @@ gymList["Saffron City"] = new Gym(
     GameConstants.Badge.Marsh,
     2500,
     GameConstants.Badge.Rainbow,
-    "This loss shocks me! But a loss is a loss. I admit I didn't work hard enough to win. You earned the MarshBadge."
+    "This loss shocks me! But a loss is a loss. I admit I didn't work hard enough to win. You earned the Marsh Badge."
 );
 gymList["Fuchsia City"] = new Gym(
     "Koga",
@@ -117,7 +117,7 @@ gymList["Fuchsia City"] = new Gym(
     GameConstants.Badge.Soul,
     3500,
     GameConstants.Badge.Marsh,
-    "Humph! You have proven your worth! Here! Take the SoulBadge!"
+    "Humph! You have proven your worth! Here! Take the Soul Badge!"
 );
 gymList["Cinnabar Island"] = new Gym(
     "Blaine",
@@ -129,7 +129,7 @@ gymList["Cinnabar Island"] = new Gym(
     GameConstants.Badge.Volcano,
     5000,
     GameConstants.Badge.Soul,
-    "I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge."
+    "I have burned down to nothing! Not even ashes remain! You have earned the Volcano Badge."
 );
 gymList["Viridian City"] = new Gym(
     "Giovanni",
@@ -142,7 +142,7 @@ gymList["Viridian City"] = new Gym(
     GameConstants.Badge.Earth,
     6000,
     GameConstants.Badge.Volcano,
-    "Ha! That was a truly intense fight. You have won! As proof, here is the EarthBadge!"
+    "Ha! That was a truly intense fight. You have won! As proof, here is the Earth Badge!"
 );
 gymList["Elite Lorelei"] = new Gym(
     "Lorelei",
@@ -293,7 +293,7 @@ gymList["Blackthorn City"] = new Gym(
     GameConstants.Badge.Rising,
     500,
     GameConstants.Badge.Glacier,
-    "Here, this is the RisingBadge... Hurry up! Take it!"
+    "Here, this is the Rising Badge... Hurry up! Take it!"
 );
 
 //Johto Elite 4
