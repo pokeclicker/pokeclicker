@@ -34,7 +34,7 @@
                                     data-bind="if: (player.alreadyCaughtPokemon($data.name))">
                                     <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                             data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
-                                        <img class="smallImage" data-bind="attr:{src: '/assets/images/' + (player.alreadyCaughtPokemonShiny($data.name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
+                                        <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (player.alreadyCaughtPokemonShiny($data.name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
                                         <span style="float:right; margin-top:8px"
@@ -113,7 +113,7 @@
                              data-bind="foreach: KeyItemHandler.keyItemList">
                             <div class="col-sm-2">
                                 <img class="clickable key-item" src=""
-                                     data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
+                                     data-bind="attr:{ src: 'assets/images/keyitems/' + $data.name() + '.png'},
                               css: {'oak-item-locked': !player.hasKeyItem($data.name())
 
                                     },

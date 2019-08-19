@@ -68,7 +68,7 @@ class PokemonHelper {
     }
 
     public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
-        let src = "/assets/images/";
+        let src = "assets/images/";
         if (shiny) {
             src += "shiny";
         }
@@ -79,7 +79,7 @@ class PokemonHelper {
     public static getPokeballImage(pokemonName: string): string {
         let src = ""
         if (player.alreadyCaughtPokemon(pokemonName)){
-            src = "/assets/images/pokeball/Pokeball-";
+            src = "assets/images/pokeball/Pokeball-";
             if (player.alreadyCaughtPokemonShiny(pokemonName)) {
                 src += "shiny-";
             }

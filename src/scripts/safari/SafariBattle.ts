@@ -50,7 +50,7 @@ class SafariBattle {
             SafariBattle.text("You throw a ball...");
             let enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
-            let p = SafariBattle.dropParticle('<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>', $('#safariPlayer').offset(), enemyImg, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
+            let p = SafariBattle.dropParticle('<div><img id="safariBall" src="assets/images/safari/pokeball.png"></div>', $('#safariPlayer').offset(), enemyImg, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
 
             setTimeout(function() {
                 $('#safariEnemy').addClass('safariCapture');
@@ -118,7 +118,7 @@ class SafariBattle {
             let enemy = $('#safariEnemy').offset();
             enemy.left += 30;
             enemy.top += 70;
-            SafariBattle.dropParticle('<img src="../assets/images/safari/bait.png">', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+            SafariBattle.dropParticle('<img src="assets/images/safari/bait.png">', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
             setTimeout(SafariBattle.enemyTurn, 1500);
         }
     }
@@ -132,9 +132,9 @@ class SafariBattle {
             let enemy = $('#safariEnemy').offset();
             enemy.left += 40;
             enemy.top += 10;
-            SafariBattle.dropParticle('<img src="../assets/images/safari/rock.png">', $('#safariPlayer').offset(), enemy, 0.8, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+            SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariPlayer').offset(), enemy, 0.8, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
             setTimeout(function(){
-                let hitSplash = $('<ptcl>').html("<img src='../assets/images/safari/hit.png'>").children().appendTo('body');
+                let hitSplash = $('<ptcl>').html("<img src='assets/images/safari/hit.png'>").children().appendTo('body');
                 hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
                 hitSplash.fadeOut(400, function(){hitSplash.remove();});
                 setTimeout(function(){
@@ -142,7 +142,7 @@ class SafariBattle {
                         top: enemy.top + 4,
                         left: enemy.left - 20
                     }
-                    let ang = $('<ptcl>').html("<img src='../assets/images/safari/angry.png'>").children().appendTo('body');
+                    let ang = $('<ptcl>').html("<img src='assets/images/safari/angry.png'>").children().appendTo('body');
                     ang.css('position','absolute').css('z-index', 9999);
                     ang.offset(newOffset);
                     ang.addClass('pulse');

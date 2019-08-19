@@ -27,7 +27,7 @@
                             <li class="list-group-item list-group-item-action seed-list-item"
                                 data-bind="click: function() {FarmRunner.curBerry = BerryList[GameConstants.BerryType[$index()]]}">
                                 <img src="" width="24px"
-                                     data-bind="attr:{ src: '/assets/images/items/' + GameConstants.BerryType[$index()] + '.png'}">
+                                     data-bind="attr:{ src: 'assets/images/items/' + GameConstants.BerryType[$index()] + '.png'}">
                                 <span data-bind="text: GameConstants.BerryType[$index()]"></span>
                                 <span class="seedAmount" data-bind="text: player.berryList[$index()]()"></span>
                             </li>
