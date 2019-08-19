@@ -13,7 +13,7 @@ class OakItemRunner {
         OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Poison_Barb, 40, "Clicks do more damage", 25, 5, 3)));
         OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Exp_Share, 50, "Gain more exp from battling", 15, 3, 1)));
 
-        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Sprayduck, 60, "Makes your berries grow faster", 25, 5, 3    )));
+        OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Sprayduck, 60, "Makes your berries grow faster", 25, 5, 3)));
 
         OakItemRunner.oakItemList.push(ko.observable(new OakItem(GameConstants.OakItem.Shiny_Charm, 70, "Encounter more shinies", 50, 100, 150)));
 
