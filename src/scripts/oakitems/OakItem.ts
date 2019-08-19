@@ -36,12 +36,12 @@ class OakItem {
 
     public getNormalizedPlayerExp() {
         let previousExp = GameConstants.OAKITEM_XP_REQUIREMENT[this.level() - 1] || 0;
-        return player.getOakItemExp(this.id) - previousExp;
+        return Math.floor((player.getOakItemExp(this.id) - previousExp) / this.expGain);
     }
 
     public getNormalizedRequiredExp() {
         let previousExp = GameConstants.OAKITEM_XP_REQUIREMENT[this.level() - 1] || 0;
-        return GameConstants.OAKITEM_XP_REQUIREMENT[this.level()] - previousExp;
+        return Math.ceil((GameConstants.OAKITEM_XP_REQUIREMENT[this.level()] - previousExp) / this.expGain);
     }
 
     public use() {
