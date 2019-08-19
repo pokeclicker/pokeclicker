@@ -154,13 +154,17 @@ class Player {
                     return ko.observable(false)
                 });
             }
-            this.currentQuest = ko.observable(savedPlayer.currentQuest);
+
+            this.currentQuests = ko.observableArray(savedPlayer.currentQuests || []);
+            for (let q of this.currentQuests()) {
+                q.initial = ko.observable(q.initial);
+            }
         } else {
             this.questRefreshes = 0;
             this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {
                 return ko.observable(false)
             });
-            this.currentQuest = ko.observable(null);
+            this.currentQuests = ko.observableArray([]);
         }
         this._questXP = ko.observable(savedPlayer._questXP || 0);
         this._questPoints = ko.observable(savedPlayer._questPoints || 0);
@@ -214,7 +218,7 @@ class Player {
     public _questPoints: KnockoutObservable<number>;
     public _questXP: KnockoutObservable<number>;
     public _lastSeen: number;
-    public currentQuest: KnockoutObservable<any>;
+    public currentQuests: KnockoutObservableArray<any>;
     private _shinyCatches: KnockoutObservable<number>;
 
     public plotList: KnockoutObservable<Plot>[];
@@ -969,7 +973,7 @@ class Player {
             "_questXP",
             "_questPoints",
             "_lastSeen",
-            "currentQuest",
+            "currentQuests",
             "_shinyCatches",
             "gymDefeats",
             "statistics",

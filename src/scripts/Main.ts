@@ -143,7 +143,7 @@ class Game {
             let now = new Date();
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
                 player.questRefreshes = 0;
-                QuestHelper.quitQuest();
+                QuestHelper.quitAllQuests();
                 QuestHelper.clearQuests();
                 QuestHelper.generateQuests(player.questLevel, player.questRefreshes, now);
                 DailyDeal.generateDeals(Underground.getDailyDealsMax(), now);
@@ -183,7 +183,7 @@ class Game {
         Underground.energyTick(Underground.getEnergyRegenTime());
         DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
         QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
-        QuestHelper.loadCurrentQuest(player.currentQuest());
+        QuestHelper.loadCurrentQuests(player.currentQuests);
         if (!player.tutorialComplete()) {
             QuestLineHelper.createTutorial();
             QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
