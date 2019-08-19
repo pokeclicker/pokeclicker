@@ -16,7 +16,7 @@
                          <div data-bind="if: $data.isAvailable()">
                               <img src="" class="currencyImage"
                                       data-bind="attr:{ src: '/assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
-                              <span data-bind="text: totalPrice">Price</span>
+                              <span data-bind="text: totalPrice(ShopHandler.amount())">Price</span>
                           </div>
                           <div data-bind="ifnot: $data.isAvailable()">
                               <span>Sold Out</span>
