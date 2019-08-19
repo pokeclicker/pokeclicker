@@ -50,12 +50,6 @@ const dests = {
     githubPages: 'docs/'
 };
 
-gulp.task('cname', () => {
-    const str = "www.pokeclicker.com";
-    return file('CNAME', str, {src: true})
-        .pipe(gulp.dest('docs/'));
-});
-
 gulp.task('copy', () => gulp.src(srcs.libs)
     .pipe(gulp.dest(dests.libs))
     .pipe(browserSync.reload({stream: true})));
@@ -138,7 +132,7 @@ gulp.task('copyWebsite', () => {
 gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles', 'full-changelog']);
 
 gulp.task('website', done => {
-    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', () => done());
+    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', () => done());
 });
 
 gulp.task('default', done => {
