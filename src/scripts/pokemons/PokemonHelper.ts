@@ -7,7 +7,9 @@ class PokemonHelper {
 
         return pokemonList.filter(function (pokemon) {
             if (pokemon["evoLevel"] !== undefined && ("" + pokemon["evoLevel"]).indexOf(evoType) !== -1) {
-                return true;
+                let index = ("" + pokemon["evoLevel"]).split(", ").indexOf(evoType);
+                let evolution = pokemon["evolution"].split(", ")[index];
+                return player.highestRegion >= PokemonHelper.calcNativeRegion(evolution);
             }
         });
     }
@@ -66,7 +68,7 @@ class PokemonHelper {
     }
 
     public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
-        let src = "/assets/images/";
+        let src = "assets/images/";
         if (shiny) {
             src += "shiny";
         }
@@ -77,7 +79,7 @@ class PokemonHelper {
     public static getPokeballImage(pokemonName: string): string {
         let src = ""
         if (player.alreadyCaughtPokemon(pokemonName)){
-            src = "/assets/images/pokeball/Pokeball-";
+            src = "assets/images/pokeball/Pokeball-";
             if (player.alreadyCaughtPokemonShiny(pokemonName)) {
                 src += "shiny-";
             }

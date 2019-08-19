@@ -1,58 +1,66 @@
 <div class="page-item" id="questDisplayContainer"
 style="background-color: white; min-height: 100px">
-    <br>
-    <button style="vertical-align: middle;" class='btn btn-primary'
-            data-bind='visible: (player.tutorialProgress() == 6) && !player.currentQuest(),
-                                   text: "New Quest",
-                                   click: function(){$("#QuestModal").modal("show")}'>
-    </button>
-    <div data-bind='if: (player.tutorialProgress() == 6) && player.currentQuest()'>
-        <p data-bind='text: QuestHelper.questList()[player.currentQuest().index].description'></p>
-        <div class="row justify-content-center">
-            <div class="col-10">
-                <div class="progress"
-                     data-bind='tooltip: {title: ko.pureComputed(function(){return QuestHelper.questList()[player.currentQuest().index].progressText()}), trigger: "hover"}'>
-                    <div class="progress-bar bg-success" role="progressbar"
-                         data-bind="attr:{ style: 'width:' + (QuestHelper.questList()[player.currentQuest().index].progress() * 100) + '%' }"
-                         aria-valuemin="0" aria-valuemax="100">
-                    </div>
-                </div>
-                <div>
-                                <span data-bind='if: QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
-                                    <button class='btn btn-sm btn-success'
-                                            data-bind='click: function(){QuestHelper.questList()[player.currentQuest().index].claimReward()}'>
-                                        Claim
-                                    </button>
-                                </span>
-                    <span>
-                                    <button class='btn btn-sm btn-primary' style="margin:5px"
-                                            data-bind='click: function(){$("#QuestModal").modal("show")}'>
-                                        Questlist
-                                    </button>
-                                </span>
-                    <span data-bind='if: !QuestHelper.questList()[player.currentQuest().index].isCompleted()'>
-                                    <button class='btn btn-sm btn-danger' style="margin:5px"
-                                            data-bind='click: function(){QuestHelper.quitQuest()}'>
-                                        Quit
-                                    </button>
-                                </span>
 
-                </div>
-            </div>
+    <!-- Quests header -->
+    <h6 style="display:inline">
+        <span class='' data-bind='text: !player.tutorialComplete() ? "Tutorial Quest" : "Quests (" + player.currentQuests().length + "/" + QuestHelper.questSlots()() + ")"'>
+        </span>
+    </h6>
+    <button class='btn btn-sm btn-primary' style="margin:5px"
+            data-bind='visible: player.tutorialComplete(), click: function(){$("#QuestModal").modal("show")}'>
+        Quest List
+    </button>
+
+    <!-- List of quests -->
+    <div data-bind="foreach: player.currentQuests">
+        <div class="card border-bottom-0">
+            <table>
+                <tr class="text-center">
+                    <td colspan="2" data-bind="text: QuestHelper.questList()[$data.index].description"></td>
+                </tr>
+                <tr>
+                    <td class="p-2">
+                        <div class="progress p-0">
+                            <div class="progress-bar bg-success" role="progressbar"
+                                data-bind="attr:{ style: 'width:' + (QuestHelper.questList()[$data.index].progress() * 100) + '%'}"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <span data-bind="text: QuestHelper.questList()[$data.index].progressText">0/1000</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td width="30%" class="p-2">
+                        <button class="btn btn-sm btn-block p-0"
+                                data-bind='
+                                    click: function(){QuestHelper.questList()[$data.index].endQuest();},
+                                    text: QuestHelper.questList()[$data.index].isCompleted() ? "Claim" : "Quit",
+                                    css: {
+                                      "btn-success": QuestHelper.questList()[$data.index].isCompleted(),
+                                      "btn-danger": !QuestHelper.questList()[$data.index].isCompleted(),
+                                    }'>
+                        </button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
     <div data-bind='if: (!player.tutorialComplete()) && (QuestLineHelper.tutorial.totalQuests > 0) && (QuestLineHelper.tutorial.curQuest() < QuestLineHelper.tutorial.totalQuests)'>
-        <p data-bind='text: QuestLineHelper.tutorial.curQuestObject().description'></p>
-        <div class="row justify-content-center">
-            <div class="col-10">
-                <div class="progress"
-                     data-bind='tooltip: {title: ko.pureComputed(function(){return QuestLineHelper.tutorial.curQuestObject().progressText()}), trigger: "hover"}'>
-                    <div class="progress-bar bg-success" role="progressbar"
-                         data-bind="attr:{ style: 'width:' + (QuestLineHelper.tutorial.curQuestObject().progress() * 100) + '%' }"
-                         aria-valuemin="0" aria-valuemax="100">
-                    </div>
-                </div>
-            </div>
+        <div class="card border-bottom-0">
+            <table>
+                <tr class="text-center">
+                    <td data-bind="text: QuestLineHelper.tutorial.curQuestObject().description"></td>
+                </tr>
+                <tr>
+                    <td class="p-2">
+                        <div class="progress p-0">
+                            <div class="progress-bar bg-success" role="progressbar"
+                                data-bind="attr:{ style: 'width:' + (QuestLineHelper.tutorial.curQuestObject().progress() * 100) + '%'}"
+                                aria-valuemin="0" aria-valuemax="100">
+                                <span data-bind="text: ko.pureComputed(function(){return QuestLineHelper.tutorial.curQuestObject().progressText()})">0/1000</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>

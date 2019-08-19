@@ -130,27 +130,30 @@ TownList["New Bark Town"] = new Town("New Bark Town", []);
 
 TownList["Cherrygrove City"] = new Town("Cherrygrove City", [29]);
 
-let VioletCityShop = new Shop(["MediumRestore"]);
+let VioletCityShop = new Shop(["MediumRestore", "Togepi"]);
 TownList["Violet City"] = new Town("Violet City", [31], VioletCityShop, dungeonList["Sprout Tower"]);
 
-TownList["Azalea Town"] = new Town("Azalea Town", [33], null, dungeonList["Slowpoke Well"]);
+let AzaleaTownShop = new Shop(["Kings_rock"]);
+TownList["Azalea Town"] = new Town("Azalea Town", [33], AzaleaTownShop, dungeonList["Slowpoke Well"]);
 
-let GoldenrodCityShop = new Shop(["Sun_stone"]);
+let GoldenrodCityShop = new Shop(["Sun_stone", "Upgrade"]);
 TownList["Goldenrod City"] = new Town("Goldenrod City", [34], GoldenrodCityShop);
 
 TownList["Ecruteak City"] = new Town("Ecruteak City", [37]);
 
-TownList["Olivine City"] = new Town("Olivine City", [39]);
+let OlivineCityShop = new Shop(["Metal_coat"]);
+TownList["Olivine City"] = new Town("Olivine City", [39], OlivineCityShop);
 
 TownList["Cianwood City"] = new Town("Cianwood City", [41]);
 
 TownList["Mahogany Town"] = new Town("Mahogany Town", [42], null, null, "Mt Mortar");
 
-let BlackthornCityShop = new Shop(["LargeRestore"]);
+let BlackthornCityShop = new Shop(["LargeRestore", "Dragon_scale"]);
 TownList["Blackthorn City"] = new Town("Blackthorn City", [44], BlackthornCityShop, null, "Ice Path");
 
 //Johto Dungeons
 TownList["Sprout Tower"] = new DungeonTown("Sprout Tower", [31]);
+TownList["Ruins of Alph"] = new DungeonTown("Ruins of Alph", [32]);
 TownList["Union Cave"] = new DungeonTown("Union Cave", [32]);
 TownList["Slowpoke Well"] = new DungeonTown("Slowpoke Well", [33]);
 TownList["Ilex Forest"] = new DungeonTown("Ilex Forest", [33]);

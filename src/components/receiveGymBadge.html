@@ -5,7 +5,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        <div class="modal-header">
            <div style="width: 100%;">
                <img src=""
-                    data-bind="attr:{ src: '/assets/images/gymLeaders/' + GymRunner.gymObservable().leaderName + '.png'}">
+                    data-bind="attr:{ src: 'assets/images/gymLeaders/' + GymRunner.gymObservable().leaderName + '.png'}">
                <h5 class="modal-title" id="receiveBadgeModalLabel"
                    data-bind="text: GymRunner.gymObservable().leaderName">Modal title</h5>
 
@@ -14,7 +14,7 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        <div class="modal-body">
            <p data-bind="text: GymRunner.gymObservable().defeatMessage"></p>
            <img src="" width="56px"
-                data-bind="attr:{ src: '/assets/images/badges/' + GymRunner.gymObservable().leaderName + '.png'}">
+                data-bind="attr:{ src: 'assets/images/badges/' + GymRunner.gymObservable().leaderName + '.png'}">
 
        </div>
        <div data-bind="if: !(GymRunner.gymObservable() instanceof Champion)">

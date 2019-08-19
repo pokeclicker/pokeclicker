@@ -5,6 +5,7 @@
 
 const pokemonMap: { [name: string]: any } = {};
 const pokemonMapId: { [id: number]: any } = {};
+const pokemonDevolutionMap: {[name: string]: string} = {};
 
 /**
  * Datalist that contains all Pokémon data
@@ -830,8 +831,8 @@ const pokemonList = [
         "id": 61,
         "name": "Poliwhirl",
         "catchRate": 120,
-        "evolution": "Poliwrath",
-        "evoLevel": "Water_stone",
+        "evolution": "Poliwrath, Politoed",
+        "evoLevel": "Water_stone, Kings_rock",
         "type": [
             "Water"
         ],
@@ -1298,7 +1299,7 @@ const pokemonList = [
         "name": "Onix",
         "catchRate": 45,
         "evolution" : "Steelix",
-        "evoLevel" : "Metal Coat",
+        "evoLevel" : "Metal_coat",
         "type": [
             "Rock",
             "Ground"
@@ -1587,7 +1588,7 @@ const pokemonList = [
         "name": "Seadra",
         "catchRate": 75,
         "evolution" : "Kingdra",
-        "evoLevel" : "Dragon Scale",
+        "evoLevel" : "Dragon_scale",
         "type": [
             "Water"
         ],
@@ -1667,7 +1668,7 @@ const pokemonList = [
         "name": "Scyther",
         "catchRate": 45,
         "evolution": "Scizor",
-        "evoLevel": "Metal Coat",
+        "evoLevel": "Metal_coat",
         "type": [
             "Bug",
             "Flying"
@@ -1845,7 +1846,7 @@ const pokemonList = [
         "name": "Porygon",
         "catchRate": 45,
         "evolution": "Porygon2",
-        "evoLevel" : "Up-Grade",
+        "evoLevel" : "Upgrade",
         "type": [
             "Normal"
         ],
@@ -3369,4 +3370,7 @@ for (let i = 0; i < pokemonList.length; i++) {
     let p = pokemonList[i];
     pokemonMap[p["name"]] = p;
     pokemonMapId[i + 1] = p;
+    if (p.hasOwnProperty("evolution")) {
+        p["evolution"].split(", ").forEach(x => {pokemonDevolutionMap[x] = p["name"]});        
+    }
 }

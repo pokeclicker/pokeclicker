@@ -144,6 +144,14 @@ dungeonList["Sprout Tower"] = new Dungeon("Sprout Tower",
     2500, GameConstants.Badge.Champion, 31, 5
 );
 
+dungeonList["Ruins of Alph"] = new Dungeon("Ruins of Alph",
+    ["Natu", "Wooper", "Quagsire", "Smeargle", "Magikarp", "Poliwag", "Poliwhirl"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    600,
+    [new DungeonBossPokemon("Unown", 3000, 14)],
+    3000, GameConstants.Badge.Zephyr, 32, 7
+);
+
 dungeonList["Union Cave"] = new Dungeon("Union Cave",
     ["Rattata", "Sandshrew", "Zubat", "Geodude", "Onix", "Goldeen", "Magikarp"],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],

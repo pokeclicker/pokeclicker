@@ -42,43 +42,7 @@ namespace GameConstants {
     export const ITEM_PRICE_MULTIPLIER = 1.01;
     export const ITEM_PRICE_DEDUCT = 1.008;
 
-    //Underground
-    export const Mine = {
-        "sizeY": 12,
-        "sizeX": 25
-    }
 
-    export const HAMMER_ENERGY = 3;
-    export const CHISEL_ENERGY = 1;
-
-    export const MaxUpgrades = {
-        "maxMineEnergy": 10,
-        "maxUndergroundItems": 7,
-        "mineEnergyGain": 17,
-        "mineEnergyRegenTime": 20,
-        "maxDailyDeals": 2
-    };
-
-    export const MineUpgradesInitialValues = {
-        "maxMineEnergy": 50,
-        "maxUndergroundItems": 3,
-        "mineEnergyGain": 3,
-        "mineEnergyRegenTime": 60,
-        "maxDailyDeals": 3
-    };
-
-    export enum MineTool {
-        "Chisel" = 0,
-        "Hammer" = 1,
-    }
-
-    export const EvoStones = [
-        "Fire Stone",
-        "Water Stone",
-        "Thunder Stone",
-        "Leaf Stone",
-        "Moon Stone"
-    ];
 
     export const PLATE_VALUE = 25;
 
@@ -162,6 +126,8 @@ namespace GameConstants {
     }
     
     export const SAFARI_BATTLE_CHANCE = 5;
+
+    export const SAFARI_BASE_POKEBALL_COUNT = 30;
 
     export const LEGAL_WALK_BLOCKS = [
         0,
@@ -256,6 +222,7 @@ namespace GameConstants {
         money,
         questPoint,
         dungeontoken,
+        diamond,
     }
 
     export enum TypeEffectiveness {
@@ -562,6 +529,7 @@ namespace GameConstants {
         "Jynx": 2500,
         "Mr_Mime": 1500,
         "Lickitung": 1000,
+        "Togepi": 2500,
 
         // TODO: Set prices for different kinds of eggs and stones
         "Egg": 1000,
@@ -578,7 +546,11 @@ namespace GameConstants {
         Leaf_stone,
         Moon_stone,
         Sun_stone,
-        Trade_stone
+        Trade_stone,
+        Dragon_scale,
+        Metal_coat,
+        Kings_rock,
+        Upgrade,
     }
 
     export enum BattleItemType {
@@ -595,7 +567,8 @@ namespace GameConstants {
         "Porygon",
         "Jynx",
         "Mr_Mime",
-        "Lickitung"
+        "Lickitung",
+        "Togepi",
     }
 
     export enum BerryType {
@@ -736,6 +709,7 @@ namespace GameConstants {
 
     export const JohtoDungeons = [
         "Sprout Tower",
+        "Ruins of Alph",
         "Union Cave",
         "Slowpoke Well",
         "Ilex Forest",
