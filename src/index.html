@@ -337,9 +337,6 @@
 
                 <!--GymView-->
                 @import "gymView.html"
-
-                <!--ShopView-->
-                @import "shopView.html"
             </div>
 
             <div data-bind="if: Game.gameState() === GameConstants.GameState.dungeon">
@@ -639,6 +636,9 @@
 
     </div>
 </div>
+
+<!--ShopModal-->
+@import "shopModal.html"
 
 <!-- Receive gym badge Modal -->
 @import "receiveGymBadge.html"
