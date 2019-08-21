@@ -289,7 +289,7 @@ class Safari {
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    $('#safariModal').on('hide.bs.modal', function () {
+    $('#safariModal').on('hidden.bs.modal', function () {
         MapHelper.moveToTown("Fuchsia City");
     });
 

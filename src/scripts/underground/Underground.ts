@@ -234,7 +234,7 @@ $(document).ready(function () {
         Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
     });
 
-    $('#mineModal').on('hide.bs.modal', function () {
+    $('#mineModal').on('hidden.bs.modal', function () {
         if (player.route() == 11) {
             Game.gameState(GameConstants.GameState.fighting);
         } else {
