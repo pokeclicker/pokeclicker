@@ -61,10 +61,11 @@
     "@types/bootstrap": "^3.3.37",
     "@types/bootstrap-notify": "^3.1.33",
     "@types/knockout": "^3.4.51",
-    "bootstrap": "4.0.0-alpha.6",
+    "bootstrap": "^4.3.1",
     "glob": "^7.1.2",
     "jquery": "^3.3.1",
     "knockout": "^3.4.2",
+    "popper.js": "^1.15.0",
     "tether": "^1.4.3"
   }
 }
