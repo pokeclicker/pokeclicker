@@ -159,7 +159,7 @@ body:hover {
   }
 
   td:first-child {
-    width: 60%;
+    min-width: 60%;
     text-align: left;
   }
   th:first-child {
@@ -167,7 +167,7 @@ body:hover {
   }
   th {
     text-align: center;
-    padding: 0 @tablePaddingWidth;
+    //padding: 0 @tablePaddingWidth;
     vertical-align: middle;
   }
 }
@@ -260,4 +260,28 @@ img {
 
 #enemy {
   min-height: 96px;
+}
+
+#routeBattleView span {
+  line-height: 1.5;
+}
+
+*::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 0px;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar
+{
+	width: 8px;
+	background-color: #F5F5F5;
+}
+
+*::-webkit-scrollbar-thumb
+{
+	border-radius: 8px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #555;
 }
