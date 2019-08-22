@@ -26,41 +26,30 @@
                </li>
            </ul>
        </div>
-       <ul class="nav flex-sm-column featureList">
-           <li class="nav-item" data-bind="if:player.town().gym">
-               <button data-bind="attr: { class: Gym.calculateCssClass(player.town().gym()) }"
-                       onclick="GymRunner.startGym(player.town().gym())">
-                   Gym
-               </button>
-           </li>
-           <li class="nav-item" data-bind="visible:player.town().shop">
-               <a class="btn btn-secondary" href="#shopModal" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
-           </li>
-           <li class="nav-item" data-bind="if:MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
-               <button class="btn btn-secondary"
-                       onclick="MapHelper.travelToNextRegion()">Go To Next Region
-               </button>
-           </li>
-           <div data-bind="if:player.town().dungeon()">
-               <li class="nav-item" data-bind="if: player.town() instanceof DungeonTown">
-                   <button class="btn btn-secondary"
-                           onclick="DungeonRunner.initializeDungeon(player.town().dungeon())">
-                       Start<br>
-                       <span data-bind="text: player.town().dungeon().tokenCost"></span>
-                       tokens
-                   </button>
-               </li>
-
-               <li class="nav-item"
-                   data-bind="if:(!(player.town() instanceof DungeonTown) && player.town() instanceof Town)">
-                   <button class="btn btn-secondary"
-                           onclick="MapHelper.moveToTown(player.town().dungeon().name())">
-                       <span data-bind="text: player.town().dungeon().name()"></span>
-                   </button>
-               </li>
-
-           </div>
-       </ul>
+       <div class="list-group">
+           <button data-bind="visible: player.town().gym, attr: { class: player.town().gym() ? Gym.calculateCssClass(player.town().gym()) : '' }"
+                   onclick="GymRunner.startGym(player.town().gym())">
+               Gym
+           </button>
+           <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
+           <button class="btn btn-secondary"
+                   onclick="MapHelper.travelToNextRegion()"
+                   data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
+                 Go To Next Region
+           </button>
+           <button class="btn btn-secondary"
+                   onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
+                   data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon()">
+               Start<br/>
+               <span data-bind="text: player.town().dungeon().tokenCost"></span>
+               tokens
+           </button>
+           <button class="btn btn-secondary"
+                   onclick="MapHelper.moveToTown(player.town().dungeon().name())"
+                   data-bind="visible: player.town().dungeon() && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon()">
+               <span data-bind="text: player.town().dungeon().name()"></span>
+           </button>
+       </div>
    </div>
    <div class="col-7 no-gutters">
        <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
