@@ -14,14 +14,14 @@
                 <div data-bind="if: $data !== null">
                     <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
 
-                    <div class="progress" data-bind='if: progress() < 100'>
+                    <div class="progress" data-bind='visible: progress() < 100'>
                         <div class="progress-bar bg-success" role="progressbar"
                              data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
                              aria-valuemin="0" aria-valuemax="100">
 							 <span data-bind="text: Math.floor($data.progress()) + '%'"></span>
                         </div>
                     </div>
-                    <div class="progress" data-bind='if: progress() >= 100'>
+                    <div class="progress" data-bind='visible: progress() >= 100'>
                         <div class="progress-bar bg-blue" role="progressbar"
                         data-bind="attr:{ style: 'width: 100%; cursor: pointer;' }, click: function(){BreedingHelper.hatchPokemonEgg($index())}, text: 'Hatch!'"
                         aria-valuemin="0" aria-valuemax="100">
