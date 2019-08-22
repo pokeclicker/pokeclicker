@@ -12,12 +12,12 @@
             </ul>
             <div class="tab-content">
                 <div id="items" class="tab-pane fade">
+                    <h3 data-bind="text: ItemHandler.stoneSelected().replace(/_/g,' ')"></h3>
                     <div class="page-item m-0" style="background-color: white;">
-
                         <div class="row no-gutters justify-content-sm-center" style="padding:15px;">
                             <div class="row col-lg-6 col-sm-11" data-bind="foreach: Array.from(Array(Object.keys(GameConstants.StoneType).length / 2).keys()).map(x=>GameConstants.StoneType[x])">
                                 <div class="col" style="cursor: pointer"
-                                        data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data}, 
+                                        data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
                                     <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}">
                                     <div data-bind="text: player._itemList[$data]()"></div>
@@ -56,41 +56,29 @@
                         </div>
 
 
-                        <div class="row no-gutters justify-content-sm-center">
-                            <div class="row justify-content-center" style="padding:15px;">
-                                <div class="col">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(1)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1}">
-                                        <span>1</span>
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(10)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 10}">
-                                        <span>10</span>
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(100)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 100}">
-                                        <span>100</span>
-                                    </button>
-                                </div>
-                                <div class="col" style="text-align: center">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(1000)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1000}">
-                                        <span>1000</span>
-                                    </button>
-                                </div>
-                                <div class="col" style="text-align: center">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(Infinity)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === Infinity}">
-                                        <span>All</span>
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="btn-group" style="padding:15px;">
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(1)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1}">
+                                1
+                            </button>
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(10)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 10}">
+                                10
+                            </button>
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(100)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 100}">
+                                100
+                            </button>
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(1000)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1000}">
+                                1000
+                            </button>
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(Infinity)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === Infinity}">
+                                Maximum
+                            </button>
                         </div>
-                        <p><b>Evolution stone usage stops when a shiny evolution is encountered</b></p>
+                        <p><i>Stops using evolution stones once a shiny is encountered</i></p>
                         <div class="row no-gutters justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
