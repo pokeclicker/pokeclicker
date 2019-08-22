@@ -34,19 +34,15 @@ style="cursor:default" tabindex="-1">
                    </div>
                    <br/>
                    <div class='row' style="text-align:center;">
-                       <div class='progress'>
+                       <div class='progress' style="height: 20px;font-size: 18px;">
                            <div id='mineEnergyBar' class='progress-bar' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
                                 data-bind="style: { width: Math.floor(Underground.energy/Underground.getMaxEnergy()*100) + '%' }">
+                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + '/' + Underground.getMaxEnergy() + ' (' + Underground.energyTick() + 's)'"></span>
                            </div>
                        </div>
-                       <span id='energyDisplay'>
-                           Energy: <span data-bind='text: Math.floor(Underground.energy)'></span>/<span
-                               data-bind='text: Underground.getMaxEnergy()'></span>
-                           (next: <span data-bind='text: Underground.energyTick'></span>s)
-                       </span>
                    </div>
-                   <div id="mineBody"></div>
+                   <div id="mineBody" style="margin:auto"></div>
                </div>
            </div>
            <div id="treasures" class="tab-pane fade">
