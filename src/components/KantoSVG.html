@@ -485,19 +485,23 @@
     <rect class="city" data-town="Pokemon Day Care"
           fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
           height="12.6" stroke="#6c8ebf" width="12.6" x="345" y="110.7"
-          data-bind="click:function(){BreedingHelper.openBreedingModal()}"></rect>
+          data-bind="click:function(){BreedingHelper.openBreedingModal()},
+          attr: { class: MapHelper.calculateTownCssClass('Mystery egg') }"></rect>
      <rect class="city" data-town="Safari Zone"
           fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
           height="12.6" stroke="#6c8ebf" width="12.6" x="292" y="300.7"
-          data-bind="click:function(){Safari.openModal()}"></rect>
+          data-bind="click:function(){Safari.openModal()},
+          attr: { class: MapHelper.calculateTownCssClass('Safari ticket') }"></rect>
     <rect class="city" data-town="Underground Entrance"
           fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
           height="12.6" stroke="#6c8ebf" width="12.6" x="380" y="240.7"
-          data-bind="click:function(){Underground.openUndergroundModal()}"></rect>
+          data-bind="click:function(){Underground.openUndergroundModal()},
+          attr: { class: MapHelper.calculateTownCssClass('Explorer kit') }"></rect>
     <rect class="city" data-town="Farm"
           fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
           height="12.6" stroke="#6c8ebf" width="12.6" x="373" y="293.7"
-          data-bind="click:function(){FarmRunner.openFarmModal()}"></rect>
+          data-bind="click:function(){FarmRunner.openFarmModal()},
+          attr: { class: MapHelper.calculateTownCssClass('Wailmer pail') }"></rect>
     <rect class="city" data-town="Dock"
           fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
           height="12.6" stroke="#6c8ebf" width="12.6" x="325" y="240"

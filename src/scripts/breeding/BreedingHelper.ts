@@ -144,7 +144,7 @@ HatchList[GameConstants.EggType.Dragon] = ["Dratini", "Dragonair", "Dragonite"];
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    $('#breedingModal').on('hide.bs.modal', function () {
+    $('#breedingModal').on('hidden.bs.modal', function () {
         if (player.route() == 5) {
             Game.gameState(GameConstants.GameState.fighting);
         } else {

@@ -9,7 +9,7 @@
                 <img class="smallImage"
                      data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
                      src=""/>
-                <span data-bind="text: name">Name</span>
+                <span data-bind="text: name">Name</span><sup data-bind="visible: player.alreadyCaughtPokemonShiny(name)">✨</sup>
             </td>
             <td data-bind="text: attack">Atk</td>
             <td data-bind="text: levelObservable">Lvl</td>
