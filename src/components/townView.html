@@ -1,15 +1,5 @@
 <div id="townView" data-bind="if: Game.gameState() === GameConstants.GameState.town"
      class="justify-content-center no-gutters no-select">
-
-<div data-bind="if:player.town().dungeon()">
-</div>
-
-<div data-bind="ifnot:player.town().dungeon()">
-   <img style="float:right;margin-right:10px;margin-top:10px;"
-        data-bind="tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'right' }"
-        src="assets/images/questionmark.png">
-</div>
-
 <div class="row justify-content-center no-gutters" style="min-height: 100px;">
    <div class="col no-gutters">
        <div data-bind="if: player.town() instanceof PokemonLeague">
@@ -56,7 +46,10 @@
        <img class="townImage no-select" src=""
             data-bind="attr:{ src: 'assets/images/towns/' + player.town().name() + '.png' }"/>
    </div>
-   <div class="col no-gutters"></div>
+   <div class="col no-gutters">
+       <button type="button" class="btn btn-outline-info" style="float: right;"
+       data-bind="visible: player.town().gym() || player.town().shop(), tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
+   </div>
 
 </div>
 <div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
