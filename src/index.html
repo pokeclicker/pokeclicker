@@ -461,29 +461,27 @@
                 </div>
             </div>
 
-            <div data-bind="if: Game.gameState() === GameConstants.GameState.dungeon">
-                <div class="page-item no-select" style="background-color: white">
-                    <div class="dungeon">
-                        <div class="card">
-                            <span data-bind="text: DungeonRunner.dungeon.name()"></span>
-                        </div>
-                        <div class="row justify-content-sm-center">
-                            <div class="dungeon-board"
-                                 data-bind="foreach: DungeonRunner.map.board()">
-                                <div class="row" data-bind="foreach: $data">
-                                    <div data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <!-- ko if: Game.gameState() === GameConstants.GameState.dungeon -->
+            <div class="card border-secondary mb-3 dungeon no-select">
+                <div class="card-header p-0">
+                    <span data-bind="text: DungeonRunner.dungeon.name()"></span>
+                </div>
+                <div class="card-body p-0 text-center">
+                    <table class="dungeon-board" style="width:70%;margin:auto;">
+                      <tbody data-bind="foreach: DungeonRunner.map.board()">
+                        <tr data-bind="foreach: $data">
+                            <td data-bind=" click: function(){DungeonRunner.map.moveToCoordinates($context.$index(), $parentContext.$index()) }, attr: { class: $data.cssClass}"></td>
+                        </tr>
+                      </tbody>
+                    </table>
                 </div>
             </div>
+            <!-- /ko -->
 
             <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
                 <div data-bind="if: (Game.gameState() === GameConstants.GameState.fighting || Game.gameState() === GameConstants.GameState.gym || Game.gameState() === GameConstants.GameState.town||
                     Game.gameState() === GameConstants.GameState.shop || Game.gameState() === GameConstants.GameState.farm)">
-                    <p id="mapTooltip" style="visibility: hidden;"></p>
+                    <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                     <div class="page-item no-select">
                         <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
                             <defs>
