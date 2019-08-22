@@ -25,7 +25,7 @@
 
             </div>
             <div class="modal-body">
-                <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;">
+                <div class="modal-body" id="treasuresBody" style="margin: auto;">
                     <div>
                         <table class='table table-hover'>
                             <thead>
@@ -41,7 +41,7 @@
                                 <td class="align-middle" style="text-align:left"><img src="assets/images/currency/questPoint.png"><span
                                         data-bind='text: " " + pointsReward'></span></td>
                                 <td class="align-middle">
-                                    <button class='btn btn-primary btn-sm' 
+                                    <button class='btn btn-primary btn-sm'
                                         data-bind='visible: QuestHelper.canStartNewQuest() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
                                         click: function(){
                                             QuestHelper.beginQuest($data.index);
