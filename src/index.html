@@ -5,7 +5,7 @@
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
         <tr data-bind='ifnot: $data.breeding()'>
-            <td>
+            <td class="text-nowrap">
                 <img class="smallImage"
                      data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
                      src=""/>
@@ -135,7 +135,7 @@
                                 <td>#</td>
                                 <td>New</td>
                                 <td><img
-                                        data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon', trigger: 'hover', placement:'right' }"
+                                        data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon (including unobtained shiny Pokémon)', trigger: 'hover', placement:'right' }"
                                         src="assets/images/questionmark.png"></td>
                             </tr>
                             </thead>
@@ -261,19 +261,19 @@
                                 <td width="33.33%">
                                     <span style="display: inline;">
                                         <img title="Money" src="assets/images/currency/money.png">
-                                        <span id="playerMoney" data-bind="text: player.money">0</span>
+                                        <span id="playerMoney" data-bind="text: player.money.toLocaleString('en-US')">0</span>
                                     </span>
                                 </td>
                                 <td width="33.33%">
                                     <span style="display: inline;">
                                         <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon" src="assets/images/currency/dungeonToken.png">
-                                        <span id="playerMoneyDungeon" data-bind="text: player.dungeonTokens">0</span>
+                                        <span id="playerMoneyDungeon" data-bind="text: player.dungeonTokens().toLocaleString('en-US')">0</span>
                                     </span>
                                 </td>
                                 <td width="33.33%">
                                     <span style="display: inline;">
                                         <img title="Quest points" src="assets/images/currency/questPoint.png">
-                                        <span id="playerMoneyQuest" data-bind="text: player.questPoints">0</span>
+                                        <span id="playerMoneyQuest" data-bind="text: player.questPoints.toLocaleString('en-US')">0</span>
                                     </span>
                                 </td>
                             </tr>
