@@ -29,10 +29,10 @@
            </button>
            <button class="btn btn-secondary"
                    onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
-                   data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon()">
+                   data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon(), attr: {class: player.town().dungeon() && player.dungeonTokens() >= player.town().dungeon().tokenCost ? 'btn btn-success' : 'btn btn-secondary'}">
                Start<br/>
-               <span data-bind="text: player.town().dungeon().tokenCost"></span>
-               tokens
+               <img title="Dungeon Tokens" src="assets/images/currency/dungeonToken.png" height="20px">
+               <span data-bind="text: player.town().dungeon().tokenCost.toLocaleString('en-US')"></span>
            </button>
            <button class="btn btn-secondary"
                    onclick="MapHelper.moveToTown(player.town().dungeon().name())"
@@ -59,7 +59,8 @@
            data-bind="foreach: player.town().dungeon().allPokemonNames">
            <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
                <img class="dungeon-pokemon-preview" src=""
-                    data-bind="attr:{ src: 'assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                    data-bind="attr:{ src: 'assets/images/' + (player.alreadyCaughtPokemonShiny($data) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png' }"/>
+               <sup style="float:right; top:10px;" data-bind="visible: player.alreadyCaughtPokemonShiny($data)">✨</sup>
            </li>
            <li class="list-inline-item"
                data-bind="ifnot: player.alreadyCaughtPokemon($data)">
