@@ -15,10 +15,27 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                Hatched pokémon have a higher chance of becoming shiny!
            </p>
            <div data-bind="if: player.canBreedPokemon()">
+               <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).map(x=>player._itemList[x]()).reduce((x,y)=>x+y) -->
+               <p>
+                   Pick an egg below to breed:
+               </p>
+               <div class="row col-lg-10 col-md-12 offset-lg-1 offset-md-0 col-sm-12 offset-sm-0"
+                    style="padding-right: 0"
+                    data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]())">
+                   <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem text-nowrap">
+                       <button class="btn btn-secondary list-group-item-action"
+                               data-bind="click: function() { ItemList[$data].use(); if (!player.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }">
+                           <img class="smallImage"
+                                data-bind="attr:{ src: BreedingHelper.getEggImage(ItemList[$data]) }"
+                                src=""/>
+                           <span data-bind="text: $data.replace(/_/g, ' ') + ' (' + player._itemList[$data]() + ')'" style="margin-left: 15px"></span>
+                       </button>
+                   </div>
+               </div>
+               <!-- /ko -->
                <p>
                    Pick a pokémon below to breed them:
                </p>
-
                <div class="row col-lg-10 col-md-12 offset-lg-1 offset-md-0 col-sm-12 offset-sm-0"
                     style="padding-right: 0"
                     data-bind="foreach: player.maxLevelPokemonList()">
@@ -34,7 +51,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                    </div>
                </div>
            </div>
-           <div data-bind="ifnot: player.hasMaxLevelPokemon()">
+           <div data-bind="ifnot: player.hasMaxLevelPokemon() && Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).map(x=>player._itemList[x]()).reduce((x,y)=>x+y)">
                <p>
                    Unfortunately, you don't have any pokémon of level 100
                </p>
