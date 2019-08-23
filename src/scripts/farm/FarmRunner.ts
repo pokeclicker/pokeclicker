@@ -17,10 +17,17 @@ class FarmRunner {
         return MapHelper.accessToRoute(14, 0) && player.hasKeyItem("Wailmer pail");
     }
 
+    public static timeToReduce(){
+      let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Sprayduck) ? OakItemRunner.calculateBonus(GameConstants.OakItem.Sprayduck) / 100 : 0;
+      oakItemBonus = 1 - oakItemBonus;
+      return Math.round(100 / oakItemBonus) / 100;
+    }
+
     public static tick() {
         this.counter = 0;
+        const timeToReduce = this.timeToReduce();
         for (let i = 0; i < player.plotList.length; i++) {
-            player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - 1));
+            player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - timeToReduce));
         }
 
     }
