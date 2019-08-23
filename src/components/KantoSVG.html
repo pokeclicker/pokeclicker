@@ -299,7 +299,8 @@
     <path class="city" data-town="Pallet Town"
           data-bind="
           click:function(){MapHelper.moveToTown('Pallet Town')},
-          attr: { class: MapHelper.calculateTownCssClass('Pallet Town') }"
+          attr: { class: MapHelper.calculateTownCssClass('Pallet Town') },
+          css: { flash: MapHelper.ableToTravel() }"
           d="M 72.1 297.83 L 78.73 291.2 L 87.87 291.2 L 94.5 297.83 L 94.5 306.97 L 87.87 313.6 L 78.73 313.6 L 72.1 306.97 Z"
           fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
           stroke-miterlimit="10" stroke-width="1.4"></path>
@@ -505,5 +506,6 @@
     <rect class="city" data-town="Dock"
           fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
           height="12.6" stroke="#6c8ebf" width="12.6" x="325" y="240"
-          data-bind="click:function(){MapHelper.openShipModal()}"></rect>
+          data-bind="click:function(){MapHelper.openShipModal()},
+          css:{ unlockedTown: player.highestRegion >= 1}"></rect>
 </g>

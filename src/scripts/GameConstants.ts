@@ -518,10 +518,10 @@ namespace GameConstants {
         "MediumRestore": 40000,
         "LargeRestore": 100000,
 
-        "PokeBlock": 0,
+        "PokeBlock": Infinity,
 
-        "Protein": 0,
-        "RareCandy": 0,
+        "Protein": Infinity,
+        "RareCandy": Infinity,
 
         // Quest points
         "Eevee": 5000,

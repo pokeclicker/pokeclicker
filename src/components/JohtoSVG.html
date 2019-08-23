@@ -250,7 +250,8 @@
     <path class="city" data-town="New Bark Town"
           data-bind="
           click:function(){MapHelper.moveToTown('New Bark Town')},
-          attr: { class: MapHelper.calculateTownCssClass('New Bark Town') }"
+          attr: { class: MapHelper.calculateTownCssClass('New Bark Town') },
+          css: { flash: MapHelper.ableToTravel() }"
           d="M 498.8 287.53 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
           fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
           stroke-miterlimit="10" stroke-width="1.4">
@@ -510,6 +511,7 @@
     <rect class="city" data-town="Dock"
           fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
           height="12.6" stroke="#6c8ebf" width="12.6" x="98" y="155"
-          data-bind="click:function(){MapHelper.openShipModal()}"></rect>
+          data-bind="click:function(){MapHelper.openShipModal()},
+          attr: { class: MapHelper.calculateTownCssClass('Olivine City') }"></rect>
 
 </g>

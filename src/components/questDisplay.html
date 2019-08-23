@@ -1,11 +1,7 @@
 <div class="card border-secondary mb-3" id="questDisplayContainer" style="min-height: 100px">
 
     <div class="card-header p-0">
-      <!-- Quests header -->
-      <h6 style="display:inline">
-          <span class='' data-bind='text: !player.tutorialComplete() ? "Tutorial Quest" : "Quests (" + player.currentQuests().length + "/" + QuestHelper.questSlots()() + ")"'>
-          </span>
-      </h6>
+      <span class='' data-bind='text: !player.tutorialComplete() ? "Tutorial Quest" : "Quests (" + player.currentQuests().length + "/" + QuestHelper.questSlots()() + ")"'></span>
       <button class='btn btn-sm btn-primary' style="position: absolute; right: -1px; top: -1px; width: auto; height: 42px;"
               data-bind='visible: player.tutorialComplete(), click: function(){$("#QuestModal").modal("show")}'>
           List

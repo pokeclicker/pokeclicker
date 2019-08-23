@@ -6,6 +6,7 @@ class FarmRunner {
     public static openFarmModal() {
         if (FarmRunner.accessToFarm()) {
             this.plotPrice(this.computePlotPrice());
+            Game.gameState(GameConstants.GameState.paused);
             $('#farmModal').modal('show');
         } else {
             Notifier.notify("You don't have access to this location yet", GameConstants.NotificationOption.warning);
@@ -46,7 +47,7 @@ class FarmRunner {
     public static allPlotsUnlocked() {
         return player.plotList[player.plotList.length - 1]().isUnlocked();
     }
-    
+
     public static canBuyPlot() {
         return !this.allPlotsUnlocked() && player.farmPoints() >= this.plotPrice();
     }
@@ -155,5 +156,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
             $(this).parent().children().removeClass("active");
             $(this).addClass("active");
         });
+    });
+
+    $('#farmModal').on('hidden.bs.modal', function () {
+        if (player.route() == 14) {
+            Game.gameState(GameConstants.GameState.fighting);
+        } else {
+            MapHelper.moveToRoute(14, GameConstants.Region.kanto);
+        }
     });
 });
