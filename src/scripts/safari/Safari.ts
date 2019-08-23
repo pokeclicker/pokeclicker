@@ -16,8 +16,8 @@ class Safari {
 
     public static load() {
         this.grid = [];
-        this.playerXY.x = 12;
-        this.playerXY.y = 20;
+        this.playerXY.x = 0;
+        this.playerXY.y = 0;
         Safari.lastDirection = "up";
         Safari.inBattle(false);
         Safari.balls(this.calculateStartPokeballs());

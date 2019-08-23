@@ -121,10 +121,10 @@ namespace GameConstants {
 
     //Safari
     export const Safari = {
-        "SizeY": 21,
+        "SizeY": Math.floor((window.innerHeight - 74 - 50) / 32),
         "SizeX": 25,
     }
-    
+
     export const SAFARI_BATTLE_CHANCE = 5;
 
     export const SAFARI_BASE_POKEBALL_COUNT = 30;
