@@ -358,7 +358,7 @@ class Player {
      * @param shiny if the pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public calculatePokeballToUse(alreadyCaught: boolean, shiny: boolean): GameConstants.Pokeball {
+    public calculatePokeballToUse(alreadyCaught: boolean, shiny: boolean, alreadyCaughtShiny: boolean): GameConstants.Pokeball {
         let pref: GameConstants.Pokeball;
         if (alreadyCaught) {
             pref = this._alreadyCaughtBallSelection();
@@ -367,7 +367,7 @@ class Player {
         }
 
         // Always throw the highest available Pokéball at shinies
-        if (shiny) {
+        if (shiny && !alreadyCaughtShiny) {
             pref = GameConstants.Pokeball.Masterball;
         }
 

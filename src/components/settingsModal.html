@@ -14,7 +14,6 @@
                     </thead>
                     <tbody>
                       <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
-                      <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('test')}"></tr>
                     </tbody>
                 </table>
                 <br/>
@@ -28,7 +27,7 @@
     <td data-bind="text: $data.displayName" >Settings</td>
     <td>
         <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
-            <option data-bind="text: $data.text, value: $data.value"></option>
+            <option data-bind="text: $data.text, value: $data.value, attr:{ selected: Settings.getSetting('theme').observableValue() == $data.value}"></option>
         </div>
     </td>
 </script>

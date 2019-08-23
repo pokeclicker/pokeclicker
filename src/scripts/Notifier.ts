@@ -23,7 +23,7 @@ class Notifier {
             offset: 20,
             spacing: 10,
             z_index: 1050,
-            delay: 3000,
+            delay: 5000,
             timer: 1000,
             url_target: '_blank',
             mouse_over: null,
@@ -50,4 +50,3 @@ class Notifier {
         });
     }
 }
-

@@ -50,9 +50,11 @@
   margin: 5px;
 }
 
-.progress {
+div.progress {
   position: relative;
   min-height: 15px;
+  background-color: #555;
+  color: whitesmoke;
 }
 .progress .progress-bar span {
   text-align: center;
@@ -60,6 +62,10 @@
   display: block;
   width: 100%;
   line-height: 1rem;
+  color: whitesmoke;
+}
+.progress .progress-bar {
+  color: whitesmoke;
 }
 
 button {
@@ -189,14 +195,13 @@ body:hover {
 }
 
 /* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
-.no-select {
+.no-select * {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Chrome/Safari/Opera */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none;
-  /* Non-prefixed version, currently
-                        not supported by any browser */
+  user-select: none; /* Non-prefixed version, currently not supported by any browser */
+  touch-action: none;
 }
 
 img {

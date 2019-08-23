@@ -1,6 +1,6 @@
 <!-- ko if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked() -->
 <div class="card border-secondary mb-3">
-    <div class="card-header">Hatchery</div>
+    <div class="card-header p-0"><span>Hatchery</span></div>
     <div id='eggList' class="card-body p-0">
       <div class="row m-0" data-bind="foreach: player.eggList">
         <div class="col-md-6 eggSlot">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="progress" data-bind='visible: progress() >= 100'>
-                    <div class="progress-bar bg-blue" role="progressbar"
+                    <div class="progress-bar bg-success" role="progressbar"
                     data-bind="attr:{ style: 'width: 100%; cursor: pointer;' }, click: function(){BreedingHelper.hatchPokemonEgg($index())}, text: 'Hatch!'"
                     aria-valuemin="0" aria-valuemax="100">
                     </div>

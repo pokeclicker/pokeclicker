@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Pokéclicker</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
         <tr data-bind='ifnot: $data.breeding()'>
@@ -126,10 +127,12 @@
         <div class="col-lg-3 col-md-6 order-lg-first">
             <div id="pokeballSelector" class="card border-secondary mb-3" style="min-height: 180px"
                 data-bind="visible: player.starter != GameConstants.Starter.None">
+                <div class="card-header p-0">
+                  <span>Pokéballs</span>
+                  <button type="button" class="btn btn-info" style="position: absolute; right: -1px; top: -1px; width: auto; height: 42px; padding: 4px;"
+                      data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon (including unobtained shiny Pokémon)', trigger: 'hover', placement:'left' }">?</button>
+                </div>
                 <div class="card-body p-0">
-
-                    <button type="button" class="btn btn-info" style="position: absolute; right: -1px; top: -1px; width: auto; height: 33px; padding: 4px;"
-                        data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon (including unobtained shiny Pokémon)', trigger: 'hover', placement:'left' }">?</button>
                     <table class="table table-sm">
                         <thead>
                         <tr>
@@ -216,7 +219,8 @@
             </div>
 
             <div class="card border-secondary mb-3 pokemon-list-container" id="pokemonListContainer"
-                 data-bind="visible: player.starter != GameConstants.Starter.None" >
+                 data-bind="visible: player.starter != GameConstants.Starter.None">
+                <div class="card-header p-0"><span>Pokémon List</span></div>
                 <div class="card-body p-0">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend">
@@ -306,10 +310,11 @@
                                          class="pokeball-smallest"
                                          src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                                 </span>
-
+                                <!-- ko if: player.routeKillsObservable(player.route())() < player.routeKillsNeeded -->
                                 <br>
-                                <span data-bind="text: player.routeKillsObservable(player.route())">kills</span>/<span
-                                    data-bind="text: player.routeKillsNeeded">killsneeded</span><br>
+                                <span data-bind="text: player.routeKillsObservable(player.route())() + '/' + player.routeKillsNeeded">0/10</span>
+                                <br>
+                                <!-- /ko -->
                             </div>
 
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span>

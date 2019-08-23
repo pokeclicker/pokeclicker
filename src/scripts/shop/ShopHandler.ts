@@ -37,9 +37,9 @@ class ShopHandler {
 
     public static calculateCss(i: number): string {
         if (this.selected() == i) {
-            return "shopItem clickable btn shopItemSelected"
+            return "shopItem clickable btn btn-secondary active"
         } else {
-            return "shopItem clickable btn"
+            return "shopItem clickable btn btn-secondary"
         }
     }
 
