@@ -82,7 +82,8 @@ class BreedingHelper {
     }
 
     public static createTypedEgg(type: GameConstants.EggType): Egg {
-        let name = HatchList[type][Math.floor(Math.random() * HatchList[type].length)];
+        let region = player.highestRegion;
+        let name = HatchList[type][region][Math.floor(Math.random() * HatchList[type][region].length)];
         return BreedingHelper.createEgg(name, type);
     }
 
@@ -136,13 +137,25 @@ class BreedingHelper {
     }
 }
 
-const HatchList: { [name: number]: string[] } = {};
-HatchList[GameConstants.EggType.Fire] = ["Charmander", "Vulpix", "Growlithe", "Ponyta"];
-HatchList[GameConstants.EggType.Water] = ["Squirtle", "Lapras", "Staryu", "Psyduck"];
-HatchList[GameConstants.EggType.Grass] = ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"];
-HatchList[GameConstants.EggType.Fighting] = ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"];
-HatchList[GameConstants.EggType.Electric] = ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"];
-HatchList[GameConstants.EggType.Dragon] = ["Dratini", "Dragonair", "Dragonite"];
+const HatchList: { [name: number]: string[][] } = {};
+HatchList[GameConstants.EggType.Fire] = [
+    ["Charmander", "Vulpix", "Growlithe", "Ponyta"],
+    ["Cyndaquil", "Slugma", "Growlithe", "Houndour"]];
+HatchList[GameConstants.EggType.Water] = [
+    ["Squirtle", "Lapras", "Staryu", "Psyduck"],
+    ["Totodile", "Wooper", "Marill", "Qwilfish"]];
+HatchList[GameConstants.EggType.Grass] = [
+    ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"],
+    ["Chikorita", "Hoppip", "Sunkern", "Bellsprout"]];
+HatchList[GameConstants.EggType.Fighting] = [
+    ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"],
+    ["Hitmonlee", "Hitmonchan", "Machop", "Hitmontop"]];
+HatchList[GameConstants.EggType.Electric] = [
+    ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"],
+    ["Chinchou", "Mareep", "Magnemite", "Voltorb"]];
+HatchList[GameConstants.EggType.Dragon] = [
+    ["Dratini", "Dragonair", "Dragonite"],
+    ["Dratini", "Dragonair", "Dragonite"]];
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
