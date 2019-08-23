@@ -7,20 +7,23 @@
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-              <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
-                 <div class="col-sm-3">
-                     <div data-bind="click: function() {ShopHandler.setSelected($index())}, attr: {class: ShopHandler.calculateCss($index())}">
-                         <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name() + '.png' }">
-                         <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
-                         <div data-bind="if: $data.isAvailable()">
-                              <img src="" class="currencyImage" data-bind="attr:{ src: 'assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
-                              <span data-bind="text: totalPrice(ShopHandler.amount())">Price</span>
-                          </div>
-                          <div data-bind="ifnot: $data.isAvailable()">
-                              <span>Sold Out</span>
-                          </div>
-                     </div>
-                  </div>
+                <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
+                    <div class="col-sm-3">
+                       <button class="shopItem clickable btn btn-block btn-secondary"
+                           data-bind="click: function() {ShopHandler.setSelected($index())},
+                           css: { active: ShopHandler.selected() == $index() },
+                           attr: { disabled: !$data.isAvailable() }">
+                           <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name() + '.png' }">
+                           <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
+                           <div data-bind="if: $data.isAvailable()">
+                                <img src="" class="currencyImage" data-bind="attr:{ src: 'assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
+                                <span data-bind="text: totalPrice(ShopHandler.amount()).toLocaleString('en-US')">Price</span>
+                            </div>
+                            <div data-bind="ifnot: $data.isAvailable()">
+                                <span>Sold Out</span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
                 <div class="row justify-content-center">
                    <div class="col-11 col-sm-10 col-md-11">
@@ -33,7 +36,7 @@
                                      type="button"
                                      onclick="ShopHandler.increaseAmount(-10)">-10
                              </button>
-                             <button class="btn btn-danger btn-outline-dark smallButton smallFont"
+                             <button class="btn btn-primary btn-outline-dark smallButton smallFont"
                                      onclick="ShopHandler.resetAmount()">1
                              </button>
                            </div>
@@ -48,6 +51,10 @@
                                <button class="btn btn-secondary smallButton smallFont"
                                        type="button"
                                        onclick="ShopHandler.increaseAmount(100)">+100
+                               </button>
+                               <button class="btn btn-primary smallButton smallFont"
+                                       type="button"
+                                       onclick="ShopHandler.maxAmount()">Max
                                </button>
                                <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}"
                                        onclick="ShopHandler.buyItem()">Buy
