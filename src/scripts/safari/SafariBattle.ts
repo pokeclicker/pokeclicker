@@ -18,6 +18,7 @@ class SafariBattle {
         Notifier.notify("Battle", GameConstants.NotificationOption.info);
         SafariBattle.showBattleBars();
         SafariBattle.text("What will you do?");
+        SafariBattle.unlockButtons();
         SafariBattle.escapeAttempts = 0;
     }
 
@@ -60,15 +61,17 @@ class SafariBattle {
                     p.addClass('bounce');
 
                     setTimeout(function () {
-                        let random = Math.random();
-                        let catchF = SafariBattle.enemy.catchFactor / 100;
-                        let index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
+                        const random = Math.random();
+                        const catchF = SafariBattle.enemy.catchFactor / 100;
+                        const index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
                         if (index != 0) {
                             SafariBattle.startRoll(index);
                         }
 
                         setTimeout(function(){
-                            if (random*100 < SafariBattle.enemy.catchFactor){
+                            const oakBonus = OakItemRunner.isActive(GameConstants.OakItem.Magic_Ball) ?
+                                OakItemRunner.calculateBonus(GameConstants.OakItem.Magic_Ball) : 0;
+                            if (random * 100 < SafariBattle.enemy.catchFactor + oakBonus){
                                 SafariBattle.capturePokemon();
                                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
                                 setTimeout(function(){
@@ -84,7 +87,7 @@ class SafariBattle {
                                     gameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
                                 }, 1000);
                             }
-                        }, (200 + 1200*index));
+                        }, (200 + 1200 * index));
                     }, 1700);
                 }, 750);
             }, 750);
@@ -191,9 +194,18 @@ class SafariBattle {
         setTimeout(function(){
             SafariBattle.text("What will you do?");
             SafariBattle.busy = false;
+            SafariBattle.unlockButtons();
         }, 1500);
         console.log(`Catch chance: ${SafariBattle.enemy.catchFactor}%`);
         console.log(`Escape chance: ${SafariBattle.enemy.escapeFactor}%`);
+    }
+
+    private static lockButtons() {
+      $('.safariOption button').attr('disabled', true);
+    }
+
+    private static unlockButtons() {
+      $('.safariOption button').attr('disabled', false);
     }
 
     private static endBattle() {

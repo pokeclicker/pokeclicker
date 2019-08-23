@@ -16,8 +16,8 @@ class Safari {
 
     public static load() {
         this.grid = [];
-        this.playerXY.x = 12;
-        this.playerXY.y = 20;
+        this.playerXY.x = 0;
+        this.playerXY.y = 0;
         Safari.lastDirection = "up";
         Safari.inBattle(false);
         Safari.balls(this.calculateStartPokeballs());
@@ -50,7 +50,7 @@ class Safari {
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
         Safari.addRandomBody(new GrassBody());
-        
+
         Safari.show();
     }
 
@@ -114,7 +114,7 @@ class Safari {
         let html = "";
 
         for (let i=0; i<this.grid.length; i++) {
-            html += "<div class='row'>";
+            html += "<div class='row m-0'>";
             for (let j=0; j<this.grid[0].length; j++) {
                 html += Safari.square(i, j);
             }
