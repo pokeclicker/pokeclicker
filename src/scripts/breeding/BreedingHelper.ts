@@ -82,9 +82,19 @@ class BreedingHelper {
     }
 
     public static createTypedEgg(type: GameConstants.EggType): Egg {
-        let region = player.highestRegion;
-        let name = HatchList[type][region][Math.floor(Math.random() * HatchList[type][region].length)];
-        return BreedingHelper.createEgg(name, type);
+        const hatch_list = HatchList[type];
+        const hatchable = hatch_list.slice(0, player.highestRegion + 1);
+        let possible_hatches = [];
+        hatchable.forEach((pokemon, index)=>{
+            if (!pokemon.length) return;
+            const toAdd = possible_hatches.length || 1;
+            for (let i = 0; i < toAdd; i++){
+                possible_hatches.push(pokemon);
+            }
+        });
+        possible_hatches = possible_hatches[Math.floor(Math.random() * possible_hatches.length)];
+        const pokemon = possible_hatches[Math.floor(Math.random() * possible_hatches.length)];
+        return BreedingHelper.createEgg(pokemon, type);
     }
 
     public static createRandomEgg(): Egg {
@@ -140,31 +150,36 @@ class BreedingHelper {
 const HatchList: { [name: number]: string[][] } = {};
 HatchList[GameConstants.EggType.Fire] = [
     ["Charmander", "Vulpix", "Growlithe", "Ponyta"],
-    ["Cyndaquil", "Slugma", "Growlithe", "Houndour"]];
+    ["Cyndaquil", "Slugma", "Houndour", "Magby"],
+  ];
 HatchList[GameConstants.EggType.Water] = [
     ["Squirtle", "Lapras", "Staryu", "Psyduck"],
-    ["Totodile", "Wooper", "Marill", "Qwilfish"]];
+    ["Totodile", "Wooper", "Marill", "Qwilfish"],
+  ];
 HatchList[GameConstants.EggType.Grass] = [
     ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"],
-    ["Chikorita", "Hoppip", "Sunkern", "Bellsprout"]];
+    ["Chikorita", "Hoppip", "Sunkern"],
+  ];
 HatchList[GameConstants.EggType.Fighting] = [
     ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"],
-    ["Hitmonlee", "Hitmonchan", "Machop", "Hitmontop"]];
+    ["Tyrogue"],
+  ];
 HatchList[GameConstants.EggType.Electric] = [
     ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"],
-    ["Chinchou", "Mareep", "Magnemite", "Voltorb"]];
+    ["Chinchou", "Mareep", "Elekid"],
+  ];
 HatchList[GameConstants.EggType.Dragon] = [
     ["Dratini", "Dragonair", "Dragonite"],
-    ["Dratini", "Dragonair", "Dragonite"]];
+    [],
+  ];
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#breedingModal').on('hidden.bs.modal', function () {
-        if (player.route() == 5) {
-            Game.gameState(GameConstants.GameState.fighting);
-        } else {
+        if (player.highestRegion == 0) {
             MapHelper.moveToRoute(5, GameConstants.Region.kanto);
         }
+        MapHelper.returnToMap();
     });
 
 });

@@ -180,7 +180,7 @@ dungeonList["Burned Tower"] = new Dungeon("Burned Tower",
     ["Rattata", "Zubat", "Koffing", "Raticate"],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     1500,
-    [new DungeonBossPokemon("Golbat", 6000, 35), new DungeonBossPokemon("Weezing", 6000, 35), new DungeonBossPokemon("Suicune", 300000, 50)],
+    [new DungeonBossPokemon("Golbat", 6000, 35), new DungeonBossPokemon("Weezing", 6000, 35), new DungeonBossPokemon("Shuckle", 300000, 50)],
     4500, GameConstants.Badge.Fog, 37, 20
 );
 

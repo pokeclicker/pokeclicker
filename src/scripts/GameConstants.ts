@@ -28,7 +28,7 @@ namespace GameConstants {
 
     export const RoamingPokemon = {
         0: ["Mew"],
-        1: ["Raikou", "Entei"],
+        1: ["Raikou", "Entei", "Suicune"],
     }
 
     // Shinies

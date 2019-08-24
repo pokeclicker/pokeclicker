@@ -575,6 +575,8 @@ const pokemonList = [
         "id": 42,
         "name": "Golbat",
         "catchRate": 90,
+        "evolution": "Crobat",
+        "evoLevel": 100,
         "type": [
             "Poison",
             "Flying"
@@ -3371,6 +3373,6 @@ for (let i = 0; i < pokemonList.length; i++) {
     pokemonMap[p["name"]] = p;
     pokemonMapId[i + 1] = p;
     if (p.hasOwnProperty("evolution")) {
-        p["evolution"].split(", ").forEach(x => {pokemonDevolutionMap[x] = p["name"]});        
+        p["evolution"].split(", ").forEach(x => {pokemonDevolutionMap[x] = p["name"]});
     }
 }

@@ -1,18 +1,31 @@
 class MapHelper {
+    public static returnToMap(){
+      if (player.currentTown()){
+        return this.moveToTown(player.currentTown());
+      }
+      if (player.route()){
+        return this.moveToRoute(player.route(), player.region);
+      }
+    }
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
-        if (!isNaN(route) && !(route == player.route())) {
-            if (this.accessToRoute(route, region)) {
-                player.route(route);
-                player.region = region;
-                player.currentTown('');
-                Battle.generateNewEnemy();
-                Game.gameState(GameConstants.GameState.fighting);
-                Game.applyRouteBindings();
+        if (isNaN(route)) return;
+        let genNewEnemy = false;
+        if (route != player.route()) {
+          genNewEnemy = true
+        }
+        if (this.accessToRoute(route, region)) {
+            player.route(route);
+            player.region = region;
+            player.currentTown('');
+            if (genNewEnemy){
+              Battle.generateNewEnemy();
             }
-            else {
-                Notifier.notify("You don't have access to that route yet.", GameConstants.NotificationOption.warning);
-            }
+            Game.gameState(GameConstants.GameState.fighting);
+            Game.applyRouteBindings();
+        }
+        else {
+            Notifier.notify("You don't have access to that route yet.", GameConstants.NotificationOption.warning);
         }
     };
 
@@ -83,9 +96,7 @@ class MapHelper {
 
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
-            //console.log($("[data-town]"));
             Game.gameState(GameConstants.GameState.idle);
-            $("[data-route='" + player.route() + "']").removeClass('currentRoute').addClass('unlockedRoute'); //pretty sure any jquery in typescript does not work fyi
             player.route(0);
             player.town(TownList[townName]);
             player.currentTown(townName);

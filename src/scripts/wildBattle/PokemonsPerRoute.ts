@@ -249,7 +249,6 @@ const pokemonsPerRoute = {
         }
     },
     2: {
-        
+
     }
 };
-
