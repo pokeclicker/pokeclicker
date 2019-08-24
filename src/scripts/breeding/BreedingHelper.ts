@@ -58,6 +58,7 @@ class BreedingHelper {
                 if (player._caughtPokemonList()[i].breeding()) {
                     player._caughtPokemonList()[i].exp(0);
                     player._caughtPokemonList()[i].breeding(false);
+                    player._caughtPokemonList()[i].checkForEvolution(true);
                 }
             }
         }

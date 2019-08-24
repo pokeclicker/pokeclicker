@@ -24,8 +24,8 @@ class EvolutionStone extends Item {
     public static computeEvolution(type: GameConstants.StoneType, pokemon: string): string {
         // Assume stones and evolutions in pokemonList are consistent in ordering
         let pkmObj = PokemonHelper.getPokemonByName(pokemon);
-        let index = ("" + pkmObj.evoLevel).split(", ").indexOf(GameConstants.StoneType[type]);
-        return pkmObj.evolution.split(", ")[index];
+        let index = pkmObj.evoLevel.indexOf(GameConstants.StoneType[type]);
+        return pkmObj.evolutionByIndex(index);
     }
 }
 
@@ -40,3 +40,4 @@ ItemList['Dragon_scale'] = new EvolutionStone(GameConstants.StoneType.Dragon_sca
 ItemList['Metal_coat'] = new EvolutionStone(GameConstants.StoneType.Metal_coat);
 ItemList['Kings_rock'] = new EvolutionStone(GameConstants.StoneType.Kings_rock);
 ItemList['Upgrade'] = new EvolutionStone(GameConstants.StoneType.Upgrade);
+ItemList['Time_stone'] = new EvolutionStone(GameConstants.StoneType.Time_stone);

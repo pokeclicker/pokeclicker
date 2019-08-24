@@ -6,10 +6,8 @@ class PokemonHelper {
     public static getPokemonsWithEvolution(evoType: string) {
 
         return pokemonList.filter(function (pokemon) {
-            if (pokemon["evoLevel"] !== undefined && ("" + pokemon["evoLevel"]).indexOf(evoType) !== -1) {
-                let index = ("" + pokemon["evoLevel"]).split(", ").indexOf(evoType);
-                let evolution = pokemon["evolution"].split(", ")[index];
-                return player.highestRegion >= PokemonHelper.calcNativeRegion(evolution);
+            if (pokemon.evoLevel && pokemon.evoLevel.includes(evoType)) {
+                return !!PokemonHelper.getPokemonByName(pokemon.name).evolutionByIndex(pokemon.evoLevel.indexOf(evoType), true);
             }
         });
     }

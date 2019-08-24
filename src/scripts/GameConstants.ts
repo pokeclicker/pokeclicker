@@ -551,6 +551,7 @@ namespace GameConstants {
         Metal_coat,
         Kings_rock,
         Upgrade,
+        Time_stone,
     }
 
     export enum BattleItemType {
