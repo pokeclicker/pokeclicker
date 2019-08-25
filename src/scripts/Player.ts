@@ -388,11 +388,14 @@ class Player {
      * @returns {boolean}
      */
     public alreadyCaughtPokemon(pokemonName: string) {
-        let id = PokemonHelper.getPokemonByName(pokemonName).id;
+        const pokemon = PokemonHelper.getPokemonByName(pokemonName);
+        if (!pokemon) return false;
+        const id = PokemonHelper.getPokemonByName(pokemonName).id;
         return player.caughtAmount[id]() > 0;
     }
 
     public alreadyCaughtPokemonShiny(pokemonName: string) {
+        if (!this.alreadyCaughtPokemon(pokemonName)) return false;
         for (let i: number = 0; i < this.caughtShinyList().length; i++) {
             if (this.caughtShinyList()[i] == pokemonName) {
                 return true;

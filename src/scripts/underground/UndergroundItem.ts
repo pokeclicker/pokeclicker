@@ -86,7 +86,7 @@ class UndergroundItem {
         if (amt > 1) {
             valuetype += "s";
         }
-        return valuetype.replace(/_/g, ' ');
+        return GameConstants.humanifyString(valuetype);
     }
 
 }
