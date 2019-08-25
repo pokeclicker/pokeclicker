@@ -358,10 +358,12 @@ class Player {
      * @param shiny if the pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public calculatePokeballToUse(alreadyCaughtShiny: boolean, shiny: boolean): GameConstants.Pokeball {
+    public calculatePokeballToUse(pokemonName: string, isShiny: boolean): GameConstants.Pokeball {
+        const alreadyCaught = this.alreadyCaughtPokemon(pokemonName);
+        const alreadyCaughtShiny = this.alreadyCaughtPokemonShiny(pokemonName);
         let pref: GameConstants.Pokeball;
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
-        if (!alreadyCaughtShiny) {
+        if (!alreadyCaught || (!alreadyCaughtShiny && isShiny)) {
             pref = this._notCaughtBallSelection();
         } else {
             pref = this._alreadyCaughtBallSelection();

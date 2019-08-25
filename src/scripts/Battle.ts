@@ -57,9 +57,9 @@ class Battle {
         player.gainShards(this.enemyPokemon());
         player.addRouteKill();
         BreedingHelper.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
-        let alreadyCaught: boolean = player.alreadyCaughtPokemon(this.enemyPokemon().name);
-        let alreadyCaughtShiny: boolean = player.alreadyCaughtPokemonShiny(this.enemyPokemon().name);
-        let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught, this.enemyPokemon().shiny, alreadyCaughtShiny);
+        const pokemonName: boolean = this.enemyPokemon().name;
+        const isShiny: boolean = this.enemyPokemon().shiny;
+        const pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(pokemonName, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(pokeBall);

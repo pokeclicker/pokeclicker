@@ -13,9 +13,9 @@ class DungeonBattle extends Battle {
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
-        const alreadyCaught: boolean = player.alreadyCaughtPokemonShiny(this.enemyPokemon().name);
+        const pokemonName: boolean = this.enemyPokemon().name;
         const isShiny: boolean = this.enemyPokemon().shiny;
-        let pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(alreadyCaught, isShiny);
+        const pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(pokemonName, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(pokeBall);
