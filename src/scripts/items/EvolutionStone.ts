@@ -25,7 +25,7 @@ class EvolutionStone extends Item {
         // Assume stones and evolutions in pokemonList are consistent in ordering
         let pkmObj = PokemonHelper.getPokemonByName(pokemon);
         let index = pkmObj.evoLevel.indexOf(GameConstants.StoneType[type]);
-        return pkmObj.evolutionByIndex(index);
+        return pkmObj.evolutionByIndex(index, true);
     }
 }
 

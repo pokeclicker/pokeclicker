@@ -122,7 +122,7 @@ TownList["Power Plant"] = new DungeonTown("Power Plant", [9], GameConstants.Badg
 TownList["Pokemon Tower"] = new DungeonTown("Pokemon Tower", [10], GameConstants.Badge.Cascade);
 TownList["Seafoam Islands"] = new DungeonTown("Seafoam Islands", [19], GameConstants.Badge.Soul);
 TownList["Victory Road"] = new DungeonTown("Victory Road", [22], GameConstants.Badge.Earth);
-TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], GameConstants.Badge.Champion);
+TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], GameConstants.Badge.Elite_Champion);
 TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], GameConstants.Badge.Soul);
 
 //Johto Towns
@@ -165,4 +165,4 @@ TownList["Whirl Islands"] = new DungeonTown("Whirl Islands", [41]);
 TownList["Mt Mortar"] = new DungeonTown("Mt Mortar", [42]);
 TownList["Ice Path"] = new DungeonTown("Ice Path", [44]);
 TownList["Dark Cave"] = new DungeonTown("Dark Cave", [45]);
-TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], GameConstants.Badge.Karen);
+TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], GameConstants.Badge.Elite_Karen);
