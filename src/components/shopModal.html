@@ -13,7 +13,11 @@
                            data-bind="click: function() {ShopHandler.setSelected($index())},
                            css: { active: ShopHandler.selected() == $index() },
                            attr: { disabled: !$data.isAvailable() }">
-                           <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name() + '.png' }">
+                           <span style="position: absolute; top: 15px; right: 20px;" data-bind="if: $data instanceof PokemonItem && player.alreadyCaughtPokemon(name())">
+                               <img class="pokeball-smallest" src=""
+                                   data-bind="attr: {src: `assets/images/pokeball/Pokeball${player.alreadyCaughtPokemonShiny(name()) ? '-shiny' : ''}-small.png`}"/>
+                           </span>
+                           <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/\W/g, '_') + '.png' }">
                            <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
                            <div data-bind="if: $data.isAvailable()">
                                 <img src="" class="currencyImage" data-bind="attr:{ src: 'assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">

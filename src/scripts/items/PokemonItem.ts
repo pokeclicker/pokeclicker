@@ -10,11 +10,7 @@ class PokemonItem extends Item {
     }
 
     gain() {
-        if (this.name() == "Mr_Mime") {
-            player.capturePokemon("Mr. Mime", PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP))
-        } else {
-            player.capturePokemon(this.name(), PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP))
-        }
+        player.capturePokemon(this.name(), PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP))
     }
 
     use() {
@@ -25,6 +21,6 @@ class PokemonItem extends Item {
 ItemList['Eevee'] = new PokemonItem(GameConstants.PokemonItemType.Eevee);
 ItemList['Porygon'] = new PokemonItem(GameConstants.PokemonItemType.Porygon);
 ItemList['Jynx'] = new PokemonItem(GameConstants.PokemonItemType.Jynx);
-ItemList['Mr. Mime'] = new PokemonItem(GameConstants.PokemonItemType.Mr_Mime);
+ItemList['Mr. Mime'] = new PokemonItem(GameConstants.PokemonItemType['Mr. Mime']);
 ItemList['Lickitung'] = new PokemonItem(GameConstants.PokemonItemType.Lickitung);
 ItemList['Togepi'] = new PokemonItem(GameConstants.PokemonItemType.Togepi);

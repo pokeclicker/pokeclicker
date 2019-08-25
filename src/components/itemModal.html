@@ -12,7 +12,7 @@
             </ul>
             <div class="tab-content">
                 <div id="items" class="tab-pane fade">
-                    <h3 data-bind="text: ItemHandler.stoneSelected().replace(/_/g, ' ')"></h3>
+                    <h3 data-bind="text: GameConstants.humanifyString(ItemHandler.stoneSelected())"></h3>
                     <div class="page-item m-0">
                         <div class="row no-gutters justify-content-sm-center" style="padding:15px;">
                             <div class="row col-lg-6 col-sm-11" data-bind="foreach: Array.from(Array(Object.keys(GameConstants.StoneType).length / 2).keys()).map(x=>GameConstants.StoneType[x])">

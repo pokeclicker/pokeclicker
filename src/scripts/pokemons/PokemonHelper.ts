@@ -14,6 +14,7 @@ class PokemonHelper {
 
     public static getPokemonByName(name: string): DataPokemon {
         let basePokemon = pokemonMap[name];
+        if (!basePokemon) return;
         let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
         let evoLevel = basePokemon["evoLevel"];
         let eggCycles: number = basePokemon["eggCycles"] || 20;

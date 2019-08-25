@@ -28,7 +28,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                            <img class="smallImage"
                                 data-bind="attr:{ src: BreedingHelper.getEggImage(ItemList[$data]) }"
                                 src=""/>
-                           <span data-bind="text: $data.replace(/_/g, ' ') + ' (' + player._itemList[$data]() + ')'" style="margin-left: 15px"></span>
+                           <span data-bind="text: GameConstants.humanifyString($data) + ' (' + player._itemList[$data]() + ')'" style="margin-left: 15px"></span>
                        </button>
                    </div>
                </div>
