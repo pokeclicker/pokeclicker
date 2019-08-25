@@ -470,7 +470,7 @@ namespace GameConstants {
             24: GameConstants.Badge.Cascade,
         },
         1: {
-            28: GameConstants.Badge.JohtoChampion,
+            28: GameConstants.Badge.Elite_JohtoChampion,
             32: GameConstants.Badge.Zephyr,
             34: GameConstants.Badge.Hive,
             35: GameConstants.Badge.Plain,
