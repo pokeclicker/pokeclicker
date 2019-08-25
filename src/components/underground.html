@@ -13,7 +13,7 @@ style="cursor:default" tabindex="-1">
                    deals</a></li>
                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
                <p><span id="diamondCounter" data-bind='text: player._diamonds'>x</span> <img
-                       src='assets/images/underground/diamond.png'></p>
+                       src='assets/images/underground/diamond.svg' width="20px'"></p>
            </ul>
        </div>
        <div class="tab-content p-0">
@@ -38,7 +38,7 @@ style="cursor:default" tabindex="-1">
                            <div id='mineEnergyBar' class='progress-bar' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
                                 data-bind="style: { width: Math.floor(Underground.energy/Underground.getMaxEnergy()*100) + '%' }">
-                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + '/' + Underground.getMaxEnergy() + ' (' + Underground.energyTick() + 's)'"></span>
+                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + '/' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                            </div>
                        </div>
                    </div>

@@ -38,8 +38,8 @@ gymList["Champion Blue"] = new Champion(
     "Blue",
     "Champion Blue",
     [],
-    GameConstants.Badge.Champion,
+    GameConstants.Badge.Elite_Champion,
     10000,
-    GameConstants.Badge.Lance,
+    GameConstants.Badge.Elite_Lance,
     "Why? Why did I lose? I never made any mistakes raising my Pokémon… Darn it! You're the new Pokémon League Champion! Although I don't like to admit it…"
 );

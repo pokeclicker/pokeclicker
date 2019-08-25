@@ -7,9 +7,8 @@ aria-labelledby="badgeCaseModalLabel">
        </div>
        <div class="modal-body">
            <div class="row no-gutters justify-content-center"
-                data-bind="foreach: new Array(GameConstants.AMOUNT_OF_BADGES)">
+                data-bind="foreach: Object.keys(GameConstants.Badge).filter(b=>isNaN(b) && !b.startsWith('Elite') && b != 'None')">
                <div class="col-sm-3 col-md-3 col-lg-3 badgeEntry">
-                   <div data-bind="with: GameConstants.Badge[$index() + 1]">
 
                        <div data-bind="if: player.hasBadge(GameConstants.Badge[$data])">
                            <img src=""
@@ -22,7 +21,6 @@ aria-labelledby="badgeCaseModalLabel">
                        </div>
                        <p style="bottom: 0;"
                           data-bind="text: $data">name</p>
-                   </div>
 
                </div>
            </div>
