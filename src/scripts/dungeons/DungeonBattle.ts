@@ -13,7 +13,7 @@ class DungeonBattle extends Battle {
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
-        const pokemonName: boolean = this.enemyPokemon().name;
+        const pokemonName: string = this.enemyPokemon().name;
         const isShiny: boolean = this.enemyPokemon().shiny;
         const pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(pokemonName, isShiny);
 

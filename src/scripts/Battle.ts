@@ -57,7 +57,7 @@ class Battle {
         player.gainShards(this.enemyPokemon());
         player.addRouteKill();
         BreedingHelper.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
-        const pokemonName: boolean = this.enemyPokemon().name;
+        const pokemonName: string = this.enemyPokemon().name;
         const isShiny: boolean = this.enemyPokemon().shiny;
         const pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(pokemonName, isShiny);
 
