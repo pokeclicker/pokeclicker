@@ -833,8 +833,8 @@ const pokemonList = [
         "id": 61,
         "name": "Poliwhirl",
         "catchRate": 120,
-        "evolution": "Poliwrath, Politoed",
-        "evoLevel": "Water_stone, Kings_rock",
+        "evolution": ["Poliwrath", "Politoed"],
+        "evoLevel": ["Water_stone", "Kings_rock"],
         "type": [
             "Water"
         ],
