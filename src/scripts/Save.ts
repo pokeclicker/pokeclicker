@@ -63,14 +63,18 @@ class Save {
         }
     }
 
-    public static reset(): void {
-        var confirmDelete = prompt("Are you sure you want reset? If so, type 'DELETE'");
+    public static reset(keepShinies: boolean = true): void {
+        var confirmDelete = prompt(`Are you sure you want reset?\nIf so, type 'DELETE'${keepShinies ? '\n\n[your shiny progress will not be reset]': ''}`);
 
-        if(confirmDelete == "DELETE"){
-            localStorage.setItem("player", null);
-            location.reload()
+        if(confirmDelete == 'DELETE'){
+            if (keepShinies){
+                const shiniesOnly = {_caughtShinyList: player.caughtShinyList()};
+                localStorage.setItem('player', JSON.stringify(shiniesOnly));
+            } else {
+                localStorage.removeItem('player');
+            }
+            location.reload();
         }
-
     }
 
     /** Filters an object by property names
