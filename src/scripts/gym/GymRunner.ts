@@ -67,7 +67,7 @@ class GymRunner {
 
             $('#receiveBadgeModal').modal('show');
         }
-        GameHelper.incrementObservable(player.statistics.gymsDefeated[Statistics.getGymIndex(gym.town, player.region)]);
+        GameHelper.incrementObservable(player.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);
         MapHelper.updateAllRoutes();
         Game.gameState(GameConstants.GameState.town);

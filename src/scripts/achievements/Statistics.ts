@@ -11,18 +11,21 @@ class Statistics {
     public totalMoney: KnockoutObservable<number>;
     public totalTokens: KnockoutObservable<number>;
     public totalQuestPoints: KnockoutObservable<number>;
+    public totalDiamonds: KnockoutObservable<number>;
     public pokeballsUsed: Array<KnockoutObservable<number>>;
     public pokeballsBought: Array<KnockoutObservable<number>>;
     public totalShards: Array<KnockoutObservable<number>>;
     public oakItemUses: Array<KnockoutObservable<number>>;
+    public berriesHarvested: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
         "gymsDefeated": GameConstants.KantoGyms.length + GameConstants.JohtoGyms.length,
         "dungeonsCleared": GameConstants.KantoDungeons.length + GameConstants.JohtoDungeons.length,
-        "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,// remove "None" pokeball type
-        "pokeballsBought": GameHelper.enumLength(GameConstants.Pokeball) - 1,
-        "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,// remove "None" pokemon type
+        "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
+        "pokeballsBought": GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
+        "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,  // remove "None" pokemon type
         "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
+        "berriesHarvested": GameHelper.enumLength(GameConstants.BerryType),
     }
 
     constructor(saved = {}) {
@@ -36,6 +39,7 @@ class Statistics {
             "totalMoney",
             "totalTokens",
             "totalQuestPoints",
+            "totalDiamonds",
         ];
 
         let arrayObservables = [
@@ -45,6 +49,7 @@ class Statistics {
             "pokeballsBought",
             "totalShards",
             "oakItemUses",
+            "berriesHarvested",
         ]
 
         for (let prop of observables) {
@@ -58,36 +63,14 @@ class Statistics {
         }
     }
 
-    public static getGymIndex(gym: string, region: GameConstants.Region) {
-        let index;
-        switch (region) {
-            case 0:
-                index = GameConstants.KantoGyms.indexOf(gym);
-                break;
-            case 1:
-                index = GameConstants.KantoGyms.length;
-                index += GameConstants.JohtoGyms.indexOf(gym);
-                break;
-        }
-        return index;
+    public static getGymIndex(gym: string) {
+        const gyms = GameConstants.RegionGyms.flat();
+        return gyms.indexOf(gym);
     }
 
     public static getDungeonIndex(dungeon: string) {
-        let index;
-        if (GameConstants.KantoDungeons.indexOf(dungeon) > -1) {
-            index = GameConstants.KantoDungeons.indexOf(dungeon)
-            return index;
-        } else {
-            index = GameConstants.KantoDungeons.length;
-        }
-        if (GameConstants.JohtoDungeons.indexOf(dungeon) > -1) {
-            index += GameConstants.JohtoDungeons.indexOf(dungeon)
-            return index;
-        } else {
-            index += GameConstants.JohtoDungeons.length;
-        }
-        console.log("Failed to find dungeon", dungeon);
-        return index;
+        const dungeons = GameConstants.RegionDungeons.flat();
+        return dungeons.indexOf(dungeon);
     }
 
 }

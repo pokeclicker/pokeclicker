@@ -133,8 +133,9 @@ class FarmRunner {
         player.berryList[GameConstants.BerryType[berryName]](player.berryList[GameConstants.BerryType[berryName]]() + amount);
     }
 
-    public static gainBerryById(berryType: number, amount: number = 1) {
-        player.berryList[berryType](player.berryList[berryType]() + amount);
+    public static gainBerryById(berryId: number, amount: number = 1) {
+        player.berryList[berryId](player.berryList[berryId]() + amount);
+        GameHelper.incrementObservable(player.statistics.berriesHarvested[berryId], amount);
     }
 
     public static getTooltipLabel(plotId) {

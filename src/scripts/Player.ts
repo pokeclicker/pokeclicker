@@ -825,6 +825,8 @@ class Player {
     }
 
     set diamonds(n: number) {
+        const amt = n - this._diamonds();
+        if (amt > 0) GameHelper.incrementObservable(player.statistics.totalDiamonds, amt);
         this._diamonds(n);
     }
 
