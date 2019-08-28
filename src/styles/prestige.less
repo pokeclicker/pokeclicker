@@ -1,0 +1,41 @@
+.prestige-table {
+  width: 90%;
+}
+.prestige-table td {
+  width: 14.2857143%;
+  position: relative;
+}
+.prestige-table td:after {
+  content: '';
+  display: block;
+  margin-top: 100%;
+}
+.prestige-upgrade {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.prestige-easy {
+  background-color: black;
+}
+
+.prestige-medium {
+  background-color:white;
+}
+
+.prestige-hard {
+  background-color:red;
+}
+
+.prestige-locked {
+  filter: contrast(10%);
+  z-index: 2;
+}
+
+.prestige-reachable {
+  filter: contrast(10%) blur(0.5px);
+  z-index: 1;
+}

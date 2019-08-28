@@ -84,6 +84,20 @@ namespace GameConstants {
         Cell_Battery,
     }
 
+    export function normalize(n: number, max:number){
+        return Math.min( max, Math.max(0, n));
+    }
+
+
+    // Prestige
+    export enum PrestigeType {
+        "Easy" = 0,
+        "Medium",
+        "Hard"
+    }
+
+    export const AMOUNT_OF_PRESTIGE_UPGRADES = 37;
+
     // Dungeons
     export const DUNGEON_SIZE = 5;
     export const DUNGEON_CHEST_SHOW = 2;
