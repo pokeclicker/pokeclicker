@@ -4,8 +4,10 @@ class QuestHelper{
     public static generateQuests(level: number, refreshes: number, d: Date) {
         SeededRand.seed(Number( level * (d.getFullYear() + refreshes * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate()));
 
+        const QuestTypes = new Set(GameConstants.QuestTypes);
         for (let i=0; i<GameConstants.QUESTS_PER_SET; i++) {
-            let type = SeededRand.fromArray(GameConstants.QuestTypes);
+            let type = SeededRand.fromArray(Array.from(QuestTypes));
+            QuestTypes.delete(type);
             let quest = QuestHelper.random(type, i);
             quest.index = i;
             QuestHelper.questList.push(quest);
@@ -13,10 +15,10 @@ class QuestHelper{
     }
 
     public static random(type: string, index: number) {
-        let amount, route;
+        let amount, route, region;
         switch (type) {
             case "DefeatPokemons":
-                route = SeededRand.intBetween(1, 25);
+                route = SeededRand.intBetween(1, GameConstants.RegionRoute[player.highestRegion]);
                 amount = SeededRand.intBetween(100, 500);
                 return new DefeatPokemonsQuest(route, amount);
             case "CapturePokemons":
@@ -49,12 +51,15 @@ class QuestHelper{
                 return new MineLayersQuest(amount);
             case "CatchShinies":
                 return new CatchShiniesQuest(1);
-            case "DefeatKantoGym":
-                let gymIndex = SeededRand.intBetween(0, GameConstants.KantoGyms.length - 1);
+            case "DefeatGym":
+                region = SeededRand.intBetween(0, player.highestRegion);
+                const gymTown = SeededRand.fromArray(GameConstants.RegionGyms[region]);
                 amount = SeededRand.intBetween(5, 20);
-                return new DefeatGymQuest(gymIndex, 0, amount);
-            case "DefeatKantoDungeon":
-                let dungeon = SeededRand.fromArray(GameConstants.KantoDungeons);
+                return new DefeatGymQuest(gymTown, amount);
+            case "DefeatDungeon":
+                // Allow upto highest region
+                region = SeededRand.intBetween(0, player.highestRegion);
+                const dungeon = SeededRand.fromArray(GameConstants.RegionDungeons[region]);
                 amount = SeededRand.intBetween(5, 20);
                 return new DefeatDungeonQuest(dungeon, amount);
             case "UsePokeball":
@@ -76,6 +81,11 @@ class QuestHelper{
                 let oakItem = SeededRand.fromArray(possibleItems);
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
+            case "HarvestBerriesQuest":
+                const possibleBerries = Object.keys(BerryList);
+                const berryType = SeededRand.fromArray(possibleBerries);
+                amount = SeededRand.intBetween(30, 300);
+                return new HarvestBerriesQuest(berryType, amount);
         }
     }
 
@@ -143,7 +153,7 @@ class QuestHelper{
             return false;
         }
         for (let i = 0; i < QuestHelper.questList().length; i++) {
-            if (!(player.completedQuestList[i]() || QuestHelper.questList()[i].isCompleted() 
+            if (!(player.completedQuestList[i]() || QuestHelper.questList()[i].isCompleted()
                     || QuestHelper.questList()[i].inProgress()())) {
                 return true;
             }

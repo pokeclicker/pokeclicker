@@ -162,16 +162,17 @@ namespace GameConstants {
     // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
     //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
     const questBase = 1; // change this to scale all quest points
-    export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
+    export const DEFEAT_POKEMONS_BASE_REWARD  = questBase * 1;
     export const CAPTURE_POKEMONS_BASE_REWARD = GameConstants.DEFEAT_POKEMONS_BASE_REWARD / 0.8; // Defeat reward divided by chance to catch (guessed)
-    export const GAIN_MONEY_BASE_REWARD      = questBase * 0.0017;  // Dimava
-    export const GAIN_TOKENS_BASE_REWARD     = CAPTURE_POKEMONS_BASE_REWARD / 13 // <route number> tokens gained for every capture
-    export const HATCH_EGGS_BASE_REWARD      = questBase * 33;      // Dimava
-    export const MINE_LAYERS_BASE_REWARD     = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
-    export const SHINY_BASE_REWARD           = questBase * 6000;    // Dimava
-    export const USE_OAK_ITEM_BASE_REWARD    = GameConstants.DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
+    export const GAIN_MONEY_BASE_REWARD       = questBase * 0.0017;  // Dimava
+    export const GAIN_TOKENS_BASE_REWARD      = CAPTURE_POKEMONS_BASE_REWARD / 13 // <route number> tokens gained for every capture
+    export const HATCH_EGGS_BASE_REWARD       = questBase * 33;      // Dimava
+    export const MINE_LAYERS_BASE_REWARD      = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
+    export const FARM_BERRIES_BASE_REWARD     = questBase * 5;       // Needs balancing
+    export const SHINY_BASE_REWARD            = questBase * 1500;    // Dimava
+    export const USE_OAK_ITEM_BASE_REWARD     = GameConstants.DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
 
-    export const ACTIVE_QUEST_MULTIPLIER     = 4;
+    export const ACTIVE_QUEST_MULTIPLIER      = 4;
 
     export const QuestTypes = [
         "DefeatPokemons",
@@ -182,10 +183,11 @@ namespace GameConstants {
         "HatchEggs",
         "MineLayers",
         "CatchShinies",
-        "DefeatKantoGym",
-        "DefeatKantoDungeon",
+        "DefeatGym",
+        "DefeatDungeon",
         "UsePokeball",
         "UseOakItem",
+        "HarvestBerriesQuest",
     ];
 
     export const QUESTS_PER_SET = 10;
@@ -695,6 +697,11 @@ namespace GameConstants {
         "Champion Lance"
     ];
 
+    export const RegionGyms = [
+      KantoGyms,
+      JohtoGyms
+    ];
+
     export const KantoDungeons = [
         "Viridian Forest",
         "Digletts Cave",
@@ -721,6 +728,11 @@ namespace GameConstants {
         "Ice Path",
         "Dark Cave",
         "Mt Silver"
+    ];
+
+    export const RegionDungeons = [
+      KantoDungeons,
+      JohtoDungeons
     ];
 
     export const StartingTowns = [
