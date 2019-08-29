@@ -35,7 +35,7 @@ class MapHelper {
 
     private static hasDungeonReq(route, region) {
         let dungeonReq = GameConstants.routeDungeonRequirements[region][route];
-        return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeonReq)]();
+        return dungeonReq == undefined || 0 < player.dungeonsCleared[Statistics.getDungeonIndex(dungeonReq)]();
     }
 
     private static hasRouteKillReq(route, region) {

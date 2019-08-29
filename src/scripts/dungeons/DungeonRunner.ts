@@ -80,6 +80,7 @@ class DungeonRunner {
 
     public static dungeonWon() {
         GameHelper.incrementObservable(player.statistics.dungeonsCleared[Statistics.getDungeonIndex(DungeonRunner.dungeon.name())]);
+        player.dungeonsCleared[Statistics.getDungeonIndex(DungeonRunner.dungeon.name())] += 1;
         Game.gameState(GameConstants.GameState.town);
         // TODO award loot with a special screen
         Notifier.notify("You have successfully completed the dungeon", GameConstants.NotificationOption.success);
@@ -101,5 +102,5 @@ class DungeonRunner {
     public static payTokens() {
         player.dungeonTokens(player.dungeonTokens() - DungeonRunner.dungeon.tokenCost);
     }
-    
+
 }

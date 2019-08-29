@@ -12,6 +12,8 @@ class Player {
     public prestigePoints: Array<KnockoutObservable<number>>;
     public prestigeUpgradesBought: Array<KnockoutObservable<boolean>>;
 
+    public dungeonsCleared: Array<KnockoutObservable<number>>;
+
     private _caughtShinyList: KnockoutObservableArray<string>;
     private _route: KnockoutObservable<number>;
     private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
@@ -52,6 +54,9 @@ class Player {
         });
         this.prestigeUpgradesBought = Array.apply(null, Array(GameConstants.AMOUNT_OF_PRESTIGE_UPGRADES + 1)).map(function (val, index) {
             return ko.observable(savedPlayer.prestigeUpgradesBought ? (savedPlayer.prestigeUpgradesBought[index] || false) : false)
+        });
+        this.dungeonsCleared = Array.apply(null, Array(GameConstants.RegionDungeons.flat().length)).map(function (val, index) {
+            return ko.observable(savedPlayer.dungeonsCleared ? (savedPlayer.dungeonsCleared[index] || 0) : 0)
         });
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         this._region = ko.observable(savedPlayer._region);
@@ -983,6 +988,7 @@ class Player {
               "currentQuests",
               "_shinyCatches",
               "gymDefeats",
+              "dungeonsCleared",
               "statistics",
               "achievementsCompleted",
               "farmPoints",
