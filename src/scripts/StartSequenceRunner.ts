@@ -65,6 +65,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
     $('#starterCaughtModal').on('hidden.bs.modal', function () {
         Save.store(player);
         Game.gameState(GameConstants.GameState.fighting);
-
     });
 });
