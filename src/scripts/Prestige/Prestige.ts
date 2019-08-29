@@ -96,12 +96,12 @@ class Prestige {
             return false;
         }
         if (!this.canReachUpgrade(upgradeId)) {
-            Notifier.notify('Can't reach this upgrade yet', GameConstants.NotificationOption.danger);
+            Notifier.notify(`Can't reach this upgrade yet`, GameConstants.NotificationOption.danger);
             return false;
 
         }
         if (player.prestigePoints[prestigeUpgrade.costType] < prestigeUpgrade.cost) {
-            Notifier.notify('Can't afford upgrade', GameConstants.NotificationOption.danger);
+            Notifier.notify(`Can't afford upgrade`, GameConstants.NotificationOption.danger);
             return false;
 
         }
