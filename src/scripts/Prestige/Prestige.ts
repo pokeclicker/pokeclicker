@@ -83,6 +83,9 @@ class Prestige {
      * Restart the game.
      */
     public static startPrestige(type: GameConstants.PrestigeType) {
+        if (!confirm(`Are you sure you want to prestige, All Your progress will be reset.\n\nPrestige (${GameConstants.PrestigeType[type]})?`))
+          return;
+
         // TODO: Calculate amount of points that should be awarded
         const amount = 1;
         this.awardPrestigePoints(player.prestigeType, amount);
