@@ -92,16 +92,16 @@ class Prestige {
     public static canBuyUpgrade(upgradeId: number): boolean {
         let prestigeUpgrade: PrestigeUpgrade = this.getUpgrade(upgradeId);
         if (this.isUpgradeBought(upgradeId)) {
-            Notifier.notify("Already bought this upgrade", GameConstants.NotificationOption.danger);
+            Notifier.notify('Already bought this upgrade', GameConstants.NotificationOption.danger);
             return false;
         }
         if (!this.canReachUpgrade(upgradeId)) {
-            Notifier.notify("Can't reach this upgrade yet", GameConstants.NotificationOption.danger);
+            Notifier.notify('Can't reach this upgrade yet', GameConstants.NotificationOption.danger);
             return false;
 
         }
         if (player.prestigePoints[prestigeUpgrade.costType] < prestigeUpgrade.cost) {
-            Notifier.notify("Can't afford upgrade", GameConstants.NotificationOption.danger);
+            Notifier.notify('Can't afford upgrade', GameConstants.NotificationOption.danger);
             return false;
 
         }
@@ -128,69 +128,70 @@ class Prestige {
 
     public static initialize() {
         // TODO add correct description and bonuses
-        this.addUpgrade(new PrestigeUpgrade(1, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(2, "Harvest time decreased by 33%", 1, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(3, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(4, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(5, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Hard, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(6, "Harvest time decreased by 33%", 1, GameConstants.PrestigeType.Hard, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(7, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Hard, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(8, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(9, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(10, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Hard, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(11, "Harvest time decreased by 33%", 3, GameConstants.PrestigeType.Hard, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(12, "Harvest time decreased by 33%", 6, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(13, "Harvest time decreased by 33%", 3, GameConstants.PrestigeType.Hard, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(14, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Hard, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(15, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(16, "Harvest time decreased by 33%", 1, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(17, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(18, "Harvest time decreased by 33%", 3, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(19, "Harvest time decreased by 33%", 7, GameConstants.PrestigeType.Medium, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(20, "Harvest time decreased by 33%", 3, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(21, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(22, "Harvest time decreased by 33%", 1, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(23, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(24, "Harvest time decreased by 33%", 5, GameConstants.PrestigeType.Medium, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(25, "Harvest time decreased by 33%", 4, GameConstants.PrestigeType.Medium, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(26, "Harvest time decreased by 33%", 6, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(27, "Harvest time decreased by 33%", 4, GameConstants.PrestigeType.Medium, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(28, "Harvest time decreased by 33%", 5, GameConstants.PrestigeType.Medium, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(29, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(30, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(31, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Medium, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(32, "Harvest time decreased by 33%", 1, GameConstants.PrestigeType.Medium, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(33, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Medium, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(34, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(35, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(36, "Harvest time decreased by 33%", 1, GameConstants.PrestigeType.Easy, -0.33));
-        this.addUpgrade(new PrestigeUpgrade(37, "Harvest time decreased by 33%", 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(1, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(2, 'Harvest time decreased by 33%', 1, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(3, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(4, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(5, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Hard, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(6, 'Harvest time decreased by 33%', 1, GameConstants.PrestigeType.Hard, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(7, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Hard, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(8, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(9, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(10, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Hard, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(11, 'Harvest time decreased by 33%', 3, GameConstants.PrestigeType.Hard, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(12, 'Harvest time decreased by 33%', 6, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(13, 'Harvest time decreased by 33%', 3, GameConstants.PrestigeType.Hard, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(14, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Hard, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(15, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(16, 'Harvest time decreased by 33%', 1, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(17, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(18, 'Harvest time decreased by 33%', 3, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(19, 'Harvest time decreased by 33%', 7, GameConstants.PrestigeType.Medium, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(20, 'Harvest time decreased by 33%', 3, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(21, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(22, 'Harvest time decreased by 33%', 1, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(23, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(24, 'Harvest time decreased by 33%', 5, GameConstants.PrestigeType.Medium, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(25, 'Harvest time decreased by 33%', 4, GameConstants.PrestigeType.Medium, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(26, 'Harvest time decreased by 33%', 6, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(27, 'Harvest time decreased by 33%', 4, GameConstants.PrestigeType.Medium, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(28, 'Harvest time decreased by 33%', 5, GameConstants.PrestigeType.Medium, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(29, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(30, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(31, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Medium, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(32, 'Harvest time decreased by 33%', 1, GameConstants.PrestigeType.Medium, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(33, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Medium, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(34, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(35, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(36, 'Harvest time decreased by 33%', 1, GameConstants.PrestigeType.Easy, -0.33));
+        this.addUpgrade(new PrestigeUpgrade(37, 'Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, -0.33));
     }
 
     public static updateHTML() {
-        let html = "<table class='prestige-table'>";
+        let html = '<table class="prestige-table"></tbody>';
         for (let i = 0; i < this.upgradeLayout.length; i++) {
             html += "<tr>";
             for (let j = 0; j < this.upgradeLayout[i].length; j++) {
                 let id = this.upgradeLayout[i][j];
-                let cssClass = this.getUpgrade(id) !== undefined ? GameConstants.PrestigeType[this.getUpgrade(id).costType].toLocaleLowerCase() : "none";
-                let opacity = "prestige-locked";
+                let cssClass = this.getUpgrade(id) !== undefined ? GameConstants.PrestigeType[this.getUpgrade(id).costType].toLocaleLowerCase() : 'none';
+                let opacity = 'prestige-locked';
                 if (this.isUpgradeBought(id) || id == 0) {
-                    opacity = ""
+                    opacity = ''
                 } else if (this.canReachUpgrade(id)) {
-                    opacity = "prestige-reachable";
+                    opacity = 'prestige-reachable';
                 }
 
 
-                html += "<td>";
+                html += '<td>';
                 html += `<div onclick=Prestige.buyUpgrade(${id}) class='prestige-upgrade prestige-${cssClass} ${opacity}'>${id}</div>`;
-                html += "</td>";
+                html += '</td>';
             }
 
-            html += "</tr>";
+            html += '</tr>';
         }
+        html += '</tbody></table>';
 
-        $("#prestige-modal-body").html(html)
+        $('#prestige-modal-body').html(html)
     }
 
 }
