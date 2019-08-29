@@ -51,13 +51,14 @@ class Prestige {
      * Set the id of the upgrade to true in player and subtract the correct points.
      */
     public static buyUpgrade(upgradeId: number) {
-        if(upgradeId == 0){
-            return;
-        }
-        if (this.canBuyUpgrade(upgradeId)) {
-            player.prestigeUpgradesBought[upgradeId](true);
-        }
-        this.updateHTML();
+        if(!this.canBuyUpgrade(upgradeId)) return;
+
+        const prestigeUpgrade: PrestigeUpgrade = this.getUpgrade(upgradeId);
+
+        player.prestigePoints[prestigeUpgrade.costType](player.prestigePoints[prestigeUpgrade.costType]() - prestigeUpgrade.cost);
+        player.prestigeUpgradesBought[upgradeId](true);
+
+        Notifier.notify(`Purchased upgrade!`, GameConstants.NotificationOption.success);
     }
 
     /**
@@ -90,21 +91,26 @@ class Prestige {
      * Check if an upgrade can be bought
      */
     public static canBuyUpgrade(upgradeId: number): boolean {
+
+        if (upgradeId <= 0) return false;
+
         let prestigeUpgrade: PrestigeUpgrade = this.getUpgrade(upgradeId);
+
         if (this.isUpgradeBought(upgradeId)) {
             Notifier.notify('Already bought this upgrade', GameConstants.NotificationOption.danger);
             return false;
         }
+
         if (!this.canReachUpgrade(upgradeId)) {
             Notifier.notify(`Can't reach this upgrade yet`, GameConstants.NotificationOption.danger);
             return false;
-
         }
+
         if (player.prestigePoints[prestigeUpgrade.costType]() < prestigeUpgrade.cost) {
             Notifier.notify(`Can't afford upgrade`, GameConstants.NotificationOption.danger);
             return false;
-
         }
+
         return true;
     }
 
