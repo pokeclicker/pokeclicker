@@ -64,8 +64,8 @@ class Prestige {
     /**
      * Reward 1 of each point that is lower or equal to the prestige that is started.
      */
-    public static awardPrestigePoints(type: GameConstants.PrestigeType) {
-        // TODO
+    public static awardPrestigePoints(type: GameConstants.PrestigeType, amount: number = 1) {
+        return player.prestigePoints[type](player.prestigePoints[type]() + amount);
     }
 
     /**
@@ -77,14 +77,17 @@ class Prestige {
 
 
     /**
-     * Reset all player values except caughtShinyList, defeatedAmount, eggSlots, itemList, diamons, shardUpgrades, mineUpgrade, statistics, questXp, shinyCatches, all farm related stuff.
+     * Reset all player values except caughtShinyList, defeatedAmount, eggSlots, itemList, diamonds, shardUpgrades, mineUpgrade, statistics, questXp, shinyCatches, all farm related stuff.
      * Store money, dungeontokens and questpoints so they can be recovered.
      * Award prestigepoints.
      * Restart the game.
      */
     public static startPrestige(type: GameConstants.PrestigeType) {
-        this.awardPrestigePoints(type);
-        // TODO
+        this.awardPrestigePoints(type, amount);
+
+        // Reset player data (only keeping specific things)
+        localStorage.setItem('player', JSON.stringify(player.toJSON(true)));
+        location.reload();
     }
 
     /**

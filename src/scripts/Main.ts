@@ -12,7 +12,6 @@ interface JQuery {
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
-    $('#PrestigeModal').modal('show');
     Preload.load(debug).then(function () {
         OakItemRunner.initialize();
         UndergroundItem.initialize();
