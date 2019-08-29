@@ -10,7 +10,7 @@ class Player {
 
     public achievementsCompleted: { [name: string]: boolean };
     public prestigesCompleted: number[] = [0,0,0];
-    public prestigePoints: number[] = [20,20,20];
+    public prestigePoints: Array<KnockoutObservable<number>>;
     public prestigeUpgradesBought: Array<KnockoutObservable<boolean>>;
 
     private _caughtShinyList: KnockoutObservableArray<string>;
@@ -48,6 +48,10 @@ class Player {
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._questPoints = ko.observable(savedPlayer._questPoints || 0);
+        this.prestigePoints = Array.apply(null, Array(GameHelper.enumLength(GameConstants.PrestigeType))).map(function (val, index) {
+            // TODO: change from 20 to 0!
+            return ko.observable(savedPlayer.prestigePoints ? (savedPlayer.prestigePoints[index] || 20) : 20)
+        });
         this.prestigeUpgradesBought = Array.apply(null, Array(GameConstants.AMOUNT_OF_PRESTIGE_UPGRADES + 1)).map(function (val, index) {
             return ko.observable(savedPlayer.prestigeUpgradesBought ? (savedPlayer.prestigeUpgradesBought[index] || false) : false)
         });
