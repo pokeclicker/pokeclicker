@@ -1001,12 +1001,9 @@ class Player {
               "_caughtShinyList",
               "_defeatedAmount",
               "_caughtAmount",
-              "_notCaughtBallSelection",
-              "_alreadyCaughtBallSelection",
               "_sortOption",
               "_sortDescending",
               "_oakItemExp",
-              "_itemMultipliers",
               "_shardUpgrades",
               "_shardsCollected",
               "achievementsCompleted",
@@ -1018,6 +1015,9 @@ class Player {
               "achievementsCompleted",
               "plotList",
               "berryList",
+              "tutorialProgress",
+              "tutorialState",
+              "tutorialComplete",
           ];
         }
         let plainJS = ko.toJS(this);
