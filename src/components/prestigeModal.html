@@ -16,9 +16,10 @@
                                 },
                                 click: function(){Prestige.buyUpgrade($data)},
                                 tooltip: {
-                                  title: Prestige.getUpgrade($data).description,
+                                  title: Prestige.getUpgrade($data).tooltip,
                                   trigger: 'hover',
-                                  placement:'bottom'
+                                  placement: 'bottom',
+                                  html: true
                                 }">
                                 <span data-bind="text: $data"></span><br/>
                                 <img data-bind="visible: Prestige.isLocked($data)()" src="assets/images/breeding/lock.png">
