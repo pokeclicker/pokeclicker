@@ -83,7 +83,12 @@ class Prestige {
      * Restart the game.
      */
     public static startPrestige(type: GameConstants.PrestigeType) {
-        this.awardPrestigePoints(type, amount);
+        // TODO: Calculate amount of points that should be awarded
+        const amount = 1;
+        this.awardPrestigePoints(player.prestigeType, amount);
+
+        // Set Players new prestige type
+        player.prestigeType = type;
 
         // Reset player data (only keeping specific things)
         localStorage.setItem('player', JSON.stringify(player.toJSON(true)));

@@ -9,6 +9,8 @@ class Player {
     private _dungeonTokens: KnockoutObservable<number>;
 
     public achievementsCompleted: { [name: string]: boolean };
+
+    public prestigeType: GameConstants.PrestigeType;
     public prestigePoints: Array<KnockoutObservable<number>>;
     public prestigeUpgradesBought: Array<KnockoutObservable<boolean>>;
 
@@ -49,6 +51,7 @@ class Player {
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._questPoints = ko.observable(savedPlayer._questPoints || 0);
+        this.prestigeType = savedPlayer.prestigeType || GameConstants.PrestigeType.Easy;
         this.prestigePoints = Array.apply(null, Array(GameHelper.enumLength(GameConstants.PrestigeType))).map(function (val, index) {
             return ko.observable(savedPlayer.prestigePoints ? (savedPlayer.prestigePoints[index] || 0) : 0)
         });
@@ -292,7 +295,14 @@ class Player {
             this._keyItems().push(name);
             KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
             player._keyItems.valueHasMutated();
+        }
+    }
 
+    public resetKeyItem(name: string) {
+        if (this.hasKeyItem(name)) {
+          this._keyItems().splice(this._keyItems().indexOf(name), 1);
+          KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
+          player._keyItems.valueHasMutated();
         }
     }
 
@@ -945,6 +955,7 @@ class Player {
               "_questPoints",
               "prestigePoints",
               "prestigeUpgradesBought",
+              "prestigeType",
               "_caughtShinyList",
               "_route",
               "_caughtPokemonList",
@@ -998,6 +1009,7 @@ class Player {
           keep = [
               "prestigePoints",
               "prestigeUpgradesBought",
+              "prestigeType",
               "_caughtShinyList",
               "_defeatedAmount",
               "_caughtAmount",
