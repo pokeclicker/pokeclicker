@@ -1,6 +1,32 @@
 <div class="modal noselect fade" id="PrestigeModal" tabindex="-1" role="dialog" aria-labelledby="PrestigeModalLabel">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+            <div class="modal-header">
+              <table width="100%">
+                  <tbody>
+                    <tr>
+                      <td width="33.33%">
+                          <span style="display: inline;">
+                              <img title="Prestige Points - Easy" src="assets/images/currency/money.png" class="prestige-coin-0" height="25px">
+                              <span id="prestigePointsEasy" data-bind="text: player.prestigePoints[0]()">0</span>
+                          </span>
+                      </td>
+                      <td width="33.33%">
+                          <span style="display: inline;">
+                              <img title="Prestige Points - Medium" src="assets/images/currency/money.png" class="prestige-coin-1" height="25px">
+                              <span id="prestigePointsMedium" data-bind="text: player.prestigePoints[1]()">0</span>
+                          </span>
+                      </td>
+                      <td width="33.33%">
+                          <span style="display: inline;">
+                              <img title="Prestige Points - Hard" src="assets/images/currency/money.png" class="prestige-coin-2" height="25px">
+                              <span id="prestigePointsHard" data-bind="text: player.prestigePoints[2]()">0</span>
+                          </span>
+                      </td>
+                    </tr>
+                  </tbody>
+              </table>
+            </div>
             <div class="modal-body" id="prestige-modal-body">
                 <table class="table table-borderless prestige-table">
                     <tbody data-bind="foreach: Prestige.upgradeLayout">
