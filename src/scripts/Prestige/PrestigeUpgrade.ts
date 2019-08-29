@@ -2,6 +2,7 @@ class PrestigeUpgrade {
 
     public id: number;
     public description: string;
+    public tooltip: string;
     public cost: number;
     public costType: GameConstants.PrestigeType;
     public bonus: number;
