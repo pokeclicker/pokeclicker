@@ -173,33 +173,6 @@ class Prestige {
         this.addUpgrade(new PrestigeUpgrade(37, '______', 2, GameConstants.PrestigeType.Easy, -0.33));
     }
 
-    public static updateHTML() {
-        let html = '<table class="prestige-table"></tbody>';
-        for (let i = 0; i < this.upgradeLayout.length; i++) {
-            html += "<tr>";
-            for (let j = 0; j < this.upgradeLayout[i].length; j++) {
-                let id = this.upgradeLayout[i][j];
-                let cssClass = this.getUpgrade(id) !== undefined ? GameConstants.PrestigeType[this.getUpgrade(id).costType].toLocaleLowerCase() : 'none';
-                let opacity = 'prestige-locked';
-                if (this.isUpgradeBought(id) || id == 0) {
-                    opacity = ''
-                } else if (this.canReachUpgrade(id)) {
-                    opacity = 'prestige-reachable';
-                }
-
-
-                html += '<td>';
-                html += `<div onclick=Prestige.buyUpgrade(${id}) class='prestige-upgrade prestige-${cssClass} ${opacity}'>${id}</div>`;
-                html += '</td>';
-            }
-
-            html += '</tr>';
-        }
-        html += '</tbody></table>';
-
-        //$('#prestige-modal-body').html(html);
-    }
-
     public static isLocked(upgradeId: number) {
         return ko.pureComputed(function(){
             return upgradeId != 0 && !Prestige.isUpgradeBought(upgradeId);

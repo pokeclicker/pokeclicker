@@ -70,8 +70,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         Game.applyRouteBindings();
         Preload.hideSplashScreen();
         game.start();
-        Prestige.updateHTML()
-
     });
 });
 
