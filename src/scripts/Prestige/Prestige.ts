@@ -55,7 +55,7 @@ class Prestige {
             return;
         }
         if (this.canBuyUpgrade(upgradeId)) {
-            player.prestigeUpgradesBought[upgradeId] = true;
+            player.prestigeUpgradesBought[upgradeId](true);
         }
         this.updateHTML();
     }
@@ -71,7 +71,7 @@ class Prestige {
      * Check if an upgrade is bought.
      */
     public static isUpgradeBought(upgradeId: number): boolean {
-        return player.prestigeUpgradesBought[upgradeId];
+        return player.prestigeUpgradesBought[upgradeId]();
     }
 
 
@@ -191,7 +191,19 @@ class Prestige {
         }
         html += '</tbody></table>';
 
-        $('#prestige-modal-body').html(html)
+        //$('#prestige-modal-body').html(html);
+    }
+
+    public static isLocked(upgradeId: number) {
+        return ko.pureComputed(function(){
+            return upgradeId != 0 && !Prestige.isUpgradeBought(upgradeId) && !Prestige.canReachUpgrade(upgradeId);
+        });
+    }
+
+    public static isReachable(upgradeId: number) {
+        return ko.pureComputed(function(){
+            return upgradeId != 0 && !Prestige.isUpgradeBought(upgradeId) && Prestige.canReachUpgrade(upgradeId);
+        });
     }
 
 }

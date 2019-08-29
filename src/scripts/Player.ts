@@ -11,7 +11,7 @@ class Player {
     public achievementsCompleted: { [name: string]: boolean };
     public prestigesCompleted: number[] = [0,0,0];
     public prestigePoints: number[] = [20,20,20];
-    public prestigeUpgradesBought = new Array(GameConstants.AMOUNT_OF_PRESTIGE_UPGRADES).fill(false);
+    public prestigeUpgradesBought: Array<KnockoutObservable<boolean>>;
 
     private _caughtShinyList: KnockoutObservableArray<string>;
     private _route: KnockoutObservable<number>;
@@ -48,6 +48,9 @@ class Player {
         this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._questPoints = ko.observable(savedPlayer._questPoints || 0);
+        this.prestigeUpgradesBought = Array.apply(null, Array(GameConstants.AMOUNT_OF_PRESTIGE_UPGRADES + 1)).map(function (val, index) {
+            return ko.observable(savedPlayer.prestigeUpgradesBought ? (savedPlayer.prestigeUpgradesBought[index] || false) : false)
+        });
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         this._region = ko.observable(savedPlayer._region);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
