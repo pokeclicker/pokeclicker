@@ -196,7 +196,7 @@ class Prestige {
 
     public static isLocked(upgradeId: number) {
         return ko.pureComputed(function(){
-            return upgradeId != 0 && !Prestige.isUpgradeBought(upgradeId) && !Prestige.canReachUpgrade(upgradeId);
+            return upgradeId != 0 && !Prestige.isUpgradeBought(upgradeId);
         });
     }
 
