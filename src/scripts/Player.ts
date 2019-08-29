@@ -275,12 +275,7 @@ class Player {
     }
 
     public hasKeyItem(name: string): boolean {
-        for (let i = 0; i < this._keyItems().length; i++) {
-            if (this._keyItems()[i] == name) {
-                return true;
-            }
-        }
-        return false;
+        return this._keyItems().includes(name);
     }
 
     set defeatedAmount(value: Array<KnockoutObservable<number>>) {
