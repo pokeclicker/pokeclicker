@@ -89,6 +89,7 @@ class Prestige {
         // TODO: Calculate amount of points that should be awarded
         const amount = 1;
         this.awardPrestigePoints(player.prestigeType, amount);
+        GameHelper.incrementObservable(player.statistics.prestigesCompleted[player.prestigeType], amount);
 
         // Set Players new prestige type
         player.prestigeType = type;
