@@ -13,6 +13,7 @@ class Player {
     public prestigeType: GameConstants.PrestigeType;
     public prestigePoints: Array<KnockoutObservable<number>>;
     public prestigeUpgradesBought: Array<KnockoutObservable<boolean>>;
+    public prestigeBank: Array<KnockoutObservable<number>>;
 
     public dungeonsCleared: Array<KnockoutObservable<number>>;
 
@@ -57,6 +58,9 @@ class Player {
         });
         this.prestigeUpgradesBought = Array.apply(null, Array(GameConstants.AMOUNT_OF_PRESTIGE_UPGRADES + 1)).map(function (val, index) {
             return ko.observable(savedPlayer.prestigeUpgradesBought ? (savedPlayer.prestigeUpgradesBought[index] || false) : false)
+        });
+        this.prestigeBank = Array.apply(null, Array(GameHelper.enumLength(GameConstants.Currency))).map(function (val, index) {
+            return ko.observable(savedPlayer.prestigeBank ? (savedPlayer.prestigeBank[index] || 0) : 0)
         });
         this.dungeonsCleared = Array.apply(null, Array(GameConstants.RegionDungeons.flat().length)).map(function (val, index) {
             return ko.observable(savedPlayer.dungeonsCleared ? (savedPlayer.dungeonsCleared[index] || 0) : 0)
@@ -956,6 +960,7 @@ class Player {
               "prestigePoints",
               "prestigeUpgradesBought",
               "prestigeType",
+              "prestigeBank",
               "_caughtShinyList",
               "_route",
               "_caughtPokemonList",
@@ -1010,6 +1015,7 @@ class Player {
               "prestigePoints",
               "prestigeUpgradesBought",
               "prestigeType",
+              "prestigeBank",
               "_caughtShinyList",
               "_defeatedAmount",
               "_caughtAmount",

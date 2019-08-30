@@ -86,10 +86,13 @@ class Prestige {
         if (!confirm(`Are you sure you want to prestige, All Your progress will be reset.\n\nPrestige (${GameConstants.PrestigeType[type]})?`))
           return;
 
+        // Apply prestige completion to statistics
+        GameHelper.incrementObservable(player.statistics.prestigesCompleted[player.prestigeType]);
+
         // TODO: Calculate amount of points that should be awarded
         const amount = 1;
         this.awardPrestigePoints(player.prestigeType, amount);
-        GameHelper.incrementObservable(player.statistics.prestigesCompleted[player.prestigeType], amount);
+        this.addToBank();
 
         // Set Players new prestige type
         player.prestigeType = type;
@@ -198,4 +201,25 @@ class Prestige {
         });
     }
 
+    public static addToBank(){
+        GameHelper.incrementObservable(player.prestigeBank[GameConstants.Currency.money], player._money());
+        GameHelper.incrementObservable(player.prestigeBank[GameConstants.Currency.questPoint], player._questPoints());
+        GameHelper.incrementObservable(player.prestigeBank[GameConstants.Currency.dungeontoken], player._dungeonTokens());
+        GameHelper.incrementObservable(player.prestigeBank[GameConstants.Currency.diamond], player._diamonds());
+        player._money(0);
+        player._questPoints(0);
+        player._dungeonTokens(0);
+        player._diamonds(0);
+    }
+
+    public static takeFromBank(){
+        GameHelper.incrementObservable(player._money, player.prestigeBank[GameConstants.Currency.money]());
+        GameHelper.incrementObservable(player._questPoints, player.prestigeBank[GameConstants.Currency.questPoint]());
+        GameHelper.incrementObservable(player._dungeonTokens, player.prestigeBank[GameConstants.Currency.dungeontoken]());
+        GameHelper.incrementObservable(player._diamonds, player.prestigeBank[GameConstants.Currency.diamond]());
+        player.prestigeBank[GameConstants.Currency.money](0);
+        player.prestigeBank[GameConstants.Currency.questPoint](0);
+        player.prestigeBank[GameConstants.Currency.dungeontoken](0);
+        player.prestigeBank[GameConstants.Currency.diamond](0);
+    }
 }
