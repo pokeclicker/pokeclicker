@@ -1022,6 +1022,7 @@ class Player {
               "_sortOption",
               "_sortDescending",
               "_oakItemExp",
+              "_keyItems",
               "_shardUpgrades",
               "_shardsCollected",
               "achievementsCompleted",
