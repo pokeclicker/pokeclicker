@@ -92,7 +92,8 @@ class Prestige {
 
         // Set Players new prestige type
         player.prestigeType = type;
-
+        // Give the player the dungeon ticket
+        player._keyItems(['Dungeon ticket']);
         // Reset player data (only keeping specific things)
         localStorage.setItem('player', JSON.stringify(player.toJSON(true)));
         location.reload();
