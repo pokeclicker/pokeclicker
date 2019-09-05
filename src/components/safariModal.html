@@ -11,7 +11,7 @@
                 </div>
                 <div id="safariBattleBody" data-bind="if: Safari.inBattle">
                     <div class='row safariEnemyRow'>
-                        <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind='attr: { src: "assets/images/pokemon/" + SafariBattle.enemy.id + ".png" }'></div>
+                        <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }"></div>
                         <div id='safariEnemyName' class='btn btn-secondary btn-sm '>
                             <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
                                 <img class='pokeball-smallest'
