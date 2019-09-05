@@ -83,9 +83,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
 
-       if(GymBattle.gym.badgeReward == GameConstants.Badge.Soul){
-           player.gainKeyItem("Safari ticket");
-       }
+        if(GymBattle.gym.badgeReward == GameConstants.Badge.Soul){
+            player.gainKeyItem("Safari ticket");
+        }
+
+        if (GymRunner.gymObservable() instanceof Champion) {
+            $('#hallOfFameModal').modal('show');
+        }
 
     });
 });

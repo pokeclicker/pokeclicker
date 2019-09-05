@@ -17,17 +17,9 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
                 data-bind="attr:{ src: 'assets/images/badges/' + GymRunner.gymObservable().leaderName + '.png'}, visible: !GameConstants.Badge[GymRunner.gymObservable().badgeReward].startsWith('Elite')">
 
        </div>
-       <div data-bind="if: !(GymRunner.gymObservable() instanceof Champion)">
+       <div>
            <div class="modal-footer">
                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-           </div>
-       </div>
-       <div data-bind="if: GymRunner.gymObservable() instanceof Champion">
-           <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                       onclick="$('#hallOfFameModal').modal('show')">
-                   Next
-               </button>
            </div>
        </div>
 
