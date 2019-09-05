@@ -83,15 +83,19 @@ class Prestige {
      * Restart the game.
      */
     public static startPrestige(type: GameConstants.PrestigeType) {
-        if (!confirm(`Are you sure you want to prestige, All Your progress will be reset.\n\nPrestige (${GameConstants.PrestigeType[type]})?`))
+        if (!this.canPrestige())
+          return Notifier.notify(`You must beat the Elite 4 Champion before you can prestige!`, GameConstants.NotificationOption.danger);
+
+        // TODO: Calculate amount of points that should be awarded
+        const amount_of_points = this.prestigePointsEarned();
+
+        if (!confirm(`Are you sure you want to prestige, All Your progress will be reset.\n\nPrestige for ${amount_of_points} x ${GameConstants.PrestigeType[player.prestigeType]} points?`))
           return;
 
         // Apply prestige completion to statistics
         GameHelper.incrementObservable(player.statistics.prestigesCompleted[player.prestigeType]);
 
-        // TODO: Calculate amount of points that should be awarded
-        const amount = 1;
-        this.awardPrestigePoints(player.prestigeType, amount);
+        this.awardPrestigePoints(player.prestigeType, amount_of_points);
         this.addToBank();
 
         // Set Players new prestige type
@@ -101,6 +105,23 @@ class Prestige {
         // Reset player data (only keeping specific things)
         localStorage.setItem('player', JSON.stringify(player.toJSON(true)));
         location.reload();
+    }
+
+    public static canPrestige(){
+      return player.hasBadge(GameConstants.Badge.Elite_Champion);
+    }
+
+    public static prestigePointsEarned(){
+      switch(true){
+        case player.hasBadge(GameConstants.Badge.Elite_JohtoChampion);:
+          return 3;
+          break;
+        case player.hasBadge(GameConstants.Badge.Elite_Champion):
+          return 1;
+          break;
+        default:
+          return 0;
+      }
     }
 
     /**
