@@ -26,6 +26,6 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         for (let pokemon of gym.pokemons) {
             attacksToWin += Math.ceil( Math.min( 4, pokemon.maxHealth / Math.max(1, playerDamage) ) );
         }
-        return Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * amount);
+        return Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount); 
     }
 }

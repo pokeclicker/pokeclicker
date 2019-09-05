@@ -62,7 +62,10 @@ class BreedingHelper {
                 }
             }
         }
-        Notifier.notify(`You hatched a ${egg.pokemon}${shiny ? '✨' : ''}!`, GameConstants.NotificationOption.success);
+
+        if (shiny) Notifier.notify(`✨ You hatched a shiny ${egg.pokemon}! ✨`, GameConstants.NotificationOption.warning);
+        else Notifier.notify(`You hatched a ${egg.pokemon}!`, GameConstants.NotificationOption.success);
+
         player.capturePokemon(egg.pokemon, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1

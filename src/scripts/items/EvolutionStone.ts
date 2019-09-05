@@ -18,6 +18,7 @@ class EvolutionStone extends Item {
         let shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
         let evolution = EvolutionStone.computeEvolution(this.type, pokemon);
         player.capturePokemon(evolution, shiny, false);
+        if (shiny) Notifier.notify(`✨ You evolved a shiny ${evolution}! ✨`, GameConstants.NotificationOption.warning);
         return shiny;
     }
 

@@ -425,7 +425,8 @@ class Player {
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
             if (!supressNotification) {
-                Notifier.notify(`You have captured a ${pokemonName}!`, GameConstants.NotificationOption.success)
+                if (shiny) Notifier.notify(`✨ You have captured a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
+                else Notifier.notify(`You have captured a ${pokemonName}!`, GameConstants.NotificationOption.success)
             }
         }
         if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
