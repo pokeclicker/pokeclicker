@@ -59,9 +59,11 @@ class CaughtPokemon {
                   this.evolver[index].dispose();
                 }
 
-                const obtainedAllEvolutions = reset ? !PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, true, true).every(p => player.alreadyCaughtPokemon(p)).length : false;
+                // We need to check if the player object has been set first, There has to be a better way though..
+                const obtainedAllEvolutions = reset ? !PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, true, true).some(p => !player.alreadyCaughtPokemon(p)) : false;
 
                 if (obtainedAllEvolutions){
+                  this.evolved = true;
                   return;
                 }
 
