@@ -7,7 +7,7 @@ class PrestigeBonuses {
      * Return the bonus if the upgrade is bought, 1 otherwise
      */
     public static getBonus(upgradeId){
-        return Prestige.isUpgradeBought(upgradeId) ? (1+Prestige.getUpgrade(upgradeId).bonus) : 0
+        return Prestige.isUpgradeBought(upgradeId) ? Prestige.getUpgrade(upgradeId).bonus : 0
     }
 
     /**
