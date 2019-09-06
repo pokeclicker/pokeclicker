@@ -90,10 +90,17 @@ class Battle {
     }
 
     protected static calculateActualCatchRate(pokeBall: GameConstants.Pokeball) {
-        let pokeballBonus = GameConstants.getCatchBonus(pokeBall);
-        let oakBonus = OakItemRunner.isActive(GameConstants.OakItem.Magic_Ball) ?
+        // Each of the bonuses is added on, not multiplied (20+5+10+10)
+        let catchRate = this.enemyPokemon().catchRate;
+        // Pokeball bonus
+        catchRate += GameConstants.getCatchBonus(pokeBall);
+        // Oak item bonus
+        catchRate += OakItemRunner.isActive(GameConstants.OakItem.Magic_Ball) ?
             OakItemRunner.calculateBonus(GameConstants.OakItem.Magic_Ball) : 0;
-        let totalChance = GameConstants.clipNumber(this.enemyPokemon().catchRate + pokeballBonus + oakBonus, 0, 100);
+        // Prestige bonus
+        catchRate += PrestigeBonuses.getBonus(36);
+        // Limit the catch chance to 0-100
+        const totalChance = GameConstants.clipNumber(catchRate, 0, 100);
         return totalChance;
     }
 

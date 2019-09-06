@@ -206,7 +206,7 @@ class Prestige {
         this.addUpgrade(new PrestigeUpgrade(33, '[Breeding]<br/>Breeding increases attack with +10%', 2, GameConstants.PrestigeType.Medium, 1.1)); // To implement bonus
         this.addUpgrade(new PrestigeUpgrade(34, '______', 2, GameConstants.PrestigeType.Easy, 0)); // To implement bonus
         this.addUpgrade(new PrestigeUpgrade(35, '[Quest]<br/>Gain 25% more quest points', 2, GameConstants.PrestigeType.Easy, 1.25)); // To implement bonus
-        this.addUpgrade(new PrestigeUpgrade(36, '[General]<br/>Catch rate +10%', 1, GameConstants.PrestigeType.Easy, 1.1)); // To implement bonus
+        this.addUpgrade(new PrestigeUpgrade(36, '[General]<br/>Catch rate +10%', 1, GameConstants.PrestigeType.Easy, 10));
         this.addUpgrade(new PrestigeUpgrade(37, '______', 2, GameConstants.PrestigeType.Easy, 0)); // To implement bonus
     }
 
