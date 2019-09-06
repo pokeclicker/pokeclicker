@@ -125,7 +125,7 @@ class Mine {
     private static chisel(x: number, y: number) {
         if (Mine.grid[x][y]() > 0) {
             if (Underground.energy >= Underground.CHISEL_ENERGY) {
-                Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)](Math.max(0, Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)]() - 2));
+                Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)](Math.max(0, Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)]() - (2 + PrestigeBonuses.getBonus(6))));
                 Underground.energy = Underground.energy - Underground.CHISEL_ENERGY;
             }
         }
