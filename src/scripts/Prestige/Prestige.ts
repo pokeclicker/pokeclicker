@@ -113,7 +113,7 @@ class Prestige {
 
     public static prestigePointsEarned(){
       switch(true){
-        case player.hasBadge(GameConstants.Badge.Elite_JohtoChampion);:
+        case player.hasBadge(GameConstants.Badge.Elite_JohtoChampion):
           return 3;
           break;
         case player.hasBadge(GameConstants.Badge.Elite_Champion):
