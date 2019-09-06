@@ -667,9 +667,10 @@ class Player {
     }
 
     public gainDungeonTokens(tokens: number) {
+        tokens = Math.round(tokens * PrestigeBonuses.getBonus(2));
         this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens));
         GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
-        Game.animateMoney(tokens,'playerMoneyDungeon');
+        Game.animateMoney(tokens, 'playerMoneyDungeon');
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
