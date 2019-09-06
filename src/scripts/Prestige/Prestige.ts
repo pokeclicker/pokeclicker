@@ -175,7 +175,7 @@ class Prestige {
         this.addUpgrade(new PrestigeUpgrade(2, '[General]<br/>Gain 30% more dungeon tokens', 1, GameConstants.PrestigeType.Easy, 1.3));
         this.addUpgrade(new PrestigeUpgrade(3, '[Underground]<br/>Max daily deals +1', 2, GameConstants.PrestigeType.Easy, 1));
         this.addUpgrade(new PrestigeUpgrade(4, '[Underground]<br/>Max treasures +1', 2, GameConstants.PrestigeType.Easy, 1));
-        this.addUpgrade(new PrestigeUpgrade(5, '[Safari Zone]<br/>Flee chance -20%', 2, GameConstants.PrestigeType.Hard, 0.8)); // To implement bonus
+        this.addUpgrade(new PrestigeUpgrade(5, '[Safari Zone]<br/>Flee chance -20%', 2, GameConstants.PrestigeType.Hard, 20));
         this.addUpgrade(new PrestigeUpgrade(6, '[Underground]<br/>Chisel damage +1', 1, GameConstants.PrestigeType.Hard, 1));
         this.addUpgrade(new PrestigeUpgrade(7, '______', 2, GameConstants.PrestigeType.Hard, 0)); // To implement bonus
         this.addUpgrade(new PrestigeUpgrade(8, '______', 2, GameConstants.PrestigeType.Easy, 0)); // To implement bonus
