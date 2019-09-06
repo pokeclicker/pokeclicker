@@ -72,7 +72,7 @@ class Prestige {
      * Check if an upgrade is bought.
      */
     public static isUpgradeBought(upgradeId: number): boolean {
-        return player.prestigeUpgradesBought[upgradeId]();
+        return player ? player.prestigeUpgradesBought[upgradeId]() : false;
     }
 
 
@@ -171,7 +171,7 @@ class Prestige {
 
     public static initialize() {
         // TODO add correct description and bonuses
-        this.addUpgrade(new PrestigeUpgrade(1, '[Farm]<br/>Harvest time decreased by 33%', 2, GameConstants.PrestigeType.Easy, 0.77)); // To implement bonus
+        this.addUpgrade(new PrestigeUpgrade(1, '[Farm]<br/>Harvest time decreased by 20%', 2, GameConstants.PrestigeType.Easy, 20));
         this.addUpgrade(new PrestigeUpgrade(2, '[General]<br/>Gain 30% more dungeon tokens', 1, GameConstants.PrestigeType.Easy, 1.3)); // To implement bonus
         this.addUpgrade(new PrestigeUpgrade(3, '[Underground]<br/>Max daily deals +1', 2, GameConstants.PrestigeType.Easy, 1)); // To implement bonus
         this.addUpgrade(new PrestigeUpgrade(4, '[Underground]<br/>Max treasures +1', 2, GameConstants.PrestigeType.Easy, 1)); // To implement bonus

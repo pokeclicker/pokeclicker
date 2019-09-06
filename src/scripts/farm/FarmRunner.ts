@@ -18,9 +18,10 @@ class FarmRunner {
     }
 
     public static timeToReduce(){
-      let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Sprayduck) ? OakItemRunner.calculateBonus(GameConstants.OakItem.Sprayduck) / 100 : 0;
-      oakItemBonus = 1 - oakItemBonus;
-      return Math.round(100 / oakItemBonus) / 100;
+      const oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Sprayduck) ? OakItemRunner.calculateBonus(GameConstants.OakItem.Sprayduck) : 0
+      const prestigeBonus = PrestigeBonuses.getBonus(1);
+      const bonus = 1 - ((oakItemBonus + prestigeBonus) / 100);
+      return Math.round(100 / bonus) / 100;
     }
 
     public static tick() {
