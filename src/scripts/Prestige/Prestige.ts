@@ -177,13 +177,13 @@ class Prestige {
         this.addUpgrade(new PrestigeUpgrade(4, '[Underground]<br/>Max treasures +1', 2, GameConstants.PrestigeType.Easy, 1));
         this.addUpgrade(new PrestigeUpgrade(5, '[Safari Zone]<br/>Flee chance -20%', 2, GameConstants.PrestigeType.Hard, 0.8));
         this.addUpgrade(new PrestigeUpgrade(6, '[Underground]<br/>Chisel damage +1', 1, GameConstants.PrestigeType.Hard, 1));
-        this.addUpgrade(new PrestigeUpgrade(7, '______', 2, GameConstants.PrestigeType.Hard, 000));
-        this.addUpgrade(new PrestigeUpgrade(8, '______', 2, GameConstants.PrestigeType.Easy, 000));
+        this.addUpgrade(new PrestigeUpgrade(7, '______', 2, GameConstants.PrestigeType.Hard, 0));
+        this.addUpgrade(new PrestigeUpgrade(8, '______', 2, GameConstants.PrestigeType.Easy, 0));
         this.addUpgrade(new PrestigeUpgrade(9, '[Farm]<br/>Fertilizer effect +20%', 2, GameConstants.PrestigeType.Easy, 1.2));
-        this.addUpgrade(new PrestigeUpgrade(10, '______', 6, GameConstants.PrestigeType.Hard, 000));
+        this.addUpgrade(new PrestigeUpgrade(10, '______', 6, GameConstants.PrestigeType.Hard, 0));
         this.addUpgrade(new PrestigeUpgrade(11, '[General]<br/>Routekills required decreased by 20%', 2, GameConstants.PrestigeType.Hard, 0.8));
         this.addUpgrade(new PrestigeUpgrade(12, '[Quest]<br/>Unlock +1 quest slot', 3, GameConstants.PrestigeType.Easy, 1));
-        this.addUpgrade(new PrestigeUpgrade(13, '______', 3, GameConstants.PrestigeType.Hard, 000));
+        this.addUpgrade(new PrestigeUpgrade(13, '______', 3, GameConstants.PrestigeType.Hard, 0));
         this.addUpgrade(new PrestigeUpgrade(14, '[Quest]<br/>Quest skip cost halved', 2, GameConstants.PrestigeType.Hard, 0.5));
         this.addUpgrade(new PrestigeUpgrade(15, '[Safari Zone]<br/>Max steps +200', 2, GameConstants.PrestigeType.Easy, 200));
         this.addUpgrade(new PrestigeUpgrade(16, '[General]<br/>Gain 10% more exp', 1, GameConstants.PrestigeType.Easy, 1.1));
@@ -198,16 +198,16 @@ class Prestige {
         this.addUpgrade(new PrestigeUpgrade(25, '[Breeding]<br/>Hatched Pokémon start at level 50', 4, GameConstants.PrestigeType.Medium, 50));
         this.addUpgrade(new PrestigeUpgrade(26, '[Underground]<br/>Energy regen time -10s', 6, GameConstants.PrestigeType.Easy, -1e4));
         this.addUpgrade(new PrestigeUpgrade(27, '[General]<br/>Encounter 25% more shinies', 4, GameConstants.PrestigeType.Medium, 1.25));
-        this.addUpgrade(new PrestigeUpgrade(28, '______', 5, GameConstants.PrestigeType.Medium, 000));
-        this.addUpgrade(new PrestigeUpgrade(29, '______', 2, GameConstants.PrestigeType.Easy, 000));
-        this.addUpgrade(new PrestigeUpgrade(30, '______', 2, GameConstants.PrestigeType.Easy, 000));
+        this.addUpgrade(new PrestigeUpgrade(28, '______', 5, GameConstants.PrestigeType.Medium, 0));
+        this.addUpgrade(new PrestigeUpgrade(29, '______', 2, GameConstants.PrestigeType.Easy, 0));
+        this.addUpgrade(new PrestigeUpgrade(30, '______', 2, GameConstants.PrestigeType.Easy, 0));
         this.addUpgrade(new PrestigeUpgrade(31, '[Underground]<br/>Max energy +50', 2, GameConstants.PrestigeType.Medium, 50));
         this.addUpgrade(new PrestigeUpgrade(32, '[Farm]<br/>Harvest Berry gain +20%', 1, GameConstants.PrestigeType.Medium, 1.2));
         this.addUpgrade(new PrestigeUpgrade(33, '[Breeding]<br/>Breeding increases attack with +10%', 2, GameConstants.PrestigeType.Medium, 1.1));
-        this.addUpgrade(new PrestigeUpgrade(34, '______', 2, GameConstants.PrestigeType.Easy, 000));
+        this.addUpgrade(new PrestigeUpgrade(34, '______', 2, GameConstants.PrestigeType.Easy, 0));
         this.addUpgrade(new PrestigeUpgrade(35, '[Quest]<br/>Gain 25% more quest points', 2, GameConstants.PrestigeType.Easy, 1.25));
         this.addUpgrade(new PrestigeUpgrade(36, '[General]<br/>Catch rate +10%', 1, GameConstants.PrestigeType.Easy, 1.1));
-        this.addUpgrade(new PrestigeUpgrade(37, '______', 2, GameConstants.PrestigeType.Easy, 000));
+        this.addUpgrade(new PrestigeUpgrade(37, '______', 2, GameConstants.PrestigeType.Easy, 0));
     }
 
     public static isLocked(upgradeId: number) {
