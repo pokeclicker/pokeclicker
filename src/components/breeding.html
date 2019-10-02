@@ -14,7 +14,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                level 100 pokémon for an egg of the same pokémon.<br>
                Hatched pokémon have a higher chance of becoming shiny!
            </p>
-           <div data-bind="if: player.canBreedPokemon()">
+           <div data-bind="if: player.hasFreeEggSlot()">
                <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).map(x=>player._itemList[x]()).reduce((x,y)=>x+y) -->
                <p>
                    Pick an egg below to breed:
@@ -33,6 +33,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                    </div>
                </div>
                <!-- /ko -->
+               <!-- Check if the player has any level 100 Pokemon or if they have any eggs -->
+               <p class="text-danger" data-bind="visible: !player.hasMaxLevelPokemon()">
+                   Unfortunately, you don't have any pokémon of level 100
+               </p>
+               <!-- ko if: player.hasMaxLevelPokemon() -->
                <p>
                    Pick a pokémon below to breed them:
                </p>
@@ -50,17 +55,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                        </button>
                    </div>
                </div>
+               <!-- /ko -->
            </div>
-           <div data-bind="ifnot: player.hasMaxLevelPokemon() && Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).map(x=>player._itemList[x]()).reduce((x,y)=>x+y)">
-               <p>
-                   Unfortunately, you don't have any pokémon of level 100
-               </p>
-           </div>
-           <div data-bind="ifnot: player.hasFreeEggSlot()">
-               <p>
-                   Unfortunately, you don't have any free eggslots
-               </p>
-           </div>
+           <p class="text-danger" data-bind="visible: !player.hasFreeEggSlot()">
+               Unfortunately, you don't have any free eggslots
+           </p>
        </div>
        <div class="modal-footer">
            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
