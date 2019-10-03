@@ -1,0 +1,768 @@
+<g transform='translate(-1,-2)' data-bind='if: player.region == GameConstants.Region.hoenn'>
+    <image width="100%" xlink:href="assets/images/hoenn.png"></image>
+
+    <!--
+    Town element
+
+        The two numbers following M in the path route are coordinates for the inital point,
+        adjust them to move the town element, and replace "TOWN" with the actual town name
+
+
+    <path d="M 70 108.39 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="TOWN"
+          data-bind="
+          click:function(){MapHelper.moveToTown('TOWN')},
+          attr: { class: MapHelper.calculateTownCssClass('TOWN') }"
+          d="M 72.8 109.53 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    -->
+
+    <!-- ------ -->
+    <!-- ROUTES -->
+    <!-- ------ -->
+
+    <!--Route 101-->
+    <g transform="rotate(90,0,0)"
+       data-bind="click:function(){ MapHelper.moveToRoute(101, 2); } ">
+        <rect data-route='101'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(101,2) }"
+              height="23"
+              width="40"
+              x="280" y="-120"></rect>
+        <text font-size="13px" x="289" y="-105">101</text>
+    </g>
+
+    <!--Route 102-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(102, 2); } ">
+        <rect data-route='102'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(102,2) }"
+              height="23"
+              width="50"
+              x="50" y="262"></rect>
+        <text font-size="13px" x="62" y="279">102</text>
+    </g>
+
+    <!--Route 103-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(103, 2); } ">
+        <rect data-route='103'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(103,2) }"
+              height="23"
+              width="89"
+              x="97" y="239"></rect>
+        <text font-size="13px" x="130" y="256">103</text>
+    </g>
+
+    <!--Route 104-->
+    <g transform="rotate(90,0,0)"
+       data-bind="click:function(){ MapHelper.moveToRoute(104, 2); } ">
+        <rect data-route='104'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(104,2) }"
+              height="23"
+              width="95"
+              x="190" y="-30"></rect>
+        <text font-size="13px" x="243" y="-14">104</text>
+    </g>
+
+    <!--Route 105-->
+    <g transform="rotate(90,0,0)"
+       data-bind="click:function(){ MapHelper.moveToRoute(105, 2); } ">
+        <rect data-route='105'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(105,2) }"
+              height="23"
+              width="65"
+              x="285" y="-31"></rect>
+        <text font-size="13px" x="306" y="-15">105</text>
+    </g>
+
+    <!--Route 106-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(106, 2); } ">
+        <rect data-route='106'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(106,2) }"
+              height="24"
+              width="68"
+              x="8" y="350"></rect>
+        <text font-size="13px" x="30" y="367">106</text>
+    </g>
+
+    <!--Route 107-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(107, 2); } ">
+        <rect data-route='107'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(107,2) }"
+              height="24"
+              width="66"
+              x="76" y="373"></rect>
+        <text font-size="13px" x="97" y="390">107</text>
+    </g>
+
+    <!--Route 108-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(108, 2); } ">
+        <rect data-route='108'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(108,2) }"
+              height="24"
+              width="44"
+              x="142" y="373"></rect>
+        <text font-size="13px" x="152" y="390">108</text>
+    </g>
+
+    <!--Route 109-->
+    <g transform="rotate(90,0,0)"
+       data-bind="click:function(){ MapHelper.moveToRoute(109, 2); } ">
+        <rect data-route='109'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(109,2) }"
+              height="24"
+              width="64"
+              x="333" y="-210"></rect>
+        <text font-size="13px" x="353" y="-194">109</text>
+    </g>
+
+    <!--Route 110-->
+    <g transform="rotate(90,0,0)"
+     data-bind="click:function(){ MapHelper.moveToRoute(110, 2); } ">
+      <rect data-route='110'
+            data-bind="attr: { class: MapHelper.calculateRouteCssClass(110,2) }"
+            height="23"
+            width="88"
+            x="199" y="-209"></rect>
+      <text font-size="13px" x="229" y="-193">110</text>
+    </g>
+
+    <!--Route 111-->
+    <g transform="rotate(90,0,0)"
+     data-bind="click:function(){ MapHelper.moveToRoute(111, 2); } ">
+      <rect data-route='111'
+            data-bind="attr: { class: MapHelper.calculateRouteCssClass(111,2) }"
+            height="23"
+            width="131"
+            x="38" y="-209"></rect>
+      <text font-size="13px" x="100" y="-193">111</text>
+    </g>
+
+    <!--Route 112-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(112, 2); } ">
+        <rect data-route='112'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(112,2) }"
+              height="46"
+              width="50"
+              x="136" y="106"></rect>
+        <text font-size="13px" x="154" y="144">112</text>
+    </g>
+
+    <!--Route 113-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(113, 2); } ">
+        <rect data-route='113'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(113,2) }"
+              height="23"
+              width="99"
+              x="87" y="38"></rect>
+        <text font-size="13px" x="120" y="55">113</text>
+    </g>
+
+    <!--Route 114-->
+    <g transform="rotate(90,0,0)"
+     data-bind="click:function(){ MapHelper.moveToRoute(114, 2); } ">
+      <rect data-route='114'
+            data-bind="attr: { class: MapHelper.calculateRouteCssClass(114,2) }"
+            height="24"
+            width="68"
+            x="38" y="-65"></rect>
+      <text font-size="13px" x="62" y="-49">114</text>
+    </g>
+
+    <!--Route 115-->
+    <g transform="rotate(90,0,0)"
+       data-bind="click:function(){ MapHelper.moveToRoute(115, 2); } ">
+        <rect data-route='115'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(115,2) }"
+              height="23"
+              width="73"
+              x="83" y="-31"></rect>
+        <text font-size="13px" x="108" y="-15">115</text>
+    </g>
+
+    <!--Route 116-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(116, 2); } ">
+        <rect data-route='116'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(116,2) }"
+              height="23"
+              width="68"
+              x="31" y="150"></rect>
+        <text font-size="13px" x="52" y="167">116</text>
+    </g>
+
+    <!--Route 117-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(117, 2); } ">
+        <rect data-route='117'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(117,2) }"
+              height="23"
+              width="61"
+              x="118" y="172"></rect>
+        <text font-size="13px" x="137" y="189">117</text>
+    </g>
+
+    <!--Route 118-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(118, 2); } ">
+        <rect data-route='118'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(118,2) }"
+              height="23"
+              width="43"
+              x="233" y="172"></rect>
+        <text font-size="13px" x="240" y="189">118</text>
+    </g>
+
+    <!--Route 119-->
+    <g transform="rotate(90,0,0)"
+     data-bind="click:function(){ MapHelper.moveToRoute(119, 2); } ">
+      <rect data-route='119'
+            data-bind="attr: { class: MapHelper.calculateRouteCssClass(119,2) }"
+            height="23"
+            width="134"
+            x="38" y="-276"></rect>
+      <text font-size="13px" x="100" y="-261">119</text>
+    </g>
+
+    <!--Route 120-->
+    <g transform="rotate(90,0,0)"
+     data-bind="click:function(){ MapHelper.moveToRoute(120, 2); } ">
+      <rect data-route='120'
+            data-bind="attr: { class: MapHelper.calculateRouteCssClass(120,2) }"
+            height="23"
+            width="90"
+            x="38" y="-321"></rect>
+      <text font-size="13px" x="73" y="-305">120</text>
+    </g>
+
+    <!--Route 121-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(121, 2); } ">
+        <rect data-route='121'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(121,2) }"
+              height="23"
+              width="109"
+              x="321" y="105"></rect>
+        <text font-size="13px" x="365" y="123">121</text>
+    </g>
+
+    <!--Route 122-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(122, 2); } ">
+        <rect data-route='122'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(122,2) }"
+              height="45"
+              width="45"
+              x="359" y="127"></rect>
+        <text font-size="13px" x="369" y="143">122</text>
+    </g>
+
+    <!--Route 123-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(123, 2); } ">
+        <rect data-route='123'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(123,2) }"
+              height="23"
+              width="135"
+              x="275" y="172"></rect>
+        <text font-size="13px" x="325" y="189">123</text>
+    </g>
+
+    <!--Route 124-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(124, 2); } ">
+        <rect data-route='124'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(124,2) }"
+              height="90"
+              width="68"
+              x="477" y="83"></rect>
+        <text font-size="13px" x="506" y="120">124</text>
+    </g>
+
+    <!--Route 125-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(125, 2); } ">
+        <rect data-route='125'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(125,2) }"
+              height="90"
+              width="68"
+              x="544" y="83"></rect>
+        <text font-size="13px" x="555" y="120">125</text>
+    </g>
+
+    <!--Route 126-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(126, 2); } ">
+        <rect data-route='126'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(126,2) }"
+              height="91"
+              width="68"
+              x="477" y="172"></rect>
+        <text font-size="13px" x="504" y="210">126</text>
+    </g>
+
+    <!--Route 127-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(127, 2); } ">
+        <rect data-route='127'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(127,2) }"
+              height="90"
+              width="68"
+              x="544" y="172"></rect>
+        <text font-size="13px" x="555" y="210">127</text>
+    </g>
+
+    <!--Route 128-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(128, 2); } ">
+        <rect data-route='128'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(128,2) }"
+              height="23"
+              width="67"
+              x="544" y="261"></rect>
+        <text font-size="13px" x="576" y="279">128</text>
+    </g>
+
+    <!--Route 129-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(129, 2); } ">
+        <rect data-route='129'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(129,2) }"
+              height="23"
+              width="48"
+              x="564" y="284"></rect>
+        <text font-size="13px" x="576" y="301">129</text>
+    </g>
+
+    <!--Route 130-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(130, 2); } ">
+        <rect data-route='130'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(130,2) }"
+              height="23"
+              width="64"
+              x="500" y="284"></rect>
+        <text font-size="13px" x="520" y="301">130</text>
+    </g>
+
+    <!--Route 131-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(131, 2); } ">
+        <rect data-route='131'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(131,2) }"
+              height="23"
+              width="67"
+              x="433" y="284"></rect>
+        <text font-size="13px" x="453" y="301">131</text>
+    </g>
+
+    <!--Route 132-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(132, 2); } ">
+        <rect data-route='132'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(132,2) }"
+              height="23"
+              width="67"
+              x="346" y="284"></rect>
+        <text font-size="13px" x="365" y="301">132</text>
+    </g>
+
+    <!--Route 133-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(133, 2); } ">
+        <rect data-route='133'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(133,2) }"
+              height="23"
+              width="69"
+              x="277" y="284"></rect>
+        <text font-size="13px" x="297" y="301">133</text>
+    </g>
+    
+    <!--Route 134-->
+    <g data-bind="click:function(){ MapHelper.moveToRoute(134, 2); } ">
+        <rect data-route='134'
+              data-bind="attr: { class: MapHelper.calculateRouteCssClass(134,2) }"
+              height="23"
+              width="66"
+              x="211" y="284"></rect>
+        <text font-size="13px" x="230" y="301">134</text>
+    </g>
+
+    <!-- ----- -->
+    <!-- TOWNS -->
+    <!-- ----- -->
+
+    <!--Littleroot Town-->
+    <path d="M 94 323 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Littleroot Town"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Littleroot Town')},
+          attr: { class: MapHelper.calculateTownCssClass('Littleroot Town') },
+          css: { flash: MapHelper.ableToTravel() }"
+          d="M 96.8 324.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Oldale Town-->
+    <path d="M 94 267 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Oldale Town"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Oldale Town')},
+          attr: { class: MapHelper.calculateTownCssClass('Oldale Town') }"
+          d="M 96.8 268.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Petalburg City-->
+    <path d="M 28 267 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Petalburg City"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Petalburg City')},
+          attr: { class: MapHelper.calculateTownCssClass('Petalburg City') }"
+          d="M 30.8 268.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Rustboro City-->
+    <path d="M 5 160 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 40 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Rustboro City"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Rustboro City')},
+          attr: { class: MapHelper.calculateTownCssClass('Rustboro City') }"
+          d="M 7.8 161.14 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 38 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Dewford Town-->
+    <path d="M 50 380 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Dewford Town"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Dewford Town')},
+          attr: { class: MapHelper.calculateTownCssClass('Dewford Town') }"
+          d="M 52.8 381.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Slateport City-->
+    <path d="M 184 290 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 40 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Slateport City"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Slateport City')},
+          attr: { class: MapHelper.calculateTownCssClass('Slateport City') }"
+          d="M 186.8 291.14 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 38 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Mauville City-->
+    <path d="M 175 178 l 8.29 -8.29 h 45 l 8.29 8.29 v 11.42 l -8.29 8.29 h -45 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Mauville City"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Mauville City')},
+          attr: { class: MapHelper.calculateTownCssClass('Mauville City') }"
+          d="M 177.7 179.14 l 6.63 -6.63 h 43 l 6.63 6.63 v 9.14 l -6.63 6.63 h -43 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Verdanturf Town-->
+    <path d="M 95 180 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Verdanturf Town"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Verdanturf Town')},
+          attr: { class: MapHelper.calculateTownCssClass('Verdanturf Town') }"
+          d="M 97.8 181.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Fallarbor Town-->
+    <path d="M 62 44 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Fallarbor Town"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Fallarbor Town')},
+          attr: { class: MapHelper.calculateTownCssClass('Fallarbor Town') }"
+          d="M 64.8 45.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Lavaridge Town-->
+    <path d="M 119 135 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Lavaridge Town"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Lavaridge Town')},
+          attr: { class: MapHelper.calculateTownCssClass('Lavaridge Town') }"
+          d="M 121.8 136.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Fortree City-->
+    <path d="M 273 45 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Fortree City"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Fortree City')},
+          attr: { class: MapHelper.calculateTownCssClass('Fortree City') }"
+          d="M 275.8 46.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--LilyCove City-->
+    <path d="M 425 112 l 8.29 -8.29 h 45 l 8.29 8.29 v 11.42 l -8.29 8.29 h -45 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="LilyCove City"
+          data-bind="
+          click:function(){MapHelper.moveToTown('LilyCove City')},
+          attr: { class: MapHelper.calculateTownCssClass('LilyCove City') }"
+          d="M 427.7 113.14 l 6.63 -6.63 h 43 l 6.63 6.63 v 9.14 l -6.63 6.63 h -43 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Mossdeep City-->
+    <path d="M 540 148 l 8.29 -8.29 h 45 l 8.29 8.29 v 11.42 l -8.29 8.29 h -45 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Mossdeep City"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Mossdeep City')},
+          attr: { class: MapHelper.calculateTownCssClass('Mossdeep City') }"
+          d="M 542.7 149.14 l 6.63 -6.63 h 43 l 6.63 6.63 v 9.14 l -6.63 6.63 h -43 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    
+    <!--Sootopolis City-->
+    <path d="M 487 232 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Sootopolis City"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Sootopolis City')},
+          attr: { class: MapHelper.calculateTownCssClass('Sootopolis City') }"
+          d="M 489.8 233.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Pacifidlog Town-->
+    <path d="M 408 290 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Pacifidlog Town"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Pacifidlog Town')},
+          attr: { class: MapHelper.calculateTownCssClass('Pacifidlog Town') }"
+          d="M 410.8 291.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Ever Grande City-->
+    <path d="M 609 269 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Ever Grande City"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Ever Grande City')},
+          attr: { class: MapHelper.calculateTownCssClass('Ever Grande City') }"
+          d="M 611.8 270.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!--Hoenn Pokemon League-->
+    <path d="M 609 218 l 8.29 -8.29 h 11.42 l 8.29 8.29 v 11.42 l -8.29 8.29 h -11.42 l -8.29 -8.29 Z"
+          fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+    <path class="city" data-town="Hoenn Pokemon League"
+          data-bind="
+          click:function(){MapHelper.moveToTown('Hoenn Pokemon League')},
+          attr: { class: MapHelper.calculateTownCssClass('Hoenn Pokemon League') }"
+          d="M 611.8 219.2 l 6.63 -6.63 h 9.14 l 6.63 6.63 v 9.14 l -6.63 6.63 h -9.14 l -6.63 -6.63 Z"
+          fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
+          stroke-miterlimit="10" stroke-width="1.4">
+    </path>
+
+    <!-- -------- -->
+    <!-- DUNGEONS -->
+    <!-- -------- -->
+
+    <!--Petalburg Woods-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="11" y="217"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Petalburg Woods')},
+    attr: { class: MapHelper.calculateTownCssClass('Petalburg Woods') }"
+          class="city" data-town="Petalburg Woods"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="12" y="218"></rect>
+
+    <!--Rusturf Tunnel-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="101" y="152"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Rusturf Tunnel')},
+    attr: { class: MapHelper.calculateTownCssClass('Rusturf Tunnel') }"
+          class="city" data-town="Rusturf Tunnel"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="102" y="153"></rect>
+
+    <!--Granite Cave-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="32" y="377"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Granite Cave')},
+    attr: { class: MapHelper.calculateTownCssClass('Granite Cave') }"
+          class="city" data-town="Granite Cave"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="33" y="378"></rect>
+
+    <!--Sea Mauville-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="156" y="354"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Sea Mauville')},
+    attr: { class: MapHelper.calculateTownCssClass('Sea Mauville') }"
+          class="city" data-town="Sea Mauville"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="157" y="355"></rect>
+
+    <!--New Mauville-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="212" y="200"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('New Mauville')},
+    attr: { class: MapHelper.calculateTownCssClass('New Mauville') }"
+          class="city" data-town="New Mauville"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="213" y="201"></rect>
+
+    <!--Meteor Falls-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="28" y="87"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Meteor Falls')},
+    attr: { class: MapHelper.calculateTownCssClass('Meteor Falls') }"
+          class="city" data-town="Meteor Falls"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="29" y="88"></rect>
+
+    <!--Fiery Path-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="158" y="109"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Fiery Path')},
+    attr: { class: MapHelper.calculateTownCssClass('Fiery Path') }"
+          class="city" data-town="Fiery Path"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="159" y="110"></rect>
+
+    <!--Jagged Path-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="137" y="109"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Jagged Path')},
+    attr: { class: MapHelper.calculateTownCssClass('Jagged Path') }"
+          class="city" data-town="Jagged Path"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="138" y="110"></rect>
+
+    <!--Mt. Chimney-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="136" y="85"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Mt. Chimney')},
+    attr: { class: MapHelper.calculateTownCssClass('Mt. Chimney') }"
+          class="city" data-town="Mt. Chimney"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="137" y="86"></rect>
+
+    <!--Mt. Pyre-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="386" y="148"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Mt. Pyre')},
+    attr: { class: MapHelper.calculateTownCssClass('Mt. Pyre') }"
+          class="city" data-town="Mt. Pyre"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="387" y="149"></rect>
+
+    <!--Shoal Cave-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="587" y="113"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Shoal Cave')},
+    attr: { class: MapHelper.calculateTownCssClass('Shoal Cave') }"
+          class="city" data-town="Shoal Cave"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="588" y="114"></rect>
+
+    <!--Seafloor Cavern-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="552" y="265"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Seafloor Cavern')},
+    attr: { class: MapHelper.calculateTownCssClass('Seafloor Cavern') }"
+          class="city" data-town="Seafloor Cavern"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="553" y="267"></rect>
+
+    <!--Sky Pillar-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="465" y="265"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Sky Pillar')},
+    attr: { class: MapHelper.calculateTownCssClass('Sky Pillar') }"
+          class="city" data-town="Sky Pillar"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="466" y="266"></rect>
+
+    <!--Cave of Origin-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="460" y="197"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Cave of Origin')},
+    attr: { class: MapHelper.calculateTownCssClass('Cave of Origin') }"
+          class="city" data-town="Cave of Origin"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="461" y="198"></rect>
+
+    <!--Hoenn Victory Road-->
+    <rect fill="#ffffff" height="15.4" stroke="none" width="15.4"
+          x="615" y="241"></rect>
+    <rect data-bind="
+    click:function(){MapHelper.moveToTown('Hoenn Victory Road')},
+    attr: { class: MapHelper.calculateTownCssClass('Hoenn Victory Road') }"
+          class="city" data-town="Hoenn Victory Road"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="616" y="242"></rect>
+
+    <!-- Dock -->
+    <rect class="city" data-town="Dock"
+          fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+          height="12.6" stroke="#6c8ebf" width="12.6" x="209" y="290"
+          data-bind="click:function(){MapHelper.openShipModal()},
+          attr: { class: MapHelper.calculateTownCssClass('Slateport City') }"></rect>
+
+
+
+</g>

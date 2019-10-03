@@ -57,13 +57,23 @@ class MapHelper {
     };
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
+        let cls;
+
         if (player.route() == route && player.region == region) {
-            return "currentRoute";
+            cls = "currentRoute";
         }
-        if (MapHelper.accessToRoute(route, region)) {
-            return "unlockedRoute";
+        else if (MapHelper.accessToRoute(route, region)) {
+            cls = "unlockedRoute";
         }
-        return "lockedRoute";
+        else {
+            cls = "lockedRoute";
+        }
+
+        if (GameConstants.WaterRoutes[region].has(route))  {
+            cls = cls + ' ' + 'waterRoute'
+        }
+
+        return cls
     }
 
     public static calculateTownCssClass(town: string): string {
