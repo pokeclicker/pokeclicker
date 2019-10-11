@@ -16,6 +16,8 @@ const gulpImport = require('gulp-html-import');
 const markdown = require('gulp-markdown');
 const inject = require('gulp-inject');
 const glob = require("glob");
+const ejs = require("gulp-ejs");
+const plumber = require("gulp-plumber");
 
 
 /**
@@ -28,6 +30,7 @@ const srcs = {
     buildArtefacts: 'build/**/*',
     scripts: 'src/scripts/**/*.ts',
     html: ['src/*.html', 'src/templates/*.html', 'src/components/*.html'],
+    ejsTemplates: ['src/templates/*.ejs'],
     styles: 'src/styles/**/*.less',
     assets: 'src/assets/**/*',
     libs: ['node_modules/bootstrap/dist/js/bootstrap.min.js',
@@ -67,18 +70,21 @@ gulp.task('browserSync', () => {
     });
 });
 
-gulp.task('import', () => {
+gulp.task('compile-html', () => {
     let recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-3).reverse();
 
     const htmlDest = './build';
     gulp.src('./src/index.html')
+        .pipe(plumber())
         .pipe(gulpImport('./src/components/'))
+        .pipe(ejs())
         .pipe(inject(gulp.src(recentChangelogs)
             .pipe(markdown()), {
             starttag: '<!-- inject:head:html -->',
             transform: (filePath, file) => file.contents.toString('utf8')
         }))
-        .pipe(gulp.dest(htmlDest));
+        .pipe(gulp.dest(htmlDest))
+        .pipe(browserSync.reload({stream: true}));
 });
 
 
@@ -129,7 +135,7 @@ gulp.task('copyWebsite', () => {
     gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
 });
 
-gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles', 'full-changelog']);
+gulp.task('build', ['copy', 'assets', 'compile-html', 'scripts', 'styles', 'full-changelog']);
 
 gulp.task('website', done => {
     runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', () => done());
@@ -137,7 +143,8 @@ gulp.task('website', done => {
 
 gulp.task('default', done => {
     runSequence('clean', 'build', 'browserSync', () => {
-        gulp.watch(srcs.html, ['import', 'html']);
+        gulp.watch(srcs.html, ['compile-html']);
+        gulp.watch(srcs.ejsTemplates, ['compile-html']);
         gulp.watch(srcs.assets, ['assets']);
         gulp.watch(srcs.scripts, ['scripts']);
         gulp.watch(srcs.styles, ['styles']);
