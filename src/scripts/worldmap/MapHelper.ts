@@ -61,7 +61,11 @@ class MapHelper {
             return "currentRoute";
         }
         if (MapHelper.accessToRoute(route, region)) {
-            return "unlockedRoute";
+            if (player.routeKillsObservable(route)() >= player.routeKillsNeeded) {
+                return "unlockedRoute";
+            } else {
+                return "unlockedUnfinishedRoute";
+            }
         }
         return "lockedRoute";
     }
@@ -75,7 +79,7 @@ class MapHelper {
         }
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
-                if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
+                if (player.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
                     return "dungeon completedDungeon"
                 }
                 return "dungeon unlockedDungeon"
