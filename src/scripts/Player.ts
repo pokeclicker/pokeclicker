@@ -582,8 +582,12 @@ class Player {
         }
     }
 
+    public shardUpgradeMaxed(typeNum: number, effectNum: number): boolean {
+        return this._shardUpgrades[typeNum][effectNum]() >= GameConstants.MAX_SHARD_UPGRADES;
+    }
+
     public canBuyShardUpgrade(typeNum: number, effectNum: number): boolean {
-        let lessThanMax = this._shardUpgrades[typeNum][effectNum]() < GameConstants.MAX_SHARD_UPGRADES;
+        let lessThanMax = !this.shardUpgradeMaxed(typeNum, effectNum);
         let hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
         return lessThanMax && hasEnoughShards;
     }
