@@ -185,18 +185,14 @@ class QuestHelper{
         });
     }
 
+    // returns true is all quest are completed
     public static checkCompletedSet() {
         for (let questCompleted of player.completedQuestList) {
             if (!questCompleted()) {
-                return;
+                return false;
             }
         }
-        //Only reachable if all quests are completed
-        QuestHelper.getCompletionReward();
-    }
-
-    private static getCompletionReward() {
-        console.log("All quests Completed!")
+        return true;
     }
 
     public static questSlots(): KnockoutObservable<number> {
