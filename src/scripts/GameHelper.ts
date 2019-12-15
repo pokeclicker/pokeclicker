@@ -56,6 +56,17 @@ class GameHelper {
         return (`0${n}`).slice(-2);
     }
 
+    public static formatAmount(n: number): string {
+      if (n >= 1e9){
+        return Math.floor(n / 1e9) + "b";
+      } else if (n >= 1e6){
+        return Math.floor(n / 1e6) + "m";
+      } else if (n >= 1e3){
+        return Math.floor(n / 1e3) + "k";
+      }
+      return n;
+    }
+
     public static getIndexFromDistribution(a: number[]) {
         let rand = Math.random();
         for (let i = 0; i < a.length; i++) {

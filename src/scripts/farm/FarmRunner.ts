@@ -29,7 +29,6 @@ class FarmRunner {
         for (let i = 0; i < player.plotList.length; i++) {
             player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - timeToReduce));
         }
-
     }
 
     public static computePlotPrice(): number {

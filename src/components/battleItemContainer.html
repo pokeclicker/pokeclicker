@@ -1,0 +1,32 @@
+<div id="BattleItemContainer" class="card mb-3">
+    <div class="card-header p-0"><span>Battle Items</span></div>
+    <div class="card-body p-0">
+      <table class="table table-bordered m-0">
+        <tbody>
+          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
+            <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]())"></td>
+          </tr>
+          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
+            <td class="p-0" data-bind="attr: {
+                                disabled: !player.itemList[$data]()
+                            },
+                            css: {
+                                'bg-primary': EffectEngineRunner.getEffect($data) > 5,
+                                'bg-warning': EffectEngineRunner.getEffect($data) <= 5 && EffectEngineRunner.getEffect($data) > 0,
+                                'bg-secondary': !EffectEngineRunner.isActive($data)()
+                            },
+                            event: {
+                                click: function(){ItemHandler.useItem($data)}
+                            }">
+                <img src="" class="clickable" data-bind="attr: { src: '/assets/images/items/' + $data + '.png' }">
+
+            </td>
+          </tr>
+          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
+            <td class="text-light p-0"><code data-bind="text: EffectEngineRunner.formattedTimeLeft($data)()"></code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>

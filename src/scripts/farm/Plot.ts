@@ -26,7 +26,4 @@ class Plot {
         }
         return 4 - Math.ceil(4 * this.timeLeft() / this.berry().harvestTime);
     }
-
-
-
 }
