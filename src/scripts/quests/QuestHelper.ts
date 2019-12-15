@@ -186,7 +186,7 @@ class QuestHelper{
     }
 
     // returns true is all quest are completed
-    public static checkCompletedSet() {
+    public static allQuestCompleted() {
         for (let questCompleted of player.completedQuestList) {
             if (!questCompleted()) {
                 return false;

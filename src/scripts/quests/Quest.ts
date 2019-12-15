@@ -26,7 +26,7 @@ abstract class Quest {
     }
 
     endQuest() {
-        if (this.isCompleted()) {
+        if (this.isCompleted() && !this.claimed()) {
             player.gainQuestPoints(this.pointsReward);
             this.claimed(true);
             if (!this.inQuestLine) player.completedQuestList[this.index](true);
