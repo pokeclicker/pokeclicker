@@ -53,6 +53,8 @@ class Gym {
  * Data list that contains all gymLeaders, accessible by townName.
  */
 const gymList: { [townName: string]: Gym } = {};
+
+// Kanto Gyms
 gymList["Pewter City"] = new Gym(
     "Brock",
     "Pewter City",
@@ -144,6 +146,8 @@ gymList["Viridian City"] = new Gym(
     GameConstants.Badge.Volcano,
     "Ha! That was a truly intense fight. You have won! As proof, here is the Earth Badge!"
 );
+
+// Kanto Elite 4
 gymList["Elite Lorelei"] = new Gym(
     "Lorelei",
     "Elite Lorelei",
@@ -199,8 +203,6 @@ gymList["Elite Lance"] = new Gym(
 //TODO make champion Gym
 
 //Johto Gyms
-
-
 gymList["Violet City"] = new Gym(
     "Falkner",
     "Violet City",
@@ -211,7 +213,6 @@ gymList["Violet City"] = new Gym(
     GameConstants.Badge.Elite_Lance,
     "...For pity's sake! My dad's cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge."
 );
-
 gymList["Azalea Town"] = new Gym(
     "Bugsy",
     "Azalea Town",
@@ -223,7 +224,6 @@ gymList["Azalea Town"] = new Gym(
     GameConstants.Badge.Zephyr,
     "Whoa, amazing! You're an expert on Pokémon! My research isn't complete yet. OK, you win. Take this Hive Badge."
 );
-
 gymList["Goldenrod City"] = new Gym(
     "Whitney",
     "Goldenrod City",
@@ -234,7 +234,6 @@ gymList["Goldenrod City"] = new Gym(
     GameConstants.Badge.Hive,
     "...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here's the Plain Badge."
 );
-
 gymList["Ecruteak City"] = new Gym(
     "Morty",
     "Ecruteak City",
@@ -247,7 +246,6 @@ gymList["Ecruteak City"] = new Gym(
     GameConstants.Badge.Plain,
     "I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge.."
 );
-
 gymList["Cianwood City"] = new Gym(
     "Chuck",
     "Cianwood City",
@@ -258,7 +256,6 @@ gymList["Cianwood City"] = new Gym(
     GameConstants.Badge.Fog,
     "Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I'm going to train 24 hours a day!"
 );
-
 gymList["Olivine City"] = new Gym(
     "Jasmine",
     "Olivine City",
@@ -270,7 +267,6 @@ gymList["Olivine City"] = new Gym(
     GameConstants.Badge.Storm,
     "...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge."
 );
-
 gymList["Mahogany Town"] = new Gym(
     "Pryce",
     "Mahogany Town",
@@ -282,7 +278,6 @@ gymList["Mahogany Town"] = new Gym(
     GameConstants.Badge.Mineral,
     "I am impressed by your prowess. With your strong will, I know you will overcome all life's obstacles. You are worthy of this Glacier Badge!"
 );
-
 gymList["Blackthorn City"] = new Gym(
     "Clair",
     "Blackthorn City",
@@ -361,4 +356,188 @@ gymList["Champion Lance"] = new Gym(
     7500,
     GameConstants.Badge.Elite_Karen,
     "…It's over. But it's an odd feeling. I’m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!"
+);
+
+// Hoenn Gyms
+gymList["Rustboro City"] = new Gym(
+    "Roxanne",
+    "Rustboro City",
+    [
+        new GymPokemon("Geodude", 100000, 14),
+        new GymPokemon("Nosepass", 100000, 15),
+    ],
+    GameConstants.Badge.Stone,
+    10000,
+    GameConstants.Badge.Elite_JohtoChampion,
+    "So… I lost… It seems that I still have much more to learn… I understand."
+);
+gymList["Dewford Town"] = new Gym(
+    "Brawly",
+    "Dewford Town",
+    [
+        new GymPokemon("Machop", 100000, 17),
+        new GymPokemon("Makuhita", 100000, 18),
+    ],
+    GameConstants.Badge.Knuckle,
+    10000,
+    GameConstants.Badge.Stone,
+    "Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you've got me. Take this Gym Badge!"
+);
+gymList["Mauville City"] = new Gym(
+    "Wattson",
+    "Mauville City",
+    [
+        new GymPokemon("Magnemite", 100000, 22),
+        new GymPokemon("Voltorb", 100000, 20),
+        new GymPokemon("Magneton", 100000, 23),
+    ],
+    GameConstants.Badge.Dynamo,
+    10000,
+    GameConstants.Badge.Knuckle,
+    "Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!"
+);
+gymList["Lavaridge Town"] = new Gym(
+    "Flannery",
+    "Lavaridge Town",
+    [
+        new GymPokemon("Slugma", 100000, 26),
+        new GymPokemon("Slugma", 100000, 26),
+        new GymPokemon("Torkoal", 100000, 28),
+    ],
+    GameConstants.Badge.Heat,
+    10000,
+    GameConstants.Badge.Dynamo,
+    "Oh... I guess I was trying too hard... I... I've only recently become a Gym Leader. I tried too hard to be someone I'm not. I have to do things my natural way. If I don't, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this."
+);
+gymList["Petalburg City"] = new Gym(
+    "Norman",
+    "Petalburg City",
+    [
+        new GymPokemon("Slaking", 100000, 28),
+        new GymPokemon("Vigoroth", 100000, 30),
+        new GymPokemon("Slaking", 100000, 31),
+    ],
+    GameConstants.Badge.Balance,
+    10000,
+    GameConstants.Badge.Heat,
+    "… I… I can't… I can't believe it. I lost to you? But, rules are rules! Here, take this."
+);
+gymList["Fortree City"] = new Gym(
+    "Winona",
+    "Fortree City",
+    [
+        new GymPokemon("Swellow", 100000, 31),
+        new GymPokemon("Pelipper", 100000, 30),
+        new GymPokemon("Skarmory", 100000, 32),
+        new GymPokemon("Altaria", 100000, 33),
+    ],
+    GameConstants.Badge.Feather,
+    10000,
+    GameConstants.Badge.Balance,
+    "Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge."
+);
+gymList["Mossdeep City"] = new Gym(
+    "Tate & Liza",
+    "Mossdeep City",
+    [
+        new GymPokemon("Lunatone", 100000, 42),
+        new GymPokemon("Solrock", 100000, 42),
+    ],
+    GameConstants.Badge.Mind,
+    10000,
+    GameConstants.Badge.Feather,
+    "What? Our combination... Was shattered! It can't be helped. You've won... So, in recognition, take this Gym Badge."
+);
+gymList["Sootopolis City"] = new Gym(
+    "Juan",
+    "Sootopolis City",
+    [
+        new GymPokemon("Luvdisc", 100000, 41),
+        new GymPokemon("Whiscash", 100000, 41),
+        new GymPokemon("Sealeo", 100000, 43),
+        new GymPokemon("Crawdaunt", 100000, 43),
+        new GymPokemon("Kingdra", 100000, 46),
+    ],
+    GameConstants.Badge.Rain,
+    10000,
+    GameConstants.Badge.Mind,
+    "I realize now your authenticity and magnificence as a Pokémon Trainer. I find much joy in having met you and your Pokémon. You have proven yourself worthy of the Rain Badge. Accept it. Having that Badge assures you full obedience of all your Pokémon to every command you make."
+);
+
+// Hoenn Elite 4
+gymList["Elite Sidney"] = new Gym(
+    "Sidney",
+    "Elite Sidney",
+    [
+        new GymPokemon("Mightyena", 100000, 46),
+        new GymPokemon("Cacturne", 100000, 46),
+        new GymPokemon("Shiftry", 100000, 48),
+        new GymPokemon("Sharpedo", 100000, 48),
+        new GymPokemon("Absol", 100000, 49),
+    ],
+    GameConstants.Badge.Elite_Sidney,
+    10000,
+    GameConstants.Badge.Rain,
+    "Well, how do you like that? I lost! Eh, it was fun, so it doesn't matter."
+);
+gymList["Elite Phoebe"] = new Gym(
+    "Phoebe",
+    "Elite Phoebe",
+    [
+        new GymPokemon("Dusclops", 100000, 48),
+        new GymPokemon("Banette", 100000, 49),
+        new GymPokemon("Banette", 100000, 49),
+        new GymPokemon("Sableye", 100000, 50),
+        new GymPokemon("Dusclops", 100000, 51),
+    ],
+    GameConstants.Badge.Elite_Phoebe,
+    10000,
+    GameConstants.Badge.Elite_Sidney,
+    "Oh, darn. I've gone and lost."
+);
+gymList["Elite Glacia"] = new Gym(
+    "Glacia",
+    "Elite Glacia",
+    [
+        new GymPokemon("Glalie", 100000, 50),
+        new GymPokemon("Sealeo", 100000, 50),
+        new GymPokemon("Glalie", 100000, 52),
+        new GymPokemon("Sealeo", 100000, 52),
+        new GymPokemon("Walrein", 100000, 53),
+    ],
+    GameConstants.Badge.Elite_Glacia,
+    10000,
+    GameConstants.Badge.Elite_Phoebe,
+    "You and your Pokémon... How hot your spirits burn! The all-consuming heat overwhelms. It's no surprise that my icy skills failed to harm you."
+);
+gymList["Elite Drake"] = new Gym(
+    "Drake",
+    "Elite Drake",
+    [
+        new GymPokemon("Shelgon", 100000, 52),
+        new GymPokemon("Altaria", 100000, 54),
+        new GymPokemon("Flygon", 100000, 53),
+        new GymPokemon("Flygon", 100000, 53),
+        new GymPokemon("Salamence", 100000, 55),
+    ],
+    GameConstants.Badge.Elite_Drake,
+    10000,
+    GameConstants.Badge.Elite_Glacia,
+    "You deserve every credit for coming this far as a Trainer of Pokémon. You do seem to know what is needed. Yes, what a Trainer needs is a virtuous heart. Pokémon touch the good hearts of Trainers and learn good from wrong. They touch the good hearts of Trainers and grow strong. Go! Go onwards! The Champion is waiting!"
+);
+gymList["Champion Wallace"] = new Gym(
+    "Wallace",
+    "Champion Wallace",
+    [
+        new GymPokemon("Wailord", 100000, 57),
+        new GymPokemon("Tentacruel", 100000, 55),
+        new GymPokemon("Ludicolo", 100000, 56),
+        new GymPokemon("Whiscash", 100000, 56),
+        new GymPokemon("Gyarados", 100000, 56),
+        new GymPokemon("Milotic", 100000, 58),
+    ],
+    GameConstants.Badge.Elite_HoennChampion,
+    10000,
+    GameConstants.Badge.Elite_Drake,
+    "I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!"
 );

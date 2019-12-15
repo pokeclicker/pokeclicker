@@ -56,6 +56,9 @@ class Dungeon {
 
 // TODO add 22-25
 const dungeonList: { [dungeonName: string]: Dungeon } = {};
+
+// Kanto Dungeons
+
 dungeonList["Viridian Forest"] = new Dungeon("Viridian Forest",
     ["Caterpie", "Metapod", "Weedle", "Kakuna", "Pidgey", "Pidgeotto"],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
@@ -135,6 +138,8 @@ dungeonList["Cerulean Cave"] = new Dungeon("Cerulean Cave",
     [new DungeonBossPokemon("Rhydon", 143675, 60), new DungeonBossPokemon("Mewtwo", 215512, 70)],
     2500, GameConstants.Badge.Elite_Champion, 20, 55
 );
+
+// Johto Dungeons
 
 dungeonList["Sprout Tower"] = new Dungeon("Sprout Tower",
     ["Rattata", "Gastly", "Hoothoot"],
@@ -231,3 +236,110 @@ dungeonList["Mt Silver"] = new Dungeon("Mt Silver",
     [new DungeonBossPokemon("Larvitar", 12000, 60)],
     10000, GameConstants.Badge.Elite_Karen, 28, 50
 );
+
+// Hoenn Dungeons
+
+dungeonList["Petalburg Woods"] = new Dungeon("Petalburg Woods",
+    ["Poochyena", "Zigzagoon", "Wurmple", "Silcoon", "Cascoon", "Taillow", "Shroomish"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Slakoth", 100000, 10)],
+    12000, null, 101, 5);
+
+dungeonList["Rusturf Tunnel"] = new Dungeon("Rusturf Tunnel",
+    ["Whismur"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Whismur", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Granite Cave"] = new Dungeon("Granite Cave",
+    ["Zubat", "Abra", "Geodude", "Makuhita", "Aron", "Sableye"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Mawile", 100000, 20), new DungeonBossPokemon("Nosepass", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Fiery Path"] = new Dungeon("Fiery Path",
+    ["Machop", "Grimer", "Koffing", "Slugma", "Numel"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Torkoal", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Meteor Falls"] = new Dungeon("Meteor Falls",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Mt. Chimney"] = new Dungeon("Mt. Chimney",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Jagged Pass"] = new Dungeon("Jagged Pass",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["New Mauville"] = new Dungeon("New Mauville",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Sea Mauville"] = new Dungeon("Sea Mauville",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Mt. Pyre"] = new Dungeon("Mt. Pyre",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Shoal Cave"] = new Dungeon("Shoal Cave",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Cave of Origin"] = new Dungeon("Cave of Origin",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Seafloor Cavern"] = new Dungeon("Seafloor Cavern",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Sky Pillar"] = new Dungeon("Sky Pillar",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
+
+dungeonList["Victory Road Hoenn"] = new Dungeon("Victory Road Hoenn",
+    ["Unown"],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    4000,
+    [new DungeonBossPokemon("Unown", 100000, 20)],
+    12000, GameConstants.Badge.Stone, 101, 5);
