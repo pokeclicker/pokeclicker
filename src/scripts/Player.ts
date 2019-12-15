@@ -108,7 +108,7 @@ class Player {
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
         this._currentTown = ko.observable("");
-        this._starter = savedPlayer._starter || GameConstants.Starter.None;
+        this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
 
         console.log(savedPlayer._itemList);
 
