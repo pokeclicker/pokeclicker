@@ -10,7 +10,12 @@ class BattleItem extends Item {
         this.type = type;
     }
 
+    buy(amt: number) {
+        player.gainItem(this.name(), amt);
+    }
+
     use() {
+        EffectEngineRunner.addEffect(this.name());
     }
 }
 

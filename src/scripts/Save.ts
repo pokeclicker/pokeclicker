@@ -156,10 +156,18 @@ class Save {
         return res;
     }
 
+    public static initializeEffects(saved?: Array<string>): {[name: string]: KnockoutObservable<number>} {
+        let res = {};
+        for (let obj in GameConstants.BattleItemType) {
+            res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
+        }
+        return res;
+    }
+
     public static loadFromFile(file) {
-        testing = file;
+        let fileToRead = file;
         let fr = new FileReader();
-        fr.readAsText(testing);
+        fr.readAsText(fileToRead);
 
         setTimeout(function () {
             try {
@@ -206,5 +214,3 @@ document.addEventListener("DOMContentLoaded", function (event) {
         $('#saveTextArea').text(JSON.stringify(player));
     });
 });
-
-let testing;

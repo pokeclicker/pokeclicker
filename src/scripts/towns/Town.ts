@@ -146,7 +146,8 @@ TownList["Ecruteak City"] = new Town("Ecruteak City", [37]);
 let OlivineCityShop = new Shop(["Metal_coat"]);
 TownList["Olivine City"] = new Town("Olivine City", [39], OlivineCityShop);
 
-TownList["Cianwood City"] = new Town("Cianwood City", [41]);
+let CianwoodCityShop = new Shop(["Ultraball", "Time_stone"]);
+TownList["Cianwood City"] = new Town("Cianwood City", [41], CianwoodCityShop);
 
 TownList["Mahogany Town"] = new Town("Mahogany Town", [42], null, null, "Mt Mortar");
 

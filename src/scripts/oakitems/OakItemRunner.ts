@@ -65,6 +65,10 @@ class OakItemRunner {
         OakItemRunner.getOakItemObject(id).use();
     }
 
+    public static canUpgradeExp(id: GameConstants.OakItem): boolean {
+        return OakItemRunner.getOakItemObject(id).canUpgradeExp();
+    }
+
     public static calculateBonus(id: GameConstants.OakItem): number {
         return OakItemRunner.getOakItemObject(id).calculateBonus()();
     }

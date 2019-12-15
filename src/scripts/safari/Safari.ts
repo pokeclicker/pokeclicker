@@ -299,7 +299,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             fps: 8,
             frames: 4
         }).on('frame', function() {
-            if (Safari.sprite.frame%2 == 0) {
+            if (Safari.sprite.frame % 2 == 0) {
                 Safari.sprite.pause();
             }
         });

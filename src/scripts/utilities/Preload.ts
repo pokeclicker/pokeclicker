@@ -47,6 +47,7 @@ class Preload {
             p.push(new Promise<number>(resolve => {
                 let img = new Image();
                 img.onload = () => resolve();
+                img.onerror = () => resolve();
                 img.src = `assets/images/towns/${name}.png`;
             }));
 

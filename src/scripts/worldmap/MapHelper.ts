@@ -60,17 +60,22 @@ class MapHelper {
         let cls;
 
         if (player.route() == route && player.region == region) {
-            cls = "currentRoute";
+            cls = 'currentRoute';
         }
         else if (MapHelper.accessToRoute(route, region)) {
-            cls = "unlockedRoute";
+            if (player.routeKillsObservable(route)() >= player.routeKillsNeeded) {
+                cls = 'unlockedRoute';
+            } else {
+                cls = 'unlockedUnfinishedRoute';
+            }
         }
         else {
-            cls = "lockedRoute";
+            cls = 'lockedRoute';
         }
 
+        // Water routes
         if (GameConstants.WaterRoutes[region].has(route))  {
-            cls = cls + ' ' + 'waterRoute'
+            cls = cls + ' waterRoute';
         }
 
         return cls
@@ -78,24 +83,24 @@ class MapHelper {
 
     public static calculateTownCssClass(town: string): string {
         if (player.hasKeyItem(town)) {
-            return "city unlockedTown";
+            return 'city unlockedTown';
         }
         if (player.currentTown() == town) {
-            return "city currentTown";
+            return 'city currentTown';
         }
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
-                if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
-                    return "dungeon completedDungeon"
+                if (player.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
+                    return 'dungeon completedDungeon'
                 }
-                return "dungeon unlockedDungeon"
+                return 'dungeon unlockedDungeon'
             }
-            return "city unlockedTown";
+            return 'city unlockedTown';
         }
         if (dungeonList.hasOwnProperty(town)) {
-            return "dungeon"
+            return 'dungeon'
         }
-        return "city";
+        return 'city';
     }
 
     public static accessToTown(townName: string): boolean {
@@ -137,20 +142,20 @@ class MapHelper {
     }
 
     public static openShipModal() {
-        let openModal = () => {$("#ShipModal").modal('show');}
+        let openModal = () => {$('#ShipModal').modal('show');}
         switch (player.region) {
             case 0:
-                if (TownList["Vermillion City"].isUnlocked() && player.highestRegion > 0) {
+                if (TownList['Vermillion City'].isUnlocked() && player.highestRegion > 0) {
                     openModal();
                     return;
                 }
             case 1:
-                if (TownList["Olivine City"].isUnlocked()) {
+                if (TownList['Olivine City'].isUnlocked()) {
                     openModal();
                     return;
                 }
         }
-        Notifier.notify("You cannot access this dock yet", GameConstants.NotificationOption.warning)
+        Notifier.notify('You cannot access this dock yet', GameConstants.NotificationOption.warning)
     }
 
     public static ableToTravel() {
