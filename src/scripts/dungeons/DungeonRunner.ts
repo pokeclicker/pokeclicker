@@ -51,8 +51,14 @@ class DungeonRunner {
         DungeonRunner.chestsOpened++;
         let random: number = GameConstants.randomIntBetween(0, DungeonRunner.dungeon.itemList.length - 1);
         let input = GameConstants.BattleItemType[DungeonRunner.dungeon.itemList[random]];
-        Notifier.notify('Found 1 ' + input + ' in a dungeon chest', GameConstants.NotificationOption.success);
-        player.gainItem(input, 1);
+        let amount = 1;
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
+            if (Math.random() < 0.5) {
+                amount += 1
+            }
+        }
+        Notifier.notify(`Found ${amount} ${input} in a dungeon chest`, GameConstants.NotificationOption.success);
+        player.gainItem(input, amount);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
         if (DungeonRunner.chestsOpened == GameConstants.DUNGEON_CHEST_SHOW) {
@@ -101,5 +107,5 @@ class DungeonRunner {
     public static payTokens() {
         player.dungeonTokens(player.dungeonTokens() - DungeonRunner.dungeon.tokenCost);
     }
-    
+
 }
