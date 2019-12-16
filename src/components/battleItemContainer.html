@@ -17,6 +17,12 @@
                             },
                             event: {
                                 click: function(){ItemHandler.useItem($data)}
+                            },
+                            tooltip: {
+                              title: $data.replace('_', ' ') + '<br/>' + ItemList[$data].description,
+                              trigger: 'hover',
+                              placement:'bottom',
+                              html: true
                             }">
                 <img src="" class="clickable" data-bind="attr: { src: 'assets/images/items/' + $data + '.png' }">
 
