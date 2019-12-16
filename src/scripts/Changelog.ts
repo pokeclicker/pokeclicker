@@ -1,8 +1,8 @@
 class Changelog {
-    public type: changelogType;
+    public type: string;
     public description: string;
 
-    constructor(type: changelogType, description: string) {
+    constructor(type: string, description: string) {
         this.type = type;
         this.description = description;
         if (type == changelogType.VERSION)
