@@ -320,12 +320,19 @@ class Player {
     private _caughtAmount: Array<KnockoutObservable<number>>;
 
     public calculateClickAttack(): number {
+        // Base power
+        let clickAttack =  Math.pow(this.caughtPokemonList.length + 1, 1.4);
+
+        // Apply Oak bonus
         const oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Poison_Barb) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Poison_Barb) / 100) : 1;
-        let clickAttack =  Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
-        if(this.effectList[GameConstants.BattleItemType.xClick]){
+        clickAttack *= oakItemBonus;
+
+        // Apply battle item bonus
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()){
             clickAttack *= 1.5;
         }
-        return clickAttack;
+
+        return Math.floor(clickAttack);
     }
 
     public calculateMoneyMultiplier(): number {
@@ -452,7 +459,7 @@ class Player {
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Amulet_Coin) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Amulet_Coin) / 100) : 1;
         let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
-        if(this.effectList[GameConstants.BattleItemType.Lucky_incense]){
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.Lucky_incense)()){
             moneytogain = Math.floor(moneytogain * 1.5);
         }
         this._money(this._money() + moneytogain);
@@ -568,7 +575,7 @@ class Player {
         let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Exp_Share) ? 1 + (OakItemRunner.calculateBonus(GameConstants.OakItem.Exp_Share) / 100) : 1;
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
-        if(this.effectList[GameConstants.BattleItemType.xExp]){
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()){
             expTotal *= 1.5;
         }
 
@@ -674,7 +681,7 @@ class Player {
     }
 
     public gainDungeonTokens(tokens: number) {
-        if(this.effectList[GameConstants.BattleItemType.Token_collector]){
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.Token_collector)()){
             tokens *= 1.5;
         }
 
@@ -824,11 +831,11 @@ class Player {
      * @returns {number} damage to be done.
      */
     public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
-        // TODO Calculate pokemon attack by checking upgrades and multipliers.
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
             let multiplier = 1;
             if (this.region !== GameHelper.getRegion(pokemon.id)) {
+                // Pokemon only retain 20% of their total damage in other regions.
                 multiplier = 0.2
             }
             if (!pokemon.breeding()) {
@@ -841,19 +848,18 @@ class Player {
             }
         }
 
-        if(this.effectList[GameConstants.BattleItemType.xAttack]){
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xAttack)()){
             attack *= 1.5;
         }
 
         return Math.round(attack);
-
     }
 
     public getRandomBerry() {
         let i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
         Notifier.notify("You got a " + GameConstants.BerryType[i] + " berry!", GameConstants.NotificationOption.success);
         let amount = 1;
-        if (this.effectList[GameConstants.BattleItemType.Item_magnet]) {
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {
                 amount += 1;
             }
