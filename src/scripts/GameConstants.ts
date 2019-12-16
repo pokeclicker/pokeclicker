@@ -744,5 +744,5 @@ namespace GameConstants {
     export const pokemonsNeededToTravel = [
         151,
         252, // Should be 251, set to 252 in case gen 3 isn't added before beta
-    ]
+    ];
 }
