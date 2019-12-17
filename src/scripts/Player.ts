@@ -428,7 +428,7 @@ class Player {
             this._caughtPokemonList.push(caughtPokemon);
             if (!supressNotification) {
                 if (shiny) Notifier.notify(`✨ You have captured a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
-                else Notifier.notify(`You have captured a ${pokemonName}!`, GameConstants.NotificationOption.success)
+                else Notifier.notify(`You have captured ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`, GameConstants.NotificationOption.success)
             }
         }
         if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {

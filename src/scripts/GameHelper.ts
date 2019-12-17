@@ -90,4 +90,7 @@ class GameHelper {
         return array;
     }
 
+    public static anOrA(name: string): string {
+      return ['a', 'e', 'i', 'o', 'u'].includes(name[0].toLowerCase()) ? 'an' : 'a';
+    }
 }

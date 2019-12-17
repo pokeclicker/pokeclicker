@@ -64,14 +64,14 @@ class BreedingHelper {
         }
 
         if (shiny) Notifier.notify(`✨ You hatched a shiny ${egg.pokemon}! ✨`, GameConstants.NotificationOption.warning);
-        else Notifier.notify(`You hatched a ${egg.pokemon}!`, GameConstants.NotificationOption.success);
+        else Notifier.notify(`You hatched ${GameHelper.anOrA(egg.pokemon)} ${egg.pokemon}!`, GameConstants.NotificationOption.success);
 
         player.capturePokemon(egg.pokemon, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         let baseForm = BreedingHelper.calculateBaseForm(egg.pokemon);
         if (egg.pokemon != baseForm && !player.alreadyCaughtPokemon(baseForm)) {
-            Notifier.notify(`You also found a ${baseForm} nearby!`, GameConstants.NotificationOption.success);
+            Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
             player.capturePokemon(baseForm, false, true);
         }
 
