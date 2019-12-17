@@ -46,7 +46,7 @@ namespace GameConstants {
 
 
 
-    export const PLATE_VALUE = 25;
+    export const PLATE_VALUE = 100;
 
     // Oak items
     export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
