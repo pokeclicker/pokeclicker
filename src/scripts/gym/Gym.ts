@@ -61,7 +61,7 @@ gymList["Pewter City"] = new Gym(
     GameConstants.Badge.Boulder,
     250,
     GameConstants.Badge.None,
-    "I took you for granted, and so I lost. As proof of your victory, I confer on you this...the official Pokémon League BoulderBadge.");
+    "I took you for granted, and so I lost. As proof of your victory, I confer on you this...the official Pokémon League Boulder Badge.");
 
 gymList["Cerulean City"] = new Gym(
     "Misty",
@@ -71,7 +71,7 @@ gymList["Cerulean City"] = new Gym(
     GameConstants.Badge.Cascade,
     500,
     GameConstants.Badge.Boulder,
-    "Wow! You're too much, all right! You can have the CascadeBadge to show that you beat me."
+    "Wow! You're too much, all right! You can have the Cascade Badge to show that you beat me."
 );
 gymList["Vermillion City"] = new Gym(
     "Lt. Surge",
@@ -82,7 +82,7 @@ gymList["Vermillion City"] = new Gym(
     GameConstants.Badge.Thunder,
     1000,
     GameConstants.Badge.Cascade,
-    "Now that's a shocker! You're the real deal, kid! Fine, then, take the ThunderBadge!"
+    "Now that's a shocker! You're the real deal, kid! Fine, then, take the Thunder Badge!"
 );
 gymList["Celadon City"] = new Gym(
     "Erika",
@@ -93,7 +93,7 @@ gymList["Celadon City"] = new Gym(
     GameConstants.Badge.Rainbow,
     1500,
     GameConstants.Badge.Thunder,
-    "Oh! I concede defeat. You are remarkably strong. I must confer on you the RainbowBadge."
+    "Oh! I concede defeat. You are remarkably strong. I must confer on you the Rainbow Badge."
 );
 gymList["Saffron City"] = new Gym(
     "Sabrina",
@@ -105,7 +105,7 @@ gymList["Saffron City"] = new Gym(
     GameConstants.Badge.Marsh,
     2500,
     GameConstants.Badge.Rainbow,
-    "This loss shocks me! But a loss is a loss. I admit I didn't work hard enough to win. You earned the MarshBadge."
+    "This loss shocks me! But a loss is a loss. I admit I didn't work hard enough to win. You earned the Marsh Badge."
 );
 gymList["Fuchsia City"] = new Gym(
     "Koga",
@@ -117,7 +117,7 @@ gymList["Fuchsia City"] = new Gym(
     GameConstants.Badge.Soul,
     3500,
     GameConstants.Badge.Marsh,
-    "Humph! You have proven your worth! Here! Take the SoulBadge!"
+    "Humph! You have proven your worth! Here! Take the Soul Badge!"
 );
 gymList["Cinnabar Island"] = new Gym(
     "Blaine",
@@ -129,7 +129,7 @@ gymList["Cinnabar Island"] = new Gym(
     GameConstants.Badge.Volcano,
     5000,
     GameConstants.Badge.Soul,
-    "I have burned down to nothing! Not even ashes remain! You have earned the VolcanoBadge."
+    "I have burned down to nothing! Not even ashes remain! You have earned the Volcano Badge."
 );
 gymList["Viridian City"] = new Gym(
     "Giovanni",
@@ -142,7 +142,7 @@ gymList["Viridian City"] = new Gym(
     GameConstants.Badge.Earth,
     6000,
     GameConstants.Badge.Volcano,
-    "Ha! That was a truly intense fight. You have won! As proof, here is the EarthBadge!"
+    "Ha! That was a truly intense fight. You have won! As proof, here is the Earth Badge!"
 );
 gymList["Elite Lorelei"] = new Gym(
     "Lorelei",
@@ -152,7 +152,7 @@ gymList["Elite Lorelei"] = new Gym(
         new GymPokemon("Slowbro", 52000, 52),
         new GymPokemon("Jynx", 57000, 54),
         new GymPokemon("Lapras", 60250, 54),],
-    GameConstants.Badge.Lorelei,
+    GameConstants.Badge.Elite_Lorelei,
     7500,
     GameConstants.Badge.Earth,
     "...Things shouldn't be this way!"
@@ -165,9 +165,9 @@ gymList["Elite Bruno"] = new Gym(
         new GymPokemon("Hitmonlee", 52000, 53),
         new GymPokemon("Onix", 57000, 54),
         new GymPokemon("Machamp", 60250, 56),],
-    GameConstants.Badge.Bruno,
+    GameConstants.Badge.Elite_Bruno,
     7500,
-    GameConstants.Badge.Lorelei,
+    GameConstants.Badge.Elite_Lorelei,
     "Why? How could I lose?"
 );
 gymList["Elite Agatha"] = new Gym(
@@ -178,9 +178,9 @@ gymList["Elite Agatha"] = new Gym(
         new GymPokemon("Haunter", 52000, 53),
         new GymPokemon("Arbok", 57000, 56),
         new GymPokemon("Gengar", 60250, 58),],
-    GameConstants.Badge.Agatha,
+    GameConstants.Badge.Elite_Agatha,
     7500,
-    GameConstants.Badge.Bruno,
+    GameConstants.Badge.Elite_Bruno,
     "Oh, my! You're something special, child!"
 );
 gymList["Elite Lance"] = new Gym(
@@ -191,9 +191,9 @@ gymList["Elite Lance"] = new Gym(
         new GymPokemon("Dragonair", 57000, 54),
         new GymPokemon("Aerodactyl", 60250, 58),
         new GymPokemon("Dragonite", 66000, 60),],
-    GameConstants.Badge.Lance,
+    GameConstants.Badge.Elite_Lance,
     7500,
-    GameConstants.Badge.Agatha,
+    GameConstants.Badge.Elite_Agatha,
     "That’s it! I hate to admit it, but you are a Pokémon master!"
 );
 //TODO make champion Gym
@@ -208,7 +208,7 @@ gymList["Violet City"] = new Gym(
         new GymPokemon("Pidgeotto", 42000, 13)],
     GameConstants.Badge.Zephyr,
     500,
-    GameConstants.Badge.Lance,
+    GameConstants.Badge.Elite_Lance,
     "...For pity's sake! My dad's cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge."
 );
 
@@ -293,7 +293,7 @@ gymList["Blackthorn City"] = new Gym(
     GameConstants.Badge.Rising,
     500,
     GameConstants.Badge.Glacier,
-    "Here, this is the RisingBadge... Hurry up! Take it!"
+    "Here, this is the Rising Badge... Hurry up! Take it!"
 );
 
 //Johto Elite 4
@@ -305,22 +305,22 @@ gymList["Elite Will"] = new Gym(
         new GymPokemon("Exeggutor", 52000, 41),
         new GymPokemon("Slowbro", 57000, 41),
         new GymPokemon("Xatu", 60250, 42),],
-    GameConstants.Badge.Will,
+    GameConstants.Badge.Elite_Will,
     7500,
     GameConstants.Badge.Rising,
     "Even though I was defeated, I won't change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four."
 );
 gymList["Elite Koga"] = new Gym(
-    "Koga",
+    "Koga2",
     "Elite Koga",
     [new GymPokemon("Ariados", 45330, 40),
         new GymPokemon("Venomoth", 48300, 41),
         new GymPokemon("Forretress", 52000, 43),
         new GymPokemon("Muk", 57000, 42),
         new GymPokemon("Crobat", 60250, 44),],
-    GameConstants.Badge.Koga,
+    GameConstants.Badge.Elite_Koga,
     7500,
-    GameConstants.Badge.Will,
+    GameConstants.Badge.Elite_Will,
     "I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!"
 );
 gymList["Elite Bruno2"] = new Gym(
@@ -331,9 +331,9 @@ gymList["Elite Bruno2"] = new Gym(
         new GymPokemon("Hitmonchan", 52000, 42),
         new GymPokemon("Onix", 57000, 43),
         new GymPokemon("Machamp", 60250, 46),],
-    GameConstants.Badge.Bruno2,
+    GameConstants.Badge.Elite_Bruno2,
     7500,
-    GameConstants.Badge.Koga,
+    GameConstants.Badge.Elite_Koga,
     "Having lost, I have no right to say anything… Go face your next challenge!"
 );
 gymList["Elite Karen"] = new Gym(
@@ -344,21 +344,21 @@ gymList["Elite Karen"] = new Gym(
         new GymPokemon("Gengar", 57000, 45),
         new GymPokemon("Murkrow", 60250, 44),
         new GymPokemon("Houndoom", 66000, 47),],
-    GameConstants.Badge.Karen,
+    GameConstants.Badge.Elite_Karen,
     7500,
-    GameConstants.Badge.Bruno2,
+    GameConstants.Badge.Elite_Bruno2,
     "Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what's important. Go on — — the Champion is waiting."
 );
 gymList["Champion Lance"] = new Gym(
-    "Lance",
+    "Lance2",
     "Champion Lance",
     [new GymPokemon("Gyarados", 58300, 44),
         new GymPokemon("Dragonite", 62000, 49),
         new GymPokemon("Dragonite", 64000, 49),
         new GymPokemon("Aerodactyl", 60250, 48),
         new GymPokemon("Dragonite", 70000, 50),],
-    GameConstants.Badge.JohtoChampion,
+    GameConstants.Badge.Elite_JohtoChampion,
     7500,
-    GameConstants.Badge.Karen,
+    GameConstants.Badge.Elite_Karen,
     "…It's over. But it's an odd feeling. I’m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!"
 );

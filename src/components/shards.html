@@ -10,8 +10,11 @@
             </div>
             <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
                 <h3>
-                    <span data-bind="text: GameConstants.PokemonType[$index()] + ' ' + player._shardsCollected[$index()]()"></span>
-                    <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
+                    <span data-bind="text: GameConstants.PokemonType[$index()]"></span>
+                    <div style="float:right;">
+                      <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
+                      <i data-bind="text: player._shardsCollected[$index()]().toLocaleString('en-US')"></i>
+                    </div>
                 </h3>
                 <table class='table' data-bind='foreach: $data'>
                     <tr>
@@ -34,7 +37,7 @@
                             <button class='btn btn-primary'
                                     data-bind='click: function(){player.buyShardUpgrade($parentContext.$index(), $index())},
                                         css: {disabled: !player.canBuyShardUpgrade($parentContext.$index(), $index())},
-                                        text: "Buy (" + player.getShardUpgradeCost($parentContext.$index(), $index()) + ")"'>
+                                        text: (player.shardUpgradeMaxed($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + player.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
                             </button>
                         </td>
                     </tr>

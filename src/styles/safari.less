@@ -22,6 +22,10 @@
     }
 }
 
+#safariBody .row {
+  display: -webkit-box;
+}
+
 #sprite {
     height: 32px;
     width: 32px;
@@ -111,7 +115,6 @@
     background-size: 100%;
     height:100px;
     font-family: 'pokefont', Helvetica Neue, serif;
-    color:white;
 
   //div:first-child{
   //    display: flex;
@@ -168,15 +171,12 @@
 }
 
 #safariEnemyName {
-  display: inline;
-}
-
-#safariEnemyName > span {
-  padding: 0 4px 1px;
-  background-color: #ececec;
-  border: solid black 1px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 }
 
 #safariBattleText {
   font-family: "Helvetica Neue", sans-serif;
+  color: whitesmoke;
 }

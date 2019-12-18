@@ -12,12 +12,12 @@
             </ul>
             <div class="tab-content">
                 <div id="items" class="tab-pane fade">
-                    <div class="page-item m-0" style="background-color: white;">
-
+                    <h3 data-bind="text: GameConstants.humanifyString(ItemHandler.stoneSelected())"></h3>
+                    <div class="page-item m-0">
                         <div class="row no-gutters justify-content-sm-center" style="padding:15px;">
                             <div class="row col-lg-6 col-sm-11" data-bind="foreach: Array.from(Array(Object.keys(GameConstants.StoneType).length / 2).keys()).map(x=>GameConstants.StoneType[x])">
                                 <div class="col" style="cursor: pointer"
-                                        data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data}, 
+                                        data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
                                     <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}">
                                     <div data-bind="text: player._itemList[$data]()"></div>
@@ -31,66 +31,48 @@
                                  style="padding-right: 0"
                                  data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(ItemHandler.stoneSelected())">
                                 <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem"
-                                    data-bind="if: (player.alreadyCaughtPokemon($data.name))">
+                                    data-bind="visible: (player.alreadyCaughtPokemon($data.name))">
                                     <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                             data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
-                                        <img class="smallImage" data-bind="attr:{src: '/assets/images/' + (player.alreadyCaughtPokemonShiny($data.name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
+                                        <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (player.alreadyCaughtPokemonShiny($data.name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
-                                        <span style="float:right; margin-top:8px"
-                                            data-bind="if: player.alreadyCaughtPokemonShiny(EvolutionStone.computeEvolution(
-                                            GameConstants.StoneType[ItemHandler.stoneSelected()], name))">
-                                            <img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"/>
-                                        </span>
-                                        <span style="float:right; margin-top:8px"
-                                            data-bind="if: (player.alreadyCaughtPokemon(EvolutionStone.computeEvolution(
-                                            GameConstants.StoneType[ItemHandler.stoneSelected()], name))
-                                            && !player.alreadyCaughtPokemonShiny(EvolutionStone.computeEvolution(
-                                                GameConstants.StoneType[ItemHandler.stoneSelected()], name)))">
-                                            <img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-small.png"/>
+                                        <span style="float:right; margin-top:8px">
+                                            <img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-small.png"
+                                                data-bind="visible: player.alreadyCaughtPokemon(EvolutionStone.computeEvolution(
+                                                GameConstants.StoneType[ItemHandler.stoneSelected()], name)) && !PokemonHelper.getPokemonByName(name).evolutionByIndex(PokemonHelper.getPokemonByName(name).evoLevel.indexOf(ItemHandler.stoneSelected()), true, true).every(p => player.alreadyCaughtPokemonShiny(p))"/>
+                                            <img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"
+                                                data-bind="visible: PokemonHelper.getPokemonByName(name).evolutionByIndex(PokemonHelper.getPokemonByName(name).evoLevel.indexOf(ItemHandler.stoneSelected()), true, true).every(p => player.alreadyCaughtPokemonShiny(p))"/>
                                         </span>
                                     </button>
-
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="row no-gutters justify-content-sm-center">
-                            <div class="row justify-content-center" style="padding:15px;">
-                                <div class="col">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(1)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1}">
-                                        <span>1</span>
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(10)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 10}">
-                                        <span>10</span>
-                                    </button>
-                                </div>
-                                <div class="col">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(100)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 100}">
-                                        <span>100</span>
-                                    </button>
-                                </div>
-                                <div class="col" style="text-align: center">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(1000)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1000}">
-                                        <span>1000</span>
-                                    </button>
-                                </div>
-                                <div class="col" style="text-align: center">
-                                    <button class="btn btn-secondary amount-button list-group-item-action"
-                                            data-bind="click: function() {ItemHandler.amountSelected(Infinity)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === Infinity}">
-                                        <span>All</span>
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="btn-group" style="padding:15px;">
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(1)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1}">
+                                1
+                            </button>
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(10)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 10}">
+                                10
+                            </button>
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(100)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 100}">
+                                100
+                            </button>
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(1000)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1000}">
+                                1000
+                            </button>
+                            <button class="btn btn-secondary amount-button list-group-item-action"
+                                    data-bind="click: function() {ItemHandler.amountSelected(Infinity)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === Infinity}">
+                                Maximum
+                            </button>
                         </div>
-                        <p><b>Evolution stone usage stops when a shiny evolution is encountered</b></p>
+                        <p><i>Stops using evolution stones once a shiny is encountered</i></p>
                         <div class="row no-gutters justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
@@ -107,13 +89,13 @@
 
 
                     </div>
-                    <div class="page-item m-0" style="background-color: white;">
+                    <div class="page-item m-0">
 
                         <div class="row no-gutters justify-content-sm-center"
                              data-bind="foreach: KeyItemHandler.keyItemList">
                             <div class="col-sm-2">
                                 <img class="clickable key-item" src=""
-                                     data-bind="attr:{ src: '/assets/images/keyitems/' + $data.name() + '.png'},
+                                     data-bind="attr:{ src: 'assets/images/keyitems/' + $data.name() + '.png'},
                               css: {'oak-item-locked': !player.hasKeyItem($data.name())
 
                                     },

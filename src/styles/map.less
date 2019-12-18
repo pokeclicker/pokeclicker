@@ -3,6 +3,7 @@
 @locked: url(#mx-gradient-f8cecc-1-ea583b-1-s-0);
 @unlocked: #009a40;
 @currentPlace: #55ff00;
+@incomplete: #e67e22;
 
 .currentRoute {
   fill: #55ff00;
@@ -10,6 +11,10 @@
 
 .unlockedRoute {
   fill: #fcb612;
+}
+
+.unlockedUnfinishedRoute {
+  fill: @incomplete;
 }
 
 .lockedRoute {
@@ -44,7 +49,7 @@ g > text {
   stroke: #000000;
 
   &.unlockedDungeon {
-    fill: @unlocked;
+    fill: @incomplete;
   }
   &.completedDungeon {
     fill: #008f3a;
@@ -53,9 +58,9 @@ g > text {
 
 #mapTooltip {
   position: absolute;
+  left: 15px;
   font-size: 13px;
   font-family: pokemonFont, "Helvetica Neue", sans-serif;
   padding: 3px;
-  background-color: #dddddd;
   border: solid #7f7f7f 1px;
 }

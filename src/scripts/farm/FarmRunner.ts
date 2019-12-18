@@ -6,6 +6,7 @@ class FarmRunner {
     public static openFarmModal() {
         if (FarmRunner.accessToFarm()) {
             this.plotPrice(this.computePlotPrice());
+            Game.gameState(GameConstants.GameState.paused);
             $('#farmModal').modal('show');
         } else {
             Notifier.notify("You don't have access to this location yet", GameConstants.NotificationOption.warning);
@@ -16,12 +17,18 @@ class FarmRunner {
         return MapHelper.accessToRoute(14, 0) && player.hasKeyItem("Wailmer pail");
     }
 
+    public static timeToReduce(){
+      let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Sprayduck) ? OakItemRunner.calculateBonus(GameConstants.OakItem.Sprayduck) / 100 : 0;
+      oakItemBonus = 1 - oakItemBonus;
+      return Math.round(100 / oakItemBonus) / 100;
+    }
+
     public static tick() {
         this.counter = 0;
+        const timeToReduce = this.timeToReduce();
         for (let i = 0; i < player.plotList.length; i++) {
-            player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - 1));
+            player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - timeToReduce));
         }
-
     }
 
     public static computePlotPrice(): number {
@@ -46,7 +53,7 @@ class FarmRunner {
     public static allPlotsUnlocked() {
         return player.plotList[player.plotList.length - 1]().isUnlocked();
     }
-    
+
     public static canBuyPlot() {
         return !this.allPlotsUnlocked() && player.farmPoints() >= this.plotPrice();
     }
@@ -125,8 +132,9 @@ class FarmRunner {
         player.berryList[GameConstants.BerryType[berryName]](player.berryList[GameConstants.BerryType[berryName]]() + amount);
     }
 
-    public static gainBerryById(berryType: number, amount: number = 1) {
-        player.berryList[berryType](player.berryList[berryType]() + amount);
+    public static gainBerryById(berryId: number, amount: number = 1) {
+        player.berryList[berryId](player.berryList[berryId]() + amount);
+        GameHelper.incrementObservable(player.statistics.berriesHarvested[berryId], amount);
     }
 
     public static getTooltipLabel(plotId) {
@@ -155,5 +163,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
             $(this).parent().children().removeClass("active");
             $(this).addClass("active");
         });
+    });
+
+    $('#farmModal').on('hidden.bs.modal', function () {
+        if (player.route() == 14) {
+            Game.gameState(GameConstants.GameState.fighting);
+        } else {
+            MapHelper.moveToRoute(14, GameConstants.Region.kanto);
+        }
     });
 });

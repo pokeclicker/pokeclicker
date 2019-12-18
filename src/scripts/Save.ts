@@ -63,14 +63,18 @@ class Save {
         }
     }
 
-    public static reset(): void {
-        var confirmDelete = prompt("Are you sure you want reset? If so, type 'DELETE'");
+    public static reset(keepShinies: boolean = true): void {
+        var confirmDelete = prompt(`Are you sure you want reset?\nIf so, type 'DELETE'${keepShinies ? '\n\n[your shiny progress will not be reset]': ''}`);
 
-        if(confirmDelete == "DELETE"){
-            localStorage.setItem("player", null);
-            location.reload()
+        if(confirmDelete == 'DELETE'){
+            if (keepShinies){
+                const shiniesOnly = {_caughtShinyList: player.caughtShinyList()};
+                localStorage.setItem('player', JSON.stringify(shiniesOnly));
+            } else {
+                localStorage.removeItem('player');
+            }
+            location.reload();
         }
-
     }
 
     /** Filters an object by property names
@@ -152,10 +156,18 @@ class Save {
         return res;
     }
 
+    public static initializeEffects(saved?: Array<string>): {[name: string]: KnockoutObservable<number>} {
+        let res = {};
+        for (let obj in GameConstants.BattleItemType) {
+            res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
+        }
+        return res;
+    }
+
     public static loadFromFile(file) {
-        testing = file;
+        let fileToRead = file;
         let fr = new FileReader();
-        fr.readAsText(testing);
+        fr.readAsText(fileToRead);
 
         setTimeout(function () {
             try {
@@ -202,5 +214,3 @@ document.addEventListener("DOMContentLoaded", function (event) {
         $('#saveTextArea').text(JSON.stringify(player));
     });
 });
-
-let testing;

@@ -4,8 +4,10 @@ class QuestHelper{
     public static generateQuests(level: number, refreshes: number, d: Date) {
         SeededRand.seed(Number( level * (d.getFullYear() + refreshes * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate()));
 
+        const QuestTypes = new Set(GameConstants.QuestTypes);
         for (let i=0; i<GameConstants.QUESTS_PER_SET; i++) {
-            let type = SeededRand.fromArray(GameConstants.QuestTypes);
+            let type = SeededRand.fromArray(Array.from(QuestTypes));
+            QuestTypes.delete(type);
             let quest = QuestHelper.random(type, i);
             quest.index = i;
             QuestHelper.questList.push(quest);
@@ -13,10 +15,10 @@ class QuestHelper{
     }
 
     public static random(type: string, index: number) {
-        let amount, route;
+        let amount, route, region;
         switch (type) {
             case "DefeatPokemons":
-                route = SeededRand.intBetween(1, 25);
+                route = SeededRand.intBetween(1, GameConstants.RegionRoute[player.highestRegion]);
                 amount = SeededRand.intBetween(100, 500);
                 return new DefeatPokemonsQuest(route, amount);
             case "CapturePokemons":
@@ -49,12 +51,15 @@ class QuestHelper{
                 return new MineLayersQuest(amount);
             case "CatchShinies":
                 return new CatchShiniesQuest(1);
-            case "DefeatKantoGym":
-                let gymIndex = SeededRand.intBetween(0, GameConstants.KantoGyms.length - 1);
+            case "DefeatGym":
+                region = SeededRand.intBetween(0, player.highestRegion);
+                const gymTown = SeededRand.fromArray(GameConstants.RegionGyms[region]);
                 amount = SeededRand.intBetween(5, 20);
-                return new DefeatGymQuest(gymIndex, 0, amount);
-            case "DefeatKantoDungeon":
-                let dungeon = SeededRand.fromArray(GameConstants.KantoDungeons);
+                return new DefeatGymQuest(gymTown, amount);
+            case "DefeatDungeon":
+                // Allow upto highest region
+                region = SeededRand.intBetween(0, player.highestRegion);
+                const dungeon = SeededRand.fromArray(GameConstants.RegionDungeons[region]);
                 amount = SeededRand.intBetween(5, 20);
                 return new DefeatDungeonQuest(dungeon, amount);
             case "UsePokeball":
@@ -76,6 +81,11 @@ class QuestHelper{
                 let oakItem = SeededRand.fromArray(possibleItems);
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
+            case "HarvestBerriesQuest":
+                const possibleBerries = Object.keys(BerryList);
+                const berryType = SeededRand.fromArray(possibleBerries);
+                amount = SeededRand.intBetween(30, 300);
+                return new HarvestBerriesQuest(berryType, amount);
         }
     }
 
@@ -85,7 +95,7 @@ class QuestHelper{
                 player.payMoney(QuestHelper.getRefreshCost())
             }
             player.questRefreshes++;
-            QuestHelper.quitQuest();
+            QuestHelper.quitAllQuests();
             QuestHelper.clearQuests();
             QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
         } else {
@@ -111,9 +121,9 @@ class QuestHelper{
         return Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1))
     }
 
-    public static loadCurrentQuest(saved) {
-        if (saved !== null) {
-            QuestHelper.questList()[saved.index].initial(saved.initial)
+    public static loadCurrentQuests(saved: KnockoutObservableArray<any>) {
+        for (let i = 0; i < saved().length; i++) {
+            QuestHelper.questList()[saved()[i].index].initial(saved()[i].initial());
         }
     }
 
@@ -135,23 +145,57 @@ class QuestHelper{
         return Math.floor(n + 1);
     }
 
-    public static quitQuest() {
-        if (player.currentQuest()) {
-            QuestHelper.questList()[player.currentQuest().index].quit();
+    public static canStartNewQuest(): boolean {
+        // Two conditions for starting new quest:
+        // 1. Current quests not exceed maximum slots
+        // 2. At least one quest is neither completed nor in-progress
+        if (player.currentQuests().length >= this.questSlots()()) {
+            return false;
         }
-    }
-
-    public static checkCompletedSet() {
-        for (let questCompleted of player.completedQuestList) {
-            if (!questCompleted()) {
-                return;
+        for (let i = 0; i < QuestHelper.questList().length; i++) {
+            if (!(player.completedQuestList[i]() || QuestHelper.questList()[i].isCompleted()
+                    || QuestHelper.questList()[i].inProgress()())) {
+                return true;
             }
         }
-        //Only reachable if all quests are completed
-        QuestHelper.getCompletionReward();
+        return false;
     }
 
-    private static getCompletionReward() {
-        console.log("All quests Completed!")
+    public static onQuest(index: number): KnockoutObservable<boolean> {
+        return ko.observable(player.currentQuests().map(x => x.index).includes(index));
+    }
+
+    public static beginQuest(index: number) {
+        if (this.canStartNewQuest()) {
+            this.questList()[index].beginQuest();
+            player.currentQuests.push({
+                index: index,
+                initial: this.questList()[index].initial(),
+            });
+            player.currentQuests.sort((x, y) => x.index - y.index);
+        } else {
+            Notifier.notify("You cannot start more quests", GameConstants.NotificationOption.danger);
+        }
+    }
+
+    public static quitAllQuests() {
+        let questIndexArr = player.currentQuests().map(x => x.index);
+        questIndexArr.forEach(index => {
+            this.questList()[index].endQuest();
+        });
+    }
+
+    // returns true is all quest are completed
+    public static allQuestCompleted() {
+        for (let questCompleted of player.completedQuestList) {
+            if (!questCompleted()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static questSlots(): KnockoutObservable<number> {
+        return ko.observable(1);
     }
 }

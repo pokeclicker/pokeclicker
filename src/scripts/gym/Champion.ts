@@ -6,10 +6,11 @@ class Champion extends Gym {
     }
 
     public setPokemon(starter: GameConstants.Starter) {
-        this.pokemons = [];
-        this.pokemons.push(new GymPokemon("Pidgeot", 52340, 59));
-        this.pokemons.push(new GymPokemon("Alakazam", 56320, 57));
-        this.pokemons.push(new GymPokemon("Rhydon", 58340, 59));
+        this.pokemons = [
+          new GymPokemon("Pidgeot", 52340, 59),
+          new GymPokemon("Alakazam", 56320, 57),
+          new GymPokemon("Rhydon", 58340, 59),
+        ];
         switch (starter) {
             case GameConstants.Starter.Bulbasaur: {
                 this.pokemons.push(new GymPokemon("Exeggutor", 57520, 59));
@@ -38,8 +39,8 @@ gymList["Champion Blue"] = new Champion(
     "Blue",
     "Champion Blue",
     [],
-    GameConstants.Badge.Champion,
+    GameConstants.Badge.Elite_Champion,
     10000,
-    GameConstants.Badge.Lance,
+    GameConstants.Badge.Elite_Lance,
     "Why? Why did I lose? I never made any mistakes raising my Pokémon… Darn it! You're the new Pokémon League Champion! Although I don't like to admit it…"
 );

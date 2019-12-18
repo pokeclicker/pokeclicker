@@ -33,7 +33,7 @@ const srcs = {
     libs: ['node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
         'node_modules/jquery/dist/jquery.min.js',
-        'node_modules/tether/dist/js/tether.min.js',
+        'node_modules/popper.js/dist/umd/popper.min.js',
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
         'src/libs/*.js'
@@ -49,12 +49,6 @@ const dests = {
     styles: 'build/styles/',
     githubPages: 'docs/'
 };
-
-gulp.task('cname', () => {
-    const str = "www.pokeclicker.com";
-    return file('CNAME', str, {src: true})
-        .pipe(gulp.dest('docs/'));
-});
 
 gulp.task('copy', () => gulp.src(srcs.libs)
     .pipe(gulp.dest(dests.libs))
@@ -138,7 +132,7 @@ gulp.task('copyWebsite', () => {
 gulp.task('build', ['copy', 'assets', 'import', 'scripts', 'styles', 'full-changelog']);
 
 gulp.task('website', done => {
-    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname', () => done());
+    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', () => done());
 });
 
 gulp.task('default', done => {

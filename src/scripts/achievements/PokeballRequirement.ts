@@ -9,6 +9,6 @@ class PokeballRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(player._pokeballs[this.pokeball](), this.requiredValue);
+        return Math.min(player.statistics.pokeballsBought[this.pokeball](), this.requiredValue);
     }
 }

@@ -15,7 +15,7 @@ abstract class Item {
 
     totalPrice(amount: number): number {
         if (this.name() == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
-            return this.price() * amount;
+            return this.basePrice * amount;
         } else {
             let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
             return Math.floor(res);

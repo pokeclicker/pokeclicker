@@ -13,7 +13,7 @@ class Plot {
         this.timeLeft = ko.observable(timeLeft);
         //this.formattedTimeLeft = ko.observable(GameConstants.formatTime(this.timeLeft()));
         this.formattedTimeLeft = ko.computed(function () {
-            return GameConstants.formatTime(this.timeLeft());
+            return GameConstants.formatTime(this.timeLeft() / FarmRunner.timeToReduce());
         }, this);
         this.isEmpty = ko.computed(function () {
             return this.berry() == null;
@@ -26,7 +26,4 @@ class Plot {
         }
         return 4 - Math.ceil(4 * this.timeLeft() / this.berry().harvestTime);
     }
-
-
-
 }

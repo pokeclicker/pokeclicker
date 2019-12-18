@@ -6,20 +6,18 @@
                 <h4 style='text-align:center' class="modal-title">Safari Zone</h4>
                 <button class='btn btn-primary' onclick='if(!Safari.inBattle()){$("#safariModal").modal("toggle")}' data-bind='css: { disabled: Safari.inBattle }' >Leave</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-0">
                 <div id="safariBody">
                 </div>
                 <div id="safariBattleBody" data-bind="if: Safari.inBattle">
                     <div class='row safariEnemyRow'>
-                        <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind='attr: { src: "assets/images/pokemon/" + SafariBattle.enemy.id + ".png" }'></div>
-                        <div id='safariEnemyName' class='col-sm-2'>
-                            <span>
-                                <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
-                                    <img class='pokeball-smallest'
-                                         data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
-                                </span>
-                                <span data-bind='text: SafariBattle.enemy.name'></span>
+                        <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }"></div>
+                        <div id='safariEnemyName' class='btn btn-secondary btn-sm '>
+                            <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
+                                <img class='pokeball-smallest'
+                                     data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
                             </span>
+                            <span data-bind='text: SafariBattle.enemy.name'></span>
                         </div>
                     </div>
                     <div class='row'>
@@ -30,26 +28,26 @@
 
                     <div id='battleConsole' class='row'>
                         <div class='col-sm-6'>
-                            <h3 id='safariBattleText' class="centeredBySpan" data-bind='html: SafariBattle.text'></h3>
+                            <h4 id='safariBattleText' class="centeredBySpan" data-bind='html: SafariBattle.text'></h4>
                             <span class="centerSpan"></span>
                         </div>
                         <div class='row col-sm-4 offset-sm-2 safariOptions'>
                             <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.throwBall()' class='btn btn-info btn-sm safariButton'
+                                <button onClick='SafariBattle.lockButtons();SafariBattle.throwBall()' class='btn btn-info btn-sm safariButton'
                                         data-bind='text: "Ball (" + Safari.balls() + ")"'></button>
                             </div>
                             <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.throwBait()' class='btn btn-info btn-sm safariButton'>
+                                <button onClick='SafariBattle.lockButtons();SafariBattle.throwBait()' class='btn btn-info btn-sm safariButton'>
                                     Bait
                                 </button>
                             </div>
                             <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.throwRock()' class='btn btn-info btn-sm safariButton'>
+                                <button onClick='SafariBattle.lockButtons();SafariBattle.throwRock()' class='btn btn-info btn-sm safariButton'>
                                     Rock
                                 </button>
                             </div>
                             <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.run()' class='btn btn-info btn-sm safariButton'>Run
+                                <button onClick='SafariBattle.lockButtons();SafariBattle.run()' class='btn btn-info btn-sm safariButton'>Run
                                 </button>
                             </div>
                         </div>

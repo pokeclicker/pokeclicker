@@ -58,15 +58,21 @@ class BreedingHelper {
                 if (player._caughtPokemonList()[i].breeding()) {
                     player._caughtPokemonList()[i].exp(0);
                     player._caughtPokemonList()[i].breeding(false);
+                    player._caughtPokemonList()[i].checkForEvolution(true);
                 }
             }
         }
+
+        if (shiny) Notifier.notify(`✨ You hatched a shiny ${egg.pokemon}! ✨`, GameConstants.NotificationOption.warning);
+        else Notifier.notify(`You hatched ${GameHelper.anOrA(egg.pokemon)} ${egg.pokemon}!`, GameConstants.NotificationOption.success);
+
         player.capturePokemon(egg.pokemon, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         let baseForm = BreedingHelper.calculateBaseForm(egg.pokemon);
         if (egg.pokemon != baseForm && !player.alreadyCaughtPokemon(baseForm)) {
-            player.capturePokemon(baseForm, false);
+            Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
+            player.capturePokemon(baseForm, false, true);
         }
 
         player._eggList[index](null);
@@ -80,8 +86,19 @@ class BreedingHelper {
     }
 
     public static createTypedEgg(type: GameConstants.EggType): Egg {
-        let name = HatchList[type][Math.floor(Math.random() * HatchList[type].length)];
-        return BreedingHelper.createEgg(name, type);
+        const hatch_list = HatchList[type];
+        const hatchable = hatch_list.slice(0, player.highestRegion + 1);
+        let possible_hatches = [];
+        hatchable.forEach((pokemon, index)=>{
+            if (!pokemon.length) return;
+            const toAdd = possible_hatches.length || 1;
+            for (let i = 0; i < toAdd; i++){
+                possible_hatches.push(pokemon);
+            }
+        });
+        possible_hatches = possible_hatches[Math.floor(Math.random() * possible_hatches.length)];
+        const pokemon = possible_hatches[Math.floor(Math.random() * possible_hatches.length)];
+        return BreedingHelper.createEgg(pokemon, type);
     }
 
     public static createRandomEgg(): Egg {
@@ -134,22 +151,39 @@ class BreedingHelper {
     }
 }
 
-const HatchList: { [name: number]: string[] } = {};
-HatchList[GameConstants.EggType.Fire] = ["Charmander", "Vulpix", "Growlithe", "Ponyta"];
-HatchList[GameConstants.EggType.Water] = ["Squirtle", "Lapras", "Staryu", "Psyduck"];
-HatchList[GameConstants.EggType.Grass] = ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"];
-HatchList[GameConstants.EggType.Fighting] = ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"];
-HatchList[GameConstants.EggType.Electric] = ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"];
-HatchList[GameConstants.EggType.Dragon] = ["Dratini", "Dragonair", "Dragonite"];
+const HatchList: { [name: number]: string[][] } = {};
+HatchList[GameConstants.EggType.Fire] = [
+    ["Charmander", "Vulpix", "Growlithe", "Ponyta"],
+    ["Cyndaquil", "Slugma", "Houndour", "Magby"],
+  ];
+HatchList[GameConstants.EggType.Water] = [
+    ["Squirtle", "Lapras", "Staryu", "Psyduck"],
+    ["Totodile", "Wooper", "Marill", "Qwilfish"],
+  ];
+HatchList[GameConstants.EggType.Grass] = [
+    ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"],
+    ["Chikorita", "Hoppip", "Sunkern"],
+  ];
+HatchList[GameConstants.EggType.Fighting] = [
+    ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"],
+    ["Tyrogue"],
+  ];
+HatchList[GameConstants.EggType.Electric] = [
+    ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"],
+    ["Chinchou", "Mareep", "Elekid"],
+  ];
+HatchList[GameConstants.EggType.Dragon] = [
+    ["Dratini", "Dragonair", "Dragonite"],
+    [],
+  ];
 
 document.addEventListener("DOMContentLoaded", function (event) {
 
-    $('#breedingModal').on('hide.bs.modal', function () {
-        if (player.route() == 5) {
-            Game.gameState(GameConstants.GameState.fighting);
-        } else {
+    $('#breedingModal').on('hidden.bs.modal', function () {
+        if (player.highestRegion == 0) {
             MapHelper.moveToRoute(5, GameConstants.Region.kanto);
         }
+        MapHelper.returnToMap();
     });
 
 });

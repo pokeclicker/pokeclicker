@@ -1,92 +1,70 @@
 <div id="townView" data-bind="if: Game.gameState() === GameConstants.GameState.town"
      class="justify-content-center no-gutters no-select">
-
-<div data-bind="if:player.town().dungeon()">
-</div>
-
-<div data-bind="ifnot:player.town().dungeon()">
-   <img style="float:right;margin-right:10px;margin-top:10px;"
-        data-bind="tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'right' }"
-        src="assets/images/questionmark.png">
-</div>
-
-<div class="row justify-content-center no-gutters" style="min-height: 100px;">
-   <div class="col no-gutters">
-       <div data-bind="if: player.town() instanceof PokemonLeague">
-           <ul class="nav flex-sm-column featureList pokemonLeagueList"
-               data-bind="foreach: player.town().gymList">
-               <li class="nav-item">
+    <div class="row justify-content-center no-gutters" style="min-height: 100px;">
+       <div class="col no-gutters">
+           <div class="list-group" data-bind="if: player.town() instanceof PokemonLeague">
+              <!-- ko foreach: player.town().gymList -->
                    <button
-                           data-bind="text: $data.leaderName,
+                           data-bind="text: $data.leaderName.replace(/\d/g,''),
                                       disable: !Gym.isUnlocked($data),
                                       click: function() {GymRunner.startGym($data)},
                                       attr: { class: Gym.calculateCssClass($data)}">
                        E4 Leader
                    </button>
-               </li>
-           </ul>
-       </div>
-       <ul class="nav flex-sm-column featureList">
-           <li class="nav-item" data-bind="if:player.town().gym">
-               <button data-bind="attr: { class: Gym.calculateCssClass(player.town().gym()) }"
+               <!-- /ko -->
+           </div>
+           <div class="list-group">
+               <button data-bind="visible: player.town().gym, attr: { class: player.town().gym() ? Gym.calculateCssClass(player.town().gym()) : '' }"
                        onclick="GymRunner.startGym(player.town().gym())">
                    Gym
                </button>
-           </li>
-           <li class="nav-item" data-bind="if:player.town().shop">
+               <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
                <button class="btn btn-secondary"
-                       onclick="ShopHandler.showShop(player.town().shop())">Shop
+                       onclick="MapHelper.travelToNextRegion()"
+                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
+                     Go To Next Region
                </button>
-           </li>
-           <li class="nav-item" data-bind="if:MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
+               <button class="btn btn-secondary p-0"
+                       onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
+                       data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon(), attr: {class: player.town().dungeon() && player.dungeonTokens() >= player.town().dungeon().tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0'}">
+                   Start<br/>
+                   <img title="Dungeon Tokens" src="assets/images/currency/dungeonToken.png" height="20px">
+                   <span data-bind="text: player.town().dungeon().tokenCost.toLocaleString('en-US')"></span>
+               </button>
                <button class="btn btn-secondary"
-                       onclick="MapHelper.travelToNextRegion()">Go To Next Region
+                       onclick="MapHelper.moveToTown(player.town().dungeon().name())"
+                       data-bind="visible: player.town().dungeon() && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon()">
+                   <span data-bind="text: player.town().dungeon().name()"></span>
                </button>
-           </li>
-           <div data-bind="if:player.town().dungeon()">
-               <li class="nav-item" data-bind="if: player.town() instanceof DungeonTown">
-                   <button class="btn btn-secondary"
-                           onclick="DungeonRunner.initializeDungeon(player.town().dungeon())">
-                       Start<br>
-                       <span data-bind="text: player.town().dungeon().tokenCost"></span>
-                       tokens
-                   </button>
-               </li>
-
-               <li class="nav-item"
-                   data-bind="if:(!(player.town() instanceof DungeonTown) && player.town() instanceof Town)">
-                   <button class="btn btn-secondary"
-                           onclick="MapHelper.moveToTown(player.town().dungeon().name())">
-                       <span data-bind="text: player.town().dungeon().name()"></span>
-                   </button>
-               </li>
-
            </div>
-       </ul>
-   </div>
-   <div class="col-7 no-gutters">
-       <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
-       <img class="townImage no-select" src=""
-            data-bind="attr:{ src: '/assets/images/towns/' + player.town().name() + '.png' }"/>
-   </div>
-   <div class="col no-gutters"></div>
+       </div>
+       <div class="col-7 no-gutters">
+           <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
+           <img class="townImage no-select" src=""
+                data-bind="attr:{ src: 'assets/images/towns/' + player.town().name() + '.png' }"/>
+       </div>
+       <div class="col no-gutters">
+           <button type="button" class="btn btn-outline-info" style="float: right;"
+           data-bind="visible: player.town().gym() || player.town().shop(), tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
+       </div>
 
-</div>
-<div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
-   <div class="card">
-       <!--Display all available Pokémon in this dungeon-->
-       <ul class="list-inline"
-           data-bind="foreach: player.town().dungeon().allPokemonNames">
-           <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
-               <img class="dungeon-pokemon-preview" src=""
-                    data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
-           </li>
-           <li class="list-inline-item"
-               data-bind="ifnot: player.alreadyCaughtPokemon($data)">
-               <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src=""
-                    data-bind="attr:{ src: '/assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
-           </li>
-       </ul>
-   </div>
-</div>
+    </div>
+    <div data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
+       <div class="card">
+           <!--Display all available Pokémon in this dungeon-->
+           <ul class="list-inline"
+               data-bind="foreach: player.town().dungeon().allPokemonNames">
+               <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
+                   <img class="dungeon-pokemon-preview" src=""
+                        data-bind="attr:{ src: 'assets/images/' + (player.alreadyCaughtPokemonShiny($data) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                   <sup style="float:right; top:10px;" data-bind="visible: player.alreadyCaughtPokemonShiny($data)">✨</sup>
+               </li>
+               <li class="list-inline-item"
+                   data-bind="ifnot: player.alreadyCaughtPokemon($data)">
+                   <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src=""
+                        data-bind="attr:{ src: 'assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
+               </li>
+           </ul>
+       </div>
+    </div>
 </div>

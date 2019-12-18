@@ -6,16 +6,15 @@ class PokemonHelper {
     public static getPokemonsWithEvolution(evoType: string) {
 
         return pokemonList.filter(function (pokemon) {
-            if (pokemon["evoLevel"] !== undefined && ("" + pokemon["evoLevel"]).indexOf(evoType) !== -1) {
-                let index = ("" + pokemon["evoLevel"]).split(", ").indexOf(evoType);
-                let evolution = pokemon["evolution"].split(", ")[index];
-                return player.highestRegion >= PokemonHelper.calcNativeRegion(evolution);
+            if (pokemon.evoLevel && pokemon.evoLevel.includes(evoType)) {
+                return !!PokemonHelper.getPokemonByName(pokemon.name).evolutionByIndex(pokemon.evoLevel.indexOf(evoType), true);
             }
         });
     }
 
     public static getPokemonByName(name: string): DataPokemon {
         let basePokemon = pokemonMap[name];
+        if (!basePokemon) return;
         let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
         let evoLevel = basePokemon["evoLevel"];
         let eggCycles: number = basePokemon["eggCycles"] || 20;
@@ -68,7 +67,7 @@ class PokemonHelper {
     }
 
     public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
-        let src = "/assets/images/";
+        let src = "assets/images/";
         if (shiny) {
             src += "shiny";
         }
@@ -79,7 +78,7 @@ class PokemonHelper {
     public static getPokeballImage(pokemonName: string): string {
         let src = ""
         if (player.alreadyCaughtPokemon(pokemonName)){
-            src = "/assets/images/pokeball/Pokeball-";
+            src = "assets/images/pokeball/Pokeball-";
             if (player.alreadyCaughtPokemonShiny(pokemonName)) {
                 src += "shiny-";
             }
