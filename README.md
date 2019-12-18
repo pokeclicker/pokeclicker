@@ -1,4 +1,5 @@
-[![Build Status](https://travis-ci.org/Ishadijcks/pokeclicker.svg?branch=develop)](https://travis-ci.org/Ishadijcks/pokeclicker)
+[![Build Status](https://travis-ci.org/pokeclicker-dev/pokeclicker.svg?branch=develop)](https://travis-ci.org/Ishadijcks/pokeclicker)
+
 # PokéClicker
 A game about catching Pokémon, defeating gym leaders, and watching numbers get bigger.
 
@@ -20,17 +21,30 @@ All file and class names should be [upper CamelCase](https://en.wikipedia.org/wi
 First make sure you have git and npm available as command-line utilities (so you should install Git and NodeJS if you don't have them already).
 
 Open a command line interface in the directory that contains this README file, and use the following command to install PokéClicker's other dependencies locally:
-- npm install
+```cmd
+npm install
+```
 
 Then finally, run the following command in the command line interface to start a browser running PokéClicker.
-- npm start
+```cmd
+npm start
+```
 
 Changes to the sourcecode will automatically cause the browser to refresh.
 This means you don't need to compile TypeScript yourself. Gulp will do this for you :thumbsup:
 
 
+## Use Google cloud shell _(alternative)_
+[![Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pokeclicker-dev/pokeclicker&git_branch=develop&page=editor&open_in_editor=README.md)
+```cmd
+npm install
+npm start
+```
+
 ## Deploying a new version to Github Pages
 Before deploying, check that the game compiles and starts up without errors. Then run:
-- npm run website
+```cmd
+npm run website
+```
 
 After this command completes, push the changed files in the 'docs' directory to Github.
