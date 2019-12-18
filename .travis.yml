@@ -4,13 +4,7 @@ node_js:
 cache:
   directories:
     - node_modules
-before_install:
-- chmod a+x ./install.sh
-- chmod a+x ./testDebug.sh
 install:
-- ./install.sh
-before_script:
-  - npm install -g gulp-cli
+- npm install
 script:
-- gulp build
-- ./testDebug.sh
+- npm test
