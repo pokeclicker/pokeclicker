@@ -22,8 +22,12 @@ const changelogType = {
 
 const changelogItems = [
     new Changelog(changelogType.VERSION, 'v1.0.2'),
+        new Changelog(changelogType.NEW, 'Can now progress in multiple quest at a time <i>(amount based on Quest Level)</i>'),
+        new Changelog(changelogType.NEW, 'Side cards can now be collapsed for more space'),
+        new Changelog(changelogType.CHANGE, 'Move battle item container'),
         new Changelog(changelogType.CHANGE, 'Update how achievement percentages are shown'),
         new Changelog(changelogType.CHANGE, 'Update hatch/catch notification message'),
+        new Changelog(changelogType.FIXED, 'Show the hatchery "list" button once Johto unlocked without page refresh'),
         new Changelog(changelogType.FIXED, 'Plates from underground should now sell for their correct value'),
     new Changelog(changelogType.VERSION, 'v1.0.1'),
         new Changelog(changelogType.NEW, 'Added changelog'),

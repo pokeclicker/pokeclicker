@@ -1,15 +1,15 @@
 <!-- ko if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked() -->
 <div class="card border-secondary mb-3">
-    <div class="card-header p-0">
+    <div class="card-header p-0" data-toggle="collapse" href="#eggList">
         <span>Hatchery</span>
-        <button class='btn btn-sm btn-primary' style="position: absolute; right: -1px; top: -1px; width: auto; height: 42px;"
-                data-bind='visible: player.highestRegion >= 1,
-                    click: function(){ BreedingHelper.openBreedingModal() },
-                    attr: { disabled: !player.hasFreeEggSlot() }'>
-            List
-        </button>
     </div>
-    <div id='eggList' class="card-body p-0">
+    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+            data-bind='visible: player.highestRegion() >= 1,
+                click: function(){ BreedingHelper.openBreedingModal() },
+                attr: { disabled: !player.hasFreeEggSlot() }'>
+        List
+    </button>
+    <div id='eggList' class="card-body p-0 show">
       <div class="row m-0" data-bind="foreach: player.eggList">
         <div class="col-md-6 eggSlot">
             <div data-bind="if: $index() === player.eggSlots()">
