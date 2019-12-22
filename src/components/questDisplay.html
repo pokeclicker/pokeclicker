@@ -1,14 +1,14 @@
-<div class="card border-secondary mb-3" id="questDisplayContainer" style="min-height: 100px">
+<div class="card border-secondary mb-3" id="questDisplayContainer" >
 
-    <div class="card-header p-0">
-      <span class='' data-bind='text: !player.tutorialComplete() ? "Tutorial Quest" : "Quests (" + player.currentQuests().length + "/" + QuestHelper.questSlots()() + ")"'></span>
-      <button class='btn btn-sm btn-primary' style="position: absolute; right: -1px; top: -1px; width: auto; height: 42px;"
-              data-bind='visible: player.tutorialComplete(), click: function(){$("#QuestModal").modal("show")}'>
-          List
-      </button>
+    <div class="card-header p-0" data-toggle="collapse" href="#questDisplayBody">
+      <span data-bind='text: !player.tutorialComplete() ? "Tutorial Quest" : "Quests (" + player.currentQuests().length + "/" + QuestHelper.questSlots()() + ")"'></span>
     </div>
+    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+            data-bind='visible: player.tutorialComplete(), click: function(){$("#QuestModal").modal("show")}'>
+        List
+    </button>
 
-    <div class="card-body p-0">
+    <div id="questDisplayBody" class="card-body p-0 show">
       <!-- List of quests -->
       <div data-bind="foreach: player.currentQuests">
           <div class="card border-bottom-0">
@@ -41,6 +41,9 @@
               </table>
           </div>
       </div>
+      <!-- ko if: player.currentQuests().length == 0 -->
+        <span class="pt-2 pb-2">No active quest</span>
+      <!-- /ko -->
       <div data-bind='if: (!player.tutorialComplete()) && (QuestLineHelper.tutorial.totalQuests > 0) && (QuestLineHelper.tutorial.curQuest() < QuestLineHelper.tutorial.totalQuests)'>
           <div class="card border-bottom-0">
               <table>

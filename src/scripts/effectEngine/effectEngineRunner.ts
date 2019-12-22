@@ -32,7 +32,7 @@ class EffectEngineRunner {
         }, this);
     }
 
-    public static isActive(itemName: string) {
+    public static isActive(itemName: string): KnockoutComputed<boolean> {
         return ko.computed(function () {
             if (!player) return false;
             return !!player.effectList[itemName]();

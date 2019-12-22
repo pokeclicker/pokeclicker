@@ -1,13 +1,13 @@
 <div class="card border-secondary mb-3" id="oakItemsContainer"
 data-bind="visible: player.starter != GameConstants.Starter.None">
-    <div class="card-header p-0">
+    <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
         <div>
             <span style="text-align:center" data-bind="text: 'Oak Items equiped: ' + OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()"></span>
-            <button type="button" class="btn btn-info" style="position: absolute; right: -1px; top: -1px; width: auto; height: 42px; padding: 4px;"
-                data-bind="tooltip: { title: 'Activate Oak items to gain unique bonuses. When an Oak item has gained enough experience you can level it up with money to boost its effect.', trigger: 'hover', placement:'left' }">?</button>
         </div>
+        <button type="button" class="btn btn-info" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
+            data-bind="tooltip: { title: 'Activate Oak items to gain unique bonuses. When an Oak item has gained enough experience you can level it up with money to boost its effect.', trigger: 'hover', placement:'left' }">?</button>
     </div>
-    <div class="card-body">
+    <div id="oakItemsBody" class="card-body show">
         <div class="row" data-bind="foreach: OakItemRunner.oakItemList">
             <div class="col-xs-4 col-sm-4 col-md-3 p-2">
                 <button class="p-0 btn"
@@ -29,23 +29,16 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
                   </button>
             </div>
         </div>
-    </div>
-
-    <div class="card oak-item-info">
-        <div data-bind="if: OakItemRunner.inspectedItem().isUnlocked()">
-            <div class="row justify-content-sm-center">
-                <div style="height:20px;" class="col">
-                    <b>
-                        <span data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></span>
-                    </b>
-                </div>
-            </div>
-            <div class="row justify-content-sm-center">
-                <div class="col">
-                    <span data-bind="text: OakItemRunner.inspectedItem().description"></span>
-                </div>
+        <hr/>
+        <div class="oak-item-info">
+            <div class="text-center">
+                <strong><h5 data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></h5></strong>
             </div>
 
+            <!-- ko if: OakItemRunner.inspectedItem().isUnlocked() -->
+            <div class="text-center">
+                <p data-bind="text: OakItemRunner.inspectedItem().description"></p>
+            </div>
             <div class="row justify-content-sm-center">
                 <div class="col-sm-11 col-md-8">
                     <div class="progress" style="margin-top: 12px"
@@ -76,35 +69,20 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
 
                     </div>
                 </div>
-            </div>
-            <div class="row justify-content-sm-center no-gutters">
-
-                <div class="col">
-                    Lvl.
-                    <span data-bind="text: OakItemRunner.inspectedItem().level()"></span>
+                <div class="col-6">
+                    Lvl. <span data-bind="text: OakItemRunner.inspectedItem().level()"></span>
                 </div>
-
-                <div class="col">
-                    Bonus:
-                    <span data-bind="text: OakItemRunner.inspectedItem().calculateBonus()"></span>
-                    %
+                <div class="col-6">
+                    Bonus: <span data-bind="text: OakItemRunner.inspectedItem().calculateBonus()"></span>%
                 </div>
             </div>
-        </div>
-        <div data-bind="ifnot: OakItemRunner.inspectedItem().isUnlocked()">
-
-            <div class="row justify-content-sm-center">
-                <div style="height:20px;" class="col">
-                    <b>
-                        <span data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></span>
-                    </b>
-                </div>
-            </div>
-
+            <!-- /ko -->
+            <!-- ko ifnot: OakItemRunner.inspectedItem().isUnlocked() -->
             <div style="min-height:80px; vertical-align: center">
                 Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq - player.caughtPokemonList.length"></span> more unique Pokémon to
                 unlock!
             </div>
+            <!-- /ko -->
         </div>
     </div>
 

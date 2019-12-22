@@ -87,7 +87,7 @@ class BreedingHelper {
 
     public static createTypedEgg(type: GameConstants.EggType): Egg {
         const hatch_list = HatchList[type];
-        const hatchable = hatch_list.slice(0, player.highestRegion + 1);
+        const hatchable = hatch_list.slice(0, player.highestRegion() + 1);
         let possible_hatches = [];
         hatchable.forEach((pokemon, index)=>{
             if (!pokemon.length) return;
@@ -141,7 +141,7 @@ class BreedingHelper {
         if (!(pokemonName in pokemonDevolutionMap)) {
             // No devolutions at all
             return pokemonName;
-        } else if (PokemonHelper.calcNativeRegion(pokemonDevolutionMap[pokemonName]) > player.highestRegion) {
+        } else if (PokemonHelper.calcNativeRegion(pokemonDevolutionMap[pokemonName]) > player.highestRegion()) {
             // No further devolutions in current unlocked regions
             return pokemonName;
         } else {
@@ -180,7 +180,7 @@ HatchList[GameConstants.EggType.Dragon] = [
 document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#breedingModal').on('hidden.bs.modal', function () {
-        if (player.highestRegion == 0) {
+        if (player.highestRegion() == 0) {
             MapHelper.moveToRoute(5, GameConstants.Region.kanto);
         }
         MapHelper.returnToMap();
