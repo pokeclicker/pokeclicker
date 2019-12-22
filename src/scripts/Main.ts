@@ -7,6 +7,9 @@ let player;
 const debug = false;
 let game;
 
+if (!debug)
+  Object.freeze(GameConstants);
+
 interface JQuery {
     animateNumber(options: object): void;
 }

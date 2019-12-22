@@ -21,6 +21,8 @@ const changelogType = {
 };
 
 const changelogItems = [
+    new Changelog(changelogType.VERSION, 'v1.0.3'),
+        new Changelog(changelogType.NEW, 'Show pokeball image by caught Pokemon in the Pokedex'),
     new Changelog(changelogType.VERSION, 'v1.0.2'),
         new Changelog(changelogType.NEW, 'Can now progress in multiple quest at a time <i>(amount based on Quest Level)</i>'),
         new Changelog(changelogType.NEW, 'Side cards can now be collapsed for more space'),
