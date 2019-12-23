@@ -1,4 +1,4 @@
-[![Build Status](https://img.shields.io/travis/pokeclicker-dev/pokeclicker?logo=travis)](https://travis-ci.org/pokeclicker-dev/pokeclicker)
+[![Build Status](https://img.shields.io/travis/pokeclicker/pokeclicker?logo=travis)](https://travis-ci.org/pokeclicker/pokeclicker)
 
 # PokéClicker
 A game about catching Pokémon, defeating gym leaders, and watching numbers get bigger.
