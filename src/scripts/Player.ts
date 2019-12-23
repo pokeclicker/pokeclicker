@@ -234,6 +234,13 @@ class Player {
 
     private highestRegion: KnockoutObservable<GameConstants.Region>;
 
+    public caughtAndShinyList(): KnockoutComputed<number> {
+        return ko.computed(function () {
+            const pokeList = this.caughtPokemonList.map(pokemon=>pokemon.name);
+            return this.caughtShinyList().filter(pokemon=>pokeList.includes(pokemon));
+        }, this);
+    }
+
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
             return Math.min(this.routeKillsNeeded, this.routeKills[route]());
@@ -321,7 +328,7 @@ class Player {
 
     public calculateClickAttack(): number {
         // Base power
-        let clickAttack =  Math.pow(this.caughtPokemonList.length + 1, 1.4);
+        let clickAttack =  Math.pow(this.caughtPokemonList.length + this.caughtAndShinyList()().length + 1, 1.4);
 
         // Apply Oak bonus
         const oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Poison_Barb) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Poison_Barb) / 100) : 1;
@@ -685,7 +692,9 @@ class Player {
             tokens *= 1.5;
         }
 
-        this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens));
+        tokens = Math.floor(tokens);
+
+        this.dungeonTokens(this.dungeonTokens() + tokens);
 
         GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
         Game.animateMoney(tokens,'playerMoneyDungeon');
