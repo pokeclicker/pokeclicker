@@ -41,7 +41,7 @@
               </table>
           </div>
       </div>
-      <!-- ko if: player.currentQuests().length == 0 -->
+      <!-- ko if: player.currentQuests().length == 0 && player.tutorialComplete()-->
         <span class="pt-2 pb-2">No active quest</span>
       <!-- /ko -->
       <div data-bind='if: (!player.tutorialComplete()) && (QuestLineHelper.tutorial.totalQuests > 0) && (QuestLineHelper.tutorial.curQuest() < QuestLineHelper.tutorial.totalQuests)'>
