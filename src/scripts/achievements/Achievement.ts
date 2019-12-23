@@ -29,7 +29,12 @@ class Achievement {
         return this.isCompleted() ? "100.0" : this.property.getProgressPercentage();
     }
 
-    public isCompleted() {
+    public isCompleted(){
         return this.unlocked || this.property.isCompleted();
+    }
+
+    public getBonus(){
+        const max = AchievementHandler.calculateMaxBonus();
+        return (this.bonus / max * 100).toFixed(2);
     }
 }

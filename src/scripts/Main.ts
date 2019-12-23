@@ -7,6 +7,9 @@ let player;
 const debug = true;
 let game;
 
+if (!debug)
+  Object.freeze(GameConstants);
+
 interface JQuery {
     animateNumber(options: object): void;
 }
@@ -78,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 class Game {
     interval;
     undergroundCounter: number;
-    farmCounter: number = 0;
     public static achievementCounter: number = 0;
 
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
@@ -106,6 +108,7 @@ class Game {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
         FarmRunner.counter += GameConstants.TICK_TIME;
+        EffectEngineRunner.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
             Game.achievementCounter = 0;
@@ -166,6 +169,10 @@ class Game {
 
         if (FarmRunner.counter > GameConstants.FARM_TICK) {
             FarmRunner.tick();
+        }
+
+        if (EffectEngineRunner.counter > GameConstants.EFFECT_ENGINE_TICK){
+            EffectEngineRunner.tick();
         }
 
         if (GameHelper.counter > 60 * 1000) {

@@ -61,7 +61,11 @@ class MapHelper {
             return "currentRoute";
         }
         if (MapHelper.accessToRoute(route, region)) {
-            return "unlockedRoute";
+            if (player.routeKillsObservable(route)() >= player.routeKillsNeeded) {
+                return "unlockedRoute";
+            } else {
+                return "unlockedUnfinishedRoute";
+            }
         }
         return "lockedRoute";
     }
@@ -75,7 +79,7 @@ class MapHelper {
         }
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
-                if (DungeonRunner.dungeonCompleted(dungeonList[town], false)) {
+                if (player.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
                     return "dungeon completedDungeon"
                 }
                 return "dungeon unlockedDungeon"
@@ -130,7 +134,7 @@ class MapHelper {
         let openModal = () => {$("#ShipModal").modal('show');}
         switch (player.region) {
             case 0:
-                if (TownList["Vermillion City"].isUnlocked() && player.highestRegion > 0) {
+                if (TownList["Vermillion City"].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
                     return;
                 }
@@ -144,14 +148,14 @@ class MapHelper {
     }
 
     public static ableToTravel() {
-        return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.highestRegion]
+        return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.highestRegion()]
     }
 
     public static travelToNextRegion() {
         if (MapHelper.ableToTravel()) {
-            player.highestRegion++;
-            MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion]);
-            player.region = player.highestRegion;
+            player.highestRegion(player.highestRegion() + 1);
+            MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
+            player.region = player.highestRegion();
         }
     }
 

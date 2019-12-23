@@ -38,7 +38,6 @@ class StartSequenceRunner {
     }
 
     public static showCaughtMessage() {
-        player.routeKills[1](0);
         Game.gameState(GameConstants.GameState.paused);
         $('#starterCaughtModal').modal('show');
         $('#pokeballSelector').css('display', 'block');

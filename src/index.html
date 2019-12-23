@@ -28,7 +28,7 @@
             </td>
             <td style="vertical-align:middle;"><span data-bind="text: getProgressPercentage()"></span>%</td>
 
-            <td style="vertical-align:middle;">+<span data-bind="text: bonus"><Bonus></Bonus></span>%</td>
+            <td style="vertical-align:middle;">+<span data-bind="text: getBonus()"></span>%</td>
         </tr>
     </script>
 
@@ -43,8 +43,7 @@
             <td></td>
             <!-- /ko -->
             <!-- ko ifnot: valueType == "Mine Egg" -->
-            <td class='vertical-middle'
-                data-bind='text: value + " " + UndergroundItem.getFullResourceName(valueType, value)'></td>
+            <td class='vertical-middle' data-bind='text: value + " " + UndergroundItem.getFullResourceName(valueType, value)'></td>
             <!-- /ko -->
             <td class='vertical-middle'>
                 <button class='btn btn-success tooltipRightMine'
@@ -122,133 +121,15 @@
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <!--left column-->
         <div class="col-lg-3 col-md-6 order-lg-first">
-            <div id="pokeballSelector" class="card border-secondary mb-3" style="min-height: 180px"
-                data-bind="visible: player.starter != GameConstants.Starter.None">
-                <div class="card-header p-0">
-                  <span>Pokéballs</span>
-                  <button type="button" class="btn btn-info" style="position: absolute; right: -1px; top: -1px; width: auto; height: 42px; padding: 4px;"
-                      data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon (including unobtained shiny Pokémon)', trigger: 'hover', placement:'left' }">?</button>
-                </div>
-                <div class="card-body p-0">
-                    <table class="table table-sm">
-                        <thead>
-                        <tr>
-                            <th width="35%">Caught</th>
-                            <th width="30%">#</th>
-                            <th width="35%">New</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
-                                     data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.None}"/>
-                            </td>
-                            <td></td>
-                            <td>
-                                <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
-                                     data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.None}"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="pokeball-small clickable"
-                                     src="assets/images/pokeball/Pokeball-small.png"
-                                     data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Pokeball}"/>
-                            </td>
-                            <td>
-                                <span data-bind="text: player.pokeballsObservable(0)"></span>
-                            </td>
-                            <td>
-                                <img class="pokeball-small clickable"
-                                     src="assets/images/pokeball/Pokeball-small.png"
-                                     data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Pokeball}"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="pokeball-small clickable"
-                                     src="assets/images/pokeball/Greatball-small.png"
-                                     data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Greatball}"/>
-                            </td>
-                            <td>
-                                <span data-bind="text: player.pokeballsObservable(1)"></span>
-                            </td>
-                            <td>
-                                <img class="pokeball-small clickable"
-                                     src="assets/images/pokeball/Greatball-small.png"
-                                     data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Greatball}"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="pokeball-small clickable"
-                                     src="assets/images/pokeball/Ultraball-small.png"
-                                     data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Ultraball}"/>
-                            </td>
-                            <td>
-                                <span data-bind="text: player.pokeballsObservable(2)"></span>
-                            </td>
-                            <td>
-                                <img class="pokeball-small clickable"
-                                     src="assets/images/pokeball/Ultraball-small.png"
-                                     data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Ultraball}"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <img class="pokeball-small clickable"
-                                     src="assets/images/pokeball/Masterball-small.png"
-                                     data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Masterball}"/>
-                            </td>
-                            <td>
-                                <span data-bind="text: player.pokeballsObservable(3)"></span>
-                            </td>
-                            <td>
-                                <img class="pokeball-small clickable"
-                                     src="assets/images/pokeball/Masterball-small.png"
-                                     data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Masterball}"/>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
-            <div class="card border-secondary mb-3 pokemon-list-container" id="pokemonListContainer"
-                 data-bind="visible: player.starter != GameConstants.Starter.None">
-                <div class="card-header p-0"><span>Pokémon List</span></div>
-                <div class="card-body p-0">
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">Sort:</span>
-                        </div>
-                        <select class="form-control" data-bind="options: GameConstants.SortOptions,
-                                                                optionsText: 'text',
-                                                                optionsValue: 'value',
-                                                                value: player._sortOption,
-                                                                optionsCaption: 'Sort By...'" title="">
-                        </select>
-                        <div class="input-group-append">
-                          <label for="reverse_sort" class="input-group-text">
-                            <input id="reverse_sort" class="clickable" type='checkbox' data-bind="checked: player._sortDescending" title=""/>&nbsp;Reverse
-                          </label>
-                        </div>
-                   </div>
-                    <table id="pokemonList" class="table table-striped table-hover table-sm">
-                        <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Atk</th>
-                            <th>Lvl</th>
-                        </tr>
-                        </thead>
-                        <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: player.sortedPokemonList()()}">
+            <!-- pokeball selector -->
+            @import "pokeballSelector.html"
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            <!-- Battle Item container-->
+            @import "battleItemContainer.html"
+
+            <!-- Pokemon List container-->
+            @import "pokemonListContainer.html"
 
         </div>
 
@@ -438,8 +319,8 @@
                             </div>
                         </div>
                     </div>
-                    <!--TownView-->
 
+                    <!--TownView-->
                     @import "townView.html"
                 </div>
 
@@ -511,116 +392,9 @@
 
         <!--Right column-->
         <div class="col-lg-3 col-md-6">
-            <div class="card border-secondary mb-3" id="oakItemsContainer"
-            data-bind="visible: player.starter != GameConstants.Starter.None">
-                <div class="card-header p-0">
-                    <div>
-                        <span style="text-align:center" data-bind="text: 'Oak Items equiped: ' + OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()"></span>
-                        <button type="button" class="btn btn-info" style="position: absolute; right: -1px; top: -1px; width: auto; height: 42px; padding: 4px;"
-                            data-bind="tooltip: { title: 'Activate Oak items to gain unique bonuses. When an Oak item has gained enough experience you can level it up with money to boost its effect.', trigger: 'hover', placement:'left' }">?</button>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <div class="row" data-bind="foreach: OakItemRunner.oakItemList">
-                        <div class="col-xs-4 col-sm-4 col-md-3 p-2">
-                            <button class="p-0 btn"
-                                data-bind="css: {
-                                   'btn-primary': OakItemRunner.isActive(id),
-                                   'btn-outline-secondary': !OakItemRunner.isActive(id)
-                                 }">
-                                <img class="clickable" src=""
-                                     data-bind="attr:{ src: 'assets/images/oakitems/' + GameConstants.humanifyString(GameConstants.OakItem[$data.id]) + '.png'},
-                                      css: {
-                                        'oak-item-locked': !OakItemRunner.isUnlocked($data.id)
-                                      },
-                                      event: {
-                                        mouseover: function(){OakItemRunner.hover($data.id)},
-                                        click: function(){OakItemRunner.click($data.id)},
-                                        mouseout : function(){OakItemRunner.hoverRelease()}
-                                      }">
-                              </button>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="card oak-item-info">
-                    <div data-bind="if: OakItemRunner.inspectedItem().isUnlocked()">
-                        <div class="row justify-content-sm-center">
-                            <div style="height:20px;" class="col">
-                                <b>
-                                    <span data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></span>
-                                </b>
-                            </div>
-                        </div>
-                        <div class="row justify-content-sm-center">
-                            <div class="col">
-                                <span data-bind="text: OakItemRunner.inspectedItem().description"></span>
-                            </div>
-                        </div>
-
-                        <div class="row justify-content-sm-center">
-                            <div class="col-sm-11 col-md-8">
-                                <div class="progress" style="margin-top: 12px"
-                                     data-bind="value: 'exp'">
-                                    <div class="progress-bar bg-success" role="progressbar"
-                                         data-bind="
-                                           attr:{
-                                             style: 'width:' + (OakItemRunner.inspectedItem().isMaxLevel() ? 100 : OakItemRunner.inspectedItem().expPercentage()) + '%'
-                                           },
-                                           css: {
-                                             'bg-success': !OakItemRunner.inspectedItem().isMaxLevel(),
-                                             'bg-primary': OakItemRunner.inspectedItem().isMaxLevel(),
-                                           }"
-                                         aria-valuemin="0" aria-valuemax="100">
-                                        <span data-bind="hidden: OakItemRunner.inspectedItem().canUpgradeExp() || OakItemRunner.inspectedItem().isMaxLevel(), html: OakItemRunner.inspectedItem().expProgress()"></span>
-                                        <div data-bind="if:OakItemRunner.inspectedItem().canUpgradeExp() || OakItemRunner.inspectedItem().isMaxLevel(),
-                                                    disable: !OakItemRunner.inspectedItem().canUpgrade()">
-                                            <div class="btn-default"
-                                                 data-bind="
-                                                  click: function(){
-                                                    OakItemRunner.inspectedItem().upgrade();
-                                                  },
-                                                  text: OakItemRunner.inspectedItem().isMaxLevel() ? 'Max Level!' : 'Upgrade'">
-                                                Upgrade!
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row justify-content-sm-center no-gutters">
-
-                            <div class="col">
-                                Lvl.
-                                <span data-bind="text: OakItemRunner.inspectedItem().level()"></span>
-                            </div>
-
-                            <div class="col">
-                                Bonus:
-                                <span data-bind="text: OakItemRunner.inspectedItem().calculateBonus()"></span>
-                                %
-                            </div>
-                        </div>
-                    </div>
-                    <div data-bind="ifnot: OakItemRunner.inspectedItem().isUnlocked()">
-
-                        <div class="row justify-content-sm-center">
-                            <div style="height:20px;" class="col">
-                                <b>
-                                    <span data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></span>
-                                </b>
-                            </div>
-                        </div>
-
-                        <div style="min-height:80px; vertical-align: center">
-                            Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq - player.caughtPokemonList.length"></span> more unique Pokémon to
-                            unlock!
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            <!-- Oak Items -->
+            @import "oakItems.html"
 
             <!-- Current Quest -->
             @import "questDisplay.html"

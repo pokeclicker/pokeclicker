@@ -128,7 +128,7 @@ class Player {
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
         this._currentTown = ko.observable("");
-        this._starter = savedPlayer._starter || GameConstants.Starter.None;
+        this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
 
         console.log(savedPlayer._itemList);
 
@@ -199,7 +199,8 @@ class Player {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
         });
         this.plotList = Save.initializePlots(savedPlayer.plotList);
-        this.highestRegion = savedPlayer.highestRegion || 0;
+        this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
+        this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
 
         this.tutorialProgress = ko.observable(savedPlayer.tutorialProgress || 0);
         this.tutorialState = savedPlayer.tutorialState;
@@ -242,11 +243,20 @@ class Player {
     public farmPoints: KnockoutObservable<number>;
     public berryList: KnockoutObservable<number>[];
 
+    public effectList: { [name: string]: KnockoutObservable<number> } = {};
+
     public tutorialProgress: KnockoutObservable<number>;
     public tutorialState: any;
     public tutorialComplete: KnockoutObservable<boolean>;
 
-    private highestRegion: GameConstants.Region;
+    private highestRegion: KnockoutObservable<GameConstants.Region>;
+
+    public caughtAndShinyList(): KnockoutComputed<number> {
+        return ko.computed(function () {
+            const pokeList = this.caughtPokemonList.map(pokemon=>pokemon.name);
+            return this.caughtShinyList().filter(pokemon=>pokeList.includes(pokemon));
+        }, this);
+    }
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
@@ -336,8 +346,19 @@ class Player {
     private _caughtAmount: Array<KnockoutObservable<number>>;
 
     public calculateClickAttack(): number {
-        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Poison_Barb) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Poison_Barb) / 100) : 1;
-        return Math.floor(Math.pow(this.caughtPokemonList.length + 1, 1.4) * oakItemBonus);
+        // Base power
+        let clickAttack =  Math.pow(this.caughtPokemonList.length + this.caughtAndShinyList()().length + 1, 1.4);
+
+        // Apply Oak bonus
+        const oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Poison_Barb) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Poison_Barb) / 100) : 1;
+        clickAttack *= oakItemBonus;
+
+        // Apply battle item bonus
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()){
+            clickAttack *= 1.5;
+        }
+
+        return Math.floor(clickAttack);
     }
 
     public calculateMoneyMultiplier(): number {
@@ -416,7 +437,7 @@ class Player {
     }
 
     public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
-        if (PokemonHelper.calcNativeRegion(pokemonName) > player.highestRegion) {
+        if (PokemonHelper.calcNativeRegion(pokemonName) > player.highestRegion()) {
             return;
         }
         OakItemRunner.use(GameConstants.OakItem.Magic_Ball);
@@ -426,7 +447,7 @@ class Player {
             this._caughtPokemonList.push(caughtPokemon);
             if (!supressNotification) {
                 if (shiny) Notifier.notify(`✨ You have captured a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
-                else Notifier.notify(`You have captured a ${pokemonName}!`, GameConstants.NotificationOption.success)
+                else Notifier.notify(`You have captured ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`, GameConstants.NotificationOption.success)
             }
         }
         if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
@@ -457,9 +478,13 @@ class Player {
         // TODO add money multipliers
         let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Amulet_Coin) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Amulet_Coin) / 100) : 1;
         let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.Lucky_incense)()){
+            moneytogain = Math.floor(moneytogain * 1.5);
+        }
         this._money(this._money() + moneytogain);
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
         Game.updateMoney();
+
         Game.animateMoney(moneytogain,'playerMoney');
     }
 
@@ -569,6 +594,10 @@ class Player {
         let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Exp_Share) ? 1 + (OakItemRunner.calculateBonus(GameConstants.OakItem.Exp_Share) / 100) : 1;
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()){
+            expTotal *= 1.5;
+        }
+
         for (let pokemon of this._caughtPokemonList()) {
             if (pokemon.levelObservable() < (this.gymBadges.length + 2) * 10) {
                 pokemon.exp(pokemon.exp() + expTotal);
@@ -594,8 +623,12 @@ class Player {
         }
     }
 
+    public shardUpgradeMaxed(typeNum: number, effectNum: number): boolean {
+        return this._shardUpgrades[typeNum][effectNum]() >= GameConstants.MAX_SHARD_UPGRADES;
+    }
+
     public canBuyShardUpgrade(typeNum: number, effectNum: number): boolean {
-        let lessThanMax = this._shardUpgrades[typeNum][effectNum]() < GameConstants.MAX_SHARD_UPGRADES;
+        let lessThanMax = !this.shardUpgradeMaxed(typeNum, effectNum);
         let hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
         return lessThanMax && hasEnoughShards;
     }
@@ -667,8 +700,18 @@ class Player {
     }
 
     public gainDungeonTokens(tokens: number) {
+        // Apply prestige bonuses
         tokens = Math.round(tokens * PrestigeBonuses.getBonus(2));
-        this._dungeonTokens(Math.floor(this._dungeonTokens() + tokens));
+
+        // Apply battle item bonus
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.Token_collector)()){
+            tokens *= 1.5;
+        }
+
+        tokens = Math.floor(tokens);
+
+        this.dungeonTokens(this.dungeonTokens() + tokens);
+
         GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
         Game.animateMoney(tokens, 'playerMoneyDungeon');
     }
@@ -813,11 +856,11 @@ class Player {
      * @returns {number} damage to be done.
      */
     public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
-        // TODO Calculate pokemon attack by checking upgrades and multipliers.
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
             let multiplier = 1;
             if (this.region !== GameHelper.getRegion(pokemon.id)) {
+                // Pokemon only retain 20% of their total damage in other regions.
                 multiplier = 0.2
             }
             if (!pokemon.breeding()) {
@@ -830,7 +873,23 @@ class Player {
             }
         }
 
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xAttack)()){
+            attack *= 1.5;
+        }
+
         return Math.round(attack);
+    }
+
+    public getRandomBerry() {
+        let i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
+        Notifier.notify("You got a " + GameConstants.BerryType[i] + " berry!", GameConstants.NotificationOption.success);
+        let amount = 1;
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
+            if (Math.random() < 0.5) {
+                amount += 1;
+            }
+        }
+        player.berryList[i](player.berryList[i]() + amount);
     }
 
 
@@ -1044,5 +1103,4 @@ class Player {
         let plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
-
 }

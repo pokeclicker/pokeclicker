@@ -1,0 +1,40 @@
+<div id="BattleItemContainer" class="card border-secondary mb-3">
+    <div class="card-header p-0" data-toggle="collapse" href="#BattleItemContainerBody">
+      <span>Battle Items</span>
+    </div>
+    <div id="BattleItemContainerBody" class="card-body p-0 show">
+      <table class="table table-bordered m-0">
+        <tbody>
+          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
+            <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]())"></td>
+          </tr>
+          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
+            <td class="p-0" data-bind="attr: {
+                                disabled: !player.itemList[$data]()
+                            },
+                            css: {
+                                'bg-primary': EffectEngineRunner.getEffect($data) > 5,
+                                'bg-warning': EffectEngineRunner.getEffect($data) <= 5 && EffectEngineRunner.getEffect($data) > 0,
+                                'bg-secondary': !EffectEngineRunner.isActive($data)()
+                            },
+                            event: {
+                                click: function(){ItemHandler.useItem($data)}
+                            },
+                            tooltip: {
+                              title: $data.replace('_', ' ') + '<br/>' + ItemList[$data].description,
+                              trigger: 'hover',
+                              placement:'bottom',
+                              html: true
+                            }">
+                <img src="" class="clickable" data-bind="attr: { src: 'assets/images/items/' + $data + '.png' }">
+
+            </td>
+          </tr>
+          <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
+            <td class="text-light p-0"><code data-bind="text: EffectEngineRunner.formattedTimeLeft($data)()"></code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+</div>

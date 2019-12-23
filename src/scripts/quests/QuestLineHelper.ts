@@ -32,7 +32,7 @@ class QuestLineHelper {
         this.tutorial.addQuest(pewter);
 
         //Buy pokeballs
-        let buyPokeballs = new BuyPokeballsQuest(30,GameConstants.Pokeball.Pokeball,50);
+        let buyPokeballs = new BuyPokeballsQuest(30, GameConstants.Pokeball.Pokeball, 50);
         buyPokeballs.pointsReward = 50;
         buyPokeballs.description = "Buy 30 pokeballs. You can find these in the Pewter City Shop.";
         this.tutorial.addQuest(buyPokeballs);
@@ -41,6 +41,18 @@ class QuestLineHelper {
         let routeThree = new DefeatPokemonsQuest(3, 10);
         routeThree.pointsReward = 100;
         this.tutorial.addQuest(routeThree);
+
+        //Buy Dungeon ticket
+        let buyDungeonTicket = new Quest(1, 10);
+        buyDungeonTicket.description = 'Buy the Dungeon ticket from Pewter City Shop.';
+        buyDungeonTicket.questFocus = ()=>+player.hasKeyItem('Dungeon ticket');
+        this.tutorial.addQuest(buyDungeonTicket);
+
+        //Cleat Mt Moon dungeon
+        let clearMtMoon = new DefeatDungeonQuest(GameConstants.KantoDungeons[2], 1);
+        clearMtMoon.pointsReward = 10;
+        clearMtMoon.description = 'Gather 75 Dungeon tokens by capturing Pokemon, then clear the Mt. Moon dungeon.';
+        this.tutorial.addQuest(clearMtMoon);
 
         this.tutorialTracker = this.tutorial.curQuestInitial.subscribe((newInitial)=>{
             player.tutorialProgress(QuestLineHelper.tutorial.curQuest());
