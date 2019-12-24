@@ -19,9 +19,18 @@ namespace GameConstants {
     export const ACHIEVEMENT_TICK = 1000;
     export const MIN_LOAD_TIME = 500;
 
-    export const AMOUNT_OF_POKEMONS = 251;
-    export const AMOUNT_OF_POKEMONS_GEN1 = 151;
-    export const AMOUNT_OF_POKEMONS_GEN2 = 251;
+    export const MAX_AVAILABLE_REGION = 2;
+
+    export const TotalPokemonsPerRegion = [
+        151, // 151
+        251, // 100
+        386, // 135
+        493, // 107
+        649, // 156
+        721, // 72
+        809, // 88
+    ];
+
     export const AMOUNT_OF_BADGES = 16;
     export const ITEM_USE_TIME = 30;
 
@@ -281,7 +290,12 @@ namespace GameConstants {
     export enum Region {
         kanto = 0,
         johto = 1,
-        hoenn = 2
+        hoenn = 2,
+        sinnoh = 3,
+        unova = 4,
+        kalos = 5,
+        alola = 6,
+        galar = 7,
     }
 
     export enum SortOptionsEnum {
@@ -311,9 +325,9 @@ namespace GameConstants {
     ];
 
     export const RegionRoute = {
-        0: 25,
-        1: 48,
-        2: 0
+        0: [1, 25],
+        1: [26, 48],
+        2: [101, 134],
     };
 
     export function randomIntBetween(min: number, max: number) {
@@ -352,6 +366,19 @@ namespace GameConstants {
         "Elite_Bruno2" = 24,
         "Elite_Karen" = 25,
         "Elite_JohtoChampion" = 26,
+        "Stone" = 27,
+        "Knuckle" = 28,
+        "Dynamo" = 29,
+        "Heat" = 30,
+        "Balance" = 31,
+        "Feather" = 32,
+        "Mind" = 33,
+        "Rain" = 34,
+        "Elite_Sidney" = 35,
+        "Elite_Phoebe" = 36,
+        "Elite_Glacia" = 37,
+        "Elite_Drake" = 38,
+        "Elite_HoennChampion" = 39,
     }
 
     export enum PokemonType {
@@ -406,7 +433,7 @@ namespace GameConstants {
     }
 
     // Map navigation
-    export const AMOUNT_OF_ROUTES = 48;
+    export const AMOUNT_OF_ROUTES = 134;
     export const AMOUNT_OF_ROUTES_KANTO = 25;
 
     /**
@@ -453,7 +480,42 @@ namespace GameConstants {
             46: [45],
             26: [46],
             27: [26],
-        }
+        },
+        2: {
+            102: [101],
+            103: [101],
+            104: [102],
+            105: [104],
+            106: [105],
+            107: [106],
+            108: [107],
+            109: [108],
+            110: [116],
+            111: [117],
+            112: [111],
+            113: [111],
+            114: [113],
+            115: [114],
+            116: [104],
+            117: [110],
+            118: [117],
+            119: [118],
+            120: [119],
+            121: [120],
+            122: [121],
+            123: [122],
+            124: [121],
+            125: [124],
+            126: [125],
+            127: [126],
+            128: [127],
+            129: [128],
+            130: [129],
+            131: [130],
+            132: [131],
+            133: [132],
+            134: [133],
+        },
     };
 
     export const routeBadgeRequirements = {
@@ -482,8 +544,25 @@ namespace GameConstants {
             43: GameConstants.Badge.Glacier,
             44: GameConstants.Badge.Glacier,
             45: GameConstants.Badge.Rising,
+        },
+        2: {
+            116: GameConstants.Badge.Stone,
+            117: GameConstants.Badge.Knuckle,
+            111: GameConstants.Badge.Dynamo,
+            112: GameConstants.Badge.Heat,
+            105: GameConstants.Badge.Balance,
+            118: GameConstants.Badge.Balance,
+            120: GameConstants.Badge.Feather,
+            126: GameConstants.Badge.Mind,
+            127: GameConstants.Badge.Rain,
         }
     };
+
+    export const WaterRoutes = {
+        0: new Set([19,20,21]),
+        1: new Set([40,41]),
+        2: new Set([105,106,107,108,109,122,124,125,126,127,128,129,130,131,132,133,134])
+    }
 
     export const routeDungeonRequirements = {
         0: {
@@ -493,6 +572,15 @@ namespace GameConstants {
         1: {
             33: "Union Cave",
             34: "Ilex Forest"
+        },
+        2: {
+            116: "Petalburg Woods",
+            110: "Granite Cave",
+            113: "Fiery Path",
+            115: "Meteor Falls",
+            112: "Jagged Pass",
+            124: "Mt. Pyre",
+            128: "Seafloor Cavern",
         }
     }
 
@@ -698,9 +786,26 @@ namespace GameConstants {
         "Champion Lance"
     ];
 
+    export const HoennGyms = [
+        "Rustboro City",
+        "Dewford Town",
+        "Mauville City",
+        "Lavaridge Town",
+        "Petalburg City",
+        "Fortree City",
+        "Mossdeep City",
+        "Sootopolis City",
+        "Elite Sidney",
+        "Elite Phoebe",
+        "Elite Glacia",
+        "Elite Drake",
+        "Champion Wallace"
+    ];
+
     export const RegionGyms = [
       KantoGyms,
-      JohtoGyms
+      JohtoGyms,
+      HoennGyms,
     ];
 
     export const KantoDungeons = [
@@ -731,18 +836,62 @@ namespace GameConstants {
         "Mt Silver"
     ];
 
+    export const HoennDungeons = [
+        "Rusturf Tunnel",
+        "Granite Cave",
+        "Jagged Pass",
+        "Fiery Path",
+        "Mt. Chimney",
+        "Meteor Falls",
+        "Mt. Pyre",
+        "Shoal Cave",
+        "Seafloor Cavern",
+        "Cave of Origin",
+        "Sky Pillar",
+        "Victory Road Hoenn",
+        "Petalburg Woods",
+        "New Mauville",
+        "Sea Mauville",
+        // These aren't implemented anywhere yet
+        /*
+        "Island Cave",
+        "Desert Ruins",
+        "Scorched Slab",
+        "Ancient Tomb",
+        "Aqua Hideout",
+        "Magma Hideout",
+        "Sealed Chamber",
+        "Artisan Cave",
+        "Desert Underpass",
+        "Marine Cave",
+        "Terra Cave",
+        "Southern Island",
+        "Faraway Island",
+        "Birth Island",
+        "Devon Corporation",
+        "Oceanic Museum",
+        "Mirage Tower",
+        "Weather Institute",
+        "Safari Zone",
+        "Mirage Island",
+        "Battle Tower",
+        "Trainer Hill",
+        "Abandoned Ship",
+        "Battle Maison",
+        "Battle Resort",
+        "Mirage Spots",
+        */
+    ];
+
     export const RegionDungeons = [
       KantoDungeons,
-      JohtoDungeons
+      JohtoDungeons,
+      HoennDungeons,
     ];
 
     export const StartingTowns = [
         "Pallet Town",
         "New Bark Town",
-    ];
-
-    export const pokemonsNeededToTravel = [
-        151,
-        252, // Should be 251, set to 252 in case gen 3 isn't added before beta
+        "Littleroot Town",
     ];
 }

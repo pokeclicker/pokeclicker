@@ -3,7 +3,7 @@
 class IndigoPlateau extends PokemonLeague {
 
     constructor(shop?: Shop) {
-        super("Indigo Plateau", [23], shop, null, "Victory Road");
+        super("Indigo Plateau Kanto", [23], shop, null, "Victory Road");
         this.gym(null);
         this.gymList = ko.observableArray<KnockoutObservable<Gym>>();
         this.gymList.push(ko.observable(gymList["Elite Lorelei"]));
@@ -20,9 +20,9 @@ class IndigoPlateau extends PokemonLeague {
 
 
 /*
-TownList["Elite Lorelei"] = TownList["Indigo Plateau"];
-TownList["Elite Bruno"] = TownList["Indigo Plateau"];
-TownList["Elite Agatha"] = TownList["Indigo Plateau"];
-TownList["Elite Lance"] = TownList["Indigo Plateau"];
-TownList["Champion Blue"] = TownList["Indigo Plateau"];
+TownList["Elite Lorelei"] = TownList["Indigo Plateau Kanto"];
+TownList["Elite Bruno"] = TownList["Indigo Plateau Kanto"];
+TownList["Elite Agatha"] = TownList["Indigo Plateau Kanto"];
+TownList["Elite Lance"] = TownList["Indigo Plateau Kanto"];
+TownList["Champion Blue"] = TownList["Indigo Plateau Kanto"];
 */

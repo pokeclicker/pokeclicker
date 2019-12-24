@@ -57,39 +57,50 @@ class MapHelper {
     };
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
+        let cls;
+
         if (player.route() == route && player.region == region) {
-            return "currentRoute";
+            cls = 'currentRoute';
         }
-        if (MapHelper.accessToRoute(route, region)) {
+        else if (MapHelper.accessToRoute(route, region)) {
             if (player.routeKillsObservable(route)() >= player.routeKillsNeeded) {
-                return "unlockedRoute";
+                cls = 'unlockedRoute';
             } else {
-                return "unlockedUnfinishedRoute";
+                cls = 'unlockedUnfinishedRoute';
             }
         }
-        return "lockedRoute";
+        else {
+            cls = 'lockedRoute';
+        }
+
+        // Water routes
+        if (GameConstants.WaterRoutes[region].has(route))  {
+            cls = cls + ' waterRoute';
+        }
+
+        return cls
     }
 
     public static calculateTownCssClass(town: string): string {
         if (player.hasKeyItem(town)) {
-            return "city unlockedTown";
+            return 'city unlockedTown';
         }
         if (player.currentTown() == town) {
-            return "city currentTown";
+            return 'city currentTown';
         }
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
                 if (player.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
-                    return "dungeon completedDungeon"
+                    return 'dungeon completedDungeon'
                 }
-                return "dungeon unlockedDungeon"
+                return 'dungeon unlockedDungeon'
             }
-            return "city unlockedTown";
+            return 'city unlockedTown';
         }
         if (dungeonList.hasOwnProperty(town)) {
-            return "dungeon"
+            return 'dungeon'
         }
-        return "city";
+        return 'city';
     }
 
     public static accessToTown(townName: string): boolean {
@@ -112,26 +123,12 @@ class MapHelper {
         }
     };
 
-    public static updateAllRoutes() {
-        for (let i = 0; i < GameConstants.AMOUNT_OF_ROUTES_KANTO; i++) {
-            // TODO fix for multiple regions
-            if (MapHelper.accessToRoute(i, GameConstants.Region.kanto)) {
-                $("[data-route='" + i + "']").removeClass('currentRoute').removeClass('lockedRoute').addClass('unlockedRoute');
-            }
-        }
-    }
-
-    public static validRoute(route: number, region: GameConstants.Region): boolean {
-        switch (region) {
-            case GameConstants.Region.kanto:
-                return route > 0 && route < 26;
-            case GameConstants.Region.johto:
-                return route > 25 && route < 49;
-        }
+    public static validRoute(route: number = 0, region: GameConstants.Region = 0): boolean {
+        return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];
     }
 
     public static openShipModal() {
-        let openModal = () => {$("#ShipModal").modal('show');}
+        let openModal = () => {$('#ShipModal').modal('show');}
         switch (player.region) {
             case 0:
                 if (TownList["Vermillion City"].isUnlocked() && player.highestRegion() > 0) {
@@ -139,16 +136,21 @@ class MapHelper {
                     return;
                 }
             case 1:
-                if (TownList["Olivine City"].isUnlocked()) {
+                if (TownList['Olivine City'].isUnlocked()) {
+                    openModal();
+                    return;
+                }
+            case 2:
+                if (TownList["Slateport City"].isUnlocked()) {
                     openModal();
                     return;
                 }
         }
-        Notifier.notify("You cannot access this dock yet", GameConstants.NotificationOption.warning)
+        Notifier.notify('You cannot access this dock yet', GameConstants.NotificationOption.warning)
     }
 
     public static ableToTravel() {
-        return player.caughtPokemonList.length >= GameConstants.pokemonsNeededToTravel[player.highestRegion()]
+        return player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && player.caughtPokemonList.length >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
     }
 
     public static travelToNextRegion() {

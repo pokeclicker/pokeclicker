@@ -1,0 +1,50 @@
+<% /* %>
+
+Parameters:
+    - region : Required : Number
+        The region this route lies in.
+
+    - route : Required : Number
+        The route number for this route.
+
+    - height : Required : Number
+        The height of this route element.
+
+    - width : Required : Number
+        The width of this route element.
+
+    - x : Required : Number
+        x axis position of this route element.
+
+    - y : Required : Number
+        y axis position of this route element.
+
+    - textx : Required when noText is not false : Number
+        x axis position of the route number text.
+
+    - texty : Required when noText is not false : Number
+        y axis position of the route number text.
+
+    - rotate : Optional : Boolean
+        Indicates if this element should be rotated 90 degrees about (0,0).
+
+    - noText : Optional : Boolean
+        Indicates if this element should not add text for it's route number.
+
+<% */ %>
+
+<g
+<% if (locals.rotate) { %>
+    transform="rotate(90,0,0)"
+<% } %>
+    data-bind="click:function(){ MapHelper.moveToRoute(<%= locals.route %>, <%= locals.region %>); } ">
+    <rect data-route='<%= locals.route %>'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(<%= locals.route %>, <%= locals.region %>) }"
+        height="<%= locals.height %>"
+        width="<%= locals.width %>"
+        x="<%= locals.x %>" y="<%= locals.y %>">
+    </rect>
+<% if (!locals.noText) { %>
+    <text font-size="13px" x="<%= locals.textx %>" y="<%= locals.texty %>"><%= locals.route %></text>
+<% } %>
+</g>

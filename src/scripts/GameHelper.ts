@@ -77,9 +77,7 @@ class GameHelper {
     }
 
     public static getRegion(id): GameConstants.Region {
-        if (id <= GameConstants.AMOUNT_OF_POKEMONS_GEN1) return GameConstants.Region.kanto;
-        if (id <= GameConstants.AMOUNT_OF_POKEMONS_GEN2) return GameConstants.Region.johto;
-        return GameConstants.Region.hoenn;
+        return GameConstants.TotalPokemonsPerRegion.findIndex(p => id < p);
     }
 
     public static createArray(start: number, max: number, step: number) {
