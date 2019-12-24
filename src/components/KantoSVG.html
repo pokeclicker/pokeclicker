@@ -462,7 +462,7 @@
     <%- include('templates/mapPOI',
         { name: "Dock"
         , x: 325, y: 240
-        , databind: "click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion >= 1}"
+        , databind: "click:function(){MapHelper.openShipModal()}, css:{ unlockedTown: player.highestRegion() >= 1}"
         })
      %>
 </g>
