@@ -28,6 +28,6 @@
     <td>
         <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
             <option data-bind="text: $data.text, value: $data.value, attr:{ selected: Settings.getSetting('theme').observableValue() == $data.value}"></option>
-        </div>
+        </select>
     </td>
 </script>
