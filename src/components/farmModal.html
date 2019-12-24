@@ -7,9 +7,8 @@
                 <!-- ko ifnot: FarmRunner.allPlotsUnlocked() -->
                 <button class="btn btn-success" onclick="FarmRunner.unlockPlot()"
                         data-bind="css: { disabled: !FarmRunner.canBuyPlot()}">
-                    <span>Unlock new plot (</span>
-                    <img src="assets/images/currency/farmPoint.png">
-                    <span data-bind="text: FarmRunner.plotPrice() + ' )'"></span>
+                    <span>Unlock new plot </span>
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': FarmRunner.plotPrice(), 'currency': GameConstants.Currency.farmPoint}}"></span>
                 </button>
                 <!-- /ko -->
             </div>
@@ -19,8 +18,7 @@
 
                     <div class="col-sm-4 col-md-3 col-lg-4">
                         <div class="col-sm-12">
-                            <img src="assets/images/currency/farmPoint.png">
-                            <span data-bind="text: ' ' + player.farmPoints()"></span>
+                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.farmPoints(), 'currency': GameConstants.Currency.farmPoint}}"></span>
                         </div>
                         <ul id="seedList" data-bind="foreach: player.berryList" class="list-group"
                             style="margin-bottom: 5px;">

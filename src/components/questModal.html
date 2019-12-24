@@ -19,8 +19,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <img src="assets/images/currency/questPoint.png">
-                    &nbsp;<span id='questPoints' data-bind="text: player._questPoints().toLocaleString('en-US')"></span>
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player._questPoints(), 'currency': GameConstants.Currency.questPoint}}"></span>
                 </div>
 
             </div>
@@ -39,8 +38,7 @@
                             <tr>
                                 <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
                                 <td class="align-middle" style="text-align:left">
-                                  <img src="assets/images/currency/questPoint.png">
-                                  &nbsp;<span data-bind="text: pointsReward.toLocaleString('en-US')"></span>
+                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
                                 </td>
                                 <td class="align-middle">
                                     <button class='btn btn-primary btn-sm btn-block'
@@ -72,9 +70,7 @@
                     <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()'
                             data-bind='text: "Refresh",
                                        enable: QuestHelper.canAffordRefresh()'></button>
-                    <img src="assets/images/currency/money.png">
-                    <span data-bind='text: Number(QuestHelper.getRefreshCost()).toLocaleString(),
-                                  css: { "text-danger": !QuestHelper.canAffordRefresh() }'></span>
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': QuestHelper.getRefreshCost(), 'currency': GameConstants.Currency.money}}"></span>
                     <span class='' data-bind='text: "(Daily refresh in " + GameHelper.formattedLetterTimeUntilTomorrow() + ")"'>
                     </span>
                 </div>
