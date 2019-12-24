@@ -26,7 +26,7 @@ class Statistics {
         "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,  // remove "None" pokemon type
         "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
         "berriesHarvested": GameHelper.enumLength(GameConstants.BerryType),
-    }
+    };
 
     constructor(saved = {}) {
         let observables = [
