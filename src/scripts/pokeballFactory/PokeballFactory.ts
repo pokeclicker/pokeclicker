@@ -25,8 +25,8 @@ class PokeballFactory {
         return PokeballFactory.BASE_MASTERBALL_TIME - this.getUpgrade(PokeballFactory.Upgrades.Masterball_Time).calculateBonus();
     }
 
-    public static getBallTime(ball: GameConstants.Pokeball){
-        switch(ball) {
+    public static getBallTime(ball: GameConstants.Pokeball) {
+        switch (ball) {
             case GameConstants.Pokeball.Pokeball:
                 return this.getPokeballTime();
             case GameConstants.Pokeball.Greatball:
@@ -54,7 +54,7 @@ class PokeballFactory {
         }
     }
 
-    public static setTimeLeft(name: GameConstants.Pokeball, timeLeft: number){
+    public static setTimeLeft(name: GameConstants.Pokeball, timeLeft: number) {
         this.getFactoryItem(name).timeLeft = timeLeft;
     }
 
@@ -66,17 +66,22 @@ class PokeballFactory {
     }
 
     public static tick() {
+        if (!this.canAccess()) {
+            return
+        }
         this.counter = 0;
         for (let i = 0; i < this.productionLine.length; i++) {
             this.productionLine[i].tick();
-            if( this.productionLine[i].timeLeft <= 0){
+            if (this.productionLine[i].timeLeft <= 0) {
                 this.productionLine[i].gainItem();
                 this.productionLine[i].timeLeft = this.getBallTime(this.productionLine[i].type);
             }
+
+            this.productionLine[i].timeLeft = Math.min(this.productionLine[i].timeLeft, this.getBallTime(this.productionLine[i].type));
         }
     }
 
-    public static canAccess(): boolean{
+    public static canAccess(): boolean {
         return MapHelper.accessToRoute(4, 0) && player.hasKeyItem("Factory key");
     }
 
@@ -94,15 +99,12 @@ class PokeballFactory {
         }
         let productionLine = saveObject['productionLine'];
         for (let i = 0; i < this.productionLine.length; i++) {
-            console.log(saveObject);
-            console.log(productionLine);
-            console.log(this.productionLine[i].name);
             this.productionLine[i].timeLeft = productionLine[this.productionLine[i].name];
         }
     }
 
     public static save(): object {
-        let undergroundSave = {};
+        let pokeballFactorySave = {};
 
         let upgradesSave = {};
         for (let item in PokeballFactory.Upgrades) {
@@ -110,16 +112,16 @@ class PokeballFactory {
                 upgradesSave[item] = PokeballFactory.getUpgrade((<any>PokeballFactory.Upgrades)[item]).level;
             }
         }
-        undergroundSave['upgrades'] = upgradesSave;
+        pokeballFactorySave['upgrades'] = upgradesSave;
 
         let productionLineSave = {};
         for (let i = 0; i < this.productionLine.length; i++) {
             productionLineSave[this.productionLine[i].name] = this.productionLine[i].timeLeft;
         }
-        undergroundSave['productionLine'] = productionLineSave;
+        pokeballFactorySave['productionLine'] = productionLineSave;
 
 
-        return undergroundSave;
+        return pokeballFactorySave;
     }
 
 
@@ -134,8 +136,8 @@ namespace PokeballFactory {
     }
 
     export const BASE_POKEBALL_TIME = 10 * 60;
-    export const BASE_GREATBALL_TIME = 60 * 60;
-    export const BASE_ULTRABALL_TIME = 10 * 60 * 60;
-    export const BASE_MASTERBALL_TIME = 24 * 60 * 60;
+    export const BASE_GREATBALL_TIME = 5 * 10 * 60;
+    export const BASE_ULTRABALL_TIME = 10 * 10 * 60;
+    export const BASE_MASTERBALL_TIME = 10 * 60 * 60;
 
 }
