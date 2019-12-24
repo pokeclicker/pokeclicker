@@ -76,6 +76,9 @@ class PokeballFactory {
         }
     }
 
+    public static canAccess(): boolean{
+        return MapHelper.accessToRoute(4, 0) && player.hasKeyItem("Factory key");
+    }
 
     public static load(saveObject: object): void {
         if (!saveObject) {

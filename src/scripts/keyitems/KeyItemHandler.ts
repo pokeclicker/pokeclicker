@@ -17,8 +17,9 @@ class KeyItemHandler {
             return player.routeKillsObservable(1)() > player.routeKillsNeeded -1;
         })));
 
-        // TODO obtain somewhere at the start
-        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Factory key", "This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13")));
+        KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Factory key", "This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13", function(){
+            return player.routeKillsObservable(4)() > player.routeKillsNeeded -1;
+        })));
 
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Dungeon ticket", "This ticket grants access to all dungeons in the Kanto region,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon")));
 
