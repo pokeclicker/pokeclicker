@@ -37,7 +37,7 @@ class DataPokemon implements pokemonInterface {
       let evolutions = this.evolution[index].constructor === Array ? this.evolution[index] : [this.evolution[index]];
 
       if (filterMaxRegion && player){
-          evolutions = evolutions.filter(p=>PokemonHelper.calcNativeRegion(p) <= player.highestRegion);
+          evolutions = evolutions.filter(p=>PokemonHelper.calcNativeRegion(p) <= player.highestRegion());
       }
 
       if (!evolutions.length){
@@ -47,7 +47,7 @@ class DataPokemon implements pokemonInterface {
       if (returnAllEvolutions){
         return evolutions;
       }
-      
+
       return evolutions[Math.floor(Math.random() * evolutions.length)];
     }
 }

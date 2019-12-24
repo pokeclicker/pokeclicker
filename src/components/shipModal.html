@@ -13,7 +13,7 @@
                         Kanto
                     </button>
                     <button class='btn btn-primary'
-                        data-bind='visible: player.region != 1 && player.highestRegion >= 1'
+                        data-bind='visible: player.region != 1 && player.highestRegion() >= 1'
                         onclick='MapHelper.moveToTown("Olivine City");player.region = 1;$("#ShipModal").modal("hide")'>
                         Johto
                     </button>

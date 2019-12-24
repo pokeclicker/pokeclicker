@@ -131,7 +131,7 @@ class MapHelper {
         let openModal = () => {$('#ShipModal').modal('show');}
         switch (player.region) {
             case 0:
-                if (TownList['Vermillion City'].isUnlocked() && player.highestRegion > 0) {
+                if (TownList["Vermillion City"].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
                     return;
                 }
@@ -150,14 +150,14 @@ class MapHelper {
     }
 
     public static ableToTravel() {
-        return player.highestRegion < GameConstants.MAX_AVAILABLE_REGION && player.caughtPokemonList.length >= GameConstants.TotalPokemonsPerRegion[player.highestRegion];
+        return player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && player.caughtPokemonList.length >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
     }
 
     public static travelToNextRegion() {
         if (MapHelper.ableToTravel()) {
-            player.highestRegion++;
-            MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion]);
-            player.region = player.highestRegion;
+            player.highestRegion(player.highestRegion() + 1);
+            MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
+            player.region = player.highestRegion();
         }
     }
 

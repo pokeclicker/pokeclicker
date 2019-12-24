@@ -64,14 +64,14 @@ class BreedingHelper {
         }
 
         if (shiny) Notifier.notify(`✨ You hatched a shiny ${egg.pokemon}! ✨`, GameConstants.NotificationOption.warning);
-        else Notifier.notify(`You hatched a ${egg.pokemon}!`, GameConstants.NotificationOption.success);
+        else Notifier.notify(`You hatched ${GameHelper.anOrA(egg.pokemon)} ${egg.pokemon}!`, GameConstants.NotificationOption.success);
 
         player.capturePokemon(egg.pokemon, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         let baseForm = BreedingHelper.calculateBaseForm(egg.pokemon);
         if (egg.pokemon != baseForm && !player.alreadyCaughtPokemon(baseForm)) {
-            Notifier.notify(`You also found a ${baseForm} nearby!`, GameConstants.NotificationOption.success);
+            Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
             player.capturePokemon(baseForm, false, true);
         }
 
@@ -87,7 +87,7 @@ class BreedingHelper {
 
     public static createTypedEgg(type: GameConstants.EggType): Egg {
         const hatch_list = HatchList[type];
-        const hatchable = hatch_list.slice(0, player.highestRegion + 1);
+        const hatchable = hatch_list.slice(0, player.highestRegion() + 1);
         let possible_hatches = [];
         hatchable.forEach((pokemon, index)=>{
             if (!pokemon.length) return;
@@ -141,7 +141,7 @@ class BreedingHelper {
         if (!(pokemonName in pokemonDevolutionMap)) {
             // No devolutions at all
             return pokemonName;
-        } else if (PokemonHelper.calcNativeRegion(pokemonDevolutionMap[pokemonName]) > player.highestRegion) {
+        } else if (PokemonHelper.calcNativeRegion(pokemonDevolutionMap[pokemonName]) > player.highestRegion()) {
             // No further devolutions in current unlocked regions
             return pokemonName;
         } else {
@@ -180,7 +180,7 @@ HatchList[GameConstants.EggType.Dragon] = [
 document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#breedingModal').on('hidden.bs.modal', function () {
-        if (player.highestRegion == 0) {
+        if (player.highestRegion() == 0) {
             MapHelper.moveToRoute(5, GameConstants.Region.kanto);
         }
         MapHelper.returnToMap();
