@@ -226,6 +226,7 @@ namespace GameConstants {
         questPoint,
         dungeontoken,
         diamond,
+        farmPoint
     }
 
     export enum TypeEffectiveness {
