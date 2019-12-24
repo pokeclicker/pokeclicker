@@ -13,15 +13,19 @@
 
   span {
     position: absolute;
-    color: white;
+    color: whitesmoke;
     background-color: rgba(0, 0, 0, 0.5);
     left: 0;
     right: 0;
     font-size: 14px;
   }
 
-  span:first-child::before {
+  span.id::before {
     content: '#';
+  }
+
+  span.attack::before {
+    content: 'Attack: ';
   }
 }
 

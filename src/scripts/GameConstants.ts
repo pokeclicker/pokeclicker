@@ -10,6 +10,7 @@ namespace GameConstants {
     export const UNDERGROUND_TICK = 1000;
     export const DUNGEON_TIME = 6000;
     export const DUNGEON_TICK = 1;
+    export const EFFECT_ENGINE_TICK = 1000;
     export const FARM_TICK = 1000;
     export const POKEBALL_FACTORY_TICK = 1000;
     export const SAVE_TICK = 10000;
@@ -23,13 +24,14 @@ namespace GameConstants {
     export const AMOUNT_OF_POKEMONS_GEN1 = 151;
     export const AMOUNT_OF_POKEMONS_GEN2 = 251;
     export const AMOUNT_OF_BADGES = 16;
+    export const ITEM_USE_TIME = 30;
 
     export const ROAMING_MIN_CHANCE = 8192;
     export const ROAMING_MAX_CHANCE = 4096;
 
     export const RoamingPokemon = {
         0: ["Mew"],
-        1: ["Raikou", "Entei"],
+        1: ["Raikou", "Entei", "Suicune"],
     }
 
     // Shinies
@@ -40,12 +42,12 @@ namespace GameConstants {
     export const SHINY_CHANCE_STONE = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
 
-    export const ITEM_PRICE_MULTIPLIER = 1.01;
-    export const ITEM_PRICE_DEDUCT = 1.008;
+    export const ITEM_PRICE_MULTIPLIER = 1.001;
+    export const ITEM_PRICE_DEDUCT = 1.0005;
 
 
 
-    export const PLATE_VALUE = 25;
+    export const PLATE_VALUE = 100;
 
     // Oak items
     export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
@@ -122,10 +124,10 @@ namespace GameConstants {
 
     //Safari
     export const Safari = {
-        "SizeY": 21,
+        "SizeY": Math.floor((window.innerHeight - 74 - 50) / 32),
         "SizeX": 25,
     }
-    
+
     export const SAFARI_BATTLE_CHANCE = 5;
 
     export const SAFARI_BASE_POKEBALL_COUNT = 30;
@@ -163,16 +165,16 @@ namespace GameConstants {
     // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
     //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
     const questBase = 1; // change this to scale all quest points
-    export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
+    export const DEFEAT_POKEMONS_BASE_REWARD  = questBase * 1;
     export const CAPTURE_POKEMONS_BASE_REWARD = GameConstants.DEFEAT_POKEMONS_BASE_REWARD / 0.8; // Defeat reward divided by chance to catch (guessed)
-    export const GAIN_MONEY_BASE_REWARD      = questBase * 0.0017;  // Dimava
-    export const GAIN_TOKENS_BASE_REWARD     = CAPTURE_POKEMONS_BASE_REWARD / 13 // <route number> tokens gained for every capture
-    export const HATCH_EGGS_BASE_REWARD      = questBase * 33;      // Dimava
-    export const MINE_LAYERS_BASE_REWARD     = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
-    export const SHINY_BASE_REWARD           = questBase * 6000;    // Dimava
-    export const USE_OAK_ITEM_BASE_REWARD    = GameConstants.DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
+    export const GAIN_MONEY_BASE_REWARD       = questBase * 0.0017;  // Dimava
+    export const GAIN_TOKENS_BASE_REWARD      = CAPTURE_POKEMONS_BASE_REWARD / 13 // <route number> tokens gained for every capture
+    export const HATCH_EGGS_BASE_REWARD       = questBase * 33;      // Dimava
+    export const MINE_LAYERS_BASE_REWARD      = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
+    export const SHINY_BASE_REWARD            = questBase * 6000;    // Dimava
+    export const USE_OAK_ITEM_BASE_REWARD     = GameConstants.DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
 
-    export const ACTIVE_QUEST_MULTIPLIER     = 4;
+    export const ACTIVE_QUEST_MULTIPLIER      = 4;
 
     export const QuestTypes = [
         "DefeatPokemons",
@@ -183,10 +185,11 @@ namespace GameConstants {
         "HatchEggs",
         "MineLayers",
         "CatchShinies",
-        "DefeatKantoGym",
-        "DefeatKantoDungeon",
+        "DefeatGym",
+        "DefeatDungeon",
         "UsePokeball",
         "UseOakItem",
+        "HarvestBerriesQuest",
     ];
 
     export const QUESTS_PER_SET = 10;
@@ -252,7 +255,7 @@ namespace GameConstants {
     }
 
     export function humanifyString(str: string) {
-        return str.split('_').join(' ');
+        return str.replace(/_/g, ' ');
     }
 
     export function formatTime(time) {
@@ -332,11 +335,11 @@ namespace GameConstants {
         "Marsh" = 6,
         "Volcano" = 7,
         "Earth" = 8,
-        "Lorelei" = 9,
-        "Bruno" = 10,
-        "Agatha" = 11,
-        "Lance" = 12,
-        "Champion" = 13,
+        "Elite_Lorelei" = 9,
+        "Elite_Bruno" = 10,
+        "Elite_Agatha" = 11,
+        "Elite_Lance" = 12,
+        "Elite_Champion" = 13,
         "Zephyr" = 14,
         "Hive" = 15,
         "Plain" = 16,
@@ -345,11 +348,11 @@ namespace GameConstants {
         "Mineral" = 19,
         "Glacier" = 20,
         "Rising" = 21,
-        "Will" = 22,
-        "Koga" = 23,
-        "Bruno2" = 24,
-        "Karen" = 25,
-        "JohtoChampion" = 26,
+        "Elite_Will" = 22,
+        "Elite_Koga" = 23,
+        "Elite_Bruno2" = 24,
+        "Elite_Karen" = 25,
+        "Elite_JohtoChampion" = 26,
     }
 
     export enum PokemonType {
@@ -471,7 +474,7 @@ namespace GameConstants {
             24: GameConstants.Badge.Cascade,
         },
         1: {
-            28: GameConstants.Badge.JohtoChampion,
+            28: GameConstants.Badge.Elite_JohtoChampion,
             32: GameConstants.Badge.Zephyr,
             34: GameConstants.Badge.Hive,
             35: GameConstants.Badge.Plain,
@@ -506,7 +509,7 @@ namespace GameConstants {
         "Pokeball": 100,
         "Greatball": 500,
         "Ultraball": 2000,
-        "Masterball": 10000,
+        "Masterball": 2500,
 
         "xAttack": 600,
         "xClick": 400,
@@ -519,16 +522,16 @@ namespace GameConstants {
         "MediumRestore": 40000,
         "LargeRestore": 100000,
 
-        "PokeBlock": 0,
+        "PokeBlock": Infinity,
 
-        "Protein": 0,
-        "RareCandy": 0,
+        "Protein": Infinity,
+        "RareCandy": Infinity,
 
         // Quest points
         "Eevee": 5000,
         "Porygon": 2000,
         "Jynx": 2500,
-        "Mr_Mime": 1500,
+        "Mr. Mime": 1500,
         "Lickitung": 1000,
         "Togepi": 2500,
 
@@ -547,23 +550,28 @@ namespace GameConstants {
         Leaf_stone,
         Moon_stone,
         Sun_stone,
-        Trade_stone
+        Trade_stone,
+        Dragon_scale,
+        Metal_coat,
+        Kings_rock,
+        Upgrade,
+        Time_stone,
     }
 
     export enum BattleItemType {
-        xAttack,
-        xClick,
-        xExp,
-        Token_collector,
-        Item_magnet,
-        Lucky_incense
+        xAttack = "xAttack",
+        xClick = "xClick",
+        xExp = "xExp",
+        Token_collector = "Token_collector",
+        Item_magnet = "Item_magnet",
+        Lucky_incense = "Lucky_incense"
     }
 
     export enum PokemonItemType {
         "Eevee",
         "Porygon",
         "Jynx",
-        "Mr_Mime",
+        "Mr. Mime",
         "Lickitung",
         "Togepi",
     }
@@ -691,6 +699,11 @@ namespace GameConstants {
         "Champion Lance"
     ];
 
+    export const RegionGyms = [
+      KantoGyms,
+      JohtoGyms
+    ];
+
     export const KantoDungeons = [
         "Viridian Forest",
         "Digletts Cave",
@@ -719,6 +732,11 @@ namespace GameConstants {
         "Mt Silver"
     ];
 
+    export const RegionDungeons = [
+      KantoDungeons,
+      JohtoDungeons
+    ];
+
     export const StartingTowns = [
         "Pallet Town",
         "New Bark Town",
@@ -727,5 +745,5 @@ namespace GameConstants {
     export const pokemonsNeededToTravel = [
         151,
         252, // Should be 251, set to 252 in case gen 3 isn't added before beta
-    ]
+    ];
 }

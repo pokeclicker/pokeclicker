@@ -3,8 +3,11 @@
         <div class="modal-content">
             <div class="modal-header">
 
-                <div class="col-2">
-                <h4>Quests</h4>
+                <div class="col-3">
+                <h5>
+                    <span class='' data-bind='text: "Quests (" + player.currentQuests().length + "/" + QuestHelper.questSlots()() + ")"'>
+                    </span>
+                </h5>
                 </div>
                 <div class='col-6'>
                     <div data-bind='text: "Lvl. "+player.questLevel'></div>
@@ -15,14 +18,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-2">
-                    <img src="assets/images/currency/questPoint.png"><span id='questPoints'
-                                                                           data-bind='text: " " +player._questPoints()'></span>
+                <div class="col-3">
+                    <img src="assets/images/currency/questPoint.png">
+                    &nbsp;<span id='questPoints' data-bind="text: player._questPoints().toLocaleString('en-US')"></span>
                 </div>
 
             </div>
             <div class="modal-body">
-                <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;">
+                <div class="modal-body" id="treasuresBody" style="margin: auto;">
                     <div>
                         <table class='table table-hover'>
                             <thead>
@@ -35,19 +38,25 @@
                             <tbody data-bind="foreach: QuestHelper.questList" >
                             <tr>
                                 <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
-                                <td class="align-middle" style="text-align:left"><img src="assets/images/currency/questPoint.png"><span
-                                        data-bind='text: " " + pointsReward'></span></td>
+                                <td class="align-middle" style="text-align:left">
+                                  <img src="assets/images/currency/questPoint.png">
+                                  &nbsp;<span data-bind="text: pointsReward.toLocaleString('en-US')"></span>
+                                </td>
                                 <td class="align-middle">
-                                    <button class='btn btn-primary btn-sm' data-bind='visible: !player.currentQuest() && !player.completedQuestList[index](),
-                                                                       click: function(){$data.beginQuest();$("#QuestModal").modal("hide")}'>
+                                    <button class='btn btn-primary btn-sm btn-block'
+                                        data-bind='visible: QuestHelper.canStartNewQuest() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
+                                        click: function(){
+                                            QuestHelper.beginQuest($data.index);
+                                            if (!QuestHelper.canStartNewQuest()) {$("#QuestModal").modal("hide");}
+                                        }'>
                                         Start
                                     </button>
-                                    <button class='btn btn-success' data-bind='visible: player.currentQuest() && (player.currentQuest().index === $data.index) && $data.isCompleted(),
-                                                                       click: $data.claimReward;player.completedQuestList[$index](true)'>
-                                        Claim Reward
+                                    <button class='btn btn-success btn-sm btn-block' data-bind='visible: QuestHelper.onQuest($data.index)() && $data.isCompleted(),
+                                                                       click: $data.endQuest'>
+                                        Claim
                                     </button>
                                     <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>
-                                    <span data-bind='visible: player.completedQuestList[index]()'>Completed</span>
+                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</span>
                                 </td>
                             </tr>
                             </tbody>

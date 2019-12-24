@@ -5,16 +5,18 @@
                 <span>Settings</span>
             </div>
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></div>
-                    </div>
-                    <div class="col-md-8">
-                        <div data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('test')}"></div>
-                    </div>
-                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                      <tr>
+                        <th>Setting</th>
+                        <th>Option</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
+                    </tbody>
+                </table>
                 <br/>
-                <div class="modal-footer"></div>
             </div>
         </div>
     </div>
@@ -22,17 +24,10 @@
 
 
 <script type="text/html" id="MultipleChoiceSettingTemplate">
-    <div class="dropdown">
-        <h3 data-bind="text: $data.displayName"></h3>
-
-        <div class="btn-group" data-bind="foreach: $data.options">
-            <button class="btn btn-primary" data-bind="
-                css: {active: $parent.isSelected($data.value)()},
-                click: function(){ Settings.setSettingByName($parent.name, $data.value)},
-                text: $data.text"
-            >
-                Option
-            </button>
+    <td data-bind="text: $data.displayName" >Settings</td>
+    <td>
+        <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
+            <option data-bind="text: $data.text, value: $data.value, attr:{ selected: Settings.getSetting('theme').observableValue() == $data.value}"></option>
         </div>
-    </div>
+    </td>
 </script>

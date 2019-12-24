@@ -47,7 +47,8 @@ class Preload {
             p.push(new Promise<number>(resolve => {
                 let img = new Image();
                 img.onload = () => resolve();
-                img.src = `/assets/images/towns/${name}.png`;
+                img.onerror = () => resolve();
+                img.src = `assets/images/towns/${name}.png`;
             }));
 
         }
@@ -59,11 +60,11 @@ class Preload {
             let img = new Image();
             img.onload = () => {
                 let loader = $('#loader');
-                loader.css('background', 'url(/assets/images/background.png) top');
+                loader.css('background', 'url(assets/images/background.png) top');
                 loader.css('background-size', 'cover');
                 resolve();
             };
-            img.src = '/assets/images/background.png';
+            img.src = 'assets/images/background.png';
 
         });
     }
@@ -73,11 +74,11 @@ class Preload {
             let img = new Image();
             img.onload = () => {
                 let body = $('body');
-                body.css('background', 'url(/assets/images/background.png) top');
+                body.css('background', 'url(assets/images/background.png) top');
                 body.css('background-size', 'cover');
                 resolve();
             };
-            img.src = '/assets/images/background.png';
+            img.src = 'assets/images/background.png';
         });
     }
 
@@ -87,7 +88,7 @@ class Preload {
             p.push(new Promise<number>(resolve => {
                 let img = new Image();
                 img.onload = () => resolve();
-                img.src = `/assets/images/pokemon/${i}.png`;
+                img.src = `assets/images/pokemon/${i}.png`;
             }));
 
         }
@@ -108,10 +109,10 @@ class Preload {
             let img = new Image();
             img.onload = () => {
                 document.querySelector('image')
-                    .setAttributeNS('http://www.w3.org/1999/xlink', 'href', '/assets/images/kanto.png');
+                    .setAttributeNS('http://www.w3.org/1999/xlink', 'href', 'assets/images/kanto.png');
                 resolve();
             };
-            img.src = '/assets/images/kanto.png';
+            img.src = 'assets/images/kanto.png';
         })
         */
     }

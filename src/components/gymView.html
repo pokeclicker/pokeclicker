@@ -1,32 +1,33 @@
 <div id="gymView" data-bind="if: Game.gameState() === GameConstants.GameState.gym">
 
-    <div style="position:relative; height: 220px;">
+    <div class="card-header p-0">
+        <div id="gymTimer" class="progress">
+            <div class="progress-bar" role="progressbar"
+                 data-bind="text: GymRunner.timeLeftSeconds(), attr:{ style: 'width:' + GymRunner.timeLeftPercentage() + '%' }"
+                 aria-valuemin="0" aria-valuemax="100">
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
         <div id="gymCountdownView">
-                <div class="row" style="display: inline-block; vertical-align: middle;">
-                    <div class="col-sm-6 offset-sm-3">
-                        <img style="width:100%" id="gif-go" src="assets/gifs/go.gif">
-                    </div>
-                </div>
-
-            <span style="display: inline-block; vertical-align:middle; height: 100%;"></span>
+          <div class="row" style="display: inline-block; vertical-align: middle;">
+            <div class="col-sm-6 offset-sm-3">
+              <img style="width:100%" id="gif-go" src="assets/gifs/go.gif">
+            </div>
+          </div>
+          <span style="display: inline-block; vertical-align:middle; height: 100%;"></span>
         </div>
         <div class="col-lg-12" style="display: block;">
-            <div id="gymTimer" class="progress">
-                <div class="progress-bar" role="progressbar"
-                     data-bind="text: GymRunner.timeLeftSeconds(), attr:{ style: 'width:' + GymRunner.timeLeftPercentage() + '%' }"
-                     aria-valuemin="0" aria-valuemax="100">
-                </div>
-            </div>
             <div class="row">
                 <div class="col-sm-4 offset-sm-4">
                     <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
                     <div class="clickable">
                         <img id="gymEnemy" src=""
-                             data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: '/assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
+                             data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: 'assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
                     </div>
                 </div>
                 <div class="col-sm-3" style="display: grid;">
-                    <span data-bind="text: GymBattle.gym.leaderName">Leader</span>
+                    <span data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')">Leader</span>
                     <div class="gymPokeballList">
                                         <span data-bind="foreach: new Array(GymBattle.pokemonsUndefeatedComputable())"><img
                                                 class="gymPokeball" src="assets/images/gymLeaders/pokeball.png"></span>
@@ -36,7 +37,7 @@
                     </div>
                     <div>
                         <img height="56px" id="gymLeader" src=""
-                             data-bind="attr:{ src: '/assets/images/gymLeaders/' + GymBattle.gym.leaderName + '.png'}">
+                             data-bind="attr:{ src: 'assets/images/gymLeaders/' + GymBattle.gym.leaderName + '.png'}">
                     </div>
 
                 </div>
@@ -55,16 +56,4 @@
             </div>
         </div>
     </div>
-    <div class="card">
-        <table width="100%">
-            <tr>
-                <td width="50%"><span style="display: inline;">Pokémon Attack: <span
-                        data-bind="text: player.pokemonAttackObservable"></span></span></td>
-                <td width="50%"><span style="display: inline;">Click Attack: <span
-                        data-bind="text: player.clickAttackObservable"></span></span>
-                </td>
-            </tr>
-        </table>
-    </div>
-
 </div>

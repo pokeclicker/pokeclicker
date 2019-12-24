@@ -1,0 +1,72 @@
+<div class="modal fade noselect" id="shopModal" tabindex="-1" role="dialog"
+     aria-labelledby="shopModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 data-bind="text: player.town().name() + ' Shop'">Shop</h4>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
+                    <div class="col-sm-3">
+                       <button class="shopItem clickable btn btn-block btn-secondary"
+                           data-bind="click: function() {ShopHandler.setSelected($index())},
+                           css: { active: ShopHandler.selected() == $index() },
+                           attr: { disabled: !$data.isAvailable() }">
+                           <span style="position: absolute; top: 15px; right: 20px;" data-bind="if: $data instanceof PokemonItem && player.alreadyCaughtPokemon(name())">
+                               <img class="pokeball-smallest" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${player.alreadyCaughtPokemonShiny(name()) ? '-shiny' : ''}-small.png`}"/>
+                           </span>
+                           <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/\W/g, '_') + '.png' }">
+                           <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
+                           <div data-bind="if: $data.isAvailable()">
+                                <img src="" class="currencyImage" data-bind="attr:{ src: 'assets/images/currency/' + GameConstants.Currency[currency]+ '.png' }">
+                                <span data-bind="text: totalPrice(ShopHandler.amount()).toLocaleString('en-US')">Price</span>
+                            </div>
+                            <div data-bind="ifnot: $data.isAvailable()">
+                                <span>Sold Out</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                   <div class="col-11 col-sm-10 col-md-11">
+                       <div class="input-group" style="margin-bottom: 6px; margin-top: 6px">
+                          <div class="input-group-prepend">
+                             <button class="btn btn-secondary smallButton smallFont" type="button"
+                                     onclick="ShopHandler.increaseAmount(-100)">-100
+                             </button>
+                             <button class="btn btn-secondary smallButton smallFont"
+                                     type="button"
+                                     onclick="ShopHandler.increaseAmount(-10)">-10
+                             </button>
+                             <button class="btn btn-primary btn-outline-dark smallButton smallFont"
+                                     onclick="ShopHandler.resetAmount()">1
+                             </button>
+                           </div>
+                           <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
+                                  value="1" min="1" required name="amountOfItems"
+                                  oninput="ShopHandler.amount(parseInt($(this).val().toString()) || 0);"
+                                  onchange="ShopHandler.amount(parseInt($(this).val().toString()) || 0);" title="">
+                            <div class="input-group-append">
+                               <button class="btn btn-secondary smallButton smallFont" type="button"
+                                       onclick="ShopHandler.increaseAmount(10)">+10
+                               </button>
+                               <button class="btn btn-secondary smallButton smallFont"
+                                       type="button"
+                                       onclick="ShopHandler.increaseAmount(100)">+100
+                               </button>
+                               <button class="btn btn-primary smallButton smallFont"
+                                       type="button"
+                                       onclick="ShopHandler.maxAmount()">Max
+                               </button>
+                               <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}"
+                                       onclick="ShopHandler.buyItem()">Buy
+                               </button>
+                           </div>
+                       </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

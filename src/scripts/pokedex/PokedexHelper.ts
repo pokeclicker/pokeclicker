@@ -101,7 +101,7 @@ class PokedexHelper {
     }
 
     private static getImage(id: number, name: string) {
-        let src = "/assets/images/";
+        let src = "assets/images/";
         if (player.alreadyCaughtPokemonShiny(name)) {
             src += "shiny";
         }

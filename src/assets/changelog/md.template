@@ -1,11 +1,11 @@
-![Version](../assets/images/version.png) VERSIONNUMBER
- 
+![Version](https://img.shields.io/badge/version-VERSIONNUMBER-blue)
+
  _Release Date: DATE_
- 
+
  ### title
  Explain stuff
- 
+
  ### Bugfixes
      - Stuff like this
- 
- --- 
+
+ ---

@@ -36,7 +36,7 @@ class KeyItemHandler {
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Safari ticket", "This ticket grants access to the Safari Zone in Fuchsia City")));
 
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Wailmer pail", "This is a tool for watering Berries you planted to make them grow more quickly", function () {
-            return player.berryList[0]() >= 5
+            return MapHelper.accessToRoute(14,1) && player.berryList[0]() >= 5
         })));
 
         KeyItemHandler.keyItemList.push(ko.observable(new KeyItem("Explorer kit", "A bag filled with convenient tools for exploring. It provides access to the Underground")));

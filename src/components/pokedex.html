@@ -76,17 +76,18 @@ aria-labelledby="pokedexModalLabel">
                    style="max-width: 100%; padding:0; margin:0;">
                    <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                        data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
-                               <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;"
-                                     data-bind="text: $data.id">number</span>
+                       <!-- Pokedex ID -->
+                       <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.id">number</span>
+                       <!-- Pokedex name caught status -->
                        <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
-                           <img src="" width="80px"
-                                data-bind="attr:{ src: PokedexHelper.getImage($data.id, $data.name)}">
-                           <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
-                                 data-bind="text: $data.name">name</span>
+                           <div data-bind="visible: player.alreadyCaughtPokemon(name)" style="position: absolute;right: 2px;top: -15px;">
+                             <img width="18px" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${player.alreadyCaughtPokemonShiny($data.name) ? '-shiny' : ''}-small.png`}"/>
+                           </div>
+                           <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id, $data.name)}">
+                           <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
                        </div>
                        <div data-bind="ifnot: PokedexHelper.pokemonSeen($data.id)">
-                           <img src="" width="80px" class="pokemon-not-seen"
-                                data-bind="attr:{src: PokemonHelper.getImage($data, false)}">
+                           <img src="" width="80px" class="pokemon-not-seen" data-bind="attr:{src: PokemonHelper.getImage($data, false)}">
                        </div>
                    </li>
                </ul>

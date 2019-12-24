@@ -122,31 +122,36 @@ TownList["Power Plant"] = new DungeonTown("Power Plant", [9], GameConstants.Badg
 TownList["Pokemon Tower"] = new DungeonTown("Pokemon Tower", [10], GameConstants.Badge.Cascade);
 TownList["Seafoam Islands"] = new DungeonTown("Seafoam Islands", [19], GameConstants.Badge.Soul);
 TownList["Victory Road"] = new DungeonTown("Victory Road", [22], GameConstants.Badge.Earth);
-TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], GameConstants.Badge.Champion);
+TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], GameConstants.Badge.Elite_Champion);
 TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], GameConstants.Badge.Soul);
 
 //Johto Towns
-TownList["New Bark Town"] = new Town("New Bark Town", []);
+let NewBarkTownShop = new Shop(["Pokeball"]);
+TownList["New Bark Town"] = new Town("New Bark Town", [], NewBarkTownShop);
 
-TownList["Cherrygrove City"] = new Town("Cherrygrove City", [29]);
+let CherrygroveCityShop = new Shop(["Greatball"]);
+TownList["Cherrygrove City"] = new Town("Cherrygrove City", [29], CherrygroveCityShop);
 
 let VioletCityShop = new Shop(["MediumRestore", "Togepi"]);
 TownList["Violet City"] = new Town("Violet City", [31], VioletCityShop, dungeonList["Sprout Tower"]);
 
-TownList["Azalea Town"] = new Town("Azalea Town", [33], null, dungeonList["Slowpoke Well"]);
+let AzaleaTownShop = new Shop(["Kings_rock"]);
+TownList["Azalea Town"] = new Town("Azalea Town", [33], AzaleaTownShop, dungeonList["Slowpoke Well"]);
 
-let GoldenrodCityShop = new Shop(["Sun_stone"]);
+let GoldenrodCityShop = new Shop(["Sun_stone", "Upgrade"]);
 TownList["Goldenrod City"] = new Town("Goldenrod City", [34], GoldenrodCityShop);
 
 TownList["Ecruteak City"] = new Town("Ecruteak City", [37]);
 
-TownList["Olivine City"] = new Town("Olivine City", [39]);
+let OlivineCityShop = new Shop(["Metal_coat"]);
+TownList["Olivine City"] = new Town("Olivine City", [39], OlivineCityShop);
 
-TownList["Cianwood City"] = new Town("Cianwood City", [41]);
+let CianwoodCityShop = new Shop(["Ultraball", "Time_stone"]);
+TownList["Cianwood City"] = new Town("Cianwood City", [41], CianwoodCityShop);
 
 TownList["Mahogany Town"] = new Town("Mahogany Town", [42], null, null, "Mt Mortar");
 
-let BlackthornCityShop = new Shop(["LargeRestore"]);
+let BlackthornCityShop = new Shop(["LargeRestore", "Dragon_scale"]);
 TownList["Blackthorn City"] = new Town("Blackthorn City", [44], BlackthornCityShop, null, "Ice Path");
 
 //Johto Dungeons
@@ -161,4 +166,4 @@ TownList["Whirl Islands"] = new DungeonTown("Whirl Islands", [41]);
 TownList["Mt Mortar"] = new DungeonTown("Mt Mortar", [42]);
 TownList["Ice Path"] = new DungeonTown("Ice Path", [44]);
 TownList["Dark Cave"] = new DungeonTown("Dark Cave", [45]);
-TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], GameConstants.Badge.Karen);
+TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], GameConstants.Badge.Elite_Karen);

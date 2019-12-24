@@ -13,43 +13,50 @@ style="cursor:default" tabindex="-1">
                    deals</a></li>
                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
                <p><span id="diamondCounter" data-bind='text: player._diamonds'>x</span> <img
-                       src='assets/images/underground/diamond.png'></p>
+                       src='assets/images/underground/diamond.svg' width="20px'"></p>
            </ul>
        </div>
-       <div class="tab-content">
+       <div class="tab-content p-0">
            <div id="dig" class="tab-pane fade in active show">
                <div class="modal-body" style="width: 80%;margin: auto;">
 
-                   <table class='table table-sm' style="width:60%; margin: auto">
-                       <tbody>
-                           <tr data-bind="template: { name: 'energyRestoreTemplate', foreach: ['SmallRestore','MediumRestore','LargeRestore']}">
-                           </tr>
-                       </tbody>
-                   </table>
-
+                   <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                     <div class="col-md-4 text-center">
+                       <button style="display: inline;" class="btn btn-secondary" data-bind="
+                                                      click: function(){  ItemList[$data].use();},
+                                                      css: { disabled: player._itemList[$data]() <= 0}"
+                       >
+                         <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+                         <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data]) + ' energy'">&nbsp;+? energy</span>
+                         <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
+                       </button>
+                     </div>
+                   </div>
+                   <br/>
                    <div class='row' style="text-align:center;">
-                       <div class='progress'>
+                       <div class='progress' style="height: 20px;font-size: 18px;">
                            <div id='mineEnergyBar' class='progress-bar' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
-                                data-bind="style: { width: Underground.energy/Underground.getMaxEnergy()*100 + '%' }">
+                                data-bind="style: { width: Math.floor(Underground.energy/Underground.getMaxEnergy()*100) + '%' }">
+                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + '/' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                            </div>
                        </div>
-                       <span id='energyDisplay' style='color:black;'>
-                           <span data-bind='text: Math.floor(Underground.energy)'></span>/<span
-                               data-bind='text: Underground.getMaxEnergy()'></span>
-                           <img src='assets/images/underground/flash.png'>
-                           (next: <span data-bind='text: Underground.energyTick'></span>s)
-                       </span>
                    </div>
-                   <div id="mineBody"></div>
+                   <div id="mineBody" style="margin:auto"></div>
                </div>
            </div>
            <div id="treasures" class="tab-pane fade">
                <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;">
                    <div data-bind="if: player.hasMineItems()">
                        <table class='table'>
+                           <thead>
+                             <tr>
+                               <th colspan="2">Item</th>
+                               <th>Value</th>
+                               <th></th>
+                             </tr>
+                           </thead>
                            <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player._mineInventory()}">
-
                            </tbody>
                        </table>
                    </div>
@@ -61,6 +68,14 @@ style="cursor:default" tabindex="-1">
            <div id="upgrades" class="tab-pane fade">
                <div class="modal-body" id="upgradesBody" style="width: 80%;margin: auto;">
                     <table class='table'>
+                        <thead>
+                          <tr>
+                            <th>Upgrade</th>
+                            <th>Amount</th>
+                            <th>Cost</th>
+                            <th></th>
+                          </tr>
+                        </thead>
                         <tbody>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
                                 'data': {'totalBonus': Underground.getMaxEnergy(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Max)}}"></tr>
@@ -88,30 +103,40 @@ style="cursor:default" tabindex="-1">
            <div id="dailyDeals" class="tab-pane fade">
                <div class="modal-body" id="dailyDealsBody" style="width: 80%;margin: auto;">
                    <table class='table'>
+                       <thead>
+                         <tr>
+                           <th colspan="2">Item</th>
+                           <th>Cost</th>
+                           <th></th>
+                           <th colspan="2">Item</th>
+                           <th>Gain</th>
+                           <th></th>
+                         </tr>
+                       </thead>
                        <tbody data-bind='foreach: DailyDeal.list'>
-                       <tr>
-                           <td class='vertical-middle'>
-                               <img class='mineInventoryItem'
-                                    data-bind='attr: {src: "assets/images/underground/"+item1.id+".png"}'>
-                               <span data-bind='text: "(" + player.getUndergroundItemAmount(item1.id) + ")"'></span>
-                           </td>
-                           <td class='vertical-middle' data-bind='text: item1.name'></td>
-                           <td class='vertical-middle' data-bind='text: amount1'></td>
-                           <td class='vertical-middle'><img src='assets/images/underground/rightArrow.png'>
-                           </td>
-                           <td class='vertical-middle' data-bind='text: item2.name'></td>
-                           <td class='vertical-middle' data-bind='text: amount2'></td>
-                           <td class='vertical-middle'>
-                               <img class='mineInventoryItem'
-                                    data-bind='attr: {src: "assets/images/underground/"+item2.id+".png"}'>
-                           </td>
-                           <td class='vertical-middle'>
-                               <button class='btn btn-info'
-                                       data-bind="click: function(){DailyDeal.use($index())}, css: { disabled: !DailyDeal.canUse($index()) }">
-                                   Trade
-                               </button>
-                           </td>
-                       </tr>
+                           <tr>
+                               <td class='vertical-middle'>
+                                   <img class='mineInventoryItem'
+                                        data-bind='attr: {src: "assets/images/underground/"+item1.id+".png"}'>
+                                   <span data-bind='text: "(" + player.getUndergroundItemAmount(item1.id) + ")"'></span>
+                               </td>
+                               <td class='vertical-middle' data-bind='text: item1.name'></td>
+                               <td class='vertical-middle' data-bind='text: amount1'></td>
+                               <td class='vertical-middle'><img src='assets/images/underground/rightArrow.png'>
+                               </td>
+                               <td class='vertical-middle'>
+                                   <img class='mineInventoryItem'
+                                        data-bind='attr: {src: "assets/images/underground/"+item2.id+".png"}'>
+                               </td>
+                               <td class='vertical-middle' data-bind='text: item2.name'></td>
+                               <td class='vertical-middle' data-bind='text: amount2'></td>
+                               <td class='vertical-middle'>
+                                   <button class='btn btn-info'
+                                           data-bind="click: function(){DailyDeal.use($index())}, css: { disabled: !DailyDeal.canUse($index()) }">
+                                       Trade
+                                   </button>
+                               </td>
+                           </tr>
                        </tbody>
                    </table>
                </div>
@@ -120,19 +145,6 @@ style="cursor:default" tabindex="-1">
    </div>
 </div>
 </div>
-
-<script type="text/html" id="energyRestoreTemplate">
-    <td class="col-md-4">
-        <button style="display: inline;" class="btn btn-secondary" data-bind="
-                                       click: function(){  ItemList[$data].use();},
-                                       css: { disabled: player._itemList[$data]() <= 0}"
-        >
-            <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
-            <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data]) + ' energy'">&nbsp;+? energy</span>
-            <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
-        </button>
-    </td>
-</script>
 
 <script type="text/html" id="undergroundUpgradeTemplate">
         <td class='vertical-middle' data-bind='text: upgrade.displayName + ": " + totalBonus'></td>

@@ -1,34 +1,47 @@
-<div data-bind="if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked()">
-    <div class="page-item">
-        <div id='eggList' class="row no-gutters" data-bind="foreach: player.eggList">
-            <div class="col-sm-6 eggSlot">
-                <div data-bind="if: $index() === player.eggSlots()">
-                    <p style="margin:2px;">Egg slot</p>
-                    <p style="margin:2px;"><img src="../assets/images/currency/questPoint.png"> <span data-bind='text: player.nextEggSlotCost()'></span></p>
-                    <button class='btn btn-primary' onclick='player.buyEggSlot()'
-                            data-bind='css: {disabled: player.questPoints <= player.nextEggSlotCost()}'>Buy</button>
-                </div>
-                <div data-bind="if: $index() > player.eggSlots()" style="margin-top: 30px;">
-                    <img src="../assets/images/breeding/lock.png">
-                </div>
-                <div data-bind="if: $data !== null">
-                    <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
+<!-- ko if: KeyItemHandler.getKeyItemObservableByName('Mystery egg')().isUnlocked() -->
+<div class="card border-secondary mb-3">
+    <div class="card-header p-0" data-toggle="collapse" href="#eggList">
+        <span>Hatchery</span>
+    </div>
+    <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+            data-bind='visible: player.highestRegion() >= 1,
+                click: function(){ BreedingHelper.openBreedingModal() },
+                attr: { disabled: !player.hasFreeEggSlot() }'>
+        List
+    </button>
+    <div id='eggList' class="card-body p-0 show">
+      <div class="row m-0" data-bind="foreach: player.eggList">
+        <div class="col-md-6 eggSlot">
+            <div data-bind="if: $index() === player.eggSlots()">
+                <p style="margin:2px;">Egg slot</p>
+                <p style="margin:2px;"><img src="assets/images/currency/questPoint.png"> <span data-bind='text: player.nextEggSlotCost()'></span></p>
+                <button class='btn btn-primary' onclick='player.buyEggSlot()'
+                        data-bind='css: {disabled: player.questPoints <= player.nextEggSlotCost()}'>Buy</button>
+            </div>
+            <div data-bind="visible: $index() > player.eggSlots()" style="margin-top: 30px;">
+                <img src="assets/images/breeding/lock.png">
+            </div>
+            <!-- ko if: $data !== null -->
+            <div style="margin-top: 30px;">
+                <img data-bind='attr: {src: BreedingHelper.getEggImage($data)}'/>
 
-                    <div class="progress" data-bind='if: progress() < 100'>
-                        <div class="progress-bar bg-success" role="progressbar"
-                             data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
-                             aria-valuemin="0" aria-valuemax="100">
-							 <span data-bind="text: Math.floor($data.progress()) + '%'"></span>
-                        </div>
+                <div class="progress" data-bind='visible: progress() < 100'>
+                    <div class="progress-bar bg-success" role="progressbar"
+                         data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
+                         aria-valuemin="0" aria-valuemax="100">
+					 <span data-bind="text: Math.floor($data.progress()) + '%'"></span>
                     </div>
-                    <div class="progress" data-bind='if: progress() >= 100'>
-                        <div class="progress-bar bg-blue" role="progressbar"
-                        data-bind="attr:{ style: 'width: 100%; cursor: pointer;' }, click: function(){BreedingHelper.hatchPokemonEgg($index())}, text: 'Hatch!'"
-                        aria-valuemin="0" aria-valuemax="100">
-                        </div>
+                </div>
+                <div class="progress" data-bind='visible: progress() >= 100'>
+                    <div class="progress-bar bg-success" role="progressbar"
+                    data-bind="attr:{ style: 'width: 100%; cursor: pointer;' }, click: function(){BreedingHelper.hatchPokemonEgg($index())}, text: 'Hatch!'"
+                    aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
             </div>
+            <!-- /ko -->
         </div>
+      </div>
     </div>
 </div>
+<!-- /ko -->

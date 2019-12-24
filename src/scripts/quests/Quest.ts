@@ -25,40 +25,31 @@ abstract class Quest {
         this.notified = false;
     }
 
-    claimReward() {
-        if (this.isCompleted()) {
+    endQuest() {
+        if (this.isCompleted() && !this.claimed()) {
             player.gainQuestPoints(this.pointsReward);
             this.claimed(true);
-            player.currentQuest(null);
             if (!this.inQuestLine) player.completedQuestList[this.index](true);
             let oldLevel = player.questLevel;
             player.questXP += this.xpReward;
-            Notifier.notify(`You have completed your quest and claimed ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);
-            QuestHelper.checkCompletedSet();
+            Notifier.notify(`You have completed your quest and claimed ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);;
+            // Refresh the list each time a player levels up
             if (oldLevel < player.questLevel) {
                 Notifier.notify("Your quest level has increased!", GameConstants.NotificationOption.success);
                 QuestHelper.refreshQuests(true);
             }
+            // Once the player completes every available quest, refresh the list for free
+            if (QuestHelper.allQuestCompleted()) {
+                QuestHelper.refreshQuests(true);
+            }
         } else {
-            Notifier.notify("Quest not yet completed", GameConstants.NotificationOption.warning);
+            this.initial(null);
         }
+        player.currentQuests(player.currentQuests().filter(x => x.index != this.index));
     }
 
     beginQuest() {
-        if (!player.currentQuest()){
-            this.initial(this.questFocus());
-            player.currentQuest({
-                index: this.index,
-                initial: this.initial()
-            });
-        } else {
-            Notifier.notify("You have already started a quest", GameConstants.NotificationOption.warning);
-        }
-    }
-
-    quit() {
-        this.initial(null);
-        player.currentQuest(null);
+        this.initial(this.questFocus());
     }
 
     set questFocus(value: KnockoutObservable<any>) {
@@ -103,7 +94,7 @@ abstract class Quest {
         this.autoComplete = true;
         this.autoCompleter = this.isCompleted.subscribe(() => {
             if (this.isCompleted()) {
-                this.claimReward();
+                this.endQuest();
                 this.autoCompleter.dispose();
             }
         })
@@ -111,7 +102,7 @@ abstract class Quest {
 
     inProgress() {
         return ko.computed(() => {
-            return player.currentQuest() && (this.index == player.currentQuest().index) && !this.isCompleted();
+            return player.currentQuests().map(x => x.index).includes(this.index) && !this.isCompleted();
         })
     }
 }

@@ -1,0 +1,91 @@
+<div id="pokeballSelector" class="card border-secondary mb-3" data-bind="visible: player.starter != GameConstants.Starter.None">
+    <div class="card-header p-0" data-toggle="collapse" href="#pokeballSelectorBody">
+      <span>Pokéballs</span>
+    </div>
+    <button type="button" class="btn btn-info" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
+        data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon (including unobtained shiny Pokémon)', trigger: 'hover', placement:'left' }">?</button>
+    <div id="pokeballSelectorBody" class="card-body p-0 show">
+        <table class="table table-sm">
+            <thead>
+            <tr>
+                <th width="35%">Caught</th>
+                <th width="30%">#</th>
+                <th width="35%">New</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
+                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.None}"/>
+                </td>
+                <td></td>
+                <td>
+                    <img class="pokeball-small clickable" src="assets/images/pokeball/None.png"
+                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.None)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.None}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="pokeball-small clickable"
+                         src="assets/images/pokeball/Pokeball-small.png"
+                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Pokeball}"/>
+                </td>
+                <td>
+                    <span data-bind="text: player.pokeballsObservable(0)"></span>
+                </td>
+                <td>
+                    <img class="pokeball-small clickable"
+                         src="assets/images/pokeball/Pokeball-small.png"
+                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Pokeball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Pokeball}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="pokeball-small clickable"
+                         src="assets/images/pokeball/Greatball-small.png"
+                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Greatball}"/>
+                </td>
+                <td>
+                    <span data-bind="text: player.pokeballsObservable(1)"></span>
+                </td>
+                <td>
+                    <img class="pokeball-small clickable"
+                         src="assets/images/pokeball/Greatball-small.png"
+                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Greatball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Greatball}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="pokeball-small clickable"
+                         src="assets/images/pokeball/Ultraball-small.png"
+                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Ultraball}"/>
+                </td>
+                <td>
+                    <span data-bind="text: player.pokeballsObservable(2)"></span>
+                </td>
+                <td>
+                    <img class="pokeball-small clickable"
+                         src="assets/images/pokeball/Ultraball-small.png"
+                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Ultraball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Ultraball}"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img class="pokeball-small clickable"
+                         src="assets/images/pokeball/Masterball-small.png"
+                         data-bind="click: function(){player.setAlreadyCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._alreadyCaughtBallSelection() === GameConstants.Pokeball.Masterball}"/>
+                </td>
+                <td>
+                    <span data-bind="text: player.pokeballsObservable(3)"></span>
+                </td>
+                <td>
+                    <img class="pokeball-small clickable"
+                         src="assets/images/pokeball/Masterball-small.png"
+                         data-bind="click: function(){player.setNotCaughtBallSelection(GameConstants.Pokeball.Masterball)}, css: {'pokeball-selected': player._notCaughtBallSelection() === GameConstants.Pokeball.Masterball}"/>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

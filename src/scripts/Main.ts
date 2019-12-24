@@ -1,12 +1,14 @@
 ///<reference path="wildBattle/RouteHelper.ts"/>
 ///<reference path="Battle.ts"/>
-///<reference path="pokeballFactory/PokeballFactory.ts"/>
 /**
  * Start the game when all html elements are loaded.
  */
 let player;
 const debug = false;
 let game;
+
+if (!debug)
+  Object.freeze(GameConstants);
 
 interface JQuery {
     animateNumber(options: object): void;
@@ -21,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
 
         $(document).ready(function () {
+            $('[data-toggle="popover"]').popover();
             $('[data-toggle="tooltip"]').tooltip();
         });
 
@@ -78,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 class Game {
     interval;
     undergroundCounter: number;
-    farmCounter: number = 0;
     public static achievementCounter: number = 0;
 
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
@@ -106,6 +108,7 @@ class Game {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
         FarmRunner.counter += GameConstants.TICK_TIME;
+        EffectEngineRunner.counter += GameConstants.TICK_TIME;
         PokeballFactory.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
@@ -146,7 +149,7 @@ class Game {
             let now = new Date();
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
                 player.questRefreshes = 0;
-                QuestHelper.quitQuest();
+                QuestHelper.quitAllQuests();
                 QuestHelper.clearQuests();
                 QuestHelper.generateQuests(player.questLevel, player.questRefreshes, now);
                 DailyDeal.generateDeals(Underground.getDailyDealsMax(), now);
@@ -173,6 +176,10 @@ class Game {
             PokeballFactory.tick();
         }
 
+        if (EffectEngineRunner.counter > GameConstants.EFFECT_ENGINE_TICK){
+            EffectEngineRunner.tick();
+        }
+
         if (GameHelper.counter > 60 * 1000) {
             GameHelper.updateTime();
         }
@@ -190,7 +197,7 @@ class Game {
         Underground.energyTick(Underground.getEnergyRegenTime());
         DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
         QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
-        QuestHelper.loadCurrentQuest(player.currentQuest());
+        QuestHelper.loadCurrentQuests(player.currentQuests);
         if (!player.tutorialComplete()) {
             QuestLineHelper.createTutorial();
             QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);

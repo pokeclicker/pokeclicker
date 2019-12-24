@@ -7,20 +7,20 @@
             <div class="modal-body">
                 <img src='assets/images/ship.png'>
                 <div style='margin-top:20px'>
-                    <span data-bind='ifnot: player.region == 0'>
-                        <button class='btn btn-primary' onclick='MapHelper.moveToTown("Vermillion City");player.region = 0;$("#ShipModal").modal("hide")'>
-                            Kanto
-                        </button>
-                    </span>
-                    <span data-bind='ifnot: player.region == 1'>
-                        <button class='btn btn-primary' onclick='MapHelper.moveToTown("Olivine City");player.region = 1;$("#ShipModal").modal("hide")'>
-                            Johto
-                        </button>
-                    </span>
+                    <button class='btn btn-primary'
+                        data-bind='visible: player.region != 0'
+                        onclick='MapHelper.moveToTown("Vermillion City");player.region = 0;$("#ShipModal").modal("hide")'>
+                        Kanto
+                    </button>
+                    <button class='btn btn-primary'
+                        data-bind='visible: player.region != 1 && player.highestRegion() >= 1'
+                        onclick='MapHelper.moveToTown("Olivine City");player.region = 1;$("#ShipModal").modal("hide")'>
+                        Johto
+                    </button>
                 </div>
             </div>
             <div class="modal-footer">
-                
+
             </div>
         </div>
     </div>

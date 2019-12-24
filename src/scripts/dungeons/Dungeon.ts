@@ -133,7 +133,7 @@ dungeonList["Cerulean Cave"] = new Dungeon("Cerulean Cave",
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     28735,
     [new DungeonBossPokemon("Rhydon", 143675, 60), new DungeonBossPokemon("Mewtwo", 215512, 70)],
-    2500, GameConstants.Badge.Champion, 20, 55
+    2500, GameConstants.Badge.Elite_Champion, 20, 55
 );
 
 dungeonList["Sprout Tower"] = new Dungeon("Sprout Tower",
@@ -141,7 +141,7 @@ dungeonList["Sprout Tower"] = new Dungeon("Sprout Tower",
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
     28735,
     [new DungeonBossPokemon("Bellsprout", 2000, 10)],
-    2500, GameConstants.Badge.Champion, 31, 5
+    2500, GameConstants.Badge.Elite_Champion, 31, 5
 );
 
 dungeonList["Ruins of Alph"] = new Dungeon("Ruins of Alph",
@@ -180,7 +180,7 @@ dungeonList["Burned Tower"] = new Dungeon("Burned Tower",
     ["Rattata", "Zubat", "Koffing", "Raticate"],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     1500,
-    [new DungeonBossPokemon("Golbat", 6000, 35), new DungeonBossPokemon("Weezing", 6000, 35), new DungeonBossPokemon("Suicune", 300000, 50)],
+    [new DungeonBossPokemon("Golbat", 6000, 35), new DungeonBossPokemon("Weezing", 6000, 35), new DungeonBossPokemon("Shuckle", 300000, 50)],
     4500, GameConstants.Badge.Fog, 37, 20
 );
 
@@ -229,5 +229,5 @@ dungeonList["Mt Silver"] = new Dungeon("Mt Silver",
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
     3500,
     [new DungeonBossPokemon("Larvitar", 12000, 60)],
-    10000, GameConstants.Badge.Karen, 28, 50
+    10000, GameConstants.Badge.Elite_Karen, 28, 50
 );
