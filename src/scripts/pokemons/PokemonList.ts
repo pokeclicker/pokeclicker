@@ -1175,7 +1175,7 @@ const pokemonList: {
         "levelType": "mediumfast",
         "exp": 132,
         "eggCycles": 20,
-        "evolution": "Sirfetch'd",
+        "evolution": ["Sirfetch'd"],
         "evoLevel": ["_____TODO_____"]
     },
     {
@@ -3201,7 +3201,7 @@ const pokemonList: {
         "levelType": "mediumfast",
         "exp": 180,
         "eggCycles": 20,
-        "evolution": "Porygon-Z",
+        "evolution": ["Porygon-Z"],
         "evoLevel": ["Trade_stone"]
     },
     {
@@ -5976,7 +5976,7 @@ const pokemonList: {
         "levelType": "mediumfast",
         "exp": 62,
         "catchRate": 145,
-        "evolution": "Mr. Mime",
+        "evolution": ["Mr. Mime"],
         "evoLevel": ["_____TODO_____"]
     },
     {
@@ -10561,7 +10561,7 @@ const pokemonList: {
         "levelType": "slow",
         "exp": 60,
         "catchRate": 45,
-        "evolution": "Hakamo-o",
+        "evolution": ["Hakamo-o"],
         "evoLevel": [35]
     },
     {
@@ -10576,7 +10576,7 @@ const pokemonList: {
         "levelType": "slow",
         "exp": 147,
         "catchRate": 45,
-        "evolution": "Kommo-o",
+        "evolution": ["Kommo-o"],
         "evoLevel": [45]
     },
     {
