@@ -1,0 +1,29 @@
+<% /* %>
+
+Parameters:
+    - name : Required : String
+        The name of the Dungeon to be added.
+        Should match what is used in the DungeonList.
+
+    - moveToTown : Optional : String
+        The name of a town to move to when this element is clicked.
+        Used when the dungeon is accessed via a town.
+
+    - x : Required : Number
+        x axis position of the dungeon icon.
+
+    - y : Required : Number
+        y axis position of the dungeon icon.
+
+<% */ %>
+
+<rect fill="#ffffff" height="15" stroke="none" width="15"
+    x="<%= locals.x %>" y="<%= locals.y %>">
+</rect>
+<rect data-bind="
+    click:function(){MapHelper.moveToTown('<%= (locals.moveToTown) ? locals.moveToTown : locals.name %>')},
+    attr: { class: MapHelper.calculateTownCssClass('<%= locals.name %>') }"
+    class="city" data-town="<%= locals.name %>"
+    fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
+    height="12" stroke="#6c8ebf" width="12" x="<%= (locals.x + 1.5) %>" y="<%= (locals.y + 1.5) %>">
+</rect>
