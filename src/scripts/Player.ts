@@ -34,8 +34,6 @@ class Player {
     private _starter: GameConstants.Starter;
     private _oakItemExp: Array<KnockoutObservable<number>>;
     private _oakItemsEquipped: string[];
-    private _eggList: Array<KnockoutObservable<Egg | void>>;
-    private _eggSlots: KnockoutObservable<number>;
 
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
@@ -128,11 +126,6 @@ class Player {
         }
         this._diamonds = ko.observable(savedPlayer._diamonds || 0);
 
-        savedPlayer._eggList = savedPlayer._eggList || [null, null, null, null];
-        this._eggList = savedPlayer._eggList.map((egg) => {
-            return ko.observable(egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null)
-        });
-        this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
         this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
@@ -654,33 +647,8 @@ class Player {
         return this._itemMultipliers;
     }
 
-    public canBreedPokemon(): boolean {
-        return this.hasMaxLevelPokemon() && this.hasFreeEggSlot();
-    }
-
     public hasMaxLevelPokemon(): boolean {
         return this.maxLevelPokemonList()().length > 0;
-    }
-
-    public hasFreeEggSlot(): boolean {
-        let counter = 0;
-        for (let egg of this._eggList) {
-            if (egg() !== null) {
-                counter++;
-            }
-        }
-        return counter < this._eggSlots();
-    }
-
-    public gainEgg(e: Egg) {
-        for (let i = 0; i < this._eggList.length; i++) {
-            if (this._eggList[i]() == null) {
-                this._eggList[i](e);
-                return true;
-            }
-        }
-        console.log("Error: Could not place " + GameConstants.EggType[e.type] + " Egg");
-        return false;
     }
 
     public gainBadge(badge: GameConstants.Badge) {
@@ -800,14 +768,6 @@ class Player {
         this._oakItemExp = value;
     }
 
-    get eggList(): Array<KnockoutObservable<Egg | void>> {
-        return this._eggList;
-    }
-
-    set eggList(value: Array<KnockoutObservable<Egg | void>>) {
-        this._eggList = value;
-    }
-
     public gainItem(itemName: string, amount: number) {
         this._itemList[itemName](this._itemList[itemName]() + amount);
     }
@@ -904,26 +864,6 @@ class Player {
             return player._mineInventory.peek()[index].amount();
         } else {
             return 0;
-        }
-    }
-
-    get eggSlots(): KnockoutObservable<number> {
-        return this._eggSlots;
-    }
-
-    public gainEggSlot() {
-        this._eggSlots(this._eggSlots() + 1);
-    }
-
-    public nextEggSlotCost() {
-        return BreedingHelper.getEggSlotCost(this._eggSlots() + 1);
-    }
-
-    public buyEggSlot() {
-        let cost = this.nextEggSlotCost();
-        if (this.questPoints >= cost) {
-            this.questPoints -= cost;
-            this.gainEggSlot();
         }
     }
 
@@ -1025,8 +965,6 @@ class Player {
             "_diamonds",
             // TODO(@Isha) remove.
             "_mineLayersCleared",
-            "_eggList",
-            "_eggSlots",
             "_shardUpgrades",
             "_shardsCollected",
             "achievementsCompleted",

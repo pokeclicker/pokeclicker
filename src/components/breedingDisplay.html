@@ -5,7 +5,7 @@
     </div>
     <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
             data-bind='visible: player.highestRegion() >= 1,
-                click: function(){ BreedingHelper.openBreedingModal() },
+                click: function(){ BreedingController.openBreedingModal() },
                 attr: { disabled: !player.hasFreeEggSlot() }'>
         List
     </button>

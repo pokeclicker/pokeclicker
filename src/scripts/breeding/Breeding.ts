@@ -1,23 +1,41 @@
-/**
- * Created by dennis on 12-07-17.
- */
-class BreedingHelper {
+import Currency = GameConstants.Currency;
 
-    public static openBreedingModal() {
-        if (player.hasKeyItem("Mystery egg")) {
-            Game.gameState(GameConstants.GameState.paused);
-            $('#breedingModal').modal('show');
-        } else {
-            Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
-        }
+class Breeding implements Feature {
+    private _eggList: Array<KnockoutObservable<Egg | void>>;
+    private _eggSlots: KnockoutObservable<number>;
+
+    public canBreedPokemon(): boolean {
+        return player.hasMaxLevelPokemon() && this.hasFreeEggSlot();
     }
 
-    public static progressEggs(amount: number) {
+
+    public hasFreeEggSlot(): boolean {
+        let counter = 0;
+        for (let egg of this._eggList) {
+            if (egg() !== null) {
+                counter++;
+            }
+        }
+        return counter < this._eggSlots();
+    }
+
+    public gainEgg(e: Egg) {
+        for (let i = 0; i < this._eggList.length; i++) {
+            if (this._eggList[i]() == null) {
+                this._eggList[i](e);
+                return true;
+            }
+        }
+        console.log("Error: Could not place " + GameConstants.EggType[e.type] + " Egg");
+        return false;
+    }
+
+    public progressEggs(amount: number) {
         if (OakItemRunner.isActive(GameConstants.OakItem.Blaze_Cassette)) {
             amount *= (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Blaze_Cassette) / 100)
         }
         amount = Math.round(amount);
-        for (let obj of player.eggList) {
+        for (let obj of this._eggList) {
             let egg: Egg = obj();
             if (egg == null || egg.notified) {
                 continue;
@@ -37,7 +55,7 @@ class BreedingHelper {
         }
     }
 
-    public static gainPokemonEgg(pokemon: CaughtPokemon) {
+    public gainPokemonEgg(pokemon: CaughtPokemon) {
         if (!player.hasFreeEggSlot()) {
             Notifier.notify("You don't have any free egg slots", GameConstants.NotificationOption.warning);
             return;
@@ -48,7 +66,7 @@ class BreedingHelper {
         pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
     }
 
-    public static hatchPokemonEgg(index: number) {
+    public hatchPokemonEgg(index: number) {
         let egg = player._eggList[index]();
         let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps/egg.steps()));
         let shiny = PokemonFactory.generateShiny(shinyChance);
@@ -69,7 +87,7 @@ class BreedingHelper {
         player.capturePokemon(egg.pokemon, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
-        let baseForm = BreedingHelper.calculateBaseForm(egg.pokemon);
+        let baseForm = this.calculateBaseForm(egg.pokemon);
         if (egg.pokemon != baseForm && !player.alreadyCaughtPokemon(baseForm)) {
             Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
             player.capturePokemon(baseForm, false, true);
@@ -80,12 +98,12 @@ class BreedingHelper {
         OakItemRunner.use(GameConstants.OakItem.Blaze_Cassette);
     }
 
-    public static createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
+    public createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
         let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
         return new Egg(this.getSteps(dataPokemon.eggCycles), pokemonName, type);
     }
 
-    public static createTypedEgg(type: GameConstants.EggType): Egg {
+    public createTypedEgg(type: GameConstants.EggType): Egg {
         const hatch_list = HatchList[type];
         const hatchable = hatch_list.slice(0, player.highestRegion() + 1);
         let possible_hatches = [];
@@ -98,30 +116,30 @@ class BreedingHelper {
         });
         possible_hatches = possible_hatches[Math.floor(Math.random() * possible_hatches.length)];
         const pokemon = possible_hatches[Math.floor(Math.random() * possible_hatches.length)];
-        return BreedingHelper.createEgg(pokemon, type);
+        return this.createEgg(pokemon, type);
     }
 
-    public static createRandomEgg(): Egg {
+    public createRandomEgg(): Egg {
         let type = Math.floor(Math.random() * (Object.keys(HatchList).length - 1));
-        let egg = BreedingHelper.createTypedEgg(type);
+        let egg = this.createTypedEgg(type);
         egg.type = GameConstants.EggType.Mystery;
         return egg;
     }
 
-    public static createFossilEgg(fossil: string): Egg {
+    public createFossilEgg(fossil: string): Egg {
         let pokemonName = GameConstants.FossilToPokemon[fossil];
-        return BreedingHelper.createEgg(pokemonName, GameConstants.EggType.Fossil);
+        return this.createEgg(pokemonName, GameConstants.EggType.Fossil);
     }
 
-    public static getSteps = function (eggCycles: number) {
+    public getSteps = function (eggCycles: number) {
         if (eggCycles === undefined) {
             return 500;
         } else {
             return eggCycles * 40;
         }
-    }
+    };
 
-    public static getEggImage(egg: Egg): string {
+    public getEggImage(egg: Egg): string {
         let eggType = GameConstants.EggType[egg.type].toLowerCase();
         if (eggType == "pokemon") {
             let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
@@ -132,11 +150,11 @@ class BreedingHelper {
         return "assets/images/breeding/egg" + eggType + ".png";
     }
 
-    public static getEggSlotCost(slot: number): number {
+    public getEggSlotCost(slot: number): number {
         return 500 * slot;
     }
 
-    public static calculateBaseForm(pokemonName: string): string {
+    public calculateBaseForm(pokemonName: string): string {
         // Base form of Pokemon depends on which regions players unlocked
         if (!(pokemonName in pokemonDevolutionMap)) {
             // No devolutions at all
@@ -146,9 +164,43 @@ class BreedingHelper {
             return pokemonName;
         } else {
             // Recurse onto its devolution
-            return BreedingHelper.calculateBaseForm(pokemonDevolutionMap[pokemonName]);
+            return this.calculateBaseForm(pokemonDevolutionMap[pokemonName]);
         }
     }
+
+
+    public buyEggSlot() {
+        let cost: Cost = this.nextEggSlotCost();
+        if (player.canAfford(cost)) {
+            player.payCost(cost);
+            this.gainEggSlot();
+        }
+    }
+
+    get eggSlots(): KnockoutObservable<number> {
+        return this._eggSlots;
+    }
+
+    public gainEggSlot() {
+        this._eggSlots(this._eggSlots() + 1);
+    }
+
+    public nextEggSlotCost() : Cost{
+        return new Cost(this.getEggSlotCost(this._eggSlots() + 1), Currency.questPoint);
+    }
+
+    get eggList(): Array<KnockoutObservable<Egg | void>> {
+        return this._eggList;
+    }
+
+    set eggList(value: Array<KnockoutObservable<Egg | void>>) {
+        this._eggList = value;
+    }
+
+//            this._eggList = savedPlayer._eggList.map((egg) => {
+//             return ko.observable(egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null)
+//         });
+//         this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
 }
 
 const HatchList: { [name: number]: string[][] } = {};
@@ -176,14 +228,3 @@ HatchList[GameConstants.EggType.Dragon] = [
     ["Dratini", "Dragonair", "Dragonite"],
     [],
   ];
-
-document.addEventListener("DOMContentLoaded", function (event) {
-
-    $('#breedingModal').on('hidden.bs.modal', function () {
-        if (player.highestRegion() == 0) {
-            MapHelper.moveToRoute(5, GameConstants.Region.kanto);
-        }
-        MapHelper.returnToMap();
-    });
-
-});
