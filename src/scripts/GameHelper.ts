@@ -64,7 +64,7 @@ class GameHelper {
       } else if (n >= 1e3){
         return Math.floor(n / 1e3) + "k";
       }
-      return n;
+      return `${n}`;
     }
 
     public static getIndexFromDistribution(a: number[]) {
