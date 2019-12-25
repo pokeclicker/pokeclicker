@@ -10898,7 +10898,9 @@ const pokemonList: {
             "Steel"
         ],
         "attack": 65,
+        "eggCycles": 120,
         "levelType": "slow",
+        "exp": 306,
         "catchRate": 3,
         "evolution": ["Melmetal"],
         "evoLevel": ["_____TODO_____"]
@@ -10910,7 +10912,9 @@ const pokemonList: {
             "Steel"
         ],
         "attack": 143,
+        "eggCycles": 120,
         "levelType": "slow",
+        "exp": 306,
         "catchRate": 3
     }
 ];

@@ -4,7 +4,7 @@ class DefeatPokemonsQuest extends Quest implements QuestInterface {
     private route: number;
 
     constructor(route: number, region: number, killsNeeded: number) {
-        super(killsNeeded, DefeatPokemonsQuest.calcReward(route, killsNeeded));
+        super(killsNeeded, DefeatPokemonsQuest.calcReward(route, region, killsNeeded));
         this.description = `Defeat ${killsNeeded} pokemon on route ${route}.`;
         this.route = route;
         this.questFocus = player.routeKills[this.route];
