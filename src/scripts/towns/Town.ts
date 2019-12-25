@@ -167,3 +167,39 @@ TownList["Mt Mortar"] = new DungeonTown("Mt Mortar", [42]);
 TownList["Ice Path"] = new DungeonTown("Ice Path", [44]);
 TownList["Dark Cave"] = new DungeonTown("Dark Cave", [45]);
 TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], GameConstants.Badge.Elite_Karen);
+
+//Hoenn Towns
+TownList["Littleroot Town"] = new Town("Littleroot Town", []);
+TownList["Oldale Town"] = new Town("Oldale Town", [101]);
+TownList["Petalburg City"] = new Town("Petalburg City", [102]);
+TownList["Rustboro City"] = new Town("Rustboro City", [104], null, null, "Petalburg Woods");
+TownList["Dewford Town"] = new Town("Dewford Town", [116], null, null, "Rusturf Tunnel");
+TownList["Slateport City"] = new Town("Slateport City", [], null, null, "Granite Cave");
+TownList["Mauville City"] = new Town("Mauville City", [110]);
+TownList["Verdanturf Town"] = new Town("Verdanturf Town", [117]);
+TownList["Lavaridge Town"] = new Town("Lavaridge Town", [115], null, null, "Mt. Chimney");
+TownList["Fallarbor Town"] = new Town("Fallarbor Town", [113]);
+TownList["Fortree City"] = new Town("Fortree City", [119]);
+TownList["LilyCove City"] = new Town("LilyCove City", [121], null, null, "Mt. Pyre");
+TownList["Mossdeep City"] = new Town("Mossdeep City", [125], null, null, "Shoal Cave");
+TownList["Sootopolis City"] = new Town("Sootopolis City", [126], null, null, "Cave of Origin");
+TownList["Ever Grande City"] = new Town("Ever Grande City", [128]);
+TownList["Pokemon League Hoenn"] = new Town("Pokemon League", [128], null, null, "Victory Road Hoenn");
+TownList["Pacifidlog Town"] = new Town("Pacifidlog Town", [131]);
+
+//Hoenn Dungeons
+TownList["Petalburg Woods"] = new DungeonTown("Petalburg Woods", [104]);
+TownList["Rusturf Tunnel"] = new DungeonTown("Rusturf Tunnel", [116], GameConstants.Badge.Stone);
+TownList["Granite Cave"] = new DungeonTown("Granite Cave", [116], GameConstants.Badge.Knuckle);
+TownList["Fiery Path"] = new DungeonTown("Fiery Path", [111], GameConstants.Badge.Dynamo);
+TownList["Meteor Falls"] = new DungeonTown("Meteor Falls", [114]);
+TownList["Mt. Chimney"] = new DungeonTown("Mt. Chimney", [115]);
+TownList["Jagged Pass"] = new DungeonTown("Jagged Pass", [115]);
+TownList["New Mauville"] = new DungeonTown("New Mauville", [112], GameConstants.Badge.Heat);
+TownList["Sea Mauville"] = new DungeonTown("Sea Mauville", [108]);
+TownList["Mt. Pyre"] = new DungeonTown("Mt. Pyre", [122]);
+TownList["Shoal Cave"] = new DungeonTown("Shoal Cave", [125]);
+TownList["Cave of Origin"] = new DungeonTown("Cave of Origin", [126]);
+TownList["Seafloor Cavern"] = new DungeonTown("Seafloor Cavern", [127]);
+TownList["Sky Pillar"] = new DungeonTown("Sky Pillar", [131]);
+TownList["Victory Road Hoenn"] = new DungeonTown("Victory Road Hoenn", [128], GameConstants.Badge.Rain);

@@ -69,7 +69,6 @@ class GymRunner {
         }
         GameHelper.incrementObservable(player.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);
-        MapHelper.updateAllRoutes();
         Game.gameState(GameConstants.GameState.town);
     }
 

@@ -19,8 +19,8 @@ class Statistics {
     public berriesHarvested: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
-        "gymsDefeated": GameConstants.KantoGyms.length + GameConstants.JohtoGyms.length,
-        "dungeonsCleared": GameConstants.KantoDungeons.length + GameConstants.JohtoDungeons.length,
+        "gymsDefeated": GameConstants.RegionGyms.flat().length,
+        "dungeonsCleared": GameConstants.RegionDungeons.flat().length,
         "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
         "pokeballsBought": GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
         "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,  // remove "None" pokemon type

@@ -30,7 +30,7 @@ class PokemonFactory {
         let id = basePokemon.id;
 
         // TODO this monster formula needs to be improved. Preferably with graphs :D
-        let maxHealth: number = PokemonFactory.routeHealth(route);
+        let maxHealth: number = PokemonFactory.routeHealth(route, region);
         let catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         let exp: number = basePokemon.exp;
 
@@ -41,7 +41,13 @@ class PokemonFactory {
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, route * 2, catchRate, exp, money, shiny);
     }
 
-    public static routeHealth(route: number): number {
+    public static routeHealth(route: number, region: number): number {
+        switch(region){
+           // Hoenn starts at route 101 need to reduce the total hp of pokemon on those routes.
+           case 2:
+              route -= 54;
+              break;
+        }
         return Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15)), 20) || 20;
     }
 
