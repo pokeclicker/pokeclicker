@@ -234,7 +234,7 @@ class Player {
 
     private highestRegion: KnockoutObservable<GameConstants.Region>;
 
-    public caughtAndShinyList(): KnockoutComputed<number> {
+    public caughtAndShinyList(): KnockoutComputed<string[]> {
         return ko.computed(function () {
             const pokeList = this.caughtPokemonList.map(pokemon=>pokemon.name);
             return this.caughtShinyList().filter(pokemon=>pokeList.includes(pokemon));

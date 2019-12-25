@@ -20,7 +20,7 @@ class QuestLineHelper {
         this.tutorial.addQuest(captureOne);
 
         //Kill 5 on route 2
-        let routeTwo = new DefeatPokemonsQuest(2, 5);
+        let routeTwo = new DefeatPokemonsQuest(2, 0, 5);
         routeTwo.pointsReward = 30;
         routeTwo.description = "Defeat 5 pokemon on route 2. Click route 2 on the map to move there and begin fighting.";
         this.tutorial.addQuest(routeTwo);
@@ -38,7 +38,7 @@ class QuestLineHelper {
         this.tutorial.addQuest(buyPokeballs);
 
         //Kill 10 on route 3
-        let routeThree = new DefeatPokemonsQuest(3, 10);
+        let routeThree = new DefeatPokemonsQuest(3, 0, 10);
         routeThree.pointsReward = 100;
         this.tutorial.addQuest(routeThree);
 

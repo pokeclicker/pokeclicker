@@ -35,7 +35,7 @@ This means you don't need to compile TypeScript yourself. Gulp will do this for 
 
 
 ## Use Google cloud shell _(alternative)_
-[![Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pokeclicker-dev/pokeclicker&git_branch=develop&page=editor&open_in_editor=README.md)
+[![Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pokeclicker/pokeclicker&git_branch=develop&page=editor&open_in_editor=README.md)
 ```cmd
 npm install
 npm start
