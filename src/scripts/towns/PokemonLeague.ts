@@ -19,11 +19,11 @@ class PokemonLeague extends Town {
 }
 
 const indigoPlateauKanto = ["Elite Lorelei", "Elite Bruno", "Elite Agatha", "Elite Lance", "Champion Blue"];
-TownList["Indigo Plateau Kanto"] = new PokemonLeague("Indigo Plateau", [23], new Shop(["Masterball", "RareCandy"]), "Victory Road", indigoPlateauKanto);
+TownList["Indigo Plateau Kanto"] = new PokemonLeague("Indigo Plateau Kanto", [23], new Shop(["Masterball", "RareCandy"]), "Victory Road", indigoPlateauKanto);
 (<PokemonLeague>TownList["Indigo Plateau Kanto"]).setupGymTowns();
 
 const indigoPlateauJohto = ["Elite Will", "Elite Koga", "Elite Bruno2", "Elite Karen", "Champion Lance"];
-TownList["Indigo Plateau Johto"] = new PokemonLeague("Indigo Plateau", [27], new Shop(["Protein"]), null, indigoPlateauJohto);
+TownList["Indigo Plateau Johto"] = new PokemonLeague("Indigo Plateau Johto", [27], new Shop(["Protein"]), null, indigoPlateauJohto);
 (<PokemonLeague>TownList["Indigo Plateau Johto"]).setupGymTowns();
 
 const pokemonLeagueHoenn = ["Elite Sidney", "Elite Phoebe", "Elite Glacia", "Elite Drake", "Champion Wallace"];
