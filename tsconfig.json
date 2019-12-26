@@ -4,7 +4,8 @@
     "lib": ["es2017", "dom", "es2019"],
     "skipLibCheck": true,
     "out": "script.min.js",
-    "sourceMap": true
+    "sourceMap": true,
+    "noEmitOnError": true
   },
   "compileOnSave": false,
   "exclude": [
