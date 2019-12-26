@@ -25,7 +25,40 @@ class MapHelper {
             Game.applyRouteBindings();
         }
         else {
-            Notifier.notify("You don't have access to that route yet.", GameConstants.NotificationOption.warning);
+          	let reqsList = '';
+
+          	if (!MapHelper.hasBadgeReq(route, region)) {
+            		let badgeNumber = GameConstants.routeBadgeRequirements[region][route];
+            		reqsList += `<br>Requires the ${GameConstants.Badge[badgeNumber]} badge.`;
+          	}
+
+          	if (!MapHelper.hasDungeonReq(route, region)) {
+            		let dungeon = GameConstants.routeDungeonRequirements[region][route];
+            		reqsList += `<br>${dungeon} dungeon needs to be completed.`;
+          	}
+
+          	if (!MapHelper.hasRouteKillReq(route, region)) {
+            		let reqList = GameConstants.routeRequirements[region][route];
+            		let routesNotCompleted = [];
+
+            		for (let i = 0; i < reqList.length; i++) {
+              			let route: number = reqList[i];
+              			if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
+              				  routesNotCompleted.push(route);
+              			}
+            		}
+
+            		if (routesNotCompleted.length > 0) {
+              			let routesList = routesNotCompleted.join(", ");
+                		if (routesNotCompleted.length > 1) {
+              			     reqsList += `<br>Routes ${routesList} still need to be completed.`;
+                    } else {
+              			     reqsList += `<br>Route ${routesList} still needs to be completed.`;
+                    }
+            		}
+          	}
+
+          	Notifier.notify("You don't have access to that route yet." + reqsList, GameConstants.NotificationOption.warning);
         }
     };
 
@@ -119,7 +152,39 @@ class MapHelper {
             Game.gameState(GameConstants.GameState.town);
             Game.applyRouteBindings();
         } else {
-            Notifier.notify("You don't have access to that location yet.", GameConstants.NotificationOption.warning);
+            const town = TownList[townName];
+          	let reqsList = '';
+
+            if (town.badgeReq && !player.hasBadge(town.badgeReq)) {
+            		reqsList += `<br/>Requires the ${GameConstants.Badge[town.badgeReq]} badge.`;
+            }
+
+          	if (!town.hasDungeonReq()) {
+            		reqsList += `<br/>${town.dungeonReq} needs to be completed.`;
+          	}
+
+          	if (!town.hasRouteReq()) {
+            		let reqList = town._reqRoutes;
+            		let routesNotCompleted = [];
+
+            		for (let i = 0; i < reqList.length; i++) {
+              			let route: number = reqList[i];
+              			if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
+              				  routesNotCompleted.push(route);
+              			}
+            		}
+
+            		if (routesNotCompleted.length > 0) {
+              			let routesList = routesNotCompleted.join(", ");
+                		if (routesNotCompleted.length > 1) {
+              			     reqsList += `<br/>Routes ${routesList} still need to be completed.`;
+                    } else {
+              			     reqsList += `<br/>Route ${routesList} still needs to be completed.`;
+                    }
+            		}
+          	}
+
+            Notifier.notify("You don't have access to that location yet." + reqsList, GameConstants.NotificationOption.warning);
         }
     };
 
