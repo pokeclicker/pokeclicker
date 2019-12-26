@@ -1,5 +1,5 @@
-const gulp = require('gulp');
-const file = require('gulp-file');
+const {src, dest, parallel, series, watch} = require('gulp');const file = require('gulp-file');
+
 const tslint = require('gulp-tslint');
 const changed = require('gulp-changed');
 const minifyHtml = require('gulp-minify-html');
@@ -22,8 +22,8 @@ const plumber = require("gulp-plumber");
 /**
  * Push build to gh-pages
  */
-gulp.task('deploy', () => gulp.src("./dist/**/*")
-    .pipe(deploy()));
+// task('deploy', () => src("./dist/**/*")
+//     .pipe(deploy()));
 
 const srcs = {
     buildArtefacts: 'build/**/*',
@@ -53,15 +53,15 @@ const dests = {
 };
 
 function copy() {
-    return gulp.src(srcs.libs)
-        .pipe(gulp.dest(dests.libs))
+    return src(srcs.libs)
+        .pipe(dest(dests.libs))
         .pipe(browserSync.reload({stream: true}));
 }
 
 function assets() {
-    return gulp.src(srcs.assets)
+    return src(srcs.assets)
         .pipe(changed(dests.assets))
-        .pipe(gulp.dest(dests.assets))
+        .pipe(dest(dests.assets))
         .pipe(browserSync.reload({stream: true}));
 }
 
@@ -75,21 +75,21 @@ function sync() {
 
 function compileHtml() {
     const htmlDest = './build';
-    return gulp.src('./src/index.html')
+    return src('./src/index.html')
         .pipe(plumber())
         .pipe(gulpImport('./src/components/'))
         .pipe(ejs())
-        .pipe(gulp.dest(htmlDest))
+        .pipe(dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
 }
 
 function html() {
     const htmlDest = './build';
 
-    return gulp.src(srcs.html)
+    return src(srcs.html)
         .pipe(changed(dests.base))
         .pipe(minifyHtml())
-        .pipe(gulp.dest(htmlDcleanOutputFolderest))
+        .pipe(dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
 }
 
@@ -97,49 +97,51 @@ function scripts() {
     let tsProject = typescript.createProject('tsconfig.json');
     return tsProject.src()
         .pipe(tsProject())
-        .pipe(gulp.dest(dests.scripts))
+        .pipe(dest(dests.scripts))
         .pipe(browserSync.reload({stream: true}));
 }
 
 function styles() {
-    return gulp.src(srcs.styles)
+    return src(srcs.styles)
         .pipe(less())
         .pipe(concat('styles.min.css'))
         .pipe(autoprefix('last 2 versions'))
         .pipe(minifyCSS())
-        .pipe(gulp.dest(dests.styles))
+        .pipe(dest(dests.styles))
         .pipe(browserSync.reload({stream: true}));
 }
 
-function cleanWebsite() {
-    return del([dests.githubPages]);
+function cleanWebsite(done) {
+    del([dests.githubPages]);
+    done();
 }
 
-function clean() {
-    return del([dests.base]);
+function clean(done) {
+    del([dests.base]);
+    done();
 }
 
 function copyWebsite(){
-    return gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
+    return src(srcs.buildArtefacts).pipe(dest(dests.githubPages));
 }
 
 function build() {
-    return gulp.series(copy(), assets(), compileHtml(), scripts(), styles());
+    return series(copy, assets, compileHtml, scripts, styles);
 }
 
 function website(){
-    return gulp.series(clean, build, cleanWebsite, copyWebsite, done);
+    return series(clean, build, cleanWebsite, copyWebsite, done);
 }
 
-// gulp.task('default', done => {
-//     gulp.series('clean', 'build', 'sync', () => {
-//         gulp.watch(srcs.html, ['compile-html']);
-//         gulp.watch(srcs.ejsTemplates, ['compile-html']);
-//         gulp.watch(srcs.assets, ['assets']);
-//         gulp.watch(srcs.scripts, ['scripts']);
-//         gulp.watch(srcs.styles, ['styles']);
+// task('default', done => {
+//     series('clean', 'build', 'sync', () => {
+//         watch(srcs.html, ['compile-html']);
+//         watch(srcs.ejsTemplates, ['compile-html']);
+//         watch(srcs.assets, ['assets']);
+//         watch(srcs.scripts, ['scripts']);
+//         watch(srcs.styles, ['styles']);
 //         done();
 //     });
 // });
 
-exports.default = gulp.series(clean(), build(), sync());
+exports.default = series(clean, build, sync);
