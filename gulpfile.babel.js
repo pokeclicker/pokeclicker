@@ -9,7 +9,6 @@ const minifyCSS = require('gulp-minify-css');
 const typescript = require('gulp-typescript');
 const browserSync = require('browser-sync');
 const del = require('del');
-const runSequence = require('run-sequence');
 const bsConfig = require("gulp-bootstrap-configurator");
 const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
@@ -53,28 +52,32 @@ const dests = {
     githubPages: 'docs/'
 };
 
-gulp.task('copy', () => gulp.src(srcs.libs)
-    .pipe(gulp.dest(dests.libs))
-    .pipe(browserSync.reload({stream: true})));
+function copy() {
+    return gulp.src(srcs.libs)
+        .pipe(gulp.dest(dests.libs))
+        .pipe(browserSync.reload({stream: true}));
+}
 
-gulp.task('assets', () => gulp.src(srcs.assets)
-    .pipe(changed(dests.assets))
-    .pipe(gulp.dest(dests.assets))
-    .pipe(browserSync.reload({stream: true})));
+function assets() {
+    return gulp.src(srcs.assets)
+        .pipe(changed(dests.assets))
+        .pipe(gulp.dest(dests.assets))
+        .pipe(browserSync.reload({stream: true}));
+}
 
-gulp.task('browserSync', () => {
-    browserSync({
+function sync() {
+    return browserSync({
         server: {
             baseDir: dests.base
         }
     });
-});
+}
 
-gulp.task('compile-html', () => {
+function compileHtml() {
     let recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-3).reverse();
-
+    console.log(recentChangelogs);
     const htmlDest = './build';
-    gulp.src('./src/index.html')
+    return gulp.src('./src/index.html')
         .pipe(plumber())
         .pipe(gulpImport('./src/components/'))
         .pipe(ejs())
@@ -85,69 +88,78 @@ gulp.task('compile-html', () => {
         }))
         .pipe(gulp.dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
-});
+}
 
-
-gulp.task('full-changelog', () => {
+function fullChangelog() {
     let recentChangelogs = glob.sync('./src/assets/changelog/*.md').reverse();
 
     const htmlDest = './build';
-    gulp.src('./src/changelog.html')
+    return gulp.src('./src/changelog.html')
         .pipe(inject(gulp.src(recentChangelogs)
             .pipe(markdown()), {
             starttag: '<!-- inject:head:html -->',
             transform: (filePath, file) => file.contents.toString('utf8')
         }))
         .pipe(gulp.dest(htmlDest));
-});
+}
 
-gulp.task('html', () => {
+function html() {
     const htmlDest = './build';
 
     return gulp.src(srcs.html)
         .pipe(changed(dests.base))
         .pipe(minifyHtml())
-        .pipe(gulp.dest(htmlDest))
+        .pipe(gulp.dest(htmlDcleanOutputFolderest))
         .pipe(browserSync.reload({stream: true}));
-});
+}
 
-gulp.task('scripts', () => {
+function scripts() {
     let tsProject = typescript.createProject('tsconfig.json');
     return tsProject.src()
         .pipe(tsProject())
         .pipe(gulp.dest(dests.scripts))
         .pipe(browserSync.reload({stream: true}));
-});
+}
 
-gulp.task('styles', () => gulp.src(srcs.styles)
-    .pipe(less())
-    .pipe(concat('styles.min.css'))
-    .pipe(autoprefix('last 2 versions'))
-    .pipe(minifyCSS())
-    .pipe(gulp.dest(dests.styles))
-    .pipe(browserSync.reload({stream: true})));
+function styles() {
+    return gulp.src(srcs.styles)
+        .pipe(less())
+        .pipe(concat('styles.min.css'))
+        .pipe(autoprefix('last 2 versions'))
+        .pipe(minifyCSS())
+        .pipe(gulp.dest(dests.styles))
+        .pipe(browserSync.reload({stream: true}));
+}
 
-gulp.task('cleanWebsite', () => del([dests.githubPages]));
+function cleanWebsite() {
+    return del([dests.githubPages]);
+}
 
-gulp.task('clean', () => del([dests.base]));
+function clean() {
+    return del([dests.base]);
+}
 
-gulp.task('copyWebsite', () => {
-    gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
-});
+function copyWebsite(){
+    return gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
+}
 
-gulp.task('build', ['copy', 'assets', 'compile-html', 'scripts', 'styles', 'full-changelog']);
+function build() {
+    return gulp.series(copy(), assets(), compileHtml(), scripts(), styles(), fullChangelog());
+}
 
-gulp.task('website', done => {
-    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', () => done());
-});
+function website(){
+    return gulp.series(clean, build, cleanWebsite, copyWebsite, done);
+}
 
-gulp.task('default', done => {
-    runSequence('clean', 'build', 'browserSync', () => {
-        gulp.watch(srcs.html, ['compile-html']);
-        gulp.watch(srcs.ejsTemplates, ['compile-html']);
-        gulp.watch(srcs.assets, ['assets']);
-        gulp.watch(srcs.scripts, ['scripts']);
-        gulp.watch(srcs.styles, ['styles']);
-        done();
-    });
-});
+// gulp.task('default', done => {
+//     gulp.series('clean', 'build', 'sync', () => {
+//         gulp.watch(srcs.html, ['compile-html']);
+//         gulp.watch(srcs.ejsTemplates, ['compile-html']);
+//         gulp.watch(srcs.assets, ['assets']);
+//         gulp.watch(srcs.scripts, ['scripts']);
+//         gulp.watch(srcs.styles, ['styles']);
+//         done();
+//     });
+// });
+
+exports.default = gulp.series(clean(), build(), sync());
