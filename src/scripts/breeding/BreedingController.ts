@@ -1,6 +1,6 @@
 class BreedingController {
     public static openBreedingModal() {
-        if (player.hasKeyItem("Mystery egg")) {
+        if (game.breeding.canAccess()) {
             Game.gameState(GameConstants.GameState.paused);
             $('#breedingModal').modal('show');
         } else {

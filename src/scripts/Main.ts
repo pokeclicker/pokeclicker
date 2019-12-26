@@ -88,6 +88,7 @@ class Game {
 
     constructor(breeding: Breeding) {
         this.breeding = breeding;
+        this.breeding.initialize();
 
         player = Save.load();
         KeyItemHandler.initialize();

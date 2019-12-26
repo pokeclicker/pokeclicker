@@ -1,12 +1,60 @@
 import Currency = GameConstants.Currency;
 
 class Breeding implements Feature {
+    name: string = "Breeding";
+    saveKey: string = "breeding";
+
     private _eggList: Array<KnockoutObservable<Egg | void>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    constructor(eggList: Array<KnockoutObservable<Egg | void>>, eggSlots: KnockoutObservable<number>) {
+    private hatchList: { [name: number]: string[][]} = {};
+
+    constructor() {
         this._eggList = [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)];
         this._eggSlots = ko.observable(1);
+    }
+
+    initialize(): void {
+        this.hatchList[GameConstants.EggType.Fire] = [
+            ["Charmander", "Vulpix", "Growlithe", "Ponyta"],
+            ["Cyndaquil", "Slugma", "Houndour", "Magby"],
+        ];
+        this.hatchList[GameConstants.EggType.Water] = [
+            ["Squirtle", "Lapras", "Staryu", "Psyduck"],
+            ["Totodile", "Wooper", "Marill", "Qwilfish"],
+        ];
+        this.hatchList[GameConstants.EggType.Grass] = [
+            ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"],
+            ["Chikorita", "Hoppip", "Sunkern"],
+        ];
+        this.hatchList[GameConstants.EggType.Fighting] = [
+            ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"],
+            ["Tyrogue"],
+        ];
+        this.hatchList[GameConstants.EggType.Electric] = [
+            ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"],
+            ["Chinchou", "Mareep", "Elekid"],
+        ];
+        this.hatchList[GameConstants.EggType.Dragon] = [
+            ["Dratini", "Dragonair", "Dragonite"],
+            [],
+        ];
+
+    }
+
+    update(delta: number): void {}
+
+    canAccess(): boolean {
+        return player.hasKeyItem("Mystery egg");
+    }
+
+    fromJSON(json: object): void {
+    }
+
+
+
+    toJSON(): object {
+        return undefined;
     }
 
     public canBreedPokemon(): boolean {
@@ -113,23 +161,23 @@ class Breeding implements Feature {
     }
 
     public createTypedEgg(type: GameConstants.EggType): Egg {
-        const hatch_list = HatchList[type];
-        const hatchable = hatch_list.slice(0, player.highestRegion() + 1);
-        let possible_hatches = [];
+        const hatchList = this.hatchList[type];
+        const hatchable = hatchList.slice(0, player.highestRegion() + 1);
+        let possibleHatches = [];
         hatchable.forEach((pokemon, index) => {
             if (!pokemon.length) return;
-            const toAdd = possible_hatches.length || 1;
+            const toAdd = possibleHatches.length || 1;
             for (let i = 0; i < toAdd; i++) {
-                possible_hatches.push(pokemon);
+                possibleHatches.push(pokemon);
             }
         });
-        possible_hatches = possible_hatches[Math.floor(Math.random() * possible_hatches.length)];
-        const pokemon = possible_hatches[Math.floor(Math.random() * possible_hatches.length)];
+        possibleHatches = possibleHatches[Math.floor(Math.random() * possibleHatches.length)];
+        const pokemon = possibleHatches[Math.floor(Math.random() * possibleHatches.length)];
         return this.createEgg(pokemon, type);
     }
 
     public createRandomEgg(): Egg {
-        let type = Math.floor(Math.random() * (Object.keys(HatchList).length - 1));
+        let type = Math.floor(Math.random() * (Object.keys(this.hatchList).length - 1));
         let egg = this.createTypedEgg(type);
         egg.type = GameConstants.EggType.Mystery;
         return egg;
@@ -175,16 +223,17 @@ class Breeding implements Feature {
         }
     }
 
+    public nextEggSlotCost(): Cost {
+        return new Cost(this.getEggSlotCost(this._eggSlots() + 1), Currency.questPoint);
+    }
+
+    // Knockout getters/setters
     get eggSlots(): KnockoutObservable<number> {
         return this._eggSlots;
     }
 
     public gainEggSlot() {
         this._eggSlots(this._eggSlots() + 1);
-    }
-
-    public nextEggSlotCost(): Cost {
-        return new Cost(this.getEggSlotCost(this._eggSlots() + 1), Currency.questPoint);
     }
 
     get eggList(): Array<KnockoutObservable<Egg | void>> {
@@ -195,34 +244,4 @@ class Breeding implements Feature {
         this._eggList = value;
     }
 
-//            this._eggList = savedPlayer._eggList.map((egg) => {
-//             return ko.observable(egg ? new Egg(egg.totalSteps, egg.pokemon, egg.type, egg.steps, egg.shinySteps, egg.notified) : null)
-//         });
-//         this._eggSlots = ko.observable(savedPlayer._eggSlots != null ? savedPlayer._eggSlots : 1);
 }
-
-const HatchList: { [name: number]: string[][] } = {};
-HatchList[GameConstants.EggType.Fire] = [
-    ["Charmander", "Vulpix", "Growlithe", "Ponyta"],
-    ["Cyndaquil", "Slugma", "Houndour", "Magby"],
-];
-HatchList[GameConstants.EggType.Water] = [
-    ["Squirtle", "Lapras", "Staryu", "Psyduck"],
-    ["Totodile", "Wooper", "Marill", "Qwilfish"],
-];
-HatchList[GameConstants.EggType.Grass] = [
-    ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"],
-    ["Chikorita", "Hoppip", "Sunkern"],
-];
-HatchList[GameConstants.EggType.Fighting] = [
-    ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"],
-    ["Tyrogue"],
-];
-HatchList[GameConstants.EggType.Electric] = [
-    ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"],
-    ["Chinchou", "Mareep", "Elekid"],
-];
-HatchList[GameConstants.EggType.Dragon] = [
-    ["Dratini", "Dragonair", "Dragonite"],
-    [],
-];
