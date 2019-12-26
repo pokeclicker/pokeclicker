@@ -74,33 +74,13 @@ function sync() {
 }
 
 function compileHtml() {
-    let recentChangelogs = glob.sync('./src/assets/changelog/*.md').slice(-3).reverse();
-    console.log(recentChangelogs);
     const htmlDest = './build';
     return gulp.src('./src/index.html')
         .pipe(plumber())
         .pipe(gulpImport('./src/components/'))
         .pipe(ejs())
-        .pipe(inject(gulp.src(recentChangelogs)
-            .pipe(markdown()), {
-            starttag: '<!-- inject:head:html -->',
-            transform: (filePath, file) => file.contents.toString('utf8')
-        }))
         .pipe(gulp.dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
-}
-
-function fullChangelog() {
-    let recentChangelogs = glob.sync('./src/assets/changelog/*.md').reverse();
-
-    const htmlDest = './build';
-    return gulp.src('./src/changelog.html')
-        .pipe(inject(gulp.src(recentChangelogs)
-            .pipe(markdown()), {
-            starttag: '<!-- inject:head:html -->',
-            transform: (filePath, file) => file.contents.toString('utf8')
-        }))
-        .pipe(gulp.dest(htmlDest));
 }
 
 function html() {
@@ -144,7 +124,7 @@ function copyWebsite(){
 }
 
 function build() {
-    return gulp.series(copy(), assets(), compileHtml(), scripts(), styles(), fullChangelog());
+    return gulp.series(copy(), assets(), compileHtml(), scripts(), styles());
 }
 
 function website(){
