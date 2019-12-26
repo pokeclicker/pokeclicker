@@ -11,7 +11,7 @@ class Town {
     private _shop?: KnockoutObservable<Shop>;
     private _dungeon?: KnockoutObservable<Dungeon>;
     private _reqRoutes: number[];
-    private dungeonReq: string; // Dungeon that must be completed to access town
+    public dungeonReq: string; // Dungeon that must be completed to access town
     public startingTown: boolean;
 
     constructor(name: string, routes: number[], shop?: Shop, dungeon?: Dungeon, dungeonReq?: string) {
@@ -68,7 +68,7 @@ class Town {
 }
 
 class DungeonTown extends Town {
-    private badgeReq: GameConstants.Badge;
+    public badgeReq: GameConstants.Badge;
 
     constructor(name: string, routes: number[], badge?: GameConstants.Badge) {
         super(name, routes, null, dungeonList[name]);
