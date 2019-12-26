@@ -91,6 +91,14 @@ class Game {
         this.breeding.initialize();
 
         player = Save.load();
+
+        // TODO(@Isha) Refactor this saving logic
+        let saveJSON = localStorage.getItem("save");
+        if (saveJSON !== null) {
+            let saveObject = JSON.parse(saveJSON);
+            this.breeding.fromJSON(saveObject[this.breeding.saveKey])
+        }
+
         KeyItemHandler.initialize();
         AchievementHandler.initialize();
         player.gainKeyItem("Coin case", true);

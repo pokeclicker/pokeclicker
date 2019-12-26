@@ -49,12 +49,17 @@ class Breeding implements Feature {
     }
 
     fromJSON(json: object): void {
+        // this._eggList = [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)];
+        // this.eggSlots = json["eggSlots"];
     }
 
 
 
     toJSON(): object {
-        return undefined;
+        // let breedingSave = {};
+        // breedingSave["eggList"] = [];
+        // breedingSave["eggSlots"] = this.eggSlots;
+        // return breedingSave;
     }
 
     public canBreedPokemon(): boolean {
