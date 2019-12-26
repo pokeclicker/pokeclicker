@@ -29,7 +29,7 @@ class CaughtPokemon {
         });
 
         this.breeding = ko.observable(breeding);
-        this.evolver = {};
+        this.evolver.dispose();
         this.checkForEvolution();
     }
 
