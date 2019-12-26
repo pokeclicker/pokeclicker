@@ -155,8 +155,10 @@ class MapHelper {
             const town = TownList[townName];
           	let reqsList = '';
 
-            if (town.badgeReq && !player.hasBadge(town.badgeReq)) {
-            		reqsList += `<br/>Requires the ${GameConstants.Badge[town.badgeReq]} badge.`;
+          	if (town instanceof DungeonTown) {
+                if (town.badgeReq && !player.hasBadge(town.badgeReq)) {
+                    reqsList += `<br/>Requires the ${GameConstants.Badge[town.badgeReq]} badge.`;
+                }
             }
 
           	if (!town.hasDungeonReq()) {
@@ -164,7 +166,7 @@ class MapHelper {
           	}
 
           	if (!town.hasRouteReq()) {
-            		let reqList = town._reqRoutes;
+            		let reqList = town.reqRoutes;
             		let routesNotCompleted = [];
 
             		for (let i = 0; i < reqList.length; i++) {

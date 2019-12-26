@@ -7,4 +7,6 @@ cache:
 install:
 - npm install
 script:
+#  Compile, fail on any error
+- tsc
 - npm test

@@ -38,10 +38,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
                 $(element).tooltip(options);
 
-                ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
-                    $(element).tooltip("dispose");
-                });
-
                 if (bindingContext.$data instanceof Plot) {
                     $(element).hover(function () {
                         $(this).data('to', setInterval(function () {
