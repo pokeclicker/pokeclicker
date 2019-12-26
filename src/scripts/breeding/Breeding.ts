@@ -93,7 +93,8 @@ class Breeding implements Feature {
         }
         amount = Math.round(amount);
         for (let obj of this._eggList) {
-            let egg: Egg = obj();
+            // TODO(@Isha) fix this properly.
+            let egg: any = obj();
             if (egg == null || egg.notified) {
                 continue;
             }
@@ -119,12 +120,13 @@ class Breeding implements Feature {
         }
         let egg = this.createEgg(pokemon.name);
         pokemon.breeding(true);
-        player.gainEgg(egg);
+        this.gainEgg(egg);
         pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
     }
 
     public hatchPokemonEgg(index: number) {
-        let egg = player._eggList[index]();
+        // TODO(@Isha) fix this properly.
+        let egg : any = this._eggList[index]();
         let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps()));
         let shiny = PokemonFactory.generateShiny(shinyChance);
 
@@ -150,7 +152,7 @@ class Breeding implements Feature {
             player.capturePokemon(baseForm, false, true);
         }
 
-        player._eggList[index](null);
+        this._eggList[index](null);
         GameHelper.incrementObservable(player.statistics.hatchedEggs);
         OakItemRunner.use(GameConstants.OakItem.Blaze_Cassette);
     }
