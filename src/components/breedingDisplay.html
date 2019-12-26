@@ -12,7 +12,7 @@
     <div id='eggList' class="card-body p-0 show">
       <div class="row m-0" data-bind="foreach: game.breeding.eggList">
         <div class="col-md-6 eggSlot">
-            <div data-bind="if: $index() === game.breeding.eggSlots()">
+            <div data-bind="if: $index() === game.breeding.eggSlots">
                 <p style="margin:2px;">Egg slot</p>
                 <p style="margin:2px;">
                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': game.breeding.nextEggSlotCost().amount, 'currency': GameConstants.Currency.questPoint}}"></span>
@@ -20,7 +20,7 @@
                 <button class='btn btn-primary' onclick='game.breeding.buyEggSlot()'
                         data-bind='css: {disabled: player.questPoints <= game.breeding.nextEggSlotCost().amount}'>Buy</button>
             </div>
-            <div data-bind="visible: $index() > game.breeding.eggSlots()" style="margin-top: 30px;">
+            <div data-bind="visible: $index() > game.breeding.eggSlots" style="margin-top: 30px;">
                 <img src="assets/images/breeding/lock.png">
             </div>
             <!-- ko if: $data !== null -->

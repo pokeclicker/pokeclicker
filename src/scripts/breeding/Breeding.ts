@@ -7,7 +7,7 @@ class Breeding implements Feature {
     private _eggList: Array<KnockoutObservable<Egg | void>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private hatchList: { [name: number]: string[][]} = {};
+    private hatchList: { [name: number]: string[][] } = {};
 
     constructor() {
         this._eggList = [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)];
@@ -42,24 +42,37 @@ class Breeding implements Feature {
 
     }
 
-    update(delta: number): void {}
+    update(delta: number): void {
+    }
 
     canAccess(): boolean {
         return player.hasKeyItem("Mystery egg");
     }
 
     fromJSON(json: object): void {
-        // this._eggList = [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)];
-        // this.eggSlots = json["eggSlots"];
+        console.log(json);
+        this._eggList = [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)];
+        let saveEggList : object[] = json["eggList"];
+
+        for (let i = 0; i < this._eggList.length; i++) {
+            if(saveEggList[i] != null){
+                let egg: Egg = new Egg(null, null, null);
+                egg.fromJSON(saveEggList[i]);
+                this._eggList[i](egg);
+            }
+        }
+        this.eggSlots = json["eggSlots"];
     }
 
 
-
     toJSON(): object {
-        // let breedingSave = {};
-        // breedingSave["eggList"] = [];
-        // breedingSave["eggSlots"] = this.eggSlots;
-        // return breedingSave;
+        let breedingSave = {};
+        breedingSave["eggList"] = this.eggList.map(function (egg: any) {
+                return egg() === null ? null : egg().toJSON();
+            }
+        );
+        breedingSave["eggSlots"] = this.eggSlots;
+        return breedingSave;
     }
 
     public canBreedPokemon(): boolean {
@@ -131,7 +144,7 @@ class Breeding implements Feature {
 
     public hatchPokemonEgg(index: number) {
         // TODO(@Isha) fix this properly.
-        let egg : any = this._eggList[index]();
+        let egg: any = this._eggList[index]();
         let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps()));
         let shiny = PokemonFactory.generateShiny(shinyChance);
 
@@ -231,16 +244,20 @@ class Breeding implements Feature {
     }
 
     public nextEggSlotCost(): Cost {
-        return new Cost(this.getEggSlotCost(this._eggSlots() + 1), Currency.questPoint);
+        return new Cost(this.getEggSlotCost(this.eggSlots + 1), Currency.questPoint);
     }
 
     // Knockout getters/setters
-    get eggSlots(): KnockoutObservable<number> {
-        return this._eggSlots;
+    get eggSlots(): number {
+        return this._eggSlots();
+    }
+
+    set eggSlots(value :number ) {
+        this._eggSlots(value);
     }
 
     public gainEggSlot() {
-        this._eggSlots(this._eggSlots() + 1);
+        this.eggSlots += 1;
     }
 
     get eggList(): Array<KnockoutObservable<Egg | void>> {
