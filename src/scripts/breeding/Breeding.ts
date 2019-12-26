@@ -84,7 +84,7 @@ class Breeding implements Feature {
     }
 
     public gainRandomEgg() {
-        this.gainEgg(this.createRandomEgg());
+        return this.gainEgg(this.createRandomEgg());
     }
 
     public progressEggs(amount: number) {
