@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     Preload.load(debug).then(function () {
         OakItemRunner.initialize();
         UndergroundItem.initialize();
-        game = new Game();
+        game = new Game(new Breeding());
         // DungeonRunner.initializeDungeon(dungeonList["Viridian Forest"]);
 
         $(document).ready(function () {
@@ -84,7 +84,11 @@ class Game {
 
     public static gameState: KnockoutObservable<GameConstants.GameState> = ko.observable(GameConstants.GameState.fighting);
 
-    constructor() {
+    public breeding: Breeding;
+
+    constructor(breeding: Breeding) {
+        this.breeding = breeding;
+
         player = Save.load();
         KeyItemHandler.initialize();
         AchievementHandler.initialize();

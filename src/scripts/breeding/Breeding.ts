@@ -4,6 +4,11 @@ class Breeding implements Feature {
     private _eggList: Array<KnockoutObservable<Egg | void>>;
     private _eggSlots: KnockoutObservable<number>;
 
+    constructor(eggList: Array<KnockoutObservable<Egg | void>>, eggSlots: KnockoutObservable<number>) {
+        this._eggList = [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)];
+        this._eggSlots = ko.observable(1);
+    }
+
     public canBreedPokemon(): boolean {
         return player.hasMaxLevelPokemon() && this.hasFreeEggSlot();
     }
@@ -28,6 +33,10 @@ class Breeding implements Feature {
         }
         console.log("Error: Could not place " + GameConstants.EggType[e.type] + " Egg");
         return false;
+    }
+
+    public gainRandomEgg() {
+        this.gainEgg(this.createRandomEgg());
     }
 
     public progressEggs(amount: number) {
@@ -56,7 +65,7 @@ class Breeding implements Feature {
     }
 
     public gainPokemonEgg(pokemon: CaughtPokemon) {
-        if (!player.hasFreeEggSlot()) {
+        if (!this.hasFreeEggSlot()) {
             Notifier.notify("You don't have any free egg slots", GameConstants.NotificationOption.warning);
             return;
         }
@@ -68,10 +77,10 @@ class Breeding implements Feature {
 
     public hatchPokemonEgg(index: number) {
         let egg = player._eggList[index]();
-        let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps/egg.steps()));
+        let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps()));
         let shiny = PokemonFactory.generateShiny(shinyChance);
 
-        for (let i=0; i<player._caughtPokemonList().length; i++) {
+        for (let i = 0; i < player._caughtPokemonList().length; i++) {
             if (player._caughtPokemonList()[i].name == egg.pokemon) {
                 if (player._caughtPokemonList()[i].breeding()) {
                     player._caughtPokemonList()[i].exp(0);
@@ -107,10 +116,10 @@ class Breeding implements Feature {
         const hatch_list = HatchList[type];
         const hatchable = hatch_list.slice(0, player.highestRegion() + 1);
         let possible_hatches = [];
-        hatchable.forEach((pokemon, index)=>{
+        hatchable.forEach((pokemon, index) => {
             if (!pokemon.length) return;
             const toAdd = possible_hatches.length || 1;
-            for (let i = 0; i < toAdd; i++){
+            for (let i = 0; i < toAdd; i++) {
                 possible_hatches.push(pokemon);
             }
         });
@@ -131,24 +140,13 @@ class Breeding implements Feature {
         return this.createEgg(pokemonName, GameConstants.EggType.Fossil);
     }
 
-    public getSteps = function (eggCycles: number) {
+    public getSteps(eggCycles: number) {
         if (eggCycles === undefined) {
             return 500;
         } else {
             return eggCycles * 40;
         }
     };
-
-    public getEggImage(egg: Egg): string {
-        let eggType = GameConstants.EggType[egg.type].toLowerCase();
-        if (eggType == "pokemon") {
-            let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
-            eggType = String(dataPokemon.type1).toLowerCase();
-        } else if (eggType == "fossil") {
-            eggType = GameConstants.PokemonToFossil[egg.pokemon];
-        }
-        return "assets/images/breeding/egg" + eggType + ".png";
-    }
 
     public getEggSlotCost(slot: number): number {
         return 500 * slot;
@@ -185,7 +183,7 @@ class Breeding implements Feature {
         this._eggSlots(this._eggSlots() + 1);
     }
 
-    public nextEggSlotCost() : Cost{
+    public nextEggSlotCost(): Cost {
         return new Cost(this.getEggSlotCost(this._eggSlots() + 1), Currency.questPoint);
     }
 
@@ -207,24 +205,24 @@ const HatchList: { [name: number]: string[][] } = {};
 HatchList[GameConstants.EggType.Fire] = [
     ["Charmander", "Vulpix", "Growlithe", "Ponyta"],
     ["Cyndaquil", "Slugma", "Houndour", "Magby"],
-  ];
+];
 HatchList[GameConstants.EggType.Water] = [
     ["Squirtle", "Lapras", "Staryu", "Psyduck"],
     ["Totodile", "Wooper", "Marill", "Qwilfish"],
-  ];
+];
 HatchList[GameConstants.EggType.Grass] = [
     ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"],
     ["Chikorita", "Hoppip", "Sunkern"],
-  ];
+];
 HatchList[GameConstants.EggType.Fighting] = [
     ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"],
     ["Tyrogue"],
-  ];
+];
 HatchList[GameConstants.EggType.Electric] = [
     ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"],
     ["Chinchou", "Mareep", "Elekid"],
-  ];
+];
 HatchList[GameConstants.EggType.Dragon] = [
     ["Dratini", "Dragonair", "Dragonite"],
     [],
-  ];
+];

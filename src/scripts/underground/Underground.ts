@@ -166,7 +166,7 @@ class Underground {
                 player.diamonds += item.value;
                 break;
             case "Mine Egg":
-                success = player.gainEgg(BreedingHelper.createFossilEgg(item.name));
+                success = game.breeding.gainEgg(game.breeding.createFossilEgg(item.name));
                 break;
             default:
                 let type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string

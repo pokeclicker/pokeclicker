@@ -48,7 +48,7 @@
             <td class='vertical-middle'>
                 <button class='btn btn-success tooltipRightMine'
                         data-bind='click: function(){ Underground.sellMineItem(id) },
-                                   css: { disabled: amount() <= 0 || (valueType === "Mine Egg" && !player.hasFreeEggSlot()) },
+                                   css: { disabled: amount() <= 0 || (valueType === "Mine Egg" && !game.breeding.hasFreeEggSlot()) },
                                    text: valueType === "Mine Egg" ? "Breed" : "Sell"'>
                 </button>
             </td>
