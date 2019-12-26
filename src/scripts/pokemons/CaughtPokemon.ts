@@ -10,7 +10,7 @@ class CaughtPokemon {
     attackBonus: KnockoutObservable<number>;
     exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
-    evolver: KnockoutSubscription;
+    evolver: KnockoutSubscription[];
     breeding: KnockoutObservable<boolean>;
     evoRegion: GameConstants.Region;
 
@@ -29,7 +29,7 @@ class CaughtPokemon {
         });
 
         this.breeding = ko.observable(breeding);
-        this.evolver.dispose();
+        this.evolver = [];
         this.checkForEvolution();
     }
 
