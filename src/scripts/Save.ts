@@ -171,7 +171,7 @@ class Save {
 
         setTimeout(function () {
             try {
-                let decoded = atob(fr.result);
+                let decoded = atob(fr.result as string);
                 JSON.parse(decoded);
                 if (decoded) {
                     localStorage.setItem("player", decoded);
