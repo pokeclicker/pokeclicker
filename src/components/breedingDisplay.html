@@ -14,7 +14,9 @@
         <div class="col-md-6 eggSlot">
             <div data-bind="if: $index() === game.breeding.eggSlots()">
                 <p style="margin:2px;">Egg slot</p>
-                <p style="margin:2px;"><img src="assets/images/currency/questPoint.png"> <span data-bind='text: game.breeding.nextEggSlotCost()'></span></p>
+                <p style="margin:2px;">
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': game.breeding.nextEggSlotCost(), 'currency': GameConstants.Currency.questPoint}}"></span>
+                </p>
                 <button class='btn btn-primary' onclick='game.breeding.buyEggSlot()'
                         data-bind='css: {disabled: player.questPoints <= game.breeding.nextEggSlotCost().amount}'>Buy</button>
             </div>

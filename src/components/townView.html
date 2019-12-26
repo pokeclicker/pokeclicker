@@ -28,8 +28,7 @@
                        onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
                        data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon(), attr: {class: player.town().dungeon() && player.dungeonTokens() >= player.town().dungeon().tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0'}">
                    Start<br/>
-                   <img title="Dungeon Tokens" src="assets/images/currency/dungeonToken.png" height="20px">
-                   <span data-bind="text: player.town().dungeon().tokenCost.toLocaleString('en-US')"></span>
+                   <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon().tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
                </button>
                <button class="btn btn-secondary"
                        onclick="MapHelper.moveToTown(player.town().dungeon().name())"
