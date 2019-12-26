@@ -1,6 +1,4 @@
 const gulp = require('gulp');
-const file = require('gulp-file');
-const tslint = require('gulp-tslint');
 const changed = require('gulp-changed');
 const minifyHtml = require('gulp-minify-html');
 const concat = require('gulp-concat');
@@ -9,13 +7,8 @@ const minifyCSS = require('gulp-minify-css');
 const typescript = require('gulp-typescript');
 const browserSync = require('browser-sync');
 const del = require('del');
-const runSequence = require('run-sequence');
-const bsConfig = require("gulp-bootstrap-configurator");
 const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
-const markdown = require('gulp-markdown');
-const inject = require('gulp-inject');
-const glob = require("glob");
 const ejs = require("gulp-ejs");
 const plumber = require("gulp-plumber");
 
@@ -70,7 +63,7 @@ gulp.task('browserSync', () => {
     });
 });
 
-gulp.task('compile-html', () => {
+gulp.task('compile-html', (done) => {
     const htmlDest = './build';
     gulp.src('./src/index.html')
         .pipe(plumber())
@@ -78,6 +71,7 @@ gulp.task('compile-html', () => {
         .pipe(ejs())
         .pipe(gulp.dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
+    done();
 });
 
 gulp.task('html', () => {
@@ -111,22 +105,23 @@ gulp.task('cleanWebsite', () => del([dests.githubPages]));
 gulp.task('clean', () => del([dests.base]));
 
 gulp.task('copyWebsite', () => {
-    gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
+    return gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
 });
 
-gulp.task('build', ['copy', 'assets', 'compile-html', 'scripts', 'styles']);
+gulp.task('build', done => {
+    gulp.series('copy', 'assets', 'compile-html', 'scripts', 'styles')(done);
+});
 
 gulp.task('website', done => {
-    runSequence('clean', 'build', 'cleanWebsite', 'copyWebsite', () => done());
+    gulp.series('clean', 'build', 'cleanWebsite', 'copyWebsite')(done);
 });
 
 gulp.task('default', done => {
-    runSequence('clean', 'build', 'browserSync', () => {
+    gulp.series('clean', 'build', 'browserSync', () => {
         gulp.watch(srcs.html, ['compile-html']);
         gulp.watch(srcs.ejsTemplates, ['compile-html']);
         gulp.watch(srcs.assets, ['assets']);
         gulp.watch(srcs.scripts, ['scripts']);
         gulp.watch(srcs.styles, ['styles']);
-        done();
-    });
+    })(done);
 });
