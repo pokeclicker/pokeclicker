@@ -22,7 +22,7 @@ class MapHelper {
               Battle.generateNewEnemy();
             }
             Game.gameState(GameConstants.GameState.fighting);
-            Game.applyRouteBindings();
+            GameController.applyRouteBindings();
         }
         else {
           	let reqsList = '';
@@ -150,7 +150,7 @@ class MapHelper {
             player.currentTown(townName);
             //this should happen last, so all the values all set beforehand
             Game.gameState(GameConstants.GameState.town);
-            Game.applyRouteBindings();
+            GameController.applyRouteBindings();
         } else {
             const town = TownList[townName];
           	let reqsList = '';
