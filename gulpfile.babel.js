@@ -61,6 +61,11 @@ gulp.task('browserSync', () => {
             baseDir: dests.base
         }
     });
+    gulp.watch(srcs.html, gulp.series('compile-html'));
+    gulp.watch(srcs.ejsTemplates, gulp.series('compile-html'));
+    gulp.watch(srcs.assets, gulp.series('assets'));
+    gulp.watch(srcs.scripts, gulp.series('scripts'));
+    gulp.watch(srcs.styles, gulp.series('styles'));
 });
 
 gulp.task('compile-html', (done) => {
@@ -117,11 +122,5 @@ gulp.task('website', done => {
 });
 
 gulp.task('default', done => {
-    gulp.series('clean', 'build', 'browserSync', () => {
-        gulp.watch(srcs.html, ['compile-html']);
-        gulp.watch(srcs.ejsTemplates, ['compile-html']);
-        gulp.watch(srcs.assets, ['assets']);
-        gulp.watch(srcs.scripts, ['scripts']);
-        gulp.watch(srcs.styles, ['styles']);
-    })(done);
+    gulp.series('clean', 'build', 'browserSync')(done);
 });
