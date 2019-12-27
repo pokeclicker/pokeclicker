@@ -5,10 +5,6 @@
 let player;
 let game;
 
-interface JQuery {
-    animateNumber(options: object): void;
-}
-
 /**
  * Start the application when all html elements are loaded.
  */
