@@ -3,7 +3,6 @@
  * Will be done after the major player refactor.
  */
 let player;
-let game;
 
 /**
  * Start the application when all html elements are loaded.

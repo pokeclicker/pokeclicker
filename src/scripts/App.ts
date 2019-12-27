@@ -1,6 +1,7 @@
 class App {
 
     static readonly debug = false;
+    static game: Game;
 
     static start() {
         if (!App.debug)
@@ -9,7 +10,7 @@ class App {
         Preload.load(App.debug).then(function () {
             OakItemRunner.initialize();
             UndergroundItem.initialize();
-            game = new Game();
+            App.game = new Game();
 
             Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
 
@@ -18,12 +19,12 @@ class App {
             PokedexHelper.populateTypeFilters();
             PokedexHelper.updateList();
 
-            ko.applyBindings(game);
+            ko.applyBindings(App.game);
             ko.options.deferUpdates = true;
 
             GameController.applyRouteBindings();
             Preload.hideSplashScreen();
-            game.start();
+            App.game.start();
 
         });
     }

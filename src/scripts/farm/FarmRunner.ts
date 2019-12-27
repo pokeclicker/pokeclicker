@@ -6,7 +6,7 @@ class FarmRunner {
     public static openFarmModal() {
         if (FarmRunner.accessToFarm()) {
             this.plotPrice(this.computePlotPrice());
-            Game.gameState = GameConstants.GameState.paused;
+            App.game.gameState = GameConstants.GameState.paused;
             $('#farmModal').modal('show');
         } else {
             Notifier.notify("You don't have access to this location yet", GameConstants.NotificationOption.warning);
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#farmModal').on('hidden.bs.modal', function () {
         if (player.route() == 14) {
-            Game.gameState = GameConstants.GameState.fighting;
+            App.game.gameState = GameConstants.GameState.fighting;
         } else {
             MapHelper.moveToRoute(14, GameConstants.Region.kanto);
         }

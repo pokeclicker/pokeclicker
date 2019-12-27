@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $(document).on("keydown", function (e) {
         let keyCode = e.keyCode;
-        if (Game.gameState == GameConstants.GameState.safari) {
+        if (App.game.gameState == GameConstants.GameState.safari) {
             let dir = GameConstants.KeyToDirection[keyCode];
             if (dir) {
                 e.preventDefault();
@@ -15,7 +15,7 @@ $(document).ready(function () {
 
     $(document).on("keyup", function (e) {
         let keyCode = e.keyCode;
-        if (Game.gameState == GameConstants.GameState.safari) {
+        if (App.game.gameState == GameConstants.GameState.safari) {
             let dir = GameConstants.KeyToDirection[keyCode];
             if (dir) {
                 e.preventDefault();

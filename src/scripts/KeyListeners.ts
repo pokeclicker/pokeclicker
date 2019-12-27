@@ -1,7 +1,7 @@
 $(document).on("keydown", function (e) {
     let keyCode = e.keyCode;
 
-    if (Game.gameState == GameConstants.GameState.dungeon) {
+    if (App.game.gameState == GameConstants.GameState.dungeon) {
         if (keyCode == 38 || keyCode == 87) {
             DungeonRunner.map.moveUp();
         } else if (keyCode == 39 || keyCode == 68) {

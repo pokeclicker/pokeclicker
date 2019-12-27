@@ -14,13 +14,13 @@ class GymRunner {
             if (gym instanceof Champion) {
                 gym.setPokemon(player.starter);
             }
-            Game.gameState =GameConstants.GameState.idle;
+            App.game.gameState =GameConstants.GameState.idle;
 
             GymBattle.gym = gym;
             GymBattle.totalPokemons(gym.pokemons.length);
             GymBattle.index(0);
             GymBattle.generateNewEnemy();
-            Game.gameState = GameConstants.GameState.gym;
+            App.game.gameState = GameConstants.GameState.gym;
             GymRunner.timeLeft(GameConstants.GYM_TIME);
             this.resetGif();
             setTimeout(function () {
@@ -55,7 +55,7 @@ class GymRunner {
 
     public static gymLost() {
         Notifier.notify("It appears you are not strong enough to defeat " + GymBattle.gym.leaderName, GameConstants.NotificationOption.danger);
-        Game.gameState = GameConstants.GameState.town;
+        App.game.gameState = GameConstants.GameState.town;
     }
 
     public static gymWon(gym: Gym) {
@@ -69,7 +69,7 @@ class GymRunner {
         }
         GameHelper.incrementObservable(player.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);
-        Game.gameState = GameConstants.GameState.town;
+        App.game.gameState = GameConstants.GameState.town;
     }
 
     public static timeLeftSeconds = ko.computed(function () {

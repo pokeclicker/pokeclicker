@@ -6,8 +6,11 @@ class Game {
     undergroundCounter: number;
     public static achievementCounter: number = 0;
 
-    private static _gameState: KnockoutObservable<GameConstants.GameState>;
+    private _gameState: KnockoutObservable<GameConstants.GameState>;
 
+    /**
+     * TODO(@Isha) pass all features through the constructor
+     */
     constructor() {
         player = Save.load();
         KeyItemHandler.initialize();
@@ -16,7 +19,7 @@ class Game {
         player.gainKeyItem("Teachy tv", true);
         player.gainKeyItem("Pokeball bag", true);
 
-        Game._gameState = ko.observable(GameConstants.GameState.fighting);
+        this._gameState = ko.observable(GameConstants.GameState.fighting);
         this.load();
     }
 
@@ -43,7 +46,7 @@ class Game {
         Underground.counter += GameConstants.TICK_TIME;
 
         GameHelper.counter += GameConstants.TICK_TIME;
-        switch (Game.gameState) {
+        switch (App.game.gameState) {
             case GameConstants.GameState.fighting: {
                 Battle.counter += GameConstants.TICK_TIME;
                 if (Battle.counter > GameConstants.BATTLE_TICK) {
@@ -125,11 +128,11 @@ class Game {
     }
 
     // Knockout getters/setters
-    static get gameState() {
+    get gameState() {
         return this._gameState()
     }
 
-    static set gameState(value) {
+    set gameState(value) {
         this._gameState(value)
     }
 }
