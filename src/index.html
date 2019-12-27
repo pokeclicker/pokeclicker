@@ -141,11 +141,11 @@
         <div class="col-lg-6 col-md-12 order-md-first">
             <div id="interactionView" class="card border-secondary mb-3">
 
-                <div class="card-header p-0" data-bind="visible: (Game.gameState() === GameConstants.GameState.fighting ||
-                                     Game.gameState() === GameConstants.GameState.dungeon ||
-                                     Game.gameState() === GameConstants.GameState.paused ||
-                                     Game.gameState() === GameConstants.GameState.town ||
-                                     Game.gameState() === GameConstants.GameState.shop)">
+                <div class="card-header p-0" data-bind="visible: (Game.gameState === GameConstants.GameState.fighting ||
+                                     Game.gameState === GameConstants.GameState.dungeon ||
+                                     Game.gameState === GameConstants.GameState.paused ||
+                                     Game.gameState === GameConstants.GameState.town ||
+                                     Game.gameState === GameConstants.GameState.shop)">
                     <table width="100%">
                         <tr>
                             <td width="33.33%">
@@ -172,10 +172,10 @@
 
                 <!--RouteBattleView-->
                 <!--Use the base battle layout for fighting and dungeons.-->
-                <div class="card-body p-0" data-bind="if: (Game.gameState() === GameConstants.GameState.fighting || Game.gameState() === GameConstants.GameState.dungeon || Game.gameState() === GameConstants.GameState.paused || Game.gameState() === GameConstants.GameState.town)"
+                <div class="card-body p-0" data-bind="if: (Game.gameState === GameConstants.GameState.fighting || Game.gameState === GameConstants.GameState.dungeon || Game.gameState === GameConstants.GameState.paused || Game.gameState === GameConstants.GameState.town)"
                      id="routeBattleView">
 
-                    <div data-bind="if: Game.gameState() === GameConstants.GameState.fighting">
+                    <div data-bind="if: Game.gameState === GameConstants.GameState.fighting">
                         <div style="height: 220px; display: block;" class="col-lg-12">
                             <div class="col-lg-12" style="display: block;">
                                 Route
@@ -244,7 +244,7 @@
                     </div>
 
                     <!--If the player is in a dungeon-->
-                    <div data-bind="if: Game.gameState() === GameConstants.GameState.dungeon">
+                    <div data-bind="if: Game.gameState === GameConstants.GameState.dungeon">
                         <div class="col-lg-12" style="display: block; height: 220px">
                             <div>
                                 <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span>
@@ -331,7 +331,7 @@
 
                 <!--GymView-->
                 @import "gymView.html"
-                <div class="card-footer p-0" data-bind="hidden: Game.gameState() === GameConstants.GameState.town">
+                <div class="card-footer p-0" data-bind="hidden: Game.gameState === GameConstants.GameState.town">
                     <table width="100%">
                         <tr>
                             <td width="50%">
@@ -349,7 +349,7 @@
                 </div>
             </div>
 
-            <!-- ko if: Game.gameState() === GameConstants.GameState.dungeon -->
+            <!-- ko if: Game.gameState === GameConstants.GameState.dungeon -->
             <div class="card border-secondary mb-3 dungeon no-select">
                 <div class="card-header p-0">
                     <span data-bind="text: DungeonRunner.dungeon.name()"></span>
@@ -367,8 +367,8 @@
             <!-- /ko -->
 
             <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
-                <div data-bind="if: (Game.gameState() === GameConstants.GameState.fighting || Game.gameState() === GameConstants.GameState.gym || Game.gameState() === GameConstants.GameState.town||
-                    Game.gameState() === GameConstants.GameState.shop || Game.gameState() === GameConstants.GameState.farm || Game.gameState() === GameConstants.GameState.paused)">
+                <div data-bind="if: (Game.gameState === GameConstants.GameState.fighting || Game.gameState === GameConstants.GameState.gym || Game.gameState === GameConstants.GameState.town||
+                    Game.gameState === GameConstants.GameState.shop || Game.gameState === GameConstants.GameState.farm || Game.gameState === GameConstants.GameState.paused)">
                     <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                     <div class="page-item no-select">
                         <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">

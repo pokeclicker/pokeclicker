@@ -1,7 +1,7 @@
-$(document).ready(function() {
-    $(document).on("keydown", function(e) {
+$(document).ready(function () {
+    $(document).on("keydown", function (e) {
         let keyCode = e.keyCode;
-        if (Game.gameState() == GameConstants.GameState.safari) {
+        if (Game.gameState == GameConstants.GameState.safari) {
             let dir = GameConstants.KeyToDirection[keyCode];
             if (dir) {
                 e.preventDefault();
@@ -11,11 +11,11 @@ $(document).ready(function() {
                 e.preventDefault();
             }
         }
-    })
+    });
 
     $(document).on("keyup", function (e) {
         let keyCode = e.keyCode;
-        if(Game.gameState() == GameConstants.GameState.safari){
+        if (Game.gameState == GameConstants.GameState.safari) {
             let dir = GameConstants.KeyToDirection[keyCode];
             if (dir) {
                 e.preventDefault();
@@ -23,9 +23,8 @@ $(document).ready(function() {
             } else if (keyCode == 32) { // space
                 e.preventDefault();
             }
-            
         }
     });
 
     $("#pokedexModal").on("show.bs.modal", PokedexHelper.updateList)
-})
+});

@@ -21,7 +21,7 @@ class MapHelper {
             if (genNewEnemy){
               Battle.generateNewEnemy();
             }
-            Game.gameState(GameConstants.GameState.fighting);
+            Game.gameState = GameConstants.GameState.fighting;
             GameController.applyRouteBindings();
         }
         else {
@@ -144,12 +144,12 @@ class MapHelper {
 
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
-            Game.gameState(GameConstants.GameState.idle);
+            Game.gameState = GameConstants.GameState.idle;
             player.route(0);
             player.town(TownList[townName]);
             player.currentTown(townName);
             //this should happen last, so all the values all set beforehand
-            Game.gameState(GameConstants.GameState.town);
+            Game.gameState = GameConstants.GameState.town;
             GameController.applyRouteBindings();
         } else {
             const town = TownList[townName];

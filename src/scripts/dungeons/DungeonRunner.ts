@@ -32,7 +32,7 @@ class DungeonRunner {
             return DungeonRunner.map.currentTile().type;
         });
         DungeonRunner.fightingBoss(false);
-        Game.gameState(GameConstants.GameState.dungeon);
+        Game.gameState = GameConstants.GameState.dungeon;
     }
 
     public static tick() {
@@ -80,13 +80,13 @@ class DungeonRunner {
 
     private static dungeonLost() {
         DungeonRunner.fighting(false);
-        Game.gameState(GameConstants.GameState.town);
+        Game.gameState = GameConstants.GameState.town;
         Notifier.notify("You could not complete the dungeon in time", GameConstants.NotificationOption.danger);
     }
 
     public static dungeonWon() {
         GameHelper.incrementObservable(player.statistics.dungeonsCleared[Statistics.getDungeonIndex(DungeonRunner.dungeon.name())]);
-        Game.gameState(GameConstants.GameState.town);
+        Game.gameState = GameConstants.GameState.town;
         // TODO award loot with a special screen
         Notifier.notify("You have successfully completed the dungeon", GameConstants.NotificationOption.success);
     }
