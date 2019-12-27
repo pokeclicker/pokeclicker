@@ -50,7 +50,10 @@ class Breeding implements Feature {
     }
 
     fromJSON(json: object): void {
-        console.log(json);
+        if (json == null){
+            return;
+        }
+
         this._eggList = [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)];
         let saveEggList : object[] = json["eggList"];
 
