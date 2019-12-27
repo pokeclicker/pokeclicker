@@ -186,11 +186,8 @@ class Player {
         this.tutorialState = savedPlayer.tutorialState;
         this.tutorialComplete = ko.observable(!!savedPlayer.tutorialComplete);
 
-        //TODO remove before deployment
-        if (!debug) {
-            if (this.starter === GameConstants.Starter.None) {
-                StartSequenceRunner.start()
-            }
+        if (this.starter === GameConstants.Starter.None) {
+            StartSequenceRunner.start()
         }
     }
 

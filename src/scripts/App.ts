@@ -1,6 +1,12 @@
 class App {
+
+    static readonly debug = false;
+
     static start() {
-        Preload.load(debug).then(function () {
+        if (!App.debug)
+            Object.freeze(GameConstants);
+
+        Preload.load(App.debug).then(function () {
             OakItemRunner.initialize();
             UndergroundItem.initialize();
             game = new Game();

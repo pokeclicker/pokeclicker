@@ -1,10 +1,9 @@
-// TODO(@Isha) refactor this to no longer be global but App properties.
+/**
+ * TODO(@Isha) refactor this to no longer be global but App properties.
+ * Will be done after the major player refactor.
+ */
 let player;
-const debug = false;
 let game;
-
-if (!debug)
-    Object.freeze(GameConstants);
 
 interface JQuery {
     animateNumber(options: object): void;
