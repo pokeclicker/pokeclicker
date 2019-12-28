@@ -68,7 +68,7 @@ class Battle {
                     this.attemptCatch();
                     this.generateNewEnemy();
                 },
-                player.calculateCatchTime(pokeBall)
+                App.game.pokeballs.calculateCatchTime(pokeBall)
             )
             ;
 
@@ -101,7 +101,7 @@ class Battle {
         this.pokeball = ko.observable(pokeBall);
         this.catching(true);
         this.catchRateActual(this.calculateActualCatchRate(pokeBall));
-        player.usePokeball(pokeBall);
+        App.game.pokeballs.usePokeball(pokeBall);
     }
 
     protected static attemptCatch() {

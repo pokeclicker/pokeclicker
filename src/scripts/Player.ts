@@ -539,7 +539,7 @@ class Player {
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
             return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
-        }, this).extend({rateLimit: player.calculateCatchTime()})
+        }, this).extend({rateLimit: 1000})
     }
 
     public maxLevelPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {

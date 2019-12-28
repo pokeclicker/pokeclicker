@@ -33,9 +33,9 @@ class Pokeballs implements Feature {
         let pref: GameConstants.Pokeball;
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
         if (!alreadyCaught || (!alreadyCaughtShiny && isShiny)) {
-            pref = player._notCaughtBallSelection();
+            pref = this.notCaughtSelection;
         } else {
-            pref = player._alreadyCaughtBallSelection();
+            pref = this.alreadyCaughtSelection;
         }
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;

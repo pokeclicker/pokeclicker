@@ -25,7 +25,7 @@ class StartSequenceRunner {
                     function () {
                         player.starter = StartSequenceRunner.starterPicked;
                         StartSequenceRunner.showCaughtMessage()
-                    }, player.calculateCatchTime());
+                    }, 1000);
 
                 //reset the function so you don't call it too many times :)
                 //What a beautiful piece of code
