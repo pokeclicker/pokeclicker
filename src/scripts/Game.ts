@@ -46,7 +46,7 @@ class Game {
         Underground.counter += GameConstants.TICK_TIME;
 
         GameHelper.counter += GameConstants.TICK_TIME;
-        switch (App.game.gameState) {
+        switch (this.gameState) {
             case GameConstants.GameState.fighting: {
                 Battle.counter += GameConstants.TICK_TIME;
                 if (Battle.counter > GameConstants.BATTLE_TICK) {
