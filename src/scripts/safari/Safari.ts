@@ -262,7 +262,7 @@ class Safari {
 
     public static openModal() {
         if (player.hasKeyItem("Safari ticket")) {
-            Game.gameState(GameConstants.GameState.safari);
+            App.game.gameState = GameConstants.GameState.safari;
             Safari.load();
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
