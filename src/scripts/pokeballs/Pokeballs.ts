@@ -50,8 +50,17 @@ class Pokeballs implements Feature {
         return use;
     }
 
-    public calculateCatchTime(ball: GameConstants.Pokeball): number {
+    calculateCatchTime(ball: GameConstants.Pokeball): number {
         return this.pokeballCatchTime[ball];
+    }
+
+    gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
+        this._pokeballs[ball](this._pokeballs[ball]() + amount)
+    }
+
+    usePokeball(ball: GameConstants.Pokeball): void {
+        this._pokeballs[ball](this._pokeballs[ball]() - 1);
+        GameHelper.incrementObservable(player.statistics.pokeballsUsed[ball]);
     }
 
     getCatchBonus(ball: GameConstants.Pokeball) {
@@ -63,33 +72,37 @@ class Pokeballs implements Feature {
     }
 
     fromJSON(json: object): void {
+        if(json == null){
+            return
+        }
+        this._pokeballs = [
+            ko.observable(json[GameConstants.Pokeball.Pokeball]),
+            ko.observable(json[GameConstants.Pokeball.Greatball]),
+            ko.observable(json[GameConstants.Pokeball.Ultraball]),
+            ko.observable(json[GameConstants.Pokeball.Masterball]),
+        ]
     }
 
-
     toJSON(): object {
-        return undefined;
+        return [
+            this._pokeballs[GameConstants.Pokeball.Pokeball](),
+            this._pokeballs[GameConstants.Pokeball.Greatball](),
+            this._pokeballs[GameConstants.Pokeball.Ultraball](),
+            this._pokeballs[GameConstants.Pokeball.Masterball]()
+        ];
     }
 
     update(delta: number): void {
+        // This method intentionally left blank
     }
 
-    public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
-        this._pokeballs[ball](this._pokeballs[ball]() + amount)
-    }
-
-    public usePokeball(ball: GameConstants.Pokeball): void {
-        this._pokeballs[ball](this._pokeballs[ball]() - 1);
-        GameHelper.incrementObservable(player.statistics.pokeballsUsed[ball]);
-    }
-
-    public pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
+    pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
         return ko.computed(function () {
             return this._pokeballs[ball]();
         }, this);
     }
 
     // Knockout getters/setters
-
     get alreadyCaughtSelection() {
         return this._alreadyCaughtSelection();
     }

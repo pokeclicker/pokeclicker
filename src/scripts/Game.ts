@@ -25,7 +25,8 @@ class Game {
         let saveJSON = localStorage.getItem("save");
         if (saveJSON !== null) {
             let saveObject = JSON.parse(saveJSON);
-            this.breeding.fromJSON(saveObject[this.breeding.saveKey])
+            this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
+            this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
         }
 
         KeyItemHandler.initialize();
