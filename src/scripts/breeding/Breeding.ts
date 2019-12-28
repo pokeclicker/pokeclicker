@@ -50,15 +50,14 @@ class Breeding implements Feature {
     }
 
     fromJSON(json: object): void {
-        if (json == null){
+        if (json == null) {
             return;
         }
 
-        this._eggList = [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)];
-        let saveEggList : object[] = json["eggList"];
+        let saveEggList: object[] = json["eggList"];
 
         for (let i = 0; i < this._eggList.length; i++) {
-            if(saveEggList[i] != null){
+            if (saveEggList[i] != null) {
                 let egg: Egg = new Egg(null, null, null);
                 egg.fromJSON(saveEggList[i]);
                 this._eggList[i](egg);
@@ -81,7 +80,6 @@ class Breeding implements Feature {
     public canBreedPokemon(): boolean {
         return player.hasMaxLevelPokemon() && this.hasFreeEggSlot();
     }
-
 
     public hasFreeEggSlot(): boolean {
         let counter = 0;
@@ -161,8 +159,11 @@ class Breeding implements Feature {
             }
         }
 
-        if (shiny) Notifier.notify(`✨ You hatched a shiny ${egg.pokemon}! ✨`, GameConstants.NotificationOption.warning);
-        else Notifier.notify(`You hatched ${GameHelper.anOrA(egg.pokemon)} ${egg.pokemon}!`, GameConstants.NotificationOption.success);
+        if (shiny) {
+            Notifier.notify(`✨ You hatched a shiny ${egg.pokemon}! ✨`, GameConstants.NotificationOption.warning);
+        } else {
+            Notifier.notify(`You hatched ${GameHelper.anOrA(egg.pokemon)} ${egg.pokemon}!`, GameConstants.NotificationOption.success);
+        }
 
         player.capturePokemon(egg.pokemon, shiny);
 
@@ -237,7 +238,6 @@ class Breeding implements Feature {
         }
     }
 
-
     public buyEggSlot() {
         let cost: Cost = this.nextEggSlotCost();
         if (player.canAfford(cost)) {
@@ -255,7 +255,7 @@ class Breeding implements Feature {
         return this._eggSlots();
     }
 
-    set eggSlots(value :number ) {
+    set eggSlots(value: number) {
         this._eggSlots(value);
     }
 
