@@ -10,7 +10,7 @@ class Pokeballs implements Feature {
     private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
 
     constructor() {
-        this._pokeballs = [ko.observable(0), ko.observable(0), ko.observable(0), ko.observable(0)];
+        this._pokeballs = [ko.observable(10), ko.observable(0), ko.observable(0), ko.observable(0)];
         this._notCaughtSelection = ko.observable(GameConstants.Pokeball.Pokeball);
         this._alreadyCaughtSelection = ko.observable(GameConstants.Pokeball.None);
     }
