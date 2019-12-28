@@ -59,7 +59,7 @@ class Breeding implements Feature {
             return;
         }
 
-        this.eggSlots = json["eggSlots"] || this.defaults.eggSlots;
+        this.eggSlots = json["eggSlots"] ?? this.defaults.eggSlots;
 
         if (json["eggList"] == null) {
             this._eggList = this.defaults.eggList;
@@ -74,7 +74,6 @@ class Breeding implements Feature {
                 }
             }
         }
-
     }
 
 

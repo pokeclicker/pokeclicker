@@ -93,8 +93,8 @@ class Pokeballs implements Feature {
                 ko.observable(pokeballsJson[GameConstants.Pokeball.Masterball]),
             ];
         }
-        this.notCaughtSelection = json["notCaughtSelection"] || this.defaults.notCaughtSelection;
-        this.alreadyCaughtSelection = json["alreadyCaughtSelection"] || this.defaults.alreadyCaughtSelection;
+        this.notCaughtSelection = json["notCaughtSelection"] ?? this.defaults.notCaughtSelection;
+        this.alreadyCaughtSelection = json["alreadyCaughtSelection"] ?? this.defaults.alreadyCaughtSelection;
     }
 
     toJSON(): object {
