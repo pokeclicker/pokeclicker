@@ -1,6 +1,8 @@
 class Egg implements Saveable {
     saveKey: string = "egg";
 
+    defaults = {};
+
     totalSteps: number;
     steps: KnockoutObservable<number>;
     shinySteps: number;

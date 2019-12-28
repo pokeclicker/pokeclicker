@@ -4,14 +4,19 @@ class Breeding implements Feature {
     name: string = "Breeding";
     saveKey: string = "breeding";
 
+    defaults = {
+        'eggList': [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)],
+        'eggSlots': 1
+    };
+
     private _eggList: Array<KnockoutObservable<Egg | void>>;
     private _eggSlots: KnockoutObservable<number>;
 
     private hatchList: { [name: number]: string[][] } = {};
 
     constructor() {
-        this._eggList = [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)];
-        this._eggSlots = ko.observable(1);
+        this._eggList = this.defaults.eggList;
+        this._eggSlots = ko.observable(this.defaults.eggSlots);
     }
 
     initialize(): void {
@@ -54,16 +59,22 @@ class Breeding implements Feature {
             return;
         }
 
-        let saveEggList: object[] = json["eggList"];
+        this.eggSlots = json["eggSlots"] || this.defaults.eggSlots;
 
-        for (let i = 0; i < this._eggList.length; i++) {
-            if (saveEggList[i] != null) {
-                let egg: Egg = new Egg(null, null, null);
-                egg.fromJSON(saveEggList[i]);
-                this._eggList[i](egg);
+        if (json["eggList"] == null) {
+            this._eggList = this.defaults.eggList;
+        } else {
+            let saveEggList: object[] = json["eggList"];
+
+            for (let i = 0; i < this._eggList.length; i++) {
+                if (saveEggList[i] != null) {
+                    let egg: Egg = new Egg(null, null, null);
+                    egg.fromJSON(saveEggList[i]);
+                    this._eggList[i](egg);
+                }
             }
         }
-        this.eggSlots = json["eggSlots"];
+
     }
 
 

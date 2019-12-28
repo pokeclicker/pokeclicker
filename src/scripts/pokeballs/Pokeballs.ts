@@ -2,17 +2,23 @@ class Pokeballs implements Feature {
     name: string = "Pokeball inventory";
     saveKey: string = "pokeballs";
 
+    defaults = {
+        'pokeballs': [ko.observable(10), ko.observable(0), ko.observable(0), ko.observable(0)],
+        'notCaughtSelection': GameConstants.Pokeball.Pokeball,
+        'alreadyCaughtSelection': GameConstants.Pokeball.None,
+    };
+
     private pokeballCatchBonus: number[];
     private pokeballCatchTime: number[];
 
-    private _pokeballs: Array<KnockoutObservable<number>>;
+    protected _pokeballs: Array<KnockoutObservable<number>>;
     private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
 
     constructor() {
-        this._pokeballs = [ko.observable(10), ko.observable(0), ko.observable(0), ko.observable(0)];
-        this._notCaughtSelection = ko.observable(GameConstants.Pokeball.Pokeball);
-        this._alreadyCaughtSelection = ko.observable(GameConstants.Pokeball.None);
+        this._pokeballs = this.defaults.pokeballs;
+        this._notCaughtSelection = ko.observable(this.defaults.notCaughtSelection);
+        this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
     }
 
     initialize(): void {
@@ -76,16 +82,19 @@ class Pokeballs implements Feature {
             return
         }
 
-        let pokeballsJson = json["pokeballs"];
-        this._pokeballs = [
-            ko.observable(pokeballsJson[GameConstants.Pokeball.Pokeball]),
-            ko.observable(pokeballsJson[GameConstants.Pokeball.Greatball]),
-            ko.observable(pokeballsJson[GameConstants.Pokeball.Ultraball]),
-            ko.observable(pokeballsJson[GameConstants.Pokeball.Masterball]),
-        ];
-
-        this.notCaughtSelection = json["notCaughtSelection"];
-        this.alreadyCaughtSelection = json["alreadyCaughtSelection"];
+        if (json["pokeballs"] == null) {
+            this._pokeballs = this.defaults.pokeballs;
+        } else {
+            let pokeballsJson = json["pokeballs"];
+            this._pokeballs = [
+                ko.observable(pokeballsJson[GameConstants.Pokeball.Pokeball]),
+                ko.observable(pokeballsJson[GameConstants.Pokeball.Greatball]),
+                ko.observable(pokeballsJson[GameConstants.Pokeball.Ultraball]),
+                ko.observable(pokeballsJson[GameConstants.Pokeball.Masterball]),
+            ];
+        }
+        this.notCaughtSelection = json["notCaughtSelection"] || this.defaults.notCaughtSelection;
+        this.alreadyCaughtSelection = json["alreadyCaughtSelection"] || this.defaults.alreadyCaughtSelection;
     }
 
     toJSON(): object {
