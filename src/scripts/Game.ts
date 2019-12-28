@@ -7,15 +7,17 @@ class Game {
     public static achievementCounter: number = 0;
 
     public breeding: Breeding;
+    public pokeballs: Pokeballs;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
     /**
      * TODO(@Isha) pass all features through the constructor
      */
-    constructor(breeding: Breeding) {
+    constructor(breeding: Breeding, pokeballs: Pokeballs) {
         this.breeding = breeding;
-        this.breeding.initialize();
+        this.pokeballs = pokeballs;
+
 
         player = Save.load();
 
