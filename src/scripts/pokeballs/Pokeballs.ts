@@ -5,12 +5,12 @@ class Pokeballs implements Feature {
     private pokeballCatchBonus: number[];
     private pokeballCatchTime: number[];
 
-    private _pokeballs: Array<KnockoutObservable<number>>;
+    public pokeballs: ArrayOfObservables<number>;
     private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
 
     constructor() {
-        this._pokeballs = [ko.observable(10), ko.observable(0), ko.observable(0), ko.observable(0)];
+        this.pokeballs = new ArrayOfObservables([10,0,0,0]);
         this._notCaughtSelection = ko.observable(GameConstants.Pokeball.Pokeball);
         this._alreadyCaughtSelection = ko.observable(GameConstants.Pokeball.None);
     }
@@ -42,7 +42,7 @@ class Pokeballs implements Feature {
 
         // Check which Pokeballs we have in stock that are of equal or lesser than selection
         for (let i: number = pref; i >= 0; i--) {
-            if (this._pokeballs[i]() > 0) {
+            if (this.pokeballs[i] > 0) {
                 use = i;
                 break;
             }
@@ -55,11 +55,11 @@ class Pokeballs implements Feature {
     }
 
     gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
-        this._pokeballs[ball](this._pokeballs[ball]() + amount)
+        this.pokeballs[ball] += amount;
     }
 
     usePokeball(ball: GameConstants.Pokeball): void {
-        this._pokeballs[ball](this._pokeballs[ball]() - 1);
+        this.pokeballs[ball] -= 1;
         GameHelper.incrementObservable(player.statistics.pokeballsUsed[ball]);
     }
 
@@ -77,12 +77,12 @@ class Pokeballs implements Feature {
         }
 
         let pokeballsJson = json["pokeballs"];
-        this._pokeballs = [
-            ko.observable(pokeballsJson[GameConstants.Pokeball.Pokeball]),
-            ko.observable(pokeballsJson[GameConstants.Pokeball.Greatball]),
-            ko.observable(pokeballsJson[GameConstants.Pokeball.Ultraball]),
-            ko.observable(pokeballsJson[GameConstants.Pokeball.Masterball]),
-        ];
+        this.pokeballs = new ArrayOfObservables([
+            pokeballsJson[GameConstants.Pokeball.Pokeball],
+            pokeballsJson[GameConstants.Pokeball.Greatball],
+            pokeballsJson[GameConstants.Pokeball.Ultraball],
+            pokeballsJson[GameConstants.Pokeball.Masterball],
+        ]);
 
         this.notCaughtSelection = json["notCaughtSelection"];
         this.alreadyCaughtSelection = json["alreadyCaughtSelection"];
@@ -91,10 +91,10 @@ class Pokeballs implements Feature {
     toJSON(): object {
         return {
             "pokeballs": [
-                this._pokeballs[GameConstants.Pokeball.Pokeball](),
-                this._pokeballs[GameConstants.Pokeball.Greatball](),
-                this._pokeballs[GameConstants.Pokeball.Ultraball](),
-                this._pokeballs[GameConstants.Pokeball.Masterball]()
+                this.pokeballs[GameConstants.Pokeball.Pokeball],
+                this.pokeballs[GameConstants.Pokeball.Greatball],
+                this.pokeballs[GameConstants.Pokeball.Ultraball],
+                this.pokeballs[GameConstants.Pokeball.Masterball]
             ],
             "notCaughtSelection": this.notCaughtSelection,
             "alreadyCaughtSelection": this.alreadyCaughtSelection
@@ -103,12 +103,6 @@ class Pokeballs implements Feature {
 
     update(delta: number): void {
         // This method intentionally left blank
-    }
-
-    pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
-        return ko.computed(function () {
-            return this._pokeballs[ball]();
-        }, this);
     }
 
     // Knockout getters/setters
