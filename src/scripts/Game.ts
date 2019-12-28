@@ -36,6 +36,11 @@ class Game {
         this.load();
     }
 
+    initialize() {
+        this.breeding.initialize();
+        this.pokeballs.initialize();
+    }
+
     start() {
         console.log("game started");
         this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
