@@ -2,12 +2,12 @@ class Pokeballs implements Feature {
     name: string = "Pokeball inventory";
     saveKey: string = "pokeballs";
 
-    private pokeballCatchBonus = [0, 5, 10, 100,];
-    private pokeballCatchTime = [1250, 1000, 750, 500,];
+    private pokeballCatchBonus: number[];
+    private pokeballCatchTime: number[];
 
     private _pokeballs: Array<KnockoutObservable<number>>;
-    private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _notCaughtSelection: KnockoutObservable<Pokeball>;
+    private _alreadyCaughtSelection: KnockoutObservable<Pokeball>;
 
     constructor() {
         this._pokeballs = [ko.observable(0), ko.observable(0), ko.observable(0), ko.observable(0)];
@@ -16,6 +16,8 @@ class Pokeballs implements Feature {
     }
 
     initialize(): void {
+        this.pokeballCatchBonus = [0, 5, 10, 100];
+        this.pokeballCatchTime = [1250, 1000, 750, 500];
     }
 
     /**
