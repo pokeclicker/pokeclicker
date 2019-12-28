@@ -186,11 +186,8 @@ class Player {
         this.tutorialState = savedPlayer.tutorialState;
         this.tutorialComplete = ko.observable(!!savedPlayer.tutorialComplete);
 
-        //TODO remove before deployment
-        if (!debug) {
-            if (this.starter === GameConstants.Starter.None) {
-                StartSequenceRunner.start()
-            }
+        if (this.starter === GameConstants.Starter.None) {
+            StartSequenceRunner.start()
         }
     }
 
@@ -471,9 +468,9 @@ class Player {
         }
         this._money(this._money() + moneytogain);
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
-        Game.updateMoney();
+        GameController.updateMoney();
 
-        Game.animateMoney(moneytogain,'playerMoney');
+        GameController.animateMoney(moneytogain,'playerMoney');
     }
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
@@ -546,7 +543,7 @@ class Player {
     public payMoney(money: number): boolean {
         if (this.hasMoney(money)) {
             this._money(Math.floor(this._money() - money));
-            Game.updateMoney();
+            GameController.updateMoney();
             return true;
         } else {
             return false;
@@ -697,7 +694,7 @@ class Player {
         this.dungeonTokens(this.dungeonTokens() + tokens);
 
         GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
-        Game.animateMoney(tokens,'playerMoneyDungeon');
+        GameController.animateMoney(tokens,'playerMoneyDungeon');
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
@@ -992,7 +989,7 @@ class Player {
     public gainQuestPoints(value: number) {
         player.questPoints += value;
         GameHelper.incrementObservable(this.statistics.totalQuestPoints, value);
-        Game.animateMoney(value,'playerMoneyQuest');
+        GameController.animateMoney(value,'playerMoneyQuest');
     }
 
     public toJSON() {

@@ -3,7 +3,7 @@ class StartSequenceRunner {
     public static starterPicked: GameConstants.Starter = GameConstants.Starter.None
 
     public static start() {
-        Game.gameState(GameConstants.GameState.paused);
+        App.game.gameState = GameConstants.GameState.paused;
         $('#startSequenceModal').modal('show');
 
     }
@@ -14,7 +14,7 @@ class StartSequenceRunner {
         let dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
         let shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
 
-        Game.gameState(GameConstants.GameState.fighting);
+        App.game.gameState = GameConstants.GameState.fighting;
 
         let battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, 0, shiny);
         Battle.enemyPokemon(battlePokemon);
@@ -38,7 +38,7 @@ class StartSequenceRunner {
     }
 
     public static showCaughtMessage() {
-        Game.gameState(GameConstants.GameState.paused);
+        App.game.gameState = GameConstants.GameState.paused;
         $('#starterCaughtModal').modal('show');
         $('#pokeballSelector').css('display', 'block');
         $('#pokemonListContainer').css('display', 'block');
@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#starterCaughtModal').on('hidden.bs.modal', function () {
         Save.store(player);
-        Game.gameState(GameConstants.GameState.fighting);
+        App.game.gameState = GameConstants.GameState.fighting;
 
     });
 });
