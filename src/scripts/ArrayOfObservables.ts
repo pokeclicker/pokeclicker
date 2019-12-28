@@ -28,7 +28,7 @@ class ArrayOfObservables<T> extends Array<T> implements Array<T>{
 				target[prop] = ko.observable(value);
 			}
 
-			return value
+			return true
 		}
 	}
 	
