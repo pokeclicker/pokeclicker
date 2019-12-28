@@ -10,7 +10,7 @@ class PokeballItem extends Item {
     }
 
     gain(amt: number) {
-        player.gainPokeballs(this.type, amt);
+        App.game.pokeballs.gainPokeballs(this.type, amt);
         GameHelper.incrementObservable(player.statistics.pokeballsBought[this.type], amt);
     }
 
