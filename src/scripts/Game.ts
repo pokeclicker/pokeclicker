@@ -25,7 +25,7 @@ class Game {
 
     start() {
         console.log("game started");
-        this.interval = setInterval(this.gameTick, GameConstants.TICK_TIME);
+        this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
     }
 
     stop() {
