@@ -179,9 +179,6 @@ class Player {
         this.tutorialState = savedPlayer.tutorialState;
         this.tutorialComplete = ko.observable(!!savedPlayer.tutorialComplete);
 
-        if (this.starter === GameConstants.Starter.None) {
-            StartSequenceRunner.start()
-        }
     }
 
     private _itemList: { [name: string]: KnockoutObservable<number> };
