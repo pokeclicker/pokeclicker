@@ -11,6 +11,7 @@ class Save {
         let saveObject = {};
 
         saveObject[Underground.saveKey] = Underground.save();
+        saveObject[App.game.breeding.saveKey] = App.game.breeding.toJSON();
 
         localStorage.setItem("save", JSON.stringify(saveObject));
 

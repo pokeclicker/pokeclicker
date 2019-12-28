@@ -19,10 +19,10 @@ class EggItem extends Item {
 
         let success: boolean;
         if (this.type === GameConstants.EggItemType.Mystery_egg) {
-            success = player.gainEgg(BreedingHelper.createRandomEgg());
+            success = App.game.breeding.gainRandomEgg();
         } else {
             let etype = GameConstants.EggType[GameConstants.EggItemType[this.type].split("_")[0]];
-            success = player.gainEgg(BreedingHelper.createTypedEgg(etype));
+            success = App.game.breeding.gainEgg(App.game.breeding.createTypedEgg(etype));
         }
 
         if (success) {

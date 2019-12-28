@@ -92,7 +92,7 @@ class Underground {
         let index = player.mineInventoryIndex(id);
         let item = Underground.getMineItemById(id);
 
-        if(item.isStone()){
+        if (item.isStone()) {
             let evostone: EvolutionStone = ItemList[item.valueType];
             evostone.gain(num);
             return;
@@ -166,7 +166,10 @@ class Underground {
                 player.diamonds += item.value;
                 break;
             case "Mine Egg":
-                success = player.gainEgg(BreedingHelper.createFossilEgg(item.name));
+                if (!App.game.breeding.hasFreeEggSlot()) {
+                    return false;
+                }
+                success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
                 break;
             default:
                 let type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string

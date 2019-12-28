@@ -6,13 +6,26 @@ class Game {
     undergroundCounter: number;
     public static achievementCounter: number = 0;
 
+    public breeding: Breeding;
+
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
     /**
      * TODO(@Isha) pass all features through the constructor
      */
-    constructor() {
+    constructor(breeding: Breeding) {
+        this.breeding = breeding;
+        this.breeding.initialize();
+
         player = Save.load();
+
+        // TODO(@Isha) Refactor this saving logic
+        let saveJSON = localStorage.getItem("save");
+        if (saveJSON !== null) {
+            let saveObject = JSON.parse(saveJSON);
+            this.breeding.fromJSON(saveObject[this.breeding.saveKey])
+        }
+
         KeyItemHandler.initialize();
         AchievementHandler.initialize();
         player.gainKeyItem("Coin case", true);
