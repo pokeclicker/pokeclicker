@@ -45,6 +45,9 @@ class Game {
 
     start() {
         console.log("game started");
+        if (player.starter === GameConstants.Starter.None) {
+            StartSequenceRunner.start()
+        }
         this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
     }
 
