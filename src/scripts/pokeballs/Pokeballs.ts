@@ -6,8 +6,8 @@ class Pokeballs implements Feature {
     private pokeballCatchTime: number[];
 
     private _pokeballs: Array<KnockoutObservable<number>>;
-    private _notCaughtSelection: KnockoutObservable<Pokeball>;
-    private _alreadyCaughtSelection: KnockoutObservable<Pokeball>;
+    private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
 
     constructor() {
         this._pokeballs = [ko.observable(0), ko.observable(0), ko.observable(0), ko.observable(0)];
