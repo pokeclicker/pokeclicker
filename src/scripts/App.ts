@@ -4,8 +4,9 @@ class App {
     static game: Game;
 
     static start() {
-        if (!App.debug)
+        if (!App.debug) {
             Object.freeze(GameConstants);
+        }
 
         Preload.load(App.debug).then(function () {
             OakItemRunner.initialize();
