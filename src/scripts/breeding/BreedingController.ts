@@ -1,7 +1,7 @@
 class BreedingController {
     public static openBreedingModal() {
-        if (game.breeding.canAccess()) {
-            Game.gameState(GameConstants.GameState.paused);
+        if (App.game.breeding.canAccess()) {
+            App.game.gameState = GameConstants.GameState.paused;
             $('#breedingModal').modal('show');
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
