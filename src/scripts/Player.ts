@@ -24,9 +24,6 @@ class Player {
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
     private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
-    private _pokeballs: Array<KnockoutObservable<number>>;
-    private _notCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _alreadyCaughtBallSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
@@ -84,15 +81,6 @@ class Player {
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
-        this._pokeballs = Array.apply(null, Array(4)).map(function (val, index) {
-            let amt = index == 0 ? 50 : 0;
-            if (savedPlayer._pokeballs && typeof savedPlayer._pokeballs[index] == 'number') {
-                amt = savedPlayer._pokeballs[index];
-            }
-            return ko.observable(amt);
-        });
-        this._notCaughtBallSelection = typeof(savedPlayer._notCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._notCaughtBallSelection) : ko.observable(GameConstants.Pokeball.Pokeball);
-        this._alreadyCaughtBallSelection = typeof(savedPlayer._alreadyCaughtBallSelection) != 'undefined' ? ko.observable(savedPlayer._alreadyCaughtBallSelection) : ko.observable(GameConstants.Pokeball.None);
         if (this._gymBadges().length == 0) {
             this._gymBadges.push(GameConstants.Badge.None)
         }
@@ -237,29 +225,6 @@ class Player {
         }, this);
     }
 
-    public pokeballsObservable(ball: GameConstants.Pokeball): KnockoutComputed<number> {
-        return ko.computed(function () {
-            return this._pokeballs[ball]();
-        }, this);
-    }
-
-    public setAlreadyCaughtBallSelection(ball: GameConstants.Pokeball) {
-        this._alreadyCaughtBallSelection(ball);
-    }
-
-    public setNotCaughtBallSelection(ball: GameConstants.Pokeball) {
-        this._notCaughtBallSelection(ball);
-    }
-
-    public gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
-        this._pokeballs[ball](this._pokeballs[ball]() + amount)
-    }
-
-    public usePokeball(ball: GameConstants.Pokeball): void {
-        this._pokeballs[ball](this._pokeballs[ball]() - 1)
-        GameHelper.incrementObservable(this.statistics.pokeballsUsed[ball]);
-    }
-
     public addRouteKill() {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
@@ -345,51 +310,6 @@ class Player {
     public calculateDungeonTokenMultiplier(): number {
         // TODO Calculate dungeon token multiplier by checking upgrades and multipliers.
         return 1;
-    }
-
-    public calculateCatchTime(ball?: GameConstants.Pokeball): number {
-        switch (ball) {
-            case GameConstants.Pokeball.Pokeball:
-                return 1250;
-            case GameConstants.Pokeball.Greatball:
-                return 1000;
-            case GameConstants.Pokeball.Ultraball:
-                return 750;
-            case GameConstants.Pokeball.Masterball:
-                return 500;
-            default:
-                return 1250;
-        }
-    }
-
-    /**
-     * Checks the players preferences to see what pokéball needs to be used on the next throw.
-     * Checks from the players pref to the most basic ball to see if the player has any.
-     * @param alreadyCaught if the pokémon is already caught.
-     * @param shiny if the pokémon is shiny.
-     * @returns {GameConstants.Pokeball} pokéball to use.
-     */
-    public calculatePokeballToUse(pokemonName: string, isShiny: boolean): GameConstants.Pokeball {
-        const alreadyCaught = this.alreadyCaughtPokemon(pokemonName);
-        const alreadyCaughtShiny = this.alreadyCaughtPokemonShiny(pokemonName);
-        let pref: GameConstants.Pokeball;
-        // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
-        if (!alreadyCaught || (!alreadyCaughtShiny && isShiny)) {
-            pref = this._notCaughtBallSelection();
-        } else {
-            pref = this._alreadyCaughtBallSelection();
-        }
-
-        let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
-
-        // Check which Pokeballs we have in stock that are of equal or lesser than selection
-        for (let i: number = pref; i >= 0; i--) {
-            if (this._pokeballs[i]() > 0) {
-                use = i;
-                break;
-            }
-        }
-        return use;
     }
 
     /**
@@ -946,9 +866,6 @@ class Player {
             "_routeKillsNeeded",
             "_region",
             "_gymBadges",
-            "_pokeballs",
-            "_notCaughtBallSelection",
-            "_alreadyCaughtBallSelection",
             "_sortOption",
             "_sortDescending",
             "_starter",

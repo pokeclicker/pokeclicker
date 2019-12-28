@@ -252,17 +252,6 @@ namespace GameConstants {
         Very = 2
     }
 
-    export const PokeballCatchBonus = [
-        0,
-        5,
-        10,
-        100,
-    ];
-
-    export function getCatchBonus(ball: GameConstants.Pokeball) {
-        return GameConstants.PokeballCatchBonus[ball];
-    }
-
     export function humanifyString(str: string) {
         return str.replace(/_/g, ' ');
     }
