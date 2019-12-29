@@ -43,10 +43,6 @@ class GameController {
             });
     }
 
-    static updateMoney(text: string = $("#playerMoney").text()) {
-        $("#playerMoney").prop('number', player.money);
-    }
-
     static bindToolTips() {
         $(document).ready(function () {
             $('[data-toggle="popover"]').popover();

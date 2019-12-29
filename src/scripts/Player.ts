@@ -378,7 +378,6 @@ class Player {
         }
         this._money(this._money() + moneytogain);
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
-        GameController.updateMoney();
 
         GameController.animateCurrency(moneytogain,'playerMoney');
     }
@@ -453,7 +452,6 @@ class Player {
     public payMoney(money: number): boolean {
         if (this.hasMoney(money)) {
             this._money(Math.floor(this._money() - money));
-            GameController.updateMoney();
             return true;
         } else {
             return false;
