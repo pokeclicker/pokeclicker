@@ -121,6 +121,11 @@ gulp.task('website', done => {
     gulp.series('clean', 'build', 'cleanWebsite', 'copyWebsite')(done);
 });
 
+gulp.task('heroku:production', done => {
+    gulp.series('clean', 'build', 'cleanWebsite', 'copyWebsite')(done);
+});
+
+
 gulp.task('default', done => {
     gulp.series('clean', 'build', 'browserSync')(done);
 });

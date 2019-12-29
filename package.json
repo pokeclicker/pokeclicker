@@ -6,6 +6,7 @@
   "scripts": {
     "start": "gulp",
     "website": "gulp website",
+    "deploy": "gulp heroku:production",
     "test": "gulp scripts"
   },
   "repository": {
