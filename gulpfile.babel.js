@@ -11,7 +11,8 @@ const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
 const ejs = require("gulp-ejs");
 const plumber = require("gulp-plumber");
-
+const replace = require('gulp-replace');
+const connect = require('gulp-connect');
 
 /**
  * Push build to gh-pages
@@ -70,9 +71,18 @@ gulp.task('browserSync', () => {
 
 gulp.task('compile-html', (done) => {
     const htmlDest = './build';
-    gulp.src('./src/index.html')
-        .pipe(plumber())
+
+    let stream = gulp.src('./src/index.html');
+    if (process.env.HEROKU) {
+        stream.pipe(replace("<!--$DEV_BANNER-->", "@import \"developmentBanner.html\""))
+    }
+    stream.pipe(replace("$INIT_SENTRY", process.env.HEROKU !== undefined));
+    stream.pipe(replace("$INIT_GOOGLE_ANALYTICS", process.env.HEROKU !== undefined));
+
+    stream.pipe(plumber())
         .pipe(gulpImport('./src/components/'))
+        .pipe(replace("$GIT_BRANCH", process.env.GIT_BRANCH))
+        .pipe(replace("$DEV_DESCRIPTION", process.env.DEV_DESCRIPTION !== undefined ? process.env.DEV_DESCRIPTION : ""))
         .pipe(ejs())
         .pipe(gulp.dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
@@ -119,6 +129,19 @@ gulp.task('build', done => {
 
 gulp.task('website', done => {
     gulp.series('clean', 'build', 'cleanWebsite', 'copyWebsite')(done);
+});
+
+gulp.task('serveProd', function () {
+    connect.server({
+        root: ['build'],
+        port: process.env.PORT || 3000,
+        host: "0.0.0.0",
+        livereload: false
+    });
+});
+
+gulp.task('heroku', done => {
+    gulp.series('clean', 'build', 'serveProd')(done);
 });
 
 gulp.task('default', done => {

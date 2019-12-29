@@ -8,5 +8,5 @@ let player;
  * Start the application when all html elements are loaded.
  */
 document.addEventListener("DOMContentLoaded", function () {
-    App.start()
+    App.start();
 });
