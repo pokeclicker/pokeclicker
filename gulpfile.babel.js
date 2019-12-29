@@ -75,7 +75,7 @@ gulp.task('compile-html', (done) => {
 
     git.revParse({args: '--abbrev-ref HEAD'}, function (err, branch) {
         let stream = gulp.src('./src/index.html');
-        if (process.env.HEROKU || true) {
+        if (process.env.HEROKU) {
             stream.pipe(replace("<!--$DEV_BANNER-->", "@import \"developmentBanner.html\""))
         }
 
