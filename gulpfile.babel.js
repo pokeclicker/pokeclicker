@@ -11,7 +11,6 @@ const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
 const ejs = require("gulp-ejs");
 const plumber = require("gulp-plumber");
-const git = require('gulp-git');
 const replace = require('gulp-replace')
 
 /**
@@ -73,21 +72,19 @@ gulp.task('browserSync', () => {
 gulp.task('compile-html', (done) => {
     const htmlDest = './build';
 
-    git.revParse({args: '--abbrev-ref HEAD'}, function (err, branch) {
-        let stream = gulp.src('./src/index.html');
-        if (process.env.HEROKU) {
-            stream.pipe(replace("<!--$DEV_BANNER-->", "@import \"developmentBanner.html\""))
-        }
-        stream.pipe(replace("$INIT_SENTRY", process.env.HEROKU !== undefined));
+    let stream = gulp.src('./src/index.html');
+    if (process.env.HEROKU) {
+        stream.pipe(replace("<!--$DEV_BANNER-->", "@import \"developmentBanner.html\""))
+    }
+    stream.pipe(replace("$INIT_SENTRY", process.env.HEROKU !== undefined));
 
-        stream.pipe(plumber())
-            .pipe(gulpImport('./src/components/'))
-            .pipe(replace("$GIT_BRANCH", branch))
-            .pipe(ejs())
-            .pipe(gulp.dest(htmlDest))
-            .pipe(browserSync.reload({stream: true}));
-        done();
-    });
+    stream.pipe(plumber())
+        .pipe(gulpImport('./src/components/'))
+        .pipe(replace("$GIT_BRANCH", process.env.GIT_BRANCH))
+        .pipe(ejs())
+        .pipe(gulp.dest(htmlDest))
+        .pipe(browserSync.reload({stream: true}));
+    done();
 
 
 });
