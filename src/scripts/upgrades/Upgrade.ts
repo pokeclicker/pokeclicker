@@ -44,7 +44,7 @@ class Upgrade {
     }
 
     canAfford(): boolean {
-        return player.canAfford(this.calculateCost());
+        return App.game.wallet.hasAmount(this.calculateCost());
     }
 
     // Override in subclass when other requirements exist.
@@ -54,7 +54,7 @@ class Upgrade {
 
     buy() {
         if (this.canBuy()) {
-            player.payCost(this.calculateCost());
+            App.game.wallet.loseAmount(this.calculateCost());
             this.levelUp();
         }
     }

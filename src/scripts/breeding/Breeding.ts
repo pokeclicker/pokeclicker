@@ -250,8 +250,8 @@ class Breeding implements Feature {
 
     public buyEggSlot() {
         let cost: Amount = this.nextEggSlotCost();
-        if (player.canAfford(cost)) {
-            player.payCost(cost);
+        if (App.game.wallet.hasAmount(cost)) {
+            App.game.wallet.loseAmount(cost);
             this.gainEggSlot();
         }
     }

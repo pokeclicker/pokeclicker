@@ -33,8 +33,8 @@ abstract class Item {
 
         let multiple = n > 1 ? "s" : "";
 
-        if (player.hasCurrency(this.totalPrice(n), this.currency)) {
-            player.payCurrency(this.totalPrice(n), this.currency);
+        if (App.game.wallet.hasAmount(new Amount(this.totalPrice(n), this.currency))) {
+            App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency));
             this.gain(n);
             this.increasePriceMultiplier(n);
             Notifier.notify("You bought " + n + " " + this.name() + multiple, GameConstants.NotificationOption.success)

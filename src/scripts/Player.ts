@@ -358,42 +358,12 @@ class Player {
         this._itemList = value;
     }
 
-    public hasCurrency(amt: number, curr: GameConstants.Currency): boolean {
-        switch (curr) {
-            case GameConstants.Currency.questPoint:
-                return this.hasQuestPoints(amt);
-            case GameConstants.Currency.diamond:
-                return this.hasDiamonds(amt);
-            default:
-                return false;
-        }
-    }
-
-    public canAfford(cost: Amount) {
-        return this.hasCurrency(cost.amount, cost.currency);
-    }
-
     public hasQuestPoints(questPoints: number) {
         return this._questPoints() >= questPoints;
     }
 
     public hasDiamonds(diamonds: number) {
         return this._diamonds() >= diamonds;
-    }
-
-    public payCurrency(amt: number, curr: GameConstants.Currency): boolean {
-        switch (curr) {
-            case GameConstants.Currency.questPoint:
-                return this.payQuestPoints(amt);
-            case GameConstants.Currency.diamond:
-                return this.payDiamonds(amt);
-            default:
-                return false;
-        }
-    }
-
-    public payCost(cost: Amount): boolean {
-        return this.payCurrency(cost.amount, cost.currency);
     }
 
     public payQuestPoints(questPoints: number): boolean {
