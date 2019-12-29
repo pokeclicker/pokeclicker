@@ -82,6 +82,7 @@ gulp.task('compile-html', (done) => {
     stream.pipe(plumber())
         .pipe(gulpImport('./src/components/'))
         .pipe(replace("$GIT_BRANCH", process.env.GIT_BRANCH))
+        .pipe(replace("$DEV_DESCRIPTION", process.env.DEV_DESCRIPTION !== undefined ? process.env.DEV_DESCRIPTION : ""))
         .pipe(ejs())
         .pipe(gulp.dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
