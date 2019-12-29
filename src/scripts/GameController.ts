@@ -18,25 +18,26 @@ class GameController {
         });
     }
 
-    static animateMoney(money, target) {
+    static animateCurrency(amount: number, target) {
         let pos;
         if ($('#' + target).offset()) {
             pos = $('#' + target).offset();
+            pos.top -= 15;
         } else {
             pos = {"top": -200, "left": 0};
         }
 
         let left = ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
-        let place = money.toString().length;
+        let place = amount.toString().length;
         let multi = 1;
         for (let i = 0; i < place; i++) {
             multi *= 10;
         }
-        let ani = '<p class="moneyanimation" style="z-index:50;position:absolute;left:' + left + 'px;top:' + pos.top + 'px;">+' + money + '</p>';
+        let ani = '<p style="z-index:50;position:absolute;left:' + left + 'px;top:' + pos.top + 'px; font-size:' + (10 + 0.5 * Math.log(amount)) + 'px;">+' + amount.toLocaleString('en-US') + '</p>';
         $(ani).prependTo('body').animate({
-                top: -100,
+                top: 10,
                 opacity: 0
-            }, 250 * Math.log(money) + 150, "linear",
+            }, 200 * Math.log(amount) + 1000, "linear",
             function () {
                 $(this).remove();
             });
