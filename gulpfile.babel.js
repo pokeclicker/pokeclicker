@@ -140,7 +140,8 @@ gulp.task('default', done => {
 gulp.task('serveprod', function() {
     connect.server({
         root: ['build'],
-        port: process.env.PORT || 3000, // localhost:5000
+        port: process.env.PORT || 3000,
+        host: "0.0.0.0",
         livereload: false
     });
 });
