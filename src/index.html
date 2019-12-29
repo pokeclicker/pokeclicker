@@ -81,6 +81,31 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css" rel="stylesheet">
 
+    <!--Sentry-->
+    <script src="https://browser.sentry-cdn.com/5.10.2/bundle.min.js" integrity="sha384-ssBfXiBvlVC7bdA/VX03S88B5MwXQWdnpJRbUYFPgswlOBwETwTp6F3SMUNpo9M9" crossorigin="anonymous">
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155132556-1"></script>
+    <script>
+        if ($INIT_GOOGLE_ANALYTICS) {
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+
+            gtag('config', 'UA-155132556-1');
+        }
+    </script>
+
+    <script>
+        if ($INIT_SENTRY) {
+            Sentry.init({dsn: 'https://a3d181455c4442e0bea640ad272afdd9@sentry.io/1868204'});
+        }
+    </script>
     <style>
         .loader {
             position: fixed;
@@ -102,6 +127,9 @@
 </head>
 <body class="no-select">
 <link href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
+
+<!--$DEV_BANNER-->
+
 @import "splash.html"
 
 <!-- Game menu-->

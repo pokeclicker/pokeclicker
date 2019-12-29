@@ -380,7 +380,7 @@ class Player {
         GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
         GameController.updateMoney();
 
-        GameController.animateMoney(moneytogain,'playerMoney');
+        GameController.animateCurrency(moneytogain,'playerMoney');
     }
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
@@ -579,7 +579,7 @@ class Player {
         this.dungeonTokens(this.dungeonTokens() + tokens);
 
         GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
-        GameController.animateMoney(tokens,'playerMoneyDungeon');
+        GameController.animateCurrency(tokens,'playerMoneyDungeon');
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
@@ -846,7 +846,7 @@ class Player {
     public gainQuestPoints(value: number) {
         player.questPoints += value;
         GameHelper.incrementObservable(this.statistics.totalQuestPoints, value);
-        GameController.animateMoney(value,'playerMoneyQuest');
+        GameController.animateCurrency(value,'playerMoneyQuest');
     }
 
     public toJSON() {
