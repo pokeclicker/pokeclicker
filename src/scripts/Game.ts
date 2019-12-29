@@ -8,16 +8,17 @@ class Game {
 
     public breeding: Breeding;
     public pokeballs: Pokeballs;
+    public wallet: Wallet;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
     /**
      * TODO(@Isha) pass all features through the constructor
      */
-    constructor(breeding: Breeding, pokeballs: Pokeballs) {
+    constructor(breeding: Breeding, pokeballs: Pokeballs, wallet: Wallet) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
-
+        this.wallet = wallet;
 
         player = Save.load();
 

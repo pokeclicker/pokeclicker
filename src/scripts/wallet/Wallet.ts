@@ -48,10 +48,30 @@ class Wallet implements Feature {
     }
 
     fromJSON(json: object): void {
+        if (json["currencies"] == null) {
+            this.currencies = new ArrayOfObservables(this.defaults.currencies);
+        } else {
+            let currenciesJson = json["currencies"];
+            this.currencies = new ArrayOfObservables([
+                currenciesJson[GameConstants.Currency.money],
+                currenciesJson[GameConstants.Currency.questPoint],
+                currenciesJson[GameConstants.Currency.dungeontoken],
+                currenciesJson[GameConstants.Currency.diamond],
+                currenciesJson[GameConstants.Currency.farmPoint],
+            ]);
+        }
     }
 
     toJSON(): object {
-        return undefined;
+        return {
+            "currencies": [
+                this.currencies[GameConstants.Currency.money],
+                this.currencies[GameConstants.Currency.questPoint],
+                this.currencies[GameConstants.Currency.dungeontoken],
+                this.currencies[GameConstants.Currency.diamond],
+                this.currencies[GameConstants.Currency.farmPoint],
+            ],
+        }
     }
 
     update(delta: number): void {
