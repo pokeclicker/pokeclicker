@@ -45,6 +45,7 @@
     "gulp-minify-html": "^1.0.4",
     "gulp-plumber": "^1.2.1",
     "gulp-replace": "^1.0.0",
+    "gulp-serve": "^1.4.0",
     "gulp-size": "^2.0.0",
     "gulp-sourcemaps": "^2.6.5",
     "gulp-strip-debug": "^1.0.2",

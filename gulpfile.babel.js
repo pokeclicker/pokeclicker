@@ -11,7 +11,8 @@ const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
 const ejs = require("gulp-ejs");
 const plumber = require("gulp-plumber");
-const replace = require('gulp-replace')
+const replace = require('gulp-replace');
+const serve = require('gulp-serve');
 
 /**
  * Push build to gh-pages
@@ -136,6 +137,11 @@ gulp.task('default', done => {
     gulp.series('clean', 'build', 'browserSync')(done);
 });
 
+gulp.task('serve', serve({
+    root: ['build'],
+    port: process.env.PORT || 3000
+}));
+
 gulp.task('heroku', done => {
-    gulp.series('clean', 'build')(done);
+    gulp.series('clean', 'build', 'serve')(done);
 });
