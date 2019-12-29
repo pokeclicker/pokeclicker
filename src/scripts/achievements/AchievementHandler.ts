@@ -61,6 +61,10 @@ class AchievementHandler {
         return AchievementHandler.bonusUnlocked() / AchievementHandler.maxBonus;
     }
 
+    public static getMoneyMultiplier() {
+        return 1 + this.achievementBonus();
+    }
+
     public static achievementBonusPercent(): string {
         return (100 * AchievementHandler.achievementBonus()).toFixed(2) + "%";
     }
