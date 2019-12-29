@@ -47,7 +47,7 @@ abstract class Item {
                 case GameConstants.Currency.questPoint:
                     curr = "quest points";
                     break;
-                case GameConstants.Currency.dungeontoken:
+                case GameConstants.Currency.dungeonToken:
                     curr = "dungeon tokens";
                     break;
             }

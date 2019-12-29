@@ -5,7 +5,6 @@
  */
 
 class Player {
-    private _dungeonTokens: KnockoutObservable<number>;
 
     public achievementsCompleted: { [name: string]: boolean };
 
@@ -36,7 +35,6 @@ class Player {
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
-        this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._questPoints = ko.observable(savedPlayer._questPoints || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         this._region = ko.observable(savedPlayer._region);
@@ -297,11 +295,6 @@ class Player {
         return 1;
     }
 
-    public calculateDungeonTokenMultiplier(): number {
-        // TODO Calculate dungeon token multiplier by checking upgrades and multipliers.
-        return 1;
-    }
-
     /**
      * Loops through the caughtPokemonList to check if the pokémon is already caight
      * @param pokemonName name to search for.
@@ -369,8 +362,6 @@ class Player {
         switch (curr) {
             case GameConstants.Currency.questPoint:
                 return this.hasQuestPoints(amt);
-            case GameConstants.Currency.dungeontoken:
-                return this.hasDungeonTokens(amt);
             case GameConstants.Currency.diamond:
                 return this.hasDiamonds(amt);
             default:
@@ -386,10 +377,6 @@ class Player {
         return this._questPoints() >= questPoints;
     }
 
-    public hasDungeonTokens(tokens: number) {
-        return this._dungeonTokens() >= tokens;
-    }
-
     public hasDiamonds(diamonds: number) {
         return this._diamonds() >= diamonds;
     }
@@ -398,8 +385,6 @@ class Player {
         switch (curr) {
             case GameConstants.Currency.questPoint:
                 return this.payQuestPoints(amt);
-            case GameConstants.Currency.dungeontoken:
-                return this.payDungeonTokens(amt);
             case GameConstants.Currency.diamond:
                 return this.payDiamonds(amt);
             default:
@@ -417,15 +402,6 @@ class Player {
             return true;
         } else {
             return false
-        }
-    }
-
-    public payDungeonTokens(tokens: number): boolean {
-        if (this.hasDungeonTokens(tokens)) {
-            this._dungeonTokens(Math.floor(this._dungeonTokens() - tokens));
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -529,19 +505,6 @@ class Player {
         this._gymBadges.push(badge);
     }
 
-    public gainDungeonTokens(tokens: number) {
-        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.Token_collector)()){
-            tokens *= 1.5;
-        }
-
-        tokens = Math.floor(tokens);
-
-        this.dungeonTokens(this.dungeonTokens() + tokens);
-
-        GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
-        GameController.animateCurrency(tokens,'playerMoneyDungeon');
-    }
-
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -564,10 +527,6 @@ class Player {
 
     set route(value: KnockoutObservable<number>) {
         this._route = value;
-    }
-
-    get dungeonTokens(): KnockoutObservable<number> {
-        return this._dungeonTokens;
     }
 
     get caughtPokemonList() {
@@ -807,7 +766,6 @@ class Player {
 
     public toJSON() {
         let keep = [
-            "_dungeonTokens",
             "_questPoints",
             "_caughtShinyList",
             "_route",

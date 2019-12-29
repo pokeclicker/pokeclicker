@@ -185,7 +185,7 @@
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon" src="assets/images/currency/dungeonToken.png" height="25px">
-                                    <span id="playerMoneyDungeon" data-bind="text: player.dungeonTokens().toLocaleString('en-US')">0</span>
+                                    <span id="playerMoneyDungeon" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">

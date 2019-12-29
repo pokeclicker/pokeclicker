@@ -114,7 +114,7 @@ class Battle {
     }
 
     public static catchPokemon() {
-        player.gainDungeonTokens(Math.floor(this.enemyPokemon().level / 2));
+        App.game.wallet.gainDungeonToken(Math.floor(this.enemyPokemon().level / 2));
         player.capturePokemon(this.enemyPokemon().name, this.enemyPokemon().shiny);
     }
 

@@ -7,7 +7,6 @@ class Wallet implements Feature {
         currencies: [0, 0, 0, 0, 0]
     };
 
-
     constructor() {
         this.currencies = new ArrayOfObservables(this.defaults.currencies);
     }
@@ -23,9 +22,21 @@ class Wallet implements Feature {
         money = Math.floor(money);
 
         GameHelper.incrementObservable(player.statistics.totalMoney, money);
-        GameController.animateCurrency(money,'playerMoney');
+        GameController.animateCurrency(money, 'playerMoney');
 
         this.addAmount(new Amount(money, Currency.money))
+    }
+
+    public gainDungeonToken(base: number, origin?: string) {
+        let tokens = base;
+        tokens *= EffectEngineRunner.getDungeonTokenMultiplier();
+
+        tokens = Math.floor(tokens);
+
+        GameHelper.incrementObservable(player.statistics.totalTokens, tokens);
+        GameController.animateCurrency(tokens, 'playerMoneyDungeon');
+
+        this.addAmount(new Amount(tokens, Currency.dungeonToken))
     }
 
     private addAmount(amount: Amount) {
@@ -33,6 +44,7 @@ class Wallet implements Feature {
     };
 
     public hasAmount(amount: Amount) {
+        console.log("called with", amount)
         return this.currencies[amount.currency] >= amount.amount;
     };
 
@@ -60,11 +72,12 @@ class Wallet implements Feature {
             this.currencies = new ArrayOfObservables([
                 currenciesJson[GameConstants.Currency.money],
                 currenciesJson[GameConstants.Currency.questPoint],
-                currenciesJson[GameConstants.Currency.dungeontoken],
+                currenciesJson[GameConstants.Currency.dungeonToken],
                 currenciesJson[GameConstants.Currency.diamond],
                 currenciesJson[GameConstants.Currency.farmPoint],
             ]);
         }
+        console.log(this.currencies);
     }
 
     toJSON(): object {
@@ -72,7 +85,7 @@ class Wallet implements Feature {
             "currencies": [
                 this.currencies[GameConstants.Currency.money],
                 this.currencies[GameConstants.Currency.questPoint],
-                this.currencies[GameConstants.Currency.dungeontoken],
+                this.currencies[GameConstants.Currency.dungeonToken],
                 this.currencies[GameConstants.Currency.diamond],
                 this.currencies[GameConstants.Currency.farmPoint],
             ],
