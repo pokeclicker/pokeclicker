@@ -12,7 +12,7 @@ const gulpImport = require('gulp-html-import');
 const ejs = require("gulp-ejs");
 const plumber = require("gulp-plumber");
 const replace = require('gulp-replace');
-const serve = require('gulp-serve');
+const connect = require('gulp-connect');
 
 /**
  * Push build to gh-pages
@@ -137,11 +137,13 @@ gulp.task('default', done => {
     gulp.series('clean', 'build', 'browserSync')(done);
 });
 
-gulp.task('serve', serve({
-    root: ['build'],
-    port: process.env.PORT || 3000
-}));
-
+gulp.task('serveprod', function() {
+    connect.server({
+        root: ['build'],
+        port: process.env.PORT || 3000, // localhost:5000
+        livereload: false
+    });
+});
 gulp.task('heroku', done => {
-    gulp.series('clean', 'build', 'serve')(done);
+    gulp.series('clean', 'build', 'serveprod')(done);
 });
