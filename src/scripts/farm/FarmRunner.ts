@@ -117,7 +117,7 @@ class FarmRunner {
             player.gainFarmPoints(plot.berry().farmValue);
             FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
             let money = plot.berry().moneyValue;
-            player.gainMoney(money);
+            App.game.wallet.gainMoney(money);
             if(!all){
                 Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success)
             }

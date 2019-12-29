@@ -5,7 +5,6 @@
  */
 
 class Player {
-    private _money: KnockoutObservable<number>;
     private _dungeonTokens: KnockoutObservable<number>;
 
     public achievementsCompleted: { [name: string]: boolean };
@@ -37,7 +36,6 @@ class Player {
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
-        this._money = ko.observable(savedPlayer._money || 0);
         this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
         this._questPoints = ko.observable(savedPlayer._questPoints || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
@@ -294,11 +292,6 @@ class Player {
         return Math.floor(clickAttack);
     }
 
-    public calculateMoneyMultiplier(): number {
-        // TODO Calculate money multiplier by checking upgrades and multipliers.
-        return 1;
-    }
-
     public calculateExpMultiplier(): number {
         // TODO Calculate exp multiplier by checking upgrades and multipliers.
         return 1;
@@ -368,29 +361,12 @@ class Player {
         return false;
     }
 
-    public gainMoney(base: number) {
-        OakItemRunner.use(GameConstants.OakItem.Amulet_Coin);
-        let money = base;
-        money *= OakItemRunner.getMoneyMultiplier();
-        money *= AchievementHandler.getMoneyMultiplier();
-        money *= EffectEngineRunner.getMoneyMultiplier();
-
-        money = Math.floor(money);
-
-        this._money(this._money() + money);
-        GameHelper.incrementObservable(this.statistics.totalMoney, money);
-
-        GameController.animateCurrency(money,'playerMoney');
-    }
-
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
     }
 
     public hasCurrency(amt: number, curr: GameConstants.Currency): boolean {
         switch (curr) {
-            case GameConstants.Currency.money:
-                return this.hasMoney(amt);
             case GameConstants.Currency.questPoint:
                 return this.hasQuestPoints(amt);
             case GameConstants.Currency.dungeontoken:
@@ -404,10 +380,6 @@ class Player {
 
     public canAfford(cost: Amount) {
         return this.hasCurrency(cost.amount, cost.currency);
-    }
-
-    public hasMoney(money: number) {
-        return this._money() >= money;
     }
 
     public hasQuestPoints(questPoints: number) {
@@ -424,8 +396,6 @@ class Player {
 
     public payCurrency(amt: number, curr: GameConstants.Currency): boolean {
         switch (curr) {
-            case GameConstants.Currency.money:
-                return this.payMoney(amt);
             case GameConstants.Currency.questPoint:
                 return this.payQuestPoints(amt);
             case GameConstants.Currency.dungeontoken:
@@ -447,15 +417,6 @@ class Player {
             return true;
         } else {
             return false
-        }
-    }
-
-    public payMoney(money: number): boolean {
-        if (this.hasMoney(money)) {
-            this._money(Math.floor(this._money() - money));
-            return true;
-        } else {
-            return false;
         }
     }
 
@@ -603,10 +564,6 @@ class Player {
 
     set route(value: KnockoutObservable<number>) {
         this._route = value;
-    }
-
-    get money(): number {
-        return this._money();
     }
 
     get dungeonTokens(): KnockoutObservable<number> {
@@ -850,7 +807,6 @@ class Player {
 
     public toJSON() {
         let keep = [
-            "_money",
             "_dungeonTokens",
             "_questPoints",
             "_caughtShinyList",

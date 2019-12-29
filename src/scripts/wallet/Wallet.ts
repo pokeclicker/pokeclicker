@@ -1,6 +1,6 @@
 class Wallet implements Feature {
     name: string = "Wallet";
-    saveKey: string;
+    saveKey: string = "wallet";
     currencies: ArrayOfObservables<number>;
 
     defaults = {
@@ -12,19 +12,20 @@ class Wallet implements Feature {
         this.currencies = new ArrayOfObservables(this.defaults.currencies);
     }
 
-    public gainMoney(amount: number, origin?: string) {
+    public gainMoney(base: number, origin?: string) {
+        OakItemRunner.use(GameConstants.OakItem.Amulet_Coin);
 
-        // Good
-        // let eventBonus = App.game.eventCalendar.getMoneyMultiplier(origin);
+        let money = base;
+        money *= OakItemRunner.getMoneyMultiplier();
+        money *= AchievementHandler.getMoneyMultiplier();
+        money *= EffectEngineRunner.getMoneyMultiplier();
 
-        // Good
-        // let xMultiplier = App.game.getSomething();
-        // let yMultiplier = App.game.getSomethingElse();
-        //
-        // amount *= eventBonus * xMultiplier * yMultiplier;
-        //
-        // Statistics.addTotalMoney(origin);
-        this.addAmount(new Amount(amount, Currency.money))
+        money = Math.floor(money);
+
+        GameHelper.incrementObservable(player.statistics.totalMoney, money);
+        GameController.animateCurrency(money,'playerMoney');
+
+        this.addAmount(new Amount(money, Currency.money))
     }
 
     private addAmount(amount: Amount) {
@@ -48,6 +49,10 @@ class Wallet implements Feature {
     }
 
     fromJSON(json: object): void {
+        if (json == null) {
+            return
+        }
+
         if (json["currencies"] == null) {
             this.currencies = new ArrayOfObservables(this.defaults.currencies);
         } else {

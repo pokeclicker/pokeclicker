@@ -28,6 +28,7 @@ class Game {
             let saveObject = JSON.parse(saveJSON);
             this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
             this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
+            this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
         }
 
         KeyItemHandler.initialize();
