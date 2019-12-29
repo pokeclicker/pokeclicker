@@ -1,4 +1,5 @@
 class Pokeballs implements Feature {
+    name: string = "Pokeballs";
     saveKey: string = "pokeballs";
 
     defaults = {

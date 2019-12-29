@@ -1,6 +1,7 @@
 import Currency = GameConstants.Currency;
 
 class Breeding implements Feature {
+    name: string = "Breeding";
     saveKey: string = "breeding";
 
     defaults = {
