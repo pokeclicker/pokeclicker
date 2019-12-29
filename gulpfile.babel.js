@@ -135,3 +135,7 @@ gulp.task('website', done => {
 gulp.task('default', done => {
     gulp.series('clean', 'build', 'browserSync')(done);
 });
+
+gulp.task('heroku', done => {
+    gulp.series('clean', 'build')(done);
+});
