@@ -3,7 +3,7 @@ class Pokeballs implements Feature {
     saveKey: string = "pokeballs";
 
     defaults = {
-        'pokeballs': [10,0,0,0],
+        'pokeballs': [10, 0, 0, 0],
         'notCaughtSelection': GameConstants.Pokeball.Pokeball,
         'alreadyCaughtSelection': GameConstants.Pokeball.None,
     };

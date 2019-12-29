@@ -32,17 +32,17 @@
 
 
 <script type="text/html" id="pokeballSelectionTemplate">
-        <td>
-            <img class="pokeball-small clickable"
-                 data-bind="attr: {src: 'assets/images/pokeball/' + $data.image + '.png'},
+    <td>
+        <img class="pokeball-small clickable"
+             data-bind="attr: {src: 'assets/images/pokeball/' + $data.image + '.png'},
                  click: function(){App.game.pokeballs.alreadyCaughtSelection = $data.ball}, css: {'pokeball-selected': App.game.pokeballs.alreadyCaughtSelection === $data.ball}"/>
-        </td>
-        <td>
-            <span data-bind="text: $data.amount"></span>
-        </td>
-        <td>
-            <img class="pokeball-small clickable"
-                 data-bind="attr: {src: 'assets/images/pokeball/' + $data.image + '.png'},
+    </td>
+    <td>
+        <span data-bind="text: $data.amount"></span>
+    </td>
+    <td>
+        <img class="pokeball-small clickable"
+             data-bind="attr: {src: 'assets/images/pokeball/' + $data.image + '.png'},
                  click: function(){App.game.pokeballs.notCaughtSelection = $data.ball}, css: {'pokeball-selected': App.game.pokeballs.notCaughtSelection === $data.ball}"/>
-        </td>
+    </td>
 </script>
