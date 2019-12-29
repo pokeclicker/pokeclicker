@@ -85,7 +85,9 @@
     </script>
 
     <script>
-        Sentry.init({ dsn: 'https://a3d181455c4442e0bea640ad272afdd9@sentry.io/1868204' });
+        if ($INIT_SENTRY) {
+            Sentry.init({dsn: 'https://a3d181455c4442e0bea640ad272afdd9@sentry.io/1868204'});
+        }
     </script>
     <style>
         .loader {

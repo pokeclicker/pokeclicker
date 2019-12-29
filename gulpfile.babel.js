@@ -78,6 +78,7 @@ gulp.task('compile-html', (done) => {
         if (process.env.HEROKU) {
             stream.pipe(replace("<!--$DEV_BANNER-->", "@import \"developmentBanner.html\""))
         }
+        stream.pipe(replace("$INIT_SENTRY", process.env.heroku !== undefined));
 
         stream.pipe(plumber())
             .pipe(gulpImport('./src/components/'))
