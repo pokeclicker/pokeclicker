@@ -11,7 +11,8 @@ const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
 const ejs = require("gulp-ejs");
 const plumber = require("gulp-plumber");
-
+const git = require('gulp-git');
+const replace = require('gulp-replace')
 
 /**
  * Push build to gh-pages
@@ -71,13 +72,23 @@ gulp.task('browserSync', () => {
 
 gulp.task('compile-html', (done) => {
     const htmlDest = './build';
-    gulp.src('./src/index.html')
-        .pipe(plumber())
-        .pipe(gulpImport('./src/components/'))
-        .pipe(ejs())
-        .pipe(gulp.dest(htmlDest))
-        .pipe(browserSync.reload({stream: true}));
-    done();
+
+    git.revParse({args: '--abbrev-ref HEAD'}, function (err, branch) {
+        let stream = gulp.src('./src/index.html');
+        if (process.env.HEROKU || true) {
+            stream.pipe(replace("<!--$DEV_BANNER-->", "@import \"developmentBanner.html\""))
+        }
+
+        stream.pipe(plumber())
+            .pipe(gulpImport('./src/components/'))
+            .pipe(replace("$GIT_BRANCH", branch))
+            .pipe(ejs())
+            .pipe(gulp.dest(htmlDest))
+            .pipe(browserSync.reload({stream: true}));
+        done();
+    });
+
+
 });
 
 gulp.task('html', () => {
