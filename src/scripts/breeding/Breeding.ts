@@ -1,7 +1,6 @@
 import Currency = GameConstants.Currency;
 
 class Breeding implements Feature {
-    name: string = "Breeding";
     saveKey: string = "breeding";
 
     defaults = {
@@ -249,15 +248,15 @@ class Breeding implements Feature {
     }
 
     public buyEggSlot() {
-        let cost: Cost = this.nextEggSlotCost();
+        let cost: Amount = this.nextEggSlotCost();
         if (player.canAfford(cost)) {
             player.payCost(cost);
             this.gainEggSlot();
         }
     }
 
-    public nextEggSlotCost(): Cost {
-        return new Cost(this.getEggSlotCost(this.eggSlots + 1), Currency.questPoint);
+    public nextEggSlotCost(): Amount {
+        return new Amount(this.getEggSlotCost(this.eggSlots + 1), Currency.questPoint);
     }
 
     // Knockout getters/setters

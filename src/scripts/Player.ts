@@ -402,7 +402,7 @@ class Player {
         }
     }
 
-    public canAfford(cost: Cost) {
+    public canAfford(cost: Amount) {
         return this.hasCurrency(cost.amount, cost.currency);
     }
 
@@ -437,7 +437,7 @@ class Player {
         }
     }
 
-    public payCost(cost: Cost): boolean {
+    public payCost(cost: Amount): boolean {
         return this.payCurrency(cost.amount, cost.currency);
     }
 
