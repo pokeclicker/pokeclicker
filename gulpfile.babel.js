@@ -130,11 +130,7 @@ gulp.task('website', done => {
     gulp.series('clean', 'build', 'cleanWebsite', 'copyWebsite')(done);
 });
 
-gulp.task('default', done => {
-    gulp.series('clean', 'build', 'browserSync')(done);
-});
-
-gulp.task('serveprod', function() {
+gulp.task('serveProd', function () {
     connect.server({
         root: ['build'],
         port: process.env.PORT || 3000,
@@ -142,6 +138,11 @@ gulp.task('serveprod', function() {
         livereload: false
     });
 });
+
 gulp.task('heroku', done => {
-    gulp.series('clean', 'build', 'serveprod')(done);
+    gulp.series('clean', 'build', 'serveProd')(done);
+});
+
+gulp.task('default', done => {
+    gulp.series('clean', 'build', 'browserSync')(done);
 });
