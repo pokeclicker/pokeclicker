@@ -59,7 +59,8 @@ gulp.task('browserSync', () => {
     browserSync({
         server: {
             baseDir: dests.base
-        }
+        },
+        port: process.env.PORT || 3000
     });
     gulp.watch(srcs.html, gulp.series('compile-html'));
     gulp.watch(srcs.ejsTemplates, gulp.series('compile-html'));
