@@ -1,1 +1,1 @@
-web: gulp herok
+web: gulp heroku
