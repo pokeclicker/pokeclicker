@@ -66,10 +66,10 @@ class Save {
     }
 
     public static reset(keepShinies: boolean = true): void {
-        var confirmDelete = prompt(`Are you sure you want reset?\nIf so, type 'DELETE'${keepShinies ? '\n\n[your shiny progress will not be reset]': ''}`);
+        var confirmDelete = prompt(`Are you sure you want reset?\nIf so, type 'DELETE'${keepShinies ? '\n\n[your shiny progress will not be reset]' : ''}`);
 
-        if(confirmDelete == 'DELETE'){
-            if (keepShinies){
+        if (confirmDelete == 'DELETE') {
+            if (keepShinies) {
                 const shiniesOnly = {_caughtShinyList: player.caughtShinyList()};
                 localStorage.setItem('player', JSON.stringify(shiniesOnly));
             } else {
@@ -94,7 +94,7 @@ class Save {
         return filtered
     }
 
-    public static initializeMultipliers(): {[name: string]: number} {
+    public static initializeMultipliers(): { [name: string]: number } {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = 1;
@@ -102,7 +102,7 @@ class Save {
         return res;
     }
 
-    public static initializeItemlist(): {[name: string]: KnockoutObservable<number>} {
+    public static initializeItemlist(): { [name: string]: KnockoutObservable<number> } {
         let res = {};
         for (let obj in ItemList) {
             res[obj] = ko.observable(0);
@@ -115,7 +115,7 @@ class Save {
         if (saved) {
             plotList = saved.map((p) => {
                 let berry;
-                if (p.berry){
+                if (p.berry) {
                     berry = new Berry(p.berry.type, p.berry.harvestTime, p.berry.moneyValue, p.berry.farmValue);
                 } else {
                     berry = null;
@@ -158,7 +158,7 @@ class Save {
         return res;
     }
 
-    public static initializeEffects(saved?: Array<string>): {[name: string]: KnockoutObservable<number>} {
+    public static initializeEffects(saved?: Array<string>): { [name: string]: KnockoutObservable<number> } {
         let res = {};
         for (let obj in GameConstants.BattleItemType) {
             res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
