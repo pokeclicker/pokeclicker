@@ -27,7 +27,7 @@ class DungeonBattle extends Battle {
                         DungeonRunner.dungeonWon();
                     }
                 },
-                player.calculateCatchTime(pokeBall)
+                App.game.pokeballs.calculateCatchTime(pokeBall)
             );
         } else if (DungeonRunner.fightingBoss()) {
             DungeonRunner.fightingBoss(false);

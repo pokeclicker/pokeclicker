@@ -7,15 +7,17 @@ class Game {
     public static achievementCounter: number = 0;
 
     public breeding: Breeding;
+    public pokeballs: Pokeballs;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
     /**
      * TODO(@Isha) pass all features through the constructor
      */
-    constructor(breeding: Breeding) {
+    constructor(breeding: Breeding, pokeballs: Pokeballs) {
         this.breeding = breeding;
-        this.breeding.initialize();
+        this.pokeballs = pokeballs;
+
 
         player = Save.load();
 
@@ -23,7 +25,8 @@ class Game {
         let saveJSON = localStorage.getItem("save");
         if (saveJSON !== null) {
             let saveObject = JSON.parse(saveJSON);
-            this.breeding.fromJSON(saveObject[this.breeding.saveKey])
+            this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
+            this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
         }
 
         KeyItemHandler.initialize();
@@ -34,6 +37,11 @@ class Game {
 
         this._gameState = ko.observable(GameConstants.GameState.fighting);
         this.load();
+    }
+
+    initialize() {
+        this.breeding.initialize();
+        this.pokeballs.initialize();
     }
 
     start() {

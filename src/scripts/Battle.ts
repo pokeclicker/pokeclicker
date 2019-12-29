@@ -59,7 +59,7 @@ class Battle {
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
         const pokemonName: string = this.enemyPokemon().name;
         const isShiny: boolean = this.enemyPokemon().shiny;
-        const pokeBall: GameConstants.Pokeball = player.calculatePokeballToUse(pokemonName, isShiny);
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonName, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(pokeBall);
@@ -68,7 +68,7 @@ class Battle {
                     this.attemptCatch();
                     this.generateNewEnemy();
                 },
-                player.calculateCatchTime(pokeBall)
+                App.game.pokeballs.calculateCatchTime(pokeBall)
             )
             ;
 
@@ -90,7 +90,7 @@ class Battle {
     }
 
     protected static calculateActualCatchRate(pokeBall: GameConstants.Pokeball) {
-        let pokeballBonus = GameConstants.getCatchBonus(pokeBall);
+        let pokeballBonus = App.game.pokeballs.getCatchBonus(pokeBall);
         let oakBonus = OakItemRunner.isActive(GameConstants.OakItem.Magic_Ball) ?
             OakItemRunner.calculateBonus(GameConstants.OakItem.Magic_Ball) : 0;
         let totalChance = GameConstants.clipNumber(this.enemyPokemon().catchRate + pokeballBonus + oakBonus, 0, 100);
@@ -101,7 +101,7 @@ class Battle {
         this.pokeball = ko.observable(pokeBall);
         this.catching(true);
         this.catchRateActual(this.calculateActualCatchRate(pokeBall));
-        player.usePokeball(pokeBall);
+        App.game.pokeballs.usePokeball(pokeBall);
     }
 
     protected static attemptCatch() {

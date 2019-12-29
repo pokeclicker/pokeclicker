@@ -1,10 +1,3 @@
-///<reference path="../shop/Shop.ts"/>
-///<reference path="../items/Pokeball.ts"/>
-///<reference path="../items/BattleItem.ts"/>
-///<reference path="../items/EnergyRestore.ts"/>
-///<reference path="../items/EvolutionStone.ts"/>
-///<reference path="../items/PokeBlock.ts"/>
-///<reference path="../items/Vitamin.ts"/>
 class Town {
     private _name: KnockoutObservable<string>;
     private _gym?: KnockoutObservable<Gym>;
