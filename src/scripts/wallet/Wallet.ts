@@ -60,6 +60,17 @@ class Wallet implements Feature {
         this.addAmount(new Amount(diamonds, Currency.diamond))
     }
 
+    public gainFarmPoints(base: number, origin?: string) {
+        let points = base;
+
+        points = Math.floor(points);
+
+        // TODO Add total farmpoints statistic
+        // GameHelper.incrementObservable(player.statistics.totalFarmPoints, points);
+
+        this.addAmount(new Amount(points, Currency.farmPoint))
+    }
+
     private addAmount(amount: Amount) {
         this.currencies[amount.currency] += amount.amount;
     };
@@ -97,7 +108,6 @@ class Wallet implements Feature {
                 currenciesJson[GameConstants.Currency.farmPoint],
             ]);
         }
-        console.log(this.currencies);
     }
 
     toJSON(): object {

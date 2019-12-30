@@ -148,7 +148,6 @@ class Player {
         this._lastSeen = Date.now();
         this.statistics = new Statistics(savedPlayer.statistics);
 
-        this.farmPoints = ko.observable(savedPlayer.farmPoints || 0);
         this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
         });
@@ -189,7 +188,6 @@ class Player {
     private _shinyCatches: KnockoutObservable<number>;
 
     public plotList: KnockoutObservable<Plot>[];
-    public farmPoints: KnockoutObservable<number>;
     public berryList: KnockoutObservable<number>[];
 
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
@@ -351,10 +349,6 @@ class Player {
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
-    }
-
-    public gainFarmPoints(points: number) {
-        this.farmPoints(Math.floor(this.farmPoints() + points));
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {
@@ -713,7 +707,6 @@ class Player {
             "gymDefeats",
             "statistics",
             "achievementsCompleted",
-            "farmPoints",
             "plotList",
             "berryList",
             "effectList",

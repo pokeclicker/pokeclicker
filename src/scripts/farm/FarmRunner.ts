@@ -45,7 +45,7 @@ class FarmRunner {
     public static unlockPlot() {
         if (this.canBuyPlot()) {
             player.unlockPlot();
-            player.farmPoints(player.farmPoints() - this.plotPrice());
+            App.game.wallet.loseAmount(new Amount(this.plotPrice(), GameConstants.Currency.farmPoint));
             this.plotPrice(this.computePlotPrice());
         }
     }
@@ -55,7 +55,7 @@ class FarmRunner {
     }
 
     public static canBuyPlot() {
-        return !this.allPlotsUnlocked() && player.farmPoints() >= this.plotPrice();
+        return !this.allPlotsUnlocked() && App.game.wallet.hasAmount(new Amount(this.plotPrice(), GameConstants.Currency.farmPoint));
     }
 
     public static getPlot(plotId: number) {
@@ -114,7 +114,7 @@ class FarmRunner {
     public static harvest(plotId, all = false) {
         let plot = this.getPlot(plotId);
         if (plot.berry() !== null && plot.timeLeft() <= 0) {
-            player.gainFarmPoints(plot.berry().farmValue);
+            App.game.wallet.gainFarmPoints(plot.berry().farmValue);
             FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
             let money = plot.berry().moneyValue;
             App.game.wallet.gainMoney(money);

@@ -18,7 +18,7 @@
 
                     <div class="col-sm-4 col-md-3 col-lg-4">
                         <div class="col-sm-12">
-                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.farmPoints(), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint], 'currency': GameConstants.Currency.farmPoint}}"></span>
                         </div>
                         <ul id="seedList" data-bind="foreach: player.berryList" class="list-group"
                             style="margin-bottom: 5px;">
