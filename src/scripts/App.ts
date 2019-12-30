@@ -16,6 +16,7 @@ class App {
             Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
 
             GameController.bindToolTips();
+            GameController.addKeyListeners();
 
             PokedexHelper.populateTypeFilters();
             PokedexHelper.updateList();
