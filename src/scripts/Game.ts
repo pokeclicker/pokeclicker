@@ -8,16 +8,17 @@ class Game {
 
     public breeding: Breeding;
     public pokeballs: Pokeballs;
+    public wallet: Wallet;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
     /**
      * TODO(@Isha) pass all features through the constructor
      */
-    constructor(breeding: Breeding, pokeballs: Pokeballs) {
+    constructor(breeding: Breeding, pokeballs: Pokeballs, wallet: Wallet) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
-
+        this.wallet = wallet;
 
         player = Save.load();
 
@@ -27,6 +28,7 @@ class Game {
             let saveObject = JSON.parse(saveJSON);
             this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
             this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
+            this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
         }
 
         KeyItemHandler.initialize();

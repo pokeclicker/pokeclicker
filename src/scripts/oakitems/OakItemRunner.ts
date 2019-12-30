@@ -68,6 +68,10 @@ class OakItemRunner {
         return OakItemRunner.getOakItemObject(id).calculateBonus()();
     }
 
+    public static getMoneyMultiplier() {
+        return OakItemRunner.isActive(GameConstants.OakItem.Amulet_Coin) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Amulet_Coin) / 100) : 1;
+    }
+
     public static getOakItemObject(id: GameConstants.OakItem): OakItem {
         return OakItemRunner.oakItemList[id]();
     }

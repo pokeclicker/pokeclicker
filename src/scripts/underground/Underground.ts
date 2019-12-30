@@ -163,7 +163,7 @@ class Underground {
         let success = true;
         switch (item.valueType) {
             case "Diamond":
-                player.diamonds += item.value;
+                App.game.wallet.gainDiamonds(item.value);
                 break;
             case "Mine Egg":
                 if (!App.game.breeding.hasFreeEggSlot()) {

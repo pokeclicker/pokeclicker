@@ -44,7 +44,7 @@ class ShopHandler {
           return input.val(0).change();
         }
         let amt = 1;
-        for (amt; player.hasCurrency(item.totalPrice(amt), item.currency); amt++){}
+        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)); amt++){}
         input.val(--amt).change();
     }
 
@@ -59,7 +59,7 @@ class ShopHandler {
     public static calculateButtonCss(): string {
         let item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
-        if (item && !(item.isAvailable() && player.hasCurrency(item.totalPrice(this.amount()), item.currency))
+        if (item && !(item.isAvailable() && App.game.wallet.hasAmount(new Amount(item.totalPrice(this.amount()), item.currency)))
                 || this.amount() < 1) {
             return "btn btn-danger smallButton smallFont"
         } else {

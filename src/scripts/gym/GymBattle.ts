@@ -11,7 +11,7 @@ class GymBattle extends Battle {
      * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
-        player.gainMoney(this.enemyPokemon().money);
+        App.game.wallet.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(this.gym.badgeReq * 3 + 1)));
         player.gainShards(this.enemyPokemon());

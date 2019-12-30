@@ -5,8 +5,6 @@
  */
 
 class Player {
-    private _money: KnockoutObservable<number>;
-    private _dungeonTokens: KnockoutObservable<number>;
 
     public achievementsCompleted: { [name: string]: boolean };
 
@@ -37,9 +35,6 @@ class Player {
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
-        this._money = ko.observable(savedPlayer._money || 0);
-        this._dungeonTokens = ko.observable(savedPlayer._dungeonTokens || 0);
-        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         this._region = ko.observable(savedPlayer._region);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
@@ -112,7 +107,6 @@ class Player {
         for (let item of this._mineInventory()) {
             item.amount = ko.observable(item.amount);
         }
-        this._diamonds = ko.observable(savedPlayer._diamonds || 0);
 
         this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
 
@@ -148,14 +142,12 @@ class Player {
             this.currentQuests = ko.observableArray([]);
         }
         this._questXP = ko.observable(savedPlayer._questXP || 0);
-        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
 
         this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
 
         this._lastSeen = Date.now();
         this.statistics = new Statistics(savedPlayer.statistics);
 
-        this.farmPoints = ko.observable(savedPlayer.farmPoints || 0);
         this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
         });
@@ -173,7 +165,6 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     private _mineInventory: KnockoutObservableArray<any>;
-    private _diamonds: KnockoutObservable<number>;
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
@@ -191,14 +182,12 @@ class Player {
 
     public completedQuestList: Array<KnockoutObservable<boolean>>;
     public questRefreshes: number;
-    public _questPoints: KnockoutObservable<number>;
     public _questXP: KnockoutObservable<number>;
     public _lastSeen: number;
     public currentQuests: KnockoutObservableArray<any>;
     private _shinyCatches: KnockoutObservable<number>;
 
     public plotList: KnockoutObservable<Plot>[];
-    public farmPoints: KnockoutObservable<number>;
     public berryList: KnockoutObservable<number>[];
 
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
@@ -294,18 +283,8 @@ class Player {
         return Math.floor(clickAttack);
     }
 
-    public calculateMoneyMultiplier(): number {
-        // TODO Calculate money multiplier by checking upgrades and multipliers.
-        return 1;
-    }
-
     public calculateExpMultiplier(): number {
         // TODO Calculate exp multiplier by checking upgrades and multipliers.
-        return 1;
-    }
-
-    public calculateDungeonTokenMultiplier(): number {
-        // TODO Calculate dungeon token multiplier by checking upgrades and multipliers.
         return 1;
     }
 
@@ -368,118 +347,8 @@ class Player {
         return false;
     }
 
-    public gainMoney(money: number) {
-        OakItemRunner.use(GameConstants.OakItem.Amulet_Coin);
-        // TODO add money multipliers
-        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Amulet_Coin) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Amulet_Coin) / 100) : 1;
-        let moneytogain = Math.floor(money * oakItemBonus * (1 + AchievementHandler.achievementBonus()))
-        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.Lucky_incense)()){
-            moneytogain = Math.floor(moneytogain * 1.5);
-        }
-        this._money(this._money() + moneytogain);
-        GameHelper.incrementObservable(this.statistics.totalMoney, moneytogain);
-        GameController.updateMoney();
-
-        GameController.animateCurrency(moneytogain,'playerMoney');
-    }
-
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
-    }
-
-    public hasCurrency(amt: number, curr: GameConstants.Currency): boolean {
-        switch (curr) {
-            case GameConstants.Currency.money:
-                return this.hasMoney(amt);
-            case GameConstants.Currency.questPoint:
-                return this.hasQuestPoints(amt);
-            case GameConstants.Currency.dungeontoken:
-                return this.hasDungeonTokens(amt);
-            case GameConstants.Currency.diamond:
-                return this.hasDiamonds(amt);
-            default:
-                return false;
-        }
-    }
-
-    public canAfford(cost: Cost) {
-        return this.hasCurrency(cost.amount, cost.currency);
-    }
-
-    public hasMoney(money: number) {
-        return this._money() >= money;
-    }
-
-    public hasQuestPoints(questPoints: number) {
-        return this._questPoints() >= questPoints;
-    }
-
-    public hasDungeonTokens(tokens: number) {
-        return this._dungeonTokens() >= tokens;
-    }
-
-    public hasDiamonds(diamonds: number) {
-        return this._diamonds() >= diamonds;
-    }
-
-    public payCurrency(amt: number, curr: GameConstants.Currency): boolean {
-        switch (curr) {
-            case GameConstants.Currency.money:
-                return this.payMoney(amt);
-            case GameConstants.Currency.questPoint:
-                return this.payQuestPoints(amt);
-            case GameConstants.Currency.dungeontoken:
-                return this.payDungeonTokens(amt);
-            case GameConstants.Currency.diamond:
-                return this.payDiamonds(amt);
-            default:
-                return false;
-        }
-    }
-
-    public payCost(cost: Cost): boolean {
-        return this.payCurrency(cost.amount, cost.currency);
-    }
-
-    public payQuestPoints(questPoints: number): boolean {
-        if (this.hasQuestPoints(questPoints)) {
-            this._questPoints(Math.floor(this.questPoints - questPoints));
-            return true;
-        } else {
-            return false
-        }
-    }
-
-    public payMoney(money: number): boolean {
-        if (this.hasMoney(money)) {
-            this._money(Math.floor(this._money() - money));
-            GameController.updateMoney();
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public payDungeonTokens(tokens: number): boolean {
-        if (this.hasDungeonTokens(tokens)) {
-            this._dungeonTokens(Math.floor(this._dungeonTokens() - tokens));
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public payDiamonds(diamonds: number): boolean {
-        if (this.hasDiamonds(diamonds)) {
-            this._diamonds(Math.floor(this._diamonds() - diamonds));
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public gainFarmPoints(points: number) {
-        this.farmPoints(Math.floor(this.farmPoints() + points));
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {
@@ -569,19 +438,6 @@ class Player {
         this._gymBadges.push(badge);
     }
 
-    public gainDungeonTokens(tokens: number) {
-        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.Token_collector)()){
-            tokens *= 1.5;
-        }
-
-        tokens = Math.floor(tokens);
-
-        this.dungeonTokens(this.dungeonTokens() + tokens);
-
-        GameHelper.incrementObservable(this.statistics.totalTokens, tokens);
-        GameController.animateCurrency(tokens,'playerMoneyDungeon');
-    }
-
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -604,14 +460,6 @@ class Player {
 
     set route(value: KnockoutObservable<number>) {
         this._route = value;
-    }
-
-    get money(): number {
-        return this._money();
-    }
-
-    get dungeonTokens(): KnockoutObservable<number> {
-        return this._dungeonTokens;
     }
 
     get caughtPokemonList() {
@@ -750,17 +598,6 @@ class Player {
         player.berryList[i](player.berryList[i]() + amount);
     }
 
-
-    get diamonds() {
-        return this._diamonds();
-    }
-
-    set diamonds(n: number) {
-        const amt = n - this._diamonds();
-        if (amt > 0) GameHelper.incrementObservable(player.statistics.totalDiamonds, amt);
-        this._diamonds(n);
-    }
-
     // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
         for (let i = 0; i < player._mineInventory().length; i++) {
@@ -835,25 +672,8 @@ class Player {
         this._questXP(value);
     }
 
-    get questPoints(): number {
-        return this._questPoints();
-    }
-
-    set questPoints(value: number) {
-        this._questPoints(value);
-    }
-
-    public gainQuestPoints(value: number) {
-        player.questPoints += value;
-        GameHelper.incrementObservable(this.statistics.totalQuestPoints, value);
-        GameController.animateCurrency(value,'playerMoneyQuest');
-    }
-
     public toJSON() {
         let keep = [
-            "_money",
-            "_dungeonTokens",
-            "_questPoints",
             "_caughtShinyList",
             "_route",
             "_caughtPokemonList",
@@ -873,7 +693,6 @@ class Player {
             "_keyItems",
             // TODO(@Isha) remove.
             "_mineInventory",
-            "_diamonds",
             // TODO(@Isha) remove.
             "_mineLayersCleared",
             "_shardUpgrades",
@@ -882,14 +701,12 @@ class Player {
             "completedQuestList",
             "questRefreshes",
             "_questXP",
-            "_questPoints",
             "_lastSeen",
             "currentQuests",
             "_shinyCatches",
             "gymDefeats",
             "statistics",
             "achievementsCompleted",
-            "farmPoints",
             "plotList",
             "berryList",
             "effectList",
