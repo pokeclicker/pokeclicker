@@ -191,7 +191,7 @@
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Quest points" src="assets/images/currency/questPoint.png" height="25px">
-                                    <span id="playerMoneyQuest" data-bind="text: player.questPoints.toLocaleString('en-US')">0</span>
+                                    <span id="playerMoneyQuest" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>

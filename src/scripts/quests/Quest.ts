@@ -27,7 +27,7 @@ abstract class Quest {
 
     endQuest() {
         if (this.isCompleted() && !this.claimed()) {
-            player.gainQuestPoints(this.pointsReward);
+            App.game.wallet.gainQuestPoints(this.pointsReward);
             this.claimed(true);
             if (!this.inQuestLine) player.completedQuestList[this.index](true);
             let oldLevel = player.questLevel;

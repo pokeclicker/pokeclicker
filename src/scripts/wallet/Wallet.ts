@@ -27,7 +27,7 @@ class Wallet implements Feature {
         this.addAmount(new Amount(money, Currency.money))
     }
 
-    public gainDungeonToken(base: number, origin?: string) {
+    public gainDungeonTokens(base: number, origin?: string) {
         let tokens = base;
         tokens *= EffectEngineRunner.getDungeonTokenMultiplier();
 
@@ -39,12 +39,32 @@ class Wallet implements Feature {
         this.addAmount(new Amount(tokens, Currency.dungeonToken))
     }
 
+    public gainQuestPoints(base: number, origin?: string) {
+        let points = base;
+
+        points = Math.floor(points);
+
+        GameHelper.incrementObservable(player.statistics.totalQuestPoints, points);
+        GameController.animateCurrency(points,'playerMoneyQuest');
+
+        this.addAmount(new Amount(points, Currency.questPoint))
+    }
+
+    public gainDiamonds(base: number, origin?: string) {
+        let diamonds = base;
+
+        diamonds = Math.floor(diamonds);
+
+        GameHelper.incrementObservable(player.statistics.totalDiamonds, diamonds);
+
+        this.addAmount(new Amount(diamonds, Currency.diamond))
+    }
+
     private addAmount(amount: Amount) {
         this.currencies[amount.currency] += amount.amount;
     };
 
     public hasAmount(amount: Amount) {
-        console.log("called with", amount)
         return this.currencies[amount.currency] >= amount.amount;
     };
 

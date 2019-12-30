@@ -35,7 +35,6 @@ class Player {
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
-        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
         this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         this._region = ko.observable(savedPlayer._region);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
@@ -108,7 +107,6 @@ class Player {
         for (let item of this._mineInventory()) {
             item.amount = ko.observable(item.amount);
         }
-        this._diamonds = ko.observable(savedPlayer._diamonds || 0);
 
         this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
 
@@ -144,7 +142,6 @@ class Player {
             this.currentQuests = ko.observableArray([]);
         }
         this._questXP = ko.observable(savedPlayer._questXP || 0);
-        this._questPoints = ko.observable(savedPlayer._questPoints || 0);
 
         this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
 
@@ -169,7 +166,6 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     private _mineInventory: KnockoutObservableArray<any>;
-    private _diamonds: KnockoutObservable<number>;
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
@@ -187,7 +183,6 @@ class Player {
 
     public completedQuestList: Array<KnockoutObservable<boolean>>;
     public questRefreshes: number;
-    public _questPoints: KnockoutObservable<number>;
     public _questXP: KnockoutObservable<number>;
     public _lastSeen: number;
     public currentQuests: KnockoutObservableArray<any>;
@@ -356,32 +351,6 @@ class Player {
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
-    }
-
-    public hasQuestPoints(questPoints: number) {
-        return this._questPoints() >= questPoints;
-    }
-
-    public hasDiamonds(diamonds: number) {
-        return this._diamonds() >= diamonds;
-    }
-
-    public payQuestPoints(questPoints: number): boolean {
-        if (this.hasQuestPoints(questPoints)) {
-            this._questPoints(Math.floor(this.questPoints - questPoints));
-            return true;
-        } else {
-            return false
-        }
-    }
-
-    public payDiamonds(diamonds: number): boolean {
-        if (this.hasDiamonds(diamonds)) {
-            this._diamonds(Math.floor(this._diamonds() - diamonds));
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public gainFarmPoints(points: number) {
@@ -635,17 +604,6 @@ class Player {
         player.berryList[i](player.berryList[i]() + amount);
     }
 
-
-    get diamonds() {
-        return this._diamonds();
-    }
-
-    set diamonds(n: number) {
-        const amt = n - this._diamonds();
-        if (amt > 0) GameHelper.incrementObservable(player.statistics.totalDiamonds, amt);
-        this._diamonds(n);
-    }
-
     // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
         for (let i = 0; i < player._mineInventory().length; i++) {
@@ -720,23 +678,8 @@ class Player {
         this._questXP(value);
     }
 
-    get questPoints(): number {
-        return this._questPoints();
-    }
-
-    set questPoints(value: number) {
-        this._questPoints(value);
-    }
-
-    public gainQuestPoints(value: number) {
-        player.questPoints += value;
-        GameHelper.incrementObservable(this.statistics.totalQuestPoints, value);
-        GameController.animateCurrency(value,'playerMoneyQuest');
-    }
-
     public toJSON() {
         let keep = [
-            "_questPoints",
             "_caughtShinyList",
             "_route",
             "_caughtPokemonList",
@@ -756,7 +699,6 @@ class Player {
             "_keyItems",
             // TODO(@Isha) remove.
             "_mineInventory",
-            "_diamonds",
             // TODO(@Isha) remove.
             "_mineLayersCleared",
             "_shardUpgrades",
@@ -765,7 +707,6 @@ class Player {
             "completedQuestList",
             "questRefreshes",
             "_questXP",
-            "_questPoints",
             "_lastSeen",
             "currentQuests",
             "_shinyCatches",
