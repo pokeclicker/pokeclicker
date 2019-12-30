@@ -45,7 +45,7 @@ class Wallet implements Feature {
         points = Math.floor(points);
 
         GameHelper.incrementObservable(player.statistics.totalQuestPoints, points);
-        GameController.animateCurrency(points,'playerMoneyQuest');
+        GameController.animateCurrency(points, 'playerMoneyQuest');
 
         this.addAmount(new Amount(points, Currency.questPoint))
     }
