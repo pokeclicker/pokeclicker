@@ -49,7 +49,10 @@ class BadgeCase implements Feature {
     }
 
     fromJSON(json: object): void {
-        this.badgeList = this.createDefaultBadgeList();
+        if (json == null) {
+            return
+        }
+        this.badgeList = new ArrayOfObservables(json as []);
     }
 
     toJSON(): object {
