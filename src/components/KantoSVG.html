@@ -455,7 +455,7 @@
     <%- include('templates/mapPOI',
         { name: "Farm"
         , x: 373, y: 294
-        , databind: "click:function(){FarmRunner.openFarmModal()}, attr: { class: MapHelper.calculateTownCssClass('Wailmer pail') }"
+        , databind: "click:function(){FarmRunner.openFarmModal()}, attr: { class: FarmRunner.accessToFarm() ? 'city unlockedTown' : 'city lockedTown' }"
         })
      %>
 
