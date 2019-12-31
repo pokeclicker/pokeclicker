@@ -233,7 +233,7 @@ namespace GameConstants {
     export enum Currency {
         money,
         questPoint,
-        dungeontoken,
+        dungeonToken,
         diamond,
         farmPoint
     }

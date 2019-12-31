@@ -1,11 +1,11 @@
-class QuestHelper{
+class QuestHelper {
     public static questList: KnockoutObservableArray<Quest> = ko.observableArray();
 
     public static generateQuests(level: number, refreshes: number, d: Date) {
-        SeededRand.seed(Number( level * (d.getFullYear() + refreshes * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate()));
+        SeededRand.seed(Number(level * (d.getFullYear() + refreshes * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate()));
 
         const QuestTypes = new Set(GameConstants.QuestTypes);
-        for (let i=0; i<GameConstants.QUESTS_PER_SET; i++) {
+        for (let i = 0; i < GameConstants.QUESTS_PER_SET; i++) {
             let type = SeededRand.fromArray(Array.from(QuestTypes));
             QuestTypes.delete(type);
             let quest = QuestHelper.random(type, i);
@@ -48,7 +48,7 @@ class QuestHelper{
                 amount = SeededRand.intBetween(1, 30);
                 return new HatchEggsQuest(amount);
             case "MineLayers":
-                amount = SeededRand.intBetween(1,3);
+                amount = SeededRand.intBetween(1, 3);
                 return new MineLayersQuest(amount);
             case "CatchShinies":
                 return new CatchShiniesQuest(1);
@@ -93,7 +93,8 @@ class QuestHelper{
     public static refreshQuests(free: boolean = false) {
         if (free || QuestHelper.canAffordRefresh()) {
             if (!free) {
-                player.payMoney(QuestHelper.getRefreshCost())
+                // TODO(@Isha) refactor to Amount
+                App.game.wallet.loseAmount(new Amount(QuestHelper.getRefreshCost(), GameConstants.Currency.money));
             }
             player.questRefreshes++;
             QuestHelper.quitAllQuests();
@@ -105,12 +106,12 @@ class QuestHelper{
     }
 
     public static canAffordRefresh(): boolean {
-        return player.money >= QuestHelper.getRefreshCost();
+        return App.game.wallet.hasAmount(new Amount(this.getRefreshCost(), GameConstants.Currency.money))
     }
 
     public static clearQuests() {
         // Empty quest list and reset completed quests
-        QuestHelper.questList.splice(0,GameConstants.QUESTS_PER_SET);
+        QuestHelper.questList.splice(0, GameConstants.QUESTS_PER_SET);
         for (let elem of player.completedQuestList) {
             elem(false);
         }
@@ -118,7 +119,9 @@ class QuestHelper{
 
     // Returns 0 when all quests are complete, ~1 million when none are
     public static getRefreshCost(): number {
-        let notComplete = player.completedQuestList.filter((elem) => {return !elem()}).length;
+        let notComplete = player.completedQuestList.filter((elem) => {
+            return !elem()
+        }).length;
         return Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1))
     }
 
@@ -155,7 +158,7 @@ class QuestHelper{
         }
         for (let i = 0; i < QuestHelper.questList().length; i++) {
             if (!(player.completedQuestList[i]() || QuestHelper.questList()[i].isCompleted()
-                    || QuestHelper.questList()[i].inProgress()())) {
+                || QuestHelper.questList()[i].inProgress()())) {
                 return true;
             }
         }

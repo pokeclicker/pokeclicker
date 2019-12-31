@@ -57,7 +57,7 @@ class OakItem {
 
     public upgrade() {
         if (this.canUpgrade()) {
-            player.payMoney(GameConstants.OAKITEM_MONEY_COST[this.level()]);
+            App.game.wallet.loseAmount(new Amount(GameConstants.OAKITEM_MONEY_COST[this.level()], GameConstants.Currency.money));
             player.gainOakItemExp(this.id, 1);
             this.calculateLevel();
         }
@@ -72,7 +72,7 @@ class OakItem {
     }
 
     public canUpgradeMoney(): boolean {
-        return player.hasMoney(GameConstants.OAKITEM_MONEY_COST[this.level()])
+        return App.game.wallet.hasAmount(new Amount(GameConstants.OAKITEM_MONEY_COST[this.level()], GameConstants.Currency.money));
     }
 
     public calculateBonus(): KnockoutComputed<number> {

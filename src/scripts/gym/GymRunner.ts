@@ -61,7 +61,7 @@ class GymRunner {
     public static gymWon(gym: Gym) {
         Notifier.notify("Congratulations, you defeated " + GymBattle.gym.leaderName + "!", GameConstants.NotificationOption.success);
         this.gymObservable(gym);
-        player.gainMoney(gym.moneyReward);
+        App.game.wallet.gainMoney(gym.moneyReward);
         if (!player.hasBadge(gym.badgeReward)) {
             player.gainBadge(gym.badgeReward);
 

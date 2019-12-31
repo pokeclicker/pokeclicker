@@ -52,7 +52,7 @@ class Battle {
      */
     public static defeatPokemon() {
         GameHelper.incrementObservable(player.statistics.pokemonDefeated);
-        player.gainMoney(this.enemyPokemon().money);
+        App.game.wallet.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.gainShards(this.enemyPokemon());
         player.addRouteKill();
@@ -114,7 +114,7 @@ class Battle {
     }
 
     public static catchPokemon() {
-        player.gainDungeonTokens(Math.floor(this.enemyPokemon().level / 2));
+        App.game.wallet.gainDungeonTokens(Math.floor(this.enemyPokemon().level / 2));
         player.capturePokemon(this.enemyPokemon().name, this.enemyPokemon().shiny);
     }
 

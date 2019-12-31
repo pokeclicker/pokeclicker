@@ -1,7 +1,3 @@
-///<reference path="../GameConstants.ts"/>
-///<reference path="Cost.ts"/>
-///<reference path="CostFactory.ts"/>
-
 class Upgrade {
     name: any;
     displayName: string;
@@ -13,11 +9,11 @@ class Upgrade {
     increasing: boolean;
 
     // Optional array of costs
-    costList: Cost[] = [];
+    costList: Amount[] = [];
     // Optional array of benefits
     bonusList: number[] = [];
 
-    constructor(name: any, displayName: string, maxLevel: number, costList: Cost[], bonusList: number[], increasing = true) {
+    constructor(name: any, displayName: string, maxLevel: number, costList: Amount[], bonusList: number[], increasing = true) {
         this.name = name;
         this.displayName = displayName;
         this.maxLevel = maxLevel;
@@ -27,7 +23,7 @@ class Upgrade {
         this.increasing = increasing;
     }
 
-    calculateCost(): Cost {
+    calculateCost(): Amount {
         return this.costList[this.level];
     }
 
@@ -48,7 +44,7 @@ class Upgrade {
     }
 
     canAfford(): boolean {
-        return player.canAfford(this.calculateCost());
+        return App.game.wallet.hasAmount(this.calculateCost());
     }
 
     // Override in subclass when other requirements exist.
@@ -58,7 +54,7 @@ class Upgrade {
 
     buy() {
         if (this.canBuy()) {
-            player.payCost(this.calculateCost());
+            App.game.wallet.loseAmount(this.calculateCost());
             this.levelUp();
         }
     }

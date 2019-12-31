@@ -32,6 +32,15 @@ class EffectEngineRunner {
         }, this);
     }
 
+    public static getMoneyMultiplier() {
+        return this.isActive(GameConstants.BattleItemType.Lucky_incense)() ? 1.5 : 1;
+    }
+
+    public static getDungeonTokenMultiplier() {
+        return this.isActive(GameConstants.BattleItemType.Token_collector)() ? 1.5 : 1;
+    }
+
+
     public static isActive(itemName: string): KnockoutComputed<boolean> {
         return ko.computed(function () {
             if (!player) return false;
