@@ -7,11 +7,11 @@ aria-labelledby="badgeCaseModalLabel">
        </div>
        <div class="modal-body">
            <div class="row no-gutters justify-content-center"
-                data-bind="foreach: Object.keys(GameConstants.Badge).filter(b=>isNaN(b) && !b.startsWith('Elite') && b != 'None')">
+                data-bind="foreach: Object.keys(BadgeCase.Badge).filter(b=>isNaN(b) && !b.startsWith('Elite') && b != 'None')">
                <div class="col-sm-3 col-md-3 col-lg-3 badgeEntry">
                    <img src="" width="60px"
                         data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
-                        css: { 'badge-not-acquired': !player.hasBadge(GameConstants.Badge[$data])}">
+                        css: { 'badge-not-acquired': !player.hasBadge(BadgeCase.Badge[$data])}">
 
                    <p style="bottom: 0;"
                       data-bind="text: $data">name</p>

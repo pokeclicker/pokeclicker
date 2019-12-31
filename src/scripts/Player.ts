@@ -21,7 +21,7 @@ class Player {
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
-    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
+    private _gymBadges: KnockoutObservableArray<BadgeCase.Badge>;
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
@@ -74,10 +74,10 @@ class Player {
         });
         this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
+        this._gymBadges = ko.observableArray<BadgeCase.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
         if (this._gymBadges().length == 0) {
-            this._gymBadges.push(GameConstants.Badge.None)
+            this._gymBadges.push(BadgeCase.Badge.None)
         }
         this._sortOption = ko.observable(savedPlayer._sortOption || null);
         this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
@@ -335,8 +335,8 @@ class Player {
         GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
 
-    public hasBadge(badge: GameConstants.Badge) {
-        if (badge == undefined || GameConstants.Badge.None) {
+    public hasBadge(badge: BadgeCase.Badge) {
+        if (badge == undefined || BadgeCase.Badge.None) {
             return true;
         }
         for (let i = 0; i < this._gymBadges().length; i++) {
@@ -434,7 +434,7 @@ class Player {
         return this.maxLevelPokemonList()().length > 0;
     }
 
-    public gainBadge(badge: GameConstants.Badge) {
+    public gainBadge(badge: BadgeCase.Badge) {
         this._gymBadges.push(badge);
     }
 
@@ -474,11 +474,11 @@ class Player {
         this._region(value);
     }
 
-    get gymBadges(): GameConstants.Badge[] {
+    get gymBadges(): BadgeCase.Badge[] {
         return this._gymBadges();
     }
 
-    set gymBadges(value: GameConstants.Badge[]) {
+    set gymBadges(value: BadgeCase.Badge[]) {
         this._gymBadges(value);
     }
 
