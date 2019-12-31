@@ -24,12 +24,12 @@ class Gym {
     }
 
     public static isUnlocked(gym: Gym): boolean {
-        return player.hasBadge(gym.badgeReq);
+        return App.game.badgeCase.hasBadge(gym.badgeReq);
     }
 
     public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
         return ko.computed(function () {
-            if (player.hasBadge(gym.badgeReward)) {
+            if (App.game.badgeCase.hasBadge(gym.badgeReward)) {
                 return "btn btn-success"
             }
             return "btn btn-secondary"

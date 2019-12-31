@@ -8,15 +8,36 @@ class BadgeCase implements Feature {
 
     constructor(badgeAmount: number) {
         this.badgeAmount = badgeAmount;
-        this.badgeList = this.createDefaultBadgeList(badgeAmount);
+        this.badgeList = this.createDefaultBadgeList();
     }
 
-    private createDefaultBadgeList(badgeAmount: number): ArrayOfObservables<boolean> {
-        let list = [];
-        for (let i = 0; i < badgeAmount; i++) {
+    private createDefaultBadgeList(): ArrayOfObservables<boolean> {
+        let list = [true];
+        for (let i = 1; i < this.badgeAmount; i++) {
             list.push(false);
         }
         return new ArrayOfObservables(list);
+    }
+
+    badgeCount() {
+        let count = 0;
+        for (let i = 0; i < this.badgeList.length; i++) {
+            if (this.badgeList[i]) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    gainBadge(badge: BadgeCase.Badge) {
+        this.badgeList[badge] = true;
+    }
+
+    hasBadge(badge: BadgeCase.Badge) {
+        if (badge == null) {
+            return true;
+        }
+        return this.badgeList[badge];
     }
 
     initialize(): void {
@@ -28,7 +49,7 @@ class BadgeCase implements Feature {
     }
 
     fromJSON(json: object): void {
-        this.badgeList = this.createDefaultBadgeList(this.badgeAmount);
+        this.badgeList = this.createDefaultBadgeList();
     }
 
     toJSON(): object {
@@ -40,7 +61,6 @@ class BadgeCase implements Feature {
     update(delta: number): void {
         // This method intentionally left blank
     }
-
 }
 
 namespace BadgeCase {

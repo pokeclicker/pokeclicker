@@ -63,7 +63,7 @@ class MapHelper {
     };
 
     private static hasBadgeReq(route, region) {
-        return player.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
+        return App.game.badgeCase.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
     }
 
     private static hasDungeonReq(route, region) {
@@ -156,7 +156,7 @@ class MapHelper {
           	let reqsList = '';
 
           	if (town instanceof DungeonTown) {
-                if (town.badgeReq && !player.hasBadge(town.badgeReq)) {
+                if (town.badgeReq && !App.game.badgeCase.hasBadge(town.badgeReq)) {
                     reqsList += `<br/>Requires the ${BadgeCase.Badge[town.badgeReq]} badge.`;
                 }
             }

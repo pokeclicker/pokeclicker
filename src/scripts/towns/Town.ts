@@ -69,7 +69,7 @@ class DungeonTown extends Town {
     }
 
     public isUnlocked() {
-        return (this.hasRouteReq() && player.hasBadge(this.badgeReq));
+        return (this.hasRouteReq() && App.game.badgeCase.hasBadge(this.badgeReq));
     }
 
 }

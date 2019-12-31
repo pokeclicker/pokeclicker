@@ -11,7 +11,7 @@ aria-labelledby="badgeCaseModalLabel">
                <div class="col-sm-3 col-md-3 col-lg-3 badgeEntry">
                    <img src="" width="60px"
                         data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
-                        css: { 'badge-not-acquired': !player.hasBadge(BadgeCase.Badge[$data])}">
+                        css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeCase.Badge[$data])}">
 
                    <p style="bottom: 0;"
                       data-bind="text: $data">name</p>

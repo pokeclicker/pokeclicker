@@ -21,7 +21,6 @@ class Player {
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
-    private _gymBadges: KnockoutObservableArray<BadgeCase.Badge>;
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
@@ -74,11 +73,8 @@ class Player {
         });
         this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        this._gymBadges = ko.observableArray<BadgeCase.Badge>(savedPlayer._gymBadges);
         this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
-        if (this._gymBadges().length == 0) {
-            this._gymBadges.push(BadgeCase.Badge.None)
-        }
+
         this._sortOption = ko.observable(savedPlayer._sortOption || null);
         this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
         this.clickAttackObservable = ko.computed(function () {
@@ -335,18 +331,6 @@ class Player {
         GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
 
-    public hasBadge(badge: BadgeCase.Badge) {
-        if (badge == undefined || BadgeCase.Badge.None) {
-            return true;
-        }
-        for (let i = 0; i < this._gymBadges().length; i++) {
-            if (this._gymBadges()[i] == badge) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
     }
@@ -363,7 +347,7 @@ class Player {
         }
 
         for (let pokemon of this._caughtPokemonList()) {
-            if (pokemon.levelObservable() < (this.gymBadges.length + 2) * 10) {
+            if (pokemon.levelObservable() < (App.game.badgeCase.badgeCount() + 2) * 10) {
                 pokemon.exp(pokemon.exp() + expTotal);
             }
         }
@@ -434,10 +418,6 @@ class Player {
         return this.maxLevelPokemonList()().length > 0;
     }
 
-    public gainBadge(badge: BadgeCase.Badge) {
-        this._gymBadges.push(badge);
-    }
-
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -472,14 +452,6 @@ class Player {
 
     set region(value: GameConstants.Region) {
         this._region(value);
-    }
-
-    get gymBadges(): BadgeCase.Badge[] {
-        return this._gymBadges();
-    }
-
-    set gymBadges(value: BadgeCase.Badge[]) {
-        this._gymBadges(value);
     }
 
     get caughtShinyList(): KnockoutObservableArray<string> {
@@ -682,7 +654,6 @@ class Player {
             "_routeKills",
             "_routeKillsNeeded",
             "_region",
-            "_gymBadges",
             "_sortOption",
             "_sortDescending",
             "_starter",
