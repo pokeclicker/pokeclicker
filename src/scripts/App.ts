@@ -11,7 +11,7 @@ class App {
         Preload.load(App.debug).then(function () {
             OakItemRunner.initialize();
             UndergroundItem.initialize();
-            App.game = new Game(new Breeding(), new Pokeballs(), new Wallet(), new BadgeCase());
+            App.game = new Game(new Breeding(), new Pokeballs(), new Wallet(), new BadgeCase(16));
 
             Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
 

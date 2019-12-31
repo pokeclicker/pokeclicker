@@ -2,12 +2,25 @@ class BadgeCase implements Feature {
     name: string = "Badge Case";
     saveKey: string = "badgeCase";
 
-    badges: boolean[];
+    badgeList: ArrayOfObservables<boolean>;
+    badgeAmount: number;
+    defaults: object = {};
 
-    defaults: object;
+    constructor(badgeAmount: number) {
+        this.badgeAmount = badgeAmount;
+        this.badgeList = this.createDefaultBadgeList(badgeAmount);
+    }
 
+    private createDefaultBadgeList(badgeAmount: number): ArrayOfObservables<boolean> {
+        let list = [];
+        for (let i = 0; i < badgeAmount; i++) {
+            list.push(false);
+        }
+        return new ArrayOfObservables(list);
+    }
 
     initialize(): void {
+        // This method intentionally left blank
     }
 
     canAccess(): boolean {
@@ -15,11 +28,13 @@ class BadgeCase implements Feature {
     }
 
     fromJSON(json: object): void {
+        this.badgeList = this.createDefaultBadgeList(this.badgeAmount);
     }
 
-
     toJSON(): object {
-        return undefined;
+        return this.badgeList.map(badge => {
+            return badge
+        });
     }
 
     update(delta: number): void {
