@@ -33,7 +33,6 @@ namespace GameConstants {
         809, // 88
     ];
 
-    export const AMOUNT_OF_BADGES = 16;
     export const ITEM_USE_TIME = 30;
 
     export const ROAMING_MIN_CHANCE = 8192;
