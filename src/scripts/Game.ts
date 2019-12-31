@@ -34,12 +34,6 @@ class Game {
             this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
         }
 
-        KeyItemHandler.initialize();
-        AchievementHandler.initialize();
-        player.gainKeyItem("Coin case", true);
-        player.gainKeyItem("Teachy tv", true);
-        player.gainKeyItem("Pokeball bag", true);
-
         this._gameState = ko.observable(GameConstants.GameState.fighting);
         this.load();
     }
