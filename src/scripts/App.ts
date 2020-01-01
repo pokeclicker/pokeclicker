@@ -35,7 +35,6 @@ class App {
             GameController.applyRouteBindings();
             Preload.hideSplashScreen();
 
-            App.game.initialize();
             App.game.start();
 
         });
