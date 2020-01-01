@@ -26,13 +26,15 @@ class App {
             PokedexHelper.populateTypeFilters();
             PokedexHelper.updateList();
 
+            App.game.initialize();
+
             ko.applyBindings(App.game);
             ko.options.deferUpdates = true;
 
             GameController.applyRouteBindings();
             Preload.hideSplashScreen();
 
-            App.game.initialize();
+
             App.game.start();
 
         });

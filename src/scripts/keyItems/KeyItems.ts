@@ -2,16 +2,16 @@ class KeyItems implements Feature {
     name: string = "Key Items";
     saveKey: string = "keyItems";
 
-    itemList: ArrayOfObservables<KeyItem>;
+    itemList: KeyItem[];
 
     defaults: object;
 
     constructor() {
-        this.itemList = new ArrayOfObservables([]);
+        this.itemList = [];
     }
 
     initialize() {
-        this.itemList = new ArrayOfObservables([
+        this.itemList = [
             new KeyItem(KeyItems.KeyItem.Teachy_tv, "A television set that is tuned to a program with useful tips for novice TRAINERS"),
             new KeyItem(KeyItems.KeyItem.Coin_case, "A case for holding money. It can hold up to 1,000,000 coins"),
             new KeyItem(KeyItems.KeyItem.Pokeball_bag, "A tiny bag that can hold up to 4 different types of PokéBalls"),
@@ -41,18 +41,19 @@ class KeyItems implements Feature {
             new KeyItem(KeyItems.KeyItem.Shard_case, "A case specifically designed for holding shards", function () {
                 return false;
             })
-        ]);
+        ];
     }
 
     hasKeyItem(item: KeyItems.KeyItem) {
-        if (this.itemList.length == 0) {
-            return false;
+        if (this.itemList[item] == undefined){
+            return false
         }
         return this.itemList[item].isUnlocked;
     }
 
     gainKeyItem(item: KeyItems.KeyItem, supressModal?: boolean) {
         if (!this.hasKeyItem(item)) {
+            // TODO move to controller
             if (!supressModal) {
                 $('.modal').modal('hide');
                 $("#keyItemModal").modal('show');
