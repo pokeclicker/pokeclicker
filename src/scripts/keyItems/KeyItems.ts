@@ -51,13 +51,9 @@ class KeyItems implements Feature {
         return this.itemList[item].isUnlocked;
     }
 
-    gainKeyItem(item: KeyItems.KeyItem, supressModal?: boolean) {
+    gainKeyItem(item: KeyItems.KeyItem) {
         if (!this.hasKeyItem(item)) {
-            // TODO move to controller
-            if (!supressModal) {
-                $('.modal').modal('hide');
-                $("#keyItemModal").modal('show');
-            }
+            KeyItemController.showGainModal(item);
             this.itemList[item].unlock();
         }
     }

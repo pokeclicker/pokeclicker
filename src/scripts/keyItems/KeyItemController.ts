@@ -1,6 +1,13 @@
 class KeyItemController {
     private static _inspectedItem: KnockoutObservable<KeyItems.KeyItem> = ko.observable(KeyItems.KeyItem.Teachy_tv);
     private static _selectedItem: KnockoutObservable<KeyItems.KeyItem> = ko.observable(KeyItems.KeyItem.Teachy_tv);
+    private static _latestGainedItem: KnockoutObservable<KeyItems.KeyItem> = ko.observable(KeyItems.KeyItem.Teachy_tv)
+
+    static showGainModal(item: KeyItems.KeyItem) {
+        this.latestGainedItem = item;
+        $('.modal').modal('hide');
+        $("#keyItemModal").modal('show');
+    }
 
     public static hover(item: KeyItems.KeyItem) {
         this.inspectedItem = item;
@@ -24,6 +31,14 @@ class KeyItemController {
 
     static set selectedItem(item: KeyItems.KeyItem) {
         this._selectedItem(item);
+    }
+
+    static get latestGainedItem() {
+        return this._latestGainedItem();
+    }
+
+    static set latestGainedItem(item: KeyItems.KeyItem) {
+        this._latestGainedItem(item);
     }
 }
 

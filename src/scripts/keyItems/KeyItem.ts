@@ -28,6 +28,10 @@ class KeyItem {
         this.unlocker.dispose();
     }
 
+    get displayName() {
+        return GameConstants.humanifyString(KeyItems.KeyItem[this.name]);
+    }
+
     get name() {
         return this._name();
     }
