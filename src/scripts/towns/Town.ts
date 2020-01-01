@@ -115,7 +115,7 @@ TownList["Power Plant"] = new DungeonTown("Power Plant", [9], BadgeCase.Badge.Ca
 TownList["Pokemon Tower"] = new DungeonTown("Pokemon Tower", [10], BadgeCase.Badge.Cascade);
 TownList["Seafoam Islands"] = new DungeonTown("Seafoam Islands", [19], BadgeCase.Badge.Soul);
 TownList["Victory Road"] = new DungeonTown("Victory Road", [22], BadgeCase.Badge.Earth);
-TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], BadgeCase.Badge.Elite_Champion);
+TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], BadgeCase.Badge.Elite_KantoChampion);
 TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], BadgeCase.Badge.Soul);
 
 //Johto Towns

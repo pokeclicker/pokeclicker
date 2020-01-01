@@ -136,7 +136,7 @@ dungeonList["Cerulean Cave"] = new Dungeon("Cerulean Cave",
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     28735,
     [new DungeonBossPokemon("Rhydon", 143675, 60), new DungeonBossPokemon("Mewtwo", 215512, 70)],
-    2500, BadgeCase.Badge.Elite_Champion, 20, 55
+    2500, BadgeCase.Badge.Elite_KantoChampion, 20, 55
 );
 
 // Johto Dungeons
@@ -146,7 +146,7 @@ dungeonList["Sprout Tower"] = new Dungeon("Sprout Tower",
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
     28735,
     [new DungeonBossPokemon("Bellsprout", 2000, 10)],
-    2500, BadgeCase.Badge.Elite_Champion, 31, 5
+    2500, BadgeCase.Badge.Elite_KantoChampion, 31, 5
 );
 
 dungeonList["Ruins of Alph"] = new Dungeon("Ruins of Alph",

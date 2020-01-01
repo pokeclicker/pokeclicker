@@ -11,7 +11,7 @@ class App {
         Preload.load(App.debug).then(function () {
             OakItemRunner.initialize();
             UndergroundItem.initialize();
-            App.game = new Game(new Breeding(), new Pokeballs(), new Wallet(), new BadgeCase(16));
+            App.game = new Game(new Breeding(), new Pokeballs(), new Wallet(), new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion + 1));
 
             KeyItemHandler.initialize();
             AchievementHandler.initialize();
