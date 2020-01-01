@@ -22,6 +22,17 @@ abstract class Item {
         }
     }
 
+    maxAmount(cost: number): number {
+        // Returns the maximum amount of items that can be bought
+        let amt = 0;
+
+        // TODO: Change to binary search if this becomes slow
+        while (this.totalPrice(amt) <= cost) {
+            amt++;
+        }
+        return amt;
+    }
+
     buy(n: number) {
         if (n <= 0) {
             return;

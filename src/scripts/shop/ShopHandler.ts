@@ -43,9 +43,8 @@ class ShopHandler {
         if (!item || !item.isAvailable()){
           return input.val(0).change();
         }
-        let amt = 1;
-        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)); amt++){}
-        input.val(--amt).change();
+        
+        input.val(item.maxAmount(App.game.wallet.currencies[item.currency])).change();
     }
 
     public static calculateCss(i: number): string {

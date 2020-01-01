@@ -13,6 +13,10 @@ class buyKeyItem extends Item {
             return this.basePrice;
         }
     
+        maxAmount(cost: number): number {
+            return this.totalPrice(1) <= cost ? 1 : 0;
+        }
+
         gain(amt: number) {
             player.gainKeyItem(GameConstants.KeyItemType[this.type].replace("_", " "))
         }
