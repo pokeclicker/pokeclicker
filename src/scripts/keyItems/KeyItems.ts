@@ -45,7 +45,7 @@ class KeyItems implements Feature {
     }
 
     hasKeyItem(item: KeyItems.KeyItem) {
-        if (this.itemList[item] == undefined){
+        if (this.itemList[item] == undefined) {
             return false
         }
         return this.itemList[item].isUnlocked;
@@ -63,11 +63,19 @@ class KeyItems implements Feature {
     }
 
     fromJSON(json: object): void {
-
+        for (let key in json) {
+            if (json.hasOwnProperty(key)) {
+                this.itemList[KeyItems.KeyItem[key]].isUnlocked = json[key];
+            }
+        }
     }
 
     toJSON(): object {
-        return undefined;
+        let save = {};
+        for (let i = 0; i < this.itemList.length; i++) {
+            save[KeyItems.KeyItem[this.itemList[i].name]] = this.itemList[i].isUnlocked;
+        }
+        return save;
     }
 
     update(delta: number): void {
