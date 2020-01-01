@@ -14,6 +14,7 @@ class Save {
         saveObject[App.game.breeding.saveKey] = App.game.breeding.toJSON();
         saveObject[App.game.pokeballs.saveKey] = App.game.pokeballs.toJSON();
         saveObject[App.game.wallet.saveKey] = App.game.wallet.toJSON();
+        saveObject[App.game.keyItems.saveKey] = App.game.keyItems.toJSON();
 
         localStorage.setItem("save", JSON.stringify(saveObject));
 
