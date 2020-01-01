@@ -61,15 +61,15 @@ class Town {
 }
 
 class DungeonTown extends Town {
-    public badgeReq: GameConstants.Badge;
+    public badgeReq: BadgeCase.Badge;
 
-    constructor(name: string, routes: number[], badge?: GameConstants.Badge) {
+    constructor(name: string, routes: number[], badge?: BadgeCase.Badge) {
         super(name, routes, null, dungeonList[name]);
         this.badgeReq = badge;
     }
 
     public isUnlocked() {
-        return (this.hasRouteReq() && player.hasBadge(this.badgeReq));
+        return (this.hasRouteReq() && App.game.badgeCase.hasBadge(this.badgeReq));
     }
 
 }
@@ -108,15 +108,15 @@ TownList["Lavender Town"] = new Town("Lavender Town", [10], LavenderTownShop, du
 
 //Kanto Dungeons
 TownList["Viridian Forest"] = new DungeonTown("Viridian Forest", [1]);
-TownList["Digletts Cave"] = new DungeonTown("Digletts Cave", [1], GameConstants.Badge.Boulder);
-TownList["Mt. Moon"] = new DungeonTown("Mt. Moon", [3], GameConstants.Badge.Boulder);
-TownList["Rock Tunnel"] = new DungeonTown("Rock Tunnel", [9], GameConstants.Badge.Cascade);
-TownList["Power Plant"] = new DungeonTown("Power Plant", [9], GameConstants.Badge.Cascade);
-TownList["Pokemon Tower"] = new DungeonTown("Pokemon Tower", [10], GameConstants.Badge.Cascade);
-TownList["Seafoam Islands"] = new DungeonTown("Seafoam Islands", [19], GameConstants.Badge.Soul);
-TownList["Victory Road"] = new DungeonTown("Victory Road", [22], GameConstants.Badge.Earth);
-TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], GameConstants.Badge.Elite_Champion);
-TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], GameConstants.Badge.Soul);
+TownList["Digletts Cave"] = new DungeonTown("Digletts Cave", [1], BadgeCase.Badge.Boulder);
+TownList["Mt. Moon"] = new DungeonTown("Mt. Moon", [3], BadgeCase.Badge.Boulder);
+TownList["Rock Tunnel"] = new DungeonTown("Rock Tunnel", [9], BadgeCase.Badge.Cascade);
+TownList["Power Plant"] = new DungeonTown("Power Plant", [9], BadgeCase.Badge.Cascade);
+TownList["Pokemon Tower"] = new DungeonTown("Pokemon Tower", [10], BadgeCase.Badge.Cascade);
+TownList["Seafoam Islands"] = new DungeonTown("Seafoam Islands", [19], BadgeCase.Badge.Soul);
+TownList["Victory Road"] = new DungeonTown("Victory Road", [22], BadgeCase.Badge.Earth);
+TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], BadgeCase.Badge.Elite_KantoChampion);
+TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], BadgeCase.Badge.Soul);
 
 //Johto Towns
 let NewBarkTownShop = new Shop(["Pokeball"]);
@@ -159,7 +159,7 @@ TownList["Whirl Islands"] = new DungeonTown("Whirl Islands", [41]);
 TownList["Mt Mortar"] = new DungeonTown("Mt Mortar", [42]);
 TownList["Ice Path"] = new DungeonTown("Ice Path", [44]);
 TownList["Dark Cave"] = new DungeonTown("Dark Cave", [45]);
-TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], GameConstants.Badge.Elite_Karen);
+TownList["Mt Silver"] = new DungeonTown("Mt Silver", [28], BadgeCase.Badge.Elite_Karen);
 
 //Hoenn Towns
 TownList["Littleroot Town"] = new Town("Littleroot Town", []);
@@ -182,17 +182,17 @@ TownList["Pacifidlog Town"] = new Town("Pacifidlog Town", [131]);
 
 //Hoenn Dungeons
 TownList["Petalburg Woods"] = new DungeonTown("Petalburg Woods", [104]);
-TownList["Rusturf Tunnel"] = new DungeonTown("Rusturf Tunnel", [116], GameConstants.Badge.Stone);
-TownList["Granite Cave"] = new DungeonTown("Granite Cave", [116], GameConstants.Badge.Knuckle);
-TownList["Fiery Path"] = new DungeonTown("Fiery Path", [111], GameConstants.Badge.Dynamo);
+TownList["Rusturf Tunnel"] = new DungeonTown("Rusturf Tunnel", [116], BadgeCase.Badge.Stone);
+TownList["Granite Cave"] = new DungeonTown("Granite Cave", [116], BadgeCase.Badge.Knuckle);
+TownList["Fiery Path"] = new DungeonTown("Fiery Path", [111], BadgeCase.Badge.Dynamo);
 TownList["Meteor Falls"] = new DungeonTown("Meteor Falls", [114]);
 TownList["Mt. Chimney"] = new DungeonTown("Mt. Chimney", [115]);
 TownList["Jagged Pass"] = new DungeonTown("Jagged Pass", [115]);
-TownList["New Mauville"] = new DungeonTown("New Mauville", [112], GameConstants.Badge.Heat);
+TownList["New Mauville"] = new DungeonTown("New Mauville", [112], BadgeCase.Badge.Heat);
 TownList["Sea Mauville"] = new DungeonTown("Sea Mauville", [108]);
 TownList["Mt. Pyre"] = new DungeonTown("Mt. Pyre", [122]);
 TownList["Shoal Cave"] = new DungeonTown("Shoal Cave", [125]);
 TownList["Cave of Origin"] = new DungeonTown("Cave of Origin", [126]);
 TownList["Seafloor Cavern"] = new DungeonTown("Seafloor Cavern", [127]);
 TownList["Sky Pillar"] = new DungeonTown("Sky Pillar", [131]);
-TownList["Victory Road Hoenn"] = new DungeonTown("Victory Road Hoenn", [128], GameConstants.Badge.Rain);
+TownList["Victory Road Hoenn"] = new DungeonTown("Victory Road Hoenn", [128], BadgeCase.Badge.Rain);

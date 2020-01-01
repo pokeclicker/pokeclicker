@@ -16,6 +16,7 @@ class App {
                 new Pokeballs(),
                 new Wallet(),
                 new KeyItems(),
+                new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion)
                 );
 
             Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
@@ -34,7 +35,7 @@ class App {
             GameController.applyRouteBindings();
             Preload.hideSplashScreen();
 
-
+            App.game.initialize();
             App.game.start();
 
         });

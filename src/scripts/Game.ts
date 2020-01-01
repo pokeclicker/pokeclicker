@@ -10,17 +10,25 @@ class Game {
     public pokeballs: Pokeballs;
     public wallet: Wallet;
     public keyItems: KeyItems;
+    public badgeCase: BadgeCase;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
     /**
      * TODO(@Isha) pass all features through the constructor
      */
-    constructor(breeding: Breeding, pokeballs: Pokeballs, wallet: Wallet, keyItems: KeyItems) {
+    constructor(
+        breeding: Breeding,
+        pokeballs: Pokeballs,
+        wallet: Wallet,
+        keyItems: KeyItems,
+        badgeCase: BadgeCase
+    ) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
         this.wallet = wallet;
         this.keyItems = keyItems;
+        this.badgeCase = badgeCase
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
@@ -39,6 +47,7 @@ class Game {
             this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
             this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
             this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
+            this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
         }
     }
 
