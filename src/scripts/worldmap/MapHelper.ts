@@ -29,7 +29,7 @@ class MapHelper {
 
           	if (!MapHelper.hasBadgeReq(route, region)) {
             		let badgeNumber = GameConstants.routeBadgeRequirements[region][route];
-            		reqsList += `<br>Requires the ${GameConstants.Badge[badgeNumber]} badge.`;
+            		reqsList += `<br>Requires the ${BadgeCase.Badge[badgeNumber]} badge.`;
           	}
 
           	if (!MapHelper.hasDungeonReq(route, region)) {
@@ -63,7 +63,7 @@ class MapHelper {
     };
 
     private static hasBadgeReq(route, region) {
-        return player.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
+        return App.game.badgeCase.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
     }
 
     private static hasDungeonReq(route, region) {
@@ -156,8 +156,8 @@ class MapHelper {
           	let reqsList = '';
 
           	if (town instanceof DungeonTown) {
-                if (town.badgeReq && !player.hasBadge(town.badgeReq)) {
-                    reqsList += `<br/>Requires the ${GameConstants.Badge[town.badgeReq]} badge.`;
+                if (town.badgeReq && !App.game.badgeCase.hasBadge(town.badgeReq)) {
+                    reqsList += `<br/>Requires the ${BadgeCase.Badge[town.badgeReq]} badge.`;
                 }
             }
 

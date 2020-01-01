@@ -1,4 +1,5 @@
 ///<reference path="../wallet/AmountFactory.ts"/>
+///<reference path="../underground/Underground.ts"/>
 class UndergroundUpgrade extends Upgrade {
 
     constructor(name: Underground.Upgrades, displayName: string, maxLevel: number, costList: Amount[], bonusList: number[], increasing = true) {
