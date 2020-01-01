@@ -115,7 +115,8 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(town: string): string {
-        if (App.game.keyItems.hasKeyItem(town)) {
+        // TODO(@Isha) this is very weird, refactor this.
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem[town])) {
             return 'city unlockedTown';
         }
         if (player.currentTown() == town) {

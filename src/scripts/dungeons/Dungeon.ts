@@ -35,7 +35,7 @@ class Dungeon {
             return false;
         }
 
-        if(!App.game.keyItems.hasKeyItem("Dungeon ticket")){
+        if(!App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket)){
             Notifier.notify("You need the Dungeon ticket to access dungeons", GameConstants.NotificationOption.danger);
             return false
         }

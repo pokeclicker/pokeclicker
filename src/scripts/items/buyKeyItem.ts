@@ -1,12 +1,12 @@
+///<reference path="../keyItems/KeyItems.ts"/>
 class buyKeyItem extends Item {
 
-        type: GameConstants.KeyItemType;
+        item: KeyItems.KeyItem;
 
-        constructor(type: GameConstants.KeyItemType) {
-            let basePrice = GameConstants.ItemPrice[GameConstants.KeyItemType[type]];
+        constructor(item: KeyItems.KeyItem, price: number) {
             let priceMultiplier = 1;
-            super(GameConstants.KeyItemType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
-            this.type = type;
+            super(KeyItems.KeyItem[item], price, priceMultiplier, GameConstants.Currency.questPoint);
+            this.item = item;
         }
 
         totalPrice(amt: number) {
@@ -14,17 +14,17 @@ class buyKeyItem extends Item {
         }
 
         gain(amt: number) {
-            player.gainKeyItem(GameConstants.KeyItemType[this.type].replace("_", " "))
+            App.game.keyItems.gainKeyItem(this.item);
         }
 
         use() {
         }
 
         isAvailable(): boolean {
-            return super.isAvailable() && !App.game.keyItems.hasKeyItem(this.name().replace("_", " "));
+            return super.isAvailable() && !App.game.keyItems.hasKeyItem(this.type);
         }
 }
 
 
-ItemList['Dungeon_ticket'] = new buyKeyItem(GameConstants.KeyItemType.Dungeon_ticket);
-ItemList['Explorer_kit'] = new buyKeyItem(GameConstants.KeyItemType.Explorer_kit);
+ItemList['Dungeon_ticket'] = new buyKeyItem(KeyItems.KeyItem.Dungeon_ticket, 250);
+ItemList['Explorer_kit'] = new buyKeyItem(KeyItems.KeyItem.Explorer_kit, 5000);

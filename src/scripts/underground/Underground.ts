@@ -180,7 +180,7 @@ class Underground {
     }
 
     public static openUndergroundModal() {
-        if (App.game.keyItems.hasKeyItem("Explorer kit")) {
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit)) {
             App.game.gameState = GameConstants.GameState.paused;
             $('#mineModal').modal('show');
         } else {
