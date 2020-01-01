@@ -11,8 +11,13 @@ class App {
         Preload.load(App.debug).then(function () {
             OakItemRunner.initialize();
             UndergroundItem.initialize();
-            App.game = new Game(new Breeding(), new Pokeballs(), new Wallet());
+            App.game = new Game(new Breeding(), new Pokeballs(), new Wallet(), new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion));
 
+            KeyItemHandler.initialize();
+            AchievementHandler.initialize();
+            player.gainKeyItem("Coin case", true);
+            player.gainKeyItem("Teachy tv", true);
+            player.gainKeyItem("Pokeball bag", true);
             Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
 
             GameController.bindToolTips();
