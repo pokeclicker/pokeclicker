@@ -12,9 +12,9 @@ class KeyItems implements Feature {
 
     initialize() {
         this.itemList = [
-            new KeyItem(KeyItems.KeyItem.Teachy_tv, "A television set that is tuned to a program with useful tips for novice TRAINERS"),
-            new KeyItem(KeyItems.KeyItem.Coin_case, "A case for holding money. It can hold up to 1,000,000 coins"),
-            new KeyItem(KeyItems.KeyItem.Pokeball_bag, "A tiny bag that can hold up to 4 different types of PokéBalls"),
+            new KeyItem(KeyItems.KeyItem.Teachy_tv, "A television set that is tuned to a program with useful tips for novice TRAINERS", null, true),
+            new KeyItem(KeyItems.KeyItem.Coin_case, "A case for holding money. It can hold up to 1,000,000 coins", null, true),
+            new KeyItem(KeyItems.KeyItem.Pokeball_bag, "A tiny bag that can hold up to 4 different types of PokéBalls", null, true),
             new KeyItem(KeyItems.KeyItem.Town_map, "A very convenient map that can be viewed anytime. It even shows you your present location in the region", function () {
                 return player.routeKillsObservable(1)() > player.routeKillsNeeded - 1;
             }),

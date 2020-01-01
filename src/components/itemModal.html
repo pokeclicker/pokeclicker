@@ -82,50 +82,39 @@
                 </div>
 
                 <div id="keyItems" class="tab-pane fade in active show">
-                    <div style="width: 100%;">
-                        <img style="float:right;margin-right:10px;margin-top:10px"
-                             data-bind="tooltip: { title: 'An overview of all Key items you have collected so far. Click on a key item to get more information.', trigger: 'hover', placement:'right' }"
-                             src="assets/images/questionmark.png">
-
-
-                    </div>
                     <div class="page-item m-0">
-
                         <div class="row no-gutters justify-content-sm-center"
                              data-bind="foreach: App.game.keyItems.itemList">
                             <div class="col-sm-2">
                                 <img class="clickable key-item" src=""
-                                     data-bind="attr:{ src: 'assets/images/keyitems/' + $data.name + '.png'},
-                              css: {'oak-item-locked': !App.game.keyItems.hasKeyItem($data.name)
-
-                                    },
+                                     data-bind="attr:{
+                                     src: 'assets/images/keyitems/' + KeyItems.KeyItem[$data.name] + '.png'},
+                              css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.name),
+                              'key-item-selected': KeyItemController.inspectedItem == $data.name
+                              },
                              event: {
                                 mouseover: function(){KeyItemController.hover($data.name)},
-                                click: function(){KeyItemController.click($data.name)},
                                 mouseout : function(){KeyItemController.hoverRelease()}
                                 }">
                             </div>
                         </div>
 
                         <div class="card oak-item-info" style="height:90px">
-                            <div data-bind="if: KeyItemController.inspectedItem !== null">
-                                <div class="row justify-content-sm-center">
-                                    <div style="height: 20px" class="col-sm-11">
-                                        <b><span data-bind="text: KeyItemController.inspectedItem.name"></span></b>
+                            <div class="row justify-content-sm-center">
+                                <div style="height: 20px" class="col-sm-11">
+                                    <b><span data-bind="text: GameConstants.humanifyString(KeyItems.KeyItem[App.game.keyItems.itemList[KeyItemController.inspectedItem].name])"></span></b>
+                                </div>
+                            </div>
+                            <div class="row justify-content-sm-center">
+                                <div class="col-sm-11">
+                                    <div data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
+                                        <p style="margin-top: 5px"
+                                           data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem].description"></p>
                                     </div>
-                                    <div class="row justify-content-sm-center">
-                                        <div class="col-sm-11">
-                                            <div data-bind="if: KeyItemController.inspectedItem.isUnlocked()">
-                                                <p style="margin-top: 5px"
-                                                   data-bind="html: KeyItemController.inspectedItem.description"></p>
-                                            </div>
-                                            <div data-bind="ifnot: KeyItemController.inspectedItem.isUnlocked()">
-                                                <p style="margin-top: 5px">?????</p>
-                                            </div>
-                                        </div>
+                                    <div data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
+                                        <p style="margin-top: 5px">?????</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
