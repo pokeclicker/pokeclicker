@@ -14,23 +14,19 @@ abstract class Item {
     }
 
     totalPrice(amount: number): number {
-        if (this.name() == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
-            return this.basePrice * amount;
-        } else {
-            let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
-            return Math.floor(res);
-        }
+        let res = this.price() * (Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount) - 1) 
+            / (GameConstants.ITEM_PRICE_MULTIPLIER - 1);
+        return Math.floor(res);
     }
 
     maxAmount(cost: number): number {
         // Returns the maximum amount of items that can be bought
-        let amt = 0;
-
-        // TODO: Change to binary search if this becomes slow
-        while (this.totalPrice(amt) <= cost) {
-            amt++;
+        if (this.price() <= 0) {
+            return 1;
         }
-        return amt;
+        let amt = Math.log(1 + cost / this.price() * (GameConstants.ITEM_PRICE_MULTIPLIER - 1)) 
+            / Math.log(GameConstants.ITEM_PRICE_MULTIPLIER);
+        return Math.floor(amt);
     }
 
     buy(n: number) {

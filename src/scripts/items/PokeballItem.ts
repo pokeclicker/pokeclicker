@@ -9,6 +9,22 @@ class PokeballItem extends Item {
         this.type = type;
     }
 
+    totalPrice(amount: number): number {
+        if (this.type == GameConstants.Pokeball.Pokeball) {
+            return this.basePrice * amount;
+        } else {
+            return super.totalPrice(amount);
+        }
+    }
+
+    maxAmount(cost: number): number {
+        if (this.type == GameConstants.Pokeball.Pokeball) {
+            return Math.floor(cost / this.basePrice);
+        } else {
+            return super.maxAmount(cost);
+        }
+    }
+
     gain(amt: number) {
         App.game.pokeballs.gainPokeballs(this.type, amt);
         GameHelper.incrementObservable(player.statistics.pokeballsBought[this.type], amt);
