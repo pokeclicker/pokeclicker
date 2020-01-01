@@ -6,8 +6,8 @@ class BadgeCase implements Feature {
     badgeAmount: number;
     defaults: object = {};
 
-    constructor(badgeAmount: number) {
-        this.badgeAmount = badgeAmount;
+    constructor(highestBadge) {
+        this.badgeAmount = highestBadge + 1;
         this.badgeList = this.createDefaultBadgeList();
     }
 
