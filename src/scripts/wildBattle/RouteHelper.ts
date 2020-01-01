@@ -21,7 +21,7 @@ class RouteHelper {
             return ["Rattata"];
         }
         let pokemonList = possiblePokemons.land;
-        if (player.hasKeyItem("Super rod") || possiblePokemons.land.length == 0) {
+        if (App.game.keyItems.hasKeyItem("Super rod") || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.water);
         }
         if (includeHeadbutt) {

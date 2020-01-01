@@ -115,7 +115,7 @@ class MapHelper {
     }
 
     public static calculateTownCssClass(town: string): string {
-        if (player.hasKeyItem(town)) {
+        if (App.game.keyItems.hasKeyItem(town)) {
             return 'city unlockedTown';
         }
         if (player.currentTown() == town) {

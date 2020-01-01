@@ -9,16 +9,18 @@ class Game {
     public breeding: Breeding;
     public pokeballs: Pokeballs;
     public wallet: Wallet;
+    public keyItems: KeyItems;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
     /**
      * TODO(@Isha) pass all features through the constructor
      */
-    constructor(breeding: Breeding, pokeballs: Pokeballs, wallet: Wallet) {
+    constructor(breeding: Breeding, pokeballs: Pokeballs, wallet: Wallet, keyItems: KeyItems) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
         this.wallet = wallet;
+        this.keyItems = keyItems;
 
         player = Save.load();
 
@@ -29,13 +31,13 @@ class Game {
             this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
             this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
             this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
+            this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
         }
 
-        KeyItemHandler.initialize();
         AchievementHandler.initialize();
-        player.gainKeyItem("Coin case", true);
-        player.gainKeyItem("Teachy tv", true);
-        player.gainKeyItem("Pokeball bag", true);
+        // player.gainKeyItem("Coin case", true);
+        // player.gainKeyItem("Teachy tv", true);
+        // player.gainKeyItem("Pokeball bag", true);
 
         this._gameState = ko.observable(GameConstants.GameState.fighting);
         this.load();
@@ -44,6 +46,7 @@ class Game {
     initialize() {
         this.breeding.initialize();
         this.pokeballs.initialize();
+        this.keyItems.initialize();
     }
 
     start() {

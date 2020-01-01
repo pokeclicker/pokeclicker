@@ -95,31 +95,31 @@
                              data-bind="foreach: KeyItemHandler.keyItemList">
                             <div class="col-sm-2">
                                 <img class="clickable key-item" src=""
-                                     data-bind="attr:{ src: 'assets/images/keyitems/' + $data.name() + '.png'},
-                              css: {'oak-item-locked': !player.hasKeyItem($data.name())
+                                     data-bind="attr:{ src: 'assets/images/keyitems/' + $data.name + '.png'},
+                              css: {'oak-item-locked': !App.game.keyItems.hasKeyItem($data.name)
 
                                     },
                              event: {
-                                mouseover: function(){KeyItemHandler.hover($data.name())},
-                                click: function(){KeyItemHandler.click($data.name())},
+                                mouseover: function(){KeyItemHandler.hover($data.name)},
+                                click: function(){KeyItemHandler.click($data.name)},
                                 mouseout : function(){KeyItemHandler.hoverRelease()}
                                 }">
                             </div>
                         </div>
 
                         <div class="card oak-item-info" style="height:90px">
-                            <div data-bind="if: KeyItemHandler.inspectedItem() !== null">
+                            <div data-bind="if: KeyItemController.inspectedItem !== null">
                                 <div class="row justify-content-sm-center">
                                     <div style="height: 20px" class="col-sm-11">
-                                        <b><span data-bind="text: KeyItemHandler.inspectedItem().name()"></span></b>
+                                        <b><span data-bind="text: KeyItemController.inspectedItem.name"></span></b>
                                     </div>
                                     <div class="row justify-content-sm-center">
                                         <div class="col-sm-11">
-                                            <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
+                                            <div data-bind="if: KeyItemController.inspectedItem.isUnlocked()">
                                                 <p style="margin-top: 5px"
-                                                   data-bind="html: KeyItemHandler.inspectedItem().description"></p>
+                                                   data-bind="html: KeyItemController.inspectedItem.description"></p>
                                             </div>
-                                            <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
+                                            <div data-bind="ifnot: KeyItemController.inspectedItem.isUnlocked()">
                                                 <p style="margin-top: 5px">?????</p>
                                             </div>
                                         </div>
