@@ -45,18 +45,19 @@ class KeyItems implements Feature {
     }
 
     hasKeyItem(item: KeyItems.KeyItem) {
+        if (this.itemList.length == 0) {
+            return false;
+        }
         return this.itemList[item].isUnlocked;
     }
 
     gainKeyItem(item: KeyItems.KeyItem, supressModal?: boolean) {
-        if (!this.hasKeyItem(name)) {
+        if (!this.hasKeyItem(item)) {
             if (!supressModal) {
                 $('.modal').modal('hide');
                 $("#keyItemModal").modal('show');
             }
-            this.gainKeyItem(item);
-            // KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
-
+            this.itemList[item].unlock();
         }
     }
 

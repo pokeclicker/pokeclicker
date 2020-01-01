@@ -22,6 +22,9 @@ class Game {
         this.wallet = wallet;
         this.keyItems = keyItems;
 
+        this._gameState = ko.observable(GameConstants.GameState.paused);
+
+
         player = Save.load();
 
         // TODO(@Isha) Refactor this saving logic
@@ -39,14 +42,29 @@ class Game {
         // player.gainKeyItem("Teachy tv", true);
         // player.gainKeyItem("Pokeball bag", true);
 
-        this._gameState = ko.observable(GameConstants.GameState.fighting);
-        this.load();
     }
 
     initialize() {
         this.breeding.initialize();
         this.pokeballs.initialize();
         this.keyItems.initialize();
+
+
+        // TODO refactor to proper initialization methods
+        OakItemRunner.loadOakItems();
+        Battle.generateNewEnemy();
+        Safari.load();
+        Save.loadMine();
+        Underground.energyTick(Underground.getEnergyRegenTime());
+        DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
+        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
+        QuestHelper.loadCurrentQuests(player.currentQuests);
+        if (!player.tutorialComplete()) {
+            QuestLineHelper.createTutorial();
+            QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
+        }
+
+        this.gameState = GameConstants.GameState.fighting
     }
 
     start() {
@@ -139,21 +157,6 @@ class Game {
 
     save() {
 
-    }
-
-    load() {
-        OakItemRunner.loadOakItems();
-        Battle.generateNewEnemy();
-        Safari.load();
-        Save.loadMine();
-        Underground.energyTick(Underground.getEnergyRegenTime());
-        DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
-        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
-        QuestHelper.loadCurrentQuests(player.currentQuests);
-        if (!player.tutorialComplete()) {
-            QuestLineHelper.createTutorial();
-            QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
-        }
     }
 
     // Knockout getters/setters
