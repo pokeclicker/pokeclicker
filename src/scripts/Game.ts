@@ -27,6 +27,10 @@ class Game {
 
         player = Save.load();
 
+        AchievementHandler.initialize();
+    }
+
+    load() {
         // TODO(@Isha) Refactor this saving logic
         let saveJSON = localStorage.getItem("save");
         if (saveJSON !== null) {
@@ -36,12 +40,6 @@ class Game {
             this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
             this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
         }
-
-        AchievementHandler.initialize();
-        // player.gainKeyItem("Coin case", true);
-        // player.gainKeyItem("Teachy tv", true);
-        // player.gainKeyItem("Pokeball bag", true);
-
     }
 
     initialize() {

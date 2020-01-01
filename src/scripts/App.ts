@@ -27,7 +27,7 @@ class App {
             PokedexHelper.updateList();
 
             App.game.initialize();
-
+            App.game.load();
             ko.applyBindings(App.game);
             ko.options.deferUpdates = true;
 
