@@ -62,7 +62,7 @@ gymList["Pewter City"] = new Gym(
         new GymPokemon("Onix", 1554, 14)],
     BadgeCase.Badge.Boulder,
     250,
-    BadgeCase.Badge.None,
+    null,
     "I took you for granted, and so I lost. As proof of your victory, I confer on you this...the official Pokémon League Boulder Badge.");
 
 gymList["Cerulean City"] = new Gym(
