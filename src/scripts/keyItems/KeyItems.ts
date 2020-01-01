@@ -65,7 +65,10 @@ class KeyItems implements Feature {
     fromJSON(json: object): void {
         for (let key in json) {
             if (json.hasOwnProperty(key)) {
-                this.itemList[KeyItems.KeyItem[key]].isUnlocked = json[key];
+                if (json[key] === true) {
+                    // Unlock to dispose unlocker if needed
+                    this.itemList[KeyItems.KeyItem[key]].unlock();
+                }
             }
         }
     }

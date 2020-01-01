@@ -25,7 +25,9 @@ class KeyItem {
 
     unlock() {
         this.isUnlocked = true;
-        this.unlocker.dispose();
+        if (this.unlocker) {
+            this.unlocker.dispose();
+        }
     }
 
     get displayName() {
