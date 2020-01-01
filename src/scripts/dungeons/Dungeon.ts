@@ -64,7 +64,7 @@ dungeonList["Viridian Forest"] = new Dungeon("Viridian Forest",
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     102,
     [new DungeonBossPokemon("Pikachu", 510, 7)],
-    50, null, 1, 5
+    50, BadgeCase.Badge.None, 1, 5
 );
 
 dungeonList["Digletts Cave"] = new Dungeon("Digletts Cave",
