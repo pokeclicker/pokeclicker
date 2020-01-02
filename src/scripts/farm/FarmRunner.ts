@@ -19,14 +19,12 @@ class FarmRunner {
 
     public static timeToReduce(){
       // TODO(@Isha) fix when refactoring to feature
-      let oakItemBonus = App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 0;
-      oakItemBonus = 1 - oakItemBonus;
-      return Math.round(100 / oakItemBonus) / 100;
+      return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 1
     }
 
     public static tick() {
         this.counter = 0;
-        const timeToReduce = this.timeToReduce();
+        const timeToReduce = App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
         for (let i = 0; i < player.plotList.length; i++) {
             player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - timeToReduce));
         }
