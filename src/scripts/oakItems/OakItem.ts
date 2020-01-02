@@ -14,7 +14,7 @@ class OakItem extends ExpUpgrade {
 
 
     constructor(name: any, displayName: string, bonusList: number[], inactiveBonus: number, increasing: boolean, unlockReq: number, description: string, expGain: number) {
-        super(name, displayName, 5, [1000, 2500, 5000, 10000, 20000], AmountFactory.createArray([1000, 2500, 5000, 10000, 20000], GameConstants.Currency.money), bonusList, increasing);
+        super(name, displayName, 5, [500, 1000, 2500, 5000, 10000], AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money), bonusList, increasing);
         this._isActive = ko.observable(false);
         this.inactiveBonus = inactiveBonus;
         this.unlockReq = unlockReq;
