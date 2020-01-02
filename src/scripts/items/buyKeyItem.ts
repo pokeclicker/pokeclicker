@@ -21,7 +21,7 @@ class buyKeyItem extends Item {
         }
 
         isAvailable(): boolean {
-            return super.isAvailable() && !App.game.keyItems.hasKeyItem(this.type);
+            return super.isAvailable() && !App.game.keyItems.hasKeyItem(this.item);
         }
 }
 
