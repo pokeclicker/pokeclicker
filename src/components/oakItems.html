@@ -1,5 +1,5 @@
 <div class="card border-secondary mb-3" id="oakItemsContainer"
-data-bind="visible: player.starter != GameConstants.Starter.None">
+data-bind="visible: App.game.oakItems.canAccess()">
     <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
         <div>
             <span style="text-align:center" data-bind="text: 'Oak Items equiped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()"></span>
