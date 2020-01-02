@@ -18,7 +18,7 @@ data-bind="visible: App.game.oakItems.canAccess()">
                     <img class="clickable" src=""
                          data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
                           css: {
-                            'oak-item-locked': !App.game.oakItems.isUnlocked($data.id),
+                            'oak-item-locked': !App.game.oakItems.isUnlocked($data.name),
                             'flash': $data.hasEnoughExp()
                           },
                           event: {
@@ -56,14 +56,20 @@ data-bind="visible: App.game.oakItems.canAccess()">
                             <span data-bind="hidden: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(), html: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString"></span>
                             <div data-bind="if:App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
                                         disable: !App.game.oakItems.itemList[OakItemController.inspectedItem].canBuy()">
+                                <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
+                                <div class="btn-default">Max level!</div>
+                                <!-- /ko -->
+
+                                <!-- ko ifnot: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
                                 <div class="btn-default"
                                      data-bind="
                                       click: function(){
                                         App.game.oakItems.itemList[OakItemController.inspectedItem].buy();
                                       },
-                                      text: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() ? 'Max Level!' : 'Upgrade'">
+                                        html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/money.png height=14px/>)'">
                                     Upgrade!
                                 </div>
+                                    <!-- /ko -->
                             </div>
                         </div>
 

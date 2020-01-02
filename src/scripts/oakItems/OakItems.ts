@@ -26,7 +26,7 @@ class OakItems implements Feature {
             new OakItem(OakItems.OakItem.Sprayduck, "Sprayduck", [25, 30, 35, 40, 45, 50], 0, false, 60, "Makes your berries grow faster", 3),
             new OakItem(OakItems.OakItem.Shiny_Charm, "Shiny Charm", [50, 60, 70, 80, 90, 100], 1, true, 70, "Encounter shinies more often", 150),
             new OakItem(OakItems.OakItem.Blaze_Cassette, "Blaze Cassette", [50, 60, 70, 80, 90, 100], 0, false, 80, "Hatch eggs faster", 10),
-            new OakItem(OakItems.OakItem.Cell_Battery, "Cell Battery", [25, 30, 35, 40, 45, 50], 0, false, 80, "More passive mining energy regen", 50),
+            new OakItem(OakItems.OakItem.Cell_Battery, "Cell Battery", [25, 30, 35, 40, 45, 50], 0, false, 90, "More passive mining energy regen", 50),
         ]
     }
 
@@ -101,6 +101,9 @@ class OakItems implements Feature {
     }
 
     activate(item: OakItems.OakItem) {
+        if (!this.isUnlocked(item)){
+            return;
+        }
         if (this.maxActiveCount() == 0) {
             return;
         }
