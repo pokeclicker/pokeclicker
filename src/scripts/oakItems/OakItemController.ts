@@ -3,6 +3,16 @@ class OakItemController {
     private static _inspectedItem: KnockoutObservable<OakItems.OakItem> = ko.observable(OakItems.OakItem.Magic_Ball);
     private static _selectedItem: KnockoutObservable<OakItems.OakItem> = ko.observable(OakItems.OakItem.Magic_Ball);
 
+    public static click(item: OakItems.OakItem) {
+        this.selectedItem = item;
+
+        if (App.game.oakItems.isActive(item)) {
+            App.game.oakItems.deactivate(item);
+            return;
+        }
+        App.game.oakItems.activate(item);
+    }
+
     public static hover(item: OakItems.OakItem) {
         this.inspectedItem = item;
     }

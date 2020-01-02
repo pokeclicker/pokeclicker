@@ -1,7 +1,7 @@
 ///<reference path="../upgrades/ExpUpgrade.ts"/>
 class OakItem extends ExpUpgrade {
 
-    isActive: boolean;
+    private _isActive: KnockoutObservable<boolean>;
     inactiveBonus: number;
     unlockReq: number;
     description: string;
@@ -10,7 +10,7 @@ class OakItem extends ExpUpgrade {
 
     constructor(name: any, displayName: string, bonusList: number[], inactiveBonus: number, increasing: boolean, unlockReq: number, description: string, expGain: number) {
         super(name, displayName, 5, [1000, 2500, 5000, 10000, 20000], AmountFactory.createArray([1000, 2500, 5000, 10000, 20000], GameConstants.Currency.money), bonusList, increasing);
-        this.isActive = false;
+        this._isActive = ko.observable(false);
         this.inactiveBonus = inactiveBonus;
         this.unlockReq = unlockReq;
         this.description = description;
@@ -31,5 +31,14 @@ class OakItem extends ExpUpgrade {
             return this.inactiveBonus;
         }
         return super.calculateBonus(level);
+    }
+
+    // Knockout getters/setters
+    get isActive() {
+        return this._isActive();
+    }
+
+    set isActive(bool: boolean) {
+        this._isActive(bool)
     }
 }

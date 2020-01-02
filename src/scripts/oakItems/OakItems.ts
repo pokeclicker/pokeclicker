@@ -39,7 +39,7 @@ class OakItems implements Feature {
         return oakItem.calculateBonus()
     }
 
-    hasOakItem(item: OakItems.OakItem) {
+    isUnlocked(item: OakItems.OakItem) {
         if (this.itemList[item] == undefined) {
             return false
         }
@@ -47,19 +47,30 @@ class OakItems implements Feature {
     }
 
     use(item: OakItems.OakItem) {
-        if (!this.hasOakItem(item)) {
+        if (!this.isUnlocked(item)) {
             return;
         }
         this.itemList[item].use();
     }
 
     maxActiveCount() {
+        return 1;
         for (let i = 0; i < this.unlockRequirements.length; i++) {
             if (player.caughtPokemonList.length < this.unlockRequirements[i]) {
                 return i;
             }
         }
         return this.unlockRequirements.length;
+    }
+
+    activeCount() {
+        let count = 0;
+        for (let i = 0; i < this.itemList.length; i++) {
+            if (this.itemList[i].isActive) {
+                count++;
+            }
+        }
+        return count;
     }
 
 
@@ -88,6 +99,26 @@ class OakItems implements Feature {
             return false;
         }
         return this.itemList[item].isActive;
+    }
+
+    activate(item: OakItems.OakItem) {
+        if (this.maxActiveCount() == 0) {
+            return;
+        }
+        if (this.maxActiveCount() == 1) {
+            this.deactivateAll();
+            this.itemList[item].isActive = true;
+        }
+    }
+
+    private deactivateAll() {
+        for (let i = 0; i < this.itemList.length; i++) {
+            this.itemList[i].isActive = false;
+        }
+    }
+
+    deactivate(item: OakItems.OakItem) {
+        this.itemList[item].isActive = false;
     }
 }
 
