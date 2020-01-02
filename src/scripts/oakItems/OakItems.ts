@@ -76,7 +76,7 @@ class OakItems implements Feature {
     fromJSON(json: object): void {
         for (let key in json) {
             if (json.hasOwnProperty(key)) {
-                this.itemList[KeyItems.KeyItem[key]].fromJSON(json[key]);
+                this.itemList[OakItems.OakItem[key]].fromJSON(json[key]);
             }
         }
     }

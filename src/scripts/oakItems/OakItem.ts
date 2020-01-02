@@ -1,5 +1,10 @@
 ///<reference path="../upgrades/ExpUpgrade.ts"/>
 class OakItem extends ExpUpgrade {
+    defaults = {
+        level: 0,
+        exp: 0,
+        isActive: false
+    };
 
     private _isActive: KnockoutObservable<boolean>;
     inactiveBonus: number;
@@ -35,6 +40,18 @@ class OakItem extends ExpUpgrade {
 
     calculateBonusIfActive(level: number = this.level) {
         return super.calculateBonus(level);
+    }
+
+
+    toJSON(): object {
+        let json = super.toJSON();
+        json["isActive"] = this.isActive;
+        return json;
+    }
+
+    fromJSON(json: object): void {
+        super.fromJSON(json);
+        this.isActive = json["isActive"] ?? this.defaults.isActive;
     }
 
     // Knockout getters/setters

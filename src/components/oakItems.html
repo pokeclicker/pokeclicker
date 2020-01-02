@@ -18,7 +18,7 @@ data-bind="visible: App.game.oakItems.canAccess()">
                     <img class="clickable" src=""
                          data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
                           css: {
-                            'oak-item-locked': $data.id,
+                            'oak-item-locked': !App.game.oakItems.isUnlocked($data.id),
                             'flash': $data.hasEnoughExp()
                           },
                           event: {
