@@ -37,7 +37,7 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
 
             <!-- ko if: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
             <div class="text-center">
-                <p data-bind="text: OakItemController.inspectedItem.description"></p>
+                <p data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].description"></p>
             </div>
             <div class="row justify-content-sm-center">
                 <div class="col-sm-11 col-md-8">
@@ -46,20 +46,20 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
                         <div class="progress-bar bg-success" role="progressbar"
                              data-bind="
                                attr:{
-                                 style: 'width:' + (App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel ? 100 : App.game.oakItems.itemList[OakItemController.inspectedItem].expPercentage) + '%'
+                                 style: 'width:' + (App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() ? 100 : App.game.oakItems.itemList[OakItemController.inspectedItem].expPercentage) + '%'
                                },
                                css: {
                                  'bg-success': !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
                                  'bg-primary': App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
                                }"
                              aria-valuemin="0" aria-valuemax="100">
-                            <span data-bind="hidden: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(), html: App.game.oakItems.itemList[OakItemController.inspectedItem].expPercentage"></span>
+                            <span data-bind="hidden: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(), html: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString"></span>
                             <div data-bind="if:App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
                                         disable: !App.game.oakItems.itemList[OakItemController.inspectedItem].canBuy()">
                                 <div class="btn-default"
                                      data-bind="
                                       click: function(){
-                                        App.game.oakItems.itemList[OakItemController.inspectedItem].upgrade();
+                                        App.game.oakItems.itemList[OakItemController.inspectedItem].buy();
                                       },
                                       text: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() ? 'Max Level!' : 'Upgrade'">
                                     Upgrade!
@@ -73,15 +73,15 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
                     Lvl. <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
                 </div>
                 <div class="col-6">
-                    Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonus()"></span>%
+                    Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>%
                 </div>
             </div>
             <!-- /ko -->
             <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
-<!--            <div style="min-height:80px; vertical-align: center">-->
-<!--                Capture <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].unlockReq - player.caughtPokemonList.length"></span> more unique Pokémon to-->
-<!--                unlock!-->
-<!--            </div>-->
+            <div style="min-height:80px; vertical-align: center">
+                Capture <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].unlockReq - player.caughtPokemonList.length"></span> more unique Pokémon to
+                unlock!
+            </div>
             <!-- /ko -->
         </div>
     </div>

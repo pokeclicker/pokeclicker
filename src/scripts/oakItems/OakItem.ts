@@ -33,6 +33,10 @@ class OakItem extends ExpUpgrade {
         return super.calculateBonus(level);
     }
 
+    calculateBonusIfActive(level: number = this.level) {
+        return super.calculateBonus(level);
+    }
+
     // Knockout getters/setters
     get isActive() {
         return this._isActive();
