@@ -211,7 +211,10 @@ class Player {
         // Base power
         let clickAttack =  Math.pow(this.caughtPokemonList.length + this.caughtAndShinyList()().length + 1, 1.4);
 
-        clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
+        // TODO(@Isha) fix when refactoring to party
+        if (App.game != undefined) {
+            clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
+        }
 
         // Apply battle item bonus
         if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()){

@@ -18,7 +18,8 @@ class FarmRunner {
     }
 
     public static timeToReduce(){
-      let oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
+      // TODO(@Isha) fix when refactoring to feature
+      let oakItemBonus = App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 0;
       oakItemBonus = 1 - oakItemBonus;
       return Math.round(100 / oakItemBonus) / 100;
     }
