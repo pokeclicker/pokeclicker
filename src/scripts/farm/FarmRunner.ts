@@ -18,7 +18,7 @@ class FarmRunner {
     }
 
     public static timeToReduce(){
-      let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Sprayduck) ? OakItemRunner.calculateBonus(GameConstants.OakItem.Sprayduck) / 100 : 0;
+      let oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
       oakItemBonus = 1 - oakItemBonus;
       return Math.round(100 / oakItemBonus) / 100;
     }
@@ -122,7 +122,7 @@ class FarmRunner {
                 Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success)
             }
             plot.berry(null);
-            OakItemRunner.use(GameConstants.OakItem.Sprayduck);
+            App.game.oakItems.use(OakItems.OakItem.Sprayduck);
             return money;
         }
         return 0;

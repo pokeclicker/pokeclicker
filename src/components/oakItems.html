@@ -8,7 +8,7 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
             data-bind="tooltip: { title: 'Activate Oak items to gain unique bonuses. When an Oak item has gained enough experience you can level it up with money to boost its effect.', trigger: 'hover', placement:'left' }">?</button>
     </div>
     <div id="oakItemsBody" class="card-body show">
-        <div class="row" data-bind="foreach: OakItemRunner.oakItemList">
+        <div class="row" data-bind="foreach: App.game.oakItems.itemList">
             <div class="col-xs-4 col-sm-4 col-md-3 p-2">
                 <button class="p-0 btn"
                     data-bind="css: {
@@ -16,7 +16,7 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
                        'btn-outline-secondary': !OakItemRunner.isActive(id)
                      }">
                     <img class="clickable" src=""
-                         data-bind="attr:{ src: 'assets/images/oakitems/' + GameConstants.humanifyString(GameConstants.OakItem[$data.id]) + '.png'},
+                         data-bind="attr:{ src: 'assets/images/oakitems/' + GameConstants.humanifyString(OakItems.OakItem[$data.id]) + '.png'},
                           css: {
                             'oak-item-locked': !OakItemRunner.isUnlocked($data.id),
                             'flash': OakItemRunner.canUpgradeExp($data.id)
@@ -32,7 +32,7 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
         <hr/>
         <div class="oak-item-info">
             <div class="text-center">
-                <strong><h5 data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></h5></strong>
+                <strong><h5 data-bind="text: GameConstants.humanifyString(OakItems.OakItem[OakItemRunner.inspectedItem().id])"></h5></strong>
             </div>
 
             <!-- ko if: OakItemRunner.inspectedItem().isUnlocked() -->

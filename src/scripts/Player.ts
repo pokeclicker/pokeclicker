@@ -26,8 +26,6 @@ class Player {
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
-    private _oakItemExp: Array<KnockoutObservable<number>>;
-    private _oakItemsEquipped: string[];
 
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
@@ -68,10 +66,6 @@ class Player {
         this._caughtAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0)
         });
-        this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
-            return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
-        });
-        this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._sortOption = ko.observable(savedPlayer._sortOption || null);
         this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
@@ -211,38 +205,13 @@ class Player {
         this._defeatedAmount = value;
     }
 
-    public calculateOakItemSlots(): KnockoutObservable<number> {
-        let total = 0;
-        if (this.caughtPokemonList.length >= GameConstants.OAKITEM_FIRST_UNLOCK) {
-            total++;
-        }
-        if (this.caughtPokemonList.length >= GameConstants.OAKITEM_SECOND_UNLOCK) {
-            total++;
-        }
-
-        if (this.caughtPokemonList.length >= GameConstants.OAKITEM_THIRD_UNLOCK) {
-            total++;
-        }
-        return ko.observable(total);
-    }
-
-    public gainOakItemExp(item: GameConstants.OakItem, amount: number) {
-        this.oakItemExp[item](this.oakItemExp[item]() + amount)
-    }
-
-    public getOakItemExp(item: GameConstants.OakItem): number {
-        return this.oakItemExp[item]();
-    }
-
     private _caughtAmount: Array<KnockoutObservable<number>>;
 
     public calculateClickAttack(): number {
         // Base power
         let clickAttack =  Math.pow(this.caughtPokemonList.length + this.caughtAndShinyList()().length + 1, 1.4);
 
-        // Apply Oak bonus
-        const oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Poison_Barb) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Poison_Barb) / 100) : 1;
-        clickAttack *= oakItemBonus;
+        clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
 
         // Apply battle item bonus
         if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()){
@@ -283,7 +252,7 @@ class Player {
         if (PokemonHelper.calcNativeRegion(pokemonName) > player.highestRegion()) {
             return;
         }
-        OakItemRunner.use(GameConstants.OakItem.Magic_Ball);
+        App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
@@ -309,10 +278,10 @@ class Player {
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {
-        OakItemRunner.use(GameConstants.OakItem.Exp_Share);
+        App.game.oakItems.use(OakItems.OakItem.Exp_Share);
         // TODO add exp multipliers
         let trainerBonus = trainer ? 1.5 : 1;
-        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Exp_Share) ? 1 + (OakItemRunner.calculateBonus(GameConstants.OakItem.Exp_Share) / 100) : 1;
+        let oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
         if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()){
@@ -451,28 +420,12 @@ class Player {
         this._currentTown = value;
     }
 
-    get oakItemsEquipped(): string[] {
-        return this._oakItemsEquipped;
-    }
-
-    set oakItemsEquipped(value: string[]) {
-        this._oakItemsEquipped = value;
-    }
-
     get starter(): GameConstants.Starter {
         return this._starter;
     }
 
     set starter(value: GameConstants.Starter) {
         this._starter = value;
-    }
-
-    get oakItemExp(): Array<KnockoutObservable<number>> {
-        return this._oakItemExp;
-    }
-
-    set oakItemExp(value: Array<KnockoutObservable<number>>) {
-        this._oakItemExp = value;
     }
 
     public gainItem(itemName: string, amount: number) {
@@ -630,8 +583,6 @@ class Player {
             "_sortOption",
             "_sortDescending",
             "_starter",
-            "_oakItemExp",
-            "_oakItemsEquipped",
             "_itemList",
             "_itemMultipliers",
             // TODO(@Isha) remove.

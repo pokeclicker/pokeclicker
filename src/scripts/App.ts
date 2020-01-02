@@ -9,14 +9,14 @@ class App {
         }
 
         Preload.load(App.debug).then(function () {
-            OakItemRunner.initialize();
             UndergroundItem.initialize();
             App.game = new Game(
                 new Breeding(),
                 new Pokeballs(),
                 new Wallet(),
                 new KeyItems(),
-                new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion)
+                new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion),
+                new OakItems([20, 50, 100]),
                 );
 
             Notifier.notify("Game loaded", GameConstants.NotificationOption.info);

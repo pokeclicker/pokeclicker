@@ -57,12 +57,12 @@ class PokemonFactory {
      * @returns {boolean}
      */
     public static generateShiny(chance: number): boolean {
-        chance = OakItemRunner.isActive(GameConstants.OakItem.Shiny_Charm) ? chance / (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Shiny_Charm) / 100) : chance;
+        chance /= App.game.oakItems.calculateBonus(OakItems.OakItem.Shiny_Charm);
 
         let rand: number = Math.floor(Math.random() * chance) + 1;
 
         if (rand <= 1) {
-            OakItemRunner.use(GameConstants.OakItem.Shiny_Charm);
+            App.game.oakItems.use(OakItems.OakItem.Shiny_Charm);
             return true;
         }
         return false;
