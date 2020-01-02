@@ -11,6 +11,7 @@ class Game {
     public wallet: Wallet;
     public keyItems: KeyItems;
     public badgeCase: BadgeCase;
+    public shards: Shards;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
@@ -22,13 +23,15 @@ class Game {
         pokeballs: Pokeballs,
         wallet: Wallet,
         keyItems: KeyItems,
-        badgeCase: BadgeCase
+        badgeCase: BadgeCase,
+        shards: Shards
     ) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
         this.wallet = wallet;
         this.keyItems = keyItems;
         this.badgeCase = badgeCase
+        this.shards = shards;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
@@ -48,6 +51,7 @@ class Game {
             this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
             this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
             this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
+            this.shards.fromJSON(saveObject[this.shards.saveKey]);
         }
     }
 

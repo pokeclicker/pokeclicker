@@ -16,7 +16,8 @@ class App {
                 new Pokeballs(),
                 new Wallet(),
                 new KeyItems(),
-                new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion)
+                new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion),
+                new Shards()
                 );
 
             Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
