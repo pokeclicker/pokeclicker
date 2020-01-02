@@ -15,7 +15,7 @@ class Wallet implements Feature {
         App.game.oakItems.use(OakItems.OakItem.Amulet_Coin);
 
         let money = base;
-        money *= App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
+        money *= App.game.oakItems.calculateBonus(OakItems.OakItem.Amulet_Coin);
         money *= AchievementHandler.getMoneyMultiplier();
         money *= EffectEngineRunner.getMoneyMultiplier();
 
