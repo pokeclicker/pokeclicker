@@ -20,13 +20,13 @@ class OakItems implements Feature {
         // TODO(@Isha) validate if working correctly
         this.itemList = [
             new OakItem(OakItems.OakItem.Magic_Ball, "Magic Ball", [5, 6, 7, 8, 9, 10], 0, true, 20, "Gives a bonus to your catchrate", 2),
-            new OakItem(OakItems.OakItem.Amulet_Coin, "Amulet Coin", [25, 30, 35, 40, 45, 50], 1, true, 30, "Gain more coins from battling", 1),
-            new OakItem(OakItems.OakItem.Poison_Barb, "Poison Barb", [25, 30, 35, 40, 45, 50], 1, true, 40, "Clicks do more damage", 3),
-            new OakItem(OakItems.OakItem.Exp_Share, "Exp Share", [15, 18, 21, 24, 27, 30], 1, true, 50, "Gain more exp from battling", 1),
-            new OakItem(OakItems.OakItem.Sprayduck, "Sprayduck", [25, 30, 35, 40, 45, 50], 0, false, 60, "Makes your berries grow faster", 3),
-            new OakItem(OakItems.OakItem.Shiny_Charm, "Shiny Charm", [50, 60, 70, 80, 90, 100], 1, true, 70, "Encounter shinies more often", 150),
-            new OakItem(OakItems.OakItem.Blaze_Cassette, "Blaze Cassette", [50, 60, 70, 80, 90, 100], 0, false, 80, "Hatch eggs faster", 10),
-            new OakItem(OakItems.OakItem.Cell_Battery, "Cell Battery", [25, 30, 35, 40, 45, 50], 0, false, 90, "More passive mining energy regen", 50),
+            new OakItem(OakItems.OakItem.Amulet_Coin, "Amulet Coin", [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, true, 30, "Gain more coins from battling", 1),
+            new OakItem(OakItems.OakItem.Poison_Barb, "Poison Barb", [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, true, 40, "Clicks do more damage", 3),
+            new OakItem(OakItems.OakItem.Exp_Share, "Exp Share", [1.15, 1.18, 1.21, 1.24, 1.27, 1.30], 1, true, 50, "Gain more exp from battling", 1),
+            new OakItem(OakItems.OakItem.Sprayduck, "Sprayduck", [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 0, false, 60, "Makes your berries grow faster", 3),
+            new OakItem(OakItems.OakItem.Shiny_Charm, "Shiny Charm", [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, true, 70, "Encounter shinies more often", 150),
+            new OakItem(OakItems.OakItem.Blaze_Cassette, "Blaze Cassette", [1.00, 1.60, 1.70, 1.80, 1.90, 2.00], 0, false, 80, "Hatch eggs faster", 10),
+            new OakItem(OakItems.OakItem.Cell_Battery, "Cell Battery", [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 0, false, 90, "More passive mining energy regen", 50),
         ]
     }
 
