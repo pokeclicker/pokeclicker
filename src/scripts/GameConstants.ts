@@ -575,8 +575,6 @@ namespace GameConstants {
         "Egg": 1000,
         "EvolutionStone": 2500,
 
-        "Dungeon_ticket": 250,
-        "Explorer_kit": 5000,
     };
 
     export enum StoneType {
@@ -652,11 +650,6 @@ namespace GameConstants {
         Dragon_egg,
         Pokemon_egg,
         Mystery_egg,
-    }
-
-    export enum KeyItemType {
-        Dungeon_ticket,
-        Explorer_kit,
     }
 
     export enum EggType {

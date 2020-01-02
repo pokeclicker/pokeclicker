@@ -180,12 +180,16 @@ class Underground {
     }
 
     public static openUndergroundModal() {
-        if (player.hasKeyItem("Explorer kit")) {
+        if (this.canAccess()) {
             App.game.gameState = GameConstants.GameState.paused;
             $('#mineModal').modal('show');
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
+    }
+
+    private static canAccess() {
+        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 
     public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {
