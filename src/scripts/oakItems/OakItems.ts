@@ -54,7 +54,6 @@ class OakItems implements Feature {
     }
 
     maxActiveCount() {
-        return 1;
         for (let i = 0; i < this.unlockRequirements.length; i++) {
             if (player.caughtPokemonList.length < this.unlockRequirements[i]) {
                 return i;
@@ -107,6 +106,9 @@ class OakItems implements Feature {
         }
         if (this.maxActiveCount() == 1) {
             this.deactivateAll();
+            this.itemList[item].isActive = true;
+        }
+        if (this.activeCount() < this.maxActiveCount()) {
             this.itemList[item].isActive = true;
         }
     }
