@@ -18,7 +18,7 @@ class KeyItem {
         this.unlockReq = ko.computed<boolean>(unlockReq);
         this.unlocker = this.unlockReq.subscribe(() => {
             if (this.unlockReq()) {
-                this.unlock();
+                App.game.keyItems.gainKeyItem(this.name);
             }
         })
     }
