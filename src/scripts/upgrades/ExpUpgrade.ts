@@ -1,9 +1,7 @@
 /**
  * An upgrade that requires experience to level up.
  */
-class ExpUpgrade extends Upgrade implements Saveable {
-    saveKey: string = "";
-
+class ExpUpgrade extends Upgrade {
     defaults = {
         level: 0,
         exp: 0
@@ -32,14 +30,13 @@ class ExpUpgrade extends Upgrade implements Saveable {
     }
 
     toJSON(): object {
-        return {
-            level: this.level,
-            exp: this.exp
-        }
+        let json = super.toJSON();
+        json["exp"] = this.exp;
+        return json;
     }
 
     fromJSON(json: object): void {
-        this.level = json["level"] ?? this.defaults.level;
+        super.fromJSON(json);
         this.exp = json["exp"] ?? this.defaults.exp;
     }
 
