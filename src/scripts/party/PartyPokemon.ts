@@ -16,7 +16,6 @@ class PartyPokemon implements Saveable {
     attackBonus: number;
     _exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
-    evolver: KnockoutSubscription[];
     evolutions: Evolution[];
     _breeding: KnockoutObservable<boolean>;
     attack: KnockoutComputed<number>;
@@ -38,7 +37,8 @@ class PartyPokemon implements Saveable {
             return this.calculateAttack();
         });
 
-        this.evolver = [];
+        this.evolutions = evolutions;
+
     }
 
     public calculateAttack(): number {
@@ -105,7 +105,7 @@ class PartyPokemon implements Saveable {
     }
 
     public checkForEvolution() {
-        if (this.evolved || this.breeding) {
+        if (this.evolved || this.breeding || this.evolutions == null || this.evolutions.length == 0) {
             return;
         }
 

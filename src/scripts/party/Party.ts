@@ -57,6 +57,7 @@ class Party implements Feature {
             if (pokemon.levelObservable() < (App.game.badgeCase.badgeCount() + 2) * 10) {
                 pokemon.exp += expTotal;
             }
+            pokemon.checkForEvolution();
         }
     }
 

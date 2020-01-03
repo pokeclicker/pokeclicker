@@ -28,8 +28,7 @@ const pokemonList: {
         "id": 1,
         "name": "Bulbasaur",
         "catchRate": 45,
-        "evolutions": [ new LevelEvolution("Bulbasaur", "Ivysaur", 16)],
-        "evoLevel": [16],
+        "evolutions": [ new LevelEvolution("Bulbasaur", "Ivysaur", 2)],
         "type": [
             "Grass",
             "Poison"
