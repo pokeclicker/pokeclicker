@@ -17,7 +17,6 @@ class OakItems implements Feature {
     }
 
     initialize() {
-        // TODO(@Isha) validate if working correctly
         this.itemList = [
             new OakItem(OakItems.OakItem.Magic_Ball, "Magic Ball", [5, 6, 7, 8, 9, 10], 0, true, 20, "Gives a bonus to your catchrate", 2),
             new OakItem(OakItems.OakItem.Amulet_Coin, "Amulet Coin", [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, true, 30, "Gain more coins from battling", 1),
@@ -101,7 +100,7 @@ class OakItems implements Feature {
     }
 
     activate(item: OakItems.OakItem) {
-        if (!this.isUnlocked(item)){
+        if (!this.isUnlocked(item)) {
             return;
         }
         if (this.maxActiveCount() == 0) {
