@@ -1,9 +1,6 @@
 ///<reference path="PokemonHelper.ts"/>
 ///<reference path="BattlePokemon.ts"/>
 
-/**
- * Created by dennis on 27-06-17.
- */
 class PokemonFactory {
 
     /**

@@ -1,6 +1,3 @@
-/**
- * Created by dennis on 26-06-17.
- */
 class CaughtPokemon {
     id: number;
     name: string;

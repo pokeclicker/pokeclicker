@@ -1,6 +1,3 @@
-/**
- * Created by dennis on 26-06-17.
- */
 class DataPokemon implements pokemonInterface {
     id: number;
     name: string;
