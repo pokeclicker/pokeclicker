@@ -141,7 +141,7 @@ class Breeding implements Feature {
         }
     }
 
-    public gainPokemonEgg(pokemon: CaughtPokemon) {
+    public gainPokemonEgg(pokemon: PartyPokemon) {
         if (!this.hasFreeEggSlot()) {
             Notifier.notify("You don't have any free egg slots", GameConstants.NotificationOption.warning);
             return;
@@ -149,7 +149,7 @@ class Breeding implements Feature {
         let egg = this.createEgg(pokemon.name);
         pokemon.breeding(true);
         this.gainEgg(egg);
-        pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
+        pokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
     }
 
     public hatchPokemonEgg(index: number) {
@@ -174,13 +174,13 @@ class Breeding implements Feature {
             Notifier.notify(`You hatched ${GameHelper.anOrA(egg.pokemon)} ${egg.pokemon}!`, GameConstants.NotificationOption.success);
         }
 
-        player.capturePokemon(egg.pokemon, shiny);
+        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(egg.pokemon).id, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         let baseForm = this.calculateBaseForm(egg.pokemon);
         if (egg.pokemon != baseForm && !player.alreadyCaughtPokemon(baseForm)) {
             Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
-            player.capturePokemon(baseForm, false, true);
+            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id, shiny);
         }
 
         this._eggList[index](null);

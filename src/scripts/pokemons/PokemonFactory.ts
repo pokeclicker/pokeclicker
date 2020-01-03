@@ -68,6 +68,11 @@ class PokemonFactory {
         return false;
     }
 
+    public static generatePartyPokemon(id: number) {
+        // TODO expand
+        return new PartyPokemon(id, "Test", false, 10, 10, 10, false);
+    }
+
     /**
      * Generate a trainer pokemon based on gymName, index and the dataList.
      * @param gymName name of the gym that the player is fighting.

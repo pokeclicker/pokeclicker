@@ -114,7 +114,8 @@ class Battle {
 
     public static catchPokemon() {
         App.game.wallet.gainDungeonTokens(Math.floor(this.enemyPokemon().level / 2));
-        player.capturePokemon(this.enemyPokemon().name, this.enemyPokemon().shiny);
+        App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
+        App.game.party.gainPokemonById(this.enemyPokemon().id);
     }
 
     static gainItem() {

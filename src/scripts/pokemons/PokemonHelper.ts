@@ -12,6 +12,11 @@ class PokemonHelper {
         });
     }
 
+
+    public static getPokemonById(id: number): DataPokemon {
+        return this.getPokemonByName(pokemonMapId[id].name);
+    }
+
     public static getPokemonByName(name: string): DataPokemon {
         let basePokemon = pokemonMap[name];
         if (!basePokemon) return;
@@ -27,43 +32,6 @@ class PokemonHelper {
 
     public static typeIdToString(id: number) {
         return GameConstants.PokemonType[id];
-    }
-
-    public static calculateLevel(pokemon: CaughtPokemon): number {
-        let level;
-        switch (PokemonHelper.getPokemonByName(pokemon.name).levelType) {
-
-            case GameConstants.LevelType.slow:
-                level = Math.pow(pokemon.exp() * 4 / 5, 1 / 3);
-                break;
-            case GameConstants.LevelType.mediumslow:
-                let y;
-                for (let x = 1; x <= 100; x++) {
-                    y = 6 / 5 * Math.pow(x, 3) - 15 * Math.pow(x, 2) + 100 * x - 140;
-                    if (pokemon.exp >= y) {
-                        level = x
-                    } else {
-                        break;
-                    }
-                }
-                break;
-            case GameConstants.LevelType.mediumfast:
-                level = Math.pow(pokemon.exp(), 1 / 3);
-                break;
-            case GameConstants.LevelType.fast:
-                level = Math.pow(pokemon.exp() * 5 / 4, 1 / 3);
-                break;
-            default:
-                level = Math.pow(30 * pokemon.exp(), 0.475) / (6 * Math.sqrt(5));
-                break;
-        }
-        return Math.max(1, Math.min(100, Math.floor(level)));
-    }
-
-    public static calculateAttack(attackBase: number, attackBonus: number, level: number): number {
-        let attackBonusMultiplier = 1 + ( attackBonus / 100 );
-        let levelMultiplier = level / 100;
-        return Math.max(1, Math.floor(attackBase * attackBonusMultiplier * levelMultiplier));
     }
 
     public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
@@ -87,7 +55,7 @@ class PokemonHelper {
         return src;
     }
 
-    public static compareBy(property: string, direction: boolean): (a: CaughtPokemon, b: CaughtPokemon) => number {
+    public static compareBy(property: string, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let _a, _b, res, dir = (direction) ? -1 : 1;
 

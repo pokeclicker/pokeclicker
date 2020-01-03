@@ -108,7 +108,7 @@ class SafariBattle {
 
     private static capturePokemon() {
         SafariBattle.text(`GOTCHA!<br> ${SafariBattle.enemy.name} was caught!`);
-        player.capturePokemon(SafariBattle.enemy.name, SafariBattle.enemy.shiny);
+        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(SafariBattle.enemy.name).id, SafariBattle.enemy.shiny);
     }
 
     public static throwBait() {

@@ -8,9 +8,7 @@ class Player {
 
     public achievementsCompleted: { [name: string]: boolean };
 
-    private _caughtShinyList: KnockoutObservableArray<string>;
     private _route: KnockoutObservable<number>;
-    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
@@ -32,7 +30,6 @@ class Player {
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
-        this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         this._region = ko.observable(savedPlayer._region);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
             this._route = ko.observable(savedPlayer._route)
@@ -50,12 +47,6 @@ class Player {
             }
         }
 
-        if (savedPlayer._caughtPokemonList) {
-            tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp, pokemon.breeding)
-            });
-        }
-        this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
         this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
@@ -184,13 +175,6 @@ class Player {
 
     private highestRegion: KnockoutObservable<GameConstants.Region>;
 
-    public caughtAndShinyList(): KnockoutComputed<string[]> {
-        return ko.computed(function () {
-            const pokeList = this.caughtPokemonList.map(pokemon=>pokemon.name);
-            return this.caughtShinyList().filter(pokemon=>pokeList.includes(pokemon));
-        }, this);
-    }
-
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
             return Math.min(this.routeKillsNeeded, this.routeKills[route]());
@@ -206,23 +190,6 @@ class Player {
     }
 
     private _caughtAmount: Array<KnockoutObservable<number>>;
-
-    public calculateClickAttack(): number {
-        // Base power
-        let clickAttack =  Math.pow(this.caughtPokemonList.length + this.caughtAndShinyList()().length + 1, 1.4);
-
-        // TODO(@Isha) fix when refactoring to party
-        if (App.game != undefined) {
-            clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
-        }
-
-        // Apply battle item bonus
-        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()){
-            clickAttack *= 1.5;
-        }
-
-        return Math.floor(clickAttack);
-    }
 
     public calculateExpMultiplier(): number {
         // TODO Calculate exp multiplier by checking upgrades and multipliers.
@@ -249,31 +216,6 @@ class Player {
             }
         }
         return false;
-    }
-
-    public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
-        if (PokemonHelper.calcNativeRegion(pokemonName) > player.highestRegion()) {
-            return;
-        }
-        App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
-        let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
-        if (!this.alreadyCaughtPokemon(pokemonName)) {
-            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
-            this._caughtPokemonList.push(caughtPokemon);
-            if (!supressNotification) {
-                if (shiny) Notifier.notify(`✨ You have captured a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
-                else Notifier.notify(`You have captured ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`, GameConstants.NotificationOption.success)
-            }
-        }
-        if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
-            this._caughtShinyList.push(pokemonName);
-            Save.store(player);
-        }
-        if (shiny) {
-            player.shinyCatches++;
-        }
-        player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
-        GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
