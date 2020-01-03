@@ -114,7 +114,7 @@ class Safari {
 
     public static openModal() {
         if (this.canAccess()) {
-            //App.game.gameState = GameConstants.GameState.safari;
+            App.game.gameState = GameConstants.GameState.safari;
             //Safari.load();
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
@@ -123,10 +123,12 @@ class Safari {
     }
 
     private static canPay() {
+        // TODO
         return true;
     }
 
     private static cost() {
+        // TODO
         return 100;
     }
 
@@ -181,6 +183,17 @@ class Safari {
         Safari.playerXY.x = i;
         Safari.playerXY.y = j;
         Safari.origin = offset;
+
+
+        let element = document.querySelector('#sprite');
+        Safari.sprite = new Motio(element, {
+            fps: 8,
+            frames: 4
+        }).on('frame', function() {
+            if (Safari.sprite.frame % 2 == 0) {
+                Safari.sprite.pause();
+            }
+        });
     }
 
     public static move(dir: string) {
@@ -316,18 +329,4 @@ document.addEventListener("DOMContentLoaded", function (event) {
     $('#safariModal').on('hidden.bs.modal', function () {
         MapHelper.moveToTown("Fuchsia City");
     });
-
-    /*
-    $('#safariModal').on('shown.bs.modal', function () {
-        let element = document.querySelector('#sprite');
-        Safari.sprite = new Motio(element, {
-            fps: 8,
-            frames: 4
-        }).on('frame', function() {
-            if (Safari.sprite.frame % 2 == 0) {
-                Safari.sprite.pause();
-            }
-        });
-    });
-    */
 });
