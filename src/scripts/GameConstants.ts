@@ -559,7 +559,7 @@ namespace GameConstants {
         Kings_rock,
         Upgrade,
         Time_stone,
-        Shiny_stone,
+        // Shiny_stone,
     }
 
     export enum BattleItemType {
