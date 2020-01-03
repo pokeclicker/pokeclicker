@@ -7,12 +7,12 @@ class DataPokemon implements pokemonInterface {
     type1: PokemonType;
     type2: PokemonType;
     attack: number;
-    levelType: GameConstants.LevelType;
+    levelType: LevelType;
     exp: number;
     eggCycles: number;
     shiny: boolean;
 
-    constructor(id: number, name: string, catchRate: number, evolution: any[], evoLevel: any[], type1: PokemonType, type2: PokemonType, attack: number, levelType: GameConstants.LevelType, exp: number, eggCycles: number) {
+    constructor(id: number, name: string, catchRate: number, evolution: any[], evoLevel: any[], type1: PokemonType, type2: PokemonType, attack: number, levelType: LevelType, exp: number, eggCycles: number) {
         this.id = id;
         this.name = name;
         this.catchRate = catchRate;

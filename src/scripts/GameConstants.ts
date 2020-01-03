@@ -329,7 +329,6 @@ namespace GameConstants {
         return Math.min(Math.max(num, min), max);
     }
 
-
     export enum TypeColor {
         Normal = "#A8A77A",
         Fire = "#EE8130",
@@ -349,14 +348,6 @@ namespace GameConstants {
         Dark = "#705746",
         Steel = "#B7B7CE",
         Fairy = "#D685AD"
-    }
-
-    export enum LevelType {
-        "slow",
-        "mediumslow",
-        "medium",
-        "mediumfast",
-        "fast"
     }
 
     // Map navigation

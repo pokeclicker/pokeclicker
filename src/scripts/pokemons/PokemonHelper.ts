@@ -33,10 +33,10 @@ class PokemonHelper {
         let level;
         switch (PokemonHelper.getPokemonByName(pokemon.name).levelType) {
 
-            case GameConstants.LevelType.slow:
+            case LevelType.slow:
                 level = Math.pow(pokemon.exp() * 4 / 5, 1 / 3);
                 break;
-            case GameConstants.LevelType.mediumslow:
+            case LevelType.mediumslow:
                 let y;
                 for (let x = 1; x <= 100; x++) {
                     y = 6 / 5 * Math.pow(x, 3) - 15 * Math.pow(x, 2) + 100 * x - 140;
@@ -47,10 +47,10 @@ class PokemonHelper {
                     }
                 }
                 break;
-            case GameConstants.LevelType.mediumfast:
+            case LevelType.mediumfast:
                 level = Math.pow(pokemon.exp(), 1 / 3);
                 break;
-            case GameConstants.LevelType.fast:
+            case LevelType.fast:
                 level = Math.pow(pokemon.exp() * 5 / 4, 1 / 3);
                 break;
             default:
