@@ -1,3 +1,4 @@
+///<reference path="../pokemons/PokemonEnum.ts"/>
 /**
  * Datalist of all Pokémon that are encountered on the routes
  * No need to ever use this list, use RouteHelper instead
@@ -6,417 +7,417 @@
 const pokemonsPerRoute = {
     0: {
         1: {
-            land: ['Pidgey', 'Rattata'],
+            land: [Pokemon.Pidgey, Pokemon.Rattata],
             water: [],
             headbutt: []
         },
         2: {
-            land: ['Caterpie', 'Weedle', 'Rattata', 'Nidoran(F)', 'Nidoran(M)'],
+            land: [Pokemon.Caterpie, Pokemon.Weedle, Pokemon.Rattata, Pokemon.NidoranF, Pokemon.NidoranM],
             water: [],
             headbutt: []
         },
         3: {
-            land: ['Pidgey', 'Rattata', 'Spearow', 'Sandshrew', 'Jigglypuff', 'Mankey'],
+            land: [Pokemon.Pidgey, Pokemon.Rattata, Pokemon.Spearow, Pokemon.Sandshrew, Pokemon.Jigglypuff, Pokemon.Mankey],
             water: [],
             headbutt: []
         },
         4: {
-            land: ['Rattata', 'Spearow', 'Ekans', 'Sandshrew', 'Mankey'],
-            water: ['Poliwag', 'Goldeen', 'Psyduck', 'Krabby', 'Seaking'],
+            land: [Pokemon.Rattata, Pokemon.Spearow, Pokemon.Ekans, Pokemon.Sandshrew, Pokemon.Mankey],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Psyduck, Pokemon.Krabby, Pokemon.Seaking],
             headbutt: []
         },
         5: {
-            land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Oddish', 'Meowth', 'Mankey', 'Abra', 'Bellsprout'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Rattata, Pokemon.Jigglypuff, Pokemon.Oddish, Pokemon.Meowth, Pokemon.Mankey, Pokemon.Abra, Pokemon.Bellsprout],
             water: [],
             headbutt: []
         },
         6: {
-            land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Oddish', 'Meowth', 'Mankey', 'Abra', 'Bellsprout'],
-            water: ['Poliwag', 'Goldeen', 'Shellder', 'Krabby'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Rattata, Pokemon.Jigglypuff, Pokemon.Oddish, Pokemon.Meowth, Pokemon.Mankey, Pokemon.Abra, Pokemon.Bellsprout],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Shellder, Pokemon.Krabby],
             headbutt: []
         },
         7: {
-            land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Vulpix', 'Jigglypuff', 'Oddish', 'Meowth', 'Mankey', 'Growlithe', 'Abra', 'Bellsprout'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Rattata, Pokemon.Vulpix, Pokemon.Jigglypuff, Pokemon.Oddish, Pokemon.Meowth, Pokemon.Mankey, Pokemon.Growlithe, Pokemon.Abra, Pokemon.Bellsprout],
             water: [],
             headbutt: []
         },
         8: {
-            land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Ekans', 'Sandshrew', 'Vulpix', 'Jigglypuff', 'Meowth', 'Mankey', 'Growlithe', 'Abra', 'Kadabra'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Rattata, Pokemon.Ekans, Pokemon.Sandshrew, Pokemon.Vulpix, Pokemon.Jigglypuff, Pokemon.Meowth, Pokemon.Mankey, Pokemon.Growlithe, Pokemon.Abra, Pokemon.Kadabra],
             water: [],
             headbutt: []
         },
         9: {
-            land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Ekans', 'Sandshrew', 'Nidoran(F)', 'Nidoran(M)', 'Nidorina', 'Nidorino'],
+            land: [Pokemon.Rattata, Pokemon.Raticate, Pokemon.Spearow, Pokemon.Fearow, Pokemon.Ekans, Pokemon.Sandshrew, Pokemon.NidoranF, Pokemon.NidoranM, Pokemon.Nidorina, Pokemon.Nidorino],
             water: [],
             headbutt: []
         },
         10: {
-            land: ['Rattata', 'Raticate', 'Spearow', 'Ekans', 'Sandshrew', 'Nidoran(F)', 'Nidoran(M)', 'Machop', 'Magnemite', 'Voltorb'],
-            water: ['Poliwag', 'Goldeen', 'Poliwhirl', 'Slowpoke', 'Krabby', 'Kingler', 'Horsea'],
+            land: [Pokemon.Rattata, Pokemon.Raticate, Pokemon.Spearow, Pokemon.Ekans, Pokemon.Sandshrew, Pokemon.NidoranF, Pokemon.NidoranM, Pokemon.Machop, Pokemon.Magnemite, Pokemon.Voltorb],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Poliwhirl, Pokemon.Slowpoke, Pokemon.Krabby, Pokemon.Kingler, Pokemon.Horsea],
             headbutt: []
         },
         11: {
-            land: ['Pidgey', 'Pidgeotto', 'Raticate', 'Rattata', 'Spearow', 'Ekans', 'Sandshrew', 'Drowzee'],
-            water: ['Poliwag', 'Goldeen', 'Tentacool', 'Shellder', 'Krabby', 'Horsea'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Raticate, Pokemon.Rattata, Pokemon.Spearow, Pokemon.Ekans, Pokemon.Sandshrew, Pokemon.Drowzee],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Tentacool, Pokemon.Shellder, Pokemon.Krabby, Pokemon.Horsea],
             headbutt: []
         },
         12: {
-            land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Snorlax'],
-            water: ['Slowbro', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Krabby', 'Horsea', 'Seadra'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Oddish, Pokemon.Gloom, Pokemon.Venonat, Pokemon.Bellsprout, Pokemon.Weepinbell, Pokemon.Farfetchd, Pokemon.Snorlax],
+            water: [Pokemon.Slowbro, Pokemon.Magikarp, Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Tentacool, Pokemon.Krabby, Pokemon.Horsea, Pokemon.Seadra],
             headbutt: []
         },
         13: {
-            land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Bellsprout', 'Weepinbell', 'Farfetch\'d', 'Ditto'],
-            water: ['Slowbro', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacool', 'Krabby', 'Horsea', 'Seadra'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Oddish, Pokemon.Gloom, Pokemon.Venonat, Pokemon.Bellsprout, Pokemon.Weepinbell, Pokemon.Farfetchd, Pokemon.Ditto],
+            water: [Pokemon.Slowbro, Pokemon.Magikarp, Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Tentacool, Pokemon.Krabby, Pokemon.Horsea, Pokemon.Seadra],
             headbutt: []
         },
         14: {
-            land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Venomoth', 'Bellsprout', 'Weepinbell', 'Ditto'],
-            water: ['Poliwag', 'Goldeen'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Oddish, Pokemon.Gloom, Pokemon.Venonat, Pokemon.Venomoth, Pokemon.Bellsprout, Pokemon.Weepinbell, Pokemon.Ditto],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen],
             headbutt: []
         },
         15: {
-            land: ['Pidgey', 'Pidgeotto', 'Oddish', 'Gloom', 'Venonat', 'Venomoth', 'Bellsprout', 'Weepinbell', 'Ditto'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Oddish, Pokemon.Gloom, Pokemon.Venonat, Pokemon.Venomoth, Pokemon.Bellsprout, Pokemon.Weepinbell, Pokemon.Ditto],
             water: [],
             headbutt: []
         },
         16: {
-            land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo', 'Snorlax'],
+            land: [Pokemon.Rattata, Pokemon.Raticate, Pokemon.Spearow, Pokemon.Fearow, Pokemon.Doduo, Pokemon.Snorlax],
             water: [],
             headbutt: []
         },
         17: {
-            land: ['Raticate', 'Spearow', 'Fearow', 'Ponyta', 'Doduo', 'Dodrio'],
-            water: ['Poliwag', 'Goldeen', 'Tentacool', 'Shellder', 'Krabby'],
+            land: [Pokemon.Raticate, Pokemon.Spearow, Pokemon.Fearow, Pokemon.Ponyta, Pokemon.Doduo, Pokemon.Dodrio],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Tentacool, Pokemon.Shellder, Pokemon.Krabby],
             headbutt: []
         },
         18: {
-            land: ['Rattata', 'Raticate', 'Spearow', 'Fearow', 'Doduo'],
-            water: ['Poliwag', 'Goldeen', 'Tentacool', 'Shellder', 'Krabby'],
+            land: [Pokemon.Rattata, Pokemon.Raticate, Pokemon.Spearow, Pokemon.Fearow, Pokemon.Doduo],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Tentacool, Pokemon.Shellder, Pokemon.Krabby],
             headbutt: []
         },
         19: {
             land: [],
-            water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Shellder', 'Horsea', 'Staryu'],
+            water: [Pokemon.Tentacool, Pokemon.Magikarp, Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Tentacruel, Pokemon.Shellder, Pokemon.Horsea, Pokemon.Staryu],
             headbutt: []
         },
         20: {
             land: [],
-            water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Shellder', 'Horsea', 'Staryu'],
+            water: [Pokemon.Tentacool, Pokemon.Magikarp, Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Tentacruel, Pokemon.Shellder, Pokemon.Horsea, Pokemon.Staryu],
             headbutt: []
         },
         21: {
-            land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Raticate', 'Tangela'],
-            water: ['Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Shellder', 'Horsea', 'Staryu'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Rattata, Pokemon.Raticate, Pokemon.Tangela],
+            water: [Pokemon.Magikarp, Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Tentacruel, Pokemon.Shellder, Pokemon.Horsea, Pokemon.Staryu],
             headbutt: []
         },
         22: {
-            land: ['Rattata', 'Spearow', 'Nidoran(F)', 'Nidoran(M)', 'Mankey'],
-            water: ['Poliwag', 'Poliwhirl', 'Goldeen'],
+            land: [Pokemon.Rattata, Pokemon.Spearow, Pokemon.NidoranF, Pokemon.NidoranM, Pokemon.Mankey],
+            water: [Pokemon.Poliwag, Pokemon.Poliwhirl, Pokemon.Goldeen],
             headbutt: []
         },
         23: {
-            land: ['Spearow', 'Fearow', 'Ekans', 'Arbok', 'Sandshrew', 'Sandslash', 'Nidorina', 'Nidorino', 'Mankey', 'Primeape', 'Ditto'],
-            water: ['Poliwag', 'Goldeen', 'Poliwhirl', 'Slowbro', 'Kingler', 'Seadra', 'Seaking'],
+            land: [Pokemon.Spearow, Pokemon.Fearow, Pokemon.Ekans, Pokemon.Arbok, Pokemon.Sandshrew, Pokemon.Sandslash, Pokemon.Nidorina, Pokemon.Nidorino, Pokemon.Mankey, Pokemon.Primeape, Pokemon.Ditto],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Poliwhirl, Pokemon.Slowbro, Pokemon.Kingler, Pokemon.Seadra, Pokemon.Seaking],
             headbutt: []
         },
         24: {
-            land: ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Pidgey', 'Pidgeotto', 'Oddish', 'Venonat', 'Abra', 'Bellsprout'],
-            water: ['Poliwag', 'Goldeen', 'Psyduck', 'Krabby', 'Seaking'],
+            land: [Pokemon.Caterpie, Pokemon.Metapod, Pokemon.Weedle, Pokemon.Kakuna, Pokemon.Pidgey, Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Oddish, Pokemon.Venonat, Pokemon.Abra, Pokemon.Bellsprout],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Psyduck, Pokemon.Krabby, Pokemon.Seaking],
             headbutt: []
         },
         25: {
-            land: ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Pidgeotto', 'Oddish', 'Venonat', 'Abra', 'Bellsprout'],
-            water: ['Poliwag', 'Goldeen', 'Psyduck', 'Krabby'],
+            land: [Pokemon.Caterpie, Pokemon.Metapod, Pokemon.Weedle, Pokemon.Kakuna, Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Oddish, Pokemon.Venonat, Pokemon.Abra, Pokemon.Bellsprout],
+            water: [Pokemon.Poliwag, Pokemon.Goldeen, Pokemon.Psyduck, Pokemon.Krabby],
             headbutt: []
         }
     },
     1: {
         26: {
-            land: ['Raticate', 'Arbok', 'Sandslash', 'Ponyta', 'Doduo', 'Dodrio', 'Quagsire'],
-            water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            land: [Pokemon.Raticate, Pokemon.Arbok, Pokemon.Sandslash, Pokemon.Ponyta, Pokemon.Doduo, Pokemon.Dodrio, Pokemon.Quagsire],
+            water: [Pokemon.Tentacool, Pokemon.Tentacruel, Pokemon.Magikarp, Pokemon.Shellder, Pokemon.Chinchou, Pokemon.Lanturn],
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         },
         27: {
-            land: ['Raticate', 'Arbok', 'Sandslash', 'Ponyta', 'Doduo', 'Dodrio', 'Quagsire'],
-            water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            land: [Pokemon.Raticate, Pokemon.Arbok, Pokemon.Sandslash, Pokemon.Ponyta, Pokemon.Doduo, Pokemon.Dodrio, Pokemon.Quagsire],
+            water: [Pokemon.Tentacool, Pokemon.Tentacruel, Pokemon.Magikarp, Pokemon.Shellder, Pokemon.Chinchou, Pokemon.Lanturn],
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         },
         28: {
-            land: ['Ponyta', 'Tangela', 'Donphan', 'Ursaring', 'Rapidash', 'Doduo', 'Dodrio', 'Sneasel', 'Murkrow'],
-            water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
-            headbutt: ['Natu', 'Aipom', 'Heracross']
+            land: [Pokemon.Ponyta, Pokemon.Tangela, Pokemon.Donphan, Pokemon.Ursaring, Pokemon.Rapidash, Pokemon.Doduo, Pokemon.Dodrio, Pokemon.Sneasel, Pokemon.Murkrow],
+            water: [Pokemon.Poliwag, Pokemon.Poliwhirl, Pokemon.Magikarp],
+            headbutt: [Pokemon.Natu, Pokemon.Aipom, Pokemon.Heracross]
         },
         29: {
-            land: ['Pidgey', 'Rattata', 'Sentret', 'Hoothoot'],
+            land: [Pokemon.Pidgey, Pokemon.Rattata, Pokemon.Sentret, Pokemon.Hoothoot],
             water: [],
-            headbutt: ['Exeggcute', 'Ledyba', 'Spinarak', 'Hoothoot', 'Pineco']
+            headbutt: [Pokemon.Exeggcute, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Hoothoot, Pokemon.Pineco]
         },
         30: {
-            land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Hoothoot', 'Ledyba', 'Spinarak'],
-            water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            land: [Pokemon.Pidgey, Pokemon.Rattata, Pokemon.Caterpie, Pokemon.Metapod, Pokemon.Weedle, Pokemon.Kakuna, Pokemon.Zubat, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak],
+            water: [Pokemon.Poliwag, Pokemon.Poliwhirl, Pokemon.Magikarp],
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         },
         31: {
-            land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Poliwag', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
-            water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
-            headbutt: ['Spearow', 'Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Aipom', 'Pineco', 'Heracross']
+            land: [Pokemon.Pidgey, Pokemon.Rattata, Pokemon.Caterpie, Pokemon.Metapod, Pokemon.Weedle, Pokemon.Kakuna, Pokemon.Zubat, Pokemon.Poliwag, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Bellsprout],
+            water: [Pokemon.Poliwag, Pokemon.Poliwhirl, Pokemon.Magikarp],
+            headbutt: [Pokemon.Spearow, Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Aipom, Pokemon.Pineco, Pokemon.Heracross]
         },
         32: {
-            land: ['Rattata', 'Ekans', 'Zubat', 'Bellsprout', 'Mareep', 'Hoppip', 'Wooper'],
-            water: ['Tentacool', 'Tentacruel', 'Quagsire', 'Magikarp', 'Qwilfish'],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Pineco']
+            land: [Pokemon.Rattata, Pokemon.Ekans, Pokemon.Zubat, Pokemon.Bellsprout, Pokemon.Mareep, Pokemon.Hoppip, Pokemon.Wooper],
+            water: [Pokemon.Tentacool, Pokemon.Tentacruel, Pokemon.Quagsire, Pokemon.Magikarp, Pokemon.Qwilfish],
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Pineco]
         },
         33: {
-            land: ['Spearow', 'Rattata', 'Ekans', 'Zubat', 'Hoppip'],
+            land: [Pokemon.Spearow, Pokemon.Rattata, Pokemon.Ekans, Pokemon.Zubat, Pokemon.Hoppip],
             water: [],
-            headbutt: ['Spearow', 'Aipom', 'Heracross']
+            headbutt: [Pokemon.Spearow, Pokemon.Aipom, Pokemon.Heracross]
         },
         34: {
-            land: ['Rattata', 'Abra', 'Drowzee', 'Ditto'],
-            water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            land: [Pokemon.Rattata, Pokemon.Abra, Pokemon.Drowzee, Pokemon.Ditto],
+            water: [Pokemon.Tentacool, Pokemon.Tentacruel, Pokemon.Krabby, Pokemon.Magikarp, Pokemon.Staryu, Pokemon.Corsola, Pokemon.Kingler],
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         },
         35: {
-            land: ['Pidgey', 'Nidoran(F)', 'Nidoran(M)', 'Abra', 'Drowzee', 'Ditto', 'Hoothoot', 'Yanma'],
-            water: ['Psyduck', 'Golduck', 'Poliwag', 'Magikarp'],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            land: [Pokemon.Pidgey, Pokemon.NidoranF, Pokemon.NidoranM, Pokemon.Abra, Pokemon.Drowzee, Pokemon.Ditto, Pokemon.Hoothoot, Pokemon.Yanma],
+            water: [Pokemon.Psyduck, Pokemon.Golduck, Pokemon.Poliwag, Pokemon.Magikarp],
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         },
         36: {
-            land: ['Pidgey', 'Nidoran(M)', 'Nidoran(F)', 'Vulpix', 'Growlithe', 'Hoothoot', 'Stantler', 'Sudowoodo'],
+            land: [Pokemon.Pidgey, Pokemon.NidoranM, Pokemon.NidoranF, Pokemon.Vulpix, Pokemon.Growlithe, Pokemon.Hoothoot, Pokemon.Stantler, Pokemon.Sudowoodo],
             water: [],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         },
         37: {
-            land: ['Pidgey', 'Pidgeotto', 'Vulpix', 'Growlithe', 'Hoothoot', 'Ledyba', 'Spinarak', 'Stantler'],
+            land: [Pokemon.Pidgey, Pokemon.Pidgeotto, Pokemon.Vulpix, Pokemon.Growlithe, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Stantler],
             water: [],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         },
         38: {
-            land: ['Rattata', 'Raticate', 'Meowth', 'Magnemite', 'Farfetch\'d', 'Tauros', 'Snubbull', 'Miltank'],
+            land: [Pokemon.Rattata, Pokemon.Raticate, Pokemon.Meowth, Pokemon.Magnemite, Pokemon.Farfetchd, Pokemon.Tauros, Pokemon.Snubbull, Pokemon.Miltank],
             water: [],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         },
         39: {
-            land: ['Rattata', 'Raticate', 'Meowth', 'Magnemite', 'Farfetch\'d', 'Tauros', 'Miltank'],
+            land: [Pokemon.Rattata, Pokemon.Raticate, Pokemon.Meowth, Pokemon.Magnemite, Pokemon.Farfetchd, Pokemon.Tauros, Pokemon.Miltank],
             water: [],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         },
         40: {
             land: [],
-            water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
+            water: [Pokemon.Tentacool, Pokemon.Tentacruel, Pokemon.Krabby, Pokemon.Magikarp, Pokemon.Staryu, Pokemon.Corsola, Pokemon.Kingler],
             headbutt: []
         },
         41: {
             land: [],
-            water: ['Tentacool', 'Tentacruel', 'Mantine', 'Magikarp', 'Chinchou', 'Shellder'],
+            water: [Pokemon.Tentacool, Pokemon.Tentacruel, Pokemon.Mantine, Pokemon.Magikarp, Pokemon.Chinchou, Pokemon.Shellder],
             headbutt: []
         },
         42: {
-            land: ['Spearow', 'Zubat', 'Mankey', 'Mareep', 'Flaaffy'],
-            water: ['Goldeen', 'Seaking', 'Magikarp'],
-            headbutt: ['Spearow', 'Aipom', 'Heracross']
+            land: [Pokemon.Spearow, Pokemon.Zubat, Pokemon.Mankey, Pokemon.Mareep, Pokemon.Flaaffy],
+            water: [Pokemon.Goldeen, Pokemon.Seaking, Pokemon.Magikarp],
+            headbutt: [Pokemon.Spearow, Pokemon.Aipom, Pokemon.Heracross]
         },
         43: {
-            land: ['Pidgeotto', 'Venonat', 'Noctowl', 'Mareep', 'Flaaffy', 'Girafarig'],
-            water: ['Magikarp', 'Poliwag'],
-            headbutt: ['Venonat', 'Exeggcute', 'Hoothoot', 'Pineco']
+            land: [Pokemon.Pidgeotto, Pokemon.Venonat, Pokemon.Noctowl, Pokemon.Mareep, Pokemon.Flaaffy, Pokemon.Girafarig],
+            water: [Pokemon.Magikarp, Pokemon.Poliwag],
+            headbutt: [Pokemon.Venonat, Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Pineco]
         },
         44: {
-            land: ['Bellsprout', 'Weepinbell', 'Lickitung', 'Tangela'],
-            water: ['Poliwag', 'Poliwhirl', 'Magikarp', 'Remoraid'],
-            headbutt: ['Spearow', 'Aipom', 'Heracross']
+            land: [Pokemon.Bellsprout, Pokemon.Weepinbell, Pokemon.Lickitung, Pokemon.Tangela],
+            water: [Pokemon.Poliwag, Pokemon.Poliwhirl, Pokemon.Magikarp, Pokemon.Remoraid],
+            headbutt: [Pokemon.Spearow, Pokemon.Aipom, Pokemon.Heracross]
         },
         45: {
-            land: ['Geodude', 'Graveler', 'Gligar', 'Teddiursa', 'Skarmory', 'Phanpy'],
-            water: ['Magikarp', 'Poliwag'],
-            headbutt: ['Spearow', 'Aipom', 'Heracross']
+            land: [Pokemon.Geodude, Pokemon.Graveler, Pokemon.Gligar, Pokemon.Teddiursa, Pokemon.Skarmory, Pokemon.Phanpy],
+            water: [Pokemon.Magikarp, Pokemon.Poliwag],
+            headbutt: [Pokemon.Spearow, Pokemon.Aipom, Pokemon.Heracross]
         },
         46: {
-            land: ['Spearow', 'Rattata', 'Geodude'],
+            land: [Pokemon.Spearow, Pokemon.Rattata, Pokemon.Geodude],
             water: [],
-            headbutt: ['Spearow', 'Aipom', 'Heracross']
+            headbutt: [Pokemon.Spearow, Pokemon.Aipom, Pokemon.Heracross]
         },
         47: {
-            land: ['Raticate', 'Spearow', 'Fearow', 'Gloom', 'Farfetch\'d', 'Ditto', 'Noctowl', 'Miltank'],
-            water: ['Tentacool', 'Seel', 'Staryu', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
-            headbutt: ['Metapod', 'Butterfree', 'Kakuna', 'Beedrill', 'Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco', 'Heracross']
+            land: [Pokemon.Raticate, Pokemon.Spearow, Pokemon.Fearow, Pokemon.Gloom, Pokemon.Farfetchd, Pokemon.Ditto, Pokemon.Noctowl, Pokemon.Miltank],
+            water: [Pokemon.Tentacool, Pokemon.Seel, Pokemon.Staryu, Pokemon.Magikarp, Pokemon.Shellder, Pokemon.Chinchou, Pokemon.Lanturn],
+            headbutt: [Pokemon.Metapod, Pokemon.Butterfree, Pokemon.Kakuna, Pokemon.Beedrill, Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco, Pokemon.Heracross]
         },
         48: {
-            land: ['Fearow', 'Vulpix', 'Gloom', 'Diglett', 'Growlithe', 'Farfetch\'d', 'Tauros', 'Hoppip', 'Girafarig'],
+            land: [Pokemon.Fearow, Pokemon.Vulpix, Pokemon.Gloom, Pokemon.Diglett, Pokemon.Growlithe, Pokemon.Farfetchd, Pokemon.Tauros, Pokemon.Hoppip, Pokemon.Girafarig],
             water: [],
-            headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco']
+            headbutt: [Pokemon.Exeggcute, Pokemon.Hoothoot, Pokemon.Ledyba, Pokemon.Spinarak, Pokemon.Pineco]
         }
     },
     2: {
         101: {
-            land: ['Wurmple', 'Poochyena', 'Zigzagoon'],
+            land: [Pokemon.Wurmple, Pokemon.Poochyena, Pokemon.Zigzagoon],
             water: [],
             headbutt: []
         },
         102: {
-            land: ['Poochyena', 'Wurmple', 'Lotad', 'Zigzagoon', 'Ralts', 'Seedot'],
-            water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
+            land: [Pokemon.Poochyena, Pokemon.Wurmple, Pokemon.Lotad, Pokemon.Zigzagoon, Pokemon.Ralts, Pokemon.Seedot],
+            water: [Pokemon.Marill, Pokemon.Goldeen, Pokemon.Magikarp, Pokemon.Corphish],
             headbutt: []
         },
         103: {
-            land: ['Poochyena', 'Wingull', 'Zigzagoon'],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            land: [Pokemon.Poochyena, Pokemon.Wingull, Pokemon.Zigzagoon],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo],
             headbutt: []
         },
         104: {
-            land: ['Poochyena', 'Wurmple', 'Marill', 'Taillow', 'Wingull'],
-            water: ['Wingull', 'Pelipper', 'Magikarp'],
+            land: [Pokemon.Poochyena, Pokemon.Wurmple, Pokemon.Marill, Pokemon.Taillow, Pokemon.Wingull],
+            water: [Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp],
             headbutt: []
         },
         105: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer],
             headbutt: []
         },
         106: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer],
             headbutt: []
         },
         107: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer],
             headbutt: []
         },
         108: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer],
             headbutt: []
         },
         109: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer],
             headbutt: []
         },
         110: {
-            land: ['Poochyena', 'Electrike', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+            land: [Pokemon.Poochyena, Pokemon.Electrike, Pokemon.Gulpin, Pokemon.Minun, Pokemon.Oddish, Pokemon.Wingull, Pokemon.Plusle],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer],
             headbutt: []
         },
         111: {
-            land: ['Sandshrew', 'Trapinch', 'Baltoy', 'Cacnea'],
-            water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
-            headbutt: ['Geodude']
+            land: [Pokemon.Sandshrew, Pokemon.Trapinch, Pokemon.Baltoy, Pokemon.Cacnea],
+            water: [Pokemon.Marill, Pokemon.Goldeen, Pokemon.Magikarp, Pokemon.Barboach],
+            headbutt: [Pokemon.Geodude]
         },
         112: {
-            land: ['Numel', 'Marill'],
+            land: [Pokemon.Numel, Pokemon.Marill],
             water: [],
             headbutt: []
         },
         113: {
-            land: ['Spinda', 'Slugma', 'Skarmory'],
+            land: [Pokemon.Spinda, Pokemon.Slugma, Pokemon.Skarmory],
             water: [],
             headbutt: []
         },
         114: {
-            land: ['Swablu', 'Lotad', 'Lombre', 'Seviper', 'Nuzleaf'],
-            water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
-            headbutt: ['Geodude']
+            land: [Pokemon.Swablu, Pokemon.Lotad, Pokemon.Lombre, Pokemon.Seviper, Pokemon.Nuzleaf],
+            water: [Pokemon.Marill, Pokemon.Goldeen, Pokemon.Magikarp, Pokemon.Barboach],
+            headbutt: [Pokemon.Geodude]
         },
         115: {
-            land: ['Swablu', 'Taillow', 'Swellow', 'Jigglypuff', 'Wingull'],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+            land: [Pokemon.Swablu, Pokemon.Taillow, Pokemon.Swellow, Pokemon.Jigglypuff, Pokemon.Wingull],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer],
             headbutt: []
         },
         116: {
-            land: ['Poochyena', 'Whismur', 'Nincada', 'Abra', 'Taillow', 'Skitty'],
+            land: [Pokemon.Poochyena, Pokemon.Whismur, Pokemon.Nincada, Pokemon.Abra, Pokemon.Taillow, Pokemon.Skitty],
             water: [],
             headbutt: []
         },
         117: {
-            land: ['Poochyena', 'Oddish', 'Marill', 'Illumise', 'Volbeat', 'Seedot'],
-            water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
+            land: [Pokemon.Poochyena, Pokemon.Oddish, Pokemon.Marill, Pokemon.Illumise, Pokemon.Volbeat, Pokemon.Seedot],
+            water: [Pokemon.Marill, Pokemon.Goldeen, Pokemon.Magikarp, Pokemon.Corphish],
             headbutt: []
         },
         118: {
-            land: ['Zigzagoon', 'Electrike', 'Linoone', 'Manectric', 'Wingull', 'Kecleon'],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha', 'Sharpedo'],
+            land: [Pokemon.Zigzagoon, Pokemon.Electrike, Pokemon.Linoone, Pokemon.Manectric, Pokemon.Wingull, Pokemon.Kecleon],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Carvanha, Pokemon.Sharpedo],
             headbutt: []
         },
         119: {
-            land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon'],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha'],
+            land: [Pokemon.Zigzagoon, Pokemon.Linoone, Pokemon.Oddish, Pokemon.Tropius, Pokemon.Kecleon],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Carvanha],
             headbutt: []
         },
         120: {
-            land: ['Poochyena', 'Mightyena', 'Oddish', 'Marill', 'Absol', 'Kecleon', 'Seedot'],
-            water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
+            land: [Pokemon.Poochyena, Pokemon.Mightyena, Pokemon.Oddish, Pokemon.Marill, Pokemon.Absol, Pokemon.Kecleon, Pokemon.Seedot],
+            water: [Pokemon.Marill, Pokemon.Goldeen, Pokemon.Magikarp, Pokemon.Barboach],
             headbutt: []
         },
         121: {
-            land: ['Poochyena', 'Shuppet', 'Mightyena', 'Oddish', 'Gloom', 'Wingull', 'Kecleon'],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+            land: [Pokemon.Poochyena, Pokemon.Shuppet, Pokemon.Mightyena, Pokemon.Oddish, Pokemon.Gloom, Pokemon.Wingull, Pokemon.Kecleon],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer],
             headbutt: []
         },
         122: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo],
             headbutt: []
         },
         123: {
-            land: ['Poochyena', 'Shuppet', 'Mightyena', 'Oddish', 'Gloom', 'Wingull', 'Kecleon'],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
+            land: [Pokemon.Poochyena, Pokemon.Shuppet, Pokemon.Mightyena, Pokemon.Oddish, Pokemon.Gloom, Pokemon.Wingull, Pokemon.Kecleon],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer],
             headbutt: []
         },
         124: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo],
             headbutt: []
         },
         125: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo],
             headbutt: []
         },
         126: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo],
             headbutt: []
         },
         127: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo],
             headbutt: []
         },
         128: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Luvdisc', 'Wailmer', 'Corsola'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Luvdisc, Pokemon.Wailmer, Pokemon.Corsola],
             headbutt: []
         },
         129: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Wailord', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Wailord, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo],
             headbutt: []
         },
         130: {
-            land: ['Wynaut'],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            land: [Pokemon.Wynaut],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo],
             headbutt: []
         },
         131: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo],
             headbutt: []
         },
         132: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo, Pokemon.Horsea],
             headbutt: []
         },
         133: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo, Pokemon.Horsea],
             headbutt: []
         },
         134: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Horsea'],
+            water: [Pokemon.Tentacool, Pokemon.Wingull, Pokemon.Pelipper, Pokemon.Magikarp, Pokemon.Wailmer, Pokemon.Sharpedo, Pokemon.Horsea],
             headbutt: []
         }
     }
