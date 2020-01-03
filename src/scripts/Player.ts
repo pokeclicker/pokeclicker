@@ -141,9 +141,6 @@ class Player {
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
 
-    public clickAttackObservable: KnockoutComputed<number>;
-    public pokemonAttackObservable: KnockoutComputed<number>;
-
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
     }

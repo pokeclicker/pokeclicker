@@ -29,7 +29,7 @@
                 <th>Lvl</th>
             </tr>
             </thead>
-            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: player.sortedPokemonList()()}">
+            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: App.game.party.caughtPokemon }">
 
             </tbody>
         </table>

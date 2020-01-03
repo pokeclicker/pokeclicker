@@ -21,11 +21,11 @@ class DefeatGymQuest extends Quest implements QuestInterface {
         if (gym instanceof Champion) {
             gym.setPokemon(player.starter);
         }
-        let playerDamage =  player.pokemonAttackObservable();
+        let playerDamage = App.game.party.calculatePokemonAttack();
         let attacksToWin = 0;
         for (let pokemon of gym.pokemons) {
             attacksToWin += Math.ceil( Math.min( 4, pokemon.maxHealth / Math.max(1, playerDamage) ) );
         }
-        return Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount); 
+        return Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount);
     }
 }

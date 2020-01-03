@@ -65,7 +65,7 @@ class Party implements Feature {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
+    public calculatePokemonAttack(type1: GameConstants.PokemonType = GameConstants.PokemonType.None, type2: GameConstants.PokemonType = GameConstants.PokemonType.None): number {
         let attack = 0;
         for (let pokemon of this.caughtPokemon) {
             let multiplier = 1;
@@ -98,6 +98,10 @@ class Party implements Feature {
             }
         }
         return false;
+    }
+
+    alreadyCaughtPokemonByName(name: string, shiny: boolean = false) {
+        return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
 
     alreadyCaughtPokemon(id: number, shiny: boolean = false) {

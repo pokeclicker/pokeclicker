@@ -80,8 +80,8 @@ aria-labelledby="pokedexModalLabel">
                        <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.id">number</span>
                        <!-- Pokedex name caught status -->
                        <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
-                           <div data-bind="visible: player.alreadyCaughtPokemon(name)" style="position: absolute;right: 2px;top: -15px;">
-                             <img width="18px" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${player.alreadyCaughtPokemonShiny($data.name) ? '-shiny' : ''}-small.png`}"/>
+                           <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
+                             <img width="18px" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}-small.png`}"/>
                            </div>
                            <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
