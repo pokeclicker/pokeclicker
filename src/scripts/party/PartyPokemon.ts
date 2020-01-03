@@ -123,7 +123,7 @@ class PartyPokemon implements Saveable {
                 }
 
                 // Check if player has already caught all of the possible evolutions
-                const obtainedAllEvolutions = reset ? !PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, true, true).some(p => !player.alreadyCaughtPokemon(p)) : false;
+                const obtainedAllEvolutions = reset ? !PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, true, true).some(p => !App.game.party.alreadyCaughtPokemon(this.id)) : false;
 
                 if (obtainedAllEvolutions) {
                     this.evolved = true;

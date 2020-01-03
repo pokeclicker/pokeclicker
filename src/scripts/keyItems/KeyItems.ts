@@ -27,7 +27,7 @@ class KeyItems implements Feature {
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Holo_caster, "A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others"),
             new KeyItem(KeyItems.KeyItem.Mystery_egg, "A mysterious Egg obtained from Mr. Pokémon. What is in the Egg is unknown", function () {
-                return player.maxLevelPokemonList()().length > 0;
+                return App.game.party.hasMaxLevelPokemon();
             }),
             new KeyItem(KeyItems.KeyItem.Safari_ticket, "This ticket grants access to the Safari Zone in Fuchsia City"),
             new KeyItem(KeyItems.KeyItem.Wailmer_pail, "This is a tool for watering Berries you planted to make them grow more quickly", function () {

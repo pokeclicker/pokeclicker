@@ -45,9 +45,9 @@ class PokemonHelper {
 
     public static getPokeballImage(pokemonName: string): string {
         let src = ""
-        if (player.alreadyCaughtPokemon(pokemonName)){
+        if (App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
             src = "assets/images/pokeball/Pokeball-";
-            if (player.alreadyCaughtPokemonShiny(pokemonName)) {
+            if (App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true)) {
                 src += "shiny-";
             }
             src += "small.png";
@@ -65,8 +65,8 @@ class PokemonHelper {
 
             //CaughtPokemon doesn't have shiny property, create one for comparison if needed
             if (property == "shiny") {
-                _a.shiny = Number(player.alreadyCaughtPokemonShiny(a.name));
-                _b.shiny = Number(player.alreadyCaughtPokemonShiny(b.name));
+                _a.shiny = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(a.name).id, true));
+                _b.shiny = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(b.name).id, true));
             }
 
             if (property == "attack" || property == "levelObservable" || property == "shiny") {

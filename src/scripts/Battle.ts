@@ -26,7 +26,7 @@ class Battle {
         if (!this.enemyPokemon().isAlive()) {
             return;
         }
-        this.enemyPokemon().damage(player.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
+        this.enemyPokemon().damage(App.game.party.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
@@ -41,7 +41,7 @@ class Battle {
         }
         App.game.oakItems.use(OakItems.OakItem.Poison_Barb);
         GameHelper.incrementObservable(player.statistics.clicks)
-        this.enemyPokemon().damage(player.calculateClickAttack());
+        this.enemyPokemon().damage(App.game.party.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
@@ -57,9 +57,8 @@ class Battle {
         player.gainShards(this.enemyPokemon());
         player.addRouteKill();
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
-        const pokemonName: string = this.enemyPokemon().name;
         const isShiny: boolean = this.enemyPokemon().shiny;
-        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonName, isShiny);
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(pokeBall);

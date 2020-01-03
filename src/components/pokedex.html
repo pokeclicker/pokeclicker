@@ -83,7 +83,7 @@ aria-labelledby="pokedexModalLabel">
                            <div data-bind="visible: player.alreadyCaughtPokemon(name)" style="position: absolute;right: 2px;top: -15px;">
                              <img width="18px" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${player.alreadyCaughtPokemonShiny($data.name) ? '-shiny' : ''}-small.png`}"/>
                            </div>
-                           <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id, $data.name)}">
+                           <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
                        </div>
                        <div data-bind="ifnot: PokedexHelper.pokemonSeen($data.id)">

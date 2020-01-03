@@ -2,16 +2,19 @@ class Party implements Feature {
     name: string = "Pokemon Party";
     saveKey: string = "party";
 
+    caughtPokemon: ObservableArrayProxy<PartyPokemon>;
+    shinyPokemon: ObservableArrayProxy<number>;
 
-    defaults: object = {
+
+    defaults: {
         caughtPokemon: [],
         shinyPokemon: [],
     };
 
-    caughtPokemon: ObservableArrayProxy<PartyPokemon>;
-    shinyPokemon: ObservableArrayProxy<number>;
 
     constructor() {
+        this.caughtPokemon = new ObservableArrayProxy([]);
+        this.shinyPokemon = new ObservableArrayProxy([]);
     }
 
     gainPokemonById(id: number, shiny: boolean = false) {
@@ -45,7 +48,7 @@ class Party implements Feature {
         let oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
-        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()){
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()) {
             expTotal *= 1.5;
         }
 
@@ -54,6 +57,47 @@ class Party implements Feature {
                 pokemon.exp += expTotal;
             }
         }
+    }
+
+    /**
+     * Calculate the attack of all your Pokémon
+     * @param type1
+     * @param type2 types of the enemy we're calculating damage against.
+     * @returns {number} damage to be done.
+     */
+    public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
+        let attack = 0;
+        for (let pokemon of this.caughtPokemon) {
+            let multiplier = 1;
+            if (player.region !== GameHelper.getRegion(pokemon.id)) {
+                // Pokemon only retain 20% of their total damage in other regions.
+                multiplier = 0.2
+            }
+            if (!pokemon.breeding()) {
+                if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
+                    attack += pokemon.attack() * multiplier;
+                } else {
+                    let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                    attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
+                }
+            }
+        }
+
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xAttack)()) {
+            attack *= 1.5;
+        }
+
+        return Math.round(attack);
+    }
+
+
+    public hasMaxLevelPokemon(): boolean {
+        for (let i = 0; i < this.caughtPokemon.length; i++) {
+            if (this.caughtPokemon[i].levelObservable() === 100) {
+                return true;
+            }
+        }
+        return false;
     }
 
     alreadyCaughtPokemon(id: number, shiny: boolean = false) {

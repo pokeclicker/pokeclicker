@@ -88,7 +88,7 @@ class Breeding implements Feature {
     }
 
     public canBreedPokemon(): boolean {
-        return player.hasMaxLevelPokemon() && this.hasFreeEggSlot();
+        return App.game.party.hasMaxLevelPokemon() && this.hasFreeEggSlot();
     }
 
     public hasFreeEggSlot(): boolean {
@@ -158,12 +158,12 @@ class Breeding implements Feature {
         let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps()));
         let shiny = PokemonFactory.generateShiny(shinyChance);
 
-        for (let i = 0; i < player._caughtPokemonList().length; i++) {
-            if (player._caughtPokemonList()[i].name == egg.pokemon) {
-                if (player._caughtPokemonList()[i].breeding()) {
-                    player._caughtPokemonList()[i].exp(0);
-                    player._caughtPokemonList()[i].breeding(false);
-                    player._caughtPokemonList()[i].checkForEvolution(true);
+        for (let i = 0; i < App.game.party.caughtPokemon.length; i++) {
+            if (App.game.party.caughtPokemon[i].name == egg.pokemon) {
+                if (App.game.party.caughtPokemon[i].breeding()) {
+                    App.game.party.caughtPokemon[i].exp = 0;
+                    App.game.party.caughtPokemon[i].breeding(false);
+                    App.game.party.caughtPokemon[i].checkForEvolution(true);
                 }
             }
         }
@@ -178,7 +178,7 @@ class Breeding implements Feature {
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         let baseForm = this.calculateBaseForm(egg.pokemon);
-        if (egg.pokemon != baseForm && !player.alreadyCaughtPokemon(baseForm)) {
+        if (egg.pokemon != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
             Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id, shiny);
         }

@@ -69,16 +69,11 @@ class Save {
         }
     }
 
-    public static reset(keepShinies: boolean = true): void {
-        var confirmDelete = prompt(`Are you sure you want reset?\nIf so, type 'DELETE'${keepShinies ? '\n\n[your shiny progress will not be reset]' : ''}`);
+    public static reset(): void {
+        var confirmDelete = prompt(`Are you sure you want reset?\nIf so, type 'DELETE'`);
 
         if (confirmDelete == 'DELETE') {
-            if (keepShinies) {
-                const shiniesOnly = {_caughtShinyList: player.caughtShinyList()};
-                localStorage.setItem('player', JSON.stringify(shiniesOnly));
-            } else {
-                localStorage.removeItem('player');
-            }
+            localStorage.removeItem('player');
             localStorage.removeItem('mine');
             localStorage.removeItem('save');
 
@@ -202,19 +197,20 @@ class Save {
         $('#saveModal').modal('hide')
     }
 
+    // TODO (@Isha) reimplement
     public static convertShinies(list: Array<string>) {
-        let converted = [];
-        for (let pokemon of list) {
-            let shiny = parseInt(pokemon['shiny']);
-            let name = pokemon['name'];
-            if (shiny == 1 && player.caughtShinyList.indexOf(name) == -1) {
-                player.caughtShinyList().push(pokemon['name']);
-                converted.push(pokemon['name']);
-            }
-        }
-        if (converted.length > 0) {
-            Notifier.notify("You have gained the following shinies: " + converted, GameConstants.NotificationOption.success)
-        }
+        // let converted = [];
+        // for (let pokemon of list) {
+        //     let shiny = parseInt(pokemon['shiny']);
+        //     let name = pokemon['name'];
+        //     if (shiny == 1 && player.caughtShinyList.indexOf(name) == -1) {
+        //         player.caughtShinyList().push(pokemon['name']);
+        //         converted.push(pokemon['name']);
+        //     }
+        // }
+        // if (converted.length > 0) {
+        //     Notifier.notify("You have gained the following shinies: " + converted, GameConstants.NotificationOption.success)
+        // }
     }
 }
 
