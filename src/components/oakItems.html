@@ -79,7 +79,12 @@ data-bind="visible: App.game.oakItems.canAccess()">
                     Lvl. <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
                 </div>
                 <div class="col-6">
+                    <!-- ko if: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
                     Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>%
+                    <!-- /ko -->
+                    <!-- ko ifnot: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
+                    Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>x
+                    <!-- /ko -->
                 </div>
             </div>
             <!-- /ko -->
