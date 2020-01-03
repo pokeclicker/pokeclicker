@@ -31,6 +31,7 @@ class PokemonHelper {
 
     public static calculateLevel(pokemon: CaughtPokemon): number {
         let level;
+        // TODO Implement LevelType.erratic and LevelType.fluctuating
         switch (PokemonHelper.getPokemonByName(pokemon.name).levelType) {
 
             case LevelType.slow:
