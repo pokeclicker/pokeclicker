@@ -12,10 +12,10 @@ class Wallet implements Feature {
     }
 
     public gainMoney(base: number, origin?: string) {
-        OakItemRunner.use(GameConstants.OakItem.Amulet_Coin);
+        App.game.oakItems.use(OakItems.OakItem.Amulet_Coin);
 
         let money = base;
-        money *= OakItemRunner.getMoneyMultiplier();
+        money *= App.game.oakItems.calculateBonus(OakItems.OakItem.Amulet_Coin);
         money *= AchievementHandler.getMoneyMultiplier();
         money *= EffectEngineRunner.getMoneyMultiplier();
 

@@ -18,14 +18,13 @@ class FarmRunner {
     }
 
     public static timeToReduce(){
-      let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Sprayduck) ? OakItemRunner.calculateBonus(GameConstants.OakItem.Sprayduck) / 100 : 0;
-      oakItemBonus = 1 - oakItemBonus;
-      return Math.round(100 / oakItemBonus) / 100;
+      // TODO(@Isha) fix when refactoring to feature
+      return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 1
     }
 
     public static tick() {
         this.counter = 0;
-        const timeToReduce = this.timeToReduce();
+        const timeToReduce = App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
         for (let i = 0; i < player.plotList.length; i++) {
             player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - timeToReduce));
         }
@@ -122,7 +121,7 @@ class FarmRunner {
                 Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success)
             }
             plot.berry(null);
-            OakItemRunner.use(GameConstants.OakItem.Sprayduck);
+            App.game.oakItems.use(OakItems.OakItem.Sprayduck);
             return money;
         }
         return 0;

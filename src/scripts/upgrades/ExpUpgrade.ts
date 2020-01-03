@@ -48,6 +48,16 @@ class ExpUpgrade extends Upgrade {
         return this.exp - this.expList[this.level - 1];
     }
 
+    get expPercentage() {
+        let nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
+        return this.normalizedExp / nextLevelExp * 100
+    }
+
+    get progressString(): string {
+        let nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
+        return Math.round(this.normalizedExp) + "/" + nextLevelExp
+    }
+
     // Private as external sources should use gainExp and normalizedExp
     private get exp() {
         return this._exp()
