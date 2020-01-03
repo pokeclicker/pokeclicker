@@ -394,7 +394,7 @@
             </div>
             <!-- /ko -->
 
-            <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
+            <div data-bind="if:App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map)">
                 <div data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>

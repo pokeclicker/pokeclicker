@@ -261,13 +261,17 @@ class Safari {
     }
 
     public static openModal() {
-        if (player.hasKeyItem("Safari ticket")) {
+        if (this.canAccess()) {
             App.game.gameState = GameConstants.GameState.safari;
             Safari.load();
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
+    }
+
+    private static canAccess() {
+        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Safari_ticket);
     }
 
     private static checkBattle(): boolean {

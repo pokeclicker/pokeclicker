@@ -9,6 +9,7 @@ class Game {
     public breeding: Breeding;
     public pokeballs: Pokeballs;
     public wallet: Wallet;
+    public keyItems: KeyItems;
     public badgeCase: BadgeCase;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
@@ -16,14 +17,28 @@ class Game {
     /**
      * TODO(@Isha) pass all features through the constructor
      */
-    constructor(breeding: Breeding, pokeballs: Pokeballs, wallet: Wallet, badgeCase: BadgeCase) {
+    constructor(
+        breeding: Breeding,
+        pokeballs: Pokeballs,
+        wallet: Wallet,
+        keyItems: KeyItems,
+        badgeCase: BadgeCase
+    ) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
         this.wallet = wallet;
-        this.badgeCase = badgeCase;
+        this.keyItems = keyItems;
+        this.badgeCase = badgeCase
+
+        this._gameState = ko.observable(GameConstants.GameState.paused);
+
 
         player = Save.load();
 
+        AchievementHandler.initialize();
+    }
+
+    load() {
         // TODO(@Isha) Refactor this saving logic
         let saveJSON = localStorage.getItem("save");
         if (saveJSON !== null) {
@@ -31,16 +46,32 @@ class Game {
             this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
             this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
             this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
+            this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
             this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
         }
-
-        this._gameState = ko.observable(GameConstants.GameState.fighting);
-        this.load();
     }
 
     initialize() {
         this.breeding.initialize();
         this.pokeballs.initialize();
+        this.keyItems.initialize();
+
+
+        // TODO refactor to proper initialization methods
+        OakItemRunner.loadOakItems();
+        Battle.generateNewEnemy();
+        Safari.load();
+        Save.loadMine();
+        Underground.energyTick(Underground.getEnergyRegenTime());
+        DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
+        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
+        QuestHelper.loadCurrentQuests(player.currentQuests);
+        if (!player.tutorialComplete()) {
+            QuestLineHelper.createTutorial();
+            QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
+        }
+
+        this.gameState = GameConstants.GameState.fighting
     }
 
     start() {
@@ -133,21 +164,6 @@ class Game {
 
     save() {
 
-    }
-
-    load() {
-        OakItemRunner.loadOakItems();
-        Battle.generateNewEnemy();
-        Safari.load();
-        Save.loadMine();
-        Underground.energyTick(Underground.getEnergyRegenTime());
-        DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
-        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
-        QuestHelper.loadCurrentQuests(player.currentQuests);
-        if (!player.tutorialComplete()) {
-            QuestLineHelper.createTutorial();
-            QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
-        }
     }
 
     // Knockout getters/setters

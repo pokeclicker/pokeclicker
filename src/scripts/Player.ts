@@ -73,8 +73,6 @@ class Player {
         });
         this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
-
         this._sortOption = ko.observable(savedPlayer._sortOption || null);
         this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
         this.clickAttackObservable = ko.computed(function () {
@@ -165,9 +163,7 @@ class Player {
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
 
-    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
-    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
 
     get itemList(): { [p: string]: KnockoutObservable<number> } {
@@ -211,31 +207,8 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
-    public hasKeyItem(name: string): boolean {
-        for (let i = 0; i < this._keyItems().length; i++) {
-            if (this._keyItems()[i] == name) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     set defeatedAmount(value: Array<KnockoutObservable<number>>) {
         this._defeatedAmount = value;
-    }
-
-    public gainKeyItem(name: string, supressModal?: boolean) {
-        if (!this.hasKeyItem(name)) {
-            this.recentKeyItem(name);
-            if (!supressModal) {
-                $('.modal').modal('hide');
-                $("#keyItemModal").modal('show');
-            }
-            this._keyItems().push(name);
-            KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
-            player._keyItems.valueHasMutated();
-
-        }
     }
 
     public calculateOakItemSlots(): KnockoutObservable<number> {
@@ -661,7 +634,6 @@ class Player {
             "_oakItemsEquipped",
             "_itemList",
             "_itemMultipliers",
-            "_keyItems",
             // TODO(@Isha) remove.
             "_mineInventory",
             // TODO(@Isha) remove.

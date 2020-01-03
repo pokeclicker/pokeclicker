@@ -14,7 +14,7 @@ class FarmRunner {
     }
 
     public static accessToFarm() {
-        return MapHelper.accessToRoute(14, 0) && player.hasKeyItem("Wailmer pail");
+        return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
     }
 
     public static timeToReduce(){
