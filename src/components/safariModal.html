@@ -48,7 +48,7 @@
                                              data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
                                         </span>
                                     </span>
-                                    <p><span id='safariCatchChance' data-bind="text: `Catch chance: ${SafariBattle.enemy.catchFactor} %`"></span><span id='safariRunChance' data-bind="text: `Escape chance: ${SafariBattle.enemy.escapeFactor} %`"></span></p>
+                                    <p><span id='safariCatchChance' data-bind="text: `Catch chance: ${SafariBattle.enemy.catchFactor.toFixed(2)} %`"></span><span id='safariRunChance' data-bind="text: `Escape chance: ${SafariBattle.enemy.escapeFactor.toFixed(2)} %`"></span></p>
                                 </div>
                             </div>
                             <div class='row'>

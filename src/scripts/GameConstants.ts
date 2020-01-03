@@ -138,13 +138,6 @@ namespace GameConstants {
         24
     ];
 
-    export const SAFARI_CATCH_MESSAGES = [
-        "Oh, no!<br>The Pokemon broke free!",
-        "Aww! It appeared to be caught!",
-        "Aargh! Almost had it!",
-        "Shoot! It was so close, too!"
-    ];
-
     export const SAFARI_OUT_OF_BALLS = "Game Over!<br>You have run out of safari balls to use."
 
     //Quests

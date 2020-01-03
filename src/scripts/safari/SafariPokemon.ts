@@ -48,7 +48,8 @@ class SafariPokemon implements pokemonInterface {
     }
 
     public get catchFactor(): number {
-        let catchF = this.baseCatchFactor;
+        const oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
+        let catchF = this.baseCatchFactor + oakBonus;
         if(this.eating > 0) {
             catchF /= 2;
         }
