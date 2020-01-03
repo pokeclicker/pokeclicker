@@ -35,13 +35,15 @@ class SafariBattle {
             width: "50%"
         }, 1000, "linear");
         */
-        SafariBattle.show();
+        //SafariBattle.show();
     }
 
+    /*
     private static show() {
         $("#safariBody").hide();
         $("#safariBattleBody").show();
     }
+    */
 
     public static throwBall() {
         if(!SafariBattle.busy) {
@@ -210,8 +212,8 @@ class SafariBattle {
     private static endBattle() {
         Safari.inBattle(false);
         SafariBattle.busy = false;
-        $("#safariBattleBody").hide();
-        $("#safariBody").show();
+        //$("#safariBattleBody").hide();
+        //$("#safariBody").show();
     }
 
     private static gameOver() {

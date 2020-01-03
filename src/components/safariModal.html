@@ -34,18 +34,21 @@
 
                         <div id="safariBody"
                             class='container-fluid'
-                            data-bind="if: Safari.inProgress() && !Safari.inBattle()">
+                            data-bind="visible: Safari.inProgress() && !Safari.inBattle()">
                         </div>
 
                         <div id="safariBattleBody" data-bind="if: Safari.inBattle">
                             <div class='row safariEnemyRow'>
                                 <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }"></div>
-                                <div id='safariEnemyName' class='btn btn-secondary btn-sm '>
-                                    <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
-                                        <img class='pokeball-smallest'
+                                <div id='safariEnemyTag' class='col-sm-6'>
+                                    <span>
+                                        <span data-bind='text: SafariBattle.enemy.name'></span>
+                                        <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
+                                            <img class='pokeball-smallest'
                                              data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
+                                        </span>
                                     </span>
-                                    <span data-bind='text: SafariBattle.enemy.name'></span>
+                                    <p><span id='safariCatchChance' data-bind="text: `Catch chance: ${SafariBattle.enemy.catchFactor} %`"></span><span id='safariRunChance' data-bind="text: `Escape chance: ${SafariBattle.enemy.escapeFactor} %`"></span></p>
                                 </div>
                             </div>
                             <div class='row'>
