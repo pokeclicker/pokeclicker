@@ -1,6 +1,6 @@
 class PartyController {
 
-    static getCaptureStatus(id: number): CaughtStatus {
+    static getCaughtStatus(id: number): CaughtStatus {
         if (App.game.party.alreadyCaughtPokemon(id, true)) {
             return CaughtStatus.CaughtShiny;
         }
