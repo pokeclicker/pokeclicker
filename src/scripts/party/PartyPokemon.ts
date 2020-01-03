@@ -17,14 +17,14 @@ class PartyPokemon implements Saveable {
     _exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
     evolver: KnockoutSubscription[];
+    evolutions: Evolution[];
     _breeding: KnockoutObservable<boolean>;
     attack: KnockoutComputed<number>;
 
 
-    constructor(id: number, name: string, evolved: boolean, baseAttack: number, attackBonus: number, exp: number, breeding: boolean = false) {
+    constructor(id: number, name: string, evolutions: Evolution[], baseAttack: number, attackBonus: number, exp: number, breeding: boolean = false) {
         this.id = id;
         this.name = name;
-        this.evolved = evolved;
         this.attackBonus = attackBonus;
         this._exp = ko.observable(exp);
         this._baseAttack = ko.observable(baseAttack);
@@ -39,7 +39,6 @@ class PartyPokemon implements Saveable {
         });
 
         this.evolver = [];
-        this.checkForEvolution();
     }
 
     public calculateAttack(): number {
@@ -105,47 +104,25 @@ class PartyPokemon implements Saveable {
         };
     }
 
-    public checkForEvolution(reset = false) {
-        // reset if pokemon has just hatched
-        if (!!reset) {
-            this.evolved = false;
-        }
-
-        const pokemonData = pokemonMapId[this.id];
-
-        // pokemon doesn't have an evolution, is already evolved, or currently breeding
-        if (!pokemonData.evoLevel || this.evolved || this.breeding) {
+    public checkForEvolution() {
+        if (this.evolved || this.breeding) {
             return;
         }
 
-        pokemonData.evoLevel.forEach((evo, index) => {
-            if (evo.constructor === Number) {
-                if (this.evolver[index]) {
-                    this.evolver[index].dispose();
-                }
-
-                // Check if player has already caught all of the possible evolutions
-                const obtainedAllEvolutions = reset ? !PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, true, true).some(p => !App.game.party.alreadyCaughtPokemon(this.id)) : false;
-
-                if (obtainedAllEvolutions) {
-                    this.evolved = true;
-                    return;
-                }
-
-                // Get evolutions for current region, else calculate a evolution for any region for when we reach that region
-                const evolution = PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, true) || PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, false);
-                const evoRegion = PokemonHelper.calcNativeRegion(evolution);
-                this.evolver[index] = this.levelObservable.subscribe(() => {
-                    if (this.levelObservable() >= evo && player.highestRegion() >= evoRegion) {
-                        Notifier.notify("Your " + this.name + " has evolved into a " + evolution, GameConstants.NotificationOption.success);
-                        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolution).id, false);
-                        player.caughtAmount[this.id](player._caughtAmount[this.id]() + 1);
-                        this.evolved = true;
-                        this.evolver[index].dispose();
-                    }
-                });
+        for (let evolution of this.evolutions) {
+            if (evolution.isSatisfied()) {
+                evolution.evolve()
             }
-        });
+        }
+    }
+
+    public useStone(type: GameConstants.StoneType) : boolean{
+        for (let evolution of this.evolutions) {
+            if (evolution instanceof StoneEvolution && evolution.stone == type) {
+                return evolution.evolve()
+            }
+        }
+        return false;
     }
 
     // Knockout getters/setter

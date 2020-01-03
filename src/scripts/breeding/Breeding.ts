@@ -163,7 +163,7 @@ class Breeding implements Feature {
                 if (App.game.party.caughtPokemon[i].breeding) {
                     App.game.party.caughtPokemon[i].exp = 0;
                     App.game.party.caughtPokemon[i].breeding = false;
-                    App.game.party.caughtPokemon[i].checkForEvolution(true);
+                    App.game.party.caughtPokemon[i].checkForEvolution();
                 }
             }
         }

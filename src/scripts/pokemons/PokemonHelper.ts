@@ -4,12 +4,12 @@
 class PokemonHelper {
 
     public static getPokemonsWithEvolution(evoType: string) {
-
-        return pokemonList.filter(function (pokemon) {
-            if (pokemon.evoLevel && pokemon.evoLevel.includes(evoType)) {
-                return !!PokemonHelper.getPokemonByName(pokemon.name).evolutionByIndex(pokemon.evoLevel.indexOf(evoType), true);
-            }
-        });
+        //TODO fix
+        // return pokemonList.filter(function (pokemon) {
+        //     if (pokemon.evoLevel && pokemon.evoLevel.includes(evoType)) {
+        //         return !!PokemonHelper.getPokemonByName(pokemon.name).evolutionByIndex(pokemon.evoLevel.indexOf(evoType), true);
+        //     }
+        // });
     }
 
 

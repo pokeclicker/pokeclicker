@@ -70,7 +70,7 @@ class PokemonFactory {
 
     public static generatePartyPokemon(id: number) {
         let dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, false, dataPokemon.attack, 0, 0, false);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false);
     }
 
     /**

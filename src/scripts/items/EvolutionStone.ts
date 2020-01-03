@@ -15,19 +15,9 @@ class EvolutionStone extends Item {
     }
 
     public use(pokemon?:string) {
-        let shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
-        let evolution = EvolutionStone.computeEvolution(this.type, pokemon);
-        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(evolution).id, shiny);
-
-        if (shiny) Notifier.notify(`✨ You evolved a shiny ${evolution}! ✨`, GameConstants.NotificationOption.warning);
+        let partyPokemon : PartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id);
+        let shiny = partyPokemon.useStone(this.type);
         return shiny;
-    }
-
-    public static computeEvolution(type: GameConstants.StoneType, pokemon: string): string {
-        // Assume stones and evolutions in pokemonList are consistent in ordering
-        let pkmObj = PokemonHelper.getPokemonByName(pokemon);
-        let index = pkmObj.evoLevel.indexOf(GameConstants.StoneType[type]);
-        return pkmObj.evolutionByIndex(index, true);
     }
 }
 
