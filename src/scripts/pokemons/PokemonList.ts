@@ -1,3 +1,4 @@
+///<reference path="../party/evolutions/LevelEvolution.ts"/>
 /**
  * Pokémon data, accessible by name or id.
  * @type {{}}
@@ -14,6 +15,7 @@ const pokemonList: {
   id: number,
   name: string,
   catchRate: number,
+  evolutions?: Evolution[]
   evolution?: any[],
   evoLevel?: any[],
   type: string[],
@@ -26,7 +28,7 @@ const pokemonList: {
         "id": 1,
         "name": "Bulbasaur",
         "catchRate": 45,
-        "evolution": ["Ivysaur"],
+        "evolutions": [ new LevelEvolution("Bulbasaur", "Ivysaur", 16)],
         "evoLevel": [16],
         "type": [
             "Grass",

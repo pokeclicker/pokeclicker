@@ -91,6 +91,13 @@ class Party implements Feature {
         return Math.round(attack);
     }
 
+    public getPokemon(id: number){
+        for (let i = 0; i < this.caughtPokemon.length; i++) {
+            if (this.caughtPokemon[i].id === id) {
+                return this.caughtPokemon[i];
+            }
+        }
+    }
 
     public hasMaxLevelPokemon(): boolean {
         for (let i = 0; i < this.caughtPokemon.length; i++) {
