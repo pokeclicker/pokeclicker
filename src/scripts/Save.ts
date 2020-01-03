@@ -17,6 +17,7 @@ class Save {
         saveObject[App.game.keyItems.saveKey] = App.game.keyItems.toJSON();
         saveObject[App.game.badgeCase.saveKey] = App.game.badgeCase.toJSON();
         saveObject[App.game.oakItems.saveKey] = App.game.oakItems.toJSON();
+        saveObject[App.game.party.saveKey] = App.game.party.toJSON();
 
         localStorage.setItem("save", JSON.stringify(saveObject));
 

@@ -1,7 +1,7 @@
 class PartyPokemon implements Saveable {
     saveKey: string;
 
-    defaults: {
+    defaults = {
         evolved: false,
         attackBonus: 0,
         exp: 0,
@@ -17,7 +17,7 @@ class PartyPokemon implements Saveable {
     _exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
     evolver: KnockoutSubscription[];
-    breeding: KnockoutObservable<boolean>;
+    _breeding: KnockoutObservable<boolean>;
     attack: KnockoutComputed<number>;
 
 
@@ -28,6 +28,7 @@ class PartyPokemon implements Saveable {
         this.attackBonus = attackBonus;
         this._exp = ko.observable(exp);
         this._baseAttack = ko.observable(baseAttack);
+        this._breeding = ko.observable(breeding);
 
         this.levelObservable = ko.computed(() => {
             return this.calculateLevel();
@@ -37,7 +38,6 @@ class PartyPokemon implements Saveable {
             return this.calculateAttack();
         });
 
-        this.breeding = ko.observable(breeding);
         this.evolver = [];
         this.checkForEvolution();
     }
@@ -114,7 +114,7 @@ class PartyPokemon implements Saveable {
         const pokemonData = pokemonMapId[this.id];
 
         // pokemon doesn't have an evolution, is already evolved, or currently breeding
-        if (!pokemonData.evoLevel || this.evolved || this.breeding()) {
+        if (!pokemonData.evoLevel || this.evolved || this.breeding) {
             return;
         }
 
@@ -155,6 +155,14 @@ class PartyPokemon implements Saveable {
 
     set exp(exp: number) {
         this._exp(exp);
+    }
+
+    get breeding() {
+        return this._breeding()
+    }
+
+    set breeding(bool: boolean) {
+        this._breeding(bool);
     }
 
     get baseAttack() {

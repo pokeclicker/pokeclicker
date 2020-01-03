@@ -19,8 +19,6 @@ class Player {
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
-    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
-    private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
@@ -57,8 +55,6 @@ class Player {
             return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0)
         });
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        this._sortOption = ko.observable(savedPlayer._sortOption || null);
-        this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
         this._town = ko.observable(TownList["Pallet Town"]);
         this._currentTown = ko.observable("");
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
@@ -407,8 +403,6 @@ class Player {
             "_routeKills",
             "_routeKillsNeeded",
             "_region",
-            "_sortOption",
-            "_sortDescending",
             "_starter",
             "_itemList",
             "_itemMultipliers",

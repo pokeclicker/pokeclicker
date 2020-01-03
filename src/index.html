@@ -6,7 +6,7 @@
     <meta charset="utf-8"/>
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
-        <tr data-bind='ifnot: $data.breeding()'>
+        <tr data-bind='ifnot: $data.breeding'>
             <td class="text-nowrap">
                 <img class="smallImage"
                      data-bind="attr:{ src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"

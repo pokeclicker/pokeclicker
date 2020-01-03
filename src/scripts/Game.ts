@@ -55,6 +55,7 @@ class Game {
             this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
             this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
             this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
+            this.party.fromJSON(saveObject[this.party.saveKey]);
         }
     }
 

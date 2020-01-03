@@ -1,12 +1,16 @@
 class PartyController {
 
-    clickAttackObservable = ko.computed(function () {
-        return App.game.party.calculateClickAttack()
-    }, this);
+    static getCaptureStatus(id: number): CaughtStatus {
+        if (App.game.party.alreadyCaughtPokemon(id, true)) {
+            return CaughtStatus.CaughtShiny;
+        }
 
-    pokemonAttackObservable = ko.computed(function () {
-        return App.game.party.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
-    }, this);
+        if (App.game.party.alreadyCaughtPokemon(id, false)) {
+            return CaughtStatus.Caught;
+        }
+
+        return CaughtStatus.NotCaught
+    }
 
     // TODO implement
     // public static sortedPokemonList(): KnockoutComputed<Array<PartyPokemon>> {
@@ -22,6 +26,5 @@ class PartyController {
     //         })
     //     }, this)
     // }
-
 
 }

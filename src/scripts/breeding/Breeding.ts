@@ -147,7 +147,7 @@ class Breeding implements Feature {
             return;
         }
         let egg = this.createEgg(pokemon.name);
-        pokemon.breeding(true);
+        pokemon.breeding = true;
         this.gainEgg(egg);
         pokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
     }
@@ -160,9 +160,9 @@ class Breeding implements Feature {
 
         for (let i = 0; i < App.game.party.caughtPokemon.length; i++) {
             if (App.game.party.caughtPokemon[i].name == egg.pokemon) {
-                if (App.game.party.caughtPokemon[i].breeding()) {
+                if (App.game.party.caughtPokemon[i].breeding) {
                     App.game.party.caughtPokemon[i].exp = 0;
-                    App.game.party.caughtPokemon[i].breeding(false);
+                    App.game.party.caughtPokemon[i].breeding = false;
                     App.game.party.caughtPokemon[i].checkForEvolution(true);
                 }
             }

@@ -1,3 +1,4 @@
+///<reference path="CaughtStatus.ts"/>
 class Party implements Feature {
     name: string = "Pokemon Party";
     saveKey: string = "party";
@@ -6,15 +7,15 @@ class Party implements Feature {
     shinyPokemon: ObservableArrayProxy<number>;
 
 
-    defaults: {
+    defaults = {
         caughtPokemon: [],
         shinyPokemon: [],
     };
 
 
     constructor() {
-        this.caughtPokemon = new ObservableArrayProxy([]);
-        this.shinyPokemon = new ObservableArrayProxy([]);
+        this.caughtPokemon = new ObservableArrayProxy(this.defaults.caughtPokemon);
+        this.shinyPokemon = new ObservableArrayProxy(this.defaults.shinyPokemon);
     }
 
     gainPokemonById(id: number, shiny: boolean = false) {
@@ -73,7 +74,7 @@ class Party implements Feature {
                 // Pokemon only retain 20% of their total damage in other regions.
                 multiplier = 0.2
             }
-            if (!pokemon.breeding()) {
+            if (!pokemon.breeding) {
                 if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
                     attack += pokemon.attack() * multiplier;
                 } else {
@@ -135,13 +136,30 @@ class Party implements Feature {
     }
 
     fromJSON(json: object): void {
+        if (json == null) {
+            return
+        }
+
+        let caughtPokemonSave = json["caughtPokemon"];
+        console.log(caughtPokemonSave);
+        for (let i = 0; i < caughtPokemonSave.length; i++) {
+            let partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
+            partyPokemon.fromJSON(caughtPokemonSave[i]);
+            console.log(partyPokemon);
+            this.caughtPokemon.push(partyPokemon)
+        }
+
+        this.shinyPokemon = new ObservableArrayProxy<number>(json["shinyPokemon"] ?? this.defaults.shinyPokemon);
     }
 
     initialize(): void {
     }
 
     toJSON(): object {
-        return undefined;
+        return {
+            caughtPokemon: this.caughtPokemon.map(x => x.toJSON()),
+            shinyPokemon: this.shinyPokemon.map(x => x)
+        }
     }
 
     update(delta: number): void {
