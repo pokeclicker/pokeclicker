@@ -150,7 +150,7 @@ class Save {
             });
         } else {
             res = [];
-            for (let item in GameConstants.PokemonType) {
+            for (let item in PokemonType) {
                 if (!isNaN(Number(item))) {
                     res[item] = [];
                     res[item][GameConstants.TypeEffectiveness.Immune] = ko.observable(0);

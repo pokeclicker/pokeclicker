@@ -1,9 +1,9 @@
 /// <reference path="Quest.ts" />
 
 class GainShardsQuest extends Quest implements QuestInterface {
-    constructor(type: GameConstants.PokemonType, amount: number) {
+    constructor(type: PokemonType, amount: number) {
         super(amount, GainShardsQuest.calcReward(type, amount));
-        this.description = `Gain ${amount} ${GameConstants.PokemonType[type]} shards.`;
+        this.description = `Gain ${amount} ${PokemonType[type]} shards.`;
         this.questFocus = player.statistics.totalShards[type];
     }
 

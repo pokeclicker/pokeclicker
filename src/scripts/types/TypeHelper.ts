@@ -31,16 +31,16 @@ class TypeHelper {
     ];
     //@formatter:on
 
-    public static getAttackModifier(a1: GameConstants.PokemonType, a2: GameConstants.PokemonType, d1: GameConstants.PokemonType, d2: GameConstants.PokemonType): number {
+    public static getAttackModifier(a1: PokemonType, a2: PokemonType, d1: PokemonType, d2: PokemonType): number {
 
-        if (a1 == GameConstants.PokemonType.None || d1 == GameConstants.PokemonType.None) {
+        if (a1 == PokemonType.None || d1 == PokemonType.None) {
             return 1;
         }
 
-        let attackType1 = GameConstants.PokemonType[a1];
-        let attackType2 = GameConstants.PokemonType[a2];
-        let defendType1 = GameConstants.PokemonType[d1];
-        let defendType2 = GameConstants.PokemonType[d2];
+        let attackType1 = PokemonType[a1];
+        let attackType2 = PokemonType[a2];
+        let defendType1 = PokemonType[d1];
+        let defendType2 = PokemonType[d2];
 
         let list = player.shardUpgrades;
         //TODO factor in shard value
@@ -48,17 +48,17 @@ class TypeHelper {
         m1 += (list[attackType1][this.valueToType(m1)]() * GameConstants.SHARD_UPGRADE_STEP);
 
         let m2 = 1, m3 = 1, m4 = 1;
-        if (d2 != GameConstants.PokemonType.None) {
+        if (d2 != PokemonType.None) {
             m2 = TypeHelper.typeMatrix[attackType1][defendType2];
             m2 += (list[attackType1][this.valueToType(m2)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
-        if (a2 != GameConstants.PokemonType.None) {
+        if (a2 != PokemonType.None) {
             m3 = TypeHelper.typeMatrix[attackType2][defendType1];
             m3 += (list[attackType2][this.valueToType(m3)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
-        if (a2 != GameConstants.PokemonType.None && d2 != GameConstants.PokemonType.None) {
+        if (a2 != PokemonType.None && d2 != PokemonType.None) {
             let m4 = TypeHelper.typeMatrix[attackType2][defendType2];
             m4 += (list[attackType2][this.valueToType(m4)]() * GameConstants.SHARD_UPGRADE_STEP);
         }

@@ -15,18 +15,18 @@ class PokemonHelper {
     public static getPokemonByName(name: string): DataPokemon {
         let basePokemon = pokemonMap[name];
         if (!basePokemon) return;
-        let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
+        let type2: PokemonType = basePokemon["type"][1] || PokemonType.None;
         let evoLevel = basePokemon["evoLevel"];
         let eggCycles: number = basePokemon["eggCycles"] || 20;
         return new DataPokemon(basePokemon["id"], basePokemon["name"], basePokemon["catchRate"], basePokemon["evolution"], evoLevel, basePokemon["type"][0], type2, basePokemon["attack"], basePokemon["levelType"], basePokemon["exp"], eggCycles);
     }
 
     public static typeStringToId(id: string) {
-        return GameConstants.PokemonType[id];
+        return PokemonType[id];
     }
 
     public static typeIdToString(id: number) {
-        return GameConstants.PokemonType[id];
+        return PokemonType[id];
     }
 
     public static calculateLevel(pokemon: CaughtPokemon): number {

@@ -79,7 +79,7 @@ class Player {
             return this.calculateClickAttack()
         }, this);
         this.pokemonAttackObservable = ko.computed(function () {
-            return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
+            return this.calculatePokemonAttack(PokemonType.None, PokemonType.None);
         }, this);
         this._town = ko.observable(TownList["Pallet Town"]);
         this._currentTown = ko.observable("");
@@ -327,11 +327,11 @@ class Player {
     }
 
     public gainShards(pokemon: BattlePokemon) {
-        let typeNum = GameConstants.PokemonType[pokemon.type1];
+        let typeNum = PokemonType[pokemon.type1];
         player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
         GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
-        if (pokemon.type2 != GameConstants.PokemonType.None) {
-            typeNum = GameConstants.PokemonType[pokemon.type2];
+        if (pokemon.type2 != PokemonType.None) {
+            typeNum = PokemonType[pokemon.type2];
             player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
             GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
         }
@@ -506,7 +506,7 @@ class Player {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
+    public calculatePokemonAttack(type1: PokemonType, type2: PokemonType): number {
         let attack = 0;
         for (let pokemon of this.caughtPokemonList) {
             let multiplier = 1;
@@ -515,7 +515,7 @@ class Player {
                 multiplier = 0.2
             }
             if (!pokemon.breeding()) {
-                if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
+                if (Battle.enemyPokemon() == null || type1 == PokemonType.None) {
                     attack += pokemon.attack() * multiplier;
                 } else {
                     let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);

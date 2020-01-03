@@ -1,3 +1,4 @@
+///<reference path="../pokemons/PokemonType.ts"/>
 class Statistics {
 
     public clicks: KnockoutObservable<number>;
@@ -23,7 +24,7 @@ class Statistics {
         "dungeonsCleared": GameConstants.RegionDungeons.flat().length,
         "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
         "pokeballsBought": GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
-        "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,  // remove "None" pokemon type
+        "totalShards": GameHelper.enumLength(PokemonType) - 1,  // remove "None" pokemon type
         "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
         "berriesHarvested": GameHelper.enumLength(GameConstants.BerryType),
     };
