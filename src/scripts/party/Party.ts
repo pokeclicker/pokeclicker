@@ -39,6 +39,23 @@ class Party implements Feature {
 
     }
 
+    public gainExp(exp: number = 0, level: number = 1, trainer: boolean = false) {
+        App.game.oakItems.use(OakItems.OakItem.Exp_Share);
+        let trainerBonus = trainer ? 1.5 : 1;
+        let oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
+        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
+
+        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()){
+            expTotal *= 1.5;
+        }
+
+        for (let pokemon of this.caughtPokemon) {
+            if (pokemon.levelObservable() < (App.game.badgeCase.badgeCount() + 2) * 10) {
+                pokemon.exp += expTotal;
+            }
+        }
+    }
+
     alreadyCaughtPokemon(id: number, shiny: boolean = false) {
         for (let i = 0; i < this.caughtPokemon.length; i++) {
             if (this.caughtPokemon[i].id === id) {

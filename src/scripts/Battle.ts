@@ -53,7 +53,7 @@ class Battle {
     public static defeatPokemon() {
         GameHelper.incrementObservable(player.statistics.pokemonDefeated);
         App.game.wallet.gainMoney(this.enemyPokemon().money);
-        player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.gainShards(this.enemyPokemon());
         player.addRouteKill();
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);

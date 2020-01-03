@@ -222,24 +222,6 @@ class Player {
         this._itemList = value;
     }
 
-    public gainExp(exp: number, level: number, trainer: boolean) {
-        App.game.oakItems.use(OakItems.OakItem.Exp_Share);
-        // TODO add exp multipliers
-        let trainerBonus = trainer ? 1.5 : 1;
-        let oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
-        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
-
-        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()){
-            expTotal *= 1.5;
-        }
-
-        for (let pokemon of this._caughtPokemonList()) {
-            if (pokemon.levelObservable() < (App.game.badgeCase.badgeCount() + 2) * 10) {
-                pokemon.exp(pokemon.exp() + expTotal);
-            }
-        }
-    }
-
     public gainShards(pokemon: BattlePokemon) {
         let typeNum = GameConstants.PokemonType[pokemon.type1];
         player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);

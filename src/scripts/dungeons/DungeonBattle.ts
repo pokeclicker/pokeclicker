@@ -6,7 +6,7 @@ class DungeonBattle extends Battle {
     public static defeatPokemon() {
         DungeonRunner.fighting(false);
         App.game.wallet.gainMoney(this.enemyPokemon().money);
-        player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.gainShards(this.enemyPokemon());
         player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(DungeonRunner.dungeon.itemRoute)));
