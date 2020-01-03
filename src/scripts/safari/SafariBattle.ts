@@ -260,6 +260,7 @@ class SafariBattle {
         SafariBattle.text(GameConstants.SAFARI_OUT_OF_BALLS);
         setTimeout(function() {
             Safari.inBattle(false);
+            Safari.inProgress(false);
             SafariBattle.busy = false;
             $("#safariModal").modal('toggle');
         }, 2000);

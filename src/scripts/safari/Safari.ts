@@ -122,6 +122,12 @@ class Safari {
         }
     }
 
+    public static closeModal() {
+        if (!Safari.inBattle()) {
+            $('#safariModal').modal('hide')
+        }
+    }
+
     private static canPay() {
         // TODO
         return true;
