@@ -58,12 +58,12 @@ class PokedexHelper {
                 return false;
             }
             let type1 = parseInt(filter['type1'] || -1);
-            if (type1 != -1 && pokemon.type.indexOf(PokemonType[type1]) == -1) {
+            if (type1 != -1 && pokemon.type1 == PokemonType.None) {
                 return false;
             }
 
             let type2 = parseInt(filter['type2'] || -1);
-            if (type2 != -1 && pokemon.type.indexOf(PokemonType[type2]) == -1) {
+            if (type2 != -1 && pokemon.type2 == PokemonType.None) {
                 return false;
             }
 

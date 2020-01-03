@@ -1,4 +1,5 @@
 ///<reference path="./badgeCase/BadgeCase.ts" />
+///<reference path="pokemons/PokemonEnum.ts"/>
 
 /**
  * Contains all game constants for easy access.
@@ -39,9 +40,9 @@ namespace GameConstants {
     export const ROAMING_MAX_CHANCE = 4096;
 
     export const RoamingPokemon = {
-        0: ["Mew"],
-        1: ["Raikou", "Entei", "Suicune"],
-    }
+        0: [Pokemon.Mew],
+        1: [Pokemon.Raikou, Pokemon.Entei, Pokemon.Suicune],
+    };
 
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;

@@ -1,5 +1,5 @@
 class CaughtPokemon {
-    id: number;
+    id: Pokemon;
     name: string;
     baseAttack: number;
     attack: KnockoutComputed<number>;
@@ -43,7 +43,7 @@ class CaughtPokemon {
           this.evolved = false;
         }
 
-        const pokemonData = pokemonMapId[this.id];
+        const pokemonData = pokemonList[this.id];
 
         // pokemon doesn't have an evolution, is already evolved, or currently breeding
         if (!pokemonData.evoLevel || this.evolved || this.breeding()){

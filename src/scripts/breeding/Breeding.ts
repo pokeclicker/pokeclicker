@@ -235,17 +235,19 @@ class Breeding implements Feature {
     }
 
     public calculateBaseForm(pokemonName: string): string {
+        // TODO(@Isha) fix this
+        return pokemonName;
         // Base form of Pokemon depends on which regions players unlocked
-        if (!(pokemonName in pokemonDevolutionMap)) {
+        // if (!(pokemonName in pokemonDevolutionMap)) {
             // No devolutions at all
-            return pokemonName;
-        } else if (PokemonHelper.calcNativeRegion(pokemonDevolutionMap[pokemonName]) > player.highestRegion()) {
+            // return pokemonName;
+        // } else if (PokemonHelper.calcNativeRegion(pokemonDevolutionMap[pokemonName]) > player.highestRegion()) {
             // No further devolutions in current unlocked regions
-            return pokemonName;
-        } else {
+            // return pokemonName;
+        // } else {
             // Recurse onto its devolution
-            return this.calculateBaseForm(pokemonDevolutionMap[pokemonName]);
-        }
+            // return this.calculateBaseForm(pokemonDevolutionMap[pokemonName]);
+        // }
     }
 
     public buyEggSlot() {

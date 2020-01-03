@@ -259,48 +259,46 @@ class Player {
 
     /**
      * Loops through the caughtPokemonList to check if the pokémon is already caight
-     * @param pokemonName name to search for.
+     * @param pokemon id to search for.
      * @returns {boolean}
      */
-    public alreadyCaughtPokemon(pokemonName: string) {
-        const pokemon = PokemonHelper.getPokemonByName(pokemonName);
-        if (!pokemon) return false;
-        const id = PokemonHelper.getPokemonByName(pokemonName).id;
-        return player.caughtAmount[id]() > 0;
+    public alreadyCaughtPokemon(pokemon: Pokemon) {
+        return player.caughtAmount[pokemon]() > 0;
     }
 
-    public alreadyCaughtPokemonShiny(pokemonName: string) {
-        if (!this.alreadyCaughtPokemon(pokemonName)) return false;
+    public alreadyCaughtPokemonShiny(pokemon: Pokemon) {
+        if (!this.alreadyCaughtPokemon(pokemon)) return false;
         for (let i: number = 0; i < this.caughtShinyList().length; i++) {
-            if (this.caughtShinyList()[i] == pokemonName) {
+            if (this.caughtShinyList()[i] == PokemonHelper.get(pokemon).name) {
                 return true;
             }
         }
         return false;
     }
 
-    public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
-        if (PokemonHelper.calcNativeRegion(pokemonName) > player.highestRegion()) {
+    public capturePokemon(pokemon: Pokemon, shiny: boolean = false, supressNotification = false) {
+
+        if (PokemonHelper.calcNativeRegion(pokemon) > player.highestRegion()) {
             return;
         }
         OakItemRunner.use(GameConstants.OakItem.Magic_Ball);
-        let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
-        if (!this.alreadyCaughtPokemon(pokemonName)) {
-            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
+        let dataPokemon: DataPokemon = PokemonHelper.get(pokemon);
+        if (!this.alreadyCaughtPokemon(pokemon)) {
+            let caughtPokemon: CaughtPokemon = new CaughtPokemon(dataPokemon, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
             if (!supressNotification) {
-                if (shiny) Notifier.notify(`✨ You have captured a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
-                else Notifier.notify(`You have captured ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`, GameConstants.NotificationOption.success)
+                if (shiny) Notifier.notify(`✨ You have captured a shiny ${dataPokemon.name}! ✨`, GameConstants.NotificationOption.warning);
+                else Notifier.notify(`You have captured ${GameHelper.anOrA(dataPokemon.name)} ${dataPokemon.name}!`, GameConstants.NotificationOption.success)
             }
         }
-        if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
-            this._caughtShinyList.push(pokemonName);
+        if (shiny && !this.alreadyCaughtPokemonShiny(pokemon)) {
+            this._caughtShinyList.push(dataPokemon.name);
             Save.store(player);
         }
         if (shiny) {
             player.shinyCatches++;
         }
-        player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
+        player.caughtAmount[pokemon](player.caughtAmount[pokemon]() + 1);
         GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
 

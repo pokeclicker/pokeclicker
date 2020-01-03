@@ -12,13 +12,17 @@ class PokemonHelper {
         });
     }
 
+    public static get(id: Pokemon): DataPokemon {
+        return pokemonList[id];
+    }
+
     public static getPokemonByName(name: string): DataPokemon {
-        let basePokemon = pokemonMap[name];
-        if (!basePokemon) return;
-        let type2: PokemonType = basePokemon["type"][1] || PokemonType.None;
-        let evoLevel = basePokemon["evoLevel"];
-        let eggCycles: number = basePokemon["eggCycles"] || 20;
-        return new DataPokemon(basePokemon["id"], basePokemon["name"], basePokemon["catchRate"], basePokemon["evolution"], evoLevel, basePokemon["type"][0], type2, basePokemon["attack"], basePokemon["levelType"], basePokemon["exp"], eggCycles);
+        for (let i = 0; i < pokemonList.length; i++) {
+            if(pokemonList[i].name == name){
+                return pokemonList[i];
+            }
+        }
+        console.log("Could not find pokemons with name", name);
     }
 
     public static typeStringToId(id: string) {
@@ -126,8 +130,7 @@ class PokemonHelper {
         }
     }
 
-    public static calcNativeRegion(pokemonName: string) {
-        let id = PokemonHelper.getPokemonByName(pokemonName).id;
+    public static calcNativeRegion(id: Pokemon) {
         if (id > 251) {
             return GameConstants.Region.hoenn;
         } else if (id > 151) {
