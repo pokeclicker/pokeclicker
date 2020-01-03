@@ -230,7 +230,7 @@
 
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span>
 
-                            <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id), 'height': '18px'}}"></span>
+                            <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></span>
 
                             <div>
                                 <div data-bind="ifnot: Battle.catching">
@@ -290,19 +290,7 @@
 
                             <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
-
-                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                                <span data-bind="if: (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id, true) && App.game.party.alreadyCaughtPokemonByName(Battle.enemyPokemon().name))">
-                                    <img title="You have captured this Pokémon!" class="pokeball-smallest"
-                                         src="assets/images/pokeball/Pokeball-small.png"/>
-                                </span>
-
-                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                                <span data-bind="if: App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id, true)">
-                                    <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
-                                         src="assets/images/pokeball/Pokeball-shiny-small.png"/>
-                                </span>
-
+                                <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></span>
                                 <div>
                                     <div data-bind="ifnot: DungeonBattle.catching">
                                         <img id="dungeonEnemy"
