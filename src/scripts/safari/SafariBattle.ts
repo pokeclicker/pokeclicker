@@ -169,7 +169,7 @@ class SafariBattle {
             let enemy = $('#safariEnemy').offset();
             enemy.left += 30;
             enemy.top += 70;
-            SafariBattle.dropParticle('<img src="assets/images/safari/bait.png">', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+            SafariBattle.dropParticle('<img src="assets/images/safari/bait.png">', $('#safariPlayer').offset(), enemy, 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
             setTimeout(SafariBattle.enemyTurn, 1500);
         }
     }
@@ -183,7 +183,7 @@ class SafariBattle {
             let enemy = $('#safariEnemy').offset();
             enemy.left += 40;
             enemy.top += 10;
-            SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariPlayer').offset(), enemy, 0.8, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+            SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariPlayer').offset(), enemy, 800, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
             setTimeout(function(){
                 let hitSplash = $('<ptcl>').html("<img src='assets/images/safari/hit.png'>").children().appendTo('body');
                 hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
