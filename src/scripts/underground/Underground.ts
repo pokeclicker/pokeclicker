@@ -124,11 +124,8 @@ class Underground {
 
     public static gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
-            let multiplier = 1;
-            if (OakItemRunner.isActive(GameConstants.OakItem.Cell_Battery)) {
-                multiplier += (OakItemRunner.calculateBonus(GameConstants.OakItem.Cell_Battery) / 100);
-            }
-            this.energy = Math.min(this.getMaxEnergy(), this.energy + (multiplier * this.getEnergyGain()));
+            let oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
+            this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
                 Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
             }

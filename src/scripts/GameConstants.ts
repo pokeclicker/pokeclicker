@@ -54,18 +54,7 @@ namespace GameConstants {
     export const ITEM_PRICE_MULTIPLIER = 1.001;
     export const ITEM_PRICE_DEDUCT = 1.0005;
 
-
-
     export const PLATE_VALUE = 100;
-
-    // Oak items
-    export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
-    export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
-    export const AMOUNT_OF_OAKITEMS = 8;
-    export const OAKITEM_MAX_LEVEL = 5;
-    export const OAKITEM_FIRST_UNLOCK = 20;
-    export const OAKITEM_SECOND_UNLOCK = 50;
-    export const OAKITEM_THIRD_UNLOCK = 100;
 
     // Breeding
     export const BREEDING_AMOUNT = 1;
@@ -83,17 +72,6 @@ namespace GameConstants {
         Taller,
         Bloom,
         Berry
-    }
-
-    export enum OakItem {
-        Magic_Ball = 0,
-        Amulet_Coin,
-        Poison_Barb,
-        Exp_Share,
-        Sprayduck,
-        Shiny_Charm,
-        Blaze_Cassette,
-        Cell_Battery,
     }
 
     // Dungeons

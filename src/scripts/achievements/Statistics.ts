@@ -1,3 +1,4 @@
+///<reference path="../oakItems/OakItems.ts"/>
 class Statistics {
 
     public clicks: KnockoutObservable<number>;
@@ -24,7 +25,7 @@ class Statistics {
         "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
         "pokeballsBought": GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
         "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,  // remove "None" pokemon type
-        "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
+        "oakItemUses": GameHelper.enumLength(OakItems.OakItem),
         "berriesHarvested": GameHelper.enumLength(GameConstants.BerryType),
     };
 

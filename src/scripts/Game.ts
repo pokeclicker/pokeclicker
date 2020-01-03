@@ -11,6 +11,7 @@ class Game {
     public wallet: Wallet;
     public keyItems: KeyItems;
     public badgeCase: BadgeCase;
+    public oakItems: OakItems;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
@@ -22,13 +23,15 @@ class Game {
         pokeballs: Pokeballs,
         wallet: Wallet,
         keyItems: KeyItems,
-        badgeCase: BadgeCase
+        badgeCase: BadgeCase,
+        oakItems: OakItems
     ) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
         this.wallet = wallet;
         this.keyItems = keyItems;
-        this.badgeCase = badgeCase
+        this.badgeCase = badgeCase;
+        this.oakItems = oakItems;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
@@ -48,6 +51,7 @@ class Game {
             this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
             this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
             this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
+            this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
         }
     }
 
@@ -55,10 +59,9 @@ class Game {
         this.breeding.initialize();
         this.pokeballs.initialize();
         this.keyItems.initialize();
-
+        this.oakItems.initialize();
 
         // TODO refactor to proper initialization methods
-        OakItemRunner.loadOakItems();
         Battle.generateNewEnemy();
         Safari.load();
         Save.loadMine();
