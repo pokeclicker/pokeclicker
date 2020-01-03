@@ -12,9 +12,9 @@ class PartyPokemon implements Saveable {
     name: string;
 
     evolved: boolean;
-    baseAttack: number;
+    _baseAttack: KnockoutObservable<number>;
     attackBonus: number;
-    exp: number;
+    _exp: KnockoutObservable<number>;
     levelObservable: KnockoutComputed<number>;
     evolver: KnockoutSubscription[];
     breeding: KnockoutObservable<boolean>;
@@ -26,11 +26,13 @@ class PartyPokemon implements Saveable {
         this.name = name;
         this.evolved = evolved;
         this.attackBonus = attackBonus;
-        this.exp = exp;
+        this._exp = ko.observable(exp);
+        this._baseAttack = ko.observable(baseAttack);
+
         this.levelObservable = ko.computed(() => {
             return this.calculateLevel();
         });
-        this.baseAttack = baseAttack;
+
         this.attack = ko.computed(() => {
             return this.calculateAttack();
         });
@@ -41,7 +43,7 @@ class PartyPokemon implements Saveable {
     }
 
     public calculateAttack(): number {
-        let attackBonusMultiplier = 1 + ( this.attackBonus / 100 );
+        let attackBonusMultiplier = 1 + (this.attackBonus / 100);
         let levelMultiplier = this.levelObservable() / 100;
         return Math.max(1, Math.floor(this.baseAttack * attackBonusMultiplier * levelMultiplier));
     }
@@ -144,5 +146,22 @@ class PartyPokemon implements Saveable {
                 });
             }
         });
+    }
+
+    // Knockout getters/setter
+    get exp() {
+        return this._exp()
+    }
+
+    set exp(exp: number) {
+        this._exp(exp);
+    }
+
+    get baseAttack() {
+        return this._baseAttack();
+    }
+
+    set baseAttack(attack: number) {
+        this._baseAttack(attack);
     }
 }

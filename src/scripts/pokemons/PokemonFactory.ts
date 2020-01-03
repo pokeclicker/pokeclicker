@@ -69,8 +69,8 @@ class PokemonFactory {
     }
 
     public static generatePartyPokemon(id: number) {
-        // TODO expand
-        return new PartyPokemon(id, "Test", false, 10, 10, 10, false);
+        let dataPokemon = PokemonHelper.getPokemonById(id);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, false, dataPokemon.attack, 0, 0, false);
     }
 
     /**
