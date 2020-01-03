@@ -326,39 +326,6 @@ class Player {
         }
     }
 
-    public gainShards(pokemon: BattlePokemon) {
-        let typeNum = GameConstants.PokemonType[pokemon.type1];
-        player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
-        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
-        if (pokemon.type2 != GameConstants.PokemonType.None) {
-            typeNum = GameConstants.PokemonType[pokemon.type2];
-            player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
-            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
-        }
-    }
-
-    public buyShardUpgrade(typeNum: number, effectNum: number) {
-        if (this.canBuyShardUpgrade(typeNum, effectNum)) {
-            this._shardsCollected[typeNum](this._shardsCollected[typeNum]() - this.getShardUpgradeCost(typeNum, effectNum));
-            this._shardUpgrades[typeNum][effectNum](this._shardUpgrades[typeNum][effectNum]() + 1);
-        }
-    }
-
-    public shardUpgradeMaxed(typeNum: number, effectNum: number): boolean {
-        return this._shardUpgrades[typeNum][effectNum]() >= GameConstants.MAX_SHARD_UPGRADES;
-    }
-
-    public canBuyShardUpgrade(typeNum: number, effectNum: number): boolean {
-        let lessThanMax = !this.shardUpgradeMaxed(typeNum, effectNum);
-        let hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
-        return lessThanMax && hasEnoughShards;
-    }
-
-    public getShardUpgradeCost(typeNum: number, effectNum: number): number {
-        let cost = (this._shardUpgrades[typeNum][effectNum]() + 1) * GameConstants.SHARD_UPGRADE_COST;
-        return cost;
-    }
-
     public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
         return ko.pureComputed(function () {
             return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
