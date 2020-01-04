@@ -21,14 +21,11 @@ class Player {
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
-    private _gymBadges: KnockoutObservableArray<GameConstants.Badge>;
     private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
     private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
-    private _oakItemExp: Array<KnockoutObservable<number>>;
-    private _oakItemsEquipped: string[];
 
     constructor(savedPlayer?) {
         let saved: boolean = (savedPlayer != null);
@@ -69,16 +66,7 @@ class Player {
         this._caughtAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
             return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0)
         });
-        this._oakItemExp = Array.apply(null, Array(GameConstants.AMOUNT_OF_OAKITEMS + 1)).map(function (val, index) {
-            return ko.observable(savedPlayer._oakItemExp ? (savedPlayer._oakItemExp[index] || 0) : 0)
-        });
-        this._oakItemsEquipped = savedPlayer._oakItemsEquipped || [];
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        this._gymBadges = ko.observableArray<GameConstants.Badge>(savedPlayer._gymBadges);
-        this._keyItems = ko.observableArray<string>(savedPlayer._keyItems);
-        if (this._gymBadges().length == 0) {
-            this._gymBadges.push(GameConstants.Badge.None)
-        }
         this._sortOption = ko.observable(savedPlayer._sortOption || null);
         this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
         this.clickAttackObservable = ko.computed(function () {
@@ -103,8 +91,8 @@ class Player {
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
 
         // TODO(@Isha) move to underground classes.
-        this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
-        for (let item of this._mineInventory()) {
+        this.mineInventory = new ObservableArrayProxy(savedPlayer.mineInventory || []);
+        for (let item of this.mineInventory) {
             item.amount = ko.observable(item.amount);
         }
 
@@ -164,14 +152,12 @@ class Player {
     private _itemList: { [name: string]: KnockoutObservable<number> };
 
     // TODO(@Isha) move to underground classes.
-    private _mineInventory: KnockoutObservableArray<any>;
+    public mineInventory: ObservableArrayProxy<any>;
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
 
-    private _keyItems: KnockoutObservableArray<string> = ko.observableArray<string>();
     public clickAttackObservable: KnockoutComputed<number>;
-    public recentKeyItem: KnockoutObservable<string> = ko.observable("Teachy tv");
     public pokemonAttackObservable: KnockoutComputed<number>;
 
     get itemList(): { [p: string]: KnockoutObservable<number> } {
@@ -215,54 +201,8 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
-    public hasKeyItem(name: string): boolean {
-        for (let i = 0; i < this._keyItems().length; i++) {
-            if (this._keyItems()[i] == name) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     set defeatedAmount(value: Array<KnockoutObservable<number>>) {
         this._defeatedAmount = value;
-    }
-
-    public gainKeyItem(name: string, supressModal?: boolean) {
-        if (!this.hasKeyItem(name)) {
-            this.recentKeyItem(name);
-            if (!supressModal) {
-                $('.modal').modal('hide');
-                $("#keyItemModal").modal('show');
-            }
-            this._keyItems().push(name);
-            KeyItemHandler.getKeyItemObservableByName(name).valueHasMutated();
-            player._keyItems.valueHasMutated();
-
-        }
-    }
-
-    public calculateOakItemSlots(): KnockoutObservable<number> {
-        let total = 0;
-        if (this.caughtPokemonList.length >= GameConstants.OAKITEM_FIRST_UNLOCK) {
-            total++;
-        }
-        if (this.caughtPokemonList.length >= GameConstants.OAKITEM_SECOND_UNLOCK) {
-            total++;
-        }
-
-        if (this.caughtPokemonList.length >= GameConstants.OAKITEM_THIRD_UNLOCK) {
-            total++;
-        }
-        return ko.observable(total);
-    }
-
-    public gainOakItemExp(item: GameConstants.OakItem, amount: number) {
-        this.oakItemExp[item](this.oakItemExp[item]() + amount)
-    }
-
-    public getOakItemExp(item: GameConstants.OakItem): number {
-        return this.oakItemExp[item]();
     }
 
     private _caughtAmount: Array<KnockoutObservable<number>>;
@@ -271,9 +211,10 @@ class Player {
         // Base power
         let clickAttack =  Math.pow(this.caughtPokemonList.length + this.caughtAndShinyList()().length + 1, 1.4);
 
-        // Apply Oak bonus
-        const oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Poison_Barb) ? (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Poison_Barb) / 100) : 1;
-        clickAttack *= oakItemBonus;
+        // TODO(@Isha) fix when refactoring to party
+        if (App.game != undefined) {
+            clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
+        }
 
         // Apply battle item bonus
         if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()){
@@ -314,7 +255,7 @@ class Player {
         if (PokemonHelper.calcNativeRegion(pokemonName) > player.highestRegion()) {
             return;
         }
-        OakItemRunner.use(GameConstants.OakItem.Magic_Ball);
+        App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
         if (!this.alreadyCaughtPokemon(pokemonName)) {
             let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
@@ -335,27 +276,15 @@ class Player {
         GameHelper.incrementObservable(player.statistics.pokemonCaptured);
     }
 
-    public hasBadge(badge: GameConstants.Badge) {
-        if (badge == undefined || GameConstants.Badge.None) {
-            return true;
-        }
-        for (let i = 0; i < this._gymBadges().length; i++) {
-            if (this._gymBadges()[i] == badge) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {
-        OakItemRunner.use(GameConstants.OakItem.Exp_Share);
+        App.game.oakItems.use(OakItems.OakItem.Exp_Share);
         // TODO add exp multipliers
         let trainerBonus = trainer ? 1.5 : 1;
-        let oakItemBonus = OakItemRunner.isActive(GameConstants.OakItem.Exp_Share) ? 1 + (OakItemRunner.calculateBonus(GameConstants.OakItem.Exp_Share) / 100) : 1;
+        let oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
         if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()){
@@ -363,7 +292,7 @@ class Player {
         }
 
         for (let pokemon of this._caughtPokemonList()) {
-            if (pokemon.levelObservable() < (this.gymBadges.length + 2) * 10) {
+            if (pokemon.levelObservable() < (App.game.badgeCase.badgeCount() + 2) * 10) {
                 pokemon.exp(pokemon.exp() + expTotal);
             }
         }
@@ -434,10 +363,6 @@ class Player {
         return this.maxLevelPokemonList()().length > 0;
     }
 
-    public gainBadge(badge: GameConstants.Badge) {
-        this._gymBadges.push(badge);
-    }
-
     get routeKills(): Array<KnockoutObservable<number>> {
         return this._routeKills;
     }
@@ -474,14 +399,6 @@ class Player {
         this._region(value);
     }
 
-    get gymBadges(): GameConstants.Badge[] {
-        return this._gymBadges();
-    }
-
-    set gymBadges(value: GameConstants.Badge[]) {
-        this._gymBadges(value);
-    }
-
     get caughtShinyList(): KnockoutObservableArray<string> {
         return this._caughtShinyList;
     }
@@ -506,28 +423,12 @@ class Player {
         this._currentTown = value;
     }
 
-    get oakItemsEquipped(): string[] {
-        return this._oakItemsEquipped;
-    }
-
-    set oakItemsEquipped(value: string[]) {
-        this._oakItemsEquipped = value;
-    }
-
     get starter(): GameConstants.Starter {
         return this._starter;
     }
 
     set starter(value: GameConstants.Starter) {
         this._starter = value;
-    }
-
-    get oakItemExp(): Array<KnockoutObservable<number>> {
-        return this._oakItemExp;
-    }
-
-    set oakItemExp(value: Array<KnockoutObservable<number>>) {
-        this._oakItemExp = value;
     }
 
     public gainItem(itemName: string, amount: number) {
@@ -547,8 +448,8 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public hasMineItems() {
-        for (let i = 0; i < this._mineInventory().length; i++) {
-            if (this._mineInventory()[i].amount() > 0) {
+        for (let i = 0; i < this.mineInventory.length; i++) {
+            if (this.mineInventory[i].amount() > 0) {
                 return true;
             }
         }
@@ -600,8 +501,8 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
-        for (let i = 0; i < player._mineInventory().length; i++) {
-            if (player._mineInventory()[i].id === id) {
+        for (let i = 0; i < player.mineInventory.length; i++) {
+            if (player.mineInventory[i].id === id) {
                 return i;
             }
         }
@@ -612,7 +513,7 @@ class Player {
     public getUndergroundItemAmount(id: number) {
         let index = this.mineInventoryIndex(id);
         if (index > -1) {
-            return player._mineInventory.peek()[index].amount();
+            return player.mineInventory[index].amount();
         } else {
             return 0;
         }
@@ -682,17 +583,13 @@ class Player {
             "_routeKills",
             "_routeKillsNeeded",
             "_region",
-            "_gymBadges",
             "_sortOption",
             "_sortDescending",
             "_starter",
-            "_oakItemExp",
-            "_oakItemsEquipped",
             "_itemList",
             "_itemMultipliers",
-            "_keyItems",
             // TODO(@Isha) remove.
-            "_mineInventory",
+            "mineInventory",
             // TODO(@Isha) remove.
             "_mineLayersCleared",
             "_shardUpgrades",

@@ -434,21 +434,21 @@
     <%- include('templates/mapPOI',
         { name: "Pokemon Day Care"
         , x: 345, y: 111
-        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: MapHelper.calculateTownCssClass('Mystery egg') }"
+        , databind: "click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
         })
      %>
 
     <%- include('templates/mapPOI',
         { name: "Safari Zone"
         , x: 292, y: 301
-        , databind: "click:function(){Safari.openModal()}, attr: { class: MapHelper.calculateTownCssClass('Safari ticket') }"
+        , databind: "click:function(){Safari.openModal()}, attr: { class: Safari.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
         })
      %>
 
     <%- include('templates/mapPOI',
         { name: "Underground Entrance"
         , x: 380, y: 241
-        , databind: "click:function(){Underground.openUndergroundModal()}, attr: { class: MapHelper.calculateTownCssClass('Explorer kit') }"
+        , databind: "click:function(){Underground.openUndergroundModal()}, attr: { class: Underground.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
         })
      %>
 

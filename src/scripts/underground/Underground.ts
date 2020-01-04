@@ -107,10 +107,10 @@ class Underground {
                 value: item.value,
                 valueType: item.valueType
             };
-            player._mineInventory.push(tempItem);
+            player.mineInventory.push(tempItem);
         } else {
-            let amt = player._mineInventory()[index].amount()
-            player._mineInventory()[index].amount(amt + num);
+            let amt = player.mineInventory[index].amount()
+            player.mineInventory[index].amount(amt + num);
         }
     }
 
@@ -124,11 +124,8 @@ class Underground {
 
     public static gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
-            let multiplier = 1;
-            if (OakItemRunner.isActive(GameConstants.OakItem.Cell_Battery)) {
-                multiplier += (OakItemRunner.calculateBonus(GameConstants.OakItem.Cell_Battery) / 100);
-            }
-            this.energy = Math.min(this.getMaxEnergy(), this.energy + (multiplier * this.getEnergyGain()));
+            let oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
+            this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
                 Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
             }
@@ -144,14 +141,14 @@ class Underground {
     }
 
     public static sellMineItem(id: number) {
-        for (let i = 0; i < player._mineInventory().length; i++) {
-            let item = player._mineInventory()[i];
+        for (let i = 0; i < player.mineInventory.length; i++) {
+            let item = player.mineInventory[i];
             if (item.id == id) {
                 if (item.amount() > 0) {
                     let success = Underground.gainProfit(item);
                     if (success) {
                         let amt = item.amount();
-                        player._mineInventory()[i].amount(amt - 1);
+                        player.mineInventory[i].amount(amt - 1);
                     }
                     return;
                 }
@@ -180,12 +177,16 @@ class Underground {
     }
 
     public static openUndergroundModal() {
-        if (player.hasKeyItem("Explorer kit")) {
+        if (this.canAccess()) {
             App.game.gameState = GameConstants.GameState.paused;
             $('#mineModal').modal('show');
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
+    }
+
+    private static canAccess() {
+        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 
     public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {

@@ -1,6 +1,4 @@
-/**
- * Created by dennis on 05-07-17.
- */
+///<reference path="../Battle.ts"/>
 class GymBattle extends Battle {
 
     static gym: Gym;

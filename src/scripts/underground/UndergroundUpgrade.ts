@@ -1,4 +1,5 @@
 ///<reference path="../wallet/AmountFactory.ts"/>
+///<reference path="../underground/Underground.ts"/>
 class UndergroundUpgrade extends Upgrade {
 
     constructor(name: Underground.Upgrades, displayName: string, maxLevel: number, costList: Amount[], bonusList: number[], increasing = true) {
@@ -7,7 +8,7 @@ class UndergroundUpgrade extends Upgrade {
 
 
     canBuy(): boolean {
-        return super.canBuy() && player.hasKeyItem("Explorer kit");
+        return super.canBuy() && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 }
 
