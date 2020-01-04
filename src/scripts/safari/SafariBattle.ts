@@ -17,41 +17,17 @@ class SafariBattle {
         SafariBattle.enemy = SafariPokemon.random();
         Safari.inBattle(true);
         Notifier.notify("Battle", GameConstants.NotificationOption.info);
-        SafariBattle.showBattleBars();
         SafariBattle.text("What will you do?");
         SafariBattle.unlockButtons();
         SafariBattle.escapeAttempts = 0;
     }
-
-    private static showBattleBars() {
-        /*
-        let html =  "<div id='battleBars' class='container-fluid'>";
-        for( let i = 0; i<10; i++){
-            html += "<div id=battleBar"+i + " class='battleBar'></div>";
-        }
-
-        html += "</div>";
-        $("#safariBody").html(html);
-        $(".battleBar").animate({
-            width: "50%"
-        }, 1000, "linear");
-        */
-        //SafariBattle.show();
-    }
-
-    /*
-    private static show() {
-        $("#safariBody").hide();
-        $("#safariBattleBody").show();
-    }
-    */
 
     public static throwBall() {
         if(!SafariBattle.busy) {
             SafariBattle.busy = true;
             Safari.balls(Safari.balls()-1);
 
-            $('#safariEnemy').css("transition-duration",(0.75*SafariBattle.Speed.enemyTransition)+"ms")
+            $('#safariEnemy').css("transition-duration",(0.75*SafariBattle.Speed.enemyTransition)+"ms");
             SafariBattle.text("You throw a ball...");
             let enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
@@ -59,14 +35,14 @@ class SafariBattle {
             let ptclhtml='<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>';
             SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, SafariBattle.Speed.ballThrow, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
 
-            SafariBattle.delay(1.1*SafariBattle.Speed.ballThrow)(0)             // throwing the ball
-            .then(SafariBattle.startCapture)                                    // pokemon being sucked into ball
-            .then(SafariBattle.delay(0.75*SafariBattle.Speed.enemyTransition))  
-            .then(SafariBattle.startBounce)                                     // pokeball dropping to ground
+            SafariBattle.delay(1.1*SafariBattle.Speed.ballThrow)(0)            // throwing the ball
+            .then(SafariBattle.startCapture)                                   // pokemon being sucked into ball
+            .then(SafariBattle.delay(0.75*SafariBattle.Speed.enemyTransition))
+            .then(SafariBattle.startBounce)                                    // pokeball dropping to ground
             .then(SafariBattle.delay(1.7*SafariBattle.Speed.ballBounce))
-            .then(SafariBattle.calcIndex)                                       // roll a dice for catching, use dice roll to determine how many pokeball rolls
+            .then(SafariBattle.calcIndex)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
             .then(SafariBattle.delayRoll)
-            .then(SafariBattle.finishCapture)                                   // capture pokemon or break free
+            .then(SafariBattle.finishCapture)                                  // capture pokemon or break free
 
         }
     }
@@ -75,10 +51,9 @@ class SafariBattle {
         return function(pass){
             return new Promise((resolve,reject)=>{
                 setTimeout((pass)=>{
-                    console.log(pass)
                     resolve(pass);
-                },ms)
-            })
+                },ms);
+            });
         }
     }
 
@@ -86,7 +61,7 @@ class SafariBattle {
         return new Promise((resolve,reject)=>{
             $('#safariEnemy').addClass('safariCapture');
             resolve();
-        })
+        });
     }
 
     private static startBounce() {
@@ -95,7 +70,7 @@ class SafariBattle {
             $('#safariEnemy > img').css('opacity', '0');
             SafariBattle.particle.addClass('bounce');
             resolve();
-        })
+        });
     }
 
     private static calcIndex() {
@@ -104,19 +79,19 @@ class SafariBattle {
             let catchF = SafariBattle.enemy.catchFactor / 100;
             let index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
             if (index != 0) {
-                $('body').css("animation-duration",SafariBattle.Speed.ballRoll+"ms")
+                $('body').css("animation-duration",SafariBattle.Speed.ballRoll+"ms");
                 SafariBattle.startRoll(index);
             }
             resolve([random,index]);
-        })
+        });
     }
 
     private static delayRoll(result) {
         return new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 resolve(result);
-            },(0.2+1.2*result[1])*SafariBattle.Speed.ballRoll)
-        })
+            },(0.2+1.2*result[1])*SafariBattle.Speed.ballRoll);
+        });
     }
 
     private static finishCapture(result) {
@@ -124,7 +99,7 @@ class SafariBattle {
         let isgameOver = (Safari.balls() == 0);
         return new Promise((resolve,reject)=>{
             if (random*100 < SafariBattle.enemy.catchFactor){
-                SafariBattle.capturePokemon()
+                SafariBattle.capturePokemon();
                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
                 setTimeout(function(){
                     SafariBattle.particle.remove();
@@ -252,8 +227,6 @@ class SafariBattle {
     private static endBattle() {
         Safari.inBattle(false);
         SafariBattle.busy = false;
-        //$("#safariBattleBody").hide();
-        //$("#safariBody").show();
     }
 
     private static gameOver() {
@@ -268,7 +241,7 @@ class SafariBattle {
 
     private static dropParticle(html: string, pos, target, time: number = 2, top, persistentParticle: boolean = false) {
         let p = $('<ptcl>').html(html).children().appendTo('body');
-        p.css('position','absolute')
+        p.css('position','absolute');
         p.offset(pos);
         if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
         p[0].style.transition = 'left ' + time + 'ms linear, top ' + time + 'ms '+top;

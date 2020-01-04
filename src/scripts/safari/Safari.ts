@@ -115,7 +115,6 @@ class Safari {
     public static openModal() {
         if (this.canAccess()) {
             App.game.gameState = GameConstants.GameState.safari;
-            //Safari.load();
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
@@ -124,17 +123,15 @@ class Safari {
 
     public static closeModal() {
         if (!Safari.inBattle()) {
-            $('#safariModal').modal('hide')
+            $('#safariModal').modal('hide');
         }
     }
 
     private static canPay() {
-        // TODO
         return App.game.wallet.hasAmount(Safari.cost());
     }
 
     private static cost() {
-        // TODO
         return new Amount(50,GameConstants.Currency.questPoint);
     }
 
@@ -143,8 +140,8 @@ class Safari {
             // TODO add increasing cost back
             //typeof player.safariCostModifier == undefined ? 1 : player.safariCostModifier++;
             
-            App.game.wallet.loseAmount(Safari.cost())
-            Safari.load()
+            App.game.wallet.loseAmount(Safari.cost());
+            Safari.load();
         }
     }
 
@@ -173,7 +170,7 @@ class Safari {
         let img = 'assets/images/safari/' + this.grid[i][j] + '.png';
         let divId = "safari-" + j + "-" + i;
 
-        return "<div id='" + divId + "' style=background-image:url('" + img + "') class='safariSquare'></div>"
+        return "<div id='" + divId + "' style=background-image:url('" + img + "') class='safariSquare'></div>";
     }
 
     private static addPlayer(i: number, j: number) {
@@ -210,7 +207,7 @@ class Safari {
             Safari.startMoving(dir);
         } else {
             if(dir) {
-                Safari.setNextDirection(dir)
+                Safari.setNextDirection(dir);
             }
         }
     }
