@@ -8,7 +8,7 @@
                      src="assets/images/questionmark.png">
 
             </div>
-            <div class="modal-body" id="shardBody" data-bind='foreach: Array(18)'>
+            <div class="modal-body" id="shardBody" data-bind='foreach: Array(Shards.nTypes)'>
                 <h3>
                     <span data-bind="text: GameConstants.PokemonType[$index()]"></span>
                     <div style="float:right;">
@@ -16,7 +16,7 @@
                       <i data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></i>
                     </div>
                 </h3>
-                <table class='table' data-bind='foreach: Array(4)'>
+                <table class='table' data-bind='foreach: Array(Shards.nEffects)'>
                     <tr>
                         <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                         <td width='50%'>

@@ -2,9 +2,15 @@ class Shards implements Feature {
     name: string = "Shards";
     saveKey: string = "shards";
 
+    public static readonly nTypes: number = 
+        GameHelper.enumLength(GameConstants.PokemonType) - 1;
+    public static readonly nEffects: number = 
+        GameHelper.enumLength(GameConstants.TypeEffectiveness);
+
     defaults = {
-        'shardWallet': Array.apply(null, Array<number>(18)).map(() => 0),
-        'shardUpgrades': Array.apply(null, Array<number>(18 * 4)).map(() => 0),
+        'shardWallet': Array.apply(null, Array<number>(Shards.nTypes)).map(() => 0),
+        'shardUpgrades': Array.apply(null, Array<number>(
+            Shards.nTypes * Shards.nEffects)).map(() => 0),
     };
 
     public shardWallet: ArrayOfObservables<number>;
@@ -57,7 +63,7 @@ class Shards implements Feature {
     ) {
         if (this.canBuyShardUpgrade(typeNum, effectNum)) {
             this.shardWallet[typeNum] -= this.getShardUpgradeCost(typeNum, effectNum);
-            this.shardUpgrades[typeNum * 4 + effectNum] ++;
+            this.shardUpgrades[typeNum * Shards.nEffects + effectNum] ++;
         }
     }
 
@@ -65,7 +71,7 @@ class Shards implements Feature {
         typeNum: GameConstants.PokemonType, 
         effectNum: GameConstants.TypeEffectiveness
     ) {
-        return this.shardUpgrades[typeNum * 4 + effectNum];
+        return this.shardUpgrades[typeNum * Shards.nEffects + effectNum];
     }
 
     initialize() {
