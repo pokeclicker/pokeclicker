@@ -29,34 +29,44 @@ class PartyController {
 
     public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
-            let _a, _b, res, dir = (direction) ? -1 : 1;
-            let property = SortOptions[option];
+            let res, dir = (direction) ? -1 : 1;
 
-            //Convert to plain JS so that observables don't need to be accessed with brackets
-            _a = ko.toJS(a);
-            _b = ko.toJS(b);
+            let aValue;
+            let bValue;
+            switch (option) {
+                case SortOptions.id:
+                    aValue = a.id;
+                    bValue = b.id;
+                    break;
+                case SortOptions.name:
+                    aValue = a.name;
+                    bValue = b.name;
+                    break;
+                case SortOptions.attack:
+                    aValue = a.calculateAttack();
+                    bValue = b.calculateAttack();
+                    break;
+                case SortOptions.levelObservable:
+                    aValue = a.calculateLevel();
+                    bValue = b.calculateLevel();
+                    break;
+                case SortOptions.shiny:
+                    aValue = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(a.name).id, true));
+                    bValue = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(b.name).id, true));
 
-            //CaughtPokemon doesn't have shiny property, create one for comparison if needed
-            if (property == "shiny") {
-                _a.shiny = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(a.name).id, true));
-                _b.shiny = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(b.name).id, true));
+
             }
-
             if (option === SortOptions.attack || option == SortOptions.levelObservable || option == SortOptions.shiny) {
                 dir *= -1;
             }
 
             //Compare by provided property
-            if (_a[property] == _b[property]) {
+            if (aValue == bValue) {
                 //If they are equal according to provided property, sort by id
-                if (_a.id < _b.id) {
-                    return -1;
-                } else if (_a.id > _b.id) {
-                    return 1;
-                }
-            } else if (_a[property] < _b[property]) {
+                return a.id - b.id;
+            } else if (aValue < bValue) {
                 res = -1;
-            } else if (_a[property] > _b[property]) {
+            } else if (aValue > bValue) {
                 res = 1;
             } else {
                 res = 0
