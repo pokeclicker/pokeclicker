@@ -200,11 +200,11 @@ class SafariBattle {
     }
 
     private static lockButtons() {
-      $('.safariOption button').attr('disabled', 'true');
+        $('.safariOption button').attr('disabled', 'true');
     }
 
     private static unlockButtons() {
-      $('.safariOption button').attr('disabled', null);
+        $('.safariOption button').attr('disabled', null);
     }
 
     private static endBattle() {

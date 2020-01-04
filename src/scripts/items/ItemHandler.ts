@@ -7,7 +7,7 @@ class ItemHandler {
 
     public static useItem(name: string){
         if (!player.itemList[name]())
-          return Notifier.notify(`You don't have any ${name.replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
+            return Notifier.notify(`You don't have any ${name.replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
 
         player.itemList[name](player.itemList[name]()-1);
         return ItemList[name].use();

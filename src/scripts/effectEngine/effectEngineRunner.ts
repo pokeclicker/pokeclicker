@@ -7,7 +7,7 @@ class EffectEngineRunner {
         for(const itemName in GameConstants.BattleItemType){
             player.effectList[itemName](Math.max(0, player.effectList[itemName]() - timeToReduce));
             if (player.effectList[itemName]() == 5){
-              Notifier.notify(`The ${itemName}s effect is about to wear off!`, GameConstants.NotificationOption.warning);
+                Notifier.notify(`The ${itemName}s effect is about to wear off!`, GameConstants.NotificationOption.warning);
             }
         }
     }
@@ -23,12 +23,12 @@ class EffectEngineRunner {
 
     public static formattedTimeLeft(itemName: string){
         return ko.computed(function () {
-             const times = GameConstants.formatTime(player.effectList[itemName]()).split(':');
-             if (+times[0] > 0) {
-               return '60:00+';
-             }
-             times.shift();
-             return times.join(':');
+            const times = GameConstants.formatTime(player.effectList[itemName]()).split(':');
+            if (+times[0] > 0) {
+                return '60:00+';
+            }
+            times.shift();
+            return times.join(':');
         }, this);
     }
 

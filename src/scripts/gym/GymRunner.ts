@@ -39,10 +39,10 @@ class GymRunner {
 
     public static resetGif(){
         const $img = $('#gif-go');
-            $img.show();
-            setTimeout(function() {
-                $img.attr('src', 'assets/gifs/go.gif');
-            }, 0);
+        $img.show();
+        setTimeout(function() {
+            $img.attr('src', 'assets/gifs/go.gif');
+        }, 0);
     }
 
     public static tick() {
@@ -82,9 +82,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
 
-       if(GymBattle.gym.badgeReward == BadgeCase.Badge.Soul){
-           App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket);
-       }
+        if(GymBattle.gym.badgeReward == BadgeCase.Badge.Soul){
+            App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket);
+        }
 
     });
 });

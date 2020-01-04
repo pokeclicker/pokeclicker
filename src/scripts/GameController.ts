@@ -35,12 +35,12 @@ class GameController {
         }
         const ani = '<p style="z-index:50;position:absolute;left:' + left + 'px;top:' + pos.top + 'px; font-size:' + (10 + 0.5 * Math.log(amount)) + 'px;">+' + amount.toLocaleString('en-US') + '</p>';
         $(ani).prependTo('body').animate({
-                top: 10,
-                opacity: 0
-            }, 200 * Math.log(amount) + 1000, "linear",
-            function () {
-                $(this).remove();
-            });
+            top: 10,
+            opacity: 0
+        }, 200 * Math.log(amount) + 1000, "linear",
+        function () {
+            $(this).remove();
+        });
     }
 
     static bindToolTips() {

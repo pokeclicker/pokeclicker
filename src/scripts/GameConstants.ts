@@ -723,9 +723,9 @@ namespace GameConstants {
     ];
 
     export const RegionGyms = [
-      KantoGyms,
-      JohtoGyms,
-      HoennGyms,
+        KantoGyms,
+        JohtoGyms,
+        HoennGyms,
     ];
 
     export const KantoDungeons = [
@@ -804,9 +804,9 @@ namespace GameConstants {
     ];
 
     export const RegionDungeons = [
-      KantoDungeons,
-      JohtoDungeons,
-      HoennDungeons,
+        KantoDungeons,
+        JohtoDungeons,
+        HoennDungeons,
     ];
 
     export const StartingTowns = [

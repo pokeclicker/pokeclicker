@@ -41,7 +41,7 @@ class ShopHandler {
         const input = $("input[name='amountOfItems']");
 
         if (!item || !item.isAvailable()){
-          return input.val(0).change();
+            return input.val(0).change();
         }
         let amt = 1;
         for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)); amt++){}

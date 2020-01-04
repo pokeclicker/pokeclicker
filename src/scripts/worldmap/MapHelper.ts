@@ -1,25 +1,25 @@
 class MapHelper {
     public static returnToMap(){
-      if (player.currentTown()){
-        return this.moveToTown(player.currentTown());
-      }
-      if (player.route()){
-        return this.moveToRoute(player.route(), player.region);
-      }
+        if (player.currentTown()){
+            return this.moveToTown(player.currentTown());
+        }
+        if (player.route()){
+            return this.moveToRoute(player.route(), player.region);
+        }
     }
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
         if (isNaN(route)) return;
         let genNewEnemy = false;
         if (route != player.route()) {
-          genNewEnemy = true
+            genNewEnemy = true
         }
         if (this.accessToRoute(route, region)) {
             player.route(route);
             player.region = region;
             player.currentTown('');
             if (genNewEnemy){
-              Battle.generateNewEnemy();
+                Battle.generateNewEnemy();
             }
             App.game.gameState = GameConstants.GameState.fighting;
             GameController.applyRouteBindings();

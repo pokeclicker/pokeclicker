@@ -42,28 +42,28 @@ class CaughtPokemon {
     public checkForEvolution(reset = false){
         // reset if pokemon has just hatched
         if (!!reset){
-          this.evolved = false;
+            this.evolved = false;
         }
 
         const pokemonData = pokemonMapId[this.id];
 
         // pokemon doesn't have an evolution, is already evolved, or currently breeding
         if (!pokemonData.evoLevel || this.evolved || this.breeding()){
-          return;
+            return;
         }
 
         pokemonData.evoLevel.forEach((evo, index)=>{
             if (evo.constructor === Number){
                 if (this.evolver[index]){
-                  this.evolver[index].dispose();
+                    this.evolver[index].dispose();
                 }
 
                 // Check if player has already caught all of the possible evolutions
                 const obtainedAllEvolutions = reset ? !PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, true, true).some(p => !player.alreadyCaughtPokemon(p)) : false;
 
                 if (obtainedAllEvolutions){
-                  this.evolved = true;
-                  return;
+                    this.evolved = true;
+                    return;
                 }
 
                 // Get evolutions for current region, else calculate a evolution for any region for when we reach that region

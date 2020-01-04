@@ -17,7 +17,7 @@ class QuestLine {
         this.curQuest = ko.computed(() => {
             const acc = 0;
             return this.quests().map((quest) => {return +quest.isCompleted()})
-                                .reduce( ( acc, iscompleted) => {return acc + iscompleted},0);
+                .reduce( ( acc, iscompleted) => {return acc + iscompleted},0);
         });
         this.curQuestInitial = ko.observable();
         this.curQuestInitial.equalityComparer = () => {return false} //Always update subscriptions, even if same data pushed in

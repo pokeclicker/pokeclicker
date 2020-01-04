@@ -80,8 +80,8 @@ class Breeding implements Feature {
     toJSON(): object {
         const breedingSave = {};
         breedingSave["eggList"] = this.eggList.map(function (egg: any) {
-                return egg() === null ? null : egg().toJSON();
-            }
+            return egg() === null ? null : egg().toJSON();
+        }
         );
         breedingSave["eggSlots"] = this.eggSlots;
         return breedingSave;

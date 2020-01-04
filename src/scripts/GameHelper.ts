@@ -57,14 +57,14 @@ class GameHelper {
     }
 
     public static formatAmount(n: number): string {
-      if (n >= 1e9){
-        return Math.floor(n / 1e9) + "b";
-      } else if (n >= 1e6){
-        return Math.floor(n / 1e6) + "m";
-      } else if (n >= 1e3){
-        return Math.floor(n / 1e3) + "k";
-      }
-      return `${n}`;
+        if (n >= 1e9){
+            return Math.floor(n / 1e9) + "b";
+        } else if (n >= 1e6){
+            return Math.floor(n / 1e6) + "m";
+        } else if (n >= 1e3){
+            return Math.floor(n / 1e3) + "k";
+        }
+        return `${n}`;
     }
 
     public static getIndexFromDistribution(a: number[]) {
@@ -89,6 +89,6 @@ class GameHelper {
     }
 
     public static anOrA(name: string): string {
-      return ['a', 'e', 'i', 'o', 'u'].includes(name[0].toLowerCase()) ? 'an' : 'a';
+        return ['a', 'e', 'i', 'o', 'u'].includes(name[0].toLowerCase()) ? 'an' : 'a';
     }
 }

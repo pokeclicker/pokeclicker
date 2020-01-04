@@ -31,23 +31,23 @@ class DataPokemon implements PokemonInterface {
     }
 
     public evolutionByIndex(index, filterMaxRegion, returnAllEvolutions = false){
-      if (!this.evolution){
-          return;
-      }
-      let evolutions = this.evolution[index].constructor === Array ? this.evolution[index] : [this.evolution[index]];
+        if (!this.evolution){
+            return;
+        }
+        let evolutions = this.evolution[index].constructor === Array ? this.evolution[index] : [this.evolution[index]];
 
-      if (filterMaxRegion && player){
-          evolutions = evolutions.filter(p=>PokemonHelper.calcNativeRegion(p) <= player.highestRegion());
-      }
+        if (filterMaxRegion && player){
+            evolutions = evolutions.filter(p=>PokemonHelper.calcNativeRegion(p) <= player.highestRegion());
+        }
 
-      if (!evolutions.length){
-          return;
-      }
+        if (!evolutions.length){
+            return;
+        }
 
-      if (returnAllEvolutions){
-        return evolutions;
-      }
+        if (returnAllEvolutions){
+            return evolutions;
+        }
 
-      return evolutions[Math.floor(Math.random() * evolutions.length)];
+        return evolutions[Math.floor(Math.random() * evolutions.length)];
     }
 }

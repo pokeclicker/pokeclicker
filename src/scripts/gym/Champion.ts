@@ -7,9 +7,9 @@ class Champion extends Gym {
 
     public setPokemon(starter: GameConstants.Starter) {
         this.pokemons = [
-          new GymPokemon("Pidgeot", 52340, 59),
-          new GymPokemon("Alakazam", 56320, 57),
-          new GymPokemon("Rhydon", 58340, 59),
+            new GymPokemon("Pidgeot", 52340, 59),
+            new GymPokemon("Alakazam", 56320, 57),
+            new GymPokemon("Rhydon", 58340, 59),
         ];
         switch (starter) {
             case GameConstants.Starter.Bulbasaur: {

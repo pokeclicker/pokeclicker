@@ -21,6 +21,7 @@ module.exports = {
     '@typescript-eslint/consistent-type-assertions': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/camelcase': 'warn'
+    '@typescript-eslint/camelcase': 'warn',
+    "indent": ["error", 4, { "SwitchCase": 1 }]
   }
 }
