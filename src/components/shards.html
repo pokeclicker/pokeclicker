@@ -33,7 +33,7 @@
                             </div>
                         </td>
                         <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] 
-                            + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * GameConstants.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
+                            + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                         <td>
                             <button class='btn btn-primary'
                                     data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},

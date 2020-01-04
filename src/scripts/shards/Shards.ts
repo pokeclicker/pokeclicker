@@ -37,7 +37,7 @@ class Shards implements Feature {
         typeNum: GameConstants.PokemonType, 
         effectNum: GameConstants.TypeEffectiveness
     ): number {
-        let cost = (this.getShardUpgrade(typeNum, effectNum) + 1) * GameConstants.SHARD_UPGRADE_COST;
+        let cost = (this.getShardUpgrade(typeNum, effectNum) + 1) * Shards.SHARD_UPGRADE_COST;
         return cost;
     }
 
@@ -45,7 +45,7 @@ class Shards implements Feature {
         typeNum: GameConstants.PokemonType, 
         effectNum: GameConstants.TypeEffectiveness
     ): boolean {
-        return this.getShardUpgrade(typeNum, effectNum) >= GameConstants.MAX_SHARD_UPGRADES;
+        return this.getShardUpgrade(typeNum, effectNum) >= Shards.MAX_SHARD_UPGRADES;
     }
 
     public canBuyShardUpgrade(
@@ -97,4 +97,10 @@ class Shards implements Feature {
             this.shardUpgrades = new ArrayOfObservables(json['shardUpgrades']);
         }
     }
+}
+
+namespace Shards {
+    export const SHARD_UPGRADE_COST = 500;
+    export const SHARD_UPGRADE_STEP = 0.1;
+    export const MAX_SHARD_UPGRADES = 10;
 }
