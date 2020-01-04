@@ -92,7 +92,8 @@ class Save {
      * @returns {Object} : The original object with only the specified properties
      */
     public static filter(object: any, keep: string[]): Record<string, any> {
-        const filtered = {}, prop;
+        const filtered = {};
+        let prop;
         for (prop in object) {
             if (keep.indexOf(prop) > -1) {
                 filtered[prop] = object[prop]
