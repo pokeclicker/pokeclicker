@@ -22,6 +22,8 @@ const changelogType = {
 
 const changelogItems = [
     new Changelog(changelogType.VERSION, 'v1.0.3'),
+        new Changelog(changelogType.FIXED, 'Selecting "max" in store will no longer freeze the game for key items'),
+    new Changelog(changelogType.VERSION, 'v1.0.3'),
         new Changelog(changelogType.NEW, 'Show pokeball image by caught Pokemon in the Pokedex'),
         new Changelog(changelogType.CHANGE, 'Show the reason you cannot access a location'),
         new Changelog(changelogType.CHANGE, 'Total shiny Pokemon caught now add to your total click attack'),
