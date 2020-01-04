@@ -112,7 +112,7 @@ class Battle {
     }
 
     public static catchPokemon() {
-        App.game.wallet.gainDungeonTokens(Math.floor(this.enemyPokemon().level / 2));
+        App.game.wallet.gainDungeonTokens(6 * Math.pow(this.enemyPokemon().level / 3, 1.05));
         App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         App.game.party.gainPokemonById(this.enemyPokemon().id, this.enemyPokemon().shiny);
     }
