@@ -44,7 +44,7 @@ class ShopHandler {
           return input.val(0).change();
         }
         let amt = 1;
-        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)); amt++){}
+        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)) && amt <= item.maxAmount; amt++){}
         input.val(--amt).change();
     }
 

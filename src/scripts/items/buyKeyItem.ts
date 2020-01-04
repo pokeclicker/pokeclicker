@@ -3,14 +3,17 @@ class buyKeyItem extends Item {
 
         item: KeyItems.KeyItem;
 
-        constructor(item: KeyItems.KeyItem, price: number) {
+        constructor(item: KeyItems.KeyItem, price: number, maxAmount: number = 1) {
             let priceMultiplier = 1;
-            super(KeyItems.KeyItem[item], price, priceMultiplier, GameConstants.Currency.questPoint);
+            super(KeyItems.KeyItem[item], price, priceMultiplier, GameConstants.Currency.questPoint, maxAmount);
             this.item = item;
         }
 
         totalPrice(amt: number) {
-            return this.basePrice;
+            if (amt > this.maxAmount) {
+              amt = this.maxAmount;
+            }
+            return this.basePrice * amt;
         }
 
         gain(amt: number) {

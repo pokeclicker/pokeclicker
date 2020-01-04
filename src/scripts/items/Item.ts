@@ -5,12 +5,14 @@ abstract class Item {
     type: any;
     currency: GameConstants.Currency;
     price: KnockoutObservable<number>;
+    maxAmount: number;
 
-    constructor(name: string, basePrice: number, priceMultiplier: number, currency: GameConstants.Currency) {
+    constructor(name: string, basePrice: number, priceMultiplier: number, currency: GameConstants.Currency, maxAmount: number = Number.MAX_SAFE_INTEGER) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
         this.price = ko.observable(this.basePrice);
+        this.maxAmount = maxAmount;
     }
 
     totalPrice(amount: number): number {
@@ -26,6 +28,12 @@ abstract class Item {
         if (n <= 0) {
             return;
         }
+
+        if (n > this.maxAmount) {
+            Notifier.notify(`You can only buy ${this.maxAmount} &times; ${this.name()}!`, GameConstants.NotificationOption.danger)
+            n = this.maxAmount;
+        }
+
         if (!this.isAvailable()) {
             Notifier.notify(`${this.name()} is sold out!`, GameConstants.NotificationOption.danger)
             return;
