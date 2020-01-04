@@ -156,7 +156,7 @@ class SafariBattle {
     }
 
     private static capturePokemon() {
-        SafariBattle.text(`GOTCHA!<br> ${SafariBattle.enemy.name} was caught!`);
+        SafariBattle.text(`<br>GOTCHA!<br>${SafariBattle.enemy.name} was caught!`);
         player.capturePokemon(SafariBattle.enemy.name, SafariBattle.enemy.shiny);
     }
 
