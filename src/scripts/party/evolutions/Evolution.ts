@@ -13,8 +13,10 @@ abstract class Evolution {
         return false;
     }
 
-    evolve(): boolean {
-        Notifier.notify(`Your ${this.basePokemon} evolved into a ${this.evolvedPokemon}`, GameConstants.NotificationOption.success);
+    evolve(notification: boolean = false): boolean {
+        if (notification) {
+            Notifier.notify(`Your ${this.basePokemon} evolved into a ${this.evolvedPokemon}`, GameConstants.NotificationOption.success);
+        }
         let shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(this.evolvedPokemon).id, shiny);
         return shiny;

@@ -20,6 +20,6 @@ class LevelEvolution extends Evolution {
             return;
         }
         this.triggered = true;
-        return super.evolve();
+        return super.evolve(true);
     }
 }
