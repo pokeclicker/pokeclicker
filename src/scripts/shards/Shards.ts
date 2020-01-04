@@ -27,7 +27,6 @@ class Shards implements Feature {
             GameHelper.incrementObservable(
                 player.statistics.totalShards[typeNum], amt);
         }
-        console.log(amt, GameConstants.PokemonType[typeNum])
     }
 
     public getShardUpgradeCost(
