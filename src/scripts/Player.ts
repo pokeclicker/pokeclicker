@@ -71,8 +71,8 @@ class Player {
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
 
         // TODO(@Isha) move to underground classes.
-        this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
-        for (let item of this._mineInventory()) {
+        this.mineInventory = new ObservableArrayProxy(savedPlayer.mineInventory || []);
+        for (let item of this.mineInventory) {
             item.amount = ko.observable(item.amount);
         }
 
@@ -132,7 +132,7 @@ class Player {
     private _itemList: { [name: string]: KnockoutObservable<number> };
 
     // TODO(@Isha) move to underground classes.
-    private _mineInventory: KnockoutObservableArray<any>;
+    public mineInventory: ObservableArrayProxy<any>;
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
@@ -301,8 +301,8 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public hasMineItems() {
-        for (let i = 0; i < this._mineInventory().length; i++) {
-            if (this._mineInventory()[i].amount() > 0) {
+        for (let i = 0; i < this.mineInventory.length; i++) {
+            if (this.mineInventory[i].amount() > 0) {
                 return true;
             }
         }
@@ -323,8 +323,8 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
-        for (let i = 0; i < player._mineInventory().length; i++) {
-            if (player._mineInventory()[i].id === id) {
+        for (let i = 0; i < player.mineInventory.length; i++) {
+            if (player.mineInventory[i].id === id) {
                 return i;
             }
         }
@@ -335,7 +335,7 @@ class Player {
     public getUndergroundItemAmount(id: number) {
         let index = this.mineInventoryIndex(id);
         if (index > -1) {
-            return player._mineInventory.peek()[index].amount();
+            return player.mineInventory[index].amount();
         } else {
             return 0;
         }
@@ -407,7 +407,7 @@ class Player {
             "_itemList",
             "_itemMultipliers",
             // TODO(@Isha) remove.
-            "_mineInventory",
+            "mineInventory",
             // TODO(@Isha) remove.
             "_mineLayersCleared",
             "_shardUpgrades",
