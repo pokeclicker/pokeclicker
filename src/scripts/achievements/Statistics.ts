@@ -58,7 +58,7 @@ class Statistics {
         }
 
         for (const array of arrayObservables) {
-            this[array] = Array.apply(null, Array(Statistics.arraySizes[array])).map((value, index) => {
+            this[array] = [...Array(Statistics.arraySizes[array])].map((value, index) => {
                 return ko.observable(saved[array] ? saved[array][index] || 0 : 0)
             })
         }

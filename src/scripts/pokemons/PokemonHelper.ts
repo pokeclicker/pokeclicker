@@ -66,7 +66,7 @@ class PokemonHelper {
         return Math.max(1, Math.floor(attackBase * attackBonusMultiplier * levelMultiplier));
     }
 
-    public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
+    public static getImage(pokemon: PokemonInterface, shiny: boolean): string {
         let src = "assets/images/";
         if (shiny) {
             src += "shiny";
@@ -89,11 +89,11 @@ class PokemonHelper {
 
     public static compareBy(property: string, direction: boolean): (a: CaughtPokemon, b: CaughtPokemon) => number {
         return function (a, b) {
-            let _a, _b, res, dir = (direction) ? -1 : 1;
+            let res, dir = (direction) ? -1 : 1;
 
             //Convert to plain JS so that observables don't need to be accessed with brackets
-            _a = ko.toJS(a);
-            _b = ko.toJS(b);
+            const _a = ko.toJS(a);
+            const _b = ko.toJS(b);
 
             //CaughtPokemon doesn't have shiny property, create one for comparison if needed
             if (property == "shiny") {

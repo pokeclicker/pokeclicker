@@ -1,4 +1,4 @@
-class SafariPokemon implements pokemonInterface {
+class SafariPokemon implements PokemonInterface {
     name: string;
     id: number;
     type1: PokemonTypes;

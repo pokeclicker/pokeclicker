@@ -2,6 +2,11 @@
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 
 /**
+ * Data list that contains all gymLeaders, accessible by townName.
+ */
+const gymList: { [townName: string]: Gym } = {};
+
+/**
  * Gym class.
  */
 class Gym {
@@ -48,11 +53,6 @@ class Gym {
 }
 
 //TODO add all rewardMessages
-
-/**
- * Data list that contains all gymLeaders, accessible by townName.
- */
-const gymList: { [townName: string]: Gym } = {};
 
 // Kanto Gyms
 gymList["Pewter City"] = new Gym(

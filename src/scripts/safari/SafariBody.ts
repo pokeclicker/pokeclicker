@@ -74,8 +74,8 @@ class SandBody extends SafariBody {
     edgeDetectCheck = 15;
 
     constructor(
-        x: number = SandBody.randomInt(), 
-        y: number = SandBody.randomInt(), 
+        x: number = SandBody.randomInt(),
+        y: number = SandBody.randomInt(),
         type = "sand"
     ) {
         super();
@@ -92,7 +92,7 @@ class SandBody extends SafariBody {
     private generateCube(sizeX: number, sizeY: number): Array<Array<number>> {
         let body = [];
         for (let i = 0; i < sizeY; i++) {
-            const row = Array.apply(null, Array(sizeX)).map(Number.prototype.valueOf, 0);
+            const row = [...Array(sizeX)].map(Number.prototype.valueOf, 0);
             body.push(row);
         }
 

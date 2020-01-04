@@ -18,6 +18,10 @@ class Player {
         return this._defeatedAmount;
     }
 
+    set defeatedAmount(value: Array<KnockoutObservable<number>>) {
+        this._defeatedAmount = value;
+    }
+
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
@@ -164,6 +168,10 @@ class Player {
         return this._itemList;
     }
 
+    set itemList(value: { [p: string]: KnockoutObservable<number> }) {
+        this._itemList = value;
+    }
+
     public statistics: Statistics;
 
     public completedQuestList: Array<KnockoutObservable<boolean>>;
@@ -199,10 +207,6 @@ class Player {
 
     public addRouteKill() {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
-    }
-
-    set defeatedAmount(value: Array<KnockoutObservable<number>>) {
-        this._defeatedAmount = value;
     }
 
     private _caughtAmount: Array<KnockoutObservable<number>>;
@@ -274,10 +278,6 @@ class Player {
         }
         player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
         GameHelper.incrementObservable(player.statistics.pokemonCaptured);
-    }
-
-    set itemList(value: { [p: string]: KnockoutObservable<number> }) {
-        this._itemList = value;
     }
 
     public gainExp(exp: number, level: number, trainer: boolean) {

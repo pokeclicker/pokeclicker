@@ -34,9 +34,8 @@ class CaughtPokemon {
     }
 
     public toJSON() {
-        let keep, plainJS;
-        keep = ["name", "evolved", "attackBonus", "exp", "breeding"];
-        plainJS = ko.toJS(this);
+        const keep = ["name", "evolved", "attackBonus", "exp", "breeding"];
+        const plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep);
     }
 

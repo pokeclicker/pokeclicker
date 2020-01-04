@@ -59,7 +59,7 @@ class TypeHelper {
         }
 
         if (a2 != GameConstants.PokemonType.None && d2 != GameConstants.PokemonType.None) {
-            let m4 = TypeHelper.typeMatrix[attackType2][defendType2];
+            m4 = TypeHelper.typeMatrix[attackType2][defendType2];
             m4 += (list[attackType2][this.valueToType(m4)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 

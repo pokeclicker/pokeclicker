@@ -1,5 +1,5 @@
 ///<reference path="../keyItems/KeyItems.ts"/>
-class buyKeyItem extends Item {
+class BuyKeyItem extends Item {
 
         item: KeyItems.KeyItem;
 
@@ -26,5 +26,5 @@ class buyKeyItem extends Item {
 }
 
 
-ItemList['Dungeon_ticket'] = new buyKeyItem(KeyItems.KeyItem.Dungeon_ticket, 250);
-ItemList['Explorer_kit'] = new buyKeyItem(KeyItems.KeyItem.Explorer_kit, 5000);
+ItemList['Dungeon_ticket'] = new BuyKeyItem(KeyItems.KeyItem.Dungeon_ticket, 250);
+ItemList['Explorer_kit'] = new BuyKeyItem(KeyItems.KeyItem.Explorer_kit, 5000);

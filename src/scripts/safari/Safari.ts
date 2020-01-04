@@ -22,7 +22,7 @@ class Safari {
         Safari.inBattle(false);
         Safari.balls(this.calculateStartPokeballs());
         for( let i = 0; i<GameConstants.Safari.SizeY; i++){
-            const row = Array.apply(null, Array(GameConstants.Safari.SizeX)).map(Number.prototype.valueOf, 0);
+            const row = [...Array(GameConstants.Safari.SizeX)].map(Number.prototype.valueOf, 0);
             this.grid.push(row);
         }
 
