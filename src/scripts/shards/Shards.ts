@@ -72,7 +72,7 @@ class Shards implements Feature {
     }
 
     canAccess(): boolean {
-        return true;
+        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Shard_case);
     }
 
     update(delta: number) {
