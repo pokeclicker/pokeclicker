@@ -22,16 +22,15 @@ class PartyController {
         });
     }
 
-    // TODO implement
-    static sortedPokemonList() {
-            // return App.game.party.caughtPokemon.sort(this.compareBy(SortOptionsEnum[],));
-        // }, this)
+    static getSortedList() {
+        return App.game.party.caughtPokemon.sort(this.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
     }
 
 
-    public static compareBy(property: string, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
+    public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let _a, _b, res, dir = (direction) ? -1 : 1;
+            let property = SortOptions[option];
 
             //Convert to plain JS so that observables don't need to be accessed with brackets
             _a = ko.toJS(a);
@@ -43,7 +42,7 @@ class PartyController {
                 _b.shiny = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(b.name).id, true));
             }
 
-            if (property == "attack" || property == "levelObservable" || property == "shiny") {
+            if (option === SortOptions.attack || option == SortOptions.levelObservable || option == SortOptions.shiny) {
                 dir *= -1;
             }
 

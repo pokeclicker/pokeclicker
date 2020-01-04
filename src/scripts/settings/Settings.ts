@@ -30,13 +30,13 @@ class Settings {
 
     }
 
-    static getSetting(name: string) {
+    static getSetting(name: string) : Setting {
         for (let i = 0; i < this.list.length; i++) {
             if (this.list[i].name == name) {
                 return this.list[i]
             }
         }
-        return false;
+        return null;
     }
 
     static save() {
@@ -88,4 +88,4 @@ Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
     SortOptions.id
 ));
 
-Settings.add(new BooleanSetting("direction", "reverse", false));
+Settings.add(new BooleanSetting("partySortDirection", "reverse", false));

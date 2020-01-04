@@ -1,11 +1,11 @@
-
 <div class="card border-secondary mb-3 pokemon-list-container" id="pokemonListContainer"
      data-bind="visible: player.starter != GameConstants.Starter.None">
     <div class="card-header p-0" data-toggle="collapse" href="#pokemonListBody">
-      <span>Pokémon List</span>
+        <span>Pokémon List</span>
     </div>
     <div id="pokemonListBody" class="card-body p-0 show">
-        <div class="row no-gutters" data-bind="template: { name: 'PartySortSettingTemplate', data: Settings.getSetting('partySort')}"></div>
+        <div class="row no-gutters"
+             data-bind="template: { name: 'PartySortSettingTemplate', data: Settings.getSetting('partySort')}"></div>
 
         <table id="pokemonList" class="table table-striped table-hover table-sm">
             <thead>
@@ -16,7 +16,7 @@
                 <th>Lvl</th>
             </tr>
             </thead>
-            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: App.game.party.caughtPokemon }">
+            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: PartyController.getSortedList() }">
 
             </tbody>
         </table>
@@ -26,13 +26,16 @@
 <script type="text/html" id="PartySortSettingTemplate">
     <div class="col-sm-2">Sort:</div>
     <div class="col">
-        <select onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
+        <select onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                data-bind="foreach: $data.options, attr: {name}">
             <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
         </select>
     </div>
     <div class="col">
         Reverse
-            <input style="vertical-align: middle" id="reverse_sort" class="clickable" type='checkbox' data-bind="checked: Settings.getSetting('partySort').observableValue()" title=""/>
+        <input style="vertical-align: middle" id="reverse_sort" class="clickable" type='checkbox'
+               data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
+               onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
 
     </div>
 
