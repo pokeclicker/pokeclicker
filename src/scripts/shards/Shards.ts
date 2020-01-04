@@ -72,7 +72,7 @@ class Shards implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Shard_case);
+        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Shar);
     }
 
     update(delta: number) {
@@ -86,10 +86,6 @@ class Shards implements Feature {
     }
 
     fromJSON(json: object) {
-        if (json == null) {
-            return
-        }
-
         if (json != null) {
             this.shardWallet = new ArrayOfObservables(json['shardWallet']);
             this.shardUpgrades = new ArrayOfObservables(json['shardUpgrades']);
