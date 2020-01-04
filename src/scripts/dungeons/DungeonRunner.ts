@@ -50,8 +50,8 @@ class DungeonRunner {
         }
 
         DungeonRunner.chestsOpened++;
-        let random: number = GameConstants.randomIntBetween(0, DungeonRunner.dungeon.itemList.length - 1);
-        let input = GameConstants.BattleItemType[DungeonRunner.dungeon.itemList[random]];
+        const random: number = GameConstants.randomIntBetween(0, DungeonRunner.dungeon.itemList.length - 1);
+        const input = GameConstants.BattleItemType[DungeonRunner.dungeon.itemList[random]];
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {
@@ -97,7 +97,7 @@ class DungeonRunner {
     })
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
-        let possiblePokemon: string[] = dungeon.allPokemonNames;
+        const possiblePokemon: string[] = dungeon.allPokemonNames;
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 

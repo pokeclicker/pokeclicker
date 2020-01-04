@@ -5,9 +5,9 @@ class Shop {
     items: KnockoutObservableArray<Item>;
 
     constructor(items: string[]) {
-        let itemList: Item[] = [];
+        const itemList: Item[] = [];
 
-        for (let item of items) {
+        for (const item of items) {
             itemList.push(ItemList[item]);
         }
 

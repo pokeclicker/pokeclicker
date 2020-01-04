@@ -17,7 +17,7 @@ abstract class Item {
         if (this.name() == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
             return this.basePrice * amount;
         } else {
-            let res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
+            const res = (this.price() * (1 - Math.pow(GameConstants.ITEM_PRICE_MULTIPLIER, amount))) / (1 - GameConstants.ITEM_PRICE_MULTIPLIER);
             return Math.floor(res);
         }
     }
@@ -31,7 +31,7 @@ abstract class Item {
             return;
         }
 
-        let multiple = n > 1 ? "s" : "";
+        const multiple = n > 1 ? "s" : "";
 
         if (App.game.wallet.hasAmount(new Amount(this.totalPrice(n), this.currency))) {
             App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency));
@@ -61,7 +61,7 @@ abstract class Item {
 
     abstract use();
 
-    isAvailable() : boolean {
+    isAvailable(): boolean {
         return true;
     }
 

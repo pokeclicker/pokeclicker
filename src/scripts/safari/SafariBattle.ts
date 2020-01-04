@@ -1,8 +1,8 @@
 class SafariBattle {
     static _enemy: KnockoutObservable<SafariPokemon> = ko.observable();
-    static busy: boolean = false;
+    static busy = false;
     static text: KnockoutObservable<string> = ko.observable("What will you do?");
-    static escapeAttempts: number = 0;
+    static escapeAttempts = 0;
 
     public static get enemy(): SafariPokemon {
         return SafariBattle._enemy();
@@ -47,11 +47,11 @@ class SafariBattle {
         if(!SafariBattle.busy) {
             SafariBattle.busy = true;
             Safari.balls(Safari.balls()-1);
-            let gameOver = Safari.balls() == 0;
+            const gameOver = Safari.balls() == 0;
             SafariBattle.text("You throw a ball...");
-            let enemyImg = $('#safariEnemy').offset();
+            const enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
-            let p = SafariBattle.dropParticle('<div><img id="safariBall" src="assets/images/safari/pokeball.png"></div>', $('#safariPlayer').offset(), enemyImg, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
+            const p = SafariBattle.dropParticle('<div><img id="safariBall" src="assets/images/safari/pokeball.png"></div>', $('#safariPlayer').offset(), enemyImg, 0.75, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
 
             setTimeout(function() {
                 $('#safariEnemy').addClass('safariCapture');
@@ -117,7 +117,7 @@ class SafariBattle {
             SafariBattle.text("You throw some bait at " + SafariBattle.enemy.name);
             SafariBattle.enemy.eating = Math.max(SafariBattle.enemy.eating, Math.floor(Math.random()*5 + 2));
             SafariBattle.enemy.angry = 0;
-            let enemy = $('#safariEnemy').offset();
+            const enemy = $('#safariEnemy').offset();
             enemy.left += 30;
             enemy.top += 70;
             SafariBattle.dropParticle('<img src="assets/images/safari/bait.png">', $('#safariPlayer').offset(), enemy, 1, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
@@ -131,20 +131,20 @@ class SafariBattle {
             SafariBattle.text("You throw a rock at " + SafariBattle.enemy.name);
             SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Math.floor(Math.random() * 5 + 2));
             SafariBattle.enemy.eating = 0;
-            let enemy = $('#safariEnemy').offset();
+            const enemy = $('#safariEnemy').offset();
             enemy.left += 40;
             enemy.top += 10;
             SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariPlayer').offset(), enemy, 0.8, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
             setTimeout(function(){
-                let hitSplash = $('<ptcl>').html("<img src='assets/images/safari/hit.png'>").children().appendTo('body');
+                const hitSplash = $('<ptcl>').html("<img src='assets/images/safari/hit.png'>").children().appendTo('body');
                 hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
                 hitSplash.fadeOut(400, function(){hitSplash.remove();});
                 setTimeout(function(){
-                    let newOffset = {
+                    const newOffset = {
                         top: enemy.top + 4,
                         left: enemy.left - 20
                     }
-                    let ang = $('<ptcl>').html("<img src='assets/images/safari/angry.png'>").children().appendTo('body');
+                    const ang = $('<ptcl>').html("<img src='assets/images/safari/angry.png'>").children().appendTo('body');
                     ang.css('position','absolute').css('z-index', 9999);
                     ang.offset(newOffset);
                     ang.addClass('pulse');
@@ -177,7 +177,7 @@ class SafariBattle {
 
     private static enemyTurn() {
         // Enemy turn to flee;
-        let random = Math.floor(Math.random()*100);
+        const random = Math.floor(Math.random()*100);
         if( random < SafariBattle.enemy.escapeFactor){
             SafariBattle.text(SafariBattle.enemy.name + " has fled.");
             setTimeout(SafariBattle.endBattle, 1000);
@@ -223,8 +223,8 @@ class SafariBattle {
         }, 2000);
     }
 
-    private static dropParticle(html: string, pos, target, time: number = 2, top, persistentParticle: boolean = false) {
-        let p = $('<ptcl>').html(html).children().appendTo('body');
+    private static dropParticle(html: string, pos, target, time = 2, top, persistentParticle = false) {
+        const p = $('<ptcl>').html(html).children().appendTo('body');
         p.css('position','absolute')
         p.offset(pos);
         if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';

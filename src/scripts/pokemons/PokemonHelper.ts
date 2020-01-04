@@ -13,11 +13,11 @@ class PokemonHelper {
     }
 
     public static getPokemonByName(name: string): DataPokemon {
-        let basePokemon = pokemonMap[name];
+        const basePokemon = pokemonMap[name];
         if (!basePokemon) return;
-        let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
-        let evoLevel = basePokemon["evoLevel"];
-        let eggCycles: number = basePokemon["eggCycles"] || 20;
+        const type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
+        const evoLevel = basePokemon["evoLevel"];
+        const eggCycles: number = basePokemon["eggCycles"] || 20;
         return new DataPokemon(basePokemon["id"], basePokemon["name"], basePokemon["catchRate"], basePokemon["evolution"], evoLevel, basePokemon["type"][0], type2, basePokemon["attack"], basePokemon["levelType"], basePokemon["exp"], eggCycles);
     }
 
@@ -61,8 +61,8 @@ class PokemonHelper {
     }
 
     public static calculateAttack(attackBase: number, attackBonus: number, level: number): number {
-        let attackBonusMultiplier = 1 + ( attackBonus / 100 );
-        let levelMultiplier = level / 100;
+        const attackBonusMultiplier = 1 + ( attackBonus / 100 );
+        const levelMultiplier = level / 100;
         return Math.max(1, Math.floor(attackBase * attackBonusMultiplier * levelMultiplier));
     }
 
@@ -126,7 +126,7 @@ class PokemonHelper {
     }
 
     public static calcNativeRegion(pokemonName: string) {
-        let id = PokemonHelper.getPokemonByName(pokemonName).id;
+        const id = PokemonHelper.getPokemonByName(pokemonName).id;
         if (id > 251) {
             return GameConstants.Region.hoenn;
         } else if (id > 151) {

@@ -37,8 +37,8 @@ class Gym {
     }
 
     public static getLeaderByBadge(badge: BadgeCase.Badge): string {
-        for (let item in gymList) {
-            let gym = gymList[item];
+        for (const item in gymList) {
+            const gym = gymList[item];
             if (BadgeCase.Badge[gym.badgeReward] == BadgeCase.Badge[BadgeCase.Badge[badge]]) {
                 return gym.leaderName;
             }

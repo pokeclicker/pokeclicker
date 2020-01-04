@@ -10,21 +10,21 @@ class GameHelper {
     });
     public static formattedTimeUntilTomorrow: KnockoutComputed<string> = ko.computed(function () {
         let milliseconds = GameHelper.msUntilTomorrow();
-        let hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
+        const hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
         milliseconds -= hours * GameHelper.MS_IN_HOUR;
-        let minutes = Math.floor(milliseconds / GameHelper.MS_IN_MIN);
+        const minutes = Math.floor(milliseconds / GameHelper.MS_IN_MIN);
         return `${hours}:${GameHelper.twoDigitNumber(minutes)}`;
     });
 
     public static formattedLetterTimeUntilTomorrow: KnockoutComputed<string> = ko.computed(function () {
         let milliseconds = GameHelper.msUntilTomorrow();
-        let hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
+        const hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
         milliseconds -= hours * GameHelper.MS_IN_HOUR;
-        let minutes = Math.floor(milliseconds / GameHelper.MS_IN_MIN);
+        const minutes = Math.floor(milliseconds / GameHelper.MS_IN_MIN);
         return `${hours}h${GameHelper.twoDigitNumber(minutes)}m`;
     });
 
-    public static incrementObservable(obs: KnockoutObservable<number>, amt: number = 1) {
+    public static incrementObservable(obs: KnockoutObservable<number>, amt = 1) {
         obs(obs() + amt);
     }
 
@@ -33,7 +33,7 @@ class GameHelper {
     }
 
     public static updateTime() {
-        let now = new Date();
+        const now = new Date();
         if (now.getDate() == GameHelper.tomorrow.getDate()) {
             GameHelper.tomorrow = GameHelper.getTomorrow();
         }
@@ -41,7 +41,7 @@ class GameHelper {
     }
 
     private static getTomorrow() {
-        let tomorrow = new Date();
+        const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
         tomorrow.setHours(0);
         tomorrow.setMinutes(0);
@@ -68,7 +68,7 @@ class GameHelper {
     }
 
     public static getIndexFromDistribution(a: number[]) {
-        let rand = Math.random();
+        const rand = Math.random();
         for (let i = 0; i < a.length; i++) {
             if (rand <= a[i]) {
                 return i;
@@ -81,7 +81,7 @@ class GameHelper {
     }
 
     public static createArray(start: number, max: number, step: number) {
-        let array = [];
+        const array = [];
         for (let i = start; i <= max; i += step) {
             array.push(i);
         }

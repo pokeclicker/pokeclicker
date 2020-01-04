@@ -4,8 +4,8 @@ class EnergyRestore extends Item {
     type: GameConstants.EnergyRestoreSize;
 
     constructor(type: GameConstants.EnergyRestoreSize) {
-        let basePrice = GameConstants.ItemPrice[GameConstants.EnergyRestoreSize[type]];
-        let priceMultiplier = 1;
+        const basePrice = GameConstants.ItemPrice[GameConstants.EnergyRestoreSize[type]];
+        const priceMultiplier = 1;
         super(GameConstants.EnergyRestoreSize[type], basePrice, priceMultiplier, GameConstants.Currency.money);
         this.type = type;
     }

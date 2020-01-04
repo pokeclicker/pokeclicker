@@ -29,10 +29,10 @@ class SafariPokemon implements pokemonInterface {
         { name: "Tangela", weight: 4 },
     ];
 
-    static readonly listWeight = SafariPokemon.list.reduce((sum:number, pokemon) => {return sum += pokemon.weight}, 0);
+    static readonly listWeight = SafariPokemon.list.reduce((sum: number, pokemon) => {return sum += pokemon.weight}, 0);
 
     constructor(name: string) {
-        let data = PokemonHelper.getPokemonByName(name);
+        const data = PokemonHelper.getPokemonByName(name);
 
         this.name = data.name;
         this.id = data.id;
@@ -70,9 +70,9 @@ class SafariPokemon implements pokemonInterface {
     }
 
     public static random() {
-        let rand = Math.random() * SafariPokemon.listWeight;
+        const rand = Math.random() * SafariPokemon.listWeight;
         let i = 0;
-        for (let pokemon of SafariPokemon.list) {
+        for (const pokemon of SafariPokemon.list) {
             i += pokemon.weight;
             if (rand < i) {
                 return new SafariPokemon(pokemon.name);

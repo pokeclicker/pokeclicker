@@ -7,8 +7,8 @@ abstract class SafariBody {
     }
 
     public getTileNeighbours(x: number, y: number) {
-        let ret = Array<boolean>(4);//["N", "E", "S", "W"]
-        let cross = Array<boolean>(4);//["NE", "SE", "SW", "NW"]
+        const ret = Array<boolean>(4);//["N", "E", "S", "W"]
+        const cross = Array<boolean>(4);//["NE", "SE", "SW", "NW"]
         if (x === 0) {
             ret[3] = false;
         } else {
@@ -60,7 +60,7 @@ abstract class SafariBody {
 
     public maxX() {
         let max = 0;
-        for (let row of this.grid) {
+        for (const row of this.grid) {
             if (row.length > max) {
                 max = row.length;
             }
@@ -71,12 +71,12 @@ abstract class SafariBody {
 
 
 class SandBody extends SafariBody {
-    edgeDetectCheck: number = 15;
+    edgeDetectCheck = 15;
 
     constructor(
         x: number = SandBody.randomInt(), 
         y: number = SandBody.randomInt(), 
-        type: string = "sand"
+        type = "sand"
     ) {
         super();
         this.type = type;
@@ -92,14 +92,14 @@ class SandBody extends SafariBody {
     private generateCube(sizeX: number, sizeY: number): Array<Array<number>> {
         let body = [];
         for (let i = 0; i < sizeY; i++) {
-            let row = Array.apply(null, Array(sizeX)).map(Number.prototype.valueOf, 0);
+            const row = Array.apply(null, Array(sizeX)).map(Number.prototype.valueOf, 0);
             body.push(row);
         }
 
-        let amount = this.type === 'fence' ? 20 : 4
+        const amount = this.type === 'fence' ? 20 : 4
         for (let i = 0; i<amount; i++){
-            let x = Math.floor(Math.random()*(sizeX-2));
-            let y = Math.floor(Math.random()*(sizeY-2));
+            const x = Math.floor(Math.random()*(sizeX-2));
+            const y = Math.floor(Math.random()*(sizeY-2));
             body = SandBody.addCube(x,y,body);
         }
         return body;
@@ -121,8 +121,8 @@ class SandBody extends SafariBody {
     }
 
     private edgeDetect() {
-        for (var i = 0; i < this.grid.length; i++) {
-            for (var j = 0; j < this.grid[i].length; j++) {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[i].length; j++) {
                 if (this.grid[i][j] === this.edgeDetectCheck) {
                     this.grid[i][j] = this.getNumber(this.getTileNeighbours(j, i));
                 }
@@ -131,8 +131,8 @@ class SandBody extends SafariBody {
     }
 
     getNumber(neighbours): number {
-        let plus = neighbours.plus;
-        let cross = neighbours.cross;
+        const plus = neighbours.plus;
+        const cross = neighbours.cross;
         if(plus.equals([false, true, true, false])){
             return 11;
         }
@@ -186,8 +186,8 @@ class FenceBody extends SandBody {
     }
 
     getNumber(neighbours): number {
-        let plus = neighbours.plus;
-        let cross = neighbours.cross;
+        const plus = neighbours.plus;
+        const cross = neighbours.cross;
         if(plus.equals([false, true, true, false])){
             return 25;
         }
@@ -231,8 +231,8 @@ class FenceBody extends SandBody {
     }
 
     private openFence() {
-        let options = [26, 28, 29, 31];
-        let pick = options[Math.floor(Math.random()*options.length)];
+        const options = [26, 28, 29, 31];
+        const pick = options[Math.floor(Math.random()*options.length)];
         for(let i = 0; i<this.grid.length; i++){
             for(let j = 0; j<this.grid[0].length; j++){
                 if(this.grid[i][j] === pick){
@@ -247,11 +247,11 @@ class FenceBody extends SandBody {
 class WaterBody extends SafariBody {
     constructor() {
         super();
-        let x = Math.floor(Math.random() * 3) + 3;
-        let y = Math.floor(Math.random() * 3) + 3;
-        let body = [];
+        const x = Math.floor(Math.random() * 3) + 3;
+        const y = Math.floor(Math.random() * 3) + 3;
+        const body = [];
         for (let i = 0; i < y; i++) {
-            let row = [];
+            const row = [];
             for (let j = 0; j < x; j++) {
                 if (i === 0){
                     if( j === 0){
@@ -290,11 +290,11 @@ class WaterBody extends SafariBody {
 class GrassBody extends SafariBody {
     constructor() {
         super();
-        let x = Math.floor(Math.random() * 3) + 4;
-        let y = Math.floor(Math.random() * 3) + 4;
-        let body = [];
+        const x = Math.floor(Math.random() * 3) + 4;
+        const y = Math.floor(Math.random() * 3) + 4;
+        const body = [];
         for (let i = 0; i < y; i++) {
-            let row = [];
+            const row = [];
             for (let j = 0; j < x; j++) {
                 if(j < x*2/3-1) {
                     row.push(10);
@@ -356,7 +356,7 @@ Array.prototype.equals = function (array) {
     if (this.length != array.length)
         return false;
 
-    for (var i = 0, l=this.length; i < l; i++) {
+    for (let i = 0, l=this.length; i < l; i++) {
         // Check if we have nested arrays
         if (this[i] instanceof Array && array[i] instanceof Array) {
             // recurse into the nested arrays

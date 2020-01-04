@@ -1,5 +1,5 @@
 class Egg implements Saveable {
-    saveKey: string = "egg";
+    saveKey = "egg";
 
     defaults = {};
 
@@ -11,7 +11,7 @@ class Egg implements Saveable {
     notified: boolean;
     progress: KnockoutComputed<number>;
 
-    constructor(totalSteps: number, pokemon: string, type: GameConstants.EggType, steps: number = 0, shinySteps: number = 0, notified: boolean = false) {
+    constructor(totalSteps: number, pokemon: string, type: GameConstants.EggType, steps = 0, shinySteps = 0, notified = false) {
         this.totalSteps = totalSteps;
         this.steps = ko.observable(steps);
         this.shinySteps = shinySteps;

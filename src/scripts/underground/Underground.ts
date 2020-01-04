@@ -1,9 +1,9 @@
 class Underground {
-    public static saveKey: string = "underground";
+    public static saveKey = "underground";
 
     public static itemSelected;
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
-    public static counter: number = 0;
+    public static counter = 0;
 
     private static _energy: KnockoutObservable<number> = ko.observable(0);
     public static upgradeList: Array<Upgrade> = [];
@@ -39,11 +39,11 @@ class Underground {
 
     public static showMine() {
         let html = "";
-        let itemsFound = "Mine.itemsFound() + '/' + Mine.itemsBuried + ' items found'";
+        const itemsFound = "Mine.itemsFound() + '/' + Mine.itemsBuried + ' items found'";
         html += "</div>";
         for (let i = 0; i < Mine.grid.length; i++) {
             html += "<div class='row'>";
-            for (var j = 0; j < Mine.grid[0].length; j++) {
+            for (let j = 0; j < Mine.grid[0].length; j++) {
                 html += Underground.mineSquare(Mine.grid[i][j](), i, j);
             }
             html += "</div>";
@@ -88,19 +88,19 @@ class Underground {
         return "col-sm-1 mineReward mineSquare " + Mine.Tool[Mine.toolSelected()] + "Selected";
     });
 
-    public static gainMineItem(id: number, num: number = 1) {
-        let index = player.mineInventoryIndex(id);
-        let item = Underground.getMineItemById(id);
+    public static gainMineItem(id: number, num = 1) {
+        const index = player.mineInventoryIndex(id);
+        const item = Underground.getMineItemById(id);
 
         if (item.isStone()) {
-            let evostone: EvolutionStone = ItemList[item.valueType];
+            const evostone: EvolutionStone = ItemList[item.valueType];
             evostone.gain(num);
             return;
         }
 
         if (index == -1) {
 
-            let tempItem = {
+            const tempItem = {
                 name: item.name,
                 amount: ko.observable(num),
                 id: id,
@@ -109,13 +109,13 @@ class Underground {
             };
             player._mineInventory.push(tempItem);
         } else {
-            let amt = player._mineInventory()[index].amount()
+            const amt = player._mineInventory()[index].amount()
             player._mineInventory()[index].amount(amt + num);
         }
     }
 
     public static getMineItemById(id: number): UndergroundItem {
-        for (let item of UndergroundItem.list) {
+        for (const item of UndergroundItem.list) {
             if (item.id == id) {
                 return item;
             }
@@ -124,7 +124,7 @@ class Underground {
 
     public static gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
-            let oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
+            const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
                 Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
@@ -134,20 +134,20 @@ class Underground {
 
     public static gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
         // Restore a percentage of maximum energy
-        let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
-        let gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
+        const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
+        const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
         this.energy = this.energy + gain;
         Notifier.notify("You restored " + gain + " mining energy!", GameConstants.NotificationOption.success);
     }
 
     public static sellMineItem(id: number) {
         for (let i = 0; i < player._mineInventory().length; i++) {
-            let item = player._mineInventory()[i];
+            const item = player._mineInventory()[i];
             if (item.id == id) {
                 if (item.amount() > 0) {
-                    let success = Underground.gainProfit(item);
+                    const success = Underground.gainProfit(item);
                     if (success) {
-                        let amt = item.amount();
+                        const amt = item.amount();
                         player._mineInventory()[i].amount(amt - 1);
                     }
                     return;
@@ -169,8 +169,8 @@ class Underground {
                 success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
                 break;
             default:
-                let type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
-                let typeNum = GameConstants.PokemonType[type];
+                const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
+                const typeNum = GameConstants.PokemonType[type];
                 player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + GameConstants.PLATE_VALUE);
         }
         return success;
@@ -190,7 +190,7 @@ class Underground {
     }
 
     public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {
-        let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
+        const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
         return effect * this.getMaxEnergy();
     }
 
@@ -200,8 +200,8 @@ class Underground {
             return;
         }
 
-        let upgrades = saveObject['upgrades'];
-        for (let item in Underground.Upgrades) {
+        const upgrades = saveObject['upgrades'];
+        for (const item in Underground.Upgrades) {
             if (isNaN(Number(item))) {
                 Underground.getUpgrade((<any>Underground.Upgrades)[item]).level = upgrades[item] || 0;
             }
@@ -210,9 +210,9 @@ class Underground {
     }
 
     public static save(): object {
-        let undergroundSave = {};
-        let upgradesSave = {};
-        for (let item in Underground.Upgrades) {
+        const undergroundSave = {};
+        const upgradesSave = {};
+        for (const item in Underground.Upgrades) {
             if (isNaN(Number(item))) {
                 upgradesSave[item] = Underground.getUpgrade((<any>Underground.Upgrades)[item]).level;
             }

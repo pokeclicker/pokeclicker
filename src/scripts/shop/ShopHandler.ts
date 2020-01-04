@@ -10,7 +10,7 @@ class ShopHandler {
         this.shopObservable(shop);
 
         for (let i = 0; i < shop.items().length; i++) {
-            let item: Item = shop.items()[i];
+            const item: Item = shop.items()[i];
             item.price(Math.round(item.basePrice * player.itemMultipliers[item.name()]));
         }
     }
@@ -20,19 +20,19 @@ class ShopHandler {
     }
 
     public static buyItem() {
-        let item: Item = this.shopObservable().items()[ShopHandler.selected()];
+        const item: Item = this.shopObservable().items()[ShopHandler.selected()];
         item.buy(this.amount());
         ShopHandler.resetAmount();
     }
 
     public static resetAmount() {
-        let input = $("input[name='amountOfItems']");
+        const input = $("input[name='amountOfItems']");
         input.val(1).change();
     }
 
     public static increaseAmount(n: number) {
-        let input = $("input[name='amountOfItems']");
-        let newVal = (parseInt(input.val().toString()) || 0) + n;
+        const input = $("input[name='amountOfItems']");
+        const newVal = (parseInt(input.val().toString()) || 0) + n;
         input.val(newVal > 1 ? newVal : 1).change();
     }
 
@@ -57,7 +57,7 @@ class ShopHandler {
     }
 
     public static calculateButtonCss(): string {
-        let item: Item = this.shopObservable().items()[ShopHandler.selected()];
+        const item: Item = this.shopObservable().items()[ShopHandler.selected()];
 
         if (item && !(item.isAvailable() && App.game.wallet.hasAmount(new Amount(item.totalPrice(this.amount()), item.currency)))
                 || this.amount() < 1) {

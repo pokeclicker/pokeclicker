@@ -38,7 +38,7 @@ class Town {
     }
 
     public hasRouteReq() {
-        for (let i of this.reqRoutes) {
+        for (const i of this.reqRoutes) {
             if (player.routeKills[i]() < player.routeKillsNeeded) {
                 return false;
             }
@@ -77,33 +77,33 @@ class DungeonTown extends Town {
 const TownList: { [name: string]: Town | PokemonLeague } = {};
 
 //Kanto Towns
-let PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp","Dungeon_ticket"]);
+const PewterCityShop = new Shop(["Pokeball", "Token_collector", "xExp","Dungeon_ticket"]);
 TownList["Pewter City"] = new Town("Pewter City", [2], PewterCityShop);
 
-let CeruleanCityShop = new Shop(["Water_stone", "xAttack", "Water_egg"]);
+const CeruleanCityShop = new Shop(["Water_stone", "xAttack", "Water_egg"]);
 TownList["Cerulean City"] = new Town("Cerulean City", [4], CeruleanCityShop, dungeonList["Cerulean Cave"]);
 
-let VermillionCityShop = new Shop(["Thunder_stone", "xExp", "Electric_egg"]);
+const VermillionCityShop = new Shop(["Thunder_stone", "xExp", "Electric_egg"]);
 TownList["Vermillion City"] = new Town("Vermillion City", [6], VermillionCityShop);
 
-let CeladonCityShop = new Shop(["Eevee", "Porygon", "Jynx", "Mr. Mime", "Lickitung"]);
+const CeladonCityShop = new Shop(["Eevee", "Porygon", "Jynx", "Mr. Mime", "Lickitung"]);
 TownList["Celadon City"] = new Town("Celadon City", [8], CeladonCityShop);
 
-let SaffronCityShop = new Shop(["Moon_stone", "xClick", "Leaf_stone", "Fighting_egg"]);
+const SaffronCityShop = new Shop(["Moon_stone", "xClick", "Leaf_stone", "Fighting_egg"]);
 TownList["Saffron City"] = new Town("Saffron City", [5], SaffronCityShop);
 
-let FuchsiaCityShop = new Shop(["Ultraball", "Trade_stone", "xExp", "Dragon_egg"]);
+const FuchsiaCityShop = new Shop(["Ultraball", "Trade_stone", "xExp", "Dragon_egg"]);
 TownList["Fuchsia City"] = new Town("Fuchsia City", [18], FuchsiaCityShop);
 
-let CinnabarIslandShop = new Shop(["Fire_stone", "Fire_egg", "SmallRestore", "Explorer_kit"]);
+const CinnabarIslandShop = new Shop(["Fire_stone", "Fire_egg", "SmallRestore", "Explorer_kit"]);
 TownList["Cinnabar Island"] = new Town("Cinnabar Island", [20], CinnabarIslandShop, dungeonList["Pokemon Mansion"]);
 
-let ViridianCityShop = new Shop(["xAttack", "xClick", "Mystery_egg"]);
+const ViridianCityShop = new Shop(["xAttack", "xClick", "Mystery_egg"]);
 TownList["Viridian City"] = new Town("Viridian City", [1], ViridianCityShop);
 
 TownList["Pallet Town"] = new Town("Pallet Town", []);
 
-let LavenderTownShop = new Shop(["Greatball", "Item_magnet", "Lucky_incense", "Grass_egg"]);
+const LavenderTownShop = new Shop(["Greatball", "Item_magnet", "Lucky_incense", "Grass_egg"]);
 TownList["Lavender Town"] = new Town("Lavender Town", [10], LavenderTownShop, dungeonList["Pokemon Tower"]);
 
 //Kanto Dungeons
@@ -119,32 +119,32 @@ TownList["Cerulean Cave"] = new DungeonTown("Cerulean Cave", [4], BadgeCase.Badg
 TownList["Pokemon Mansion"] = new DungeonTown("Pokemon Mansion", [20], BadgeCase.Badge.Soul);
 
 //Johto Towns
-let NewBarkTownShop = new Shop(["Pokeball"]);
+const NewBarkTownShop = new Shop(["Pokeball"]);
 TownList["New Bark Town"] = new Town("New Bark Town", [], NewBarkTownShop);
 
-let CherrygroveCityShop = new Shop(["Greatball"]);
+const CherrygroveCityShop = new Shop(["Greatball"]);
 TownList["Cherrygrove City"] = new Town("Cherrygrove City", [29], CherrygroveCityShop);
 
-let VioletCityShop = new Shop(["MediumRestore", "Togepi"]);
+const VioletCityShop = new Shop(["MediumRestore", "Togepi"]);
 TownList["Violet City"] = new Town("Violet City", [31], VioletCityShop, dungeonList["Sprout Tower"]);
 
-let AzaleaTownShop = new Shop(["Kings_rock"]);
+const AzaleaTownShop = new Shop(["Kings_rock"]);
 TownList["Azalea Town"] = new Town("Azalea Town", [33], AzaleaTownShop, dungeonList["Slowpoke Well"]);
 
-let GoldenrodCityShop = new Shop(["Sun_stone", "Upgrade"]);
+const GoldenrodCityShop = new Shop(["Sun_stone", "Upgrade"]);
 TownList["Goldenrod City"] = new Town("Goldenrod City", [34], GoldenrodCityShop);
 
 TownList["Ecruteak City"] = new Town("Ecruteak City", [37]);
 
-let OlivineCityShop = new Shop(["Metal_coat"]);
+const OlivineCityShop = new Shop(["Metal_coat"]);
 TownList["Olivine City"] = new Town("Olivine City", [39], OlivineCityShop);
 
-let CianwoodCityShop = new Shop(["Ultraball", "Time_stone"]);
+const CianwoodCityShop = new Shop(["Ultraball", "Time_stone"]);
 TownList["Cianwood City"] = new Town("Cianwood City", [41], CianwoodCityShop);
 
 TownList["Mahogany Town"] = new Town("Mahogany Town", [42], null, null, "Mt Mortar");
 
-let BlackthornCityShop = new Shop(["LargeRestore", "Dragon_scale"]);
+const BlackthornCityShop = new Shop(["LargeRestore", "Dragon_scale"]);
 TownList["Blackthorn City"] = new Town("Blackthorn City", [44], BlackthornCityShop, null, "Ice Path");
 
 //Johto Dungeons

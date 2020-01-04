@@ -30,7 +30,7 @@ class ExpUpgrade extends Upgrade {
     }
 
     toJSON(): object {
-        let json = super.toJSON();
+        const json = super.toJSON();
         json["exp"] = this.exp;
         return json;
     }
@@ -49,12 +49,12 @@ class ExpUpgrade extends Upgrade {
     }
 
     get expPercentage() {
-        let nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
+        const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
         return this.normalizedExp / nextLevelExp * 100
     }
 
     get progressString(): string {
-        let nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
+        const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
         return Math.round(this.normalizedExp) + "/" + nextLevelExp
     }
 

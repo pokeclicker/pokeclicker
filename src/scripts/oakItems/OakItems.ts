@@ -1,6 +1,6 @@
 class OakItems implements Feature {
-    name: string = "Oak Items";
-    saveKey: string = "oakItems";
+    name = "Oak Items";
+    saveKey = "oakItems";
 
     itemList: OakItem[];
     unlockRequirements: number[];
@@ -30,7 +30,7 @@ class OakItems implements Feature {
     }
 
     calculateBonus(item: OakItems.OakItem) {
-        let oakItem = this.itemList[item];
+        const oakItem = this.itemList[item];
         if (oakItem == undefined) {
             console.log("Warning: could not find oakItem", item, "This could have unintended consequences");
             return 1;
@@ -73,7 +73,7 @@ class OakItems implements Feature {
 
 
     fromJSON(json: object): void {
-        for (let key in json) {
+        for (const key in json) {
             if (json.hasOwnProperty(key)) {
                 this.itemList[OakItems.OakItem[key]].fromJSON(json[key]);
             }
@@ -81,7 +81,7 @@ class OakItems implements Feature {
     }
 
     toJSON(): object {
-        let save = {};
+        const save = {};
         for (let i = 0; i < this.itemList.length; i++) {
             save[OakItems.OakItem[this.itemList[i].name]] = this.itemList[i].toJSON();
         }

@@ -1,6 +1,6 @@
 class Mine {
-    public static sizeX: number = 25;
-    public static sizeY: number = 12;
+    public static sizeX = 25;
+    public static sizeY = 12;
     public static grid: Array<Array<KnockoutObservable<number>>>;
     public static rewardGrid: Array<Array<any>>;
     public static itemsFound: KnockoutObservable<number>;
@@ -9,17 +9,17 @@ class Mine {
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: KnockoutObservable<Mine.Tool> = ko.observable(0);
-    private static loadingNewLayer: boolean = true
+    private static loadingNewLayer = true
 
     public static loadMine() {
-        let tmpGrid = [];
-        let tmpRewardGrid = [];
+        const tmpGrid = [];
+        const tmpRewardGrid = [];
         Mine.rewardNumbers = [];
         Mine.itemsFound = ko.observable(0);
         Mine.itemsBuried = 0;
         for (let i = 0; i < this.sizeY; i++) {
-            let row = [];
-            let rewardRow = [];
+            const row = [];
+            const rewardRow = [];
             for (let j = 0; j < this.sizeX; j++) {
                 row.push(ko.observable(Math.min(5, Math.max(1, Math.floor(Math.random() * 2 + Math.random() * 3) + 1))));
                 rewardRow.push(0);
@@ -31,10 +31,10 @@ class Mine {
         Mine.rewardGrid = tmpRewardGrid;
 
         for (let i = 0; i < Underground.getMaxItems(); i++) {
-            let item = UndergroundItem.getRandomItem();
-            let x = Mine.getRandomCoord(this.sizeX, item.space[0].length);
-            let y = Mine.getRandomCoord(this.sizeY, item.space.length);
-            let res = Mine.canAddReward(x, y, item)
+            const item = UndergroundItem.getRandomItem();
+            const x = Mine.getRandomCoord(this.sizeX, item.space[0].length);
+            const y = Mine.getRandomCoord(this.sizeY, item.space.length);
+            const res = Mine.canAddReward(x, y, item)
             if (res) {
                 Mine.addReward(x, y, item);
             }
@@ -67,8 +67,8 @@ class Mine {
     }
 
     private static alreadyHasRewardId(id: number): boolean {
-        for (let row of Mine.rewardGrid) {
-            for (let item of row) {
+        for (const row of Mine.rewardGrid) {
+            for (const item of row) {
                 if (item.value === id) {
                     return true;
                 }
@@ -201,7 +201,7 @@ class Mine {
     }
 
     public static serialize() {
-        let mine = {
+        const mine = {
             grid: this.grid,
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound,

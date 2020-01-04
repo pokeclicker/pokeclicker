@@ -1,6 +1,6 @@
 class FarmRunner {
     public static curBerry: Berry = BerryList["Cheri"];
-    public static counter: number = 0;
+    public static counter = 0;
     public static plotPrice: KnockoutObservable<number> = ko.observable(10);
 
     public static openFarmModal() {
@@ -87,12 +87,12 @@ class FarmRunner {
         return player.berryList[type]() > 0;
     }
 
-    public static removeBerry(type: GameConstants.BerryType, amount: number = 1) {
+    public static removeBerry(type: GameConstants.BerryType, amount = 1) {
         player.berryList[type](player.berryList[type]() - amount);
     }
 
     public static plant(plotId) {
-        let plot = this.getPlot(plotId);
+        const plot = this.getPlot(plotId);
         if (!plot.isEmpty()) {
             return;
         }
@@ -111,11 +111,11 @@ class FarmRunner {
     }
 
     public static harvest(plotId, all = false) {
-        let plot = this.getPlot(plotId);
+        const plot = this.getPlot(plotId);
         if (plot.berry() !== null && plot.timeLeft() <= 0) {
             App.game.wallet.gainFarmPoints(plot.berry().farmValue);
             FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
-            let money = plot.berry().moneyValue;
+            const money = plot.berry().moneyValue;
             App.game.wallet.gainMoney(money);
             if(!all){
                 Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success)
@@ -127,17 +127,17 @@ class FarmRunner {
         return 0;
     }
 
-    public static gainBerryByName(berryName: string, amount: number = 1) {
+    public static gainBerryByName(berryName: string, amount = 1) {
         player.berryList[GameConstants.BerryType[berryName]](player.berryList[GameConstants.BerryType[berryName]]() + amount);
     }
 
-    public static gainBerryById(berryId: number, amount: number = 1) {
+    public static gainBerryById(berryId: number, amount = 1) {
         player.berryList[berryId](player.berryList[berryId]() + amount);
         GameHelper.incrementObservable(player.statistics.berriesHarvested[berryId], amount);
     }
 
     public static getTooltipLabel(plotId) {
-        let plot = this.getPlot(plotId);
+        const plot = this.getPlot(plotId);
 
         if (plot.timeLeft() > 0) {
             return plot.formattedTimeLeft();
@@ -156,7 +156,7 @@ class FarmRunner {
 
 document.addEventListener("DOMContentLoaded", function (event) {
     $('#farmModal').on('show.bs.modal', function () {
-        let seedList = $('#seedList');
+        const seedList = $('#seedList');
         seedList.children().get(FarmRunner.curBerry.type).className += " active";
         seedList.find("li").click(function () {
             $(this).parent().children().removeClass("active");

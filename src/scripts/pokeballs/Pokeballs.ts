@@ -1,6 +1,6 @@
 class Pokeballs implements Feature {
-    name: string = "Pokeballs";
-    saveKey: string = "pokeballs";
+    name = "Pokeballs";
+    saveKey = "pokeballs";
 
     defaults = {
         'pokeballs': [10, 0, 0, 0],
@@ -85,7 +85,7 @@ class Pokeballs implements Feature {
         if (json["pokeballs"] == null) {
             this.pokeballs = new ArrayOfObservables(this.defaults.pokeballs);
         } else {
-            let pokeballsJson = json["pokeballs"];
+            const pokeballsJson = json["pokeballs"];
             this.pokeballs = new ArrayOfObservables([
                 pokeballsJson[GameConstants.Pokeball.Pokeball],
                 pokeballsJson[GameConstants.Pokeball.Greatball],

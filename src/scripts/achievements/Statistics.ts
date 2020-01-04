@@ -30,7 +30,7 @@ class Statistics {
     };
 
     constructor(saved = {}) {
-        let observables = [
+        const observables = [
             "clicks",
             "hatchedEggs",
             "pokemonCaptured",
@@ -43,7 +43,7 @@ class Statistics {
             "totalDiamonds",
         ];
 
-        let arrayObservables = [
+        const arrayObservables = [
             "gymsDefeated",
             "dungeonsCleared",
             "pokeballsUsed",
@@ -53,11 +53,11 @@ class Statistics {
             "berriesHarvested",
         ]
 
-        for (let prop of observables) {
+        for (const prop of observables) {
             this[prop] = ko.observable(saved[prop] || 0)
         }
 
-        for (let array of arrayObservables) {
+        for (const array of arrayObservables) {
             this[array] = Array.apply(null, Array(Statistics.arraySizes[array])).map((value, index) => {
                 return ko.observable(saved[array] ? saved[array][index] || 0 : 0)
             })

@@ -1,8 +1,8 @@
 import Currency = GameConstants.Currency;
 
 class Breeding implements Feature {
-    name: string = "Breeding";
-    saveKey: string = "breeding";
+    name = "Breeding";
+    saveKey = "breeding";
 
     defaults = {
         'eggList': [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)],
@@ -64,11 +64,11 @@ class Breeding implements Feature {
         if (json["eggList"] == null) {
             this._eggList = this.defaults.eggList;
         } else {
-            let saveEggList: object[] = json["eggList"];
+            const saveEggList: object[] = json["eggList"];
 
             for (let i = 0; i < this._eggList.length; i++) {
                 if (saveEggList[i] != null) {
-                    let egg: Egg = new Egg(null, null, null);
+                    const egg: Egg = new Egg(null, null, null);
                     egg.fromJSON(saveEggList[i]);
                     this._eggList[i](egg);
                 }
@@ -78,7 +78,7 @@ class Breeding implements Feature {
 
 
     toJSON(): object {
-        let breedingSave = {};
+        const breedingSave = {};
         breedingSave["eggList"] = this.eggList.map(function (egg: any) {
                 return egg() === null ? null : egg().toJSON();
             }
@@ -93,7 +93,7 @@ class Breeding implements Feature {
 
     public hasFreeEggSlot(): boolean {
         let counter = 0;
-        for (let egg of this._eggList) {
+        for (const egg of this._eggList) {
             if (egg() !== null) {
                 counter++;
             }
@@ -120,9 +120,9 @@ class Breeding implements Feature {
         amount *= App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette);
 
         amount = Math.round(amount);
-        for (let obj of this._eggList) {
+        for (const obj of this._eggList) {
             // TODO(@Isha) fix this properly.
-            let egg: any = obj();
+            const egg: any = obj();
             if (egg == null || egg.notified) {
                 continue;
             }
@@ -146,7 +146,7 @@ class Breeding implements Feature {
             Notifier.notify("You don't have any free egg slots", GameConstants.NotificationOption.warning);
             return;
         }
-        let egg = this.createEgg(pokemon.name);
+        const egg = this.createEgg(pokemon.name);
         pokemon.breeding(true);
         this.gainEgg(egg);
         pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
@@ -154,9 +154,9 @@ class Breeding implements Feature {
 
     public hatchPokemonEgg(index: number) {
         // TODO(@Isha) fix this properly.
-        let egg: any = this._eggList[index]();
-        let shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps()));
-        let shiny = PokemonFactory.generateShiny(shinyChance);
+        const egg: any = this._eggList[index]();
+        const shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps()));
+        const shiny = PokemonFactory.generateShiny(shinyChance);
 
         for (let i = 0; i < player._caughtPokemonList().length; i++) {
             if (player._caughtPokemonList()[i].name == egg.pokemon) {
@@ -177,7 +177,7 @@ class Breeding implements Feature {
         player.capturePokemon(egg.pokemon, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
-        let baseForm = this.calculateBaseForm(egg.pokemon);
+        const baseForm = this.calculateBaseForm(egg.pokemon);
         if (egg.pokemon != baseForm && !player.alreadyCaughtPokemon(baseForm)) {
             Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
             player.capturePokemon(baseForm, false, true);
@@ -189,7 +189,7 @@ class Breeding implements Feature {
     }
 
     public createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
-        let dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
+        const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
         return new Egg(this.getSteps(dataPokemon.eggCycles), pokemonName, type);
     }
 
@@ -210,14 +210,14 @@ class Breeding implements Feature {
     }
 
     public createRandomEgg(): Egg {
-        let type = Math.floor(Math.random() * (Object.keys(this.hatchList).length - 1));
-        let egg = this.createTypedEgg(type);
+        const type = Math.floor(Math.random() * (Object.keys(this.hatchList).length - 1));
+        const egg = this.createTypedEgg(type);
         egg.type = GameConstants.EggType.Mystery;
         return egg;
     }
 
     public createFossilEgg(fossil: string): Egg {
-        let pokemonName = GameConstants.FossilToPokemon[fossil];
+        const pokemonName = GameConstants.FossilToPokemon[fossil];
         return this.createEgg(pokemonName, GameConstants.EggType.Fossil);
     }
 
@@ -248,7 +248,7 @@ class Breeding implements Feature {
     }
 
     public buyEggSlot() {
-        let cost: Amount = this.nextEggSlotCost();
+        const cost: Amount = this.nextEggSlotCost();
         if (App.game.wallet.hasAmount(cost)) {
             App.game.wallet.loseAmount(cost);
             this.gainEggSlot();

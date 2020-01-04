@@ -28,7 +28,7 @@ class GymRunner {
                 GymBattle.index(0);
                 GymBattle.generateNewEnemy();
                 $('#gymCountdownView').fadeOut(300);
-                let $img = $('#gif-go');
+                const $img = $('#gif-go');
                 $img.hide();
             }, GameConstants.GYM_COUNTDOWN)
 
@@ -38,7 +38,7 @@ class GymRunner {
     }
 
     public static resetGif(){
-        let $img = $('#gif-go');
+        const $img = $('#gif-go');
             $img.show();
             setTimeout(function() {
                 $img.attr('src', 'assets/gifs/go.gif');

@@ -7,7 +7,7 @@ class UndergroundItem {
 
     public static list: Array<UndergroundItem> = [];
 
-    constructor(name: string, id: number, space: Array<Array<number>>, value: number = 1, valueType: string = "Diamond") {
+    constructor(name: string, id: number, space: Array<Array<number>>, value = 1, valueType = "Diamond") {
         this.name = name;
         this.id = id;
         this.space = space;
@@ -71,7 +71,7 @@ class UndergroundItem {
     }
 
     public static getRandomItem(): UndergroundItem {
-        let i = Math.floor(Math.random()*(UndergroundItem.list.length));
+        const i = Math.floor(Math.random()*(UndergroundItem.list.length));
         return UndergroundItem.list[i] || UndergroundItem.list[0];
     }
 

@@ -28,7 +28,7 @@ class Player {
     private _starter: GameConstants.Starter;
 
     constructor(savedPlayer?) {
-        let saved: boolean = (savedPlayer != null);
+        const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
         let tmpCaughtList = [];
@@ -83,7 +83,7 @@ class Player {
 
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
-            for (let key in savedPlayer._itemList) {
+            for (const key in savedPlayer._itemList) {
                 this._itemList[key] = ko.observable(savedPlayer._itemList[key]);
             }
         }
@@ -92,7 +92,7 @@ class Player {
 
         // TODO(@Isha) move to underground classes.
         this._mineInventory = ko.observableArray(savedPlayer._mineInventory || []);
-        for (let item of this._mineInventory()) {
+        for (const item of this._mineInventory()) {
             item.amount = ko.observable(item.amount);
         }
 
@@ -104,8 +104,8 @@ class Player {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
 
-        let today = new Date();
-        let lastSeen = new Date(this._lastSeen);
+        const today = new Date();
+        const lastSeen = new Date(this._lastSeen);
         if (today.toLocaleDateString() == lastSeen.toLocaleDateString()) {
             this.questRefreshes = savedPlayer.questRefreshes;
             if (savedPlayer.completedQuestList) {
@@ -119,7 +119,7 @@ class Player {
             }
 
             this.currentQuests = ko.observableArray(savedPlayer.currentQuests || []);
-            for (let q of this.currentQuests()) {
+            for (const q of this.currentQuests()) {
                 q.initial = ko.observable(q.initial);
             }
         } else {
@@ -243,7 +243,7 @@ class Player {
 
     public alreadyCaughtPokemonShiny(pokemonName: string) {
         if (!this.alreadyCaughtPokemon(pokemonName)) return false;
-        for (let i: number = 0; i < this.caughtShinyList().length; i++) {
+        for (let i = 0; i < this.caughtShinyList().length; i++) {
             if (this.caughtShinyList()[i] == pokemonName) {
                 return true;
             }
@@ -251,14 +251,14 @@ class Player {
         return false;
     }
 
-    public capturePokemon(pokemonName: string, shiny: boolean = false, supressNotification = false) {
+    public capturePokemon(pokemonName: string, shiny = false, supressNotification = false) {
         if (PokemonHelper.calcNativeRegion(pokemonName) > player.highestRegion()) {
             return;
         }
         App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
-        let pokemonData = PokemonHelper.getPokemonByName(pokemonName);
+        const pokemonData = PokemonHelper.getPokemonByName(pokemonName);
         if (!this.alreadyCaughtPokemon(pokemonName)) {
-            let caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
+            const caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
             this._caughtPokemonList.push(caughtPokemon);
             if (!supressNotification) {
                 if (shiny) Notifier.notify(`✨ You have captured a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
@@ -283,15 +283,15 @@ class Player {
     public gainExp(exp: number, level: number, trainer: boolean) {
         App.game.oakItems.use(OakItems.OakItem.Exp_Share);
         // TODO add exp multipliers
-        let trainerBonus = trainer ? 1.5 : 1;
-        let oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
+        const trainerBonus = trainer ? 1.5 : 1;
+        const oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
         if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()){
             expTotal *= 1.5;
         }
 
-        for (let pokemon of this._caughtPokemonList()) {
+        for (const pokemon of this._caughtPokemonList()) {
             if (pokemon.levelObservable() < (App.game.badgeCase.badgeCount() + 2) * 10) {
                 pokemon.exp(pokemon.exp() + expTotal);
             }
@@ -321,13 +321,13 @@ class Player {
     }
 
     public canBuyShardUpgrade(typeNum: number, effectNum: number): boolean {
-        let lessThanMax = !this.shardUpgradeMaxed(typeNum, effectNum);
-        let hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
+        const lessThanMax = !this.shardUpgradeMaxed(typeNum, effectNum);
+        const hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
         return lessThanMax && hasEnoughShards;
     }
 
     public getShardUpgradeCost(typeNum: number, effectNum: number): number {
-        let cost = (this._shardUpgrades[typeNum][effectNum]() + 1) * GameConstants.SHARD_UPGRADE_COST;
+        const cost = (this._shardUpgrades[typeNum][effectNum]() + 1) * GameConstants.SHARD_UPGRADE_COST;
         return cost;
     }
 
@@ -440,8 +440,8 @@ class Player {
     }
 
     public lowerItemMultipliers() {
-        for (let obj in ItemList) {
-            let item = ItemList[obj];
+        for (const obj in ItemList) {
+            const item = ItemList[obj];
             item.decreasePriceMultiplier();
         }
     }
@@ -464,7 +464,7 @@ class Player {
      */
     public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
         let attack = 0;
-        for (let pokemon of this.caughtPokemonList) {
+        for (const pokemon of this.caughtPokemonList) {
             let multiplier = 1;
             if (this.region !== GameHelper.getRegion(pokemon.id)) {
                 // Pokemon only retain 20% of their total damage in other regions.
@@ -474,7 +474,7 @@ class Player {
                 if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
                     attack += pokemon.attack() * multiplier;
                 } else {
-                    let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                    const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                     attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
                 }
             }
@@ -488,7 +488,7 @@ class Player {
     }
 
     public getRandomBerry() {
-        let i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
+        const i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
         Notifier.notify("You got a " + GameConstants.BerryType[i] + " berry!", GameConstants.NotificationOption.success);
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
@@ -511,7 +511,7 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public getUndergroundItemAmount(id: number) {
-        let index = this.mineInventoryIndex(id);
+        const index = this.mineInventoryIndex(id);
         if (index > -1) {
             return player._mineInventory.peek()[index].amount();
         } else {
@@ -551,9 +551,9 @@ class Player {
     }
 
     public percentToNextQuestLevel(): number {
-        let current = this.questLevel;
-        let requiredForCurrent = QuestHelper.levelToXP(current);
-        let requiredForNext = QuestHelper.levelToXP(current + 1);
+        const current = this.questLevel;
+        const requiredForCurrent = QuestHelper.levelToXP(current);
+        const requiredForNext = QuestHelper.levelToXP(current + 1);
         return 100 * (this.questXP - requiredForCurrent) / (requiredForNext - requiredForCurrent);
     }
 
@@ -574,7 +574,7 @@ class Player {
     }
 
     public toJSON() {
-        let keep = [
+        const keep = [
             "_caughtShinyList",
             "_route",
             "_caughtPokemonList",
@@ -612,7 +612,7 @@ class Player {
             "tutorialState",
             "tutorialComplete",
         ];
-        let plainJS = ko.toJS(this);
+        const plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
 }

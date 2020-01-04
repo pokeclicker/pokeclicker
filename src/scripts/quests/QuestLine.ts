@@ -15,7 +15,7 @@ class QuestLine {
         this.quests = ko.observableArray();
         this.totalQuests = 0;
         this.curQuest = ko.computed(() => {
-            let acc = 0;
+            const acc = 0;
             return this.quests().map((quest) => {return +quest.isCompleted()})
                                 .reduce( ( acc, iscompleted) => {return acc + iscompleted},0);
         });
@@ -47,7 +47,7 @@ class QuestLine {
     }
 
     beginQuest(index: number, initial?) {
-        let quest = this.quests()[index];
+        const quest = this.quests()[index];
         if (typeof initial == "undefined") {
             initial = quest.questFocus();
         }

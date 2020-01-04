@@ -11,16 +11,16 @@ const pokemonDevolutionMap: {[name: string]: string} = {};
  * Datalist that contains all Pokémon data
  */
 const pokemonList: {
-  id: number,
-  name: string,
-  catchRate: number,
-  evolution?: any[],
-  evoLevel?: any[],
-  type: string[],
-  attack: number,
-  levelType: string,
-  exp: number,
-  eggCycles: number
+  id: number;
+  name: string;
+  catchRate: number;
+  evolution?: any[];
+  evoLevel?: any[];
+  type: string[];
+  attack: number;
+  levelType: string;
+  exp: number;
+  eggCycles: number;
 }[] = [
     {
         "id": 1,

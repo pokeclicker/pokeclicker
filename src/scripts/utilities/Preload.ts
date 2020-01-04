@@ -1,6 +1,6 @@
 class Preload {
 
-    public static hideSplashScreen(fast: boolean = false) {
+    public static hideSplashScreen(fast = false) {
         if (fast) {
             $('.loader').hide();
         } else {
@@ -8,7 +8,7 @@ class Preload {
         }
     }
 
-    public static load(skipWait: boolean = false) {
+    public static load(skipWait = false) {
         if (skipWait) {
             return new Promise(resolve => {
                 //If you want to skip waiting, resolve immediately
@@ -39,13 +39,13 @@ class Preload {
     }
 
     private static loadTowns() {
-        let p = Array<Promise<number>>();
-        for (let name in TownList) {
+        const p = Array<Promise<number>>();
+        for (const name in TownList) {
             if (name.indexOf("Elite") !== -1 || name.indexOf("Champion") !== -1) {
                 continue;
             }
             p.push(new Promise<number>(resolve => {
-                let img = new Image();
+                const img = new Image();
                 img.onload = () => resolve();
                 img.onerror = () => resolve();
                 img.src = `assets/images/towns/${name}.png`;
@@ -57,9 +57,9 @@ class Preload {
 
     private static loadSplashScreen() {
         return new Promise<number>(resolve => {
-            let img = new Image();
+            const img = new Image();
             img.onload = () => {
-                let loader = $('#loader');
+                const loader = $('#loader');
                 loader.css('background', 'url(assets/images/background.png) top');
                 loader.css('background-size', 'cover');
                 resolve();
@@ -71,9 +71,9 @@ class Preload {
 
     private static loadBackground() {
         return new Promise<number>(resolve => {
-            let img = new Image();
+            const img = new Image();
             img.onload = () => {
-                let body = $('body');
+                const body = $('body');
                 body.css('background', 'url(assets/images/background.png) top');
                 body.css('background-size', 'cover');
                 resolve();
@@ -83,10 +83,10 @@ class Preload {
     }
 
     private static loadPokemon() {
-        let p = Array<Promise<number>>();
+        const p = Array<Promise<number>>();
         for (let i = 1; i <= GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION]; i++) {
             p.push(new Promise<number>(resolve => {
-                let img = new Image();
+                const img = new Image();
                 img.onload = () => resolve();
                 img.src = `assets/images/pokemon/${i}.png`;
             }));

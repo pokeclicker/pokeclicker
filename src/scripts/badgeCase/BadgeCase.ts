@@ -1,6 +1,6 @@
 class BadgeCase implements Feature {
-    name: string = "Badge Case";
-    saveKey: string = "badgeCase";
+    name = "Badge Case";
+    saveKey = "badgeCase";
 
     badgeList: ArrayOfObservables<boolean>;
     badgeAmount: number;
@@ -12,7 +12,7 @@ class BadgeCase implements Feature {
     }
 
     private createDefaultBadgeList(): ArrayOfObservables<boolean> {
-        let list = new Array(this.badgeAmount).fill(false);
+        const list = new Array(this.badgeAmount).fill(false);
         return new ArrayOfObservables(list);
     }
 

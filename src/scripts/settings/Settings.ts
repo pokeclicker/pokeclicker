@@ -13,14 +13,14 @@ class Settings {
     }
 
     static load(dict) {
-        for (let name in dict) {
-            let value = dict[name];
+        for (const name in dict) {
+            const value = dict[name];
             this.setSettingByName(name, value)
         }
     }
 
     static setSettingByName(name: string, value: any) {
-        let setting = this.getSetting(name);
+        const setting = this.getSetting(name);
         if (setting) {
             setting.set(value);
         } else {
@@ -39,7 +39,7 @@ class Settings {
     }
 
     static save() {
-        let dict = {};
+        const dict = {};
         for (let i = 0; i < this.list.length; i++) {
             dict[this.list[i].name] = this.list[i].value;
         }

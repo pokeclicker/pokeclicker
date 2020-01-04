@@ -4,7 +4,7 @@ class buyKeyItem extends Item {
         item: KeyItems.KeyItem;
 
         constructor(item: KeyItems.KeyItem, price: number) {
-            let priceMultiplier = 1;
+            const priceMultiplier = 1;
             super(KeyItems.KeyItem[item], price, priceMultiplier, GameConstants.Currency.questPoint);
             this.item = item;
         }

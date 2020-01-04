@@ -6,13 +6,13 @@ class PokemonLeague extends Town {
         super(name, routes, shop, null, dungeonReq);
         this.gym(null);
         this.gymList = ko.observableArray<KnockoutObservable<Gym>>();
-        for (let gym of gyms) {
+        for (const gym of gyms) {
             this.gymList.push(ko.observable(gymList[gym]));
         }
     }
 
     public setupGymTowns() {
-        for (let gym of this.gymList()) {
+        for (const gym of this.gymList()) {
             TownList[gym().town] = TownList[this.name()];
         }
     }

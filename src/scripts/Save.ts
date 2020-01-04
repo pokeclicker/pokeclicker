@@ -1,14 +1,14 @@
 class Save {
 
-    static counter: number = 0;
+    static counter = 0;
 
     public static store(player: Player) {
-        let json = JSON.stringify(player);
+        const json = JSON.stringify(player);
         localStorage.setItem("player", json);
         localStorage.setItem("mine", Mine.serialize());
         localStorage.setItem("settings", Settings.save());
 
-        let saveObject = {};
+        const saveObject = {};
 
         saveObject[Underground.saveKey] = Underground.save();
         saveObject[App.game.breeding.saveKey] = App.game.breeding.toJSON();
@@ -25,15 +25,15 @@ class Save {
     }
 
     public static load(): Player {
-        let saved = localStorage.getItem("player");
+        const saved = localStorage.getItem("player");
 
-        let settings = localStorage.getItem("settings");
+        const settings = localStorage.getItem("settings");
         Settings.load(JSON.parse(settings));
 
 
-        let saveJSON = localStorage.getItem("save");
+        const saveJSON = localStorage.getItem("save");
         if (saveJSON !== null) {
-            let saveObject = JSON.parse(saveJSON);
+            const saveObject = JSON.parse(saveJSON);
             Underground.load(saveObject[Underground.saveKey]);
         }
 
@@ -45,11 +45,11 @@ class Save {
     }
 
     public static download() {
-        let element = document.createElement('a');
+        const element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(btoa(JSON.stringify(player))));
-        let currentdate = new Date();
-        let datestr = currentdate.toISOString().replace("T", " ").slice(0, 19);
-        let filename = "PokeClickerSave_" + datestr + '.txt';
+        const currentdate = new Date();
+        const datestr = currentdate.toISOString().replace("T", " ").slice(0, 19);
+        const filename = "PokeClickerSave_" + datestr + '.txt';
         element.setAttribute('download', filename);
 
         element.style.display = 'none';
@@ -61,7 +61,7 @@ class Save {
     }
 
     public static loadMine() {
-        let mine = localStorage.getItem("mine");
+        const mine = localStorage.getItem("mine");
         if (mine) {
             Mine.loadSavedMine(JSON.parse(mine));
         } else {
@@ -69,8 +69,8 @@ class Save {
         }
     }
 
-    public static reset(keepShinies: boolean = true): void {
-        var confirmDelete = prompt(`Are you sure you want reset?\nIf so, type 'DELETE'${keepShinies ? '\n\n[your shiny progress will not be reset]' : ''}`);
+    public static reset(keepShinies = true): void {
+        const confirmDelete = prompt(`Are you sure you want reset?\nIf so, type 'DELETE'${keepShinies ? '\n\n[your shiny progress will not be reset]' : ''}`);
 
         if (confirmDelete == 'DELETE') {
             if (keepShinies) {
@@ -91,7 +91,7 @@ class Save {
      * @param       keep : string[] An array of property names that should be kept
      * @returns {Object} : The original object with only the specified properties
      */
-    public static filter(object: any, keep: string[]): Object {
+    public static filter(object: any, keep: string[]): Record<string, any> {
         let filtered = {}, prop;
         for (prop in object) {
             if (keep.indexOf(prop) > -1) {
@@ -102,16 +102,16 @@ class Save {
     }
 
     public static initializeMultipliers(): { [name: string]: number } {
-        let res = {};
-        for (let obj in ItemList) {
+        const res = {};
+        for (const obj in ItemList) {
             res[obj] = 1;
         }
         return res;
     }
 
     public static initializeItemlist(): { [name: string]: KnockoutObservable<number> } {
-        let res = {};
-        for (let obj in ItemList) {
+        const res = {};
+        for (const obj in ItemList) {
             res[obj] = ko.observable(0);
         }
         return res;
@@ -127,7 +127,7 @@ class Save {
                 } else {
                     berry = null;
                 }
-                let plot = new Plot(p.isUnlocked, p.exp, p.level, p.boosted, berry, p.timeLeft);
+                const plot = new Plot(p.isUnlocked, p.exp, p.level, p.boosted, berry, p.timeLeft);
                 return ko.observable(plot)
             })
         } else {
@@ -151,7 +151,7 @@ class Save {
             });
         } else {
             res = [];
-            for (let item in GameConstants.PokemonType) {
+            for (const item in GameConstants.PokemonType) {
                 if (!isNaN(Number(item))) {
                     res[item] = [];
                     res[item][GameConstants.TypeEffectiveness.Immune] = ko.observable(0);
@@ -166,21 +166,21 @@ class Save {
     }
 
     public static initializeEffects(saved?: Array<string>): { [name: string]: KnockoutObservable<number> } {
-        let res = {};
-        for (let obj in GameConstants.BattleItemType) {
+        const res = {};
+        for (const obj in GameConstants.BattleItemType) {
             res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
         }
         return res;
     }
 
     public static loadFromFile(file) {
-        let fileToRead = file;
-        let fr = new FileReader();
+        const fileToRead = file;
+        const fr = new FileReader();
         fr.readAsText(fileToRead);
 
         setTimeout(function () {
             try {
-                let decoded = atob(fr.result as string);
+                const decoded = atob(fr.result as string);
                 JSON.parse(decoded);
                 if (decoded) {
                     localStorage.setItem("player", decoded);
@@ -195,18 +195,18 @@ class Save {
     }
 
     public static convert() {
-        let base64 = $('#convertTextArea').val().toString();
-        let json = atob(base64);
-        let p = JSON.parse(json);
+        const base64 = $('#convertTextArea').val().toString();
+        const json = atob(base64);
+        const p = JSON.parse(json);
         Save.convertShinies(p.caughtPokemonList);
         $('#saveModal').modal('hide')
     }
 
     public static convertShinies(list: Array<string>) {
-        let converted = [];
-        for (let pokemon of list) {
-            let shiny = parseInt(pokemon['shiny']);
-            let name = pokemon['name'];
+        const converted = [];
+        for (const pokemon of list) {
+            const shiny = parseInt(pokemon['shiny']);
+            const name = pokemon['name'];
             if (shiny == 1 && player.caughtShinyList.indexOf(name) == -1) {
                 player.caughtShinyList().push(pokemon['name']);
                 converted.push(pokemon['name']);

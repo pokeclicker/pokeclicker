@@ -6,9 +6,9 @@ class QuestHelper {
 
         const QuestTypes = new Set(GameConstants.QuestTypes);
         for (let i = 0; i < GameConstants.QUESTS_PER_SET; i++) {
-            let type = SeededRand.fromArray(Array.from(QuestTypes));
+            const type = SeededRand.fromArray(Array.from(QuestTypes));
             QuestTypes.delete(type);
-            let quest = QuestHelper.random(type, i);
+            const quest = QuestHelper.random(type, i);
             quest.index = i;
             QuestHelper.questList.push(quest);
         }
@@ -32,7 +32,7 @@ class QuestHelper {
                 amount = SeededRand.intBetween(1000, 8000);
                 return new GainTokensQuest(amount);
             case "GainShards":
-                let possibleTypes = [
+                const possibleTypes = [
                     GameConstants.PokemonType.Normal,
                     GameConstants.PokemonType.Poison,
                     GameConstants.PokemonType.Water,
@@ -41,7 +41,7 @@ class QuestHelper {
                     GameConstants.PokemonType.Fire,
                     GameConstants.PokemonType.Fighting,
                 ];
-                let type = SeededRand.fromArray(possibleTypes);
+                const type = SeededRand.fromArray(possibleTypes);
                 amount = SeededRand.intBetween(200, 600);
                 return new GainShardsQuest(type, amount);
             case "HatchEggs":
@@ -64,12 +64,12 @@ class QuestHelper {
                 amount = SeededRand.intBetween(5, 20);
                 return new DefeatDungeonQuest(dungeon, amount);
             case "UsePokeball":
-                let possiblePokeballs = [GameConstants.Pokeball.Pokeball, GameConstants.Pokeball.Greatball, GameConstants.Pokeball.Ultraball];
-                let pokeball = SeededRand.fromArray(possiblePokeballs);
+                const possiblePokeballs = [GameConstants.Pokeball.Pokeball, GameConstants.Pokeball.Greatball, GameConstants.Pokeball.Ultraball];
+                const pokeball = SeededRand.fromArray(possiblePokeballs);
                 amount = SeededRand.intBetween(100, 500);
                 return new UsePokeballQuest(pokeball, amount);
             case "UseOakItem":
-                let possibleItems = [
+                const possibleItems = [
                     OakItems.OakItem.Magic_Ball,
                     OakItems.OakItem.Amulet_Coin,
                     //OakItems.OakItem.Poison_Barb,
@@ -79,7 +79,7 @@ class QuestHelper {
                     //OakItems.OakItem.Blaze_Cassette,
                     //OakItems.OakItem.Cell_Battery,
                 ]
-                let oakItem = SeededRand.fromArray(possibleItems);
+                const oakItem = SeededRand.fromArray(possibleItems);
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
             case "HarvestBerriesQuest":
@@ -90,7 +90,7 @@ class QuestHelper {
         }
     }
 
-    public static refreshQuests(free: boolean = false) {
+    public static refreshQuests(free = false) {
         if (free || QuestHelper.canAffordRefresh()) {
             if (!free) {
                 // TODO(@Isha) refactor to Amount
@@ -112,14 +112,14 @@ class QuestHelper {
     public static clearQuests() {
         // Empty quest list and reset completed quests
         QuestHelper.questList.splice(0, GameConstants.QUESTS_PER_SET);
-        for (let elem of player.completedQuestList) {
+        for (const elem of player.completedQuestList) {
             elem(false);
         }
     }
 
     // Returns 0 when all quests are complete, ~1 million when none are
     public static getRefreshCost(): number {
-        let notComplete = player.completedQuestList.filter((elem) => {
+        const notComplete = player.completedQuestList.filter((elem) => {
             return !elem()
         }).length;
         return Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1))
@@ -135,8 +135,8 @@ class QuestHelper {
     public static levelToXP(level: number): number {
         if (level >= 2) {
             // Sum of geometric series
-            let a = 1000, r = 1.2, n = level - 1;
-            let sum = a * (Math.pow(r, n) - 1) / (r - 1);
+            const a = 1000, r = 1.2, n = level - 1;
+            const sum = a * (Math.pow(r, n) - 1) / (r - 1);
             return Math.ceil(sum);
         } else {
             return 0;
@@ -144,8 +144,8 @@ class QuestHelper {
     }
 
     public static xpToLevel(xp: number): number {
-        let sum = xp, a = 1000, r = 1.2;
-        let n = Math.log(1 + ((r - 1) * sum) / a) / Math.log(r);
+        const sum = xp, a = 1000, r = 1.2;
+        const n = Math.log(1 + ((r - 1) * sum) / a) / Math.log(r);
         return Math.floor(n + 1);
     }
 
@@ -183,7 +183,7 @@ class QuestHelper {
     }
 
     public static quitAllQuests() {
-        let questIndexArr = player.currentQuests().map(x => x.index);
+        const questIndexArr = player.currentQuests().map(x => x.index);
         questIndexArr.forEach(index => {
             this.questList()[index].endQuest();
         });
@@ -191,7 +191,7 @@ class QuestHelper {
 
     // returns true is all quest are completed
     public static allQuestCompleted() {
-        for (let questCompleted of player.completedQuestList) {
+        for (const questCompleted of player.completedQuestList) {
             if (!questCompleted()) {
                 return false;
             }

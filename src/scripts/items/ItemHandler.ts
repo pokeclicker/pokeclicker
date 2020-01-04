@@ -14,13 +14,13 @@ class ItemHandler {
     }
 
     public static resetAmount() {
-        let input = $("input[name='amountOfStones']");
+        const input = $("input[name='amountOfStones']");
         input.val(1).change();
     }
 
     public static increaseAmount(n: number) {
-        let input = $("input[name='amountOfItems']");
-        let newVal = (parseInt(input.val().toString()) || 0) + n;
+        const input = $("input[name='amountOfItems']");
+        const newVal = (parseInt(input.val().toString()) || 0) + n;
         input.val(newVal > 1 ? newVal : 1).change();
     }
 
@@ -28,7 +28,7 @@ class ItemHandler {
         if(this.pokemonSelected() == ""){
             return Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
         }
-        let amountTotal = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
+        const amountTotal = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
         if(!amountTotal){
             return Notifier.notify(`You don't have any ${this.stoneSelected().replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
@@ -43,7 +43,7 @@ class ItemHandler {
                 break;
             }
         }
-        let multiple = amountUsed == 1 ? "" : "s";
+        const multiple = amountUsed == 1 ? "" : "s";
         Notifier.notify("You used " + amountUsed + " " + this.stoneSelected() + multiple, GameConstants.NotificationOption.success);
     }
 

@@ -14,7 +14,7 @@ class CaughtPokemon {
     breeding: KnockoutObservable<boolean>;
     evoRegion: GameConstants.Region;
 
-    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number, breeding: boolean = false) {
+    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number, breeding = false) {
         this.id = pokemonData.id;
         this.name = pokemonData.name;
         this.evolved = ev;

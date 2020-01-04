@@ -44,7 +44,7 @@ class OakItem extends ExpUpgrade {
 
 
     toJSON(): object {
-        let json = super.toJSON();
+        const json = super.toJSON();
         json["isActive"] = this.isActive;
         return json;
     }

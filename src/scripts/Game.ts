@@ -4,7 +4,7 @@
 class Game {
     interval;
     undergroundCounter: number;
-    public static achievementCounter: number = 0;
+    public static achievementCounter = 0;
 
     public breeding: Breeding;
     public pokeballs: Pokeballs;
@@ -43,9 +43,9 @@ class Game {
 
     load() {
         // TODO(@Isha) Refactor this saving logic
-        let saveJSON = localStorage.getItem("save");
+        const saveJSON = localStorage.getItem("save");
         if (saveJSON !== null) {
-            let saveObject = JSON.parse(saveJSON);
+            const saveObject = JSON.parse(saveJSON);
             this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
             this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
             this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
@@ -130,7 +130,7 @@ class Game {
         }
 
         if (Save.counter > GameConstants.SAVE_TICK) {
-            let now = new Date();
+            const now = new Date();
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
                 player.questRefreshes = 0;
                 QuestHelper.quitAllQuests();

@@ -239,7 +239,7 @@ namespace GameConstants {
         if (time == 0) {
             return "Ready"
         }
-        let sec_num = parseInt('' + time, 10); // don't forget the second param
+        const sec_num = parseInt('' + time, 10); // don't forget the second param
         let hours: any = Math.floor(sec_num / 3600);
         let minutes: any = Math.floor((sec_num - (hours * 3600)) / 60);
         let seconds: any = sec_num - (hours * 3600) - (minutes * 60);
@@ -276,7 +276,7 @@ namespace GameConstants {
     }
 
     export class Option {
-        text: String;
+        text: string;
         value: any;
 
         constructor(text, value) {

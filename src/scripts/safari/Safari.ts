@@ -3,10 +3,10 @@
 class Safari {
     static grid: Array<Array<number>>;
     static player: Point = new Point(12, 20);
-    static lastDirection: string = "up";
+    static lastDirection = "up";
     static nextDirection: string;
-    static walking: boolean = false;
-    static isMoving: boolean = false;
+    static walking = false;
+    static isMoving = false;
     static queue: Array<string> = [];
     private static playerXY = {"x": 0, "y": 0};
     private static origin;
@@ -22,7 +22,7 @@ class Safari {
         Safari.inBattle(false);
         Safari.balls(this.calculateStartPokeballs());
         for( let i = 0; i<GameConstants.Safari.SizeY; i++){
-            let row = Array.apply(null, Array(GameConstants.Safari.SizeX)).map(Number.prototype.valueOf, 0);
+            const row = Array.apply(null, Array(GameConstants.Safari.SizeX)).map(Number.prototype.valueOf, 0);
             this.grid.push(row);
         }
 
@@ -61,7 +61,7 @@ class Safari {
             x = Math.max(0, x-3);
             y = Math.max(0, y-3);
         }
-        let res = Safari.canAddBody(x, y, body);
+        const res = Safari.canAddBody(x, y, body);
         if (res || body.type === 'grass') {
             Safari.addBody(x, y, body);
         }
@@ -128,15 +128,15 @@ class Safari {
     }
 
     private static square(i: number, j: number): string {
-        let img = 'assets/images/safari/' + this.grid[i][j] + '.png';
-        let divId = "safari-" + j + "-" + i;
+        const img = 'assets/images/safari/' + this.grid[i][j] + '.png';
+        const divId = "safari-" + j + "-" + i;
 
         return "<div id='" + divId + "' style=background-image:url('" + img + "') class='col-sm-1 safariSquare'></div>"
     }
 
     private static addPlayer(i: number, j: number) {
-        let topLeft = $(`#safari-0-0`).offset();
-        let offset = {
+        const topLeft = $(`#safari-0-0`).offset();
+        const offset = {
             top: 32*j + topLeft.top,
             left: 32*i + topLeft.left
         };
@@ -178,18 +178,18 @@ class Safari {
         Safari.lastDirection = direction;
 
         Safari.sprite.toggle();
-        let directionOffset = Safari.directionToXY(direction);
+        const directionOffset = Safari.directionToXY(direction);
 
         Safari.isMoving = true;
 
-        let newPos = {
+        const newPos = {
             x: Safari.playerXY.x + directionOffset.x,
             y: Safari.playerXY.y + directionOffset.y
         };
 
         if (Safari.canMove(newPos.x, newPos.y)) {
-            let next = $(`#safari-${newPos.x}-${newPos.y}`).offset();
-            let offset = {
+            const next = $(`#safari-${newPos.x}-${newPos.y}`).offset();
+            const offset = {
                 top: `+=${directionOffset.y * 32}`,
                 left: `+=${directionOffset.x * 32}`
             }
@@ -298,7 +298,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 
     $('#safariModal').on('shown.bs.modal', function () {
-        let element = document.querySelector('#sprite');
+        const element = document.querySelector('#sprite');
         Safari.sprite = new Motio(element, {
             fps: 8,
             frames: 4

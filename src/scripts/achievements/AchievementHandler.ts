@@ -35,7 +35,7 @@ class AchievementHandler {
     }
 
     public static addAchievement(name: string, description: string, property: Requirement, bonus: number) {
-        let unlocked: boolean = player.achievementsCompleted[name];
+        const unlocked: boolean = player.achievementsCompleted[name];
         AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, unlocked));
     }
 
@@ -49,7 +49,7 @@ class AchievementHandler {
 
     public static bonusUnlocked(): number {
         let sum = 0;
-        for (let achievement of AchievementHandler.achievementList) {
+        for (const achievement of AchievementHandler.achievementList) {
             if (achievement.isCompleted()) {
                 sum += achievement.bonus;
             }

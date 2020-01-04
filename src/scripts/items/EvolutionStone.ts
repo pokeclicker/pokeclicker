@@ -4,8 +4,8 @@ class EvolutionStone extends Item {
     type: GameConstants.StoneType;
 
     constructor(type: GameConstants.StoneType) {
-        let basePrice = GameConstants.ItemPrice.EvolutionStone;
-        let priceMultiplier = 1;
+        const basePrice = GameConstants.ItemPrice.EvolutionStone;
+        const priceMultiplier = 1;
         super(GameConstants.StoneType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
         this.type = type;
     }
@@ -14,9 +14,9 @@ class EvolutionStone extends Item {
         player.gainItem(GameConstants.StoneType[this.type], n)
     }
 
-    public use(pokemon?:string) {
-        let shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
-        let evolution = EvolutionStone.computeEvolution(this.type, pokemon);
+    public use(pokemon?: string) {
+        const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
+        const evolution = EvolutionStone.computeEvolution(this.type, pokemon);
         player.capturePokemon(evolution, shiny, false);
         if (shiny) Notifier.notify(`✨ You evolved a shiny ${evolution}! ✨`, GameConstants.NotificationOption.warning);
         return shiny;
@@ -24,8 +24,8 @@ class EvolutionStone extends Item {
 
     public static computeEvolution(type: GameConstants.StoneType, pokemon: string): string {
         // Assume stones and evolutions in pokemonList are consistent in ordering
-        let pkmObj = PokemonHelper.getPokemonByName(pokemon);
-        let index = pkmObj.evoLevel.indexOf(GameConstants.StoneType[type]);
+        const pkmObj = PokemonHelper.getPokemonByName(pokemon);
+        const index = pkmObj.evoLevel.indexOf(GameConstants.StoneType[type]);
         return pkmObj.evolutionByIndex(index, true);
     }
 }

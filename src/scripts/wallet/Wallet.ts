@@ -1,6 +1,6 @@
 class Wallet implements Feature {
-    name: string = "Wallet";
-    saveKey: string = "wallet";
+    name = "Wallet";
+    saveKey = "wallet";
     currencies: ArrayOfObservables<number>;
 
     defaults = {
@@ -99,7 +99,7 @@ class Wallet implements Feature {
         if (json["currencies"] == null) {
             this.currencies = new ArrayOfObservables(this.defaults.currencies);
         } else {
-            let currenciesJson = json["currencies"];
+            const currenciesJson = json["currencies"];
             this.currencies = new ArrayOfObservables([
                 currenciesJson[GameConstants.Currency.money],
                 currenciesJson[GameConstants.Currency.questPoint],

@@ -5,7 +5,7 @@ class Achievement {
     public unlocked: boolean;
     public bonus: number;
 
-    constructor(name: string, description: string, property: Requirement, bonus:number, unlocked: boolean = false) {
+    constructor(name: string, description: string, property: Requirement, bonus: number, unlocked = false) {
         this.name = name;
         this.description = description;
         this.property = property;
