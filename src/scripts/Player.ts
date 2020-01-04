@@ -96,13 +96,7 @@ class Player {
             item.amount = ko.observable(item.amount);
         }
 
-        this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
-
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
-
-        this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
-            return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
-        });
 
         let today = new Date();
         let lastSeen = new Date(this._lastSeen);
@@ -153,9 +147,6 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     private _mineInventory: KnockoutObservableArray<any>;
-
-    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
-    private _shardsCollected: Array<KnockoutObservable<number>>;
 
     public clickAttackObservable: KnockoutComputed<number>;
     public pokemonAttackObservable: KnockoutComputed<number>;
@@ -497,22 +488,6 @@ class Player {
         this.plotList[i]().isUnlocked(true);
     }
 
-    get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
-        return this._shardUpgrades;
-    }
-
-    set shardUpgrades(value: Array<Array<KnockoutObservable<number>>>) {
-        this._shardUpgrades = value;
-    }
-
-    get shardsCollected(): Array<KnockoutObservable<number>> {
-        return this._shardsCollected;
-    }
-
-    set shardsCollected(value: Array<KnockoutObservable<number>>) {
-        this._shardsCollected = value;
-    }
-
     get questLevel(): number {
         return QuestHelper.xpToLevel(player.questXP);
     }
@@ -559,8 +534,6 @@ class Player {
             "_mineInventory",
             // TODO(@Isha) remove.
             "_mineLayersCleared",
-            "_shardUpgrades",
-            "_shardsCollected",
             "achievementsCompleted",
             "completedQuestList",
             "questRefreshes",
