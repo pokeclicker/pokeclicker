@@ -111,7 +111,7 @@ namespace GameConstants {
 
     //Safari
     export const Safari = {
-        "SizeY": Math.floor((window.innerHeight - 74 - 50) / 32),
+        "SizeY": Math.floor((window.innerHeight - 150) / 32),
         "SizeX": 25,
     }
 
