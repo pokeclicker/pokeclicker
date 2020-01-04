@@ -22,6 +22,9 @@ class Shards implements Feature {
     }
 
     public gainShards(amt: number, typeNum: GameConstants.PokemonType) {
+        if (!this.canAccess()) {
+            return;
+        }
         this.shardWallet[typeNum] += amt;
         if (amt > 0) {
             GameHelper.incrementObservable(
@@ -91,6 +94,16 @@ class Shards implements Feature {
         if (json != null) {
             this.shardWallet = new ArrayOfObservables(json['shardWallet']);
             this.shardUpgrades = new ArrayOfObservables(json['shardUpgrades']);
+        }
+    }
+
+    public openShardModal() {
+        if (this.canAccess()) {
+            $('#shardModal').modal('show');
+        } else {
+            Notifier.notify(
+                "You do not have the Shard Case", 
+                GameConstants.NotificationOption.warning);
         }
     }
 }
