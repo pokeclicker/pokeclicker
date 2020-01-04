@@ -69,8 +69,7 @@ class SafariBattle {
                         }
 
                         setTimeout(function(){
-                            const oakBonus = OakItemRunner.isActive(GameConstants.OakItem.Magic_Ball) ?
-                                OakItemRunner.calculateBonus(GameConstants.OakItem.Magic_Ball) : 0;
+                            const oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
                             if (random * 100 < SafariBattle.enemy.catchFactor + oakBonus){
                                 SafariBattle.capturePokemon();
                                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');

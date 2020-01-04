@@ -9,7 +9,6 @@ class App {
         }
 
         Preload.load(App.debug).then(function () {
-            OakItemRunner.initialize();
             UndergroundItem.initialize();
             App.game = new Game(
                 new Breeding(),
@@ -17,6 +16,7 @@ class App {
                 new Wallet(),
                 new KeyItems(),
                 new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion),
+                new OakItems([20, 50, 100]),
                 new Shards()
                 );
 
