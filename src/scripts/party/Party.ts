@@ -57,7 +57,7 @@ class Party implements Feature {
             if (pokemon.levelObservable() < (App.game.badgeCase.badgeCount() + 2) * 10) {
                 pokemon.exp += expTotal;
             }
-            pokemon.checkForEvolution();
+            pokemon.checkForLevelEvolution();
         }
     }
 
@@ -149,11 +149,9 @@ class Party implements Feature {
         }
 
         let caughtPokemonSave = json["caughtPokemon"];
-        console.log(caughtPokemonSave);
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             let partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);
-            console.log(partyPokemon);
             this.caughtPokemon.push(partyPokemon)
         }
 

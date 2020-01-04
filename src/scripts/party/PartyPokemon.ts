@@ -78,13 +78,13 @@ class PartyPokemon implements Saveable {
         return Math.max(1, Math.min(100, Math.floor(level)));
     }
 
-    public checkForEvolution() {
+    public checkForLevelEvolution() {
         if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
             return;
         }
 
         for (let evolution of this.evolutions) {
-            if (evolution.isSatisfied()) {
+            if (evolution instanceof LevelEvolution && evolution.isSatisfied()) {
                 evolution.evolve()
             }
         }

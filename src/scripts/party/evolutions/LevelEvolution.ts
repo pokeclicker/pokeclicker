@@ -16,7 +16,7 @@ class LevelEvolution extends Evolution {
     }
 
     evolve(): boolean {
-        if (this.type == EvolutionType.Level && this.triggered ){
+        if (this.triggered ){
             return;
         }
         this.triggered = true;
