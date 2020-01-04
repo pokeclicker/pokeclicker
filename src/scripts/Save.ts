@@ -131,7 +131,7 @@ class Save {
                 return ko.observable(plot)
             })
         } else {
-            plotList = Array.apply(null, Array(GameConstants.AMOUNT_OF_PLOTS)).map(function (val, index) {
+            plotList = [...Array(GameConstants.AMOUNT_OF_PLOTS)].map(function (val, index) {
                 if (index == 0) {
                     return ko.observable(new Plot(true, 0, 0, false, null, 0));
                 }

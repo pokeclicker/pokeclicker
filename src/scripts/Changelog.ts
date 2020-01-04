@@ -1,3 +1,13 @@
+const changelogType = {
+    VERSION: '<code>',
+    NEW: '<span class="badge badge-success">NEW</span>',
+    CHANGE: '<span class="badge badge-primary">CHANGE</span>',
+    FIXED: '<span class="badge badge-warning">FIXED</span>',
+    REMOVED: '<span class="badge badge-danger">REMOVED</span>',
+    DEFAULT: '<span class="badge badge-default">-</span>', // unused - can be changed
+    INFO: '<span class="badge badge-info">INFO</span>', // unused - can be changed
+};
+
 class Changelog {
     public type: string;
     public description: string;
@@ -9,16 +19,6 @@ class Changelog {
             this.description += '</code>';
     }
 }
-
-const changelogType = {
-    VERSION: '<code>',
-    NEW: '<span class="badge badge-success">NEW</span>',
-    CHANGE: '<span class="badge badge-primary">CHANGE</span>',
-    FIXED: '<span class="badge badge-warning">FIXED</span>',
-    REMOVED: '<span class="badge badge-danger">REMOVED</span>',
-    DEFAULT: '<span class="badge badge-default">-</span>', // unused - can be changed
-    INFO: '<span class="badge badge-info">INFO</span>', // unused - can be changed
-};
 
 const changelogItems = [
     new Changelog(changelogType.VERSION, 'v1.0.3'),

@@ -56,14 +56,14 @@ class Player {
             });
         }
         this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
-        this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES + 1)).map(function (val, index) {
+        this._routeKills = [...Array(GameConstants.AMOUNT_OF_ROUTES + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
 
-        this._defeatedAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
+        this._defeatedAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0)
         });
-        this._caughtAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
+        this._caughtAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0)
         });
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
@@ -100,7 +100,7 @@ class Player {
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
 
-        this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
+        this._shardsCollected = [...Array<number>(18)].map((value, index) => {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
 
@@ -113,7 +113,7 @@ class Player {
                     return ko.observable(bool)
                 });
             } else {
-                this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {
+                this.completedQuestList = [...Array(GameConstants.QUESTS_PER_SET)].map(() => {
                     return ko.observable(false)
                 });
             }
@@ -124,7 +124,7 @@ class Player {
             }
         } else {
             this.questRefreshes = 0;
-            this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {
+            this.completedQuestList = [...Array(GameConstants.QUESTS_PER_SET)].map(() => {
                 return ko.observable(false)
             });
             this.currentQuests = ko.observableArray([]);
@@ -136,7 +136,7 @@ class Player {
         this._lastSeen = Date.now();
         this.statistics = new Statistics(savedPlayer.statistics);
 
-        this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
+        this.berryList = [...Array(GameConstants.AMOUNT_OF_BERRIES)].map(function (val, index) {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
         });
         this.plotList = Save.initializePlots(savedPlayer.plotList);
