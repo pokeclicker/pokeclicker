@@ -21,16 +21,13 @@ class Shards implements Feature {
         this.shardUpgrades = new ArrayOfObservables(this.defaults.shardUpgrades);
     }
 
-    public gainShards(pokemon: BattlePokemon) {
-        let typeNum = GameConstants.PokemonType[pokemon.type1];
-        this.shardWallet[typeNum] += pokemon.shardReward;
-        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
-        
-        if (pokemon.type2 != GameConstants.PokemonType.None) {
-            typeNum = GameConstants.PokemonType[pokemon.type2];
-            this.shardWallet[typeNum] += pokemon.shardReward;
-            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
+    public gainShards(amt: number, typeNum: GameConstants.PokemonType) {
+        this.shardWallet[typeNum] += amt;
+        if (amt > 0) {
+            GameHelper.incrementObservable(
+                player.statistics.totalShards[typeNum], amt);
         }
+        console.log(amt, GameConstants.PokemonType[typeNum])
     }
 
     public getShardUpgradeCost(
@@ -62,7 +59,7 @@ class Shards implements Feature {
         effectNum: GameConstants.TypeEffectiveness
     ) {
         if (this.canBuyShardUpgrade(typeNum, effectNum)) {
-            this.shardWallet[typeNum] -= this.getShardUpgradeCost(typeNum, effectNum);
+            this.gainShards(-this.getShardUpgradeCost(typeNum, effectNum), typeNum);
             this.shardUpgrades[typeNum * Shards.nEffects + effectNum] ++;
         }
     }

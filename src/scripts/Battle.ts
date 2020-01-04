@@ -54,7 +54,7 @@ class Battle {
         GameHelper.incrementObservable(player.statistics.pokemonDefeated);
         App.game.wallet.gainMoney(this.enemyPokemon().money);
         player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
-        App.game.shards.gainShards(this.enemyPokemon());
+        this.gainShardsAfterBattle();
         player.addRouteKill();
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
         const pokemonName: string = this.enemyPokemon().name;
@@ -78,6 +78,18 @@ class Battle {
         this.gainItem();
         player.lowerItemMultipliers();
         player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
+    }
+
+    protected static gainShardsAfterBattle() {
+        let pokemon: BattlePokemon = this.enemyPokemon();
+
+        let typeNum = GameConstants.PokemonType[pokemon.type1];
+        App.game.shards.gainShards(pokemon.shardReward, typeNum);
+
+        if (pokemon.type2 != GameConstants.PokemonType.None) {
+            typeNum = GameConstants.PokemonType[pokemon.type2];
+            App.game.shards.gainShards(pokemon.shardReward, typeNum);
+        }
     }
 
     /**
