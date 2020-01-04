@@ -38,7 +38,7 @@
                             <button class='btn btn-primary'
                                     data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},
                                         css: {disabled: !App.game.shards.canBuyShardUpgrade($parentContext.$index(), $index())},
-                                        text: (App.game.shards.shardUpgradeMaxed($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
+                                        text: (App.game.shards.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
                             </button>
                         </td>
                     </tr>

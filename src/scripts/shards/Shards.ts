@@ -35,7 +35,7 @@ class Shards implements Feature {
         return cost;
     }
 
-    public shardUpgradeMaxed(
+    public hasMaxUpgrade(
         typeNum: GameConstants.PokemonType, 
         effectNum: GameConstants.TypeEffectiveness
     ): boolean {
@@ -46,7 +46,7 @@ class Shards implements Feature {
             typeNum: GameConstants.PokemonType, 
             effectNum: GameConstants.TypeEffectiveness
     ): boolean {  
-        let lessThanMax = !this.shardUpgradeMaxed(typeNum, effectNum);
+        let lessThanMax = !this.hasMaxUpgrade(typeNum, effectNum);
         let hasEnoughShards = this.shardWallet[typeNum] >= this.getShardUpgradeCost(typeNum, effectNum);
         return lessThanMax && hasEnoughShards;
     }
