@@ -787,7 +787,7 @@ const pokemonList: {
         "levelType": "mediumfast",
         "exp": 63,
         "eggCycles": 20,
-        "evolutions": [new LevelEvolution("Slowpoke", "Slowbro", 37), new StoneEvolution("Slowpoke", "SlowKing", GameConstants.StoneType.Kings_rock)],
+        "evolutions": [new LevelEvolution("Slowpoke", "Slowbro", 37), new StoneEvolution("Slowpoke", "Slowking", GameConstants.StoneType.Kings_rock)],
     }, {
         "id": 80,
         "name": "Slowbro",
