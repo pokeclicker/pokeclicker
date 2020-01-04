@@ -23,12 +23,12 @@
                         <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
                             <div class="center margin-bottom-sm">
                                 <button id="paySafariButton" 
-                                    class="btn btn-primary" 
+                                    class="btn" 
                                     onclick="Safari.payEntranceFee()"
-                                    data-bind="class: Safari.canPay() ? '' : 'disabled'">
+                                    data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
                                     Pay Entrance Fee
                                 </button>
-                                <span id="safariEntranceCost" data-bind="text: `${Safari.cost()} Quest Points`"></span>
+                                <span id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></span>
                             </div>
                             <img class='fit-width' src="../assets/images/safari/area1.png" />
                         </div>

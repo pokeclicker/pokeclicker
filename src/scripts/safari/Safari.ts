@@ -130,12 +130,12 @@ class Safari {
 
     private static canPay() {
         // TODO
-        return true;
+        return App.game.wallet.hasAmount(Safari.cost());
     }
 
     private static cost() {
         // TODO
-        return 100;
+        return new Amount(50,GameConstants.Currency.questPoint);
     }
 
     private static payEntranceFee() {
@@ -143,7 +143,7 @@ class Safari {
             // TODO add increasing cost back
             //typeof player.safariCostModifier == undefined ? 1 : player.safariCostModifier++;
             
-            App.game.wallet.loseAmount(new Amount(Safari.cost(),GameConstants.Currency.questPoint))
+            App.game.wallet.loseAmount(Safari.cost())
             Safari.load()
         }
     }
