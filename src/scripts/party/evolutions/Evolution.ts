@@ -14,6 +14,9 @@ abstract class Evolution {
     }
 
     evolve(notification: boolean = false): boolean {
+        if (PokemonHelper.calcNativeRegion(this.evolvedPokemon) > player.highestRegion()) {
+            return false;
+        }
         if (notification) {
             Notifier.notify(`Your ${this.basePokemon} evolved into a ${this.evolvedPokemon}`, GameConstants.NotificationOption.success);
         }
