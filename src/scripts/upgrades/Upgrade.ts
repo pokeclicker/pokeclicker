@@ -1,4 +1,9 @@
-class Upgrade {
+class Upgrade implements Saveable {
+    defaults = {
+        level: 0
+    };
+    saveKey: string;
+
     name: any;
     displayName: string;
     maxLevel: number;
@@ -14,10 +19,11 @@ class Upgrade {
     bonusList: number[] = [];
 
     constructor(name: any, displayName: string, maxLevel: number, costList: Amount[], bonusList: number[], increasing = true) {
+        this.saveKey = name;
         this.name = name;
         this.displayName = displayName;
         this.maxLevel = maxLevel;
-        this.level = 0;
+        this.level = this.defaults.level;
         this.costList = costList;
         this.bonusList = bonusList;
         this.increasing = increasing;
@@ -61,6 +67,19 @@ class Upgrade {
 
     levelUp() {
         this.level = this.level + 1;
+    }
+
+    fromJSON(json: object): void {
+        if (json == null) {
+            return
+        }
+        this.level = json["level"] ?? this.defaults.level;
+    }
+
+    toJSON(): object {
+        return {
+            level: this.level
+        }
     }
 
     // Knockout getters/setters

@@ -39,7 +39,7 @@ class Battle {
         if (!this.enemyPokemon().isAlive()) {
             return;
         }
-        OakItemRunner.use(GameConstants.OakItem.Poison_Barb);
+        App.game.oakItems.use(OakItems.OakItem.Poison_Barb);
         GameHelper.incrementObservable(player.statistics.clicks)
         this.enemyPokemon().damage(player.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
@@ -91,8 +91,7 @@ class Battle {
 
     protected static calculateActualCatchRate(pokeBall: GameConstants.Pokeball) {
         let pokeballBonus = App.game.pokeballs.getCatchBonus(pokeBall);
-        let oakBonus = OakItemRunner.isActive(GameConstants.OakItem.Magic_Ball) ?
-            OakItemRunner.calculateBonus(GameConstants.OakItem.Magic_Ball) : 0;
+        let oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
         let totalChance = GameConstants.clipNumber(this.enemyPokemon().catchRate + pokeballBonus + oakBonus, 0, 100);
         return totalChance;
     }

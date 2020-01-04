@@ -124,11 +124,8 @@ class Underground {
 
     public static gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
-            let multiplier = 1;
-            if (OakItemRunner.isActive(GameConstants.OakItem.Cell_Battery)) {
-                multiplier += (OakItemRunner.calculateBonus(GameConstants.OakItem.Cell_Battery) / 100);
-            }
-            this.energy = Math.min(this.getMaxEnergy(), this.energy + (multiplier * this.getEnergyGain()));
+            let oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
+            this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
                 Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
             }
@@ -180,12 +177,16 @@ class Underground {
     }
 
     public static openUndergroundModal() {
-        if (player.hasKeyItem("Explorer kit")) {
+        if (this.canAccess()) {
             App.game.gameState = GameConstants.GameState.paused;
             $('#mineModal').modal('show');
         } else {
             Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
         }
+    }
+
+    private static canAccess() {
+        return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 
     public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {

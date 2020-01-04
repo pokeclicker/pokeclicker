@@ -1,3 +1,5 @@
+///<reference path="./badgeCase/BadgeCase.ts" />
+
 /**
  * Contains all game constants for easy access.
  */
@@ -31,7 +33,6 @@ namespace GameConstants {
         809, // 88
     ];
 
-    export const AMOUNT_OF_BADGES = 16;
     export const ITEM_USE_TIME = 30;
 
     export const ROAMING_MIN_CHANCE = 8192;
@@ -53,18 +54,7 @@ namespace GameConstants {
     export const ITEM_PRICE_MULTIPLIER = 1.001;
     export const ITEM_PRICE_DEDUCT = 1.0005;
 
-
-
     export const PLATE_VALUE = 100;
-
-    // Oak items
-    export const OAKITEM_XP_REQUIREMENT = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE];
-    export const OAKITEM_MONEY_COST = [1000, 2500, 5000, 10000, 20000, Number.MAX_VALUE,];
-    export const AMOUNT_OF_OAKITEMS = 8;
-    export const OAKITEM_MAX_LEVEL = 5;
-    export const OAKITEM_FIRST_UNLOCK = 20;
-    export const OAKITEM_SECOND_UNLOCK = 50;
-    export const OAKITEM_THIRD_UNLOCK = 100;
 
     // Breeding
     export const BREEDING_AMOUNT = 1;
@@ -82,17 +72,6 @@ namespace GameConstants {
         Taller,
         Bloom,
         Berry
-    }
-
-    export enum OakItem {
-        Magic_Ball = 0,
-        Amulet_Coin,
-        Poison_Barb,
-        Exp_Share,
-        Sprayduck,
-        Shiny_Charm,
-        Blaze_Cassette,
-        Cell_Battery,
     }
 
     // Dungeons
@@ -328,48 +307,6 @@ namespace GameConstants {
         return Math.min(Math.max(num, min), max);
     }
 
-    export enum Badge {
-        "None" = 0,
-        "Boulder" = 1,
-        "Cascade" = 2,
-        "Thunder" = 3,
-        "Rainbow" = 4,
-        "Soul" = 5,
-        "Marsh" = 6,
-        "Volcano" = 7,
-        "Earth" = 8,
-        "Elite_Lorelei" = 9,
-        "Elite_Bruno" = 10,
-        "Elite_Agatha" = 11,
-        "Elite_Lance" = 12,
-        "Elite_Champion" = 13,
-        "Zephyr" = 14,
-        "Hive" = 15,
-        "Plain" = 16,
-        "Fog" = 17,
-        "Storm" = 18,
-        "Mineral" = 19,
-        "Glacier" = 20,
-        "Rising" = 21,
-        "Elite_Will" = 22,
-        "Elite_Koga" = 23,
-        "Elite_Bruno2" = 24,
-        "Elite_Karen" = 25,
-        "Elite_JohtoChampion" = 26,
-        "Stone" = 27,
-        "Knuckle" = 28,
-        "Dynamo" = 29,
-        "Heat" = 30,
-        "Balance" = 31,
-        "Feather" = 32,
-        "Mind" = 33,
-        "Rain" = 34,
-        "Elite_Sidney" = 35,
-        "Elite_Phoebe" = 36,
-        "Elite_Glacia" = 37,
-        "Elite_Drake" = 38,
-        "Elite_HoennChampion" = 39,
-    }
 
     export enum PokemonType {
         "None" = -1,
@@ -510,41 +447,41 @@ namespace GameConstants {
 
     export const routeBadgeRequirements = {
         0: {
-            3: GameConstants.Badge.Boulder,
-            5: GameConstants.Badge.Cascade,
-            7: GameConstants.Badge.Thunder,
-            8: GameConstants.Badge.Thunder,
-            9: GameConstants.Badge.Cascade,
-            11: GameConstants.Badge.Thunder,
-            12: GameConstants.Badge.Marsh,
-            13: GameConstants.Badge.Marsh,
-            16: GameConstants.Badge.Marsh,
-            19: GameConstants.Badge.Soul,
-            21: GameConstants.Badge.Volcano,
-            22: GameConstants.Badge.Earth,
-            24: GameConstants.Badge.Cascade,
+            3: BadgeCase.Badge.Boulder,
+            5: BadgeCase.Badge.Cascade,
+            7: BadgeCase.Badge.Thunder,
+            8: BadgeCase.Badge.Thunder,
+            9: BadgeCase.Badge.Cascade,
+            11: BadgeCase.Badge.Thunder,
+            12: BadgeCase.Badge.Marsh,
+            13: BadgeCase.Badge.Marsh,
+            16: BadgeCase.Badge.Marsh,
+            19: BadgeCase.Badge.Soul,
+            21: BadgeCase.Badge.Volcano,
+            22: BadgeCase.Badge.Earth,
+            24: BadgeCase.Badge.Cascade,
         },
         1: {
-            28: GameConstants.Badge.Elite_JohtoChampion,
-            32: GameConstants.Badge.Zephyr,
-            34: GameConstants.Badge.Hive,
-            35: GameConstants.Badge.Plain,
-            38: GameConstants.Badge.Fog,
-            42: GameConstants.Badge.Mineral,
-            43: GameConstants.Badge.Glacier,
-            44: GameConstants.Badge.Glacier,
-            45: GameConstants.Badge.Rising,
+            28: BadgeCase.Badge.Elite_JohtoChampion,
+            32: BadgeCase.Badge.Zephyr,
+            34: BadgeCase.Badge.Hive,
+            35: BadgeCase.Badge.Plain,
+            38: BadgeCase.Badge.Fog,
+            42: BadgeCase.Badge.Mineral,
+            43: BadgeCase.Badge.Glacier,
+            44: BadgeCase.Badge.Glacier,
+            45: BadgeCase.Badge.Rising,
         },
         2: {
-            116: GameConstants.Badge.Stone,
-            117: GameConstants.Badge.Knuckle,
-            111: GameConstants.Badge.Dynamo,
-            112: GameConstants.Badge.Heat,
-            105: GameConstants.Badge.Balance,
-            118: GameConstants.Badge.Balance,
-            120: GameConstants.Badge.Feather,
-            126: GameConstants.Badge.Mind,
-            127: GameConstants.Badge.Rain,
+            116: BadgeCase.Badge.Stone,
+            117: BadgeCase.Badge.Knuckle,
+            111: BadgeCase.Badge.Dynamo,
+            112: BadgeCase.Badge.Heat,
+            105: BadgeCase.Badge.Balance,
+            118: BadgeCase.Badge.Balance,
+            120: BadgeCase.Badge.Feather,
+            126: BadgeCase.Badge.Mind,
+            127: BadgeCase.Badge.Rain,
         }
     };
 
@@ -616,8 +553,6 @@ namespace GameConstants {
         "Egg": 1000,
         "EvolutionStone": 2500,
 
-        "Dungeon_ticket": 250,
-        "Explorer_kit": 5000,
     };
 
     export enum StoneType {
@@ -693,11 +628,6 @@ namespace GameConstants {
         Dragon_egg,
         Pokemon_egg,
         Mystery_egg,
-    }
-
-    export enum KeyItemType {
-        Dungeon_ticket,
-        Explorer_kit,
     }
 
     export enum EggType {

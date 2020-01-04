@@ -51,7 +51,7 @@ class Breeding implements Feature {
     }
 
     canAccess(): boolean {
-        return player.hasKeyItem("Mystery egg");
+        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Mystery_egg);
     }
 
     fromJSON(json: object): void {
@@ -117,9 +117,8 @@ class Breeding implements Feature {
     }
 
     public progressEggs(amount: number) {
-        if (OakItemRunner.isActive(GameConstants.OakItem.Blaze_Cassette)) {
-            amount *= (1 + OakItemRunner.calculateBonus(GameConstants.OakItem.Blaze_Cassette) / 100)
-        }
+        amount *= App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette);
+
         amount = Math.round(amount);
         for (let obj of this._eggList) {
             // TODO(@Isha) fix this properly.
@@ -128,7 +127,7 @@ class Breeding implements Feature {
                 continue;
             }
             egg.steps(egg.steps() + amount);
-            if (OakItemRunner.isActive(GameConstants.OakItem.Shiny_Charm)) {
+            if (App.game.oakItems.isActive(OakItems.OakItem.Shiny_Charm)) {
                 egg.shinySteps += amount;
             }
             if (egg.steps() >= egg.totalSteps) {
@@ -186,7 +185,7 @@ class Breeding implements Feature {
 
         this._eggList[index](null);
         GameHelper.incrementObservable(player.statistics.hatchedEggs);
-        OakItemRunner.use(GameConstants.OakItem.Blaze_Cassette);
+        App.game.oakItems.use(OakItems.OakItem.Blaze_Cassette);
     }
 
     public createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {

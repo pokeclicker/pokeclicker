@@ -62,8 +62,8 @@ class GymRunner {
         Notifier.notify("Congratulations, you defeated " + GymBattle.gym.leaderName + "!", GameConstants.NotificationOption.success);
         this.gymObservable(gym);
         App.game.wallet.gainMoney(gym.moneyReward);
-        if (!player.hasBadge(gym.badgeReward)) {
-            player.gainBadge(gym.badgeReward);
+        if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
+            App.game.badgeCase.gainBadge(gym.badgeReward);
 
             $('#receiveBadgeModal').modal('show');
         }
@@ -82,8 +82,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
 
-       if(GymBattle.gym.badgeReward == GameConstants.Badge.Soul){
-           player.gainKeyItem("Safari ticket");
+       if(GymBattle.gym.badgeReward == BadgeCase.Badge.Soul){
+           App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket);
        }
 
     });
