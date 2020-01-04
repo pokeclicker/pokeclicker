@@ -3,15 +3,32 @@
 
 class PokemonHelper {
 
-    public static getPokemonsWithEvolution(evoType: string) {
-        //TODO fix
-        // return pokemonList.filter(function (pokemon) {
-        //     if (pokemon.evoLevel && pokemon.evoLevel.includes(evoType)) {
-        //         return !!PokemonHelper.getPokemonByName(pokemon.name).evolutionByIndex(pokemon.evoLevel.indexOf(evoType), true);
-        //     }
-        // });
+    public static getPokemonsWithEvolution(evoType: GameConstants.StoneType) {
+        return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
+            if (!partyPokemon.evolutions) {
+                return false
+            }
+            for (let evolution of partyPokemon.evolutions) {
+                if (evolution instanceof StoneEvolution && evolution.stone == evoType) {
+                    return true;
+                }
+            }
+            return false;
+        });
     }
 
+    public static getEvolution(base: string, evoType: GameConstants.StoneType) {
+        for (let pokemon of App.game.party.caughtPokemon){
+            if (pokemon.name == base){
+                for (let evolution of pokemon.evolutions){
+                    if (evolution instanceof StoneEvolution && evolution.stone == evoType) {
+                        return evolution.evolvedPokemon;
+                    }
+                }
+            }
+        }
+        return ""
+    }
 
     public static getPokemonById(id: number): DataPokemon {
         return this.getPokemonByName(pokemonMapId[id].name);

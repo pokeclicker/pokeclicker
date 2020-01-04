@@ -29,7 +29,7 @@
                         <div class="row no-gutters justify-content-sm-center" style="padding:15px">
                             <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0"
                                  style="padding-right: 0"
-                                 data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(ItemHandler.stoneSelected())">
+                                 data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
                                 <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem"
                                     data-bind="visible: (App.game.party.alreadyCaughtPokemonByName($data.name))">
                                     <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
@@ -37,13 +37,11 @@
                                         <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
-                                        <span style="float:right; margin-top:8px">
-                                            <img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-small.png"
-                                                data-bind="visible: App.game.party.alreadyCaughtPokemonByName(EvolutionStone.computeEvolution(
-                                                GameConstants.StoneType[ItemHandler.stoneSelected()], name)) && !PokemonHelper.getPokemonByName(name).evolutionByIndex(PokemonHelper.getPokemonByName(name).evoLevel.indexOf(ItemHandler.stoneSelected()), true, true).every(p => App.game.party.alreadyCaughtPokemonByName(p, true))"/>
-                                            <img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"
-                                                data-bind="visible: PokemonHelper.getPokemonByName(name).evolutionByIndex(PokemonHelper.getPokemonByName(name).evoLevel.indexOf(ItemHandler.stoneSelected()), true, true).every(p => App.game.party.alreadyCaughtPokemonByName(p, true))"/>
-                                        </span>
+                                        <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status':
+                                            PartyController.getCaughtStatus(
+                                                PokemonHelper.getEvolution($data.name, GameConstants.StoneType[ItemHandler.stoneSelected()])
+                                                )
+                                            }}"></span>
                                     </button>
                                 </div>
                             </div>
