@@ -23,6 +23,9 @@ class Party implements Feature {
     }
 
     gainPokemon(pokemon: PartyPokemon, shiny: boolean = false) {
+        if (shiny) {
+            player.shinyCatches++;
+        }
         // Already have it shiny
         if (this.alreadyCaughtPokemon(pokemon.id, true)) {
             return;
