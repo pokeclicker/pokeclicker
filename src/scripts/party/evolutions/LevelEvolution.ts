@@ -3,6 +3,8 @@
 class LevelEvolution extends Evolution {
 
     level: number;
+    triggered: boolean;
+
 
     constructor(basePokemon: string, evolvedPokemon: string, level: number) {
         super(basePokemon, evolvedPokemon, EvolutionType.Level);
@@ -11,5 +13,13 @@ class LevelEvolution extends Evolution {
 
     isSatisfied() : boolean{
         return App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id).levelObservable() >= this.level;
+    }
+
+    evolve(): boolean {
+        if (this.type == EvolutionType.Level && this.triggered ){
+            return;
+        }
+        this.triggered = true;
+        return super.evolve();
     }
 }

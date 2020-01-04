@@ -11,7 +11,6 @@ class PartyPokemon implements Saveable {
     id: number;
     name: string;
 
-    evolved: boolean;
     _baseAttack: KnockoutObservable<number>;
     attackBonus: number;
     _exp: KnockoutObservable<number>;
@@ -79,33 +78,8 @@ class PartyPokemon implements Saveable {
         return Math.max(1, Math.min(100, Math.floor(level)));
     }
 
-    public fromJSON(json: object): void {
-        if (json == null) {
-            return;
-        }
-
-        if (json["id"] == null) {
-            return
-        }
-
-        this.evolved = json["evolved"] ?? this.defaults.evolved;
-        this.attackBonus = json["attackBonus"] ?? this.defaults.attackBonus;
-        this.exp = json["exp"] ?? this.defaults.exp;
-        this.breeding = json["breeding"] ?? this.defaults.breeding;
-    }
-
-    public toJSON() {
-        return {
-            id: this.id,
-            evolved: this.evolved,
-            attackBonus: this.attackBonus,
-            exp: this.exp,
-            breeding: this.breeding
-        };
-    }
-
     public checkForEvolution() {
-        if (this.evolved || this.breeding || this.evolutions == null || this.evolutions.length == 0) {
+        if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
             return;
         }
 
@@ -116,13 +90,54 @@ class PartyPokemon implements Saveable {
         }
     }
 
-    public useStone(type: GameConstants.StoneType) : boolean{
+    public useStone(type: GameConstants.StoneType): boolean {
         for (let evolution of this.evolutions) {
             if (evolution instanceof StoneEvolution && evolution.stone == type) {
                 return evolution.evolve()
             }
         }
         return false;
+    }
+
+    public fromJSON(json: object): void {
+        if (json == null) {
+            return;
+        }
+
+        if (json["id"] == null) {
+            return
+        }
+
+        this.attackBonus = json["attackBonus"] ?? this.defaults.attackBonus;
+        this.exp = json["exp"] ?? this.defaults.exp;
+        this.breeding = json["breeding"] ?? this.defaults.breeding;
+
+        if (this.evolutions != null) {
+            for (let evolution of this.evolutions) {
+                if (evolution instanceof LevelEvolution) {
+                    evolution.triggered = json["levelEvolutionTriggered"];
+                }
+            }
+        }
+
+    }
+
+    public toJSON() {
+        let levelEvolutionTriggered = false;
+        if (this.evolutions != null) {
+            for (let evolution of this.evolutions) {
+                if (evolution instanceof LevelEvolution && evolution.triggered) {
+                    levelEvolutionTriggered = true;
+                }
+            }
+        }
+        return {
+            id: this.id,
+            attackBonus: this.attackBonus,
+            exp: this.exp,
+            breeding: this.breeding,
+            levelEvolutionTriggered: levelEvolutionTriggered
+        };
     }
 
     // Knockout getters/setter
