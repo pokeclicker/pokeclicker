@@ -11,12 +11,12 @@ class LevelEvolution extends Evolution {
         this.level = level;
     }
 
-    isSatisfied() : boolean{
+    isSatisfied(): boolean {
         return App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id).levelObservable() >= this.level;
     }
 
     evolve(): boolean {
-        if (this.triggered ){
+        if (this.triggered) {
             return;
         }
         this.triggered = true;
