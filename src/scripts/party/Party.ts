@@ -23,6 +23,9 @@ class Party implements Feature {
     }
 
     gainPokemon(pokemon: PartyPokemon, shiny: boolean = false) {
+        player.caughtAmount[pokemon.id](player.caughtAmount[pokemon.id]() + 1);
+        GameHelper.incrementObservable(player.statistics.pokemonCaptured);
+
         if (shiny) {
             player.shinyCatches++;
         }
@@ -40,8 +43,6 @@ class Party implements Feature {
             return;
         }
         Notifier.notify(`You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, GameConstants.NotificationOption.success);
-        player.caughtAmount[pokemon.id](player.caughtAmount[pokemon.id]() + 1);
-        GameHelper.incrementObservable(player.statistics.pokemonCaptured);
         this.caughtPokemon.push(pokemon);
 
     }
