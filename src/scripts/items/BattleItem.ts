@@ -12,10 +12,6 @@ class BattleItem extends Item {
         this.description = description;
     }
 
-    gain(amt: number) {
-        player.gainItem(this.name(), amt);
-    }
-
     use() {
         EffectEngineRunner.addEffect(this.name());
     }
