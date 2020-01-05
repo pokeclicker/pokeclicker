@@ -8,7 +8,7 @@ class PokemonHelper {
             if (!partyPokemon.evolutions) {
                 return false
             }
-            for (let evolution of partyPokemon.evolutions) {
+            for (const evolution of partyPokemon.evolutions) {
                 if (evolution instanceof StoneEvolution && evolution.stone == evoType && PokemonHelper.calcNativeRegion(evolution.evolvedPokemon) <= player.highestRegion()) {
                     return true;
                 }
@@ -18,16 +18,16 @@ class PokemonHelper {
     }
 
     public static getEvolution(id: number, evoType: GameConstants.StoneType) {
-        for (let pokemon of App.game.party.caughtPokemon){
+        for (const pokemon of App.game.party.caughtPokemon){
             if (pokemon.id == id){
-                for (let evolution of pokemon.evolutions){
+                for (const evolution of pokemon.evolutions){
                     if (evolution instanceof StoneEvolution && evolution.stone == evoType) {
                         return evolution.evolvedPokemon;
                     }
                 }
             }
         }
-        return "";
+        return '';
     }
 
     public static getPokemonById(id: number): DataPokemon {
@@ -35,16 +35,16 @@ class PokemonHelper {
     }
 
     public static getPokemonByName(name: string): DataPokemon {
-        let basePokemon = pokemonMap[name];
+        const basePokemon = pokemonMap[name];
         if (!basePokemon) {
-            console.log("Could not find pokemon", name);
+            console.log('Could not find pokemon', name);
             return;
         }
 
-        let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
-        let evoLevel = basePokemon["evoLevel"];
-        let eggCycles: number = basePokemon["eggCycles"] || 20;
-        return new DataPokemon(basePokemon["id"], basePokemon["name"], basePokemon["catchRate"], basePokemon["evolutions"], basePokemon["evolution"], evoLevel, basePokemon["type"][0], type2, basePokemon["attack"], basePokemon["levelType"], basePokemon["exp"], eggCycles);
+        const type2: GameConstants.PokemonType = basePokemon['type'][1] || GameConstants.PokemonType.None;
+        const evoLevel = basePokemon['evoLevel'];
+        const eggCycles: number = basePokemon['eggCycles'] || 20;
+        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], basePokemon['evolution'], evoLevel, basePokemon['type'][0], type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles);
     }
 
     public static typeStringToId(id: string) {
@@ -55,31 +55,31 @@ class PokemonHelper {
         return GameConstants.PokemonType[id];
     }
 
-    public static getImage(pokemon: pokemonInterface, shiny: boolean): string {
-        let src = "assets/images/";
+    public static getImage(pokemon: PokemonInterface, shiny: boolean): string {
+        let src = 'assets/images/';
         if (shiny) {
-            src += "shiny";
+            src += 'shiny';
         }
-        src += "pokemon/" + pokemon.id + ".png";
+        src += `pokemon/${pokemon.id}.png`;
         return src;
     }
 
     public static getPokeballImage(pokemonName: string): string {
-        let src = ""
+        let src = ''
         if (App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
-            src = "assets/images/pokeball/Pokeball-";
+            src = 'assets/images/pokeball/Pokeball-';
             if (App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true)) {
-                src += "shiny-";
+                src += 'shiny-';
             }
-            src += "small.png";
+            src += 'small.png';
         }
         return src;
     }
 
 
     public static calcNativeRegion(pokemonName: string) {
-        let pokemon = PokemonHelper.getPokemonByName(pokemonName);
-        let id = pokemon.id;
+        const pokemon = PokemonHelper.getPokemonByName(pokemonName);
+        const id = pokemon.id;
         if (id > 251) {
             return GameConstants.Region.hoenn;
         } else if (id > 151) {

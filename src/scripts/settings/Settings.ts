@@ -30,7 +30,7 @@ class Settings {
 
     }
 
-    static getSetting(name: string) : Setting {
+    static getSetting(name: string): Setting {
         for (let i = 0; i < this.list.length; i++) {
             if (this.list[i].name == name) {
                 return this.list[i]
@@ -79,13 +79,13 @@ Settings.add(
 
 Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
     [
-        new GameConstants.Option("Pokedex #", SortOptions.id),
-        new GameConstants.Option("Name", SortOptions.name),
-        new GameConstants.Option("Attack", SortOptions.attack),
-        new GameConstants.Option("Level", SortOptions.levelObservable),
-        new GameConstants.Option("Shiny", SortOptions.shiny),
+        new GameConstants.Option('Pokedex #', SortOptions.id),
+        new GameConstants.Option('Name', SortOptions.name),
+        new GameConstants.Option('Attack', SortOptions.attack),
+        new GameConstants.Option('Level', SortOptions.levelObservable),
+        new GameConstants.Option('Shiny', SortOptions.shiny),
     ],
     SortOptions.id
 ));
 
-Settings.add(new BooleanSetting("partySortDirection", "reverse", false));
+Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));

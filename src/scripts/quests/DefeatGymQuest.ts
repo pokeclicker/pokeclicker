@@ -9,21 +9,21 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     private static getDescription(gymTown: string, amount: number): string {
         let desc = `Defeat ${gymTown} `;
-        if (gymTown.indexOf("Elite") == -1 && gymTown.indexOf("Champion") == -1) {
-            desc += "gym ";
+        if (gymTown.indexOf('Elite') == -1 && gymTown.indexOf('Champion') == -1) {
+            desc += 'gym ';
         }
         desc += `${amount} times.`;
         return desc;
     }
 
     private static calcReward(gymTown: string, amount: number): number {
-        let gym = gymList[gymTown];
+        const gym = gymList[gymTown];
         if (gym instanceof Champion) {
             gym.setPokemon(player.starter);
         }
-        let playerDamage = App.game.party.calculatePokemonAttack();
+        const playerDamage = App.game.party.calculatePokemonAttack();
         let attacksToWin = 0;
-        for (let pokemon of gym.pokemons) {
+        for (const pokemon of gym.pokemons) {
             attacksToWin += Math.ceil( Math.min( 4, pokemon.maxHealth / Math.max(1, playerDamage) ) );
         }
         return Math.ceil(attacksToWin * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount);

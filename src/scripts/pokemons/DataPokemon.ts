@@ -1,4 +1,4 @@
-class DataPokemon implements pokemonInterface {
+class DataPokemon implements PokemonInterface {
     id: number;
     name: string;
     catchRate: number;

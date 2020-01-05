@@ -1,8 +1,8 @@
 enum LevelType {
-    "erratic",
-    "slow",
-    "mediumslow",
-    "mediumfast",
-    "fast",
-    "fluctuating"
+    'erratic',
+    'slow',
+    'mediumslow',
+    'mediumfast',
+    'fast',
+    'fluctuating'
 }

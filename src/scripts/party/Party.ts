@@ -1,7 +1,7 @@
 ///<reference path="CaughtStatus.ts"/>
 class Party implements Feature {
-    name: string = "Pokemon Party";
-    saveKey: string = "party";
+    name = 'Pokemon Party';
+    saveKey = 'party';
 
     caughtPokemon: ObservableArrayProxy<PartyPokemon>;
     shinyPokemon: ObservableArrayProxy<number>;
@@ -18,11 +18,11 @@ class Party implements Feature {
         this.shinyPokemon = new ObservableArrayProxy(this.defaults.shinyPokemon);
     }
 
-    gainPokemonById(id: number, shiny: boolean = false) {
+    gainPokemonById(id: number, shiny = false) {
         this.gainPokemon(PokemonFactory.generatePartyPokemon(id), shiny);
     }
 
-    gainPokemon(pokemon: PartyPokemon, shiny: boolean = false) {
+    gainPokemon(pokemon: PartyPokemon, shiny = false) {
         player.caughtAmount[pokemon.id](player.caughtAmount[pokemon.id]() + 1);
         GameHelper.incrementObservable(player.statistics.pokemonCaptured);
 
@@ -47,18 +47,18 @@ class Party implements Feature {
 
     }
 
-    public gainExp(exp: number = 0, level: number = 1, trainer: boolean = false) {
+    public gainExp(exp = 0, level = 1, trainer = false) {
         App.game.oakItems.use(OakItems.OakItem.Exp_Share);
-        let trainerBonus = trainer ? 1.5 : 1;
-        let oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
+        const trainerBonus = trainer ? 1.5 : 1;
+        const oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()) {
             expTotal *= 1.5;
         }
 
-        let maxLevel = (App.game.badgeCase.badgeCount() + 2) * 10;
-        for (let pokemon of this.caughtPokemon) {
+        const maxLevel = (App.game.badgeCase.badgeCount() + 2) * 10;
+        for (const pokemon of this.caughtPokemon) {
             if (pokemon.levelObservable() < maxLevel) {
                 pokemon.exp += expTotal;
             }
@@ -74,7 +74,7 @@ class Party implements Feature {
      */
     public calculatePokemonAttack(type1: GameConstants.PokemonType = GameConstants.PokemonType.None, type2: GameConstants.PokemonType = GameConstants.PokemonType.None): number {
         let attack = 0;
-        for (let pokemon of this.caughtPokemon) {
+        for (const pokemon of this.caughtPokemon) {
             let multiplier = 1;
             if (player.region !== GameHelper.getRegion(pokemon.id)) {
                 // Pokemon only retain 20% of their total damage in other regions.
@@ -84,7 +84,7 @@ class Party implements Feature {
                 if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
                     attack += pokemon.attack() * multiplier;
                 } else {
-                    let dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                    const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                     attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
                 }
             }
@@ -114,11 +114,11 @@ class Party implements Feature {
         return false;
     }
 
-    alreadyCaughtPokemonByName(name: string, shiny: boolean = false) {
+    alreadyCaughtPokemonByName(name: string, shiny = false) {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
 
-    alreadyCaughtPokemon(id: number, shiny: boolean = false) {
+    alreadyCaughtPokemon(id: number, shiny = false) {
         for (let i = 0; i < this.caughtPokemon.length; i++) {
             if (this.caughtPokemon[i].id === id) {
                 return (!shiny || this.shinyPokemon.includes(id));
@@ -153,14 +153,14 @@ class Party implements Feature {
             return
         }
 
-        let caughtPokemonSave = json["caughtPokemon"];
+        const caughtPokemonSave = json['caughtPokemon'];
         for (let i = 0; i < caughtPokemonSave.length; i++) {
-            let partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
+            const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);
             this.caughtPokemon.push(partyPokemon)
         }
 
-        this.shinyPokemon = new ObservableArrayProxy<number>(json["shinyPokemon"] ?? this.defaults.shinyPokemon);
+        this.shinyPokemon = new ObservableArrayProxy<number>(json['shinyPokemon'] ?? this.defaults.shinyPokemon);
     }
 
     initialize(): void {
@@ -169,7 +169,7 @@ class Party implements Feature {
     toJSON(): object {
         return {
             caughtPokemon: this.caughtPokemon.map(x => x.toJSON()),
-            shinyPokemon: this.shinyPokemon.map(x => x)
+            shinyPokemon: this.shinyPokemon.map(x => x),
         }
     }
 

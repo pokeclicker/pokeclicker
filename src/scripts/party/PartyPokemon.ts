@@ -5,7 +5,7 @@ class PartyPokemon implements Saveable {
         evolved: false,
         attackBonus: 0,
         exp: 0,
-        breeding: false
+        breeding: false,
     };
 
     id: number;
@@ -20,7 +20,7 @@ class PartyPokemon implements Saveable {
     attack: KnockoutComputed<number>;
 
 
-    constructor(id: number, name: string, evolutions: Evolution[], baseAttack: number, attackBonus: number, exp: number, breeding: boolean = false) {
+    constructor(id: number, name: string, evolutions: Evolution[], baseAttack: number, attackBonus: number, exp: number, breeding = false) {
         this.id = id;
         this.name = name;
         this.attackBonus = attackBonus;
@@ -41,15 +41,15 @@ class PartyPokemon implements Saveable {
     }
 
     public calculateAttack(): number {
-        let attackBonusMultiplier = 1 + (this.attackBonus / 100);
-        let levelMultiplier = this.levelObservable() / 100;
+        const attackBonusMultiplier = 1 + (this.attackBonus / 100);
+        const levelMultiplier = this.levelObservable() / 100;
         return Math.max(1, Math.floor(this.baseAttack * attackBonusMultiplier * levelMultiplier));
     }
 
 
     public calculateLevel(): number {
         let level;
-        let levelType = PokemonHelper.getPokemonByName(this.name).levelType;
+        const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
         switch (levelType) {
 
             case LevelType.slow:
@@ -73,7 +73,7 @@ class PartyPokemon implements Saveable {
                 level = Math.pow(this.exp * 5 / 4, 1 / 3);
                 break;
             default:
-                console.log("Could not find levelType: ", levelType);
+                console.log('Could not find levelType: ', levelType);
                 level = Math.pow(30 * this.exp, 0.475) / (6 * Math.sqrt(5));
                 break;
         }
@@ -85,7 +85,7 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        for (let evolution of this.evolutions) {
+        for (const evolution of this.evolutions) {
             if (evolution instanceof LevelEvolution && evolution.isSatisfied()) {
                 evolution.evolve()
             }
@@ -93,7 +93,7 @@ class PartyPokemon implements Saveable {
     }
 
     public useStone(type: GameConstants.StoneType): boolean {
-        for (let evolution of this.evolutions) {
+        for (const evolution of this.evolutions) {
             if (evolution instanceof StoneEvolution && evolution.stone == type) {
                 return evolution.evolve()
             }
@@ -106,18 +106,18 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        if (json["id"] == null) {
+        if (json['id'] == null) {
             return
         }
 
-        this.attackBonus = json["attackBonus"] ?? this.defaults.attackBonus;
-        this.exp = json["exp"] ?? this.defaults.exp;
-        this.breeding = json["breeding"] ?? this.defaults.breeding;
+        this.attackBonus = json['attackBonus'] ?? this.defaults.attackBonus;
+        this.exp = json['exp'] ?? this.defaults.exp;
+        this.breeding = json['breeding'] ?? this.defaults.breeding;
 
         if (this.evolutions != null) {
-            for (let evolution of this.evolutions) {
+            for (const evolution of this.evolutions) {
                 if (evolution instanceof LevelEvolution) {
-                    evolution.triggered = json["levelEvolutionTriggered"];
+                    evolution.triggered = json['levelEvolutionTriggered'];
                 }
             }
         }
@@ -127,7 +127,7 @@ class PartyPokemon implements Saveable {
     public toJSON() {
         let levelEvolutionTriggered = false;
         if (this.evolutions != null) {
-            for (let evolution of this.evolutions) {
+            for (const evolution of this.evolutions) {
                 if (evolution instanceof LevelEvolution && evolution.triggered) {
                     levelEvolutionTriggered = true;
                 }
@@ -138,7 +138,7 @@ class PartyPokemon implements Saveable {
             attackBonus: this.attackBonus,
             exp: this.exp,
             breeding: this.breeding,
-            levelEvolutionTriggered: levelEvolutionTriggered
+            levelEvolutionTriggered: levelEvolutionTriggered,
         };
     }
 

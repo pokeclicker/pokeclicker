@@ -4,8 +4,8 @@ class EvolutionStone extends Item {
     type: GameConstants.StoneType;
 
     constructor(type: GameConstants.StoneType) {
-        let basePrice = GameConstants.ItemPrice.EvolutionStone;
-        let priceMultiplier = 1;
+        const basePrice = GameConstants.ItemPrice.EvolutionStone;
+        const priceMultiplier = 1;
         super(GameConstants.StoneType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
         this.type = type;
     }
@@ -14,9 +14,9 @@ class EvolutionStone extends Item {
         player.gainItem(GameConstants.StoneType[this.type], n)
     }
 
-    public use(pokemon?:string) {
-        let partyPokemon : PartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id);
-        let shiny = partyPokemon.useStone(this.type);
+    public use(pokemon?: string) {
+        const partyPokemon: PartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id);
+        const shiny = partyPokemon.useStone(this.type);
         return shiny;
     }
 }

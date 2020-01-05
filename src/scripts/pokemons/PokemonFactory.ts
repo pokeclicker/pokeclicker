@@ -69,7 +69,7 @@ class PokemonFactory {
     }
 
     public static generatePartyPokemon(id: number) {
-        let dataPokemon = PokemonHelper.getPokemonById(id);
+        const dataPokemon = PokemonHelper.getPokemonById(id);
         return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false);
     }
 

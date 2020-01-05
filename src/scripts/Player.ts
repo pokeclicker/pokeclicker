@@ -12,10 +12,6 @@ class Player {
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
-    get defeatedAmount(): Array<KnockoutObservable<number>> {
-        return this._defeatedAmount;
-    }
-
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
@@ -24,7 +20,7 @@ class Player {
     private _starter: GameConstants.Starter;
 
     constructor(savedPlayer?) {
-        let saved: boolean = (savedPlayer != null);
+        const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
         this._region = ko.observable(savedPlayer._region);
@@ -44,26 +40,26 @@ class Player {
             }
         }
 
-        this._routeKills = Array.apply(null, Array(GameConstants.AMOUNT_OF_ROUTES + 1)).map(function (val, index) {
+        this._routeKills = [...Array(GameConstants.AMOUNT_OF_ROUTES + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
 
-        this._defeatedAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
+        this._defeatedAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0)
         });
-        this._caughtAmount = Array.apply(null, Array(pokemonList.length + 1)).map(function (val, index) {
+        this._caughtAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0)
         });
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        this._town = ko.observable(TownList["Pallet Town"]);
-        this._currentTown = ko.observable("");
+        this._town = ko.observable(TownList['Pallet Town']);
+        this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
 
         console.log(savedPlayer._itemList);
 
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
-            for (let key in savedPlayer._itemList) {
+            for (const key in savedPlayer._itemList) {
                 this._itemList[key] = ko.observable(savedPlayer._itemList[key]);
             }
         }
@@ -72,7 +68,7 @@ class Player {
 
         // TODO(@Isha) move to underground classes.
         this.mineInventory = new ObservableArrayProxy(savedPlayer.mineInventory || []);
-        for (let item of this.mineInventory) {
+        for (const item of this.mineInventory) {
             item.amount = ko.observable(item.amount);
         }
 
@@ -80,12 +76,12 @@ class Player {
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
 
-        this._shardsCollected = Array.apply(null, Array<number>(18)).map((value, index) => {
+        this._shardsCollected = [...Array<number>(18)].map((value, index) => {
             return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
         });
 
-        let today = new Date();
-        let lastSeen = new Date(this._lastSeen);
+        const today = new Date();
+        const lastSeen = new Date(this._lastSeen);
         if (today.toLocaleDateString() == lastSeen.toLocaleDateString()) {
             this.questRefreshes = savedPlayer.questRefreshes;
             if (savedPlayer.completedQuestList) {
@@ -93,18 +89,18 @@ class Player {
                     return ko.observable(bool)
                 });
             } else {
-                this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {
+                this.completedQuestList = [...Array(GameConstants.QUESTS_PER_SET)].map(() => {
                     return ko.observable(false)
                 });
             }
 
             this.currentQuests = ko.observableArray(savedPlayer.currentQuests || []);
-            for (let q of this.currentQuests()) {
+            for (const q of this.currentQuests()) {
                 q.initial = ko.observable(q.initial);
             }
         } else {
             this.questRefreshes = 0;
-            this.completedQuestList = Array.apply(null, Array(GameConstants.QUESTS_PER_SET)).map(() => {
+            this.completedQuestList = [...Array(GameConstants.QUESTS_PER_SET)].map(() => {
                 return ko.observable(false)
             });
             this.currentQuests = ko.observableArray([]);
@@ -116,7 +112,7 @@ class Player {
         this._lastSeen = Date.now();
         this.statistics = new Statistics(savedPlayer.statistics);
 
-        this.berryList = Array.apply(null, Array(GameConstants.AMOUNT_OF_BERRIES)).map(function (val, index) {
+        this.berryList = [...Array(GameConstants.AMOUNT_OF_BERRIES)].map(function (val, index) {
             return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
         });
         this.plotList = Save.initializePlots(savedPlayer.plotList);
@@ -136,10 +132,6 @@ class Player {
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
-
-    get itemList(): { [p: string]: KnockoutObservable<number> } {
-        return this._itemList;
-    }
 
     public statistics: Statistics;
 
@@ -175,10 +167,18 @@ class Player {
         this._defeatedAmount = value;
     }
 
+    get defeatedAmount(): Array<KnockoutObservable<number>> {
+        return this._defeatedAmount;
+    }
+
     private _caughtAmount: Array<KnockoutObservable<number>>;
 
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
+    }
+
+    get itemList(): { [p: string]: KnockoutObservable<number> } {
+        return this._itemList;
     }
 
     public gainShards(pokemon: BattlePokemon) {
@@ -204,13 +204,13 @@ class Player {
     }
 
     public canBuyShardUpgrade(typeNum: number, effectNum: number): boolean {
-        let lessThanMax = !this.shardUpgradeMaxed(typeNum, effectNum);
-        let hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
+        const lessThanMax = !this.shardUpgradeMaxed(typeNum, effectNum);
+        const hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
         return lessThanMax && hasEnoughShards;
     }
 
     public getShardUpgradeCost(typeNum: number, effectNum: number): number {
-        let cost = (this._shardUpgrades[typeNum][effectNum]() + 1) * GameConstants.SHARD_UPGRADE_COST;
+        const cost = (this._shardUpgrades[typeNum][effectNum]() + 1) * GameConstants.SHARD_UPGRADE_COST;
         return cost;
     }
 
@@ -293,8 +293,8 @@ class Player {
     }
 
     public lowerItemMultipliers() {
-        for (let obj in ItemList) {
-            let item = ItemList[obj];
+        for (const obj in ItemList) {
+            const item = ItemList[obj];
             item.decreasePriceMultiplier();
         }
     }
@@ -310,8 +310,8 @@ class Player {
     }
 
     public getRandomBerry() {
-        let i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
-        Notifier.notify("You got a " + GameConstants.BerryType[i] + " berry!", GameConstants.NotificationOption.success);
+        const i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
+        Notifier.notify(`You got a ${GameConstants.BerryType[i]} berry!`, GameConstants.NotificationOption.success);
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {
@@ -333,7 +333,7 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public getUndergroundItemAmount(id: number) {
-        let index = this.mineInventoryIndex(id);
+        const index = this.mineInventoryIndex(id);
         if (index > -1) {
             return player.mineInventory[index].amount();
         } else {
@@ -373,9 +373,9 @@ class Player {
     }
 
     public percentToNextQuestLevel(): number {
-        let current = this.questLevel;
-        let requiredForCurrent = QuestHelper.levelToXP(current);
-        let requiredForNext = QuestHelper.levelToXP(current + 1);
+        const current = this.questLevel;
+        const requiredForCurrent = QuestHelper.levelToXP(current);
+        const requiredForNext = QuestHelper.levelToXP(current + 1);
         return 100 * (this.questXP - requiredForCurrent) / (requiredForNext - requiredForCurrent);
     }
 
@@ -396,41 +396,41 @@ class Player {
     }
 
     public toJSON() {
-        let keep = [
-            "_route",
-            "_defeatedAmount",
-            "_caughtAmount",
-            "_routeKills",
-            "_routeKillsNeeded",
-            "_region",
-            "_starter",
-            "_itemList",
-            "_itemMultipliers",
+        const keep = [
+            '_route',
+            '_defeatedAmount',
+            '_caughtAmount',
+            '_routeKills',
+            '_routeKillsNeeded',
+            '_region',
+            '_starter',
+            '_itemList',
+            '_itemMultipliers',
             // TODO(@Isha) remove.
-            "mineInventory",
+            'mineInventory',
             // TODO(@Isha) remove.
-            "_mineLayersCleared",
-            "_shardUpgrades",
-            "_shardsCollected",
-            "achievementsCompleted",
-            "completedQuestList",
-            "questRefreshes",
-            "_questXP",
-            "_lastSeen",
-            "currentQuests",
-            "_shinyCatches",
-            "gymDefeats",
-            "statistics",
-            "achievementsCompleted",
-            "plotList",
-            "berryList",
-            "effectList",
-            "highestRegion",
-            "tutorialProgress",
-            "tutorialState",
-            "tutorialComplete",
+            '_mineLayersCleared',
+            '_shardUpgrades',
+            '_shardsCollected',
+            'achievementsCompleted',
+            'completedQuestList',
+            'questRefreshes',
+            '_questXP',
+            '_lastSeen',
+            'currentQuests',
+            '_shinyCatches',
+            'gymDefeats',
+            'statistics',
+            'achievementsCompleted',
+            'plotList',
+            'berryList',
+            'effectList',
+            'highestRegion',
+            'tutorialProgress',
+            'tutorialState',
+            'tutorialComplete',
         ];
-        let plainJS = ko.toJS(this);
+        const plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)
     }
 }
