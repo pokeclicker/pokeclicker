@@ -58,7 +58,7 @@ class MapHelper {
             		}
           	}
 
-          	Notifier.notify("You don't have access to that route yet." + reqsList, GameConstants.NotificationOption.warning);
+          	Notifier.notify(`You don't have access to that route yet.${reqsList}`, GameConstants.NotificationOption.warning);
         }
     };
 
@@ -108,7 +108,7 @@ class MapHelper {
 
         // Water routes
         if (GameConstants.WaterRoutes[region].has(route))  {
-            cls = cls + ' waterRoute';
+            cls = `${cls} waterRoute`;
         }
 
         return cls
@@ -187,7 +187,7 @@ class MapHelper {
             		}
           	}
 
-            Notifier.notify("You don't have access to that location yet." + reqsList, GameConstants.NotificationOption.warning);
+            Notifier.notify(`You don't have access to that location yet.${reqsList}`, GameConstants.NotificationOption.warning);
         }
     };
 

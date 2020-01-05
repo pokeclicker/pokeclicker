@@ -108,7 +108,7 @@ class Breeding implements Feature {
                 return true;
             }
         }
-        console.log('Error: Could not place ' + GameConstants.EggType[e.type] + ' Egg');
+        console.log(`Error: Could not place ${GameConstants.EggType[e.type]} Egg`);
         return false;
     }
 
@@ -132,7 +132,7 @@ class Breeding implements Feature {
             }
             if (egg.steps() >= egg.totalSteps) {
                 if (egg.type == GameConstants.EggType.Pokemon) {
-                    Notifier.notify(egg.pokemon + ' is ready to hatch!', GameConstants.NotificationOption.success);
+                    Notifier.notify(`${egg.pokemon} is ready to hatch!`, GameConstants.NotificationOption.success);
                 } else {
                     Notifier.notify('An egg is ready to hatch!', GameConstants.NotificationOption.success);
                 }

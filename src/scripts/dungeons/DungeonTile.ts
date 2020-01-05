@@ -21,6 +21,6 @@ class DungeonTile {
             this.cssClass('tile tile-player');
             return;
         }
-        this.cssClass('tile tile-' + GameConstants.DungeonTile[this.type()]);
+        this.cssClass(`tile tile-${GameConstants.DungeonTile[this.type()]}`);
     }
 }

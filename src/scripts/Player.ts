@@ -489,7 +489,7 @@ class Player {
 
     public getRandomBerry() {
         const i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
-        Notifier.notify('You got a ' + GameConstants.BerryType[i] + ' berry!', GameConstants.NotificationOption.success);
+        Notifier.notify(`You got a ${GameConstants.BerryType[i]} berry!`, GameConstants.NotificationOption.success);
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {

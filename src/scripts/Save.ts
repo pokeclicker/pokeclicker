@@ -46,10 +46,10 @@ class Save {
 
     public static download() {
         const element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(btoa(JSON.stringify(player))));
+        element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(player)))}`);
         const currentdate = new Date();
         const datestr = currentdate.toISOString().replace('T', ' ').slice(0, 19);
-        const filename = 'PokeClickerSave_' + datestr + '.txt';
+        const filename = `PokeClickerSave_${datestr}.txt`;
         element.setAttribute('download', filename);
 
         element.style.display = 'none';
@@ -214,7 +214,7 @@ class Save {
             }
         }
         if (converted.length > 0) {
-            Notifier.notify('You have gained the following shinies: ' + converted, GameConstants.NotificationOption.success)
+            Notifier.notify(`You have gained the following shinies: ${converted}`, GameConstants.NotificationOption.success)
         }
     }
 }

@@ -55,7 +55,7 @@ class ExpUpgrade extends Upgrade {
 
     get progressString(): string {
         const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return Math.round(this.normalizedExp) + '/' + nextLevelExp
+        return `${Math.round(this.normalizedExp)}/${nextLevelExp}`
     }
 
     // Private as external sources should use gainExp and normalizedExp

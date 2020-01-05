@@ -10,7 +10,7 @@ class PokedexHelper {
         if (pokemon.type2 == GameConstants.PokemonType.None) {
             return TypeColor[pokemon.type1];
         }
-        return 'linear-gradient(90deg,' + TypeColor[pokemon.type1] + ' 50%, ' + TypeColor[pokemon.type2] + ' 50%)';
+        return `linear-gradient(90deg,${TypeColor[pokemon.type1]} 50%, ${TypeColor[pokemon.type2]} 50%)`;
     }
 
     /**
@@ -105,7 +105,7 @@ class PokedexHelper {
         if (player.alreadyCaughtPokemonShiny(name)) {
             src += 'shiny';
         }
-        src += 'pokemon/' + id + '.png';
+        src += `pokemon/${id}.png`;
         return src;
     }
 }

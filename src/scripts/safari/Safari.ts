@@ -167,10 +167,10 @@ class Safari {
     }
 
     private static square(i: number, j: number): string {
-        const img = 'assets/images/safari/' + this.grid[i][j] + '.png';
-        const divId = 'safari-' + j + '-' + i;
+        const img = `assets/images/safari/${this.grid[i][j]}.png`;
+        const divId = `safari-${j}-${i}`;
 
-        return "<div id='" + divId + "' style=background-image:url('" + img + "') class='safariSquare'></div>";
+        return `<div id='${divId}' style=background-image:url('${img}') class='safariSquare'></div>`;
     }
 
     private static addPlayer(i: number, j: number) {
@@ -180,7 +180,7 @@ class Safari {
             left: 32*i + topLeft.left,
         };
         $('#safariBody').append("<div id='sprite'></div>");
-        $('#sprite').css('background',  "url('assets/images/safari/walk" + Safari.lastDirection + ".png')");
+        $('#sprite').css('background',  `url('assets/images/safari/walk${Safari.lastDirection}.png')`);
         $('#sprite').css('position', 'absolute');
         $('#sprite').offset( offset );
         Safari.playerXY.x = i;
@@ -244,7 +244,7 @@ class Safari {
                 left: `+=${directionOffset.x * 32}`,
             }
 
-            $('#sprite').css('background', "url('assets/images/safari/walk"+direction+".png')");
+            $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
             $('#sprite').animate(offset, 250, 'linear', function() {
@@ -253,7 +253,7 @@ class Safari {
                 if(Safari.walking){ if (!Safari.checkBattle() && Safari.queue[0]){Safari.step(Safari.queue[0])} }
             });
         } else {
-            $('#sprite').css('background', "url('assets/images/safari/walk"+direction+".png')");
+            $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
             setTimeout(function(){
                 Safari.walking = false;
                 Safari.isMoving = false;

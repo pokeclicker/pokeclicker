@@ -20,8 +20,8 @@ class GameController {
 
     static animateCurrency(amount: number, target) {
         let pos;
-        if ($('#' + target).offset()) {
-            pos = $('#' + target).offset();
+        if ($(`#${target}`).offset()) {
+            pos = $(`#${target}`).offset();
             pos.top -= 15;
         } else {
             pos = {'top': -200, 'left': 0};
@@ -33,7 +33,7 @@ class GameController {
         for (let i = 0; i < place; i++) {
             multi *= 10;
         }
-        const ani = '<p style="z-index:50;position:absolute;left:' + left + 'px;top:' + pos.top + 'px; font-size:' + (10 + 0.5 * Math.log(amount)) + 'px;">+' + amount.toLocaleString('en-US') + '</p>';
+        const ani = `<p style="z-index:50;position:absolute;left:${left}px;top:${pos.top}px; font-size:${10 + 0.5 * Math.log(amount)}px;">+${amount.toLocaleString('en-US')}</p>`;
         $(ani).prependTo('body').animate({
             top: 10,
             opacity: 0,

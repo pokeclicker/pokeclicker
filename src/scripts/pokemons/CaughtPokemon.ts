@@ -71,7 +71,7 @@ class CaughtPokemon {
                 const evoRegion = PokemonHelper.calcNativeRegion(evolution);
                 this.evolver[index] = this.levelObservable.subscribe(() => {
                     if (this.levelObservable() >= evo && player.highestRegion() >= evoRegion) {
-                        Notifier.notify('Your ' + this.name + ' has evolved into a ' + evolution, GameConstants.NotificationOption.success);
+                        Notifier.notify(`Your ${this.name} has evolved into a ${evolution}`, GameConstants.NotificationOption.success);
                         player.capturePokemon(evolution, false, true);
                         player.caughtAmount[this.id](player._caughtAmount[this.id]() + 1);
                         this.evolved = true;

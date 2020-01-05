@@ -66,7 +66,7 @@ class AchievementHandler {
     }
 
     public static achievementBonusPercent(): string {
-        return (100 * AchievementHandler.achievementBonus()).toFixed(2) + '%';
+        return `${(100 * AchievementHandler.achievementBonus()).toFixed(2)}%`;
     }
 
     public static initialize() {
@@ -176,9 +176,9 @@ class AchievementHandler {
 
         for (let i = 1; i <= GameConstants.AMOUNT_OF_ROUTES_KANTO; i++) {
 
-            AchievementHandler.addAchievement('Route ' + i + ' traveler', 'Defeat 100 Pokémon on route ' + i, new RouteKillRequirement(100, i), 0.02);
-            AchievementHandler.addAchievement('Route ' + i + ' explorer', 'Defeat 1,000 Pokémon on route ' + i, new RouteKillRequirement(1000, i), 0.05);
-            AchievementHandler.addAchievement('Route ' + i + ' conqueror', 'Defeat 10,000 Pokémon on route ' + i, new RouteKillRequirement(10000, i), 0.10);
+            AchievementHandler.addAchievement(`Route ${i} traveler`, `Defeat 100 Pokémon on route ${i}`, new RouteKillRequirement(100, i), 0.02);
+            AchievementHandler.addAchievement(`Route ${i} explorer`, `Defeat 1,000 Pokémon on route ${i}`, new RouteKillRequirement(1000, i), 0.05);
+            AchievementHandler.addAchievement(`Route ${i} conqueror`, `Defeat 10,000 Pokémon on route ${i}`, new RouteKillRequirement(10000, i), 0.10);
         }
 
         for (let i = 0; i < GameConstants.KantoGyms.length; i++) {

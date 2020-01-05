@@ -72,9 +72,9 @@ abstract class Quest {
 
         this.progressText = ko.computed(function() {
             if (this.initial() !== null) {
-                return '' + Math.min((this.questFocus() - this.initial()), this.amount) +'/' +  this.amount;
+                return `${Math.min((this.questFocus() - this.initial()), this.amount)}/${this.amount}`;
             } else {
-                return '0/'+this.amount;
+                return `0/${this.amount}`;
             }
         }, this);
         this.isCompleted = ko.computed(function() {

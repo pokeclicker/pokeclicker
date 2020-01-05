@@ -58,11 +58,11 @@ class GameHelper {
 
     public static formatAmount(n: number): string {
         if (n >= 1e9){
-            return Math.floor(n / 1e9) + 'b';
+            return `${Math.floor(n / 1e9)}b`;
         } else if (n >= 1e6){
-            return Math.floor(n / 1e6) + 'm';
+            return `${Math.floor(n / 1e6)}m`;
         } else if (n >= 1e3){
-            return Math.floor(n / 1e3) + 'k';
+            return `${Math.floor(n / 1e3)}k`;
         }
         return `${n}`;
     }

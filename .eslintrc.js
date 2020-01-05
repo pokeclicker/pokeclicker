@@ -28,5 +28,7 @@ module.exports = {
     'comma-dangle': ['error', { 'arrays': 'always-multiline', 'objects': 'always-multiline', 'imports': 'always-multiline', 'exports': 'always-multiline' }],
     'quotes': ['error', 'single', { 'avoidEscape': true }],
     'no-useless-concat': 'error',
+    'prefer-template': 'warn',
+    'template-curly-spacing': ['error', 'never'],
   }
 }

@@ -27,7 +27,7 @@ class SafariBattle {
             SafariBattle.busy = true;
             Safari.balls(Safari.balls()-1);
 
-            $('#safariEnemy').css('transition-duration',(0.75*SafariBattle.Speed.enemyTransition)+'ms');
+            $('#safariEnemy').css('transition-duration',`${0.75*SafariBattle.Speed.enemyTransition}ms`);
             SafariBattle.text('You throw a ball...');
             const enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
@@ -66,7 +66,7 @@ class SafariBattle {
 
     private static startBounce() {
         return new Promise((resolve,reject)=>{
-            $('body').css('animation-duration',(1.6*SafariBattle.Speed.ballBounce)+'ms');
+            $('body').css('animation-duration',`${1.6*SafariBattle.Speed.ballBounce}ms`);
             $('#safariEnemy > img').css('opacity', '0');
             SafariBattle.particle.addClass('bounce');
             resolve();
@@ -79,7 +79,7 @@ class SafariBattle {
             const catchF = SafariBattle.enemy.catchFactor / 100;
             const index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
             if (index != 0) {
-                $('body').css('animation-duration',SafariBattle.Speed.ballRoll+'ms');
+                $('body').css('animation-duration',`${SafariBattle.Speed.ballRoll}ms`);
                 SafariBattle.startRoll(index);
             }
             resolve([random,index]);
@@ -138,7 +138,7 @@ class SafariBattle {
     public static throwBait() {
         if(!SafariBattle.busy){
             SafariBattle.busy = true;
-            SafariBattle.text('You throw some bait at ' + SafariBattle.enemy.name);
+            SafariBattle.text(`You throw some bait at ${SafariBattle.enemy.name}`);
             SafariBattle.enemy.eating = Math.max(SafariBattle.enemy.eating, Math.floor(Math.random()*5 + 2));
             SafariBattle.enemy.angry = 0;
             const enemy = $('#safariEnemy').offset();
@@ -152,7 +152,7 @@ class SafariBattle {
     public static throwRock() {
         if(!SafariBattle.busy) {
             SafariBattle.busy = true;
-            SafariBattle.text('You throw a rock at ' + SafariBattle.enemy.name);
+            SafariBattle.text(`You throw a rock at ${SafariBattle.enemy.name}`);
             SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Math.floor(Math.random() * 5 + 2));
             SafariBattle.enemy.eating = 0;
             const enemy = $('#safariEnemy').offset();
@@ -198,14 +198,14 @@ class SafariBattle {
         // Enemy turn to flee;
         const random = Math.floor(Math.random()*100);
         if( random < SafariBattle.enemy.escapeFactor){
-            SafariBattle.text(SafariBattle.enemy.name + ' has fled.');
+            SafariBattle.text(`${SafariBattle.enemy.name} has fled.`);
             setTimeout(SafariBattle.endBattle, 1000);
         } else if(SafariBattle.enemy.eating > 0) {
-            SafariBattle.text(SafariBattle.enemy.name + ' is eating.');
+            SafariBattle.text(`${SafariBattle.enemy.name} is eating.`);
         } else if(SafariBattle.enemy.angry > 0) {
-            SafariBattle.text(SafariBattle.enemy.name + ' is angry!');
+            SafariBattle.text(`${SafariBattle.enemy.name} is angry!`);
         } else {
-            SafariBattle.text(SafariBattle.enemy.name + ' is watching carefully...');
+            SafariBattle.text(`${SafariBattle.enemy.name} is watching carefully...`);
         }
         SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating-1);
         SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry-1);
@@ -244,7 +244,7 @@ class SafariBattle {
         p.css('position','absolute');
         p.offset(pos);
         if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
-        p[0].style.transition = 'left ' + time + 'ms linear, top ' + time + 'ms '+top;
+        p[0].style.transition = `left ${time}ms linear, top ${time}ms ${top}`;
         p.offset(target);
         if (!persistentParticle) {
             setTimeout(function() {

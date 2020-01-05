@@ -150,7 +150,7 @@ class FarmRunner {
         if (plot.getStage() <= 1) {
             return 'assets/images/farm/AllTreeSeedIII.png'
         }
-        return 'assets/images/farm/' + GameConstants.BerryType[plot.berry().type] + 'Tree' + GameConstants.PlotStage[plot.getStage()] + 'III.png';
+        return `assets/images/farm/${GameConstants.BerryType[plot.berry().type]}Tree${GameConstants.PlotStage[plot.getStage()]}III.png`;
     }
 }
 
