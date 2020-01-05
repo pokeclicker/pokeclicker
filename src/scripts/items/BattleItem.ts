@@ -12,7 +12,7 @@ class BattleItem extends Item {
         this.description = description;
     }
 
-    buy(amt: number) {
+    gain(amt: number) {
         player.gainItem(this.name(), amt);
     }
 
