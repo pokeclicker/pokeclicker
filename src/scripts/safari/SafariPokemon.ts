@@ -6,8 +6,9 @@ class SafariPokemon implements pokemonInterface {
     shiny: boolean;
     baseCatchFactor: number;
     baseEscapeFactor: number;
-    angry: number;
-    eating: number;
+    private _angry: KnockoutObservable<number>;
+    private _eating: KnockoutObservable<number>;
+
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
     static readonly list = [
@@ -40,14 +41,15 @@ class SafariPokemon implements pokemonInterface {
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
         if (this.shiny) Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
-        this.baseCatchFactor = data.catchRate * 100/1275;
-        this.baseEscapeFactor = 40;
-        this.angry = 0;
-        this.eating = 0;
+        this.baseCatchFactor = data.catchRate * 1/6;
+        this.baseEscapeFactor = 30;
+        this._angry = ko.observable(0);
+        this._eating = ko.observable(0);
     }
 
     public get catchFactor(): number {
-        let catchF = this.baseCatchFactor;
+        const oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
+        let catchF = this.baseCatchFactor + oakBonus;
         if(this.eating > 0) {
             catchF /= 2;
         }
@@ -67,6 +69,22 @@ class SafariPokemon implements pokemonInterface {
         }
 
         return this.baseEscapeFactor;
+    }
+
+    public get angry(): number {
+        return this._angry();
+    }
+
+    public set angry(value: number) {
+        this._angry(value);
+    }
+
+    public get eating(): number {
+        return this._eating();
+    }
+
+    public set eating(value: number) {
+        this._eating(value);
     }
 
     public static random() {
