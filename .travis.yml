@@ -9,5 +9,4 @@ install:
 script:
 #  Compile, fail on any error
 - tsc
-- npm run ts-test
 - npm run eslint
