@@ -36,7 +36,11 @@ class PokemonHelper {
 
     public static getPokemonByName(name: string): DataPokemon {
         let basePokemon = pokemonMap[name];
-        if (!basePokemon) return;
+        if (!basePokemon) {
+            console.log("Could not find pokemon", name);
+            return;
+        }
+
         let type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
         let evoLevel = basePokemon["evoLevel"];
         let eggCycles: number = basePokemon["eggCycles"] || 20;
@@ -74,7 +78,8 @@ class PokemonHelper {
 
 
     public static calcNativeRegion(pokemonName: string) {
-        let id = PokemonHelper.getPokemonByName(pokemonName).id;
+        let pokemon = PokemonHelper.getPokemonByName(pokemonName);
+        let id = pokemon.id;
         if (id > 251) {
             return GameConstants.Region.hoenn;
         } else if (id > 151) {
