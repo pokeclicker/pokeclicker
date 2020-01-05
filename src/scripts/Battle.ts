@@ -6,7 +6,7 @@
 class Battle {
     static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
 
-    static counter: number = 0;
+    static counter = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static catchRateActual: KnockoutObservable<number> = ko.observable(null);
     static pokeball: KnockoutObservable<GameConstants.Pokeball>;
@@ -90,9 +90,9 @@ class Battle {
     }
 
     protected static calculateActualCatchRate(pokeBall: GameConstants.Pokeball) {
-        let pokeballBonus = App.game.pokeballs.getCatchBonus(pokeBall);
-        let oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
-        let totalChance = GameConstants.clipNumber(this.enemyPokemon().catchRate + pokeballBonus + oakBonus, 0, 100);
+        const pokeballBonus = App.game.pokeballs.getCatchBonus(pokeBall);
+        const oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
+        const totalChance = GameConstants.clipNumber(this.enemyPokemon().catchRate + pokeballBonus + oakBonus, 0, 100);
         return totalChance;
     }
 
@@ -104,7 +104,7 @@ class Battle {
     }
 
     protected static attemptCatch() {
-        let random: number = Math.floor(Math.random() * 100);
+        const random: number = Math.floor(Math.random() * 100);
         if (random <= this.catchRateActual()) {
             this.catchPokemon();
         }
@@ -118,7 +118,7 @@ class Battle {
     }
 
     static gainItem() {
-        let p = player.route() / 1600 + 0.009375;
+        const p = player.route() / 1600 + 0.009375;
 
         if (Math.random() < p) {
             player.getRandomBerry()

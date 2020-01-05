@@ -1,25 +1,25 @@
 class MapHelper {
     public static returnToMap(){
-      if (player.currentTown()){
-        return this.moveToTown(player.currentTown());
-      }
-      if (player.route()){
-        return this.moveToRoute(player.route(), player.region);
-      }
+        if (player.currentTown()){
+            return this.moveToTown(player.currentTown());
+        }
+        if (player.route()){
+            return this.moveToRoute(player.route(), player.region);
+        }
     }
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
         if (isNaN(route)) return;
         let genNewEnemy = false;
         if (route != player.route()) {
-          genNewEnemy = true
+            genNewEnemy = true
         }
         if (this.accessToRoute(route, region)) {
             player.route(route);
             player.region = region;
             player.currentTown('');
             if (genNewEnemy){
-              Battle.generateNewEnemy();
+                Battle.generateNewEnemy();
             }
             App.game.gameState = GameConstants.GameState.fighting;
             GameController.applyRouteBindings();
@@ -28,28 +28,28 @@ class MapHelper {
           	let reqsList = '';
 
           	if (!MapHelper.hasBadgeReq(route, region)) {
-            		let badgeNumber = GameConstants.routeBadgeRequirements[region][route];
+            		const badgeNumber = GameConstants.routeBadgeRequirements[region][route];
             		reqsList += `<br>Requires the ${BadgeCase.Badge[badgeNumber]} badge.`;
           	}
 
           	if (!MapHelper.hasDungeonReq(route, region)) {
-            		let dungeon = GameConstants.routeDungeonRequirements[region][route];
+            		const dungeon = GameConstants.routeDungeonRequirements[region][route];
             		reqsList += `<br>${dungeon} dungeon needs to be completed.`;
           	}
 
           	if (!MapHelper.hasRouteKillReq(route, region)) {
-            		let reqList = GameConstants.routeRequirements[region][route];
-            		let routesNotCompleted = [];
+            		const reqList = GameConstants.routeRequirements[region][route];
+            		const routesNotCompleted = [];
 
             		for (let i = 0; i < reqList.length; i++) {
-              			let route: number = reqList[i];
+              			const route: number = reqList[i];
               			if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
               				  routesNotCompleted.push(route);
               			}
             		}
 
             		if (routesNotCompleted.length > 0) {
-              			let routesList = routesNotCompleted.join(", ");
+              			const routesList = routesNotCompleted.join(', ');
                 		if (routesNotCompleted.length > 1) {
               			     reqsList += `<br>Routes ${routesList} still need to be completed.`;
                     } else {
@@ -58,7 +58,7 @@ class MapHelper {
             		}
           	}
 
-          	Notifier.notify("You don't have access to that route yet." + reqsList, GameConstants.NotificationOption.warning);
+          	Notifier.notify(`You don't have access to that route yet.${reqsList}`, GameConstants.NotificationOption.warning);
         }
     };
 
@@ -67,17 +67,17 @@ class MapHelper {
     }
 
     private static hasDungeonReq(route, region) {
-        let dungeonReq = GameConstants.routeDungeonRequirements[region][route];
+        const dungeonReq = GameConstants.routeDungeonRequirements[region][route];
         return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeonReq)]();
     }
 
     private static hasRouteKillReq(route, region) {
-        let reqList = GameConstants.routeRequirements[region][route];
+        const reqList = GameConstants.routeRequirements[region][route];
         if (reqList == undefined) {
             return true;
         }
         for (let i = 0; i < reqList.length; i++) {
-            let route: number = reqList[i];
+            const route: number = reqList[i];
             if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
                 return false
             }
@@ -108,7 +108,7 @@ class MapHelper {
 
         // Water routes
         if (GameConstants.WaterRoutes[region].has(route))  {
-            cls = cls + ' waterRoute';
+            cls = `${cls} waterRoute`;
         }
 
         return cls
@@ -138,7 +138,7 @@ class MapHelper {
     }
 
     public static accessToTown(townName: string): boolean {
-        let town = TownList[townName];
+        const town = TownList[townName];
         if (!town) return false;
         return town.isUnlocked();
     };
@@ -167,18 +167,18 @@ class MapHelper {
           	}
 
           	if (!town.hasRouteReq()) {
-            		let reqList = town.reqRoutes;
-            		let routesNotCompleted = [];
+            		const reqList = town.reqRoutes;
+            		const routesNotCompleted = [];
 
             		for (let i = 0; i < reqList.length; i++) {
-              			let route: number = reqList[i];
+              			const route: number = reqList[i];
               			if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
               				  routesNotCompleted.push(route);
               			}
             		}
 
             		if (routesNotCompleted.length > 0) {
-              			let routesList = routesNotCompleted.join(", ");
+              			const routesList = routesNotCompleted.join(', ');
                 		if (routesNotCompleted.length > 1) {
               			     reqsList += `<br/>Routes ${routesList} still need to be completed.`;
                     } else {
@@ -187,19 +187,19 @@ class MapHelper {
             		}
           	}
 
-            Notifier.notify("You don't have access to that location yet." + reqsList, GameConstants.NotificationOption.warning);
+            Notifier.notify(`You don't have access to that location yet.${reqsList}`, GameConstants.NotificationOption.warning);
         }
     };
 
-    public static validRoute(route: number = 0, region: GameConstants.Region = 0): boolean {
+    public static validRoute(route = 0, region: GameConstants.Region = 0): boolean {
         return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];
     }
 
     public static openShipModal() {
-        let openModal = () => {$('#ShipModal').modal('show');}
+        const openModal = () => {$('#ShipModal').modal('show');}
         switch (player.region) {
             case 0:
-                if (TownList["Vermillion City"].isUnlocked() && player.highestRegion() > 0) {
+                if (TownList['Vermillion City'].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
                     return;
                 }
@@ -209,7 +209,7 @@ class MapHelper {
                     return;
                 }
             case 2:
-                if (TownList["Slateport City"].isUnlocked()) {
+                if (TownList['Slateport City'].isUnlocked()) {
                     openModal();
                     return;
                 }

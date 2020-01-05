@@ -1,6 +1,6 @@
 class BadgeCase implements Feature {
-    name: string = "Badge Case";
-    saveKey: string = "badgeCase";
+    name = 'Badge Case';
+    saveKey = 'badgeCase';
 
     badgeList: ArrayOfObservables<boolean>;
     badgeAmount: number;
@@ -12,7 +12,7 @@ class BadgeCase implements Feature {
     }
 
     private createDefaultBadgeList(): ArrayOfObservables<boolean> {
-        let list = new Array(this.badgeAmount).fill(false);
+        const list = new Array(this.badgeAmount).fill(false);
         return new ArrayOfObservables(list);
     }
 
@@ -68,45 +68,45 @@ class BadgeCase implements Feature {
 
 namespace BadgeCase {
     export enum Badge {
-        "None",
-        "Boulder",
-        "Cascade",
-        "Thunder",
-        "Rainbow",
-        "Soul",
-        "Marsh",
-        "Volcano",
-        "Earth",
-        "Elite_Lorelei",
-        "Elite_Bruno",
-        "Elite_Agatha",
-        "Elite_Lance",
-        "Elite_KantoChampion",
-        "Zephyr",
-        "Hive",
-        "Plain",
-        "Fog",
-        "Storm",
-        "Mineral",
-        "Glacier",
-        "Rising",
-        "Elite_Will",
-        "Elite_Koga",
-        "Elite_Bruno2",
-        "Elite_Karen",
-        "Elite_JohtoChampion",
-        "Stone",
-        "Knuckle",
-        "Dynamo",
-        "Heat",
-        "Balance",
-        "Feather",
-        "Mind",
-        "Rain",
-        "Elite_Sidney",
-        "Elite_Phoebe",
-        "Elite_Glacia",
-        "Elite_Drake",
-        "Elite_HoennChampion",
+        'None',
+        'Boulder',
+        'Cascade',
+        'Thunder',
+        'Rainbow',
+        'Soul',
+        'Marsh',
+        'Volcano',
+        'Earth',
+        'Elite_Lorelei',
+        'Elite_Bruno',
+        'Elite_Agatha',
+        'Elite_Lance',
+        'Elite_KantoChampion',
+        'Zephyr',
+        'Hive',
+        'Plain',
+        'Fog',
+        'Storm',
+        'Mineral',
+        'Glacier',
+        'Rising',
+        'Elite_Will',
+        'Elite_Koga',
+        'Elite_Bruno2',
+        'Elite_Karen',
+        'Elite_JohtoChampion',
+        'Stone',
+        'Knuckle',
+        'Dynamo',
+        'Heat',
+        'Balance',
+        'Feather',
+        'Mind',
+        'Rain',
+        'Elite_Sidney',
+        'Elite_Phoebe',
+        'Elite_Glacia',
+        'Elite_Drake',
+        'Elite_HoennChampion',
     }
 }

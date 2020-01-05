@@ -14,7 +14,7 @@ class CaughtPokemon {
     breeding: KnockoutObservable<boolean>;
     evoRegion: GameConstants.Region;
 
-    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number, breeding: boolean = false) {
+    constructor(pokemonData: DataPokemon, ev: boolean, atBo: number, xp: number, breeding = false) {
         this.id = pokemonData.id;
         this.name = pokemonData.name;
         this.evolved = ev;
@@ -34,37 +34,36 @@ class CaughtPokemon {
     }
 
     public toJSON() {
-        let keep, plainJS;
-        keep = ["name", "evolved", "attackBonus", "exp", "breeding"];
-        plainJS = ko.toJS(this);
+        const keep = ['name', 'evolved', 'attackBonus', 'exp', 'breeding'];
+        const plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep);
     }
 
     public checkForEvolution(reset = false){
         // reset if pokemon has just hatched
         if (!!reset){
-          this.evolved = false;
+            this.evolved = false;
         }
 
         const pokemonData = pokemonMapId[this.id];
 
         // pokemon doesn't have an evolution, is already evolved, or currently breeding
         if (!pokemonData.evoLevel || this.evolved || this.breeding()){
-          return;
+            return;
         }
 
         pokemonData.evoLevel.forEach((evo, index)=>{
             if (evo.constructor === Number){
                 if (this.evolver[index]){
-                  this.evolver[index].dispose();
+                    this.evolver[index].dispose();
                 }
 
                 // Check if player has already caught all of the possible evolutions
                 const obtainedAllEvolutions = reset ? !PokemonHelper.getPokemonByName(this.name).evolutionByIndex(index, true, true).some(p => !player.alreadyCaughtPokemon(p)) : false;
 
                 if (obtainedAllEvolutions){
-                  this.evolved = true;
-                  return;
+                    this.evolved = true;
+                    return;
                 }
 
                 // Get evolutions for current region, else calculate a evolution for any region for when we reach that region
@@ -72,7 +71,7 @@ class CaughtPokemon {
                 const evoRegion = PokemonHelper.calcNativeRegion(evolution);
                 this.evolver[index] = this.levelObservable.subscribe(() => {
                     if (this.levelObservable() >= evo && player.highestRegion() >= evoRegion) {
-                        Notifier.notify("Your " + this.name + " has evolved into a " + evolution, GameConstants.NotificationOption.success);
+                        Notifier.notify(`Your ${this.name} has evolved into a ${evolution}`, GameConstants.NotificationOption.success);
                         player.capturePokemon(evolution, false, true);
                         player.caughtAmount[this.id](player._caughtAmount[this.id]() + 1);
                         this.evolved = true;
