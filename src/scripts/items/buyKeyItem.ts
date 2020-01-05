@@ -11,7 +11,7 @@ class BuyKeyItem extends Item {
 
         totalPrice(amt: number) {
             if (amt > this.maxAmount) {
-              amt = this.maxAmount;
+                amt = this.maxAmount;
             }
             return this.basePrice * amt;
         }
