@@ -24,7 +24,7 @@ class Safari {
         Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());
         for( let i = 0; i<GameConstants.Safari.SizeY; i++){
-            let row = Array.apply(null, Array(GameConstants.Safari.SizeX)).map(Number.prototype.valueOf, 0);
+            const row = [...Array(GameConstants.Safari.SizeX)].map(Number.prototype.valueOf, 0);
             Safari.grid.push(row);
         }
 
@@ -188,7 +188,7 @@ class Safari {
         Safari.origin = offset;
 
 
-        let element = document.querySelector('#sprite');
+        const element = document.querySelector('#sprite');
         Safari.sprite = new Motio(element, {
             fps: 8,
             frames: 4

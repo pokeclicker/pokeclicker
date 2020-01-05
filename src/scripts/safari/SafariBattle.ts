@@ -2,7 +2,7 @@ class SafariBattle {
     static _enemy: KnockoutObservable<SafariPokemon> = ko.observable();
     static busy = false;
     static text: KnockoutObservable<string> = ko.observable("What will you do?");
-    static escapeAttempts: number = 0;
+    static escapeAttempts = 0;
     static particle;
 
     public static get enemy(): SafariPokemon {
@@ -32,17 +32,17 @@ class SafariBattle {
             const enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
 
-            let ptclhtml='<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>';
+            const ptclhtml='<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>';
             SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, SafariBattle.Speed.ballThrow, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
 
             SafariBattle.delay(1.1*SafariBattle.Speed.ballThrow)(0)            // throwing the ball
-            .then(SafariBattle.startCapture)                                   // pokemon being sucked into ball
-            .then(SafariBattle.delay(0.75*SafariBattle.Speed.enemyTransition))
-            .then(SafariBattle.startBounce)                                    // pokeball dropping to ground
-            .then(SafariBattle.delay(1.7*SafariBattle.Speed.ballBounce))
-            .then(SafariBattle.calcIndex)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
-            .then(SafariBattle.delayRoll)
-            .then(SafariBattle.finishCapture)                                  // capture pokemon or break free
+                .then(SafariBattle.startCapture)                                   // pokemon being sucked into ball
+                .then(SafariBattle.delay(0.75*SafariBattle.Speed.enemyTransition))
+                .then(SafariBattle.startBounce)                                    // pokeball dropping to ground
+                .then(SafariBattle.delay(1.7*SafariBattle.Speed.ballBounce))
+                .then(SafariBattle.calcIndex)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
+                .then(SafariBattle.delayRoll)
+                .then(SafariBattle.finishCapture)                                  // capture pokemon or break free
 
         }
     }
@@ -75,9 +75,9 @@ class SafariBattle {
 
     private static calcIndex() {
         return new Promise((resolve,reject)=>{
-            let random = Math.random();
-            let catchF = SafariBattle.enemy.catchFactor / 100;
-            let index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
+            const random = Math.random();
+            const catchF = SafariBattle.enemy.catchFactor / 100;
+            const index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
             if (index != 0) {
                 $('body').css("animation-duration",SafariBattle.Speed.ballRoll+"ms");
                 SafariBattle.startRoll(index);
@@ -95,8 +95,8 @@ class SafariBattle {
     }
 
     private static finishCapture(result) {
-        let [random,index]=result;
-        let isgameOver = (Safari.balls() == 0);
+        const [random,index]=result;
+        const isgameOver = (Safari.balls() == 0);
         return new Promise((resolve,reject)=>{
             if (random*100 < SafariBattle.enemy.catchFactor){
                 SafariBattle.capturePokemon();
@@ -239,8 +239,8 @@ class SafariBattle {
         }, 2000);
     }
 
-    private static dropParticle(html: string, pos, target, time: number = 2, top, persistentParticle: boolean = false) {
-        let p = $('<ptcl>').html(html).children().appendTo('body');
+    private static dropParticle(html: string, pos, target, time = 2, top, persistentParticle = false) {
+        const p = $('<ptcl>').html(html).children().appendTo('body');
         p.css('position','absolute');
         p.offset(pos);
         if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';

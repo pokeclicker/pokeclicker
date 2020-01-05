@@ -96,7 +96,7 @@ class Player {
 
         // TODO(@Isha) move to underground classes.
         this.mineInventory = new ObservableArrayProxy(savedPlayer.mineInventory || []);
-        for (let item of this.mineInventory) {
+        for (const item of this.mineInventory) {
             item.amount = ko.observable(item.amount);
         }
 
