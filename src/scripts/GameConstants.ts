@@ -111,7 +111,7 @@ namespace GameConstants {
 
     //Safari
     export const Safari = {
-        "SizeY": Math.floor((window.innerHeight - 74 - 50) / 32),
+        "SizeY": Math.floor((window.innerHeight - 150) / 32),
         "SizeX": 25,
     }
 
@@ -136,13 +136,6 @@ namespace GameConstants {
         22,
         23,
         24
-    ];
-
-    export const SAFARI_CATCH_MESSAGES = [
-        "Oh, no!<br>The Pokemon broke free!",
-        "Aww! It appeared to be caught!",
-        "Aargh! Almost had it!",
-        "Shoot! It was so close, too!"
     ];
 
     export const SAFARI_OUT_OF_BALLS = "Game Over!<br>You have run out of safari balls to use."
