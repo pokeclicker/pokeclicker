@@ -3,7 +3,7 @@
 class ClearDungeonRequirement extends Requirement {
     private dungeonIndex: number; // Gym name index in array GameConstants.Gyms
 
-    constructor(value: number, dungeonIndex:number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+    constructor(value: number, dungeonIndex: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, type);
         this.dungeonIndex = dungeonIndex;
     }

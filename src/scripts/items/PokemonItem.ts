@@ -3,8 +3,8 @@ class PokemonItem extends Item {
     type: GameConstants.PokemonItemType;
 
     constructor(pokemon: GameConstants.PokemonItemType) {
-        let basePrice = GameConstants.ItemPrice[GameConstants.PokemonItemType[pokemon]];
-        let priceMultiplier = 1;
+        const basePrice = GameConstants.ItemPrice[GameConstants.PokemonItemType[pokemon]];
+        const priceMultiplier = 1;
         super(GameConstants.PokemonItemType[pokemon], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
         this.type = pokemon;
     }

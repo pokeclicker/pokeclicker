@@ -15,9 +15,9 @@ class QuestLine {
         this.quests = ko.observableArray();
         this.totalQuests = 0;
         this.curQuest = ko.computed(() => {
-            let acc = 0;
+            const acc = 0;
             return this.quests().map((quest) => {return +quest.isCompleted()})
-                                .reduce( ( acc, iscompleted) => {return acc + iscompleted},0);
+                .reduce( ( acc, iscompleted) => {return acc + iscompleted},0);
         });
         this.curQuestInitial = ko.observable();
         this.curQuestInitial.equalityComparer = () => {return false} //Always update subscriptions, even if same data pushed in
@@ -27,7 +27,7 @@ class QuestLine {
             if (this.totalQuests > 0 && this.curQuest() < this.totalQuests) {
                 return this.quests()[this.curQuest()];
             } else {
-                return {progress: ()=>{return 0}, progressText: ()=>{return ""}}
+                return {progress: ()=>{return 0}, progressText: ()=>{return ''}}
             }
         });
 
@@ -47,8 +47,8 @@ class QuestLine {
     }
 
     beginQuest(index: number, initial?) {
-        let quest = this.quests()[index];
-        if (typeof initial == "undefined") {
+        const quest = this.quests()[index];
+        if (typeof initial == 'undefined') {
             initial = quest.questFocus();
         }
         quest.initial(initial);
@@ -56,7 +56,7 @@ class QuestLine {
     }
 
     resumeAt(index: number, state) {
-        if (typeof state != "undefined") {
+        if (typeof state != 'undefined') {
             for (let i=0; i<index; i++) {
                 this.quests()[i].autoCompleter.dispose();
                 this.quests()[i].complete();

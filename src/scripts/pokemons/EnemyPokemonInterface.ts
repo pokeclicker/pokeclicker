@@ -1,4 +1,4 @@
-interface enemyPokemonInterface extends pokemonInterface {
+interface EnemyPokemonInterface extends PokemonInterface {
     health: number | KnockoutObservable<number>;
     maxHealth: number | KnockoutObservable<number>;
     level: number;

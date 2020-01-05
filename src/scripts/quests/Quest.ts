@@ -17,7 +17,7 @@ abstract class Quest {
 
     constructor(amount: number, pointsReward: number) {
         this.amount = amount;
-        let randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
+        const randomPointBonus = 0.9 + SeededRand.next() * 0.2; // random between 0.9 and 1.1
         this.pointsReward = Math.ceil(pointsReward * randomPointBonus);
         this.xpReward = pointsReward/10;
         this.claimed = ko.observable(false);
@@ -30,12 +30,12 @@ abstract class Quest {
             App.game.wallet.gainQuestPoints(this.pointsReward);
             this.claimed(true);
             if (!this.inQuestLine) player.completedQuestList[this.index](true);
-            let oldLevel = player.questLevel;
+            const oldLevel = player.questLevel;
             player.questXP += this.xpReward;
             Notifier.notify(`You have completed your quest and claimed ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);;
             // Refresh the list each time a player levels up
             if (oldLevel < player.questLevel) {
-                Notifier.notify("Your quest level has increased!", GameConstants.NotificationOption.success);
+                Notifier.notify('Your quest level has increased!', GameConstants.NotificationOption.success);
                 QuestHelper.refreshQuests(true);
             }
             // Once the player completes every available quest, refresh the list for free
@@ -72,13 +72,13 @@ abstract class Quest {
 
         this.progressText = ko.computed(function() {
             if (this.initial() !== null) {
-                return "" + Math.min((this.questFocus() - this.initial()), this.amount) +"/" +  this.amount;
+                return `${Math.min((this.questFocus() - this.initial()), this.amount)}/${this.amount}`;
             } else {
-                return "0/"+this.amount;
+                return `0/${this.amount}`;
             }
         }, this);
         this.isCompleted = ko.computed(function() {
-            let completed = this.progress() == 1;
+            const completed = this.progress() == 1;
             if (!this.autoComplete && completed && !this.notified) {
                 Notifier.notify(`You can complete your quest for ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);
             }

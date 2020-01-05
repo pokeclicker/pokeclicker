@@ -1,6 +1,6 @@
 class Pokeballs implements Feature {
-    name: string = "Pokeballs";
-    saveKey: string = "pokeballs";
+    name = 'Pokeballs';
+    saveKey = 'pokeballs';
 
     defaults = {
         'pokeballs': [25, 0, 0, 0],
@@ -82,10 +82,10 @@ class Pokeballs implements Feature {
             return
         }
 
-        if (json["pokeballs"] == null) {
+        if (json['pokeballs'] == null) {
             this.pokeballs = new ArrayOfObservables(this.defaults.pokeballs);
         } else {
-            let pokeballsJson = json["pokeballs"];
+            const pokeballsJson = json['pokeballs'];
             this.pokeballs = new ArrayOfObservables([
                 pokeballsJson[GameConstants.Pokeball.Pokeball],
                 pokeballsJson[GameConstants.Pokeball.Greatball],
@@ -93,20 +93,20 @@ class Pokeballs implements Feature {
                 pokeballsJson[GameConstants.Pokeball.Masterball],
             ]);
         }
-        this.notCaughtSelection = json["notCaughtSelection"] ?? this.defaults.notCaughtSelection;
-        this.alreadyCaughtSelection = json["alreadyCaughtSelection"] ?? this.defaults.alreadyCaughtSelection;
+        this.notCaughtSelection = json['notCaughtSelection'] ?? this.defaults.notCaughtSelection;
+        this.alreadyCaughtSelection = json['alreadyCaughtSelection'] ?? this.defaults.alreadyCaughtSelection;
     }
 
     toJSON(): object {
         return {
-            "pokeballs": [
+            'pokeballs': [
                 this.pokeballs[GameConstants.Pokeball.Pokeball],
                 this.pokeballs[GameConstants.Pokeball.Greatball],
                 this.pokeballs[GameConstants.Pokeball.Ultraball],
-                this.pokeballs[GameConstants.Pokeball.Masterball]
+                this.pokeballs[GameConstants.Pokeball.Masterball],
             ],
-            "notCaughtSelection": this.notCaughtSelection,
-            "alreadyCaughtSelection": this.alreadyCaughtSelection
+            'notCaughtSelection': this.notCaughtSelection,
+            'alreadyCaughtSelection': this.alreadyCaughtSelection,
         }
     }
 

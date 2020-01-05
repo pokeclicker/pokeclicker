@@ -1,9 +1,9 @@
 class Underground {
-    public static saveKey: string = "underground";
+    public static saveKey = 'underground';
 
     public static itemSelected;
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
-    public static counter: number = 0;
+    public static counter = 0;
 
     private static _energy: KnockoutObservable<number> = ko.observable(0);
     public static upgradeList: Array<Upgrade> = [];
@@ -38,44 +38,44 @@ class Underground {
     }
 
     public static showMine() {
-        let html = "";
-        let itemsFound = "Mine.itemsFound() + '/' + Mine.itemsBuried + ' items found'";
-        html += "</div>";
+        let html = '';
+        const itemsFound = "Mine.itemsFound() + '/' + Mine.itemsBuried + ' items found'";
+        html += '</div>';
         for (let i = 0; i < Mine.grid.length; i++) {
             html += "<div class='row'>";
-            for (var j = 0; j < Mine.grid[0].length; j++) {
+            for (let j = 0; j < Mine.grid[0].length; j++) {
                 html += Underground.mineSquare(Mine.grid[i][j](), i, j);
             }
-            html += "</div>";
+            html += '</div>';
         }
 
-        html += "<div class='row'>";
-        html += "<button onClick='Mine.toolSelected(Mine.Tool.Hammer)' class='btn btn-danger'>Hammer (" + Underground.HAMMER_ENERGY + " energy)</button>";
-        html += "<button onClick='Mine.toolSelected(Mine.Tool.Chisel)' class='btn btn-info'>Chisel (" + Underground.CHISEL_ENERGY + " energy)</button>";
-        html += "<h3 data-bind='text: Mine.itemsFound()+" + '"/"' + "+Mine.itemsBuried+" + '" items found"' + "'></h3>";
-        html += "</div>";
-        $("#mineBody").html(html);
+        html += `<div class='row'>
+                  <button onClick='Mine.toolSelected(Mine.Tool.Hammer)' class='btn btn-danger'>Hammer (${Underground.HAMMER_ENERGY} energy)</button>
+                  <button onClick='Mine.toolSelected(Mine.Tool.Chisel)' class='btn btn-info'>Chisel (${Underground.CHISEL_ENERGY} energy)</button>
+                  <h3 data-bind='text: Mine.itemsFound() + "/" + Mine.itemsBuried + " items found"'></h3>
+                </div>`;
+        $('#mineBody').html(html);
     }
 
     private static mineSquare(amount: number, i: number, j: number): string {
         if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() === 0) {
             Mine.rewardGrid[i][j].revealed = 1;
-            return "<img src='assets/images/underground/" + Mine.rewardGrid[i][j].value + "/" + Mine.rewardGrid[i][j].value + "-" + Mine.rewardGrid[i][j].y + "-" + Mine.rewardGrid[i][j].x + ".png' data-bind='css: Underground.rewardCssClass' data-i='" + i + "' data-j='" + j + "'>";
+            return `<img src='assets/images/underground/${Mine.rewardGrid[i][j].value}/${Mine.rewardGrid[i][j].value}-${Mine.rewardGrid[i][j].y}-${Mine.rewardGrid[i][j].x}.png' data-bind='css: Underground.rewardCssClass' data-i='${i}' data-j='${j}'>`;
         } else {
-            return "<div data-bind='css: Underground.calculateCssClass(" + i + "," + j + ")()' data-i='" + i + "' data-j='" + j + "'></div>";
+            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})()' data-i='${i}' data-j='${j}'></div>`;
         }
     }
 
     public static calculateCssClass(i: number, j: number): KnockoutComputed<string> {
         return ko.computed(function () {
-            return "col-sm-1 rock" + Math.max(Mine.grid[i][j](), 0) + " mineSquare " + Mine.Tool[Mine.toolSelected()] + "Selected";
+            return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
         }, this, {
             disposeWhen: function () {
                 if (Mine.grid[i][j]() == 0) {
                     if (Mine.rewardGrid[i][j] != 0 && Mine.rewardGrid[i][j].revealed != 1) {
                         Mine.rewardGrid[i][j].revealed = 1;
-                        $("div[data-i=" + i + "][data-j=" + j + "]").replaceWith("<img src='assets/images/underground/" + Mine.rewardGrid[i][j].value + "/" + Mine.rewardGrid[i][j].value + "-" + Mine.rewardGrid[i][j].y + "-" + Mine.rewardGrid[i][j].x + ".png' data-bind='css: Underground.rewardCssClass' data-i='" + i + "' data-j='" + j + "'>")
-                        ko.applyBindings(null, $("img[data-i=" + i + "][data-j=" + j + "]")[0])
+                        $(`div[data-i=${i}][data-j=${j}]`).replaceWith(`<img src='assets/images/underground/${Mine.rewardGrid[i][j].value}/${Mine.rewardGrid[i][j].value}-${Mine.rewardGrid[i][j].y}-${Mine.rewardGrid[i][j].x}.png' data-bind='css: Underground.rewardCssClass' data-i='${i}' data-j='${j}'>`)
+                        ko.applyBindings(null, $(`img[data-i=${i}][data-j=${j}]`)[0])
                         Mine.checkItemsRevealed();
                     }
                 }
@@ -85,37 +85,37 @@ class Underground {
     }
 
     private static rewardCssClass: KnockoutComputed<string> = ko.pureComputed(function () {
-        return "col-sm-1 mineReward mineSquare " + Mine.Tool[Mine.toolSelected()] + "Selected";
+        return `col-sm-1 mineReward mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
     });
 
-    public static gainMineItem(id: number, num: number = 1) {
-        let index = player.mineInventoryIndex(id);
-        let item = Underground.getMineItemById(id);
+    public static gainMineItem(id: number, num = 1) {
+        const index = player.mineInventoryIndex(id);
+        const item = Underground.getMineItemById(id);
 
         if (item.isStone()) {
-            let evostone: EvolutionStone = ItemList[item.valueType];
+            const evostone: EvolutionStone = ItemList[item.valueType];
             evostone.gain(num);
             return;
         }
 
         if (index == -1) {
 
-            let tempItem = {
+            const tempItem = {
                 name: item.name,
                 amount: ko.observable(num),
                 id: id,
                 value: item.value,
-                valueType: item.valueType
+                valueType: item.valueType,
             };
             player.mineInventory.push(tempItem);
         } else {
-            let amt = player.mineInventory[index].amount()
+            const amt = player.mineInventory[index].amount()
             player.mineInventory[index].amount(amt + num);
         }
     }
 
     public static getMineItemById(id: number): UndergroundItem {
-        for (let item of UndergroundItem.list) {
+        for (const item of UndergroundItem.list) {
             if (item.id == id) {
                 return item;
             }
@@ -124,30 +124,30 @@ class Underground {
 
     public static gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
-            let oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
+            const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
-                Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
+                Notifier.notify('Your mining energy has reached maximum capacity!', GameConstants.NotificationOption.success);
             }
         }
     }
 
     public static gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
         // Restore a percentage of maximum energy
-        let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
-        let gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
+        const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
+        const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
         this.energy = this.energy + gain;
-        Notifier.notify("You restored " + gain + " mining energy!", GameConstants.NotificationOption.success);
+        Notifier.notify(`You restored ${gain} mining energy!`, GameConstants.NotificationOption.success);
     }
 
     public static sellMineItem(id: number) {
         for (let i = 0; i < player.mineInventory.length; i++) {
-            let item = player.mineInventory[i];
+            const item = player.mineInventory[i];
             if (item.id == id) {
                 if (item.amount() > 0) {
-                    let success = Underground.gainProfit(item);
+                    const success = Underground.gainProfit(item);
                     if (success) {
-                        let amt = item.amount();
+                        const amt = item.amount();
                         player.mineInventory[i].amount(amt - 1);
                     }
                     return;
@@ -159,18 +159,18 @@ class Underground {
     private static gainProfit(item: UndergroundItem): boolean {
         let success = true;
         switch (item.valueType) {
-            case "Diamond":
+            case 'Diamond':
                 App.game.wallet.gainDiamonds(item.value);
                 break;
-            case "Mine Egg":
+            case 'Mine Egg':
                 if (!App.game.breeding.hasFreeEggSlot()) {
                     return false;
                 }
                 success = App.game.breeding.gainEgg(App.game.breeding.createFossilEgg(item.name));
                 break;
             default:
-                let type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
-                let typeNum = GameConstants.PokemonType[type];
+                const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
+                const typeNum = GameConstants.PokemonType[type];
                 player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + GameConstants.PLATE_VALUE);
         }
         return success;
@@ -181,7 +181,7 @@ class Underground {
             App.game.gameState = GameConstants.GameState.paused;
             $('#mineModal').modal('show');
         } else {
-            Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
+            Notifier.notify('You do not have access to that location', GameConstants.NotificationOption.warning);
         }
     }
 
@@ -190,18 +190,18 @@ class Underground {
     }
 
     public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {
-        let effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
+        const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
         return effect * this.getMaxEnergy();
     }
 
     public static load(saveObject: object): void {
         if (!saveObject) {
-            console.log("Underground not loaded.");
+            console.log('Underground not loaded.');
             return;
         }
 
-        let upgrades = saveObject['upgrades'];
-        for (let item in Underground.Upgrades) {
+        const upgrades = saveObject['upgrades'];
+        for (const item in Underground.Upgrades) {
             if (isNaN(Number(item))) {
                 Underground.getUpgrade((<any>Underground.Upgrades)[item]).level = upgrades[item] || 0;
             }
@@ -210,9 +210,9 @@ class Underground {
     }
 
     public static save(): object {
-        let undergroundSave = {};
-        let upgradesSave = {};
-        for (let item in Underground.Upgrades) {
+        const undergroundSave = {};
+        const upgradesSave = {};
+        for (const item in Underground.Upgrades) {
             if (isNaN(Number(item))) {
                 upgradesSave[item] = Underground.getUpgrade((<any>Underground.Upgrades)[item]).level;
             }
@@ -234,7 +234,7 @@ class Underground {
 }
 
 $(document).ready(function () {
-    $("body").on('click', '.mineSquare', function () {
+    $('body').on('click', '.mineSquare', function () {
         Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
     });
 
