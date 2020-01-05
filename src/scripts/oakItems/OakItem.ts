@@ -46,13 +46,13 @@ class OakItem extends ExpUpgrade {
 
     toJSON(): object {
         const json = super.toJSON();
-        json["isActive"] = this.isActive;
+        json['isActive'] = this.isActive;
         return json;
     }
 
     fromJSON(json: object): void {
         super.fromJSON(json);
-        this.isActive = json["isActive"] ?? this.defaults.isActive;
+        this.isActive = json['isActive'] ?? this.defaults.isActive;
     }
 
     // Knockout getters/setters

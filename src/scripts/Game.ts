@@ -43,7 +43,7 @@ class Game {
 
     load() {
         // TODO(@Isha) Refactor this saving logic
-        const saveJSON = localStorage.getItem("save");
+        const saveJSON = localStorage.getItem('save');
         if (saveJSON !== null) {
             const saveObject = JSON.parse(saveJSON);
             this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
@@ -78,7 +78,7 @@ class Game {
     }
 
     start() {
-        console.log("game started");
+        console.log('game started');
         if (player.starter === GameConstants.Starter.None) {
             StartSequenceRunner.start()
         }

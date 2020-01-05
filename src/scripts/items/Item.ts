@@ -31,24 +31,24 @@ abstract class Item {
             return;
         }
 
-        const multiple = n > 1 ? "s" : "";
+        const multiple = n > 1 ? 's' : '';
 
         if (App.game.wallet.hasAmount(new Amount(this.totalPrice(n), this.currency))) {
             App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency));
             this.gain(n);
             this.increasePriceMultiplier(n);
-            Notifier.notify("You bought " + n + " " + this.name() + multiple, GameConstants.NotificationOption.success)
+            Notifier.notify('You bought ' + n + ' ' + this.name() + multiple, GameConstants.NotificationOption.success)
         } else {
-            let curr = "currency";
+            let curr = 'currency';
             switch (this.currency) {
                 case GameConstants.Currency.money:
-                    curr = "money";
+                    curr = 'money';
                     break;
                 case GameConstants.Currency.questPoint:
-                    curr = "quest points";
+                    curr = 'quest points';
                     break;
                 case GameConstants.Currency.dungeonToken:
-                    curr = "dungeon tokens";
+                    curr = 'dungeon tokens';
                     break;
             }
             Notifier.notify(`You don't have enough ${curr} to buy ${n} ${this.name() + multiple}`, GameConstants.NotificationOption.danger)

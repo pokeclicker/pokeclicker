@@ -1,5 +1,5 @@
 class FarmRunner {
-    public static curBerry: Berry = BerryList["Cheri"];
+    public static curBerry: Berry = BerryList['Cheri'];
     public static counter = 0;
     public static plotPrice: KnockoutObservable<number> = ko.observable(10);
 
@@ -143,24 +143,24 @@ class FarmRunner {
             return plot.formattedTimeLeft();
         }
 
-        return "Ready"
+        return 'Ready'
     }
 
     public static getImage(plot: Plot) {
         if (plot.getStage() <= 1) {
-            return "assets/images/farm/AllTreeSeedIII.png"
+            return 'assets/images/farm/AllTreeSeedIII.png'
         }
-        return "assets/images/farm/" + GameConstants.BerryType[plot.berry().type] + "Tree" + GameConstants.PlotStage[plot.getStage()] + "III.png";
+        return 'assets/images/farm/' + GameConstants.BerryType[plot.berry().type] + 'Tree' + GameConstants.PlotStage[plot.getStage()] + 'III.png';
     }
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener('DOMContentLoaded', function (event) {
     $('#farmModal').on('show.bs.modal', function () {
         const seedList = $('#seedList');
-        seedList.children().get(FarmRunner.curBerry.type).className += " active";
-        seedList.find("li").click(function () {
-            $(this).parent().children().removeClass("active");
-            $(this).addClass("active");
+        seedList.children().get(FarmRunner.curBerry.type).className += ' active';
+        seedList.find('li').click(function () {
+            $(this).parent().children().removeClass('active');
+            $(this).addClass('active');
         });
     });
 

@@ -18,7 +18,7 @@ class PokeballItem extends Item {
     }
 }
 
-ItemList["Pokeball"] = new PokeballItem(GameConstants.Pokeball.Pokeball, GameConstants.Currency.money);
-ItemList["Greatball"] = new PokeballItem(GameConstants.Pokeball.Greatball, GameConstants.Currency.money);
-ItemList["Ultraball"] = new PokeballItem(GameConstants.Pokeball.Ultraball, GameConstants.Currency.money);
-ItemList["Masterball"] = new PokeballItem(GameConstants.Pokeball.Masterball, GameConstants.Currency.questPoint);
+ItemList['Pokeball'] = new PokeballItem(GameConstants.Pokeball.Pokeball, GameConstants.Currency.money);
+ItemList['Greatball'] = new PokeballItem(GameConstants.Pokeball.Greatball, GameConstants.Currency.money);
+ItemList['Ultraball'] = new PokeballItem(GameConstants.Pokeball.Ultraball, GameConstants.Currency.money);
+ItemList['Masterball'] = new PokeballItem(GameConstants.Pokeball.Masterball, GameConstants.Currency.questPoint);

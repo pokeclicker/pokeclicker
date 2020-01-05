@@ -82,14 +82,14 @@ class DungeonRunner {
     private static dungeonLost() {
         DungeonRunner.fighting(false);
         App.game.gameState = GameConstants.GameState.town;
-        Notifier.notify("You could not complete the dungeon in time", GameConstants.NotificationOption.danger);
+        Notifier.notify('You could not complete the dungeon in time', GameConstants.NotificationOption.danger);
     }
 
     public static dungeonWon() {
         GameHelper.incrementObservable(player.statistics.dungeonsCleared[Statistics.getDungeonIndex(DungeonRunner.dungeon.name())]);
         App.game.gameState = GameConstants.GameState.town;
         // TODO award loot with a special screen
-        Notifier.notify("You have successfully completed the dungeon", GameConstants.NotificationOption.success);
+        Notifier.notify('You have successfully completed the dungeon', GameConstants.NotificationOption.success);
     }
 
     public static timeLeftSeconds = ko.computed(function () {

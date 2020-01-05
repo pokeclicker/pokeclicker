@@ -4,7 +4,7 @@ class Preload {
         if (fast) {
             $('.loader').hide();
         } else {
-            $('.loader').fadeOut("slow")
+            $('.loader').fadeOut('slow')
         }
     }
 
@@ -42,7 +42,7 @@ class Preload {
     private static loadTowns() {
         const p = Array<Promise<number>>();
         for (const name in TownList) {
-            if (name.indexOf("Elite") !== -1 || name.indexOf("Champion") !== -1) {
+            if (name.indexOf('Elite') !== -1 || name.indexOf('Champion') !== -1) {
                 continue;
             }
             p.push(new Promise<number>(resolve => {

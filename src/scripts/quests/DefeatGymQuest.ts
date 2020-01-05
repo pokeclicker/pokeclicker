@@ -9,8 +9,8 @@ class DefeatGymQuest extends Quest implements QuestInterface {
 
     private static getDescription(gymTown: string, amount: number): string {
         let desc = `Defeat ${gymTown} `;
-        if (gymTown.indexOf("Elite") == -1 && gymTown.indexOf("Champion") == -1) {
-            desc += "gym ";
+        if (gymTown.indexOf('Elite') == -1 && gymTown.indexOf('Champion') == -1) {
+            desc += 'gym ';
         }
         desc += `${amount} times.`;
         return desc;

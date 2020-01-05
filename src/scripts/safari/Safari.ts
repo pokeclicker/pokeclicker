@@ -3,12 +3,12 @@
 class Safari {
     static grid: Array<Array<number>>;
     static player: Point = new Point(12, 20);
-    static lastDirection = "up";
+    static lastDirection = 'up';
     static nextDirection: string;
     static walking = false;
     static isMoving = false;
     static queue: Array<string> = [];
-    private static playerXY = {"x": 0, "y": 0};
+    private static playerXY = {'x': 0, 'y': 0};
     private static origin;
     static inProgress: KnockoutObservable<boolean> = ko.observable(false);
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
@@ -19,7 +19,7 @@ class Safari {
         Safari.grid = [];
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
-        Safari.lastDirection = "up";
+        Safari.lastDirection = 'up';
         Safari.inBattle(false);
         Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());
@@ -117,7 +117,7 @@ class Safari {
             App.game.gameState = GameConstants.GameState.safari;
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
-            Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
+            Notifier.notify('You do not have access to that location', GameConstants.NotificationOption.warning);
         }
     }
 
@@ -150,17 +150,17 @@ class Safari {
     }
 
     static show() {
-        let html = "";
+        let html = '';
 
         for (let i=0; i<Safari.grid.length; i++) {
             html += "<div class='row'>";
             for (let j=0; j<Safari.grid[0].length; j++) {
                 html += Safari.square(i, j);
             }
-            html += "</div>";
+            html += '</div>';
         }
 
-        $("#safariBody").html(html);
+        $('#safariBody').html(html);
 
         Safari.addPlayer(Math.floor(GameConstants.Safari.SizeX - 1)/2, GameConstants.Safari.SizeY - 1);
 
@@ -168,21 +168,21 @@ class Safari {
 
     private static square(i: number, j: number): string {
         const img = 'assets/images/safari/' + this.grid[i][j] + '.png';
-        const divId = "safari-" + j + "-" + i;
+        const divId = 'safari-' + j + '-' + i;
 
         return "<div id='" + divId + "' style=background-image:url('" + img + "') class='safariSquare'></div>";
     }
 
     private static addPlayer(i: number, j: number) {
-        const topLeft = $(`#safari-0-0`).offset();
+        const topLeft = $('#safari-0-0').offset();
         const offset = {
             top: 32*j + topLeft.top,
             left: 32*i + topLeft.left,
         };
-        $("#safariBody").append("<div id='sprite'></div>");
-        $("#sprite").css('background',  "url('assets/images/safari/walk" + Safari.lastDirection + ".png')");
-        $("#sprite").css('position', 'absolute');
-        $("#sprite").offset( offset );
+        $('#safariBody').append("<div id='sprite'></div>");
+        $('#sprite').css('background',  "url('assets/images/safari/walk" + Safari.lastDirection + ".png')");
+        $('#sprite').css('position', 'absolute');
+        $('#sprite').offset( offset );
         Safari.playerXY.x = i;
         Safari.playerXY.y = j;
         Safari.origin = offset;
@@ -244,16 +244,16 @@ class Safari {
                 left: `+=${directionOffset.x * 32}`,
             }
 
-            $("#sprite").css("background", "url('assets/images/safari/walk"+direction+".png')");
+            $('#sprite').css('background', "url('assets/images/safari/walk"+direction+".png')");
             Safari.playerXY.x = newPos.x;
             Safari.playerXY.y = newPos.y;
-            $('#sprite').animate(offset, 250, "linear", function() {
+            $('#sprite').animate(offset, 250, 'linear', function() {
                 Safari.checkBattle();
                 Safari.isMoving = false;
                 if(Safari.walking){ if (!Safari.checkBattle() && Safari.queue[0]){Safari.step(Safari.queue[0])} }
             });
         } else {
-            $("#sprite").css("background", "url('assets/images/safari/walk"+direction+".png')");
+            $('#sprite').css('background', "url('assets/images/safari/walk"+direction+".png')");
             setTimeout(function(){
                 Safari.walking = false;
                 Safari.isMoving = false;
@@ -270,10 +270,10 @@ class Safari {
         let x = 0;
         let y = 0;
         switch (dir) {
-            case "left": x=-1;break;
-            case "up": y=-1;break;
-            case "right": x=1;break;
-            case "down": y=1;break;
+            case 'left': x=-1;break;
+            case 'up': y=-1;break;
+            case 'right': x=1;break;
+            case 'down': y=1;break;
         }
         return {x: x, y: y};
     }
@@ -327,9 +327,9 @@ class Safari {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener('DOMContentLoaded', function (event) {
 
     $('#safariModal').on('hidden.bs.modal', function () {
-        MapHelper.moveToTown("Fuchsia City");
+        MapHelper.moveToTown('Fuchsia City');
     });
 });

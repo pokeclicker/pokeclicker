@@ -19,7 +19,7 @@ class App {
                 new OakItems([20, 50, 100])
             );
 
-            Notifier.notify("Game loaded", GameConstants.NotificationOption.info);
+            Notifier.notify('Game loaded', GameConstants.NotificationOption.info);
 
             GameController.bindToolTips();
             GameController.addKeyListeners();

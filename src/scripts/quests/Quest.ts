@@ -35,7 +35,7 @@ abstract class Quest {
             Notifier.notify(`You have completed your quest and claimed ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);;
             // Refresh the list each time a player levels up
             if (oldLevel < player.questLevel) {
-                Notifier.notify("Your quest level has increased!", GameConstants.NotificationOption.success);
+                Notifier.notify('Your quest level has increased!', GameConstants.NotificationOption.success);
                 QuestHelper.refreshQuests(true);
             }
             // Once the player completes every available quest, refresh the list for free
@@ -72,9 +72,9 @@ abstract class Quest {
 
         this.progressText = ko.computed(function() {
             if (this.initial() !== null) {
-                return "" + Math.min((this.questFocus() - this.initial()), this.amount) +"/" +  this.amount;
+                return '' + Math.min((this.questFocus() - this.initial()), this.amount) +'/' +  this.amount;
             } else {
-                return "0/"+this.amount;
+                return '0/'+this.amount;
             }
         }, this);
         this.isCompleted = ko.computed(function() {

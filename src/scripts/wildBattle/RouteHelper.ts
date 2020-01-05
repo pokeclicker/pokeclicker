@@ -18,7 +18,7 @@ class RouteHelper {
         }
         const possiblePokemons = pokemonsPerRoute[region][route];
         if (possiblePokemons == null) {
-            return ["Rattata"];
+            return ['Rattata'];
         }
         let pokemonList = possiblePokemons.land;
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Super_rod) || possiblePokemons.land.length == 0) {

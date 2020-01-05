@@ -79,8 +79,8 @@ class Player {
         this.pokemonAttackObservable = ko.computed(function () {
             return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
         }, this);
-        this._town = ko.observable(TownList["Pallet Town"]);
-        this._currentTown = ko.observable("");
+        this._town = ko.observable(TownList['Pallet Town']);
+        this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
 
         console.log(savedPlayer._itemList);
@@ -489,7 +489,7 @@ class Player {
 
     public getRandomBerry() {
         const i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
-        Notifier.notify("You got a " + GameConstants.BerryType[i] + " berry!", GameConstants.NotificationOption.success);
+        Notifier.notify('You got a ' + GameConstants.BerryType[i] + ' berry!', GameConstants.NotificationOption.success);
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {
@@ -575,42 +575,42 @@ class Player {
 
     public toJSON() {
         const keep = [
-            "_caughtShinyList",
-            "_route",
-            "_caughtPokemonList",
-            "_defeatedAmount",
-            "_caughtAmount",
-            "_routeKills",
-            "_routeKillsNeeded",
-            "_region",
-            "_sortOption",
-            "_sortDescending",
-            "_starter",
-            "_itemList",
-            "_itemMultipliers",
+            '_caughtShinyList',
+            '_route',
+            '_caughtPokemonList',
+            '_defeatedAmount',
+            '_caughtAmount',
+            '_routeKills',
+            '_routeKillsNeeded',
+            '_region',
+            '_sortOption',
+            '_sortDescending',
+            '_starter',
+            '_itemList',
+            '_itemMultipliers',
             // TODO(@Isha) remove.
-            "mineInventory",
+            'mineInventory',
             // TODO(@Isha) remove.
-            "_mineLayersCleared",
-            "_shardUpgrades",
-            "_shardsCollected",
-            "achievementsCompleted",
-            "completedQuestList",
-            "questRefreshes",
-            "_questXP",
-            "_lastSeen",
-            "currentQuests",
-            "_shinyCatches",
-            "gymDefeats",
-            "statistics",
-            "achievementsCompleted",
-            "plotList",
-            "berryList",
-            "effectList",
-            "highestRegion",
-            "tutorialProgress",
-            "tutorialState",
-            "tutorialComplete",
+            '_mineLayersCleared',
+            '_shardUpgrades',
+            '_shardsCollected',
+            'achievementsCompleted',
+            'completedQuestList',
+            'questRefreshes',
+            '_questXP',
+            '_lastSeen',
+            'currentQuests',
+            '_shinyCatches',
+            'gymDefeats',
+            'statistics',
+            'achievementsCompleted',
+            'plotList',
+            'berryList',
+            'effectList',
+            'highestRegion',
+            'tutorialProgress',
+            'tutorialState',
+            'tutorialComplete',
         ];
         const plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep)

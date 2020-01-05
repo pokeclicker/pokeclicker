@@ -179,10 +179,10 @@ class Mine {
     }
 
     private static completed() {
-        Notifier.notify("You dig deeper...", GameConstants.NotificationOption.info);
-        ko.cleanNode(document.getElementById("mineBody"));
+        Notifier.notify('You dig deeper...', GameConstants.NotificationOption.info);
+        ko.cleanNode(document.getElementById('mineBody'));
         Mine.loadMine();
-        ko.applyBindings(null, document.getElementById("mineBody"));
+        ko.applyBindings(null, document.getElementById('mineBody'));
     }
 
     public static loadSavedMine(mine) {
@@ -215,7 +215,7 @@ class Mine {
 
 namespace Mine {
     export enum Tool {
-        "Chisel" = 0,
-        "Hammer" = 1,
+        'Chisel' = 0,
+        'Hammer' = 1,
     }
 }

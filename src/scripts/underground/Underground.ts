@@ -1,5 +1,5 @@
 class Underground {
-    public static saveKey = "underground";
+    public static saveKey = 'underground';
 
     public static itemSelected;
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
@@ -38,44 +38,44 @@ class Underground {
     }
 
     public static showMine() {
-        let html = "";
+        let html = '';
         const itemsFound = "Mine.itemsFound() + '/' + Mine.itemsBuried + ' items found'";
-        html += "</div>";
+        html += '</div>';
         for (let i = 0; i < Mine.grid.length; i++) {
             html += "<div class='row'>";
             for (let j = 0; j < Mine.grid[0].length; j++) {
                 html += Underground.mineSquare(Mine.grid[i][j](), i, j);
             }
-            html += "</div>";
+            html += '</div>';
         }
 
         html += "<div class='row'>";
-        html += "<button onClick='Mine.toolSelected(Mine.Tool.Hammer)' class='btn btn-danger'>Hammer (" + Underground.HAMMER_ENERGY + " energy)</button>";
-        html += "<button onClick='Mine.toolSelected(Mine.Tool.Chisel)' class='btn btn-info'>Chisel (" + Underground.CHISEL_ENERGY + " energy)</button>";
-        html += "<h3 data-bind='text: Mine.itemsFound()+" + '"/"' + "+Mine.itemsBuried+" + '" items found"' + "'></h3>";
-        html += "</div>";
-        $("#mineBody").html(html);
+        html += "<button onClick='Mine.toolSelected(Mine.Tool.Hammer)' class='btn btn-danger'>Hammer (" + Underground.HAMMER_ENERGY + ' energy)</button>';
+        html += "<button onClick='Mine.toolSelected(Mine.Tool.Chisel)' class='btn btn-info'>Chisel (" + Underground.CHISEL_ENERGY + ' energy)</button>';
+        html += "<h3 data-bind='text: Mine.itemsFound()+" + '"/"' + '+Mine.itemsBuried+' + '" items found"' + "'></h3>";
+        html += '</div>';
+        $('#mineBody').html(html);
     }
 
     private static mineSquare(amount: number, i: number, j: number): string {
         if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() === 0) {
             Mine.rewardGrid[i][j].revealed = 1;
-            return "<img src='assets/images/underground/" + Mine.rewardGrid[i][j].value + "/" + Mine.rewardGrid[i][j].value + "-" + Mine.rewardGrid[i][j].y + "-" + Mine.rewardGrid[i][j].x + ".png' data-bind='css: Underground.rewardCssClass' data-i='" + i + "' data-j='" + j + "'>";
+            return "<img src='assets/images/underground/" + Mine.rewardGrid[i][j].value + '/' + Mine.rewardGrid[i][j].value + '-' + Mine.rewardGrid[i][j].y + '-' + Mine.rewardGrid[i][j].x + ".png' data-bind='css: Underground.rewardCssClass' data-i='" + i + "' data-j='" + j + "'>";
         } else {
-            return "<div data-bind='css: Underground.calculateCssClass(" + i + "," + j + ")()' data-i='" + i + "' data-j='" + j + "'></div>";
+            return "<div data-bind='css: Underground.calculateCssClass(" + i + ',' + j + ")()' data-i='" + i + "' data-j='" + j + "'></div>";
         }
     }
 
     public static calculateCssClass(i: number, j: number): KnockoutComputed<string> {
         return ko.computed(function () {
-            return "col-sm-1 rock" + Math.max(Mine.grid[i][j](), 0) + " mineSquare " + Mine.Tool[Mine.toolSelected()] + "Selected";
+            return 'col-sm-1 rock' + Math.max(Mine.grid[i][j](), 0) + ' mineSquare ' + Mine.Tool[Mine.toolSelected()] + 'Selected';
         }, this, {
             disposeWhen: function () {
                 if (Mine.grid[i][j]() == 0) {
                     if (Mine.rewardGrid[i][j] != 0 && Mine.rewardGrid[i][j].revealed != 1) {
                         Mine.rewardGrid[i][j].revealed = 1;
-                        $("div[data-i=" + i + "][data-j=" + j + "]").replaceWith("<img src='assets/images/underground/" + Mine.rewardGrid[i][j].value + "/" + Mine.rewardGrid[i][j].value + "-" + Mine.rewardGrid[i][j].y + "-" + Mine.rewardGrid[i][j].x + ".png' data-bind='css: Underground.rewardCssClass' data-i='" + i + "' data-j='" + j + "'>")
-                        ko.applyBindings(null, $("img[data-i=" + i + "][data-j=" + j + "]")[0])
+                        $('div[data-i=' + i + '][data-j=' + j + ']').replaceWith("<img src='assets/images/underground/" + Mine.rewardGrid[i][j].value + '/' + Mine.rewardGrid[i][j].value + '-' + Mine.rewardGrid[i][j].y + '-' + Mine.rewardGrid[i][j].x + ".png' data-bind='css: Underground.rewardCssClass' data-i='" + i + "' data-j='" + j + "'>")
+                        ko.applyBindings(null, $('img[data-i=' + i + '][data-j=' + j + ']')[0])
                         Mine.checkItemsRevealed();
                     }
                 }
@@ -85,7 +85,7 @@ class Underground {
     }
 
     private static rewardCssClass: KnockoutComputed<string> = ko.pureComputed(function () {
-        return "col-sm-1 mineReward mineSquare " + Mine.Tool[Mine.toolSelected()] + "Selected";
+        return 'col-sm-1 mineReward mineSquare ' + Mine.Tool[Mine.toolSelected()] + 'Selected';
     });
 
     public static gainMineItem(id: number, num = 1) {
@@ -127,7 +127,7 @@ class Underground {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
-                Notifier.notify("Your mining energy has reached maximum capacity!", GameConstants.NotificationOption.success);
+                Notifier.notify('Your mining energy has reached maximum capacity!', GameConstants.NotificationOption.success);
             }
         }
     }
@@ -137,7 +137,7 @@ class Underground {
         const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
         const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
         this.energy = this.energy + gain;
-        Notifier.notify("You restored " + gain + " mining energy!", GameConstants.NotificationOption.success);
+        Notifier.notify('You restored ' + gain + ' mining energy!', GameConstants.NotificationOption.success);
     }
 
     public static sellMineItem(id: number) {
@@ -159,10 +159,10 @@ class Underground {
     private static gainProfit(item: UndergroundItem): boolean {
         let success = true;
         switch (item.valueType) {
-            case "Diamond":
+            case 'Diamond':
                 App.game.wallet.gainDiamonds(item.value);
                 break;
-            case "Mine Egg":
+            case 'Mine Egg':
                 if (!App.game.breeding.hasFreeEggSlot()) {
                     return false;
                 }
@@ -181,7 +181,7 @@ class Underground {
             App.game.gameState = GameConstants.GameState.paused;
             $('#mineModal').modal('show');
         } else {
-            Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
+            Notifier.notify('You do not have access to that location', GameConstants.NotificationOption.warning);
         }
     }
 
@@ -196,7 +196,7 @@ class Underground {
 
     public static load(saveObject: object): void {
         if (!saveObject) {
-            console.log("Underground not loaded.");
+            console.log('Underground not loaded.');
             return;
         }
 
@@ -234,7 +234,7 @@ class Underground {
 }
 
 $(document).ready(function () {
-    $("body").on('click', '.mineSquare', function () {
+    $('body').on('click', '.mineSquare', function () {
         Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
     });
 

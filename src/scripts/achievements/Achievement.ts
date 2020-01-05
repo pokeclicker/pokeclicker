@@ -15,7 +15,7 @@ class Achievement {
 
     public check() {
         if (this.isCompleted()) {
-            Notifier.notify(this.name + "<br><small>" + this.description + "</small>", GameConstants.NotificationOption.warning)
+            Notifier.notify(this.name + '<br><small>' + this.description + '</small>', GameConstants.NotificationOption.warning)
             player.achievementsCompleted[this.name] = true;
             this.unlocked = true;
         }
@@ -26,7 +26,7 @@ class Achievement {
     }
 
     public getProgressPercentage(){
-        return this.isCompleted() ? "100.0" : this.property.getProgressPercentage();
+        return this.isCompleted() ? '100.0' : this.property.getProgressPercentage();
     }
 
     public isCompleted(){

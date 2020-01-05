@@ -17,8 +17,8 @@ class Notifier {
             newest_on_top: true,
             showProgressbar: false,
             placement: {
-                from: "top",
-                align: "left",
+                from: 'top',
+                align: 'left',
             },
             offset: 20,
             spacing: 10,

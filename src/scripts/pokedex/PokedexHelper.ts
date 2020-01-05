@@ -5,7 +5,7 @@ class PokedexHelper {
         const pokemon = PokemonHelper.getPokemonByName(name);
 
         if (!PokedexHelper.pokemonSeen(pokemon.id)()) {
-            return "grey"
+            return 'grey'
         }
         if (pokemon.type2 == GameConstants.PokemonType.None) {
             return TypeColor[pokemon.type1];
@@ -27,17 +27,17 @@ class PokedexHelper {
     public static filteredList: KnockoutObservableArray<object> = ko.observableArray([]);
 
     public static populateTypeFilters() {
-        let options = $("#pokedex-filter-type1");
+        let options = $('#pokedex-filter-type1');
         $.each(GameConstants.PokemonType, function () {
             if (isNaN(Number(this)) && this != GameConstants.PokemonType.None) {
-                options.append($("<option />").val(GameConstants.PokemonType[this]).text(this));
+                options.append($('<option />').val(GameConstants.PokemonType[this]).text(this));
             }
         });
 
-        options = $("#pokedex-filter-type2");
+        options = $('#pokedex-filter-type2');
         $.each(GameConstants.PokemonType, function () {
             if (isNaN(Number(this)) && this != GameConstants.PokemonType.None) {
-                options.append($("<option />").val(GameConstants.PokemonType[this]).text(this));
+                options.append($('<option />').val(GameConstants.PokemonType[this]).text(this));
             }
         });
     }
@@ -54,7 +54,7 @@ class PokedexHelper {
         const highestDex = Math.max(highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
-            if ((filter['name'] || "") != "" && pokemon.name.toLowerCase().indexOf(filter['name'].toLowerCase()) == -1) {
+            if ((filter['name'] || '') != '' && pokemon.name.toLowerCase().indexOf(filter['name'].toLowerCase()) == -1) {
                 return false;
             }
             const type1 = parseInt(filter['type1'] || -1);
@@ -101,11 +101,11 @@ class PokedexHelper {
     }
 
     private static getImage(id: number, name: string) {
-        let src = "assets/images/";
+        let src = 'assets/images/';
         if (player.alreadyCaughtPokemonShiny(name)) {
-            src += "shiny";
+            src += 'shiny';
         }
-        src += "pokemon/" + id + ".png";
+        src += 'pokemon/' + id + '.png';
         return src;
     }
 }

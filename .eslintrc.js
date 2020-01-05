@@ -26,5 +26,6 @@ module.exports = {
     'no-trailing-spaces': ['error', { 'skipBlankLines': true }],
     'array-bracket-newline': ['error', { 'multiline': true }],
     'comma-dangle': ['error', { 'arrays': 'always-multiline', 'objects': 'always-multiline', 'imports': 'always-multiline', 'exports': 'always-multiline' }],
+    'quotes': ['error', 'single', { 'avoidEscape': true }],
   }
 }

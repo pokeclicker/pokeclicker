@@ -20,37 +20,37 @@ class Statistics {
     public berriesHarvested: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
-        "gymsDefeated": GameConstants.RegionGyms.flat().length,
-        "dungeonsCleared": GameConstants.RegionDungeons.flat().length,
-        "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
-        "pokeballsBought": GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
-        "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,  // remove "None" pokemon type
-        "oakItemUses": GameHelper.enumLength(OakItems.OakItem),
-        "berriesHarvested": GameHelper.enumLength(GameConstants.BerryType),
+        'gymsDefeated': GameConstants.RegionGyms.flat().length,
+        'dungeonsCleared': GameConstants.RegionDungeons.flat().length,
+        'pokeballsUsed': GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
+        'pokeballsBought': GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
+        'totalShards': GameHelper.enumLength(GameConstants.PokemonType) - 1,  // remove "None" pokemon type
+        'oakItemUses': GameHelper.enumLength(OakItems.OakItem),
+        'berriesHarvested': GameHelper.enumLength(GameConstants.BerryType),
     };
 
     constructor(saved = {}) {
         const observables = [
-            "clicks",
-            "hatchedEggs",
-            "pokemonCaptured",
-            "pokemonDefeated",
-            "digItems",
-            "digDeeper",
-            "totalMoney",
-            "totalTokens",
-            "totalQuestPoints",
-            "totalDiamonds",
+            'clicks',
+            'hatchedEggs',
+            'pokemonCaptured',
+            'pokemonDefeated',
+            'digItems',
+            'digDeeper',
+            'totalMoney',
+            'totalTokens',
+            'totalQuestPoints',
+            'totalDiamonds',
         ];
 
         const arrayObservables = [
-            "gymsDefeated",
-            "dungeonsCleared",
-            "pokeballsUsed",
-            "pokeballsBought",
-            "totalShards",
-            "oakItemUses",
-            "berriesHarvested",
+            'gymsDefeated',
+            'dungeonsCleared',
+            'pokeballsUsed',
+            'pokeballsBought',
+            'totalShards',
+            'oakItemUses',
+            'berriesHarvested',
         ]
 
         for (const prop of observables) {

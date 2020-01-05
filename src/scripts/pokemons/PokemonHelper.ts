@@ -15,10 +15,10 @@ class PokemonHelper {
     public static getPokemonByName(name: string): DataPokemon {
         const basePokemon = pokemonMap[name];
         if (!basePokemon) return;
-        const type2: GameConstants.PokemonType = basePokemon["type"][1] || GameConstants.PokemonType.None;
-        const evoLevel = basePokemon["evoLevel"];
-        const eggCycles: number = basePokemon["eggCycles"] || 20;
-        return new DataPokemon(basePokemon["id"], basePokemon["name"], basePokemon["catchRate"], basePokemon["evolution"], evoLevel, basePokemon["type"][0], type2, basePokemon["attack"], basePokemon["levelType"], basePokemon["exp"], eggCycles);
+        const type2: GameConstants.PokemonType = basePokemon['type'][1] || GameConstants.PokemonType.None;
+        const evoLevel = basePokemon['evoLevel'];
+        const eggCycles: number = basePokemon['eggCycles'] || 20;
+        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolution'], evoLevel, basePokemon['type'][0], type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles);
     }
 
     public static typeStringToId(id: string) {
@@ -67,22 +67,22 @@ class PokemonHelper {
     }
 
     public static getImage(pokemon: PokemonInterface, shiny: boolean): string {
-        let src = "assets/images/";
+        let src = 'assets/images/';
         if (shiny) {
-            src += "shiny";
+            src += 'shiny';
         }
-        src += "pokemon/" + pokemon.id + ".png";
+        src += 'pokemon/' + pokemon.id + '.png';
         return src;
     }
 
     public static getPokeballImage(pokemonName: string): string {
-        let src = ""
+        let src = ''
         if (player.alreadyCaughtPokemon(pokemonName)){
-            src = "assets/images/pokeball/Pokeball-";
+            src = 'assets/images/pokeball/Pokeball-';
             if (player.alreadyCaughtPokemonShiny(pokemonName)) {
-                src += "shiny-";
+                src += 'shiny-';
             }
-            src += "small.png";
+            src += 'small.png';
         }
         return src;
     }
@@ -96,12 +96,12 @@ class PokemonHelper {
             const _b = ko.toJS(b);
 
             //CaughtPokemon doesn't have shiny property, create one for comparison if needed
-            if (property == "shiny") {
+            if (property == 'shiny') {
                 _a.shiny = Number(player.alreadyCaughtPokemonShiny(a.name));
                 _b.shiny = Number(player.alreadyCaughtPokemonShiny(b.name));
             }
 
-            if (property == "attack" || property == "levelObservable" || property == "shiny") {
+            if (property == 'attack' || property == 'levelObservable' || property == 'shiny') {
                 dir *= -1;
             }
 

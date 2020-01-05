@@ -50,9 +50,9 @@ class ShopHandler {
 
     public static calculateCss(i: number): string {
         if (this.selected() == i) {
-            return "shopItem clickable btn btn-secondary active"
+            return 'shopItem clickable btn btn-secondary active'
         } else {
-            return "shopItem clickable btn btn-secondary"
+            return 'shopItem clickable btn btn-secondary'
         }
     }
 
@@ -61,9 +61,9 @@ class ShopHandler {
 
         if (item && !(item.isAvailable() && App.game.wallet.hasAmount(new Amount(item.totalPrice(this.amount()), item.currency)))
                 || this.amount() < 1) {
-            return "btn btn-danger smallButton smallFont"
+            return 'btn btn-danger smallButton smallFont'
         } else {
-            return "btn btn-success smallButton smallFont"
+            return 'btn btn-success smallButton smallFont'
         }
     }
 }

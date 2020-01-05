@@ -1,7 +1,7 @@
 class SafariBattle {
     static _enemy: KnockoutObservable<SafariPokemon> = ko.observable();
     static busy = false;
-    static text: KnockoutObservable<string> = ko.observable("What will you do?");
+    static text: KnockoutObservable<string> = ko.observable('What will you do?');
     static escapeAttempts = 0;
     static particle;
 
@@ -16,8 +16,8 @@ class SafariBattle {
     public static load() {
         SafariBattle.enemy = SafariPokemon.random();
         Safari.inBattle(true);
-        Notifier.notify("Battle", GameConstants.NotificationOption.info);
-        SafariBattle.text("What will you do?");
+        Notifier.notify('Battle', GameConstants.NotificationOption.info);
+        SafariBattle.text('What will you do?');
         SafariBattle.unlockButtons();
         SafariBattle.escapeAttempts = 0;
     }
@@ -27,8 +27,8 @@ class SafariBattle {
             SafariBattle.busy = true;
             Safari.balls(Safari.balls()-1);
 
-            $('#safariEnemy').css("transition-duration",(0.75*SafariBattle.Speed.enemyTransition)+"ms");
-            SafariBattle.text("You throw a ball...");
+            $('#safariEnemy').css('transition-duration',(0.75*SafariBattle.Speed.enemyTransition)+'ms');
+            SafariBattle.text('You throw a ball...');
             const enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
 
@@ -66,7 +66,7 @@ class SafariBattle {
 
     private static startBounce() {
         return new Promise((resolve,reject)=>{
-            $('body').css("animation-duration",(1.6*SafariBattle.Speed.ballBounce)+"ms");
+            $('body').css('animation-duration',(1.6*SafariBattle.Speed.ballBounce)+'ms');
             $('#safariEnemy > img').css('opacity', '0');
             SafariBattle.particle.addClass('bounce');
             resolve();
@@ -79,7 +79,7 @@ class SafariBattle {
             const catchF = SafariBattle.enemy.catchFactor / 100;
             const index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
             if (index != 0) {
-                $('body').css("animation-duration",SafariBattle.Speed.ballRoll+"ms");
+                $('body').css('animation-duration',SafariBattle.Speed.ballRoll+'ms');
                 SafariBattle.startRoll(index);
             }
             resolve([random,index]);
@@ -138,7 +138,7 @@ class SafariBattle {
     public static throwBait() {
         if(!SafariBattle.busy){
             SafariBattle.busy = true;
-            SafariBattle.text("You throw some bait at " + SafariBattle.enemy.name);
+            SafariBattle.text('You throw some bait at ' + SafariBattle.enemy.name);
             SafariBattle.enemy.eating = Math.max(SafariBattle.enemy.eating, Math.floor(Math.random()*5 + 2));
             SafariBattle.enemy.angry = 0;
             const enemy = $('#safariEnemy').offset();
@@ -152,7 +152,7 @@ class SafariBattle {
     public static throwRock() {
         if(!SafariBattle.busy) {
             SafariBattle.busy = true;
-            SafariBattle.text("You throw a rock at " + SafariBattle.enemy.name);
+            SafariBattle.text('You throw a rock at ' + SafariBattle.enemy.name);
             SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Math.floor(Math.random() * 5 + 2));
             SafariBattle.enemy.eating = 0;
             const enemy = $('#safariEnemy').offset();
@@ -189,7 +189,7 @@ class SafariBattle {
     public static run() {
         if (!SafariBattle.busy){
             SafariBattle.busy = true;
-            SafariBattle.text("You flee.");
+            SafariBattle.text('You flee.');
             setTimeout(SafariBattle.endBattle, 1500);
         }
     }
@@ -198,19 +198,19 @@ class SafariBattle {
         // Enemy turn to flee;
         const random = Math.floor(Math.random()*100);
         if( random < SafariBattle.enemy.escapeFactor){
-            SafariBattle.text(SafariBattle.enemy.name + " has fled.");
+            SafariBattle.text(SafariBattle.enemy.name + ' has fled.');
             setTimeout(SafariBattle.endBattle, 1000);
         } else if(SafariBattle.enemy.eating > 0) {
-            SafariBattle.text(SafariBattle.enemy.name + " is eating.");
+            SafariBattle.text(SafariBattle.enemy.name + ' is eating.');
         } else if(SafariBattle.enemy.angry > 0) {
-            SafariBattle.text(SafariBattle.enemy.name + " is angry!");
+            SafariBattle.text(SafariBattle.enemy.name + ' is angry!');
         } else {
-            SafariBattle.text(SafariBattle.enemy.name + " is watching carefully...");
+            SafariBattle.text(SafariBattle.enemy.name + ' is watching carefully...');
         }
         SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating-1);
         SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry-1);
         setTimeout(function(){
-            SafariBattle.text("What will you do?");
+            SafariBattle.text('What will you do?');
             SafariBattle.busy = false;
             SafariBattle.unlockButtons();
         }, 1500);
@@ -235,7 +235,7 @@ class SafariBattle {
             Safari.inBattle(false);
             Safari.inProgress(false);
             SafariBattle.busy = false;
-            $("#safariModal").modal('toggle');
+            $('#safariModal').modal('toggle');
         }, 2000);
     }
 
@@ -268,9 +268,9 @@ namespace SafariBattle {
     }
 
     export const CATCH_MESSAGES = [
-        "Oh, no!<br>The Pokemon broke free!",
-        "Aww! It appeared to be caught!",
-        "Aargh! Almost had it!",
-        "Shoot! It was so close, too!",
+        'Oh, no!<br>The Pokemon broke free!',
+        'Aww! It appeared to be caught!',
+        'Aargh! Almost had it!',
+        'Shoot! It was so close, too!',
     ];
 }

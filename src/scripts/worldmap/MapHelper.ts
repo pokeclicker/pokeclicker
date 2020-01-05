@@ -49,7 +49,7 @@ class MapHelper {
             		}
 
             		if (routesNotCompleted.length > 0) {
-              			const routesList = routesNotCompleted.join(", ");
+              			const routesList = routesNotCompleted.join(', ');
                 		if (routesNotCompleted.length > 1) {
               			     reqsList += `<br>Routes ${routesList} still need to be completed.`;
                     } else {
@@ -178,7 +178,7 @@ class MapHelper {
             		}
 
             		if (routesNotCompleted.length > 0) {
-              			const routesList = routesNotCompleted.join(", ");
+              			const routesList = routesNotCompleted.join(', ');
                 		if (routesNotCompleted.length > 1) {
               			     reqsList += `<br/>Routes ${routesList} still need to be completed.`;
                     } else {
@@ -199,7 +199,7 @@ class MapHelper {
         const openModal = () => {$('#ShipModal').modal('show');}
         switch (player.region) {
             case 0:
-                if (TownList["Vermillion City"].isUnlocked() && player.highestRegion() > 0) {
+                if (TownList['Vermillion City'].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
                     return;
                 }
@@ -209,7 +209,7 @@ class MapHelper {
                     return;
                 }
             case 2:
-                if (TownList["Slateport City"].isUnlocked()) {
+                if (TownList['Slateport City'].isUnlocked()) {
                     openModal();
                     return;
                 }

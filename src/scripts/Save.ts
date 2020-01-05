@@ -4,9 +4,9 @@ class Save {
 
     public static store(player: Player) {
         const json = JSON.stringify(player);
-        localStorage.setItem("player", json);
-        localStorage.setItem("mine", Mine.serialize());
-        localStorage.setItem("settings", Settings.save());
+        localStorage.setItem('player', json);
+        localStorage.setItem('mine', Mine.serialize());
+        localStorage.setItem('settings', Settings.save());
 
         const saveObject = {};
 
@@ -18,26 +18,26 @@ class Save {
         saveObject[App.game.badgeCase.saveKey] = App.game.badgeCase.toJSON();
         saveObject[App.game.oakItems.saveKey] = App.game.oakItems.toJSON();
 
-        localStorage.setItem("save", JSON.stringify(saveObject));
+        localStorage.setItem('save', JSON.stringify(saveObject));
 
         this.counter = 0;
-        console.log("Game saved")
+        console.log('Game saved')
     }
 
     public static load(): Player {
-        const saved = localStorage.getItem("player");
+        const saved = localStorage.getItem('player');
 
-        const settings = localStorage.getItem("settings");
+        const settings = localStorage.getItem('settings');
         Settings.load(JSON.parse(settings));
 
 
-        const saveJSON = localStorage.getItem("save");
+        const saveJSON = localStorage.getItem('save');
         if (saveJSON !== null) {
             const saveObject = JSON.parse(saveJSON);
             Underground.load(saveObject[Underground.saveKey]);
         }
 
-        if (saved !== "null") {
+        if (saved !== 'null') {
             return new Player(JSON.parse(saved));
         } else {
             return new Player()
@@ -48,8 +48,8 @@ class Save {
         const element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(btoa(JSON.stringify(player))));
         const currentdate = new Date();
-        const datestr = currentdate.toISOString().replace("T", " ").slice(0, 19);
-        const filename = "PokeClickerSave_" + datestr + '.txt';
+        const datestr = currentdate.toISOString().replace('T', ' ').slice(0, 19);
+        const filename = 'PokeClickerSave_' + datestr + '.txt';
         element.setAttribute('download', filename);
 
         element.style.display = 'none';
@@ -61,7 +61,7 @@ class Save {
     }
 
     public static loadMine() {
-        const mine = localStorage.getItem("mine");
+        const mine = localStorage.getItem('mine');
         if (mine) {
             Mine.loadSavedMine(JSON.parse(mine));
         } else {
@@ -184,13 +184,13 @@ class Save {
                 const decoded = atob(fr.result as string);
                 JSON.parse(decoded);
                 if (decoded) {
-                    localStorage.setItem("player", decoded);
+                    localStorage.setItem('player', decoded);
                     location.reload();
                 } else {
-                    Notifier.notify("This is not a valid decoded savefile", GameConstants.NotificationOption.danger);
+                    Notifier.notify('This is not a valid decoded savefile', GameConstants.NotificationOption.danger);
                 }
             } catch (err) {
-                Notifier.notify("This is not a valid savefile", GameConstants.NotificationOption.danger);
+                Notifier.notify('This is not a valid savefile', GameConstants.NotificationOption.danger);
             }
         }, 1000);
     }
@@ -214,12 +214,12 @@ class Save {
             }
         }
         if (converted.length > 0) {
-            Notifier.notify("You have gained the following shinies: " + converted, GameConstants.NotificationOption.success)
+            Notifier.notify('You have gained the following shinies: ' + converted, GameConstants.NotificationOption.success)
         }
     }
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener('DOMContentLoaded', function (event) {
     $('#saveModal').on('show.bs.modal', function () {
         $('#saveTextArea').text(JSON.stringify(player));
     });

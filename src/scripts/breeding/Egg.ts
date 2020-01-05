@@ -1,5 +1,5 @@
 class Egg implements Saveable {
-    saveKey = "egg";
+    saveKey = 'egg';
 
     defaults = {};
 
@@ -36,12 +36,12 @@ class Egg implements Saveable {
     }
 
     fromJSON(json: object): void {
-        this.totalSteps = json["totalSteps"];
-        this.steps = ko.observable(json["steps"]);
-        this.shinySteps = json["shinySteps"];
-        this.pokemon = json["pokemon"];
-        this.type = json["type"];
-        this.notified = json["boolean"];
+        this.totalSteps = json['totalSteps'];
+        this.steps = ko.observable(json['steps']);
+        this.shinySteps = json['shinySteps'];
+        this.pokemon = json['pokemon'];
+        this.type = json['type'];
+        this.notified = json['boolean'];
         this.progress = ko.computed(function () {
             return this.steps() / this.totalSteps * 100;
         }, this);

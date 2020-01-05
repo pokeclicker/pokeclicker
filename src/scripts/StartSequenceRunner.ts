@@ -47,7 +47,7 @@ class StartSequenceRunner {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener('DOMContentLoaded', function (event) {
 
     $('#startSequenceModal').on('hidden.bs.modal', function () {
         $('#pickStarterModal').modal('show');

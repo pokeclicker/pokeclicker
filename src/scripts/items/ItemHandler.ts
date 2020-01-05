@@ -1,7 +1,7 @@
 class ItemHandler {
 
-    public static stoneSelected: KnockoutObservable<string> = ko.observable("Fire_stone");
-    public static pokemonSelected: KnockoutObservable<string> = ko.observable("Vulpix");
+    public static stoneSelected: KnockoutObservable<string> = ko.observable('Fire_stone');
+    public static pokemonSelected: KnockoutObservable<string> = ko.observable('Vulpix');
     public static amountSelected: KnockoutObservable<number> = ko.observable(1);
     static amount: KnockoutObservable<number> = ko.observable(1);
 
@@ -25,8 +25,8 @@ class ItemHandler {
     }
 
     public static useStones(){
-        if(this.pokemonSelected() == ""){
-            return Notifier.notify("No Pokémon selected", GameConstants.NotificationOption.danger);
+        if(this.pokemonSelected() == ''){
+            return Notifier.notify('No Pokémon selected', GameConstants.NotificationOption.danger);
         }
         const amountTotal = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
@@ -43,8 +43,8 @@ class ItemHandler {
                 break;
             }
         }
-        const multiple = amountUsed == 1 ? "" : "s";
-        Notifier.notify("You used " + amountUsed + " " + this.stoneSelected() + multiple, GameConstants.NotificationOption.success);
+        const multiple = amountUsed == 1 ? '' : 's';
+        Notifier.notify('You used ' + amountUsed + ' ' + this.stoneSelected() + multiple, GameConstants.NotificationOption.success);
     }
 
 }

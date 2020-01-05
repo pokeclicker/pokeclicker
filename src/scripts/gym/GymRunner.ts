@@ -6,7 +6,7 @@ class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
-    public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList["Pewter City"]);
+    public static gymObservable: KnockoutObservable<Gym> = ko.observable(gymList['Pewter City']);
 
     public static startGym(gym: Gym) {
         this.gymObservable(gym);
@@ -33,7 +33,7 @@ class GymRunner {
             }, GameConstants.GYM_COUNTDOWN)
 
         } else {
-            Notifier.notify(gym.leaderName + " does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges", GameConstants.NotificationOption.danger);
+            Notifier.notify(gym.leaderName + ' does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges', GameConstants.NotificationOption.danger);
         }
     }
 
@@ -54,12 +54,12 @@ class GymRunner {
     }
 
     public static gymLost() {
-        Notifier.notify("It appears you are not strong enough to defeat " + GymBattle.gym.leaderName, GameConstants.NotificationOption.danger);
+        Notifier.notify('It appears you are not strong enough to defeat ' + GymBattle.gym.leaderName, GameConstants.NotificationOption.danger);
         App.game.gameState = GameConstants.GameState.town;
     }
 
     public static gymWon(gym: Gym) {
-        Notifier.notify("Congratulations, you defeated " + GymBattle.gym.leaderName + "!", GameConstants.NotificationOption.success);
+        Notifier.notify('Congratulations, you defeated ' + GymBattle.gym.leaderName + '!', GameConstants.NotificationOption.success);
         this.gymObservable(gym);
         App.game.wallet.gainMoney(gym.moneyReward);
         if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
@@ -78,7 +78,7 @@ class GymRunner {
 
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener('DOMContentLoaded', function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
 

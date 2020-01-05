@@ -84,44 +84,44 @@ class TypeHelper {
     }
 
     public static readonly typeColors = [
-        "595c3b", // Normal
-        "b10818", // Fire
-        "294a94", // Water
-        "b57b31", // Electric
-        "4a944a", // Grass
-        "42a59c", // Ice
-        "b54a4a", // Fighting
-        "7b42c6", // Poison
-        "946b4a", // Ground
-        "218cb5", // Flying
-        "ce6363", // Psychic
-        "8cb521", // Bug
-        "a58c4a", // Rock
-        "605a72", // Ghost
-        "8c424a", // Dragon
-        "4a6b84", // Dark
-        "737373", // Steel
-        "d694ce",  // Fairy
+        '595c3b', // Normal
+        'b10818', // Fire
+        '294a94', // Water
+        'b57b31', // Electric
+        '4a944a', // Grass
+        '42a59c', // Ice
+        'b54a4a', // Fighting
+        '7b42c6', // Poison
+        '946b4a', // Ground
+        '218cb5', // Flying
+        'ce6363', // Psychic
+        '8cb521', // Bug
+        'a58c4a', // Rock
+        '605a72', // Ghost
+        '8c424a', // Dragon
+        '4a6b84', // Dark
+        '737373', // Steel
+        'd694ce',  // Fairy
     ];
 
     public static readonly typeColorsLocked = [
-        "d3d4c4", // Normal
-        "fb9d9d", // Fire
-        "99b6ff", // Water
-        "ffda99", // Electric
-        "aff1a7", // Grass
-        "b5efef", // Ice
-        "f1bba7", // Fighting
-        "e7ccff", // Poison
-        "e3d1b5", // Ground
-        "99dfff", // Flying
-        "ffb5ad", // Psychic
-        "dbf99f", // Bug
-        "e3d1b5", // Rock
-        "c8c3d5", // Ghost
-        "e7b1b1", // Dragon
-        "bcccdc", // Dark
-        "cccccc", // Steel
-        "ffc6e7",  // Fairy
+        'd3d4c4', // Normal
+        'fb9d9d', // Fire
+        '99b6ff', // Water
+        'ffda99', // Electric
+        'aff1a7', // Grass
+        'b5efef', // Ice
+        'f1bba7', // Fighting
+        'e7ccff', // Poison
+        'e3d1b5', // Ground
+        '99dfff', // Flying
+        'ffb5ad', // Psychic
+        'dbf99f', // Bug
+        'e3d1b5', // Rock
+        'c8c3d5', // Ghost
+        'e7b1b1', // Dragon
+        'bcccdc', // Dark
+        'cccccc', // Steel
+        'ffc6e7',  // Fairy
     ];
 }

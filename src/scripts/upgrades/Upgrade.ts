@@ -73,7 +73,7 @@ class Upgrade implements Saveable {
         if (json == null) {
             return
         }
-        this.level = json["level"] ?? this.defaults.level;
+        this.level = json['level'] ?? this.defaults.level;
     }
 
     toJSON(): object {

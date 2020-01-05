@@ -76,7 +76,7 @@ class SandBody extends SafariBody {
     constructor(
         x: number = SandBody.randomInt(),
         y: number = SandBody.randomInt(),
-        type = "sand"
+        type = 'sand'
     ) {
         super();
         this.type = type;

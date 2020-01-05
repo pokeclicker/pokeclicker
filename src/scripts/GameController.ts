@@ -24,7 +24,7 @@ class GameController {
             pos = $('#' + target).offset();
             pos.top -= 15;
         } else {
-            pos = {"top": -200, "left": 0};
+            pos = {'top': -200, 'left': 0};
         }
 
         const left = ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
@@ -37,7 +37,7 @@ class GameController {
         $(ani).prependTo('body').animate({
             top: 10,
             opacity: 0,
-        }, 200 * Math.log(amount) + 1000, "linear",
+        }, 200 * Math.log(amount) + 1000, 'linear',
         function () {
             $(this).remove();
         });
@@ -74,14 +74,14 @@ class GameController {
 
             },
             options: {
-                placement: "bottom",
-                trigger: "click",
+                placement: 'bottom',
+                trigger: 'click',
             },
         };
     }
 
     static addKeyListeners() {
-        $(document).on("keydown", function (e) {
+        $(document).on('keydown', function (e) {
             const keyCode = e.keyCode;
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {
@@ -102,7 +102,7 @@ class GameController {
 
         });
 
-        $(document).on("keydown", function (e) {
+        $(document).on('keydown', function (e) {
             const keyCode = e.keyCode;
             if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyToDirection[keyCode];
@@ -116,7 +116,7 @@ class GameController {
             }
         });
 
-        $(document).on("keyup", function (e) {
+        $(document).on('keyup', function (e) {
             const keyCode = e.keyCode;
             if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyToDirection[keyCode];
@@ -132,5 +132,5 @@ class GameController {
 }
 
 $(document).ready(function () {
-    $("#pokedexModal").on("show.bs.modal", PokedexHelper.updateList)
+    $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList)
 });

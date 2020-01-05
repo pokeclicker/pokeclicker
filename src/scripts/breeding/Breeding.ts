@@ -1,8 +1,8 @@
 import Currency = GameConstants.Currency;
 
 class Breeding implements Feature {
-    name = "Breeding";
-    saveKey = "breeding";
+    name = 'Breeding';
+    saveKey = 'breeding';
 
     defaults = {
         'eggList': [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)],
@@ -21,27 +21,27 @@ class Breeding implements Feature {
 
     initialize(): void {
         this.hatchList[GameConstants.EggType.Fire] = [
-            ["Charmander", "Vulpix", "Growlithe", "Ponyta"],
-            ["Cyndaquil", "Slugma", "Houndour", "Magby"],
+            ['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'],
+            ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
         ];
         this.hatchList[GameConstants.EggType.Water] = [
-            ["Squirtle", "Lapras", "Staryu", "Psyduck"],
-            ["Totodile", "Wooper", "Marill", "Qwilfish"],
+            ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
+            ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
         ];
         this.hatchList[GameConstants.EggType.Grass] = [
-            ["Bulbasaur", "Oddish", "Tangela", "Bellsprout"],
-            ["Chikorita", "Hoppip", "Sunkern"],
+            ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
+            ['Chikorita', 'Hoppip', 'Sunkern'],
         ];
         this.hatchList[GameConstants.EggType.Fighting] = [
-            ["Hitmonlee", "Hitmonchan", "Machop", "Mankey"],
-            ["Tyrogue"],
+            ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
+            ['Tyrogue'],
         ];
         this.hatchList[GameConstants.EggType.Electric] = [
-            ["Magnemite", "Pikachu", "Voltorb", "Electabuzz"],
-            ["Chinchou", "Mareep", "Elekid"],
+            ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
+            ['Chinchou', 'Mareep', 'Elekid'],
         ];
         this.hatchList[GameConstants.EggType.Dragon] = [
-            ["Dratini", "Dragonair", "Dragonite"],
+            ['Dratini', 'Dragonair', 'Dragonite'],
             [],
         ];
 
@@ -59,12 +59,12 @@ class Breeding implements Feature {
             return;
         }
 
-        this.eggSlots = json["eggSlots"] ?? this.defaults.eggSlots;
+        this.eggSlots = json['eggSlots'] ?? this.defaults.eggSlots;
 
-        if (json["eggList"] == null) {
+        if (json['eggList'] == null) {
             this._eggList = this.defaults.eggList;
         } else {
-            const saveEggList: object[] = json["eggList"];
+            const saveEggList: object[] = json['eggList'];
 
             for (let i = 0; i < this._eggList.length; i++) {
                 if (saveEggList[i] != null) {
@@ -79,11 +79,11 @@ class Breeding implements Feature {
 
     toJSON(): object {
         const breedingSave = {};
-        breedingSave["eggList"] = this.eggList.map(function (egg: any) {
+        breedingSave['eggList'] = this.eggList.map(function (egg: any) {
             return egg() === null ? null : egg().toJSON();
         }
         );
-        breedingSave["eggSlots"] = this.eggSlots;
+        breedingSave['eggSlots'] = this.eggSlots;
         return breedingSave;
     }
 
@@ -108,7 +108,7 @@ class Breeding implements Feature {
                 return true;
             }
         }
-        console.log("Error: Could not place " + GameConstants.EggType[e.type] + " Egg");
+        console.log('Error: Could not place ' + GameConstants.EggType[e.type] + ' Egg');
         return false;
     }
 
@@ -132,9 +132,9 @@ class Breeding implements Feature {
             }
             if (egg.steps() >= egg.totalSteps) {
                 if (egg.type == GameConstants.EggType.Pokemon) {
-                    Notifier.notify(egg.pokemon + " is ready to hatch!", GameConstants.NotificationOption.success);
+                    Notifier.notify(egg.pokemon + ' is ready to hatch!', GameConstants.NotificationOption.success);
                 } else {
-                    Notifier.notify("An egg is ready to hatch!", GameConstants.NotificationOption.success);
+                    Notifier.notify('An egg is ready to hatch!', GameConstants.NotificationOption.success);
                 }
                 egg.notified = true;
             }

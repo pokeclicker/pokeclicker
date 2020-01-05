@@ -31,13 +31,13 @@ class ExpUpgrade extends Upgrade {
 
     toJSON(): object {
         const json = super.toJSON();
-        json["exp"] = this.exp;
+        json['exp'] = this.exp;
         return json;
     }
 
     fromJSON(json: object): void {
         super.fromJSON(json);
-        this.exp = json["exp"] ?? this.defaults.exp;
+        this.exp = json['exp'] ?? this.defaults.exp;
     }
 
     // Knockout getters/setters
@@ -55,7 +55,7 @@ class ExpUpgrade extends Upgrade {
 
     get progressString(): string {
         const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
-        return Math.round(this.normalizedExp) + "/" + nextLevelExp
+        return Math.round(this.normalizedExp) + '/' + nextLevelExp
     }
 
     // Private as external sources should use gainExp and normalizedExp
