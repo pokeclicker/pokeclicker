@@ -29,6 +29,7 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, 'Going to the breeder will no longer send you to route 5'),
     new Changelog(changelogType.CHANGE, 'You will now start the game with 25 Pokeballs'),
     new Changelog(changelogType.CHANGE, 'Tutorial quest buy Pokeballs amount reduced'),
+    new Changelog(changelogType.FIXED, 'Selecting "max" in store will no longer freeze the game for key items'),
     // v1.0.3 - 01-01-2020
     new Changelog(changelogType.VERSION, 'v1.0.3'),
     new Changelog(changelogType.NEW, 'Show pokeball image by caught Pokemon in the Pokedex'),
