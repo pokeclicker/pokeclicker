@@ -57,8 +57,9 @@ class Party implements Feature {
             expTotal *= 1.5;
         }
 
+        let maxLevel = (App.game.badgeCase.badgeCount() + 2) * 10;
         for (let pokemon of this.caughtPokemon) {
-            if (pokemon.levelObservable() < (App.game.badgeCase.badgeCount() + 2) * 10) {
+            if (pokemon.levelObservable() < maxLevel) {
                 pokemon.exp += expTotal;
             }
             pokemon.checkForLevelEvolution();

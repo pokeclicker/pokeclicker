@@ -24,7 +24,7 @@ class PartyPokemon implements Saveable {
         this.id = id;
         this.name = name;
         this.attackBonus = attackBonus;
-        this._exp = ko.observable(exp);
+        this._exp = ko.observable(exp).extend({ rateLimit: 1000 });
         this._baseAttack = ko.observable(baseAttack);
         this._breeding = ko.observable(breeding);
 
