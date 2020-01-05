@@ -72,6 +72,6 @@ Settings.add(
             new GameConstants.Option('United', 'united'),
             new GameConstants.Option('Yeti (default)', 'yeti'),
         ],
-        'yeti',
+        'yeti'
     )
 );

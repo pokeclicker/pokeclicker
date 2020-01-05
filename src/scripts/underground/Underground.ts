@@ -105,7 +105,7 @@ class Underground {
                 amount: ko.observable(num),
                 id: id,
                 value: item.value,
-                valueType: item.valueType
+                valueType: item.valueType,
             };
             player.mineInventory.push(tempItem);
         } else {

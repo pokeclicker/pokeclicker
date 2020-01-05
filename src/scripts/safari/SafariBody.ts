@@ -39,7 +39,7 @@ abstract class SafariBody {
         }
         return {
             plus: ret,
-            cross: cross
+            cross: cross,
         };
     }
 

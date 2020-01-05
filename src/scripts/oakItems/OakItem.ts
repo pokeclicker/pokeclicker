@@ -3,7 +3,7 @@ class OakItem extends ExpUpgrade {
     defaults = {
         level: 0,
         exp: 0,
-        isActive: false
+        isActive: false,
     };
 
     private _isActive: KnockoutObservable<boolean>;

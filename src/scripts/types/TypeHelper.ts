@@ -101,7 +101,7 @@ class TypeHelper {
         "8c424a", // Dragon
         "4a6b84", // Dark
         "737373", // Steel
-        "d694ce"  // Fairy
+        "d694ce",  // Fairy
     ];
 
     public static readonly typeColorsLocked = [
@@ -122,6 +122,6 @@ class TypeHelper {
         "e7b1b1", // Dragon
         "bcccdc", // Dark
         "cccccc", // Steel
-        "ffc6e7"  // Fairy
+        "ffc6e7",  // Fairy
     ];
 }

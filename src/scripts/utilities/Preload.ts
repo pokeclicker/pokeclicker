@@ -22,13 +22,14 @@ class Preload {
             })
         } else {
             return new Promise(resolve => {
-                Promise.all([Preload.loadSplashScreen(),
+                Promise.all([
+                    Preload.loadSplashScreen(),
                     Preload.loadSplashScreen(),
                     Preload.loadBackground(),
                     Preload.loadMap(),
                     Preload.loadTowns(),
                     // Preload.loadPokemon(),
-                    Preload.minimumTime()
+                    Preload.minimumTime(),
                 ]).then(() => {
                     resolve();
                 }).catch((reason => {

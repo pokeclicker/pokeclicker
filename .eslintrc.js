@@ -22,6 +22,9 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/camelcase': 'warn',
-    "indent": ["error", 4, { "SwitchCase": 1 }]
+    'indent': ['error', 4, { 'SwitchCase': 1 }],
+    'no-trailing-spaces': ['error', { 'skipBlankLines': true }],
+    'array-bracket-newline': ['error', { 'multiline': true }],
+    'comma-dangle': ['error', { 'arrays': 'always-multiline', 'objects': 'always-multiline', 'imports': 'always-multiline', 'exports': 'always-multiline' }],
   }
 }

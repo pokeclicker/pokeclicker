@@ -85,7 +85,7 @@ class Mine {
                         x: j,
                         y: i,
                         value: reward.space[i][j],
-                        revealed: 0
+                        revealed: 0,
                     };
                 }
             }
@@ -206,7 +206,7 @@ class Mine {
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound,
             itemsBuried: this.itemsBuried,
-            rewardNumbers: this.rewardNumbers
+            rewardNumbers: this.rewardNumbers,
         }
 
         return ko.toJSON(mine);

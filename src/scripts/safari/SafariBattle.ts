@@ -166,7 +166,7 @@ class SafariBattle {
                 setTimeout(function(){
                     const newOffset = {
                         top: enemy.top + 4,
-                        left: enemy.left - 20
+                        left: enemy.left - 20,
                     }
                     const ang = $('<ptcl>').html("<img src='assets/images/safari/angry.png'>").children().appendTo('body');
                     ang.css('position','absolute').css('z-index', 9999);
@@ -271,6 +271,6 @@ namespace SafariBattle {
         "Oh, no!<br>The Pokemon broke free!",
         "Aww! It appeared to be caught!",
         "Aargh! Almost had it!",
-        "Shoot! It was so close, too!"
+        "Shoot! It was so close, too!",
     ];
 }

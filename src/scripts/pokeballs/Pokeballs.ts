@@ -103,10 +103,10 @@ class Pokeballs implements Feature {
                 this.pokeballs[GameConstants.Pokeball.Pokeball],
                 this.pokeballs[GameConstants.Pokeball.Greatball],
                 this.pokeballs[GameConstants.Pokeball.Ultraball],
-                this.pokeballs[GameConstants.Pokeball.Masterball]
+                this.pokeballs[GameConstants.Pokeball.Masterball],
             ],
             "notCaughtSelection": this.notCaughtSelection,
-            "alreadyCaughtSelection": this.alreadyCaughtSelection
+            "alreadyCaughtSelection": this.alreadyCaughtSelection,
         }
     }
 

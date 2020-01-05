@@ -1,6 +1,6 @@
 class Upgrade implements Saveable {
     defaults = {
-        level: 0
+        level: 0,
     };
     saveKey: string;
 
@@ -78,7 +78,7 @@ class Upgrade implements Saveable {
 
     toJSON(): object {
         return {
-            level: this.level
+            level: this.level,
         }
     }
 

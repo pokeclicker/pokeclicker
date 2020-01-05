@@ -4,7 +4,7 @@ class Wallet implements Feature {
     currencies: ArrayOfObservables<number>;
 
     defaults = {
-        currencies: [0, 0, 0, 0, 0]
+        currencies: [0, 0, 0, 0, 0],
     };
 
     constructor() {

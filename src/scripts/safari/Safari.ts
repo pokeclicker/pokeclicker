@@ -177,7 +177,7 @@ class Safari {
         const topLeft = $(`#safari-0-0`).offset();
         const offset = {
             top: 32*j + topLeft.top,
-            left: 32*i + topLeft.left
+            left: 32*i + topLeft.left,
         };
         $("#safariBody").append("<div id='sprite'></div>");
         $("#sprite").css('background',  "url('assets/images/safari/walk" + Safari.lastDirection + ".png')");
@@ -191,7 +191,7 @@ class Safari {
         const element = document.querySelector('#sprite');
         Safari.sprite = new Motio(element, {
             fps: 8,
-            frames: 4
+            frames: 4,
         }).on('frame', function() {
             if (Safari.sprite.frame % 2 == 0) {
                 Safari.sprite.pause();
@@ -234,14 +234,14 @@ class Safari {
 
         const newPos = {
             x: Safari.playerXY.x + directionOffset.x,
-            y: Safari.playerXY.y + directionOffset.y
+            y: Safari.playerXY.y + directionOffset.y,
         };
 
         if (Safari.canMove(newPos.x, newPos.y)) {
             const next = $(`#safari-${newPos.x}-${newPos.y}`).offset();
             const offset = {
                 top: `+=${directionOffset.y * 32}`,
-                left: `+=${directionOffset.x * 32}`
+                left: `+=${directionOffset.x * 32}`,
             }
 
             $("#sprite").css("background", "url('assets/images/safari/walk"+direction+".png')");

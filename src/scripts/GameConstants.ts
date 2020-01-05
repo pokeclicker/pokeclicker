@@ -135,7 +135,7 @@ namespace GameConstants {
         21,
         22,
         23,
-        24
+        24,
     ];
 
     export const SAFARI_OUT_OF_BALLS = "Game Over!<br>You have run out of safari balls to use."
@@ -475,13 +475,13 @@ namespace GameConstants {
             120: BadgeCase.Badge.Feather,
             126: BadgeCase.Badge.Mind,
             127: BadgeCase.Badge.Rain,
-        }
+        },
     };
 
     export const WaterRoutes = {
         0: new Set([19,20,21]),
         1: new Set([40,41]),
-        2: new Set([105,106,107,108,109,122,124,125,126,127,128,129,130,131,132,133,134])
+        2: new Set([105,106,107,108,109,122,124,125,126,127,128,129,130,131,132,133,134]),
     }
 
     export const routeDungeonRequirements = {
@@ -491,7 +491,7 @@ namespace GameConstants {
         },
         1: {
             33: "Union Cave",
-            34: "Ilex Forest"
+            34: "Ilex Forest",
         },
         2: {
             116: "Petalburg Woods",
@@ -501,7 +501,7 @@ namespace GameConstants {
             112: "Jagged Pass",
             124: "Mt. Pyre",
             128: "Seafloor Cavern",
-        }
+        },
     }
 
     export enum Starter {
@@ -696,7 +696,7 @@ namespace GameConstants {
         "Elite Koga",
         "Elite Bruno2",
         "Elite Karen",
-        "Champion Lance"
+        "Champion Lance",
     ];
 
     export const HoennGyms = [
@@ -712,7 +712,7 @@ namespace GameConstants {
         "Elite Phoebe",
         "Elite Glacia",
         "Elite Drake",
-        "Champion Wallace"
+        "Champion Wallace",
     ];
 
     export const RegionGyms = [
@@ -731,7 +731,7 @@ namespace GameConstants {
         "Seafoam Islands",
         "Pokemon Mansion",
         "Victory Road",
-        "Cerulean Cave"
+        "Cerulean Cave",
     ];
 
     export const JohtoDungeons = [
@@ -746,7 +746,7 @@ namespace GameConstants {
         "Mt Mortar",
         "Ice Path",
         "Dark Cave",
-        "Mt Silver"
+        "Mt Silver",
     ];
 
     export const HoennDungeons = [

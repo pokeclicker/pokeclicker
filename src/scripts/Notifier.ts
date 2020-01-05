@@ -7,7 +7,7 @@ class Notifier {
             title: '',
             message: GameConstants.humanifyString(message),
             url: '',
-            target: ''
+            target: '',
         },{
             // settings
             element: 'body',
@@ -18,7 +18,7 @@ class Notifier {
             showProgressbar: false,
             placement: {
                 from: "top",
-                align: "left"
+                align: "left",
             },
             offset: 20,
             spacing: 10,
@@ -29,7 +29,7 @@ class Notifier {
             mouse_over: null,
             animate: {
                 enter: 'animated fadeInDown',
-                exit: 'animated fadeOutUp'
+                exit: 'animated fadeOutUp',
             },
             onShow: null,
             onShown: null,
@@ -46,7 +46,7 @@ class Notifier {
             '<div class="progress-bar progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
             '</div>' +
             '<a href="{3}" target="{4}" data-notify="url"></a>' +
-            '</div>'
+            '</div>',
         });
     }
 }

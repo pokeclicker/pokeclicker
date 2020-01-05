@@ -6,7 +6,7 @@ class Breeding implements Feature {
 
     defaults = {
         'eggList': [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)],
-        'eggSlots': 1
+        'eggSlots': 1,
     };
 
     private _eggList: Array<KnockoutObservable<Egg | void>>;

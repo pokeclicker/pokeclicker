@@ -58,8 +58,10 @@ class Gym {
 gymList["Pewter City"] = new Gym(
     "Brock",
     "Pewter City",
-    [new GymPokemon("Geodude", 770, 12),
-        new GymPokemon("Onix", 1554, 14)],
+    [
+        new GymPokemon("Geodude", 770, 12),
+        new GymPokemon("Onix", 1554, 14),
+    ],
     BadgeCase.Badge.Boulder,
     250,
     BadgeCase.Badge.None,
@@ -68,8 +70,10 @@ gymList["Pewter City"] = new Gym(
 gymList["Cerulean City"] = new Gym(
     "Misty",
     "Cerulean City",
-    [new GymPokemon("Staryu", 4000, 18),
-        new GymPokemon("Starmie", 6800, 21)],
+    [
+        new GymPokemon("Staryu", 4000, 18),
+        new GymPokemon("Starmie", 6800, 21),
+    ],
     BadgeCase.Badge.Cascade,
     500,
     BadgeCase.Badge.Boulder,
@@ -78,9 +82,11 @@ gymList["Cerulean City"] = new Gym(
 gymList["Vermillion City"] = new Gym(
     "Lt. Surge",
     "Vermillion City",
-    [new GymPokemon("Voltorb", 10780, 21),
+    [
+        new GymPokemon("Voltorb", 10780, 21),
         new GymPokemon("Pikachu", 13540, 18),
-        new GymPokemon("Raichu", 15675, 24)],
+        new GymPokemon("Raichu", 15675, 24),
+    ],
     BadgeCase.Badge.Thunder,
     1000,
     BadgeCase.Badge.Cascade,
@@ -89,9 +95,11 @@ gymList["Vermillion City"] = new Gym(
 gymList["Celadon City"] = new Gym(
     "Erika",
     "Celadon City",
-    [new GymPokemon("Victreebel", 28810, 29),
+    [
+        new GymPokemon("Victreebel", 28810, 29),
         new GymPokemon("Tangela", 30340, 24),
-        new GymPokemon("Vileplume", 36400, 29)],
+        new GymPokemon("Vileplume", 36400, 29),
+    ],
     BadgeCase.Badge.Rainbow,
     1500,
     BadgeCase.Badge.Thunder,
@@ -100,10 +108,12 @@ gymList["Celadon City"] = new Gym(
 gymList["Saffron City"] = new Gym(
     "Sabrina",
     "Saffron City",
-    [new GymPokemon("Kadabra", 23040, 38),
+    [
+        new GymPokemon("Kadabra", 23040, 38),
         new GymPokemon("Mr. Mime", 25600, 37),
         new GymPokemon("Venomoth", 28400, 38),
-        new GymPokemon("Alakazam", 35380, 43)],
+        new GymPokemon("Alakazam", 35380, 43),
+    ],
     BadgeCase.Badge.Marsh,
     2500,
     BadgeCase.Badge.Rainbow,
@@ -112,10 +122,12 @@ gymList["Saffron City"] = new Gym(
 gymList["Fuchsia City"] = new Gym(
     "Koga",
     "Fuchsia City",
-    [new GymPokemon("Koffing", 30780, 38),
+    [
+        new GymPokemon("Koffing", 30780, 38),
         new GymPokemon("Muk", 32460, 37),
         new GymPokemon("Koffing", 36540, 38),
-        new GymPokemon("Weezing", 37430, 43)],
+        new GymPokemon("Weezing", 37430, 43),
+    ],
     BadgeCase.Badge.Soul,
     3500,
     BadgeCase.Badge.Marsh,
@@ -124,10 +136,12 @@ gymList["Fuchsia City"] = new Gym(
 gymList["Cinnabar Island"] = new Gym(
     "Blaine",
     "Cinnabar Island",
-    [new GymPokemon("Growlithe", 37430, 42),
+    [
+        new GymPokemon("Growlithe", 37430, 42),
         new GymPokemon("Ponyta", 42340, 40),
         new GymPokemon("Rapidash", 45230, 42),
-        new GymPokemon("Arcanine", 50290, 47)],
+        new GymPokemon("Arcanine", 50290, 47),
+    ],
     BadgeCase.Badge.Volcano,
     5000,
     BadgeCase.Badge.Soul,
@@ -136,11 +150,13 @@ gymList["Cinnabar Island"] = new Gym(
 gymList["Viridian City"] = new Gym(
     "Giovanni",
     "Viridian City",
-    [new GymPokemon("Rhyhorn", 45230, 45),
+    [
+        new GymPokemon("Rhyhorn", 45230, 45),
         new GymPokemon("Dugtrio", 47530, 42),
         new GymPokemon("Nidoqueen", 48740, 44),
         new GymPokemon("Nidoking", 48350, 45),
-        new GymPokemon("Rhydon", 55000, 50)],
+        new GymPokemon("Rhydon", 55000, 50),
+    ],
     BadgeCase.Badge.Earth,
     6000,
     BadgeCase.Badge.Volcano,
@@ -151,11 +167,13 @@ gymList["Viridian City"] = new Gym(
 gymList["Elite Lorelei"] = new Gym(
     "Lorelei",
     "Elite Lorelei",
-    [new GymPokemon("Dewgong", 45330, 52),
+    [
+        new GymPokemon("Dewgong", 45330, 52),
         new GymPokemon("Cloyster", 48300, 51),
         new GymPokemon("Slowbro", 52000, 52),
         new GymPokemon("Jynx", 57000, 54),
-        new GymPokemon("Lapras", 60250, 54),],
+        new GymPokemon("Lapras", 60250, 54),
+    ],
     BadgeCase.Badge.Elite_Lorelei,
     7500,
     BadgeCase.Badge.Earth,
@@ -164,11 +182,13 @@ gymList["Elite Lorelei"] = new Gym(
 gymList["Elite Bruno"] = new Gym(
     "Bruno",
     "Elite Bruno",
-    [new GymPokemon("Onix", 45330, 51),
+    [
+        new GymPokemon("Onix", 45330, 51),
         new GymPokemon("Hitmonchan", 48300, 53),
         new GymPokemon("Hitmonlee", 52000, 53),
         new GymPokemon("Onix", 57000, 54),
-        new GymPokemon("Machamp", 60250, 56),],
+        new GymPokemon("Machamp", 60250, 56),
+    ],
     BadgeCase.Badge.Elite_Bruno,
     7500,
     BadgeCase.Badge.Elite_Lorelei,
@@ -177,11 +197,13 @@ gymList["Elite Bruno"] = new Gym(
 gymList["Elite Agatha"] = new Gym(
     "Agatha",
     "Elite Agatha",
-    [new GymPokemon("Gengar", 45330, 54),
+    [
+        new GymPokemon("Gengar", 45330, 54),
         new GymPokemon("Golbat", 48300, 54),
         new GymPokemon("Haunter", 52000, 53),
         new GymPokemon("Arbok", 57000, 56),
-        new GymPokemon("Gengar", 60250, 58),],
+        new GymPokemon("Gengar", 60250, 58),
+    ],
     BadgeCase.Badge.Elite_Agatha,
     7500,
     BadgeCase.Badge.Elite_Bruno,
@@ -190,11 +212,13 @@ gymList["Elite Agatha"] = new Gym(
 gymList["Elite Lance"] = new Gym(
     "Lance",
     "Elite Lance",
-    [new GymPokemon("Gyarados", 48300, 56),
+    [
+        new GymPokemon("Gyarados", 48300, 56),
         new GymPokemon("Dragonair", 52000, 54),
         new GymPokemon("Dragonair", 57000, 54),
         new GymPokemon("Aerodactyl", 60250, 58),
-        new GymPokemon("Dragonite", 66000, 60),],
+        new GymPokemon("Dragonite", 66000, 60),
+    ],
     BadgeCase.Badge.Elite_Lance,
     7500,
     BadgeCase.Badge.Elite_Agatha,
@@ -206,8 +230,10 @@ gymList["Elite Lance"] = new Gym(
 gymList["Violet City"] = new Gym(
     "Falkner",
     "Violet City",
-    [new GymPokemon("Pidgey", 38000, 9),
-        new GymPokemon("Pidgeotto", 42000, 13)],
+    [
+        new GymPokemon("Pidgey", 38000, 9),
+        new GymPokemon("Pidgeotto", 42000, 13),
+    ],
     BadgeCase.Badge.Zephyr,
     500,
     BadgeCase.Badge.Elite_Lance,
@@ -216,9 +242,11 @@ gymList["Violet City"] = new Gym(
 gymList["Azalea Town"] = new Gym(
     "Bugsy",
     "Azalea Town",
-    [new GymPokemon("Metapod", 33000, 15),
+    [
+        new GymPokemon("Metapod", 33000, 15),
         new GymPokemon("Kakuna", 37500, 15),
-        new GymPokemon("Scyther", 39000, 17)],
+        new GymPokemon("Scyther", 39000, 17),
+    ],
     BadgeCase.Badge.Hive,
     500,
     BadgeCase.Badge.Zephyr,
@@ -227,8 +255,10 @@ gymList["Azalea Town"] = new Gym(
 gymList["Goldenrod City"] = new Gym(
     "Whitney",
     "Goldenrod City",
-    [new GymPokemon("Clefairy", 50000, 17),
-        new GymPokemon("Miltank", 80000, 19)],
+    [
+        new GymPokemon("Clefairy", 50000, 17),
+        new GymPokemon("Miltank", 80000, 19),
+    ],
     BadgeCase.Badge.Plain,
     500,
     BadgeCase.Badge.Hive,
@@ -237,10 +267,12 @@ gymList["Goldenrod City"] = new Gym(
 gymList["Ecruteak City"] = new Gym(
     "Morty",
     "Ecruteak City",
-    [new GymPokemon("Gastly", 37000, 21),
+    [
+        new GymPokemon("Gastly", 37000, 21),
         new GymPokemon("Haunter", 38000, 21),
         new GymPokemon("Haunter", 40000, 23),
-        new GymPokemon("Gengar", 42000, 25)],
+        new GymPokemon("Gengar", 42000, 25),
+    ],
     BadgeCase.Badge.Fog,
     500,
     BadgeCase.Badge.Plain,
@@ -249,8 +281,10 @@ gymList["Ecruteak City"] = new Gym(
 gymList["Cianwood City"] = new Gym(
     "Chuck",
     "Cianwood City",
-    [new GymPokemon("Primeape", 87000, 29),
-        new GymPokemon("Poliwrath", 93000, 31)],
+    [
+        new GymPokemon("Primeape", 87000, 29),
+        new GymPokemon("Poliwrath", 93000, 31),
+    ],
     BadgeCase.Badge.Storm,
     500,
     BadgeCase.Badge.Fog,
@@ -259,9 +293,11 @@ gymList["Cianwood City"] = new Gym(
 gymList["Olivine City"] = new Gym(
     "Jasmine",
     "Olivine City",
-    [new GymPokemon("Magnemite", 67000, 30),
+    [
+        new GymPokemon("Magnemite", 67000, 30),
         new GymPokemon("Magnemite", 68000, 30),
-        new GymPokemon("Steelix", 72000, 35)],
+        new GymPokemon("Steelix", 72000, 35),
+    ],
     BadgeCase.Badge.Mineral,
     500,
     BadgeCase.Badge.Storm,
@@ -270,9 +306,11 @@ gymList["Olivine City"] = new Gym(
 gymList["Mahogany Town"] = new Gym(
     "Pryce",
     "Mahogany Town",
-    [new GymPokemon("Seel", 70000, 30),
+    [
+        new GymPokemon("Seel", 70000, 30),
         new GymPokemon("Dewgong", 72500, 32),
-        new GymPokemon("Piloswine", 76000, 34)],
+        new GymPokemon("Piloswine", 76000, 34),
+    ],
     BadgeCase.Badge.Glacier,
     500,
     BadgeCase.Badge.Mineral,
@@ -281,10 +319,12 @@ gymList["Mahogany Town"] = new Gym(
 gymList["Blackthorn City"] = new Gym(
     "Clair",
     "Blackthorn City",
-    [new GymPokemon("Dragonair", 65000, 38),
+    [
+        new GymPokemon("Dragonair", 65000, 38),
         new GymPokemon("Dragonair", 65000, 38),
         new GymPokemon("Gyarados", 78000, 38),
-        new GymPokemon("Kingdra", 80000, 41)],
+        new GymPokemon("Kingdra", 80000, 41),
+    ],
     BadgeCase.Badge.Rising,
     500,
     BadgeCase.Badge.Glacier,
@@ -295,11 +335,13 @@ gymList["Blackthorn City"] = new Gym(
 gymList["Elite Will"] = new Gym(
     "Will",
     "Elite Will",
-    [new GymPokemon("Xatu", 45330, 40),
+    [
+        new GymPokemon("Xatu", 45330, 40),
         new GymPokemon("Jynx", 48300, 41),
         new GymPokemon("Exeggutor", 52000, 41),
         new GymPokemon("Slowbro", 57000, 41),
-        new GymPokemon("Xatu", 60250, 42),],
+        new GymPokemon("Xatu", 60250, 42),
+    ],
     BadgeCase.Badge.Elite_Will,
     7500,
     BadgeCase.Badge.Rising,
@@ -308,11 +350,13 @@ gymList["Elite Will"] = new Gym(
 gymList["Elite Koga"] = new Gym(
     "Koga2",
     "Elite Koga",
-    [new GymPokemon("Ariados", 45330, 40),
+    [
+        new GymPokemon("Ariados", 45330, 40),
         new GymPokemon("Venomoth", 48300, 41),
         new GymPokemon("Forretress", 52000, 43),
         new GymPokemon("Muk", 57000, 42),
-        new GymPokemon("Crobat", 60250, 44),],
+        new GymPokemon("Crobat", 60250, 44),
+    ],
     BadgeCase.Badge.Elite_Koga,
     7500,
     BadgeCase.Badge.Elite_Will,
@@ -321,11 +365,13 @@ gymList["Elite Koga"] = new Gym(
 gymList["Elite Bruno2"] = new Gym(
     "Bruno2",
     "Elite Bruno2",
-    [new GymPokemon("Hitmontop", 45330, 42),
+    [
+        new GymPokemon("Hitmontop", 45330, 42),
         new GymPokemon("Hitmonlee", 48300, 42),
         new GymPokemon("Hitmonchan", 52000, 42),
         new GymPokemon("Onix", 57000, 43),
-        new GymPokemon("Machamp", 60250, 46),],
+        new GymPokemon("Machamp", 60250, 46),
+    ],
     BadgeCase.Badge.Elite_Bruno2,
     7500,
     BadgeCase.Badge.Elite_Koga,
@@ -334,11 +380,13 @@ gymList["Elite Bruno2"] = new Gym(
 gymList["Elite Karen"] = new Gym(
     "Karen",
     "Elite Karen",
-    [new GymPokemon("Umbreon", 48300, 42),
+    [
+        new GymPokemon("Umbreon", 48300, 42),
         new GymPokemon("Vileplume", 52000, 42),
         new GymPokemon("Gengar", 57000, 45),
         new GymPokemon("Murkrow", 60250, 44),
-        new GymPokemon("Houndoom", 66000, 47),],
+        new GymPokemon("Houndoom", 66000, 47),
+    ],
     BadgeCase.Badge.Elite_Karen,
     7500,
     BadgeCase.Badge.Elite_Bruno2,
@@ -347,11 +395,13 @@ gymList["Elite Karen"] = new Gym(
 gymList["Champion Lance"] = new Gym(
     "Lance2",
     "Champion Lance",
-    [new GymPokemon("Gyarados", 58300, 44),
+    [
+        new GymPokemon("Gyarados", 58300, 44),
         new GymPokemon("Dragonite", 62000, 49),
         new GymPokemon("Dragonite", 64000, 49),
         new GymPokemon("Aerodactyl", 60250, 48),
-        new GymPokemon("Dragonite", 70000, 50),],
+        new GymPokemon("Dragonite", 70000, 50),
+    ],
     BadgeCase.Badge.Elite_JohtoChampion,
     7500,
     BadgeCase.Badge.Elite_Karen,

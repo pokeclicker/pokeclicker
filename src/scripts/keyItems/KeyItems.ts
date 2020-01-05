@@ -40,7 +40,7 @@ class KeyItems implements Feature {
             // TODO obtain after first prestige
             new KeyItem(KeyItems.KeyItem.Shard_case, "A case specifically designed for holding shards", function () {
                 return false;
-            })
+            }),
         ];
     }
 

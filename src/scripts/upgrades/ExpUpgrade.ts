@@ -4,7 +4,7 @@
 class ExpUpgrade extends Upgrade {
     defaults = {
         level: 0,
-        exp: 0
+        exp: 0,
     };
 
     expList: number[];
