@@ -107,10 +107,10 @@ class Underground {
                 value: item.value,
                 valueType: item.valueType
             };
-            player._mineInventory.push(tempItem);
+            player.mineInventory.push(tempItem);
         } else {
-            const amt = player._mineInventory()[index].amount()
-            player._mineInventory()[index].amount(amt + num);
+            let amt = player.mineInventory[index].amount()
+            player.mineInventory[index].amount(amt + num);
         }
     }
 
@@ -141,14 +141,14 @@ class Underground {
     }
 
     public static sellMineItem(id: number) {
-        for (let i = 0; i < player._mineInventory().length; i++) {
-            const item = player._mineInventory()[i];
+        for (let i = 0; i < player.mineInventory.length; i++) {
+            let item = player.mineInventory[i];
             if (item.id == id) {
                 if (item.amount() > 0) {
                     const success = Underground.gainProfit(item);
                     if (success) {
-                        const amt = item.amount();
-                        player._mineInventory()[i].amount(amt - 1);
+                        let amt = item.amount();
+                        player.mineInventory[i].amount(amt - 1);
                     }
                     return;
                 }

@@ -10,20 +10,22 @@ class Safari {
     static queue: Array<string> = [];
     private static playerXY = {"x": 0, "y": 0};
     private static origin;
+    static inProgress: KnockoutObservable<boolean> = ko.observable(false);
     static inBattle: KnockoutObservable<boolean> = ko.observable(false);
     static balls: KnockoutObservable<number> = ko.observable();
     static sprite: Motio;
 
     public static load() {
-        this.grid = [];
-        this.playerXY.x = 0;
-        this.playerXY.y = 0;
+        Safari.grid = [];
+        Safari.playerXY.x = 0;
+        Safari.playerXY.y = 0;
         Safari.lastDirection = "up";
         Safari.inBattle(false);
+        Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());
         for( let i = 0; i<GameConstants.Safari.SizeY; i++){
-            const row = [...Array(GameConstants.Safari.SizeX)].map(Number.prototype.valueOf, 0);
-            this.grid.push(row);
+            let row = Array.apply(null, Array(GameConstants.Safari.SizeX)).map(Number.prototype.valueOf, 0);
+            Safari.grid.push(row);
         }
 
         Safari.addRandomBody(new FenceBody());
@@ -110,28 +112,65 @@ class Safari {
         }
     }
 
+    public static openModal() {
+        if (this.canAccess()) {
+            App.game.gameState = GameConstants.GameState.safari;
+            $('#safariModal').modal({backdrop: 'static', keyboard: false});
+        } else {
+            Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
+        }
+    }
+
+    public static closeModal() {
+        if (!Safari.inBattle()) {
+            $('#safariModal').modal('hide');
+        }
+    }
+
+    private static canPay() {
+        return App.game.wallet.hasAmount(Safari.cost());
+    }
+
+    private static cost() {
+        return new Amount(50,GameConstants.Currency.questPoint);
+    }
+
+    private static payEntranceFee() {
+        if (Safari.canPay()) {
+            // TODO add increasing cost back
+            //typeof player.safariCostModifier == undefined ? 1 : player.safariCostModifier++;
+
+            App.game.wallet.loseAmount(Safari.cost());
+            Safari.load();
+        }
+    }
+
+    private static canAccess() {
+        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Safari_ticket);
+    }
+
     static show() {
         let html = "";
 
-        for (let i=0; i<this.grid.length; i++) {
-            html += "<div class='row m-0'>";
-            for (let j=0; j<this.grid[0].length; j++) {
+        for (let i=0; i<Safari.grid.length; i++) {
+            html += "<div class='row'>";
+            for (let j=0; j<Safari.grid[0].length; j++) {
                 html += Safari.square(i, j);
             }
             html += "</div>";
         }
 
-        $("#safariBattleBody").hide();
-        $("#safariBody").html(html).show();
+        $("#safariBody").html(html);
 
         Safari.addPlayer(Math.floor(GameConstants.Safari.SizeX - 1)/2, GameConstants.Safari.SizeY - 1);
+
     }
 
     private static square(i: number, j: number): string {
         const img = 'assets/images/safari/' + this.grid[i][j] + '.png';
         const divId = "safari-" + j + "-" + i;
 
-        return "<div id='" + divId + "' style=background-image:url('" + img + "') class='col-sm-1 safariSquare'></div>"
+        return "<div id='" + divId + "' style=background-image:url('" + img + "') class='safariSquare'></div>";
     }
 
     private static addPlayer(i: number, j: number) {
@@ -147,6 +186,17 @@ class Safari {
         Safari.playerXY.x = i;
         Safari.playerXY.y = j;
         Safari.origin = offset;
+
+
+        let element = document.querySelector('#sprite');
+        Safari.sprite = new Motio(element, {
+            fps: 8,
+            frames: 4
+        }).on('frame', function() {
+            if (Safari.sprite.frame % 2 == 0) {
+                Safari.sprite.pause();
+            }
+        });
     }
 
     public static move(dir: string) {
@@ -157,7 +207,7 @@ class Safari {
             Safari.startMoving(dir);
         } else {
             if(dir) {
-                Safari.setNextDirection(dir)
+                Safari.setNextDirection(dir);
             }
         }
     }
@@ -260,20 +310,6 @@ class Safari {
         if (!Safari.queue[0]){ Safari.walking = false };
     }
 
-    public static openModal() {
-        if (this.canAccess()) {
-            App.game.gameState = GameConstants.GameState.safari;
-            Safari.load();
-            $('#safariModal').modal({backdrop: 'static', keyboard: false});
-        } else {
-            Notifier.notify("You do not have access to that location", GameConstants.NotificationOption.warning);
-        }
-    }
-
-    private static canAccess() {
-        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Safari_ticket);
-    }
-
     private static checkBattle(): boolean {
         let battle = false;
         if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
@@ -295,17 +331,5 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     $('#safariModal').on('hidden.bs.modal', function () {
         MapHelper.moveToTown("Fuchsia City");
-    });
-
-    $('#safariModal').on('shown.bs.modal', function () {
-        const element = document.querySelector('#sprite');
-        Safari.sprite = new Motio(element, {
-            fps: 8,
-            frames: 4
-        }).on('frame', function() {
-            if (Safari.sprite.frame % 2 == 0) {
-                Safari.sprite.pause();
-            }
-        });
     });
 });
