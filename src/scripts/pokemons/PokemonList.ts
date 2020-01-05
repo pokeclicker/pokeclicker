@@ -1,6 +1,7 @@
 ///<reference path="../party/evolutions/LevelEvolution.ts"/>
 ///<reference path="../party/evolutions/StoneEvolution.ts"/>
 ///<reference path="../GameConstants.ts"/>
+///<reference path="../party/LevelType.ts"/>
 /**
  * Pokémon data, accessible by name or id.
  * @type {{}}
@@ -22,7 +23,7 @@ const pokemonList: {
     evoLevel?: any[],
     type: string[],
     attack: number,
-    levelType: string,
+    levelType: LevelType,
     exp: number,
     eggCycles: number
 }[] =
@@ -32,7 +33,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass", "Poison"],
         "attack": 65,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 64,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Bulbasaur", "Ivysaur", 16)],
@@ -42,7 +43,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass", "Poison"],
         "attack": 80,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Ivysaur", "Venusaur", 32)],
@@ -52,7 +53,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass", "Poison"],
         "attack": 100,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 236,
         "eggCycles": 20
     }, {
@@ -61,7 +62,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fire"],
         "attack": 60,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 62,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Charmander", "Charmeleon", 16)],
@@ -71,7 +72,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fire"],
         "attack": 80,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Charmeleon", "Charizard", 36)],
@@ -81,7 +82,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fire", "Flying"],
         "attack": 105,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 240,
         "eggCycles": 20
     }, {
@@ -90,7 +91,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water"],
         "attack": 50,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 63,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Squirtle", "Wartortle", 16)],
@@ -100,7 +101,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water"],
         "attack": 65,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Wartortle", "Blastoise", 36)],
@@ -110,7 +111,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water"],
         "attack": 85,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 239,
         "eggCycles": 20
     }, {
@@ -119,7 +120,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Bug"],
         "attack": 30,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 39,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Caterpie", "Metapod", 7)],
@@ -129,7 +130,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Bug"],
         "attack": 25,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 72,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Metapod", "Butterfree", 10)],
@@ -139,7 +140,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Bug", "Flying"],
         "attack": 90,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 178,
         "eggCycles": 15
     }, {
@@ -148,7 +149,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Bug", "Poison"],
         "attack": 35,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 39,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Weedle", "Kakuna", 7)],
@@ -158,7 +159,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Bug", "Poison"],
         "attack": 25,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 72,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Kakuna", "Beedrill", 10)],
@@ -168,7 +169,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Bug", "Poison"],
         "attack": 90,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 178,
         "eggCycles": 15
     }, {
@@ -177,7 +178,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Normal", "Flying"],
         "attack": 45,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 50,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Pidgey", "Pidgeotto", 18)],
@@ -187,7 +188,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Normal", "Flying"],
         "attack": 60,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 122,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Pidgeotto", "Pidgeot", 36)],
@@ -197,7 +198,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal", "Flying"],
         "attack": 80,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 216,
         "eggCycles": 15
     }, {
@@ -206,7 +207,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Normal"],
         "attack": 56,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 51,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Rattata", "Raticate", 20)],
@@ -216,7 +217,7 @@ const pokemonList: {
         "catchRate": 127,
         "type": ["Normal"],
         "attack": 81,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 145,
         "eggCycles": 15
     }, {
@@ -225,7 +226,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Normal", "Flying"],
         "attack": 60,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 52,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Spearow", "Fearow", 20)],
@@ -235,7 +236,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Normal", "Flying"],
         "attack": 90,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 155,
         "eggCycles": 15
     }, {
@@ -244,7 +245,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Poison"],
         "attack": 60,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 58,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Ekans", "Arbok", 22)],
@@ -254,7 +255,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Poison"],
         "attack": 85,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 157,
         "eggCycles": 20
     }, {
@@ -263,7 +264,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Electric"],
         "attack": 55,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 112,
         "eggCycles": 10,
         "evolutions": [new StoneEvolution("Pikachu", "Raichu", GameConstants.StoneType.Thunder_stone)],
@@ -273,7 +274,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Electric"],
         "attack": 90,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 218,
         "eggCycles": 10
     }, {
@@ -282,7 +283,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Ground"],
         "attack": 75,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 60,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Sandshrew", "Sandslash", 22)],
@@ -292,7 +293,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Ground"],
         "attack": 100,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 158,
         "eggCycles": 20
     }, {
@@ -301,7 +302,7 @@ const pokemonList: {
         "catchRate": 235,
         "type": ["Poison"],
         "attack": 47,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 55,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Nidoran(F)", "Nidorina", 16)],
@@ -311,7 +312,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Poison"],
         "attack": 62,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 128,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Nidorina", "Nidoqueen", GameConstants.StoneType.Moon_stone)],
@@ -321,7 +322,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Poison", "Ground"],
         "attack": 92,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 227,
         "eggCycles": 20
     }, {
@@ -330,7 +331,7 @@ const pokemonList: {
         "catchRate": 235,
         "type": ["Poison"],
         "attack": 57,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 55,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Nidoran(M)", "Nidorino", 16)],
@@ -340,7 +341,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Poison"],
         "attack": 72,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 128,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Nidorino", "Nidoking", GameConstants.StoneType.Moon_stone)],
@@ -350,7 +351,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Poison", "Ground"],
         "attack": 102,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 227,
         "eggCycles": 20
     }, {
@@ -359,7 +360,7 @@ const pokemonList: {
         "catchRate": 150,
         "type": ["Fairy"],
         "attack": 60,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 113,
         "eggCycles": 10,
         "evolutions": [new StoneEvolution("Clefairy", "Clefable", GameConstants.StoneType.Moon_stone)],
@@ -369,7 +370,7 @@ const pokemonList: {
         "catchRate": 25,
         "type": ["Fairy"],
         "attack": 95,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 217,
         "eggCycles": 10
     }, {
@@ -378,7 +379,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Fire"],
         "attack": 50,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 60,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Vulpix", "Ninetales", GameConstants.StoneType.Fire_stone)],
@@ -388,7 +389,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Fire"],
         "attack": 81,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 177,
         "eggCycles": 20
     }, {
@@ -397,7 +398,7 @@ const pokemonList: {
         "catchRate": 170,
         "type": ["Normal", "Fairy"],
         "attack": 45,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 95,
         "eggCycles": 10,
         "evolutions": [new StoneEvolution("Jigglypuff", "Wigglytuff", GameConstants.StoneType.Moon_stone)],
@@ -407,7 +408,7 @@ const pokemonList: {
         "catchRate": 50,
         "type": ["Normal", "Fairy"],
         "attack": 85,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 196,
         "eggCycles": 10
     }, {
@@ -416,7 +417,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Poison", "Flying"],
         "attack": 45,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 49,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Zubat", "Golbat", 22)],
@@ -426,7 +427,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Poison", "Flying"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 159,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Golbat", "Crobat", 100)],
@@ -436,7 +437,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Grass", "Poison"],
         "attack": 75,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 64,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Oddish", "Gloom", 21)],
@@ -446,7 +447,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Grass", "Poison"],
         "attack": 85,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 138,
         "eggCycles": 20,
         "evolutions": [
@@ -459,7 +460,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass", "Poison"],
         "attack": 110,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 221,
         "eggCycles": 20
     }, {
@@ -468,7 +469,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Bug", "Grass"],
         "attack": 70,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 57,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Paras", "Parasect", 24)],
@@ -478,7 +479,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Bug", "Grass"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 142,
         "eggCycles": 20
     }, {
@@ -487,7 +488,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Bug", "Poison"],
         "attack": 55,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 61,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Venonat", "Venomoth", 31)],
@@ -497,7 +498,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Bug", "Poison"],
         "attack": 90,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 158,
         "eggCycles": 20
     }, {
@@ -506,7 +507,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Ground"],
         "attack": 55,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 53,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Diglett", "Dugtrio", 26)],
@@ -516,7 +517,7 @@ const pokemonList: {
         "catchRate": 50,
         "type": ["Ground"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 149,
         "eggCycles": 20
     }, {
@@ -525,7 +526,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Normal"],
         "attack": 45,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 58,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Meowth", "Persian", 28)],
@@ -535,7 +536,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Normal"],
         "attack": 70,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 154,
         "eggCycles": 20
     }, {
@@ -544,7 +545,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Water"],
         "attack": 65,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 64,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Psyduck", "Golduck", 33)],
@@ -554,7 +555,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Water"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 175,
         "eggCycles": 20
     }, {
@@ -563,7 +564,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Fighting"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 61,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Mankey", "Primeape", 28)],
@@ -573,7 +574,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Fighting"],
         "attack": 105,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 159,
         "eggCycles": 20
     }, {
@@ -582,7 +583,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Fire"],
         "attack": 70,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 70,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Growlithe", "Arcanine", GameConstants.StoneType.Fire_stone)],
@@ -592,7 +593,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Fire"],
         "attack": 110,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 194,
         "eggCycles": 20
     }, {
@@ -601,7 +602,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Water"],
         "attack": 50,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 60,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Poliwag", "Poliwhirl", 25)],
@@ -611,7 +612,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Water"],
         "attack": 65,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 135,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Poliwhirl", "Poliwrath", GameConstants.StoneType.Water_stone), new StoneEvolution("Poliwhirl", "Politoed", GameConstants.StoneType.Kings_rock)],
@@ -621,7 +622,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water", "Fighting"],
         "attack": 95,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 230,
         "eggCycles": 20
     }, {
@@ -630,7 +631,7 @@ const pokemonList: {
         "catchRate": 200,
         "type": ["Psychic"],
         "attack": 105,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 62,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Abra", "Kadabra", 16)],
@@ -640,7 +641,7 @@ const pokemonList: {
         "catchRate": 100,
         "type": ["Psychic"],
         "attack": 120,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 140,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Kadabra", "Alakazam", GameConstants.StoneType.Trade_stone)],
@@ -650,7 +651,7 @@ const pokemonList: {
         "catchRate": 50,
         "type": ["Psychic"],
         "attack": 135,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 225,
         "eggCycles": 20
     }, {
@@ -659,7 +660,7 @@ const pokemonList: {
         "catchRate": 180,
         "type": ["Fighting"],
         "attack": 80,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 61,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Machop", "Machoke", 28)],
@@ -669,7 +670,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Fighting"],
         "attack": 100,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Machoke", "Machamp", GameConstants.StoneType.Trade_stone)],
@@ -679,7 +680,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fighting"],
         "attack": 130,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 227,
         "eggCycles": 20
     }, {
@@ -688,7 +689,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Grass", "Poison"],
         "attack": 75,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 60,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Bellsprout", "Weepinbell", 21)],
@@ -698,7 +699,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Grass", "Poison"],
         "attack": 90,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 137,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Weepinbell", "Victreebel", GameConstants.StoneType.Leaf_stone)],
@@ -708,7 +709,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass", "Poison"],
         "attack": 105,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 221,
         "eggCycles": 20
     }, {
@@ -717,7 +718,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Water", "Poison"],
         "attack": 50,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 67,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Tentacool", "Tentacruel", 30)],
@@ -727,7 +728,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Water", "Poison"],
         "attack": 80,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 180,
         "eggCycles": 20
     }, {
@@ -736,7 +737,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Rock", "Ground"],
         "attack": 80,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 60,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Geodude", "Graveler", 25)],
@@ -746,7 +747,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Rock", "Ground"],
         "attack": 95,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 137,
         "eggCycles": 15,
         "evolutions": [new StoneEvolution("Graveler", "Golem", GameConstants.StoneType.Trade_stone)],
@@ -756,7 +757,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Ground"],
         "attack": 120,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 223,
         "eggCycles": 15
     }, {
@@ -765,7 +766,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Fire"],
         "attack": 85,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 82,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Ponyta", "Rapidash", 40)],
@@ -775,7 +776,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Fire"],
         "attack": 100,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 175,
         "eggCycles": 20
     }, {
@@ -784,7 +785,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Water", "Psychic"],
         "attack": 65,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 63,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Slowpoke", "Slowbro", 37), new StoneEvolution("Slowpoke", "Slowking", GameConstants.StoneType.Kings_rock)],
@@ -794,7 +795,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Water", "Psychic"],
         "attack": 100,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 172,
         "eggCycles": 20
     }, {
@@ -803,7 +804,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Electric", "Steel"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 65,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Magnemite", "Magneton", 30)],
@@ -813,7 +814,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Electric", "Steel"],
         "attack": 120,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 163,
         "eggCycles": 20,
     }, {
@@ -822,7 +823,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal", "Flying"],
         "attack": 65,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 132,
         "eggCycles": 20,
     }, {
@@ -831,7 +832,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Normal", "Flying"],
         "attack": 85,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 62,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Doduo", "Dodrio", 31)],
@@ -841,7 +842,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal", "Flying"],
         "attack": 110,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 165,
         "eggCycles": 20
     }, {
@@ -850,7 +851,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Water"],
         "attack": 45,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 65,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Seel", "Dewgong", 34)],
@@ -860,7 +861,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Water", "Ice"],
         "attack": 70,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 166,
         "eggCycles": 20
     }, {
@@ -869,7 +870,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Poison"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 65,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Grimer", "Muk", 38)],
@@ -879,7 +880,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Poison"],
         "attack": 105,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 175,
         "eggCycles": 20
     }, {
@@ -888,7 +889,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Water"],
         "attack": 65,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 61,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Shellder", "Cloyster", GameConstants.StoneType.Water_stone)],
@@ -898,7 +899,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Water", "Ice"],
         "attack": 95,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 184,
         "eggCycles": 20
     }, {
@@ -907,7 +908,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Ghost", "Poison"],
         "attack": 100,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 62,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Gastly", "Haunter", 25)],
@@ -917,7 +918,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Ghost", "Poison"],
         "attack": 115,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Haunter", "Gengar", GameConstants.StoneType.Trade_stone)],
@@ -927,7 +928,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Ghost", "Poison"],
         "attack": 130,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 225,
         "eggCycles": 20
     }, {
@@ -936,7 +937,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Ground"],
         "attack": 45,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 77,
         "eggCycles": 25,
         "evolutions": [new StoneEvolution("Onix", "Steelix", GameConstants.StoneType.Metal_coat)],
@@ -946,7 +947,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Psychic"],
         "attack": 48,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 66,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Drowzee", "Hypno", 26)],
@@ -956,7 +957,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Psychic"],
         "attack": 73,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 169,
         "eggCycles": 20
     }, {
@@ -965,7 +966,7 @@ const pokemonList: {
         "catchRate": 225,
         "type": ["Water"],
         "attack": 105,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 65,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Krabby", "Kingler", 28)],
@@ -975,7 +976,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Water"],
         "attack": 130,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 166,
         "eggCycles": 20
     }, {
@@ -984,7 +985,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Electric"],
         "attack": 55,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 66,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Voltorb", "Electrode", 30)],
@@ -994,7 +995,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Electric"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 172,
         "eggCycles": 20
     }, {
@@ -1003,7 +1004,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Grass", "Psychic"],
         "attack": 60,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 65,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Exeggcute", "Exeggutor", GameConstants.StoneType.Leaf_stone)],
@@ -1013,7 +1014,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass", "Psychic"],
         "attack": 125,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 186,
         "eggCycles": 20
     }, {
@@ -1022,7 +1023,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Ground"],
         "attack": 50,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 64,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Cubone", "Marowak", 28)],
@@ -1032,7 +1033,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Ground"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 149,
         "eggCycles": 20
     }, {
@@ -1041,7 +1042,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fighting"],
         "attack": 120,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 159,
         "eggCycles": 25
     }, {
@@ -1050,7 +1051,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fighting"],
         "attack": 105,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 159,
         "eggCycles": 25
     }, {
@@ -1059,7 +1060,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal"],
         "attack": 60,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 77,
         "eggCycles": 20,
     }, {
@@ -1068,7 +1069,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Poison"],
         "attack": 65,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 68,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Koffing", "Weezing", 35)],
@@ -1078,7 +1079,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Poison"],
         "attack": 90,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 172,
         "eggCycles": 20
     }, {
@@ -1087,7 +1088,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Ground", "Rock"],
         "attack": 85,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 69,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Rhyhorn", "Rhydon", 42)],
@@ -1097,7 +1098,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Ground", "Rock"],
         "attack": 130,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 170,
         "eggCycles": 20,
     }, {
@@ -1106,7 +1107,7 @@ const pokemonList: {
         "catchRate": 30,
         "type": ["Normal"],
         "attack": 35,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 395,
         "eggCycles": 40,
         "evolutions": [new LevelEvolution("Chansey", "Blissey", 100)],
@@ -1116,7 +1117,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass"],
         "attack": 100,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 87,
         "eggCycles": 20,
     }, {
@@ -1125,7 +1126,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 172,
         "eggCycles": 20
     }, {
@@ -1134,7 +1135,7 @@ const pokemonList: {
         "catchRate": 225,
         "type": ["Water"],
         "attack": 70,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 59,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Horsea", "Seadra", 32)],
@@ -1144,7 +1145,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Water"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 154,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Seadra", "Kingdra", GameConstants.StoneType.Dragon_scale)],
@@ -1154,7 +1155,7 @@ const pokemonList: {
         "catchRate": 225,
         "type": ["Water"],
         "attack": 67,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 64,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Goldeen", "Seaking", 33)],
@@ -1164,7 +1165,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Water"],
         "attack": 92,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 158,
         "eggCycles": 20
     }, {
@@ -1173,7 +1174,7 @@ const pokemonList: {
         "catchRate": 225,
         "type": ["Water"],
         "attack": 70,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 68,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Staryu", "Starmie", GameConstants.StoneType.Water_stone)],
@@ -1183,7 +1184,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Water", "Psychic"],
         "attack": 100,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 182,
         "eggCycles": 20
     }, {
@@ -1192,7 +1193,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Psychic", "Fairy"],
         "attack": 100,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 161,
         "eggCycles": 25
     }, {
@@ -1201,7 +1202,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Bug", "Flying"],
         "attack": 110,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 100,
         "eggCycles": 25,
         "evolutions": [new StoneEvolution("Scyther", "Scizor", GameConstants.StoneType.Metal_coat)],
@@ -1211,7 +1212,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Ice", "Psychic"],
         "attack": 115,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 159,
         "eggCycles": 25
     }, {
@@ -1220,7 +1221,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Electric"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 172,
         "eggCycles": 25,
         "evolutions": [new StoneEvolution("Electabuzz", "Electivire", GameConstants.StoneType.Trade_stone)],
@@ -1230,7 +1231,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fire"],
         "attack": 100,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 173,
         "eggCycles": 25,
         "evolutions": [new StoneEvolution("Magmar", "Magmortar", GameConstants.StoneType.Trade_stone)],
@@ -1240,7 +1241,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Bug"],
         "attack": 125,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 175,
         "eggCycles": 25
     }, {
@@ -1249,7 +1250,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal"],
         "attack": 100,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 172,
         "eggCycles": 20
     }, {
@@ -1258,7 +1259,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Water"],
         "attack": 15,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 40,
         "eggCycles": 5,
         "evolutions": [new LevelEvolution("Magikarp", "Gyarados", 20)],
@@ -1268,7 +1269,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water", "Flying"],
         "attack": 125,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 189,
         "eggCycles": 5
     }, {
@@ -1277,7 +1278,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water", "Ice"],
         "attack": 85,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 187,
         "eggCycles": 40
     }, {
@@ -1286,7 +1287,7 @@ const pokemonList: {
         "catchRate": 35,
         "type": ["Normal"],
         "attack": 48,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 101,
         "eggCycles": 20
     }, {
@@ -1295,7 +1296,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Normal"],
         "attack": 55,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 65,
         "eggCycles": 35,
         "evolutions": [
@@ -1311,7 +1312,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water"],
         "attack": 110,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 184,
         "eggCycles": 35
     }, {
@@ -1320,7 +1321,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Electric"],
         "attack": 110,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 184,
         "eggCycles": 35
     }, {
@@ -1329,7 +1330,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fire"],
         "attack": 130,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 184,
         "eggCycles": 35
     }, {
@@ -1338,7 +1339,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal"],
         "attack": 85,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 79,
         "eggCycles": 20,
         // TODO implement porygon2
@@ -1349,7 +1350,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Water"],
         "attack": 90,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 71,
         "eggCycles": 30,
         "evolutions": [new LevelEvolution("Omanyte", "Omastar", 40)],
@@ -1359,7 +1360,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Water"],
         "attack": 115,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 173,
         "eggCycles": 30
     }, {
@@ -1368,7 +1369,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Water"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 71,
         "eggCycles": 30,
         "evolutions": [new LevelEvolution("Kabuto", "Kabutops", 40)],
@@ -1378,7 +1379,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Water"],
         "attack": 115,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 173,
         "eggCycles": 30
     }, {
@@ -1387,7 +1388,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Flying"],
         "attack": 105,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 180,
         "eggCycles": 35
     }, {
@@ -1396,7 +1397,7 @@ const pokemonList: {
         "catchRate": 25,
         "type": ["Normal"],
         "attack": 110,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 189,
         "eggCycles": 40
     }, {
@@ -1405,7 +1406,7 @@ const pokemonList: {
         "catchRate": 3,
         "type": ["Ice", "Flying"],
         "attack": 95,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 261,
         "eggCycles": 80
     }, {
@@ -1414,7 +1415,7 @@ const pokemonList: {
         "catchRate": 3,
         "type": ["Electric", "Flying"],
         "attack": 125,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 261,
         "eggCycles": 80
     }, {
@@ -1423,7 +1424,7 @@ const pokemonList: {
         "catchRate": 3,
         "type": ["Fire", "Flying"],
         "attack": 125,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 261,
         "eggCycles": 80
     }, {
@@ -1432,7 +1433,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Dragon"],
         "attack": 64,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 60,
         "eggCycles": 40,
         "evolutions": [new LevelEvolution("Dratini", "Dragonair", 30)],
@@ -1442,7 +1443,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Dragon"],
         "attack": 84,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 147,
         "eggCycles": 40,
         "evolutions": [new LevelEvolution("Dragonair", "Dragonite", 55)],
@@ -1452,7 +1453,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Dragon", "Flying"],
         "attack": 134,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 270,
         "eggCycles": 40
     }, {
@@ -1461,7 +1462,7 @@ const pokemonList: {
         "catchRate": 3,
         "type": ["Psychic"],
         "attack": 154,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 306,
         "eggCycles": 120
     }, {
@@ -1470,7 +1471,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Psychic"],
         "attack": 100,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 270,
         "eggCycles": 120
     }, {
@@ -1479,7 +1480,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass"],
         "attack": 65,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 64,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Chikorita", "Bayleef", 16)],
@@ -1489,7 +1490,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass"],
         "attack": 80,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Bayleef", "Meganium", 32)],
@@ -1499,7 +1500,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass"],
         "attack": 100,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 236,
         "eggCycles": 20
     }, {
@@ -1508,7 +1509,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fire"],
         "attack": 52,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 62,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Cyndaquil", "Quilava", 14)],
@@ -1518,7 +1519,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fire"],
         "attack": 65,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Quilava", "Typhlosion", 36)],
@@ -1528,7 +1529,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fire"],
         "attack": 85,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 240,
         "eggCycles": 20
     }, {
@@ -1537,7 +1538,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water"],
         "attack": 65,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 63,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Totodile", "Croconaw", 18)],
@@ -1547,7 +1548,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water"],
         "attack": 80,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Croconaw", "Feraligatr", 30)],
@@ -1557,7 +1558,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water"],
         "attack": 105,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 239,
         "eggCycles": 20
     }, {
@@ -1566,7 +1567,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Normal"],
         "attack": 46,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 43,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Sentret", "Furret", 15)],
@@ -1576,7 +1577,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Normal"],
         "attack": 76,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 145,
         "eggCycles": 15
     }, {
@@ -1585,7 +1586,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Normal", "Flying"],
         "attack": 56,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 52,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Hoothoot", "Noctowl", 20)],
@@ -1595,7 +1596,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Normal", "Flying"],
         "attack": 96,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 158,
         "eggCycles": 15
     }, {
@@ -1604,7 +1605,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Bug", "Flying"],
         "attack": 80,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 53,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Ledyba", "Ledian", 18)],
@@ -1614,7 +1615,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Bug", "Flying"],
         "attack": 110,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 137,
         "eggCycles": 15
     }, {
@@ -1623,7 +1624,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Bug", "Poison"],
         "attack": 60,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 50,
         "eggCycles": 15,
         "evolutions": [new LevelEvolution("Spinarak", "Ariados", 22)],
@@ -1633,7 +1634,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Bug", "Poison"],
         "attack": 90,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 140,
         "eggCycles": 15
     }, {
@@ -1642,7 +1643,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Poison", "Flying"],
         "attack": 90,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 241,
         "eggCycles": 15
     }, {
@@ -1651,7 +1652,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Water", "Electric"],
         "attack": 56,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 66,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Chinchou", "Lanturn", 27)],
@@ -1661,7 +1662,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Water", "Electric"],
         "attack": 76,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 161,
         "eggCycles": 20
     }, {
@@ -1670,7 +1671,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Electric"],
         "attack": 40,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 41,
         "eggCycles": 10,
         "evolutions": [new LevelEvolution("Pichu", "Pikachu", 100)],
@@ -1680,7 +1681,7 @@ const pokemonList: {
         "catchRate": 150,
         "type": ["Fairy"],
         "attack": 55,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 44,
         "eggCycles": 10,
         "evolutions": [new LevelEvolution("Cleffa", "Clefairy", 100)],
@@ -1690,7 +1691,7 @@ const pokemonList: {
         "catchRate": 170,
         "type": ["Normal", "Fairy"],
         "attack": 30,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 42,
         "eggCycles": 10,
         "evolutions": [new LevelEvolution("Igglybuff", "Jigglypuff", 100)],
@@ -1700,7 +1701,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Fairy"],
         "attack": 65,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 49,
         "eggCycles": 10,
         "evolutions": [new LevelEvolution("Togepi", "Togetic", 100)],
@@ -1710,7 +1711,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Fairy", "Flying"],
         "attack": 105,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 142,
         "eggCycles": 10,
     }, {
@@ -1719,7 +1720,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Psychic", "Flying"],
         "attack": 50,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 64,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Natu", "Xatu", 25)],
@@ -1729,7 +1730,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Psychic", "Flying"],
         "attack": 75,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 165,
         "eggCycles": 20
     }, {
@@ -1738,7 +1739,7 @@ const pokemonList: {
         "catchRate": 235,
         "type": ["Electric"],
         "attack": 45,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 56,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Mareep", "Flaaffy", 15)],
@@ -1748,7 +1749,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Electric"],
         "attack": 60,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 128,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Flaaffy", "Ampharos", 30)],
@@ -1758,7 +1759,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Electric"],
         "attack": 110,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 230,
         "eggCycles": 20
     }, {
@@ -1767,7 +1768,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass"],
         "attack": 100,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 221,
         "eggCycles": 20
     }, {
@@ -1776,7 +1777,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Water", "Fairy"],
         "attack": 50,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 88,
         "eggCycles": 10,
         "evolutions": [new LevelEvolution("Marill", "Azumarill", 18)],
@@ -1786,7 +1787,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Water", "Fairy"],
         "attack": 80,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 189,
         "eggCycles": 10
     }, {
@@ -1795,7 +1796,7 @@ const pokemonList: {
         "catchRate": 65,
         "type": ["Rock"],
         "attack": 100,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 144,
         "eggCycles": 20
     }, {
@@ -1804,7 +1805,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water"],
         "attack": 100,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 225,
         "eggCycles": 20
     }, {
@@ -1813,7 +1814,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Grass", "Flying"],
         "attack": 55,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 50,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Hoppip", "Skiploom", 18)],
@@ -1823,7 +1824,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Grass", "Flying"],
         "attack": 65,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 119,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Skiploom", "Jumpluff", 27)],
@@ -1833,7 +1834,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Grass", "Flying"],
         "attack": 95,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 207,
         "eggCycles": 20
     }, {
@@ -1842,7 +1843,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal"],
         "attack": 70,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 72,
         "eggCycles": 20,
     }, {
@@ -1851,7 +1852,7 @@ const pokemonList: {
         "catchRate": 235,
         "type": ["Grass"],
         "attack": 30,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 36,
         "eggCycles": 20,
         "evolutions": [new StoneEvolution("Sunkern", "Sunflora", GameConstants.StoneType.Sun_stone)],
@@ -1861,7 +1862,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Grass"],
         "attack": 85,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 149,
         "eggCycles": 20
     }, {
@@ -1870,7 +1871,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Bug", "Flying"],
         "attack": 65,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 78,
         "eggCycles": 20,
     }, {
@@ -1879,7 +1880,7 @@ const pokemonList: {
         "catchRate": 255,
         "type": ["Water", "Ground"],
         "attack": 45,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 42,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Wooper", "Quagsire", 20)],
@@ -1889,7 +1890,7 @@ const pokemonList: {
         "catchRate": 90,
         "type": ["Water", "Ground"],
         "attack": 85,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 151,
         "eggCycles": 20
     }, {
@@ -1898,7 +1899,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Psychic"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 184,
         "eggCycles": 35
     }, {
@@ -1907,7 +1908,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Dark"],
         "attack": 130,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 184,
         "eggCycles": 35
     }, {
@@ -1916,7 +1917,7 @@ const pokemonList: {
         "catchRate": 30,
         "type": ["Dark", "Flying"],
         "attack": 85,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 81,
         "eggCycles": 20,
     }, {
@@ -1925,7 +1926,7 @@ const pokemonList: {
         "catchRate": 70,
         "type": ["Water", "Psychic"],
         "attack": 110,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 172,
         "eggCycles": 20
     }, {
@@ -1934,7 +1935,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Ghost"],
         "attack": 85,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 87,
         "eggCycles": 25,
     }, {
@@ -1943,7 +1944,7 @@ const pokemonList: {
         "catchRate": 225,
         "type": ["Psychic"],
         "attack": 72,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 118,
         "eggCycles": 40
     }, {
@@ -1952,7 +1953,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Psychic"],
         "attack": 58,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 142,
         "eggCycles": 20
     }, {
@@ -1961,7 +1962,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Normal", "Psychic"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 159,
         "eggCycles": 20
     }, {
@@ -1970,7 +1971,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Bug"],
         "attack": 65,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 58,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Pineco", "Forretress", 31)],
@@ -1980,7 +1981,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Bug", "Steel"],
         "attack": 90,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 163,
         "eggCycles": 20
     }, {
@@ -1989,7 +1990,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Normal"],
         "attack": 70,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 145,
         "eggCycles": 20
     }, {
@@ -1998,7 +1999,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Ground", "Flying"],
         "attack": 75,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 86,
         "eggCycles": 20,
     }, {
@@ -2007,7 +2008,7 @@ const pokemonList: {
         "catchRate": 25,
         "type": ["Steel", "Ground"],
         "attack": 125,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 179,
         "eggCycles": 25
     }, {
@@ -2016,7 +2017,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Fairy"],
         "attack": 80,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 60,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Snubbull", "Granbull", 23)],
@@ -2026,7 +2027,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Fairy"],
         "attack": 120,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 158,
         "eggCycles": 20
     }, {
@@ -2035,7 +2036,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water", "Poison"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 88,
         "eggCycles": 20
     }, {
@@ -2044,7 +2045,7 @@ const pokemonList: {
         "catchRate": 25,
         "type": ["Bug", "Steel"],
         "attack": 150,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 175,
         "eggCycles": 25
     }, {
@@ -2053,7 +2054,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Bug", "Rock"],
         "attack": 230,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 177,
         "eggCycles": 20
     }, {
@@ -2062,7 +2063,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Bug", "Fighting"],
         "attack": 185,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 175,
         "eggCycles": 25
     }, {
@@ -2071,7 +2072,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Dark", "Ice"],
         "attack": 95,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 86,
         "eggCycles": 20,
     }, {
@@ -2080,7 +2081,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Normal"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 66,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Teddiursa", "Ursaring", 30)],
@@ -2090,7 +2091,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Normal"],
         "attack": 130,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 175,
         "eggCycles": 20
     }, {
@@ -2099,7 +2100,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Fire"],
         "attack": 40,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 50,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Slugma", "Magcargo", 38)],
@@ -2109,7 +2110,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Fire", "Rock"],
         "attack": 80,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 151,
         "eggCycles": 20
     }, {
@@ -2118,7 +2119,7 @@ const pokemonList: {
         "catchRate": 225,
         "type": ["Ice", "Ground"],
         "attack": 50,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 50,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Swinub", "Piloswine", 33)],
@@ -2128,7 +2129,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Ice", "Ground"],
         "attack": 100,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 158,
         "eggCycles": 20,
     }, {
@@ -2137,7 +2138,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Water", "Rock"],
         "attack": 95,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 144,
         "eggCycles": 20
     }, {
@@ -2146,7 +2147,7 @@ const pokemonList: {
         "catchRate": 190,
         "type": ["Water"],
         "attack": 65,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 60,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Remoraid", "Octillery", 25)],
@@ -2156,7 +2157,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Water"],
         "attack": 105,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 168,
         "eggCycles": 20
     }, {
@@ -2165,7 +2166,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Ice", "Flying"],
         "attack": 55,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 116,
         "eggCycles": 20
     }, {
@@ -2174,7 +2175,7 @@ const pokemonList: {
         "catchRate": 25,
         "type": ["Water", "Flying"],
         "attack": 140,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 170,
         "eggCycles": 25
     }, {
@@ -2183,7 +2184,7 @@ const pokemonList: {
         "catchRate": 25,
         "type": ["Steel", "Flying"],
         "attack": 80,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 163,
         "eggCycles": 25
     }, {
@@ -2192,7 +2193,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Dark", "Fire"],
         "attack": 60,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 66,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Houndour", "Houndoom", 24)],
@@ -2202,7 +2203,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Dark", "Fire"],
         "attack": 90,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 175,
         "eggCycles": 20
     }, {
@@ -2211,7 +2212,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Water", "Dragon"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 243,
         "eggCycles": 20
     }, {
@@ -2220,7 +2221,7 @@ const pokemonList: {
         "catchRate": 120,
         "type": ["Ground"],
         "attack": 60,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 66,
         "eggCycles": 20,
         "evolutions": [new LevelEvolution("Phanpy", "Donphan", 25)],
@@ -2230,7 +2231,7 @@ const pokemonList: {
         "catchRate": 60,
         "type": ["Ground"],
         "attack": 120,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 175,
         "eggCycles": 20
     }, {
@@ -2239,7 +2240,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal"],
         "attack": 95,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 180,
         "eggCycles": 20,
     }, {
@@ -2248,7 +2249,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal"],
         "attack": 95,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 163,
         "eggCycles": 20
     }, {
@@ -2257,7 +2258,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal"],
         "attack": 45,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 88,
         "eggCycles": 20
     }, {
@@ -2266,7 +2267,7 @@ const pokemonList: {
         "catchRate": 75,
         "type": ["Fighting"],
         "attack": 35,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 42,
         "eggCycles": 25,
         "evolutions": [
@@ -2280,7 +2281,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fighting"],
         "attack": 110,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 159,
         "eggCycles": 25
     }, {
@@ -2289,7 +2290,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Ice", "Psychic"],
         "attack": 65,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 61,
         "eggCycles": 25,
         "evolutions": [new LevelEvolution("Smoochum", "Jynx", 30)],
@@ -2299,7 +2300,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Electric"],
         "attack": 63,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 72,
         "eggCycles": 25,
         "evolutions": [new LevelEvolution("Elekid", "Electabuzz", 30)],
@@ -2309,7 +2310,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Fire"],
         "attack": 75,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 73,
         "eggCycles": 25,
         "evolutions": [new LevelEvolution("Magby", "Magmar", 30)],
@@ -2319,7 +2320,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Normal"],
         "attack": 80,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 172,
         "eggCycles": 20
     }, {
@@ -2328,7 +2329,7 @@ const pokemonList: {
         "catchRate": 30,
         "type": ["Normal"],
         "attack": 135,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 608,
         "eggCycles": 40
     }, {
@@ -2337,7 +2338,7 @@ const pokemonList: {
         "catchRate": 3,
         "type": ["Electric"],
         "attack": 100,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 261,
         "eggCycles": 80
     }, {
@@ -2346,7 +2347,7 @@ const pokemonList: {
         "catchRate": 3,
         "type": ["Fire"],
         "attack": 115,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 261,
         "eggCycles": 80
     }, {
@@ -2355,7 +2356,7 @@ const pokemonList: {
         "catchRate": 3,
         "type": ["Water"],
         "attack": 115,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 261,
         "eggCycles": 80
     }, {
@@ -2364,7 +2365,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Ground"],
         "attack": 64,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 60,
         "eggCycles": 40,
         "evolutions": [new LevelEvolution("Larvitar", "Pupitar", 30)],
@@ -2374,7 +2375,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Ground"],
         "attack": 84,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 144,
         "eggCycles": 40,
         "evolutions": [new LevelEvolution("Pupitar", "Tyranitar", 55)],
@@ -2384,7 +2385,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Rock", "Dark"],
         "attack": 164,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 270,
         "eggCycles": 40
     }, {
@@ -2393,7 +2394,7 @@ const pokemonList: {
         "catchRate": 3,
         "type": ["Psychic", "Flying"],
         "attack": 154,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 306,
         "eggCycles": 120
     }, {
@@ -2402,7 +2403,7 @@ const pokemonList: {
         "catchRate": 3,
         "type": ["Fire", "Flying"],
         "attack": 154,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 306,
         "eggCycles": 120
     }, {
@@ -2411,7 +2412,7 @@ const pokemonList: {
         "catchRate": 45,
         "type": ["Psychic", "Grass"],
         "attack": 100,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 270,
         "eggCycles": 120
     }, {
@@ -2420,7 +2421,7 @@ const pokemonList: {
         "type": ["Grass"],
         "attack": 70,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 62,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Treecko", "Grovyle", 16)],
@@ -2430,7 +2431,7 @@ const pokemonList: {
         "type": ["Grass"],
         "attack": 95,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Grovyle", "Sceptile", 36)],
@@ -2440,7 +2441,7 @@ const pokemonList: {
         "type": ["Grass"],
         "attack": 120,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 239,
         "catchRate": 45
     }, {
@@ -2449,7 +2450,7 @@ const pokemonList: {
         "type": ["Fire"],
         "attack": 70,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 62,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Torchic", "Combusken", 16)],
@@ -2459,7 +2460,7 @@ const pokemonList: {
         "type": ["Fire", "Fighting"],
         "attack": 85,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Combusken", "Blaziken", 36)],
@@ -2469,7 +2470,7 @@ const pokemonList: {
         "type": ["Fire", "Fighting"],
         "attack": 120,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 239,
         "catchRate": 45
     }, {
@@ -2478,7 +2479,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 70,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 62,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Mudkip", "Marshtomp", 16)],
@@ -2488,7 +2489,7 @@ const pokemonList: {
         "type": ["Water", "Ground"],
         "attack": 85,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 142,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Marshtomp", "Swampert", 36)],
@@ -2498,7 +2499,7 @@ const pokemonList: {
         "type": ["Water", "Ground"],
         "attack": 110,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 241,
         "catchRate": 45
     }, {
@@ -2507,7 +2508,7 @@ const pokemonList: {
         "type": ["Dark"],
         "attack": 55,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 56,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Poochyena", "Mightyena", 18)],
@@ -2517,7 +2518,7 @@ const pokemonList: {
         "type": ["Dark"],
         "attack": 90,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 147,
         "catchRate": 127
     }, {
@@ -2526,7 +2527,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 60,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 56,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Zigzagoon", "Linoone", 20)],
@@ -2536,7 +2537,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 100,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 147,
         "catchRate": 90,
     }, {
@@ -2545,7 +2546,7 @@ const pokemonList: {
         "type": ["Bug"],
         "attack": 45,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 56,
         "catchRate": 255,
         "evolutions": [
@@ -2558,7 +2559,7 @@ const pokemonList: {
         "type": ["Bug"],
         "attack": 55,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 72,
         "catchRate": 120,
         "evolutions": [new LevelEvolution("Silcoon", "Beautifly", 10)],
@@ -2568,7 +2569,7 @@ const pokemonList: {
         "type": ["Bug", "Flying"],
         "attack": 100,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 178,
         "catchRate": 45
     }, {
@@ -2577,7 +2578,7 @@ const pokemonList: {
         "type": ["Bug"],
         "attack": 55,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 72,
         "catchRate": 120
     }, {
@@ -2586,7 +2587,7 @@ const pokemonList: {
         "type": ["Bug", "Poison"],
         "attack": 90,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 173,
         "catchRate": 45
     }, {
@@ -2595,7 +2596,7 @@ const pokemonList: {
         "type": ["Water", "Grass"],
         "attack": 50,
         "eggCycles": 15,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 44,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Lotad", "Lombre", 14)],
@@ -2605,7 +2606,7 @@ const pokemonList: {
         "type": ["Water", "Grass"],
         "attack": 70,
         "eggCycles": 15,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 119,
         "catchRate": 120,
         "evolutions": [new StoneEvolution("Lombre", "Ludicolo", GameConstants.StoneType.Water_stone)],
@@ -2615,7 +2616,7 @@ const pokemonList: {
         "type": ["Water", "Grass"],
         "attack": 100,
         "eggCycles": 15,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 216,
         "catchRate": 45
     }, {
@@ -2624,7 +2625,7 @@ const pokemonList: {
         "type": ["Grass"],
         "attack": 50,
         "eggCycles": 15,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 44,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Seedot", "Nuzleaf", 14)],
@@ -2634,7 +2635,7 @@ const pokemonList: {
         "type": ["Grass", "Dark"],
         "attack": 70,
         "eggCycles": 15,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 119,
         "catchRate": 120,
         "evolutions": [new StoneEvolution("Nuzleaf", "Shiftry", GameConstants.StoneType.Leaf_stone)],
@@ -2644,7 +2645,7 @@ const pokemonList: {
         "type": ["Grass", "Dark"],
         "attack": 100,
         "eggCycles": 15,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 216,
         "catchRate": 45
     }, {
@@ -2653,7 +2654,7 @@ const pokemonList: {
         "type": ["Normal", "Flying"],
         "attack": 85,
         "eggCycles": 15,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 54,
         "catchRate": 200,
         "evolutions": [new LevelEvolution("Taillow", "Swellow", 22)],
@@ -2663,7 +2664,7 @@ const pokemonList: {
         "type": ["Normal", "Flying"],
         "attack": 125,
         "eggCycles": 15,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 159,
         "catchRate": 45
     }, {
@@ -2672,7 +2673,7 @@ const pokemonList: {
         "type": ["Water", "Flying"],
         "attack": 85,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 54,
         "catchRate": 190,
         "evolutions": [new LevelEvolution("Wingull", "Pelipper", 25)],
@@ -2682,7 +2683,7 @@ const pokemonList: {
         "type": ["Water", "Flying"],
         "attack": 100,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 154,
         "catchRate": 45
     }, {
@@ -2691,7 +2692,7 @@ const pokemonList: {
         "type": ["Psychic", "Fairy"],
         "attack": 45,
         "eggCycles": 20,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 40,
         "catchRate": 235,
         "evolutions": [new LevelEvolution("Ralts", "Kirlia", 20)],
@@ -2701,7 +2702,7 @@ const pokemonList: {
         "type": ["Psychic", "Fairy"],
         "attack": 65,
         "eggCycles": 20,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 97,
         "catchRate": 120,
         "evolutions": [new LevelEvolution("Kirlia", "Gardevoir", 30)],
@@ -2711,7 +2712,7 @@ const pokemonList: {
         "type": ["Psychic", "Fairy"],
         "attack": 125,
         "eggCycles": 20,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 233,
         "catchRate": 45
     }, {
@@ -2720,7 +2721,7 @@ const pokemonList: {
         "type": ["Bug", "Water"],
         "attack": 65,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 54,
         "catchRate": 200,
         "evolutions": [new LevelEvolution("Surskit", "Masquerain", 22)],
@@ -2730,7 +2731,7 @@ const pokemonList: {
         "type": ["Bug", "Flying"],
         "attack": 100,
         "eggCycles": 15,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 159,
         "catchRate": 75
     }, {
@@ -2739,7 +2740,7 @@ const pokemonList: {
         "type": ["Grass"],
         "attack": 60,
         "eggCycles": 15,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 59,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Shroomish", "Breloom", 23)],
@@ -2749,7 +2750,7 @@ const pokemonList: {
         "type": ["Grass", "Fighting"],
         "attack": 130,
         "eggCycles": 15,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 161,
         "catchRate": 90
     }, {
@@ -2758,7 +2759,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 60,
         "eggCycles": 15,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 56,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Slakoth", "Vigoroth", 18)],
@@ -2768,7 +2769,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 90,
         "eggCycles": 15,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 154,
         "catchRate": 120,
         "evolutions": [new LevelEvolution("Vigoroth", "Slaking", 36)],
@@ -2778,7 +2779,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 160,
         "eggCycles": 15,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 252,
         "catchRate": 45
     }, {
@@ -2787,7 +2788,7 @@ const pokemonList: {
         "type": ["Bug", "Ground"],
         "attack": 90,
         "eggCycles": 15,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 53,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Nincada", "Ninjask", 20)],
@@ -2797,7 +2798,7 @@ const pokemonList: {
         "type": ["Bug", "Flying"],
         "attack": 160,
         "eggCycles": 15,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 160,
         "catchRate": 120
     }, {
@@ -2806,7 +2807,7 @@ const pokemonList: {
         "type": ["Bug", "Ghost"],
         "attack": 90,
         "eggCycles": 15,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 83,
         "catchRate": 45
     }, {
@@ -2815,7 +2816,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 64,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 48,
         "catchRate": 190,
         "evolutions": [new LevelEvolution("Whismur", "Loudred", 20)],
@@ -2825,7 +2826,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 84,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 126,
         "catchRate": 120,
         "evolutions": [new LevelEvolution("Loudred", "Exploud", 40)],
@@ -2835,7 +2836,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 104,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 221,
         "catchRate": 45
     }, {
@@ -2844,7 +2845,7 @@ const pokemonList: {
         "type": ["Fighting"],
         "attack": 72,
         "eggCycles": 20,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 47,
         "catchRate": 180,
         "evolutions": [new LevelEvolution("Makuhita", "Hariyama", 24)],
@@ -2854,7 +2855,7 @@ const pokemonList: {
         "type": ["Fighting"],
         "attack": 144,
         "eggCycles": 20,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 166,
         "catchRate": 200
     }, {
@@ -2863,7 +2864,7 @@ const pokemonList: {
         "type": ["Normal", "Fairy"],
         "attack": 50,
         "eggCycles": 10,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 38,
         "catchRate": 150,
         "evolutions": [new LevelEvolution("Azurill", "Marill", 100)],
@@ -2873,7 +2874,7 @@ const pokemonList: {
         "type": ["Rock"],
         "attack": 135,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 75,
         "catchRate": 255,
     }, {
@@ -2882,7 +2883,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 50,
         "eggCycles": 15,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 52,
         "catchRate": 255,
         "evolutions": [new StoneEvolution("Skitty", "Delcatty", GameConstants.StoneType.Moon_stone)],
@@ -2892,7 +2893,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 90,
         "eggCycles": 15,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 140,
         "catchRate": 60
     }, {
@@ -2901,7 +2902,7 @@ const pokemonList: {
         "type": ["Dark", "Ghost"],
         "attack": 75,
         "eggCycles": 25,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 133,
         "catchRate": 45
     }, {
@@ -2910,7 +2911,7 @@ const pokemonList: {
         "type": ["Steel", "Fairy"],
         "attack": 85,
         "eggCycles": 20,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 133,
         "catchRate": 45
     }, {
@@ -2919,7 +2920,7 @@ const pokemonList: {
         "type": ["Steel", "Rock"],
         "attack": 100,
         "eggCycles": 35,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 66,
         "catchRate": 180,
         "evolutions": [new LevelEvolution("Aron", "Lairon", 32)],
@@ -2929,7 +2930,7 @@ const pokemonList: {
         "type": ["Steel", "Rock"],
         "attack": 140,
         "eggCycles": 35,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 151,
         "catchRate": 90,
         "evolutions": [new LevelEvolution("Lairon", "Aggron", 42)],
@@ -2939,7 +2940,7 @@ const pokemonList: {
         "type": ["Steel", "Rock"],
         "attack": 180,
         "eggCycles": 35,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 239,
         "catchRate": 45
     }, {
@@ -2948,7 +2949,7 @@ const pokemonList: {
         "type": ["Fighting", "Psychic"],
         "attack": 60,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 56,
         "catchRate": 180,
         "evolutions": [new LevelEvolution("Meditite", "Medicham", 37)],
@@ -2958,7 +2959,7 @@ const pokemonList: {
         "type": ["Fighting", "Psychic"],
         "attack": 80,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 144,
         "catchRate": 90
     }, {
@@ -2967,7 +2968,7 @@ const pokemonList: {
         "type": ["Electric"],
         "attack": 65,
         "eggCycles": 20,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 59,
         "catchRate": 120,
         "evolutions": [new LevelEvolution("Electrike", "Manectric", 26)],
@@ -2977,7 +2978,7 @@ const pokemonList: {
         "type": ["Electric"],
         "attack": 105,
         "eggCycles": 20,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 166,
         "catchRate": 45
     }, {
@@ -2986,7 +2987,7 @@ const pokemonList: {
         "type": ["Electric"],
         "attack": 95,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 142,
         "catchRate": 200
     }, {
@@ -2995,7 +2996,7 @@ const pokemonList: {
         "type": ["Electric"],
         "attack": 95,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 142,
         "catchRate": 200
     }, {
@@ -3004,7 +3005,7 @@ const pokemonList: {
         "type": ["Bug"],
         "attack": 85,
         "eggCycles": 15,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 151,
         "catchRate": 150
     }, {
@@ -3013,7 +3014,7 @@ const pokemonList: {
         "type": ["Bug"],
         "attack": 85,
         "eggCycles": 15,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 151,
         "catchRate": 150
     }, {
@@ -3022,7 +3023,7 @@ const pokemonList: {
         "type": ["Grass", "Poison"],
         "attack": 100,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 140,
         "catchRate": 150,
     }, {
@@ -3031,7 +3032,7 @@ const pokemonList: {
         "type": ["Poison"],
         "attack": 70,
         "eggCycles": 20,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 60,
         "catchRate": 225,
         "evolutions": [new LevelEvolution("Gulpin", "Swalot", 26)],
@@ -3041,7 +3042,7 @@ const pokemonList: {
         "type": ["Poison"],
         "attack": 100,
         "eggCycles": 20,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 163,
         "catchRate": 75
     }, {
@@ -3050,7 +3051,7 @@ const pokemonList: {
         "type": ["Water", "Dark"],
         "attack": 90,
         "eggCycles": 20,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 61,
         "catchRate": 225,
         "evolutions": [new LevelEvolution("Carvanha", "Sharpedo", 30)],
@@ -3060,7 +3061,7 @@ const pokemonList: {
         "type": ["Water", "Dark"],
         "attack": 120,
         "eggCycles": 20,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 161,
         "catchRate": 60
     }, {
@@ -3069,7 +3070,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 130,
         "eggCycles": 40,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 80,
         "catchRate": 125,
         "evolutions": [new LevelEvolution("Wailmer", "Wailord", 40)],
@@ -3079,7 +3080,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 170,
         "eggCycles": 40,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 175,
         "catchRate": 60
     }, {
@@ -3088,7 +3089,7 @@ const pokemonList: {
         "type": ["Fire", "Ground"],
         "attack": 65,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 61,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Numel", "Camerupt", 33)],
@@ -3098,7 +3099,7 @@ const pokemonList: {
         "type": ["Fire", "Ground"],
         "attack": 105,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 161,
         "catchRate": 150
     }, {
@@ -3107,7 +3108,7 @@ const pokemonList: {
         "type": ["Fire"],
         "attack": 140,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 165,
         "catchRate": 90
     }, {
@@ -3116,7 +3117,7 @@ const pokemonList: {
         "type": ["Psychic"],
         "attack": 80,
         "eggCycles": 20,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 66,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Spoink", "Grumpig", 32)],
@@ -3126,7 +3127,7 @@ const pokemonList: {
         "type": ["Psychic"],
         "attack": 110,
         "eggCycles": 20,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 165,
         "catchRate": 60
     }, {
@@ -3135,7 +3136,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 60,
         "eggCycles": 15,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 126,
         "catchRate": 255
     }, {
@@ -3144,7 +3145,7 @@ const pokemonList: {
         "type": ["Ground"],
         "attack": 100,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 58,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Trapinch", "Vibrava", 35)],
@@ -3154,7 +3155,7 @@ const pokemonList: {
         "type": ["Ground", "Dragon"],
         "attack": 70,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 119,
         "catchRate": 120,
         "evolutions": [new LevelEvolution("Vibrava", "Flygon", 45)],
@@ -3164,7 +3165,7 @@ const pokemonList: {
         "type": ["Ground", "Dragon"],
         "attack": 100,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 234,
         "catchRate": 45
     }, {
@@ -3173,7 +3174,7 @@ const pokemonList: {
         "type": ["Grass"],
         "attack": 85,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 67,
         "catchRate": 190,
         "evolutions": [new LevelEvolution("Cacnea", "Cacturne", 32)],
@@ -3183,7 +3184,7 @@ const pokemonList: {
         "type": ["Grass", "Dark"],
         "attack": 115,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 166,
         "catchRate": 60
     }, {
@@ -3192,7 +3193,7 @@ const pokemonList: {
         "type": ["Normal", "Flying"],
         "attack": 75,
         "eggCycles": 20,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 62,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Swablu", "Altaria", 35)],
@@ -3202,7 +3203,7 @@ const pokemonList: {
         "type": ["Dragon", "Flying"],
         "attack": 105,
         "eggCycles": 20,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 172,
         "catchRate": 45
     }, {
@@ -3211,7 +3212,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 115,
         "eggCycles": 20,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 160,
         "catchRate": 90
     }, {
@@ -3220,7 +3221,7 @@ const pokemonList: {
         "type": ["Poison"],
         "attack": 100,
         "eggCycles": 20,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 160,
         "catchRate": 90
     }, {
@@ -3229,7 +3230,7 @@ const pokemonList: {
         "type": ["Rock", "Psychic"],
         "attack": 95,
         "eggCycles": 25,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 161,
         "catchRate": 45
     }, {
@@ -3238,7 +3239,7 @@ const pokemonList: {
         "type": ["Rock", "Psychic"],
         "attack": 95,
         "eggCycles": 25,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 161,
         "catchRate": 45
     }, {
@@ -3247,7 +3248,7 @@ const pokemonList: {
         "type": ["Water", "Ground"],
         "attack": 60,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 58,
         "catchRate": 190,
         "evolutions": [new LevelEvolution("Barboach", "Whiscash", 30)],
@@ -3257,7 +3258,7 @@ const pokemonList: {
         "type": ["Water", "Ground"],
         "attack": 110,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 164,
         "catchRate": 75
     }, {
@@ -3266,7 +3267,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 80,
         "eggCycles": 15,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 62,
         "catchRate": 205,
         "evolutions": [new LevelEvolution("Corphish", "Crawdaunt", 30)],
@@ -3276,7 +3277,7 @@ const pokemonList: {
         "type": ["Water", "Dark"],
         "attack": 120,
         "eggCycles": 15,
-        "levelType": "fluctuating",
+        "levelType": LevelType.fluctuating,
         "exp": 164,
         "catchRate": 155
     }, {
@@ -3285,7 +3286,7 @@ const pokemonList: {
         "type": ["Ground", "Psychic"],
         "attack": 70,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 60,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Baltoy", "Claydol", 36)],
@@ -3295,7 +3296,7 @@ const pokemonList: {
         "type": ["Ground", "Psychic"],
         "attack": 120,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 175,
         "catchRate": 90
     }, {
@@ -3304,7 +3305,7 @@ const pokemonList: {
         "type": ["Rock", "Grass"],
         "attack": 87,
         "eggCycles": 30,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 71,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Lileep", "Cradily", 40)],
@@ -3314,7 +3315,7 @@ const pokemonList: {
         "type": ["Rock", "Grass"],
         "attack": 107,
         "eggCycles": 30,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 173,
         "catchRate": 45
     }, {
@@ -3323,7 +3324,7 @@ const pokemonList: {
         "type": ["Rock", "Bug"],
         "attack": 95,
         "eggCycles": 30,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 71,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Anorith", "Armaldo", 40)],
@@ -3333,7 +3334,7 @@ const pokemonList: {
         "type": ["Rock", "Bug"],
         "attack": 125,
         "eggCycles": 30,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 173,
         "catchRate": 45
     }, {
@@ -3342,7 +3343,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 80,
         "eggCycles": 20,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 40,
         "catchRate": 255,
         "evolutions": [new StoneEvolution("Feebas", "Milotic", GameConstants.StoneType.Trade_stone)],
@@ -3352,7 +3353,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 125,
         "eggCycles": 20,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 189,
         "catchRate": 60
     }, {
@@ -3361,7 +3362,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 70,
         "eggCycles": 25,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 147,
         "catchRate": 45
     }, {
@@ -3370,7 +3371,7 @@ const pokemonList: {
         "type": ["Normal"],
         "attack": 120,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 154,
         "catchRate": 200
     }, {
@@ -3379,7 +3380,7 @@ const pokemonList: {
         "type": ["Ghost"],
         "attack": 75,
         "eggCycles": 25,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 59,
         "catchRate": 225,
         "evolutions": [new LevelEvolution("Shuppet", "Banette", 37)],
@@ -3389,7 +3390,7 @@ const pokemonList: {
         "type": ["Ghost"],
         "attack": 115,
         "eggCycles": 25,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 159,
         "catchRate": 45
     }, {
@@ -3398,7 +3399,7 @@ const pokemonList: {
         "type": ["Ghost"],
         "attack": 90,
         "eggCycles": 25,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 59,
         "catchRate": 190,
         "evolutions": [new LevelEvolution("Duskull", "Dusclops", 37)],
@@ -3408,7 +3409,7 @@ const pokemonList: {
         "type": ["Ghost"],
         "attack": 130,
         "eggCycles": 25,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 159,
         "catchRate": 90,
     }, {
@@ -3417,7 +3418,7 @@ const pokemonList: {
         "type": ["Grass", "Flying"],
         "attack": 99,
         "eggCycles": 25,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 161,
         "catchRate": 200
     }, {
@@ -3426,7 +3427,7 @@ const pokemonList: {
         "type": ["Psychic"],
         "attack": 95,
         "eggCycles": 25,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 159,
         "catchRate": 45
     }, {
@@ -3435,7 +3436,7 @@ const pokemonList: {
         "type": ["Dark"],
         "attack": 130,
         "eggCycles": 25,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 163,
         "catchRate": 30
     }, {
@@ -3444,7 +3445,7 @@ const pokemonList: {
         "type": ["Psychic"],
         "attack": 95,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 52,
         "catchRate": 125,
         "evolutions": [new LevelEvolution("Wynaut", "Wobbuffet", 15)],
@@ -3454,7 +3455,7 @@ const pokemonList: {
         "type": ["Ice"],
         "attack": 50,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 60,
         "catchRate": 190,
         "evolutions": [new LevelEvolution("Snorunt", "Glalie", 42)],
@@ -3464,7 +3465,7 @@ const pokemonList: {
         "type": ["Ice"],
         "attack": 80,
         "eggCycles": 20,
-        "levelType": "mediumfast",
+        "levelType": LevelType.mediumfast,
         "exp": 168,
         "catchRate": 75
     }, {
@@ -3473,7 +3474,7 @@ const pokemonList: {
         "type": ["Ice", "Water"],
         "attack": 70,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 58,
         "catchRate": 255,
         "evolutions": [new LevelEvolution("Spheal", "Sealeo", 32)],
@@ -3483,7 +3484,7 @@ const pokemonList: {
         "type": ["Ice", "Water"],
         "attack": 90,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 144,
         "catchRate": 120,
         "evolutions": [new LevelEvolution("Sealeo", "Walrein", 44)],
@@ -3493,7 +3494,7 @@ const pokemonList: {
         "type": ["Ice", "Water"],
         "attack": 110,
         "eggCycles": 20,
-        "levelType": "mediumslow",
+        "levelType": LevelType.mediumslow,
         "exp": 239,
         "catchRate": 45
     }, {
@@ -3502,7 +3503,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 85,
         "eggCycles": 20,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 69,
         "catchRate": 255,
         "evolutions": [new StoneEvolution("Clamperl", "Huntail", GameConstants.StoneType.Trade_stone)],
@@ -3512,7 +3513,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 105,
         "eggCycles": 20,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 170,
         "catchRate": 60
     }, {
@@ -3521,7 +3522,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 114,
         "eggCycles": 20,
-        "levelType": "erratic",
+        "levelType": LevelType.erratic,
         "exp": 170,
         "catchRate": 60
     }, {
@@ -3530,7 +3531,7 @@ const pokemonList: {
         "type": ["Water", "Rock"],
         "attack": 130,
         "eggCycles": 40,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 170,
         "catchRate": 25
     }, {
@@ -3539,7 +3540,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 97,
         "eggCycles": 20,
-        "levelType": "fast",
+        "levelType": LevelType.fast,
         "exp": 116,
         "catchRate": 225
     }, {
@@ -3548,7 +3549,7 @@ const pokemonList: {
         "type": ["Dragon"],
         "attack": 75,
         "eggCycles": 40,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 60,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Bagon", "Shelgon", 30)],
@@ -3558,7 +3559,7 @@ const pokemonList: {
         "type": ["Dragon"],
         "attack": 100,
         "eggCycles": 40,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 147,
         "catchRate": 45,
         "evolutions": [new LevelEvolution("Shelgon", "Salamence", 50)],
@@ -3568,7 +3569,7 @@ const pokemonList: {
         "type": ["Dragon", "Flying"],
         "attack": 135,
         "eggCycles": 40,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 270,
         "catchRate": 45
     }, {
@@ -3577,7 +3578,7 @@ const pokemonList: {
         "type": ["Steel", "Psychic"],
         "attack": 80,
         "eggCycles": 40,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 60,
         "catchRate": 3,
         "evolutions": [new LevelEvolution("Beldum", "Metang", 20)],
@@ -3587,7 +3588,7 @@ const pokemonList: {
         "type": ["Steel", "Psychic"],
         "attack": 100,
         "eggCycles": 40,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 147,
         "catchRate": 3,
         "evolutions": [new LevelEvolution("Metang", "Metagross", 45)],
@@ -3597,7 +3598,7 @@ const pokemonList: {
         "type": ["Steel", "Psychic"],
         "attack": 135,
         "eggCycles": 40,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 270,
         "catchRate": 3
     }, {
@@ -3606,7 +3607,7 @@ const pokemonList: {
         "type": ["Rock"],
         "attack": 200,
         "eggCycles": 80,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 261,
         "catchRate": 3
     }, {
@@ -3615,7 +3616,7 @@ const pokemonList: {
         "type": ["Ice"],
         "attack": 200,
         "eggCycles": 80,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 261,
         "catchRate": 3
     }, {
@@ -3624,7 +3625,7 @@ const pokemonList: {
         "type": ["Steel"],
         "attack": 150,
         "eggCycles": 80,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 261,
         "catchRate": 3
     }, {
@@ -3633,7 +3634,7 @@ const pokemonList: {
         "type": ["Dragon", "Psychic"],
         "attack": 130,
         "eggCycles": 120,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 270,
         "catchRate": 3
     }, {
@@ -3642,7 +3643,7 @@ const pokemonList: {
         "type": ["Dragon", "Psychic"],
         "attack": 130,
         "eggCycles": 120,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 270,
         "catchRate": 3
     }, {
@@ -3651,7 +3652,7 @@ const pokemonList: {
         "type": ["Water"],
         "attack": 150,
         "eggCycles": 120,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 302,
         "catchRate": 3
     }, {
@@ -3660,7 +3661,7 @@ const pokemonList: {
         "type": ["Ground"],
         "attack": 150,
         "eggCycles": 120,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 302,
         "catchRate": 3
     }, {
@@ -3669,7 +3670,7 @@ const pokemonList: {
         "type": ["Dragon", "Flying"],
         "attack": 150,
         "eggCycles": 120,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 306,
         "catchRate": 45
     }, {
@@ -3678,7 +3679,7 @@ const pokemonList: {
         "type": ["Steel", "Psychic"],
         "attack": 100,
         "eggCycles": 120,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 270,
         "catchRate": 3
     }, {
@@ -3687,7 +3688,7 @@ const pokemonList: {
         "type": ["Psychic"],
         "attack": 150,
         "eggCycles": 120,
-        "levelType": "slow",
+        "levelType": LevelType.slow,
         "exp": 270,
         "catchRate": 3
     }];

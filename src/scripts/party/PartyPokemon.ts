@@ -49,12 +49,13 @@ class PartyPokemon implements Saveable {
 
     public calculateLevel(): number {
         let level;
-        switch (PokemonHelper.getPokemonByName(this.name).levelType) {
+        let levelType = PokemonHelper.getPokemonByName(this.name).levelType;
+        switch (levelType) {
 
-            case GameConstants.LevelType.slow:
+            case LevelType.slow:
                 level = Math.pow(this.exp * 4 / 5, 1 / 3);
                 break;
-            case GameConstants.LevelType.mediumslow:
+            case LevelType.mediumslow:
                 let y;
                 for (let x = 1; x <= 100; x++) {
                     y = 6 / 5 * Math.pow(x, 3) - 15 * Math.pow(x, 2) + 100 * x - 140;
@@ -65,13 +66,14 @@ class PartyPokemon implements Saveable {
                     }
                 }
                 break;
-            case GameConstants.LevelType.mediumfast:
+            case LevelType.mediumfast:
                 level = Math.pow(this.exp, 1 / 3);
                 break;
-            case GameConstants.LevelType.fast:
+            case LevelType.fast:
                 level = Math.pow(this.exp * 5 / 4, 1 / 3);
                 break;
             default:
+                console.log("Could not find levelType: ", levelType);
                 level = Math.pow(30 * this.exp, 0.475) / (6 * Math.sqrt(5));
                 break;
         }

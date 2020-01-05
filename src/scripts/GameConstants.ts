@@ -329,14 +329,6 @@ namespace GameConstants {
         Fairy = "#D685AD"
     }
 
-    export enum LevelType {
-        "slow",
-        "mediumslow",
-        "medium",
-        "mediumfast",
-        "fast"
-    }
-
     // Map navigation
     export const AMOUNT_OF_ROUTES = 134;
     export const AMOUNT_OF_ROUTES_KANTO = 25;
