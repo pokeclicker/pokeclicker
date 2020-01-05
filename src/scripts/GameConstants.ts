@@ -11,13 +11,13 @@ namespace GameConstants {
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
     export const DUNGEON_TIME = 6000;
-    export const DUNGEON_TICK = 1;
+    export const DUNGEON_TICK = 10;
     export const EFFECT_ENGINE_TICK = 1000;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
     export const GYM_COUNTDOWN = 1000;
-    export const GYM_TICK = 1;
+    export const GYM_TICK = 10;
     export const ACHIEVEMENT_TICK = 1000;
     export const MIN_LOAD_TIME = 500;
 
