@@ -4,7 +4,7 @@
 abstract class AmountFactory {
 
     static createArray(amounts: number[], currency: GameConstants.Currency): Amount[] {
-        let array = [];
+        const array = [];
         for (let i = 0; i < amounts.length; i++) {
             array.push(new Amount(amounts[i], currency));
         }

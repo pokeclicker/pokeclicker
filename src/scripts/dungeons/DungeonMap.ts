@@ -12,8 +12,8 @@ class DungeonMap {
         // Move the boss if it spawns on the player.
         if (this.currentTile().type() == GameConstants.DungeonTile.boss) {
             this.currentTile().type(GameConstants.DungeonTile.empty);
-            let newX = GameConstants.randomIntBetween(0, size - 2);
-            let newY = GameConstants.randomIntBetween(0, size - 2);
+            const newX = GameConstants.randomIntBetween(0, size - 2);
+            const newY = GameConstants.randomIntBetween(0, size - 2);
             this.board()[newY][newX].type(GameConstants.DungeonTile.boss);
             this.board()[newY][newX].calculateCssClass();
         }
@@ -110,14 +110,14 @@ class DungeonMap {
 
     public generateMap() {
         // Fill mapList with required Tiles
-        let mapList: DungeonTile[] = [];
+        const mapList: DungeonTile[] = [];
 
         mapList.push(new DungeonTile(GameConstants.DungeonTile.boss));
-        for (let i: number = 0; i < this.size; i++) {
+        for (let i = 0; i < this.size; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.chest));
         }
 
-        for (let i: number = 0; i < this.size * 2 + 3; i++) {
+        for (let i = 0; i < this.size * 2 + 3; i++) {
             mapList.push(new DungeonTile(GameConstants.DungeonTile.enemy));
         }
 
@@ -129,7 +129,7 @@ class DungeonMap {
         this.shuffle(mapList);
 
         // Create a 2d array
-        let map: DungeonTile[][] = [];
+        const map: DungeonTile[][] = [];
         while (mapList.length) {
             map.push(mapList.splice(0, this.size));
         }

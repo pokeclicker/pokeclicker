@@ -1,10 +1,10 @@
 class Wallet implements Feature {
-    name: string = "Wallet";
-    saveKey: string = "wallet";
+    name = 'Wallet';
+    saveKey = 'wallet';
     currencies: ArrayOfObservables<number>;
 
     defaults = {
-        currencies: [0, 0, 0, 0, 0]
+        currencies: [0, 0, 0, 0, 0],
     };
 
     constructor() {
@@ -96,10 +96,10 @@ class Wallet implements Feature {
             return
         }
 
-        if (json["currencies"] == null) {
+        if (json['currencies'] == null) {
             this.currencies = new ArrayOfObservables(this.defaults.currencies);
         } else {
-            let currenciesJson = json["currencies"];
+            const currenciesJson = json['currencies'];
             this.currencies = new ArrayOfObservables([
                 currenciesJson[GameConstants.Currency.money],
                 currenciesJson[GameConstants.Currency.questPoint],
@@ -112,7 +112,7 @@ class Wallet implements Feature {
 
     toJSON(): object {
         return {
-            "currencies": [
+            'currencies': [
                 this.currencies[GameConstants.Currency.money],
                 this.currencies[GameConstants.Currency.questPoint],
                 this.currencies[GameConstants.Currency.dungeonToken],

@@ -31,7 +31,7 @@ class ArrayOfObservables<T> extends Array<T> implements Array<T> {
             }
 
             return true
-        }
+        },
     }
 
 }

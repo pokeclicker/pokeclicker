@@ -1,5 +1,5 @@
 class SeededRand {
-    private static state: number = 12345;
+    private static state = 12345;
     private static readonly MOD: number = 233280;
     private static readonly OFFSET: number = 49297;
     private static readonly MULTIPLIER: number = 9301;

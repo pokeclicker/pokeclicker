@@ -6,8 +6,8 @@ class BooleanSetting extends MultipleChoiceSetting {
             name,
             displayName,
             [
-                new GameConstants.Option("On", true),
-                new GameConstants.Option("Off", false)
+                new GameConstants.Option('On', true),
+                new GameConstants.Option('Off', false),
             ],
             defaultValue
         );
