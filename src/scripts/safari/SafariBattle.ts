@@ -75,6 +75,66 @@ class SafariBattle {
 
     private static calcIndex() {
         return new Promise((resolve,reject)=>{
+            let random = Math.random();
+            let catchF = SafariBattle.enemy.catchFactor / 100;
+            let index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
+            if (index != 0) {
+                $('body').css("animation-duration",SafariBattle.Speed.ballRoll+"ms");
+                SafariBattle.startRoll(index);
+            }
+            resolve([random,index]);
+        });
+    }
+
+    private static delayRoll(result) {
+        return new Promise((resolve,reject)=>{
+            setTimeout(()=>{
+                resolve(result);
+            },(0.2+1.2*result[1])*SafariBattle.Speed.ballRoll);
+        });
+    }
+
+    private static finishCapture(result) {
+        let [random,index]=result;
+        let isgameOver = (Safari.balls() == 0);
+        return new Promise((resolve,reject)=>{
+            if (random*100 < SafariBattle.enemy.catchFactor){
+                SafariBattle.capturePokemon();
+                $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
+                setTimeout(function(){
+                    SafariBattle.particle.remove();
+                    isgameOver ? SafariBattle.gameOver() : SafariBattle.endBattle();
+                }, 1.7*SafariBattle.Speed.enemyTransition);
+            } else {
+                $('#safariEnemy > img').css('opacity', '1');
+                $('#safariEnemy').removeClass('safariCapture');
+                SafariBattle.text(SafariBattle.CATCH_MESSAGES[index]);
+                SafariBattle.particle.remove();
+                setTimeout( function() {
+                    isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
+                }, 1*SafariBattle.Speed.enemyTransition);
+            }
+        })
+    }
+
+    private static startCapture() {
+        return new Promise((resolve,reject)=>{
+            $('#safariEnemy').addClass('safariCapture');
+            resolve();
+        });
+    }
+
+    private static startBounce() {
+        return new Promise((resolve,reject)=>{
+            $('body').css("animation-duration",(1.6*SafariBattle.Speed.ballBounce)+"ms");
+            $('#safariEnemy > img').css('opacity', '0');
+            SafariBattle.particle.addClass('bounce');
+            resolve();
+        });
+    }
+
+    private static calcIndex() {
+        return new Promise((resolve,reject)=>{
             const random = Math.random();
             const catchF = SafariBattle.enemy.catchFactor / 100;
             const index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
