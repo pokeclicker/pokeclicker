@@ -1341,8 +1341,7 @@ const pokemonList: {
             'levelType': LevelType.mediumfast,
             'exp': 79,
             'eggCycles': 20,
-        // TODO implement porygon2
-        // "evolutions": [new LevelEvolution("Porygon", "Porygon2", Upgrade)],
+            'evolutions': [new StoneEvolution('Porygon', 'Porygon2', GameConstants.StoneType.Upgrade)],
         }, {
             'id': 138,
             'name': 'Omanyte',
