@@ -7,19 +7,7 @@ class Save {
         localStorage.setItem('player', json);
         localStorage.setItem('mine', Mine.serialize());
         localStorage.setItem('settings', Settings.save());
-
-        const saveObject = {};
-
-        saveObject[Underground.saveKey] = Underground.save();
-        saveObject[App.game.breeding.saveKey] = App.game.breeding.toJSON();
-        saveObject[App.game.pokeballs.saveKey] = App.game.pokeballs.toJSON();
-        saveObject[App.game.wallet.saveKey] = App.game.wallet.toJSON();
-        saveObject[App.game.keyItems.saveKey] = App.game.keyItems.toJSON();
-        saveObject[App.game.badgeCase.saveKey] = App.game.badgeCase.toJSON();
-        saveObject[App.game.oakItems.saveKey] = App.game.oakItems.toJSON();
-        saveObject[App.game.party.saveKey] = App.game.party.toJSON();
-
-        localStorage.setItem('save', JSON.stringify(saveObject));
+        localStorage.setItem('save', JSON.stringify(this.getSaveObject()));
 
         this.counter = 0;
         console.log('Game saved')
