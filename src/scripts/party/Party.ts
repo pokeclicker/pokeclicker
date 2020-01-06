@@ -61,8 +61,8 @@ class Party implements Feature {
         for (const pokemon of this.caughtPokemon) {
             if (pokemon.levelObservable() < maxLevel) {
                 pokemon.exp += expTotal;
-                pokemon.checkForLevelEvolution();
             }
+            pokemon.checkForLevelEvolution();
         }
     }
 
