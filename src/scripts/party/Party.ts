@@ -14,7 +14,7 @@ class Party implements Feature {
 
 
     constructor() {
-        this._caughtPokemon = ko.observableArray();
+        this._caughtPokemon = ko.observableArray([]);
         this.shinyPokemon = new ObservableArrayProxy(this.defaults.shinyPokemon);
     }
 
@@ -43,7 +43,7 @@ class Party implements Feature {
             return;
         }
         Notifier.notify(`You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, GameConstants.NotificationOption.success);
-        this.caughtPokemon.push(pokemon);
+        this._caughtPokemon().push(pokemon);
 
     }
 
@@ -58,7 +58,7 @@ class Party implements Feature {
         }
 
         const maxLevel = (App.game.badgeCase.badgeCount() + 2) * 10;
-        for (const pokemon of this.caughtPokemon) {
+        for (const pokemon of this._caughtPokemon()) {
             if (pokemon.levelObservable() < maxLevel) {
                 pokemon.exp += expTotal;
                 pokemon.checkForLevelEvolution();
@@ -74,7 +74,7 @@ class Party implements Feature {
      */
     public calculatePokemonAttack(type1: GameConstants.PokemonType = GameConstants.PokemonType.None, type2: GameConstants.PokemonType = GameConstants.PokemonType.None): number {
         let attack = 0;
-        for (const pokemon of this.caughtPokemon) {
+        for (const pokemon of this._caughtPokemon()) {
             let multiplier = 1;
             if (player.region !== GameHelper.getRegion(pokemon.id)) {
                 // Pokemon only retain 20% of their total damage in other regions.
@@ -98,16 +98,16 @@ class Party implements Feature {
     }
 
     public getPokemon(id: number) {
-        for (let i = 0; i < this.caughtPokemon.length; i++) {
-            if (this.caughtPokemon[i].id === id) {
-                return this.caughtPokemon[i];
+        for (let i = 0; i < this._caughtPokemon().length; i++) {
+            if (this._caughtPokemon()[i].id === id) {
+                return this._caughtPokemon()[i];
             }
         }
     }
 
     public hasMaxLevelPokemon(): boolean {
-        for (let i = 0; i < this.caughtPokemon.length; i++) {
-            if (this.caughtPokemon[i].levelObservable() === 100) {
+        for (let i = 0; i < this._caughtPokemon().length; i++) {
+            if (this._caughtPokemon()[i].levelObservable() === 100) {
                 return true;
             }
         }
@@ -119,8 +119,8 @@ class Party implements Feature {
     }
 
     alreadyCaughtPokemon(id: number, shiny = false) {
-        for (let i = 0; i < this.caughtPokemon.length; i++) {
-            if (this.caughtPokemon[i].id === id) {
+        for (let i = 0; i < this._caughtPokemon().length; i++) {
+            if (this._caughtPokemon()[i].id === id) {
                 return (!shiny || this.shinyPokemon.includes(id));
             }
         }
@@ -129,7 +129,7 @@ class Party implements Feature {
 
     calculateClickAttack(): number {
         // Base power
-        let clickAttack = Math.pow(this.caughtPokemon.length + 1, 1.4);
+        let clickAttack = Math.pow(this._caughtPokemon().length + 1, 1.4);
 
         // TODO(@Isha) fix when refactoring to party
         if (App.game != undefined) {
@@ -157,7 +157,7 @@ class Party implements Feature {
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);
-            this.caughtPokemon.push(partyPokemon)
+            this._caughtPokemon().push(partyPokemon)
         }
 
         this.shinyPokemon = new ObservableArrayProxy<number>(json['shinyPokemon'] ?? this.defaults.shinyPokemon);
@@ -168,7 +168,7 @@ class Party implements Feature {
 
     toJSON(): object {
         return {
-            caughtPokemon: this.caughtPokemon.map(x => x.toJSON()),
+            caughtPokemon: this._caughtPokemon().map(x => x.toJSON()),
             shinyPokemon: this.shinyPokemon.map(x => x),
         }
     }
@@ -179,6 +179,10 @@ class Party implements Feature {
 
     get caughtPokemon() {
         return this._caughtPokemon();
+    }
+
+    set caughtPokemon(pokemon: PartyPokemon[]) {
+        this._caughtPokemon(pokemon);
     }
 
 }
