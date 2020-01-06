@@ -526,6 +526,7 @@ namespace GameConstants {
     };
 
     export enum StoneType {
+        None = -1,
         Fire_stone,
         Water_stone,
         Thunder_stone,
@@ -538,6 +539,8 @@ namespace GameConstants {
         Kings_rock,
         Upgrade,
         Time_stone,
+        Shiny_stone,
+        Dusk_stone,
     }
 
     export enum BattleItemType {
