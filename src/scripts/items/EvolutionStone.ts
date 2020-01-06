@@ -21,7 +21,6 @@ class EvolutionStone extends Item {
     }
 }
 
-//ItemList['None'] = new EvolutionStone(GameConstants.StoneType.None);
 ItemList['Fire_stone'] = new EvolutionStone(GameConstants.StoneType.Fire_stone);
 ItemList['Water_stone'] = new EvolutionStone(GameConstants.StoneType.Water_stone);
 ItemList['Thunder_stone'] = new EvolutionStone(GameConstants.StoneType.Thunder_stone);
@@ -34,5 +33,3 @@ ItemList['Metal_coat'] = new EvolutionStone(GameConstants.StoneType.Metal_coat);
 ItemList['Kings_rock'] = new EvolutionStone(GameConstants.StoneType.Kings_rock);
 ItemList['Upgrade'] = new EvolutionStone(GameConstants.StoneType.Upgrade);
 ItemList['Time_stone'] = new EvolutionStone(GameConstants.StoneType.Time_stone);
-ItemList['Shiny_stone'] = new EvolutionStone(GameConstants.StoneType.Shiny_stone);
-ItemList['Dusk_stone'] = new EvolutionStone(GameConstants.StoneType.Dusk_stone);

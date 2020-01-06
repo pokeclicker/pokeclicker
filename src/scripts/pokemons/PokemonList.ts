@@ -5630,7 +5630,7 @@ const pokemonList: {
             'levelType': 4,
             'exp': 60,
             'catchRate': 255,
-            'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.Shiny_stone)],
+            'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.None)],
         },
         {
             'id': 573,
@@ -6010,7 +6010,7 @@ const pokemonList: {
             'levelType': LevelType.mediumslow,
             'exp': 130,
             'catchRate': 90,
-            'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.Dusk_stone)],
+            'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.None)],
         },
         {
             'id': 609,
@@ -6656,7 +6656,7 @@ const pokemonList: {
             'levelType': LevelType.mediumfast,
             'exp': 130,
             'catchRate': 120,
-            'evolutions': [new StoneEvolution('Floette', 'Florges', GameConstants.StoneType.Shiny_stone)],
+            'evolutions': [new StoneEvolution('Floette', 'Florges', GameConstants.StoneType.None)],
         },
         {
             'id': 671,
@@ -6761,7 +6761,7 @@ const pokemonList: {
             'levelType': LevelType.mediumfast,
             'exp': 157,
             'catchRate': 90,
-            'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.Dusk_stone)],
+            'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.None)],
         },
         {
             'id': 681,
