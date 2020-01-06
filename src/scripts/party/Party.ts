@@ -43,7 +43,7 @@ class Party implements Feature {
             return;
         }
         Notifier.notify(`You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, GameConstants.NotificationOption.success);
-        this.caughtPokemon.push(pokemon);
+        this._caughtPokemon.push(pokemon);
 
     }
 
@@ -157,7 +157,7 @@ class Party implements Feature {
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);
-            this.caughtPokemon.push(partyPokemon)
+            this._caughtPokemon.push(partyPokemon)
         }
 
         this.shinyPokemon = new ObservableArrayProxy<number>(json['shinyPokemon'] ?? this.defaults.shinyPokemon);
