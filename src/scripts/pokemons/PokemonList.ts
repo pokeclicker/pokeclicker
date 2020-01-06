@@ -1225,6 +1225,7 @@ const pokemonList: {
             'levelType': LevelType.mediumfast,
             'exp': 172,
             'eggCycles': 25,
+            'evolutions': [new StoneEvolution('Electabuzz', 'Electivire', GameConstants.StoneType.Trade_stone)],
         }, {
             'id': 126,
             'name': 'Magmar',
@@ -1234,6 +1235,7 @@ const pokemonList: {
             'levelType': LevelType.mediumfast,
             'exp': 173,
             'eggCycles': 25,
+            'evolutions': [new StoneEvolution('Magmar', 'Magmortar', GameConstants.StoneType.Trade_stone)],
         }, {
             'id': 127,
             'name': 'Pinsir',
