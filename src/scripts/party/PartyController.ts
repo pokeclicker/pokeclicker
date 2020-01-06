@@ -23,9 +23,9 @@ class PartyController {
     }
 
     static getSortedList() {
-        return ko.computed(function() {
-            return App.game.party.caughtPokemon.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
-        }).extend({ throttle: 1000 });
+        return ko.pureComputed(function() {
+            return App.game.party._caughtPokemon.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
+        });
     }
 
 

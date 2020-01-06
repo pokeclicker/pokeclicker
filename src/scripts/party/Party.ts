@@ -3,7 +3,7 @@ class Party implements Feature {
     name = 'Pokemon Party';
     saveKey = 'party';
 
-    caughtPokemon: ObservableArrayProxy<PartyPokemon>;
+    _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
     shinyPokemon: ObservableArrayProxy<number>;
 
 
@@ -14,7 +14,7 @@ class Party implements Feature {
 
 
     constructor() {
-        this.caughtPokemon = new ObservableArrayProxy(this.defaults.caughtPokemon);
+        this._caughtPokemon = ko.observableArray([]);
         this.shinyPokemon = new ObservableArrayProxy(this.defaults.shinyPokemon);
     }
 
@@ -43,7 +43,7 @@ class Party implements Feature {
             return;
         }
         Notifier.notify(`You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, GameConstants.NotificationOption.success);
-        this.caughtPokemon.push(pokemon);
+        this._caughtPokemon.push(pokemon);
 
     }
 
@@ -157,7 +157,7 @@ class Party implements Feature {
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);
-            this.caughtPokemon.push(partyPokemon)
+            this._caughtPokemon.push(partyPokemon)
         }
 
         this.shinyPokemon = new ObservableArrayProxy<number>(json['shinyPokemon'] ?? this.defaults.shinyPokemon);
@@ -168,13 +168,21 @@ class Party implements Feature {
 
     toJSON(): object {
         return {
-            caughtPokemon: this.caughtPokemon.map(x => x.toJSON()),
+            caughtPokemon: this._caughtPokemon().map(x => x.toJSON()),
             shinyPokemon: this.shinyPokemon.map(x => x),
         }
     }
 
     update(delta: number): void {
         // This method intentionally left blank
+    }
+
+    get caughtPokemon() {
+        return this._caughtPokemon();
+    }
+
+    set caughtPokemon(pokemon: PartyPokemon[]) {
+        this._caughtPokemon(pokemon);
     }
 
 }
