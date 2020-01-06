@@ -25,6 +25,21 @@ class Save {
         console.log('Game saved')
     }
 
+    public static getSaveObject(){
+        const saveObject = {};
+
+        saveObject[Underground.saveKey] = Underground.save();
+        saveObject[App.game.breeding.saveKey] = App.game.breeding.toJSON();
+        saveObject[App.game.pokeballs.saveKey] = App.game.pokeballs.toJSON();
+        saveObject[App.game.wallet.saveKey] = App.game.wallet.toJSON();
+        saveObject[App.game.keyItems.saveKey] = App.game.keyItems.toJSON();
+        saveObject[App.game.badgeCase.saveKey] = App.game.badgeCase.toJSON();
+        saveObject[App.game.oakItems.saveKey] = App.game.oakItems.toJSON();
+        saveObject[App.game.party.saveKey] = App.game.party.toJSON();
+
+        return saveObject;
+    }
+
     public static load(): Player {
         const saved = localStorage.getItem('player');
 
@@ -47,7 +62,7 @@ class Save {
 
     public static download() {
         const element = document.createElement('a');
-        element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(player)))}`);
+        element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify({player, save: this.getSaveObject()})))}`);
         const currentdate = new Date();
         const datestr = currentdate.toISOString().replace('T', ' ').slice(0, 19);
         const filename = `PokeClickerSave_${datestr}.txt`;
@@ -178,9 +193,12 @@ class Save {
         setTimeout(function () {
             try {
                 const decoded = atob(fr.result as string);
-                JSON.parse(decoded);
-                if (decoded) {
-                    localStorage.setItem('player', decoded);
+                console.debug('decoded:', decoded);
+                const json = JSON.parse(decoded);
+                console.debug('json:', json);
+                if (decoded && json && json.player && json.save) {
+                    localStorage.setItem('player', JSON.stringify(json.player));
+                    localStorage.setItem('save', JSON.stringify(json.save));
                     location.reload();
                 } else {
                     Notifier.notify('This is not a valid decoded savefile', GameConstants.NotificationOption.danger);
