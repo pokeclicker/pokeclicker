@@ -3,7 +3,7 @@ class Party implements Feature {
     name = 'Pokemon Party';
     saveKey = 'party';
 
-    caughtPokemon: ObservableArrayProxy<PartyPokemon>;
+    _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
     shinyPokemon: ObservableArrayProxy<number>;
 
 
@@ -14,7 +14,7 @@ class Party implements Feature {
 
 
     constructor() {
-        this.caughtPokemon = new ObservableArrayProxy(this.defaults.caughtPokemon);
+        this._caughtPokemon = ko.observableArray();
         this.shinyPokemon = new ObservableArrayProxy(this.defaults.shinyPokemon);
     }
 
@@ -61,8 +61,8 @@ class Party implements Feature {
         for (const pokemon of this.caughtPokemon) {
             if (pokemon.levelObservable() < maxLevel) {
                 pokemon.exp += expTotal;
+                pokemon.checkForLevelEvolution();
             }
-            pokemon.checkForLevelEvolution();
         }
     }
 
@@ -175,6 +175,10 @@ class Party implements Feature {
 
     update(delta: number): void {
         // This method intentionally left blank
+    }
+
+    get caughtPokemon() {
+        return this._caughtPokemon();
     }
 
 }
