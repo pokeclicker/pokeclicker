@@ -149,7 +149,6 @@ class Breeding implements Feature {
         const egg = this.createEgg(pokemon.name);
         pokemon.breeding = true;
         this.gainEgg(egg);
-        pokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
     }
 
     public hatchPokemonEgg(index: number) {
@@ -163,7 +162,11 @@ class Breeding implements Feature {
                 if (App.game.party.caughtPokemon[i].breeding) {
                     App.game.party.caughtPokemon[i].exp = 0;
                     App.game.party.caughtPokemon[i].breeding = false;
+                    App.game.party.caughtPokemon[i].level = App.game.party.caughtPokemon[i].calculateLevelFromExp();
+                    App.game.party.caughtPokemon[i].attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
+                    App.game.party.caughtPokemon[i].attack = App.game.party.caughtPokemon[i].calculateAttack();
                     App.game.party.caughtPokemon[i].checkForLevelEvolution();
+
                 }
             }
         }

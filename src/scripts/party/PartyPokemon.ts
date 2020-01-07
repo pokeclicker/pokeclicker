@@ -42,8 +42,8 @@ class PartyPokemon implements Saveable {
 
 
     calculateLevelFromExp() {
-        const levelType = PokemonHelper.getPokemonByName(this.name).levelType
-        for (let i = this.level - 1; i < levelRequirements[levelType].length; i++) {
+        const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
+        for (let i = 0; i < levelRequirements[levelType].length; i++) {
             if (levelRequirements[levelType][i] > this.exp) {
                 return i;
             }
