@@ -161,12 +161,12 @@ class Breeding implements Feature {
             if (App.game.party.caughtPokemon[i].name == egg.pokemon) {
                 if (App.game.party.caughtPokemon[i].breeding) {
                     App.game.party.caughtPokemon[i].exp = 0;
+                    App.game.party.caughtPokemon[i].level = 1;
                     App.game.party.caughtPokemon[i].breeding = false;
                     App.game.party.caughtPokemon[i].level = App.game.party.caughtPokemon[i].calculateLevelFromExp();
                     App.game.party.caughtPokemon[i].attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
                     App.game.party.caughtPokemon[i].attack = App.game.party.caughtPokemon[i].calculateAttack();
                     App.game.party.caughtPokemon[i].checkForLevelEvolution();
-
                 }
             }
         }
