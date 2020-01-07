@@ -23,7 +23,7 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
-        if (!this.enemyPokemon().isAlive()) {
+        if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
         this.enemyPokemon().damage(player.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
@@ -36,7 +36,7 @@ class Battle {
      * Attacks with clicks and checks if the enemy is defeated.
      */
     public static clickAttack() {
-        if (!this.enemyPokemon().isAlive()) {
+        if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
         App.game.oakItems.use(OakItems.OakItem.Poison_Barb);
