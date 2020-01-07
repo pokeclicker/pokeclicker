@@ -14,7 +14,7 @@
                 <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
             </td>
             <td data-bind="text: attack">Atk</td>
-            <td data-bind="text: levelObservable">Lvl</td>
+            <td data-bind="text: level">Lvl</td>
         </tr>
     </script>
 
@@ -343,7 +343,7 @@
                         <tr>
                             <td width="50%">
                               <span style="display: inline;">Pokémon Attack:
-                                  <span data-bind="text: App.game.party.calculatePokemonAttack().toLocaleString('en-US')"></span>
+                                  <span data-bind="text: App.game.party.calculatePokemonAttack(Battle.enemyPokemon().type1, Battle.enemyPokemon().type2).toLocaleString('en-US')"></span>
                               </span>
                             </td>
                             <td width="50%">

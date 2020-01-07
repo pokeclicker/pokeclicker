@@ -14,7 +14,7 @@ class PartyPokemon implements Saveable {
     _baseAttack: KnockoutObservable<number>;
     attackBonus: number;
     _exp: KnockoutObservable<number>;
-    levelObservable: KnockoutComputed<number>;
+    _level: KnockoutObservable<number>;
     evolutions: Evolution[];
     _breeding: KnockoutObservable<boolean>;
     attack: KnockoutComputed<number>;
@@ -24,13 +24,11 @@ class PartyPokemon implements Saveable {
         this.id = id;
         this.name = name;
         this.attackBonus = attackBonus;
-        this._exp = ko.observable(exp).extend({ rateLimit: 1000 });
+        this._exp = ko.observable(exp).extend({rateLimit: 1000});
         this._baseAttack = ko.observable(baseAttack);
         this._breeding = ko.observable(breeding);
 
-        this.levelObservable = ko.computed(() => {
-            return this.calculateLevel();
-        });
+        this._level = ko.observable(1);
 
         this.attack = ko.computed(() => {
             return this.calculateAttack();
@@ -42,42 +40,25 @@ class PartyPokemon implements Saveable {
 
     public calculateAttack(): number {
         const attackBonusMultiplier = 1 + (this.attackBonus / 100);
-        const levelMultiplier = this.levelObservable() / 100;
+        const levelMultiplier = this.level / 100;
         return Math.max(1, Math.floor(this.baseAttack * attackBonusMultiplier * levelMultiplier));
     }
 
 
-    public calculateLevel(): number {
-        let level;
-        const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
-        switch (levelType) {
-
-            case LevelType.slow:
-                level = Math.pow(this.exp * 4 / 5, 1 / 3);
-                break;
-            case LevelType.mediumslow:
-                let y;
-                for (let x = 1; x <= 100; x++) {
-                    y = 6 / 5 * Math.pow(x, 3) - 15 * Math.pow(x, 2) + 100 * x - 140;
-                    if (this.exp >= y) {
-                        level = x
-                    } else {
-                        break;
-                    }
-                }
-                break;
-            case LevelType.mediumfast:
-                level = Math.pow(this.exp, 1 / 3);
-                break;
-            case LevelType.fast:
-                level = Math.pow(this.exp * 5 / 4, 1 / 3);
-                break;
-            default:
-                console.log('Could not find levelType: ', levelType);
-                level = Math.pow(30 * this.exp, 0.475) / (6 * Math.sqrt(5));
-                break;
+    calculateLevelFromExp() {
+        const levelType = PokemonHelper.getPokemonByName(this.name).levelType
+        for (let i = this.level - 1; i < levelRequirements[levelType].length; i++) {
+            if (levelRequirements[levelType][i] > this.exp) {
+                return i;
+            }
         }
-        return Math.max(1, Math.min(100, Math.floor(level)));
+        return this.level;
+    };
+
+    public gainExp(exp: number) {
+        this.exp += exp;
+        this.level = this.calculateLevelFromExp();
+        this.checkForLevelEvolution();
     }
 
     public checkForLevelEvolution() {
@@ -112,6 +93,7 @@ class PartyPokemon implements Saveable {
 
         this.attackBonus = json['attackBonus'] ?? this.defaults.attackBonus;
         this.exp = json['exp'] ?? this.defaults.exp;
+        this.level = this.calculateLevelFromExp();
         this.breeding = json['breeding'] ?? this.defaults.breeding;
 
         if (this.evolutions != null) {
@@ -149,6 +131,14 @@ class PartyPokemon implements Saveable {
 
     set exp(exp: number) {
         this._exp(exp);
+    }
+
+    get level() {
+        return this._level()
+    }
+
+    set level(level: number) {
+        this._level(level);
     }
 
     get breeding() {

@@ -82,7 +82,7 @@ Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
         new GameConstants.Option('Pokedex #', SortOptions.id),
         new GameConstants.Option('Name', SortOptions.name),
         new GameConstants.Option('Attack', SortOptions.attack),
-        new GameConstants.Option('Level', SortOptions.levelObservable),
+        new GameConstants.Option('Level', SortOptions.level),
         new GameConstants.Option('Shiny', SortOptions.shiny),
     ],
     SortOptions.id

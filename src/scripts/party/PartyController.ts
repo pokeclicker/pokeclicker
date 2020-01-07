@@ -18,7 +18,7 @@ class PartyController {
 
     public static getMaxLevelPokemonList() {
         return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
-            return !partyPokemon.breeding && partyPokemon.levelObservable() >= 100;
+            return !partyPokemon.breeding && partyPokemon.level >= 100;
         });
     }
 
@@ -48,9 +48,9 @@ class PartyController {
                     aValue = a.calculateAttack();
                     bValue = b.calculateAttack();
                     break;
-                case SortOptions.levelObservable:
-                    aValue = a.calculateLevel();
-                    bValue = b.calculateLevel();
+                case SortOptions.level:
+                    aValue = a.level;
+                    bValue = b.level;
                     break;
                 case SortOptions.shiny:
                     aValue = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(a.name).id, true));
@@ -58,7 +58,7 @@ class PartyController {
 
 
             }
-            if (option === SortOptions.attack || option == SortOptions.levelObservable || option == SortOptions.shiny) {
+            if (option === SortOptions.attack || option == SortOptions.level || option == SortOptions.shiny) {
                 dir *= -1;
             }
 
