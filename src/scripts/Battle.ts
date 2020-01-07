@@ -103,6 +103,9 @@ class Battle {
     }
 
     protected static attemptCatch() {
+        if (this.enemyPokemon() == null) {
+            return;
+        }
         const random: number = Math.floor(Math.random() * 100);
         if (random <= this.catchRateActual()) {
             this.catchPokemon();
