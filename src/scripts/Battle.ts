@@ -104,6 +104,7 @@ class Battle {
 
     protected static attemptCatch() {
         if (this.enemyPokemon() == null) {
+            this.catching(false);
             return;
         }
         const random: number = Math.floor(Math.random() * 100);

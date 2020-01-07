@@ -35,10 +35,10 @@ class DungeonBattle extends Battle {
     }
 
     public static generateNewEnemy() {
-        DungeonRunner.fighting(true);
         this.catching(false);
         this.counter = 0;
         this.enemyPokemon(PokemonFactory.generateDungeonPokemon(DungeonRunner.dungeon.pokemonList, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level));
+        DungeonRunner.fighting(true);
     }
 
     public static generateNewBoss() {
