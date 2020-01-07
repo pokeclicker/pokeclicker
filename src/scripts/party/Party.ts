@@ -81,10 +81,10 @@ class Party implements Feature {
             }
             if (!pokemon.breeding) {
                 if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
-                    attack += pokemon.attack() * multiplier;
+                    attack += pokemon.attack * multiplier;
                 } else {
                     const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-                    attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
+                    attack += pokemon.attack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
                 }
             }
         }

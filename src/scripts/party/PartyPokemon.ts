@@ -11,28 +11,24 @@ class PartyPokemon implements Saveable {
     id: number;
     name: string;
 
-    _baseAttack: KnockoutObservable<number>;
+    baseAttack: number;
     attackBonus: number;
     exp: number;
     _level: KnockoutObservable<number>;
     evolutions: Evolution[];
     _breeding: KnockoutObservable<boolean>;
-    attack: KnockoutComputed<number>;
-
+    _attack: KnockoutObservable<number>;
 
     constructor(id: number, name: string, evolutions: Evolution[], baseAttack: number, attackBonus: number, exp: number, breeding = false) {
         this.id = id;
         this.name = name;
         this.attackBonus = attackBonus;
         this.exp = exp;
-        this._baseAttack = ko.observable(baseAttack);
+        this.baseAttack = baseAttack;
         this._breeding = ko.observable(breeding);
 
         this._level = ko.observable(1);
-
-        this.attack = ko.computed(() => {
-            return this.calculateAttack();
-        });
+        this._attack = ko.observable(this.calculateAttack());
 
         this.evolutions = evolutions;
 
@@ -58,6 +54,7 @@ class PartyPokemon implements Saveable {
     public gainExp(exp: number) {
         this.exp += exp;
         this.level = this.calculateLevelFromExp();
+        this.attack = this.calculateAttack();
         this.checkForLevelEvolution();
     }
 
@@ -94,6 +91,7 @@ class PartyPokemon implements Saveable {
         this.attackBonus = json['attackBonus'] ?? this.defaults.attackBonus;
         this.exp = json['exp'] ?? this.defaults.exp;
         this.level = this.calculateLevelFromExp();
+        this.attack = this.calculateAttack();
         this.breeding = json['breeding'] ?? this.defaults.breeding;
 
         if (this.evolutions != null) {
@@ -133,19 +131,20 @@ class PartyPokemon implements Saveable {
         this._level(level);
     }
 
+    get attack() {
+        return this._attack()
+    }
+
+    set attack(attack: number) {
+        this._attack(attack);
+    }
+
+
     get breeding() {
         return this._breeding()
     }
 
     set breeding(bool: boolean) {
         this._breeding(bool);
-    }
-
-    get baseAttack() {
-        return this._baseAttack();
-    }
-
-    set baseAttack(attack: number) {
-        this._baseAttack(attack);
     }
 }
