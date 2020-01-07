@@ -53,9 +53,13 @@ class PartyPokemon implements Saveable {
 
     public gainExp(exp: number) {
         this.exp += exp;
-        this.level = this.calculateLevelFromExp();
-        this.attack = this.calculateAttack();
-        this.checkForLevelEvolution();
+        const oldLevel = this.level;
+        const newLevel = this.calculateLevelFromExp();
+        if (oldLevel !== newLevel) {
+            this.level = newLevel;
+            this.attack = this.calculateAttack();
+            this.checkForLevelEvolution();
+        }
     }
 
     public checkForLevelEvolution() {
