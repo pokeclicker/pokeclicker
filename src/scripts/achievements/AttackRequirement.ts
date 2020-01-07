@@ -6,6 +6,6 @@ class AttackRequirement extends Requirement{
     }
 
     public getProgress(){
-        return Math.min(App.game.party.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None), this.requiredValue);
+        return Math.min(App.game.party.pokemonAttackObservable()(), this.requiredValue);
     }
 }

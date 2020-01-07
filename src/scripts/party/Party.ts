@@ -12,10 +12,23 @@ class Party implements Feature {
         shinyPokemon: [],
     };
 
+    hasMaxLevelPokemon: KnockoutComputed<boolean>;
+
 
     constructor() {
         this._caughtPokemon = ko.observableArray([]);
         this.shinyPokemon = new ObservableArrayProxy(this.defaults.shinyPokemon);
+
+
+        this.hasMaxLevelPokemon = ko.pureComputed(() => {
+            for (let i = 0; i < this.caughtPokemon.length; i++) {
+                if (this.caughtPokemon[i].level === 100) {
+                    return true;
+                }
+            }
+            return false;
+        }).extend({rateLimit: 1000});
+
     }
 
     gainPokemonById(id: number, shiny = false) {
@@ -96,21 +109,18 @@ class Party implements Feature {
         return Math.round(attack);
     }
 
+    public pokemonAttackObservable(type1: GameConstants.PokemonType = GameConstants.PokemonType.None, type2: GameConstants.PokemonType = GameConstants.PokemonType.None): KnockoutComputed<number> {
+        return ko.pureComputed(() => {
+            return App.game.party.calculatePokemonAttack(type1, type2);
+        }).extend({rateLimit: 1000});
+    }
+
     public getPokemon(id: number) {
         for (let i = 0; i < this.caughtPokemon.length; i++) {
             if (this.caughtPokemon[i].id === id) {
                 return this.caughtPokemon[i];
             }
         }
-    }
-
-    public hasMaxLevelPokemon(): boolean {
-        for (let i = 0; i < this.caughtPokemon.length; i++) {
-            if (this.caughtPokemon[i].level === 100) {
-                return true;
-            }
-        }
-        return false;
     }
 
     alreadyCaughtPokemonByName(name: string, shiny = false) {
