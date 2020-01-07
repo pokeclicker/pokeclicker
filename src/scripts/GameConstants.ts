@@ -526,6 +526,7 @@ namespace GameConstants {
     };
 
     export enum StoneType {
+        None = -1,
         Fire_stone,
         Water_stone,
         Thunder_stone,
