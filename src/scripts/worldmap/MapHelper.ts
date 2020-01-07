@@ -149,6 +149,7 @@ class MapHelper {
             player.route(0);
             player.town(TownList[townName]);
             player.currentTown(townName);
+            Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
             GameController.applyRouteBindings();
