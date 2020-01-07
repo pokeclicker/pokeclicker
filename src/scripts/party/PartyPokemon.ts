@@ -13,7 +13,7 @@ class PartyPokemon implements Saveable {
 
     _baseAttack: KnockoutObservable<number>;
     attackBonus: number;
-    _exp: KnockoutObservable<number>;
+    exp: number;
     _level: KnockoutObservable<number>;
     evolutions: Evolution[];
     _breeding: KnockoutObservable<boolean>;
@@ -24,7 +24,7 @@ class PartyPokemon implements Saveable {
         this.id = id;
         this.name = name;
         this.attackBonus = attackBonus;
-        this._exp = ko.observable(exp).extend({rateLimit: 1000});
+        this.exp = exp;
         this._baseAttack = ko.observable(baseAttack);
         this._breeding = ko.observable(breeding);
 
@@ -125,14 +125,6 @@ class PartyPokemon implements Saveable {
     }
 
     // Knockout getters/setter
-    get exp() {
-        return this._exp()
-    }
-
-    set exp(exp: number) {
-        this._exp(exp);
-    }
-
     get level() {
         return this._level()
     }
