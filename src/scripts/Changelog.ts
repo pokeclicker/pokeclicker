@@ -23,6 +23,8 @@ class Changelog {
 const changelogItems = [
     // v1.0.4
     new Changelog(changelogType.VERSION, 'v1.0.4'),
+    new Changelog(changelogType.NEW, 'Add setting to toggle egg percentage/step count'),
+    new Changelog(changelogType.CHANGE, 'Total shiny Pokemon caught no longer adds to your click attack'),
     new Changelog(changelogType.CHANGE, 'Halve xp needed to upgrade Oak items'),
     new Changelog(changelogType.FIXED, 'BattleItems now buy correctly'),
     new Changelog(changelogType.CHANGE, 'Increase dungeon tokens received when catching Pokemon'),
