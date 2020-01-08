@@ -108,7 +108,7 @@ class Breeding implements Feature {
                 return true;
             }
         }
-        console.log(`Error: Could not place ${GameConstants.EggType[e.type]} Egg`);
+        console.error(`Error: Could not place ${GameConstants.EggType[e.type]} Egg`);
         return false;
     }
 
