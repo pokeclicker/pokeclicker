@@ -10,6 +10,7 @@ class Egg implements Saveable {
     type: GameConstants.EggType;
     notified: boolean;
     progress: KnockoutComputed<number>;
+    progressText: KnockoutComputed<string>;
 
     constructor(totalSteps: number, pokemon: string, type: GameConstants.EggType, steps = 0, shinySteps = 0, notified = false) {
         this.totalSteps = totalSteps;
@@ -20,6 +21,10 @@ class Egg implements Saveable {
         this.notified = notified;
         this.progress = ko.computed(function () {
             return this.steps() / this.totalSteps * 100;
+        }, this);
+
+        this.progressText = ko.pureComputed(function () {
+            return `${this.steps()} / ${this.totalSteps}`;
         }, this);
     }
 

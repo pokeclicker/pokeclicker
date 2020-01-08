@@ -88,4 +88,13 @@ Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
     SortOptions.id
 ));
 
+Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress display:',
+    [
+        new GameConstants.Option('Step count', 'stepCount'),
+        new GameConstants.Option('Percentage', 'percentage'),
+    ],
+    'percentage'
+));
+
+
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
