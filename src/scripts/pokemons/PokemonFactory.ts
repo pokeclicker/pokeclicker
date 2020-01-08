@@ -68,6 +68,11 @@ class PokemonFactory {
         return false;
     }
 
+    public static generatePartyPokemon(id: number) {
+        const dataPokemon = PokemonHelper.getPokemonById(id);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false);
+    }
+
     /**
      * Generate a trainer pokemon based on gymName, index and the dataList.
      * @param gymName name of the gym that the player is fighting.

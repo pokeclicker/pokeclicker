@@ -219,7 +219,7 @@ class MapHelper {
     }
 
     public static ableToTravel() {
-        return player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && player.caughtPokemonList.length >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
+        return player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && App.game.party.caughtPokemon.length >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
     }
 
     public static travelToNextRegion() {

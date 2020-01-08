@@ -1,6 +1,7 @@
 /// <reference path="Setting.ts" />
 /// <reference path="BooleanSetting.ts"/>
 /// <reference path="MultipleChoiceSetting.ts"/>
+///<reference path="SortOptions.ts"/>
 
 class Settings {
     static list: Setting[] = [];
@@ -29,13 +30,13 @@ class Settings {
 
     }
 
-    static getSetting(name: string) {
+    static getSetting(name: string): Setting {
         for (let i = 0; i < this.list.length; i++) {
             if (this.list[i].name == name) {
                 return this.list[i]
             }
         }
-        return false;
+        return null;
     }
 
     static save() {
@@ -75,3 +76,16 @@ Settings.add(
         'yeti'
     )
 );
+
+Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
+    [
+        new GameConstants.Option('Pokedex #', SortOptions.id),
+        new GameConstants.Option('Name', SortOptions.name),
+        new GameConstants.Option('Attack', SortOptions.attack),
+        new GameConstants.Option('Level', SortOptions.level),
+        new GameConstants.Option('Shiny', SortOptions.shiny),
+    ],
+    SortOptions.id
+));
+
+Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));

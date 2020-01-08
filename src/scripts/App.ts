@@ -16,7 +16,8 @@ class App {
                 new Wallet(),
                 new KeyItems(),
                 new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion),
-                new OakItems([20, 50, 100])
+                new OakItems([20, 50, 100]),
+                new Party()
             );
 
             Notifier.notify('Game loaded', GameConstants.NotificationOption.info);

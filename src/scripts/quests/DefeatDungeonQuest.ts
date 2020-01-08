@@ -8,7 +8,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
     }
 
     private static calcReward(dungeon: string, amount: number): number {
-        const playerDamage = player.pokemonAttackObservable();
+        const playerDamage = App.game.party.calculateClickAttack();
         const attacksToDefeatPokemon = Math.min(4, dungeonList[dungeon].baseHealth / playerDamage);
         // Average tiles till boss ~= 13
         return Math.ceil(attacksToDefeatPokemon * 13 * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount);

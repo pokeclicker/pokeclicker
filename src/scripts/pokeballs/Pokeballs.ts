@@ -29,13 +29,13 @@ class Pokeballs implements Feature {
     /**
      * Checks the players preferences to see what pokéball needs to be used on the next throw.
      * Checks from the players pref to the most basic ball to see if the player has any.
-     * @param pokemonName the pokemon we are trying to catch.
+     * @param id the pokemon we are trying to catch.
      * @param isShiny if the pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public calculatePokeballToUse(pokemonName: string, isShiny: boolean): GameConstants.Pokeball {
-        const alreadyCaught = player.alreadyCaughtPokemon(pokemonName);
-        const alreadyCaughtShiny = player.alreadyCaughtPokemonShiny(pokemonName);
+    public calculatePokeballToUse(id: number, isShiny: boolean): GameConstants.Pokeball {
+        const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
+        const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
         let pref: GameConstants.Pokeball;
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
         if (!alreadyCaught || (!alreadyCaughtShiny && isShiny)) {

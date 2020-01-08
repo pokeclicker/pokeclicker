@@ -46,10 +46,10 @@ class RouteHelper {
 
     public static listCompleted(possiblePokemon: string[], includeShiny: boolean) {
         for (let i = 0; i < possiblePokemon.length; i++) {
-            if (!player.alreadyCaughtPokemon(possiblePokemon[i])) {
+            if (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(possiblePokemon[i]).id)) {
                 return false;
             }
-            if (includeShiny && !player.alreadyCaughtPokemonShiny((possiblePokemon[i]))) {
+            if (includeShiny && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(possiblePokemon[i]).id, true)) {
                 return false;
             }
         }

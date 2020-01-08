@@ -7,7 +7,13 @@ class Save {
         localStorage.setItem('player', json);
         localStorage.setItem('mine', Mine.serialize());
         localStorage.setItem('settings', Settings.save());
+        localStorage.setItem('save', JSON.stringify(this.getSaveObject()));
 
+        this.counter = 0;
+        console.log('Game saved')
+    }
+
+    public static getSaveObject(){
         const saveObject = {};
 
         saveObject[Underground.saveKey] = Underground.save();
@@ -17,11 +23,9 @@ class Save {
         saveObject[App.game.keyItems.saveKey] = App.game.keyItems.toJSON();
         saveObject[App.game.badgeCase.saveKey] = App.game.badgeCase.toJSON();
         saveObject[App.game.oakItems.saveKey] = App.game.oakItems.toJSON();
+        saveObject[App.game.party.saveKey] = App.game.party.toJSON();
 
-        localStorage.setItem('save', JSON.stringify(saveObject));
-
-        this.counter = 0;
-        console.log('Game saved')
+        return saveObject;
     }
 
     public static load(): Player {
@@ -46,7 +50,7 @@ class Save {
 
     public static download() {
         const element = document.createElement('a');
-        element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(player)))}`);
+        element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify({player, save: this.getSaveObject()})))}`);
         const currentdate = new Date();
         const datestr = currentdate.toISOString().replace('T', ' ').slice(0, 19);
         const filename = `PokeClickerSave_${datestr}.txt`;
@@ -69,16 +73,11 @@ class Save {
         }
     }
 
-    public static reset(keepShinies = true): void {
-        const confirmDelete = prompt(`Are you sure you want reset?\nIf so, type 'DELETE'${keepShinies ? '\n\n[your shiny progress will not be reset]' : ''}`);
+    public static reset(): void {
+        const confirmDelete = prompt('Are you sure you want reset?\nIf so, type \'DELETE\'');
 
         if (confirmDelete == 'DELETE') {
-            if (keepShinies) {
-                const shiniesOnly = {_caughtShinyList: player.caughtShinyList()};
-                localStorage.setItem('player', JSON.stringify(shiniesOnly));
-            } else {
-                localStorage.removeItem('player');
-            }
+            localStorage.removeItem('player');
             localStorage.removeItem('mine');
             localStorage.removeItem('save');
 
@@ -182,9 +181,12 @@ class Save {
         setTimeout(function () {
             try {
                 const decoded = atob(fr.result as string);
-                JSON.parse(decoded);
-                if (decoded) {
-                    localStorage.setItem('player', decoded);
+                console.debug('decoded:', decoded);
+                const json = JSON.parse(decoded);
+                console.debug('json:', json);
+                if (decoded && json && json.player && json.save) {
+                    localStorage.setItem('player', JSON.stringify(json.player));
+                    localStorage.setItem('save', JSON.stringify(json.save));
                     location.reload();
                 } else {
                     Notifier.notify('This is not a valid decoded savefile', GameConstants.NotificationOption.danger);
@@ -203,19 +205,20 @@ class Save {
         $('#saveModal').modal('hide')
     }
 
+    // TODO (@Isha) reimplement
     public static convertShinies(list: Array<string>) {
-        const converted = [];
-        for (const pokemon of list) {
-            const shiny = parseInt(pokemon['shiny']);
-            const name = pokemon['name'];
-            if (shiny == 1 && player.caughtShinyList.indexOf(name) == -1) {
-                player.caughtShinyList().push(pokemon['name']);
-                converted.push(pokemon['name']);
-            }
-        }
-        if (converted.length > 0) {
-            Notifier.notify(`You have gained the following shinies: ${converted}`, GameConstants.NotificationOption.success)
-        }
+        // let converted = [];
+        // for (let pokemon of list) {
+        //     let shiny = parseInt(pokemon['shiny']);
+        //     let name = pokemon['name'];
+        //     if (shiny == 1 && player.caughtShinyList.indexOf(name) == -1) {
+        //         player.caughtShinyList().push(pokemon['name']);
+        //         converted.push(pokemon['name']);
+        //     }
+        // }
+        // if (converted.length > 0) {
+        //     Notifier.notify("You have gained the following shinies: " + converted, GameConstants.NotificationOption.success)
+        // }
     }
 }
 

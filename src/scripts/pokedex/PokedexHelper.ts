@@ -50,7 +50,7 @@ class PokedexHelper {
         const filter = PokedexHelper.getFilters();
 
         const highestDefeated = player.defeatedAmount.reduce((highest, pokemon, index)=> pokemon() && index > highest ? index : highest, 0);
-        const highestCaught = player.caughtPokemonList.reduce((highest, pokemon)=> pokemon.id > highest ? pokemon.id : highest, 0);
+        const highestCaught = App.game.party.caughtPokemon.reduce((highest, pokemon)=> pokemon.id > highest ? pokemon.id : highest, 0);
         const highestDex = Math.max(highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
@@ -71,7 +71,7 @@ class PokedexHelper {
                 return false;
             }
 
-            if (filter['shiny'] && !player.alreadyCaughtPokemonShiny(pokemon.name)) {
+            if (filter['shiny'] && !App.game.party.alreadyCaughtPokemon(pokemon.id, true)) {
                 return false;
             }
 
@@ -102,7 +102,7 @@ class PokedexHelper {
 
     private static getImage(id: number, name: string) {
         let src = 'assets/images/';
-        if (player.alreadyCaughtPokemonShiny(name)) {
+        if (App.game.party.alreadyCaughtPokemon(id, true)) {
             src += 'shiny';
         }
         src += `pokemon/${id}.png`;

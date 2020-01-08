@@ -7,17 +7,17 @@
 namespace GameConstants {
 
     // Ticks
-    export const TICK_TIME = 10;
+    export const TICK_TIME = 100;
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
     export const DUNGEON_TIME = 6000;
-    export const DUNGEON_TICK = 1;
+    export const DUNGEON_TICK = 10;
     export const EFFECT_ENGINE_TICK = 1000;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
     export const GYM_COUNTDOWN = 1000;
-    export const GYM_TICK = 1;
+    export const GYM_TICK = 10;
     export const ACHIEVEMENT_TICK = 1000;
     export const MIN_LOAD_TIME = 500;
 
@@ -260,14 +260,6 @@ namespace GameConstants {
         galar = 7,
     }
 
-    export enum SortOptionsEnum {
-        'id' = 0,
-        'name' = 1,
-        'attack' = 2,
-        'levelObservable' = 3,
-        'shiny' = 4
-    }
-
     export class Option {
         text: string;
         value: any;
@@ -278,13 +270,6 @@ namespace GameConstants {
         }
     }
 
-    export const SortOptions = [
-        new Option('Pokedex #', GameConstants.SortOptionsEnum.id),
-        new Option('Name', GameConstants.SortOptionsEnum.name),
-        new Option('Attack', GameConstants.SortOptionsEnum.attack),
-        new Option('Level', GameConstants.SortOptionsEnum.levelObservable),
-        new Option('Shiny', GameConstants.SortOptionsEnum.shiny),
-    ];
 
     export const RegionRoute = {
         0: [1, 25],
@@ -342,14 +327,6 @@ namespace GameConstants {
         Dark = '#705746',
         Steel = '#B7B7CE',
         Fairy = '#D685AD'
-    }
-
-    export enum LevelType {
-        'slow',
-        'mediumslow',
-        'medium',
-        'mediumfast',
-        'fast'
     }
 
     // Map navigation
@@ -549,6 +526,7 @@ namespace GameConstants {
     };
 
     export enum StoneType {
+        None = -1,
         Fire_stone,
         Water_stone,
         Thunder_stone,

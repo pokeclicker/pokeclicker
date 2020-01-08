@@ -13,7 +13,7 @@ class OakItems implements Feature {
     }
 
     canAccess(): boolean {
-        return player.caughtPokemonList.length > 15;
+        return App.game.party.caughtPokemon.length > 15;
     }
 
     initialize() {
@@ -42,7 +42,7 @@ class OakItems implements Feature {
         if (this.itemList[item] == undefined) {
             return false
         }
-        return player.caughtPokemonList.length >= this.itemList[item].unlockReq;
+        return App.game.party.caughtPokemon.length >= this.itemList[item].unlockReq;
     }
 
     use(item: OakItems.OakItem) {
@@ -54,7 +54,7 @@ class OakItems implements Feature {
 
     maxActiveCount() {
         for (let i = 0; i < this.unlockRequirements.length; i++) {
-            if (player.caughtPokemonList.length < this.unlockRequirements[i]) {
+            if (App.game.party.caughtPokemon.length < this.unlockRequirements[i]) {
                 return i;
             }
         }

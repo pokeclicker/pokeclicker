@@ -88,7 +88,7 @@ class Breeding implements Feature {
     }
 
     public canBreedPokemon(): boolean {
-        return player.hasMaxLevelPokemon() && this.hasFreeEggSlot();
+        return App.game.party.hasMaxLevelPokemon() && this.hasFreeEggSlot();
     }
 
     public hasFreeEggSlot(): boolean {
@@ -141,15 +141,14 @@ class Breeding implements Feature {
         }
     }
 
-    public gainPokemonEgg(pokemon: CaughtPokemon) {
+    public gainPokemonEgg(pokemon: PartyPokemon) {
         if (!this.hasFreeEggSlot()) {
             Notifier.notify("You don't have any free egg slots", GameConstants.NotificationOption.warning);
             return;
         }
         const egg = this.createEgg(pokemon.name);
-        pokemon.breeding(true);
+        pokemon.breeding = true;
         this.gainEgg(egg);
-        pokemon.attackBonus(pokemon.attackBonus() + GameConstants.BREEDING_ATTACK_BONUS);
     }
 
     public hatchPokemonEgg(index: number) {
@@ -158,12 +157,16 @@ class Breeding implements Feature {
         const shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps()));
         const shiny = PokemonFactory.generateShiny(shinyChance);
 
-        for (let i = 0; i < player._caughtPokemonList().length; i++) {
-            if (player._caughtPokemonList()[i].name == egg.pokemon) {
-                if (player._caughtPokemonList()[i].breeding()) {
-                    player._caughtPokemonList()[i].exp(0);
-                    player._caughtPokemonList()[i].breeding(false);
-                    player._caughtPokemonList()[i].checkForEvolution(true);
+        for (let i = 0; i < App.game.party.caughtPokemon.length; i++) {
+            if (App.game.party.caughtPokemon[i].name == egg.pokemon) {
+                if (App.game.party.caughtPokemon[i].breeding) {
+                    App.game.party.caughtPokemon[i].exp = 0;
+                    App.game.party.caughtPokemon[i].level = 1;
+                    App.game.party.caughtPokemon[i].breeding = false;
+                    App.game.party.caughtPokemon[i].level = App.game.party.caughtPokemon[i].calculateLevelFromExp();
+                    App.game.party.caughtPokemon[i].attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
+                    App.game.party.caughtPokemon[i].attack = App.game.party.caughtPokemon[i].calculateAttack();
+                    App.game.party.caughtPokemon[i].checkForLevelEvolution();
                 }
             }
         }
@@ -174,13 +177,13 @@ class Breeding implements Feature {
             Notifier.notify(`You hatched ${GameHelper.anOrA(egg.pokemon)} ${egg.pokemon}!`, GameConstants.NotificationOption.success);
         }
 
-        player.capturePokemon(egg.pokemon, shiny);
+        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(egg.pokemon).id, shiny);
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         const baseForm = this.calculateBaseForm(egg.pokemon);
-        if (egg.pokemon != baseForm && !player.alreadyCaughtPokemon(baseForm)) {
+        if (egg.pokemon != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
             Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
-            player.capturePokemon(baseForm, false, true);
+            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id, shiny);
         }
 
         this._eggList[index](null);

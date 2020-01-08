@@ -22,8 +22,8 @@
 
                         <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
                             <div class="center margin-bottom-sm">
-                                <button id="paySafariButton" 
-                                    class="btn" 
+                                <button id="paySafariButton"
+                                    class="btn"
                                     onclick="Safari.payEntranceFee()"
                                     data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
                                     Pay Entrance Fee
@@ -44,7 +44,7 @@
                                 <div id='safariEnemyTag' class='col-sm-6'>
                                     <span>
                                         <span data-bind='text: SafariBattle.enemy.name'></span>
-                                        <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
+                                        <span data-bind="if: App.game.party.alreadyCaughtPokemonByName(SafariBattle.enemy.name)">
                                             <img class='pokeball-smallest'
                                              data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
                                         </span>

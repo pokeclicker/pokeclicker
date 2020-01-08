@@ -26,7 +26,7 @@ class Battle {
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
-        this.enemyPokemon().damage(player.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
+        this.enemyPokemon().damage(App.game.party.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
@@ -41,7 +41,7 @@ class Battle {
         }
         App.game.oakItems.use(OakItems.OakItem.Poison_Barb);
         GameHelper.incrementObservable(player.statistics.clicks)
-        this.enemyPokemon().damage(player.calculateClickAttack());
+        this.enemyPokemon().damage(App.game.party.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
@@ -53,13 +53,12 @@ class Battle {
     public static defeatPokemon() {
         GameHelper.incrementObservable(player.statistics.pokemonDefeated);
         App.game.wallet.gainMoney(this.enemyPokemon().money);
-        player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.gainShards(this.enemyPokemon());
         player.addRouteKill();
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
-        const pokemonName: string = this.enemyPokemon().name;
         const isShiny: boolean = this.enemyPokemon().shiny;
-        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonName, isShiny);
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(pokeBall);
@@ -104,6 +103,10 @@ class Battle {
     }
 
     protected static attemptCatch() {
+        if (this.enemyPokemon() == null) {
+            this.catching(false);
+            return;
+        }
         const random: number = Math.floor(Math.random() * 100);
         if (random <= this.catchRateActual()) {
             this.catchPokemon();
@@ -114,7 +117,8 @@ class Battle {
 
     public static catchPokemon() {
         App.game.wallet.gainDungeonTokens(6 * Math.pow(this.enemyPokemon().level / 3, 1.05));
-        player.capturePokemon(this.enemyPokemon().name, this.enemyPokemon().shiny);
+        App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
+        App.game.party.gainPokemonById(this.enemyPokemon().id, this.enemyPokemon().shiny);
     }
 
     static gainItem() {

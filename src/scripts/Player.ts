@@ -8,25 +8,13 @@ class Player {
 
     public achievementsCompleted: { [name: string]: boolean };
 
-    private _caughtShinyList: KnockoutObservableArray<string>;
     private _route: KnockoutObservable<number>;
-    private _caughtPokemonList: KnockoutObservableArray<CaughtPokemon>;
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
-
-    get defeatedAmount(): Array<KnockoutObservable<number>> {
-        return this._defeatedAmount;
-    }
-
-    set defeatedAmount(value: Array<KnockoutObservable<number>>) {
-        this._defeatedAmount = value;
-    }
 
     private _routeKills: Array<KnockoutObservable<number>>;
     private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
-    private _sortOption: KnockoutObservable<GameConstants.SortOptionsEnum>;
-    private _sortDescending: KnockoutObservable<boolean>;
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
@@ -35,8 +23,6 @@ class Player {
         const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0
-        let tmpCaughtList = [];
-        this._caughtShinyList = ko.observableArray<string>(savedPlayer._caughtShinyList);
         this._region = ko.observable(savedPlayer._region);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
             this._route = ko.observable(savedPlayer._route)
@@ -54,12 +40,6 @@ class Player {
             }
         }
 
-        if (savedPlayer._caughtPokemonList) {
-            tmpCaughtList = savedPlayer._caughtPokemonList.map((pokemon) => {
-                return new CaughtPokemon(PokemonHelper.getPokemonByName(pokemon.name), pokemon.evolved, pokemon.attackBonus, pokemon.exp, pokemon.breeding)
-            });
-        }
-        this._caughtPokemonList = ko.observableArray<CaughtPokemon>(tmpCaughtList);
         this._routeKills = [...Array(GameConstants.AMOUNT_OF_ROUTES + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
         });
@@ -71,14 +51,6 @@ class Player {
             return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0)
         });
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
-        this._sortOption = ko.observable(savedPlayer._sortOption || null);
-        this._sortDescending = ko.observable(typeof(savedPlayer._sortDescending) != 'undefined' ? savedPlayer._sortDescending : false);
-        this.clickAttackObservable = ko.computed(function () {
-            return this.calculateClickAttack()
-        }, this);
-        this.pokemonAttackObservable = ko.computed(function () {
-            return this.calculatePokemonAttack(GameConstants.PokemonType.None, GameConstants.PokemonType.None);
-        }, this);
         this._town = ko.observable(TownList['Pallet Town']);
         this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
@@ -161,17 +133,6 @@ class Player {
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
 
-    public clickAttackObservable: KnockoutComputed<number>;
-    public pokemonAttackObservable: KnockoutComputed<number>;
-
-    get itemList(): { [p: string]: KnockoutObservable<number> } {
-        return this._itemList;
-    }
-
-    set itemList(value: { [p: string]: KnockoutObservable<number> }) {
-        this._itemList = value;
-    }
-
     public statistics: Statistics;
 
     public completedQuestList: Array<KnockoutObservable<boolean>>;
@@ -192,13 +153,6 @@ class Player {
 
     private highestRegion: KnockoutObservable<GameConstants.Region>;
 
-    public caughtAndShinyList(): KnockoutComputed<string[]> {
-        return ko.computed(function () {
-            const pokeList = this.caughtPokemonList.map(pokemon=>pokemon.name);
-            return this.caughtShinyList().filter(pokemon=>pokeList.includes(pokemon));
-        }, this);
-    }
-
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
             return Math.min(this.routeKillsNeeded, this.routeKills[route]());
@@ -209,93 +163,22 @@ class Player {
         this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
     }
 
+    set defeatedAmount(value: Array<KnockoutObservable<number>>) {
+        this._defeatedAmount = value;
+    }
+
+    get defeatedAmount(): Array<KnockoutObservable<number>> {
+        return this._defeatedAmount;
+    }
+
     private _caughtAmount: Array<KnockoutObservable<number>>;
 
-    public calculateClickAttack(): number {
-        // Base power
-        let clickAttack =  Math.pow(this.caughtPokemonList.length + this.caughtAndShinyList()().length + 1, 1.4);
-
-        // TODO(@Isha) fix when refactoring to party
-        if (App.game != undefined) {
-            clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
-        }
-
-        // Apply battle item bonus
-        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()){
-            clickAttack *= 1.5;
-        }
-
-        return Math.floor(clickAttack);
+    set itemList(value: { [p: string]: KnockoutObservable<number> }) {
+        this._itemList = value;
     }
 
-    public calculateExpMultiplier(): number {
-        // TODO Calculate exp multiplier by checking upgrades and multipliers.
-        return 1;
-    }
-
-    /**
-     * Loops through the caughtPokemonList to check if the pokémon is already caight
-     * @param pokemonName name to search for.
-     * @returns {boolean}
-     */
-    public alreadyCaughtPokemon(pokemonName: string) {
-        const pokemon = PokemonHelper.getPokemonByName(pokemonName);
-        if (!pokemon) return false;
-        const id = PokemonHelper.getPokemonByName(pokemonName).id;
-        return player.caughtAmount[id]() > 0;
-    }
-
-    public alreadyCaughtPokemonShiny(pokemonName: string) {
-        if (!this.alreadyCaughtPokemon(pokemonName)) return false;
-        for (let i = 0; i < this.caughtShinyList().length; i++) {
-            if (this.caughtShinyList()[i] == pokemonName) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public capturePokemon(pokemonName: string, shiny = false, supressNotification = false) {
-        if (PokemonHelper.calcNativeRegion(pokemonName) > player.highestRegion()) {
-            return;
-        }
-        App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
-        const pokemonData = PokemonHelper.getPokemonByName(pokemonName);
-        if (!this.alreadyCaughtPokemon(pokemonName)) {
-            const caughtPokemon: CaughtPokemon = new CaughtPokemon(pokemonData, false, 0, 0);
-            this._caughtPokemonList.push(caughtPokemon);
-            if (!supressNotification) {
-                if (shiny) Notifier.notify(`✨ You have captured a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
-                else Notifier.notify(`You have captured ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`, GameConstants.NotificationOption.success)
-            }
-        }
-        if (shiny && !this.alreadyCaughtPokemonShiny(pokemonName)) {
-            this._caughtShinyList.push(pokemonName);
-            Save.store(player);
-        }
-        if (shiny) {
-            player.shinyCatches++;
-        }
-        player.caughtAmount[pokemonData.id](player.caughtAmount[pokemonData.id]() + 1);
-        GameHelper.incrementObservable(player.statistics.pokemonCaptured);
-    }
-
-    public gainExp(exp: number, level: number, trainer: boolean) {
-        App.game.oakItems.use(OakItems.OakItem.Exp_Share);
-        // TODO add exp multipliers
-        const trainerBonus = trainer ? 1.5 : 1;
-        const oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
-        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
-
-        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()){
-            expTotal *= 1.5;
-        }
-
-        for (const pokemon of this._caughtPokemonList()) {
-            if (pokemon.levelObservable() < (App.game.badgeCase.badgeCount() + 2) * 10) {
-                pokemon.exp(pokemon.exp() + expTotal);
-            }
-        }
+    get itemList(): { [p: string]: KnockoutObservable<number> } {
+        return this._itemList;
     }
 
     public gainShards(pokemon: BattlePokemon) {
@@ -331,20 +214,6 @@ class Player {
         return cost;
     }
 
-    public sortedPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
-        return ko.pureComputed(function () {
-            return this._caughtPokemonList().sort(PokemonHelper.compareBy(GameConstants.SortOptionsEnum[player._sortOption()], player._sortDescending()));
-        }, this).extend({rateLimit: 1000})
-    }
-
-    public maxLevelPokemonList(): KnockoutComputed<Array<CaughtPokemon>> {
-        return ko.pureComputed(function () {
-            return this._caughtPokemonList().filter((pokemon) => {
-                return pokemon.levelObservable() == 100 && !pokemon.breeding();
-            })
-        }, this)
-    }
-
     get caughtAmount(): Array<KnockoutObservable<number>> {
         return this._caughtAmount;
     }
@@ -357,10 +226,6 @@ class Player {
 
     get itemMultipliers(): { [p: string]: number } {
         return this._itemMultipliers;
-    }
-
-    public hasMaxLevelPokemon(): boolean {
-        return this.maxLevelPokemonList()().length > 0;
     }
 
     get routeKills(): Array<KnockoutObservable<number>> {
@@ -387,24 +252,12 @@ class Player {
         this._route = value;
     }
 
-    get caughtPokemonList() {
-        return this._caughtPokemonList();
-    }
-
     get region(): GameConstants.Region {
         return this._region();
     }
 
     set region(value: GameConstants.Region) {
         this._region(value);
-    }
-
-    get caughtShinyList(): KnockoutObservableArray<string> {
-        return this._caughtShinyList;
-    }
-
-    set caughtShinyList(value: KnockoutObservableArray<string>) {
-        this._caughtShinyList = value;
     }
 
     get town(): KnockoutObservable<Town> {
@@ -454,37 +307,6 @@ class Player {
             }
         }
         return false;
-    }
-
-    /**
-     * Calculate the attack of all your Pokémon
-     * @param type1
-     * @param type2 types of the enemy we're calculating damage against.
-     * @returns {number} damage to be done.
-     */
-    public calculatePokemonAttack(type1: GameConstants.PokemonType, type2: GameConstants.PokemonType): number {
-        let attack = 0;
-        for (const pokemon of this.caughtPokemonList) {
-            let multiplier = 1;
-            if (this.region !== GameHelper.getRegion(pokemon.id)) {
-                // Pokemon only retain 20% of their total damage in other regions.
-                multiplier = 0.2
-            }
-            if (!pokemon.breeding()) {
-                if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
-                    attack += pokemon.attack() * multiplier;
-                } else {
-                    const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-                    attack += pokemon.attack() * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
-                }
-            }
-        }
-
-        if(EffectEngineRunner.isActive(GameConstants.BattleItemType.xAttack)()){
-            attack *= 1.5;
-        }
-
-        return Math.round(attack);
     }
 
     public getRandomBerry() {
@@ -575,16 +397,12 @@ class Player {
 
     public toJSON() {
         const keep = [
-            '_caughtShinyList',
             '_route',
-            '_caughtPokemonList',
             '_defeatedAmount',
             '_caughtAmount',
             '_routeKills',
             '_routeKillsNeeded',
             '_region',
-            '_sortOption',
-            '_sortDescending',
             '_starter',
             '_itemList',
             '_itemMultipliers',
