@@ -19,8 +19,6 @@ const pokemonList: {
     name: string;
     catchRate: number;
     evolutions?: Evolution[];
-    evolution?: any[];
-    evoLevel?: any[];
     type: string[];
     attack: number;
     levelType: LevelType;
