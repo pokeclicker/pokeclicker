@@ -90,8 +90,8 @@ Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
 
 Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress display:',
     [
-        new GameConstants.Option('Step count', 'stepCount'),
         new GameConstants.Option('Percentage', 'percentage'),
+        new GameConstants.Option('Step count', 'stepCount'),
     ],
     'percentage'
 ));
