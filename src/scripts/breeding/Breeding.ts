@@ -237,16 +237,15 @@ class Breeding implements Feature {
     }
 
     public calculateBaseForm(pokemonName: string): string {
+        const devolution = pokemonDevolutionMap[pokemonName];
         // Base form of Pokemon depends on which regions players unlocked
-        if (!(pokemonName in pokemonDevolutionMap)) {
+        if (!devolution || PokemonHelper.calcNativeRegion(devolution) > player.highestRegion()) {
             // No devolutions at all
-            return pokemonName;
-        } else if (PokemonHelper.calcNativeRegion(pokemonDevolutionMap[pokemonName]) > player.highestRegion()) {
             // No further devolutions in current unlocked regions
             return pokemonName;
         } else {
             // Recurse onto its devolution
-            return this.calculateBaseForm(pokemonDevolutionMap[pokemonName]);
+            return this.calculateBaseForm(devolution);
         }
     }
 
