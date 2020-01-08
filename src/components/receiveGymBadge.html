@@ -1,4 +1,4 @@
-<div class="modal fade" id="receiveBadgeModal" tabindex="-1" role="dialog"
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="receiveBadgeModal" tabindex="-1" role="dialog"
 aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
    <div class="modal-content">
@@ -18,14 +18,14 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
            <!-- /ko -->
 
        </div>
-       <div data-bind="if: !(GymRunner.gymObservable() instanceof Champion)">
+       <div data-bind="ifnot: GymRunner.gymObservable() instanceof Champion">
            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
            </div>
        </div>
        <div data-bind="if: GymRunner.gymObservable() instanceof Champion">
            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal"
+               <button type="button" class="btn btn-primary" data-dismiss="modal"
                        onclick="$('#hallOfFameModal').modal('show')">
                    Next
                </button>
