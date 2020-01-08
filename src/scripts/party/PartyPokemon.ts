@@ -75,10 +75,14 @@ class PartyPokemon implements Saveable {
     }
 
     public useStone(type: GameConstants.StoneType): boolean {
+        const possibleEvolutions = [];
         for (const evolution of this.evolutions) {
             if (evolution instanceof StoneEvolution && evolution.stone == type) {
-                return evolution.evolve()
+                possibleEvolutions.push(evolution);
             }
+        }
+        if (possibleEvolutions.length !== 0) {
+            return possibleEvolutions[GameConstants.randomIntBetween(0, possibleEvolutions.length - 1)].evolve();
         }
         return false;
     }
