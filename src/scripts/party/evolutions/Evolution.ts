@@ -20,7 +20,7 @@ abstract class Evolution {
         }
         // We have already obtained the evolution
         if (App.game.party.alreadyCaughtPokemonByName(this.evolvedPokemon)){
-          return false;
+            return false;
         }
         if (notification) {
             Notifier.notify(`Your ${this.basePokemon} evolved into a ${this.evolvedPokemon}`, GameConstants.NotificationOption.success);
