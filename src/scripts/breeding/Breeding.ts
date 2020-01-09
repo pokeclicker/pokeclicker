@@ -108,7 +108,7 @@ class Breeding implements Feature {
                 return true;
             }
         }
-        console.log(`Error: Could not place ${GameConstants.EggType[e.type]} Egg`);
+        console.error(`Error: Could not place ${GameConstants.EggType[e.type]} Egg`);
         return false;
     }
 
@@ -159,14 +159,17 @@ class Breeding implements Feature {
 
         for (let i = 0; i < App.game.party.caughtPokemon.length; i++) {
             if (App.game.party.caughtPokemon[i].name == egg.pokemon) {
-                if (App.game.party.caughtPokemon[i].breeding) {
-                    App.game.party.caughtPokemon[i].exp = 0;
-                    App.game.party.caughtPokemon[i].level = 1;
-                    App.game.party.caughtPokemon[i].breeding = false;
-                    App.game.party.caughtPokemon[i].level = App.game.party.caughtPokemon[i].calculateLevelFromExp();
-                    App.game.party.caughtPokemon[i].attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
-                    App.game.party.caughtPokemon[i].attack = App.game.party.caughtPokemon[i].calculateAttack();
-                    App.game.party.caughtPokemon[i].checkForLevelEvolution();
+                const partyPokemon = App.game.party.caughtPokemon[i];
+                if (partyPokemon.breeding) {
+                    partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
+                    partyPokemon.exp = 0;
+                    partyPokemon.level = 1;
+                    partyPokemon.breeding = false;
+                    partyPokemon.level = partyPokemon.calculateLevelFromExp();
+                    partyPokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
+                    partyPokemon.attack = partyPokemon.calculateAttack();
+                    partyPokemon.checkForLevelEvolution();
+                    break;
                 }
             }
         }
@@ -239,16 +242,15 @@ class Breeding implements Feature {
     }
 
     public calculateBaseForm(pokemonName: string): string {
+        const devolution = pokemonDevolutionMap[pokemonName];
         // Base form of Pokemon depends on which regions players unlocked
-        if (!(pokemonName in pokemonDevolutionMap)) {
+        if (!devolution || PokemonHelper.calcNativeRegion(devolution) > player.highestRegion()) {
             // No devolutions at all
-            return pokemonName;
-        } else if (PokemonHelper.calcNativeRegion(pokemonDevolutionMap[pokemonName]) > player.highestRegion()) {
             // No further devolutions in current unlocked regions
             return pokemonName;
         } else {
             // Recurse onto its devolution
-            return this.calculateBaseForm(pokemonDevolutionMap[pokemonName]);
+            return this.calculateBaseForm(devolution);
         }
     }
 

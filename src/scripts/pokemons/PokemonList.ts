@@ -19,13 +19,12 @@ const pokemonList: {
     name: string;
     catchRate: number;
     evolutions?: Evolution[];
-    evolution?: any[];
-    evoLevel?: any[];
     type: string[];
     attack: number;
     levelType: LevelType;
     exp: number;
     eggCycles: number;
+    baby?: boolean;
 }[] =
     [
         {
@@ -1675,6 +1674,7 @@ const pokemonList: {
             'exp': 41,
             'eggCycles': 10,
             'evolutions': [new LevelEvolution('Pichu', 'Pikachu', 100)],
+            'baby': true,
         }, {
             'id': 173,
             'name': 'Cleffa',
@@ -1685,6 +1685,7 @@ const pokemonList: {
             'exp': 44,
             'eggCycles': 10,
             'evolutions': [new LevelEvolution('Cleffa', 'Clefairy', 100)],
+            'baby': true,
         }, {
             'id': 174,
             'name': 'Igglybuff',
@@ -1695,6 +1696,7 @@ const pokemonList: {
             'exp': 42,
             'eggCycles': 10,
             'evolutions': [new LevelEvolution('Igglybuff', 'Jigglypuff', 100)],
+            'baby': true,
         }, {
             'id': 175,
             'name': 'Togepi',
@@ -2275,6 +2277,7 @@ const pokemonList: {
                 new LevelEvolution('Tyrogue', 'Hitmonchan', 20),
                 new LevelEvolution('Tyrogue', 'Hitmontop', 20),
             ],
+            'baby': true,
         }, {
             'id': 237,
             'name': 'Hitmontop',
@@ -2294,6 +2297,7 @@ const pokemonList: {
             'exp': 61,
             'eggCycles': 25,
             'evolutions': [new LevelEvolution('Smoochum', 'Jynx', 30)],
+            'baby': true,
         }, {
             'id': 239,
             'name': 'Elekid',
@@ -2304,6 +2308,7 @@ const pokemonList: {
             'exp': 72,
             'eggCycles': 25,
             'evolutions': [new LevelEvolution('Elekid', 'Electabuzz', 30)],
+            'baby': true,
         }, {
             'id': 240,
             'name': 'Magby',
@@ -2314,6 +2319,7 @@ const pokemonList: {
             'exp': 73,
             'eggCycles': 25,
             'evolutions': [new LevelEvolution('Magby', 'Magmar', 30)],
+            'baby': true,
         }, {
             'id': 241,
             'name': 'Miltank',
@@ -2868,6 +2874,7 @@ const pokemonList: {
             'exp': 38,
             'catchRate': 150,
             'evolutions': [new LevelEvolution('Azurill', 'Marill', 100)],
+            'baby': true,
         }, {
             'id': 299,
             'name': 'Nosepass',
@@ -3449,6 +3456,7 @@ const pokemonList: {
             'exp': 52,
             'catchRate': 125,
             'evolutions': [new LevelEvolution('Wynaut', 'Wobbuffet', 15)],
+            'baby': true,
         }, {
             'id': 361,
             'name': 'Snorunt',
@@ -3904,6 +3912,7 @@ const pokemonList: {
             'exp': 56,
             'catchRate': 255,
             'evolutions': [new LevelEvolution('Budew', 'Roselia', 100)],
+            'baby': true,
         },
         {
             'id': 407,
@@ -4185,6 +4194,7 @@ const pokemonList: {
             'exp': 57,
             'catchRate': 120,
             'evolutions': [new LevelEvolution('Chingling', 'Chimecho', 100)],
+            'baby': true,
         },
         {
             'id': 434,
@@ -4238,6 +4248,7 @@ const pokemonList: {
             'exp': 58,
             'catchRate': 255,
             'evolutions': [new StoneEvolution('Bonsly', 'Sudowoodo', GameConstants.StoneType.None)],
+            'baby': true,
         },
         {
             'id': 439,
@@ -4249,6 +4260,7 @@ const pokemonList: {
             'exp': 62,
             'catchRate': 145,
             'evolutions': [new StoneEvolution('Mime Jr.', 'Mr. Mime', GameConstants.StoneType.None)],
+            'baby': true,
         },
         {
             'id': 440,
@@ -4260,6 +4272,7 @@ const pokemonList: {
             'exp': 110,
             'catchRate': 130,
             'evolutions': [new StoneEvolution('Happiny', 'Chansey', GameConstants.StoneType.None)],
+            'baby': true,
         },
         {
             'id': 441,
@@ -4323,6 +4336,7 @@ const pokemonList: {
             'exp': 78,
             'catchRate': 50,
             'evolutions': [new LevelEvolution('Munchlax', 'Snorlax', 100)],
+            'baby': true,
         },
         {
             'id': 447,
@@ -4449,6 +4463,7 @@ const pokemonList: {
             'exp': 69,
             'catchRate': 25,
             'evolutions': [new StoneEvolution('Mantyke', 'Mantine', GameConstants.StoneType.None)],
+            'baby': true,
         },
         {
             'id': 459,
@@ -8105,14 +8120,8 @@ const pokemonList: {
 
 // TODO move to its own initialize method that gets called on game start.
 pokemonList.forEach(p => {
-    if (p.evolution) {
-        if (p.evolution.constructor !== Array) {
-            p.evolution = [p.evolution];
-        }
-        p.evolution.forEach(evo => pokemonDevolutionMap[evo] = p.name);
-    }
-    if (p.evoLevel && p.evoLevel.constructor !== Array) {
-        p.evoLevel = [p.evoLevel];
+    if (p.baby) {
+        p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.evolvedPokemon] = evo.basePokemon);
     }
     pokemonMap[p.name] = p;
     pokemonMapId[p.id] = p;
