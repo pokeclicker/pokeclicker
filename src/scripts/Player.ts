@@ -186,7 +186,7 @@ class Player {
             return;
         }
         player._shardsCollected[type](player._shardsCollected[type]() + amount);
-        GameHelper.incrementObservable(player.statistics.totalShards[amount], amount);
+        GameHelper.incrementObservable(player.statistics.totalShards[type], amount);
     }
 
     public buyShardUpgrade(typeNum: number, effectNum: number) {
