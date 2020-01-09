@@ -40,19 +40,19 @@ class ShopHandler {
         const item: Item = this.shopObservable().items()[ShopHandler.selected()];
         const input = $("input[name='amountOfItems']");
 
-        if (!item || !item.isAvailable()){
+        if (!item || !item.isAvailable()) {
             return input.val(0).change();
         }
         let amt = 1;
-        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)) && amt <= item.maxAmount && amt <= 1e6; amt++){}
+        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)) && amt <= item.maxAmount && amt <= 1e6; amt++) {}
         input.val(--amt).change();
     }
 
     public static calculateCss(i: number): string {
         if (this.selected() == i) {
-            return 'shopItem clickable btn btn-secondary active'
+            return 'shopItem clickable btn btn-secondary active';
         } else {
-            return 'shopItem clickable btn btn-secondary'
+            return 'shopItem clickable btn btn-secondary';
         }
     }
 
@@ -61,9 +61,9 @@ class ShopHandler {
 
         if (item && !(item.isAvailable() && App.game.wallet.hasAmount(new Amount(item.totalPrice(this.amount()), item.currency)))
                 || this.amount() < 1) {
-            return 'btn btn-danger smallButton smallFont'
+            return 'btn btn-danger smallButton smallFont';
         } else {
-            return 'btn btn-success smallButton smallFont'
+            return 'btn btn-success smallButton smallFont';
         }
     }
 }

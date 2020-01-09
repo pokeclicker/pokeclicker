@@ -22,10 +22,10 @@ class Player {
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
-        this._lastSeen = savedPlayer._lastSeen || 0
+        this._lastSeen = savedPlayer._lastSeen || 0;
         this._region = ko.observable(savedPlayer._region);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
-            this._route = ko.observable(savedPlayer._route)
+            this._route = ko.observable(savedPlayer._route);
         } else {
             switch (savedPlayer._region) {
                 case 0:
@@ -41,14 +41,14 @@ class Player {
         }
 
         this._routeKills = [...Array(GameConstants.AMOUNT_OF_ROUTES + 1)].map(function (val, index) {
-            return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0)
+            return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0);
         });
 
         this._defeatedAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
-            return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0)
+            return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0);
         });
         this._caughtAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
-            return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0)
+            return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0);
         });
         this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._town = ko.observable(TownList['Pallet Town']);
@@ -86,11 +86,11 @@ class Player {
             this.questRefreshes = savedPlayer.questRefreshes;
             if (savedPlayer.completedQuestList) {
                 this.completedQuestList = savedPlayer.completedQuestList.map((bool) => {
-                    return ko.observable(bool)
+                    return ko.observable(bool);
                 });
             } else {
                 this.completedQuestList = [...Array(GameConstants.QUESTS_PER_SET)].map(() => {
-                    return ko.observable(false)
+                    return ko.observable(false);
                 });
             }
 
@@ -101,7 +101,7 @@ class Player {
         } else {
             this.questRefreshes = 0;
             this.completedQuestList = [...Array(GameConstants.QUESTS_PER_SET)].map(() => {
-                return ko.observable(false)
+                return ko.observable(false);
             });
             this.currentQuests = ko.observableArray([]);
         }
@@ -113,7 +113,7 @@ class Player {
         this.statistics = new Statistics(savedPlayer.statistics);
 
         this.berryList = [...Array(GameConstants.AMOUNT_OF_BERRIES)].map(function (val, index) {
-            return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0)
+            return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0);
         });
         this.plotList = Save.initializePlots(savedPlayer.plotList);
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
@@ -160,7 +160,7 @@ class Player {
     }
 
     public addRouteKill() {
-        this.routeKills[this.route()](this.routeKills[this.route()]() + 1)
+        this.routeKills[this.route()](this.routeKills[this.route()]() + 1);
     }
 
     set defeatedAmount(value: Array<KnockoutObservable<number>>) {
@@ -184,11 +184,11 @@ class Player {
     public gainShards(pokemon: BattlePokemon) {
         let typeNum = GameConstants.PokemonType[pokemon.type1];
         player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
-        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
+        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward);
         if (pokemon.type2 != GameConstants.PokemonType.None) {
             typeNum = GameConstants.PokemonType[pokemon.type2];
             player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
-            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward)
+            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward);
         }
     }
 
@@ -431,6 +431,6 @@ class Player {
             'tutorialComplete',
         ];
         const plainJS = ko.toJS(this);
-        return Save.filter(plainJS, keep)
+        return Save.filter(plainJS, keep);
     }
 }

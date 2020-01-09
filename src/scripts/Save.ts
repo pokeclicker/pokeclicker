@@ -10,10 +10,10 @@ class Save {
         localStorage.setItem('save', JSON.stringify(this.getSaveObject()));
 
         this.counter = 0;
-        console.log('Game saved')
+        console.log('Game saved');
     }
 
-    public static getSaveObject(){
+    public static getSaveObject() {
         const saveObject = {};
 
         saveObject[Underground.saveKey] = Underground.save();
@@ -44,7 +44,7 @@ class Save {
         if (saved !== 'null') {
             return new Player(JSON.parse(saved));
         } else {
-            return new Player()
+            return new Player();
         }
     }
 
@@ -95,10 +95,10 @@ class Save {
         let prop;
         for (prop in object) {
             if (keep.indexOf(prop) > -1) {
-                filtered[prop] = object[prop]
+                filtered[prop] = object[prop];
             }
         }
-        return filtered
+        return filtered;
     }
 
     public static initializeMultipliers(): { [name: string]: number } {
@@ -128,14 +128,14 @@ class Save {
                     berry = null;
                 }
                 const plot = new Plot(p.isUnlocked, p.exp, p.level, p.boosted, berry, p.timeLeft);
-                return ko.observable(plot)
-            })
+                return ko.observable(plot);
+            });
         } else {
             plotList = [...Array(GameConstants.AMOUNT_OF_PLOTS)].map(function (val, index) {
                 if (index == 0) {
                     return ko.observable(new Plot(true, 0, 0, false, null, 0));
                 }
-                return ko.observable(new Plot(false, 0, 0, false, null, 0))
+                return ko.observable(new Plot(false, 0, 0, false, null, 0));
             });
         }
         return plotList;
@@ -146,8 +146,8 @@ class Save {
         if (saved) {
             res = saved.map((type) => {
                 return type.map((effectiveness) => {
-                    return ko.observable(effectiveness)
-                })
+                    return ko.observable(effectiveness);
+                });
             });
         } else {
             res = [];
@@ -202,7 +202,7 @@ class Save {
         const json = atob(base64);
         const p = JSON.parse(json);
         Save.convertShinies(p.caughtPokemonList);
-        $('#saveModal').modal('hide')
+        $('#saveModal').modal('hide');
     }
 
     // TODO (@Isha) reimplement

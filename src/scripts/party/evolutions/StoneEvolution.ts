@@ -9,7 +9,7 @@ class StoneEvolution extends Evolution {
         this.stone = stone;
     }
 
-    isSatisfied(): boolean{
+    isSatisfied(): boolean {
         return true;
     }
 }

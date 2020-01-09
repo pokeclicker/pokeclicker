@@ -8,13 +8,13 @@ class GameController {
             if (id && id != 'mapTooltipWrapper') {
                 const tooltip = $('#mapTooltip');
                 tooltip.text(id);
-                tooltip.css('visibility', 'visible')
+                tooltip.css('visibility', 'visible');
 
             }
         }, function () {
             const tooltip = $('#mapTooltip');
             tooltip.text('');
-            tooltip.css('visibility', 'hidden')
+            tooltip.css('visibility', 'hidden');
         });
     }
 
@@ -85,19 +85,28 @@ class GameController {
             const keyCode = e.keyCode;
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {
-                if (keyCode == 38 || keyCode == 87) {
+                if (keyCode == 38 || keyCode == 87) { // up || w
                     DungeonRunner.map.moveUp();
-                } else if (keyCode == 39 || keyCode == 68) {
+                } else if (keyCode == 39 || keyCode == 68) { // right || d
                     DungeonRunner.map.moveRight();
-                } else if (keyCode == 37 || keyCode == 65) {
+                } else if (keyCode == 37 || keyCode == 65) { // left || a
                     DungeonRunner.map.moveLeft();
-                } else if (keyCode == 40 || keyCode == 83) {
+                } else if (keyCode == 40 || keyCode == 83) { // down || s
                     DungeonRunner.map.moveDown();
-                } else if (keyCode == 32) {
+                } else if (keyCode == 32) { // space
                     DungeonRunner.openChest();
                     DungeonRunner.startBossFight();
                 }
                 e.preventDefault();
+            } else if (App.game.gameState === GameConstants.GameState.town) {
+                if (keyCode == 32) { // space
+                    if (player.town().gym) {
+                        GymRunner.startGym(player.town().gym());
+                    } else if (player.town() instanceof DungeonTown) {
+                        DungeonRunner.initializeDungeon(player.town().dungeon());
+                    }
+                    e.preventDefault();
+                }
             }
 
         });
@@ -132,5 +141,5 @@ class GameController {
 }
 
 $(document).ready(function () {
-    $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList)
+    $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList);
 });

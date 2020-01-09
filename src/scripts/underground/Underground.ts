@@ -74,14 +74,14 @@ class Underground {
                 if (Mine.grid[i][j]() == 0) {
                     if (Mine.rewardGrid[i][j] != 0 && Mine.rewardGrid[i][j].revealed != 1) {
                         Mine.rewardGrid[i][j].revealed = 1;
-                        $(`div[data-i=${i}][data-j=${j}]`).replaceWith(`<img src='assets/images/underground/${Mine.rewardGrid[i][j].value}/${Mine.rewardGrid[i][j].value}-${Mine.rewardGrid[i][j].y}-${Mine.rewardGrid[i][j].x}.png' data-bind='css: Underground.rewardCssClass' data-i='${i}' data-j='${j}'>`)
-                        ko.applyBindings(null, $(`img[data-i=${i}][data-j=${j}]`)[0])
+                        $(`div[data-i=${i}][data-j=${j}]`).replaceWith(`<img src='assets/images/underground/${Mine.rewardGrid[i][j].value}/${Mine.rewardGrid[i][j].value}-${Mine.rewardGrid[i][j].y}-${Mine.rewardGrid[i][j].x}.png' data-bind='css: Underground.rewardCssClass' data-i='${i}' data-j='${j}'>`);
+                        ko.applyBindings(null, $(`img[data-i=${i}][data-j=${j}]`)[0]);
                         Mine.checkItemsRevealed();
                     }
                 }
-                return false
+                return false;
             },
-        })
+        });
     }
 
     private static rewardCssClass: KnockoutComputed<string> = ko.pureComputed(function () {
@@ -109,7 +109,7 @@ class Underground {
             };
             player.mineInventory.push(tempItem);
         } else {
-            const amt = player.mineInventory[index].amount()
+            const amt = player.mineInventory[index].amount();
             player.mineInventory[index].amount(amt + num);
         }
     }

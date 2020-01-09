@@ -1,7 +1,7 @@
 /* eslint @typescript-eslint/camelcase: off */
 class Notifier {
 
-    public static notify(message: string, type: GameConstants.NotificationOption){
+    public static notify(message: string, type: GameConstants.NotificationOption) {
         ($ as any).notify({
             // options
             icon: 'glyphicon glyphicon-warning-sign',

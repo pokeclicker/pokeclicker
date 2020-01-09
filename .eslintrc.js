@@ -30,5 +30,10 @@ module.exports = {
     'no-useless-concat': 'error',
     'prefer-template': 'warn',
     'template-curly-spacing': ['error', 'never'],
+    'curly': 'error',
+    'brace-style': 'error',
+    'semi': 'error',
+    "space-before-blocks": ["error", "always"],
+    "keyword-spacing": ["error"],
   }
-}
+};

@@ -15,14 +15,17 @@ class Changelog {
     constructor(type: string, description: string) {
         this.type = type;
         this.description = description;
-        if (type == changelogType.VERSION)
+        if (type == changelogType.VERSION) {
             this.description += '</code>';
+        }
     }
 }
 
 const changelogItems = [
     // v1.0.4
     new Changelog(changelogType.VERSION, 'v1.0.4'),
+    new Changelog(changelogType.NEW, 'Can now use spacebar to start Gym/Dungeon'),
+    new Changelog(changelogType.FIXED, 'Stones now work with multiple evolutions'),
     new Changelog(changelogType.FIXED, 'Pokemon will no longer evolve into evolutions you have already obtained'),
     new Changelog(changelogType.FIXED, 'Can obtain Pokemon from future generations by re-breeding'),
     new Changelog(changelogType.FIXED, 'Devolutions are obtained when breeding evolved forms'),

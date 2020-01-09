@@ -17,9 +17,9 @@ class FarmRunner {
         return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
     }
 
-    public static timeToReduce(){
+    public static timeToReduce() {
         // TODO(@Isha) fix when refactoring to feature
-        return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 1
+        return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 1;
     }
 
     public static tick() {
@@ -72,8 +72,8 @@ class FarmRunner {
         for (let i = 0; i < player.plotList.length; i++) {
             total += FarmRunner.harvest(i, true);
         }
-        if (total > 0 ){
-            Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success)
+        if (total > 0 ) {
+            Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success);
         }
     }
 
@@ -117,8 +117,8 @@ class FarmRunner {
             FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
             const money = plot.berry().moneyValue;
             App.game.wallet.gainMoney(money);
-            if(!all){
-                Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success)
+            if (!all) {
+                Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success);
             }
             plot.berry(null);
             App.game.oakItems.use(OakItems.OakItem.Sprayduck);
@@ -143,12 +143,12 @@ class FarmRunner {
             return plot.formattedTimeLeft();
         }
 
-        return 'Ready'
+        return 'Ready';
     }
 
     public static getImage(plot: Plot) {
         if (plot.getStage() <= 1) {
-            return 'assets/images/farm/AllTreeSeedIII.png'
+            return 'assets/images/farm/AllTreeSeedIII.png';
         }
         return `assets/images/farm/${GameConstants.BerryType[plot.berry().type]}Tree${GameConstants.PlotStage[plot.getStage()]}III.png`;
     }

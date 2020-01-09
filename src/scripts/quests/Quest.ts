@@ -29,7 +29,9 @@ abstract class Quest {
         if (this.isCompleted() && !this.claimed()) {
             App.game.wallet.gainQuestPoints(this.pointsReward);
             this.claimed(true);
-            if (!this.inQuestLine) player.completedQuestList[this.index](true);
+            if (!this.inQuestLine) {
+                player.completedQuestList[this.index](true);
+            }
             const oldLevel = player.questLevel;
             player.questXP += this.xpReward;
             Notifier.notify(`You have completed your quest and claimed ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);;
@@ -58,7 +60,7 @@ abstract class Quest {
     }
 
     get questFocus() {
-        return this._questFocus
+        return this._questFocus;
     }
 
     protected createProgressObservables() {
@@ -97,12 +99,12 @@ abstract class Quest {
                 this.endQuest();
                 this.autoCompleter.dispose();
             }
-        })
+        });
     }
 
     inProgress() {
         return ko.computed(() => {
             return player.currentQuests().map(x => x.index).includes(this.index) && !this.isCompleted();
-        })
+        });
     }
 }

@@ -69,16 +69,20 @@ class PartyPokemon implements Saveable {
 
         for (const evolution of this.evolutions) {
             if (evolution instanceof LevelEvolution && evolution.isSatisfied()) {
-                evolution.evolve()
+                evolution.evolve();
             }
         }
     }
 
     public useStone(type: GameConstants.StoneType): boolean {
+        const possibleEvolutions = [];
         for (const evolution of this.evolutions) {
             if (evolution instanceof StoneEvolution && evolution.stone == type) {
-                return evolution.evolve()
+                possibleEvolutions.push(evolution);
             }
+        }
+        if (possibleEvolutions.length !== 0) {
+            return GameConstants.randomElement(possibleEvolutions).evolve();
         }
         return false;
     }
@@ -89,7 +93,7 @@ class PartyPokemon implements Saveable {
         }
 
         if (json['id'] == null) {
-            return
+            return;
         }
 
         this.attackBonus = json['attackBonus'] ?? this.defaults.attackBonus;
@@ -128,7 +132,7 @@ class PartyPokemon implements Saveable {
 
     // Knockout getters/setter
     get level() {
-        return this._level()
+        return this._level();
     }
 
     set level(level: number) {
@@ -136,7 +140,7 @@ class PartyPokemon implements Saveable {
     }
 
     get attack() {
-        return this._attack()
+        return this._attack();
     }
 
     set attack(attack: number) {
@@ -145,7 +149,7 @@ class PartyPokemon implements Saveable {
 
 
     get breeding() {
-        return this._breeding()
+        return this._breeding();
     }
 
     set breeding(bool: boolean) {
