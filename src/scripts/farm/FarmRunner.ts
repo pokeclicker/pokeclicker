@@ -3,18 +3,10 @@ class FarmRunner {
     public static counter = 0;
     public static plotPrice: KnockoutObservable<number> = ko.observable(10);
 
-    public static openFarmModal() {
-        if (FarmRunner.accessToFarm()) {
-            this.plotPrice(this.computePlotPrice());
-            App.game.gameState = GameConstants.GameState.paused;
-            $('#farmModal').modal('show');
-        } else {
-            Notifier.notify("You don't have access to this location yet", GameConstants.NotificationOption.warning);
-        }
-    }
+
 
     public static accessToFarm() {
-        return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
+        return ;
     }
 
     public static timeToReduce() {

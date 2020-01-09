@@ -13,7 +13,6 @@ namespace GameConstants {
     export const DUNGEON_TIME = 6000;
     export const DUNGEON_TICK = 10;
     export const EFFECT_ENGINE_TICK = 1000;
-    export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
     export const GYM_COUNTDOWN = 1000;
@@ -59,10 +58,6 @@ namespace GameConstants {
     // Breeding
     export const BREEDING_AMOUNT = 1;
     export const BREEDING_ATTACK_BONUS = 25;
-
-    // Farm
-    export const AMOUNT_OF_BERRIES = 8;
-    export const AMOUNT_OF_PLOTS = 25;
 
     export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
 
