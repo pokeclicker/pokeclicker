@@ -79,7 +79,7 @@ class Pokeballs implements Feature {
 
     fromJSON(json: object): void {
         if (json == null) {
-            return
+            return;
         }
 
         if (json['pokeballs'] == null) {
@@ -107,7 +107,7 @@ class Pokeballs implements Feature {
             ],
             'notCaughtSelection': this.notCaughtSelection,
             'alreadyCaughtSelection': this.alreadyCaughtSelection,
-        }
+        };
     }
 
     update(delta: number): void {

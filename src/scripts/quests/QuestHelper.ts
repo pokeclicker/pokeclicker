@@ -78,7 +78,7 @@ class QuestHelper {
                     //OakItems.OakItem.Shiny_Charm,
                     //OakItems.OakItem.Blaze_Cassette,
                     //OakItems.OakItem.Cell_Battery,
-                ]
+                ];
                 const oakItem = SeededRand.fromArray(possibleItems);
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
@@ -99,14 +99,14 @@ class QuestHelper {
             player.questRefreshes++;
             QuestHelper.quitAllQuests();
             QuestHelper.clearQuests();
-            QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date())
+            QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
         } else {
             Notifier.notify("You can't afford to do that!", GameConstants.NotificationOption.danger);
         }
     }
 
     public static canAffordRefresh(): boolean {
-        return App.game.wallet.hasAmount(new Amount(this.getRefreshCost(), GameConstants.Currency.money))
+        return App.game.wallet.hasAmount(new Amount(this.getRefreshCost(), GameConstants.Currency.money));
     }
 
     public static clearQuests() {
@@ -120,9 +120,9 @@ class QuestHelper {
     // Returns 0 when all quests are complete, ~1 million when none are
     public static getRefreshCost(): number {
         const notComplete = player.completedQuestList.filter((elem) => {
-            return !elem()
+            return !elem();
         }).length;
-        return Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1))
+        return Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1));
     }
 
     public static loadCurrentQuests(saved: KnockoutObservableArray<any>) {

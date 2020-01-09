@@ -15,8 +15,9 @@ class Changelog {
     constructor(type: string, description: string) {
         this.type = type;
         this.description = description;
-        if (type == changelogType.VERSION)
+        if (type == changelogType.VERSION) {
             this.description += '</code>';
+        }
     }
 }
 

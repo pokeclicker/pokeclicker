@@ -71,7 +71,7 @@ class Upgrade implements Saveable {
 
     fromJSON(json: object): void {
         if (json == null) {
-            return
+            return;
         }
         this.level = json['level'] ?? this.defaults.level;
     }
@@ -79,7 +79,7 @@ class Upgrade implements Saveable {
     toJSON(): object {
         return {
             level: this.level,
-        }
+        };
     }
 
     // Knockout getters/setters

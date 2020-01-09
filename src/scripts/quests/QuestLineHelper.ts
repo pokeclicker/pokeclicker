@@ -55,7 +55,7 @@ class QuestLineHelper {
         this.tutorialTracker = this.tutorial.curQuestInitial.subscribe((newInitial)=>{
             player.tutorialProgress(QuestLineHelper.tutorial.curQuest());
             player.tutorialState = newInitial;
-        })
+        });
 
         this.tutorialCompleter = this.tutorial.curQuest.subscribe((quest)=>{
             if (quest == QuestLineHelper.tutorial.totalQuests) {
@@ -64,6 +64,6 @@ class QuestLineHelper {
                 player.tutorialProgress(quest);
                 player.tutorialComplete(true);
             }
-        })
+        });
     }
 }

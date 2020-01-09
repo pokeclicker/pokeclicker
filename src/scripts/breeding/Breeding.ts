@@ -201,7 +201,9 @@ class Breeding implements Feature {
         const hatchable = hatchList.slice(0, player.highestRegion() + 1);
         let possibleHatches = [];
         hatchable.forEach((pokemon, index) => {
-            if (!pokemon.length) return;
+            if (!pokemon.length) {
+                return;
+            }
             const toAdd = possibleHatches.length || 1;
             for (let i = 0; i < toAdd; i++) {
                 possibleHatches.push(pokemon);

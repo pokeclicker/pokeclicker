@@ -42,7 +42,7 @@ class SafariBattle {
                 .then(SafariBattle.delay(1.7*SafariBattle.Speed.ballBounce))
                 .then(SafariBattle.calcIndex)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
                 .then(SafariBattle.delayRoll)
-                .then(SafariBattle.finishCapture)                                  // capture pokemon or break free
+                .then(SafariBattle.finishCapture);                                  // capture pokemon or break free
 
         }
     }
@@ -54,7 +54,7 @@ class SafariBattle {
                     resolve(pass);
                 },ms);
             });
-        }
+        };
     }
 
     private static startCapture() {
@@ -114,19 +114,25 @@ class SafariBattle {
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
                 }, 1*SafariBattle.Speed.enemyTransition);
             }
-        })
+        });
     }
 
     private static startRoll = function(n){
-        if (n == 4) {n--}
+        if (n == 4) {
+            n--;
+        }
         $('#safariBall').addClass('safari-roll-left');
-        setTimeout(function(){ SafariBattle.safariRoll(n-1) }, 1200);
+        setTimeout(function(){
+            SafariBattle.safariRoll(n-1);
+        }, 1200);
     }
 
     private static safariRoll = function(n){
         if (n != 0){
             $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
-            setTimeout(function(){SafariBattle.safariRoll(n-1)}, 1200);
+            setTimeout(function(){
+                SafariBattle.safariRoll(n-1);
+            }, 1200);
         }
     }
 
@@ -162,12 +168,14 @@ class SafariBattle {
             setTimeout(function(){
                 const hitSplash = $('<ptcl>').html("<img src='assets/images/safari/hit.png'>").children().appendTo('body');
                 hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
-                hitSplash.fadeOut(400, function(){hitSplash.remove();});
+                hitSplash.fadeOut(400, function(){
+                    hitSplash.remove();
+                });
                 setTimeout(function(){
                     const newOffset = {
                         top: enemy.top + 4,
                         left: enemy.left - 20,
-                    }
+                    };
                     const ang = $('<ptcl>').html("<img src='assets/images/safari/angry.png'>").children().appendTo('body');
                     ang.css('position','absolute').css('z-index', 9999);
                     ang.offset(newOffset);
@@ -243,7 +251,9 @@ class SafariBattle {
         const p = $('<ptcl>').html(html).children().appendTo('body');
         p.css('position','absolute');
         p.offset(pos);
-        if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
+        if (!top) {
+            top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
+        }
         p[0].style.transition = `left ${time}ms linear, top ${time}ms ${top}`;
         p.offset(target);
         if (!persistentParticle) {
@@ -265,7 +275,7 @@ namespace SafariBattle {
         ballBounce: 850,
         ballRoll: 700,
         enemyTransition: 1000,
-    }
+    };
 
     export const CATCH_MESSAGES = [
         'Oh, no!<br>The Pokemon broke free!',

@@ -90,7 +90,7 @@ class Party implements Feature {
             let multiplier = 1;
             if (player.region !== GameHelper.getRegion(pokemon.id)) {
                 // Pokemon only retain 20% of their total damage in other regions.
-                multiplier = 0.2
+                multiplier = 0.2;
             }
             if (!pokemon.breeding) {
                 if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
@@ -159,14 +159,14 @@ class Party implements Feature {
 
     fromJSON(json: object): void {
         if (json == null) {
-            return
+            return;
         }
 
         const caughtPokemonSave = json['caughtPokemon'];
         for (let i = 0; i < caughtPokemonSave.length; i++) {
             const partyPokemon = PokemonFactory.generatePartyPokemon(caughtPokemonSave[i].id);
             partyPokemon.fromJSON(caughtPokemonSave[i]);
-            this._caughtPokemon.push(partyPokemon)
+            this._caughtPokemon.push(partyPokemon);
         }
 
         this.shinyPokemon = new ObservableArrayProxy<number>(json['shinyPokemon'] ?? this.defaults.shinyPokemon);
@@ -179,7 +179,7 @@ class Party implements Feature {
         return {
             caughtPokemon: this._caughtPokemon().map(x => x.toJSON()),
             shinyPokemon: this.shinyPokemon.map(x => x),
-        }
+        };
     }
 
     update(delta: number): void {

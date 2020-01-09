@@ -24,7 +24,7 @@ class Wallet implements Feature {
         GameHelper.incrementObservable(player.statistics.totalMoney, money);
         GameController.animateCurrency(money, 'playerMoney');
 
-        this.addAmount(new Amount(money, Currency.money))
+        this.addAmount(new Amount(money, Currency.money));
     }
 
     public gainDungeonTokens(base: number, origin?: string) {
@@ -36,7 +36,7 @@ class Wallet implements Feature {
         GameHelper.incrementObservable(player.statistics.totalTokens, tokens);
         GameController.animateCurrency(tokens, 'playerMoneyDungeon');
 
-        this.addAmount(new Amount(tokens, Currency.dungeonToken))
+        this.addAmount(new Amount(tokens, Currency.dungeonToken));
     }
 
     public gainQuestPoints(base: number, origin?: string) {
@@ -47,7 +47,7 @@ class Wallet implements Feature {
         GameHelper.incrementObservable(player.statistics.totalQuestPoints, points);
         GameController.animateCurrency(points, 'playerMoneyQuest');
 
-        this.addAmount(new Amount(points, Currency.questPoint))
+        this.addAmount(new Amount(points, Currency.questPoint));
     }
 
     public gainDiamonds(base: number, origin?: string) {
@@ -57,7 +57,7 @@ class Wallet implements Feature {
 
         GameHelper.incrementObservable(player.statistics.totalDiamonds, diamonds);
 
-        this.addAmount(new Amount(diamonds, Currency.diamond))
+        this.addAmount(new Amount(diamonds, Currency.diamond));
     }
 
     public gainFarmPoints(base: number, origin?: string) {
@@ -68,7 +68,7 @@ class Wallet implements Feature {
         // TODO Add total farmpoints statistic
         // GameHelper.incrementObservable(player.statistics.totalFarmPoints, points);
 
-        this.addAmount(new Amount(points, Currency.farmPoint))
+        this.addAmount(new Amount(points, Currency.farmPoint));
     }
 
     private addAmount(amount: Amount) {
@@ -93,7 +93,7 @@ class Wallet implements Feature {
 
     fromJSON(json: object): void {
         if (json == null) {
-            return
+            return;
         }
 
         if (json['currencies'] == null) {
@@ -119,7 +119,7 @@ class Wallet implements Feature {
                 this.currencies[GameConstants.Currency.diamond],
                 this.currencies[GameConstants.Currency.farmPoint],
             ],
-        }
+        };
     }
 
     update(delta: number): void {
