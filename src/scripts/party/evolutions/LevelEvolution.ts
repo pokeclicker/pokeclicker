@@ -17,9 +17,15 @@ class LevelEvolution extends Evolution {
 
     evolve(): boolean {
         if (this.triggered) {
-            return;
+            return false;
         }
         this.triggered = true;
+
+        // We have already obtained the evolution
+        if (App.game.party.alreadyCaughtPokemonByName(this.evolvedPokemon)){
+            return false;
+        }
+
         return super.evolve(true);
     }
 }

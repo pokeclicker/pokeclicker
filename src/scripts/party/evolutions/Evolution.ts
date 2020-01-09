@@ -18,13 +18,11 @@ abstract class Evolution {
         if (PokemonHelper.calcNativeRegion(this.evolvedPokemon) > player.highestRegion()) {
             return false;
         }
-        // We have already obtained the evolution
-        if (App.game.party.alreadyCaughtPokemonByName(this.evolvedPokemon)){
-            return false;
-        }
+
         if (notification) {
             Notifier.notify(`Your ${this.basePokemon} evolved into a ${this.evolvedPokemon}`, GameConstants.NotificationOption.success);
         }
+
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(this.evolvedPokemon).id, shiny);
         return shiny;
