@@ -23,6 +23,8 @@ class Changelog {
 const changelogItems = [
     // v1.0.4
     new Changelog(changelogType.VERSION, 'v1.0.4'),
+    new Changelog(changelogType.FIXED, 'Pokemon will no longer evolve into evolutions you have already obtained'),
+    new Changelog(changelogType.FIXED, 'Can obtain Pokemon from future generations by re-breeding'),
     new Changelog(changelogType.FIXED, 'Devolutions are obtained when breeding evolved forms'),
     new Changelog(changelogType.NEW, 'Add setting to toggle egg percentage/step count'),
     new Changelog(changelogType.CHANGE, 'Total shiny Pokemon caught no longer adds to your click attack'),
