@@ -217,7 +217,9 @@ class Safari {
 
         if(!Safari.isMoving) {
             if (Safari.sprite.frame == 2) {
-                Safari.sprite.to(0, true, function(){Safari.step(dir)});
+                Safari.sprite.to(0, true, function(){
+                    Safari.step(dir)
+                });
             } else {
                 Safari.step(dir);
             }
@@ -250,7 +252,11 @@ class Safari {
             $('#sprite').animate(offset, 250, 'linear', function() {
                 Safari.checkBattle();
                 Safari.isMoving = false;
-                if(Safari.walking){ if (!Safari.checkBattle() && Safari.queue[0]){Safari.step(Safari.queue[0])} }
+                if(Safari.walking){
+                    if (!Safari.checkBattle() && Safari.queue[0]){
+                        Safari.step(Safari.queue[0])
+                    }
+                }
             });
         } else {
             $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
@@ -307,7 +313,9 @@ class Safari {
                 Safari.queue.splice(i, 1);
             }
         }
-        if (!Safari.queue[0]){ Safari.walking = false };
+        if (!Safari.queue[0]){
+            Safari.walking = false
+        };
     }
 
     private static checkBattle(): boolean {

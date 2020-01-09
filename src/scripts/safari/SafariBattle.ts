@@ -118,15 +118,21 @@ class SafariBattle {
     }
 
     private static startRoll = function(n){
-        if (n == 4) {n--}
+        if (n == 4) {
+            n--
+        }
         $('#safariBall').addClass('safari-roll-left');
-        setTimeout(function(){ SafariBattle.safariRoll(n-1) }, 1200);
+        setTimeout(function(){
+            SafariBattle.safariRoll(n-1)
+        }, 1200);
     }
 
     private static safariRoll = function(n){
         if (n != 0){
             $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
-            setTimeout(function(){SafariBattle.safariRoll(n-1)}, 1200);
+            setTimeout(function(){
+                SafariBattle.safariRoll(n-1)
+            }, 1200);
         }
     }
 
@@ -162,7 +168,9 @@ class SafariBattle {
             setTimeout(function(){
                 const hitSplash = $('<ptcl>').html("<img src='assets/images/safari/hit.png'>").children().appendTo('body');
                 hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
-                hitSplash.fadeOut(400, function(){hitSplash.remove();});
+                hitSplash.fadeOut(400, function(){
+                    hitSplash.remove();
+                });
                 setTimeout(function(){
                     const newOffset = {
                         top: enemy.top + 4,
@@ -243,7 +251,9 @@ class SafariBattle {
         const p = $('<ptcl>').html(html).children().appendTo('body');
         p.css('position','absolute');
         p.offset(pos);
-        if (!top) top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
+        if (!top) {
+            top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
+        }
         p[0].style.transition = `left ${time}ms linear, top ${time}ms ${top}`;
         p.offset(target);
         if (!persistentParticle) {

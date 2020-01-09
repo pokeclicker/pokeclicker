@@ -9,7 +9,9 @@ class MapHelper {
     }
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
-        if (isNaN(route)) return;
+        if (isNaN(route)) {
+            return;
+        }
         let genNewEnemy = false;
         if (route != player.route()) {
             genNewEnemy = true
@@ -23,8 +25,7 @@ class MapHelper {
             }
             App.game.gameState = GameConstants.GameState.fighting;
             GameController.applyRouteBindings();
-        }
-        else {
+        } else {
           	let reqsList = '';
 
           	if (!MapHelper.hasBadgeReq(route, region)) {
@@ -94,15 +95,13 @@ class MapHelper {
 
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
-        }
-        else if (MapHelper.accessToRoute(route, region)) {
+        } else if (MapHelper.accessToRoute(route, region)) {
             if (player.routeKillsObservable(route)() >= player.routeKillsNeeded) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
             }
-        }
-        else {
+        } else {
             cls = 'lockedRoute';
         }
 
@@ -139,7 +138,9 @@ class MapHelper {
 
     public static accessToTown(townName: string): boolean {
         const town = TownList[townName];
-        if (!town) return false;
+        if (!town) {
+            return false;
+        }
         return town.isUnlocked();
     };
 
@@ -197,7 +198,9 @@ class MapHelper {
     }
 
     public static openShipModal() {
-        const openModal = () => {$('#ShipModal').modal('show');}
+        const openModal = () => {
+            $('#ShipModal').modal('show');
+        }
         switch (player.region) {
             case 0:
                 if (TownList['Vermillion City'].isUnlocked() && player.highestRegion() > 0) {

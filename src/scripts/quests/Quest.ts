@@ -29,7 +29,9 @@ abstract class Quest {
         if (this.isCompleted() && !this.claimed()) {
             App.game.wallet.gainQuestPoints(this.pointsReward);
             this.claimed(true);
-            if (!this.inQuestLine) player.completedQuestList[this.index](true);
+            if (!this.inQuestLine) {
+                player.completedQuestList[this.index](true);
+            }
             const oldLevel = player.questLevel;
             player.questXP += this.xpReward;
             Notifier.notify(`You have completed your quest and claimed ${this.pointsReward} quest points!`, GameConstants.NotificationOption.success);;

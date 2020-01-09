@@ -37,7 +37,9 @@ class PokemonFactory {
         const deviation = Math.floor(Math.random() * 51) - 25;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        if (shiny) Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
+        if (shiny) {
+            Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
+        }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, route * 2, catchRate, exp, money, shiny);
     }
 
@@ -99,7 +101,9 @@ class PokemonFactory {
         const exp: number = basePokemon.exp;
         const money = 0;
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        if (shiny) Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
+        if (shiny) {
+            Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
+        }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, GameConstants.DUNGEON_SHARDS);
     }
 
@@ -114,7 +118,9 @@ class PokemonFactory {
         const exp: number = basePokemon.exp;
         const money = 0;
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
-        if (shiny) Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
+        if (shiny) {
+            Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
+        }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, money, shiny, GameConstants.DUNGEON_BOSS_SHARDS);
     }
 
