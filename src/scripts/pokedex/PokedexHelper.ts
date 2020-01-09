@@ -57,13 +57,13 @@ class PokedexHelper {
             if ((filter['name'] || '') != '' && pokemon.name.toLowerCase().indexOf(filter['name'].toLowerCase()) == -1) {
                 return false;
             }
-            const type1 = parseInt(filter['type1'] || -1);
-            if (type1 != -1 && pokemon.type.indexOf(PokemonType[type1]) == -1) {
+            const type1: PokemonType = parseInt(filter['type1'] || PokemonType.None);
+            if (type1 != PokemonType.None && pokemon.type.includes(type1)) {
                 return false;
             }
 
-            const type2 = parseInt(filter['type2'] || -1);
-            if (type2 != -1 && pokemon.type.indexOf(PokemonType[type2]) == -1) {
+            const type2: PokemonType = parseInt(filter['type2'] || PokemonType.None);
+            if (type2 != PokemonType.None && pokemon.type.includes(type2)) {
                 return false;
             }
 

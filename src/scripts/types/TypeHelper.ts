@@ -37,30 +37,25 @@ class TypeHelper {
             return 1;
         }
 
-        const attackType1 = PokemonType[a1];
-        const attackType2 = PokemonType[a2];
-        const defendType1 = PokemonType[d1];
-        const defendType2 = PokemonType[d2];
-
         const list = player.shardUpgrades;
         //TODO factor in shard value
-        let m1 = TypeHelper.typeMatrix[attackType1][defendType1];
-        m1 += (list[attackType1][this.valueToType(m1)]() * GameConstants.SHARD_UPGRADE_STEP);
+        let m1 = TypeHelper.typeMatrix[a1][d1];
+        m1 += (list[a1][this.valueToType(m1)]() * GameConstants.SHARD_UPGRADE_STEP);
 
         let m2 = 1, m3 = 1, m4 = 1;
         if (d2 != PokemonType.None) {
-            m2 = TypeHelper.typeMatrix[attackType1][defendType2];
-            m2 += (list[attackType1][this.valueToType(m2)]() * GameConstants.SHARD_UPGRADE_STEP);
+            m2 = TypeHelper.typeMatrix[a1][d2];
+            m2 += (list[a1][this.valueToType(m2)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
         if (a2 != PokemonType.None) {
-            m3 = TypeHelper.typeMatrix[attackType2][defendType1];
-            m3 += (list[attackType2][this.valueToType(m3)]() * GameConstants.SHARD_UPGRADE_STEP);
+            m3 = TypeHelper.typeMatrix[a2][d1];
+            m3 += (list[a2][this.valueToType(m3)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
         if (a2 != PokemonType.None && d2 != PokemonType.None) {
-            m4 = TypeHelper.typeMatrix[attackType2][defendType2];
-            m4 += (list[attackType2][this.valueToType(m4)]() * GameConstants.SHARD_UPGRADE_STEP);
+            m4 = TypeHelper.typeMatrix[a2][d2];
+            m4 += (list[a2][this.valueToType(m4)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
         return m1 * m2 * m3 * m4;

@@ -41,10 +41,12 @@ class PokemonHelper {
             return;
         }
 
-        const type2: PokemonType = basePokemon['type'][1] || PokemonType.None;
+        const type1 = basePokemon['type'][0];
+        const type2: PokemonType = basePokemon['type'][1] ?? PokemonType.None;
+
         const evoLevel = basePokemon['evoLevel'];
         const eggCycles: number = basePokemon['eggCycles'] || 20;
-        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], basePokemon['evolution'], evoLevel, basePokemon['type'][0], type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles);
+        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], basePokemon['evolution'], evoLevel, type1, type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles);
     }
 
     public static typeStringToId(id: string) {
