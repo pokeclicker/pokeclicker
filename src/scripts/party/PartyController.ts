@@ -1,7 +1,7 @@
 class PartyController {
 
     static getCaughtStatusByName(name: string): CaughtStatus {
-        return this.getCaughtStatus(PokemonHelper.getPokemonByName(name).id)
+        return this.getCaughtStatus(PokemonHelper.getPokemonByName(name).id);
     }
 
     static getCaughtStatus(id: number): CaughtStatus {
@@ -13,7 +13,7 @@ class PartyController {
             return CaughtStatus.Caught;
         }
 
-        return CaughtStatus.NotCaught
+        return CaughtStatus.NotCaught;
     }
 
     public static getMaxLevelPokemonList() {
@@ -71,11 +71,11 @@ class PartyController {
             } else if (aValue > bValue) {
                 res = 1;
             } else {
-                res = 0
+                res = 0;
             }
 
             return res * dir;
-        }
+        };
     }
 
 

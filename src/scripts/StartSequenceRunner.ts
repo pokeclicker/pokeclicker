@@ -24,14 +24,14 @@ class StartSequenceRunner {
                 setTimeout(
                     function () {
                         player.starter = StartSequenceRunner.starterPicked;
-                        StartSequenceRunner.showCaughtMessage()
+                        StartSequenceRunner.showCaughtMessage();
                     }, 1000);
 
                 //reset the function so you don't call it too many times :)
                 //What a beautiful piece of code
                 battlePokemon.isAlive = function () {
                     return false;
-                }
+                };
             }
             return this.health() > 0;
         };

@@ -69,7 +69,7 @@ class PartyPokemon implements Saveable {
 
         for (const evolution of this.evolutions) {
             if (evolution instanceof LevelEvolution && evolution.isSatisfied()) {
-                evolution.evolve()
+                evolution.evolve();
             }
         }
     }
@@ -77,7 +77,7 @@ class PartyPokemon implements Saveable {
     public useStone(type: GameConstants.StoneType): boolean {
         for (const evolution of this.evolutions) {
             if (evolution instanceof StoneEvolution && evolution.stone == type) {
-                return evolution.evolve()
+                return evolution.evolve();
             }
         }
         return false;
@@ -89,7 +89,7 @@ class PartyPokemon implements Saveable {
         }
 
         if (json['id'] == null) {
-            return
+            return;
         }
 
         this.attackBonus = json['attackBonus'] ?? this.defaults.attackBonus;
@@ -128,7 +128,7 @@ class PartyPokemon implements Saveable {
 
     // Knockout getters/setter
     get level() {
-        return this._level()
+        return this._level();
     }
 
     set level(level: number) {
@@ -136,7 +136,7 @@ class PartyPokemon implements Saveable {
     }
 
     get attack() {
-        return this._attack()
+        return this._attack();
     }
 
     set attack(attack: number) {
@@ -145,7 +145,7 @@ class PartyPokemon implements Saveable {
 
 
     get breeding() {
-        return this._breeding()
+        return this._breeding();
     }
 
     set breeding(bool: boolean) {

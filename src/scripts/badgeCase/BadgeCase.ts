@@ -47,17 +47,17 @@ class BadgeCase implements Feature {
 
     fromJSON(json: object): void {
         if (json == null) {
-            return
+            return;
         }
 
         for (let i = 0; i < this.badgeList.length; i++) {
-            this.badgeList[i] = json[i]
+            this.badgeList[i] = json[i];
         }
     }
 
     toJSON(): object {
         return this.badgeList.map(badge => {
-            return badge
+            return badge;
         });
     }
 

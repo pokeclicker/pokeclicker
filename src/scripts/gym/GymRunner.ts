@@ -30,7 +30,7 @@ class GymRunner {
                 $('#gymCountdownView').fadeOut(300);
                 const $img = $('#gif-go');
                 $img.hide();
-            }, GameConstants.GYM_COUNTDOWN)
+            }, GameConstants.GYM_COUNTDOWN);
 
         } else {
             Notifier.notify(`${gym.leaderName} does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges`, GameConstants.NotificationOption.danger);
@@ -50,7 +50,7 @@ class GymRunner {
             GymRunner.gymLost();
         }
         this.timeLeft(this.timeLeft() - GameConstants.GYM_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100))
+        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.GYM_TIME * 100));
     }
 
     public static gymLost() {

@@ -6,7 +6,7 @@ class PokemonHelper {
     public static getPokemonsWithEvolution(evoType: GameConstants.StoneType) {
         return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
             if (!partyPokemon.evolutions) {
-                return false
+                return false;
             }
             for (const evolution of partyPokemon.evolutions) {
                 if (evolution instanceof StoneEvolution && evolution.stone == evoType && PokemonHelper.calcNativeRegion(evolution.evolvedPokemon) <= player.highestRegion()) {
@@ -65,7 +65,7 @@ class PokemonHelper {
     }
 
     public static getPokeballImage(pokemonName: string): string {
-        let src = ''
+        let src = '';
         if (App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id)) {
             src = 'assets/images/pokeball/Pokeball-';
             if (App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(pokemonName).id, true)) {

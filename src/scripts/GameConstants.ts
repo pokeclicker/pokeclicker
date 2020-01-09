@@ -41,7 +41,7 @@ namespace GameConstants {
     export const RoamingPokemon = {
         0: ['Mew'],
         1: ['Raikou', 'Entei', 'Suicune'],
-    }
+    };
 
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
@@ -113,7 +113,7 @@ namespace GameConstants {
     export const Safari = {
         'SizeY': Math.floor((window.innerHeight - 150) / 32),
         'SizeX': 25,
-    }
+    };
 
     export const SAFARI_BATTLE_CHANCE = 5;
 
@@ -138,7 +138,7 @@ namespace GameConstants {
         24,
     ];
 
-    export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.'
+    export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
 
     //Quests
 
@@ -148,7 +148,7 @@ namespace GameConstants {
     export const DEFEAT_POKEMONS_BASE_REWARD  = questBase * 1;
     export const CAPTURE_POKEMONS_BASE_REWARD = GameConstants.DEFEAT_POKEMONS_BASE_REWARD / 0.8; // Defeat reward divided by chance to catch (guessed)
     export const GAIN_MONEY_BASE_REWARD       = questBase * 0.0017;  // Dimava
-    export const GAIN_TOKENS_BASE_REWARD      = CAPTURE_POKEMONS_BASE_REWARD / 13 // <route number> tokens gained for every capture
+    export const GAIN_TOKENS_BASE_REWARD      = CAPTURE_POKEMONS_BASE_REWARD / 13; // <route number> tokens gained for every capture
     export const HATCH_EGGS_BASE_REWARD       = questBase * 33;      // Dimava
     export const MINE_LAYERS_BASE_REWARD      = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
     export const SHINY_BASE_REWARD            = questBase * 6000;    // Dimava
@@ -230,7 +230,7 @@ namespace GameConstants {
 
     export function formatTime(time) {
         if (time == 0) {
-            return 'Ready'
+            return 'Ready';
         }
 
         time = parseInt(`${time}`, 10); // don't forget the second param
@@ -451,7 +451,7 @@ namespace GameConstants {
         0: new Set([19,20,21]),
         1: new Set([40,41]),
         2: new Set([105,106,107,108,109,122,124,125,126,127,128,129,130,131,132,133,134]),
-    }
+    };
 
     export const routeDungeonRequirements = {
         0: {
@@ -471,7 +471,7 @@ namespace GameConstants {
             124: 'Mt. Pyre',
             128: 'Seafloor Cavern',
         },
-    }
+    };
 
     export enum Starter {
         'None' = -1,
@@ -609,7 +609,7 @@ namespace GameConstants {
         SmallRestore: 0.1,
         MediumRestore: 0.2,
         LargeRestore: 0.5,
-    }
+    };
 
     export const KeyToDirection = {
         37: 'left',
@@ -620,13 +620,13 @@ namespace GameConstants {
         68: 'right', //d
         83: 'down', //s
         87: 'up', //w
-    }
+    };
 
     export const FossilToPokemon = {
         'Helix Fossil': 'Omanyte',
         'Dome Fossil': 'Kabuto',
         'Old Amber': 'Aerodactyl',
-    }
+    };
 
     //Used for image name
     export const PokemonToFossil = {
@@ -634,7 +634,7 @@ namespace GameConstants {
         'Kabuto': 'dome',
         'Aerodactyl': 'amber',
 
-    }
+    };
 
     // For random quest, name matches entry in gymList (created in Gym.ts)
     export const KantoGyms = [

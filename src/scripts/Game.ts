@@ -78,13 +78,13 @@ class Game {
             QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
         }
 
-        this.gameState = GameConstants.GameState.fighting
+        this.gameState = GameConstants.GameState.fighting;
     }
 
     start() {
         console.log('game started');
         if (player.starter === GameConstants.Starter.None) {
-            StartSequenceRunner.start()
+            StartSequenceRunner.start();
         }
         this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
     }
@@ -175,10 +175,10 @@ class Game {
 
     // Knockout getters/setters
     get gameState() {
-        return this._gameState()
+        return this._gameState();
     }
 
     set gameState(value) {
-        this._gameState(value)
+        this._gameState(value);
     }
 }

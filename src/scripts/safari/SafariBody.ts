@@ -96,7 +96,7 @@ class SandBody extends SafariBody {
             body.push(row);
         }
 
-        const amount = this.type === 'fence' ? 20 : 4
+        const amount = this.type === 'fence' ? 20 : 4;
         for (let i = 0; i<amount; i++){
             const x = Math.floor(Math.random()*(sizeX-2));
             const y = Math.floor(Math.random()*(sizeY-2));
@@ -257,25 +257,25 @@ class WaterBody extends SafariBody {
                     if( j === 0){
                         row.push(1);
                     } else if (j < x-1){
-                        row.push(2)
+                        row.push(2);
                     } else if (j === x-1){
-                        row.push(3)
+                        row.push(3);
                     }
                 } else if (i < y - 1){
                     if( j === 0){
                         row.push(4);
                     } else if (j < x-1){
-                        row.push(5)
+                        row.push(5);
                     } else if (j === x-1){
-                        row.push(6)
+                        row.push(6);
                     }
                 } else if (i === y - 1){
                     if( j === 0){
                         row.push(7);
                     } else if (j < x-1){
-                        row.push(8)
+                        row.push(8);
                     } else if (j === x-1){
-                        row.push(9)
+                        row.push(9);
                     }
                 }
             }
@@ -371,7 +371,7 @@ Array.prototype.equals = function (array) {
         }
     }
     return true;
-}
+};
 
 interface Array<T> {
     equals(array: Array<T>): boolean;

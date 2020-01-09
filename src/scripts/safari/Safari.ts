@@ -218,7 +218,7 @@ class Safari {
         if(!Safari.isMoving) {
             if (Safari.sprite.frame == 2) {
                 Safari.sprite.to(0, true, function(){
-                    Safari.step(dir)
+                    Safari.step(dir);
                 });
             } else {
                 Safari.step(dir);
@@ -244,7 +244,7 @@ class Safari {
             const offset = {
                 top: `+=${directionOffset.y * 32}`,
                 left: `+=${directionOffset.x * 32}`,
-            }
+            };
 
             $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
             Safari.playerXY.x = newPos.x;
@@ -254,7 +254,7 @@ class Safari {
                 Safari.isMoving = false;
                 if(Safari.walking){
                     if (!Safari.checkBattle() && Safari.queue[0]){
-                        Safari.step(Safari.queue[0])
+                        Safari.step(Safari.queue[0]);
                     }
                 }
             });
@@ -314,7 +314,7 @@ class Safari {
             }
         }
         if (!Safari.queue[0]){
-            Safari.walking = false
+            Safari.walking = false;
         };
     }
 

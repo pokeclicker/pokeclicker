@@ -31,7 +31,7 @@ class SafariPokemon implements PokemonInterface {
     ];
 
     static readonly listWeight = SafariPokemon.list.reduce((sum: number, pokemon) => {
-        return sum += pokemon.weight
+        return sum += pokemon.weight;
     }, 0);
 
     constructor(name: string) {

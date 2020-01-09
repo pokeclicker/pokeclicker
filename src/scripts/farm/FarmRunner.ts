@@ -19,7 +19,7 @@ class FarmRunner {
 
     public static timeToReduce(){
         // TODO(@Isha) fix when refactoring to feature
-        return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 1
+        return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 1;
     }
 
     public static tick() {
@@ -73,7 +73,7 @@ class FarmRunner {
             total += FarmRunner.harvest(i, true);
         }
         if (total > 0 ){
-            Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success)
+            Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success);
         }
     }
 
@@ -118,7 +118,7 @@ class FarmRunner {
             const money = plot.berry().moneyValue;
             App.game.wallet.gainMoney(money);
             if(!all){
-                Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success)
+                Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success);
             }
             plot.berry(null);
             App.game.oakItems.use(OakItems.OakItem.Sprayduck);
@@ -143,12 +143,12 @@ class FarmRunner {
             return plot.formattedTimeLeft();
         }
 
-        return 'Ready'
+        return 'Ready';
     }
 
     public static getImage(plot: Plot) {
         if (plot.getStage() <= 1) {
-            return 'assets/images/farm/AllTreeSeedIII.png'
+            return 'assets/images/farm/AllTreeSeedIII.png';
         }
         return `assets/images/farm/${GameConstants.BerryType[plot.berry().type]}Tree${GameConstants.PlotStage[plot.getStage()]}III.png`;
     }

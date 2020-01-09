@@ -41,7 +41,7 @@ class DungeonRunner {
             this.dungeonLost();
         }
         this.timeLeft(this.timeLeft() - GameConstants.DUNGEON_TICK);
-        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100))
+        this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
     }
 
     public static openChest() {
@@ -55,7 +55,7 @@ class DungeonRunner {
         let amount = 1;
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             if (Math.random() < 0.5) {
-                amount += 1
+                amount += 1;
             }
         }
         Notifier.notify(`Found ${amount} ${input} in a dungeon chest`, GameConstants.NotificationOption.success);

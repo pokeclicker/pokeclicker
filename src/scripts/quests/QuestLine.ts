@@ -17,16 +17,16 @@ class QuestLine {
         this.curQuest = ko.computed(() => {
             const acc = 0;
             return this.quests().map((quest) => {
-                return +quest.isCompleted()
+                return +quest.isCompleted();
             })
                 .reduce( ( acc, iscompleted) => {
-                    return acc + iscompleted
+                    return acc + iscompleted;
                 },0);
         });
         this.curQuestInitial = ko.observable();
         this.curQuestInitial.equalityComparer = () => {
-            return false
-        } //Always update subscriptions, even if same data pushed in
+            return false;
+        }; //Always update subscriptions, even if same data pushed in
 
         this.curQuestObject = ko.computed(() => {
             this.quests(); //register dependency on this computed so it will update
@@ -34,20 +34,20 @@ class QuestLine {
                 return this.quests()[this.curQuest()];
             } else {
                 return {progress: ()=>{
-                    return 0
+                    return 0;
                 }, progressText: ()=>{
-                    return ''
-                }}
+                    return '';
+                }};
             }
         });
 
         this.autoBegin = this.curQuest.subscribe((num) => {
             if (this.curQuest() < this.totalQuests) {
                 setTimeout(() => {
-                    this.beginQuest(this.curQuest())
+                    this.beginQuest(this.curQuest());
                 },2000);
             }
-        })
+        });
     }
 
     addQuest(quest: Quest) {

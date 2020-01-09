@@ -32,5 +32,6 @@ module.exports = {
     'template-curly-spacing': ['error', 'never'],
     'curly': 'error',
     'brace-style': 'error',
+    'semi': 'error',
   }
 }

@@ -42,7 +42,7 @@ class SafariBattle {
                 .then(SafariBattle.delay(1.7*SafariBattle.Speed.ballBounce))
                 .then(SafariBattle.calcIndex)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
                 .then(SafariBattle.delayRoll)
-                .then(SafariBattle.finishCapture)                                  // capture pokemon or break free
+                .then(SafariBattle.finishCapture);                                  // capture pokemon or break free
 
         }
     }
@@ -54,7 +54,7 @@ class SafariBattle {
                     resolve(pass);
                 },ms);
             });
-        }
+        };
     }
 
     private static startCapture() {
@@ -114,16 +114,16 @@ class SafariBattle {
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
                 }, 1*SafariBattle.Speed.enemyTransition);
             }
-        })
+        });
     }
 
     private static startRoll = function(n){
         if (n == 4) {
-            n--
+            n--;
         }
         $('#safariBall').addClass('safari-roll-left');
         setTimeout(function(){
-            SafariBattle.safariRoll(n-1)
+            SafariBattle.safariRoll(n-1);
         }, 1200);
     }
 
@@ -131,7 +131,7 @@ class SafariBattle {
         if (n != 0){
             $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
             setTimeout(function(){
-                SafariBattle.safariRoll(n-1)
+                SafariBattle.safariRoll(n-1);
             }, 1200);
         }
     }
@@ -175,7 +175,7 @@ class SafariBattle {
                     const newOffset = {
                         top: enemy.top + 4,
                         left: enemy.left - 20,
-                    }
+                    };
                     const ang = $('<ptcl>').html("<img src='assets/images/safari/angry.png'>").children().appendTo('body');
                     ang.css('position','absolute').css('z-index', 9999);
                     ang.offset(newOffset);
@@ -275,7 +275,7 @@ namespace SafariBattle {
         ballBounce: 850,
         ballRoll: 700,
         enemyTransition: 1000,
-    }
+    };
 
     export const CATCH_MESSAGES = [
         'Oh, no!<br>The Pokemon broke free!',

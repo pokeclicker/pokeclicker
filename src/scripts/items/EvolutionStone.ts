@@ -11,7 +11,7 @@ class EvolutionStone extends Item {
     }
 
     public gain(n: number) {
-        player.gainItem(GameConstants.StoneType[this.type], n)
+        player.gainItem(GameConstants.StoneType[this.type], n);
     }
 
     public use(pokemon?: string) {

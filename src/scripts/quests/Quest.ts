@@ -60,7 +60,7 @@ abstract class Quest {
     }
 
     get questFocus() {
-        return this._questFocus
+        return this._questFocus;
     }
 
     protected createProgressObservables() {
@@ -99,12 +99,12 @@ abstract class Quest {
                 this.endQuest();
                 this.autoCompleter.dispose();
             }
-        })
+        });
     }
 
     inProgress() {
         return ko.computed(() => {
             return player.currentQuests().map(x => x.index).includes(this.index) && !this.isCompleted();
-        })
+        });
     }
 }

@@ -35,9 +35,9 @@ class Gym {
     public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
         return ko.computed(function () {
             if (App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                return 'btn btn-success'
+                return 'btn btn-success';
             }
-            return 'btn btn-secondary'
+            return 'btn btn-secondary';
         });
     }
 

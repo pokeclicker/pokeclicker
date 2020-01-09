@@ -9,7 +9,7 @@ class OakItems implements Feature {
 
     constructor(unlockRequirements: number[]) {
         this.itemList = [];
-        this.unlockRequirements = unlockRequirements
+        this.unlockRequirements = unlockRequirements;
     }
 
     canAccess(): boolean {
@@ -26,7 +26,7 @@ class OakItems implements Feature {
             new OakItem(OakItems.OakItem.Shiny_Charm, 'Shiny Charm', [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, true, 70, 'Encounter shinies more often', 150),
             new OakItem(OakItems.OakItem.Blaze_Cassette, 'Blaze Cassette', [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, false, 80, 'Hatch eggs faster', 10),
             new OakItem(OakItems.OakItem.Cell_Battery, 'Cell Battery', [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, false, 90, 'More passive mining energy regen', 50),
-        ]
+        ];
     }
 
     calculateBonus(item: OakItems.OakItem) {
@@ -35,12 +35,12 @@ class OakItems implements Feature {
             console.log('Warning: could not find oakItem', item, 'This could have unintended consequences');
             return 1;
         }
-        return oakItem.calculateBonus()
+        return oakItem.calculateBonus();
     }
 
     isUnlocked(item: OakItems.OakItem) {
         if (this.itemList[item] == undefined) {
-            return false
+            return false;
         }
         return App.game.party.caughtPokemon.length >= this.itemList[item].unlockReq;
     }
