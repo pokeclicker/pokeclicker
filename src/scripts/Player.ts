@@ -181,15 +181,12 @@ class Player {
         return this._itemList;
     }
 
-    public gainShards(pokemon: BattlePokemon) {
-        let typeNum = PokemonType[pokemon.type1];
-        player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
-        GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward);
-        if (pokemon.type2 != PokemonType.None) {
-            typeNum = PokemonType[pokemon.type2];
-            player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + pokemon.shardReward);
-            GameHelper.incrementObservable(player.statistics.totalShards[typeNum], pokemon.shardReward);
+    public gainShards(type: PokemonType, amount = 1) {
+        if (type === PokemonType.None) {
+            return;
         }
+        player._shardsCollected[type](player._shardsCollected[type]() + amount);
+        GameHelper.incrementObservable(player.statistics.totalShards[amount], amount);
     }
 
     public buyShardUpgrade(typeNum: number, effectNum: number) {
