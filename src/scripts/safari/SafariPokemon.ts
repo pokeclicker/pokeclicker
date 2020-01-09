@@ -30,7 +30,9 @@ class SafariPokemon implements PokemonInterface {
         { name: 'Tangela', weight: 4 },
     ];
 
-    static readonly listWeight = SafariPokemon.list.reduce((sum: number, pokemon) => {return sum += pokemon.weight}, 0);
+    static readonly listWeight = SafariPokemon.list.reduce((sum: number, pokemon) => {
+        return sum += pokemon.weight;
+    }, 0);
 
     constructor(name: string) {
         const data = PokemonHelper.getPokemonByName(name);
@@ -40,7 +42,9 @@ class SafariPokemon implements PokemonInterface {
         this.type1 = data.type1;
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
-        if (this.shiny) Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
+        if (this.shiny) {
+            Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
+        }
         this.baseCatchFactor = data.catchRate * 1/6;
         this.baseEscapeFactor = 30;
         this._angry = ko.observable(0);

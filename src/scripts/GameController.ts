@@ -8,13 +8,13 @@ class GameController {
             if (id && id != 'mapTooltipWrapper') {
                 const tooltip = $('#mapTooltip');
                 tooltip.text(id);
-                tooltip.css('visibility', 'visible')
+                tooltip.css('visibility', 'visible');
 
             }
         }, function () {
             const tooltip = $('#mapTooltip');
             tooltip.text('');
-            tooltip.css('visibility', 'hidden')
+            tooltip.css('visibility', 'hidden');
         });
     }
 
@@ -142,5 +142,5 @@ class GameController {
 }
 
 $(document).ready(function () {
-    $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList)
+    $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList);
 });

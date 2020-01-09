@@ -15,8 +15,9 @@ class Changelog {
     constructor(type: string, description: string) {
         this.type = type;
         this.description = description;
-        if (type == changelogType.VERSION)
+        if (type == changelogType.VERSION) {
             this.description += '</code>';
+        }
     }
 }
 
@@ -24,6 +25,7 @@ const changelogItems = [
     // v1.0.4
     new Changelog(changelogType.VERSION, 'v1.0.4'),
     new Changelog(changelogType.NEW, 'Can now use spacebar to start Gym/Dungeon'),
+    new Changelog(changelogType.FIXED, 'Stones now work with multiple evolutions'),
     new Changelog(changelogType.NEW, 'Add setting to toggle egg percentage/step count'),
     new Changelog(changelogType.CHANGE, 'Total shiny Pokemon caught no longer adds to your click attack'),
     new Changelog(changelogType.CHANGE, 'Halve xp needed to upgrade Oak items'),

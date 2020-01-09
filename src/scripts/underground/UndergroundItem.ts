@@ -16,7 +16,7 @@ class UndergroundItem {
     }
 
     private static addItem(name, id, space, ...rest) {
-        UndergroundItem.list.push(new UndergroundItem(name, id, space, ...rest))
+        UndergroundItem.list.push(new UndergroundItem(name, id, space, ...rest));
     }
 
     public static initialize() {

@@ -13,7 +13,9 @@ class EffectEngineRunner {
     }
 
     public static getEffect(itemName: string) {
-        if (!player) return 0;
+        if (!player) {
+            return 0;
+        }
         return player.effectList[itemName]();
     }
 
@@ -43,7 +45,9 @@ class EffectEngineRunner {
 
     public static isActive(itemName: string): KnockoutComputed<boolean> {
         return ko.computed(function () {
-            if (!player) return false;
+            if (!player) {
+                return false;
+            }
             return !!player.effectList[itemName]();
         }, this);
     }

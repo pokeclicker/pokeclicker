@@ -20,7 +20,7 @@ class KeyItem {
             if (this.unlockReq()) {
                 App.game.keyItems.gainKeyItem(this.name);
             }
-        })
+        });
     }
 
     unlock() {
@@ -39,7 +39,7 @@ class KeyItem {
     }
 
     get description() {
-        return this._description()
+        return this._description();
     }
 
     get isUnlocked() {

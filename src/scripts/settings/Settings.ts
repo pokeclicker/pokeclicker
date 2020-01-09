@@ -16,7 +16,7 @@ class Settings {
     static load(dict) {
         for (const name in dict) {
             const value = dict[name];
-            this.setSettingByName(name, value)
+            this.setSettingByName(name, value);
         }
     }
 
@@ -33,7 +33,7 @@ class Settings {
     static getSetting(name: string): Setting {
         for (let i = 0; i < this.list.length; i++) {
             if (this.list[i].name == name) {
-                return this.list[i]
+                return this.list[i];
             }
         }
         return null;

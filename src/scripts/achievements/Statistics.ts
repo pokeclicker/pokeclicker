@@ -51,16 +51,16 @@ class Statistics {
             'totalShards',
             'oakItemUses',
             'berriesHarvested',
-        ]
+        ];
 
         for (const prop of observables) {
-            this[prop] = ko.observable(saved[prop] || 0)
+            this[prop] = ko.observable(saved[prop] || 0);
         }
 
         for (const array of arrayObservables) {
             this[array] = [...Array(Statistics.arraySizes[array])].map((value, index) => {
-                return ko.observable(saved[array] ? saved[array][index] || 0 : 0)
-            })
+                return ko.observable(saved[array] ? saved[array][index] || 0 : 0);
+            });
         }
     }
 

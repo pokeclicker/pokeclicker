@@ -9,10 +9,12 @@ class MapHelper {
     }
 
     public static moveToRoute = function (route: number, region: GameConstants.Region) {
-        if (isNaN(route)) return;
+        if (isNaN(route)) {
+            return;
+        }
         let genNewEnemy = false;
         if (route != player.route()) {
-            genNewEnemy = true
+            genNewEnemy = true;
         }
         if (this.accessToRoute(route, region)) {
             player.route(route);
@@ -23,8 +25,7 @@ class MapHelper {
             }
             App.game.gameState = GameConstants.GameState.fighting;
             GameController.applyRouteBindings();
-        }
-        else {
+        } else {
           	let reqsList = '';
 
           	if (!MapHelper.hasBadgeReq(route, region)) {
@@ -79,7 +80,7 @@ class MapHelper {
         for (let i = 0; i < reqList.length; i++) {
             const route: number = reqList[i];
             if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
-                return false
+                return false;
             }
         }
         return true;
@@ -94,15 +95,13 @@ class MapHelper {
 
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
-        }
-        else if (MapHelper.accessToRoute(route, region)) {
+        } else if (MapHelper.accessToRoute(route, region)) {
             if (player.routeKillsObservable(route)() >= player.routeKillsNeeded) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
             }
-        }
-        else {
+        } else {
             cls = 'lockedRoute';
         }
 
@@ -111,7 +110,7 @@ class MapHelper {
             cls = `${cls} waterRoute`;
         }
 
-        return cls
+        return cls;
     }
 
     public static calculateTownCssClass(town: string): string {
@@ -125,21 +124,23 @@ class MapHelper {
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
                 if (player.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
-                    return 'dungeon completedDungeon'
+                    return 'dungeon completedDungeon';
                 }
-                return 'dungeon unlockedDungeon'
+                return 'dungeon unlockedDungeon';
             }
             return 'city unlockedTown';
         }
         if (dungeonList.hasOwnProperty(town)) {
-            return 'dungeon'
+            return 'dungeon';
         }
         return 'city';
     }
 
     public static accessToTown(townName: string): boolean {
         const town = TownList[townName];
-        if (!town) return false;
+        if (!town) {
+            return false;
+        }
         return town.isUnlocked();
     };
 
@@ -197,7 +198,9 @@ class MapHelper {
     }
 
     public static openShipModal() {
-        const openModal = () => {$('#ShipModal').modal('show');}
+        const openModal = () => {
+            $('#ShipModal').modal('show');
+        };
         switch (player.region) {
             case 0:
                 if (TownList['Vermillion City'].isUnlocked() && player.highestRegion() > 0) {
@@ -215,7 +218,7 @@ class MapHelper {
                     return;
                 }
         }
-        Notifier.notify('You cannot access this dock yet', GameConstants.NotificationOption.warning)
+        Notifier.notify('You cannot access this dock yet', GameConstants.NotificationOption.warning);
     }
 
     public static ableToTravel() {
