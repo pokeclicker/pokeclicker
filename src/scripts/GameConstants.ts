@@ -274,7 +274,7 @@ namespace GameConstants {
     }
 
     export function randomElement(array: any[]) {
-        return array[GameConstants.randomIntBetween(0, array.length - 1)]
+        return array[GameConstants.randomIntBetween(0, array.length - 1)];
     }
 
     export function clipNumber(num: number, min: number, max: number) {
