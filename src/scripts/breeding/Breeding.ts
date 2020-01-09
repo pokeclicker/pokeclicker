@@ -161,7 +161,9 @@ class Breeding implements Feature {
             if (App.game.party.caughtPokemon[i].name == egg.pokemon) {
                 const partyPokemon = App.game.party.caughtPokemon[i];
                 if (partyPokemon.breeding) {
-                    partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
+                    if (partyPokemon.evolutions !== undefined) {
+                        partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
+                    }
                     partyPokemon.exp = 0;
                     partyPokemon.level = 1;
                     partyPokemon.breeding = false;
