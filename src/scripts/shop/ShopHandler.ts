@@ -40,11 +40,11 @@ class ShopHandler {
         const item: Item = this.shopObservable().items()[ShopHandler.selected()];
         const input = $("input[name='amountOfItems']");
 
-        if (!item || !item.isAvailable()){
+        if (!item || !item.isAvailable()) {
             return input.val(0).change();
         }
         let amt = 1;
-        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)) && amt <= item.maxAmount && amt <= 1e6; amt++){}
+        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)) && amt <= item.maxAmount && amt <= 1e6; amt++) {}
         input.val(--amt).change();
     }
 

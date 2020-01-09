@@ -13,7 +13,7 @@ class Save {
         console.log('Game saved');
     }
 
-    public static getSaveObject(){
+    public static getSaveObject() {
         const saveObject = {};
 
         saveObject[Underground.saveKey] = Underground.save();

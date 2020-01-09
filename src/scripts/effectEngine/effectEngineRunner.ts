@@ -4,9 +4,9 @@ class EffectEngineRunner {
     public static tick() {
         this.counter = 0;
         const timeToReduce = 1;
-        for(const itemName in GameConstants.BattleItemType){
+        for (const itemName in GameConstants.BattleItemType) {
             player.effectList[itemName](Math.max(0, player.effectList[itemName]() - timeToReduce));
-            if (player.effectList[itemName]() == 5){
+            if (player.effectList[itemName]() == 5) {
                 Notifier.notify(`The ${itemName}s effect is about to wear off!`, GameConstants.NotificationOption.warning);
             }
         }
@@ -19,11 +19,11 @@ class EffectEngineRunner {
         return player.effectList[itemName]();
     }
 
-    public static addEffect(itemName: string){
+    public static addEffect(itemName: string) {
         player.effectList[itemName](Math.max(0, player.effectList[itemName]() +  GameConstants.ITEM_USE_TIME));
     }
 
-    public static formattedTimeLeft(itemName: string){
+    public static formattedTimeLeft(itemName: string) {
         return ko.computed(function () {
             const times = GameConstants.formatTime(player.effectList[itemName]()).split(':');
             if (+times[0] > 0) {
