@@ -46,7 +46,7 @@ class PokemonHelper {
 
         const evoLevel = basePokemon['evoLevel'];
         const eggCycles: number = basePokemon['eggCycles'] || 20;
-        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], basePokemon['evolution'], evoLevel, type1, type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles);
+        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], evoLevel, type1, type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles);
     }
 
     public static typeStringToId(id: string) {
