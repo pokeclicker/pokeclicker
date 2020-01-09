@@ -1,9 +1,9 @@
 class MapHelper {
-    public static returnToMap(){
-        if (player.currentTown()){
+    public static returnToMap() {
+        if (player.currentTown()) {
             return this.moveToTown(player.currentTown());
         }
-        if (player.route()){
+        if (player.route()) {
             return this.moveToRoute(player.route(), player.region);
         }
     }
@@ -20,7 +20,7 @@ class MapHelper {
             player.route(route);
             player.region = region;
             player.currentTown('');
-            if (genNewEnemy){
+            if (genNewEnemy) {
                 Battle.generateNewEnemy();
             }
             App.game.gameState = GameConstants.GameState.fighting;

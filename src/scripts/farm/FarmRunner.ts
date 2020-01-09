@@ -17,7 +17,7 @@ class FarmRunner {
         return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
     }
 
-    public static timeToReduce(){
+    public static timeToReduce() {
         // TODO(@Isha) fix when refactoring to feature
         return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 1;
     }
@@ -72,7 +72,7 @@ class FarmRunner {
         for (let i = 0; i < player.plotList.length; i++) {
             total += FarmRunner.harvest(i, true);
         }
-        if (total > 0 ){
+        if (total > 0 ) {
             Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success);
         }
     }
@@ -117,7 +117,7 @@ class FarmRunner {
             FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
             const money = plot.berry().moneyValue;
             App.game.wallet.gainMoney(money);
-            if(!all){
+            if(!all) {
                 Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success);
             }
             plot.berry(null);

@@ -30,12 +30,12 @@ class Dungeon {
     }
 
     public isUnlocked(): boolean {
-        if(!App.game.badgeCase.hasBadge(this.badgeReq)){
+        if(!App.game.badgeCase.hasBadge(this.badgeReq)) {
             Notifier.notify(`You need the ${BadgeCase.Badge[this.badgeReq]} badge to access this dungeon`, GameConstants.NotificationOption.danger);
             return false;
         }
 
-        if(!App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket)){
+        if(!App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket)) {
             Notifier.notify('You need the Dungeon ticket to access dungeons', GameConstants.NotificationOption.danger);
             return false;
         }
