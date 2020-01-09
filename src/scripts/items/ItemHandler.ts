@@ -26,20 +26,20 @@ class ItemHandler {
     }
 
     public static useStones() {
-        if(this.pokemonSelected() == '') {
+        if (this.pokemonSelected() == '') {
             return Notifier.notify('No Pokémon selected', GameConstants.NotificationOption.danger);
         }
         const amountTotal = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
-        if(!amountTotal) {
+        if (!amountTotal) {
             return Notifier.notify(`You don't have any ${this.stoneSelected().replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
         }
 
         let amountUsed = 0;
-        for(let i = 0; i< amountTotal; i++) {
+        for (let i = 0; i< amountTotal; i++) {
             player.itemList[this.stoneSelected()](player.itemList[this.stoneSelected()]()-1);
             amountUsed++;
-            if((ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())) {
+            if ((ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())) {
                 // Stop when a shiny is encountered
                 break;
             }

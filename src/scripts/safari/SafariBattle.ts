@@ -23,7 +23,7 @@ class SafariBattle {
     }
 
     public static throwBall() {
-        if(!SafariBattle.busy) {
+        if (!SafariBattle.busy) {
             SafariBattle.busy = true;
             Safari.balls(Safari.balls()-1);
 
@@ -142,7 +142,7 @@ class SafariBattle {
     }
 
     public static throwBait() {
-        if(!SafariBattle.busy) {
+        if (!SafariBattle.busy) {
             SafariBattle.busy = true;
             SafariBattle.text(`You throw some bait at ${SafariBattle.enemy.name}`);
             SafariBattle.enemy.eating = Math.max(SafariBattle.enemy.eating, Math.floor(Math.random()*5 + 2));
@@ -156,7 +156,7 @@ class SafariBattle {
     }
 
     public static throwRock() {
-        if(!SafariBattle.busy) {
+        if (!SafariBattle.busy) {
             SafariBattle.busy = true;
             SafariBattle.text(`You throw a rock at ${SafariBattle.enemy.name}`);
             SafariBattle.enemy.angry = Math.max(SafariBattle.enemy.angry, Math.floor(Math.random() * 5 + 2));
@@ -205,12 +205,12 @@ class SafariBattle {
     private static enemyTurn() {
         // Enemy turn to flee;
         const random = Math.floor(Math.random()*100);
-        if( random < SafariBattle.enemy.escapeFactor) {
+        if ( random < SafariBattle.enemy.escapeFactor) {
             SafariBattle.text(`${SafariBattle.enemy.name} has fled.`);
             setTimeout(SafariBattle.endBattle, 1000);
-        } else if(SafariBattle.enemy.eating > 0) {
+        } else if (SafariBattle.enemy.eating > 0) {
             SafariBattle.text(`${SafariBattle.enemy.name} is eating.`);
-        } else if(SafariBattle.enemy.angry > 0) {
+        } else if (SafariBattle.enemy.angry > 0) {
             SafariBattle.text(`${SafariBattle.enemy.name} is angry!`);
         } else {
             SafariBattle.text(`${SafariBattle.enemy.name} is watching carefully...`);

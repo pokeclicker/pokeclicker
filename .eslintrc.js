@@ -34,5 +34,6 @@ module.exports = {
     'brace-style': 'error',
     'semi': 'error',
     "space-before-blocks": ["error", "always"],
+    "keyword-spacing": ["error"],
   }
 };

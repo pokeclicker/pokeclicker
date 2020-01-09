@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
 
-        if(GymBattle.gym.badgeReward == BadgeCase.Badge.Soul) {
+        if (GymBattle.gym.badgeReward == BadgeCase.Badge.Soul) {
             App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket);
         }
 
