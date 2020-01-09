@@ -84,7 +84,7 @@ class Party implements Feature {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public calculatePokemonAttack(type1: GameConstants.PokemonType = GameConstants.PokemonType.None, type2: GameConstants.PokemonType = GameConstants.PokemonType.None): number {
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
             let multiplier = 1;
@@ -93,7 +93,7 @@ class Party implements Feature {
                 multiplier = 0.2;
             }
             if (!pokemon.breeding) {
-                if (Battle.enemyPokemon() == null || type1 == GameConstants.PokemonType.None) {
+                if (Battle.enemyPokemon() == null || type1 == PokemonType.None) {
                     attack += pokemon.attack * multiplier;
                 } else {
                     const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
@@ -109,7 +109,7 @@ class Party implements Feature {
         return Math.round(attack);
     }
 
-    public pokemonAttackObservable(type1: GameConstants.PokemonType = GameConstants.PokemonType.None, type2: GameConstants.PokemonType = GameConstants.PokemonType.None): KnockoutComputed<number> {
+    public pokemonAttackObservable(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None): KnockoutComputed<number> {
         return ko.pureComputed(() => {
             return App.game.party.calculatePokemonAttack(type1, type2);
         }).extend({rateLimit: 1000});

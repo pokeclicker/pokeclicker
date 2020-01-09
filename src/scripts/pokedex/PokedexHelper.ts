@@ -7,7 +7,7 @@ class PokedexHelper {
         if (!PokedexHelper.pokemonSeen(pokemon.id)()) {
             return 'grey';
         }
-        if (pokemon.type2 == GameConstants.PokemonType.None) {
+        if (pokemon.type2 == PokemonType.None) {
             return TypeColor[pokemon.type1];
         }
         return `linear-gradient(90deg,${TypeColor[pokemon.type1]} 50%, ${TypeColor[pokemon.type2]} 50%)`;
@@ -28,16 +28,16 @@ class PokedexHelper {
 
     public static populateTypeFilters() {
         let options = $('#pokedex-filter-type1');
-        $.each(GameConstants.PokemonType, function () {
-            if (isNaN(Number(this)) && this != GameConstants.PokemonType.None) {
-                options.append($('<option />').val(GameConstants.PokemonType[this]).text(this));
+        $.each(PokemonType, function () {
+            if (isNaN(Number(this)) && this != PokemonType.None) {
+                options.append($('<option />').val(PokemonType[this]).text(this));
             }
         });
 
         options = $('#pokedex-filter-type2');
-        $.each(GameConstants.PokemonType, function () {
-            if (isNaN(Number(this)) && this != GameConstants.PokemonType.None) {
-                options.append($('<option />').val(GameConstants.PokemonType[this]).text(this));
+        $.each(PokemonType, function () {
+            if (isNaN(Number(this)) && this != PokemonType.None) {
+                options.append($('<option />').val(PokemonType[this]).text(this));
             }
         });
     }
@@ -58,12 +58,12 @@ class PokedexHelper {
                 return false;
             }
             const type1 = parseInt(filter['type1'] || -1);
-            if (type1 != -1 && pokemon.type.indexOf(GameConstants.PokemonType[type1]) == -1) {
+            if (type1 != -1 && pokemon.type.indexOf(PokemonType[type1]) == -1) {
                 return false;
             }
 
             const type2 = parseInt(filter['type2'] || -1);
-            if (type2 != -1 && pokemon.type.indexOf(GameConstants.PokemonType[type2]) == -1) {
+            if (type2 != -1 && pokemon.type.indexOf(PokemonType[type2]) == -1) {
                 return false;
             }
 

@@ -33,13 +33,13 @@ class QuestHelper {
                 return new GainTokensQuest(amount);
             case 'GainShards':
                 const possibleTypes = [
-                    GameConstants.PokemonType.Normal,
-                    GameConstants.PokemonType.Poison,
-                    GameConstants.PokemonType.Water,
-                    GameConstants.PokemonType.Grass,
-                    GameConstants.PokemonType.Flying,
-                    GameConstants.PokemonType.Fire,
-                    GameConstants.PokemonType.Fighting,
+                    PokemonType.Normal,
+                    PokemonType.Poison,
+                    PokemonType.Water,
+                    PokemonType.Grass,
+                    PokemonType.Flying,
+                    PokemonType.Fire,
+                    PokemonType.Fighting,
                 ];
                 const type = SeededRand.fromArray(possibleTypes);
                 amount = SeededRand.intBetween(200, 600);
