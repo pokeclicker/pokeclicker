@@ -8120,7 +8120,7 @@ const pokemonList: {
 
 // TODO move to its own initialize method that gets called on game start.
 pokemonList.forEach(p => {
-    if (p.baby){
+    if (p.baby) {
         p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.evolvedPokemon] = evo.basePokemon);
     }
     pokemonMap[p.name] = p;

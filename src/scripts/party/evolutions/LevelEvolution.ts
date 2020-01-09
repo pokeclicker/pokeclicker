@@ -22,7 +22,7 @@ class LevelEvolution extends Evolution {
         this.triggered = true;
 
         // We have already obtained the evolution
-        if (App.game.party.alreadyCaughtPokemonByName(this.evolvedPokemon)){
+        if (App.game.party.alreadyCaughtPokemonByName(this.evolvedPokemon)) {
             return false;
         }
 
