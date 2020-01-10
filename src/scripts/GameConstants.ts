@@ -500,19 +500,19 @@ namespace GameConstants {
     };
 
     export enum StoneType {
-        None = -1,
-        Fire_stone,
-        Water_stone,
-        Thunder_stone,
-        Leaf_stone,
-        Moon_stone,
-        Sun_stone,
-        Trade_stone,
-        Dragon_scale,
-        Metal_coat,
-        Kings_rock,
-        Upgrade,
-        Time_stone,
+        'None' = -1,
+        'Fire_stone',
+        'Water_stone',
+        'Thunder_stone',
+        'Leaf_stone',
+        'Moon_stone',
+        'Sun_stone',
+        'Trade_stone',
+        'Dragon_scale',
+        'Metal_coat',
+        'Kings_rock',
+        'Upgrade',
+        'Time_stone',
     }
 
     export enum BattleItemType {
@@ -565,14 +565,14 @@ namespace GameConstants {
     }
 
     export enum EggItemType {
-        Fire_egg,
-        Water_egg,
-        Grass_egg,
-        Fighting_egg,
-        Electric_egg,
-        Dragon_egg,
-        Pokemon_egg,
-        Mystery_egg,
+        'Fire_egg',
+        'Water_egg',
+        'Grass_egg',
+        'Fighting_egg',
+        'Electric_egg',
+        'Dragon_egg',
+        'Pokemon_egg',
+        'Mystery_egg',
     }
 
     export enum EggType {
