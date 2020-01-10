@@ -53,7 +53,7 @@ class TypeHelper {
         }
 
         if (a2 != PokemonType.None && d2 != PokemonType.None) {
-            let m4 = TypeHelper.typeMatrix[a2][d2];
+            m4 = TypeHelper.typeMatrix[a2][d2];
             m4 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m4)) * Shards.SHARD_UPGRADE_STEP);
         }
 
