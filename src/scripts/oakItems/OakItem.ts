@@ -3,7 +3,7 @@ class OakItem extends ExpUpgrade {
     defaults = {
         level: 0,
         exp: 0,
-        isActive: false
+        isActive: false,
     };
 
     private _isActive: KnockoutObservable<boolean>;
@@ -23,12 +23,13 @@ class OakItem extends ExpUpgrade {
     }
 
     use(exp: number = this.expGain) {
-        if (this.isMaxLevel() || !this.isActive) {
+        if (!this.isActive) {
             return;
         }
-
+        if (!this.isMaxLevel()) {
+            this.gainExp(exp);
+        }
         GameHelper.incrementObservable(player.statistics.oakItemUses[this.name]);
-        this.gainExp(exp);
     }
 
     calculateBonus(level: number = this.level): number {
@@ -44,22 +45,27 @@ class OakItem extends ExpUpgrade {
 
 
     toJSON(): object {
-        let json = super.toJSON();
-        json["isActive"] = this.isActive;
+        const json = super.toJSON();
+        json['isActive'] = this.isActive;
         return json;
     }
 
     fromJSON(json: object): void {
         super.fromJSON(json);
-        this.isActive = json["isActive"] ?? this.defaults.isActive;
+        this.isActive = json['isActive'] ?? this.defaults.isActive;
     }
 
     // Knockout getters/setters
+    get progressString(): string {
+        const nextLevelExp = this.level === 0 ? this.expList[this.level] : this.expList[this.level] - this.expList[this.level - 1];
+        return `${Math.floor(this.normalizedExp / this.expGain)}/${Math.ceil(nextLevelExp / this.expGain)}`;
+    }
+
     get isActive() {
         return this._isActive();
     }
 
     set isActive(bool: boolean) {
-        this._isActive(bool)
+        this._isActive(bool);
     }
 }

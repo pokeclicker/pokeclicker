@@ -1,26 +1,21 @@
-/**
- * Created by dennis on 26-06-17.
- */
-class DataPokemon implements pokemonInterface {
+class DataPokemon implements PokemonInterface {
     id: number;
     name: string;
     catchRate: number;
-    evolution: any[];
-    evoLevel: any[];
-    type1: GameConstants.PokemonType;
-    type2: GameConstants.PokemonType;
+    evolutions: Evolution[];
+    type1: PokemonType;
+    type2: PokemonType;
     attack: number;
-    levelType: GameConstants.LevelType;
+    levelType: LevelType;
     exp: number;
     eggCycles: number;
     shiny: boolean;
 
-    constructor(id: number, name: string, catchRate: number, evolution: any[], evoLevel: any[], type1: GameConstants.PokemonType, type2: GameConstants.PokemonType, attack: number, levelType: GameConstants.LevelType, exp: number, eggCycles: number) {
+    constructor(id: number, name: string, catchRate: number, evolutions: Evolution[], type1: PokemonType, type2: PokemonType, attack: number, levelType: LevelType, exp: number, eggCycles: number) {
         this.id = id;
         this.name = name;
         this.catchRate = catchRate;
-        this.evolution = evolution;
-        this.evoLevel = evoLevel;
+        this.evolutions = evolutions;
         this.type1 = type1;
         this.type2 = type2;
         this.attack = attack;
@@ -30,24 +25,4 @@ class DataPokemon implements pokemonInterface {
         this.shiny = false;
     }
 
-    public evolutionByIndex(index, filterMaxRegion, returnAllEvolutions = false){
-      if (!this.evolution){
-          return;
-      }
-      let evolutions = this.evolution[index].constructor === Array ? this.evolution[index] : [this.evolution[index]];
-
-      if (filterMaxRegion && player){
-          evolutions = evolutions.filter(p=>PokemonHelper.calcNativeRegion(p) <= player.highestRegion());
-      }
-
-      if (!evolutions.length){
-          return;
-      }
-
-      if (returnAllEvolutions){
-        return evolutions;
-      }
-
-      return evolutions[Math.floor(Math.random() * evolutions.length)];
-    }
 }

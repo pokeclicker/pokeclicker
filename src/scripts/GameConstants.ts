@@ -7,17 +7,17 @@
 namespace GameConstants {
 
     // Ticks
-    export const TICK_TIME = 10;
+    export const TICK_TIME = 100;
     export const BATTLE_TICK = 1000;
     export const UNDERGROUND_TICK = 1000;
     export const DUNGEON_TIME = 6000;
-    export const DUNGEON_TICK = 1;
+    export const DUNGEON_TICK = 10;
     export const EFFECT_ENGINE_TICK = 1000;
     export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
     export const GYM_COUNTDOWN = 1000;
-    export const GYM_TICK = 1;
+    export const GYM_TICK = 10;
     export const ACHIEVEMENT_TICK = 1000;
     export const MIN_LOAD_TIME = 500;
 
@@ -39,9 +39,9 @@ namespace GameConstants {
     export const ROAMING_MAX_CHANCE = 4096;
 
     export const RoamingPokemon = {
-        0: ["Mew"],
-        1: ["Raikou", "Entei", "Suicune"],
-    }
+        0: ['Mew'],
+        1: ['Raikou', 'Entei', 'Suicune'],
+    };
 
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
@@ -107,9 +107,9 @@ namespace GameConstants {
 
     //Safari
     export const Safari = {
-        "SizeY": Math.floor((window.innerHeight - 74 - 50) / 32),
-        "SizeX": 25,
-    }
+        'SizeY': Math.floor((window.innerHeight - 150) / 32),
+        'SizeX': 25,
+    };
 
     export const SAFARI_BATTLE_CHANCE = 5;
 
@@ -131,17 +131,10 @@ namespace GameConstants {
         21,
         22,
         23,
-        24
+        24,
     ];
 
-    export const SAFARI_CATCH_MESSAGES = [
-        "Oh, no!<br>The Pokemon broke free!",
-        "Aww! It appeared to be caught!",
-        "Aargh! Almost had it!",
-        "Shoot! It was so close, too!"
-    ];
-
-    export const SAFARI_OUT_OF_BALLS = "Game Over!<br>You have run out of safari balls to use."
+    export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
 
     //Quests
 
@@ -151,7 +144,7 @@ namespace GameConstants {
     export const DEFEAT_POKEMONS_BASE_REWARD  = questBase * 1;
     export const CAPTURE_POKEMONS_BASE_REWARD = GameConstants.DEFEAT_POKEMONS_BASE_REWARD / 0.8; // Defeat reward divided by chance to catch (guessed)
     export const GAIN_MONEY_BASE_REWARD       = questBase * 0.0017;  // Dimava
-    export const GAIN_TOKENS_BASE_REWARD      = CAPTURE_POKEMONS_BASE_REWARD / 13 // <route number> tokens gained for every capture
+    export const GAIN_TOKENS_BASE_REWARD      = CAPTURE_POKEMONS_BASE_REWARD / 13; // <route number> tokens gained for every capture
     export const HATCH_EGGS_BASE_REWARD       = questBase * 33;      // Dimava
     export const MINE_LAYERS_BASE_REWARD      = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
     export const SHINY_BASE_REWARD            = questBase * 6000;    // Dimava
@@ -160,19 +153,19 @@ namespace GameConstants {
     export const ACTIVE_QUEST_MULTIPLIER      = 4;
 
     export const QuestTypes = [
-        "DefeatPokemons",
-        "CapturePokemons",
-        "GainMoney",
-        "GainTokens",
-        "GainShards",
-        "HatchEggs",
-        "MineLayers",
-        "CatchShinies",
-        "DefeatGym",
-        "DefeatDungeon",
-        "UsePokeball",
-        "UseOakItem",
-        "HarvestBerriesQuest",
+        'DefeatPokemons',
+        'CapturePokemons',
+        'GainMoney',
+        'GainTokens',
+        'GainShards',
+        'HatchEggs',
+        'MineLayers',
+        'CatchShinies',
+        'DefeatGym',
+        'DefeatDungeon',
+        'UsePokeball',
+        'UseOakItem',
+        'HarvestBerriesQuest',
     ];
 
     export const QUESTS_PER_SET = 10;
@@ -198,11 +191,11 @@ namespace GameConstants {
     }
 
     export enum Pokeball {
-        "None" = -1,
-        "Pokeball" = 0,
-        "Greatball" = 1,
-        "Ultraball" = 2,
-        "Masterball" = 3,
+        'None' = -1,
+        'Pokeball' = 0,
+        'Greatball' = 1,
+        'Ultraball' = 2,
+        'Masterball' = 3,
     }
 
     export enum Currency {
@@ -233,23 +226,15 @@ namespace GameConstants {
 
     export function formatTime(time) {
         if (time == 0) {
-            return "Ready"
+            return 'Ready';
         }
-        let sec_num = parseInt('' + time, 10); // don't forget the second param
-        let hours: any = Math.floor(sec_num / 3600);
-        let minutes: any = Math.floor((sec_num - (hours * 3600)) / 60);
-        let seconds: any = sec_num - (hours * 3600) - (minutes * 60);
 
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
-        if (minutes < 10) {
-            minutes = "0" + minutes;
-        }
-        if (seconds < 10) {
-            seconds = "0" + seconds;
-        }
-        return hours + ':' + minutes + ':' + seconds;
+        time = parseInt(`${time}`, 10); // don't forget the second param
+        const hours: any = `${Math.floor(time / 3600)}`.padStart(2, '0');
+        const minutes: any = `${Math.floor((time - (hours * 3600)) / 60)}`.padStart(2, '0');
+        const seconds: any = `${time - (hours * 3600) - (minutes * 60)}`.padStart(2, '0');
+
+        return `${hours}:${minutes}:${seconds}`;
     }
 
     export enum Region {
@@ -263,16 +248,8 @@ namespace GameConstants {
         galar = 7,
     }
 
-    export enum SortOptionsEnum {
-        "id" = 0,
-        "name" = 1,
-        "attack" = 2,
-        "levelObservable" = 3,
-        "shiny" = 4
-    }
-
     export class Option {
-        text: String;
+        text: string;
         value: any;
 
         constructor(text, value) {
@@ -281,13 +258,6 @@ namespace GameConstants {
         }
     }
 
-    export const SortOptions = [
-        new Option("Pokedex #", GameConstants.SortOptionsEnum.id),
-        new Option("Name", GameConstants.SortOptionsEnum.name),
-        new Option("Attack", GameConstants.SortOptionsEnum.attack),
-        new Option("Level", GameConstants.SortOptionsEnum.levelObservable),
-        new Option("Shiny", GameConstants.SortOptionsEnum.shiny),
-    ];
 
     export const RegionRoute = {
         0: [1, 25],
@@ -299,61 +269,35 @@ namespace GameConstants {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
+    export function randomElement(array: any[]) {
+        return array[GameConstants.randomIntBetween(0, array.length - 1)];
+    }
+
     export function clipNumber(num: number, min: number, max: number) {
         return Math.min(Math.max(num, min), max);
     }
 
 
-    export enum PokemonType {
-        "None" = -1,
-        "Normal" = 0,
-        "Fire" = 1,
-        "Water" = 2,
-        "Electric" = 3,
-        "Grass" = 4,
-        "Ice" = 5,
-        "Fighting" = 6,
-        "Poison" = 7,
-        "Ground" = 8,
-        "Flying" = 9,
-        "Psychic" = 10,
-        "Bug" = 11,
-        "Rock" = 12,
-        "Ghost" = 13,
-        "Dragon" = 14,
-        "Dark" = 15,
-        "Steel" = 16,
-        "Fairy" = 17,
-    }
-
-    export enum TypeColor {
-        Normal = "#A8A77A",
-        Fire = "#EE8130",
-        Water = "#6390F0",
-        Electric = "#F7D02C",
-        Grass = "#7AC74C",
-        Ice = "#96D9D6",
-        Fighting = "#C22E28",
-        Poison = "#A33EA1",
-        Ground = "#E2BF65",
-        Flying = "#A98FF3",
-        Psychic = "#F95587",
-        Bug = "#A6B91A",
-        Rock = "#B6A136",
-        Ghost = "#735797",
-        Dragon = "#6F35FC",
-        Dark = "#705746",
-        Steel = "#B7B7CE",
-        Fairy = "#D685AD"
-    }
-
-    export enum LevelType {
-        "slow",
-        "mediumslow",
-        "medium",
-        "mediumfast",
-        "fast"
-    }
+    export const TypeColor = [
+        '#A8A77A', // Normal
+        '#EE8130', // Fire
+        '#6390F0', // Water
+        '#F7D02C', // Electric
+        '#7AC74C', // Grass
+        '#96D9D6', // Ice
+        '#C22E28', // Fighting
+        '#A33EA1', // Poison
+        '#E2BF65', // Ground
+        '#A98FF3', // Flying
+        '#F95587', // Psychic
+        '#A6B91A', // Bug
+        '#B6A136', // Rock
+        '#735797', // Ghost
+        '#6F35FC', // Dragon
+        '#705746', // Dark
+        '#B7B7CE', // Steel
+        '#D685AD', // Fairy
+    ];
 
     // Map navigation
     export const AMOUNT_OF_ROUTES = 134;
@@ -478,80 +422,81 @@ namespace GameConstants {
             120: BadgeCase.Badge.Feather,
             126: BadgeCase.Badge.Mind,
             127: BadgeCase.Badge.Rain,
-        }
+        },
     };
 
     export const WaterRoutes = {
         0: new Set([19,20,21]),
         1: new Set([40,41]),
-        2: new Set([105,106,107,108,109,122,124,125,126,127,128,129,130,131,132,133,134])
-    }
+        2: new Set([105,106,107,108,109,122,124,125,126,127,128,129,130,131,132,133,134]),
+    };
 
     export const routeDungeonRequirements = {
         0: {
-            4: "Mt. Moon",
-            20: "Seafoam Islands",
+            4: 'Mt. Moon',
+            20: 'Seafoam Islands',
         },
         1: {
-            33: "Union Cave",
-            34: "Ilex Forest"
+            33: 'Union Cave',
+            34: 'Ilex Forest',
         },
         2: {
-            116: "Petalburg Woods",
-            110: "Granite Cave",
-            113: "Fiery Path",
-            115: "Meteor Falls",
-            112: "Jagged Pass",
-            124: "Mt. Pyre",
-            128: "Seafloor Cavern",
-        }
-    }
+            116: 'Petalburg Woods',
+            110: 'Granite Cave',
+            113: 'Fiery Path',
+            115: 'Meteor Falls',
+            112: 'Jagged Pass',
+            124: 'Mt. Pyre',
+            128: 'Seafloor Cavern',
+        },
+    };
 
     export enum Starter {
-        "None" = -1,
-        "Bulbasaur" = 0,
-        "Charmander" = 1,
-        "Squirtle" = 2,
+        'None' = -1,
+        'Bulbasaur' = 0,
+        'Charmander' = 1,
+        'Squirtle' = 2,
     }
 
     export const ItemPrice = {
         // Money
-        "Pokeball": 100,
-        "Greatball": 500,
-        "Ultraball": 2000,
-        "Masterball": 2500,
+        'Pokeball': 100,
+        'Greatball': 500,
+        'Ultraball': 2000,
+        'Masterball': 2500,
 
-        "xAttack": 600,
-        "xClick": 400,
-        "xExp": 800,
-        "Token_collector": 1000,
-        "Item_magnet": 1500,
-        "Lucky_incense": 2000,
+        'xAttack': 600,
+        'xClick': 400,
+        'xExp': 800,
+        'Token_collector': 1000,
+        'Item_magnet': 1500,
+        'Lucky_incense': 2000,
 
-        "SmallRestore": 20000,
-        "MediumRestore": 40000,
-        "LargeRestore": 100000,
+        'SmallRestore': 20000,
+        'MediumRestore': 40000,
+        'LargeRestore': 100000,
 
-        "PokeBlock": Infinity,
+        'PokeBlock': Infinity,
 
-        "Protein": Infinity,
-        "RareCandy": Infinity,
+        'Protein': Infinity,
+        'RareCandy': Infinity,
 
         // Quest points
-        "Eevee": 5000,
-        "Porygon": 2000,
-        "Jynx": 2500,
-        "Mr. Mime": 1500,
-        "Lickitung": 1000,
-        "Togepi": 2500,
+        'Eevee': 5000,
+        'Porygon': 2000,
+        'Jynx': 2500,
+        'Mr. Mime': 1500,
+        'Lickitung': 1000,
+        'Togepi': 2500,
 
         // TODO: Set prices for different kinds of eggs and stones
-        "Egg": 1000,
-        "EvolutionStone": 2500,
+        'Egg': 1000,
+        'EvolutionStone': 2500,
 
     };
 
     export enum StoneType {
+        None = -1,
         Fire_stone,
         Water_stone,
         Thunder_stone,
@@ -567,21 +512,21 @@ namespace GameConstants {
     }
 
     export enum BattleItemType {
-        xAttack = "xAttack",
-        xClick = "xClick",
-        xExp = "xExp",
-        Token_collector = "Token_collector",
-        Item_magnet = "Item_magnet",
-        Lucky_incense = "Lucky_incense"
+        xAttack = 'xAttack',
+        xClick = 'xClick',
+        xExp = 'xExp',
+        Token_collector = 'Token_collector',
+        Item_magnet = 'Item_magnet',
+        Lucky_incense = 'Lucky_incense'
     }
 
     export enum PokemonItemType {
-        "Eevee",
-        "Porygon",
-        "Jynx",
-        "Mr. Mime",
-        "Lickitung",
-        "Togepi",
+        'Eevee',
+        'Porygon',
+        'Jynx',
+        'Mr. Mime',
+        'Lickitung',
+        'Togepi',
     }
 
     export enum BerryType {
@@ -642,132 +587,132 @@ namespace GameConstants {
         SmallRestore: 0.1,
         MediumRestore: 0.2,
         LargeRestore: 0.5,
-    }
+    };
 
     export const KeyToDirection = {
-        37: "left",
-        38: "up",
-        39: "right",
-        40: "down",
-        65: "left", //a
-        68: "right", //d
-        83: "down", //s
-        87: "up", //w
-    }
+        37: 'left',
+        38: 'up',
+        39: 'right',
+        40: 'down',
+        65: 'left', //a
+        68: 'right', //d
+        83: 'down', //s
+        87: 'up', //w
+    };
 
     export const FossilToPokemon = {
-        "Helix Fossil": "Omanyte",
-        "Dome Fossil": "Kabuto",
-        "Old Amber": "Aerodactyl",
-    }
+        'Helix Fossil': 'Omanyte',
+        'Dome Fossil': 'Kabuto',
+        'Old Amber': 'Aerodactyl',
+    };
 
     //Used for image name
     export const PokemonToFossil = {
-        "Omanyte": "helix",
-        "Kabuto": "dome",
-        "Aerodactyl": "amber",
+        'Omanyte': 'helix',
+        'Kabuto': 'dome',
+        'Aerodactyl': 'amber',
 
-    }
+    };
 
     // For random quest, name matches entry in gymList (created in Gym.ts)
     export const KantoGyms = [
-        "Pewter City",
-        "Cerulean City",
-        "Vermillion City",
-        "Celadon City",
-        "Saffron City",
-        "Fuchsia City",
-        "Cinnabar Island",
-        "Viridian City",
-        "Elite Lorelei",
-        "Elite Bruno",
-        "Elite Agatha",
-        "Elite Lance",
-        "Champion Blue",
+        'Pewter City',
+        'Cerulean City',
+        'Vermillion City',
+        'Celadon City',
+        'Saffron City',
+        'Fuchsia City',
+        'Cinnabar Island',
+        'Viridian City',
+        'Elite Lorelei',
+        'Elite Bruno',
+        'Elite Agatha',
+        'Elite Lance',
+        'Champion Blue',
     ];
 
     export const JohtoGyms = [
-        "Violet City",
-        "Azalea Town",
-        "Goldenrod City",
-        "Ecruteak City",
-        "Cianwood City",
-        "Olivine City",
-        "Mahogany Town",
-        "Blackthorn City",
-        "Elite Will",
-        "Elite Koga",
-        "Elite Bruno2",
-        "Elite Karen",
-        "Champion Lance"
+        'Violet City',
+        'Azalea Town',
+        'Goldenrod City',
+        'Ecruteak City',
+        'Cianwood City',
+        'Olivine City',
+        'Mahogany Town',
+        'Blackthorn City',
+        'Elite Will',
+        'Elite Koga',
+        'Elite Bruno2',
+        'Elite Karen',
+        'Champion Lance',
     ];
 
     export const HoennGyms = [
-        "Rustboro City",
-        "Dewford Town",
-        "Mauville City",
-        "Lavaridge Town",
-        "Petalburg City",
-        "Fortree City",
-        "Mossdeep City",
-        "Sootopolis City",
-        "Elite Sidney",
-        "Elite Phoebe",
-        "Elite Glacia",
-        "Elite Drake",
-        "Champion Wallace"
+        'Rustboro City',
+        'Dewford Town',
+        'Mauville City',
+        'Lavaridge Town',
+        'Petalburg City',
+        'Fortree City',
+        'Mossdeep City',
+        'Sootopolis City',
+        'Elite Sidney',
+        'Elite Phoebe',
+        'Elite Glacia',
+        'Elite Drake',
+        'Champion Wallace',
     ];
 
     export const RegionGyms = [
-      KantoGyms,
-      JohtoGyms,
-      HoennGyms,
+        KantoGyms,
+        JohtoGyms,
+        HoennGyms,
     ];
 
     export const KantoDungeons = [
-        "Viridian Forest",
-        "Digletts Cave",
-        "Mt. Moon",
-        "Rock Tunnel",
-        "Power Plant",
-        "Pokemon Tower",
-        "Seafoam Islands",
-        "Pokemon Mansion",
-        "Victory Road",
-        "Cerulean Cave"
+        'Viridian Forest',
+        'Digletts Cave',
+        'Mt. Moon',
+        'Rock Tunnel',
+        'Power Plant',
+        'Pokemon Tower',
+        'Seafoam Islands',
+        'Pokemon Mansion',
+        'Victory Road',
+        'Cerulean Cave',
     ];
 
     export const JohtoDungeons = [
-        "Sprout Tower",
-        "Ruins of Alph",
-        "Union Cave",
-        "Slowpoke Well",
-        "Ilex Forest",
-        "Burned Tower",
-        "Tin Tower",
-        "Whirl Islands",
-        "Mt Mortar",
-        "Ice Path",
-        "Dark Cave",
-        "Mt Silver"
+        'Sprout Tower',
+        'Ruins of Alph',
+        'Union Cave',
+        'Slowpoke Well',
+        'Ilex Forest',
+        'Burned Tower',
+        'Tin Tower',
+        'Whirl Islands',
+        'Mt Mortar',
+        'Ice Path',
+        'Dark Cave',
+        'Mt Silver',
     ];
 
     export const HoennDungeons = [
-        "Rusturf Tunnel",
-        "Granite Cave",
-        "Jagged Pass",
-        "Fiery Path",
-        "Mt. Chimney",
-        "Meteor Falls",
-        "Mt. Pyre",
-        "Shoal Cave",
-        "Seafloor Cavern",
-        "Cave of Origin",
-        "Sky Pillar",
-        "Victory Road Hoenn",
-        "Petalburg Woods",
-        "New Mauville",
-        "Sea Mauville",
+        'Rusturf Tunnel',
+        'Granite Cave',
+        'Jagged Pass',
+        'Fiery Path',
+        'Mt. Chimney',
+        'Meteor Falls',
+        'Mt. Pyre',
+        'Shoal Cave',
+        'Seafloor Cavern',
+        'Cave of Origin',
+        'Sky Pillar',
+        'Victory Road Hoenn',
+        'Petalburg Woods',
+        'New Mauville',
+        'Sea Mauville',
         // These aren't implemented anywhere yet
         /*
         "Island Cave",
@@ -800,14 +745,14 @@ namespace GameConstants {
     ];
 
     export const RegionDungeons = [
-      KantoDungeons,
-      JohtoDungeons,
-      HoennDungeons,
+        KantoDungeons,
+        JohtoDungeons,
+        HoennDungeons,
     ];
 
     export const StartingTowns = [
-        "Pallet Town",
-        "New Bark Town",
-        "Littleroot Town",
+        'Pallet Town',
+        'New Bark Town',
+        'Littleroot Town',
     ];
 }

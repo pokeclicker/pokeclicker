@@ -4,7 +4,7 @@
 class Game {
     interval;
     undergroundCounter: number;
-    public static achievementCounter: number = 0;
+    public static achievementCounter = 0;
 
     public breeding: Breeding;
     public pokeballs: Pokeballs;
@@ -12,6 +12,7 @@ class Game {
     public keyItems: KeyItems;
     public badgeCase: BadgeCase;
     public oakItems: OakItems;
+    public party: Party;
     public shards: Shards;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
@@ -26,6 +27,7 @@ class Game {
         keyItems: KeyItems,
         badgeCase: BadgeCase,
         oakItems: OakItems,
+        party: Party,
         shards: Shards
     ) {
         this.breeding = breeding;
@@ -34,6 +36,7 @@ class Game {
         this.keyItems = keyItems;
         this.badgeCase = badgeCase;
         this.oakItems = oakItems;
+        this.party = party;
         this.shards = shards;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
@@ -46,15 +49,16 @@ class Game {
 
     load() {
         // TODO(@Isha) Refactor this saving logic
-        let saveJSON = localStorage.getItem("save");
+        const saveJSON = localStorage.getItem('save');
         if (saveJSON !== null) {
-            let saveObject = JSON.parse(saveJSON);
+            const saveObject = JSON.parse(saveJSON);
             this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
             this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
             this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
             this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
             this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
             this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
+            this.party.fromJSON(saveObject[this.party.saveKey]);
             this.shards.fromJSON(saveObject[this.shards.saveKey]);
         }
     }
@@ -67,7 +71,7 @@ class Game {
 
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();
-        Safari.load();
+        //Safari.load();
         Save.loadMine();
         Underground.energyTick(Underground.getEnergyRegenTime());
         DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
@@ -78,13 +82,13 @@ class Game {
             QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
         }
 
-        this.gameState = GameConstants.GameState.fighting
+        this.gameState = GameConstants.GameState.fighting;
     }
 
     start() {
-        console.log("game started");
+        console.log('game started');
         if (player.starter === GameConstants.Starter.None) {
-            StartSequenceRunner.start()
+            StartSequenceRunner.start();
         }
         this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
     }
@@ -134,7 +138,7 @@ class Game {
         }
 
         if (Save.counter > GameConstants.SAVE_TICK) {
-            let now = new Date();
+            const now = new Date();
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
                 player.questRefreshes = 0;
                 QuestHelper.quitAllQuests();
@@ -175,10 +179,10 @@ class Game {
 
     // Knockout getters/setters
     get gameState() {
-        return this._gameState()
+        return this._gameState();
     }
 
     set gameState(value) {
-        this._gameState(value)
+        this._gameState(value);
     }
 }

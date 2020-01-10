@@ -11,12 +11,12 @@ class StartSequenceRunner {
     public static pickStarter(s: GameConstants.Starter) {
         this.starterPicked = s;
         $('#pickStarterModal').modal('hide');
-        let dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
-        let shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);
+        const shiny: boolean = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
 
         App.game.gameState = GameConstants.GameState.fighting;
 
-        let battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, 0, shiny);
+        const battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, 0, shiny);
         Battle.enemyPokemon(battlePokemon);
         // Set the function to call showCaughtMessage after pokemon is caught
         battlePokemon.isAlive = function () {
@@ -24,14 +24,14 @@ class StartSequenceRunner {
                 setTimeout(
                     function () {
                         player.starter = StartSequenceRunner.starterPicked;
-                        StartSequenceRunner.showCaughtMessage()
+                        StartSequenceRunner.showCaughtMessage();
                     }, 1000);
 
                 //reset the function so you don't call it too many times :)
                 //What a beautiful piece of code
                 battlePokemon.isAlive = function () {
                     return false;
-                }
+                };
             }
             return this.health() > 0;
         };
@@ -47,7 +47,7 @@ class StartSequenceRunner {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function (event) {
+document.addEventListener('DOMContentLoaded', function (event) {
 
     $('#startSequenceModal').on('hidden.bs.modal', function () {
         $('#pickStarterModal').modal('show');

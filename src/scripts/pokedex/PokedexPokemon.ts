@@ -1,13 +1,13 @@
-class PokedexPokemon implements pokemonInterface {
+class PokedexPokemon implements PokemonInterface {
     name: string;
     id: number;
-    type1: GameConstants.PokemonType;
-    type2: GameConstants.PokemonType;
+    type1: PokemonType;
+    type2: PokemonType;
     kills: number;
     catches: number;
     shiny: boolean;
 
-    constructor(name: string, id: number, type1: GameConstants.PokemonType, type2: GameConstants.PokemonType, kills: number, catches: number, shiny: boolean) {
+    constructor(name: string, id: number, type1: PokemonType, type2: PokemonType, kills: number, catches: number, shiny: boolean) {
         this.name = name;
         this.id = id;
         this.type1 = type1;

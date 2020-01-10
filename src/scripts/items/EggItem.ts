@@ -3,8 +3,8 @@ class EggItem extends Item {
     type: GameConstants.EggItemType;
 
     constructor(type: GameConstants.EggItemType, price: number = GameConstants.ItemPrice.Egg) {
-        let basePrice = price;
-        let priceMultiplier = 1;
+        const basePrice = price;
+        const priceMultiplier = 1;
         super(GameConstants.EggItemType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
         this.type = type;
     }
@@ -21,7 +21,7 @@ class EggItem extends Item {
         if (this.type === GameConstants.EggItemType.Mystery_egg) {
             success = App.game.breeding.gainRandomEgg();
         } else {
-            let etype = GameConstants.EggType[GameConstants.EggItemType[this.type].split("_")[0]];
+            const etype = GameConstants.EggType[GameConstants.EggItemType[this.type].split('_')[0]];
             success = App.game.breeding.gainEgg(App.game.breeding.createTypedEgg(etype));
         }
 

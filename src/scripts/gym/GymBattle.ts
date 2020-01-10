@@ -10,13 +10,13 @@ class GymBattle extends Battle {
      */
     public static defeatPokemon() {
         App.game.wallet.gainMoney(this.enemyPokemon().money);
-        player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(this.gym.badgeReq * 3 + 1)));
         this.gainShardsAfterBattle();
         this.index(this.index() + 1);
 
         if (this.index() >= this.gym.pokemons.length) {
-            GymRunner.gymWon(this.gym)
+            GymRunner.gymWon(this.gym);
         } else {
             this.generateNewEnemy();
         }

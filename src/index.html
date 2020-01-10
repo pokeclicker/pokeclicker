@@ -6,15 +6,15 @@
     <meta charset="utf-8"/>
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
-        <tr data-bind='ifnot: $data.breeding()'>
+        <tr data-bind='ifnot: $data.breeding'>
             <td class="text-nowrap">
                 <img class="smallImage"
-                     data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
+                     data-bind="attr:{ src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"
                      src=""/>
-                <span data-bind="text: name">Name</span><sup data-bind="visible: player.alreadyCaughtPokemonShiny(name)">✨</sup>
+                <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
             </td>
             <td data-bind="text: attack">Atk</td>
-            <td data-bind="text: levelObservable">Lvl</td>
+            <td data-bind="text: level">Lvl</td>
         </tr>
     </script>
 
@@ -143,6 +143,7 @@
 
 <!--Templates -->
 @import "templates/currencyTemplate.html"
+@import "templates/caughtStatusTemplate.html"
 
 <div class="container">
     <div class="row justify-content-center">
@@ -229,17 +230,7 @@
 
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span>
 
-                            <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                            <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
-                                <img title="You have captured this Pokémon!" class="pokeball-smallest"
-                                     src="assets/images/pokeball/Pokeball-small.png"/>
-                            </span>
-
-                            <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                            <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
-                                <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
-                                     src="assets/images/pokeball/Pokeball-shiny-small.png"/>
-                            </span>
+                            <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></span>
 
                             <div>
                                 <div data-bind="ifnot: Battle.catching">
@@ -299,19 +290,7 @@
 
                             <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
-
-                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                                <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
-                                    <img title="You have captured this Pokémon!" class="pokeball-smallest"
-                                         src="assets/images/pokeball/Pokeball-small.png"/>
-                                </span>
-
-                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                                <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
-                                    <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
-                                         src="assets/images/pokeball/Pokeball-shiny-small.png"/>
-                                </span>
-
+                                <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></span>
                                 <div>
                                     <div data-bind="ifnot: DungeonBattle.catching">
                                         <img id="dungeonEnemy"
@@ -364,12 +343,12 @@
                         <tr>
                             <td width="50%">
                               <span style="display: inline;">Pokémon Attack:
-                                  <span data-bind="text: player.pokemonAttackObservable().toLocaleString('en-US')"></span>
+                                  <span data-bind="text: App.game.party.pokemonAttackObservable()().toLocaleString('en-US')"></span>
                               </span>
                             </td>
                             <td width="50%">
                               <span style="display: inline;">Click Attack:
-                                  <span data-bind="text: player.clickAttackObservable().toLocaleString('en-US')"></span>
+                                  <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                               </span>
                             </td>
                         </tr>

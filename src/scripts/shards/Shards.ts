@@ -3,7 +3,7 @@ class Shards implements Feature {
     saveKey: string = "shards";
 
     public static readonly nTypes: number = 
-        GameHelper.enumLength(GameConstants.PokemonType) - 1;
+        GameHelper.enumLength(PokemonType) - 1;
     public static readonly nEffects: number = 
         GameHelper.enumLength(GameConstants.TypeEffectiveness);
 
@@ -21,8 +21,8 @@ class Shards implements Feature {
         this.shardUpgrades = new ArrayOfObservables(this.defaults.shardUpgrades);
     }
 
-    public gainShards(amt: number, typeNum: GameConstants.PokemonType) {
-        if (!this.canAccess()) {
+    public gainShards(amt: number, typeNum: PokemonType) {
+        if (!this.canAccess() || typeNum == PokemonType.None) {
             return;
         }
         this.shardWallet[typeNum] += amt;
@@ -33,7 +33,7 @@ class Shards implements Feature {
     }
 
     public getShardUpgradeCost(
-        typeNum: GameConstants.PokemonType, 
+        typeNum: PokemonType, 
         effectNum: GameConstants.TypeEffectiveness
     ): number {
         let cost = (this.getShardUpgrade(typeNum, effectNum) + 1) * Shards.SHARD_UPGRADE_COST;
@@ -41,15 +41,15 @@ class Shards implements Feature {
     }
 
     public hasMaxUpgrade(
-        typeNum: GameConstants.PokemonType, 
+        typeNum: PokemonType, 
         effectNum: GameConstants.TypeEffectiveness
     ): boolean {
         return this.getShardUpgrade(typeNum, effectNum) >= Shards.MAX_SHARD_UPGRADES;
     }
 
     public canBuyShardUpgrade(
-            typeNum: GameConstants.PokemonType, 
-            effectNum: GameConstants.TypeEffectiveness
+        typeNum: PokemonType, 
+        effectNum: GameConstants.TypeEffectiveness
     ): boolean {  
         let lessThanMax = !this.hasMaxUpgrade(typeNum, effectNum);
         let hasEnoughShards = this.shardWallet[typeNum] >= this.getShardUpgradeCost(typeNum, effectNum);
@@ -57,7 +57,7 @@ class Shards implements Feature {
     }
 
     public buyShardUpgrade(
-        typeNum: GameConstants.PokemonType, 
+        typeNum: PokemonType, 
         effectNum: GameConstants.TypeEffectiveness
     ) {
         if (this.canBuyShardUpgrade(typeNum, effectNum)) {
@@ -67,9 +67,9 @@ class Shards implements Feature {
     }
 
     public getShardUpgrade(
-        typeNum: GameConstants.PokemonType, 
+        typeNum: PokemonType, 
         effectNum: GameConstants.TypeEffectiveness
-    ) {
+    ): number {
         return this.shardUpgrades[typeNum * Shards.nEffects + effectNum];
     }
 

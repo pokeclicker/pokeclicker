@@ -3,8 +3,8 @@ class PokemonItem extends Item {
     type: GameConstants.PokemonItemType;
 
     constructor(pokemon: GameConstants.PokemonItemType) {
-        let basePrice = GameConstants.ItemPrice[GameConstants.PokemonItemType[pokemon]];
-        let priceMultiplier = 1;
+        const basePrice = GameConstants.ItemPrice[GameConstants.PokemonItemType[pokemon]];
+        const priceMultiplier = 1;
         super(GameConstants.PokemonItemType[pokemon], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
         this.type = pokemon;
     }
@@ -12,8 +12,10 @@ class PokemonItem extends Item {
     gain() {
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
         const pokemonName = this.name();
-        if (shiny) Notifier.notify(`✨ You obtained a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
-        player.capturePokemon(pokemonName, shiny);
+        if (shiny) {
+            Notifier.notify(`✨ You obtained a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
+        }
+        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny);
     }
 
     use() {

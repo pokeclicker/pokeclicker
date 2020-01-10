@@ -6,7 +6,7 @@
 class Battle {
     static enemyPokemon: KnockoutObservable<BattlePokemon> = ko.observable(null);
 
-    static counter: number = 0;
+    static counter = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static catchRateActual: KnockoutObservable<number> = ko.observable(null);
     static pokeball: KnockoutObservable<GameConstants.Pokeball>;
@@ -23,10 +23,10 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
-        if (!this.enemyPokemon().isAlive()) {
+        if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
-        this.enemyPokemon().damage(player.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
+        this.enemyPokemon().damage(App.game.party.calculatePokemonAttack(this.enemyPokemon().type1, this.enemyPokemon().type2));
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
@@ -36,12 +36,12 @@ class Battle {
      * Attacks with clicks and checks if the enemy is defeated.
      */
     public static clickAttack() {
-        if (!this.enemyPokemon().isAlive()) {
+        if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
         App.game.oakItems.use(OakItems.OakItem.Poison_Barb);
-        GameHelper.incrementObservable(player.statistics.clicks)
-        this.enemyPokemon().damage(player.calculateClickAttack());
+        GameHelper.incrementObservable(player.statistics.clicks);
+        this.enemyPokemon().damage(App.game.party.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }
@@ -53,13 +53,12 @@ class Battle {
     public static defeatPokemon() {
         GameHelper.incrementObservable(player.statistics.pokemonDefeated);
         App.game.wallet.gainMoney(this.enemyPokemon().money);
-        player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         this.gainShardsAfterBattle();
         player.addRouteKill();
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
-        const pokemonName: string = this.enemyPokemon().name;
         const isShiny: boolean = this.enemyPokemon().shiny;
-        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(pokemonName, isShiny);
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(pokeBall);
@@ -82,14 +81,16 @@ class Battle {
 
     protected static gainShardsAfterBattle() {
         let pokemon: BattlePokemon = this.enemyPokemon();
+        App.game.shards.gainShards(pokemon.shardReward, pokemon.type1);
+        App.game.shards.gainShards(pokemon.shardReward, pokemon.type2);
 
-        let typeNum = GameConstants.PokemonType[pokemon.type1];
-        App.game.shards.gainShards(pokemon.shardReward, typeNum);
+        // let typeNum = GameConstants.PokemonType[pokemon.type1];
+        // App.game.shards.gainShards(pokemon.shardReward, typeNum);
 
-        if (pokemon.type2 != GameConstants.PokemonType.None) {
-            typeNum = GameConstants.PokemonType[pokemon.type2];
-            App.game.shards.gainShards(pokemon.shardReward, typeNum);
-        }
+        // if (pokemon.type2 != GameConstants.PokemonType.None) {
+        //     typeNum = GameConstants.PokemonType[pokemon.type2];
+        //     App.game.shards.gainShards(pokemon.shardReward, typeNum);
+        // }
     }
 
     /**
@@ -102,9 +103,9 @@ class Battle {
     }
 
     protected static calculateActualCatchRate(pokeBall: GameConstants.Pokeball) {
-        let pokeballBonus = App.game.pokeballs.getCatchBonus(pokeBall);
-        let oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
-        let totalChance = GameConstants.clipNumber(this.enemyPokemon().catchRate + pokeballBonus + oakBonus, 0, 100);
+        const pokeballBonus = App.game.pokeballs.getCatchBonus(pokeBall);
+        const oakBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Magic_Ball);
+        const totalChance = GameConstants.clipNumber(this.enemyPokemon().catchRate + pokeballBonus + oakBonus, 0, 100);
         return totalChance;
     }
 
@@ -116,7 +117,11 @@ class Battle {
     }
 
     protected static attemptCatch() {
-        let random: number = Math.floor(Math.random() * 100);
+        if (this.enemyPokemon() == null) {
+            this.catching(false);
+            return;
+        }
+        const random: number = Math.floor(Math.random() * 100);
         if (random <= this.catchRateActual()) {
             this.catchPokemon();
         }
@@ -125,15 +130,16 @@ class Battle {
     }
 
     public static catchPokemon() {
-        App.game.wallet.gainDungeonTokens(Math.floor(this.enemyPokemon().level / 2));
-        player.capturePokemon(this.enemyPokemon().name, this.enemyPokemon().shiny);
+        App.game.wallet.gainDungeonTokens(6 * Math.pow(this.enemyPokemon().level / 3, 1.05));
+        App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
+        App.game.party.gainPokemonById(this.enemyPokemon().id, this.enemyPokemon().shiny);
     }
 
     static gainItem() {
-        let p = player.route() / 1600 + 0.009375;
+        const p = player.route() / 1600 + 0.009375;
 
         if (Math.random() < p) {
-            player.getRandomBerry()
+            player.getRandomBerry();
         }
     }
 

@@ -1,10 +1,7 @@
-/**
- * Created by dennis on 26-06-17.
- */
-interface pokemonInterface {
+interface PokemonInterface {
     name: string;
     id: number;
-    type1: PokemonTypes;
-    type2: PokemonTypes;
+    type1: PokemonType;
+    type2: PokemonType;
     shiny?: boolean;
 }

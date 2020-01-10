@@ -90,7 +90,7 @@ data-bind="visible: App.game.oakItems.canAccess()">
             <!-- /ko -->
             <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
             <div style="min-height:80px; vertical-align: center">
-                Capture <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].unlockReq - player.caughtPokemonList.length"></span> more unique Pokémon to
+                Capture <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].unlockReq - App.game.party.caughtPokemon.length"></span> more unique Pokémon to
                 unlock!
             </div>
             <!-- /ko -->

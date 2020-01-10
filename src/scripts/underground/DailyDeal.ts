@@ -25,7 +25,7 @@ class DailyDeal {
         SeededRand.seedWithDate(date);
 
         for (let i = 0; i < maxDeals; i++) {
-            let deal = new DailyDeal();
+            const deal = new DailyDeal();
             if (deal.isValid()) {
                 DailyDeal.list.push(deal);
             }
@@ -33,11 +33,11 @@ class DailyDeal {
     }
 
     private isValid(): boolean {
-        return ( (this.item1.name !== this.item2.name) && !DailyDeal.reverseDealExists(this.item1.name, this.item2.name) && !this.item1.isStone() )
+        return ( (this.item1.name !== this.item2.name) && !DailyDeal.reverseDealExists(this.item1.name, this.item2.name) && !this.item1.isStone() );
     }
 
     private static reverseDealExists(name1: string, name2: string): boolean {
-        for (let deal of DailyDeal.list) {
+        for (const deal of DailyDeal.list) {
             if (deal.item2.name == name1) {
                 if (deal.item1.name == name2) {
                     return true;
@@ -50,21 +50,21 @@ class DailyDeal {
     }
 
     public static canUse(i): boolean {
-        let deal = DailyDeal.list[i];
-        let index = player.mineInventoryIndex(deal.item1.id);
+        const deal = DailyDeal.list[i];
+        const index = player.mineInventoryIndex(deal.item1.id);
         if (index > -1) {
-            return player._mineInventory()[index].amount() >= deal.amount1;
+            return player.mineInventory[index].amount() >= deal.amount1;
         } else {
-            return false
+            return false;
         }
     }
 
     public static use(i) {
-        let deal = DailyDeal.list[i];
-        let item1Index = player.mineInventoryIndex(deal.item1.id);
+        const deal = DailyDeal.list[i];
+        const item1Index = player.mineInventoryIndex(deal.item1.id);
         if (DailyDeal.canUse(i)) {
-            let amt = player._mineInventory()[item1Index].amount();
-            player._mineInventory()[item1Index].amount(amt - deal.amount1);
+            const amt = player.mineInventory[item1Index].amount();
+            player.mineInventory[item1Index].amount(amt - deal.amount1);
             Underground.gainMineItem(deal.item2.id, deal.amount2);
             //player._statistics.dailyDealsUsed(player._statistics.dailyDealsUsed()+1);
         }

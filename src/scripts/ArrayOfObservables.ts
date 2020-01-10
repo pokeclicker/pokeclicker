@@ -5,7 +5,7 @@ class ArrayOfObservables<T> extends Array<T> implements Array<T> {
     constructor(protected array: T[]) {
         super();
         this._array = this.array.map((el) => {
-            return ko.observable(el)
+            return ko.observable(el);
         });
         return new Proxy(this._array, ArrayOfObservables.proxyHandler);
     }
@@ -21,7 +21,7 @@ class ArrayOfObservables<T> extends Array<T> implements Array<T> {
 
         set: function (target: any, prop: string, value: any) {
             if (Array.prototype.hasOwnProperty(prop)) {
-                return Reflect.set(target, prop, value)
+                return Reflect.set(target, prop, value);
             }
 
             if (ko.isObservable(target[prop])) {
@@ -30,8 +30,8 @@ class ArrayOfObservables<T> extends Array<T> implements Array<T> {
                 target[prop] = ko.observable(value);
             }
 
-            return true
-        }
+            return true;
+        },
     }
 
 }

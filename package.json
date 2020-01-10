@@ -6,7 +6,10 @@
   "scripts": {
     "start": "gulp",
     "website": "gulp website",
-    "test": "gulp scripts"
+    "test": "npm run ts-test && npm run eslint",
+    "ts-test": "gulp scripts",
+    "eslint": "eslint --config ./.eslintrc.js --ext ts ./src/scripts",
+    "eslint-fix": "eslint --config ./.eslintrc.js --ext ts --fix ./src/scripts"
   },
   "repository": {
     "type": "git",
@@ -52,14 +55,16 @@
     "gulp-typescript": "^3.2.4",
     "gulp-util": "^3.0.7",
     "natives": "^1.1.6",
-    "tslint": "^3.15.1",
     "typescript": "^3.7.4"
   },
   "dependencies": {
     "@types/bootstrap": "^3.4.0",
     "@types/bootstrap-notify": "^3.1.34",
     "@types/knockout": "^3.4.66",
+    "@typescript-eslint/eslint-plugin": "^2.14.0",
+    "@typescript-eslint/parser": "^2.14.0",
     "bootstrap": "^4.3.1",
+    "eslint": "^6.8.0",
     "jquery": "^3.4.1",
     "knockout": "^3.5.0",
     "popper.js": "^1.15.0"

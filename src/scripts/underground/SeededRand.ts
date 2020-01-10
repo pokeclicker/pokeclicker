@@ -1,5 +1,5 @@
 class SeededRand {
-    private static state: number = 12345;
+    private static state = 12345;
     private static readonly MOD: number = 233280;
     private static readonly OFFSET: number = 49297;
     private static readonly MULTIPLIER: number = 9301;
@@ -18,10 +18,10 @@ class SeededRand {
     }
 
     public static intBetween(min: number, max: number): number {
-        return Math.floor( (max-min + 1) * SeededRand.next() + min )
+        return Math.floor( (max-min + 1) * SeededRand.next() + min );
     }
 
     public static fromArray<T>(arr: Array<T>): T {
-        return arr[SeededRand.intBetween(0, arr.length - 1)]
+        return arr[SeededRand.intBetween(0, arr.length - 1)];
     }
 }

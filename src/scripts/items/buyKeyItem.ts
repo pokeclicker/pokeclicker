@@ -1,16 +1,19 @@
 ///<reference path="../keyItems/KeyItems.ts"/>
-class buyKeyItem extends Item {
+class BuyKeyItem extends Item {
 
         item: KeyItems.KeyItem;
 
-        constructor(item: KeyItems.KeyItem, price: number) {
-            let priceMultiplier = 1;
-            super(KeyItems.KeyItem[item], price, priceMultiplier, GameConstants.Currency.questPoint);
+        constructor(item: KeyItems.KeyItem, price: number, maxAmount = 1) {
+            const priceMultiplier = 1;
+            super(KeyItems.KeyItem[item], price, priceMultiplier, GameConstants.Currency.questPoint, maxAmount);
             this.item = item;
         }
 
         totalPrice(amt: number) {
-            return this.basePrice;
+            if (amt > this.maxAmount) {
+                amt = this.maxAmount;
+            }
+            return this.basePrice * amt;
         }
 
         gain(amt: number) {
@@ -26,5 +29,5 @@ class buyKeyItem extends Item {
 }
 
 
-ItemList['Dungeon_ticket'] = new buyKeyItem(KeyItems.KeyItem.Dungeon_ticket, 250);
-ItemList['Explorer_kit'] = new buyKeyItem(KeyItems.KeyItem.Explorer_kit, 5000);
+ItemList['Dungeon_ticket'] = new BuyKeyItem(KeyItems.KeyItem.Dungeon_ticket, 250);
+ItemList['Explorer_kit'] = new BuyKeyItem(KeyItems.KeyItem.Explorer_kit, 5000);

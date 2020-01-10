@@ -29,7 +29,12 @@
                     <div class="progress-bar bg-success" role="progressbar"
                          data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
                          aria-valuemin="0" aria-valuemax="100">
-					 <span data-bind="text: Math.floor($data.progress()) + '%'"></span>
+                        <!-- ko if: Settings.getSetting('breedingDisplay').observableValue() == 'stepCount' -->
+                        <span data-bind="text: $data.progressText()"></span>
+                        <!-- /ko -->
+                        <!-- ko if: Settings.getSetting('breedingDisplay').observableValue() == 'percentage' -->
+                        <span data-bind="text: Math.floor($data.progress()) + '%'"></span>
+                        <!-- /ko -->
                     </div>
                 </div>
                 <div class="progress" data-bind='visible: progress() >= 100'>

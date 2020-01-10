@@ -15,27 +15,39 @@ class QuestLine {
         this.quests = ko.observableArray();
         this.totalQuests = 0;
         this.curQuest = ko.computed(() => {
-            let acc = 0;
-            return this.quests().map((quest) => {return +quest.isCompleted()})
-                                .reduce( ( acc, iscompleted) => {return acc + iscompleted},0);
+            const acc = 0;
+            return this.quests().map((quest) => {
+                return +quest.isCompleted();
+            })
+                .reduce( ( acc, iscompleted) => {
+                    return acc + iscompleted;
+                },0);
         });
         this.curQuestInitial = ko.observable();
-        this.curQuestInitial.equalityComparer = () => {return false} //Always update subscriptions, even if same data pushed in
+        this.curQuestInitial.equalityComparer = () => {
+            return false;
+        }; //Always update subscriptions, even if same data pushed in
 
         this.curQuestObject = ko.computed(() => {
             this.quests(); //register dependency on this computed so it will update
             if (this.totalQuests > 0 && this.curQuest() < this.totalQuests) {
                 return this.quests()[this.curQuest()];
             } else {
-                return {progress: ()=>{return 0}, progressText: ()=>{return ""}}
+                return {progress: ()=>{
+                    return 0;
+                }, progressText: ()=>{
+                    return '';
+                }};
             }
         });
 
         this.autoBegin = this.curQuest.subscribe((num) => {
             if (this.curQuest() < this.totalQuests) {
-                setTimeout(() => {this.beginQuest(this.curQuest())},2000);
+                setTimeout(() => {
+                    this.beginQuest(this.curQuest());
+                },2000);
             }
-        })
+        });
     }
 
     addQuest(quest: Quest) {
@@ -47,8 +59,8 @@ class QuestLine {
     }
 
     beginQuest(index: number, initial?) {
-        let quest = this.quests()[index];
-        if (typeof initial == "undefined") {
+        const quest = this.quests()[index];
+        if (typeof initial == 'undefined') {
             initial = quest.questFocus();
         }
         quest.initial(initial);
@@ -56,7 +68,7 @@ class QuestLine {
     }
 
     resumeAt(index: number, state) {
-        if (typeof state != "undefined") {
+        if (typeof state != 'undefined') {
             for (let i=0; i<index; i++) {
                 this.quests()[i].autoCompleter.dispose();
                 this.quests()[i].complete();
