@@ -516,12 +516,12 @@ namespace GameConstants {
     }
 
     export enum BattleItemType {
-        xAttack = 'xAttack',
-        xClick = 'xClick',
-        xExp = 'xExp',
-        Token_collector = 'Token_collector',
-        Item_magnet = 'Item_magnet',
-        Lucky_incense = 'Lucky_incense'
+        'xAttack' = 'xAttack',
+        'xClick' = 'xClick',
+        'xExp' = 'xExp',
+        'Token_collector' = 'Token_collector',
+        'Item_magnet' = 'Item_magnet',
+        'Lucky_incense' = 'Lucky_incense'
     }
 
     export enum PokemonItemType {
