@@ -69,7 +69,7 @@ class QuestLine {
 
     resumeAt(index: number, state) {
         if (typeof state != 'undefined') {
-            for (let i=0; i<index; i++) {
+            for (let i = 0; i < index; i++) {
                 this.quests()[i].autoCompleter.dispose();
                 this.quests()[i].complete();
             }

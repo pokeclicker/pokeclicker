@@ -22,7 +22,7 @@ class Achievement {
     }
 
     public getProgress() {
-        return this.isCompleted() ? this.property.requiredValue: this.property.getProgress();
+        return this.isCompleted() ? this.property.requiredValue : this.property.getProgress();
     }
 
     public getProgressPercentage() {

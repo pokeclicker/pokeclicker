@@ -36,7 +36,7 @@ class TypeHelper {
 
     public static getAttackModifier(a1: PokemonType, a2: PokemonType, d1: PokemonType, d2: PokemonType): number {
 
-        if (a1 ==PokemonType.None || d1 == PokemonType.None) {
+        if (a1 == PokemonType.None || d1 == PokemonType.None) {
             return 1;
         }
 

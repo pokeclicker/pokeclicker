@@ -25,21 +25,21 @@ class SafariBattle {
     public static throwBall() {
         if (!SafariBattle.busy) {
             SafariBattle.busy = true;
-            Safari.balls(Safari.balls()-1);
+            Safari.balls(Safari.balls() - 1);
 
-            $('#safariEnemy').css('transition-duration',`${0.75*SafariBattle.Speed.enemyTransition}ms`);
+            $('#safariEnemy').css('transition-duration',`${0.75 * SafariBattle.Speed.enemyTransition}ms`);
             SafariBattle.text('You throw a ball...');
             const enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
 
-            const ptclhtml='<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>';
+            const ptclhtml = '<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>';
             SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, SafariBattle.Speed.ballThrow, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
 
-            SafariBattle.delay(1.1*SafariBattle.Speed.ballThrow)(0)            // throwing the ball
+            SafariBattle.delay(1.1 * SafariBattle.Speed.ballThrow)(0)            // throwing the ball
                 .then(SafariBattle.startCapture)                                   // pokemon being sucked into ball
-                .then(SafariBattle.delay(0.75*SafariBattle.Speed.enemyTransition))
+                .then(SafariBattle.delay(0.75 * SafariBattle.Speed.enemyTransition))
                 .then(SafariBattle.startBounce)                                    // pokeball dropping to ground
-                .then(SafariBattle.delay(1.7*SafariBattle.Speed.ballBounce))
+                .then(SafariBattle.delay(1.7 * SafariBattle.Speed.ballBounce))
                 .then(SafariBattle.calcIndex)                                      // roll a dice for catching, use dice roll to determine how many pokeball rolls
                 .then(SafariBattle.delayRoll)
                 .then(SafariBattle.finishCapture);                                  // capture pokemon or break free
@@ -66,7 +66,7 @@ class SafariBattle {
 
     private static startBounce() {
         return new Promise((resolve,reject)=>{
-            $('body').css('animation-duration',`${1.6*SafariBattle.Speed.ballBounce}ms`);
+            $('body').css('animation-duration',`${1.6 * SafariBattle.Speed.ballBounce}ms`);
             $('#safariEnemy > img').css('opacity', '0');
             SafariBattle.particle.addClass('bounce');
             resolve();
@@ -90,21 +90,21 @@ class SafariBattle {
         return new Promise((resolve,reject)=>{
             setTimeout(()=>{
                 resolve(result);
-            },(0.2+1.2*result[1])*SafariBattle.Speed.ballRoll);
+            },(0.2 + 1.2 * result[1]) * SafariBattle.Speed.ballRoll);
         });
     }
 
     private static finishCapture(result) {
-        const [random,index]=result;
+        const [random,index] = result;
         const isgameOver = (Safari.balls() == 0);
         return new Promise((resolve,reject)=>{
-            if (random*100 < SafariBattle.enemy.catchFactor) {
+            if (random * 100 < SafariBattle.enemy.catchFactor) {
                 SafariBattle.capturePokemon();
                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
                 setTimeout(function() {
                     SafariBattle.particle.remove();
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.endBattle();
-                }, 1.7*SafariBattle.Speed.enemyTransition);
+                }, 1.7 * SafariBattle.Speed.enemyTransition);
             } else {
                 $('#safariEnemy > img').css('opacity', '1');
                 $('#safariEnemy').removeClass('safariCapture');
@@ -112,7 +112,7 @@ class SafariBattle {
                 SafariBattle.particle.remove();
                 setTimeout( function() {
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
-                }, 1*SafariBattle.Speed.enemyTransition);
+                }, 1 * SafariBattle.Speed.enemyTransition);
             }
         });
     }
@@ -123,7 +123,7 @@ class SafariBattle {
         }
         $('#safariBall').addClass('safari-roll-left');
         setTimeout(function() {
-            SafariBattle.safariRoll(n-1);
+            SafariBattle.safariRoll(n - 1);
         }, 1200);
     }
 
@@ -131,7 +131,7 @@ class SafariBattle {
         if (n != 0) {
             $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
             setTimeout(function() {
-                SafariBattle.safariRoll(n-1);
+                SafariBattle.safariRoll(n - 1);
             }, 1200);
         }
     }
@@ -145,7 +145,7 @@ class SafariBattle {
         if (!SafariBattle.busy) {
             SafariBattle.busy = true;
             SafariBattle.text(`You throw some bait at ${SafariBattle.enemy.name}`);
-            SafariBattle.enemy.eating = Math.max(SafariBattle.enemy.eating, Math.floor(Math.random()*5 + 2));
+            SafariBattle.enemy.eating = Math.max(SafariBattle.enemy.eating, Math.floor(Math.random() * 5 + 2));
             SafariBattle.enemy.angry = 0;
             const enemy = $('#safariEnemy').offset();
             enemy.left += 30;
@@ -204,7 +204,7 @@ class SafariBattle {
 
     private static enemyTurn() {
         // Enemy turn to flee;
-        const random = Math.floor(Math.random()*100);
+        const random = Math.floor(Math.random() * 100);
         if ( random < SafariBattle.enemy.escapeFactor) {
             SafariBattle.text(`${SafariBattle.enemy.name} has fled.`);
             setTimeout(SafariBattle.endBattle, 1000);
@@ -215,8 +215,8 @@ class SafariBattle {
         } else {
             SafariBattle.text(`${SafariBattle.enemy.name} is watching carefully...`);
         }
-        SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating-1);
-        SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry-1);
+        SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating - 1);
+        SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry - 1);
         setTimeout(function() {
             SafariBattle.text('What will you do?');
             SafariBattle.busy = false;
