@@ -282,48 +282,26 @@ namespace GameConstants {
     }
 
 
-    export enum PokemonType {
-        'None' = -1,
-        'Normal' = 0,
-        'Fire' = 1,
-        'Water' = 2,
-        'Electric' = 3,
-        'Grass' = 4,
-        'Ice' = 5,
-        'Fighting' = 6,
-        'Poison' = 7,
-        'Ground' = 8,
-        'Flying' = 9,
-        'Psychic' = 10,
-        'Bug' = 11,
-        'Rock' = 12,
-        'Ghost' = 13,
-        'Dragon' = 14,
-        'Dark' = 15,
-        'Steel' = 16,
-        'Fairy' = 17,
-    }
-
-    export enum TypeColor {
-        Normal = '#A8A77A',
-        Fire = '#EE8130',
-        Water = '#6390F0',
-        Electric = '#F7D02C',
-        Grass = '#7AC74C',
-        Ice = '#96D9D6',
-        Fighting = '#C22E28',
-        Poison = '#A33EA1',
-        Ground = '#E2BF65',
-        Flying = '#A98FF3',
-        Psychic = '#F95587',
-        Bug = '#A6B91A',
-        Rock = '#B6A136',
-        Ghost = '#735797',
-        Dragon = '#6F35FC',
-        Dark = '#705746',
-        Steel = '#B7B7CE',
-        Fairy = '#D685AD'
-    }
+    export const TypeColor = [
+        '#A8A77A', // Normal
+        '#EE8130', // Fire
+        '#6390F0', // Water
+        '#F7D02C', // Electric
+        '#7AC74C', // Grass
+        '#96D9D6', // Ice
+        '#C22E28', // Fighting
+        '#A33EA1', // Poison
+        '#E2BF65', // Ground
+        '#A98FF3', // Flying
+        '#F95587', // Psychic
+        '#A6B91A', // Bug
+        '#B6A136', // Rock
+        '#735797', // Ghost
+        '#6F35FC', // Dragon
+        '#705746', // Dark
+        '#B7B7CE', // Steel
+        '#D685AD', // Fairy
+    ];
 
     // Map navigation
     export const AMOUNT_OF_ROUTES = 134;

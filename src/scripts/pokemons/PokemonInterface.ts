@@ -1,7 +1,7 @@
 interface PokemonInterface {
     name: string;
     id: number;
-    type1: PokemonTypes;
-    type2: PokemonTypes;
+    type1: PokemonType;
+    type2: PokemonType;
     shiny?: boolean;
 }
