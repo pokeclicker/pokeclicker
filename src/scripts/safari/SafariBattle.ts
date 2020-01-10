@@ -27,13 +27,13 @@ class SafariBattle {
             SafariBattle.busy = true;
             Safari.balls(Safari.balls() - 1);
 
-            $('#safariEnemy').css('transition-duration',`${0.75 * SafariBattle.Speed.enemyTransition}ms`);
+            $('#safariEnemy').css('transition-duration', `${0.75 * SafariBattle.Speed.enemyTransition}ms`);
             SafariBattle.text('You throw a ball...');
             const enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
 
             const ptclhtml = '<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>';
-            SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, SafariBattle.Speed.ballThrow, 'cubic-bezier(0,0,0.4,1)', true).css('z-index',9999);
+            SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, SafariBattle.Speed.ballThrow, 'cubic-bezier(0,0,0.4,1)', true).css('z-index', 9999);
 
             SafariBattle.delay(1.1 * SafariBattle.Speed.ballThrow)(0)            // throwing the ball
                 .then(SafariBattle.startCapture)                                   // pokemon being sucked into ball
@@ -48,25 +48,25 @@ class SafariBattle {
     }
 
     private static delay(ms) {
-        return function(pass) {
-            return new Promise((resolve,reject)=>{
-                setTimeout((pass)=>{
+        return function (pass) {
+            return new Promise((resolve, reject) => {
+                setTimeout((pass) => {
                     resolve(pass);
-                },ms);
+                }, ms);
             });
         };
     }
 
     private static startCapture() {
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             $('#safariEnemy').addClass('safariCapture');
             resolve();
         });
     }
 
     private static startBounce() {
-        return new Promise((resolve,reject)=>{
-            $('body').css('animation-duration',`${1.6 * SafariBattle.Speed.ballBounce}ms`);
+        return new Promise((resolve, reject) => {
+            $('body').css('animation-duration', `${1.6 * SafariBattle.Speed.ballBounce}ms`);
             $('#safariEnemy > img').css('opacity', '0');
             SafariBattle.particle.addClass('bounce');
             resolve();
@@ -74,34 +74,34 @@ class SafariBattle {
     }
 
     private static calcIndex() {
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             const random = Math.random();
             const catchF = SafariBattle.enemy.catchFactor / 100;
-            const index = catchF >= 1 ? 3 : Math.floor( 4 * (1 - Math.max( random, catchF )) / (1 - catchF) );
+            const index = catchF >= 1 ? 3 : Math.floor(4 * (1 - Math.max(random, catchF)) / (1 - catchF));
             if (index != 0) {
-                $('body').css('animation-duration',`${SafariBattle.Speed.ballRoll}ms`);
+                $('body').css('animation-duration', `${SafariBattle.Speed.ballRoll}ms`);
                 SafariBattle.startRoll(index);
             }
-            resolve([random,index]);
+            resolve([random, index]);
         });
     }
 
     private static delayRoll(result) {
-        return new Promise((resolve,reject)=>{
-            setTimeout(()=>{
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
                 resolve(result);
-            },(0.2 + 1.2 * result[1]) * SafariBattle.Speed.ballRoll);
+            }, (0.2 + 1.2 * result[1]) * SafariBattle.Speed.ballRoll);
         });
     }
 
     private static finishCapture(result) {
-        const [random,index] = result;
+        const [random, index] = result;
         const isgameOver = (Safari.balls() == 0);
-        return new Promise((resolve,reject)=>{
+        return new Promise((resolve, reject) => {
             if (random * 100 < SafariBattle.enemy.catchFactor) {
                 SafariBattle.capturePokemon();
                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
-                setTimeout(function() {
+                setTimeout(function () {
                     SafariBattle.particle.remove();
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.endBattle();
                 }, 1.7 * SafariBattle.Speed.enemyTransition);
@@ -110,27 +110,27 @@ class SafariBattle {
                 $('#safariEnemy').removeClass('safariCapture');
                 SafariBattle.text(SafariBattle.CATCH_MESSAGES[index]);
                 SafariBattle.particle.remove();
-                setTimeout( function() {
+                setTimeout(function () {
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
                 }, 1 * SafariBattle.Speed.enemyTransition);
             }
         });
     }
 
-    private static startRoll = function(n) {
+    private static startRoll = function (n) {
         if (n == 4) {
             n--;
         }
         $('#safariBall').addClass('safari-roll-left');
-        setTimeout(function() {
+        setTimeout(function () {
             SafariBattle.safariRoll(n - 1);
         }, 1200);
     }
 
-    private static safariRoll = function(n) {
+    private static safariRoll = function (n) {
         if (n != 0) {
             $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
-            setTimeout(function() {
+            setTimeout(function () {
                 SafariBattle.safariRoll(n - 1);
             }, 1200);
         }
@@ -150,7 +150,7 @@ class SafariBattle {
             const enemy = $('#safariEnemy').offset();
             enemy.left += 30;
             enemy.top += 70;
-            SafariBattle.dropParticle('<img src="assets/images/safari/bait.png">', $('#safariPlayer').offset(), enemy, 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
+            SafariBattle.dropParticle('<img src="assets/images/safari/bait.png">', $('#safariPlayer').offset(), enemy, 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
             setTimeout(SafariBattle.enemyTurn, 1500);
         }
     }
@@ -164,32 +164,32 @@ class SafariBattle {
             const enemy = $('#safariEnemy').offset();
             enemy.left += 40;
             enemy.top += 10;
-            SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariPlayer').offset(), enemy, 800, 'cubic-bezier(0,0,0.4,1)').css('z-index',9999);
-            setTimeout(function() {
+            SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariPlayer').offset(), enemy, 800, 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
+            setTimeout(function () {
                 const hitSplash = $('<ptcl>').html("<img src='assets/images/safari/hit.png'>").children().appendTo('body');
                 hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
-                hitSplash.fadeOut(400, function() {
+                hitSplash.fadeOut(400, function () {
                     hitSplash.remove();
                 });
-                setTimeout(function() {
+                setTimeout(function () {
                     const newOffset = {
                         top: enemy.top + 4,
                         left: enemy.left - 20,
                     };
                     const ang = $('<ptcl>').html("<img src='assets/images/safari/angry.png'>").children().appendTo('body');
-                    ang.css('position','absolute').css('z-index', 9999);
+                    ang.css('position', 'absolute').css('z-index', 9999);
                     ang.offset(newOffset);
                     ang.addClass('pulse');
-                    setTimeout(function() {
+                    setTimeout(function () {
                         newOffset.top -= 10;
                         newOffset.left += 60;
                         ang.offset(newOffset);
-                        setTimeout(function() {
+                        setTimeout(function () {
                             ang.remove();
-                        },350);
-                    },350);
-                },300);
-            },800);
+                        }, 350);
+                    }, 350);
+                }, 300);
+            }, 800);
             setTimeout(SafariBattle.enemyTurn, 2000);
         }
     }
@@ -205,7 +205,7 @@ class SafariBattle {
     private static enemyTurn() {
         // Enemy turn to flee;
         const random = Math.floor(Math.random() * 100);
-        if ( random < SafariBattle.enemy.escapeFactor) {
+        if (random < SafariBattle.enemy.escapeFactor) {
             SafariBattle.text(`${SafariBattle.enemy.name} has fled.`);
             setTimeout(SafariBattle.endBattle, 1000);
         } else if (SafariBattle.enemy.eating > 0) {
@@ -217,7 +217,7 @@ class SafariBattle {
         }
         SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating - 1);
         SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry - 1);
-        setTimeout(function() {
+        setTimeout(function () {
             SafariBattle.text('What will you do?');
             SafariBattle.busy = false;
             SafariBattle.unlockButtons();
@@ -239,7 +239,7 @@ class SafariBattle {
 
     private static gameOver() {
         SafariBattle.text(GameConstants.SAFARI_OUT_OF_BALLS);
-        setTimeout(function() {
+        setTimeout(function () {
             Safari.inBattle(false);
             Safari.inProgress(false);
             SafariBattle.busy = false;
@@ -249,7 +249,7 @@ class SafariBattle {
 
     private static dropParticle(html: string, pos, target, time = 2, top, persistentParticle = false) {
         const p = $('<ptcl>').html(html).children().appendTo('body');
-        p.css('position','absolute');
+        p.css('position', 'absolute');
         p.offset(pos);
         if (!top) {
             top = 'cubic-bezier(0.6, -0.3, 0.7, 0)';
@@ -257,10 +257,10 @@ class SafariBattle {
         p[0].style.transition = `left ${time}ms linear, top ${time}ms ${top}`;
         p.offset(target);
         if (!persistentParticle) {
-            setTimeout(function() {
+            setTimeout(function () {
                 p.fadeOut();
             }, time - 200);
-            setTimeout(function() {
+            setTimeout(function () {
                 p.remove();
             }, time);
         }

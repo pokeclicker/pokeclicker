@@ -52,12 +52,12 @@ class QuestLineHelper {
         clearMtMoon.description = 'Gather 75 Dungeon tokens by capturing Pokemon, then clear the Mt. Moon dungeon.';
         this.tutorial.addQuest(clearMtMoon);
 
-        this.tutorialTracker = this.tutorial.curQuestInitial.subscribe((newInitial)=>{
+        this.tutorialTracker = this.tutorial.curQuestInitial.subscribe((newInitial) => {
             player.tutorialProgress(QuestLineHelper.tutorial.curQuest());
             player.tutorialState = newInitial;
         });
 
-        this.tutorialCompleter = this.tutorial.curQuest.subscribe((quest)=>{
+        this.tutorialCompleter = this.tutorial.curQuest.subscribe((quest) => {
             if (quest == QuestLineHelper.tutorial.totalQuests) {
                 QuestLineHelper.tutorialTracker.dispose();
                 player.tutorialState = null;

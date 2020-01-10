@@ -33,9 +33,9 @@ class QuestLine {
             if (this.totalQuests > 0 && this.curQuest() < this.totalQuests) {
                 return this.quests()[this.curQuest()];
             } else {
-                return {progress: ()=>{
+                return {progress: () => {
                     return 0;
-                }, progressText: ()=>{
+                }, progressText: () => {
                     return '';
                 }};
             }
