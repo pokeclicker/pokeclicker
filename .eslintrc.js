@@ -36,5 +36,6 @@ module.exports = {
     "space-before-blocks": ["error", "always"],
     "keyword-spacing": ["error"],
     "no-tabs": ["error"],
+    "array-bracket-spacing": ["error", "never"]
   }
 };
