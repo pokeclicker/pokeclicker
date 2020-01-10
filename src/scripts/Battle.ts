@@ -80,17 +80,9 @@ class Battle {
     }
 
     protected static gainShardsAfterBattle() {
-        let pokemon: BattlePokemon = this.enemyPokemon();
+        const pokemon: BattlePokemon = this.enemyPokemon();
         App.game.shards.gainShards(pokemon.shardReward, pokemon.type1);
         App.game.shards.gainShards(pokemon.shardReward, pokemon.type2);
-
-        // let typeNum = GameConstants.PokemonType[pokemon.type1];
-        // App.game.shards.gainShards(pokemon.shardReward, typeNum);
-
-        // if (pokemon.type2 != GameConstants.PokemonType.None) {
-        //     typeNum = GameConstants.PokemonType[pokemon.type2];
-        //     App.game.shards.gainShards(pokemon.shardReward, typeNum);
-        // }
     }
 
     /**

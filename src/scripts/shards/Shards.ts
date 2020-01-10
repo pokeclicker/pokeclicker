@@ -49,7 +49,7 @@ class Shards implements Feature {
     public canBuyShardUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
-    ): boolean {  
+    ): boolean {
         const lessThanMax = !this.hasMaxUpgrade(typeNum, effectNum);
         const hasEnoughShards = this.shardWallet[typeNum] >= this.getShardUpgradeCost(typeNum, effectNum);
         return lessThanMax && hasEnoughShards;
@@ -101,7 +101,7 @@ class Shards implements Feature {
             $('#shardModal').modal('show');
         } else {
             Notifier.notify(
-                "You do not have the Shard Case",
+                'You do not have the Shard Case',
                 GameConstants.NotificationOption.warning);
         }
     }
