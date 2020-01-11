@@ -1,4 +1,4 @@
-///<reference path="../farming/BerryType.ts"/>
+///<reference path="./BerryType.ts"/>
 class Berry {
     public type: BerryType;
     public harvestTime: number;
