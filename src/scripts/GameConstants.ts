@@ -550,17 +550,6 @@ namespace GameConstants {
         'Togepi',
     }
 
-    export enum BerryType {
-        Cheri,
-        Chesto,
-        Pecha,
-        Rawst,
-        Aspear,
-        Leppa,
-        Oran,
-        Sitrus
-    }
-
     export enum PokeBlockColor {
         Black,
         Red,

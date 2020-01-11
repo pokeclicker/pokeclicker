@@ -5,21 +5,9 @@ class FarmRunner {
 
 
 
-    public static accessToFarm() {
-        return ;
-    }
-
     public static timeToReduce() {
         // TODO(@Isha) fix when refactoring to feature
         return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 1;
-    }
-
-    public static tick() {
-        this.counter = 0;
-        const timeToReduce = App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
-        for (let i = 0; i < player.plotList.length; i++) {
-            player.plotList[i]().timeLeft(Math.max(0, player.plotList[i]().timeLeft() - timeToReduce));
-        }
     }
 
     public static computePlotPrice(): number {

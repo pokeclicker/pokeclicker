@@ -4,7 +4,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
     constructor(berryType: string, amount: number) {
         super(amount, HarvestBerriesQuest.calcReward(berryType, amount));
         this.description = `Harvest ${amount} ${berryType} berries at the farm.`;
-        this.questFocus = player.statistics.berriesHarvested[GameConstants.BerryType[berryType]];
+        this.questFocus = player.statistics.berriesHarvested[BerryType[berryType]];
     }
 
     // TODO: Balance the reward amount better
