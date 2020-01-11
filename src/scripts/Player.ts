@@ -74,8 +74,8 @@ class Player {
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
 
-        let today = new Date();
-        let lastSeen = new Date(this._lastSeen);
+        const today = new Date();
+        const lastSeen = new Date(this._lastSeen);
         if (today.toLocaleDateString() == lastSeen.toLocaleDateString()) {
             this.questRefreshes = savedPlayer.questRefreshes;
             if (savedPlayer.completedQuestList) {
