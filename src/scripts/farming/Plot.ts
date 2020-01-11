@@ -21,14 +21,14 @@ class Plot implements Saveable {
         this._berry = ko.observable(berry);
         this._timeLeft = ko.observable(timeLeft);
 
-        this.formattedTimeLeft = ko.computed(function () {
-            return GameConstants.formatTime(this.timeLeft / App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck));
+        this.formattedTimeLeft = ko.pureComputed(function () {
+            return GameConstants.formatTime(this.timeLeft);
         }, this);
-        this.isEmpty = ko.computed(function () {
-            return this.berry == null;
+        this.isEmpty = ko.pureComputed(function () {
+            return this.berry == BerryType.None;
         }, this);
         this.stage = ko.pureComputed(function () {
-            if (this.berry == null) {
+            if (this.berry == BerryType.None) {
                 return 1;
             }
             return 4 - Math.ceil(4 * this.timeLeft / this.berry.harvestTime);
