@@ -28,8 +28,8 @@ class Farming implements Feature {
 
     unlockPlot() {
         if (this.canBuyPlot()) {
-            this.plotList[this.unlockedPlotCount()].isUnlocked = true;
             App.game.wallet.loseAmount(this.calculatePlotPrice());
+            this.plotList[this.unlockedPlotCount()].isUnlocked = true;
         }
     }
 
