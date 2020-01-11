@@ -160,7 +160,7 @@ class Game {
             Underground.counter = 0;
         }
 
-        this.farming.update(GameConstants.TICK_TIME);
+        this.farming.update(GameConstants.TICK_TIME / 1000);
 
         if (EffectEngineRunner.counter > GameConstants.EFFECT_ENGINE_TICK) {
             EffectEngineRunner.tick();

@@ -20,11 +20,33 @@ class Farming implements Feature {
     berryList: ArrayOfObservables<number>;
     plotList: ArrayOfObservables<Plot>;
 
-
     constructor() {
         this.berryList = new ArrayOfObservables(this.defaults.berryList);
         this.plotList = new ArrayOfObservables(this.defaults.plotList);
 
+    }
+
+    public unlockPlot() {
+        if (this.canBuyPlot()) {
+            this.unlockPlot();
+            App.game.wallet.loseAmount(this.calculatePlotPrice());
+        }
+    }
+
+    public allPlotsUnlocked() {
+        return this.plotList[this.plotList.length - 1].isUnlocked;
+    }
+
+    canBuyPlot() {
+        return !this.allPlotsUnlocked() && App.game.wallet.hasAmount(this.calculatePlotPrice());
+    }
+
+    calculatePlotPrice(): Amount {
+        if (this.allPlotsUnlocked()) {
+            return new Amount(Infinity, GameConstants.Currency.farmPoint);
+        }
+        const plotsAvailable = App.game.farming.plotList.filter(plot => plot.isUnlocked).length;
+        return new Amount(10 * Math.floor(Math.pow(plotsAvailable, 1.6)), GameConstants.Currency.farmPoint);
     }
 
     plant(index: number, berry: BerryType) {
@@ -36,6 +58,12 @@ class Farming implements Feature {
         this.berryList[berry] -= 1;
         plot.berry = berry;
         plot.timeLeft = this.berryData[berry].harvestTime;
+    }
+
+    plantAll(berry: BerryType) {
+        this.plotList.forEach((plot, index) => {
+            this.plant(index, berry);
+        });
     }
 
     /**
@@ -75,7 +103,6 @@ class Farming implements Feature {
             Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success);
         }
     }
-
 
     gainBerry(berry: BerryType, amount = 1) {
         this.berryList[berry] += amount;
@@ -137,10 +164,9 @@ class Farming implements Feature {
     }
 
     update(delta: number): void {
-        const timeToReduce = App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
+        const timeToReduce = delta * App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
         this.plotList.forEach(plot => {
             plot.reduceTime(timeToReduce);
         });
     }
-
 }
