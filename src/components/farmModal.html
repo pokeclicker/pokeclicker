@@ -23,11 +23,11 @@
                         <ul id="seedList" data-bind="foreach: App.game.farming.berryList" class="list-group"
                             style="margin-bottom: 5px;">
                             <li class="list-group-item list-group-item-action seed-list-item"
-                                data-bind="click: function() {FarmController.selectedBerry = BerryType[$index()]}">
+                                data-bind="click: function() {FarmController.selectedBerry = $index()}">
                                 <img src="" width="24px"
                                      data-bind="attr:{ src: 'assets/images/items/' + BerryType[$index()] + '.png'}">
                                 <span data-bind="text: BerryType[$index()]"></span>
-                                <span class="seedAmount" data-bind="text: $data"></span>
+                                <span class="seedAmount" data-bind="text: App.game.farming.berryList[$index()]"></span>
                             </li>
                         </ul>
 
