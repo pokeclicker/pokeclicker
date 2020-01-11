@@ -12,7 +12,6 @@ class FarmController {
 
     public static getImage(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
-        console.log(plot);
         if (plot.stage() <= 1) {
             return 'assets/images/farm/AllTreeSeedIII.png';
         }

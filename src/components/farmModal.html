@@ -5,7 +5,7 @@
             <div class="modal-header">
                 <h4>Farm</h4>
                 <!-- ko ifnot: App.game.farming.allPlotsUnlocked() -->
-                <button class="btn btn-success" onclick="App.game.farming.calculatePlotPrice()"
+                <button class="btn btn-success" onclick="App.game.farming.unlockPlot()"
                         data-bind="css: { disabled: !App.game.farming.canBuyPlot()}">
                     <span>Unlock new plot </span>
                     <span data-bind="template: { name: 'amountTemplate', data: App.game.farming.calculatePlotPrice()}"></span>
