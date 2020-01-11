@@ -22,7 +22,7 @@ class Plot implements Saveable {
         this._timeLeft = ko.observable(timeLeft);
 
         this.formattedTimeLeft = ko.computed(function () {
-            return GameConstants.formatTime(this.timeLeft / FarmRunner.timeToReduce());
+            return GameConstants.formatTime(this.timeLeft / App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck));
         }, this);
         this.isEmpty = ko.computed(function () {
             return this.berry == null;

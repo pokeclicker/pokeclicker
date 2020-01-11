@@ -112,10 +112,6 @@ class Player {
         this._lastSeen = Date.now();
         this.statistics = new Statistics(savedPlayer.statistics);
 
-        this.berryList = [...Array(GameConstants.AMOUNT_OF_BERRIES)].map(function (val, index) {
-            return ko.observable(savedPlayer.berryList ? (savedPlayer.berryList[index] || 0) : 0);
-        });
-        this.plotList = Save.initializePlots(savedPlayer.plotList);
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
 
@@ -141,9 +137,6 @@ class Player {
     public _lastSeen: number;
     public currentQuests: KnockoutObservableArray<any>;
     private _shinyCatches: KnockoutObservable<number>;
-
-    public plotList: KnockoutObservable<Plot>[];
-    public berryList: KnockoutObservable<number>[];
 
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
 
@@ -309,18 +302,6 @@ class Player {
         return false;
     }
 
-    public getRandomBerry() {
-        const i = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
-        Notifier.notify(`You got a ${BerryType[i]} berry!`, GameConstants.NotificationOption.success);
-        let amount = 1;
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
-            if (Math.random() < 0.5) {
-                amount += 1;
-            }
-        }
-        player.berryList[i](player.berryList[i]() + amount);
-    }
-
     // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
         for (let i = 0; i < player.mineInventory.length; i++) {
@@ -339,17 +320,6 @@ class Player {
         } else {
             return 0;
         }
-    }
-
-    public unlockPlot() {
-        let i = 0;
-        while (i < this.plotList.length && this.plotList[i]().isUnlocked()) {
-            i++;
-        }
-        if (i == this.plotList.length) {
-            return;
-        }
-        this.plotList[i]().isUnlocked(true);
     }
 
     get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
@@ -422,8 +392,6 @@ class Player {
             'gymDefeats',
             'statistics',
             'achievementsCompleted',
-            'plotList',
-            'berryList',
             'effectList',
             'highestRegion',
             'tutorialProgress',

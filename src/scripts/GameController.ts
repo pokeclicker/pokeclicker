@@ -64,7 +64,7 @@ class GameController {
                     $(element).hover(function () {
                         $(this).data('to', setInterval(function () {
                             $(element).tooltip('hide')
-                                .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
+                                .attr('data-original-title', FarmController.getTooltipLabel(bindingContext.$index()))
                                 .tooltip('show');
                         }, 100));
                     }, function () {

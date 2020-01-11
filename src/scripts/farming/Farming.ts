@@ -26,9 +26,9 @@ class Farming implements Feature {
 
     }
 
-    public unlockPlot() {
+    unlockPlot() {
         if (this.canBuyPlot()) {
-            this.unlockPlot();
+            this.plotList[this.unlockedPlotCount()].isUnlocked = true;
             App.game.wallet.loseAmount(this.calculatePlotPrice());
         }
     }
@@ -45,8 +45,12 @@ class Farming implements Feature {
         if (this.allPlotsUnlocked()) {
             return new Amount(Infinity, GameConstants.Currency.farmPoint);
         }
-        const plotsAvailable = App.game.farming.plotList.filter(plot => plot.isUnlocked).length;
-        return new Amount(10 * Math.floor(Math.pow(plotsAvailable, 1.6)), GameConstants.Currency.farmPoint);
+        const plotCount = this.unlockedPlotCount();
+        return new Amount(10 * Math.floor(Math.pow(plotCount, 1.6)), GameConstants.Currency.farmPoint);
+    }
+
+    unlockedPlotCount() {
+        return App.game.farming.plotList.filter(plot => plot.isUnlocked).length;
     }
 
     plant(index: number, berry: BerryType) {
@@ -102,6 +106,12 @@ class Farming implements Feature {
         if (total > 0) {
             Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success);
         }
+    }
+
+    gainRandomBerry(amount = 1) {
+        const berry = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
+        Notifier.notify(`You got a ${BerryType[berry]} berry!`, GameConstants.NotificationOption.success);
+        this.gainBerry(berry, amount);
     }
 
     gainBerry(berry: BerryType, amount = 1) {
