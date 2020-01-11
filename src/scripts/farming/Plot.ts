@@ -28,10 +28,10 @@ class Plot implements Saveable {
             return this.berry == BerryType.None;
         }, this);
         this.stage = ko.pureComputed(function () {
-            if (this.berry == BerryType.None) {
+            if (this.berry === BerryType.None) {
                 return 1;
             }
-            return 4 - Math.ceil(4 * this.timeLeft / this.berry.harvestTime);
+            return 4 - Math.ceil(4 * this.timeLeft / App.game.farming.berryData[this.berry].harvestTime);
         }, this);
 
     }

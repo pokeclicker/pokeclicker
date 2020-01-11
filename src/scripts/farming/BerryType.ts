@@ -1,5 +1,5 @@
 enum BerryType {
-    None,
+    None = -1,
     Cheri,
     Chesto,
     Pecha,

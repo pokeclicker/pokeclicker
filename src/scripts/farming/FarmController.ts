@@ -12,10 +12,11 @@ class FarmController {
 
     public static getImage(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
+        console.log(plot);
         if (plot.stage() <= 1) {
             return 'assets/images/farm/AllTreeSeedIII.png';
         }
-        return `assets/images/farm/${BerryType[plot.berry]}Tree${GameConstants.PlotStage[plot.stage()]}III.png`;
+        return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}III.png`;
     }
 
     public static getTooltipLabel(index: number) {

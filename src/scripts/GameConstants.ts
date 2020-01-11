@@ -61,14 +61,6 @@ namespace GameConstants {
 
     export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
 
-    export enum PlotStage {
-        Seed,
-        Sprout,
-        Taller,
-        Bloom,
-        Berry
-    }
-
     // Dungeons
     export const DUNGEON_SIZE = 5;
     export const DUNGEON_CHEST_SHOW = 2;
