@@ -46,7 +46,7 @@ class Farming implements Feature {
             return new Amount(Infinity, GameConstants.Currency.farmPoint);
         }
         const plotCount = this.unlockedPlotCount();
-        return new Amount(10 * Math.floor(Math.pow(plotCount, 1.6)), GameConstants.Currency.farmPoint);
+        return new Amount(10 * Math.floor(Math.pow(plotCount, 2)), GameConstants.Currency.farmPoint);
     }
 
     unlockedPlotCount() {
