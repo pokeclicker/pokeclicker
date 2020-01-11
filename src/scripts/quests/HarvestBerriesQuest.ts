@@ -9,7 +9,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
 
     // TODO: Balance the reward amount better
     private static calcReward(berryType: string, amount: number): number {
-        const { harvestTime } = BerryList[berryType];
+        const { harvestTime } = berryData[berryType];
         const avgBerriesPerHarvest = 2.5;
         const plotsAvailable = player.plotList.filter(plot=>plot().isUnlocked()).length;
         return Math.ceil((amount / avgBerriesPerHarvest) * (harvestTime / Math.max(4, plotsAvailable)));

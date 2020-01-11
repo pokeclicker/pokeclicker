@@ -1,6 +1,4 @@
 class FarmRunner {
-    public static curBerry: Berry = BerryList['Cheri'];
-    public static counter = 0;
     public static plotPrice: KnockoutObservable<number> = ko.observable(10);
 
 
@@ -37,101 +35,14 @@ class FarmRunner {
         return !this.allPlotsUnlocked() && App.game.wallet.hasAmount(new Amount(this.plotPrice(), GameConstants.Currency.farmPoint));
     }
 
-    public static getPlot(plotId: number) {
-        return player.plotList[plotId]();
-    }
-
     public static plantAll() {
         for (let i = 0; i < player.plotList.length; i++) {
             FarmRunner.plant(i);
         }
     }
 
-    public static harvestAll() {
-        let total = 0;
-        for (let i = 0; i < player.plotList.length; i++) {
-            total += FarmRunner.harvest(i, true);
-        }
-        if (total > 0 ) {
-            Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success);
-        }
-    }
 
-    public static isEmpty(plotId) {
-        return ko.computed(function () {
-            return this.getPlot(plotId).berry() == null;
-        }, this);
-    }
 
-    public static hasBerry(type: GameConstants.BerryType) {
-        return player.berryList[type]() > 0;
-    }
-
-    public static removeBerry(type: GameConstants.BerryType, amount = 1) {
-        player.berryList[type](player.berryList[type]() - amount);
-    }
-
-    public static plant(plotId) {
-        const plot = this.getPlot(plotId);
-        if (!plot.isEmpty()) {
-            return;
-        }
-
-        if (!plot.isUnlocked()) {
-            return;
-        }
-
-        if (!this.hasBerry(FarmRunner.curBerry.type)) {
-            return;
-        }
-        FarmRunner.removeBerry(FarmRunner.curBerry.type);
-        plot.berry(FarmRunner.curBerry);
-        plot.timeLeft(FarmRunner.curBerry.harvestTime);
-
-    }
-
-    public static harvest(plotId, all = false) {
-        const plot = this.getPlot(plotId);
-        if (plot.berry() !== null && plot.timeLeft() <= 0) {
-            App.game.wallet.gainFarmPoints(plot.berry().farmValue);
-            FarmRunner.gainBerryById(plot.berry().type, GameConstants.randomIntBetween(2, 3));
-            const money = plot.berry().moneyValue;
-            App.game.wallet.gainMoney(money);
-            if (!all) {
-                Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success);
-            }
-            plot.berry(null);
-            App.game.oakItems.use(OakItems.OakItem.Sprayduck);
-            return money;
-        }
-        return 0;
-    }
-
-    public static gainBerryByName(berryName: string, amount = 1) {
-        player.berryList[GameConstants.BerryType[berryName]](player.berryList[GameConstants.BerryType[berryName]]() + amount);
-    }
-
-    public static gainBerryById(berryId: number, amount = 1) {
-        player.berryList[berryId](player.berryList[berryId]() + amount);
-        GameHelper.incrementObservable(player.statistics.berriesHarvested[berryId], amount);
-    }
-
-    public static getTooltipLabel(plotId) {
-        const plot = this.getPlot(plotId);
-
-        if (plot.timeLeft() > 0) {
-            return plot.formattedTimeLeft();
-        }
-
-        return 'Ready';
-    }
-
-    public static getImage(plot: Plot) {
-        if (plot.getStage() <= 1) {
-            return 'assets/images/farm/AllTreeSeedIII.png';
-        }
-        return `assets/images/farm/${GameConstants.BerryType[plot.berry().type]}Tree${GameConstants.PlotStage[plot.getStage()]}III.png`;
-    }
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
