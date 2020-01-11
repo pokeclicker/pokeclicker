@@ -22,7 +22,7 @@ class Plot implements Saveable {
         this._timeLeft = ko.observable(timeLeft);
 
         this.formattedTimeLeft = ko.pureComputed(function () {
-            return GameConstants.formatTime(this.timeLeft);
+            return GameConstants.formatTime(Math.ceil(this.timeLeft) / App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck));
         }, this);
         this.isEmpty = ko.pureComputed(function () {
             return this.berry == BerryType.None;
