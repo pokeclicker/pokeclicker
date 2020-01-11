@@ -14,7 +14,7 @@ class GymRunner {
             if (gym instanceof Champion) {
                 gym.setPokemon(player.starter);
             }
-            App.game.gameState =GameConstants.GameState.idle;
+            App.game.gameState = GameConstants.GameState.idle;
 
             GymBattle.gym = gym;
             GymBattle.totalPokemons(gym.pokemons.length);

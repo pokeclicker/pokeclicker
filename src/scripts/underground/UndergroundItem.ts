@@ -71,7 +71,7 @@ class UndergroundItem {
     }
 
     public static getRandomItem(): UndergroundItem {
-        const i = Math.floor(Math.random()*(UndergroundItem.list.length));
+        const i = Math.floor(Math.random() * (UndergroundItem.list.length));
         return UndergroundItem.list[i] || UndergroundItem.list[0];
     }
 

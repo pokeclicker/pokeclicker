@@ -19,7 +19,7 @@ class FarmRunner {
 
     public static timeToReduce() {
         // TODO(@Isha) fix when refactoring to feature
-        return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck): 1;
+        return App.game ? App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck) : 1;
     }
 
     public static tick() {

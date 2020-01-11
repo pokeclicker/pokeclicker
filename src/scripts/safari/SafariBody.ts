@@ -28,7 +28,7 @@ abstract class SafariBody {
         if (y === this.grid.length - 1) {
             ret[2] = false;
         } else {
-            ret[2] = this.grid[y + 1][x] !== 0 &&this.grid[y + 1][x] !== undefined;
+            ret[2] = this.grid[y + 1][x] !== 0 && this.grid[y + 1][x] !== undefined;
         }
 
         if (ret.equals([true, true, true, true])) {
@@ -97,9 +97,9 @@ class SandBody extends SafariBody {
         }
 
         const amount = this.type === 'fence' ? 20 : 4;
-        for (let i = 0; i<amount; i++) {
-            const x = Math.floor(Math.random()*(sizeX-2));
-            const y = Math.floor(Math.random()*(sizeY-2));
+        for (let i = 0; i < amount; i++) {
+            const x = Math.floor(Math.random() * (sizeX - 2));
+            const y = Math.floor(Math.random() * (sizeY - 2));
             body = SandBody.addCube(x,y,body);
         }
         return body;
@@ -107,16 +107,16 @@ class SandBody extends SafariBody {
 
     private static addCube(x: number, y: number, body: Array<Array<number>>): Array<Array<number>> {
         if (Math.random() >= 0.5) {
-            body[y+2][x] = 15;
-            body[y+2][x+1] = 15;
-            body[y][x+2] = 15;
-            body[y+1][x+2] = 15;
-            body[y+2][x+2] = 15;
+            body[y + 2][x] = 15;
+            body[y + 2][x + 1] = 15;
+            body[y][x + 2] = 15;
+            body[y + 1][x + 2] = 15;
+            body[y + 2][x + 2] = 15;
         }
         body[y][x] = 15;
-        body[y+1][x] = 15;
-        body[y][x+1] = 15;
-        body[y+1][x+1] = 15;
+        body[y + 1][x] = 15;
+        body[y][x + 1] = 15;
+        body[y + 1][x + 1] = 15;
         return body;
     }
 
@@ -232,9 +232,9 @@ class FenceBody extends SandBody {
 
     private openFence() {
         const options = [26, 28, 29, 31];
-        const pick = options[Math.floor(Math.random()*options.length)];
-        for (let i = 0; i<this.grid.length; i++) {
-            for (let j = 0; j<this.grid[0].length; j++) {
+        const pick = options[Math.floor(Math.random() * options.length)];
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[0].length; j++) {
                 if (this.grid[i][j] === pick) {
                     this.grid[i][j] = 0;
                 }
@@ -256,25 +256,25 @@ class WaterBody extends SafariBody {
                 if (i === 0) {
                     if ( j === 0) {
                         row.push(1);
-                    } else if (j < x-1) {
+                    } else if (j < x - 1) {
                         row.push(2);
-                    } else if (j === x-1) {
+                    } else if (j === x - 1) {
                         row.push(3);
                     }
                 } else if (i < y - 1) {
                     if ( j === 0) {
                         row.push(4);
-                    } else if (j < x-1) {
+                    } else if (j < x - 1) {
                         row.push(5);
-                    } else if (j === x-1) {
+                    } else if (j === x - 1) {
                         row.push(6);
                     }
                 } else if (i === y - 1) {
                     if ( j === 0) {
                         row.push(7);
-                    } else if (j < x-1) {
+                    } else if (j < x - 1) {
                         row.push(8);
-                    } else if (j === x-1) {
+                    } else if (j === x - 1) {
                         row.push(9);
                     }
                 }
@@ -296,7 +296,7 @@ class GrassBody extends SafariBody {
         for (let i = 0; i < y; i++) {
             const row = [];
             for (let j = 0; j < x; j++) {
-                if (j < x*2/3-1) {
+                if (j < x * 2 / 3 - 1) {
                     row.push(10);
                 } else {
                     row.push(0);
@@ -312,8 +312,8 @@ class GrassBody extends SafariBody {
     }
 
     private fillHoles() {
-        for (let i = 0; i<this.grid.length; i++) {
-            for (let j = 0; j<this.grid[0].length; j++) {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[0].length; j++) {
                 if (this.grid[i][j] === 0) {
                     if (i !== 0 && i !== this.grid.length - 1) {
                         if (this.grid[i - 1][j] === 10 && this.grid[i + 1][j] === 10) {
@@ -324,12 +324,12 @@ class GrassBody extends SafariBody {
             }
         }
 
-        for (let i = 0; i<this.grid.length; i++) {
-            for (let j = 0; j<this.grid[0].length; j++) {
+        for (let i = 0; i < this.grid.length; i++) {
+            for (let j = 0; j < this.grid[0].length; j++) {
                 if (this.grid[i][j] === 0) {
 
                     if (j !== 0 && j !== this.grid[0].length - 1) {
-                        if (this.grid[i][j-1] === 10 && this.grid[i][j+1] === 10) {
+                        if (this.grid[i][j - 1] === 10 && this.grid[i][j + 1] === 10) {
                             this.grid[i][j] = 10;
                         }
                     }
@@ -358,7 +358,7 @@ Array.prototype.equals = function (array) {
         return false;
     }
 
-    for (let i = 0, l=this.length; i < l; i++) {
+    for (let i = 0, l = this.length; i < l; i++) {
         // Check if we have nested arrays
         if (this[i] instanceof Array && array[i] instanceof Array) {
             // recurse into the nested arrays

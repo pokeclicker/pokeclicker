@@ -45,7 +45,7 @@ class SafariPokemon implements PokemonInterface {
         if (this.shiny) {
             Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
         }
-        this.baseCatchFactor = data.catchRate * 1/6;
+        this.baseCatchFactor = data.catchRate * 1 / 6;
         this.baseEscapeFactor = 30;
         this._angry = ko.observable(0);
         this._eating = ko.observable(0);
