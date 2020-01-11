@@ -37,7 +37,7 @@ class GymRunner {
         }
     }
 
-    private hideGif() {
+    private static hideGif() {
         $('#gymCountdownView').fadeOut(300);
         const $img = $('#gif-go');
         $img.hide();
