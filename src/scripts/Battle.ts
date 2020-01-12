@@ -126,7 +126,7 @@ class Battle {
         const p = player.route() / 1600 + 0.009375;
 
         if (Math.random() < p) {
-            App.game.farming.gainRandomBerry(1);
+            App.game.farming.gainRandomBerry();
         }
     }
 
