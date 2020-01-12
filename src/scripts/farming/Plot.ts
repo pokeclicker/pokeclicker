@@ -36,11 +36,9 @@ class Plot implements Saveable {
 
     }
 
-
     reduceTime(seconds: number) {
         this.timeLeft = Math.max(0, this.timeLeft - seconds);
     }
-
 
     fromJSON(json: object): void {
         if (json == null) {
