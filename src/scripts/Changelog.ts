@@ -37,6 +37,11 @@ const changelogItems = [
     // Unreleased
 
 
+    // v0.2.0
+    new Changelog(changelogType.VERSION, 'v0.2.0 Redeemable codes'),
+    new Changelog(changelogType.NEW, 'Add redeemable codes to get a quick boost. You can enter them under the Save tab'),
+    new Changelog(changelogType.FIXED, 'Gyms no longer reset 1 second in'),
+
     // v0.1.0
     new Changelog(changelogType.VERSION, 'v0.1.0 Farming refactor'),
     new Changelog(changelogType.CHANGE, 'Farming plots are a bit more expensive'),
