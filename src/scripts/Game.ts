@@ -13,6 +13,7 @@ class Game {
     public badgeCase: BadgeCase;
     public oakItems: OakItems;
     public party: Party;
+    public farming: Farming;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
@@ -26,7 +27,8 @@ class Game {
         keyItems: KeyItems,
         badgeCase: BadgeCase,
         oakItems: OakItems,
-        party: Party
+        party: Party,
+        farming: Farming
     ) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
@@ -35,6 +37,7 @@ class Game {
         this.badgeCase = badgeCase;
         this.oakItems = oakItems;
         this.party = party;
+        this.farming = farming;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
@@ -56,6 +59,7 @@ class Game {
             this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
             this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
             this.party.fromJSON(saveObject[this.party.saveKey]);
+            this.farming.fromJSON(saveObject[this.farming.saveKey]);
         }
     }
 
@@ -64,6 +68,7 @@ class Game {
         this.pokeballs.initialize();
         this.keyItems.initialize();
         this.oakItems.initialize();
+        this.farming.initialize();
 
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();
@@ -96,7 +101,6 @@ class Game {
     gameTick() {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
-        FarmRunner.counter += GameConstants.TICK_TIME;
         EffectEngineRunner.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
@@ -156,9 +160,7 @@ class Game {
             Underground.counter = 0;
         }
 
-        if (FarmRunner.counter > GameConstants.FARM_TICK) {
-            FarmRunner.tick();
-        }
+        this.farming.update(GameConstants.TICK_TIME / 1000);
 
         if (EffectEngineRunner.counter > GameConstants.EFFECT_ENGINE_TICK) {
             EffectEngineRunner.tick();

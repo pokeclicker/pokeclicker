@@ -44,10 +44,8 @@ class GameController {
     }
 
     static bindToolTips() {
-        $(document).ready(function () {
-            $('[data-toggle="popover"]').popover();
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+        $('[data-toggle="popover"]').popover();
+        $('[data-toggle="tooltip"]').tooltip();
 
 
         (ko as any).bindingHandlers.tooltip = {
@@ -60,11 +58,16 @@ class GameController {
 
                 $(element).tooltip(options);
 
+
+                ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                    $(element).tooltip('dispose');
+                });
+
                 if (bindingContext.$data instanceof Plot) {
                     $(element).hover(function () {
                         $(this).data('to', setInterval(function () {
                             $(element).tooltip('hide')
-                                .attr('data-original-title', FarmRunner.getTooltipLabel(bindingContext.$index()))
+                                .attr('data-original-title', FarmController.getTooltipLabel(bindingContext.$index()))
                                 .tooltip('show');
                         }, 100));
                     }, function () {

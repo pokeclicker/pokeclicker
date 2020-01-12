@@ -1,4 +1,5 @@
 ///<reference path="../oakItems/OakItems.ts"/>
+///<reference path="../farming/BerryType.ts"/>
 ///<reference path="../pokemons/PokemonType.ts"/>
 class Statistics {
 
@@ -27,7 +28,7 @@ class Statistics {
         'pokeballsBought': GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
         'totalShards': GameHelper.enumLength(PokemonType) - 1,  // remove "None" pokemon type
         'oakItemUses': GameHelper.enumLength(OakItems.OakItem),
-        'berriesHarvested': GameHelper.enumLength(GameConstants.BerryType),
+        'berriesHarvested': GameHelper.enumLength(BerryType) - 1,  // remove "None" berry
     };
 
     constructor(saved = {}) {
