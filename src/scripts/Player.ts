@@ -13,7 +13,6 @@ class Player {
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
     private _routeKills: Array<KnockoutObservable<number>>;
-    private _routeKillsNeeded: KnockoutObservable<number>;
     private _region: KnockoutObservable<GameConstants.Region>;
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
@@ -50,7 +49,6 @@ class Player {
         this._caughtAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0);
         });
-        this._routeKillsNeeded = ko.observable(savedPlayer._routeKillsNeeded || 10);
         this._town = ko.observable(TownList['Pallet Town']);
         this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
@@ -148,7 +146,7 @@ class Player {
 
     public routeKillsObservable(route: number): KnockoutComputed<number> {
         return ko.computed(function () {
-            return Math.min(this.routeKillsNeeded, this.routeKills[route]());
+            return Math.min(GameConstants.ROUTE_KILLS_NEEDED, this.routeKills[route]());
         }, this);
     }
 
@@ -224,14 +222,6 @@ class Player {
 
     set routeKills(value: Array<KnockoutObservable<number>>) {
         this._routeKills = value;
-    }
-
-    get routeKillsNeeded(): number {
-        return this._routeKillsNeeded();
-    }
-
-    set routeKillsNeeded(value: number) {
-        this._routeKillsNeeded(value);
     }
 
     get route(): KnockoutObservable<number> {
@@ -368,7 +358,6 @@ class Player {
             '_defeatedAmount',
             '_caughtAmount',
             '_routeKills',
-            '_routeKillsNeeded',
             '_region',
             '_starter',
             '_itemList',
