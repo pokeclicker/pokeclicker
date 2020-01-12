@@ -9,12 +9,9 @@ class Farming implements Feature {
 
     defaults = {
         berryList: Array<number>(this.AMOUNT_OF_BERRIES).fill(0),
-        plotList: Array<Plot>(this.AMOUNT_OF_PLOTS).fill(
-            new Plot(true, false, BerryType.None, 0),
-            0, 1
-        ).fill(
-            new Plot(false, false, BerryType.None, 0)
-            , 1, this.AMOUNT_OF_PLOTS),
+        plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
+            return new Plot(index === 0, false, BerryType.None, 0);
+        }),
     };
 
     berryList: ArrayOfObservables<number>;
