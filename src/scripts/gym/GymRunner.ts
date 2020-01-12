@@ -1,6 +1,3 @@
-/**
- * Created by dennis on 05-07-17.
- */
 class GymRunner {
 
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
