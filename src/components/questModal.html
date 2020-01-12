@@ -70,7 +70,7 @@
                     <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()'
                             data-bind='text: "Refresh",
                                        enable: QuestHelper.canAffordRefresh()'></button>
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': QuestHelper.getRefreshCost(), 'currency': GameConstants.Currency.money}}"></span>
+                    <span data-bind="template: { name: 'amountTemplate', data: QuestHelper.getRefreshCost()}"></span>
                     <span class='' data-bind='text: "(Daily refresh in " + GameHelper.formattedLetterTimeUntilTomorrow() + ")"'>
                     </span>
                 </div>
