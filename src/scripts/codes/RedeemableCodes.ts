@@ -11,6 +11,9 @@ class RedeemableCodes implements Saveable {
                 App.game.farming.gainBerry(BerryType.Cheri, 100);
                 Notifier.notify('You gain 10000 farmpoints and 100 Cheri berries', GameConstants.NotificationOption.success);
             }),
+            new RedeemableCode('good-luck', 1538489764, false, function () {
+                Notifier.notify('Congrats, you did it. Although you probably already read this text so it can\'t feel very satisfying can it?', GameConstants.NotificationOption.success);
+            }),
         ];
     }
 
