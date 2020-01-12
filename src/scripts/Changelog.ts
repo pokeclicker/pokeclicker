@@ -22,6 +22,12 @@ class Changelog {
 }
 
 const changelogItems = [
+    // v1.1.0
+    new Changelog(changelogType.VERSION, 'v1.1.0 Farming refactor'),
+    new Changelog(changelogType.CHANGE, 'Farming plots are a bit more expensive'),
+    new Changelog(changelogType.CHANGE, 'Wailmer pail unlocks at 3 Cheri berries instead of 5'),
+    new Changelog(changelogType.FIXED, 'Tooltips no longer overstay their welcome on the Farm'),
+
     // v1.0.4
     new Changelog(changelogType.VERSION, 'v1.0.4'),
     new Changelog(changelogType.NEW, 'Can now use spacebar to start Gym/Dungeon'),
