@@ -4,11 +4,12 @@ class RedeemableCodes implements Saveable {
 
     codeList: RedeemableCode[];
 
-
     constructor() {
         this.codeList = [
-            new RedeemableCode('test-code', 1818694934, false, function () {
-                App.game.wallet.gainMoney(100);
+            new RedeemableCode('farming-quickstart', -83143881, false, function () {
+                App.game.wallet.gainFarmPoints(10000);
+                App.game.farming.gainBerry(BerryType.Cheri, 100);
+                Notifier.notify('You gain 10000 farmpoints and 100 Cheri berries', GameConstants.NotificationOption.success);
             }),
         ];
     }
@@ -48,10 +49,18 @@ class RedeemableCodes implements Saveable {
 
 
     fromJSON(json: string[]): void {
+        if (json == null) {
+            return;
+        }
+
         json.forEach(name => {
-            this.codeList.find(code => {
+            const foundCode = this.codeList.find(code => {
                 return code.name === name;
-            }).isRedeemed = true;
+            });
+
+            if (foundCode) {
+                foundCode.isRedeemed = true;
+            }
         });
     }
 
