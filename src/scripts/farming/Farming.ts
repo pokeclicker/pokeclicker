@@ -83,7 +83,9 @@ class Farming implements Feature {
 
         App.game.wallet.gainFarmPoints(this.berryData[plot.berry].farmValue);
         const money = App.game.wallet.gainMoney(this.berryData[plot.berry].moneyValue);
-        this.gainBerry(plot.berry, GameConstants.randomIntBetween(2, 3));
+        const amount = GameConstants.randomIntBetween(2, 3);
+        GameHelper.incrementObservable(player.statistics.berriesHarvested[plot.berry], amount);
+        this.gainBerry(plot.berry, amount);
 
         if (!suppressNotification) {
             Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success);
