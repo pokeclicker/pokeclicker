@@ -15,6 +15,7 @@ class Statistics {
     public totalTokens: KnockoutObservable<number>;
     public totalQuestPoints: KnockoutObservable<number>;
     public totalDiamonds: KnockoutObservable<number>;
+    public totalFarmPoints: KnockoutObservable<number>;
     public pokeballsUsed: Array<KnockoutObservable<number>>;
     public pokeballsBought: Array<KnockoutObservable<number>>;
     public totalShards: Array<KnockoutObservable<number>>;
@@ -43,6 +44,7 @@ class Statistics {
             'totalTokens',
             'totalQuestPoints',
             'totalDiamonds',
+            'totalFarmPoints',
         ];
 
         const arrayObservables = [

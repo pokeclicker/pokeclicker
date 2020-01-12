@@ -66,8 +66,7 @@ class Wallet implements Feature {
 
         points = Math.floor(points);
 
-        // TODO Add total farmpoints statistic
-        // GameHelper.incrementObservable(player.statistics.totalFarmPoints, points);
+        GameHelper.incrementObservable(player.statistics.totalFarmPoints, points);
 
         this.addAmount(new Amount(points, Currency.farmPoint));
     }
