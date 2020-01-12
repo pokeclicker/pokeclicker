@@ -6,6 +6,7 @@ class Game {
     undergroundCounter: number;
     public static achievementCounter = 0;
 
+    // Features
     public breeding: Breeding;
     public pokeballs: Pokeballs;
     public wallet: Wallet;
@@ -14,6 +15,8 @@ class Game {
     public oakItems: OakItems;
     public party: Party;
     public farming: Farming;
+
+    public redeemableCodes: RedeemableCodes;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
@@ -28,7 +31,8 @@ class Game {
         badgeCase: BadgeCase,
         oakItems: OakItems,
         party: Party,
-        farming: Farming
+        farming: Farming,
+        codes: RedeemableCodes
     ) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
@@ -38,6 +42,8 @@ class Game {
         this.oakItems = oakItems;
         this.party = party;
         this.farming = farming;
+
+        this.redeemableCodes = codes;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
@@ -60,6 +66,8 @@ class Game {
             this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
             this.party.fromJSON(saveObject[this.party.saveKey]);
             this.farming.fromJSON(saveObject[this.farming.saveKey]);
+
+            this.redeemableCodes.fromJSON(saveObject[this.redeemableCodes.saveKey]);
         }
     }
 

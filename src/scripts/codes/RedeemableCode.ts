@@ -1,5 +1,4 @@
-class Code {
-
+class RedeemableCode {
     name: string;
     hash: number;
     isRedeemed: boolean;

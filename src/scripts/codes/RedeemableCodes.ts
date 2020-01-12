@@ -1,13 +1,13 @@
-class Codes implements Saveable {
+class RedeemableCodes implements Saveable {
     defaults: object;
-    saveKey: string;
+    saveKey = 'redeemable-codes';
 
-    codeList: Code[];
+    codeList: RedeemableCode[];
 
 
     constructor() {
         this.codeList = [
-            new Code('test-code', 1818694934, false, function () {
+            new RedeemableCode('test-code', 1818694934, false, function () {
                 App.game.wallet.gainMoney(100);
             }),
         ];
@@ -16,16 +16,16 @@ class Codes implements Saveable {
     enterCode(code: string) {
         const hash = this.hash(code);
 
-        const foundCode = this.codeList.find(code => {
+        const redeemableCode = this.codeList.find(code => {
             return code.hash === hash;
         });
 
-        if (!foundCode) {
+        if (!redeemableCode) {
             Notifier.notify(`Invalid code ${code}`, GameConstants.NotificationOption.danger);
             return;
         }
 
-        foundCode.redeem();
+        redeemableCode.redeem();
     }
 
     /**
@@ -56,7 +56,7 @@ class Codes implements Saveable {
     }
 
     toJSON(): object {
-        return this.codeList.reduce(function (res: string[], code: Code) {
+        return this.codeList.reduce(function (res: string[], code: RedeemableCode) {
             if (code.isRedeemed) {
                 res.push(code.name);
             }
