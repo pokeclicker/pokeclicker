@@ -119,7 +119,7 @@ class Farming implements Feature {
     }
 
     hasBerry(berry: BerryType) {
-        return this.berryList[berry] >= 0;
+        return this.berryList[berry] > 0;
     }
 
     canAccess(): boolean {
