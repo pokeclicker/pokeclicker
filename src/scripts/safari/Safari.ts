@@ -23,7 +23,7 @@ class Safari {
         Safari.inBattle(false);
         Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());
-        for ( let i = 0; i<GameConstants.Safari.SizeY; i++) {
+        for ( let i = 0; i < GameConstants.Safari.SizeY; i++) {
             const row = [...Array(GameConstants.Safari.SizeX)].map(Number.prototype.valueOf, 0);
             Safari.grid.push(row);
         }
@@ -60,8 +60,8 @@ class Safari {
         let x = Safari.getRandomCoord(GameConstants.Safari.SizeX - 2);
         let y = Safari.getRandomCoord(GameConstants.Safari.SizeY - 2);
         if (body.type === 'fence') {
-            x = Math.max(0, x-3);
-            y = Math.max(0, y-3);
+            x = Math.max(0, x - 3);
+            y = Math.max(0, y - 3);
         }
         const res = Safari.canAddBody(x, y, body);
         if (res || body.type === 'grass') {
@@ -70,21 +70,21 @@ class Safari {
     }
 
     private static getRandomCoord(max: number): number {
-        return Math.floor(Math.random()*(max-3)) + 1;
+        return Math.floor(Math.random() * (max - 3)) + 1;
     }
 
     private static canAddBody(x: number, y: number, body: SafariBody): boolean {
         if (
             x == 0 ||
             y == 0 ||
-            y+body.maxY() >= GameConstants.Safari.SizeY ||
-            x+body.maxX() >= GameConstants.Safari.SizeX
+            y + body.maxY() >= GameConstants.Safari.SizeY ||
+            x + body.maxX() >= GameConstants.Safari.SizeX
         ) {
             return false;
         }
-        for (let i = 0; i<body.grid.length; i++) {
-            for (let j = 0; j<body.grid[i].length; j++) {
-                if ( (i + y) <GameConstants.Safari.SizeY && (j + x) < GameConstants.Safari.SizeX) {
+        for (let i = 0; i < body.grid.length; i++) {
+            for (let j = 0; j < body.grid[i].length; j++) {
+                if ( (i + y) < GameConstants.Safari.SizeY && (j + x) < GameConstants.Safari.SizeX) {
                     if (body.grid[i][j] !== 0) {
                         if (this.grid[i + y][j + x] !== 0) {
                             return false;
@@ -99,10 +99,10 @@ class Safari {
     }
 
     private static addBody(x: number, y: number, body: SafariBody) {
-        for (let i = 0; i<body.grid.length; i++) {
-            for ( let j = 0; j<body.grid[i].length; j++) {
+        for (let i = 0; i < body.grid.length; i++) {
+            for ( let j = 0; j < body.grid[i].length; j++) {
                 if (body.grid[i][j] !== 0) {
-                    if ( (i + y) <GameConstants.Safari.SizeY && (j + x) < GameConstants.Safari.SizeX) {
+                    if ( (i + y) < GameConstants.Safari.SizeY && (j + x) < GameConstants.Safari.SizeX) {
                         if (this.grid[i + y][j + x] === 0) {
                             this.grid[i + y][j + x] = body.grid[i][j];
                         }
@@ -152,9 +152,9 @@ class Safari {
     static show() {
         let html = '';
 
-        for (let i=0; i<Safari.grid.length; i++) {
+        for (let i = 0; i < Safari.grid.length; i++) {
             html += "<div class='row'>";
-            for (let j=0; j<Safari.grid[0].length; j++) {
+            for (let j = 0; j < Safari.grid[0].length; j++) {
                 html += Safari.square(i, j);
             }
             html += '</div>';
@@ -162,7 +162,7 @@ class Safari {
 
         $('#safariBody').html(html);
 
-        Safari.addPlayer(Math.floor(GameConstants.Safari.SizeX - 1)/2, GameConstants.Safari.SizeY - 1);
+        Safari.addPlayer(Math.floor(GameConstants.Safari.SizeX - 1) / 2, GameConstants.Safari.SizeY - 1);
 
     }
 
@@ -176,8 +176,8 @@ class Safari {
     private static addPlayer(i: number, j: number) {
         const topLeft = $('#safari-0-0').offset();
         const offset = {
-            top: 32*j + topLeft.top,
-            left: 32*i + topLeft.left,
+            top: 32 * j + topLeft.top,
+            left: 32 * i + topLeft.left,
         };
         $('#safariBody').append("<div id='sprite'></div>");
         $('#sprite').css('background',  `url('assets/images/safari/walk${Safari.lastDirection}.png')`);
@@ -276,16 +276,16 @@ class Safari {
         let x = 0;
         let y = 0;
         switch (dir) {
-            case 'left': x=-1;break;
-            case 'up': y=-1;break;
-            case 'right': x=1;break;
-            case 'down': y=1;break;
+            case 'left': x = -1;break;
+            case 'up': y = -1;break;
+            case 'right': x = 1;break;
+            case 'down': y = 1;break;
         }
         return {x: x, y: y};
     }
 
     private static canMove(x: number, y: number): boolean {
-        for (let i = 0; i<GameConstants.LEGAL_WALK_BLOCKS.length; i++) {
+        for (let i = 0; i < GameConstants.LEGAL_WALK_BLOCKS.length; i++) {
             if (Safari.grid[y] && Safari.grid[y][x] === GameConstants.LEGAL_WALK_BLOCKS[i]) {
                 return true;
             }
@@ -308,7 +308,7 @@ class Safari {
     }
 
     public static stop(dir: string) {
-        for (let i=0; i<Safari.queue.length; i++) {
+        for (let i = 0; i < Safari.queue.length; i++) {
             if (Safari.queue[i] == dir) {
                 Safari.queue.splice(i, 1);
             }

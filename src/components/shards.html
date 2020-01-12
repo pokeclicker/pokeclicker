@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
                 <h3>
-                    <span data-bind="text: GameConstants.PokemonType[$index()]"></span>
+                    <span data-bind="text: PokemonType[$index()]"></span>
                     <div style="float:right;">
                       <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
                       <i data-bind="text: player._shardsCollected[$index()]().toLocaleString('en-US')"></i>

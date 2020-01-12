@@ -41,18 +41,19 @@ class PokemonHelper {
             return;
         }
 
-        const type2: GameConstants.PokemonType = basePokemon['type'][1] || GameConstants.PokemonType.None;
-        const evoLevel = basePokemon['evoLevel'];
+        const type1 = basePokemon['type'][0];
+        const type2: PokemonType = basePokemon['type'][1] ?? PokemonType.None;
+
         const eggCycles: number = basePokemon['eggCycles'] || 20;
-        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], basePokemon['evolution'], evoLevel, basePokemon['type'][0], type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles);
+        return new DataPokemon(basePokemon['id'], basePokemon['name'], basePokemon['catchRate'], basePokemon['evolutions'], type1, type2, basePokemon['attack'], basePokemon['levelType'], basePokemon['exp'], eggCycles);
     }
 
     public static typeStringToId(id: string) {
-        return GameConstants.PokemonType[id];
+        return PokemonType[id];
     }
 
     public static typeIdToString(id: number) {
-        return GameConstants.PokemonType[id];
+        return PokemonType[id];
     }
 
     public static getImage(pokemon: PokemonInterface, shiny: boolean): string {

@@ -35,5 +35,9 @@ module.exports = {
     'semi': 'error',
     "space-before-blocks": ["error", "always"],
     "keyword-spacing": ["error"],
+    "no-tabs": ["error"],
+    "array-bracket-spacing": ["error", "never"],
+    "space-infix-ops": ["error"],
+    "arrow-spacing": ["error"],
   }
 };

@@ -170,7 +170,7 @@ class Underground {
                 break;
             default:
                 const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
-                const typeNum = GameConstants.PokemonType[type];
+                const typeNum = PokemonType[type];
                 player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + GameConstants.PLATE_VALUE);
         }
         return success;
@@ -249,11 +249,11 @@ $(document).ready(function () {
 
 namespace Underground {
     export enum Upgrades {
-        Energy_Max,
-        Items_Max,
-        Energy_Gain,
-        Energy_Regen_Time,
-        Daily_Deals_Max
+        'Energy_Max',
+        'Items_Max',
+        'Energy_Gain',
+        'Energy_Regen_Time',
+        'Daily_Deals_Max'
     }
 
     export const BASE_ENERGY_MAX = 50;

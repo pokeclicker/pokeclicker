@@ -10,7 +10,7 @@ abstract class Requirement {
     abstract getProgress();
 
     public getProgressPercentage() {
-        return (this.getProgress()/ this.requiredValue * 100).toFixed(1);
+        return (this.getProgress() / this.requiredValue * 100).toFixed(1);
     }
 
     public isCompleted() {

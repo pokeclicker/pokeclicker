@@ -7,7 +7,7 @@ class PokedexHelper {
         if (!PokedexHelper.pokemonSeen(pokemon.id)()) {
             return 'grey';
         }
-        if (pokemon.type2 == GameConstants.PokemonType.None) {
+        if (pokemon.type2 == PokemonType.None) {
             return TypeColor[pokemon.type1];
         }
         return `linear-gradient(90deg,${TypeColor[pokemon.type1]} 50%, ${TypeColor[pokemon.type2]} 50%)`;
@@ -28,16 +28,16 @@ class PokedexHelper {
 
     public static populateTypeFilters() {
         let options = $('#pokedex-filter-type1');
-        $.each(GameConstants.PokemonType, function () {
-            if (isNaN(Number(this)) && this != GameConstants.PokemonType.None) {
-                options.append($('<option />').val(GameConstants.PokemonType[this]).text(this));
+        $.each(PokemonType, function () {
+            if (isNaN(Number(this)) && this != PokemonType.None) {
+                options.append($('<option />').val(PokemonType[this]).text(this));
             }
         });
 
         options = $('#pokedex-filter-type2');
-        $.each(GameConstants.PokemonType, function () {
-            if (isNaN(Number(this)) && this != GameConstants.PokemonType.None) {
-                options.append($('<option />').val(GameConstants.PokemonType[this]).text(this));
+        $.each(PokemonType, function () {
+            if (isNaN(Number(this)) && this != PokemonType.None) {
+                options.append($('<option />').val(PokemonType[this]).text(this));
             }
         });
     }
@@ -49,21 +49,21 @@ class PokedexHelper {
     public static getList(): Array<object> {
         const filter = PokedexHelper.getFilters();
 
-        const highestDefeated = player.defeatedAmount.reduce((highest, pokemon, index)=> pokemon() && index > highest ? index : highest, 0);
-        const highestCaught = App.game.party.caughtPokemon.reduce((highest, pokemon)=> pokemon.id > highest ? pokemon.id : highest, 0);
+        const highestDefeated = player.defeatedAmount.reduce((highest, pokemon, index) => pokemon() && index > highest ? index : highest, 0);
+        const highestCaught = App.game.party.caughtPokemon.reduce((highest, pokemon) => pokemon.id > highest ? pokemon.id : highest, 0);
         const highestDex = Math.max(highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
             if ((filter['name'] || '') != '' && pokemon.name.toLowerCase().indexOf(filter['name'].toLowerCase()) == -1) {
                 return false;
             }
-            const type1 = parseInt(filter['type1'] || -1);
-            if (type1 != -1 && pokemon.type.indexOf(GameConstants.PokemonType[type1]) == -1) {
+            const type1: PokemonType = parseInt(filter['type1'] || PokemonType.None);
+            if (type1 != PokemonType.None && pokemon.type.includes(type1)) {
                 return false;
             }
 
-            const type2 = parseInt(filter['type2'] || -1);
-            if (type2 != -1 && pokemon.type.indexOf(GameConstants.PokemonType[type2]) == -1) {
+            const type2: PokemonType = parseInt(filter['type2'] || PokemonType.None);
+            if (type2 != PokemonType.None && pokemon.type.includes(type2)) {
                 return false;
             }
 

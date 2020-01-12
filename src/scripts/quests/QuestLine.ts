@@ -33,9 +33,9 @@ class QuestLine {
             if (this.totalQuests > 0 && this.curQuest() < this.totalQuests) {
                 return this.quests()[this.curQuest()];
             } else {
-                return {progress: ()=>{
+                return {progress: () => {
                     return 0;
-                }, progressText: ()=>{
+                }, progressText: () => {
                     return '';
                 }};
             }
@@ -69,7 +69,7 @@ class QuestLine {
 
     resumeAt(index: number, state) {
         if (typeof state != 'undefined') {
-            for (let i=0; i<index; i++) {
+            for (let i = 0; i < index; i++) {
                 this.quests()[i].autoCompleter.dispose();
                 this.quests()[i].complete();
             }
