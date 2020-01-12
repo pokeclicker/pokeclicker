@@ -11,6 +11,12 @@ aria-labelledby="saveModalLabel">
                <div class="tab-content">
                     <div id="saveTab" class="tab-pane fade in active show">
                        <div class="page-item m-0 pt-3 pb-3">
+                           <form onsubmit="RedeemableCodeController.enterCode(); return false;">
+                               Code: <input id="redeemable-code-input" type="text" name="code">
+                               <input type="submit">
+                           </form>
+                           <hr>
+
                            <button class="btn btn-info" onClick=Save.download()>Download Save</button>
                            <hr>
 
