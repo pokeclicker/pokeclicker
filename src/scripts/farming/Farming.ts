@@ -173,7 +173,5 @@ class Farming implements Feature {
                 this.plotList[index] = plot;
             });
         }
-
-
     }
 }
