@@ -21,7 +21,7 @@ class Shards implements Feature {
     }
 
     public gainShards(amt: number, typeNum: PokemonType) {
-        if (!this.canAccess() || typeNum == PokemonType.None) {
+        if (typeNum == PokemonType.None) {
             return;
         }
         this.shardWallet[typeNum] += amt;
