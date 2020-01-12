@@ -20,7 +20,24 @@ class Farming implements Feature {
     constructor() {
         this.berryList = new ArrayOfObservables(this.defaults.berryList);
         this.plotList = new ArrayOfObservables(this.defaults.plotList);
+    }
 
+    initialize(): void {
+        this.berryData[BerryType.Cheri] = new Berry(BerryType.Cheri, 30, 100, 6);
+        this.berryData[BerryType.Chesto] = new Berry(BerryType.Chesto, 45, 150, 8);
+        this.berryData[BerryType.Pecha] = new Berry(BerryType.Pecha, 60, 180, 10);
+        this.berryData[BerryType.Rawst] = new Berry(BerryType.Rawst, 90, 240, 14);
+        this.berryData[BerryType.Aspear] = new Berry(BerryType.Aspear, 120, 290, 18);
+        this.berryData[BerryType.Leppa] = new Berry(BerryType.Leppa, 240, 460, 30);
+        this.berryData[BerryType.Oran] = new Berry(BerryType.Oran, 300, 530, 35);
+        this.berryData[BerryType.Sitrus] = new Berry(BerryType.Sitrus, 600, 1000, 60);
+    }
+
+    update(delta: number): void {
+        const timeToReduce = delta * App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
+        this.plotList.forEach(plot => {
+            plot.reduceTime(timeToReduce);
+        });
     }
 
     unlockPlot() {
@@ -30,7 +47,7 @@ class Farming implements Feature {
         }
     }
 
-    public allPlotsUnlocked() {
+    allPlotsUnlocked() {
         return this.plotList[this.plotList.length - 1].isUnlocked;
     }
 
@@ -114,7 +131,7 @@ class Farming implements Feature {
     }
 
     gainBerry(berry: BerryType, amount = 1) {
-        this.berryList[berry] += amount;
+        this.berryList[berry] += Math.floor(amount);
     }
 
     hasBerry(berry: BerryType) {
@@ -125,6 +142,12 @@ class Farming implements Feature {
         return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
     }
 
+    toJSON(): object {
+        return {
+            berryList: this.berryList.map(x => x),
+            plotList: this.plotList.map(plot => plot.toJSON()),
+        };
+    }
 
     fromJSON(json: object): void {
         if (json == null) {
@@ -152,30 +175,5 @@ class Farming implements Feature {
         }
 
 
-    }
-
-    initialize(): void {
-        this.berryData[BerryType.Cheri] = new Berry(BerryType.Cheri, 30, 100, 6);
-        this.berryData[BerryType.Chesto] = new Berry(BerryType.Chesto, 45, 150, 8);
-        this.berryData[BerryType.Pecha] = new Berry(BerryType.Pecha, 60, 180, 10);
-        this.berryData[BerryType.Rawst] = new Berry(BerryType.Rawst, 90, 240, 14);
-        this.berryData[BerryType.Aspear] = new Berry(BerryType.Aspear, 120, 290, 18);
-        this.berryData[BerryType.Leppa] = new Berry(BerryType.Leppa, 240, 460, 30);
-        this.berryData[BerryType.Oran] = new Berry(BerryType.Oran, 300, 530, 35);
-        this.berryData[BerryType.Sitrus] = new Berry(BerryType.Sitrus, 600, 1000, 60);
-    }
-
-    toJSON(): object {
-        return {
-            berryList: this.berryList.map(x => x),
-            plotList: this.plotList.map(plot => plot.toJSON()),
-        };
-    }
-
-    update(delta: number): void {
-        const timeToReduce = delta * App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
-        this.plotList.forEach(plot => {
-            plot.reduceTime(timeToReduce);
-        });
     }
 }
