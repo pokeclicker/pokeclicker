@@ -58,15 +58,15 @@
     "typescript": "^3.7.4"
   },
   "dependencies": {
-    "@types/bootstrap": "^3.4.0",
+    "@types/bootstrap": "^4.3.1",
     "@types/bootstrap-notify": "^3.1.34",
     "@types/knockout": "^3.4.66",
-    "@typescript-eslint/eslint-plugin": "^2.14.0",
-    "@typescript-eslint/parser": "^2.14.0",
-    "bootstrap": "^4.3.1",
+    "@typescript-eslint/eslint-plugin": "^2.15.0",
+    "@typescript-eslint/parser": "^2.15.0",
+    "bootstrap": "^4.4.1",
     "eslint": "^6.8.0",
     "jquery": "^3.4.1",
-    "knockout": "^3.5.0",
-    "popper.js": "^1.15.0"
+    "knockout": "^3.5.1",
+    "popper.js": "^1.16.0"
   }
 }
