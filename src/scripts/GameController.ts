@@ -44,10 +44,8 @@ class GameController {
     }
 
     static bindToolTips() {
-        $(document).ready(function () {
-            $('[data-toggle="popover"]').popover();
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+        $('[data-toggle="popover"]').popover();
+        $('[data-toggle="tooltip"]').tooltip();
 
 
         (ko as any).bindingHandlers.tooltip = {
@@ -59,6 +57,11 @@ class GameController {
                 ko.utils.extend(options, local);
 
                 $(element).tooltip(options);
+
+
+                ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                    $(element).tooltip('dispose');
+                });
 
                 if (bindingContext.$data instanceof Plot) {
                     $(element).hover(function () {
