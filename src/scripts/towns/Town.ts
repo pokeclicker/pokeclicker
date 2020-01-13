@@ -39,7 +39,7 @@ class Town {
 
     public hasRouteReq() {
         for (const i of this.reqRoutes) {
-            if (player.routeKills[i]() < GameConstants.ROUTE_KILLS_NEEDED) {
+            if (player.statistics.routeKills[i]() < GameConstants.ROUTE_KILLS_NEEDED) {
                 return false;
             }
         }

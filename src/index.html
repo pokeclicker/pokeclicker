@@ -221,9 +221,9 @@
                                          class="pokeball-smallest"
                                          src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                                 </span>
-                                <!-- ko if: player.routeKillsObservable(player.route())() < GameConstants.ROUTE_KILLS_NEEDED -->
+                                <!-- ko if: player.statistics.routeKills[player.route()]() < GameConstants.ROUTE_KILLS_NEEDED -->
                                 <br>
-                                <span data-bind="text: player.routeKillsObservable(player.route())() + '/' + GameConstants.ROUTE_KILLS_NEEDED">0/10</span>
+                                <span data-bind="text: player.statistics.routeKills[player.route()]() + '/' + GameConstants.ROUTE_KILLS_NEEDED">0/10</span>
                                 <br>
                                 <!-- /ko -->
                             </div>

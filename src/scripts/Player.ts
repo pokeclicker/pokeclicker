@@ -12,7 +12,6 @@ class Player {
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
-    private _routeKills: Array<KnockoutObservable<number>>;
     private _region: KnockoutObservable<GameConstants.Region>;
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
@@ -38,10 +37,6 @@ class Player {
                     this._region = ko.observable(GameConstants.Region.kanto);
             }
         }
-
-        this._routeKills = [...Array(GameConstants.AMOUNT_OF_ROUTES + 1)].map(function (val, index) {
-            return ko.observable(savedPlayer._routeKills ? (savedPlayer._routeKills[index] || 0) : 0);
-        });
 
         this._defeatedAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0);
@@ -144,16 +139,6 @@ class Player {
 
     private highestRegion: KnockoutObservable<GameConstants.Region>;
 
-    public routeKillsObservable(route: number): KnockoutComputed<number> {
-        return ko.computed(function () {
-            return Math.min(GameConstants.ROUTE_KILLS_NEEDED, this.routeKills[route]());
-        }, this);
-    }
-
-    public addRouteKill() {
-        this.routeKills[this.route()](this.routeKills[this.route()]() + 1);
-    }
-
     set defeatedAmount(value: Array<KnockoutObservable<number>>) {
         this._defeatedAmount = value;
     }
@@ -214,14 +199,6 @@ class Player {
 
     get itemMultipliers(): { [p: string]: number } {
         return this._itemMultipliers;
-    }
-
-    get routeKills(): Array<KnockoutObservable<number>> {
-        return this._routeKills;
-    }
-
-    set routeKills(value: Array<KnockoutObservable<number>>) {
-        this._routeKills = value;
     }
 
     get route(): KnockoutObservable<number> {
@@ -357,7 +334,6 @@ class Player {
             '_route',
             '_defeatedAmount',
             '_caughtAmount',
-            '_routeKills',
             '_region',
             '_starter',
             '_itemList',

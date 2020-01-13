@@ -56,7 +56,9 @@ class Battle {
         App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.gainShards(this.enemyPokemon().type1);
         player.gainShards(this.enemyPokemon().type2);
-        player.addRouteKill();
+
+        GameHelper.incrementObservable(player.statistics.routeKills[player.route()]);
+
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
         const isShiny: boolean = this.enemyPokemon().shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);

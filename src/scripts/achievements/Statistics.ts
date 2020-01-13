@@ -21,6 +21,7 @@ class Statistics {
     public totalShards: Array<KnockoutObservable<number>>;
     public oakItemUses: Array<KnockoutObservable<number>>;
     public berriesHarvested: Array<KnockoutObservable<number>>;
+    public routeKills: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
         'gymsDefeated': GameConstants.RegionGyms.flat().length,
@@ -30,6 +31,7 @@ class Statistics {
         'totalShards': GameHelper.enumLength(PokemonType) - 1,  // remove "None" pokemon type
         'oakItemUses': GameHelper.enumLength(OakItems.OakItem),
         'berriesHarvested': GameHelper.enumLength(BerryType) - 1,  // remove "None" berry
+        'routeKills': GameConstants.AMOUNT_OF_ROUTES,
     };
 
     constructor(saved = {}) {
@@ -55,6 +57,7 @@ class Statistics {
             'totalShards',
             'oakItemUses',
             'berriesHarvested',
+            'routeKills',
         ];
 
         for (const prop of observables) {
