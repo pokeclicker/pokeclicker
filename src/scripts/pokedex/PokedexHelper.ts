@@ -59,7 +59,7 @@ class PokedexHelper {
             }
             const type1: PokemonType = parseInt(filter['type1'] || PokemonType.None);
             const type2: PokemonType = parseInt(filter['type2'] || PokemonType.None);
-            if (type1 != PokemonType.None && !pokemon.type.includes(type1) && (type2 == PokemonType.None || !pokemon.type.includes(type2))) {
+            if ((type1 != PokemonType.None && !pokemon.type.includes(type1)) || (type2 != PokemonType.None && !pokemon.type.includes(type2))) {
                 return false;
             }
 
