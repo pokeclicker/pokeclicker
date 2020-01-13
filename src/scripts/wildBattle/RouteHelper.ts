@@ -41,20 +41,7 @@ class RouteHelper {
 
     public static routeCompleted(route: number, region: RegionType, includeShiny: boolean, includeHeadbutt = true): boolean {
         const possiblePokemon: string[] = RouteHelper.getAvailablePokemonList(route, region, includeHeadbutt);
-        return RouteHelper.listCompleted(possiblePokemon, includeShiny);
-    }
-
-    // TODO(@Isha) Move to pokedex feature
-    public static listCompleted(possiblePokemon: string[], includeShiny: boolean) {
-        for (let i = 0; i < possiblePokemon.length; i++) {
-            if (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(possiblePokemon[i]).id)) {
-                return false;
-            }
-            if (includeShiny && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(possiblePokemon[i]).id, true)) {
-                return false;
-            }
-        }
-        return true;
+        return App.game.party.alreadyCaughtList(possiblePokemon, includeShiny);
     }
 
 }

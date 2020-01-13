@@ -123,6 +123,12 @@ class Party implements Feature {
         }
     }
 
+    alreadyCaughtList(possiblePokemon: string[], includeShiny: boolean) {
+        return possiblePokemon.every(pokemon => {
+            return this.alreadyCaughtPokemonByName(pokemon, includeShiny);
+        });
+    }
+
     alreadyCaughtPokemonByName(name: string, shiny = false) {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }

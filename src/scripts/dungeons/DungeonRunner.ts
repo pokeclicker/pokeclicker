@@ -98,7 +98,7 @@ class DungeonRunner {
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
         const possiblePokemon: string[] = dungeon.allPokemonNames;
-        return RouteHelper.listCompleted(possiblePokemon, includeShiny);
+        return App.game.party.alreadyCaughtList(possiblePokemon, includeShiny);
     }
 
     public static hasEnoughTokens() {
