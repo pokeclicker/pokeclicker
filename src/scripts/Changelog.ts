@@ -35,6 +35,11 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
  */
 const changelogItems = [
     // Unreleased
+    // v0.3.0
+    new Changelog(changelogType.VERSION, 'v0.3.0 Map and region rework'),
+    new Changelog(changelogType.CHANGE, 'The map logic is rewritten to be much cleaner and more selfcontained'),
+    new Changelog(changelogType.REMOVED, 'Features on the map no longer require you to travel there'),
+
 
     // v0.2.1
     new Changelog(changelogType.VERSION, 'v0.2.1'),
