@@ -1,4 +1,13 @@
-class World {
+class World implements Feature {
+    name = 'World';
+
+    saveKey = 'world';
+    defaults = {
+        currentRoute: 1,
+        currentRegion: RegionType.kanto,
+    };
+
+
     currentRegion: RegionType;
     // TODO combine to position?
     currentRoute: number;
@@ -42,4 +51,30 @@ class World {
         });
     }
 
+    initialize(): void {
+        // This method intentionally left blank
+    }
+
+    canAccess(): boolean {
+        return true;
+    }
+
+    update(delta: number): void {
+        // This method intentionally left blank
+    }
+
+    toJSON(): object {
+        return {
+            currentRoute: this.currentRoute,
+            currentRegion: this.currentRegion,
+        };
+    }
+
+    fromJSON(json: object): void {
+        if (json == null) {
+            return;
+        }
+        this.currentRoute = json['currentRoute'] ?? this.defaults.currentRoute;
+        this.currentRegion = json['currentRegion'] ?? this.defaults.currentRegion;
+    }
 }

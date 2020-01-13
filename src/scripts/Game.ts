@@ -15,6 +15,7 @@ class Game {
     public oakItems: OakItems;
     public party: Party;
     public farming: Farming;
+    public world: World;
 
     public redeemableCodes: RedeemableCodes;
 
@@ -32,6 +33,7 @@ class Game {
         oakItems: OakItems,
         party: Party,
         farming: Farming,
+        world: World,
         codes: RedeemableCodes
     ) {
         this.breeding = breeding;
@@ -42,6 +44,7 @@ class Game {
         this.oakItems = oakItems;
         this.party = party;
         this.farming = farming;
+        this.world = world;
 
         this.redeemableCodes = codes;
 
@@ -66,6 +69,7 @@ class Game {
             this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
             this.party.fromJSON(saveObject[this.party.saveKey]);
             this.farming.fromJSON(saveObject[this.farming.saveKey]);
+            this.world.fromJSON(saveObject[this.world.saveKey]);
 
             this.redeemableCodes.fromJSON(saveObject[this.redeemableCodes.saveKey]);
         }
