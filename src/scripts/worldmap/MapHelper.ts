@@ -1,68 +1,4 @@
 class MapHelper {
-    public static returnToMap() {
-        if (player.currentTown()) {
-            return this.moveToTown(player.currentTown());
-        }
-        if (App.game.world.currentRoute) {
-            return this.moveToRoute(App.game.world.currentRoute, App.game.world.currentRegion);
-        }
-    }
-
-    public static moveToRoute = function (route: number, region: RegionType) {
-        if (isNaN(route)) {
-            return;
-        }
-        let genNewEnemy = false;
-        if (route != App.game.world.currentRoute) {
-            genNewEnemy = true;
-        }
-        if (this.accessToRoute(route, region)) {
-            App.game.world.currentRoute = route;
-            App.game.world.currentRegion = region;
-            player.currentTown('');
-            if (genNewEnemy) {
-                Battle.generateNewEnemy();
-            }
-            App.game.gameState = GameConstants.GameState.fighting;
-            GameController.applyRouteBindings();
-        } else {
-            let reqsList = '';
-
-            if (!MapHelper.hasBadgeReq(route, region)) {
-                const badgeNumber = GameConstants.routeBadgeRequirements[region][route];
-                reqsList += `<br>Requires the ${BadgeCase.Badge[badgeNumber]} badge.`;
-            }
-
-            if (!MapHelper.hasDungeonReq(route, region)) {
-                const dungeon = GameConstants.routeDungeonRequirements[region][route];
-                reqsList += `<br>${dungeon} dungeon needs to be completed.`;
-            }
-
-            if (!MapHelper.hasRouteKillReq(route, region)) {
-                const reqList = GameConstants.routeRequirements[region][route];
-                const routesNotCompleted = [];
-
-                for (let i = 0; i < reqList.length; i++) {
-                    const route: number = reqList[i];
-                    if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
-                        routesNotCompleted.push(route);
-                    }
-                }
-
-                if (routesNotCompleted.length > 0) {
-                    const routesList = routesNotCompleted.join(', ');
-                    if (routesNotCompleted.length > 1) {
-                        reqsList += `<br>Routes ${routesList} still need to be completed.`;
-                    } else {
-                        reqsList += `<br>Route ${routesList} still needs to be completed.`;
-                    }
-                }
-            }
-
-            Notifier.notify(`You don't have access to that route yet.${reqsList}`, GameConstants.NotificationOption.warning);
-        }
-    };
-
     private static hasBadgeReq(route, region) {
         return App.game.badgeCase.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
     }
@@ -90,28 +26,7 @@ class MapHelper {
         return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
     };
 
-    public static calculateRouteCssClass(route: number, region: RegionType): string {
-        let cls;
 
-        if (App.game.world.currentRoute == route && App.game.world.currentRegion == region) {
-            cls = 'currentRoute';
-        } else if (MapHelper.accessToRoute(route, region)) {
-            if (player.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
-                cls = 'unlockedRoute';
-            } else {
-                cls = 'unlockedUnfinishedRoute';
-            }
-        } else {
-            cls = 'lockedRoute';
-        }
-
-        // Water routes
-        if (GameConstants.WaterRoutes[region].has(route)) {
-            cls = `${cls} waterRoute`;
-        }
-
-        return cls;
-    }
 
     public static calculateTownCssClass(town: string): string {
         // TODO(@Isha) this is very weird, refactor this.
@@ -147,7 +62,7 @@ class MapHelper {
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
-            App.game.world.currentRoute = 0;
+            App.game.world.currentRoute = -1;
             player.town(TownList[townName]);
             player.currentTown(townName);
             Battle.enemyPokemon(null);

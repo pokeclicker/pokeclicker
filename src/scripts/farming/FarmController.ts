@@ -38,13 +38,5 @@ document.addEventListener('DOMContentLoaded', function (event) {
             $(this).addClass('active');
         });
     });
-
-    $('#farmModal').on('hidden.bs.modal', function () {
-        if (App.game.world.currentRoute == 14) {
-            App.game.gameState = GameConstants.GameState.fighting;
-        } else {
-            MapHelper.moveToRoute(14, RegionType.kanto);
-        }
-    });
 });
 

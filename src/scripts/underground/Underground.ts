@@ -238,13 +238,6 @@ $(document).ready(function () {
         Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
     });
 
-    $('#mineModal').on('hidden.bs.modal', function () {
-        if (App.game.world.currentRoute == 11) {
-            App.game.gameState = GameConstants.GameState.fighting;
-        } else {
-            MapHelper.moveToRoute(11, RegionType.kanto);
-        }
-    });
 });
 
 namespace Underground {

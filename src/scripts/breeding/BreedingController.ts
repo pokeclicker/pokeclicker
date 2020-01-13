@@ -21,8 +21,4 @@ class BreedingController {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    $('#breedingModal').on('hidden.bs.modal', function () {
-        MapHelper.returnToMap();
-    });
-
 });

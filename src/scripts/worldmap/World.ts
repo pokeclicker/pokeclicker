@@ -3,8 +3,8 @@ class World implements Feature {
 
     saveKey = 'world';
     defaults = {
-        currentRoute: 1,
         currentRegion: RegionType.kanto,
+        currentRoute: 1,
     };
 
     private _currentRegion: KnockoutObservable<RegionType>;
@@ -18,8 +18,8 @@ class World implements Feature {
 
     constructor(regions: Region[]) {
         this.regions = regions;
-        this._currentRegion = ko.observable(RegionType.kanto);
-        this._currentRoute = ko.observable(0);
+        this._currentRegion = ko.observable(this.defaults.currentRegion);
+        this._currentRoute = ko.observable(this.defaults.currentRoute);
     }
 
     moveToRoute(route: number, region: RegionType) {
@@ -41,10 +41,13 @@ class World implements Feature {
 
         if (!newRoute.canAccess()) {
             Notifier.notify(newRoute.lockedReason(), GameConstants.NotificationOption.danger);
+            return;
         }
 
         this.currentRoute = route;
         this.currentRegion = region;
+        Battle.generateNewEnemy();
+
         this.currentTown = null;
 
         App.game.gameState = GameConstants.GameState.fighting;
@@ -100,12 +103,12 @@ class World implements Feature {
         if (json == null) {
             return;
         }
-        this.currentRoute = json['currentRoute'] ?? this.defaults.currentRoute;
         this.currentRegion = json['currentRegion'] ?? this.defaults.currentRegion;
+        this.currentRoute = 1;
+        // this.currentRoute = json['currentRoute'] ?? this.defaults.currentRoute;
     }
 
     // Knockout getters/setters
-
     get currentRegion(): RegionType {
         return this._currentRegion();
     }

@@ -11,7 +11,10 @@ abstract class WorldLocation {
         let res = '';
         this.requirements.forEach(requirement => {
             if (!requirement.isCompleted()) {
-                res += `${requirement.lockedReason()}\n`;
+                if (res !== '') {
+                    res += '<br>';
+                }
+                res += `${requirement.lockedReason()}`;
             }
         });
         return res;
