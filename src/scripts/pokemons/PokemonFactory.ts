@@ -19,7 +19,7 @@ class PokemonFactory {
             const possible = GameConstants.RoamingPokemon[region];
             name = possible[Math.floor(Math.random() * possible.length)];
         } else {
-            const pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
+            const pokemonList: string[] = App.game.world.getRegion(region).getRoute(route).getAvailablePokemon();
             const rand: number = Math.floor(Math.random() * pokemonList.length);
             name = pokemonList[rand];
         }

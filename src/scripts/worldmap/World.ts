@@ -7,7 +7,6 @@ class World implements Feature {
         currentRegion: RegionType.kanto,
     };
 
-
     currentRegion: RegionType;
     // TODO combine to position?
     currentRoute: number;
@@ -15,6 +14,11 @@ class World implements Feature {
     currentTown: string;
 
     regions: Region[];
+
+
+    constructor(regions: Region[]) {
+        this.regions = regions;
+    }
 
     moveToRoute(route: number, region: RegionType) {
         if (isNaN(route)) {
@@ -50,6 +54,26 @@ class World implements Feature {
             return region.type === type;
         });
     }
+
+    public static getAvailablePokemonList(route: number, region: RegionType, includeHeadbutt = true): string[] {
+        // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
+        if (!MapHelper.validRoute(route, region)) {
+            route = GameConstants.RegionRoute[region][0];
+        }
+        const possiblePokemons = pokemonsPerRoute[region][route];
+        if (possiblePokemons == null) {
+            return ['Rattata'];
+        }
+        let pokemonList = possiblePokemons.land;
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Super_rod) || possiblePokemons.land.length == 0) {
+            pokemonList = pokemonList.concat(possiblePokemons.water);
+        }
+        if (includeHeadbutt) {
+            pokemonList = pokemonList.concat(possiblePokemons.headbutt);
+        }
+        return pokemonList;
+    }
+
 
     initialize(): void {
         // This method intentionally left blank

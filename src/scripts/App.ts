@@ -19,7 +19,7 @@ class App {
                 new OakItems([20, 50, 100]),
                 new Party(),
                 new Farming(),
-                new World(),
+                new World([RegionFactory.createKanto()]),
                 new RedeemableCodes()
             );
 

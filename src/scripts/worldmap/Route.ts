@@ -16,4 +16,19 @@ class Route extends WorldLocation {
     }
 
 
+    allPokemonCaught(shiny = false) {
+        const possiblePokemon: string[] = this.pokemons.land.concat(this.pokemons.water).concat(this.pokemons.headButt);
+        return App.game.party.alreadyCaughtList(possiblePokemon, shiny);
+    }
+
+    getAvailablePokemon(includeHeadButt = true) {
+        let pokemonList = this.pokemons.land;
+        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Super_rod) || this.pokemons.land.length === 0) {
+            pokemonList = pokemonList.concat(this.pokemons.water);
+        }
+        if (includeHeadButt) {
+            pokemonList = pokemonList.concat(this.pokemons.headButt);
+        }
+        return pokemonList;
+    }
 }
