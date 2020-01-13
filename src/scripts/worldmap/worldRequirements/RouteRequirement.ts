@@ -1,11 +1,11 @@
-class RouteRequirement implements MapRequirement {
+class RouteRequirement implements WorldRequirement {
     route: number;
 
     constructor(route: number) {
         this.route = route;
     }
 
-    canAccess(): boolean {
+    isCompleted(): boolean {
         return player.statistics.routeKills[this.route]() >= GameConstants.ROUTE_KILLS_NEEDED;
     }
 

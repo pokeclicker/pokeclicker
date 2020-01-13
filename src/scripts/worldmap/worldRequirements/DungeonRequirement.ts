@@ -1,4 +1,4 @@
-class DungeonRequirement implements MapRequirement {
+class DungeonRequirement implements WorldRequirement {
     // TODO(@Isha) change to enum during dungeon refactor
     dungeon: string;
 
@@ -6,7 +6,7 @@ class DungeonRequirement implements MapRequirement {
         this.dungeon = dungeon;
     }
 
-    canAccess(): boolean {
+    isCompleted(): boolean {
         return player.statistics.dungeonsCleared[Statistics.getDungeonIndex(this.dungeon)]() > 0;
     }
 

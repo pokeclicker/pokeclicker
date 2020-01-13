@@ -1,11 +1,11 @@
-class BadgeRequirement implements MapRequirement {
+class BadgeRequirement implements WorldRequirement {
     badge: BadgeCase.Badge;
 
     constructor(badge: BadgeCase.Badge) {
         this.badge = badge;
     }
 
-    canAccess(): boolean {
+    isCompleted(): boolean {
         return App.game.badgeCase.hasBadge(this.badge);
     }
 
