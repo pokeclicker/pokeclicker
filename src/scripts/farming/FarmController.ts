@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
         if (player.route() == 14) {
             App.game.gameState = GameConstants.GameState.fighting;
         } else {
-            MapHelper.moveToRoute(14, GameConstants.Region.kanto);
+            MapHelper.moveToRoute(14, RegionType.kanto);
         }
     });
 });

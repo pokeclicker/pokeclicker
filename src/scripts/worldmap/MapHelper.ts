@@ -8,7 +8,7 @@ class MapHelper {
         }
     }
 
-    public static moveToRoute = function (route: number, region: GameConstants.Region) {
+    public static moveToRoute = function (route: number, region: RegionType) {
         if (isNaN(route)) {
             return;
         }
@@ -86,11 +86,11 @@ class MapHelper {
         return true;
     }
 
-    public static accessToRoute = function (route: number, region: GameConstants.Region) {
+    public static accessToRoute = function (route: number, region: RegionType) {
         return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
     };
 
-    public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
+    public static calculateRouteCssClass(route: number, region: RegionType): string {
         let cls;
 
         if (player.route() == route && player.region == region) {
@@ -193,7 +193,7 @@ class MapHelper {
         }
     };
 
-    public static validRoute(route = 0, region: GameConstants.Region = 0): boolean {
+    public static validRoute(route = 0, region: RegionType = 0): boolean {
         return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];
     }
 

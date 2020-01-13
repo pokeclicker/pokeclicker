@@ -12,7 +12,7 @@ class Player {
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
-    private _region: KnockoutObservable<GameConstants.Region>;
+    private _region: KnockoutObservable<RegionType>;
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
@@ -34,7 +34,7 @@ class Player {
                     break;
                 default:
                     this._route = ko.observable(1);
-                    this._region = ko.observable(GameConstants.Region.kanto);
+                    this._region = ko.observable(RegionType.kanto);
             }
         }
 
@@ -137,7 +137,7 @@ class Player {
     public tutorialState: any;
     public tutorialComplete: KnockoutObservable<boolean>;
 
-    private highestRegion: KnockoutObservable<GameConstants.Region>;
+    private highestRegion: KnockoutObservable<RegionType>;
 
     set defeatedAmount(value: Array<KnockoutObservable<number>>) {
         this._defeatedAmount = value;
@@ -209,11 +209,11 @@ class Player {
         this._route = value;
     }
 
-    get region(): GameConstants.Region {
+    get region(): RegionType {
         return this._region();
     }
 
-    set region(value: GameConstants.Region) {
+    set region(value: RegionType) {
         this._region(value);
     }
 

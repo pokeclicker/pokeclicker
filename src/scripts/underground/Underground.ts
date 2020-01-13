@@ -242,7 +242,7 @@ $(document).ready(function () {
         if (player.route() == 11) {
             App.game.gameState = GameConstants.GameState.fighting;
         } else {
-            MapHelper.moveToRoute(11, GameConstants.Region.kanto);
+            MapHelper.moveToRoute(11, RegionType.kanto);
         }
     });
 });

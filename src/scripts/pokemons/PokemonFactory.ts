@@ -9,7 +9,7 @@ class PokemonFactory {
      * @param region region that the player is in.
      * @returns {any}
      */
-    public static generateWildPokemon(route: number, region: GameConstants.Region): BattlePokemon {
+    public static generateWildPokemon(route: number, region: RegionType): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
             return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
