@@ -1,18 +1,15 @@
 abstract class WorldLocation {
-    worldRequirements: WorldRequirement[];
+    abstract requirements: WorldRequirement[];
 
     canAccess(): boolean {
-        this.worldRequirements.forEach(requirement => {
-            if (!requirement.isCompleted()) {
-                return false;
-            }
+        return this.requirements.every(requirement => {
+            return requirement.isCompleted();
         });
-        return true;
     }
 
     lockedReason() {
         let res = '';
-        this.worldRequirements.forEach(requirement => {
+        this.requirements.forEach(requirement => {
             if (!requirement.isCompleted()) {
                 res += `${requirement.lockedReason()}\n`;
             }
