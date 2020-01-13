@@ -239,7 +239,7 @@ $(document).ready(function () {
     });
 
     $('#mineModal').on('hidden.bs.modal', function () {
-        if (player.route() == 11) {
+        if (App.game.world.currentRoute == 11) {
             App.game.gameState = GameConstants.GameState.fighting;
         } else {
             MapHelper.moveToRoute(11, RegionType.kanto);

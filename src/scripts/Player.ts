@@ -8,11 +8,8 @@ class Player {
 
     public achievementsCompleted: { [name: string]: boolean };
 
-    private _route: KnockoutObservable<number>;
-
     private _defeatedAmount: Array<KnockoutObservable<number>>;
 
-    private _region: KnockoutObservable<RegionType>;
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
@@ -21,22 +18,7 @@ class Player {
         const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0;
-        this._region = ko.observable(savedPlayer._region);
-        if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
-            this._route = ko.observable(savedPlayer._route);
-        } else {
-            switch (savedPlayer._region) {
-                case 0:
-                    this._route = ko.observable(1);
-                    break;
-                case 1:
-                    this._route = ko.observable(29);
-                    break;
-                default:
-                    this._route = ko.observable(1);
-                    this._region = ko.observable(RegionType.kanto);
-            }
-        }
+
 
         this._defeatedAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0);
@@ -201,22 +183,6 @@ class Player {
         return this._itemMultipliers;
     }
 
-    get route(): KnockoutObservable<number> {
-        return this._route;
-    }
-
-    set route(value: KnockoutObservable<number>) {
-        this._route = value;
-    }
-
-    get region(): RegionType {
-        return this._region();
-    }
-
-    set region(value: RegionType) {
-        this._region(value);
-    }
-
     get town(): KnockoutObservable<Town> {
         return this._town;
     }
@@ -331,10 +297,8 @@ class Player {
 
     public toJSON() {
         const keep = [
-            '_route',
             '_defeatedAmount',
             '_caughtAmount',
-            '_region',
             '_starter',
             '_itemList',
             '_itemMultipliers',

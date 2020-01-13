@@ -57,9 +57,9 @@ class Battle {
         player.gainShards(this.enemyPokemon().type1);
         player.gainShards(this.enemyPokemon().type2);
 
-        GameHelper.incrementObservable(player.statistics.routeKills[player.route()]);
+        GameHelper.incrementObservable(player.statistics.routeKills[App.game.world.currentRoute]);
 
-        App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
+        App.game.breeding.progressEggs(Math.floor(Math.sqrt(App.game.world.currentRoute) * 100) / 100);
         const isShiny: boolean = this.enemyPokemon().shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
 
@@ -88,7 +88,7 @@ class Battle {
      */
     public static generateNewEnemy() {
         Battle.counter = 0;
-        Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
+        Battle.enemyPokemon(PokemonFactory.generateWildPokemon(App.game.world.currentRoute, App.game.world.currentRegion));
     }
 
     protected static calculateActualCatchRate(pokeBall: GameConstants.Pokeball) {
@@ -125,7 +125,7 @@ class Battle {
     }
 
     static gainItem() {
-        const p = player.route() / 1600 + 0.009375;
+        const p = App.game.world.currentRoute / 1600 + 0.009375;
 
         if (Math.random() < p) {
             App.game.farming.gainRandomBerry();

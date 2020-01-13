@@ -7,9 +7,9 @@ class World implements Feature {
         currentRegion: RegionType.kanto,
     };
 
-    currentRegion: RegionType;
+    private _currentRegion: KnockoutObservable<RegionType>;
     // TODO combine to position?
-    currentRoute: number;
+    private _currentRoute: KnockoutObservable<number>;
     currentDungeon: string;
     currentTown: string;
 
@@ -18,6 +18,8 @@ class World implements Feature {
 
     constructor(regions: Region[]) {
         this.regions = regions;
+        this._currentRegion = ko.observable(RegionType.kanto);
+        this._currentRoute = ko.observable(0);
     }
 
     moveToRoute(route: number, region: RegionType) {
@@ -100,5 +102,23 @@ class World implements Feature {
         }
         this.currentRoute = json['currentRoute'] ?? this.defaults.currentRoute;
         this.currentRegion = json['currentRegion'] ?? this.defaults.currentRegion;
+    }
+
+    // Knockout getters/setters
+
+    get currentRegion(): RegionType {
+        return this._currentRegion();
+    }
+
+    set currentRegion(region: RegionType) {
+        this._currentRegion(region);
+    }
+
+    get currentRoute(): number {
+        return this._currentRoute();
+    }
+
+    set currentRoute(number: number) {
+        this._currentRoute(number);
     }
 }

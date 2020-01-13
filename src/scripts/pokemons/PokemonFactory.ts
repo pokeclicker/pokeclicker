@@ -122,7 +122,7 @@ class PokemonFactory {
     }
 
     private static roamingEncounter(route): boolean {
-        switch (player.region) {
+        switch (App.game.world.currentRegion) {
             case 0:
                 return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, 25, 1, route);
             case 1:

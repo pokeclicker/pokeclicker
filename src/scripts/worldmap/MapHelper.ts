@@ -3,8 +3,8 @@ class MapHelper {
         if (player.currentTown()) {
             return this.moveToTown(player.currentTown());
         }
-        if (player.route()) {
-            return this.moveToRoute(player.route(), player.region);
+        if (App.game.world.currentRoute) {
+            return this.moveToRoute(App.game.world.currentRoute, App.game.world.currentRegion);
         }
     }
 
@@ -13,12 +13,12 @@ class MapHelper {
             return;
         }
         let genNewEnemy = false;
-        if (route != player.route()) {
+        if (route != App.game.world.currentRoute) {
             genNewEnemy = true;
         }
         if (this.accessToRoute(route, region)) {
-            player.route(route);
-            player.region = region;
+            App.game.world.currentRoute = route;
+            App.game.world.currentRegion = region;
             player.currentTown('');
             if (genNewEnemy) {
                 Battle.generateNewEnemy();
@@ -93,7 +93,7 @@ class MapHelper {
     public static calculateRouteCssClass(route: number, region: RegionType): string {
         let cls;
 
-        if (player.route() == route && player.region == region) {
+        if (App.game.world.currentRoute == route && App.game.world.currentRegion == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
             if (player.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
@@ -147,7 +147,7 @@ class MapHelper {
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
-            player.route(0);
+            App.game.world.currentRoute = 0;
             player.town(TownList[townName]);
             player.currentTown(townName);
             Battle.enemyPokemon(null);
@@ -201,7 +201,7 @@ class MapHelper {
         const openModal = () => {
             $('#ShipModal').modal('show');
         };
-        switch (player.region) {
+        switch (App.game.world.currentRegion) {
             case 0:
                 if (TownList['Vermillion City'].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
@@ -229,7 +229,7 @@ class MapHelper {
         if (MapHelper.ableToTravel()) {
             player.highestRegion(player.highestRegion() + 1);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
-            player.region = player.highestRegion();
+            App.game.world.currentRegion = player.highestRegion();
         }
     }
 

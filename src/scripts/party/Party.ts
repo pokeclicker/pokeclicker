@@ -88,7 +88,7 @@ class Party implements Feature {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
             let multiplier = 1;
-            if (player.region !== GameHelper.getRegion(pokemon.id)) {
+            if (App.game.world.currentRegion !== GameHelper.getRegion(pokemon.id)) {
                 // Pokemon only retain 20% of their total damage in other regions.
                 multiplier = 0.2;
             }
