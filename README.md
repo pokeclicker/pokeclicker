@@ -22,7 +22,7 @@ Then finally, run the following command in the command line interface to start a
 ```cmd
 npm start
 ```
-
+pokeclicker
 Changes to the sourcecode will automatically cause the browser to refresh.
 This means you don't need to compile TypeScript yourself. Gulp will do this for you :thumbsup:
 
