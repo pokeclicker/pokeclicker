@@ -174,7 +174,7 @@ class MapHelper {
 
                 for (let i = 0; i < reqList.length; i++) {
                     const route: number = reqList[i];
-                    if (player.statistics.routeKills[route] < GameConstants.ROUTE_KILLS_NEEDED) {
+                    if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
                         routesNotCompleted.push(route);
                     }
                 }
