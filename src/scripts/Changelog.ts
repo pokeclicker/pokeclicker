@@ -36,6 +36,9 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
 const changelogItems = [
     // Unreleased
 
+    // v0.2.1
+    new Changelog(changelogType.VERSION, 'v0.2.1'),
+    new Changelog(changelogType.REMOVED, 'Remove Hoenn dungeons for now to avoid triggering errors'),
 
     // v0.2.0
     new Changelog(changelogType.VERSION, 'v0.2.0 Redeemable codes'),
