@@ -1,21 +1,20 @@
 class RouteFactory {
 
-    static createRoute(number: number, pokemons: PokemonPerRoute, requirements: WorldRequirement[] = [], isWater = false) {
-
-        pokemons = RouteFactory.cleanPokemonPerRoute(pokemons);
-        return new Route(number, pokemons, requirements, isWater);
+    static createRoute(number: number, pokemon: PokemonPerRoute, requirements: WorldRequirement[] = [], isWater = false) {
+        pokemon = RouteFactory.cleanPokemonPerRoute(pokemon);
+        return new Route(number, pokemon, requirements, isWater);
     }
 
-    private static cleanPokemonPerRoute(pokemons: PokemonPerRoute) {
-        if (pokemons.land === undefined) {
-            pokemons.land = [];
+    private static cleanPokemonPerRoute(pokemon: PokemonPerRoute) {
+        if (pokemon.land === undefined) {
+            pokemon.land = [];
         }
-        if (pokemons.water === undefined) {
-            pokemons.water = [];
+        if (pokemon.water === undefined) {
+            pokemon.water = [];
         }
-        if (pokemons.headButt === undefined) {
-            pokemons.headButt = [];
+        if (pokemon.headButt === undefined) {
+            pokemon.headButt = [];
         }
-        return pokemons;
+        return pokemon;
     }
 }
