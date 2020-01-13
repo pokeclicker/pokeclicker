@@ -20,7 +20,7 @@ class RedeemableCodes implements Saveable {
                 }
                 Notifier.notify('You have unlocked all routes in Kanto', GameConstants.NotificationOption.success);
             }),
-            new RedeemableCode('route-unlock-johto', -891649982, false, function () {
+            new RedeemableCode('route-unlock-johto-2', -891649982, false, function () {
                 for (let i = 26; i <= 46; i++) {
                     player.statistics.routeKills[i](10);
                 }
