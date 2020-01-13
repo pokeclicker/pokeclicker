@@ -26,7 +26,7 @@ const pokemonsPerRoute = {
             headbutt: [],
         },
         5: {
-            land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Oddish', '!(((owth', 'Mankey', 'Abra', 'Bellsprout'],
+            land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Oddish', 'Meowth', 'Mankey', 'Abra', 'Bellsprout'],
             water: [],
             headbutt: [],
         },
