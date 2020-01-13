@@ -2,11 +2,18 @@
 class Route extends WorldLocation {
 
     number: number;
+    pokemons: PokemonPerRoute;
     requirements: WorldRequirement[];
+    isWater: boolean;
 
 
-    pokemons: string[][]
-
+    constructor(number: number, pokemons: PokemonPerRoute, requirements: WorldRequirement[], isWater) {
+        super();
+        this.number = number;
+        this.requirements = requirements;
+        this.pokemons = pokemons;
+        this.isWater = isWater;
+    }
 
 
 }
