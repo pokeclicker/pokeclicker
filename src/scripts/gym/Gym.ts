@@ -31,8 +31,6 @@ class Gym extends WorldLocation {
     }
 }
 
-// Kanto Gyms
-
 //Johto Gyms
 // gymList['Violet City'] = new Gym(
 //     'Falkner',
@@ -215,6 +213,12 @@ class Gym extends WorldLocation {
 //     "…It's over. But it's an odd feeling. I’m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!"
 // );
 //
+
+// const indigoPlateauJohto = ['Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance'];
+// TownList['Indigo Plateau Johto'] = new PokemonLeague('Indigo Plateau Johto', [27], ShopName.None,  null, indigoPlateauJohto);
+// (<PokemonLeague>TownList['Indigo Plateau Johto']).setupGymTowns();
+//
+
 // // Hoenn Gyms
 // gymList['Rustboro City'] = new Gym(
 //     'Roxanne',
@@ -398,3 +402,8 @@ class Gym extends WorldLocation {
 //     BadgeCase.Badge.Elite_Drake,
 //     'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!'
 // );
+
+
+// const pokemonLeagueHoenn = ['Elite Sidney', 'Elite Phoebe', 'Elite Glacia', 'Elite Drake', 'Champion Wallace'];
+// TownList['Pokemon League Hoenn'] = new PokemonLeague('Pokemon League Hoenn', [128], ShopName.None, 'Victory Road Hoenn', pokemonLeagueHoenn);
+// (<PokemonLeague>TownList['Pokemon League Hoenn']).setupGymTowns();

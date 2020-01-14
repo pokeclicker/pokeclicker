@@ -1,16 +1,16 @@
 ///<reference path="../shop/ShopName.ts"/>
 class Town {
     private _name: KnockoutObservable<string>;
-    private _gym: KnockoutObservable<GymLeaderName>;
+    private gyms: GymLeaderName[];
     private _shop: KnockoutObservable<ShopName>;
     private _dungeon?: KnockoutObservable<Dungeon>;
     private _reqRoutes: number[];
     public dungeonReq: string; // Dungeon that must be completed to access town
     public startingTown: boolean;
 
-    constructor(name: string, routes: number[], shop: ShopName = ShopName.None, gym: GymLeaderName = GymLeaderName.None, dungeon?: Dungeon, dungeonReq?: string) {
+    constructor(name: string, routes: number[], shop: ShopName = ShopName.None, gyms: GymLeaderName[] = [], dungeon?: Dungeon, dungeonReq?: string) {
         this._name = ko.observable(name);
-        this._gym = ko.observable(gym);
+        this.gyms = gyms;
         this._reqRoutes = routes;
         this._shop = ko.observable(shop);
         this._dungeon = ko.observable(dungeon);
@@ -20,10 +20,6 @@ class Town {
 
     get name(): KnockoutObservable<string> {
         return this._name;
-    }
-
-    get gym(): GymLeaderName {
-        return this._gym();
     }
 
     get reqRoutes(): number[] {
@@ -75,20 +71,21 @@ class DungeonTown extends Town {
 
 }
 
-const TownList: { [name: string]: Town | PokemonLeague } = {};
+const TownList: { [name: string]: Town  } = {};
 
 //Kanto Towns
 
-TownList['Pewter City'] = new Town('Pewter City', [2], ShopName.PewterCity, GymLeaderName.Brock);
-TownList['Cerulean City'] = new Town('Cerulean City', [4], ShopName.CeruleanCity, GymLeaderName.Misty, dungeonList['Cerulean Cave']);
-TownList['Vermillion City'] = new Town('Vermillion City', [6], ShopName.VermillionCity, GymLeaderName.Lt_Surge);
-TownList['Celadon City'] = new Town('Celadon City', [8], ShopName.CeladonCity,  GymLeaderName.Erika);
-TownList['Saffron City'] = new Town('Saffron City', [5], ShopName.SaffronCity,  GymLeaderName.Sabrina);
-TownList['Fuchsia City'] = new Town('Fuchsia City', [18], ShopName.FuchsiaCity,  GymLeaderName.Koga);
-TownList['Cinnabar Island'] = new Town('Cinnabar Island', [20], ShopName.CinnabarIsland,  GymLeaderName.Blaine, dungeonList['Pokemon Mansion']);
-TownList['Viridian City'] = new Town('Viridian City', [1], ShopName.ViridianCity,  GymLeaderName.Giovanni);
+TownList['Pewter City'] = new Town('Pewter City', [2], ShopName.PewterCity, [GymLeaderName.Brock]);
+TownList['Cerulean City'] = new Town('Cerulean City', [4], ShopName.CeruleanCity, [GymLeaderName.Misty], dungeonList['Cerulean Cave']);
+TownList['Vermillion City'] = new Town('Vermillion City', [6], ShopName.VermillionCity, [GymLeaderName.Lt_Surge]);
+TownList['Celadon City'] = new Town('Celadon City', [8], ShopName.CeladonCity,  [GymLeaderName.Erika]);
+TownList['Saffron City'] = new Town('Saffron City', [5], ShopName.SaffronCity,  [GymLeaderName.Sabrina]);
+TownList['Fuchsia City'] = new Town('Fuchsia City', [18], ShopName.FuchsiaCity,  [GymLeaderName.Koga]);
+TownList['Cinnabar Island'] = new Town('Cinnabar Island', [20], ShopName.CinnabarIsland,  [GymLeaderName.Blaine], dungeonList['Pokemon Mansion']);
+TownList['Viridian City'] = new Town('Viridian City', [1], ShopName.ViridianCity,  [GymLeaderName.Giovanni]);
 TownList['Pallet Town'] = new Town('Pallet Town', [], ShopName.None);
-TownList['Lavender Town'] = new Town('Lavender Town', [10], ShopName.LavenderTown,  GymLeaderName.None, dungeonList['Pokemon Tower']);
+TownList['Lavender Town'] = new Town('Lavender Town', [10], ShopName.LavenderTown,  [GymLeaderName.None], dungeonList['Pokemon Tower']);
+TownList['Indigo Plateau Kanto'] = new Town('Indigo Plateau Kanto', [23], ShopName.None, [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],null, 'Victory Road');
 
 //Kanto Dungeons
 TownList['Viridian Forest'] = new DungeonTown('Viridian Forest', [1]);

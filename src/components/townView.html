@@ -2,22 +2,17 @@
      class="justify-content-center no-gutters no-select">
     <div class="row justify-content-center no-gutters" style="min-height: 100px;">
        <div class="col no-gutters">
-           <div class="list-group" data-bind="if: player.town() instanceof PokemonLeague">
-              <!-- ko foreach: player.town().gymList -->
-                   <button
-                           data-bind="text: GymLeaderName[$data.leaderName],
-                                      disable: !$data.canAccess(),
+           <div class="list-group">
+               <!-- ko foreach: player.town().gyms -->
+               <button class="btn btn-primary"
+                       data-bind="text: GymLeaderName[$data],
+                                      disable: !App.game.world.getGym($data).canAccess(),
                                       click: function() {GymRunner.startGym($data)},
                                       attr: { class: GymController.calculateCssClass($data)}">
-                       E4 Leader
-                   </button>
-               <!-- /ko -->
-           </div>
-           <div class="list-group">
-               <button data-bind="visible: player.town().gym !== GymLeaderName.None, attr: { class: player.town().gym !== GymLeaderName.None ? GymController.calculateCssClass(player.town().gym) : '' }"
-                       onclick="GymRunner.startGym(player.town().gym)">
-                   Gym
+                   Gym Leader
                </button>
+               <!-- /ko -->
+
                <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop !== ShopName.None" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop)">Shop</a>
                <button class="btn btn-secondary"
                        onclick="MapHelper.travelToNextRegion()"
