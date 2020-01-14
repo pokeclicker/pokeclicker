@@ -1,18 +1,18 @@
 ///<reference path="../shop/ShopName.ts"/>
 class Town {
     private _name: KnockoutObservable<string>;
-    private gyms: GymLeaderName[];
-    private _shop: KnockoutObservable<ShopName>;
+    public gyms: GymLeaderName[];
+    public shops: ShopName[];
     private _dungeon?: KnockoutObservable<Dungeon>;
     private _reqRoutes: number[];
     public dungeonReq: string; // Dungeon that must be completed to access town
     public startingTown: boolean;
 
-    constructor(name: string, routes: number[], shop: ShopName = ShopName.None, gyms: GymLeaderName[] = [], dungeon?: Dungeon, dungeonReq?: string) {
+    constructor(name: string, routes: number[], shops: ShopName[] = [], gyms: GymLeaderName[] = [], dungeon?: Dungeon, dungeonReq?: string) {
         this._name = ko.observable(name);
         this.gyms = gyms;
         this._reqRoutes = routes;
-        this._shop = ko.observable(shop);
+        this.shops = shops;
         this._dungeon = ko.observable(dungeon);
         this.dungeonReq = dungeonReq;
         this.startingTown = GameConstants.StartingTowns.indexOf(this._name()) > -1;
@@ -24,10 +24,6 @@ class Town {
 
     get reqRoutes(): number[] {
         return this._reqRoutes;
-    }
-
-    get shop(): ShopName {
-        return this._shop();
     }
 
     get dungeon(): KnockoutObservable<Dungeon> {
@@ -75,17 +71,17 @@ const TownList: { [name: string]: Town  } = {};
 
 //Kanto Towns
 
-TownList['Pewter City'] = new Town('Pewter City', [2], ShopName.PewterCity, [GymLeaderName.Brock]);
-TownList['Cerulean City'] = new Town('Cerulean City', [4], ShopName.CeruleanCity, [GymLeaderName.Misty], dungeonList['Cerulean Cave']);
-TownList['Vermillion City'] = new Town('Vermillion City', [6], ShopName.VermillionCity, [GymLeaderName.Lt_Surge]);
-TownList['Celadon City'] = new Town('Celadon City', [8], ShopName.CeladonCity,  [GymLeaderName.Erika]);
-TownList['Saffron City'] = new Town('Saffron City', [5], ShopName.SaffronCity,  [GymLeaderName.Sabrina]);
-TownList['Fuchsia City'] = new Town('Fuchsia City', [18], ShopName.FuchsiaCity,  [GymLeaderName.Koga]);
-TownList['Cinnabar Island'] = new Town('Cinnabar Island', [20], ShopName.CinnabarIsland,  [GymLeaderName.Blaine], dungeonList['Pokemon Mansion']);
-TownList['Viridian City'] = new Town('Viridian City', [1], ShopName.ViridianCity,  [GymLeaderName.Giovanni]);
-TownList['Pallet Town'] = new Town('Pallet Town', [], ShopName.None);
-TownList['Lavender Town'] = new Town('Lavender Town', [10], ShopName.LavenderTown,  [GymLeaderName.None], dungeonList['Pokemon Tower']);
-TownList['Indigo Plateau Kanto'] = new Town('Indigo Plateau Kanto', [23], ShopName.None, [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],null, 'Victory Road');
+TownList['Pewter City'] = new Town('Pewter City', [2], [ShopName.PewterCity], [GymLeaderName.Brock]);
+TownList['Cerulean City'] = new Town('Cerulean City', [4], [ShopName.CeruleanCity], [GymLeaderName.Misty], dungeonList['Cerulean Cave']);
+TownList['Vermillion City'] = new Town('Vermillion City', [6], [ShopName.VermillionCity], [GymLeaderName.Lt_Surge]);
+TownList['Celadon City'] = new Town('Celadon City', [8], [ShopName.CeladonCity],  [GymLeaderName.Erika]);
+TownList['Saffron City'] = new Town('Saffron City', [5], [ShopName.SaffronCity],  [GymLeaderName.Sabrina]);
+TownList['Fuchsia City'] = new Town('Fuchsia City', [18], [ShopName.FuchsiaCity],  [GymLeaderName.Koga]);
+TownList['Cinnabar Island'] = new Town('Cinnabar Island', [20], [ShopName.CinnabarIsland],  [GymLeaderName.Blaine], dungeonList['Pokemon Mansion']);
+TownList['Viridian City'] = new Town('Viridian City', [1], [ShopName.ViridianCity],  [GymLeaderName.Giovanni]);
+TownList['Pallet Town'] = new Town('Pallet Town', [], []);
+TownList['Lavender Town'] = new Town('Lavender Town', [10], [ShopName.LavenderTown],  [], dungeonList['Pokemon Tower']);
+TownList['Indigo Plateau Kanto'] = new Town('Indigo Plateau Kanto', [23], [], [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],null, 'Victory Road');
 
 //Kanto Dungeons
 TownList['Viridian Forest'] = new DungeonTown('Viridian Forest', [1]);

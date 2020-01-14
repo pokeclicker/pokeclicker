@@ -20,6 +20,8 @@ class ShopHandler {
             const item: Item = shop.items()[i];
             item.price(Math.round(item.basePrice * player.itemMultipliers[item.name()]));
         }
+
+        $('#shopModal').modal('toggle');
     }
 
     public static setSelected(i: number) {

@@ -12,8 +12,10 @@
                    Gym Leader
                </button>
                <!-- /ko -->
+               <!-- ko foreach: player.town().shops -->
+               <button class="btn btn-secondary" data-bind="click: function() {ShopHandler.showShop($data)}">Shop</button>
+               <!-- /ko -->
 
-               <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop !== ShopName.None" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop)">Shop</a>
                <button class="btn btn-secondary"
                        onclick="MapHelper.travelToNextRegion()"
                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
@@ -39,7 +41,7 @@
        </div>
        <div class="col no-gutters">
            <button type="button" class="btn btn-outline-info" style="float: right;"
-           data-bind="visible: player.town().gym !== GymLeaderName.None || player.town().shop !== ShopName.None, tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
+           data-bind="tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
        </div>
 
     </div>
