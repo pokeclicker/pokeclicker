@@ -304,7 +304,7 @@ class RegionFactory {
                 [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
                 102,
                 [new DungeonBossPokemon('Pikachu', 510, 7)],
-                50, null, 1, 5),
+                50, [], 1, 5),
             new Dungeon(DungeonName.Digletts_Cave,
                 ['Diglett'],
                 [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],

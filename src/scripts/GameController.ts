@@ -104,7 +104,7 @@ class GameController {
             } else if (App.game.gameState === GameConstants.GameState.town) {
                 if (keyCode == 32) { // space
                     if (player.town().gyms[0]) {
-                        GymRunner.startGym(player.town().gym[0]);
+                        GymRunner.startGym(player.town().gyms[0]);
                     } else if (player.town() instanceof DungeonEntrance) {
                         DungeonRunner.initializeDungeon(player.town().dungeons[0]);
                     }
