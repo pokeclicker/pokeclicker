@@ -60,7 +60,7 @@ class QuestHelper {
             case 'DefeatDungeon':
                 // Allow upto highest region
                 region = SeededRand.intBetween(0, player.highestRegion());
-                const dungeon = SeededRand.fromArray(GameConstants.RegionDungeons[region]);
+                const dungeon = SeededRand.fromArray(App.game.world.getCurrentRegion().dungeons).name;
                 amount = SeededRand.intBetween(5, 20);
                 return new DefeatDungeonQuest(dungeon, amount);
             case 'UsePokeball':

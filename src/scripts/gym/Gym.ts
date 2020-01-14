@@ -4,11 +4,6 @@
 ///<reference path="../worldmap/worldRequirements/BadgeRequirement.ts"/>
 
 /**
- * Data list that contains all gymLeaders, accessible by townName.
- */
-const gymList: { [townName: string]: Gym } = {};
-
-/**
  * Gym class.
  */
 class Gym extends WorldLocation {

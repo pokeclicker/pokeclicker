@@ -2,6 +2,7 @@
 ///<reference path="../farming/BerryType.ts"/>
 ///<reference path="../pokemons/PokemonType.ts"/>
 ///<reference path="../gym/GymLeaderName.ts"/>
+///<reference path="../dungeons/DungeonName.ts"/>
 class Statistics {
 
     public clicks: KnockoutObservable<number>;
@@ -26,7 +27,7 @@ class Statistics {
 
     private static readonly arraySizes = {
         'gymsDefeated': GameHelper.enumLength(GymLeaderName) - 1,
-        'dungeonsCleared': GameConstants.RegionDungeons.flat().length,
+        'dungeonsCleared': GameHelper.enumLength(DungeonName) - 1,
         'pokeballsUsed': GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
         'pokeballsBought': GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
         'totalShards': GameHelper.enumLength(PokemonType) - 1,  // remove "None" pokemon type
@@ -71,10 +72,4 @@ class Statistics {
             });
         }
     }
-
-    public static getDungeonIndex(dungeon: string) {
-        const dungeons = GameConstants.RegionDungeons.flat();
-        return dungeons.indexOf(dungeon);
-    }
-
 }

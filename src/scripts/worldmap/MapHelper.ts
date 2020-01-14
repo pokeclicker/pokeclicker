@@ -8,17 +8,17 @@ class MapHelper {
             return 'city currentTown';
         }
         if (MapHelper.accessToTown(town)) {
-            if (dungeonList.hasOwnProperty(town)) {
-                if (player.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
-                    return 'dungeon completedDungeon';
-                }
-                return 'dungeon unlockedDungeon';
-            }
+            // if (dungeonList.hasOwnProperty(town)) {
+            //     if (player.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
+            //         return 'dungeon completedDungeon';
+            //     }
+            //     return 'dungeon unlockedDungeon';
+            // }
             return 'city unlockedTown';
         }
-        if (dungeonList.hasOwnProperty(town)) {
-            return 'dungeon';
-        }
+        // if (dungeonList.hasOwnProperty(town)) {
+        //     return 'dungeon';
+        // }
         return 'city';
     }
 
@@ -41,41 +41,7 @@ class MapHelper {
             App.game.gameState = GameConstants.GameState.town;
             GameController.applyRouteBindings();
         } else {
-            const town = TownList[townName];
-            let reqsList = '';
-
-            if (town instanceof DungeonTown) {
-                if (town.badgeReq && !App.game.badgeCase.hasBadge(town.badgeReq)) {
-                    reqsList += `<br/>Requires the ${BadgeCase.Badge[town.badgeReq]} badge.`;
-                }
-            }
-
-            if (!town.hasDungeonReq()) {
-                reqsList += `<br/>${town.dungeonReq} needs to be completed.`;
-            }
-
-            if (!town.hasRouteReq()) {
-                const reqList = town.reqRoutes;
-                const routesNotCompleted = [];
-
-                for (let i = 0; i < reqList.length; i++) {
-                    const route: number = reqList[i];
-                    if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
-                        routesNotCompleted.push(route);
-                    }
-                }
-
-                if (routesNotCompleted.length > 0) {
-                    const routesList = routesNotCompleted.join(', ');
-                    if (routesNotCompleted.length > 1) {
-                        reqsList += `<br/>Routes ${routesList} still need to be completed.`;
-                    } else {
-                        reqsList += `<br/>Route ${routesList} still needs to be completed.`;
-                    }
-                }
-            }
-
-            Notifier.notify(`You don't have access to that location yet.${reqsList}`, GameConstants.NotificationOption.warning);
+            console.error('Move to World');
         }
     };
 

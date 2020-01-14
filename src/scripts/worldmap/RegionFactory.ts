@@ -18,7 +18,7 @@ class RegionFactory {
             RouteFactory.createRoute(4, {
                 land: ['Rattata', 'Spearow', 'Ekans', 'Sandshrew', 'Mankey'],
                 water: ['Poliwag', 'Goldeen', 'Psyduck', 'Krabby', 'Seaking'],
-            }, [new RouteRequirement(3), new DungeonRequirement('Mt. Moon')]),
+            }, [new RouteRequirement(3), new DungeonRequirement(DungeonName.Mt_Moon)]),
 
             RouteFactory.createRoute(5, {
                 land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Oddish', 'Meowth', 'Mankey', 'Abra', 'Bellsprout'],
@@ -31,7 +31,7 @@ class RegionFactory {
 
             RouteFactory.createRoute(7, {
                 land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Vulpix', 'Jigglypuff', 'Oddish', 'Meowth', 'Mankey', 'Growlithe', 'Abra', 'Bellsprout'],
-            }, [new RouteRequirement(5), new RouteRequirement(10), , new BadgeRequirement(BadgeCase.Badge.Thunder)]),
+            }, [new RouteRequirement(5), new RouteRequirement(10), new BadgeRequirement(BadgeCase.Badge.Thunder)]),
 
             RouteFactory.createRoute(8, {
                 land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Ekans', 'Sandshrew', 'Vulpix', 'Jigglypuff', 'Meowth', 'Mankey', 'Growlithe', 'Abra', 'Kadabra'],
@@ -90,7 +90,7 @@ class RegionFactory {
 
             RouteFactory.createRoute(20, {
                 water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Shellder', 'Horsea', 'Staryu'],
-            }, [new RouteRequirement(19), new DungeonRequirement('Seafoam Islands')], true),
+            }, [new RouteRequirement(19), new DungeonRequirement(DungeonName.Seafoam_Islands)], true),
 
             RouteFactory.createRoute(21, {
                 land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Raticate', 'Tangela'],
@@ -298,7 +298,71 @@ class RegionFactory {
             ),
         ];
 
+        const dungeons: Dungeon[] = [
+            new Dungeon(DungeonName.Viridian_Forest,
+                ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Pidgeotto'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+                102,
+                [new DungeonBossPokemon('Pikachu', 510, 7)],
+                50, null, 1, 5),
+            new Dungeon(DungeonName.Digletts_Cave,
+                ['Diglett'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
+                1208,
+                [new DungeonBossPokemon('Dugtrio', 6040, 31)],
+                95, [new BadgeRequirement(BadgeCase.Badge.Boulder)], 2, 22),
+            new Dungeon(DungeonName.Mt_Moon,
+                ['Sandshrew', 'Clefairy', 'Zubat', 'Paras', 'Geodude', 'Pidgeotto'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Token_collector],
+                834,
+                [new DungeonBossPokemon('Kabuto', 4170, 12), new DungeonBossPokemon('Omanyte', 4170, 12)],
+                75, [new BadgeRequirement(BadgeCase.Badge.Boulder)], 4, 10),
+            new Dungeon(DungeonName.Rock_Tunnel,
+                ['Zubat', 'Geodude', 'Machop'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
+                4117,
+                [new DungeonBossPokemon('Onix', 20585, 17)],
+                500, [new BadgeRequirement(BadgeCase.Badge.Cascade)], 5, 15),
+            new Dungeon(DungeonName.Power_Plant,
+                ['Pikachu', 'Raichu', 'Magnemite', 'Magneton', 'Grimer', 'Muk', 'Electrode'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+                13507,
+                [new DungeonBossPokemon('Electabuzz', 67535, 35), new DungeonBossPokemon('Zapdos', 101302, 50)],
+                1000, [new BadgeRequirement(BadgeCase.Badge.Cascade)], 8, 25),
+            new Dungeon(DungeonName.Pokemon_Tower,
+                ['Gastly', 'Haunter', 'Cubone'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                7523,
+                [new DungeonBossPokemon('Marowak', 37615, 30)],
+                750, [new BadgeRequirement(BadgeCase.Badge.Cascade)], 10, 20),
+            new Dungeon(DungeonName.Seafoam_Islands,
+                ['Zubat', 'Golbat', 'Psyduck', 'Golduck', 'Slowpoke', 'Slowbro', 'Shellder', 'Krabby', 'Horsea', 'Staryu'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xExp],
+                17226,
+                [new DungeonBossPokemon('Seel', 86130, 35), new DungeonBossPokemon('Articuno', 129195, 50)],
+                1250, [new BadgeRequirement(BadgeCase.Badge.Soul)], 15, 30),
+            new Dungeon(DungeonName.Pokemon_Mansion,
+                ['Growlithe', 'Vulpix', 'Grimer', 'Muk', 'Koffing', 'Weezing'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
+                17760,
+                [new DungeonBossPokemon('Magmar', 88800, 40)],
+                1500, [new BadgeRequirement(BadgeCase.Badge.Soul)], 16, 35),
+            new Dungeon(DungeonName.Victory_Road,
+                ['Zubat', 'Golbat', 'Machop', 'Geodude', 'Graveler', 'Onix', 'Marowak', 'Venomoth'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                24595,
+                [new DungeonBossPokemon('Machoke', 122975, 42), new DungeonBossPokemon('Moltres', 184462, 50)],
+                2000, [new BadgeRequirement(BadgeCase.Badge.Earth)], 20, 40),
+            new Dungeon(DungeonName.Cerulean_Cave,
+                ['Arbok', 'Raichu', 'Sandslash', 'Golbat', 'Parasect', 'Venomoth', 'Kadabra', 'Magneton', 'Dodrio', 'Hypno', 'Ditto', 'Wigglytuff', 'Electrode', 'Marowak', 'Chansey'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+                28735,
+                [new DungeonBossPokemon('Rhydon', 143675, 60), new DungeonBossPokemon('Mewtwo', 215512, 70)],
+                2500, [new BadgeRequirement(BadgeCase.Badge.Elite_KantoChampion)], 20, 55
+            ),
 
-        return new Region(RegionName.kanto, 151, routes, gyms, shops);
+        ];
+
+        return new Region(RegionName.kanto, 151, routes, gyms, shops, dungeons);
     }
 }

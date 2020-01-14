@@ -89,6 +89,11 @@ class World implements Saveable {
         return this.getCurrentRegion().getGym(name);
     }
 
+
+    getDungeon(name: DungeonName) {
+        return this.getCurrentRegion().getDungeon(name);
+    }
+
     toJSON(): object {
         return {
             currentRoute: this.currentRoute,

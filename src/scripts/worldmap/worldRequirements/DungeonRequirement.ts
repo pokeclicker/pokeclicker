@@ -1,16 +1,15 @@
 class DungeonRequirement implements WorldRequirement {
-    // TODO(@Isha) change to enum during dungeon refactor
-    dungeon: string;
+    name: DungeonName;
 
-    constructor(dungeon: string) {
-        this.dungeon = dungeon;
+    constructor(name: DungeonName) {
+        this.name = name;
     }
 
     isCompleted(): boolean {
-        return player.statistics.dungeonsCleared[Statistics.getDungeonIndex(this.dungeon)]() > 0;
+        return player.statistics.dungeonsCleared[(this.name)]() > 0;
     }
 
     lockedReason(): string {
-        return `You need to clear the ${this.dungeon} Dungeon before you can access this location.`;
+        return `You need to clear the ${DungeonName[this.name]} Dungeon before you can access this location.`;
     }
 }

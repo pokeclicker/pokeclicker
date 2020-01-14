@@ -7,13 +7,15 @@ class Region {
     routes: Route[];
     gyms: Gym[];
     shops: Shop[];
+    dungeons: Dungeon[];
 
-    constructor(type: RegionName, pokemonsAvailable: number, routes: Route[], gyms: Gym[], shops: Shop[]) {
+    constructor(type: RegionName, pokemonsAvailable: number, routes: Route[], gyms: Gym[], shops: Shop[], dungeons: Dungeon[]) {
         this.type = type;
         this.pokemonsAvailable = pokemonsAvailable;
         this.routes = routes;
         this.gyms = gyms;
         this.shops = shops;
+        this.dungeons = dungeons;
     }
 
     getRoute(number: number): Route {
@@ -45,5 +47,15 @@ class Region {
             console.error(`Could not find gym ${GymLeaderName[name]}`);
         }
         return gym;
+    }
+
+    getDungeon(name: DungeonName) {
+        const dungeon = this.dungeons.find(dungeon => {
+            return dungeon.name === name;
+        });
+        if (dungeon === undefined) {
+            console.error(`Could not find dungeon ${DungeonName[name]}`);
+        }
+        return dungeon;
     }
 }
