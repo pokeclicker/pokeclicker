@@ -57,7 +57,7 @@ class Party implements Feature {
         }
         Notifier.notify(`You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, GameConstants.NotificationOption.success);
         this._caughtPokemon.push(pokemon);
-
+        this._caughtPokemon=PartyController.getSortedList()()
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
