@@ -315,7 +315,6 @@ class Player {
             '_lastSeen',
             'currentQuests',
             '_shinyCatches',
-            'gymDefeats',
             'statistics',
             'achievementsCompleted',
             'effectList',
