@@ -19,12 +19,15 @@
                <!-- ko foreach: player.town().dungeons -->
                    <!-- ko if: player.town() instanceof DungeonEntrance -->
                        <button class="btn btn-primary"
-                               data-bind="text: GameConstants.humanifyString(DungeonName[$data]),
-                                              disable: !App.game.world.getDungeon($data).canAccess(),
-                                              click: function() {DungeonRunner.initializeDungeon($data)}"
+                               data-bind="
+                               disable: !App.game.world.getDungeon($data).canAccess(),
+                               click: function() {DungeonRunner.initializeDungeon($data)}"
                        >
-                           Dungeon
+                           <span data-bind="text: GameConstants.humanifyString(DungeonName[$data])"></span>
+                           <br>
+                           <span data-bind="template: { name: 'currencyTemplate', data: App.game.world.getDungeon($data).entryCost}"></span>
                        </button>
+
                <!-- /ko -->
                    <!-- ko ifnot: player.town() instanceof DungeonEntrance -->
                        <button class="btn btn-primary"
