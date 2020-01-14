@@ -82,11 +82,11 @@ class PokemonHelper {
         const pokemon = PokemonHelper.getPokemonByName(pokemonName);
         const id = pokemon.id;
         if (id > 251) {
-            return RegionType.hoenn;
+            return RegionName.hoenn;
         } else if (id > 151) {
-            return RegionType.johto;
+            return RegionName.johto;
         } else {
-            return RegionType.kanto;
+            return RegionName.kanto;
         }
     }
 

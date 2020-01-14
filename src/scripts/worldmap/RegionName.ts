@@ -1,4 +1,4 @@
-enum RegionType {
+enum RegionName {
     kanto = 0,
     johto = 1,
     hoenn = 2,

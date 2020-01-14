@@ -1,5 +1,5 @@
 class Region {
-    type: RegionType;
+    type: RegionName;
 
     pokemonsAvailable: number;
 
@@ -8,7 +8,7 @@ class Region {
     gyms: Gym[];
     shops: Shop[];
 
-    constructor(type: RegionType, pokemonsAvailable: number, routes: Route[], gyms: Gym[], shops: Shop[]) {
+    constructor(type: RegionName, pokemonsAvailable: number, routes: Route[], gyms: Gym[], shops: Shop[]) {
         this.type = type;
         this.pokemonsAvailable = pokemonsAvailable;
         this.routes = routes;

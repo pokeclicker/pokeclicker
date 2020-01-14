@@ -79,7 +79,7 @@ class MapHelper {
         }
     };
 
-    public static validRoute(route = 0, region: RegionType = 0): boolean {
+    public static validRoute(route = 0, region: RegionName = 0): boolean {
         return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];
     }
 

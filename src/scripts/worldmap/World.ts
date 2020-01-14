@@ -3,11 +3,11 @@ class World implements Saveable {
 
     saveKey = 'world';
     defaults = {
-        currentRegion: RegionType.kanto,
+        currentRegion: RegionName.kanto,
         currentRoute: 1,
     };
 
-    private _currentRegion: KnockoutObservable<RegionType>;
+    private _currentRegion: KnockoutObservable<RegionName>;
     // TODO combine to position?
     private _currentRoute: KnockoutObservable<number>;
     currentDungeon: string;
@@ -22,7 +22,7 @@ class World implements Saveable {
         this._currentRoute = ko.observable(this.defaults.currentRoute);
     }
 
-    moveToRoute(route: number, region: RegionType) {
+    moveToRoute(route: number, region: RegionName) {
         if (route === this.currentRoute && region === this.currentRegion) {
             console.log('This is the current route');
             return;
@@ -48,7 +48,7 @@ class World implements Saveable {
         GameController.applyRouteBindings();
     }
 
-    getRegion(type: RegionType): Region {
+    getRegion(type: RegionName): Region {
         const region = this.regions.find(region => {
             return region.type === type;
         });
@@ -58,7 +58,7 @@ class World implements Saveable {
         return region;
     }
 
-    isValidRoute(route: number, region: RegionType) {
+    isValidRoute(route: number, region: RegionName) {
         const foundRegion = this.getRegion(region);
         if (foundRegion === undefined) {
             console.error(`Undefined region ${region} with route ${route}`);
@@ -66,13 +66,13 @@ class World implements Saveable {
         }
         const foundRoute = foundRegion.getRoute(route);
         if (foundRoute === undefined) {
-            console.error(`Undefined route ${route} in region ${RegionType[region]}`);
+            console.error(`Undefined route ${route} in region ${RegionName[region]}`);
             return false;
         }
         return true;
     }
 
-    accessToRoute(route: number, region: RegionType) {
+    accessToRoute(route: number, region: RegionName) {
         return this.isValidRoute(route, region) && this.getRegion(region).getRoute(route).canAccess();
     }
 
@@ -98,11 +98,11 @@ class World implements Saveable {
     }
 
     // Knockout getters/setters
-    get currentRegion(): RegionType {
+    get currentRegion(): RegionName {
         return this._currentRegion();
     }
 
-    set currentRegion(region: RegionType) {
+    set currentRegion(region: RegionName) {
         this._currentRegion(region);
     }
 

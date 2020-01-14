@@ -9,7 +9,7 @@ class PokemonFactory {
      * @param region region that the player is in.
      * @returns {any}
      */
-    public static generateWildPokemon(route: number, region: RegionType): BattlePokemon {
+    public static generateWildPokemon(route: number, region: RegionName): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
         }
         let possiblePokemon: string[] = [];
@@ -21,7 +21,7 @@ class PokemonFactory {
         }
 
         if (possiblePokemon.length === 0) {
-            console.error(`Could not find pokemon to spawn on route ${route} in region ${RegionType[region]}`);
+            console.error(`Could not find pokemon to spawn on route ${route} in region ${RegionName[region]}`);
             return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
 

@@ -139,7 +139,7 @@ class Farming implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.world.accessToRoute(14, RegionType.kanto) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
+        return App.game.world.accessToRoute(14, RegionName.kanto) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
     }
 
     toJSON(): object {

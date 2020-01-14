@@ -1,5 +1,5 @@
 ///<reference path="Shop.ts"/>
-///<reference path="../worldmap/RegionType.ts"/>
+///<reference path="../worldmap/RegionName.ts"/>
 ///<reference path="ShopName.ts"/>
 class ShopHandler {
     static shopObservable: KnockoutObservable<Shop> = ko.observable(new Shop(ShopName.None, []));

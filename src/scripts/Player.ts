@@ -119,7 +119,7 @@ class Player {
     public tutorialState: any;
     public tutorialComplete: KnockoutObservable<boolean>;
 
-    private highestRegion: KnockoutObservable<RegionType>;
+    private highestRegion: KnockoutObservable<RegionName>;
 
     set defeatedAmount(value: Array<KnockoutObservable<number>>) {
         this._defeatedAmount = value;

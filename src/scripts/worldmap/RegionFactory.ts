@@ -130,6 +130,6 @@ class RegionFactory {
             new Shop(ShopName.LavenderTown, ['Greatball', 'Item_magnet', 'Lucky_incense', 'Grass_egg']),
 
         ];
-        return new Region(RegionType.kanto, 151, routes, [], shops);
+        return new Region(RegionName.kanto, 151, routes, [], shops);
     }
 }

@@ -186,7 +186,7 @@ class Underground {
     }
 
     private static canAccess() {
-        return App.game.world.accessToRoute(11, RegionType.kanto) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
+        return App.game.world.accessToRoute(11, RegionName.kanto) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 
     public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {

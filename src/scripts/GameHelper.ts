@@ -76,7 +76,7 @@ class GameHelper {
         }
     }
 
-    public static getRegion(id): RegionType {
+    public static getRegion(id): RegionName {
         return GameConstants.TotalPokemonsPerRegion.findIndex(p => id < p);
     }
 
