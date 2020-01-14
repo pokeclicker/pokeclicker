@@ -29,20 +29,9 @@ class Gym extends WorldLocation {
         this.requirements = requirements;
         this.defeatMessage = rewardMessage;
     }
-
-    public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
-        return ko.computed(function () {
-            if (App.game.badgeCase.hasBadge(gym.badgeReward)) {
-                return 'btn btn-success';
-            }
-            return 'btn btn-secondary';
-        });
-    }
 }
 
 // Kanto Gyms
-
-//TODO make champion Gym
 
 //Johto Gyms
 // gymList['Violet City'] = new Gym(

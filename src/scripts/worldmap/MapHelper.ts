@@ -34,6 +34,7 @@ class MapHelper {
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
             App.game.world.currentRoute = -1;
+            console.log(townName);
             player.town(TownList[townName]);
             player.currentTown(townName);
             Battle.enemyPokemon(null);

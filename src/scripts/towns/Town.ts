@@ -1,16 +1,16 @@
 ///<reference path="../shop/ShopName.ts"/>
 class Town {
     private _name: KnockoutObservable<string>;
-    private _gym?: KnockoutObservable<Gym>;
+    private _gym: KnockoutObservable<GymLeaderName>;
     private _shop: KnockoutObservable<ShopName>;
     private _dungeon?: KnockoutObservable<Dungeon>;
     private _reqRoutes: number[];
     public dungeonReq: string; // Dungeon that must be completed to access town
     public startingTown: boolean;
 
-    constructor(name: string, routes: number[], shop: ShopName = ShopName.None, dungeon?: Dungeon, dungeonReq?: string) {
+    constructor(name: string, routes: number[], shop: ShopName = ShopName.None, gym: GymLeaderName = GymLeaderName.None, dungeon?: Dungeon, dungeonReq?: string) {
         this._name = ko.observable(name);
-        this._gym = ko.observable(gymList[name]);
+        this._gym = ko.observable(gym);
         this._reqRoutes = routes;
         this._shop = ko.observable(shop);
         this._dungeon = ko.observable(dungeon);
@@ -22,12 +22,12 @@ class Town {
         return this._name;
     }
 
-    get reqRoutes(): number[] {
-        return this._reqRoutes;
+    get gym(): GymLeaderName {
+        return this._gym();
     }
 
-    get gym(): KnockoutObservable<Gym> {
-        return this._gym;
+    get reqRoutes(): number[] {
+        return this._reqRoutes;
     }
 
     get shop(): ShopName {
@@ -65,7 +65,7 @@ class DungeonTown extends Town {
     public badgeReq: BadgeCase.Badge;
 
     constructor(name: string, routes: number[], badge?: BadgeCase.Badge) {
-        super(name, routes, null, dungeonList[name]);
+        super(name, routes, null, null, dungeonList[name]);
         this.badgeReq = badge;
     }
 
@@ -79,16 +79,16 @@ const TownList: { [name: string]: Town | PokemonLeague } = {};
 
 //Kanto Towns
 
-TownList['Pewter City'] = new Town('Pewter City', [2], ShopName.PewterCity);
-TownList['Cerulean City'] = new Town('Cerulean City', [4], ShopName.CeruleanCity, dungeonList['Cerulean Cave']);
-TownList['Vermillion City'] = new Town('Vermillion City', [6], ShopName.VermillionCity);
-TownList['Celadon City'] = new Town('Celadon City', [8], ShopName.CeladonCity);
-TownList['Saffron City'] = new Town('Saffron City', [5], ShopName.SaffronCity);
-TownList['Fuchsia City'] = new Town('Fuchsia City', [18], ShopName.FuchsiaCity);
-TownList['Cinnabar Island'] = new Town('Cinnabar Island', [20], ShopName.CinnabarIsland, dungeonList['Pokemon Mansion']);
-TownList['Viridian City'] = new Town('Viridian City', [1], ShopName.ViridianCity);
+TownList['Pewter City'] = new Town('Pewter City', [2], ShopName.PewterCity, GymLeaderName.Brock);
+TownList['Cerulean City'] = new Town('Cerulean City', [4], ShopName.CeruleanCity, GymLeaderName.Misty, dungeonList['Cerulean Cave']);
+TownList['Vermillion City'] = new Town('Vermillion City', [6], ShopName.VermillionCity, GymLeaderName.Lt_Surge);
+TownList['Celadon City'] = new Town('Celadon City', [8], ShopName.CeladonCity,  GymLeaderName.Erika);
+TownList['Saffron City'] = new Town('Saffron City', [5], ShopName.SaffronCity,  GymLeaderName.Sabrina);
+TownList['Fuchsia City'] = new Town('Fuchsia City', [18], ShopName.FuchsiaCity,  GymLeaderName.Koga);
+TownList['Cinnabar Island'] = new Town('Cinnabar Island', [20], ShopName.CinnabarIsland,  GymLeaderName.Blaine, dungeonList['Pokemon Mansion']);
+TownList['Viridian City'] = new Town('Viridian City', [1], ShopName.ViridianCity,  GymLeaderName.Giovanni);
 TownList['Pallet Town'] = new Town('Pallet Town', [], ShopName.None);
-TownList['Lavender Town'] = new Town('Lavender Town', [10], ShopName.LavenderTown, dungeonList['Pokemon Tower']);
+TownList['Lavender Town'] = new Town('Lavender Town', [10], ShopName.LavenderTown,  GymLeaderName.None, dungeonList['Pokemon Tower']);
 
 //Kanto Dungeons
 TownList['Viridian Forest'] = new DungeonTown('Viridian Forest', [1]);
@@ -132,37 +132,37 @@ TownList['Pokemon Mansion'] = new DungeonTown('Pokemon Mansion', [20], BadgeCase
 // TownList['Blackthorn City'] = new Town('Blackthorn City', [44], BlackthornCityShop, null, 'Ice Path');
 
 //Johto Dungeons
-TownList['Sprout Tower'] = new DungeonTown('Sprout Tower', [31]);
-TownList['Ruins of Alph'] = new DungeonTown('Ruins of Alph', [32]);
-TownList['Union Cave'] = new DungeonTown('Union Cave', [32]);
-TownList['Slowpoke Well'] = new DungeonTown('Slowpoke Well', [33]);
-TownList['Ilex Forest'] = new DungeonTown('Ilex Forest', [33]);
-TownList['Burned Tower'] = new DungeonTown('Burned Tower', [37]);
-TownList['Tin Tower'] = new DungeonTown('Tin Tower', [37]);
-TownList['Whirl Islands'] = new DungeonTown('Whirl Islands', [41]);
-TownList['Mt Mortar'] = new DungeonTown('Mt Mortar', [42]);
-TownList['Ice Path'] = new DungeonTown('Ice Path', [44]);
-TownList['Dark Cave'] = new DungeonTown('Dark Cave', [45]);
-TownList['Mt Silver'] = new DungeonTown('Mt Silver', [28], BadgeCase.Badge.Elite_Karen);
+// TownList['Sprout Tower'] = new DungeonTown('Sprout Tower', [31]);
+// TownList['Ruins of Alph'] = new DungeonTown('Ruins of Alph', [32]);
+// TownList['Union Cave'] = new DungeonTown('Union Cave', [32]);
+// TownList['Slowpoke Well'] = new DungeonTown('Slowpoke Well', [33]);
+// TownList['Ilex Forest'] = new DungeonTown('Ilex Forest', [33]);
+// TownList['Burned Tower'] = new DungeonTown('Burned Tower', [37]);
+// TownList['Tin Tower'] = new DungeonTown('Tin Tower', [37]);
+// TownList['Whirl Islands'] = new DungeonTown('Whirl Islands', [41]);
+// TownList['Mt Mortar'] = new DungeonTown('Mt Mortar', [42]);
+// TownList['Ice Path'] = new DungeonTown('Ice Path', [44]);
+// TownList['Dark Cave'] = new DungeonTown('Dark Cave', [45]);
+// TownList['Mt Silver'] = new DungeonTown('Mt Silver', [28], BadgeCase.Badge.Elite_Karen);
 
 //Hoenn Towns
-TownList['Littleroot Town'] = new Town('Littleroot Town', []);
-TownList['Oldale Town'] = new Town('Oldale Town', [101]);
-TownList['Petalburg City'] = new Town('Petalburg City', [102]);
-TownList['Rustboro City'] = new Town('Rustboro City', [104], null, null, 'Petalburg Woods');
-TownList['Dewford Town'] = new Town('Dewford Town', [116], null, null, 'Rusturf Tunnel');
-TownList['Slateport City'] = new Town('Slateport City', [], null, null, 'Granite Cave');
-TownList['Mauville City'] = new Town('Mauville City', [110]);
-TownList['Verdanturf Town'] = new Town('Verdanturf Town', [117]);
-TownList['Lavaridge Town'] = new Town('Lavaridge Town', [115], null, null, 'Mt. Chimney');
-TownList['Fallarbor Town'] = new Town('Fallarbor Town', [113]);
-TownList['Fortree City'] = new Town('Fortree City', [119]);
-TownList['Lilycove City'] = new Town('LilyCove City', [121], null, null, 'Mt. Pyre');
-TownList['Mossdeep City'] = new Town('Mossdeep City', [125], null, null, 'Shoal Cave');
-TownList['Sootopolis City'] = new Town('Sootopolis City', [126], null, null, 'Cave of Origin');
-TownList['Ever Grande City'] = new Town('Ever Grande City', [128]);
-TownList['Pokemon League Hoenn'] = new Town('Pokemon League', [128], null, null, 'Victory Road Hoenn');
-TownList['Pacifidlog Town'] = new Town('Pacifidlog Town', [131]);
+// TownList['Littleroot Town'] = new Town('Littleroot Town', []);
+// TownList['Oldale Town'] = new Town('Oldale Town', [101]);
+// TownList['Petalburg City'] = new Town('Petalburg City', [102]);
+// TownList['Rustboro City'] = new Town('Rustboro City', [104], null, null, 'Petalburg Woods');
+// TownList['Dewford Town'] = new Town('Dewford Town', [116], null, null, 'Rusturf Tunnel');
+// TownList['Slateport City'] = new Town('Slateport City', [], null, null, 'Granite Cave');
+// TownList['Mauville City'] = new Town('Mauville City', [110]);
+// TownList['Verdanturf Town'] = new Town('Verdanturf Town', [117]);
+// TownList['Lavaridge Town'] = new Town('Lavaridge Town', [115], null, null, 'Mt. Chimney');
+// TownList['Fallarbor Town'] = new Town('Fallarbor Town', [113]);
+// TownList['Fortree City'] = new Town('Fortree City', [119]);
+// TownList['Lilycove City'] = new Town('LilyCove City', [121], null, null, 'Mt. Pyre');
+// TownList['Mossdeep City'] = new Town('Mossdeep City', [125], null, null, 'Shoal Cave');
+// TownList['Sootopolis City'] = new Town('Sootopolis City', [126], null, null, 'Cave of Origin');
+// TownList['Ever Grande City'] = new Town('Ever Grande City', [128]);
+// TownList['Pokemon League Hoenn'] = new Town('Pokemon League', [128], null, null, 'Victory Road Hoenn');
+// TownList['Pacifidlog Town'] = new Town('Pacifidlog Town', [131]);
 
 // TODO Implement
 //Hoenn Dungeons

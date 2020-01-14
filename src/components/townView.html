@@ -8,14 +8,14 @@
                            data-bind="text: GymLeaderName[$data.leaderName],
                                       disable: !$data.canAccess(),
                                       click: function() {GymRunner.startGym($data)},
-                                      attr: { class: Gym.calculateCssClass($data)}">
+                                      attr: { class: GymController.calculateCssClass($data)}">
                        E4 Leader
                    </button>
                <!-- /ko -->
            </div>
            <div class="list-group">
-               <button data-bind="visible: player.town().gym, attr: { class: player.town().gym() ? Gym.calculateCssClass(player.town().gym()) : '' }"
-                       onclick="GymRunner.startGym(player.town().gym())">
+               <button data-bind="visible: player.town().gym !== GymLeaderName.None, attr: { class: player.town().gym !== GymLeaderName.None ? GymController.calculateCssClass(player.town().gym) : '' }"
+                       onclick="GymRunner.startGym(player.town().gym)">
                    Gym
                </button>
                <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop !== ShopName.None" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop)">Shop</a>
@@ -44,7 +44,7 @@
        </div>
        <div class="col no-gutters">
            <button type="button" class="btn btn-outline-info" style="float: right;"
-           data-bind="visible: player.town().gym() || player.town().shop !== ShopName.None, tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
+           data-bind="visible: player.town().gym !== GymLeaderName.None || player.town().shop !== ShopName.None, tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
        </div>
 
     </div>
