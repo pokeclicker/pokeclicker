@@ -5,7 +5,7 @@
            <div class="list-group">
                <!-- ko foreach: player.town().gyms -->
                <button class="btn btn-primary"
-                       data-bind="text: GymLeaderName[$data],
+                       data-bind="text: GameConstants.humanifyString(GymLeaderName[$data]),
                                       disable: !App.game.world.getGym($data).canAccess(),
                                       click: function() {GymRunner.startGym($data)},
                                       attr: { class: GymController.calculateCssClass($data)}">
@@ -19,7 +19,7 @@
                <!-- ko foreach: player.town().dungeons -->
                    <!-- ko if: player.town() instanceof DungeonEntrance -->
                        <button class="btn btn-primary"
-                               data-bind="text: DungeonName[$data],
+                               data-bind="text: GameConstants.humanifyString(DungeonName[$data]),
                                               disable: !App.game.world.getDungeon($data).canAccess(),
                                               click: function() {DungeonRunner.initializeDungeon($data)}"
                        >
@@ -28,7 +28,7 @@
                <!-- /ko -->
                    <!-- ko ifnot: player.town() instanceof DungeonEntrance -->
                        <button class="btn btn-primary"
-                               data-bind="text: DungeonName[$data],
+                               data-bind="text:  GameConstants.humanifyString(DungeonName[$data]),
                                                       disable: !App.game.world.getDungeon($data).canAccess(),
                                                       click: function() {MapHelper.moveToTown($data)},
                                                       attr: { class: GymController.calculateCssClass($data)}">
@@ -48,7 +48,7 @@
            </div>
        </div>
        <div class="col-7 no-gutters">
-           <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
+           <h2 class="pageItemTitle" data-bind="text: GameConstants.humanifyString(player.town().name())">Town Name</h2>
            <img class="townImage no-select" src=""
                 data-bind="attr:{ src: 'assets/images/towns/' + player.town().name() + '.png' }"/>
        </div>

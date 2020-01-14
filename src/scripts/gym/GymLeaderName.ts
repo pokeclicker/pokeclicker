@@ -2,7 +2,7 @@ enum GymLeaderName {
     'None' = -1,
     'Brock',
     'Misty',
-    'Lt_Surge',
+    'Lt._Surge',
     'Erika',
     'Sabrina',
     'Koga',

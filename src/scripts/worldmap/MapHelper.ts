@@ -1,5 +1,9 @@
 class MapHelper {
     public static calculateTownCssClass(town: string): string {
+        // TODO Temporary fix
+        town = town.replace(' ', '_');
+        town = town.replace(' ', '_');
+
         // TODO(@Isha) this is very weird, refactor this.
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem[town])) {
             return 'city unlockedTown';
@@ -31,6 +35,12 @@ class MapHelper {
     };
 
     public static moveToTown(townName: string) {
+        // TODO Temporary fix
+        townName = townName.replace(' ', '_');
+        townName = townName.replace(' ', '_');
+
+        console.log(townName);
+
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
             App.game.world.currentRoute = -1;

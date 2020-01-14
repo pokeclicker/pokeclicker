@@ -26,7 +26,7 @@ class Player {
         this._caughtAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0);
         });
-        this._town = ko.observable(TownList['Pallet Town']);
+        this._town = ko.observable(TownList['Pallet_Town']);
         this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
 

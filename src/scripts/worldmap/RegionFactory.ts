@@ -18,7 +18,7 @@ class RegionFactory {
             RouteFactory.createRoute(4, {
                 land: ['Rattata', 'Spearow', 'Ekans', 'Sandshrew', 'Mankey'],
                 water: ['Poliwag', 'Goldeen', 'Psyduck', 'Krabby', 'Seaking'],
-            }, [new RouteRequirement(3), new DungeonRequirement(DungeonName.Mt_Moon)]),
+            }, [new RouteRequirement(3), new DungeonRequirement(DungeonName['Mt._Moon'])]),
 
             RouteFactory.createRoute(5, {
                 land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Oddish', 'Meowth', 'Mankey', 'Abra', 'Bellsprout'],
@@ -155,7 +155,7 @@ class RegionFactory {
                 "Wow! You're too much, all right! You can have the Cascade Badge to show that you beat me."
             ),
             new Gym(
-                GymLeaderName.Lt_Surge,
+                GymLeaderName['Lt._Surge'],
                 [
                     new GymPokemon('Voltorb', 10780, 21),
                     new GymPokemon('Pikachu', 13540, 18),
@@ -311,7 +311,7 @@ class RegionFactory {
                 1208,
                 [new DungeonBossPokemon('Dugtrio', 6040, 31)],
                 95, [new BadgeRequirement(BadgeCase.Badge.Boulder)], 2, 22),
-            new Dungeon(DungeonName.Mt_Moon,
+            new Dungeon(DungeonName['Mt._Moon'],
                 ['Sandshrew', 'Clefairy', 'Zubat', 'Paras', 'Geodude', 'Pidgeotto'],
                 [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Token_collector],
                 834,

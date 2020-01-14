@@ -49,29 +49,29 @@ const TownList: { [name: string]: Town  } = {};
 
 //Kanto Towns
 
-TownList['Pewter City'] = new Town('Pewter City', [new RouteRequirement(2)], [ShopName.PewterCity], [GymLeaderName.Brock]);
-TownList['Cerulean City'] = new Town('Cerulean City', [new RouteRequirement(4)], [ShopName.CeruleanCity], [GymLeaderName.Misty], [DungeonName.Cerulean_Cave]);
-TownList['Vermillion City'] = new Town('Vermillion City', [new RouteRequirement(6)], [ShopName.VermillionCity], [GymLeaderName.Lt_Surge]);
-TownList['Celadon City'] = new Town('Celadon City', [new RouteRequirement(8)], [ShopName.CeladonCity],  [GymLeaderName.Erika]);
-TownList['Saffron City'] = new Town('Saffron City', [new RouteRequirement(5)], [ShopName.SaffronCity],  [GymLeaderName.Sabrina]);
-TownList['Fuchsia City'] = new Town('Fuchsia City', [new RouteRequirement(18)], [ShopName.FuchsiaCity],  [GymLeaderName.Koga]);
-TownList['Cinnabar Island'] = new Town('Cinnabar Island', [new RouteRequirement(20)], [ShopName.CinnabarIsland],  [GymLeaderName.Blaine], [DungeonName.Pokemon_Mansion]);
-TownList['Viridian City'] = new Town('Viridian City', [new RouteRequirement(1)], [ShopName.ViridianCity],  [GymLeaderName.Giovanni]);
-TownList['Pallet Town'] = new Town('Pallet Town', [], []);
-TownList['Lavender Town'] = new Town('Lavender Town', [new RouteRequirement(10)], [ShopName.LavenderTown],  [], [DungeonName.Pokemon_Tower]);
-TownList['Indigo Plateau Kanto'] = new Town('Indigo Plateau Kanto', [new RouteRequirement(23)], [], [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],[]);
+TownList['Pewter_City'] = new Town('Pewter_City', [new RouteRequirement(2)], [ShopName.PewterCity], [GymLeaderName.Brock]);
+TownList['Cerulean_City'] = new Town('Cerulean_City', [new RouteRequirement(4)], [ShopName.CeruleanCity], [GymLeaderName.Misty], [DungeonName.Cerulean_Cave]);
+TownList['Vermillion_City'] = new Town('Vermillion_City', [new RouteRequirement(6)], [ShopName.VermillionCity], [GymLeaderName['Lt._Surge']]);
+TownList['Celadon_City'] = new Town('Celadon_City', [new RouteRequirement(8)], [ShopName.CeladonCity],  [GymLeaderName.Erika]);
+TownList['Saffron_City'] = new Town('Saffron_City', [new RouteRequirement(5)], [ShopName.SaffronCity],  [GymLeaderName.Sabrina]);
+TownList['Fuchsia_City'] = new Town('Fuchsia_City', [new RouteRequirement(18)], [ShopName.FuchsiaCity],  [GymLeaderName.Koga]);
+TownList['Cinnabar_Island'] = new Town('Cinnabar_Island', [new RouteRequirement(20)], [ShopName.CinnabarIsland],  [GymLeaderName.Blaine], [DungeonName.Pokemon_Mansion]);
+TownList['Viridian_City'] = new Town('Viridian_City', [new RouteRequirement(1)], [ShopName.ViridianCity],  [GymLeaderName.Giovanni]);
+TownList['Pallet_Town'] = new Town('Pallet_Town', [], []);
+TownList['Lavender_Town'] = new Town('Lavender_Town', [new RouteRequirement(10)], [ShopName.LavenderTown],  [], [DungeonName.Pokemon_Tower]);
+TownList['Indigo_Plateau_Kanto'] = new Town('Indigo_Plateau_Kanto', [new RouteRequirement(23)], [], [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],[]);
 
 //Kanto Dungeons
-TownList['Viridian Forest'] = new DungeonEntrance(DungeonName.Viridian_Forest, [new RouteRequirement(1)]);
-TownList['Digletts Cave'] = new DungeonEntrance(DungeonName.Digletts_Cave, [new RouteRequirement(2), new BadgeRequirement(BadgeCase.Badge.Boulder)]);
-TownList['Mt. Moon'] = new DungeonEntrance(DungeonName.Mt_Moon, [new RouteRequirement(3), new BadgeRequirement(BadgeCase.Badge.Boulder)]);
-TownList['Rock Tunnel'] = new DungeonEntrance(DungeonName.Rock_Tunnel, [new RouteRequirement(9), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
-TownList['Power Plant'] = new DungeonEntrance(DungeonName.Power_Plant, [new RouteRequirement(9), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
-TownList['Pokemon Tower'] = new DungeonEntrance(DungeonName.Pokemon_Tower, [new RouteRequirement(10), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
-TownList['Seafoam Islands'] = new DungeonEntrance(DungeonName.Seafoam_Islands, [new RouteRequirement(19), new BadgeRequirement(BadgeCase.Badge.Soul)]);
-TownList['Victory Road'] = new DungeonEntrance(DungeonName.Victory_Road, [new RouteRequirement(22), new BadgeRequirement(BadgeCase.Badge.Earth)]);
-TownList['Cerulean Cave'] = new DungeonEntrance(DungeonName.Cerulean_Cave, [new RouteRequirement(4), new BadgeRequirement(BadgeCase.Badge.Elite_KantoChampion)]);
-TownList['Pokemon Mansion'] = new DungeonEntrance(DungeonName.Pokemon_Mansion, [new RouteRequirement(20), new BadgeRequirement(BadgeCase.Badge.Soul)]);
+TownList['Viridian_Forest'] = new DungeonEntrance(DungeonName.Viridian_Forest, [new RouteRequirement(1)]);
+TownList['Digletts_Cave'] = new DungeonEntrance(DungeonName.Digletts_Cave, [new RouteRequirement(2), new BadgeRequirement(BadgeCase.Badge.Boulder)]);
+TownList['Mt._Moon'] = new DungeonEntrance(DungeonName['Mt._Moon'], [new RouteRequirement(3), new BadgeRequirement(BadgeCase.Badge.Boulder)]);
+TownList['Rock_Tunnel'] = new DungeonEntrance(DungeonName.Rock_Tunnel, [new RouteRequirement(9), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
+TownList['Power_Plant'] = new DungeonEntrance(DungeonName.Power_Plant, [new RouteRequirement(9), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
+TownList['Pokemon_Tower'] = new DungeonEntrance(DungeonName.Pokemon_Tower, [new RouteRequirement(10), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
+TownList['Seafoam_Islands'] = new DungeonEntrance(DungeonName.Seafoam_Islands, [new RouteRequirement(19), new BadgeRequirement(BadgeCase.Badge.Soul)]);
+TownList['Victory_Road'] = new DungeonEntrance(DungeonName.Victory_Road, [new RouteRequirement(22), new BadgeRequirement(BadgeCase.Badge.Earth)]);
+TownList['Cerulean_Cave'] = new DungeonEntrance(DungeonName.Cerulean_Cave, [new RouteRequirement(4), new BadgeRequirement(BadgeCase.Badge.Elite_KantoChampion)]);
+TownList['Pokemon_Mansion'] = new DungeonEntrance(DungeonName.Pokemon_Mansion, [new RouteRequirement(20), new BadgeRequirement(BadgeCase.Badge.Soul)]);
 
 //Johto Towns
 // const NewBarkTownShop = new Shop(['Pokeball']);

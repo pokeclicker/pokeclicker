@@ -47,7 +47,7 @@ class QuestLineHelper {
         this.tutorial.addQuest(buyDungeonTicket);
 
         //Cleat Mt Moon dungeon
-        const clearMtMoon = new DefeatDungeonQuest(DungeonName.Mt_Moon, 1);
+        const clearMtMoon = new DefeatDungeonQuest(DungeonName['Mt._Moon'], 1);
         clearMtMoon.pointsReward = 10;
         clearMtMoon.description = 'Gather 75 Dungeon tokens by capturing Pokemon, then clear the Mt. Moon dungeon.';
         this.tutorial.addQuest(clearMtMoon);

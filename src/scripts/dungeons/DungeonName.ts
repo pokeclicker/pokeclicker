@@ -2,7 +2,7 @@ enum DungeonName {
     'None' = -1,
     'Viridian_Forest',
     'Digletts_Cave',
-    'Mt_Moon',
+    'Mt._Moon',
     'Rock_Tunnel',
     'Power_Plant',
     'Pokemon_Tower',
