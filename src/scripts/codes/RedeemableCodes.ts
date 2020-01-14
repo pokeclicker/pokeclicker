@@ -14,6 +14,18 @@ class RedeemableCodes implements Saveable {
             new RedeemableCode('good-luck', 1538489764, false, function () {
                 Notifier.notify('Congrats, you did it. Although you probably already read this text so it can\'t feel very satisfying can it?', GameConstants.NotificationOption.success);
             }),
+            new RedeemableCode('route-unlock-kanto', -889017321, false, function () {
+                for (let i = 1; i <= 25; i++) {
+                    player.statistics.routeKills[i](10);
+                }
+                Notifier.notify('You have unlocked all routes in Kanto', GameConstants.NotificationOption.success);
+            }),
+            new RedeemableCode('route-unlock-johto-2', -891649982, false, function () {
+                for (let i = 26; i <= 46; i++) {
+                    player.statistics.routeKills[i](10);
+                }
+                Notifier.notify('You have unlocked all routes in Johto', GameConstants.NotificationOption.success);
+            }),
         ];
     }
 
