@@ -294,6 +294,7 @@ namespace GameConstants {
     export const AMOUNT_OF_ROUTES = 134;
     export const AMOUNT_OF_ROUTES_KANTO = 25;
 
+    export const ROUTE_KILLS_NEEDED = 10;
     /**
      * Each route contains a list of routenumbers that need to be completed
      * Access with routeRequirements.region.routeNumber
