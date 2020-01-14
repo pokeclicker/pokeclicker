@@ -1,8 +1,8 @@
 ///<reference path="Gym.ts"/>
 class Champion extends Gym {
 
-    constructor(leaderName: string, town: string, pokemons: GymPokemon[], badgeReward: BadgeCase.Badge, moneyReward: number, badgeReq: BadgeCase.Badge, rewardMessage: string) {
-        super(leaderName, town, pokemons, badgeReward, moneyReward, badgeReq, rewardMessage);
+    constructor(leaderName: GymLeaderName, pokemons: GymPokemon[], badgeReward: BadgeCase.Badge, moneyReward: number, requirements: WorldRequirement[], rewardMessage: string) {
+        super(leaderName, pokemons, badgeReward, moneyReward, requirements, rewardMessage);
     }
 
     public setPokemon(starter: GameConstants.Starter) {
@@ -34,13 +34,3 @@ class Champion extends Gym {
     }
 
 }
-
-gymList['Champion Blue'] = new Champion(
-    'Blue',
-    'Champion Blue',
-    [],
-    BadgeCase.Badge.Elite_KantoChampion,
-    10000,
-    BadgeCase.Badge.Elite_Lance,
-    "Why? Why did I lose? I never made any mistakes raising my Pokémon… Darn it! You're the new Pokémon League Champion! Although I don't like to admit it…"
-);

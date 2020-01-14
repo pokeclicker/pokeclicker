@@ -5,9 +5,9 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        <div class="modal-header">
            <div style="width: 100%;">
                <img src=""
-                    data-bind="attr:{ src: 'assets/images/gymLeaders/' + GymRunner.gymObservable().leaderName + '.png'}">
+                    data-bind="attr:{ src: 'assets/images/gymLeaders/' + GymLeaderName[GymRunner.gymObservable().leaderName] + '.png'}">
                <h5 class="modal-title" id="receiveBadgeModalLabel"
-                   data-bind="text: GymRunner.gymObservable().leaderName.replace(/\d/g,'')">Modal title</h5>
+                   data-bind="text: GymLeaderName[GymRunner.gymObservable().leaderName]">Modal title</h5>
 
            </div>
        </div>

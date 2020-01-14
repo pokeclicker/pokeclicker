@@ -584,61 +584,6 @@ namespace GameConstants {
 
     };
 
-    // For random quest, name matches entry in gymList (created in Gym.ts)
-    export const KantoGyms = [
-        'Pewter City',
-        'Cerulean City',
-        'Vermillion City',
-        'Celadon City',
-        'Saffron City',
-        'Fuchsia City',
-        'Cinnabar Island',
-        'Viridian City',
-        'Elite Lorelei',
-        'Elite Bruno',
-        'Elite Agatha',
-        'Elite Lance',
-        'Champion Blue',
-    ];
-
-    export const JohtoGyms = [
-        'Violet City',
-        'Azalea Town',
-        'Goldenrod City',
-        'Ecruteak City',
-        'Cianwood City',
-        'Olivine City',
-        'Mahogany Town',
-        'Blackthorn City',
-        'Elite Will',
-        'Elite Koga',
-        'Elite Bruno2',
-        'Elite Karen',
-        'Champion Lance',
-    ];
-
-    export const HoennGyms = [
-        'Rustboro City',
-        'Dewford Town',
-        'Mauville City',
-        'Lavaridge Town',
-        'Petalburg City',
-        'Fortree City',
-        'Mossdeep City',
-        'Sootopolis City',
-        'Elite Sidney',
-        'Elite Phoebe',
-        'Elite Glacia',
-        'Elite Drake',
-        'Champion Wallace',
-    ];
-
-    export const RegionGyms = [
-        KantoGyms,
-        JohtoGyms,
-        HoennGyms,
-    ];
-
     export const KantoDungeons = [
         'Viridian Forest',
         'Digletts Cave',

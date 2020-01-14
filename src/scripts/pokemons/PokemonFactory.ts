@@ -81,9 +81,7 @@ class PokemonFactory {
      * @param index index of the pokémon that is being generated.
      * @returns {any}
      */
-    public static generateTrainerPokemon(gymName: string, index: number): BattlePokemon {
-        const gym = gymList[gymName];
-        const pokemon = gym.pokemons[index];
+    public static generateTrainerPokemon(pokemon: GymPokemon, index: number): BattlePokemon {
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
 
         const exp: number = basePokemon.exp * 1.5;

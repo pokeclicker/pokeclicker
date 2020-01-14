@@ -11,7 +11,7 @@ class GymBattle extends Battle {
     public static defeatPokemon() {
         App.game.wallet.gainMoney(this.enemyPokemon().money);
         App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
-        App.game.breeding.progressEggs(Math.floor(Math.sqrt(this.gym.badgeReq * 3 + 1)));
+        App.game.breeding.progressEggs(Math.floor(Math.sqrt(this.gym.badgeReward * 3 + 1)));
         player.gainShards(this.enemyPokemon().type1);
         player.gainShards(this.enemyPokemon().type2);
         this.index(this.index() + 1);
@@ -29,7 +29,7 @@ class GymBattle extends Battle {
      */
     public static generateNewEnemy() {
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateTrainerPokemon(this.gym.town, this.index()));
+        this.enemyPokemon(PokemonFactory.generateTrainerPokemon(this.gym.pokemons[this.index()], this.index()));
     }
 
     public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.computed(function () {

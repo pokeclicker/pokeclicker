@@ -27,7 +27,7 @@
                     </div>
                 </div>
                 <div class="col-sm-3" style="display: grid;">
-                    <span data-bind="text: GymBattle.gym.leaderName.replace(/\d/g,'')">Leader</span>
+                    <span data-bind="text: GymLeaderName[GymBattle.gym.leaderName].replace(/\d/g,'')">Leader</span>
                     <div class="gymPokeballList">
                                         <span data-bind="foreach: new Array(GymBattle.pokemonsUndefeatedComputable())"><img
                                                 class="gymPokeball" src="assets/images/gymLeaders/pokeball.png"></span>

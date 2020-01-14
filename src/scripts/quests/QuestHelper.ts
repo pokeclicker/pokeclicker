@@ -54,9 +54,9 @@ class QuestHelper {
                 return new CatchShiniesQuest(1);
             case 'DefeatGym':
                 region = SeededRand.intBetween(0, player.highestRegion());
-                const gymTown = SeededRand.fromArray(GameConstants.RegionGyms[region]);
+                const leaderName = SeededRand.fromArray(App.game.world.getCurrentRegion().gyms).leaderName;
                 amount = SeededRand.intBetween(5, 20);
-                return new DefeatGymQuest(gymTown, amount);
+                return new DefeatGymQuest(leaderName, amount);
             case 'DefeatDungeon':
                 // Allow upto highest region
                 region = SeededRand.intBetween(0, player.highestRegion());

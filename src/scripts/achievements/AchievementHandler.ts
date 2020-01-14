@@ -181,11 +181,11 @@ class AchievementHandler {
             AchievementHandler.addAchievement(`Route ${i} conqueror`, `Defeat 10,000 Pokémon on route ${i}`, new RouteKillRequirement(10000, i), 0.10);
         }
 
-        for (let i = 0; i < GameConstants.KantoGyms.length; i++) {
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym tourist`, 'Clear 1 time', new ClearGymRequirement( 1, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym regular`, 'Clear 10 times', new ClearGymRequirement(10, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym ruler`, 'Clear 100 times', new ClearGymRequirement( 100, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym owner`, 'Clear 1,000 times', new ClearGymRequirement(1000, i), 0.01);
+        for (let i = 0; i < GameHelper.enumLength(GymLeaderName) - 1; i++) {
+            AchievementHandler.addAchievement(`${GymLeaderName[i]} Gym tourist`, 'Clear 1 time', new ClearGymRequirement( 1, i), 0.01);
+            AchievementHandler.addAchievement(`${GymLeaderName[i]} Gym regular`, 'Clear 10 times', new ClearGymRequirement(10, i), 0.01);
+            AchievementHandler.addAchievement(`${GymLeaderName[i]} Gym ruler`, 'Clear 100 times', new ClearGymRequirement( 100, i), 0.01);
+            AchievementHandler.addAchievement(`${GymLeaderName[i]} Gym owner`, 'Clear 1,000 times', new ClearGymRequirement(1000, i), 0.01);
         }
 
         for (let i = 0; i < GameConstants.KantoDungeons.length; i++) {

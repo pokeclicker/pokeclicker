@@ -5,8 +5,8 @@
            <div class="list-group" data-bind="if: player.town() instanceof PokemonLeague">
               <!-- ko foreach: player.town().gymList -->
                    <button
-                           data-bind="text: $data.leaderName.replace(/\d/g,''),
-                                      disable: !Gym.isUnlocked($data),
+                           data-bind="text: GymLeaderName[$data.leaderName],
+                                      disable: !$data.canAccess(),
                                       click: function() {GymRunner.startGym($data)},
                                       attr: { class: Gym.calculateCssClass($data)}">
                        E4 Leader

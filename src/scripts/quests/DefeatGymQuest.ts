@@ -1,23 +1,18 @@
 /// <reference path="Quest.ts" />
 
 class DefeatGymQuest extends Quest implements QuestInterface {
-    constructor(gymTown: string, amount: number) {
-        super(amount, DefeatGymQuest.calcReward(gymTown, amount));
-        this.description = DefeatGymQuest.getDescription(gymTown, amount);
-        this.questFocus = player.statistics.gymsDefeated[Statistics.getGymIndex(gymTown)];
+    constructor(name: GymLeaderName, amount: number) {
+        super(amount, DefeatGymQuest.calcReward(name, amount));
+        this.description = DefeatGymQuest.getDescription(name, amount);
+        this.questFocus = player.statistics.gymsDefeated[name];
     }
 
-    private static getDescription(gymTown: string, amount: number): string {
-        let desc = `Defeat ${gymTown} `;
-        if (gymTown.indexOf('Elite') == -1 && gymTown.indexOf('Champion') == -1) {
-            desc += 'gym ';
-        }
-        desc += `${amount} times.`;
-        return desc;
+    private static getDescription(name: GymLeaderName, amount: number): string {
+        return `Defeat ${GymLeaderName[name]} ${amount} times.`;
     }
 
-    private static calcReward(gymTown: string, amount: number): number {
-        const gym = gymList[gymTown];
+    private static calcReward(name: GymLeaderName, amount: number): number {
+        const gym: Gym = App.game.world.getGym(name);
         if (gym instanceof Champion) {
             gym.setPokemon(player.starter);
         }

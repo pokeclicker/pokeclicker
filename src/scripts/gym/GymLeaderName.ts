@@ -1,0 +1,16 @@
+enum GymLeaderName {
+    'None' = -1,
+    'Brock',
+    'Misty',
+    'Lt_Surge',
+    'Erika',
+    'Sabrina',
+    'Koga',
+    'Blaine',
+    'Giovanni',
+    'Lorelei',
+    'Bruno',
+    'Agatha',
+    'Lance',
+    'Blue',
+}

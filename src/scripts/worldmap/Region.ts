@@ -36,4 +36,14 @@ class Region {
         return shop;
 
     }
+
+    getGym(name: GymLeaderName) {
+        const gym = this.gyms.find(gym => {
+            return gym.leaderName === name;
+        });
+        if (gym === undefined) {
+            console.error(`Could not find gym ${GymLeaderName[name]}`);
+        }
+        return gym;
+    }
 }

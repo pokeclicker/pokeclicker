@@ -76,9 +76,17 @@ class World implements Saveable {
         return this.isValidRoute(route, region) && this.getRegion(region).getRoute(route).canAccess();
     }
 
-    // Helper method to easily get shops
+    // Helper methods
+    getCurrentRegion() {
+        return this.getRegion(this.currentRegion);
+    }
+
     getShop(name: ShopName) {
-        return this.getRegion(this.currentRegion).getShop(name);
+        return this.getCurrentRegion().getShop(name);
+    }
+
+    getGym(name: GymLeaderName) {
+        return this.getCurrentRegion().getGym(name);
     }
 
     toJSON(): object {
