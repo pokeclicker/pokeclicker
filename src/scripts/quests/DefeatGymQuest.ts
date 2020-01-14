@@ -8,7 +8,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     }
 
     private static getDescription(name: GymLeaderName, amount: number): string {
-        return `Defeat ${GymLeaderName[name]} ${amount} times.`;
+        return `Defeat ${GameConstants.humanifyString(GymLeaderName[name])} ${amount} times.`;
     }
 
     private static calcReward(name: GymLeaderName, amount: number): number {

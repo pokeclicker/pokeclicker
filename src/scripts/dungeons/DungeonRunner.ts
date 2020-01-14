@@ -26,7 +26,7 @@ class DungeonRunner {
             Notifier.notify("You don't have enough dungeon tokens", GameConstants.NotificationOption.danger);
             return false;
         }
-        App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+        App.game.wallet.loseAmount(DungeonRunner.dungeon.entryCost);
 
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE);
@@ -106,6 +106,6 @@ class DungeonRunner {
     }
 
     public static hasEnoughTokens() {
-        return App.game.wallet.hasAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
+        return App.game.wallet.hasAmount(DungeonRunner.dungeon.entryCost);
     }
 }

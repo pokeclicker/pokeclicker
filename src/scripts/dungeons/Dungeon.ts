@@ -13,7 +13,7 @@ class Dungeon extends WorldLocation {
     itemList: GameConstants.BattleItemType[];
     baseHealth: number;
     bossList: DungeonBossPokemon[];
-    tokenCost: number;
+    entryCost: Amount;
     itemRoute: number;
     level: number;
     allPokemonNames: string[];
@@ -25,7 +25,7 @@ class Dungeon extends WorldLocation {
         this.itemList = itemList;
         this.baseHealth = baseHealth;
         this.bossList = bossList;
-        this.tokenCost = tokenCost;
+        this.entryCost = new Amount(tokenCost, GameConstants.Currency.dungeonToken);
         this.requirements = requirements;
         this.itemRoute = itemRoute;
         this.level = level;
