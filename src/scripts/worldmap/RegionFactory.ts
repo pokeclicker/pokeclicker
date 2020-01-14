@@ -118,6 +118,18 @@ class RegionFactory {
             }, [new RouteRequirement(24)]),
         ];
 
-        return new Region(RegionType.kanto, 151, routes, []);
+        const shops: Shop[] = [
+            new Shop(ShopName.PewterCity, ['Pokeball', 'Token_collector', 'xExp', 'Dungeon_ticket']),
+            new Shop(ShopName.CeruleanCity, ['Water_stone', 'xAttack', 'Water_egg']),
+            new Shop(ShopName.VermillionCity, ['Thunder_stone', 'xExp', 'Electric_egg']),
+            new Shop(ShopName.CeladonCity, ['Eevee', 'Porygon', 'Jynx', 'Mr. Mime', 'Lickitung']),
+            new Shop(ShopName.SaffronCity, ['Moon_stone', 'xClick', 'Leaf_stone', 'Fighting_egg']),
+            new Shop(ShopName.FuchsiaCity, ['Ultraball', 'Trade_stone', 'xExp', 'Dragon_egg']),
+            new Shop(ShopName.CinnabarIsland, ['Fire_stone', 'Fire_egg', 'SmallRestore', 'Explorer_kit']),
+            new Shop(ShopName.ViridianCity, ['xAttack', 'xClick', 'Mystery_egg']),
+            new Shop(ShopName.LavenderTown, ['Greatball', 'Item_magnet', 'Lucky_incense', 'Grass_egg']),
+
+        ];
+        return new Region(RegionType.kanto, 151, routes, [], shops);
     }
 }

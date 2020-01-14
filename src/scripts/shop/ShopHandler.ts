@@ -1,10 +1,17 @@
 ///<reference path="Shop.ts"/>
+///<reference path="../worldmap/RegionType.ts"/>
+///<reference path="ShopName.ts"/>
 class ShopHandler {
-    static shopObservable: KnockoutObservable<Shop> = ko.observable(new Shop([]));
+    static shopObservable: KnockoutObservable<Shop> = ko.observable(new Shop(ShopName.None, []));
     static selected: KnockoutObservable<number> = ko.observable(0);
     static amount: KnockoutObservable<number> = ko.observable(1);
 
-    public static showShop(shop: Shop) {
+    public static showShop(name: ShopName) {
+        const shop = App.game.world.getShop(name);
+        if (shop === undefined) {
+            return;
+        }
+
         this.setSelected(0);
         this.resetAmount();
         this.shopObservable(shop);

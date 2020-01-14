@@ -18,7 +18,7 @@
                        onclick="GymRunner.startGym(player.town().gym())">
                    Gym
                </button>
-               <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
+               <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop !== ShopName.None" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop)">Shop</a>
                <button class="btn btn-secondary"
                        onclick="MapHelper.travelToNextRegion()"
                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
@@ -44,7 +44,7 @@
        </div>
        <div class="col no-gutters">
            <button type="button" class="btn btn-outline-info" style="float: right;"
-           data-bind="visible: player.town().gym() || player.town().shop(), tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
+           data-bind="visible: player.town().gym() || player.town().shop !== ShopName.None, tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
        </div>
 
     </div>

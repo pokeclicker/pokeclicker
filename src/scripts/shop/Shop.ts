@@ -1,7 +1,9 @@
 class Shop {
+    name: ShopName;
     items: KnockoutObservableArray<Item>;
 
-    constructor(items: string[]) {
+    constructor(name: ShopName, items: string[]) {
+        this.name = name;
         const itemList: Item[] = [];
 
         for (const item of items) {

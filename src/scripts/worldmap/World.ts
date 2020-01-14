@@ -1,4 +1,4 @@
-class World implements Feature {
+class World implements Saveable {
     name = 'World';
 
     saveKey = 'world';
@@ -76,16 +76,9 @@ class World implements Feature {
         return this.isValidRoute(route, region) && this.getRegion(region).getRoute(route).canAccess();
     }
 
-    initialize(): void {
-        // This method intentionally left blank
-    }
-
-    canAccess(): boolean {
-        return true;
-    }
-
-    update(delta: number): void {
-        // This method intentionally left blank
+    // Helper method to easily get shops
+    getShop(name: ShopName) {
+        return this.getRegion(this.currentRegion).getShop(name);
     }
 
     toJSON(): object {
