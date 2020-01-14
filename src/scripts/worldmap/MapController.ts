@@ -4,7 +4,7 @@ class MapController {
 
         if (App.game.world.currentRoute == route && App.game.world.currentRegion == region) {
             cls = 'currentRoute';
-        } else if (MapHelper.accessToRoute(route, region)) {
+        } else if (App.game.world.accessToRoute(route, region)) {
             if (player.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {

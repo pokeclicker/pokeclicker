@@ -11,18 +11,21 @@ class PokemonFactory {
      */
     public static generateWildPokemon(route: number, region: RegionType): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
+        }
+        let possiblePokemon: string[] = [];
+        if (PokemonFactory.roamingEncounter(route)) {
+            possiblePokemon = GameConstants.RoamingPokemon[region];
+        }
+        if (possiblePokemon.length === 0) {
+            possiblePokemon = App.game.world.getRegion(region).getRoute(route).getAvailablePokemon();
+        }
+
+        if (possiblePokemon.length === 0) {
+            console.error(`Could not find pokemon to spawn on route ${route} in region ${RegionType[region]}`);
             return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
-        let name: string;
 
-        if (PokemonFactory.roamingEncounter(route)) {
-            const possible = GameConstants.RoamingPokemon[region];
-            name = possible[Math.floor(Math.random() * possible.length)];
-        } else {
-            const pokemonList: string[] = App.game.world.getRegion(region).getRoute(route).getAvailablePokemon();
-            const rand: number = Math.floor(Math.random() * pokemonList.length);
-            name = pokemonList[rand];
-        }
+        const name = GameConstants.randomElement(possiblePokemon);
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
 

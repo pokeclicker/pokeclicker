@@ -1,33 +1,4 @@
 class MapHelper {
-    private static hasBadgeReq(route, region) {
-        return App.game.badgeCase.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
-    }
-
-    private static hasDungeonReq(route, region) {
-        const dungeonReq = GameConstants.routeDungeonRequirements[region][route];
-        return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeonReq)]();
-    }
-
-    private static hasRouteKillReq(route, region) {
-        const reqList = GameConstants.routeRequirements[region][route];
-        if (reqList == undefined) {
-            return true;
-        }
-        for (let i = 0; i < reqList.length; i++) {
-            const route: number = reqList[i];
-            if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public static accessToRoute = function (route: number, region: RegionType) {
-        return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
-    };
-
-
-
     public static calculateTownCssClass(town: string): string {
         // TODO(@Isha) this is very weird, refactor this.
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem[town])) {

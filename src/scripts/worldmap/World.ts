@@ -23,21 +23,15 @@ class World implements Feature {
     }
 
     moveToRoute(route: number, region: RegionType) {
-        if (isNaN(route)) {
-            console.error('Could not move to route', route);
-            return;
-        }
-
-        if (route === this.currentRoute) {
+        if (route === this.currentRoute && region === this.currentRegion) {
             console.log('This is the current route');
             return;
         }
-        const newRoute = this.getRegion(region).getRoute(route);
-
-        if (newRoute === undefined) {
-            console.log(`Could not find route ${route} in region ${RegionType[region]}`);
+        if (!this.isValidRoute(route, region)) {
             return;
         }
+
+        const newRoute = this.getRegion(region).getRoute(route);
 
         if (!newRoute.canAccess()) {
             Notifier.notify(newRoute.lockedReason(), GameConstants.NotificationOption.danger);
@@ -55,30 +49,32 @@ class World implements Feature {
     }
 
     getRegion(type: RegionType): Region {
-        return this.regions.find(region => {
+        const region = this.regions.find(region => {
             return region.type === type;
         });
+        if (region === undefined) {
+            console.error(`Could not find region ${region}`);
+        }
+        return region;
     }
 
-    public static getAvailablePokemonList(route: number, region: RegionType, includeHeadbutt = true): string[] {
-        // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
-        if (!MapHelper.validRoute(route, region)) {
-            route = GameConstants.RegionRoute[region][0];
+    isValidRoute(route: number, region: RegionType) {
+        const foundRegion = this.getRegion(region);
+        if (foundRegion === undefined) {
+            console.error(`Undefined region ${region} with route ${route}`);
+            return false;
         }
-        const possiblePokemons = pokemonsPerRoute[region][route];
-        if (possiblePokemons == null) {
-            return ['Rattata'];
+        const foundRoute = foundRegion.getRoute(route);
+        if (foundRoute === undefined) {
+            console.error(`Undefined route ${route} in region ${RegionType[region]}`);
+            return false;
         }
-        let pokemonList = possiblePokemons.land;
-        if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Super_rod) || possiblePokemons.land.length == 0) {
-            pokemonList = pokemonList.concat(possiblePokemons.water);
-        }
-        if (includeHeadbutt) {
-            pokemonList = pokemonList.concat(possiblePokemons.headbutt);
-        }
-        return pokemonList;
+        return true;
     }
 
+    accessToRoute(route: number, region: RegionType) {
+        return this.isValidRoute(route, region) && this.getRegion(region).getRoute(route).canAccess();
+    }
 
     initialize(): void {
         // This method intentionally left blank

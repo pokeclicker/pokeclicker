@@ -15,9 +15,12 @@ class Region {
     }
 
     getRoute(number: number): Route {
-        return this.routes.find(route => {
+        const route = this.routes.find(route => {
             return route.number === number;
         });
+        if (route === undefined) {
+            console.error(`Could not find route ${route}`);
+        }
+        return route;
     }
-
 }
