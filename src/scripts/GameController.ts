@@ -105,8 +105,8 @@ class GameController {
                 if (keyCode == 32) { // space
                     if (player.town().gyms[0]) {
                         GymRunner.startGym(player.town().gym[0]);
-                    } else if (player.town() instanceof DungeonTown) {
-                        DungeonRunner.initializeDungeon(player.town().dungeon());
+                    } else if (player.town() instanceof DungeonEntrance) {
+                        DungeonRunner.initializeDungeon(player.town().dungeons[0]);
                     }
                     e.preventDefault();
                 }

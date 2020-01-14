@@ -1,5 +1,8 @@
 ///<reference path="../shop/ShopName.ts"/>
-class Town {
+///<reference path="../worldmap/worldRequirements/RouteRequirement.ts"/>
+class Town extends WorldLocation {
+    requirements: WorldRequirement[];
+
     private _name: KnockoutObservable<string>;
     public gyms: GymLeaderName[];
     public shops: ShopName[];
@@ -8,10 +11,11 @@ class Town {
     public dungeonReq: string; // Dungeon that must be completed to access town
     public startingTown: boolean;
 
-    constructor(name: string, routes: number[], shops: ShopName[] = [], gyms: GymLeaderName[] = [], dungeons: DungeonName[] = []) {
+    constructor(name: string, requirements: WorldRequirement[], shops: ShopName[] = [], gyms: GymLeaderName[] = [], dungeons: DungeonName[] = []) {
+        super();
         this._name = ko.observable(name);
         this.gyms = gyms;
-        this._reqRoutes = routes;
+        this.requirements = requirements;
         this.shops = shops;
         this.dungeons = dungeons;
         this.startingTown = GameConstants.StartingTowns.indexOf(this._name()) > -1;
@@ -29,22 +33,15 @@ class Town {
     public isUnlocked() {
         return true;
     }
+
 }
 
-class DungeonTown extends Town {
-    public badgeReq: BadgeCase.Badge;
-
-    constructor(name: string, routes: number[], badge?: BadgeCase.Badge) {
-        // TODO fix later.
-        super(name, routes, null, null, [DungeonName.Mt_Moon]);
-        this.badgeReq = badge;
+class DungeonEntrance extends Town {
+    // TODO fix later
+    constructor(name: DungeonName, requirements: WorldRequirement[]) {
+        super(DungeonName[name], requirements, [], [], [name]);
     }
 
-
-    //TODO refactor to WorldLocation
-    public isUnlocked() {
-        return true;
-    }
 
 }
 
@@ -52,29 +49,29 @@ const TownList: { [name: string]: Town  } = {};
 
 //Kanto Towns
 
-TownList['Pewter City'] = new Town('Pewter City', [2], [ShopName.PewterCity], [GymLeaderName.Brock]);
-TownList['Cerulean City'] = new Town('Cerulean City', [4], [ShopName.CeruleanCity], [GymLeaderName.Misty], [DungeonName.Cerulean_Cave]);
-TownList['Vermillion City'] = new Town('Vermillion City', [6], [ShopName.VermillionCity], [GymLeaderName.Lt_Surge]);
-TownList['Celadon City'] = new Town('Celadon City', [8], [ShopName.CeladonCity],  [GymLeaderName.Erika]);
-TownList['Saffron City'] = new Town('Saffron City', [5], [ShopName.SaffronCity],  [GymLeaderName.Sabrina]);
-TownList['Fuchsia City'] = new Town('Fuchsia City', [18], [ShopName.FuchsiaCity],  [GymLeaderName.Koga]);
-TownList['Cinnabar Island'] = new Town('Cinnabar Island', [20], [ShopName.CinnabarIsland],  [GymLeaderName.Blaine], [DungeonName.Pokemon_Mansion]);
-TownList['Viridian City'] = new Town('Viridian City', [1], [ShopName.ViridianCity],  [GymLeaderName.Giovanni]);
+TownList['Pewter City'] = new Town('Pewter City', [new RouteRequirement(2)], [ShopName.PewterCity], [GymLeaderName.Brock]);
+TownList['Cerulean City'] = new Town('Cerulean City', [new RouteRequirement(4)], [ShopName.CeruleanCity], [GymLeaderName.Misty], [DungeonName.Cerulean_Cave]);
+TownList['Vermillion City'] = new Town('Vermillion City', [new RouteRequirement(6)], [ShopName.VermillionCity], [GymLeaderName.Lt_Surge]);
+TownList['Celadon City'] = new Town('Celadon City', [new RouteRequirement(8)], [ShopName.CeladonCity],  [GymLeaderName.Erika]);
+TownList['Saffron City'] = new Town('Saffron City', [new RouteRequirement(5)], [ShopName.SaffronCity],  [GymLeaderName.Sabrina]);
+TownList['Fuchsia City'] = new Town('Fuchsia City', [new RouteRequirement(18)], [ShopName.FuchsiaCity],  [GymLeaderName.Koga]);
+TownList['Cinnabar Island'] = new Town('Cinnabar Island', [new RouteRequirement(20)], [ShopName.CinnabarIsland],  [GymLeaderName.Blaine], [DungeonName.Pokemon_Mansion]);
+TownList['Viridian City'] = new Town('Viridian City', [new RouteRequirement(1)], [ShopName.ViridianCity],  [GymLeaderName.Giovanni]);
 TownList['Pallet Town'] = new Town('Pallet Town', [], []);
-TownList['Lavender Town'] = new Town('Lavender Town', [10], [ShopName.LavenderTown],  [], [DungeonName.Pokemon_Tower]);
-TownList['Indigo Plateau Kanto'] = new Town('Indigo Plateau Kanto', [23], [], [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],[]);
+TownList['Lavender Town'] = new Town('Lavender Town', [new RouteRequirement(10)], [ShopName.LavenderTown],  [], [DungeonName.Pokemon_Tower]);
+TownList['Indigo Plateau Kanto'] = new Town('Indigo Plateau Kanto', [new RouteRequirement(23)], [], [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],[]);
 
 //Kanto Dungeons
-TownList['Viridian Forest'] = new DungeonTown('Viridian Forest', [1]);
-TownList['Digletts Cave'] = new DungeonTown('Digletts Cave', [1], BadgeCase.Badge.Boulder);
-TownList['Mt. Moon'] = new DungeonTown('Mt. Moon', [3], BadgeCase.Badge.Boulder);
-TownList['Rock Tunnel'] = new DungeonTown('Rock Tunnel', [9], BadgeCase.Badge.Cascade);
-TownList['Power Plant'] = new DungeonTown('Power Plant', [9], BadgeCase.Badge.Cascade);
-TownList['Pokemon Tower'] = new DungeonTown('Pokemon Tower', [10], BadgeCase.Badge.Cascade);
-TownList['Seafoam Islands'] = new DungeonTown('Seafoam Islands', [19], BadgeCase.Badge.Soul);
-TownList['Victory Road'] = new DungeonTown('Victory Road', [22], BadgeCase.Badge.Earth);
-TownList['Cerulean Cave'] = new DungeonTown('Cerulean Cave', [4], BadgeCase.Badge.Elite_KantoChampion);
-TownList['Pokemon Mansion'] = new DungeonTown('Pokemon Mansion', [20], BadgeCase.Badge.Soul);
+TownList['Viridian Forest'] = new DungeonEntrance(DungeonName.Viridian_Forest, [new RouteRequirement(1)]);
+TownList['Digletts Cave'] = new DungeonEntrance(DungeonName.Digletts_Cave, [new RouteRequirement(2), new BadgeRequirement(BadgeCase.Badge.Boulder)]);
+TownList['Mt. Moon'] = new DungeonEntrance(DungeonName.Mt_Moon, [new RouteRequirement(3), new BadgeRequirement(BadgeCase.Badge.Boulder)]);
+TownList['Rock Tunnel'] = new DungeonEntrance(DungeonName.Rock_Tunnel, [new RouteRequirement(9), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
+TownList['Power Plant'] = new DungeonEntrance(DungeonName.Power_Plant, [new RouteRequirement(9), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
+TownList['Pokemon Tower'] = new DungeonEntrance(DungeonName.Pokemon_Tower, [new RouteRequirement(10), new BadgeRequirement(BadgeCase.Badge.Cascade)]);
+TownList['Seafoam Islands'] = new DungeonEntrance(DungeonName.Seafoam_Islands, [new RouteRequirement(19), new BadgeRequirement(BadgeCase.Badge.Soul)]);
+TownList['Victory Road'] = new DungeonEntrance(DungeonName.Victory_Road, [new RouteRequirement(22), new BadgeRequirement(BadgeCase.Badge.Earth)]);
+TownList['Cerulean Cave'] = new DungeonEntrance(DungeonName.Cerulean_Cave, [new RouteRequirement(4), new BadgeRequirement(BadgeCase.Badge.Elite_KantoChampion)]);
+TownList['Pokemon Mansion'] = new DungeonEntrance(DungeonName.Pokemon_Mansion, [new RouteRequirement(20), new BadgeRequirement(BadgeCase.Badge.Soul)]);
 
 //Johto Towns
 // const NewBarkTownShop = new Shop(['Pokeball']);

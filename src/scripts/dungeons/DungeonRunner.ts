@@ -12,8 +12,12 @@ class DungeonRunner {
     public static currentTileType;
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
 
-    public static initializeDungeon(dungeon) {
-        if (!dungeon.isUnlocked()) {
+    public static initializeDungeon(name: DungeonName) {
+        const dungeon = App.game.world.getDungeon(name);
+        if (dungeon === undefined) {
+            return;
+        }
+        if (!dungeon.canAccess()) {
             return false;
         }
         DungeonRunner.dungeon = dungeon;
