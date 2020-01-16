@@ -145,7 +145,6 @@ TownList['Pokemon_Mansion'] = new DungeonEntrance(DungeonName.Pokemon_Mansion, [
 // TownList['Mt. Chimney'] = new DungeonTown('Mt. Chimney', [115]);
 // TownList['Jagged Pass'] = new DungeonTown('Jagged Pass', [115]);
 // TownList['New Mauville'] = new DungeonTown('New Mauville', [112], BadgeCase.Badge.Heat);
-// TownList['Sea Mauville'] = new DungeonTown('Sea Mauville', [108]);
 // TownList['Mt. Pyre'] = new DungeonTown('Mt. Pyre', [122]);
 // TownList['Shoal Cave'] = new DungeonTown('Shoal Cave', [125]);
 // TownList['Cave of Origin'] = new DungeonTown('Cave of Origin', [126]);
