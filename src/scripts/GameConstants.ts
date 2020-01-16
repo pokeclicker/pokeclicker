@@ -20,7 +20,7 @@ namespace GameConstants {
     export const ACHIEVEMENT_TICK = 1000;
     export const MIN_LOAD_TIME = 500;
 
-    export const MAX_AVAILABLE_REGION = 1;
+    export const MAX_AVAILABLE_REGION = 2;
 
     export const TotalPokemonsPerRegion = [
         151, // 151
