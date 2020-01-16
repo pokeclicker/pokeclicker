@@ -212,10 +212,14 @@ class Dungeon extends WorldLocation {
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
-//     ['Unown'],
+//     ['Shuppet', 'Duskull', 'Vulpix', 'Wingull', 'Meditite'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
-//     [new DungeonBossPokemon('Unown', 100000, 20)],
+//     [
+//       new DungeonBossPokemon('Shuppet', 100000, 20),
+//       new DungeonBossPokemon('Duskull', 100000, 20),
+//       new DungeonBossPokemon('Chimecho', 100000, 20),
+//     ],
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Shoal Cave'] = new Dungeon('Shoal Cave',
