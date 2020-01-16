@@ -184,10 +184,10 @@ class Dungeon extends WorldLocation {
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
-//     ['Unown'],
+//     ['Zubat', 'Poochyena'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
-//     [new DungeonBossPokemon('Unown', 100000, 20)],
+//     [new DungeonBossPokemon('Numel', 100000, 20)],
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
