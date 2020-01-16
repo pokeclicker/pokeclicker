@@ -230,10 +230,13 @@ class Dungeon extends WorldLocation {
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
-//     ['Unown'],
+//     ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
-//     [new DungeonBossPokemon('Unown', 100000, 20)],
+//     [
+//       new DungeonBossPokemon('Kyogre', 100000, 20),
+//       new DungeonBossPokemon('Groudon', 100000, 20),
+//     ],
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
