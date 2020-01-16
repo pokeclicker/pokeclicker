@@ -173,10 +173,14 @@ class Dungeon extends WorldLocation {
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
-//     ['Unown'],
+//     ['Zubat', 'Golbat', 'Goldeen', 'Magikarp', 'Barboach'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
-//     [new DungeonBossPokemon('Unown', 100000, 20)],
+//     [
+//       new DungeonBossPokemon('Bagon', 100000, 20),
+//       new DungeonBossPokemon('Solrock', 100000, 20),
+//       new DungeonBossPokemon('Lunatone', 100000, 20),
+//     ],
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
