@@ -191,10 +191,14 @@ class Dungeon extends WorldLocation {
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
-//     ['Unown'],
+//     ['Machop', 'Numel', 'Spoink'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
-//     [new DungeonBossPokemon('Unown', 100000, 20)],
+//     [
+//       new DungeonBossPokemon('Machop', 100000, 20),
+//       new DungeonBossPokemon('Numel', 100000, 20),
+//       new DungeonBossPokemon('Spoink', 100000, 20),
+//     ],
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['New Mauville'] = new Dungeon('New Mauville',
