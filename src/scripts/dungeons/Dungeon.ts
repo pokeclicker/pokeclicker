@@ -240,10 +240,10 @@ class Dungeon extends WorldLocation {
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
-//     ['Unown'],
+//     ['Zubat', 'Golbat', 'Tentacool', 'Magikarp', 'Wailmer'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
-//     [new DungeonBossPokemon('Unown', 100000, 20)],
+//     [new DungeonBossPokemon('Wailmer', 100000, 20)],
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
