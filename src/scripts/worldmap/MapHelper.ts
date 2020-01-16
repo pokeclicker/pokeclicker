@@ -44,7 +44,7 @@ class MapHelper {
 
                 for (let i = 0; i < reqList.length; i++) {
                     const route: number = reqList[i];
-                    if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
+                    if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
                         routesNotCompleted.push(route);
                     }
                 }
@@ -79,7 +79,7 @@ class MapHelper {
         }
         for (let i = 0; i < reqList.length; i++) {
             const route: number = reqList[i];
-            if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
+            if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
                 return false;
             }
         }
@@ -96,7 +96,7 @@ class MapHelper {
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
-            if (player.routeKillsObservable(route)() >= player.routeKillsNeeded) {
+            if (player.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
@@ -174,7 +174,7 @@ class MapHelper {
 
                 for (let i = 0; i < reqList.length; i++) {
                     const route: number = reqList[i];
-                    if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
+                    if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
                         routesNotCompleted.push(route);
                     }
                 }
