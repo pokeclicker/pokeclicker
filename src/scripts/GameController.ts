@@ -60,7 +60,7 @@ class GameController {
 
 
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
-                    $(element).tooltip('destroy');
+                    $(element).tooltip('dispose');
                 });
 
                 if (bindingContext.$data instanceof Plot) {
