@@ -257,8 +257,13 @@ class Dungeon extends WorldLocation {
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
-//     ['Unown'],
+//     ['Zubat', 'Golbat', 'Whismur', 'Loudred', 'Makuhita', 'Aron', 'Mawile', 'Meditite', 'Geodude', 'Goldeen', 'Magikarp', 'Barboach', 'Whiscash'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
-//     [new DungeonBossPokemon('Unown', 100000, 20)],
+//     [
+//       new DungeonBossPokemon('Hariyama', 100000, 20),
+//       new DungeonBossPokemon('Lairon', 100000, 20),
+//       new DungeonBossPokemon('Medicham', 100000, 20),
+//       new DungeonBossPokemon('Graveler', 100000, 20),
+//     ],
 //     12000, BadgeCase.Badge.Stone, 101, 5);
