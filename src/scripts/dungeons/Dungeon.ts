@@ -177,7 +177,6 @@ class Dungeon extends WorldLocation {
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
 //     [
-//       new DungeonBossPokemon('Bagon', 100000, 20),
 //       new DungeonBossPokemon('Solrock', 100000, 20),
 //       new DungeonBossPokemon('Lunatone', 100000, 20),
 //     ],
