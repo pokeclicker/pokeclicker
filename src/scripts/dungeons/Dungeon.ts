@@ -202,12 +202,15 @@ class Dungeon extends WorldLocation {
 //     12000, BadgeCase.Badge.Stone, 101, 5);
 //
 // dungeonList['New Mauville'] = new Dungeon('New Mauville',
-//     ['Unown'],
+//     ['Magnemite', 'Voltorb'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
-//     [new DungeonBossPokemon('Unown', 100000, 20)],
+//     [
+//       new DungeonBossPokemon('Magneton', 100000, 20),
+//       new DungeonBossPokemon('Electrode', 100000, 20),
+//     ],
 //     12000, BadgeCase.Badge.Stone, 101, 5);
-//
+
 // dungeonList['Sea Mauville'] = new Dungeon('Sea Mauville',
 //     ['Unown'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
