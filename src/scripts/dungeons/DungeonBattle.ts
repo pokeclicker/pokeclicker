@@ -5,6 +5,10 @@ class DungeonBattle extends Battle {
      */
     public static defeatPokemon() {
         DungeonRunner.fighting(false);
+        if (DungeonRunner.fightingBoss()) {
+            DungeonRunner.fightingBoss(false);
+            DungeonRunner.defeatedBoss(true);
+        }
         App.game.wallet.gainMoney(this.enemyPokemon().money);
         App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         player.gainShards(this.enemyPokemon().type1, this.enemyPokemon().shardReward);
@@ -22,15 +26,13 @@ class DungeonBattle extends Battle {
             setTimeout(
                 () => {
                     this.attemptCatch();
-                    if (DungeonRunner.fightingBoss()) {
-                        DungeonRunner.fightingBoss(false);
+                    if (DungeonRunner.defeatedBoss()) {
                         DungeonRunner.dungeonWon();
                     }
                 },
                 App.game.pokeballs.calculateCatchTime(pokeBall)
             );
-        } else if (DungeonRunner.fightingBoss()) {
-            DungeonRunner.fightingBoss(false);
+        } else if (DungeonRunner.defeatedBoss()) {
             DungeonRunner.dungeonWon();
         }
     }
