@@ -1,6 +1,8 @@
 class TypeHelper {
 
     //@formatter:off
+    /*eslint-disable */
+
     public static typeMatrix: Array<Array<number>> = [
         //                E              F
         //                L              I                   P
@@ -30,10 +32,11 @@ class TypeHelper {
         [  1, 0.5,   1,   1,   1,   1,   2, 0.5,   1,   1,   1,   1,   1,   1,   2,   2, 0.5,   1], // FAIRY
     ];
     //@formatter:on
+    /*eslint-enable */
 
     public static getAttackModifier(a1: PokemonType, a2: PokemonType, d1: PokemonType, d2: PokemonType): number {
 
-        if (a1 ==PokemonType.None || d1 == PokemonType.None) {
+        if (a1 == PokemonType.None || d1 == PokemonType.None) {
             return 1;
         }
 

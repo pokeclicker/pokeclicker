@@ -7,14 +7,7 @@ NOTE: PokéClicker is still in its early stages of development!
 
 You can try out the current state at www.pokeclicker.com
 
-# Game design
-The design document is in a fancy LaTeX format that can be viewed [here](https://www.sharelatex.com/project/58d39d51e6bc7ab471b64512)
-It contains all knowledge needed to help out in the development.
-
 # Developer instructions
-
-## Naming conventions
-All file and class names should be [upper CamelCase](https://en.wikipedia.org/wiki/Camel_case). Function names should be lower camelCase.
 
 ## Building from Source
 

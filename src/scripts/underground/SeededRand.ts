@@ -5,7 +5,7 @@ class SeededRand {
     private static readonly MULTIPLIER: number = 9301;
 
     public static next(): number {
-        this.state = (this.state*this.MULTIPLIER + this.OFFSET) % this.MOD;
+        this.state = (this.state * this.MULTIPLIER + this.OFFSET) % this.MOD;
         return this.state / this.MOD;
     }
 
@@ -18,7 +18,7 @@ class SeededRand {
     }
 
     public static intBetween(min: number, max: number): number {
-        return Math.floor( (max-min + 1) * SeededRand.next() + min );
+        return Math.floor( (max - min + 1) * SeededRand.next() + min );
     }
 
     public static fromArray<T>(arr: Array<T>): T {

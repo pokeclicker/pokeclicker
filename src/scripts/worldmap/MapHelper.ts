@@ -26,40 +26,40 @@ class MapHelper {
             App.game.gameState = GameConstants.GameState.fighting;
             GameController.applyRouteBindings();
         } else {
-          	let reqsList = '';
+            let reqsList = '';
 
-          	if (!MapHelper.hasBadgeReq(route, region)) {
-            		const badgeNumber = GameConstants.routeBadgeRequirements[region][route];
-            		reqsList += `<br>Requires the ${BadgeCase.Badge[badgeNumber]} badge.`;
-          	}
+            if (!MapHelper.hasBadgeReq(route, region)) {
+                const badgeNumber = GameConstants.routeBadgeRequirements[region][route];
+                reqsList += `<br>Requires the ${BadgeCase.Badge[badgeNumber]} badge.`;
+            }
 
-          	if (!MapHelper.hasDungeonReq(route, region)) {
-            		const dungeon = GameConstants.routeDungeonRequirements[region][route];
-            		reqsList += `<br>${dungeon} dungeon needs to be completed.`;
-          	}
+            if (!MapHelper.hasDungeonReq(route, region)) {
+                const dungeon = GameConstants.routeDungeonRequirements[region][route];
+                reqsList += `<br>${dungeon} dungeon needs to be completed.`;
+            }
 
-          	if (!MapHelper.hasRouteKillReq(route, region)) {
-            		const reqList = GameConstants.routeRequirements[region][route];
-            		const routesNotCompleted = [];
+            if (!MapHelper.hasRouteKillReq(route, region)) {
+                const reqList = GameConstants.routeRequirements[region][route];
+                const routesNotCompleted = [];
 
-            		for (let i = 0; i < reqList.length; i++) {
-              			const route: number = reqList[i];
-              			if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
-              				  routesNotCompleted.push(route);
-              			}
-            		}
-
-            		if (routesNotCompleted.length > 0) {
-              			const routesList = routesNotCompleted.join(', ');
-                		if (routesNotCompleted.length > 1) {
-              			     reqsList += `<br>Routes ${routesList} still need to be completed.`;
-                    } else {
-              			     reqsList += `<br>Route ${routesList} still needs to be completed.`;
+                for (let i = 0; i < reqList.length; i++) {
+                    const route: number = reqList[i];
+                    if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
+                        routesNotCompleted.push(route);
                     }
-            		}
-          	}
+                }
 
-          	Notifier.notify(`You don't have access to that route yet.${reqsList}`, GameConstants.NotificationOption.warning);
+                if (routesNotCompleted.length > 0) {
+                    const routesList = routesNotCompleted.join(', ');
+                    if (routesNotCompleted.length > 1) {
+                        reqsList += `<br>Routes ${routesList} still need to be completed.`;
+                    } else {
+                        reqsList += `<br>Route ${routesList} still needs to be completed.`;
+                    }
+                }
+            }
+
+            Notifier.notify(`You don't have access to that route yet.${reqsList}`, GameConstants.NotificationOption.warning);
         }
     };
 
@@ -79,7 +79,7 @@ class MapHelper {
         }
         for (let i = 0; i < reqList.length; i++) {
             const route: number = reqList[i];
-            if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
+            if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
                 return false;
             }
         }
@@ -96,7 +96,7 @@ class MapHelper {
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
-            if (player.routeKillsObservable(route)() >= player.routeKillsNeeded) {
+            if (player.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
@@ -106,7 +106,7 @@ class MapHelper {
         }
 
         // Water routes
-        if (GameConstants.WaterRoutes[region].has(route))  {
+        if (GameConstants.WaterRoutes[region].has(route)) {
             cls = `${cls} waterRoute`;
         }
 
@@ -156,38 +156,38 @@ class MapHelper {
             GameController.applyRouteBindings();
         } else {
             const town = TownList[townName];
-          	let reqsList = '';
+            let reqsList = '';
 
-          	if (town instanceof DungeonTown) {
+            if (town instanceof DungeonTown) {
                 if (town.badgeReq && !App.game.badgeCase.hasBadge(town.badgeReq)) {
                     reqsList += `<br/>Requires the ${BadgeCase.Badge[town.badgeReq]} badge.`;
                 }
             }
 
-          	if (!town.hasDungeonReq()) {
-            		reqsList += `<br/>${town.dungeonReq} needs to be completed.`;
-          	}
+            if (!town.hasDungeonReq()) {
+                reqsList += `<br/>${town.dungeonReq} needs to be completed.`;
+            }
 
-          	if (!town.hasRouteReq()) {
-            		const reqList = town.reqRoutes;
-            		const routesNotCompleted = [];
+            if (!town.hasRouteReq()) {
+                const reqList = town.reqRoutes;
+                const routesNotCompleted = [];
 
-            		for (let i = 0; i < reqList.length; i++) {
-              			const route: number = reqList[i];
-              			if (player.routeKillsObservable(route)() < player.routeKillsNeeded) {
-              				  routesNotCompleted.push(route);
-              			}
-            		}
-
-            		if (routesNotCompleted.length > 0) {
-              			const routesList = routesNotCompleted.join(', ');
-                		if (routesNotCompleted.length > 1) {
-              			     reqsList += `<br/>Routes ${routesList} still need to be completed.`;
-                    } else {
-              			     reqsList += `<br/>Route ${routesList} still needs to be completed.`;
+                for (let i = 0; i < reqList.length; i++) {
+                    const route: number = reqList[i];
+                    if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
+                        routesNotCompleted.push(route);
                     }
-            		}
-          	}
+                }
+
+                if (routesNotCompleted.length > 0) {
+                    const routesList = routesNotCompleted.join(', ');
+                    if (routesNotCompleted.length > 1) {
+                        reqsList += `<br/>Routes ${routesList} still need to be completed.`;
+                    } else {
+                        reqsList += `<br/>Route ${routesList} still needs to be completed.`;
+                    }
+                }
+            }
 
             Notifier.notify(`You don't have access to that location yet.${reqsList}`, GameConstants.NotificationOption.warning);
         }

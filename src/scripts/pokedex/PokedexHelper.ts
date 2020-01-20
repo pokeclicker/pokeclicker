@@ -49,8 +49,8 @@ class PokedexHelper {
     public static getList(): Array<object> {
         const filter = PokedexHelper.getFilters();
 
-        const highestDefeated = player.defeatedAmount.reduce((highest, pokemon, index)=> pokemon() && index > highest ? index : highest, 0);
-        const highestCaught = App.game.party.caughtPokemon.reduce((highest, pokemon)=> pokemon.id > highest ? pokemon.id : highest, 0);
+        const highestDefeated = player.defeatedAmount.reduce((highest, pokemon, index) => pokemon() && index > highest ? index : highest, 0);
+        const highestCaught = App.game.party.caughtPokemon.reduce((highest, pokemon) => pokemon.id > highest ? pokemon.id : highest, 0);
         const highestDex = Math.max(highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
@@ -58,12 +58,8 @@ class PokedexHelper {
                 return false;
             }
             const type1: PokemonType = parseInt(filter['type1'] || PokemonType.None);
-            if (type1 != PokemonType.None && pokemon.type.includes(type1)) {
-                return false;
-            }
-
             const type2: PokemonType = parseInt(filter['type2'] || PokemonType.None);
-            if (type2 != PokemonType.None && pokemon.type.includes(type2)) {
+            if ((type1 != PokemonType.None && !pokemon.type.includes(type1)) || (type2 != PokemonType.None && !pokemon.type.includes(type2))) {
                 return false;
             }
 

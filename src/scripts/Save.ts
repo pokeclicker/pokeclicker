@@ -25,6 +25,9 @@ class Save {
         saveObject[App.game.oakItems.saveKey] = App.game.oakItems.toJSON();
         saveObject[App.game.party.saveKey] = App.game.party.toJSON();
         saveObject[App.game.shards.saveKey] = App.game.shards.toJSON();
+        saveObject[App.game.farming.saveKey] = App.game.farming.toJSON();
+
+        saveObject[App.game.redeemableCodes.saveKey] = App.game.redeemableCodes.toJSON();
 
         return saveObject;
     }
@@ -116,30 +119,6 @@ class Save {
             res[obj] = ko.observable(0);
         }
         return res;
-    }
-
-    public static initializePlots(saved?: Array<any>): KnockoutObservable<Plot>[] {
-        let plotList: Array<KnockoutObservable<Plot>>;
-        if (saved) {
-            plotList = saved.map((p) => {
-                let berry;
-                if (p.berry) {
-                    berry = new Berry(p.berry.type, p.berry.harvestTime, p.berry.moneyValue, p.berry.farmValue);
-                } else {
-                    berry = null;
-                }
-                const plot = new Plot(p.isUnlocked, p.exp, p.level, p.boosted, berry, p.timeLeft);
-                return ko.observable(plot);
-            });
-        } else {
-            plotList = [...Array(GameConstants.AMOUNT_OF_PLOTS)].map(function (val, index) {
-                if (index == 0) {
-                    return ko.observable(new Plot(true, 0, 0, false, null, 0));
-                }
-                return ko.observable(new Plot(false, 0, 0, false, null, 0));
-            });
-        }
-        return plotList;
     }
 
     public static initializeShards(saved?: Array<Array<number>>): Array<Array<KnockoutObservable<number>>> {

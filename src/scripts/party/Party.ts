@@ -140,10 +140,7 @@ class Party implements Feature {
         // Base power
         let clickAttack = Math.pow(this.caughtPokemon.length + 1, 1.4);
 
-        // TODO(@Isha) fix when refactoring to party
-        if (App.game != undefined) {
-            clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
-        }
+        clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
 
         // Apply battle item bonus
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()) {

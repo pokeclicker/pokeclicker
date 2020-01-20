@@ -10,7 +10,7 @@ class ItemHandler {
             return Notifier.notify(`You don't have any ${name.replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
         }
 
-        player.itemList[name](player.itemList[name]()-1);
+        player.itemList[name](player.itemList[name]() - 1);
         return ItemList[name].use();
     }
 
@@ -36,8 +36,8 @@ class ItemHandler {
         }
 
         let amountUsed = 0;
-        for (let i = 0; i< amountTotal; i++) {
-            player.itemList[this.stoneSelected()](player.itemList[this.stoneSelected()]()-1);
+        for (let i = 0; i < amountTotal; i++) {
+            player.itemList[this.stoneSelected()](player.itemList[this.stoneSelected()]() - 1);
             amountUsed++;
             if ((ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())) {
                 // Stop when a shiny is encountered

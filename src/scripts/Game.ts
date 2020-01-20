@@ -6,6 +6,7 @@ class Game {
     undergroundCounter: number;
     public static achievementCounter = 0;
 
+    // Features
     public breeding: Breeding;
     public pokeballs: Pokeballs;
     public wallet: Wallet;
@@ -14,6 +15,9 @@ class Game {
     public oakItems: OakItems;
     public party: Party;
     public shards: Shards;
+    public farming: Farming;
+
+    public redeemableCodes: RedeemableCodes;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
@@ -28,7 +32,9 @@ class Game {
         badgeCase: BadgeCase,
         oakItems: OakItems,
         party: Party,
-        shards: Shards
+        shards: Shards,
+        farming: Farming,
+        codes: RedeemableCodes
     ) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
@@ -38,6 +44,9 @@ class Game {
         this.oakItems = oakItems;
         this.party = party;
         this.shards = shards;
+        this.farming = farming;
+
+        this.redeemableCodes = codes;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
@@ -60,6 +69,9 @@ class Game {
             this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
             this.party.fromJSON(saveObject[this.party.saveKey]);
             this.shards.fromJSON(saveObject[this.shards.saveKey]);
+            this.farming.fromJSON(saveObject[this.farming.saveKey]);
+
+            this.redeemableCodes.fromJSON(saveObject[this.redeemableCodes.saveKey]);
         }
     }
 
@@ -68,6 +80,7 @@ class Game {
         this.pokeballs.initialize();
         this.keyItems.initialize();
         this.oakItems.initialize();
+        this.farming.initialize();
 
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();
@@ -100,7 +113,6 @@ class Game {
     gameTick() {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
-        FarmRunner.counter += GameConstants.TICK_TIME;
         EffectEngineRunner.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
@@ -160,9 +172,7 @@ class Game {
             Underground.counter = 0;
         }
 
-        if (FarmRunner.counter > GameConstants.FARM_TICK) {
-            FarmRunner.tick();
-        }
+        this.farming.update(GameConstants.TICK_TIME / 1000);
 
         if (EffectEngineRunner.counter > GameConstants.EFFECT_ENGINE_TICK) {
             EffectEngineRunner.tick();

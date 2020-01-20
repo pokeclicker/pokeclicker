@@ -1,4 +1,5 @@
 ///<reference path="../oakItems/OakItems.ts"/>
+///<reference path="../farming/BerryType.ts"/>
 ///<reference path="../pokemons/PokemonType.ts"/>
 class Statistics {
 
@@ -14,11 +15,13 @@ class Statistics {
     public totalTokens: KnockoutObservable<number>;
     public totalQuestPoints: KnockoutObservable<number>;
     public totalDiamonds: KnockoutObservable<number>;
+    public totalFarmPoints: KnockoutObservable<number>;
     public pokeballsUsed: Array<KnockoutObservable<number>>;
     public pokeballsBought: Array<KnockoutObservable<number>>;
     public totalShards: Array<KnockoutObservable<number>>;
     public oakItemUses: Array<KnockoutObservable<number>>;
     public berriesHarvested: Array<KnockoutObservable<number>>;
+    public routeKills: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
         'gymsDefeated': GameConstants.RegionGyms.flat().length,
@@ -27,7 +30,8 @@ class Statistics {
         'pokeballsBought': GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
         'totalShards': GameHelper.enumLength(PokemonType) - 1,  // remove "None" pokemon type
         'oakItemUses': GameHelper.enumLength(OakItems.OakItem),
-        'berriesHarvested': GameHelper.enumLength(GameConstants.BerryType),
+        'berriesHarvested': GameHelper.enumLength(BerryType) - 1,  // remove "None" berry
+        'routeKills': GameConstants.AMOUNT_OF_ROUTES,
     };
 
     constructor(saved = {}) {
@@ -42,6 +46,7 @@ class Statistics {
             'totalTokens',
             'totalQuestPoints',
             'totalDiamonds',
+            'totalFarmPoints',
         ];
 
         const arrayObservables = [
@@ -52,6 +57,7 @@ class Statistics {
             'totalShards',
             'oakItemUses',
             'berriesHarvested',
+            'routeKills',
         ];
 
         for (const prop of observables) {

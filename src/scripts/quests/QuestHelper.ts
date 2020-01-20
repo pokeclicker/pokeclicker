@@ -83,8 +83,7 @@ class QuestHelper {
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
             case 'HarvestBerriesQuest':
-                const possibleBerries = Object.keys(BerryList);
-                const berryType = SeededRand.fromArray(possibleBerries);
+                const berryType = SeededRand.intBetween(0, GameHelper.enumLength(Berry));
                 amount = SeededRand.intBetween(30, 300);
                 return new HarvestBerriesQuest(berryType, amount);
         }
@@ -93,8 +92,7 @@ class QuestHelper {
     public static refreshQuests(free = false) {
         if (free || QuestHelper.canAffordRefresh()) {
             if (!free) {
-                // TODO(@Isha) refactor to Amount
-                App.game.wallet.loseAmount(new Amount(QuestHelper.getRefreshCost(), GameConstants.Currency.money));
+                App.game.wallet.loseAmount(QuestHelper.getRefreshCost());
             }
             player.questRefreshes++;
             QuestHelper.quitAllQuests();
@@ -106,7 +104,7 @@ class QuestHelper {
     }
 
     public static canAffordRefresh(): boolean {
-        return App.game.wallet.hasAmount(new Amount(this.getRefreshCost(), GameConstants.Currency.money));
+        return App.game.wallet.hasAmount(this.getRefreshCost());
     }
 
     public static clearQuests() {
@@ -118,11 +116,11 @@ class QuestHelper {
     }
 
     // Returns 0 when all quests are complete, ~1 million when none are
-    public static getRefreshCost(): number {
+    public static getRefreshCost(): Amount {
         const notComplete = player.completedQuestList.filter((elem) => {
             return !elem();
         }).length;
-        return Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1));
+        return new Amount(Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)), GameConstants.Currency.money);
     }
 
     public static loadCurrentQuests(saved: KnockoutObservableArray<any>) {

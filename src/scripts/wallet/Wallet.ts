@@ -11,7 +11,7 @@ class Wallet implements Feature {
         this.currencies = new ArrayOfObservables(this.defaults.currencies);
     }
 
-    public gainMoney(base: number, origin?: string) {
+    public gainMoney(base: number, origin?: string): number {
         App.game.oakItems.use(OakItems.OakItem.Amulet_Coin);
 
         let money = base;
@@ -25,6 +25,7 @@ class Wallet implements Feature {
         GameController.animateCurrency(money, 'playerMoney');
 
         this.addAmount(new Amount(money, Currency.money));
+        return money;
     }
 
     public gainDungeonTokens(base: number, origin?: string) {
@@ -65,8 +66,7 @@ class Wallet implements Feature {
 
         points = Math.floor(points);
 
-        // TODO Add total farmpoints statistic
-        // GameHelper.incrementObservable(player.statistics.totalFarmPoints, points);
+        GameHelper.incrementObservable(player.statistics.totalFarmPoints, points);
 
         this.addAmount(new Amount(points, Currency.farmPoint));
     }

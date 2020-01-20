@@ -32,7 +32,7 @@ class OakItems implements Feature {
     calculateBonus(item: OakItems.OakItem) {
         const oakItem = this.itemList[item];
         if (oakItem == undefined) {
-            console.log('Warning: could not find oakItem', item, 'This could have unintended consequences');
+            console.error('Could not find oakItem', item, 'This could have unintended consequences');
             return 1;
         }
         return oakItem.calculateBonus();

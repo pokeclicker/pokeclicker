@@ -55,7 +55,9 @@ class Battle {
         App.game.wallet.gainMoney(this.enemyPokemon().money);
         App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         this.gainShardsAfterBattle();
-        player.addRouteKill();
+
+        GameHelper.incrementObservable(player.statistics.routeKills[player.route()]);
+
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
         const isShiny: boolean = this.enemyPokemon().shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
@@ -131,7 +133,7 @@ class Battle {
         const p = player.route() / 1600 + 0.009375;
 
         if (Math.random() < p) {
-            player.getRandomBerry();
+            App.game.farming.gainRandomBerry();
         }
     }
 

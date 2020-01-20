@@ -13,7 +13,6 @@ namespace GameConstants {
     export const DUNGEON_TIME = 6000;
     export const DUNGEON_TICK = 10;
     export const EFFECT_ENGINE_TICK = 1000;
-    export const FARM_TICK = 1000;
     export const SAVE_TICK = 10000;
     export const GYM_TIME = 3000;
     export const GYM_COUNTDOWN = 1000;
@@ -60,19 +59,7 @@ namespace GameConstants {
     export const BREEDING_AMOUNT = 1;
     export const BREEDING_ATTACK_BONUS = 25;
 
-    // Farm
-    export const AMOUNT_OF_BERRIES = 8;
-    export const AMOUNT_OF_PLOTS = 25;
-
     export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
-
-    export enum PlotStage {
-        Seed,
-        Sprout,
-        Taller,
-        Bloom,
-        Berry
-    }
 
     // Dungeons
     export const DUNGEON_SIZE = 5;
@@ -303,6 +290,7 @@ namespace GameConstants {
     export const AMOUNT_OF_ROUTES = 134;
     export const AMOUNT_OF_ROUTES_KANTO = 25;
 
+    export const ROUTE_KILLS_NEEDED = 10;
     /**
      * Each route contains a list of routenumbers that need to be completed
      * Access with routeRequirements.region.routeNumber
@@ -496,28 +484,28 @@ namespace GameConstants {
     };
 
     export enum StoneType {
-        None = -1,
-        Fire_stone,
-        Water_stone,
-        Thunder_stone,
-        Leaf_stone,
-        Moon_stone,
-        Sun_stone,
-        Trade_stone,
-        Dragon_scale,
-        Metal_coat,
-        Kings_rock,
-        Upgrade,
-        Time_stone,
+        'None' = -1,
+        'Fire_stone',
+        'Water_stone',
+        'Thunder_stone',
+        'Leaf_stone',
+        'Moon_stone',
+        'Sun_stone',
+        'Trade_stone',
+        'Dragon_scale',
+        'Metal_coat',
+        'Kings_rock',
+        'Upgrade',
+        'Time_stone',
     }
 
     export enum BattleItemType {
-        xAttack = 'xAttack',
-        xClick = 'xClick',
-        xExp = 'xExp',
-        Token_collector = 'Token_collector',
-        Item_magnet = 'Item_magnet',
-        Lucky_incense = 'Lucky_incense'
+        'xAttack' = 'xAttack',
+        'xClick' = 'xClick',
+        'xExp' = 'xExp',
+        'Token_collector' = 'Token_collector',
+        'Item_magnet' = 'Item_magnet',
+        'Lucky_incense' = 'Lucky_incense'
     }
 
     export enum PokemonItemType {
@@ -527,17 +515,6 @@ namespace GameConstants {
         'Mr. Mime',
         'Lickitung',
         'Togepi',
-    }
-
-    export enum BerryType {
-        Cheri,
-        Chesto,
-        Pecha,
-        Rawst,
-        Aspear,
-        Leppa,
-        Oran,
-        Sitrus
     }
 
     export enum PokeBlockColor {
@@ -561,14 +538,14 @@ namespace GameConstants {
     }
 
     export enum EggItemType {
-        Fire_egg,
-        Water_egg,
-        Grass_egg,
-        Fighting_egg,
-        Electric_egg,
-        Dragon_egg,
-        Pokemon_egg,
-        Mystery_egg,
+        'Fire_egg',
+        'Water_egg',
+        'Grass_egg',
+        'Fighting_egg',
+        'Electric_egg',
+        'Dragon_egg',
+        'Pokemon_egg',
+        'Mystery_egg',
     }
 
     export enum EggType {
