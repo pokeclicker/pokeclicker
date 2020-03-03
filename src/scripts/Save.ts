@@ -184,20 +184,21 @@ class Save {
         $('#saveModal').modal('hide');
     }
 
-    // TODO (@Isha) reimplement
-    public static convertShinies(list: Array<string>) {
-        // let converted = [];
-        // for (let pokemon of list) {
-        //     let shiny = parseInt(pokemon['shiny']);
-        //     let name = pokemon['name'];
-        //     if (shiny == 1 && player.caughtShinyList.indexOf(name) == -1) {
-        //         player.caughtShinyList().push(pokemon['name']);
-        //         converted.push(pokemon['name']);
-        //     }
-        // }
-        // if (converted.length > 0) {
-        //     Notifier.notify("You have gained the following shinies: " + converted, GameConstants.NotificationOption.success)
-        // }
+    public static convertShinies(list: Array<any>) {
+        const converted = [];
+        list = list.filter(p => p.shiny);
+        for (const pokemon of list) {
+            const id = +pokemon.id;
+            if (!App.game.party.shinyPokemon.includes(id)) {
+                converted.push(pokemon.name);
+                App.game.party.shinyPokemon.push(id);
+            }
+        }
+        if (converted.length > 0) {
+            Notifier.notify(`You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`, GameConstants.NotificationOption.success);
+        } else {
+            Notifier.notify('No new shiny Pokémon to import.', GameConstants.NotificationOption.info);
+        }
     }
 }
 
