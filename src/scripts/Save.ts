@@ -183,7 +183,7 @@ class Save {
             const p = JSON.parse(json);
             Save.convertShinies(p.caughtPokemonList);
             $('#saveModal').modal('hide');
-        } catch(e) {
+        } catch (e) {
             Notifier.notify('Invalid save data.', GameConstants.NotificationOption.danger);
         }
     }
