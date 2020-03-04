@@ -178,10 +178,14 @@ class Save {
 
     public static convert() {
         const base64 = $('#convertTextArea').val().toString();
-        const json = atob(base64);
-        const p = JSON.parse(json);
-        Save.convertShinies(p.caughtPokemonList);
-        $('#saveModal').modal('hide');
+        try {
+            const json = atob(base64);
+            const p = JSON.parse(json);
+            Save.convertShinies(p.caughtPokemonList);
+            $('#saveModal').modal('hide');
+        } catch(e) {
+            Notifier.notify('Invalid save data.', GameConstants.NotificationOption.danger);
+        }
     }
 
     public static convertShinies(list: Array<any>) {
