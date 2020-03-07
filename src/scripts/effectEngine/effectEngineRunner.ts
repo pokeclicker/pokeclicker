@@ -7,8 +7,8 @@ class EffectEngineRunner {
         for (const itemName in GameConstants.BattleItemType) {
             const timeRemaining = player.effectList[itemName]();
             if (timeRemaining > 0) {
-              player.effectList[itemName](Math.max(0, timeRemaining - timeToReduce));
-              this.updateFormattedTimeLeft(itemName);
+                player.effectList[itemName](Math.max(0, timeRemaining - timeToReduce));
+                this.updateFormattedTimeLeft(itemName);
             }
             if (player.effectList[itemName]() == 5) {
                 Notifier.notify(`The ${itemName}s effect is about to wear off!`, GameConstants.NotificationOption.warning);
