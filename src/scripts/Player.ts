@@ -106,7 +106,7 @@ class Player {
         this.statistics = new Statistics(savedPlayer.statistics);
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
-        this.effectTimer = Save.initializeEffects({});
+        this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
 
         this.tutorialProgress = ko.observable(savedPlayer.tutorialProgress || 0);
@@ -357,6 +357,7 @@ class Player {
             'statistics',
             'achievementsCompleted',
             'effectList',
+            'effectTimer',
             'highestRegion',
             'tutorialProgress',
             'tutorialState',
