@@ -20,7 +20,7 @@ class App {
                 new Party(),
                 new Shards(),
                 new Farming(),
-                new World([RegionFactory.createKanto()]),
+                new World([RegionFactory.createKanto(), RegionFactory.createJohto(), RegionFactory.createHoenn()]),
                 new RedeemableCodes()
             );
 

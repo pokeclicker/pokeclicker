@@ -48,7 +48,6 @@ class DungeonEntrance extends Town {
 const TownList: { [name: string]: Town  } = {};
 
 //Kanto Towns
-
 TownList['Pewter_City'] = new Town('Pewter_City', [new RouteRequirement(2)], [ShopName.Pewter_City], [GymLeaderName.Brock]);
 TownList['Cerulean_City'] = new Town('Cerulean_City', [new RouteRequirement(4)], [ShopName.Cerulean_City], [GymLeaderName.Misty], [DungeonName.Cerulean_Cave]);
 TownList['Vermillion_City'] = new Town('Vermillion_City', [new RouteRequirement(6)], [ShopName.Vermillion_City], [GymLeaderName['Lt._Surge']]);

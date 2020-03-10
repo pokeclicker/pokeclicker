@@ -1,9 +1,6 @@
 class Region {
     type: RegionName;
-
     pokemonsAvailable: number;
-
-
     routes: Route[];
     gyms: Gym[];
     shops: Shop[];

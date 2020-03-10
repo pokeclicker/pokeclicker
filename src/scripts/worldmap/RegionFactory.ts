@@ -365,4 +365,143 @@ class RegionFactory {
 
         return new Region(RegionName.kanto, 151, routes, gyms, shops, dungeons);
     }
+
+    static createJohto(): Region {
+
+        const routes: Route[] = [
+            RouteFactory.createRoute(26, {
+                land: ['Raticate', 'Arbok', 'Sandslash', 'Ponyta', 'Doduo', 'Dodrio', 'Quagsire'],
+                water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(46)]),
+            RouteFactory.createRoute(27, {
+                land: ['Raticate', 'Arbok', 'Sandslash', 'Ponyta', 'Doduo', 'Dodrio', 'Quagsire'],
+                water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(26)]),
+            RouteFactory.createRoute(28, {
+                land: ['Ponyta', 'Tangela', 'Donphan', 'Ursaring', 'Rapidash', 'Doduo', 'Dodrio', 'Sneasel', 'Murkrow'],
+                water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
+                headbutt: ['Natu', 'Aipom', 'Heracross'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Elite_JohtoChampion)]),
+            RouteFactory.createRoute(29, {
+                land: ['Pidgey', 'Rattata', 'Sentret', 'Hoothoot'],
+                water: [],
+                headbutt: ['Exeggcute', 'Ledyba', 'Spinarak', 'Hoothoot', 'Pineco'],
+            }),
+            RouteFactory.createRoute(30, {
+                land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Hoothoot', 'Ledyba', 'Spinarak'],
+                water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(29)]),
+            RouteFactory.createRoute(31, {
+                land: ['Pidgey', 'Rattata', 'Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Poliwag', 'Hoothoot', 'Ledyba', 'Spinarak', 'Bellsprout'],
+                water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
+                headbutt: ['Spearow', 'Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Aipom', 'Pineco', 'Heracross'],
+            }, [new RouteRequirement(30)]),
+            RouteFactory.createRoute(32, {
+                land: ['Rattata', 'Ekans', 'Zubat', 'Bellsprout', 'Mareep', 'Hoppip', 'Wooper'],
+                water: ['Tentacool', 'Tentacruel', 'Quagsire', 'Magikarp', 'Qwilfish'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Zephyr)]),
+            RouteFactory.createRoute(33, {
+                land: ['Spearow', 'Rattata', 'Ekans', 'Zubat', 'Hoppip'],
+                water: [],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new RouteRequirement(32), new DungeonRequirement(DungeonName.Union_Cave)]]),
+            RouteFactory.createRoute(34, {
+                land: ['Rattata', 'Abra', 'Drowzee', 'Ditto'],
+                water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Hive), new DungeonRequirement(DungeonName.Ilex_Forest)]]),
+            RouteFactory.createRoute(35, {
+                land: ['Pidgey', 'Nidoran(F)', 'Nidoran(M)', 'Abra', 'Drowzee', 'Ditto', 'Hoothoot', 'Yanma'],
+                water: ['Psyduck', 'Golduck', 'Poliwag', 'Magikarp'],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Plain)]),
+            RouteFactory.createRoute(36, {
+                land: ['Pidgey', 'Nidoran(M)', 'Nidoran(F)', 'Vulpix', 'Growlithe', 'Hoothoot', 'Stantler', 'Sudowoodo'],
+                water: [],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(35)]),
+            RouteFactory.createRoute(37, {
+                land: ['Pidgey', 'Pidgeotto', 'Vulpix', 'Growlithe', 'Hoothoot', 'Ledyba', 'Spinarak', 'Stantler'],
+                water: [],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(36)]),
+            RouteFactory.createRoute(38, {
+                land: ['Rattata', 'Raticate', 'Meowth', 'Magnemite', 'Farfetch\'d', 'Tauros', 'Snubbull', 'Miltank'],
+                water: [],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Fog)]),
+            RouteFactory.createRoute(39, {
+                land: ['Rattata', 'Raticate', 'Meowth', 'Magnemite', 'Farfetch\'d', 'Tauros', 'Miltank'],
+                water: [],
+                headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
+            }, [new RouteRequirement(38)]),
+            RouteFactory.createRoute(40, {
+                land: [],
+                water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
+                headbutt: [],
+            }, [new RouteRequirement(39)], true),
+            RouteFactory.createRoute(41, {
+                land: [],
+                water: ['Tentacool', 'Tentacruel', 'Mantine', 'Magikarp', 'Chinchou', 'Shellder'],
+                headbutt: [],
+            }, [new RouteRequirement(40)], true),
+            RouteFactory.createRoute(42, {
+                land: ['Spearow', 'Zubat', 'Mankey', 'Mareep', 'Flaaffy'],
+                water: ['Goldeen', 'Seaking', 'Magikarp'],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Mineral)]),
+            RouteFactory.createRoute(43, {
+                land: ['Pidgeotto', 'Venonat', 'Noctowl', 'Mareep', 'Flaaffy', 'Girafarig'],
+                water: ['Magikarp', 'Poliwag'],
+                headbutt: ['Venonat', 'Exeggcute', 'Hoothoot', 'Pineco'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Glacier)]),
+            RouteFactory.createRoute(44, {
+                land: ['Bellsprout', 'Weepinbell', 'Lickitung', 'Tangela'],
+                water: ['Poliwag', 'Poliwhirl', 'Magikarp', 'Remoraid'],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Glacier)]),
+            RouteFactory.createRoute(45, {
+                land: ['Geodude', 'Graveler', 'Gligar', 'Teddiursa', 'Skarmory', 'Phanpy'],
+                water: ['Magikarp', 'Poliwag'],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new BadgeRequirement(BadgeCase.Badge.Rising)]),
+            RouteFactory.createRoute(46, {
+                land: ['Spearow', 'Rattata', 'Geodude'],
+                water: [],
+                headbutt: ['Spearow', 'Aipom', 'Heracross'],
+            }, [new RouteRequirement(45)]),
+        ];
+
+        const shops: Shop[] = [
+        ];
+
+        const gyms: Gym[] = [
+        ];
+
+        const dungeons: Dungeon[] = [
+        ];
+
+        return new Region(RegionName.johto, 100, routes, gyms, shops, dungeons);
+    }
+
+    static createHoenn(): Region {
+
+        const routes: Route[] = [
+        ];
+
+        const shops: Shop[] = [
+        ];
+
+        const gyms: Gym[] = [
+        ];
+
+        const dungeons: Dungeon[] = [
+        ];
+
+        return new Region(RegionName.hoenn, 135, routes, gyms, shops, dungeons);
+    }
 }
