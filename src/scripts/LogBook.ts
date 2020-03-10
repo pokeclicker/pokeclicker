@@ -49,7 +49,7 @@ class LogBook implements Feature {
         }
     }
 
-    fromJSON(json: { logs: Array<{ type: LogBookType, description: string, date: number }> }): void {
+    fromJSON(json: { logs: Array<{ type: LogBookType; description: string; date: number }> }): void {
         if (json == null || !json.logs) {
             return;
         }
@@ -61,14 +61,14 @@ class LogBook implements Feature {
 
     initialize(): void {}
 
-    toJSON(): { logs: Array<{ type: LogBookType, description: string, date: number }> } {
+    toJSON(): { logs: Array<{ type: LogBookType; description: string; date: number }> } {
         return {
             logs: this.logs.slice(0, 100),
         };
     }
 
     canAccess(): boolean {
-      return true;
+        return true;
     }
 
     update(delta: number): void {}  // This method intentionally left blank
