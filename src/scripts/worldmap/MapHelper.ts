@@ -1,8 +1,7 @@
 class MapHelper {
     public static calculateTownCssClass(town: string): string {
         // TODO Temporary fix
-        town = town.replace(' ', '_');
-        town = town.replace(' ', '_');
+        town = town.replace(/ /g, '_');
 
         // TODO(@Isha) this is very weird, refactor this.
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem[town])) {
@@ -85,9 +84,9 @@ class MapHelper {
     }
 
     public static travelToNextRegion() {
-        if (MapHelper.ableToTravel()) {
+        if (this.ableToTravel()) {
             player.highestRegion(player.highestRegion() + 1);
-            MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
+            this.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             App.game.world.currentRegion = player.highestRegion();
         }
     }
