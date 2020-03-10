@@ -500,8 +500,8 @@ class RegionFactory {
                     new GymPokemon('Pidgeotto', 42000, 13),
                 ],
                 BadgeCase.Badge.Zephyr,
-                500
-                    [new BadgeRequirement(BadgeCase.Badge.Elite_Lance)],
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Elite_Lance)],
                 '...For pity\'s sake! My dad\'s cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge.'
             ),
             new Gym(
@@ -512,8 +512,8 @@ class RegionFactory {
                     new GymPokemon('Scyther', 39000, 17),
                 ],
                 BadgeCase.Badge.Hive,
-                500
-                    [new BadgeRequirement(BadgeCase.Badge.Zephyr)],
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Zephyr)],
                 'Whoa, amazing! You\'re an expert on Pokémon! My research isn\'t complete yet. OK, you win. Take this Hive Badge.'
             ),
             new Gym(
@@ -523,8 +523,8 @@ class RegionFactory {
                     new GymPokemon('Miltank', 80000, 19),
                 ],
                 BadgeCase.Badge.Plain,
-                500
-                    [new BadgeRequirement(BadgeCase.Badge.Hive)],
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Hive)],
                 '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s the Plain Badge.'
             ),
             new Gym(
@@ -536,8 +536,8 @@ class RegionFactory {
                     new GymPokemon('Gengar', 42000, 25),
                 ],
                 BadgeCase.Badge.Fog,
-                500
-                    [new BadgeRequirement(BadgeCase.Badge.Plain)],
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Plain)],
                 'I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge..'
             ),
             new Gym(
@@ -547,8 +547,8 @@ class RegionFactory {
                     new GymPokemon('Poliwrath', 93000, 31),
                 ],
                 BadgeCase.Badge.Storm,
-                500
-                    [new BadgeRequirement(BadgeCase.Badge.Fog)],
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Fog)],
                 'Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I\'m going to train 24 hours a day!'
             ),
             new Gym(
@@ -559,8 +559,8 @@ class RegionFactory {
                     new GymPokemon('Steelix', 72000, 35),
                 ],
                 BadgeCase.Badge.Mineral,
-                500
-                    [new BadgeRequirement(BadgeCase.Badge.Storm)],
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Storm)],
                 '...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge.'
             ),
             new Gym(
@@ -571,8 +571,8 @@ class RegionFactory {
                     new GymPokemon('Piloswine', 76000, 34),
                 ],
                 BadgeCase.Badge.Glacier,
-                500
-                    [new BadgeRequirement(BadgeCase.Badge.Mineral)],
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Mineral)],
                 'I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Glacier Badge!'
             ),
             new Gym(
@@ -584,8 +584,8 @@ class RegionFactory {
                     new GymPokemon('Kingdra', 80000, 41),
                 ],
                 BadgeCase.Badge.Rising,
-                500
-                    [new BadgeRequirement(BadgeCase.Badge.Glacier)],
+                500,
+                [new BadgeRequirement(BadgeCase.Badge.Glacier)],
                 'Here, this is the Rising Badge... Hurry up! Take it!'
             ),
             new Gym(
@@ -598,8 +598,8 @@ class RegionFactory {
                     new GymPokemon('Xatu', 60250, 42),
                 ],
                 BadgeCase.Badge.Elite_Will,
-                7500
-                    [new BadgeRequirement(BadgeCase.Badge.Rising)],
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Rising)],
                 'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.'
             ),
             new Gym(
@@ -612,8 +612,8 @@ class RegionFactory {
                     new GymPokemon('Crobat', 60250, 44),
                 ],
                 BadgeCase.Badge.Elite_Koga,
-                7500
-                    [new BadgeRequirement(BadgeCase.Badge.Elite_Will)],
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Elite_Will)],
                 'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!'
             ),
             new Gym(
@@ -626,8 +626,8 @@ class RegionFactory {
                     new GymPokemon('Machamp', 60250, 46),
                 ],
                 BadgeCase.Badge.Elite_Bruno2,
-                7500
-                    [new BadgeRequirement(BadgeCase.Badge.Elite_Koga)],
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Elite_Koga)],
                 'Having lost, I have no right to say anything… Go face your next challenge!'
             ),
             new Gym(
@@ -640,8 +640,8 @@ class RegionFactory {
                     new GymPokemon('Houndoom', 66000, 47),
                 ],
                 BadgeCase.Badge.Elite_Karen,
-                7500
-                    [new BadgeRequirement(BadgeCase.Badge.Elite_Bruno2)],
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Elite_Bruno2)],
                 'Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what\'s important. Go on — — the Champion is waiting.'
             ),
             new Gym(
@@ -654,8 +654,8 @@ class RegionFactory {
                     new GymPokemon('Dragonite', 70000, 50),
                 ],
                 BadgeCase.Badge.Elite_JohtoChampion,
-                7500
-                    [new BadgeRequirement(BadgeCase.Badge.Elite_Karen)],
+                7500,
+                [new BadgeRequirement(BadgeCase.Badge.Elite_Karen)],
                 '…It\'s over. But it\'s an odd feeling. I’m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!'
             ),
         ];
