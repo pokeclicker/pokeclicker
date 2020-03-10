@@ -27,7 +27,14 @@
                            <br>
                            <span data-bind="template: { name: 'currencyTemplate', data: App.game.world.getDungeon($data).entryCost}"></span>
                        </button>
-
+                   <!-- /ko -->
+                   <!-- ko ifnot: player.town() instanceof DungeonEntrance -->
+                       <button class="btn btn-primary"
+                               data-bind="text:  GameConstants.humanifyString(DungeonName[$data]),
+                                                      disable: !App.game.world.getDungeon($data).canAccess(),
+                                                      click: function() {MapHelper.moveToTown($data)}}">
+                           Dungeon
+                       </button>
                    <!-- /ko -->
                <!-- /ko -->
 
