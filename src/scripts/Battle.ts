@@ -90,9 +90,9 @@ class Battle {
         Battle.counter = 0;
         Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
         if (Battle.enemyPokemon().shiny) {
-            App.game.logbook.newEntry(logBookType.SHINY, `You encountered a Shiny ${Battle.enemyPokemon().name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${Battle.enemyPokemon().name} on route ${player.route()}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id)) {
-            App.game.logbook.newEntry(logBookType.NEW, `You encountered a wild ${Battle.enemyPokemon().name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${Battle.enemyPokemon().name} on route ${player.route()}.`);
         }
     }
 
@@ -119,9 +119,9 @@ class Battle {
         if (random <= this.catchRateActual()) { // Caught
             this.catchPokemon();
         } else if (Battle.enemyPokemon().shiny) { // Failed to catch, Shiny
-            App.game.logbook.newEntry(logBookType.ESCAPED, `The Shiny ${this.enemyPokemon().name} escaped!`);
+            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${this.enemyPokemon().name} escaped!`);
         } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) { // Failed to catch, Uncaught
-            App.game.logbook.newEntry(logBookType.ESCAPED, `The wild ${this.enemyPokemon().name} escaped!`);
+            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The wild ${this.enemyPokemon().name} escaped!`);
         }
         this.catching(false);
         this.catchRateActual(null);

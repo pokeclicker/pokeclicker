@@ -43,9 +43,9 @@ class DungeonBattle extends Battle {
         this.enemyPokemon(PokemonFactory.generateDungeonPokemon(DungeonRunner.dungeon.pokemonList, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level));
 
         if (this.enemyPokemon().shiny) {
-            App.game.logbook.newEntry(logBookType.SHINY, `You encountered a Shiny ${this.enemyPokemon().name} at ${player.town().dungeon().name()}.`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${this.enemyPokemon().name} at ${player.town().dungeon().name()}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
-            App.game.logbook.newEntry(logBookType.NEW, `You encountered a wild ${this.enemyPokemon().name} at ${player.town().dungeon().name()}.`);
+            App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${this.enemyPokemon().name} at ${player.town().dungeon().name()}.`);
         }
 
         DungeonRunner.fighting(true);
@@ -58,9 +58,9 @@ class DungeonBattle extends Battle {
         this.enemyPokemon(PokemonFactory.generateDungeonBoss(DungeonRunner.dungeon.bossList, DungeonRunner.chestsOpened));
 
         if (this.enemyPokemon().shiny) {
-            App.game.logbook.newEntry(logBookType.SHINY, `You encountered a Shiny ${this.enemyPokemon().name} at ${player.town().dungeon().name()}.`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${this.enemyPokemon().name} at ${player.town().dungeon().name()}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) {
-            App.game.logbook.newEntry(logBookType.NEW, `You encountered a wild ${this.enemyPokemon().name} at ${player.town().dungeon().name()}.`);
+            App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${this.enemyPokemon().name} at ${player.town().dungeon().name()}.`);
         }
     }
 

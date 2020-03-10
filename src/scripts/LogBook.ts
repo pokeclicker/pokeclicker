@@ -1,29 +1,34 @@
-const logBookType = {
+interface LogBookType {
+    display: string;
+    label: string;
+}
+
+const LogBookTypes = {
     NEW: {
-        rowType: 'primary',
+        display: 'primary',
         label: 'NEW',
     },
     SHINY: {
-        rowType: 'warning',
+        display: 'warning',
         label: 'SHINY',
     },
     CAUGHT: {
-        rowType: 'success',
+        display: 'success',
         label: 'CAUGHT',
     },
     ESCAPED: {
-        rowType: 'danger',
+        display: 'danger',
         label: 'ESCAPED',
     },
 };
 
-class LogBookEntry {
+class LogBookLog {
 
-    public type: logBookType;
+    public type: LogBookType;
     public description: string;
     public date: number;
 
-    constructor(type: logBookType, description: string, date: number = Date.now()) {
+    constructor(type: LogBookType, description: string, date: number = Date.now()) {
         this.date = date;
         this.type = type;
         this.description = description;
@@ -33,35 +38,38 @@ class LogBookEntry {
 class LogBook implements Feature {
     name = 'Log Book';
     saveKey = 'logbook';
+    defaults: object;
 
-    public entries: ObservableArrayProxy<LogBookEntry> = new ObservableArrayProxy([]);
+    public logs: ObservableArrayProxy<LogBookLog> = new ObservableArrayProxy([]);
 
-    newEntry(type: logBookType, message: string) {
-        const length = this.entries.unshift(new LogBookEntry(type, message));
+    newLog(type: LogBookType, message: string) {
+        const length = this.logs.unshift(new LogBookLog(type, message));
         if (length > 1000) {
-            this.entries.pop();
+            this.logs.pop();
         }
     }
 
-    fromJSON(json: object): void {
-        if (json == null) {
+    fromJSON(json: { logs: Array<{ type: LogBookType, description: string, date: number }> }): void {
+        if (json == null || !json.logs) {
             return;
         }
 
-        json.entries.forEach(entry => {
-            this.entries.push(new LogBookEntry(entry.type, entry.description, entry.date));
+        json.logs.forEach(entry => {
+            this.logs.push(new LogBookLog(entry.type, entry.description, entry.date));
         });
     }
 
     initialize(): void {}
 
-    toJSON(): object {
+    toJSON(): { logs: Array<{ type: LogBookType, description: string, date: number }> } {
         return {
-            entries: this.entries.slice(0, 100),
+            logs: this.logs.slice(0, 100),
         };
     }
 
-    update(delta: number): void {
-        // This method intentionally left blank
+    canAccess(): boolean {
+      return true;
     }
+
+    update(delta: number): void {}  // This method intentionally left blank
 }
