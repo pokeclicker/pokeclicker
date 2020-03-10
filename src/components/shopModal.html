@@ -3,7 +3,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 data-bind="text: player.town().name() + ' Shop'">Shop</h4>
+                <h4 data-bind="text: GameConstants.humanifyString(player.town().name()) + ' Shop'">Shop</h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
