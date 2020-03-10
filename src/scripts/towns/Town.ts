@@ -32,7 +32,7 @@ class Town extends WorldLocation {
 
     //TODO refactor to WorldLocation
     public isUnlocked() {
-        return true;
+        return !this.requirements.filter(req=>!req.isCompleted()).length;
     }
 
 }
