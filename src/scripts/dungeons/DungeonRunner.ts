@@ -96,7 +96,7 @@ class DungeonRunner {
             DungeonRunner.dungeonFinished(true);
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name());
+            MapHelper.moveToTown(DungeonName[DungeonRunner.dungeon.name]);
             Notifier.notify('You could not complete the dungeon in time', GameConstants.NotificationOption.danger);
         }
     }
@@ -105,7 +105,7 @@ class DungeonRunner {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
             GameHelper.incrementObservable(player.statistics.dungeonsCleared[DungeonRunner.dungeon.name]);
-            MapHelper.moveToTown(DungeonRunner.dungeon.name());
+            MapHelper.moveToTown(DungeonName[DungeonRunner.dungeon.name]);
             // TODO award loot with a special screen
             Notifier.notify('You have successfully completed the dungeon', GameConstants.NotificationOption.success);
         }
