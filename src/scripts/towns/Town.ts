@@ -42,8 +42,6 @@ class DungeonEntrance extends Town {
     constructor(name: DungeonName, requirements: WorldRequirement[]) {
         super(DungeonName[name], requirements, [], [], [name]);
     }
-
-
 }
 
 const TownList: { [name: string]: Town  } = {};
@@ -86,18 +84,18 @@ TownList['Mahogany_Town'] = new Town('Mahogany_Town', [new RouteRequirement(42),
 TownList['Blackthorn_City'] = new Town('Blackthorn_City', [new RouteRequirement(44), new DungeonRequirement(DungeonName.Ice_Path)], [ShopName.Blackthorn_City]);
 
 //Johto Dungeons
-// TownList['Sprout Tower'] = new DungeonTown('Sprout Tower', [31]);
-// TownList['Ruins of Alph'] = new DungeonTown('Ruins of Alph', [32]);
-// TownList['Union Cave'] = new DungeonTown('Union Cave', [32]);
-// TownList['Slowpoke Well'] = new DungeonTown('Slowpoke Well', [33]);
-// TownList['Ilex Forest'] = new DungeonTown('Ilex Forest', [33]);
-// TownList['Burned Tower'] = new DungeonTown('Burned Tower', [37]);
-// TownList['Tin Tower'] = new DungeonTown('Tin Tower', [37]);
-// TownList['Whirl Islands'] = new DungeonTown('Whirl Islands', [41]);
-// TownList['Mt Mortar'] = new DungeonTown('Mt Mortar', [42]);
-// TownList['Ice Path'] = new DungeonTown('Ice Path', [44]);
-// TownList['Dark Cave'] = new DungeonTown('Dark Cave', [45]);
-// TownList['Mt Silver'] = new DungeonTown('Mt Silver', [28], BadgeCase.Badge.Elite_Karen);
+TownList['Sprout_Tower'] = new DungeonEntrance(DungeonName.Sprout_Tower, [new RouteRequirement(31)]);
+TownList['Ruins_of_Alph'] = new DungeonEntrance(DungeonName.Ruins_of_Alph, [new RouteRequirement(32)]);
+TownList['Union_Cave'] = new DungeonEntrance(DungeonName.Union_Cave, [new RouteRequirement(32)]);
+TownList['Slowpoke_Well'] = new DungeonEntrance(DungeonName.Slowpoke_Well, [new RouteRequirement(33)]);
+TownList['Ilex_Forest'] = new DungeonEntrance(DungeonName.Ilex_Forest, [new RouteRequirement(33)]);
+TownList['Burned_Tower'] = new DungeonEntrance(DungeonName.Burned_Tower, [new RouteRequirement(37)]);
+TownList['Tin_Tower'] = new DungeonEntrance(DungeonName.Tin_Tower, [new RouteRequirement(37)]);
+TownList['Whirl_Islands'] = new DungeonEntrance(DungeonName.Whirl_Islands, [new RouteRequirement(41)]);
+TownList['Mt_Mortar'] = new DungeonEntrance(DungeonName.Mt_Mortar, [new RouteRequirement(42)]);
+TownList['Ice_Path'] = new DungeonEntrance(DungeonName.Ice_Path, [new RouteRequirement(44)]);
+TownList['Dark_Cave'] = new DungeonEntrance(DungeonName.Dark_Cave, [new RouteRequirement(45)]);
+TownList['Mt_Silver'] = new DungeonEntrance(DungeonName.Mt_Silver, [new RouteRequirement(28), new BadgeRequirement(BadgeCase.Badge.Elite_Karen)]);
 
 //Hoenn Towns
 // TownList['Littleroot Town'] = new Town('Littleroot Town', []);
@@ -118,19 +116,18 @@ TownList['Blackthorn_City'] = new Town('Blackthorn_City', [new RouteRequirement(
 // TownList['Pokemon League Hoenn'] = new Town('Pokemon League', [128], null, null, 'Victory Road Hoenn');
 // TownList['Pacifidlog Town'] = new Town('Pacifidlog Town', [131]);
 
-// TODO Implement
 //Hoenn Dungeons
-// TownList['Petalburg Woods'] = new DungeonTown('Petalburg Woods', [104]);
-// TownList['Rusturf Tunnel'] = new DungeonTown('Rusturf Tunnel', [116], BadgeCase.Badge.Stone);
-// TownList['Granite Cave'] = new DungeonTown('Granite Cave', [116], BadgeCase.Badge.Knuckle);
-// TownList['Fiery Path'] = new DungeonTown('Fiery Path', [111], BadgeCase.Badge.Dynamo);
-// TownList['Meteor Falls'] = new DungeonTown('Meteor Falls', [114]);
-// TownList['Mt. Chimney'] = new DungeonTown('Mt. Chimney', [115]);
-// TownList['Jagged Pass'] = new DungeonTown('Jagged Pass', [115]);
-// TownList['New Mauville'] = new DungeonTown('New Mauville', [112], BadgeCase.Badge.Heat);
-// TownList['Mt. Pyre'] = new DungeonTown('Mt. Pyre', [122]);
-// TownList['Shoal Cave'] = new DungeonTown('Shoal Cave', [125]);
-// TownList['Cave of Origin'] = new DungeonTown('Cave of Origin', [126]);
-// TownList['Seafloor Cavern'] = new DungeonTown('Seafloor Cavern', [127]);
-// TownList['Sky Pillar'] = new DungeonTown('Sky Pillar', [131]);
-// TownList['Victory Road Hoenn'] = new DungeonTown('Victory Road Hoenn', [128], BadgeCase.Badge.Rain);
+// TownList['Petalburg Woods'] = new DungeonEntrance(DungeonName.Petalburg Woods, [new RouteRequirement(104)]);
+// TownList['Rusturf Tunnel'] = new DungeonEntrance(DungeonName.Rusturf Tunnel, [new RouteRequirement(116), new BadgeRequirement(BadgeCase.Badge.Stone)]);
+// TownList['Granite Cave'] = new DungeonEntrance(DungeonName.Granite Cave, [new RouteRequirement(116), new BadgeRequirement(BadgeCase.Badge.Knuckle)]);
+// TownList['Fiery Path'] = new DungeonEntrance(DungeonName.Fiery Path, [new RouteRequirement(111), new BadgeRequirement(BadgeCase.Badge.Dynamo)]);
+// TownList['Meteor Falls'] = new DungeonEntrance(DungeonName.Meteor Falls, [new RouteRequirement(114)]);
+// TownList['Mt. Chimney'] = new DungeonEntrance(DungeonName.Mt. Chimney, [new RouteRequirement(115)]);
+// TownList['Jagged Pass'] = new DungeonEntrance(DungeonName.Jagged Pass, [new RouteRequirement(115)]);
+// TownList['New Mauville'] = new DungeonEntrance(DungeonName.New Mauville, [new RouteRequirement(112), new BadgeRequirement(BadgeCase.Badge.Heat)]);
+// TownList['Mt. Pyre'] = new DungeonEntrance(DungeonName.Mt. Pyre, [new RouteRequirement(122)]);
+// TownList['Shoal Cave'] = new DungeonEntrance(DungeonName.Shoal Cave, [new RouteRequirement(125)]);
+// TownList['Cave of Origin'] = new DungeonEntrance(DungeonName.Cave of Origin, [new RouteRequirement(126)]);
+// TownList['Seafloor Cavern'] = new DungeonEntrance(DungeonName.Seafloor Cavern, [new RouteRequirement(127)]);
+// TownList['Sky Pillar'] = new DungeonEntrance(DungeonName.Sky Pillar, [new RouteRequirement(131)]);
+// TownList['Victory Road Hoenn'] = new DungeonEntrance(DungeonName.Victory Road Hoenn, [new RouteRequirement(128), new BadgeRequirement(BadgeCase.Badge.Rain)]);
