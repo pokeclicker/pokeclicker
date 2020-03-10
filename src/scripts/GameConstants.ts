@@ -88,11 +88,7 @@ namespace GameConstants {
         boss,
     }
 
-    //Shards
-    export const SHARD_UPGRADE_COST = 500;
-    export const SHARD_UPGRADE_STEP = 0.1;
-    export const MAX_SHARD_UPGRADES = 10;
-
+    //Shards from battle
     export const DUNGEON_SHARDS = 3;
     export const DUNGEON_BOSS_SHARDS = 20;
     export const GYM_SHARDS = 5;
