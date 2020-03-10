@@ -62,17 +62,17 @@ class MapHelper {
         };
         switch (App.game.world.currentRegion) {
             case 0:
-                if (TownList['Vermillion City'].isUnlocked() && player.highestRegion() > 0) {
+                if (TownList['Vermillion_City'].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
                     return;
                 }
             case 1:
-                if (TownList['Olivine City'].isUnlocked()) {
+                if (TownList['Olivine_City'].isUnlocked()) {
                     openModal();
                     return;
                 }
             case 2:
-                if (TownList['Slateport City'].isUnlocked()) {
+                if (TownList['Slateport_City'].isUnlocked()) {
                     openModal();
                     return;
                 }
