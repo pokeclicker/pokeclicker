@@ -48,12 +48,12 @@ class MapHelper {
             App.game.gameState = GameConstants.GameState.town;
             GameController.applyRouteBindings();
         } else {
-            console.error('Move to World');
+            console.error('Move to Town:', townName);
         }
     };
 
     public static validRoute(route = 0, region: RegionName = 0): boolean {
-        return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];
+        return App.game.world.isValidRoute(route, region);
     }
 
     public static openShipModal() {
