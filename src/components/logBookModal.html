@@ -8,16 +8,16 @@
                 <table class="table table-striped table-hover table-bordered table-sm">
                     <thead>
                       <tr>
-                        <th>Date</th>
                         <th>Type</th>
                         <th>Message</th>
+                        <th>Date</th>
                       </tr>
                     </thead>
                     <tbody data-bind="foreach: logBookItems">
                       <tr>
-                        <td class="text-left tight"><code data-bind="text:new Date(date).toLocaleString()">-</code></td>
-                        <td class="tight" data-bind="html:type"><span class="badge badge-info">-</span></td>
+                        <td class="tight" data-bind="html:type.label, class: 'table-' + type.rowType"></td>
                         <td class="text-left" data-bind="text:description">-</td>
+                        <td class="text-left tight" data-bind="text:new Date(date).toLocaleString()">-</td>
                       </tr>
                     </tbody>
                 </table>

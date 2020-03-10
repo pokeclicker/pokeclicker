@@ -1,12 +1,26 @@
 const logBookType = {
-    NEW: '<span class="badge badge-primary">NEW</span>',
-    SHINY: '<span class="badge badge-warning">SHINY</span>',
-    CAUGHT: '<span class="badge badge-success">CAUGHT</span>',
-    ESCAPED: '<span class="badge badge-danger">ESCAPED</span>',
+    NEW: {
+      rowType: 'primary',
+      label: 'NEW',
+    },
+    SHINY: {
+      rowType: 'warning',
+      label: 'SHINY',
+    },
+    CAUGHT: {
+      rowType: 'success',
+      label: 'CAUGHT',
+    },,
+    ESCAPED: {
+      rowType: 'danger',
+      label: 'ESCAPED',
+    },,
     // unused - can be changed
+    /*
     3: '<span class="badge badge-warning">-</span>',
     5: '<span class="badge badge-default">-</span>',
     INFO: '<span class="badge badge-info">INFO</span>',
+    */
 };
 
 class LogBook {
@@ -18,9 +32,6 @@ class LogBook {
         this.date = Date.now() - Math.floor(Math.random() * (6e4 * 60 * 24));
         this.type = type;
         this.description = description;
-        if (type == changelogType.VERSION) {
-            this.description += '</code>';
-        }
     }
 }
 
