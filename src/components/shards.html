@@ -8,22 +8,22 @@
                      src="assets/images/questionmark.png">
 
             </div>
-            <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
+            <div class="modal-body" id="shardBody" data-bind='foreach: Array(Shards.nTypes)'>
                 <h3>
                     <span data-bind="text: PokemonType[$index()]"></span>
                     <div style="float:right;">
                       <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
-                      <i data-bind="text: player._shardsCollected[$index()]().toLocaleString('en-US')"></i>
+                      <i data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></i>
                     </div>
                 </h3>
-                <table class='table' data-bind='foreach: $data'>
+                <table class='table' data-bind='foreach: Array(Shards.nEffects)'>
                     <tr>
                         <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                         <td width='50%'>
                             <div class="progress"
                                  data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
                                 <div class='progress-bar' role="progressbar"
-                                     data-bind="style: { width: ($data * 10) + '%',
+                                     data-bind="style: { width: (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * 10) + '%',
                                                                'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
                                      aria-valuemin="0" aria-valuemax="100">
                                 </div>
@@ -32,12 +32,13 @@
                                 </div>
                             </div>
                         </td>
-                        <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] + ($data * GameConstants.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
+                        <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] 
+                            + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                         <td>
                             <button class='btn btn-primary'
-                                    data-bind='click: function(){player.buyShardUpgrade($parentContext.$index(), $index())},
-                                        css: {disabled: !player.canBuyShardUpgrade($parentContext.$index(), $index())},
-                                        text: (player.shardUpgradeMaxed($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + player.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
+                                    data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},
+                                        css: {disabled: !App.game.shards.canBuyShardUpgrade($parentContext.$index(), $index())},
+                                        text: (App.game.shards.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
                             </button>
                         </td>
                     </tr>
