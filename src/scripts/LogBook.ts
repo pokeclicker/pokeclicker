@@ -1,19 +1,19 @@
 const logBookType = {
     NEW: {
-      rowType: 'primary',
-      label: 'NEW',
+        rowType: 'primary',
+        label: 'NEW',
     },
     SHINY: {
-      rowType: 'warning',
-      label: 'SHINY',
+        rowType: 'warning',
+        label: 'SHINY',
     },
     CAUGHT: {
-      rowType: 'success',
-      label: 'CAUGHT',
+        rowType: 'success',
+        label: 'CAUGHT',
     },
     ESCAPED: {
-      rowType: 'danger',
-      label: 'ESCAPED',
+        rowType: 'danger',
+        label: 'ESCAPED',
     },
 };
 
@@ -37,8 +37,10 @@ class LogBook implements Feature {
     public entries: ObservableArrayProxy<LogBookEntry> = new ObservableArrayProxy([]);
 
     newEntry(type: logBookType, message: string) {
-      const length = this.entries.unshift(new LogBookEntry(type, message));
-      if (length > 1000) this.entries.pop();
+        const length = this.entries.unshift(new LogBookEntry(type, message));
+        if (length > 1000) {
+            this.entries.pop();
+        }
     }
 
     fromJSON(json: object): void {
@@ -46,9 +48,9 @@ class LogBook implements Feature {
             return;
         }
 
-        json.entries.forEach(entry=>{
+        json.entries.forEach(entry => {
             this.entries.push(new LogBookEntry(entry.type, entry.description, entry.date));
-        })
+        });
     }
 
     initialize(): void {}
