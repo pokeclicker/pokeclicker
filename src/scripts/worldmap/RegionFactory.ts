@@ -493,6 +493,171 @@ class RegionFactory {
         ];
 
         const gyms: Gym[] = [
+            new Gym(
+                GymLeaderName.Falkner,
+                [
+                    new GymPokemon('Pidgey', 38000, 9),
+                    new GymPokemon('Pidgeotto', 42000, 13),
+                ],
+                BadgeCase.Badge.Zephyr,
+                500
+                    [new BadgeRequirement(BadgeCase.Badge.Elite_Lance)],
+                '...For pity\'s sake! My dad\'s cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge.'
+            ),
+            new Gym(
+                GymLeaderName.Bugsy,
+                [
+                    new GymPokemon('Metapod', 33000, 15),
+                    new GymPokemon('Kakuna', 37500, 15),
+                    new GymPokemon('Scyther', 39000, 17),
+                ],
+                BadgeCase.Badge.Hive,
+                500
+                    [new BadgeRequirement(BadgeCase.Badge.Zephyr)],
+                'Whoa, amazing! You\'re an expert on Pokémon! My research isn\'t complete yet. OK, you win. Take this Hive Badge.'
+            ),
+            new Gym(
+                GymLeaderName.Whitney,
+                [
+                    new GymPokemon('Clefairy', 50000, 17),
+                    new GymPokemon('Miltank', 80000, 19),
+                ],
+                BadgeCase.Badge.Plain,
+                500
+                    [new BadgeRequirement(BadgeCase.Badge.Hive)],
+                '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s the Plain Badge.'
+            ),
+            new Gym(
+                GymLeaderName.Morty,
+                [
+                    new GymPokemon('Gastly', 37000, 21),
+                    new GymPokemon('Haunter', 38000, 21),
+                    new GymPokemon('Haunter', 40000, 23),
+                    new GymPokemon('Gengar', 42000, 25),
+                ],
+                BadgeCase.Badge.Fog,
+                500
+                    [new BadgeRequirement(BadgeCase.Badge.Plain)],
+                'I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge..'
+            ),
+            new Gym(
+                GymLeaderName.Chuck,
+                [
+                    new GymPokemon('Primeape', 87000, 29),
+                    new GymPokemon('Poliwrath', 93000, 31),
+                ],
+                BadgeCase.Badge.Storm,
+                500
+                    [new BadgeRequirement(BadgeCase.Badge.Fog)],
+                'Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I\'m going to train 24 hours a day!'
+            ),
+            new Gym(
+                GymLeaderName.Jasmine,
+                [
+                    new GymPokemon('Magnemite', 67000, 30),
+                    new GymPokemon('Magnemite', 68000, 30),
+                    new GymPokemon('Steelix', 72000, 35),
+                ],
+                BadgeCase.Badge.Mineral,
+                500
+                    [new BadgeRequirement(BadgeCase.Badge.Storm)],
+                '...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge.'
+            ),
+            new Gym(
+                GymLeaderName.Pryce,
+                [
+                    new GymPokemon('Seel', 70000, 30),
+                    new GymPokemon('Dewgong', 72500, 32),
+                    new GymPokemon('Piloswine', 76000, 34),
+                ],
+                BadgeCase.Badge.Glacier,
+                500
+                    [new BadgeRequirement(BadgeCase.Badge.Mineral)],
+                'I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Glacier Badge!'
+            ),
+            new Gym(
+                GymLeaderName.Clair,
+                [
+                    new GymPokemon('Dragonair', 65000, 38),
+                    new GymPokemon('Dragonair', 65000, 38),
+                    new GymPokemon('Gyarados', 78000, 38),
+                    new GymPokemon('Kingdra', 80000, 41),
+                ],
+                BadgeCase.Badge.Rising,
+                500
+                    [new BadgeRequirement(BadgeCase.Badge.Glacier)],
+                'Here, this is the Rising Badge... Hurry up! Take it!'
+            ),
+            new Gym(
+                GymLeaderName.Will,
+                [
+                    new GymPokemon('Xatu', 45330, 40),
+                    new GymPokemon('Jynx', 48300, 41),
+                    new GymPokemon('Exeggutor', 52000, 41),
+                    new GymPokemon('Slowbro', 57000, 41),
+                    new GymPokemon('Xatu', 60250, 42),
+                ],
+                BadgeCase.Badge.Elite_Will,
+                7500
+                    [new BadgeRequirement(BadgeCase.Badge.Rising)],
+                'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.'
+            ),
+            new Gym(
+                GymLeaderName.Koga2,
+                [
+                    new GymPokemon('Ariados', 45330, 40),
+                    new GymPokemon('Venomoth', 48300, 41),
+                    new GymPokemon('Forretress', 52000, 43),
+                    new GymPokemon('Muk', 57000, 42),
+                    new GymPokemon('Crobat', 60250, 44),
+                ],
+                BadgeCase.Badge.Elite_Koga,
+                7500
+                    [new BadgeRequirement(BadgeCase.Badge.Elite_Will)],
+                'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!'
+            ),
+            new Gym(
+                GymLeaderName.Bruno2,
+                [
+                    new GymPokemon('Hitmontop', 45330, 42),
+                    new GymPokemon('Hitmonlee', 48300, 42),
+                    new GymPokemon('Hitmonchan', 52000, 42),
+                    new GymPokemon('Onix', 57000, 43),
+                    new GymPokemon('Machamp', 60250, 46),
+                ],
+                BadgeCase.Badge.Elite_Bruno2,
+                7500
+                    [new BadgeRequirement(BadgeCase.Badge.Elite_Koga)],
+                'Having lost, I have no right to say anything… Go face your next challenge!'
+            ),
+            new Gym(
+                GymLeaderName.Karen,
+                [
+                    new GymPokemon('Umbreon', 48300, 42),
+                    new GymPokemon('Vileplume', 52000, 42),
+                    new GymPokemon('Gengar', 57000, 45),
+                    new GymPokemon('Murkrow', 60250, 44),
+                    new GymPokemon('Houndoom', 66000, 47),
+                ],
+                BadgeCase.Badge.Elite_Karen,
+                7500
+                    [new BadgeRequirement(BadgeCase.Badge.Elite_Bruno2)],
+                'Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what\'s important. Go on — — the Champion is waiting.'
+            ),
+            new Gym(
+                GymLeaderName.Lance2,
+                [
+                    new GymPokemon('Gyarados', 58300, 44),
+                    new GymPokemon('Dragonite', 62000, 49),
+                    new GymPokemon('Dragonite', 64000, 49),
+                    new GymPokemon('Aerodactyl', 60250, 48),
+                    new GymPokemon('Dragonite', 70000, 50),
+                ],
+                BadgeCase.Badge.Elite_JohtoChampion,
+                7500
+                    [new BadgeRequirement(BadgeCase.Badge.Elite_Karen)],
+                '…It\'s over. But it\'s an odd feeling. I’m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!'
+            ),
         ];
 
         const dungeons: Dungeon[] = [
@@ -587,17 +752,13 @@ class RegionFactory {
 
     static createHoenn(): Region {
 
-        const routes: Route[] = [
-        ];
+        const routes: Route[] = [];
 
-        const shops: Shop[] = [
-        ];
+        const shops: Shop[] = [];
 
-        const gyms: Gym[] = [
-        ];
+        const gyms: Gym[] = [];
 
-        const dungeons: Dungeon[] = [
-        ];
+        const dungeons: Dungeon[] = [];
 
         return new Region(RegionName.hoenn, 135, routes, gyms, shops, dungeons);
     }
