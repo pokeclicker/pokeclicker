@@ -17,7 +17,7 @@ class Route extends WorldLocation {
 
 
     allPokemonCaught(shiny = false) {
-        const possiblePokemon: string[] = this.pokemons.land.concat(this.pokemons.water).concat(this.pokemons.headButt);
+        const possiblePokemon: string[] = this.pokemons.land.concat(this.pokemons.water).concat(this.pokemons.headbutt);
         return App.game.party.alreadyCaughtList(possiblePokemon, shiny);
     }
 
@@ -27,7 +27,7 @@ class Route extends WorldLocation {
             pokemonList = pokemonList.concat(this.pokemons.water);
         }
         if (includeHeadButt) {
-            pokemonList = pokemonList.concat(this.pokemons.headButt);
+            pokemonList = pokemonList.concat(this.pokemons.headbutt);
         }
         return pokemonList;
     }

@@ -12,8 +12,8 @@ class RouteFactory {
         if (pokemon.water === undefined) {
             pokemon.water = [];
         }
-        if (pokemon.headButt === undefined) {
-            pokemon.headButt = [];
+        if (pokemon.headbutt === undefined) {
+            pokemon.headbutt = [];
         }
         return pokemon;
     }
