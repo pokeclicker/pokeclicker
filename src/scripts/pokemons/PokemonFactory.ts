@@ -11,7 +11,10 @@ class PokemonFactory {
      */
     public static generateWildPokemon(route: number, region: RegionName): BattlePokemon {
         if (!MapHelper.validRoute(route, region)) {
+            console.error(`Invalid route ${route} in region ${RegionName[region]}`);
+            return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
+
         let possiblePokemon: string[] = [];
         if (PokemonFactory.roamingEncounter(route)) {
             possiblePokemon = GameConstants.RoamingPokemon[region];
