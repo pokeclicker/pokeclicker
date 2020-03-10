@@ -39,7 +39,7 @@ class KeyItems implements Feature {
             new KeyItem(KeyItems.KeyItem.Event_calendar, 'This calendar will keep you up to date on the latest events'),
             // TODO obtain after first prestige
             new KeyItem(KeyItems.KeyItem.Shard_case, 'A case specifically designed for holding shards', function () {
-                return false;
+                return App.game.party.hasMaxLevelPokemon();
             }),
         ];
     }

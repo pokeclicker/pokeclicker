@@ -128,10 +128,9 @@ class Party implements Feature {
     }
 
     alreadyCaughtPokemon(id: number, shiny = false) {
-        for (let i = 0; i < this.caughtPokemon.length; i++) {
-            if (this.caughtPokemon[i].id === id) {
-                return (!shiny || this.shinyPokemon.includes(id));
-            }
+        const pokemon = this.caughtPokemon.find(p => p.id == id);
+        if (pokemon) {
+            return (!shiny || this.shinyPokemon.includes(id));
         }
         return false;
     }

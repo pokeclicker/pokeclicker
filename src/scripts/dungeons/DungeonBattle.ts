@@ -11,8 +11,7 @@ class DungeonBattle extends Battle {
         }
         App.game.wallet.gainMoney(this.enemyPokemon().money);
         App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
-        player.gainShards(this.enemyPokemon().type1, this.enemyPokemon().shardReward);
-        player.gainShards(this.enemyPokemon().type2, this.enemyPokemon().shardReward);
+        this.gainShardsAfterBattle();
         player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(DungeonRunner.dungeon.itemRoute)));
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
