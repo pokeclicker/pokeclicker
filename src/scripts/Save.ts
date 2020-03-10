@@ -25,6 +25,7 @@ class Save {
         saveObject[App.game.oakItems.saveKey] = App.game.oakItems.toJSON();
         saveObject[App.game.party.saveKey] = App.game.party.toJSON();
         saveObject[App.game.farming.saveKey] = App.game.farming.toJSON();
+        saveObject[App.game.logbook.saveKey] = App.game.logbook.toJSON();
 
         saveObject[App.game.redeemableCodes.saveKey] = App.game.redeemableCodes.toJSON();
 

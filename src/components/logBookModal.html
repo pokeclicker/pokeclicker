@@ -13,7 +13,7 @@
                         <th>Date</th>
                       </tr>
                     </thead>
-                    <tbody data-bind="foreach: player.logBookItems">
+                    <tbody data-bind="foreach: App.game.logbook.entries">
                       <tr>
                         <td class="tight" data-bind="html:type.label, class: 'table-' + type.rowType"></td>
                         <td class="text-left" data-bind="text:description">-</td>

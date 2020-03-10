@@ -17,19 +17,49 @@ const logBookType = {
     },
 };
 
-class LogBook {
-    public date: number;
+class LogBookEntry {
+
     public type: logBookType;
     public description: string;
+    public date: number;
 
-    constructor(type: logBookType, description: string) {
-        this.date = Date.now();
+    constructor(type: logBookType, description: string, date: number = Date.now()) {
+        this.date = date;
         this.type = type;
         this.description = description;
     }
+}
 
-    static newEntry(type: logBookType, message: string) {
-      const length = player.logBookItems.unshift(new LogBook(type, message));
-      if (length > 1000) player.logBookItems.pop();
+class LogBook implements Feature {
+    name = 'Log Book';
+    saveKey = 'logbook';
+
+    public entries: ObservableArrayProxy<LogBookEntry> = new ObservableArrayProxy([]);
+
+    newEntry(type: logBookType, message: string) {
+      const length = this.entries.unshift(new LogBookEntry(type, message));
+      if (length > 1000) this.entries.pop();
+    }
+
+    fromJSON(json: object): void {
+        if (json == null) {
+            return;
+        }
+
+        json.entries.forEach(entry=>{
+            this.entries.push(new LogBookEntry(entry.type, entry.description, entry.date));
+        })
+    }
+
+    initialize(): void {}
+
+    toJSON(): object {
+        return {
+            entries: this.entries.slice(0, 100),
+        };
+    }
+
+    update(delta: number): void {
+        // This method intentionally left blank
     }
 }

@@ -65,8 +65,6 @@ class Player {
             item.amount = ko.observable(item.amount);
         }
 
-        this.logBookItems = new ObservableArrayProxy(savedPlayer.logBookItems || []);
-
         this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
@@ -120,7 +118,6 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public mineInventory: ObservableArrayProxy<any>;
-    public logBookItems: ObservableArrayProxy<any>;
 
     private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
     private _shardsCollected: Array<KnockoutObservable<number>>;
@@ -355,7 +352,6 @@ class Player {
             'currentQuests',
             '_shinyCatches',
             'gymDefeats',
-            'logBookItems',
             'statistics',
             'achievementsCompleted',
             'effectList',

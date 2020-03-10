@@ -15,6 +15,7 @@ class Game {
     public oakItems: OakItems;
     public party: Party;
     public farming: Farming;
+    public logbook: LogBook;
 
     public redeemableCodes: RedeemableCodes;
 
@@ -32,6 +33,7 @@ class Game {
         oakItems: OakItems,
         party: Party,
         farming: Farming,
+        logbook: LogBook,
         codes: RedeemableCodes
     ) {
         this.breeding = breeding;
@@ -42,7 +44,7 @@ class Game {
         this.oakItems = oakItems;
         this.party = party;
         this.farming = farming;
-
+        this.logbook = logbook;
         this.redeemableCodes = codes;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
@@ -66,6 +68,7 @@ class Game {
             this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
             this.party.fromJSON(saveObject[this.party.saveKey]);
             this.farming.fromJSON(saveObject[this.farming.saveKey]);
+            this.logbook.fromJSON(saveObject[this.logbook.saveKey]);
 
             this.redeemableCodes.fromJSON(saveObject[this.redeemableCodes.saveKey]);
         }
