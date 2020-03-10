@@ -178,6 +178,7 @@ class Breeding implements Feature {
 
         if (shiny) {
             Notifier.notify(`✨ You hatched a shiny ${egg.pokemon}! ✨`, GameConstants.NotificationOption.warning);
+            LogBook.newEntry(logBookType.SHINY, `You hatched a shiny ${egg.pokemon}!`);
         } else {
             Notifier.notify(`You hatched ${GameHelper.anOrA(egg.pokemon)} ${egg.pokemon}!`, GameConstants.NotificationOption.success);
         }

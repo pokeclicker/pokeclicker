@@ -25,29 +25,17 @@ const logBookType = {
 
 class LogBook {
     public date: number;
-    public type: string;
+    public type: logBookType;
     public description: string;
 
-    constructor(type: string, description: string) {
-        this.date = Date.now() - Math.floor(Math.random() * (6e4 * 60 * 24));
+    constructor(type: logBookType, description: string) {
+        this.date = Date.now();
         this.type = type;
         this.description = description;
     }
-}
 
-/**
- * Add your changes to the top of the changelog. Please do not increase the version number.
- *
- * MAJOR - Will stay at 0 during development, 1 after the first public release
- * MINOR - Will increment for each feature refactor or large changes to a feature
- * PATCH - Increment for small changes, bugfixes, UI changes.
- */
-const logBookItems = [
-    new LogBook(logBookType.SHINY, 'You encountered a shiny Onix'),
-    new LogBook(logBookType.CAUGHT, 'You caught a shiny Abra'),
-    new LogBook(logBookType.SHINY, 'You encountered a shiny Abra'),
-    new LogBook(logBookType.ESCAPED, 'Shiny Chansey Escaped'),
-    new LogBook(logBookType.SHINY, 'You encountered a shiny Chansey'),
-    new LogBook(logBookType.ESCAPED, 'Mew Escaped'),
-    new LogBook(logBookType.NEW, 'You encountered a Mew'),
-];
+    static newEntry(type: logBookType, message: string) {
+      const length = player.logBookItems.unshift(new LogBook(type, message));
+      if (length > 1000) player.logBookItems.pop();
+    }
+}
