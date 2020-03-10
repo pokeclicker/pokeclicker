@@ -491,6 +491,90 @@ class RegionFactory {
         ];
 
         const dungeons: Dungeon[] = [
+            new Dungeon(DungeonName.Sprout_Tower,
+                ['Rattata', 'Gastly', 'Hoothoot'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
+                28735,
+                [new DungeonBossPokemon('Bellsprout', 2000, 10)],
+                2500, [new BadgeRequirement(BadgeCase.Badge.Elite_KantoChampion)] 31, 5
+            ),
+            new Dungeon(DungeonName.Ruins_of_Alph,
+                ['Natu', 'Wooper', 'Quagsire', 'Smeargle', 'Magikarp', 'Poliwag', 'Poliwhirl'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                600,
+                [new DungeonBossPokemon('Unown', 3000, 14)],
+                3000, [new BadgeRequirement(BadgeCase.Badge.Zephyr)] 32, 7
+            ),
+            new Dungeon(DungeonName.Union_Cave,
+                ['Rattata', 'Sandshrew', 'Zubat', 'Geodude', 'Onix', 'Goldeen', 'Magikarp'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                600,
+                [new DungeonBossPokemon('Wooper', 3000, 14)],
+                3000, [new BadgeRequirement(BadgeCase.Badge.Zephyr)] 32, 7
+            ),
+            new Dungeon(DungeonName.Slowpoke_Well,
+                ['Zubat', 'Slowpoke'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+                900,
+                [new DungeonBossPokemon('Slowbro', 4000, 20)],
+                3500, [new BadgeRequirement(BadgeCase.Badge.Zephyr)] 33, 12
+            ),
+            new Dungeon(DungeonName.Ilex_Forest,
+                ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Oddish', 'Paras', 'Hoothoot'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
+                1200,
+                [new DungeonBossPokemon('Noctowl', 5000, 30), new DungeonBossPokemon('Beedrill', 5000, 30), new DungeonBossPokemon('Butterfree', 5000, 30), new DungeonBossPokemon('Celebi', 300000, 50)],
+                4000, [new BadgeRequirement(BadgeCase.Badge.Hive)] 34, 15
+            ),
+            new Dungeon(DungeonName.Burned_Tower,
+                ['Rattata', 'Zubat', 'Koffing', 'Raticate'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+                1500,
+                [new DungeonBossPokemon('Golbat', 6000, 35), new DungeonBossPokemon('Weezing', 6000, 35), new DungeonBossPokemon('Shuckle', 300000, 50)],
+                4500, [new BadgeRequirement(BadgeCase.Badge.Fog)] 37, 20
+            ),
+            new Dungeon(DungeonName.Tin_Tower,
+                ['Rattata', 'Gastly'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                1500,
+                [new DungeonBossPokemon('Raticate', 6000, 35), new DungeonBossPokemon('Haunter', 6000, 35), new DungeonBossPokemon('Ho-Oh', 300000, 70)],
+                4500, [new BadgeRequirement(BadgeCase.Badge.Fog)] 37, 20
+            ),
+            new Dungeon(DungeonName.Whirl_Islands,
+                ['Zubat', 'Golbat', 'Seel', 'Krabby', 'Horsea'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xExp],
+                1800,
+                [new DungeonBossPokemon('Dewgong', 7000, 40), new DungeonBossPokemon('Kingler', 7000, 40), new DungeonBossPokemon('Lugia', 300000, 70)],
+                5000, [new BadgeRequirement(BadgeCase.Badge.Storm)] 41, 25
+            ),
+            new Dungeon(DungeonName.Mt_Mortar,
+                ['Rattata', 'Zubat', 'Geodude', 'Marill', 'Raticate', 'Golbat', 'Graveler'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
+                2100,
+                [new DungeonBossPokemon('Tyrogue', 8000, 45)],
+                5500, [new BadgeRequirement(BadgeCase.Badge.Storm)] 42, 30
+            ),
+            new Dungeon(DungeonName.Ice_Path,
+                ['Zubat', 'Jynx', 'Swinub'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
+                2400,
+                [new DungeonBossPokemon('Delibird', 9000, 50)],
+                6000, [new BadgeRequirement(BadgeCase.Badge.Glacier)] 44, 32
+            ),
+            new Dungeon(DungeonName.Dark_Cave,
+                ['Zubat', 'Geodude', 'Golbat', 'Graveler', 'Wobbuffet'],
+                [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+                3000,
+                [new DungeonBossPokemon('Dunsparce', 10000, 55)],
+                6500, [new BadgeRequirement(BadgeCase.Badge.Rising)] 45, 35
+            ),
+            new Dungeon(DungeonName.Mt_Silver,
+                ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
+                [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+                3500,
+                [new DungeonBossPokemon('Larvitar', 12000, 60)],
+                10000, [new BadgeRequirement(BadgeCase.Badge.Elite_Karen)] 28, 50
+            ),
         ];
 
         return new Region(RegionName.johto, 100, routes, gyms, shops, dungeons);

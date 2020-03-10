@@ -10,5 +10,16 @@ enum DungeonName {
     'Pokemon_Mansion',
     'Victory_Road',
     'Cerulean_Cave',
-
+    'Sprout_Tower',
+    'Ruins_of_Alph',
+    'Union_Cave',
+    'Slowpoke_Well',
+    'Ilex_Forest',
+    'Burned_Tower',
+    'Tin_Tower',
+    'Whirl_Islands',
+    'Mt_Mortar',
+    'Ice_Path',
+    'Dark_Cave',
+    'Mt_Silver',
 }

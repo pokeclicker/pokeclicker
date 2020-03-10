@@ -44,135 +44,37 @@ class Dungeon extends WorldLocation {
  * Data list that contains all dungeons, accessible by name.
  */
 
-// Johto Dungeons
-
-// dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
-//     ['Rattata', 'Gastly', 'Hoothoot'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
-//     28735,
-//     [new DungeonBossPokemon('Bellsprout', 2000, 10)],
-//     2500, BadgeCase.Badge.Elite_KantoChampion, 31, 5
-// );
-//
-// dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
-//     ['Natu', 'Wooper', 'Quagsire', 'Smeargle', 'Magikarp', 'Poliwag', 'Poliwhirl'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-//     600,
-//     [new DungeonBossPokemon('Unown', 3000, 14)],
-//     3000, BadgeCase.Badge.Zephyr, 32, 7
-// );
-//
-// dungeonList['Union Cave'] = new Dungeon('Union Cave',
-//     ['Rattata', 'Sandshrew', 'Zubat', 'Geodude', 'Onix', 'Goldeen', 'Magikarp'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-//     600,
-//     [new DungeonBossPokemon('Wooper', 3000, 14)],
-//     3000, BadgeCase.Badge.Zephyr, 32, 7
-// );
-//
-// dungeonList['Slowpoke Well'] = new Dungeon('Slowpoke Well',
-//     ['Zubat', 'Slowpoke'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-//     900,
-//     [new DungeonBossPokemon('Slowbro', 4000, 20)],
-//     3500, BadgeCase.Badge.Zephyr, 33, 12
-// );
-//
-// dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
-//     ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Oddish', 'Paras', 'Hoothoot'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
-//     1200,
-//     [new DungeonBossPokemon('Noctowl', 5000, 30), new DungeonBossPokemon('Beedrill', 5000, 30), new DungeonBossPokemon('Butterfree', 5000, 30), new DungeonBossPokemon('Celebi', 300000, 50)],
-//     4000, BadgeCase.Badge.Hive, 34, 15
-// );
-//
-// dungeonList['Burned Tower'] = new Dungeon('Burned Tower',
-//     ['Rattata', 'Zubat', 'Koffing', 'Raticate'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
-//     1500,
-//     [new DungeonBossPokemon('Golbat', 6000, 35), new DungeonBossPokemon('Weezing', 6000, 35), new DungeonBossPokemon('Shuckle', 300000, 50)],
-//     4500, BadgeCase.Badge.Fog, 37, 20
-// );
-//
-// dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
-//     ['Rattata', 'Gastly'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-//     1500,
-//     [new DungeonBossPokemon('Raticate', 6000, 35), new DungeonBossPokemon('Haunter', 6000, 35), new DungeonBossPokemon('Ho-Oh', 300000, 70)],
-//     4500, BadgeCase.Badge.Fog, 37, 20
-// );
-//
-// dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
-//     ['Zubat', 'Golbat', 'Seel', 'Krabby', 'Horsea'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xExp],
-//     1800,
-//     [new DungeonBossPokemon('Dewgong', 7000, 40), new DungeonBossPokemon('Kingler', 7000, 40), new DungeonBossPokemon('Lugia', 300000, 70)],
-//     5000, BadgeCase.Badge.Storm, 41, 25
-// );
-//
-// dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
-//     ['Rattata', 'Zubat', 'Geodude', 'Marill', 'Raticate', 'Golbat', 'Graveler'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
-//     2100,
-//     [new DungeonBossPokemon('Tyrogue', 8000, 45)],
-//     5500, BadgeCase.Badge.Storm, 42, 30
-// );
-//
-// dungeonList['Ice Path'] = new Dungeon('Ice Path',
-//     ['Zubat', 'Jynx', 'Swinub'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
-//     2400,
-//     [new DungeonBossPokemon('Delibird', 9000, 50)],
-//     6000, BadgeCase.Badge.Glacier, 44, 32
-// );
-//
-// dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
-//     ['Zubat', 'Geodude', 'Golbat', 'Graveler', 'Wobbuffet'],
-//     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-//     3000,
-//     [new DungeonBossPokemon('Dunsparce', 10000, 55)],
-//     6500, BadgeCase.Badge.Rising, 45, 35
-// );
-//
-// dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
-//     ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
-//     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-//     3500,
-//     [new DungeonBossPokemon('Larvitar', 12000, 60)],
-//     10000, BadgeCase.Badge.Elite_Karen, 28, 50
-// );
-//
 // // Hoenn Dungeons
 //
-// dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
+// new Dungeon(DungeonName.Petalburg Woods,
 //     ['Poochyena', 'Zigzagoon', 'Wurmple', 'Silcoon', 'Cascoon', 'Taillow', 'Shroomish'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
 //     [new DungeonBossPokemon('Slakoth', 100000, 10)],
 //     12000, null, 101, 5);
 //
-// dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
+// new Dungeon(DungeonName.Rusturf Tunnel,
 //     ['Whismur'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
 //     [new DungeonBossPokemon('Whismur', 100000, 20)],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Granite Cave'] = new Dungeon('Granite Cave',
+// new Dungeon(DungeonName.Granite Cave,
 //     ['Zubat', 'Abra', 'Geodude', 'Makuhita', 'Aron', 'Sableye'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
 //     [new DungeonBossPokemon('Mawile', 100000, 20), new DungeonBossPokemon('Nosepass', 100000, 20)],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Fiery Path'] = new Dungeon('Fiery Path',
+// new Dungeon(DungeonName.Fiery Path,
 //     ['Machop', 'Grimer', 'Koffing', 'Slugma', 'Numel'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
 //     [new DungeonBossPokemon('Torkoal', 100000, 20)],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
+// new Dungeon(DungeonName.Meteor Falls,
 //     ['Zubat', 'Golbat', 'Goldeen', 'Magikarp', 'Barboach'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
@@ -180,16 +82,16 @@ class Dungeon extends WorldLocation {
 //       new DungeonBossPokemon('Solrock', 100000, 20),
 //       new DungeonBossPokemon('Lunatone', 100000, 20),
 //     ],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
+// new Dungeon(DungeonName.Mt. Chimney,
 //     ['Zubat', 'Poochyena'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
 //     [new DungeonBossPokemon('Numel', 100000, 20)],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
+// new Dungeon(DungeonName.Jagged Pass,
 //     ['Machop', 'Numel', 'Spoink'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
@@ -198,9 +100,9 @@ class Dungeon extends WorldLocation {
 //       new DungeonBossPokemon('Numel', 100000, 20),
 //       new DungeonBossPokemon('Spoink', 100000, 20),
 //     ],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['New Mauville'] = new Dungeon('New Mauville',
+// new Dungeon(DungeonName.New Mauville,
 //     ['Magnemite', 'Voltorb'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
@@ -208,9 +110,9 @@ class Dungeon extends WorldLocation {
 //       new DungeonBossPokemon('Magneton', 100000, 20),
 //       new DungeonBossPokemon('Electrode', 100000, 20),
 //     ],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
+// new Dungeon(DungeonName.Mt. Pyre,
 //     ['Shuppet', 'Duskull', 'Vulpix', 'Wingull', 'Meditite'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
@@ -219,16 +121,16 @@ class Dungeon extends WorldLocation {
 //       new DungeonBossPokemon('Duskull', 100000, 20),
 //       new DungeonBossPokemon('Chimecho', 100000, 20),
 //     ],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Shoal Cave'] = new Dungeon('Shoal Cave',
+// new Dungeon(DungeonName.Shoal Cave,
 //     ['Zubat', 'Golbat', 'Spheal', 'Tentacool', 'Magikarp', 'Wailmer'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
 //     [new DungeonBossPokemon('Snorunt', 100000, 20)],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
+// new Dungeon(DungeonName.Cave of Origin,
 //     ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
@@ -236,16 +138,16 @@ class Dungeon extends WorldLocation {
 //       new DungeonBossPokemon('Kyogre', 100000, 20),
 //       new DungeonBossPokemon('Groudon', 100000, 20),
 //     ],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
+// new Dungeon(DungeonName.Seafloor Cavern,
 //     ['Zubat', 'Golbat', 'Tentacool', 'Magikarp', 'Wailmer'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
 //     [new DungeonBossPokemon('Wailmer', 100000, 20)],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
+// new Dungeon(DungeonName.Sky Pillar,
 //     ['Golbat', 'Sableye', 'Claydol', 'Banette', 'Mawile', 'Altaria'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
@@ -253,9 +155,9 @@ class Dungeon extends WorldLocation {
 //       new DungeonBossPokemon('Dusclops', 100000, 20),
 //       new DungeonBossPokemon('Rayquaza', 100000, 20),
 //     ],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
 //
-// dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
+// new Dungeon(DungeonName.Victory Road Hoenn,
 //     ['Zubat', 'Golbat', 'Whismur', 'Loudred', 'Makuhita', 'Aron', 'Mawile', 'Meditite', 'Geodude', 'Goldeen', 'Magikarp', 'Barboach', 'Whiscash'],
 //     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
 //     4000,
@@ -265,4 +167,4 @@ class Dungeon extends WorldLocation {
 //       new DungeonBossPokemon('Medicham', 100000, 20),
 //       new DungeonBossPokemon('Graveler', 100000, 20),
 //     ],
-//     12000, BadgeCase.Badge.Stone, 101, 5);
+//     12000, [new BadgeRequirement(BadgeCase.Badge.Stone)] 101, 5);
