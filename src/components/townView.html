@@ -32,7 +32,7 @@
                        <button class="btn btn-primary"
                                data-bind="text:  GameConstants.humanifyString(DungeonName[$data]),
                                                       disable: !App.game.world.getDungeon($data).canAccess(),
-                                                      click: function() {MapHelper.moveToTown($data)}}">
+                                                      click: function() {MapHelper.moveToTown(DungeonName[$data])}">
                            Dungeon
                        </button>
                    <!-- /ko -->
