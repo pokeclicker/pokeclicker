@@ -1,5 +1,6 @@
 ///<reference path="../shop/ShopName.ts"/>
 ///<reference path="../worldmap/worldRequirements/RouteRequirement.ts"/>
+///<reference path="../worldmap/worldRequirements/DungeonRequirement.ts"/>
 class Town extends WorldLocation {
     requirements: WorldRequirement[];
 
@@ -51,13 +52,13 @@ const TownList: { [name: string]: Town  } = {};
 TownList['Pewter_City'] = new Town('Pewter_City', [new RouteRequirement(2)], [ShopName.Pewter_City], [GymLeaderName.Brock]);
 TownList['Cerulean_City'] = new Town('Cerulean_City', [new RouteRequirement(4)], [ShopName.Cerulean_City], [GymLeaderName.Misty], [DungeonName.Cerulean_Cave]);
 TownList['Vermillion_City'] = new Town('Vermillion_City', [new RouteRequirement(6)], [ShopName.Vermillion_City], [GymLeaderName['Lt._Surge']]);
-TownList['Celadon_City'] = new Town('Celadon_City', [new RouteRequirement(8)], [ShopName.Celadon_City],  [GymLeaderName.Erika]);
-TownList['Saffron_City'] = new Town('Saffron_City', [new RouteRequirement(5)], [ShopName.Saffron_City],  [GymLeaderName.Sabrina]);
-TownList['Fuchsia_City'] = new Town('Fuchsia_City', [new RouteRequirement(18)], [ShopName.Fuchsia_City],  [GymLeaderName.Koga]);
-TownList['Cinnabar_Island'] = new Town('Cinnabar_Island', [new RouteRequirement(20)], [ShopName.Cinnabar_Island],  [GymLeaderName.Blaine], [DungeonName.Pokemon_Mansion]);
-TownList['Viridian_City'] = new Town('Viridian_City', [new RouteRequirement(1)], [ShopName.Viridian_City],  [GymLeaderName.Giovanni]);
+TownList['Celadon_City'] = new Town('Celadon_City', [new RouteRequirement(8)], [ShopName.Celadon_City], [GymLeaderName.Erika]);
+TownList['Saffron_City'] = new Town('Saffron_City', [new RouteRequirement(5)], [ShopName.Saffron_City], [GymLeaderName.Sabrina]);
+TownList['Fuchsia_City'] = new Town('Fuchsia_City', [new RouteRequirement(18)], [ShopName.Fuchsia_City], [GymLeaderName.Koga]);
+TownList['Cinnabar_Island'] = new Town('Cinnabar_Island', [new RouteRequirement(20)], [ShopName.Cinnabar_Island], [GymLeaderName.Blaine], [DungeonName.Pokemon_Mansion]);
+TownList['Viridian_City'] = new Town('Viridian_City', [new RouteRequirement(1)], [ShopName.Viridian_City], [GymLeaderName.Giovanni]);
 TownList['Pallet_Town'] = new Town('Pallet_Town');
-TownList['Lavender_Town'] = new Town('Lavender_Town', [new RouteRequirement(10)], [ShopName.Lavender_Town],  [], [DungeonName.Pokemon_Tower]);
+TownList['Lavender_Town'] = new Town('Lavender_Town', [new RouteRequirement(10)], [ShopName.Lavender_Town], [], [DungeonName.Pokemon_Tower]);
 TownList['Indigo_Plateau_Kanto'] = new Town('Indigo_Plateau_Kanto', [new RouteRequirement(23)], [], [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],[]);
 
 //Kanto Dungeons
@@ -81,8 +82,8 @@ TownList['Goldenrod_City'] = new Town('Goldenrod_City', [new RouteRequirement(34
 TownList['Ecruteak_City'] = new Town('Ecruteak_City', [new RouteRequirement(37)]);
 TownList['Olivine_City'] = new Town('Olivine_City', [new RouteRequirement(39)], [ShopName.Olivine_City]);
 TownList['Cianwood_City'] = new Town('Cianwood_City', [new RouteRequirement(41)], [ShopName.Cianwood_City]);
-TownList['Mahogany_Town'] = new Town('Mahogany_Town', [new RouteRequirement(42)/*, new DungeonRequirement(DungeonName.Mt_Mortar) */]);
-TownList['Blackthorn_City'] = new Town('Blackthorn_City', [new RouteRequirement(44)/*, new DungeonRequirement(DungeonName.Ice_Path) */], [ShopName.Blackthorn_City]);
+TownList['Mahogany_Town'] = new Town('Mahogany_Town', [new RouteRequirement(42), new DungeonRequirement(DungeonName.Mt_Mortar)]);
+TownList['Blackthorn_City'] = new Town('Blackthorn_City', [new RouteRequirement(44), new DungeonRequirement(DungeonName.Ice_Path)], [ShopName.Blackthorn_City]);
 
 //Johto Dungeons
 // TownList['Sprout Tower'] = new DungeonTown('Sprout Tower', [31]);
