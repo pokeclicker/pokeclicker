@@ -10,17 +10,11 @@ const logBookType = {
     CAUGHT: {
       rowType: 'success',
       label: 'CAUGHT',
-    },,
+    },
     ESCAPED: {
       rowType: 'danger',
       label: 'ESCAPED',
-    },,
-    // unused - can be changed
-    /*
-    3: '<span class="badge badge-warning">-</span>',
-    5: '<span class="badge badge-default">-</span>',
-    INFO: '<span class="badge badge-info">INFO</span>',
-    */
+    },
 };
 
 class LogBook {
