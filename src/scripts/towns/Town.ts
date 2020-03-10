@@ -49,16 +49,16 @@ const TownList: { [name: string]: Town  } = {};
 
 //Kanto Towns
 
-TownList['Pewter_City'] = new Town('Pewter_City', [new RouteRequirement(2)], [ShopName.PewterCity], [GymLeaderName.Brock]);
-TownList['Cerulean_City'] = new Town('Cerulean_City', [new RouteRequirement(4)], [ShopName.CeruleanCity], [GymLeaderName.Misty], [DungeonName.Cerulean_Cave]);
-TownList['Vermillion_City'] = new Town('Vermillion_City', [new RouteRequirement(6)], [ShopName.VermillionCity], [GymLeaderName['Lt._Surge']]);
-TownList['Celadon_City'] = new Town('Celadon_City', [new RouteRequirement(8)], [ShopName.CeladonCity],  [GymLeaderName.Erika]);
-TownList['Saffron_City'] = new Town('Saffron_City', [new RouteRequirement(5)], [ShopName.SaffronCity],  [GymLeaderName.Sabrina]);
-TownList['Fuchsia_City'] = new Town('Fuchsia_City', [new RouteRequirement(18)], [ShopName.FuchsiaCity],  [GymLeaderName.Koga]);
-TownList['Cinnabar_Island'] = new Town('Cinnabar_Island', [new RouteRequirement(20)], [ShopName.CinnabarIsland],  [GymLeaderName.Blaine], [DungeonName.Pokemon_Mansion]);
-TownList['Viridian_City'] = new Town('Viridian_City', [new RouteRequirement(1)], [ShopName.ViridianCity],  [GymLeaderName.Giovanni]);
+TownList['Pewter_City'] = new Town('Pewter_City', [new RouteRequirement(2)], [ShopName.Pewter_City], [GymLeaderName.Brock]);
+TownList['Cerulean_City'] = new Town('Cerulean_City', [new RouteRequirement(4)], [ShopName.Cerulean_City], [GymLeaderName.Misty], [DungeonName.Cerulean_Cave]);
+TownList['Vermillion_City'] = new Town('Vermillion_City', [new RouteRequirement(6)], [ShopName.Vermillion_City], [GymLeaderName['Lt._Surge']]);
+TownList['Celadon_City'] = new Town('Celadon_City', [new RouteRequirement(8)], [ShopName.Celadon_City],  [GymLeaderName.Erika]);
+TownList['Saffron_City'] = new Town('Saffron_City', [new RouteRequirement(5)], [ShopName.Saffron_City],  [GymLeaderName.Sabrina]);
+TownList['Fuchsia_City'] = new Town('Fuchsia_City', [new RouteRequirement(18)], [ShopName.Fuchsia_City],  [GymLeaderName.Koga]);
+TownList['Cinnabar_Island'] = new Town('Cinnabar_Island', [new RouteRequirement(20)], [ShopName.Cinnabar_Island],  [GymLeaderName.Blaine], [DungeonName.Pokemon_Mansion]);
+TownList['Viridian_City'] = new Town('Viridian_City', [new RouteRequirement(1)], [ShopName.Viridian_City],  [GymLeaderName.Giovanni]);
 TownList['Pallet_Town'] = new Town('Pallet_Town', [], []);
-TownList['Lavender_Town'] = new Town('Lavender_Town', [new RouteRequirement(10)], [ShopName.LavenderTown],  [], [DungeonName.Pokemon_Tower]);
+TownList['Lavender_Town'] = new Town('Lavender_Town', [new RouteRequirement(10)], [ShopName.Lavender_Town],  [], [DungeonName.Pokemon_Tower]);
 TownList['Indigo_Plateau_Kanto'] = new Town('Indigo_Plateau_Kanto', [new RouteRequirement(23)], [], [GymLeaderName.Lorelei, GymLeaderName.Bruno, GymLeaderName.Agatha, GymLeaderName.Lance, GymLeaderName.Blue],[]);
 
 //Kanto Dungeons

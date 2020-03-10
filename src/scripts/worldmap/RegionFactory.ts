@@ -119,15 +119,15 @@ class RegionFactory {
         ];
 
         const shops: Shop[] = [
-            new Shop(ShopName.PewterCity, ['Pokeball', 'Token_collector', 'xExp', 'Dungeon_ticket']),
-            new Shop(ShopName.CeruleanCity, ['Water_stone', 'xAttack', 'Water_egg']),
-            new Shop(ShopName.VermillionCity, ['Thunder_stone', 'xExp', 'Electric_egg']),
-            new Shop(ShopName.CeladonCity, ['Eevee', 'Porygon', 'Jynx', 'Mr. Mime', 'Lickitung']),
-            new Shop(ShopName.SaffronCity, ['Moon_stone', 'xClick', 'Leaf_stone', 'Fighting_egg']),
-            new Shop(ShopName.FuchsiaCity, ['Ultraball', 'Trade_stone', 'xExp', 'Dragon_egg']),
-            new Shop(ShopName.CinnabarIsland, ['Fire_stone', 'Fire_egg', 'SmallRestore', 'Explorer_kit']),
-            new Shop(ShopName.ViridianCity, ['xAttack', 'xClick', 'Mystery_egg']),
-            new Shop(ShopName.LavenderTown, ['Greatball', 'Item_magnet', 'Lucky_incense', 'Grass_egg']),
+            new Shop(ShopName.Pewter_City, ['Pokeball', 'Token_collector', 'xExp', 'Dungeon_ticket']),
+            new Shop(ShopName.Cerulean_City, ['Water_stone', 'xAttack', 'Water_egg']),
+            new Shop(ShopName.Vermillion_City, ['Thunder_stone', 'xExp', 'Electric_egg']),
+            new Shop(ShopName.Celadon_City, ['Eevee', 'Porygon', 'Jynx', 'Mr. Mime', 'Lickitung']),
+            new Shop(ShopName.Saffron_City, ['Moon_stone', 'xClick', 'Leaf_stone', 'Fighting_egg']),
+            new Shop(ShopName.Fuchsia_City, ['Ultraball', 'Trade_stone', 'xExp', 'Dragon_egg']),
+            new Shop(ShopName.Cinnabar_Island, ['Fire_stone', 'Fire_egg', 'SmallRestore', 'Explorer_kit']),
+            new Shop(ShopName.Viridian_City, ['xAttack', 'xClick', 'Mystery_egg']),
+            new Shop(ShopName.Lavender_Town, ['Greatball', 'Item_magnet', 'Lucky_incense', 'Grass_egg']),
 
         ];
 

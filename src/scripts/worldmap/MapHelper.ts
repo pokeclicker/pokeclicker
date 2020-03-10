@@ -36,10 +36,7 @@ class MapHelper {
 
     public static moveToTown(townName: string) {
         // TODO Temporary fix
-        townName = townName.replace(' ', '_');
-        townName = townName.replace(' ', '_');
-
-        console.log(townName);
+        townName = townName.replace(/ /g, '_');
 
         if (MapHelper.accessToTown(townName)) {
             App.game.gameState = GameConstants.GameState.idle;
