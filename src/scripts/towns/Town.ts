@@ -8,7 +8,6 @@ class Town extends WorldLocation {
     public gyms: GymLeaderName[];
     public shops: ShopName[];
     public dungeons: DungeonName[];
-    private _reqRoutes: number[];
     public dungeonReq: string; // Dungeon that must be completed to access town
     public startingTown: boolean;
 
@@ -24,10 +23,6 @@ class Town extends WorldLocation {
 
     get name(): KnockoutObservable<string> {
         return this._name;
-    }
-
-    get reqRoutes(): number[] {
-        return this._reqRoutes;
     }
 
     //TODO refactor to WorldLocation
