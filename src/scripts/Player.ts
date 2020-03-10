@@ -9,7 +9,6 @@ class Player {
     public achievementsCompleted: { [name: string]: boolean };
 
     private _defeatedAmount: Array<KnockoutObservable<number>>;
-
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
@@ -18,7 +17,6 @@ class Player {
         const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0;
-
 
         this._defeatedAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
             return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0);
