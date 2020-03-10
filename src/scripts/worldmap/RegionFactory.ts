@@ -477,6 +477,14 @@ class RegionFactory {
         ];
 
         const shops: Shop[] = [
+            new Shop(ShopName.New_Bark_Town, ['Pokeball']),
+            new Shop(ShopName.Cherrygrove_City, ['Greatball']),
+            new Shop(ShopName.Violet_City, ['MediumRestore', 'Togepi']),
+            new Shop(ShopName.Azalea_Town, ['Kings_rock']),
+            new Shop(ShopName.Goldenrod_City, ['Sun_stone', 'Upgrade']),
+            new Shop(ShopName.Olivine_City, ['Metal_coat']),
+            new Shop(ShopName.Cianwood_City, ['Ultraball', 'Time_stone']),
+            new Shop(ShopName.Blackthorn_City, ['LargeRestore', 'Dragon_scale']),
         ];
 
         const gyms: Gym[] = [

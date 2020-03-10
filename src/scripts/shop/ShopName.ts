@@ -9,4 +9,12 @@ enum ShopName {
     'Cinnabar_Island',
     'Viridian_City',
     'Lavender_Town',
+    'New_Bark_Town',
+    'Cherrygrove_City',
+    'Violet_City',
+    'Azalea_Town',
+    'Goldenrod_City',
+    'Olivine_City',
+    'Cianwood_City',
+    'Blackthorn_City',
 }

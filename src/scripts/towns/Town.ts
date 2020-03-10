@@ -73,33 +73,16 @@ TownList['Cerulean_Cave'] = new DungeonEntrance(DungeonName.Cerulean_Cave, [new 
 TownList['Pokemon_Mansion'] = new DungeonEntrance(DungeonName.Pokemon_Mansion, [new RouteRequirement(20), new BadgeRequirement(BadgeCase.Badge.Soul)]);
 
 //Johto Towns
-// const NewBarkTownShop = new Shop(['Pokeball']);
-// TownList['New Bark Town'] = new Town('New Bark Town', [], NewBarkTownShop);
-//
-// const CherrygroveCityShop = new Shop(['Greatball']);
-// TownList['Cherrygrove City'] = new Town('Cherrygrove City', [29], CherrygroveCityShop);
-//
-// const VioletCityShop = new Shop(['MediumRestore', 'Togepi']);
-// TownList['Violet City'] = new Town('Violet City', [31], VioletCityShop, dungeonList['Sprout Tower']);
-//
-// const AzaleaTownShop = new Shop(['Kings_rock']);
-// TownList['Azalea Town'] = new Town('Azalea Town', [33], AzaleaTownShop, dungeonList['Slowpoke Well']);
-//
-// const GoldenrodCityShop = new Shop(['Sun_stone', 'Upgrade']);
-// TownList['Goldenrod City'] = new Town('Goldenrod City', [34], GoldenrodCityShop);
-//
+// TownList['New_Bark_Town'] = new Town('New Bark Town', [], NewBarkTownShop);
+// TownList['Cherrygrove_City'] = new Town('Cherrygrove City', [29], CherrygroveCityShop);
+// TownList['Violet_City'] = new Town('Violet City', [31], VioletCityShop, dungeonList['Sprout Tower']);
+// TownList['Azalea_Town'] = new Town('Azalea Town', [33], AzaleaTownShop, dungeonList['Slowpoke Well']);
+// TownList['Goldenrod_City'] = new Town('Goldenrod City', [34], GoldenrodCityShop);
 // TownList['Ecruteak City'] = new Town('Ecruteak City', [37]);
-//
-// const OlivineCityShop = new Shop(['Metal_coat']);
-// TownList['Olivine City'] = new Town('Olivine City', [39], OlivineCityShop);
-//
-// const CianwoodCityShop = new Shop(['Ultraball', 'Time_stone']);
-// TownList['Cianwood City'] = new Town('Cianwood City', [41], CianwoodCityShop);
-//
+// TownList['Olivine_City'] = new Town('Olivine City', [39], OlivineCityShop);
+// TownList['Cianwood_City'] = new Town('Cianwood City', [41], CianwoodCityShop);
 // TownList['Mahogany Town'] = new Town('Mahogany Town', [42], null, null, 'Mt Mortar');
-//
-// const BlackthornCityShop = new Shop(['LargeRestore', 'Dragon_scale']);
-// TownList['Blackthorn City'] = new Town('Blackthorn City', [44], BlackthornCityShop, null, 'Ice Path');
+// TownList['Blackthorn_City'] = new Town('Blackthorn City', [44], BlackthornCityShop, null, 'Ice Path');
 
 //Johto Dungeons
 // TownList['Sprout Tower'] = new DungeonTown('Sprout Tower', [31]);
