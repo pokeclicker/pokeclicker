@@ -100,12 +100,9 @@ class World implements Saveable {
         };
     }
 
-    fromJSON(json: object): void {
-        if (json == null) {
-            return;
-        }
-        this.currentRegion = json.currentRegion ?? this.defaults.currentRegion;
-        this.currentRoute = json.currentRoute ?? this.defaults.currentRoute;
+    fromJSON({ currentRegion, currentRoute }: { currentRegion: number; currentRoute: number }): void {
+        this.currentRegion = currentRegion ?? this.defaults.currentRegion;
+        this.currentRoute = currentRoute ?? this.defaults.currentRoute;
     }
 
     // Knockout getters/setters
