@@ -1,6 +1,5 @@
 class World implements Saveable {
     name = 'World';
-
     saveKey = 'world';
     defaults = {
         currentRegion: RegionName.kanto,
@@ -105,9 +104,8 @@ class World implements Saveable {
         if (json == null) {
             return;
         }
-        this.currentRegion = json['currentRegion'] ?? this.defaults.currentRegion;
-        this.currentRoute = 1;
-        // this.currentRoute = json['currentRoute'] ?? this.defaults.currentRoute;
+        this.currentRegion = json.currentRegion ?? this.defaults.currentRegion;
+        this.currentRoute = json.currentRoute ?? this.defaults.currentRoute;
     }
 
     // Knockout getters/setters
