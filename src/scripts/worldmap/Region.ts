@@ -20,7 +20,7 @@ class Region {
             return route.number === number;
         });
         if (route === undefined) {
-            console.error(`Could not find route ${route}`);
+            console.error(`Could not find route ${number}`);
         }
         return route;
     }
@@ -30,7 +30,7 @@ class Region {
             return shop.name === name;
         });
         if (shop === undefined) {
-            console.error(`Could not find shop ${ShopName[name]}`);
+            console.error(`Could not find shop ${name}`);
         }
         return shop;
 
@@ -41,7 +41,7 @@ class Region {
             return gym.leaderName === name;
         });
         if (gym === undefined) {
-            console.error(`Could not find gym ${GymLeaderName[name]}`);
+            console.error(`Could not find gym ${name}`);
         }
         return gym;
     }
@@ -51,7 +51,7 @@ class Region {
             return dungeon.name === name;
         });
         if (dungeon === undefined) {
-            console.error(`Could not find dungeon ${DungeonName[name]}`);
+            console.error(`Could not find dungeon ${name}`);
         }
         return dungeon;
     }

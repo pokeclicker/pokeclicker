@@ -15,7 +15,7 @@ class MapController {
         }
 
         // Water routes
-        if (GameConstants.WaterRoutes[region].has(route)) {
+        if (App.game.world.getRegion(App.game.world.currentRegion).getRoute(route).isWater) {
             cls = `${cls} waterRoute`;
         }
 

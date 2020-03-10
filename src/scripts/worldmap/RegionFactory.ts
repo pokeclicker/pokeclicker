@@ -408,12 +408,12 @@ class RegionFactory {
                 land: ['Spearow', 'Rattata', 'Ekans', 'Zubat', 'Hoppip'],
                 water: [],
                 headbutt: ['Spearow', 'Aipom', 'Heracross'],
-            }, [new RouteRequirement(32), new DungeonRequirement(DungeonName.Union_Cave)]]),
+            }, [new RouteRequirement(32), new DungeonRequirement(DungeonName.Union_Cave)]),
             RouteFactory.createRoute(34, {
                 land: ['Rattata', 'Abra', 'Drowzee', 'Ditto'],
                 water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
                 headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
-            }, [new BadgeRequirement(BadgeCase.Badge.Hive), new DungeonRequirement(DungeonName.Ilex_Forest)]]),
+            }, [new BadgeRequirement(BadgeCase.Badge.Hive), new DungeonRequirement(DungeonName.Ilex_Forest)]),
             RouteFactory.createRoute(35, {
                 land: ['Pidgey', 'Nidoran(F)', 'Nidoran(M)', 'Abra', 'Drowzee', 'Ditto', 'Hoothoot', 'Yanma'],
                 water: ['Psyduck', 'Golduck', 'Poliwag', 'Magikarp'],
