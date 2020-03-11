@@ -9,17 +9,17 @@
                 <div style='margin-top:20px'>
                     <button class='btn btn-primary'
                         data-bind='visible: App.game.world.currentRegion != 0'
-                        onclick='MapHelper.moveToTown("Vermillion City");App.game.world.currentRegion = 0;$("#ShipModal").modal("hide")'>
+                        onclick='MapHelper.moveToTown("Vermillion_City");App.game.world.currentRegion = 0;$("#ShipModal").modal("hide")'>
                         Kanto
                     </button>
                     <button class='btn btn-primary'
                         data-bind='visible: App.game.world.currentRegion != 1 && player.highestRegion() >= 1'
-                        onclick='MapHelper.moveToTown("Olivine City");App.game.world.currentRegion = 1;$("#ShipModal").modal("hide")'>
+                        onclick='MapHelper.moveToTown("Olivine_City");App.game.world.currentRegion = 1;$("#ShipModal").modal("hide")'>
                         Johto
                     </button>
                     <button class='btn btn-primary'
                         data-bind='visible: App.game.world.currentRegion != 2 && player.highestRegion >= 2'
-                        onclick='MapHelper.moveToTown("Slateport City");App.game.world.currentRegion = 2;$("#ShipModal").modal("hide")'>
+                        onclick='MapHelper.moveToTown("Slateport_City");App.game.world.currentRegion = 2;$("#ShipModal").modal("hide")'>
                         Hoenn
                     </button>
                 </div>
