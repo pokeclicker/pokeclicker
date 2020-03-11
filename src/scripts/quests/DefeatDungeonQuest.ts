@@ -14,7 +14,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         const attacksToCompleteDungeon = attacksToDefeatPokemon * averageTilesToBoss;
         const completeDungeonsReward = attacksToCompleteDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * GameConstants.ACTIVE_QUEST_MULTIPLIER * amount;
 
-        let region:GameConstants.Region, route:number;
+        let region: GameConstants.Region, route: number;
         for (region = player.highestRegion; region >= 0; region--) {
             route = QuestHelper.highestOneShotRoute(region); // returns 0 if no routes in this region can be one shot
             if (route) {
@@ -26,7 +26,7 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         }
         const tokens = PokemonFactory.routeDungeonTokens(route,region);
         const routeKillsPerDungeon = dungeonList[dungeon].tokenCost / tokens;
-        const collectTokensReward = routeKillsPerDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * amount
+        const collectTokensReward = routeKillsPerDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * amount;
 
         return Math.ceil(completeDungeonsReward + collectTokensReward);
     }
