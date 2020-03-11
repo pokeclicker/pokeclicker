@@ -24,6 +24,7 @@ class Save {
         saveObject[App.game.badgeCase.saveKey] = App.game.badgeCase.toJSON();
         saveObject[App.game.oakItems.saveKey] = App.game.oakItems.toJSON();
         saveObject[App.game.party.saveKey] = App.game.party.toJSON();
+        saveObject[App.game.shards.saveKey] = App.game.shards.toJSON();
         saveObject[App.game.farming.saveKey] = App.game.farming.toJSON();
         saveObject[App.game.logbook.saveKey] = App.game.logbook.toJSON();
 
@@ -179,26 +180,31 @@ class Save {
 
     public static convert() {
         const base64 = $('#convertTextArea').val().toString();
-        const json = atob(base64);
-        const p = JSON.parse(json);
-        Save.convertShinies(p.caughtPokemonList);
-        $('#saveModal').modal('hide');
+        try {
+            const json = atob(base64);
+            const p = JSON.parse(json);
+            Save.convertShinies(p.caughtPokemonList);
+            $('#saveModal').modal('hide');
+        } catch (e) {
+            Notifier.notify('Invalid save data.', GameConstants.NotificationOption.danger);
+        }
     }
 
-    // TODO (@Isha) reimplement
-    public static convertShinies(list: Array<string>) {
-        // let converted = [];
-        // for (let pokemon of list) {
-        //     let shiny = parseInt(pokemon['shiny']);
-        //     let name = pokemon['name'];
-        //     if (shiny == 1 && player.caughtShinyList.indexOf(name) == -1) {
-        //         player.caughtShinyList().push(pokemon['name']);
-        //         converted.push(pokemon['name']);
-        //     }
-        // }
-        // if (converted.length > 0) {
-        //     Notifier.notify("You have gained the following shinies: " + converted, GameConstants.NotificationOption.success)
-        // }
+    public static convertShinies(list: Array<any>) {
+        const converted = [];
+        list = list.filter(p => p.shiny);
+        for (const pokemon of list) {
+            const id = +pokemon.id;
+            if (!App.game.party.shinyPokemon.includes(id)) {
+                converted.push(pokemon.name);
+                App.game.party.shinyPokemon.push(id);
+            }
+        }
+        if (converted.length > 0) {
+            Notifier.notify(`You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`, GameConstants.NotificationOption.success);
+        } else {
+            Notifier.notify('No new shiny Pokémon to import.', GameConstants.NotificationOption.info);
+        }
     }
 }
 
