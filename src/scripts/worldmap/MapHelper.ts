@@ -3,6 +3,8 @@ class MapHelper {
         // TODO Temporary fix
         town = town.replace(/ /g, '_');
 
+        const isDungeon: boolean = TownList[town] instanceof DungeonEntrance;
+
         // TODO(@Isha) this is very weird, refactor this.
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem[town])) {
             return 'city unlockedTown';
@@ -11,17 +13,17 @@ class MapHelper {
             return 'city currentTown';
         }
         if (MapHelper.accessToTown(town)) {
-            // if (dungeonList.hasOwnProperty(town)) {
-            //     if (player.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
-            //         return 'dungeon completedDungeon';
-            //     }
-            //     return 'dungeon unlockedDungeon';
-            // }
+            if (isDungeon) {
+                // if (player.statistics.dungeonsCleared[town]()) {
+                //     return 'dungeon completedDungeon';
+                // }
+                return 'dungeon unlockedDungeon';
+            }
             return 'city unlockedTown';
         }
-        // if (dungeonList.hasOwnProperty(town)) {
-        //     return 'dungeon';
-        // }
+        if (isDungeon) {
+            return 'dungeon';
+        }
         return 'city';
     }
 
