@@ -76,20 +76,19 @@ class World implements Saveable {
     }
 
     // Helper methods
-    getCurrentRegion() {
+    getCurrentRegion(): Region {
         return this.getRegion(this.currentRegion);
     }
 
-    getShop(name: ShopName) {
+    getShop(name: ShopName): Shop {
         return this.getCurrentRegion().getShop(name);
     }
 
-    getGym(name: GymLeaderName) {
+    getGym(name: GymLeaderName): Gym {
         return this.getCurrentRegion().getGym(name);
     }
 
-
-    getDungeon(name: DungeonName) {
+    getDungeon(name: DungeonName): Dungeon {
         return this.getCurrentRegion().getDungeon(name);
     }
 
