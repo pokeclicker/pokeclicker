@@ -916,7 +916,7 @@ const pokemonList: {
             'exp': 62,
             'eggCycles': 20,
             'evolutions': [new LevelEvolution('Gastly', 'Haunter', 25)],
-       }, {
+        }, {
             'id': 93,
             'name': 'Haunter',
             'catchRate': 90,
