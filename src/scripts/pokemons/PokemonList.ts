@@ -14173,7 +14173,7 @@ const pokemonList: {
             },
         },
         {
-            'id': 810,
+            'id': -1,
             'name': 'Mega-Venusaur',
             'type': [PokemonType.Grass, PokemonType.Poison],
             'eggCycles': 120,
@@ -14190,7 +14190,7 @@ const pokemonList: {
             },
         },
         {
-            'id': 811,
+            'id': -2,
             'name': 'Mega-Charizard-X',
             'type': [PokemonType.Fire, PokemonType.Dragon],
             'eggCycles': 20,
