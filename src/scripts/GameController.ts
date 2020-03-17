@@ -110,6 +110,14 @@ class GameController {
                     }
                     e.preventDefault();
                 }
+            } else if (App.game.gameState === GameConstants.GameState.fighting) {
+                if (keyCode == 187 || keyCode == 107) { // plus
+                    MapHelper.moveToRoute(player.route() + 1, player.region);
+                    e.preventDefault();
+                } else if (keyCode == 189 || keyCode == 109) { // minus
+                    MapHelper.moveToRoute(player.route() - 1, player.region);
+                    e.preventDefault();
+                }
             }
 
         });
