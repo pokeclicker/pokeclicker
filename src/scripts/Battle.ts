@@ -133,7 +133,7 @@ class Battle {
     }
 
     public static catchPokemon() {
-        App.game.wallet.gainDungeonTokens(6 * Math.pow(this.enemyPokemon().level / 3, 1.05));
+        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(player.route(), player.region));
         App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         App.game.party.gainPokemonById(this.enemyPokemon().id, this.enemyPokemon().shiny);
     }

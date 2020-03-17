@@ -203,4 +203,17 @@ class QuestHelper {
             return Math.min(4, Math.max(1, player ? Math.floor(player.questLevel / 5) : 1));
         }, this);
     }
+
+    public static highestOneShotRoute(region: GameConstants.Region): number {
+        const [first, last] = GameConstants.RegionRoute[region];
+        const attack = Math.max(1, App.game.party.calculatePokemonAttack());
+
+        for (let route = last; route >= first; route--) {
+            if (PokemonFactory.routeHealth(route, region) < attack) {
+                return route;
+            }
+        }
+
+        return 0;
+    }
 }
