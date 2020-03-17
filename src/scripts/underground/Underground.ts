@@ -171,7 +171,7 @@ class Underground {
             default:
                 const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
                 const typeNum = PokemonType[type];
-                player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + GameConstants.PLATE_VALUE);
+                App.game.shards.shardWallet[typeNum] += GameConstants.PLATE_VALUE;
         }
         return success;
     }
