@@ -14205,12 +14205,15 @@ const pokemonList: {
                 'specialDefense': 85,
                 'speed': 100,
             },
+
+
         },
     ];
 
 
 // TODO move to its own initialize method that gets called on game start.
 pokemonList.forEach(p => {
+
     p.attack = Math.round(Math.max(Math.round(Math.max(1, Math.floor(Math.sqrt((2 * hitpoints)) * (2 * Math.round(Math.sqrt(attack * specialAttack) + Math.sqrt(speed)) * Math.sqrt(2 * Math.round(Math.sqrt(defense * specialDefense) + Math.sqrt(speed))))))) / 300));
     if (p.baby) {
         p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.evolvedPokemon] = evo.basePokemon);
