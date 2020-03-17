@@ -20,6 +20,7 @@ class App {
                 new Party(),
                 new Shards(),
                 new Farming(),
+                new LogBook(),
                 new RedeemableCodes()
             );
 
