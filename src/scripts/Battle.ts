@@ -95,9 +95,9 @@ class Battle {
         Battle.counter = 0;
         Battle.enemyPokemon(PokemonFactory.generateWildPokemon(App.game.world.currentRoute, App.game.world.currentRegion));
         if (Battle.enemyPokemon().shiny) {
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${Battle.enemyPokemon().name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${Battle.enemyPokemon().name} on route ${App.game.world.currentRoute}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id)) {
-            App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${Battle.enemyPokemon().name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${Battle.enemyPokemon().name} on route ${App.game.world.currentRoute}.`);
         }
     }
 
@@ -133,7 +133,7 @@ class Battle {
     }
 
     public static catchPokemon() {
-        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(player.route(), player.region));
+        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(App.game.world.currentRoute, player.region));
         App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         App.game.party.gainPokemonById(this.enemyPokemon().id, this.enemyPokemon().shiny);
     }

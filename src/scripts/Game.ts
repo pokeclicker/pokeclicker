@@ -76,7 +76,7 @@ class Game {
             this.shards.fromJSON(saveObject[this.shards.saveKey]);
             this.farming.fromJSON(saveObject[this.farming.saveKey]);
             this.logbook.fromJSON(saveObject[this.logbook.saveKey]);
-            this.world.fromJSON(saveObject[this.world.saveKey]);
+            this.world.fromJSON(saveObject[this.world.saveKey] || {});
 
             this.redeemableCodes.fromJSON(saveObject[this.redeemableCodes.saveKey]);
         }

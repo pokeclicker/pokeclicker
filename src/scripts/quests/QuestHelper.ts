@@ -204,7 +204,7 @@ class QuestHelper {
         }, this);
     }
 
-    public static highestOneShotRoute(region: GameConstants.Region): number {
+    public static highestOneShotRoute(region: RegionName): number {
         const [first, last] = GameConstants.RegionRoute[region];
         const attack = Math.max(1, App.game.party.calculatePokemonAttack());
 

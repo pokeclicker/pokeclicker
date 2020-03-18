@@ -46,28 +46,28 @@ class PokemonFactory {
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny);
     }
 
-    public static routeLevel(route: number, region: GameConstants.Region): number {
+    public static routeLevel(route: number, region: RegionName): number {
         return route * 2;
     }
 
-    public static routeHealth(route: number, region: GameConstants.Region): number {
+    public static routeHealth(route: number, region: RegionName): number {
         switch (region) {
             // Hoenn starts at route 101 need to reduce the total hp of pokemon on those routes.
-            case GameConstants.Region.hoenn:
+            case RegionName.hoenn:
                 route -= 54;
                 break;
         }
         return Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15)), 20) || 20;
     }
 
-    public static routeMoney(route: number, region: GameConstants.Region): number {
+    public static routeMoney(route: number, region: RegionName): number {
         const deviation = Math.floor(Math.random() * 51) - 25;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
 
         return money;
     }
 
-    public static routeDungeonTokens(route: number, region: GameConstants.Region): number {
+    public static routeDungeonTokens(route: number, region: RegionName): number {
         const tokens = 6 * Math.pow(this.routeLevel(route,region) / 3, 1.05);
 
         return tokens;
