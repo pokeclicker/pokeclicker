@@ -36,7 +36,7 @@ const pokemonList: {
     attack?: number;
     baseOffense?: number;
     baseDefense?: number;
-    baseStamina? number;
+    baseStamina?: number;
 }[] =
     [
         {
