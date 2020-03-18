@@ -38,11 +38,11 @@ class Player {
             }
         }
 
-        this._defeatedAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
-            return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0);
-        });
-        this._caughtAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
-            return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0);
+        this._defeatedAmount = [];
+        this._caughtAmount = [];
+        [...Object.keys(pokemonMapId)].forEach((id, index) => {
+            this._defeatedAmount[id] = ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[id] || 0) : 0);
+            this._caughtAmount[id] = ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0);
         });
         this._town = ko.observable(TownList['Pallet Town']);
         this._currentTown = ko.observable('');
