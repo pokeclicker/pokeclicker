@@ -20,7 +20,7 @@ class Champion extends Gym {
             }
             case GameConstants.Starter.Charmander: {
                 this.pokemons.push(new GymPokemon('Arcanine', 65340, 59));
-                this.pokemons.push(new GymPokemon('Gyarados', 63040, 61));
+                this.pokemons.push(new GymPokemon('Exeggutor', 57520, 61));
                 this.pokemons.push(new GymPokemon('Blastoise', 70000, 63));
                 break;
             }

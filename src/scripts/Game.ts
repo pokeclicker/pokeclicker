@@ -16,6 +16,7 @@ class Game {
     public party: Party;
     public shards: Shards;
     public farming: Farming;
+    public logbook: LogBook;
     public world: World;
 
     public redeemableCodes: RedeemableCodes;
@@ -35,6 +36,7 @@ class Game {
         party: Party,
         shards: Shards,
         farming: Farming,
+        logbook: LogBook,
         world: World,
         codes: RedeemableCodes
     ) {
@@ -47,8 +49,8 @@ class Game {
         this.party = party;
         this.shards = shards;
         this.farming = farming;
+        this.logbook = logbook;
         this.world = world;
-
         this.redeemableCodes = codes;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
@@ -73,6 +75,7 @@ class Game {
             this.party.fromJSON(saveObject[this.party.saveKey]);
             this.shards.fromJSON(saveObject[this.shards.saveKey]);
             this.farming.fromJSON(saveObject[this.farming.saveKey]);
+            this.logbook.fromJSON(saveObject[this.logbook.saveKey]);
             this.world.fromJSON(saveObject[this.world.saveKey]);
 
             this.redeemableCodes.fromJSON(saveObject[this.redeemableCodes.saveKey]);

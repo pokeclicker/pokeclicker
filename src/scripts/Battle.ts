@@ -94,6 +94,11 @@ class Battle {
     public static generateNewEnemy() {
         Battle.counter = 0;
         Battle.enemyPokemon(PokemonFactory.generateWildPokemon(App.game.world.currentRoute, App.game.world.currentRegion));
+        if (Battle.enemyPokemon().shiny) {
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${Battle.enemyPokemon().name} on route ${player.route()}.`);
+        } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id)) {
+            App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${Battle.enemyPokemon().name} on route ${player.route()}.`);
+        }
     }
 
     protected static calculateActualCatchRate(pokeBall: GameConstants.Pokeball) {
@@ -116,15 +121,19 @@ class Battle {
             return;
         }
         const random: number = Math.floor(Math.random() * 100);
-        if (random <= this.catchRateActual()) {
+        if (random <= this.catchRateActual()) { // Caught
             this.catchPokemon();
+        } else if (Battle.enemyPokemon().shiny) { // Failed to catch, Shiny
+            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The Shiny ${this.enemyPokemon().name} escaped!`);
+        } else if (!App.game.party.alreadyCaughtPokemon(this.enemyPokemon().id)) { // Failed to catch, Uncaught
+            App.game.logbook.newLog(LogBookTypes.ESCAPED, `The wild ${this.enemyPokemon().name} escaped!`);
         }
         this.catching(false);
         this.catchRateActual(null);
     }
 
     public static catchPokemon() {
-        App.game.wallet.gainDungeonTokens(6 * Math.pow(this.enemyPokemon().level / 3, 1.05));
+        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(player.route(), player.region));
         App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         App.game.party.gainPokemonById(this.enemyPokemon().id, this.enemyPokemon().shiny);
     }
