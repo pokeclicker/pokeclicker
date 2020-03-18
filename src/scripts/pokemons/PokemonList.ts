@@ -14143,7 +14143,7 @@ const pokemonList: {
             'type': [PokemonType.Steel],
             'eggCycles': 120,
             'levelType': LevelType.slow,
-            'exp': 306,
+            'exp': 135,
             'catchRate': 3,
             'evolutions': [new StoneEvolution('Meltan', 'Melmetal', GameConstants.StoneType.None)],
             'base': {
@@ -14161,7 +14161,7 @@ const pokemonList: {
             'type': [PokemonType.Steel],
             'eggCycles': 120,
             'levelType': LevelType.slow,
-            'exp': 306,
+            'exp': 270,
             'catchRate': 3,
             'base': {
                 'hitpoints': 135,
