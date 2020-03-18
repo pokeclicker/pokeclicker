@@ -14172,42 +14172,6 @@ const pokemonList: {
                 'speed': 34,
             },
         },
-        {
-            'id': -1,
-            'name': 'Mega-Venusaur',
-            'type': [PokemonType.Grass, PokemonType.Poison],
-            'eggCycles': 120,
-            'levelType': LevelType.mediumslow,
-            'exp': 306,
-            'catchRate': 45,
-            'base': {
-                'hitpoints': 80,
-                'attack': 100,
-                'specialAttack': 122,
-                'defense': 123,
-                'specialDefense': 120,
-                'speed': 80,
-            },
-        },
-        {
-            'id': -2,
-            'name': 'Mega-Charizard-X',
-            'type': [PokemonType.Fire, PokemonType.Dragon],
-            'eggCycles': 20,
-            'levelType': LevelType.mediumslow,
-            'exp': 306,
-            'catchRate': 45,
-            'base': {
-                'hitpoints': 78,
-                'attack': 130,
-                'specialAttack': 130,
-                'defense': 111,
-                'specialDefense': 85,
-                'speed': 100,
-            },
-
-
-        },
     ];
 
 
