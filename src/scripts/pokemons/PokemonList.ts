@@ -14173,7 +14173,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -1,
+            'id': 1000000,
             'name': 'Mega Venusaur',
             'type': [PokemonType.Grass, PokemonType.Poison],
             'eggCycles': 120,
@@ -14190,7 +14190,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -2,
+            'id': 1000001,
             'name': 'Mega Charizard X',
             'type': [PokemonType.Fire, PokemonType.Dragon],
             'eggCycles': 20,
@@ -14207,7 +14207,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -2,
+            'id': 1000002,
             'name': 'Mega Charizard Y',
             'type': [PokemonType.Fire, PokemonType.Flying],
             'eggCycles': 20,
@@ -14224,7 +14224,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -3,
+            'id': 1000003,
             'name': 'Mega Blastoise',
             'type': [PokemonType.Water],
             'eggCycles': 20,
@@ -14241,7 +14241,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -4,
+            'id': 1000004,
             'name': 'Mega Beedrill',
             'type': [PokemonType.Bug, PokemonType.Poison],
             'eggCycles': 20,
@@ -14258,7 +14258,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -5,
+            'id': 1000005,
             'name': 'Mega Pidgeot',
             'type': [PokemonType.Normal, PokemonType.Flying],
             'eggCycles': 15,
@@ -14275,7 +14275,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -6,
+            'id': 1000006,
             'name': 'Mega Alakazam',
             'type': [PokemonType.Psychic],
             'eggCycles': 20,
@@ -14292,7 +14292,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -7,
+            'id': 1000007,
             'name': 'Mega Slowbro',
             'type': [PokemonType.Water, PokemonType.Psychic],
             'eggCycles': 20,
@@ -14309,7 +14309,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -8,
+            'id': 1000008,
             'name': 'Mega Gengar',
             'type': [PokemonType.Poison, PokemonType.Ghost],
             'eggCycles': 20,
@@ -14326,7 +14326,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -9,
+            'id': 1000009,
             'name': 'Mega Kangaskhan',
             'type': [PokemonType.Normal],
             'eggCycles': 20,
@@ -14343,7 +14343,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -10,
+            'id': 1000010,
             'name': 'Mega Pinsir',
             'type': [PokemonType.Bug, PokemonType.Flying],
             'eggCycles': 25,
@@ -14360,7 +14360,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -11,
+            'id': 1000011,
             'name': 'Mega Gyarados',
             'type': [PokemonType.Water, PokemonType.Dark],
             'eggCycles': 5,
@@ -14377,7 +14377,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -12,
+            'id': 1000012,
             'name': 'Mega Aerodactyl',
             'type': [PokemonType.Water, PokemonType.Dark],
             'eggCycles': 35,
@@ -14394,7 +14394,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -13,
+            'id': 1000013,
             'name': 'Mega Mewtwo X',
             'type': [PokemonType.Psychic, PokemonType.Fighting],
             'eggCycles': 120,
@@ -14411,7 +14411,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -14,
+            'id': 1000014,
             'name': 'Mega Mewtwo Y',
             'type': [PokemonType.Psychic, PokemonType.Fighting],
             'eggCycles': 120,
