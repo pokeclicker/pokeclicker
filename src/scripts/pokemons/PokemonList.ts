@@ -14181,8 +14181,8 @@ const pokemonList: {
 // TODO move to its own initialize method that gets called on game start.
 pokemonList.forEach(p => {
     
-    p.baseOffense = 2 * Math.round(Math.sqrt(p.base.attack * p.base.specialAttack) + Math.sqrt(p.base.speed);
-    p.baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed;
+    p.baseOffense = 2 * Math.round(Math.sqrt(p.base.attack * p.base.specialAttack) + Math.sqrt(p.base.speed));
+    p.baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
     p.baseStamina = 2 * p.base.hitpoints;
 
     p.attack = Math.max(10, Math.floor(Math.sqrt(p.baseDefense * p.baseStamina) * p.baseOffense / 300));
