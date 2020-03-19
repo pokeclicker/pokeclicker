@@ -14467,7 +14467,7 @@ const pokemonList: {
         {
             'id': -17,
             'name': 'Primal Kyogre',
-            'type': [PokemonType.Water, PokemonType.Fire],
+            'type': [PokemonType.Water],
             'eggCycles': 120,
             'levelType': LevelType.slow,
             'exp': 347,
