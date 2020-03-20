@@ -1,0 +1,71 @@
+<script type="text/html" id="eggSVGTemplate">
+
+<svg class="egg" 
+     viewbox="0 0 190 200" 
+     xmlns="http://www.w3.org/2000/svg"
+     height="auto" width="60%"
+     data-bind="attr: {'data-type1': PokemonType[$data.pokemonType1], 'data-type2': PokemonType[$data.pokemonType2]}"
+>
+    <defs>
+        
+        <!-- clip path for light section, should be the same as outline -->
+        <clipPath id="mask_entire_egg">
+          <path d="M 5 95
+                   c 40,-120 140,-120 180,0 
+                   c 20,130 -200,130 -180,0
+                  "
+          />
+        </clipPath>
+        
+        <!-- light gradient to be applied on top, to give a 3d effect -->
+        <radialGradient id="gradient_highlight">
+          <stop offset="5%" stop-color="white" stop-opacity="0.9"/>
+          <stop offset="30%" stop-color="white" stop-opacity="0.5"/>
+          <stop offset="70%" stop-color="black" stop-opacity="0.2"/>
+        </radialGradient>
+        
+    </defs>
+    <g id="eggSVGMainGroup" clip-path="url(#mask_entire_egg)">
+        <!-- a couple of bezier curves to create an egg shape -->
+        <!-- slight corner where they meet, I gave up fiddling with the curves -->
+        <path class="egg-outline"
+              d="M 5 95
+                 c 40,-120 140,-120 180,0 
+                 c 20,130 -200,130 -180,0
+                "
+        />
+        
+        <!-- spots -->
+        <ellipse class="egg-spot"
+                 rx="20" ry="28"
+                 transform="translate(45,120) rotate(-30,10,15)"
+        />
+        
+        <ellipse class="egg-spot"
+                 rx="10" ry="18" 
+                 transform="translate(135,150) rotate(45,5,9)"
+        />
+        
+        <ellipse class="egg-spot"
+                 rx="12" ry="18"
+                 transform="translate(65,185) rotate(40,6,9)"
+        />
+        
+        <ellipse class="egg-spot"
+                 rx="10" ry="14"
+                 transform="translate(100,125) rotate(30,5,7)"
+        />
+        
+        <ellipse class="egg-spot"
+                 rx="20" ry="24"
+                 transform="translate(125,75) rotate(45,10,12)"
+        />
+        
+        <!-- highlight -->
+        <circle cx="76" cy="40" r="200"
+                fill="url(#gradient_highlight)"
+        />
+    </g>
+</svg>
+
+</script>
