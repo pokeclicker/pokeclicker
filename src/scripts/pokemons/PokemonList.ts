@@ -14181,7 +14181,7 @@ pokemonList.forEach(p => {
     const baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
     const baseStamina = 2 * p.base.hitpoints;
 
-    p.attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 225));
+    p.attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if (p.baby) {
         p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.evolvedPokemon] = evo.basePokemon);
     }
