@@ -8,6 +8,8 @@ class Egg implements Saveable {
     shinySteps: number;
     pokemon: string;
     type: GameConstants.EggType;
+    pokemonType1: PokemonType;
+    pokemonType2: PokemonType;
     notified: boolean;
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
@@ -19,6 +21,11 @@ class Egg implements Saveable {
         this.pokemon = pokemon;
         this.type = type;
         this.notified = notified;
+
+        this.init();
+    }
+
+    private init() {
         this.progress = ko.computed(function () {
             return this.steps() / this.totalSteps * 100;
         }, this);
@@ -26,6 +33,15 @@ class Egg implements Saveable {
         this.progressText = ko.pureComputed(function () {
             return `${this.steps()} / ${this.totalSteps}`;
         }, this);
+
+        if (this.pokemon) {
+            const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(this.pokemon);
+            this.pokemonType1 = dataPokemon.type1;
+            this.pokemonType2 = dataPokemon.type2 === PokemonType.None ? dataPokemon.type1 : dataPokemon.type2;
+        } else {
+            this.pokemonType1 = PokemonType['Normal'];
+            this.pokemonType2 = PokemonType['Normal'];
+        }
     }
 
     toJSON(): object {
@@ -47,9 +63,7 @@ class Egg implements Saveable {
         this.pokemon = json['pokemon'];
         this.type = json['type'];
         this.notified = json['boolean'];
-        this.progress = ko.computed(function () {
-            return this.steps() / this.totalSteps * 100;
-        }, this);
+        this.init();
     }
 
 
