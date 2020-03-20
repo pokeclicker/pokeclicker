@@ -28,25 +28,24 @@ class DailyDeal {
         const temp = [];
         for (let i = 0; i < maxDeals; i++) {
             const deal = new DailyDeal();
-            if (deal.isValid()) {
+            if (deal.isValid(temp)) {
                 temp.push(deal);
             }
         }
         DailyDeal.list.push(...temp);
     }
 
-    private isValid(): boolean {
-        return ( (this.item1.name !== this.item2.name) && !DailyDeal.reverseDealExists(this.item1.name, this.item2.name) && !this.item1.isStone() );
+    private isValid(dealList: Array<DailyDeal>): boolean {
+        return ( (this.item1.name !== this.item2.name) && !DailyDeal.reverseDealExists(this.item1.name, this.item2.name, dealList) && !this.item1.isStone() );
     }
 
-    private static reverseDealExists(name1: string, name2: string): boolean {
-        const list = DailyDeal.list.peek();
-        for (const deal of list) {
+    private static reverseDealExists(name1: string, name2: string, dealList: Array<DailyDeal>): boolean {
+        for (const deal of dealList) {
             if (deal.item2.name == name1) {
                 if (deal.item1.name == name2) {
                     return true;
                 } else {
-                    return DailyDeal.reverseDealExists(deal.item1.name, name2);
+                    return DailyDeal.reverseDealExists(deal.item1.name, name2, dealList);
                 }
             }
         }
