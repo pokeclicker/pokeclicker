@@ -4,7 +4,7 @@ class DailyDeal {
     public amount1: number;
     public amount2: number;
 
-    public static list: Array<DailyDeal> = [];
+    public static list: KnockoutObservableArray<DailyDeal> = ko.observableArray();
 
     constructor() {
         this.item1 = DailyDeal.randomItem();
@@ -23,13 +23,16 @@ class DailyDeal {
 
     public static generateDeals(maxDeals: number, date: Date) {
         SeededRand.seedWithDate(date);
-
+        
+        DailyDeal.list.removeAll();
+        const temp = [];
         for (let i = 0; i < maxDeals; i++) {
             const deal = new DailyDeal();
             if (deal.isValid()) {
-                DailyDeal.list.push(deal);
+                temp.push(deal);
             }
         }
+        DailyDeal.list.push(...temp);
     }
 
     private isValid(): boolean {
@@ -37,7 +40,8 @@ class DailyDeal {
     }
 
     private static reverseDealExists(name1: string, name2: string): boolean {
-        for (const deal of DailyDeal.list) {
+        const list = DailyDeal.list.peek();
+        for (const deal of list) {
             if (deal.item2.name == name1) {
                 if (deal.item1.name == name2) {
                     return true;
@@ -50,7 +54,7 @@ class DailyDeal {
     }
 
     public static canUse(i): boolean {
-        const deal = DailyDeal.list[i];
+        const deal = DailyDeal.list.peek()[i];
         const index = player.mineInventoryIndex(deal.item1.id);
         if (index > -1) {
             return player.mineInventory[index].amount() >= deal.amount1;
@@ -60,7 +64,7 @@ class DailyDeal {
     }
 
     public static use(i) {
-        const deal = DailyDeal.list[i];
+        const deal = DailyDeal.list.peek()[i];
         const item1Index = player.mineInventoryIndex(deal.item1.id);
         if (DailyDeal.canUse(i)) {
             const amt = player.mineInventory[item1Index].amount();
