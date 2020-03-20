@@ -8,13 +8,20 @@
 >
     <defs>
         
-        <!-- clip path for light section, should be the same as outline -->
+        <!-- a couple of bezier curves to create an egg shape -->
+        <!-- slight quadratic curve where the two beziers meet, to smooth the corner -->
+        <path id="egg_outline"
+            d="M 8 85
+               c 45,-110 125,-110 174,0
+               q 2,5 3,10
+               c 20,130 -200,130 -180,0
+               q 1,-5 3,-10
+              "
+        />
+
+        <!-- clip path so we only see things that are inside the egg outline -->
         <clipPath id="mask_entire_egg">
-          <path d="M 5 95
-                   c 40,-120 140,-120 180,0 
-                   c 20,130 -200,130 -180,0
-                  "
-          />
+          <use href="#egg_outline" />
         </clipPath>
         
         <!-- light gradient to be applied on top, to give a 3d effect -->
@@ -26,16 +33,10 @@
         
     </defs>
     <g id="eggSVGMainGroup" clip-path="url(#mask_entire_egg)">
-        <!-- a couple of bezier curves to create an egg shape -->
-        <!-- slight corner where they meet, I gave up fiddling with the curves -->
-        <path class="egg-outline"
-              d="M 5 95
-                 c 40,-120 140,-120 180,0 
-                 c 20,130 -200,130 -180,0
-                "
-        />
+        <!-- outline of egg, filled with main type color -->
+        <use href="#egg_outline" class="egg-outline" />
         
-        <!-- spots -->
+        <!-- egg spots, filled with secondary type color -->
         <ellipse class="egg-spot"
                  rx="20" ry="28"
                  transform="translate(45,120) rotate(-30,10,15)"
@@ -61,7 +62,7 @@
                  transform="translate(125,75) rotate(45,10,12)"
         />
         
-        <!-- highlight -->
+        <!-- highlight, used to give 3D effect -->
         <circle cx="76" cy="40" r="200"
                 fill="url(#gradient_highlight)"
         />

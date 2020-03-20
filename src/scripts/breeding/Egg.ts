@@ -62,7 +62,7 @@ class Egg implements Saveable {
         this.shinySteps = json['shinySteps'];
         this.pokemon = json['pokemon'];
         this.type = json['type'];
-        this.notified = json['boolean'];
+        this.notified = json['notified'];
         this.init();
     }
 
