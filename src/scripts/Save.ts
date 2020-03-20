@@ -26,6 +26,7 @@ class Save {
         saveObject[App.game.party.saveKey] = App.game.party.toJSON();
         saveObject[App.game.shards.saveKey] = App.game.shards.toJSON();
         saveObject[App.game.farming.saveKey] = App.game.farming.toJSON();
+        saveObject[App.game.logbook.saveKey] = App.game.logbook.toJSON();
 
         saveObject[App.game.redeemableCodes.saveKey] = App.game.redeemableCodes.toJSON();
 
@@ -149,6 +150,14 @@ class Save {
         const res = {};
         for (const obj in GameConstants.BattleItemType) {
             res[obj] = ko.observable(saved ? saved[obj] || 0 : 0);
+        }
+        return res;
+    }
+
+    public static initializeEffectTimer(saved?: Array<string>): { [name: string]: KnockoutObservable<string> } {
+        const res = {};
+        for (const obj in GameConstants.BattleItemType) {
+            res[obj] = ko.observable(saved ? saved[obj] || '00:00' : '00:00');
         }
         return res;
     }
