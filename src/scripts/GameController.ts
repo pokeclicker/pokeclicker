@@ -88,7 +88,7 @@ class GameController {
             const keyCode = e.keyCode;
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {
-                switch(keyCode) {
+                switch (keyCode) {
                     case 38: // up
                     case 87: // w
                         DungeonRunner.map.moveUp();
@@ -113,8 +113,7 @@ class GameController {
                         return;
                 }
                 e.preventDefault();
-            }
-            else if (App.game.gameState === GameConstants.GameState.town) {
+            } else if (App.game.gameState === GameConstants.GameState.town) {
                 if (keyCode == 32) { // space
                     if (player.town().gym()) {
                         GymRunner.startGym(player.town().gym());
@@ -123,9 +122,8 @@ class GameController {
                     }
                     e.preventDefault();
                 }
-            }
-            else if (App.game.gameState === GameConstants.GameState.fighting) {
-                switch(keyCode) {
+            } else if (App.game.gameState === GameConstants.GameState.fighting) {
+                switch (keyCode) {
                     case 187: // plus
                     case 107: // plus (numpad)
                         MapHelper.moveToRoute(player.route() + 1, player.region);
