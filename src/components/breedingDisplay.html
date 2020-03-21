@@ -21,7 +21,7 @@
             <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 30px;">
                 <img src="assets/images/breeding/lock.png">
             </div>
-            <!-- ko if: $data !== null -->
+            <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 30px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <!-- ko if: $data.type == GameConstants.EggType.Fossil -->
                 <img data-bind='attr: {src: BreedingController.getEggImage($data)}'/>

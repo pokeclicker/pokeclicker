@@ -9,7 +9,7 @@ class Breeding implements Feature {
         'eggSlots': 1,
     };
 
-    private _eggList: Array<KnockoutObservable<Egg | void>>;
+    private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
 
     private hatchList: { [name: number]: string[][] } = {};
@@ -80,7 +80,7 @@ class Breeding implements Feature {
     toJSON(): object {
         const breedingSave = {};
         breedingSave['eggList'] = this.eggList.map(function (egg: any) {
-            return egg() === null ? null : egg().toJSON();
+            return egg() === null ? new Egg() : egg().toJSON();
         }
         );
         breedingSave['eggSlots'] = this.eggSlots;
@@ -94,7 +94,7 @@ class Breeding implements Feature {
     public hasFreeEggSlot(): boolean {
         let counter = 0;
         for (const egg of this._eggList) {
-            if (egg() !== null) {
+            if (!egg().isNone()) {
                 counter++;
             }
         }
@@ -103,7 +103,7 @@ class Breeding implements Feature {
 
     public gainEgg(e: Egg) {
         for (let i = 0; i < this._eggList.length; i++) {
-            if (this._eggList[i]() == null) {
+            if (this._eggList[i]().isNone()) {
                 this._eggList[i](e);
                 return true;
             }
@@ -120,24 +120,8 @@ class Breeding implements Feature {
         amount *= App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette);
 
         amount = Math.round(amount);
-        for (const obj of this._eggList) {
-            // TODO(@Isha) fix this properly.
-            const egg: any = obj();
-            if (egg == null || egg.notified) {
-                continue;
-            }
-            egg.steps(egg.steps() + amount);
-            if (App.game.oakItems.isActive(OakItems.OakItem.Shiny_Charm)) {
-                egg.shinySteps += amount;
-            }
-            if (egg.steps() >= egg.totalSteps) {
-                if (egg.type == GameConstants.EggType.Pokemon) {
-                    Notifier.notify(`${egg.pokemon} is ready to hatch!`, GameConstants.NotificationOption.success);
-                } else {
-                    Notifier.notify('An egg is ready to hatch!', GameConstants.NotificationOption.success);
-                }
-                egg.notified = true;
-            }
+        for (const egg of this._eggList) {
+            egg().addSteps(amount);
         }
     }
 
@@ -152,54 +136,14 @@ class Breeding implements Feature {
     }
 
     public hatchPokemonEgg(index: number) {
-        // TODO(@Isha) fix this properly.
-        const egg: any = this._eggList[index]();
-        const shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps()));
-        const shiny = PokemonFactory.generateShiny(shinyChance);
-
-        for (let i = 0; i < App.game.party.caughtPokemon.length; i++) {
-            if (App.game.party.caughtPokemon[i].name == egg.pokemon) {
-                const partyPokemon = App.game.party.caughtPokemon[i];
-                if (partyPokemon.breeding) {
-                    if (partyPokemon.evolutions !== undefined) {
-                        partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
-                    }
-                    partyPokemon.exp = 0;
-                    partyPokemon.level = 1;
-                    partyPokemon.breeding = false;
-                    partyPokemon.level = partyPokemon.calculateLevelFromExp();
-                    partyPokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
-                    partyPokemon.attack = partyPokemon.calculateAttack();
-                    partyPokemon.checkForLevelEvolution();
-                    break;
-                }
-            }
-        }
-
-        if (shiny) {
-            Notifier.notify(`✨ You hatched a shiny ${egg.pokemon}! ✨`, GameConstants.NotificationOption.warning);
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${egg.pokemon}!`);
-        } else {
-            Notifier.notify(`You hatched ${GameHelper.anOrA(egg.pokemon)} ${egg.pokemon}!`, GameConstants.NotificationOption.success);
-        }
-
-        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(egg.pokemon).id, shiny);
-
-        // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
-        const baseForm = this.calculateBaseForm(egg.pokemon);
-        if (egg.pokemon != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
-            Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
-            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id, shiny);
-        }
-
-        this._eggList[index](null);
-        GameHelper.incrementObservable(player.statistics.hatchedEggs);
-        App.game.oakItems.use(OakItems.OakItem.Blaze_Cassette);
+        const egg: Egg = this._eggList[index]();
+        egg.hatch();
+        this._eggList[index](new Egg());
     }
 
     public createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
         const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
-        return new Egg(this.getSteps(dataPokemon.eggCycles), pokemonName, type);
+        return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonName);
     }
 
     public createTypedEgg(type: GameConstants.EggType): Egg {
@@ -282,11 +226,11 @@ class Breeding implements Feature {
         this.eggSlots += 1;
     }
 
-    get eggList(): Array<KnockoutObservable<Egg | void>> {
+    get eggList(): Array<KnockoutObservable<Egg>> {
         return this._eggList;
     }
 
-    set eggList(value: Array<KnockoutObservable<Egg | void>>) {
+    set eggList(value: Array<KnockoutObservable<Egg>>) {
         this._eggList = value;
     }
 

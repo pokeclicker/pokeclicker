@@ -14,7 +14,7 @@ class Egg implements Saveable {
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
 
-    constructor(totalSteps: number, pokemon: string, type: GameConstants.EggType, steps = 0, shinySteps = 0, notified = false) {
+    constructor(type = GameConstants.EggType.None, totalSteps = 0, pokemon = '', steps = 0, shinySteps = 0, notified = false) {
         this.totalSteps = totalSteps;
         this.steps = ko.observable(steps);
         this.shinySteps = shinySteps;
@@ -44,6 +44,78 @@ class Egg implements Saveable {
         }
     }
 
+    isNone() {
+        return this.type === GameConstants.EggType.None;
+    }
+
+    addSteps(amount: number) {
+        if (this.isNone() || this.notified) {
+            return;
+        }
+        this.steps(this.steps() + amount);
+        if (App.game.oakItems.isActive(OakItems.OakItem.Shiny_Charm)) {
+            this.shinySteps += amount;
+        }
+        if (this.canHatch()) {
+            if (this.type == GameConstants.EggType.Pokemon) {
+                Notifier.notify(`${this.pokemon} is ready to hatch!`, GameConstants.NotificationOption.success);
+            } else {
+                Notifier.notify('An egg is ready to hatch!', GameConstants.NotificationOption.success);
+            }
+            this.notified = true;
+        }
+    }
+
+    canHatch() {
+        return !this.isNone() && this.steps() >= this.totalSteps;
+    }
+
+    hatch() {
+        if (!this.canHatch()) {
+            return;
+        }
+        const shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, this.shinySteps / this.steps()));
+        const shiny = PokemonFactory.generateShiny(shinyChance);
+
+        for (let i = 0; i < App.game.party.caughtPokemon.length; i++) {
+            if (App.game.party.caughtPokemon[i].name == this.pokemon) {
+                const partyPokemon = App.game.party.caughtPokemon[i];
+                if (partyPokemon.breeding) {
+                    if (partyPokemon.evolutions !== undefined) {
+                        partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
+                    }
+                    partyPokemon.exp = 0;
+                    partyPokemon.level = 1;
+                    partyPokemon.breeding = false;
+                    partyPokemon.level = partyPokemon.calculateLevelFromExp();
+                    partyPokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
+                    partyPokemon.attack = partyPokemon.calculateAttack();
+                    partyPokemon.checkForLevelEvolution();
+                    break;
+                }
+            }
+        }
+
+        if (shiny) {
+            Notifier.notify(`✨ You hatched a shiny ${this.pokemon}! ✨`, GameConstants.NotificationOption.warning);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
+        } else {
+            Notifier.notify(`You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`, GameConstants.NotificationOption.success);
+        }
+
+        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(this.pokemon).id, shiny);
+
+        // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
+        const baseForm = App.game.breeding.calculateBaseForm(this.pokemon);
+        if (this.pokemon != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
+            Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
+            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id, shiny);
+        }
+
+        GameHelper.incrementObservable(player.statistics.hatchedEggs);
+        App.game.oakItems.use(OakItems.OakItem.Blaze_Cassette);
+    }
+
     toJSON(): object {
         return {
             totalSteps: this.totalSteps,
@@ -65,6 +137,4 @@ class Egg implements Saveable {
         this.notified = json['notified'];
         this.init();
     }
-
-
 }

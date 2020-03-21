@@ -553,6 +553,7 @@ namespace GameConstants {
     }
 
     export enum EggType {
+        None = -1,
         Fire,
         Water,
         Grass,
