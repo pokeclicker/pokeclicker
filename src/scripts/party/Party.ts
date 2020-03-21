@@ -50,12 +50,14 @@ class Party implements Feature {
         if (shiny) {
             this.shinyPokemon.push(pokemon.id);
             Notifier.notify(`✨ You have captured a shiny ${pokemon.name}! ✨`, GameConstants.NotificationOption.warning);
+            App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}!`);
         }
 
         if (this.alreadyCaughtPokemon(pokemon.id, false)) {
             return;
         }
         Notifier.notify(`You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, GameConstants.NotificationOption.success);
+        App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
         this._caughtPokemon.push(pokemon);
 
     }
