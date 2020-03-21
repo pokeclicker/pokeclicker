@@ -14137,7 +14137,7 @@ const pokemonList: {
             'type': [PokemonType.Steel],
             'eggCycles': 120,
             'levelType': LevelType.slow,
-            'exp': 306,
+            'exp': 135,
             'catchRate': 3,
             'evolutions': [new StoneEvolution('Meltan', 'Melmetal', GameConstants.StoneType.None)],
             'base': {
@@ -14155,7 +14155,7 @@ const pokemonList: {
             'type': [PokemonType.Steel],
             'eggCycles': 120,
             'levelType': LevelType.slow,
-            'exp': 306,
+            'exp': 270,
             'catchRate': 3,
             'base': {
                 'hitpoints': 135,
@@ -14171,7 +14171,11 @@ const pokemonList: {
 
 // TODO move to its own initialize method that gets called on game start.
 pokemonList.forEach(p => {
-    p.attack = Math.max(...Object.values(p.base));
+    const baseOffense = 2 * Math.round(Math.sqrt(p.base.attack * p.base.specialAttack) + Math.sqrt(p.base.speed));
+    const baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
+    const baseStamina = 2 * p.base.hitpoints;
+
+    p.attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if (p.baby) {
         p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.evolvedPokemon] = evo.basePokemon);
     }
