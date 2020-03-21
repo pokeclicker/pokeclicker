@@ -22,7 +22,7 @@
                 <img src="assets/images/breeding/lock.png">
             </div>
             <!-- ko if: $data !== null -->
-            <div style="margin-top: 30px;">
+            <div style="margin-top: 30px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <img data-bind='attr: {src: BreedingController.getEggImage($data)}'/>
 
                 <div class="progress" data-bind='visible: progress() < 100'>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="progress" data-bind='visible: progress() >= 100'>
                     <div class="progress-bar bg-success" role="progressbar"
-                    data-bind="attr:{ style: 'width: 100%; cursor: pointer;' }, click: function(){App.game.breeding.hatchPokemonEgg($index())}, text: 'Hatch!'"
+                    data-bind="attr:{ style: 'width: 100%; cursor: pointer;' }, text: 'Hatch!'"
                     aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
