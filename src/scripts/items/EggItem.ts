@@ -21,7 +21,7 @@ class EggItem extends Item {
         if (this.type === GameConstants.EggItemType.Mystery_egg) {
             success = App.game.breeding.gainRandomEgg();
         } else {
-            const etype = GameConstants.EggType[GameConstants.EggItemType[this.type].split('_')[0]];
+            const etype = EggType[GameConstants.EggItemType[this.type].split('_')[0]];
             success = App.game.breeding.gainEgg(App.game.breeding.createTypedEgg(etype));
         }
 

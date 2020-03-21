@@ -7,14 +7,14 @@ class Egg implements Saveable {
     steps: KnockoutObservable<number>;
     shinySteps: number;
     pokemon: string;
-    type: GameConstants.EggType;
+    type: EggType;
     pokemonType1: PokemonType;
     pokemonType2: PokemonType;
     notified: boolean;
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
 
-    constructor(type = GameConstants.EggType.None, totalSteps = 0, pokemon = '', steps = 0, shinySteps = 0, notified = false) {
+    constructor(type = EggType.None, totalSteps = 0, pokemon = '', steps = 0, shinySteps = 0, notified = false) {
         this.totalSteps = totalSteps;
         this.steps = ko.observable(steps);
         this.shinySteps = shinySteps;
@@ -45,7 +45,7 @@ class Egg implements Saveable {
     }
 
     isNone() {
-        return this.type === GameConstants.EggType.None;
+        return this.type === EggType.None;
     }
 
     addSteps(amount: number) {
@@ -57,7 +57,7 @@ class Egg implements Saveable {
             this.shinySteps += amount;
         }
         if (this.canHatch()) {
-            if (this.type == GameConstants.EggType.Pokemon) {
+            if (this.type == EggType.Pokemon) {
                 Notifier.notify(`${this.pokemon} is ready to hatch!`, GameConstants.NotificationOption.success);
             } else {
                 Notifier.notify('An egg is ready to hatch!', GameConstants.NotificationOption.success);

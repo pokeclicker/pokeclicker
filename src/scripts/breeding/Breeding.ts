@@ -20,27 +20,27 @@ class Breeding implements Feature {
     }
 
     initialize(): void {
-        this.hatchList[GameConstants.EggType.Fire] = [
+        this.hatchList[EggType.Fire] = [
             ['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'],
             ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
         ];
-        this.hatchList[GameConstants.EggType.Water] = [
+        this.hatchList[EggType.Water] = [
             ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
             ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
         ];
-        this.hatchList[GameConstants.EggType.Grass] = [
+        this.hatchList[EggType.Grass] = [
             ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
             ['Chikorita', 'Hoppip', 'Sunkern'],
         ];
-        this.hatchList[GameConstants.EggType.Fighting] = [
+        this.hatchList[EggType.Fighting] = [
             ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
             ['Tyrogue'],
         ];
-        this.hatchList[GameConstants.EggType.Electric] = [
+        this.hatchList[EggType.Electric] = [
             ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
             ['Chinchou', 'Mareep', 'Elekid'],
         ];
-        this.hatchList[GameConstants.EggType.Dragon] = [
+        this.hatchList[EggType.Dragon] = [
             ['Dratini', 'Dragonair', 'Dragonite'],
             [],
         ];
@@ -108,7 +108,7 @@ class Breeding implements Feature {
                 return true;
             }
         }
-        console.error(`Error: Could not place ${GameConstants.EggType[e.type]} Egg`);
+        console.error(`Error: Could not place ${EggType[e.type]} Egg`);
         return false;
     }
 
@@ -141,12 +141,12 @@ class Breeding implements Feature {
         this._eggList[index](new Egg());
     }
 
-    public createEgg(pokemonName: string, type = GameConstants.EggType.Pokemon): Egg {
+    public createEgg(pokemonName: string, type = EggType.Pokemon): Egg {
         const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
         return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonName);
     }
 
-    public createTypedEgg(type: GameConstants.EggType): Egg {
+    public createTypedEgg(type: EggType): Egg {
         const hatchList = this.hatchList[type];
         const hatchable = hatchList.slice(0, player.highestRegion() + 1);
         let possibleHatches = [];
@@ -167,13 +167,13 @@ class Breeding implements Feature {
     public createRandomEgg(): Egg {
         const type = Math.floor(Math.random() * (Object.keys(this.hatchList).length - 1));
         const egg = this.createTypedEgg(type);
-        egg.type = GameConstants.EggType.Mystery;
+        egg.type = EggType.Mystery;
         return egg;
     }
 
     public createFossilEgg(fossil: string): Egg {
         const pokemonName = GameConstants.FossilToPokemon[fossil];
-        return this.createEgg(pokemonName, GameConstants.EggType.Fossil);
+        return this.createEgg(pokemonName, EggType.Fossil);
     }
 
     public getSteps(eggCycles: number) {

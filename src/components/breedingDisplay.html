@@ -23,10 +23,10 @@
             </div>
             <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 30px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
-                <!-- ko if: $data.type == GameConstants.EggType.Fossil -->
+                <!-- ko if: $data.type == EggType.Fossil -->
                 <img data-bind='attr: {src: BreedingController.getEggImage($data)}'/>
                 <!-- /ko -->
-                <!-- ko ifnot: $data.type == GameConstants.EggType.Fossil -->
+                <!-- ko ifnot: $data.type == EggType.Fossil -->
                 <div data-bind="template: { name: 'eggSVGTemplate', data: $data}"></div>
                 <!-- /ko -->
 
