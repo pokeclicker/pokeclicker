@@ -23,6 +23,7 @@
             </div>
             <!-- ko if: $data !== null -->
             <div style="margin-top: 30px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
+                <!-- ko if: $data.type == GameConstants.EggType.Fossil -->
                 <img data-bind='attr: {src: BreedingController.getEggImage($data)}'/>
                 <!-- /ko -->
                 <!-- ko ifnot: $data.type == GameConstants.EggType.Fossil -->
