@@ -1,5 +1,3 @@
-
-
 .breedingListItem {
   text-align: left;
   margin-bottom: 3px;
@@ -36,4 +34,67 @@
 
 #eggList {
   background-color: #aaa;
+}
+
+@eggMainColors:
+  "Bug" #9df68e,
+  "Dark" #3d3d3d,
+  "Dragon" #ff0006,
+  "Electric" #ffe600,
+  "Fairy" #f36ec2,
+  "Fighting" #fbbd47,
+  "Fire" #d94c32,
+  "Flying" #a0c7e8,
+  "Ghost" #dbdbdb,
+  "Grass" #a1f173,
+  "Ground" #ad5840,
+  "Ice" #00aaff,
+  "Normal" #e8e0a0,
+  "Poison" #c183c1,
+  "Psychic" #fa92b2,
+  "Rock" #d2c8ac,
+  "Steel" #b5b4b1,
+  "Water" #379eff;
+
+@eggAccentColors:
+  "Bug" #5ab690,
+  "Dark" #040404,
+  "Dragon" #000000,
+  "Electric" #ccbb00,
+  "Fairy" #a1382b,
+  "Fighting" #b94a00,
+  "Fire" #fafb00,
+  "Flying" #6896c6,
+  "Ghost" #7c7c7c,
+  "Grass" #2f9f59,
+  "Ground" #763900,
+  "Ice" #00ffbe,
+  "Normal" #689050,
+  "Poison" #682a68,
+  "Psychic" #a13959,
+  "Rock" #6d6d6d,
+  "Steel" #7088b5,
+  "Water" #445e9c;
+
+@import "for";
+
+.egg {
+  .for(@eggMainColors); .-each(@value) {
+    @type: extract(@value, 1);
+    @color: extract(@value, 2);
+    &[data-type1='@{type}'] .egg-outline {
+      fill: @color;
+    }
+  }
+}
+
+// if this isn't in a separate .egg {}, it will overwrite the one above
+.egg {
+  .for(@eggAccentColors); .-each(@value) {
+    @type: extract(@value, 1);
+    @color: extract(@value, 2);
+    &[data-type2='@{type}'] .egg-spot {
+      fill: @color;
+    }
+  }
 }
