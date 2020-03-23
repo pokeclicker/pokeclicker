@@ -84,6 +84,7 @@ class Game {
         this.keyItems.initialize();
         this.oakItems.initialize();
         this.farming.initialize();
+        this.load();
 
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();

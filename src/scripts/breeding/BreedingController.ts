@@ -9,7 +9,7 @@ class BreedingController {
     }
 
     public static getEggImage(egg: Egg): string {
-        let eggType = GameConstants.EggType[egg.type].toLowerCase();
+        let eggType = EggType[egg.type].toLowerCase();
         if (eggType == 'pokemon') {
             const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(egg.pokemon);
             eggType = String(PokemonType[dataPokemon.type1]).toLowerCase();
