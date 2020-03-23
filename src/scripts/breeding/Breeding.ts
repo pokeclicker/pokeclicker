@@ -5,7 +5,7 @@ class Breeding implements Feature {
     saveKey = 'breeding';
 
     defaults = {
-        'eggList': [ko.observable(null), ko.observable(null), ko.observable(null), ko.observable(null)],
+        'eggList': [ko.observable(new Egg()), ko.observable(new Egg()), ko.observable(new Egg()), ko.observable(new Egg())],
         'eggSlots': 1,
     };
 
