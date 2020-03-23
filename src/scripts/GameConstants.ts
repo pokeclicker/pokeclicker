@@ -466,18 +466,6 @@ namespace GameConstants {
         'Mystery_egg',
     }
 
-    export enum EggType {
-        Fire,
-        Water,
-        Grass,
-        Fighting,
-        Electric,
-        Dragon,
-        Pokemon,
-        Mystery,
-        Fossil
-    }
-
     export const EnergyRestoreEffect = {
         SmallRestore: 0.1,
         MediumRestore: 0.2,
