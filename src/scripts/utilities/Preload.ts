@@ -63,6 +63,9 @@ class Preload {
                 const loader = $('#loader');
                 loader.css('background', 'url(assets/images/background.png) top');
                 loader.css('background-size', 'cover');
+                loader.css('overflow-x', 'hidden');
+                loader.css('background-color', '#7dad71');
+                loader.css('background-repeat', 'repeat-x');
                 resolve();
             };
             img.src = 'assets/images/background.png';
@@ -77,6 +80,9 @@ class Preload {
                 const body = $('body');
                 body.css('background', 'url(assets/images/background.png) top');
                 body.css('background-size', 'cover');
+                body.css('overflow-x', 'hidden');
+                body.css('background-color', '#7dad71');
+                body.css('background-repeat', 'repeat-x');
                 resolve();
             };
             img.src = 'assets/images/background.png';
