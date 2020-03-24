@@ -226,8 +226,11 @@ class Breeding implements Feature {
         if (this.eggSlots < 4){
             this.eggSlots += 1;
         }
-    } else {
-        this.eggSlots += 0;
+        } else {
+            this.eggSlots += 0;
+            console.error("eggSlots is larger than 4.");
+        }
+        
     }
 
     get eggList(): Array<KnockoutObservable<Egg>> {
