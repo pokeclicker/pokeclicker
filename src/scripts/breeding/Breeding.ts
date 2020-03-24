@@ -223,11 +223,10 @@ class Breeding implements Feature {
     }
 
     public gainEggSlot() {
-        if (this.eggSlots < 4){
+        if (this.eggSlots <= 3){
             this.eggSlots += 1;
         }
         } else {
-            this.eggSlots += 0;
             console.error("eggSlots is larger than 4.");
         }
         
