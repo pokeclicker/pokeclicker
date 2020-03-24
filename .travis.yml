@@ -6,7 +6,6 @@ cache:
     - node_modules
 install:
 - npm install
-
 script:
 #  Compile, fail on any error
 - tsc
