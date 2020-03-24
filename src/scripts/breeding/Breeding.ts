@@ -226,7 +226,7 @@ class Breeding implements Feature {
         if (this.eggSlots < this.eggList.length){
             this.eggSlots += 1;
         } else {
-            console.error(${eggSlots} `is larger than` ${eggList.length});
+            console.error(`Error : ${eggSlots} is larger than ${eggList.length}.`);
         }        
     }
 
