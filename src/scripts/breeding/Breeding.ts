@@ -279,7 +279,11 @@ class Breeding implements Feature {
     }
 
     public gainEggSlot() {
-        this.eggSlots += 1;
+        if (this.eggSlots < 4){
+            this.eggSlots += 1;
+        }
+    } else {
+        this.eggSlots += 0;
     }
 
     get eggList(): Array<KnockoutObservable<Egg | void>> {
