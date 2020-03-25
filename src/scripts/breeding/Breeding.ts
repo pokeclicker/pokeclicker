@@ -125,7 +125,7 @@ class Breeding implements Feature {
         }
     }
 
-    public gainPokemonEgg(pokemon: PartyPokemon) {
+    public gainPokemonEgg(pokemon: PartyPokemon): void {
         if (!this.hasFreeEggSlot()) {
             Notifier.notify("You don't have any free egg slots", GameConstants.NotificationOption.warning);
             return;
@@ -135,10 +135,20 @@ class Breeding implements Feature {
         this.gainEgg(egg);
     }
 
-    public hatchPokemonEgg(index: number) {
+    public hatchPokemonEgg(index: number): void {
         const egg: Egg = this._eggList[index]();
         egg.hatch();
         this._eggList[index](new Egg());
+        this.moveEggs();
+    }
+
+    public moveEggs(): void {
+        this._eggList.forEach((egg, index) => {
+            if (egg().isNone() && index < this._eggList.length) {
+                egg(this._eggList[index + 1]());
+                this._eggList[index + 1](new Egg());
+            }
+        });
     }
 
     public createEgg(pokemonName: string, type = EggType.Pokemon): Egg {
