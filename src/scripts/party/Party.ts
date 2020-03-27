@@ -139,7 +139,7 @@ class Party implements Feature {
 
     calculateClickAttack(): number {
         // Base power
-        let clickAttack = Math.pow(this.caughtPokemon.length + 1, 1.4);
+        let clickAttack = this.attack / 20;
 
         clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
 
