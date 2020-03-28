@@ -233,11 +233,11 @@ class Breeding implements Feature {
     }
 
     public gainEggSlot() {
-        if (this.eggSlots < this.eggList.length){
+        if (this.eggSlots < this.eggList.length) {
             this.eggSlots += 1;
         } else {
             console.error(`Error : ${this.eggSlots} is larger than ${this.eggList.length}.`);
-        }        
+        }
     }
 
     get eggList(): Array<KnockoutObservable<Egg>> {
