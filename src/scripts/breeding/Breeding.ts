@@ -144,7 +144,7 @@ class Breeding implements Feature {
 
     public moveEggs(): void {
         this._eggList.forEach((egg, index) => {
-            if (egg().isNone() && index < this._eggList.length) {
+            if (egg().isNone() && index < this._eggList.length - 1) {
                 egg(this._eggList[index + 1]());
                 this._eggList[index + 1](new Egg());
             }
