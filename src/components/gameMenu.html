@@ -19,8 +19,9 @@
         <li>
             <a class="dropdown-item" href="#logBookModal" data-toggle="modal">Log Book</a>
         </li>
-        <li>
-            <a class="dropdown-item" href="#" data-bind="click:function(){App.game.shards.openShardModal()}">Shards</a>
+        <li data-bind="attr: {  title: App.game.shards.canAccess() ? '' : 'Progress further to unlock...'}">
+            <a class="dropdown-item" href="#" data-bind="click:function(){App.game.shards.openShardModal()},
+            attr: {class: App.game.shards.canAccess() ? 'dropdown-item' : 'dropdown-item disabled'}">Shards</a>
         </li>
         <li>
             <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Items</a>
@@ -41,7 +42,9 @@
             <a class="dropdown-item" href="https://discordapp.com/invite/rHF3V54" target="_blank">Discord</a>
         </li>
         <li>
-            <a class="dropdown-item" href="https://gitreports.com/issue/pokeclicker/pokeclicker?name=Anonymous&issue_title=[BUG%20REPORT]%20" target="_blank">Report a bug</a>
+            <a class="dropdown-item"
+               href="https://gitreports.com/issue/pokeclicker/pokeclicker?name=Anonymous&issue_title=[BUG%20REPORT]%20"
+               target="_blank">Report a bug</a>
         </li>
 
     </ul>
