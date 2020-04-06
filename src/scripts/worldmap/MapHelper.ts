@@ -28,6 +28,10 @@ class MapHelper {
         } else {
             let reqsList = '';
 
+            if (!MapHelper.routeExist(route, region)) {
+                reqsList += `<br>Route ${route} does not exist in the ${GameConstants.Region[region]} region.`;
+            }
+
             if (!MapHelper.hasBadgeReq(route, region)) {
                 const badgeNumber = GameConstants.routeBadgeRequirements[region][route];
                 reqsList += `<br>Requires the ${BadgeCase.Badge[badgeNumber]} badge.`;
@@ -63,6 +67,10 @@ class MapHelper {
         }
     };
 
+    public static routeExist(route, region) {
+        return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];
+    }
+
     private static hasBadgeReq(route, region) {
         return App.game.badgeCase.hasBadge(GameConstants.routeBadgeRequirements[region][route]);
     }
@@ -87,7 +95,7 @@ class MapHelper {
     }
 
     public static accessToRoute = function (route: number, region: GameConstants.Region) {
-        return MapHelper.hasBadgeReq(route, region) && MapHelper.hasDungeonReq(route, region) && MapHelper.hasRouteKillReq(route, region);
+        return this.routeExist(route, region) && this.hasBadgeReq(route, region) && this.hasDungeonReq(route, region) && this.hasRouteKillReq(route, region);
     };
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
