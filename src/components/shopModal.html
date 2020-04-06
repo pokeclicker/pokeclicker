@@ -4,18 +4,18 @@
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h4 data-bind="text: player.town().name() + ' Shop'">Shop</h4>
-                <h4 style="display: inline;">
+                <h4>
                     <img title="Money" src="assets/images/currency/money.png">
                     <span id="playerMoney"
                           data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US')">0</span>
                 </h4>
-                <h4 style="display: inline;">
+                <h4>
                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon"
                          src="assets/images/currency/dungeonToken.png">
                     <span id="playerMoneyDungeon"
                           data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US')">0</span>
                 </h4>
-                <h4 style="display: inline;">
+                <h4>
                     <img title="Quest points" src="assets/images/currency/questPoint.png">
                     <span id="playerMoneyQuest"
                           data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US')">0</span>
