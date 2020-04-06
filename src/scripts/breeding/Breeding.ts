@@ -233,6 +233,10 @@ class Breeding implements Feature {
     }
 
     public gainEggSlot() {
+        if (this.eggSlots === this.eggList.length) {
+            console.error('Cannot gain another eggslot.');
+            return;
+        }
         this.eggSlots += 1;
     }
 
