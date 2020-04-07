@@ -20,12 +20,16 @@ class GameController {
 
     static animateCurrency(amount: number, target) {
         let pos;
-        if ($(`#${target}`).offset()) {
+        const targetVisible = $(`#${target}`).is(':visible');
+        
+        if ($(`#${target}`).offset() && targetVisible) {
             pos = $(`#${target}`).offset();
             pos.top -= 15;
         } else {
-            pos = {'top': -200, 'left': 0};
-        }
+            pos = $('#gameTitle').offset();
+            pos.top += 45;
+            pos.left -= 100;
+        };
 
         const left = ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
         const place = amount.toString().length;
