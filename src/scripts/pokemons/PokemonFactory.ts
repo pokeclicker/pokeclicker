@@ -50,6 +50,21 @@ class PokemonFactory {
             case GameConstants.Region.hoenn:
                 route -= 54;
                 break;
+            case GameConstants.Region.sinnoh:
+                route -= 129;
+                break;
+            case GameConstants.Region.unova:
+                route += 111;
+                break;
+            case GameConstants.Region.kalos:
+                route += 124;
+                break;
+            case GameConstants.Region.alola:
+                route += 148;
+                break;
+            case GameConstants.Region.galar:
+                route += 165;
+                break;
         }
         return Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15)), 20) || 20;
     }
