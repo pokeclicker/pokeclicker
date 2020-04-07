@@ -15,6 +15,7 @@
 }
 
 .eggSlot {
+  height:120px;
   display: inline-block;
   background-image: url('../assets/images/breeding/breedingSlot.png');
   background-repeat: no-repeat;
@@ -29,6 +30,40 @@
       width: 80%;
     }
   }
+  .purchaseEggSlot{
+    p{
+      margin:0;
+      margin-top:5px;
+    }
+  }
+  .lockedEggSlot{
+    img{
+      margin-top:45%;
+    }
+  }
+  .unlockedEggSlot {
+    margin-top:20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .eggSlot{
+    height:200px;
+    .purchaseEggSlot{
+      p{
+        margin:0;
+      }
+      p:first-of-type{
+        padding-top:45px;
+      }
+    }
+  }
+  .eggSlot .lockedEggSlot {
+    img {
+      margin-top:40%;
+    }
+  }
+
 }
 
 #eggList {

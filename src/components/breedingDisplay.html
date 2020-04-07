@@ -10,19 +10,19 @@
     <div id='eggList' class="card-body p-0 show">
       <div class="row m-0" data-bind="foreach: App.game.breeding.eggList">
         <div class="col-6 eggSlot">
-            <div data-bind="if: $index() === App.game.breeding.eggSlots">
-                <p style="margin:2px;">Egg slot</p>
-                <p style="margin:2px;">
+            <div data-bind="if: $index() === App.game.breeding.eggSlots" class="purchaseEggSlot">
+                <p>Egg slot</p>
+                <p>
                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.breeding.nextEggSlotCost().amount, 'currency': GameConstants.Currency.questPoint}}"></span>
                 </p>
                 <button class='btn btn-primary' onclick='App.game.breeding.buyEggSlot()'
                         data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint] <= App.game.breeding.nextEggSlotCost().amount}'>Buy</button>
             </div>
-            <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 30px;">
+            <div data-bind="visible: $index() > App.game.breeding.eggSlots" class="lockedEggSlot">
                 <img src="assets/images/breeding/lock.png">
             </div>
             <!-- ko ifnot: $data.isNone() -->
-            <div style="margin-top: 30px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
+            <div class="clickable unlockedEggSlot" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <!-- ko if: $data.type == EggType.Fossil -->
                 <img data-bind='attr: {src: BreedingController.getEggImage($data)}'/>
                 <!-- /ko -->
