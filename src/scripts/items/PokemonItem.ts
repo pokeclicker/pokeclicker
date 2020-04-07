@@ -15,7 +15,7 @@ class PokemonItem extends Item {
         if (shiny) {
             Notifier.notify(`✨ You obtained a shiny ${pokemonName}! ✨`, GameConstants.NotificationOption.warning);
         }
-        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny);
+        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny, true);
     }
 
     use() {
