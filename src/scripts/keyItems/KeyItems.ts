@@ -31,7 +31,7 @@ class KeyItems implements Feature {
             }),
             new KeyItem(KeyItems.KeyItem.Safari_ticket, 'This ticket grants access to the Safari Zone in Fuchsia City'),
             new KeyItem(KeyItems.KeyItem.Wailmer_pail, 'This is a tool for watering Berries you planted to make them grow more quickly', function () {
-                return MapHelper.accessToRoute(14, 1) && App.game.farming.berryList[0] >= 3;
+                return MapHelper.accessToRoute(14, 0) && App.game.farming.berryList[0] >= 3;
             }),
 
             new KeyItem(KeyItems.KeyItem.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground'),
