@@ -31,7 +31,7 @@ class EffectEngineRunner {
     public static updateFormattedTimeLeft(itemName: string) {
         const times = GameConstants.formatTime(player.effectList[itemName]()).split(':');
         if (+times[0] > 0) {
-            return '60:00+';
+            return player.effectTimer[itemName]('60:00+');
         }
         times.shift();
         player.effectTimer[itemName](times.join(':'));
