@@ -71,6 +71,15 @@ class KeyItems implements Feature {
                 }
             }
         }
+
+        // Gain the item in case the requirements changed.
+        for (const keyItem of this.itemList) {
+            if (!keyItem.isUnlocked && keyItem.unlockReq !== null) {
+                if (keyItem.unlockReq()) {
+                    App.game.keyItems.gainKeyItem(keyItem.name);
+                }
+            }
+        }
     }
 
     toJSON(): object {
