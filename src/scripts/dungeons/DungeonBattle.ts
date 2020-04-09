@@ -9,7 +9,6 @@ class DungeonBattle extends Battle {
             DungeonRunner.fightingBoss(false);
             DungeonRunner.defeatedBoss(true);
         }
-        App.game.wallet.gainMoney(this.enemyPokemon().money);
         App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         this.gainShardsAfterBattle();
         player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
