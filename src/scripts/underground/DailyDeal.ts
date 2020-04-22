@@ -33,6 +33,7 @@ class DailyDeal {
             if (deal.isValid(temp)) {
                 temp.push(deal);
             }
+            i++;
         }
         DailyDeal.list.push(...temp);
     }
