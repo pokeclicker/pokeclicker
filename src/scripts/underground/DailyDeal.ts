@@ -27,9 +27,10 @@ class DailyDeal {
         DailyDeal.list.removeAll();
         const temp = [];
         const maxTries = maxDeals * 10;
-        for (let i = 0; i < maxTries; i++) {
+        let i = 0;
+        while (i < maxTries && temp.length < maxDeals) {
             const deal = new DailyDeal();
-            if (temp.length < maxDeals && deal.isValid(temp)) {
+            if (deal.isValid(temp)) {
                 temp.push(deal);
             }
         }
