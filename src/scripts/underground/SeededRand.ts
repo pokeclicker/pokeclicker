@@ -25,7 +25,7 @@ class SeededRand {
         return arr[SeededRand.intBetween(0, arr.length - 1)];
     }
 
-    public static fromEnum(arr: Array): T {
+    public static fromEnum(arr): number {
         arr = Object.keys(arr).map(Number).filter(item => +item >= 0);
         return this.fromArray(arr);
     }
