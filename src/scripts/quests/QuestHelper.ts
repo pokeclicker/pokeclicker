@@ -83,7 +83,7 @@ class QuestHelper {
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
             case 'HarvestBerriesQuest':
-                const berryType = SeededRand.intBetween(0, GameHelper.enumLength(Berry));
+                const berryType = SeededRand.intBetween(0, GameHelper.enumLength(BerryType));
                 amount = SeededRand.intBetween(30, 300);
                 return new HarvestBerriesQuest(berryType, amount);
         }
