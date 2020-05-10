@@ -26,7 +26,7 @@ class SeededRand {
     }
 
     public static fromEnum(arr): number {
-        arr = Object.keys(arr).map(Number).filter(item => +item >= 0);
+        arr = Object.keys(arr).map(Number).filter(item => item >= 0);
         return this.fromArray(arr);
     }
 }
