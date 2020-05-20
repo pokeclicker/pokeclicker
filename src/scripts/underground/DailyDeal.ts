@@ -26,11 +26,14 @@ class DailyDeal {
         
         DailyDeal.list.removeAll();
         const temp = [];
-        for (let i = 0; i < maxDeals; i++) {
+        const maxTries = maxDeals * 10;
+        let i = 0;
+        while (i < maxTries && temp.length < maxDeals) {
             const deal = new DailyDeal();
             if (deal.isValid(temp)) {
                 temp.push(deal);
             }
+            i++;
         }
         DailyDeal.list.push(...temp);
     }
