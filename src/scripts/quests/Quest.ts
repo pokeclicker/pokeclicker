@@ -80,7 +80,9 @@ abstract class Quest {
             }
         }, this);
 
-        // this computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
+        // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
+        // This will only be a problem if we make it subscribe to a function which lives longer than itself
+        // Since it is only subscribing to observables on `this`, and the function is being kept on `this`, we shouldn't have a problem
         this.isCompleted = ko.computed(function() {
             const completed = this.progress() == 1;
             if (!this.autoComplete && completed && !this.notified) {

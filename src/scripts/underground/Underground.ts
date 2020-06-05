@@ -67,6 +67,7 @@ class Underground {
     }
 
     public static calculateCssClass(i: number, j: number): KnockoutComputed<string> {
+        // disposed via the disposeWhen function passed as an option
         return ko.computed(function () {
             return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
         }, this, {
