@@ -64,7 +64,7 @@ abstract class Quest {
     }
 
     protected createProgressObservables() {
-        this.progress = ko.computed(function() {
+        this.progress = ko.pureComputed(function() {
             if (this.initial() !== null) {
                 return Math.min(1, ( this.questFocus() - this.initial()) / this.amount);
             } else {
@@ -72,13 +72,15 @@ abstract class Quest {
             }
         }, this);
 
-        this.progressText = ko.computed(function() {
+        this.progressText = ko.pureComputed(function() {
             if (this.initial() !== null) {
                 return `${Math.min((this.questFocus() - this.initial()), this.amount)}/${this.amount}`;
             } else {
                 return `0/${this.amount}`;
             }
         }, this);
+
+        // this computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
         this.isCompleted = ko.computed(function() {
             const completed = this.progress() == 1;
             if (!this.autoComplete && completed && !this.notified) {
@@ -103,7 +105,7 @@ abstract class Quest {
     }
 
     inProgress() {
-        return ko.computed(() => {
+        return ko.pureComputed(() => {
             return player.currentQuests().map(x => x.index).includes(this.index) && !this.isCompleted();
         });
     }
