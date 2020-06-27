@@ -47,7 +47,7 @@ class EffectEngineRunner {
 
 
     public static isActive(itemName: string): KnockoutComputed<boolean> {
-        return ko.computed(function () {
+        return ko.pureComputed(function () {
             if (!player) {
                 return false;
             }
