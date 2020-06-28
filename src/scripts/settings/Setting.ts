@@ -43,7 +43,7 @@ class Setting {
     }
 
     isSelected(value: any): KnockoutComputed<boolean> {
-        return ko.computed(function () {
+        return ko.pureComputed(function () {
             return this.observableValue() === value;
         }, this);
     }

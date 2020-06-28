@@ -83,7 +83,7 @@ class QuestHelper {
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
             case 'HarvestBerriesQuest':
-                const berryType = SeededRand.intBetween(0, GameHelper.enumLength(Berry));
+                const berryType = SeededRand.fromEnum(BerryType);
                 amount = SeededRand.intBetween(30, 300);
                 return new HarvestBerriesQuest(berryType, amount);
         }
@@ -198,7 +198,7 @@ class QuestHelper {
     }
 
     public static questSlots(): KnockoutComputed<number> {
-        return ko.computed(function () {
+        return ko.pureComputed(function () {
             // Minimum of 1, Maximum of 4
             return Math.min(4, Math.max(1, player ? Math.floor(player.questLevel / 5) : 1));
         }, this);

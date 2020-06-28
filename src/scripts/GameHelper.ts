@@ -5,10 +5,10 @@ class GameHelper {
     public static counter = 0;
     public static currentTime: KnockoutObservable<Date> = ko.observable(new Date());
     public static tomorrow: Date = GameHelper.getTomorrow();
-    public static msUntilTomorrow: KnockoutComputed<number> = ko.computed(function () {
+    public static msUntilTomorrow: KnockoutComputed<number> = ko.pureComputed(function () {
         return Number(GameHelper.tomorrow) - Number(GameHelper.currentTime());
     });
-    public static formattedTimeUntilTomorrow: KnockoutComputed<string> = ko.computed(function () {
+    public static formattedTimeUntilTomorrow: KnockoutComputed<string> = ko.pureComputed(function () {
         let milliseconds = GameHelper.msUntilTomorrow();
         const hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
         milliseconds -= hours * GameHelper.MS_IN_HOUR;
@@ -16,7 +16,7 @@ class GameHelper {
         return `${hours}:${GameHelper.twoDigitNumber(minutes)}`;
     });
 
-    public static formattedLetterTimeUntilTomorrow: KnockoutComputed<string> = ko.computed(function () {
+    public static formattedLetterTimeUntilTomorrow: KnockoutComputed<string> = ko.pureComputed(function () {
         let milliseconds = GameHelper.msUntilTomorrow();
         const hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
         milliseconds -= hours * GameHelper.MS_IN_HOUR;
