@@ -6,15 +6,15 @@
     <meta charset="utf-8"/>
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
-        <tr data-bind='ifnot: $data.breeding()'>
+        <tr data-bind='ifnot: $data.breeding'>
             <td class="text-nowrap">
                 <img class="smallImage"
-                     data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
+                     data-bind="attr:{ src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"
                      src=""/>
-                <span data-bind="text: name">Name</span><sup data-bind="visible: player.alreadyCaughtPokemonShiny(name)">✨</sup>
+                <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
             </td>
             <td data-bind="text: attack">Atk</td>
-            <td data-bind="text: levelObservable">Lvl</td>
+            <td data-bind="text: level">Lvl</td>
         </tr>
     </script>
 
@@ -166,7 +166,11 @@
             <a class="dropdown-item" href="#achievementsModal" data-toggle="modal">Achievements</a>
         </li>
         <li>
-            <a class="dropdown-item" href="#shardModal" data-toggle="modal">Shards</a>
+            <a class="dropdown-item" href="#logBookModal" data-toggle="modal">Log Book</a>
+        </li>
+        <li data-bind="attr: {  title: App.game.shards.canAccess() ? '' : 'Progress further to unlock...'}">
+            <a class="dropdown-item" href="#" data-bind="click:function(){App.game.shards.openShardModal()},
+            attr: {class: App.game.shards.canAccess() ? 'dropdown-item' : 'dropdown-item disabled all-pointers'}">Shards</a>
         </li>
         <li>
             <a class="dropdown-item" href="#showItemsModal" data-toggle="modal">Items</a>
@@ -187,7 +191,9 @@
             <a class="dropdown-item" href="https://discordapp.com/invite/rHF3V54" target="_blank">Discord</a>
         </li>
         <li>
-            <a class="dropdown-item" href="https://gitreports.com/issue/Ishadijcks/pokeclicker" target="_blank">Report a bug</a>
+            <a class="dropdown-item"
+               href="https://gitreports.com/issue/pokeclicker/pokeclicker?name=Anonymous&issue_title=[BUG%20REPORT]%20"
+               target="_blank">Report a bug</a>
         </li>
 
     </ul>
@@ -196,31 +202,31 @@
 
 <!-- Get Keyitem modal-->
 <div class="modal" id="keyItemModal" tabindex="-1" role="dialog"
-aria-labelledby="keyItemModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content" style="text-align: center">
-       <div class="modal-header">
-           <div style="width: 100%;">
-               <img src="assets/images/oak.png">
-               <h5 class="modal-title" id="keyItemModalLabel">New key item!</h5>
-           </div>
-       </div>
-       <div class="modal-body">
-           <h5><b>Congratulations!</b></h5>
-           <span>You have gained a</span><br>
-           <img
-                   class="key-item"
-                   data-bind="attr:{ title: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name(),  src: 'assets/images/keyitems/' + KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name() + '.png'}"
-                   src=""/><br>
-           <span><strong data-bind="text: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name()">Name</strong></span><br>
-           <span data-bind="html: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).description()">Description</span>
-
-       </div>
-       <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       </div>
-   </div>
-</div>
+     aria-labelledby="keyItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header">
+                <div style="width: 100%;">
+                    <img src="assets/images/oak.png">
+                    <h5 class="modal-title" id="keyItemModalLabel">New key item!</h5>
+                </div>
+            </div>
+            <div class="modal-body">
+                <h5><b>Congratulations!</b></h5>
+                <span>You have gained a</span><br>
+                <img
+                        class="key-item"
+                        data-bind="attr:{ title: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName,  src: 'assets/images/keyitems/' + KeyItems.KeyItem[KeyItemController.latestGainedItem] + '.png'}"
+                        src=""/><br>
+                <span><strong
+                        data-bind="text: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName">Name</strong></span><br>
+                <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem].description">Description</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -242,7 +248,7 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                     <h3 data-bind="text: GameConstants.humanifyString(ItemHandler.stoneSelected())"></h3>
                     <div class="page-item m-0">
                         <div class="row no-gutters justify-content-sm-center" style="padding:15px;">
-                            <div class="row col-lg-6 col-sm-11" data-bind="foreach: Array.from(Array(Object.keys(GameConstants.StoneType).length / 2).keys()).map(x=>GameConstants.StoneType[x])">
+                            <div class="row col-lg-6 col-sm-11" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                 <div class="col" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
@@ -256,21 +262,18 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                         <div class="row no-gutters justify-content-sm-center" style="padding:15px">
                             <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0"
                                  style="padding-right: 0"
-                                 data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(ItemHandler.stoneSelected())">
-                                <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem"
-                                    data-bind="visible: (player.alreadyCaughtPokemon($data.name))">
+                                 data-bind="foreach: PokemonHelper.getPokemonsWithEvolution(GameConstants.StoneType[ItemHandler.stoneSelected()])">
+                                <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem">
                                     <button class="btn btn-secondary smallButton list-group-item-action" style="padding-right:15px"
                                             data-bind="click: function() {ItemHandler.pokemonSelected(name)}, css:{ 'pokemon-selected': ItemHandler.pokemonSelected() === name}">
-                                        <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (player.alreadyCaughtPokemonShiny($data.name) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
+                                        <img class="smallImage" data-bind="attr:{src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data.id, true) ? 'shiny' : '') + 'pokemon/' + id +'.png' }"/>
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
-                                        <span style="float:right; margin-top:8px">
-                                            <img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-small.png"
-                                                data-bind="visible: player.alreadyCaughtPokemon(EvolutionStone.computeEvolution(
-                                                GameConstants.StoneType[ItemHandler.stoneSelected()], name)) && !PokemonHelper.getPokemonByName(name).evolutionByIndex(PokemonHelper.getPokemonByName(name).evoLevel.indexOf(ItemHandler.stoneSelected()), true, true).every(p => player.alreadyCaughtPokemonShiny(p))"/>
-                                            <img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-shiny-small.png"
-                                                data-bind="visible: PokemonHelper.getPokemonByName(name).evolutionByIndex(PokemonHelper.getPokemonByName(name).evoLevel.indexOf(ItemHandler.stoneSelected()), true, true).every(p => player.alreadyCaughtPokemonShiny(p))"/>
-                                        </span>
+                                        <span style="float:right; margin-top:8px" data-bind="template: { name: 'caughtStatusTemplate', data: {'status':
+                                            PartyController.getCaughtStatusByName(
+                                                PokemonHelper.getEvolution($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()])
+                                                )
+                                            }}"></span>
                                     </button>
                                 </div>
                             </div>
@@ -309,50 +312,39 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                 </div>
 
                 <div id="keyItems" class="tab-pane fade in active show">
-                    <div style="width: 100%;">
-                        <img style="float:right;margin-right:10px;margin-top:10px"
-                             data-bind="tooltip: { title: 'An overview of all Key items you have collected so far. Click on a key item to get more information.', trigger: 'hover', placement:'right' }"
-                             src="assets/images/questionmark.png">
-
-
-                    </div>
                     <div class="page-item m-0">
-
                         <div class="row no-gutters justify-content-sm-center"
-                             data-bind="foreach: KeyItemHandler.keyItemList">
+                             data-bind="foreach: App.game.keyItems.itemList">
                             <div class="col-sm-2">
                                 <img class="clickable key-item" src=""
-                                     data-bind="attr:{ src: 'assets/images/keyitems/' + $data.name() + '.png'},
-                              css: {'oak-item-locked': !player.hasKeyItem($data.name())
-
-                                    },
+                                     data-bind="attr:{
+                                     src: 'assets/images/keyitems/' + KeyItems.KeyItem[$data.name] + '.png'},
+                              css: {'key-item-locked': !App.game.keyItems.hasKeyItem($data.name),
+                              'key-item-selected': KeyItemController.inspectedItem == $data.name
+                              },
                              event: {
-                                mouseover: function(){KeyItemHandler.hover($data.name())},
-                                click: function(){KeyItemHandler.click($data.name())},
-                                mouseout : function(){KeyItemHandler.hoverRelease()}
+                                mouseover: function(){KeyItemController.hover($data.name)},
+                                mouseout : function(){KeyItemController.hoverRelease()}
                                 }">
                             </div>
                         </div>
 
                         <div class="card oak-item-info" style="height:90px">
-                            <div data-bind="if: KeyItemHandler.inspectedItem() !== null">
-                                <div class="row justify-content-sm-center">
-                                    <div style="height: 20px" class="col-sm-11">
-                                        <b><span data-bind="text: KeyItemHandler.inspectedItem().name()"></span></b>
+                            <div class="row justify-content-sm-center">
+                                <div style="height: 20px" class="col-sm-11">
+                                    <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem].displayName"></span></b>
+                                </div>
+                            </div>
+                            <div class="row justify-content-sm-center">
+                                <div class="col-sm-11">
+                                    <div data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
+                                        <p style="margin-top: 5px"
+                                           data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem].description"></p>
                                     </div>
-                                    <div class="row justify-content-sm-center">
-                                        <div class="col-sm-11">
-                                            <div data-bind="if: KeyItemHandler.inspectedItem().isUnlocked()">
-                                                <p style="margin-top: 5px"
-                                                   data-bind="html: KeyItemHandler.inspectedItem().description"></p>
-                                            </div>
-                                            <div data-bind="ifnot: KeyItemHandler.inspectedItem().isUnlocked()">
-                                                <p style="margin-top: 5px">?????</p>
-                                            </div>
-                                        </div>
+                                    <div data-bind="ifnot: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
+                                        <p style="margin-top: 5px">?????</p>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -387,13 +379,111 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
     </span>
 </script>
 
+<script type="text/html" id="amountTemplate">
+    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></span>
+</script>
+
 <!-- Example usage -->
-<!-- <span data-bind="template: { name: 'currencyTemplate', data: {'amount': FarmRunner.plotPrice(), 'currency': GameConstants.Currency.farmPoint}}"></span> -->
+<!-- <span data-bind="template: { name: 'currencyTemplate', data: {'amount': FarmController.plotPrice(), 'currency': GameConstants.Currency.farmPoint}}"></span> -->
+
+<script type="text/html" id="caughtStatusTemplate">
+    <span style="display: inline;">
+        <!-- ko if: $data.status == CaughtStatus.Caught -->
+        <img title="You have captured this Pokémon!"
+             class="pokeball-smallest"
+             src="assets/images/pokeball/Pokeball-small.png"
+        />
+        <!-- /ko -->
+        <!-- ko if: $data.status == CaughtStatus.CaughtShiny -->
+        <img title="You have captured this Pokémon shiny!"
+             class="pokeball-smallest"
+             src="assets/images/pokeball/Pokeball-shiny-small.png"
+        />
+        <!-- /ko -->
+    </span>
+</script>
+
+<!-- Example usage -->
+<!-- <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(id)}}"></span> -->
+
+<script type="text/html" id="eggSVGTemplate">
+
+<svg class="egg"
+     viewbox="0 0 190 200"
+     xmlns="http://www.w3.org/2000/svg"
+     width="60%"
+     data-bind="attr: {'data-type1': PokemonType[$data.pokemonType1], 'data-type2': PokemonType[$data.pokemonType2]}"
+>
+    <defs>
+
+        <!-- a couple of bezier curves to create an egg shape -->
+        <!-- slight quadratic curve where the two beziers meet, to smooth the corner -->
+        <path id="egg_outline"
+            d="M 8 85
+               c 45,-110 125,-110 174,0
+               q 2,5 3,10
+               c 20,130 -200,130 -180,0
+               q 1,-5 3,-10
+              "
+        />
+
+        <!-- clip path so we only see things that are inside the egg outline -->
+        <clipPath id="mask_entire_egg">
+          <use href="#egg_outline" />
+        </clipPath>
+
+        <!-- light gradient to be applied on top, to give a 3d effect -->
+        <radialGradient id="gradient_highlight">
+          <stop offset="5%" stop-color="white" stop-opacity="0.9"/>
+          <stop offset="30%" stop-color="white" stop-opacity="0.5"/>
+          <stop offset="70%" stop-color="black" stop-opacity="0.2"/>
+        </radialGradient>
+
+    </defs>
+    <g id="eggSVGMainGroup" clip-path="url(#mask_entire_egg)">
+        <!-- outline of egg, filled with main type color -->
+        <use href="#egg_outline" class="egg-outline" />
+
+        <!-- egg spots, filled with secondary type color -->
+        <ellipse class="egg-spot"
+                 rx="20" ry="28"
+                 transform="translate(45,120) rotate(-30,10,15)"
+        />
+
+        <ellipse class="egg-spot"
+                 rx="10" ry="18"
+                 transform="translate(135,150) rotate(45,5,9)"
+        />
+
+        <ellipse class="egg-spot"
+                 rx="12" ry="18"
+                 transform="translate(65,185) rotate(40,6,9)"
+        />
+
+        <ellipse class="egg-spot"
+                 rx="10" ry="14"
+                 transform="translate(100,125) rotate(30,5,7)"
+        />
+
+        <ellipse class="egg-spot"
+                 rx="20" ry="24"
+                 transform="translate(125,75) rotate(45,10,12)"
+        />
+
+        <!-- highlight, used to give 3D effect -->
+        <circle cx="76" cy="40" r="200"
+                fill="url(#gradient_highlight)"
+        />
+    </g>
+</svg>
+
+</script>
 
 
 <div class="container">
     <div class="row justify-content-center">
-        <h1>Pokéclicker</h1>
+        <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
+        <h1 id="gameTitle">Pokéclicker</h1>
     </div>
     <div class="row justify-content-lg-center" style="text-align: center">
 
@@ -409,26 +499,26 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
     </div>
     <button type="button" class="btn btn-info"
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
-            data-bind="tooltip: { title: 'Select which Pokéball to use on caught Pokémon and new Pokémon (including unobtained shiny Pokémon)', trigger: 'hover', placement:'left' }">
+            data-bind="tooltip: { title: 'Select which Pokéball to use on Pokémon depending on their status', trigger: 'hover', placement:'left' }">
         ?
     </button>
     <div id="pokeballSelectorBody" class="card-body p-0 show">
         <table class="table table-sm">
             <thead>
             <tr>
-                <th width="35%">Caught</th>
-                <th width="30%">#</th>
-                <th width="35%">New</th>
+                <th width="20%" title="Previously captured Pokémon will use this ball selection">Caught</th>
+                <th width="20%" title="Previously captured Shiny Pokémon will use this ball selection">✨</th>
+                <th width="20%" title="Amount of balls you have available">#</th>
+                <th width="20%" title="Uncaptured Pokémon will use this ball selection">New</th>
+                <th width="20%" title="Uncaptured Shiny Pokémon will use this ball selection">✨</th>
             </tr>
             </thead>
             <tbody>
-            <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'None', 'amount': '', 'ball': GameConstants.Pokeball.None}}"></tr>
-            <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'Pokeball-small', 'amount': App.game.pokeballs.pokeballs[0], 'ball': GameConstants.Pokeball.Pokeball}}"></tr>
-            <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'Greatball-small', 'amount': App.game.pokeballs.pokeballs[1], 'ball': GameConstants.Pokeball.Greatball}}"></tr>
-            <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'Ultraball-small', 'amount': App.game.pokeballs.pokeballs[2], 'ball': GameConstants.Pokeball.Ultraball}}"></tr>
-            <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'Masterball-small', 'amount': App.game.pokeballs.pokeballs[3], 'ball': GameConstants.Pokeball.Masterball}}"></tr>
-
-
+              <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'None', 'amount': '', 'ball': GameConstants.Pokeball.None}}"></tr>
+              <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'Pokeball-small', 'amount': App.game.pokeballs.pokeballs[0], 'ball': GameConstants.Pokeball.Pokeball}}"></tr>
+              <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'Greatball-small', 'amount': App.game.pokeballs.pokeballs[1], 'ball': GameConstants.Pokeball.Greatball}}"></tr>
+              <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'Ultraball-small', 'amount': App.game.pokeballs.pokeballs[2], 'ball': GameConstants.Pokeball.Ultraball}}"></tr>
+              <tr data-bind="template: { name: 'pokeballSelectionTemplate', data: {'image': 'Masterball-small', 'amount': App.game.pokeballs.pokeballs[3], 'ball': GameConstants.Pokeball.Masterball}}"></tr>
             </tbody>
         </table>
     </div>
@@ -442,12 +532,22 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                  click: function(){App.game.pokeballs.alreadyCaughtSelection = $data.ball}, css: {'pokeball-selected': App.game.pokeballs.alreadyCaughtSelection === $data.ball}"/>
     </td>
     <td>
+        <img class="pokeball-small clickable"
+             data-bind="attr: {src: 'assets/images/pokeball/' + $data.image + '.png'},
+                 click: function(){App.game.pokeballs.alreadyCaughtShinySelection = $data.ball}, css: {'pokeball-selected': App.game.pokeballs.alreadyCaughtShinySelection === $data.ball}"/>
+    </td>
+    <td>
         <span data-bind="text: $data.amount"></span>
     </td>
     <td>
         <img class="pokeball-small clickable"
              data-bind="attr: {src: 'assets/images/pokeball/' + $data.image + '.png'},
                  click: function(){App.game.pokeballs.notCaughtSelection = $data.ball}, css: {'pokeball-selected': App.game.pokeballs.notCaughtSelection === $data.ball}"/>
+    </td>
+    <td>
+        <img class="pokeball-small clickable"
+             data-bind="attr: {src: 'assets/images/pokeball/' + $data.image + '.png'},
+                 click: function(){App.game.pokeballs.notCaughtShinySelection = $data.ball}, css: {'pokeball-selected': App.game.pokeballs.notCaughtShinySelection === $data.ball}"/>
     </td>
 </script>
 
@@ -486,7 +586,11 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
             </td>
           </tr>
           <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
-            <td class="text-light p-0"><code data-bind="text: EffectEngineRunner.formattedTimeLeft($data)()"></code></td>
+            <td class="text-light p-0">
+              <!-- ko if: EffectEngineRunner.getEffect($data) > 0 -->
+                <code data-bind="text: player.effectTimer[$data]()"></code>
+              <!-- /ko -->
+            </td>
           </tr>
         </tbody>
       </table>
@@ -496,43 +600,47 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
 
 
             <!-- Pokemon List container-->
-            
-<div class="card border-secondary mb-3 pokemon-list-container" id="pokemonListContainer"
+            <div class="card border-secondary mb-3 pokemon-list-container" id="pokemonListContainer"
      data-bind="visible: player.starter != GameConstants.Starter.None">
     <div class="card-header p-0" data-toggle="collapse" href="#pokemonListBody">
-      <span>Pokémon List</span>
+        <span>Pokémon List</span>
     </div>
     <div id="pokemonListBody" class="card-body p-0 show">
-        <div class="input-group input-group-sm">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Sort:</span>
-            </div>
-            <select class="form-control" data-bind="options: GameConstants.SortOptions,
-                                                    optionsText: 'text',
-                                                    optionsValue: 'value',
-                                                    value: player._sortOption,
-                                                    optionsCaption: 'Sort By...'" title="">
-            </select>
-            <div class="input-group-append">
-              <label for="reverse_sort" class="input-group-text">
-                <input id="reverse_sort" class="clickable" type='checkbox' data-bind="checked: player._sortDescending" title=""/>&nbsp;Reverse
-              </label>
-            </div>
-       </div>
+        <div data-bind="template: { name: 'PartySortSettingTemplate', data: Settings.getSetting('partySort')}"></div>
+
         <table id="pokemonList" class="table table-striped table-hover table-sm">
             <thead>
+
             <tr>
                 <th>Name</th>
                 <th>Atk</th>
                 <th>Lvl</th>
             </tr>
             </thead>
-            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: player.sortedPokemonList()()}">
+            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: PartyController.getSortedList()() }">
 
             </tbody>
         </table>
     </div>
 </div>
+
+<script type="text/html" id="PartySortSettingTemplate">
+    <div class="row no-gutters" style="align-items: center">
+        <div class="col-sm-2">Sort:</div>
+        <div class="col">
+            <select onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                    data-bind="foreach: $data.options, attr: {name}">
+                <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
+            </select>
+        </div>
+        <div class="col">
+            Reverse
+            <input style="vertical-align: middle" class="clickable" type='checkbox'
+                   data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
+                   onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
+        </div>
+    </div>
+</script>
 
 
         </div>
@@ -551,19 +659,19 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Money" src="assets/images/currency/money.png" height="25px">
-                                    <span id="playerMoney" data-bind="text: player.money.toLocaleString('en-US')">0</span>
+                                    <span id="playerMoney" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon" src="assets/images/currency/dungeonToken.png" height="25px">
-                                    <span id="playerMoneyDungeon" data-bind="text: player.dungeonTokens().toLocaleString('en-US')">0</span>
+                                    <span id="playerMoneyDungeon" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Quest points" src="assets/images/currency/questPoint.png" height="25px">
-                                    <span id="playerMoneyQuest" data-bind="text: player.questPoints.toLocaleString('en-US')">0</span>
+                                    <span id="playerMoneyQuest" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>
@@ -576,7 +684,7 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                      id="routeBattleView">
 
                     <div data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
-                        <div style="height: 220px; display: block;" class="col-lg-12">
+                        <div data-bind="click: function() {Battle.clickAttack()}" style="height: 220px; display: block;" class="col-lg-12 clickable">
                             <div class="col-lg-12" style="display: block;">
                                 Route
                                 <span data-bind="text: player.route">number</span>
@@ -592,32 +700,21 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                                          class="pokeball-smallest"
                                          src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                                 </span>
-                                <!-- ko if: player.routeKillsObservable(player.route())() < player.routeKillsNeeded -->
+                                <!-- ko if: player.statistics.routeKills[player.route()]() < GameConstants.ROUTE_KILLS_NEEDED -->
                                 <br>
-                                <span data-bind="text: player.routeKillsObservable(player.route())() + '/' + player.routeKillsNeeded">0/10</span>
+                                <span data-bind="text: player.statistics.routeKills[player.route()]() + '/' + GameConstants.ROUTE_KILLS_NEEDED">0/10</span>
                                 <br>
                                 <!-- /ko -->
                             </div>
 
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span>
 
-                            <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                            <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
-                                <img title="You have captured this Pokémon!" class="pokeball-smallest"
-                                     src="assets/images/pokeball/Pokeball-small.png"/>
-                            </span>
-
-                            <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                            <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
-                                <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
-                                     src="assets/images/pokeball/Pokeball-shiny-small.png"/>
-                            </span>
+                            <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></span>
 
                             <div>
                                 <div data-bind="ifnot: Battle.catching">
-                                    <img class="clickable" id="enemy"
-                                         data-bind="click: function() {Battle.clickAttack()},
-                                                    attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
+                                    <img id="enemy"
+                                         data-bind="attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
                                          src=""/>
                                     <br>
                                     <span data-bind="text: Battle.enemyPokemon().health">health</span>
@@ -645,7 +742,17 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
 
                     <!--If the player is in a dungeon-->
                     <div data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
-                        <div class="col-lg-12" style="display: block; height: 220px">
+                        <div class="col-lg-12 clickable" style="display: block; height: 220px"
+                            data-bind="click: function() {
+                              if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
+                                DungeonBattle.clickAttack();
+                              } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+                                DungeonRunner.openChest();
+                              } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+                                DungeonRunner.startBossFight();
+                              }
+                            }">
+
                             <div>
                                 <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span>
                                 <!--If all Pokémon on the route are caught-->
@@ -669,25 +776,14 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                                 </div>
                             </div>
 
-                            <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
+                            <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching) -->
+                            <div>
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
-
-                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                                <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
-                                    <img title="You have captured this Pokémon!" class="pokeball-smallest"
-                                         src="assets/images/pokeball/Pokeball-small.png"/>
-                                </span>
-
-                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                                <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
-                                    <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
-                                         src="assets/images/pokeball/Pokeball-shiny-small.png"/>
-                                </span>
-
+                                <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></span>
                                 <div>
                                     <div data-bind="ifnot: DungeonBattle.catching">
                                         <img id="dungeonEnemy"
-                                             data-bind="click: function() {DungeonBattle.clickAttack()}, attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
+                                             data-bind="attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
                                              src=""/>
                                         <br>
                                         <span data-bind="text: DungeonBattle.enemyPokemon().health">health</span>/
@@ -709,18 +805,17 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                                     </div>
                                 </div>
                             </div>
-                            <div data-bind="if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest">
-                                <img data-bind="click: function(){DungeonRunner.openChest()}"
-                                     class="dungeon-chest"
-                                     src="assets/images/dungeons/chest.png"/>
+                            <!-- /ko -->
+                            <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
+                            <div>
+                                <img class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
                             </div>
-
-                            <div data-bind="if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss())">
-                                <button class="btn btn-danger dungeon-boss-button"
-                                        data-bind="click: function(){DungeonRunner.startBossFight()}">Start
-                                    Bossfight
-                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
+                            <div>
+                                <button class="btn btn-danger dungeon-boss-button">Start Bossfight</button>
                             </div>
+                            <!-- /ko -->
                         </div>
                     </div>
 
@@ -753,7 +848,7 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                </button>
                <button class="btn btn-secondary p-0"
                        onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
-                       data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon(), attr: {class: player.town().dungeon() && player.dungeonTokens() >= player.town().dungeon().tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0'}">
+                       data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon(), attr: {class: player.town().dungeon() && App.game.wallet.currencies[GameConstants.Currency.dungeonToken] >= player.town().dungeon().tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0'}">
                    Start<br/>
                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon().tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
                </button>
@@ -780,13 +875,13 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
            <!--Display all available Pokémon in this dungeon-->
            <ul class="list-inline"
                data-bind="foreach: player.town().dungeon().allPokemonNames">
-               <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
+               <li class="list-inline-item" data-bind="if: App.game.party.alreadyCaughtPokemonByName($data)">
                    <img class="dungeon-pokemon-preview" src=""
-                        data-bind="attr:{ src: 'assets/images/' + (player.alreadyCaughtPokemonShiny($data) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png' }"/>
-                   <sup style="float:right; top:10px;" data-bind="visible: player.alreadyCaughtPokemonShiny($data)">✨</sup>
+                        data-bind="attr:{ src: 'assets/images/' + (App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                   <sup style="float:right; top:10px;" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
                </li>
                <li class="list-inline-item"
-                   data-bind="ifnot: player.alreadyCaughtPokemon($data)">
+                   data-bind="ifnot: App.game.party.alreadyCaughtPokemonByName($data)">
                    <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src=""
                         data-bind="attr:{ src: 'assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
                </li>
@@ -818,13 +913,13 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
           </div>
           <span style="display: inline-block; vertical-align:middle; height: 100%;"></span>
         </div>
-        <div class="col-lg-12" style="display: block;">
+        <div class="col-lg-12 clickable" style="display: block;" data-bind="click: function() {GymBattle.clickAttack()}">
             <div class="row">
                 <div class="col-sm-4 offset-sm-4">
                     <span data-bind="text: GymBattle.enemyPokemon().name">Pokemon name</span><br>
-                    <div class="clickable">
+                    <div>
                         <img id="gymEnemy" src=""
-                             data-bind="click: function() {GymBattle.clickAttack()}, attr:{ src: 'assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
+                             data-bind="attr:{ src: 'assets/images/pokemon/' + GymBattle.enemyPokemon().id + '.png' }"/>
                     </div>
                 </div>
                 <div class="col-sm-3" style="display: grid;">
@@ -864,12 +959,12 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
                         <tr>
                             <td width="50%">
                               <span style="display: inline;">Pokémon Attack:
-                                  <span data-bind="text: player.pokemonAttackObservable().toLocaleString('en-US')"></span>
+                                  <span data-bind="text: App.game.party.pokemonAttackObservable()().toLocaleString('en-US')"></span>
                               </span>
                             </td>
                             <td width="50%">
                               <span style="display: inline;">Click Attack:
-                                  <span data-bind="text: player.clickAttackObservable().toLocaleString('en-US')"></span>
+                                  <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                               </span>
                             </td>
                         </tr>
@@ -894,7 +989,7 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
             </div>
             <!-- /ko -->
 
-            <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
+            <div data-bind="if:App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map)">
                 <div data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
@@ -1961,7 +2056,7 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
     stroke="#6c8ebf"
     height="12.6" width="12.6"
     x="345" y="111"
-    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Mystery egg&#39;) }"
+    data-bind="click:function(){BreedingController.openBreedingModal()}, attr: { class: App.game.breeding.canAccess() ? &#39;city unlockedTown&#39; : &#39;city lockedTown&#39; }"
 >
 </rect>
 
@@ -1974,7 +2069,7 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
     stroke="#6c8ebf"
     height="12.6" width="12.6"
     x="292" y="301"
-    data-bind="click:function(){Safari.openModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Safari ticket&#39;) }"
+    data-bind="click:function(){Safari.openModal()}, attr: { class: Safari.canAccess() ? &#39;city unlockedTown&#39; : &#39;city lockedTown&#39; }"
 >
 </rect>
 
@@ -1987,7 +2082,7 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
     stroke="#6c8ebf"
     height="12.6" width="12.6"
     x="380" y="241"
-    data-bind="click:function(){Underground.openUndergroundModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Explorer kit&#39;) }"
+    data-bind="click:function(){Underground.openUndergroundModal()}, attr: { class: Underground.canAccess() ? &#39;city unlockedTown&#39; : &#39;city lockedTown&#39; }"
 >
 </rect>
 
@@ -2000,7 +2095,7 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
     stroke="#6c8ebf"
     height="12.6" width="12.6"
     x="373" y="294"
-    data-bind="click:function(){FarmRunner.openFarmModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Wailmer pail&#39;) }"
+    data-bind="click:function(){FarmController.openFarmModal()}, attr: { class: App.game.farming.canAccess() ? &#39;city unlockedTown&#39; : &#39;city lockedTown&#39; }"
 >
 </rect>
 
@@ -2422,6 +2517,42 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
     </rect>
 
     <text font-size="13px" x="226" y="-445">46</text>
+
+</g>
+
+
+     <!--Route 47-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(47, 1); } ">
+    <rect data-route='47'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(47, 1) }"
+        height="32"
+        width="32"
+        x="0" y="280">
+    </rect>
+
+    <text font-size="13px" x="8" y="300">47</text>
+
+</g>
+
+
+    <!--Route 48-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(48, 1); } ">
+    <rect data-route='48'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(48, 1) }"
+        height="64"
+        width="32"
+        x="0" y="217">
+    </rect>
+
+    <text font-size="13px" x="8" y="250">48</text>
 
 </g>
 
@@ -3750,10 +3881,10 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
          
       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
 </path>
-<path class="city" data-town="Petalburg Town"
+<path class="city" data-town="Petalburg City"
         data-bind="
-        click:function(){MapHelper.moveToTown('Petalburg Town')},
-        attr: { class: MapHelper.calculateTownCssClass('Petalburg Town') },
+        click:function(){MapHelper.moveToTown('Petalburg City')},
+        attr: { class: MapHelper.calculateTownCssClass('Petalburg City') },
         "
 
         d="M 30.8 268.2 
@@ -4030,10 +4161,10 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
          
       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
 </path>
-<path class="city" data-town="Fortree Town"
+<path class="city" data-town="Fortree City"
         data-bind="
-        click:function(){MapHelper.moveToTown('Fortree Town')},
-        attr: { class: MapHelper.calculateTownCssClass('Fortree Town') },
+        click:function(){MapHelper.moveToTown('Fortree City')},
+        attr: { class: MapHelper.calculateTownCssClass('Fortree City') },
         "
 
         d="M 275.8 46.2 
@@ -4470,9 +4601,9 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
     x="615" y="241">
 </rect>
 <rect data-bind="
-    click:function(){MapHelper.moveToTown('Hoenn Victory Road')},
-    attr: { class: MapHelper.calculateTownCssClass('Hoenn Victory Road') }"
-    class="city" data-town="Hoenn Victory Road"
+    click:function(){MapHelper.moveToTown('Victory Road Hoenn')},
+    attr: { class: MapHelper.calculateTownCssClass('Victory Road Hoenn') }"
+    class="city" data-town="Victory Road Hoenn"
     fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
     height="12" stroke="#6c8ebf" width="12" x="616.5" y="242.5">
 </rect>
@@ -4513,32 +4644,32 @@ aria-labelledby="keyItemModalLabel" aria-hidden="true">
 
             <!-- Oak Items -->
             <div class="card border-secondary mb-3" id="oakItemsContainer"
-data-bind="visible: player.starter != GameConstants.Starter.None">
+data-bind="visible: App.game.oakItems.canAccess()">
     <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
         <div>
-            <span style="text-align:center" data-bind="text: 'Oak Items equiped: ' + OakItemRunner.getTotalActiveOakItems() + '/' + player.calculateOakItemSlots()()"></span>
+            <span style="text-align:center" data-bind="text: 'Oak Items equiped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()"></span>
         </div>
         <button type="button" class="btn btn-info" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
             data-bind="tooltip: { title: 'Activate Oak items to gain unique bonuses. When an Oak item has gained enough experience you can level it up with money to boost its effect.', trigger: 'hover', placement:'left' }">?</button>
     </div>
     <div id="oakItemsBody" class="card-body show">
-        <div class="row" data-bind="foreach: OakItemRunner.oakItemList">
-            <div class="col-xs-4 col-sm-4 col-md-3 p-2">
+        <div class="row" data-bind="foreach: App.game.oakItems.itemList">
+            <div class="col-xs-4 col-3 col-md-3 p-2">
                 <button class="p-0 btn"
                     data-bind="css: {
-                       'btn-primary': OakItemRunner.isActive(id),
-                       'btn-outline-secondary': !OakItemRunner.isActive(id)
+                       'btn-primary': $data.isActive,
+                       'btn-outline-secondary': !$data.isActive
                      }">
                     <img class="clickable" src=""
-                         data-bind="attr:{ src: 'assets/images/oakitems/' + GameConstants.humanifyString(GameConstants.OakItem[$data.id]) + '.png'},
+                         data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
                           css: {
-                            'oak-item-locked': !OakItemRunner.isUnlocked($data.id),
-                            'flash': OakItemRunner.canUpgradeExp($data.id)
+                            'oak-item-locked': !App.game.oakItems.isUnlocked($data.name),
+                            'flash': $data.hasEnoughExp()
                           },
                           event: {
-                            mouseover: function(){OakItemRunner.hover($data.id)},
-                            click: function(){OakItemRunner.click($data.id)},
-                            mouseout : function(){OakItemRunner.hoverRelease()}
+                            mouseover: function(){OakItemController.hover($data.name)},
+                            click: function(){OakItemController.click($data.name)},
+                            mouseout : function(){OakItemController.hoverRelease()}
                           }">
                   </button>
             </div>
@@ -4546,54 +4677,65 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
         <hr/>
         <div class="oak-item-info">
             <div class="text-center">
-                <strong><h5 data-bind="text: GameConstants.humanifyString(GameConstants.OakItem[OakItemRunner.inspectedItem().id])"></h5></strong>
+                <strong><h5 data-bind="text: GameConstants.humanifyString(OakItems.OakItem[OakItemController.inspectedItem])"></h5></strong>
             </div>
 
-            <!-- ko if: OakItemRunner.inspectedItem().isUnlocked() -->
+            <!-- ko if: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
             <div class="text-center">
-                <p data-bind="text: OakItemRunner.inspectedItem().description"></p>
+                <p data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].description"></p>
             </div>
             <div class="row justify-content-sm-center">
                 <div class="col-sm-11 col-md-8">
-                    <div class="progress" style="margin-top: 12px"
-                         data-bind="value: 'exp'">
+                    <div class="progress"
+                         data-bind="value: '$data.normalizedExp'">
                         <div class="progress-bar bg-success" role="progressbar"
                              data-bind="
                                attr:{
-                                 style: 'width:' + (OakItemRunner.inspectedItem().isMaxLevel() ? 100 : OakItemRunner.inspectedItem().expPercentage()) + '%'
+                                 style: 'width:' + (App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() ? 100 : App.game.oakItems.itemList[OakItemController.inspectedItem].expPercentage) + '%'
                                },
                                css: {
-                                 'bg-success': !OakItemRunner.inspectedItem().isMaxLevel(),
-                                 'bg-primary': OakItemRunner.inspectedItem().isMaxLevel(),
+                                 'bg-success': !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
+                                 'bg-primary': App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
                                }"
                              aria-valuemin="0" aria-valuemax="100">
-                            <span data-bind="hidden: OakItemRunner.inspectedItem().canUpgradeExp() || OakItemRunner.inspectedItem().isMaxLevel(), html: OakItemRunner.inspectedItem().expProgress()"></span>
-                            <div data-bind="if:OakItemRunner.inspectedItem().canUpgradeExp() || OakItemRunner.inspectedItem().isMaxLevel(),
-                                        disable: !OakItemRunner.inspectedItem().canUpgrade()">
+                            <span data-bind="hidden: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(), html: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString"></span>
+                            <div data-bind="if:App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
+                                        disable: !App.game.oakItems.itemList[OakItemController.inspectedItem].canBuy()">
+                                <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
+                                <div class="btn-default">Max level!</div>
+                                <!-- /ko -->
+
+                                <!-- ko ifnot: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
                                 <div class="btn-default"
                                      data-bind="
                                       click: function(){
-                                        OakItemRunner.inspectedItem().upgrade();
+                                        App.game.oakItems.itemList[OakItemController.inspectedItem].buy();
                                       },
-                                      text: OakItemRunner.inspectedItem().isMaxLevel() ? 'Max Level!' : 'Upgrade'">
+                                        html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/money.png height=14px/>)'">
                                     Upgrade!
                                 </div>
+                                    <!-- /ko -->
                             </div>
                         </div>
 
                     </div>
                 </div>
                 <div class="col-6">
-                    Lvl. <span data-bind="text: OakItemRunner.inspectedItem().level()"></span>
+                    Lvl. <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
                 </div>
                 <div class="col-6">
-                    Bonus: <span data-bind="text: OakItemRunner.inspectedItem().calculateBonus()"></span>%
+                    <!-- ko if: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
+                    Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>%
+                    <!-- /ko -->
+                    <!-- ko ifnot: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
+                    Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>x
+                    <!-- /ko -->
                 </div>
             </div>
             <!-- /ko -->
-            <!-- ko ifnot: OakItemRunner.inspectedItem().isUnlocked() -->
+            <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
             <div style="min-height:80px; vertical-align: center">
-                Capture <span data-bind="text: OakItemRunner.inspectedItem().unlockReq - player.caughtPokemonList.length"></span> more unique Pokémon to
+                Capture <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].unlockReq - App.game.party.caughtPokemon.length"></span> more unique Pokémon to
                 unlock!
             </div>
             <!-- /ko -->
@@ -4693,25 +4835,35 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.breeding.nextEggSlotCost().amount, 'currency': GameConstants.Currency.questPoint}}"></span>
                 </p>
                 <button class='btn btn-primary' onclick='App.game.breeding.buyEggSlot()'
-                        data-bind='css: {disabled: player.questPoints <= App.game.breeding.nextEggSlotCost().amount}'>Buy</button>
+                        data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint] <= App.game.breeding.nextEggSlotCost().amount}'>Buy</button>
             </div>
             <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 30px;">
                 <img src="assets/images/breeding/lock.png">
             </div>
-            <!-- ko if: $data !== null -->
-            <div style="margin-top: 30px;">
+            <!-- ko ifnot: $data.isNone() -->
+            <div style="margin-top: 30px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
+                <!-- ko if: $data.type == EggType.Fossil -->
                 <img data-bind='attr: {src: BreedingController.getEggImage($data)}'/>
+                <!-- /ko -->
+                <!-- ko ifnot: $data.type == EggType.Fossil -->
+                <div data-bind="template: { name: 'eggSVGTemplate', data: $data}"></div>
+                <!-- /ko -->
 
                 <div class="progress" data-bind='visible: progress() < 100'>
                     <div class="progress-bar bg-success" role="progressbar"
                          data-bind="attr:{ style: 'width:' + $data.progress() + '%' }"
                          aria-valuemin="0" aria-valuemax="100">
-					 <span data-bind="text: Math.floor($data.progress()) + '%'"></span>
+                        <!-- ko if: Settings.getSetting('breedingDisplay').observableValue() == 'stepCount' -->
+                        <span data-bind="text: $data.progressText()"></span>
+                        <!-- /ko -->
+                        <!-- ko if: Settings.getSetting('breedingDisplay').observableValue() == 'percentage' -->
+                        <span data-bind="text: Math.floor($data.progress()) + '%'"></span>
+                        <!-- /ko -->
                     </div>
                 </div>
                 <div class="progress" data-bind='visible: progress() >= 100'>
                     <div class="progress-bar bg-success" role="progressbar"
-                    data-bind="attr:{ style: 'width: 100%; cursor: pointer;' }, click: function(){App.game.breeding.hatchPokemonEgg($index())}, text: 'Hatch!'"
+                    data-bind="attr:{ style: 'width: 100%; cursor: pointer;' }, text: 'Hatch!'"
                     aria-valuemin="0" aria-valuemax="100">
                     </div>
                 </div>
@@ -4735,6 +4887,22 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h4 data-bind="text: player.town().name() + ' Shop'">Shop</h4>
+                <h4>
+                    <img title="Money" src="assets/images/currency/money.png">
+                    <span id="playerMoney"
+                          data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US')">0</span>
+                </h4>
+                <h4>
+                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon"
+                         src="assets/images/currency/dungeonToken.png">
+                    <span id="playerMoneyDungeon"
+                          data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US')">0</span>
+                </h4>
+                <h4>
+                    <img title="Quest points" src="assets/images/currency/questPoint.png">
+                    <span id="playerMoneyQuest"
+                          data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US')">0</span>
+                </h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
@@ -4744,8 +4912,8 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
                            data-bind="click: function() {ShopHandler.setSelected($index())},
                            css: { active: ShopHandler.selected() == $index() },
                            attr: { disabled: !$data.isAvailable() }">
-                           <span style="position: absolute; top: 15px; right: 20px;" data-bind="if: $data instanceof PokemonItem && player.alreadyCaughtPokemon(name())">
-                               <img class="pokeball-smallest" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${player.alreadyCaughtPokemonShiny(name()) ? '-shiny' : ''}-small.png`}"/>
+                           <span style="position: absolute; top: 15px; right: 20px;" data-bind="if: $data instanceof PokemonItem && App.game.party.alreadyCaughtPokemonByName(name())">
+                               <img class="pokeball-smallest" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemonByName(name(), true) ? '-shiny' : ''}-small.png`}"/>
                            </span>
                            <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/\W/g, '_') + '.png' }">
                            <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
@@ -4803,7 +4971,7 @@ data-bind="visible: player.starter != GameConstants.Starter.None">
 
 
 <!-- Receive gym badge Modal -->
-<div class="modal fade" id="receiveBadgeModal" tabindex="-1" role="dialog"
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="receiveBadgeModal" tabindex="-1" role="dialog"
 aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
    <div class="modal-content">
@@ -4818,19 +4986,19 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
        </div>
        <div class="modal-body">
            <p data-bind="text: GymRunner.gymObservable().defeatMessage"></p>
-           <!-- ko if: !GameConstants.Badge[GymRunner.gymObservable().badgeReward].startsWith('Elite') -->
-           <img src="" width="56px" data-bind="attr:{ src: 'assets/images/badges/' + GameConstants.Badge[GymRunner.gymObservable().badgeReward] + '.png'}">
+           <!-- ko if: !BadgeCase.Badge[GymRunner.gymObservable().badgeReward].startsWith('Elite') -->
+           <img src="" width="56px" data-bind="attr:{ src: 'assets/images/badges/' + BadgeCase.Badge[GymRunner.gymObservable().badgeReward] + '.png'}">
            <!-- /ko -->
 
        </div>
-       <div data-bind="if: !(GymRunner.gymObservable() instanceof Champion)">
+       <div data-bind="ifnot: GymRunner.gymObservable() instanceof Champion">
            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
            </div>
        </div>
        <div data-bind="if: GymRunner.gymObservable() instanceof Champion">
            <div class="modal-footer">
-               <button type="button" class="btn btn-secondary" data-dismiss="modal"
+               <button type="button" class="btn btn-primary" data-dismiss="modal"
                        onclick="$('#hallOfFameModal').modal('show')">
                    Next
                </button>
@@ -4880,6 +5048,37 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 </div>
 </div>
 
+<!-- Log Book Modal-->
+<div class="modal noselect fade" id="logBookModal" tabindex="-1" role="dialog" aria-labelledby="logBookModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <span>Log Book</span>
+            </div>
+            <div class="modal-body p-0">
+                <table class="table table-striped table-hover table-bordered table-sm">
+                    <thead>
+                      <tr>
+                        <th>Type</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody data-bind="foreach: App.game.logbook.logs">
+                      <tr>
+                        <td class="tight" data-bind="html:type.label, class: 'table-' + type.display"></td>
+                        <td class="text-left" data-bind="text:description">-</td>
+                        <td class="text-left tight"><code data-bind="text:new Date(date).toLocaleString()">-</code></td>
+                      </tr>
+                    </tbody>
+                </table>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Settings Modal-->
 <div class="modal noselect fade" id="settingsModal" tabindex="-1" role="dialog" aria-labelledby="settingsModalLabel">
     <div class="modal-dialog modal-lg" role="document">
@@ -4897,6 +5096,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                     </thead>
                     <tbody>
                       <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
+                      <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
                     </tbody>
                 </table>
                 <br/>
@@ -4910,7 +5110,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <td data-bind="text: $data.displayName" >Settings</td>
     <td>
         <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
-            <option data-bind="text: $data.text, value: $data.value, attr:{ selected: Settings.getSetting('theme').observableValue() == $data.value}"></option>
+            <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
         </select>
     </td>
 </script>
@@ -5031,7 +5231,7 @@ aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
                    <img
                            title="A television set that is tuned to a program with useful tips for novice TRAINERS"
                            class="key-item"
-                           src="assets/images/keyitems/Teachy%20tv.png"/>
+                           src="assets/images/keyitems/Teachy_tv.png"/>
                    <br>
                    <p>Teachy tv</p>
                </div>
@@ -5039,7 +5239,7 @@ aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
                    <img
                            title="A case for holding money. It can hold up to 1,000,000 coins"
                            class="key-item"
-                           src="assets/images/keyitems/Coin%20case.png"/>
+                           src="assets/images/keyitems/Coin_case.png"/>
                    <br>
                    <p>Coin case</p>
                </div>
@@ -5047,7 +5247,7 @@ aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
                    <img
                            title="A tiny bag that can hold up to 4 different types of PokéBalls"
                            class="key-item"
-                           src="assets/images/keyitems/Pokeball%20bag.png"/>
+                           src="assets/images/keyitems/Pokeball_bag.png"/>
                    <br>
                    <p>PokéBall bag</p>
                </div>
@@ -5064,35 +5264,33 @@ aria-labelledby="starterCaughtModalLabel" aria-hidden="true">
 
 
 <!-- Hall of Fame Modal -->
-<div class="modal fade" id="hallOfFameModal" tabindex="-1" role="dialog"
+<div class="modal fade" data-keyboard="false" data-backdrop="static" id="hallOfFameModal" tabindex="-1" role="dialog"
 aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
    <div class="modal-content">
        <div class="modal-header">
            <div style="width: 100%;">
-               <img src=""
-                    data-bind="attr:{ src: 'assets/images/oak.png'}">
+               <img src="assets/images/oak.png">
                <h5 class="modal-title" id="hallOfFameModalLabel">Professor Oak</h5>
-
            </div>
        </div>
        <div class="modal-body">
            <p>
-               So, you won! Congratulations! You're the new Pokémon League champion! You've grown
-               up so
-               much since you first left with <span
-                   data-bind="text: GameConstants.Starter[player.starter]">starter</span>! You have
-               worked
-               hard to become the new League Champion!
+               So, you won! Congratulations!<br/>
+               You are the new Pokémon League champion!<br/>
+               You have grown up so much since you first left with <span data-bind="text: GameConstants.Starter[player.starter]">starter</span>!<br/>
+               <br/>
+               There are many more regions to explore,<br/>
+               In order to move on you will need to capture all available Pokemon from the current region!
            </p>
-
        </div>
        <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
        </div>
    </div>
 </div>
 </div>
+
 
 <!-- Shards Modal -->
 <div aria-labelledby="myModalLabel" class="modal fade" id="shardModal" role="dialog" tabindex="-1">
@@ -5105,22 +5303,22 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                      src="assets/images/questionmark.png">
 
             </div>
-            <div class="modal-body" id="shardBody" data-bind='foreach: player._shardUpgrades'>
+            <div class="modal-body" id="shardBody" data-bind='foreach: Array(Shards.nTypes)'>
                 <h3>
-                    <span data-bind="text: GameConstants.PokemonType[$index()]"></span>
+                    <span data-bind="text: PokemonType[$index()]"></span>
                     <div style="float:right;">
                       <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
-                      <i data-bind="text: player._shardsCollected[$index()]().toLocaleString('en-US')"></i>
+                      <i data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></i>
                     </div>
                 </h3>
-                <table class='table' data-bind='foreach: $data'>
+                <table class='table' data-bind='foreach: Array(Shards.nEffects)'>
                     <tr>
                         <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                         <td width='50%'>
                             <div class="progress"
                                  data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
                                 <div class='progress-bar' role="progressbar"
-                                     data-bind="style: { width: ($data * 10) + '%',
+                                     data-bind="style: { width: (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * 10) + '%',
                                                                'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
                                      aria-valuemin="0" aria-valuemax="100">
                                 </div>
@@ -5129,12 +5327,13 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                                 </div>
                             </div>
                         </td>
-                        <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] + ($data * GameConstants.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
+                        <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] 
+                            + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                         <td>
                             <button class='btn btn-primary'
-                                    data-bind='click: function(){player.buyShardUpgrade($parentContext.$index(), $index())},
-                                        css: {disabled: !player.canBuyShardUpgrade($parentContext.$index(), $index())},
-                                        text: (player.shardUpgradeMaxed($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + player.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
+                                    data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},
+                                        css: {disabled: !App.game.shards.canBuyShardUpgrade($parentContext.$index(), $index())},
+                                        text: (App.game.shards.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
                             </button>
                         </td>
                     </tr>
@@ -5182,23 +5381,23 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                </div>
                <!-- /ko -->
                <!-- Check if the player has any level 100 Pokemon or if they have any eggs -->
-               <p class="text-danger" data-bind="visible: !player.hasMaxLevelPokemon()">
+               <p class="text-danger" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
                    Unfortunately, you don't have any pokémon of level 100
                </p>
-               <!-- ko if: player.hasMaxLevelPokemon() -->
+               <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
                  <p>
                      Pick a pokémon below to breed them:
                  </p>
-                 <div class="row" data-bind="foreach: player.maxLevelPokemonList()">
+                 <div class="row" data-bind="foreach: PartyController.getMaxLevelPokemonList()">
                     <button class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
                     data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)},
                       click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}">
                         <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                         <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
-                            <div data-bind="visible: player.alreadyCaughtPokemonShiny(name)" style="position: absolute;right: 20px;top: 20px;">✨</div>
-                            <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id, $data.name)}">
+                            <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 20px;top: 20px;">✨</div>
+                            <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                             <span class="attack" style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
-                              data-bind="text: $data.attack()">attack</span>
+                              data-bind="text: $data.attack">attack</span>
                         </div>
                     </button>
                  </div>
@@ -5231,7 +5430,7 @@ style="cursor:default" tabindex="-1">
                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#dailyDeals">Daily
                    deals</a></li>
                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
-               <p><span id="diamondCounter" data-bind='text: player._diamonds'>x</span> <img
+               <p><span id="diamondCounter" data-bind='text: App.game.wallet.currencies[GameConstants.Currency.diamond]'>x</span> <img
                        src='assets/images/underground/diamond.svg' width="20px'"></p>
            </ul>
        </div>
@@ -5275,7 +5474,7 @@ style="cursor:default" tabindex="-1">
                                <th></th>
                              </tr>
                            </thead>
-                           <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player._mineInventory()}">
+                           <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player.mineInventory}">
                            </tbody>
                        </table>
                    </div>
@@ -5464,10 +5663,10 @@ aria-labelledby="pokedexModalLabel">
                        <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.id">number</span>
                        <!-- Pokedex name caught status -->
                        <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
-                           <div data-bind="visible: player.alreadyCaughtPokemon(name)" style="position: absolute;right: 2px;top: -15px;">
-                             <img width="18px" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${player.alreadyCaughtPokemonShiny($data.name) ? '-shiny' : ''}-small.png`}"/>
+                           <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
+                             <img width="18px" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}-small.png`}"/>
                            </div>
-                           <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id, $data.name)}">
+                           <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
                        </div>
                        <div data-bind="ifnot: PokedexHelper.pokemonSeen($data.id)">
@@ -5496,11 +5695,11 @@ aria-labelledby="badgeCaseModalLabel">
        </div>
        <div class="modal-body">
            <div class="row no-gutters justify-content-center"
-                data-bind="foreach: Object.keys(GameConstants.Badge).filter(b=>isNaN(b) && !b.startsWith('Elite') && b != 'None')">
+                data-bind="foreach: BadgeCaseController.getDisplayableBadges()">
                <div class="col-sm-3 col-md-3 col-lg-3 badgeEntry">
                    <img src="" width="60px"
                         data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
-                        css: { 'badge-not-acquired': !player.hasBadge(GameConstants.Badge[$data])}">
+                        css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeCase.Badge[$data])}">
 
                    <p style="bottom: 0;"
                       data-bind="text: $data">name</p>
@@ -5519,50 +5718,58 @@ aria-labelledby="badgeCaseModalLabel">
 
 <!-- Save Modal-->
 <div class="modal fade noselect" id="saveModal" tabindex="-1" role="dialog"
-aria-labelledby="saveModalLabel">
-<div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content">
-       <div class="modal-body p-0">
-           <div class="tabbable">
-               <ul class="nav nav-tabs nav-fill">
-                   <li class="nav-item"><a class="nav-link active" href="#saveTab" data-toggle="tab">Save</a></li>
-                   <li class="nav-item"><a class="nav-link" href="#saveConvert" data-toggle="tab">Converter</a></li>
-               </ul>
-               <div class="tab-content">
-                    <div id="saveTab" class="tab-pane fade in active show">
-                       <div class="page-item m-0 pt-3 pb-3">
-                           <button class="btn btn-info" onClick=Save.download()>Download Save</button>
-                           <hr>
+     aria-labelledby="saveModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item"><a class="nav-link active" href="#saveTab" data-toggle="tab">Save</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveConvert" data-toggle="tab">Converter</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="saveTab" class="tab-pane fade in active show">
+                            <div class="page-item m-0 pt-3 pb-3">
+                                <form class="form-inline justify-content-center">
+                                    <input placeholder="Enter code..." id="redeemable-code-input" type="text">
+                                    <button class="btn btn-info" name="name" value="value" type="submit"
+                                            onclick="RedeemableCodeController.enterCode(); return false;">Claim!
+                                    </button>
+                                </form>
+                                <hr>
 
-                           <input type="file" id="input" accept=".txt" style="display:none;"
-                                  onchange=Save.loadFromFile(this.files[0])>
-                           <label for="input" class="btn btn-info">Import Save</label>
-                           <hr>
-                           <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
-                            savefile</h3>
-                           <button class="btn btn-danger" onClick="Save.reset(false)">Reset All</button>
-                           <button class="btn btn-danger" onClick="Save.reset(true)">Reset Keep Shinies</button>
-                       </div>
-                   </div>
+                                <button class="btn btn-info" onClick=Save.download()>Download Save</button>
+                                <hr>
 
-                   <div id="saveConvert" class="tab-pane fade">
-                       <div class="page-item m-0 pt-3 pb-3">
-                           <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
-                           <textarea id="convertTextArea" class="saveTextArea"></textarea>
-                           <button style="float: right;" class="btn btn-success" onclick="Save.convert()">
-                               Convert
-                           </button>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
+                                <input type="file" id="input" accept=".txt" style="display:none;"
+                                       onchange=Save.loadFromFile(this.files[0])>
+                                <label for="input" class="btn btn-info">Import Save</label>
+                                <hr>
+                                <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
+                                    savefile</h3>
+                                <button class="btn btn-danger" onClick="Save.reset()">Reset All</button>
+                            </div>
+                        </div>
 
-       <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       </div>
-   </div>
-</div>
+                        <div id="saveConvert" class="tab-pane fade">
+                            <div class="page-item m-0 pt-3 pb-3">
+                                <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
+                                <textarea id="convertTextArea" class="saveTextArea"></textarea>
+                                <button style="float: right;" class="btn btn-success" onclick="Save.convert()">
+                                    Convert
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -5588,7 +5795,7 @@ aria-labelledby="saveModalLabel">
                     </div>
                 </div>
                 <div class="col-3">
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player._questPoints(), 'currency': GameConstants.Currency.questPoint}}"></span>
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.questPoint], 'currency': GameConstants.Currency.questPoint}}"></span>
                 </div>
 
             </div>
@@ -5623,7 +5830,7 @@ aria-labelledby="saveModalLabel">
                                         Claim
                                     </button>
                                     <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>
-                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</span>
+                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -5639,7 +5846,7 @@ aria-labelledby="saveModalLabel">
                     <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()'
                             data-bind='text: "Refresh",
                                        enable: QuestHelper.canAffordRefresh()'></button>
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': QuestHelper.getRefreshCost(), 'currency': GameConstants.Currency.money}}"></span>
+                    <span data-bind="template: { name: 'amountTemplate', data: QuestHelper.getRefreshCost()}"></span>
                     <span class='' data-bind='text: "(Daily refresh in " + GameHelper.formattedLetterTimeUntilTomorrow() + ")"'>
                     </span>
                 </div>
@@ -5657,11 +5864,11 @@ aria-labelledby="saveModalLabel">
         <div class="modal-content">
             <div class="modal-header">
                 <h4>Farm</h4>
-                <!-- ko ifnot: FarmRunner.allPlotsUnlocked() -->
-                <button class="btn btn-success" onclick="FarmRunner.unlockPlot()"
-                        data-bind="css: { disabled: !FarmRunner.canBuyPlot()}">
+                <!-- ko ifnot: App.game.farming.allPlotsUnlocked() -->
+                <button class="btn btn-success" onclick="App.game.farming.unlockPlot()"
+                        data-bind="css: { disabled: !App.game.farming.canBuyPlot()}">
                     <span>Unlock new plot </span>
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': FarmRunner.plotPrice(), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                    <span data-bind="template: { name: 'amountTemplate', data: App.game.farming.calculatePlotPrice()}"></span>
                 </button>
                 <!-- /ko -->
             </div>
@@ -5671,50 +5878,50 @@ aria-labelledby="saveModalLabel">
 
                     <div class="col-sm-4 col-md-3 col-lg-4">
                         <div class="col-sm-12">
-                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.farmPoints(), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint], 'currency': GameConstants.Currency.farmPoint}}"></span>
                         </div>
-                        <ul id="seedList" data-bind="foreach: player.berryList" class="list-group"
+                        <ul id="seedList" data-bind="foreach: App.game.farming.berryList" class="list-group"
                             style="margin-bottom: 5px;">
                             <li class="list-group-item list-group-item-action seed-list-item"
-                                data-bind="click: function() {FarmRunner.curBerry = BerryList[GameConstants.BerryType[$index()]]}">
+                                data-bind="click: function() {FarmController.selectedBerry = $index()}">
                                 <img src="" width="24px"
-                                     data-bind="attr:{ src: 'assets/images/items/' + GameConstants.BerryType[$index()] + '.png'}">
-                                <span data-bind="text: GameConstants.BerryType[$index()]"></span>
-                                <span class="seedAmount" data-bind="text: player.berryList[$index()]()"></span>
+                                     data-bind="attr:{ src: 'assets/images/items/' + BerryType[$index()] + '.png'}">
+                                <span data-bind="text: BerryType[$index()]"></span>
+                                <span class="seedAmount" data-bind="text: App.game.farming.berryList[$index()]"></span>
                             </li>
                         </ul>
 
                         <div class="row">
                             <div class="col-sm-12 col-6">
                                 <button class="btn btn-primary btn-sm farm-button"
-                                        data-bind="click: function(){FarmRunner.plantAll()}">Plant All
+                                        data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">Plant All
                                 </button>
                             </div>
                             <div class="col-sm-12 col-6">
                                 <button class="btn btn-success btn-sm farm-button"
-                                        data-bind="click: function(){FarmRunner.harvestAll()}">Harvest All
+                                        data-bind="click: function(){App.game.farming.harvestAll()}">Harvest All
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-8 col-md-9 col-lg-8" style="padding-left: 0">
-                        <div id="plotList" data-bind="foreach: player.plotList">
-                            <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked()}">
+                        <div id="plotList" data-bind="foreach: App.game.farming.plotList">
+                            <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked}">
                                 <div class="plot-content">
                                     <div class="plotImage">
                                         <img style="width: 100%" src="assets/images/farm/soil.png">
-                                        <div data-bind="ifnot:FarmRunner.isEmpty($index())()">
+                                        <div data-bind="ifnot: $data.isEmpty()">
                                             <div class="plotButton"
-                                                 data-bind="click: function(){FarmRunner.harvest($index())}, tooltip: {title: FarmRunner.getPlot($index()).formattedTimeLeft, trigger: 'hover', animation: false}">
+                                                 data-bind="click: function(){App.game.farming.harvest($index())}, tooltip: {title: $data.formattedTimeLeft, trigger: 'hover', animation: false}">
                                                 <img width="100%" height="100%"
                                                      style="max-width: 100%; max-height: 100%"
                                                      src=""
-                                                     data-bind="attr:{ src: FarmRunner.getImage($data)}">
+                                                     data-bind="attr:{ src: FarmController.getImage($index())}">
                                             </div>
                                         </div>
-                                        <div data-bind="if:FarmRunner.isEmpty($index())()">
+                                        <div data-bind="if: $data.isEmpty()">
                                             <div class="plotButton"
-                                                 data-bind="click: function(){FarmRunner.plant($index())}">
+                                                 data-bind="click: function(){App.game.farming.plant($index(), FarmController.selectedBerry)}">
                                             </div>
                                         </div>
                                     </div>
@@ -5773,61 +5980,120 @@ aria-labelledby="saveModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <p style='margin-bottom: 0' data-bind='text: "Balls: " + Safari.balls()'></p>
                 <h4 style='text-align:center' class="modal-title">Safari Zone</h4>
-                <button class='btn btn-primary' onclick='if(!Safari.inBattle()){$("#safariModal").modal("toggle")}' data-bind='css: { disabled: Safari.inBattle }' >Leave</button>
+                <button class='btn btn-danger modalClose' onclick='Safari.closeModal()'>Leave</button>
             </div>
-            <div class="modal-body p-0">
-                <div id="safariBody">
-                </div>
-                <div id="safariBattleBody" data-bind="if: Safari.inBattle">
-                    <div class='row safariEnemyRow'>
-                        <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }"></div>
-                        <div id='safariEnemyName' class='btn btn-secondary btn-sm '>
-                            <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
-                                <img class='pokeball-smallest'
-                                     data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
-                            </span>
-                            <span data-bind='text: SafariBattle.enemy.name'></span>
-                        </div>
-                    </div>
-                    <div class='row'>
-                        <div class='col-sm-2 offset-sm-3'>
-                           <img id='safariPlayer' src='assets/images/safari/playerBack.png'>
-                        </div>
-                    </div>
 
-                    <div id='battleConsole' class='row'>
-                        <div class='col-sm-6'>
-                            <h4 id='safariBattleText' class="centeredBySpan" data-bind='html: SafariBattle.text'></h4>
-                            <span class="centerSpan"></span>
+            <ul style="width:100%" class="nav nav-tabs nav-fill">
+                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#safariExplore">Explore</a>
+                </li>
+                <li class='nav-item'><a class='nav-link' href="#safariHelp" data-bind="attr: {'data-toggle': Safari.inBattle() ? '' : 'tab'}">Help</a>
+                </li>
+            </ul>
+
+            <!-- Tabs -->
+            <div class=tab-content>
+
+                <!-- Main tab -->
+                <div  id="safariExplore" class="tab-pane fade in active show">
+                    <div class="modal-body p-0">
+
+                        <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
+                            <div class="center margin-bottom-sm">
+                                <button id="paySafariButton"
+                                    class="btn"
+                                    onclick="Safari.payEntranceFee()"
+                                    data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
+                                    Pay Entrance Fee
+                                </button>
+                                <span id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></span>
+                            </div>
+                            <img class='fit-width' src="../assets/images/safari/area1.png" />
                         </div>
-                        <div class='row col-sm-4 offset-sm-2 safariOptions'>
-                            <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.lockButtons();SafariBattle.throwBall()' class='btn btn-info btn-sm safariButton'
-                                        data-bind='text: "Ball (" + Safari.balls() + ")"'></button>
+
+                        <div id="safariBody"
+                            class='container-fluid'
+                            data-bind="visible: Safari.inProgress() && !Safari.inBattle()">
+                        </div>
+
+                        <div id="safariBattleBody" data-bind="if: Safari.inBattle">
+                            <div class='row safariEnemyRow'>
+                                <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }"></div>
+                                <div id='safariEnemyTag' class='col-sm-6'>
+                                    <span>
+                                        <span data-bind='text: SafariBattle.enemy.name'></span>
+                                        <span data-bind="if: App.game.party.alreadyCaughtPokemonByName(SafariBattle.enemy.name)">
+                                            <img class='pokeball-smallest'
+                                             data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
+                                        </span>
+                                    </span>
+                                    <p><span id='safariCatchChance' data-bind="text: `Catch chance: ${SafariBattle.enemy.catchFactor.toFixed(2)} %`"></span><span id='safariRunChance' data-bind="text: `Escape chance: ${SafariBattle.enemy.escapeFactor.toFixed(2)} %`"></span></p>
+                                </div>
                             </div>
-                            <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.lockButtons();SafariBattle.throwBait()' class='btn btn-info btn-sm safariButton'>
-                                    Bait
-                                </button>
+                            <div class='row'>
+                                <div class='col-sm-2 offset-sm-3'>
+                                   <img id='safariPlayer' src='assets/images/safari/playerBack.png'>
+                                </div>
                             </div>
-                            <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.lockButtons();SafariBattle.throwRock()' class='btn btn-info btn-sm safariButton'>
-                                    Rock
-                                </button>
-                            </div>
-                            <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.lockButtons();SafariBattle.run()' class='btn btn-info btn-sm safariButton'>Run
-                                </button>
+
+                            <div id='battleConsole' class='row'>
+                                <div class='col-sm-6'>
+                                    <h4 id='safariBattleText' class="centeredBySpan" data-bind='html: SafariBattle.text'></h4>
+                                    <span class="centerSpan"></span>
+                                </div>
+                                <div class='row col-sm-4 offset-sm-2 safariOptions'>
+                                    <div class='col-sm-6 safariOption'>
+                                        <button onClick='SafariBattle.lockButtons();SafariBattle.throwBall()' class='btn btn-info btn-sm safariButton'
+                                                data-bind='text: "Ball (" + Safari.balls() + ")"'></button>
+                                    </div>
+                                    <div class='col-sm-6 safariOption'>
+                                        <button onClick='SafariBattle.lockButtons();SafariBattle.throwBait()' class='btn btn-info btn-sm safariButton'>
+                                            Bait
+                                        </button>
+                                    </div>
+                                    <div class='col-sm-6 safariOption'>
+                                        <button onClick='SafariBattle.lockButtons();SafariBattle.throwRock()' class='btn btn-info btn-sm safariButton'>
+                                            Rock
+                                        </button>
+                                    </div>
+                                    <div class='col-sm-6 safariOption'>
+                                        <button onClick='SafariBattle.lockButtons();SafariBattle.run()' class='btn btn-info btn-sm safariButton'>Run
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Help tab -->
+                <div  id="safariHelp" class="tab-pane fade">
+                    <div class="modal-body" style="width: 80%;margin: auto;">
+                        <p id="safariHelpText">
+                            <p>The safari zone contains several unique pokemon, and a different method of encountering and capturing pokemon.</p>
+                            <p>After paying the entrance fee, you will be able to walk around in the safari zone. To encounter pokemon, you must walk in tall grass.</p>
+                            <p>
+                                When you have encountered a pokemon, you will be given 4 options:
+                                <ul>
+                                    <li>Ball: This will throw a pokeball and give you a chance of capturing the pokemon</li>
+                                    <li>Rock: Throwing a rock will make the pokemon more likely to flee, but easier to catch</li>
+                                    <li>Bait: Throwing bait will make the pokemon less likely to flee, but harder to catch</li>
+                                    <li>Run: This will end the encounter</li>
+                                </ul>
+                            </p>
+                            <p>After your turn of the encounter, if it did not result in the encounter ending, the wild pokemon will have a chance of running away.</p>
+                            <p>Your safari exploration will end when you have run out of pokeballs.</p>
+                        </p>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+
 
 
 </body>
