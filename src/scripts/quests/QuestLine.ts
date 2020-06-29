@@ -14,7 +14,7 @@ class QuestLine {
         this.description = description;
         this.quests = ko.observableArray();
         this.totalQuests = 0;
-        this.curQuest = ko.computed(() => {
+        this.curQuest = ko.pureComputed(() => {
             const acc = 0;
             return this.quests().map((quest) => {
                 return +quest.isCompleted();
@@ -28,7 +28,7 @@ class QuestLine {
             return false;
         }; //Always update subscriptions, even if same data pushed in
 
-        this.curQuestObject = ko.computed(() => {
+        this.curQuestObject = ko.pureComputed(() => {
             this.quests(); //register dependency on this computed so it will update
             if (this.totalQuests > 0 && this.curQuest() < this.totalQuests) {
                 return this.quests()[this.curQuest()];

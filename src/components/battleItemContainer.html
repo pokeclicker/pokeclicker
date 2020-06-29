@@ -31,7 +31,11 @@
             </td>
           </tr>
           <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
-            <td class="text-light p-0"><code data-bind="text: EffectEngineRunner.formattedTimeLeft($data)()"></code></td>
+            <td class="text-light p-0">
+              <!-- ko if: EffectEngineRunner.getEffect($data) > 0 -->
+                <code data-bind="text: player.effectTimer[$data]()"></code>
+              <!-- /ko -->
+            </td>
           </tr>
         </tbody>
       </table>

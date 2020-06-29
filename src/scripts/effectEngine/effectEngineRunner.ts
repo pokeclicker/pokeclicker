@@ -5,7 +5,11 @@ class EffectEngineRunner {
         this.counter = 0;
         const timeToReduce = 1;
         for (const itemName in GameConstants.BattleItemType) {
-            player.effectList[itemName](Math.max(0, player.effectList[itemName]() - timeToReduce));
+            const timeRemaining = player.effectList[itemName]();
+            if (timeRemaining > 0) {
+                player.effectList[itemName](Math.max(0, timeRemaining - timeToReduce));
+                this.updateFormattedTimeLeft(itemName);
+            }
             if (player.effectList[itemName]() == 5) {
                 Notifier.notify(`The ${itemName}s effect is about to wear off!`, GameConstants.NotificationOption.warning);
             }
@@ -21,17 +25,16 @@ class EffectEngineRunner {
 
     public static addEffect(itemName: string) {
         player.effectList[itemName](Math.max(0, player.effectList[itemName]() +  GameConstants.ITEM_USE_TIME));
+        this.updateFormattedTimeLeft(itemName);
     }
 
-    public static formattedTimeLeft(itemName: string) {
-        return ko.computed(function () {
-            const times = GameConstants.formatTime(player.effectList[itemName]()).split(':');
-            if (+times[0] > 0) {
-                return '60:00+';
-            }
-            times.shift();
-            return times.join(':');
-        }, this);
+    public static updateFormattedTimeLeft(itemName: string) {
+        const times = GameConstants.formatTime(player.effectList[itemName]()).split(':');
+        if (+times[0] > 0) {
+            return player.effectTimer[itemName]('60:00+');
+        }
+        times.shift();
+        player.effectTimer[itemName](times.join(':'));
     }
 
     public static getMoneyMultiplier() {
@@ -44,7 +47,7 @@ class EffectEngineRunner {
 
 
     public static isActive(itemName: string): KnockoutComputed<boolean> {
-        return ko.computed(function () {
+        return ko.pureComputed(function () {
             if (!player) {
                 return false;
             }

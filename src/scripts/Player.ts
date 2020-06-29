@@ -65,13 +65,7 @@ class Player {
             item.amount = ko.observable(item.amount);
         }
 
-        this._shardUpgrades = Save.initializeShards(savedPlayer._shardUpgrades);
-
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
-
-        this._shardsCollected = [...Array<number>(18)].map((value, index) => {
-            return ko.observable(savedPlayer._shardsCollected ? savedPlayer._shardsCollected[index] : 0);
-        });
 
         const today = new Date();
         const lastSeen = new Date(this._lastSeen);
@@ -106,6 +100,7 @@ class Player {
         this.statistics = new Statistics(savedPlayer.statistics);
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
+        this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
 
         this.tutorialProgress = ko.observable(savedPlayer.tutorialProgress || 0);
@@ -119,8 +114,8 @@ class Player {
     // TODO(@Isha) move to underground classes.
     public mineInventory: ObservableArrayProxy<any>;
 
-    private _shardUpgrades: Array<Array<KnockoutObservable<number>>>;
-    private _shardsCollected: Array<KnockoutObservable<number>>;
+    public clickAttackObservable: KnockoutComputed<number>;
+    public pokemonAttackObservable: KnockoutComputed<number>;
 
     public statistics: Statistics;
 
@@ -132,6 +127,7 @@ class Player {
     private _shinyCatches: KnockoutObservable<number>;
 
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
+    public effectTimer: { [name: string]: KnockoutObservable<string> } = {};
 
     public tutorialProgress: KnockoutObservable<number>;
     public tutorialState: any;
@@ -155,36 +151,6 @@ class Player {
 
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
-    }
-
-    public gainShards(type: PokemonType, amount = 1) {
-        if (type === PokemonType.None) {
-            return;
-        }
-        player._shardsCollected[type](player._shardsCollected[type]() + amount);
-        GameHelper.incrementObservable(player.statistics.totalShards[type], amount);
-    }
-
-    public buyShardUpgrade(typeNum: number, effectNum: number) {
-        if (this.canBuyShardUpgrade(typeNum, effectNum)) {
-            this._shardsCollected[typeNum](this._shardsCollected[typeNum]() - this.getShardUpgradeCost(typeNum, effectNum));
-            this._shardUpgrades[typeNum][effectNum](this._shardUpgrades[typeNum][effectNum]() + 1);
-        }
-    }
-
-    public shardUpgradeMaxed(typeNum: number, effectNum: number): boolean {
-        return this._shardUpgrades[typeNum][effectNum]() >= GameConstants.MAX_SHARD_UPGRADES;
-    }
-
-    public canBuyShardUpgrade(typeNum: number, effectNum: number): boolean {
-        const lessThanMax = !this.shardUpgradeMaxed(typeNum, effectNum);
-        const hasEnoughShards = this._shardsCollected[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
-        return lessThanMax && hasEnoughShards;
-    }
-
-    public getShardUpgradeCost(typeNum: number, effectNum: number): number {
-        const cost = (this._shardUpgrades[typeNum][effectNum]() + 1) * GameConstants.SHARD_UPGRADE_COST;
-        return cost;
     }
 
     get caughtAmount(): Array<KnockoutObservable<number>> {
@@ -286,22 +252,6 @@ class Player {
         }
     }
 
-    get shardUpgrades(): Array<Array<KnockoutObservable<number>>> {
-        return this._shardUpgrades;
-    }
-
-    set shardUpgrades(value: Array<Array<KnockoutObservable<number>>>) {
-        this._shardUpgrades = value;
-    }
-
-    get shardsCollected(): Array<KnockoutObservable<number>> {
-        return this._shardsCollected;
-    }
-
-    set shardsCollected(value: Array<KnockoutObservable<number>>) {
-        this._shardsCollected = value;
-    }
-
     get questLevel(): number {
         return QuestHelper.xpToLevel(player.questXP);
     }
@@ -342,8 +292,6 @@ class Player {
             'mineInventory',
             // TODO(@Isha) remove.
             '_mineLayersCleared',
-            '_shardUpgrades',
-            '_shardsCollected',
             'achievementsCompleted',
             'completedQuestList',
             'questRefreshes',
@@ -355,6 +303,7 @@ class Player {
             'statistics',
             'achievementsCompleted',
             'effectList',
+            'effectTimer',
             'highestRegion',
             'tutorialProgress',
             'tutorialState',

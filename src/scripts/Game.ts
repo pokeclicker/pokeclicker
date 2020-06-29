@@ -14,7 +14,9 @@ class Game {
     public badgeCase: BadgeCase;
     public oakItems: OakItems;
     public party: Party;
+    public shards: Shards;
     public farming: Farming;
+    public logbook: LogBook;
 
     public redeemableCodes: RedeemableCodes;
 
@@ -31,7 +33,9 @@ class Game {
         badgeCase: BadgeCase,
         oakItems: OakItems,
         party: Party,
+        shards: Shards,
         farming: Farming,
+        logbook: LogBook,
         codes: RedeemableCodes
     ) {
         this.breeding = breeding;
@@ -41,8 +45,9 @@ class Game {
         this.badgeCase = badgeCase;
         this.oakItems = oakItems;
         this.party = party;
+        this.shards = shards;
         this.farming = farming;
-
+        this.logbook = logbook;
         this.redeemableCodes = codes;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
@@ -65,7 +70,9 @@ class Game {
             this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
             this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
             this.party.fromJSON(saveObject[this.party.saveKey]);
+            this.shards.fromJSON(saveObject[this.shards.saveKey]);
             this.farming.fromJSON(saveObject[this.farming.saveKey]);
+            this.logbook.fromJSON(saveObject[this.logbook.saveKey]);
 
             this.redeemableCodes.fromJSON(saveObject[this.redeemableCodes.saveKey]);
         }
@@ -77,6 +84,7 @@ class Game {
         this.keyItems.initialize();
         this.oakItems.initialize();
         this.farming.initialize();
+        this.load();
 
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();

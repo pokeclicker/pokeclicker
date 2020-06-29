@@ -144,10 +144,12 @@
 <!--Templates -->
 @import "templates/currencyTemplate.html"
 @import "templates/caughtStatusTemplate.html"
+@import "templates/eggSVGTemplate.html"
 
 <div class="container">
     <div class="row justify-content-center">
-        <h1>Pokéclicker</h1>
+        <!--The id title is needed for a default marker for money animation to display when not in a wild battle where the playerMoney span is not visible-->
+        <h1 id="gameTitle">Pokéclicker</h1>
     </div>
     <div class="row justify-content-lg-center" style="text-align: center">
 
@@ -205,7 +207,7 @@
                      id="routeBattleView">
 
                     <div data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
-                        <div style="height: 220px; display: block;" class="col-lg-12">
+                        <div data-bind="click: function() {Battle.clickAttack()}" style="height: 220px; display: block;" class="col-lg-12 clickable">
                             <div class="col-lg-12" style="display: block;">
                                 Route
                                 <span data-bind="text: player.route">number</span>
@@ -234,9 +236,8 @@
 
                             <div>
                                 <div data-bind="ifnot: Battle.catching">
-                                    <img class="clickable" id="enemy"
-                                         data-bind="click: function() {Battle.clickAttack()},
-                                                    attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
+                                    <img id="enemy"
+                                         data-bind="attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
                                          src=""/>
                                     <br>
                                     <span data-bind="text: Battle.enemyPokemon().health">health</span>
@@ -264,7 +265,17 @@
 
                     <!--If the player is in a dungeon-->
                     <div data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
-                        <div class="col-lg-12" style="display: block; height: 220px">
+                        <div class="col-lg-12 clickable" style="display: block; height: 220px"
+                            data-bind="click: function() {
+                              if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
+                                DungeonBattle.clickAttack();
+                              } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+                                DungeonRunner.openChest();
+                              } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+                                DungeonRunner.startBossFight();
+                              }
+                            }">
+
                             <div>
                                 <span data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</span>
                                 <!--If all Pokémon on the route are caught-->
@@ -288,13 +299,14 @@
                                 </div>
                             </div>
 
-                            <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
+                            <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching) -->
+                            <div>
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
                                 <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></span>
                                 <div>
                                     <div data-bind="ifnot: DungeonBattle.catching">
                                         <img id="dungeonEnemy"
-                                             data-bind="click: function() {DungeonBattle.clickAttack()}, attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
+                                             data-bind="attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
                                              src=""/>
                                         <br>
                                         <span data-bind="text: DungeonBattle.enemyPokemon().health">health</span>/
@@ -316,18 +328,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div data-bind="if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest">
-                                <img data-bind="click: function(){DungeonRunner.openChest()}"
-                                     class="dungeon-chest"
-                                     src="assets/images/dungeons/chest.png"/>
+                            <!-- /ko -->
+                            <!-- ko if: DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest -->
+                            <div>
+                                <img class="dungeon-chest" src="assets/images/dungeons/chest.png"/>
                             </div>
-
-                            <div data-bind="if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss())">
-                                <button class="btn btn-danger dungeon-boss-button"
-                                        data-bind="click: function(){DungeonRunner.startBossFight()}">Start
-                                    Bossfight
-                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) -->
+                            <div>
+                                <button class="btn btn-danger dungeon-boss-button">Start Bossfight</button>
                             </div>
+                            <!-- /ko -->
                         </div>
                     </div>
 
@@ -426,6 +437,9 @@
 
 <!-- Achievements Modal -->
 @import "achievements.html"
+
+<!-- Log Book Modal-->
+@import "logBookModal.html"
 
 <!-- Settings Modal-->
 @import "settingsModal.html"

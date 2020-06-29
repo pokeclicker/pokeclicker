@@ -67,6 +67,7 @@ class Underground {
     }
 
     public static calculateCssClass(i: number, j: number): KnockoutComputed<string> {
+        // disposed via the disposeWhen function passed as an option
         return ko.computed(function () {
             return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
         }, this, {
@@ -171,7 +172,7 @@ class Underground {
             default:
                 const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
                 const typeNum = PokemonType[type];
-                player._shardsCollected[typeNum](player._shardsCollected[typeNum]() + GameConstants.PLATE_VALUE);
+                App.game.shards.gainShards(GameConstants.PLATE_VALUE, typeNum);
         }
         return success;
     }

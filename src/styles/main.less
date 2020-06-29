@@ -88,10 +88,6 @@ button {
   cursor: pointer;
 }
 
-body {
-    overflow-x: hidden;
-}
-
 body:hover {
   cursor: default;
 }
@@ -192,7 +188,7 @@ body:hover {
 }
 
 /* http://stackoverflow.com/questions/826782/how-to-disable-text-selection-highlighting-using-css */
-.no-select * {
+.no-select *:not(input) {
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Chrome/Safari/Opera */
   -moz-user-select: none; /* Firefox */
@@ -297,4 +293,13 @@ img {
 img.fit-width {
   max-width: 100%;
   max-height: auto;
+}
+
+td.tight {
+  width: 1px;
+  white-space: nowrap;
+}
+
+.all-pointers {
+  pointer-events: all !important;
 }

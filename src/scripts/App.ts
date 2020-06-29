@@ -18,7 +18,9 @@ class App {
                 new BadgeCase(BadgeCase.Badge.Elite_JohtoChampion),
                 new OakItems([20, 50, 100]),
                 new Party(),
+                new Shards(),
                 new Farming(),
+                new LogBook(),
                 new RedeemableCodes()
             );
 
@@ -31,7 +33,6 @@ class App {
             PokedexHelper.updateList();
 
             App.game.initialize();
-            App.game.load();
             ko.applyBindings(App.game);
             ko.options.deferUpdates = true;
 
