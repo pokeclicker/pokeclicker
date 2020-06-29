@@ -1,4 +1,33 @@
-<div class="alert alert-warning" role="alert" style="text-align:center; font-size:16px">
-    You are currently playing on the branch '$GIT_BRANCH'. Thank you for trying out the development build! Please submit any bugs <a href="https://github.com/pokeclicker/pokeclicker/issues" target="_blank">here</a>.
-    $DEV_DESCRIPTION
+<div class="modal" data-keyboard="false" data-backdrop="static" id="developmentModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please read carefully</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>You are currently playing on the branch '$GIT_BRANCH'. Thank you for trying out the development
+                    build! Please submit any bugs <a href="https://github.com/pokeclicker/pokeclicker/issues"
+                                                     target="_blank">here</a> or in the #testing channel on <a
+                            href="https://discordapp.com/invite/rHF3V54" target="_blank">discord</a>.</p>
+                <p> Keep in mind that this is a development environment and you should not count on your progress
+                    to be transferred.</p>
+                <hr/>
+                $DEV_DESCRIPTION
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Agreed</button>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('#developmentModal').modal('toggle')
+    });
+
+</script>

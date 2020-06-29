@@ -1,11 +1,11 @@
 class Pokeballs implements Feature {
-    name: string = "Pokeball inventory";
-    saveKey: string = "pokeballs";
+    name = 'Pokeballs';
+    saveKey = 'pokeballs';
 
     defaults = {
-        'pokeballs': [10, 0, 0, 0],
+        'pokeballs': [25, 0, 0, 0],
         'notCaughtSelection': GameConstants.Pokeball.Pokeball,
-        'alreadyCaughtSelection': GameConstants.Pokeball.None,
+        'alreadyCaughtSelection': GameConstants.Pokeball.Pokeball,
     };
 
     private pokeballCatchBonus: number[];
@@ -29,13 +29,13 @@ class Pokeballs implements Feature {
     /**
      * Checks the players preferences to see what pokéball needs to be used on the next throw.
      * Checks from the players pref to the most basic ball to see if the player has any.
-     * @param pokemonName the pokemon we are trying to catch.
+     * @param id the pokemon we are trying to catch.
      * @param isShiny if the pokémon is shiny.
      * @returns {GameConstants.Pokeball} pokéball to use.
      */
-    public calculatePokeballToUse(pokemonName: string, isShiny: boolean): GameConstants.Pokeball {
-        const alreadyCaught = player.alreadyCaughtPokemon(pokemonName);
-        const alreadyCaughtShiny = player.alreadyCaughtPokemonShiny(pokemonName);
+    public calculatePokeballToUse(id: number, isShiny: boolean): GameConstants.Pokeball {
+        const alreadyCaught = App.game.party.alreadyCaughtPokemon(id);
+        const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
         let pref: GameConstants.Pokeball;
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
         if (!alreadyCaught || (!alreadyCaughtShiny && isShiny)) {
@@ -79,13 +79,13 @@ class Pokeballs implements Feature {
 
     fromJSON(json: object): void {
         if (json == null) {
-            return
+            return;
         }
 
-        if (json["pokeballs"] == null) {
+        if (json['pokeballs'] == null) {
             this.pokeballs = new ArrayOfObservables(this.defaults.pokeballs);
         } else {
-            let pokeballsJson = json["pokeballs"];
+            const pokeballsJson = json['pokeballs'];
             this.pokeballs = new ArrayOfObservables([
                 pokeballsJson[GameConstants.Pokeball.Pokeball],
                 pokeballsJson[GameConstants.Pokeball.Greatball],
@@ -93,21 +93,21 @@ class Pokeballs implements Feature {
                 pokeballsJson[GameConstants.Pokeball.Masterball],
             ]);
         }
-        this.notCaughtSelection = json["notCaughtSelection"] ?? this.defaults.notCaughtSelection;
-        this.alreadyCaughtSelection = json["alreadyCaughtSelection"] ?? this.defaults.alreadyCaughtSelection;
+        this.notCaughtSelection = json['notCaughtSelection'] ?? this.defaults.notCaughtSelection;
+        this.alreadyCaughtSelection = json['alreadyCaughtSelection'] ?? this.defaults.alreadyCaughtSelection;
     }
 
     toJSON(): object {
         return {
-            "pokeballs": [
+            'pokeballs': [
                 this.pokeballs[GameConstants.Pokeball.Pokeball],
                 this.pokeballs[GameConstants.Pokeball.Greatball],
                 this.pokeballs[GameConstants.Pokeball.Ultraball],
-                this.pokeballs[GameConstants.Pokeball.Masterball]
+                this.pokeballs[GameConstants.Pokeball.Masterball],
             ],
-            "notCaughtSelection": this.notCaughtSelection,
-            "alreadyCaughtSelection": this.alreadyCaughtSelection
-        }
+            'notCaughtSelection': this.notCaughtSelection,
+            'alreadyCaughtSelection': this.alreadyCaughtSelection,
+        };
     }
 
     update(delta: number): void {

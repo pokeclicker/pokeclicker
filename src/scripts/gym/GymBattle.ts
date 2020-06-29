@@ -1,6 +1,4 @@
-/**
- * Created by dennis on 05-07-17.
- */
+///<reference path="../Battle.ts"/>
 class GymBattle extends Battle {
 
     static gym: Gym;
@@ -11,14 +9,15 @@ class GymBattle extends Battle {
      * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
-        player.gainMoney(this.enemyPokemon().money);
-        player.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        App.game.wallet.gainMoney(this.enemyPokemon().money);
+        App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(this.gym.badgeReq * 3 + 1)));
-        player.gainShards(this.enemyPokemon());
+        player.gainShards(this.enemyPokemon().type1, this.enemyPokemon().shardReward);
+        player.gainShards(this.enemyPokemon().type2, this.enemyPokemon().shardReward);
         this.index(this.index() + 1);
 
         if (this.index() >= this.gym.pokemons.length) {
-            GymRunner.gymWon(this.gym)
+            GymRunner.gymWon(this.gym);
         } else {
             this.generateNewEnemy();
         }

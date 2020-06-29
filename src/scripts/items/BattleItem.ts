@@ -5,15 +5,11 @@ class BattleItem extends Item {
     description: string;
 
     constructor(type: GameConstants.BattleItemType, description: string) {
-        let basePrice = GameConstants.ItemPrice[GameConstants.BattleItemType[type]];
-        let priceMultiplier = 1;
+        const basePrice = GameConstants.ItemPrice[GameConstants.BattleItemType[type]];
+        const priceMultiplier = 1;
         super(GameConstants.BattleItemType[type], basePrice, priceMultiplier, GameConstants.Currency.money);
         this.type = type;
         this.description = description;
-    }
-
-    buy(amt: number) {
-        player.gainItem(this.name(), amt);
     }
 
     use() {

@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player._questPoints(), 'currency': GameConstants.Currency.questPoint}}"></span>
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.questPoint], 'currency': GameConstants.Currency.questPoint}}"></span>
                 </div>
 
             </div>
@@ -54,7 +54,7 @@
                                         Claim
                                     </button>
                                     <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>
-                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</span>
+                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</button>
                                 </td>
                             </tr>
                             </tbody>
@@ -70,7 +70,7 @@
                     <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()'
                             data-bind='text: "Refresh",
                                        enable: QuestHelper.canAffordRefresh()'></button>
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': QuestHelper.getRefreshCost(), 'currency': GameConstants.Currency.money}}"></span>
+                    <span data-bind="template: { name: 'amountTemplate', data: QuestHelper.getRefreshCost()}"></span>
                     <span class='' data-bind='text: "(Daily refresh in " + GameHelper.formattedLetterTimeUntilTomorrow() + ")"'>
                     </span>
                 </div>

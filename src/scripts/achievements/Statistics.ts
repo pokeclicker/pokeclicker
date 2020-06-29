@@ -1,3 +1,6 @@
+///<reference path="../oakItems/OakItems.ts"/>
+///<reference path="../farming/BerryType.ts"/>
+///<reference path="../pokemons/PokemonType.ts"/>
 class Statistics {
 
     public clicks: KnockoutObservable<number>;
@@ -12,54 +15,59 @@ class Statistics {
     public totalTokens: KnockoutObservable<number>;
     public totalQuestPoints: KnockoutObservable<number>;
     public totalDiamonds: KnockoutObservable<number>;
+    public totalFarmPoints: KnockoutObservable<number>;
     public pokeballsUsed: Array<KnockoutObservable<number>>;
     public pokeballsBought: Array<KnockoutObservable<number>>;
     public totalShards: Array<KnockoutObservable<number>>;
     public oakItemUses: Array<KnockoutObservable<number>>;
     public berriesHarvested: Array<KnockoutObservable<number>>;
+    public routeKills: Array<KnockoutObservable<number>>;
 
     private static readonly arraySizes = {
-        "gymsDefeated": GameConstants.RegionGyms.flat().length,
-        "dungeonsCleared": GameConstants.RegionDungeons.flat().length,
-        "pokeballsUsed": GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
-        "pokeballsBought": GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
-        "totalShards": GameHelper.enumLength(GameConstants.PokemonType) - 1,  // remove "None" pokemon type
-        "oakItemUses": GameHelper.enumLength(GameConstants.OakItem),
-        "berriesHarvested": GameHelper.enumLength(GameConstants.BerryType),
+        'gymsDefeated': GameConstants.RegionGyms.flat().length,
+        'dungeonsCleared': GameConstants.RegionDungeons.flat().length,
+        'pokeballsUsed': GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
+        'pokeballsBought': GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
+        'totalShards': GameHelper.enumLength(PokemonType) - 1,  // remove "None" pokemon type
+        'oakItemUses': GameHelper.enumLength(OakItems.OakItem),
+        'berriesHarvested': GameHelper.enumLength(BerryType) - 1,  // remove "None" berry
+        'routeKills': GameConstants.AMOUNT_OF_ROUTES,
     };
 
     constructor(saved = {}) {
-        let observables = [
-            "clicks",
-            "hatchedEggs",
-            "pokemonCaptured",
-            "pokemonDefeated",
-            "digItems",
-            "digDeeper",
-            "totalMoney",
-            "totalTokens",
-            "totalQuestPoints",
-            "totalDiamonds",
+        const observables = [
+            'clicks',
+            'hatchedEggs',
+            'pokemonCaptured',
+            'pokemonDefeated',
+            'digItems',
+            'digDeeper',
+            'totalMoney',
+            'totalTokens',
+            'totalQuestPoints',
+            'totalDiamonds',
+            'totalFarmPoints',
         ];
 
-        let arrayObservables = [
-            "gymsDefeated",
-            "dungeonsCleared",
-            "pokeballsUsed",
-            "pokeballsBought",
-            "totalShards",
-            "oakItemUses",
-            "berriesHarvested",
-        ]
+        const arrayObservables = [
+            'gymsDefeated',
+            'dungeonsCleared',
+            'pokeballsUsed',
+            'pokeballsBought',
+            'totalShards',
+            'oakItemUses',
+            'berriesHarvested',
+            'routeKills',
+        ];
 
-        for (let prop of observables) {
-            this[prop] = ko.observable(saved[prop] || 0)
+        for (const prop of observables) {
+            this[prop] = ko.observable(saved[prop] || 0);
         }
 
-        for (let array of arrayObservables) {
-            this[array] = Array.apply(null, Array(Statistics.arraySizes[array])).map((value, index) => {
-                return ko.observable(saved[array] ? saved[array][index] || 0 : 0)
-            })
+        for (const array of arrayObservables) {
+            this[array] = [...Array(Statistics.arraySizes[array])].map((value, index) => {
+                return ko.observable(saved[array] ? saved[array][index] || 0 : 0);
+            });
         }
     }
 

@@ -12,7 +12,7 @@ style="cursor:default" tabindex="-1">
                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#dailyDeals">Daily
                    deals</a></li>
                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
-               <p><span id="diamondCounter" data-bind='text: player._diamonds'>x</span> <img
+               <p><span id="diamondCounter" data-bind='text: App.game.wallet.currencies[GameConstants.Currency.diamond]'>x</span> <img
                        src='assets/images/underground/diamond.svg' width="20px'"></p>
            </ul>
        </div>
@@ -56,7 +56,7 @@ style="cursor:default" tabindex="-1">
                                <th></th>
                              </tr>
                            </thead>
-                           <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player._mineInventory()}">
+                           <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player.mineInventory}">
                            </tbody>
                        </table>
                    </div>

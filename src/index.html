@@ -6,15 +6,15 @@
     <meta charset="utf-8"/>
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
     <script type="text/html" id="pokemonListTemplate">
-        <tr data-bind='ifnot: $data.breeding()'>
+        <tr data-bind='ifnot: $data.breeding'>
             <td class="text-nowrap">
                 <img class="smallImage"
-                     data-bind="attr:{ src: PokemonHelper.getImage($data, player.alreadyCaughtPokemonShiny($data.name)) }"
+                     data-bind="attr:{ src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"
                      src=""/>
-                <span data-bind="text: name">Name</span><sup data-bind="visible: player.alreadyCaughtPokemonShiny(name)">✨</sup>
+                <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
             </td>
             <td data-bind="text: attack">Atk</td>
-            <td data-bind="text: levelObservable">Lvl</td>
+            <td data-bind="text: level">Lvl</td>
         </tr>
     </script>
 
@@ -143,6 +143,7 @@
 
 <!--Templates -->
 @import "templates/currencyTemplate.html"
+@import "templates/caughtStatusTemplate.html"
 
 <div class="container">
     <div class="row justify-content-center">
@@ -179,19 +180,19 @@
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Money" src="assets/images/currency/money.png" height="25px">
-                                    <span id="playerMoney" data-bind="text: player.money.toLocaleString('en-US')">0</span>
+                                    <span id="playerMoney" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon" src="assets/images/currency/dungeonToken.png" height="25px">
-                                    <span id="playerMoneyDungeon" data-bind="text: player.dungeonTokens().toLocaleString('en-US')">0</span>
+                                    <span id="playerMoneyDungeon" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline;">
                                     <img title="Quest points" src="assets/images/currency/questPoint.png" height="25px">
-                                    <span id="playerMoneyQuest" data-bind="text: player.questPoints.toLocaleString('en-US')">0</span>
+                                    <span id="playerMoneyQuest" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>
@@ -220,26 +221,16 @@
                                          class="pokeball-smallest"
                                          src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                                 </span>
-                                <!-- ko if: player.routeKillsObservable(player.route())() < player.routeKillsNeeded -->
+                                <!-- ko if: player.statistics.routeKills[player.route()]() < GameConstants.ROUTE_KILLS_NEEDED -->
                                 <br>
-                                <span data-bind="text: player.routeKillsObservable(player.route())() + '/' + player.routeKillsNeeded">0/10</span>
+                                <span data-bind="text: player.statistics.routeKills[player.route()]() + '/' + GameConstants.ROUTE_KILLS_NEEDED">0/10</span>
                                 <br>
                                 <!-- /ko -->
                             </div>
 
                             <span data-bind="text: Battle.enemyPokemon().name">Pokemon name</span>
 
-                            <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                            <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
-                                <img title="You have captured this Pokémon!" class="pokeball-smallest"
-                                     src="assets/images/pokeball/Pokeball-small.png"/>
-                            </span>
-
-                            <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                            <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
-                                <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
-                                     src="assets/images/pokeball/Pokeball-shiny-small.png"/>
-                            </span>
+                            <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></span>
 
                             <div>
                                 <div data-bind="ifnot: Battle.catching">
@@ -299,19 +290,7 @@
 
                             <div data-bind="if: (DungeonRunner.fighting() || DungeonBattle.catching)">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
-
-                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                                <span data-bind="if: (!player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name) && player.alreadyCaughtPokemon(Battle.enemyPokemon().name))">
-                                    <img title="You have captured this Pokémon!" class="pokeball-smallest"
-                                         src="assets/images/pokeball/Pokeball-small.png"/>
-                                </span>
-
-                                <!--This comment has to be here, otherwise the Pokéball is too far to the right #HTML-->
-                                <span data-bind="if: player.alreadyCaughtPokemonShiny(Battle.enemyPokemon().name)">
-                                    <img title="You have captured this Pokémon shiny!" class="pokeball-smallest"
-                                         src="assets/images/pokeball/Pokeball-shiny-small.png"/>
-                                </span>
-
+                                <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></span>
                                 <div>
                                     <div data-bind="ifnot: DungeonBattle.catching">
                                         <img id="dungeonEnemy"
@@ -364,12 +343,12 @@
                         <tr>
                             <td width="50%">
                               <span style="display: inline;">Pokémon Attack:
-                                  <span data-bind="text: player.pokemonAttackObservable().toLocaleString('en-US')"></span>
+                                  <span data-bind="text: App.game.party.pokemonAttackObservable()().toLocaleString('en-US')"></span>
                               </span>
                             </td>
                             <td width="50%">
                               <span style="display: inline;">Click Attack:
-                                  <span data-bind="text: player.clickAttackObservable().toLocaleString('en-US')"></span>
+                                  <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                               </span>
                             </td>
                         </tr>
@@ -394,7 +373,7 @@
             </div>
             <!-- /ko -->
 
-            <div data-bind="if:KeyItemHandler.getKeyItemObservableByName('Town map')().isUnlocked()">
+            <div data-bind="if:App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map)">
                 <div data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>

@@ -2,58 +2,117 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <p style='margin-bottom: 0' data-bind='text: "Balls: " + Safari.balls()'></p>
                 <h4 style='text-align:center' class="modal-title">Safari Zone</h4>
-                <button class='btn btn-primary' onclick='if(!Safari.inBattle()){$("#safariModal").modal("toggle")}' data-bind='css: { disabled: Safari.inBattle }' >Leave</button>
+                <button class='btn btn-danger modalClose' onclick='Safari.closeModal()'>Leave</button>
             </div>
-            <div class="modal-body p-0">
-                <div id="safariBody">
-                </div>
-                <div id="safariBattleBody" data-bind="if: Safari.inBattle">
-                    <div class='row safariEnemyRow'>
-                        <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }"></div>
-                        <div id='safariEnemyName' class='btn btn-secondary btn-sm '>
-                            <span data-bind="if: player.alreadyCaughtPokemon(SafariBattle.enemy.name)">
-                                <img class='pokeball-smallest'
-                                     data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
-                            </span>
-                            <span data-bind='text: SafariBattle.enemy.name'></span>
-                        </div>
-                    </div>
-                    <div class='row'>
-                        <div class='col-sm-2 offset-sm-3'>
-                           <img id='safariPlayer' src='assets/images/safari/playerBack.png'>
-                        </div>
-                    </div>
 
-                    <div id='battleConsole' class='row'>
-                        <div class='col-sm-6'>
-                            <h4 id='safariBattleText' class="centeredBySpan" data-bind='html: SafariBattle.text'></h4>
-                            <span class="centerSpan"></span>
+            <ul style="width:100%" class="nav nav-tabs nav-fill">
+                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#safariExplore">Explore</a>
+                </li>
+                <li class='nav-item'><a class='nav-link' href="#safariHelp" data-bind="attr: {'data-toggle': Safari.inBattle() ? '' : 'tab'}">Help</a>
+                </li>
+            </ul>
+
+            <!-- Tabs -->
+            <div class=tab-content>
+
+                <!-- Main tab -->
+                <div  id="safariExplore" class="tab-pane fade in active show">
+                    <div class="modal-body p-0">
+
+                        <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
+                            <div class="center margin-bottom-sm">
+                                <button id="paySafariButton"
+                                    class="btn"
+                                    onclick="Safari.payEntranceFee()"
+                                    data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
+                                    Pay Entrance Fee
+                                </button>
+                                <span id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></span>
+                            </div>
+                            <img class='fit-width' src="../assets/images/safari/area1.png" />
                         </div>
-                        <div class='row col-sm-4 offset-sm-2 safariOptions'>
-                            <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.lockButtons();SafariBattle.throwBall()' class='btn btn-info btn-sm safariButton'
-                                        data-bind='text: "Ball (" + Safari.balls() + ")"'></button>
+
+                        <div id="safariBody"
+                            class='container-fluid'
+                            data-bind="visible: Safari.inProgress() && !Safari.inBattle()">
+                        </div>
+
+                        <div id="safariBattleBody" data-bind="if: Safari.inBattle">
+                            <div class='row safariEnemyRow'>
+                                <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }"></div>
+                                <div id='safariEnemyTag' class='col-sm-6'>
+                                    <span>
+                                        <span data-bind='text: SafariBattle.enemy.name'></span>
+                                        <span data-bind="if: App.game.party.alreadyCaughtPokemonByName(SafariBattle.enemy.name)">
+                                            <img class='pokeball-smallest'
+                                             data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
+                                        </span>
+                                    </span>
+                                    <p><span id='safariCatchChance' data-bind="text: `Catch chance: ${SafariBattle.enemy.catchFactor.toFixed(2)} %`"></span><span id='safariRunChance' data-bind="text: `Escape chance: ${SafariBattle.enemy.escapeFactor.toFixed(2)} %`"></span></p>
+                                </div>
                             </div>
-                            <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.lockButtons();SafariBattle.throwBait()' class='btn btn-info btn-sm safariButton'>
-                                    Bait
-                                </button>
+                            <div class='row'>
+                                <div class='col-sm-2 offset-sm-3'>
+                                   <img id='safariPlayer' src='assets/images/safari/playerBack.png'>
+                                </div>
                             </div>
-                            <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.lockButtons();SafariBattle.throwRock()' class='btn btn-info btn-sm safariButton'>
-                                    Rock
-                                </button>
-                            </div>
-                            <div class='col-sm-6 safariOption'>
-                                <button onClick='SafariBattle.lockButtons();SafariBattle.run()' class='btn btn-info btn-sm safariButton'>Run
-                                </button>
+
+                            <div id='battleConsole' class='row'>
+                                <div class='col-sm-6'>
+                                    <h4 id='safariBattleText' class="centeredBySpan" data-bind='html: SafariBattle.text'></h4>
+                                    <span class="centerSpan"></span>
+                                </div>
+                                <div class='row col-sm-4 offset-sm-2 safariOptions'>
+                                    <div class='col-sm-6 safariOption'>
+                                        <button onClick='SafariBattle.lockButtons();SafariBattle.throwBall()' class='btn btn-info btn-sm safariButton'
+                                                data-bind='text: "Ball (" + Safari.balls() + ")"'></button>
+                                    </div>
+                                    <div class='col-sm-6 safariOption'>
+                                        <button onClick='SafariBattle.lockButtons();SafariBattle.throwBait()' class='btn btn-info btn-sm safariButton'>
+                                            Bait
+                                        </button>
+                                    </div>
+                                    <div class='col-sm-6 safariOption'>
+                                        <button onClick='SafariBattle.lockButtons();SafariBattle.throwRock()' class='btn btn-info btn-sm safariButton'>
+                                            Rock
+                                        </button>
+                                    </div>
+                                    <div class='col-sm-6 safariOption'>
+                                        <button onClick='SafariBattle.lockButtons();SafariBattle.run()' class='btn btn-info btn-sm safariButton'>Run
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                <!-- Help tab -->
+                <div  id="safariHelp" class="tab-pane fade">
+                    <div class="modal-body" style="width: 80%;margin: auto;">
+                        <p id="safariHelpText">
+                            <p>The safari zone contains several unique pokemon, and a different method of encountering and capturing pokemon.</p>
+                            <p>After paying the entrance fee, you will be able to walk around in the safari zone. To encounter pokemon, you must walk in tall grass.</p>
+                            <p>
+                                When you have encountered a pokemon, you will be given 4 options:
+                                <ul>
+                                    <li>Ball: This will throw a pokeball and give you a chance of capturing the pokemon</li>
+                                    <li>Rock: Throwing a rock will make the pokemon more likely to flee, but easier to catch</li>
+                                    <li>Bait: Throwing bait will make the pokemon less likely to flee, but harder to catch</li>
+                                    <li>Run: This will end the encounter</li>
+                                </ul>
+                            </p>
+                            <p>After your turn of the encounter, if it did not result in the encounter ending, the wild pokemon will have a chance of running away.</p>
+                            <p>Your safari exploration will end when you have run out of pokeballs.</p>
+                        </p>
+
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 </div>
+

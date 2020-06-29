@@ -1,7 +1,9 @@
 class TypeHelper {
 
     //@formatter:off
-    public static typeMatrix : Array<Array<number>> = [
+    /*eslint-disable */
+
+    public static typeMatrix: Array<Array<number>> = [
         //                E              F
         //                L              I                   P
         // N              E              G    P    G    F    S                   D
@@ -30,37 +32,33 @@ class TypeHelper {
         [  1, 0.5,   1,   1,   1,   1,   2, 0.5,   1,   1,   1,   1,   1,   1,   2,   2, 0.5,   1], // FAIRY
     ];
     //@formatter:on
+    /*eslint-enable */
 
-    public static getAttackModifier(a1: GameConstants.PokemonType, a2: GameConstants.PokemonType, d1: GameConstants.PokemonType, d2: GameConstants.PokemonType): number {
+    public static getAttackModifier(a1: PokemonType, a2: PokemonType, d1: PokemonType, d2: PokemonType): number {
 
-        if (a1 == GameConstants.PokemonType.None || d1 == GameConstants.PokemonType.None) {
+        if (a1 == PokemonType.None || d1 == PokemonType.None) {
             return 1;
         }
 
-        let attackType1 = GameConstants.PokemonType[a1];
-        let attackType2 = GameConstants.PokemonType[a2];
-        let defendType1 = GameConstants.PokemonType[d1];
-        let defendType2 = GameConstants.PokemonType[d2];
-
-        let list = player.shardUpgrades;
+        const list = player.shardUpgrades;
         //TODO factor in shard value
-        let m1 = TypeHelper.typeMatrix[attackType1][defendType1];
-        m1 += (list[attackType1][this.valueToType(m1)]() * GameConstants.SHARD_UPGRADE_STEP);
+        let m1 = TypeHelper.typeMatrix[a1][d1];
+        m1 += (list[a1][this.valueToType(m1)]() * GameConstants.SHARD_UPGRADE_STEP);
 
         let m2 = 1, m3 = 1, m4 = 1;
-        if (d2 != GameConstants.PokemonType.None) {
-            m2 = TypeHelper.typeMatrix[attackType1][defendType2];
-            m2 += (list[attackType1][this.valueToType(m2)]() * GameConstants.SHARD_UPGRADE_STEP);
+        if (d2 != PokemonType.None) {
+            m2 = TypeHelper.typeMatrix[a1][d2];
+            m2 += (list[a1][this.valueToType(m2)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
-        if (a2 != GameConstants.PokemonType.None) {
-            m3 = TypeHelper.typeMatrix[attackType2][defendType1];
-            m3 += (list[attackType2][this.valueToType(m3)]() * GameConstants.SHARD_UPGRADE_STEP);
+        if (a2 != PokemonType.None) {
+            m3 = TypeHelper.typeMatrix[a2][d1];
+            m3 += (list[a2][this.valueToType(m3)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
-        if (a2 != GameConstants.PokemonType.None && d2 != GameConstants.PokemonType.None) {
-            let m4 = TypeHelper.typeMatrix[attackType2][defendType2];
-            m4 += (list[attackType2][this.valueToType(m4)]() * GameConstants.SHARD_UPGRADE_STEP);
+        if (a2 != PokemonType.None && d2 != PokemonType.None) {
+            m4 = TypeHelper.typeMatrix[a2][d2];
+            m4 += (list[a2][this.valueToType(m4)]() * GameConstants.SHARD_UPGRADE_STEP);
         }
 
         return m1 * m2 * m3 * m4;
@@ -84,44 +82,44 @@ class TypeHelper {
     }
 
     public static readonly typeColors = [
-        "595c3b", // Normal
-        "b10818", // Fire
-        "294a94", // Water
-        "b57b31", // Electric
-        "4a944a", // Grass
-        "42a59c", // Ice
-        "b54a4a", // Fighting
-        "7b42c6", // Poison
-        "946b4a", // Ground
-        "218cb5", // Flying
-        "ce6363", // Psychic
-        "8cb521", // Bug
-        "a58c4a", // Rock
-        "605a72", // Ghost
-        "8c424a", // Dragon
-        "4a6b84", // Dark
-        "737373", // Steel
-        "d694ce"  // Fairy
+        '595c3b', // Normal
+        'b10818', // Fire
+        '294a94', // Water
+        'b57b31', // Electric
+        '4a944a', // Grass
+        '42a59c', // Ice
+        'b54a4a', // Fighting
+        '7b42c6', // Poison
+        '946b4a', // Ground
+        '218cb5', // Flying
+        'ce6363', // Psychic
+        '8cb521', // Bug
+        'a58c4a', // Rock
+        '605a72', // Ghost
+        '8c424a', // Dragon
+        '4a6b84', // Dark
+        '737373', // Steel
+        'd694ce',  // Fairy
     ];
 
     public static readonly typeColorsLocked = [
-        "d3d4c4", // Normal
-        "fb9d9d", // Fire
-        "99b6ff", // Water
-        "ffda99", // Electric
-        "aff1a7", // Grass
-        "b5efef", // Ice
-        "f1bba7", // Fighting
-        "e7ccff", // Poison
-        "e3d1b5", // Ground
-        "99dfff", // Flying
-        "ffb5ad", // Psychic
-        "dbf99f", // Bug
-        "e3d1b5", // Rock
-        "c8c3d5", // Ghost
-        "e7b1b1", // Dragon
-        "bcccdc", // Dark
-        "cccccc", // Steel
-        "ffc6e7"  // Fairy
+        'd3d4c4', // Normal
+        'fb9d9d', // Fire
+        '99b6ff', // Water
+        'ffda99', // Electric
+        'aff1a7', // Grass
+        'b5efef', // Ice
+        'f1bba7', // Fighting
+        'e7ccff', // Poison
+        'e3d1b5', // Ground
+        '99dfff', // Flying
+        'ffb5ad', // Psychic
+        'dbf99f', // Bug
+        'e3d1b5', // Rock
+        'c8c3d5', // Ghost
+        'e7b1b1', // Dragon
+        'bcccdc', // Dark
+        'cccccc', // Steel
+        'ffc6e7',  // Fairy
     ];
 }

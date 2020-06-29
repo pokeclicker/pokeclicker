@@ -20,5 +20,9 @@
     </span>
 </script>
 
+<script type="text/html" id="amountTemplate">
+    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': $data.amount, 'currency': $data.currency}}"></span>
+</script>
+
 <!-- Example usage -->
-<!-- <span data-bind="template: { name: 'currencyTemplate', data: {'amount': FarmRunner.plotPrice(), 'currency': GameConstants.Currency.farmPoint}}"></span> -->
+<!-- <span data-bind="template: { name: 'currencyTemplate', data: {'amount': FarmController.plotPrice(), 'currency': GameConstants.Currency.farmPoint}}"></span> -->

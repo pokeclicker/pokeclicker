@@ -6,6 +6,6 @@ class ShinyPokemonRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(player._caughtShinyList().length, this.requiredValue);
+        return Math.min(App.game.party.shinyPokemon.length, this.requiredValue);
     }
 }

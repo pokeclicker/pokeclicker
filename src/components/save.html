@@ -1,46 +1,54 @@
 <div class="modal fade noselect" id="saveModal" tabindex="-1" role="dialog"
-aria-labelledby="saveModalLabel">
-<div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content">
-       <div class="modal-body p-0">
-           <div class="tabbable">
-               <ul class="nav nav-tabs nav-fill">
-                   <li class="nav-item"><a class="nav-link active" href="#saveTab" data-toggle="tab">Save</a></li>
-                   <li class="nav-item"><a class="nav-link" href="#saveConvert" data-toggle="tab">Converter</a></li>
-               </ul>
-               <div class="tab-content">
-                    <div id="saveTab" class="tab-pane fade in active show">
-                       <div class="page-item m-0 pt-3 pb-3">
-                           <button class="btn btn-info" onClick=Save.download()>Download Save</button>
-                           <hr>
+     aria-labelledby="saveModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <div class="tabbable">
+                    <ul class="nav nav-tabs nav-fill">
+                        <li class="nav-item"><a class="nav-link active" href="#saveTab" data-toggle="tab">Save</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#saveConvert" data-toggle="tab">Converter</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="saveTab" class="tab-pane fade in active show">
+                            <div class="page-item m-0 pt-3 pb-3">
+                                <form class="form-inline justify-content-center">
+                                    <input placeholder="Enter code..." id="redeemable-code-input" type="text">
+                                    <button class="btn btn-info" name="name" value="value" type="submit"
+                                            onclick="RedeemableCodeController.enterCode(); return false;">Claim!
+                                    </button>
+                                </form>
+                                <hr>
 
-                           <input type="file" id="input" accept=".txt" style="display:none;"
-                                  onchange=Save.loadFromFile(this.files[0])>
-                           <label for="input" class="btn btn-info">Import Save</label>
-                           <hr>
-                           <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
-                            savefile</h3>
-                           <button class="btn btn-danger" onClick="Save.reset(false)">Reset All</button>
-                           <button class="btn btn-danger" onClick="Save.reset(true)">Reset Keep Shinies</button>
-                       </div>
-                   </div>
+                                <button class="btn btn-info" onClick=Save.download()>Download Save</button>
+                                <hr>
 
-                   <div id="saveConvert" class="tab-pane fade">
-                       <div class="page-item m-0 pt-3 pb-3">
-                           <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
-                           <textarea id="convertTextArea" class="saveTextArea"></textarea>
-                           <button style="float: right;" class="btn btn-success" onclick="Save.convert()">
-                               Convert
-                           </button>
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
+                                <input type="file" id="input" accept=".txt" style="display:none;"
+                                       onchange=Save.loadFromFile(this.files[0])>
+                                <label for="input" class="btn btn-info">Import Save</label>
+                                <hr>
+                                <h3 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
+                                    savefile</h3>
+                                <button class="btn btn-danger" onClick="Save.reset()">Reset All</button>
+                            </div>
+                        </div>
 
-       <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       </div>
-   </div>
-</div>
+                        <div id="saveConvert" class="tab-pane fade">
+                            <div class="page-item m-0 pt-3 pb-3">
+                                <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
+                                <textarea id="convertTextArea" class="saveTextArea"></textarea>
+                                <button style="float: right;" class="btn btn-success" onclick="Save.convert()">
+                                    Convert
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

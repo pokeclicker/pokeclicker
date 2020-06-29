@@ -1,27 +1,27 @@
 <div class="modal" id="keyItemModal" tabindex="-1" role="dialog"
-aria-labelledby="keyItemModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content" style="text-align: center">
-       <div class="modal-header">
-           <div style="width: 100%;">
-               <img src="assets/images/oak.png">
-               <h5 class="modal-title" id="keyItemModalLabel">New key item!</h5>
-           </div>
-       </div>
-       <div class="modal-body">
-           <h5><b>Congratulations!</b></h5>
-           <span>You have gained a</span><br>
-           <img
-                   class="key-item"
-                   data-bind="attr:{ title: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name(),  src: 'assets/images/keyitems/' + KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name() + '.png'}"
-                   src=""/><br>
-           <span><strong data-bind="text: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).name()">Name</strong></span><br>
-           <span data-bind="html: KeyItemHandler.getKeyItemByName(player.recentKeyItem()).description()">Description</span>
-
-       </div>
-       <div class="modal-footer">
-           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-       </div>
-   </div>
-</div>
+     aria-labelledby="keyItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="text-align: center">
+            <div class="modal-header">
+                <div style="width: 100%;">
+                    <img src="assets/images/oak.png">
+                    <h5 class="modal-title" id="keyItemModalLabel">New key item!</h5>
+                </div>
+            </div>
+            <div class="modal-body">
+                <h5><b>Congratulations!</b></h5>
+                <span>You have gained a</span><br>
+                <img
+                        class="key-item"
+                        data-bind="attr:{ title: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName,  src: 'assets/images/keyitems/' + KeyItems.KeyItem[KeyItemController.latestGainedItem] + '.png'}"
+                        src=""/><br>
+                <span><strong
+                        data-bind="text: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName">Name</strong></span><br>
+                <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem].description">Description</span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>

@@ -4,50 +4,100 @@
 class Game {
     interval;
     undergroundCounter: number;
-    public static achievementCounter: number = 0;
+    public static achievementCounter = 0;
 
+    // Features
     public breeding: Breeding;
     public pokeballs: Pokeballs;
+    public wallet: Wallet;
+    public keyItems: KeyItems;
+    public badgeCase: BadgeCase;
+    public oakItems: OakItems;
+    public party: Party;
+    public farming: Farming;
+
+    public redeemableCodes: RedeemableCodes;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
     /**
      * TODO(@Isha) pass all features through the constructor
      */
-    constructor(breeding: Breeding, pokeballs: Pokeballs) {
+    constructor(
+        breeding: Breeding,
+        pokeballs: Pokeballs,
+        wallet: Wallet,
+        keyItems: KeyItems,
+        badgeCase: BadgeCase,
+        oakItems: OakItems,
+        party: Party,
+        farming: Farming,
+        codes: RedeemableCodes
+    ) {
         this.breeding = breeding;
         this.pokeballs = pokeballs;
+        this.wallet = wallet;
+        this.keyItems = keyItems;
+        this.badgeCase = badgeCase;
+        this.oakItems = oakItems;
+        this.party = party;
+        this.farming = farming;
+
+        this.redeemableCodes = codes;
+
+        this._gameState = ko.observable(GameConstants.GameState.paused);
 
 
         player = Save.load();
 
+        AchievementHandler.initialize();
+    }
+
+    load() {
         // TODO(@Isha) Refactor this saving logic
-        let saveJSON = localStorage.getItem("save");
+        const saveJSON = localStorage.getItem('save');
         if (saveJSON !== null) {
-            let saveObject = JSON.parse(saveJSON);
+            const saveObject = JSON.parse(saveJSON);
             this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
             this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
+            this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
+            this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
+            this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
+            this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
+            this.party.fromJSON(saveObject[this.party.saveKey]);
+            this.farming.fromJSON(saveObject[this.farming.saveKey]);
+
+            this.redeemableCodes.fromJSON(saveObject[this.redeemableCodes.saveKey]);
         }
-
-        KeyItemHandler.initialize();
-        AchievementHandler.initialize();
-        player.gainKeyItem("Coin case", true);
-        player.gainKeyItem("Teachy tv", true);
-        player.gainKeyItem("Pokeball bag", true);
-
-        this._gameState = ko.observable(GameConstants.GameState.fighting);
-        this.load();
     }
 
     initialize() {
         this.breeding.initialize();
         this.pokeballs.initialize();
+        this.keyItems.initialize();
+        this.oakItems.initialize();
+        this.farming.initialize();
+
+        // TODO refactor to proper initialization methods
+        Battle.generateNewEnemy();
+        //Safari.load();
+        Save.loadMine();
+        Underground.energyTick(Underground.getEnergyRegenTime());
+        DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
+        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
+        QuestHelper.loadCurrentQuests(player.currentQuests);
+        if (!player.tutorialComplete()) {
+            QuestLineHelper.createTutorial();
+            QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
+        }
+
+        this.gameState = GameConstants.GameState.fighting;
     }
 
     start() {
-        console.log("game started");
+        console.log('game started');
         if (player.starter === GameConstants.Starter.None) {
-            StartSequenceRunner.start()
+            StartSequenceRunner.start();
         }
         this.interval = setInterval(this.gameTick.bind(this), GameConstants.TICK_TIME);
     }
@@ -59,7 +109,6 @@ class Game {
     gameTick() {
         // Update tick counters
         this.undergroundCounter += GameConstants.TICK_TIME;
-        FarmRunner.counter += GameConstants.TICK_TIME;
         EffectEngineRunner.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
@@ -97,7 +146,7 @@ class Game {
         }
 
         if (Save.counter > GameConstants.SAVE_TICK) {
-            let now = new Date();
+            const now = new Date();
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
                 player.questRefreshes = 0;
                 QuestHelper.quitAllQuests();
@@ -119,9 +168,7 @@ class Game {
             Underground.counter = 0;
         }
 
-        if (FarmRunner.counter > GameConstants.FARM_TICK) {
-            FarmRunner.tick();
-        }
+        this.farming.update(GameConstants.TICK_TIME / 1000);
 
         if (EffectEngineRunner.counter > GameConstants.EFFECT_ENGINE_TICK) {
             EffectEngineRunner.tick();
@@ -136,27 +183,12 @@ class Game {
 
     }
 
-    load() {
-        OakItemRunner.loadOakItems();
-        Battle.generateNewEnemy();
-        Safari.load();
-        Save.loadMine();
-        Underground.energyTick(Underground.getEnergyRegenTime());
-        DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
-        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
-        QuestHelper.loadCurrentQuests(player.currentQuests);
-        if (!player.tutorialComplete()) {
-            QuestLineHelper.createTutorial();
-            QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
-        }
-    }
-
     // Knockout getters/setters
     get gameState() {
-        return this._gameState()
+        return this._gameState();
     }
 
     set gameState(value) {
-        this._gameState(value)
+        this._gameState(value);
     }
 }

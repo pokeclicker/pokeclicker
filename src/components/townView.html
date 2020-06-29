@@ -26,7 +26,7 @@
                </button>
                <button class="btn btn-secondary p-0"
                        onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
-                       data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon(), attr: {class: player.town().dungeon() && player.dungeonTokens() >= player.town().dungeon().tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0'}">
+                       data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon(), attr: {class: player.town().dungeon() && App.game.wallet.currencies[GameConstants.Currency.dungeonToken] >= player.town().dungeon().tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0'}">
                    Start<br/>
                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': player.town().dungeon().tokenCost, 'currency': GameConstants.Currency.dungeonToken}}"></span>
                </button>
@@ -53,13 +53,13 @@
            <!--Display all available Pokémon in this dungeon-->
            <ul class="list-inline"
                data-bind="foreach: player.town().dungeon().allPokemonNames">
-               <li class="list-inline-item" data-bind="if: player.alreadyCaughtPokemon($data)">
+               <li class="list-inline-item" data-bind="if: App.game.party.alreadyCaughtPokemonByName($data)">
                    <img class="dungeon-pokemon-preview" src=""
-                        data-bind="attr:{ src: 'assets/images/' + (player.alreadyCaughtPokemonShiny($data) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png' }"/>
-                   <sup style="float:right; top:10px;" data-bind="visible: player.alreadyCaughtPokemonShiny($data)">✨</sup>
+                        data-bind="attr:{ src: 'assets/images/' + (App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png' }"/>
+                   <sup style="float:right; top:10px;" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
                </li>
                <li class="list-inline-item"
-                   data-bind="ifnot: player.alreadyCaughtPokemon($data)">
+                   data-bind="ifnot: App.game.party.alreadyCaughtPokemonByName($data)">
                    <img class="dungeon-pokemon-preview dungeon-pokemon-locked" src=""
                         data-bind="attr:{ src: 'assets/images/pokemon/' + pokemonMap[$data].id + '.png' }"/>
                </li>
