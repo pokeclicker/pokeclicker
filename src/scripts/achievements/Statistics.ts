@@ -31,7 +31,7 @@ class Statistics {
         'totalShards': GameHelper.enumLength(PokemonType) - 1,  // remove "None" pokemon type
         'oakItemUses': GameHelper.enumLength(OakItems.OakItem),
         'berriesHarvested': GameHelper.enumLength(BerryType) - 1,  // remove "None" berry
-        'routeKills': GameConstants.AMOUNT_OF_ROUTES + 1,
+        'routeKills': GameConstants.HIGHEST_ROUTE_NUMBER + 1, // Add 1 for "route 0"
     };
 
     constructor(saved = {}) {
