@@ -681,7 +681,6 @@ namespace GameConstants {
         'Victory Road Hoenn',
         'Petalburg Woods',
         'New Mauville',
-        'Sea Mauville',
         // These aren't implemented anywhere yet
         /*
         "Island Cave",
