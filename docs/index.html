@@ -4440,20 +4440,6 @@
     height="12" stroke="#6c8ebf" width="12" x="33.5" y="378.5">
 </rect>
 
-    <!--Sea Mauville-->
-    
-
-<rect fill="#ffffff" height="15" stroke="none" width="15"
-    x="156" y="354">
-</rect>
-<rect data-bind="
-    click:function(){MapHelper.moveToTown('Sea Mauville')},
-    attr: { class: MapHelper.calculateTownCssClass('Sea Mauville') }"
-    class="city" data-town="Sea Mauville"
-    fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
-    height="12" stroke="#6c8ebf" width="12" x="157.5" y="355.5">
-</rect>
-
     <!--New Mauville-->
     
 
@@ -5961,7 +5947,7 @@ aria-labelledby="badgeCaseModalLabel">
                         Johto
                     </button>
                     <button class='btn btn-primary'
-                        data-bind='visible: player.region != 2 && player.highestRegion >= 2'
+                        data-bind='visible: player.region != 2 && player.highestRegion() >= 2'
                         onclick='MapHelper.moveToTown("Slateport City");player.region = 2;$("#ShipModal").modal("hide")'>
                         Hoenn
                     </button>
