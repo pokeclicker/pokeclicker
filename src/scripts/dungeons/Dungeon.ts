@@ -12,7 +12,7 @@ class Dungeon {
     bossList: DungeonBossPokemon[];
     tokenCost: number;
     badgeReq: BadgeCase.Badge;
-    itemRoute: number;
+    itemRoute: number; // Nearest route, used for breeding steps
     level: number;
     allPokemonNames: string[];
 
@@ -145,95 +145,95 @@ dungeonList['Sprout Tower'] = new Dungeon('Sprout Tower',
     ['Rattata', 'Gastly', 'Hoothoot'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
     28735,
-    [new DungeonBossPokemon('Bellsprout', 2000, 10)],
+    [new DungeonBossPokemon('Bellsprout', 120000, 10)],
     2500, BadgeCase.Badge.Elite_KantoChampion, 31, 5
 );
 
 dungeonList['Ruins of Alph'] = new Dungeon('Ruins of Alph',
     ['Natu', 'Wooper', 'Quagsire', 'Smeargle', 'Magikarp', 'Poliwag', 'Poliwhirl'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    600,
-    [new DungeonBossPokemon('Unown', 3000, 14)],
+    30600,
+    [new DungeonBossPokemon('Unown', 130000, 14)],
     3000, BadgeCase.Badge.Zephyr, 32, 7
 );
 
 dungeonList['Union Cave'] = new Dungeon('Union Cave',
     ['Rattata', 'Sandshrew', 'Zubat', 'Geodude', 'Onix', 'Goldeen', 'Magikarp'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    600,
-    [new DungeonBossPokemon('Wooper', 3000, 14)],
+    31600,
+    [new DungeonBossPokemon('Wooper', 130000, 14)],
     3000, BadgeCase.Badge.Zephyr, 32, 7
 );
 
 dungeonList['Slowpoke Well'] = new Dungeon('Slowpoke Well',
     ['Zubat', 'Slowpoke'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    900,
-    [new DungeonBossPokemon('Slowbro', 4000, 20)],
+    33900,
+    [new DungeonBossPokemon('Slowbro', 140000, 20)],
     3500, BadgeCase.Badge.Zephyr, 33, 12
 );
 
 dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
     ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Oddish', 'Paras', 'Hoothoot'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
-    1200,
-    [new DungeonBossPokemon('Noctowl', 5000, 30), new DungeonBossPokemon('Beedrill', 5000, 30), new DungeonBossPokemon('Butterfree', 5000, 30), new DungeonBossPokemon('Celebi', 300000, 50)],
+    41200,
+    [new DungeonBossPokemon('Noctowl', 150000, 30), new DungeonBossPokemon('Beedrill', 150000, 30), new DungeonBossPokemon('Butterfree', 150000, 30), new DungeonBossPokemon('Celebi', 300000, 50)],
     4000, BadgeCase.Badge.Hive, 34, 15
 );
 
 dungeonList['Burned Tower'] = new Dungeon('Burned Tower',
     ['Rattata', 'Zubat', 'Koffing', 'Raticate'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
-    1500,
-    [new DungeonBossPokemon('Golbat', 6000, 35), new DungeonBossPokemon('Weezing', 6000, 35), new DungeonBossPokemon('Shuckle', 300000, 50)],
+    44500,
+    [new DungeonBossPokemon('Golbat', 160000, 35), new DungeonBossPokemon('Weezing', 160000, 35), new DungeonBossPokemon('Shuckle', 300000, 50)],
     4500, BadgeCase.Badge.Fog, 37, 20
 );
 
 dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     ['Rattata', 'Gastly'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    1500,
-    [new DungeonBossPokemon('Raticate', 6000, 35), new DungeonBossPokemon('Haunter', 6000, 35), new DungeonBossPokemon('Ho-Oh', 300000, 70)],
+    44500,
+    [new DungeonBossPokemon('Raticate', 160000, 35), new DungeonBossPokemon('Haunter', 160000, 35), new DungeonBossPokemon('Ho-Oh', 300000, 70)],
     4500, BadgeCase.Badge.Fog, 37, 20
 );
 
 dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
     ['Zubat', 'Golbat', 'Seel', 'Krabby', 'Horsea'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xExp],
-    1800,
-    [new DungeonBossPokemon('Dewgong', 7000, 40), new DungeonBossPokemon('Kingler', 7000, 40), new DungeonBossPokemon('Lugia', 300000, 70)],
+    46800,
+    [new DungeonBossPokemon('Dewgong', 170000, 40), new DungeonBossPokemon('Kingler', 170000, 40), new DungeonBossPokemon('Lugia', 300000, 70)],
     5000, BadgeCase.Badge.Storm, 41, 25
 );
 
 dungeonList['Mt Mortar'] = new Dungeon('Mt Mortar',
     ['Rattata', 'Zubat', 'Geodude', 'Marill', 'Raticate', 'Golbat', 'Graveler'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
-    2100,
-    [new DungeonBossPokemon('Tyrogue', 8000, 45)],
+    52100,
+    [new DungeonBossPokemon('Tyrogue', 180000, 45)],
     5500, BadgeCase.Badge.Storm, 42, 30
 );
 
 dungeonList['Ice Path'] = new Dungeon('Ice Path',
     ['Zubat', 'Jynx', 'Swinub'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
-    2400,
-    [new DungeonBossPokemon('Delibird', 9000, 50)],
+    60400,
+    [new DungeonBossPokemon('Delibird', 190000, 50)],
     6000, BadgeCase.Badge.Glacier, 44, 32
 );
 
 dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
     ['Zubat', 'Geodude', 'Golbat', 'Graveler', 'Wobbuffet'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    3000,
-    [new DungeonBossPokemon('Dunsparce', 10000, 55)],
+    63000,
+    [new DungeonBossPokemon('Dunsparce', 200000, 55)],
     6500, BadgeCase.Badge.Rising, 45, 35
 );
 
 dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
     ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    3500,
-    [new DungeonBossPokemon('Larvitar', 12000, 60)],
+    66500,
+    [new DungeonBossPokemon('Larvitar', 220000, 60)],
     10000, BadgeCase.Badge.Elite_Karen, 28, 50
 );
 
@@ -242,104 +242,122 @@ dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
 dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
     ['Poochyena', 'Zigzagoon', 'Wurmple', 'Silcoon', 'Cascoon', 'Taillow', 'Shroomish'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Slakoth', 100000, 10)],
+    97000,
+    [new DungeonBossPokemon('Slakoth', 230000, 10)],
     12000, null, 101, 5);
 
 dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
     ['Whismur'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Whismur', 100000, 20)],
+    98000,
+    [new DungeonBossPokemon('Whismur', 250000, 20)],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Granite Cave'] = new Dungeon('Granite Cave',
     ['Zubat', 'Abra', 'Geodude', 'Makuhita', 'Aron', 'Sableye'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Mawile', 100000, 20), new DungeonBossPokemon('Nosepass', 100000, 20)],
+    101000,
+    [new DungeonBossPokemon('Mawile', 260000, 20), new DungeonBossPokemon('Nosepass', 260000, 20)],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Fiery Path'] = new Dungeon('Fiery Path',
     ['Machop', 'Grimer', 'Koffing', 'Slugma', 'Numel'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Torkoal', 100000, 20)],
+    104000,
+    [new DungeonBossPokemon('Torkoal', 300000, 20)],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
-    ['Unown'],
+    ['Zubat', 'Golbat', 'Goldeen', 'Magikarp', 'Barboach'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    103000,
+    [
+        new DungeonBossPokemon('Solrock', 320000, 20),
+        new DungeonBossPokemon('Lunatone', 320000, 20),
+    ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
-    ['Unown'],
+    ['Zubat', 'Poochyena'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
     4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    [new DungeonBossPokemon('Numel', 350000, 20)],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
-    ['Unown'],
+    ['Machop', 'Numel', 'Spoink'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    120000,
+    [
+        new DungeonBossPokemon('Machop', 400000, 20),
+        new DungeonBossPokemon('Numel', 400000, 20),
+        new DungeonBossPokemon('Spoink', 400000, 20),
+    ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['New Mauville'] = new Dungeon('New Mauville',
-    ['Unown'],
+    ['Magnemite', 'Voltorb'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
-    12000, BadgeCase.Badge.Stone, 101, 5);
-
-dungeonList['Sea Mauville'] = new Dungeon('Sea Mauville',
-    ['Unown'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    110000,
+    [
+        new DungeonBossPokemon('Magneton', 420000, 20),
+        new DungeonBossPokemon('Electrode', 420000, 20),
+    ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
-    ['Unown'],
+    ['Shuppet', 'Duskull', 'Vulpix', 'Wingull', 'Meditite'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    120000,
+    [
+        new DungeonBossPokemon('Shuppet', 430000, 20),
+        new DungeonBossPokemon('Duskull', 440000, 20),
+        new DungeonBossPokemon('Chimecho', 430000, 20),
+    ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Shoal Cave'] = new Dungeon('Shoal Cave',
-    ['Unown'],
+    ['Zubat', 'Golbat', 'Spheal', 'Tentacool', 'Magikarp', 'Wailmer'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    110000,
+    [new DungeonBossPokemon('Snorunt', 460000, 20)],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
-    ['Unown'],
+    ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    160000,
+    [
+        new DungeonBossPokemon('Kyogre', 650000, 20),
+        new DungeonBossPokemon('Groudon', 650000, 20),
+    ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
-    ['Unown'],
+    ['Zubat', 'Golbat', 'Tentacool', 'Magikarp', 'Wailmer'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    130000,
+    [new DungeonBossPokemon('Wailmer', 500000, 20)],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
-    ['Unown'],
+    ['Golbat', 'Sableye', 'Claydol', 'Banette', 'Mawile', 'Altaria'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    170000,
+    [
+        new DungeonBossPokemon('Dusclops', 500000, 20),
+        new DungeonBossPokemon('Rayquaza', 724002, 20),
+    ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
-    ['Unown'],
+    ['Zubat', 'Golbat', 'Whismur', 'Loudred', 'Makuhita', 'Aron', 'Mawile', 'Meditite', 'Geodude', 'Goldeen', 'Magikarp', 'Barboach', 'Whiscash'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
+    150000,
+    [
+        new DungeonBossPokemon('Hariyama', 500000, 20),
+        new DungeonBossPokemon('Lairon', 500000, 20),
+        new DungeonBossPokemon('Medicham', 500000, 20),
+        new DungeonBossPokemon('Graveler', 500000, 20),
+    ],
     12000, BadgeCase.Badge.Stone, 101, 5);

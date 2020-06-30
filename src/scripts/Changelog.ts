@@ -36,17 +36,24 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
 const changelogItems = [
     // Unreleased
 
+    // v0.3.0
+    new Changelog(changelogType.VERSION, 'v0.3.0 - Hoenn Update'),
+    new Changelog(changelogType.NEW, 'Add initial Hoenn region'),
+    new Changelog(changelogType.CHANGE, 'Shiny Pokemon now increase click damage at a 50% rate compared to normal Pokemon'),
+    new Changelog(changelogType.CHANGE, 'Allow better control of which type of ball to use when capturing a Pokemon'),
+
     // v0.2.1
     new Changelog(changelogType.VERSION, 'v0.2.1'),
     new Changelog(changelogType.REMOVED, 'Remove Hoenn dungeons for now to avoid triggering errors'),
+    new Changelog(changelogType.FIXED, 'Other berries will now be tasked in Quests'),
 
     // v0.2.0
-    new Changelog(changelogType.VERSION, 'v0.2.0 Redeemable codes'),
+    new Changelog(changelogType.VERSION, 'v0.2.0 - Redeemable codes'),
     new Changelog(changelogType.NEW, 'Add redeemable codes to get a quick boost. You can enter them under the Save tab'),
     new Changelog(changelogType.FIXED, 'Gyms no longer reset 1 second in'),
 
     // v0.1.0
-    new Changelog(changelogType.VERSION, 'v0.1.0 Farming refactor'),
+    new Changelog(changelogType.VERSION, 'v0.1.0 - Farming refactor'),
     new Changelog(changelogType.CHANGE, 'Farming plots are a bit more expensive'),
     new Changelog(changelogType.CHANGE, 'Wailmer pail unlocks at 3 Cheri berries instead of 5'),
     new Changelog(changelogType.FIXED, 'Tooltips no longer overstay their welcome on the Farm'),

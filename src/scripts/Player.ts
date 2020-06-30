@@ -48,8 +48,6 @@ class Player {
         this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
 
-        console.log(savedPlayer._itemList);
-
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
             for (const key in savedPlayer._itemList) {
