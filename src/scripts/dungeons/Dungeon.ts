@@ -272,8 +272,8 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
     103000,
     [
-      new DungeonBossPokemon('Solrock', 320000, 20),
-      new DungeonBossPokemon('Lunatone', 320000, 20),
+        new DungeonBossPokemon('Solrock', 320000, 20),
+        new DungeonBossPokemon('Lunatone', 320000, 20),
     ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
@@ -289,9 +289,9 @@ dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
     120000,
     [
-      new DungeonBossPokemon('Machop', 400000, 20),
-      new DungeonBossPokemon('Numel', 400000, 20),
-      new DungeonBossPokemon('Spoink', 400000, 20),
+        new DungeonBossPokemon('Machop', 400000, 20),
+        new DungeonBossPokemon('Numel', 400000, 20),
+        new DungeonBossPokemon('Spoink', 400000, 20),
     ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
@@ -300,8 +300,8 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
     110000,
     [
-      new DungeonBossPokemon('Magneton', 420000, 20),
-      new DungeonBossPokemon('Electrode', 420000, 20),
+        new DungeonBossPokemon('Magneton', 420000, 20),
+        new DungeonBossPokemon('Electrode', 420000, 20),
     ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
@@ -310,9 +310,9 @@ dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
     120000,
     [
-      new DungeonBossPokemon('Shuppet', 430000, 20),
-      new DungeonBossPokemon('Duskull', 440000, 20),
-      new DungeonBossPokemon('Chimecho', 430000, 20),
+        new DungeonBossPokemon('Shuppet', 430000, 20),
+        new DungeonBossPokemon('Duskull', 440000, 20),
+        new DungeonBossPokemon('Chimecho', 430000, 20),
     ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
@@ -328,8 +328,8 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
     160000,
     [
-      new DungeonBossPokemon('Kyogre', 650000, 20),
-      new DungeonBossPokemon('Groudon', 650000, 20),
+        new DungeonBossPokemon('Kyogre', 650000, 20),
+        new DungeonBossPokemon('Groudon', 650000, 20),
     ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
@@ -345,8 +345,8 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
     170000,
     [
-      new DungeonBossPokemon('Dusclops', 500000, 20),
-      new DungeonBossPokemon('Rayquaza', 724002, 20),
+        new DungeonBossPokemon('Dusclops', 500000, 20),
+        new DungeonBossPokemon('Rayquaza', 724002, 20),
     ],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
@@ -355,9 +355,9 @@ dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
     150000,
     [
-      new DungeonBossPokemon('Hariyama', 500000, 20),
-      new DungeonBossPokemon('Lairon', 500000, 20),
-      new DungeonBossPokemon('Medicham', 500000, 20),
-      new DungeonBossPokemon('Graveler', 500000, 20),
+        new DungeonBossPokemon('Hariyama', 500000, 20),
+        new DungeonBossPokemon('Lairon', 500000, 20),
+        new DungeonBossPokemon('Medicham', 500000, 20),
+        new DungeonBossPokemon('Graveler', 500000, 20),
     ],
     12000, BadgeCase.Badge.Stone, 101, 5);
