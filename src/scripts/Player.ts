@@ -32,6 +32,9 @@ class Player {
                 case 1:
                     this._route = ko.observable(29);
                     break;
+                case 2:
+                    this._route = ko.observable(101);
+                    break;
                 default:
                     this._route = ko.observable(1);
                     this._region = ko.observable(GameConstants.Region.kanto);
