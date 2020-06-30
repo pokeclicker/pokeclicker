@@ -291,7 +291,7 @@ namespace GameConstants {
     ];
 
     // Map navigation
-    export const AMOUNT_OF_ROUTES = 134;
+    export const HIGHEST_ROUTE_NUMBER = 134;
     export const AMOUNT_OF_ROUTES_KANTO = 25;
 
     export const ROUTE_KILLS_NEEDED = 10;
