@@ -295,13 +295,6 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
     [new DungeonBossPokemon('Unown', 100000, 20)],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
-dungeonList['Sea Mauville'] = new Dungeon('Sea Mauville',
-    ['Unown'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
-    [new DungeonBossPokemon('Unown', 100000, 20)],
-    12000, BadgeCase.Badge.Stone, 101, 5);
-
 dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
     ['Unown'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
