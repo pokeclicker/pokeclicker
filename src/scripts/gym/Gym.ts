@@ -490,6 +490,8 @@ gymList['Mossdeep City'] = new Gym(
     'Tate & Liza',
     'Mossdeep City',
     [
+        new GymPokemon('Xatu', 302000, 41),
+        new GymPokemon('Claydol', 303000, 41),
         new GymPokemon('Lunatone', 302000, 42),
         new GymPokemon('Solrock', 303000, 42),
     ],
