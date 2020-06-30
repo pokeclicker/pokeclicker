@@ -162,7 +162,8 @@ TownList['Dark Cave'] = new DungeonTown('Dark Cave', [45]);
 TownList['Mt Silver'] = new DungeonTown('Mt Silver', [28], BadgeCase.Badge.Elite_Karen);
 
 //Hoenn Towns
-TownList['Littleroot Town'] = new Town('Littleroot Town', []);
+const LittleRootTownShop = new Shop(['Pokeball']);
+TownList['Littleroot Town'] = new Town('Littleroot Town', [], LittleRootTownShop);
 TownList['Oldale Town'] = new Town('Oldale Town', [101]);
 TownList['Petalburg City'] = new Town('Petalburg City', [102]);
 TownList['Rustboro City'] = new Town('Rustboro City', [104], null, null, 'Petalburg Woods');
@@ -173,7 +174,9 @@ TownList['Verdanturf Town'] = new Town('Verdanturf Town', [117]);
 TownList['Lavaridge Town'] = new Town('Lavaridge Town', [115], null, null, 'Mt. Chimney');
 TownList['Fallarbor Town'] = new Town('Fallarbor Town', [113]);
 TownList['Fortree City'] = new Town('Fortree City', [119]);
-TownList['Lilycove City'] = new Town('LilyCove City', [121], null, null, 'Mt. Pyre');
+
+const LilyCoveCityShop = new Shop(['Pokeball', 'Greatball', 'Ultraball', 'SmallRestore', 'MediumRestore', 'LargeRestore', 'xAttack', 'xClick', 'xExp', 'Token_collector', 'Item_magnet', 'Lucky_incense']);
+TownList['Lilycove City'] = new Town('LilyCove City', [121], LilyCoveCityShop, null, 'Mt. Pyre');
 TownList['Mossdeep City'] = new Town('Mossdeep City', [125], null, null, 'Shoal Cave');
 TownList['Sootopolis City'] = new Town('Sootopolis City', [126], null, null, 'Cave of Origin');
 TownList['Ever Grande City'] = new Town('Ever Grande City', [128]);
