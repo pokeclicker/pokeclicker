@@ -20,7 +20,7 @@ namespace GameConstants {
     export const ACHIEVEMENT_TICK = 1000;
     export const MIN_LOAD_TIME = 500;
 
-    export const MAX_AVAILABLE_REGION = 1;
+    export const MAX_AVAILABLE_REGION = 2; // Hoenn
 
     export const TotalPokemonsPerRegion = [
         151, // 151
@@ -291,7 +291,7 @@ namespace GameConstants {
     ];
 
     // Map navigation
-    export const AMOUNT_OF_ROUTES = 134;
+    export const HIGHEST_ROUTE_NUMBER = 134;
     export const AMOUNT_OF_ROUTES_KANTO = 25;
 
     export const ROUTE_KILLS_NEEDED = 10;
