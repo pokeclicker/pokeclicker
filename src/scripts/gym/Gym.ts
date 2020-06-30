@@ -235,7 +235,7 @@ gymList['Violet City'] = new Gym(
         new GymPokemon('Pidgeotto', 42000, 13),
     ],
     BadgeCase.Badge.Zephyr,
-    500,
+    250,
     BadgeCase.Badge.Elite_Lance,
     "...For pity's sake! My dad's cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge."
 );
@@ -260,7 +260,7 @@ gymList['Goldenrod City'] = new Gym(
         new GymPokemon('Miltank', 80000, 19),
     ],
     BadgeCase.Badge.Plain,
-    500,
+    1000,
     BadgeCase.Badge.Hive,
     "...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here's the Plain Badge."
 );
@@ -274,7 +274,7 @@ gymList['Ecruteak City'] = new Gym(
         new GymPokemon('Gengar', 42000, 25),
     ],
     BadgeCase.Badge.Fog,
-    500,
+    1500,
     BadgeCase.Badge.Plain,
     'I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge..'
 );
@@ -286,7 +286,7 @@ gymList['Cianwood City'] = new Gym(
         new GymPokemon('Poliwrath', 93000, 31),
     ],
     BadgeCase.Badge.Storm,
-    500,
+    2500,
     BadgeCase.Badge.Fog,
     "Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I'm going to train 24 hours a day!"
 );
@@ -299,7 +299,7 @@ gymList['Olivine City'] = new Gym(
         new GymPokemon('Steelix', 72000, 35),
     ],
     BadgeCase.Badge.Mineral,
-    500,
+    3500,
     BadgeCase.Badge.Storm,
     '...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge.'
 );
@@ -312,7 +312,7 @@ gymList['Mahogany Town'] = new Gym(
         new GymPokemon('Piloswine', 76000, 34),
     ],
     BadgeCase.Badge.Glacier,
-    500,
+    4000,
     BadgeCase.Badge.Mineral,
     "I am impressed by your prowess. With your strong will, I know you will overcome all life's obstacles. You are worthy of this Glacier Badge!"
 );
@@ -326,7 +326,7 @@ gymList['Blackthorn City'] = new Gym(
         new GymPokemon('Kingdra', 80000, 41),
     ],
     BadgeCase.Badge.Rising,
-    500,
+    5000,
     BadgeCase.Badge.Glacier,
     'Here, this is the Rising Badge... Hurry up! Take it!'
 );
@@ -417,7 +417,7 @@ gymList['Rustboro City'] = new Gym(
         new GymPokemon('Nosepass', 102000, 15),
     ],
     BadgeCase.Badge.Stone,
-    10000,
+    1000,
     BadgeCase.Badge.Elite_JohtoChampion,
     'So… I lost… It seems that I still have much more to learn… I understand.'
 );
@@ -429,7 +429,7 @@ gymList['Dewford Town'] = new Gym(
         new GymPokemon('Makuhita', 134000, 18),
     ],
     BadgeCase.Badge.Knuckle,
-    10000,
+    2000,
     BadgeCase.Badge.Stone,
     "Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you've got me. Take this Gym Badge!"
 );
@@ -442,7 +442,7 @@ gymList['Mauville City'] = new Gym(
         new GymPokemon('Magneton', 183000, 23),
     ],
     BadgeCase.Badge.Dynamo,
-    10000,
+    3000,
     BadgeCase.Badge.Knuckle,
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!'
 );
@@ -455,7 +455,7 @@ gymList['Lavaridge Town'] = new Gym(
         new GymPokemon('Torkoal', 204000, 28),
     ],
     BadgeCase.Badge.Heat,
-    10000,
+    4000,
     BadgeCase.Badge.Dynamo,
     "Oh... I guess I was trying too hard... I... I've only recently become a Gym Leader. I tried too hard to be someone I'm not. I have to do things my natural way. If I don't, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this."
 );
@@ -468,7 +468,7 @@ gymList['Petalburg City'] = new Gym(
         new GymPokemon('Slaking', 276000, 31),
     ],
     BadgeCase.Badge.Balance,
-    10000,
+    5000,
     BadgeCase.Badge.Heat,
     "… I… I can't… I can't believe it. I lost to you? But, rules are rules! Here, take this."
 );
@@ -482,7 +482,7 @@ gymList['Fortree City'] = new Gym(
         new GymPokemon('Altaria', 269000, 33),
     ],
     BadgeCase.Badge.Feather,
-    10000,
+    6000,
     BadgeCase.Badge.Balance,
     'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.'
 );
@@ -496,7 +496,7 @@ gymList['Mossdeep City'] = new Gym(
         new GymPokemon('Solrock', 303000, 42),
     ],
     BadgeCase.Badge.Mind,
-    10000,
+    8000,
     BadgeCase.Badge.Feather,
     "What? Our combination... Was shattered! It can't be helped. You've won... So, in recognition, take this Gym Badge."
 );
@@ -528,7 +528,7 @@ gymList['Elite Sidney'] = new Gym(
         new GymPokemon('Absol', 420000, 49),
     ],
     BadgeCase.Badge.Elite_Sidney,
-    10000,
+    15000,
     BadgeCase.Badge.Rain,
     "Well, how do you like that? I lost! Eh, it was fun, so it doesn't matter."
 );
@@ -543,7 +543,7 @@ gymList['Elite Phoebe'] = new Gym(
         new GymPokemon('Dusclops', 463000, 51),
     ],
     BadgeCase.Badge.Elite_Phoebe,
-    10000,
+    15000,
     BadgeCase.Badge.Elite_Sidney,
     "Oh, darn. I've gone and lost."
 );
@@ -558,7 +558,7 @@ gymList['Elite Glacia'] = new Gym(
         new GymPokemon('Walrein', 500000, 53),
     ],
     BadgeCase.Badge.Elite_Glacia,
-    10000,
+    15000,
     BadgeCase.Badge.Elite_Phoebe,
     "You and your Pokémon... How hot your spirits burn! The all-consuming heat overwhelms. It's no surprise that my icy skills failed to harm you."
 );
@@ -573,7 +573,7 @@ gymList['Elite Drake'] = new Gym(
         new GymPokemon('Salamence', 517000, 55),
     ],
     BadgeCase.Badge.Elite_Drake,
-    10000,
+    15000,
     BadgeCase.Badge.Elite_Glacia,
     'You deserve every credit for coming this far as a Trainer of Pokémon. You do seem to know what is needed. Yes, what a Trainer needs is a virtuous heart. Pokémon touch the good hearts of Trainers and learn good from wrong. They touch the good hearts of Trainers and grow strong. Go! Go onwards! The Champion is waiting!'
 );
@@ -589,7 +589,7 @@ gymList['Champion Wallace'] = new Gym(
         new GymPokemon('Milotic', 582000, 58),
     ],
     BadgeCase.Badge.Elite_HoennChampion,
-    10000,
+    15000,
     BadgeCase.Badge.Elite_Drake,
     'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!'
 );
