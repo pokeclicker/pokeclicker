@@ -18,7 +18,7 @@
                         Johto
                     </button>
                     <button class='btn btn-primary'
-                        data-bind='visible: player.region != 2 && player.highestRegion >= 2'
+                        data-bind='visible: player.region != 2 && player.highestRegion() >= 2'
                         onclick='MapHelper.moveToTown("Slateport City");player.region = 2;$("#ShipModal").modal("hide")'>
                         Hoenn
                     </button>
