@@ -51,10 +51,17 @@ class PokemonFactory {
                 route -= 54;
                 break;
         }
-        return Math.max(Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15)), 20) || 20;
+        const health: number = Math.max(20, Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15))) || 20;
+        return health
     }
 
     public static routeMoney(route: number, region: GameConstants.Region): number {
+        switch (region) {
+            // Hoenn starts at route 101 need to reduce the total money earned on those routes.
+            case GameConstants.Region.hoenn:
+                route -= 54;
+                break;
+        }
         const deviation = Math.floor(Math.random() * 51) - 25;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
 
@@ -62,7 +69,14 @@ class PokemonFactory {
     }
 
     public static routeDungeonTokens(route: number, region: GameConstants.Region): number {
-        const tokens = 6 * Math.pow(this.routeLevel(route,region) / 3, 1.05);
+        switch (region) {
+            // Hoenn starts at route 101 need to reduce the total dungeon tokens earned on those routes.
+            case GameConstants.Region.hoenn:
+                route -= 54;
+                break;
+        }
+
+        const tokens = Math.max(1, 6 * Math.pow(this.routeLevel(route,region) / 3, 1.05));
 
         return tokens;
     }
