@@ -12,7 +12,7 @@ class DungeonBattle extends Battle {
         App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         this.gainShardsAfterBattle();
         player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
-        App.game.breeding.progressEggs(Math.floor(Math.sqrt(DungeonRunner.dungeon.itemRoute)));
+        App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.itemRoute, player.region);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
