@@ -81,13 +81,8 @@ class PokemonHelper {
     public static calcNativeRegion(pokemonName: string) {
         const pokemon = PokemonHelper.getPokemonByName(pokemonName);
         const id = pokemon.id;
-        if (id > 251) {
-            return GameConstants.Region.hoenn;
-        } else if (id > 151) {
-            return GameConstants.Region.johto;
-        } else {
-            return GameConstants.Region.kanto;
-        }
+        const region = GameConstants.TotalPokemonsPerRegion.findIndex(highest_region_id=>highest_region_id >= id);
+        return region >= 0 ? region : Infinity;
     }
 
 }
