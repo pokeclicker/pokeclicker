@@ -58,7 +58,7 @@ class Battle {
 
         GameHelper.incrementObservable(player.statistics.routeKills[player.route()]);
 
-        App.game.breeding.progressEggs(Math.floor(Math.sqrt(player.route()) * 100) / 100);
+        App.game.breeding.progressEggsBattle(player.route(), player.region);
         const isShiny: boolean = this.enemyPokemon().shiny;
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
 

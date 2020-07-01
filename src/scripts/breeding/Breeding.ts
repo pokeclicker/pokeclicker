@@ -122,6 +122,16 @@ class Breeding implements Feature {
         return this.gainEgg(this.createRandomEgg());
     }
 
+    public progressEggsBattle(route: number, region: GameConstants.Region) {
+        switch (region) {
+            // Hoenn starts at route 101 need to reduce the total money earned on those routes.
+            case GameConstants.Region.hoenn:
+                route -= 54;
+                break;
+        }
+        return this.progressEggs(+Math.sqrt(route).toFixed(2));
+    }
+
     public progressEggs(amount: number) {
         amount *= App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette);
 

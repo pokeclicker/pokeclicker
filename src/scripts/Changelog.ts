@@ -36,6 +36,14 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
 const changelogItems = [
     // Unreleased
 
+    // v0.3.1
+    new Changelog(changelogType.VERSION, 'v0.3.1 - Bug catcher'),
+    new Changelog(changelogType.CHANGE, 'Eevee will now evolve into Espeon or Umbreon depending on the time of day (when using Time stone)'),
+    new Changelog(changelogType.FIXED, 'Can no longer evolve Magmar and Electabuzz before you are allowed'),
+    new Changelog(changelogType.FIXED, 'Fix breeding steps gained for newer regions'),
+    new Changelog(changelogType.FIXED, 'Fix roaming encounters for newer regions'),
+    new Changelog(changelogType.FIXED, 'Fix route rewards for newer regions'),
+
     // v0.3.0
     new Changelog(changelogType.VERSION, 'v0.3.0 - Hoenn Update'),
     new Changelog(changelogType.NEW, 'Add initial Hoenn region'),
