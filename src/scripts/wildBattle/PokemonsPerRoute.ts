@@ -315,7 +315,7 @@ const pokemonsPerRoute = {
             headbutt: [],
         },
         114: {
-            land: ['Surskit', 'Swablu', 'Lotad', 'Lombre', 'Seviper', 'Nuzleaf'],
+            land: ['Zangoose', 'Surskit', 'Swablu', 'Lotad', 'Lombre', 'Seviper', 'Nuzleaf'],
             water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
             headbutt: ['Geodude'],
         },
@@ -340,7 +340,7 @@ const pokemonsPerRoute = {
             headbutt: [],
         },
         119: {
-            land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon'],
+            land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon', 'Castform'],
             water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha'],
             headbutt: [],
         },
@@ -366,7 +366,7 @@ const pokemonsPerRoute = {
         },
         124: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Clamperl', 'Relicanth'],
             headbutt: [],
         },
         125: {
@@ -376,7 +376,7 @@ const pokemonsPerRoute = {
         },
         126: {
             land: [],
-            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo'],
+            water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer', 'Sharpedo', 'Clamperl', 'Relicanth'],
             headbutt: [],
         },
         127: {
