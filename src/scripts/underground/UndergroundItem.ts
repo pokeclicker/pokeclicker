@@ -23,10 +23,10 @@ class UndergroundItem {
         this.addItem('Helix Fossil', 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]], 0, 'Mine Egg');
         this.addItem('Dome Fossil', 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]], 0, 'Mine Egg');
         this.addItem('Old Amber', 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 0, 'Mine Egg');
-        // this.addItem("Root Fossil", 4, [[0,0,4,4,4], [0,0,4,4,4], [4,0,0,4,4], [4,4,4,4,4], [0,4,4,4,0]], 3);
-        // this.addItem("Claw Fossil", 5, [[5,5,5,0,0], [5,5,5,5,0], [0,5,5,5,5], [0,0,0,5,5]], 3);
-        // this.addItem("Armor Fossil", 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
-        // this.addItem("Skull Fossil", 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]], 3);
+        this.addItem('Root Fossil', 4, [[0,0,4,4,4], [0,0,4,4,4], [4,0,0,4,4], [4,4,4,4,4], [0,4,4,4,0]], 0, 'Mine Egg');
+        this.addItem('Claw Fossil', 5, [[5,5,5,0,0], [5,5,5,5,0], [0,5,5,5,5], [0,0,0,5,5]], 0, 'Mine Egg');
+        // this.addItem('Armor Fossil', 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
+        // this.addItem('Skull Fossil', 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]], 3);
         this.addItem('Rare Bone', 8, [[8,0,0,0,0,8], [8,8,8,8,8,8], [8,0,0,0,0,8]], 3);
         this.addItem('Star Piece', 9, [[0,9,0], [9,9,9], [0,9,0]], 5);
         this.addItem('Revive', 10, [[0,10,0], [10,10,10], [0,10,0]], 2);
@@ -68,6 +68,8 @@ class UndergroundItem {
         this.addItem('Toxic Plate', 43, [[43,43,43,43], [43,43,43,43], [43,43,43,43]], 100, 'poison');
         this.addItem('Zap Plate', 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]], 100, 'electric');
         this.addItem('Pixie Plate', 45, [[45,45,45,45], [45,45,45,45], [45,45,45,45]], 100, 'fairy');
+
+        this.addItem('Time Stone', 46, [[46,46], [46,46]], 1, 'Time_stone');
     }
 
     public static getRandomItem(): UndergroundItem {

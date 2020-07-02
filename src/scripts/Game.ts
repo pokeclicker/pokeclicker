@@ -3,7 +3,6 @@
  */
 class Game {
     interval;
-    undergroundCounter: number;
     public static achievementCounter = 0;
 
     // Features
@@ -115,7 +114,6 @@ class Game {
 
     gameTick() {
         // Update tick counters
-        this.undergroundCounter += GameConstants.TICK_TIME;
         EffectEngineRunner.counter += GameConstants.TICK_TIME;
         Game.achievementCounter += GameConstants.TICK_TIME;
         if (Game.achievementCounter > GameConstants.ACHIEVEMENT_TICK) {
