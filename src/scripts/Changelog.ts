@@ -36,6 +36,13 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
 const changelogItems = [
     // Unreleased
 
+    // v0.4.1
+    new Changelog(changelogType.VERSION, 'v0.4.1 - More fixes'),
+    new Changelog(changelogType.NEW, 'More items added to underground'),
+    new Changelog(changelogType.CHANGE, 'All Hoenn Pokemon should be obtainable now'),
+    new Changelog(changelogType.FIXED, 'Pokedex filtering should be working again'),
+    new Changelog(changelogType.FIXED, 'Some items showing _ in their name in notifications'),
+
     // v0.4.0
     new Changelog(changelogType.VERSION, 'v0.4.0 - Statistics update'),
     new Changelog(changelogType.NEW, 'Current save data should be compatible with future versions!'),

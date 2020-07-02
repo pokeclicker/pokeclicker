@@ -177,7 +177,8 @@ TownList['Fortree City'] = new Town('Fortree City', [119]);
 
 const LilyCoveCityShop = new Shop(['Pokeball', 'Greatball', 'Ultraball', 'SmallRestore', 'MediumRestore', 'LargeRestore', 'xAttack', 'xClick', 'xExp', 'Token_collector', 'Item_magnet', 'Lucky_incense']);
 TownList['Lilycove City'] = new Town('LilyCove City', [121], LilyCoveCityShop, null, 'Mt. Pyre');
-TownList['Mossdeep City'] = new Town('Mossdeep City', [125], null, null, 'Shoal Cave');
+const MossdeepCityShop = new Shop(['Beldum']);
+TownList['Mossdeep City'] = new Town('Mossdeep City', [125], MossdeepCityShop, null, 'Shoal Cave');
 TownList['Sootopolis City'] = new Town('Sootopolis City', [126], null, null, 'Cave of Origin');
 TownList['Ever Grande City'] = new Town('Ever Grande City', [128]);
 TownList['Pokemon League Hoenn'] = new Town('Pokemon League', [128], null, null, 'Victory Road Hoenn');
