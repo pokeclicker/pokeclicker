@@ -486,6 +486,7 @@ namespace GameConstants {
         'Mr. Mime': 1500,
         'Lickitung': 1000,
         'Togepi': 2500,
+        'Beldum': 5000,
 
         // TODO: Set prices for different kinds of eggs and stones
         'Egg': 1000,
@@ -525,6 +526,7 @@ namespace GameConstants {
         'Mr. Mime',
         'Lickitung',
         'Togepi',
+        'Beldum',
     }
 
     export enum PokeBlockColor {
