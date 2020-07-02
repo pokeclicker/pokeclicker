@@ -6441,8 +6441,8 @@ const pokemonList: {
             'exp': 69,
             'catchRate': 255,
             'evolutions': [
-                new StoneEvolution('Clamperl', 'Huntail', GameConstants.StoneType.Trade_stone)
-                new StoneEvolution('Clamperl', 'Gorebyss', GameConstants.StoneType.Trade_stone)
+                new StoneEvolution('Clamperl', 'Huntail', GameConstants.StoneType.Trade_stone),
+                new StoneEvolution('Clamperl', 'Gorebyss', GameConstants.StoneType.Trade_stone),
             ],
             'base': {
                 'hitpoints': 35,
