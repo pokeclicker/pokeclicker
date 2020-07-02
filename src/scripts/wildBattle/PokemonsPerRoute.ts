@@ -255,7 +255,7 @@ const pokemonsPerRoute = {
             headbutt: [],
         },
         102: {
-            land: ['Poochyena', 'Wurmple', 'Lotad', 'Zigzagoon', 'Ralts', 'Seedot'],
+            land: ['Surskit', 'Poochyena', 'Wurmple', 'Lotad', 'Zigzagoon', 'Ralts', 'Seedot'],
             water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
             headbutt: [],
         },
@@ -315,7 +315,7 @@ const pokemonsPerRoute = {
             headbutt: [],
         },
         114: {
-            land: ['Swablu', 'Lotad', 'Lombre', 'Seviper', 'Nuzleaf'],
+            land: ['Surskit', 'Swablu', 'Lotad', 'Lombre', 'Seviper', 'Nuzleaf'],
             water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
             headbutt: ['Geodude'],
         },
@@ -330,7 +330,7 @@ const pokemonsPerRoute = {
             headbutt: [],
         },
         117: {
-            land: ['Poochyena', 'Oddish', 'Marill', 'Illumise', 'Volbeat', 'Seedot'],
+            land: ['Surskit', 'Poochyena', 'Oddish', 'Marill', 'Illumise', 'Volbeat', 'Seedot'],
             water: ['Marill', 'Goldeen', 'Magikarp', 'Corphish'],
             headbutt: [],
         },
@@ -345,7 +345,7 @@ const pokemonsPerRoute = {
             headbutt: [],
         },
         120: {
-            land: ['Poochyena', 'Mightyena', 'Oddish', 'Marill', 'Absol', 'Kecleon', 'Seedot'],
+            land: ['Surskit', 'Poochyena', 'Mightyena', 'Oddish', 'Marill', 'Absol', 'Kecleon', 'Seedot'],
             water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
             headbutt: [],
         },

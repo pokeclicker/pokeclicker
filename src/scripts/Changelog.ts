@@ -36,6 +36,15 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
 const changelogItems = [
     // Unreleased
 
+    // v0.4.0
+    new Changelog(changelogType.VERSION, 'v0.4.0 - Statistics update'),
+    new Changelog(changelogType.NEW, 'Current save data should be compatible with future versions!'),
+    new Changelog(changelogType.NEW, 'More statistics have been added'),
+    new Changelog(changelogType.CHANGE, 'Updated the way statistics are stored'),
+    new Changelog(changelogType.CHANGE, 'Updated notifications'),
+    new Changelog(changelogType.FIXED, 'Fix some missing Hoenn Pokemon'),
+    new Changelog(changelogType.FIXED, 'Fix some missing images'),
+
     // v0.3.1
     new Changelog(changelogType.VERSION, 'v0.3.1 - Bug catcher'),
     new Changelog(changelogType.CHANGE, 'Eevee will now evolve into Espeon or Umbreon depending on the time of day (when using Time stone)'),

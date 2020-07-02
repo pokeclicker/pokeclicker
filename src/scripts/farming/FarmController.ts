@@ -6,7 +6,7 @@ class FarmController {
         if (App.game.farming.canAccess()) {
             $('#farmModal').modal('show');
         } else {
-            Notifier.notify(`You need the ${GameConstants.humanifyString(KeyItems.KeyItem[KeyItems.KeyItem.Wailmer_pail])} to access this location`, GameConstants.NotificationOption.warning);
+            Notifier.notify({ message: `You need the ${GameConstants.humanifyString(KeyItems.KeyItem[KeyItems.KeyItem.Wailmer_pail])} to access this location`, type: GameConstants.NotificationOption.warning });
         }
     }
 

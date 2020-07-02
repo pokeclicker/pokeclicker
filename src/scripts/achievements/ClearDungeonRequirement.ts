@@ -9,6 +9,6 @@ class ClearDungeonRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(player.statistics.dungeonsCleared[this.dungeonIndex](), this.requiredValue);
+        return Math.min(App.game.statistics.dungeonsCleared[this.dungeonIndex](), this.requiredValue);
     }
 }

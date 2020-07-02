@@ -4725,6 +4725,7 @@ const pokemonList: {
             'levelType': LevelType.mediumfast,
             'exp': 72,
             'catchRate': 120,
+            'evolutions': [new LevelEvolution('Cascoon', 'Dustox', 10)],
             'base': {
                 'hitpoints': 50,
                 'attack': 35,

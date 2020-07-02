@@ -30,8 +30,7 @@ class Shards implements Feature {
         }
         this.shardWallet[typeNum] += amt;
         if (amt > 0) {
-            GameHelper.incrementObservable(
-                player.statistics.totalShards[typeNum], amt);
+            GameHelper.incrementObservable(App.game.statistics.totalShards[typeNum], amt);
         }
     }
 
@@ -104,9 +103,7 @@ class Shards implements Feature {
         if (this.canAccess()) {
             $('#shardModal').modal('show');
         } else {
-            Notifier.notify(
-                'You do not have the Shard Case',
-                GameConstants.NotificationOption.warning);
+            Notifier.notify({ message: 'You do not have the Shard Case', type: GameConstants.NotificationOption.warning });
         }
     }
 }

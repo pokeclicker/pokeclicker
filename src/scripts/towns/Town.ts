@@ -39,7 +39,7 @@ class Town {
 
     public hasRouteReq() {
         for (const i of this.reqRoutes) {
-            if (player.statistics.routeKills[i]() < GameConstants.ROUTE_KILLS_NEEDED) {
+            if (App.game.statistics.routeKills[i]() < GameConstants.ROUTE_KILLS_NEEDED) {
                 return false;
             }
         }
@@ -49,7 +49,7 @@ class Town {
 
     public hasDungeonReq() {
         if (this.dungeonReq != undefined) {
-            return 0 < player.statistics.dungeonsCleared[Statistics.getDungeonIndex(this.dungeonReq)]();
+            return 0 < App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(this.dungeonReq)]();
         } else {
             return true;
         }

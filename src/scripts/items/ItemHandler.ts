@@ -7,7 +7,7 @@ class ItemHandler {
 
     public static useItem(name: string) {
         if (!player.itemList[name]()) {
-            return Notifier.notify(`You don't have any ${name.replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
+            return Notifier.notify({ message: `You don't have any ${name.replace(/_/g, ' ')}s left...`, type: GameConstants.NotificationOption.danger });
         }
 
         player.itemList[name](player.itemList[name]() - 1);
@@ -27,12 +27,12 @@ class ItemHandler {
 
     public static useStones() {
         if (this.pokemonSelected() == '') {
-            return Notifier.notify('No Pokémon selected', GameConstants.NotificationOption.danger);
+            return Notifier.notify({ message: 'No Pokémon selected', type: GameConstants.NotificationOption.danger });
         }
         const amountTotal = Math.min(this.amountSelected(), player.itemList[this.stoneSelected()]());
 
         if (!amountTotal) {
-            return Notifier.notify(`You don't have any ${this.stoneSelected().replace(/_/g, ' ')}s left...`, GameConstants.NotificationOption.danger);
+            return Notifier.notify({ message: `You don't have any ${this.stoneSelected().replace(/_/g, ' ')}s left...`, type: GameConstants.NotificationOption.danger });
         }
 
         let amountUsed = 0;
@@ -45,7 +45,7 @@ class ItemHandler {
             }
         }
         const multiple = amountUsed == 1 ? '' : 's';
-        Notifier.notify(`You used ${amountUsed} ${this.stoneSelected()}${multiple}`, GameConstants.NotificationOption.success);
+        Notifier.notify({ message: `You used ${amountUsed} ${this.stoneSelected()}${multiple}`, type: GameConstants.NotificationOption.success });
     }
 
 }

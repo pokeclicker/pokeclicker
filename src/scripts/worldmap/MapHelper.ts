@@ -48,7 +48,7 @@ class MapHelper {
 
                 for (let i = 0; i < reqList.length; i++) {
                     const route: number = reqList[i];
-                    if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
+                    if (App.game.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
                         routesNotCompleted.push(route);
                     }
                 }
@@ -63,7 +63,7 @@ class MapHelper {
                 }
             }
 
-            Notifier.notify(`You don't have access to that route yet.${reqsList}`, GameConstants.NotificationOption.warning);
+            Notifier.notify({ message: `You don't have access to that route yet.${reqsList}`, type: GameConstants.NotificationOption.warning });
         }
     };
 
@@ -77,7 +77,7 @@ class MapHelper {
 
     private static hasDungeonReq(route, region) {
         const dungeonReq = GameConstants.routeDungeonRequirements[region][route];
-        return dungeonReq == undefined || 0 < player.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeonReq)]();
+        return dungeonReq == undefined || 0 < App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeonReq)]();
     }
 
     private static hasRouteKillReq(route, region) {
@@ -87,7 +87,7 @@ class MapHelper {
         }
         for (let i = 0; i < reqList.length; i++) {
             const route: number = reqList[i];
-            if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
+            if (App.game.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
                 return false;
             }
         }
@@ -104,7 +104,7 @@ class MapHelper {
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
-            if (player.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
+            if (App.game.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
@@ -131,7 +131,7 @@ class MapHelper {
         }
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
-                if (player.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
+                if (App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
                     return 'dungeon completedDungeon';
                 }
                 return 'dungeon unlockedDungeon';
@@ -182,7 +182,7 @@ class MapHelper {
 
                 for (let i = 0; i < reqList.length; i++) {
                     const route: number = reqList[i];
-                    if (player.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
+                    if (App.game.statistics.routeKills[route]() < GameConstants.ROUTE_KILLS_NEEDED) {
                         routesNotCompleted.push(route);
                     }
                 }
@@ -197,7 +197,7 @@ class MapHelper {
                 }
             }
 
-            Notifier.notify(`You don't have access to that location yet.${reqsList}`, GameConstants.NotificationOption.warning);
+            Notifier.notify({ message: `You don't have access to that location yet.${reqsList}`, type: GameConstants.NotificationOption.warning });
         }
     };
 
@@ -226,7 +226,7 @@ class MapHelper {
                     return;
                 }
         }
-        Notifier.notify('You cannot access this dock yet', GameConstants.NotificationOption.warning);
+        Notifier.notify({ message: 'You cannot access this dock yet', type: GameConstants.NotificationOption.warning });
     }
 
     public static ableToTravel() {

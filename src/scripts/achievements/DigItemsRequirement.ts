@@ -6,6 +6,6 @@ class DigItemsRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(player.statistics.digItems(), this.requiredValue);
+        return Math.min(App.game.statistics.digItems(), this.requiredValue);
     }
 }

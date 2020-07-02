@@ -11,6 +11,22 @@
   }
 }
 
+#toaster {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  padding: 10px;
+  width: 370px;
+  z-index: 1020;
+  pointer-events: none;
+  .toast {
+    pointer-events: all;
+  }
+  .toast-body .close {
+    color: whitesmoke;
+  }
+}
+
 .flash{
   color:#f2f;
 	-webkit-animation: flash linear 0.5s infinite;
