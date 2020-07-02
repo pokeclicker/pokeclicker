@@ -58,6 +58,9 @@ class PokedexHelper {
         const highestDex = Math.max(highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
+            // If Pokemon shouldn't be unlocked yet
+            if (pokemon.id > GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION]) return false;
+
             if ((filter['name'] || '') != '' && pokemon.name.toLowerCase().indexOf(filter['name'].toLowerCase()) == -1) {
                 return false;
             }
