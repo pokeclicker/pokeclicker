@@ -1,27 +1,73 @@
 ///<reference path="../oakItems/OakItems.ts"/>
 ///<reference path="../farming/BerryType.ts"/>
 ///<reference path="../pokemons/PokemonType.ts"/>
-class Statistics {
+class Statistics implements Saveable {
+    saveKey = 'statistics';
 
-    public clicks: KnockoutObservable<number>;
-    public hatchedEggs: KnockoutObservable<number>;
-    public pokemonCaptured: KnockoutObservable<number>;
-    public pokemonDefeated: KnockoutObservable<number>;
-    public gymsDefeated: Array<KnockoutObservable<number>>;
-    public dungeonsCleared: Array<KnockoutObservable<number>>;
-    public digItems: KnockoutObservable<number>; // Total treasure found in underground
-    public digDeeper: KnockoutObservable<number>; // Total underground layers completed
-    public totalMoney: KnockoutObservable<number>;
-    public totalTokens: KnockoutObservable<number>;
-    public totalQuestPoints: KnockoutObservable<number>;
-    public totalDiamonds: KnockoutObservable<number>;
-    public totalFarmPoints: KnockoutObservable<number>;
-    public pokeballsUsed: Array<KnockoutObservable<number>>;
-    public pokeballsBought: Array<KnockoutObservable<number>>;
-    public totalShards: Array<KnockoutObservable<number>>;
-    public oakItemUses: Array<KnockoutObservable<number>>;
-    public berriesHarvested: Array<KnockoutObservable<number>>;
-    public routeKills: Array<KnockoutObservable<number>>;
+    defaults = {};
+
+    clicks: KnockoutObservable<number>;
+    hatchedEggs: KnockoutObservable<number>;
+    pokemonCaptured: Array<KnockoutObservable<number>>;
+    pokemonDefeated: Array<KnockoutObservable<number>>;
+    pokemonEncountered: Array<KnockoutObservable<number>>;
+    shinyPokemonCaptured: Array<KnockoutObservable<number>>;
+    shinyPokemonDefeated: Array<KnockoutObservable<number>>;
+    shinyPokemonEncountered: Array<KnockoutObservable<number>>;
+    totalPokemonCaptured: KnockoutObservable<number>;
+    totalPokemonDefeated: KnockoutObservable<number>;
+    totalPokemonEncountered: KnockoutObservable<number>;
+    totalShinyPokemonCaptured: KnockoutObservable<number>;
+    totalShinyPokemonDefeated: KnockoutObservable<number>;
+    totalShinyPokemonEncountered: KnockoutObservable<number>;
+    gymsDefeated: Array<KnockoutObservable<number>>;
+    dungeonsCleared: Array<KnockoutObservable<number>>;
+    digItems: KnockoutObservable<number>; // Total treasure found in underground
+    digDeeper: KnockoutObservable<number>; // Total underground layers completed
+    totalMoney: KnockoutObservable<number>;
+    totalTokens: KnockoutObservable<number>;
+    totalQuestPoints: KnockoutObservable<number>;
+    totalDiamonds: KnockoutObservable<number>;
+    totalFarmPoints: KnockoutObservable<number>;
+    pokeballsUsed: Array<KnockoutObservable<number>>;
+    pokeballsBought: Array<KnockoutObservable<number>>;
+    totalShards: Array<KnockoutObservable<number>>;
+    oakItemUses: Array<KnockoutObservable<number>>;
+    berriesHarvested: Array<KnockoutObservable<number>>;
+    routeKills: Array<KnockoutObservable<number>>;
+    observables = [
+        'clicks',
+        'hatchedEggs',
+        'digItems',
+        'digDeeper',
+        'totalMoney',
+        'totalTokens',
+        'totalQuestPoints',
+        'totalDiamonds',
+        'totalFarmPoints',
+        'totalPokemonCaptured',
+        'totalPokemonDefeated',
+        'totalPokemonEncountered',
+        'totalShinyPokemonCaptured',
+        'totalShinyPokemonDefeated',
+        'totalShinyPokemonEncountered',
+    ];
+    arrayObservables = [
+        'gymsDefeated',
+        'dungeonsCleared',
+        'pokeballsUsed',
+        'pokeballsBought',
+        'totalShards',
+        'oakItemUses',
+        'berriesHarvested',
+        'routeKills',
+        'pokemonCaptured',
+        'pokemonDefeated',
+        'pokemonEncountered',
+        'shinyPokemonCaptured',
+        'shinyPokemonDefeated',
+        'shinyPokemonEncountered',
+    ];
 
     private static readonly arraySizes = {
         'gymsDefeated': GameConstants.RegionGyms.flat().length,
@@ -32,41 +78,22 @@ class Statistics {
         'oakItemUses': GameHelper.enumLength(OakItems.OakItem),
         'berriesHarvested': GameHelper.enumLength(BerryType) - 1,  // remove "None" berry
         'routeKills': GameConstants.HIGHEST_ROUTE_NUMBER + 1, // Add 1 for "route 0"
+        'pokemonCaptured': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
+        'pokemonDefeated': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
+        'pokemonEncountered': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
+        'shinyPokemonCaptured': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
+        'shinyPokemonDefeated': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
+        'shinyPokemonEncountered': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
     };
 
-    constructor(saved = {}) {
-        const observables = [
-            'clicks',
-            'hatchedEggs',
-            'pokemonCaptured',
-            'pokemonDefeated',
-            'digItems',
-            'digDeeper',
-            'totalMoney',
-            'totalTokens',
-            'totalQuestPoints',
-            'totalDiamonds',
-            'totalFarmPoints',
-        ];
-
-        const arrayObservables = [
-            'gymsDefeated',
-            'dungeonsCleared',
-            'pokeballsUsed',
-            'pokeballsBought',
-            'totalShards',
-            'oakItemUses',
-            'berriesHarvested',
-            'routeKills',
-        ];
-
-        for (const prop of observables) {
-            this[prop] = ko.observable(saved[prop] || 0);
+    constructor() {
+        for (const prop of this.observables) {
+            this[prop] = ko.observable(0);
         }
 
-        for (const array of arrayObservables) {
+        for (const array of this.arrayObservables) {
             this[array] = [...Array(Statistics.arraySizes[array])].map((value, index) => {
-                return ko.observable(saved[array] ? saved[array][index] || 0 : 0);
+                return ko.observable(0);
             });
         }
     }
@@ -79,6 +106,34 @@ class Statistics {
     public static getDungeonIndex(dungeon: string) {
         const dungeons = GameConstants.RegionDungeons.flat();
         return dungeons.indexOf(dungeon);
+    }
+
+    toJSON(): object {
+        const saveObject = {};
+
+        for (const prop of this.observables) {
+            saveObject[prop] = this[prop]();
+        }
+
+        for (const array of this.arrayObservables) {
+            saveObject[array] = this[array].map(x => x());
+        }
+
+        return saveObject;
+    }
+
+    fromJSON(json: object): void {
+        if (!json) return;
+
+        for (const prop of this.observables) {
+            this[prop] = ko.observable(json[prop] || 0);
+        }
+
+        for (const array of this.arrayObservables) {
+            this[array] = [...Array(Statistics.arraySizes[array])].map((value, index) => {
+                return ko.observable(json[array] ? json[array][index] || 0 : 0);
+            });
+        }
     }
 
 }

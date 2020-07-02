@@ -126,6 +126,7 @@
 
 </head>
 <body class="no-select">
+<div id="toaster"></div>
 <link href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
 
 <!--$DEV_BANNER-->
@@ -223,9 +224,9 @@
                                          class="pokeball-smallest"
                                          src="assets/images/pokeball/Pokeball-shiny-small.png"/>
                                 </span>
-                                <!-- ko if: player.statistics.routeKills[player.route()]() < GameConstants.ROUTE_KILLS_NEEDED -->
+                                <!-- ko if: App.game.statistics.routeKills[player.route()]() < GameConstants.ROUTE_KILLS_NEEDED -->
                                 <br>
-                                <span data-bind="text: player.statistics.routeKills[player.route()]() + '/' + GameConstants.ROUTE_KILLS_NEEDED">0/10</span>
+                                <span data-bind="text: App.game.statistics.routeKills[player.route()]() + '/' + GameConstants.ROUTE_KILLS_NEEDED">0/10</span>
                                 <br>
                                 <!-- /ko -->
                             </div>

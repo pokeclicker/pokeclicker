@@ -6,6 +6,6 @@ class DigDeeperRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(player.statistics.digDeeper(), this.requiredValue);
+        return Math.min(App.game.statistics.digDeeper(), this.requiredValue);
     }
 }

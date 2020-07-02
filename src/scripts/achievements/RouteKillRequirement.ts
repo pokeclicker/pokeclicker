@@ -9,6 +9,6 @@ class RouteKillRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(player.statistics.routeKills[this.route](), this.requiredValue);
+        return Math.min(App.game.statistics.routeKills[this.route](), this.requiredValue);
     }
 }

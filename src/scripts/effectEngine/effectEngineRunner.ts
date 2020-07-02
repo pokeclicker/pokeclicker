@@ -11,7 +11,7 @@ class EffectEngineRunner {
                 this.updateFormattedTimeLeft(itemName);
             }
             if (player.effectList[itemName]() == 5) {
-                Notifier.notify(`The ${itemName}s effect is about to wear off!`, GameConstants.NotificationOption.warning);
+                Notifier.notify({ message: `The ${itemName}s effect is about to wear off!`, type: GameConstants.NotificationOption.warning });
             }
         }
     }

@@ -16,7 +16,7 @@ class SafariBattle {
     public static load() {
         SafariBattle.enemy = SafariPokemon.random();
         Safari.inBattle(true);
-        Notifier.notify('Battle', GameConstants.NotificationOption.info);
+        Notifier.notify({ message: 'Battle', type: GameConstants.NotificationOption.info });
         SafariBattle.text('What will you do?');
         SafariBattle.unlockButtons();
         SafariBattle.escapeAttempts = 0;
@@ -32,7 +32,7 @@ class SafariBattle {
             const enemyImg = $('#safariEnemy').offset();
             enemyImg.left += 48;
 
-            const ptclhtml = '<div><img id="safariBall" src="../assets/images/safari/pokeball.png"></div>';
+            const ptclhtml = '<div><img id="safariBall" src="assets/images/safari/pokeball.png"></div>';
             SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, SafariBattle.Speed.ballThrow, 'cubic-bezier(0,0,0.4,1)', true).css('z-index', 9999);
 
             SafariBattle.delay(1.1 * SafariBattle.Speed.ballThrow)(0)            // throwing the ball

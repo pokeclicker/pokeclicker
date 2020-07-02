@@ -20,7 +20,7 @@ abstract class Evolution {
         }
 
         if (notification) {
-            Notifier.notify(`Your ${this.basePokemon} evolved into a ${this.evolvedPokemon}`, GameConstants.NotificationOption.success);
+            Notifier.notify({ message: `Your ${this.basePokemon} evolved into a ${this.evolvedPokemon}`, type: GameConstants.NotificationOption.success });
         }
 
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);

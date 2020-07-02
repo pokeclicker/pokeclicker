@@ -143,7 +143,7 @@ class Breeding implements Feature {
 
     public gainPokemonEgg(pokemon: PartyPokemon): void {
         if (!this.hasFreeEggSlot()) {
-            Notifier.notify("You don't have any free egg slots", GameConstants.NotificationOption.warning);
+            Notifier.notify({ message: "You don't have any free egg slots", type: GameConstants.NotificationOption.warning });
             return;
         }
         const egg = this.createEgg(pokemon.name);

@@ -21,7 +21,7 @@ class DungeonRunner {
         DungeonRunner.dungeon = dungeon;
 
         if (!DungeonRunner.hasEnoughTokens()) {
-            Notifier.notify("You don't have enough dungeon tokens", GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: "You don't have enough dungeon tokens", type: GameConstants.NotificationOption.danger });
             return false;
         }
         App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
@@ -66,7 +66,7 @@ class DungeonRunner {
                 amount += 1;
             }
         }
-        Notifier.notify(`Found ${amount} ${input} in a dungeon chest`, GameConstants.NotificationOption.success);
+        Notifier.notify({ message: `Found ${amount} ${input} in a dungeon chest`, type: GameConstants.NotificationOption.success });
         player.gainItem(input, amount);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
@@ -93,17 +93,17 @@ class DungeonRunner {
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
             MapHelper.moveToTown(DungeonRunner.dungeon.name());
-            Notifier.notify('You could not complete the dungeon in time', GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: 'You could not complete the dungeon in time', type: GameConstants.NotificationOption.danger });
         }
     }
 
     public static dungeonWon() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
-            GameHelper.incrementObservable(player.statistics.dungeonsCleared[Statistics.getDungeonIndex(DungeonRunner.dungeon.name())]);
+            GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(DungeonRunner.dungeon.name())]);
             MapHelper.moveToTown(DungeonRunner.dungeon.name());
             // TODO award loot with a special screen
-            Notifier.notify('You have successfully completed the dungeon', GameConstants.NotificationOption.success);
+            Notifier.notify({ message: 'You have successfully completed the dungeon', type: GameConstants.NotificationOption.success });
         }
     }
 
