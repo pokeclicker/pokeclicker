@@ -29,3 +29,4 @@ ItemList['Jynx'] = new PokemonItem(GameConstants.PokemonItemType.Jynx);
 ItemList['Mr. Mime'] = new PokemonItem(GameConstants.PokemonItemType['Mr. Mime']);
 ItemList['Lickitung'] = new PokemonItem(GameConstants.PokemonItemType.Lickitung);
 ItemList['Togepi'] = new PokemonItem(GameConstants.PokemonItemType.Togepi);
+ItemList['Beldum'] = new PokemonItem(GameConstants.PokemonItemType.Beldum);
