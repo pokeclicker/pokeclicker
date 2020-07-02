@@ -69,6 +69,11 @@ class UndergroundItem {
         this.addItem('Zap Plate', 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]], 100, 'electric');
         this.addItem('Pixie Plate', 45, [[45,45,45,45], [45,45,45,45], [45,45,45,45]], 100, 'fairy');
 
+        this.addItem('Trade Stone', 46, [[46,46], [46,46]], 1, 'Trade_stone');
+        this.addItem('Dragon Scale', 47, [[47,47], [47,47]], 1, 'Dragon_scale');
+        this.addItem('Metal Coat', 48, [[48,48], [48,48]], 1, 'Metal_coat');
+        this.addItem('Kings Rock', 49, [[49,49], [49,49]], 1, 'Kings_rock');
+        this.addItem('Upgrade', 50, [[50,50], [50,50]], 1, 'Upgrade');
         this.addItem('Time Stone', 51, [[51,51], [51,51]], 1, 'Time_stone');
     }
 
