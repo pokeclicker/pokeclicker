@@ -579,6 +579,8 @@ namespace GameConstants {
         'Helix Fossil': 'Omanyte',
         'Dome Fossil': 'Kabuto',
         'Old Amber': 'Aerodactyl',
+        'Root Fossil': 'Lileep',
+        'Claw Fossil': 'Anorith',
     };
 
     //Used for image name
@@ -586,6 +588,8 @@ namespace GameConstants {
         'Omanyte': 'helix',
         'Kabuto': 'dome',
         'Aerodactyl': 'amber',
+        'Lileep': 'root',
+        'Anorith': 'claw',
 
     };
 
