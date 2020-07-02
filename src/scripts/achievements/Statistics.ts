@@ -123,7 +123,9 @@ class Statistics implements Saveable {
     }
 
     fromJSON(json: object): void {
-        if (!json) return;
+        if (!json) {
+            return;
+        }
 
         for (const prop of this.observables) {
             this[prop] = ko.observable(json[prop] || 0);
