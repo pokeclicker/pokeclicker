@@ -45,7 +45,7 @@ class ItemHandler {
             }
         }
         const multiple = amountUsed == 1 ? '' : 's';
-        Notifier.notify({ message: `You used ${amountUsed} ${this.stoneSelected()}${multiple}`, type: GameConstants.NotificationOption.success });
+        Notifier.notify({ message: `You used ${amountUsed} ${GameConstants.humanifyString(this.stoneSelected())}${multiple}`, type: GameConstants.NotificationOption.success });
     }
 
 }
