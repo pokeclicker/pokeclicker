@@ -45,7 +45,7 @@ abstract class Item {
             App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency));
             this.gain(n);
             this.increasePriceMultiplier(n);
-            Notifier.notify({ message: `You bought ${n} ${this.name()}${multiple}`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({ message: `You bought ${n} ${GameConstants.humanifyString(this.name())}${multiple}`, type: GameConstants.NotificationOption.success });
         } else {
             let curr = 'currency';
             switch (this.currency) {
