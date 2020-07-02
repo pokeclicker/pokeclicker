@@ -5112,7 +5112,10 @@ const pokemonList: {
             'levelType': LevelType.erratic,
             'exp': 53,
             'catchRate': 255,
-            'evolutions': [new LevelEvolution('Nincada', 'Ninjask', 20)],
+            'evolutions': [
+                new LevelEvolution('Nincada', 'Ninjask', 20),
+                new LevelEvolution('Nincada', 'Shedinja', 20),
+            ],
             'base': {
                 'hitpoints': 31,
                 'attack': 45,
