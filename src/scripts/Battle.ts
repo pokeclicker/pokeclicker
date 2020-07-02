@@ -40,7 +40,7 @@ class Battle {
             return;
         }
         App.game.oakItems.use(OakItems.OakItem.Poison_Barb);
-        GameHelper.incrementObservable(player.statistics.clicks);
+        GameHelper.incrementObservable(App.game.statistics.clicks);
         this.enemyPokemon().damage(App.game.party.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
@@ -51,16 +51,22 @@ class Battle {
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon() {
-        GameHelper.incrementObservable(player.statistics.pokemonDefeated);
-        App.game.wallet.gainMoney(this.enemyPokemon().money);
-        App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
+        const enemyPokemon = this.enemyPokemon();
+        GameHelper.incrementObservable(App.game.statistics.pokemonDefeated[enemyPokemon.id]);
+        GameHelper.incrementObservable(App.game.statistics.totalPokemonDefeated);
+        App.game.wallet.gainMoney(enemyPokemon.money);
+        App.game.party.gainExp(enemyPokemon.exp, enemyPokemon.level, false);
         this.gainShardsAfterBattle();
 
-        GameHelper.incrementObservable(player.statistics.routeKills[player.route()]);
+        GameHelper.incrementObservable(App.game.statistics.routeKills[player.route()]);
 
         App.game.breeding.progressEggsBattle(player.route(), player.region);
-        const isShiny: boolean = this.enemyPokemon().shiny;
-        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
+        const isShiny: boolean = enemyPokemon.shiny;
+        if (isShiny) {
+            GameHelper.incrementObservable(App.game.statistics.shinyPokemonDefeated[enemyPokemon.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonDefeated);
+        }
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
             this.prepareCatch(pokeBall);
@@ -78,7 +84,6 @@ class Battle {
         }
         this.gainItem();
         player.lowerItemMultipliers();
-        player.defeatedAmount[this.enemyPokemon().id](player.defeatedAmount[this.enemyPokemon().id]() + 1);
     }
 
     protected static gainShardsAfterBattle() {
@@ -92,9 +97,14 @@ class Battle {
      * Reset the counter.
      */
     public static generateNewEnemy() {
-        Battle.counter = 0;
-        Battle.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
-        if (Battle.enemyPokemon().shiny) {
+        this.counter = 0;
+        this.enemyPokemon(PokemonFactory.generateWildPokemon(player.route(), player.region));
+        const enemyPokemon = this.enemyPokemon();
+        GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
+        GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
+        if (enemyPokemon.shiny) {
+            GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
+            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
             App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${Battle.enemyPokemon().name} on route ${player.route()}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id)) {
             App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${Battle.enemyPokemon().name} on route ${player.route()}.`);

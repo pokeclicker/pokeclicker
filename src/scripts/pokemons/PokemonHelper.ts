@@ -31,13 +31,13 @@ class PokemonHelper {
     }
 
     public static getPokemonById(id: number): DataPokemon {
-        return this.getPokemonByName(pokemonMapId[id].name);
+        return this.getPokemonByName(pokemonMap[id].name);
     }
 
     public static getPokemonByName(name: string): DataPokemon {
         const basePokemon = pokemonMap[name];
         if (!basePokemon) {
-            console.log('Could not find pokemon', name);
+            console.warn('Could not find pokemon', name);
             return;
         }
 

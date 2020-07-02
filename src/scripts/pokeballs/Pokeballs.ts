@@ -80,7 +80,7 @@ class Pokeballs implements Feature {
 
     usePokeball(ball: GameConstants.Pokeball): void {
         this.pokeballs[ball] -= 1;
-        GameHelper.incrementObservable(player.statistics.pokeballsUsed[ball]);
+        GameHelper.incrementObservable(App.game.statistics.pokeballsUsed[ball]);
     }
 
     getCatchBonus(ball: GameConstants.Pokeball) {

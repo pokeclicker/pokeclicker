@@ -8,9 +8,10 @@ class App {
             Object.freeze(GameConstants);
         }
 
-        Preload.load(App.debug).then(function () {
+        Preload.load(App.debug).then(() => {
             UndergroundItem.initialize();
             App.game = new Game(
+                new Update(),
                 new Breeding(),
                 new Pokeballs(),
                 new Wallet(),
@@ -21,10 +22,11 @@ class App {
                 new Shards(),
                 new Farming(),
                 new LogBook(),
-                new RedeemableCodes()
+                new RedeemableCodes(),
+                new Statistics()
             );
 
-            Notifier.notify('Game loaded', GameConstants.NotificationOption.info);
+            Notifier.notify({ message: 'Game loaded', type: GameConstants.NotificationOption.info });
 
             GameController.bindToolTips();
             GameController.addKeyListeners();

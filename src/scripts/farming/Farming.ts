@@ -98,11 +98,11 @@ class Farming implements Feature {
         App.game.wallet.gainFarmPoints(this.berryData[plot.berry].farmValue);
         const money = App.game.wallet.gainMoney(this.berryData[plot.berry].moneyValue);
         const amount = GameConstants.randomIntBetween(2, 3);
-        GameHelper.incrementObservable(player.statistics.berriesHarvested[plot.berry], amount);
+        GameHelper.incrementObservable(App.game.statistics.berriesHarvested[plot.berry], amount);
         this.gainBerry(plot.berry, amount);
 
         if (!suppressNotification) {
-            Notifier.notify(`You earned ${money} money from the harvest!`, GameConstants.NotificationOption.success);
+            Notifier.notify({ message: `You earned ${money} money from the harvest!`, type: GameConstants.NotificationOption.success });
         }
 
         plot.berry = BerryType.None;
@@ -120,13 +120,13 @@ class Farming implements Feature {
         });
 
         if (total > 0) {
-            Notifier.notify(`You earned ${total} money from the harvest!`, GameConstants.NotificationOption.success);
+            Notifier.notify({ message: `You earned ${total} money from the harvest!`, type: GameConstants.NotificationOption.success });
         }
     }
 
     gainRandomBerry(amount = 1) {
         const berry = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
-        Notifier.notify(`You got a ${BerryType[berry]} berry!`, GameConstants.NotificationOption.success);
+        Notifier.notify({ message: `You got a ${BerryType[berry]} berry!`, type: GameConstants.NotificationOption.success });
         this.gainBerry(berry, amount);
     }
 

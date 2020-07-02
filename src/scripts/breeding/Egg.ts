@@ -58,9 +58,9 @@ class Egg implements Saveable {
         }
         if (this.canHatch()) {
             if (this.type == EggType.Pokemon) {
-                Notifier.notify(`${this.pokemon} is ready to hatch!`, GameConstants.NotificationOption.success);
+                Notifier.notify({ message: `${this.pokemon} is ready to hatch!`, type: GameConstants.NotificationOption.success });
             } else {
-                Notifier.notify('An egg is ready to hatch!', GameConstants.NotificationOption.success);
+                Notifier.notify({ message: 'An egg is ready to hatch!', type: GameConstants.NotificationOption.success });
             }
             this.notified = true;
         }
@@ -97,10 +97,10 @@ class Egg implements Saveable {
         }
 
         if (shiny) {
-            Notifier.notify(`✨ You hatched a shiny ${this.pokemon}! ✨`, GameConstants.NotificationOption.warning);
+            Notifier.notify({ message: `✨ You hatched a shiny ${this.pokemon}! ✨`, type: GameConstants.NotificationOption.warning });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
         } else {
-            Notifier.notify(`You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`, GameConstants.NotificationOption.success);
+            Notifier.notify({ message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`, type: GameConstants.NotificationOption.success });
         }
 
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(this.pokemon).id, shiny);
@@ -108,11 +108,11 @@ class Egg implements Saveable {
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         const baseForm = App.game.breeding.calculateBaseForm(this.pokemon);
         if (this.pokemon != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
-            Notifier.notify(`You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, GameConstants.NotificationOption.success);
+            Notifier.notify({ message: `You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, type: GameConstants.NotificationOption.success });
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id, shiny);
         }
 
-        GameHelper.incrementObservable(player.statistics.hatchedEggs);
+        GameHelper.incrementObservable(App.game.statistics.hatchedEggs);
         App.game.oakItems.use(OakItems.OakItem.Blaze_Cassette);
     }
 

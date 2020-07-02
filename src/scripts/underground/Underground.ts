@@ -128,7 +128,7 @@ class Underground {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
-                Notifier.notify('Your mining energy has reached maximum capacity!', GameConstants.NotificationOption.success);
+                Notifier.notify({ message: 'Your mining energy has reached maximum capacity!', type: GameConstants.NotificationOption.success });
             }
         }
     }
@@ -138,7 +138,7 @@ class Underground {
         const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
         const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
         this.energy = this.energy + gain;
-        Notifier.notify(`You restored ${gain} mining energy!`, GameConstants.NotificationOption.success);
+        Notifier.notify({ message: `You restored ${gain} mining energy!`, type: GameConstants.NotificationOption.success });
     }
 
     public static sellMineItem(id: number) {
@@ -182,7 +182,7 @@ class Underground {
             App.game.gameState = GameConstants.GameState.paused;
             $('#mineModal').modal('show');
         } else {
-            Notifier.notify('You do not have access to that location', GameConstants.NotificationOption.warning);
+            Notifier.notify({ message: 'You do not have access to that location', type: GameConstants.NotificationOption.warning });
         }
     }
 
@@ -197,7 +197,7 @@ class Underground {
 
     public static load(saveObject: object): void {
         if (!saveObject) {
-            console.log('Underground not loaded.');
+            console.warn('Underground not loaded.');
             return;
         }
 

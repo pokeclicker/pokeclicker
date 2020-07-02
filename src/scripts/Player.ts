@@ -10,8 +10,6 @@ class Player {
 
     private _route: KnockoutObservable<number>;
 
-    private _defeatedAmount: Array<KnockoutObservable<number>>;
-
     private _region: KnockoutObservable<GameConstants.Region>;
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
@@ -41,12 +39,6 @@ class Player {
             }
         }
 
-        this._defeatedAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
-            return ko.observable(savedPlayer._defeatedAmount ? (savedPlayer._defeatedAmount[index] || 0) : 0);
-        });
-        this._caughtAmount = [...Array(pokemonList.length + 1)].map(function (val, index) {
-            return ko.observable(savedPlayer._caughtAmount ? (savedPlayer._caughtAmount[index] || 0) : 0);
-        });
         this._town = ko.observable(TownList['Pallet Town']);
         this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
@@ -95,10 +87,7 @@ class Player {
         }
         this._questXP = ko.observable(savedPlayer._questXP || 0);
 
-        this._shinyCatches = ko.observable(savedPlayer._shinyCatches || 0);
-
         this._lastSeen = Date.now();
-        this.statistics = new Statistics(savedPlayer.statistics);
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
@@ -118,14 +107,11 @@ class Player {
     public clickAttackObservable: KnockoutComputed<number>;
     public pokemonAttackObservable: KnockoutComputed<number>;
 
-    public statistics: Statistics;
-
     public completedQuestList: Array<KnockoutObservable<boolean>>;
     public questRefreshes: number;
     public _questXP: KnockoutObservable<number>;
     public _lastSeen: number;
     public currentQuests: KnockoutObservableArray<any>;
-    private _shinyCatches: KnockoutObservable<number>;
 
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
     public effectTimer: { [name: string]: KnockoutObservable<string> } = {};
@@ -136,30 +122,12 @@ class Player {
 
     private highestRegion: KnockoutObservable<GameConstants.Region>;
 
-    set defeatedAmount(value: Array<KnockoutObservable<number>>) {
-        this._defeatedAmount = value;
-    }
-
-    get defeatedAmount(): Array<KnockoutObservable<number>> {
-        return this._defeatedAmount;
-    }
-
-    private _caughtAmount: Array<KnockoutObservable<number>>;
-
     set itemList(value: { [p: string]: KnockoutObservable<number> }) {
         this._itemList = value;
     }
 
     get itemList(): { [p: string]: KnockoutObservable<number> } {
         return this._itemList;
-    }
-
-    get caughtAmount(): Array<KnockoutObservable<number>> {
-        return this._caughtAmount;
-    }
-
-    set caughtAmount(value: Array<KnockoutObservable<number>>) {
-        this._caughtAmount = value;
     }
 
     private _itemMultipliers: { [name: string]: number };
@@ -264,14 +232,6 @@ class Player {
         return 100 * (this.questXP - requiredForCurrent) / (requiredForNext - requiredForCurrent);
     }
 
-    get shinyCatches(): number {
-        return this._shinyCatches();
-    }
-
-    set shinyCatches(value: number) {
-        this._shinyCatches(value);
-    }
-
     get questXP(): number {
         return this._questXP();
     }
@@ -283,8 +243,6 @@ class Player {
     public toJSON() {
         const keep = [
             '_route',
-            '_defeatedAmount',
-            '_caughtAmount',
             '_region',
             '_starter',
             '_itemList',
@@ -299,9 +257,7 @@ class Player {
             '_questXP',
             '_lastSeen',
             'currentQuests',
-            '_shinyCatches',
             'gymDefeats',
-            'statistics',
             'achievementsCompleted',
             'effectList',
             'effectTimer',

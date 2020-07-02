@@ -9,6 +9,6 @@ class ClearGymRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(player.statistics.gymsDefeated[this.gymIndex](), this.requiredValue);
+        return Math.min(App.game.statistics.gymsDefeated[this.gymIndex](), this.requiredValue);
     }
 }
