@@ -2,7 +2,7 @@ class Update implements Saveable {
     defaults: object;
     saveKey = 'update';
 
-    version = '0.4.1';
+    version = '0.4.2';
     saveVersion = '0.0.0';
 
     constructor() {}
@@ -31,7 +31,6 @@ class Update implements Saveable {
                     totalPokemonDefeated: playerData.statistics.pokemonDefeated,
                 };
 
-                console.log('statistics', statistics);
                 App.game.statistics.fromJSON(statistics);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.4.0 - Couldn\'t update statistics..');

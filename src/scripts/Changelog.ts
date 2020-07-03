@@ -34,7 +34,9 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
-    // Unreleased
+    // v0.4.2
+    new Changelog(changelogType.VERSION, 'v0.4.2'),
+    new Changelog(changelogType.FIXED, 'Fixed some Key items not being given when supposed to'),
 
     // v0.4.1
     new Changelog(changelogType.VERSION, 'v0.4.1 - More fixes'),

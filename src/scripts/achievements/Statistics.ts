@@ -128,12 +128,12 @@ class Statistics implements Saveable {
         }
 
         for (const prop of this.observables) {
-            this[prop] = ko.observable(json[prop] || 0);
+            this[prop](json[prop] || 0);
         }
 
         for (const array of this.arrayObservables) {
-            this[array] = [...Array(Statistics.arraySizes[array])].map((value, index) => {
-                return ko.observable(json[array] ? json[array][index] || 0 : 0);
+            this[array].forEach((el, index) => {
+                el(json[array] ? json[array][index] || 0 : 0);
             });
         }
     }
