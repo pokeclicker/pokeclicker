@@ -108,6 +108,9 @@ class Breeding implements Feature {
     }
 
     public gainEgg(e: Egg) {
+        if (e.isNone()) {
+            return false;
+        }
         for (let i = 0; i < this._eggList.length; i++) {
             if (this._eggList[i]().isNone()) {
                 this._eggList[i](e);
@@ -198,6 +201,11 @@ class Breeding implements Feature {
 
     public createFossilEgg(fossil: string): Egg {
         const pokemonName = GameConstants.FossilToPokemon[fossil];
+        const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
+        if (pokemonNativeRegion > player.highestRegion()) {
+            Notifier.notify({ message: 'You must progress further before you can uncover this fossil Pokemon!', type: GameConstants.NotificationOption.warning, timeout: 5e3 });
+            return new Egg();
+        }
         return this.createEgg(pokemonName, EggType.Fossil);
     }
 
