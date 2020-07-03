@@ -201,7 +201,7 @@ class Save {
             }
         }
         if (converted.length > 0) {
-            Notifier.notify({ message: `You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({ message: `You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`, type: GameConstants.NotificationOption.success, timeout: 1e4 });
         } else {
             Notifier.notify({ message: 'No new shiny Pokémon to import.', type: GameConstants.NotificationOption.info });
         }
