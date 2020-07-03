@@ -14188,17 +14188,24 @@ pokemonList.forEach(p => {
     }
 });
 
-const pokemonMap = new Proxy(pokemonList, {
-    get: (obj, prop: string) => {
+const pokemonMap: any = new Proxy(pokemonList, {
+    get: (pokemon, prop: string) => {
         if (+prop) {
             const id: number = +prop;
-            return obj.find(p => p.id == id);
+            return pokemon.find(p => p.id == id);
         }
         switch (prop) {
             case 'random':
-                return () => obj[Math.floor(Math.random() * obj.length)];
+                return (_max = 0, _min = 0) => {
+                    // minimum 0
+                    const min = Math.max(0, Math.min(_min, _max));
+                    // maximum is same as however many pokemon are available
+                    const max = Math.min(pokemon.length, Math.max(_min, _max));
+                    const random = Math.floor(Math.random() * (max ? max : pokemon.length) + min);
+                    return pokemon[random];
+                };
             default:
-                return obj.find(p => p.name.toLowerCase() == prop.toLowerCase());
+                return pokemon.find(p => p.name.toLowerCase() == prop.toLowerCase());
         }
     },
 });
