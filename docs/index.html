@@ -840,7 +840,7 @@
                <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
                <button class="btn btn-secondary"
                        onclick="MapHelper.travelToNextRegion()"
-                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
+                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name())">
                      Go To Next Region
                </button>
                <button class="btn btn-secondary p-0"
@@ -4193,10 +4193,10 @@
          
       fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
 </path>
-<path class="city" data-town="Lilycove City"
+<path class="city" data-town="LilyCove City"
         data-bind="
-        click:function(){MapHelper.moveToTown('Lilycove City')},
-        attr: { class: MapHelper.calculateTownCssClass('Lilycove City') },
+        click:function(){MapHelper.moveToTown('LilyCove City')},
+        attr: { class: MapHelper.calculateTownCssClass('LilyCove City') },
         "
 
         d="M 427.8 113.2 
