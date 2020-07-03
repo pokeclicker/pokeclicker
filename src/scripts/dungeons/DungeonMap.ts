@@ -126,7 +126,9 @@ class DungeonMap {
         }
 
         // Shuffle the tiles randomly
-        this.shuffle(mapList);
+        while (mapList[mapList.length - Math.floor(this.size / 2) - 1].type() != GameConstants.DungeonTile.empty) {
+            this.shuffle(mapList);
+        }
 
         // Create a 2d array
         const map: DungeonTile[][] = [];
