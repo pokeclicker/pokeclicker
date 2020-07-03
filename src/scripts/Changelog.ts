@@ -9,7 +9,7 @@ const changelogType = {
 };
 
 class Changelog {
-    public type: { display: string, label: string };
+    public type: { display: string; label: string };
     public description: string;
 
     constructor(type = { display: 'default', label: '-' }, description: string) {
