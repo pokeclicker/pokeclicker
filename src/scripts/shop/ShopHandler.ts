@@ -9,10 +9,9 @@ class ShopHandler {
         this.resetAmount();
         this.shopObservable(shop);
 
-        for (let i = 0; i < shop.items().length; i++) {
-            const item: Item = shop.items()[i];
-            item.price(Math.round(item.basePrice * player.itemMultipliers[item.name()]));
-        }
+        shop.items().forEach(item => {
+            item.price(Math.round(item.basePrice * (player.itemMultipliers[item.name()] || 1)));
+        });
     }
 
     public static setSelected(i: number) {
