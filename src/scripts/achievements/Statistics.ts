@@ -99,11 +99,11 @@ class Statistics implements Saveable {
     }
 
     public static getGymIndex(gym: string) {
-        return GameConstants.RegionGyms.flat().findIndex(g=>g==gym);
+        return GameConstants.RegionGyms.flat().findIndex(g => g == gym);
     }
 
     public static getDungeonIndex(dungeon: string) {
-        return GameConstants.RegionDungeons.flat().findIndex(d=>d==dungeon);
+        return GameConstants.RegionDungeons.flat().findIndex(d => d == dungeon);
     }
 
     toJSON(): object {
