@@ -34,7 +34,7 @@ const changelogItems = [
     new Changelog(changelogType.NEW, 'Add setting to disable currency animations'),
     new Changelog(changelogType.CHANGE, 'Increase some notifications display time'),
     new Changelog(changelogType.CHANGE, 'Decreased price multiplier'),
-    new Changelog(changelogType.CHANGE, 'Modifed pokemon list reverse checkbox to show arrows instead'),
+    new Changelog(changelogType.CHANGE, 'Modified pokemon list reverse checkbox to show arrows instead'),
     new Changelog(changelogType.FIXED, 'Tidy up Key items, Evolution stones selector'),
     new Changelog(changelogType.FIXED, 'Sketchy theme checkboxes and close icons should display correctly now'),
 
