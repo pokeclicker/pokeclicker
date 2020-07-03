@@ -21,7 +21,7 @@
                <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
                <button class="btn btn-secondary"
                        onclick="MapHelper.travelToNextRegion()"
-                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.indexOf(player.town().name()) > -1">
+                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name())">
                      Go To Next Region
                </button>
                <button class="btn btn-secondary p-0"

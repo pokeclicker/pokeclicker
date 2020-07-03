@@ -63,7 +63,7 @@ class PokedexHelper {
                 return false;
             }
 
-            if ((filter['name'] || '') != '' && pokemon.name.toLowerCase().indexOf(filter['name'].toLowerCase()) == -1) {
+            if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase())) {
                 return false;
             }
             const type1: PokemonType = parseInt(filter['type1'] || PokemonType.None);

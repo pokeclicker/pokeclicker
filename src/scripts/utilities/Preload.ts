@@ -42,7 +42,7 @@ class Preload {
     private static loadTowns() {
         const p = Array<Promise<number>>();
         for (const name in TownList) {
-            if (name.indexOf('Elite') !== -1 || name.indexOf('Champion') !== -1) {
+            if (name.includes('Elite') || name.includes('Champion')) {
                 continue;
             }
             p.push(new Promise<number>(resolve => {
