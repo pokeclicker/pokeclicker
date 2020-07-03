@@ -219,6 +219,10 @@ namespace GameConstants {
         return str.replace(/_/g, ' ');
     }
 
+    export function camelCaseToString(str: string) {
+        return str.replace(/([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase())));
+    }
+
     export function formatTime(time) {
         if (time == 0) {
             return 'Ready';
