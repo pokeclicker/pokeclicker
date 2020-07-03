@@ -6,25 +6,91 @@ class RedeemableCodes implements Saveable {
 
     constructor() {
         this.codeList = [
-            new RedeemableCode('farming-quickstart', -83143881, false, function () {
+            new RedeemableCode('farming-quick-start', -83143881, false, function () {
+                // Give the player 10k farming points, 100 Cheri berries
                 App.game.wallet.gainFarmPoints(10000);
                 App.game.farming.gainBerry(BerryType.Cheri, 100);
-                Notifier.notify({ message: 'You gain 10000 farmpoints and 100 Cheri berries', type: GameConstants.NotificationOption.success });
+                // Notify that the code was activated successfully
+                Notifier.notify({ title:'Code activated!', message: 'You gained 10,000 farmpoints and 100 Cheri berries', type: GameConstants.NotificationOption.success, timeout: 1e4 });
             }),
-            new RedeemableCode('good-luck', 1538489764, false, function () {
-                Notifier.notify({ message: 'Congrats, you did it. Although you probably already read this text so it can\'t feel very satisfying can it?', type: GameConstants.NotificationOption.success });
+            new RedeemableCode('shiny-charmer', -318017456, false, function () {
+                // Select a random Pokemon to give the player as a shiny
+                const pokemon = pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]);
+                App.game.party.gainPokemon(pokemon, true, true);
+                // Notify that the code was activated successfully
+                Notifier.notify({ title:'Code activated!', message: `✨ You found a shiny ${pokemon.name}! ✨`, type: GameConstants.NotificationOption.success, timeout: 1e4 });
             }),
-            new RedeemableCode('route-unlock-kanto', -889017321, false, function () {
-                for (let i = 1; i <= 25; i++) {
-                    App.game.statistics.routeKills[i](10);
+            new RedeemableCode('complete-kanto', 750807787, false, function () {
+                // Complete all routes
+                for (let route = GameConstants.RegionRoute[GameConstants.Region.kanto][0]; route <= GameConstants.RegionRoute[GameConstants.Region.kanto][1]; route++) {
+                    App.game.statistics.routeKills[route](10);
                 }
-                Notifier.notify({ message: 'You have unlocked all routes in Kanto', type: GameConstants.NotificationOption.success });
-            }),
-            new RedeemableCode('route-unlock-johto-2', -891649982, false, function () {
-                for (let i = 26; i <= 46; i++) {
-                    App.game.statistics.routeKills[i](10);
+                // Complete all gyms
+                GameConstants.KantoGyms.forEach(gym => {
+                    App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)](1);
+                    // Give badge
+                    if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
+                        App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
+                    }
+                });
+                // Complete all dungeons
+                GameConstants.KantoDungeons.forEach(dungeon => {
+                    App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)](1);
+                });
+                // Catch all Pokemon
+                for (let id = 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto]; id++) {
+                    App.game.party.gainPokemonById(id, false, true);
                 }
-                Notifier.notify({ message: 'You have unlocked all routes in Johto', type: GameConstants.NotificationOption.success });
+                // Notify that the code was activated successfully
+                Notifier.notify({ title:'Code activated!', message: 'You have unlocked all of the Kanto region', type: GameConstants.NotificationOption.success, timeout: 1e4 });
+            }),
+            new RedeemableCode('complete-johto', 171396746, false, function () {
+                // Complete all routes
+                for (let route = GameConstants.RegionRoute[GameConstants.Region.johto][0]; route <= GameConstants.RegionRoute[GameConstants.Region.johto][1]; route++) {
+                    App.game.statistics.routeKills[route](10);
+                }
+                // Complete all gyms
+                GameConstants.JohtoGyms.forEach(gym => {
+                    App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)](1);
+                    // Give badge
+                    if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
+                        App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
+                    }
+                });
+                // Complete all dungeons
+                GameConstants.JohtoDungeons.forEach(dungeon => {
+                    App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)](1);
+                });
+                // Catch all Pokemon
+                for (let id = GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto] + 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.johto]; id++) {
+                    App.game.party.gainPokemonById(id, false, true);
+                }
+                // Notify that the code was activated successfully
+                Notifier.notify({ title:'Code activated!', message: 'You have unlocked all of the Johto region', type: GameConstants.NotificationOption.success, timeout: 1e4 });
+            }),
+            new RedeemableCode('complete-hoenn', -1257697040, false, function () {
+                // Complete all routes
+                for (let route = GameConstants.RegionRoute[GameConstants.Region.hoenn][0]; route <= GameConstants.RegionRoute[GameConstants.Region.hoenn][1]; route++) {
+                    App.game.statistics.routeKills[route](10);
+                }
+                // Complete all gyms
+                GameConstants.HoennGyms.forEach(gym => {
+                    App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)](1);
+                    // Give badge
+                    if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
+                        App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
+                    }
+                });
+                // Complete all dungeons
+                GameConstants.HoennDungeons.forEach(dungeon => {
+                    App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)](1);
+                });
+                // Catch all Pokemon
+                for (let id = GameConstants.TotalPokemonsPerRegion[GameConstants.Region.johto] + 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.hoenn]; id++) {
+                    App.game.party.gainPokemonById(id, false, true);
+                }
+                // Notify that the code was activated successfully
+                Notifier.notify({ title:'Code activated!', message: 'You have unlocked all of the Hoenn region', type: GameConstants.NotificationOption.success, timeout: 1e4 });
             }),
         ];
     }

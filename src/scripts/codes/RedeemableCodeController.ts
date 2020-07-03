@@ -1,6 +1,8 @@
 class RedeemableCodeController {
     static enterCode() {
-        const code = (<HTMLInputElement>document.getElementById('redeemable-code-input')).value;
+        const el = document.getElementById('redeemable-code-input') as HTMLInputElement;;
+        const code = el.value;
+        el.value = '';
         App.game.redeemableCodes.enterCode(code);
     }
 }
