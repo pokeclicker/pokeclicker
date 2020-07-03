@@ -38,6 +38,7 @@ const changelogItems = [
     new Changelog(changelogType.VERSION, 'v0.4.3'),
     new Changelog(changelogType.NEW, 'Add setting to disable currency animations'),
     new Changelog(changelogType.CHANGE, 'Increase some notifications display time'),
+    new Changelog(changelogType.CHANGE, 'Decreased price multipler'),
     new Changelog(changelogType.FIXED, 'Tidy up Key items, Evolution stones selector'),
     new Changelog(changelogType.FIXED, 'Sketchy theme checkboxes and close icons should display correctly now'),
 
