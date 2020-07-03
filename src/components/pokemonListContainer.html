@@ -24,16 +24,14 @@
 
 <script type="text/html" id="PartySortSettingTemplate">
     <div class="row no-gutters" style="align-items: center">
-        <div class="col-sm-2">Sort:</div>
-        <div class="col">
-            <select onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                    data-bind="foreach: $data.options, attr: {name}">
-                <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
-            </select>
-        </div>
-        <div class="col">
-            Reverse
-            <input style="vertical-align: middle" class="clickable" type='checkbox'
+        <div class="col-2">Sort:</div>
+        <select class="col-9" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                data-bind="foreach: $data.options, attr: {name}">
+            <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
+        </select>
+        <div class="col-1">
+            <label for="partySortDirection" class="clickable" style="font-size: 24px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+            <input id="partySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
                    data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
                    onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
         </div>
