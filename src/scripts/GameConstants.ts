@@ -51,7 +51,7 @@ namespace GameConstants {
     export const SHINY_CHANCE_STONE = 4096;
     export const SHINY_CHANCE_SAFARI = 2048;
 
-    export const ITEM_PRICE_MULTIPLIER = 1.001;
+    export const ITEM_PRICE_MULTIPLIER = 1.00045;
     export const ITEM_PRICE_DEDUCT = 1.0005;
 
     export const PLATE_VALUE = 100;
