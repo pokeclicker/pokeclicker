@@ -77,7 +77,7 @@ class Egg implements Saveable {
         const shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, this.shinySteps / this.steps()));
         const shiny = PokemonFactory.generateShiny(shinyChance);
 
-        const partyPokemon = App.game.party.caughtPokemon.find(p=>p.name == this.pokemon);
+        const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
         if (partyPokemon?.breeding) {
             if (partyPokemon.evolutions !== undefined) {
                 partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
