@@ -2,7 +2,7 @@ class Update implements Saveable {
     defaults: object;
     saveKey = 'update';
 
-    version = '0.4.2';
+    version = '0.4.3';
     saveVersion = '0.0.0';
 
     constructor() {}
