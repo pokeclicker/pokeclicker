@@ -159,11 +159,10 @@ class Breeding implements Feature {
     }
 
     public moveEggs(): void {
+        const tempEggList = App.game.breeding._eggList.filter(egg=>egg().type != EggType.None);
+
         this._eggList.forEach((egg, index) => {
-            if (egg().isNone() && index < this._eggList.length - 1) {
-                egg(this._eggList[index + 1]());
-                this._eggList[index + 1](new Egg());
-            }
+            egg(tempEggList[index] ? tempEggList[index]() : new Egg());
         });
     }
 
