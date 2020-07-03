@@ -15,8 +15,8 @@
                     <h3 data-bind="text: GameConstants.humanifyString(ItemHandler.stoneSelected())"></h3>
                     <div class="page-item m-0">
                         <div class="row no-gutters justify-content-sm-center" style="padding:15px;">
-                            <div class="row col-lg-6 col-sm-11" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
-                                <div class="col" style="cursor: pointer"
+                            <div class="row col-lg-6 col-sm-10" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
+                                <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
                                     <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}">
@@ -82,7 +82,7 @@
                     <div class="page-item m-0">
                         <div class="row no-gutters justify-content-sm-center"
                              data-bind="foreach: App.game.keyItems.itemList">
-                            <div class="col-sm-2">
+                            <div class="col-2">
                                 <img class="clickable key-item" src=""
                                      data-bind="attr:{
                                      src: 'assets/images/keyitems/' + KeyItems.KeyItem[$data.name] + '.png'},
@@ -98,12 +98,12 @@
 
                         <div class="card oak-item-info" style="height:90px">
                             <div class="row justify-content-sm-center">
-                                <div style="height: 20px" class="col-sm-11">
+                                <div style="height: 20px" class="col-xs-10">
                                     <b><span data-bind="text: App.game.keyItems.itemList[KeyItemController.inspectedItem].displayName"></span></b>
                                 </div>
                             </div>
                             <div class="row justify-content-sm-center">
-                                <div class="col-sm-11">
+                                <div class="col-xs-10">
                                     <div data-bind="if: App.game.keyItems.hasKeyItem(KeyItemController.inspectedItem)">
                                         <p style="margin-top: 5px"
                                            data-bind="html: App.game.keyItems.itemList[KeyItemController.inspectedItem].description"></p>
