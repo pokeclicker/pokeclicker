@@ -36,6 +36,7 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
 const changelogItems = [
     // v0.4.3
     new Changelog(changelogType.VERSION, 'v0.4.3'),
+    new Changelog(changelogType.NEW, 'Add setting to disable currency animations'),
     new Changelog(changelogType.FIXED, 'Tidy up Key items, Evolution stones selector'),
 
     // v0.4.2

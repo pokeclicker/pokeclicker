@@ -19,9 +19,13 @@ class GameController {
     }
 
     static animateCurrency(amount: number, target) {
+        // Check if animations have been disabled
+        if (!Settings.getSetting('showCurrencyGainedAnimation').observableValue()) {
+            return;
+        }
         let pos;
         const targetVisible = $(`#${target}`).is(':visible');
-        
+
         if ($(`#${target}`).offset() && targetVisible) {
             pos = $(`#${target}`).offset();
             pos.top -= 15;

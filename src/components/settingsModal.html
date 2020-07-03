@@ -15,6 +15,7 @@
                     <tbody>
                       <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
                       <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
+                      <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                     </tbody>
                 </table>
                 <br/>
@@ -25,10 +26,19 @@
 
 
 <script type="text/html" id="MultipleChoiceSettingTemplate">
-    <td data-bind="text: $data.displayName" >Settings</td>
+    <td data-bind="text: $data.displayName">setting name</td>
     <td>
         <select class="form-control" onchange="Settings.setSettingByName(this.name, this.value)" data-bind="foreach: $data.options, attr: {name}">
             <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
         </select>
+    </td>
+</script>
+
+<script type="text/html" id="BooleanSettingTemplate">
+    <td data-bind="text: $data.displayName">setting name</td>
+    <td>
+      <input class="clickable" type="checkbox"
+           data-bind="checked: Settings.getSetting($data.name).observableValue(), attr: {name}"
+           onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
 </script>
