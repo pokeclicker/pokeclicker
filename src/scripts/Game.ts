@@ -63,7 +63,6 @@ class Game {
     }
 
     load() {
-        // TODO(@Isha) Refactor this saving logic
         const saveJSON = localStorage.getItem('save');
 
         if (saveJSON !== null) {
