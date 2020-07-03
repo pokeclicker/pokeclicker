@@ -14,7 +14,7 @@ class Town {
         this._shop = ko.observable(shop);
         this._dungeon = ko.observable(dungeon);
         this.dungeonReq = dungeonReq;
-        this.startingTown = GameConstants.StartingTowns.indexOf(this._name()) > -1;
+        this.startingTown = GameConstants.StartingTowns.includes(this._name());
     }
 
     get name(): KnockoutObservable<string> {

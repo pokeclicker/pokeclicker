@@ -91,7 +91,7 @@ class Save {
         const filtered = {};
         let prop;
         for (prop in object) {
-            if (keep.indexOf(prop) > -1) {
+            if (keep.includes(prop)) {
                 filtered[prop] = object[prop];
             }
         }
