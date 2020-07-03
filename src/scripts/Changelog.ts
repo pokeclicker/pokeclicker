@@ -34,16 +34,13 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
-    // v0.4.4
-    new Changelog(changelogType.UPDATE, 'v0.4.3'),
-    new Changelog(changelogType.FIXED, 'Fix LilyCove City naming and image'),
-
     // v0.4.3
     new Changelog(changelogType.UPDATE, 'v0.4.3'),
     new Changelog(changelogType.NEW, 'Add setting to disable currency animations'),
     new Changelog(changelogType.CHANGE, 'Increase some notifications display time'),
     new Changelog(changelogType.CHANGE, 'Modified pokemon list reverse checkbox to show arrows instead'),
     new Changelog(changelogType.CHANGE, 'Updated changelog layout'),
+    new Changelog(changelogType.FIXED, 'Fix LilyCove City naming and image'),
     new Changelog(changelogType.FIXED, 'Tidy up Key items, Evolution stones selector'),
     new Changelog(changelogType.FIXED, 'Sketchy theme checkboxes and close icons should display correctly now'),
 
