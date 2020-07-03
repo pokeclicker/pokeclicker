@@ -34,6 +34,10 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.3
+    new Changelog(changelogType.VERSION, 'v0.4.3'),
+    new Changelog(changelogType.FIXED, 'Tidy up Key items, Evolution stones selector'),
+
     // v0.4.2
     new Changelog(changelogType.VERSION, 'v0.4.2'),
     new Changelog(changelogType.FIXED, 'Fixed some Key items not being given when supposed to'),
