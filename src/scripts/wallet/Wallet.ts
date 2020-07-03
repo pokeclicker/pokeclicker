@@ -72,13 +72,10 @@ class Wallet implements Feature {
     }
 
     private addAmount(amount: Amount) {
-        if (isNaN(amount.amount)) {
-            console.error(`Could not add amount ${amount}`);
+        if (isNaN(amount.amount) || amount.amount <= 1) {
+            console.trace(`Could not add amount ${amount}`);
+            amount.amount = 1;
             return;
-        }
-
-        if (amount.amount <= 0) {
-            console.error(`We can only add positive amounts, ${amount} is not valid`);
         }
 
         this.currencies[amount.currency] += amount.amount;
