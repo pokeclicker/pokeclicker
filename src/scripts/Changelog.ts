@@ -34,6 +34,10 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.4
+    new Changelog(changelogType.UPDATE, 'v0.4.4'),
+    new Changelog(changelogType.FIXED, 'Fixed being able to breed fossils from regions you have not reached yet'),
+
     // v0.4.3
     new Changelog(changelogType.UPDATE, 'v0.4.3'),
     new Changelog(changelogType.NEW, 'Add setting to disable currency animations'),
