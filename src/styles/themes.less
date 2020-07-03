@@ -1,0 +1,39 @@
+// Any changes needed for specific bootswatch themes should be put in here
+.sketchy {
+  // Fix mis-aligned checkbox
+  [type="checkbox"]:before {
+    left: 0;
+    top: -0.5em;
+  }
+  [type="checkbox"]:checked:after {
+    left: 0.15em;
+    top: -0.28em;
+  }
+
+  // Fix double close button
+  #toaster .toast-body {
+    .close, .close:hover {
+      color: transparent;
+    }
+
+    .close:before,
+    .close:hover:before,
+    .close:focus:before,
+    .close:active:before {
+      color: whitesmoke;
+    }
+  }
+
+  #toaster .toast-header {
+    .close, .close:hover {
+      color: transparent;
+    }
+
+    .close:before,
+    .close:hover:before,
+    .close:focus:before,
+    .close:active:before {
+      color: #333;
+    }
+  }
+}
