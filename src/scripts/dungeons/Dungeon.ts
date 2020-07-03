@@ -54,7 +54,6 @@ class Dungeon {
  * Data list that contains all dungeons, accessible by name.
  */
 
-// TODO add 22-25
 const dungeonList: { [dungeonName: string]: Dungeon } = {};
 
 // Kanto Dungeons

@@ -52,8 +52,6 @@ class Gym {
     }
 }
 
-//TODO add all rewardMessages
-
 // Kanto Gyms
 gymList['Pewter City'] = new Gym(
     'Brock',
