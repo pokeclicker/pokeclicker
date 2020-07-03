@@ -31,7 +31,8 @@ class Changelog {
 const changelogItems = [
     // v0.4.4
     new Changelog(changelogType.UPDATE, 'v0.4.4'),
-    new Changelog(changelogType.FIXED, 'Fixed being able to breed fossils from regions you have not reached yet'),
+    new Changelog(changelogType.FIXED, 'Can no longer breed fossils from regions you have not reached yet'),
+    new Changelog(changelogType.FIXED, 'Added missing notifications for stone evolution Pokemon'),
 
     // v0.4.3
     new Changelog(changelogType.UPDATE, 'v0.4.3'),
