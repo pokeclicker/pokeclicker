@@ -22,11 +22,6 @@ class Changelog {
 }
 
 /**
- * TODO(@Isha) Change to unreleased changedlog and add an explanation on how to use it
- */
-const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add anything to this list yet')];
-
-/**
  * Add your changes to the top of the changelog. Please do not increase the version number.
  *
  * MAJOR - Will stay at 0 during development, 1 after the first public release
@@ -39,6 +34,7 @@ const changelogItems = [
     new Changelog(changelogType.NEW, 'Add setting to disable currency animations'),
     new Changelog(changelogType.CHANGE, 'Increase some notifications display time'),
     new Changelog(changelogType.CHANGE, 'Decreased price multiplier'),
+    new Changelog(changelogType.CHANGE, 'Modifed pokemon list reverse checkbox to show arrows instead'),
     new Changelog(changelogType.FIXED, 'Tidy up Key items, Evolution stones selector'),
     new Changelog(changelogType.FIXED, 'Sketchy theme checkboxes and close icons should display correctly now'),
 
