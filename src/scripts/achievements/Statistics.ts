@@ -6,6 +6,8 @@ class Statistics implements Saveable {
 
     defaults = {};
 
+    selectedPokemonID = ko.observable(1);
+
     clickAttacks: KnockoutObservable<number>;
     hatchedEggs: KnockoutObservable<number>;
     pokemonCaptured: Array<KnockoutObservable<number>>;

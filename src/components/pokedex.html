@@ -86,6 +86,7 @@ aria-labelledby="pokedexModalLabel">
                              <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}-small.png`}"/>
                            </div>
                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
+                           <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedPokemonID($data.id)}, tooltip: { html: true, title: `<u>Information:</u><br/>Base Attack: <strong>${$data.attack}</strong><br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate)}%</strong><br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>`, trigger: 'hover', placement:'bottom' }"></a>
                            <!-- /ko -->
                        </div>
                    </li>
