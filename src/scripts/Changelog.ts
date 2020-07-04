@@ -32,6 +32,8 @@ const changelogItems = [
     // v0.4.4
     new Changelog(changelogType.UPDATE, 'v0.4.4'),
     new Changelog(changelogType.NEW, 'Add some new game codes'),
+    new Changelog(changelogType.NEW, 'Statistics can now be viewed from the Start Menu'),
+    new Changelog(changelogType.NEW, 'Pokemon statistics can be viewed by clicking a Pokemon in the Pokedex'),
     new Changelog(changelogType.CHANGE, 'Update some game codes'),
     new Changelog(changelogType.REMOVED, 'Remove old game codes'),
     new Changelog(changelogType.FIXED, 'Can no longer breed fossils from regions you have not reached yet'),
