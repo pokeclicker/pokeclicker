@@ -180,3 +180,8 @@ class GameController {
 $(document).ready(function () {
     $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList);
 });
+
+// when stacking modals allow scrolling after top modal hidden
+$(document).on('hidden.bs.modal', '.modal', function () {
+    $('.modal:visible').length && $(document.body).addClass('modal-open');
+});
