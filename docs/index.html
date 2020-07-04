@@ -161,7 +161,7 @@
             <a class="dropdown-item" href="#badgeCaseModal" data-toggle="modal">Badge Case</a>
         </li>
         <li>
-            <button class="dropdown-item" href="#statistics">Statistics</button>
+            <button class="dropdown-item" href="#statisticsModal" data-toggle="modal">Statistics</button>
         </li>
         <li>
             <a class="dropdown-item" href="#achievementsModal" data-toggle="modal">Achievements</a>
@@ -773,8 +773,8 @@
                                 </div>
                             </div>
 
-                            <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching) -->
-                            <div>
+                            <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
+                            <div data-bind="if: DungeonBattle.enemyPokemon()?.health()">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
                                 <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></span>
                                 <div>
@@ -5033,6 +5033,38 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 </div>
 </div>
 
+<!-- Statistics Modal-->
+<div class="modal noselect fade" id="statisticsModal" tabindex="-1" role="dialog" aria-labelledby="statisticsModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style='justify-content: space-around;'>
+                <h5 class="modal-title">Statistics</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <table class="table table-striped table-hover table-bordered table-sm">
+                    <thead>
+                      <tr>
+                        <th>Statistic</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody data-bind="foreach: App.game.statistics.observables">
+                      <tr>
+                        <td class="text-left" data-bind="text: GameConstants.camelCaseToString($data)">-</td>
+                        <td class="text-left tight"><code data-bind="text:App.game.statistics[$data]().toLocaleString('en-US')">-</code></td>
+                      </tr>
+                    </tbody>
+                </table>
+                <br/>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <!-- Log Book Modal-->
 <div class="modal noselect fade" id="logBookModal" tabindex="-1" role="dialog" aria-labelledby="logBookModalLabel">
     <div class="modal-dialog modal-lg" role="document">
@@ -5678,6 +5710,7 @@ aria-labelledby="pokedexModalLabel">
                              <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}-small.png`}"/>
                            </div>
                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
+                           <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedPokemonID($data.id)}, tooltip: { html: true, title: `<u>Information:</u><br/>Base Attack: <strong>${$data.attack}</strong><br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate)}%</strong><br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>`, trigger: 'hover', placement:'bottom' }"></a>
                            <!-- /ko -->
                        </div>
                    </li>
@@ -5690,6 +5723,87 @@ aria-labelledby="pokedexModalLabel">
        </div>
    </div>
 </div>
+</div>
+
+
+<!-- Statistics Modal-->
+<div class="modal noselect fade" id="pokemonStatisticsModal" tabindex="-1" role="dialog" aria-labelledby="pokemonStatisticsModal">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content" data-bind="with: App.game.statistics.selectedPokemonID()">
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-muted" data-bind="text: `#${pokemonMap[$data].id.toString().padStart(3,0)}&nbsp;&nbsp;`"></h5>
+                <h5 class="modal-title" data-bind="text: pokemonMap[$data].name">Pokemon Statistics</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <img data-bind="attr:{ src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data, true) ? 'shiny' : '') + 'pokemon/' + $data + '.png' }" src=""/>
+                <table class="table table-striped table-hover table-bordered table-sm">
+                  <thead>
+                    <tr class="text-light">
+                      <th class="text-left bg-dark">Type</th>
+                      <th class="text-left bg-dark">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody">
+                    <tr>
+                      <td class="text-left">Base Attack</td>
+                      <td class="text-left tight"><code data-bind="text: pokemonMap[$data].attack.toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Current Attack</td>
+                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data)?.attack || 0).toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Catch Rate</td>
+                      <td class="text-left tight"><code data-bind="text: PokemonFactory.catchRateHelper(pokemonMap[$data].catchRate) + '%'">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Hatch Steps</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.breeding.getSteps(pokemonMap[$data].eggCycles).toLocaleString('en-US')">-</code></td>
+                    </tr>
+                  </tbody>
+                  <thead>
+                    <tr class="text-light">
+                      <th class="text-left bg-dark">Statistic</th>
+                      <th class="text-left bg-dark">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody">
+                    <tr>
+                      <td class="text-left">Hatched</td>
+                      <td class="text-left tight"><code data-bind="text: ((App.game.party.getPokemon($data)?.attackBonus / 25) || 0).toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Encountered</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.statistics.pokemonEncountered[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Defeated</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.statistics.pokemonDefeated[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Captured</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.statistics.pokemonCaptured[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Shinies Encountered</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonEncountered[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Shinies Defeated</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonDefeated[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Shinies Captured</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonCaptured[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 
 
@@ -5741,9 +5855,7 @@ aria-labelledby="badgeCaseModalLabel">
                             <div class="page-item m-0 pt-3 pb-3">
                                 <form class="form-inline justify-content-center">
                                     <input placeholder="Enter code..." id="redeemable-code-input" type="text">
-                                    <button class="btn btn-info" name="name" value="value" type="submit"
-                                            onclick="RedeemableCodeController.enterCode(); return false;">Claim!
-                                    </button>
+                                    <button class="btn btn-info" name="name" value="value" type="submit" onclick="RedeemableCodeController.enterCode(); return false;">Claim!</button>
                                 </form>
                                 <hr>
 
