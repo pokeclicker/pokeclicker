@@ -1,11 +1,11 @@
 ///<reference path="Requirement.ts"/>
 
-class DigDeeperRequirement extends Requirement {
+class UndergroundLayersMinedRequirement extends Requirement {
     constructor( value: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, type);
     }
 
     public getProgress() {
-        return Math.min(App.game.statistics.digDeeper(), this.requiredValue);
+        return Math.min(App.game.statistics.undergroundLayersMined(), this.requiredValue);
     }
 }

@@ -40,7 +40,7 @@ class Battle {
             return;
         }
         App.game.oakItems.use(OakItems.OakItem.Poison_Barb);
-        GameHelper.incrementObservable(App.game.statistics.clicks);
+        GameHelper.incrementObservable(App.game.statistics.clickAttacks);
         this.enemyPokemon().damage(App.game.party.calculateClickAttack());
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
