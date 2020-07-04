@@ -21,7 +21,7 @@ class Egg implements Saveable {
         this.pokemon = pokemon;
         this.type = type;
         this.notified = notified;
-        
+
         this.init();
     }
 
@@ -51,6 +51,9 @@ class Egg implements Saveable {
     addSteps(amount: number) {
         if (this.isNone() || this.notified) {
             return;
+        }
+        if (!+amount) {
+            amount = 1;
         }
         this.steps(this.steps() + amount);
         if (App.game.oakItems.isActive(OakItems.OakItem.Shiny_Charm)) {
