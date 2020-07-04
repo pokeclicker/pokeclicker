@@ -34,7 +34,7 @@ class Wallet implements Feature {
 
         tokens = Math.floor(tokens);
 
-        GameHelper.incrementObservable(App.game.statistics.totalTokens, tokens);
+        GameHelper.incrementObservable(App.game.statistics.totalDungeonTokens, tokens);
         GameController.animateCurrency(tokens, 'playerMoneyDungeon');
 
         this.addAmount(new Amount(tokens, Currency.dungeonToken));

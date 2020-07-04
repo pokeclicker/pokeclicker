@@ -94,16 +94,16 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Bling x10!', 'Obtain 1000 Diamonds', new DiamondRequirement(1000), 0.15);
         AchievementHandler.addAchievement("If you like it, you should've put a ring on it.", 'Obtain 10,000 Diamonds', new DiamondRequirement(10000), 0.25);
 
-        AchievementHandler.addAchievement('Is my thumb green yet?', 'Dig up 1 item', new DigItemsRequirement(1), 0.01);
-        AchievementHandler.addAchievement('My shovel is starting to crack', 'Dig up 10 items', new DigItemsRequirement(10), 0.01);
-        AchievementHandler.addAchievement("Why can't I make a diamond shovel?", 'Dig up 100 items', new DigItemsRequirement(100), 0.01);
-        AchievementHandler.addAchievement('This is definitely not Minecraft', 'Dig up 1,000 items', new DigItemsRequirement(1000), 0.01);
-        AchievementHandler.addAchievement('I wonder how much is down there...', 'Dig up 10,000 items', new DigItemsRequirement(10000), 0.01);
+        AchievementHandler.addAchievement('Is my thumb green yet?', 'Dig up 1 item', new UndergroundItemsFoundRequirement(1), 0.01);
+        AchievementHandler.addAchievement('My shovel is starting to crack', 'Dig up 10 items', new UndergroundItemsFoundRequirement(10), 0.01);
+        AchievementHandler.addAchievement("Why can't I make a diamond shovel?", 'Dig up 100 items', new UndergroundItemsFoundRequirement(100), 0.01);
+        AchievementHandler.addAchievement('This is definitely not Minecraft', 'Dig up 1,000 items', new UndergroundItemsFoundRequirement(1000), 0.01);
+        AchievementHandler.addAchievement('I wonder how much is down there...', 'Dig up 10,000 items', new UndergroundItemsFoundRequirement(10000), 0.01);
 
-        AchievementHandler.addAchievement('The earth is like unions', 'Dig deeper 1 time', new DigDeeperRequirement(1), 0.01);
-        AchievementHandler.addAchievement('This takes foreverrrrrrr', 'Dig deeper 10 times', new DigDeeperRequirement(10), 0.01);
-        AchievementHandler.addAchievement("DigDug ain't got nothin on me", 'Dig deeper 100 times', new DigDeeperRequirement(100), 0.01);
-        AchievementHandler.addAchievement("Both my thumbs are green! This can't be healthy", 'Dig deeper 1000 times', new DigDeeperRequirement(1000), 0.01);
+        AchievementHandler.addAchievement('The earth is like unions', 'Dig deeper 1 time', new UndergroundLayersMinedRequirement(1), 0.01);
+        AchievementHandler.addAchievement('This takes foreverrrrrrr', 'Dig deeper 10 times', new UndergroundLayersMinedRequirement(10), 0.01);
+        AchievementHandler.addAchievement("DigDug ain't got nothin on me", 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.01);
+        AchievementHandler.addAchievement("Both my thumbs are green! This can't be healthy", 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.01);
 
         AchievementHandler.addAchievement('First Team', 'Capture 100 Pokemon', new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokemon', new CapturedRequirement(1000), 0.10);

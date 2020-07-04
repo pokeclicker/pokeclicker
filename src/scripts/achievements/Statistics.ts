@@ -6,7 +6,7 @@ class Statistics implements Saveable {
 
     defaults = {};
 
-    clicks: KnockoutObservable<number>;
+    clickAttacks: KnockoutObservable<number>;
     hatchedEggs: KnockoutObservable<number>;
     pokemonCaptured: Array<KnockoutObservable<number>>;
     pokemonDefeated: Array<KnockoutObservable<number>>;
@@ -22,10 +22,10 @@ class Statistics implements Saveable {
     totalShinyPokemonEncountered: KnockoutObservable<number>;
     gymsDefeated: Array<KnockoutObservable<number>>;
     dungeonsCleared: Array<KnockoutObservable<number>>;
-    digItems: KnockoutObservable<number>; // Total treasure found in underground
-    digDeeper: KnockoutObservable<number>; // Total underground layers completed
+    undergroundItemsFound: KnockoutObservable<number>; // Total treasure found in underground
+    undergroundLayersMined: KnockoutObservable<number>; // Total underground layers completed
     totalMoney: KnockoutObservable<number>;
-    totalTokens: KnockoutObservable<number>;
+    totalDungeonTokens: KnockoutObservable<number>;
     totalQuestPoints: KnockoutObservable<number>;
     totalDiamonds: KnockoutObservable<number>;
     totalFarmPoints: KnockoutObservable<number>;
@@ -36,12 +36,12 @@ class Statistics implements Saveable {
     berriesHarvested: Array<KnockoutObservable<number>>;
     routeKills: Array<KnockoutObservable<number>>;
     observables = [
-        'clicks',
+        'clickAttacks',
         'hatchedEggs',
-        'digItems',
-        'digDeeper',
+        'undergroundItemsFound',
+        'undergroundLayersMined',
         'totalMoney',
-        'totalTokens',
+        'totalDungeonTokens',
         'totalQuestPoints',
         'totalDiamonds',
         'totalFarmPoints',
