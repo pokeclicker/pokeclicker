@@ -9,7 +9,8 @@
     "test": "npm run ts-test && npm run eslint",
     "ts-test": "gulp scripts",
     "eslint": "eslint --config ./.eslintrc.js --ext ts ./src/scripts",
-    "eslint-fix": "eslint --config ./.eslintrc.js --ext ts --fix ./src/scripts"
+    "eslint-fix": "eslint --config ./.eslintrc.js --ext ts --fix ./src/scripts",
+    "publish": "git push origin develop:master"
   },
   "repository": {
     "type": "git",
