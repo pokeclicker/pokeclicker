@@ -1,7 +1,7 @@
 /* eslint @typescript-eslint/camelcase: off */
 class Notifier {
 
-    public static notify({ message, type = GameConstants.NotificationOption.primary, title = '', timeout = 3000, time = 'just now' }: { message: string; type?: GameConstants.NotificationOption; title?: string; timeout?: number, time?: string }) {
+    public static notify({ message, type = GameConstants.NotificationOption.primary, title = '', timeout = 3000, time = 'just now' }: { message: string; type?: GameConstants.NotificationOption; title?: string; timeout?: number; time?: string }) {
         const toastID = Math.random().toString(36).substr(2, 9);
         const toastHTML = `<div id="${toastID}" class="toast bg-${GameConstants.NotificationOption[type]}" data-autohide="false">
     ${title ? `<div class="toast-header">
