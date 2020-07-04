@@ -10,19 +10,22 @@
             <div class="modal-body" style="background: url('assets/images/safari/5.png');">
                 <img src='assets/images/ship.png' style='width: 100%;'>
                 <div style='margin-top:20px'>
-                    <button class='btn btn-block btn-primary'
+                    <button class='btn btn-block btn-success'
+                        data-dismiss='modal'
                         data-bind='visible: player.region != 0'
-                        onclick='MapHelper.moveToTown("Vermillion City");player.region = 0;$("#ShipModal").modal("hide")'>
+                        onclick='MapHelper.moveToTown("Vermillion City");player.region = 0;'>
                         Kanto
                     </button>
                     <button class='btn btn-block btn-success'
+                        data-dismiss='modal'
                         data-bind='visible: player.region != 1 && player.highestRegion() >= 1'
-                        onclick='MapHelper.moveToTown("Olivine City");player.region = 1;$("#ShipModal").modal("hide")'>
+                        onclick='MapHelper.moveToTown("Olivine City");player.region = 1;'>
                         Johto
                     </button>
                     <button class='btn btn-block btn-success'
+                        data-dismiss='modal'
                         data-bind='visible: player.region != 2 && player.highestRegion() >= 2'
-                        onclick='MapHelper.moveToTown("Slateport City");player.region = 2;$("#ShipModal").modal("hide")'>
+                        onclick='MapHelper.moveToTown("Slateport City");player.region = 2;'>
                         Hoenn
                     </button>
                 </div>
