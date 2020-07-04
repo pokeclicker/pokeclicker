@@ -34,6 +34,10 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.5
+    new Changelog(changelogType.UPDATE, 'v0.4.5'),
+    new Changelog(changelogType.FIXED, 'Dungeon layout should be shuffled again'),
+
     // v0.4.4
     new Changelog(changelogType.UPDATE, 'v0.4.4'),
     new Changelog(changelogType.NEW, 'Statistics can now be viewed from the Start Menu'),
