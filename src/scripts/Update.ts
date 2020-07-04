@@ -59,7 +59,7 @@ class Update implements Saveable {
         }
 
         if (this.saveVersion != this.version) {
-            Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: 'Check the changelog for details!', type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+            Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!', type: GameConstants.NotificationOption.primary, timeout: 6e4 });
         }
     }
 
