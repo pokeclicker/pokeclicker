@@ -36,6 +36,8 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
 const changelogItems = [
     // v0.4.4
     new Changelog(changelogType.UPDATE, 'v0.4.4'),
+    new Changelog(changelogType.NEW, 'Statistics can now be viewed from the Start Menu'),
+    new Changelog(changelogType.NEW, 'Pokemon statistics can be viewed by clicking a Pokemon in the Pokedex'),
     new Changelog(changelogType.FIXED, 'Can no longer breed fossils from regions you have not reached yet'),
     new Changelog(changelogType.FIXED, 'Added missing notifications for stone evolution Pokemon'),
 
