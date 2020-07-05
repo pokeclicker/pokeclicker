@@ -32,7 +32,7 @@ class Update implements Saveable {
                 // Loading the new data
                 App.game.statistics.fromJSON(saveData.statistics);
             } catch (ಠ_ಠ) {
-                console.error('[update] v0.4.0 - Couldn\'t update statistics..');
+                console.error('[update] v0.4.0 - Couldn\'t update statistics..', ಠ_ಠ);
             }
         }
 
@@ -54,7 +54,7 @@ class Update implements Saveable {
                 // Loading the new data
                 App.game.statistics.fromJSON(saveData.statistics);
             } catch (ಠ_ಠ) {
-                console.error('[update] v0.4.4 - Couldn\'t update statistics..');
+                console.error('[update] v0.4.4 - Couldn\'t update statistics..', ಠ_ಠ);
             }
         }
 
