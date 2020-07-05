@@ -42,18 +42,19 @@ class Party implements Feature {
         if (shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonCaptured);
-        }
-        // Already have it shiny
-        if (this.alreadyCaughtPokemon(pokemon.id, true)) {
-            return;
-        }
-
-        if (shiny) {
-            this.shinyPokemon.push(pokemon.id);
-            Notifier.notify({ message: `✨ You have captured a shiny ${pokemon.name}! ✨`, type: GameConstants.NotificationOption.warning });
+            // Add all shiny catches to the log book
             App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured a shiny ${pokemon.name}!`);
+            // Already caught (shiny)
+            if (this.alreadyCaughtPokemon(pokemon.id, true)) {
+                return;
+            }
+            // Notify if not already caught
+            Notifier.notify({ message: `✨ You have captured a shiny ${pokemon.name}! ✨`, type: GameConstants.NotificationOption.warning });
+            // Add to caught shiny list
+            this.shinyPokemon.push(pokemon.id);
         }
 
+        // Already caught (non shiny)
         if (this.alreadyCaughtPokemon(pokemon.id, false)) {
             return;
         }
