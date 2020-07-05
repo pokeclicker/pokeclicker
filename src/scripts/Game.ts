@@ -40,7 +40,7 @@ class Game {
         logbook: LogBook,
         codes: RedeemableCodes,
         statistics: Statistics,
-        specialEvents: SpecialEvents,
+        specialEvents: SpecialEvents
     ) {
         this.update = update;
         this.breeding = breeding;

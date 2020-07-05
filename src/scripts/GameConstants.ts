@@ -248,7 +248,6 @@ namespace GameConstants {
         time = Math.abs(time);
 
         if (time > GameConstants.DAY) {
-            let str = ''
             const days = Math.ceil(time / GameConstants.DAY);
             return `${time % GameConstants.DAY ? '< ' : ''}${days} day${days == 1 ? '' : 's'}`;
         }
