@@ -9,7 +9,7 @@ ko.extenders.numeric = function(target, precision) {
         read: target,  //always return the original observables value
         write: function(newValue) {
             if (!isNaN(newValue)) {
-                let current = target(),
+                const current = target(),
                     roundingMultiplier = Math.pow(10, precision),
                     newValueAsNum = +newValue,
                     valueToWrite = Math.round(newValueAsNum * roundingMultiplier) / roundingMultiplier;
@@ -24,7 +24,7 @@ ko.extenders.numeric = function(target, precision) {
                     }
                 }
             }
-        }
+        },
     }).extend({ notify: 'always' });
 
     //initialize with current value to make sure it is rounded appropriately
