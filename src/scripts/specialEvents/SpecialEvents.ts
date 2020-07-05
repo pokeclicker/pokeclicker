@@ -3,7 +3,7 @@ class SpecialEvents implements Feature {
     saveKey = 'events';
     defaults: object;
 
-    public events = {};
+    public events = [];
 
     newEvent(event: SpecialEvent) {
         this.events.push(event);
@@ -15,7 +15,7 @@ class SpecialEvents implements Feature {
         }
     }
 
-    toJSON(): { logs: Array<{ type: LogBookType; description: string; date: number }> } {
+    toJSON() {
         return {
             // no data to save yet
         };

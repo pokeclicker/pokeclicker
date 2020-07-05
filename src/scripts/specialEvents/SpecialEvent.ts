@@ -1,12 +1,3 @@
-enum NotifiedStatus {
-  None,
-  New,
-  Starting,
-  Started,
-  Ending,
-  Ended,
-}
-
 class SpecialEvent {
     id: number;
     title: string;
@@ -16,7 +7,7 @@ class SpecialEvent {
     endTime: Date;
     endFunction: Function;
 
-    notified: number;
+    notified: SpecialEventNotifiedStatus;
 
 
     constructor(id: number, title: string, description: string, startTime: Date, startFunction: Function, endTime: Date, endFunction: Function) {
