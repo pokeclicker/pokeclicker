@@ -72,10 +72,9 @@ class Wallet implements Feature {
     }
 
     private addAmount(amount: Amount) {
-        if (isNaN(amount.amount) || amount.amount <= 1) {
-            console.trace(`Could not add amount ${amount}`);
+        if (isNaN(amount.amount) || amount.amount <= 0) {
+            console.trace(`Could not add amount:`, amount);
             amount.amount = 1;
-            return;
         }
 
         this.currencies[amount.currency] += amount.amount;
@@ -86,6 +85,11 @@ class Wallet implements Feature {
     };
 
     public loseAmount(amount: Amount) {
+        if (isNaN(amount.amount) || amount.amount <= 0) {
+            console.trace(`Could not remove amount:`, amount);
+            amount.amount = 1;
+        }
+
         this.currencies[amount.currency] -= amount.amount;
     };
 
