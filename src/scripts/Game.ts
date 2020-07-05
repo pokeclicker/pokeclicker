@@ -100,7 +100,7 @@ class Game {
     }
 
     start() {
-        console.log('game started');
+        console.log('%cGame started', 'color:limegreen;font-weight:900;');
         if (player.starter === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }
