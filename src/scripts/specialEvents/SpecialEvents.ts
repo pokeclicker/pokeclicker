@@ -6,7 +6,10 @@ class SpecialEvents implements Feature {
     public events = [];
 
     newEvent(event: SpecialEvent) {
-        this.events.push(event);
+        // Check if the event exist before adding it again
+        if (!this.events.find(ev => ev.id == event.id)) {
+            this.events.push(event);
+        }
     }
 
     fromJSON(json: { logs: Array<{ type: LogBookType; description: string; date: number }> }): void {
