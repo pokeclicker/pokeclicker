@@ -30,12 +30,12 @@ class Changelog {
  */
 const changelogItems = [
     // v0.4.5
-    new Changelog(changelogType.UPDATE, 'v0.4.5'),
+    new Changelog(changelogType.UPDATE, 'v0.4.5 - Special events'),
     new Changelog(changelogType.NEW, 'Special events can now appear in game'),
     new Changelog(changelogType.FIXED, 'Dungeon layout should be shuffled again'),
 
     // v0.4.4
-    new Changelog(changelogType.UPDATE, 'v0.4.4'),
+    new Changelog(changelogType.UPDATE, 'v0.4.4 - Statistics 2.0'),
     new Changelog(changelogType.NEW, 'Add some new game codes'),
     new Changelog(changelogType.NEW, 'Statistics can now be viewed from the Start Menu'),
     new Changelog(changelogType.NEW, 'Pokemon statistics can be viewed by clicking a Pokemon in the Pokedex'),
