@@ -3,16 +3,18 @@ class SpecialEvents implements Feature {
     saveKey = 'events';
     defaults: object;
 
-    public events = [];
+    static events = [];
 
-    newEvent(event: SpecialEvent) {
+    static newEvent(id: number, title: string, description: string, startTime: Date, startFunction: Function, endTime: Date, endFunction: Function) {
         // Check if the event exist before adding it again
-        if (!this.events.find(ev => ev.id == event.id)) {
-            this.events.push(event);
+        if (!SpecialEvents.events.find(event => event.id == id)) {
+            SpecialEvents.events.push(new SpecialEvent(id, title, description, startTime, startFunction, endTime, endFunction));
         }
     }
 
-    fromJSON(json: { logs: Array<{ type: LogBookType; description: string; date: number }> }): void {
+    initialize(): void {}
+
+    fromJSON(json: any): void {
         if (!json) {
             return;
         }
@@ -23,8 +25,6 @@ class SpecialEvents implements Feature {
             // no data to save yet
         };
     }
-
-    initialize(): void {}
 
     canAccess(): boolean {
         return true;
