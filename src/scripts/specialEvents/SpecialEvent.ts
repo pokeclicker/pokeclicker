@@ -23,51 +23,51 @@ class SpecialEvent {
     }
 
     initialize(): void {
-            // If event already over, do nothing
-            if (this.hasEnded()) {
-                return;
-            }
+        // If event already over, do nothing
+        if (this.hasEnded()) {
+            return;
+        }
 
-            const timeTillEventStart = this.timeTillStart();
-            // If more than 1 week, don't notify the player yet
-            if (timeTillEventStart > 7 * GameConstants.DAY) {
-                this.notify(`starts in ${GameConstants.formatTimeShortWords(timeTillEventStart)}!`, Math.min(1 * GameConstants.HOUR));
-                // Check again in 1 day if we are closer
-                setTimeout(() => {
-                    this.initialize();
-                }, timeTillEventStart - 1 * GameConstants.DAY);
-                return;
-            }
-
-            // If more than 1 day, notify player about the upcoming event
-            if (timeTillEventStart > 1 * GameConstants.DAY) {
-                this.notify(`starts in ${GameConstants.formatTimeShortWords(timeTillEventStart)}!`, Math.min(1 * GameConstants.HOUR));
-                // Check again in 6 hours if we are closer
-                setTimeout(() => {
-                    this.initialize();
-                }, timeTillEventStart - 6 * GameConstants.HOUR);
-                return;
-            }
-
-            // If more than 1 hour, notify player about event starting time
-            if (timeTillEventStart > 1 * GameConstants.HOUR) {
-                this.notify(`starts in ${GameConstants.formatTimeShortWords(timeTillEventStart)}!`, Math.min(timeTillEventStart, 1 * GameConstants.HOUR));
-            }
-
-            // If not started yet, notify player event will start soon
-            if (!this.shouldStartNow()) {
-                // Notify player when 1 hour left, or now
-                const sendNotificationTimeout = Math.max(timeTillEventStart - 1 * GameConstants.HOUR, 0);
-                const notificationTimeout = sendNotificationTimeout ? 1 * GameConstants.HOUR : timeTillEventStart;
-                setTimeout(() => {
-                    this.notify(`starts in ${GameConstants.formatTimeShortWords(notificationTimeout)}!`, notificationTimeout);
-                }, sendNotificationTimeout);
-            }
-
-            // Start event now, or at start time
+        const timeTillEventStart = this.timeTillStart();
+        // If more than 1 week, don't notify the player yet
+        if (timeTillEventStart > 7 * GameConstants.DAY) {
+            this.notify(`starts in ${GameConstants.formatTimeShortWords(timeTillEventStart)}!`, Math.min(1 * GameConstants.HOUR));
+            // Check again in 1 day if we are closer
             setTimeout(() => {
-                this.start();
-            }, Math.max(0, timeTillEventStart));
+                this.initialize();
+            }, timeTillEventStart - 1 * GameConstants.DAY);
+            return;
+        }
+
+        // If more than 1 day, notify player about the upcoming event
+        if (timeTillEventStart > 1 * GameConstants.DAY) {
+            this.notify(`starts in ${GameConstants.formatTimeShortWords(timeTillEventStart)}!`, Math.min(1 * GameConstants.HOUR));
+            // Check again in 6 hours if we are closer
+            setTimeout(() => {
+                this.initialize();
+            }, timeTillEventStart - 6 * GameConstants.HOUR);
+            return;
+        }
+
+        // If more than 1 hour, notify player about event starting time
+        if (timeTillEventStart > 1 * GameConstants.HOUR) {
+            this.notify(`starts in ${GameConstants.formatTimeShortWords(timeTillEventStart)}!`, Math.min(timeTillEventStart, 1 * GameConstants.HOUR));
+        }
+
+        // If not started yet, notify player event will start soon
+        if (!this.shouldStartNow()) {
+            // Notify player when 1 hour left, or now
+            const sendNotificationTimeout = Math.max(timeTillEventStart - 1 * GameConstants.HOUR, 0);
+            const notificationTimeout = sendNotificationTimeout ? 1 * GameConstants.HOUR : timeTillEventStart;
+            setTimeout(() => {
+                this.notify(`starts in ${GameConstants.formatTimeShortWords(notificationTimeout)}!`, notificationTimeout);
+            }, sendNotificationTimeout);
+        }
+
+        // Start event now, or at start time
+        setTimeout(() => {
+            this.start();
+        }, Math.max(0, timeTillEventStart));
     }
 
     shouldStartNow(): boolean {

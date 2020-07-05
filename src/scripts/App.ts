@@ -24,7 +24,7 @@ class App {
                 new LogBook(),
                 new RedeemableCodes(),
                 new Statistics(),
-                new SpecialEvents(),
+                new SpecialEvents()
             );
 
             Notifier.notify({ message: 'Game loaded', type: GameConstants.NotificationOption.info });
