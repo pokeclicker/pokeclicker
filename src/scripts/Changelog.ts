@@ -32,7 +32,12 @@ const changelogItems = [
     // v0.4.5
     new Changelog(changelogType.UPDATE, 'v0.4.5 - Special events'),
     new Changelog(changelogType.NEW, 'Special events can now appear in game'),
+    new Changelog(changelogType.NEW, 'Flying Pikachu Event'),
+    new Changelog(changelogType.CHANGE, 'Modified the look of the dock'),
+    new Changelog(changelogType.CHANGE, 'Always add caught Shiny Pokemon to the Log Book'),
+    new Changelog(changelogType.CHANGE, 'Added close button on the top right of more modals'),
     new Changelog(changelogType.FIXED, 'Dungeon layout should be shuffled again'),
+    new Changelog(changelogType.FIXED, 'Hopefully fixed some values becoming NaN'),
 
     // v0.4.4
     new Changelog(changelogType.UPDATE, 'v0.4.4 - Statistics 2.0'),
