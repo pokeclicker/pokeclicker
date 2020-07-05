@@ -1,19 +1,12 @@
-class Events implements Feature {
+class SpecialEvents implements Feature {
     name = 'Events';
     saveKey = 'events';
     defaults: object;
 
     public events = {};
 
-    newEvent(id: number, title: string, description: string, start_time: Date, end_time: Date, start_function: Function, end_function: Function) {
-        this.events[id] = {
-            title,
-            description,
-            start_time,
-            end_time,
-            start_function,
-            end_function,
-        };
+    newEvent(event: SpecialEvent) {
+        this.events.push(event);
     }
 
     fromJSON(json: { logs: Array<{ type: LogBookType; description: string; date: number }> }): void {
