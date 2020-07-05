@@ -4,7 +4,7 @@ class PokedexHelper {
     public static getBackgroundColors(name: string): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
 
-        if (!PokedexHelper.pokemonSeen(pokemon.id)()) {
+        if (!this.pokemonSeen(pokemon.id)()) {
             return 'grey';
         }
         if (pokemon.type2 == PokemonType.None) {

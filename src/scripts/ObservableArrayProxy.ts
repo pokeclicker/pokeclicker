@@ -27,7 +27,7 @@ class ObservableArrayProxy<T> extends Array<T> implements Array<T> {
             // This is needed for map, forEach etc to work,
             // because they want to check if target.hasOwnProperty("0") first.
             // The ko function doesn't seem to have any OwnProperties anyway, so no harm here (don't quote me)
-            return Reflect.has(target(),prop);
+            return Reflect.has(target(), prop);
         },
     }
 
