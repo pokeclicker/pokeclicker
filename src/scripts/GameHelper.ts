@@ -25,6 +25,12 @@ class GameHelper {
     });
 
     public static incrementObservable(obs: KnockoutObservable<number>, amt = 1) {
+        if (typeof obs != 'function') {
+            return false;
+        }
+        if (isNaN(amt) || amt == 0) {
+            amt = 1;
+        }
         obs(obs() + amt);
     }
 
