@@ -73,7 +73,7 @@ class Wallet implements Feature {
 
     private addAmount(amount: Amount) {
         if (isNaN(amount.amount) || amount.amount <= 0) {
-            console.trace(`Could not add amount:`, amount);
+            console.trace('Could not add amount:', amount);
             amount.amount = 1;
         }
 
@@ -86,7 +86,7 @@ class Wallet implements Feature {
 
     public loseAmount(amount: Amount) {
         if (isNaN(amount.amount) || amount.amount <= 0) {
-            console.trace(`Could not remove amount:`, amount);
+            console.trace('Could not remove amount:', amount);
             amount.amount = 1;
         }
 
