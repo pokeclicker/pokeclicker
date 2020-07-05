@@ -81,6 +81,9 @@ class PokemonHelper {
     public static calcNativeRegion(pokemonName: string) {
         const pokemon = PokemonHelper.getPokemonByName(pokemonName);
         const id = pokemon.id;
+        if (id <= 0) {
+            return Infinity;
+        }
         const region = GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= id);
         return region >= 0 ? region : Infinity;
     }
