@@ -32,17 +32,17 @@ class SpecialEvent {
         // If more than 1 week, don't notify the player yet
         if (timeTillEventStart > 7 * GameConstants.DAY) {
             this.notify(`starts in ${GameConstants.formatTimeShortWords(timeTillEventStart)}!`, Math.min(1 * GameConstants.HOUR));
-            // Check again in 1 day if we are closer
+            // Check again when 7 days left until event start
             setTimeout(() => {
                 this.initialize();
-            }, timeTillEventStart - 1 * GameConstants.DAY);
+            }, timeTillEventStart - 7 * GameConstants.DAY);
             return;
         }
 
         // If more than 1 day, notify player about the upcoming event
         if (timeTillEventStart > 1 * GameConstants.DAY) {
             this.notify(`starts in ${GameConstants.formatTimeShortWords(timeTillEventStart)}!`, Math.min(1 * GameConstants.HOUR));
-            // Check again in 6 hours if we are closer
+            // Check again when less than 6 hours till event start
             setTimeout(() => {
                 this.initialize();
             }, timeTillEventStart - 6 * GameConstants.HOUR);
