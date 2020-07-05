@@ -86,7 +86,7 @@
     </script>
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-155132556-1"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
     <script>
         if (false) {
             window.dataLayer = window.dataLayer || [];
@@ -97,7 +97,7 @@
 
             gtag('js', new Date());
 
-            gtag('config', 'UA-155132556-1');
+            gtag('config', 'UA-171657234-1');
         }
     </script>
 
@@ -5070,7 +5070,10 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
-                <span>Log Book</span>
+                <h5 class="modal-title">Log Book</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body p-0">
                 <table class="table table-striped table-hover table-bordered table-sm">
@@ -5101,7 +5104,10 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
-                <span>Settings</span>
+                <h5 class="modal-title">Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <table class="table table-striped table-hover">
@@ -5148,7 +5154,10 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
        <div class="modal-content">
            <div class="modal-header">
-               <h4>Changelog</h4>
+               <h5>Changelog</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
            </div>
 
            <div class="modal-body p-0">
@@ -5813,7 +5822,10 @@ aria-labelledby="badgeCaseModalLabel">
 <div class="modal-dialog modal-lg" role="document">
    <div class="modal-content">
        <div class="modal-header">
-           <h4>Badge Case</h4>
+           <h5 class="modal-title">Badge Case</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+           </button>
        </div>
        <div class="modal-body">
            <div class="row no-gutters justify-content-center"
@@ -6062,33 +6074,36 @@ aria-labelledby="badgeCaseModalLabel">
 
 <!-- Ship Modal-->
 <div class="modal noselect fade" id="ShipModal" tabindex="-1" role="dialog" aria-labelledby="ShipModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
-                <span>Regional Travel</span>
+                <h5 class="modal-title">Regional Travel</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-body">
-                <img src='assets/images/ship.png'>
+            <div class="modal-body bg-ocean">
+                <img src='assets/images/ship.png' style='width: 100%;'>
                 <div style='margin-top:20px'>
-                    <button class='btn btn-primary'
+                    <button class='btn btn-block btn-success'
+                        data-dismiss='modal'
                         data-bind='visible: player.region != 0'
-                        onclick='MapHelper.moveToTown("Vermillion City");player.region = 0;$("#ShipModal").modal("hide")'>
+                        onclick='MapHelper.moveToTown("Vermillion City");player.region = 0;'>
                         Kanto
                     </button>
-                    <button class='btn btn-primary'
+                    <button class='btn btn-block btn-success'
+                        data-dismiss='modal'
                         data-bind='visible: player.region != 1 && player.highestRegion() >= 1'
-                        onclick='MapHelper.moveToTown("Olivine City");player.region = 1;$("#ShipModal").modal("hide")'>
+                        onclick='MapHelper.moveToTown("Olivine City");player.region = 1;'>
                         Johto
                     </button>
-                    <button class='btn btn-primary'
+                    <button class='btn btn-block btn-success'
+                        data-dismiss='modal'
                         data-bind='visible: player.region != 2 && player.highestRegion() >= 2'
-                        onclick='MapHelper.moveToTown("Slateport City");player.region = 2;$("#ShipModal").modal("hide")'>
+                        onclick='MapHelper.moveToTown("Slateport City");player.region = 2;'>
                         Hoenn
                     </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-
             </div>
         </div>
     </div>
