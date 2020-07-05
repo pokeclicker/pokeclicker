@@ -138,8 +138,8 @@ class Statistics implements Saveable {
 
         for (const array of this.arrayObservables) {
             json[array]?.forEach((el, index) => {
-                if (this[array]) {
-                    this[array][index](el);
+                if (this[array] && +el) {
+                    this[array][index](+el);
                 }
             });
         }
