@@ -59,7 +59,7 @@ class PokedexHelper {
 
         return pokemonList.filter(function (pokemon) {
             // If the Pokemon shouldn't be unlocked yet
-            if (pokemon.id > GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION]) {
+            if (PokemonHelper.calcNativeRegion(pokemon.name) > GameConstants.MAX_AVAILABLE_REGION) {
                 return false;
             }
 

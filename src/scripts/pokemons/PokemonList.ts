@@ -14205,7 +14205,7 @@ const pokemonMap: any = new Proxy(pokemonList, {
                     return pokemon[random];
                 };
             default:
-                return pokemon.find(p => p.name.toLowerCase() == prop.toLowerCase());
+                return pokemon.find(p => p.name.toLowerCase() == prop.toLowerCase()) || pokemon[prop];
         }
     },
 });
