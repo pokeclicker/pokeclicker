@@ -71,31 +71,34 @@ class Statistics implements Saveable {
         'shinyPokemonEncountered',
     ];
 
-    private static readonly arraySizes = {
-        'gymsDefeated': GameConstants.RegionGyms.flat().length,
-        'dungeonsCleared': GameConstants.RegionDungeons.flat().length,
-        'pokeballsUsed': GameHelper.enumLength(GameConstants.Pokeball) - 1,   // remove "None" pokeball type
-        'pokeballsBought': GameHelper.enumLength(GameConstants.Pokeball) - 1, // remove "None" pokeball type
-        'totalShards': GameHelper.enumLength(PokemonType) - 1,  // remove "None" pokemon type
-        'oakItemUses': GameHelper.enumLength(OakItems.OakItem),
-        'berriesHarvested': GameHelper.enumLength(BerryType) - 1,  // remove "None" berry
-        'routeKills': GameConstants.HIGHEST_ROUTE_NUMBER + 1, // Add 1 for "route 0"
-        'pokemonCaptured': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
-        'pokemonDefeated': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
-        'pokemonEncountered': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
-        'shinyPokemonCaptured': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
-        'shinyPokemonDefeated': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
-        'shinyPokemonEncountered': GameConstants.TotalPokemonsPerRegion[GameConstants.MAX_AVAILABLE_REGION] + 1,
-    };
-
     constructor() {
         for (const prop of this.observables) {
             this[prop] = ko.observable(0);
         }
 
         for (const array of this.arrayObservables) {
-            this[array] = [...Array(Statistics.arraySizes[array])].map((value, index) => {
-                return ko.observable(0);
+            this[array] = new Proxy([ko.observable(0)], {
+                get: (statistics, prop: string) => {
+                    if (statistics[prop]) {
+                        return statistics[prop];
+                    }
+
+                    // If it's not an int or less than zero, we do not want to set it
+                    const id: number = +prop;
+                    if (isNaN(id) || id < 0) {
+                        console.trace(`[Statistics] [${array}] Invalid property requested:`, prop);
+                        return () => 0;
+                    }
+                    statistics[id] = ko.observable(0);
+                    return statistics[id];
+                },
+
+                has: function (target: any, prop: string) {
+                    // This is needed for map, forEach etc to work,
+                    // because they want to check if target.hasOwnProperty("0") first.
+                    // The ko function doesn't seem to have any OwnProperties anyway, so no harm here (don't quote me)
+                    return Reflect.has(target, prop);
+                },
             });
         }
     }
@@ -132,8 +135,10 @@ class Statistics implements Saveable {
         }
 
         for (const array of this.arrayObservables) {
-            this[array].forEach((el, index) => {
-                el(json[array] ? json[array][index] || 0 : 0);
+            json[array]?.forEach((el, index) => {
+                if (this[array]) {
+                    this[array][index](el);
+                }
             });
         }
     }
