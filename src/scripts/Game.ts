@@ -19,6 +19,7 @@ class Game {
     public logbook: LogBook;
     public redeemableCodes: RedeemableCodes;
     public statistics: Statistics;
+    public specialEvents: SpecialEvents;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
@@ -38,7 +39,8 @@ class Game {
         farming: Farming,
         logbook: LogBook,
         codes: RedeemableCodes,
-        statistics: Statistics
+        statistics: Statistics,
+        specialEvents: SpecialEvents,
     ) {
         this.update = update;
         this.breeding = breeding;
@@ -53,6 +55,7 @@ class Game {
         this.logbook = logbook;
         this.redeemableCodes = codes;
         this.statistics = statistics;
+        this.specialEvents = specialEvents;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
@@ -80,6 +83,7 @@ class Game {
         this.keyItems.initialize();
         this.oakItems.initialize();
         this.farming.initialize();
+        this.specialEvents.initialize();
         this.load();
         this.update.check();
 

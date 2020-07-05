@@ -34,6 +34,11 @@ namespace GameConstants {
 
     export const ITEM_USE_TIME = 30;
 
+
+    export const MINUTE = 1000 * 60;
+    export const HOUR = 1000 * 60 * 60;
+    export const DAY = 1000 * 60 * 60 * 24;
+
     export const ROAMING_MIN_CHANCE = 8192;
     export const ROAMING_MAX_CHANCE = 4096;
 
@@ -234,6 +239,25 @@ namespace GameConstants {
         const seconds: any = `${time - (hours * 3600) - (minutes * 60)}`.padStart(2, '0');
 
         return `${hours}:${minutes}:${seconds}`;
+    }
+
+    export function formatTimeShortWords(time: number): string {
+        if (isNaN(+time) || time == 0) {
+            return 'now';
+        }
+        time = Math.abs(time);
+
+        if (time > GameConstants.DAY) {
+            let str = ''
+            const days = Math.ceil(time / GameConstants.DAY);
+            return `${time % GameConstants.DAY ? '< ' : ''}${days} day${days == 1 ? '' : 's'}`;
+        }
+        if (time > GameConstants.HOUR) {
+            const hours = Math.ceil(time / GameConstants.HOUR);
+            return `${time % GameConstants.HOUR ? '< ' : ''}${hours} hour${hours == 1 ? '' : 's'}`;
+        }
+        const minutes = Math.ceil(time / GameConstants.MINUTE);
+        return `${time % GameConstants.MINUTE ? '< ' : ''}${minutes} min${minutes == 1 ? '' : 's'}`;
     }
 
     export enum Region {
