@@ -36,6 +36,7 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
 const changelogItems = [
     // v0.4.5
     new Changelog(changelogType.UPDATE, 'v0.4.5'),
+    new Changelog(changelogType.NEW, 'Special events can now appear in game'),
     new Changelog(changelogType.FIXED, 'Dungeon layout should be shuffled again'),
 
     // v0.4.4
