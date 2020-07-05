@@ -86,7 +86,9 @@ class Statistics implements Saveable {
                     // If it's not an int or less than zero, we do not want to set it
                     const id: number = +prop;
                     if (isNaN(id) || id < 0) {
-                        console.trace(`[Statistics] [${array}] Invalid property requested:`, prop);
+                        if (isNaN(id)) {
+                            console.trace(`[Statistics] [${array}] Invalid property requested:`, prop);
+                        }
                         return () => 0;
                     }
                     statistics[id] = ko.observable(0);
