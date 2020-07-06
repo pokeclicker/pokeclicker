@@ -39,6 +39,7 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.4.6 - Bug fixes'),
     new Changelog(changelogType.FIXED, 'Pokeball should appear in dungeons again'),
     new Changelog(changelogType.CHANGE, 'Safari now uses a Safari Ball'),
+    new Changelog(changelogType.CHANGE, 'Added ability to track event Pokemon statistics'),
 
     // v0.4.5
     new Changelog(changelogType.UPDATE, 'v0.4.5 - Special events'),
