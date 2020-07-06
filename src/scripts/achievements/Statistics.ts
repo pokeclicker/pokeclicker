@@ -80,11 +80,11 @@ class Statistics implements Saveable {
 
     constructor() {
         for (const prop of this.observables) {
-            this[prop] = ko.observable(0);
+            this[prop] = ko.observable(0).extend({ numeric: 0 });
         }
 
         for (const array of this.arrayObservables) {
-            this[array] = new Proxy([ko.observable(0)], {
+            this[array] = new Proxy([ko.observable(0).extend({ numeric: 0 })], {
                 get: (statistics, prop: string) => {
                     if (statistics[prop]) {
                         return statistics[prop];
@@ -98,9 +98,11 @@ class Statistics implements Saveable {
                         }
                         return () => 0;
                     }
-                    statistics[id] = ko.observable(0);
+                    statistics[id] = ko.observable(0).extend({ numeric: 0 });
                     return statistics[id];
                 },
+
+                set: () => {},
 
                 has: function (target: any, prop: string) {
                     // This is needed for map, forEach etc to work,
@@ -112,7 +114,7 @@ class Statistics implements Saveable {
         }
 
         for (const array of this.objectObservables) {
-            this[array] = new Proxy({0: ko.observable(0)}, {
+            this[array] = new Proxy({0: ko.observable(0).extend({ numeric: 0 })}, {
                 get: (statistics, prop: string) => {
                     if (statistics[prop]) {
                         return statistics[prop];
@@ -137,11 +139,13 @@ class Statistics implements Saveable {
                     }
 
                     return (val) => {
-                        if (!isNaN(val)) {
-                            statistics[prop] = ko.observable(val); return val;
+                        if (!isNaN(+val)) {
+                            statistics[prop] = ko.observable(val).extend({ numeric: 0 }); return val;
                         } return 0;
                     };
                 },
+
+                set: () => {},
 
                 has: function (target: any, prop: string) {
                     // This is needed for map, forEach etc to work,
