@@ -4,7 +4,7 @@ const changelogType = {
     CHANGE: { display: 'primary', label: 'CHANGE' },
     FIXED: { display: 'warning', label: 'FIXED' },
     REMOVED: { display: 'danger', label: 'REMOVED' },
-    INFO: { display: 'info', label: 'INFO' }, // unused - can be changed
+    EVENT: { display: 'info', label: 'EVENT' },
     DEFAULT: { display: 'default', label: '-' }, // unused - can be changed
 };
 
@@ -30,9 +30,13 @@ class Changelog {
  */
 const changelogItems = [
     // v0.4.5
+    new Changelog(changelogType.UPDATE, 'v0.4.6 - Bug fixes'),
+    new Changelog(changelogType.FIXED, 'Pokeball should appear in dungeons again'),
+
+    // v0.4.5
     new Changelog(changelogType.UPDATE, 'v0.4.5 - Special events'),
+    new Changelog(changelogType.EVENT, 'Flying Pikachu Event'),
     new Changelog(changelogType.NEW, 'Special events can now appear in game'),
-    new Changelog(changelogType.NEW, 'Flying Pikachu Event'),
     new Changelog(changelogType.CHANGE, 'Modified the look of the dock'),
     new Changelog(changelogType.CHANGE, 'Always add caught Shiny Pokemon to the Log Book'),
     new Changelog(changelogType.CHANGE, 'Added close button on the top right of more modals'),
