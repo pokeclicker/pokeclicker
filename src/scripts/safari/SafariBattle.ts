@@ -30,9 +30,9 @@ class SafariBattle {
             $('#safariEnemy').css('transition-duration', `${0.75 * SafariBattle.Speed.enemyTransition}ms`);
             SafariBattle.text('You throw a ball...');
             const enemyImg = $('#safariEnemy').offset();
-            enemyImg.left += 48;
+            enemyImg.left += 36;
 
-            const ptclhtml = '<div><img id="safariBall" src="assets/images/safari/pokeball.png"></div>';
+            const ptclhtml = '<div><img id="safariBall" src="assets/images/safari/safariball.png"></div>';
             SafariBattle.particle = SafariBattle.dropParticle(ptclhtml, $('#safariPlayer').offset(), enemyImg, SafariBattle.Speed.ballThrow, 'cubic-bezier(0,0,0.4,1)', true).css('z-index', 9999);
 
             SafariBattle.delay(1.1 * SafariBattle.Speed.ballThrow)(0)            // throwing the ball
