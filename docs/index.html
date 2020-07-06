@@ -88,7 +88,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
     <script>
-        if (false) {
+        if (!window.location.hostname.includes('localhost')) {
             window.dataLayer = window.dataLayer || [];
 
             function gtag() {
@@ -186,10 +186,13 @@
             <a class="dropdown-item" href="#changelogModal" data-toggle="modal">Changelog</a>
         </li>
         <li>
+            <a class="dropdown-item" href="#eventsModal" data-toggle="modal">Events</a>
+        </li>
+        <li>
             <a class="dropdown-item" href="https://pokeclicker.reddit.com" target="_blank">Subreddit</a>
         </li>
         <li>
-            <a class="dropdown-item" href="https://discordapp.com/invite/rHF3V54" target="_blank">Discord</a>
+            <a class="dropdown-item" href="https://discord.gg/jcRdtxN" target="_blank">Discord</a>
         </li>
         <li>
             <a class="dropdown-item" href="https://github.com/pokeclicker-dev/pokeclicker/issues" target="_blank">Report a bug</a>
@@ -359,19 +362,19 @@
 <script type="text/html" id="currencyTemplate">
     <span style="display: inline;">
         <!-- ko if: $data.currency == GameConstants.Currency.money -->
-        <img alt="Money" src="assets/images/currency/money.png" data-bind="attr: {height: $data.height || '24px'}"/>
+        <img alt="Money" src="assets/images/currency/money.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
         <!-- ko if: $data.currency == GameConstants.Currency.dungeonToken -->
-        <img alt="Dungeon Tokens" src="assets/images/currency/dungeonToken.png" data-bind="attr: {height: $data.height || '24px'}"/>
+        <img alt="Dungeon Tokens" src="assets/images/currency/dungeonToken.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
         <!-- ko if: $data.currency == GameConstants.Currency.questPoint -->
-        <img alt="Quest Points" src="assets/images/currency/questPoint.png" data-bind="attr: {height: $data.height || '24px'}"/>
+        <img alt="Quest Points" src="assets/images/currency/questPoint.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
         <!-- ko if: $data.currency == GameConstants.Currency.diamond -->
-        <img alt="Diamonds" src="assets/images/underground/diamond.svg" data-bind="attr: {height: $data.height || '24px'}"/>
+        <img alt="Diamonds" src="assets/images/underground/diamond.svg" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
         <!-- ko if: $data.currency == GameConstants.Currency.farmPoint -->
-        <img alt="Farm Points" src="assets/images/currency/farmPoint.png" data-bind="attr: {height: $data.height || '24px'}"/>
+        <img alt="Farm Points" src="assets/images/currency/farmPoint.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
 
         <span data-bind="text: $data.amount.toLocaleString('en-US')">0</span>
@@ -774,7 +777,7 @@
                             </div>
 
                             <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
-                            <div data-bind="if: DungeonBattle.enemyPokemon()?.health()">
+                            <div data-bind="if: DungeonBattle.enemyPokemon">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
                                 <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></span>
                                 <div>
@@ -4630,7 +4633,7 @@
 data-bind="visible: App.game.oakItems.canAccess()">
     <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
         <div>
-            <span style="text-align:center" data-bind="text: 'Oak Items equiped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()"></span>
+            <span style="text-align:center" data-bind="text: 'Oak Items Equipped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()"></span>
         </div>
         <button type="button" class="btn btn-info" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
             data-bind="tooltip: { title: 'Activate Oak items to gain unique bonuses. When an Oak item has gained enough experience you can level it up with money to boost its effect.', trigger: 'hover', placement:'left' }">?</button>
@@ -4822,7 +4825,7 @@ data-bind="visible: App.game.oakItems.canAccess()">
                         data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint] <= App.game.breeding.nextEggSlotCost().amount}'>Buy</button>
             </div>
             <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 20px;">
-                <img src="assets/images/breeding/lock.png">
+                <img src="assets/images/breeding/lock.svg">
             </div>
             <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
@@ -5121,6 +5124,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                       <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
                       <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
                       <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
+                      <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('autoDownloadBackupSaveOnUpdate')}"></tr>
                     </tbody>
                 </table>
                 <br/>
@@ -5173,6 +5177,49 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                        <td class="tight" data-bind="html: type.label, class: 'table-' + type.display"></td>
                        <td class="text-left" data-bind="html: description">-</td>
                      </tr>
+                   </tbody>
+               </table>
+               <br/>
+           </div>
+
+           <div class="modal-footer">
+               <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+           </div>
+       </div>
+    </div>
+</div>
+
+
+<!-- Changelog Modal -->
+<div class="modal fade noselect" id="eventsModal" tabindex="-1" role="dialog" aria-badgeledby="eventsModal">
+    <div class="modal-dialog modal-lg" role="document">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h5>Events</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+
+           <div class="modal-body p-0">
+               <table class="table table-striped table-hover table-bordered table-sm">
+                   <thead>
+                     <tr>
+                       <th>Event</th>
+                       <th>Description</th>
+                       <th>Start Time</th>
+                       <th>End Time</th>
+                     </tr>
+                   </thead>
+                   <tbody data-bind="foreach: SpecialEvents.events">
+                     <!-- ko if: Date.now() < endTime -->
+                     <tr>
+                       <td class="tight" data-bind="text: title"></td>
+                       <td class="text-left" data-bind="text: description"></td>
+                       <td class="text-left tight"><code data-bind="text: startTime.toLocaleString()">-</code></td>
+                       <td class="text-left tight"><code data-bind="text: endTime.toLocaleString()">-</code></td>
+                     </tr>
+                     <!-- /ko -->
                    </tbody>
                </table>
                <br/>
@@ -5699,6 +5746,13 @@ aria-labelledby="pokedexModalLabel">
                                       value="false" onclick="PokedexHelper.updateList()"> Shiny
                            </label>
                        </div>
+                       <!--Shiny-->
+                       <div class="col-sm-2">
+                           <label class="form-check-label">
+                               <input class="form-check-input" type="checkbox" id="pokedex-filter-not-shiny"
+                                      value="false" onclick="PokedexHelper.updateList()"> Not Shiny
+                           </label>
+                       </div>
 
                    </div>
                </div>
@@ -5719,7 +5773,7 @@ aria-labelledby="pokedexModalLabel">
                              <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}-small.png`}"/>
                            </div>
                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
-                           <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedPokemonID($data.id)}, tooltip: { html: true, title: `<u>Information:</u><br/>Base Attack: <strong>${$data.attack}</strong><br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate)}%</strong><br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>`, trigger: 'hover', placement:'bottom' }"></a>
+                           <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedPokemonID($data.id)}, tooltip: { html: true, title: `<u>Information:</u><br/>Base Attack: <strong>${$data.attack}</strong><br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong><br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>`, trigger: 'hover', placement:'bottom' }"></a>
                            <!-- /ko -->
                        </div>
                    </li>
@@ -5766,7 +5820,7 @@ aria-labelledby="pokedexModalLabel">
                     </tr>
                     <tr>
                       <td class="text-left">Catch Rate</td>
-                      <td class="text-left tight"><code data-bind="text: PokemonFactory.catchRateHelper(pokemonMap[$data].catchRate) + '%'">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: PokemonFactory.catchRateHelper(pokemonMap[$data].catchRate, true) + '%'">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Hatch Steps</td>
