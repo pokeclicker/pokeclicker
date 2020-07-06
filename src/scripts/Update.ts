@@ -74,6 +74,7 @@ class Update implements Saveable {
                 button.click();
                 document.body.removeChild(button);
             }
+            button.style.display = '';
 
             Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`, type: GameConstants.NotificationOption.primary, timeout: 6e4 });
 
