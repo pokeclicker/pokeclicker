@@ -68,14 +68,14 @@ class Update implements Saveable {
             button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
 
             // Add to body and click, triggering auto download
-            if (settingsData.autoDownloadBackupSaveOnUpdate) {
+            if (!settingsData.disableAutoDownloadBackupSaveOnUpdate) {
                 button.style.display = 'none';
                 document.body.appendChild(button);
                 button.click();
                 document.body.removeChild(button);
             }
 
-            Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!${settingsData.autoDownloadBackupSaveOnUpdate ? '' : `<br/><br/>${button.outerHTML}`}`, type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+            Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`, type: GameConstants.NotificationOption.primary, timeout: 6e4 });
 
 
 
