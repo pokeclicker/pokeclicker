@@ -34,6 +34,7 @@ const changelogItems = [
     new Changelog(changelogType.NEW, 'Old save can be backed up when the game updates incase anything goes wrong<br/><i>You can disable auto download in the settings</i>'),
     new Changelog(changelogType.CHANGE, 'Safari now uses a Safari Ball'),
     new Changelog(changelogType.CHANGE, 'Added ability to track event Pokemon statistics'),
+    new Changelog(changelogType.CHANGE, 'Update Discord link'),
     new Changelog(changelogType.FIXED, 'Pokeball should appear in dungeons again'),
     new Changelog(changelogType.FIXED, 'Fix Eeveelutions'),
 
