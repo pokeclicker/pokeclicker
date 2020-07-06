@@ -10,6 +10,8 @@ class Battle {
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static catchRateActual: KnockoutObservable<number> = ko.observable(null);
     static pokeball: KnockoutObservable<GameConstants.Pokeball>;
+    static lastPokemonAttack = Date.now();
+    static lastClickAttack = Date.now();
 
     /**
      * Probably not needed right now, but might be if we add more logic to a gameTick.
@@ -23,6 +25,13 @@ class Battle {
      * Attacks with Pokémon and checks if the enemy is defeated.
      */
     public static pokemonAttack() {
+        // TODO: figure out a better way of handling this
+        // Limit pokemon attack speed, Only allow 1 attack per 900ms
+        const now = Date.now();
+        if (this.lastPokemonAttack > now - 900) {
+            return;
+        }
+        this.lastPokemonAttack = now;
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
@@ -36,6 +45,13 @@ class Battle {
      * Attacks with clicks and checks if the enemy is defeated.
      */
     public static clickAttack() {
+        // TODO: figure out a better way of handling this
+        // Limit click attack speed, Only allow 1 attack per 20ms (50 per second)
+        const now = Date.now();
+        if (this.lastClickAttack > now - 20) {
+            return;
+        }
+        this.lastClickAttack = now;
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
