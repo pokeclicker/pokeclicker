@@ -32,6 +32,7 @@ const changelogItems = [
     // v0.4.6
     new Changelog(changelogType.UPDATE, 'v0.4.6 - Bug fixes'),
     new Changelog(changelogType.NEW, 'Old save can be backed up when the game updates incase anything goes wrong<br/><i>You can disable auto download in the settings</i>'),
+    new Changelog(changelogType.NEW, 'Add events modal'),
     new Changelog(changelogType.CHANGE, 'Safari now uses a Safari Ball'),
     new Changelog(changelogType.CHANGE, 'Added ability to track event Pokemon statistics'),
     new Changelog(changelogType.CHANGE, 'Update Discord link'),
