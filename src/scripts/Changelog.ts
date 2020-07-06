@@ -35,9 +35,10 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
-    // v0.4.5
+    // v0.4.6
     new Changelog(changelogType.UPDATE, 'v0.4.6 - Bug fixes'),
     new Changelog(changelogType.FIXED, 'Pokeball should appear in dungeons again'),
+    new Changelog(changelogType.NEW, 'Old save can be backed up when the game updates in case anything goes wrong<br/><i>You can disable auto download in the settings</i>'),
     new Changelog(changelogType.CHANGE, 'Safari now uses a Safari Ball'),
     new Changelog(changelogType.CHANGE, 'Added ability to track event Pokemon statistics'),
 
