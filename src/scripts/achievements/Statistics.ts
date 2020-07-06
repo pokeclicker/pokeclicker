@@ -102,7 +102,9 @@ class Statistics implements Saveable {
                     return statistics[id];
                 },
 
-                set: () => {},
+                // TODO: fixup typescript errors
+                // This makes it so the stats observable can't be accidently changed
+                // set: () => {},
 
                 has: function (target: any, prop: string) {
                     // This is needed for map, forEach etc to work,
@@ -145,7 +147,9 @@ class Statistics implements Saveable {
                     };
                 },
 
-                set: () => {},
+                // TODO: fixup typescript errors
+                // This makes it so the stats observable can't be accidently changed
+                // set: () => {},
 
                 has: function (target: any, prop: string) {
                     // This is needed for map, forEach etc to work,
