@@ -8,22 +8,15 @@ class Statistics implements Saveable {
 
     selectedPokemonID = ko.observable(1);
 
+    // observables
     clickAttacks: KnockoutObservable<number>;
     hatchedEggs: KnockoutObservable<number>;
-    pokemonCaptured: Array<KnockoutObservable<number>>;
-    pokemonDefeated: Array<KnockoutObservable<number>>;
-    pokemonEncountered: Array<KnockoutObservable<number>>;
-    shinyPokemonCaptured: Array<KnockoutObservable<number>>;
-    shinyPokemonDefeated: Array<KnockoutObservable<number>>;
-    shinyPokemonEncountered: Array<KnockoutObservable<number>>;
     totalPokemonCaptured: KnockoutObservable<number>;
     totalPokemonDefeated: KnockoutObservable<number>;
     totalPokemonEncountered: KnockoutObservable<number>;
     totalShinyPokemonCaptured: KnockoutObservable<number>;
     totalShinyPokemonDefeated: KnockoutObservable<number>;
     totalShinyPokemonEncountered: KnockoutObservable<number>;
-    gymsDefeated: Array<KnockoutObservable<number>>;
-    dungeonsCleared: Array<KnockoutObservable<number>>;
     undergroundItemsFound: KnockoutObservable<number>; // Total treasure found in underground
     undergroundLayersMined: KnockoutObservable<number>; // Total underground layers completed
     totalMoney: KnockoutObservable<number>;
@@ -31,12 +24,23 @@ class Statistics implements Saveable {
     totalQuestPoints: KnockoutObservable<number>;
     totalDiamonds: KnockoutObservable<number>;
     totalFarmPoints: KnockoutObservable<number>;
+    // arrayObservables
     pokeballsUsed: Array<KnockoutObservable<number>>;
     pokeballsBought: Array<KnockoutObservable<number>>;
     totalShards: Array<KnockoutObservable<number>>;
     oakItemUses: Array<KnockoutObservable<number>>;
     berriesHarvested: Array<KnockoutObservable<number>>;
     routeKills: Array<KnockoutObservable<number>>;
+    gymsDefeated: Array<KnockoutObservable<number>>;
+    dungeonsCleared: Array<KnockoutObservable<number>>;
+    // objectObservables
+    pokemonCaptured: any;
+    pokemonDefeated: any;
+    pokemonEncountered: any;
+    shinyPokemonCaptured: any;
+    shinyPokemonDefeated: any;
+    shinyPokemonEncountered: any;
+
     observables = [
         'clickAttacks',
         'hatchedEggs',
@@ -63,13 +67,16 @@ class Statistics implements Saveable {
         'oakItemUses',
         'berriesHarvested',
         'routeKills',
+    ];
+    // These will allow negative values (special events etc)
+    objectObservables = [
         'pokemonCaptured',
         'pokemonDefeated',
         'pokemonEncountered',
         'shinyPokemonCaptured',
         'shinyPokemonDefeated',
         'shinyPokemonEncountered',
-    ];
+    ]
 
     constructor() {
         for (const prop of this.observables) {
@@ -84,8 +91,8 @@ class Statistics implements Saveable {
                     }
 
                     // If it's not an int or less than zero, we do not want to set it
-                    const id: number = +prop;
-                    if (isNaN(id) || id < 0) {
+                    const id: number = Math.floor(+prop);
+                    if (isNaN(id) || id < 0 || id != +prop) {
                         if (isNaN(id)) {
                             console.trace(`[Statistics] [${array}] Invalid property requested:`, prop);
                         }
@@ -93,6 +100,47 @@ class Statistics implements Saveable {
                     }
                     statistics[id] = ko.observable(0);
                     return statistics[id];
+                },
+
+                has: function (target: any, prop: string) {
+                    // This is needed for map, forEach etc to work,
+                    // because they want to check if target.hasOwnProperty("0") first.
+                    // The ko function doesn't seem to have any OwnProperties anyway, so no harm here (don't quote me)
+                    return Reflect.has(target, prop);
+                },
+            });
+        }
+
+        for (const array of this.objectObservables) {
+            this[array] = new Proxy({0: ko.observable(0)}, {
+                get: (statistics, prop: string) => {
+                    if (statistics[prop]) {
+                        return statistics[prop];
+                    }
+
+                    switch (prop) {
+                        case 'highestID':
+                            let highestID = 0;
+                            Object.entries(statistics).forEach(([key, val]) => {
+                                if (!isNaN(+key) && +key > highestID && val() > 0) {
+                                    highestID = +key;
+                                }
+                            });
+                            return highestID;
+                    }
+
+                    // If it's not an int or less than zero, we do not want to set it
+                    const id: number = +prop;
+                    if (isNaN(id)) {
+                        console.trace(`[Statistics] [${array}] Invalid property requested:`, prop);
+                        return () => 0;
+                    }
+
+                    return (val) => {
+                        if (!isNaN(val)) {
+                            statistics[prop] = ko.observable(val); return val;
+                        } return 0;
+                    };
                 },
 
                 has: function (target: any, prop: string) {
@@ -124,6 +172,13 @@ class Statistics implements Saveable {
             saveObject[array] = this[array].map(x => x());
         }
 
+        for (const object of this.objectObservables) {
+            saveObject[object] = {};
+            Object.entries(this[object]).forEach(([key, val]: [string, Function]) => {
+                saveObject[object][key] = val();
+            });
+        }
+
         return saveObject;
     }
 
@@ -142,6 +197,17 @@ class Statistics implements Saveable {
                     this[array][index](+el);
                 }
             });
+        }
+
+        for (const object of this.objectObservables) {
+            if (json[object]) {
+                Object.entries(json[object]).forEach(([key, val]) => {
+                    const num = +val;
+                    if (!isNaN(num) && num) {
+                        this[object][key](num);
+                    }
+                });
+            }
         }
     }
 
