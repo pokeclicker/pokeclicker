@@ -88,7 +88,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
     <script>
-        if ($INIT_GOOGLE_ANALYTICS) {
+        if (!window.location.hostname.includes('localhost')) {
             window.dataLayer = window.dataLayer || [];
 
             function gtag() {
