@@ -83,6 +83,10 @@ class SpecialEvent {
         return +this.endTime - Date.now();
     }
 
+    hasStarted(): boolean {
+        return this.timeTillStart() <= 0;
+    }
+
     hasEnded(): boolean {
         return this.timeTillEnd() <= 0;
     }
