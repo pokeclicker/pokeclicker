@@ -100,3 +100,5 @@ Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress dis
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
+
+Settings.add(new BooleanSetting('autoDownloadBackupSaveOnUpdate', 'Automatically download backup save when game updates', true));
