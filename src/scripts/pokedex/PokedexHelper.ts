@@ -72,15 +72,26 @@ class PokedexHelper {
                 return false;
             }
 
-            if (filter['caught'] && App.game.statistics.pokemonCaptured[pokemon.id]() == 0) {
+            const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
+            const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
+
+            // If not caught
+            if (filter['caught'] && !alreadyCaught) {
                 return false;
             }
 
-            if (filter['shiny'] && !App.game.party.alreadyCaughtPokemon(pokemon.id, true)) {
+            // If not caught shiny variant
+            if (filter['shiny'] && !alreadyCaughtShiny) {
                 return false;
             }
 
-            if (filter['uncaught'] && App.game.statistics.pokemonCaptured[pokemon.id]() !== 0) {
+            // If not caught, or already caught shiny
+            if (filter['not-shiny'] && (!alreadyCaught || alreadyCaughtShiny)) {
+                return false;
+            }
+
+            // If already caught
+            if (filter['uncaught'] && alreadyCaught) {
                 return false;
             }
 
@@ -102,6 +113,7 @@ class PokedexHelper {
         res['caught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-caught')).checked;
         res['uncaught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-uncaught')).checked;
         res['shiny'] = (<HTMLInputElement> document.getElementById('pokedex-filter-shiny')).checked;
+        res['not-shiny'] = (<HTMLInputElement> document.getElementById('pokedex-filter-not-shiny')).checked;
         return res;
     }
 
