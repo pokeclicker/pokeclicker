@@ -53,9 +53,10 @@ class PokedexHelper {
     public static getList(): Array<object> {
         const filter = PokedexHelper.getFilters();
 
+        const highestEncountered = App.game.statistics.pokemonEncountered.reduce((highest, pokemon, index) => pokemon() && index > highest ? index : highest, 0);
         const highestDefeated = App.game.statistics.pokemonDefeated.reduce((highest, pokemon, index) => pokemon() && index > highest ? index : highest, 0);
-        const highestCaught = App.game.party.caughtPokemon.reduce((highest, pokemon) => pokemon.id > highest ? pokemon.id : highest, 0);
-        const highestDex = Math.max(highestDefeated, highestCaught);
+        const highestCaught = App.game.statistics.pokemonCaptured.reduce((highest, pokemon, index) => pokemon() && index > highest ? index : highest, 0);
+        const highestDex = Math.max(highestEncountered, highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
             // If the Pokemon shouldn't be unlocked yet
@@ -63,15 +64,24 @@ class PokedexHelper {
                 return false;
             }
 
+            // If we haven't seen a pokemon this high yet
+            if (pokemon.id > highestDex) {
+                return false;
+            }
+
+            // Check if the name contains the string
             if (filter['name'] && !pokemon.name.toLowerCase().includes(filter['name'].toLowerCase())) {
                 return false;
             }
+
+            // Check if either of the types match
             const type1: PokemonType = parseInt(filter['type1'] || PokemonType.None);
             const type2: PokemonType = parseInt(filter['type2'] || PokemonType.None);
             if ((type1 != PokemonType.None && !pokemon.type.includes(type1)) || (type2 != PokemonType.None && !pokemon.type.includes(type2))) {
                 return false;
             }
 
+            // Checks based on caught/shiny status
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
             const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
 
@@ -92,10 +102,6 @@ class PokedexHelper {
 
             // If already caught
             if (filter['uncaught'] && alreadyCaught) {
-                return false;
-            }
-
-            if (pokemon.id > highestDex) {
                 return false;
             }
 
