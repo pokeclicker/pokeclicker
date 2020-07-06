@@ -2,7 +2,7 @@ class Update implements Saveable {
     defaults: object;
     saveKey = 'update';
 
-    version = '0.4.5';
+    version = '0.4.6';
     saveVersion = '0.0.0';
 
     constructor() {}
@@ -15,6 +15,8 @@ class Update implements Saveable {
         // Must modify these object when updating
         const playerData = this.getPlayerData();
         const saveData = this.getSaveData();
+        const settingsData = this.getSettingsData();
+        const backupSaveData = {player: playerData, save: saveData};
 
         // v0.4.0 - Statistics update
         if (this.isOlderVersion(this.saveVersion, '0.4.0')) {
@@ -58,8 +60,25 @@ class Update implements Saveable {
             }
         }
 
-        if (this.saveVersion != this.version) {
-            Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!', type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+        if (this.saveVersion != this.version && this.saveVersion != '0.0.0') {
+            const button = document.createElement('a');
+            button.className = 'btn btn-block btn-danger';
+            button.innerText = 'Click to Backup Save!';
+            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`;
+            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+
+            // Add to body and click, triggering auto download
+            if (settingsData.autoDownloadBackupSaveOnUpdate) {
+                button.style.display = 'none';
+                document.body.appendChild(button);
+                button.click();
+                document.body.removeChild(button);
+            }
+
+            Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details! ${settingsData.autoDownloadBackupSaveOnUpdate ? '' : `<br/><br/>${button.outerHTML}`}`, type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+
+
+
         }
     }
 
@@ -82,6 +101,17 @@ class Update implements Saveable {
             console.error('Error getting save data', err);
         } finally {
             return saveData || {};
+        }
+    }
+
+    getSettingsData() {
+        let settingsData: any;
+        try {
+            settingsData = JSON.parse(localStorage.settings);
+        } catch (err) {
+            console.error('Error getting save data', err);
+        } finally {
+            return settingsData || {};
         }
     }
 
