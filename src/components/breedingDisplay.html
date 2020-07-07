@@ -12,12 +12,12 @@
         <div class="col-6 p-0 eggSlot">
           <div class="content">
             <div data-bind="if: $index() === App.game.breeding.eggSlots">
-                <p style="margin:2px;">Egg slot</p>
-                <p style="margin:2px;">
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.breeding.nextEggSlotCost().amount, 'currency': GameConstants.Currency.questPoint}}"></span>
+                <p>
+                  <br/>
+                  <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.breeding.nextEggSlotCost().amount, 'currency': GameConstants.Currency.questPoint}}"></span>
                 </p>
                 <button class='btn btn-primary' onclick='App.game.breeding.buyEggSlot()'
-                        data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint] <= App.game.breeding.nextEggSlotCost().amount}'>Buy</button>
+                        data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint] <= App.game.breeding.nextEggSlotCost().amount}'>Unlock</button>
             </div>
             <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 20px;">
                 <img src="assets/images/breeding/lock.svg">
