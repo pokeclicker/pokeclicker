@@ -6,6 +6,6 @@ class CaughtPokemonRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(App.game.party.caughtPokemon.length, this.requiredValue);
+        return Math.min(App.game.party.caughtPokemon.filter(p => p.id > 0).length, this.requiredValue);
     }
 }
