@@ -77,14 +77,13 @@ Settings.add(
     )
 );
 
+const sortsettings = Object.keys(SortOptionConfigs).map(
+    function(opt) {
+        return new GameConstants.Option(SortOptionConfigs[opt].text, parseInt(opt));
+    }
+);
 Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
-    [
-        new GameConstants.Option('Pokedex #', SortOptions.id),
-        new GameConstants.Option('Name', SortOptions.name),
-        new GameConstants.Option('Attack', SortOptions.attack),
-        new GameConstants.Option('Level', SortOptions.level),
-        new GameConstants.Option('Shiny', SortOptions.shiny),
-    ],
+    sortsettings,
     SortOptions.id
 ));
 
