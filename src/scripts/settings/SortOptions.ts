@@ -3,7 +3,8 @@ enum SortOptions {
     'name' = 1,
     'attack' = 2,
     'level' = 3,
-    'shiny' = 4
+    'shiny' = 4,
+    'baseAttack' = 5,
 }
 
 type SortOptionConfig = {
@@ -43,6 +44,12 @@ const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.shiny]: {
         'text': 'Shiny',
         'getValue': p => Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(p.name).id, true)),
+        'invert': true,
+    },
+
+    [SortOptions.baseAttack]: {
+        'text': 'Base Attack',
+        'getValue': p => p.baseAttack,
         'invert': true,
     },
 };
