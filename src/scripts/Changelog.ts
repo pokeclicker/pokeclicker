@@ -33,6 +33,7 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.4.7 - Layout'),
     new Changelog(changelogType.NEW, 'Added option to sort Pokémon list by base attack'),
     new Changelog(changelogType.CHANGE, 'Updated the Oak Items layout'),
+    new Changelog(changelogType.FIXED, 'Event Pokémon no longer count towards achievements or being able to travel to next region'),
 
     // v0.4.6
     new Changelog(changelogType.UPDATE, 'v0.4.6 - Bug fixes'),
