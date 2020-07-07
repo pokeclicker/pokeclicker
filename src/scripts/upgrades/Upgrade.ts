@@ -62,6 +62,8 @@ class Upgrade implements Saveable {
         if (this.canBuy()) {
             App.game.wallet.loseAmount(this.calculateCost());
             this.levelUp();
+        } else {
+            Notifier.notify({ message: 'You cannot afford to buy this upgrade yet', type: GameConstants.NotificationOption.warning })
         }
     }
 
