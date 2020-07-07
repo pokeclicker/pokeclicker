@@ -66,7 +66,7 @@ aria-labelledby="pokedexModalLabel">
                                       value="false" onclick="PokedexHelper.updateList()"> Shiny
                            </label>
                        </div>
-                       <!--Shiny-->
+                       <!--Not Shiny-->
                        <div class="col-sm-2">
                            <label class="form-check-label">
                                <input class="form-check-input" type="checkbox" id="pokedex-filter-not-shiny"
@@ -74,6 +74,10 @@ aria-labelledby="pokedexModalLabel">
                            </label>
                        </div>
 
+                   </div>
+
+                   <div class="row justify-content-center">
+                      <h4 data-bind="text: `Showing ${PokedexHelper.filteredList().length} Pokémon`"></h4>
                    </div>
                </div>
 
