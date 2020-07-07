@@ -71,6 +71,9 @@ class OakItems implements Feature {
         return count;
     }
 
+    hasAvailableSlot(): boolean {
+        return this.activeCount() < this.maxActiveCount();
+    }
 
     fromJSON(json: object): void {
         for (const key in json) {

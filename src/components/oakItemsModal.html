@@ -1,0 +1,70 @@
+<div class="modal fade noselect" id="oakItemsModal" tabindex="-1" role="dialog" aria-badgeledby="oakItemsModal">
+    <div class="modal-dialog modal-sm" role="document">
+       <div class="modal-content">
+           <div class="modal-header">
+               <h5 data-bind="text: 'Oak Items Equipped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()">Oak Items</h5>
+               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                   <span aria-hidden="true">&times;</span>
+               </button>
+           </div>
+           <div class="modal-body">
+              <div class="row" data-bind="foreach: App.game.oakItems.itemList">
+                  <div class="col p-0">
+                      <button class="p-0 btn"
+                          data-bind="css: {
+                             'btn-primary': $data.isActive,
+                             'btn-outline-secondary': !$data.isActive
+                           }">
+                          <img class="clickable" style="max-width: 100%;" src=""
+                               data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
+                                css: {
+                                  'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
+                                },
+                                event: {
+                                  mouseover: function(){OakItemController.hover($data.name)},
+                                  click: function(){OakItemController.click($data.name)},
+                                }">
+                        </button>
+                  </div>
+              </div>
+          </div>
+          <div class="modal-footer p-0">
+              <table class="table table-bordered text-center m-0">
+                <thead>
+                  <th colspan="2">
+                    <strong data-bind="text: GameConstants.humanifyString(OakItems.OakItem[OakItemController.inspectedItem])"></strong>
+                  </th>
+                </thead>
+                <tbody>
+                  <!-- ko if: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
+                  <tr>
+                    <td colspan="2" data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].description"></td>
+                  </tr>
+                  <tr>
+                    <td class="table-dark" style="width: 50%">
+                      Level: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
+                    </td>
+                    <td class="table-dark" style="width: 50%">
+                      <!-- ko if: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
+                      Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>%
+                      <!-- /ko -->
+                      <!-- ko ifnot: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
+                      Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>x
+                      <!-- /ko -->
+                    </td>
+                  </tr>
+                  <!-- /ko -->
+                  <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
+                  <tr>
+                    <td colspan="2">Locked!<br/>Capture <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].unlockReq - App.game.party.caughtPokemon.length"></span> more unique Pokémon</td>
+                  </tr>
+                  <tr>
+
+                  </tr>
+                  <!-- /ko -->
+                </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>

@@ -29,6 +29,10 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.7
+    new Changelog(changelogType.UPDATE, 'v0.4.7 - Layout'),
+    new Changelog(changelogType.CHANGE, 'Updated the Oak Items layout'),
+
     // v0.4.6
     new Changelog(changelogType.UPDATE, 'v0.4.6 - Bug fixes'),
     new Changelog(changelogType.NEW, 'Old save can be backed up when the game updates incase anything goes wrong<br/><i>You can disable auto download in the settings</i>'),
