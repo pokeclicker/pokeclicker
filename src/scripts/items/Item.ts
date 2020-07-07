@@ -50,16 +50,16 @@ abstract class Item {
             let curr = 'currency';
             switch (this.currency) {
                 case GameConstants.Currency.money:
-                    curr = 'money';
+                    curr = 'Money';
                     break;
                 case GameConstants.Currency.questPoint:
-                    curr = 'quest points';
+                    curr = 'Quest Points';
                     break;
                 case GameConstants.Currency.dungeonToken:
-                    curr = 'dungeon tokens';
+                    curr = 'Dungeon Tokens';
                     break;
             }
-            Notifier.notify({ message: `You don't have enough ${curr} to buy ${n} ${this.name() + multiple}`, type: GameConstants.NotificationOption.danger });
+            Notifier.notify({ message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.name()) + multiple}`, type: GameConstants.NotificationOption.danger });
         }
     }
 
