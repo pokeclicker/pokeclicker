@@ -31,6 +31,7 @@ class Changelog {
 const changelogItems = [
     // v0.4.7
     new Changelog(changelogType.UPDATE, 'v0.4.7 - Layout'),
+    new Changelog(changelogType.NEW, 'Added option to sort Pokémon list by base attack'),
     new Changelog(changelogType.CHANGE, 'Updated the Oak Items layout'),
 
     // v0.4.6
