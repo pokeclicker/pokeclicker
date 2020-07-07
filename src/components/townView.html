@@ -19,10 +19,10 @@
                    Gym
                </button>
                <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
-               <button class="btn btn-secondary"
+               <button class="btn btn-warning"
                        onclick="MapHelper.travelToNextRegion()"
-                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name())">
-                     Go To Next Region
+                       data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name()), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
+                     Travel To Next Region
                </button>
                <button class="btn btn-secondary p-0"
                        onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
