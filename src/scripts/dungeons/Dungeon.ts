@@ -279,7 +279,7 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
 dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
     ['Zubat', 'Poochyena'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
-    4000,
+    110000,
     [new DungeonBossPokemon('Numel', 350000, 20)],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
