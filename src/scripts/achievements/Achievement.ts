@@ -15,7 +15,7 @@ class Achievement {
 
     public check() {
         if (this.isCompleted()) {
-            Notifier.notify({ title: this.name, message: this.description, type: GameConstants.NotificationOption.warning, timeout: 1e4 });
+            Notifier.notify({ title: `[Achievement] ${this.name}`, message: this.description, type: GameConstants.NotificationOption.warning, timeout: 1e4 });
             player.achievementsCompleted[this.name] = true;
             this.unlocked = true;
         }

@@ -278,7 +278,7 @@ namespace SafariBattle {
     };
 
     export const CATCH_MESSAGES = [
-        'Oh, no!<br>The Pokemon broke free!',
+        'Oh, no!<br>The Pokémon broke free!',
         'Aww! It appeared to be caught!',
         'Aargh! Almost had it!',
         'Shoot! It was so close, too!',

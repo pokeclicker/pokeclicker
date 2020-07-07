@@ -10,19 +10,19 @@ class QuestLineHelper {
         const defeatStarter = new CapturePokemonsQuest(1);
         //Capture pokemon because start sequence resets route 1 kills to 0, making this quest think it is incomplete
         defeatStarter.pointsReward = 10;
-        defeatStarter.description = 'Defeat the pokemon. Click to deal damage';
+        defeatStarter.description = 'Defeat the Pokémon. Click to deal damage';
         this.tutorial.addQuest(defeatStarter);
 
         //Capture 1 pokemon
         const captureOne = new CapturePokemonsQuest(1);
         captureOne.pointsReward = 20;
-        captureOne.description = 'Capture 1 pokemon. When you defeat a pokemon, a pokeball is thrown and you have a chance to capture it.';
+        captureOne.description = 'Capture 1 Pokémon. When you defeat a Pokémon, a pokeball is thrown and you have a chance to capture it.';
         this.tutorial.addQuest(captureOne);
 
         //Kill 5 on route 2
         const routeTwo = new DefeatPokemonsQuest(2, 0, 5);
         routeTwo.pointsReward = 30;
-        routeTwo.description = 'Defeat 5 pokemon on route 2. Click route 2 on the map to move there and begin fighting.';
+        routeTwo.description = 'Defeat 5 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.';
         this.tutorial.addQuest(routeTwo);
 
         //Defeat Pewter Gym
@@ -49,7 +49,7 @@ class QuestLineHelper {
         //Cleat Mt Moon dungeon
         const clearMtMoon = new DefeatDungeonQuest(GameConstants.KantoDungeons[2], 1);
         clearMtMoon.pointsReward = 10;
-        clearMtMoon.description = 'Gather 75 Dungeon tokens by capturing Pokemon, then clear the Mt. Moon dungeon.';
+        clearMtMoon.description = 'Gather 75 Dungeon tokens by capturing Pokémon, then clear the Mt. Moon dungeon.';
         this.tutorial.addQuest(clearMtMoon);
 
         this.tutorialTracker = this.tutorial.curQuestInitial.subscribe((newInitial) => {

@@ -105,17 +105,17 @@ class AchievementHandler {
         AchievementHandler.addAchievement("DigDug ain't got nothin on me", 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.01);
         AchievementHandler.addAchievement("Both my thumbs are green! This can't be healthy", 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.01);
 
-        AchievementHandler.addAchievement('First Team', 'Capture 100 Pokemon', new CapturedRequirement(100), 0.05);
-        AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokemon', new CapturedRequirement(1000), 0.10);
-        AchievementHandler.addAchievement('Pokemon Army', 'Capture 10,000 Pokemon', new CapturedRequirement(10000), 0.15);
-        AchievementHandler.addAchievement('Pokemon Collector', 'Capture 100,000 Pokemon', new CapturedRequirement(100000), 0.25);
-        AchievementHandler.addAchievement('You get a pokemon, you get a pokemon, everyone gets a pokemon!', 'Capture 1,000,000 Pokemon', new CapturedRequirement(1000000), 0.50);
+        AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon', new CapturedRequirement(100), 0.05);
+        AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokémon', new CapturedRequirement(1000), 0.10);
+        AchievementHandler.addAchievement('Pokémon Army', 'Capture 10,000 Pokémon', new CapturedRequirement(10000), 0.15);
+        AchievementHandler.addAchievement('Pokémon Collector', 'Capture 100,000 Pokémon', new CapturedRequirement(100000), 0.25);
+        AchievementHandler.addAchievement('You get a Pokémon, you get a Pokémon, everyone gets a Pokémon!', 'Capture 1,000,000 Pokémon', new CapturedRequirement(1000000), 0.50);
 
-        AchievementHandler.addAchievement('A Long Road Ahead', 'Defeat 100 Pokemon', new DefeatedRequirement(100), 0.05);
-        AchievementHandler.addAchievement('Highway to Pallet Town', 'Defeat 1,000 Pokemon', new DefeatedRequirement(1000), 0.10);
-        AchievementHandler.addAchievement('Overleveled', 'Defeat 10,000 Pokemon', new DefeatedRequirement(10000), 0.15);
-        AchievementHandler.addAchievement('The Cake is a Lie, but the Grind is real', 'Defeat 100,000 Pokemon', new DefeatedRequirement(100000), 0.25);
-        AchievementHandler.addAchievement('Are there any left?', 'Defeat 1,000,000 Pokemon', new DefeatedRequirement(1000000), 0.50);
+        AchievementHandler.addAchievement('A Long Road Ahead', 'Defeat 100 Pokémon', new DefeatedRequirement(100), 0.05);
+        AchievementHandler.addAchievement('Highway to Pallet Town', 'Defeat 1,000 Pokémon', new DefeatedRequirement(1000), 0.10);
+        AchievementHandler.addAchievement('Overleveled', 'Defeat 10,000 Pokémon', new DefeatedRequirement(10000), 0.15);
+        AchievementHandler.addAchievement('The Cake is a Lie, but the Grind is real', 'Defeat 100,000 Pokémon', new DefeatedRequirement(100000), 0.25);
+        AchievementHandler.addAchievement('Are there any left?', 'Defeat 1,000,000 Pokémon', new DefeatedRequirement(1000000), 0.50);
 
         AchievementHandler.addAchievement("Startin' Out", 'Capture your first Pokémon', new CaughtPokemonRequirement(1), 0.01);
         AchievementHandler.addAchievement('Like Ants in a PC', 'Capture 10 unique Pokémons', new CaughtPokemonRequirement(10), 0.02);
@@ -138,7 +138,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Just keep swimming just keep swimming -- oooo shiny!', 'Capture 100 unique Shinies', new ShinyPokemonRequirement(100), 0.60);
         AchievementHandler.addAchievement("I don't know if I can handle the next batch of shinies.", 'Complete the Kanto Pokédex shiny!', new ShinyPokemonRequirement(151), 1.50);
 
-        AchievementHandler.addAchievement('Pokemon Nursery', 'Hatch 1 egg', new HatchRequirement(1), 0.01);
+        AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg', new HatchRequirement(1), 0.01);
         AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs', new HatchRequirement(10), 0.01);
         AchievementHandler.addAchievement('Marathon Runner', 'Hatch 100 eggs', new HatchRequirement(100), 0.01);
         AchievementHandler.addAchievement('Egg Factory', 'Hatch 1,000 eggs', new HatchRequirement(1000), 0.01);
