@@ -59,7 +59,6 @@ class Game {
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
-
         player = Save.load();
 
         AchievementHandler.initialize();
@@ -72,7 +71,11 @@ class Game {
             const saveObject = JSON.parse(saveJSON);
 
             Object.keys(saveObject).filter(key => this[key]?.saveKey).forEach(key => {
-                this[key].fromJSON(saveObject[key]);
+                try {
+                    this[key].fromJSON(saveObject[key]);
+                } catch (error) {
+                    console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
+                }
             });
         }
     }
@@ -85,7 +88,6 @@ class Game {
         this.farming.initialize();
         this.specialEvents.initialize();
         this.load();
-        this.update.check();
 
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();

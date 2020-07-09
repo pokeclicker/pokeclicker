@@ -2,10 +2,12 @@ class Update implements Saveable {
     defaults: object;
     saveKey = 'update';
 
-    version = '0.4.7';
+    version = '0.4.8';
     saveVersion = '0.0.0';
 
-    constructor() {}
+    constructor() {
+        this.fromJSON(this.getSaveData().update, true);
+    }
 
     isOlderVersion(version, compareVersion) {
         return compareVersion.localeCompare(version, undefined, { numeric: true }) === 1;
@@ -18,10 +20,10 @@ class Update implements Saveable {
         const settingsData = this.getSettingsData();
         const backupSaveData = {player: playerData, save: saveData};
 
-        // v0.4.0 - Statistics update
+        // v0.4.0
         if (this.isOlderVersion(this.saveVersion, '0.4.0')) {
             try {
-                // update the save data as it is no longer a part of player data
+                // Update the save data as it is no longer a part of player data
                 saveData.statistics = {
                     ...playerData.statistics || {},
                     pokemonCaptured: playerData._caughtAmount || 0,
@@ -31,20 +33,20 @@ class Update implements Saveable {
                     totalPokemonDefeated: playerData.statistics.pokemonDefeated || 0,
                 };
 
-                // Loading the new data
-                App.game.statistics.fromJSON(saveData.statistics);
+                // Update save data
+                this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.4.0 - Couldn\'t update statistics..', ಠ_ಠ);
             }
         }
 
-        // v0.4.4 - Statistics update 2
+        // v0.4.4
         if (this.isOlderVersion(this.saveVersion, '0.4.4')) {
             try {
                 // Just incase statistics is not set
                 saveData.statistics = saveData.statistics || {};
 
-                // update the save data as it is no longer a part of player data
+                // Rename from the old statistic name
                 saveData.statistics = {
                     ...saveData.statistics,
                     clickAttacks: saveData.statistics.clicks || 0,
@@ -54,12 +56,13 @@ class Update implements Saveable {
                 };
 
                 // Loading the new data
-                App.game.statistics.fromJSON(saveData.statistics);
+                this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.4.4 - Couldn\'t update statistics..', ಠ_ಠ);
             }
         }
 
+        // Notify the player that the game has updated!
         if (this.saveVersion != this.version && this.saveVersion != '0.0.0') {
             const button = document.createElement('a');
             button.className = 'btn btn-block btn-danger';
@@ -94,6 +97,14 @@ class Update implements Saveable {
         }
     }
 
+    setPlayerData(playerData: any) {
+        try {
+            localStorage.player = JSON.stringify(playerData);
+        } catch (err) {
+            console.error('Error setting player data', err);
+        }
+    }
+
     getSaveData() {
         let saveData: any;
         try {
@@ -105,23 +116,43 @@ class Update implements Saveable {
         }
     }
 
+    setSaveData(saveData: any) {
+        try {
+            localStorage.save = JSON.stringify(saveData);
+        } catch (err) {
+            console.error('Error setting save data', err);
+        }
+    }
+
     getSettingsData() {
         let settingsData: any;
         try {
             settingsData = JSON.parse(localStorage.settings);
         } catch (err) {
-            console.error('Error getting save data', err);
+            console.error('Error getting settings data', err);
         } finally {
             return settingsData || {};
         }
     }
 
-    fromJSON(json): void {
-        if (!json) {
+    setSettingsData(settingsData: any) {
+        try {
+            localStorage.settings = JSON.stringify(settingsData);
+        } catch (err) {
+            console.error('Error setting settings data', err);
+        }
+    }
+
+    fromJSON(json, initial = false): void {
+        if (!initial) {
             return;
+        }
+        if (!json) {
+            json = { version: '0.0.0' };
         }
 
         this.saveVersion = json.version || '0.0.0';
+        this.check();
     }
 
     toJSON(): object {
