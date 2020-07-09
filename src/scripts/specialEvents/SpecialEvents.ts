@@ -58,7 +58,7 @@ SpecialEvents.newEvent(2, 'Mewtwo strikes back!', 'Encounter Armored Mewtwo for 
         dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
     }
 );
- // Yearly
+// Yearly
 SpecialEvents.newEvent(3, 'Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto and Johto.',
     // Start
     new Date(new Date().getFullYear(), 9, 30, 1), () => {
