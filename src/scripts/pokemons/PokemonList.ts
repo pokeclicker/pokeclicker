@@ -14173,7 +14173,7 @@ const pokemonList: {
                 'speed': 34,
             },
         },
-        // Event Pokemon only
+        // Missingno.
         {
             'id': 0,
             'name': 'MissingNo.',
@@ -14192,6 +14192,7 @@ const pokemonList: {
                 'speed': 0,
             },
         },
+        // Event Pokemon only between -1 → -99
         {
             'id': -1,
             'name': 'Flying Pikachu',
@@ -14228,12 +14229,64 @@ const pokemonList: {
         },
         {
             'id': -3,
+            'name': 'Armored Mewtwo',
+            'catchRate': 2,
+            'type': [PokemonType.Psychic],
+            'levelType': LevelType.slow,
+            'exp': 306,
+            'eggCycles': 120,
+            'base': {
+                'hitpoints': 106,
+                'attack': 110,
+                'specialAttack': 154,
+                'defense': 100,
+                'specialDefense': 100,
+                'speed': 130,
+            },
+        },
+        {
+            'id': -4,
+            'name': 'Santa Dragonite',
+            'catchRate': 20,
+            'type': [PokemonType.Dragon, PokemonType.Flying],
+            'levelType': LevelType.slow,
+            'exp': 270,
+            'eggCycles': 40,
+            'base': {
+                'hitpoints': 91,
+                'attack': 134,
+                'specialAttack': 100,
+                'defense': 95,
+                'specialDefense': 100,
+                'speed': 80,
+            },
+        },
+        {
+            'id': -5,
+            'name': 'Spooky Togepi',
+            'catchRate': 30,
+            'type': [PokemonType.Fairy],
+            'levelType': LevelType.fast,
+            'exp': 49,
+            'eggCycles': 10,
+            'base': {
+                'hitpoints': 35,
+                'attack': 25,
+                'specialAttack': 40,
+                'defense': 65,
+                'specialDefense': 65,
+                'speed': 20,
+            },
+        },
+        // Megas only between -100 → -199
+        {
+            'id': -100,
             'name': 'Mega Venusaur',
             'type': [PokemonType.Grass, PokemonType.Poison],
             'eggCycles': 120,
             'levelType': LevelType.mediumslow,
             'exp': 281,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 80,
                 'attack': 100,
@@ -14244,13 +14297,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -4,
+            'id': -101,
             'name': 'Mega Charizard X',
             'type': [PokemonType.Fire, PokemonType.Dragon],
             'eggCycles': 120,
             'levelType': LevelType.mediumslow,
             'exp': 285,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 78,
                 'attack': 130,
@@ -14261,13 +14314,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -5,
+            'id': -102,
             'name': 'Mega Charizard Y',
             'type': [PokemonType.Fire, PokemonType.Flying],
             'eggCycles': 120,
             'levelType': LevelType.mediumslow,
             'exp': 285,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 78,
                 'attack': 104,
@@ -14278,13 +14331,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -6,
+            'id': -103,
             'name': 'Mega Blastoise',
             'type': [PokemonType.Water],
             'eggCycles': 120,
             'levelType': LevelType.mediumslow,
             'exp': 284,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 79,
                 'attack': 103,
@@ -14295,13 +14348,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -7,
+            'id': -104,
             'name': 'Mega Beedrill',
             'type': [PokemonType.Bug, PokemonType.Poison],
             'eggCycles': 80,
             'levelType': LevelType.mediumfast,
             'exp': 223,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 65,
                 'attack': 150,
@@ -14312,13 +14365,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -8,
+            'id': -105,
             'name': 'Mega Pidgeot',
             'type': [PokemonType.Normal, PokemonType.Flying],
             'eggCycles': 80,
             'levelType': LevelType.mediumfast,
             'exp': 261,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 83,
                 'attack': 80,
@@ -14329,13 +14382,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -9,
+            'id': -106,
             'name': 'Mega Alakazam',
             'type': [PokemonType.Psychic],
             'eggCycles': 80,
             'levelType': LevelType.mediumslow,
             'exp': 270,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 55,
                 'attack': 50,
@@ -14346,13 +14399,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -10,
+            'id': -107,
             'name': 'Mega Slowbro',
             'type': [PokemonType.Water, PokemonType.Psychic],
             'eggCycles': 80,
             'levelType': LevelType.mediumfast,
             'exp': 207,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 95,
                 'attack': 75,
@@ -14363,13 +14416,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -11,
+            'id': -108,
             'name': 'Mega Gengar',
             'type': [PokemonType.Poison, PokemonType.Ghost],
             'eggCycles': 120,
             'levelType': LevelType.mediumslow,
             'exp': 207,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 60,
                 'attack': 65,
@@ -14380,13 +14433,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -12,
+            'id': -109,
             'name': 'Mega Kangaskhan',
             'type': [PokemonType.Normal],
             'eggCycles': 120,
             'levelType': LevelType.mediumslow,
             'exp': 207,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 105,
                 'attack': 125,
@@ -14397,13 +14450,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -13,
+            'id': -110,
             'name': 'Mega Pinsir',
             'type': [PokemonType.Bug, PokemonType.Flying],
             'eggCycles': 120,
             'levelType': LevelType.mediumslow,
             'exp': 210,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 65,
                 'attack': 155,
@@ -14414,13 +14467,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -14,
+            'id': -111,
             'name': 'Mega Gyarados',
             'type': [PokemonType.Water, PokemonType.Dark],
-            'eggCycles': 125,
+            'eggCycles': 120,
             'levelType': LevelType.slow,
             'exp': 224,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 95,
                 'attack': 155,
@@ -14431,13 +14484,13 @@ const pokemonList: {
             },
         },
         {
-            'id': -15,
+            'id': -112,
             'name': 'Mega Aerodactyl',
             'type': [PokemonType.Water, PokemonType.Dark],
             'eggCycles': 120,
             'levelType': LevelType.mediumslow,
             'exp': 215,
-            'catchRate': 20,
+            'catchRate': 10,
             'base': {
                 'hitpoints': 80,
                 'attack': 135,
@@ -14448,7 +14501,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -16,
+            'id': -113,
             'name': 'Mega Mewtwo X',
             'type': [PokemonType.Psychic, PokemonType.Fighting],
             'eggCycles': 120,
@@ -14465,7 +14518,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -17,
+            'id': -114,
             'name': 'Mega Mewtwo Y',
             'type': [PokemonType.Psychic, PokemonType.Fighting],
             'eggCycles': 120,
@@ -14482,7 +14535,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -18,
+            'id': -115,
             'name': 'Mega Rayquaza',
             'type': [PokemonType.Dragon, PokemonType.Flying],
             'eggCycles': 120,
@@ -14499,7 +14552,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -19,
+            'id': -116,
             'name': 'Primal Groudon',
             'type': [PokemonType.Ground, PokemonType.Fire],
             'eggCycles': 120,
@@ -14516,7 +14569,7 @@ const pokemonList: {
             },
         },
         {
-            'id': -20,
+            'id': -117,
             'name': 'Primal Kyogre',
             'type': [PokemonType.Water],
             'eggCycles': 120,
@@ -14549,9 +14602,12 @@ pokemonList.forEach(p => {
 
 const pokemonMap: any = new Proxy(pokemonList, {
     get: (pokemon, prop: string) => {
-        if (+prop) {
+        if (!isNaN(+prop)) {
             const id: number = +prop;
-            return pokemon.find(p => p.id == id);
+            const pokemonByID = pokemon.find(p => p.id == id);
+            if (pokemonByID) {
+                return pokemonByID;
+            }
         }
         switch (prop) {
             case 'random':
@@ -14564,7 +14620,7 @@ const pokemonMap: any = new Proxy(pokemonList, {
                     return pokemon[random];
                 };
             default:
-                return pokemon.find(p => p.name.toLowerCase() == prop.toLowerCase()) || pokemon[prop];
+                return pokemon.find(p => p.name.toLowerCase() == prop.toLowerCase()) || pokemon[prop] || pokemon.find(p => p.id == 0);
         }
     },
 });
