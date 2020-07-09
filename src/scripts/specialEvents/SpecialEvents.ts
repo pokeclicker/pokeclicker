@@ -37,11 +37,11 @@ class SpecialEvents implements Feature {
 // Create our events here for now
 SpecialEvents.newEvent(1, 'Flying Pikachu', 'Encounter Flying Pikachu for a limited time on any route in Kanto.',
     // Start
-    new Date(2020, 6, 6), () => {
+    new Date(2020, 6, 6, 2), () => {
         Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Flying Pikachu'));
     },
     // End
-    new Date(2020, 6, 13), () => {
+    new Date(2020, 6, 12, 22), () => {
         Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land = pokemonsPerRoute[GameConstants.Region.kanto][route].land.filter(p => p != 'Flying Pikachu'));
     }
 );
