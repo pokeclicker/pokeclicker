@@ -31,7 +31,6 @@ class SpecialEvent {
         const timeTillEventStart = this.timeTillStart();
         // If more than 1 week, don't notify the player yet
         if (timeTillEventStart > 7 * GameConstants.DAY) {
-            this.notify(`starts in ${GameConstants.formatTimeShortWords(timeTillEventStart)}!`, Math.min(1 * GameConstants.HOUR));
             // Check again when 7 days left until event start
             setTimeout(() => {
                 this.initialize();
