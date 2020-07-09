@@ -34,6 +34,7 @@ const changelogItems = [
     new Changelog(changelogType.NEW, 'Added option to sort Pokémon list by base attack'),
     new Changelog(changelogType.CHANGE, 'Added information and confirmation check before traveling to next available region'),
     new Changelog(changelogType.CHANGE, 'Updated the Oak Items layout'),
+    new Changelog(changelogType.CHANGE, 'Updated layout of Towns and Dungeons'),
     new Changelog(changelogType.CHANGE, 'Updated the Hoenn map'),
     new Changelog(changelogType.FIXED, 'Event Pokémon no longer count towards achievements or being able to travel to next region'),
     new Changelog(changelogType.FIXED, 'Mt. Chimney dungeon is now more powerful'),
