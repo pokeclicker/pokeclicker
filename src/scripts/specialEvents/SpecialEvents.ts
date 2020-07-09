@@ -36,6 +36,7 @@ class SpecialEvents implements Feature {
 // TODO: Fetch events from a server each 1/2/3/6/12/24 hours
 // Create our events here for now
 
+// Once off - for now..
 SpecialEvents.newEvent(1, 'Flying Pikachu', 'Encounter Flying Pikachu for a limited time on any route in Kanto.',
     // Start
     new Date(2020, 6, 6, 2), () => {
@@ -57,7 +58,7 @@ SpecialEvents.newEvent(2, 'Mewtwo strikes back!', 'Encounter Armored Mewtwo for 
         dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
     }
 );
-
+ // Yearly
 SpecialEvents.newEvent(3, 'Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto and Johto.',
     // Start
     new Date(new Date().getFullYear(), 9, 30, 1), () => {
