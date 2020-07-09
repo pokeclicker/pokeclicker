@@ -14278,6 +14278,23 @@ const pokemonList: {
                 'speed': 20,
             },
         },
+        {
+            'id': -6,
+            'name': 'Spooky Bulbasaur',
+            'catchRate': 25,
+            'type': [PokemonType.Grass, PokemonType.Poison],
+            'levelType': LevelType.mediumslow,
+            'exp': 64,
+            'eggCycles': 20,
+            'base': {
+                'hitpoints': 45,
+                'attack': 49,
+                'specialAttack': 65,
+                'defense': 49,
+                'specialDefense': 65,
+                'speed': 45,
+            },
+        },
         // Megas only between -100 → -199
         {
             'id': -100,
