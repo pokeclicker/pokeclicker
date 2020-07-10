@@ -333,6 +333,12 @@ class Safari {
     private static calculateStartPokeballs() {
         return GameConstants.SAFARI_BASE_POKEBALL_COUNT;
     }
+
+    static completed(shiny = false) {
+        return SafariPokemon.list.reduce((all,poke) => {
+            return all && App.game.party.alreadyCaughtPokemonByName(poke.name,shiny);
+        }, true);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
