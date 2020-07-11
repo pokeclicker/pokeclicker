@@ -308,10 +308,63 @@ img {
 
 #enemy {
   min-height: 96px;
+  margin-top: 25px;
 }
 
-#routeBattleView span {
-  line-height: 1.5;
+#routeBattleView {
+  color: whitesmoke;
+
+  background-image: url(../assets/images/battle-background.png);
+  background-size: cover;
+  background-position: bottom;
+
+  span {
+    line-height: 1.5;
+  }
+
+  .routeProgress {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    font-size: 16px;
+  }
+
+  .routeInfo {
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    font-size: 16px;
+  }
+
+  .dungeonTimer {
+    position: absolute;
+    width: 100%;
+    height: 20px;
+    top: 36px;
+  }
+
+  .pokeball-animated {
+    margin-top: 25px;
+  }
+
+  .catchChance {
+    color: black;
+  }
+
+  .hitpoints {
+    height: 20px;
+    position: absolute;
+    bottom: 20px;
+    width: 90%;
+    left: 5%;
+  }
+}
+
+.pageItemTitle {
+  width: 100%;
+  color: whitesmoke;
+  background-color: rgba(0,0,0,0.7);
+  margin: 0px;
 }
 
 *::-webkit-scrollbar-track
