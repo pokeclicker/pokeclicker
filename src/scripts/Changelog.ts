@@ -33,7 +33,8 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.4.8'),
     new Changelog(changelogType.NEW, 'More events'),
     new Changelog(changelogType.NEW, 'Added pokeball indicator to Safari Zone entrance'),
-    new Changelog(changelogType.FIXED, 'Event notifications showing way before event'),
+    new Changelog(changelogType.FIXED, 'Event notifications showing way before event start'),
+    new Changelog(changelogType.FIXED, 'Reduce lag when hatching'),
 
     // v0.4.7
     new Changelog(changelogType.UPDATE, 'v0.4.7 - Layout'),
