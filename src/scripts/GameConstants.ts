@@ -431,11 +431,11 @@ namespace GameConstants {
             34: BadgeCase.Badge.Hive,
             35: BadgeCase.Badge.Plain,
             38: BadgeCase.Badge.Fog,
+            47: BadgeCase.Badge.Storm,
             42: BadgeCase.Badge.Mineral,
             43: BadgeCase.Badge.Glacier,
             44: BadgeCase.Badge.Glacier,
             45: BadgeCase.Badge.Rising,
-            47: BadgeCase.Badge.Elite_JohtoChampion,
         },
         2: {
             116: BadgeCase.Badge.Stone,
