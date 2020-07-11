@@ -32,7 +32,8 @@ const changelogItems = [
     // v0.4.8
     new Changelog(changelogType.UPDATE, 'v0.4.8'),
     new Changelog(changelogType.NEW, 'More events'),
-    new Changelog(changelogType.NEW, 'Added pokeball indicator to Safari Zone entrance'),
+    new Changelog(changelogType.NEW, 'Added caught status indicator to Safari Zone entrance'),
+    new Changelog(changelogType.NEW, 'Added caught status indicator to Dungeons'),
     new Changelog(changelogType.CHANGE, 'Show Oak Item details on hover on main screen'),
     new Changelog(changelogType.CHANGE, 'Updated Oak Items modal to show current experience on hover'),
     new Changelog(changelogType.CHANGE, 'Animate town and dungeon background images'),

@@ -7,7 +7,24 @@
             data-bind="visible: player.town().gym() || player.town().shop(), tooltip: { title: 'In towns you can battle gymleaders to earn badges, or visit shops to buy items.', trigger: 'hover', placement:'left' }">?</button>
             <button type="button" class="btn btn-outline-info" style="float: right;"
             data-bind="visible: player.town() instanceof DungeonTown, tooltip: { title: 'Capture Pokémon to gain Dungeon Tokens in order to battle dungeons.', trigger: 'hover', placement:'left' }">?</button>
-            <h2 class="pageItemTitle" data-bind="text: player.town().name()">Town Name</h2>
+            <h2 class="pageItemTitle">
+              <knockout data-bind="text: player.town().name()">Town Name</knockout>
+
+              <knockout data-bind="if: player.town() instanceof DungeonTown && player.town().dungeon()">
+                  <!--If all Pokémon in the dungeon are caught-->
+                  <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(player.town().dungeon(), true) && DungeonRunner.dungeonCompleted(player.town().dungeon(), false))">
+                      <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
+                           src="assets/images/pokeball/Pokeball-small.png"/>
+                  </knockout>
+
+                  <!--If all Pokémon in the dungeon are caught shiny-->
+                  <knockout data-bind="if: DungeonRunner.dungeonCompleted(player.town().dungeon(), true)">
+                      <img title="You have captured all Pokémon shiny on this route!"
+                           class="pokeball-smallest"
+                           src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                  </knockout>
+              </knockout>
+            </h2>
         </div>
     </div>
     <div class="row no-gutters">
