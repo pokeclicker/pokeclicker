@@ -29,6 +29,10 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.8
+    new Changelog(changelogType.UPDATE, 'v0.4.8'),
+    new Changelog(changelogType.NEW, 'Added pokeball indicator to Safari Zone entrance'),
+
     // v0.4.7
     new Changelog(changelogType.UPDATE, 'v0.4.7 - Layout'),
     new Changelog(changelogType.NEW, 'Added option to sort Pokémon list by base attack'),
