@@ -18,7 +18,7 @@ data-bind="visible: App.game.oakItems.canAccess()">
         </thead>
         -->
         <tbody data-bind="foreach: App.game.oakItems.itemList">
-          <tr data-bind="if: $data.isActive">
+          <tr data-bind="if: $data.isActive, tooltip: { html: true, title: `<u>${$data.displayName}</u><br/><p>${$data.description}</p>Level: <strong>${$data.level}</strong><br/>Bonus: <strong>${$data.calculateBonusIfActive()}${$index == OakItems.OakItem.Magic_Ball ? 'x' : '%'}</strong>`, trigger: 'hover', placement:'bottom' }">
             <td class="tight p-1">
               <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'}">
             </td>

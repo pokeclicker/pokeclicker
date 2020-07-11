@@ -33,6 +33,8 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.4.8'),
     new Changelog(changelogType.NEW, 'More events'),
     new Changelog(changelogType.NEW, 'Added pokeball indicator to Safari Zone entrance'),
+    new Changelog(changelogType.CHANGE, 'Show Oak Item details on hover on main screen'),
+    new Changelog(changelogType.CHANGE, 'Updated Oak Items modal to show current experience on hover'),
     new Changelog(changelogType.FIXED, 'Event notifications showing way before event start'),
     new Changelog(changelogType.FIXED, 'Reduce lag when hatching'),
 

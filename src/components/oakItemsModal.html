@@ -41,6 +41,32 @@
                     <td colspan="2" data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].description"></td>
                   </tr>
                   <tr>
+                    <td colspan="2" class="p-0">
+                      <div class="progress" style="height: 40px;">
+                          <div class="progress-bar bg-primary" role="progressbar"
+                              data-bind="attr:{ style: 'width:' + (App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() ? 100 : App.game.oakItems.itemList[OakItemController.inspectedItem].expPercentage) + '%' },
+                                 css: {
+                                   'bg-success': App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
+                                   'bg-primary': !App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() || App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel(),
+                                 }"
+                              aria-valuemin="0" aria-valuemax="100">
+                              <!-- ko if: !App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
+                              <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString" style="font-size: 15px;"></span>
+                              <!-- /ko -->
+                              <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
+                              <span class="clickable" data-bind="html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/money.png height=18px/>)',
+                                click: function(){ App.game.oakItems.itemList[OakItemController.inspectedItem].buy(); }" style="font-size: 15px;">
+                                Upgrade
+                              </span>
+                              <!-- /ko -->
+                              <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
+                              <span style="font-size: 15px;">MAX LEVEL!</span>
+                              <!-- /ko -->
+                          </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
                     <td class="table-dark" style="width: 50%">
                       Level: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
                     </td>
