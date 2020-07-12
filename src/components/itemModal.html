@@ -15,8 +15,8 @@
                     <h3 data-bind="text: GameConstants.humanifyString(ItemHandler.stoneSelected())"></h3>
                     <div class="page-item m-0">
                         <div class="row no-gutters justify-content-sm-center" style="padding:15px;">
-                            <div class="row col-lg-6 col-sm-11" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
-                                <div class="col" style="cursor: pointer"
+                            <div class="row no-gutters col-lg-6 col-sm-11" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
+                                <div class="col-md-2 col-sm-3 col-6" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
                                     <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}">

@@ -78,7 +78,7 @@ class GymRunner {
         App.game.gameState = GameConstants.GameState.town;
     }
 
-    public static timeLeftSeconds = ko.computed(function () {
+    public static timeLeftSeconds = ko.pureComputed(function () {
         return (Math.ceil(GymRunner.timeLeft() / 10) / 10).toFixed(1);
     })
 

@@ -5,7 +5,9 @@ class Pokeballs implements Feature {
     defaults = {
         'pokeballs': [25, 0, 0, 0],
         'notCaughtSelection': GameConstants.Pokeball.Pokeball,
+        'notCaughtShinySelection': GameConstants.Pokeball.Pokeball,
         'alreadyCaughtSelection': GameConstants.Pokeball.Pokeball,
+        'alreadyCaughtShinySelection': GameConstants.Pokeball.Pokeball,
     };
 
     private pokeballCatchBonus: number[];
@@ -13,12 +15,16 @@ class Pokeballs implements Feature {
 
     public pokeballs: ArrayOfObservables<number>;
     private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _notCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
     private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _alreadyCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
 
     constructor() {
         this.pokeballs = new ArrayOfObservables(this.defaults.pokeballs);
         this._notCaughtSelection = ko.observable(this.defaults.notCaughtSelection);
+        this._notCaughtShinySelection = ko.observable(this.defaults.notCaughtShinySelection);
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
+        this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
     }
 
     initialize(): void {
@@ -38,10 +44,18 @@ class Pokeballs implements Feature {
         const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(id, true);
         let pref: GameConstants.Pokeball;
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
-        if (!alreadyCaught || (!alreadyCaughtShiny && isShiny)) {
-            pref = this.notCaughtSelection;
+        if (isShiny) {
+            if (!alreadyCaughtShiny) {
+                pref = this.notCaughtShinySelection;
+            } else {
+                pref = this.alreadyCaughtShinySelection;
+            }
         } else {
-            pref = this.alreadyCaughtSelection;
+            if (!alreadyCaught) {
+                pref = this.notCaughtSelection;
+            } else {
+                pref = this.alreadyCaughtSelection;
+            }
         }
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
@@ -94,7 +108,9 @@ class Pokeballs implements Feature {
             ]);
         }
         this.notCaughtSelection = json['notCaughtSelection'] ?? this.defaults.notCaughtSelection;
+        this.notCaughtShinySelection = json['notCaughtShinySelection'] ?? this.defaults.notCaughtShinySelection;
         this.alreadyCaughtSelection = json['alreadyCaughtSelection'] ?? this.defaults.alreadyCaughtSelection;
+        this.alreadyCaughtShinySelection = json['alreadyCaughtShinySelection'] ?? this.defaults.alreadyCaughtShinySelection;
     }
 
     toJSON(): object {
@@ -106,7 +122,9 @@ class Pokeballs implements Feature {
                 this.pokeballs[GameConstants.Pokeball.Masterball],
             ],
             'notCaughtSelection': this.notCaughtSelection,
+            'notCaughtShinySelection': this.notCaughtShinySelection,
             'alreadyCaughtSelection': this.alreadyCaughtSelection,
+            'alreadyCaughtShinySelection': this.alreadyCaughtShinySelection,
         };
     }
 
@@ -115,6 +133,22 @@ class Pokeballs implements Feature {
     }
 
     // Knockout getters/setters
+    get notCaughtSelection() {
+        return this._notCaughtSelection();
+    }
+
+    set notCaughtSelection(ball: GameConstants.Pokeball) {
+        this._notCaughtSelection(ball);
+    }
+
+    get notCaughtShinySelection() {
+        return this._notCaughtShinySelection();
+    }
+
+    set notCaughtShinySelection(ball: GameConstants.Pokeball) {
+        this._notCaughtShinySelection(ball);
+    }
+
     get alreadyCaughtSelection() {
         return this._alreadyCaughtSelection();
     }
@@ -123,11 +157,11 @@ class Pokeballs implements Feature {
         this._alreadyCaughtSelection(ball);
     }
 
-    get notCaughtSelection() {
-        return this._notCaughtSelection();
+    get alreadyCaughtShinySelection() {
+        return this._alreadyCaughtShinySelection();
     }
 
-    set notCaughtSelection(ball: GameConstants.Pokeball) {
-        this._notCaughtSelection(ball);
+    set alreadyCaughtShinySelection(ball: GameConstants.Pokeball) {
+        this._alreadyCaughtShinySelection(ball);
     }
 }

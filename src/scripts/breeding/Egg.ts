@@ -26,7 +26,7 @@ class Egg implements Saveable {
     }
 
     private init() {
-        this.progress = ko.computed(function () {
+        this.progress = ko.pureComputed(function () {
             return this.steps() / this.totalSteps * 100;
         }, this);
 
