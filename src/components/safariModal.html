@@ -2,7 +2,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 style='text-align:center' class="modal-title">Safari Zone</h4>
+                <h4 style='text-align:center' class="modal-title">
+                    Safari Zone
+                    <span data-bind="if: Safari.completed()">
+                        <img class="pokeball-smallest"
+                            data-bind='attr:{
+                                title:"You have captured all of the Safari Pokémon" + (Safari.completed(true) ? " shiny" : "") + "!",
+                                src:"assets/images/pokeball/Pokeball" + (Safari.completed(true) ? "-shiny" : "") + "-small.png"
+                            }'
+                        />
+                    </span>
+                </h4>
                 <button class='btn btn-danger modalClose' onclick='Safari.closeModal()'>Leave</button>
             </div>
 
