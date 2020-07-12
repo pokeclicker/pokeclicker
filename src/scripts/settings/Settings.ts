@@ -100,4 +100,6 @@ Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 
+Settings.add(new BooleanSetting('disableBerryNotifications', 'Disable berry notifications', false));
+
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));

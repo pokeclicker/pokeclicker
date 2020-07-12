@@ -29,6 +29,10 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.9
+    new Changelog(changelogType.UPDATE, 'v0.4.9'),
+    new Changelog(changelogType.NEW, 'Added option to disable found berries notifications'),
+
     // v0.4.8
     new Changelog(changelogType.UPDATE, 'v0.4.8'),
     new Changelog(changelogType.NEW, 'More events'),

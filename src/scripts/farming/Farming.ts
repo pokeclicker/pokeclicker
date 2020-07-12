@@ -124,9 +124,11 @@ class Farming implements Feature {
         }
     }
 
-    gainRandomBerry(amount = 1) {
+    gainRandomBerry(amount = 1, disableNotification = false) {
         const berry = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
-        Notifier.notify({ message: `You got a ${BerryType[berry]} berry!`, type: GameConstants.NotificationOption.success });
+        if (!disableNotification && !Settings.getSetting('disableBerryNotifications').observableValue()) {
+            Notifier.notify({ message: `You got a ${BerryType[berry]} berry!`, type: GameConstants.NotificationOption.success });
+        }
         this.gainBerry(berry, amount);
     }
 
