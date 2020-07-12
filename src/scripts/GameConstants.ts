@@ -339,6 +339,7 @@ namespace GameConstants {
             46: [45],
             26: [46],
             27: [26],
+            48: [47],
         },
         2: {
             102: [101],
@@ -403,6 +404,7 @@ namespace GameConstants {
             43: BadgeCase.Badge.Glacier,
             44: BadgeCase.Badge.Glacier,
             45: BadgeCase.Badge.Rising,
+            47: BadgeCase.Badge.Storm,
         },
         2: {
             116: BadgeCase.Badge.Stone,
