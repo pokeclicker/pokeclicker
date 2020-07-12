@@ -15,6 +15,7 @@ class KeyItem {
             this.unlockReq = null;
             return;
         }
+        // This computed is disposed by unlock()
         this.unlockReq = ko.computed<boolean>(unlockReq);
         this.unlocker = this.unlockReq.subscribe(() => {
             if (this.unlockReq()) {

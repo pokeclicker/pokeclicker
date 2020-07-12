@@ -32,33 +32,12 @@ class PartyController {
     public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
             let res, dir = (direction) ? -1 : 1;
+            const config = SortOptionConfigs[option];
 
-            let aValue;
-            let bValue;
-            switch (option) {
-                case SortOptions.id:
-                    aValue = a.id;
-                    bValue = b.id;
-                    break;
-                case SortOptions.name:
-                    aValue = a.name;
-                    bValue = b.name;
-                    break;
-                case SortOptions.attack:
-                    aValue = a.calculateAttack();
-                    bValue = b.calculateAttack();
-                    break;
-                case SortOptions.level:
-                    aValue = a.level;
-                    bValue = b.level;
-                    break;
-                case SortOptions.shiny:
-                    aValue = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(a.name).id, true));
-                    bValue = Number(App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(b.name).id, true));
+            const aValue = config.getValue(a);
+            const bValue = config.getValue(b);
 
-
-            }
-            if (option === SortOptions.attack || option == SortOptions.level || option == SortOptions.shiny) {
+            if (config.invert) {
                 dir *= -1;
             }
 

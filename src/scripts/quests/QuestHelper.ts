@@ -198,7 +198,7 @@ class QuestHelper {
     }
 
     public static questSlots(): KnockoutComputed<number> {
-        return ko.computed(function () {
+        return ko.pureComputed(function () {
             // Minimum of 1, Maximum of 4
             return Math.min(4, Math.max(1, player ? Math.floor(player.questLevel / 5) : 1));
         }, this);
