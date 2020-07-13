@@ -17,19 +17,19 @@
                       <td colspan="2" data-bind="text: QuestHelper.questList()[$data.index].description"></td>
                   </tr>
                   <tr>
-                      <td class="p-2">
+                      <td width="70%" class="p-0">
                           <div class="progress p-0">
-                              <div class="progress-bar bg-success" role="progressbar"
+                              <div class="progress-bar bg-primary" role="progressbar"
                                   data-bind="attr:{ style: 'width:' + (QuestHelper.questList()[$data.index].progress() * 100) + '%'}"
                                   aria-valuemin="0" aria-valuemax="100">
-                                  <span data-bind="text: QuestHelper.questList()[$data.index].progressText">0/1000</span>
+                                  <span data-bind="text: QuestHelper.questList()[$data.index].progressText">0 / 1000</span>
                               </div>
                           </div>
                       </td>
-                      <td width="30%" class="p-2">
+                      <td width="30%" class="p-0">
                           <button class="btn btn-sm btn-block p-0"
                                   data-bind='
-                                      click: function(){QuestHelper.questList()[$data.index].endQuest();},
+                                      click: function(){QuestHelper.questList()[$data.index].endQuest()},
                                       text: QuestHelper.questList()[$data.index].isCompleted() ? "Claim" : "Quit",
                                       css: {
                                         "btn-success": QuestHelper.questList()[$data.index].isCompleted(),
