@@ -265,15 +265,15 @@ namespace GameConstants {
         } else if (num >= 1e9) {
             num = Math.floor(num / 1e8);
             num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return num + 'B';
+            return `${num}B`;
         } else if (num >= 1e6) {
             num = Math.floor(num / 1e5);
             num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return num + 'M';
+            return `${num}M`;
         } else if (num >= 1e3) {
             num = Math.floor(num / 1e2);
             num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return num + 'K';
+            return `${num}K`;
         } else {
             return num.toString();
         }
