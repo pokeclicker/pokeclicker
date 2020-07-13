@@ -44,13 +44,13 @@ class OakItem extends ExpUpgrade {
     }
 
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         const json = super.toJSON();
         json['isActive'] = this.isActive;
         return json;
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         super.fromJSON(json);
         this.isActive = json['isActive'] ?? this.defaults.isActive;
     }

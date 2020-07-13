@@ -85,14 +85,14 @@ class Shards implements Feature {
     update(delta: number) {
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return {
             'shardWallet': this.shardWallet.map(x => x),
             'shardUpgrades': this.shardUpgrades.map(x => x),
         };
     }
 
-    fromJSON(json: object) {
+    fromJSON(json: Record<string, any>) {
         if (json != null) {
             this.shardWallet = new ArrayOfObservables(json['shardWallet']);
             this.shardUpgrades = new ArrayOfObservables(json['shardUpgrades']);

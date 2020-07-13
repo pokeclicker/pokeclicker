@@ -4,7 +4,7 @@ class BadgeCase implements Feature {
 
     badgeList: ArrayOfObservables<boolean>;
     badgeAmount: number;
-    defaults: object = {};
+    defaults: Record<string, any> = {};
 
     constructor(highestBadge) {
         this.badgeAmount = highestBadge + 1;
@@ -45,7 +45,7 @@ class BadgeCase implements Feature {
         return true;
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }
@@ -55,7 +55,7 @@ class BadgeCase implements Feature {
         }
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return this.badgeList.map(badge => {
             return badge;
         });

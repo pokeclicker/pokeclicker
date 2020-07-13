@@ -1,17 +1,19 @@
+type EmptyCallback = () => void;
+
 class SpecialEvent {
     id: number;
     title: string;
     description: string;
     startTime: Date;
-    startFunction: Function;
+    startFunction: EmptyCallback;
     endTime: Date;
-    endFunction: Function;
+    endFunction: EmptyCallback;
 
     // TODO: only notify once initially until event about to start/end
     notified: SpecialEventNotifiedStatus;
 
 
-    constructor(id: number, title: string, description: string, startTime: Date, startFunction: Function, endTime: Date, endFunction: Function) {
+    constructor(id: number, title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;

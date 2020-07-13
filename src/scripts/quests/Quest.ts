@@ -34,7 +34,7 @@ abstract class Quest {
             }
             const oldLevel = player.questLevel;
             player.questXP += this.xpReward;
-            Notifier.notify({ message: `You have completed your quest and claimed ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success });;
+            Notifier.notify({ message: `You have completed your quest and claimed ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success });
             // Refresh the list each time a player levels up
             if (oldLevel < player.questLevel) {
                 Notifier.notify({ message: 'Your quest level has increased!', type: GameConstants.NotificationOption.success, timeout: 1e4 });

@@ -164,7 +164,7 @@ class Party implements Feature {
         return true;
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }
@@ -182,7 +182,7 @@ class Party implements Feature {
     initialize(): void {
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return {
             caughtPokemon: this._caughtPokemon().map(x => x.toJSON()),
             shinyPokemon: this.shinyPokemon.map(x => x),

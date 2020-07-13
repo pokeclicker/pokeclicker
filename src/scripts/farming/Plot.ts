@@ -40,7 +40,7 @@ class Plot implements Saveable {
         this.timeLeft = Math.max(0, this.timeLeft - seconds);
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }
@@ -51,7 +51,7 @@ class Plot implements Saveable {
         this.timeLeft = json['timeLeft'] ?? this.defaults.timeLeft;
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return {
             isUnlocked: this.isUnlocked,
             boosted: this.boosted,

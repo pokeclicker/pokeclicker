@@ -169,7 +169,7 @@ class Statistics implements Saveable {
         return GameConstants.RegionDungeons.flat().findIndex(d => d == dungeon);
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         const saveObject = {};
 
         for (const prop of this.observables) {
@@ -182,7 +182,7 @@ class Statistics implements Saveable {
 
         for (const object of this.objectObservables) {
             saveObject[object] = {};
-            Object.entries(this[object]).forEach(([key, val]: [string, Function]) => {
+            Object.entries(this[object]).forEach(([key, val]: [string, KnockoutObservable<number>]) => {
                 saveObject[object][key] = val();
             });
         }
@@ -190,7 +190,7 @@ class Statistics implements Saveable {
         return saveObject;
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         if (!json) {
             return;
         }

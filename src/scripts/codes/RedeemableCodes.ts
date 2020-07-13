@@ -1,5 +1,5 @@
 class RedeemableCodes implements Saveable {
-    defaults: object;
+    defaults: Record<string, any>;
     saveKey = 'redeemableCodes';
 
     codeList: RedeemableCode[];
@@ -145,7 +145,7 @@ class RedeemableCodes implements Saveable {
         });
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return this.codeList.reduce(function (res: string[], code: RedeemableCode) {
             if (code.isRedeemed) {
                 res.push(code.name);

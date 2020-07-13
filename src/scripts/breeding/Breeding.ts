@@ -64,7 +64,7 @@ class Breeding implements Feature {
         return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Mystery_egg);
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }
@@ -74,7 +74,7 @@ class Breeding implements Feature {
         if (json['eggList'] == null) {
             this._eggList = this.defaults.eggList;
         } else {
-            const saveEggList: object[] = json['eggList'];
+            const saveEggList: Record<string, any>[] = json['eggList'];
 
             for (let i = 0; i < this._eggList.length; i++) {
                 if (saveEggList[i] != null) {
@@ -87,7 +87,7 @@ class Breeding implements Feature {
     }
 
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         const breedingSave = {};
         breedingSave['eggList'] = this.eggList.map(function (egg: any) {
             return egg() === null ? new Egg() : egg().toJSON();
@@ -219,7 +219,7 @@ class Breeding implements Feature {
         } else {
             return eggCycles * 40;
         }
-    };
+    }
 
     public getEggSlotCost(slot: number): number {
         return 500 * slot;

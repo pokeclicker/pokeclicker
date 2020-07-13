@@ -144,14 +144,14 @@ class Farming implements Feature {
         return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return {
             berryList: this.berryList.map(x => x),
             plotList: this.plotList.map(plot => plot.toJSON()),
         };
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }
@@ -169,7 +169,7 @@ class Farming implements Feature {
         if (savedPlots == null) {
             this.plotList = new ArrayOfObservables(this.defaults.plotList);
         } else {
-            (savedPlots as object[]).forEach((value: object, index: number) => {
+            (savedPlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
                 const plot: Plot = new Plot(false, false, BerryType.None, 0);
                 plot.fromJSON(value);
                 this.plotList[index] = plot;

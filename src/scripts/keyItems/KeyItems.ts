@@ -4,7 +4,7 @@ class KeyItems implements Feature {
 
     itemList: KeyItem[];
 
-    defaults: object;
+    defaults: Record<string, any>;
 
     constructor() {
         this.itemList = [];
@@ -62,7 +62,7 @@ class KeyItems implements Feature {
         return true;
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         for (const key in json) {
             if (json.hasOwnProperty(key)) {
                 if (json[key] === true) {
@@ -82,7 +82,7 @@ class KeyItems implements Feature {
         }
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         const save = {};
         for (let i = 0; i < this.itemList.length; i++) {
             save[KeyItems.KeyItem[this.itemList[i].name]] = this.itemList[i].isUnlocked;

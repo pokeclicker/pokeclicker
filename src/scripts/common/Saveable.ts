@@ -1,8 +1,8 @@
 interface Saveable {
     saveKey: string;
-    defaults: object;
+    defaults: Record<string, any>;
 
-    toJSON(): object ;
+    toJSON(): Record<string, any> ;
 
-    fromJSON(json: object): void;
+    fromJSON(json: Record<string, any>): void;
 }

@@ -29,13 +29,13 @@ class ExpUpgrade extends Upgrade {
         return this.exp >= this.expList[this.level];
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         const json = super.toJSON();
         json['exp'] = this.exp;
         return json;
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         super.fromJSON(json);
         this.exp = json['exp'] ?? this.defaults.exp;
     }

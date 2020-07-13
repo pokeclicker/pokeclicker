@@ -5,7 +5,7 @@ class OakItems implements Feature {
     itemList: OakItem[];
     unlockRequirements: number[];
 
-    defaults: object;
+    defaults: Record<string, any>;
 
     constructor(unlockRequirements: number[]) {
         this.itemList = [];
@@ -75,7 +75,7 @@ class OakItems implements Feature {
         return this.activeCount() < this.maxActiveCount();
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         for (const key in json) {
             if (json.hasOwnProperty(key)) {
                 this.itemList[OakItems.OakItem[key]].fromJSON(json[key]);
@@ -83,7 +83,7 @@ class OakItems implements Feature {
         }
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         const save = {};
         for (let i = 0; i < this.itemList.length; i++) {
             save[OakItems.OakItem[this.itemList[i].name]] = this.itemList[i].toJSON();

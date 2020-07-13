@@ -71,14 +71,14 @@ class Upgrade implements Saveable {
         this.level = this.level + 1;
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }
         this.level = json['level'] ?? this.defaults.level;
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return {
             level: this.level,
         };

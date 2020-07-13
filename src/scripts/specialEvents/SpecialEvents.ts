@@ -1,11 +1,11 @@
 class SpecialEvents implements Feature {
     name = 'Events';
     saveKey = 'events';
-    defaults: object;
+    defaults: Record<string, any>;
 
     static events = [];
 
-    static newEvent(id: number, title: string, description: string, startTime: Date, startFunction: Function, endTime: Date, endFunction: Function) {
+    static newEvent(id: number, title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
         // Check if the event exist before adding it again
         if (!SpecialEvents.events.find(event => event.id == id)) {
             SpecialEvents.events.push(new SpecialEvent(id, title, description, startTime, startFunction, endTime, endFunction));

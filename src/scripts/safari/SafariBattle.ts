@@ -265,7 +265,7 @@ class SafariBattle {
             }, time);
         }
         return p;
-    };
+    }
 }
 
 namespace SafariBattle {

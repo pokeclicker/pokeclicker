@@ -150,7 +150,7 @@ class MapHelper {
             return false;
         }
         return town.isUnlocked();
-    };
+    }
 
     public static moveToTown(townName: string) {
         if (MapHelper.accessToTown(townName)) {
@@ -199,7 +199,7 @@ class MapHelper {
 
             Notifier.notify({ message: `You don't have access to that location yet.${reqsList}`, type: GameConstants.NotificationOption.warning });
         }
-    };
+    }
 
     public static validRoute(route = 0, region: GameConstants.Region = 0): boolean {
         return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];

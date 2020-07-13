@@ -195,7 +195,7 @@ class Underground {
         return effect * this.getMaxEnergy();
     }
 
-    public static load(saveObject: object): void {
+    public static load(saveObject: Record<string, any>): void {
         if (!saveObject) {
             console.warn('Underground not loaded.');
             return;
@@ -210,7 +210,7 @@ class Underground {
         this.energy = saveObject['energy'] || 0;
     }
 
-    public static save(): object {
+    public static save(): Record<string, any> {
         const undergroundSave = {};
         const upgradesSave = {};
         for (const item in Underground.Upgrades) {

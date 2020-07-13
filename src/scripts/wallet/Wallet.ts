@@ -78,11 +78,11 @@ class Wallet implements Feature {
         }
 
         this.currencies[amount.currency] += amount.amount;
-    };
+    }
 
     public hasAmount(amount: Amount) {
         return this.currencies[amount.currency] >= amount.amount;
-    };
+    }
 
     public loseAmount(amount: Amount) {
         if (isNaN(amount.amount) || amount.amount <= 0) {
@@ -91,7 +91,7 @@ class Wallet implements Feature {
         }
 
         this.currencies[amount.currency] -= amount.amount;
-    };
+    }
 
 
     initialize(): void {
@@ -101,7 +101,7 @@ class Wallet implements Feature {
         return true;
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }
@@ -120,7 +120,7 @@ class Wallet implements Feature {
         }
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return {
             'currencies': [
                 this.currencies[GameConstants.Currency.money],

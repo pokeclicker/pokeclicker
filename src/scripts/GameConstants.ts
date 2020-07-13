@@ -220,15 +220,15 @@ namespace GameConstants {
         Very = 2
     }
 
-    export function humanifyString(str: string) {
+    export function humanifyString(str: string): string {
         return str.replace(/_/g, ' ');
     }
 
-    export function camelCaseToString(str: string) {
+    export function camelCaseToString(str: string): string {
         return str.replace(/([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase())));
     }
 
-    export function formatTime(time) {
+    export function formatTime(time: number | Date): string {
         if (time == 0) {
             return 'Ready';
         }
@@ -294,7 +294,7 @@ namespace GameConstants {
         text: string;
         value: any;
 
-        constructor(text, value) {
+        constructor(text: string, value: any) {
             this.text = text;
             this.value = value;
         }
@@ -307,15 +307,15 @@ namespace GameConstants {
         2: [101, 134],
     };
 
-    export function randomIntBetween(min: number, max: number) {
+    export function randomIntBetween(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    export function randomElement(array: any[]) {
+    export function randomElement(array: any[]): any {
         return array[GameConstants.randomIntBetween(0, array.length - 1)];
     }
 
-    export function clipNumber(num: number, min: number, max: number) {
+    export function clipNumber(num: number, min: number, max: number): number {
         return Math.min(Math.max(num, min), max);
     }
 

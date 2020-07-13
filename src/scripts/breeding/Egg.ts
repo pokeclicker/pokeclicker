@@ -114,7 +114,7 @@ class Egg implements Saveable {
         App.game.oakItems.use(OakItems.OakItem.Blaze_Cassette);
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return {
             totalSteps: this.totalSteps,
             steps: this.steps(),
@@ -126,7 +126,7 @@ class Egg implements Saveable {
 
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         this.totalSteps = json['totalSteps'];
         this.steps = ko.observable(json['steps']);
         this.shinySteps = json['shinySteps'];

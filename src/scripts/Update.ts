@@ -1,5 +1,5 @@
 class Update implements Saveable {
-    defaults: object;
+    defaults: Record<string, any>;
     saveKey = 'update';
 
     version = '0.4.8';
@@ -155,7 +155,7 @@ class Update implements Saveable {
         this.check();
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return {
             version: this.version,
         };

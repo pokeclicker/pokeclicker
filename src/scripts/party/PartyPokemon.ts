@@ -49,7 +49,7 @@ class PartyPokemon implements Saveable {
             }
         }
         return this.level;
-    };
+    }
 
     public gainExp(exp: number) {
         this.exp += exp;
@@ -94,7 +94,7 @@ class PartyPokemon implements Saveable {
         return false;
     }
 
-    public fromJSON(json: object): void {
+    public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }

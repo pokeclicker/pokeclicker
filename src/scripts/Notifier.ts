@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/camelcase: off */
 class Notifier {
 
     public static notify({ message, type = GameConstants.NotificationOption.primary, title = '', timeout = 3000, time = 'just now' }: { message: string; type?: GameConstants.NotificationOption; title?: string; timeout?: number; time?: string }) {

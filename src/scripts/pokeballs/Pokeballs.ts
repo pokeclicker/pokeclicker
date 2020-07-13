@@ -91,7 +91,7 @@ class Pokeballs implements Feature {
         return true;
     }
 
-    fromJSON(json: object): void {
+    fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
         }
@@ -113,7 +113,7 @@ class Pokeballs implements Feature {
         this.alreadyCaughtShinySelection = json['alreadyCaughtShinySelection'] ?? this.defaults.alreadyCaughtShinySelection;
     }
 
-    toJSON(): object {
+    toJSON(): Record<string, any> {
         return {
             'pokeballs': [
                 this.pokeballs[GameConstants.Pokeball.Pokeball],

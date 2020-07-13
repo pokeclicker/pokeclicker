@@ -28,7 +28,7 @@ class PokedexHelper {
         });
     }
 
-    public static filteredList: KnockoutObservableArray<object> = ko.observableArray([]);
+    public static filteredList: KnockoutObservableArray<Record<string, any>> = ko.observableArray([]);
 
     public static populateTypeFilters() {
         let options = $('#pokedex-filter-type1');
@@ -50,7 +50,7 @@ class PokedexHelper {
         PokedexHelper.filteredList(PokedexHelper.getList());
     }
 
-    public static getList(): Array<object> {
+    public static getList(): Array<Record<string, any>> {
         const filter = PokedexHelper.getFilters();
 
         const highestEncountered = App.game.statistics.pokemonEncountered.highestID;

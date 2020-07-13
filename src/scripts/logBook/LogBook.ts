@@ -1,7 +1,7 @@
 class LogBook implements Feature {
     name = 'Log Book';
     saveKey = 'logbook';
-    defaults: object;
+    defaults: Record<string, any>;
 
     public logs: ObservableArrayProxy<LogBookLog> = new ObservableArrayProxy([]);
 

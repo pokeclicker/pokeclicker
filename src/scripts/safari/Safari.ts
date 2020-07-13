@@ -301,7 +301,7 @@ class Safari {
                 } else {
                     Safari.queue[0] = direction;
                 }
-            };
+            }
             Safari.nextDirection = direction;
             Safari.walking = true;
         }
@@ -315,7 +315,7 @@ class Safari {
         }
         if (!Safari.queue[0]) {
             Safari.walking = false;
-        };
+        }
     }
 
     private static checkBattle(): boolean {
