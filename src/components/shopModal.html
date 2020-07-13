@@ -7,18 +7,21 @@
                 <h4>
                     <img title="Money" src="assets/images/currency/money.png">
                     <span id="playerMoney"
-                          data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US')">0</span>
+                          data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]),
+                              tooltip: { title: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US'), trigger: 'hover', animation: false }">0</span>
                 </h4>
                 <h4>
                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon"
                          src="assets/images/currency/dungeonToken.png">
                     <span id="playerMoneyDungeon"
-                          data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US')">0</span>
+                          data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]),
+                              tooltip: { title: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US'), trigger: 'hover', animation: false }">0</span>
                 </h4>
                 <h4>
                     <img title="Quest points" src="assets/images/currency/questPoint.png">
                     <span id="playerMoneyQuest"
-                          data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US')">0</span>
+                          data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint]),
+                              tooltip: { title: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US'), trigger: 'hover', animation: false }">0</span>
                 </h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
