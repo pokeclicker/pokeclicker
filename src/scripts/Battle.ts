@@ -159,7 +159,8 @@ class Battle {
     }
 
     public static catchPokemon() {
-        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(player.route(), player.region));
+        const route = player.route() || player.town()?.dungeon()?.itemRoute || 1;
+        App.game.wallet.gainDungeonTokens(PokemonFactory.routeDungeonTokens(route, player.region));
         App.game.oakItems.use(OakItems.OakItem.Magic_Ball);
         App.game.party.gainPokemonById(this.enemyPokemon().id, this.enemyPokemon().shiny);
     }
