@@ -63,7 +63,7 @@
     "@types/knockout": "^3.4.66",
     "@typescript-eslint/eslint-plugin": "^2.15.0",
     "@typescript-eslint/parser": "^2.15.0",
-    "bootstrap": "^4.4.1",
+    "bootstrap": "^4.5.0",
     "eslint": "^6.8.0",
     "jquery": "^3.5.0",
     "knockout": "^3.5.1",
