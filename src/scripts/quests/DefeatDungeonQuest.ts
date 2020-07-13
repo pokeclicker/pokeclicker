@@ -3,7 +3,7 @@
 class DefeatDungeonQuest extends Quest implements QuestInterface {
     constructor(dungeon: string, amount: number) {
         super(amount, DefeatDungeonQuest.calcReward(dungeon, amount));
-        this.description = `Defeat the ${dungeon} dungeon ${amount} times.`;
+        this.description = `Defeat the ${dungeon} dungeon ${amount.toLocaleString('en-US')} times.`;
         this.questFocus = App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)];
     }
 

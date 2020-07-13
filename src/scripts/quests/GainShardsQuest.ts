@@ -3,7 +3,7 @@
 class GainShardsQuest extends Quest implements QuestInterface {
     constructor(type: PokemonType, amount: number) {
         super(amount, GainShardsQuest.calcReward(type, amount));
-        this.description = `Gain ${amount} ${PokemonType[type]} shards.`;
+        this.description = `Gain ${amount.toLocaleString('en-US')} ${PokemonType[type]} shards.`;
         this.questFocus = App.game.statistics.totalShards[type];
     }
 
