@@ -2,7 +2,8 @@ class Update implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'update';
 
-    version = '0.4.9';
+    // Loaded from package.json
+    version = '$VERSION';
     saveVersion = '0.0.0';
 
     constructor() {

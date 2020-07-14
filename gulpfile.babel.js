@@ -13,6 +13,7 @@ const ejs = require("gulp-ejs");
 const plumber = require("gulp-plumber");
 const replace = require('gulp-replace');
 const connect = require('gulp-connect');
+const version = process.env.npm_package_version || '0.0.0';
 
 /**
  * Push build to gh-pages
@@ -76,6 +77,7 @@ gulp.task('compile-html', (done) => {
     if (process.env.HEROKU) {
         stream.pipe(replace('<!--$DEV_BANNER-->', '@import "developmentBanner.html"'))
     }
+    stream.pipe(replace('$VERSION', version));
     stream.pipe(replace('$INIT_SENTRY', process.env.HEROKU !== undefined));
     stream.pipe(replace('$INIT_GOOGLE_ANALYTICS', process.env.HEROKU !== undefined));
 
@@ -102,6 +104,7 @@ gulp.task('html', () => {
 gulp.task('scripts', () => {
     const tsProject = typescript.createProject('tsconfig.json');
     return tsProject.src()
+        .pipe(replace('$VERSION', version))
         .pipe(tsProject())
         .pipe(gulp.dest(dests.scripts))
         .pipe(browserSync.reload({stream: true}));
