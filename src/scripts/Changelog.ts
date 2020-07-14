@@ -36,6 +36,7 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, 'Updated Bootstrap, TypeScript and other dependencies, please report any problems you may notice'),
     new Changelog(changelogType.CHANGE, 'Limit maximum Quest Points for Dungeon and Gym quests'),
     new Changelog(changelogType.CHANGE, 'Updated quest list layout'),
+    new Changelog(changelogType.CHANGE, 'Format numbers in shop and pokeball selector'),
     new Changelog(changelogType.FIXED, 'Dungeons should now award Dungeon Tokens when catching a Pokémon'),
     new Changelog(changelogType.FIXED, 'Badge names should display correctly now'),
 
