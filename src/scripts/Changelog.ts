@@ -32,6 +32,7 @@ const changelogItems = [
     // v0.4.9
     new Changelog(changelogType.UPDATE, 'v0.4.9'),
     new Changelog(changelogType.NEW, 'Added option to disable found berries notifications'),
+    new Changelog(changelogType.NEW, 'Added different background images when battling Pokémon depending on route/dungeon'),
     new Changelog(changelogType.CHANGE, 'Updated Bootstrap, TypeScript and other dependencies, please report any problems you may notice'),
     new Changelog(changelogType.CHANGE, 'Limit maximum Quest Points for Dungeon and Gym quests'),
     new Changelog(changelogType.FIXED, 'Dungeons should now award Dungeon Tokens when catching a Pokémon'),
