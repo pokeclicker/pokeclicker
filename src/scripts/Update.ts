@@ -2,7 +2,7 @@ class Update implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'update';
 
-    version = '0.4.8';
+    version = '0.4.9';
     saveVersion = '0.0.0';
 
     constructor() {
