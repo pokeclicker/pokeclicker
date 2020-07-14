@@ -472,38 +472,50 @@ namespace GameConstants {
 
     export const WaterAreas = {
         0: new Set([19, 20, 21]),
-        1: new Set([40, 41, 'Slowpoke Well']),
-        2: new Set([105, 106, 107, 108, 109, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134]),
+        1: new Set([40, 41, 'Slowpoke Well', 'Whirl Islands']),
+        2: new Set([105, 106, 107, 108, 109, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Shoal Cave', 'Seafloor Cavern']),
     };
 
     export const IceAreas = {
         0: new Set(['Seafoam Islands']),
-        1: new Set([]),
+        1: new Set(['Ice Path']),
         2: new Set([]),
     };
 
     export const ForestAreas = {
         0: new Set(['Viridian Forest']),
-        1: new Set([]),
-        2: new Set([]),
+        1: new Set(['Ilex Forest']),
+        2: new Set(['Petalburg Woods']),
     };
 
     export const CaveAreas = {
         0: new Set(['Digletts Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road']),
-        1: new Set(['Ruins of Alph', 'Union Cave']),
-        2: new Set([]),
+        1: new Set(['Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
+        2: new Set(['Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
     };
 
     export const GemCaveAreas = {
         0: new Set(['Cerulean Cave']),
-        1: new Set([]),
-        2: new Set([]),
+        1: new Set(['Mt Silver']),
+        2: new Set(['Cave of Origin', 'Sky Pillar']),
     };
 
     export const PowerPlantAreas = {
-        0: new Set(['Power Plant', 'Pokemon Tower', 'Pokemon Mansion']),
-        1: new Set([]),
+        0: new Set(['Power Plant']),
+        1: new Set(['Tin Tower']),
         2: new Set([]),
+    };
+
+    export const MansionAreas = {
+        0: new Set(['Pokemon Mansion']),
+        1: new Set(['Burned Tower']),
+        2: new Set(['Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
+    };
+
+    export const GraveyardAreas = {
+        0: new Set(['Pokemon Tower']),
+        1: new Set([]),
+        2: new Set(['Mt. Pyre']),
     };
 
     export const routeDungeonRequirements = {
