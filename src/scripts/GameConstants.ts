@@ -221,11 +221,11 @@ namespace GameConstants {
     }
 
     export function humanifyString(str: string): string {
-        return str.replace(/_/g, ' ');
+        return str.replace(/[_-]+/g, ' ');
     }
 
     export function camelCaseToString(str: string): string {
-        return str.replace(/([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase())));
+        return str.replace(/[\s_-]?([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase()))).trim();
     }
 
     export function formatTime(time: number | Date): string {
