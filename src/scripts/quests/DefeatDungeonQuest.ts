@@ -28,6 +28,6 @@ class DefeatDungeonQuest extends Quest implements QuestInterface {
         const routeKillsPerDungeon = dungeonList[dungeon].tokenCost / tokens;
         const collectTokensReward = routeKillsPerDungeon * GameConstants.DEFEAT_POKEMONS_BASE_REWARD * amount;
 
-        return Math.ceil(completeDungeonsReward + collectTokensReward);
+        return Math.min(5000, Math.ceil(completeDungeonsReward + collectTokensReward));
     }
 }
