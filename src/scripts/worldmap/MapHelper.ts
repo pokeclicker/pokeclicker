@@ -98,6 +98,24 @@ class MapHelper {
         return this.routeExist(route, region) && this.hasBadgeReq(route, region) && this.hasDungeonReq(route, region) && this.hasRouteKillReq(route, region);
     };
 
+    public static calculateBattleCssClass(): string {
+        const area = player.route() || player.town()?.name() || undefined;
+
+        if (GameConstants.WaterAreas[player.region].has(area)) {
+            return 'water';
+        } else if (GameConstants.IceAreas[player.region].has(area)) {
+            return 'ice';
+        } else if (GameConstants.ForestAreas[player.region].has(area)) {
+            return 'forest';
+        } else if (GameConstants.CaveAreas[player.region].has(area)) {
+            return 'cave';
+        } else if (GameConstants.GemCaveAreas[player.region].has(area)) {
+            return 'cave-gem';
+        } else if (GameConstants.PowerPlantAreas[player.region].has(area)) {
+            return 'power-plant';
+        }
+    }
+
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
         let cls;
 
@@ -114,7 +132,7 @@ class MapHelper {
         }
 
         // Water routes
-        if (GameConstants.WaterRoutes[region].has(route)) {
+        if (GameConstants.WaterAreas[region].has(route)) {
             cls = `${cls} waterRoute`;
         }
 

@@ -470,10 +470,40 @@ namespace GameConstants {
         },
     };
 
-    export const WaterRoutes = {
-        0: new Set([19,20,21]),
-        1: new Set([40,41]),
-        2: new Set([105,106,107,108,109,122,124,125,126,127,128,129,130,131,132,133,134]),
+    export const WaterAreas = {
+        0: new Set([19, 20, 21]),
+        1: new Set([40, 41, 'Slowpoke Well']),
+        2: new Set([105, 106, 107, 108, 109, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134]),
+    };
+
+    export const IceAreas = {
+        0: new Set(['Seafoam Islands']),
+        1: new Set([]),
+        2: new Set([]),
+    };
+
+    export const ForestAreas = {
+        0: new Set(['Viridian Forest']),
+        1: new Set([]),
+        2: new Set([]),
+    };
+
+    export const CaveAreas = {
+        0: new Set(['Digletts Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road']),
+        1: new Set(['Ruins of Alph', 'Union Cave']),
+        2: new Set([]),
+    };
+
+    export const GemCaveAreas = {
+        0: new Set(['Cerulean Cave']),
+        1: new Set([]),
+        2: new Set([]),
+    };
+
+    export const PowerPlantAreas = {
+        0: new Set(['Power Plant', 'Pokemon Tower', 'Pokemon Mansion']),
+        1: new Set([]),
+        2: new Set([]),
     };
 
     export const routeDungeonRequirements = {
