@@ -318,8 +318,18 @@ img {
   background-size: cover;
   background-position: bottom;
 
+  &.forest {
+      background-image: url(../assets/images/battleBackground/forest.png);
+      background-position: top;
+  }
+
   &.water {
       background-image: url(../assets/images/battleBackground/water.png);
+      background-position: top;
+  }
+
+  &.ice {
+      background-image: url(../assets/images/battleBackground/ice.png);
       background-position: top;
   }
 
@@ -328,8 +338,13 @@ img {
       background-position: top;
   }
 
-  &.gem {
+  &.gem, &.cave-gem {
       background-image: url(../assets/images/battleBackground/cave-gem.png);
+      background-position: center;
+  }
+
+  &.power-plant {
+      background-image: url(../assets/images/battleBackground/power-plant.png);
       background-position: center;
   }
 
