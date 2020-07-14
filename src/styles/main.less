@@ -314,9 +314,24 @@ img {
 #routeBattleView {
   color: whitesmoke;
 
-  background-image: url(../assets/images/battle-background.png);
+  background-image: url(../assets/images/battleBackground/default.png);
   background-size: cover;
   background-position: bottom;
+
+  &.water {
+      background-image: url(../assets/images/battleBackground/water.png);
+      background-position: top;
+  }
+
+  &.cave {
+      background-image: url(../assets/images/battleBackground/cave.png);
+      background-position: top;
+  }
+
+  &.gem {
+      background-image: url(../assets/images/battleBackground/cave-gem.png);
+      background-position: center;
+  }
 
   h2 {
     font-size: 2rem;
