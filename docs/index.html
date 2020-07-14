@@ -504,8 +504,8 @@
             data-bind="tooltip: { title: 'Select which Pokéball to use on Pokémon depending on their status', trigger: 'hover', placement:'left' }">
         ?
     </button>
-    <div id="pokeballSelectorBody" class="card-body p-0 show">
-        <table class="table table-sm">
+    <div id="pokeballSelectorBody" class="card-body p-0 show table-responsive">
+        <table class="table table-sm m-0">
             <thead>
             <tr>
                 <th width="20%" title="Previously captured Pokémon will use this ball selection">Caught</th>
@@ -539,7 +539,7 @@
                  click: function(){App.game.pokeballs.alreadyCaughtShinySelection = $data.ball}, css: {'pokeball-selected': App.game.pokeballs.alreadyCaughtShinySelection === $data.ball}"/>
     </td>
     <td>
-        <span data-bind="text: $data.amount"></span>
+        <span data-bind="text: GameConstants.formatNumber($data.amount), tooltip: {title: $data.amount.toLocaleString('en-US'), trigger: 'hover', animation: false}"></span>
     </td>
     <td>
         <img class="pokeball-small clickable"
@@ -682,7 +682,8 @@
                 <!--Use the base battle layout for fighting and dungeons.-->
 
                 <div id="routeBattleView" class="card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town)">
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town),
+                        class: MapHelper.calculateBattleCssClass()">
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 220px; display: block;">
                             <h2 class="pageItemTitle" style="display: block;">
@@ -4756,19 +4757,19 @@ data-bind="visible: App.game.oakItems.canAccess()">
                       <td colspan="2" data-bind="text: QuestHelper.questList()[$data.index].description"></td>
                   </tr>
                   <tr>
-                      <td class="p-2">
+                      <td width="70%" class="p-0">
                           <div class="progress p-0">
-                              <div class="progress-bar bg-success" role="progressbar"
+                              <div class="progress-bar bg-primary" role="progressbar"
                                   data-bind="attr:{ style: 'width:' + (QuestHelper.questList()[$data.index].progress() * 100) + '%'}"
                                   aria-valuemin="0" aria-valuemax="100">
-                                  <span data-bind="text: QuestHelper.questList()[$data.index].progressText">0/1000</span>
+                                  <span data-bind="text: QuestHelper.questList()[$data.index].progressText">0 / 1000</span>
                               </div>
                           </div>
                       </td>
-                      <td width="30%" class="p-2">
+                      <td width="30%" class="p-0">
                           <button class="btn btn-sm btn-block p-0"
                                   data-bind='
-                                      click: function(){QuestHelper.questList()[$data.index].endQuest();},
+                                      click: function(){QuestHelper.questList()[$data.index].endQuest()},
                                       text: QuestHelper.questList()[$data.index].isCompleted() ? "Claim" : "Quit",
                                       css: {
                                         "btn-success": QuestHelper.questList()[$data.index].isCompleted(),
@@ -4883,18 +4884,21 @@ data-bind="visible: App.game.oakItems.canAccess()">
                 <h4>
                     <img title="Money" src="assets/images/currency/money.png">
                     <span id="playerMoney"
-                          data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US')">0</span>
+                          data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]),
+                              tooltip: { title: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US'), trigger: 'hover', animation: false }">0</span>
                 </h4>
                 <h4>
                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon"
                          src="assets/images/currency/dungeonToken.png">
                     <span id="playerMoneyDungeon"
-                          data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US')">0</span>
+                          data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]),
+                              tooltip: { title: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US'), trigger: 'hover', animation: false }">0</span>
                 </h4>
                 <h4>
                     <img title="Quest points" src="assets/images/currency/questPoint.png">
                     <span id="playerMoneyQuest"
-                          data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US')">0</span>
+                          data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint]),
+                              tooltip: { title: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US'), trigger: 'hover', animation: false }">0</span>
                 </h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
@@ -5227,6 +5231,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                       <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
                       <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
                       <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
+                      <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableBerryNotifications')}"></tr>
                       <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                     </tbody>
                 </table>
