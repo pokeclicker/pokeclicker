@@ -19,7 +19,6 @@ class Preload {
     }
 
     public static updateProgressBar() {
-        console.log('updating progress bar');
         const toLoad = this.itemsToLoad.length;
         const loaded = this.itemsLoaded.length;
         const errored = this.itemsErrored.length;
