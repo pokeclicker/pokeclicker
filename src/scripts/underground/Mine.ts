@@ -166,6 +166,7 @@ class Mine {
                 }
             }
         }
+        App.game.oakItems.use(OakItems.OakItem.Cell_Battery);
         return true;
     }
 
@@ -174,7 +175,6 @@ class Mine {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
             GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
-            App.game.oakItems.use(OakItems.OakItem.Cell_Battery);
         }
     }
 

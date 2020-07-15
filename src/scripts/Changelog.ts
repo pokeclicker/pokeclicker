@@ -29,6 +29,10 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.11
+    new Changelog(changelogType.UPDATE, 'v0.4.11'),
+    new Changelog(changelogType.CHANGE, 'The Cell Battery Oak Item will now gain points each time you find an item'),
+
     // v0.4.10
     new Changelog(changelogType.UPDATE, 'v0.4.10 - Minor update'),
     new Changelog(changelogType.NEW, 'Added preload progress indicator'),
