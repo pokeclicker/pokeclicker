@@ -10,7 +10,7 @@ class Save {
         localStorage.setItem('save', JSON.stringify(this.getSaveObject()));
 
         this.counter = 0;
-        console.log('%cGame saved', 'color:skyblue;font-weight:900;');
+        console.log('%cGame saved', 'color:#3498db;font-weight:900;');
     }
 
     public static getSaveObject() {

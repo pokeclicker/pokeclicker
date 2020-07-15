@@ -106,7 +106,7 @@ class Game {
     }
 
     start() {
-        console.log('%cGame started', 'color:limegreen;font-weight:900;');
+        console.log(`[${new Date().toISOString()}] %cGame started`, 'color:#2ecc71;font-weight:900;');
         if (player.starter === GameConstants.Starter.None) {
             StartSequenceRunner.start();
         }

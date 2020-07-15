@@ -9,6 +9,7 @@ class App {
         }
 
         Preload.load(App.debug).then(() => {
+            console.log(`[${new Date().toISOString()}] %cLoading Game Data..`, 'color:#8e44ad;font-weight:900;');
             UndergroundItem.initialize();
             App.game = new Game(
                 new Update(),

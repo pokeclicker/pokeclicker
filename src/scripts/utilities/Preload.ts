@@ -9,6 +9,7 @@ class Preload {
     }
 
     public static load(skipWait = false) {
+        console.log(`[${new Date().toISOString()}] %cPreloading Images..`, 'color:#8e44ad;font-weight:900;');
         if (skipWait) {
             return new Promise(resolve => {
                 //If you want to skip waiting, resolve immediately
