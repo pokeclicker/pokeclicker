@@ -154,6 +154,13 @@ class MapHelper {
                 }
                 return 'dungeon unlockedDungeon';
             }
+            if (gymList.hasOwnProperty(town)) {
+                // If defeated the previous gym, but not this one
+                const gymIndex = Statistics.getGymIndex(town);
+                if ((gymIndex == 0 || App.game.statistics.gymsDefeated[gymIndex - 1]()) && !App.game.statistics.gymsDefeated[gymIndex]()) {
+                    return 'city unlockedUnfinishedTown';
+                }
+            }
             return 'city unlockedTown';
         }
         if (dungeonList.hasOwnProperty(town)) {
