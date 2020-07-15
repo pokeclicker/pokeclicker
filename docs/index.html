@@ -63,7 +63,7 @@
     <script src="libs/knockout-latest.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js"></script>
+    <script src="scripts/script.min.js?v=0.4.10"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -79,7 +79,7 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.4.10" rel="stylesheet">
 
     <!--Sentry-->
     <script src="https://browser.sentry-cdn.com/5.10.2/bundle.min.js" integrity="sha384-ssBfXiBvlVC7bdA/VX03S88B5MwXQWdnpJRbUYFPgswlOBwETwTp6F3SMUNpo9M9" crossorigin="anonymous">
@@ -141,11 +141,18 @@
                 </div>
             </div>
         </div>
-        <img src="assets/images/pokeball/Pokeball.png" class="loader-pokeball"/>
-
+        <div class="loader-content">
+            <img src="assets/images/pokeball/Pokeball.png" class="loader-pokeball"/>
+            <div class="progress">
+                <div id="preload-progress-bar" class="progress-bar bg-primary" role="progressbar" style="width:0%;">
+                    <span id="preload-progress-text">Loading...</span>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
+
 
 <!-- Game menu-->
 <div class="dropdown clearfix" style="position:absolute; right:0; top:0; z-index: 100;">
