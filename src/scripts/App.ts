@@ -9,7 +9,7 @@ class App {
         }
 
         Preload.load(App.debug).then(() => {
-            console.log(`[${new Date().toISOString()}] %cLoading Game Data..`, 'color:#8e44ad;font-weight:900;');
+            console.log(`[${GameConstants.formatDate(new Date())}] %cLoading Game Data..`, 'color:#8e44ad;font-weight:900;');
             UndergroundItem.initialize();
             App.game = new Game(
                 new Update(),
@@ -28,6 +28,7 @@ class App {
                 new SpecialEvents()
             );
 
+            console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#8e44ad;font-weight:900;');
             Notifier.notify({ message: 'Game loaded', type: GameConstants.NotificationOption.info });
 
             GameController.bindToolTips();

@@ -18,7 +18,8 @@ namespace GameConstants {
     export const GYM_COUNTDOWN = 1000;
     export const GYM_TICK = 10;
     export const ACHIEVEMENT_TICK = 1000;
-    export const MIN_LOAD_TIME = 500;
+    export const MIN_LOAD_TIME = 500; // 0.5 Seconds
+    export const MAX_LOAD_TIME = 15000; // 15 Seconds
 
     export const MAX_AVAILABLE_REGION = 2; // Hoenn
 
@@ -226,6 +227,10 @@ namespace GameConstants {
 
     export function camelCaseToString(str: string): string {
         return str.replace(/[\s_-]?([A-Z])/g, ' $1').replace(/\b\w/g, (w) => (w.replace(/\w/, (c) => c.toUpperCase()))).trim();
+    }
+
+    export function formatDate(date: Date): string {
+        return date.toISOString().replace(/T/, ' ').replace(/.\d+Z/,'');
     }
 
     export function formatTime(time: number | Date): string {

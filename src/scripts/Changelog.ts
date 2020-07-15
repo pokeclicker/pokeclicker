@@ -29,6 +29,11 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.10
+    new Changelog(changelogType.UPDATE, 'v0.4.10 - Minor update'),
+    new Changelog(changelogType.NEW, 'Added preload progress indicator'),
+    new Changelog(changelogType.NEW, 'Game will still load if not all the images preload correctly'),
+
     // v0.4.9
     new Changelog(changelogType.UPDATE, 'v0.4.9'),
     new Changelog(changelogType.NEW, 'Added option to disable found berries notifications'),
