@@ -37,9 +37,7 @@
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
                                         <span style="float:right; margin-top:8px" data-bind="template: { name: 'caughtStatusTemplate', data: {'status':
-                                            PartyController.getCaughtStatusByName(
-                                                PokemonHelper.getEvolution($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()])
-                                                )
+                                            PartyController.getEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()])
                                             }}"></span>
                                     </button>
                                 </div>

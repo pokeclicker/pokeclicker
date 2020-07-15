@@ -3,7 +3,7 @@
 
 class PokemonHelper {
 
-    public static getPokemonsWithEvolution(evoType: GameConstants.StoneType) {
+    public static getPokemonsWithEvolution(evoType: GameConstants.StoneType): PartyPokemon[] {
         return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
             if (!partyPokemon.evolutions) {
                 return false;
@@ -17,13 +17,12 @@ class PokemonHelper {
         });
     }
 
-    public static getEvolution(id: number, evoType: GameConstants.StoneType) {
-        for (const pokemon of App.game.party.caughtPokemon) {
-            if (pokemon.id == id) {
-                for (const evolution of pokemon.evolutions) {
-                    if (evolution instanceof StoneEvolution && evolution.stone == evoType) {
-                        return evolution.evolvedPokemon;
-                    }
+    public static getEvolution(id: number, evoType: GameConstants.StoneType): string {
+        const pokemon = App.game.party.caughtPokemon.find(p => p.id == id);
+        if (pokemon) {
+            for (const evolution of pokemon.evolutions) {
+                if (evolution instanceof StoneEvolution && evolution.stone == evoType) {
+                    return evolution.evolvedPokemon;
                 }
             }
         }
