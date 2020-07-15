@@ -7,7 +7,10 @@ class Update implements Saveable {
     saveVersion = '0.0.0';
 
     constructor() {
-        this.fromJSON(this.getSaveData().update, true);
+        const saveData = this.getSaveData();
+        if (saveData) {
+            this.fromJSON(saveData.update, true);
+        }
     }
 
     isOlderVersion(version, compareVersion) {
@@ -20,6 +23,9 @@ class Update implements Saveable {
         const saveData = this.getSaveData();
         const settingsData = this.getSettingsData();
         const backupSaveData = {player: playerData, save: saveData};
+        if (!playerData || !saveData || !settingsData) {
+            return;
+        }
 
         // v0.4.0
         if (this.isOlderVersion(this.saveVersion, '0.4.0')) {
@@ -92,9 +98,9 @@ class Update implements Saveable {
         try {
             playerData = JSON.parse(localStorage.player);
         } catch (err) {
-            console.error('Error getting player data', err);
+            console.warn('Error getting player data', err);
         } finally {
-            return playerData || {};
+            return playerData;
         }
     }
 
@@ -111,9 +117,9 @@ class Update implements Saveable {
         try {
             saveData = JSON.parse(localStorage.save);
         } catch (err) {
-            console.error('Error getting save data', err);
+            console.warn('Error getting save data', err);
         } finally {
-            return saveData || {};
+            return saveData;
         }
     }
 
@@ -130,9 +136,9 @@ class Update implements Saveable {
         try {
             settingsData = JSON.parse(localStorage.settings);
         } catch (err) {
-            console.error('Error getting settings data', err);
+            console.warn('Error getting settings data', err);
         } finally {
-            return settingsData || {};
+            return settingsData;
         }
     }
 
