@@ -57,27 +57,27 @@ SpecialEvents.newEvent(2, 'Mewtwo strikes back!', 'Encounter Armored Mewtwo for 
         dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
     }
 );
-//
-// // Yearly
-// SpecialEvents.newEvent(3, 'Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto and Johto.',
-//     // Start
-//     new Date(new Date().getFullYear(), 9, 30, 1), () => {
-//         Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Spooky Bulbasaur'));
-//         Object.keys(pokemonsPerRoute[GameConstants.Region.johto]).forEach(route => pokemonsPerRoute[GameConstants.Region.johto][route].land.push('Spooky Togepi'));
-//     },
-//     // End
-//     new Date(new Date().getFullYear(), 10, 1, 23), () => {
-//         Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land = pokemonsPerRoute[GameConstants.Region.kanto][route].land.filter(p => p != 'Spooky Bulbasaur'));
-//         Object.keys(pokemonsPerRoute[GameConstants.Region.johto]).forEach(route => pokemonsPerRoute[GameConstants.Region.johto][route].land = pokemonsPerRoute[GameConstants.Region.johto][route].land.filter(p => p != 'Spooky Togepi'));
-//     }
-// );
-// SpecialEvents.newEvent(4, 'Merry Christmas!', 'Encounter Santa Dragonite for a limited time on Victory Road.',
-//     // Start
-//     new Date(new Date().getFullYear(), 11, 25, 2), () => {
-//         dungeonList['Victory Road'].bossList.push(new DungeonBossPokemon('Santa Dragonite', 1000000, 80));
-//     },
-//     // End
-//     new Date(new Date().getFullYear(), 11, 27, 22), () => {
-//         dungeonList['Victory Road'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Santa Dragonite');
-//     }
-// );
+
+// Yearly
+SpecialEvents.newEvent(3, 'Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto and Johto.',
+    // Start
+    new Date(new Date().getFullYear(), 9, 30, 1), () => {
+        Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land.push(...['Spooky Bulbasaur', 'Gastly']));
+        Object.keys(pokemonsPerRoute[GameConstants.Region.johto]).forEach(route => pokemonsPerRoute[GameConstants.Region.johto][route].land.push(...['Spooky Togepi', 'Misdreavus']));
+    },
+    // End
+    new Date(new Date().getFullYear(), 10, 1, 23), () => {
+        Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land = pokemonsPerRoute[GameConstants.Region.kanto][route].land.filter(p => !['Spooky Bulbasaur', 'Gastly'].includes(p)));
+        Object.keys(pokemonsPerRoute[GameConstants.Region.johto]).forEach(route => pokemonsPerRoute[GameConstants.Region.johto][route].land = pokemonsPerRoute[GameConstants.Region.johto][route].land.filter(p => !['Spooky Togepi', 'Misdreavus'].includes(p)));
+    }
+);
+SpecialEvents.newEvent(4, 'Merry Christmas!', 'Encounter Santa Dragonite for a limited time roaming in Kanto.',
+    // Start
+    new Date(new Date().getFullYear(), 11, 25, 2), () => {
+        GameConstants.RoamingPokemon[GameConstants.Region.kanto].push('Santa Dragonite');
+    },
+    // End
+    new Date(new Date().getFullYear(), 11, 27, 22), () => {
+        GameConstants.RoamingPokemon[GameConstants.Region.kanto] = GameConstants.RoamingPokemon[GameConstants.Region.kanto].filter(p => p != 'Santa Dragonite');
+    }
+);
