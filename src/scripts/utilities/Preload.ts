@@ -94,12 +94,12 @@ class Preload {
                 img.onload = () => {
                     Preload.itemLoaded(`town-${name}`);
                     resolve();
-                }
+                };
                 img.onerror = () => {
                     Preload.itemErrored(`town-${name}`);
                     console.warn('Failed to load town image:', name);
                     resolve();
-                }
+                };
                 img.src = `assets/images/towns/${name}.png`;
             }));
 
@@ -125,7 +125,7 @@ class Preload {
                 Preload.itemErrored('splash-screen');
                 console.warn('Failed to load splash screen background image..');
                 resolve();
-            }
+            };
             img.src = 'assets/images/background.png';
 
         });
@@ -149,7 +149,7 @@ class Preload {
                 Preload.itemErrored('background');
                 console.warn('Failed to load background image..');
                 resolve();
-            }
+            };
             img.src = 'assets/images/background.png';
         });
     }
@@ -163,12 +163,12 @@ class Preload {
                 img.onload = () => {
                     Preload.itemLoaded(i);
                     resolve();
-                }
+                };
                 img.onerror = () => {
                     Preload.itemErrored(i);
                     console.warn('Failed to load image for pokemon:', i);
                     resolve();
-                }
+                };
                 img.src = `assets/images/pokemon/${i}.png`;
             }));
 
