@@ -18,32 +18,34 @@
                       <i data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></i>
                     </div>
                 </h3>
-                <table class='table' data-bind='foreach: Array(Shards.nEffects)'>
-                    <tr>
-                        <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
-                        <td width='50%'>
-                            <div class="progress"
-                                 data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
-                                <div class='progress-bar' role="progressbar"
-                                     data-bind="style: { width: (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * 10) + '%',
-                                                               'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
-                                     aria-valuemin="0" aria-valuemax="100">
+                <table class='table table-sm table-hover table-striped'>
+                    <tbody data-bind='foreach: Array(Shards.nEffects)'>
+                        <tr>
+                            <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
+                            <td width='50%'>
+                                <div class="progress"
+                                    data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
+                                    <div class='progress-bar' role="progressbar"
+                                        data-bind="style: { width: (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * 10) + '%',
+                                                                'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                    </div>
+                                    <div class='cell-container' data-bind='foreach: new Array(9)'>
+                                        <div class='progress-cell' style='width: 10%'></div>
+                                    </div>
                                 </div>
-                                <div class='cell-container' data-bind='foreach: new Array(9)'>
-                                    <div class='progress-cell' style='width: 10%'></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] 
-                            + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
-                        <td>
-                            <button class='btn btn-primary'
-                                    data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},
-                                        css: {disabled: !App.game.shards.canBuyShardUpgrade($parentContext.$index(), $index())},
-                                        text: (App.game.shards.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
-                            </button>
-                        </td>
-                    </tr>
+                            </td>
+                            <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] 
+                                + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
+                            <td>
+                                <button class='btn btn-block btn-primary'
+                                        data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},
+                                            css: {disabled: !App.game.shards.canBuyShardUpgrade($parentContext.$index(), $index())},
+                                            text: (App.game.shards.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
