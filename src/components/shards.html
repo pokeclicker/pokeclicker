@@ -1,11 +1,13 @@
-<div class="modal fade noselect" id="shardModal" tabindex="-1" role="dialog" aria-badgeledby="changelogModal">
+<div class="modal fade noselect" id="shardModal" tabindex="-1" role="dialog" aria-badgeledby="shardModal">
     <div class="modal-dialog modal-lg" role="document">
        <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"></h4>
-                <img style="float:right;margin-right:10px;"
-                     data-bind="tooltip: { title: 'Use shards to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get shards based on its type. ', trigger: 'hover', placement:'right' }"
-                     src="assets/images/questionmark.png">
+                <h5>Shards</h5>
+                <button type="button" class="btn btn-info"
+                        style="position: absolute; right: 0px; top: 0px; width: auto; height: 63px; padding: 10px;"
+                        data-bind="tooltip: { title: 'Use shards to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get shards based on its type.', trigger: 'hover', placement:'left' }">
+                    ?
+                </button>
 
             </div>
             <div class="modal-body" id="shardBody" data-bind='foreach: Array(Shards.nTypes)'>
