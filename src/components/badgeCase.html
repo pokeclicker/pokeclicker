@@ -11,7 +11,7 @@ aria-labelledby="badgeCaseModalLabel">
        <div class="modal-body">
            <div class="row no-gutters justify-content-center"
                 data-bind="foreach: BadgeCaseController.getDisplayableBadges()">
-               <div class="col-sm-3 col-md-3 col-lg-3 badgeEntry">
+               <div class="col-3 badgeEntry">
                    <img src="" width="60px"
                         data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
                         css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeCase.Badge[$data])}">
