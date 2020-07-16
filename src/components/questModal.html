@@ -23,46 +23,40 @@
                 </div>
 
             </div>
-            <div class="modal-body">
-                <div class="modal-body" id="treasuresBody" style="margin: auto;">
-                    <div>
-                        <table class='table table-hover'>
-                            <thead>
-                            <tr>
-                                <td><h5>Description</h5></td>
-                                <td><h5>Reward</h5></td>
-                                <td><h5>Status</h5></td>
-                            </tr>
-                            </thead>
-                            <tbody data-bind="foreach: QuestHelper.questList" >
-                            <tr>
-                                <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
-                                <td class="align-middle" style="text-align:left">
-                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
-                                </td>
-                                <td class="align-middle">
-                                    <button class='btn btn-primary btn-sm btn-block'
-                                        data-bind='visible: QuestHelper.canStartNewQuest() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
-                                        click: function(){
-                                            QuestHelper.beginQuest($data.index);
-                                            if (!QuestHelper.canStartNewQuest()) {$("#QuestModal").modal("hide");}
-                                        }'>
-                                        Start
-                                    </button>
-                                    <button class='btn btn-success btn-sm btn-block' data-bind='visible: QuestHelper.onQuest($data.index)() && $data.isCompleted(),
-                                                                       click: $data.endQuest'>
-                                        Claim
-                                    </button>
-                                    <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>
-                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
+            <div class="modal-body p-0">
+                <table class='table table-hover m-0'>
+                    <thead>
+                    <tr>
+                        <td><h5>Description</h5></td>
+                        <td><h5>Reward</h5></td>
+                        <td><h5>Status</h5></td>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: QuestHelper.questList" >
+                    <tr>
+                        <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
+                        <td class="align-middle" style="text-align:left">
+                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
+                        </td>
+                        <td class="align-middle">
+                            <button class='btn btn-primary btn-sm btn-block'
+                                data-bind='visible: QuestHelper.canStartNewQuest() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
+                                click: function(){
+                                    QuestHelper.beginQuest($data.index);
+                                    if (!QuestHelper.canStartNewQuest()) {$("#QuestModal").modal("hide");}
+                                }'>
+                                Start
+                            </button>
+                            <button class='btn btn-success btn-sm btn-block' data-bind='visible: QuestHelper.onQuest($data.index)() && $data.isCompleted(),
+                                                                click: $data.endQuest'>
+                                Claim
+                            </button>
+                            <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>
+                            <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="modal-footer">
