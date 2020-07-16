@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const gulp = require('gulp');
 const changed = require('gulp-changed');
 const minifyHtml = require('gulp-minify-html');
@@ -9,8 +10,8 @@ const browserSync = require('browser-sync');
 const del = require('del');
 const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
-const ejs = require("gulp-ejs");
-const plumber = require("gulp-plumber");
+const ejs = require('gulp-ejs');
+const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
 const connect = require('gulp-connect');
 const version = process.env.npm_package_version || '0.0.0';
@@ -35,8 +36,8 @@ const srcs = {
         'node_modules/popper.js/dist/umd/popper.min.js',
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
-        'src/libs/*.js'
-    ]
+        'src/libs/*.js',
+    ],
 };
 
 
@@ -46,7 +47,7 @@ const dests = {
     assets: 'build/assets/',
     scripts: 'build/scripts/',
     styles: 'build/styles/',
-    githubPages: 'docs/'
+    githubPages: 'docs/',
 };
 
 gulp.task('copy', () => gulp.src(srcs.libs)
@@ -61,8 +62,8 @@ gulp.task('assets', () => gulp.src(srcs.assets)
 gulp.task('browserSync', () => {
     browserSync({
         server: {
-            baseDir: dests.base
-        }
+            baseDir: dests.base,
+        },
     });
     gulp.watch(srcs.html, gulp.series('compile-html'));
     gulp.watch(srcs.ejsTemplates, gulp.series('compile-html'));
@@ -74,8 +75,9 @@ gulp.task('browserSync', () => {
 gulp.task('compile-html', (done) => {
     const htmlDest = './build';
     const stream = gulp.src('./src/index.html');
+    // If we want the development banner displayed
     if (process.env.HEROKU) {
-        stream.pipe(replace('<!--$DEV_BANNER-->', '@import "developmentBanner.html"'))
+        stream.pipe(replace('<!--$DEV_BANNER-->', '@import "developmentBanner.html"'));
     }
     stream.pipe(replace('$VERSION', version));
     stream.pipe(replace('$INIT_GOOGLE_ANALYTICS', process.env.HEROKU !== undefined));
@@ -138,7 +140,7 @@ gulp.task('serveProd', function () {
         root: ['build'],
         port: process.env.PORT || 3000,
         host: '0.0.0.0',
-        livereload: false
+        livereload: false,
     });
 });
 
