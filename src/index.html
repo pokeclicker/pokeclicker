@@ -396,31 +396,32 @@
             </div>
             <!-- /ko -->
 
-            <div data-bind="if:App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map)">
-                <div data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+            <div class="card border-secondary mb-3" data-bind="if:App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map)">
+                <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
+                    <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
+                </div>
+                <div id="mapBody" class="card-body p-0 show" data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
-                    <div class="page-item no-select">
-                        <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
-                            <defs>
-                                <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%"
-                                                y2="100%">
-                                    <stop offset="0%" style="stop-color:#909090"></stop>
-                                    <stop offset="100%" style="stop-color:#c1c1c1"></stop>
-                                </lineargradient>
-                                <lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%"
-                                                y2="100%">
-                                    <stop offset="0%" style="stop-color:#DAE8FC"></stop>
-                                    <stop offset="100%" style="stop-color:#7EA6E0"></stop>
-                                </lineargradient>
-                            </defs>
+                    <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
+                        <defs>
+                            <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%"
+                                            y2="100%">
+                                <stop offset="0%" style="stop-color:#909090"></stop>
+                                <stop offset="100%" style="stop-color:#c1c1c1"></stop>
+                            </lineargradient>
+                            <lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%"
+                                            y2="100%">
+                                <stop offset="0%" style="stop-color:#DAE8FC"></stop>
+                                <stop offset="100%" style="stop-color:#7EA6E0"></stop>
+                            </lineargradient>
+                        </defs>
 
-                            @import "KantoSVG.html"
-                            @import "JohtoSVG.html"
-                            @import "HoennSVG.html"
+                        @import "KantoSVG.html"
+                        @import "JohtoSVG.html"
+                        @import "HoennSVG.html"
 
-                        </svg>
-                    </div>
+                    </svg>
                 </div>
             </div>
         </div>

@@ -32,6 +32,7 @@ const changelogItems = [
     // v0.4.11
     new Changelog(changelogType.UPDATE, 'v0.4.11'),
     new Changelog(changelogType.NEW, 'Towns will show as orange if you have not yet completed the gym'),
+    new Changelog(changelogType.NEW, 'Map is able to be hidden now'),
     new Changelog(changelogType.CHANGE, 'The Cell Battery Oak Item will now gain points each time you find an item'),
     new Changelog(changelogType.CHANGE, 'Updated the layout of the shard modal'),
     new Changelog(changelogType.FIXED, 'Stone evolutions will now only show the Pokéball if all possible evolutions have been caught'),
