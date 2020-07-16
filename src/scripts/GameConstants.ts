@@ -102,12 +102,6 @@ namespace GameConstants {
     export const DUNGEON_BOSS_SHARDS = 20;
     export const GYM_SHARDS = 5;
 
-    //Safari
-    export const Safari = {
-        'SizeY': Math.floor((window.innerHeight - 150) / 32),
-        'SizeX': 25,
-    };
-
     export const SAFARI_BATTLE_CHANCE = 5;
 
     export const SAFARI_BASE_POKEBALL_COUNT = 30;

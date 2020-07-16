@@ -15,6 +15,14 @@ class Safari {
     static balls: KnockoutObservable<number> = ko.observable();
     static sprite: Motio;
 
+    public static sizeX(): number {
+        return Math.min(25, Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32));
+    }
+
+    public static sizeY(): number {
+        return Math.floor((window.innerHeight - 250) / 32);
+    }
+
     public static load() {
         Safari.grid = [];
         Safari.playerXY.x = 0;
@@ -23,8 +31,8 @@ class Safari {
         Safari.inBattle(false);
         Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());
-        for ( let i = 0; i < GameConstants.Safari.SizeY; i++) {
-            const row = [...Array(GameConstants.Safari.SizeX)].map(Number.prototype.valueOf, 0);
+        for ( let i = 0; i < this.sizeY(); i++) {
+            const row = [...Array(this.sizeX())].map(Number.prototype.valueOf, 0);
             Safari.grid.push(row);
         }
 
@@ -57,8 +65,8 @@ class Safari {
     }
 
     private static addRandomBody(body: SafariBody) {
-        let x = Safari.getRandomCoord(GameConstants.Safari.SizeX - 2);
-        let y = Safari.getRandomCoord(GameConstants.Safari.SizeY - 2);
+        let x = Safari.getRandomCoord(this.sizeX() - 2);
+        let y = Safari.getRandomCoord(this.sizeY() - 2);
         if (body.type === 'fence') {
             x = Math.max(0, x - 3);
             y = Math.max(0, y - 3);
@@ -77,14 +85,14 @@ class Safari {
         if (
             x == 0 ||
             y == 0 ||
-            y + body.maxY() >= GameConstants.Safari.SizeY ||
-            x + body.maxX() >= GameConstants.Safari.SizeX
+            y + body.maxY() >= this.sizeY() ||
+            x + body.maxX() >= this.sizeX()
         ) {
             return false;
         }
         for (let i = 0; i < body.grid.length; i++) {
             for (let j = 0; j < body.grid[i].length; j++) {
-                if ( (i + y) < GameConstants.Safari.SizeY && (j + x) < GameConstants.Safari.SizeX) {
+                if ( (i + y) < this.sizeY() && (j + x) < this.sizeX()) {
                     if (body.grid[i][j] !== 0) {
                         if (this.grid[i + y][j + x] !== 0) {
                             return false;
@@ -102,7 +110,7 @@ class Safari {
         for (let i = 0; i < body.grid.length; i++) {
             for ( let j = 0; j < body.grid[i].length; j++) {
                 if (body.grid[i][j] !== 0) {
-                    if ( (i + y) < GameConstants.Safari.SizeY && (j + x) < GameConstants.Safari.SizeX) {
+                    if ( (i + y) < this.sizeY() && (j + x) < this.sizeX()) {
                         if (this.grid[i + y][j + x] === 0) {
                             this.grid[i + y][j + x] = body.grid[i][j];
                         }
@@ -137,7 +145,7 @@ class Safari {
 
     private static payEntranceFee() {
         if (Safari.canPay()) {
-            // TODO add increasing cost back
+            // TODO: add increasing cost back
             //typeof player.safariCostModifier == undefined ? 1 : player.safariCostModifier++;
 
             App.game.wallet.loseAmount(Safari.cost());
@@ -153,7 +161,7 @@ class Safari {
         let html = '';
 
         for (let i = 0; i < Safari.grid.length; i++) {
-            html += "<div class='row'>";
+            html += "<div class='row flex-nowrap'>";
             for (let j = 0; j < Safari.grid[0].length; j++) {
                 html += Safari.square(i, j);
             }
@@ -162,7 +170,7 @@ class Safari {
 
         $('#safariBody').html(html);
 
-        Safari.addPlayer(Math.floor(GameConstants.Safari.SizeX - 1) / 2, GameConstants.Safari.SizeY - 1);
+        Safari.addPlayer(Math.floor((this.sizeX() - 1) / 2), this.sizeY() - 1);
 
     }
 
@@ -342,8 +350,7 @@ class Safari {
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
-
-    $('#safariModal').on('hidden.bs.modal', function () {
+    $('#safariModal').on('hide.bs.modal', function () {
         MapHelper.moveToTown('Fuchsia City');
     });
 });
