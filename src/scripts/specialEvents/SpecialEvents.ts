@@ -62,7 +62,7 @@ SpecialEvents.newEvent(2, 'Mewtwo strikes back!', 'Encounter Armored Mewtwo for 
 // Yearly
 SpecialEvents.newEvent(3, 'Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto, Johto and Hoenn.',
     // Start
-    new Date(new Date().getFullYear(), 5, 30, 1), () => {
+    new Date(new Date().getFullYear(), 10, 30, 1), () => {
         SeededRand.seed(new Date().getFullYear());
         Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => {
             SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Spooky Bulbasaur') : null;
