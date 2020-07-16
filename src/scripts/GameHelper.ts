@@ -82,10 +82,6 @@ class GameHelper {
         }
     }
 
-    public static getRegion(id): GameConstants.Region {
-        return GameConstants.TotalPokemonsPerRegion.findIndex(p => id < p);
-    }
-
     public static createArray(start: number, max: number, step: number) {
         const array = [];
         for (let i = start; i <= max; i += step) {
