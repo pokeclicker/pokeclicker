@@ -81,10 +81,6 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css?v=$VERSION" rel="stylesheet">
 
-    <!--Sentry-->
-    <script src="https://browser.sentry-cdn.com/5.10.2/bundle.min.js" integrity="sha384-ssBfXiBvlVC7bdA/VX03S88B5MwXQWdnpJRbUYFPgswlOBwETwTp6F3SMUNpo9M9" crossorigin="anonymous">
-    </script>
-
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
     <script>
@@ -98,12 +94,6 @@
             gtag('js', new Date());
 
             gtag('config', 'UA-171657234-1');
-        }
-    </script>
-
-    <script>
-        if ($INIT_SENTRY) {
-            Sentry.init({dsn: 'https://a3d181455c4442e0bea640ad272afdd9@sentry.io/1868204'});
         }
     </script>
     <style>
