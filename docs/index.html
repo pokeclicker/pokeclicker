@@ -63,7 +63,7 @@
     <script src="libs/knockout-latest.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.4.10"></script>
+    <script src="scripts/script.min.js?v=0.4.11"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -79,7 +79,7 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.4.10" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.4.11" rel="stylesheet">
 
     <!--Sentry-->
     <script src="https://browser.sentry-cdn.com/5.10.2/bundle.min.js" integrity="sha384-ssBfXiBvlVC7bdA/VX03S88B5MwXQWdnpJRbUYFPgswlOBwETwTp6F3SMUNpo9M9" crossorigin="anonymous">
@@ -279,9 +279,7 @@
                                         <span data-bind="text: name" style="margin-left: 20px">Name</span>
 
                                         <span style="float:right; margin-top:8px" data-bind="template: { name: 'caughtStatusTemplate', data: {'status':
-                                            PartyController.getCaughtStatusByName(
-                                                PokemonHelper.getEvolution($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()])
-                                                )
+                                            PartyController.getEvolutionsCaughtStatus($data.id, GameConstants.StoneType[ItemHandler.stoneSelected()])
                                             }}"></span>
                                     </button>
                                 </div>
@@ -609,7 +607,7 @@
 
 
             <!-- Pokemon List container-->
-            <div class="card border-secondary mb-3 pokemon-list-container" id="pokemonListContainer"
+            <div class="card border-secondary mb-3" id="pokemonListContainer"
      data-bind="visible: player.starter != GameConstants.Starter.None">
     <div class="card-header p-0" data-toggle="collapse" href="#pokemonListBody">
         <span>Pokémon List</span>
@@ -688,7 +686,7 @@
                 <!--RouteBattleView-->
                 <!--Use the base battle layout for fighting and dungeons.-->
 
-                <div id="routeBattleView" class="card-body p-0 justify-content-center no-gutters no-select"
+                <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
                     data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town),
                         class: MapHelper.calculateBattleCssClass()">
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
@@ -696,10 +694,10 @@
                             <h2 class="pageItemTitle" style="display: block;">
 
                                 <!-- ko if: App.game.statistics.routeKills[player.route()]() < GameConstants.ROUTE_KILLS_NEEDED -->
-                                <knockout class="routeProgress" data-bind="text: App.game.statistics.routeKills[player.route()]() + ' / ' + GameConstants.ROUTE_KILLS_NEEDED">0/10</knockout>
+                                <knockout class="right" data-bind="text: App.game.statistics.routeKills[player.route()]() + ' / ' + GameConstants.ROUTE_KILLS_NEEDED">0/10</knockout>
                                 <!-- /ko -->
 
-                                <knockout class="routeInfo">
+                                <knockout class="left">
                                     Route <knockout data-bind="text: player.route">number</knockout>
                                     <!--If all Pokémon on the route are caught-->
                                     <knockout data-bind="if: (!RouteHelper.routeCompleted(player.route(), player.region, true) && RouteHelper.routeCompleted(player.route(), player.region, false))">
@@ -723,7 +721,7 @@
 
                             <div>
                                 <div data-bind="ifnot: Battle.catching">
-                                    <img id="enemy"
+                                    <img class="enemy"
                                          data-bind="attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
                                          src=""/>
                                 </div>
@@ -767,7 +765,7 @@
                                     &nbsp;
                                 </knockout>
 
-                                <knockout class="routeInfo">
+                                <knockout class="left">
                                     <knockout data-bind="text: DungeonRunner.dungeon.name()">Dungeon name</knockout>
 
                                     <!--If all Pokémon in the dungeon are caught-->
@@ -784,7 +782,7 @@
                                     </knockout>
                                 </knockout>
 
-                                <knockout class="routeProgress" data-bind="css: { 'text-danger': DungeonRunner.timeLeftSeconds() < 20, 'text-primary': DungeonRunner.timeLeftSeconds() >= 20 }">
+                                <knockout class="right" data-bind="css: { 'text-danger': DungeonRunner.timeLeftSeconds() < 20, 'text-primary': DungeonRunner.timeLeftSeconds() >= 20 }">
                                     <h4><strong data-bind="text: DungeonRunner.timeLeftSeconds() + 's'"></strong></h4>
                                 </knockout>
 
@@ -802,7 +800,7 @@
                             <div data-bind="if: DungeonBattle.enemyPokemon">
                                 <div>
                                     <div data-bind="ifnot: DungeonBattle.catching">
-                                        <img id="enemy"
+                                        <img class="enemy"
                                              data-bind="attr:{ src: PokemonHelper.getImage(DungeonBattle.enemyPokemon(), DungeonBattle.enemyPokemon().shiny) }"
                                              src=""/>
                                     </div>
@@ -1021,26 +1019,28 @@
             </div>
             <!-- /ko -->
 
-            <div data-bind="if:App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map)">
-                <div data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+            <div class="card border-secondary mb-3" data-bind="if:App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map)">
+                <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
+                    <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
+                </div>
+                <div id="mapBody" class="card-body p-0 show" data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
-                    <div class="page-item no-select">
-                        <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
-                            <defs>
-                                <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%"
-                                                y2="100%">
-                                    <stop offset="0%" style="stop-color:#909090"></stop>
-                                    <stop offset="100%" style="stop-color:#c1c1c1"></stop>
-                                </lineargradient>
-                                <lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%"
-                                                y2="100%">
-                                    <stop offset="0%" style="stop-color:#DAE8FC"></stop>
-                                    <stop offset="100%" style="stop-color:#7EA6E0"></stop>
-                                </lineargradient>
-                            </defs>
+                    <svg id="map" viewBox="0 0 650 400" preserveAspectRatio="xMaxYMax meet">
+                        <defs>
+                            <lineargradient id="mx-gradient-f8cecc-1-ea583b-1-s-0" x1="0%" x2="0%" y1="0%"
+                                            y2="100%">
+                                <stop offset="0%" style="stop-color:#909090"></stop>
+                                <stop offset="100%" style="stop-color:#c1c1c1"></stop>
+                            </lineargradient>
+                            <lineargradient id="mx-gradient-dae8fc-1-7ea6e0-1-s-0" x1="0%" x2="0%" y1="0%"
+                                            y2="100%">
+                                <stop offset="0%" style="stop-color:#DAE8FC"></stop>
+                                <stop offset="100%" style="stop-color:#7EA6E0"></stop>
+                            </lineargradient>
+                        </defs>
 
-                            <g data-bind='if: player.region == GameConstants.Region.kanto'>
+                        <g data-bind='if: player.region == GameConstants.Region.kanto'>
     <image width="100%" xlink:href="assets/images/kanto.png"></image>
 
     <!-- ------ -->
@@ -2146,7 +2146,7 @@
 
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.johto'>
+                        <g data-bind='if: player.region == GameConstants.Region.johto'>
     <image width="100%" xlink:href="assets/images/johto.png"></image>
 
     <!-- ------ -->
@@ -3180,7 +3180,7 @@
 
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.hoenn'>
+                        <g data-bind='if: player.region == GameConstants.Region.hoenn'>
     <image width="100%" xlink:href="assets/images/hoenn.png"></image>
 
     <!-- ------ -->
@@ -4669,8 +4669,7 @@
 </g>
 
 
-                        </svg>
-                    </div>
+                    </svg>
                 </div>
             </div>
         </div>
@@ -5162,7 +5161,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body p-0">
-                <table class="table table-striped table-hover table-bordered table-sm">
+                <table class="table table-striped table-hover table-bordered table-sm m-0">
                     <thead>
                       <tr>
                         <th>Statistic</th>
@@ -5176,7 +5175,6 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                       </tr>
                     </tbody>
                 </table>
-                <br/>
             </div>
         </div>
     </div>
@@ -5194,7 +5192,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                 </button>
             </div>
             <div class="modal-body p-0">
-                <table class="table table-striped table-hover table-bordered table-sm">
+                <table class="table table-striped table-hover table-bordered table-sm m-0">
                     <thead>
                       <tr>
                         <th>Type</th>
@@ -5206,7 +5204,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                       <tr>
                         <td class="tight" data-bind="html:type.label, class: 'table-' + type.display"></td>
                         <td class="text-left" data-bind="text:description">-</td>
-                        <td class="text-left tight"><code data-bind="text:new Date(date).toLocaleString()">-</code></td>
+                        <td class="text-left"><code data-bind="text:new Date(date).toLocaleString()">-</code></td>
                       </tr>
                     </tbody>
                 </table>
@@ -5226,8 +5224,8 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <table class="table table-striped table-hover">
+            <div class="modal-body p-0">
+                <table class="table table-striped table-hover m-0">
                     <thead>
                       <tr>
                         <th>Setting</th>
@@ -5242,7 +5240,6 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                       <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                     </tbody>
                 </table>
-                <br/>
             </div>
         </div>
     </div>
@@ -5317,7 +5314,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
            </div>
 
            <div class="modal-body p-0">
-               <table class="table table-striped table-hover table-bordered table-sm">
+               <table class="table table-striped table-hover table-bordered table-sm m-0">
                    <thead>
                      <tr>
                        <th>Event</th>
@@ -5329,10 +5326,10 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                    <tbody data-bind="foreach: SpecialEvents.events">
                      <!-- ko if: Date.now() < endTime -->
                      <tr>
-                       <td class="tight" data-bind="text: title"></td>
+                       <td data-bind="text: title"></td>
                        <td class="text-left" data-bind="text: description"></td>
-                       <td class="text-left tight"><code data-bind="text: startTime.toLocaleString()">-</code></td>
-                       <td class="text-left tight"><code data-bind="text: endTime.toLocaleString()">-</code></td>
+                       <td class="text-left"><code data-bind="text: startTime.toLocaleString()">-</code></td>
+                       <td class="text-left"><code data-bind="text: endTime.toLocaleString()">-</code></td>
                      </tr>
                      <!-- /ko -->
                    </tbody>
@@ -5506,7 +5503,7 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
 
 <!-- Log Book Modal-->
 <div class="modal noselect fade" id="nextRegionModal" tabindex="-1" role="dialog" aria-labelledby="nextRegionModal">
-    <div class="modal-dialog modal-md" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
         <div class="modal-content">
            <div class="modal-header">
                <h5 class="modal-title" data-bind="text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">Travel to next region</h5>
@@ -5531,50 +5528,62 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
 
 
 <!-- Shards Modal -->
-<div aria-labelledby="myModalLabel" class="modal fade" id="shardModal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" id="shardModalDialog" role="document">
-        <div class="modal-content">
+<div class="modal fade noselect" id="shardModal" tabindex="-1" role="dialog" aria-badgeledby="shardModal">
+    <div class="modal-dialog modal-lg" role="document">
+       <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title"></h4>
-                <img style="float:right;margin-right:10px;"
-                     data-bind="tooltip: { title: 'Use shards to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get shards based on its type. ', trigger: 'hover', placement:'right' }"
-                     src="assets/images/questionmark.png">
+                <h5>Shards</h5>
+                <button type="button" class="btn btn-info"
+                        style="position: absolute; right: 0px; top: 0px; width: auto; height: 63px; padding: 10px;"
+                        data-bind="tooltip: { title: 'Use shards to upgrade the type effectiveness of your Pokémon. When you defeat a Pokémon, you get shards based on its type.', trigger: 'hover', placement:'left' }">
+                    ?
+                </button>
 
             </div>
-            <div class="modal-body" id="shardBody" data-bind='foreach: Array(Shards.nTypes)'>
-                <h3>
-                    <span data-bind="text: PokemonType[$index()]"></span>
-                    <div style="float:right;">
-                      <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
-                      <i data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></i>
-                    </div>
-                </h3>
-                <table class='table' data-bind='foreach: Array(Shards.nEffects)'>
-                    <tr>
-                        <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
-                        <td width='50%'>
-                            <div class="progress"
-                                 data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
-                                <div class='progress-bar' role="progressbar"
-                                     data-bind="style: { width: (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * 10) + '%',
-                                                               'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
-                                     aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                                <div class='cell-container' data-bind='foreach: new Array(9)'>
-                                    <div class='progress-cell' style='width: 10%'></div>
-                                </div>
-                            </div>
-                        </td>
-                        <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] 
-                            + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
-                        <td>
-                            <button class='btn btn-primary'
-                                    data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},
-                                        css: {disabled: !App.game.shards.canBuyShardUpgrade($parentContext.$index(), $index())},
-                                        text: (App.game.shards.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
-                            </button>
-                        </td>
-                    </tr>
+            <div class="modal-body p-0">
+                <table class='table table-sm table-hover m-0'>
+                    <tbody>
+                        <!-- ko foreach: Array(Shards.nTypes) -->
+                            <tr>
+                                <th colspan="4" class="text-left table-dark text-light">
+                                    <h3>
+                                        <knockout data-bind="text: PokemonType[$index()]"></knockout>
+                                        <div class="float-right">
+                                            <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
+                                            <knockout data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></knockout>
+                                        </div>
+                                    </h3>
+                                </th>
+                            </tr>
+                            <!-- ko foreach: Array(Shards.nEffects) -->
+                                <tr>
+                                    <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
+                                    <td width='50%'>
+                                        <div class="progress"
+                                            data-bind="style: { 'background-color': '#' + TypeHelper.typeColorsLocked[$parentContext.$index()] }">
+                                            <div class='progress-bar' role="progressbar"
+                                                data-bind="style: { width: (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * 10) + '%',
+                                                                        'background-color': '#' + TypeHelper.typeColors[$parentContext.$index()] }"
+                                                aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                            <div class='cell-container' data-bind='foreach: new Array(9)'>
+                                                <div class='progress-cell' style='width: 10%'></div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] 
+                                        + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
+                                    <td>
+                                        <button class='btn btn-block btn-primary'
+                                                data-bind='click: function(){App.game.shards.buyShardUpgrade($parentContext.$index(), $index())},
+                                                    css: {disabled: !App.game.shards.canBuyShardUpgrade($parentContext.$index(), $index())},
+                                                    text: (App.game.shards.hasMaxUpgrade($parentContext.$index(), $index()) ?  "MAXED" : "Buy (" + App.game.shards.getShardUpgradeCost($parentContext.$index(), $index()) + ")")'>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -5936,7 +5945,7 @@ aria-labelledby="pokedexModalLabel">
 
 <!-- Statistics Modal-->
 <div class="modal noselect fade" id="pokemonStatisticsModal" tabindex="-1" role="dialog" aria-labelledby="pokemonStatisticsModal">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
         <div class="modal-content" data-bind="with: App.game.statistics.selectedPokemonID()">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-muted" data-bind="text: `#${pokemonMap[$data].id.toString().padStart(3,0)}&nbsp;&nbsp;`"></h5>
@@ -6029,7 +6038,7 @@ aria-labelledby="badgeCaseModalLabel">
        <div class="modal-body">
            <div class="row no-gutters justify-content-center"
                 data-bind="foreach: BadgeCaseController.getDisplayableBadges()">
-               <div class="col-sm-3 col-md-3 col-lg-3 badgeEntry">
+               <div class="col-3 badgeEntry">
                    <img src="" width="60px"
                         data-bind="attr:{ src: 'assets/images/badges/'+ $data +'.png'},
                         css: { 'badge-not-acquired': !App.game.badgeCase.hasBadge(BadgeCase.Badge[$data])}">
@@ -6130,46 +6139,40 @@ aria-labelledby="badgeCaseModalLabel">
                 </div>
 
             </div>
-            <div class="modal-body">
-                <div class="modal-body" id="treasuresBody" style="margin: auto;">
-                    <div>
-                        <table class='table table-hover'>
-                            <thead>
-                            <tr>
-                                <td><h5>Description</h5></td>
-                                <td><h5>Reward</h5></td>
-                                <td><h5>Status</h5></td>
-                            </tr>
-                            </thead>
-                            <tbody data-bind="foreach: QuestHelper.questList" >
-                            <tr>
-                                <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
-                                <td class="align-middle" style="text-align:left">
-                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
-                                </td>
-                                <td class="align-middle">
-                                    <button class='btn btn-primary btn-sm btn-block'
-                                        data-bind='visible: QuestHelper.canStartNewQuest() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
-                                        click: function(){
-                                            QuestHelper.beginQuest($data.index);
-                                            if (!QuestHelper.canStartNewQuest()) {$("#QuestModal").modal("hide");}
-                                        }'>
-                                        Start
-                                    </button>
-                                    <button class='btn btn-success btn-sm btn-block' data-bind='visible: QuestHelper.onQuest($data.index)() && $data.isCompleted(),
-                                                                       click: $data.endQuest'>
-                                        Claim
-                                    </button>
-                                    <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>
-                                    <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                </div>
-
+            <div class="modal-body p-0">
+                <table class='table table-hover m-0'>
+                    <thead>
+                    <tr>
+                        <td><h5>Description</h5></td>
+                        <td><h5>Reward</h5></td>
+                        <td><h5>Status</h5></td>
+                    </tr>
+                    </thead>
+                    <tbody data-bind="foreach: QuestHelper.questList" >
+                    <tr>
+                        <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
+                        <td class="align-middle" style="text-align:left">
+                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
+                        </td>
+                        <td class="align-middle">
+                            <button class='btn btn-primary btn-sm btn-block'
+                                data-bind='visible: QuestHelper.canStartNewQuest() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
+                                click: function(){
+                                    QuestHelper.beginQuest($data.index);
+                                    if (!QuestHelper.canStartNewQuest()) {$("#QuestModal").modal("hide");}
+                                }'>
+                                Start
+                            </button>
+                            <button class='btn btn-success btn-sm btn-block' data-bind='visible: QuestHelper.onQuest($data.index)() && $data.isCompleted(),
+                                                                click: $data.endQuest'>
+                                Claim
+                            </button>
+                            <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>
+                            <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
 
             <div class="modal-footer">
@@ -6273,7 +6276,7 @@ aria-labelledby="badgeCaseModalLabel">
 
 <!-- Ship Modal-->
 <div class="modal noselect fade" id="ShipModal" tabindex="-1" role="dialog" aria-labelledby="ShipModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Regional Travel</h5>
@@ -6310,9 +6313,22 @@ aria-labelledby="badgeCaseModalLabel">
 
 
 <!-- Safari Modal -->
-<div aria-labelledby="myModalLabel" class="modal fade noselect" id="safariModal" role="dialog" style="cursor:default" tabindex="-1">
-    <div class="modal-dialog" role="document">
+<div aria-labelledby="safariModal" class="modal fade noselect" id="safariModal" role="dialog" style="cursor:default" tabindex="-1">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+            <div class="controls" data-bind="visible: Safari.inProgress() && !Safari.inBattle()">
+                <div style="width:120px">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 411 411">
+                        <g>
+                          <path fill="whitesmoke" d="M382 137h-89c-11 0-19-8-19-19V29c0-16-13-29-29-29h-79c-16 0-29 13-29 29v89c0 11-8 19-19 19H29c-16 0-29 13-29 29v79c0 16 13 29 29 29h89c11 0 19 8 19 19v89c0 16 13 29 29 29h79c16 0 29-13 29-29v-89c0-11 8-19 19-19h89c16 0 29-13 29-29v-79c0-16-13-29-29-29zM93 244c0 2-2 3-4 2l-52-38c-2-1-2-4 0-5l52-38c2-1 4 0 4 3v76zm72-155l38-52c1-2 4-2 5 0l38 52c1 2 0 4-2 4h-76c-3 0-4-2-3-4zm81 233l-38 52c-1 2-4 2-5 0l-38-52c-1-2 0-4 3-4h76c2 0 3 2 2 4zm-40-69a47 47 0 110-94 47 47 0 010 94zm168-45l-52 38c-2 1-4 0-4-2v-76c0-3 2-4 4-3l52 38c2 1 2 4 0 5z"/>
+                          <path fill="transparent" d="M135 1h142v137H135z"   onmousedown="GameController.simulateKey(38)" onmouseout="GameController.simulateKey(38, 'up')" onmouseup="GameController.simulateKey(38, 'up')" ontouchstart="GameController.simulateKey(38)"/><!-- up -->
+                          <path fill="transparent" d="M1 137h142v137H1z"     onmousedown="GameController.simulateKey(37)" onmouseout="GameController.simulateKey(37, 'up')" onmouseup="GameController.simulateKey(37, 'up')" ontouchstart="GameController.simulateKey(37)"/><!-- left -->
+                          <path fill="transparent" d="M135 273h142v137H135z" onmousedown="GameController.simulateKey(40)" onmouseout="GameController.simulateKey(40, 'up')" onmouseup="GameController.simulateKey(40, 'up')" ontouchstart="GameController.simulateKey(40)"/><!-- down -->
+                          <path fill="transparent" d="M268 137h142v137H268z" onmousedown="GameController.simulateKey(39)" onmouseout="GameController.simulateKey(39, 'up')" onmouseup="GameController.simulateKey(39, 'up')" ontouchstart="GameController.simulateKey(39)"/><!-- right -->
+                        </g>
+                    </svg>
+                </div>
+            </div>
             <div class="modal-header">
                 <h4 style='text-align:center' class="modal-title">
                     Safari Zone
@@ -6328,115 +6344,124 @@ aria-labelledby="badgeCaseModalLabel">
                 <button class='btn btn-danger modalClose' onclick='Safari.closeModal()'>Leave</button>
             </div>
 
-            <ul style="width:100%" class="nav nav-tabs nav-fill">
-                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#safariExplore">Explore</a>
-                </li>
-                <li class='nav-item'><a class='nav-link' href="#safariHelp" data-bind="attr: {'data-toggle': Safari.inBattle() ? '' : 'tab'}">Help</a>
-                </li>
-            </ul>
+            <div class="modal-body p-0">
+                <!-- Tab Titles -->
+                <ul style="width:100%" class="nav nav-tabs nav-fill">
+                    <li class="nav-item">
+                        <a data-toggle='tab' class='nav-link active' href="#safariExplore">Explore</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a class='nav-link' href="#safariHelp" data-bind="attr: {'data-toggle': Safari.inBattle() ? '' : 'tab'}">Help</a>
+                    </li>
+                </ul>
 
-            <!-- Tabs -->
-            <div class=tab-content>
+                <!-- Tab Contents -->
+                <div class=tab-content>
 
-                <!-- Main tab -->
-                <div  id="safariExplore" class="tab-pane fade in active show">
-                    <div class="modal-body p-0">
+                    <!-- Main tab -->
+                    <div  id="safariExplore" class="tab-pane fade in active show">
+                        <div class="modal-body p-0">
 
-                        <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
-                            <div class="center margin-bottom-sm">
-                                <button id="paySafariButton"
-                                    class="btn"
-                                    onclick="Safari.payEntranceFee()"
-                                    data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
-                                    Pay Entrance Fee
-                                </button>
-                                <span id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></span>
-                            </div>
-                            <img class='fit-width' src="assets/images/safari/area1.png" />
-                        </div>
-
-                        <div id="safariBody"
-                            class='container-fluid'
-                            data-bind="visible: Safari.inProgress() && !Safari.inBattle()">
-                        </div>
-
-                        <div id="safariBattleBody" data-bind="if: Safari.inBattle">
-                            <div class='row safariEnemyRow'>
-                                <div class='col-sm-2 offset-sm-8' id='safariEnemy'><img data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }"></div>
-                                <div id='safariEnemyTag' class='col-sm-6'>
-                                    <span>
-                                        <span data-bind='text: SafariBattle.enemy.name'></span>
-                                        <span data-bind="if: App.game.party.alreadyCaughtPokemonByName(SafariBattle.enemy.name)">
-                                            <img class='pokeball-smallest'
-                                             data-bind='attr: { src: PokemonHelper.getPokeballImage(SafariBattle.enemy.name) }'/>
-                                        </span>
-                                    </span>
-                                    <p><span id='safariCatchChance' data-bind="text: `Catch chance: ${SafariBattle.enemy.catchFactor.toFixed(2)} %`"></span><span id='safariRunChance' data-bind="text: `Escape chance: ${SafariBattle.enemy.escapeFactor.toFixed(2)} %`"></span></p>
+                            <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
+                                <div class="center margin-bottom-sm">
+                                    <button id="paySafariButton"
+                                        class="btn"
+                                        onclick="Safari.payEntranceFee()"
+                                        data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
+                                        Pay Entrance Fee
+                                    </button>
+                                    <span id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></span>
                                 </div>
-                            </div>
-                            <div class='row'>
-                                <div class='col-sm-2 offset-sm-3'>
-                                   <img id='safariPlayer' src='assets/images/safari/playerBack.png'>
-                                </div>
+                                <img class='fit-width' src="assets/images/safari/area1.png" />
                             </div>
 
-                            <div id='battleConsole' class='row'>
-                                <div class='col-sm-6'>
-                                    <h4 id='safariBattleText' class="centeredBySpan" data-bind='html: SafariBattle.text'></h4>
-                                    <span class="centerSpan"></span>
-                                </div>
-                                <div class='row col-sm-4 offset-sm-2 safariOptions'>
-                                    <div class='col-sm-6 safariOption'>
-                                        <button onClick='SafariBattle.lockButtons();SafariBattle.throwBall()' class='btn btn-info btn-sm safariButton'
-                                                data-bind='text: "Ball (" + Safari.balls() + ")"'></button>
-                                    </div>
-                                    <div class='col-sm-6 safariOption'>
-                                        <button onClick='SafariBattle.lockButtons();SafariBattle.throwBait()' class='btn btn-info btn-sm safariButton'>
-                                            Bait
-                                        </button>
-                                    </div>
-                                    <div class='col-sm-6 safariOption'>
-                                        <button onClick='SafariBattle.lockButtons();SafariBattle.throwRock()' class='btn btn-info btn-sm safariButton'>
-                                            Rock
-                                        </button>
-                                    </div>
-                                    <div class='col-sm-6 safariOption'>
-                                        <button onClick='SafariBattle.lockButtons();SafariBattle.run()' class='btn btn-info btn-sm safariButton'>Run
-                                        </button>
-                                    </div>
-                                </div>
+                            <div id="safariBody"
+                                class='container-fluid'
+                                data-bind="visible: Safari.inProgress()">
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <!-- Help tab -->
-                <div  id="safariHelp" class="tab-pane fade">
-                    <div class="modal-body" style="width: 80%;margin: auto;">
-                        <div id="safariHelpText">
-                            <p>The safari zone contains several unique Pokémon, and a different method of encountering and capturing Pokémon.</p>
-                            <p>After paying the entrance fee, you will be able to walk around in the safari zone. To encounter Pokémon, you must walk in tall grass.</p>
-                            <p>
-                                When you have encountered a Pokémon, you will be given 4 options:
-                                <ul>
-                                    <li>Ball: This will throw a pokeball and give you a chance of capturing the Pokémon</li>
-                                    <li>Rock: Throwing a rock will make the Pokémon more likely to flee, but easier to catch</li>
-                                    <li>Bait: Throwing bait will make the Pokémon less likely to flee, but harder to catch</li>
-                                    <li>Run: This will end the encounter</li>
-                                </ul>
-                            </p>
-                            <p>After your turn of the encounter, if it did not result in the encounter ending, the wild Pokémon will have a chance of running away.</p>
-                            <p>Your safari exploration will end when you have run out of pokeballs.</p>
+                    <!-- Help tab -->
+                    <div  id="safariHelp" class="tab-pane fade">
+                        <div class="modal-body" style="width: 80%;margin: auto;">
+                            <div id="safariHelpText">
+                                <p>The safari zone contains several unique Pokémon, and a different method of encountering and capturing Pokémon.</p>
+                                <p>After paying the entrance fee, you will be able to walk around in the safari zone. To encounter Pokémon, you must walk in tall grass.</p>
+                                <p>
+                                    When you have encountered a Pokémon, you will be given 4 options:
+                                    <ul>
+                                        <li>Ball: This will throw a pokeball and give you a chance of capturing the Pokémon</li>
+                                        <li>Rock: Throwing a rock will make the Pokémon more likely to flee, but easier to catch</li>
+                                        <li>Bait: Throwing bait will make the Pokémon less likely to flee, but harder to catch</li>
+                                        <li>Run: This will end the encounter</li>
+                                    </ul>
+                                </p>
+                                <p>After your turn of the encounter, if it did not result in the encounter ending, the wild Pokémon will have a chance of running away.</p>
+                                <p>Your safari exploration will end when you have run out of pokeballs.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+
+<!-- Safari Modal -->
+<div class="modal fade noselect" id="safariBattleModal" tabindex="-1" role="dialog" aria-badgeledby="safariBattleModal">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+       <div class="modal-content">
+           <div class="modal-body p-0">
+              <div class="battle-view">
+                <div class="row justify-content-center no-gutters" data-bind="if: Safari.inBattle">
+                  <div class="col no-gutters clickable" data-bind="click: function() {BattleFrontierBattle.clickAttack()}" style="height: 220px; display: block;">
+                      <h2 class="pageItemTitle" style="display: block;">
+
+                          <knockout class="left">
+                          </knockout>
+
+                          <knockout>
+                              <knockout data-bind="text: SafariBattle.enemy.name">Pokemon name</knockout>
+                              <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(SafariBattle.enemy.id)}}"></knockout>
+                          </knockout>
+
+                          <knockout class="right">
+                          </knockout>
+                      </h2>
+
+                      <div>
+                          <img class="enemy" data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }" src=""/>
+                      </div>
+
+                      <h2 class="pageItemFooter" style="display: block;">
+
+                          <knockout class="left" data-bind="text: `Catch chance: ${SafariBattle.enemy.catchFactor.toFixed(2)} %`">
+                          </knockout>
+                            &nbsp;
+                          <knockout class="right" data-bind="text: `Escape chance: ${SafariBattle.enemy.escapeFactor.toFixed(2)} %`">
+                          </knockout>
+                      </h2>
+                  </div>
+                </div>
+              </div>
+           </div>
+
+           <div class="modal-footer p-0 bg-dark text-light">
+                <div class="message" data-bind='html: SafariBattle.text'></div>
+                <div class="row" style="width: 100%;">
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBall()" data-bind='text: "Ball (" + Safari.balls() + ")"'>Ball (30)</button>
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBait()">Bait</button>
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwRock()">Rock</button>
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.run()">Run</button>
+                </div>
+           </div>
+       </div>
+    </div>
+</div>
 
 </body>
 </html>
