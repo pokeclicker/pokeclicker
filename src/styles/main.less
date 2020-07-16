@@ -193,13 +193,16 @@ body:hover {
   margin: -10px;
 }
 
-.pokemon-list-container {
+#pokemonListContainer {
   max-height: 300px;
-  overflow: auto;
+
+  .card-body {
+    overflow: auto;
+  }
 }
 
 @media (min-width: 992px) {
-  .pokemon-list-container {
+  #pokemonListContainer {
     max-height: 400px;
   }
 }
