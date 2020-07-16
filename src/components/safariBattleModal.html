@@ -1,0 +1,50 @@
+<div class="modal fade noselect" id="safariBattleModal" tabindex="-1" role="dialog" aria-badgeledby="safariBattleModal">
+    <div class="modal-dialog modal-dialog-centered modal-md" role="document">
+       <div class="modal-content">
+           <div class="modal-body p-0">
+              <div class="battle-view">
+                <div class="row justify-content-center no-gutters" data-bind="if: Safari.inBattle">
+                  <div class="col no-gutters clickable" data-bind="click: function() {BattleFrontierBattle.clickAttack()}" style="height: 220px; display: block;">
+                      <h2 class="pageItemTitle" style="display: block;">
+
+                          <knockout class="left">
+                          </knockout>
+
+                          <knockout>
+                              <knockout data-bind="text: SafariBattle.enemy.name">Pokemon name</knockout>
+                              <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(SafariBattle.enemy.id)}}"></knockout>
+                          </knockout>
+
+                          <knockout class="right">
+                          </knockout>
+                      </h2>
+
+                      <div>
+                          <img class="enemy" data-bind="attr: { src: `assets/images/${SafariBattle.enemy.shiny ? 'shiny' : ''}pokemon/${SafariBattle.enemy.id}.png` }" src=""/>
+                      </div>
+
+                      <h2 class="pageItemFooter" style="display: block;">
+
+                          <knockout class="left" data-bind="text: `Catch chance: ${SafariBattle.enemy.catchFactor.toFixed(2)} %`">
+                          </knockout>
+                            &nbsp;
+                          <knockout class="right" data-bind="text: `Escape chance: ${SafariBattle.enemy.escapeFactor.toFixed(2)} %`">
+                          </knockout>
+                      </h2>
+                  </div>
+                </div>
+              </div>
+           </div>
+
+           <div class="modal-footer p-0 bg-dark text-light">
+                <div class="message" data-bind='html: SafariBattle.text'></div>
+                <div class="row" style="width: 100%;">
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBall()" data-bind='text: "Ball (" + Safari.balls() + ")"'>Ball (30)</button>
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBait()">Bait</button>
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwRock()">Rock</button>
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.run()">Run</button>
+                </div>
+           </div>
+       </div>
+    </div>
+</div>
