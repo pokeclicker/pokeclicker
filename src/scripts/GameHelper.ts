@@ -38,6 +38,14 @@ class GameHelper {
         return Object.keys(enumerable).length / 2;
     }
 
+    public static enumStrings(enumerable): string[] {
+        return Object.keys(enumerable).filter(k => isNaN(+k));
+    }
+
+    public static enumNumbers(enumerable): number[] {
+        return Object.keys(enumerable).filter(k => !isNaN(+k));
+    }
+
     public static updateTime() {
         const now = new Date();
         if (now.getDate() == GameHelper.tomorrow.getDate()) {
