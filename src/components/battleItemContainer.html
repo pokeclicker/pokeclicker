@@ -1,8 +1,8 @@
-<div id="BattleItemContainer" class="card border-secondary mb-3">
-    <div class="card-header p-0" data-toggle="collapse" href="#BattleItemContainerBody">
+<div id="battleItemContainer" class="card sortable border-secondary mb-3">
+    <div class="card-header p-0" data-toggle="collapse" href="#battleItemContainerBody">
       <span>Battle Items</span>
     </div>
-    <div id="BattleItemContainerBody" class="card-body p-0 show">
+    <div id="battleItemContainerBody" class="card-body p-0 show">
       <table class="table table-bordered m-0">
         <tbody>
           <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">

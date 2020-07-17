@@ -5,12 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development gulp",
-
     "test": "npm run ts-test && npm run eslint",
     "ts-test": "gulp scripts",
     "eslint": "eslint --config ./.eslintrc.js --ext ts ./src/scripts",
     "eslint-fix": "eslint --config ./.eslintrc.js --ext ts --fix ./src/scripts",
-    
     "website": "npm test && cross-env NODE_ENV=production gulp website",
     "publish": "npm test && git push origin develop:master"
   },
@@ -31,6 +29,7 @@
   "homepage": "https://github.com/pokeclicker-dev/pokeclicker#readme",
   "devDependencies": {
     "@types/jquery": "^3.3.31",
+    "@types/sortablejs": "^1.10.5",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
@@ -71,6 +70,7 @@
     "eslint": "^7.4.0",
     "jquery": "^3.5.1",
     "knockout": "^3.5.1",
-    "popper.js": "^1.16.0"
+    "popper.js": "^1.16.0",
+    "sortablejs": "^1.10.2"
   }
 }

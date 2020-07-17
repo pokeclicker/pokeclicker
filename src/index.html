@@ -62,6 +62,9 @@
     <!--Knockout-->
     <script src="libs/knockout-latest.js"></script>
 
+    <!--Sortable-->
+    <script src="libs/Sortable.min.js"></script>
+
     <!--Minified scripts-->
     <script src="scripts/script.min.js?v=$VERSION"></script>
 
@@ -146,7 +149,7 @@
 
         <!--The next two divs switch around on large screens. This way, battle screen/map is on top on smaller screens-->
         <!--left column-->
-        <div class="col-lg-3 col-md-6 order-lg-first">
+        <div id="left-column" class="col-lg-3 col-md-6 order-lg-first">
 
             <!-- pokeball selector -->
             @import "pokeballSelector.html"
@@ -160,8 +163,8 @@
         </div>
 
         <!--Middle column-->
-        <div class="col-lg-6 col-md-12 order-md-first">
-            <div id="interactionView" class="card border-secondary mb-3">
+        <div id="middle-column" class="col-lg-6 col-md-12 order-md-first">
+            <div id="battleContainer" class="card sortable-disabled border-secondary mb-3">
 
                 <div class="card-header p-0" data-bind="visible: (App.game.gameState === GameConstants.GameState.fighting ||
                                      App.game.gameState === GameConstants.GameState.dungeon ||
@@ -370,7 +373,7 @@
             </div>
 
             <!-- ko if: App.game.gameState === GameConstants.GameState.dungeon -->
-            <div class="card border-secondary mb-3 dungeon no-select">
+            <div id="dungeonMap" class="card sortable-disabled border-secondary mb-3 dungeon no-select">
                 <div class="card-header p-0">
                     <span data-bind="text: DungeonRunner.dungeon.name()"></span>
                 </div>
@@ -385,10 +388,9 @@
                 </div>
             </div>
             <!-- /ko -->
-
-            <knockout data-bind="if:App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
-            App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
-                <div class="card border-secondary mb-3">
+            <knockout id="middle-sort-column">
+                <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
+                    App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
@@ -419,7 +421,7 @@
         </div>
 
         <!--Right column-->
-        <div class="col-lg-3 col-md-6">
+        <div id="right-column" class="col-lg-3 col-md-6">
 
             <!-- Oak Items -->
             @import "oakItemsContainer.html"

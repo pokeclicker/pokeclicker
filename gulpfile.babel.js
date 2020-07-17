@@ -36,6 +36,7 @@ const srcs = {
         'node_modules/popper.js/dist/umd/popper.min.js',
         'node_modules/knockout/build/output/knockout-latest.js',
         'node_modules/bootstrap-notify/bootstrap-notify.min.js',
+        'node_modules/sortablejs/Sortable.min.js',
         'src/libs/*.js',
     ],
 };
