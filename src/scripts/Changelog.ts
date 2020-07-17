@@ -29,6 +29,11 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.12
+    new Changelog(changelogType.UPDATE, 'v0.4.12'),
+    new Changelog(changelogType.FIXED, 'Some battle background images were not showing, they should now appear correctly'),
+    new Changelog(changelogType.FIXED, 'Town Map will now be fully hidden when it is supposed to be'),
+
     // v0.4.11
     new Changelog(changelogType.UPDATE, 'v0.4.11'),
     new Changelog(changelogType.NEW, 'Towns will show as orange if you have not yet completed the gym'),
