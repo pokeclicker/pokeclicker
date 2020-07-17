@@ -3,10 +3,8 @@ class EvolutionStone extends Item {
 
     type: GameConstants.StoneType;
 
-    constructor(type: GameConstants.StoneType) {
-        const basePrice = GameConstants.ItemPrice.EvolutionStone;
-        const priceMultiplier = 1;
-        super(GameConstants.StoneType[type], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
+    constructor(type: GameConstants.StoneType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
+        super(GameConstants.StoneType[type], basePrice, currency);
         this.type = type;
     }
 
@@ -21,15 +19,16 @@ class EvolutionStone extends Item {
     }
 }
 
-ItemList['Fire_stone'] = new EvolutionStone(GameConstants.StoneType.Fire_stone);
-ItemList['Water_stone'] = new EvolutionStone(GameConstants.StoneType.Water_stone);
-ItemList['Thunder_stone'] = new EvolutionStone(GameConstants.StoneType.Thunder_stone);
-ItemList['Leaf_stone'] = new EvolutionStone(GameConstants.StoneType.Leaf_stone);
-ItemList['Moon_stone'] = new EvolutionStone(GameConstants.StoneType.Moon_stone);
-ItemList['Sun_stone'] = new EvolutionStone(GameConstants.StoneType.Sun_stone);
-ItemList['Trade_stone'] = new EvolutionStone(GameConstants.StoneType.Trade_stone);
-ItemList['Dragon_scale'] = new EvolutionStone(GameConstants.StoneType.Dragon_scale);
-ItemList['Metal_coat'] = new EvolutionStone(GameConstants.StoneType.Metal_coat);
-ItemList['Kings_rock'] = new EvolutionStone(GameConstants.StoneType.Kings_rock);
-ItemList['Upgrade'] = new EvolutionStone(GameConstants.StoneType.Upgrade);
-ItemList['Time_stone'] = new EvolutionStone(GameConstants.StoneType.Time_stone);
+// TODO: Set prices for different kinds of stones
+ItemList['Fire_stone']    = new EvolutionStone(GameConstants.StoneType.Fire_stone, 2500);
+ItemList['Water_stone']   = new EvolutionStone(GameConstants.StoneType.Water_stone, 2500);
+ItemList['Thunder_stone'] = new EvolutionStone(GameConstants.StoneType.Thunder_stone, 2500);
+ItemList['Leaf_stone']    = new EvolutionStone(GameConstants.StoneType.Leaf_stone, 2500);
+ItemList['Moon_stone']    = new EvolutionStone(GameConstants.StoneType.Moon_stone, 2500);
+ItemList['Sun_stone']     = new EvolutionStone(GameConstants.StoneType.Sun_stone, 2500);
+ItemList['Trade_stone']   = new EvolutionStone(GameConstants.StoneType.Trade_stone, 2500);
+ItemList['Dragon_scale']  = new EvolutionStone(GameConstants.StoneType.Dragon_scale, 2500);
+ItemList['Metal_coat']    = new EvolutionStone(GameConstants.StoneType.Metal_coat, 2500);
+ItemList['Kings_rock']    = new EvolutionStone(GameConstants.StoneType.Kings_rock, 2500);
+ItemList['Upgrade']       = new EvolutionStone(GameConstants.StoneType.Upgrade, 2500);
+ItemList['Time_stone']    = new EvolutionStone(GameConstants.StoneType.Time_stone, 2500);

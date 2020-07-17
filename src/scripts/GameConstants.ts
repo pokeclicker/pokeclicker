@@ -544,44 +544,6 @@ namespace GameConstants {
         'Squirtle' = 2,
     }
 
-    export const ItemPrice = {
-        // Money
-        'Pokeball': 100,
-        'Greatball': 500,
-        'Ultraball': 2000,
-        'Masterball': 2500,
-
-        'xAttack': 600,
-        'xClick': 400,
-        'xExp': 800,
-        'Token_collector': 1000,
-        'Item_magnet': 1500,
-        'Lucky_incense': 2000,
-
-        'SmallRestore': 20000,
-        'MediumRestore': 40000,
-        'LargeRestore': 100000,
-
-        'PokeBlock': Infinity,
-
-        'Protein': Infinity,
-        'RareCandy': Infinity,
-
-        // Quest points
-        'Eevee': 5000,
-        'Porygon': 2000,
-        'Jynx': 2500,
-        'Mr. Mime': 1500,
-        'Lickitung': 1000,
-        'Togepi': 2500,
-        'Beldum': 5000,
-
-        // TODO: Set prices for different kinds of eggs and stones
-        'Egg': 1000,
-        'EvolutionStone': 2500,
-
-    };
-
     export enum StoneType {
         'None' = -1,
         'Fire_stone',

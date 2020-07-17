@@ -3,10 +3,8 @@ class EnergyRestore extends Item {
 
     type: GameConstants.EnergyRestoreSize;
 
-    constructor(type: GameConstants.EnergyRestoreSize) {
-        const basePrice = GameConstants.ItemPrice[GameConstants.EnergyRestoreSize[type]];
-        const priceMultiplier = 1;
-        super(GameConstants.EnergyRestoreSize[type], basePrice, priceMultiplier, GameConstants.Currency.money);
+    constructor(type: GameConstants.EnergyRestoreSize, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money) {
+        super(GameConstants.EnergyRestoreSize[type], basePrice, currency);
         this.type = type;
     }
 
@@ -23,6 +21,6 @@ class EnergyRestore extends Item {
     }
 }
 
-ItemList['SmallRestore'] = new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore);
-ItemList['MediumRestore'] = new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore);
-ItemList['LargeRestore'] = new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore);
+ItemList['SmallRestore']  = new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 20000);
+ItemList['MediumRestore'] = new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 40000);
+ItemList['LargeRestore']  = new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 100000);

@@ -2,10 +2,8 @@ class PokemonItem extends Item {
 
     type: GameConstants.PokemonItemType;
 
-    constructor(pokemon: GameConstants.PokemonItemType) {
-        const basePrice = GameConstants.ItemPrice[GameConstants.PokemonItemType[pokemon]];
-        const priceMultiplier = 1;
-        super(GameConstants.PokemonItemType[pokemon], basePrice, priceMultiplier, GameConstants.Currency.questPoint);
+    constructor(pokemon: GameConstants.PokemonItemType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
+        super(GameConstants.PokemonItemType[pokemon], basePrice, currency);
         this.type = pokemon;
     }
 
@@ -23,10 +21,10 @@ class PokemonItem extends Item {
 
 }
 
-ItemList['Eevee'] = new PokemonItem(GameConstants.PokemonItemType.Eevee);
-ItemList['Porygon'] = new PokemonItem(GameConstants.PokemonItemType.Porygon);
-ItemList['Jynx'] = new PokemonItem(GameConstants.PokemonItemType.Jynx);
-ItemList['Mr. Mime'] = new PokemonItem(GameConstants.PokemonItemType['Mr. Mime']);
-ItemList['Lickitung'] = new PokemonItem(GameConstants.PokemonItemType.Lickitung);
-ItemList['Togepi'] = new PokemonItem(GameConstants.PokemonItemType.Togepi);
-ItemList['Beldum'] = new PokemonItem(GameConstants.PokemonItemType.Beldum);
+ItemList['Eevee']     = new PokemonItem(GameConstants.PokemonItemType.Eevee, 5000);
+ItemList['Porygon']   = new PokemonItem(GameConstants.PokemonItemType.Porygon, 2000);
+ItemList['Jynx']      = new PokemonItem(GameConstants.PokemonItemType.Jynx, 2500);
+ItemList['Mr. Mime']  = new PokemonItem(GameConstants.PokemonItemType['Mr. Mime'], 1500);
+ItemList['Lickitung'] = new PokemonItem(GameConstants.PokemonItemType.Lickitung, 1000);
+ItemList['Togepi']    = new PokemonItem(GameConstants.PokemonItemType.Togepi, 2500);
+ItemList['Beldum']    = new PokemonItem(GameConstants.PokemonItemType.Beldum, 5000);

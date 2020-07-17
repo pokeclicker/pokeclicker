@@ -1,3 +1,4 @@
+/* eslint-disable array-bracket-newline */
 ///<reference path="Town.ts"/>
 class PokemonLeague extends Town {
     public gymList: KnockoutObservableArray<KnockoutObservable<Gym>>;
@@ -19,13 +20,21 @@ class PokemonLeague extends Town {
 }
 
 const indigoPlateauKanto = ['Elite Lorelei', 'Elite Bruno', 'Elite Agatha', 'Elite Lance', 'Champion Blue'];
-TownList['Indigo Plateau Kanto'] = new PokemonLeague('Indigo Plateau Kanto', [23], new Shop(['Masterball', 'RareCandy']), 'Victory Road', indigoPlateauKanto);
+const indigoPlateauKantoShop = new Shop([
+    ItemList['Masterball'],
+    ItemList['RareCandy'],
+]);
+TownList['Indigo Plateau Kanto'] = new PokemonLeague('Indigo Plateau Kanto', [23], indigoPlateauKantoShop, 'Victory Road', indigoPlateauKanto);
 (<PokemonLeague>TownList['Indigo Plateau Kanto']).setupGymTowns();
 
+const indigoPlateauJohtoShop = new Shop([
+    ItemList['Protein'],
+]);
 const indigoPlateauJohto = ['Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance'];
-TownList['Indigo Plateau Johto'] = new PokemonLeague('Indigo Plateau Johto', [27], new Shop(['Protein']), null, indigoPlateauJohto);
+TownList['Indigo Plateau Johto'] = new PokemonLeague('Indigo Plateau Johto', [27], indigoPlateauJohtoShop, null, indigoPlateauJohto);
 (<PokemonLeague>TownList['Indigo Plateau Johto']).setupGymTowns();
 
+const pokemonLeagueHoennShop = null;
 const pokemonLeagueHoenn = ['Elite Sidney', 'Elite Phoebe', 'Elite Glacia', 'Elite Drake', 'Champion Wallace'];
-TownList['Pokemon League Hoenn'] = new PokemonLeague('Pokemon League Hoenn', [128], null, 'Victory Road Hoenn', pokemonLeagueHoenn);
+TownList['Pokemon League Hoenn'] = new PokemonLeague('Pokemon League Hoenn', [128], pokemonLeagueHoennShop, 'Victory Road Hoenn', pokemonLeagueHoenn);
 (<PokemonLeague>TownList['Pokemon League Hoenn']).setupGymTowns();

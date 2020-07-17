@@ -3,9 +3,8 @@ class BuyKeyItem extends Item {
 
         item: KeyItems.KeyItem;
 
-        constructor(item: KeyItems.KeyItem, price: number, maxAmount = 1) {
-            const priceMultiplier = 1;
-            super(KeyItems.KeyItem[item], price, priceMultiplier, GameConstants.Currency.questPoint, maxAmount);
+        constructor(item: KeyItems.KeyItem, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, maxAmount = 1) {
+            super(KeyItems.KeyItem[item], basePrice, currency, maxAmount);
             this.item = item;
         }
 
@@ -30,4 +29,4 @@ class BuyKeyItem extends Item {
 
 
 ItemList['Dungeon_ticket'] = new BuyKeyItem(KeyItems.KeyItem.Dungeon_ticket, 250);
-ItemList['Explorer_kit'] = new BuyKeyItem(KeyItems.KeyItem.Explorer_kit, 5000);
+ItemList['Explorer_kit']   = new BuyKeyItem(KeyItems.KeyItem.Explorer_kit, 5000);

@@ -7,7 +7,7 @@ abstract class Item {
     price: KnockoutObservable<number>;
     maxAmount: number;
 
-    constructor(name: string, basePrice: number, priceMultiplier: number, currency: GameConstants.Currency, maxAmount: number = Number.MAX_SAFE_INTEGER) {
+    constructor(name: string, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money, maxAmount: number = Number.MAX_SAFE_INTEGER) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
