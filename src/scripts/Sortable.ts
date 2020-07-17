@@ -25,22 +25,33 @@ $(() => {
                 const currentSortable = evt.to[Object.keys(evt.to)[0]];
                 const order = currentSortable.toArray();
                 localStorage[currentSortable.el.id] = order.join('|');
+                currentSortable.el.innerHTML = currentSortable.el.innerHTML.replace(/>[\s\n\r\t]+</g, '><').trim();
             },
         });
     });
 
     // Sort the items between columns, in order
-    columns.forEach(storageName => {
-        const itemOrder = localStorage.getItem(storageName);
+    columns.forEach(sortable => {
+        const parent = document.getElementById(sortable);
+        const itemOrder = localStorage.getItem(sortable);
         const itemOrderArr = itemOrder ? itemOrder.split('|') : [];
+
         let prevItem;
         itemOrderArr.forEach(item => {
+            const child = document.getElementById(item);
             if (!prevItem) {
-                $(`#${item}`).prependTo(`#${storageName}`);
+                parent.insertBefore(child, parent.firstChild);
             } else {
-                $(`#${item}`).insertAfter(`#${prevItem}`);
+                const prevChild = document.getElementById(prevItem);
+                prevChild.parentNode.insertBefore(child, prevChild.nextSibling);
             }
             prevItem = item;
         });
+    });
+
+    // Clear out whitespace
+    columns.forEach(sortable => {
+        const el = document.getElementById(sortable);
+        el.innerHTML = el.innerHTML.replace(/>[\s\n\r\t]+</g, '><').trim();
     });
 });

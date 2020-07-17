@@ -27,6 +27,24 @@
   }
 }
 
+  
+@media (min-width: 768px) {
+  #left-column, #middle-sort-column, #right-column {
+    &:empty {
+      height: 30px;
+      border-color: rgba(30, 30, 30, 0.3);
+      border-style: dashed;
+      border-width: 1px;
+      &::after {
+        color: rgba(30, 30, 30, 0.3);
+        font-size: 10px;
+        content: 'DRAG AND DROP MODULES HERE';
+      }
+      margin-bottom: 15px;
+    }
+  }
+}
+
 .modal.show .bg-ocean {
   background: url('../assets/images/safari/5.png');
   animation: animatedOcean 60s linear infinite;
