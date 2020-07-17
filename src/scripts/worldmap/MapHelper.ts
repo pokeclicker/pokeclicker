@@ -113,6 +113,10 @@ class MapHelper {
             return 'cave-gem';
         } else if (GameConstants.PowerPlantAreas[player.region].has(area)) {
             return 'power-plant';
+        } else if (GameConstants.MansionAreas[player.region].has(area)) {
+            return 'mansion';
+        } else if (GameConstants.GraveyardAreas[player.region].has(area)) {
+            return 'graveyard';
         }
     }
 
