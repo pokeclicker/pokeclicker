@@ -136,7 +136,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Where Did All The Shiny Pokémon Go?', 'Capture 50 unique Shinies', new ShinyPokemonRequirement(50), 0.30);
         AchievementHandler.addAchievement('Nvm, found some more', 'Capture 75 unique Shinies', new ShinyPokemonRequirement(75), 0.45);
         AchievementHandler.addAchievement('Just keep swimming just keep swimming -- oooo shiny!', 'Capture 100 unique Shinies', new ShinyPokemonRequirement(100), 0.60);
-        AchievementHandler.addAchievement("I don't know if I can handle the next batch of shinies.", 'Complete the Kanto Pokédex shiny!', new ShinyPokemonRequirement(151), 1.50);
+        AchievementHandler.addAchievement("I don't know if I can handle the next batch of shinies.", 'Capture 151 unique Shinies!', new ShinyPokemonRequirement(151), 1.50);
 
         AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg', new HatchRequirement(1), 0.01);
         AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs', new HatchRequirement(10), 0.01);
