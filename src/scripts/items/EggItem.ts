@@ -8,15 +8,14 @@ class EggItem extends Item {
     }
 
     use() {
-        if (this.type === GameConstants.EggItemType.Pokemon_egg) {
-            return;
-        }
         if (player.itemList[this.name()]() <= 0) {
             return;
         }
 
         let success: boolean;
-        if (this.type === GameConstants.EggItemType.Mystery_egg) {
+        if (this.type === GameConstants.EggItemType.Pokemon_egg) {
+            success = App.game.breeding.gainPokemonEgg(pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]));
+        } else if (this.type === GameConstants.EggItemType.Mystery_egg) {
             success = App.game.breeding.gainRandomEgg();
         } else {
             const etype = EggType[GameConstants.EggItemType[this.type].split('_')[0]];

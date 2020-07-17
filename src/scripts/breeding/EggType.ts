@@ -8,5 +8,5 @@ enum EggType {
     Dragon,
     Pokemon,
     Mystery,
-    Fossil
+    Fossil,
 }
