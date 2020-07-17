@@ -19,13 +19,16 @@ $(() => {
                 set: sortable => {
                     const order = sortable.toArray();
                     localStorage.setItem(sortable.el.id, order.join('|'));
+                    // Clear out whitespace
+                    if (/^([\s\r\n\t]|<!--.*-->)+$/.test(sortable.el.innerHTML)) {
+                        sortable.el.innerHTML = '';
+                    }
                 },
             },
             onSort: evt => {
                 const currentSortable = evt.to[Object.keys(evt.to)[0]];
                 const order = currentSortable.toArray();
                 localStorage[currentSortable.el.id] = order.join('|');
-                currentSortable.el.innerHTML = currentSortable.el.innerHTML.replace(/>[\s\n\r\t]+</g, '><').trim();
             },
         });
     });
@@ -52,6 +55,8 @@ $(() => {
     // Clear out whitespace
     columns.forEach(sortable => {
         const el = document.getElementById(sortable);
-        el.innerHTML = el.innerHTML.replace(/>[\s\n\r\t]+</g, '><').trim();
+        if (/^([\s\r\n\t]|<!--.*-->)+$/.test(el.innerHTML)) {
+            el.innerHTML = '';
+        }
     });
 });
