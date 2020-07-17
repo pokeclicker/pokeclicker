@@ -43,7 +43,7 @@ class GameHelper {
     }
 
     public static enumNumbers(enumerable): number[] {
-        return Object.keys(enumerable).filter(k => !isNaN(+k));
+        return Object.keys(enumerable).filter(k => !isNaN(+k)).map(Number);
     }
 
     public static updateTime() {
