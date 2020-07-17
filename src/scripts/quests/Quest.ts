@@ -45,6 +45,9 @@ abstract class Quest {
                 QuestHelper.refreshQuests(true);
             }
         } else {
+            if (!confirm('Are you sure you want to quit this quest?!')) {
+                return;
+            }
             this.initial(null);
         }
         player.currentQuests(player.currentQuests().filter(x => x.index != this.index));
