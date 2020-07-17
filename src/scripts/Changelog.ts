@@ -33,6 +33,7 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.4.12'),
     new Changelog(changelogType.NEW, 'Modules can now be sorted/arranged any way you like, just drag and drop'),
     new Changelog(changelogType.NEW, 'Added confirmation when quiting a quest'),
+    new Changelog(changelogType.CHANGE, 'Updated dungeon token cost in Hoenn dungeons'),
     new Changelog(changelogType.FIXED, 'Some battle background images were not showing, they should now appear correctly'),
     new Changelog(changelogType.FIXED, 'Town Map will now be fully hidden when it is supposed to be'),
 
