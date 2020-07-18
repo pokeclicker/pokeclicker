@@ -103,7 +103,7 @@ class PokemonHelper {
 
     public static getPokemonRegionRoutes(pokemonName: string) {
         const regionRoutes = {};
-        Object.values(pokemonsPerRoute).forEach((routes, region) => {
+        Object.entries(pokemonsPerRoute).forEach(([region, routes]) => {
             Object.entries(routes).forEach(([route, encounterType]) => {
                 if (Object.values(encounterType).flat().includes(pokemonName)) {
                     if (!regionRoutes[region]) {
