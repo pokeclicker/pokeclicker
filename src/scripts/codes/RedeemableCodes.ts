@@ -23,11 +23,11 @@ class RedeemableCodes implements Saveable {
             new RedeemableCode('complete-kanto', 750807787, false, function () {
                 // Complete all routes
                 for (let route = GameConstants.RegionRoute[GameConstants.Region.kanto][0]; route <= GameConstants.RegionRoute[GameConstants.Region.kanto][1]; route++) {
-                    App.game.statistics.routeKills[route](10);
+                    GameHelper.incrementObservable(App.game.statistics.routeKills[route], 10);
                 }
                 // Complete all gyms
                 GameConstants.KantoGyms.forEach(gym => {
-                    App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)](1);
+                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)]);
                     // Give badge
                     if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
                         App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
@@ -35,7 +35,7 @@ class RedeemableCodes implements Saveable {
                 });
                 // Complete all dungeons
                 GameConstants.KantoDungeons.forEach(dungeon => {
-                    App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)](1);
+                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)]);
                 });
                 // Catch all Pokemon
                 for (let id = 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto]; id++) {
@@ -47,11 +47,11 @@ class RedeemableCodes implements Saveable {
             new RedeemableCode('complete-johto', 171396746, false, function () {
                 // Complete all routes
                 for (let route = GameConstants.RegionRoute[GameConstants.Region.johto][0]; route <= GameConstants.RegionRoute[GameConstants.Region.johto][1]; route++) {
-                    App.game.statistics.routeKills[route](10);
+                    GameHelper.incrementObservable(App.game.statistics.routeKills[route], 10);
                 }
                 // Complete all gyms
                 GameConstants.JohtoGyms.forEach(gym => {
-                    App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)](1);
+                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)]);
                     // Give badge
                     if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
                         App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
@@ -59,7 +59,7 @@ class RedeemableCodes implements Saveable {
                 });
                 // Complete all dungeons
                 GameConstants.JohtoDungeons.forEach(dungeon => {
-                    App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)](1);
+                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)]);
                 });
                 // Catch all Pokemon
                 for (let id = GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto] + 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.johto]; id++) {
@@ -71,11 +71,11 @@ class RedeemableCodes implements Saveable {
             new RedeemableCode('complete-hoenn', -1257697040, false, function () {
                 // Complete all routes
                 for (let route = GameConstants.RegionRoute[GameConstants.Region.hoenn][0]; route <= GameConstants.RegionRoute[GameConstants.Region.hoenn][1]; route++) {
-                    App.game.statistics.routeKills[route](10);
+                    GameHelper.incrementObservable(App.game.statistics.routeKills[route], 10);
                 }
                 // Complete all gyms
                 GameConstants.HoennGyms.forEach(gym => {
-                    App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)](1);
+                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)]);
                     // Give badge
                     if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
                         App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
@@ -83,7 +83,7 @@ class RedeemableCodes implements Saveable {
                 });
                 // Complete all dungeons
                 GameConstants.HoennDungeons.forEach(dungeon => {
-                    App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)](1);
+                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)]);
                 });
                 // Catch all Pokemon
                 for (let id = GameConstants.TotalPokemonsPerRegion[GameConstants.Region.johto] + 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.hoenn]; id++) {
