@@ -4766,7 +4766,11 @@
                       <td width="30%" class="p-0">
                           <button class="btn btn-sm btn-block p-0"
                                   data-bind='
-                                      click: function(){QuestHelper.questList()[$data.index].endQuest()},
+                                      click: function(){
+                                          QuestHelper.questList()[$data.index].isCompleted() ?
+                                          QuestHelper.questList()[$data.index].endQuest() :
+                                          QuestHelper.questList()[$data.index].endQuest(true);
+                                        },
                                       text: QuestHelper.questList()[$data.index].isCompleted() ? "Claim" : "Quit",
                                       css: {
                                         "btn-success": QuestHelper.questList()[$data.index].isCompleted(),
