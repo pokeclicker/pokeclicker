@@ -13,7 +13,7 @@ class OakItems implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.party.caughtPokemon.length > 15;
+        return App.game.party.caughtPokemon.length >= 20;
     }
 
     initialize() {
