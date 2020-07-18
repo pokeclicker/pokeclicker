@@ -125,7 +125,7 @@ class Safari {
             App.game.gameState = GameConstants.GameState.safari;
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
-            Notifier.notify({ message: 'You do not have access to that location', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({ message: 'You need the Safari Pass to access this location.<br/><i>Visit the Gym in Fuschia City</i>', type: GameConstants.NotificationOption.warning });
         }
     }
 

@@ -4,7 +4,7 @@ class BreedingController {
             App.game.gameState = GameConstants.GameState.paused;
             $('#breedingModal').modal('show');
         } else {
-            Notifier.notify({ message: 'You do not have access to that location', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({ message: 'You do not have access to the Day Care yet.<br/><i>Get a Pokémon to level 100 first</i>', type: GameConstants.NotificationOption.warning });
         }
     }
 
