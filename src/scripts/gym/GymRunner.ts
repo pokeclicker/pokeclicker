@@ -24,10 +24,10 @@ class GymRunner {
             App.game.gameState = GameConstants.GameState.gym;
             this.resetGif();
 
-            setTimeout(function () {
+            setTimeout(() => {
                 this.started = true;
                 this.hideGif();
-            }.bind(this), GameConstants.GYM_COUNTDOWN);
+            }, GameConstants.GYM_COUNTDOWN);
 
         } else {
             Notifier.notify({ message: `${gym.leaderName} does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges`, type: GameConstants.NotificationOption.danger });
@@ -36,12 +36,11 @@ class GymRunner {
 
     private static hideGif() {
         $('#gymCountdownView').fadeOut(300);
-        const $img = $('#gif-go');
-        $img.hide();
+        $('#gymGo').hide();
     }
 
     public static resetGif() {
-        const $img = $('#gif-go');
+        const $img = $('#gymGo');
         $img.show();
         setTimeout(function () {
             $img.attr('src', 'assets/gifs/go.gif');

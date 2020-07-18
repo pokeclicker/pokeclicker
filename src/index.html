@@ -170,7 +170,8 @@
                                      App.game.gameState === GameConstants.GameState.dungeon ||
                                      App.game.gameState === GameConstants.GameState.paused ||
                                      App.game.gameState === GameConstants.GameState.town ||
-                                     App.game.gameState === GameConstants.GameState.shop)">
+                                     App.game.gameState === GameConstants.GameState.shop ||
+                                     App.game.gameState === GameConstants.GameState.gym)">
                     <table width="100%">
                         <tr>
                             <td width="33.33%">
@@ -199,8 +200,10 @@
                 <!--Use the base battle layout for fighting and dungeons.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town),
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym),
                         class: MapHelper.calculateBattleCssClass()">
+                    
+                    <!-- Route Battles -->
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 220px; display: block;">
                             <h2 class="pageItemTitle" style="display: block;">
@@ -256,7 +259,7 @@
                         </div>
                     </div>
 
-                    <!--If the player is in a dungeon-->
+                    <!-- Dungeon Battles -->
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.dungeon">
                         <div class="col no-gutters clickable" style="height: 220px; display: block;"
                             data-bind="click: function() {
@@ -298,7 +301,7 @@
                                     <h4><strong data-bind="text: DungeonRunner.timeLeftSeconds() + 's'"></strong></h4>
                                 </knockout>
 
-                                <div class="progress dungeonTimer">
+                                <div class="progress timer">
                                     <div class="progress-bar bg-danger" role="progressbar"
                                          data-bind="attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' },
                                          css: { 'bg-danger': DungeonRunner.timeLeftSeconds() < 20, 'bg-primary': DungeonRunner.timeLeftSeconds() >= 20 }"
@@ -346,14 +349,15 @@
                             <!-- /ko -->
                         </div>
                     </div>
+                    
+                    <!-- Gym Battles -->
+                    @import "gymView.html"
 
                     <!--TownView-->
                     @import "townView.html"
                 </div>
 
 
-                <!--GymView-->
-                @import "gymView.html"
                 <div class="card-footer p-0" data-bind="hidden: App.game.gameState === GameConstants.GameState.town">
                     <table width="100%">
                         <tr>
