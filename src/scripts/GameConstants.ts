@@ -477,25 +477,25 @@ namespace GameConstants {
 
     export const IceAreas = {
         0: new Set(['Seafoam Islands']),
-        1: new Set(['Ice Path', 'Whirl Islands']),
+        1: new Set(['Mahogany Town', 'Ice Path', 'Whirl Islands']),
         2: new Set([]),
     };
 
     export const ForestAreas = {
         0: new Set(['Fuchsia City', 'Viridian Forest']),
-        1: new Set(['Ilex Forest']),
+        1: new Set(['Azalea Town', 'Ilex Forest']),
         2: new Set(['Petalburg Woods']),
     };
 
     export const CaveAreas = {
         0: new Set(['Pewter City', 'Digletts Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road']),
-        1: new Set(['Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
+        1: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
         2: new Set(['Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
     };
 
     export const GemCaveAreas = {
         0: new Set(['Viridian City', 'Cerulean Cave']),
-        1: new Set(['Mt Silver']),
+        1: new Set(['Blackthorn City', 'Mt Silver']),
         2: new Set(['Cave of Origin', 'Sky Pillar']),
     };
 
@@ -507,13 +507,13 @@ namespace GameConstants {
 
     export const MansionAreas = {
         0: new Set(['Cinnabar Island', 'Pokemon Mansion']),
-        1: new Set(['Burned Tower']),
+        1: new Set(['Olivine City', 'Burned Tower']),
         2: new Set(['Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
     };
 
     export const GraveyardAreas = {
         0: new Set(['Saffron City', 'Pokemon Tower']),
-        1: new Set([]),
+        1: new Set(['Ecruteak City']),
         2: new Set(['Mt. Pyre']),
     };
 
