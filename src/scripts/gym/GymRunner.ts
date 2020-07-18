@@ -84,12 +84,12 @@ class GymRunner {
 }
 
 document.addEventListener('DOMContentLoaded', function (event) {
-
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
-
         if (GymBattle.gym.badgeReward == BadgeCase.Badge.Soul) {
             App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket);
         }
-
+        if (GymBattle.gym.badgeReward == BadgeCase.Badge.Earth) {
+            App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Shard_case);
+        }
     });
 });

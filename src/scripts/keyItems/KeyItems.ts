@@ -37,10 +37,7 @@ class KeyItems implements Feature {
             new KeyItem(KeyItems.KeyItem.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground'),
             // TODO buy for 500 quest points
             new KeyItem(KeyItems.KeyItem.Event_calendar, 'This calendar will keep you up to date on the latest events'),
-            // TODO obtain after first prestige
-            new KeyItem(KeyItems.KeyItem.Shard_case, 'A case specifically designed for holding shards', function () {
-                return App.game.party.hasMaxLevelPokemon();
-            }),
+            new KeyItem(KeyItems.KeyItem.Shard_case, 'A case specifically designed for holding shards'),
         ];
     }
 
