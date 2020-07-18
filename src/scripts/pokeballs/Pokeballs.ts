@@ -4,27 +4,27 @@ class Pokeballs implements Feature {
 
     defaults = {
         'pokeballs': [25, 0, 0, 0],
+        'alreadyCaughtSelection': GameConstants.Pokeball.None,
+        'alreadyCaughtShinySelection': GameConstants.Pokeball.Pokeball,
         'notCaughtSelection': GameConstants.Pokeball.Pokeball,
         'notCaughtShinySelection': GameConstants.Pokeball.Pokeball,
-        'alreadyCaughtSelection': GameConstants.Pokeball.Pokeball,
-        'alreadyCaughtShinySelection': GameConstants.Pokeball.Pokeball,
     };
 
     private pokeballCatchBonus: number[];
     private pokeballCatchTime: number[];
 
     public pokeballs: ArrayOfObservables<number>;
-    private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
-    private _notCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
     private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _alreadyCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
+    private _notCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
 
     constructor() {
         this.pokeballs = new ArrayOfObservables(this.defaults.pokeballs);
-        this._notCaughtSelection = ko.observable(this.defaults.notCaughtSelection);
-        this._notCaughtShinySelection = ko.observable(this.defaults.notCaughtShinySelection);
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
+        this._notCaughtSelection = ko.observable(this.defaults.notCaughtSelection);
+        this._notCaughtShinySelection = ko.observable(this.defaults.notCaughtShinySelection);
     }
 
     initialize(): void {
