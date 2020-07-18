@@ -12,7 +12,7 @@ class Breeding implements Feature {
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private hatchList: { [name: number]: string[][] } = {};
+    public hatchList: { [name: number]: string[][] } = {};
 
     constructor() {
         this._eggList = this.defaults.eggList;
