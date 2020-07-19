@@ -27,7 +27,7 @@ class DungeonRunner {
         App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
 
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
-        DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE);
+        DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE + player.region);
         DungeonRunner.pokemonDefeated = 0;
         DungeonRunner.chestsOpened = 0;
         DungeonRunner.loot = [];
