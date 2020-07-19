@@ -1,7 +1,6 @@
 class BreedingController {
     public static openBreedingModal() {
         if (App.game.breeding.canAccess()) {
-            App.game.gameState = GameConstants.GameState.paused;
             $('#breedingModal').modal('show');
         } else {
             Notifier.notify({ message: 'You do not have access to the Day Care yet.<br/><i>Get a Pokémon to level 100 first</i>', type: GameConstants.NotificationOption.warning });
@@ -19,10 +18,3 @@ class BreedingController {
         return `assets/images/breeding/egg${eggType}.png`;
     }
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    $('#breedingModal').on('hidden.bs.modal', function () {
-        MapHelper.returnToMap();
-    });
-
-});
