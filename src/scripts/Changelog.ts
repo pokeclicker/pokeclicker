@@ -29,6 +29,10 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.13
+    new Changelog(changelogType.UPDATE, 'v0.4.13'),
+    new Changelog(changelogType.CHANGE, 'Updated Masterball pricing'),
+
     // v0.4.12
     new Changelog(changelogType.UPDATE, 'v0.4.12'),
     new Changelog(changelogType.NEW, 'Modules can now be sorted/arranged any way you like, just drag and drop'),
