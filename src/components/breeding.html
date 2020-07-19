@@ -47,7 +47,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                       click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}">
                         <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                         <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
-                            <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 20px;top: 20px;">✨</div>
+                            <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
                             <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                             <span class="attack" style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
                               data-bind="text: $data.attack">attack</span>
