@@ -1,0 +1,25 @@
+<div id="shortcutsContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.highestRegion">
+    <div class="card-header p-0" data-toggle="collapse" href="#shortcutsBody">
+        <span style="text-align:center">Shortcuts</span>
+    </div>
+    <div id="shortcutsBody" class="card-body show p-0">
+      <table class="table table-sm m-0">
+        <tbody>
+          <tr data-bind="visible: Underground.canAccess">
+            <td>
+              <button class="btn btn-block btn-primary m-0" onclick="Underground.openUndergroundModal()">
+                  Underground
+              </button>
+            </td>
+          </tr>
+          <tr data-bind="visible: App.game.farming.canAccess">
+            <td>
+              <button class="btn btn-block btn-primary m-0" onclick="FarmController.openFarmModal()">
+                  Farm
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
