@@ -18,21 +18,6 @@
         </tr>
     </script>
 
-    <script type="text/html" id="achievementListTemplate">
-        <tr data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }">
-            <td style="text-align:left;vertical-align:middle;"><b><span data-bind="text: name">Name</span></b><br>
-                <small><span data-bind="text: description">Description</span></small>
-            </td>
-
-            <td style="vertical-align:middle;"><span data-bind="text: getProgress()">1</span>/<span
-                    data-bind="text: property.requiredValue">2</span>
-            </td>
-            <td style="vertical-align:middle;"><span data-bind="text: getProgressPercentage()"></span>%</td>
-
-            <td style="vertical-align:middle;">+<span data-bind="text: getBonus()"></span>%</td>
-        </tr>
-    </script>
-
     <script type="text/html" id="treasureListTemplate">
         <tr data-bind='if: amount() > 0'>
             <td class='vertical-middle'>
@@ -66,7 +51,7 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.4.12"></script>
+    <script src="scripts/script.min.js?v=0.4.13"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -82,7 +67,7 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.4.12" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.4.13" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
@@ -940,6 +925,9 @@
                        href="#nextRegionModal" data-toggle="modal"
                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name()), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
                      Travel To Next Region
+               </button>
+               <button class="btn btn-info" onclick="MapHelper.openShipModal();" data-bind="visible: player.highestRegion() > 0 && GameConstants.DockTowns.includes(player.town().name())">
+                     Dock
                </button>
                <button class="btn btn-secondary p-0"
                        onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
@@ -4868,6 +4856,41 @@
     </div>
 </div>
 
+
+            <!-- Shortcuts Menu -->
+            <div id="shortcutsContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.highestRegion">
+    <div class="card-header p-0" data-toggle="collapse" href="#shortcutsBody">
+        <span style="text-align:center">Shortcuts</span>
+    </div>
+    <div id="shortcutsBody" class="card-body show p-0">
+      <table class="table table-sm m-0">
+        <tbody>
+          <tr data-bind="visible: Underground.canAccess">
+            <td>
+              <button class="btn btn-block btn-primary m-0" onclick="Underground.openUndergroundModal()">
+                  Underground
+              </button>
+            </td>
+          </tr>
+          <tr data-bind="visible: App.game.farming.canAccess">
+            <td>
+              <button class="btn btn-block btn-primary m-0" onclick="FarmController.openFarmModal()">
+                  Farm
+              </button>
+            </td>
+          </tr>
+          <tr data-bind="visible: App.game.statistics.gymsDefeated[Statistics.getGymIndex('Champion Lance')]">
+            <td>
+              <button class="btn btn-block btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);player.currentTown('Poké Mart');" href="#shopModal" data-toggle="modal">
+                  Poké Mart
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+</div>
+
         </div>
 
     </div>
@@ -4879,25 +4902,19 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header text-center">
-                <h4 data-bind="text: player.town().name() + ' Shop'">Shop</h4>
+                <h4 data-bind="text: player.currentTown().endsWith('Mart') ? player.currentTown() : player.currentTown() + ' Shop'">Shop</h4>
                 <h4>
                     <img title="Money" src="assets/images/currency/money.png">
-                    <span id="playerMoney"
-                          data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money]),
-                              tooltip: { title: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US'), trigger: 'hover', animation: false }">0</span>
+                    <span id="playerMoney" data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money])">0</span>
                 </h4>
                 <h4>
                     <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon"
                          src="assets/images/currency/dungeonToken.png">
-                    <span id="playerMoneyDungeon"
-                          data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken]),
-                              tooltip: { title: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US'), trigger: 'hover', animation: false }">0</span>
+                    <span id="playerMoneyDungeon" data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken])">0</span>
                 </h4>
                 <h4>
                     <img title="Quest points" src="assets/images/currency/questPoint.png">
-                    <span id="playerMoneyQuest"
-                          data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint]),
-                              tooltip: { title: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US'), trigger: 'hover', animation: false }">0</span>
+                    <span id="playerMoneyQuest" data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint])">0</span>
                 </h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
@@ -4923,42 +4940,33 @@
                     </div>
                 </div>
                 <div class="row justify-content-center">
-                   <div class="col-11 col-sm-10 col-md-11">
-                       <div class="input-group" style="margin-bottom: 6px; margin-top: 6px">
-                          <div class="input-group-prepend">
-                             <button class="btn btn-secondary smallButton smallFont" type="button"
-                                     onclick="ShopHandler.increaseAmount(-100)">-100
-                             </button>
-                             <button class="btn btn-secondary smallButton smallFont"
-                                     type="button"
-                                     onclick="ShopHandler.increaseAmount(-10)">-10
-                             </button>
-                             <button class="btn btn-primary btn-outline-dark smallButton smallFont"
-                                     onclick="ShopHandler.resetAmount()">1
-                             </button>
-                           </div>
-                           <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
-                                  value="1" min="1" required name="amountOfItems"
-                                  oninput="ShopHandler.amount(parseInt($(this).val().toString()) || 0);"
-                                  onchange="ShopHandler.amount(parseInt($(this).val().toString()) || 0);" title="">
+                    <div class="col-11 col-sm-10 col-md-11">
+                        <div class="input-group" style="margin-bottom: 6px; margin-top: 6px">
+                            <div class="input-group-prepend">
+                                <button class="btn btn-warning btn-outline-dark smallButton smallFont" onclick="ShopHandler.resetAmount()">
+                                    Reset
+                                </button>
+                            </div>
+                            <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
+                                    value="1" min="1" required name="amountOfItems"
+                                    oninput="ShopHandler.amount(parseInt($(this).val().toString()) || 0);"
+                                    onchange="ShopHandler.amount(parseInt($(this).val().toString()) || 0);" title=""/>
                             <div class="input-group-append">
-                               <button class="btn btn-secondary smallButton smallFont" type="button"
-                                       onclick="ShopHandler.increaseAmount(10)">+10
-                               </button>
-                               <button class="btn btn-secondary smallButton smallFont"
-                                       type="button"
-                                       onclick="ShopHandler.increaseAmount(100)">+100
-                               </button>
-                               <button class="btn btn-primary smallButton smallFont"
-                                       type="button"
-                                       onclick="ShopHandler.maxAmount()">Max
-                               </button>
-                               <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}"
-                                       onclick="ShopHandler.buyItem()">Buy
-                               </button>
-                           </div>
-                       </div>
-                   </div>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
+                                    +10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
+                                    +100
+                                </button>
+                                <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
+                                    Max
+                                </button>
+                                <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}" onclick="ShopHandler.buyItem()">
+                                    Buy
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -5009,39 +5017,50 @@ aria-labelledby="receiveBadgeModalLabel" aria-hidden="true">
 <!-- Achievements Modal -->
 <div class="modal  fade" id="achievementsModal" tabindex="-1" role="dialog"
 aria-labelledby="AchievementsModalLabel" aria-hidden="true">
-<div class="modal-dialog modal-lg" role="document">
-   <div class="modal-content">
-       <div class="modal-header">
-           <h5>Achievements</h5>
-           <h5 style="display: inline" data-bind="text: 'Total Bonus: ' + AchievementHandler.achievementBonusPercent(), tooltip: { title: 'As you earn achievements, you gain up to 100% more money and xp from all sources.', trigger: 'hover', placement:'right' }"></h5>
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Achievements</h5>
+                <h5 style="display: inline" data-bind="text: 'Total Bonus: ' + AchievementHandler.achievementBonusPercent(), tooltip: { title: 'As you earn achievements, you gain up to 100% more money and xp from all sources.', trigger: 'hover', placement:'right' }"></h5>
+            </div>
 
-       </div>
-       <div class="modal-body">
-           <table id="" class="table table-hover">
-               <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.getAchievementListWithIndex(10*AchievementHandler.navigateIndex())}">
-               </tbody>
-           </table>
-       </div>
+            <div class="modal-body table-responsive">
+                <table class="table table-hover table-striped table-sm">
+                    <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.getAchievementListWithIndex(10*AchievementHandler.navigateIndex())}">
+                    </tbody>
+                </table>
+            </div>
 
-       <div class="modal-footer justify-content-center">
-           <button class="btn btn-secondary" onclick="AchievementHandler.navigateLeft()"
-                   data-bind=" css: {disabled: AchievementHandler.navigateIndex() === 0}">
-               <img src="assets/images/leftarrow.png">
-           </button>
-           <div data-bind="text: AchievementHandler.navigateIndex()+1 + '/' + (AchievementHandler.getNumberOfTabs()+1)"></div>
+            <div class="modal-footer justify-content-center">
+                <button class="btn btn-secondary" onclick="AchievementHandler.navigateLeft()"
+                        data-bind=" css: {disabled: AchievementHandler.navigateIndex() === 0}">
+                    <img src="assets/images/leftarrow.png">
+                </button>
 
+                <div data-bind="text: AchievementHandler.navigateIndex()+1 + '/' + (AchievementHandler.getNumberOfTabs()+1)"></div>
+                
+                <button class="btn btn-secondary" onclick="AchievementHandler.navigateRight()"
+                        data-bind=" css: {disabled: AchievementHandler.navigateIndex() ===  AchievementHandler.getNumberOfTabs()}">
+                    <img src="assets/images/rightarrow.png">
+                </button>
+            </div>
+        </div>
+    </div>
 
+    <script type="text/html" id="achievementListTemplate">
+        <tr data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }">
+            <td style="text-align:left;vertical-align:middle;"><b><span data-bind="text: name">Name</span></b><br>
+                <small><span data-bind="text: description">Description</span></small>
+            </td>
 
-           <button class="btn btn-secondary" onclick="AchievementHandler.navigateRight()"
-                   data-bind=" css: {disabled: AchievementHandler.navigateIndex() ===  AchievementHandler.getNumberOfTabs()}">
-               <img src="assets/images/rightarrow.png">
-           </button>
+            <td style="vertical-align:middle;"><span data-bind="text: getProgress()">1</span>/<span
+                    data-bind="text: property.requiredValue">2</span>
+            </td>
+            <td style="vertical-align:middle;"><span data-bind="text: getProgressPercentage()"></span>%</td>
 
-
-       </div>
-
-   </div>
-</div>
+            <td style="vertical-align:middle;">+<span data-bind="text: getBonus()"></span>%</td>
+        </tr>
+    </script>
 </div>
 
 <!-- Oak Items Modal-->
@@ -5634,7 +5653,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                       click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}">
                         <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                         <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
-                            <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 20px;top: 20px;">✨</div>
+                            <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
                             <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                             <span class="attack" style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
                               data-bind="text: $data.attack">attack</span>
