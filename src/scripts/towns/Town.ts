@@ -77,6 +77,21 @@ class DungeonTown extends Town {
 
 const TownList: { [name: string]: Town | PokemonLeague } = {};
 
+const pokeMartShop = new Shop([
+    ItemList['Pokeball'],
+    ItemList['Greatball'],
+    ItemList['Ultraball'],
+    ItemList['xAttack'],
+    ItemList['xClick'],
+    ItemList['xExp'],
+    ItemList['Item_magnet'],
+    ItemList['Token_collector'],
+    ItemList['Lucky_incense'],
+    ItemList['SmallRestore'],
+    ItemList['MediumRestore'],
+    ItemList['LargeRestore'],
+]);
+
 //Kanto Shops
 const PewterCityShop = new Shop([
     ItemList['Pokeball'],

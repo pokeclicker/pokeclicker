@@ -19,6 +19,13 @@
               </button>
             </td>
           </tr>
+          <tr data-bind="visible: App.game.statistics.gymsDefeated[Statistics.getGymIndex('Champion Lance')]">
+            <td>
+              <button class="btn btn-block btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);player.currentTown('Poké Mart');" href="#shopModal" data-toggle="modal">
+                  Poké Mart
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

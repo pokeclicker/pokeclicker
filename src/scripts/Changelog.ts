@@ -32,6 +32,7 @@ const changelogItems = [
     // v0.4.13
     new Changelog(changelogType.UPDATE, 'v0.4.13'),
     new Changelog(changelogType.NEW, 'Added shortcut module'),
+    new Changelog(changelogType.NEW, 'Added Poké Mart to shortcuts module'),
     new Changelog(changelogType.CHANGE, 'Updated Masterball pricing'),
     new Changelog(changelogType.CHANGE, 'Allow the game to continue running while hatchery menu is open'),
     new Changelog(changelogType.CHANGE, 'Added button to open Dock for cities located nearby'),
