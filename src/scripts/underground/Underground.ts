@@ -179,7 +179,6 @@ class Underground {
 
     public static openUndergroundModal() {
         if (this.canAccess()) {
-            App.game.gameState = GameConstants.GameState.paused;
             $('#mineModal').modal('show');
         } else {
             Notifier.notify({ message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>', type: GameConstants.NotificationOption.warning });
