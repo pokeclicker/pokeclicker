@@ -3,8 +3,8 @@ class BuyKeyItem extends Item {
 
         item: KeyItems.KeyItem;
 
-        constructor(item: KeyItems.KeyItem, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, maxAmount = 1) {
-            super(KeyItems.KeyItem[item], basePrice, currency, maxAmount);
+        constructor(item: KeyItems.KeyItem, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, options = {}) {
+            super(KeyItems.KeyItem[item], basePrice, currency, { maxAmount: 1, ...options });
             this.item = item;
         }
 

@@ -10,7 +10,7 @@ class ShopHandler {
         this.shopObservable(shop);
 
         shop.items().forEach(item => {
-            item.price(Math.round(item.basePrice * (player.itemMultipliers[item.name()] || 1)));
+            item.price(Math.round(item.basePrice * (player.itemMultipliers[item.saveName] || 1)));
         });
     }
 

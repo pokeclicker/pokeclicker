@@ -2,8 +2,8 @@
 class PokeballItem extends Item {
     type: GameConstants.Pokeball;
 
-    constructor(type: GameConstants.Pokeball, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money) {
-        super(GameConstants.Pokeball[type], basePrice, currency);
+    constructor(type: GameConstants.Pokeball, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money, options = {}) {
+        super(GameConstants.Pokeball[type], basePrice, currency, options);
         this.type = type;
     }
 
