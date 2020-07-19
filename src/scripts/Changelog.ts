@@ -33,6 +33,7 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.4.13'),
     new Changelog(changelogType.CHANGE, 'Updated Masterball pricing'),
     new Changelog(changelogType.CHANGE, 'Allow the game to continue running while hatchery menu is open'),
+    new Changelog(changelogType.CHANGE, 'Add button to open Dock for cities located nearby'),
 
     // v0.4.12
     new Changelog(changelogType.UPDATE, 'v0.4.12'),

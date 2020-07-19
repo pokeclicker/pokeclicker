@@ -785,4 +785,10 @@ namespace GameConstants {
         'New Bark Town',
         'Littleroot Town',
     ];
+
+    export const DockTowns = [
+        'Vermillion City',
+        'Olivine City',
+        'Slateport City',
+    ];
 }

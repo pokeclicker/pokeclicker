@@ -51,6 +51,9 @@
                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name()), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
                      Travel To Next Region
                </button>
+               <button class="btn btn-info" onclick="MapHelper.openShipModal();" data-bind="visible: player.highestRegion() > 0 && GameConstants.DockTowns.includes(player.town().name())">
+                     Dock
+               </button>
                <button class="btn btn-secondary p-0"
                        onclick="DungeonRunner.initializeDungeon(player.town().dungeon())"
                        data-bind="visible: player.town() instanceof DungeonTown, if: player.town().dungeon(), attr: { class: player.town().dungeon() && App.game.wallet.currencies[GameConstants.Currency.dungeonToken] >= player.town().dungeon().tokenCost ? 'btn btn-success p-0' : 'btn btn-secondary p-0' }">
