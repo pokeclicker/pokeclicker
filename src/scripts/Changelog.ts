@@ -32,6 +32,7 @@ const changelogItems = [
     // v0.4.13
     new Changelog(changelogType.UPDATE, 'v0.4.13'),
     new Changelog(changelogType.CHANGE, 'Updated Masterball pricing'),
+    new Changelog(changelogType.CHANGE, 'Allow the game to continue running while hatchery menu is open'),
 
     // v0.4.12
     new Changelog(changelogType.UPDATE, 'v0.4.12'),
