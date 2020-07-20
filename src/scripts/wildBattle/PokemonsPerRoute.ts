@@ -229,7 +229,7 @@ const pokemonsPerRoute = {
         },
         45: {
             land: ['Geodude', 'Graveler', 'Gligar', 'Teddiursa', 'Skarmory', 'Phanpy'],
-            water: ['Magikarp', 'Poliwag'],
+            water: ['Magikarp', 'Poliwag', 'Dratini'],
             headbutt: ['Spearow', 'Aipom', 'Heracross'],
         },
         46: {

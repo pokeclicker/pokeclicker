@@ -29,6 +29,10 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.14
+    new Changelog(changelogType.UPDATE, 'v0.4.14'),
+    new Changelog(changelogType.NEW, 'Added Dratini to Route 45'),
+
     // v0.4.13
     new Changelog(changelogType.UPDATE, 'v0.4.13'),
     new Changelog(changelogType.NEW, 'Added shortcut module'),
