@@ -5,21 +5,21 @@
     <div id="shortcutsBody" class="card-body show p-0">
       <table class="table table-sm m-0">
         <tbody>
-          <tr data-bind="visible: Underground.canAccess">
+          <tr class="p-0" data-bind="visible: Underground.canAccess">
             <td>
               <button class="btn btn-block btn-primary m-0" onclick="Underground.openUndergroundModal()">
                   Underground
               </button>
             </td>
           </tr>
-          <tr data-bind="visible: App.game.farming.canAccess">
+          <tr class="p-0" data-bind="visible: App.game.farming.canAccess">
             <td>
               <button class="btn btn-block btn-primary m-0" onclick="FarmController.openFarmModal()">
                   Farm
               </button>
             </td>
           </tr>
-          <tr data-bind="visible: App.game.statistics.gymsDefeated[Statistics.getGymIndex('Champion Lance')]">
+          <tr class="p-0" data-bind="visible: App.game.statistics.gymsDefeated[Statistics.getGymIndex('Champion Lance')]">
             <td>
               <button class="btn btn-block btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);player.currentTown('Poké Mart');" href="#shopModal" data-toggle="modal">
                   Poké Mart
