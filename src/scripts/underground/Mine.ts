@@ -144,7 +144,7 @@ class Mine {
             if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
                 Underground.gainMineItem(Mine.rewardNumbers[i]);
                 const itemName = Underground.getMineItemById(Mine.rewardNumbers[i]).name;
-                Notifier.notify({ message: `You found ${GameHelper.anOrA(itemName)} ${itemName}`, type: GameConstants.NotificationOption.success });
+                Notifier.notify({ message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`, type: GameConstants.NotificationOption.success });
                 Mine.itemsFound(Mine.itemsFound() + 1);
                 GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound);
                 Mine.rewardNumbers.splice(i, 1);
