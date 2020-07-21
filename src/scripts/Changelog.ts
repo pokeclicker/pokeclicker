@@ -32,7 +32,8 @@ const changelogItems = [
     // v0.4.14
     new Changelog(changelogType.UPDATE, 'v0.4.14'),
     new Changelog(changelogType.NEW, 'Added Dratini to Route 45'),
-    new Changelog(changelogType.CHANGE, 'Enlarge buttons in Shortcuts list'),
+    new Changelog(changelogType.CHANGE, 'Enlarge buttons in Shortcut menu, Safari Zone'),
+    new Changelog(changelogType.CHANGE, 'Make Shop items fit better'),
 
     // v0.4.13
     new Changelog(changelogType.UPDATE, 'v0.4.13'),
