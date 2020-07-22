@@ -32,15 +32,21 @@ style="cursor:default" tabindex="-1">
                         </button>
                     </div>
                     <div class='row' style="text-align:center;">
-                        <div class='progress' style="height: 20px;font-size: 18px;">
-                            <div id='mineEnergyBar' class='progress-bar' role='progressbar'
+                        <div class='progress'>
+                            <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
                                 data-bind="style: { width: Math.floor(Underground.energy/Underground.getMaxEnergy()*100) + '%' }">
                                 <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + '/' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                             </div>
                         </div>
                     </div>
-                    <div id="mineBody" style="margin:auto"></div>
+                    <div id="mineBody" style="margin:auto">
+                    </div>
+                    <div class='row'>
+                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'>Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
+                        <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'>Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
+                        <button class='col-12 col-md-4 btn' data-bind='text: Mine.itemsFound() + "/" + Mine.itemsBuried + " items found"'></button>
+                      </div>
                 </div>
                 <div id="treasures" class="tab-pane fade">
                     <div data-bind="if: player.hasMineItems()">

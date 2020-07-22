@@ -3,7 +3,7 @@ class Mine {
     public static sizeY = 12;
     public static grid: Array<Array<KnockoutObservable<number>>>;
     public static rewardGrid: Array<Array<any>>;
-    public static itemsFound: KnockoutObservable<number>;
+    public static itemsFound: KnockoutObservable<number> = ko.observable(0);
     public static itemsBuried: number;
     public static rewardNumbers: Array<number>;
 
@@ -15,7 +15,7 @@ class Mine {
         const tmpGrid = [];
         const tmpRewardGrid = [];
         Mine.rewardNumbers = [];
-        Mine.itemsFound = ko.observable(0);
+        Mine.itemsFound(0);
         Mine.itemsBuried = 0;
         for (let i = 0; i < this.sizeY; i++) {
             const row = [];
@@ -170,6 +170,12 @@ class Mine {
         return true;
     }
 
+    public static itemsFoundtext() {
+        return ko.pureComputed(() => {
+            return `${Mine.itemsFound()} / ${Mine.itemsBuried} items found`;
+        });
+    }
+
     private static checkCompleted() {
         if (Mine.itemsFound() >= Mine.itemsBuried) {
             setTimeout(Mine.completed, 1500);
@@ -192,7 +198,7 @@ class Mine {
             });
         });
         this.rewardGrid = mine.rewardGrid;
-        this.itemsFound = ko.observable(mine.itemsFound);
+        this.itemsFound(mine.itemsFound);
         this.itemsBuried = mine.itemsBuried;
         this.rewardNumbers = mine.rewardNumbers;
         this.loadingNewLayer = false;

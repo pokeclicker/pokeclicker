@@ -39,8 +39,6 @@ class Underground {
 
     public static showMine() {
         let html = '';
-        const itemsFound = "Mine.itemsFound() + '/' + Mine.itemsBuried + ' items found'";
-        html += '</div>';
         for (let i = 0; i < Mine.grid.length; i++) {
             html += "<div class='row'>";
             for (let j = 0; j < Mine.grid[0].length; j++) {
@@ -48,12 +46,6 @@ class Underground {
             }
             html += '</div>';
         }
-
-        html += `<div class='row'>
-                  <button onClick='Mine.toolSelected(Mine.Tool.Hammer)' class='btn btn-danger'>Hammer (${Underground.HAMMER_ENERGY} energy)</button>
-                  <button onClick='Mine.toolSelected(Mine.Tool.Chisel)' class='btn btn-info'>Chisel (${Underground.CHISEL_ENERGY} energy)</button>
-                  <h3 data-bind='text: Mine.itemsFound() + "/" + Mine.itemsBuried + " items found"'></h3>
-                </div>`;
         $('#mineBody').html(html);
     }
 
