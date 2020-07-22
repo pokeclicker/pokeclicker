@@ -1,10 +1,4 @@
 #mineModal {
-    .modal-dialog {
-        overflow-x: visible;
-        max-width: none;
-        width: 1032px
-    }
-
     ul.nav {
         width: 100%;
     }
@@ -16,7 +10,7 @@
 }
 
 .mineInventoryItem {
-    width: 50px;
+    width: 20px;
 }
 
 .rock5 {
@@ -48,17 +42,25 @@
 }
 
 .restore-item {
-    width: 32px;
-    height: 32px;
+    width: 26px;
+    height: 26px;
 }
 
 .mineSquare {
-    height:32px;
-    width:32px !important;
+    height: 0px;
+    width:4% !important;
     margin: 0px !important;
     padding:0px !important;
+    padding-top:4% !important;
     text-align: center;
-    max-width: 32px !important;
+    max-width: 4% !important;
+    background-size: contain;
+    img {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+    }
 }
 .mineSquare:after {
     content: "";

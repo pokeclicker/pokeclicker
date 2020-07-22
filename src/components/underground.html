@@ -1,6 +1,6 @@
 <div aria-labelledby="myModalLabel" class="modal fade noselect" id="mineModal" role="dialog"
 style="cursor:default" tabindex="-1">
-<div class="modal-dialog" role="document">
+<div class="modal-dialog modal-lg" role="document">
    <div class="modal-content">
        <div class="modal-header">
            <ul class="nav nav-tabs nav-fill">
@@ -18,21 +18,17 @@ style="cursor:default" tabindex="-1">
        </div>
        <div class="tab-content p-0">
            <div id="dig" class="tab-pane fade in active show">
-               <div class="modal-body" style="width: 80%;margin: auto;">
-
-                   <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
-                     <div class="col-md-4 text-center">
-                       <button style="display: inline;" class="btn btn-secondary" data-bind="
-                                                      click: function(){  ItemList[$data].use();},
-                                                      css: { disabled: player._itemList[$data]() <= 0}"
-                       >
-                         <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
-                         <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data]) + ' energy'">&nbsp;+? energy</span>
-                         <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
-                       </button>
-                     </div>
-                   </div>
-                   <br/>
+               <div class="modal-body">
+                    <div class="input-group" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                        <button style="display: inline;" class="btn btn-secondary" data-bind="
+                                                       click: function(){  ItemList[$data].use();},
+                                                       css: { disabled: player._itemList[$data]() <= 0}"
+                        >
+                          <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+                          <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data]) + ' energy'">&nbsp;+? energy</span>
+                          <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
+                        </button>
+                    </div>
                    <div class='row' style="text-align:center;">
                        <div class='progress' style="height: 20px;font-size: 18px;">
                            <div id='mineEnergyBar' class='progress-bar' role='progressbar'
@@ -46,7 +42,7 @@ style="cursor:default" tabindex="-1">
                </div>
            </div>
            <div id="treasures" class="tab-pane fade">
-               <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;">
+               <div class="modal-body" id="treasuresBody">
                    <div data-bind="if: player.hasMineItems()">
                        <table class='table'>
                            <thead>
@@ -66,7 +62,7 @@ style="cursor:default" tabindex="-1">
                </div>
            </div>
            <div id="upgrades" class="tab-pane fade">
-               <div class="modal-body" id="upgradesBody" style="width: 80%;margin: auto;">
+               <div class="modal-body" id="upgradesBody">
                     <table class='table'>
                         <thead>
                           <tr>
@@ -92,7 +88,7 @@ style="cursor:default" tabindex="-1">
                </div>
            </div>
            <div id="help" class="tab-pane fade">
-               <div class="modal-body" id="helpBody" style="width: 80%;margin: auto;">
+               <div class="modal-body" id="helpBody">
                    <h4>In the underground you can mine for hidden treasures.</h4>
                    <h4>Select the Hammer or the Chisel and click on the wall.</h4>
                    <h4>Sell your treasures for shards or diamonds!</h4>
@@ -101,7 +97,7 @@ style="cursor:default" tabindex="-1">
                </div>
            </div>
            <div id="dailyDeals" class="tab-pane fade">
-               <div class="modal-body" id="dailyDealsBody" style="width: 80%;margin: auto;">
+               <div class="modal-body" id="dailyDealsBody">
                    <table class='table'>
                        <thead>
                          <tr>
