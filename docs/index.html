@@ -18,29 +18,6 @@
         </tr>
     </script>
 
-    <script type="text/html" id="treasureListTemplate">
-        <tr data-bind='if: amount() > 0'>
-            <td class='vertical-middle'>
-                <img class='mineInventoryItem' data-bind='attr:{ src: "assets/images/underground/"+id+".png" }'>
-                <span data-bind='text: "("+$data.amount()+")"'></span>
-            </td>
-            <td class='vertical-middle' data-bind='text: name'></td>
-            <!-- ko if: valueType == "Mine Egg" -->
-            <td></td>
-            <!-- /ko -->
-            <!-- ko ifnot: valueType == "Mine Egg" -->
-            <td class='vertical-middle' data-bind='text: value + " " + UndergroundItem.getFullResourceName(valueType, value)'></td>
-            <!-- /ko -->
-            <td class='vertical-middle'>
-                <button class='btn btn-success tooltipRightMine'
-                        data-bind='click: function(){ Underground.sellMineItem(id) },
-                                   css: { disabled: amount() <= 0 || (valueType === "Mine Egg" && !App.game.breeding.hasFreeEggSlot()) },
-                                   text: valueType === "Mine Egg" ? "Breed" : "Sell"'>
-                </button>
-            </td>
-        </tr>
-    </script>
-
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
 
@@ -51,7 +28,7 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.4.13"></script>
+    <script src="scripts/script.min.js?v=0.4.14"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -67,7 +44,7 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.4.13" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.4.14" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
@@ -4677,7 +4654,7 @@
         </thead>
         -->
         <tbody data-bind="foreach: App.game.oakItems.itemList">
-          <tr data-bind="if: $data.isActive, tooltip: { html: true, title: `<u>${$data.displayName}</u><br/><p>${$data.description}</p>Level: <strong>${$data.level}</strong><br/>Bonus: <strong>${$data.calculateBonusIfActive()}${$index() != OakItems.OakItem.Magic_Ball ? '×' : '%'}</strong>`, trigger: 'hover', placement:'bottom' }">
+          <tr data-bind="if: $data.isActive, tooltip: { html: true, title: $data.tooltip, trigger: 'hover', placement:'bottom' }">
             <td class="tight p-1">
               <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'}">
             </td>
@@ -4808,7 +4785,7 @@
     </button>
     <div id='eggList' class="card-body p-0 show">
       <div class="row m-0" data-bind="foreach: App.game.breeding.eggList">
-        <div class="col-6 p-0 eggSlot">
+        <div class="col-3 col-md-6 p-0 eggSlot">
           <div class="content">
             <div data-bind="if: $index() === App.game.breeding.eggSlots">
                 <p>
@@ -4866,21 +4843,21 @@
       <table class="table table-sm m-0">
         <tbody>
           <tr data-bind="visible: Underground.canAccess">
-            <td>
+            <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="Underground.openUndergroundModal()">
                   Underground
               </button>
             </td>
           </tr>
           <tr data-bind="visible: App.game.farming.canAccess">
-            <td>
+            <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="FarmController.openFarmModal()">
                   Farm
               </button>
             </td>
           </tr>
           <tr data-bind="visible: App.game.statistics.gymsDefeated[Statistics.getGymIndex('Champion Lance')]">
-            <td>
+            <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="ShopHandler.showShop(pokeMartShop);player.currentTown('Poké Mart');" href="#shopModal" data-toggle="modal">
                   Poké Mart
               </button>
@@ -4904,23 +4881,22 @@
             <div class="modal-header text-center">
                 <h4 data-bind="text: player.currentTown().endsWith('Mart') ? player.currentTown() : player.currentTown() + ' Shop'">Shop</h4>
                 <h4>
-                    <img title="Money" src="assets/images/currency/money.png">
+                    <img title="Money" src="assets/images/currency/money.png" style="width: 32px;">
                     <span id="playerMoney" data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money])">0</span>
                 </h4>
                 <h4>
-                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon"
-                         src="assets/images/currency/dungeonToken.png">
+                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon" src="assets/images/currency/dungeonToken.png" style="width: 32px;">
                     <span id="playerMoneyDungeon" data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken])">0</span>
                 </h4>
                 <h4>
-                    <img title="Quest points" src="assets/images/currency/questPoint.png">
+                    <img title="Quest points" src="assets/images/currency/questPoint.png" style="width: 32px;">
                     <span id="playerMoneyQuest" data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint])">0</span>
                 </h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
-                    <div class="col-sm-3">
+                    <div class="col-6 col-sm-4 col-lg-3">
                        <button class="shopItem clickable btn btn-block btn-secondary"
                            data-bind="click: function() {ShopHandler.setSelected($index())},
                            css: { active: ShopHandler.selected() == $index() },
@@ -5677,81 +5653,81 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 <!-- Underground Modal -->
 <div aria-labelledby="myModalLabel" class="modal fade noselect" id="mineModal" role="dialog"
 style="cursor:default" tabindex="-1">
-<div class="modal-dialog" role="document">
-   <div class="modal-content">
-       <div class="modal-header">
-           <ul class="nav nav-tabs nav-fill">
-               <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
-               <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a>
-               </li>
-               <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#upgrades">Upgrades</a>
-               </li>
-               <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#dailyDeals">Daily
-                   deals</a></li>
-               <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
-               <p><span id="diamondCounter" data-bind='text: App.game.wallet.currencies[GameConstants.Currency.diamond]'>x</span> <img
-                       src='assets/images/underground/diamond.svg' width="20px'"></p>
-           </ul>
-       </div>
-       <div class="tab-content p-0">
-           <div id="dig" class="tab-pane fade in active show">
-               <div class="modal-body" style="width: 80%;margin: auto;">
-
-                   <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
-                     <div class="col-md-4 text-center">
-                       <button style="display: inline;" class="btn btn-secondary" data-bind="
-                                                      click: function(){  ItemList[$data].use();},
-                                                      css: { disabled: player._itemList[$data]() <= 0}"
-                       >
-                         <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
-                         <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data]) + ' energy'">&nbsp;+? energy</span>
-                         <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
-                       </button>
-                     </div>
-                   </div>
-                   <br/>
-                   <div class='row' style="text-align:center;">
-                       <div class='progress' style="height: 20px;font-size: 18px;">
-                           <div id='mineEnergyBar' class='progress-bar' role='progressbar'
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header p-0">
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#dig">Dig</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#treasures">Treasures</a>
+                    </li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#upgrades">Upgrades</a>
+                    </li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#dailyDeals">Daily
+                        deals</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
+                    <btn class="btn btn-primary">
+                        <span id="diamondCounter" data-bind='text: App.game.wallet.currencies[GameConstants.Currency.diamond]'>x</span>
+                        <img src='assets/images/underground/diamond.svg' width="20px'">
+                    </btn>
+                </ul>
+            </div>
+            
+            <div class="modal-body tab-content p-0">
+                <div id="dig" class="tab-pane fade in active show pl-3 pr-3">
+                    <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                        <button class="col-4 btn btn-secondary" data-bind="
+                                                        click: function(){  ItemList[$data].use();},
+                                                        css: { disabled: player._itemList[$data]() <= 0}"
+                        >
+                            <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
+                            <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+                            <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
+                        </button>
+                    </div>
+                    <div class='row' style="text-align:center;">
+                        <div class='progress'>
+                            <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
                                 data-bind="style: { width: Math.floor(Underground.energy/Underground.getMaxEnergy()*100) + '%' }">
-                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + '/' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
-                           </div>
-                       </div>
-                   </div>
-                   <div id="mineBody" style="margin:auto"></div>
-               </div>
-           </div>
-           <div id="treasures" class="tab-pane fade">
-               <div class="modal-body" id="treasuresBody" style="width: 80%;margin: auto;">
-                   <div data-bind="if: player.hasMineItems()">
-                       <table class='table'>
-                           <thead>
-                             <tr>
-                               <th colspan="2">Item</th>
-                               <th>Value</th>
-                               <th></th>
-                             </tr>
-                           </thead>
-                           <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player.mineInventory}">
-                           </tbody>
-                       </table>
-                   </div>
-                   <div data-bind="ifnot:player.hasMineItems()">
-                       You don't have any treasures yet...
-                   </div>
-               </div>
-           </div>
-           <div id="upgrades" class="tab-pane fade">
-               <div class="modal-body" id="upgradesBody" style="width: 80%;margin: auto;">
-                    <table class='table'>
+                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + ' / ' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="mineBody" style="margin:auto">
+                    </div>
+                    <div class='row'>
+                        <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'>Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
+                        <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'>Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
+                        <button class='col-12 col-md-4 btn' data-bind="text: Mine.itemsFound() + ' / ' + Mine.itemsBuried + ' items found'"></button>
+                      </div>
+                </div>
+                <div id="treasures" class="tab-pane fade">
+                    <div data-bind="if: player.hasMineItems()">
+                        <table class="table table-sm table-hover table-striped m-0">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Item</th>
+                                    <th>Value</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="template: { name: 'treasureListTemplate', foreach: player.mineInventory}">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div data-bind="ifnot:player.hasMineItems()">
+                        You don't have any treasures yet...
+                    </div>
+                </div>
+                <div id="upgrades" class="tab-pane fade">
+                    <table class="table table-sm table-hover table-striped m-0">
                         <thead>
-                          <tr>
+                            <tr>
                             <th>Upgrade</th>
                             <th>Amount</th>
                             <th>Cost</th>
                             <th></th>
-                          </tr>
+                            </tr>
                         </thead>
                         <tbody>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
@@ -5766,77 +5742,96 @@ style="cursor:default" tabindex="-1">
                             'data': {'totalBonus': Underground.getDailyDealsMax(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Daily_Deals_Max)}}"></tr>
                         </tbody>
                     </table>
-               </div>
-           </div>
-           <div id="help" class="tab-pane fade">
-               <div class="modal-body" id="helpBody" style="width: 80%;margin: auto;">
-                   <h4>In the underground you can mine for hidden treasures.</h4>
-                   <h4>Select the Hammer or the Chisel and click on the wall.</h4>
-                   <h4>Sell your treasures for shards or diamonds!</h4>
-                   <h4>You can use your diamonds to buy all kinds of upgrades that will help you explore the underground even further!</h4>
-                   <h4>In the Daily deals tab you can trade your items.</h4>
-               </div>
-           </div>
-           <div id="dailyDeals" class="tab-pane fade">
-               <div class="modal-body" id="dailyDealsBody" style="width: 80%;margin: auto;">
-                   <table class='table'>
-                       <thead>
-                         <tr>
-                           <th colspan="2">Item</th>
-                           <th>Cost</th>
-                           <th></th>
-                           <th colspan="2">Item</th>
-                           <th>Gain</th>
-                           <th></th>
-                         </tr>
-                       </thead>
-                       <tbody data-bind='foreach: DailyDeal.list'>
-                           <tr>
-                               <td class='vertical-middle'>
-                                   <img class='mineInventoryItem'
-                                        data-bind='attr: {src: "assets/images/underground/"+item1.id+".png"}'>
-                                   <span data-bind='text: "(" + player.getUndergroundItemAmount(item1.id) + ")"'></span>
-                               </td>
-                               <td class='vertical-middle' data-bind='text: item1.name'></td>
-                               <td class='vertical-middle' data-bind='text: amount1'></td>
-                               <td class='vertical-middle'><img src='assets/images/underground/rightArrow.png'>
-                               </td>
-                               <td class='vertical-middle'>
-                                   <img class='mineInventoryItem'
-                                        data-bind='attr: {src: "assets/images/underground/"+item2.id+".png"}'>
-                               </td>
-                               <td class='vertical-middle' data-bind='text: item2.name'></td>
-                               <td class='vertical-middle' data-bind='text: amount2'></td>
-                               <td class='vertical-middle'>
-                                   <button class='btn btn-info'
-                                           data-bind="click: function(){DailyDeal.use($index())}, css: { disabled: !DailyDeal.canUse($index()) }">
-                                       Trade
-                                   </button>
-                               </td>
-                           </tr>
-                       </tbody>
-                   </table>
-               </div>
-           </div>
-       </div>
-   </div>
-</div>
-</div>
+                </div>
+                <div id="help" class="tab-pane fade">
+                    <h4>In the underground you can mine for hidden treasures.</h4>
+                    <h4>Select the Hammer or the Chisel and click on the wall.</h4>
+                    <h4>Sell your treasures for shards or diamonds!</h4>
+                    <h4>You can use your diamonds to buy all kinds of upgrades that will help you explore the underground even further!</h4>
+                    <h4>In the Daily deals tab you can trade your items.</h4>
+                </div>
+                <div id="dailyDeals" class="tab-pane fade">
+                    <div class="table-responsive" id="dailyDealsBody">
+                        <table class="table table-sm table-hover table-striped m-0 text-left">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Inv</th>
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind='foreach: DailyDeal.list'>
+                                <tr>
+                                    <td class='vertical-middle text-center' data-bind='text: player.getUndergroundItemAmount(item1.id)'></td>
+                                    <td class='vertical-middle'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item1.id+".png"}'>
+                                    </td>
+                                    <td class='vertical-middle' data-bind='text: amount1 + " × " + item1.name'></td>
+                                    <td class='vertical-middle'>→</td>
+                                    <td class='vertical-middle'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item2.id+".png"}'>
+                                    </td>
+                                    <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
+                                    <td class='vertical-middle'>
+                                        <button class='btn btn-success btn-block' data-bind='click: function(){DailyDeal.use($index())}, css: { disabled: !DailyDeal.canUse($index()) }'>
+                                            Trade
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-<script type="text/html" id="undergroundUpgradeTemplate">
-        <td class='vertical-middle' data-bind='text: upgrade.displayName + ": " + totalBonus'></td>
-        <td class='vertical-middle'
-            data-bind='text: upgrade.isMaxLevel() ? "" : "(" + (upgrade.increasing ? "+" : "-") + upgrade.upgradeBonus() + ")"'></td>
-        <td class='vertical-middle'
-            data-bind='text: upgrade.isMaxLevel() ? "" : upgrade.calculateCost().amount + " diamonds"'></td>
-        <td class='vertical-middle'>
-            <button class='btn btn-success'
-                    data-bind='css: { disabled: !upgrade.canBuy() },
-                                                          text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
-                                                          click: function(){upgrade.buy()}'>
-            </button>
-        </td>
-</script>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="undergroundUpgradeTemplate">
+            <td class='vertical-middle' data-bind='text: upgrade.displayName + ": " + totalBonus'></td>
+            <td class='vertical-middle'
+                data-bind='text: upgrade.isMaxLevel() ? "" : "(" + (upgrade.increasing ? "+" : "-") + upgrade.upgradeBonus() + ")"'></td>
+            <td class='vertical-middle'
+                data-bind='text: upgrade.isMaxLevel() ? "" : upgrade.calculateCost().amount + " diamonds"'></td>
+            <td class='vertical-middle'>
+                <button class='btn btn-success btn-block'
+                        data-bind='css: { disabled: !upgrade.canBuy() },
+                                text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
+                                click: function(){upgrade.buy(); DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());}'>
+                </button>
+            </td>
+    </script>
+
+    <script type="text/html" id="treasureListTemplate">
+        <tr data-bind='if: amount() > 0'>
+            <td class='vertical-middle'>
+                <img class='mineInventoryItem' data-bind='attr:{ src: "assets/images/underground/"+id+".png" }'>
+                <span data-bind='text: "("+$data.amount()+")"'></span>
+            </td>
+            <td class='vertical-middle' data-bind='text: name'></td>
+            <!-- ko if: valueType == "Mine Egg" -->
+            <td></td>
+            <!-- /ko -->
+            <!-- ko ifnot: valueType == "Mine Egg" -->
+            <td class='vertical-middle' data-bind='text: value + " " + UndergroundItem.getFullResourceName(valueType, value)'></td>
+            <!-- /ko -->
+            <td class='vertical-middle'>
+                <button class='btn btn-success btn-block'
+                        data-bind='click: function(){ Underground.sellMineItem(id) },
+                                css: { disabled: amount() <= 0 || (valueType === "Mine Egg" && !App.game.breeding.hasFreeEggSlot()) },
+                                text: valueType === "Mine Egg" ? "Breed" : "Sell"'>
+                </button>
+            </td>
+        </tr>
+    </script>
+</div>
 
 
 <!-- Pokedex Modal-->
@@ -6189,7 +6184,7 @@ aria-labelledby="badgeCaseModalLabel">
 
             <div class="modal-footer">
                 <div id='refreshQuests'>
-                    <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()'
+                    <button class="btn btn-primary" onclick='QuestHelper.refreshQuests(false, true)'
                             data-bind='text: "Refresh",
                                        enable: QuestHelper.canAffordRefresh()'></button>
                     <span data-bind="template: { name: 'amountTemplate', data: QuestHelper.getRefreshCost()}"></span>
@@ -6375,15 +6370,10 @@ aria-labelledby="badgeCaseModalLabel">
                         <div class="modal-body p-0">
 
                             <div id="safariEntrance" data-bind="if: !Safari.inProgress()">
-                                <div class="center margin-bottom-sm">
-                                    <button id="paySafariButton"
-                                        class="btn"
-                                        onclick="Safari.payEntranceFee()"
-                                        data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
-                                        Pay Entrance Fee
-                                    </button>
-                                    <span id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></span>
-                                </div>
+                                <button id="paySafariButton" class="btn btn-block" onclick="Safari.payEntranceFee()"
+                                    data-bind="class: Safari.canPay() ? 'btn-primary' : 'disabled btn-danger'">
+                                    Pay Entrance Fee <knockout id='safariEntranceCost' data-bind="template: { name: 'currencyTemplate', data: {'amount': Safari.cost().amount, 'currency': Safari.cost().currency}}"></knockout>
+                                </button>
                                 <img class='fit-width' src="assets/images/safari/area1.png" />
                             </div>
 
