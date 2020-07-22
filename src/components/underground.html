@@ -99,37 +99,32 @@ style="cursor:default" tabindex="-1">
                 </div>
                 <div id="dailyDeals" class="tab-pane fade">
                     <div class="table-responsive" id="dailyDealsBody">
-                        <table class="table table-sm table-hover table-striped m-0">
+                        <table class="table table-sm table-hover table-striped m-0 text-left">
                             <thead>
                                 <tr>
-                                <th colspan="2">Item</th>
-                                <th>Cost</th>
-                                <th></th>
-                                <th colspan="2">Item</th>
-                                <th>Gain</th>
-                                <th></th>
+                                    <th class="text-center">Inv</th>
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody data-bind='foreach: DailyDeal.list'>
                                 <tr>
+                                    <td class='vertical-middle text-center' data-bind='text: player.getUndergroundItemAmount(item1.id)'></td>
                                     <td class='vertical-middle'>
-                                        <img class='mineInventoryItem'
-                                                data-bind='attr: {src: "assets/images/underground/"+item1.id+".png"}'>
-                                        <span data-bind='text: "(" + player.getUndergroundItemAmount(item1.id) + ")"'></span>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item1.id+".png"}'>
                                     </td>
-                                    <td class='vertical-middle' data-bind='text: item1.name'></td>
-                                    <td class='vertical-middle' data-bind='text: amount1'></td>
-                                    <td class='vertical-middle'><img src='assets/images/underground/rightArrow.png'>
-                                    </td>
+                                    <td class='vertical-middle' data-bind='text: amount1 + " × " + item1.name'></td>
+                                    <td class='vertical-middle'>→</td>
                                     <td class='vertical-middle'>
-                                        <img class='mineInventoryItem'
-                                                data-bind='attr: {src: "assets/images/underground/"+item2.id+".png"}'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item2.id+".png"}'>
                                     </td>
-                                    <td class='vertical-middle' data-bind='text: item2.name'></td>
-                                    <td class='vertical-middle' data-bind='text: amount2'></td>
+                                    <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
                                     <td class='vertical-middle'>
-                                        <button class='btn btn-success btn-block'
-                                                data-bind="click: function(){DailyDeal.use($index())}, css: { disabled: !DailyDeal.canUse($index()) }">
+                                        <button class='btn btn-success btn-block' data-bind='click: function(){DailyDeal.use($index())}, css: { disabled: !DailyDeal.canUse($index()) }'>
                                             Trade
                                         </button>
                                     </td>
