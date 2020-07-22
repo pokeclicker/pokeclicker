@@ -170,12 +170,6 @@ class Mine {
         return true;
     }
 
-    public static itemsFoundtext() {
-        return ko.pureComputed(() => {
-            return `${Mine.itemsFound()} / ${Mine.itemsBuried} items found`;
-        });
-    }
-
     private static checkCompleted() {
         if (Mine.itemsFound() >= Mine.itemsBuried) {
             setTimeout(Mine.completed, 1500);

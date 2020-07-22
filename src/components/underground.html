@@ -36,7 +36,7 @@ style="cursor:default" tabindex="-1">
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
                                 data-bind="style: { width: Math.floor(Underground.energy/Underground.getMaxEnergy()*100) + '%' }">
-                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + '/' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
+                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + ' / ' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@ style="cursor:default" tabindex="-1">
                     <div class='row'>
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'>Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'>Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
-                        <button class='col-12 col-md-4 btn' data-bind='text: Mine.itemsFound() + "/" + Mine.itemsBuried + " items found"'></button>
+                        <button class='col-12 col-md-4 btn' data-bind="text: Mine.itemsFound() + ' / ' + Mine.itemsBuried + ' items found'"></button>
                       </div>
                 </div>
                 <div id="treasures" class="tab-pane fade">
@@ -128,7 +128,7 @@ style="cursor:default" tabindex="-1">
                                     <td class='vertical-middle' data-bind='text: item2.name'></td>
                                     <td class='vertical-middle' data-bind='text: amount2'></td>
                                     <td class='vertical-middle'>
-                                        <button class='btn btn-info'
+                                        <button class='btn btn-success btn-block'
                                                 data-bind="click: function(){DailyDeal.use($index())}, css: { disabled: !DailyDeal.canUse($index()) }">
                                             Trade
                                         </button>
