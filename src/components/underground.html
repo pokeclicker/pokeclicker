@@ -16,33 +16,32 @@ style="cursor:default" tabindex="-1">
                        src='assets/images/underground/diamond.svg' width="20px'"></p>
            </ul>
        </div>
+       <div class="modal-body p-0">
        <div class="tab-content p-0">
-           <div id="dig" class="tab-pane fade in active show">
-               <div class="modal-body">
-                    <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
-                        <button class="col-4 btn btn-secondary" data-bind="
-                                                       click: function(){  ItemList[$data].use();},
-                                                       css: { disabled: player._itemList[$data]() <= 0}"
-                        >
-                          <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
-                          <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
-                          <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
-                        </button>
+           <div id="dig" class="tab-pane fade in active show p-3">
+                <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                    <button class="col-4 btn btn-secondary" data-bind="
+                                                    click: function(){  ItemList[$data].use();},
+                                                    css: { disabled: player._itemList[$data]() <= 0}"
+                    >
+                        <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
+                        <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+                        <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
+                    </button>
+                </div>
+                <div class='row' style="text-align:center;">
+                    <div class='progress' style="height: 20px;font-size: 18px;">
+                        <div id='mineEnergyBar' class='progress-bar' role='progressbar'
+                            aria-valuemin='0' aria-valuemax='100'
+                            data-bind="style: { width: Math.floor(Underground.energy/Underground.getMaxEnergy()*100) + '%' }">
+                            <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + '/' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
+                        </div>
                     </div>
-                   <div class='row' style="text-align:center;">
-                       <div class='progress' style="height: 20px;font-size: 18px;">
-                           <div id='mineEnergyBar' class='progress-bar' role='progressbar'
-                                aria-valuemin='0' aria-valuemax='100'
-                                data-bind="style: { width: Math.floor(Underground.energy/Underground.getMaxEnergy()*100) + '%' }">
-                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + '/' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
-                           </div>
-                       </div>
-                   </div>
-                   <div id="mineBody" style="margin:auto"></div>
-               </div>
+                </div>
+                <div id="mineBody" style="margin:auto"></div>
            </div>
            <div id="treasures" class="tab-pane fade">
-               <div class="modal-body p-0" id="treasuresBody">
+               <div id="treasuresBody">
                    <div data-bind="if: player.hasMineItems()">
                        <table class='table'>
                            <thead>
@@ -62,7 +61,7 @@ style="cursor:default" tabindex="-1">
                </div>
            </div>
            <div id="upgrades" class="tab-pane fade">
-               <div class="modal-body p-0" id="upgradesBody">
+               <div id="upgradesBody">
                     <table class='table'>
                         <thead>
                           <tr>
@@ -88,7 +87,7 @@ style="cursor:default" tabindex="-1">
                </div>
            </div>
            <div id="help" class="tab-pane fade">
-               <div class="modal-body" id="helpBody">
+               <div id="helpBody">
                    <h4>In the underground you can mine for hidden treasures.</h4>
                    <h4>Select the Hammer or the Chisel and click on the wall.</h4>
                    <h4>Sell your treasures for shards or diamonds!</h4>
@@ -97,7 +96,7 @@ style="cursor:default" tabindex="-1">
                </div>
            </div>
            <div id="dailyDeals" class="tab-pane fade">
-               <div class="modal-body table-responsive p-0" id="dailyDealsBody">
+               <div class="table-responsive" id="dailyDealsBody">
                    <table class='table table-sm table-hover table-striped'>
                        <thead>
                          <tr>
@@ -136,6 +135,7 @@ style="cursor:default" tabindex="-1">
                        </tbody>
                    </table>
                </div>
+           </div>
            </div>
        </div>
    </div>
