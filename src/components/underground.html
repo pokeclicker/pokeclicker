@@ -19,14 +19,14 @@ style="cursor:default" tabindex="-1">
        <div class="tab-content p-0">
            <div id="dig" class="tab-pane fade in active show">
                <div class="modal-body">
-                    <div class="input-group" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
-                        <button style="display: inline;" class="btn btn-secondary" data-bind="
+                    <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                        <button class="col-4 btn btn-secondary" data-bind="
                                                        click: function(){  ItemList[$data].use();},
                                                        css: { disabled: player._itemList[$data]() <= 0}"
                         >
-                          <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
-                          <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data]) + ' energy'">&nbsp;+? energy</span>
                           <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
+                          <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+                          <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
                         </button>
                     </div>
                    <div class='row' style="text-align:center;">
