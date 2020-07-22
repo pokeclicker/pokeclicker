@@ -60,12 +60,12 @@ abstract class Item {
         }
 
         if (n > this.maxAmount) {
-            Notifier.notify({ message: `You can only buy ${this.maxAmount} &times; ${this.name()}!`, type: GameConstants.NotificationOption.danger });
+            Notifier.notify({ message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.name())}!`, type: GameConstants.NotificationOption.danger });
             n = this.maxAmount;
         }
 
         if (!this.isAvailable()) {
-            Notifier.notify({ message: `${this.name()} is sold out!`, type: GameConstants.NotificationOption.danger });
+            Notifier.notify({ message: `${GameConstants.humanifyString(this.name())} is sold out!`, type: GameConstants.NotificationOption.danger });
             return;
         }
 
