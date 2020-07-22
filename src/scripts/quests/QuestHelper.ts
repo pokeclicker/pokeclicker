@@ -89,9 +89,12 @@ class QuestHelper {
         }
     }
 
-    public static refreshQuests(free = false) {
+    public static refreshQuests(free = false, shouldConfirm = false) {
         if (free || QuestHelper.canAffordRefresh()) {
             if (!free) {
+                if (shouldConfirm && !confirm('Are you sure you want to refresh the quest list?!')) {
+                    return;
+                }
                 App.game.wallet.loseAmount(QuestHelper.getRefreshCost());
             }
             player.questRefreshes++;

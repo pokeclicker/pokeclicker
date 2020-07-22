@@ -61,7 +61,7 @@
 
             <div class="modal-footer">
                 <div id='refreshQuests'>
-                    <button class="btn btn-primary" onclick='QuestHelper.refreshQuests()'
+                    <button class="btn btn-primary" onclick='QuestHelper.refreshQuests(false, true)'
                             data-bind='text: "Refresh",
                                        enable: QuestHelper.canAffordRefresh()'></button>
                     <span data-bind="template: { name: 'amountTemplate', data: QuestHelper.getRefreshCost()}"></span>
