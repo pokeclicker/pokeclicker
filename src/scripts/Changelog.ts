@@ -34,6 +34,7 @@ const changelogItems = [
     new Changelog(changelogType.NEW, 'Added Dratini to Route 45'),
     new Changelog(changelogType.CHANGE, 'Enlarge buttons in Shortcut menu, Safari Zone'),
     new Changelog(changelogType.CHANGE, 'Make Shop items fit better'),
+    new Changelog(changelogType.CHANGE, 'Breeding display takes up less space on smaller screens now'),
     new Changelog(changelogType.CHANGE, 'Add confirmation when refreshing quest list'),
 
     // v0.4.13
