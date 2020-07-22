@@ -38,6 +38,7 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, 'Breeding display takes up less space on smaller screens now'),
     new Changelog(changelogType.CHANGE, 'Add confirmation when refreshing quest list'),
     new Changelog(changelogType.FIXED, 'Update Oak items tooltip when upgraded'),
+    new Changelog(changelogType.FIXED, 'Auto refresh Daily Deals when upgrade purchased'),
 
     // v0.4.13
     new Changelog(changelogType.UPDATE, 'v0.4.13'),

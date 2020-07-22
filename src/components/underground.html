@@ -151,8 +151,8 @@ style="cursor:default" tabindex="-1">
         <td class='vertical-middle'>
             <button class='btn btn-success'
                     data-bind='css: { disabled: !upgrade.canBuy() },
-                                                          text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
-                                                          click: function(){upgrade.buy()}'>
+                               text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
+                               click: function(){upgrade.buy(); DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());}'>
             </button>
         </td>
 </script>
