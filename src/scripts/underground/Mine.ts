@@ -15,7 +15,6 @@ class Mine {
         const tmpGrid = [];
         const tmpRewardGrid = [];
         Mine.rewardNumbers = [];
-        Mine.itemsFound(0);
         Mine.itemsBuried = 0;
         for (let i = 0; i < this.sizeY; i++) {
             const row = [];
@@ -40,6 +39,7 @@ class Mine {
             }
         }
         Mine.loadingNewLayer = false;
+        Mine.itemsFound(0);
         Underground.showMine();
     }
 
