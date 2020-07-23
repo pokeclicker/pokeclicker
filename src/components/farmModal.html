@@ -13,10 +13,8 @@
                 <!-- /ko -->
             </div>
             <div class="modal-body">
-                <div id="farmView"
-                     class="justify-content-center no-select row">
-
-                    <div class="col-sm-4 col-md-3 col-lg-4">
+                <div id="farmView" class="justify-content-center no-select row">
+                    <div class="col-12 col-lg-4">
                         <div class="col-sm-12">
                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint], 'currency': GameConstants.Currency.farmPoint}}"></span>
                         </div>
@@ -33,18 +31,18 @@
 
                         <div class="row">
                             <div class="col-sm-12 col-6">
-                                <button class="btn btn-primary btn-sm farm-button"
+                                <button class="btn btn-primary btn-block"
                                         data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">Plant All
                                 </button>
                             </div>
                             <div class="col-sm-12 col-6">
-                                <button class="btn btn-success btn-sm farm-button"
+                                <button class="btn btn-success btn-block"
                                         data-bind="click: function(){App.game.farming.harvestAll()}">Harvest All
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-8 col-md-9 col-lg-8" style="padding-left: 0">
+                    <div class="col-12 col-lg-8" style="padding-left: 0">
                         <div id="plotList" data-bind="foreach: App.game.farming.plotList">
                             <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked}">
                                 <div class="plot-content">
