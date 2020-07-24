@@ -70,7 +70,7 @@ class Update implements Saveable {
         }
 
         // v0.4.16
-        if (this.isOlderVersion(this.saveVersion, '0.4.16')) {
+        if (this.isOlderVersion(this.saveVersion, '0.4.15')) {
             delete localStorage.mine;
         }
 
