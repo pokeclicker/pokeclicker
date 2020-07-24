@@ -38,11 +38,11 @@ class UndergroundItem {
         this.addItem('Hard Stone', 16, [[16,16],[16,16]], 4);
 
         this.addItem('Fire Stone', 17, [[17,17,17], [17,17,17], [17,17,17]], 1, 'Fire_stone');
-        this.addItem('Water Stone', 18, [[18,18,18], [18,18,18], [18,18,0]], 1, 'Water_stone');
-        this.addItem('Thunder Stone', 19, [[0,19,19], [19,19,19], [19,19,0]], 1, 'Thunder_stone');
-        this.addItem('Leaf Stone', 20, [[0,20,0], [20,20,20], [20,20,20], [0,20,0]], 1, 'Leaf_stone');
-        this.addItem('Moon Stone', 21, [[0,21,21,21], [21,21,21,0]], 1, 'Moon_stone');
-        this.addItem('Sun Stone', 22, [[0,22,0], [22,22,22], [22,22,22]], 1, 'Sun_stone');
+        this.addItem('Water Stone', 18, [[18,18,18], [18,18,18], [18,18,18]], 1, 'Water_stone');
+        this.addItem('Thunder Stone', 19, [[19,19,19], [19,19,19], [19,19,19]], 1, 'Thunder_stone');
+        this.addItem('Leaf Stone', 20, [[20,20,20], [20,20,20], [20,20,20], [20,20,20]], 1, 'Leaf_stone');
+        this.addItem('Moon Stone', 21, [[21,21,21], [21,21,21], [21,21,21]], 1, 'Moon_stone');
+        this.addItem('Sun Stone', 22, [[22,22,22], [22,22,22], [22,22,22]], 1, 'Sun_stone');
 
         this.addItem('Oval Stone', 23, [[23,23,23], [23,23,23], [23,23,23]], 3);
         this.addItem('Everstone', 24, [[24,24,24], [24,24,24]], 3);
@@ -69,12 +69,12 @@ class UndergroundItem {
         this.addItem('Zap Plate', 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]], 100, 'electric');
         this.addItem('Pixie Plate', 45, [[45,45,45,45], [45,45,45,45], [45,45,45,45]], 100, 'fairy');
 
-        this.addItem('Trade Stone', 46, [[46,46], [46,46]], 1, 'Trade_stone');
-        this.addItem('Dragon Scale', 47, [[47,47], [47,47]], 1, 'Dragon_scale');
-        this.addItem('Metal Coat', 48, [[48,48], [48,48]], 1, 'Metal_coat');
-        this.addItem('Kings Rock', 49, [[49,49], [49,49]], 1, 'Kings_rock');
-        this.addItem('Upgrade', 50, [[50,50], [50,50]], 1, 'Upgrade');
-        this.addItem('Time Stone', 51, [[51,51], [51,51]], 1, 'Time_stone');
+        this.addItem('Trade Stone', 46, [[46,46,46], [46,46,46], [46,46,46]], 1, 'Trade_stone');
+        this.addItem('Dragon Scale', 47, [[47,47,47], [47,47,47], [47,47,47]], 1, 'Dragon_scale');
+        this.addItem('Metal Coat', 48, [[48,48,48], [48,48,48], [48,48,48]], 1, 'Metal_coat');
+        this.addItem('Kings Rock', 49, [[49,49,49], [49,49,49], [49,49,49]], 1, 'Kings_rock');
+        this.addItem('Upgrade', 50, [[50,50,50], [50,50,50], [50,50,50]], 1, 'Upgrade');
+        this.addItem('Time Stone', 51, [[51,51,51], [51,51,51], [51,51,51]], 1, 'Time_stone');
     }
 
     public static getRandomItem(): UndergroundItem {
