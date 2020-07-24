@@ -217,29 +217,6 @@
     max-width: 4% !important;
     background-size: contain;
 }
-.mineSquare:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.rock1:hover:after,
-.rock2:hover:after,
-.rock3:hover:after,
-.rock4:hover:after,
-.rock5:hover:after,
-.hammerSelected.mineSquare:hover:after
-{
-    border: 1px solid red;
-}
-
-img.hammerSelected.mineReward:hover {
-    outline: 1px solid red;
-    z-index: 1;
-}
 
 .HammerSelected {
     cursor:url('../assets/images/underground/hammer.png'), auto;
@@ -247,4 +224,46 @@ img.hammerSelected.mineReward:hover {
 
 .ChiselSelected {
     cursor: url('../assets/images/underground/chissel.png'), auto;
+            
+    &.mineSquare:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 100;
+        pointer-events: none;
+    }
+
+    &.rock1:hover:after,
+    &.rock2:hover:after,
+    &.rock3:hover:after,
+    &.rock4:hover:after,
+    &.rock5:hover:after {
+        width: 100%;
+        height: 100%;
+        border: 1px solid red;
+    }
+}
+
+#mineBody {
+    .row:not(:first-child):not(:last-child) {
+        .HammerSelected:not(:first-child):not(:last-child) {
+
+            &.mineSquare:after {
+                content: "";
+                position: absolute;
+                top: -100%;
+                left: -100%;
+                z-index: 100;
+                pointer-events: none;
+            }
+
+            &.mineSquare:hover:after
+            {
+                width: 300%;
+                height: 300%;
+                border: 1px solid red;
+            }
+        }
+    }
 }
