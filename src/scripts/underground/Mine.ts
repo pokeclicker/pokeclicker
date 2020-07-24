@@ -82,6 +82,8 @@ class Mine {
             for (let j = 0; j < reward.space[i].length; j++) {
                 if (reward.space[i][j] !== 0) {
                     Mine.rewardGrid[i + y][j + x] = {
+                        sizeX: reward.space[i].length,
+                        sizeY: reward.space.length,
                         x: j,
                         y: i,
                         value: reward.space[i][j],

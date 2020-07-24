@@ -52,7 +52,7 @@ class Underground {
     private static mineSquare(amount: number, i: number, j: number): string {
         if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() === 0) {
             Mine.rewardGrid[i][j].revealed = 1;
-            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})()' data-i='${i}' data-j='${j}'><img src='assets/images/underground/${Mine.rewardGrid[i][j].value}/${Mine.rewardGrid[i][j].value}-${Mine.rewardGrid[i][j].y}-${Mine.rewardGrid[i][j].x}.png'/></div>`;
+            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})()' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y}" style="background-image: url('assets/images/underground/${Mine.rewardGrid[i][j].value}.png');"></div></div>`;
         } else {
             return `<div data-bind='css: Underground.calculateCssClass(${i},${j})()' data-i='${i}' data-j='${j}'></div>`;
         }
@@ -67,7 +67,7 @@ class Underground {
                 if (Mine.grid[i][j]() == 0) {
                     if (Mine.rewardGrid[i][j] != 0 && Mine.rewardGrid[i][j].revealed != 1) {
                         Mine.rewardGrid[i][j].revealed = 1;
-                        $(`div[data-i=${i}][data-j=${j}]`).html(`<img src='assets/images/underground/${Mine.rewardGrid[i][j].value}/${Mine.rewardGrid[i][j].value}-${Mine.rewardGrid[i][j].y}-${Mine.rewardGrid[i][j].x}.png' data-bind='css: Underground.rewardCssClass'>`);
+                        $(`div[data-i=${i}][data-j=${j}]`).html(`<div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y}" style="background-image: url('assets/images/underground/${Mine.rewardGrid[i][j].value}.png');"></div>`);
                         Mine.checkItemsRevealed();
                     }
                 }
