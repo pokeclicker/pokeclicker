@@ -19,7 +19,7 @@
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
-                                    <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}">
+                                    <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}" style="max-width: 32px;">
                                     <div data-bind="text: player._itemList[$data]()"></div>
                                 </div>
                             </div>

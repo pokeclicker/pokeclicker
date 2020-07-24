@@ -19,7 +19,7 @@
         <tbody data-bind="foreach: App.game.oakItems.itemList">
           <tr data-bind="if: $data.isActive, tooltip: { html: true, title: $data.tooltip, trigger: 'hover', placement:'bottom' }">
             <td class="tight p-1">
-              <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'}">
+              <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'}" width="32px">
             </td>
             <td class="p-0">
               <div class="progress" style="height: 40px;">
