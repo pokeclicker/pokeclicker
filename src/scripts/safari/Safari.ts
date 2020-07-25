@@ -140,7 +140,7 @@ class Safari {
     }
 
     private static cost() {
-        return new Amount(50,GameConstants.Currency.questPoint);
+        return new Amount(100, GameConstants.Currency.questPoint);
     }
 
     private static payEntranceFee() {
