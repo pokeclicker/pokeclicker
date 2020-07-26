@@ -1,7 +1,6 @@
 type EmptyCallback = () => void;
 
 class SpecialEvent {
-    id: number;
     title: string;
     description: string;
     startTime: Date;
@@ -13,7 +12,7 @@ class SpecialEvent {
     notified: SpecialEventNotifiedStatus;
 
 
-    constructor(id: number, title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
+    constructor(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;

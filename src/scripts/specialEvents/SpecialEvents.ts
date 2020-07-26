@@ -5,10 +5,10 @@ class SpecialEvents implements Feature {
 
     static events = [];
 
-    static newEvent(id: number, title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
+    static newEvent(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
         // Check if the event exist before adding it again
-        if (!SpecialEvents.events.find(event => event.id == id)) {
-            SpecialEvents.events.push(new SpecialEvent(id, title, description, startTime, startFunction, endTime, endFunction));
+        if (!SpecialEvents.events.find(event => event.title == title)) {
+            SpecialEvents.events.push(new SpecialEvent(title, description, startTime, startFunction, endTime, endFunction));
         }
     }
 
@@ -37,7 +37,7 @@ class SpecialEvents implements Feature {
 // Create our events here for now
 
 // Once off - for now..
-SpecialEvents.newEvent(1, 'Flying Pikachu', 'Encounter Flying Pikachu for a limited time on any route in Kanto.',
+SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time on any route in Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
         SeededRand.seed(new Date().getFullYear());
@@ -48,7 +48,7 @@ SpecialEvents.newEvent(1, 'Flying Pikachu', 'Encounter Flying Pikachu for a limi
         Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land = pokemonsPerRoute[GameConstants.Region.kanto][route].land.filter(p => p != 'Flying Pikachu'));
     }
 );
-SpecialEvents.newEvent(2, 'Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.',
+SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.',
     // Start
     new Date(2020, 7, 3, 2), () => {
         dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
@@ -60,7 +60,7 @@ SpecialEvents.newEvent(2, 'Mewtwo strikes back!', 'Encounter Armored Mewtwo for 
 );
 
 // Yearly
-SpecialEvents.newEvent(3, 'Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto, Johto and Hoenn.',
+SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto, Johto and Hoenn.',
     // Start
     new Date(new Date().getFullYear(), 9, 30, 1), () => {
         SeededRand.seed(new Date().getFullYear());
@@ -85,7 +85,7 @@ SpecialEvents.newEvent(3, 'Halloween!', 'Encounter Spooky Pokemon for a limited 
         Object.keys(pokemonsPerRoute[GameConstants.Region.hoenn]).forEach(route => pokemonsPerRoute[GameConstants.Region.hoenn][route].land = pokemonsPerRoute[GameConstants.Region.hoenn][route].land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
     }
 );
-SpecialEvents.newEvent(4, 'Merry Christmas!', 'Encounter Santa Dragonite for a limited time roaming around Kanto, Johto and Hoenn.',
+SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Dragonite for a limited time roaming around Kanto, Johto and Hoenn.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
         GameConstants.RoamingPokemon[GameConstants.Region.kanto].push('Santa Dragonite');
