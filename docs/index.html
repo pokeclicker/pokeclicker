@@ -28,7 +28,7 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.4.14"></script>
+    <script src="scripts/script.min.js?v=0.4.15"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -44,7 +44,7 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.4.14" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.4.15" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
@@ -216,7 +216,7 @@
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
-                                    <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}">
+                                    <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}" style="max-width: 32px;">
                                     <div data-bind="text: player._itemList[$data]()"></div>
                                 </div>
                             </div>
@@ -369,76 +369,21 @@
 <!-- <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(id)}}"></span> -->
 
 <script type="text/html" id="eggSVGTemplate">
-
-<svg class="egg"
-     viewbox="0 0 190 200"
-     xmlns="http://www.w3.org/2000/svg"
-     width="60%"
-     data-bind="attr: {'data-type1': PokemonType[$data.pokemonType1], 'data-type2': PokemonType[$data.pokemonType2]}"
->
+  <svg class="egg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126.7 126.7" data-bind="attr: {'data-type1': PokemonType[$data.pokemonType1], 'data-type2': PokemonType[$data.pokemonType2]}">
     <defs>
-
-        <!-- a couple of bezier curves to create an egg shape -->
-        <!-- slight quadratic curve where the two beziers meet, to smooth the corner -->
-        <path id="egg_outline"
-            d="M 8 85
-               c 45,-110 125,-110 174,0
-               q 2,5 3,10
-               c 20,130 -200,130 -180,0
-               q 1,-5 3,-10
-              "
-        />
-
-        <!-- clip path so we only see things that are inside the egg outline -->
-        <clipPath id="mask_entire_egg">
-          <use href="#egg_outline" />
-        </clipPath>
-
-        <!-- light gradient to be applied on top, to give a 3d effect -->
-        <radialGradient id="gradient_highlight">
-          <stop offset="5%" stop-color="white" stop-opacity="0.9"/>
-          <stop offset="30%" stop-color="white" stop-opacity="0.5"/>
-          <stop offset="70%" stop-color="black" stop-opacity="0.2"/>
-        </radialGradient>
-
+      <filter id="b" width="1.193" height="1.123" x="-.096" y="-.061" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation=".402"/>
+      </filter>
+      <filter id="a" width="1.067" height="1.045" x="-.034" y="-.023" color-interpolation-filters="sRGB">
+        <feGaussianBlur stdDeviation="1.168"/>
+      </filter>
     </defs>
-    <g id="eggSVGMainGroup" clip-path="url(#mask_entire_egg)">
-        <!-- outline of egg, filled with main type color -->
-        <use href="#egg_outline" class="egg-outline" />
-
-        <!-- egg spots, filled with secondary type color -->
-        <ellipse class="egg-spot"
-                 rx="20" ry="28"
-                 transform="translate(45,120) rotate(-30,10,15)"
-        />
-
-        <ellipse class="egg-spot"
-                 rx="10" ry="18"
-                 transform="translate(135,150) rotate(45,5,9)"
-        />
-
-        <ellipse class="egg-spot"
-                 rx="12" ry="18"
-                 transform="translate(65,185) rotate(40,6,9)"
-        />
-
-        <ellipse class="egg-spot"
-                 rx="10" ry="14"
-                 transform="translate(100,125) rotate(30,5,7)"
-        />
-
-        <ellipse class="egg-spot"
-                 rx="20" ry="24"
-                 transform="translate(125,75) rotate(45,10,12)"
-        />
-
-        <!-- highlight, used to give 3D effect -->
-        <circle cx="76" cy="40" r="200"
-                fill="url(#gradient_highlight)"
-        />
-    </g>
-</svg>
-
+    <path class="egg-main" d="M111.5 76.2a48.2 47.7 0 11-96.3 0c0-26.3 21.5-74.7 48.1-74.7s48.2 48.4 48.2 74.7z"/>
+    <g data-bind="html: BreedingController.getEggSpots($data.pokemon)"></g>
+    <path fill-opacity=".1" d="M63.3 1.5s34.377 56.31 22.684 83.558c-11.693 27.25-58.004 25.939-58.004 25.939 37.3 33.053 83.737 5.438 83.52-33.997-.147-26.6-21.6-75.5-48.2-75.5z" filter="url(#a)"/>
+    <path fill="#fff" fill-opacity=".3" d="M47.106 33.508a4.8 8 0 01-4.284 7.952 4.8 8 0 01-5.204-6.246 4.8 8 0 013.167-9.293 4.8 8 0 015.884 4.252" filter="url(#b)" transform="rotate(13.2 42.307 33.508)"/>
+    <path fill="#111" d="M63.3 126.7A49.7 49.7 0 0113.7 77c0-14 5.6-33 14.3-48.5C38.3 10.1 50.8 0 63.3 0c12.5 0 25 10.1 35.4 28.5A109 109 0 01113 77a49.7 49.7 0 01-49.7 49.7zM63.3 3C48 3 36.3 20 30.6 30a105 105 0 00-14 47 46.7 46.7 0 0093.4 0c0-13.5-5.5-32-14-47C90.5 20 78.8 3 63.4 3z"/>
+  </svg>
 </script>
 
 
@@ -541,7 +486,7 @@
                               placement:'bottom',
                               html: true
                             }">
-                <img src="" class="clickable" data-bind="attr: { src: 'assets/images/items/' + $data + '.png' }">
+                <img src="" class="clickable" data-bind="attr: { src: 'assets/images/items/' + $data + '.png' }" width="26px">
 
             </td>
           </tr>
@@ -4656,7 +4601,7 @@
         <tbody data-bind="foreach: App.game.oakItems.itemList">
           <tr data-bind="if: $data.isActive, tooltip: { html: true, title: $data.tooltip, trigger: 'hover', placement:'bottom' }">
             <td class="tight p-1">
-              <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'}">
+              <img class="clickable" href="#oakItemsModal" data-toggle="modal" src="" data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'}" width="32px">
             </td>
             <td class="p-0">
               <div class="progress" style="height: 40px;">
@@ -5057,7 +5002,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                              'btn-primary': $data.isActive,
                              'btn-outline-secondary': !$data.isActive
                            }">
-                          <img class="clickable" style="max-width: 100%;" src=""
+                          <img class="clickable" style="height: 32px;" src=""
                                data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
                                 css: {
                                   'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
@@ -5322,7 +5267,6 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                      <!-- /ko -->
                    </tbody>
                </table>
-               <br/>
            </div>
 
            <div class="modal-footer">
@@ -5585,34 +5529,42 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-lg" role="document">
    <div class="modal-content">
        <div class="modal-header">
-           <div style="width: 100%;">
-               <img src="assets/images/oak.png">
-               <h5 class="modal-title" id="breedingModalLabel">Day Care Old Man</h5>
-           </div>
+            <h5 class="modal-title" id="breedingModalLabel">Day Care</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
        </div>
        <div class="modal-body">
+           <img src="assets/images/oak.png">
            <p>
                This is the Pokémon Day Care Center.<br/>
                You can trade your level 100 pokémon for an egg of the same pokémon.<br/>
-               Hatched pokémon will increase their attack and have a higher chance of becoming shiny!
+               Hatched pokémon will gain a <knockout data-bind="text: GameConstants.BREEDING_ATTACK_BONUS"></knockout>% bonus of their base attack and have a higher chance of becoming shiny!
            </p>
            <div data-bind="if: App.game.breeding.hasFreeEggSlot()">
-               <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).map(x=>player._itemList[x]()).reduce((x,y)=>x+y) -->
+               <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()).length || Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length -->
                <p>
-                   Pick an egg below to breed:
+                   Pick an egg/fossil below to breed:
                </p>
-               <div class="row col-lg-10 col-md-12 offset-lg-1 offset-md-0 col-sm-12 offset-sm-0"
-                    style="padding-right: 0"
-                    data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]())">
-                   <div class="col-md-6 col-sm-10 col-lg-4 offset-sm-1 offset-md-0 offset-md-0 breedingListItem text-nowrap">
-                       <button class="btn btn-secondary list-group-item-action"
-                               data-bind="click: function() { ItemList[$data].use(); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }">
-                           <img class="smallImage"
-                                data-bind="attr:{ src: BreedingController.getEggImage(ItemList[$data]) }"
-                                src=""/>
-                           <span data-bind="text: GameConstants.humanifyString($data) + ' (' + player._itemList[$data]() + ')'" style="margin-left: 15px"></span>
+               <div class="row">
+                    <!-- ko foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()) -->
+                        <button class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
+                            data-bind="click: function() { ItemList[$data].use(); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }">
+                            <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data)">egg</span>
+                            <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
+                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
+                            data-bind="text: 'Amount: ' + player._itemList[$data]()">amount</span>
+                        </button>
+                    <!-- /ko -->
+                    <!-- ko foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false) -->
+                       <button class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
+                       data-bind="click: function() { Underground.sellMineItem($data.id); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }">
+                             <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
+                             <img src="" width="60%" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
+                             <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
+                             data-bind="text: 'Amount: ' + $data.amount()">amount</span>
                        </button>
-                   </div>
+                    <!-- /ko -->
                </div>
                <!-- /ko -->
                <!-- Check if the player has any level 100 Pokemon or if they have any eggs -->
@@ -5621,7 +5573,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                </p>
                <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
                  <p>
-                     Pick a pokémon below to breed them:
+                     Pick a pokémon below to breed:
                  </p>
                  <div class="row" data-bind="foreach: PartyController.getMaxLevelPokemonList()">
                     <button class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
@@ -6214,10 +6166,8 @@ aria-labelledby="badgeCaseModalLabel">
                 <!-- /ko -->
             </div>
             <div class="modal-body">
-                <div id="farmView"
-                     class="justify-content-center no-select row">
-
-                    <div class="col-sm-4 col-md-3 col-lg-4">
+                <div id="farmView" class="justify-content-center no-select row">
+                    <div class="col-12 col-lg-4">
                         <div class="col-sm-12">
                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint], 'currency': GameConstants.Currency.farmPoint}}"></span>
                         </div>
@@ -6233,19 +6183,19 @@ aria-labelledby="badgeCaseModalLabel">
                         </ul>
 
                         <div class="row">
-                            <div class="col-sm-12 col-6">
-                                <button class="btn btn-primary btn-sm farm-button"
-                                        data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">Plant All
+                            <div class="col-lg-12 col-6">
+                                <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">
+                                    Plant All
                                 </button>
                             </div>
-                            <div class="col-sm-12 col-6">
-                                <button class="btn btn-success btn-sm farm-button"
-                                        data-bind="click: function(){App.game.farming.harvestAll()}">Harvest All
+                            <div class="col-lg-12 col-6">
+                                <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
+                                    Harvest All
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-8 col-md-9 col-lg-8" style="padding-left: 0">
+                    <div class="col-12 col-lg-8" style="padding-left: 0">
                         <div id="plotList" data-bind="foreach: App.game.farming.plotList">
                             <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked}">
                                 <div class="plot-content">
