@@ -14,7 +14,7 @@ class SeededRand {
     }
 
     public static seed(state: number) {
-        this.state = state;
+        this.state = Math.abs(state);
     }
 
     public static intBetween(min: number, max: number): number {
