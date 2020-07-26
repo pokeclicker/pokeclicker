@@ -637,11 +637,11 @@ namespace GameConstants {
 
     //Used for image name
     export const PokemonToFossil = {
-        'Omanyte': 'helix',
-        'Kabuto': 'dome',
-        'Aerodactyl': 'amber',
-        'Lileep': 'root',
-        'Anorith': 'claw',
+        'Omanyte': 'Helix Fossil',
+        'Kabuto': 'Dome Fossil',
+        'Aerodactyl': 'Old Amber',
+        'Lileep': 'Root Fossil',
+        'Anorith': 'Claw Fossil',
 
     };
 
