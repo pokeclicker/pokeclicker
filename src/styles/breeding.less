@@ -110,10 +110,14 @@
 @import "for";
 
 .egg {
+  width: 60%;
+}
+
+.egg {
   .for(@eggMainColors); .-each(@value) {
     @type: extract(@value, 1);
     @color: extract(@value, 2);
-    &[data-type1='@{type}'] .egg-outline {
+    &[data-type1='@{type}'] .egg-main {
       fill: @color;
     }
   }

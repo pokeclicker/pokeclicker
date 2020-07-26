@@ -1,72 +1,18 @@
 <script type="text/html" id="eggSVGTemplate">
-
-<svg class="egg"
-     viewbox="0 0 190 200"
-     xmlns="http://www.w3.org/2000/svg"
-     width="60%"
-     data-bind="attr: {'data-type1': PokemonType[$data.pokemonType1], 'data-type2': PokemonType[$data.pokemonType2]}"
->
-    <defs>
-
-        <!-- a couple of bezier curves to create an egg shape -->
-        <!-- slight quadratic curve where the two beziers meet, to smooth the corner -->
-        <path id="egg_outline"
-            d="M 8 85
-               c 45,-110 125,-110 174,0
-               q 2,5 3,10
-               c 20,130 -200,130 -180,0
-               q 1,-5 3,-10
-              "
-        />
-
-        <!-- clip path so we only see things that are inside the egg outline -->
-        <clipPath id="mask_entire_egg">
-          <use href="#egg_outline" />
-        </clipPath>
-
-        <!-- light gradient to be applied on top, to give a 3d effect -->
-        <radialGradient id="gradient_highlight">
-          <stop offset="5%" stop-color="white" stop-opacity="0.9"/>
-          <stop offset="30%" stop-color="white" stop-opacity="0.5"/>
-          <stop offset="70%" stop-color="black" stop-opacity="0.2"/>
-        </radialGradient>
-
-    </defs>
-    <g id="eggSVGMainGroup" clip-path="url(#mask_entire_egg)">
-        <!-- outline of egg, filled with main type color -->
-        <use href="#egg_outline" class="egg-outline" />
-
-        <!-- egg spots, filled with secondary type color -->
-        <ellipse class="egg-spot"
-                 rx="20" ry="28"
-                 transform="translate(45,120) rotate(-30,10,15)"
-        />
-
-        <ellipse class="egg-spot"
-                 rx="10" ry="18"
-                 transform="translate(135,150) rotate(45,5,9)"
-        />
-
-        <ellipse class="egg-spot"
-                 rx="12" ry="18"
-                 transform="translate(65,185) rotate(40,6,9)"
-        />
-
-        <ellipse class="egg-spot"
-                 rx="10" ry="14"
-                 transform="translate(100,125) rotate(30,5,7)"
-        />
-
-        <ellipse class="egg-spot"
-                 rx="20" ry="24"
-                 transform="translate(125,75) rotate(45,10,12)"
-        />
-
-        <!-- highlight, used to give 3D effect -->
-        <circle cx="76" cy="40" r="200"
-                fill="url(#gradient_highlight)"
-        />
-    </g>
-</svg>
+  <svg class="egg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 126.7 126.7" data-bind="attr: {'data-type1': PokemonType[$data.pokemonType1], 'data-type2': PokemonType[$data.pokemonType2]}">
+    <defs/>
+    <path class="egg-main" d="M111.5 76.2a48.2 47.7 0 11-96.3 0c0-26.3 21.5-74.7 48.1-74.7s48.2 48.4 48.2 74.7z"/>
+    <path class="egg-spot" d="M33.5 104.3c4.4 4.9 9.3 7.3 6.7 9.6-2.6 2.4-8.3.4-12.7-4.4-4.5-4.9-6-10.8-3.4-13.2 2.6-2.3 5 3.2 9.4 8zm59.7 0c-4.5 4.9-9.4 7.3-6.8 9.6 2.6 2.4 8.4.4 12.8-4.4 4.4-4.9 6-10.8 3.3-13.2-2.6-2.3-4.9 3.2-9.3 8zM91.6 89.5c-6.2 13.5-19 21-28.6 16.6-9.5-4.4-5-12.4 1.2-26 6.3-13.5 12-27.6 21.5-23.2 9.5 4.4 12.2 19 6 32.6zM67 40.7c0 8.1 3.6 14.7-4.6 14.7s-14.6-6.6-14.6-14.7S54.3 26 62.4 26c8.2 0 4.7 6.6 4.7 14.7z"/>
+    <circle class="egg-spot" cx="35" cy="38" r="3"/>
+    <circle class="egg-spot" cx="46" cy="23" r="1"/>
+    <circle class="egg-spot" cx="40" cy="56" r="2"/>
+    <circle class="egg-spot" cx="67" cy="113" r="2"/>
+    <circle class="egg-spot" cx="59" cy="111" r="2"/>
+    <circle class="egg-spot" cx="83" cy="30" r="3"/>
+    <circle class="egg-spot" cx="93" cy="45" r="3"/>
+    <circle class="egg-spot" cx="44" cy="91" r="4"/>
+    <path fill-opacity=".1" d="M63.3 1.5v123.7A48.2 48.2 0 00111.5 77c0-26.6-21.6-75.5-48.2-75.5z"/>
+    <path fill="#111" d="M63.3 126.7A49.7 49.7 0 0113.7 77c0-14 5.6-33 14.3-48.5C38.3 10.1 50.8 0 63.3 0c12.5 0 25 10.1 35.4 28.5A109 109 0 01113 77a49.7 49.7 0 01-49.7 49.7zM63.3 3C48 3 36.3 20 30.6 30a105 105 0 00-14 47 46.7 46.7 0 0093.4 0c0-13.5-5.5-32-14-47C90.5 20 78.8 3 63.4 3z"/>
+  </svg>
 
 </script>
