@@ -71,7 +71,14 @@ class Update implements Saveable {
 
         // v0.4.16
         if (this.isOlderVersion(this.saveVersion, '0.4.15')) {
-            delete localStorage.mine;
+            try {
+                playerData._itemList.Lucky_egg = playerData._itemList.xExp;
+                delete playerData._itemList.xExp;
+                delete localStorage.mine;
+                this.setPlayerData(playerData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.4.15 - Couldn\'t update..', ಠ_ಠ);
+            }
         }
 
         // Notify the player that the game has updated!

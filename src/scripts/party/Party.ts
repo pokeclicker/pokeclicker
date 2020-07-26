@@ -76,7 +76,7 @@ class Party implements Feature {
         const oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
         let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
 
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xExp)()) {
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Lucky_egg)()) {
             expTotal *= 1.5;
         }
 

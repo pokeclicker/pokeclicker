@@ -108,7 +108,7 @@ dungeonList['Pokemon Tower'] = new Dungeon('Pokemon Tower',
 
 dungeonList['Seafoam Islands'] = new Dungeon('Seafoam Islands',
     ['Zubat', 'Golbat', 'Psyduck', 'Golduck', 'Slowpoke', 'Slowbro', 'Shellder', 'Krabby', 'Horsea', 'Staryu'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_egg],
     17226,
     [new DungeonBossPokemon('Seel', 86130, 35), new DungeonBossPokemon('Articuno', 129195, 50)],
     1250, BadgeCase.Badge.Soul, 15, 30
@@ -166,7 +166,7 @@ dungeonList['Union Cave'] = new Dungeon('Union Cave',
 
 dungeonList['Slowpoke Well'] = new Dungeon('Slowpoke Well',
     ['Zubat', 'Slowpoke'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     33900,
     [new DungeonBossPokemon('Slowbro', 140000, 20)],
     3500, BadgeCase.Badge.Zephyr, 33, 12
@@ -198,7 +198,7 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
 
 dungeonList['Whirl Islands'] = new Dungeon('Whirl Islands',
     ['Zubat', 'Golbat', 'Seel', 'Krabby', 'Horsea'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_egg],
     46800,
     [new DungeonBossPokemon('Dewgong', 170000, 40), new DungeonBossPokemon('Kingler', 170000, 40), new DungeonBossPokemon('Lugia', 300000, 70)],
     5000, BadgeCase.Badge.Storm, 41, 25
@@ -230,7 +230,7 @@ dungeonList['Dark Cave'] = new Dungeon('Dark Cave',
 
 dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
     ['Ponyta', 'Doduo', 'Tangela', 'Sneasel', 'Ursaring', 'Donphan', 'Teddiursa', 'Phanpy', 'Quagsire', 'Misdreavus'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     66500,
     [new DungeonBossPokemon('Larvitar', 220000, 60)],
     10000, BadgeCase.Badge.Elite_Karen, 28, 50
@@ -240,35 +240,35 @@ dungeonList['Mt Silver'] = new Dungeon('Mt Silver',
 
 dungeonList['Petalburg Woods'] = new Dungeon('Petalburg Woods',
     ['Poochyena', 'Zigzagoon', 'Wurmple', 'Silcoon', 'Cascoon', 'Taillow', 'Shroomish'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     97000,
     [new DungeonBossPokemon('Slakoth', 230000, 10)],
     12000, null, 101, 5);
 
 dungeonList['Rusturf Tunnel'] = new Dungeon('Rusturf Tunnel',
     ['Whismur'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     98000,
     [new DungeonBossPokemon('Whismur', 250000, 20)],
     14000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Granite Cave'] = new Dungeon('Granite Cave',
     ['Zubat', 'Abra', 'Geodude', 'Makuhita', 'Aron', 'Sableye'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     101000,
     [new DungeonBossPokemon('Mawile', 260000, 20), new DungeonBossPokemon('Nosepass', 260000, 20)],
     16000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Fiery Path'] = new Dungeon('Fiery Path',
     ['Machop', 'Grimer', 'Koffing', 'Slugma', 'Numel'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     104000,
     [new DungeonBossPokemon('Torkoal', 300000, 20)],
     17000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
     ['Zubat', 'Golbat', 'Goldeen', 'Magikarp', 'Barboach'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     103000,
     [
         new DungeonBossPokemon('Solrock', 320000, 20),
@@ -278,14 +278,14 @@ dungeonList['Meteor Falls'] = new Dungeon('Meteor Falls',
 
 dungeonList['Mt. Chimney'] = new Dungeon('Mt. Chimney',
     ['Zubat', 'Poochyena'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     110000,
     [new DungeonBossPokemon('Numel', 350000, 20)],
     20000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
     ['Machop', 'Numel', 'Spoink'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     120000,
     [
         new DungeonBossPokemon('Machop', 400000, 20),
@@ -296,7 +296,7 @@ dungeonList['Jagged Pass'] = new Dungeon('Jagged Pass',
 
 dungeonList['New Mauville'] = new Dungeon('New Mauville',
     ['Magnemite', 'Voltorb'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     110000,
     [
         new DungeonBossPokemon('Magneton', 420000, 20),
@@ -306,7 +306,7 @@ dungeonList['New Mauville'] = new Dungeon('New Mauville',
 
 dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
     ['Shuppet', 'Duskull', 'Vulpix', 'Wingull', 'Meditite'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     120000,
     [
         new DungeonBossPokemon('Shuppet', 430000, 20),
@@ -317,14 +317,14 @@ dungeonList['Mt. Pyre'] = new Dungeon('Mt. Pyre',
 
 dungeonList['Shoal Cave'] = new Dungeon('Shoal Cave',
     ['Zubat', 'Golbat', 'Spheal', 'Tentacool', 'Magikarp', 'Wailmer'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     110000,
     [new DungeonBossPokemon('Snorunt', 460000, 20)],
     12000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     160000,
     [
         new DungeonBossPokemon('Kyogre', 650000, 20),
@@ -334,14 +334,14 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
 
 dungeonList['Seafloor Cavern'] = new Dungeon('Seafloor Cavern',
     ['Zubat', 'Golbat', 'Tentacool', 'Magikarp', 'Wailmer'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     130000,
     [new DungeonBossPokemon('Wailmer', 500000, 20)],
     31000, BadgeCase.Badge.Stone, 101, 5);
 
 dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     ['Golbat', 'Sableye', 'Claydol', 'Banette', 'Mawile', 'Altaria'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     170000,
     [
         new DungeonBossPokemon('Dusclops', 500000, 20),
@@ -351,7 +351,7 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
 
 dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
     ['Zubat', 'Golbat', 'Whismur', 'Loudred', 'Makuhita', 'Aron', 'Mawile', 'Meditite', 'Geodude', 'Goldeen', 'Magikarp', 'Barboach', 'Whiscash'],
-    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xExp],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     150000,
     [
         new DungeonBossPokemon('Hariyama', 500000, 20),

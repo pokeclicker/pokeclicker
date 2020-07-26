@@ -563,7 +563,7 @@ namespace GameConstants {
     export enum BattleItemType {
         'xAttack' = 'xAttack',
         'xClick' = 'xClick',
-        'xExp' = 'xExp',
+        'Lucky_egg' = 'Lucky_egg',
         'Token_collector' = 'Token_collector',
         'Item_magnet' = 'Item_magnet',
         'Lucky_incense' = 'Lucky_incense'

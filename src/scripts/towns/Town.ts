@@ -83,7 +83,7 @@ const pokeMartShop = new Shop([
     ItemList['Ultraball'],
     ItemList['xAttack'],
     ItemList['xClick'],
-    ItemList['xExp'],
+    ItemList['Lucky_egg'],
     ItemList['Item_magnet'],
     ItemList['Token_collector'],
     ItemList['Lucky_incense'],
@@ -96,7 +96,7 @@ const pokeMartShop = new Shop([
 const PewterCityShop = new Shop([
     ItemList['Pokeball'],
     ItemList['Token_collector'],
-    ItemList['xExp'],
+    ItemList['Lucky_egg'],
     ItemList['Dungeon_ticket'],
 ]);
 const CeruleanCityShop = new Shop([
@@ -106,7 +106,7 @@ const CeruleanCityShop = new Shop([
 ]);
 const VermillionCityShop = new Shop([
     ItemList['Thunder_stone'],
-    ItemList['xExp'],
+    ItemList['Lucky_egg'],
     ItemList['Electric_egg'],
 ]);
 const CeladonCityShop = new Shop([
@@ -125,7 +125,7 @@ const SaffronCityShop = new Shop([
 const FuchsiaCityShop = new Shop([
     ItemList['Ultraball'],
     ItemList['Trade_stone'],
-    ItemList['xExp'],
+    ItemList['Lucky_egg'],
     ItemList['Dragon_egg'],
 ]);
 const CinnabarIslandShop = new Shop([
@@ -239,7 +239,7 @@ const LilyCoveCityShop = new Shop([
     ItemList['LargeRestore'],
     ItemList['xAttack'],
     ItemList['xClick'],
-    ItemList['xExp'],
+    ItemList['Lucky_egg'],
     ItemList['Token_collector'],
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
