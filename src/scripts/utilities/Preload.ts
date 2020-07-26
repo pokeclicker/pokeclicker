@@ -49,6 +49,7 @@ class Preload {
                 Preload.loadSplashScreen();
                 Preload.loadBackground();
                 Preload.loadTowns();
+                Preload.loadUndergroundItems();
                 // Preload.loadMap();
                 // Preload.loadPokemon(),
                 Preload.hideSplashScreen(true);
@@ -65,6 +66,7 @@ class Preload {
                     Preload.loadSplashScreen(),
                     Preload.loadBackground(),
                     Preload.loadTowns(),
+                    Preload.loadUndergroundItems(),
                     // Preload.loadMap(),
                     // Preload.loadPokemon(),
                     Preload.minimumTime(),
@@ -172,6 +174,27 @@ class Preload {
             }));
 
         }
+        return Promise.all(p);
+    }
+
+    private static loadUndergroundItems() {
+        const p = Array<Promise<number>>();
+        UndergroundItem.list.forEach(item => {
+            Preload.itemLoading(item.id);
+            p.push(new Promise<number>(resolve => {
+                const img = new Image();
+                img.onload = () => {
+                    Preload.itemLoaded(item.id);
+                    resolve();
+                };
+                img.onerror = () => {
+                    Preload.itemErrored(item.id);
+                    console.warn('Failed to load image for Underground item:', item.name);
+                    resolve();
+                };
+                img.src = `assets/images/underground/${item.id}.png`;
+            }));
+        });
         return Promise.all(p);
     }
 
