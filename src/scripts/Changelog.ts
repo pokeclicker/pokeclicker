@@ -29,7 +29,7 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
-    // v0.4.14
+    // v0.4.15
     new Changelog(changelogType.UPDATE, 'v0.4.15'),
     new Changelog(changelogType.NEW, 'New item images'),
     new Changelog(changelogType.CHANGE, 'Day Care is now unlocked once you defeat Route 5'),
