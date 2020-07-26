@@ -15,6 +15,6 @@ class BreedingController {
         } else if (eggType == 'fossil') {
             eggType = GameConstants.PokemonToFossil[egg.pokemon];
         }
-        return `assets/images/breeding/egg${eggType}.png`;
+        return `assets/images/breeding/${eggType}.png`;
     }
 }
