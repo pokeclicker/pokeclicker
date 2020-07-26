@@ -31,7 +31,8 @@ class Changelog {
 const changelogItems = [
     // v0.4.15
     new Changelog(changelogType.UPDATE, 'v0.4.15'),
-    new Changelog(changelogType.NEW, 'New item images'),
+    new Changelog(changelogType.CHANGE, 'xExp is now the Lucky Egg'),
+    new Changelog(changelogType.CHANGE, 'Updated Currency, Item, Berry, Egg and Fossil images'),
     new Changelog(changelogType.CHANGE, 'Day Care is now unlocked once you defeat Route 5'),
     new Changelog(changelogType.CHANGE, 'Fossils will now show in the Hatchery'),
     new Changelog(changelogType.CHANGE, 'Update Farm layout for smaller displays'),
