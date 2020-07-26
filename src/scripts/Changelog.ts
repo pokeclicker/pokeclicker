@@ -32,6 +32,8 @@ const changelogItems = [
     // v0.4.14
     new Changelog(changelogType.UPDATE, 'v0.4.15'),
     new Changelog(changelogType.NEW, 'New item images'),
+    new Changelog(changelogType.CHANGE, 'Day Care is now unlocked once you defeat Route 5'),
+    new Changelog(changelogType.CHANGE, 'Fossils will now show in the Hatchery'),
     new Changelog(changelogType.CHANGE, 'Update Farm layout for smaller displays'),
     new Changelog(changelogType.CHANGE, 'Update Safari Zone cost'),
     new Changelog(changelogType.CHANGE, 'Underground now shows the 3 x 3 area which will be mined when using the hammer'),
