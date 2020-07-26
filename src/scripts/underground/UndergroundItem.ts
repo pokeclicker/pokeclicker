@@ -40,7 +40,7 @@ class UndergroundItem {
         this.addItem('Fire Stone', 17, [[17,17,17], [17,17,17], [17,17,17]], 1, 'Fire_stone');
         this.addItem('Water Stone', 18, [[18,18,18], [18,18,18], [18,18,18]], 1, 'Water_stone');
         this.addItem('Thunder Stone', 19, [[19,19,19], [19,19,19], [19,19,19]], 1, 'Thunder_stone');
-        this.addItem('Leaf Stone', 20, [[20,20,20], [20,20,20], [20,20,20], [20,20,20]], 1, 'Leaf_stone');
+        this.addItem('Leaf Stone', 20, [[20,20,20], [20,20,20], [20,20,20]], 1, 'Leaf_stone');
         this.addItem('Moon Stone', 21, [[21,21,21], [21,21,21], [21,21,21]], 1, 'Moon_stone');
         this.addItem('Sun Stone', 22, [[22,22,22], [22,22,22], [22,22,22]], 1, 'Sun_stone');
 
