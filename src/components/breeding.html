@@ -29,13 +29,13 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             data-bind="text: 'Amount: ' + player._itemList[$data]()">amount</span>
                         </button>
                     <!-- /ko -->
-                    <!-- ko foreach: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())) -->
+                    <!-- ko foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false) -->
                        <button class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
-                       data-bind="click: function() { ItemList[$data].use(); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }">
-                             <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data)">fossil</span>
-                             <img src="" width="60%" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
+                       data-bind="click: function() { Underground.sellMineItem($data.id); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }">
+                             <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
+                             <img src="" width="60%" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
                              <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
-                             data-bind="text: 'Amount: ' + player.mineInventory.find(i => i.name == $data).amount()">amount</span>
+                             data-bind="text: 'Amount: ' + $data.amount()">amount</span>
                        </button>
                     <!-- /ko -->
                </div>
