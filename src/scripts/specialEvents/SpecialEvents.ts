@@ -48,6 +48,7 @@ SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited
         Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land = pokemonsPerRoute[GameConstants.Region.kanto][route].land.filter(p => p != 'Flying Pikachu'));
     }
 );
+// TODO: remove once event finishes
 SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.',
     // Start
     new Date(2020, 7, 3, 2), () => {
@@ -60,6 +61,16 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
 );
 
 // Yearly
+SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.',
+    // Start
+    new Date(new Date().getFullYear(), 6, 18, 1), () => {
+        dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
+    },
+    // End
+    new Date(new Date().getFullYear(), 6, 24, 23), () => {
+        dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
+    }
+);
 SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto, Johto and Hoenn.',
     // Start
     new Date(new Date().getFullYear(), 9, 30, 1), () => {
