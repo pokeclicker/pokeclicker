@@ -48,6 +48,11 @@ class Settings {
     }
 }
 
+/*
+ * THESE SETTINGS SHOULD ALL BE PUT IN SETTINGS MENU
+ */
+
+//Display settings
 Settings.add(
     new MultipleChoiceSetting('theme', 'Theme',
         [
@@ -76,7 +81,31 @@ Settings.add(
         'yeti'
     )
 );
+Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress display:',
+    [
+        new GameConstants.Option('Percentage', 'percentage'),
+        new GameConstants.Option('Step count', 'stepCount'),
+    ],
+    'percentage'
+));
+Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 
+// Other settings
+Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
+
+
+// Sound settings
+Settings.add(new BooleanSetting('sound.Achievement', 'New achievement', true));
+Settings.add(new BooleanSetting('sound.New Catch', 'New pokemon/shiny captured', true));
+Settings.add(new BooleanSetting('sound.Shiny', 'Shiny encountered', true));
+Settings.add(new BooleanSetting('sound.Ready to Hatch', 'Egg ready to hatch', true));
+
+// Notification settings
+Settings.add(new BooleanSetting('disableBerryNotifications', 'Disable berry notifications', false));
+
+/*
+ * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
+ */
 const sortsettings = Object.keys(SortOptionConfigs).map(
     function(opt) {
         return new GameConstants.Option(SortOptionConfigs[opt].text, parseInt(opt));
@@ -86,20 +115,4 @@ Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
     sortsettings,
     SortOptions.id
 ));
-
-Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress display:',
-    [
-        new GameConstants.Option('Percentage', 'percentage'),
-        new GameConstants.Option('Step count', 'stepCount'),
-    ],
-    'percentage'
-));
-
-
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
-
-Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
-
-Settings.add(new BooleanSetting('disableBerryNotifications', 'Disable berry notifications', false));
-
-Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));

@@ -8,21 +8,57 @@
                 </button>
             </div>
             <div class="modal-body p-0">
-                <table class="table table-striped table-hover m-0">
-                    <thead>
-                      <tr>
-                        <th>Setting</th>
-                        <th>Option</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
-                      <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
-                      <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
-                      <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableBerryNotifications')}"></tr>
-                      <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
-                    </tbody>
-                </table>
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-sound" data-toggle="tab">Sound</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-notifications" data-toggle="tab">Notifications</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#settings-other" data-toggle="tab">Other</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="settings-display">
+                        <table class="table table-striped table-hover m-0">
+                            <!-- <thead>
+                              <tr>
+                                <th>Setting</th>
+                                <th>Option</th>
+                              </tr>
+                            </thead> -->
+                            <tbody>
+                              <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
+                              <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
+                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tab-pane" id="settings-sound">
+                        <table class="table table-striped table-hover m-0">
+                            <tbody>
+                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('sound.Achievement')}"></tr>
+                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('sound.Ready to Hatch')}"></tr>
+                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('sound.New Catch')}"></tr>
+                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('sound.Shiny')}"></tr>
+                            </tbody>
+                        </table>
+                    </div> 
+
+                    <div class="tab-pane" id="settings-notifications">
+                        <table class="table table-striped table-hover m-0">
+                            <tbody>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableBerryNotifications')}"></tr>
+                            </tbody>
+                        </table>
+                    </div> 
+
+                    <div class="tab-pane" id="settings-other">
+                        <table class="table table-striped table-hover m-0">
+                            <tbody>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
+                            </tbody>
+                        </table>
+                    </div> 
+                </div>
             </div>
         </div>
     </div>
@@ -39,10 +75,14 @@
 </script>
 
 <script type="text/html" id="BooleanSettingTemplate">
-    <td data-bind="text: $data.displayName">setting name</td>
     <td>
-      <input class="clickable" type="checkbox"
-           data-bind="checked: Settings.getSetting($data.name).observableValue(), attr: {name}"
-           onchange="Settings.setSettingByName(this.name, this.checked)"/>
+        <label data-bind="attr: { for: 'checkbox-' + $data.name }, text: $data.displayName">
+            setting name
+        </label>
+    </td>
+    <td>
+        <input class="clickable" type="checkbox"
+            data-bind="checked: Settings.getSetting($data.name).observableValue(), attr: {name, id: 'checkbox-' + $data.name }"
+            onchange="Settings.setSettingByName(this.name, this.checked)"/>
     </td>
 </script>

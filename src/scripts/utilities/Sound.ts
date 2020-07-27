@@ -41,6 +41,10 @@ class Sound {
     }
 
     canPlay() {
-        return true;
+        const setting = Settings.getSetting(`sound.${this.name}`);
+        if (!setting) {
+            return true;
+        }
+        return !!setting.value;
     }
 }
