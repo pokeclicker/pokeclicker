@@ -29,6 +29,12 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.16
+    new Changelog(changelogType.UPDATE, 'v0.4.16'),
+    new Changelog(changelogType.NEW, 'Added sounds for specific events'),
+    new Changelog(changelogType.NEW, 'Added more settings'),
+    new Changelog(changelogType.CHANGE, 'Updated settings menu'),
+
     // v0.4.15
     new Changelog(changelogType.UPDATE, 'v0.4.15'),
     new Changelog(changelogType.NEW, 'Eggs now have multiple different styles'),
