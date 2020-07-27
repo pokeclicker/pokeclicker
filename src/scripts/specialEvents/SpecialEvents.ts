@@ -53,10 +53,12 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
     // Start
     new Date(2020, 7, 3, 2), () => {
         dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
+        GameConstants.RoamingPokemon[GameConstants.Region.kanto].push(...['Bulbasaurtwo', 'Charmandertwo', 'Squirtletwo']);
     },
     // End
     new Date(2020, 7, 9, 2), () => {
         dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
+        GameConstants.RoamingPokemon[GameConstants.Region.kanto] = GameConstants.RoamingPokemon[GameConstants.Region.kanto].filter(p => !['Bulbasaurtwo', 'Charmandertwo', 'Squirtletwo'].includes(p));
     }
 );
 
@@ -65,10 +67,12 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
         dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
+        GameConstants.RoamingPokemon[GameConstants.Region.kanto].push(...['Bulbasaurtwo', 'Charmandertwo', 'Squirtletwo']);
     },
     // End
     new Date(new Date().getFullYear(), 6, 24, 23), () => {
         dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
+        GameConstants.RoamingPokemon[GameConstants.Region.kanto] = GameConstants.RoamingPokemon[GameConstants.Region.kanto].filter(p => !['Bulbasaurtwo', 'Charmandertwo', 'Squirtletwo'].includes(p));
     }
 );
 SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto, Johto and Hoenn.',
