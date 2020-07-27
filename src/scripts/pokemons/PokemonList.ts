@@ -14348,13 +14348,13 @@ const pokemonList: {
         },
         {
             'id': -10,
-            'name': 'Bulbasaurtwo',
+            'name': 'Bulbasaur (clone)',
             'catchRate': 45,
             'type': [PokemonType.Grass, PokemonType.Poison],
             'levelType': LevelType.mediumslow,
             'exp': 64,
             'eggCycles': 20,
-            'evolutions': [new LevelEvolution('Bulbasaurtwo', 'Ivysaurtwo', 16)],
+            'evolutions': [new LevelEvolution('Bulbasaur (clone)', 'Ivysaur (clone)', 16)],
             'base': {
                 'hitpoints': 45,
                 'attack': 49,
@@ -14366,13 +14366,13 @@ const pokemonList: {
         },
         {
             'id': -11,
-            'name': 'Ivysaurtwo',
+            'name': 'Ivysaur (clone)',
             'catchRate': 45,
             'type': [PokemonType.Grass, PokemonType.Poison],
             'levelType': LevelType.mediumslow,
             'exp': 142,
             'eggCycles': 20,
-            'evolutions': [new LevelEvolution('Ivysaurtwo', 'Venusaurtwo', 32)],
+            'evolutions': [new LevelEvolution('Ivysaur (clone)', 'Venusaur (clone)', 32)],
             'base': {
                 'hitpoints': 60,
                 'attack': 62,
@@ -14384,7 +14384,7 @@ const pokemonList: {
         },
         {
             'id': -12,
-            'name': 'Venusaurtwo',
+            'name': 'Venusaur (clone)',
             'catchRate': 45,
             'type': [PokemonType.Grass, PokemonType.Poison],
             'levelType': LevelType.mediumslow,
@@ -14401,13 +14401,13 @@ const pokemonList: {
         },
         {
             'id': -13,
-            'name': 'Charmandertwo',
+            'name': 'Charmander (clone)',
             'catchRate': 45,
             'type': [PokemonType.Fire],
             'levelType': LevelType.mediumslow,
             'exp': 62,
             'eggCycles': 20,
-            'evolutions': [new LevelEvolution('Charmandertwo', 'Charmeleontwo', 16)],
+            'evolutions': [new LevelEvolution('Charmander (clone)', 'Charmeleon (clone)', 16)],
             'base': {
                 'hitpoints': 39,
                 'attack': 52,
@@ -14419,13 +14419,13 @@ const pokemonList: {
         },
         {
             'id': -14,
-            'name': 'Charmeleontwo',
+            'name': 'Charmeleon (clone)',
             'catchRate': 45,
             'type': [PokemonType.Fire],
             'levelType': LevelType.mediumslow,
             'exp': 142,
             'eggCycles': 20,
-            'evolutions': [new LevelEvolution('Charmeleontwo', 'Charizardtwo', 36)],
+            'evolutions': [new LevelEvolution('Charmeleon (clone)', 'Charizard (clone)', 36)],
             'base': {
                 'hitpoints': 58,
                 'attack': 64,
@@ -14437,7 +14437,7 @@ const pokemonList: {
         },
         {
             'id': -15,
-            'name': 'Charizardtwo',
+            'name': 'Charizard (clone)',
             'catchRate': 45,
             'type': [PokemonType.Fire, PokemonType.Flying],
             'levelType': LevelType.mediumslow,
@@ -14454,13 +14454,13 @@ const pokemonList: {
         },
         {
             'id': -16,
-            'name': 'Squirtletwo',
+            'name': 'Squirtle (clone)',
             'catchRate': 45,
             'type': [PokemonType.Water],
             'levelType': LevelType.mediumslow,
             'exp': 63,
             'eggCycles': 20,
-            'evolutions': [new LevelEvolution('Squirtletwo', 'Wartortletwo', 16)],
+            'evolutions': [new LevelEvolution('Squirtle (clone)', 'Wartortle (clone)', 16)],
             'base': {
                 'hitpoints': 44,
                 'attack': 48,
@@ -14472,13 +14472,13 @@ const pokemonList: {
         },
         {
             'id': -17,
-            'name': 'Wartortletwo',
+            'name': 'Wartortle (clone)',
             'catchRate': 45,
             'type': [PokemonType.Water],
             'levelType': LevelType.mediumslow,
             'exp': 142,
             'eggCycles': 20,
-            'evolutions': [new LevelEvolution('Wartortletwo', 'Blastoisetwo', 36)],
+            'evolutions': [new LevelEvolution('Wartortle (clone)', 'Blastoise (clone)', 36)],
             'base': {
                 'hitpoints': 59,
                 'attack': 63,
@@ -14490,7 +14490,7 @@ const pokemonList: {
         },
         {
             'id': -18,
-            'name': 'Blastoisetwo',
+            'name': 'Blastoise (clone)',
             'catchRate': 45,
             'type': [PokemonType.Water],
             'levelType': LevelType.mediumslow,
