@@ -61,9 +61,9 @@ class Egg implements Saveable {
         }
         if (this.canHatch()) {
             if (this.type == EggType.Pokemon) {
-                Notifier.notify({ message: `${this.pokemon} is ready to hatch!`, type: GameConstants.NotificationOption.success });
+                Notifier.notify({ message: `${this.pokemon} is ready to hatch!`, type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_hatch });
             } else {
-                Notifier.notify({ message: 'An egg is ready to hatch!', type: GameConstants.NotificationOption.success });
+                Notifier.notify({ message: 'An egg is ready to hatch!', type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_hatch });
             }
             this.notified = true;
         }
@@ -95,7 +95,7 @@ class Egg implements Saveable {
         }
 
         if (shiny) {
-            Notifier.notify({ message: `✨ You hatched a shiny ${this.pokemon}! ✨`, type: GameConstants.NotificationOption.warning });
+            Notifier.notify({ message: `✨ You hatched a shiny ${this.pokemon}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
         } else {
             Notifier.notify({ message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`, type: GameConstants.NotificationOption.success });

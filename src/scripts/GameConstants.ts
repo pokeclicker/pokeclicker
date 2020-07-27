@@ -1,4 +1,5 @@
 ///<reference path="./badgeCase/BadgeCase.ts" />
+///<reference path="utilities/Sound.ts"/>
 
 /**
  * Contains all game constants for easy access.
@@ -89,6 +90,12 @@ namespace GameConstants {
         dark,
         light,
     }
+    export const NotificationSound = {
+        ready_to_hatch: new Sound('Ready to Hatch', 'assets/sounds/ready_to_hatch.mp3'),
+        shiny_long: new Sound('Shiny', 'assets/sounds/shiny_long.mp3'),
+        new_catch: new Sound('New Catch', 'assets/sounds/new_catch.mp3'),
+        achievement: new Sound('Achievement', 'assets/sounds/achievement.mp3'),
+    };
 
     export enum DungeonTile {
         empty,
