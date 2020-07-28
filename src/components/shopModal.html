@@ -4,21 +4,14 @@
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h4 data-bind="text: player.currentTown().endsWith('Mart') ? player.currentTown() : player.currentTown() + ' Shop'">Shop</h4>
-                <h4>
-                    <img title="Money" src="assets/images/currency/money.png" style="width: 32px;">
-                    <span id="playerMoney" data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.money])">0</span>
-                </h4>
-                <h4>
-                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokemon" src="assets/images/currency/dungeonToken.png" style="width: 32px;">
-                    <span id="playerMoneyDungeon" data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.dungeonToken])">0</span>
-                </h4>
-                <h4>
-                    <img title="Quest points" src="assets/images/currency/questPoint.png" style="width: 32px;">
-                    <span id="playerMoneyQuest" data-bind="text: GameConstants.formatNumber(App.game.wallet.currencies[GameConstants.Currency.questPoint])">0</span>
-                </h4>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
+                <div class="row justify-content-center" data-bind="foreach: [...new Set(ShopHandler.shopObservable().items().map(i => i.currency))]">
+                    <h4 class="col-6 col-sm-4 col-lg-2">
+                        <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data], currency: $data, reduced: true }}"></span>
+                    </h4>
+                </div>
                 <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
                     <div class="col-6 col-sm-4 col-lg-3">
                        <button class="shopItem clickable btn btn-block btn-secondary"
