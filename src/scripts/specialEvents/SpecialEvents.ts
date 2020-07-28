@@ -84,13 +84,13 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited tim
             SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Gastly') : null;
         });
         Object.keys(pokemonsPerRoute[GameConstants.Region.johto]).forEach(route => {
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Spooky Togepi') : null;
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Misdreavus') : null;
+            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.johto][route].land.push('Spooky Togepi') : null;
+            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.johto][route].land.push('Misdreavus') : null;
         });
         Object.keys(pokemonsPerRoute[GameConstants.Region.hoenn]).forEach(route => {
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Pikachu (Gengar)') : null;
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Shuppet') : null;
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Duskull') : null;
+            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.hoenn][route].land.push('Pikachu (Gengar)') : null;
+            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.hoenn][route].land.push('Shuppet') : null;
+            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.hoenn][route].land.push('Duskull') : null;
         });
     },
     // End
