@@ -14182,7 +14182,6 @@ const pokemonList: {
             'levelType': LevelType.mediumslow,
             'exp': 64,
             'eggCycles': 20,
-            'evolutions': [new LevelEvolution('Bulbasaur', 'Ivysaur', 16)],
             'base': {
                 'hitpoints': 178,
                 'attack': 19,
