@@ -34,6 +34,7 @@ const changelogItems = [
     new Changelog(changelogType.NEW, 'Added sounds for specific events'),
     new Changelog(changelogType.NEW, 'Added more settings'),
     new Changelog(changelogType.CHANGE, 'Updated settings menu'),
+    new Changelog(changelogType.CHANGE, 'Shops will now only show the balance of currencies used there'),
 
     // v0.4.15
     new Changelog(changelogType.UPDATE, 'v0.4.15'),
