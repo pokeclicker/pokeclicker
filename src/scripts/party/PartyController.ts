@@ -32,7 +32,7 @@ class PartyController {
         return status;
     }
 
-    public static getMaxLevelPokemonList() {
+    public static getMaxLevelPokemonList(): Array<PartyPokemon> {
         return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
             return !partyPokemon.breeding && partyPokemon.level >= 100;
         });
