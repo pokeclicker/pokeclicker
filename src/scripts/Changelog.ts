@@ -33,8 +33,10 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.4.16'),
     new Changelog(changelogType.NEW, 'Added sounds for specific events'),
     new Changelog(changelogType.NEW, 'Added more settings'),
+    new Changelog(changelogType.NEW, 'New maps'),
     new Changelog(changelogType.CHANGE, 'Updated settings menu'),
     new Changelog(changelogType.CHANGE, 'Shops will now only show the balance of currencies used there'),
+    new Changelog(changelogType.CHANGE, 'Gyms and Dungeons in the Johto and Hoenn regions have been buffed'),
 
     // v0.4.15
     new Changelog(changelogType.UPDATE, 'v0.4.15'),
