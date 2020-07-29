@@ -14,13 +14,12 @@ Parameters:
         Any knockout data-bind needed for this element to function.
 
 <% */ %>
-<rect 
-    class="city" 
-    data-town="<%= locals.name %>"
-    fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)" 
-    stroke="#6c8ebf"
-    height="12.6" width="12.6"
-    x="<%= locals.x %>" y="<%= locals.y %>"
-    data-bind="<%= locals.databind %>"
->
+
+<rect class="city"
+    data-town="<%= locals.name %>" 
+    x="<%= locals.x * 16 %>"
+    y="<%= locals.y * 16 %>"
+    height="<%= (locals.height || 3) * 16 %>"
+    width="<%= (locals.width || 3) * 16 %>"
+    data-bind="<%= locals.databind %>">
 </rect>

@@ -35,16 +35,16 @@ Parameters:
 
 <g
 <% if (locals.rotate) { %>
-    transform="rotate(90,0,0)"
+    transform="rotate(90 ,<%= locals.x * 16 %>, <%= locals.y * 16 %>)"
 <% } %>
     data-bind="click:function(){ MapHelper.moveToRoute(<%= locals.route %>, <%= locals.region %>); } ">
     <rect data-route='<%= locals.route %>'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(<%= locals.route %>, <%= locals.region %>) }"
-        height="<%= locals.height %>"
-        width="<%= locals.width %>"
-        x="<%= locals.x %>" y="<%= locals.y %>">
+        height="<%= locals.height * 16 %>"
+        width="<%= locals.width * 16 %>"
+        x="<%= locals.x * 16 %>" y="<%= locals.y * 16 - (locals.rotate ? locals.height * 16 : 0 ) %>">
     </rect>
 <% if (!locals.noText) { %>
-    <text font-size="13px" x="<%= locals.textx %>" y="<%= locals.texty %>"><%= locals.route %></text>
+    <text style="font-size: 32px" x="<%= locals.x * 16 + (locals.width * 16) / 2 - (locals.route.toString().length * 8) %>" y="<%= locals.y * 16 + (locals.height * 16) / 2 + (locals.rotate ? -40 : 8) %>"><%= locals.route %></text>
 <% } %>
 </g>

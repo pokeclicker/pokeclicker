@@ -24,36 +24,16 @@ Parameters:
 
 <% */ %>
 
-<path d="M <%= locals.x %> <%= locals.y %> 
-         l 8.29 -8.29 
-         h <% if (locals.type === "H") { %> 45 <% } else { %> 11.42 <% } %> 
-         l 8.29 8.29 
-         v <% if (locals.type === "V") { %> 40 <% } else { %> 11.42 <% } %> 
-         l -8.29 8.29 
-         h <% if (locals.type === "H") { %> -45 <% } else { %> -11.42 <% } %> 
-         l -8.29 -8.29 
-         Z"
-         
-      fill="#ffffff" stroke="#000000" stroke-miterlimit="10" stroke-width="1.4">
-</path>
-<path class="city" data-town="<%= locals.name %>"
-        data-bind="
+<rect class="city"
+    data-town="<%= locals.name %>" 
+    x="<%= locals.x * 16 %>"
+    y="<%= locals.y * 16 %>"
+    height="<%= (locals.height || 4) * 16 %>"
+    width="<%= (locals.width || 4) * 16 %>"
+    data-bind="
         click:function(){MapHelper.moveToTown('<%= locals.name %>')},
         attr: { class: MapHelper.calculateTownCssClass('<%= locals.name %>') },
         <% if (locals.home) { %>
             css: { flash: MapHelper.ableToTravel() }
-        <% } %>"
-
-        d="M <%= (locals.x + 2.8) %> <%= (locals.y + 1.2) %> 
-           l 6.63 -6.63 
-           h <% if (locals.type === "H") { %> 42.8 <% } else { %> 9.14 <% } %> 
-           l 6.63 6.63 
-           v <% if (locals.type === "V") { %> 37.8 <% } else { %> 9.14 <% } %> 
-           l -6.63 6.63 
-           h <% if (locals.type === "H") { %> -42.8 <% } else { %> -9.14 <% } %>
-           l -6.63 -6.63 
-           Z"
-
-        fill="url(#mx-gradient-f8cecc-1-ea583b-1-s-0)" stroke="#b85450"
-        stroke-miterlimit="10" stroke-width="1.4">
-</path>
+        <% } %>">
+</rect>

@@ -1,71 +1,57 @@
 @import "variables.less";
 
-@locked: url(#mx-gradient-f8cecc-1-ea583b-1-s-0);
-@unlocked: #009a40;
-@currentPlace: #55ff00;
-@incomplete: #e67e22;
+@locked: rgba(0, 0, 0, 0.5);
+@currentPlace: rgba(85, 255, 0, 0.5);
+@incomplete: rgba(255, 145, 0, 0.7);
 
-.currentRoute {
-  fill: #55ff00;
-}
-
-.unlockedRoute {
-  fill: #fcb612;
-}
-
-.unlockedUnfinishedRoute {
-  fill: @incomplete;
-}
-
-.lockedRoute {
-  fill: #c3242c;
-}
-
-.waterRoute {
-  opacity: 0.7;
-
-  &.unlockedRoute {
-    fill: lightblue;
-    opacity: 0.4;
+#map {
+  rect, path {
+    cursor: pointer;
+    fill: transparent;
   }
-}
 
-#map g g, #map rect, #map path {
-  cursor: pointer;
-}
+  text {
+    pointer-events: none;
+  }
 
-g > text {
-  font-size: @smallFont;
-
-}
-
-.city {
-  fill: @locked;
-  stroke: #000000;
-
-  &.currentTown {
+  .currentRoute {
     fill: @currentPlace;
   }
-
-  &.unlockedTown {
-    fill: @unlocked;
-  }
-
-  &.unlockedUnfinishedTown {
+  
+  .unlockedUnfinishedRoute {
     fill: @incomplete;
   }
-
-}
-
-.dungeon {
-  fill: @locked;
-  stroke: #000000;
-
-  &.unlockedDungeon {
-    fill: @incomplete;
+  
+  .lockedRoute {
+    fill: @locked;
   }
-  &.completedDungeon {
-    fill: #008f3a;
+
+  .city {
+    fill: @locked;
+
+    &.currentTown {
+      fill: @currentPlace;
+    }
+
+    &.unlockedUnfinishedTown {
+      fill: @incomplete;
+    }
+
+    &.unlockedTown {
+      fill: transparent;
+    }
+  }
+
+  .dungeon {
+    fill: @locked;
+
+    &.unlockedDungeon {
+      fill: @incomplete;
+    }
+
+    &.completedDungeon {
+      fill: transparent;
+    }
   }
 }
 
@@ -76,4 +62,5 @@ g > text {
   font-family: pokemonFont, "Helvetica Neue", sans-serif;
   padding: 3px;
   border: solid #7f7f7f 1px;
+  pointer-events: none;
 }

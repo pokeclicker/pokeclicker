@@ -17,13 +17,12 @@ Parameters:
 
 <% */ %>
 
-<rect fill="#ffffff" height="15" stroke="none" width="15"
-    x="<%= locals.x %>" y="<%= locals.y %>">
-</rect>
-<rect data-bind="
-    click:function(){MapHelper.moveToTown('<%= (locals.moveToTown) ? locals.moveToTown : locals.name %>')},
-    attr: { class: MapHelper.calculateTownCssClass('<%= locals.name %>') }"
-    class="city" data-town="<%= locals.name %>"
-    fill="url(#mx-gradient-dae8fc-1-7ea6e0-1-s-0)"
-    height="12" stroke="#6c8ebf" width="12" x="<%= (locals.x + 1.5) %>" y="<%= (locals.y + 1.5) %>">
+<rect class="city"
+    data-town="<%= locals.name %>" 
+    x="<%= locals.x * 16 %>"
+    y="<%= locals.y * 16 %>"
+    height="<%= (locals.height || 3) * 16 %>"
+    width="<%= (locals.width || 4) * 16 %>"
+    data-bind="click:function(){MapHelper.moveToTown('<%= (locals.moveToTown) ? locals.moveToTown : locals.name %>')},
+        attr: { class: MapHelper.calculateTownCssClass('<%= locals.name %>') }">
 </rect>
