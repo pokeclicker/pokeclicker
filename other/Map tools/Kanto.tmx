@@ -8,14 +8,14 @@
  <tileset firstgid="9301" source="kanto.tsx"/>
  <tileset firstgid="9302" source="pokemontower.tsx"/>
  <tileset firstgid="9338" source="tiles_FRLG_buildings.tsx"/>
- <layer id="1" name="Water" width="100" height="60" locked="1">
+ <layer id="1" name="Water" width="100" height="60" locked="1" tintcolor="#c8c8c8">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXGUAACBcAQAAAQC53bsjAg==
   </data>
  </layer>
  <layer id="25" name="Water Light" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXE0AABAAAAEAu90OsA==
+   KLUv/WDAXM0TAIQCAABcAVwBXAEAAFwBXAFcAVwBXAFcAVwBXAFcAVwBAABcAVwBAABcAYFcqNHHAdEFDhjkWAsSABK4BC4BQEATMAQgAUAAEiAEHAEQKAFAAgQUUwYxVz09TtW4RUb+UJT21+GGl4kze1xs19mAddF92TbiganGfNB50kXvCkEwtY2I+zL14R6eS+7SH9nF8+5j9iF3M/uNU/dyT0clOYHr3oboc1/xVPMIPYTwaX6acs5n8I/hp28T9Bx2iK9dT3xWp7fR7beQq/DFCMXwGkVax59J5D6fyfQAZxeVGKw3lvdWDQe20DpSk2bOQE+vokuJDxrlA2TOcd3/b4gQIbcX7650oegtR2njzQUv8VUBko9U2zB+MHPkA9kZkMXt8XYHLNPggxflJmeMKnllsqY/wiriosD+0XwDH4V1+M82I156fDOqyfnFRkS373UxqBnlLyLn0zZ6twzTvkwzqTy8IsdYTyqeuHQ4Gj3Pd10gN0dglI3PuqiL7OwnsNlUDkEz1V+nEvWCK1B/wk7mdWFIB4P6hOY9GW8bjFK+cx2K3/5Js7AhKqdP4HHqfdOq+5AOqmyTyOB4LHL1g7le7Ca5q3ILoITJEV2P5QKzkkK+7qPUjqo82vW/kJcpT2drsRQ3aLiMrOWK6PQb0c7IJewt+89Lw6P/v47h9WZ/AYpNJ2vlofCROCCjF03XFRiLrzLTJebi1xWv8X0B1i6bK9frHZjLfzSmErtsrNqI17sNOWmNUfiINr7iBQ73k7f4an2k8djMjxWdcUi/J95iNc4T+eXlZde4ySV+k9m3fr6VGziak5e8NZ4sBQLVhZ//pUyMcM9/AB38AQ==
   </data>
  </layer>
  <layer id="8" name="Land Tier 1" width="100" height="60" tintcolor="#b4b4b4">
