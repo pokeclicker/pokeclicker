@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="2020.07.21" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="21" nextobjectid="11">
+ <editorsettings>
+  <export target="Kanto.json" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="tiles_FRLG.tsx"/>
+ <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
+ <tileset firstgid="9301" source="kanto.tsx"/>
+ <layer id="1" name="Water" width="100" height="60" locked="1">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXGUAACBcAQAAAQC53bsjAg==
+  </data>
+ </layer>
+ <layer id="8" name="Land" width="100" height="60" locked="1" tintcolor="#b4b4b4">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXE0SAJKEDBHACQAR8vdt9OOnJEkUD7TcASJtdS3LQKpH3af0NH41EpEuABgxE34dkhxS8AkGP/EzgN2ocA8AYAISAQBScQASABEEFEHDETQYgUbgEAAEEIFEAEAEDAGFURBMQjVngTxpVH2YzvEbZG8B8L5RvJ/aL5NxwdiSTRfP0HLNIHO1RHshIDPpiv+91B01KGA4bpKe7/UovFju74jqhkEf3BjXz4Aj1ddeK4orx47Xim3LxVq/y2l5V/cZyGCKVkAUXkW7wzlC7BC+d5Wm8aedHAWrrODVRLDXstPxcwAdZOQjW30ESIy3igOOsJGARon9OEf/5WehPYodpwVXPz0EYPJ0g4bdMOOiP1KtSfi3O6FHsXDrto8nMLnITHabfDSifTkw6TLM2OPFbLheQScvFCHwctGGyQV9tyHSfDIEuDbCH3V0K5NvR4qKa1cwa/IQ6HherZcK+YpWgmzOMtVkE/jsDf2epFHfZ63tgKlr7AFNmjfy4LqdVLbJvA89AhnCcwrCCTD8ElH1seQRcq6Ml7c2WABBj6o/7M7VjdFRsdH3lCYZPNCS+tzHsZH4ED22NXdebiA/2DyTS3ZqpCaDtqn74I55tM/O4rJXa3Khm58/heAq84yIy65/bSDFKlkHU6dg+/sfcooC8JNlhOUyTlKBnFRNUViXokp9JAcB1a2mGqeHEyqT78hBWpN68ZEBcSzGhpiDqEyuMaFm/HHJ3JFoPzefGHjWjfvR8+MEIUPp5IlxchQIgvELXpLBOJcOGR7nAdtVDw==
+  </data>
+ </layer>
+ <layer id="18" name="Land Tier 2" width="100" height="60" tintcolor="#d2d2d2">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXK0LACIHBwXwAQhm/Nu2bdu2bdu2bdu2bdu2bdu2bdu2DRaA3KiAgwcgAw2AARLgEEgIJAKNQCQQCSQCiSBCAIBhGIzJULsLQQV94iMnVlo1x+/MkpMf/HcTLVkrfxRXtPdJMtp1EajmrTeORHC7b6LN0ysomVpVDtc0mv0IK1swmlzRLI3St5YQXSxml8oQ1WogxnWHsFENTTkNEGsYz3GDs7HdONtdqE9hGu4611I3Qgf5SZVKBIRjnaF+57DQIbxDz/2bwhQ6uN5Evm4OsgcyfWpjQN4Ycfq9hvcSo3ErWmjtS8nNuNWhW5NGPkf3Wn2VzJYqNjtRWGoJ5mzzJLvdvY7+22y3CrB3jW13Jz3jgXZHju/aqN+Q7LuwN7zK3wGDhn+998LYcRT97uxaPkXPwmHPU/e5s7rugv7bp+1R8lsa+z55+PfGu9e+IbXdSBcPt/tSdNhMuJP6Dq9khhbdP4/4SbnBjMOv0HV4wNjqYIvv/uOsHj8=
+  </data>
+ </layer>
+ <layer id="19" name="Land Tier 3" width="100" height="60" tintcolor="#e6e6e6">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXHUIAALEBAXwAQhm/Nu2bdu2bdu2bdu2DQKAlKigwwMwg0xAKxJgEVgEIoFEIBFYBBoBQAAQBAAEcAzEYEQR4xAAbYazb7x1C0vUzT+zbiIHRJ13zRonsu0fs5jUTSb68SbI1i5yBEiJulJobzqswiP2mXP/nq5H1P4cmB/HvO+JsbndQtyvg7r2hMl/1v0nWxrL5xVm9/SItNgV/+lo9ZHlYvXVOrkFgNV4Ej/1ltdBGj7SYMfWVFvXwwNbTPT2oZfmIJkOQcuz1Vwag2Q6BC2drfx355MqY7mGDaCP4vQKg1vQ3aMsLnUgx/Ek7dUzvLtVmXaf8NsxdNEEIb6TtOPSe+1JUfywhD5+CcxYWIHZAg==
+  </data>
+ </layer>
+ <layer id="20" name="Land Tier 4" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXLUCACAAACgFL6Dgx7CDMrgB9aqabbYmqtaKj6s8XWvlwKC2f1+n/oq0qS8XplJUokZxOCREiVwKYav3dI4lCs7MJ5WgKtWMuKiHguRNRi1++4YiY+kMPksB
+  </data>
+ </layer>
+ <layer id="3" name="Routes" width="100" height="60" locked="1">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXA0MALKEDRJA5YgAhCU9FmXn7Ev7bzWUkA/HysMY+prp+S5Xo/gmR3VW+0W+Co+n1DqmEfEHFoKfA4Y/fX+gcE8lCYACE8HIiRyB8wMwSfXBNMwUs9rzQwsJmJwqE6v0q7YxLVDsQ1pcAEXATaE22jD8q5bsqig8dM9k3wBSS1PHOhp4mAqs6hKJCydXrRSya0KVa5jSOw9GqtPDz9eBjw0qVqqIbimOTk6tynM/rCcQk1GDUfPFkdyzIyWZ5iZDgJUZ3KaGMyt1lMaaLFVuXKeYT/6PUJEmod74vSIVp3qkNoHqzUTUbBpPc04NNsc0RzVFBY0abg60HbMy/cmq4qbotDXtJJ/SMxHqQORINFUnS6lt6DwB6uRRMRNBH0gYiVJ5uz+vTMUnmcpVaFKlplHVHKCTJouak5LofunOEQnS5FDBOXTP+YOR0mRO81mlSz89J4bJSvM3SN/xvU+81O146oPEDHUp/hL/aQricVHxwil5bZKE/iJVGmX64qp0ZdrsLzI=
+  </data>
+ </layer>
+ <layer id="5" name="Dungeons" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXL0GAKIGFBxwj4AAe7+ANzewXEYDNGkjIgAAAEBiN5VgCeEBhutwFa4iDC7BCgCu0qM80huJQg/08bwOhvMyb/M0F8urTCQvAlFAGu/xHBNj8RSXQLzpMqjwEIIlOcCCgxC0AhGMEiQl/P8ngiQpohvG0SAASoCTDUfkx4gTKFxCBcQhO8BJgHMARyI2nX4XDb77BaDm1smKyzjJRQWcnOXHWD7jJwCYeokVrqwe4q/VzNWGyREp751YtZ+DD5h1vmH/5cRwjhT9MMeuNOeWadL2tvU4Mi66qlp+
+  </data>
+ </layer>
+ <layer id="13" name="Towns" width="100" height="60" locked="1">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXI0NAEYbRDgAWQuCAPz////////9GyiKoigufp7LsizLsiyLLnO9y1yv66kVKS7YezgY+P//EfP/11qG90PoATAAMgA0ADd6ohd6oMfgLajxaLwZT8FL8BC8A8/AK/AIvAHX4rF4K56AF+ABeDXv8zyv80bLAR0eh7eByBvyhDwNL8PD8C48C6/Co/Am+Hg9Ho8n4UV4p2d6pUd6EN4DHO/Gs/EcvAYDl+gVeoE4L3NcZLwYD8Z78VxstlB5U56Up+KleCjeiWfilXgk3ggmb8lT8kS8EA/E+/A8vFlWWFZXVlZWVaKsoKyerJysmiRZIVkdWRlZFQkCZPWj2qFjlWN9Xp5X50VzeplepRdp5iXzinnBXKMBM6hhCpGAJJZELPsAA4IYCuoBEYwQJBDhR4RXhM8ImIBYme5ZkTS9yV9FkkalAla+X74k34j4Jn3v5+gBdzzqMRjVVTfLmGQJPHS+3LVG4qSizJMq1lrHSQWZ51asFRwnTWWeVsVdCHFSdeapBXfpDo10Cj3gavnQAwlcCYCTRfej0Z/ryvUfVqD/GzIYsjVkN2RpyLIhm0wndqkL4wE=
+  </data>
+ </layer>
+ <layer id="14" name="Gyms" width="100" height="60" locked="1">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXP0BADAAADIGADoPgLC3AZV66OOnaVSO3xr423nlxxfVQJ4/ScAPOGedFKqZJzzDAXwJPJD/NFDHOLnUVgRq3k4PSA==
+  </data>
+ </layer>
+ <layer id="6" name="Other" width="100" height="60" locked="1">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXEUFABIJGiVwYUAB0+hPo49AIyiwlnljjTWOAACCABKKDlZO9op8MOeZU4cdklfkBRF9oQ/EeC1eCs/X+Tgr8UK8DptP82Ue5rt8ltIVqRodbAZbQfUh2AY2gYANYEs11HbaTCmvfPJxxxsNL5xwF6BwghJNyO6gQ7sDLdijUrFMpaJ8atRMlhOkqhLxwTVJXX5iciAV2YnlQKlCOKlOkKrJ6xlUM1jlsvUhBA==
+  </data>
+ </layer>
+ <layer id="15" name="Decoration" width="100" height="60">
+  <data encoding="base64" compression="zstd">
+   KLUv/WDAXF0DAOQCAADtCwD1CwAArAUA9bwFu5oZAACbGQAAnBkAohkAAKMZAACkqhkAAKsZAACsGRegEIkWF7YBcMMCYwed8ZVRLZVVLWHYV+5LKVyTq7Yg1LmZ11aNSKef6tIr0U2unrUeuq5aYH2xF/+O
+  </data>
+ </layer>
+ <objectgroup id="12" name="Map Test" visible="0" opacity="0.38">
+  <object id="10" gid="9301" x="94" y="992" width="1646" height="1011"/>
+ </objectgroup>
+</map>
