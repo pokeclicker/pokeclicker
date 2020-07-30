@@ -3,6 +3,26 @@
 Download [Tiled](https://www.mapeditor.org/)
 Open all the files in this directory with Tiled _(excluding the images)_
 
+## Land:
+4 - 5 Layers
+
+Lighter on the inside (based on height map)
+
+Darker on the outside
+
+Lips around near ocean
+
+![](https://i.imgur.com/ZXlIwmm.png)
+
+## Water:
+2 layers
+
+200,200,200 tint on darker water
+
+no tint on lighter water
+
+![](https://i.imgur.com/cHVbyMY.png)
+
 ## Locations:
 
 **When placing anything on the map, try and keep it to the top left where possible, and try to avoid covering any routes**
@@ -27,6 +47,11 @@ Open all the files in this directory with Tiled _(excluding the images)_
 **Home Town:**
 <br/>Icon:
 <br/>![](https://i.imgur.com/z6uuVM5.png)
+
+**Dock:**
+<br/>Icon:
+<br/>![](https://i.imgur.com/HQOIsCn.png)
+<br/>![](https://i.imgur.com/jrML84Z.png)
 
 **Dungeons:**
 <br/>Generally just use this icon, with one of the other colored variations, expand if needed.
