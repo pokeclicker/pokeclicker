@@ -12,6 +12,7 @@
     "node_modules",
     "build",
     "src/libs",
-    "src/specs"
+    "src/specs",
+    "other"
   ]
 }
