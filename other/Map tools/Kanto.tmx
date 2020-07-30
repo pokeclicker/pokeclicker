@@ -8,14 +8,14 @@
  <tileset firstgid="9301" source="kanto.tsx"/>
  <tileset firstgid="9302" source="pokemontower.tsx"/>
  <tileset firstgid="9338" source="tiles_FRLG_buildings.tsx"/>
- <layer id="1" name="Water" width="100" height="60" locked="1" tintcolor="#c8c8c8">
+ <layer id="1" name="Water Dark" width="100" height="60" locked="1" tintcolor="#c8c8c8">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXGUAACBcAQAAAQC53bsjAg==
   </data>
  </layer>
  <layer id="25" name="Water Light" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXM0TAIQCAABcAVwBXAEAAFwBXAFcAVwBXAFcAVwBXAFcAVwBAABcAVwBAABcAYFcqNHHAdEFDhjkWAsSABK4BC4BQEATMAQgAUAAEiAEHAEQKAFAAgQUUwYxVz09TtW4RUb+UJT21+GGl4kze1xs19mAddF92TbiganGfNB50kXvCkEwtY2I+zL14R6eS+7SH9nF8+5j9iF3M/uNU/dyT0clOYHr3oboc1/xVPMIPYTwaX6acs5n8I/hp28T9Bx2iK9dT3xWp7fR7beQq/DFCMXwGkVax59J5D6fyfQAZxeVGKw3lvdWDQe20DpSk2bOQE+vokuJDxrlA2TOcd3/b4gQIbcX7650oegtR2njzQUv8VUBko9U2zB+MHPkA9kZkMXt8XYHLNPggxflJmeMKnllsqY/wiriosD+0XwDH4V1+M82I156fDOqyfnFRkS373UxqBnlLyLn0zZ6twzTvkwzqTy8IsdYTyqeuHQ4Gj3Pd10gN0dglI3PuqiL7OwnsNlUDkEz1V+nEvWCK1B/wk7mdWFIB4P6hOY9GW8bjFK+cx2K3/5Js7AhKqdP4HHqfdOq+5AOqmyTyOB4LHL1g7le7Ca5q3ILoITJEV2P5QKzkkK+7qPUjqo82vW/kJcpT2drsRQ3aLiMrOWK6PQb0c7IJewt+89Lw6P/v47h9WZ/AYpNJ2vlofCROCCjF03XFRiLrzLTJebi1xWv8X0B1i6bK9frHZjLfzSmErtsrNqI17sNOWmNUfiINr7iBQ73k7f4an2k8djMjxWdcUi/J95iNc4T+eXlZde4ySV+k9m3fr6VGziak5e8NZ4sBQLVhZ//pUyMcM9/AB38AQ==
+   KLUv/WDAXFUVAGQCAABcAVwBXAEAAAAAAABcAVwBXAFcAVwBXAFcAVwBXAFcAVwBXAGBiKjhiwPBBYwg5BwDEiASqAQ2AUCAEwAELAFAwBEAgSMAAiYASmAAQsoYU9YAMY/RreCm0Zsl/PUw9niZdNqzvIwjARR84DucKV7+st4xrkoONpztadZDsCeFvT3J1bYxygM7OKNgYD8ofKySax8j67tso+evtgU7KmTfj2xs5ozqDrJcN09SQsW63Gw+5KjdGIM9jf+XTh8z0yvnFsg7mvm5W3u7JpKFWdCQ18aXIZkhHWO0Ol246VbPpOYAketiQQetxtQtd8hTXx355Om318m0+HrNwWT5qMijFWL41jpUgCvGeyNdjL5p5JOaV8ccsIVvpNqnXduou5mz6v8TZ/osmBe0uw3Jlp8vKs6/4kzhXuq2mFLBtNt4uC2i4wPscyp8QtZBL44UM8ZBj1kT5W3qb01B9wi6iJb1Nj6XsT5R8ugWH9j0Fy2b88loavanuxvHRdBDUH4f8yRi15VnYWdHoAIFB7GhqRF5fb2EXZv2KrRGssRYoincjrjh+Gfth9upIbRnQhZ97mgb1gPNambwb+8kK7xhUmFOnx18Ws6SY5KSB8x8pPg81Be6Y48q7zbOpqY2fd7wvQIkX9Ic3GUw60C0OpkVzqff1eTGN1Jx87OS7BiWLzz3X7pLdeZz31rEN/gnAzsG97/SR3OyHktpS9LgB/s6oDgkXlGIaibxXYKPqmWTRvlsYn86+fIn0lukJORvUCrTlfsoL1G1RcqK6bIOo8ybP2MegpcnR/6x943v6g+t3OJHK0zANL6iBhIqk7eoJvbZRosyP/60jEP6mHiL2MhIhMGXl42NmyNRLGH6/s+Uw8BR7vgy8o0nHwMZpcJP+vIkKi3efwBtVQE=
   </data>
  </layer>
  <layer id="8" name="Land Tier 1" width="100" height="60" tintcolor="#b4b4b4">
@@ -88,7 +88,7 @@
    KLUv/WDAXF0DAOQCAADtCwD1CwAArAUA9bwFu5oZAACbGQAAnBkAohkAAKMZAACkqhkAAKsZAACsGRegEIkWF7YBcMMCYwed8ZVRLZVVLWHYV+5LKVyTq7Yg1LmZ11aNSKef6tIr0U2unrUeuq5aYH2xF/+O
   </data>
  </layer>
- <objectgroup id="12" name="Map Test" visible="0" opacity="0.38">
+ <objectgroup id="12" name="Map Overlay" visible="0" opacity="0.38">
   <object id="10" gid="9301" x="94" y="992" width="1646" height="1011"/>
  </objectgroup>
 </map>
