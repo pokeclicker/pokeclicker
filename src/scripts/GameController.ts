@@ -20,12 +20,16 @@ class GameController {
 
     static animateCurrency(amount: number, target) {
         let pos;
-        if ($(`#${target}`).offset()) {
+        const targetVisible = $(`#${target}`).is(':visible');
+        
+        if ($(`#${target}`).offset() && targetVisible) {
             pos = $(`#${target}`).offset();
             pos.top -= 15;
         } else {
-            pos = {'top': -200, 'left': 0};
-        }
+            pos = $('#gameTitle').offset();
+            pos.top += 45;
+            pos.left -= 100;
+        };
 
         const left = ((Math.random() * ((pos.left + 25) - (pos.left - 25)) + (pos.left - 25))).toFixed(2);
         const place = amount.toString().length;
@@ -88,28 +92,54 @@ class GameController {
             const keyCode = e.keyCode;
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {
-                if (keyCode == 38 || keyCode == 87) { // up || w
-                    DungeonRunner.map.moveUp();
-                } else if (keyCode == 39 || keyCode == 68) { // right || d
-                    DungeonRunner.map.moveRight();
-                } else if (keyCode == 37 || keyCode == 65) { // left || a
-                    DungeonRunner.map.moveLeft();
-                } else if (keyCode == 40 || keyCode == 83) { // down || s
-                    DungeonRunner.map.moveDown();
-                } else if (keyCode == 32) { // space
-                    DungeonRunner.openChest();
-                    DungeonRunner.startBossFight();
+                switch (keyCode) {
+                    case 38: // up
+                    case 87: // w
+                        DungeonRunner.map.moveUp();
+                        break;
+                    case 37: // left
+                    case 65: // a
+                        DungeonRunner.map.moveLeft();
+                        break;
+                    case 40: // down
+                    case 83: // s
+                        DungeonRunner.map.moveDown();
+                        break;
+                    case 39: // right
+                    case 68: // d
+                        DungeonRunner.map.moveRight();
+                        break;
+                    case 32: // space
+                        DungeonRunner.openChest();
+                        DungeonRunner.startBossFight();
+                        break;
+                    default: // any other key (ignore)
+                        return;
                 }
                 e.preventDefault();
             } else if (App.game.gameState === GameConstants.GameState.town) {
                 if (keyCode == 32) { // space
-                    if (player.town().gym) {
+                    if (player.town().gym()) {
                         GymRunner.startGym(player.town().gym());
-                    } else if (player.town() instanceof DungeonTown) {
+                    } else if (player.town().dungeon()) {
                         DungeonRunner.initializeDungeon(player.town().dungeon());
                     }
                     e.preventDefault();
                 }
+            } else if (App.game.gameState === GameConstants.GameState.fighting) {
+                switch (keyCode) {
+                    case 187: // plus
+                    case 107: // plus (numpad)
+                        MapHelper.moveToRoute(player.route() + 1, player.region);
+                        break;
+                    case 189: // minus
+                    case 109: // minus (numpad)
+                        MapHelper.moveToRoute(player.route() - 1, player.region);
+                        break;
+                    default: // any other key (ignore)
+                        return;
+                }
+                e.preventDefault();
             }
 
         });

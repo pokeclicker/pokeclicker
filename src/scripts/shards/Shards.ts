@@ -21,6 +21,10 @@ class Shards implements Feature {
     }
 
     public gainShards(amt: number, typeNum: PokemonType) {
+        if (!this.canAccess()) {
+            return;
+        }
+
         if (typeNum == PokemonType.None) {
             return;
         }

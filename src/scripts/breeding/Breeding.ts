@@ -17,6 +17,10 @@ class Breeding implements Feature {
     constructor() {
         this._eggList = this.defaults.eggList;
         this._eggSlots = ko.observable(this.defaults.eggSlots);
+
+        this._eggList.forEach((egg) => {
+            egg.extend({deferred: true});
+        });
     }
 
     initialize(): void {
@@ -233,6 +237,10 @@ class Breeding implements Feature {
     }
 
     public gainEggSlot() {
+        if (this.eggSlots === this.eggList.length) {
+            console.error('Cannot gain another eggslot.');
+            return;
+        }
         this.eggSlots += 1;
     }
 

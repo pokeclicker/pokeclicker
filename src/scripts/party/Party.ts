@@ -31,11 +31,11 @@ class Party implements Feature {
 
     }
 
-    gainPokemonById(id: number, shiny = false) {
-        this.gainPokemon(PokemonFactory.generatePartyPokemon(id), shiny);
+    gainPokemonById(id: number, shiny = false, suppressNotification = false) {
+        this.gainPokemon(PokemonFactory.generatePartyPokemon(id), shiny, suppressNotification);
     }
 
-    gainPokemon(pokemon: PartyPokemon, shiny = false) {
+    gainPokemon(pokemon: PartyPokemon, shiny = false, suppressNotification = false) {
         GameHelper.incrementObservable(player.caughtAmount[pokemon.id]);
         GameHelper.incrementObservable(player.statistics.pokemonCaptured);
 
@@ -56,10 +56,16 @@ class Party implements Feature {
         if (this.alreadyCaughtPokemon(pokemon.id, false)) {
             return;
         }
-        Notifier.notify(`You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, GameConstants.NotificationOption.success);
+
+        if (!suppressNotification) {
+            Notifier.notify(`You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, GameConstants.NotificationOption.success);
+        }
+
         App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
         this._caughtPokemon.push(pokemon);
 
+        // Trigger sorting update of PokemonList UI
+        PartyController.getSortedList()();
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {

@@ -31,7 +31,7 @@ class EffectEngineRunner {
     public static updateFormattedTimeLeft(itemName: string) {
         const times = GameConstants.formatTime(player.effectList[itemName]()).split(':');
         if (+times[0] > 0) {
-            return '60:00+';
+            return player.effectTimer[itemName]('60:00+');
         }
         times.shift();
         player.effectTimer[itemName](times.join(':'));
@@ -47,7 +47,7 @@ class EffectEngineRunner {
 
 
     public static isActive(itemName: string): KnockoutComputed<boolean> {
-        return ko.computed(function () {
+        return ko.pureComputed(function () {
             if (!player) {
                 return false;
             }

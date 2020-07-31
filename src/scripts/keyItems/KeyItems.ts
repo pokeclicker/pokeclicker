@@ -31,7 +31,7 @@ class KeyItems implements Feature {
             }),
             new KeyItem(KeyItems.KeyItem.Safari_ticket, 'This ticket grants access to the Safari Zone in Fuchsia City'),
             new KeyItem(KeyItems.KeyItem.Wailmer_pail, 'This is a tool for watering Berries you planted to make them grow more quickly', function () {
-                return MapHelper.accessToRoute(14, 1) && App.game.farming.berryList[0] >= 3;
+                return MapHelper.accessToRoute(14, GameConstants.Region.kanto);
             }),
 
             new KeyItem(KeyItems.KeyItem.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground'),
@@ -68,6 +68,15 @@ class KeyItems implements Feature {
                 if (json[key] === true) {
                     // Unlock to dispose unlocker if needed
                     this.itemList[KeyItems.KeyItem[key]].unlock();
+                }
+            }
+        }
+
+        // Gain the item in case the requirements changed.
+        for (const keyItem of this.itemList) {
+            if (!keyItem.isUnlocked && keyItem.unlockReq !== null) {
+                if (keyItem.unlockReq()) {
+                    App.game.keyItems.gainKeyItem(keyItem.name);
                 }
             }
         }

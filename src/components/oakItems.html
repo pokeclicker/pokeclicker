@@ -2,14 +2,14 @@
 data-bind="visible: App.game.oakItems.canAccess()">
     <div class="card-header p-0" data-toggle="collapse" href="#oakItemsBody">
         <div>
-            <span style="text-align:center" data-bind="text: 'Oak Items equiped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()"></span>
+            <span style="text-align:center" data-bind="text: 'Oak Items equipped: ' + App.game.oakItems.activeCount() + '/' + App.game.oakItems.maxActiveCount()"></span>
         </div>
         <button type="button" class="btn btn-info" style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
             data-bind="tooltip: { title: 'Activate Oak items to gain unique bonuses. When an Oak item has gained enough experience you can level it up with money to boost its effect.', trigger: 'hover', placement:'left' }">?</button>
     </div>
     <div id="oakItemsBody" class="card-body show">
         <div class="row" data-bind="foreach: App.game.oakItems.itemList">
-            <div class="col-xs-4 col-sm-4 col-md-3 p-2">
+            <div class="col-xs-4 col-3 col-md-3 p-2">
                 <button class="p-0 btn"
                     data-bind="css: {
                        'btn-primary': $data.isActive,

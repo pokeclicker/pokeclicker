@@ -9,7 +9,6 @@ class GymBattle extends Battle {
      * Award the player with exp, and go to the next pokemon
      */
     public static defeatPokemon() {
-        App.game.wallet.gainMoney(this.enemyPokemon().money);
         App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
         App.game.breeding.progressEggs(Math.floor(Math.sqrt(this.gym.badgeReq * 3 + 1)));
         this.gainShardsAfterBattle();
@@ -31,11 +30,11 @@ class GymBattle extends Battle {
         this.enemyPokemon(PokemonFactory.generateTrainerPokemon(this.gym.town, this.index()));
     }
 
-    public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.computed(function () {
+    public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(function () {
         return GymBattle.index();
     });
 
-    public static pokemonsUndefeatedComputable: KnockoutComputed<number> = ko.computed(function () {
+    public static pokemonsUndefeatedComputable: KnockoutComputed<number> = ko.pureComputed(function () {
         return GymBattle.totalPokemons() - GymBattle.index();
     })
 }
