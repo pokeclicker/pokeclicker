@@ -3,13 +3,7 @@
 ///<reference path="../GameConstants.ts"/>
 ///<reference path="../party/LevelType.ts"/>
 ///<reference path="PokemonType.ts"/>
-/**
- * Pokémon data, accessible by name or id.
- * @type {{}}
- */
 
-const pokemonMap: { [name: string]: any } = {};
-const pokemonMapId: { [id: number]: any } = {};
 const pokemonDevolutionMap: { [name: string]: string } = {};
 
 /**
@@ -14185,6 +14179,19 @@ pokemonList.forEach(p => {
     if (p.baby) {
         p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.evolvedPokemon] = evo.basePokemon);
     }
-    pokemonMap[p.name] = p;
-    pokemonMapId[p.id] = p;
+});
+
+const pokemonMap = new Proxy(pokemonList, {
+    get: (obj, prop: string) => {
+        if (+prop) {
+            const id: number = +prop;
+            return obj.find(p => p.id == id);
+        }
+        switch (prop) {
+            case 'random':
+                return () => obj[Math.floor(Math.random() * obj.length)];
+            default:
+                return obj.find(p => p.name.toLowerCase() == prop.toLowerCase());
+        }
+    },
 });
