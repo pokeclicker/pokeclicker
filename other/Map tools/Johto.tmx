@@ -3,6 +3,7 @@
  <tileset firstgid="1" source="johto.tsx"/>
  <tileset firstgid="2" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1318" source="tiles_Advanced.tsx"/>
+ <tileset firstgid="9302" source="sprouttower.tsx"/>
  <layer id="1" name="Water Dark" width="100" height="60" locked="1" tintcolor="#c8c8c8">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXGUAACBdAQAAAQC53bsjAg==
@@ -58,9 +59,9 @@
    KLUv/WDAXFUKALQDAAAWDQAAEA0AAA4NAAMAAAACAAAABAAhAAAABQAAACI+PTsAAAAGPDw+AyAAPj4fPAMIDQ8QDSANHz5ooHBrRQKQgopgJAEyqbEqhlOa9PmA9qCqUTBNVrWvg7TCk/r9o9YSetLJEtUlnuWlctqlUCZN0Ze/Oe6SZGZqZzKqLL+AJe+lkH+m50ii2yFFI02C0jvMjUC19C+Nl+PklSQZanLqTZn/SyShxiihJkuVd6KU0FV6QiqZjLr8/OqM6bzVMsGbpHrr6fWvXi5z6pGkFAyrfABP5cmo/0HqP2iAfREiNVlUHpfocOOS7zDAKTQJFUdApTf98s4m6WskNDlKHDdUyN52pTeG1ITJ46fPa2q3pOAmpXLQ0BLUYqQ9WafY6kl2olvEmrRTHPNkStf7hH+4mafXGVEXpkeo6q+gv+MklRJM5S0VZA==
   </data>
  </layer>
- <layer id="9" name="Dungeons" width="100" height="60" locked="1">
+ <layer id="9" name="Dungeons" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXP0PABZZRjPgHhAUc8IvOaqdb5PF/eL/TO0r/7oNTMxUQWuBslfwdkp1ai9EzW4YhmEYHmQSoAWdtgM3ADcANgDLQoWLwjUByvfEydfkYyLhigDhenA5WPIpSfIh+Y5Ug4vBgkvBlaDn49n5jHxFns5XIn1BPiAHpeJKcbG4UHD5tnxaviwflu/KZ+VEiYvENeIycYkIcYH4cHm4OnC4Nmi4MlwYqnxUpnxSvigXBo1n2zkJCPAEQKe0kdR8aT4035nPzFfmIwMjdIGuz/XictF47Nh0jPnEfGE+MN+Xz8vXpcWKAyPRx+ZsciwOnDebmzZstjUlItuQTciPzcfWI8eGY7sxmrHV2GjIiLGJQqDtc08Ing48GShA4GlAz2ZjVKhBrTECbSDYuFoOkAIEAhFC6BLgEDBAhoBhQwQ7BA8R/Hscw9zbBuHAIZmjofFMWsmYiIijMUqaPAcifgknD8Qv8YmGc8fbbyXgZNzUAH8qVP3FE3MxRF8I/gXUAeRCQrBJZIBrRrQwzRnZyZexynGttto6GGjAH/8NSy9M2d+S/4bkk1BCUQJlTynpdQ8BwEn2yFgmeSYaTfpUIcTKNIn3a8s6GXnOUxMePq1kJyPPGQ2qdRLxnAO6kd0XTDeyfxFqkvh0Mj0UavJcdJKcCzXpnud+vLZDTeIvLwd99Dl05hc=
+   KLUv/WDAXG0SAAYeUzjAHgkoPOQGC6CgQuEGUW3YR2OK0VUkU1gLvePqNbI5tZK8JJLjBcEAC0BRFMUpgugSxbEQPIyQB0MAPwBCAA1DlA/Kk8/J1+TCZqHCRmGbwORbouRL8iGRsEWAsD3YHBz5jBT5iHxDrMHGYMGmYEsg5AsC5Pvx+Xg6vqYcH47vxgEkqhkyVjG+fF6+Lh+Xb8un5cuCZLQVbUTb0TaE5bvyWfmqfFS+KZ8UIaDtZ/PZgrYenm1HZ8vZcDhsGzRsGQYvEDyvnZfOK+fCeX14eXh1uE8IPh34ZKAAgU8DhKxarIKsgDwJCPAJgI6mVQ4zX5mPzDfmE/OF+cCYWNqUtqStxBYsmJLerNyoNmzWrNSkQbM609RjxWO1w8aqxooGjNWLlQsWKVYrVipQnFgxLSmtkpBeRy+jVxHRa+g14iVC6BX0Anr9+Lx6XiECYahhKSECDCDQaIHlsAIEgHQABhLAECA4hADhQgQrBA8R/GsYAqPLA+GAJpmjkeKZjHVMCCGOhkqavB4hfgkH5YhfoskyMkv8n3njj8xjsvQFpYX7TQU4ef4owJ9OtR/Ai7kYhRaX/+J1UjmGsDqJOuCad61Ac0aS/+VTJdek1e94sj06/jtO9EKQfZf8d5x80h4PY1H2NHnBUXkDZgAvgAggFsBJSn6sFE7ASVZQWCbBB44mxasQe4tp8nwowjRJ6o9TJnh9dKGdJEVHNCjdSSt0fOhG8lgM3UgKm1CTgOOT3rehJgffJ7tHQ00OfjzPKb8CNQkxSDmAR/nBbJQ=
   </data>
  </layer>
  <layer id="5" name="Towns" width="100" height="60" locked="1">

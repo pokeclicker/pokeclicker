@@ -443,11 +443,17 @@
     <!--Sprout Tower-->
     <%- include('templates/mapDungeon',
         { name: "Sprout Tower"
-        , moveToTown: "Violet City"
-        , x: 44, y: 21
-        , width: 1, height: 1
+        , x: 44, y: 13.5
+        , width: 4, height: 4.5
         })
-     %>
+    %>
+    <!--Sprout Tower Extension-->
+    <%- include('templates/mapDungeon',
+        { name: "Sprout Tower"
+        , x: 45, y: 18
+        , width: 3, height: 1
+        })
+    %>
 
     <!--Ruins of Alph-->
     <%- include('templates/mapDungeon',
