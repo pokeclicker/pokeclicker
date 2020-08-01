@@ -242,9 +242,10 @@ class SafariBattle {
     }
 
     private static endBattle() {
-        Safari.inBattle(false);
-        SafariBattle.busy = false;
-        $('#safariBattleModal').modal('hide');
+        $('#safariBattleModal').one('hidden.bs.modal', () => {
+            Safari.inBattle(false);
+            SafariBattle.busy = false;
+        }).modal('hide');
     }
 
     private static gameOver() {
