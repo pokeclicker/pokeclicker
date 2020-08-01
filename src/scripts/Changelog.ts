@@ -32,6 +32,7 @@ const changelogItems = [
     // v0.4.16
     new Changelog(changelogType.UPDATE, 'v0.4.16'),
     new Changelog(changelogType.NEW, 'Update maps'),
+    new Changelog(changelogType.NEW, 'Add notification settings'),
     new Changelog(changelogType.FIXED, 'Safari Zone should no longer lock up'),
 
     // v0.4.16
