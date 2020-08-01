@@ -32,6 +32,9 @@ class Player {
                 case 1:
                     this._route = ko.observable(29);
                     break;
+                case 2:
+                    this._route = ko.observable(101);
+                    break;
                 default:
                     this._route = ko.observable(1);
                     this._region = ko.observable(GameConstants.Region.kanto);
@@ -47,8 +50,6 @@ class Player {
         this._town = ko.observable(TownList['Pallet Town']);
         this._currentTown = ko.observable('');
         this._starter = savedPlayer._starter != undefined ? savedPlayer._starter : GameConstants.Starter.None;
-
-        console.log(savedPlayer._itemList);
 
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
