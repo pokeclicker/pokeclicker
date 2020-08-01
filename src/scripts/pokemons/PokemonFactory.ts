@@ -45,23 +45,13 @@ class PokemonFactory {
     }
 
     public static routeHealth(route: number, region: GameConstants.Region): number {
-        switch (region) {
-            // Hoenn starts at route 101 need to reduce the total hp of pokemon on those routes.
-            case GameConstants.Region.hoenn:
-                route -= 54;
-                break;
-        }
+        route = MapHelper.normalizeRoute(route, region);
         const health: number = Math.max(20, Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15))) || 20;
         return health;
     }
 
     public static routeMoney(route: number, region: GameConstants.Region): number {
-        switch (region) {
-            // Hoenn starts at route 101 need to reduce the total money earned on those routes.
-            case GameConstants.Region.hoenn:
-                route -= 54;
-                break;
-        }
+        route = MapHelper.normalizeRoute(route, region);
         const deviation = Math.floor(Math.random() * 51) - 25;
         const money: number = Math.max(10, 3 * route + 5 * Math.pow(route, 1.15) + deviation);
 
@@ -69,12 +59,7 @@ class PokemonFactory {
     }
 
     public static routeDungeonTokens(route: number, region: GameConstants.Region): number {
-        switch (region) {
-            // Hoenn starts at route 101 need to reduce the total dungeon tokens earned on those routes.
-            case GameConstants.Region.hoenn:
-                route -= 54;
-                break;
-        }
+        route = MapHelper.normalizeRoute(route, region);
 
         const tokens = Math.max(1, 6 * Math.pow(this.routeLevel(route,region) / 3, 1.05));
 
@@ -98,7 +83,7 @@ class PokemonFactory {
         return false;
     }
 
-    public static generatePartyPokemon(id: number) {
+    public static generatePartyPokemon(id: number): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
         return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false);
     }
@@ -165,7 +150,7 @@ class PokemonFactory {
         return Math.random() < 1 / (max + ( (min - max) * (maxRoute - curRoute) / (maxRoute - minRoute)));
     }
 
-    private static catchRateHelper(baseCatchRate: number, noVariation = false) {
+    private static catchRateHelper(baseCatchRate: number, noVariation = false): number {
         const catchVariation = noVariation ? 0 : GameConstants.randomIntBetween(-3, 3);
         const catchRateRaw = Math.floor(Math.pow(baseCatchRate, 0.75)) + catchVariation;
         return GameConstants.clipNumber(catchRateRaw, 0, 100);

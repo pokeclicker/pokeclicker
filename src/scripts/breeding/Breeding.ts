@@ -130,12 +130,7 @@ class Breeding implements Feature {
     }
 
     public progressEggsBattle(route: number, region: GameConstants.Region) {
-        switch (region) {
-            // Hoenn starts at route 101 need to reduce the total money earned on those routes.
-            case GameConstants.Region.hoenn:
-                route -= 54;
-                break;
-        }
+        route = MapHelper.normalizeRoute(route, region);
         return this.progressEggs(+Math.sqrt(route).toFixed(2));
     }
 
