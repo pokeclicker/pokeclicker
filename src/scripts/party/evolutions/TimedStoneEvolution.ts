@@ -1,13 +1,14 @@
 ///<reference path="Evolution.ts"/>
 ///<reference path="EvolutionType.ts"/>
-class TimedStoneEvolution extends Evolution {
+class TimedStoneEvolution extends StoneEvolution {
 
     stone: GameConstants.StoneType;
     timeData: TimedStoneData[];
     defaultEvolution: string;
 
     constructor(basePokemon: string, timeData: TimedStoneData[], defaultEvolution: string, stone: GameConstants.StoneType) {
-        super(basePokemon, EvolutionType.Level);
+        super(basePokemon, defaultEvolution, stone);
+        this.timeData = timeData;
         this.stone = stone;
         this.defaultEvolution = defaultEvolution;
     }
