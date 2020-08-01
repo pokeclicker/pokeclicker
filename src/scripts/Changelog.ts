@@ -36,6 +36,10 @@ const unreleasedChangelogItems = [new Changelog(changelogType.INFO, 'Do not add 
 const changelogItems = [
     // Unreleased
 
+    // v0.3.1
+    new Changelog(changelogType.VERSION, 'v0.3.1 - Bug catcher'),
+    new Changelog(changelogType.CHANGE, 'Eevee will now evolve into Espeon or Umbreon depending on the time of day (when using Time stone)'),
+
     // v0.3.0
     new Changelog(changelogType.VERSION, 'v0.3.0 - Hoenn Update'),
     new Changelog(changelogType.NEW, 'Add initial Hoenn region'),

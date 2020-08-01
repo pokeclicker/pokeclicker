@@ -1,5 +1,6 @@
 ///<reference path="../party/evolutions/LevelEvolution.ts"/>
 ///<reference path="../party/evolutions/StoneEvolution.ts"/>
+///<reference path="../party/evolutions/TimedStoneEvolution.ts"/>
 ///<reference path="../GameConstants.ts"/>
 ///<reference path="../party/LevelType.ts"/>
 ///<reference path="PokemonType.ts"/>
@@ -16,12 +17,12 @@ const pokemonList: {
     evolutions?: Evolution[];
     type: PokemonType[];
     base: {
-      hitpoints: number;
-      attack: number;
-      specialAttack: number;
-      defense: number;
-      specialDefense: number;
-      speed: number;
+        hitpoints: number;
+        attack: number;
+        specialAttack: number;
+        defense: number;
+        specialDefense: number;
+        speed: number;
     };
     levelType: LevelType;
     exp: number;
@@ -2361,8 +2362,7 @@ const pokemonList: {
                 new StoneEvolution('Eevee', 'Vaporeon', GameConstants.StoneType.Water_stone),
                 new StoneEvolution('Eevee', 'Jolteon', GameConstants.StoneType.Thunder_stone),
                 new StoneEvolution('Eevee', 'Flareon', GameConstants.StoneType.Fire_stone),
-                new StoneEvolution('Eevee', 'Espeon', GameConstants.StoneType.Time_stone),
-                new StoneEvolution('Eevee', 'Umbreon', GameConstants.StoneType.Time_stone),
+                new TimedStoneEvolution('Eevee', [new TimedStoneData(6, 18, 'Espeon')], 'Umbreon', GameConstants.StoneType.Time_stone),
             ],
             'base': {
                 'hitpoints': 55,
@@ -14177,7 +14177,7 @@ pokemonList.forEach(p => {
 
     p.attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if (p.baby) {
-        p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.evolvedPokemon] = evo.basePokemon);
+        p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon);
     }
 });
 

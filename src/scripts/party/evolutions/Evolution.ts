@@ -1,11 +1,9 @@
 abstract class Evolution {
     basePokemon: string;
-    evolvedPokemon: string;
     type: EvolutionType;
 
-    constructor(basePokemon: string, evolvedPokemon: string, type: EvolutionType) {
+    constructor(basePokemon: string, type: EvolutionType) {
         this.basePokemon = basePokemon;
-        this.evolvedPokemon = evolvedPokemon;
         this.type = type;
     }
 
@@ -13,18 +11,20 @@ abstract class Evolution {
         return false;
     }
 
+    abstract getEvolvedPokemon(): string
+
     evolve(notification = false): boolean {
         // This Pokemon is from a region we haven't reached yet
-        if (PokemonHelper.calcNativeRegion(this.evolvedPokemon) > player.highestRegion()) {
+        if (PokemonHelper.calcNativeRegion(this.getEvolvedPokemon()) > player.highestRegion()) {
             return false;
         }
 
         if (notification) {
-            Notifier.notify(`Your ${this.basePokemon} evolved into a ${this.evolvedPokemon}`, GameConstants.NotificationOption.success);
+            Notifier.notify(`Your ${this.basePokemon} evolved into a ${this.getEvolvedPokemon()}`, GameConstants.NotificationOption.success);
         }
 
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);
-        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(this.evolvedPokemon).id, shiny, true);
+        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(this.getEvolvedPokemon()).id, shiny, true);
         return shiny;
     }
 
