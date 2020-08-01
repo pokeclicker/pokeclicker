@@ -1,5 +1,7 @@
 ///<reference path="Evolution.ts"/>
 ///<reference path="EvolutionType.ts"/>
+
+// Note that baby Pokemon cannot use this evolution as the devolution map cannot be properly inverted.
 class TimedStoneEvolution extends StoneEvolution {
 
     stone: GameConstants.StoneType;
