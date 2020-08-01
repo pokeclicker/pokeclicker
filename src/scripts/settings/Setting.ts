@@ -1,13 +1,15 @@
+/// <reference path="SettingOption.ts" />
+
 class Setting {
     name: string;
     displayName: string;
-    options: GameConstants.Option[];
+    options: SettingOption[];
     defaultValue: any;
     value: any;
     observableValue: KnockoutObservable<any>;
 
     // Leave options array empty to allow all options.
-    constructor(name: string, displayName: string, options: GameConstants.Option[], defaultValue: any) {
+    constructor(name: string, displayName: string, options: SettingOption[], defaultValue: any) {
         this.name = name;
         this.displayName = displayName;
         this.options = options;

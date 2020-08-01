@@ -126,8 +126,8 @@ class Farming implements Feature {
 
     gainRandomBerry(amount = 1, disableNotification = false) {
         const berry = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
-        if (!disableNotification && !Settings.getSetting('disableBerryNotifications').observableValue()) {
-            Notifier.notify({ message: `You got a ${BerryType[berry]} berry!`, type: GameConstants.NotificationOption.success });
+        if (!disableNotification) {
+            Notifier.notify({ message: `You got a ${BerryType[berry]} berry!`, type: GameConstants.NotificationOption.success, setting: GameConstants.NotificationSetting.route_item_found });
         }
         this.gainBerry(berry, amount);
     }

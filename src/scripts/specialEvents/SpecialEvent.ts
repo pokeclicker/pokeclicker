@@ -93,7 +93,7 @@ class SpecialEvent {
 
     notify(time: string, timeout: number, type = GameConstants.NotificationOption.info) {
         timeout -= 1000;
-        Notifier.notify({ title: `[EVENT] ${this.title}`, message: `${this.description}<br/><br/><strong>Start time:</strong> ${this.startTime.toLocaleString()}<br/><strong>End time:</strong> ${this.endTime.toLocaleString()}`, type, time, timeout });
+        Notifier.notify({ title: `[EVENT] ${this.title}`, message: `${this.description}<br/><br/><strong>Start time:</strong> ${this.startTime.toLocaleString()}<br/><strong>End time:</strong> ${this.endTime.toLocaleString()}`, type, time, timeout, setting: GameConstants.NotificationSetting.event_start_end });
     }
 
     start() {

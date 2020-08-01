@@ -66,7 +66,7 @@ class DungeonRunner {
                 amount += 1;
             }
         }
-        Notifier.notify({ message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`, type: GameConstants.NotificationOption.success });
+        Notifier.notify({ message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`, type: GameConstants.NotificationOption.success, setting: GameConstants.NotificationSetting.dungeon_item_found });
         player.gainItem(input, amount);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();

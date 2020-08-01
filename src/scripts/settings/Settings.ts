@@ -1,7 +1,7 @@
 /// <reference path="Setting.ts" />
 /// <reference path="BooleanSetting.ts"/>
 /// <reference path="MultipleChoiceSetting.ts"/>
-///<reference path="SortOptions.ts"/>
+/// <reference path="SortOptions.ts"/>
 
 class Settings {
     static list: Setting[] = [];
@@ -56,35 +56,35 @@ class Settings {
 Settings.add(
     new MultipleChoiceSetting('theme', 'Theme',
         [
-            new GameConstants.Option('Cerulean', 'cerulean'),
-            new GameConstants.Option('Cosmo', 'cosmo'),
-            new GameConstants.Option('Cyborg', 'cyborg'),
-            new GameConstants.Option('Darkly', 'darkly'),
-            new GameConstants.Option('Flatly', 'flatly'),
-            new GameConstants.Option('Journal', 'journal'),
-            new GameConstants.Option('Litera', 'litera'),
-            new GameConstants.Option('Lumen', 'lumen'),
-            new GameConstants.Option('Lux', 'lux'),
-            new GameConstants.Option('Materia', 'materia'),
-            new GameConstants.Option('Minty', 'minty'),
-            new GameConstants.Option('Pulse', 'pulse'),
-            new GameConstants.Option('Sandstone', 'sandstone'),
-            new GameConstants.Option('Simplex', 'simplex'),
-            new GameConstants.Option('Sketchy', 'sketchy'),
-            new GameConstants.Option('Slate', 'slate'),
-            new GameConstants.Option('Solar', 'solar'),
-            new GameConstants.Option('Spacelab', 'spacelab'),
-            new GameConstants.Option('Superhero', 'superhero'),
-            new GameConstants.Option('United', 'united'),
-            new GameConstants.Option('Yeti (default)', 'yeti'),
+            new SettingOption('Cerulean', 'cerulean'),
+            new SettingOption('Cosmo', 'cosmo'),
+            new SettingOption('Cyborg', 'cyborg'),
+            new SettingOption('Darkly', 'darkly'),
+            new SettingOption('Flatly', 'flatly'),
+            new SettingOption('Journal', 'journal'),
+            new SettingOption('Litera', 'litera'),
+            new SettingOption('Lumen', 'lumen'),
+            new SettingOption('Lux', 'lux'),
+            new SettingOption('Materia', 'materia'),
+            new SettingOption('Minty', 'minty'),
+            new SettingOption('Pulse', 'pulse'),
+            new SettingOption('Sandstone', 'sandstone'),
+            new SettingOption('Simplex', 'simplex'),
+            new SettingOption('Sketchy', 'sketchy'),
+            new SettingOption('Slate', 'slate'),
+            new SettingOption('Solar', 'solar'),
+            new SettingOption('Spacelab', 'spacelab'),
+            new SettingOption('Superhero', 'superhero'),
+            new SettingOption('United', 'united'),
+            new SettingOption('Yeti (default)', 'yeti'),
         ],
         'yeti'
     )
 );
 Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress display:',
     [
-        new GameConstants.Option('Percentage', 'percentage'),
-        new GameConstants.Option('Step count', 'stepCount'),
+        new SettingOption('Percentage', 'percentage'),
+        new SettingOption('Step count', 'stepCount'),
     ],
     'percentage'
 ));
@@ -101,14 +101,16 @@ Settings.add(new BooleanSetting('sound.Shiny', 'Shiny encountered', true));
 Settings.add(new BooleanSetting('sound.Ready to Hatch', 'Egg ready to hatch', true));
 
 // Notification settings
-Settings.add(new BooleanSetting('disableBerryNotifications', 'Disable berry notifications', false));
+Object.values(GameConstants.NotificationSetting).forEach(setting => {
+    Settings.add(setting);
+});
 
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
 const sortsettings = Object.keys(SortOptionConfigs).map(
     function(opt) {
-        return new GameConstants.Option(SortOptionConfigs[opt].text, parseInt(opt));
+        return new SettingOption(SortOptionConfigs[opt].text, parseInt(opt));
     }
 );
 Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',

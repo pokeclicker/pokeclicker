@@ -45,8 +45,8 @@
 
                     <div class="tab-pane" id="settings-notifications">
                         <table class="table table-striped table-hover m-0">
-                            <tbody>
-                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableBerryNotifications')}"></tr>
+                            <tbody data-bind="foreach: Object.values(GameConstants.NotificationSetting)">
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
                             </tbody>
                         </table>
                     </div> 

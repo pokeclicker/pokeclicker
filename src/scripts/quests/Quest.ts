@@ -89,7 +89,7 @@ abstract class Quest {
         this.isCompleted = ko.computed(function() {
             const completed = this.progress() == 1;
             if (!this.autoComplete && completed && !this.notified) {
-                Notifier.notify({ message: `You can complete your quest for ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success, timeout: 5e3 });
+                Notifier.notify({ message: `You can complete your quest for ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success, timeout: 5e3, setting: GameConstants.NotificationSetting.quest_ready_to_complete });
             }
             return completed;
         }, this);

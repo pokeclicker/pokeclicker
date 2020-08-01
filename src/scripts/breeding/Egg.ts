@@ -61,9 +61,9 @@ class Egg implements Saveable {
         }
         if (this.canHatch()) {
             if (this.type == EggType.Pokemon) {
-                Notifier.notify({ message: `${this.pokemon} is ready to hatch!`, type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_hatch });
+                Notifier.notify({ message: `${this.pokemon} is ready to hatch!`, type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_hatch, setting: GameConstants.NotificationSetting.ready_to_hatch });
             } else {
-                Notifier.notify({ message: 'An egg is ready to hatch!', type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_hatch });
+                Notifier.notify({ message: 'An egg is ready to hatch!', type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_hatch, setting: GameConstants.NotificationSetting.ready_to_hatch });
             }
             this.notified = true;
         }

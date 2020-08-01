@@ -22,7 +22,6 @@ class SafariBattle {
         // Generate enemy
         SafariBattle.enemy = SafariPokemon.random();
         Safari.inBattle(true);
-        Notifier.notify({ message: 'Battle', type: GameConstants.NotificationOption.info });
         SafariBattle.text('What will you do?');
         SafariBattle.unlockButtons();
         SafariBattle.escapeAttempts = 0;
