@@ -1,4 +1,6 @@
-class PokemonItem extends Item {
+/// <reference path="CaughtIndicatingItem.ts" />
+
+class PokemonItem extends CaughtIndicatingItem {
 
     type: GameConstants.PokemonItemType;
 
@@ -17,6 +19,10 @@ class PokemonItem extends Item {
     }
 
     use() {
+    }
+
+    getCaughtStatus(): CaughtStatus {
+        return PartyController.getCaughtStatusByName(this.name());
     }
 
 }

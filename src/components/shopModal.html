@@ -18,9 +18,11 @@
                            data-bind="click: function() {ShopHandler.setSelected($index())},
                            css: { active: ShopHandler.selected() == $index() },
                            attr: { disabled: !$data.isAvailable() }">
-                           <span style="position: absolute; top: 15px; right: 20px;" data-bind="if: $data instanceof PokemonItem && App.game.party.alreadyCaughtPokemonByName(name())">
-                               <img class="pokeball-smallest" src="" data-bind="attr: {src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemonByName(name(), true) ? '-shiny' : ''}-small.png`}"/>
-                           </span>
+                           <knockout data-bind="if: ($data instanceof CaughtIndicatingItem)">
+                               <span style="position: absolute; top: 15px; right: 20px;" 
+                                     data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
+                               </span>
+                           </knockout>
                            <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/\W/g, '_') + '.png' }">
                            <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
                            <div data-bind="if: $data.isAvailable()">

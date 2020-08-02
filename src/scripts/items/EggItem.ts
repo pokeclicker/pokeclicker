@@ -1,4 +1,6 @@
-class EggItem extends Item {
+/// <reference path="CaughtIndicatingItem.ts" />
+
+class EggItem extends CaughtIndicatingItem {
 
     type: GameConstants.EggItemType;
 
@@ -24,6 +26,22 @@ class EggItem extends Item {
 
         if (success) {
             player.loseItem(this.name(), 1);
+        }
+    }
+
+    getCaughtStatus(): CaughtStatus {
+        switch (this.type) {
+            case (GameConstants.EggItemType.Pokemon_egg): {
+                // random pokemon
+                return CaughtStatus.NotCaught;
+            }
+            case (GameConstants.EggItemType.Mystery_egg): {
+                return App.game.breeding.getAllCaughtStatus();
+            }
+            default: {
+                const etype = EggType[GameConstants.EggItemType[this.type].split('_')[0]];
+                return App.game.breeding.getTypeCaughtStatus(etype);
+            }
         }
     }
 }

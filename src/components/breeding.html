@@ -28,6 +28,8 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
                             <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
                             data-bind="text: 'Amount: ' + player._itemList[$data]()">amount</span>
+                            <knockout style="position: absolute; right: 2px; top: -14px;"
+                            data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"/>
                         </button>
                     <!-- /ko -->
                     <!-- ko foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false) -->
