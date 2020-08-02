@@ -6,18 +6,13 @@ class StoneEvolution extends Evolution {
     evolvedPokemon: string
 
     constructor(basePokemon: string, evolvedPokemon: string, stone: GameConstants.StoneType) {
-        super(basePokemon, EvolutionType.Stone);
+        super(basePokemon);
         this.stone = stone;
         this.evolvedPokemon = evolvedPokemon;
+        this.type.push(EvolutionType.Stone);
     }
-
 
     getEvolvedPokemon(): string {
         return this.evolvedPokemon;
-    }
-
-    isSatisfied(): boolean {
-        // Check that evolution is within reached regions
-        return PokemonHelper.calcNativeRegion(this.evolvedPokemon) <= player.highestRegion();
     }
 }

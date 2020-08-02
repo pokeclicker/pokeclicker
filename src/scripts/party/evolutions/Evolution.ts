@@ -1,14 +1,15 @@
 abstract class Evolution {
     basePokemon: string;
-    type: EvolutionType;
+    type: EvolutionType[];
 
-    constructor(basePokemon: string, type: EvolutionType) {
+    constructor(basePokemon: string) {
         this.basePokemon = basePokemon;
-        this.type = type;
+        this.type = [];
     }
 
     isSatisfied(): boolean {
-        return false;
+        // Check that evolution is within reached regions
+        return PokemonHelper.calcNativeRegion(this.getEvolvedPokemon()) <= player.highestRegion();
     }
 
     abstract getEvolvedPokemon(): string
@@ -32,3 +33,5 @@ abstract class Evolution {
     }
 
 }
+
+type MinimalEvo = ConstructorImplementing<Evolution, 'getEvolvedPokemon'>
