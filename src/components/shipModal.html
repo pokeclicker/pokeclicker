@@ -9,24 +9,13 @@
             </div>
             <div class="modal-body bg-ocean">
                 <img src='assets/images/ship.png' style='width: 100%;'>
-                <div style='margin-top:20px'>
+                <div style='margin-top:20px' data-bind="foreach: GameHelper.enumStrings(GameConstants.Region)">
                     <button class='btn btn-block btn-success'
                         data-dismiss='modal'
-                        data-bind='visible: player.region != 0'
-                        onclick='MapHelper.moveToTown("Vermillion City");player.region = 0;'>
-                        Kanto
-                    </button>
-                    <button class='btn btn-block btn-success'
-                        data-dismiss='modal'
-                        data-bind='visible: player.region != 1 && player.highestRegion() >= 1'
-                        onclick='MapHelper.moveToTown("Olivine City");player.region = 1;'>
-                        Johto
-                    </button>
-                    <button class='btn btn-block btn-success'
-                        data-dismiss='modal'
-                        data-bind='visible: player.region != 2 && player.highestRegion() >= 2'
-                        onclick='MapHelper.moveToTown("Slateport City");player.region = 2;'>
-                        Hoenn
+                        data-bind='visible: player.region != GameConstants.Region[$data] && GameConstants.Region[$data] <= player.highestRegion() && GameConstants.Region[$data] <= GameConstants.MAX_AVAILABLE_REGION,
+                        click: () => { MapHelper.moveToTown(GameConstants.DockTowns[GameConstants.Region[$data]]); player.region = GameConstants.Region[$data]; },
+                        text: GameConstants.camelCaseToString($data)'>
+                        Region
                     </button>
                 </div>
             </div>
