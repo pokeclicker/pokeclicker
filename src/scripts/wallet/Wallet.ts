@@ -72,13 +72,9 @@ class Wallet implements Feature {
     }
 
     private addAmount(amount: Amount) {
-        if (isNaN(amount.amount)) {
-            console.error(`Could not add amount ${amount}`);
+        if (isNaN(amount.amount) || amount.amount <= 0) {
+            console.trace(`Could not add amount ${amount}`);
             return;
-        }
-
-        if (amount.amount <= 0) {
-            console.error(`We can only add positive amounts, ${amount} is not valid`);
         }
 
         this.currencies[amount.currency] += amount.amount;
@@ -89,6 +85,11 @@ class Wallet implements Feature {
     };
 
     public loseAmount(amount: Amount) {
+        if (isNaN(amount.amount) || amount.amount <= 0) {
+            console.trace(`Could not lose amount ${amount}`);
+            return;
+        }
+
         this.currencies[amount.currency] -= amount.amount;
     };
 
