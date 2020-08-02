@@ -29,10 +29,11 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
-    // v0.4.16
-    new Changelog(changelogType.UPDATE, 'v0.4.16'),
+    // v0.4.17
+    new Changelog(changelogType.UPDATE, 'v0.4.17'),
     new Changelog(changelogType.NEW, 'Update maps'),
     new Changelog(changelogType.NEW, 'Add notification settings'),
+    new Changelog(changelogType.NEW, 'Can now filter the Pokédex by pure type Pokémon by selecting None for the second type'),
     new Changelog(changelogType.FIXED, 'Safari Zone should no longer lock up'),
 
     // v0.4.16
