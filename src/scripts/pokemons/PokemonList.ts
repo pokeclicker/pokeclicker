@@ -8,29 +8,31 @@
 
 const pokemonDevolutionMap: { [name: string]: string } = {};
 
+type PokemonListData = {
+  id: number;
+  name: string;
+  catchRate: number;
+  evolutions?: Evolution[];
+  type: PokemonType[];
+  base: {
+    hitpoints: number;
+    attack: number;
+    specialAttack: number;
+    defense: number;
+    specialDefense: number;
+    speed: number;
+  };
+  levelType: LevelType;
+  exp: number;
+  eggCycles: number;
+  baby?: boolean;
+  attack?: number;
+}
+
 /**
  * Datalist that contains all Pokémon data
  */
-const pokemonList: {
-    id: number;
-    name: string;
-    catchRate: number;
-    evolutions?: Evolution[];
-    type: PokemonType[];
-    base: {
-        hitpoints: number;
-        attack: number;
-        specialAttack: number;
-        defense: number;
-        specialDefense: number;
-        speed: number;
-    };
-    levelType: LevelType;
-    exp: number;
-    eggCycles: number;
-    baby?: boolean;
-    attack?: number;
-}[] =
+const pokemonList: PokemonListData[] =
     [
         {
             'id': 1,

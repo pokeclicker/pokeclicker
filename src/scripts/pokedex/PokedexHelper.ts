@@ -75,9 +75,14 @@ class PokedexHelper {
             }
 
             // Check if either of the types match
-            const type1: PokemonType = parseInt(filter['type1'] || PokemonType.None);
-            const type2: PokemonType = parseInt(filter['type2'] || PokemonType.None);
-            if ((type1 != PokemonType.None && !pokemon.type.includes(type1)) || (type2 != PokemonType.None && !pokemon.type.includes(type2))) {
+            const type1: (PokemonType | null) = filter['type1'] ? parseInt(filter['type1']) : null;
+            const type2: (PokemonType | null) = filter['type2'] ? parseInt(filter['type2']) : null;
+            if ([type1, type2].includes(PokemonType.None)) {
+                const type = (type1 == PokemonType.None) ? type2 : type1;
+                if (!PokedexHelper.isPureType(pokemon, type)) {
+                    return false;
+                }
+            } else if ((type1 != null && !pokemon.type.includes(type1)) || (type2 != null && !pokemon.type.includes(type2))) {
                 return false;
             }
 
@@ -130,5 +135,9 @@ class PokedexHelper {
         }
         src += `pokemon/${id}.png`;
         return src;
+    }
+
+    private static isPureType(pokemon: PokemonListData, type: (PokemonType | null)): boolean {
+        return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
 }
