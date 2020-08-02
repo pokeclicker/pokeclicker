@@ -3,8 +3,9 @@ class Sound {
     public name: string;
     public initialized = false;
 
-    constructor (name: string, src: string) {
-        this.name = name;
+    constructor (fileName: string, soundName: string) {
+        const src = `assets/sounds/${fileName}.mp3`;
+        this.name = soundName;
         this.sound.setAttribute('preload', 'auto');
         this.sound.setAttribute('controls', 'none');
         this.sound.style.display = 'none';
@@ -15,9 +16,14 @@ class Sound {
             this.initialized = true;
             // This is needed to be able to play sounds on mobile devices
             $(document).one('click', () => {
-                this.sound.play();
-                this.sound.pause();
-                this.sound.src = src;
+                this.sound.play().finally(() => {
+                    this.sound.pause();
+                    this.sound.src = src;
+                });
+                setTimeout(() => {
+                    this.sound.pause();
+                    this.sound.src = src;
+                }, 1000);
             });
         });
     }

@@ -34,11 +34,8 @@
 
                     <div class="tab-pane" id="settings-sound">
                         <table class="table table-striped table-hover m-0">
-                            <tbody>
-                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('sound.Achievement')}"></tr>
-                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('sound.Ready to Hatch')}"></tr>
-                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('sound.New Catch')}"></tr>
-                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('sound.Shiny')}"></tr>
+                            <tbody data-bind="foreach: Object.values(GameConstants.NotificationSound)">
+                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
                             </tbody>
                         </table>
                     </div> 

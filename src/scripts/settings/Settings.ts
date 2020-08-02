@@ -95,10 +95,9 @@ Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disabl
 
 
 // Sound settings
-Settings.add(new BooleanSetting('sound.Achievement', 'New achievement', true));
-Settings.add(new BooleanSetting('sound.New Catch', 'New pokemon/shiny captured', true));
-Settings.add(new BooleanSetting('sound.Shiny', 'Shiny encountered', true));
-Settings.add(new BooleanSetting('sound.Ready to Hatch', 'Egg ready to hatch', true));
+Object.values(GameConstants.NotificationSound).forEach(sound => {
+    Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
+});
 
 // Notification settings
 Object.values(GameConstants.NotificationSetting).forEach(setting => {

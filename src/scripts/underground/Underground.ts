@@ -119,7 +119,7 @@ class Underground {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
-                Notifier.notify({ message: 'Your mining energy has reached maximum capacity!', type: GameConstants.NotificationOption.success, timeout: 1e4, setting: GameConstants.NotificationSetting.underground_energy_full });
+                Notifier.notify({ message: 'Your mining energy has reached maximum capacity!', type: GameConstants.NotificationOption.success, timeout: 1e4, sound: GameConstants.NotificationSound.underground_energy_full, setting: GameConstants.NotificationSetting.underground_energy_full });
             }
         }
     }

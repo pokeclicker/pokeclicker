@@ -92,10 +92,16 @@ namespace GameConstants {
         light,
     }
     export const NotificationSound = {
-        ready_to_hatch: new Sound('Ready to Hatch', 'assets/sounds/ready_to_hatch.mp3'),
-        shiny_long: new Sound('Shiny', 'assets/sounds/shiny_long.mp3'),
-        new_catch: new Sound('New Catch', 'assets/sounds/new_catch.mp3'),
-        achievement: new Sound('Achievement', 'assets/sounds/achievement.mp3'),
+        ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
+        shiny_long: new Sound('shiny_long', 'Shiny Pokemon encountered/hatched'),
+        new_catch: new Sound('new_catch', 'New pokemon/shiny captured'),
+        achievement: new Sound('achievement', 'New achievement earned'),
+        battle_item_timer: new Sound('battle_item_timer', 'Battle item about to wear off'),
+        quest_ready_to_complete: new Sound('quest_ready_to_complete', 'Quest is ready to be completed'),
+        quest_level_increased: new Sound('quest_level_increased', 'Quest level increased'),
+        underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
+        // TODO: needs a notification
+        ready_to_harvest: new Sound('assets/sounds/ready_to_harvest.mp3', 'Farm ready to harvest'),
     };
     export const NotificationSetting = {
         ready_to_hatch: new BooleanSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),
