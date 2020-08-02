@@ -77,18 +77,11 @@ class PartyPokemon implements Saveable {
     public useStone(stoneType: GameConstants.StoneType): boolean {
         const possibleEvolutions = [];
         for (const evolution of this.evolutions) {
-            if (evolution instanceof StoneEvolution && evolution.stone == stoneType) {
+            if (evolution instanceof StoneEvolution && evolution.stone == stoneType && evolution.isSatisfied()) {
                 possibleEvolutions.push(evolution);
             }
         }
         if (possibleEvolutions.length !== 0) {
-            if (this.name == 'Eevee' && stoneType == GameConstants.StoneType.Time_stone) {
-                const hour = new Date().getHours();
-                const evo = (hour >= 6 && hour < 18) /* Day time */ ? possibleEvolutions.find(e => e.evolvedPokemon == 'Espeon') : possibleEvolutions.find(e => e.evolvedPokemon == 'Umbreon');
-                if (evo) {
-                    return evo.evolve();
-                }
-            }
             return GameConstants.randomElement(possibleEvolutions).evolve();
         }
         return false;

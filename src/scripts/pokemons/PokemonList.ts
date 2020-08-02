@@ -1,5 +1,7 @@
 ///<reference path="../party/evolutions/LevelEvolution.ts"/>
 ///<reference path="../party/evolutions/StoneEvolution.ts"/>
+///<reference path="../party/evolutions/TimedStoneEvolution.ts"/>
+///<reference path="../party/evolutions/TimedLevelEvolution.ts"/>
 ///<reference path="../GameConstants.ts"/>
 ///<reference path="../party/LevelType.ts"/>
 ///<reference path="PokemonType.ts"/>
@@ -16,12 +18,12 @@ const pokemonList: {
     evolutions?: Evolution[];
     type: PokemonType[];
     base: {
-      hitpoints: number;
-      attack: number;
-      specialAttack: number;
-      defense: number;
-      specialDefense: number;
-      speed: number;
+        hitpoints: number;
+        attack: number;
+        specialAttack: number;
+        defense: number;
+        specialDefense: number;
+        speed: number;
     };
     levelType: LevelType;
     exp: number;
@@ -2361,8 +2363,8 @@ const pokemonList: {
                 new StoneEvolution('Eevee', 'Vaporeon', GameConstants.StoneType.Water_stone),
                 new StoneEvolution('Eevee', 'Jolteon', GameConstants.StoneType.Thunder_stone),
                 new StoneEvolution('Eevee', 'Flareon', GameConstants.StoneType.Fire_stone),
-                new StoneEvolution('Eevee', 'Espeon', GameConstants.StoneType.Time_stone),
-                new StoneEvolution('Eevee', 'Umbreon', GameConstants.StoneType.Time_stone),
+                new DayTimedStoneEvolution('Eevee', 'Espeon'),
+                new NightTimedStoneEvolution('Eevee', 'Umbreon'),
             ],
             'base': {
                 'hitpoints': 55,
@@ -3791,6 +3793,7 @@ const pokemonList: {
             'levelType': LevelType.mediumslow,
             'exp': 86,
             'eggCycles': 20,
+            'evolutions': [new NightTimedLevelEvolution('Sneasel', 'Weavile', 100)],
             'base': {
                 'hitpoints': 55,
                 'attack': 95,
@@ -7140,7 +7143,7 @@ const pokemonList: {
             'levelType': LevelType.mediumslow,
             'exp': 56,
             'catchRate': 255,
-            'evolutions': [new LevelEvolution('Budew', 'Roselia', 100)],
+            'evolutions': [new DayTimedLevelEvolution('Budew', 'Roselia', 100)],
             'baby': true,
             'base': {
                 'hitpoints': 40,
@@ -14822,7 +14825,7 @@ pokemonList.forEach(p => {
 
     p.attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if (p.baby) {
-        p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.evolvedPokemon] = evo.basePokemon);
+        p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon);
     }
 });
 

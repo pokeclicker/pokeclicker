@@ -23,7 +23,7 @@ class PokemonHelper {
                 return false;
             }
             for (const evolution of partyPokemon.evolutions) {
-                if (evolution instanceof StoneEvolution && evolution.stone == evoType && PokemonHelper.calcNativeRegion(evolution.evolvedPokemon) <= player.highestRegion()) {
+                if (evolution instanceof StoneEvolution && evolution.stone == evoType && evolution.isSatisfied() && PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon()) <= player.highestRegion()) {
                     return true;
                 }
             }
@@ -36,7 +36,7 @@ class PokemonHelper {
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
                 if (evolution instanceof StoneEvolution && evolution.stone == evoType) {
-                    return evolution.evolvedPokemon;
+                    return evolution.getEvolvedPokemon();
                 }
             }
         }
@@ -198,13 +198,13 @@ class PokemonHelper {
     }
 
     public static getPokemonLevelPrevolution(pokemonName: string): Evolution {
-        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e instanceof LevelEvolution && e.evolvedPokemon == pokemonName) : null);
-        return evolutionPokemon ? evolutionPokemon.evolutions.find(e => e.evolvedPokemon == pokemonName) : undefined;
+        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e instanceof LevelEvolution && e.getEvolvedPokemon() == pokemonName) : null);
+        return evolutionPokemon ? evolutionPokemon.evolutions.find(e => e.getEvolvedPokemon() == pokemonName) : undefined;
     }
 
     public static getPokemonStonePrevolution(pokemonName: string): Evolution {
-        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e instanceof StoneEvolution && e.evolvedPokemon == pokemonName) : null);
-        return evolutionPokemon ? evolutionPokemon.evolutions.find(e => e.evolvedPokemon == pokemonName) : undefined;
+        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e instanceof StoneEvolution && e.getEvolvedPokemon() == pokemonName) : null);
+        return evolutionPokemon ? evolutionPokemon.evolutions.find(e => e.getEvolvedPokemon() == pokemonName) : undefined;
     }
     
     public static getPokemonLocations = (pokemonName: string) => {

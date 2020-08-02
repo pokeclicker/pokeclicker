@@ -21,8 +21,8 @@ class PartyController {
         const pokemon = App.game.party.caughtPokemon.find(p => p.id == id);
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
-                if (evolution instanceof StoneEvolution && evolution.stone == evoType) {
-                    const pStatus = this.getCaughtStatusByName(evolution.evolvedPokemon);
+                if (evolution instanceof StoneEvolution && evolution.stone == evoType && evolution.isSatisfied()) {
+                    const pStatus = this.getCaughtStatusByName(evolution.getEvolvedPokemon());
                     if (pStatus < status) {
                         status = pStatus;
                     }

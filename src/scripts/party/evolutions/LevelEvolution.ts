@@ -3,16 +3,24 @@
 class LevelEvolution extends Evolution {
 
     level: number;
+    evolvedPokemon: string
     triggered: boolean;
 
-
     constructor(basePokemon: string, evolvedPokemon: string, level: number) {
-        super(basePokemon, evolvedPokemon, EvolutionType.Level);
+        super(basePokemon, EvolutionType.Level);
+        this.evolvedPokemon = evolvedPokemon;
         this.level = level;
     }
 
+    getEvolvedPokemon(): string {
+        return this.evolvedPokemon;
+    }
+
     isSatisfied(): boolean {
-        return App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id).level >= this.level;
+        // Check if within region
+        return PokemonHelper.calcNativeRegion(this.evolvedPokemon) <= player.highestRegion()
+        // Check high enough level
+        && App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id).level >= this.level;
     }
 
     evolve(): boolean {
@@ -22,7 +30,7 @@ class LevelEvolution extends Evolution {
         this.triggered = true;
 
         // We have already obtained the evolution
-        if (App.game.party.alreadyCaughtPokemonByName(this.evolvedPokemon)) {
+        if (App.game.party.alreadyCaughtPokemonByName(this.getEvolvedPokemon())) {
             return false;
         }
 
