@@ -14,7 +14,7 @@ class RedeemableCode {
 
     redeem() {
         if (this.isRedeemed) {
-            Notifier.notify('You have already redeemed this code', GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: 'You have already redeemed this code', type: GameConstants.NotificationOption.danger });
             return;
         }
         this.isRedeemed = true;

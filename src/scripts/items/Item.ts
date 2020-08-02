@@ -30,12 +30,12 @@ abstract class Item {
         }
 
         if (n > this.maxAmount) {
-            Notifier.notify(`You can only buy ${this.maxAmount} &times; ${this.name()}!`, GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: `You can only buy ${this.maxAmount} &times; ${this.name()}!`, type: GameConstants.NotificationOption.danger });
             n = this.maxAmount;
         }
 
         if (!this.isAvailable()) {
-            Notifier.notify(`${this.name()} is sold out!`, GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: `${this.name()} is sold out!`, type: GameConstants.NotificationOption.danger });
             return;
         }
 
@@ -45,7 +45,7 @@ abstract class Item {
             App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency));
             this.gain(n);
             this.increasePriceMultiplier(n);
-            Notifier.notify(`You bought ${n} ${this.name()}${multiple}`, GameConstants.NotificationOption.success);
+            Notifier.notify({ message: `You bought ${n} ${this.name()}${multiple}`, type: GameConstants.NotificationOption.success });
         } else {
             let curr = 'currency';
             switch (this.currency) {
@@ -59,7 +59,7 @@ abstract class Item {
                     curr = 'dungeon tokens';
                     break;
             }
-            Notifier.notify(`You don't have enough ${curr} to buy ${n} ${this.name() + multiple}`, GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: `You don't have enough ${curr} to buy ${n} ${this.name() + multiple}`, type: GameConstants.NotificationOption.danger });
         }
     }
 

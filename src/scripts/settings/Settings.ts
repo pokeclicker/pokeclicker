@@ -25,7 +25,7 @@ class Settings {
         if (setting) {
             setting.set(value);
         } else {
-            console.log(`Setting ${name} does not exist`);
+            console.warn(`Setting ${name} does not exist`);
         }
 
     }

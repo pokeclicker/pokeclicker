@@ -43,7 +43,7 @@ class SafariPokemon implements PokemonInterface {
         this.type2 = data.type2;
         this.shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SAFARI);
         if (this.shiny) {
-            Notifier.notify(`✨ You encountered a shiny ${name}! ✨`, GameConstants.NotificationOption.warning);
+            Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning });
         }
         this.baseCatchFactor = data.catchRate * 1 / 6;
         this.baseEscapeFactor = 30;

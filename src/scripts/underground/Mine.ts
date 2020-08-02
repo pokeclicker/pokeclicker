@@ -144,9 +144,9 @@ class Mine {
             if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
                 Underground.gainMineItem(Mine.rewardNumbers[i]);
                 const itemName = Underground.getMineItemById(Mine.rewardNumbers[i]).name;
-                Notifier.notify(`You found ${GameHelper.anOrA(itemName)} ${itemName}`, GameConstants.NotificationOption.success);
+                Notifier.notify({ message: `You found ${GameHelper.anOrA(itemName)} ${itemName}`, type: GameConstants.NotificationOption.success });
                 Mine.itemsFound(Mine.itemsFound() + 1);
-                GameHelper.incrementObservable(player.statistics.digItems);
+                GameHelper.incrementObservable(App.game.statistics.digItems);
                 Mine.rewardNumbers.splice(i, 1);
                 i--;
                 Mine.checkCompleted();
@@ -173,13 +173,13 @@ class Mine {
         if (Mine.itemsFound() >= Mine.itemsBuried) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
-            GameHelper.incrementObservable(player.statistics.digDeeper);
+            GameHelper.incrementObservable(App.game.statistics.digDeeper);
             App.game.oakItems.use(OakItems.OakItem.Cell_Battery);
         }
     }
 
     private static completed() {
-        Notifier.notify('You dig deeper...', GameConstants.NotificationOption.info);
+        Notifier.notify({ message: 'You dig deeper...', type: GameConstants.NotificationOption.info });
         ko.cleanNode(document.getElementById('mineBody'));
         Mine.loadMine();
         ko.applyBindings(null, document.getElementById('mineBody'));

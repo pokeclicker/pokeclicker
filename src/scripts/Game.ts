@@ -7,6 +7,7 @@ class Game {
     public static achievementCounter = 0;
 
     // Features
+    public update: Update;
     public breeding: Breeding;
     public pokeballs: Pokeballs;
     public wallet: Wallet;
@@ -17,8 +18,8 @@ class Game {
     public shards: Shards;
     public farming: Farming;
     public logbook: LogBook;
-
     public redeemableCodes: RedeemableCodes;
+    public statistics: Statistics;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
@@ -26,6 +27,7 @@ class Game {
      * TODO(@Isha) pass all features through the constructor
      */
     constructor(
+        update: Update,
         breeding: Breeding,
         pokeballs: Pokeballs,
         wallet: Wallet,
@@ -36,8 +38,10 @@ class Game {
         shards: Shards,
         farming: Farming,
         logbook: LogBook,
-        codes: RedeemableCodes
+        codes: RedeemableCodes,
+        statistics: Statistics
     ) {
+        this.update = update;
         this.breeding = breeding;
         this.pokeballs = pokeballs;
         this.wallet = wallet;
@@ -49,6 +53,7 @@ class Game {
         this.farming = farming;
         this.logbook = logbook;
         this.redeemableCodes = codes;
+        this.statistics = statistics;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
@@ -61,20 +66,13 @@ class Game {
     load() {
         // TODO(@Isha) Refactor this saving logic
         const saveJSON = localStorage.getItem('save');
+
         if (saveJSON !== null) {
             const saveObject = JSON.parse(saveJSON);
-            this.breeding.fromJSON(saveObject[this.breeding.saveKey]);
-            this.pokeballs.fromJSON(saveObject[this.pokeballs.saveKey]);
-            this.wallet.fromJSON(saveObject[this.wallet.saveKey]);
-            this.keyItems.fromJSON(saveObject[this.keyItems.saveKey]);
-            this.badgeCase.fromJSON(saveObject[this.badgeCase.saveKey]);
-            this.oakItems.fromJSON(saveObject[this.oakItems.saveKey]);
-            this.party.fromJSON(saveObject[this.party.saveKey]);
-            this.shards.fromJSON(saveObject[this.shards.saveKey]);
-            this.farming.fromJSON(saveObject[this.farming.saveKey]);
-            this.logbook.fromJSON(saveObject[this.logbook.saveKey]);
 
-            this.redeemableCodes.fromJSON(saveObject[this.redeemableCodes.saveKey]);
+            Object.keys(saveObject).filter(key => this[key]?.saveKey).forEach(key => {
+                this[key].fromJSON(saveObject[key]);
+            });
         }
     }
 
@@ -85,6 +83,7 @@ class Game {
         this.oakItems.initialize();
         this.farming.initialize();
         this.load();
+        this.update.check();
 
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();
@@ -161,7 +160,7 @@ class Game {
                 QuestHelper.clearQuests();
                 QuestHelper.generateQuests(player.questLevel, player.questRefreshes, now);
                 DailyDeal.generateDeals(Underground.getDailyDealsMax(), now);
-                Notifier.notify("It's a new day! Your quests and underground deals have been updated.", GameConstants.NotificationOption.info);
+                Notifier.notify({ message: 'It\'s a new day! Your quests and underground deals have been updated.', type: GameConstants.NotificationOption.info });
             }
             player._lastSeen = Date.now();
             Save.store(player);

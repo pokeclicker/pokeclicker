@@ -30,7 +30,7 @@ class GymRunner {
             }.bind(this), GameConstants.GYM_COUNTDOWN);
 
         } else {
-            Notifier.notify(`${gym.leaderName} does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges`, GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: `${gym.leaderName} does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges`, type: GameConstants.NotificationOption.danger });
         }
     }
 
@@ -60,12 +60,12 @@ class GymRunner {
     }
 
     public static gymLost() {
-        Notifier.notify(`It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}`, GameConstants.NotificationOption.danger);
+        Notifier.notify({ message: `It appears you are not strong enough to defeat ${GymBattle.gym.leaderName}`, type: GameConstants.NotificationOption.danger });
         App.game.gameState = GameConstants.GameState.town;
     }
 
     public static gymWon(gym: Gym) {
-        Notifier.notify(`Congratulations, you defeated ${GymBattle.gym.leaderName}!`, GameConstants.NotificationOption.success);
+        Notifier.notify({ message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`, type: GameConstants.NotificationOption.success });
         this.gymObservable(gym);
         App.game.wallet.gainMoney(gym.moneyReward);
         if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
@@ -73,7 +73,7 @@ class GymRunner {
 
             $('#receiveBadgeModal').modal('show');
         }
-        GameHelper.incrementObservable(player.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
+        GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);
         App.game.gameState = GameConstants.GameState.town;
     }

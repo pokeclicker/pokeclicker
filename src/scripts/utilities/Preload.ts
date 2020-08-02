@@ -33,7 +33,7 @@ class Preload {
                 ]).then(() => {
                     resolve();
                 }).catch((reason => {
-                    console.log(reason);
+                    console.error('Preload failed:', reason);
                 }));
             });
         }

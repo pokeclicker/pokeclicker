@@ -21,7 +21,7 @@ class Setting {
             this.value = value;
             this.observableValue(value);
         } else {
-            console.log(`${value} is not a valid value for setting ${this.name}`);
+            console.warn(`${value} is not a valid value for setting ${this.name}`);
         }
     }
 

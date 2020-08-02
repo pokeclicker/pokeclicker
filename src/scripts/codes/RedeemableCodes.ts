@@ -1,6 +1,6 @@
 class RedeemableCodes implements Saveable {
     defaults: object;
-    saveKey = 'redeemable-codes';
+    saveKey = 'redeemableCodes';
 
     codeList: RedeemableCode[];
 
@@ -9,22 +9,22 @@ class RedeemableCodes implements Saveable {
             new RedeemableCode('farming-quickstart', -83143881, false, function () {
                 App.game.wallet.gainFarmPoints(10000);
                 App.game.farming.gainBerry(BerryType.Cheri, 100);
-                Notifier.notify('You gain 10000 farmpoints and 100 Cheri berries', GameConstants.NotificationOption.success);
+                Notifier.notify({ message: 'You gain 10000 farmpoints and 100 Cheri berries', type: GameConstants.NotificationOption.success });
             }),
             new RedeemableCode('good-luck', 1538489764, false, function () {
-                Notifier.notify('Congrats, you did it. Although you probably already read this text so it can\'t feel very satisfying can it?', GameConstants.NotificationOption.success);
+                Notifier.notify({ message: 'Congrats, you did it. Although you probably already read this text so it can\'t feel very satisfying can it?', type: GameConstants.NotificationOption.success });
             }),
             new RedeemableCode('route-unlock-kanto', -889017321, false, function () {
                 for (let i = 1; i <= 25; i++) {
-                    player.statistics.routeKills[i](10);
+                    App.game.statistics.routeKills[i](10);
                 }
-                Notifier.notify('You have unlocked all routes in Kanto', GameConstants.NotificationOption.success);
+                Notifier.notify({ message: 'You have unlocked all routes in Kanto', type: GameConstants.NotificationOption.success });
             }),
             new RedeemableCode('route-unlock-johto-2', -891649982, false, function () {
                 for (let i = 26; i <= 46; i++) {
-                    player.statistics.routeKills[i](10);
+                    App.game.statistics.routeKills[i](10);
                 }
-                Notifier.notify('You have unlocked all routes in Johto', GameConstants.NotificationOption.success);
+                Notifier.notify({ message: 'You have unlocked all routes in Johto', type: GameConstants.NotificationOption.success });
             }),
         ];
     }
@@ -37,7 +37,7 @@ class RedeemableCodes implements Saveable {
         });
 
         if (!redeemableCode) {
-            Notifier.notify(`Invalid code ${code}`, GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: `Invalid code ${code}`, type: GameConstants.NotificationOption.danger });
             return;
         }
 

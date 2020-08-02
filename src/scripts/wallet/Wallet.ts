@@ -21,7 +21,7 @@ class Wallet implements Feature {
 
         money = Math.floor(money);
 
-        GameHelper.incrementObservable(player.statistics.totalMoney, money);
+        GameHelper.incrementObservable(App.game.statistics.totalMoney, money);
         GameController.animateCurrency(money, 'playerMoney');
 
         this.addAmount(new Amount(money, Currency.money));
@@ -34,7 +34,7 @@ class Wallet implements Feature {
 
         tokens = Math.floor(tokens);
 
-        GameHelper.incrementObservable(player.statistics.totalTokens, tokens);
+        GameHelper.incrementObservable(App.game.statistics.totalTokens, tokens);
         GameController.animateCurrency(tokens, 'playerMoneyDungeon');
 
         this.addAmount(new Amount(tokens, Currency.dungeonToken));
@@ -45,7 +45,7 @@ class Wallet implements Feature {
 
         points = Math.floor(points);
 
-        GameHelper.incrementObservable(player.statistics.totalQuestPoints, points);
+        GameHelper.incrementObservable(App.game.statistics.totalQuestPoints, points);
         GameController.animateCurrency(points, 'playerMoneyQuest');
 
         this.addAmount(new Amount(points, Currency.questPoint));
@@ -56,7 +56,7 @@ class Wallet implements Feature {
 
         diamonds = Math.floor(diamonds);
 
-        GameHelper.incrementObservable(player.statistics.totalDiamonds, diamonds);
+        GameHelper.incrementObservable(App.game.statistics.totalDiamonds, diamonds);
 
         this.addAmount(new Amount(diamonds, Currency.diamond));
     }
@@ -66,7 +66,7 @@ class Wallet implements Feature {
 
         points = Math.floor(points);
 
-        GameHelper.incrementObservable(player.statistics.totalFarmPoints, points);
+        GameHelper.incrementObservable(App.game.statistics.totalFarmPoints, points);
 
         this.addAmount(new Amount(points, Currency.farmPoint));
     }

@@ -117,7 +117,7 @@ class Safari {
             App.game.gameState = GameConstants.GameState.safari;
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
-            Notifier.notify('You do not have access to that location', GameConstants.NotificationOption.warning);
+            Notifier.notify({ message: 'You do not have access to that location', type: GameConstants.NotificationOption.warning });
         }
     }
 

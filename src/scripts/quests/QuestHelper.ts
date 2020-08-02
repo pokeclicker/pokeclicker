@@ -99,7 +99,7 @@ class QuestHelper {
             QuestHelper.clearQuests();
             QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
         } else {
-            Notifier.notify("You can't afford to do that!", GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: "You can't afford to do that!", type: GameConstants.NotificationOption.danger });
         }
     }
 
@@ -176,7 +176,7 @@ class QuestHelper {
             });
             player.currentQuests.sort((x, y) => x.index - y.index);
         } else {
-            Notifier.notify('You cannot start more quests', GameConstants.NotificationOption.danger);
+            Notifier.notify({ message: 'You cannot start more quests', type: GameConstants.NotificationOption.danger });
         }
     }
 

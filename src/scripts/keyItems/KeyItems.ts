@@ -16,13 +16,13 @@ class KeyItems implements Feature {
             new KeyItem(KeyItems.KeyItem.Coin_case, 'A case for holding money. It can hold up to 1,000,000 coins', null, true),
             new KeyItem(KeyItems.KeyItem.Pokeball_bag, 'A tiny bag that can hold up to 4 different types of PokéBalls', null, true),
             new KeyItem(KeyItems.KeyItem.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region', function () {
-                return player.statistics.routeKills[1]() >= GameConstants.ROUTE_KILLS_NEEDED;
+                return App.game.statistics.routeKills[1]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13'),
             new KeyItem(KeyItems.KeyItem.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon'),
             new KeyItem(KeyItems.KeyItem.Super_rod, 'The best fishing rod for catching wild water Pokémon', function () {
-                return player.statistics.routeKills[12]() >= GameConstants.ROUTE_KILLS_NEEDED;
+                return App.game.statistics.routeKills[12]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others'),

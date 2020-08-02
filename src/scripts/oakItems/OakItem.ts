@@ -29,7 +29,7 @@ class OakItem extends ExpUpgrade {
         if (!this.isMaxLevel()) {
             this.gainExp(exp);
         }
-        GameHelper.incrementObservable(player.statistics.oakItemUses[this.name]);
+        GameHelper.incrementObservable(App.game.statistics.oakItemUses[this.name]);
     }
 
     calculateBonus(level: number = this.level): number {

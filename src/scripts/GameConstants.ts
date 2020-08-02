@@ -77,7 +77,11 @@ namespace GameConstants {
         info,
         success,
         warning,
-        danger
+        danger,
+        primary,
+        secondary,
+        dark,
+        light,
     }
 
     export enum DungeonTile {
