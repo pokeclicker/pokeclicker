@@ -301,7 +301,7 @@
                             </div>
 
                             <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
-                            <div data-bind="if: DungeonBattle.enemyPokemon()?.health()">
+                            <div data-bind="if: DungeonBattle.enemyPokemon">
                                 <span data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</span>
                                 <span data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></span>
                                 <div>
