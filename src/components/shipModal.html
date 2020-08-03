@@ -10,6 +10,7 @@
             <div class="modal-body bg-ocean">
                 <img src='assets/images/ship.png' style='width: 100%;'>
                 <div style='margin-top:20px' data-bind="foreach: GameHelper.enumStrings(GameConstants.Region)">
+                    <!-- ko if: $data !== 'none' -->
                     <button class='btn btn-block btn-success'
                         data-dismiss='modal'
                         data-bind='visible: player.region != GameConstants.Region[$data] && GameConstants.Region[$data] <= player.highestRegion() && GameConstants.Region[$data] <= GameConstants.MAX_AVAILABLE_REGION,
@@ -17,6 +18,7 @@
                         text: GameConstants.camelCaseToString($data)'>
                         Region
                     </button>
+                    <!-- /ko -->
                 </div>
             </div>
         </div>

@@ -99,7 +99,7 @@ class Party implements Feature {
         for (const pokemon of this.caughtPokemon) {
             let multiplier = 1;
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
-            if (nativeRegion != player.region && nativeRegion != Infinity) {
+            if (nativeRegion != player.region && nativeRegion != GameConstants.Region.none) {
                 // Pokemon only retain 20% of their total damage in other regions.
                 multiplier = 0.2;
             }
