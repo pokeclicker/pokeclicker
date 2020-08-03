@@ -165,8 +165,8 @@ class PokemonFactory {
         return Math.random() < 1 / (max + ( (min - max) * (maxRoute - curRoute) / (maxRoute - minRoute)));
     }
 
-    private static catchRateHelper(baseCatchRate: number) {
-        const catchVariation = GameConstants.randomIntBetween(-3, 3);
+    private static catchRateHelper(baseCatchRate: number, noVariation = false) {
+        const catchVariation = noVariation ? 0 : GameConstants.randomIntBetween(-3, 3);
         const catchRateRaw = Math.floor(Math.pow(baseCatchRate, 0.75)) + catchVariation;
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
     }
