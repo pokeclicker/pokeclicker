@@ -101,7 +101,7 @@ namespace GameConstants {
         quest_level_increased: new Sound('quest_level_increased', 'Quest level increased'),
         underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
         // TODO: needs a notification
-        ready_to_harvest: new Sound('assets/sounds/ready_to_harvest.mp3', 'Farm ready to harvest'),
+        ready_to_harvest: new Sound('ready_to_harvest', 'Farm ready to harvest'),
     };
     export const NotificationSetting = {
         ready_to_hatch: new BooleanSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),
