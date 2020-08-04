@@ -6,6 +6,6 @@ class HatchRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(App.game.statistics.hatchedEggs(), this.requiredValue);
+        return Math.min(App.game.statistics.totalPokemonHatched(), this.requiredValue);
     }
 }

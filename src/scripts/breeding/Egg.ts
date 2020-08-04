@@ -97,6 +97,7 @@ class Egg implements Saveable {
         if (shiny) {
             Notifier.notify({ message: `✨ You hatched a shiny ${this.pokemon}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
+            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
             Notifier.notify({ message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`, type: GameConstants.NotificationOption.success });
         }
@@ -107,10 +108,10 @@ class Egg implements Saveable {
         const baseForm = App.game.breeding.calculateBaseForm(this.pokemon);
         if (this.pokemon != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
             Notifier.notify({ message: `You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, type: GameConstants.NotificationOption.success });
-            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id, shiny);
+            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id);
         }
 
-        GameHelper.incrementObservable(App.game.statistics.hatchedEggs);
+        GameHelper.incrementObservable(App.game.statistics.totalPokemonHatched);
         App.game.oakItems.use(OakItems.OakItem.Blaze_Cassette);
     }
 

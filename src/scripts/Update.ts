@@ -27,7 +27,6 @@ class Update implements Saveable {
             return;
         }
 
-        // v0.4.0
         if (this.isOlderVersion(this.saveVersion, '0.4.0')) {
             try {
                 // Update the save data as it is no longer a part of player data
@@ -47,7 +46,6 @@ class Update implements Saveable {
             }
         }
 
-        // v0.4.4
         if (this.isOlderVersion(this.saveVersion, '0.4.4')) {
             try {
                 // Just incase statistics is not set
@@ -69,7 +67,6 @@ class Update implements Saveable {
             }
         }
 
-        // v0.4.16
         if (this.isOlderVersion(this.saveVersion, '0.4.15')) {
             try {
                 playerData._itemList.Lucky_egg = playerData._itemList.xExp;
@@ -78,6 +75,24 @@ class Update implements Saveable {
                 this.setPlayerData(playerData);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.4.15 - Couldn\'t update..', ಠ_ಠ);
+            }
+        }
+
+        if (this.isOlderVersion(this.saveVersion, '0.4.17')) {
+            try {
+                // Just incase statistics is not set
+                saveData.statistics = saveData.statistics || {};
+
+                // Rename from the old statistic name
+                saveData.statistics = {
+                    ...saveData.statistics,
+                    totalPokemonHatched: saveData.statistics.hatchedEggs || 0,
+                };
+
+                // Loading the new data
+                this.setSaveData(saveData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.4.17 - Couldn\'t update statistics..', ಠ_ಠ);
             }
         }
 
