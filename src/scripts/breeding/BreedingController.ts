@@ -90,7 +90,7 @@ class BreedingController {
         if (App.game.breeding.canAccess()) {
             $('#breedingModal').modal('show');
         } else {
-            Notifier.notify({ message: 'You do not have access to the Day Care yet.<br/><i>Get a Pokémon to level 100 first</i>', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({ message: 'You do not have access to the Day Care yet.<br/><i>Clear route 5 first</i>', type: GameConstants.NotificationOption.warning });
         }
     }
 
