@@ -43,7 +43,7 @@ class UndergroundItem {
 
 }
 
-UndergroundItem.addItem('Helix Fossil', 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1]], 0, 'Mine Egg');
+UndergroundItem.addItem('Helix Fossil', 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,0]], 0, 'Mine Egg');
 UndergroundItem.addItem('Dome Fossil', 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2], [0,2,2,2,0]], 0, 'Mine Egg');
 UndergroundItem.addItem('Old Amber', 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 0, 'Mine Egg');
 UndergroundItem.addItem('Root Fossil', 4, [[0,0,4,4,4], [0,0,4,4,4], [4,0,0,4,4], [4,4,4,4,4], [0,4,4,4,0]], 0, 'Mine Egg');
