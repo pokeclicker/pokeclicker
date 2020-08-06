@@ -40,6 +40,7 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, 'Move some dungeons to be standalone'),
     new Changelog(changelogType.FIXED, 'Safari Zone should no longer lock up'),
     new Changelog(changelogType.FIXED, 'Event Pokémon can now evolve'),
+    new Changelog(changelogType.FIXED, 'Helix fossil now displays correctly when mining in the Underground'),
 
     // v0.4.16
     new Changelog(changelogType.UPDATE, 'v0.4.16'),
