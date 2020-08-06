@@ -6,8 +6,7 @@ enum PokemonLocationType {
     Roaming,
     Dungeon,
     DungeonBoss,
-    LevelEvolution,
-    StoneEvolution,
+    Evolution,
     Egg,
     Baby,
     Shop,
@@ -197,13 +196,24 @@ class PokemonHelper {
         return safariPokemon ? +((safariPokemon.weight / SafariPokemon.listWeight) * 100).toFixed(2) : 0;
     }
 
+    public static getPokemonPrevolution(pokemonName: string): Array<Evolution> {
+        const evolutions = [];
+        const prevolutionPokemon = pokemonList.filter(p => p.evolutions ? p.evolutions.find(e => e.getEvolvedPokemon() == pokemonName) : false);
+        prevolutionPokemon.forEach(p => p.evolutions.forEach(e => {
+            if (e.getEvolvedPokemon() == pokemonName) {
+                evolutions.push(e);
+            }
+        }));
+        return evolutions;
+    }
+
     public static getPokemonLevelPrevolution(pokemonName: string): Evolution {
-        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e instanceof LevelEvolution && e.getEvolvedPokemon() == pokemonName) : null);
+        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e.type.includes(EvolutionType.Level) && e.getEvolvedPokemon() == pokemonName) : null);
         return evolutionPokemon ? evolutionPokemon.evolutions.find(e => e.getEvolvedPokemon() == pokemonName) : undefined;
     }
 
     public static getPokemonStonePrevolution(pokemonName: string): Evolution {
-        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e instanceof StoneEvolution && e.getEvolvedPokemon() == pokemonName) : null);
+        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e.type.includes(EvolutionType.Stone) && e.getEvolvedPokemon() == pokemonName) : null);
         return evolutionPokemon ? evolutionPokemon.evolutions.find(e => e.getEvolvedPokemon() == pokemonName) : undefined;
     }
     
@@ -254,15 +264,10 @@ class PokemonHelper {
         if (safariChance) {
             encounterTypes[PokemonLocationType.Safari] = `${safariChance}%`;
         }
-        // Level Evolution
-        const levelEvolution = PokemonHelper.getPokemonLevelPrevolution(pokemonName);
-        if (levelEvolution) {
-            encounterTypes[PokemonLocationType.LevelEvolution] = levelEvolution;
-        }
-        // Stone Evolution
-        const stoneEvolution = PokemonHelper.getPokemonStonePrevolution(pokemonName);
-        if (stoneEvolution) {
-            encounterTypes[PokemonLocationType.StoneEvolution] = stoneEvolution;
+        // Evolution
+        const evolutions = PokemonHelper.getPokemonPrevolution(pokemonName);
+        if (evolutions.length) {
+            encounterTypes[PokemonLocationType.Evolution] = evolutions;
         }
 
         // Return the list of items
