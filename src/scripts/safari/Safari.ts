@@ -16,7 +16,7 @@ class Safari {
     static sprite: Motio;
 
     public static sizeX(): number {
-        return Math.min(25, Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32));
+        return Math.floor(document.querySelector('#safariModal .modal-dialog').scrollWidth / 32);
     }
 
     public static sizeY(): number {

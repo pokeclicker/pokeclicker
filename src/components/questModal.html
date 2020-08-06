@@ -1,5 +1,5 @@
 <div class="modal noselect fade" id="QuestModal" tabindex="-1" role="dialog" aria-labelledby="QuestModalLabel">
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
 
@@ -61,12 +61,12 @@
 
             <div class="modal-footer">
                 <div id='refreshQuests'>
-                    <button class="btn btn-primary" onclick='QuestHelper.refreshQuests(false, true)'
-                            data-bind='text: "Refresh",
-                                       enable: QuestHelper.canAffordRefresh()'></button>
-                    <span data-bind="template: { name: 'amountTemplate', data: QuestHelper.getRefreshCost()}"></span>
-                    <span class='' data-bind='text: "(Daily refresh in " + GameHelper.formattedLetterTimeUntilTomorrow() + ")"'>
-                    </span>
+                    <button class="btn btn-primary" onclick="QuestHelper.refreshQuests(false, true)"
+                            data-bind="enable: QuestHelper.canAffordRefresh(), tooltip: { title: `Daily refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`, trigger: 'hover', placement:'top' }">
+                        <span data-bind="template: { name: 'amountTemplate', data: QuestHelper.getRefreshCost() }"></span> - Refresh
+                        </span>
+                    </button>
+                    
                 </div>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
