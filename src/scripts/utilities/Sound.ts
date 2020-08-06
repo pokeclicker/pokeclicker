@@ -53,4 +53,9 @@ class Sound {
         }
         return !!setting.value;
     }
+    toJSON() {
+        return {
+            name: this.name,
+        };
+    }
 }
