@@ -1,8 +1,15 @@
 type EmptyCallback = () => void;
 
+enum SpecialEventStatus {
+    none,
+    started,
+    ended,
+}
+
 class SpecialEvent {
     title: string;
     description: string;
+    status: SpecialEventStatus = SpecialEventStatus.none;
     startTime: Date;
     startFunction: EmptyCallback;
     endTime: Date;
@@ -25,7 +32,8 @@ class SpecialEvent {
 
     initialize(): void {
         // If event already over, do nothing
-        if (this.hasEnded()) {
+        if (this.timeTillEnd() <= 0) {
+            this.status = SpecialEventStatus.ended;
             return;
         }
 
@@ -84,11 +92,11 @@ class SpecialEvent {
     }
 
     hasStarted(): boolean {
-        return this.timeTillStart() <= 0;
+        return this.status == SpecialEventStatus.started;
     }
 
     hasEnded(): boolean {
-        return this.timeTillEnd() <= 0;
+        return this.status == SpecialEventStatus.ended;
     }
 
     notify(time: string, timeout: number, type = GameConstants.NotificationOption.info) {
@@ -97,6 +105,7 @@ class SpecialEvent {
     }
 
     start() {
+        this.status = SpecialEventStatus.started;
         const timeTillEventEnd = this.timeTillEnd();
 
         this.notify('on now!', Math.min(1 * GameConstants.HOUR, timeTillEventEnd), GameConstants.NotificationOption.success);
@@ -118,6 +127,7 @@ class SpecialEvent {
     }
 
     end() {
+        this.status = SpecialEventStatus.ended;
         this.notify('just ended!', 1 * GameConstants.HOUR, GameConstants.NotificationOption.danger);
         this.endFunction();
     }
