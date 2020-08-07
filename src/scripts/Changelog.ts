@@ -31,6 +31,7 @@ class Changelog {
 const changelogItems = [
     // v0.4.18
     new Changelog(changelogType.UPDATE, 'v0.4.18'),
+    new Changelog(changelogType.CHANGE, 'Separate Day Care modal into individual tabs for Pokémon, Eggs and Fossils'),
     new Changelog(changelogType.CHANGE, 'Update modal displays'),
     new Changelog(changelogType.FIXED, 'Event Pokémon no longer displayed in Pokédex'),
 
