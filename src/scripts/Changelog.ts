@@ -29,13 +29,18 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.18
+    new Changelog(changelogType.UPDATE, 'v0.4.18'),
+    new Changelog(changelogType.CHANGE, 'Update modal displays'),
+    new Changelog(changelogType.FIXED, 'Event Pokémon no longer displayed in Pokédex'),
+
     // v0.4.17
     new Changelog(changelogType.UPDATE, 'v0.4.17'),
     new Changelog(changelogType.NEW, 'Update maps'),
     new Changelog(changelogType.NEW, 'Add notification settings'),
     new Changelog(changelogType.NEW, 'Add more notification sounds and settings'),
     new Changelog(changelogType.NEW, 'Can now filter the Pokédex by pure type Pokémon by selecting None for the second type'),
-    new Changelog(changelogType.NEW, 'Added statistic for Hatched Shiny Pokemon'),
+    new Changelog(changelogType.NEW, 'Added statistic for Hatched Shiny Pokémon'),
     new Changelog(changelogType.NEW, 'Caught indicator on eggs showing if you have obtained all the Pokémon available in that egg type'),
     new Changelog(changelogType.CHANGE, 'Move some dungeons to be standalone'),
     new Changelog(changelogType.FIXED, 'Safari Zone should no longer lock up'),
