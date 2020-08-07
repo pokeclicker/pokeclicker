@@ -27,6 +27,7 @@ type PokemonListData = {
   eggCycles: number;
   baby?: boolean;
   attack?: number;
+  heldItem?: string;
 }
 
 /**
@@ -1444,6 +1445,7 @@ const pokemonList: PokemonListData[] =
                 'specialDefense': 80,
                 'speed': 30,
             },
+            'heldItem': 'Kings_rock',
         },
         {
             'id': 81,
@@ -2618,6 +2620,7 @@ const pokemonList: PokemonListData[] =
                 'specialDefense': 50,
                 'speed': 50,
             },
+            'heldItem': 'Dragon_scale',
         },
         {
             'id': 148,
@@ -4012,6 +4015,7 @@ const pokemonList: PokemonListData[] =
                 'specialDefense': 70,
                 'speed': 70,
             },
+            'heldItem': 'Metal_coat',
         },
         {
             'id': 228,

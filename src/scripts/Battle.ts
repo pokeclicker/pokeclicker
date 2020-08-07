@@ -68,20 +68,12 @@ class Battle {
      */
     public static defeatPokemon() {
         const enemyPokemon = this.enemyPokemon();
-        GameHelper.incrementObservable(App.game.statistics.pokemonDefeated[enemyPokemon.id]);
-        GameHelper.incrementObservable(App.game.statistics.totalPokemonDefeated);
-        App.game.wallet.gainMoney(enemyPokemon.money);
-        App.game.party.gainExp(enemyPokemon.exp, enemyPokemon.level, false);
-        this.gainShardsAfterBattle();
+        enemyPokemon.defeat();
 
         GameHelper.incrementObservable(App.game.statistics.routeKills[player.route()]);
 
         App.game.breeding.progressEggsBattle(player.route(), player.region);
         const isShiny: boolean = enemyPokemon.shiny;
-        if (isShiny) {
-            GameHelper.incrementObservable(App.game.statistics.shinyPokemonDefeated[enemyPokemon.id]);
-            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonDefeated);
-        }
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
@@ -100,12 +92,6 @@ class Battle {
         }
         this.gainItem();
         player.lowerItemMultipliers();
-    }
-
-    protected static gainShardsAfterBattle() {
-        const pokemon: BattlePokemon = this.enemyPokemon();
-        App.game.shards.gainShards(pokemon.shardReward, pokemon.type1);
-        App.game.shards.gainShards(pokemon.shardReward, pokemon.type2);
     }
 
     /**

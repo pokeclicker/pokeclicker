@@ -112,6 +112,7 @@ namespace GameConstants {
         quest_ready_to_complete: new BooleanSetting('notification.quest_ready_to_complete', 'Quest is ready to be completed', true),
         underground_energy_full: new BooleanSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true),
         event_start_end: new BooleanSetting('notification.event_start_end', 'Event start/end information', true),
+        dropped_item: new BooleanSetting('notification.dropped_item', 'Enemy pokemon dropped an item', true),
     };
 
     export enum DungeonTile {
@@ -120,6 +121,10 @@ namespace GameConstants {
         chest,
         boss,
     }
+
+    // Held item chance
+    export const ROUTE_HELD_ITEM_CHANCE = 512;
+    export const DUNGEON_HELD_ITEM_CHANCE = 128;
 
     //Shards from battle
     export const DUNGEON_SHARDS = 3;

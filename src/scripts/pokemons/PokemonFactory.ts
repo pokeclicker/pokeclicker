@@ -31,13 +31,14 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
+        const heldItem: string = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_CHANCE);
 
         const money: number = this.routeMoney(route,region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         if (shiny) {
             Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
         }
-        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny);
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, 1, heldItem);
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
@@ -113,11 +114,12 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_CHANCE);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         if (shiny) {
             Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
         }
-        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, GameConstants.DUNGEON_SHARDS);
+        return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, GameConstants.DUNGEON_SHARDS, heldItem);
     }
 
     public static generateDungeonBoss(bossPokemonList: DungeonBossPokemon[], chestsOpened: number): BattlePokemon {
@@ -154,5 +156,21 @@ class PokemonFactory {
         const catchVariation = noVariation ? 0 : GameConstants.randomIntBetween(-3, 3);
         const catchRateRaw = Math.floor(Math.pow(baseCatchRate, 0.75)) + catchVariation;
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
+    }
+
+    private static generateHeldItem(item: string, chance: number): string | null {
+        if (!item || !ItemList[item]) {
+            return null;
+        }
+
+        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
+            chance /= 1.5;
+        }
+        const rand: number = Math.floor(Math.random() * chance) + 1;
+        if (rand <= 1) {
+            return item;
+        }
+
+        return null;
     }
 }

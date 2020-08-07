@@ -116,6 +116,11 @@ class PokedexHelper {
                 return false;
             }
 
+            // Only pokemon with a hold item
+            if (filter['held-item'] && !ItemList[pokemon.heldItem]) {
+                return false;
+            }
+
             return true;
         });
     }
@@ -131,6 +136,7 @@ class PokedexHelper {
         res['uncaught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-uncaught')).checked;
         res['shiny'] = (<HTMLInputElement> document.getElementById('pokedex-filter-shiny')).checked;
         res['not-shiny'] = (<HTMLInputElement> document.getElementById('pokedex-filter-not-shiny')).checked;
+        res['held-item'] = (<HTMLInputElement> document.getElementById('pokedex-filter-held-item')).checked;
         return res;
     }
 

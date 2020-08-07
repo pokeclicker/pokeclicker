@@ -3,7 +3,7 @@ interface LogBookType {
     label: string;
 }
 
-const LogBookTypes = {
+const LogBookTypes: Record<string, LogBookType> = {
     NEW: {
         display: 'primary',
         label: 'NEW',
@@ -19,5 +19,9 @@ const LogBookTypes = {
     ESCAPED: {
         display: 'danger',
         label: 'ESCAPED',
+    },
+    FOUND: {
+        display: 'primary',
+        label: 'FOUND',
     },
 };

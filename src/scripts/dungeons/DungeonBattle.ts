@@ -9,19 +9,12 @@ class DungeonBattle extends Battle {
             DungeonRunner.fightingBoss(false);
             DungeonRunner.defeatedBoss(true);
         }
-        App.game.party.gainExp(this.enemyPokemon().exp, this.enemyPokemon().level, false);
-        this.gainShardsAfterBattle();
-        GameHelper.incrementObservable(App.game.statistics.pokemonDefeated[this.enemyPokemon().id]);
-        GameHelper.incrementObservable(App.game.statistics.totalPokemonDefeated);
+        this.enemyPokemon().defeat();
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.itemRoute, player.region);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
         const isShiny: boolean = this.enemyPokemon().shiny;
-        if (isShiny) {
-            GameHelper.incrementObservable(App.game.statistics.shinyPokemonDefeated[this.enemyPokemon().id]);
-            GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonDefeated);
-        }
         const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {

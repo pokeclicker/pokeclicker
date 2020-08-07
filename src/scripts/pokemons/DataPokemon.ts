@@ -1,27 +1,19 @@
 class DataPokemon implements PokemonInterface {
-    id: number;
-    name: string;
-    catchRate: number;
-    evolutions: Evolution[];
-    type1: PokemonType;
-    type2: PokemonType;
-    attack: number;
-    levelType: LevelType;
-    exp: number;
-    eggCycles: number;
     shiny: boolean;
 
-    constructor(id: number, name: string, catchRate: number, evolutions: Evolution[], type1: PokemonType, type2: PokemonType, attack: number, levelType: LevelType, exp: number, eggCycles: number) {
-        this.id = id;
-        this.name = name;
-        this.catchRate = catchRate;
-        this.evolutions = evolutions;
-        this.type1 = type1;
-        this.type2 = type2;
-        this.attack = attack;
-        this.levelType = levelType;
-        this.exp = exp;
-        this.eggCycles = eggCycles;
+    constructor(
+        public id: number,
+        public name: string,
+        public catchRate: number,
+        public evolutions: Evolution[],
+        public type1: PokemonType,
+        public type2: PokemonType,
+        public attack: number,
+        public levelType: LevelType,
+        public exp: number,
+        public eggCycles: number,
+        public heldItem: string | null
+    ) {
         this.shiny = false;
     }
 
