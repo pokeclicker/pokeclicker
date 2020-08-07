@@ -60,7 +60,13 @@ class PokedexHelper {
 
         return pokemonList.filter(function (pokemon) {
             // If the Pokemon shouldn't be unlocked yet
-            if (PokemonHelper.calcNativeRegion(pokemon.name) > GameConstants.MAX_AVAILABLE_REGION) {
+            const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+            if (nativeRegion > GameConstants.MAX_AVAILABLE_REGION || nativeRegion == GameConstants.Region.none) {
+                return false;
+            }
+
+            // Event Pokemon
+            if (pokemon.id <= 0) {
                 return false;
             }
 
