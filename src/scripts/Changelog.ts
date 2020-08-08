@@ -31,7 +31,8 @@ class Changelog {
 const changelogItems = [
     // v0.4.18
     new Changelog(changelogType.UPDATE, 'v0.4.18'),
-    new Changelog(changelogType.NEW, 'Add volume control for notification sounds'),
+    new Changelog(changelogType.NEW, 'Added ability to sell/trade multiple items at once in the Underground'),
+    new Changelog(changelogType.NEW, 'Added volume control for notification sounds'),
     new Changelog(changelogType.NEW, 'Some Pokémon now have a chance to drop rare items upon defeat'),
     new Changelog(changelogType.NEW, 'Added Pokédex filter for Pokémon that drop rare items'),
     new Changelog(changelogType.CHANGE, 'Separate Day Care modal into individual tabs for Pokémon, Eggs and Fossils'),
