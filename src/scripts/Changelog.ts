@@ -39,6 +39,7 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, 'Update modal displays'),
     new Changelog(changelogType.CHANGE, 'Deoxys no longer roaming'),
     new Changelog(changelogType.FIXED, 'Event Pokémon no longer displayed in Pokédex'),
+    new Changelog(changelogType.FIXED, 'Reduce memory usage in Underground'),
 
     // v0.4.17
     new Changelog(changelogType.UPDATE, 'v0.4.17'),
