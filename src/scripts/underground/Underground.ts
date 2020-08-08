@@ -52,28 +52,14 @@ class Underground {
     private static mineSquare(amount: number, i: number, j: number): string {
         if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() === 0) {
             Mine.rewardGrid[i][j].revealed = 1;
-            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})()' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y}" style="background-image: url('assets/images/underground/${Mine.rewardGrid[i][j].value}.png');"></div></div>`;
+            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y}" style="background-image: url('assets/images/underground/${Mine.rewardGrid[i][j].value}.png');"></div></div>`;
         } else {
-            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})()' data-i='${i}' data-j='${j}'></div>`;
+            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'></div>`;
         }
     }
 
-    public static calculateCssClass(i: number, j: number): KnockoutComputed<string> {
-        // disposed via the disposeWhen function passed as an option
-        return ko.computed(function () {
-            return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
-        }, this, {
-            disposeWhen: function () {
-                if (Mine.grid[i][j]() == 0) {
-                    if (Mine.rewardGrid[i][j] != 0 && Mine.rewardGrid[i][j].revealed != 1) {
-                        Mine.rewardGrid[i][j].revealed = 1;
-                        $(`div[data-i=${i}][data-j=${j}]`).html(`<div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y}" style="background-image: url('assets/images/underground/${Mine.rewardGrid[i][j].value}.png');"></div>`);
-                        Mine.checkItemsRevealed();
-                    }
-                }
-                return false;
-            },
-        });
+    public static calculateCssClass(i: number, j: number): string {
+        return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
     }
 
     private static rewardCssClass: KnockoutComputed<string> = ko.pureComputed(function () {

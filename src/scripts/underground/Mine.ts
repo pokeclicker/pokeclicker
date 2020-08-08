@@ -115,7 +115,7 @@ class Mine {
                     if (Mine.grid[Mine.normalizeY(x + i)][Mine.normalizeX(y + j)]() > 0) {
                         hasMined = true;
                     }
-                    Mine.grid[Mine.normalizeY(x + i)][Mine.normalizeX(y + j)](Math.max(0, Mine.grid[Mine.normalizeY(x + i)][Mine.normalizeX(y + j)]() - 1));
+                    this.breakTile(x + i, y + j, 1);
                 }
             }
             if (hasMined) {
@@ -127,9 +127,24 @@ class Mine {
     private static chisel(x: number, y: number) {
         if (Mine.grid[x][y]() > 0) {
             if (Underground.energy >= Underground.CHISEL_ENERGY) {
-                Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)](Math.max(0, Mine.grid[Mine.normalizeY(x)][Mine.normalizeX(y)]() - 2));
+                this.breakTile(x, y, 2);
                 Underground.energy = Underground.energy - Underground.CHISEL_ENERGY;
             }
+        }
+    }
+
+    private static breakTile(_x: number, _y: number, layers = 1) {
+        const x = Mine.normalizeY(_x);
+        const y = Mine.normalizeX(_y);
+        const newlayer = Math.max(0, Mine.grid[x][y]() - layers);
+
+        Mine.grid[x][y](newlayer);
+
+        const reward = Mine.rewardGrid[x][y];
+        if (newlayer == 0 && reward != 0 && reward.revealed != 1) {
+            reward.revealed = 1;
+            $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y}" style="background-image: url('assets/images/underground/${reward.value}.png');"></div>`);
+            Mine.checkItemsRevealed();
         }
     }
 
