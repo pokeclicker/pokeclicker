@@ -31,6 +31,9 @@ class Changelog {
 const changelogItems = [
     // v0.4.18
     new Changelog(changelogType.UPDATE, 'v0.4.18'),
+    new Changelog(changelogType.NEW, 'Add volume control for notification sounds'),
+    new Changelog(changelogType.NEW, 'Some Pokémon now have a chance to drop rare items upon defeat'),
+    new Changelog(changelogType.NEW, 'Added Pokédex filter for Pokémon that drop rare items'),
     new Changelog(changelogType.CHANGE, 'Separate Day Care modal into individual tabs for Pokémon, Eggs and Fossils'),
     new Changelog(changelogType.CHANGE, 'Update modal displays'),
     new Changelog(changelogType.FIXED, 'Event Pokémon no longer displayed in Pokédex'),
