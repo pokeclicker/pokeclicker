@@ -25,6 +25,14 @@ class Sound {
                     this.sound.src = src;
                 }, 1000);
             });
+
+            Settings.getSetting('sound.volume').observableValue.subscribe((volume) => {
+                try {
+                    this.sound.volume = volume / 100;
+                } catch (e) {
+                    console.error(e);
+                }
+            });
         });
     }
     

@@ -1,6 +1,7 @@
 /// <reference path="Setting.ts" />
 /// <reference path="BooleanSetting.ts"/>
 /// <reference path="MultipleChoiceSetting.ts"/>
+/// <reference path="RangeSetting.ts"/>
 /// <reference path="SortOptions.ts"/>
 
 class Settings {
@@ -98,6 +99,7 @@ Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disabl
 Object.values(GameConstants.NotificationSound).forEach(sound => {
     Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
 });
+Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 
 // Notification settings
 Object.values(GameConstants.NotificationSetting).forEach(setting => {
