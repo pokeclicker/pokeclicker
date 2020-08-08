@@ -19,6 +19,7 @@ class Game {
     public logbook: LogBook;
     public redeemableCodes: RedeemableCodes;
     public statistics: Statistics;
+    public quests: Quests;
     public specialEvents: SpecialEvents;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
@@ -40,6 +41,7 @@ class Game {
         logbook: LogBook,
         codes: RedeemableCodes,
         statistics: Statistics,
+        quests: Quests,
         specialEvents: SpecialEvents
     ) {
         this.update = update;
@@ -55,6 +57,7 @@ class Game {
         this.logbook = logbook;
         this.redeemableCodes = codes;
         this.statistics = statistics;
+        this.quests = quests;
         this.specialEvents = specialEvents;
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
@@ -67,17 +70,17 @@ class Game {
     load() {
         const saveJSON = localStorage.getItem('save');
 
-        if (saveJSON !== null) {
-            const saveObject = JSON.parse(saveJSON);
+        const saveObject = JSON.parse(saveJSON || '{}');
 
-            Object.keys(saveObject).filter(key => this[key]?.saveKey).forEach(key => {
-                try {
-                    this[key].fromJSON(saveObject[key]);
-                } catch (error) {
-                    console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
-                }
-            });
-        }
+        Object.keys(this).filter(key => this[key]?.saveKey).forEach(key => {
+            try {
+                const saveKey = this[key].saveKey;
+                // Load our save object or the default save data
+                this[key].fromJSON(saveObject[saveKey] || this[key].toJSON());
+            } catch (error) {
+                console.error('Unable to load sava data from JSON for:', key, '\nError:\n', error);
+            }
+        });
     }
 
     initialize() {
@@ -95,12 +98,6 @@ class Game {
         Save.loadMine();
         Underground.energyTick(Underground.getEnergyRegenTime());
         DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
-        QuestHelper.generateQuests(player.questLevel, player.questRefreshes, new Date());
-        QuestHelper.loadCurrentQuests(player.currentQuests);
-        if (!player.tutorialComplete()) {
-            QuestLineHelper.createTutorial();
-            QuestLineHelper.tutorial.resumeAt(player.tutorialProgress(), player.tutorialState);
-        }
 
         this.gameState = GameConstants.GameState.fighting;
     }
@@ -158,10 +155,8 @@ class Game {
         if (Save.counter > GameConstants.SAVE_TICK) {
             const now = new Date();
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
-                player.questRefreshes = 0;
-                QuestHelper.quitAllQuests();
-                QuestHelper.clearQuests();
-                QuestHelper.generateQuests(player.questLevel, player.questRefreshes, now);
+                this.quests.resetRefreshes();
+                this.quests.generateQuestList();
                 DailyDeal.generateDeals(Underground.getDailyDealsMax(), now);
                 Notifier.notify({ message: 'It\'s a new day! Your quests and underground deals have been updated.', type: GameConstants.NotificationOption.info, timeout: 1e4 });
             }

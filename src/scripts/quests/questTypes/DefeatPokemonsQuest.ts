@@ -1,13 +1,13 @@
-/// <reference path="Quest.ts" />
+/// <reference path="../Quest.ts" />
 
 class DefeatPokemonsQuest extends Quest implements QuestInterface {
     private route: number;
 
     constructor(route: number, region: number, killsNeeded: number) {
         super(killsNeeded, DefeatPokemonsQuest.calcReward(route, region, killsNeeded));
-        this.description = `Defeat ${killsNeeded.toLocaleString('en-US')} pokemon on route ${route}.`;
+        this.description = `Defeat ${killsNeeded.toLocaleString('en-US')} Pokémon on route ${route}.`;
         this.route = route;
-        this.questFocus = App.game.statistics.routeKills[this.route];
+        this.focus = App.game.statistics.routeKills[this.route];
     }
 
     private static calcReward(route: number, region: number, killsNeeded: number): number {

@@ -8,7 +8,7 @@ abstract class Quest {
     progressText: KnockoutComputed<string>;
     isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
-    private _questFocus: KnockoutObservable<any>;
+    private _focus: KnockoutObservable<any>;
     initial: KnockoutObservable<any>;
     notified: boolean;
     autoComplete: boolean;
@@ -25,51 +25,42 @@ abstract class Quest {
         this.notified = false;
     }
 
-    endQuest(shouldConfirm = false) {
+    claim() {
         if (this.isCompleted() && !this.claimed()) {
+            App.game.quests.addXP(this.xpReward);
             App.game.wallet.gainQuestPoints(this.pointsReward);
             this.claimed(true);
-            if (!this.inQuestLine) {
-                player.completedQuestList[this.index](true);
-            }
-            const oldLevel = player.questLevel;
-            player.questXP += this.xpReward;
             Notifier.notify({ message: `You have completed your quest and claimed ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success });
-            // Refresh the list each time a player levels up
-            if (oldLevel < player.questLevel) {
-                Notifier.notify({ message: 'Your quest level has increased!', type: GameConstants.NotificationOption.success, timeout: 1e4, sound: GameConstants.NotificationSound.quest_level_increased });
-                QuestHelper.refreshQuests(true);
-            }
-            // Once the player completes every available quest, refresh the list for free
-            if (QuestHelper.allQuestCompleted()) {
-                QuestHelper.refreshQuests(true);
-            }
-        } else {
-            if (shouldConfirm && !confirm('Are you sure you want to quit this quest?!')) {
-                return;
-            }
-            this.initial(null);
+            return true;
         }
-        player.currentQuests(player.currentQuests().filter(x => x.index != this.index));
+        return false;
     }
 
-    beginQuest() {
-        this.initial(this.questFocus());
+    quit(shouldConfirm = false) {
+        if (shouldConfirm && !confirm('Are you sure you want to quit this quest?!')) {
+            return false;
+        }
+        this.initial(null);
+        return true;
     }
 
-    set questFocus(value: KnockoutObservable<any>) {
-        this._questFocus = value;
+    begin() {
+        this.initial(this.focus());
+    }
+
+    set focus(value: KnockoutObservable<any>) {
+        this._focus = value;
         this.createProgressObservables();
     }
 
-    get questFocus() {
-        return this._questFocus;
+    get focus() {
+        return this._focus;
     }
 
     protected createProgressObservables() {
         this.progress = ko.pureComputed(function() {
             if (this.initial() !== null) {
-                return Math.min(1, ( this.questFocus() - this.initial()) / this.amount);
+                return Math.min(1, ( this.focus() - this.initial()) / this.amount);
             } else {
                 return 0;
             }
@@ -77,7 +68,7 @@ abstract class Quest {
 
         this.progressText = ko.pureComputed(function() {
             if (this.initial() !== null) {
-                return `${Math.min((this.questFocus() - this.initial()), this.amount)} / ${this.amount}`;
+                return `${Math.min((this.focus() - this.initial()), this.amount)} / ${this.amount}`;
             } else {
                 return `0 / ${this.amount}`;
             }
@@ -90,28 +81,44 @@ abstract class Quest {
             const completed = this.progress() == 1;
             if (!this.autoComplete && completed && !this.notified) {
                 Notifier.notify({ message: `You can complete your quest for ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success, timeout: 5e3, sound: GameConstants.NotificationSound.quest_ready_to_complete, setting: GameConstants.NotificationSetting.quest_ready_to_complete });
+                this.notified = true;
             }
             return completed;
         }, this);
     }
 
     complete() {
-        this.initial(this.questFocus() - this.amount);
+        this.initial(this.focus() - this.amount);
     }
 
     createAutoCompleter() {
         this.autoComplete = true;
         this.autoCompleter = this.isCompleted.subscribe(() => {
             if (this.isCompleted()) {
-                this.endQuest();
+                this.claim();
                 this.autoCompleter.dispose();
             }
         });
     }
 
-    inProgress() {
+    get inProgress() {
         return ko.pureComputed(() => {
-            return player.currentQuests().map(x => x.index).includes(this.index) && !this.isCompleted();
+            return this.initial() !== null && !this.claimed();
         });
+    }
+
+    toJSON() {
+        return {
+            amount: this.amount,
+            initial: this.initial(),
+            description: this.description,
+            index: this.index || 0,
+            notified: this.notified,
+            pointsReward: this.pointsReward,
+            xpReward: this.xpReward,
+            inProgress: this.inProgress(),
+            isCompleted: this.isCompleted(),
+            claimed: this.claimed(),
+        };
     }
 }

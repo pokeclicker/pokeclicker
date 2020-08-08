@@ -10,23 +10,16 @@ const gymList: { [townName: string]: Gym } = {};
  * Gym class.
  */
 class Gym {
-    leaderName: string;
-    town: string;
-    pokemons: GymPokemon[];
-    badgeReward: BadgeCase.Badge;
-    moneyReward: number;
-    badgeReq: BadgeCase.Badge;
-    defeatMessage: string;
-
-    constructor(leaderName: string, town: string, pokemons: GymPokemon[], badgeReward: BadgeCase.Badge, moneyReward: number, badgeReq: BadgeCase.Badge, rewardMessage: string) {
-        this.leaderName = leaderName;
-        this.town = town;
-        this.pokemons = pokemons;
-        this.badgeReward = badgeReward;
-        this.moneyReward = moneyReward;
-        this.badgeReq = badgeReq;
-        this.defeatMessage = rewardMessage;
-    }
+    constructor(
+        public leaderName: string,
+        public town: string,
+        public pokemons: GymPokemon[],
+        public badgeReward: BadgeCase.Badge,
+        public moneyReward: number,
+        public badgeReq: BadgeCase.Badge,
+        public defeatMessage: string,
+        public rewardFunction = () => {}
+    ) {}
 
     public static isUnlocked(gym: Gym): boolean {
         return App.game.badgeCase.hasBadge(gym.badgeReq);
@@ -49,6 +42,15 @@ class Gym {
             }
         }
         return 'Brock';
+    }
+
+    public firstWinReward() {
+        // Give the player this gyms badge
+        App.game.badgeCase.gainBadge(this.badgeReward);
+        // Show the badge modal
+        $('#receiveBadgeModal').modal('show');
+        // Run the first time reward function
+        this.rewardFunction();
     }
 }
 
@@ -595,5 +597,8 @@ gymList['Champion Wallace'] = new Gym(
     BadgeCase.Badge.Elite_HoennChampion,
     15000,
     BadgeCase.Badge.Elite_Drake,
-    'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!'
+    'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!',
+    () => {
+        App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest();
+    }
 );

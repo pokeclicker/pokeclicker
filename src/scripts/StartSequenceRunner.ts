@@ -9,6 +9,7 @@ class StartSequenceRunner {
     }
 
     public static pickStarter(s: GameConstants.Starter) {
+        App.game.quests.getQuestLine('Tutorial Quests').beginQuest(0);
         this.starterPicked = s;
         $('#pickStarterModal').modal('hide');
         const dataPokemon = PokemonHelper.getPokemonByName(GameConstants.Starter[this.starterPicked]);

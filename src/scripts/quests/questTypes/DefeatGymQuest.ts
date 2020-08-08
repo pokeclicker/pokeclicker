@@ -1,10 +1,10 @@
-/// <reference path="Quest.ts" />
+/// <reference path="../Quest.ts" />
 
 class DefeatGymQuest extends Quest implements QuestInterface {
     constructor(gymTown: string, amount: number) {
         super(amount, DefeatGymQuest.calcReward(gymTown, amount));
         this.description = DefeatGymQuest.getDescription(gymTown, amount);
-        this.questFocus = App.game.statistics.gymsDefeated[Statistics.getGymIndex(gymTown)];
+        this.focus = App.game.statistics.gymsDefeated[Statistics.getGymIndex(gymTown)];
     }
 
     private static getDescription(gymTown: string, amount: number): string {

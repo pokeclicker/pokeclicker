@@ -5,15 +5,15 @@
 
                 <div class="col-3">
                 <h5>
-                    <span class='' data-bind='text: "Quests (" + player.currentQuests().length + "/" + QuestHelper.questSlots()() + ")"'>
+                    <span class='' data-bind='text: "Quests (" + App.game.quests.currentQuests().length + "/" + App.game.quests.questSlots() + ")"'>
                     </span>
                 </h5>
                 </div>
                 <div class='col-6'>
-                    <div data-bind='text: "Lvl. "+player.questLevel'></div>
+                    <div>Lvl. <knockout data-bind='text: App.game.quests.level'></knockout></div>
                     <div class="progress" style='height: 5px'>
                         <div class="progress-bar bg-info" role="progressbar"
-                             data-bind="attr:{ style: 'width:' + player.percentToNextQuestLevel() + '%' }"
+                             data-bind="attr:{ style: 'width:' + App.game.quests.percentToNextQuestLevel() + '%' }"
                              aria-valuemin="0" aria-valuemax="100">
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                         <td><h5>Status</h5></td>
                     </tr>
                     </thead>
-                    <tbody data-bind="foreach: QuestHelper.questList" >
+                    <tbody data-bind="foreach: App.game.quests.questList" >
                     <tr>
                         <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
                         <td class="align-middle" style="text-align:left">
@@ -40,19 +40,19 @@
                         </td>
                         <td class="align-middle">
                             <button class='btn btn-primary btn-sm btn-block'
-                                data-bind='visible: QuestHelper.canStartNewQuest() && !QuestHelper.onQuest($data.index)() && !player.completedQuestList[index](),
+                                data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted(),
                                 click: function(){
-                                    QuestHelper.beginQuest($data.index);
-                                    if (!QuestHelper.canStartNewQuest()) {$("#QuestModal").modal("hide");}
+                                    App.game.quests.beginQuest($data.index);
+                                    if (!App.game.quests.canStartNewQuest()) {$("#QuestModal").modal("hide");}
                                 }'>
                                 Start
                             </button>
-                            <button class='btn btn-success btn-sm btn-block' data-bind='visible: QuestHelper.onQuest($data.index)() && $data.isCompleted(),
-                                                                click: $data.endQuest'>
+                            <button class='btn btn-success btn-sm btn-block' data-bind='visible: !$data.claimed() && $data.isCompleted(),
+                                                                click: () => { App.game.quests.claimQuest($data.index) }'>
                                 Claim
                             </button>
-                            <span data-bind='visible: $data.inProgress(), text: Math.floor(progress()*100) + "%"'></span>
-                            <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: player.completedQuestList[index]()'>Completed</button>
+                            <span data-bind='visible: $data.inProgress() && !$data.isCompleted(), text: Math.floor(progress()*100) + "%"'></span>
+                            <button class='btn btn-success btn-sm btn-block' disabled data-bind='visible: $data.claimed()'>Completed</button>
                         </td>
                     </tr>
                     </tbody>
@@ -61,9 +61,9 @@
 
             <div class="modal-footer">
                 <div id='refreshQuests'>
-                    <button class="btn btn-primary" onclick="QuestHelper.refreshQuests(false, true)"
-                            data-bind="enable: QuestHelper.canAffordRefresh(), tooltip: { title: `Daily refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`, trigger: 'hover', placement:'top' }">
-                        <span data-bind="template: { name: 'amountTemplate', data: QuestHelper.getRefreshCost() }"></span> - Refresh
+                    <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)"
+                            data-bind="enable: App.game.quests.canAffordRefresh(), tooltip: { title: `Daily refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`, trigger: 'hover', placement:'top' }">
+                        <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
                         </span>
                     </button>
                     

@@ -67,10 +67,9 @@ class GymRunner {
         Notifier.notify({ message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`, type: GameConstants.NotificationOption.success });
         this.gymObservable(gym);
         App.game.wallet.gainMoney(gym.moneyReward);
+        // If this is the first time defeating this gym
         if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
-            App.game.badgeCase.gainBadge(gym.badgeReward);
-
-            $('#receiveBadgeModal').modal('show');
+            gym.firstWinReward();
         }
         GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);

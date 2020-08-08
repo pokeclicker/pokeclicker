@@ -60,7 +60,7 @@ class Update implements Saveable {
                     undergroundLayersMined:  saveData.statistics.digDeeper || 0,
                 };
 
-                // Loading the new data
+                // Update save data
                 this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.4.4 - Couldn\'t update statistics..', ಠ_ಠ);
@@ -72,6 +72,8 @@ class Update implements Saveable {
                 playerData._itemList.Lucky_egg = playerData._itemList.xExp;
                 delete playerData._itemList.xExp;
                 delete localStorage.mine;
+
+                // Update save data
                 this.setPlayerData(playerData);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.4.15 - Couldn\'t update..', ಠ_ಠ);
@@ -89,10 +91,53 @@ class Update implements Saveable {
                     totalPokemonHatched: saveData.statistics.hatchedEggs || 0,
                 };
 
-                // Loading the new data
+                // Update save data
                 this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.4.17 - Couldn\'t update statistics..', ಠ_ಠ);
+            }
+        }
+
+        if (this.isOlderVersion(this.saveVersion, '0.4.18')) {
+            try {
+                // Move quests from player data -> save data
+                saveData.quests = {
+                    xp: Math.floor(playerData._questXP || 0),
+                    refreshes: playerData.questRefreshes || 0,
+                    lastRefresh: playerData._lastSeen,
+                    questList: new Array(10).fill({}).map((q,index) => ({ index, initial: null })),
+                    questLines: [
+                        {
+                            state: playerData.tutorialComplete ? 2 : 1,
+                            name: 'Tutorial Quests',
+                            quest: playerData.tutorialProgress || 0,
+                        },
+                    ],
+                };
+                // Convert quest the player is currently doing
+                (playerData.currentQuests || []).forEach(quest => {
+                    saveData.quests.questList[quest.index || 0].initial = quest.initial || null;
+                });
+                // Convert quest the player has completed
+                (playerData.completedQuestList || []).forEach((complete, index) => {
+                    if (complete) {
+                        saveData.quests.questList[index].notified = true;
+                        saveData.quests.questList[index].claimed = true;
+                        saveData.quests.questList[index].initial = 0;
+                    }
+                });
+
+                // If player has defeated the Hoenn Champion, start the deoxys quest line
+                saveData.badgeCase = saveData.badgeCase || [];
+                // Not using game constants incase the value isn't 39 in the future
+                if (saveData.badgeCase[39]) {
+                    saveData.quests.questLines.push({state: 1, name: 'Mystery of Deoxys', quest: 0});
+                }
+
+                // Update save data
+                this.setSaveData(saveData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.4.18 - Couldn\'t update quests data..', ಠ_ಠ);
             }
         }
 

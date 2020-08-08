@@ -62,40 +62,12 @@ class Player {
 
         const today = new Date();
         const lastSeen = new Date(this._lastSeen);
-        if (today.toLocaleDateString() == lastSeen.toLocaleDateString()) {
-            this.questRefreshes = savedPlayer.questRefreshes;
-            if (savedPlayer.completedQuestList) {
-                this.completedQuestList = savedPlayer.completedQuestList.map((bool) => {
-                    return ko.observable(bool);
-                });
-            } else {
-                this.completedQuestList = [...Array(GameConstants.QUESTS_PER_SET)].map(() => {
-                    return ko.observable(false);
-                });
-            }
-
-            this.currentQuests = ko.observableArray(savedPlayer.currentQuests || []);
-            for (const q of this.currentQuests()) {
-                q.initial = ko.observable(q.initial);
-            }
-        } else {
-            this.questRefreshes = 0;
-            this.completedQuestList = [...Array(GameConstants.QUESTS_PER_SET)].map(() => {
-                return ko.observable(false);
-            });
-            this.currentQuests = ko.observableArray([]);
-        }
-        this._questXP = ko.observable(savedPlayer._questXP || 0);
 
         this._lastSeen = Date.now();
 
         this.effectList = Save.initializeEffects(savedPlayer.effectList || {});
         this.effectTimer = Save.initializeEffectTimer(savedPlayer.effectTimer || {});
         this.highestRegion = ko.observable(savedPlayer.highestRegion || 0);
-
-        this.tutorialProgress = ko.observable(savedPlayer.tutorialProgress || 0);
-        this.tutorialState = savedPlayer.tutorialState;
-        this.tutorialComplete = ko.observable(!!savedPlayer.tutorialComplete);
 
     }
 
@@ -107,18 +79,10 @@ class Player {
     public clickAttackObservable: KnockoutComputed<number>;
     public pokemonAttackObservable: KnockoutComputed<number>;
 
-    public completedQuestList: Array<KnockoutObservable<boolean>>;
-    public questRefreshes: number;
-    public _questXP: KnockoutObservable<number>;
     public _lastSeen: number;
-    public currentQuests: KnockoutObservableArray<any>;
 
     public effectList: { [name: string]: KnockoutObservable<number> } = {};
     public effectTimer: { [name: string]: KnockoutObservable<string> } = {};
-
-    public tutorialProgress: KnockoutObservable<number>;
-    public tutorialState: any;
-    public tutorialComplete: KnockoutObservable<boolean>;
 
     private highestRegion: KnockoutObservable<GameConstants.Region>;
 
@@ -221,25 +185,6 @@ class Player {
         }
     }
 
-    get questLevel(): number {
-        return QuestHelper.xpToLevel(player.questXP);
-    }
-
-    public percentToNextQuestLevel(): number {
-        const current = this.questLevel;
-        const requiredForCurrent = QuestHelper.levelToXP(current);
-        const requiredForNext = QuestHelper.levelToXP(current + 1);
-        return 100 * (this.questXP - requiredForCurrent) / (requiredForNext - requiredForCurrent);
-    }
-
-    get questXP(): number {
-        return this._questXP();
-    }
-
-    set questXP(value: number) {
-        this._questXP(value);
-    }
-
     public toJSON() {
         const keep = [
             '_route',
@@ -252,19 +197,12 @@ class Player {
             // TODO(@Isha) remove.
             '_mineLayersCleared',
             'achievementsCompleted',
-            'completedQuestList',
-            'questRefreshes',
-            '_questXP',
             '_lastSeen',
-            'currentQuests',
             'gymDefeats',
             'achievementsCompleted',
             'effectList',
             'effectTimer',
             'highestRegion',
-            'tutorialProgress',
-            'tutorialState',
-            'tutorialComplete',
         ];
         const plainJS = ko.toJS(this);
         return Save.filter(plainJS, keep);

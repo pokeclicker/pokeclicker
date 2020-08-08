@@ -25,6 +25,7 @@ class App {
                 new LogBook(),
                 new RedeemableCodes(),
                 new Statistics(),
+                new Quests(),
                 new SpecialEvents()
             );
 
