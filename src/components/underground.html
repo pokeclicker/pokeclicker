@@ -124,9 +124,16 @@ style="cursor:default" tabindex="-1">
                                     </td>
                                     <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
                                     <td class='vertical-middle'>
-                                        <button class='btn btn-success btn-block' data-bind='click: function(){DailyDeal.use($index())}, css: { disabled: !DailyDeal.canUse($index()) }'>
-                                            Trade
-                                        </button>
+                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){DailyDeal.use($index(), tradeAmount())}, css: { disabled: !DailyDeal.canUse($index()) }'>
+                                                Trade
+                                            </button>
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !DailyDeal.canUse($index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </button>
+                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
+                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
+                                            </div>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
@@ -170,11 +177,21 @@ style="cursor:default" tabindex="-1">
             <td class='vertical-middle' data-bind='text: value + " " + UndergroundItem.getFullResourceName(valueType, value)'></td>
             <!-- /ko -->
             <td class='vertical-middle'>
-                <button class='btn btn-success btn-block'
-                        data-bind='click: function(){ Underground.sellMineItem(id) },
-                                css: { disabled: amount() <= 0 || (valueType === "Mine Egg" && !App.game.breeding.hasFreeEggSlot()) },
-                                text: valueType === "Mine Egg" ? "Breed" : "Sell"'>
-                </button>
+                <div class="btn-group btn-block" data-bind="let: { sellAmount: ko.observable(1) }">
+                    <button class='btn btn-success btn-block'
+                            data-bind="attr: { 'data-itemid': id },
+                                    css: { disabled: amount() <= 0 || (valueType === 'Mine Egg' && !App.game.breeding.hasFreeEggSlot()) },
+                                    text: valueType === 'Mine Egg' ? 'Breed' : 'Sell',
+                                    click: function(){Underground.sellMineItem($element.dataset.itemid, sellAmount() || 1)}">
+                    </button>
+                    <!-- ko if: valueType !== 'Mine Egg' -->
+                    <button type="button" data-bind="text: sellAmount() + '&nbsp;'" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    </button>
+                    <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
+                        <button class="dropdown-item" type="button" data-bind="click: function(){sellAmount($data)}, text: $data"></button>
+                    </div>
+                    <!-- /ko -->
+                </div>
             </td>
         </tr>
     </script>

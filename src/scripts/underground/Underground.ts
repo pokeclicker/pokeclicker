@@ -132,15 +132,19 @@ class Underground {
         Notifier.notify({ message: `You restored ${gain} mining energy!`, type: GameConstants.NotificationOption.success });
     }
 
-    public static sellMineItem(id: number) {
+    public static sellMineItem(id: number, amount = 1) {
         for (let i = 0; i < player.mineInventory.length; i++) {
             const item = player.mineInventory[i];
             if (item.id == id) {
-                if (item.amount() > 0) {
-                    const success = Underground.gainProfit(item);
+                if (item.valueType == 'Mine Egg') {
+                    amount = 1;
+                }
+                const curAmt = item.amount();
+                if (curAmt > 0) {
+                    const sellAmt = Math.min(curAmt, amount);
+                    const success = Underground.gainProfit(item, sellAmt);
                     if (success) {
-                        const amt = item.amount();
-                        player.mineInventory[i].amount(amt - 1);
+                        player.mineInventory[i].amount(curAmt - sellAmt);
                     }
                     return;
                 }
@@ -148,11 +152,11 @@ class Underground {
         }
     }
 
-    private static gainProfit(item: UndergroundItem): boolean {
+    private static gainProfit(item: UndergroundItem, amount: number): boolean {
         let success = true;
         switch (item.valueType) {
             case 'Diamond':
-                App.game.wallet.gainDiamonds(item.value);
+                App.game.wallet.gainDiamonds(item.value * amount);
                 break;
             case 'Mine Egg':
                 if (!App.game.breeding.hasFreeEggSlot()) {
@@ -163,7 +167,7 @@ class Underground {
             default:
                 const type = item.valueType.charAt(0).toUpperCase() + item.valueType.slice(1); //Capitalizes string
                 const typeNum = PokemonType[type];
-                App.game.shards.gainShards(GameConstants.PLATE_VALUE, typeNum);
+                App.game.shards.gainShards(GameConstants.PLATE_VALUE * amount, typeNum);
         }
         return success;
     }

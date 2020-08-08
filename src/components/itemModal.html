@@ -48,29 +48,12 @@
                         </div>
 
 
-                        <div class="row justify-content-center">
-                            <div class="btn-group">
-                                <button class="btn btn-secondary amount-button list-group-item-action"
-                                        data-bind="click: function() {ItemHandler.amountSelected(1)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1}">
-                                    1
-                                </button>
-                                <button class="btn btn-secondary amount-button list-group-item-action"
-                                        data-bind="click: function() {ItemHandler.amountSelected(10)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 10}">
-                                    10
-                                </button>
-                                <button class="btn btn-secondary amount-button list-group-item-action"
-                                        data-bind="click: function() {ItemHandler.amountSelected(100)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 100}">
-                                    100
-                                </button>
-                                <button class="btn btn-secondary amount-button list-group-item-action"
-                                        data-bind="click: function() {ItemHandler.amountSelected(1000)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === 1000}">
-                                    1000
-                                </button>
-                                <button class="btn btn-secondary amount-button list-group-item-action"
-                                        data-bind="click: function() {ItemHandler.amountSelected(Infinity)}, css:{ 'pokemon-selected': ItemHandler.amountSelected() === Infinity}">
-                                    Maximum
-                                </button>
-                            </div>
+                        <div class="row justify-content-center"
+                             data-bind="template: { name:'multiOptionTemplate',
+                                                    data: { observable: ItemHandler.amountSelected,
+                                                            optionValues: [1,10,100,1000,Infinity]
+                                                          }
+                                                  }">
                         </div>
                         <p><i>Stops using evolution stones once a shiny is encountered</i></p>
                         <div class="row no-gutters justify-content-sm-center">

@@ -55,7 +55,7 @@ class DailyDeal {
         return false;
     }
 
-    public static canUse(i): boolean {
+    public static canUse(i: number): boolean {
         const deal = DailyDeal.list.peek()[i];
         const index = player.mineInventoryIndex(deal.item1.id);
         if (index > -1) {
@@ -65,13 +65,15 @@ class DailyDeal {
         }
     }
 
-    public static use(i) {
+    public static use(i: number, tradeTimes = 1) {
         const deal = DailyDeal.list.peek()[i];
         const item1Index = player.mineInventoryIndex(deal.item1.id);
         if (DailyDeal.canUse(i)) {
             const amt = player.mineInventory[item1Index].amount();
-            player.mineInventory[item1Index].amount(amt - deal.amount1);
-            Underground.gainMineItem(deal.item2.id, deal.amount2);
+            const maxTrades = Math.floor(amt / deal.amount1);
+            tradeTimes = Math.min(tradeTimes, maxTrades);
+            player.mineInventory[item1Index].amount(amt - (deal.amount1 * tradeTimes));
+            Underground.gainMineItem(deal.item2.id, deal.amount2 * tradeTimes);
             //player._statistics.dailyDealsUsed(player._statistics.dailyDealsUsed()+1);
         }
     }
