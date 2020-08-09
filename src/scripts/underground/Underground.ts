@@ -237,4 +237,5 @@ namespace Underground {
 
     export const HAMMER_ENERGY = 3;
     export const CHISEL_ENERGY = 1;
+    export const PROSPECT_ENERGY = 15;
 }
