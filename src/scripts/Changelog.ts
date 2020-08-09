@@ -31,13 +31,17 @@ class Changelog {
 const changelogItems = [
     // v0.4.18
     new Changelog(changelogType.UPDATE, 'v0.4.18'),
+    new Changelog(changelogType.NEW, 'Added Prospect ability to the Underground to help see which types items are in the current layer'),
+    new Changelog(changelogType.NEW, 'Added Bomb ability to the Underground which will mine random tiles for you'),
+    new Changelog(changelogType.NEW, 'Added ability to Skip layers in the Underground'),
     new Changelog(changelogType.NEW, 'Added ability to sell/trade multiple items at once in the Underground'),
     new Changelog(changelogType.NEW, 'Added volume control for notification sounds'),
     new Changelog(changelogType.NEW, 'Some Pokémon now have a chance to drop rare items upon defeat'),
     new Changelog(changelogType.NEW, 'Added Pokédex filter for Pokémon that drop rare items'),
+    new Changelog(changelogType.NEW, 'Added Deoxys quest line'),
+    new Changelog(changelogType.CHANGE, 'Deoxys no longer roaming'),
     new Changelog(changelogType.CHANGE, 'Separate Day Care modal into individual tabs for Pokémon, Eggs and Fossils'),
     new Changelog(changelogType.CHANGE, 'Update modal displays'),
-    new Changelog(changelogType.CHANGE, 'Deoxys no longer roaming'),
     new Changelog(changelogType.FIXED, 'Event Pokémon no longer displayed in Pokédex'),
     new Changelog(changelogType.FIXED, 'Reduce memory usage in Underground'),
 
