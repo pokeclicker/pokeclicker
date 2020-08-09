@@ -30,7 +30,7 @@ class Changelog {
  */
 const changelogItems = [
     // v0.4.18
-    new Changelog(changelogType.UPDATE, 'v0.4.18'),
+    new Changelog(changelogType.UPDATE, 'v0.4.18 - Underground'),
     new Changelog(changelogType.NEW, 'Added Prospect ability to the Underground to see which types of items are in the current layer'),
     new Changelog(changelogType.NEW, 'Added Bomb ability to the Underground which will mine random tiles for you'),
     new Changelog(changelogType.NEW, 'Added ability to Skip layers in the Underground'),
