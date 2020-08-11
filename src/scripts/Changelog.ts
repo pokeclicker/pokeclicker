@@ -29,6 +29,11 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.19
+    new Changelog(changelogType.UPDATE, 'v0.4.19'),
+    new Changelog(changelogType.NEW, 'Filters added to the Day Care'),
+    new Changelog(changelogType.NEW, 'Achievements available for all regions'),
+
     // v0.4.18
     new Changelog(changelogType.UPDATE, 'v0.4.18 - Underground'),
     new Changelog(changelogType.NEW, 'Added Prospect ability to the Underground to see which types of items are in the current layer'),
