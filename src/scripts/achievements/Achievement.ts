@@ -1,17 +1,12 @@
 class Achievement {
-    public name: string;
-    public description: string;
-    public property: Requirement;
-    public unlocked: boolean;
-    public bonus: number;
-
-    constructor(name: string, description: string, property: Requirement, bonus: number, unlocked = false) {
-        this.name = name;
-        this.description = description;
-        this.property = property;
-        this.bonus = bonus;
-        this.unlocked = unlocked;
-    }
+    constructor(
+        public name: string,
+        public description: string,
+        public property: Requirement,
+        public bonus: number,
+        public region: GameConstants.Region,
+        public unlocked = false
+    ) {}
 
     public check() {
         if (this.isCompleted()) {
@@ -34,7 +29,7 @@ class Achievement {
     }
 
     public getBonus() {
-        const max = AchievementHandler.calculateMaxBonus();
+        const max = AchievementHandler.maxBonus()[this.region] ;
         return (this.bonus / max * 100).toFixed(2);
     }
 }

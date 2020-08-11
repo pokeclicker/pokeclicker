@@ -4,7 +4,7 @@ class AchievementHandler {
 
     public static achievementList: Achievement[] = [];
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
-    private static maxBonus: number;
+    public static maxBonus: KnockoutObservableArray<number> = ko.observableArray([]);
 
     public static navigateRight() {
         if (AchievementHandler.navigateIndex() < AchievementHandler.getNumberOfTabs()) {
@@ -19,11 +19,12 @@ class AchievementHandler {
     }
 
     public static getNumberOfTabs() {
-        return Math.floor(AchievementHandler.achievementList.length / 10);
+        return Math.floor(AchievementHandler.achievementList.filter(a => a.region <= player.highestRegion()).length / 10);
     }
 
     public static getAchievementListWithIndex(index: number) {
-        return AchievementHandler.achievementList.slice(index, index + 10);
+        index *= 10;
+        return AchievementHandler.achievementList.filter(a => a.region <= player.highestRegion()).slice(index, index + 10);
     }
 
     public static checkAchievements() {
@@ -34,31 +35,34 @@ class AchievementHandler {
         }
     }
 
-    public static addAchievement(name: string, description: string, property: Requirement, bonus: number) {
+    public static addAchievement(name: string, description: string, property: Requirement, bonus: number, region = GameConstants.Region.none) {
         const unlocked: boolean = player.achievementsCompleted[name];
-        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, unlocked));
+        AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked));
     }
 
     public static calculateMaxBonus() {
-        let sum = 0;
-        for (let i = 0; i < AchievementHandler.achievementList.length; i++) {
-            sum += AchievementHandler.achievementList[i].bonus;
-        }
-        return sum;
+        GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
+            AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region).reduce((sum, a) => sum + a.bonus, 0);
+        });
     }
 
     public static bonusUnlocked(): number {
         let sum = 0;
-        for (const achievement of AchievementHandler.achievementList) {
-            if (achievement.isCompleted()) {
-                sum += achievement.bonus;
-            }
-        }
+        GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
+            sum += AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonus, 0);
+        });
         return sum;
     }
 
     public static achievementBonus(): number {
-        return AchievementHandler.bonusUnlocked() / AchievementHandler.maxBonus;
+        let sum = 0;
+        GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
+            const total = AchievementHandler.achievementList.filter(a => a.region == region && a.isCompleted()).reduce((sum, a) => sum + a.bonus, 0) / AchievementHandler.maxBonus()[region];
+            if (!isNaN(total)) {
+                sum += total;
+            }
+        });
+        return sum;
     }
 
     public static getMoneyMultiplier() {
@@ -71,6 +75,9 @@ class AchievementHandler {
 
     public static initialize() {
 
+        /*
+         * GENERAL
+         */
         AchievementHandler.addAchievement('My First Hundo', 'Obtain 100 Pokédollars', new MoneyRequirement(100), 0.05);
         AchievementHandler.addAchievement('I Should Buy a PokéMart', 'Obtain 1,000 Pokédollars', new MoneyRequirement(1000), 0.10);
         AchievementHandler.addAchievement('A Small Fortune', 'Obtain 10,000 Pokédollars', new MoneyRequirement(10000), 0.15);
@@ -89,6 +96,10 @@ class AchievementHandler {
         AchievementHandler.addAchievement('An Unrelenting Force', 'Have 5,000 Attack', new AttackRequirement(5000), 0.15);
         AchievementHandler.addAchievement('FUS DOH RAH', 'Have 10,000 Attack', new AttackRequirement(10000), 0.20);
         AchievementHandler.addAchievement('Ok, I have enough attack already...', 'Have 25,000 Attack', new AttackRequirement(25000), 0.25);
+        AchievementHandler.addAchievement('Silver attack button!', 'Have 100,000 Attack', new AttackRequirement(100000), 0.30);
+        AchievementHandler.addAchievement('Pesky roamings, I need to oneshot routes for them...', 'Have 250,000 Attack', new AttackRequirement(250000), 0.35);
+        AchievementHandler.addAchievement('You pressed F12 by any chance?', 'Have 500,000 Attack', new AttackRequirement(500000), 0.40);
+        AchievementHandler.addAchievement('Left Left Right Right A B A B - Hey, 1 million!', 'Have 1,000,000 Attack', new AttackRequirement(1000000), 0.40);
 
         AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds', new DiamondRequirement(100), 0.05);
         AchievementHandler.addAchievement('Bling x10!', 'Obtain 1000 Diamonds', new DiamondRequirement(1000), 0.15);
@@ -174,29 +185,33 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Ultra Clicker', 'Click 1,000 Times', new ClickRequirement(1000, 1), 0.10);
         AchievementHandler.addAchievement('Need a new mouse yet?', 'Click 10,000 Times', new ClickRequirement(10000, 1), 0.25);
 
-        for (let i = 1; i <= GameConstants.AMOUNT_OF_ROUTES_KANTO; i++) {
 
-            AchievementHandler.addAchievement(`Route ${i} traveler`, `Defeat 100 Pokémon on route ${i}`, new RouteKillRequirement(100, i), 0.02);
-            AchievementHandler.addAchievement(`Route ${i} explorer`, `Defeat 1,000 Pokémon on route ${i}`, new RouteKillRequirement(1000, i), 0.05);
-            AchievementHandler.addAchievement(`Route ${i} conqueror`, `Defeat 10,000 Pokémon on route ${i}`, new RouteKillRequirement(10000, i), 0.10);
-        }
+        /*
+         * REGIONAL
+         */
+        GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none).forEach(region => {
+            // Routes
+            if (GameConstants.RegionRoute[region]) {
+                for (let i = GameConstants.RegionRoute[region][0]; i <= GameConstants.RegionRoute[region][1]; i++) {
+                    AchievementHandler.addAchievement(`Route ${i} traveler`, `Defeat 100 Pokémon on route ${i}`, new RouteKillRequirement(100, i), 1, region);
+                    AchievementHandler.addAchievement(`Route ${i} explorer`, `Defeat 1,000 Pokémon on route ${i}`, new RouteKillRequirement(1000, i), 2, region);
+                    AchievementHandler.addAchievement(`Route ${i} conqueror`, `Defeat 10,000 Pokémon on route ${i}`, new RouteKillRequirement(10000, i), 3, region);
+                }
+            }
+            // Gyms
+            GameConstants.RegionGyms[region]?.forEach(gym => {
+                AchievementHandler.addAchievement(`${gym} Gym regular`, 'Clear 10 times', new ClearGymRequirement(10, Statistics.getGymIndex(gym)), 1, region);
+                AchievementHandler.addAchievement(`${gym} Gym ruler`, 'Clear 100 times', new ClearGymRequirement( 100, Statistics.getGymIndex(gym)), 2, region);
+                AchievementHandler.addAchievement(`${gym} Gym owner`, 'Clear 1,000 times', new ClearGymRequirement(1000, Statistics.getGymIndex(gym)), 3, region);
+            });
+            // Dungeons
+            GameConstants.RegionDungeons[region]?.forEach(dungeon => {
+                AchievementHandler.addAchievement(`${dungeon} explorer`, 'Clear 10 times', new ClearDungeonRequirement(10, Statistics.getDungeonIndex(dungeon)), 1, region);
+                AchievementHandler.addAchievement(`${dungeon} expert`, 'Clear 100 times', new ClearDungeonRequirement(100, Statistics.getDungeonIndex(dungeon)), 2, region);
+                AchievementHandler.addAchievement(`${dungeon} hermit`, 'Clear 1,000 times', new ClearDungeonRequirement(1000, Statistics.getDungeonIndex(dungeon)), 3, region);
+            });
+        });
 
-        for (let i = 0; i < GameConstants.KantoGyms.length; i++) {
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym tourist`, 'Clear 1 time', new ClearGymRequirement( 1, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym regular`, 'Clear 10 times', new ClearGymRequirement(10, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym ruler`, 'Clear 100 times', new ClearGymRequirement( 100, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoGyms[i]} Gym owner`, 'Clear 1,000 times', new ClearGymRequirement(1000, i), 0.01);
-        }
-
-        for (let i = 0; i < GameConstants.KantoDungeons.length; i++) {
-            AchievementHandler.addAchievement(`${GameConstants.KantoDungeons[i]} visitor`, 'Clear 1 time', new ClearDungeonRequirement(1, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoDungeons[i]} explorer`, 'Clear 10 times', new ClearDungeonRequirement(10, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoDungeons[i]} expert`, 'Clear 100 times', new ClearDungeonRequirement(100, i), 0.01);
-            AchievementHandler.addAchievement(`${GameConstants.KantoDungeons[i]} hermit`, 'Clear 1,000 times', new ClearDungeonRequirement(1000, i), 0.01);
-        }
-
-
-        AchievementHandler.maxBonus = AchievementHandler.calculateMaxBonus();
-
+        AchievementHandler.calculateMaxBonus();
     }
 }

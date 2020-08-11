@@ -3,7 +3,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% more money and xp from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
+                <h5 data-bind="tooltip: { title: 'As you earn achievements, you gain up to 100% (per region) more money and xp from all sources.', trigger: 'hover', placement:'right' }">Achievements Bonus: <u class="text-primary" data-bind="text: AchievementHandler.achievementBonusPercent()"></u></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -11,7 +11,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 
             <div class="modal-body table-responsive p-0">
                 <table class="table table-hover table-striped table-sm m-0">
-                    <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.getAchievementListWithIndex(10*AchievementHandler.navigateIndex())}">
+                    <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.getAchievementListWithIndex(AchievementHandler.navigateIndex())}">
                     </tbody>
                 </table>
             </div>
