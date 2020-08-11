@@ -23,7 +23,49 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <div class="row" data-bind="foreach: PartyController.getMaxLevelPokemonList()">
+                        <div class="text-left">
+                            <div class="form-row">
+                                <div class="form-group col-md-3 col-6">
+                                    <label>Region</label>
+                                    <select class="custom-select" onchange="BreedingController.filter.region(+this.value)">
+                                        <option value="-2">All</option>
+                                        <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
+                                        <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
+                                        <!-- /ko -->
+                                        <option value="-1">None</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-6">
+                                    <label>Caught Status</label>
+                                    <select class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
+                                        <option value="0">All</option>
+                                        <option value="1">Not Shiny</option>
+                                        <option value="2">Shiny</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-6">
+                                    <label>Type</label>
+                                    <select class="custom-select" onchange="BreedingController.filter.type1(+this.value)">
+                                        <option value="-2">All</option>
+                                        <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
+                                        <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                        <!-- /ko -->
+                                        <option value="-1">None</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3 col-6">
+                                    <label>Type</label>
+                                    <select class="custom-select" onchange="BreedingController.filter.type2(+this.value)">
+                                        <option value="-2">All</option>
+                                        <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
+                                        <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                        <!-- /ko -->
+                                        <option value="-1">None</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" data-bind="foreach: BreedingController.breedableList">
                             <button class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
                             data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)},
                             click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}">

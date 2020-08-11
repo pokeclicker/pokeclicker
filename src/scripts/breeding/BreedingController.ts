@@ -1,3 +1,5 @@
+///<reference path="../party/CaughtStatus.ts"/>
+
 class BreedingController {
     public static spotTypes = [
         `<g class="egg-spot">
@@ -111,5 +113,57 @@ class BreedingController {
         SeededRand.seed(seed);
         SeededRand.seed(SeededRand.intBetween(0, 1000));
         return SeededRand.fromArray(this.spotTypes);
+    }
+
+    public static filter = {
+        shinyStatus: ko.observable(CaughtStatus.NotCaught).extend({ numeric: 0 }),
+        // All = -2
+        type1: ko.observable(-2).extend({ numeric: 0 }),
+        type2: ko.observable(-2).extend({ numeric: 0 }),
+        region: ko.observable(-2).extend({ numeric: 0 }),
+    }
+
+    public static breedableList = ko.pureComputed(() => {
+        return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
+            // Only breedable Pokemon
+            if (partyPokemon.breeding || partyPokemon.level < 100) {
+                return false;
+            }
+
+            // Check based on shiny status
+            if (BreedingController.filter.shinyStatus()) {
+                if (PartyController.getCaughtStatus(partyPokemon.id) !== BreedingController.filter.shinyStatus()) {
+                    return false;
+                }
+            }
+
+            // Check based on native region
+            if (BreedingController.filter.region() > -2) {
+                if (PokemonHelper.calcNativeRegion(partyPokemon.name) !== BreedingController.filter.region()) {
+                    return false;
+                }
+            }
+
+            // Check if either of the types match
+            const type1: (PokemonType | null) = BreedingController.filter.type1() > -2 ? BreedingController.filter.type1() : null;
+            const type2: (PokemonType | null) = BreedingController.filter.type2() > -2 ? BreedingController.filter.type2() : null;
+            if (type1 !== null || type2 !== null) {
+                const { type: types } = pokemonMap[partyPokemon.name];
+                if ([type1, type2].includes(PokemonType.None)) {
+                    const type = (type1 == PokemonType.None) ? type2 : type1;
+                    if (!BreedingController.isPureType(partyPokemon, type)) {
+                        return false;
+                    }
+                } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
+                    return false;
+                }
+            }
+            return true;
+        });
+    });
+
+    private static isPureType(pokemon: PartyPokemon, type: (PokemonType | null)): boolean {
+        const pokemonData = pokemonMap[pokemon.name];
+        return ((type == null || pokemonData.type[0] === type) && (pokemonData.type[1] == undefined || pokemonData.type[1] == PokemonType.None));
     }
 }
