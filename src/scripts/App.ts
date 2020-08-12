@@ -11,13 +11,14 @@ class App {
         Preload.load(App.debug).then(() => {
             console.log(`[${GameConstants.formatDate(new Date())}] %cLoading Game Data..`, 'color:#8e44ad;font-weight:900;');
             UndergroundItem.initialize();
+            player = Save.load();
             App.game = new Game(
                 new Update(),
                 new Breeding(),
                 new Pokeballs(),
                 new Wallet(),
                 new KeyItems(),
-                new BadgeCase(BadgeCase.Badge.Elite_HoennChampion),
+                new BadgeCase(),
                 new OakItems([20, 50, 100]),
                 new Party(),
                 new Shards(),

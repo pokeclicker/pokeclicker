@@ -1,29 +1,18 @@
 class BadgeCase implements Feature {
     name = 'Badge Case';
     saveKey = 'badgeCase';
-
-    badgeList: ArrayOfObservables<boolean>;
-    badgeAmount: number;
     defaults: Record<string, any> = {};
 
-    constructor(highestBadge) {
-        this.badgeAmount = highestBadge + 1;
-        this.badgeList = this.createDefaultBadgeList();
-    }
+    badgeList: ArrayOfObservables<boolean> = new ArrayOfObservables(new Array(GameConstants.RegionGyms.flat().length).fill(false));
+    highestAvailableBadge: KnockoutComputed<number> = ko.pureComputed(() => {
+        const region = player.highestRegion();
+        return gymList[GameConstants.RegionGyms[region][GameConstants.RegionGyms[region].length - 1]].badgeReward;
+    });
 
-    private createDefaultBadgeList(): ArrayOfObservables<boolean> {
-        const list = new Array(this.badgeAmount).fill(false);
-        return new ArrayOfObservables(list);
-    }
+    constructor() {}
 
     badgeCount() {
-        let count = 0;
-        for (let i = 0; i < this.badgeList.length; i++) {
-            if (this.badgeList[i]) {
-                count++;
-            }
-        }
-        return count;
+        return this.badgeList.reduce((a, b) => (+a) + (+b), 0);
     }
 
     gainBadge(badge: BadgeCase.Badge) {
@@ -50,15 +39,15 @@ class BadgeCase implements Feature {
             return;
         }
 
-        for (let i = 0; i < this.badgeList.length; i++) {
-            this.badgeList[i] = json[i];
-        }
+        json.forEach((hasBadge, index) => {
+            this.badgeList[index] = hasBadge;
+        });
     }
 
     toJSON(): Record<string, any> {
-        return this.badgeList.map(badge => {
-            return badge;
-        });
+        let shouldReturn = false;
+        // We only want to save upto the highest badge we have obtained, everything else is assumed to be false
+        return [...this.badgeList].reverse().filter(i => shouldReturn || i && (shouldReturn = i)).reverse();
     }
 
     update(delta: number): void {

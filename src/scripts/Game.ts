@@ -62,8 +62,6 @@ class Game {
 
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
-        player = Save.load();
-
         AchievementHandler.initialize();
     }
 
