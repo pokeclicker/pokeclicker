@@ -1,6 +1,11 @@
 class Notifier {
     public static notify({ message, type = GameConstants.NotificationOption.primary, title = '', timeout = 3000, time = 'just now', sound = null, setting = null }: { message: string; type?: GameConstants.NotificationOption; title?: string; timeout?: number; time?: string, sound?: Sound, setting?: BooleanSetting }) {
         $(document).ready(function() {
+            // If we have sounds enabled for this, play it now
+            if (sound) {
+                sound.play();
+            }
+            
             // Check if this type of notification is disabled
             if (setting && !Settings.getSetting(setting.name).value) {
                 return;
@@ -23,11 +28,6 @@ class Notifier {
 
             // Show the notification
             $('.toast').toast('show');
-
-            // If we have sounds enabled for this, play it now
-            if (sound) {
-                sound.play();
-            }
 
             // Once the notification is shown, hide it after specified timeout
             $(`#${toastID}`).on('shown.bs.toast', (el) => {
