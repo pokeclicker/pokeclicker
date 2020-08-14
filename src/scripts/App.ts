@@ -9,6 +9,8 @@ class App {
         }
 
         Preload.load(App.debug).then(() => {
+            ko.options.deferUpdates = true;
+            
             console.log(`[${GameConstants.formatDate(new Date())}] %cLoading Game Data..`, 'color:#8e44ad;font-weight:900;');
             UndergroundItem.initialize();
             player = Save.load();
@@ -41,7 +43,6 @@ class App {
 
             App.game.initialize();
             ko.applyBindings(App.game);
-            ko.options.deferUpdates = true;
 
             GameController.applyRouteBindings();
             Preload.hideSplashScreen();

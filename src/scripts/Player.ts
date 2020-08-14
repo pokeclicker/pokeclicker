@@ -76,9 +76,6 @@ class Player {
     // TODO(@Isha) move to underground classes.
     public mineInventory: ObservableArrayProxy<any>;
 
-    public clickAttackObservable: KnockoutComputed<number>;
-    public pokemonAttackObservable: KnockoutComputed<number>;
-
     public _lastSeen: number;
 
     public effectList: { [name: string]: KnockoutObservable<number> } = {};

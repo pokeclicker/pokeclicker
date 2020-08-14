@@ -120,11 +120,9 @@ class Party implements Feature {
         return Math.round(attack);
     }
 
-    public pokemonAttackObservable(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None): KnockoutComputed<number> {
-        return ko.pureComputed(() => {
-            return App.game.party.calculatePokemonAttack(type1, type2);
-        }).extend({rateLimit: 1000});
-    }
+    public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {
+        return App.game.party.calculatePokemonAttack();
+    }).extend({rateLimit: 1000});
 
     public getPokemon(id: number) {
         for (let i = 0; i < this.caughtPokemon.length; i++) {

@@ -16436,6 +16436,7 @@ pokemonList.forEach(p => {
     if (p.baby) {
         p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon);
     }
+    p.nativeRegion = p.nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= p.id);
 });
 
 const pokemonMap: any = new Proxy(pokemonList, {
