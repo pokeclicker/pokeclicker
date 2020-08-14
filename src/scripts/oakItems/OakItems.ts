@@ -25,7 +25,7 @@ class OakItems implements Feature {
             new OakItem(OakItems.OakItem.Sprayduck, 'Sprayduck', [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, false, 60, 'Makes your berries grow faster', 3),
             new OakItem(OakItems.OakItem.Shiny_Charm, 'Shiny Charm', [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, true, 70, 'Encounter shinies more often', 150),
             new OakItem(OakItems.OakItem.Blaze_Cassette, 'Blaze Cassette', [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, false, 80, 'Hatch eggs faster', 10),
-            new OakItem(OakItems.OakItem.Cell_Battery, 'Cell Battery', [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, false, 90, 'More passive mining energy regen', 20),
+            new OakItem(OakItems.OakItem.Cell_Battery, 'Cell Battery', [1.5, 1.6, 1.7, 1.8, 1.9, 2], 1, false, 90, 'More passive mining energy regen', 20),
         ];
     }
 
