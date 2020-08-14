@@ -33,6 +33,8 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.4.19'),
     new Changelog(changelogType.NEW, 'Filters added to the Day Care'),
     new Changelog(changelogType.NEW, 'Achievements available for all regions'),
+    new Changelog(changelogType.CHANGE, 'Buffed bonus for the Cell Battery'),
+    new Changelog(changelogType.CHANGE, 'Sounds will now play if enabled even if the notification is disabled'),
 
     // v0.4.18
     new Changelog(changelogType.UPDATE, 'v0.4.18 - Underground'),
