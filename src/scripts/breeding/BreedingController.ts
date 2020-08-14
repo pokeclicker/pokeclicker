@@ -160,7 +160,7 @@ class BreedingController {
             }
             return true;
         });
-    });
+    }, {rateLimit: 1000});
 
     private static isPureType(pokemon: PartyPokemon, type: (PokemonType | null)): boolean {
         const pokemonData = pokemonMap[pokemon.name];

@@ -24,9 +24,9 @@ class Achievement {
         return this.isCompleted() ? '100.0' : this.property.getProgressPercentage();
     }
 
-    public isCompleted() {
+    public isCompleted: KnockoutComputed<boolean> = ko.pureComputed(() => {
         return this.unlocked || this.property.isCompleted();
-    }
+    })
 
     public getBonus() {
         const max = AchievementHandler.maxBonus()[this.region] ;
