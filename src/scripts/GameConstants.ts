@@ -33,6 +33,7 @@ namespace GameConstants {
         649, // 156 - Unova
         721, // 72 - Kalos
         809, // 88 - Alola
+        893, // 84 - Galar
     ];
 
     export const ITEM_USE_TIME = 30;
