@@ -30,7 +30,13 @@ class GymRunner {
             }, GameConstants.GYM_COUNTDOWN);
 
         } else {
-            Notifier.notify({ message: `${gym.leaderName} does not deem you a worthy opponent yet...<br>Perhaps you can convince them with more gym badges`, type: GameConstants.NotificationOption.danger });
+            const reqsList = [];
+            gym.requirements?.forEach(requirement => {
+                if (!requirement.isCompleted()) {
+                    reqsList.push(requirement.hint());
+                }
+            });
+            Notifier.notify({ message: `You don't have access to ${gym.leaderName}s Gym yet.<br/>${reqsList.join('<br/>')}`, type: GameConstants.NotificationOption.warning });
         }
     }
 

@@ -8,4 +8,8 @@ class UndergroundItemsFoundRequirement extends Requirement {
     public getProgress() {
         return Math.min(App.game.statistics.undergroundItemsFound(), this.requiredValue);
     }
+
+    public hint(): string {
+        return `${this.requiredValue} items need to be found in the Underground.`;
+    }
 }

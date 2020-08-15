@@ -3,7 +3,7 @@ class SpecialEvents implements Feature {
     saveKey = 'events';
     defaults: Record<string, any>;
 
-    static events = [];
+    static events: SpecialEvent[] = [];
 
     static newEvent(title: string, description: string, startTime: Date, startFunction: EmptyCallback, endTime: Date, endFunction: EmptyCallback) {
         // Check if the event exist before adding it again
@@ -41,11 +41,11 @@ SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
         SeededRand.seed(new Date().getFullYear());
-        Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Flying Pikachu') : null);
+        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => SeededRand.boolean() ? route.pokemon.land.push('Flying Pikachu') : null);
     },
     // End
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
-        Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land = pokemonsPerRoute[GameConstants.Region.kanto][route].land.filter(p => p != 'Flying Pikachu'));
+        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => p != 'Flying Pikachu'));
     }
 );
 // TODO: remove once event finishes
@@ -79,25 +79,25 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited tim
     // Start
     new Date(new Date().getFullYear(), 9, 30, 1), () => {
         SeededRand.seed(new Date().getFullYear());
-        Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => {
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Spooky Bulbasaur') : null;
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.kanto][route].land.push('Gastly') : null;
+        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
+            SeededRand.boolean() ? route.pokemon.land.push('Spooky Bulbasaur') : null;
+            SeededRand.boolean() ? route.pokemon.land.push('Gastly') : null;
         });
-        Object.keys(pokemonsPerRoute[GameConstants.Region.johto]).forEach(route => {
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.johto][route].land.push('Spooky Togepi') : null;
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.johto][route].land.push('Misdreavus') : null;
+        Routes.getRoutesByRegion(GameConstants.Region.johto).forEach(route => {
+            SeededRand.boolean() ? route.pokemon.land.push('Spooky Togepi') : null;
+            SeededRand.boolean() ? route.pokemon.land.push('Misdreavus') : null;
         });
-        Object.keys(pokemonsPerRoute[GameConstants.Region.hoenn]).forEach(route => {
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.hoenn][route].land.push('Pikachu (Gengar)') : null;
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.hoenn][route].land.push('Shuppet') : null;
-            SeededRand.boolean() ? pokemonsPerRoute[GameConstants.Region.hoenn][route].land.push('Duskull') : null;
+        Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => {
+            SeededRand.boolean() ? route.pokemon.land.push('Pikachu (Gengar)') : null;
+            SeededRand.boolean() ? route.pokemon.land.push('Shuppet') : null;
+            SeededRand.boolean() ? route.pokemon.land.push('Duskull') : null;
         });
     },
     // End
     new Date(new Date().getFullYear(), 10, 5, 23), () => {
-        Object.keys(pokemonsPerRoute[GameConstants.Region.kanto]).forEach(route => pokemonsPerRoute[GameConstants.Region.kanto][route].land = pokemonsPerRoute[GameConstants.Region.kanto][route].land.filter(p => !['Spooky Bulbasaur', 'Gastly'].includes(p)));
-        Object.keys(pokemonsPerRoute[GameConstants.Region.johto]).forEach(route => pokemonsPerRoute[GameConstants.Region.johto][route].land = pokemonsPerRoute[GameConstants.Region.johto][route].land.filter(p => !['Spooky Togepi', 'Misdreavus'].includes(p)));
-        Object.keys(pokemonsPerRoute[GameConstants.Region.hoenn]).forEach(route => pokemonsPerRoute[GameConstants.Region.hoenn][route].land = pokemonsPerRoute[GameConstants.Region.hoenn][route].land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
+        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Bulbasaur', 'Gastly'].includes(p)));
+        Routes.getRoutesByRegion(GameConstants.Region.johto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Spooky Togepi', 'Misdreavus'].includes(p)));
+        Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
     }
 );
 SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Dragonite for a limited time roaming around Kanto, Johto and Hoenn.',

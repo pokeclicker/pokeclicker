@@ -8,4 +8,8 @@ class AttackRequirement extends Requirement {
     public getProgress() {
         return Math.min(App.game.party.pokemonAttackObservable(), this.requiredValue);
     }
+
+    public hint(): string {
+        return `${this.requiredValue} Attack needed.`;
+    }
 }

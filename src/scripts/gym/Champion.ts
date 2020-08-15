@@ -1,8 +1,8 @@
 ///<reference path="Gym.ts"/>
 class Champion extends Gym {
 
-    constructor(leaderName: string, town: string, pokemons: GymPokemon[], badgeReward: BadgeCase.Badge, moneyReward: number, badgeReq: BadgeCase.Badge, rewardMessage: string) {
-        super(leaderName, town, pokemons, badgeReward, moneyReward, badgeReq, rewardMessage);
+    constructor(leaderName: string, town: string, pokemons: GymPokemon[], badgeReward: BadgeCase.Badge, moneyReward: number, rewardMessage: string, requirements: Requirement[] = []) {
+        super(leaderName, town, pokemons, badgeReward, moneyReward, rewardMessage, requirements);
     }
 
     public setPokemon(starter: GameConstants.Starter) {
@@ -24,7 +24,8 @@ class Champion extends Gym {
                 this.pokemons.push(new GymPokemon('Blastoise', 70000, 63));
                 break;
             }
-            case GameConstants.Starter.Squirtle: {
+            case GameConstants.Starter.Squirtle:
+            default: {
                 this.pokemons.push(new GymPokemon('Gyarados', 63040, 59));
                 this.pokemons.push(new GymPokemon('Arcanine', 65340, 61));
                 this.pokemons.push(new GymPokemon('Venusaur', 70000, 63));
@@ -41,6 +42,6 @@ gymList['Champion Blue'] = new Champion(
     [],
     BadgeCase.Badge.Elite_KantoChampion,
     10000,
-    BadgeCase.Badge.Elite_Lance,
-    "Why? Why did I lose? I never made any mistakes raising my Pokémon… Darn it! You're the new Pokémon League Champion! Although I don't like to admit it…"
+    'Why? Why did I lose? I never made any mistakes raising my Pokémon… Darn it! You\'re the new Pokémon League Champion! Although I don\'t like to admit it…',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Lance)]
 );

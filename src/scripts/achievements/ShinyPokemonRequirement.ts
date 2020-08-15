@@ -8,4 +8,8 @@ class ShinyPokemonRequirement extends Requirement {
     public getProgress() {
         return Math.min(App.game.party.shinyPokemon.filter(id => id > 0).length, this.requiredValue);
     }
+
+    public hint(): string {
+        return `${this.requiredValue} Shiny Pokémon need to be obtained .`;
+    }
 }

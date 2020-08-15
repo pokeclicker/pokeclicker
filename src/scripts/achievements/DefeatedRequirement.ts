@@ -8,4 +8,8 @@ class DefeatedRequirement extends Requirement {
     public getProgress() {
         return Math.min(App.game.statistics.totalPokemonDefeated(), this.requiredValue);
     }
+
+    public hint(): string {
+        return `${this.requiredValue} Pokémon need to be defeated.`;
+    }
 }

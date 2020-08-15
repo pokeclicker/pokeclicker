@@ -8,6 +8,7 @@ abstract class Requirement {
     }
 
     abstract getProgress();
+    abstract hint();
 
     public getProgressPercentage() {
         return (this.getProgress() / this.requiredValue * 100).toFixed(1);
@@ -23,5 +24,6 @@ abstract class Requirement {
                 return this.getProgress() >= this.requiredValue;
         }
     }
+
 }
 

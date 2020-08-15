@@ -8,4 +8,8 @@ class UndergroundLayersMinedRequirement extends Requirement {
     public getProgress() {
         return Math.min(App.game.statistics.undergroundLayersMined(), this.requiredValue);
     }
+
+    public hint(): string {
+        return `${this.requiredValue} layers need to be mined in the Underground.`;
+    }
 }

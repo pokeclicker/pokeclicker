@@ -8,4 +8,8 @@ class ClickRequirement extends Requirement {
     public getProgress() {
         return Math.min(App.game.statistics.clickAttacks(), this.requiredValue);
     }
+
+    public hint(): string {
+        return `${this.requiredValue} click attacks need to be completed.`;
+    }
 }

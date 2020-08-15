@@ -10,7 +10,7 @@ class GymBattle extends Battle {
      */
     public static defeatPokemon() {
         this.enemyPokemon().defeat(true);
-        App.game.breeding.progressEggsBattle(this.gym.badgeReq * 3 + 1, player.region);
+        App.game.breeding.progressEggsBattle(this.gym.badgeReward * 3 + 1, player.region);
         this.index(this.index() + 1);
 
         if (this.index() >= this.gym.pokemons.length) {

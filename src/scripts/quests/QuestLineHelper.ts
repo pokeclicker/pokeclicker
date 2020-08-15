@@ -16,37 +16,32 @@ class QuestLineHelper {
         tutorial.addQuest(captureOne);
 
         //Kill 5 on route 2
-        const routeTwo = new DefeatPokemonsQuest(2, GameConstants.Region.kanto, 5);
-        routeTwo.pointsReward = 30;
-        routeTwo.description = 'Defeat 5 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.';
+        const routeTwo = new DefeatPokemonsQuest(2, GameConstants.Region.kanto, 10);
+        routeTwo.pointsReward = 20;
+        routeTwo.description = 'Defeat 10 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.';
         tutorial.addQuest(routeTwo);
+
+        //Buy pokeballs
+        const buyPokeballs = new BuyPokeballsQuest(10, GameConstants.Pokeball.Pokeball, 50);
+        buyPokeballs.pointsReward = 50;
+        buyPokeballs.description = 'Buy 10 pokeballs. You can find these in the Viridian City Shop.';
+        tutorial.addQuest(buyPokeballs);
+
+        //Buy Dungeon ticket
+        const buyDungeonTicket = new CustomQuest(1, 10, 'Buy the Dungeon ticket from Viridian City Shop.', () => + App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
+        tutorial.addQuest(buyDungeonTicket);
+
+        //Clear Viridian Forest
+        const clearMtMoon = new DefeatDungeonQuest('Viridian Forest', 1);
+        clearMtMoon.pointsReward = 50;
+        clearMtMoon.description = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
+        tutorial.addQuest(clearMtMoon);
 
         //Defeat Pewter Gym
         const pewter = new DefeatGymQuest(GameConstants.KantoGyms[0], 1);
-        pewter.pointsReward = 40;
+        pewter.pointsReward = 50;
         pewter.description = 'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.';
         tutorial.addQuest(pewter);
-
-        //Buy pokeballs
-        const buyPokeballs = new BuyPokeballsQuest(20, GameConstants.Pokeball.Pokeball, 50);
-        buyPokeballs.pointsReward = 50;
-        buyPokeballs.description = 'Buy 20 pokeballs. You can find these in the Pewter City Shop.';
-        tutorial.addQuest(buyPokeballs);
-
-        //Kill 10 on route 3
-        const routeThree = new DefeatPokemonsQuest(3, GameConstants.Region.kanto, 10);
-        routeThree.pointsReward = 100;
-        tutorial.addQuest(routeThree);
-
-        //Buy Dungeon ticket
-        const buyDungeonTicket = new CustomQuest(1, 10, 'Buy the Dungeon ticket from Pewter City Shop.', () => + App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
-        tutorial.addQuest(buyDungeonTicket);
-
-        //Clear Mt Moon dungeon
-        const clearMtMoon = new DefeatDungeonQuest(GameConstants.KantoDungeons[2], 1);
-        clearMtMoon.pointsReward = 10;
-        clearMtMoon.description = 'Gather 75 Dungeon tokens by capturing Pokémon, then clear the Mt. Moon dungeon.';
-        tutorial.addQuest(clearMtMoon);
 
         App.game.quests.questLines().push(tutorial);
     }

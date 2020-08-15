@@ -1,5 +1,6 @@
 ///<reference path="GymPokemon.ts"/>
 ///<reference path="../pokemons/PokemonFactory.ts"/>
+///<reference path="../achievements/OneFromManyRequirement.ts"/>
 
 /**
  * Data list that contains all gymLeaders, accessible by townName.
@@ -16,13 +17,13 @@ class Gym {
         public pokemons: GymPokemon[],
         public badgeReward: BadgeCase.Badge,
         public moneyReward: number,
-        public badgeReq: BadgeCase.Badge,
         public defeatMessage: string,
+        public requirements: (OneFromManyRequirement | Requirement)[] = [],
         public rewardFunction = () => {}
     ) {}
 
     public static isUnlocked(gym: Gym): boolean {
-        return App.game.badgeCase.hasBadge(gym.badgeReq);
+        return gym.requirements.every(requirement => requirement.isCompleted());
     }
 
     public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
@@ -64,8 +65,9 @@ gymList['Pewter City'] = new Gym(
     ],
     BadgeCase.Badge.Boulder,
     250,
-    BadgeCase.Badge.None,
-    'I took you for granted, and so I lost. As proof of your victory, I confer on you this...the official Pokémon League Boulder Badge.');
+    'I took you for granted, and so I lost. As proof of your victory, I confer on you this...the official Pokémon League Boulder Badge.',
+    [new RouteKillRequirement(10, 2)]
+);
 
 gymList['Cerulean City'] = new Gym(
     'Misty',
@@ -76,8 +78,8 @@ gymList['Cerulean City'] = new Gym(
     ],
     BadgeCase.Badge.Cascade,
     500,
-    BadgeCase.Badge.Boulder,
-    "Wow! You're too much, all right! You can have the Cascade Badge to show that you beat me."
+    "Wow! You're too much, all right! You can have the Cascade Badge to show that you beat me.",
+    [new RouteKillRequirement(10, 4)]
 );
 gymList['Vermillion City'] = new Gym(
     'Lt. Surge',
@@ -89,8 +91,11 @@ gymList['Vermillion City'] = new Gym(
     ],
     BadgeCase.Badge.Thunder,
     1000,
-    BadgeCase.Badge.Cascade,
-    "Now that's a shocker! You're the real deal, kid! Fine, then, take the Thunder Badge!"
+    "Now that's a shocker! You're the real deal, kid! Fine, then, take the Thunder Badge!",
+    [
+        new RouteKillRequirement(10, 6),
+        new GymBadgeRequirement(BadgeCase.Badge.Cascade),
+    ]
 );
 gymList['Celadon City'] = new Gym(
     'Erika',
@@ -102,8 +107,8 @@ gymList['Celadon City'] = new Gym(
     ],
     BadgeCase.Badge.Rainbow,
     1500,
-    BadgeCase.Badge.Thunder,
-    'Oh! I concede defeat. You are remarkably strong. I must confer on you the Rainbow Badge.'
+    'Oh! I concede defeat. You are remarkably strong. I must confer on you the Rainbow Badge.',
+    [new RouteKillRequirement(10, 8)]
 );
 gymList['Saffron City'] = new Gym(
     'Sabrina',
@@ -116,8 +121,8 @@ gymList['Saffron City'] = new Gym(
     ],
     BadgeCase.Badge.Marsh,
     2500,
-    BadgeCase.Badge.Rainbow,
-    "This loss shocks me! But a loss is a loss. I admit I didn't work hard enough to win. You earned the Marsh Badge."
+    'This loss shocks me! But a loss is a loss. I admit I didn\'t work hard enough to win. You earned the Marsh Badge.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Rainbow)]
 );
 gymList['Fuchsia City'] = new Gym(
     'Koga',
@@ -130,8 +135,13 @@ gymList['Fuchsia City'] = new Gym(
     ],
     BadgeCase.Badge.Soul,
     3500,
-    BadgeCase.Badge.Marsh,
-    'Humph! You have proven your worth! Here! Take the Soul Badge!'
+    'Humph! You have proven your worth! Here! Take the Soul Badge!',
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, 18),
+            new RouteKillRequirement(10, 15),
+        ]),
+    ]
 );
 gymList['Cinnabar Island'] = new Gym(
     'Blaine',
@@ -144,8 +154,8 @@ gymList['Cinnabar Island'] = new Gym(
     ],
     BadgeCase.Badge.Volcano,
     5000,
-    BadgeCase.Badge.Soul,
-    'I have burned down to nothing! Not even ashes remain! You have earned the Volcano Badge.'
+    'I have burned down to nothing! Not even ashes remain! You have earned the Volcano Badge.',
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Pokemon Mansion'))]
 );
 gymList['Viridian City'] = new Gym(
     'Giovanni',
@@ -159,8 +169,12 @@ gymList['Viridian City'] = new Gym(
     ],
     BadgeCase.Badge.Earth,
     6000,
-    BadgeCase.Badge.Volcano,
-    'Ha! That was a truly intense fight. You have won! As proof, here is the Earth Badge!'
+    'Ha! That was a truly intense fight. You have won! As proof, here is the Earth Badge!',
+    [
+        new GymBadgeRequirement(BadgeCase.Badge.Volcano),
+        new GymBadgeRequirement(BadgeCase.Badge.Marsh),
+        new GymBadgeRequirement(BadgeCase.Badge.Thunder),
+    ]
 );
 
 // Kanto Elite 4
@@ -176,8 +190,8 @@ gymList['Elite Lorelei'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Lorelei,
     7500,
-    BadgeCase.Badge.Earth,
-    "...Things shouldn't be this way!"
+    '...Things shouldn\'t be this way!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Earth)]
 );
 gymList['Elite Bruno'] = new Gym(
     'Bruno',
@@ -191,8 +205,8 @@ gymList['Elite Bruno'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Bruno,
     7500,
-    BadgeCase.Badge.Elite_Lorelei,
-    'Why? How could I lose?'
+    'Why? How could I lose?',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Lorelei)]
 );
 gymList['Elite Agatha'] = new Gym(
     'Agatha',
@@ -206,8 +220,8 @@ gymList['Elite Agatha'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Agatha,
     7500,
-    BadgeCase.Badge.Elite_Bruno,
-    "Oh, my! You're something special, child!"
+    'Oh, my! You\'re something special, child!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Bruno)]
 );
 gymList['Elite Lance'] = new Gym(
     'Lance',
@@ -221,8 +235,8 @@ gymList['Elite Lance'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Lance,
     7500,
-    BadgeCase.Badge.Elite_Agatha,
-    'That’s it! I hate to admit it, but you are a Pokémon master!'
+    'That’s it! I hate to admit it, but you are a Pokémon master!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Agatha)]
 );
 //TODO make champion Gym
 
@@ -236,8 +250,8 @@ gymList['Violet City'] = new Gym(
     ],
     BadgeCase.Badge.Zephyr,
     250,
-    BadgeCase.Badge.Elite_Lance,
-    "...For pity's sake! My dad's cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge."
+    '...For pity\'s sake! My dad\'s cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Lance)]
 );
 gymList['Azalea Town'] = new Gym(
     'Bugsy',
@@ -249,8 +263,8 @@ gymList['Azalea Town'] = new Gym(
     ],
     BadgeCase.Badge.Hive,
     500,
-    BadgeCase.Badge.Zephyr,
-    "Whoa, amazing! You're an expert on Pokémon! My research isn't complete yet. OK, you win. Take this Hive Badge."
+    'Whoa, amazing! You\'re an expert on Pokémon! My research isn\'t complete yet. OK, you win. Take this Hive Badge.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Zephyr)]
 );
 gymList['Goldenrod City'] = new Gym(
     'Whitney',
@@ -261,8 +275,8 @@ gymList['Goldenrod City'] = new Gym(
     ],
     BadgeCase.Badge.Plain,
     1000,
-    BadgeCase.Badge.Hive,
-    "...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here's the Plain Badge."
+    '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s the Plain Badge.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Hive)]
 );
 gymList['Ecruteak City'] = new Gym(
     'Morty',
@@ -275,8 +289,8 @@ gymList['Ecruteak City'] = new Gym(
     ],
     BadgeCase.Badge.Fog,
     1500,
-    BadgeCase.Badge.Plain,
-    'I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge..'
+    'I see... Your journey has taken you to far-away places. And you have witnessed much more than me. I envy you for that... Here is the Fog Badge..',
+    [new GymBadgeRequirement(BadgeCase.Badge.Plain)]
 );
 gymList['Cianwood City'] = new Gym(
     'Chuck',
@@ -287,8 +301,8 @@ gymList['Cianwood City'] = new Gym(
     ],
     BadgeCase.Badge.Storm,
     2500,
-    BadgeCase.Badge.Fog,
-    "Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I'm going to train 24 hours a day!"
+    'Here is the Storm Badge. Wahahah! I enjoyed battling you! But a loss is a loss! From now on, I\'m going to train 24 hours a day!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Fog)]
 );
 gymList['Olivine City'] = new Gym(
     'Jasmine',
@@ -300,8 +314,8 @@ gymList['Olivine City'] = new Gym(
     ],
     BadgeCase.Badge.Mineral,
     3500,
-    BadgeCase.Badge.Storm,
-    '...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge.'
+    '...You are a better Trainer than me, in both skill and kindness. In accordance with League rules, I confer upon you this Mineral Badge.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Storm)]
 );
 gymList['Mahogany Town'] = new Gym(
     'Pryce',
@@ -313,8 +327,8 @@ gymList['Mahogany Town'] = new Gym(
     ],
     BadgeCase.Badge.Glacier,
     4000,
-    BadgeCase.Badge.Mineral,
-    "I am impressed by your prowess. With your strong will, I know you will overcome all life's obstacles. You are worthy of this Glacier Badge!"
+    'I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Glacier Badge!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Mineral)]
 );
 gymList['Blackthorn City'] = new Gym(
     'Clair',
@@ -327,8 +341,8 @@ gymList['Blackthorn City'] = new Gym(
     ],
     BadgeCase.Badge.Rising,
     5000,
-    BadgeCase.Badge.Glacier,
-    'Here, this is the Rising Badge... Hurry up! Take it!'
+    'Here, this is the Rising Badge... Hurry up! Take it!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Glacier)]
 );
 
 //Johto Elite 4
@@ -344,8 +358,8 @@ gymList['Elite Will'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Will,
     7500,
-    BadgeCase.Badge.Rising,
-    "Even though I was defeated, I won't change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four."
+    'Even though I was defeated, I won\'t change my course. I will continue battling until I stand above all Trainers! Now move on and experience the true ferocity of the Elite Four.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Rising)]
 );
 gymList['Elite Koga'] = new Gym(
     'Koga2',
@@ -359,8 +373,8 @@ gymList['Elite Koga'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Koga,
     7500,
-    BadgeCase.Badge.Elite_Will,
-    'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!'
+    'I subjected you to everything I could muster. But my efforts failed. I must hone my skills. Go on to the next room, and put your abilities to the test!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Will)]
 );
 gymList['Elite Bruno2'] = new Gym(
     'Bruno2',
@@ -374,8 +388,8 @@ gymList['Elite Bruno2'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Bruno2,
     7500,
-    BadgeCase.Badge.Elite_Koga,
-    'Having lost, I have no right to say anything… Go face your next challenge!'
+    'Having lost, I have no right to say anything… Go face your next challenge!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Koga)]
 );
 gymList['Elite Karen'] = new Gym(
     'Karen',
@@ -389,8 +403,8 @@ gymList['Elite Karen'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Karen,
     7500,
-    BadgeCase.Badge.Elite_Bruno2,
-    "Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what's important. Go on — — the Champion is waiting."
+    'Strong Pokémon. Weak Pokémon. That is only the selfish perception of people. Truly skilled Trainers should try to win with the Pokémon they love best. I like your style. You understand what\'s important. Go on — — the Champion is waiting.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Bruno2)]
 );
 gymList['Champion Lance'] = new Gym(
     'Lance2',
@@ -404,8 +418,8 @@ gymList['Champion Lance'] = new Gym(
     ],
     BadgeCase.Badge.Elite_JohtoChampion,
     7500,
-    BadgeCase.Badge.Elite_Karen,
-    "…It's over. But it's an odd feeling. I’m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!"
+    '…It\'s over. But it\'s an odd feeling. I\'m not angry that I lost. In fact, I feel happy. Happy that I witnessed the rise of a great new Champion!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Karen)]
 );
 
 // Hoenn Gyms
@@ -419,8 +433,8 @@ gymList['Rustboro City'] = new Gym(
     ],
     BadgeCase.Badge.Stone,
     1000,
-    BadgeCase.Badge.Elite_JohtoChampion,
-    'So… I lost… It seems that I still have much more to learn… I understand.'
+    'So… I lost… It seems that I still have much more to learn… I understand.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_JohtoChampion)]
 );
 gymList['Dewford Town'] = new Gym(
     'Brawly',
@@ -432,8 +446,8 @@ gymList['Dewford Town'] = new Gym(
     ],
     BadgeCase.Badge.Knuckle,
     2000,
-    BadgeCase.Badge.Stone,
-    "Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you've got me. Take this Gym Badge!"
+    'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Stone)]
 );
 gymList['Mauville City'] = new Gym(
     'Wattson',
@@ -446,8 +460,8 @@ gymList['Mauville City'] = new Gym(
     ],
     BadgeCase.Badge.Dynamo,
     3000,
-    BadgeCase.Badge.Knuckle,
-    'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!'
+    'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Knuckle)]
 );
 gymList['Lavaridge Town'] = new Gym(
     'Flannery',
@@ -460,8 +474,8 @@ gymList['Lavaridge Town'] = new Gym(
     ],
     BadgeCase.Badge.Heat,
     4000,
-    BadgeCase.Badge.Dynamo,
-    "Oh... I guess I was trying too hard... I... I've only recently become a Gym Leader. I tried too hard to be someone I'm not. I have to do things my natural way. If I don't, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this."
+    'Oh... I guess I was trying too hard... I... I\'ve only recently become a Gym Leader. I tried too hard to be someone I\'m not. I have to do things my natural way. If I don\'t, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Dynamo)]
 );
 gymList['Petalburg City'] = new Gym(
     'Norman',
@@ -474,8 +488,8 @@ gymList['Petalburg City'] = new Gym(
     ],
     BadgeCase.Badge.Balance,
     5000,
-    BadgeCase.Badge.Heat,
-    "… I… I can't… I can't believe it. I lost to you? But, rules are rules! Here, take this."
+    '… I… I can\'t… I can\'t believe it. I lost to you? But, rules are rules! Here, take this.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Heat)]
 );
 gymList['Fortree City'] = new Gym(
     'Winona',
@@ -489,8 +503,8 @@ gymList['Fortree City'] = new Gym(
     ],
     BadgeCase.Badge.Feather,
     6000,
-    BadgeCase.Badge.Balance,
-    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.'
+    'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Balance)]
 );
 gymList['Mossdeep City'] = new Gym(
     'Tate & Liza',
@@ -503,8 +517,8 @@ gymList['Mossdeep City'] = new Gym(
     ],
     BadgeCase.Badge.Mind,
     8000,
-    BadgeCase.Badge.Feather,
-    "What? Our combination... Was shattered! It can't be helped. You've won... So, in recognition, take this Gym Badge."
+    'What? Our combination... Was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Feather)]
 );
 gymList['Sootopolis City'] = new Gym(
     'Juan',
@@ -518,8 +532,8 @@ gymList['Sootopolis City'] = new Gym(
     ],
     BadgeCase.Badge.Rain,
     10000,
-    BadgeCase.Badge.Mind,
-    'I realize now your authenticity and magnificence as a Pokémon Trainer. I find much joy in having met you and your Pokémon. You have proven yourself worthy of the Rain Badge. Accept it. Having that Badge assures you full obedience of all your Pokémon to every command you make.'
+    'I realize now your authenticity and magnificence as a Pokémon Trainer. I find much joy in having met you and your Pokémon. You have proven yourself worthy of the Rain Badge. Accept it. Having that Badge assures you full obedience of all your Pokémon to every command you make.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Mind)]
 );
 
 // Hoenn Elite 4
@@ -535,8 +549,8 @@ gymList['Elite Sidney'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Sidney,
     15000,
-    BadgeCase.Badge.Rain,
-    "Well, how do you like that? I lost! Eh, it was fun, so it doesn't matter."
+    'Well, how do you like that? I lost! Eh, it was fun, so it doesn\'t matter.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Rain)]
 );
 gymList['Elite Phoebe'] = new Gym(
     'Phoebe',
@@ -550,8 +564,8 @@ gymList['Elite Phoebe'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Phoebe,
     15000,
-    BadgeCase.Badge.Elite_Sidney,
-    "Oh, darn. I've gone and lost."
+    'Oh, darn. I\'ve gone and lost.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Sidney)]
 );
 gymList['Elite Glacia'] = new Gym(
     'Glacia',
@@ -565,8 +579,8 @@ gymList['Elite Glacia'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Glacia,
     15000,
-    BadgeCase.Badge.Elite_Phoebe,
-    "You and your Pokémon... How hot your spirits burn! The all-consuming heat overwhelms. It's no surprise that my icy skills failed to harm you."
+    'You and your Pokémon... How hot your spirits burn! The all-consuming heat overwhelms. It\'s no surprise that my icy skills failed to harm you.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Phoebe)]
 );
 gymList['Elite Drake'] = new Gym(
     'Drake',
@@ -580,8 +594,8 @@ gymList['Elite Drake'] = new Gym(
     ],
     BadgeCase.Badge.Elite_Drake,
     15000,
-    BadgeCase.Badge.Elite_Glacia,
-    'You deserve every credit for coming this far as a Trainer of Pokémon. You do seem to know what is needed. Yes, what a Trainer needs is a virtuous heart. Pokémon touch the good hearts of Trainers and learn good from wrong. They touch the good hearts of Trainers and grow strong. Go! Go onwards! The Champion is waiting!'
+    'You deserve every credit for coming this far as a Trainer of Pokémon. You do seem to know what is needed. Yes, what a Trainer needs is a virtuous heart. Pokémon touch the good hearts of Trainers and learn good from wrong. They touch the good hearts of Trainers and grow strong. Go! Go onwards! The Champion is waiting!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Glacia)]
 );
 gymList['Champion Wallace'] = new Gym(
     'Wallace',
@@ -596,8 +610,8 @@ gymList['Champion Wallace'] = new Gym(
     ],
     BadgeCase.Badge.Elite_HoennChampion,
     15000,
-    BadgeCase.Badge.Elite_Drake,
     'I, the Champion, fall in defeat… That was wonderful work. You were elegant, infuriatingly so. And yet it was utterly glorious! Kudos to you! You are a truly noble Pokémon Trainer!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Drake)],
     () => {
         App.game.quests.getQuestLine('Mystery of Deoxys').beginQuest();
     }

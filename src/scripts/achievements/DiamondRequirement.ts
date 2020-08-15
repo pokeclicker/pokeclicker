@@ -8,4 +8,8 @@ class DiamondRequirement extends Requirement {
     public getProgress() {
         return Math.min(App.game.statistics.totalDiamonds(), this.requiredValue);
     }
+
+    public hint(): string {
+        return `${this.requiredValue} Diamonds need to be obtained.`;
+    }
 }

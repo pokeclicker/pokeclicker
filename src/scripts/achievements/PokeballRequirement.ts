@@ -11,4 +11,8 @@ class PokeballRequirement extends Requirement {
     public getProgress() {
         return Math.min(App.game.statistics.pokeballsBought[this.pokeball](), this.requiredValue);
     }
+
+    public hint(): string {
+        return `${this.requiredValue} ${GameConstants.Pokeball[this.pokeball]} need to be obtained.`;
+    }
 }
