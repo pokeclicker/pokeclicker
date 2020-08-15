@@ -105,11 +105,9 @@ abstract class Quest {
         });
     }
 
-    get inProgress() {
-        return ko.pureComputed(() => {
-            return this.initial() !== null && !this.claimed();
-        });
-    }
+    inProgress = ko.pureComputed(() => {
+        return this.initial() !== null && !this.claimed();
+    });
 
     toJSON() {
         return {

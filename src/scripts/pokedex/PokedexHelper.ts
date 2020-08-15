@@ -19,7 +19,7 @@ class PokedexHelper {
      * @returns {boolean}
      */
     public static pokemonSeen(id: number): KnockoutComputed<boolean> {
-        return ko.pureComputed(function () {
+        return ko.pureComputed(() => {
             try {
                 return App.game.statistics.pokemonEncountered[id]() > 0 || App.game.statistics.pokemonDefeated[id]() > 0 || App.game.statistics.pokemonCaptured[id]() > 0 || App.game.party.alreadyCaughtPokemon(id);
             } catch (error) {

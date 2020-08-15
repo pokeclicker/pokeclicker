@@ -27,7 +27,7 @@ class Gym {
     }
 
     public static calculateCssClass(gym: Gym): KnockoutComputed<string> {
-        return ko.pureComputed(function () {
+        return ko.pureComputed(() => {
             if (App.game.badgeCase.hasBadge(gym.badgeReward)) {
                 return 'btn btn-success';
             }

@@ -38,11 +38,9 @@ class PartyController {
         });
     }
 
-    static getSortedList() {
-        return ko.pureComputed(function() {
-            return App.game.party._caughtPokemon.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
-        }).extend({rateLimit: 500});
-    }
+    static getSortedList = ko.pureComputed(function() {
+        return App.game.party._caughtPokemon.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
+    }).extend({ rateLimit: 500 });
 
 
     public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {

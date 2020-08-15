@@ -47,11 +47,11 @@ class EffectEngineRunner {
 
 
     public static isActive(itemName: string): KnockoutComputed<boolean> {
-        return ko.pureComputed(function () {
+        return ko.pureComputed(() => {
             if (!player) {
                 return false;
             }
             return !!player.effectList[itemName]();
-        }, this);
+        });
     }
 }

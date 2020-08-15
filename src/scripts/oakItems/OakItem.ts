@@ -69,9 +69,7 @@ class OakItem extends ExpUpgrade {
         this._isActive(bool);
     }
 
-    get tooltip() {
-        return ko.pureComputed(() => {
-            return `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}</strong><br/>Bonus: <strong>${this.calculateBonusIfActive()}${this.displayName != 'Magic Ball' ? '×' : '%'}</strong>`;
-        });
-    }
+    tooltip = ko.pureComputed(() => {
+        return `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}</strong><br/>Bonus: <strong>${this.calculateBonusIfActive()}${this.displayName != 'Magic Ball' ? '×' : '%'}</strong>`;
+    });
 }
