@@ -49,10 +49,12 @@ class QuestLine {
         });
 
         this.autoBegin = this.curQuest.subscribe((num) => {
-            if (this.curQuest() < this.totalQuests && this.curQuestObject().initial() !== null) {
-                setTimeout(() => {
-                    this.beginQuest(this.curQuest());
-                }, 2000);
+            if (this.curQuest() < this.totalQuests) {
+                if (this.curQuestObject().initial() == null) {
+                    setTimeout(() => {
+                        this.beginQuest(this.curQuest());
+                    }, 2000);
+                }
             } else {
                 this.state(QuestLineState.ended);
             }
@@ -80,8 +82,7 @@ class QuestLine {
 
     resumeAt(index: number, initial) {
         if (initial != undefined) {
-            for (let i = 0; i < index; i++) {
-                // TODO: fix quests starting at 0 again
+            for (let i = 0; i < Math.min(index, this.totalQuests); i++) {
                 this.quests()[i].autoCompleter.dispose();
                 this.quests()[i].complete();
             }
