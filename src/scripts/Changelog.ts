@@ -29,6 +29,13 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.4.20
+    new Changelog(changelogType.UPDATE, 'v0.4.20 - Battle Frontier'),
+    new Changelog(changelogType.NEW, 'Added the Battle Frontier in the Hoenn region'),
+    new Changelog(changelogType.CHANGE, 'Buffed Dungeon Token gain in higher regions'),
+    new Changelog(changelogType.CHANGE, 'Updated the order Routes, Dungeons and Gyms need to be completed in the Kanto region'),
+    new Changelog(changelogType.FIXED, 'Questline progress restored correctly'),
+
     // v0.4.19
     new Changelog(changelogType.UPDATE, 'v0.4.19'),
     new Changelog(changelogType.NEW, 'Filters added to the Day Care'),
