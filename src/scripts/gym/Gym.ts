@@ -251,7 +251,7 @@ gymList['Violet City'] = new Gym(
     BadgeCase.Badge.Zephyr,
     250,
     '...For pity\'s sake! My dad\'s cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge.',
-    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Lance)]
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Sprout Tower'))]
 );
 gymList['Azalea Town'] = new Gym(
     'Bugsy',
@@ -264,7 +264,7 @@ gymList['Azalea Town'] = new Gym(
     BadgeCase.Badge.Hive,
     500,
     'Whoa, amazing! You\'re an expert on Pokémon! My research isn\'t complete yet. OK, you win. Take this Hive Badge.',
-    [new GymBadgeRequirement(BadgeCase.Badge.Zephyr)]
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Slowpoke Well'))]
 );
 gymList['Goldenrod City'] = new Gym(
     'Whitney',
@@ -276,7 +276,7 @@ gymList['Goldenrod City'] = new Gym(
     BadgeCase.Badge.Plain,
     1000,
     '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s the Plain Badge.',
-    [new GymBadgeRequirement(BadgeCase.Badge.Hive)]
+    [new RouteKillRequirement(10, 34)]
 );
 gymList['Ecruteak City'] = new Gym(
     'Morty',
@@ -328,7 +328,7 @@ gymList['Mahogany Town'] = new Gym(
     BadgeCase.Badge.Glacier,
     4000,
     'I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Glacier Badge!',
-    [new GymBadgeRequirement(BadgeCase.Badge.Mineral)]
+    [new RouteKillRequirement(10, 43)]
 );
 gymList['Blackthorn City'] = new Gym(
     'Clair',
