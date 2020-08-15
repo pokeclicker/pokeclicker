@@ -134,7 +134,8 @@
                                      App.game.gameState === GameConstants.GameState.paused ||
                                      App.game.gameState === GameConstants.GameState.town ||
                                      App.game.gameState === GameConstants.GameState.shop ||
-                                     App.game.gameState === GameConstants.GameState.gym)">
+                                     App.game.gameState === GameConstants.GameState.gym ||
+                                     App.game.gameState == GameConstants.GameState.battleFrontier)">
                     <table width="100%">
                         <tr>
                             <td width="33.33%">
@@ -160,12 +161,12 @@
                 </div>
 
                 <!--RouteBattleView-->
-                <!--Use the base battle layout for fighting and dungeons.-->
+                <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym),
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier),
                         class: MapHelper.calculateBattleCssClass()">
-                    
+
                     <!-- Route Battles -->
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 220px; display: block;">
@@ -312,18 +313,23 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                    
+
                     <!-- Gym Battles -->
                     @import "gymView.html"
+
+                    <!-- Battle Frontier Battles -->
+                    @import "battleFrontierView.html"
 
                     <!--TownView-->
                     @import "townView.html"
                 </div>
 
 
+                <!-- Display Pokemon Attack, Click Attack damge values-->
                 <div class="card-footer p-0" data-bind="hidden: App.game.gameState === GameConstants.GameState.town">
                     <table width="100%">
                         <tr>
+                            <!-- ko ifnot: App.game.gameState === GameConstants.GameState.battleFrontier -->
                             <td width="50%">
                               <span style="display: inline;">Pokémon Attack:
                                   <span data-bind="text: App.game.party.pokemonAttackObservable().toLocaleString('en-US')"></span>
@@ -334,6 +340,14 @@
                                   <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                               </span>
                             </td>
+                            <!-- /ko -->
+                            <!-- ko if: App.game.gameState === GameConstants.GameState.battleFrontier -->
+                            <td width="100%">
+                                <span style="display: inline;">Pokémon Attack:
+                                    <span data-bind="text: App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, true).toLocaleString('en-US');"></span>
+                                </span>
+                            </td>
+                            <!-- /ko -->
                         </tr>
                     </table>
                 </div>
@@ -355,6 +369,10 @@
                 </div>
             </div>
             <!-- /ko -->
+
+            <!-- Battle Frontier Information Container  -->
+            @import "battleFrontierInfo.html"
+
             <div id="middle-sort-column">
                 <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">

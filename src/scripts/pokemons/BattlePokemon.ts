@@ -18,11 +18,12 @@ class BattlePokemon implements EnemyPokemonInterface {
      * @param shiny
      * @param [heldItem] item to gain on defeat of this pokemon
      */
+
     constructor(
         public name: string,
         public id: number,
-        public type1: PokemonType,
-        public type2: PokemonType,
+        public type1: PokemonType = PokemonType.None,
+        public type2: PokemonType = PokemonType.None,
         maxHealth: number,
         public level: number,
         public catchRate: number,

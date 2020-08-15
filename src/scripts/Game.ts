@@ -148,6 +148,14 @@ class Game {
                 DungeonRunner.tick();
                 break;
             }
+            case GameConstants.GameState.battleFrontier: {
+                BattleFrontierBattle.counter += GameConstants.TICK_TIME;
+                if (BattleFrontierBattle.counter > GameConstants.BATTLE_TICK) {
+                    BattleFrontierBattle.tick();
+                }
+                BattleFrontierRunner.tick();
+                break;
+            }
         }
 
         if (Save.counter > GameConstants.SAVE_TICK) {

@@ -94,12 +94,12 @@ class Party implements Feature {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None): number {
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
             let multiplier = 1;
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
-            if (nativeRegion != player.region && nativeRegion != GameConstants.Region.none) {
+            if (!ignoreRegionMultiplier && nativeRegion != player.region && nativeRegion != GameConstants.Region.none) {
                 // Pokemon only retain 20% of their total damage in other regions.
                 multiplier = 0.2;
             }

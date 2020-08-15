@@ -1,0 +1,44 @@
+
+<!-- ko if: App.game.gameState === GameConstants.GameState.battleFrontier -->
+<div id="battleFrontierInformation" class="card sortable-disabled border-secondary mb-3 battle-frontier no-select">
+    <div class="card-header p-0">
+        <span>Battle Frontier</span>
+    </div>
+    <!-- ko ifnot: BattleFrontierRunner.started -->
+    <div class="card-body text-center">
+        <h5>Welcome to the Battle Frontier!</h5>
+        <p>
+            Here you will be battling through many stages to earn Battle Points.<br/>
+            But be aware, if you leave early, You will not earn anything.<br/>
+            You'll get special items if you reach special milestone stages.<br/>
+            When you are ready, click Start!<br/>
+            <i>Note: there is no click damage in the Battle Frontier</i>
+        </p>
+        <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start()">Start</a>
+        <a class="btn btn-block btn-danger text-light" onclick="BattleFrontier.leave()">Leave</a>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: BattleFrontierRunner.started -->
+    <div class="card-body text-center p-0">
+        <table class="table table-hover table-striped table-bordered table-sm m-0">
+            <thead>
+                <tr>
+                    <th colspan="2">Upcoming Rewards</th>
+                </tr>
+                <tr>
+                    <th>Stage</th>
+                    <th class="text-left">Reward</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: BattleFrontierMilestones.availableMilestones().slice(0, 4)">
+                <tr>
+                    <th class="tight" data-bind="text: $data.stage"></td>
+                    <td class="text-left"><knockout data-bind="text: $data.description"></knockout> <knockout data-bind="if: $data.image"><img data-bind="attr:{ src: $data.image }" src="" width="20px" /></knockout></td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-block btn-danger text-light" onclick="BattleFrontierRunner.battleQuit()">Quit Battle</a>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

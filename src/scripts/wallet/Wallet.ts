@@ -4,7 +4,7 @@ class Wallet implements Feature {
     currencies: ArrayOfObservables<number>;
 
     defaults = {
-        currencies: Array(GameHelper.enumLength(GameConstants.Currency)).fill(0),
+        currencies: new Array(GameHelper.enumLength(GameConstants.Currency)).fill(0),
     };
 
     constructor() {
@@ -69,6 +69,16 @@ class Wallet implements Feature {
         GameHelper.incrementObservable(App.game.statistics.totalFarmPoints, points);
 
         this.addAmount(new Amount(points, Currency.farmPoint));
+    }
+    
+    public gainBattlePoints(base: number) {
+        let bPoints = base;
+
+        bPoints = Math.floor(bPoints);
+
+        GameHelper.incrementObservable(App.game.statistics.totalBattlePoints, bPoints);
+
+        this.addAmount(new Amount(bPoints, Currency.battlePoint));
     }
 
     private addAmount(amount: Amount) {
