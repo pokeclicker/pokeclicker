@@ -24,6 +24,9 @@ class Routes {
     }
 
     public static normalizedNumber(region: GameConstants.Region, route: number): number {
+        if (region == GameConstants.Region.none) {
+            return route;
+        }
         return this.regionRoutes.findIndex(routeData => routeData.region == region && routeData.number == route) + 1;
     }
 }

@@ -29,8 +29,8 @@ class BattleFrontierBattle extends Battle {
      * Award the player with exp, shards and go to the next pokemon
      */
     public static defeatPokemon() {
-        // This needs to stay as Kanto so the stage number isn't adjusted
-        App.game.breeding.progressEggsBattle(BattleFrontierRunner.stage(), GameConstants.Region.kanto);
+        // This needs to stay as none so the stage number isn't adjusted
+        App.game.breeding.progressEggsBattle(BattleFrontierRunner.stage(), GameConstants.Region.none);
         this.enemyPokemon().defeat(true);
         // Next pokemon
         GameHelper.incrementObservable(this.pokemonIndex);
@@ -52,8 +52,8 @@ class BattleFrontierBattle extends Battle {
 
     public static generateNewEnemy() {
         const enemy = pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]);
-        // This needs to stay as Kanto so the stage number isn't adjusted
-        const health = PokemonFactory.routeHealth(BattleFrontierRunner.stage() + 10, GameConstants.Region.kanto);
+        // This needs to stay as none so the stage number isn't adjusted
+        const health = PokemonFactory.routeHealth(BattleFrontierRunner.stage() + 10, GameConstants.Region.none);
         const level = Math.min(100, BattleFrontierRunner.stage());
         // Don't award money per pokemon defeated, award money at the end
         const money = 0;
