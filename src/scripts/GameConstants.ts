@@ -11,6 +11,7 @@ namespace GameConstants {
     // Ticks
     export const TICK_TIME = 100;
     export const BATTLE_TICK = 1000;
+    export const BATTLE_FRONTIER_TICK = 500;
     export const UNDERGROUND_TICK = 1000;
     export const DUNGEON_TIME = 6000;
     export const DUNGEON_TICK = 10;
