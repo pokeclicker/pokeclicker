@@ -447,7 +447,7 @@ gymList['Dewford Town'] = new Gym(
     BadgeCase.Badge.Knuckle,
     2000,
     'Whoah, wow! You made a much bigger splash than I expected! You swamped me! Okay, you\'ve got me. Take this Gym Badge!',
-    [new GymBadgeRequirement(BadgeCase.Badge.Stone)]
+    []
 );
 gymList['Mauville City'] = new Gym(
     'Wattson',
@@ -461,7 +461,7 @@ gymList['Mauville City'] = new Gym(
     BadgeCase.Badge.Dynamo,
     3000,
     'Wahahahah! Fine, I lost! You ended up giving me a thrill! Take this Badge!',
-    [new GymBadgeRequirement(BadgeCase.Badge.Knuckle)]
+    []
 );
 gymList['Lavaridge Town'] = new Gym(
     'Flannery',
@@ -475,7 +475,7 @@ gymList['Lavaridge Town'] = new Gym(
     BadgeCase.Badge.Heat,
     4000,
     'Oh... I guess I was trying too hard... I... I\'ve only recently become a Gym Leader. I tried too hard to be someone I\'m not. I have to do things my natural way. If I don\'t, my Pokémon will be confused. Thanks for teaching me that. For that, you deserve this.',
-    [new GymBadgeRequirement(BadgeCase.Badge.Dynamo)]
+    []
 );
 gymList['Petalburg City'] = new Gym(
     'Norman',
@@ -504,7 +504,7 @@ gymList['Fortree City'] = new Gym(
     BadgeCase.Badge.Feather,
     6000,
     'Never before have I seen a Trainer command Pokémon with more grace than I... In recognition of your prowess, I present to you this Gym Badge.',
-    [new GymBadgeRequirement(BadgeCase.Badge.Balance)]
+    []
 );
 gymList['Mossdeep City'] = new Gym(
     'Tate & Liza',
@@ -518,7 +518,7 @@ gymList['Mossdeep City'] = new Gym(
     BadgeCase.Badge.Mind,
     8000,
     'What? Our combination... Was shattered! It can\'t be helped. You\'ve won... So, in recognition, take this Gym Badge.',
-    [new GymBadgeRequirement(BadgeCase.Badge.Feather)]
+    []
 );
 gymList['Sootopolis City'] = new Gym(
     'Juan',
@@ -533,7 +533,7 @@ gymList['Sootopolis City'] = new Gym(
     BadgeCase.Badge.Rain,
     10000,
     'I realize now your authenticity and magnificence as a Pokémon Trainer. I find much joy in having met you and your Pokémon. You have proven yourself worthy of the Rain Badge. Accept it. Having that Badge assures you full obedience of all your Pokémon to every command you make.',
-    [new GymBadgeRequirement(BadgeCase.Badge.Mind)]
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Sky Pillar'))]
 );
 
 // Hoenn Elite 4
