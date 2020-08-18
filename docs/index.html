@@ -28,7 +28,7 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.4.19-patch2"></script>
+    <script src="scripts/script.min.js?v=0.4.20"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -44,7 +44,7 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.4.19-patch2" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.4.20" rel="stylesheet">
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
@@ -327,6 +327,9 @@
         <!-- ko if: $data.currency == GameConstants.Currency.farmPoint -->
         <img alt="Farm Points" src="assets/images/currency/farmPoint.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
+        <!-- ko if: $data.currency == GameConstants.Currency.battlePoint -->
+        <img alt="Battle Points" src="assets/images/currency/battlePoint.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
+        <!-- /ko -->
 
         <span data-bind="text: $data.reduced ? GameConstants.formatNumber($data.amount) : $data.amount.toLocaleString('en-US')">0</span>
     </span>
@@ -521,7 +524,7 @@
                 <th>Lvl</th>
             </tr>
             </thead>
-            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: PartyController.getSortedList()() }">
+            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: PartyController.getSortedList() }">
 
             </tbody>
         </table>
@@ -556,7 +559,8 @@
                                      App.game.gameState === GameConstants.GameState.paused ||
                                      App.game.gameState === GameConstants.GameState.town ||
                                      App.game.gameState === GameConstants.GameState.shop ||
-                                     App.game.gameState === GameConstants.GameState.gym)">
+                                     App.game.gameState === GameConstants.GameState.gym ||
+                                     App.game.gameState == GameConstants.GameState.battleFrontier)">
                     <table width="100%">
                         <tr>
                             <td width="33.33%">
@@ -582,12 +586,12 @@
                 </div>
 
                 <!--RouteBattleView-->
-                <!--Use the base battle layout for fighting and dungeons.-->
+                <!--Use the base battle layout for fighting, dungeons and battle frontier.-->
 
                 <div class="battle-view card-body p-0 justify-content-center no-gutters no-select"
-                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym),
+                    data-bind="if: (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.dungeon || App.game.gameState === GameConstants.GameState.paused || App.game.gameState === GameConstants.GameState.town || App.game.gameState === GameConstants.GameState.gym || App.game.gameState == GameConstants.GameState.battleFrontier),
                         class: MapHelper.calculateBattleCssClass()">
-                    
+
                     <!-- Route Battles -->
                     <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.fighting">
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 220px; display: block;">
@@ -734,7 +738,7 @@
                             <!-- /ko -->
                         </div>
                     </div>
-                    
+
                     <!-- Gym Battles -->
                     
 <div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState === GameConstants.GameState.gym">
@@ -793,6 +797,49 @@
     </div>
 </div>
 
+
+                    <!-- Battle Frontier Battles -->
+                    
+<div class="row justify-content-center no-gutters" data-bind="if: App.game.gameState == GameConstants.GameState.battleFrontier">
+    <div class="col no-gutters" data-bind="if: BattleFrontierBattle.enemyPokemon" style="height: 220px; display: block;">
+        <h2 class="pageItemTitle" style="display: block;">
+
+            <knockout class="left">
+                Stage <knockout data-bind="text: BattleFrontierRunner.stage">0</knockout>
+            </knockout>
+
+            <knockout>
+                <knockout data-bind="text: BattleFrontierBattle.enemyPokemon().name">Pokemon name</knockout>
+            </knockout>
+
+            <knockout class="right" data-bind="html: BattleFrontierRunner.pokemonLeftImages">
+            </knockout>
+
+            <div class="progress timer">
+                <div class="progress-bar bg-danger" role="progressbar"
+                        data-bind="attr:{ style: 'width:' + BattleFrontierRunner.timeLeftPercentage() + '%' },
+                        css: { 'bg-danger': BattleFrontierRunner.timeLeftSeconds() < 20, 'bg-primary': BattleFrontierRunner.timeLeftSeconds() >= 20 }"
+                        aria-valuemin="0" aria-valuemax="100">
+                        <span data-bind="text: BattleFrontierRunner.timeLeftSeconds() + 's'" style="font-size: 12px;"></span>
+                </div>
+            </div>
+
+        </h2>
+
+        <div>
+            <img class="enemy"
+                    data-bind="attr:{ src: PokemonHelper.getImage(BattleFrontierBattle.enemyPokemon(), BattleFrontierBattle.enemyPokemon().shiny) }"
+                    src=""/>
+        </div>
+        <div class="progress hitpoints" style="height: 20px;">
+            <div class="progress-bar bg-danger" role="progressbar"
+                    data-bind="attr:{ style: 'width:' + BattleFrontierBattle.enemyPokemon().healthPercentage() + '%' }"
+                    aria-valuemin="0" aria-valuemax="100">
+                    <span data-bind="text: BattleFrontierBattle.enemyPokemon().health() + ' / ' + BattleFrontierBattle.enemyPokemon().maxHealth()" style="font-size: 12px;"></span>
+            </div>
+        </div>
+    </div>
+</div>
 
                     <!--TownView-->
                     <knockout data-bind="if: App.game.gameState === GameConstants.GameState.town">
@@ -862,6 +909,11 @@
                        data-bind="visible: player.town().dungeon() && (!(player.town() instanceof DungeonTown) && player.town() instanceof Town), if: player.town().dungeon()">
                    <span data-bind="text: player.town().dungeon().name()"></span>
                </button>
+               <button class="btn btn-primary"
+                       onclick="BattleFrontier.enter()"
+                       data-bind="visible: player.town().name() == 'Battle Frontier'">
+                   Enter Battle Frontier
+               </button>
            </div>
        </div>
 
@@ -885,9 +937,11 @@
                 </div>
 
 
+                <!-- Display Pokemon Attack, Click Attack damge values-->
                 <div class="card-footer p-0" data-bind="hidden: App.game.gameState === GameConstants.GameState.town">
                     <table width="100%">
                         <tr>
+                            <!-- ko ifnot: App.game.gameState === GameConstants.GameState.battleFrontier -->
                             <td width="50%">
                               <span style="display: inline;">Pokémon Attack:
                                   <span data-bind="text: App.game.party.pokemonAttackObservable().toLocaleString('en-US')"></span>
@@ -898,6 +952,14 @@
                                   <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
                               </span>
                             </td>
+                            <!-- /ko -->
+                            <!-- ko if: App.game.gameState === GameConstants.GameState.battleFrontier -->
+                            <td width="100%">
+                                <span style="display: inline;">Pokémon Attack:
+                                    <span data-bind="text: App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, true).toLocaleString('en-US');"></span>
+                                </span>
+                            </td>
+                            <!-- /ko -->
                         </tr>
                     </table>
                 </div>
@@ -919,6 +981,53 @@
                 </div>
             </div>
             <!-- /ko -->
+
+            <!-- Battle Frontier Information Container  -->
+            
+<!-- ko if: App.game.gameState === GameConstants.GameState.battleFrontier -->
+<div id="battleFrontierInformation" class="card sortable-disabled border-secondary mb-3 battle-frontier no-select">
+    <div class="card-header p-0">
+        <span>Battle Frontier</span>
+    </div>
+    <!-- ko ifnot: BattleFrontierRunner.started -->
+    <div class="card-body text-center">
+        <h5>Welcome to the Battle Frontier!</h5>
+        <p>
+            Here you will be battling through many stages to earn Battle Points.<br/>
+            But be aware, if you leave early, You will not earn anything.<br/>
+            You'll get special items if you reach special milestone stages.<br/>
+            When you are ready, click Start!<br/>
+            <i>Note: there is no click damage in the Battle Frontier</i>
+        </p>
+        <a class="btn btn-block btn-success text-light" onclick="BattleFrontierRunner.start()">Start</a>
+        <a class="btn btn-block btn-danger text-light" onclick="BattleFrontier.leave()">Leave</a>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: BattleFrontierRunner.started -->
+    <div class="card-body text-center p-0">
+        <table class="table table-hover table-striped table-bordered table-sm m-0">
+            <thead>
+                <tr>
+                    <th colspan="2">Upcoming Rewards</th>
+                </tr>
+                <tr>
+                    <th>Stage</th>
+                    <th class="text-left">Reward</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: BattleFrontierMilestones.availableMilestones().slice(0, 4)">
+                <tr>
+                    <th class="tight" data-bind="text: $data.stage"></td>
+                    <td class="text-left"><knockout data-bind="text: $data.description"></knockout> <knockout data-bind="if: $data.image"><img data-bind="attr:{ src: $data.image }" src="" width="20px" /></knockout></td>
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-block btn-danger text-light" onclick="BattleFrontierRunner.battleQuit()">Quit Battle</a>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+
             <div id="middle-sort-column">
                 <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
@@ -2011,40 +2120,40 @@
     <!-- ROUTES -->
     <!-- ------ -->
 
-    <!--Route 26-->
+    <!--Route 27-->
     
 
 <g
 
-    data-bind="click:function(){ MapHelper.moveToRoute(26, 1); } ">
-    <rect data-route='26'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 1) }"
+    data-bind="click:function(){ MapHelper.moveToRoute(27, 1); } ">
+    <rect data-route='27'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(27, 1) }"
         height="48"
         width="304"
         x="1232" y="672">
     </rect>
 
-    <text style="font-size: 32px" x="1368" y="706">26</text>
+    <text style="font-size: 32px" x="1368" y="706">27</text>
 
 </g>
 
 
-    <!--Route 27-->
+    <!--Route 26-->
     
 
 <g
 
     transform="rotate(90 ,1488, 176)"
 
-    data-bind="click:function(){ MapHelper.moveToRoute(27, 1); } ">
-    <rect data-route='27'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(27, 1) }"
+    data-bind="click:function(){ MapHelper.moveToRoute(26, 1); } ">
+    <rect data-route='26'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(26, 1) }"
         height="48"
         width="496"
         x="1488" y="128">
     </rect>
 
-    <text style="font-size: 32px" x="1720" y="162">27</text>
+    <text style="font-size: 32px" x="1720" y="162">26</text>
 
 </g>
 
@@ -4346,6 +4455,35 @@
     data-bind="
         click:function(){MapHelper.moveToTown('Pokemon League Hoenn')},
         attr: { class: MapHelper.calculateTownCssClass('Pokemon League Hoenn') },
+        ">
+</rect>
+
+     <!--Battle Frontier-->
+     
+
+<rect class="city"
+    data-town="Battle Frontier" 
+    x="1232"
+    y="744"
+    height="72"
+    width="112"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Battle Frontier')},
+        attr: { class: MapHelper.calculateTownCssClass('Battle Frontier') },
+        ">
+</rect>
+    <!--Battle Frontier Extension-->
+    
+
+<rect class="city"
+    data-town="Battle Frontier" 
+    x="1272"
+    y="736"
+    height="8"
+    width="32"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Battle Frontier')},
+        attr: { class: MapHelper.calculateTownCssClass('Battle Frontier') },
         ">
 </rect>
 
