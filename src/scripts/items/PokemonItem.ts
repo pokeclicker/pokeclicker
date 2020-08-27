@@ -27,10 +27,15 @@ class PokemonItem extends CaughtIndicatingItem {
 
 }
 
-ItemList['Eevee']     = new PokemonItem(GameConstants.PokemonItemType.Eevee, 5000);
-ItemList['Porygon']   = new PokemonItem(GameConstants.PokemonItemType.Porygon, 2000);
-ItemList['Jynx']      = new PokemonItem(GameConstants.PokemonItemType.Jynx, 2500);
-ItemList['Mr. Mime']  = new PokemonItem(GameConstants.PokemonItemType['Mr. Mime'], 1500);
-ItemList['Lickitung'] = new PokemonItem(GameConstants.PokemonItemType.Lickitung, 1000);
-ItemList['Togepi']    = new PokemonItem(GameConstants.PokemonItemType.Togepi, 2500);
-ItemList['Beldum']    = new PokemonItem(GameConstants.PokemonItemType.Beldum, 5000);
+ItemList['Eevee']         = new PokemonItem(GameConstants.PokemonItemType.Eevee, 5000);
+ItemList['Porygon']       = new PokemonItem(GameConstants.PokemonItemType.Porygon, 2000);
+ItemList['Jynx']          = new PokemonItem(GameConstants.PokemonItemType.Jynx, 2500);
+ItemList['Mr. Mime']      = new PokemonItem(GameConstants.PokemonItemType['Mr. Mime'], 1500);
+ItemList['Lickitung']     = new PokemonItem(GameConstants.PokemonItemType.Lickitung, 1000);
+ItemList['Togepi']        = new PokemonItem(GameConstants.PokemonItemType.Togepi, 2500);
+ItemList['Beldum']        = new PokemonItem(GameConstants.PokemonItemType.Beldum, 5000);
+ItemList['Skorupi']       = new PokemonItem(GameConstants.PokemonItemType.Skorupi, 5000);
+ItemList['Combee']        = new PokemonItem(GameConstants.PokemonItemType.Combee, 5000);
+ItemList['Burmy (plant)'] = new PokemonItem(GameConstants.PokemonItemType['Burmy (plant)'], 5000);
+ItemList['Cherubi']       = new PokemonItem(GameConstants.PokemonItemType.Cherubi, 5000);
+ItemList['Spiritomb']     = new PokemonItem(GameConstants.PokemonItemType.Spiritomb, 5000);

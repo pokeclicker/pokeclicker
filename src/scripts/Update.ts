@@ -141,6 +141,21 @@ class Update implements Saveable {
             }
         }
 
+        if (this.isOlderVersion(this.saveVersion, '0.5.0')) {
+            try {
+                // Give the players Soothe Bells in place of Time stones
+                playerData._itemList = playerData._itemList || {};
+                playerData._itemList.Soothe_bell = playerData._itemList.Time_stone || 0;
+                console.debug('items', playerData._itemList);
+                delete playerData._itemList.Time_stone;
+
+                // Update player data
+                this.setPlayerData(playerData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.0 - Couldn\'t update item list data..', ಠ_ಠ);
+            }
+        }
+
         // Notify the player that the game has updated!
         if (this.saveVersion != this.version && this.saveVersion != '0.0.0') {
             const button = document.createElement('a');

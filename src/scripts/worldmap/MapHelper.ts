@@ -187,12 +187,17 @@ class MapHelper {
                     openModal();
                     return;
                 }
+            case 3:
+                if (TownList['Canalave City'].isUnlocked()) {
+                    openModal();
+                    return;
+                }
         }
         Notifier.notify({ message: 'You cannot access this dock yet', type: GameConstants.NotificationOption.warning });
     }
 
     public static ableToTravel() {
-        return player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && App.game.party.caughtPokemon.filter(p => p.id > 0).length >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
+        return player.highestRegion() < GameConstants.MAX_AVAILABLE_REGION && new Set(App.game.party.caughtPokemon.filter(p => p.id > 0).map(p => Math.floor(p.id))).size >= GameConstants.TotalPokemonsPerRegion[player.highestRegion()];
     }
 
     public static travelToNextRegion() {

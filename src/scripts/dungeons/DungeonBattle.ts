@@ -10,7 +10,7 @@ class DungeonBattle extends Battle {
             DungeonRunner.defeatedBoss(true);
         }
         this.enemyPokemon().defeat();
-        App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.itemRoute, player.region);
+        App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 

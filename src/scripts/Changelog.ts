@@ -29,6 +29,22 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.5.0 - Sinnoh
+    new Changelog(changelogType.UPDATE, 'v0.5.0 - Sinnoh'),
+    new Changelog(changelogType.NEW, 'The Sinnoh region is now available'),
+    new Changelog(changelogType.NEW, 'New evolution stones'),
+    new Changelog(changelogType.NEW, 'Dungeon based evolutions'),
+    new Changelog(changelogType.NEW, 'Time based evolutions'),
+    new Changelog(changelogType.NEW, '2 new fossils added to the Underground'),
+    new Changelog(changelogType.NEW, 'Pokemon alternate forms can now be obtained'),
+    new Changelog(changelogType.CHANGE, 'Decrease attack reduction in newer regions'),
+    new Changelog(changelogType.CHANGE, 'All Happiness/Friendship evolutions now make use of the Soothe Bell'),
+    new Changelog(changelogType.CHANGE, 'Added base exp per quest completed'),
+    new Changelog(changelogType.CHANGE, 'Updated the order Routes, Dungeons and Gyms need to be completed in the Kanto region'),
+    new Changelog(changelogType.FIXED, 'Gyms should award correct amount of Egg steps now'),
+    new Changelog(changelogType.REMOVED, 'Removed Time Stone'),
+    new Changelog(changelogType.REMOVED, 'Removed hold evolution items from the Underground'),
+
     // v0.4.20
     new Changelog(changelogType.UPDATE, 'v0.4.20 - Battle Frontier'),
     new Changelog(changelogType.NEW, 'Added the Battle Frontier in the Hoenn region'),

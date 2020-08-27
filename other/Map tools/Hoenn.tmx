@@ -2,7 +2,6 @@
 <map version="1.4" tiledversion="2020.07.21" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="19" nextobjectid="3">
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
- <tileset firstgid="9301" source="hoenn.tsx"/>
  <layer id="1" name="Water Dark" width="100" height="60" tintcolor="#c8c8c8">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXGUAACBcAQAAAQC53bsjAg==
@@ -13,7 +12,7 @@
    KLUv/WDAXAUbAOQDAABcAVwBXAFcAVwBXAEAAFwBXAFcAVwBXAFcAVwBXAFcAVwBXAFcAVwBAABcAQAAXAFcAVwBXAFcAVwBXAGB+6jRxwGxBRIgJp0FEqARiAQyAUDAEwAELAFDABIABCQBECABUIQJlFHMoeID4ZKTodfcGYE9WcgAQpzGodC3diZitiaJSVYYezCP8hTdWlbFPRbEmKUfLP78S775wGYAB5i+U7m86l8qDTS11ZH5Rgpfjzl9rdYiWrzbpbxlnOUtbTmBfjyGf9rXs8MLqLdHqDIXr60xVZfCrhJ3RYf7EJjAVxmuGUi36A3yLef7sc9EyvtYnKSpe5d/UewKvgzSW0DdcZgKQ9jtxFjb9+pssW7Vax+l/iTvxPEUDVCr+vTU/DrbwRUQafXr+XjG8OIoeelTrMGxvES+6QSxCwBhP0TqjjVX8rcET42XQ/uzVRtW9o++hmuwPyp8Xz3QBEMD5z2Ng4SvYA07LWQ83O2akZ7vosAf1tWsvxj556GJGQfPLJbl/TR5g6m/L+z2er7BypN/B3XPF4opEJfj/gEDamV4wnC/GtR3/nz0l/qyzyrUpl0ZpM2GdBhpZIQEUWahNdrT36BbeuPVHsz+iqEyPPccHeRDEP+/4Rj+s/ejpeN2xgbUJrahHnHrvQTUI5/nvA7+2Y+sIWb/2csdVR2CB3S+SWv7Qee+0OhsPHzP/nizLNiBGs6FTjEfuHH8jDn3HJ5dP0RozHZN3Zhj+namHPTxleFe9IRmYD+Gn8pShvdAiQEFrOm2HuwZ6trY3bnkHefTHAvWJu3gVP1xnsEPcDHCF/Y3xT3LtKQuuFFKyVYGZpQ0JifygE/9RWVlsjBIi3nEHbeXa9wvZXVMxGha4MYPG/O67puHDPm0mtxdMamDunmcPaMF2qOvhdRNEUJcNOQ1NER+uLCr3t2/bgGLG83v9shS581v+uT91uabgcjJnAAg8IQ+eiQQZIKPWiJUcfmIreROloxJ9mUjdjvebtpo4N2ejLQ8+2PoCkkPAxf26cvOoxyEhXu/KR92dW35PUT/Z0NNllZWofXquLRqTH0hrYb9M00VfVvd3NS23Ajt93588n+W1OxxdJTRRLKNp3ZPZFmg7Qll2jPjjXpTU4Ph1l4tVktuME8N9S3vHw==
   </data>
  </layer>
- <layer id="6" name="Water Routes" width="100" height="60" locked="1">
+ <layer id="6" name="Water Routes" width="100" height="60">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXF0GAIQCAAAGDQAABwgNFQ0AAA8NDQ4QFhcPHQ0AAB8XHg0fEA8PDQcNDw0fDUGgYK01oIITDKUK5H2or4DCfCkVKM2fWkkhdxZoTycq9ArU4GKbnDpL+DRSD1owESWLojowaBCPNl4hQVHJcXJV0IGkmgx+BaeIVePkVIlDVr2ISz1Q+Lqr1Ze7JfviT9ytkTkxUr3cHSrXddIH47b+esfCcPLP4IDTo7IGk1UqnxDWTan7UlaofMKoTjlJtYdWfQ31Nz206mtov9Ev9MUG
   </data>
@@ -53,7 +52,7 @@
    KLUv/WDAXNUQAPKFCQfQFwPJHMMdhp6Sm7limNGUnJ4kbc/HhZFj6v2KurpdRyAEiAECgNCoQNsGcIIJAATQTAASIBEACJWgxQgyjMAiaBCChCFIGAICCIyAGMWkYtirAXCXHlGnVj2JnSjDD1Bicphms/aAu5wOzlXrTnsHl4RyPYkuAinnzEzG0bgsUXe6ovOiG3ftCv1Wrpqckuu4ofFmwTmwEpxkKvmRtIRn5MSfWOKF57ahEGJ6OM9DAkDsj+PlaSbehjUddYHtXY5eE6tAlPumiXgQxD5BzN8CAuNv4QMouvQKWBy5bPoKWHLILaToUbEExl2rL5+juV6VJzCwc7Xx8kWwAnYYhuJyZfOLMOvcXSebYGNdg3SzDVNJGBfW9eA/NKCW1Uo9EodPoDl4coeA0BGOla4wZvXuvQPEAM/1yep6jmnRBHIDHq7bp6DY2TIY18vEv0IegOIfEz8LfUPEDwguCHwmrE/azymNf1z8X+nj5fiNpJr3y37LyYHfbCak6XyNDyE58D+JJL2ReZAzObjxeydiVejV4Skfrb1Pfn1gfyF0kmSAm3n8wH0cvj0GZ/m8OutxkRTwJcGpqg8ez/y87+xhh6mD8+XbnBZIXc1EEI7X8I9fyGcQ62h46Sa1mN2h2YmfaNymWxcxj/l3Vs2iiNhR7SRgKfyjoYWSVw293R4tsrdV7g1HPqJTQ3eajCC8lB26T4Y6/zitmQI=
   </data>
  </layer>
- <layer id="5" name="Routes" width="100" height="60" locked="1">
+ <layer id="5" name="Routes" width="100" height="60">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXAUQAOLFEBNAaxwAfDyDGkteQY/JbGE2TBIfqFcz6Wp0UKCa4aUwyRYHsyplYplv4LQne4isglT7Er7Gl1WI5T/UBPnr2AD4jw+At6Bwb0UDkIITgQBq2/mooJlc7U3PLRiuJlXfCS2iydWJCYs1s2hy1D0qUMCVTWr1X884do0tsknUiyuZXI2GxtPqpQtXV1WbTcHAjAO1gwg3naRKUCZuXqTeWKEnFDkdTu9oP0UMYLqykInJoi4U2Y9v6W4aFz/VwIZH6iSk37N48J1Hzs9cn35ZLtKPvUxJrKkg25Cmck1Kja+nM1JWlUoXsOaaXD1x8J9Ox6oud+4l/2knHJOrIqpCXSSpJo+6A6+zapUDmLjJUq2n6V/5imQyf2alAJ2KFOxG6XS0b02oNrM3X5B1/G6I46LsJKeg0t7NKbZUJ1kCZ++lHDJIfkQ5ihP7y61j1C2d4JoctQURKZlEbabR7lkyyeouVKL+qNO3lZY1CZVKydH0sXSfzDRT9PlkgU0tOaUjiGoS5Bp5LI1XOl9PtwVGRLQweaiDZFmTQQdONmKZg536uv65vItqOEZGVTbNTUINlIxYv6j+pUYfqVqBUr5OSyZXfRlvBV2Hivh0k6NaBqD4J1l1nZbJEe27UfCTgzowg6fLho9O9EpOCjhEm8WEN01yCjhEl0WJN/2VP5cB
   </data>
@@ -83,7 +82,4 @@
    KLUv/WDAXE0AABAAAAEAu90OsA==
   </data>
  </layer>
- <objectgroup id="2" name="Map Overlay" visible="0" opacity="0">
-  <object id="2" gid="9301" x="-182" y="1066" width="1944" height="1122"/>
- </objectgroup>
 </map>

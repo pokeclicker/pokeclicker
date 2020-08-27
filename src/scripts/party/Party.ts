@@ -100,8 +100,8 @@ class Party implements Feature {
             let multiplier = 1;
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
             if (!ignoreRegionMultiplier && nativeRegion != player.region && nativeRegion != GameConstants.Region.none) {
-                // Pokemon only retain 20% of their total damage in other regions.
-                multiplier = 0.2;
+                // Pokemon only retain a % of their total damage in other regions based on highest region.
+                multiplier = this.getRegionAttackMultiplier();
             }
             if (!pokemon.breeding) {
                 if (Battle.enemyPokemon() == null || type1 == PokemonType.None) {
@@ -118,6 +118,11 @@ class Party implements Feature {
         }
 
         return Math.round(attack);
+    }
+
+    public getRegionAttackMultiplier(highestRegion = player.highestRegion()): number {
+        // between 0.2 -> 1 based on highest region
+        return Math.min(1, Math.max(0.2, 0.1 + (highestRegion / 10)));
     }
 
     public pokemonAttackObservable: KnockoutComputed<number> = ko.pureComputed(() => {

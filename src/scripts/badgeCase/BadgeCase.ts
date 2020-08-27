@@ -58,6 +58,7 @@ class BadgeCase implements Feature {
 namespace BadgeCase {
     export enum Badge {
         'None',
+        // Kanto
         'Boulder',
         'Cascade',
         'Thunder',
@@ -71,6 +72,7 @@ namespace BadgeCase {
         'Elite_Agatha',
         'Elite_Lance',
         'Elite_KantoChampion',
+        // Johto
         'Zephyr',
         'Hive',
         'Plain',
@@ -84,6 +86,7 @@ namespace BadgeCase {
         'Elite_Bruno2',
         'Elite_Karen',
         'Elite_JohtoChampion',
+        // Hoenn
         'Stone',
         'Knuckle',
         'Dynamo',
@@ -97,5 +100,19 @@ namespace BadgeCase {
         'Elite_Glacia',
         'Elite_Drake',
         'Elite_HoennChampion',
+        //Sinnoh
+        'Coal',
+        'Forest',
+        'Relic',
+        'Cobble',
+        'Fen',
+        'Mine',
+        'Icicle',
+        'Beacon',
+        'Elite_Aaron',
+        'Elite_Bertha',
+        'Elite_Flint',
+        'Elite_Lucian',
+        'Elite_SinnohChampion',
     }
 }

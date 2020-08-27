@@ -5,9 +5,8 @@
  </editorsettings>
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
- <tileset firstgid="9301" source="kanto.tsx"/>
- <tileset firstgid="9302" source="pokemontower.tsx"/>
- <tileset firstgid="9338" source="tiles_FRLG_buildings.tsx"/>
+ <tileset firstgid="9301" source="pokemontower.tsx"/>
+ <tileset firstgid="9337" source="tiles_FRLG_buildings.tsx"/>
  <layer id="1" name="Water Dark" width="100" height="60" locked="1" tintcolor="#c8c8c8">
   <data encoding="base64" compression="zstd">
    KLUv/WDAXGUAACBcAQAAAQC53bsjAg==
@@ -65,7 +64,7 @@
  </layer>
  <layer id="5" name="Dungeons" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXFUJABLNJChgVwEFEN9774zRG1oZiYY8ZKYOkSCJIJZ1v/32FZCjdCPa1oZSwE49nw/ie/gcvobzfJ0v4UP4DgpOBieCU7rZbLaajWabGRA4BbBsK5vKlrKNJgDOiWKb2CS2iO1jDNvCprB5to7M9XHFXDAvLlfLCOU6MblGrpKLRCTkAvHouDhEIVHGtXFpgDAurtCyqLhABzeo4TEZySixkgfggkPEjgERTBIcI/z/J4IIJZGpMQky8k3amhamhQIvJSiT8BdNk5JM+OOei5O9jJphCmifNAs42X4m4Mi7TSfc1fB1tcw1t37GWANO5oIaY/nGlwDJ1IuN4MrQL3StGlVymERPea+2svbrwge/dU3D/plF4RyEfpCWHWnO79MkRSPUw+Jh0FVVigc=
+   KLUv/WDAXFUJABLNJChgVwEFEN97b8NgtU0KiaYtTb4OkSCpMdoy/vkHPDDFqeLudodSwE49ng/ie/gcvobrfJwv4UP4DgpOBieCU6rZaLaZTWaLGRA4BahsKRvKNtpEE8DmRLFNbBJbxOYxhm1hU9g6Gwfm+rheLpcWlmtlJLpOTK6Rq+QiEQm5QDw6Lo4QKJRxbVwaH4yLC7QsKq7PATeo4TEZySixkgfggkPEjgERTBIcI/z/J4IIJZGpMQky8k3amhamhQIvJSiT8BdNk5JM+OOei5O9jJphCmifNAs42X4m4Mi7TSfc1fB1tcw1t37GWANO5oIaY/nGlwDJ1IuN4MrQL3StGlVymERPea+2svbrwge/dU3D/plF4RyEfpCWHWnO79MkRSPUw+Jh0FVVigc=
   </data>
  </layer>
  <layer id="13" name="Towns" width="100" height="60" locked="1">
@@ -80,7 +79,7 @@
  </layer>
  <layer id="6" name="Other" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXLUIAIaQLzMgR4EgAMNhQ+DhsEmAxHQO+qQkSyf8AAzAWlVVVevMrKqqekRSBEGKegnBf1A4NKgrxDscAB4AJgATeSEg7+N5vI7jeBtP42XEeOkXJy7xiApPOMIBV/NoZp7Mi3kwL8/ltbwSy1t5Ki8F5Z08k1dC8kYOAyYJIAV4sHKwakAqYrBasFKQYIVgdaAysCqwIrDzdF7Ow7l5NgMWTxVPFABeRy8jiKeHJwei19BLaGp4YnhaCHoBvX4un1fPiychqGACEkGYaoIHsAO7AxHMEGwR/n+OYAmMYB62AS0YKqhUpJqyNrkJTl0i6fqkcVSYQLdAMQJlwskrKNyTAxaQAAMUYAEGeAFOin6gZwcxKMOyqSME
+   KLUv/WDAXLUIAIaQLzMgR4EgAMNhQ+DhsEmAxHQO+qQkSyf8AAzAtKqqqnVmVlVV9UxSBEGKegnBf1A4NKgrxDscAB4AJgATeSEg7+N5vI7jeBtP42XEeOkXJy7xiApPOMIBV/NoZp7Mi3kwL8/llV4Ly1t5Ki8F5Z08k1dC8kYOAyYJIAV4sHKwakAqYrBasFKQYIVgdaAysCqwIrDzdF7Ow7l5NgMWTxVPFABeRy8jiKeHJwei19BLaGp4YnhaCHoBvX4un1fPiychqGACEkGYaoIHsAO7AxHMEGwR/n+OYAmMYB62AS0YKqhUpJqyNrkJTl0i6fqkcVSYQLdAMQJlwskrKNyTAxaQAAMUYAEGeAFOin6gZwcxKMOyqSME
   </data>
  </layer>
  <layer id="15" name="Decoration" width="100" height="60">
@@ -88,7 +87,4 @@
    KLUv/WDAXF0DAOQCAADtCwD1CwAArAUA9bwFu5oZAACbGQAAnBkAohkAAKMZAACkqhkAAKsZAACsGRegEIkWF7YBcMMCYwed8ZVRLZVVLWHYV+5LKVyTq7Yg1LmZ11aNSKef6tIr0U2unrUeuq5aYH2xF/+O
   </data>
  </layer>
- <objectgroup id="12" name="Map Overlay" visible="0" opacity="0.38">
-  <object id="10" gid="9301" x="94" y="992" width="1646" height="1011"/>
- </objectgroup>
 </map>

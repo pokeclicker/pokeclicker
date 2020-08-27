@@ -10,7 +10,8 @@ class GymBattle extends Battle {
      */
     public static defeatPokemon() {
         this.enemyPokemon().defeat(true);
-        App.game.breeding.progressEggsBattle(this.gym.badgeReward * 3 + 1, player.region);
+        // Make gym "route" regionless
+        App.game.breeding.progressEggsBattle(this.gym.badgeReward * 3 + 1, GameConstants.Region.none);
         this.index(this.index() + 1);
 
         if (this.index() >= this.gym.pokemons.length) {
@@ -21,7 +22,6 @@ class GymBattle extends Battle {
     }
 
     /**
-     * Generate a new enemy based on the current route and region.
      * Reset the counter.
      */
     public static generateNewEnemy() {

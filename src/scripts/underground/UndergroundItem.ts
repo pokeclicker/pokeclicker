@@ -48,8 +48,8 @@ UndergroundItem.addItem('Dome Fossil', 2, [[2,2,2,2,2], [2,2,2,2,2], [2,2,2,2,2]
 UndergroundItem.addItem('Old Amber', 3, [[0,3,3,3], [3,3,3,3], [3,3,3,3], [3,3,3,0]], 0, 'Mine Egg');
 UndergroundItem.addItem('Root Fossil', 4, [[0,0,4,4,4], [0,0,4,4,4], [4,0,0,4,4], [4,4,4,4,4], [0,4,4,4,0]], 0, 'Mine Egg');
 UndergroundItem.addItem('Claw Fossil', 5, [[5,5,5,0,0], [5,5,5,5,0], [0,5,5,5,5], [0,0,0,5,5]], 0, 'Mine Egg');
-// UndergroundItem.addItem('Armor Fossil', 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 3);
-// UndergroundItem.addItem('Skull Fossil', 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]], 3);
+UndergroundItem.addItem('Armor Fossil', 6, [[0,6,6,6,0], [0,6,6,6,0], [6,6,6,6,6], [0,6,6,6,0]], 0, 'Mine Egg');
+UndergroundItem.addItem('Skull Fossil', 7, [[7,7,7,7], [7,7,7,7], [7,7,7,7], [0,7,7,0]], 0, 'Mine Egg');
 UndergroundItem.addItem('Rare Bone', 8, [[8,0,0,0,0,8], [8,8,8,8,8,8], [8,0,0,0,0,8]], 3);
 UndergroundItem.addItem('Star Piece', 9, [[0,9,0], [9,9,9], [0,9,0]], 5);
 UndergroundItem.addItem('Revive', 10, [[0,10,0], [10,10,10], [0,10,0]], 2);
@@ -91,10 +91,3 @@ UndergroundItem.addItem('Stone Plate', 42, [[42,42,42,42], [42,42,42,42], [42,42
 UndergroundItem.addItem('Toxic Plate', 43, [[43,43,43,43], [43,43,43,43], [43,43,43,43]], 100, 'poison');
 UndergroundItem.addItem('Zap Plate', 44, [[44,44,44,44], [44,44,44,44], [44,44,44,44]], 100, 'electric');
 UndergroundItem.addItem('Pixie Plate', 45, [[45,45,45,45], [45,45,45,45], [45,45,45,45]], 100, 'fairy');
-
-UndergroundItem.addItem('Trade Stone', 46, [[46,46,46], [46,46,46], [46,46,46]], 1, 'Trade_stone');
-UndergroundItem.addItem('Dragon Scale', 47, [[47,47,47], [47,47,47], [47,47,47]], 1, 'Dragon_scale');
-UndergroundItem.addItem('Metal Coat', 48, [[48,48,48], [48,48,48], [48,48,48]], 1, 'Metal_coat');
-UndergroundItem.addItem('Kings Rock', 49, [[49,49,49], [49,49,49], [49,49,49]], 1, 'Kings_rock');
-UndergroundItem.addItem('Upgrade', 50, [[50,50,50], [50,50,50], [50,50,50]], 1, 'Upgrade');
-UndergroundItem.addItem('Time Stone', 51, [[51,51,51], [51,51,51], [51,51,51]], 1, 'Time_stone');
