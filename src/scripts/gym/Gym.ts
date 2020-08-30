@@ -101,7 +101,7 @@ gymList['Celadon City'] = new Gym(
     'Erika',
     'Celadon City',
     [
-        new GymPokemon('Victreebel', 28810, 29),
+        new GymPokemon('Victreebel', 38810, 29),
         new GymPokemon('Tangela', 30340, 24),
         new GymPokemon('Vileplume', 36400, 29),
     ],

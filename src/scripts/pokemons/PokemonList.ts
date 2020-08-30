@@ -9485,7 +9485,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 492.1,
             'name': 'Shaymin (sky)',
-            'type': [PokemonType.Grass],
+            'type': [PokemonType.Grass, PokemonType.Flying],
             'eggCycles': 120,
             'levelType': LevelType.mediumslow,
             'exp': 270,
