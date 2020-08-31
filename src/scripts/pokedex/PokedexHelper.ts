@@ -96,6 +96,11 @@ class PokedexHelper {
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
             const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
 
+            // Alternate forms that we haven't caught yet
+            if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {
+                return false;
+            }
+
             // If not caught
             if (filter['caught'] && !alreadyCaught) {
                 return false;
