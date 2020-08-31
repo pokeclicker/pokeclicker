@@ -31,6 +31,7 @@ class Changelog {
 const changelogItems = [
     // v0.5.1
     new Changelog(changelogType.UPDATE, 'v0.5.1'),
+    new Changelog(changelogType.NEW, 'Added a notification for when the game has an update available'),
     new Changelog(changelogType.FIXED, 'Unobtainable items will no longer remain in the Underground'),
 
     // v0.5.0 - Sinnoh

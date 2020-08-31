@@ -51,9 +51,16 @@ const dests = {
     githubPages: 'docs/',
 };
 
-gulp.task('copy', () => gulp.src(srcs.libs)
-    .pipe(gulp.dest(dests.libs))
-    .pipe(browserSync.reload({stream: true})));
+gulp.task('copy', (done) => {
+    // Copy package.json to our base directory
+    gulp.src('./package.json').pipe(gulp.dest(`${dests.base}/`));
+
+    gulp.src(srcs.libs)
+        .pipe(gulp.dest(dests.libs))
+        .pipe(browserSync.reload({stream: true}));
+
+    done();
+});
 
 gulp.task('assets', () => gulp.src(srcs.assets)
     .pipe(changed(dests.assets))
