@@ -29,6 +29,10 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.5.1
+    new Changelog(changelogType.UPDATE, 'v0.5.1'),
+    new Changelog(changelogType.FIXED, 'Unobtainable items will no longer remain in the Underground'),
+
     // v0.5.0 - Sinnoh
     new Changelog(changelogType.UPDATE, 'v0.5.0 - Sinnoh'),
     new Changelog(changelogType.NEW, 'The Sinnoh region is now available'),

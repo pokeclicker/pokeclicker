@@ -156,6 +156,18 @@ class Update implements Saveable {
             }
         }
 
+        if (this.isOlderVersion(this.saveVersion, '0.5.1')) {
+            try {
+                // Items removed from the Underground, if the player has these items in their current layer, reset their mine
+                const mineData = JSON.parse(localStorage.mine);
+                if (mineData.rewardNumbers.some(id => id >= 46)) {
+                    delete localStorage.mine;
+                }
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.1 - Couldn\'t reset player mine..', ಠ_ಠ);
+            }
+        }
+
         // Notify the player that the game has updated!
         if (this.saveVersion != this.version && this.saveVersion != '0.0.0') {
             const button = document.createElement('a');
