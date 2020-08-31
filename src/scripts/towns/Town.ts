@@ -233,7 +233,7 @@ TownList['Mossdeep City'] = new Town('Mossdeep City', [new RouteKillRequirement(
 TownList['Sootopolis City'] = new Town('Sootopolis City', [new RouteKillRequirement(10, 126), new GymBadgeRequirement(BadgeCase.Badge.Mind)]);
 TownList['Ever Grande City'] = new Town('Ever Grande City', [new GymBadgeRequirement(BadgeCase.Badge.Rain)]);
 TownList['Pokemon League Hoenn'] = new Town('Pokemon League', [new RouteKillRequirement(10, 128), new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Hoenn'))]);
-TownList['Pacifidlog Town'] = new Town('Pacifidlog Town', [new RouteKillRequirement(10, 131)]);
+TownList['Pacifidlog Town'] = new Town('Pacifidlog Town', [new RouteKillRequirement(10, 131)], PacifidlogTownShop);
 TownList['Battle Frontier'] = new Town('Battle Frontier', [new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)], BattleFrontierShop);
 
 //Hoenn Dungeons
