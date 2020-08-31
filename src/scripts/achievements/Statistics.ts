@@ -57,7 +57,6 @@ class Statistics implements Saveable {
 
     observables = [
         'clickAttacks',
-        'hatchedEggs',
         'totalMoney',
         'totalDungeonTokens',
         'totalQuestPoints',
@@ -71,11 +70,11 @@ class Statistics implements Saveable {
         'totalShinyPokemonCaptured',
         'totalShinyPokemonDefeated',
         'totalShinyPokemonEncountered',
+        'totalShinyPokemonHatched',
         'undergroundItemsFound',
         'undergroundLayersMined',
         'battleFrontierTotalStagesCompleted',
         'battleFrontierHighestStageCompleted',
-        'totalShinyPokemonHatched',
     ];
     arrayObservables = [
         'gymsDefeated',
