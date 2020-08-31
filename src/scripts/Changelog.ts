@@ -33,6 +33,8 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.5.1'),
     new Changelog(changelogType.NEW, 'Added a notification for when the game has an update available'),
     new Changelog(changelogType.FIXED, 'Unobtainable items will no longer remain in the Underground'),
+    new Changelog(changelogType.FIXED, 'Pacifidlog town shop now available'),
+    new Changelog(changelogType.FIXED, 'Hide alternate forms from Pokédex that have not yet been caught'),
 
     // v0.5.0 - Sinnoh
     new Changelog(changelogType.UPDATE, 'v0.5.0 - Sinnoh'),
@@ -41,7 +43,7 @@ const changelogItems = [
     new Changelog(changelogType.NEW, 'Dungeon based evolutions'),
     new Changelog(changelogType.NEW, 'Time based evolutions'),
     new Changelog(changelogType.NEW, '2 new fossils added to the Underground'),
-    new Changelog(changelogType.NEW, 'Pokemon alternate forms can now be obtained'),
+    new Changelog(changelogType.NEW, 'Pokémon alternate forms can now be obtained'),
     new Changelog(changelogType.CHANGE, 'Decrease attack reduction in newer regions'),
     new Changelog(changelogType.CHANGE, 'All Happiness/Friendship evolutions now make use of the Soothe Bell'),
     new Changelog(changelogType.CHANGE, 'Added base exp per quest completed'),
