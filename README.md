@@ -1,11 +1,11 @@
-[![Build Status](https://img.shields.io/travis/com/pokeclicker-dev/pokeclicker?logo=travis)](https://travis-ci.com/pokeclicker-dev/pokeclicker)
+[![Build Status](https://img.shields.io/travis/com/pokeclicker/pokeclicker?logo=travis)](https://travis-ci.com/pokeclicker/pokeclicker)
 
 # PokéClicker
 A game about catching Pokémon, defeating gym leaders, and watching numbers get bigger.
 
 NOTE: PokéClicker is still in development!
 
-You can try out the current state at https://pokeclicker-dev.github.io/pokeclicker/
+You can try out the current state at https://pokeclicker.github.io/pokeclicker/
 
 # Developer instructions
 
@@ -28,7 +28,7 @@ This means you don't need to compile TypeScript yourself. Gulp will do this for 
 
 
 ## Use Google cloud shell _(alternative)_
-[![Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pokeclicker-dev/pokeclicker&git_branch=develop&page=editor&open_in_editor=README.md)
+[![Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pokeclicker/pokeclicker&git_branch=develop&page=editor&open_in_editor=README.md)
 ```cmd
 npm install
 npm start
