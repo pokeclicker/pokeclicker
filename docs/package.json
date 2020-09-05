@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pokeclicker-dev/pokeclicker.git"
+    "url": "git+https://github.com/pokeclicker/pokeclicker.git"
   },
   "babel": {
     "presets": [
@@ -24,9 +24,9 @@
   "author": "RedSparr0w",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/pokeclicker-dev/pokeclicker/issues"
+    "url": "https://github.com/pokeclicker/pokeclicker/issues"
   },
-  "homepage": "https://github.com/pokeclicker-dev/pokeclicker#readme",
+  "homepage": "https://github.com/pokeclicker/pokeclicker#readme",
   "devDependencies": {
     "@types/jquery": "^3.3.31",
     "@types/sortablejs": "^1.10.5",
