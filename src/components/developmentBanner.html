@@ -1,24 +1,23 @@
 <div class="modal" data-keyboard="false" data-backdrop="static" id="developmentModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header bg-danger">
                 <h5 class="modal-title">Please read carefully</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>You are currently playing on the branch '$GIT_BRANCH'. Thank you for trying out the development
-                    build! Please submit any bugs <a href="https://github.com/pokeclicker/pokeclicker/issues" target="_blank">here</a>
-                    or in the #testing channel on <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>.</p>
-                <p> Keep in mind that this is a development environment and you should not count on your progress
-                    to be transferred.</p>
-                <hr/>
-                $DEV_DESCRIPTION
-
+                <p>This version is going to be shutting down soon.</p>
+                <p>
+                    Please download your save, and move to the new official website:<br/>
+                    <button class="btn btn-info btn-block" onClick=Save.download()>Download Save</button>
+                    <a class="btn btn-info btn-block" href="https://pokeclicker.com">Go to pokeclicker.com</a>
+                </p>
+                <p>You can continue playing here, but this site may close at any point and <strong>you will lose your save.</strong></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Agreed</button>
+                <button type="button" class="btn btn-danger btn-block" data-dismiss="modal">I accept the risks, stay here</button>
             </div>
         </div>
     </div>
@@ -26,6 +25,6 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function (event) {
-        $('#developmentModal').modal('toggle')
+        $('#developmentModal').modal({ backdrop: 'static', keyboard: false, show: true });
     });
 </script>
