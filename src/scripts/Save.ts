@@ -16,6 +16,7 @@ class Save {
     public static getSaveObject() {
         const saveObject = {};
 
+        // TODO: Make the Underground a game Feature
         saveObject[Underground.saveKey] = Underground.save();
 
         Object.keys(App.game).filter(key => App.game[key].saveKey).forEach(key => {

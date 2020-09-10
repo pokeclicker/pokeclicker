@@ -46,21 +46,9 @@
     <!--Minified styles-->
     <link href="styles/styles.min.css?v=$VERSION" rel="stylesheet">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
-    <script>
-        if ($INIT_GOOGLE_ANALYTICS) {
-            window.dataLayer = window.dataLayer || [];
+    <!-- Google Analytics-->
+    @importif $GOOGLE_ANALYTICS_ID "googleAnalytics.html"
 
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-
-            gtag('js', new Date());
-
-            gtag('config', 'UA-171657234-1');
-        }
-    </script>
     <style>
         .loader {
             position: fixed;
@@ -85,6 +73,7 @@
 <link href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
 
 <!--$DEV_BANNER-->
+@importif $DEV_BANNER "developmentBanner.html"
 
 @import "splash.html"
 
@@ -486,7 +475,7 @@
 @import "badgeCase.html"
 
 <!-- Save Modal-->
-@import "save.html"
+@import "saveModal.html"
 
 <!-- Quests Modal-->
 @import "questModal.html"

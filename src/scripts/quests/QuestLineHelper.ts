@@ -28,7 +28,7 @@ class QuestLineHelper {
         tutorial.addQuest(buyPokeballs);
 
         //Buy Dungeon ticket
-        const buyDungeonTicket = new CustomQuest(1, 10, 'Buy the Dungeon ticket from Viridian City Shop.', () => + App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
+        const buyDungeonTicket = new CustomQuest(1, 10, 'Buy the Dungeon ticket from Viridian City Shop.', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest
@@ -93,8 +93,33 @@ class QuestLineHelper {
         App.game.quests.questLines().push(deoxysQuestLine);
     }
 
+    public static createUndergroundQuestLine() {
+        const undergroundQuestLine = new QuestLine('Mining Expedition', 'Explore the underground');
+
+        //Buy Explorer Kit (no reward)
+        const buyExplorerKit = new CustomQuest(1, () => {}, 'Buy the Explorer Kit from Cinnabar Island Shop', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit), 0);
+        undergroundQuestLine.addQuest(buyExplorerKit);
+
+        // Mine 5 layers in the Unerground
+        const OldAmberReward = () => {
+            // Gain an Old Amber
+            Underground.gainMineItem(3);
+            Notifier.notify({
+                title: undergroundQuestLine.name,
+                message: 'You have gained an Old Amber fossil!<br/><i>You can breed this in the hatchery.</i>',
+                type: GameConstants.NotificationOption.success,
+                timeout: GameConstants.MINUTE,
+            });
+        };
+        const mineLayers = new CustomQuest(5, OldAmberReward, 'Mine 5 layers in the Underground', App.game.statistics.undergroundLayersMined);
+        undergroundQuestLine.addQuest(mineLayers);
+
+        App.game.quests.questLines().push(undergroundQuestLine);
+    }
+
     public static loadQuestLines() {
         this.createTutorial();
         this.createDeoxysQuestLine();
+        this.createUndergroundQuestLine();
     }
 }

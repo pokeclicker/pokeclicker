@@ -25,13 +25,18 @@
                                 </div>
                             </form>
                             <hr>
+                            <!-- ko if: App.game.discord.enabled -->
+                            <button class="btn btn-primary btn-block" onClick="App.game.discord.login()" data-bind="visible: !App.game.discord.ID()">Link Discord</button>
+                            <button class="btn btn-warning btn-block" onClick="App.game.discord.logout()" data-bind="visible: App.game.discord.ID()">Unlink Discord</button>
+                            <hr>
+                            <!-- /ko -->
 
-                            <button class="btn btn-info btn-block" onClick=Save.download()>Download Save</button>
+                            <button class="btn btn-primary btn-block" onClick="Save.download()">Download Save</button>
                             <hr>
 
                             <input type="file" id="input" accept=".txt" style="display:none;"
                                     onchange=Save.loadFromFile(this.files[0])>
-                            <label for="input" class="btn btn-info btn-block">Import Save</label>
+                            <label for="input" class="btn btn-primary btn-block">Import Save</label>
                             <hr>
                             <h5 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
                                 savefile</h5>

@@ -40,6 +40,7 @@ namespace GameConstants {
     export const ITEM_USE_TIME = 30;
 
 
+    export const SECOND = 1000;
     export const MINUTE = 1000 * 60;
     export const HOUR = 1000 * 60 * 60;
     export const DAY = 1000 * 60 * 60 * 24;

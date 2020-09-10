@@ -16,7 +16,7 @@ class RedeemableCodes implements Saveable {
             new RedeemableCode('shiny-charmer', -318017456, false, function () {
                 // Select a random Pokemon to give the player as a shiny
                 const pokemon = pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]);
-                App.game.party.gainPokemon(pokemon, true, true);
+                App.game.party.gainPokemonById(pokemon.id, true, true);
                 // Notify that the code was activated successfully
                 Notifier.notify({ title:'Code activated!', message: `✨ You found a shiny ${pokemon.name}! ✨`, type: GameConstants.NotificationOption.success, timeout: 1e4 });
             }),
@@ -44,70 +44,32 @@ class RedeemableCodes implements Saveable {
                 // Notify that the code was activated successfully
                 Notifier.notify({ title:'Code activated!', message: 'You have unlocked all of the Kanto region', type: GameConstants.NotificationOption.success, timeout: 1e4 });
             }),
-            new RedeemableCode('complete-johto', 171396746, false, function () {
-                // Complete all routes
-                for (let route = GameConstants.RegionRoute[GameConstants.Region.johto][0]; route <= GameConstants.RegionRoute[GameConstants.Region.johto][1]; route++) {
-                    GameHelper.incrementObservable(App.game.statistics.routeKills[route], 10);
-                }
-                // Complete all gyms
-                GameConstants.JohtoGyms.forEach(gym => {
-                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)]);
-                    // Give badge
-                    if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
-                        App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
-                    }
-                });
-                // Complete all dungeons
-                GameConstants.JohtoDungeons.forEach(dungeon => {
-                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)]);
-                });
-                // Catch all Pokemon
-                for (let id = GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto] + 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.johto]; id++) {
-                    App.game.party.gainPokemonById(id, false, true);
-                }
-                // Notify that the code was activated successfully
-                Notifier.notify({ title:'Code activated!', message: 'You have unlocked all of the Johto region', type: GameConstants.NotificationOption.success, timeout: 1e4 });
-            }),
-            new RedeemableCode('complete-hoenn', -1257697040, false, function () {
-                // Complete all routes
-                for (let route = GameConstants.RegionRoute[GameConstants.Region.hoenn][0]; route <= GameConstants.RegionRoute[GameConstants.Region.hoenn][1]; route++) {
-                    GameHelper.incrementObservable(App.game.statistics.routeKills[route], 10);
-                }
-                // Complete all gyms
-                GameConstants.HoennGyms.forEach(gym => {
-                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)]);
-                    // Give badge
-                    if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
-                        App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
-                    }
-                });
-                // Complete all dungeons
-                GameConstants.HoennDungeons.forEach(dungeon => {
-                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)]);
-                });
-                // Catch all Pokemon
-                for (let id = GameConstants.TotalPokemonsPerRegion[GameConstants.Region.johto] + 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.hoenn]; id++) {
-                    App.game.party.gainPokemonById(id, false, true);
-                }
-                // Notify that the code was activated successfully
-                Notifier.notify({ title:'Code activated!', message: 'You have unlocked all of the Hoenn region', type: GameConstants.NotificationOption.success, timeout: 1e4 });
-            }),
         ];
     }
 
+    isDiscordCode(code: string): boolean {
+        return /^\w{4}-\w{4}-\w{4}$/.test(code);
+    }
+
     enterCode(code: string) {
+        // If this is a Discord code, send it to the Discord class to check
+        if (App.game.discord.enabled && this.isDiscordCode(code)) {
+            return App.game.discord.enterCode(code);
+        }
+
         const hash = this.hash(code);
 
-        const redeemableCode = this.codeList.find(code => {
-            return code.hash === hash;
+        const redeemableCode = this.codeList.find(c => {
+            return c.hash === hash;
         });
 
         if (!redeemableCode) {
-            Notifier.notify({ message: `Invalid code ${code}`, type: GameConstants.NotificationOption.danger });
-            return;
+            return Notifier.notify({ message: `Invalid code ${code}`, type: GameConstants.NotificationOption.danger });
         }
 
-        redeemableCode.redeem();
+        if (redeemableCode) {
+            redeemableCode.redeem();
+        }
     }
 
     /**
