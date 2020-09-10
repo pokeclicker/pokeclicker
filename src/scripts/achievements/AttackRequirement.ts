@@ -6,7 +6,9 @@ class AttackRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(App.game.party.pokemonAttackObservable(), this.requiredValue);
+        // Calculate real total attack regardless of current region
+        const currentAttack = App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, true);
+        return Math.min(currentAttack, this.requiredValue);
     }
 
     public hint(): string {
