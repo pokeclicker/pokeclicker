@@ -374,7 +374,10 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Tentacruel', 'Krabby', 'Magikarp', 'Staryu', 'Corsola', 'Kingler'],
     }),
-    [new GymBadgeRequirement(BadgeCase.Badge.Fog)]
+    [
+        new RouteKillRequirement(10, 39),
+        new GymBadgeRequirement(BadgeCase.Badge.Fog),
+    ]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.johto, 41,
