@@ -7,14 +7,47 @@ const autoprefix = require('gulp-autoprefixer');
 const minifyCSS = require('gulp-minify-css');
 const typescript = require('gulp-typescript');
 const browserSync = require('browser-sync');
-const del = require('del');
 const less = require('gulp-less');
 const gulpImport = require('gulp-html-import');
 const ejs = require('gulp-ejs');
 const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
-const connect = require('gulp-connect');
+const del = require('del');
+const fs = require('fs');
 const version = process.env.npm_package_version || '0.0.0';
+
+// Import our config, or log a warning if hasn't been created
+let config = {};
+try {
+    config = require('./config.js');
+} catch (err) {
+    console.warn('\n[WARNING] No config file exist, this will still run fine without it, but it is recommended.\n');
+}
+// use our config settings or default values if the key doesn't exist
+config = Object.assign({
+    CNAME: false,
+    GOOGLE_ANALYTICS_INIT: false,
+    GOOGLE_ANALYTICS_ID: false,
+    DEV_BANNER: false,
+    DISCORD_CLIENT_ID: false,
+    DISCORD_LOGIN_URI: false,
+}, config);
+
+const escapeRegExp = (string) => {
+    return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+};
+
+const htmlImportIf = (html_str, is_true) => {
+    // Allow import if
+    if (is_true) {
+        // replace with standard import
+        return replace(`@importif ${html_str}`, '@import');
+    } else {
+        // remove the line
+        const replaceRegex = new RegExp(`\\s*@importif ${escapeRegExp(html_str)}.*\\n?`, 'g');
+        return replace(replaceRegex, '');
+    }
+};
 
 /**
  * Push build to gh-pages
@@ -84,14 +117,14 @@ gulp.task('compile-html', (done) => {
     const htmlDest = './build';
     const stream = gulp.src('./src/index.html');
     // If we want the development banner displayed
-    if (process.env.HEROKU) {
-        stream.pipe(replace('<!--$DEV_BANNER-->', '@import "developmentBanner.html"'));
-    }
-    stream.pipe(replace('$VERSION', version));
-    stream.pipe(replace('$INIT_GOOGLE_ANALYTICS', process.env.NODE_ENV == 'production'));
+    stream.pipe(htmlImportIf('$DEV_BANNER', config.DEV_BANNER));
+    stream.pipe(htmlImportIf('$GOOGLE_ANALYTICS_ID', config.GOOGLE_ANALYTICS_ID));
 
     stream.pipe(plumber())
         .pipe(gulpImport('./src/components/'))
+        .pipe(replace('$VERSION', version))
+        .pipe(replace('$GOOGLE_ANALYTICS_INIT', !!config.GOOGLE_ANALYTICS_INIT))
+        .pipe(replace('$GOOGLE_ANALYTICS_ID', config.GOOGLE_ANALYTICS_ID))
         .pipe(replace('$GIT_BRANCH', process.env.GIT_BRANCH))
         .pipe(replace('$DEV_DESCRIPTION', process.env.DEV_DESCRIPTION !== undefined ? process.env.DEV_DESCRIPTION : ''))
         .pipe(ejs())
@@ -100,20 +133,13 @@ gulp.task('compile-html', (done) => {
     done();
 });
 
-gulp.task('html', () => {
-    const htmlDest = './build';
-
-    return gulp.src(srcs.html)
-        .pipe(changed(dests.base))
-        .pipe(minifyHtml())
-        .pipe(gulp.dest(htmlDest))
-        .pipe(browserSync.reload({stream: true}));
-});
-
 gulp.task('scripts', () => {
     const tsProject = typescript.createProject('tsconfig.json');
     return tsProject.src()
         .pipe(replace('$VERSION', version))
+        .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
+        .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
+        .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
         .pipe(tsProject())
         .pipe(gulp.dest(dests.scripts))
         .pipe(browserSync.reload({stream: true}));
@@ -135,25 +161,20 @@ gulp.task('copyWebsite', () => {
     return gulp.src(srcs.buildArtefacts).pipe(gulp.dest(dests.githubPages));
 });
 
+gulp.task('cname', (done) => {
+    if (!config.CNAME) {
+        console.warn('[warning] No CNAME set in config!');
+        return;
+    }
+    fs.writeFile(`${dests.githubPages}CNAME`, config.CNAME, done);
+});
+
 gulp.task('build', done => {
     gulp.series('copy', 'assets', 'compile-html', 'scripts', 'styles')(done);
 });
 
 gulp.task('website', done => {
-    gulp.series('clean', 'build', 'cleanWebsite', 'copyWebsite')(done);
-});
-
-gulp.task('serveProd', function () {
-    connect.server({
-        root: ['build'],
-        port: process.env.PORT || 3000,
-        host: '0.0.0.0',
-        livereload: false,
-    });
-});
-
-gulp.task('heroku', done => {
-    gulp.series('clean', 'build', 'serveProd')(done);
+    gulp.series('clean', 'build', 'cleanWebsite', 'copyWebsite', 'cname')(done);
 });
 
 gulp.task('default', done => {

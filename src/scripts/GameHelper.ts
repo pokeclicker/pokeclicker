@@ -46,6 +46,11 @@ class GameHelper {
         return Object.keys(enumerable).filter(k => !isNaN(+k)).map(Number);
     }
 
+    public static tick() {
+        this.counter = 0;
+        this.updateTime();
+    }
+
     public static updateTime() {
         const now = new Date();
         if (now.getDate() == GameHelper.tomorrow.getDate()) {

@@ -141,7 +141,10 @@ gymList['Fuchsia City'] = new Gym(
             new RouteKillRequirement(10, 18),
             new RouteKillRequirement(10, 15),
         ]),
-    ]
+    ],
+    () => {
+        App.game.quests.getQuestLine('Mining Expedition').beginQuest();
+    }
 );
 gymList['Cinnabar Island'] = new Gym(
     'Blaine',

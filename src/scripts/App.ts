@@ -32,7 +32,8 @@ class App {
                 new RedeemableCodes(),
                 new Statistics(),
                 new Quests(),
-                new SpecialEvents()
+                new SpecialEvents(),
+                new Discord()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#8e44ad;font-weight:900;');
