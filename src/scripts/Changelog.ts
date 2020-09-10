@@ -29,6 +29,10 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.5.2
+    new Changelog(changelogType.UPDATE, 'v0.5.2'),
+    new Changelog(changelogType.NEW, 'More statistics added'),
+
     // v0.5.1
     new Changelog(changelogType.UPDATE, 'v0.5.1'),
     new Changelog(changelogType.NEW, 'Added a notification for when the game has an update available'),

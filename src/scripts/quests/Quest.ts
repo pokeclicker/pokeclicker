@@ -35,6 +35,7 @@ abstract class Quest {
             } else {
                 Notifier.notify({ message: 'You have completed a quest!', type: GameConstants.NotificationOption.success });
             }
+            GameHelper.incrementObservable(App.game.statistics.questsCompleted);
             return true;
         }
         return false;
