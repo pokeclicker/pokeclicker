@@ -28,7 +28,7 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.5.1"></script>
+    <script src="scripts/script.min.js?v=0.5.2"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -44,9 +44,10 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.5.1" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.5.2" rel="stylesheet">
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <!-- Google Analytics-->
+        <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-171657234-1"></script>
     <script>
         if (true) {
@@ -61,6 +62,7 @@
             gtag('config', 'UA-171657234-1');
         }
     </script>
+
     <style>
         .loader {
             position: fixed;
@@ -7042,12 +7044,13 @@ aria-labelledby="startSequenceModalLabel" aria-hidden="true">
            </div>
        </div>
        <div class="modal-body">
-           <p>Hello, there! Glad to meet you! Welcome to the world of Pokémon!<br>
-               My name is Oak. People affectionately refer to me as the Pokémon Professor.<br>
-               This world… …is inhabited far and wide by creatures called Pokémon!<br>
-               For some people, Pokémon are pets. Other use them for battling.<br>
-               As for myself… I study Pokémon as a profession.<br>
-               However, your very own Pokémon legend is about to unfold!<br>
+           <p>
+               Hello, there! Welcome to the world of Pokémon!<br/>
+               My name is Oak, People affectionately refer to me as the Pokémon Professor.<br/>
+               This world is inhabited by creatures called Pokémon!<br/>
+               For some people, Pokémon are pets. Other use them for battling.<br/>
+               As for myself… I study Pokémon as a profession.<br/>
+               However, your very own Pokémon legend is about to unfold!<br/>
                A world of dreams and adventures with Pokémon awaits! Let's go!
            </p>
        </div>
@@ -7300,54 +7303,54 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
 
             <div class="tab-content p-3">
                 <div class="tab-pane active" id="breeding-pokemon">
+                    <div class="text-left">
+                        <div class="form-row">
+                            <div class="form-group col-md-3 col-6">
+                                <label>Region</label>
+                                <select class="custom-select" onchange="BreedingController.filter.region(+this.value)">
+                                    <option value="-2">All</option>
+                                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
+                                    <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
+                                    <!-- /ko -->
+                                    <option value="-1">None</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3 col-6">
+                                <label>Caught Status</label>
+                                <select class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
+                                    <option value="0">All</option>
+                                    <option value="1">Not Shiny</option>
+                                    <option value="2">Shiny</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3 col-6">
+                                <label>Type</label>
+                                <select class="custom-select" onchange="BreedingController.filter.type1(+this.value)">
+                                    <option value="-2">All</option>
+                                    <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
+                                    <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                    <!-- /ko -->
+                                    <option value="-1">None</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3 col-6">
+                                <label>Type</label>
+                                <select class="custom-select" onchange="BreedingController.filter.type2(+this.value)">
+                                    <option value="-2">All</option>
+                                    <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
+                                    <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                    <!-- /ko -->
+                                    <option value="-1">None</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                     <div data-bind="if: App.game.breeding.hasFreeEggSlot()">
                         <!-- Check if the player has any level 100 Pokemon or if they have any eggs -->
                         <p class="text-danger" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
                             Unfortunately, you don't have any pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <div class="text-left">
-                            <div class="form-row">
-                                <div class="form-group col-md-3 col-6">
-                                    <label>Region</label>
-                                    <select class="custom-select" onchange="BreedingController.filter.region(+this.value)">
-                                        <option value="-2">All</option>
-                                        <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
-                                        <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
-                                        <!-- /ko -->
-                                        <option value="-1">None</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3 col-6">
-                                    <label>Caught Status</label>
-                                    <select class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
-                                        <option value="0">All</option>
-                                        <option value="1">Not Shiny</option>
-                                        <option value="2">Shiny</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3 col-6">
-                                    <label>Type</label>
-                                    <select class="custom-select" onchange="BreedingController.filter.type1(+this.value)">
-                                        <option value="-2">All</option>
-                                        <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
-                                        <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
-                                        <!-- /ko -->
-                                        <option value="-1">None</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col-md-3 col-6">
-                                    <label>Type</label>
-                                    <select class="custom-select" onchange="BreedingController.filter.type2(+this.value)">
-                                        <option value="-2">All</option>
-                                        <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
-                                        <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
-                                        <!-- /ko -->
-                                        <option value="-1">None</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row" data-bind="foreach: BreedingController.breedableList">
                             <button class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
                             data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)},
@@ -7824,10 +7827,6 @@ aria-labelledby="pokedexModalLabel">
                   </thead>
                   <tbody">
                     <tr>
-                      <td class="text-left">Hatched</td>
-                      <td class="text-left tight"><code data-bind="text: ((App.game.party.getPokemon($data)?.attackBonus / 25) || 0).toLocaleString('en-US')">-</code></td>
-                    </tr>
-                    <tr>
                       <td class="text-left">Encountered</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.pokemonEncountered[$data]().toLocaleString('en-US')">-</code></td>
                     </tr>
@@ -7840,6 +7839,10 @@ aria-labelledby="pokedexModalLabel">
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.pokemonCaptured[$data]().toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
+                      <td class="text-left">Hatched</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.statistics.pokemonHatched[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
                       <td class="text-left">Shinies Encountered</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonEncountered[$data]().toLocaleString('en-US')">-</code></td>
                     </tr>
@@ -7850,6 +7853,10 @@ aria-labelledby="pokedexModalLabel">
                     <tr>
                       <td class="text-left">Shinies Captured</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonCaptured[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Shinies Hatched</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonHatched[$data]().toLocaleString('en-US')">-</code></td>
                     </tr>
                   </tbody>
                 </table>
@@ -7921,13 +7928,18 @@ aria-labelledby="badgeCaseModalLabel">
                                 </div>
                             </form>
                             <hr>
+                            <!-- ko if: App.game.discord.enabled -->
+                            <button class="btn btn-primary btn-block" onClick="App.game.discord.login()" data-bind="visible: !App.game.discord.ID()">Link Discord</button>
+                            <button class="btn btn-warning btn-block" onClick="App.game.discord.logout()" data-bind="visible: App.game.discord.ID()">Unlink Discord</button>
+                            <hr>
+                            <!-- /ko -->
 
-                            <button class="btn btn-info btn-block" onClick=Save.download()>Download Save</button>
+                            <button class="btn btn-primary btn-block" onClick="Save.download()">Download Save</button>
                             <hr>
 
                             <input type="file" id="input" accept=".txt" style="display:none;"
                                     onchange=Save.loadFromFile(this.files[0])>
-                            <label for="input" class="btn btn-info btn-block">Import Save</label>
+                            <label for="input" class="btn btn-primary btn-block">Import Save</label>
                             <hr>
                             <h5 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
                                 savefile</h5>
