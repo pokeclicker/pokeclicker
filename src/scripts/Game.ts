@@ -6,21 +6,6 @@ class Game {
     public static achievementCounter = 0;
 
     // Features
-    public update: Update;
-    public breeding: Breeding;
-    public pokeballs: Pokeballs;
-    public wallet: Wallet;
-    public keyItems: KeyItems;
-    public badgeCase: BadgeCase;
-    public oakItems: OakItems;
-    public party: Party;
-    public shards: Shards;
-    public farming: Farming;
-    public logbook: LogBook;
-    public redeemableCodes: RedeemableCodes;
-    public statistics: Statistics;
-    public quests: Quests;
-    public specialEvents: SpecialEvents;
 
     private _gameState: KnockoutObservable<GameConstants.GameState>;
 
@@ -28,38 +13,23 @@ class Game {
      * TODO(@Isha) pass all features through the constructor
      */
     constructor(
-        update: Update,
-        breeding: Breeding,
-        pokeballs: Pokeballs,
-        wallet: Wallet,
-        keyItems: KeyItems,
-        badgeCase: BadgeCase,
-        oakItems: OakItems,
-        party: Party,
-        shards: Shards,
-        farming: Farming,
-        logbook: LogBook,
-        codes: RedeemableCodes,
-        statistics: Statistics,
-        quests: Quests,
-        specialEvents: SpecialEvents
+        public update: Update,
+        public breeding: Breeding,
+        public pokeballs: Pokeballs,
+        public wallet: Wallet,
+        public keyItems: KeyItems,
+        public badgeCase: BadgeCase,
+        public oakItems: OakItems,
+        public party: Party,
+        public shards: Shards,
+        public farming: Farming,
+        public logbook: LogBook,
+        public redeemableCodes: RedeemableCodes,
+        public statistics: Statistics,
+        public quests: Quests,
+        public specialEvents: SpecialEvents,
+        public discord: Discord
     ) {
-        this.update = update;
-        this.breeding = breeding;
-        this.pokeballs = pokeballs;
-        this.wallet = wallet;
-        this.keyItems = keyItems;
-        this.badgeCase = badgeCase;
-        this.oakItems = oakItems;
-        this.party = party;
-        this.shards = shards;
-        this.farming = farming;
-        this.logbook = logbook;
-        this.redeemableCodes = codes;
-        this.statistics = statistics;
-        this.quests = quests;
-        this.specialEvents = specialEvents;
-
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
         AchievementHandler.initialize();
