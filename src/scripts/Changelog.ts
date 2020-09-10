@@ -33,6 +33,10 @@ const changelogItems = [
     new Changelog(changelogType.UPDATE, 'v0.5.2'),
     new Changelog(changelogType.NEW, 'Underground quest line created'),
     new Changelog(changelogType.NEW, 'More statistics added'),
+    new Changelog(changelogType.NEW, 'Some minor Discord integration'),
+    new Changelog(changelogType.CHANGE, 'Attack achievement no longer based on current region'),
+    new Changelog(changelogType.CHANGE, 'Modified the way game ticks are handled'),
+    new Changelog(changelogType.FIXED, 'Fixed breeding filter displayed options being reset after hatchery filled up'),
 
     // v0.5.1
     new Changelog(changelogType.UPDATE, 'v0.5.1'),
