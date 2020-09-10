@@ -222,6 +222,18 @@ class Update implements Saveable {
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.5.2 - Couldn\'t update player statistics..', ಠ_ಠ);
             }
+            try {
+                // If the player has the Soul Badge already
+                // Not using game constants incase the badge value isn't 5 in the future
+                if (saveData.badgeCase[5]) {
+                    saveData.quests.questLines.push({state: 1, name: 'Mining Expedition', quest: 0});
+                }
+
+                // Update save data
+                this.setSaveData(saveData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.2 - Couldn\'t start Aerodactyl Quest line..', ಠ_ಠ);
+            }
         }
 
         // Notify the player that the game has updated!

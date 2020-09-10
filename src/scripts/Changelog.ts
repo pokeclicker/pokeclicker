@@ -31,6 +31,7 @@ class Changelog {
 const changelogItems = [
     // v0.5.2
     new Changelog(changelogType.UPDATE, 'v0.5.2'),
+    new Changelog(changelogType.NEW, 'Underground quest line created'),
     new Changelog(changelogType.NEW, 'More statistics added'),
 
     // v0.5.1
