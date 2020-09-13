@@ -523,7 +523,7 @@ dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
 dungeonList['Flower Paradise'] = new Dungeon('Flower Paradise',
     ['Vileplume', 'Bellsprout', 'Exeggutor', 'Bellossom', 'Skiploom', 'Sunflora', 'Roselia'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_incense],
-    220400,
+    2203000,
     [
         new DungeonBossPokemon('Venusaur', 7900000, 50),
         new DungeonBossPokemon('Meganium', 7000000, 50),
