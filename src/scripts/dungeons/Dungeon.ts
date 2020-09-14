@@ -33,11 +33,11 @@ class Dungeon {
         return true;
     }
 
-    private calculateAllPokemonNames() {
+    public calculateAllPokemonNames() {
         const pokemonNameSet = new Set(this.pokemonList);
-        for (let i = 0; i < this.bossList.length; i++) {
-            pokemonNameSet.add(this.bossList[i].name);
-        }
+        this.availableBosses().forEach(boss => {
+            pokemonNameSet.add(boss.name);
+        });
         this.allPokemonNames = [...pokemonNameSet];
     }
 

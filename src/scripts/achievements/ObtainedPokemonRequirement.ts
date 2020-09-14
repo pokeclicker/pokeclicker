@@ -3,12 +3,13 @@
 class ObtainedPokemonRequirement extends Requirement {
     public pokemonID: number;
 
-    constructor(pokemonID: number, value = 1, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+    constructor(pokemon: DataPokemon, value = 1, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, type);
+        this.pokemonID = pokemon.id;
     }
 
     public getProgress() {
-        return Math.min(App.game.statistics.pokemonCaptured[this.pokemonID](), this.requiredValue);
+        return Math.min(App.game?.statistics?.pokemonCaptured[this.pokemonID](), this.requiredValue);
     }
 
     public hint(): string {
