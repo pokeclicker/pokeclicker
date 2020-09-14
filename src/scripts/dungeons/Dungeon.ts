@@ -1,5 +1,7 @@
 ///<reference path="DungeonBossPokemon.ts"/>
 ///<reference path="../achievements/GymBadgeRequirement.ts"/>
+///<reference path="../achievements/MultiRequirement.ts"/>
+///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 
 /**
  * Gym class.
@@ -37,6 +39,10 @@ class Dungeon {
             pokemonNameSet.add(this.bossList[i].name);
         }
         this.allPokemonNames = [...pokemonNameSet];
+    }
+
+    public availableBosses(): DungeonBossPokemon[] {
+        return this.bossList.filter(b => b.isUnlocked());
     }
 }
 
@@ -187,7 +193,15 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     ['Rattata', 'Gastly'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     88500,
-    [new DungeonBossPokemon('Raticate', 320000, 35), new DungeonBossPokemon('Haunter', 320000, 35), new DungeonBossPokemon('Ho-Oh', 610000, 70)],
+    [
+        new DungeonBossPokemon('Raticate', 320000, 35),
+        new DungeonBossPokemon('Haunter', 320000, 35),
+        new DungeonBossPokemon('Ho-Oh', 610000, 70, new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Raikou),
+            new ObtainedPokemonRequirement(pokemonMap.Entei),
+            new ObtainedPokemonRequirement(pokemonMap.Suicune),
+        ])),
+    ],
     4500, 37, 20
 );
 

@@ -56,7 +56,7 @@ class DungeonBattle extends Battle {
         DungeonRunner.fighting(true);
         this.catching(false);
         this.counter = 0;
-        this.enemyPokemon(PokemonFactory.generateDungeonBoss(DungeonRunner.dungeon.bossList, DungeonRunner.chestsOpened));
+        this.enemyPokemon(PokemonFactory.generateDungeonBoss(DungeonRunner.dungeon.availableBosses(), DungeonRunner.chestsOpened));
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[this.enemyPokemon().id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
 
