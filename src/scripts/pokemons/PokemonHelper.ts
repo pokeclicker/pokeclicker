@@ -166,7 +166,7 @@ class PokemonHelper {
         const regions = [];
         Object.entries(RoamingPokemonList.list).forEach(([region, pokemonArr]) => {
             if (pokemonArr.find(r => r.pokemon.name == pokemonName)) {
-                regions.push(region);
+                regions.push(+region);
             }
         });
         return regions;
