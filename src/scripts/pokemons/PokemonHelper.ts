@@ -164,8 +164,8 @@ class PokemonHelper {
 
     public static getPokemonRoamingRegions(pokemonName: string): Array<string> {
         const regions = [];
-        Object.entries(GameConstants.RoamingPokemon).forEach(([region, pokemonArr]) => {
-            if (pokemonArr.includes(pokemonName)) {
+        Object.entries(RoamingPokemonList.list).forEach(([region, pokemonArr]) => {
+            if (pokemonArr.find(r => r.pokemon.name == pokemonName)) {
                 regions.push(region);
             }
         });
