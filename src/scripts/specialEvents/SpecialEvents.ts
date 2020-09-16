@@ -92,16 +92,16 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited tim
 SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Dragonite for a limited time roaming around Kanto, Johto and Hoenn.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Santa Dragonite']));
-        RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon(pokemonMap['Santa Dragonite']));
-        RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap['Santa Dragonite']));
-        RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap['Santa Dragonite']));
+        // Add to every region excluding None
+        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
+            RoamingPokemonList.add(region, new RoamingPokemon(pokemonMap['Santa Dragonite']));
+        });
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
-        RoamingPokemonList.list[GameConstants.Region.kanto] = RoamingPokemonList.list[GameConstants.Region.kanto].filter(r => r.pokemon.name != 'Santa Dragonite');
-        RoamingPokemonList.list[GameConstants.Region.johto] = RoamingPokemonList.list[GameConstants.Region.johto].filter(r => r.pokemon.name != 'Santa Dragonite');
-        RoamingPokemonList.list[GameConstants.Region.hoenn] = RoamingPokemonList.list[GameConstants.Region.hoenn].filter(r => r.pokemon.name != 'Santa Dragonite');
-        RoamingPokemonList.list[GameConstants.Region.sinnoh] = RoamingPokemonList.list[GameConstants.Region.sinnoh].filter(r => r.pokemon.name != 'Santa Dragonite');
+        // Remove from every region excluding None
+        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
+            RoamingPokemonList.remove(region, 'Santa Dragonite');
+        });
     }
 );
