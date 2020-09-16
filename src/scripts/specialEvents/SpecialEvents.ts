@@ -36,20 +36,18 @@ class SpecialEvents implements Feature {
 // TODO: Fetch events from a server each 1/2/3/6/12/24 hours?
 // Create our events here for now
 
-// Once off - for now..
-SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time on any route in Kanto.',
+
+// Yearly
+SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
-        SeededRand.seed(new Date().getFullYear());
-        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => SeededRand.boolean() ? route.pokemon.land.push('Flying Pikachu') : null);
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Flying Pikachu']));
     },
     // End
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
-        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => p != 'Flying Pikachu'));
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Flying Pikachu');
     }
 );
-
-// Yearly
 SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokemon roaming in Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
