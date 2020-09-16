@@ -116,6 +116,7 @@ class BreedingController {
     }
 
     public static filter = {
+        search: ko.observable(new RegExp('', 'i')),
         shinyStatus: ko.observable(CaughtStatus.NotCaught).extend({ numeric: 0 }),
         // All = -2
         type1: ko.observable(-2).extend({ numeric: 0 }),
@@ -127,6 +128,10 @@ class BreedingController {
         return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
             // Only breedable Pokemon
             if (partyPokemon.breeding || partyPokemon.level < 100) {
+                return false;
+            }
+
+            if (!BreedingController.filter.search().test(partyPokemon.name)) {
                 return false;
             }
 

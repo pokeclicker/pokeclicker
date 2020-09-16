@@ -19,6 +19,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 <div class="tab-pane active" id="breeding-pokemon">
                     <div class="text-left">
                         <div class="form-row">
+                            <div class="form-group col-md-6 col-6">
+                                <label>Search</label>
+                                <input class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
+                            </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Region</label>
                                 <select class="custom-select" onchange="BreedingController.filter.region(+this.value)">
