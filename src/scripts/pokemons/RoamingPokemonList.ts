@@ -10,6 +10,13 @@ class RoamingPokemonList {
         RoamingPokemonList.list[region].push(roamer);
     }
 
+    public static remove(region: GameConstants.Region, pokemonName: string): void {
+        const index = RoamingPokemonList.list[region].findIndex(r => r.pokemon.name == pokemonName);
+        if (index) {
+            RoamingPokemonList.list[region].splice(index, 1);
+        }
+    }
+
     public static getRegionalRoamers(region: GameConstants.Region): Array<RoamingPokemon> {
         return RoamingPokemonList.list[region] ? RoamingPokemonList.list[region].filter(p => p.isRoaming()) : [];
     }
