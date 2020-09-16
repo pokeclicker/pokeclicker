@@ -12,7 +12,7 @@ class RoamingPokemonList {
 
     public static remove(region: GameConstants.Region, pokemonName: string): void {
         const index = RoamingPokemonList.list[region].findIndex(r => r.pokemon.name == pokemonName);
-        if (index) {
+        if (index >= 0) {
             RoamingPokemonList.list[region].splice(index, 1);
         }
     }
