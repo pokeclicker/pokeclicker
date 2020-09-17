@@ -1,5 +1,5 @@
 class RoamingPokemonList {
-    public static list: Array<Array<RoamingPokemon>> = [];
+    public static list: Partial<Record<GameConstants.Region, Array<RoamingPokemon>>> = {};
 
     constructor() { }
 
