@@ -48,13 +48,6 @@ namespace GameConstants {
     export const ROAMING_MIN_CHANCE = 8192;
     export const ROAMING_MAX_CHANCE = 4096;
 
-    export const RoamingPokemon = {
-        0: ['Mew'],
-        1: ['Raikou', 'Entei', 'Suicune'],
-        2: ['Latios', 'Latias', 'Regice', 'Regirock', 'Registeel', 'Jirachi'],
-        3: ['Manaphy'],
-    };
-
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
@@ -429,6 +422,7 @@ namespace GameConstants {
         'Bulbasaur' = 0,
         'Charmander' = 1,
         'Squirtle' = 2,
+        'Pikachu' = 3,
     }
 
     export enum StoneType {

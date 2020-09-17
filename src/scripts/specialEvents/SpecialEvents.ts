@@ -36,43 +36,30 @@ class SpecialEvents implements Feature {
 // TODO: Fetch events from a server each 1/2/3/6/12/24 hours?
 // Create our events here for now
 
-// Once off - for now..
-SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time on any route in Kanto.',
+
+// Yearly
+SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited time roaming Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 6, 1), () => {
-        SeededRand.seed(new Date().getFullYear());
-        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => SeededRand.boolean() ? route.pokemon.land.push('Flying Pikachu') : null);
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Flying Pikachu']));
     },
     // End
     new Date(new Date().getFullYear(), 6, 12, 23), () => {
-        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => p != 'Flying Pikachu'));
+        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Flying Pikachu');
     }
 );
-// TODO: remove once event finishes
-SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokemon roaming in Kanto.',
-    // Start
-    new Date(2020, 7, 3, 2), () => {
-        dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
-        GameConstants.RoamingPokemon[GameConstants.Region.kanto].push(...['Bulbasaur (clone)', 'Charmander (clone)', 'Squirtle (clone)']);
-    },
-    // End
-    new Date(2020, 7, 9, 2), () => {
-        dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
-        GameConstants.RoamingPokemon[GameConstants.Region.kanto] = GameConstants.RoamingPokemon[GameConstants.Region.kanto].filter(p => !['Bulbasaur (clone)', 'Charmander (clone)', 'Squirtle (clone)'].includes(p));
-    }
-);
-
-// Yearly
 SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokemon roaming in Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
         dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
-        GameConstants.RoamingPokemon[GameConstants.Region.kanto].push(...['Bulbasaur (clone)', 'Charmander (clone)', 'Squirtle (clone)']);
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Bulbasaur (clone)']));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Charmander (clone)']));
+        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Squirtle (clone)']));
     },
     // End
     new Date(new Date().getFullYear(), 6, 24, 23), () => {
         dungeonList['Cerulean Cave'].bossList = dungeonList['Cerulean Cave'].bossList.filter(boss => boss.name != 'Armored Mewtwo');
-        GameConstants.RoamingPokemon[GameConstants.Region.kanto] = GameConstants.RoamingPokemon[GameConstants.Region.kanto].filter(p => !['Bulbasaur (clone)', 'Charmander (clone)', 'Squirtle (clone)'].includes(p));
+        RoamingPokemonList.list[GameConstants.Region.kanto] = RoamingPokemonList.list[GameConstants.Region.kanto].filter(r => !['Bulbasaur (clone)', 'Charmander (clone)', 'Squirtle (clone)'].includes(r.pokemon.name));
     }
 );
 SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto, Johto and Hoenn.',
@@ -103,14 +90,16 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited tim
 SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Dragonite for a limited time roaming around Kanto, Johto and Hoenn.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
-        GameConstants.RoamingPokemon[GameConstants.Region.kanto].push('Santa Dragonite');
-        GameConstants.RoamingPokemon[GameConstants.Region.johto].push('Santa Dragonite');
-        GameConstants.RoamingPokemon[GameConstants.Region.hoenn].push('Santa Dragonite');
+        // Add to every region excluding None
+        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
+            RoamingPokemonList.add(region, new RoamingPokemon(pokemonMap['Santa Dragonite']));
+        });
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
-        GameConstants.RoamingPokemon[GameConstants.Region.kanto] = GameConstants.RoamingPokemon[GameConstants.Region.kanto].filter(p => p != 'Santa Dragonite');
-        GameConstants.RoamingPokemon[GameConstants.Region.johto] = GameConstants.RoamingPokemon[GameConstants.Region.johto].filter(p => p != 'Santa Dragonite');
-        GameConstants.RoamingPokemon[GameConstants.Region.hoenn] = GameConstants.RoamingPokemon[GameConstants.Region.hoenn].filter(p => p != 'Santa Dragonite');
+        // Remove from every region excluding None
+        GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
+            RoamingPokemonList.remove(region, 'Santa Dragonite');
+        });
     }
 );
