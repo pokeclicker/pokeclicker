@@ -422,6 +422,7 @@ namespace GameConstants {
         'Bulbasaur' = 0,
         'Charmander' = 1,
         'Squirtle' = 2,
+        'Pikachu' = 3,
     }
 
     export enum StoneType {

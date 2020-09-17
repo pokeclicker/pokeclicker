@@ -1,6 +1,7 @@
 class StartSequenceRunner {
 
     public static starterPicked: GameConstants.Starter = GameConstants.Starter.None
+    public static noStarterCount = 0;
 
     public static start() {
         App.game.gameState = GameConstants.GameState.paused;
@@ -57,8 +58,18 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
     $('#pickStarterModal').on('hidden.bs.modal', function () {
         if (StartSequenceRunner.starterPicked == GameConstants.Starter.None) {
-            $('#pickStarterModalText').text("I can't hold off all three! Please pick the pokémon you want to fight!");
+            StartSequenceRunner.noStarterCount++;
+            const startersCount = StartSequenceRunner.noStarterCount >= 5 ? 'four' : 'three';
+            $('#pickStarterModalText').text(`I can't hold off all ${startersCount}! Please pick the pokémon you want to fight!`);
             $('#pickStarterModal').modal('show');
+            if (StartSequenceRunner.noStarterCount == 5) {
+                // Add Pikachu to the selections
+                $('#starterSelection').append(`<div class="col">
+                        <input class="image-starter" type="image"
+                           src="assets/images/pokemon/25.png"
+                           onclick="StartSequenceRunner.pickStarter(GameConstants.Starter.Pikachu)">
+                    </div>`);
+            }
         }
     });
 
