@@ -1,5 +1,7 @@
 ///<reference path="DungeonBossPokemon.ts"/>
 ///<reference path="../achievements/GymBadgeRequirement.ts"/>
+///<reference path="../achievements/MultiRequirement.ts"/>
+///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
 
 /**
  * Gym class.
@@ -31,12 +33,16 @@ class Dungeon {
         return true;
     }
 
-    private calculateAllPokemonNames() {
+    public calculateAllPokemonNames() {
         const pokemonNameSet = new Set(this.pokemonList);
-        for (let i = 0; i < this.bossList.length; i++) {
-            pokemonNameSet.add(this.bossList[i].name);
-        }
+        this.availableBosses().forEach(boss => {
+            pokemonNameSet.add(boss.name);
+        });
         this.allPokemonNames = [...pokemonNameSet];
+    }
+
+    public availableBosses(): DungeonBossPokemon[] {
+        return this.bossList.filter(b => b.isUnlocked());
     }
 }
 
@@ -171,7 +177,12 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
     ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Zubat', 'Oddish', 'Paras', 'Hoothoot'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Token_collector],
     82200,
-    [new DungeonBossPokemon('Noctowl', 300000, 30), new DungeonBossPokemon('Beedrill', 300000, 30), new DungeonBossPokemon('Butterfree', 300000, 30), new DungeonBossPokemon('Celebi', 600000, 50)],
+    [
+        new DungeonBossPokemon('Noctowl', 300000, 30),
+        new DungeonBossPokemon('Beedrill', 300000, 30),
+        new DungeonBossPokemon('Butterfree', 300000, 30),
+        new DungeonBossPokemon('Celebi', 600000, 50, new GymBadgeRequirement(BadgeCase.Badge.Elite_JohtoChampion)),
+    ],
     4000, 34, 15
 );
 
@@ -187,7 +198,15 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     ['Rattata', 'Gastly'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     88500,
-    [new DungeonBossPokemon('Raticate', 320000, 35), new DungeonBossPokemon('Haunter', 320000, 35), new DungeonBossPokemon('Ho-Oh', 610000, 70)],
+    [
+        new DungeonBossPokemon('Raticate', 320000, 35),
+        new DungeonBossPokemon('Haunter', 320000, 35),
+        new DungeonBossPokemon('Ho-Oh', 610000, 70, new MultiRequirement([
+            new ObtainedPokemonRequirement(pokemonMap.Raikou),
+            new ObtainedPokemonRequirement(pokemonMap.Entei),
+            new ObtainedPokemonRequirement(pokemonMap.Suicune),
+        ])),
+    ],
     4500, 37, 20
 );
 
