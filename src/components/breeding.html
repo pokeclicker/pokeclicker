@@ -78,19 +78,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <div class="row" data-bind="foreach: BreedingController.breedableList">
-                            <button class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
-                            data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)},
-                            click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: BreedingController.breedableList">
+                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
-                                <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
-                                    <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
-                                    <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
-                                    data-bind="text: BreedingController.getDisplayValue($data)">Attack: 0</span>
-                                </div>
-                            </button>
-                        </div>
+                                <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
+                                <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
+                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
+                                <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}"></a>
+                            </li>
+                        </ul>
                         <!-- /ko -->
                     </div>
                     <p class="text-danger" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
