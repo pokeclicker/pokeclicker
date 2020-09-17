@@ -8,6 +8,6 @@ class DungeonBossPokemon {
     ) {}
 
     public isUnlocked(): boolean {
-        return this.requirement ? this.requirement.isCompleted() : true;
+        return App.game && this.requirement ? this.requirement.isCompleted() : true;
     }
 }
