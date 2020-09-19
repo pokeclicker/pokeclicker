@@ -42,3 +42,7 @@ RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap
 
 // Sinnoh
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Manaphy));
+
+// Unova
+RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Tornadus));
+RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Thundurus));

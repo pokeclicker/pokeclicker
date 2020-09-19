@@ -29,36 +29,60 @@ class Breeding implements Feature {
             ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
             ['Torchic'],
             ['Chimchar'],
+            ['Tepig'],
+            ['Fennekin'],
+            ['Litten'],
+            ['Scorbunny'],
         ];
         this.hatchList[EggType.Water] = [
             ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
             ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
             ['Mudkip', 'Feebas', 'Clamperl'],
             ['Piplup', 'Finneon'],
+            ['Oshawott'],
+            ['Froakie'],
+            ['Popplio'],
+            ['Sobble'],
         ];
         this.hatchList[EggType.Grass] = [
             ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
             ['Chikorita', 'Hoppip', 'Sunkern'],
             ['Treecko', 'Tropius', 'Roselia'],
             ['Turtwig', 'Carnivine'],
+            ['Snivy'],
+            ['Chespin'],
+            ['Rowlet'],
+            ['Grookey'],
         ];
         this.hatchList[EggType.Fighting] = [
             ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
             ['Tyrogue'],
             ['Makuhita', 'Meditite'],
             ['Riolu'],
+            [],
+            [],
+            [],
+            [],
         ];
         this.hatchList[EggType.Electric] = [
             ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
             ['Chinchou', 'Mareep', 'Elekid'],
             ['Plusle', 'Minun', 'Electrike'],
             ['Pachirisu'],
+            [],
+            [],
+            [],
+            [],
         ];
         this.hatchList[EggType.Dragon] = [
             ['Dratini', 'Dragonair', 'Dragonite'],
             [],
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
+            ['Deino', 'Zwellous', 'Hydreigon'],
+            [],
+            [],
+            [],
         ];
 
     }

@@ -534,6 +534,8 @@ namespace GameConstants {
         'Claw Fossil': 'Anorith',
         'Armor Fossil': 'Shieldon',
         'Skull Fossil': 'Cranidos',
+        'Cover Fossil': 'Tirtouga',
+        'Plume Fossil': 'Archen',
     };
 
     //Used for image name
@@ -545,6 +547,8 @@ namespace GameConstants {
         'Anorith': 'Claw Fossil',
         'Shieldon': 'Armor Fossil',
         'Cranidos': 'Skull Fossil',
+        'Tirtouga': 'Cover Fossil',
+        'Archen': 'Plume Fossil',
 
     };
 
@@ -612,12 +616,29 @@ namespace GameConstants {
         'Elite Lucian',
         'Champion Cynthia',
     ];
+    
+    export const UnovaGyms = [
+        'Aspertia City',
+        'Virbank City',
+        'Castelia City',
+        'Nimbasa City',
+        'Driftveil City',
+        'Mistralton City',
+        'Opelucid City',
+        'Humilau City',
+        'Elite Shauntal',
+        'Elite Marshal',
+        'Elite Grimsley',
+        'Elite Caitlin',
+        'Champion Iris',
+    ];
 
     export const RegionGyms = [
         KantoGyms,
         JohtoGyms,
         HoennGyms,
         SinnohGyms,
+        UnovaGyms,
     ];
 
     export const KantoDungeons = [
@@ -717,12 +738,43 @@ namespace GameConstants {
         'Snowpoint Temple',
         'Stark Mountain',
     ];
+    
+    export const UnovaDungeons = [
+        'Pledge Grove',
+        'Flocessy Ranch',
+        'Virbank Complex',    //Optional dungeon, contains no unique Pokémon, safe to scrap
+        'Liberty Garden',
+        'Castelia Sewers',
+        'Relic Passage',
+        'Desert Resort',    //Should really be a route
+        'Relic Castle',
+        'Lostlorn Forest',
+        'Chargestone Cave',
+        'Mistralton Cave',
+        'Celestial Tower',
+        'Reversal Mountain',
+        'Strange House',    //Optional dungeon, contains no unique Pokémon, safe to scrap
+        'Undella Bay',    //Should really be a route
+        'Seaside Cave',
+        'Giant Chasm',
+        'Abundant Shrine',
+        'Cave of Being',    //Contains gen 4 trio only
+        'Victory Road Unova',
+        'Twist Mountain',
+        'Dragonspiral Tower',
+        'Moor of Icirrus',
+        'Pinwheel Forest',
+        'Wellspring Cave',    //Optional dungeon, contains no unique Pokémon, safe to scrap
+        'Dreamyard',
+        'P2 Laboratory',
+    ];
 
     export const RegionDungeons = [
         KantoDungeons,
         JohtoDungeons,
         HoennDungeons,
         SinnohDungeons,
+        UnovaDungeons,
     ];
 
     export const StartingTowns = [
@@ -730,6 +782,7 @@ namespace GameConstants {
         'New Bark Town',
         'Littleroot Town',
         'Twinleaf Town',
+        'Aspertia City',
     ];
 
     export const DockTowns = [
@@ -737,5 +790,6 @@ namespace GameConstants {
         'Olivine City',
         'Slateport City',
         'Canalave City',
+        'Castelia City',
     ];
 }

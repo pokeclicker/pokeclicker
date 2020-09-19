@@ -114,5 +114,19 @@ namespace BadgeCase {
         'Elite_Flint',
         'Elite_Lucian',
         'Elite_SinnohChampion',
+        //Unova
+        'Basic',
+        'Toxic',
+        'Insect',
+        'Bolt',
+        'Quake',
+        'Jet',
+        'Legend',
+        'Wave',
+        'Elite_Shauntal',
+        'Elite_Marshal',
+        'Elite_Grimsley',
+        'Elite_Caitlin',
+        'Elite_UnovaChampion',
     }
 }
