@@ -129,7 +129,7 @@ class SpecialEvent {
 
         // If more than 1 day, don't notify the player yet
         if (timeTillEventEnd > 1 * GameConstants.DAY) {
-            // Check again when 7 days left until event start, or in 7 days (whichever is less)
+            // Check again when 1 day left until event start, or in 1 day (whichever is less)
             setTimeout(() => {
                 this.checkEnd();
             }, Math.min(1 * GameConstants.DAY, timeTillEventEnd - 1 * GameConstants.DAY));
