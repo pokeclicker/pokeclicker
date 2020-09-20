@@ -19,6 +19,7 @@ class Discord implements Saveable {
         new DiscordPokemonCode(pokemonMap['Unown (C)'], 700, 'Alternate form of Unown'),
         new DiscordPokemonCode(pokemonMap['Unown (O)'], 700, 'Alternate form of Unown'),
         new DiscordPokemonCode(pokemonMap['Unown (R)'], 700, 'Alternate form of Unown'),
+        new DiscordPokemonCode(pokemonMap['Surfing Pikachu'], 1500, 'It\'s a Pikachu on a surfboard!'),
     ];
 
     get enabled(): boolean {
