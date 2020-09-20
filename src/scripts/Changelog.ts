@@ -38,6 +38,9 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, 'Some Dungeon Pokémon will only appear after certain requirements have been met'),
     new Changelog(changelogType.FIXED, 'Flower Paradise dungeon HP corrected'),
     new Changelog(changelogType.FIXED, 'Route 40 should no longer unlock before reaching it'),
+    new Changelog(changelogType.FIXED, 'Reduce some checks firing too often'),
+    new Changelog(changelogType.FIXED, 'Game controls will be ignored if focused on an input element'),
+    new Changelog(changelogType.FIXED, 'Backgrounds should no longer overflow in breeding modal'),
 
     // v0.5.2
     new Changelog(changelogType.UPDATE, 'v0.5.2'),
