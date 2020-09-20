@@ -775,7 +775,7 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Durant' 8000000, 70),
+        new DungeonBossPokemon('Durant', 8000000, 70),
         new DungeonBossPokemon('Cryogonal', 8000000, 70),
         new DungeonBossPokemon('Heatmor', 8000000, 70),
         new DungeonBossPokemon('Regigigas', 8000000, 70),
