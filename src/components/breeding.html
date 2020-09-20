@@ -19,6 +19,19 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 <div class="tab-pane active" id="breeding-pokemon">
                     <div class="text-left">
                         <div class="form-row">
+                            <div class="form-group col-md-6 col-6">
+                                <label>Search</label>
+                                <input class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
+                            </div>
+                            <div class="form-group col-md-6 col-6">
+                                <label>Display Value</label>
+                                <select class="custom-select" onchange="BreedingController.displayValue(this.value)">
+                                    <option value="attack" selected>Attack</option>
+                                    <option value="attackBonus">Attack Bonus</option>
+                                    <option value="baseAttack">Base Attack</option>
+                                    <option value="eggSteps">Egg Steps</option>
+                                </select>
+                            </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Region</label>
                                 <select class="custom-select" onchange="BreedingController.filter.region(+this.value)">
@@ -73,8 +86,8 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
                                     <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
                                     <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
-                                    <span class="attack" style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
-                                    data-bind="text: $data.attack">attack</span>
+                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
+                                    data-bind="text: BreedingController.getDisplayValue($data)">Attack: 0</span>
                                 </div>
                             </button>
                         </div>

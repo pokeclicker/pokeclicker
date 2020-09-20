@@ -1,11 +1,13 @@
 class DungeonBossPokemon {
-    name: string;
-    baseHealth: number;
-    level: number;
 
-    constructor(name: string, maxHealth: number, level: number) {
-        this.name = name;
-        this.baseHealth = maxHealth;
-        this.level = level;
+    constructor(
+        public name: string,
+        public baseHealth: number,
+        public level: number,
+        public requirement?: MultiRequirement | OneFromManyRequirement | Requirement
+    ) {}
+
+    public isUnlocked(): boolean {
+        return App.game && this.requirement ? this.requirement.isCompleted() : true;
     }
 }

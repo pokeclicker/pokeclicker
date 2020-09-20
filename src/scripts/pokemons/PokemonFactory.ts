@@ -16,8 +16,8 @@ class PokemonFactory {
         let name: string;
 
         if (PokemonFactory.roamingEncounter(route, region)) {
-            const possible = GameConstants.RoamingPokemon[region];
-            name = possible[Math.floor(Math.random() * possible.length)];
+            const possible = RoamingPokemonList.getRegionalRoamers(region);
+            name = possible[Math.floor(Math.random() * possible.length)].pokemon.name;
         } else {
             const pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
             const rand: number = Math.floor(Math.random() * pokemonList.length);
@@ -141,8 +141,8 @@ class PokemonFactory {
 
     private static roamingEncounter(route: number, region: GameConstants.Region): boolean {
         const routes = GameConstants.RegionRoute[region];
-        const roamingPokemon = GameConstants.RoamingPokemon[region];
-        if (!routes || !roamingPokemon) {
+        const roamingPokemon = RoamingPokemonList.getRegionalRoamers(region);
+        if (!routes || !roamingPokemon || !roamingPokemon.length) {
             return false;
         }
         return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, routes[1], routes[0], route);

@@ -116,6 +116,7 @@ class BreedingController {
     }
 
     public static filter = {
+        search: ko.observable(new RegExp('', 'i')),
         shinyStatus: ko.observable(CaughtStatus.NotCaught).extend({ numeric: 0 }),
         // All = -2
         type1: ko.observable(-2).extend({ numeric: 0 }),
@@ -127,6 +128,10 @@ class BreedingController {
         return App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
             // Only breedable Pokemon
             if (partyPokemon.breeding || partyPokemon.level < 100) {
+                return false;
+            }
+
+            if (!BreedingController.filter.search().test(partyPokemon.name)) {
                 return false;
             }
 
@@ -160,10 +165,23 @@ class BreedingController {
             }
             return true;
         });
-    }, {rateLimit: 1000});
+    }, {rateLimit: 2000});
 
     private static isPureType(pokemon: PartyPokemon, type: (PokemonType | null)): boolean {
         const pokemonData = pokemonMap[pokemon.name];
         return ((type == null || pokemonData.type[0] === type) && (pokemonData.type[1] == undefined || pokemonData.type[1] == PokemonType.None));
+    }
+
+    // Value displayed at bottom of image
+    public static displayValue = ko.observable('attack');
+
+    private static getDisplayValue(pokemon: PartyPokemon): string {
+        const pokemonData = pokemonMap[pokemon.name];
+        switch (this.displayValue()) {
+            case 'attack': return `Attack: ${pokemon.attack.toLocaleString('en-US')}`;
+            case 'attackBonus': return `Attack Bonus: ${Math.floor(pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100)).toLocaleString('en-US')}`;
+            case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
+            case 'eggSteps': return `Egg Steps: ${App.game.breeding.getSteps(pokemonData.eggCycles).toLocaleString('en-US')}`;
+        }
     }
 }
