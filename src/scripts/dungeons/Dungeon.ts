@@ -572,7 +572,7 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
     96500, 201, 35);
 
 // Unova
-
+// TODO: Balancing of dungeon Pokemon HP & rewards.
 dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
     ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
