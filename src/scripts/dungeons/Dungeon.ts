@@ -577,18 +577,14 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
     ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Keldeo (Resolute)', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Keldeo (Resolute)', 8000000, 70)],
     96500, 201, 35);
     
 dungeonList['Flocessy Ranch'] = new Dungeon('Flocessy Ranch',
     ['Psyduck', 'Mareep', 'Azurill', 'Patrat', 'Lillipup', 'Pidove'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Riolu', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Riolu', 8000000, 70)],
     96500, 201, 35);
     
 dungeonList['Virbank Complex'] = new Dungeon('Virbank Complex',
@@ -605,9 +601,7 @@ dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
     ['Rattata', 'Zubat', 'Grimer', 'Trubbish'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Muk', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Muk', 8000000, 70)],
     96500, 201, 35);
     
 dungeonList['Relic Passage'] = new Dungeon('Relic Passage',
@@ -676,9 +670,7 @@ dungeonList['Celestial Tower'] = new Dungeon('Celestial Tower',
     ['Golbat', 'Elgyem', 'Misdreavus', 'Haunter'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Litwick', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Litwick', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
