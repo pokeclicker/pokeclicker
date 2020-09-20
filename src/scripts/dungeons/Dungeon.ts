@@ -670,9 +670,10 @@ dungeonList['Mistralton Cave'] = new Dungeon('Mistralton Cave',
         new DungeonBossPokemon('Axew', 8000000, 70),
         new DungeonBossPokemon('Cobalion', 8000000, 70),
     ],
+    96500, 201, 35);
     
 dungeonList['Celestial Tower'] = new Dungeon('Celestial Tower',
-    ['Golbat', 'Elgyem', 'Misdreavus' 'Haunter'],
+    ['Golbat', 'Elgyem', 'Misdreavus', 'Haunter'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -710,6 +711,8 @@ dungeonList['Undella Bay'] = new Dungeon ('Undella Bay',
         new DungeonBossPokemon('Mantine', 8000000, 70),
         new DungeonBossPokemon('Walrein', 8000000, 70),
         new DungeonBossPokemon('Wailord', 8000000, 70),
+    ],
+    96500, 201, 35);
     
 dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     ['Golduck', 'Seel', 'Shellder', 'Luvdisc', 'Boldore', 'Woobat', 'Tynamo', 'Frillish'],
