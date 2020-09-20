@@ -573,7 +573,7 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
 
 // Unova
 
-dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove'
+dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
     ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
@@ -582,7 +582,7 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove'
     ],
     96500, 201, 35);
     
-dungeonList['Flocessy Ranch'] = new Dungeon('Flocessy Ranch'
+dungeonList['Flocessy Ranch'] = new Dungeon('Flocessy Ranch',
     ['Psyduck', 'Mareep', 'Azurill', 'Patrat', 'Lillipup', 'Pidove'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
@@ -591,7 +591,7 @@ dungeonList['Flocessy Ranch'] = new Dungeon('Flocessy Ranch'
     ],
     96500, 201, 35);
     
-dungeonList['Virbank Complex'] = new Dungeon('Virbank Complex'
+dungeonList['Virbank Complex'] = new Dungeon('Virbank Complex',
     ['Magnemite', 'Koffing', 'Patrat', 'Pidove', 'Lillipup', 'Pidove'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
