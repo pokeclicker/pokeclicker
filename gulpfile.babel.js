@@ -164,7 +164,7 @@ gulp.task('copyWebsite', () => {
 gulp.task('cname', (done) => {
     if (!config.CNAME) {
         console.warn('[warning] No CNAME set in config!');
-        return;
+        return done();
     }
     fs.writeFile(`${dests.githubPages}CNAME`, config.CNAME, done);
 });
