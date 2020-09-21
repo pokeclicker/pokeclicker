@@ -580,7 +580,7 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
     [new DungeonBossPokemon('Keldeo (Resolute)', 8000000, 70)],
     96500, 201, 35);
     
-dungeonList['Flocessy Ranch'] = new Dungeon('Flocessy Ranch',
+dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     ['Psyduck', 'Mareep', 'Azurill', 'Patrat', 'Lillipup', 'Pidove'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
