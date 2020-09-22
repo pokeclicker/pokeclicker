@@ -801,3 +801,189 @@ gymList['Champion Cynthia'] = new Gym(
     'That was excellent. Truly, an outstanding battle. You gave the support your Pokémon needed to maximize their power. And you guided them with certainty to secure victory. You have both passion and calculating coolness. Together, you and your Pokémon can overcome any challenge that may come your way. Those are the impressions I got from our battle. I\'m glad I got to take part in the crowning of Sinnoh\'s new Champion! Come with me. We\'ll take the lift.',
     [new GymBadgeRequirement(BadgeCase.Badge.Elite_Lucian)]
 );
+gymList['Aspertia City'] = new Gym(
+    'Cheren',
+    'Aspertia City',
+    [
+        new GymPokemon('Patrat', 2458300, 58),
+        new GymPokemon('Pidove', 2462000, 58),
+        new GymPokemon('Lillipup', 2464000, 58),
+    ],
+    BadgeCase.Badge.Basic,
+    128000,
+    'That battle has made me feel really glad you were my first challenger as a Gym Leader… I give you this in honor of the strength you and your Pokémon showed!',
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Floccesy Ranch'))]
+);
+gymList['Virbank City'] = new Gym(
+    'Roxie',
+    'Virbank City',
+    [
+        new GymPokemon('Koffing', 2458300, 58),
+        new GymPokemon('Grimer', 2462000, 58),
+        new GymPokemon('Whirlipede', 2464000, 58),
+    ],
+    BadgeCase.Badge.Toxic,
+    128000,
+    'Sigh! What are you doing losing, Roxie?! Well…I guess that means you\'re strong! This stinks, but I gave it everything I had, and I feel revitalized and refreshed now! Here! Proof that you beat me!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Basic)]
+);
+gymList['Castelia City'] = new Gym(
+    'Burgh',
+    'Castelia City',
+    [
+        new GymPokemon('Dwebble', 2458300, 58),
+        new GymPokemon('Shelmet', 2462000, 58),
+        new GymPokemon('Karrablast', 2464000, 58),
+        new GymPokemon('Leavanny', 2464000, 58),
+    ],
+    BadgeCase.Badge.Insect,
+    128000,
+    'Oh hoo… You are very strong indeed! I guess it\'s no surprise I lost. Here! Take this Insect Badge! I think it\'ll suit you!',
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Castelia Sewers'))]
+);
+gymList['Nimbasa City'] = new Gym(
+    'Elesa',
+    'Nimbasa City',
+    [
+        new GymPokemon('Emolga', 2458300, 58),
+        new GymPokemon('Flaaffy', 2462000, 58),
+        new GymPokemon('Joltik', 2464000, 58),
+        new GymPokemon('Zebstrika', 2464000, 58),
+    ],
+    BadgeCase.Badge.Bolt,
+    128000,
+    'Well… Now you… you\'re an even more wonderful Trainer than I expected. Your sweet fighting style swept me off my feet! Take this!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Insect)]
+);
+gymList['Driftveil City'] = new Gym(
+    'Clay',
+    'Driftveil City',
+    [
+        new GymPokemon('Krokorok', 2458300, 58),
+        new GymPokemon('Sandslash', 2462000, 58),
+        new GymPokemon('Onix', 2464000, 58),
+        new GymPokemon('Excadrill', 2464000, 58),
+    ],
+    BadgeCase.Badge.Quake,
+    128000,
+    'Phew… You\'re really somethin\'! Li\'l whippersnapper Trainers who pack a real punch keep showin\' up one after another. Mrmph. Here! Take this!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Bolt)]
+);
+gymList['Mistralton City'] = new Gym(
+    'Skyla',
+    'Mistralton City',
+    [
+        new GymPokemon('Swoobat', 2458300, 58),
+        new GymPokemon('Skarmory', 2462000, 58),
+        new GymPokemon('Sigilyph', 2464000, 58),
+        new GymPokemon('Swanna', 2464000, 58),
+    ],
+    BadgeCase.Badge.Jet,
+    128000,
+    'You\'re an amazing Pokémon Trainer. My Pokémon and I are happy because for the first time in quite a while--about two years, I\'d say--we could fight with our full strength. This is an official League Gym Badge. But this is just a stepping-stone.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Quake)]
+);
+gymList['Opelucid City'] = new Gym(
+    'Drayden',
+    'Opelucid City',
+    [
+        new GymPokemon('Druddigon', 2458300, 58),
+        new GymPokemon('Flygon', 2462000, 58),
+        new GymPokemon('Altaria', 2464000, 58),
+        new GymPokemon('Haxorus', 2464000, 58),
+    ],
+    BadgeCase.Badge.Legend,
+    128000,
+    'Wonderful. I\'m grateful that we had a chance to meet and battle. It reminded me that Pokémon battles are about working with others to meet our challenges together.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Jet)]
+);
+gymList['Humilau City'] = new Gym(
+    'Marlon',
+    'Humilau City',
+    [
+        new GymPokemon('Wailord', 2458300, 58),
+        new GymPokemon('Mantine', 2462000, 58),
+        new GymPokemon('Carracosta', 2464000, 58),
+        new GymPokemon('Jellicent', 2464000, 58),
+    ],
+    BadgeCase.Badge.Wave,
+    128000,
+    'You don\'t just look strong, you\'re strong fo\' reals! Eh, I was swept away, too! Oh yeah, yo. I was so surprised that I forgot! I gotta give this to you!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Legend)]
+);
+gymList['Elite Shauntal'] = new Gym(
+    'Shauntal',
+    'Elite Shauntal',
+    [
+        new GymPokemon('Cofagrigus', 1945330, 49),
+        new GymPokemon('Drifblim', 1948300, 49),
+        new GymPokemon('Golurk', 1952000, 50),
+        new GymPokemon('Banette', 1957000, 51),
+        new GymPokemon('Chandelure', 1960250, 53),
+    ],
+    BadgeCase.Badge.Elite_Shauntal,
+    64000,
+    'My Pokémon and the challenger\'s Pokémon. Everyone battled even though they were hurt... Thank you.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Wave)]
+);
+gymList['Elite Marshal'] = new Gym(
+    'Marshal',
+    'Elite Marshal',
+    [
+        new GymPokemon('Throh', 1945330, 49),
+        new GymPokemon('Sawk', 1948300, 49),
+        new GymPokemon('Mienshao', 1952000, 50),
+        new GymPokemon('Lucario', 1957000, 51),
+        new GymPokemon('Conkeldurr', 1960250, 53),
+    ],
+    BadgeCase.Badge.Elite_Marshal,
+    64000,
+    'Whew! Well done! As your battles continue, aim for even greater heights!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Shauntal)]
+);
+gymList['Elite Grimsley'] = new Gym(
+    'Grimsley',
+    'Elite Grimsley',
+    [
+        new GymPokemon('Liepard', 1945330, 49),
+        new GymPokemon('Scrafty', 1948300, 49),
+        new GymPokemon('Krookodile', 1952000, 50),
+        new GymPokemon('Absol', 1957000, 51),
+        new GymPokemon('Bisharp', 1960250, 53),
+    ],
+    BadgeCase.Badge.Elite_Grimsley,
+    64000,
+    'Whether or not you get to fight at full strength, whether or not luck smiles on you--none of that matters. Only results matter. And a loss is a loss. See, victory shines like a bright light. And right now, you and your Pokémon are shining brilliantly.',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Marshal)]
+);
+gymList['Elite Caitlin'] = new Gym(
+    'Caitlin',
+    'Elite Caitlin',
+    [
+        new GymPokemon('Musharna', 1945330, 49),
+        new GymPokemon('Sigilyph', 1948300, 49),
+        new GymPokemon('Reuniclus', 1952000, 50),
+        new GymPokemon('Gothitelle', 1957000, 51),
+        new GymPokemon('Metagross', 1960250, 53),
+    ],
+    BadgeCase.Badge.Elite_Caitlin,
+    64000,
+    'You and your Pokémon are both excellent and elegant. To have been able to battle against such a splendid team... My Pokémon and I learned a lot! I offer you my thanks',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Grimsley)]
+);
+gymList['Champion Iris'] = new Gym(
+    'Iris',
+    'Champion Iris',
+    [
+        new GymPokemon('Hydreigon', 2458300, 58),
+        new GymPokemon('Druddigon', 2462000, 58),
+        new GymPokemon('Aggron', 2464000, 58),
+        new GymPokemon('Archeops', 2460250, 60),
+        new GymPokemon('Lapras', 2470000, 58),
+        new GymPokemon('Haxorus', 2570000, 62),
+    ],
+    BadgeCase.Badge.Elite_UnovaChampion,
+    128000,
+    'I\'m upset I couldn\'t win! But you know what? More than that, I\'m happy! I mean, come on. By having a serious battle, you and your Pokémon, and me and my Pokémon, we all got to know one another better than before! Yep, we sure did! OK, let\'s go!',
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_Caitlin)]
+);
