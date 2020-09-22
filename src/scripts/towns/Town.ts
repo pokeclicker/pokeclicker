@@ -332,7 +332,7 @@ const AspertiaCityShop = new Shop([
 
 //Unova Towns
 TownList['Aspertia City'] = new Town('Aspertia City', [], AspertiaCityShop);
-TownList['Flocessy Town'] = new Town('Flocessy Town', [new RouteKillRequirement(10, 19)]);
+TownList['Floccesy Town'] = new Town('Floccesy Town', [new RouteKillRequirement(10, 19)]);
 TownList['Virbank City'] = new Town('Virbank City', [new GymBadgeRequirement(BadgeCase.Badge.Basic)]);
 TownList['Castelia City'] = new Town('Castelia City', [new GymBadgeRequirement(BadgeCase.Badge.Toxic)], undefined, dungeonList['Castelia Sewers']);
 TownList['Nimbasa City'] = new Town('Nimbasa City', [new RouteKillRequirement(10, 4), new GymBadgeRequirement(BadgeCase.Badge.Insect)]);
@@ -361,7 +361,7 @@ TownList['Nuvema Town'] = new Town('Nuvema Town', [new RouteKillRequirement(10, 
 
 //Unova Dungeons
 TownList['Pledge Grove'] = new DungeonTown('Pledge Grove', [new ObtainedPokemonRequirement(pokemonMap.Keldeo)]);
-TownList['Floccesy Ranch'] = new DungeonTown('Flocessy Ranch', [new RouteKillRequirement(10, 20)]);
+TownList['Floccesy Ranch'] = new DungeonTown('Floccesy Ranch', [new RouteKillRequirement(10, 20)]);
 TownList['Virbank Complex'] = new DungeonTown('Virbank Complex', [new GymBadgeRequirement(BadgeCase.Badge.Basic)]);    //Optional dungeon, no unique mons, safe to scrap
 TownList['Liberty Garden'] = new DungeonTown('Liberty Garden', [new GymBadgeRequirement(BadgeCase.Badge.Toxic)]);    //Victini dungeon, maybe unlock later
 TownList['Castelia Sewers'] = new DungeonTown('Castelia Sewers', [new GymBadgeRequirement(BadgeCase.Badge.Toxic)]);
