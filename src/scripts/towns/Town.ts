@@ -289,7 +289,7 @@ const EternaCityShop = new Shop([
 ]);
 const HearthomeCityShop = new Shop([
     ItemList['Soothe_bell'],
-    ItemList['Fire_egg']
+    ItemList['Fire_egg'],
 ]);
 const SolaceonTownShop = new Shop([
     ItemList['Dawn_stone'],
