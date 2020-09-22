@@ -146,7 +146,7 @@ const GoldenrodCityShop = new Shop([
     ItemList['Soothe_bell'],
 ]);
 const EcruteakCityShop = new Shop([
-    ItemList['Greatball']
+    ItemList['Greatball'],
     ItemList['Fire_egg'],
 ]);
 const OlivineCityShop = new Shop([
