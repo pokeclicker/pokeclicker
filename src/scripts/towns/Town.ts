@@ -313,10 +313,12 @@ const VeilstoneCityShop = new Shop([
     ItemList['Token_collector'],
     ItemList['Item_magnet'],
     ItemList['Lucky_incense'],
-    ItemList['Fighting_egg'],
 ]);
 const CelesticTownShop = new Shop([
     ItemList['Dragon_egg'],
+]);
+const CanalaveCityShop = new Shop ([
+    ItemList['Fighting_egg'],
 ]);
 const PalParkShop = new Shop([
     ItemList['Razor_claw'],
@@ -356,7 +358,7 @@ TownList['Veilstone City'] = new Town('Veilstone City', [new RouteKillRequiremen
 TownList['Pastoria City'] = new Town('Pastoria City', [new RouteKillRequirement(10, 213)], PastoriaShop);
 TownList['Celestic Town'] = new Town('Celestic Town', [new RouteKillRequirement(10, 210), new GymBadgeRequirement(BadgeCase.Badge.Fen)], CelesticTownShop);
 TownList['Pal Park'] = new Town('Pal Park', [new RouteKillRequirement(10, 221)], PalParkShop);
-TownList['Canalave City'] = new Town('Canalave City', [new RouteKillRequirement(10, 218)]);
+TownList['Canalave City'] = new Town('Canalave City', [new RouteKillRequirement(10, 218)], CanalaveCityShop);
 TownList['Snowpoint City'] = new Town('Snowpoint City', [new RouteKillRequirement(10, 217)]);
 TownList['Sunyshore City'] = new Town('Sunyshore City', [new RouteKillRequirement(10, 222)], SunyshoreCityShop);
 TownList['Pokemon League Sinnoh'] = new Town('Pokemon League Sinnoh', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Sinnoh'))]);
