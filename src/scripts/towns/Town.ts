@@ -235,6 +235,9 @@ const PacifidlogTownShop = new Shop([
     ItemList['Deepsea_tooth'],
     ItemList['Deepsea_scale'],
 ]);
+const EverGrandeCityShop = new Shop([
+    ItemList['Dragon_egg'],
+]);
 // TODO: finalize items and prices
 const BattleFrontierShop = new Shop([
     new PokeballItem(GameConstants.Pokeball.Ultraball, 1, GameConstants.Currency.battlePoint),
