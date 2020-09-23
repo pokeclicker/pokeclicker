@@ -396,6 +396,7 @@ const VirbankCityShop = new Shop([
     ItemList['Greatball'],
 ]);
 const CasteliaCityShop = new Shop([
+    ItemList['Trade_stone'],
     ItemList['Water_egg'],
 ]);
 const NimbasaCityShop = new Shop([
