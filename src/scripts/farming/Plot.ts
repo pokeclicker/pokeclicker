@@ -14,6 +14,7 @@ class Plot implements Saveable {
     formattedTimeLeft: KnockoutComputed<string>;
     isEmpty: KnockoutComputed<boolean>;
     stage: KnockoutComputed<number>;
+    notified: boolean;
 
     constructor(isUnlocked: boolean, boosted: boolean, berry: BerryType, timeLeft: number) {
         this._isUnlocked = ko.observable(isUnlocked);
@@ -33,7 +34,7 @@ class Plot implements Saveable {
             }
             return 4 - Math.ceil(4 * this.timeLeft / App.game.farming.berryData[this.berry].harvestTime);
         }, this);
-
+        this.notified = false;        
     }
 
     reduceTime(seconds: number) {
