@@ -34,7 +34,7 @@ class Plot implements Saveable {
             }
             return 4 - Math.ceil(4 * this.timeLeft / App.game.farming.berryData[this.berry].harvestTime);
         }, this);
-        this.notified = false;        
+        this.notified = false;
     }
 
     reduceTime(seconds: number) {
