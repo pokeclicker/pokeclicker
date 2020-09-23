@@ -25,19 +25,19 @@ class AchievementHandler {
     }
 
     public static filter = {
-        status: ko.observable("all"),
-        type: ko.observable("all"),
+        status: ko.observable('all'),
+        type: ko.observable('all'),
     }
 
     public static getAchievementListWithIndex() {
         this.achievementListFiltered = this.achievementList.filter(a => a.region <= player.highestRegion() &&
-                                        (this.filter.status() == "all" ? true : a.unlocked == JSON.parse(this.filter.status())) &&
-                                        (this.filter.type() == "all" ? true : a.type == achievementType[this.filter.type()]));
+                                        (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
+                                        (this.filter.type() == 'all' ? true : a.type == achievementType[this.filter.type()]));
         this.getNumberOfTabs();
-        return this.achievementListFiltered.slice(this.navigateIndex()*10, (this.navigateIndex()*10) + 10);
+        return this.achievementListFiltered.slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
     }
 
-    public static getAchievementOption(status: string, type: string){
+    public static getAchievementOption(status: string, type: string) {
         this.filter.status(status);
         this.filter.type(type);
         this.navigateIndex(0);
