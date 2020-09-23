@@ -30,6 +30,26 @@
 
             </td>
           </tr>
+		  <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
+            <td class="p-0 clickable" data-bind="visible: player.highestRegion,
+							css: {
+                                'bg-primary': EffectEngineRunner.getEffect($data) > 5,
+                                'bg-warning': EffectEngineRunner.getEffect($data) <= 5 && EffectEngineRunner.getEffect($data) > 0,
+                                'bg-secondary': !EffectEngineRunner.isActive($data)(),
+								'text-light': EffectEngineRunner.isActive($data)()
+                            },
+                            event: {
+                                click: function(){ItemHandler.useAllItems($data)}
+                            },
+							text: 'MAX',
+                            tooltip: {
+                              title: 'Use all avaliable ' + $data.replace('_', ' ') + 's at once.',
+                              trigger: 'hover',
+                              placement:'bottom',
+                              html: true
+                            }">
+            </td>
+          </tr>
           <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
             <td class="text-light p-0">
               <!-- ko if: EffectEngineRunner.getEffect($data) > 0 -->

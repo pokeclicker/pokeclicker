@@ -23,8 +23,8 @@ class EffectEngineRunner {
         return player.effectList[itemName]();
     }
 
-    public static addEffect(itemName: string) {
-        player.effectList[itemName](Math.max(0, player.effectList[itemName]() +  GameConstants.ITEM_USE_TIME));
+    public static addEffect(itemName: string, amount: number = 1) {
+        player.effectList[itemName](Math.max(0, player.effectList[itemName]() + amount * GameConstants.ITEM_USE_TIME));
         this.updateFormattedTimeLeft(itemName);
     }
 

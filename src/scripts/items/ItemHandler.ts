@@ -13,6 +13,17 @@ class ItemHandler {
         player.itemList[name](player.itemList[name]() - 1);
         return ItemList[name].use();
     }
+	
+	public static useAllItems(name: string) {
+		if (!player.itemList[name]()) {
+            return Notifier.notify({ message: `You don't have any ${GameConstants.humanifyString(name)}s left...`, type: GameConstants.NotificationOption.danger });
+        }
+
+		const amount = player.itemList[name]();
+		
+        player.itemList[name](0);
+        return ItemList[name].use(amount);
+	}
 
     public static resetAmount() {
         const input = $("input[name='amountOfStones']");

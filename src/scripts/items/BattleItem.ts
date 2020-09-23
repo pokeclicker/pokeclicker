@@ -10,8 +10,8 @@ class BattleItem extends Item {
         this.description = description;
     }
 
-    use() {
-        EffectEngineRunner.addEffect(this.name());
+    use(amount: number = 1) {
+        EffectEngineRunner.addEffect(this.name(), amount);
     }
 }
 
