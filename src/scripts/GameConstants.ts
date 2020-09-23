@@ -158,7 +158,7 @@ namespace GameConstants {
     // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
     //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
     const questBase = 1; // change this to scale all quest points
-    export const DEFEAT_POKEMONS_BASE_REWARD  = questBase * 3;
+    export const DEFEAT_POKEMONS_BASE_REWARD  = questBase * 1.2;
     export const CAPTURE_POKEMONS_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD / 0.5; // Defeat reward divided by chance to catch (guessed)
     export const GAIN_MONEY_BASE_REWARD       = questBase * 0.005;  // Dimava
     export const GAIN_TOKENS_BASE_REWARD      = CAPTURE_POKEMONS_BASE_REWARD / 9; // <route number> tokens gained for every capture
