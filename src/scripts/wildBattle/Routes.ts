@@ -1071,7 +1071,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     GameConstants.Region.unova, 3,
     new RoutePokemon({
-        land: ['Tranquill', 'Watchog', 'Zebstrika', 'Herdier', 'Purrloin'],
+        land: ['Tranquill', 'Watchog', 'Herdier', 'Purrloin'],
     }),
     [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Pinwheel Forest'))]
 ));
@@ -1105,7 +1105,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     GameConstants.Region.unova, 7,
     new RoutePokemon({
-        land: ['Blitzle', 'Cubchoo', 'Deerling', 'Zebstrika', 'Watchog', 'Tranquill', 'Foongus'],
+        land: ['Cubchoo', 'Deerling', 'Watchog', 'Tranquill', 'Foongus'],
     }),
     [
         new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Chargestone Cave')),
@@ -1195,7 +1195,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     GameConstants.Region.unova, 18,
     new RoutePokemon({
-        land: ['Scrafty', 'Crustle', 'Sawk', 'Throh'],
+        land: ['Scrafty', 'Crustle'],
     }),
     [new RouteKillRequirement(10, 17)]
 ));
@@ -1230,7 +1230,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     GameConstants.Region.unova, 23,
     new RoutePokemon({
-        land: ['Bouffalant', 'Sawk', 'Mienfoo', 'Amoonguss', 'Vullaby', 'Rufflet'],
+        land: ['Bouffalant', 'Mienfoo', 'Amoonguss', 'Vullaby', 'Rufflet'],
     }),
     [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Giant Chasm'))]
 ));
