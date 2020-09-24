@@ -363,14 +363,14 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     ],
     40000, 101, 5);
 
-dungeonList['Sealed Cave'] = new Dungeon('Sealed Cave',
-    ['Zubat', 'Poochyena', 'Nosepass'],
+dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
+    ['Zubat', 'Golbat', 'Tentacool'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     400000,
     [
-        new DungeonBossPokemon('Regirock', 1200000, 20),
-        new DungeonBossPokemon('Regice', 1824002, 20),
-        new DungeonBossPokemon('Registeel', 1824002, 20),
+        new DungeonBossPokemon('Regirock', 1500000, 20),
+        new DungeonBossPokemon('Regice', 1500000, 20),
+        new DungeonBossPokemon('Registeel', 1500000, 20),
     ],
     32000, 101, 5);
 

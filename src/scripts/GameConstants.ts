@@ -649,6 +649,7 @@ namespace GameConstants {
     ];
 
     export const HoennDungeons = [
+        'Petalburg Woods',
         'Rusturf Tunnel',
         'Granite Cave',
         'Jagged Pass',
@@ -658,10 +659,10 @@ namespace GameConstants {
         'Mt. Pyre',
         'Shoal Cave',
         'Seafloor Cavern',
+        'Sealed Chamber',
         'Cave of Origin',
         'Sky Pillar',
         'Victory Road Hoenn',
-        'Petalburg Woods',
         'New Mauville',
         // These aren't implemented anywhere yet
         /*
@@ -671,7 +672,6 @@ namespace GameConstants {
         "Ancient Tomb",
         "Aqua Hideout",
         "Magma Hideout",
-        "Sealed Chamber",
         "Artisan Cave",
         "Desert Underpass",
         "Marine Cave",
@@ -695,7 +695,6 @@ namespace GameConstants {
     ];
 
     export const SinnohDungeons = [
-        // TODO: SINNOH
         'Oreburgh Gate',
         'Ravaged Path',
         'Eterna Forest',

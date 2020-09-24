@@ -282,7 +282,7 @@ TownList['Cave of Origin'] = new DungeonTown('Cave of Origin', [new RouteKillReq
 TownList['Seafloor Cavern'] = new DungeonTown('Seafloor Cavern', [new RouteKillRequirement(10, 128), new GymBadgeRequirement(BadgeCase.Badge.Mind)]);
 TownList['Sky Pillar'] = new DungeonTown('Sky Pillar', [new RouteKillRequirement(10, 131), new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Cave of Origin'))]);
 TownList['Victory Road Hoenn'] = new DungeonTown('Victory Road Hoenn', [new GymBadgeRequirement(BadgeCase.Badge.Rain)]);
-TownList['Sealed Cave'] = new DungeonTown('Sealed Cave', [new RouteKillRequirement(10, 134),new GymBadgeRequirement(BadgeCase.Badge.Mind)]);
+TownList['Sealed Chamber'] = new DungeonTown('Sealed Chamber', [new RouteKillRequirement(10, 134),new GymBadgeRequirement(BadgeCase.Badge.Mind)]);
 
 //Sinnoh Shops
 const TwinleafTownShop = new Shop([
