@@ -35,13 +35,15 @@ class Farming implements Feature {
 
     update(delta: number): void {
         const timeToReduce = delta * App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
+        let notify = false;
         this.plotList.forEach(plot => {
+            plot.reduceTime(timeToReduce);
             if (!plot.isEmpty() && plot.timeLeft == 0 && !plot.notified) {
                 plot.notified = true;
+                notify = true;
             }
-            plot.reduceTime(timeToReduce);
         });
-        if (this.plotList.some(plot => !plot.isEmpty() && plot.timeLeft == 0 && !plot.notified)) {
+        if (notify) {
             Notifier.notify({ message: 'A berry is ready to harvest!', type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_harvest, setting: GameConstants.NotificationSetting.ready_to_harvest });
         }
     }
