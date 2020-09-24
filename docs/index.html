@@ -28,7 +28,7 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.5.2"></script>
+    <script src="scripts/script.min.js?v=0.5.3"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -44,7 +44,7 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.5.2" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.5.3" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -7078,8 +7078,7 @@ aria-labelledby="pickStarterModalLabel" aria-hidden="true">
                I can only hold off two! Pick the one you want to fight!</p>
            <div class="row justify-content-center">
                <div class="col-lg-8">
-                   <div class="row">
-
+                   <div id="starterSelection" class="row">
                        <div class="col">
                            <input class="image-starter" type="image"
                                   src="assets/images/pokemon/1.png"
@@ -7305,6 +7304,19 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 <div class="tab-pane active" id="breeding-pokemon">
                     <div class="text-left">
                         <div class="form-row">
+                            <div class="form-group col-md-6 col-6">
+                                <label>Search</label>
+                                <input class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
+                            </div>
+                            <div class="form-group col-md-6 col-6">
+                                <label>Display Value</label>
+                                <select class="custom-select" onchange="BreedingController.displayValue(this.value)">
+                                    <option value="attack" selected>Attack</option>
+                                    <option value="attackBonus">Attack Bonus</option>
+                                    <option value="baseAttack">Base Attack</option>
+                                    <option value="eggSteps">Egg Steps</option>
+                                </select>
+                            </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Region</label>
                                 <select class="custom-select" onchange="BreedingController.filter.region(+this.value)">
@@ -7351,19 +7363,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <div class="row" data-bind="foreach: BreedingController.breedableList">
-                            <button class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
-                            data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)},
-                            click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: BreedingController.breedableList">
+                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
-                                <div data-bind="if: PokedexHelper.pokemonSeen($data.id)">
-                                    <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
-                                    <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
-                                    <span class="attack" style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
-                                    data-bind="text: $data.attack">attack</span>
-                                </div>
-                            </button>
-                        </div>
+                                <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
+                                <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
+                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
+                                <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}"></a>
+                            </li>
+                        </ul>
                         <!-- /ko -->
                     </div>
                     <p class="text-danger" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
@@ -7377,19 +7385,16 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any eggs to breed.
                         </p>
                         <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()).length -->
-                        <div class="row">
-                            <!-- ko foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()) -->
-                                <button class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
-                                    data-bind="click: function() { ItemList[$data].use(); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }">
-                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data)">egg</span>
-                                    <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
-                                    data-bind="text: 'Amount: ' + player._itemList[$data]()">amount</span>
-                                    <knockout style="position: absolute; right: 2px; top: -14px;"
+                        <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]())">
+                            <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap">
+                                <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data)">egg</span>
+                                <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
+                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player._itemList[$data]()">amount</span>
+                                <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }"></a>
+                                <knockout style="position: absolute; right: 2px; top: -14px;"
                                     data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"/>
-                                </button>
-                            <!-- /ko -->
-                        </div>
+                            </li>
+                        </ul>
                         <!-- /ko -->
                     </div>
 
@@ -7404,17 +7409,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any fossils to breed.
                         </p>
                         <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length -->
-                        <div class="row">
-                            <!-- ko foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false) -->
-                                <button class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap btn"
-                                data-bind="click: function() { Underground.sellMineItem($data.id); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }">
-                                    <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
-                                    <img src="" width="60%" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
-                                    <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
-                                    data-bind="text: 'Amount: ' + $data.amount()">amount</span>
-                                </button>
-                            <!-- /ko -->
-                        </div>
+                        <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false)">
+                            <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap">
+                                <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
+                                <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
+                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount()">amount</span>
+                                <a class="overlay" href="#breed" data-bind="click: function() { Underground.sellMineItem($data.id); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }"></a>
+                            </li>
+                        </ul>
                         <!-- /ko -->
                     </div>
 
@@ -7747,23 +7749,19 @@ aria-labelledby="pokedexModalLabel">
 
            </div>
            <div>
-               <ul class="row justify-content-center" data-bind="foreach: PokedexHelper.filteredList()"
+               <ul class="row justify-content-center p-0" data-bind="foreach: PokedexHelper.filteredList()"
                    style="max-width: 100%; padding:0; margin:0;">
                    <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
-                       data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
-                       <!-- Pokedex ID -->
-                       <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.id">number</span>
-                       <!-- Pokedex name caught status -->
-                       <div>
-                           <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokedexHelper.getImage($data.id)}">
-                           <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
-                           <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
-                             <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}-small.png`}"/>
-                           </div>
-                           <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
-                           <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedPokemonID($data.id)}, tooltip: { html: true, title: `<u>Information:</u><br/>Base Attack: <strong>${$data.attack}</strong><br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong><br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>`, trigger: 'hover', placement:'bottom' }"></a>
-                           <!-- /ko -->
-                       </div>
+                        data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
+                        <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: (Math.floor($data.id) + '').padStart(3, 0)">number</span>
+                            <div data-bind="visible: App.game.party.alreadyCaughtPokemonByName(name)" style="position: absolute;right: 2px;top: -15px;">
+                                <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon($data.id, true) ? '-shiny' : ''}-small.png`}"/>
+                            </div>
+                            <img src="" width="80px" data-bind="css: { 'pokemon-not-seen': !PokedexHelper.pokemonSeen($data.id)() }, attr:{ src: PokedexHelper.getImage($data.id)}">
+                            <!-- ko if: PokedexHelper.pokemonSeen($data.id) -->
+                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: $data.name">name</span>
+                            <a class="overlay" href="#pokemonStatisticsModal" data-toggle="modal" data-bind="click: ()=>{App.game.statistics.selectedPokemonID($data.id)}, tooltip: { html: true, title: `<u>Information:</u><br/>Base Attack: <strong>${$data.attack}</strong><br/>Catch Rate: <strong>${PokemonFactory.catchRateHelper($data.catchRate, true)}%</strong><br/>Hatch Steps: <strong>${App.game.breeding.getSteps($data.eggCycles).toLocaleString('en-US')}</strong>`, trigger: 'hover', placement:'bottom' }"></a>
+                            <!-- /ko -->
                    </li>
                </ul>
            </div>
