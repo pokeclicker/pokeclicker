@@ -6,6 +6,7 @@ enum SortOptions {
     'shiny' = 4,
     'baseAttack' = 5,
     'breedingEffiency' = 6,
+    'highestRegionBreedingEfficiency' = 7,
 }
 
 type SortOptionConfig = {
@@ -57,6 +58,12 @@ const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.breedingEffiency]: {
         'text': 'Breeding Efficiency',
         'getValue': p => (p.baseAttack / pokemonMap[p.name].eggCycles),
+        'invert': true,
+    },
+
+    [SortOptions.highestRegionBreedingEfficiency]: {
+        'text': 'HRBE',
+        'getValue': p => (p.baseAttack / pokemonMap[p.name].eggCycles * (PokemonHelper.calcNativeRegion(p.name) < player.highestRegion() ? (player.highestRegion() + 1) * 0.1 : 1)),
         'invert': true,
     },
 };
