@@ -27,6 +27,7 @@ class AchievementHandler {
     public static filter = {
         status: ko.observable('all'),
         type: ko.observable('all'),
+        region: ko.observable(-1),
     }
 
     public static getAchievementListWithIndex() {
@@ -36,18 +37,9 @@ class AchievementHandler {
     public static filterAchievementList() {
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() &&
                                     (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
-                                    (this.filter.type() == 'all' ? true : a.type == AchievementType[this.filter.type()])));
+                                    (this.filter.type() == 'all' ? true : a.type == AchievementType[this.filter.type()]) &&
+                                    (this.filter.region() == -1 ? true : a.region == this.filter.region())));
         this.resetPages();
-    }
-
-    public static updateStatusFilter(status: string) {
-        this.filter.status(status);
-        this.filterAchievementList();
-    }
-
-    public static updateTypeFilter(type: string) {
-        this.filter.type(type);
-        this.filterAchievementList();
     }
 
     public static resetPages() {
@@ -243,5 +235,6 @@ class AchievementHandler {
         AchievementHandler.calculateMaxBonus();
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion()));
         this.resetPages();
+        Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
     }
 }
