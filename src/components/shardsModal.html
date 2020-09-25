@@ -15,16 +15,14 @@
                     <tbody>
                         <!-- ko foreach: Array(Shards.nTypes) -->
                             <tr>
-                                <th colspan="4" class="text-left table-dark text-light">
-                                    <a href="#" data-toggle="collapse" data-target=".collapse-shard-" data-bind="attr: { 'data-target': '.collapse-shard-' + $index() }">
-                                        <h3>
-                                            <knockout data-bind="text: PokemonType[$index()]"></knockout>
-                                            <div class="float-right">
-                                                <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
-                                                <knockout data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></knockout>
-                                            </div>
-                                        </h3>
-                                    </a>
+                                <th colspan="4" class="clickable text-left table-dark text-light"  data-toggle="collapse" data-target=".collapse-shard-" data-bind="attr: { 'data-target': '.collapse-shard-' + $index() }">
+                                    <h3>
+                                        <knockout data-bind="text: PokemonType[$index()]"></knockout>
+                                        <div class="float-right">
+                                            <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
+                                            <knockout data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></knockout>
+                                        </div>
+                                    </h3>
                                 </th>
                             </tr>
                             <!-- ko foreach: Array(Shards.nEffects) -->
