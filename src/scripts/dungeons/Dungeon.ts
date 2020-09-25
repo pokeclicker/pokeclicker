@@ -334,7 +334,7 @@ dungeonList['Shoal Cave'] = new Dungeon('Shoal Cave',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     290000,
     [new DungeonBossPokemon('Snorunt', 900000, 20)],
-    12000, 101, 5);
+    28000, 101, 5);
 
 dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
@@ -451,11 +451,11 @@ dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
     69500, 201, 20);
 
 dungeonList['Lake Verity'] = new Dungeon('Lake Verity',
-    ['Starly', 'Bidoof', 'Psyduck', 'Golduck', 'Magikarp', 'Goldeen'],
+    ['Starly', 'Bidoof', 'Psyduck', 'Magikarp', 'Goldeen'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Item_magnet],
     768735,
     [
-        new DungeonBossPokemon('Mesprit', 3820000, 10),
+        new DungeonBossPokemon('Golduck', 3820000, 10),
         new DungeonBossPokemon('Seaking', 3820000, 10),
     ],
     72500, 201, 5);
@@ -529,7 +529,7 @@ dungeonList['Fullmoon Island'] = new Dungeon('Fullmoon Island',
     ['Illumise', 'Minun', 'Espeon', 'Luvdisc'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [new DungeonBossPokemon('Cresselia', 9000000, 70)],
+    [new DungeonBossPokemon('Clefable', 9000000, 70)],
     96500, 201, 35);
 
 dungeonList['Newmoon Island'] = new Dungeon('Newmoon Island',
