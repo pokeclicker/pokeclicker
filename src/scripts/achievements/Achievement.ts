@@ -6,7 +6,7 @@ class Achievement {
         public bonus: number,
         public region: GameConstants.Region,
         public unlocked = false,
-        public type: achievementType
+        public type: AchievementType
     ) {}
 
     public check() {

@@ -1,4 +1,4 @@
-enum achievementType {
+enum AchievementType {
     'money' = 0,
     'dungeonToken' = 1,
     'attack' = 2,
