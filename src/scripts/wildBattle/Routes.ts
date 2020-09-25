@@ -1201,7 +1201,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     GameConstants.Region.unova, 18,
     new RoutePokemon({
-        land: ['Tropuis', 'Carnivine', 'Watchog', 'Crustle', 'Scrafty'],
+        land: ['Tropius', 'Carnivine', 'Watchog', 'Crustle', 'Scrafty'],
         water: ['Frillish', 'Alomomola'],
     }),
     [new RouteKillRequirement(10, 17)]
@@ -1264,7 +1264,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 3,
     new RoutePokemon({
-        land: ['Burmy', 'Bunnelby', 'Fletchling', 'Dunsparce'],
+        land: ['Burmy (plant)', 'Burmy (trash)', 'Burmy (sand)', 'Bunnelby', 'Fletchling', 'Dunsparce'],
     })
 ));
 Routes.add(new RegionRoute(
