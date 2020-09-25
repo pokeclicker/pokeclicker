@@ -334,7 +334,7 @@ dungeonList['Shoal Cave'] = new Dungeon('Shoal Cave',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     290000,
     [new DungeonBossPokemon('Snorunt', 900000, 20)],
-    12000, 101, 5);
+    28000, 101, 5);
 
 dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     ['Zubat', 'Golbat', 'Sableye', 'Mawile'],
