@@ -116,6 +116,11 @@ class GameController {
 
     static addKeyListeners() {
         $(document).on('keydown', function (e) {
+            // Ignore any of our controls if focused on an input element
+            if (document.activeElement.localName == 'input') {
+                return;
+            }
+
             const keyCode = e.keyCode;
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {
