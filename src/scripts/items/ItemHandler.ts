@@ -5,7 +5,7 @@ class ItemHandler {
     public static amountSelected: KnockoutObservable<number> = ko.observable(1);
     static amount: KnockoutObservable<number> = ko.observable(1);
     public static amountToUse = 1;
-    public static multipliers = ['x1', 'x10', 'x100', 'All'];
+    public static multipliers = ['×1', '×10', '×100', '×1000', 'All'];
     public static multIndex = ko.observable(0);
 
     public static useItem(name: string) {
