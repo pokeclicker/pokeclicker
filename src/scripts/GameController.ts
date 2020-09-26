@@ -51,12 +51,12 @@ class GameController {
         });
     }
 
-    static simulateKey(keyCode: number, type = 'keydown', modifiers = {}) {
+    static simulateKey(code: string, type = 'keydown', modifiers = {}) {
         const evtName = type.startsWith('key') ? type : `key${type}`;
 
         const event = document.createEvent('HTMLEvents') as KeyboardEvent;
         Object.defineProperties(event, {
-            keyCode: {value: keyCode},
+            code: {value: code},
         });
         event.initEvent(evtName, true, false);
 
@@ -65,13 +65,6 @@ class GameController {
         }
 
         document.dispatchEvent(event);
-    }
-
-    static simulateKeyPress(keyCode: number, modifiers = {}) {
-        this.simulateKey(keyCode, 'down', modifiers);
-        setTimeout(() => {
-            this.simulateKey(keyCode, 'up', modifiers);
-        }, 20);
     }
 
     static bindToolTips() {
@@ -115,33 +108,33 @@ class GameController {
     }
 
     static addKeyListeners() {
-        $(document).on('keydown', function (e) {
+        $(document).keydown(function (e) {
             // Ignore any of our controls if focused on an input element
             if (document.activeElement.localName == 'input') {
                 return;
             }
 
-            const keyCode = e.keyCode;
+            const code = e.originalEvent.code;
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {
-                switch (keyCode) {
-                    case 38: // up
-                    case 87: // w
+                switch (code) {
+                    case 'ArrowUp':
+                    case 'KeyW':
                         DungeonRunner.map.moveUp();
                         break;
-                    case 37: // left
-                    case 65: // a
+                    case 'ArrowLeft':
+                    case 'KeyA':
                         DungeonRunner.map.moveLeft();
                         break;
-                    case 40: // down
-                    case 83: // s
+                    case 'ArrowDown':
+                    case 'KeyS':
                         DungeonRunner.map.moveDown();
                         break;
-                    case 39: // right
-                    case 68: // d
+                    case 'ArrowRight':
+                    case 'KeyD':
                         DungeonRunner.map.moveRight();
                         break;
-                    case 32: // space
+                    case 'Space':
                         DungeonRunner.openChest();
                         DungeonRunner.startBossFight();
                         break;
@@ -150,7 +143,7 @@ class GameController {
                 }
                 e.preventDefault();
             } else if (App.game.gameState === GameConstants.GameState.town) {
-                if (keyCode == 32) { // space
+                if (code === 'Space') {
                     if (player.town().gym()) {
                         GymRunner.startGym(player.town().gym());
                     } else if (player.town().dungeon()) {
@@ -159,13 +152,12 @@ class GameController {
                     e.preventDefault();
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
-                switch (keyCode) {
-                    case 187: // plus
-                    case 107: // plus (numpad)
+                // Simpler with key because +/= share a code
+                switch (e.key) {
+                    case '+':
                         MapHelper.moveToRoute(player.route() + 1, player.region);
                         break;
-                    case 189: // minus
-                    case 109: // minus (numpad)
+                    case '-':
                         MapHelper.moveToRoute(player.route() - 1, player.region);
                         break;
                     default: // any other key (ignore)
@@ -176,28 +168,28 @@ class GameController {
 
         });
 
-        $(document).on('keydown', function (e) {
-            const keyCode = e.keyCode;
+        $(document).keydown(function (e) {
+            const code = e.originalEvent.code;
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyToDirection[keyCode];
+                const dir = GameConstants.KeyCodeToDirection[code];
                 if (dir) {
                     e.preventDefault();
                     Safari.move(dir);
                 }
-                if (keyCode == 32) { // space
+                if (code === 'Space') {
                     e.preventDefault();
                 }
             }
         });
 
-        $(document).on('keyup', function (e) {
-            const keyCode = e.keyCode;
+        $(document).keyup(function (e) {
+            const code = e.originalEvent.code;
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyToDirection[keyCode];
+                const dir = GameConstants.KeyCodeToDirection[code];
                 if (dir) {
                     e.preventDefault();
                     Safari.stop(dir);
-                } else if (keyCode == 32) { // space
+                } else if (code === 'Space') {
                     e.preventDefault();
                 }
             }
