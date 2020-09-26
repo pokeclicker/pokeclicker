@@ -7,12 +7,13 @@ class App {
         if (!App.debug) {
             Object.freeze(GameConstants);
         }
-
+        const js = JSON.stringify(Routes.regionRoutes.map(r => Math.round(PokemonFactory.routeDungeonTokens(r.number, r.region))));
         Preload.load(App.debug).then(() => {
             ko.options.deferUpdates = true;
             
             console.log(`[${GameConstants.formatDate(new Date())}] %cLoading Game Data..`, 'color:#8e44ad;font-weight:900;');
             // Needs to be loaded first so save data can be updated (specifically "player" data)
+            console.log(js);
             const update = new Update();
 
             UndergroundItem.initialize();
