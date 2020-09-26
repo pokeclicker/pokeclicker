@@ -108,7 +108,7 @@ class GameController {
     }
 
     static addKeyListeners() {
-        $(document).keydown(function (e) {
+        $(document).on('keydown', function (e) {
             // Ignore any of our controls if focused on an input element
             if (document.activeElement.localName == 'input') {
                 return;
@@ -168,7 +168,7 @@ class GameController {
 
         });
 
-        $(document).keydown(function (e) {
+        $(document).on('keydown', function (e) {
             const code = e.originalEvent.code;
             if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyCodeToDirection[code];
@@ -182,7 +182,7 @@ class GameController {
             }
         });
 
-        $(document).keyup(function (e) {
+        $(document).on('keyup', function (e) {
             const code = e.originalEvent.code;
             if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyCodeToDirection[code];
