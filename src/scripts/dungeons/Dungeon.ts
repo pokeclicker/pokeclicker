@@ -412,6 +412,11 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     553000,
     [new DungeonBossPokemon('Rotom', 2200000, 70)],
+    [new DungeonBossPokemon('Rotom (heat)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom))],
+    [new DungeonBossPokemon('Rotom (wash)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom))],
+    [new DungeonBossPokemon('Rotom (frost)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom))],
+    [new DungeonBossPokemon('Rotom (fan)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom))],
+    [new DungeonBossPokemon('Rotom (mow)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom))],
     52500, 201, 35);
 
 dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
