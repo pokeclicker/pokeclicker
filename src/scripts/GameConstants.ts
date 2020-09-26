@@ -97,7 +97,6 @@ namespace GameConstants {
         quest_ready_to_complete: new Sound('quest_ready_to_complete', 'Quest is ready to be completed'),
         quest_level_increased: new Sound('quest_level_increased', 'Quest level increased'),
         underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
-        // TODO: needs a notification
         ready_to_harvest: new Sound('ready_to_harvest', 'Farm ready to harvest'),
     };
     export const NotificationSetting = {
@@ -110,6 +109,7 @@ namespace GameConstants {
         underground_energy_full: new BooleanSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true),
         event_start_end: new BooleanSetting('notification.event_start_end', 'Event start/end information', true),
         dropped_item: new BooleanSetting('notification.dropped_item', 'Enemy pokemon dropped an item', true),
+        ready_to_harvest: new BooleanSetting('notification.ready_to_harvest', 'Berry ready to harvest', true),
     };
 
     export enum DungeonTile {

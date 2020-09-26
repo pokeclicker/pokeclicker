@@ -392,22 +392,76 @@ TownList['Snowpoint Temple'] = new DungeonTown('Snowpoint Temple', [new RouteKil
 const AspertiaCityShop = new Shop([
     ItemList['Pokeball'],
 ]);
+const VirbankCityShop = new Shop([
+    ItemList['Greatball'],
+]);
+const CasteliaCityShop = new Shop([
+    ItemList['Trade_stone'],
+    ItemList['Water_egg'],
+]);
+const NimbasaCityShop = new Shop([
+    ItemList['Grass_egg'],
+    ItemList['Electric_egg'],
+]);
+const MistraltonCityShop = new Shop([
+    ItemList['Ultraball'],
+    ItemList['Thunder_stone'],
+]);
+const LentimasTownShop = new Shop([
+    ItemList['Fire_egg'],
+]);
+const LacunosaTownShop = new Shop([
+    ItemList['Fighting_egg'],
+]);
+const OpelucidCityShop = new Shop([
+    ItemList['Pokeball'],
+    ItemList['Greatball'],
+    ItemList['Ultraball'],
+    ItemList['SmallRestore'],
+    ItemList['MediumRestore'],
+    ItemList['LargeRestore'],
+    ItemList['xAttack'],
+    ItemList['xClick'],
+    ItemList['Lucky_egg'],
+    ItemList['Token_collector'],
+    ItemList['Item_magnet'],
+    ItemList['Lucky_incense'],
+]);
+const IcirrusCityShop = new Shop([
+    ItemList['Dragon_egg'],
+]);
+const BlackAndWhiteParkShop = new Shop([
+    ItemList['Moon_stone'],
+    ItemList['Sun_stone'],
+]);
+const NacreneCityShop = new Shop([
+    ItemList['Soothe_bell'],
+]);
+const StriatornCityShop = new Shop([
+    ItemList['Leaf_stone'],
+    ItemList['Water_stone'],
+    ItemList['Fire_stone'],
+]);
+const AccumulaTownShop = new Shop([
+    ItemList['Dusk_stone'],
+    ItemList['Shiny_stone'],
+]);
 
 //Unova Towns
 TownList['Aspertia City'] = new Town('Aspertia City', [], AspertiaCityShop);
 TownList['Floccesy Town'] = new Town('Floccesy Town', [new RouteKillRequirement(10, 19)]);
-TownList['Virbank City'] = new Town('Virbank City', [new GymBadgeRequirement(BadgeCase.Badge.Basic)]);
-TownList['Castelia City'] = new Town('Castelia City', [new GymBadgeRequirement(BadgeCase.Badge.Toxic)], undefined, dungeonList['Castelia Sewers']);
-TownList['Nimbasa City'] = new Town('Nimbasa City', [new RouteKillRequirement(10, 4), new GymBadgeRequirement(BadgeCase.Badge.Insect)]);
+TownList['Virbank City'] = new Town('Virbank City', [new GymBadgeRequirement(BadgeCase.Badge.Basic)], VirbankCityShop);
+TownList['Castelia City'] = new Town('Castelia City', [new GymBadgeRequirement(BadgeCase.Badge.Toxic)], CasteliaCityShop, dungeonList['Castelia Sewers']);
+TownList['Nimbasa City'] = new Town('Nimbasa City', [new RouteKillRequirement(10, 4), new GymBadgeRequirement(BadgeCase.Badge.Insect)], NimbasaCityShop);
 TownList['Driftveil City'] = new Town('Driftveil City', [new RouteKillRequirement(10,5), new GymBadgeRequirement(BadgeCase.Badge.Bolt)]);
-TownList['Mistralton City'] = new Town('Mistralton City', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Chargestone Cave')), new GymBadgeRequirement(BadgeCase.Badge.Quake)]);
-TownList['Lentimas Town'] = new Town('Lentimas Town', [new GymBadgeRequirement(BadgeCase.Badge.Jet)]);
+TownList['Mistralton City'] = new Town('Mistralton City', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Chargestone Cave')), new GymBadgeRequirement(BadgeCase.Badge.Quake)], MistraltonCityShop);
+TownList['Lentimas Town'] = new Town('Lentimas Town', [new GymBadgeRequirement(BadgeCase.Badge.Jet)], LentimasTownShop);
 TownList['Undella Town'] = new Town('Undella Town', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Reversal Mountain'))]);
-TownList['Lacunosa Town'] = new Town('Lacunosa Town', [new RouteKillRequirement(10, 13)]);
-TownList['Opelucid City'] = new Town('Opelucid City', [new RouteKillRequirement(10, 11)]);
+TownList['Lacunosa Town'] = new Town('Lacunosa Town', [new RouteKillRequirement(10, 13)], LacunosaTownShop);
+TownList['Opelucid City'] = new Town('Opelucid City', [new RouteKillRequirement(10, 11)], OpelucidCityShop);
 TownList['Humilau City'] = new Town('Humilau City', [new RouteKillRequirement(10, 21)]);
 TownList['Pokemon League Unova'] = new Town('Pokemon League Unova', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Unova'))]);
-TownList['Icirrus City'] = new Town('Icirrus City', [new OneFromManyRequirement([new RouteKillRequirement(10, 8), new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Twist Mountain'))])]);
+TownList['Icirrus City'] = new Town('Icirrus City', [new OneFromManyRequirement([new RouteKillRequirement(10, 8), new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Twist Mountain'))])], IcirrusCityShop);
 TownList['Black and White Park'] = new Town('Black and White Park', [
     new OneFromManyRequirement([
         new MultiRequirement([
@@ -416,10 +470,10 @@ TownList['Black and White Park'] = new Town('Black and White Park', [
         ]),
         new RouteKillRequirement(10, 15),
     ]),
-]);
-TownList['Nacrene City'] = new Town('Nacrene City', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Pinwheel Forest'))]);
-TownList['Striatorn City'] = new Town('Striatorn City', [new RouteKillRequirement(10, 3)]);
-TownList['Accumula Town'] = new Town('Accumula Town', [new RouteKillRequirement(10, 2)]);
+], BlackAndWhiteParkShop);
+TownList['Nacrene City'] = new Town('Nacrene City', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Pinwheel Forest'))], NacreneCityShop);
+TownList['Striatorn City'] = new Town('Striatorn City', [new RouteKillRequirement(10, 3)], StriatornCityShop);
+TownList['Accumula Town'] = new Town('Accumula Town', [new RouteKillRequirement(10, 2)], AccumulaTownShop);
 TownList['Nuvema Town'] = new Town('Nuvema Town', [new RouteKillRequirement(10, 1)]);
 
 //Unova Dungeons
