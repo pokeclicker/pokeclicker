@@ -4,13 +4,19 @@ class ItemHandler {
     public static pokemonSelected: KnockoutObservable<string> = ko.observable('Vulpix');
     public static amountSelected: KnockoutObservable<number> = ko.observable(1);
     static amount: KnockoutObservable<number> = ko.observable(1);
+    public static amountToUse = 1;
+    public static multipliers = ['x1', 'x10', 'x100', 'All'];
+    public static multIndex = ko.observable(0);
 
     public static useItem(name: string) {
         if (!player.itemList[name]()) {
             return Notifier.notify({ message: `You don't have any ${GameConstants.humanifyString(name)}s left...`, type: GameConstants.NotificationOption.danger });
         }
-
-        player.itemList[name](player.itemList[name]() - 1);
+        this.amountToUse =
+            this.multipliers[this.multIndex()] == 'All' ||
+                player.itemList[name]() - Number(this.multipliers[this.multIndex()].replace('x', '')) < 0 ?
+                player.itemList[name]() : Number(this.multipliers[this.multIndex()].replace('x', ''));
+        player.itemList[name](player.itemList[name]() - this.amountToUse);
         return ItemList[name].use();
     }
 
@@ -46,6 +52,14 @@ class ItemHandler {
         }
         const multiple = amountUsed == 1 ? '' : 's';
         Notifier.notify({ message: `You used ${amountUsed} ${GameConstants.humanifyString(this.stoneSelected())}${multiple}`, type: GameConstants.NotificationOption.success });
+    }
+
+    public static incrementMultiplier() {
+        this.multIndex((this.multIndex() + 1) % this.multipliers.length);
+    }
+
+    public static decrementMultiplier() {
+        this.multIndex((((this.multIndex() - 1) % this.multipliers.length) + this.multipliers.length) % this.multipliers.length);
     }
 
 }
