@@ -12,10 +12,11 @@ class ItemHandler {
         if (!player.itemList[name]()) {
             return Notifier.notify({ message: `You don't have any ${GameConstants.humanifyString(name)}s left...`, type: GameConstants.NotificationOption.danger });
         }
-        this.amountToUse =
-            this.multipliers[this.multIndex()] == 'All' ||
-                player.itemList[name]() - Number(this.multipliers[this.multIndex()].replace('x', '')) < 0 ?
-                player.itemList[name]() : Number(this.multipliers[this.multIndex()].replace('x', ''));
+        // Either the digits specified, or All (Infinity)
+        const amountSelected = Number(this.multipliers[this.multIndex()].replace(/\D/g, '')) || Infinity;
+        // Only allow the player to use the amount they have maximum
+        this.amountToUse = Math.min(player.itemList[name](), amountSelected);
+
         player.itemList[name](player.itemList[name]() - this.amountToUse);
         return ItemList[name].use();
     }
