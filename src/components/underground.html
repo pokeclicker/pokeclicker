@@ -18,7 +18,7 @@ style="cursor:default" tabindex="-1">
                     </btn>
                 </ul>
             </div>
-            
+
             <div class="modal-body tab-content p-0">
                 <div id="dig" class="tab-pane fade in active show pl-3 pr-3">
                     <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
@@ -49,7 +49,7 @@ style="cursor:default" tabindex="-1">
                             <button class='btn' data-bind="text: Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ' items found'"></button>
                             <button id="mine-prospect-result" type="button" class="btn btn-info" data-html="true"
                                     style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
-                                    data-bind="tooltip: { title: () => Mine.prospectResult() ?? 'Prospect to get more details', trigger: 'hover', placement:'left' }">
+                                    data-bind="tooltip: { title: () => Mine.prospectResult() || 'Prospect to get more details', trigger: 'hover', placement:'left' }">
                                 ?
                             </button>
                         </div>
