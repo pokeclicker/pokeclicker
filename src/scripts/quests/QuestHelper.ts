@@ -22,7 +22,7 @@ class QuestHelper {
         switch (type) {
             case 'DefeatPokemons':
                 region = SeededRand.intBetween(0, player.highestRegion());
-                route = SeededRand.intBetween(GameConstants.RegionRoute[region][0], GameConstants.RegionRoute[region][1]);
+                route = SeededRand.fromArray(Routes.getRoutesByRegion(region)).number;
                 amount = SeededRand.intBetween(100, 500);
                 return new DefeatPokemonsQuest(route, region, amount);
             case 'CapturePokemons':
