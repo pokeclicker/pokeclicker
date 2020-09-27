@@ -656,14 +656,14 @@ namespace GameConstants {
         'Fiery Path',
         'Mt. Chimney',
         'Meteor Falls',
-        'Mt. Pyre',
+        'Mt. Pyre'
+        'New Mauville',
         'Shoal Cave',
         'Seafloor Cavern',
         'Sealed Chamber',
         'Cave of Origin',
         'Sky Pillar',
         'Victory Road Hoenn',
-        'New Mauville',
         // These aren't implemented anywhere yet
         /*
         "Island Cave",
