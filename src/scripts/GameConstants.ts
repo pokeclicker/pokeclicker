@@ -656,7 +656,7 @@ namespace GameConstants {
         'Fiery Path',
         'Mt. Chimney',
         'Meteor Falls',
-        'Mt. Pyre'
+        'Mt. Pyre',
         'New Mauville',
         'Shoal Cave',
         'Seafloor Cavern',
