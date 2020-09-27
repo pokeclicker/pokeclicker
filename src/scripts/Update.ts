@@ -236,6 +236,18 @@ class Update implements Saveable {
             }
         }
 
+        if (this.isOlderVersion(this.saveVersion, '0.5.4')) {
+            try {
+                //Correct statistics
+                App.game.wallet.currencies[GameConstants.Currency.questPoint] += 3000;
+
+                // Update save data
+                this.setSaveData(saveData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.4 - Couldn\'t update player statistics..', ಠ_ಠ);
+            }
+        }
+
         // Notify the player that the game has updated!
         if (this.saveVersion != this.version && this.saveVersion != '0.0.0') {
             const button = document.createElement('a');
