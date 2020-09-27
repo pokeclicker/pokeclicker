@@ -241,6 +241,10 @@ class Update implements Saveable {
                 // Calculate hatched amount (we can't calculate the shiny hatches though)
                 const pokemonHatched = {};
                 saveData.party.caughtPokemon.forEach(p => pokemonHatched[p.id] = p.attackBonus / 25);
+                //Correct statistics
+                let i = saveData.statistics.dungeonsDefeated.length;
+                const lowestIndex = 39;
+                while(i --> lowestIndex) saveData.statistics.dungeonsDefeated[i + 1] = saveData.statistics.dungeonsDefeated[i];
                 // Rename from the old statistic name, add our new statistics
                 saveData.statistics = {
                     ...saveData.statistics,
@@ -248,6 +252,7 @@ class Update implements Saveable {
                     totalShardsGained: saveData.statistics.totalShards.reduce((sum, b) => sum + b, 0) || 0,
                     shardsGained: saveData.statistics.totalShards || 0,
                     pokemonHatched,
+                    
                 };
 
                 // Update save data
