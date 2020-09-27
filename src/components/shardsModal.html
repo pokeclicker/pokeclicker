@@ -12,10 +12,10 @@
             </div>
             <div class="modal-body p-0">
                 <table class='table table-sm table-hover m-0'>
-                    <tbody>
-                        <!-- ko foreach: Array(Shards.nTypes) -->
+                    <!-- ko foreach: Array(Shards.nTypes) -->
+                        <thead>
                             <tr>
-                                <th colspan="4" class="text-left table-dark text-light">
+                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-shard-' + $index() }">
                                     <h3>
                                         <knockout data-bind="text: PokemonType[$index()]"></knockout>
                                         <div class="float-right">
@@ -25,6 +25,8 @@
                                     </h3>
                                 </th>
                             </tr>
+                        </thead>
+                        <tbody class="collapse show" data-bind="attr: { id: 'collapse-shard-' + $index() }">
                             <!-- ko foreach: Array(Shards.nEffects) -->
                                 <tr>
                                     <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
@@ -52,8 +54,8 @@
                                     </td>
                                 </tr>
                             <!-- /ko -->
-                        <!-- /ko -->
-                    </tbody>
+                        </tbody>
+                    <!-- /ko -->
                 </table>
             </div>
 
