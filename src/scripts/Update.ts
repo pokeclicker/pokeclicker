@@ -236,43 +236,19 @@ class Update implements Saveable {
             }
         }
         
-        if (this.isOlderVersion(this.saveVersion, '0.5.3')) {
+        if (this.isOlderVersion(this.saveVersion, '0.5.4')) {
             try {
-                // Calculate hatched amount (we can't calculate the shiny hatches though)
-                const pokemonHatched = {};
-                saveData.party.caughtPokemon.forEach(p => pokemonHatched[p.id] = p.attackBonus / 25);
                 //Correct statistics
                 let i = saveData.statistics.dungeonsDefeated.length;
                 const lowestIndex = 39;
                 while (i -- > lowestIndex) {
                     saveData.statistics.dungeonsDefeated[i + 1] = saveData.statistics.dungeonsDefeated[i];
                 }
-                // Rename from the old statistic name, add our new statistics
-                saveData.statistics = {
-                    ...saveData.statistics,
-                    totalBerriesHarvested: saveData.statistics.berriesHarvested.reduce((sum, b) => sum + b, 0) || 0,
-                    totalShardsGained: saveData.statistics.totalShards.reduce((sum, b) => sum + b, 0) || 0,
-                    shardsGained: saveData.statistics.totalShards || 0,
-                    pokemonHatched,
-                    
-                };
 
                 // Update save data
                 this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.5.4 - Couldn\'t update player statistics..', ಠ_ಠ);
-            }
-            try {
-                // If the player has the Soul Badge already
-                // Not using game constants incase the badge value isn't 5 in the future
-                if (saveData.badgeCase[5]) {
-                    saveData.quests.questLines.push({state: 1, name: 'Mining Expedition', quest: 0});
-                }
-
-                // Update save data
-                this.setSaveData(saveData);
-            } catch (ಠ_ಠ) {
-                console.error('[update] v0.5.3 - Couldn\'t start Aerodactyl Quest line..', ಠ_ಠ);
             }
         }
 
