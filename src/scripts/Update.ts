@@ -240,7 +240,7 @@ class Update implements Saveable {
             try {
                 //Correct statistics
                 let i = saveData.statistics.dungeonsDefeated.length;
-                const lowestIndex = 39;
+                const lowestIndex = 22;
                 while (i -- > lowestIndex) {
                     saveData.statistics.dungeonsDefeated[i + 1] = saveData.statistics.dungeonsDefeated[i];
                 }
