@@ -1,11 +1,11 @@
---
+---
 name: Suggestion
 about: Use this to suggest new features or changes to the game
 title: "[SUGGESTION] "
 labels:
 assignees: ''
 
---
+---
 <!-- Provide a general summary of the issue in the Title above -->
 
 **Current Behavior**
