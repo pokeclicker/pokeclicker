@@ -5,7 +5,7 @@ class Quests implements Saveable {
         xp: 0,
         refreshes: 0,
     };
-    
+
     public xp = ko.observable(0).extend({ numeric: 0 });
     public refreshes = ko.observable(0);
     public lastRefresh = new Date();
@@ -18,7 +18,7 @@ class Quests implements Saveable {
         // Minimum of 1, Maximum of 4
         return Math.min(4, Math.max(1, Math.floor(this.level() / 5)));
     });
-    
+
     // Get current quests by status
     public completedQuests: KnockoutComputed<Array<Quest>> = ko.pureComputed(() => {
         return this.questList().filter(quest => quest.isCompleted());
@@ -88,6 +88,7 @@ class Quests implements Saveable {
 
     generateQuestList() {
         this.lastRefresh = new Date();
+        this.currentQuests().forEach(quest => quest.quit());
         this.questList(QuestHelper.generateQuestList(this.generateSeed(), GameConstants.QUESTS_PER_SET));
     }
 
@@ -223,7 +224,7 @@ class Quests implements Saveable {
         } else {
             this.refreshes(json.refreshes || this.defaults.refreshes);
         }
-        
+
         // Generate the questList
         this.generateQuestList();
 
@@ -231,7 +232,7 @@ class Quests implements Saveable {
         if (json.questList) {
             this.loadQuestList(json.questList);
         }
-        
+
         // Generate the questLines
         QuestLineHelper.loadQuestLines();
 
