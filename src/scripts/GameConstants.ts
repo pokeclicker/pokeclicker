@@ -709,12 +709,12 @@ namespace GameConstants {
         'Distortion World',
         'Victory Road Sinnoh',
         'Spear Pillar',
-        'Hall of Origin',
         'Fullmoon Island',
         'Newmoon Island',
         'Flower Paradise',
         'Snowpoint Temple',
         'Stark Mountain',
+        'Hall of Origin',
     ];
 
     export const RegionDungeons = [
