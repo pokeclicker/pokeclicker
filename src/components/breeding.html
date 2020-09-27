@@ -21,11 +21,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <div class="form-row">
                             <div class="form-group col-md-6 col-6">
                                 <label>Search</label>
-                                <input class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
+                                <input autocomplete="off" class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
                             </div>
                             <div class="form-group col-md-6 col-6">
                                 <label>Display Value</label>
-                                <select class="custom-select" onchange="BreedingController.displayValue(this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value)">
                                     <option value="attack" selected>Attack</option>
                                     <option value="attackBonus">Attack Bonus</option>
                                     <option value="baseAttack">Base Attack</option>
@@ -34,7 +34,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Region</label>
-                                <select class="custom-select" onchange="BreedingController.filter.region(+this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.region(+this.value)">
                                     <option value="-2">All</option>
                                     <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
                                     <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
@@ -44,7 +44,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Caught Status</label>
-                                <select class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
                                     <option value="0">All</option>
                                     <option value="1">Not Shiny</option>
                                     <option value="2">Shiny</option>
@@ -52,7 +52,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select class="custom-select" onchange="BreedingController.filter.type1(+this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.type1(+this.value)">
                                     <option value="-2">All</option>
                                     <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
                                     <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
@@ -62,7 +62,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select class="custom-select" onchange="BreedingController.filter.type2(+this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.type2(+this.value)">
                                     <option value="-2">All</option>
                                     <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
                                     <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
