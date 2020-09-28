@@ -90,13 +90,6 @@ Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress dis
     'percentage'
 ));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
-Settings.add(new MultipleChoiceSetting('backgroundImage', 'Background image:',
-    [
-        new SettingOption('Day', 'background-day'),
-        new SettingOption('Night', 'background-night'),
-    ],
-    'background-day'
-));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
