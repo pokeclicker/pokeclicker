@@ -81,7 +81,9 @@ class Battle {
             setTimeout(
                 () => {
                     this.attemptCatch(enemyPokemon);
-                    this.generateNewEnemy();
+                    if (player.route() != 0) {
+                        this.generateNewEnemy();
+                    }
                 },
                 App.game.pokeballs.calculateCatchTime(pokeBall)
             )
