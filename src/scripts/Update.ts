@@ -236,7 +236,7 @@ class Update implements Saveable {
             }
         }
         
-        if (this.isOlderVersion(this.saveVersion, '0.5.4')) {
+        if (this.isOlderVersion(this.saveVersion, '0.5.5')) {
             try {
                 //Correct statistics
                 let i = saveData.statistics.dungeonsDefeated.length;
@@ -258,7 +258,7 @@ class Update implements Saveable {
                 // Update save data
                 this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
-                console.error('[update] v0.5.4 - Couldn\'t update player statistics..', ಠ_ಠ);
+                console.error('[update] v0.5.5 - Couldn\'t update player statistics..', ಠ_ಠ);
             }
         }
 
