@@ -239,21 +239,10 @@ class Update implements Saveable {
         if (this.isOlderVersion(this.saveVersion, '0.5.5')) {
             try {
                 //Correct statistics
-                let i = saveData.statistics.dungeonsDefeated.length;
-                const lowestIndexI = 22;
-                while (i -- > lowestIndexI) {
-                    saveData.statistics.dungeonsDefeated[i + 1] = saveData.statistics.dungeonsDefeated[i];
-                }
-
-                const lowestIndexX = 30;
-                while (i -- > lowestIndexX) {
-                    saveData.statistics.dungeonsDefeated[i + 1] = saveData.statistics.dungeonsDefeated[i];
-                }
-
-                const lowestIndexY = 50;
-                while (i -- > lowestIndexY) {
-                    saveData.statistics.dungeonsDefeated[i + 1] = saveData.statistics.dungeonsDefeated[i];
-                }
+                saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 22, 34); // Petalburg Woods
+                saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 30, 35); // New Mauville
+                saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56, 50); // Hall of Origin
+                saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 33); // Hall of Origin
 
                 // Update save data
                 this.setSaveData(saveData);
@@ -281,6 +270,16 @@ class Update implements Saveable {
 
             Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`, type: GameConstants.NotificationOption.primary, timeout: 6e4 });
         }
+    }
+
+    static moveIndex = (arr, to, from = Infinity, defaultVal = 0) => {
+        let temp = arr.splice(from, 1);
+        if (!temp.length) {
+            temp = [defaultVal];
+        }
+        const end = arr.splice(to);
+        arr = [...arr, ...temp, ...end];
+        return arr;
     }
 
     getPlayerData() {
