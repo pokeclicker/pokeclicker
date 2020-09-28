@@ -28,7 +28,7 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.5.3"></script>
+    <script src="scripts/script.min.js?v=0.5.4"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -44,7 +44,7 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.5.3" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.5.4" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -467,6 +467,18 @@
     <div class="card-header p-0" data-toggle="collapse" href="#battleItemContainerBody">
       <span>Battle Items</span>
     </div>
+    <button type="button" class="btn btn-sm btn-primary" 
+            style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" 
+            data-bind="text: ItemHandler.multipliers[ItemHandler.multIndex()]"
+            onclick="ItemHandler.incrementMultiplier()"
+            oncontextmenu="ItemHandler.decrementMultiplier(); return false"
+            title="Controls"
+            data-toggle="popover"
+            data-html="true"
+            data-content="Left/right click to cycle amount<br/>Click on item image to use"
+            data-placement="right"
+            data-trigger="hover">1
+    </button>
     <div id="battleItemContainerBody" class="card-body p-0 show">
       <table class="table table-bordered m-0">
         <tbody>
@@ -6547,7 +6559,7 @@
                                      data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
                                </span>
                            </knockout>
-                           <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/\W/g, '_') + '.png' }">
+                           <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/[^\w.-\\(\\)]/g, '_') + '.png' }">
                            <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
                            <div data-bind="if: $data.isAvailable()">
                                 <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency}}"></span>
@@ -7229,10 +7241,10 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
             </div>
             <div class="modal-body p-0">
                 <table class='table table-sm table-hover m-0'>
-                    <tbody>
-                        <!-- ko foreach: Array(Shards.nTypes) -->
+                    <!-- ko foreach: Array(Shards.nTypes) -->
+                        <thead>
                             <tr>
-                                <th colspan="4" class="text-left table-dark text-light">
+                                <th colspan="4" class="clickable text-left table-dark text-light" data-toggle="collapse" data-bind="attr: { 'href': '#collapse-shard-' + $index() }">
                                     <h3>
                                         <knockout data-bind="text: PokemonType[$index()]"></knockout>
                                         <div class="float-right">
@@ -7242,6 +7254,8 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                                     </h3>
                                 </th>
                             </tr>
+                        </thead>
+                        <tbody class="collapse show" data-bind="attr: { id: 'collapse-shard-' + $index() }">
                             <!-- ko foreach: Array(Shards.nEffects) -->
                                 <tr>
                                     <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
@@ -7269,8 +7283,8 @@ aria-labelledby="hallOfFameModalLabel" aria-hidden="true">
                                     </td>
                                 </tr>
                             <!-- /ko -->
-                        <!-- /ko -->
-                    </tbody>
+                        </tbody>
+                    <!-- /ko -->
                 </table>
             </div>
 
@@ -7306,11 +7320,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         <div class="form-row">
                             <div class="form-group col-md-6 col-6">
                                 <label>Search</label>
-                                <input class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
+                                <input autocomplete="off" class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
                             </div>
                             <div class="form-group col-md-6 col-6">
                                 <label>Display Value</label>
-                                <select class="custom-select" onchange="BreedingController.displayValue(this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value)">
                                     <option value="attack" selected>Attack</option>
                                     <option value="attackBonus">Attack Bonus</option>
                                     <option value="baseAttack">Base Attack</option>
@@ -7319,7 +7333,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Region</label>
-                                <select class="custom-select" onchange="BreedingController.filter.region(+this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.region(+this.value)">
                                     <option value="-2">All</option>
                                     <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
                                     <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
@@ -7329,7 +7343,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Caught Status</label>
-                                <select class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
                                     <option value="0">All</option>
                                     <option value="1">Not Shiny</option>
                                     <option value="2">Shiny</option>
@@ -7337,7 +7351,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select class="custom-select" onchange="BreedingController.filter.type1(+this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.type1(+this.value)">
                                     <option value="-2">All</option>
                                     <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
                                     <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
@@ -7347,7 +7361,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select class="custom-select" onchange="BreedingController.filter.type2(+this.value)">
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.type2(+this.value)">
                                     <option value="-2">All</option>
                                     <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
                                     <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
@@ -7357,7 +7371,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                         </div>
                     </div>
-                    <div data-bind="if: App.game.breeding.hasFreeEggSlot()">
+                    <div data-bind="visible: App.game.breeding.hasFreeEggSlot()">
                         <!-- Check if the player has any level 100 Pokemon or if they have any eggs -->
                         <p class="text-danger" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
                             Unfortunately, you don't have any pokémon of level 100 to breed.
@@ -7380,7 +7394,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 </div>
 
                 <div class="tab-pane" id="breeding-eggs">
-                    <div data-bind="if: App.game.breeding.hasFreeEggSlot()">
+                    <div data-bind="visible: App.game.breeding.hasFreeEggSlot()">
                         <p class="text-danger" data-bind="visible: !Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()).length">
                             Unfortunately, you don't have any eggs to breed.
                         </p>
@@ -7404,7 +7418,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 </div> 
 
                 <div class="tab-pane" id="breeding-fossils">
-                    <div data-bind="if: App.game.breeding.hasFreeEggSlot()">
+                    <div data-bind="visible: App.game.breeding.hasFreeEggSlot()">
                         <p class="text-danger" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length">
                             Unfortunately, you don't have any fossils to breed.
                         </p>
@@ -7455,7 +7469,7 @@ style="cursor:default" tabindex="-1">
                     </btn>
                 </ul>
             </div>
-            
+
             <div class="modal-body tab-content p-0">
                 <div id="dig" class="tab-pane fade in active show pl-3 pr-3">
                     <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
@@ -7486,7 +7500,7 @@ style="cursor:default" tabindex="-1">
                             <button class='btn' data-bind="text: Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ' items found'"></button>
                             <button id="mine-prospect-result" type="button" class="btn btn-info" data-html="true"
                                     style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
-                                    data-bind="tooltip: { title: () => Mine.prospectResult() ?? 'Prospect to get more details', trigger: 'hover', placement:'left' }">
+                                    data-bind="tooltip: { title: () => Mine.prospectResult() || 'Prospect to get more details', trigger: 'hover', placement:'left' }">
                                 ?
                             </button>
                         </div>
@@ -7795,14 +7809,14 @@ aria-labelledby="pokedexModalLabel">
                       <th class="text-left bg-dark">Amount</th>
                     </tr>
                   </thead>
-                  <tbody">
+                  <tbody>
                     <tr>
                       <td class="text-left">Base Attack</td>
                       <td class="text-left tight"><code data-bind="text: pokemonMap[$data].attack.toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Current Attack</td>
-                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data)?.attack || 0).toLocaleString('en-US')">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Catch Rate</td>
@@ -7823,7 +7837,7 @@ aria-labelledby="pokedexModalLabel">
                       <th class="text-left bg-dark">Amount</th>
                     </tr>
                   </thead>
-                  <tbody">
+                  <tbody>
                     <tr>
                       <td class="text-left">Encountered</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.pokemonEncountered[$data]().toLocaleString('en-US')">-</code></td>
@@ -8152,7 +8166,7 @@ aria-labelledby="badgeCaseModalLabel">
 
 
 <!-- Safari Modal -->
-<div aria-labelledby="safariModal" class="modal fade noselect" id="safariModal" role="dialog" style="cursor:default" tabindex="-1">
+<div aria-labelledby="safariModal" class="modal fade noselect" id="safariModal" role="dialog" style="cursor:default" tabindex="-1" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="controls" data-bind="visible: Safari.inProgress() && !Safari.inBattle()">
@@ -8246,7 +8260,7 @@ aria-labelledby="badgeCaseModalLabel">
 
 
 <!-- Safari Modal -->
-<div class="modal fade noselect" id="safariBattleModal" tabindex="-1" role="dialog" aria-badgeledby="safariBattleModal">
+<div class="modal fade noselect" id="safariBattleModal" tabindex="-1" role="dialog" aria-badgeledby="safariBattleModal" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
        <div class="modal-content">
            <div class="modal-body p-0">
