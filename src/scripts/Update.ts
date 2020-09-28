@@ -244,7 +244,7 @@ class Update implements Saveable {
                 // Update save data
                 this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
-                console.error('[update] v0.5.4 - Couldn\'t update player statistics..', ಠ_ಠ);
+                console.error('[update] v0.5.4 - Couldn\'t refund players Quest Points..', ಠ_ಠ);
             }
         }
 
