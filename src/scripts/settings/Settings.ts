@@ -94,6 +94,7 @@ Settings.add(new MultipleChoiceSetting('backgroundImage', 'Background image:',
     [
         new SettingOption('Day', 'background-day'),
         new SettingOption('Night', 'background-night'),
+        new SettingOption('Dynamic', 'background-dynamic'),
     ],
     'background-day'
 ));
@@ -126,3 +127,28 @@ Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
     SortOptions.id
 ));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
+
+/*
+ * SUBSCRIBERS
+ */
+
+let autoUpdateScene;
+Settings.getSetting('backgroundImage').observableValue.subscribe(newValue => {
+    if (newValue == 'background-dynamic') {
+        // Start adding Pokemon to the scene
+        DynamicBackground.active = true;
+        DynamicBackground.startAddingPokemon();
+
+        // Update the background images, sun and moon
+        DynamicBackground.updateScene();
+        autoUpdateScene = setTimeout(() => {
+            DynamicBackground.updateScene();
+            setInterval(DynamicBackground.updateScene, GameConstants.MINUTE);
+            
+        }, GameConstants.MINUTE - (Date.now() % GameConstants.MINUTE));
+    } else {
+        // Stop adding Pokemon to the scene
+        DynamicBackground.active = false;
+        clearInterval(autoUpdateScene);
+    }
+});
