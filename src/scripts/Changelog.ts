@@ -29,6 +29,23 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.5.4
+    new Changelog(changelogType.UPDATE, 'v0.5.4'),
+    new Changelog(changelogType.NEW, 'More stores and items added in Johto, Hoenn and Sinnoh'),
+    new Changelog(changelogType.NEW, 'Added notifications for the Farm'),
+    new Changelog(changelogType.NEW, 'Can now sort Pokémon list by Breeding Efficiency'),
+    new Changelog(changelogType.NEW, 'Can now sort Pokémon list by Egg Steps'),
+    new Changelog(changelogType.NEW, 'New Rotom forms available'),
+    new Changelog(changelogType.NEW, 'Added ability to use multiple battle items in 1 click'),
+    new Changelog(changelogType.NEW, 'Shards types can now be collapsed'),
+    new Changelog(changelogType.CHANGE, 'Game should now load in older versions of Firefox'),
+    new Changelog(changelogType.CHANGE, 'Mesprit and Cresselia are now roaming in Sinnoh'),
+    new Changelog(changelogType.FIXED, 'Updated Burmy (plant) shop image'),
+    new Changelog(changelogType.FIXED, 'Safari Zone modal should no longer be able to close without clicking the intended buttons'),
+    new Changelog(changelogType.FIXED, 'Updated Shoal Cave entry cost'),
+    new Changelog(changelogType.FIXED, 'Hatchery should no longer cause lag when hatching'),
+    new Changelog(changelogType.FIXED, 'Old Quests will no longer give a notification when completed once they are refreshed'),
+
     // v0.5.3
     new Changelog(changelogType.UPDATE, 'v0.5.3'),
     new Changelog(changelogType.NEW, 'Can filter Daycare Pokémon by name (regex supported)'),

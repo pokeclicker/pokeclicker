@@ -6,6 +6,7 @@ enum SortOptions {
     'shiny' = 4,
     'baseAttack' = 5,
     'breedingEfficiency' = 6,
+    'eggCycles' = 7,
 }
 
 type SortOptionConfig = {
@@ -58,5 +59,10 @@ const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
         'text': 'Breeding Efficiency',
         'getValue': p => (p.baseAttack / pokemonMap[p.name].eggCycles),
         'invert': true,
+    },
+
+    [SortOptions.eggCycles]: {
+        'text': 'Egg Steps',
+        'getValue': p => pokemonMap[p.name].eggCycles,
     },
 };
