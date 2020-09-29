@@ -17,14 +17,14 @@
                       <th class="text-left bg-dark">Amount</th>
                     </tr>
                   </thead>
-                  <tbody">
+                  <tbody>
                     <tr>
                       <td class="text-left">Base Attack</td>
                       <td class="text-left tight"><code data-bind="text: pokemonMap[$data].attack.toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Current Attack</td>
-                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data)?.attack || 0).toLocaleString('en-US')">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Catch Rate</td>
@@ -45,7 +45,7 @@
                       <th class="text-left bg-dark">Amount</th>
                     </tr>
                   </thead>
-                  <tbody">
+                  <tbody>
                     <tr>
                       <td class="text-left">Encountered</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.pokemonEncountered[$data]().toLocaleString('en-US')">-</code></td>
