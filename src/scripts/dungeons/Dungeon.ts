@@ -341,8 +341,9 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     390000,
     [
-        new DungeonBossPokemon('Kyogre', 1300000, 20),
-        new DungeonBossPokemon('Groudon', 1300000, 20),
+        new DungeonBossPokemon('Milotic', 900000, 50),
+        new DungeonBossPokemon('Kyogre', 1300000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)),
+        new DungeonBossPokemon('Groudon', 1300000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)),
     ],
     34000, 101, 5);
 
@@ -359,7 +360,7 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     420000,
     [
         new DungeonBossPokemon('Dusclops', 1200000, 20),
-        new DungeonBossPokemon('Rayquaza', 1824002, 20),
+        new DungeonBossPokemon('Rayquaza', 1824002, 70),
     ],
     40000, 101, 5);
 
