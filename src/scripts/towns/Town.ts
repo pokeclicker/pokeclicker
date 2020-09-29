@@ -110,6 +110,12 @@ const ViridianCityOldMan = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
     'You can use the Pokeball Selector to select which type of Pokeball to use on specific Pokemon based on caught status.'
 ]);
+const CinnabarIslandResearcher = new NPC('Researcher', [
+    'They were trying to clone an ancient Pokémon in the mansion, I wonder if they succeeded.',
+    'Apparently the ancient Pokémon escaped, And can be found roaming around Kanto!',
+]);
+
+  
 
 //Kanto Towns
 TownList['Pewter City'] = new Town('Pewter City', [new RouteKillRequirement(10, 2), new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Viridian Forest'))], PewterCityShop);
@@ -118,7 +124,7 @@ TownList['Vermillion City'] = new Town('Vermillion City', [new RouteKillRequirem
 TownList['Celadon City'] = new Town('Celadon City', [new RouteKillRequirement(10, 8)], CeladonCityShop);
 TownList['Saffron City'] = new Town('Saffron City', [new GymBadgeRequirement(BadgeCase.Badge.Rainbow)], SaffronCityShop);
 TownList['Fuchsia City'] = new Town('Fuchsia City', [new OneFromManyRequirement([new RouteKillRequirement(10, 18), new RouteKillRequirement(10, 15)])], FuchsiaCityShop);
-TownList['Cinnabar Island'] = new Town('Cinnabar Island', [new OneFromManyRequirement([new RouteKillRequirement(10, 20), new RouteKillRequirement(10, 21)])], CinnabarIslandShop, dungeonList['Pokemon Mansion']);
+TownList['Cinnabar Island'] = new Town('Cinnabar Island', [new OneFromManyRequirement([new RouteKillRequirement(10, 20), new RouteKillRequirement(10, 21)])], CinnabarIslandShop, dungeonList['Pokemon Mansion'], [CinnabarIslandResearcher]);
 TownList['Viridian City'] = new Town('Viridian City', [new RouteKillRequirement(10, 1)], ViridianCityShop, undefined, [ViridianCityOldMan]);
 TownList['Pallet Town'] = new Town('Pallet Town', []);
 TownList['Lavender Town'] = new Town('Lavender Town', [new RouteKillRequirement(10, 10)], LavenderTownShop, dungeonList['Pokemon Tower']);
