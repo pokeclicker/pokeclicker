@@ -341,9 +341,9 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     390000,
     [
-        new DungeonBossPokemon('Slaking', 900000, 50),
-        new DungeonBossPokemon('Kyogre', 1300000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)),
-        new DungeonBossPokemon('Groudon', 1300000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)),
+        new DungeonBossPokemon('Whiscash', 1000000, 50),
+        new DungeonBossPokemon('Kyogre', 1700000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)),
+        new DungeonBossPokemon('Groudon', 1700000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)),
     ],
     34000, 101, 5);
 
