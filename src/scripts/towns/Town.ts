@@ -108,7 +108,7 @@ const LavenderTownShop = new Shop([
 
 const ViridianCityOldMan = new NPC('Old Man', [
     'Ahh, I\'ve had my coffee now and I feel great!',
-    'You can use the Pokeball Selector to select which type of Pokeball to use on specific Pokemon based on caught status.'
+    'You can use the Pokeball Selector to select which type of Pokeball to use on specific Pokemon based on caught status.',
 ]);
 const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion, I wonder if they succeeded.',
