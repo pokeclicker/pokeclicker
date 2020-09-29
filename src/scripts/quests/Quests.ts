@@ -140,9 +140,9 @@ class Quests implements Saveable {
         return false;
     }
 
-    // returns false if we still have incomplete quest
+    // returns false if we still have incomplete/inprogress quest
     public allQuestCompleted() {
-        return !this.incompleteQuests().length;
+        return !this.incompleteQuests().length && !this.currentQuests().length;
     }
 
     // 1000 xp needed to reach level 2, amount needed for next level increases by 20% of previous level
