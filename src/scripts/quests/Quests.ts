@@ -63,7 +63,7 @@ class Quests implements Saveable {
         if (quest && quest.isCompleted() && !quest.claimed()) {
             quest.claim();
             // Once the player completes every available quest, refresh the list for free
-            if (this.allQuestCompleted()) {
+            if (this.allQuestClaimed()) {
                 this.refreshQuests(true);
             }
         } else {
@@ -141,7 +141,7 @@ class Quests implements Saveable {
     }
 
     // returns false if we still have incomplete/inprogress quest
-    public allQuestCompleted() {
+    public allQuestClaimed() {
         return !this.incompleteQuests().length && !this.currentQuests().length;
     }
 
