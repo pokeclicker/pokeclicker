@@ -34,11 +34,10 @@ RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon(pokemonMap
 RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Latios, undefined, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)));
 RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Latias, undefined, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)));
 // TODO: these need another way to be obtained
-RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Regice, undefined, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)));
-RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Regirock, undefined, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)));
-RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Registeel, undefined, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)));
 RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Jirachi, undefined, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)));
 
 
 // Sinnoh
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Manaphy));
+RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Mesprit, undefined, new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Lake Verity'))));
+RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Cresselia, undefined, new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Fullmoon Island'))));
