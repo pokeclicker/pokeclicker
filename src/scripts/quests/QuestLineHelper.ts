@@ -28,17 +28,7 @@ class QuestLineHelper {
         tutorial.addQuest(buyPokeballs);
 
         //Buy Dungeon ticket
-        const buyDungeonTicketReward = () => {
-            Information.show({
-                steps: [
-                    {
-                        element: document.getElementById('pokeballSelector'),
-                        intro: 'Select which Pokeball types to catch Pokemon with based on their caught/shiny status.',
-                    },
-                ],
-            });
-        };
-        const buyDungeonTicket = new CustomQuest(1, buyDungeonTicketReward, 'Buy the Dungeon ticket from Viridian City Shop.', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
+        const buyDungeonTicket = new CustomQuest(1, 50, 'Buy the Dungeon ticket from Viridian City Shop.', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest

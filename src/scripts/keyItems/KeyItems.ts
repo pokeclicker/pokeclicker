@@ -29,7 +29,16 @@ class KeyItems implements Feature {
             }),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13'),
-            new KeyItem(KeyItems.KeyItem.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon'),
+            new KeyItem(KeyItems.KeyItem.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon', null, false, () => {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('pokeballSelector'),
+                            intro: 'Select which Pokeball types to catch Pokemon with based on their caught/shiny status.',
+                        },
+                    ],
+                });
+            }),
             new KeyItem(KeyItems.KeyItem.Super_rod, 'The best fishing rod for catching wild water Pokémon', function () {
                 return App.game.statistics.routeKills[12]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }),
