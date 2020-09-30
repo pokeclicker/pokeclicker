@@ -122,23 +122,17 @@ class Underground {
     }
 
     public static sortMineItems(prop: string) {
-        if (prop == this.lastPropSort) this.sortDirection *= -1;
+        if (prop == this.lastPropSort) { this.sortDirection *= -1; }
         this.lastPropSort = prop;
 
         player.mineInventory.sort((a, b) => {
-            switch(prop) {
-                case 'amount': 
-                    if (a.amount() > b.amount()) return -1 * this.sortDirection;
-                    if (a.amount() < b.amount()) return 1 * this.sortDirection;
-                    return 0;
+            switch (prop) {
+                case 'amount':
+                    return (a.amount() - b.amount()) * this.sortDirection;
                 case 'value':
-                    if (a.value > b.value) return -1 * this.sortDirection;
-                    if (a.value < b.value) return 1 * this.sortDirection;
-                    return 0;
+                    return (a.value - b.value) * this.sortDirection;
                 case 'name':
-                    if (a.name > b.name) return -1 * this.sortDirection;
-                    if (a.name < b.name) return 1 * this.sortDirection;
-                    return 0;
+                    return a.name > b.name ? -1 * this.sortDirection : 1 * this.sortDirection;
             }
         });
     }
