@@ -84,9 +84,9 @@ class PokemonFactory {
         return false;
     }
 
-    public static generatePartyPokemon(id: number): PartyPokemon {
+    public static generatePartyPokemon(id: number, shiny = false): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false, shiny);
     }
 
     /**
