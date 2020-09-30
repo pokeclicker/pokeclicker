@@ -20,11 +20,23 @@ class StartSequenceRunner {
 
         const battlePokemon = new BattlePokemon(dataPokemon.name, dataPokemon.id, dataPokemon.type1, dataPokemon.type2, 10, 1, 100, 0, 0, shiny);
         Battle.enemyPokemon(battlePokemon);
+
+        // Show the help information text
+        Information.show({
+            steps: [
+                {
+                    element: document.getElementsByClassName('battle-view')[0],
+                    intro: 'Click here to deal "Click Attack" damage to Pokémon.',
+                },
+            ],
+        });
+
         // Set the function to call showCaughtMessage after pokemon is caught
         battlePokemon.isAlive = function () {
             if (battlePokemon.health() <= 0) {
                 setTimeout(
                     function () {
+                        Information.hide();
                         player.starter = StartSequenceRunner.starterPicked;
                         StartSequenceRunner.showCaughtMessage();
                     }, 1000);
