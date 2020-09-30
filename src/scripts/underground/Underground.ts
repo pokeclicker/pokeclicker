@@ -122,7 +122,9 @@ class Underground {
     }
 
     public static sortMineItems(prop: string) {
-        if (prop == this.lastPropSort) { this.sortDirection *= -1; }
+        if (prop == this.lastPropSort) {
+            this.sortDirection *= -1;
+        }
         this.lastPropSort = prop;
 
         player.mineInventory.sort((a, b) => {
