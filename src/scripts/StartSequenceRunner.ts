@@ -91,10 +91,6 @@ document.addEventListener('DOMContentLoaded', function (event) {
         Information.show({
             steps: [
                 {
-                    element: document.getElementById('pokeballSelector'),
-                    intro: 'Select which Pokeball types to catch Pokemon with based on their caught/shiny status.',
-                },
-                {
                     element: document.getElementById('questDisplayContainer'),
                     intro: 'Complete the tutorial quests to continue.',
                 },
