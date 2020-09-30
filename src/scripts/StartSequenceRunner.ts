@@ -88,5 +88,17 @@ document.addEventListener('DOMContentLoaded', function (event) {
     $('#starterCaughtModal').on('hidden.bs.modal', function () {
         Save.store(player);
         App.game.gameState = GameConstants.GameState.fighting;
+        Information.show({
+            steps: [
+                {
+                    element: document.getElementById('pokeballSelector'),
+                    intro: 'Select which Pokeball types to catch Pokemon with based on their caught/shiny status.',
+                },
+                {
+                    element: document.getElementById('questDisplayContainer'),
+                    intro: 'Complete the tutorial quests to continue.',
+                },
+            ],
+        });
     });
 });
