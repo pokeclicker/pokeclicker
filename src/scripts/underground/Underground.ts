@@ -5,6 +5,9 @@ class Underground {
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
     public static counter = 0;
 
+    public static sortDirection = -1;
+    public static lastPropSort = '';
+
     private static _energy: KnockoutObservable<number> = ko.observable(0);
     public static upgradeList: Array<Upgrade> = [];
 
@@ -116,6 +119,28 @@ class Underground {
         const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
         this.energy = this.energy + gain;
         Notifier.notify({ message: `You restored ${gain} mining energy!`, type: GameConstants.NotificationOption.success });
+    }
+
+    public static sortMineItems(prop: string) {
+        if (prop == this.lastPropSort) this.sortDirection *= -1;
+        this.lastPropSort = prop;
+
+        player.mineInventory.sort((a, b) => {
+            switch(prop) {
+                case 'amount': 
+                    if (a.amount() > b.amount()) return -1 * this.sortDirection;
+                    if (a.amount() < b.amount()) return 1 * this.sortDirection;
+                    return 0;
+                case 'value':
+                    if (a.value > b.value) return -1 * this.sortDirection;
+                    if (a.value < b.value) return 1 * this.sortDirection;
+                    return 0;
+                case 'name':
+                    if (a.name > b.name) return -1 * this.sortDirection;
+                    if (a.name < b.name) return 1 * this.sortDirection;
+                    return 0;
+            }
+        });
     }
 
     public static sellMineItem(id: number, amount = 1) {
