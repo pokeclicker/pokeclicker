@@ -17,6 +17,15 @@ class KeyItems implements Feature {
             new KeyItem(KeyItems.KeyItem.Pokeball_bag, 'A tiny bag that can hold up to 4 different types of PokéBalls', null, true),
             new KeyItem(KeyItems.KeyItem.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region', function () {
                 return App.game.statistics.routeKills[1]() >= GameConstants.ROUTE_KILLS_NEEDED;
+            }, false, () => {
+                Information.show({
+                    steps: [
+                        {
+                            element: document.getElementById('townMap'),
+                            intro: 'This is the Town Map,<br/>Use this to move to between different Routes, Towns and Dungeons.',
+                        },
+                    ],
+                });
             }),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13'),
