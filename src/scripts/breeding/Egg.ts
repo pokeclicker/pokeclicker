@@ -78,9 +78,11 @@ class Egg implements Saveable {
             return;
         }
         let shinyChance = GameConstants.SHINY_CHANCE_BREEDING;
-        shinyChance /= App.game.oakItems.calculateBonusIfActive(OakItems.OakItem.Shiny_Charm) * Math.min(1, this.shinySteps / this.steps());
+        const shinyCharmBonus = shinyChance / App.game.oakItems.calculateBonusIfActive(OakItems.OakItem.Shiny_Charm);
+        const bonusStepsChance = shinyCharmBonus * Math.min(1, this.shinySteps / this.steps());
+        shinyChance -= bonusStepsChance;
 
-        const shiny = PokemonFactory.generateShiny(shinyChance, true);
+        const shiny = PokemonFactory.generateShiny(Math.ceil(shinyChance), true);
 
         const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
         // If the party pokemon exist, increase it's damage output
