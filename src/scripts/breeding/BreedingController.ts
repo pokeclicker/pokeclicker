@@ -90,6 +90,7 @@ class BreedingController {
 
     public static initialize() {
         Object.keys(BreedingController.filter).forEach(e => (<KnockoutObservable<any>> BreedingController.filter[e]).subscribe(() => BreedingController.filterBreedableList()));
+        App.game.party._caughtPokemon.subscribe(() => BreedingController.filterBreedableList());
     }
 
     public static openBreedingModal() {
@@ -131,6 +132,7 @@ class BreedingController {
     public static breedableList = ko.observable([]);
 
     public static filterBreedableList() {
+        console.log(App.game.party.caughtPokemon[0].name);
         this.breedableList(App.game.party.caughtPokemon.filter((partyPokemon: PartyPokemon) => {
             // Only breedable Pokemon
             if (partyPokemon.breeding || partyPokemon.level < 100) {
