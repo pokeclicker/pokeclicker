@@ -139,9 +139,13 @@ class PokemonHelper {
         const dungeons = [];
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // Dungeon Boss
-            const isBoss = dungeon.bossList.find(boss => boss.name == pokemonName);
-            if (isBoss) {
-                dungeons.push(dungeonName);
+            const boss = dungeon.bossList.find(boss => boss.name == pokemonName);
+            if (boss) {
+                const data = {
+                    dungeon: dungeonName,
+                    requirements: boss.requirement?.hint(),
+                };
+                dungeons.push(data);
             }
         });
         return dungeons;
@@ -173,8 +177,13 @@ class PokemonHelper {
     public static getPokemonRoamingRegions(pokemonName: string): Array<string> {
         const regions = [];
         Object.entries(RoamingPokemonList.list).forEach(([region, pokemonArr]) => {
-            if (pokemonArr.find(r => r.pokemon.name == pokemonName)) {
-                regions.push(+region);
+            const pokemon = pokemonArr.find(r => r.pokemon.name == pokemonName);
+            if (pokemon) {
+                const data = {
+                    region: +region,
+                    requirements: pokemon.unlockRequirement?.hint(),
+                };
+                regions.push(data);
             }
         });
         return regions;
