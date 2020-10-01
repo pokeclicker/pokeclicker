@@ -92,6 +92,7 @@ class Underground {
         } else {
             const amt = player.mineInventory[index].amount();
             player.mineInventory[index].amount(amt + num);
+            this.sortMineItems(this.lastPropSort);
         }
     }
 
@@ -167,6 +168,7 @@ class Underground {
                     const success = Underground.gainProfit(item, sellAmt);
                     if (success) {
                         player.mineInventory[i].amount(curAmt - sellAmt);
+                        this.sortMineItems(this.lastPropSort);
                     }
                     return;
                 }
