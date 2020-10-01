@@ -60,7 +60,7 @@ class Breeding implements Feature {
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
         ];
-
+        BreedingController.initialize();
     }
 
     update(delta: number): void {
