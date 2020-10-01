@@ -70,6 +70,20 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <option value="-1">None</option>
                                 </select>
                             </div>
+                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySort')">
+                                <label>Sort</label>
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                                    data-bind="foreach: $data.options, attr: {name}">
+                                    <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySortDirection')">
+                                <label>Sort Direction</label>
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, this.value === 'true')"
+                                    data-bind="foreach: $data.options, attr: {name}">
+                                    <option data-bind="text: $data.value ? 'Descending' : 'Ascending', value: $data.value.toString(), attr:{ selected: $parent.observableValue() === $data.value}"></option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div data-bind="visible: App.game.breeding.hasFreeEggSlot()">
