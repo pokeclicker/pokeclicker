@@ -92,7 +92,7 @@ class Underground {
         } else {
             const amt = player.mineInventory[index].amount();
             player.mineInventory[index].amount(amt + num);
-            this.sortMineItems(this.lastPropSort);
+            this.sortMineItems(this.lastPropSort, false);
         }
     }
 
@@ -122,7 +122,7 @@ class Underground {
         Notifier.notify({ message: `You restored ${gain} mining energy!`, type: GameConstants.NotificationOption.success });
     }
 
-    public static sortMineItems(prop: string) {
+    public static sortMineItems(prop: string, flip = true) {
         const prevEl = document.querySelector(`[data-undergroundsort=${Underground.lastPropSort}]`);
         const nextEl = prop == this.lastPropSort ? prevEl : document.querySelector(`[data-undergroundsort=${prop}]`);
 
@@ -133,10 +133,10 @@ class Underground {
                 prevEl.textContent = this.lastPropSort;
             }
             this.lastPropSort = prop;
+        } else if (flip) {
+            // Flip sort direction
+            this.sortDirection *= -1;
         }
-
-        // Flip sort direction
-        this.sortDirection *= -1;
 
         // Update element text to dispaly sort direction
         if (nextEl) {
@@ -168,7 +168,7 @@ class Underground {
                     const success = Underground.gainProfit(item, sellAmt);
                     if (success) {
                         player.mineInventory[i].amount(curAmt - sellAmt);
-                        this.sortMineItems(this.lastPropSort);
+                        this.sortMineItems(this.lastPropSort, false);
                     }
                     return;
                 }
