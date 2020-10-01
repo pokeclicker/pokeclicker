@@ -72,8 +72,10 @@ class PokemonFactory {
      * @param chance Base chance, should be from GameConstants.SHINY_CHANCE.*
      * @returns {boolean}
      */
-    public static generateShiny(chance: number): boolean {
-        chance /= App.game.oakItems.calculateBonus(OakItems.OakItem.Shiny_Charm);
+    public static generateShiny(chance: number, ignoreShinyCharm = false): boolean {
+        if (!ignoreShinyCharm) {
+            chance /= App.game.oakItems.calculateBonus(OakItems.OakItem.Shiny_Charm);
+        }
 
         const rand: number = Math.floor(Math.random() * chance) + 1;
 

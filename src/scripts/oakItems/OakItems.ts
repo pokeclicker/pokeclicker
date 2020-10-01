@@ -38,6 +38,15 @@ class OakItems implements Feature {
         return oakItem.calculateBonus();
     }
 
+    calculateBonusIfActive(item: OakItems.OakItem) {
+        const oakItem = this.itemList[item];
+        if (oakItem == undefined) {
+            console.error('Could not find oakItem', item, 'This could have unintended consequences');
+            return 1;
+        }
+        return oakItem.calculateBonusIfActive();
+    }
+
     isUnlocked(item: OakItems.OakItem) {
         if (this.itemList[item] == undefined) {
             return false;
