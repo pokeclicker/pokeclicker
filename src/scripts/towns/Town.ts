@@ -159,6 +159,9 @@ const CianwoodCityShop = new Shop([
     ItemList['Ultraball'],
     ItemList['Fighting_egg'],
 ]);
+const MahoganyTownShop = new Shop([
+    ItemList['Fighting_egg'],
+]);
 const BlackthornCityShop = new Shop([
     ItemList['LargeRestore'],
     ItemList['Dragon_scale'],
@@ -173,7 +176,7 @@ TownList['Goldenrod City'] = new Town('Goldenrod City', [new RouteKillRequiremen
 TownList['Ecruteak City'] = new Town('Ecruteak City', [new RouteKillRequirement(10, 37)], EcruteakCityShop);
 TownList['Olivine City'] = new Town('Olivine City', [new RouteKillRequirement(10, 39)], OlivineCityShop);
 TownList['Cianwood City'] = new Town('Cianwood City', [new RouteKillRequirement(10, 41)], CianwoodCityShop);
-TownList['Mahogany Town'] = new Town('Mahogany Town', [new RouteKillRequirement(10, 42)]);
+TownList['Mahogany Town'] = new Town('Mahogany Town', [new RouteKillRequirement(10, 42)], MahoganyTownShop);
 TownList['Blackthorn City'] = new Town('Blackthorn City', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Ice Path'))], BlackthornCityShop);
 
 //Johto Dungeons
@@ -196,6 +199,9 @@ const LittleRootTownShop = new Shop([
 ]);
 const RustboroCityShop = new Shop([
     ItemList['Mystery_egg'],
+]);
+const DewfordTownShop = new Shop([
+    ItemList['Fighting_egg'],
 ]);
 const SlateportCityShop = new Shop([
     ItemList['Greatball'],
@@ -260,7 +266,7 @@ TownList['Littleroot Town'] = new Town('Littleroot Town', [], LittleRootTownShop
 TownList['Oldale Town'] = new Town('Oldale Town', [new RouteKillRequirement(10, 101)]);
 TownList['Petalburg City'] = new Town('Petalburg City', [new RouteKillRequirement(10, 102)]);
 TownList['Rustboro City'] = new Town('Rustboro City', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Petalburg Woods'))], RustboroCityShop);
-TownList['Dewford Town'] = new Town('Dewford Town', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Rusturf Tunnel'))]);
+TownList['Dewford Town'] = new Town('Dewford Town', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Rusturf Tunnel'))], DewfordTownShop);
 TownList['Slateport City'] = new Town('Slateport City', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Granite Cave')), new GymBadgeRequirement(BadgeCase.Badge.Knuckle)], SlateportCityShop);
 TownList['Mauville City'] = new Town('Mauville City', [new RouteKillRequirement(10, 110)]);
 TownList['Verdanturf Town'] = new Town('Verdanturf Town', [new RouteKillRequirement(10, 117)], VerdanturfTownShop);
