@@ -60,7 +60,7 @@ class Breeding implements Feature {
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
         ];
-
+        BreedingController.initialize();
     }
 
     update(delta: number): void {
@@ -198,7 +198,7 @@ class Breeding implements Feature {
     }
 
     public createRandomEgg(): Egg {
-        const type = Math.floor(Math.random() * (Object.keys(this.hatchList).length - 1));
+        const type = Math.floor(Math.random() * Object.keys(this.hatchList).length);
         const egg = this.createTypedEgg(type);
         egg.type = EggType.Mystery;
         return egg;
