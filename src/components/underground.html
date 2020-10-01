@@ -63,9 +63,9 @@ style="cursor:default" tabindex="-1">
                         <table class="table table-sm table-hover table-striped m-0">
                             <thead>
                                 <tr>
-                                    <th class="clickable" data-bind="click: Underground.sortMineItems('amount')">Amount</th>
-                                    <th class="clickable" data-bind="click: Underground.sortMineItems('name')">Item</th>
-                                    <th class="clickable" data-bind="click: Underground.sortMineItems('value')">Value</th>
+                                    <th class="clickable" onclick="Underground.sortMineItems(this.dataset.undergroundsort)" data-undergroundsort="Amount">Amount</th>
+                                    <th class="clickable" onclick="Underground.sortMineItems(this.dataset.undergroundsort)" data-undergroundsort="Item">Item</th>
+                                    <th class="clickable" onclick="Underground.sortMineItems(this.dataset.undergroundsort)" data-undergroundsort="Value">Value</th>
                                     <th></th>
                                 </tr>
                             </thead>

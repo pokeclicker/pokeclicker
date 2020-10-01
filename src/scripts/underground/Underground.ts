@@ -6,7 +6,7 @@ class Underground {
     public static counter = 0;
 
     public static sortDirection = -1;
-    public static lastPropSort = '';
+    public static lastPropSort = 'none';
 
     private static _energy: KnockoutObservable<number> = ko.observable(0);
     public static upgradeList: Array<Upgrade> = [];
@@ -122,19 +122,34 @@ class Underground {
     }
 
     public static sortMineItems(prop: string) {
-        if (prop == this.lastPropSort) {
-            this.sortDirection *= -1;
+        const prevEl = document.querySelector(`[data-undergroundsort=${Underground.lastPropSort}]`);
+        const nextEl = prop == this.lastPropSort ? prevEl : document.querySelector(`[data-undergroundsort=${prop}]`);
+
+        // If new sort by, update old sort by
+        if (prop != this.lastPropSort) {
+            // Remove sort direction from previous element
+            if (prevEl) {
+                prevEl.textContent = this.lastPropSort;
+            }
+            this.lastPropSort = prop;
         }
-        this.lastPropSort = prop;
+
+        // Flip sort direction
+        this.sortDirection *= -1;
+
+        // Update element text to dispaly sort direction
+        if (nextEl) {
+            nextEl.textContent = `${prop} ${this.sortDirection > 0 ? '▴' : '▾'}`;
+        }
 
         player.mineInventory.sort((a, b) => {
             switch (prop) {
-                case 'amount':
+                case 'Amount':
                     return (a.amount() - b.amount()) * this.sortDirection;
-                case 'value':
+                case 'Value':
                     return (a.value - b.value) * this.sortDirection;
-                case 'name':
-                    return a.name > b.name ? -1 * this.sortDirection : 1 * this.sortDirection;
+                case 'Item':
+                    return a.name > b.name ? 1 * this.sortDirection : -1 * this.sortDirection;
             }
         });
     }
