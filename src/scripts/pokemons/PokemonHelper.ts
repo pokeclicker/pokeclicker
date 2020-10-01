@@ -100,6 +100,14 @@ class PokemonHelper {
         return region >= 0 ? region : GameConstants.Region.none;
     }
 
+    public static calcUniquePokemonsByRegion(region: GameConstants.Region) {
+        if (region != 0) {
+            return GameConstants.TotalPokemonsPerRegion[region] - Number(GameConstants.TotalPokemonsPerRegion[region - 1]);
+        } else {
+            return GameConstants.TotalPokemonsPerRegion[region];
+        }
+    }
+
     public static getPokemonRegionRoutes(pokemonName: string) {
         const regionRoutes = {};
         Routes.regionRoutes.forEach(routeData => {
