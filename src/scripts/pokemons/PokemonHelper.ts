@@ -131,9 +131,13 @@ class PokemonHelper {
         const dungeons = [];
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // Dungeon Boss
-            const isBoss = dungeon.bossList.find(boss => boss.name == pokemonName);
-            if (isBoss) {
-                dungeons.push(dungeonName);
+            const boss = dungeon.bossList.find(boss => boss.name == pokemonName);
+            if (boss) {
+                const data = {
+                    dungeon: dungeonName,
+                    requirements: boss.requirement?.hint(),
+                };
+                dungeons.push(data);
             }
         });
         return dungeons;
