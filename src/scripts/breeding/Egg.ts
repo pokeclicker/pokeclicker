@@ -100,12 +100,12 @@ class Egg implements Saveable {
         App.game.party.gainPokemonById(pokemonID, shiny);
 
         if (shiny) {
-            Notifier.notify({ message: `✨ You hatched a shiny ${this.pokemon}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long });
+            Notifier.notify({ message: `✨ You hatched a shiny ${this.pokemon}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.hatched_shiny });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
-            Notifier.notify({ message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({ message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`, type: GameConstants.NotificationOption.success, setting: GameConstants.NotificationSetting.hatched });
         }
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
