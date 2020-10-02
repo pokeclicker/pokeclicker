@@ -31,8 +31,10 @@ class Changelog {
 const changelogItems = [
     // v0.5.5
     new Changelog(changelogType.UPDATE, 'v0.5.5'),
+    new Changelog(changelogType.NEW, 'Achievements can now be filtered'),
     new Changelog(changelogType.NEW, 'Can sort Underground items by clicking on table titles'),
     new Changelog(changelogType.NEW, 'NPCs now in towns, will provide dialog that will help the player complete their Pokédex'),
+    new Changelog(changelogType.NEW, 'More notification settings have been added'),
     new Changelog(changelogType.CHANGE, 'Increase shiny chance when using an evolution item'),
     new Changelog(changelogType.CHANGE, 'Increase shiny chance for dungeon Pokémon'),
     new Changelog(changelogType.CHANGE, 'More shops added to towns'),
