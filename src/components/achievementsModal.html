@@ -18,7 +18,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                     <label>Status</label>
                                     <select class="custom-select" onchange="AchievementHandler.filter.status(this.value)">
                                         <option value="all" selected>All</option>
-                                        <option value="false">Uncompleted</option>
+                                        <option value="false">Incomplete</option>
                                         <option value="true">Completed</option>
                                     </select>
                                 </div>
@@ -26,8 +26,8 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                     <label>Type</label>
                                     <select class="custom-select" onchange="AchievementHandler.filter.type(this.value)">
                                         <option value="all" selected>All</option>
-                                        <!-- ko foreach: GameHelper.enumStrings(AchievementType) -->
-                                        <option data-bind="value: $data, text: GameConstants.camelCaseToString($data)">Type</option>
+                                        <!-- ko foreach: AchievementHandler.achievementTypes() -->
+                                        <option data-bind="value: $data, text: GameConstants.camelCaseToString($data.replace(/Requirement$/i, ''))">Type</option>
                                         <!-- /ko -->
                                     </select>
                                 </div>

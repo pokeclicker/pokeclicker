@@ -1,6 +1,7 @@
 class AchievementHandler {
 
     public static achievementList: Achievement[] = [];
+    public static achievementTypes: KnockoutObservableArray<string> = ko.observableArray([]);
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static maxBonus: KnockoutObservableArray<number> = ko.observableArray([]);
     public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
@@ -24,8 +25,8 @@ class AchievementHandler {
 
     public static filter = {
         status: ko.observable('all'),
-        type: ko.observable('all'),
         region: ko.observable(-1),
+        type:   ko.observable('all'),
     }
 
     public static getAchievementListWithIndex() {
@@ -35,8 +36,8 @@ class AchievementHandler {
     public static filterAchievementList() {
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() &&
                                     (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
-                                    (this.filter.type() == 'all' ? true : a.property.constructor.name == AchievementType[this.filter.type()]) &&
                                     (this.filter.region() == -1 ? true : a.region == this.filter.region())));
+                                    (this.filter.type()   == 'all' ? true : a.property.constructor.name == this.filter.type()) &&
         this.resetPages();
     }
 
@@ -62,6 +63,12 @@ class AchievementHandler {
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
             AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region).reduce((sum, a) => sum + a.bonus, 0);
         });
+    }
+
+    public static calculateAchievementTypes() {
+        const types = [];
+        AchievementHandler.achievementList.forEach(a => types.push(a.property?.constructor.name));
+        AchievementHandler.achievementTypes([...new Set(types)]);
     }
 
     public static bonusUnlocked(): number {
@@ -231,6 +238,7 @@ class AchievementHandler {
         });
 
         AchievementHandler.calculateMaxBonus();
+        AchievementHandler.calculateAchievementTypes();
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion()));
         this.resetPages();
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
