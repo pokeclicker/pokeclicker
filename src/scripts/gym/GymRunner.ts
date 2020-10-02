@@ -70,7 +70,7 @@ class GymRunner {
     }
 
     public static gymWon(gym: Gym) {
-        Notifier.notify({ message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`, type: GameConstants.NotificationOption.success });
+        Notifier.notify({ message: `Congratulations, you defeated ${GymBattle.gym.leaderName}!`, type: GameConstants.NotificationOption.success, setting: GameConstants.NotificationSetting.gym_won });
         this.gymObservable(gym);
         App.game.wallet.gainMoney(gym.moneyReward);
         // If this is the first time defeating this gym

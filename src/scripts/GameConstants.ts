@@ -101,6 +101,8 @@ namespace GameConstants {
     };
     export const NotificationSetting = {
         ready_to_hatch: new BooleanSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),
+        hatched: new BooleanSetting('notification.hatched', 'Egg hatched', true),
+        hatched_shiny: new BooleanSetting('notification.hatched_shiny', 'Egg hatched a shiny', true),
         route_item_found: new BooleanSetting('notification.route_item_found', 'Item found during route battle', true),
         dungeon_item_found: new BooleanSetting('notification.dungeon_item_found', 'Item found in dungeon chest', true),
         battle_item_timer: new BooleanSetting('notification.battle_item_timer', 'Battle item about to wear off', true),
@@ -110,6 +112,7 @@ namespace GameConstants {
         event_start_end: new BooleanSetting('notification.event_start_end', 'Event start/end information', true),
         dropped_item: new BooleanSetting('notification.dropped_item', 'Enemy pokemon dropped an item', true),
         ready_to_harvest: new BooleanSetting('notification.ready_to_harvest', 'Berry ready to harvest', true),
+        gym_won: new BooleanSetting('notification.gym_won', 'Gym leader defeated', true),
     };
 
     export enum DungeonTile {
