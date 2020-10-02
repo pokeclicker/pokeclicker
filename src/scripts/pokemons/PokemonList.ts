@@ -9420,7 +9420,7 @@ const pokemonList: PokemonListData[] =
             'eggCycles': 40,
             'levelType': LevelType.slow,
             'exp': 216,
-            // 69420 to prevent evolution ingame
+            // 69420 to prevent evolution ingame, evolution needed for baby form to be obtainable
             'evolutions': [new LevelEvolution('Phione', 'Manaphy', 69420)],
             'baby': true,
             'catchRate': 30,
