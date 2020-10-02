@@ -33,7 +33,7 @@ class EffectEngineRunner {
         if (+times[0] > 99) {
             return player.effectTimer[itemName]('99h+');
         } else if (+times[0] > 0) {
-            return player.effectTimer[itemName](`${times[0]}h`);
+            return player.effectTimer[itemName](`${+times[0]}h`);
         }
         times.shift();
         player.effectTimer[itemName](times.join(':'));
