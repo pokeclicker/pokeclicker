@@ -115,7 +115,7 @@ class PokemonFactory {
         const exp: number = basePokemon.exp;
         const money = 0;
         const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_CHANCE);
-        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
             Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
         }
@@ -132,7 +132,7 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
-        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
             Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
         }

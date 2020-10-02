@@ -46,9 +46,11 @@ class Pokeballs implements Feature {
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
         if (isShiny) {
             if (!alreadyCaughtShiny) {
-                pref = this.notCaughtShinySelection;
+                // if the pokemon is also not caught, use the higher selection since a notCaughtShiny is also a notCaught pokemon
+                pref = !alreadyCaught ? Math.max(this.notCaughtSelection, this.notCaughtShinySelection) : this.notCaughtShinySelection;
             } else {
-                pref = this.alreadyCaughtShinySelection;
+                // if the shiny is already caught, use the higher selection since the pokemon is also a caught pokemon
+                pref = Math.max(this.alreadyCaughtSelection, this.alreadyCaughtShinySelection);
             }
         } else {
             if (!alreadyCaught) {
