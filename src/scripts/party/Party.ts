@@ -115,11 +115,11 @@ class Party implements Feature {
             multiplier = this.getRegionAttackMultiplier();
         }
         if (ignoreBreeding || !pokemon.breeding) {
-            if (Battle.enemyPokemon() == null || type1 == PokemonType.None) {
+            if (type1 == PokemonType.None) {
                 attack = pokemon.attack * multiplier;
             } else {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-                attack = pokemon.attack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
+                attack = pokemon.attack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
             }
         }
 

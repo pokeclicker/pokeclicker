@@ -4,6 +4,8 @@ class DamageCalculator {
     static region = ko.observable(GameConstants.Region.none);
     static ignoreBreeding = ko.observable(false);
 
+    static observableTypeDamageArray = ko.pureComputed(DamageCalculator.getDamageByTypes, DamageCalculator);
+
     static getDamageByTypes(): number[] {
         const typedamage = new Array(GameHelper.enumLength(PokemonType) - 1).fill(0);
         const ignoreRegionMultiplier = this.region() == GameConstants.Region.none;
