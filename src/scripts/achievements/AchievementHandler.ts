@@ -162,7 +162,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Keeping Oak Really Busy', 'Capture 75 unique Pokémons', new CaughtPokemonRequirement(75), 0.15);
         AchievementHandler.addAchievement('Surpassing Ash', 'Capture 88 unique Pokémons', new CaughtPokemonRequirement(88), 0.05);
         AchievementHandler.addAchievement('I Wanna be The Very Best', 'Capture 100 unique Pokémons', new CaughtPokemonRequirement(100), 0.20);
-        AchievementHandler.addAchievement('I Should Probably Take a Break', 'Complete the Kanto Pokédex!', new CaughtPokemonRequirement(151), 0.50);
+        AchievementHandler.addAchievement('I Should Probably Take a Break', 'Complete the Kanto Pokédex!', new CaughtUniquePokemonsByRegionRequirement(GameConstants.Region.kanto), 0.50);
 
         AchievementHandler.addAchievement("I'd rather be shiny", 'Capture your first Shiny', new ShinyPokemonRequirement(1), 0.03);
         AchievementHandler.addAchievement('These pokémon must be sick', 'Capture 10 unique Shinies', new ShinyPokemonRequirement(10), 0.06);
