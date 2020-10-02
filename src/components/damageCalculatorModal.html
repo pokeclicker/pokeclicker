@@ -1,0 +1,49 @@
+<div class="modal fade" id="damageCalculatorModal" tabindex="-1" role="dialog"
+aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+   <div class="modal-content">
+       <div class="modal-header">
+            <h5 class="modal-title" id="damageCalculatorModalLabel" data-bind="tooltip: { title: `Check how much damage you are doing against a particular pokemon type, and see a breakdown of where that damage is coming from by your pokemon types.`, trigger: 'hover', placement:'right' }">Damage Calculator <span class="text-primary">ⓘ</span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+       </div>
+       <div class="modal-body p-0">
+          <div class="form-row">
+              <div class="form-group form-check col-md-3 col-6 align-self-center">
+                  <input class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.ignoreBreeding"></input>
+                  <label class="form-check-label">Ignore Breeding</label>
+              </div>
+                <div class="form-group col-md-3 col-6">
+                    <label>Region</label>
+                    <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.region">
+                        <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
+                        <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
+                        <!-- /ko -->
+                        <option value="-1">None</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-3 col-6">
+                    <label>Type 1</label>
+                    <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.type1">
+                        <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
+                        <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                        <!-- /ko -->
+                    </select>
+                </div>
+                <div class="form-group col-md-3 col-6">
+                    <label>Type 2</label>
+                    <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.type2">
+                        <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
+                        <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                        <!-- /ko -->
+                    </select>
+                </div>
+            </div>
+       </div>
+       <div class="modal-footer">
+           <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+       </div>
+   </div>
+</div>
+</div>
