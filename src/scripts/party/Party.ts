@@ -107,8 +107,9 @@ class Party implements Feature {
         return Math.round(attack);
     }
 
-    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, ignoreBreeding = false): number {
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, ignoreBreeding = false, useBaseAttack = false): number {
         let multiplier = 1, attack: number;
+        const pAttack = useBaseAttack ? pokemon.baseAttack : pokemon.attack;
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
             // Pokemon only retain a % of their total damage in other regions based on highest region.
@@ -116,10 +117,10 @@ class Party implements Feature {
         }
         if (ignoreBreeding || !pokemon.breeding) {
             if (type1 == PokemonType.None) {
-                attack = pokemon.attack * multiplier;
+                attack = pAttack * multiplier;
             } else {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-                attack = pokemon.attack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
+                attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
             }
         }
 
