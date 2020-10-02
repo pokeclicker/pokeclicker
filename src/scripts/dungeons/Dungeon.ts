@@ -970,7 +970,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
         new DungeonBossPokemon('Lickitung', 8000000, 70),
         new DungeonBossPokemon('Skarmory', 8000000, 70),
         new DungeonBossPokemon('Zweilous', 8000000, 70),
-        new DungeonBossPokemon('Noibat', 8000000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_KalosChampion)),
+        new DungeonBossPokemon('Noibat', 8000000, 70),
     ],
     96500, 201, 35);
     
