@@ -29,6 +29,25 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.5.5
+    new Changelog(changelogType.UPDATE, 'v0.5.5'),
+    new Changelog(changelogType.NEW, 'Can sort Underground items by clicking on table titles'),
+    new Changelog(changelogType.NEW, 'NPCs now in towns, will provide dialog that will help the player complete their Pokédex'),
+    new Changelog(changelogType.CHANGE, 'Increase shiny chance when using an evolution item'),
+    new Changelog(changelogType.CHANGE, 'Increase shiny chance for dungeon Pokémon'),
+    new Changelog(changelogType.CHANGE, 'More shops added to towns'),
+    new Changelog(changelogType.CHANGE, 'More Pokémon added to typed eggs'),
+    new Changelog(changelogType.CHANGE, 'Electrike is now exclusive to eggs'),
+    new Changelog(changelogType.CHANGE, '"Complete the Kanto Pokédex!" achievement now requires all 151 Kanto Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Regirock, Regice and Registeel no longer Roaming, now in Sealed Chamber dungeon'),
+    new Changelog(changelogType.CHANGE, 'Kyogre and Groudon will only appear in their dungeon after defeating the Hoenn Elite 4'),
+    new Changelog(changelogType.CHANGE, 'If you encounter a new pokemon that is also shiny, the higher tier ball will be selected'),
+    new Changelog(changelogType.FIXED, 'Quest list should only auto refresh if all quest are claimed or it is a new day'),
+    new Changelog(changelogType.FIXED, 'Gym Pokémon can no longer be captured by players'),
+    new Changelog(changelogType.FIXED, 'Reduce some lag caused by hatchery filters'),
+    new Changelog(changelogType.FIXED, 'Mystery egg can now hatch Pokémon from the Dragon Egg pool'),
+    new Changelog(changelogType.FIXED, 'Travelling to the next Region now requires all of that regions Pokémon (excluding different forms)'),
+
     // v0.5.4
     new Changelog(changelogType.UPDATE, 'v0.5.4'),
     new Changelog(changelogType.NEW, 'More stores and items added in Johto, Hoenn and Sinnoh'),
