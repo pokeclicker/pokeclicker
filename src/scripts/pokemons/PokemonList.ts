@@ -9421,7 +9421,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.slow,
             'exp': 216,
             // 69420 to prevent evolution ingame
-            'evolutions': [new LevelEvolution('Phione', 'Manaphy', 69420],
+            'evolutions': [new LevelEvolution('Phione', 'Manaphy', 69420)],
             'baby': true,
             'catchRate': 30,
             'base': {
