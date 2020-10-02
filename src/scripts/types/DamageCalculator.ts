@@ -4,8 +4,10 @@ class DamageCalculator {
     static region = ko.observable(GameConstants.Region.none);
     static ignoreBreeding = ko.observable(false);
     static baseAttackOnly = ko.observable(false);
+    static detailType = ko.observable(PokemonType.None);
 
     static observableTypeDamageArray = ko.pureComputed(DamageCalculator.getDamageByTypes, DamageCalculator);
+    static observableTypeDetails = ko.pureComputed(DamageCalculator.getTypeDetail);
 
     static getDamageByTypes(): number[] {
         const typedamage = new Array(GameHelper.enumLength(PokemonType) - 1).fill(0);
@@ -26,4 +28,42 @@ class DamageCalculator {
 
         return typedamage;
     }
+
+    static getTypeDetail(): TypeDetail[] {
+        return App.game.party.caughtPokemon.filter(pokemon => {
+            const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+            return dataPokemon.type1 == DamageCalculator.detailType() || dataPokemon.type2 == DamageCalculator.detailType();
+        }).reduce((details, pokemon) => {
+            details.push(DamageCalculator.getOneTypeDetail(pokemon));
+            return details;
+        }, []).sort((a, b) => b.damage - a.damage);
+    }
+
+    static getOneTypeDetail(pokemon: PartyPokemon): TypeDetail {
+        const ignoreRegionMultiplier = DamageCalculator.region() == GameConstants.Region.none;
+        const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+        return {
+            id: dataPokemon.id,
+            name: dataPokemon.name,
+            type1: dataPokemon.type1,
+            type2: dataPokemon.type2,
+            damage: App.game.party.calculateOnePokemonAttack(
+                pokemon,
+                DamageCalculator.type1(),
+                DamageCalculator.type2(),
+                DamageCalculator.region(),
+                ignoreRegionMultiplier,
+                DamageCalculator.ignoreBreeding(),
+                DamageCalculator.baseAttackOnly()
+            ),
+        };
+    }
+}
+
+type TypeDetail = {
+  id: number,
+  name: string,
+  type1: PokemonType,
+  type2: PokemonType,
+  damage: number
 }
