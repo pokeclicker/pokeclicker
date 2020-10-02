@@ -517,3 +517,89 @@ TownList['Pinwheel Forest'] = new DungeonTown('Pinwheel Forest', [new GymBadgeRe
 TownList['Wellspring Cave'] = new DungeonTown('Wellspring Cave', [new RouteKillRequirement(10, 3)]);    //Optional dungeon, no unique mons, safe to scrap
 TownList['Dreamyard'] = new DungeonTown('Dreamyard', [new RouteKillRequirement(10, 3)]);
 TownList['P2 Laboratory'] = new DungeonTown('P2 Laboratory', [new RouteKillRequirement(10, 17)]);
+
+//Kalos Shops
+const VanivilleTownShop = new Shop([
+    ItemList['Pokeball'],
+]);
+const SantaluneCityShop = new Shop([
+    ItemList['Mystery_egg'],
+]);
+const LumioseCityShop = new Shop([
+    ItemList['Greatball'],
+    ItemList['Electric_egg'],
+]);
+const AmbretteTownShop = new Shop([
+    ItemList['Water_egg'],
+]);
+const GeosengeTownShop = new Shop([
+    ItemList['Fire_egg'],
+]);
+const ShalourCityShop = new Shop([
+    ItemList['Fighting_egg'],
+]);
+const CoumarineCityShop = new Shop([
+    ItemList['Ultraball'],
+    ItemList['Grass_egg'],
+]);
+const LaverreCityShop = new Shop([
+    ItemList['Sachet'],
+    ItemList['Whipped Dream'],
+]);
+const DendemilleTownShop = new Shop([
+    ItemList['Dusk_stone'],
+    ItemList['Shiny_stone'],
+]);
+const AnistarCityShop = new Shop([
+    ItemList['Sun_stone'],
+]);
+const CouriwayTownShop = new Shop([
+    ItemList['Dragon_egg'],
+]);
+
+//Kalos Towns
+TownList['Vaniville Town'] = new Town('Vaniville Town', [], VanivilleTownShop);
+TownList['Aquacorde Town'] = new Town('Aquacorde Town');
+TownList['Santalune City'] = new Town('Santalune City', [new RouteKillRequirement(10, 3)], SantaluneCityShop);
+TownList['Lumiose City'] = new Town('Lumiose City', [new RouteKillRequirement(10, 3)], LumioseCityShop);
+TownList['Camphrier Town'] = new Town('Camphrier Town', [new RouteKillRequirement(10, 4)]);
+TownList['Ambrette Town'] = new Town('Ambrette Town', [new RouteKillRequirement(10, 8)], AmbretteTownShop);
+TownList['Cyllage City'] = new Town('Cyllage City', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Glittering Cave'))]);
+TownList['Geosenge Town'] = new Town('Geosenge Town', [new RouteKillRequirement(10, 10)], GeosengeTownShop);
+TownList['Shalour City'] = new Town('Shalour City', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Reflection Cave'))], ShalourCityShop);
+TownList['Coumarine City'] = new Town('Coumarine City', [new RouteKillRequirement(10, 12)], CoumarineCityShop);
+TownList['Laverre City'] = new Town('Laverre City', [new RouteKillRequirement(10, 14)], LaverreCityShop);
+TownList['Dendemille Town'] = new Town('Dendemille Town', [new RouteKillRequirement(10, 15)], DendemilleTownShop);
+TownList['Anistar City'] = new Town('Anistar City', [new RouteKillRequirement(10, 17)], AnistarCityShop);
+TownList['Couriway Town'] = new Town('Couriway Town', [new RouteKillRequirement(10, 18)], CouriwayTownShop);
+TownList['Snowbelle City'] = new Town('Snowbelle City', [new RouteKillRequirement(10, 19)]);
+TownList['Pokémon League Kalos'] = new Town('Pokémon League Kalos', [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Kalos'))]);
+
+//Kalos Dungeons
+TownList['Santalune Forest'] = new DungeonTown('Santalune Forest', [new RouteKillRequirement(10, 2)]);
+TownList['Parfum Palace'] = new DungeonTown('Parfum Palace', [new RouteKillRequirement(10, 6)]);
+TownList['Connecting Cave'] = new DungeonTown('Connecting Cave', [new RouteKillRequirement(10, 7)]);
+TownList['Glittering Cave'] = new DungeonTown('Glittering Cave', [new RouteKillRequirement(10, 9)]);
+TownList['Reflection Cave'] = new DungeonTown('Reflection Cave', [new RouteKillRequirement(10, 11)]);
+//Tower of Mastery?
+TownList['Azure bay'] = new DungeonTown('Azure bay', [new RouteKillRequirement(10, 12)]);
+//Sea Spirit's Den?
+//Kalos Power Plant?
+TownList['Lost Hotel'] = new DungeonTown('Lost Hotel', [new RouteKillRequirement(10, 15)]);
+TownList['Frost Cavern'] = new DungeonTown('Frost Cavern', [new RouteKillRequirement(10, 15)]);
+TownList['Team Flare Secret HQ'] = new DungeonTown('Team Flare Secret HQ', [new GymBadgeRequirement(BadgeCase.Badge.Psychic)]);
+TownList['Terminus Cave'] = new DungeonTown('Terminus Cave', [new RouteKillRequirement(10, 18)]);
+TownList['Pokémon Village'] = new DungeonTown('Pokémon Village', [new RouteKillRequirement(10, 20)]);
+TownList['Victory Road Kalos'] = new DungeonTown('Victory Road Kalos', [
+    new OneFromManyRequirement([
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeCase.Badge.Iceberg),
+            new RouteKillRequirement(10, 21),
+        ]),
+        new MultiRequirement([
+            new GymBadgeRequirement(BadgeCase.Badge.Iceberg),
+            new RouteKillRequirement(10, 22),
+        ]),
+    ]),
+]);
+//Unknown Cave?

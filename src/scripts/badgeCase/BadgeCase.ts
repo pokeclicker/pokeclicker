@@ -128,5 +128,19 @@ namespace BadgeCase {
         'Elite_Grimsley',
         'Elite_Caitlin',
         'Elite_UnovaChampion',
+        //Kalos
+        'Bug',
+        'Cliff',
+        'Rumble',
+        'Plant',
+        'Voltage',
+        'Fairy',
+        'Psychic',
+        'Iceberg',
+        'Elite_Malva',
+        'Elite_Siebold',
+        'Elite_Wikstrom',
+        'Elite_Drasna',
+        'Elite_KalosChampion',
     }
 }

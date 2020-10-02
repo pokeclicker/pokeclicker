@@ -452,6 +452,8 @@ namespace GameConstants {
         'Razor_claw',
         'Razor_fang',
         'Prism_scale',
+        'Sachet',
+        'Whipped_dream'
     }
 
     export enum BattleItemType {
@@ -633,12 +635,29 @@ namespace GameConstants {
         'Champion Iris',
     ];
 
+    export const KalosGyms = [
+        'Santalune City',
+        'Cyllage City',
+        'Shalour City',
+        'Coumarine City',
+        'Lumiose City',
+        'Laverre City',
+        'Anistar City',
+        'Snowbelle City',
+        'Elite Malva',
+        'Elite Siebold',
+        'Elite Wikstrom',
+        'Elite Drasna',
+        'Champion Diantha',
+    ];
+
     export const RegionGyms = [
         KantoGyms,
         JohtoGyms,
         HoennGyms,
         SinnohGyms,
         UnovaGyms,
+        KalosGyms,
     ];
 
     export const KantoDungeons = [
@@ -769,12 +788,33 @@ namespace GameConstants {
         'P2 Laboratory',
     ];
 
+    export const KalosDungeons = [
+        'Santalune Forest',
+        'Parfum Palace',
+        'Connecting Cave',
+        'Glittering Cave',
+        'Reflection Cave',
+        //'Tower of Mastery',
+        'Azure Bay',    //Should really be a route
+        //'Sea Spirit's Den',
+        //'Kalos Power Plant',
+        //'Pokéball Factory',
+        'Lost Hotel',
+        'Frost Cavern',
+        'Team Flare Secret HQ',
+        'Terminus Cave',
+        'Pokémon Village',
+        'Victory Road Kalos',
+        //'Unknown Dungeon',
+    ];
+
     export const RegionDungeons = [
         KantoDungeons,
         JohtoDungeons,
         HoennDungeons,
         SinnohDungeons,
         UnovaDungeons,
+        KalosDungeons,
     ];
 
     export const StartingTowns = [
@@ -783,6 +823,7 @@ namespace GameConstants {
         'Littleroot Town',
         'Twinleaf Town',
         'Aspertia City',
+        'Vaniville Town',
     ];
 
     export const DockTowns = [
@@ -791,5 +832,6 @@ namespace GameConstants {
         'Slateport City',
         'Canalave City',
         'Castelia City',
+        'Coumarine City',
     ];
 }

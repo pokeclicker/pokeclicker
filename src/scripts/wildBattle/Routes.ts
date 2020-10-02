@@ -1253,140 +1253,164 @@ Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 1,
     new RoutePokemon({
         land: ['Rattata'],
-    })
+    }),
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_UnovaChampion)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 2,
     new RoutePokemon({
         land: ['Fletchling', 'Bunnelby', 'Scatterbug'],
-    })
+    }),
+    [new GymBadgeRequirement(BadgeCase.Badge.Elite_UnovaChampion)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 3,
     new RoutePokemon({
         land: ['Burmy (plant)', 'Burmy (trash)', 'Burmy (sand)', 'Bunnelby', 'Fletchling', 'Dunsparce'],
-    })
+    }),
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Santalune Forest'))]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 4,
     new RoutePokemon({
         land: ['Flabébé', 'Ralts', 'Combee', 'Budew', 'Skitty'],
-    })
+    }),
+    [new GymBadgeRequirement(BadgeCase.Badge.Bug)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 5,
     new RoutePokemon({
         land: ['Pancham', 'Furfrou', 'Abra', 'Gulpin', 'Doduo'],
-    })
+    }),
+    [new RouteKillRequirement(10, 4)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 6,
     new RoutePokemon({
         land: ['Honedge', 'Espurr', 'Kecleon', 'Sentret', 'Nincada'],
-    })
+    }),
+    [new RouteKillRequirement(10, 5)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 7,
     new RoutePokemon({
         land: ['Flabébé', 'Spritzee', 'Swirlix', 'Ducklett', 'Croagunk', 'Roselia', 'Smeargle'],
-    })
+    }),
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Parfum Palace'))]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 8,
     new RoutePokemon({
         land: ['Inkay', 'Mienfoo', 'Drifloon', 'Absol', 'Bagon', 'Zangoose', 'Spoink'],
-    })
+    }),
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Connecting Cave'))]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 9,
     new RoutePokemon({
         land: ['Hippopotas', 'Sandile', 'Helioptile'],
-    })
+    }),
+    [new RouteKillRequirement(10, 8)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 10,
     new RoutePokemon({
         land: ['Snubbull', 'Houndour', 'Electrike', 'Sigilyph', 'Emolga', 'Golett', 'Hawlucha'],
-    })
+    }),
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Glittering Cave'))]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 11,
     new RoutePokemon({
         land: ['Hariyama', 'Staravia', 'Chingling', 'Stunky', 'Throh', 'Sawk', 'Dedenne'],
-    })
+    }),
+    [new GymBadgeRequirement(BadgeCase.Badge.Cliff)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 12,
     new RoutePokemon({
         land: ['Slowpoke', 'Exeggcute', 'Pinsir', 'Tauros', 'Heracross', 'Miltank', 'Pachirisu', 'Chatot'],
         water: ['Lapras', 'Luvdisc', 'Huntail', 'Gorebyss', 'Binacle'],
-    })
+    }),
+    [new GymBadgeRequirement(BadgeCase.Badge.Rumble)]
+    //Replace req with Tower of Mastery dungeon if implemented.
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 13,
     new RoutePokemon({
         land: ['Dugtrio', 'Trapinch', 'Gible', 'Graveler', 'Slugma'],
-    })
+    }),
+    [new RouteKillRequirement(10, 12)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 14,
     new RoutePokemon({
         land: ['Weepinbell', 'Haunter', 'Quagsire', 'Skorupi', 'Carnivine', 'Karrablast', 'Shelmet', 'Goomy'],
         water: ['Stunfisk'],
-    })
+    }),
+    [new GymBadgeRequirement(BadgeCase.Badge.Voltage)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 15,
     new RoutePokemon({
         land: ['Mightyena', 'Skorupi', 'Watchog', 'Liepard', 'Foongus', 'Pawniard', 'Klefki'],
         water: ['Lombre', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
-    })
+    }),
+    [new GymBadgeRequirement(BadgeCase.Badge.Fairy)]
+    //Replace req with Pokéball Factory dungeon if implemented.
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 16,
     new RoutePokemon({
         land: ['Skorupi', 'Pumpkaboo', 'Floatzel', 'Foongus', 'Phantump', 'Klefki'],
         water: ['Lombre', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
-    })
+    }),
+    [new RouteKillRequirement(10, 15)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 17,
     new RoutePokemon({
         land: ['Sneasel', 'Delibird', 'Snover', 'Abomasnow'],
-    })
+    }),
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Frost Cavern'))]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 18,
     new RoutePokemon({
         land: ['Pupitar', 'Lairon', 'Torkoal', 'Gurdurr', 'Heatmor', 'Durant'],
-    })
+    }),
+    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Team Flare Secret HQ'))]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 19,
     new RoutePokemon({
         land: ['Quagsire', 'Drapion', 'Carnivine', 'Karrablast', 'Shelmet', 'Sliggoo'],
         water: ['Stunfisk', 'Politoed'],
-    })
+    }),
+    [new RouteKillRequirement(10, 18)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 20,
     new RoutePokemon({
         land: ['Jigglypuff', 'Noctowl', 'Zoroark', 'Gothorita', 'Amoonguss', 'Trevenant'],
-    })
+    }),
+    [new RouteKillRequirement(10, 19)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 21,
     new RoutePokemon({
         land: ['Scyther', 'Ursaring', 'Spinda', 'Altaria', 'Floatzel'],
         water: ['Lombre', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Dratini', 'Dragonair'],
-    })
+    }),
+    [new RouteKillRequirement(10, 19)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 22,
     new RoutePokemon({
         land: ['Psyduck', 'Farfetch\'d', 'Dunsparce', 'Azurill', 'Bidoof', 'Riolu', 'Bunnelby', 'Litleo'],
         water: ['Azumarill'],
-    })
+    }),
+    [new RouteKillRequirement(10, 3)]
 ));
 /*
 ALOLA

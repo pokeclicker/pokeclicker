@@ -13343,7 +13343,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumfast,
             'exp': 68,
             'catchRate': 200,
-            'evolutions': [new StoneEvolution('Spritzee', 'Aromatisse', GameConstants.StoneType.Trade_stone)],
+            'evolutions': [new StoneEvolution('Spritzee', 'Aromatisse', GameConstants.StoneType.Sachet)],
             'base': {
                 'hitpoints': 78,
                 'attack': 52,
@@ -13378,7 +13378,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumfast,
             'exp': 68,
             'catchRate': 200,
-            'evolutions': [new StoneEvolution('Swirlix', 'Slurpuff', GameConstants.StoneType.Trade_stone)],
+            'evolutions': [new StoneEvolution('Swirlix', 'Slurpuff', GameConstants.StoneType.Whipped_dream)],
             'base': {
                 'hitpoints': 62,
                 'attack': 48,
