@@ -33,7 +33,8 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 </div>
                                 <div class="form-group col-md-4 col-4">
                                     <label>Region</label>
-                                    <select class="custom-select" onchange="AchievementHandler.filter.region(+this.value)">
+                                    <select class="custom-select" onchange="AchievementHandler.filter.region(this.value)">
+                                        <option value="all" selected>All</option>
                                         <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => GameConstants.Region[r] <= player.highestRegion()) -->
                                         <option data-bind="value: GameConstants.Region[$data], text: GameConstants.camelCaseToString($data)">Region</option>
                                         <!-- /ko -->

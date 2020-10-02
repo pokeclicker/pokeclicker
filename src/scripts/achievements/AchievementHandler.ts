@@ -25,8 +25,8 @@ class AchievementHandler {
 
     public static filter = {
         status: ko.observable('all'),
-        region: ko.observable(-1),
         type:   ko.observable('all'),
+        region: ko.observable('all'),
     }
 
     public static getAchievementListWithIndex() {
@@ -36,8 +36,8 @@ class AchievementHandler {
     public static filterAchievementList() {
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() &&
                                     (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
-                                    (this.filter.region() == -1 ? true : a.region == this.filter.region())));
                                     (this.filter.type()   == 'all' ? true : a.property.constructor.name == this.filter.type()) &&
+                                    (this.filter.region() == 'all' ? true : a.region == +this.filter.region())));
         this.resetPages();
     }
 
