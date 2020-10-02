@@ -63,7 +63,7 @@ class Quests implements Saveable {
         if (quest && quest.isCompleted() && !quest.claimed()) {
             quest.claim();
             // Once the player completes every available quest, refresh the list for free
-            if (this.allQuestCompleted()) {
+            if (this.allQuestClaimed()) {
                 this.refreshQuests(true);
             }
         } else {
@@ -140,9 +140,9 @@ class Quests implements Saveable {
         return false;
     }
 
-    // returns false if we still have incomplete quest
-    public allQuestCompleted() {
-        return !this.incompleteQuests().length;
+    // returns false if we still have incomplete/inprogress quest
+    public allQuestClaimed() {
+        return !this.incompleteQuests().length && !this.currentQuests().length;
     }
 
     // 1000 xp needed to reach level 2, amount needed for next level increases by 20% of previous level
