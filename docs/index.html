@@ -28,7 +28,7 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.5.4"></script>
+    <script src="scripts/script.min.js?v=0.5.5"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -44,7 +44,7 @@
     <script src="libs/motio.js"></script>
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.5.4" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.5.5" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -930,6 +930,15 @@
                </button>
            </div>
        </div>
+       <div class="col-6"></div>
+       <div class="col-3 no-gutters">
+           <div class="list-group" data-bind="foreach: player.town().npcs()">
+                <button class="btn btn-info"
+                        data-bind="text: $data.name, click: $data.openDialog">
+                    NPC
+                </button>
+           </div>
+        </div>
 
     </div>
     <knockout data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
@@ -4714,6 +4723,19 @@
         attr: { class: MapHelper.calculateTownCssClass('Victory Road Hoenn') }">
 </rect>
 
+    <!--Sealed Chamber-->
+    
+
+<rect class="city"
+    data-town="Sealed Chamber" 
+    x="608"
+    y="560"
+    height="80"
+    width="96"
+    data-bind="click:function(){MapHelper.moveToTown('Sealed Chamber')},
+        attr: { class: MapHelper.calculateTownCssClass('Sealed Chamber') }">
+</rect>
+
 
 
 
@@ -6440,7 +6462,7 @@
         <span>Hatchery</span>
     </div>
     <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-            data-bind='click: function(){ BreedingController.openBreedingModal() }'>
+            data-bind='click: function(){ BreedingController.openBreedingModal(); BreedingController.filterBreedableList() }'>
         List
     </button>
     <div id='eggList' class="card-body p-0 show">
@@ -6658,8 +6680,42 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
             </div>
 
             <div class="modal-body table-responsive p-0">
+                <div class="tab-content p-3">
+                    <div class="tab-pane active">
+                        <div class="text-left">
+                            <div class="form-row">
+                                <div class="form-group col-md-4 col-4">
+                                    <label>Status</label>
+                                    <select class="custom-select" onchange="AchievementHandler.filter.status(this.value)">
+                                        <option value="all" selected>All</option>
+                                        <option value="false">Incomplete</option>
+                                        <option value="true">Completed</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4 col-4">
+                                    <label>Type</label>
+                                    <select class="custom-select" onchange="AchievementHandler.filter.type(this.value)">
+                                        <option value="all" selected>All</option>
+                                        <!-- ko foreach: AchievementHandler.achievementTypes() -->
+                                        <option data-bind="value: $data, text: GameConstants.camelCaseToString($data.replace(/Requirement$/i, ''))">Type</option>
+                                        <!-- /ko -->
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-4 col-4">
+                                    <label>Region</label>
+                                    <select class="custom-select" onchange="AchievementHandler.filter.region(this.value)">
+                                        <option value="all" selected>All</option>
+                                        <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => GameConstants.Region[r] <= player.highestRegion()) -->
+                                        <option data-bind="value: GameConstants.Region[$data], text: GameConstants.camelCaseToString($data)">Region</option>
+                                        <!-- /ko -->
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <table class="table table-hover table-striped table-sm m-0">
-                    <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.getAchievementListWithIndex(AchievementHandler.navigateIndex())}">
+                    <tbody data-bind="template: { name: 'achievementListTemplate', foreach: AchievementHandler.getAchievementListWithIndex()}">
                     </tbody>
                 </table>
             </div>
@@ -6670,10 +6726,10 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                     <img src="assets/images/leftarrow.png">
                 </button>
 
-                <div data-bind="text: AchievementHandler.navigateIndex()+1 + '/' + (AchievementHandler.getNumberOfTabs()+1)"></div>
+                <div data-bind="text: AchievementHandler.navigateIndex()+1 + '/' + (AchievementHandler.numberOfTabs()+1)"></div>
                 
                 <button class="btn btn-secondary" onclick="AchievementHandler.navigateRight()"
-                        data-bind=" css: {disabled: AchievementHandler.navigateIndex() ===  AchievementHandler.getNumberOfTabs()}">
+                        data-bind=" css: {disabled: AchievementHandler.navigateIndex() ===  AchievementHandler.numberOfTabs()}">
                     <img src="assets/images/rightarrow.png">
                 </button>
             </div>
@@ -7377,13 +7433,13 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: BreedingController.breedableList">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: BreedingController.breedableList()">
                             <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                                 <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
                                 <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
-                                <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}"></a>
+                                <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.gainPokemonEgg($data); BreedingController.filterBreedableList();if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}"></a>
                             </li>
                         </ul>
                         <!-- /ko -->
@@ -7514,8 +7570,9 @@ style="cursor:default" tabindex="-1">
                         <table class="table table-sm table-hover table-striped m-0">
                             <thead>
                                 <tr>
-                                    <th colspan="2">Item</th>
-                                    <th>Value</th>
+                                    <th class="clickable" onclick="Underground.sortMineItems(this.dataset.undergroundsort)" data-undergroundsort="Amount">Amount</th>
+                                    <th class="clickable" onclick="Underground.sortMineItems(this.dataset.undergroundsort)" data-undergroundsort="Item">Item</th>
+                                    <th class="clickable" onclick="Underground.sortMineItems(this.dataset.undergroundsort)" data-undergroundsort="Value">Value</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -8309,6 +8366,20 @@ aria-labelledby="badgeCaseModalLabel">
            </div>
        </div>
     </div>
+</div>
+
+<!-- NPC Modal-->
+<div class="modal fade noselect" id="npc-modal" role="dialog" tabindex="-1">
+  <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <u><h5 class="npc-name">NPC Name</h5></u><br/>
+        <img class="npc-image" src=""/>
+        <div class="npc-dialog"></div>
+        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 </body>
