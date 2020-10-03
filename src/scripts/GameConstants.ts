@@ -808,3 +808,8 @@ namespace GameConstants {
         'Coumarine City',
     ];
 }
+
+// TODO: Remove namespace after all scripts have been moved to modules
+if (typeof module !== 'undefined') {
+    module.exports = GameConstants;
+}

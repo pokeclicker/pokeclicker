@@ -12,9 +12,16 @@ const gulpImport = require('gulp-html-import');
 const ejs = require('gulp-ejs');
 const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
+const filter = require('gulp-filter');
+const rename = require('gulp-rename');
+const streamToPromise = require('gulp-stream-to-promise');
+const gulpWebpack = require('webpack-stream');
+const webpack = require('webpack');
 const del = require('del');
 const fs = require('fs');
 const version = process.env.npm_package_version || '0.0.0';
+
+const webpackConfig = require('./webpack.config');
 
 // Import our config, or log a warning if hasn't been created
 let config = {};
@@ -60,7 +67,7 @@ gulp.task('deploy', () => gulp.src('./dist/**/*')
 
 const srcs = {
     buildArtefacts: 'build/**/*',
-    scripts: 'src/scripts/**/*.ts',
+    scripts: ['src/scripts/**/*.ts', 'src/modules/**/*.ts'],
     html: ['src/*.html', 'src/templates/*.html', 'src/components/*.html'],
     ejsTemplates: ['src/templates/*.ejs'],
     styles: 'src/styles/**/*.less',
@@ -86,6 +93,7 @@ const dests = {
     libs: 'build/libs/',
     assets: 'build/assets/',
     scripts: 'build/scripts/',
+    declarations: 'src/declarations/',
     styles: 'build/styles/',
     githubPages: 'docs/',
 };
@@ -141,15 +149,49 @@ gulp.task('compile-html', (done) => {
 });
 
 gulp.task('scripts', () => {
-    const tsProject = typescript.createProject('tsconfig.json');
-    return tsProject.src()
-        .pipe(replace('$VERSION', version))
-        .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
-        .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
-        .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
-        .pipe(tsProject())
-        .pipe(gulp.dest(dests.scripts))
-        .pipe(browserSync.reload({stream: true}));
+    const base = gulp.src('src/modules/index.ts')
+        .pipe(gulpWebpack(webpackConfig, webpack));
+
+    const generateDeclarations = base
+        .pipe(filter((path) => path.relative.startsWith('../src/modules')))
+        .pipe(rename((path) => Object.assign(
+            {},
+            path,
+            // Strip '../src/modules' from the start of declaration paths
+            { dirname: path.dirname.replace('../src/modules', '.') }
+        )))
+        // Remove exports so that ./src/scripts can use them
+        .pipe(replace(/(^|\n)export default \w+;/, '$1')) // export default variable;
+        .pipe(replace(/(^|\n)export default /, '$1')) // export default class ...
+        .pipe(replace(/(^|\n)export /, '$1declare '))
+        // Replace imports with references
+        .pipe(replace(/(^|\n)import .* from '(.*)((.d)?.ts)?';/, '$1///<reference path="$2.d.ts"/>'))
+        // Fix broken declarations
+        .pipe(replace('declare {};', ''))
+        .pipe(gulp.dest(dests.declarations));
+
+    const compileModules = base
+        // Exclude declaration files
+        .pipe(filter((path) => !path.relative.startsWith('../src')))
+        .pipe(gulp.dest(dests.scripts));
+
+    // Run the tasks for the new modules
+    return Promise.all([
+        streamToPromise(generateDeclarations),
+        streamToPromise(compileModules),
+    ]).then(() => {
+        // Compile the old scripts
+        const tsProject = typescript.createProject('tsconfig.json');
+        const compileScripts = tsProject.src()
+            .pipe(replace('$VERSION', version))
+            .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
+            .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
+            .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
+            .pipe(tsProject())
+            .pipe(gulp.dest(dests.scripts))
+            .pipe(browserSync.reload({stream: true}));
+        return streamToPromise(compileScripts);
+    });
 });
 
 gulp.task('styles', () => gulp.src(srcs.styles)
