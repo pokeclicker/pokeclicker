@@ -13,7 +13,18 @@
 }
 
 .tile-player {
-  background-color: green;
+  background: green;
+  position: relative;
+  &::after {
+    position: absolute;
+    top: calc(50% - 16px);
+    left: calc(50% - 16px);
+    content: '';
+    display: block;
+    width: 32px;
+    height: 32px;
+    background: url('../assets/images/safari/walkdown.png') no-repeat top left;
+  }
 }
 
 .tile-empty {
