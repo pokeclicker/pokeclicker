@@ -52,18 +52,27 @@ class Save {
     }
 
     public static download() {
-        const element = document.createElement('a');
-        element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify({player, save: this.getSaveObject()})))}`);
-        const datestr = GameConstants.formatDate(new Date());
-        const filename = `[v${App.game.update.version}] PokeClickerSave_${datestr}.txt`;
-        element.setAttribute('download', filename);
+        const backupSaveData = {player, save: this.getSaveObject()};
+        try {
+            const element = document.createElement('a');
+            element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`);
+            const datestr = GameConstants.formatDate(new Date());
+            const filename = `[v${App.game.update.version}] PokeClickerSave_${datestr}.txt`;
+            element.setAttribute('download', filename);
 
-        element.style.display = 'none';
-        document.body.appendChild(element);
+            element.style.display = 'none';
+            document.body.appendChild(element);
 
-        element.click();
+            element.click();
 
-        document.body.removeChild(element);
+            document.body.removeChild(element);
+        } catch (err) {
+            console.error('Error trying to download save', err);
+            Notifier.notify({ title: 'Failed to download save data', message: 'Please check the console for errors, and report them on our Discord.', type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+            try {
+                localStorage.backupSave = JSON.stringify(backupSaveData);
+            } catch (e) {}
+        }
     }
 
     public static loadMine() {
