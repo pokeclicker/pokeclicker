@@ -83,7 +83,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                     <!-- /ko -->
                 </select>
                 <!-- ko if: DamageCalculator.detailType() != PokemonType.None -->
-                <span class="float-right" data-bind="text: `Type Damage: ${Math.round(DamageCalculator.observableTypeDamageArray()[DamageCalculator.detailType()]).toLocaleString('en-US')}`"></span>
+                <span class="float-right" data-bind="text: `${PokemonType[DamageCalculator.detailType()]} Damage: ${Math.round(DamageCalculator.observableTypeDamageArray()[DamageCalculator.detailType()]).toLocaleString('en-US')}`"></span>
                 <!-- /ko -->
             </div>
             <div data-bind="if: DamageCalculator.detailType() != PokemonType.None">
