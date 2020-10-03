@@ -55,9 +55,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                         data-bind=" css: {disabled: AchievementHandler.navigateIndex() === 0}">
                     <img src="assets/images/leftarrow.png">
                 </button>
-
                 <div data-bind="text: AchievementHandler.navigateIndex()+1 + '/' + (AchievementHandler.numberOfTabs()+1)"></div>
-                
                 <button class="btn btn-secondary" onclick="AchievementHandler.navigateRight()"
                         data-bind=" css: {disabled: AchievementHandler.navigateIndex() ===  AchievementHandler.numberOfTabs()}">
                     <img src="assets/images/rightarrow.png">
@@ -67,7 +65,9 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     </div>
 
     <script type="text/html" id="achievementListTemplate">
-        <tr data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }">
+        <tr
+            class="achievement-row"
+            data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }, click: () => {AchievementHandler.trackAchievement($data); $('#achievementsModal').modal('hide');}">
             <td style="text-align:left;vertical-align:middle;"><b><span data-bind="text: name">Name</span></b><br>
                 <small><span data-bind="text: description">Description</span></small>
             </td>
