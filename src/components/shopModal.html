@@ -26,7 +26,7 @@
                            <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/[^\w.-\\(\\)]/g, '_') + '.png' }">
                            <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
                            <div data-bind="if: $data.isAvailable()">
-                                <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency}}"></span>
+                                <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>
                             </div>
                             <div data-bind="ifnot: $data.isAvailable()">
                                 <span>Sold Out</span>
