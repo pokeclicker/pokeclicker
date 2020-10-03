@@ -20,7 +20,12 @@ class Save {
         saveObject[Underground.saveKey] = Underground.save();
 
         Object.keys(App.game).filter(key => App.game[key].saveKey).forEach(key => {
-            saveObject[App.game[key].saveKey] = App.game[key].toJSON();
+            let saveData = App.game[key].toJSON();
+            // Remove non-ascii characters from discord usernames prior to save.
+            if (key === 'discord') {
+                saveData.username = saveData.username.replace(/[^\x00-\x7F]/g, "");
+            }
+            saveObject[App.game[key].saveKey] = saveData;
         });
 
         return saveObject;
