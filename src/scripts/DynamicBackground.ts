@@ -98,9 +98,9 @@ class DynamicBackground {
     static startAddingPokemon = () => {
         const delay = Math.floor(Math.random() * (10 * GameConstants.SECOND));
         setTimeout(() => {
-            // todo update highest ID
+            // limited to players highest region
             if (DynamicBackground.active) {
-                DynamicBackground.addPokemon(Math.floor(Math.random() * 815) + 1);
+                DynamicBackground.addPokemon(Math.floor(Math.random() * GameConstants.TotalPokemonsPerRegion[player.highestRegion()]) + 1);
                 DynamicBackground.startAddingPokemon();
             }
         }, delay);
