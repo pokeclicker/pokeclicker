@@ -266,6 +266,7 @@ class Safari {
                     }
                 }
             });
+            App.game.breeding.progressEggs(1);
         } else {
             $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
             setTimeout(function() {
