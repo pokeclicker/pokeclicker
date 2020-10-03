@@ -308,7 +308,7 @@ namespace GameConstants {
         }
 
         if (suffixCounter > -1) {
-            let returnNumString = String(Math.floor(returnNum * 10) / 10);
+            const returnNumString = String(Math.floor(returnNum * 10) / 10);
             return `${returnNumString}${suffixes[suffixCounter]}`;
         }
 
