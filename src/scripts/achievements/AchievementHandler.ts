@@ -1,13 +1,14 @@
-///<reference path="MoneyRequirement.ts"/>
-
 class AchievementHandler {
 
     public static achievementList: Achievement[] = [];
+    public static achievementTypes: KnockoutObservableArray<string> = ko.observableArray([]);
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static maxBonus: KnockoutObservableArray<number> = ko.observableArray([]);
+    public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
+    public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
 
     public static navigateRight() {
-        if (AchievementHandler.navigateIndex() < AchievementHandler.getNumberOfTabs()) {
+        if (AchievementHandler.navigateIndex() < AchievementHandler.numberOfTabs()) {
             AchievementHandler.navigateIndex(AchievementHandler.navigateIndex() + 1);
         }
     }
@@ -18,13 +19,31 @@ class AchievementHandler {
         }
     }
 
-    public static getNumberOfTabs() {
-        return Math.floor(AchievementHandler.achievementList.filter(a => a.region <= player.highestRegion()).length / 10);
+    public static calculateNumberOfTabs() {
+        this.numberOfTabs(Math.floor((this.achievementListFiltered().filter(a => a.region <= player.highestRegion()).length - 1) / 10));
     }
 
-    public static getAchievementListWithIndex(index: number) {
-        index *= 10;
-        return AchievementHandler.achievementList.filter(a => a.region <= player.highestRegion()).slice(index, index + 10);
+    public static filter = {
+        status: ko.observable('all'),
+        type:   ko.observable('all'),
+        region: ko.observable('all'),
+    }
+
+    public static getAchievementListWithIndex() {
+        return this.achievementListFiltered().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
+    }
+
+    public static filterAchievementList() {
+        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() &&
+                                    (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
+                                    (this.filter.type()   == 'all' ? true : a.property.constructor.name == this.filter.type()) &&
+                                    (this.filter.region() == 'all' ? true : a.region == +this.filter.region())));
+        this.resetPages();
+    }
+
+    public static resetPages() {
+        this.calculateNumberOfTabs();
+        this.navigateIndex(0);
     }
 
     public static checkAchievements() {
@@ -44,6 +63,12 @@ class AchievementHandler {
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
             AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region).reduce((sum, a) => sum + a.bonus, 0);
         });
+    }
+
+    public static calculateAchievementTypes() {
+        const types = [];
+        AchievementHandler.achievementList.forEach(a => types.push(a.property?.constructor.name));
+        AchievementHandler.achievementTypes([...new Set(types)]);
     }
 
     public static bonusUnlocked(): number {
@@ -137,7 +162,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Keeping Oak Really Busy', 'Capture 75 unique Pokémons', new CaughtPokemonRequirement(75), 0.15);
         AchievementHandler.addAchievement('Surpassing Ash', 'Capture 88 unique Pokémons', new CaughtPokemonRequirement(88), 0.05);
         AchievementHandler.addAchievement('I Wanna be The Very Best', 'Capture 100 unique Pokémons', new CaughtPokemonRequirement(100), 0.20);
-        AchievementHandler.addAchievement('I Should Probably Take a Break', 'Complete the Kanto Pokédex!', new CaughtPokemonRequirement(151), 0.50);
+        AchievementHandler.addAchievement('I Should Probably Take a Break', 'Complete the Kanto Pokédex!', new CaughtUniquePokemonsByRegionRequirement(GameConstants.Region.kanto), 0.50);
 
         AchievementHandler.addAchievement("I'd rather be shiny", 'Capture your first Shiny', new ShinyPokemonRequirement(1), 0.03);
         AchievementHandler.addAchievement('These pokémon must be sick', 'Capture 10 unique Shinies', new ShinyPokemonRequirement(10), 0.06);
@@ -213,5 +238,9 @@ class AchievementHandler {
         });
 
         AchievementHandler.calculateMaxBonus();
+        AchievementHandler.calculateAchievementTypes();
+        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion()));
+        this.resetPages();
+        Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
     }
 }
