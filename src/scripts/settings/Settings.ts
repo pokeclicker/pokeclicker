@@ -131,24 +131,6 @@ Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 /*
  * SUBSCRIBERS
  */
-
-let autoUpdateScene;
 Settings.getSetting('backgroundImage').observableValue.subscribe(newValue => {
-    if (newValue == 'background-dynamic') {
-        // Start adding Pokemon to the scene
-        DynamicBackground.active = true;
-        DynamicBackground.startAddingPokemon();
-
-        // Update the background images, sun and moon
-        DynamicBackground.updateScene();
-        autoUpdateScene = setTimeout(() => {
-            DynamicBackground.updateScene();
-            setInterval(DynamicBackground.updateScene, GameConstants.MINUTE);
-            
-        }, GameConstants.MINUTE - (Date.now() % GameConstants.MINUTE));
-    } else {
-        // Stop adding Pokemon to the scene
-        DynamicBackground.active = false;
-        clearInterval(autoUpdateScene);
-    }
+    newValue == 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
 });

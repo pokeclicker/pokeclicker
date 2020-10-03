@@ -1,4 +1,6 @@
 class DynamicBackground {
+    public static autoUpdateScene;
+
     constructor() {}
 
     /*
@@ -92,17 +94,43 @@ class DynamicBackground {
         }, GameConstants.MINUTE);
     };
 
-    static active = false;
+    /*
+     * ADDING POKEMON TO THE SCENE
+     */
+    static addPokemonTimeout;
 
     static startAddingPokemon = () => {
         // Random delay up to 10 seconds
         const delay = Math.floor(Math.random() * (10 * GameConstants.SECOND));
-        setTimeout(() => {
+
+        // Assign our timeout function so we can stop it later
+        DynamicBackground.addPokemonTimeout = setTimeout(() => {
             // limited to players highest region
-            if (DynamicBackground.active) {
-                DynamicBackground.addPokemon(Math.floor(Math.random() * GameConstants.TotalPokemonsPerRegion[player.highestRegion()]) + 1);
-                DynamicBackground.startAddingPokemon();
-            }
+            DynamicBackground.addPokemon(Math.floor(Math.random() * GameConstants.TotalPokemonsPerRegion[player.highestRegion()]) + 1);
+            // Add another pokemon
+            DynamicBackground.startAddingPokemon();
         }, delay);
     };
+
+    static stopAddingPokemon = () => {
+        clearTimeout(DynamicBackground.addPokemonTimeout);
+    }
+
+    /*
+     * SCENE MANAGER
+     */
+    static startScene = () => {
+        // Start adding the Pokemon images (manages it's own timer)
+        DynamicBackground.startAddingPokemon();
+        // Update the background now then every minute
+        DynamicBackground.updateScene();
+        DynamicBackground.autoUpdateScene = setInterval(DynamicBackground.updateScene, GameConstants.MINUTE);
+    }
+
+    static stopScene = () => {
+        // Stop adding the pokemon images
+        DynamicBackground.stopAddingPokemon();
+        // Stop updating background images
+        clearInterval(DynamicBackground.autoUpdateScene);
+    }
 }
