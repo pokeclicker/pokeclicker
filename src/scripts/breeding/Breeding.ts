@@ -175,7 +175,10 @@ class Breeding implements Feature {
 
     public gainPokemonEgg(pokemon: PartyPokemon): boolean {
         if (!this.hasFreeEggSlot()) {
-            Notifier.notify({ message: "You don't have any free egg slots", type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: "You don't have any free egg slots",
+                type: NotificationConstants.NotificationOption.warning,
+            });
             return false;
         }
         const egg = this.createEgg(pokemon.name);
@@ -232,7 +235,11 @@ class Breeding implements Feature {
         const pokemonName = GameConstants.FossilToPokemon[fossil];
         const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
         if (pokemonNativeRegion > player.highestRegion()) {
-            Notifier.notify({ message: 'You must progress further before you can uncover this fossil Pokemon!', type: GameConstants.NotificationOption.warning, timeout: 5e3 });
+            Notifier.notify({
+                message: 'You must progress further before you can uncover this fossil Pokemon!',
+                type: NotificationConstants.NotificationOption.warning,
+                timeout: 5e3,
+            });
             return new Egg();
         }
         return this.createEgg(pokemonName, EggType.Fossil);

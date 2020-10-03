@@ -44,7 +44,12 @@ class Farming implements Feature {
             }
         });
         if (notify) {
-            Notifier.notify({ message: 'A berry is ready to harvest!', type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_harvest, setting: GameConstants.NotificationSetting.ready_to_harvest });
+            Notifier.notify({
+                message: 'A berry is ready to harvest!',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.ready_to_harvest,
+                setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+            });
         }
     }
 
@@ -112,7 +117,10 @@ class Farming implements Feature {
         this.gainBerry(plot.berry, amount);
 
         if (!suppressNotification) {
-            Notifier.notify({ message: `You earned ${money} money from the harvest!`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({
+                message: `You earned ${money} money from the harvest!`,
+                type: NotificationConstants.NotificationOption.success,
+            });
         }
 
         plot.berry = BerryType.None;
@@ -130,14 +138,21 @@ class Farming implements Feature {
         });
 
         if (total > 0) {
-            Notifier.notify({ message: `You earned ${total} money from the harvest!`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({
+                message: `You earned ${total} money from the harvest!`,
+                type: NotificationConstants.NotificationOption.success,
+            });
         }
     }
 
     gainRandomBerry(amount = 1, disableNotification = false) {
         const berry = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
         if (!disableNotification) {
-            Notifier.notify({ message: `You got a ${BerryType[berry]} berry!`, type: GameConstants.NotificationOption.success, setting: GameConstants.NotificationSetting.route_item_found });
+            Notifier.notify({
+                message: `You got a ${BerryType[berry]} berry!`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.route_item_found,
+            });
         }
         this.gainBerry(berry, amount);
     }

@@ -49,7 +49,11 @@ class Party implements Feature {
                 return;
             }
             // Notify if not already caught
-            Notifier.notify({ message: `✨ You have captured a shiny ${pokemon.name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.new_catch });
+            Notifier.notify({
+                message: `✨ You have captured a shiny ${pokemon.name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.new_catch,
+            });
             // Add to caught shiny list
             this.shinyPokemon.push(pokemon.id);
         }
@@ -60,7 +64,11 @@ class Party implements Feature {
         }
 
         if (!suppressNotification) {
-            Notifier.notify({ message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.new_catch });
+            Notifier.notify({
+                message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.new_catch,
+            });
         }
 
         App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);

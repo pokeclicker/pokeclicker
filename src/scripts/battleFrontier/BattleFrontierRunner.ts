@@ -59,7 +59,12 @@ class BattleFrontierRunner {
         const battlePointsEarned = Math.round(stageBeaten * battleMultiplier);
         const moneyEarned = stageBeaten * 100 * battleMultiplier;
 
-        Notifier.notify({ title: 'Battle Frontier', message: `You managed to beat stage ${stageBeaten}.<br/>You received ${battlePointsEarned} BP`, type: GameConstants.NotificationOption.success, timeout: 5 * GameConstants.MINUTE });
+        Notifier.notify({
+            title: 'Battle Frontier',
+            message: `You managed to beat stage ${stageBeaten}.<br/>You received ${battlePointsEarned} BP`,
+            type: NotificationConstants.NotificationOption.success,
+            timeout: 5 * GameConstants.MINUTE,
+        });
 
         // Award battle points
         App.game.wallet.gainBattlePoints(battlePointsEarned);
@@ -73,7 +78,12 @@ class BattleFrontierRunner {
             return;
         }
         // Don't give any points, user quit the challenge
-        Notifier.notify({ title: 'Battle Frontier', message: `You made it to stage ${this.stage()}`, type: GameConstants.NotificationOption.info, timeout: 5 * GameConstants.MINUTE });
+        Notifier.notify({
+            title: 'Battle Frontier',
+            message: `You made it to stage ${this.stage()}`,
+            type: NotificationConstants.NotificationOption.info,
+            timeout: 5 * GameConstants.MINUTE,
+        });
 
         this.end();
     }

@@ -112,13 +112,13 @@ Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disabl
 
 
 // Sound settings
-Object.values(GameConstants.NotificationSound).forEach(sound => {
+Object.values(NotificationConstants.NotificationSound).forEach(sound => {
     Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
 });
 Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 
 // Notification settings
-Object.values(GameConstants.NotificationSetting).forEach(setting => {
+Object.values(NotificationConstants.NotificationSetting).forEach(setting => {
     Settings.add(setting);
 });
 
