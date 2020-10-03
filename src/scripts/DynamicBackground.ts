@@ -5,10 +5,8 @@ class DynamicBackground {
     SUN & MOON
     */
     static setSunMoonPosition = (date = new Date()) => {
+        const h = window.innerHeight;
         const w = window.innerWidth / 1.2;
-
-        // Do the same thing with the height. Responsive = Good times.
-        const h = window.innerHeight / 1;
 
         // Get the hours and minutes.
         const hours = date.getHours();
@@ -25,7 +23,7 @@ class DynamicBackground {
         const moonY = (h / 1.4) + (h * Math.cos(moonRad)) / 2;
 
 
-        // Apply the poisitions based on our previous calculations
+        // Apply the positions based on our previous calculations
         const sun = document.getElementById('sun');
         sun.style.top = `${sunY}px`;
         sun.style.left = `${sunX}px`;
@@ -70,7 +68,7 @@ class DynamicBackground {
         } catch (e) {}
     };
 
-    // Determines the images to use based on the hour
+    // Determines the images to use based on the current hour
     static getPicture = hour => {
         if (hour >= 23 || hour < 1) {
             return 11;
@@ -99,7 +97,7 @@ class DynamicBackground {
         }
     }
 
-    // All the flying pokemon IDs
+    // All the flying pokemon IDs (these pokemon can spawn in the sky)
     static flyingPokemon = [12,15,17,18,22,41,42,49,92,93,109,110,142,144,145,146,149,151,164,165,166,169,176,187,188,189,193,200,206,227,249,250,251,267,269,277,278,279,284,291,329,330,333,334,358,380,381,382,384,385,397,398,414,415,416,425,426,433,462,469,479,480,481,482,488,489,490,491,521,527,528,567,581,628,642,644,645,646,662,663,666,691,707,714,715,738,745,746];
 
     // Add a pokemon to the scene
