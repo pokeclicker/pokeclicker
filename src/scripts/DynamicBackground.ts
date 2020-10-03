@@ -13,8 +13,8 @@ class DynamicBackground {
         const mins = date.getMinutes();
 
         // Calculate the position of the sun and moon based on the time.
-        const sunRad = (((hours) * 60 + mins) / (24.00 * 62.00)) * Math.PI * 2;
-        const moonRad = (((hours + 12) * 60 + mins) / (24.00 * 60.00)) * Math.PI * 2;
+        const sunRad = (((hours) * 60 + mins) / (24 * 62)) * Math.PI * 2;
+        const moonRad = (((hours + 12) * 60 + mins) / (24 * 60)) * Math.PI * 2;
 
         // Calculate the axis
         const sunX = (w / 1.8) - (w * Math.sin(sunRad)) / 2;
