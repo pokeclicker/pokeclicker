@@ -69,7 +69,8 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                                 tooltip: {title: `${PokemonType[$index()]} - ${$data.toFixed().toLocaleString('en-US')}`,
                                           trigger: 'hover',
                                           placement:'bottom'
-                                         }"
+                                         },
+                                click: () => {DamageCalculator.detailType($index())}"
                 ></div>
                 <!-- /ko -->
             </div>
