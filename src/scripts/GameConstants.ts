@@ -298,7 +298,7 @@ namespace GameConstants {
         let returnNum = num;
         let suffixCounter = -1;
 
-        while (returnNum > 1e3 && (suffixCounter < suffixes.length - 1)) {
+        while (returnNum >= 1e3 && (suffixCounter < suffixes.length - 1)) {
             returnNum /= 1e3;
             suffixCounter++;
         }
