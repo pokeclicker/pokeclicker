@@ -78,11 +78,10 @@ class DynamicBackground {
 
     // Add a pokemon to the scene
     static addPokemon = id => {
-        const pokeElement = document.createElement('div');
-
         const flying = DynamicBackground.flyingPokemon.includes(id);
-        const shiny = !Math.floor(Math.random() * 1024);
+        const shiny = !Math.floor(Math.random() * GameConstants.SHINY_CHANCE_BREEDING);
 
+        const pokeElement = document.createElement('div');
         pokeElement.style.bottom = flying ? `${Math.floor(Math.random() * 70) + 20}vh` : `${Math.floor(Math.random() * 10) + 5}vh`;
         pokeElement.style.backgroundImage = `url('/assets/images/dynamic-background/pokemon/${id.toString().padStart(3, 0)}${shiny ? 's' : ''}.png')`;
         pokeElement.classList.add('pokemon');
@@ -96,6 +95,7 @@ class DynamicBackground {
     static active = false;
 
     static startAddingPokemon = () => {
+        // Random delay up to 10 seconds
         const delay = Math.floor(Math.random() * (10 * GameConstants.SECOND));
         setTimeout(() => {
             // limited to players highest region
