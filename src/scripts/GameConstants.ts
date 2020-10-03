@@ -292,21 +292,27 @@ namespace GameConstants {
     export function formatNumber(num: number): string {
         if (isNaN(+num)) {
             return '0';
-        } else if (num >= 1e9) {
-            num = Math.floor(num / 1e8);
-            num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return `${num}B`;
-        } else if (num >= 1e6) {
-            num = Math.floor(num / 1e5);
-            num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return `${num}M`;
-        } else if (num >= 1e3) {
-            num = Math.floor(num / 1e2);
-            num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return `${num}K`;
-        } else {
-            return num.toString();
         }
+
+        const suffixes = ['K', 'M', 'B', 'T', 'QD', 'QT'];
+        let returnNum = num;
+        let suffixCounter = -1;
+
+        while (returnNum >= 1e3 && (suffixCounter < suffixes.length - 1)) {
+            returnNum /= 1e3;
+            suffixCounter++;
+        }
+
+        if (returnNum > 1e3) {
+            return '∞';
+        }
+
+        if (suffixCounter > -1) {
+            const returnNumString = String(Math.floor(returnNum * 10) / 10);
+            return `${returnNumString}${suffixes[suffixCounter]}`;
+        }
+
+        return num.toString();
     }
 
     export enum Region {
