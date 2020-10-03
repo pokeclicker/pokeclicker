@@ -2,7 +2,7 @@ class DamageCalculator {
     static type1 = ko.observable(PokemonType.None);
     static type2 = ko.observable(PokemonType.None);
     static region = ko.observable(GameConstants.Region.none);
-    static ignoreBreeding = ko.observable(false);
+    static includeBreeding = ko.observable(false);
     static baseAttackOnly = ko.observable(false);
     static detailType = ko.observable(PokemonType.None);
 
@@ -19,7 +19,7 @@ class DamageCalculator {
                 continue;
             }
 
-            const attack = App.game.party.calculateOnePokemonAttack(pokemon, this.type1(), this.type2(), this.region(), ignoreRegionMultiplier, this.ignoreBreeding(), this.baseAttackOnly());
+            const attack = App.game.party.calculateOnePokemonAttack(pokemon, this.type1(), this.type2(), this.region(), ignoreRegionMultiplier, this.includeBreeding(), this.baseAttackOnly());
             
             typedamage[dataPokemon.type1] += attack / 2;
             const otherType = dataPokemon.type2 !== PokemonType.None ? dataPokemon.type2 : dataPokemon.type1;
@@ -53,7 +53,7 @@ class DamageCalculator {
                 DamageCalculator.type2(),
                 DamageCalculator.region(),
                 ignoreRegionMultiplier,
-                DamageCalculator.ignoreBreeding(),
+                DamageCalculator.includeBreeding(),
                 DamageCalculator.baseAttackOnly()
             ),
         };

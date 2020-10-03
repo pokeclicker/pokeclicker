@@ -6,7 +6,7 @@
               src=""/>
           <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
       </td>
-      <td data-bind="text: Math.round(damage).toLocaleString('en-US')">Atk</td>
+      <td data-bind="text: Math.round(damage).toLocaleString('en-US')">Damage</td>
       <td data-bind="text: PokemonType[type1]">Type 1</td>
       <td data-bind="text: PokemonType[type2]">Type 2</td>
   </tr>
@@ -26,8 +26,8 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
             <div class="form-row">
                 <div class="form-group col-md-3 col-6 align-self-center">
                     <div class="form-check">
-                        <input id="damage-calc-ignore-breeding" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.ignoreBreeding"></input>
-                        <label for="damage-calc-ignore-breeding" class="form-check-label">Ignore Breeding</label>
+                        <input id="damage-calc-include-breeding" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.includeBreeding"></input>
+                        <label for="damage-calc-include-breeding" class="form-check-label">Include Breeding</label>
                     </div>
                     <div class="form-check">
                         <input id="damage-calc-use-base" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.baseAttackOnly"></input>
