@@ -20,7 +20,7 @@ style="cursor:default" tabindex="-1">
             </div>
 
             <div class="modal-body tab-content p-0">
-                <div id="dig" class="tab-pane fade in active show pl-3 pr-3">
+                <div id="dig" class="tab-pane fade in active show pl-3 pr-3" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
                     <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
                         <button class="col-4 btn btn-secondary" data-bind="
                                                         click: function(){  ItemList[$data].use();},
