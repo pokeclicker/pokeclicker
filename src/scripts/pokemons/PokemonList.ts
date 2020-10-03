@@ -17367,6 +17367,23 @@ const pokemonList: PokemonListData[] =
                 'speed': 78,
             },
         },
+        {
+            'id': -19,
+            'name': 'Old Timey Pikachu',
+            'catchRate': 190,
+            'type': [PokemonType.Electric],
+            'levelType': LevelType.mediumfast,
+            'exp': 112,
+            'eggCycles': 10,
+            'base': {
+                'hitpoints': 35,
+                'attack': 55,
+                'specialAttack': 50,
+                'defense': 40,
+                'specialDefense': 50,
+                'speed': 90,
+            },
+        },
         // Megas only between -100 → -199
         {
             'id': -100,

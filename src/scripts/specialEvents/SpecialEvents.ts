@@ -87,6 +87,19 @@ SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited tim
         Routes.getRoutesByRegion(GameConstants.Region.hoenn).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Pikachu (Gengar)', 'Shuppet', 'Duskull'].includes(p)));
     }
 );
+SpecialEvents.newEvent('Fall back!', 'In honor of daylight savings time, encounter Old Timey Pikachu for a limited time roaming in Kanto',
+    // Start
+    new Date(new Date().getFullYear(), 9, 1, 1), () => {
+        SeededRand.seed(new Date().getFullYear());
+        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
+            SeededRand.boolean() ? route.pokemon.land.push('Old Timey Pikachu') : null;
+        });
+    },
+    // End
+    new Date(new Date().getFullYear(), 9, 8, 23), () => {
+        Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => route.pokemon.land = route.pokemon.land.filter(p => !['Old Timey Pikachu'].includes(p)));
+    }
+);
 SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Dragonite for a limited time roaming around Kanto, Johto and Hoenn.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
