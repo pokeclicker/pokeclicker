@@ -44,6 +44,8 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, 'Regirock, Regice and Registeel no longer Roaming, now in Sealed Chamber dungeon'),
     new Changelog(changelogType.CHANGE, 'Kyogre and Groudon will only appear in their dungeon after defeating the Hoenn Elite 4'),
     new Changelog(changelogType.CHANGE, 'If you encounter a new pokemon that is also shiny, the higher tier ball will be selected'),
+    new Changelog(changelogType.CHANGE, 'Battle item effect timers now display upto 99 hours'),
+    new Changelog(changelogType.CHANGE, 'Phione now obtained by breeding Manaphy'),
     new Changelog(changelogType.FIXED, 'Quest list should only auto refresh if all quest are claimed or it is a new day'),
     new Changelog(changelogType.FIXED, 'Gym Pokémon can no longer be captured by players'),
     new Changelog(changelogType.FIXED, 'Reduce some lag caused by hatchery filters'),
