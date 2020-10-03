@@ -8,6 +8,20 @@ class DamageCalculator {
 
     static observableTypeDamageArray = ko.pureComputed(DamageCalculator.getDamageByTypes, DamageCalculator);
     static observableTypeDetails = ko.pureComputed(DamageCalculator.getTypeDetail);
+    static observableTotalDamage = ko.pureComputed(DamageCalculator.totalDamage);
+
+    static totalDamage(): number {
+        const ignoreRegionMultiplier = DamageCalculator.region() == GameConstants.Region.none;
+
+        return App.game.party.calculatePokemonAttack(
+            DamageCalculator.type1(),
+            DamageCalculator.type2(),
+            ignoreRegionMultiplier,
+            DamageCalculator.region(),
+            DamageCalculator.includeBreeding(),
+            DamageCalculator.baseAttackOnly()
+        );
+    }
 
     static getDamageByTypes(): number[] {
         const typedamage = new Array(GameHelper.enumLength(PokemonType) - 1).fill(0);

@@ -60,6 +60,7 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                     </select>
                 </div>
             </div>
+            <div data-bind="text: `Total Damage: ${Math.round(DamageCalculator.observableTotalDamage()).toLocaleString('en-US')}`"> </div>
             <div class="d-flex">
                 <!-- ko foreach: DamageCalculator.observableTypeDamageArray -->
                 <div class="type-damage-bar"
@@ -81,6 +82,9 @@ aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
                     <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
                     <!-- /ko -->
                 </select>
+                <!-- ko if: DamageCalculator.detailType() != PokemonType.None -->
+                <span class="float-right" data-bind="text: `Type Damage: ${Math.round(DamageCalculator.observableTypeDamageArray()[DamageCalculator.detailType()]).toLocaleString('en-US')}`"></span>
+                <!-- /ko -->
             </div>
             <div data-bind="if: DamageCalculator.detailType() != PokemonType.None">
                 <table class="table table-striped table-hover table-sm m-0">
