@@ -148,7 +148,7 @@ class Discord implements Saveable {
     toJSON(): Record<string, any> {
         return {
             ID: this.ID(),
-            username: this.username(),
+            username: this.username()?.replace(/[^\x00-\x7F]/g, ''),
             codes: this.codes.filter(c => c.claimed),
         };
     }
