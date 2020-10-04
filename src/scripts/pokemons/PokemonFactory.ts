@@ -168,6 +168,12 @@ class PokemonFactory {
         }
         const rand: number = Math.floor(Math.random() * chance) + 1;
         if (rand <= 1) {
+            if (item.includes('Mega')){
+                if (player.highestRegion >= GameConstants.Region.kalos){
+                    return item;
+                }
+                return null;
+            }
             return item;
         }
 

@@ -462,7 +462,13 @@ namespace GameConstants {
         'Razor_fang',
         'Prism_scale',
         'Sachet',
-        'Whipped_dream'
+        'Whipped_dream',
+        'Weak_Mega_Stone',
+        'Medium_Mega_Stone',
+        'Strong_Mega_Stone',
+        'Legendary_Mega_Stone',
+        'Strong_Legendary_Mega_Stone',
+        'Ultra_Legendary_Mega_Stone',
     }
 
     export enum BattleItemType {
@@ -769,7 +775,6 @@ namespace GameConstants {
     export const UnovaDungeons = [
         'Pledge Grove',
         'Floccesy Ranch',
-        'Virbank Complex',    //Optional dungeon, contains no unique Pokémon, safe to scrap
         'Liberty Garden',
         'Castelia Sewers',
         'Relic Passage',
@@ -780,7 +785,6 @@ namespace GameConstants {
         'Mistralton Cave',
         'Celestial Tower',
         'Reversal Mountain',
-        'Strange House',    //Optional dungeon, contains no unique Pokémon, safe to scrap
         'Undella Bay',    //Should really be a route
         'Seaside Cave',
         'Giant Chasm',
@@ -791,7 +795,6 @@ namespace GameConstants {
         'Dragonspiral Tower',
         'Moor of Icirrus',
         'Pinwheel Forest',
-        'Wellspring Cave',    //Optional dungeon, contains no unique Pokémon, safe to scrap
         'Dreamyard',
         'P2 Laboratory',
     ];
@@ -813,7 +816,7 @@ namespace GameConstants {
         'Terminus Cave',
         'Pokémon Village',
         'Victory Road Kalos',
-        //'Unknown Dungeon',
+        'Unknown Dungeon',
     ];
 
     export const RegionDungeons = [
