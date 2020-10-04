@@ -591,15 +591,10 @@ TownList['Team Flare Secret HQ'] = new DungeonTown('Team Flare Secret HQ', [new 
 TownList['Terminus Cave'] = new DungeonTown('Terminus Cave', [new RouteKillRequirement(10, 18)]);
 TownList['Pokémon Village'] = new DungeonTown('Pokémon Village', [new RouteKillRequirement(10, 20)]);
 TownList['Victory Road Kalos'] = new DungeonTown('Victory Road Kalos', [
+    new GymBadgeRequirement(BadgeCase.Badge.Iceberg),
     new OneFromManyRequirement([
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeCase.Badge.Iceberg),
-            new RouteKillRequirement(10, 21),
-        ]),
-        new MultiRequirement([
-            new GymBadgeRequirement(BadgeCase.Badge.Iceberg),
-            new RouteKillRequirement(10, 22),
-        ]),
+        new RouteKillRequirement(10, 21),
+        new RouteKillRequirement(10, 22),
     ]),
 ]);
 //Unknown Cave?
