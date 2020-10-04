@@ -43,6 +43,11 @@
     <!--Motio-->
     <script src="libs/motio.js"></script>
 
+    <!--Intro.js-->
+    <script src="libs/intro.min.js"></script>
+    <link href="libs/introjs.css" rel="stylesheet">
+    <link href="libs/introjs-modern.css" rel="stylesheet">
+
     <!--Minified styles-->
     <link href="styles/styles.min.css?v=$VERSION" rel="stylesheet">
 
@@ -53,22 +58,25 @@
         .loader {
             position: fixed;
             top: 0;
-            height: 100%;
-            width: 100%;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
             background-color: #79c9fa;
             background-size: cover;
             z-index: 9999;
         }
 
         .loader-wrapper {
-            height: 100%;
-            width: 100%;
+            height: 100vh;
+            width: 100vw;
             position: relative;
         }
     </style>
 
 </head>
-<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue()">
+<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue() ">
+@import "dynamicBackground.html"
+
 <div id="toaster"></div>
 <link href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
 

@@ -5,11 +5,13 @@ class KeyItem {
 
     public unlockReq: KnockoutComputed<boolean>;
     public unlocker: KnockoutSubscription;
+    public unlockReward: () => void;
 
-    constructor(name: KeyItems.KeyItem, description: string, unlockReq?, isUnlocked?: boolean) {
+    constructor(name: KeyItems.KeyItem, description: string, unlockReq?, isUnlocked = false, unlockReward = () => {}) {
         this._name = ko.observable(name);
         this._description = ko.observable(description);
         this._isUnlocked = ko.observable(isUnlocked ?? false);
+        this.unlockReward = unlockReward;
 
         if (this.isUnlocked || unlockReq == undefined) {
             this.unlockReq = null;
