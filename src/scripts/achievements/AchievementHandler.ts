@@ -98,6 +98,10 @@ class AchievementHandler {
         return `${(100 * AchievementHandler.achievementBonus()).toFixed(2)}%`;
     }
 
+    public static findByName(name: string): Achievement {
+        return AchievementHandler.achievementList.find((achievement) => achievement.name === name);
+    }
+
     public static initialize() {
 
         /*

@@ -1,7 +1,7 @@
 declare const Sortable: any;
 
 $(() => {
-    const columns = ['left-column', 'middle-sort-column', 'right-column'];
+    const columns = ['left-column', 'middle-top-sort-column', 'middle-bottom-sort-column', 'right-column'];
 
     // Enable sorting of items
     columns.forEach(column => {
