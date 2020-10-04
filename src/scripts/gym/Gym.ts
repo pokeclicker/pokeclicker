@@ -1064,7 +1064,7 @@ gymList['Lumiose City'] = new Gym(
     ],
     BadgeCase.Badge.Voltage,
     128000,
-    'Oh, Bonnie... When will you learn there\'s no shame in losing? I\'m glad whenever I get to learn something new thanks to strong challengers like this boy/girl here.',
+    'Oh, Bonnie... When will you learn there\'s no shame in losing? I\'m glad whenever I get to learn something new thanks to strong challengers like you here.',
     [new RouteKillRequirement(10, 13), new GymBadgeRequirement(BadgeCase.Badge.Plant)]
 );
 //Replace req with Kalos Power Plant dungeon if implemented.
