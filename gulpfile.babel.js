@@ -65,6 +65,9 @@ const srcs = {
     libs: [
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/intro.js/minified/intro.min.js',
+        'node_modules/intro.js/introjs.css',
+        'node_modules/intro.js/themes/introjs-modern.css',
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/popper.js/dist/umd/popper.min.js',
         'node_modules/knockout/build/output/knockout-latest.js',
