@@ -46,11 +46,19 @@ class DailyDeal {
             return false;
         }
 
+        if (!this.item1.isStone()) {
+            return false;
+        }
+
         if (DailyDeal.sameDealExists(item1Name, item2Name, dealList)) {
             return false;
         }
 
-        return ( !DailyDeal.reverseDealExists(item1Name, item2Name, dealList) && !this.item1.isStone() );
+        if (DailyDeal.reverseDealExists(item1Name, item2Name, dealList)) {
+            return false;
+        }
+
+        return true;
     }
 
     private static sameDealExists(name1: string, name2: string, dealList: Array<DailyDeal>): boolean {
