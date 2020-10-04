@@ -42,7 +42,7 @@ class DailyDeal {
         const item1Name = this.item1.name;
         const item2Name = this.item2.name;
 
-        if (item1Name !== item2Name) {
+        if (item1Name == item2Name) {
             return false;
         }
 
