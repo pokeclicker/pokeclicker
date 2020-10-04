@@ -341,8 +341,9 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
     390000,
     [
-        new DungeonBossPokemon('Kyogre', 1300000, 20),
-        new DungeonBossPokemon('Groudon', 1300000, 20),
+        new DungeonBossPokemon('Exploud', 1000000, 50),
+        new DungeonBossPokemon('Kyogre', 1700000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)),
+        new DungeonBossPokemon('Groudon', 1700000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)),
     ],
     34000, 101, 5);
 
@@ -359,9 +360,20 @@ dungeonList['Sky Pillar'] = new Dungeon('Sky Pillar',
     420000,
     [
         new DungeonBossPokemon('Dusclops', 1200000, 20),
-        new DungeonBossPokemon('Rayquaza', 1824002, 20),
+        new DungeonBossPokemon('Rayquaza', 1824002, 70),
     ],
     40000, 101, 5);
+
+dungeonList['Sealed Chamber'] = new Dungeon('Sealed Chamber',
+    ['Zubat', 'Golbat', 'Tentacool'],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.Lucky_egg],
+    400000,
+    [
+        new DungeonBossPokemon('Regirock', 1500000, 20),
+        new DungeonBossPokemon('Regice', 1500000, 20),
+        new DungeonBossPokemon('Registeel', 1500000, 20),
+    ],
+    32000, 101, 5);
 
 dungeonList['Victory Road Hoenn'] = new Dungeon('Victory Road Hoenn',
     ['Zubat', 'Golbat', 'Whismur', 'Loudred', 'Makuhita', 'Aron', 'Mawile', 'Meditite', 'Geodude', 'Goldeen', 'Magikarp', 'Barboach', 'Whiscash'],
@@ -411,7 +423,14 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
     ['Gastly', 'Haunter', 'Gengar'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     553000,
-    [new DungeonBossPokemon('Rotom', 2200000, 70)],
+    [
+        new DungeonBossPokemon('Rotom', 2200000, 70),
+        new DungeonBossPokemon('Rotom (heat)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
+        new DungeonBossPokemon('Rotom (wash)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
+        new DungeonBossPokemon('Rotom (frost)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
+        new DungeonBossPokemon('Rotom (fan)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
+        new DungeonBossPokemon('Rotom (mow)', 2300000, 70, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
+    ],
     52500, 201, 35);
 
 dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',

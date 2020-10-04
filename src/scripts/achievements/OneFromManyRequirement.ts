@@ -13,9 +13,9 @@ class OneFromManyRequirement {
         const output = [];
         this.requirements.forEach(requirement => {
             if (!requirement.isCompleted()) {
-                output.push(requirement.hint());
+                output.push(requirement.hint().replace(/\./g, ''));
             }
         });
-        return output.join(' or ');
+        return `${output.join(' or ')}.`;
     }
 }

@@ -575,7 +575,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     GameConstants.Region.hoenn, 110,
     new RoutePokemon({
-        land: ['Poochyena', 'Electrike', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
+        land: ['Poochyena', 'Gulpin', 'Minun', 'Oddish', 'Wingull', 'Plusle'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
     [
@@ -643,7 +643,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     GameConstants.Region.hoenn, 118,
     new RoutePokemon({
-        land: ['Zigzagoon', 'Electrike', 'Linoone', 'Manectric', 'Wingull', 'Kecleon'],
+        land: ['Zigzagoon', 'Linoone', 'Wingull', 'Kecleon'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha', 'Sharpedo'],
     }),
     [new GymBadgeRequirement(BadgeCase.Badge.Balance)]

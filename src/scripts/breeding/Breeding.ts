@@ -27,7 +27,7 @@ class Breeding implements Feature {
         this.hatchList[EggType.Fire] = [
             ['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'],
             ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
-            ['Torchic'],
+            ['Torchic', 'Numel'],
             ['Chimchar'],
             ['Tepig', 'Pansear'],
             ['Fennekin'],
@@ -38,7 +38,7 @@ class Breeding implements Feature {
             ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
             ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
             ['Mudkip', 'Feebas', 'Clamperl'],
-            ['Piplup', 'Finneon'],
+            ['Piplup', 'Finneon', 'Buizel'],
             ['Oshawott', 'Panpour'],
             ['Froakie'],
             ['Popplio'],
@@ -48,7 +48,7 @@ class Breeding implements Feature {
             ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
             ['Chikorita', 'Hoppip', 'Sunkern'],
             ['Treecko', 'Tropius', 'Roselia'],
-            ['Turtwig', 'Carnivine'],
+            ['Turtwig', 'Carnivine', 'Budew'],
             ['Snivy', 'Pansage'],
             ['Chespin'],
             ['Rowlet'],
@@ -68,7 +68,7 @@ class Breeding implements Feature {
             ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
             ['Chinchou', 'Mareep', 'Elekid'],
             ['Plusle', 'Minun', 'Electrike'],
-            ['Pachirisu'],
+            ['Pachirisu', 'Shinx'],
             ['Blitzle'],
             [],
             [],
@@ -84,7 +84,7 @@ class Breeding implements Feature {
             [],
             [],
         ];
-
+        BreedingController.initialize();
     }
 
     update(delta: number): void {
@@ -222,7 +222,7 @@ class Breeding implements Feature {
     }
 
     public createRandomEgg(): Egg {
-        const type = Math.floor(Math.random() * (Object.keys(this.hatchList).length - 1));
+        const type = Math.floor(Math.random() * Object.keys(this.hatchList).length);
         const egg = this.createTypedEgg(type);
         egg.type = EggType.Mystery;
         return egg;
@@ -247,7 +247,8 @@ class Breeding implements Feature {
     }
 
     public getEggSlotCost(slot: number): number {
-        return 500 * slot;
+        return 500
+          * slot;
     }
 
     public calculateBaseForm(pokemonName: string): string {
