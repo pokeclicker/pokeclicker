@@ -141,9 +141,9 @@ class AchievementHandler {
         AchievementHandler.addAchievement("DigDug ain't got nothin on me", 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.01);
         AchievementHandler.addAchievement("Both my thumbs are green! This can't be healthy", 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.01);
 
-        AchievementHandler.addAchievement('Is that how I use these?', 'Level 1 Oak Item to the maximum level', new OakItemRequirement(1), 0.05);
-        AchievementHandler.addAchievement("I've got my hands full with all these", 'Level 3 Oak Items to the maximum level', new OakItemRequirement(3), 0.1);
-        AchievementHandler.addAchievement('Preparred for anything!', 'Level 8 Oak Items to the maximum level', new OakItemRequirement(8), 0.15);
+        AchievementHandler.addAchievement('Is that how I use this?', 'Level 1 Oak Item to the maximum level', new OakItemRequirement(1), 0.05);
+        AchievementHandler.addAchievement("I've got my hands full with all of these", 'Level 3 Oak Items to the maximum level', new OakItemRequirement(3), 0.1);
+        AchievementHandler.addAchievement('Prepared for anything!', 'Level 8 Oak Items to the maximum level', new OakItemRequirement(8), 0.15);
 
         AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon', new CapturedRequirement(100), 0.05);
         AchievementHandler.addAchievement('Filling the PC', 'Capture 1,000 Pokémon', new CapturedRequirement(1000), 0.10);
