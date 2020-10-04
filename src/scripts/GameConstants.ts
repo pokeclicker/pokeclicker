@@ -842,10 +842,4 @@ namespace GameConstants {
         'Castelia City',
         'Coumarine City',
     ];
-
-    // These regions (and their towns) will be skipped by the preloader
-    export const UnreleasedRegions = [
-        GameConstants.Region.unova,
-        GameConstants.Region.kalos,
-    ];
 }
