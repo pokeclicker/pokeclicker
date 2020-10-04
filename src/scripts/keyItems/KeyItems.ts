@@ -34,7 +34,7 @@ class KeyItems implements Feature {
                     steps: [
                         {
                             element: document.getElementById('pokeballSelector'),
-                            intro: 'Select which Pokeball types to catch Pokémon with based on their caught/shiny status.<br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.png" height="25px"> Dungeon Tokens',
+                            intro: 'Select which Pokeball types to catch Pokémon with based on their caught/shiny status.<br/><i><sup>Hover over the column titles for more info.</sup></i><br/><br/>Capturing Pokémon gains you <img title="Dungeon Tokens\nGained by capturing Pokémon" src="assets/images/currency/dungeonToken.png" height="25px"> Dungeon Tokens.',
                         },
                     ],
                 });
