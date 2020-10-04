@@ -86,8 +86,11 @@ class Preload {
     private static loadTowns() {
         const p = Array<Promise<number>>();
         for (const name in TownList) {
-            // Skip unreleased towns
-            if (GameConstants.UnreleasedRegions.includes(TownList[name].region())) {
+            // Skip unreleased towns unless a feature flag has enabled them
+            if (
+                !((<any>window).featureFlags && (<any>window).featureFlags.preloadUnreleasedTowns) &&
+                GameConstants.UnreleasedRegions.includes(TownList[name].region())
+            ) {
                 continue;
             }
             // Skip fake towns that exist for the Elite
