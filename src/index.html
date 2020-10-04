@@ -124,8 +124,10 @@
 
         <!--Middle column-->
         <div id="middle-column" class="col-lg-6 col-md-12 order-md-first">
-            <!-- Achievement Tracker -->
-            @import "achievementTrackerContainer.html"
+            <div id="middle-top-sort-column">
+                <!-- Achievement Tracker -->
+                @import "achievementTrackerContainer.html"
+            </div>
 
             <div id="battleContainer" class="card sortable-disabled border-secondary mb-3">
 
@@ -373,7 +375,7 @@
             <!-- Battle Frontier Information Container  -->
             @import "battleFrontierInfo.html"
 
-            <div id="middle-sort-column">
+            <div id="middle-bottom-sort-column">
                 <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
