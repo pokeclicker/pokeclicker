@@ -841,3 +841,137 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
         new DungeonBossPokemon('Genesect', 8000000, 70),
     ],
     96500, 201, 35);
+
+// Kalos
+// TODO: Balancing of dungeon Pokemon HP & rewards.
+dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
+    ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Fletchling'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Pikachu', 8000000, 70),
+        new DungeonBossPokemon('Scatterbug', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Parfum Palace'] = new Dungeon('Parfum Palace',
+    ['Goldeen', 'Seaking', 'Magikarp', 'Gyarados', 'Corphish', 'Crawdaunt'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Furfrou', 8000000, 70)],
+    96500, 201, 35);
+
+dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
+    ['Zubat', 'Whismur', 'Meditite'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Axew', 8000000, 70)],
+    96500, 201, 35);
+
+dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
+    ['Machop', 'Onix', 'Cubone', 'Rhyhorn', 'Lunatone', 'Solrock'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Kangaskhan', 8000000, 70),
+        new DungeonBossPokemon('Mawile', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
+    ['Mr. Mime', 'Sableye', 'Chingling', 'Roggenrola', 'Solosis'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Wobbuffet', 8000000, 70),
+        new DungeonBossPokemon('Carbink', 8000000, 70),
+    ],
+    96500, 201, 35);
+    
+//Tower of Mastery?
+
+dungeonList['Azure bay'] = new Dungeon('Azure bay',
+    ['Tentacool', 'Slowpoke', 'Exeggcute', 'Chinchou', 'Remoraid', 'Wingull', 'Chatot', 'Mantyke'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Lapras', 8000000, 70),
+        new DungeonBossPokemon('Luvdisc', 8000000, 70),
+        new DungeonBossPokemon('Inkay', 8000000, 70),
+    ],
+    96500, 201, 35);
+//Should really be a route
+
+//Sea Spirit's Den? Releases Articuno, Zapdos, Moltres roamers.
+
+//Kalos Power Plant?
+
+//Pokéball Factory?
+
+dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
+    ['Magneton', 'Electrode', 'Litwick', 'Pawniard'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Trubbish', 8000000, 70),
+        new DungeonBossPokemon('Rotom', 8000000, 70),
+        new DungeonBossPokemon('Klefki', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
+    ['Poliwhirl', 'Haunter', 'Piloswine', 'Floatzel', 'Bergmite'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Jynx', 8000000, 70),
+        new DungeonBossPokemon('Beartic', 8000000, 70),
+        new DungeonBossPokemon('Cryogonal', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
+    ['Golbat', 'Gyarados', 'Houndoom', 'Mightyena', 'Manectric', 'Swalot', 'Toxicroak', 'Honchkrow', 'Liepard', 'Scrafty', 'Mienshao', 'Pyroar'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Xerneas', 8000000, 70),
+        new DungeonBossPokemon('Yveltal', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
+    ['Sandslash', 'Graveler', 'Lairon', 'Shuckle', 'Ariados'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Durant', 8000000, 70),
+        new DungeonBossPokemon('Pupitar', 8000000, 70),
+        new DungeonBossPokemon('Noibat', 8000000, 70),
+        new DungeonBossPokemon('Zygarde', 8000000, 70, new GymBadgeRequirement(BadgeCase.Badge.Elite_KalosChampion)),
+    ],
+    96500, 201, 35);
+
+dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
+    ['Jigglypuff', 'Poliwhirl', 'Noctowl', 'Lombre', 'Gothorita', 'Amooonguss'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Ditto', 8000000, 70),
+        new DungeonBossPokemon('Zoroark', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
+    ['Graveler', 'Haunter', 'Gurdurr', 'Druddigon', 'Ariados'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Lickitung', 8000000, 70),
+        new DungeonBossPokemon('Skarmory', 8000000, 70),
+        new DungeonBossPokemon('Zweilous', 8000000, 70),
+        new DungeonBossPokemon('Noibat', 8000000, 70),
+    ],
+    96500, 201, 35);
+    
+//Unknown Dungeon? Contains Mewtwo.
