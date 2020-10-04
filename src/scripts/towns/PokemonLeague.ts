@@ -30,7 +30,6 @@ const indigoPlateauShop = new Shop([
     ItemList['Protein'],
 ]);
 
-const indigoPlateauKanto = ['Elite Lorelei', 'Elite Bruno', 'Elite Agatha', 'Elite Lance', 'Champion Blue'];
 TownList['Indigo Plateau Kanto'] = new PokemonLeague(
     'Indigo Plateau Kanto',
     GameConstants.Region.kanto,
@@ -39,21 +38,19 @@ TownList['Indigo Plateau Kanto'] = new PokemonLeague(
         new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road')),
     ],
     indigoPlateauShop,
-    indigoPlateauKanto
+    ['Elite Lorelei', 'Elite Bruno', 'Elite Agatha', 'Elite Lance', 'Champion Blue']
 );
 (<PokemonLeague>TownList['Indigo Plateau Kanto']).setupGymTowns();
 
-const indigoPlateauJohto = ['Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance'];
 TownList['Indigo Plateau Johto'] = new PokemonLeague(
     'Indigo Plateau Johto',
     GameConstants.Region.johto,
     [new RouteKillRequirement(10, 27)],
     indigoPlateauShop,
-    indigoPlateauJohto
+    ['Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance']
 );
 (<PokemonLeague>TownList['Indigo Plateau Johto']).setupGymTowns();
 
-const pokemonLeagueHoenn = ['Elite Sidney', 'Elite Phoebe', 'Elite Glacia', 'Elite Drake', 'Champion Wallace'];
 TownList['Pokemon League Hoenn'] = new PokemonLeague(
     'Pokemon League Hoenn',
     GameConstants.Region.hoenn,
@@ -62,11 +59,10 @@ TownList['Pokemon League Hoenn'] = new PokemonLeague(
         new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Hoenn')),
     ],
     indigoPlateauShop,
-    pokemonLeagueHoenn
+    ['Elite Sidney', 'Elite Phoebe', 'Elite Glacia', 'Elite Drake', 'Champion Wallace']
 );
 (<PokemonLeague>TownList['Pokemon League Hoenn']).setupGymTowns();
 
-const pokemonLeagueSinnoh = ['Elite Aaron', 'Elite Bertha', 'Elite Flint', 'Elite Lucian', 'Champion Cynthia'];
 TownList['Pokemon League Sinnoh'] = new PokemonLeague(
     'Pokemon League Sinnoh',
     GameConstants.Region.sinnoh,
@@ -75,7 +71,7 @@ TownList['Pokemon League Sinnoh'] = new PokemonLeague(
         new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Sinnoh')),
     ],
     indigoPlateauShop,
-    pokemonLeagueSinnoh
+    ['Elite Aaron', 'Elite Bertha', 'Elite Flint', 'Elite Lucian', 'Champion Cynthia']
 );
 (<PokemonLeague>TownList['Pokemon League Sinnoh']).setupGymTowns();
 
