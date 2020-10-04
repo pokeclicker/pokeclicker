@@ -6,7 +6,6 @@ class AchievementHandler {
     public static maxBonus: KnockoutObservableArray<number> = ko.observableArray([]);
     public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
-    public static trackedAchievement: KnockoutObservable<Achievement> = ko.observable(null);
 
     public static navigateRight() {
         if (AchievementHandler.navigateIndex() < AchievementHandler.numberOfTabs()) {
@@ -99,17 +98,8 @@ class AchievementHandler {
         return `${(100 * AchievementHandler.achievementBonus()).toFixed(2)}%`;
     }
 
-    // TODO mephistic - we might not need this one? Decide how we load
-    public static trackAchievementByIndex(indexToTrack: number) {
-        AchievementHandler.trackAchievement(AchievementHandler.achievementList[indexToTrack]);
-    }
-
-    public static trackAchievement(achievement: Achievement) {
-        AchievementHandler.trackedAchievement(achievement);
-    }
-
-    public static hasTrackedAchievement(): boolean {
-       return AchievementHandler.trackedAchievement() !== null;
+    public static findByName(name: string): Achievement {
+        return AchievementHandler.achievementList.find((achievement) => achievement.name === name);
     }
 
     public static initialize() {
@@ -250,9 +240,6 @@ class AchievementHandler {
                 AchievementHandler.addAchievement(`${dungeon} hermit`, 'Clear 1,000 times', new ClearDungeonRequirement(1000, Statistics.getDungeonIndex(dungeon)), 3, region);
             });
         });
-
-        AchievementHandler.achievementList
-
 
         AchievementHandler.calculateMaxBonus();
         AchievementHandler.calculateAchievementTypes();

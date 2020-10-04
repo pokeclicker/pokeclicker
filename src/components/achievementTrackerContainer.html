@@ -17,7 +17,7 @@
     id="achievementTrackerBody"
     class="card-body show p-0"
   >
-    <!-- ko if: !AchievementHandler.hasTrackedAchievement() -->
+    <!-- ko if: !App.game.achievementTracker.hasTrackedAchievement() -->
     <div
       class="clickable table-warning text-light p-2"
       href="#achievementsModal"
@@ -27,11 +27,11 @@
     </div>
     <!-- /ko -->
 
-    <!-- ko if: AchievementHandler.hasTrackedAchievement() -->
+    <!-- ko if: App.game.achievementTracker.hasTrackedAchievement()-->
     <table class="table table-sm m-0">
       <tbody>
         <tr>
-          <td colspan="2" data-bind="text:AchievementHandler.trackedAchievement().description">
+          <td colspan="2" data-bind="text: App.game.achievementTracker.trackedAchievement().description">
             Achievement Description
           </td>
         </tr>
@@ -43,11 +43,11 @@
                 role="progressbar"
                 aria-valuemin="0"
                 aria-valuemax="100"
-                data-bind="attr:{ style: 'width:' + AchievementHandler.trackedAchievement().getProgressPercentage() + '%'}, css: {
-                           'bg-success': AchievementHandler.trackedAchievement().isCompleted(),
-                           'bg-primary': !AchievementHandler.trackedAchievement().isCompleted()
+                data-bind="attr:{ style: 'width:' + App.game.achievementTracker.trackedAchievement().getProgressPercentage() + '%'}, css: {
+                           'bg-success': App.game.achievementTracker.trackedAchievement().isCompleted(),
+                           'bg-primary': !App.game.achievementTracker.trackedAchievement().isCompleted()
                          }">
-                <span data-bind="text: AchievementHandler.trackedAchievement().getProgressText">0 / 1000</span>
+                <span data-bind="text: App.game.achievementTracker.trackedAchievement().getProgressText">0 / 1000</span>
               </div>
             </div>
           </td>

@@ -67,7 +67,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     <script type="text/html" id="achievementListTemplate">
         <tr
             class="achievement-row"
-            data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }, click: () => {AchievementHandler.trackAchievement($data); $('#achievementsModal').modal('hide');}">
+            data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }, click: () => {App.game.achievementTracker.trackAchievement($data); $('#achievementsModal').modal('hide');}">
             <td style="text-align:left;vertical-align:middle;"><b><span data-bind="text: name">Name</span></b><br>
                 <small><span data-bind="text: description">Description</span></small>
             </td>
