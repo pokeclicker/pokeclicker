@@ -4,11 +4,11 @@ class AchievementTracker implements Feature {
     trackedAchievement: KnockoutObservable<Achievement>;
 
     defaults = {
-        'trackedAchievement': null
+        'trackedAchievement': null,
     };
 
     constructor() {
-        this.trackedAchievement = ko.observable(this.defaults.trackedAchievement)
+        this.trackedAchievement = ko.observable(this.defaults.trackedAchievement);
     }
 
     initialize(): void {
@@ -28,17 +28,17 @@ class AchievementTracker implements Feature {
         }
 
         if (!!json.trackedAchievementName) {
-            let achievement: Achievement = AchievementHandler.findByName(json.trackedAchievementName);
+            const achievement: Achievement = AchievementHandler.findByName(json.trackedAchievementName);
             if (!!achievement) {
-                this.trackedAchievement(achievement)
+                this.trackedAchievement(achievement);
             }
         }
     }
 
     toJSON(): Record<string, any> {
         return {
-            trackedAchievementName: this.hasTrackedAchievement() ? this.trackedAchievement().name : null
-        }
+            trackedAchievementName: this.hasTrackedAchievement() ? this.trackedAchievement().name : null,
+        };
     }
 
     trackAchievement(achievement: Achievement): void {

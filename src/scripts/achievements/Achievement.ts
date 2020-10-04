@@ -34,6 +34,6 @@ class Achievement {
     }
 
     public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => {
-        return this.getProgress() + " / " + this.property.requiredValue;
+        return `${this.getProgress()}/${this.property.requiredValue}`;
     })
 }
