@@ -604,7 +604,7 @@ dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [new DungeonBossPokemon('Riolu', 11000000, 70)],
-    96500, 201, 35);   
+    96500, 201, 35);
     
 dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
     ['Rattata', 'Zubat', 'Grimer', 'Trubbish'],
