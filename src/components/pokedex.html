@@ -42,6 +42,21 @@ aria-labelledby="pokedexModalLabel">
                            </div>
                        </div>
 
+                    </div>
+                   
+                    <div class="row justify-content-center">
+
+                       <!--Region-->
+                       <div class="form-group row col-sm-10 col-lg-6">
+                           <label class="col-2 col-form-label" for="pokedex-filter-region">Region</label>
+                           <div class="col-10">
+                               <select id="pokedex-filter-region" class="custom-select"
+                                       oninput="PokedexHelper.updateList()" style="margin-right: 8px">
+                                   <option value="" selected>All</option>
+                               </select>
+                           </div>
+                       </div>
+
                    </div>
 
                    <div class="form-group row justify-content-center">

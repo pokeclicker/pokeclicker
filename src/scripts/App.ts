@@ -42,7 +42,7 @@ class App {
             GameController.bindToolTips();
             GameController.addKeyListeners();
 
-            PokedexHelper.populateTypeFilters();
+            PokedexHelper.populateFilters();
             PokedexHelper.updateList();
 
             App.game.initialize();
