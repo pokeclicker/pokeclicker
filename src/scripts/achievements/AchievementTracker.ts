@@ -16,7 +16,7 @@ class AchievementTracker implements Feature {
     }
 
     canAccess(): boolean {
-        return App.game.party.caughtPokemon.length > 110;
+        return App.game.party.caughtPokemon.length >= 110;
     }
 
     update(delta: number): void {

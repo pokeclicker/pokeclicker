@@ -1,6 +1,7 @@
 <div
   id="achivementTrackerContainer"
   class="card sortable border-secondary mb-3"
+  data-bind="visible: App.game.achievementTracker.canAccess()"
 >
   <div class="card-header p-0" data-toggle="collapse" href="#achievementTrackerBody">
     <span style="text-align: center">Achievement Tracker</span>
