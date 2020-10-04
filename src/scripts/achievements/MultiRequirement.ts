@@ -13,9 +13,9 @@ class MultiRequirement {
         const output = [];
         this.requirements.forEach(requirement => {
             if (!requirement.isCompleted()) {
-                output.push(requirement.hint());
+                output.push(requirement.hint().replace(/\./g, ''));
             }
         });
-        return output.join(' and ');
+        return `${output.join(' and ')}.`;
     }
 }

@@ -4,6 +4,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
    <div class="modal-content">
        <div class="modal-header">
             <h5 class="modal-title" id="breedingModalLabel" data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'right' }">Day Care <span class="text-primary">ⓘ</span></h5>
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
+                    data-target="#breeding-filter" aria-expanded="false" aria-controls="breeding-filter">
+                Filters
+            </button>
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
+                    data-target="#breeding-sort" aria-expanded="false" aria-controls="breeding-sort">
+                Sort
+            </button>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -18,7 +26,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             <div class="tab-content p-3">
                 <div class="tab-pane active" id="breeding-pokemon">
                     <div class="text-left">
-                        <div class="form-row">
+                        <div class="form-row collapse" id="breeding-filter">
                             <div class="form-group col-md-6 col-6">
                                 <label>Search</label>
                                 <input autocomplete="off" class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
@@ -71,6 +79,22 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </select>
                             </div>
                         </div>
+                        <div class="form-row collapse" id="breeding-sort">
+                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySort')">
+                                <label>Sort</label>
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                                    data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                    <option data-bind="text: $data.text, value: $data.value"></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySortDirection')">
+                                <label>Sort Direction</label>
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, this.value === 'true')"
+                                    data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue().toString()]">
+                                    <option data-bind="text: $data.value ? 'Descending' : 'Ascending', value: $data.value.toString()"></option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div data-bind="visible: App.game.breeding.hasFreeEggSlot()">
                         <!-- Check if the player has any level 100 Pokemon or if they have any eggs -->
@@ -78,13 +102,13 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: BreedingController.breedableList">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: BreedingController.breedableList()">
                             <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                                 <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
                                 <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
-                                <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.gainPokemonEgg($data);if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}"></a>
+                                <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.gainPokemonEgg($data); BreedingController.filterBreedableList();if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide');}}"></a>
                             </li>
                         </ul>
                         <!-- /ko -->

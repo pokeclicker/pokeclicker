@@ -5,6 +5,9 @@ class Underground {
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
     public static counter = 0;
 
+    public static sortDirection = -1;
+    public static lastPropSort = 'none';
+
     private static _energy: KnockoutObservable<number> = ko.observable(0);
     public static upgradeList: Array<Upgrade> = [];
 
@@ -89,6 +92,7 @@ class Underground {
         } else {
             const amt = player.mineInventory[index].amount();
             player.mineInventory[index].amount(amt + num);
+            this.sortMineItems(this.lastPropSort, false);
         }
     }
 
@@ -118,6 +122,39 @@ class Underground {
         Notifier.notify({ message: `You restored ${gain} mining energy!`, type: GameConstants.NotificationOption.success });
     }
 
+    public static sortMineItems(prop: string, flip = true) {
+        const prevEl = document.querySelector(`[data-undergroundsort=${Underground.lastPropSort}]`);
+        const nextEl = prop == this.lastPropSort ? prevEl : document.querySelector(`[data-undergroundsort=${prop}]`);
+
+        // If new sort by, update old sort by
+        if (prop != this.lastPropSort) {
+            // Remove sort direction from previous element
+            if (prevEl) {
+                prevEl.textContent = this.lastPropSort;
+            }
+            this.lastPropSort = prop;
+        } else if (flip) {
+            // Flip sort direction
+            this.sortDirection *= -1;
+        }
+
+        // Update element text to dispaly sort direction
+        if (nextEl) {
+            nextEl.textContent = `${prop} ${this.sortDirection > 0 ? '▴' : '▾'}`;
+        }
+
+        player.mineInventory.sort((a, b) => {
+            switch (prop) {
+                case 'Amount':
+                    return (a.amount() - b.amount()) * this.sortDirection;
+                case 'Value':
+                    return (a.value - b.value) * this.sortDirection;
+                case 'Item':
+                    return a.name > b.name ? 1 * this.sortDirection : -1 * this.sortDirection;
+            }
+        });
+    }
+
     public static sellMineItem(id: number, amount = 1) {
         for (let i = 0; i < player.mineInventory.length; i++) {
             const item = player.mineInventory[i];
@@ -131,6 +168,7 @@ class Underground {
                     const success = Underground.gainProfit(item, sellAmt);
                     if (success) {
                         player.mineInventory[i].amount(curAmt - sellAmt);
+                        this.sortMineItems(this.lastPropSort, false);
                     }
                     return;
                 }

@@ -51,10 +51,10 @@ namespace GameConstants {
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
-    export const SHINY_CHANCE_BREEDING = 1024;
     export const SHINY_CHANCE_SHOP = 2048;
-    export const SHINY_CHANCE_STONE = 4096;
+    export const SHINY_CHANCE_STONE = 2048;
     export const SHINY_CHANCE_SAFARI = 2048;
+    export const SHINY_CHANCE_BREEDING = 1024;
 
     export const ITEM_PRICE_MULTIPLIER = 1.00045;
     export const ITEM_PRICE_DEDUCT = 1.0005;
@@ -101,6 +101,8 @@ namespace GameConstants {
     };
     export const NotificationSetting = {
         ready_to_hatch: new BooleanSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),
+        hatched: new BooleanSetting('notification.hatched', 'Egg hatched', true),
+        hatched_shiny: new BooleanSetting('notification.hatched_shiny', 'Egg hatched a shiny', true),
         route_item_found: new BooleanSetting('notification.route_item_found', 'Item found during route battle', true),
         dungeon_item_found: new BooleanSetting('notification.dungeon_item_found', 'Item found in dungeon chest', true),
         battle_item_timer: new BooleanSetting('notification.battle_item_timer', 'Battle item about to wear off', true),
@@ -110,6 +112,7 @@ namespace GameConstants {
         event_start_end: new BooleanSetting('notification.event_start_end', 'Event start/end information', true),
         dropped_item: new BooleanSetting('notification.dropped_item', 'Enemy pokemon dropped an item', true),
         ready_to_harvest: new BooleanSetting('notification.ready_to_harvest', 'Berry ready to harvest', true),
+        gym_won: new BooleanSetting('notification.gym_won', 'Gym leader defeated', true),
     };
 
     export enum DungeonTile {
@@ -289,21 +292,27 @@ namespace GameConstants {
     export function formatNumber(num: number): string {
         if (isNaN(+num)) {
             return '0';
-        } else if (num >= 1e9) {
-            num = Math.floor(num / 1e8);
-            num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return `${num}B`;
-        } else if (num >= 1e6) {
-            num = Math.floor(num / 1e5);
-            num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return `${num}M`;
-        } else if (num >= 1e3) {
-            num = Math.floor(num / 1e2);
-            num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return `${num}K`;
-        } else {
-            return num.toString();
         }
+
+        const suffixes = ['K', 'M', 'B', 'T', 'QD', 'QT'];
+        let returnNum = num;
+        let suffixCounter = -1;
+
+        while (returnNum >= 1e3 && (suffixCounter < suffixes.length - 1)) {
+            returnNum /= 1e3;
+            suffixCounter++;
+        }
+
+        if (returnNum > 1e3) {
+            return '∞';
+        }
+
+        if (suffixCounter > -1) {
+            const returnNumString = String(Math.floor(returnNum * 10) / 10);
+            return `${returnNumString}${suffixes[suffixCounter]}`;
+        }
+
+        return num.toString();
     }
 
     export enum Region {
