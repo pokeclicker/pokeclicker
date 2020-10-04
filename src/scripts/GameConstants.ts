@@ -463,12 +463,6 @@ namespace GameConstants {
         'Prism_scale',
         'Sachet',
         'Whipped_dream',
-        'Weak_Mega_Stone',
-        'Medium_Mega_Stone',
-        'Strong_Mega_Stone',
-        'Legendary_Mega_Stone',
-        'Strong_Legendary_Mega_Stone',
-        'Ultra_Legendary_Mega_Stone',
     }
 
     export enum BattleItemType {
