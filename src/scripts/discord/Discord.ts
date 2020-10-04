@@ -107,7 +107,7 @@ class Discord implements Saveable {
             return false;
         }
         // User not logged in to Discord
-        if (!this.ID) {
+        if (!this.ID()) {
             Notifier.notify({ message: 'You must sign in to Discord before attempting this code', type: GameConstants.NotificationOption.danger });
             return false;
         }
