@@ -46,7 +46,7 @@ class DailyDeal {
             return false;
         }
 
-        if (!this.item1.isStone()) {
+        if (this.item1.isStone()) {
             return false;
         }
 
