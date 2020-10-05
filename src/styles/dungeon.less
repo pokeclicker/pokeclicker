@@ -2,6 +2,10 @@
   height: 45px;
   border: 1px solid black;
   margin: 1px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.8;
+  }
 }
 
 .tile-invisible {
@@ -9,7 +13,18 @@
 }
 
 .tile-player {
-  background-color: green;
+  background: green;
+  position: relative;
+  &::after {
+    position: absolute;
+    top: calc(50% - 16px);
+    left: calc(50% - 16px);
+    content: '';
+    display: block;
+    width: 32px;
+    height: 32px;
+    background: url('../assets/images/safari/walkdown.png') no-repeat top left;
+  }
 }
 
 .tile-empty {
@@ -50,6 +65,14 @@
   -webkit-filter: brightness(0%); /* Safari 6.0 - 9.0 */
   filter: brightness(0%);
   opacity: 0.2;
+  body.cyborg &,
+  body.darkly &,
+  body.slate &,
+  body.superhero & {
+    -webkit-filter: brightness(100); /* Safari 6.0 - 9.0 */
+    filter: brightness(100);
+    opacity: 0.3;
+  }
 }
 
 .dungeon-pokemon-preview {

@@ -90,6 +90,7 @@ class BreedingController {
 
     public static initialize() {
         Object.keys(BreedingController.filter).forEach(e => (<KnockoutObservable<any>> BreedingController.filter[e]).subscribe(() => BreedingController.filterBreedableList()));
+        App.game.party._caughtPokemon.subscribe(() => BreedingController.filterBreedableList());
     }
 
     public static openBreedingModal() {
