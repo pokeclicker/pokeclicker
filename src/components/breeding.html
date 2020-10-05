@@ -141,26 +141,25 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 </div> 
 
                 <div class="tab-pane" id="breeding-fossils">
-                        <p class="text-danger" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
-                            Unfortunately, you don't have any free eggslots.
-                        </p>
+                    <p class="text-danger" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
+                        Unfortunately, you don't have any free eggslots.
+                    </p>
 
-                        <p class="text-danger" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length">
-                            <span data-bind="text: App.game.breeding.hasFreeEggSlot() ? 'Unfortunately,' : 'Even more unfortunately,'"></span> you don't have any fossils to breed.
-                        </p>
+                    <p class="text-danger" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length">
+                        <span data-bind="text: App.game.breeding.hasFreeEggSlot() ? 'Unfortunately,' : 'Even more unfortunately,'"></span> you don't have any fossils to breed.
+                    </p>
 
-                        <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false)">
-                            <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
-                                <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
-                                <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
-                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount()">amount</span>
-                                <a class="overlay" href="#breed" data-bind="click: function() { Underground.sellMineItem($data.id); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }"></a>
-                            </li>
-                        </ul>
-                        <!-- /ko -->
-                    </div>
-                </div> 
+                    <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length -->
+                    <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false)">
+                        <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
+                            <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
+                            <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
+                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount()">amount</span>
+                            <a class="overlay" href="#breed" data-bind="click: function() { Underground.sellMineItem($data.id); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }"></a>
+                        </li>
+                    </ul>
+                    <!-- /ko -->
+                </div>
             </div>
        </div>
        <div class="modal-footer">
