@@ -5,46 +5,50 @@ aria-labelledby="pokedexModalLabel">
        <div class="modal-header">
            <h4 style="margin-bottom: 0">Pokédex</h4>
            <button style="float:right;" class="btn btn-secondary" type="button" data-toggle="collapse"
-                   data-target="#pokedex-collapse" aria-expanded="false" aria-controls="pokedex-collapse">
+                   data-target="#pokedex-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container">
                Filters
            </button>
        </div>
        <div class="modal-body">
+            <div class="collapse" id="pokedex-filter-container">
+                <div class="container-fluid" style="border-bottom: 1px solid #eceeef">
+                    <div class="form-row text-left">
 
-           <div class="collapse" id="pokedex-collapse">
-               <div class="container-fluid" style="border-bottom: 1px solid #eceeef">
-                   <div class="row justify-content-center">
+                        <!--Name-->
+                        <div class="form-group col-md-6 col-6">
+                            <label>Name</label>
+                            <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
+                                   oninput="PokedexHelper.updateList()">
+                        </div>
 
-                       <!--Name-->
-                       <div class="form-group row col-sm-10 col-lg-6">
-                           <label class="col-2 col-form-label">Name</label>
-                           <div class="col-10">
-                               <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
-                                      oninput="PokedexHelper.updateList()">
-                           </div>
-                       </div>
+                        <!--Region-->
+                        <div class="form-group col-md-6 col-6">
+                            <label>Region</label>
+                            <select id="pokedex-filter-region" class="custom-select"
+                                    oninput="PokedexHelper.updateList()" style="margin-right: 8px">
+                                <option value="" selected>All</option>
+                            </select>
+                        </div>
 
-                       <!--Types-->
-                       <div class="form-group row col-sm-10 col-lg-6">
-                           <label class="col-2 col-form-label" for="pokedex-filter-type1">Type</label>
-                           <div class="col-5">
-                               <select id="pokedex-filter-type1" class="custom-select"
-                                       oninput="PokedexHelper.updateList()" style="margin-right: 8px">
-                                   <option value="" selected>All</option>
-                               </select>
-                           </div>
-                           <label class="sr-only" for="pokedex-filter-type2">Type</label>
-                           <div class="col-5">
-                               <select id="pokedex-filter-type2" class="custom-select"
-                                       oninput="PokedexHelper.updateList()">
-                                   <option value="" selected>All</option>
-                               </select>
-                           </div>
-                       </div>
+                        <!--Types-->
+                        <div class="form-group col-md-6 col-6">
+                            <label>Type</label>
+                            <select id="pokedex-filter-type1" class="custom-select"
+                                    oninput="PokedexHelper.updateList()" style="margin-right: 8px">
+                                <option value="" selected>All</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 col-6">
+                            <label>Type</label>
+                            <select id="pokedex-filter-type2" class="custom-select"
+                                    oninput="PokedexHelper.updateList()">
+                                <option value="" selected>All</option>
+                            </select>
+                        </div>
 
-                   </div>
+                    </div>
 
-                   <div class="form-group row justify-content-center">
+                    <div class="form-group row justify-content-center">
                        <!--Uncaught-->
                        <div class="col-sm-2">
                            <label class="form-check-label">
