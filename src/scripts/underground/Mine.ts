@@ -318,7 +318,7 @@ class Mine {
             rewardNumbers: this.rewardNumbers,
             prospectResult: this.prospectResult(),
             skipsRemaining: this.skipsRemaining(),
-        }
+        };
         return mineSave;
     }
 }
