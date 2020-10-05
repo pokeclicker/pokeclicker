@@ -5,7 +5,6 @@ class Save {
     public static store(player: Player) {
         const json = JSON.stringify(player);
         localStorage.setItem('player', json);
-        localStorage.setItem('mine', Mine.serialize());
         localStorage.setItem('settings', Settings.save());
         localStorage.setItem('save', JSON.stringify(this.getSaveObject()));
 
@@ -67,15 +66,6 @@ class Save {
             try {
                 localStorage.backupSave = JSON.stringify(backupSaveData);
             } catch (e) {}
-        }
-    }
-
-    public static loadMine() {
-        const mine = localStorage.getItem('mine');
-        if (mine) {
-            Mine.loadSavedMine(JSON.parse(mine));
-        } else {
-            Mine.loadMine();
         }
     }
 

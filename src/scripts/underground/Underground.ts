@@ -226,6 +226,13 @@ class Underground {
             }
         }
         this.energy = saveObject['energy'] || 0;
+
+        const mine = saveObject['mine'];
+        if (mine) {
+            Mine.loadSavedMine(mine);
+        } else {
+            Mine.loadMine();
+        }
     }
 
     public static save(): Record<string, any> {
@@ -238,6 +245,7 @@ class Underground {
         }
         undergroundSave['upgrades'] = upgradesSave;
         undergroundSave['energy'] = this.energy;
+        undergroundSave['mine'] = Mine.save();
         return undergroundSave;
     }
 

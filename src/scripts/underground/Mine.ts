@@ -297,11 +297,7 @@ class Mine {
     }
 
     public static loadSavedMine(mine) {
-        this.grid = mine.grid.map((row) => {
-            return row.map((num) => {
-                return ko.observable(num);
-            });
-        });
+        this.grid = mine.grid.map(row => row.map(val => ko.observable(val))),
         this.rewardGrid = mine.rewardGrid;
         this.itemsFound(mine.itemsFound);
         this.itemsBuried(mine.itemsBuried);
@@ -313,18 +309,17 @@ class Mine {
         Underground.showMine();
     }
 
-    public static serialize() {
-        const mine = {
-            grid: this.grid,
+    public static save(): Record<string, any> {
+        const mineSave = {
+            grid: this.grid.map(row => row.map(val => val())),
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound(),
             itemsBuried: this.itemsBuried(),
             rewardNumbers: this.rewardNumbers,
             prospectResult: this.prospectResult(),
             skipsRemaining: this.skipsRemaining(),
-        };
-
-        return ko.toJSON(mine);
+        }
+        return mineSave;
     }
 }
 
