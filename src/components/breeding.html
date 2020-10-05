@@ -4,6 +4,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
    <div class="modal-content">
        <div class="modal-header">
             <h5 class="modal-title" id="breedingModalLabel" data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'right' }">Day Care <span class="text-primary">ⓘ</span></h5>
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
+                    data-target="#breeding-filter" aria-expanded="false" aria-controls="breeding-filter">
+                Filters
+            </button>
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
+                    data-target="#breeding-sort" aria-expanded="false" aria-controls="breeding-sort">
+                Sort
+            </button>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -18,7 +26,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             <div class="tab-content p-3">
                 <div class="tab-pane active" id="breeding-pokemon">
                     <div class="text-left">
-                        <div class="form-row">
+                        <div class="form-row collapse" id="breeding-filter">
                             <div class="form-group col-md-6 col-6">
                                 <label>Search</label>
                                 <input autocomplete="off" class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
@@ -68,6 +76,22 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
                                     <!-- /ko -->
                                     <option value="-1">None</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row collapse" id="breeding-sort">
+                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySort')">
+                                <label>Sort</label>
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                                    data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                    <option data-bind="text: $data.text, value: $data.value"></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySortDirection')">
+                                <label>Sort Direction</label>
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, this.value === 'true')"
+                                    data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue().toString()]">
+                                    <option data-bind="text: $data.value ? 'Descending' : 'Ascending', value: $data.value.toString()"></option>
                                 </select>
                             </div>
                         </div>

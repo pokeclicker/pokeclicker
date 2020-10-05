@@ -90,6 +90,14 @@ Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress dis
     'percentage'
 ));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
+Settings.add(new MultipleChoiceSetting('backgroundImage', 'Background image:',
+    [
+        new SettingOption('Day', 'background-day'),
+        new SettingOption('Night', 'background-night'),
+        new SettingOption('Dynamic', 'background-dynamic'),
+    ],
+    'background-day'
+));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
@@ -119,3 +127,10 @@ Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
     SortOptions.id
 ));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
+
+/*
+ * SUBSCRIBERS
+ */
+Settings.getSetting('backgroundImage').observableValue.subscribe(newValue => {
+    newValue == 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
+});
