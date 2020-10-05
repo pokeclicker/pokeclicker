@@ -3,7 +3,7 @@
 class PokemonLeague extends Town {
     public gymList: KnockoutObservableArray<KnockoutObservable<Gym>>;
 
-    constructor(name: string, region: GameConstants.Region, requirements: Requirement[], shop: Shop, gyms: string[]) {
+    constructor(name: string, region: GameConstants.Region, requirements: Array<Requirement | OneFromManyRequirement>, shop: Shop, gyms: string[]) {
         super(name, region, { requirements, shop });
         this.gym(null);
         this.gymList = ko.observableArray<KnockoutObservable<Gym>>();
