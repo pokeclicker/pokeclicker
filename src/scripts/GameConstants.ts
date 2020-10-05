@@ -634,6 +634,10 @@ namespace GameConstants {
         KalosGyms,
     ];
 
+    export function getGymIndex(gym: string): number {
+        return GameConstants.RegionGyms.flat().findIndex(g => g === gym);
+    }
+
     export const KantoDungeons = [
         'Viridian Forest',
         'Digletts Cave',
@@ -789,6 +793,10 @@ namespace GameConstants {
         UnovaDungeons,
         KalosDungeons,
     ];
+
+    export function getDungeonIndex(dungeon: string): number {
+        return GameConstants.RegionDungeons.flat().findIndex(d => d === dungeon);
+    }
 
     export const StartingTowns = [
         'Pallet Town',

@@ -49,7 +49,7 @@ class QuestLineHelper {
                 ],
             });
         };
-        const pewter = new CustomQuest(1, pewterReward, 'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.', () => App.game.statistics.gymsDefeated[Statistics.getGymIndex('Pewter City')](), 0);
+        const pewter = new CustomQuest(1, pewterReward, 'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.', () => App.game.statistics.gymsDefeated[GameConstants.getGymIndex('Pewter City')](), 0);
         tutorial.addQuest(pewter);
 
         App.game.quests.questLines().push(tutorial);

@@ -6,4 +6,5 @@ import DataStore from './DataStore';
 Object.assign(<any>window, {
     DataStore,
     BadgeCase: DataStore.badge,
+    Statistics: DataStore.statistics,
 });
