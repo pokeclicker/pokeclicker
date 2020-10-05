@@ -24,7 +24,7 @@ namespace GameConstants {
     export const MIN_LOAD_TIME = 500; // 0.5 Seconds
     export const MAX_LOAD_TIME = 20000; // 20 Seconds
 
-    export const MAX_AVAILABLE_REGION = 3; // Sinnoh
+    export const MAX_AVAILABLE_REGION = 4; // Unova
 
     export const TotalPokemonsPerRegion = [
         151, // 151 - Kanto
@@ -742,7 +742,6 @@ namespace GameConstants {
     export const UnovaDungeons = [
         'Pledge Grove',
         'Floccesy Ranch',
-        'Virbank Complex',    //Optional dungeon, contains no unique Pokémon, safe to scrap
         'Liberty Garden',
         'Castelia Sewers',
         'Relic Passage',
@@ -753,18 +752,15 @@ namespace GameConstants {
         'Mistralton Cave',
         'Celestial Tower',
         'Reversal Mountain',
-        'Strange House',    //Optional dungeon, contains no unique Pokémon, safe to scrap
         'Undella Bay',    //Should really be a route
         'Seaside Cave',
         'Giant Chasm',
         'Abundant Shrine',
-        'Cave of Being',    //Contains gen 4 trio only
         'Victory Road Unova',
         'Twist Mountain',
         'Dragonspiral Tower',
         'Moor of Icirrus',
         'Pinwheel Forest',
-        'Wellspring Cave',    //Optional dungeon, contains no unique Pokémon, safe to scrap
         'Dreamyard',
         'P2 Laboratory',
     ];
