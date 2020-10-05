@@ -310,6 +310,9 @@ class Mine {
     }
 
     public static save(): Record<string, any> {
+        if (this.grid == null) {
+            this.loadMine();
+        }
         const mineSave = {
             grid: this.grid.map(row => row.map(val => val())),
             rewardGrid: this.rewardGrid,
