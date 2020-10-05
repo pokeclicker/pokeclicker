@@ -120,6 +120,18 @@ class Egg implements Saveable {
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id);
         }
 
+        // Unown may hatch another Unown that's not available in the Ruins of Alph dungeon.
+        if (Math.floor(pokemonID) === 201) {
+            const randomID = GameConstants.randomIntBetween(0, 27);
+            const foundID = 201 + (randomID/100);
+            const foundUnown = PokemonHelper.getPokemonById(foundID);
+
+            if (!App.game.party.alreadyCaughtPokemon(foundID)) {
+                Notifier.notify({ message: `You also found ${GameHelper.anOrA(foundUnown.name)} ${foundUnown.name} nearby!`, type: GameConstants.NotificationOption.success });
+                App.game.party.gainPokemonById(foundID);
+            }
+        }
+
         // Update statistics
         GameHelper.incrementObservable(App.game.statistics.pokemonHatched[pokemonID]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonHatched);
