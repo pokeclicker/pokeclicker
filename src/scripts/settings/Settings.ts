@@ -119,7 +119,7 @@ Object.values(GameConstants.NotificationSetting).forEach(setting => {
  */
 const sortsettings = Object.keys(SortOptionConfigs).map(
     function(opt) {
-        return new SettingOption(SortOptionConfigs[opt].text, parseInt(opt));
+        return new SettingOption(SortOptionConfigs[opt].text, parseInt(opt, 10));
     }
 );
 Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
