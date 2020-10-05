@@ -3,7 +3,7 @@
 class PokemonLeague extends Town {
     public gymList: KnockoutObservableArray<KnockoutObservable<Gym>>;
 
-    constructor(name: string, region: GameConstants.Region, requirements: Requirement[], shop: Shop, gyms: string[]) {
+    constructor(name: string, region: GameConstants.Region, requirements: Array<Requirement | OneFromManyRequirement>, shop: Shop, gyms: string[]) {
         super(name, region, { requirements, shop });
         this.gym(null);
         this.gymList = ko.observableArray<KnockoutObservable<Gym>>();
@@ -75,3 +75,29 @@ TownList['Pokemon League Sinnoh'] = new PokemonLeague(
 );
 (<PokemonLeague>TownList['Pokemon League Sinnoh']).setupGymTowns();
 
+TownList['Pokemon League Unova'] = new PokemonLeague(
+    'Pokemon League Unova',
+    GameConstants.Region.unova,
+    [
+        new RouteKillRequirement(10, 23),
+        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Unova')),
+    ],
+    indigoPlateauShop,
+    ['Elite Shauntal', 'Elite Marshal', 'Elite Grimsley', 'Elite Caitlin', 'Champion Iris']
+);
+(<PokemonLeague>TownList['Pokemon League Unova']).setupGymTowns();
+
+TownList['Pokemon League Kalos'] = new PokemonLeague(
+    'Pokemon League Kalos',
+    GameConstants.Region.kalos,
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, 21),
+            new RouteKillRequirement(10, 22),
+        ]),
+        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Kalos')),
+    ],
+    indigoPlateauShop,
+    ['Elite Malva', 'Elite Siebold', 'Elite Wikstrom', 'Elite Drasna', 'Champion Diantha']
+);
+(<PokemonLeague>TownList['Pokemon League Kalos']).setupGymTowns();
