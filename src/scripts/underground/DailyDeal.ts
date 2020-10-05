@@ -39,7 +39,35 @@ class DailyDeal {
     }
 
     private isValid(dealList: Array<DailyDeal>): boolean {
-        return ( (this.item1.name !== this.item2.name) && !DailyDeal.reverseDealExists(this.item1.name, this.item2.name, dealList) && !this.item1.isStone() );
+        const item1Name = this.item1.name;
+        const item2Name = this.item2.name;
+
+        if (item1Name == item2Name) {
+            return false;
+        }
+
+        if (this.item1.isStone()) {
+            return false;
+        }
+
+        if (DailyDeal.sameDealExists(item1Name, item2Name, dealList)) {
+            return false;
+        }
+
+        if (DailyDeal.reverseDealExists(item1Name, item2Name, dealList)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private static sameDealExists(name1: string, name2: string, dealList: Array<DailyDeal>): boolean {
+        for (const deal of dealList) {
+            if (deal.item1.name == name1 && deal.item2.name == name2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static reverseDealExists(name1: string, name2: string, dealList: Array<DailyDeal>): boolean {
