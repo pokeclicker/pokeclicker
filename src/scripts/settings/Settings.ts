@@ -89,6 +89,14 @@ Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress dis
     ],
     'percentage'
 ));
+Settings.add(new MultipleChoiceSetting('shopButtons', 'Shop amount buttons:',
+    [
+        new SettingOption('+10, +100', 'original'),
+        new SettingOption('+100, +1000', 'bigplus'),
+        new SettingOption('\u00d710, \u00f710', 'multiplication'),
+    ],
+    'original'
+));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new MultipleChoiceSetting('backgroundImage', 'Background image:',
     [
