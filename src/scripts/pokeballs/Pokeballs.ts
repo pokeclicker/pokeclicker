@@ -18,17 +18,22 @@ class Pokeballs implements Feature {
     private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _notCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
 
+    public selectedSelection: KnockoutObservable<KnockoutObservable<GameConstants.Pokeball>>;
+    public selectedTitle: KnockoutObservable<string>;
+
     constructor() {
         this.pokeballs = [
-            new Pokeball(GameConstants.Pokeball.Pokeball, 0, 1250, 25),
-            new Pokeball(GameConstants.Pokeball.Greatball, 5, 1000, 0),
-            new Pokeball(GameConstants.Pokeball.Ultraball, 10, 750, 0),
-            new Pokeball(GameConstants.Pokeball.Masterball, 100, 500, 0),
+            new Pokeball(GameConstants.Pokeball.Pokeball, 0, 1250, 'Pokeball-small', 'A stanard Pokeball', 25),
+            new Pokeball(GameConstants.Pokeball.Greatball, 5, 1000, 'Greatball-small', '+5% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Ultraball, 10, 750, 'Ultraball-small', '+10% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Masterball, 100, 500, 'Masterball-small', '100% chance to catch'),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
         this._notCaughtSelection = ko.observable(this.defaults.notCaughtSelection);
         this._notCaughtShinySelection = ko.observable(this.defaults.notCaughtShinySelection);
+        this.selectedTitle = ko.observable('');
+        this.selectedSelection = ko.observable(this._alreadyCaughtSelection);
     }
 
     initialize(): void {

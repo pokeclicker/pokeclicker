@@ -17,10 +17,10 @@
                     <th width="20%" data-toggle="tooltip" title="Uncaptured Shiny Pokémon will use this ball selection">✨</th>
                 </tr>
                 <tr>
-                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: App.game.pokeballs.alreadyCaughtSelection}"></td>
-                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: App.game.pokeballs.alreadyCaughtShinySelection}"></td>
-                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: App.game.pokeballs.notCaughtSelection}"></td>
-                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: App.game.pokeballs.notCaughtShinySelection}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.alreadyCaughtSelection, 'field': App.game.pokeballs._alreadyCaughtSelection, 'title': 'Already Caught Pokemon'}}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.alreadyCaughtShinySelection, 'field': App.game.pokeballs._alreadyCaughtShinySelection, 'title': 'Already Caught Shiny Pokemon'}}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.notCaughtSelection, 'field': App.game.pokeballs._notCaughtSelection, 'title': 'New Pokemon'}}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.notCaughtShinySelection, 'field': App.game.pokeballs._notCaughtShinySelection, 'title': 'New Shiny Pokemon'}}"></td>
                 </tr>
                 <tr>
                     <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.pokeballs[App.game.pokeballs.alreadyCaughtSelection]}"></td>
@@ -34,7 +34,7 @@
 
     <script type="text/html" id="selectedPokeballDisplayTemplate">
         <img class="pokeball-small clickable pokeball-selected" 
-            data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data] + ($data < 0 ? '.png' : '-small.png')}, click: function() {$('#pokeballSelectorModal').modal('show')}"/>
+            data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.value] + ($data.value < 0 ? '.png' : '-small.png')}, click: function() {App.game.pokeballs.selectedSelection($data.field); App.game.pokeballs.selectedTitle($data.title); $('#pokeballSelectorModal').modal('show')}"/>
     </script>
 
     <script type="text/html" id="selectedPokeballCountTemplate">
