@@ -1,3 +1,5 @@
+///<reference path="Pokeball.ts"/>
+
 class Pokeballs implements Feature {
     name = 'Pokeballs';
     saveKey = 'pokeballs';
@@ -10,17 +12,19 @@ class Pokeballs implements Feature {
         'notCaughtShinySelection': GameConstants.Pokeball.Pokeball,
     };
 
-    private pokeballCatchBonus: number[];
-    private pokeballCatchTime: number[];
-
-    public pokeballs: ArrayOfObservables<number>;
+    public pokeballs: Pokeball[];
     private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _alreadyCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
     private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _notCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
 
     constructor() {
-        this.pokeballs = new ArrayOfObservables(this.defaults.pokeballs);
+        this.pokeballs = [
+            new Pokeball(GameConstants.Pokeball.Pokeball, 0, 1250, 25),
+            new Pokeball(GameConstants.Pokeball.Greatball, 5, 1000, 0),
+            new Pokeball(GameConstants.Pokeball.Ultraball, 10, 750, 0),
+            new Pokeball(GameConstants.Pokeball.Masterball, 100, 500, 0),
+        ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
         this._notCaughtSelection = ko.observable(this.defaults.notCaughtSelection);
@@ -28,8 +32,6 @@ class Pokeballs implements Feature {
     }
 
     initialize(): void {
-        this.pokeballCatchBonus = [0, 5, 10, 100];
-        this.pokeballCatchTime = [1250, 1000, 750, 500];
     }
 
     /**
@@ -64,7 +66,7 @@ class Pokeballs implements Feature {
 
         // Check which Pokeballs we have in stock that are of equal or lesser than selection
         for (let i: number = pref; i >= 0; i--) {
-            if (this.pokeballs[i] > 0) {
+            if (this.pokeballs[i].quantity() > 0) {
                 use = i;
                 break;
             }
@@ -73,20 +75,20 @@ class Pokeballs implements Feature {
     }
 
     calculateCatchTime(ball: GameConstants.Pokeball): number {
-        return this.pokeballCatchTime[ball];
+        return this.pokeballs[ball].catchTime;
     }
 
     gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
-        this.pokeballs[ball] += amount;
+        GameHelper.incrementObservable(this.pokeballs[ball].quantity, amount);
     }
 
     usePokeball(ball: GameConstants.Pokeball): void {
-        this.pokeballs[ball] -= 1;
+        GameHelper.incrementObservable(this.pokeballs[ball].quantity, -1);
         GameHelper.incrementObservable(App.game.statistics.pokeballsUsed[ball]);
     }
 
     getCatchBonus(ball: GameConstants.Pokeball) {
-        return this.pokeballCatchBonus[ball];
+        return this.pokeballs[ball].catchBonus;
     }
 
     canAccess(): boolean {
@@ -98,16 +100,8 @@ class Pokeballs implements Feature {
             return;
         }
 
-        if (json['pokeballs'] == null) {
-            this.pokeballs = new ArrayOfObservables(this.defaults.pokeballs);
-        } else {
-            const pokeballsJson = json['pokeballs'];
-            this.pokeballs = new ArrayOfObservables([
-                pokeballsJson[GameConstants.Pokeball.Pokeball],
-                pokeballsJson[GameConstants.Pokeball.Greatball],
-                pokeballsJson[GameConstants.Pokeball.Ultraball],
-                pokeballsJson[GameConstants.Pokeball.Masterball],
-            ]);
+        if (json['pokeballs'] != null) {
+            json['pokeballs'].map((amt: number, ind: number) => this.pokeballs[ind].quantity(amt));
         }
         this.notCaughtSelection = json['notCaughtSelection'] ?? this.defaults.notCaughtSelection;
         this.notCaughtShinySelection = json['notCaughtShinySelection'] ?? this.defaults.notCaughtShinySelection;
@@ -117,12 +111,7 @@ class Pokeballs implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            'pokeballs': [
-                this.pokeballs[GameConstants.Pokeball.Pokeball],
-                this.pokeballs[GameConstants.Pokeball.Greatball],
-                this.pokeballs[GameConstants.Pokeball.Ultraball],
-                this.pokeballs[GameConstants.Pokeball.Masterball],
-            ],
+            'pokeballs': this.pokeballs.map(p => p.quantity()),
             'notCaughtSelection': this.notCaughtSelection,
             'notCaughtShinySelection': this.notCaughtShinySelection,
             'alreadyCaughtSelection': this.alreadyCaughtSelection,
