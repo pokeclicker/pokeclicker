@@ -31,14 +31,18 @@
     <!-- ko if: App.game.achievementTracker.hasTrackedAchievement()-->
     <table class="table table-sm m-0">
       <tbody>
-        <tr class="achievement-tracker-name">
-          <td colspan="2" data-bind="text: App.game.achievementTracker.trackedAchievement().name">
-            Achievement Name
-          </td>
-        </tr>
         <tr>
-          <td colspan="2" data-bind="text: App.game.achievementTracker.trackedAchievement().description">
-            Achievement Description
+          <td>
+            <div>
+              <span class="achievement-header achievement-tracker-name" data-bind="text: App.game.achievementTracker.trackedAchievement().name">
+                Achievement Name
+              </span>
+            </div>
+            <div>
+              <span class="achievement-header" data-bind="text: App.game.achievementTracker.trackedAchievement().description">
+                Achievement Description
+              </span>
+            </div>
           </td>
         </tr>
         <tr>
