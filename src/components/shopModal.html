@@ -17,7 +17,13 @@
                        <button class="shopItem clickable btn btn-block btn-secondary"
                            data-bind="click: function() {ShopHandler.setSelected($index())},
                            css: { active: ShopHandler.selected() == $index() },
-                           attr: { disabled: !$data.isAvailable() }">
+                           attr: { disabled: !$data.isAvailable() },
+                           tooltip: {
+                              title: $data.description ? $data.name().replace('_', ' ') + '<br/>' + $data.description : '',
+                              trigger: 'hover',
+                              placement:'bottom',
+                              html: true
+                            }">
                            <knockout data-bind="if: ($data instanceof CaughtIndicatingItem)">
                                <span style="position: absolute; top: 15px; right: 20px;" 
                                      data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
@@ -45,8 +51,8 @@
                         </div>
                         <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
                                 value="1" min="1" required name="amountOfItems"
-                                oninput="ShopHandler.amount(parseInt($(this).val().toString()) || 0);"
-                                onchange="ShopHandler.amount(parseInt($(this).val().toString()) || 0);" title=""/>
+                                oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
+                                onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
                         <div class="input-group-append">
                             <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
                                 +10
