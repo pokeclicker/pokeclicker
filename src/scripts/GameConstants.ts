@@ -406,7 +406,7 @@ namespace GameConstants {
         1: new Set(['Blackthorn City', 'Mt Silver']),
         2: new Set(['Cave of Origin', 'Sky Pillar']),
         3: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
-        4: new Set(['Chargestone Cave', 'Driftveil City']), 
+        4: new Set(['Chargestone Cave', 'Driftveil City']),
     };
 
     export const PowerPlantAreas = {
@@ -422,7 +422,7 @@ namespace GameConstants {
         1: new Set(['Olivine City', 'Burned Tower']),
         2: new Set(['Lavaridge Town', 'Petalburg City', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
         3: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
-        4: new Set(['Liberty Garden', 'Strange House', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
+        4: new Set(['Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
     };
 
     export const GraveyardAreas = {
