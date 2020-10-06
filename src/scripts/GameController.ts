@@ -114,10 +114,8 @@ class GameController {
                 return;
             }
 
-            const code = e.originalEvent.code;
-
             if (App.game.gameState === GameConstants.GameState.dungeon) {
-                switch (code) {
+                switch (e.code) {
                     case 'ArrowUp':
                     case 'KeyW':
                         DungeonRunner.map.moveUp();
@@ -143,7 +141,7 @@ class GameController {
                 }
                 e.preventDefault();
             } else if (App.game.gameState === GameConstants.GameState.town) {
-                if (code === 'Space') {
+                if (e.code === 'Space') {
                     if (player.town().gym()) {
                         GymRunner.startGym(player.town().gym());
                     } else if (player.town().dungeon()) {
@@ -169,27 +167,25 @@ class GameController {
         });
 
         $(document).on('keydown', function (e) {
-            const code = e.originalEvent.code;
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyCodeToDirection[code];
+                const dir = GameConstants.KeyCodeToDirection[e.code];
                 if (dir) {
                     e.preventDefault();
                     Safari.move(dir);
                 }
-                if (code === 'Space') {
+                if (e.code === 'Space') {
                     e.preventDefault();
                 }
             }
         });
 
         $(document).on('keyup', function (e) {
-            const code = e.originalEvent.code;
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyCodeToDirection[code];
+                const dir = GameConstants.KeyCodeToDirection[e.code];
                 if (dir) {
                     e.preventDefault();
                     Safari.stop(dir);
-                } else if (code === 'Space') {
+                } else if (e.code === 'Space') {
                     e.preventDefault();
                 }
             }

@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/pokeclicker/pokeclicker#readme",
   "devDependencies": {
-    "@types/jquery": "^3.3.31",
+    "@types/jquery": "^3.5.2",
     "@types/sortablejs": "^1.10.5",
     "babel-core": "^6.26.3",
     "babel-preset-env": "^1.7.0",
