@@ -233,15 +233,15 @@ class AchievementHandler {
             }
             // Gyms
             GameConstants.RegionGyms[region]?.forEach(gym => {
-                AchievementHandler.addAchievement(`${gym} Gym regular`, 'Clear 10 times', new ClearGymRequirement(10, Statistics.getGymIndex(gym)), 1, region);
-                AchievementHandler.addAchievement(`${gym} Gym ruler`, 'Clear 100 times', new ClearGymRequirement( 100, Statistics.getGymIndex(gym)), 2, region);
-                AchievementHandler.addAchievement(`${gym} Gym owner`, 'Clear 1,000 times', new ClearGymRequirement(1000, Statistics.getGymIndex(gym)), 3, region);
+                AchievementHandler.addAchievement(`${gym} Gym regular`, `Clear ${gym} Gym 10 times`, new ClearGymRequirement(10, Statistics.getGymIndex(gym)), 1, region);
+                AchievementHandler.addAchievement(`${gym} Gym ruler`, `Clear ${gym} Gym 100 times`, new ClearGymRequirement( 100, Statistics.getGymIndex(gym)), 2, region);
+                AchievementHandler.addAchievement(`${gym} Gym owner`, `Clear ${gym} Gym 1,000 times`, new ClearGymRequirement(1000, Statistics.getGymIndex(gym)), 3, region);
             });
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
-                AchievementHandler.addAchievement(`${dungeon} explorer`, 'Clear 10 times', new ClearDungeonRequirement(10, Statistics.getDungeonIndex(dungeon)), 1, region);
-                AchievementHandler.addAchievement(`${dungeon} expert`, 'Clear 100 times', new ClearDungeonRequirement(100, Statistics.getDungeonIndex(dungeon)), 2, region);
-                AchievementHandler.addAchievement(`${dungeon} hermit`, 'Clear 1,000 times', new ClearDungeonRequirement(1000, Statistics.getDungeonIndex(dungeon)), 3, region);
+                AchievementHandler.addAchievement(`${dungeon} explorer`, `Clear ${dungeon} 10 times`, new ClearDungeonRequirement(10, Statistics.getDungeonIndex(dungeon)), 1, region);
+                AchievementHandler.addAchievement(`${dungeon} expert`, `Clear ${dungeon} 100 times`, new ClearDungeonRequirement(100, Statistics.getDungeonIndex(dungeon)), 2, region);
+                AchievementHandler.addAchievement(`${dungeon} hermit`, `Clear ${dungeon} 1,000 times`, new ClearDungeonRequirement(1000, Statistics.getDungeonIndex(dungeon)), 3, region);
             });
         });
 
