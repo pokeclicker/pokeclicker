@@ -31,6 +31,25 @@ class Changelog {
 const changelogItems = [
     // v0.5.5
     new Changelog(changelogType.UPDATE, 'v0.5.5'),
+    new Changelog(changelogType.NEW, 'Added Damage Calculator to Start Menu'),
+    new Changelog(changelogType.NEW, 'Background settings Night and Dynamic added'),
+    new Changelog(changelogType.NEW, 'Walking in the Safari Zone will now add steps to your eggs'),
+    new Changelog(changelogType.NEW, 'Achievements added for reaching maximum level on oak items'),
+    new Changelog(changelogType.NEW, 'Added Achievement Tracker module'),
+    new Changelog(changelogType.NEW, 'Added region filter to Pokédex'),
+    new Changelog(changelogType.NEW, 'Added sort dropdown to the Hatchery'),
+    new Changelog(changelogType.NEW, 'Introduction to some gameplay elements added for new players'),
+    new Changelog(changelogType.NEW, 'Eggs will wobble when they are ready to hatch'),
+    new Changelog(changelogType.NEW, 'Start Menu contains a link to the Wiki'),
+    new Changelog(changelogType.CHANGE, 'Can hide the Pokémon filter in the Hatchery'),
+    new Changelog(changelogType.CHANGE, 'Can see your list of eggs and fossils even if you cannot breed them'),
+    new Changelog(changelogType.CHANGE, 'Unobtained pokemon will show as white on dark themes'),
+    new Changelog(changelogType.CHANGE, 'Underground will no longer contain multiple deals with the same items'),
+    new Changelog(changelogType.FIXED, 'Shop prices should no longer overflow when too large'),
+    new Changelog(changelogType.FIXED, 'Discord usernames should no longer affect saves'),
+
+    // v0.5.5
+    new Changelog(changelogType.UPDATE, 'v0.5.5'),
     new Changelog(changelogType.NEW, 'Achievements can now be filtered'),
     new Changelog(changelogType.NEW, 'Can sort Underground items by clicking on table titles'),
     new Changelog(changelogType.NEW, 'NPCs now in towns, will provide dialog that will help the player complete their Pokédex'),
