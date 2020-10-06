@@ -254,7 +254,7 @@ class Underground {
 
 $(document).ready(function () {
     $('body').on('click', '.mineSquare', function () {
-        Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
+        Mine.click(parseInt(this.dataset.i, 10), parseInt(this.dataset.j, 10));
     });
 });
 
