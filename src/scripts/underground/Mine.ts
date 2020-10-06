@@ -44,7 +44,10 @@ class Mine {
         }
         Mine.loadingNewLayer = false;
         Mine.itemsFound(0);
+        
+        ko.cleanNode(document.getElementById('mineBody'));
         Underground.showMine();
+        ko.applyBindings(null, document.getElementById('mineBody'));
     }
 
     private static getRandomCoord(max: number, size: number): number {
@@ -291,9 +294,7 @@ class Mine {
 
     private static completed() {
         Notifier.notify({ message: 'You dig deeper...', type: GameConstants.NotificationOption.info });
-        ko.cleanNode(document.getElementById('mineBody'));
         Mine.loadMine();
-        ko.applyBindings(null, document.getElementById('mineBody'));
     }
 
     public static loadSavedMine(mine) {
