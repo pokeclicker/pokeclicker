@@ -30,7 +30,7 @@ class PokedexHelper {
 
     public static filteredList: KnockoutObservableArray<Record<string, any>> = ko.observableArray([]);
 
-    public static populateTypeFilters() {
+    public static populateFilters() {
         let options = $('#pokedex-filter-type1');
         $.each(PokemonType, function () {
             if (isNaN(Number(this)) && this != PokemonType.None) {
@@ -44,6 +44,11 @@ class PokedexHelper {
                 options.append($('<option />').val(PokemonType[this]).text(this));
             }
         });
+        
+        options = $('#pokedex-filter-region');
+        for (let i = 0;i <= GameConstants.MAX_AVAILABLE_REGION;i++) {
+            options.append($('<option />').val(i).text(GameConstants.camelCaseToString(GameConstants.Region[i])));
+        }
     }
 
     public static updateList() {
@@ -64,7 +69,13 @@ class PokedexHelper {
             if (nativeRegion > GameConstants.MAX_AVAILABLE_REGION || nativeRegion == GameConstants.Region.none) {
                 return false;
             }
-
+            
+            // If not showing this region
+            const region: (GameConstants.Region | null) = filter['region'] ? parseInt(filter['region'], 10) : null;
+            if (region != null && region != nativeRegion) {
+                return false;
+            }
+            
             // Event Pokemon
             if (pokemon.id <= 0) {
                 return false;
@@ -81,8 +92,8 @@ class PokedexHelper {
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = filter['type1'] ? parseInt(filter['type1']) : null;
-            const type2: (PokemonType | null) = filter['type2'] ? parseInt(filter['type2']) : null;
+            const type1: (PokemonType | null) = filter['type1'] ? parseInt(filter['type1'], 10) : null;
+            const type2: (PokemonType | null) = filter['type2'] ? parseInt(filter['type2'], 10) : null;
             if ([type1, type2].includes(PokemonType.None)) {
                 const type = (type1 == PokemonType.None) ? type2 : type1;
                 if (!PokedexHelper.isPureType(pokemon, type)) {
@@ -137,6 +148,8 @@ class PokedexHelper {
         res['type1'] = type1.options[type1.selectedIndex].value;
         const type2 = <HTMLSelectElement>document.getElementById('pokedex-filter-type2');
         res['type2'] = type2.options[type2.selectedIndex].value;
+        const region = <HTMLSelectElement>document.getElementById('pokedex-filter-region');
+        res['region'] = region.options[region.selectedIndex].value;
         res['caught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-caught')).checked;
         res['uncaught'] = (<HTMLInputElement> document.getElementById('pokedex-filter-uncaught')).checked;
         res['shiny'] = (<HTMLInputElement> document.getElementById('pokedex-filter-shiny')).checked;

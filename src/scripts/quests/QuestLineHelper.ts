@@ -28,7 +28,7 @@ class QuestLineHelper {
         tutorial.addQuest(buyPokeballs);
 
         //Buy Dungeon ticket
-        const buyDungeonTicket = new CustomQuest(1, 10, 'Buy the Dungeon ticket from Viridian City Shop.', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
+        const buyDungeonTicket = new CustomQuest(1, 50, 'Buy the Dungeon ticket from Viridian City Shop.', () => +App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Dungeon_ticket), 0);
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest
@@ -38,9 +38,18 @@ class QuestLineHelper {
         tutorial.addQuest(clearMtMoon);
 
         //Defeat Pewter Gym
-        const pewter = new DefeatGymQuest(GameConstants.KantoGyms[0], 1);
-        pewter.pointsReward = 50;
-        pewter.description = 'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.';
+        const pewterReward = () => {
+            Notifier.notify({ message: 'Tutorial completed!', type: GameConstants.NotificationOption.success });
+            Information.show({
+                steps: [
+                    {
+                        element: document.getElementById('questDisplayContainer'),
+                        intro: 'Click "List" to see the current quests that can be completed for <img title="Quest points" src="assets/images/currency/questPoint.png" height="25px"> Quest Points.',
+                    },
+                ],
+            });
+        };
+        const pewter = new CustomQuest(1, pewterReward, 'Defeat Pewter City Gym. Click the town on the map to move there, then click the Gym button to start the battle.', () => App.game.statistics.gymsDefeated[Statistics.getGymIndex('Pewter City')](), 0);
         tutorial.addQuest(pewter);
 
         App.game.quests.questLines().push(tutorial);
