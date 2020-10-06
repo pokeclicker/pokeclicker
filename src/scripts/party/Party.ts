@@ -108,7 +108,7 @@ class Party implements Feature {
     }
 
     public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false): number {
-        let multiplier = 1, attack: number;
+        let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : pokemon.attack;
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
