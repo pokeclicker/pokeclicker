@@ -5,7 +5,7 @@ A game about catching Pokémon, defeating gym leaders, and watching numbers get 
 
 NOTE: PokéClicker is still in development!
 
-You can try out the current state at https://pokeclicker.github.io/pokeclicker/
+You can try out the current state at https://www.pokeclicker.com/
 
 You can reach out on discord to discuss your ideas and how to implement them: https://discordapp.com/invite/rHF3V54
 
