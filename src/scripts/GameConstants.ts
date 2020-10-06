@@ -396,6 +396,7 @@ namespace GameConstants {
         1: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
         2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
         3: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
+        4: new Set(['Mistralton Cave', 'Seaside Cave', 'Wellspring Cave', 'Twist Mountain', 'Reversal Mountain', 'Victory Road Unova']),
     };
 
     export const GemCaveAreas = {
@@ -403,6 +404,7 @@ namespace GameConstants {
         1: new Set(['Blackthorn City', 'Mt Silver']),
         2: new Set(['Cave of Origin', 'Sky Pillar']),
         3: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
+        4: new Set(['Chargestone Cave']), 
     };
 
     export const PowerPlantAreas = {
