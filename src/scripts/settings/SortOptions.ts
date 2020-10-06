@@ -15,9 +15,6 @@ type SortOptionConfig = {
 
     // How to get the comparison value from a PartyPokemon
     getValue: (p: PartyPokemon) => any;
-
-    // true if the default sort direction should be descending
-    invert?: boolean;
 }
 
 const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
@@ -34,31 +31,26 @@ const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.attack]: {
         'text': 'Attack',
         'getValue': p => p.calculateAttack(),
-        'invert': true,
     },
 
     [SortOptions.level]: {
         'text': 'Level',
         'getValue': p => p.level,
-        'invert': true,
     },
 
     [SortOptions.shiny]: {
         'text': 'Shiny',
         'getValue': p => +App.game.party.shinyPokemon.includes(p.id),
-        'invert': true,
     },
 
     [SortOptions.baseAttack]: {
         'text': 'Base Attack',
         'getValue': p => p.baseAttack,
-        'invert': true,
     },
 
     [SortOptions.breedingEfficiency]: {
         'text': 'Breeding Efficiency',
         'getValue': p => (p.baseAttack / pokemonMap[p.name].eggCycles),
-        'invert': true,
     },
 
     [SortOptions.eggCycles]: {

@@ -45,15 +45,12 @@ class PartyController {
 
     public static compareBy(option: SortOptions, direction: boolean): (a: PartyPokemon, b: PartyPokemon) => number {
         return function (a, b) {
-            let res, dir = (direction) ? -1 : 1;
+            let res: number;
+            const dir = (direction) ? -1 : 1;
             const config = SortOptionConfigs[option];
 
             const aValue = config.getValue(a);
             const bValue = config.getValue(b);
-
-            if (config.invert) {
-                dir *= -1;
-            }
 
             //Compare by provided property
             if (aValue == bValue) {
