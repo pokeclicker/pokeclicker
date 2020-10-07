@@ -198,7 +198,8 @@ class Mine {
         }
     }
 
-    private static bomb(tiles = 10) {
+    private static bomb() {
+        const tiles = Underground.getBombEfficiency();
         if (Underground.energy >= Underground.CHISEL_ENERGY * tiles) {
             for (let i = 1; i < tiles; i++) {
                 const x = GameConstants.randomIntBetween(1, this.sizeY - 2);
