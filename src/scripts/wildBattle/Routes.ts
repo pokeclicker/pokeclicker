@@ -343,7 +343,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Nidoran(M)', 'Nidoran(F)', 'Vulpix', 'Growlithe', 'Hoothoot', 'Stantler', 'Sudowoodo'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
-    [new GymBadgeRequirement(BadgeCase.Badge.Plain)]
+    [new GymBadgeRequirement(BadgeCase.Badge.Plain), new RouteKillRequirement(10, 35)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.johto, 37,
