@@ -74,7 +74,6 @@ class Save {
 
         if (confirmDelete == 'DELETE') {
             localStorage.removeItem('player');
-            localStorage.removeItem('mine');
             localStorage.removeItem('save');
 
             location.reload();
