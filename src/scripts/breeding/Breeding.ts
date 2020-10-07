@@ -247,8 +247,7 @@ class Breeding implements Feature {
     }
 
     public getEggSlotCost(slot: number): number {
-        return 500
-          * slot;
+        return 500 * slot;
     }
 
     public calculateBaseForm(pokemonName: string): string {
