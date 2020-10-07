@@ -312,6 +312,7 @@ class Mine {
 
     public static save(): Record<string, any> {
         if (this.grid == null) {
+            // This part should only get called when game saves for the first time after catching starter
             ko.cleanNode(document.getElementById('mineBody'));
             Mine.loadMine();
             ko.applyBindings(null, document.getElementById('mineBody'));
