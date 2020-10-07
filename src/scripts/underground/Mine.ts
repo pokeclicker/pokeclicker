@@ -45,9 +45,7 @@ class Mine {
         Mine.loadingNewLayer = false;
         Mine.itemsFound(0);
         
-        ko.cleanNode(document.getElementById('mineBody'));
         Underground.showMine();
-        ko.applyBindings(null, document.getElementById('mineBody'));
     }
 
     private static getRandomCoord(max: number, size: number): number {
@@ -294,7 +292,9 @@ class Mine {
 
     private static completed() {
         Notifier.notify({ message: 'You dig deeper...', type: GameConstants.NotificationOption.info });
+        ko.cleanNode(document.getElementById('mineBody'));
         Mine.loadMine();
+        ko.applyBindings(null, document.getElementById('mineBody'));
     }
 
     public static loadSavedMine(mine) {
@@ -312,7 +312,9 @@ class Mine {
 
     public static save(): Record<string, any> {
         if (this.grid == null) {
-            this.loadMine();
+            ko.cleanNode(document.getElementById('mineBody'));
+            Mine.loadMine();
+            ko.applyBindings(null, document.getElementById('mineBody'));
         }
         const mineSave = {
             grid: this.grid.map(row => row.map(val => val())),
