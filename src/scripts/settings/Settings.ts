@@ -89,6 +89,14 @@ Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress dis
     ],
     'percentage'
 ));
+Settings.add(new MultipleChoiceSetting('shopButtons', 'Shop amount buttons:',
+    [
+        new SettingOption('+10, +100', 'original'),
+        new SettingOption('+100, +1000', 'bigplus'),
+        new SettingOption('×10, ÷10', 'multiplication'),
+    ],
+    'original'
+));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new MultipleChoiceSetting('backgroundImage', 'Background image:',
     [
@@ -119,7 +127,7 @@ Object.values(GameConstants.NotificationSetting).forEach(setting => {
  */
 const sortsettings = Object.keys(SortOptionConfigs).map(
     function(opt) {
-        return new SettingOption(SortOptionConfigs[opt].text, parseInt(opt));
+        return new SettingOption(SortOptionConfigs[opt].text, parseInt(opt, 10));
     }
 );
 Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
