@@ -94,23 +94,10 @@ class Party implements Feature {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false): number {
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
-            let multiplier = 1;
-            const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
-            if (!ignoreRegionMultiplier && nativeRegion != player.region && nativeRegion != GameConstants.Region.none) {
-                // Pokemon only retain a % of their total damage in other regions based on highest region.
-                multiplier = this.getRegionAttackMultiplier();
-            }
-            if (!pokemon.breeding) {
-                if (Battle.enemyPokemon() == null || type1 == PokemonType.None) {
-                    attack += pokemon.attack * multiplier;
-                } else {
-                    const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-                    attack += pokemon.attack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
-                }
-            }
+            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack);
         }
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xAttack)()) {
@@ -118,6 +105,26 @@ class Party implements Feature {
         }
 
         return Math.round(attack);
+    }
+
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false): number {
+        let multiplier = 1, attack = 0;
+        const pAttack = useBaseAttack ? pokemon.baseAttack : pokemon.attack;
+        const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+        if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
+            // Pokemon only retain a % of their total damage in other regions based on highest region.
+            multiplier = this.getRegionAttackMultiplier();
+        }
+        if (includeBreeding || !pokemon.breeding) {
+            if (type1 == PokemonType.None) {
+                attack = pAttack * multiplier;
+            } else {
+                const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
+            }
+        }
+
+        return attack;
     }
 
     public getRegionAttackMultiplier(highestRegion = player.highestRegion()): number {
