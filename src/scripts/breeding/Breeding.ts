@@ -55,10 +55,10 @@ class Breeding implements Feature {
             ['Pachirisu', 'Shinx'],
         ];
         this.hatchList[EggType.Dragon] = [
-            ['Dratini', 'Dragonair', 'Dragonite'],
+            ['Dratini'],
             [],
-            ['Bagon', 'Shelgon', 'Salamence'],
-            ['Gible', 'Gabite', 'Garchomp'],
+            ['Bagon'],
+            ['Gible'],
         ];
         BreedingController.initialize();
     }
