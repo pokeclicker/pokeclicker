@@ -53,6 +53,7 @@ class KeyItems implements Feature {
             }),
 
             new KeyItem(KeyItems.KeyItem.Explorer_kit, 'A bag filled with convenient tools for exploring. It provides access to the Underground'),
+            new KeyItem(KeyItems.KeyItem.Apricorn_box, 'A handy box where you can store Apricorns'),
             // TODO buy for 500 quest points
             new KeyItem(KeyItems.KeyItem.Event_calendar, 'This calendar will keep you up to date on the latest events'),
             new KeyItem(KeyItems.KeyItem.Shard_case, 'A case specifically designed for holding shards'),
@@ -124,6 +125,7 @@ namespace KeyItems {
         'Safari_ticket',
         'Wailmer_pail',
         'Explorer_kit',
+        'Apricorn_box',
         'Event_calendar',
         'Shard_case'
     }

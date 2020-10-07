@@ -65,6 +65,9 @@ namespace GameConstants {
     export const BREEDING_ATTACK_BONUS = 25;
 
     export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
+    
+    // TODO: Determine Distribution
+    export const ApricornDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98];
 
     // Dungeons
     export const DUNGEON_SIZE = 5;
