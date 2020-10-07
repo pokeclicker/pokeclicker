@@ -17,11 +17,11 @@ class ApricornPlot implements Saveable {
     _boosted: KnockoutObservable<boolean>;
     _apricorn: KnockoutObservable<ApricornType>;
     _apricornStage: KnockoutObservable<PlotStage>;
-    _apricornTimeLeft: KnockoutObservable<number>;
-    _apricornHarvestsLeft: KnockoutObservable<number>;
+    _timeLeft: KnockoutObservable<number>;
+    _apricornHarvests: KnockoutObservable<number>;
     //_mulch: KnockoutObservable<MulchType>;
     //_mulchTimeLeft: KnockoutObservable<number>;
-    formattedApricornTimeLeft: KnockoutComputed<string>;
+    formattedTimeLeft: KnockoutComputed<string>;
     //formattedMulchTimeLeft: KnockoutComputed<string>;
     isEmpty: KnockoutComputed<boolean>;
     stage: KnockoutComputed<number>;
@@ -42,7 +42,7 @@ class ApricornPlot implements Saveable {
         //this._mulchTimeLeft = ko.observable(mulchTimeLeft);
 
         this.formattedTimeLeft = ko.pureComputed(function () {
-            return GameConstants.formatTime(Math.ceil(this.timeLeft) / App.game.apricornFarming.getGrowthMultiplier());
+            return GameConstants.formatTime(Math.ceil(this.timeLeft) / App.game.apricorn.getGrowthMultiplier());
         }, this);
         
         this.isEmpty = ko.pureComputed(function () {
@@ -59,7 +59,7 @@ class ApricornPlot implements Saveable {
                 return this.apricornStage;
             }
             // Apricorn is still in growth phase
-            return 3 - Math.ceil(4 * this.timeLeft / App.game.apricornfarming.apricornData[this.apricorn].growTime);
+            return 3 - Math.ceil(4 * this.timeLeft / App.game.apricorn.apricornData[this.apricorn].growTime);
         }, this);
         
         this.notified = false;
@@ -67,7 +67,7 @@ class ApricornPlot implements Saveable {
 
     reduceTime(seconds: number) {
         // Don't do anything if there aren't any Apricorns
-        if (this.apricorn == Apricorn.None) { return; }
+        if (this.apricorn == ApricornType.None) { return; }
         
         this.timeLeft = Math.max(0, this.timeLeft - seconds);
         
@@ -76,31 +76,32 @@ class ApricornPlot implements Saveable {
             // Apricorn tree finished growing
             if (this.apricornStage == PlotStage.Seed) {
                 this.apricornStage = PlotStage.Bloom;
-                this.timeLeft = App.game.apricornFarming.apricornData[this.apricorn].harvestTime;
+                this.timeLeft = App.game.apricorn.apricornData[this.apricorn].harvestTime;
             }
             // Apricorn tree finished creating Apricorn
             else if (this.apricornStage == PlotStage.Bloom) {
                 this.apricornStage = PlotStage.Berry;
-                this.timeLeft = App.game.apricornFarming.apricornData[this.apricorn].harvestTime;
+                this.timeLeft = App.game.apricorn.apricornData[this.apricorn].harvestTime;
             }
             // Apricorn is ripe
-            } else if (this.apricornStage == PlotStage.Berry) {
+            else if (this.apricornStage == PlotStage.Berry) {
                 this.harvest(true);
             }
         }
     }
     
-    harvest(dropped: boolean = false): void {
+    harvest(dropped: boolean = false): number {
         // Incrementing total harvests
         this.apricornHarvests += 1;
         
         // Checking if tree should die
-        if (this.apricornHarvests >= App.game.apricornFarming.apricornData[this.apricorn].harvestAmount) {
+        if (this.apricornHarvests >= App.game.apricorn.apricornData[this.apricorn].harvestAmount) {
             if (dropped) {
                 // TODO: Roll for replant using Gooey Mulch
                 // Doesn't increment berry gain, sets this.apricorn and this.timeLeft accordingly
             } else {
                 // TODO: Return berry gain, modified by Damp Mulch
+                return 1;
             }
             
             this.apricorn = ApricornType.None;
@@ -110,10 +111,11 @@ class ApricornPlot implements Saveable {
         }
         // Tree still lives
         else {
-            // TODO: Roll for harvest using Stable Mulch
+            // TODO: Roll for harvest using Stable Mulch and Damp Mulch
+            return 1;
             
             this.apricornStage = PlotStage.Bloom;
-            this.timeLeft = App.game.apricornFarming.apricornData[this.apricorn].harvestTime;
+            this.timeLeft = App.game.apricorn.apricornData[this.apricorn].harvestTime;
         }
     }
 

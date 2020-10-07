@@ -11,25 +11,25 @@ class ApricornController {
     }
 
     public static getImage(index: number) {
-        const plot: Plot = App.game.apricornFarming.plotList[index];
+        const plot: ApricornPlot = App.game.apricorn.plotList[index];
         if (plot.stage() <= 1) {
-            return 'assets/images/farm/AllTreeSeedIII.png';
+            return 'assetplot.stage() s/images/farm/AllTreeSeedIII.png';
         }
         // TODO: Link to Apricorn tree assets
         return `assets/images/farm/${BerryType[plot.apricorn]}Tree${PlotStage[plot.stage()]}III.png`;
     }
 
     public static getTooltipLabel(index: number) {
-        const plot: Plot = App.game.apricornFarming.plotList[index];
+        const plot: ApricornPlot = App.game.apricorn.plotList[index];
 
-        const timeStr = plot.formattedTimeLeft();
+        const timeStr: string = plot.formattedTimeLeft();
 
         switch (plot.apricornStage) {
             case PlotStage.Bloom: {
                 return `${timeStr} until ready`;
             }
             case PlotStage.Berry: {
-                return `${timestr} until overripe`;
+                return `${timeStr} until overripe`;
             }
             default: {
                 return `${timeStr} until grown`;
@@ -40,15 +40,12 @@ class ApricornController {
 }
 document.addEventListener('DOMContentLoaded', function (event) {
     $('#apricornModal').on('show.bs.modal', function () {
-        /*
-        TODO: Implement
-        const seedList = $('#seedList');
-        seedList.children().get(FarmController.selectedBerry).className += ' active';
-        seedList.find('li').click(function () {
+        const apricornList = $('#apricornList');
+        apricornList.children().get(ApricornController.selectedApricorn).className += ' active';
+        apricornList.find('li').click(function () {
             $(this).parent().children().removeClass('active');
             $(this).addClass('active');
         });
-        */
     });
 });
 

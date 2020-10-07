@@ -1,0 +1,68 @@
+<div class="modal fade noselect" id="apricornModal" tabindex="-1" role="dialog"
+     aria-labelledby="apricornModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Apricorn Farm</h4>
+            </div>
+            <div class="modal-body">
+                <div id="apricornView" class="justify-content-center no-select row">
+                    <div class="col-12 col-lg-4">
+                        <ul id="apricornList" data-bind="foreach: App.game.apricorn.apricornList" class="list-group"
+                            style="margin-bottom: 5px;">
+                            <li class="list-group-item list-group-item-action seed-list-item"
+                                data-bind="click: function() {ApricornController.selectedApricorn = $index()}">
+                                <img src="" width="24px"
+                                     data-bind="attr:{ src: 'assets/images/items/' + BerryType[$index()] + '.png'}">
+                                <span data-bind="text: ApricornType[$index()]"></span>
+                                <span class="apricornAmount" data-bind="text: App.game.apricorn.apricornList[$index()]"></span>
+                            </li>
+                        </ul>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-6">
+                                <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.apricorn.plantAll(ApricornController.selectedApricorn)}">
+                                    Plant All
+                                </button>
+                            </div>
+                            <div class="col-lg-12 col-6">
+                                <button class="btn btn-success btn-block" data-bind="click: function(){App.game.apricorn.harvestAll()}">
+                                    Harvest All
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-8" style="padding-left: 0">
+                        <div id="plotList" data-bind="foreach: App.game.apricorn.plotList">
+                            <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked}">
+                                <div class="plot-content">
+                                    <div class="plotImage">
+                                        <img style="width: 100%" src="assets/images/farm/soil.png">
+                                        <div data-bind="ifnot: $data.isEmpty()">
+                                            <div class="plotButton"
+                                                 data-bind="click: function(){App.game.apricorn.harvest($index())}, tooltip: {title: $data.formattedTimeLeft, trigger: 'hover', animation: false}">
+                                                <img width="100%" height="100%"
+                                                     style="max-width: 100%; max-height: 100%"
+                                                     src=""
+                                                     data-bind="attr:{ src: ApricornController.getImage($index())}">
+                                            </div>
+                                        </div>
+                                        <div data-bind="if: $data.isEmpty()">
+                                            <div class="plotButton"
+                                                 data-bind="click: function(){App.game.apricorn.plant($index(), ApricornController.selectedApricorn)}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

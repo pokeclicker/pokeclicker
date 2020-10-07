@@ -1,6 +1,6 @@
 class ApricornFarming implements Feature {
-    name = 'ApricornFarming';
-    saveKey = 'apricornFarming';
+    name = 'Apricorn';
+    saveKey = 'apricorn';
 
     apricornData: { [type: number]: Apricorn } = {};
 
@@ -10,11 +10,11 @@ class ApricornFarming implements Feature {
     defaults = {
         apricornList: Array<number>(this.AMOUNT_OF_APRICORNS).fill(0),
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
-            return new ApricornPlot(index === 0, false, ApricornType.None, 0);
+            return new ApricornPlot(index === 0, false, ApricornType.None, PlotStage.Seed, 0, 0);
         }),
     };
 
-    berryList: ArrayOfObservables<number>;
+    apricornList: ArrayOfObservables<number>;
     plotList: ArrayOfObservables<ApricornPlot>;
 
     constructor() {
@@ -60,9 +60,9 @@ class ApricornFarming implements Feature {
         */
     }
 
-    unlockPlot() {
-        if (this.canBuyPlot()) {
-            App.game.wallet.loseAmount(this.calculatePlotPrice());
+    unlockPlot(index: number) {
+        if (this.canBuyPlot(index)) {
+            this.apricornList[index] -= this.calculatePlotPrice(index);
             this.plotList[this.unlockedPlotCount()].isUnlocked = true;
         }
     }
@@ -71,22 +71,20 @@ class ApricornFarming implements Feature {
         return this.plotList[this.plotList.length - 1].isUnlocked;
     }
 
-    canBuyPlot() {
-        return !this.allPlotsUnlocked() && App.game.wallet.hasAmount(this.calculatePlotPrice());
+    canBuyPlot(index: number) {
+        return !this.allPlotsUnlocked() && this.apricornList[index] >= this.calculatePlotPrice(index);
     }
 
-    // CONVERT
-    calculatePlotPrice(): Amount {
+    calculatePlotPrice(index: number): number {
         if (this.allPlotsUnlocked()) {
-            return new Amount(Infinity, GameConstants.Currency.farmPoint);
+            return Infinity;
         }
-        const plotCount = this.unlockedPlotCount();
-        return new Amount(10 * Math.floor(Math.pow(plotCount, 2)), GameConstants.Currency.farmPoint);
+        // TODO: find scaling price
+        return index;
     }
 
-    // CONVERT
-    unlockedPlotCount() {
-        return App.game.farming.plotList.filter(plot => plot.isUnlocked).length;
+    unlockedPlotCount(): number {
+        return App.game.apricorn.plotList.filter(plot => plot.isUnlocked).length;
     }
 
     plant(index: number, apricorn: ApricornType) {
@@ -98,7 +96,7 @@ class ApricornFarming implements Feature {
         this.apricornList[apricorn] -= 1;
         plot.apricorn = apricorn;
         plot.apricornStage = PlotStage.Seed;
-        plot.timeLeft = App.game.apricornfarming.apricornData[this.apricorn].growTime;
+        plot.timeLeft = App.game.apricorn.apricornData[apricorn].growTime;
         plot.apricornHarvests = 0;        
     }
 
@@ -115,7 +113,7 @@ class ApricornFarming implements Feature {
     harvest(index: number): void {
         const plot = this.plotList[index];
         if (plot.apricorn === ApricornType.None || plot.apricornStage != PlotStage.Berry) {
-            return 0;
+            return;
         }
 
         // Saving Apricorn type
@@ -127,12 +125,11 @@ class ApricornFarming implements Feature {
     }
 
     /**
-     * Try to harvest all plots, suppresses the individual notifications
+     * Try to harvest all plots
      */
     public harvestAll() {
-        let total = 0;
         this.plotList.forEach((plot, index) => {
-            total += this.harvest(index);
+            this.harvest(index);
         });
     }
 
@@ -184,7 +181,7 @@ class ApricornFarming implements Feature {
             this.plotList = new ArrayOfObservables(this.defaults.plotList);
         } else {
             (savedPlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
-                const plot: Plot = new Plot(false, false, Apricorn.None, PlotStage.Seed, 0, 0);
+                const plot: ApricornPlot = new ApricornPlot(false, false, ApricornType.None, PlotStage.Seed, 0, 0);
                 plot.fromJSON(value);
                 this.plotList[index] = plot;
             });

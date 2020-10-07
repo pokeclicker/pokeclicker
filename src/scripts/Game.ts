@@ -23,6 +23,7 @@ class Game {
         public party: Party,
         public shards: Shards,
         public farming: Farming,
+        public apricorn: ApricornFarming,
         public logbook: LogBook,
         public redeemableCodes: RedeemableCodes,
         public statistics: Statistics,
@@ -58,6 +59,7 @@ class Game {
         this.keyItems.initialize();
         this.oakItems.initialize();
         this.farming.initialize();
+        this.apricorn.initialize();
         this.specialEvents.initialize();
         this.load();
 
@@ -154,6 +156,9 @@ class Game {
 
         // Farm
         this.farming.update(GameConstants.TICK_TIME / GameConstants.SECOND);
+        
+        // Apricorns
+        this.apricorn.update(GameConstants.TICK_TIME / GameConstants.SECOND);
 
         // Effect Engine (battle items)
         EffectEngineRunner.counter += GameConstants.TICK_TIME;

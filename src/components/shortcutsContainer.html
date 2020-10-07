@@ -26,6 +26,13 @@
               </button>
             </td>
           </tr>
+          <tr data-bind="visible: App.game.apricorn.canAccess">
+            <td class="p-0">
+              <button class="btn btn-block btn-primary m-0" onclick="ApricornController.openApricornModal()">
+                  Apricorn Farm
+              </button>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

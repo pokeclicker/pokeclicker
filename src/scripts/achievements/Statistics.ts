@@ -38,6 +38,8 @@ class Statistics implements Saveable {
     undergroundDailyDealTrades: KnockoutObservable<number>;
     // Farm
     totalBerriesHarvested: KnockoutObservable<number>;
+    // Apricorns
+    totalApricornsHarvested: KnockoutObservable<number>;
     // Battle Frontier
     battleFrontierTotalStagesCompleted: KnockoutObservable<number>;
     battleFrontierHighestStageCompleted: KnockoutObservable<number>;
@@ -52,6 +54,8 @@ class Statistics implements Saveable {
     oakItemUses: Array<KnockoutObservable<number>>;
     // Farm
     berriesHarvested: Array<KnockoutObservable<number>>;
+    // Apricorns
+    apricornsHarvested: Array<KnockoutObservable<number>>;
     //Battle
     routeKills: Array<KnockoutObservable<number>>;
     gymsDefeated: Array<KnockoutObservable<number>>;

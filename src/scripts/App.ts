@@ -28,6 +28,7 @@ class App {
                 new Party(),
                 new Shards(),
                 new Farming(),
+                new ApricornFarming(),
                 new LogBook(),
                 new RedeemableCodes(),
                 new Statistics(),
