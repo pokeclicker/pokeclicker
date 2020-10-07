@@ -60,6 +60,7 @@
     "gulp-strip-debug": "^3.0.0",
     "gulp-typescript": "^5.0.1",
     "gulp-util": "^3.0.7",
+    "husky": "^4.3.0",
     "natives": "^1.1.6",
     "ts-loader": "^8.0.4",
     "typescript": "^3.7.4",
@@ -81,5 +82,10 @@
     "knockout": "^3.5.1",
     "popper.js": "^1.16.0",
     "sortablejs": "^1.10.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run eslint"
+    }
   }
 }
