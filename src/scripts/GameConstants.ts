@@ -461,6 +461,8 @@ namespace GameConstants {
         'Razor_claw',
         'Razor_fang',
         'Prism_scale',
+        'Sachet',
+        'Whipped_dream',
     }
 
     export enum BattleItemType {
@@ -543,6 +545,8 @@ namespace GameConstants {
         'Claw Fossil': 'Anorith',
         'Armor Fossil': 'Shieldon',
         'Skull Fossil': 'Cranidos',
+        'Cover Fossil': 'Tirtouga',
+        'Plume Fossil': 'Archen',
     };
 
     //Used for image name
@@ -554,6 +558,8 @@ namespace GameConstants {
         'Anorith': 'Claw Fossil',
         'Shieldon': 'Armor Fossil',
         'Cranidos': 'Skull Fossil',
+        'Tirtouga': 'Cover Fossil',
+        'Archen': 'Plume Fossil',
 
     };
 
@@ -621,12 +627,46 @@ namespace GameConstants {
         'Elite Lucian',
         'Champion Cynthia',
     ];
+    
+    export const UnovaGyms = [
+        'Aspertia City',
+        'Virbank City',
+        'Castelia City',
+        'Nimbasa City',
+        'Driftveil City',
+        'Mistralton City',
+        'Opelucid City',
+        'Humilau City',
+        'Elite Shauntal',
+        'Elite Marshal',
+        'Elite Grimsley',
+        'Elite Caitlin',
+        'Champion Iris',
+    ];
+
+    export const KalosGyms = [
+        'Santalune City',
+        'Cyllage City',
+        'Shalour City',
+        'Coumarine City',
+        'Lumiose City',
+        'Laverre City',
+        'Anistar City',
+        'Snowbelle City',
+        'Elite Malva',
+        'Elite Siebold',
+        'Elite Wikstrom',
+        'Elite Drasna',
+        'Champion Diantha',
+    ];
 
     export const RegionGyms = [
         KantoGyms,
         JohtoGyms,
         HoennGyms,
         SinnohGyms,
+        UnovaGyms,
+        KalosGyms,
     ];
 
     export const KantoDungeons = [
@@ -725,12 +765,64 @@ namespace GameConstants {
         'Stark Mountain',
         'Hall of Origin',
     ];
+    
+    export const UnovaDungeons = [
+        'Pledge Grove',
+        'Floccesy Ranch',
+        'Virbank Complex',    //Optional dungeon, contains no unique Pokémon, safe to scrap
+        'Liberty Garden',
+        'Castelia Sewers',
+        'Relic Passage',
+        'Desert Resort',    //Should really be a route
+        'Relic Castle',
+        'Lostlorn Forest',
+        'Chargestone Cave',
+        'Mistralton Cave',
+        'Celestial Tower',
+        'Reversal Mountain',
+        'Strange House',    //Optional dungeon, contains no unique Pokémon, safe to scrap
+        'Undella Bay',    //Should really be a route
+        'Seaside Cave',
+        'Giant Chasm',
+        'Abundant Shrine',
+        'Cave of Being',    //Contains gen 4 trio only
+        'Victory Road Unova',
+        'Twist Mountain',
+        'Dragonspiral Tower',
+        'Moor of Icirrus',
+        'Pinwheel Forest',
+        'Wellspring Cave',    //Optional dungeon, contains no unique Pokémon, safe to scrap
+        'Dreamyard',
+        'P2 Laboratory',
+    ];
+
+    export const KalosDungeons = [
+        'Santalune Forest',
+        'Parfum Palace',
+        'Connecting Cave',
+        'Glittering Cave',
+        'Reflection Cave',
+        //'Tower of Mastery',
+        'Azure Bay',    //Should really be a route
+        //'Sea Spirit's Den',
+        //'Kalos Power Plant',
+        //'Pokéball Factory',
+        'Lost Hotel',
+        'Frost Cavern',
+        'Team Flare Secret HQ',
+        'Terminus Cave',
+        'Pokémon Village',
+        'Victory Road Kalos',
+        //'Unknown Dungeon',
+    ];
 
     export const RegionDungeons = [
         KantoDungeons,
         JohtoDungeons,
         HoennDungeons,
         SinnohDungeons,
+        UnovaDungeons,
+        KalosDungeons,
     ];
 
     export const StartingTowns = [
@@ -738,6 +830,8 @@ namespace GameConstants {
         'New Bark Town',
         'Littleroot Town',
         'Twinleaf Town',
+        'Aspertia City',
+        'Vaniville Town',
     ];
 
     export const DockTowns = [
@@ -745,5 +839,7 @@ namespace GameConstants {
         'Olivine City',
         'Slateport City',
         'Canalave City',
+        'Castelia City',
+        'Coumarine City',
     ];
 }

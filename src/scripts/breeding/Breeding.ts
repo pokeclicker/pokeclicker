@@ -29,36 +29,60 @@ class Breeding implements Feature {
             ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
             ['Torchic', 'Numel'],
             ['Chimchar'],
+            ['Tepig', 'Pansear'],
+            ['Fennekin'],
+            ['Litten'],
+            ['Scorbunny'],
         ];
         this.hatchList[EggType.Water] = [
             ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
             ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
             ['Mudkip', 'Feebas', 'Clamperl'],
             ['Piplup', 'Finneon', 'Buizel'],
+            ['Oshawott', 'Panpour'],
+            ['Froakie'],
+            ['Popplio'],
+            ['Sobble'],
         ];
         this.hatchList[EggType.Grass] = [
             ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
             ['Chikorita', 'Hoppip', 'Sunkern'],
             ['Treecko', 'Tropius', 'Roselia'],
             ['Turtwig', 'Carnivine', 'Budew'],
+            ['Snivy', 'Pansage'],
+            ['Chespin'],
+            ['Rowlet'],
+            ['Grookey'],
         ];
         this.hatchList[EggType.Fighting] = [
             ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
             ['Tyrogue'],
             ['Makuhita', 'Meditite'],
             ['Riolu'],
+            ['Throh', 'Sawk'],
+            [],
+            [],
+            [],
         ];
         this.hatchList[EggType.Electric] = [
             ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
             ['Chinchou', 'Mareep', 'Elekid'],
             ['Plusle', 'Minun', 'Electrike'],
             ['Pachirisu', 'Shinx'],
+            ['Blitzle'],
+            [],
+            [],
+            [],
         ];
         this.hatchList[EggType.Dragon] = [
             ['Dratini', 'Dragonair', 'Dragonite'],
             [],
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
+            ['Deino', 'Zwellous', 'Hydreigon'],
+            [],
+            [],
+            [],
         ];
         BreedingController.initialize();
     }

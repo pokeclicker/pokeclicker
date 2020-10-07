@@ -41,3 +41,7 @@ RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Manaphy));
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Mesprit, undefined, new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Lake Verity'))));
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Cresselia, undefined, new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Fullmoon Island'))));
+
+// Unova
+RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Tornadus));
+RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Thundurus));
