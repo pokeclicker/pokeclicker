@@ -147,6 +147,7 @@ const NewBarkTownShop = new Shop([
 ]);
 const CherrygroveCityShop = new Shop([
     ItemList['Greatball'],
+    ItemList['Apricorn_box'],
 ]);
 const VioletCityShop = new Shop([
     ItemList['MediumRestore'],

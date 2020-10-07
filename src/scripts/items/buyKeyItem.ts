@@ -30,3 +30,4 @@ class BuyKeyItem extends Item {
 
 ItemList['Dungeon_ticket'] = new BuyKeyItem(KeyItems.KeyItem.Dungeon_ticket, 100);
 ItemList['Explorer_kit']   = new BuyKeyItem(KeyItems.KeyItem.Explorer_kit, 5000);
+ItemList['Apricorn_box']   = new BuyKeyItem(KeyItems.KeyItem.Apricorn_box, 2500);

@@ -5,14 +5,14 @@
     <div id="shortcutsBody" class="card-body show p-0">
       <table class="table table-sm m-0">
         <tbody>
-          <tr data-bind="visible: Underground.canAccess">
+          <tr data-bind="visible: Underground.canAccess()">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="Underground.openUndergroundModal()">
                   Underground
               </button>
             </td>
           </tr>
-          <tr data-bind="visible: App.game.farming.canAccess">
+          <tr data-bind="visible: App.game.farming.canAccess()">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="FarmController.openFarmModal()">
                   Farm
@@ -26,7 +26,7 @@
               </button>
             </td>
           </tr>
-          <tr data-bind="visible: App.game.apricorn.canAccess">
+          <tr data-bind="visible: App.game.apricorn.canAccess()">
             <td class="p-0">
               <button class="btn btn-block btn-primary m-0" onclick="ApricornController.openApricornModal()">
                   Apricorn Farm

@@ -150,9 +150,7 @@ class ApricornFarming implements Feature {
     }
 
     canAccess(): boolean {
-        // TODO: Figure this one out
-        return true;
-        return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
+        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Apricorn_box);
     }
 
     toJSON(): Record<string, any> {

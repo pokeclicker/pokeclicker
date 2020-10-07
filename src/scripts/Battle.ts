@@ -157,7 +157,11 @@ class Battle {
         const p = player.route() / 1600 + 0.009375;
 
         if (Math.random() < p) {
-            App.game.farming.gainRandomBerry();
+            if (player.region == GameConstants.Region.johto) {
+                App.game.apricorn.gainRandomApricorn();
+            } else {
+                App.game.farming.gainRandomBerry();
+            }
         }
     }
 
