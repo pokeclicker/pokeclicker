@@ -233,9 +233,10 @@ class AchievementHandler {
             }
             // Gyms
             GameConstants.RegionGyms[region]?.forEach(gym => {
-                AchievementHandler.addAchievement(`${gym} Gym regular`, `Clear ${gym} Gym 10 times`, new ClearGymRequirement(10, Statistics.getGymIndex(gym)), 1, region);
-                AchievementHandler.addAchievement(`${gym} Gym ruler`, `Clear ${gym} Gym 100 times`, new ClearGymRequirement( 100, Statistics.getGymIndex(gym)), 2, region);
-                AchievementHandler.addAchievement(`${gym} Gym owner`, `Clear ${gym} Gym 1,000 times`, new ClearGymRequirement(1000, Statistics.getGymIndex(gym)), 3, region);
+                const gymTitle: string = gym.includes("Elite") || gym.includes("Champion") ? gym : `${gym} Gym`;
+                AchievementHandler.addAchievement(`${gymTitle} Regular`, `Clear ${gymTitle} 10 times`, new ClearGymRequirement(10, Statistics.getGymIndex(gym)), 1, region);
+                AchievementHandler.addAchievement(`${gymTitle} Ruler`, `Clear ${gymTitle} 100 times`, new ClearGymRequirement( 100, Statistics.getGymIndex(gym)), 2, region);
+                AchievementHandler.addAchievement(`${gymTitle} Owner`, `Clear ${gymTitle} 1,000 times`, new ClearGymRequirement(1000, Statistics.getGymIndex(gym)), 3, region);
             });
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
