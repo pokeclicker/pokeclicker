@@ -279,7 +279,8 @@ namespace Underground {
     export const BASE_DAILY_DEALS_MAX = 3;
     export const BASE_BOMB_EFFICIENCY = 10;
 
-    export const HAMMER_ENERGY = 3;
     export const CHISEL_ENERGY = 1;
+    export const HAMMER_ENERGY = 3;
+    export const BOMB_ENERGY = 10;
     export const PROSPECT_ENERGY = 15;
 }

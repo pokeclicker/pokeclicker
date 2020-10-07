@@ -184,7 +184,7 @@ class Mine {
                 }
             }
             if (hasMined) {
-                Underground.energy = Underground.energy - Underground.HAMMER_ENERGY;
+                Underground.energy -= Underground.HAMMER_ENERGY;
             }
         }
     }
@@ -193,21 +193,21 @@ class Mine {
         if (Mine.grid[x][y]() > 0) {
             if (Underground.energy >= Underground.CHISEL_ENERGY) {
                 this.breakTile(x, y, 2);
-                Underground.energy = Underground.energy - Underground.CHISEL_ENERGY;
+                Underground.energy -= Underground.CHISEL_ENERGY;
             }
         }
     }
 
     private static bomb() {
         const tiles = Underground.getBombEfficiency();
-        if (Underground.energy >= Underground.CHISEL_ENERGY * tiles) {
+        if (Underground.energy >= Underground.BOMB_ENERGY) {
             for (let i = 1; i < tiles; i++) {
                 const x = GameConstants.randomIntBetween(1, this.sizeY - 2);
                 const y = GameConstants.randomIntBetween(1, this.sizeX - 2);
                 this.breakTile(x, y, 2);
             }
 
-            Underground.energy -= Underground.CHISEL_ENERGY * tiles;
+            Underground.energy -= Underground.BOMB_ENERGY;
         }
     }
 
