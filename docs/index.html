@@ -28,7 +28,7 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.5.5-patch2"></script>
+    <script src="scripts/script.min.js?v=0.5.6"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -43,8 +43,13 @@
     <!--Motio-->
     <script src="libs/motio.js"></script>
 
+    <!--Intro.js-->
+    <script src="libs/intro.min.js"></script>
+    <link href="libs/introjs.css" rel="stylesheet">
+    <link href="libs/introjs-modern.css" rel="stylesheet">
+
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.5.5-patch2" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.5.6" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -67,22 +72,46 @@
         .loader {
             position: fixed;
             top: 0;
-            height: 100%;
-            width: 100%;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
             background-color: #79c9fa;
             background-size: cover;
             z-index: 9999;
         }
 
         .loader-wrapper {
-            height: 100%;
-            width: 100%;
+            height: 100vh;
+            width: 100vw;
             position: relative;
         }
     </style>
 
 </head>
-<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue()">
+<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue() ">
+<div id="dynamic-background">
+    <!-- Sky -->
+    <div id="sky1" class="sky sky-0" style="opacity: 1;"></div>
+    <div id="sky2" class="sky sky-1" style="opacity: 0;"></div>
+
+    <!-- Sun & Moon -->
+    <div id="orbital">
+        <div id="sun" style="top: 570.474px; left: 1234.9px;"></div>
+        <div id="moon" style="bottom: 595.351px; right: 1212.76px;"></div>
+    </div>
+
+    <!-- Ground -->
+    <div id="ground1" class="ground ground-0" style="opacity: 1;"></div>
+    <div id="ground2" class="ground ground-1" style="opacity: 0;"></div>
+
+    <!-- Clouds -->
+    <div class="cloud-container">
+        <div id="clouds">
+            <div class="cloud1 cloud1-0" id="cloud1One"></div>
+        </div>
+    </div>
+</div>
+
 <div id="toaster"></div>
 <link href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
 
@@ -144,6 +173,9 @@
             <a class="dropdown-item" href="#settingsModal" data-toggle="modal">Settings</a>
         </li>
         <li>
+            <a class="dropdown-item" href="#damageCalculatorModal" data-toggle="modal">Damage Calculator</a>
+        </li>
+        <li>
             <a class="dropdown-item" href="#saveModal" data-toggle="modal">Save</a>
         </li>
         <li>
@@ -159,6 +191,9 @@
             <a class="dropdown-item" href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>
         </li>
         <li>
+            <a class="dropdown-item" href="http://pokeclicker.miraheze.org/" target="_blank">Wiki</a>
+        </li>
+        <li>
             <a class="dropdown-item" href="https://github.com/pokeclicker/pokeclicker/issues" target="_blank">Report a bug</a>
         </li>
 
@@ -167,8 +202,7 @@
 
 
 <!-- Get Keyitem modal-->
-<div class="modal" id="keyItemModal" tabindex="-1" role="dialog"
-     aria-labelledby="keyItemModalLabel" aria-hidden="true">
+<div class="modal" id="keyItemModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content" style="text-align: center">
             <div class="modal-header">
@@ -178,18 +212,16 @@
                 </div>
             </div>
             <div class="modal-body">
-                <h5><b>Congratulations!</b></h5>
+                <h5><strong>Congratulations!</strong></h5>
                 <span>You have gained a</span><br>
-                <img
-                        class="key-item"
-                        data-bind="attr:{ title: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName,  src: 'assets/images/keyitems/' + KeyItems.KeyItem[KeyItemController.latestGainedItem] + '.png'}"
-                        src=""/><br>
-                <span><strong
-                        data-bind="text: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName">Name</strong></span><br>
+                <img class="key-item" src="" data-bind="attr:{ title: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName,  src: 'assets/images/keyitems/' + KeyItems.KeyItem[KeyItemController.latestGainedItem] + '.png'}"/><br>
+                <span>
+                    <strong data-bind="text: App.game.keyItems.itemList[KeyItemController.latestGainedItem].displayName">Name</strong>
+                </span><br>
                 <span data-bind="html:  App.game.keyItems.itemList[KeyItemController.latestGainedItem].description">Description</span>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" data-bind="click: App.game.keyItems.itemList[KeyItemController.latestGainedItem].unlockReward">Close</button>
             </div>
         </div>
     </div>
@@ -333,7 +365,7 @@
         <img alt="Battle Points" src="assets/images/currency/battlePoint.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
 
-        <span data-bind="text: $data.reduced ? GameConstants.formatNumber($data.amount) : $data.amount.toLocaleString('en-US')">0</span>
+        <span data-bind="text: ($data.reduced || ($data.amount > $data.reducedThreshold)) ? GameConstants.formatNumber($data.amount) : $data.amount.toLocaleString('en-US')">0</span>
     </span>
 </script>
 
@@ -417,11 +449,11 @@
         <table class="table table-sm m-0">
             <thead>
             <tr>
-                <th width="20%" title="Previously captured Pokémon will use this ball selection">Caught</th>
-                <th width="20%" title="Previously captured Shiny Pokémon will use this ball selection">✨</th>
-                <th width="20%" title="Amount of balls you have available">#</th>
-                <th width="20%" title="Uncaptured Pokémon will use this ball selection">New</th>
-                <th width="20%" title="Uncaptured Shiny Pokémon will use this ball selection">✨</th>
+                <th width="20%" data-toggle="tooltip" title="Previously captured Pokémon will use this ball selection">Caught</th>
+                <th width="20%" data-toggle="tooltip" title="Previously captured Shiny Pokémon will use this ball selection">✨</th>
+                <th width="20%" data-toggle="tooltip" title="Amount of balls you have available">#</th>
+                <th width="20%" data-toggle="tooltip" title="Uncaptured Pokémon will use this ball selection">New</th>
+                <th width="20%" data-toggle="tooltip" title="Uncaptured Shiny Pokémon will use this ball selection">✨</th>
             </tr>
             </thead>
             <tbody>
@@ -566,6 +598,71 @@
 
         <!--Middle column-->
         <div id="middle-column" class="col-lg-6 col-md-12 order-md-first">
+            <div id="middle-top-sort-column">
+                <!-- Achievement Tracker -->
+                <div
+  id="achivementTrackerContainer"
+  class="card sortable border-secondary mb-3"
+  data-bind="visible: App.game.achievementTracker.canAccess()"
+>
+  <div class="card-header p-0" data-toggle="collapse" href="#achievementTrackerBody">
+    <span style="text-align: center">Achievement Tracker</span>
+  </div>
+  <button
+    class="btn btn-sm btn-primary"
+    style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+    data-toggle="modal"
+    href="#achievementsModal"
+  >
+    List
+  </button>
+  <div
+    id="achievementTrackerBody"
+    class="card-body show p-0"
+  >
+    <!-- ko if: !App.game.achievementTracker.hasTrackedAchievement() -->
+    <div
+      class="clickable table-warning text-light p-2"
+      href="#achievementsModal"
+      data-toggle="modal"
+    >
+      Select an achievement to track!
+    </div>
+    <!-- /ko -->
+
+    <!-- ko if: App.game.achievementTracker.hasTrackedAchievement()-->
+    <table class="table table-sm m-0">
+      <tbody>
+        <tr>
+          <td colspan="2" data-bind="text: App.game.achievementTracker.trackedAchievement().description">
+            Achievement Description
+          </td>
+        </tr>
+        <tr>
+          <td class="p-0">
+            <div class="progress p-0">
+              <div
+                class="progress-bar bg-primary"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                data-bind="attr:{ style: 'width:' + App.game.achievementTracker.trackedAchievement().getProgressPercentage() + '%'}, css: {
+                           'bg-success': App.game.achievementTracker.trackedAchievement().isCompleted(),
+                           'bg-primary': !App.game.achievementTracker.trackedAchievement().isCompleted()
+                         }">
+                <span data-bind="text: App.game.achievementTracker.trackedAchievement().getProgressText">0 / 1000</span>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- /ko -->
+  </div>
+ </div>
+
+            </div>
+
             <div id="battleContainer" class="card sortable-disabled border-secondary mb-3">
 
                 <div class="card-header p-0" data-bind="visible: (App.game.gameState === GameConstants.GameState.fighting ||
@@ -1051,7 +1148,7 @@
 </div>
 <!-- /ko -->
 
-            <div id="middle-sort-column">
+            <div id="middle-bottom-sort-column">
                 <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
@@ -6483,10 +6580,10 @@
             <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <!-- ko if: $data.type == EggType.Fossil -->
-                <img data-bind='attr: {src: BreedingController.getEggImage($data)}'/>
+                <img data-bind="attr: {src: BreedingController.getEggImage($data)}, class: progress() >= 100 ? 'hatching' : (stepsRemaining() <= 50 ? 'hatchingSoon' : '')"/>
                 <!-- /ko -->
                 <!-- ko ifnot: $data.type == EggType.Fossil -->
-                <div data-bind="template: { name: 'eggSVGTemplate', data: $data}"></div>
+                <div data-bind="template: { name: 'eggSVGTemplate', data: $data}, class: progress() >= 100 ? 'hatching' : (stepsRemaining() <= 50 ? 'hatchingSoon' : '')"></div>
                 <!-- /ko -->
 
                 <div class="progress" data-bind='visible: progress() < 100'>
@@ -6575,7 +6672,13 @@
                        <button class="shopItem clickable btn btn-block btn-secondary"
                            data-bind="click: function() {ShopHandler.setSelected($index())},
                            css: { active: ShopHandler.selected() == $index() },
-                           attr: { disabled: !$data.isAvailable() }">
+                           attr: { disabled: !$data.isAvailable() },
+                           tooltip: {
+                              title: $data.description ? $data.name().replace('_', ' ') + '<br/>' + $data.description : '',
+                              trigger: 'hover',
+                              placement:'bottom',
+                              html: true
+                            }">
                            <knockout data-bind="if: ($data instanceof CaughtIndicatingItem)">
                                <span style="position: absolute; top: 15px; right: 20px;" 
                                      data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
@@ -6584,7 +6687,7 @@
                            <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/[^\w.-\\(\\)]/g, '_') + '.png' }">
                            <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
                            <div data-bind="if: $data.isAvailable()">
-                                <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency}}"></span>
+                                <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>
                             </div>
                             <div data-bind="ifnot: $data.isAvailable()">
                                 <span>Sold Out</span>
@@ -6603,15 +6706,33 @@
                         </div>
                         <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
                                 value="1" min="1" required name="amountOfItems"
-                                oninput="ShopHandler.amount(parseInt($(this).val().toString()) || 0);"
-                                onchange="ShopHandler.amount(parseInt($(this).val().toString()) || 0);" title=""/>
+                                oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
+                                onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
                         <div class="input-group-append">
-                            <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
-                                +10
-                            </button>
-                            <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
-                                +100
-                            </button>
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
+                                    +10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
+                                    +100
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(10)">
+                                    &times;10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(0.1)">
+                                    &div;10
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
+                                    +100
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(1000)">
+                                    +1000
+                                </button>
+                            <!-- /ko -->
                             <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
                                 Max
                             </button>
@@ -6725,9 +6846,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                         data-bind=" css: {disabled: AchievementHandler.navigateIndex() === 0}">
                     <img src="assets/images/leftarrow.png">
                 </button>
-
                 <div data-bind="text: AchievementHandler.navigateIndex()+1 + '/' + (AchievementHandler.numberOfTabs()+1)"></div>
-                
                 <button class="btn btn-secondary" onclick="AchievementHandler.navigateRight()"
                         data-bind=" css: {disabled: AchievementHandler.navigateIndex() ===  AchievementHandler.numberOfTabs()}">
                     <img src="assets/images/rightarrow.png">
@@ -6737,7 +6856,9 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
     </div>
 
     <script type="text/html" id="achievementListTemplate">
-        <tr data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }">
+        <tr
+            class="achievement-row"
+            data-bind="css: { 'table-success': isCompleted() , 'table-danger': !isCompleted() }, click: () => {App.game.achievementTracker.trackAchievement($data); $('#achievementsModal').modal('hide');}">
             <td style="text-align:left;vertical-align:middle;"><b><span data-bind="text: name">Name</span></b><br>
                 <small><span data-bind="text: description">Description</span></small>
             </td>
@@ -6751,6 +6872,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
         </tr>
     </script>
 </div>
+
 
 <!-- Oak Items Modal-->
 <div class="modal fade noselect" id="oakItemsModal" tabindex="-1" role="dialog" aria-badgeledby="oakItemsModal">
@@ -6949,9 +7071,11 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                               </tr>
                             </thead> -->
                             <tbody>
-                              <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
-                              <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
-                              <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('theme')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('backgroundImage')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('shopButtons')}"></tr>
+                                <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
                             </tbody>
                         </table>
                     </div>
@@ -7359,6 +7483,14 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
    <div class="modal-content">
        <div class="modal-header">
             <h5 class="modal-title" id="breedingModalLabel" data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'right' }">Day Care <span class="text-primary">ⓘ</span></h5>
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
+                    data-target="#breeding-filter" aria-expanded="false" aria-controls="breeding-filter">
+                Filters
+            </button>
+            <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
+                    data-target="#breeding-sort" aria-expanded="false" aria-controls="breeding-sort">
+                Sort
+            </button>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -7373,7 +7505,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
             <div class="tab-content p-3">
                 <div class="tab-pane active" id="breeding-pokemon">
                     <div class="text-left">
-                        <div class="form-row">
+                        <div class="form-row collapse" id="breeding-filter">
                             <div class="form-group col-md-6 col-6">
                                 <label>Search</label>
                                 <input autocomplete="off" class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
@@ -7426,6 +7558,22 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </select>
                             </div>
                         </div>
+                        <div class="form-row collapse" id="breeding-sort">
+                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySort')">
+                                <label>Sort</label>
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                                    data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                    <option data-bind="text: $data.text, value: $data.value"></option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySortDirection')">
+                                <label>Sort Direction</label>
+                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, this.value === 'true')"
+                                    data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue().toString()]">
+                                    <option data-bind="text: $data.value ? 'Descending' : 'Ascending', value: $data.value.toString()"></option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div data-bind="visible: App.game.breeding.hasFreeEggSlot()">
                         <!-- Check if the player has any level 100 Pokemon or if they have any eggs -->
@@ -7450,50 +7598,47 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                 </div>
 
                 <div class="tab-pane" id="breeding-eggs">
-                    <div data-bind="visible: App.game.breeding.hasFreeEggSlot()">
-                        <p class="text-danger" data-bind="visible: !Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()).length">
-                            Unfortunately, you don't have any eggs to breed.
-                        </p>
-                        <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()).length -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]())">
-                            <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap">
-                                <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data)">egg</span>
-                                <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
-                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player._itemList[$data]()">amount</span>
-                                <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }"></a>
-                                <knockout style="position: absolute; right: 2px; top: -14px;"
-                                    data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"/>
-                            </li>
-                        </ul>
-                        <!-- /ko -->
-                    </div>
-
                     <p class="text-danger" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
                         Unfortunately, you don't have any free eggslots.
                     </p>
+
+                    <p class="text-danger" data-bind="visible: !Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()).length">
+                        <span data-bind="text: App.game.breeding.hasFreeEggSlot() ? 'Unfortunately,' : 'Even more unfortunately,'"></span> you don't have any eggs to breed.
+                    </p>
+                    <!-- ko if: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]()).length -->
+                    <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.EggItemType).filter(e=>isNaN(e)).filter(x=>player._itemList[x]())">
+                        <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
+                            <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data)">egg</span>
+                            <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data}.png` }">
+                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + player._itemList[$data]()">amount</span>
+                            <a class="overlay" href="#breed" data-bind="click: function() { ItemList[$data].use(); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }"></a>
+                            <knockout style="position: absolute; right: 2px; top: -14px;"
+                                data-bind="template: { name: 'caughtStatusTemplate', data: { status: ItemList[$data].getCaughtStatus() }, if: (ItemList[$data] instanceof CaughtIndicatingItem) }"/>
+                        </li>
+                    </ul>
+                    <!-- /ko -->
                 </div> 
 
                 <div class="tab-pane" id="breeding-fossils">
-                    <div data-bind="visible: App.game.breeding.hasFreeEggSlot()">
-                        <p class="text-danger" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length">
-                            Unfortunately, you don't have any fossils to breed.
-                        </p>
-                        <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false)">
-                            <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap">
-                                <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
-                                <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
-                                <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount()">amount</span>
-                                <a class="overlay" href="#breed" data-bind="click: function() { Underground.sellMineItem($data.id); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }"></a>
-                            </li>
-                        </ul>
-                        <!-- /ko -->
-                    </div>
-
                     <p class="text-danger" data-bind="visible: !App.game.breeding.hasFreeEggSlot()">
                         Unfortunately, you don't have any free eggslots.
                     </p>
-                </div> 
+
+                    <p class="text-danger" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length">
+                        <span data-bind="text: App.game.breeding.hasFreeEggSlot() ? 'Unfortunately,' : 'Even more unfortunately,'"></span> you don't have any fossils to breed.
+                    </p>
+
+                    <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length -->
+                    <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false)">
+                        <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
+                            <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
+                            <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
+                            <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount()">amount</span>
+                            <a class="overlay" href="#breed" data-bind="click: function() { Underground.sellMineItem($data.id); if (!App.game.breeding.hasFreeEggSlot()) {$('#breedingModal').modal('hide'); } }"></a>
+                        </li>
+                    </ul>
+                    <!-- /ko -->
+                </div>
             </div>
        </div>
        <div class="modal-footer">
@@ -7527,7 +7672,7 @@ style="cursor:default" tabindex="-1">
             </div>
 
             <div class="modal-body tab-content p-0">
-                <div id="dig" class="tab-pane fade in active show pl-3 pr-3">
+                <div id="dig" class="tab-pane fade in active show pl-3 pr-3" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
                     <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
                         <button class="col-4 btn btn-secondary" data-bind="
                                                         click: function(){  ItemList[$data].use();},
@@ -7735,46 +7880,50 @@ aria-labelledby="pokedexModalLabel">
        <div class="modal-header">
            <h4 style="margin-bottom: 0">Pokédex</h4>
            <button style="float:right;" class="btn btn-secondary" type="button" data-toggle="collapse"
-                   data-target="#pokedex-collapse" aria-expanded="false" aria-controls="pokedex-collapse">
+                   data-target="#pokedex-filter-container" aria-expanded="false" aria-controls="pokedex-filter-container">
                Filters
            </button>
        </div>
        <div class="modal-body">
+            <div class="collapse" id="pokedex-filter-container">
+                <div class="container-fluid" style="border-bottom: 1px solid #eceeef">
+                    <div class="form-row text-left">
 
-           <div class="collapse" id="pokedex-collapse">
-               <div class="container-fluid" style="border-bottom: 1px solid #eceeef">
-                   <div class="row justify-content-center">
+                        <!--Name-->
+                        <div class="form-group col-md-6 col-6">
+                            <label>Name</label>
+                            <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
+                                   oninput="PokedexHelper.updateList()">
+                        </div>
 
-                       <!--Name-->
-                       <div class="form-group row col-sm-10 col-lg-6">
-                           <label class="col-2 col-form-label">Name</label>
-                           <div class="col-10">
-                               <input id="nameFilter" class="form-control" placeholder="Bulbasaur" value=""
-                                      oninput="PokedexHelper.updateList()">
-                           </div>
-                       </div>
+                        <!--Region-->
+                        <div class="form-group col-md-6 col-6">
+                            <label>Region</label>
+                            <select id="pokedex-filter-region" class="custom-select"
+                                    oninput="PokedexHelper.updateList()" style="margin-right: 8px">
+                                <option value="" selected>All</option>
+                            </select>
+                        </div>
 
-                       <!--Types-->
-                       <div class="form-group row col-sm-10 col-lg-6">
-                           <label class="col-2 col-form-label" for="pokedex-filter-type1">Type</label>
-                           <div class="col-5">
-                               <select id="pokedex-filter-type1" class="custom-select"
-                                       oninput="PokedexHelper.updateList()" style="margin-right: 8px">
-                                   <option value="" selected>All</option>
-                               </select>
-                           </div>
-                           <label class="sr-only" for="pokedex-filter-type2">Type</label>
-                           <div class="col-5">
-                               <select id="pokedex-filter-type2" class="custom-select"
-                                       oninput="PokedexHelper.updateList()">
-                                   <option value="" selected>All</option>
-                               </select>
-                           </div>
-                       </div>
+                        <!--Types-->
+                        <div class="form-group col-md-6 col-6">
+                            <label>Type</label>
+                            <select id="pokedex-filter-type1" class="custom-select"
+                                    oninput="PokedexHelper.updateList()" style="margin-right: 8px">
+                                <option value="" selected>All</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 col-6">
+                            <label>Type</label>
+                            <select id="pokedex-filter-type2" class="custom-select"
+                                    oninput="PokedexHelper.updateList()">
+                                <option value="" selected>All</option>
+                            </select>
+                        </div>
 
-                   </div>
+                    </div>
 
-                   <div class="form-group row justify-content-center">
+                    <div class="form-group row justify-content-center">
                        <!--Uncaught-->
                        <div class="col-sm-2">
                            <label class="form-check-label">
@@ -7984,8 +8133,7 @@ aria-labelledby="badgeCaseModalLabel">
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active" href="#saveTab" data-toggle="tab">Save</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#saveConvert" data-toggle="tab">Converter</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#saveConvert" data-toggle="tab">Convert Original Save</a></li>
                 </ul>
                 <div class="tab-content p-3">
                     <div id="saveTab" class="tab-pane fade in active show">
@@ -8000,6 +8148,7 @@ aria-labelledby="badgeCaseModalLabel">
                             <!-- ko if: App.game.discord.enabled -->
                             <button class="btn btn-primary btn-block" onClick="App.game.discord.login()" data-bind="visible: !App.game.discord.ID()">Link Discord</button>
                             <button class="btn btn-warning btn-block" onClick="App.game.discord.logout()" data-bind="visible: App.game.discord.ID()">Unlink Discord</button>
+                            <i class="text-warning"><strong>Note:</strong> This is <strong>not</strong> used for cloud saves,<br/>this just allows you to enter codes recieved from the Discord bot.</i>
                             <hr>
                             <!-- /ko -->
 
@@ -8010,14 +8159,13 @@ aria-labelledby="badgeCaseModalLabel">
                                     onchange=Save.loadFromFile(this.files[0])>
                             <label for="input" class="btn btn-primary btn-block">Import Save</label>
                             <hr>
-                            <h5 style="color:red; margin-top: 20px;">You do not get any rewards for resetting your
-                                savefile</h5>
+                            <h5 class="text-danger">You do not get any rewards for resetting your savefile</h5>
                             <button class="btn btn-danger btn-block" onClick="Save.reset()">Reset All</button>
                         </div>
                     </div>
 
                     <div id="saveConvert" class="tab-pane fade">
-                        <p>You can paste your old Pokéclicker savefile here, to keep shinies:</p>
+                        <p>You can paste your old PokéClicker save file here, to keep shinies:</p>
                         <textarea id="convertTextArea" class="saveTextArea"></textarea>
                         <button class="btn btn-success btn-block" onclick="Save.convert()">
                             Convert
@@ -8381,6 +8529,120 @@ aria-labelledby="badgeCaseModalLabel">
     </div>
   </div>
 </div>
+
+<!-- Damage Calculator Modal -->
+<script type="text/html" id="damageDetailTemplate">
+  <tr>
+      <td>
+          <img class="smallImage" data-bind="attr:{ src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }" src=""/>
+      <td class="text-nowrap">
+          <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
+      </td>
+      <td data-bind="text: Math.round(damage).toLocaleString('en-US')">Damage</td>
+      <td data-bind="text: PokemonType[type1]">Type 1</td>
+      <td data-bind="text: PokemonType[type2]">Type 2</td>
+  </tr>
+</script>
+
+<div class="modal fade" id="damageCalculatorModal" tabindex="-1" role="dialog"
+aria-labelledby="damageCalculatorModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="damageCalculatorModalLabel" data-bind="tooltip: { title: `Check how much damage you are doing against a particular pokemon type, and see a breakdown of where that damage is coming from by your pokemon types.`, trigger: 'hover', placement:'right' }">Damage Calculator <span class="text-primary">ⓘ</span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body p-0">
+            <div class="p-1">
+                <div class="form-row m-0">
+                    <div class="form-group col-md-3 col-6 align-self-center">
+                        <div class="form-check">
+                            <input id="damage-calc-include-breeding" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.includeBreeding"></input>
+                            <label for="damage-calc-include-breeding" class="form-check-label">Include Breeding</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="damage-calc-use-base" class="form-check-input" type="checkbox" autocomplete="off" data-bind="checked: DamageCalculator.baseAttackOnly"></input>
+                            <label for="damage-calc-use-base" class="form-check-label">Base Attack Only</label>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3 col-6">
+                        <label>Region</label>
+                        <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.region">
+                            <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
+                            <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
+                            <!-- /ko -->
+                            <option value="-1">None</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3 col-6">
+                        <label>Type 1</label>
+                        <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.type1">
+                            <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
+                            <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                            <!-- /ko -->
+                        </select>
+                    </div>
+                    <div class="form-group col-md-3 col-6">
+                        <label>Type 2</label>
+                        <select autocomplete="off" class="custom-select" data-bind="value: DamageCalculator.type2">
+                            <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
+                            <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                            <!-- /ko -->
+                        </select>
+                    </div>
+                </div>
+                <div data-bind="text: `Total Damage: ${Math.round(DamageCalculator.observableTotalDamage()).toLocaleString('en-US')}`"> </div>
+                <div class="d-flex">
+                    <!-- ko foreach: DamageCalculator.observableTypeDamageArray -->
+                    <div class="type-damage-bar"
+                        data-bind="style: {'flex-grow': $data,
+                                            'background-color': '#' + TypeHelper.typeColorsLocked[$index()]
+                                          },
+                                    tooltip: {title: `${PokemonType[$index()]}: ${Math.round($data).toLocaleString('en-US')}`,
+                                              trigger: 'hover',
+                                              placement:'bottom'
+                                            },
+                                    click: () => {DamageCalculator.detailType($index())}"
+                    ></div>
+                    <!-- /ko -->
+                </div>
+                <div class="form-group text-left mt-3">
+                    <label>Type Detail</label>
+                    <select autocomplete="off" data-bind="value: DamageCalculator.detailType">
+                        <!-- ko foreach: GameHelper.enumStrings(PokemonType) -->
+                        <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                        <!-- /ko -->
+                    </select>
+                    <!-- ko if: DamageCalculator.detailType() != PokemonType.None -->
+                    <span class="float-right" data-bind="text: `${PokemonType[DamageCalculator.detailType()]} Damage: ${Math.round(DamageCalculator.observableTypeDamageArray()[DamageCalculator.detailType()]).toLocaleString('en-US')}`"></span>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div data-bind="if: DamageCalculator.detailType() != PokemonType.None">
+                <table id="damageCalcTypeDetailTable" class="table table-striped table-hover table-sm m-0">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Damage</th>
+                            <th>Type 1</th>
+                            <th>Type 2</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="template: { name: 'damageDetailTemplate', foreach: DamageCalculator.observableTypeDetails }">
+                    </tbody>
+                </table>
+            </div>
+       </div>
+       <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+       </div>
+   </div>
+</div>
+</div>
+
 
 </body>
 </html>

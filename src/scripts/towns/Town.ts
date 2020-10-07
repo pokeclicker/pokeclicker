@@ -130,6 +130,10 @@ const CinnabarIslandResearcher = new NPC('Researcher', [
     'They were trying to clone an ancient Pokémon in the mansion, I wonder if they succeeded.',
     'Apparently the ancient Pokémon escaped, And can be found roaming around Kanto!',
 ]);
+const BigSpender = new NPC('Big Spender', [
+    'I love shopping! When I come in, the cashiers know I want tons of items.',
+    'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
+]);
 
   
 
@@ -168,6 +172,7 @@ TownList['Celadon City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 8)],
         shop: CeladonCityShop,
+        npcs: [BigSpender],
     }
 );
 TownList['Saffron City'] = new Town(
@@ -368,6 +373,7 @@ TownList['Goldenrod City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 34)],
         shop: GoldenrodCityShop,
+        npcs: [BigSpender],
     }
 );
 TownList['Ecruteak City'] = new Town(
@@ -642,6 +648,7 @@ TownList['LilyCove City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 121)],
         shop: LilyCoveCityShop,
+        npcs: [BigSpender],
     }
 );
 TownList['Mossdeep City'] = new Town(
@@ -919,6 +926,7 @@ TownList['Veilstone City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 215)],
         shop: VeilstoneCityShop,
+        npcs: [BigSpender],
     }
 );
 TownList['Pastoria City'] = new Town(
