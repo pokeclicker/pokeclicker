@@ -68,7 +68,11 @@ class BattlePokemon implements EnemyPokemonInterface {
             const name = GameConstants.humanifyString(item.name());
             item.gain(1);
             const msg = `${this.name} dropped ${GameHelper.anOrA(name)} ${name}!`;
-            Notifier.notify({ message: `The enemy ${msg}`, type: GameConstants.NotificationOption.success, setting: GameConstants.NotificationSetting.dropped_item });
+            Notifier.notify({
+                message: `The enemy ${msg}`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.dropped_item,
+            });
             App.game.logbook.newLog(LogBookTypes.FOUND, `An enemy ${msg}`);
         }
         App.game.party.gainExp(this.exp, this.level, trainer);

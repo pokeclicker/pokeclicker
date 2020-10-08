@@ -109,7 +109,13 @@ class Underground {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
-                Notifier.notify({ message: 'Your mining energy has reached maximum capacity!', type: GameConstants.NotificationOption.success, timeout: 1e4, sound: GameConstants.NotificationSound.underground_energy_full, setting: GameConstants.NotificationSetting.underground_energy_full });
+                Notifier.notify({
+                    message: 'Your mining energy has reached maximum capacity!',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                    sound: NotificationConstants.NotificationSound.underground_energy_full,
+                    setting: NotificationConstants.NotificationSetting.underground_energy_full,
+                });
             }
         }
     }
@@ -119,7 +125,10 @@ class Underground {
         const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
         const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
         this.energy = this.energy + gain;
-        Notifier.notify({ message: `You restored ${gain} mining energy!`, type: GameConstants.NotificationOption.success });
+        Notifier.notify({
+            message: `You restored ${gain} mining energy!`,
+            type: NotificationConstants.NotificationOption.success,
+        });
     }
 
     public static sortMineItems(prop: string, flip = true) {
@@ -200,7 +209,10 @@ class Underground {
         if (this.canAccess()) {
             $('#mineModal').modal('show');
         } else {
-            Notifier.notify({ message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
