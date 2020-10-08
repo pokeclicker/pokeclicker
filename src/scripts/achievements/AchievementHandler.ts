@@ -40,6 +40,10 @@ class AchievementHandler {
                                     (this.filter.region() == 'all' ? true : a.region == +this.filter.region())));
         if (!retainPage) {
             this.resetPages();
+        } else if (this.getAchievementListWithIndex().length == 0) {
+            if (this.navigateIndex() > 0) {
+                this.navigateIndex(this.navigateIndex() - 1);
+            }
         }
     }
 
