@@ -1572,7 +1572,7 @@ const CoumarineCityShop = new Shop([
 ]);
 const LaverreCityShop = new Shop([
     ItemList['Sachet'],
-    ItemList['Whipped Dream'],
+    ItemList['Whipped_dream'],
 ]);
 const DendemilleTownShop = new Shop([
     ItemList['Dusk_stone'],
