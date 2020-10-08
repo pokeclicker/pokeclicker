@@ -269,10 +269,20 @@ class Update implements Saveable {
                 }
                 button.style.display = '';
 
-                Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`, type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+                Notifier.notify({
+                    title: `[v${this.version}] Game has been updated!`,
+                    message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`,
+                    type: NotificationConstants.NotificationOption.primary,
+                    timeout: 6e4,
+                });
             } catch (err) {
                 console.error('Error trying to convert backup save', err);
-                Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our Discord.</i>', type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+                Notifier.notify({
+                    title: `[v${this.version}] Game has been updated!`,
+                    message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our Discord.</i>',
+                    type: NotificationConstants.NotificationOption.primary,
+                    timeout: 6e4,
+                });
                 try {
                     localStorage.backupSave = JSON.stringify(backupSaveData);
                 } catch (e) {}

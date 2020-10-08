@@ -24,7 +24,10 @@ abstract class Evolution {
 
         // Notify the player if they haven't already caught the evolution, or notifications are forced
         if (!App.game.party.alreadyCaughtPokemonByName(evolvedPokemon) || notification) {
-            Notifier.notify({ message: `Your ${this.basePokemon} evolved into a ${evolvedPokemon}`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({
+                message: `Your ${this.basePokemon} evolved into a ${evolvedPokemon}`,
+                type: NotificationConstants.NotificationOption.success,
+            });
         }
 
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_STONE);

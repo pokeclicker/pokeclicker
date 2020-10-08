@@ -39,7 +39,7 @@ class QuestLineHelper {
 
         //Defeat Pewter Gym
         const pewterReward = () => {
-            Notifier.notify({ message: 'Tutorial completed!', type: GameConstants.NotificationOption.success });
+            Notifier.notify({ message: 'Tutorial completed!', type: NotificationConstants.NotificationOption.success });
             Information.show({
                 steps: [
                     {
@@ -71,7 +71,11 @@ class QuestLineHelper {
         // Defeat 500 Psychic type Pokemon
         const psychicShardReward = () => {
             App.game.shards.gainShards(500, PokemonType.Psychic);
-            Notifier.notify({ title: deoxysQuestLine.name, message: 'You have gained 500 Psychic shards', type: GameConstants.NotificationOption.success });
+            Notifier.notify({
+                title: deoxysQuestLine.name,
+                message: 'You have gained 500 Psychic shards',
+                type: NotificationConstants.NotificationOption.success,
+            });
         };
         const defeatPsychic = new CustomQuest(500, psychicShardReward, 'Defeat 500 Psychic type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonDefeated[p.id]()).reduce((a,b) => a + b, 0);
@@ -85,7 +89,11 @@ class QuestLineHelper {
                 return console.error('Unable to find item Mind Plate');
             }
             Underground.gainMineItem(mindPlate.id, 20);
-            Notifier.notify({ title: deoxysQuestLine.name, message: `You have gained 20 ${mindPlate.name}s`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({
+                title: deoxysQuestLine.name,
+                message: `You have gained 20 ${mindPlate.name}s`,
+                type: NotificationConstants.NotificationOption.success,
+            });
         };
         const catchPsychic = new CustomQuest(200, mindPlateReward, 'Capture 200 Psychic type Pokémon', () => {
             return pokemonMap.filter(p => p.type.includes(PokemonType.Psychic)).map(p => App.game.statistics.pokemonCaptured[p.id]()).reduce((a,b) => a + b, 0);
@@ -94,7 +102,12 @@ class QuestLineHelper {
 
         // Reach stage 100 in battle frontier
         const reachStage100Reward = () => {
-            Notifier.notify({ title: deoxysQuestLine.name, message: 'Quest line completed!<br/><i>You have uncovered the Mystery of Deoxys</i>', type: GameConstants.NotificationOption.success, timeout: 3e4 });
+            Notifier.notify({
+                title: deoxysQuestLine.name,
+                message: 'Quest line completed!<br/><i>You have uncovered the Mystery of Deoxys</i>',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 3e4,
+            });
         };
         const reachStage100 = new CustomQuest(100, reachStage100Reward, 'Defeat stage 100 in the Battle Frontier', App.game.statistics.battleFrontierHighestStageCompleted, 0);
         deoxysQuestLine.addQuest(reachStage100);
@@ -116,7 +129,7 @@ class QuestLineHelper {
             Notifier.notify({
                 title: undergroundQuestLine.name,
                 message: 'You have gained an Old Amber fossil!<br/><i>You can breed this in the hatchery.</i>',
-                type: GameConstants.NotificationOption.success,
+                type: NotificationConstants.NotificationOption.success,
                 timeout: GameConstants.MINUTE,
             });
         };
