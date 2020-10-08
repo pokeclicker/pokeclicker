@@ -33,12 +33,14 @@ class AchievementHandler {
         return this.achievementListFiltered().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
     }
 
-    public static filterAchievementList() {
+    public static filterAchievementList(retainPage?: boolean) {
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() &&
                                     (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
                                     (this.filter.type()   == 'all' ? true : a.property.constructor.name == this.filter.type()) &&
                                     (this.filter.region() == 'all' ? true : a.region == +this.filter.region())));
-        this.resetPages();
+        if (!retainPage) {
+            this.resetPages();
+        }
     }
 
     public static resetPages() {

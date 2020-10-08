@@ -19,7 +19,7 @@ class Achievement {
             });
             player.achievementsCompleted[this.name] = true;
             this.unlocked = true;
-            AchievementHandler.filterAchievementList();
+            AchievementHandler.filterAchievementList(true);
         }
     }
 
