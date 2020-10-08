@@ -13,7 +13,10 @@ class PokemonItem extends CaughtIndicatingItem {
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
         const pokemonName = this.name();
         if (shiny) {
-            Notifier.notify({ message: `✨ You obtained a shiny ${pokemonName}! ✨`, type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: `✨ You obtained a shiny ${pokemonName}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
         App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(pokemonName).id, shiny, true);
     }

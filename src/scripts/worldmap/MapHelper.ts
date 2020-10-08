@@ -27,7 +27,10 @@ class MapHelper {
             GameController.applyRouteBindings();
         } else {
             if (!MapHelper.routeExist(route, region)) {
-                return Notifier.notify({ message: `Route ${route} does not exist in the ${GameConstants.Region[region]} region.`, type: GameConstants.NotificationOption.warning });
+                return Notifier.notify({
+                    message: `Route ${route} does not exist in the ${GameConstants.Region[region]} region.`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
             }
 
             const routeData = Routes.getRoute(region, route);
@@ -39,7 +42,10 @@ class MapHelper {
                 }
             });
 
-            Notifier.notify({ message: `You don't have access to that route yet.<br/>${reqsList.join('<br/>')}`, type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: `You don't have access to that route yet.<br/>${reqsList.join('<br/>')}`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     };
 
@@ -163,7 +169,10 @@ class MapHelper {
                 }
             });
 
-            Notifier.notify({ message: `You don't have access to that location yet.<br/>${reqsList.join('<br/>')}`, type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: `You don't have access to that location yet.<br/>${reqsList.join('<br/>')}`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
@@ -197,7 +206,10 @@ class MapHelper {
                     return;
                 }
         }
-        Notifier.notify({ message: 'You cannot access this dock yet', type: GameConstants.NotificationOption.warning });
+        Notifier.notify({
+            message: 'You cannot access this dock yet',
+            type: NotificationConstants.NotificationOption.warning,
+        });
     }
 
     public static ableToTravel() {
