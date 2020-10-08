@@ -5,7 +5,8 @@ cache:
   directories:
     - node_modules
 install:
-- npm install
+# Use clean install to ensure we're getting identical versions to package-lock.json
+- npm ci
 script:
 #  Compile, fail on any error
 - tsc
