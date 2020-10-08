@@ -249,6 +249,9 @@ class Update implements Saveable {
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.5.5 - Couldn\'t update player statistics..', ಠ_ಠ);
             }
+        }
+        
+        if (this.isOlderVersion(this.saveVersion, '0.5.7')) {
             try {
                 //Update shinies
                 saveData.party.shinyPokemon.forEach(name => {
@@ -264,7 +267,7 @@ class Update implements Saveable {
                 // Update save data
                 this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
-                console.error('[update] v0.5.5 - Couldn\'t update player shinies..', ಠ_ಠ);
+                console.error('[update] v0.5.7 - Couldn\'t update player shinies..', ಠ_ಠ);
             }
         }
 
