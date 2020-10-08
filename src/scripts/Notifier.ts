@@ -1,5 +1,21 @@
 class Notifier {
-    public static notify({ message, type = GameConstants.NotificationOption.primary, title = '', timeout = 3000, time = 'just now', sound = null, setting = null }: { message: string; type?: GameConstants.NotificationOption; title?: string; timeout?: number; time?: string, sound?: Sound, setting?: BooleanSetting }) {
+    public static notify({
+        message,
+        type = NotificationConstants.NotificationOption.primary,
+        title = '',
+        timeout = 3000,
+        time = 'just now',
+        sound = null,
+        setting = null,
+    }: {
+        message: string;
+        type?: NotificationConstants.NotificationOption;
+        title?: string;
+        timeout?: number;
+        time?: string,
+        sound?: Sound,
+        setting?: BooleanSetting,
+    }) {
         $(document).ready(function() {
             // If we have sounds enabled for this, play it now
             if (sound) {
@@ -13,7 +29,7 @@ class Notifier {
 
             // Get the notification ready to display
             const toastID = Math.random().toString(36).substr(2, 9);
-            const toastHTML = `<div id="${toastID}" class="toast bg-${GameConstants.NotificationOption[type]}" data-autohide="false">
+            const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationConstants.NotificationOption[type]}" data-autohide="false">
                   ${title ? `<div class="toast-header">
                     <strong class="mr-auto text-primary">${title || ''}</strong>
                     <small class="text-muted">${time}</small>

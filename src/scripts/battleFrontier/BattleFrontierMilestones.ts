@@ -43,7 +43,12 @@ class BattleFrontierMilestones {
     public static gainReward(defeatedStage: number): void {
         const reward = this.nextMileStone();
         if (reward && reward.stage == defeatedStage) {
-            Notifier.notify({ title: '[Battle Frontier]', message: `You've successfully defeated stage ${defeatedStage} and earned:<br/><span>${reward.description}</span>!`, type: GameConstants.NotificationOption.warning, timeout: 1e4 });
+            Notifier.notify({
+                title: '[Battle Frontier]',
+                message: `You've successfully defeated stage ${defeatedStage} and earned:<br/><span>${reward.description}</span>!`,
+                type: NotificationConstants.NotificationOption.warning,
+                timeout: 1e4,
+            });
             reward.gain();
         }
     }
