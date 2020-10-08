@@ -18,7 +18,7 @@ First make sure you have git and npm available as command-line utilities (so you
 
 Open a command line interface in the directory that contains this README file, and use the following command to install PokéClicker's other dependencies locally:
 ```cmd
-npm install
+npm clean-install
 ```
 
 Then finally, run the following command in the command line interface to start a browser running PokéClicker.
@@ -33,7 +33,7 @@ This means you don't need to compile TypeScript yourself. Gulp will do this for 
 ## Use Google cloud shell _(alternative)_
 [![Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pokeclicker/pokeclicker&git_branch=develop&page=editor&open_in_editor=README.md)
 ```cmd
-npm install
+npm clean-install
 npm start
 ```
 
