@@ -23,10 +23,10 @@
                     <td data-bind="template: {name: 'selectedPokeballDisplayTemplate', data: { 'value': App.game.pokeballs.notCaughtShinySelection, 'field': App.game.pokeballs._notCaughtShinySelection, 'title': 'New Shiny Pokemon'}}"></td>
                 </tr>
                 <tr>
-                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.pokeballs[App.game.pokeballs.alreadyCaughtSelection]}"></td>
-                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.pokeballs[App.game.pokeballs.alreadyCaughtShinySelection]}"></td>
-                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.pokeballs[App.game.pokeballs.notCaughtSelection]}"></td>
-                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.pokeballs[App.game.pokeballs.notCaughtShinySelection]}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.getBallQuantity(App.game.pokeballs.alreadyCaughtSelection)}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.getBallQuantity(App.game.pokeballs.alreadyCaughtShinySelection)}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.getBallQuantity(App.game.pokeballs.notCaughtSelection)}"></td>
+                    <td data-bind="template: {name: 'selectedPokeballCountTemplate', data: App.game.pokeballs.getBallQuantity(App.game.pokeballs.notCaughtShinySelection)}"></td>
                 </tr>
             </thead>
         </table>
@@ -38,6 +38,6 @@
     </script>
 
     <script type="text/html" id="selectedPokeballCountTemplate">
-        <span data-bind="text: $data ? GameConstants.formatNumber($data.quantity()) : '', tooltip: $data && {title: $data.quantity().toLocaleString('en-US'), trigger: 'hover', animation: false}"></span>
+        <span data-bind="text: $data ? GameConstants.formatNumber($data) : '', tooltip: $data && {title: $data.toLocaleString('en-US'), trigger: 'hover', animation: false}"></span>
     </script>
 </div>

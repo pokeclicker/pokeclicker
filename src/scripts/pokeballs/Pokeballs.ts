@@ -96,6 +96,11 @@ class Pokeballs implements Feature {
         return this.pokeballs[ball].catchBonus;
     }
 
+    getBallQuantity(ball: GameConstants.Pokeball) {
+        const pokeball = this.pokeballs[ball];
+        return pokeball ? pokeball.quantity() : '';
+    }
+
     canAccess(): boolean {
         return true;
     }
