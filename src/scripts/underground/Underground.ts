@@ -5,6 +5,9 @@ class Underground {
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
     public static counter = 0;
 
+    public static sortDirection = -1;
+    public static lastPropSort = 'none';
+
     private static _energy: KnockoutObservable<number> = ko.observable(0);
     public static upgradeList: Array<Upgrade> = [];
 
@@ -89,6 +92,7 @@ class Underground {
         } else {
             const amt = player.mineInventory[index].amount();
             player.mineInventory[index].amount(amt + num);
+            this.sortMineItems(this.lastPropSort, false);
         }
     }
 
@@ -105,7 +109,13 @@ class Underground {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
-                Notifier.notify({ message: 'Your mining energy has reached maximum capacity!', type: GameConstants.NotificationOption.success, timeout: 1e4, sound: GameConstants.NotificationSound.underground_energy_full, setting: GameConstants.NotificationSetting.underground_energy_full });
+                Notifier.notify({
+                    message: 'Your mining energy has reached maximum capacity!',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                    sound: NotificationConstants.NotificationSound.underground_energy_full,
+                    setting: NotificationConstants.NotificationSetting.underground_energy_full,
+                });
             }
         }
     }
@@ -115,7 +125,43 @@ class Underground {
         const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
         const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
         this.energy = this.energy + gain;
-        Notifier.notify({ message: `You restored ${gain} mining energy!`, type: GameConstants.NotificationOption.success });
+        Notifier.notify({
+            message: `You restored ${gain} mining energy!`,
+            type: NotificationConstants.NotificationOption.success,
+        });
+    }
+
+    public static sortMineItems(prop: string, flip = true) {
+        const prevEl = document.querySelector(`[data-undergroundsort=${Underground.lastPropSort}]`);
+        const nextEl = prop == this.lastPropSort ? prevEl : document.querySelector(`[data-undergroundsort=${prop}]`);
+
+        // If new sort by, update old sort by
+        if (prop != this.lastPropSort) {
+            // Remove sort direction from previous element
+            if (prevEl) {
+                prevEl.textContent = this.lastPropSort;
+            }
+            this.lastPropSort = prop;
+        } else if (flip) {
+            // Flip sort direction
+            this.sortDirection *= -1;
+        }
+
+        // Update element text to dispaly sort direction
+        if (nextEl) {
+            nextEl.textContent = `${prop} ${this.sortDirection > 0 ? '▴' : '▾'}`;
+        }
+
+        player.mineInventory.sort((a, b) => {
+            switch (prop) {
+                case 'Amount':
+                    return (a.amount() - b.amount()) * this.sortDirection;
+                case 'Value':
+                    return (a.value - b.value) * this.sortDirection;
+                case 'Item':
+                    return a.name > b.name ? 1 * this.sortDirection : -1 * this.sortDirection;
+            }
+        });
     }
 
     public static sellMineItem(id: number, amount = 1) {
@@ -131,6 +177,7 @@ class Underground {
                     const success = Underground.gainProfit(item, sellAmt);
                     if (success) {
                         player.mineInventory[i].amount(curAmt - sellAmt);
+                        this.sortMineItems(this.lastPropSort, false);
                     }
                     return;
                 }
@@ -162,7 +209,10 @@ class Underground {
         if (this.canAccess()) {
             $('#mineModal').modal('show');
         } else {
-            Notifier.notify({ message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
@@ -216,7 +266,7 @@ class Underground {
 
 $(document).ready(function () {
     $('body').on('click', '.mineSquare', function () {
-        Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
+        Mine.click(parseInt(this.dataset.i, 10), parseInt(this.dataset.j, 10));
     });
 });
 

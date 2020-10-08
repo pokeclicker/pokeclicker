@@ -90,13 +90,17 @@ class BreedingController {
 
     public static initialize() {
         Object.keys(BreedingController.filter).forEach(e => (<KnockoutObservable<any>> BreedingController.filter[e]).subscribe(() => BreedingController.filterBreedableList()));
+        App.game.party._caughtPokemon.subscribe(() => BreedingController.filterBreedableList());
     }
 
     public static openBreedingModal() {
         if (App.game.breeding.canAccess()) {
             $('#breedingModal').modal('show');
         } else {
-            Notifier.notify({ message: 'You do not have access to the Day Care yet.<br/><i>Clear route 5 first</i>', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: 'You do not have access to the Day Care yet.<br/><i>Clear route 5 first</i>',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 

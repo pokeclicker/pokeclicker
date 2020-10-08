@@ -27,38 +27,62 @@ class Breeding implements Feature {
         this.hatchList[EggType.Fire] = [
             ['Charmander', 'Vulpix', 'Growlithe', 'Ponyta'],
             ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
-            ['Torchic'],
+            ['Torchic', 'Numel'],
             ['Chimchar'],
+            ['Tepig', 'Pansear'],
+            ['Fennekin'],
+            ['Litten'],
+            ['Scorbunny'],
         ];
         this.hatchList[EggType.Water] = [
             ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
             ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
             ['Mudkip', 'Feebas', 'Clamperl'],
-            ['Piplup', 'Finneon'],
+            ['Piplup', 'Finneon', 'Buizel'],
+            ['Oshawott', 'Panpour'],
+            ['Froakie'],
+            ['Popplio'],
+            ['Sobble'],
         ];
         this.hatchList[EggType.Grass] = [
             ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
             ['Chikorita', 'Hoppip', 'Sunkern'],
             ['Treecko', 'Tropius', 'Roselia'],
-            ['Turtwig', 'Carnivine'],
+            ['Turtwig', 'Carnivine', 'Budew'],
+            ['Snivy', 'Pansage'],
+            ['Chespin'],
+            ['Rowlet'],
+            ['Grookey'],
         ];
         this.hatchList[EggType.Fighting] = [
             ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
             ['Tyrogue'],
             ['Makuhita', 'Meditite'],
             ['Riolu'],
+            ['Throh', 'Sawk'],
+            [],
+            [],
+            [],
         ];
         this.hatchList[EggType.Electric] = [
             ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
             ['Chinchou', 'Mareep', 'Elekid'],
             ['Plusle', 'Minun', 'Electrike'],
-            ['Pachirisu'],
+            ['Pachirisu', 'Shinx'],
+            ['Blitzle'],
+            [],
+            [],
+            [],
         ];
         this.hatchList[EggType.Dragon] = [
             ['Dratini', 'Dragonair', 'Dragonite'],
             [],
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
+            ['Deino', 'Zwellous', 'Hydreigon'],
+            [],
+            [],
+            [],
         ];
         BreedingController.initialize();
     }
@@ -151,7 +175,10 @@ class Breeding implements Feature {
 
     public gainPokemonEgg(pokemon: PartyPokemon): boolean {
         if (!this.hasFreeEggSlot()) {
-            Notifier.notify({ message: "You don't have any free egg slots", type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: "You don't have any free egg slots",
+                type: NotificationConstants.NotificationOption.warning,
+            });
             return false;
         }
         const egg = this.createEgg(pokemon.name);
@@ -198,7 +225,7 @@ class Breeding implements Feature {
     }
 
     public createRandomEgg(): Egg {
-        const type = Math.floor(Math.random() * (Object.keys(this.hatchList).length - 1));
+        const type = Math.floor(Math.random() * Object.keys(this.hatchList).length);
         const egg = this.createTypedEgg(type);
         egg.type = EggType.Mystery;
         return egg;
@@ -208,7 +235,11 @@ class Breeding implements Feature {
         const pokemonName = GameConstants.FossilToPokemon[fossil];
         const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
         if (pokemonNativeRegion > player.highestRegion()) {
-            Notifier.notify({ message: 'You must progress further before you can uncover this fossil Pokemon!', type: GameConstants.NotificationOption.warning, timeout: 5e3 });
+            Notifier.notify({
+                message: 'You must progress further before you can uncover this fossil Pokemon!',
+                type: NotificationConstants.NotificationOption.warning,
+                timeout: 5e3,
+            });
             return new Egg();
         }
         return this.createEgg(pokemonName, EggType.Fossil);

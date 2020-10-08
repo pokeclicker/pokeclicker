@@ -47,18 +47,32 @@ class Save {
     }
 
     public static download() {
-        const element = document.createElement('a');
-        element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify({player, save: this.getSaveObject()})))}`);
-        const datestr = GameConstants.formatDate(new Date());
-        const filename = `[v${App.game.update.version}] PokeClickerSave_${datestr}.txt`;
-        element.setAttribute('download', filename);
+        const backupSaveData = {player, save: this.getSaveObject()};
+        try {
+            const element = document.createElement('a');
+            element.setAttribute('href', `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`);
+            const datestr = GameConstants.formatDate(new Date());
+            const filename = `[v${App.game.update.version}] PokeClickerSave_${datestr}.txt`;
+            element.setAttribute('download', filename);
 
-        element.style.display = 'none';
-        document.body.appendChild(element);
+            element.style.display = 'none';
+            document.body.appendChild(element);
 
-        element.click();
+            element.click();
 
-        document.body.removeChild(element);
+            document.body.removeChild(element);
+        } catch (err) {
+            console.error('Error trying to download save', err);
+            Notifier.notify({
+                title: 'Failed to download save data',
+                message: 'Please check the console for errors, and report them on our Discord.',
+                type: NotificationConstants.NotificationOption.primary,
+                timeout: 6e4,
+            });
+            try {
+                localStorage.backupSave = JSON.stringify(backupSaveData);
+            } catch (e) {}
+        }
     }
 
     public static loadMine() {
@@ -170,10 +184,16 @@ class Save {
                     localStorage.setItem('save', JSON.stringify(json.save));
                     location.reload();
                 } else {
-                    Notifier.notify({ message: 'This is not a valid decoded savefile', type: GameConstants.NotificationOption.danger });
+                    Notifier.notify({
+                        message: 'This is not a valid decoded savefile',
+                        type: NotificationConstants.NotificationOption.danger,
+                    });
                 }
             } catch (err) {
-                Notifier.notify({ message: 'This is not a valid savefile', type: GameConstants.NotificationOption.danger });
+                Notifier.notify({
+                    message: 'This is not a valid savefile',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
             }
         }, 1000);
     }
@@ -186,7 +206,10 @@ class Save {
             Save.convertShinies(p.caughtPokemonList);
             $('#saveModal').modal('hide');
         } catch (e) {
-            Notifier.notify({ message: 'Invalid save data.', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'Invalid save data.',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -202,9 +225,16 @@ class Save {
             }
         }
         if (converted.length > 0) {
-            Notifier.notify({ message: `You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`, type: GameConstants.NotificationOption.success, timeout: 1e4 });
+            Notifier.notify({
+                message: `You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+            });
         } else {
-            Notifier.notify({ message: 'No new shiny Pokémon to import.', type: GameConstants.NotificationOption.info });
+            Notifier.notify({
+                message: 'No new shiny Pokémon to import.',
+                type: NotificationConstants.NotificationOption.info,
+            });
         }
     }
 }

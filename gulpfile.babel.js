@@ -31,6 +31,9 @@ config = Object.assign({
     DEV_BANNER: false,
     DISCORD_CLIENT_ID: false,
     DISCORD_LOGIN_URI: false,
+    FEATURE_FLAGS: {
+        preloadUnreleasedTowns: false,
+    },
 }, config);
 
 const escapeRegExp = (string) => {
@@ -65,6 +68,9 @@ const srcs = {
     libs: [
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/intro.js/minified/intro.min.js',
+        'node_modules/intro.js/introjs.css',
+        'node_modules/intro.js/themes/introjs-modern.css',
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/popper.js/dist/umd/popper.min.js',
         'node_modules/knockout/build/output/knockout-latest.js',
@@ -127,6 +133,7 @@ gulp.task('compile-html', (done) => {
         .pipe(replace('$GOOGLE_ANALYTICS_ID', config.GOOGLE_ANALYTICS_ID))
         .pipe(replace('$GIT_BRANCH', process.env.GIT_BRANCH))
         .pipe(replace('$DEV_DESCRIPTION', process.env.DEV_DESCRIPTION !== undefined ? process.env.DEV_DESCRIPTION : ''))
+        .pipe(replace('$FEATURE_FLAGS', process.env.NODE_ENV === 'production' ? '{}' : JSON.stringify(config.FEATURE_FLAGS)))
         .pipe(ejs())
         .pipe(gulp.dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));

@@ -125,7 +125,10 @@ class Safari {
             App.game.gameState = GameConstants.GameState.safari;
             $('#safariModal').modal({backdrop: 'static', keyboard: false});
         } else {
-            Notifier.notify({ message: 'You need the Safari Pass to access this location.<br/><i>Visit the Gym in Fuschia City</i>', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: 'You need the Safari Pass to access this location.<br/><i>Visit the Gym in Fuschia City</i>',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
@@ -266,6 +269,7 @@ class Safari {
                     }
                 }
             });
+            App.game.breeding.progressEggs(1);
         } else {
             $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
             setTimeout(function() {

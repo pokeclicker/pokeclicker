@@ -43,7 +43,10 @@ class Quests implements Saveable {
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
         } else {
-            Notifier.notify({ message: 'You cannot start more quests', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot start more quests',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -53,7 +56,10 @@ class Quests implements Saveable {
         if (quest && quest.inProgress()) {
             quest.quit(shouldConfirm);
         } else {
-            Notifier.notify({ message: 'You cannot quit this quest', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot quit this quest',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -63,12 +69,15 @@ class Quests implements Saveable {
         if (quest && quest.isCompleted() && !quest.claimed()) {
             quest.claim();
             // Once the player completes every available quest, refresh the list for free
-            if (this.allQuestCompleted()) {
+            if (this.allQuestClaimed()) {
                 this.refreshQuests(true);
             }
         } else {
             console.trace('cannot claim quest..');
-            Notifier.notify({ message: 'You cannot claim this quest', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot claim this quest',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -81,7 +90,12 @@ class Quests implements Saveable {
 
         // Refresh the list each time a player levels up
         if (this.level() > currentLevel) {
-            Notifier.notify({ message: 'Your quest level has increased!', type: GameConstants.NotificationOption.success, timeout: 1e4, sound: GameConstants.NotificationSound.quest_level_increased });
+            Notifier.notify({
+                message: 'Your quest level has increased!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+                sound: NotificationConstants.NotificationSound.quest_level_increased,
+            });
             this.refreshQuests(true);
         }
     }
@@ -108,7 +122,10 @@ class Quests implements Saveable {
             GameHelper.incrementObservable(this.refreshes);
             this.generateQuestList();
         } else {
-            Notifier.notify({ message: 'You cannot afford to do that!', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot afford to do that!',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -140,9 +157,9 @@ class Quests implements Saveable {
         return false;
     }
 
-    // returns false if we still have incomplete quest
-    public allQuestCompleted() {
-        return !this.incompleteQuests().length;
+    // returns false if we still have incomplete/inprogress quest
+    public allQuestClaimed() {
+        return !this.incompleteQuests().length && !this.currentQuests().length;
     }
 
     // 1000 xp needed to reach level 2, amount needed for next level increases by 20% of previous level

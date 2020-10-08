@@ -11,14 +11,24 @@ class RedeemableCodes implements Saveable {
                 App.game.wallet.gainFarmPoints(10000);
                 App.game.farming.gainBerry(BerryType.Cheri, 100);
                 // Notify that the code was activated successfully
-                Notifier.notify({ title:'Code activated!', message: 'You gained 10,000 farmpoints and 100 Cheri berries', type: GameConstants.NotificationOption.success, timeout: 1e4 });
+                Notifier.notify({
+                    title:'Code activated!',
+                    message: 'You gained 10,000 farmpoints and 100 Cheri berries',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                });
             }),
             new RedeemableCode('shiny-charmer', -318017456, false, function () {
                 // Select a random Pokemon to give the player as a shiny
                 const pokemon = pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]);
                 App.game.party.gainPokemonById(pokemon.id, true, true);
                 // Notify that the code was activated successfully
-                Notifier.notify({ title:'Code activated!', message: `✨ You found a shiny ${pokemon.name}! ✨`, type: GameConstants.NotificationOption.success, timeout: 1e4 });
+                Notifier.notify({
+                    title:'Code activated!',
+                    message: `✨ You found a shiny ${pokemon.name}! ✨`,
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                });
             }),
             new RedeemableCode('complete-kanto', 750807787, false, function () {
                 // Complete all routes
@@ -42,7 +52,12 @@ class RedeemableCodes implements Saveable {
                     App.game.party.gainPokemonById(id, false, true);
                 }
                 // Notify that the code was activated successfully
-                Notifier.notify({ title:'Code activated!', message: 'You have unlocked all of the Kanto region', type: GameConstants.NotificationOption.success, timeout: 1e4 });
+                Notifier.notify({
+                    title:'Code activated!',
+                    message: 'You have unlocked all of the Kanto region',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                });
             }),
         ];
     }
@@ -64,7 +79,10 @@ class RedeemableCodes implements Saveable {
         });
 
         if (!redeemableCode) {
-            return Notifier.notify({ message: `Invalid code ${code}`, type: GameConstants.NotificationOption.danger });
+            return Notifier.notify({
+                message: `Invalid code ${code}`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
 
         if (redeemableCode) {

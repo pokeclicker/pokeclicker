@@ -270,22 +270,40 @@ class Update implements Saveable {
 
         // Notify the player that the game has updated!
         if (this.saveVersion != this.version && this.saveVersion != '0.0.0') {
-            const button = document.createElement('a');
-            button.className = 'btn btn-block btn-danger';
-            button.innerText = 'Click to Backup Save!';
-            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`;
-            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+            try {
+                const button = document.createElement('a');
+                button.className = 'btn btn-block btn-danger';
+                button.innerText = 'Click to Backup Save!';
+                button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`;
+                button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
 
-            // Add to body and click, triggering auto download
-            if (!settingsData.disableAutoDownloadBackupSaveOnUpdate) {
-                button.style.display = 'none';
-                document.body.appendChild(button);
-                button.click();
-                document.body.removeChild(button);
+                // Add to body and click, triggering auto download
+                if (!settingsData.disableAutoDownloadBackupSaveOnUpdate) {
+                    button.style.display = 'none';
+                    document.body.appendChild(button);
+                    button.click();
+                    document.body.removeChild(button);
+                }
+                button.style.display = '';
+
+                Notifier.notify({
+                    title: `[v${this.version}] Game has been updated!`,
+                    message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`,
+                    type: NotificationConstants.NotificationOption.primary,
+                    timeout: 6e4,
+                });
+            } catch (err) {
+                console.error('Error trying to convert backup save', err);
+                Notifier.notify({
+                    title: `[v${this.version}] Game has been updated!`,
+                    message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our Discord.</i>',
+                    type: NotificationConstants.NotificationOption.primary,
+                    timeout: 6e4,
+                });
+                try {
+                    localStorage.backupSave = JSON.stringify(backupSaveData);
+                } catch (e) {}
             }
-            button.style.display = '';
-
-            Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`, type: GameConstants.NotificationOption.primary, timeout: 6e4 });
         }
     }
 

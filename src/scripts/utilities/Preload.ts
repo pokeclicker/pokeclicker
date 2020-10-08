@@ -46,8 +46,6 @@ class Preload {
             return new Promise(resolve => {
                 //If you want to skip waiting, resolve immediately
                 resolve();
-                Preload.loadSplashScreen();
-                Preload.loadBackground();
                 Preload.loadTowns();
                 Preload.loadUndergroundItems();
                 // Preload.loadMap();
@@ -63,8 +61,6 @@ class Preload {
                 }, GameConstants.MAX_LOAD_TIME);
 
                 Promise.all([
-                    Preload.loadSplashScreen(),
-                    Preload.loadBackground(),
                     Preload.loadTowns(),
                     Preload.loadUndergroundItems(),
                     // Preload.loadMap(),
@@ -86,6 +82,13 @@ class Preload {
     private static loadTowns() {
         const p = Array<Promise<number>>();
         for (const name in TownList) {
+            // Skip unreleased towns unless a feature flag has enabled them
+            if (
+                !(<any>window).featureFlags?.preloadUnreleasedTowns && TownList[name].region() > GameConstants.MAX_AVAILABLE_REGION
+            ) {
+                continue;
+            }
+            // Skip fake towns that exist for the Elite
             if (name.includes('Elite') || name.includes('Champion')) {
                 continue;
             }
@@ -106,53 +109,6 @@ class Preload {
 
         }
         return Promise.all(p);
-    }
-
-    private static loadSplashScreen() {
-        return new Promise<number>(resolve => {
-            const img = new Image();
-            Preload.itemLoading('splash-screen');
-            img.onload = () => {
-                const loader = $('#loader');
-                loader.css('background', 'url(assets/images/background.png) top');
-                loader.css('background-size', 'cover');
-                loader.css('overflow', 'hidden');
-                loader.css('background-color', '#7dad71');
-                loader.css('background-repeat', 'repeat-x');
-                Preload.itemLoaded('splash-screen');
-                resolve();
-            };
-            img.onerror = () => {
-                Preload.itemErrored('splash-screen');
-                console.warn('Failed to load splash screen background image..');
-                resolve();
-            };
-            img.src = 'assets/images/background.png';
-
-        });
-    }
-
-    private static loadBackground() {
-        return new Promise<number>(resolve => {
-            const img = new Image();
-            Preload.itemLoading('background');
-            img.onload = () => {
-                const body = $('body');
-                body.css('background', 'url(assets/images/background.png) top');
-                body.css('background-size', 'cover');
-                body.css('overflow-x', 'hidden');
-                body.css('background-color', '#7dad71');
-                body.css('background-repeat', 'repeat-x');
-                Preload.itemLoaded('background');
-                resolve();
-            };
-            img.onerror = () => {
-                Preload.itemErrored('background');
-                console.warn('Failed to load background image..');
-                resolve();
-            };
-            img.src = 'assets/images/background.png';
-        });
     }
 
     private static loadPokemon() {
