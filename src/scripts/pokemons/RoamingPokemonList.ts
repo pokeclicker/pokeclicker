@@ -47,3 +47,4 @@ RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMa
 // Unova
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Tornadus));
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Thundurus));
+RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap['Meloetta (aria)'], undefined, new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion)));

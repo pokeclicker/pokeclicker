@@ -12725,7 +12725,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 648,
-            'name': 'Meloetta',
+            'name': 'Meloetta (aria)',
             'type': [PokemonType.Normal, PokemonType.Psychic],
             'eggCycles': 120,
             'levelType': LevelType.slow,
