@@ -19,6 +19,7 @@ const gulpWebpack = require('webpack-stream');
 const webpack = require('webpack');
 const del = require('del');
 const fs = require('fs');
+const path = require('path');
 const version = process.env.npm_package_version || '0.0.0';
 
 const webpackConfig = require('./webpack.config');
@@ -152,13 +153,17 @@ gulp.task('scripts', () => {
     const base = gulp.src('src/modules/index.ts')
         .pipe(gulpWebpack(webpackConfig, webpack));
 
+    // Convert the posix path to a path that matches the current OS
+    const osPathPrefix = '../src'.split(path.posix.sep).join(path.sep);
+    const osPathModulePrefix = '../src/modules'.split(path.posix.sep).join(path.sep);
+
     const generateDeclarations = base
-        .pipe(filter((path) => path.relative.startsWith('../src/modules')))
-        .pipe(rename((path) => Object.assign(
+        .pipe(filter((vinylPath) => vinylPath.relative.startsWith(osPathModulePrefix)))
+        .pipe(rename((vinylPath) => Object.assign(
             {},
-            path,
-            // Strip '../src/modules' from the start of declaration paths
-            { dirname: path.dirname.replace('../src/modules', '.') }
+            vinylPath,
+            // Strip '../src/modules' from the start of declaration vinylPaths
+            { dirname: vinylPath.dirname.replace(osPathModulePrefix, '.') }
         )))
         // Remove exports so that ./src/scripts can use them
         .pipe(replace(/(^|\n)export default \w+;/, '$1')) // export default variable;
@@ -172,7 +177,7 @@ gulp.task('scripts', () => {
 
     const compileModules = base
         // Exclude declaration files
-        .pipe(filter((path) => !path.relative.startsWith('../src')))
+        .pipe(filter((vinylPath) => !vinylPath.relative.startsWith(osPathPrefix)))
         .pipe(gulp.dest(dests.scripts));
 
     // Run the tasks for the new modules
