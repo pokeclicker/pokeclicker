@@ -181,22 +181,25 @@ gulp.task('scripts', () => {
         .pipe(gulp.dest(dests.scripts));
 
     // Run the tasks for the new modules
-    return Promise.all([
-        streamToPromise(generateDeclarations),
-        streamToPromise(compileModules),
-    ]).then(() => {
-        // Compile the old scripts
-        const tsProject = typescript.createProject('tsconfig.json');
-        const compileScripts = tsProject.src()
-            .pipe(replace('$VERSION', version))
-            .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
-            .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
-            .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
-            .pipe(tsProject())
-            .pipe(gulp.dest(dests.scripts))
-            .pipe(browserSync.reload({stream: true}));
-        return streamToPromise(compileScripts);
-    });
+
+    return del([dests.declarations])
+        .then(() => Promise.all([
+            streamToPromise(generateDeclarations),
+            streamToPromise(compileModules),
+        ]))
+        .then(() => {
+            // Compile the old scripts
+            const tsProject = typescript.createProject('tsconfig.json');
+            const compileScripts = tsProject.src()
+                .pipe(replace('$VERSION', version))
+                .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
+                .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
+                .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
+                .pipe(tsProject())
+                .pipe(gulp.dest(dests.scripts))
+                .pipe(browserSync.reload({stream: true}));
+            return streamToPromise(compileScripts);
+        });
 });
 
 gulp.task('styles', () => gulp.src(srcs.styles)
