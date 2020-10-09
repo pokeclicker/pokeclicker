@@ -1,6 +1,7 @@
 /* eslint-disable array-bracket-newline */
 ///<reference path="../achievements/GymBadgeRequirement.ts"/>
 ///<reference path="../achievements/OneFromManyRequirement.ts"/>
+///<reference path="../badgeCase/BadgeTypes.ts"/>
 ///<reference path="NPC.ts"/>
 
 type TownOptionalArgument = {
@@ -179,7 +180,7 @@ TownList['Saffron City'] = new Town(
     'Saffron City',
     GameConstants.Region.kanto,
     {
-        requirements: [new GymBadgeRequirement(BadgeCase.Badge.Rainbow)],
+        requirements: [new GymBadgeRequirement(BadgeTypes.Rainbow)],
         shop: SaffronCityShop,
     }
 );
@@ -248,7 +249,7 @@ TownList['Rock Tunnel'] = new DungeonTown(
     GameConstants.Region.kanto,
     [
         new RouteKillRequirement(10, 9),
-        new GymBadgeRequirement(BadgeCase.Badge.Cascade),
+        new GymBadgeRequirement(BadgeTypes.Cascade),
     ]
 );
 TownList['Power Plant'] = new DungeonTown(
@@ -256,7 +257,7 @@ TownList['Power Plant'] = new DungeonTown(
     GameConstants.Region.kanto,
     [
         new RouteKillRequirement(10, 9),
-        new GymBadgeRequirement(BadgeCase.Badge.Soul),
+        new GymBadgeRequirement(BadgeTypes.Soul),
     ]
 );
 TownList['Pokemon Tower'] = new DungeonTown(
@@ -264,7 +265,7 @@ TownList['Pokemon Tower'] = new DungeonTown(
     GameConstants.Region.kanto,
     [
         new RouteKillRequirement(10, 10),
-        new GymBadgeRequirement(BadgeCase.Badge.Rainbow),
+        new GymBadgeRequirement(BadgeTypes.Rainbow),
     ]
 );
 TownList['Seafoam Islands'] = new DungeonTown(
@@ -288,7 +289,7 @@ TownList['Victory Road'] = new DungeonTown(
 TownList['Cerulean Cave'] = new DungeonTown(
     'Cerulean Cave',
     GameConstants.Region.kanto,
-    [new GymBadgeRequirement(BadgeCase.Badge.Elite_KantoChampion)]
+    [new GymBadgeRequirement(BadgeTypes.Elite_KantoChampion)]
 );
 
 //Johto Shops
@@ -441,7 +442,7 @@ TownList['Slowpoke Well'] = new DungeonTown(
 TownList['Ilex Forest'] = new DungeonTown(
     'Ilex Forest',
     GameConstants.Region.johto,
-    [new GymBadgeRequirement(BadgeCase.Badge.Hive)]
+    [new GymBadgeRequirement(BadgeTypes.Hive)]
 );
 TownList['Burned Tower'] = new DungeonTown(
     'Burned Tower',
@@ -452,16 +453,16 @@ TownList['Tin Tower'] = new DungeonTown(
     'Tin Tower',
     GameConstants.Region.johto,
     [
-        new GymBadgeRequirement(BadgeCase.Badge.Mineral),
-        new GymBadgeRequirement(BadgeCase.Badge.Glacier),
+        new GymBadgeRequirement(BadgeTypes.Mineral),
+        new GymBadgeRequirement(BadgeTypes.Glacier),
     ]
 );
 TownList['Whirl Islands'] = new DungeonTown(
     'Whirl Islands',
     GameConstants.Region.johto,
     [
-        new GymBadgeRequirement(BadgeCase.Badge.Mineral),
-        new GymBadgeRequirement(BadgeCase.Badge.Glacier),
+        new GymBadgeRequirement(BadgeTypes.Mineral),
+        new GymBadgeRequirement(BadgeTypes.Glacier),
     ]
 );
 TownList['Mt Mortar'] = new DungeonTown(
@@ -597,7 +598,7 @@ TownList['Slateport City'] = new Town(
     {
         requirements: [
             new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Granite Cave')),
-            new GymBadgeRequirement(BadgeCase.Badge.Knuckle),
+            new GymBadgeRequirement(BadgeTypes.Knuckle),
         ],
         shop: SlateportCityShop,
     }
@@ -663,7 +664,7 @@ TownList['Sootopolis City'] = new Town(
     'Sootopolis City',
     GameConstants.Region.hoenn,
     {
-        requirements: [new RouteKillRequirement(10, 126), new GymBadgeRequirement(BadgeCase.Badge.Mind)],
+        requirements: [new RouteKillRequirement(10, 126), new GymBadgeRequirement(BadgeTypes.Mind)],
         shop: SootopolisCityShop,
     }
 );
@@ -671,7 +672,7 @@ TownList['Ever Grande City'] = new Town(
     'Ever Grande City',
     GameConstants.Region.hoenn,
     {
-        requirements: [new GymBadgeRequirement(BadgeCase.Badge.Rain)],
+        requirements: [new GymBadgeRequirement(BadgeTypes.Rain)],
         shop: EverGrandeCityShop,
     }
 );
@@ -697,7 +698,7 @@ TownList['Battle Frontier'] = new Town(
     'Battle Frontier',
     GameConstants.Region.hoenn,
     {
-        requirements: [new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)],
+        requirements: [new GymBadgeRequirement(BadgeTypes.Elite_HoennChampion)],
         shop: BattleFrontierShop,
     }
 );
@@ -713,7 +714,7 @@ TownList['Rusturf Tunnel'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [
         new RouteKillRequirement(10, 116),
-        new GymBadgeRequirement(BadgeCase.Badge.Stone),
+        new GymBadgeRequirement(BadgeTypes.Stone),
     ]
 );
 TownList['Granite Cave'] = new DungeonTown(
@@ -744,7 +745,7 @@ TownList['Jagged Pass'] = new DungeonTown(
 TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
     GameConstants.Region.hoenn,
-    [new GymBadgeRequirement(BadgeCase.Badge.Balance)]
+    [new GymBadgeRequirement(BadgeTypes.Balance)]
 );
 TownList['Mt. Pyre'] = new DungeonTown(
     'Mt. Pyre',
@@ -769,7 +770,7 @@ TownList['Seafloor Cavern'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [
         new RouteKillRequirement(10, 128),
-        new GymBadgeRequirement(BadgeCase.Badge.Mind),
+        new GymBadgeRequirement(BadgeTypes.Mind),
     ]
 );
 TownList['Sky Pillar'] = new DungeonTown(
@@ -783,14 +784,14 @@ TownList['Sky Pillar'] = new DungeonTown(
 TownList['Victory Road Hoenn'] = new DungeonTown(
     'Victory Road Hoenn',
     GameConstants.Region.hoenn,
-    [new GymBadgeRequirement(BadgeCase.Badge.Rain)]
+    [new GymBadgeRequirement(BadgeTypes.Rain)]
 );
 TownList['Sealed Chamber'] = new DungeonTown(
     'Sealed Chamber',
     GameConstants.Region.hoenn,
     [
         new RouteKillRequirement(10, 134),
-        new GymBadgeRequirement(BadgeCase.Badge.Mind),
+        new GymBadgeRequirement(BadgeTypes.Mind),
     ]
 );
 
@@ -943,7 +944,7 @@ TownList['Celestic Town'] = new Town(
     {
         requirements: [
             new RouteKillRequirement(10, 210),
-            new GymBadgeRequirement(BadgeCase.Badge.Fen),
+            new GymBadgeRequirement(BadgeTypes.Fen),
         ],
         shop: CelesticTownShop,
     }
@@ -990,7 +991,7 @@ TownList['Fight Area'] = new Town(
     'Fight Area',
     GameConstants.Region.sinnoh,
     {
-        requirements: [new GymBadgeRequirement(BadgeCase.Badge.Elite_SinnohChampion)],
+        requirements: [new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion)],
     }
 );
 TownList['Survival Area'] = new Town(
@@ -1021,7 +1022,7 @@ TownList['Ravaged Path'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 204),
-        new GymBadgeRequirement(BadgeCase.Badge.Coal),
+        new GymBadgeRequirement(BadgeTypes.Coal),
     ]
 );
 TownList['Eterna Forest'] = new DungeonTown(
@@ -1029,7 +1030,7 @@ TownList['Eterna Forest'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 205),
-        new GymBadgeRequirement(BadgeCase.Badge.Coal),
+        new GymBadgeRequirement(BadgeTypes.Coal),
     ]
 );
 TownList['Old Chateau'] = new DungeonTown(
@@ -1037,7 +1038,7 @@ TownList['Old Chateau'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 205),
-        new GymBadgeRequirement(BadgeCase.Badge.Forest),
+        new GymBadgeRequirement(BadgeTypes.Forest),
     ]
 );
 TownList['Wayward Cave'] = new DungeonTown(
@@ -1060,7 +1061,7 @@ TownList['Mt. Coronet North'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 211),
-        new GymBadgeRequirement(BadgeCase.Badge.Mine),
+        new GymBadgeRequirement(BadgeTypes.Mine),
     ]
 );
 TownList['Distortion World'] = new DungeonTown(
@@ -1068,7 +1069,7 @@ TownList['Distortion World'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 214),
-        new GymBadgeRequirement(BadgeCase.Badge.Icicle),
+        new GymBadgeRequirement(BadgeTypes.Icicle),
     ]
 );
 TownList['Lake Valor'] = new DungeonTown(
@@ -1076,7 +1077,7 @@ TownList['Lake Valor'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 213),
-        new GymBadgeRequirement(BadgeCase.Badge.Icicle),
+        new GymBadgeRequirement(BadgeTypes.Icicle),
     ]
 );
 TownList['Lake Verity'] = new DungeonTown(
@@ -1084,7 +1085,7 @@ TownList['Lake Verity'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 201),
-        new GymBadgeRequirement(BadgeCase.Badge.Icicle),
+        new GymBadgeRequirement(BadgeTypes.Icicle),
     ]
 );
 TownList['Lake Acuity'] = new DungeonTown(
@@ -1092,7 +1093,7 @@ TownList['Lake Acuity'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 217),
-        new GymBadgeRequirement(BadgeCase.Badge.Icicle),
+        new GymBadgeRequirement(BadgeTypes.Icicle),
     ]
 );
 TownList['Victory Road Sinnoh'] = new DungeonTown(
@@ -1100,7 +1101,7 @@ TownList['Victory Road Sinnoh'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 223),
-        new GymBadgeRequirement(BadgeCase.Badge.Beacon),
+        new GymBadgeRequirement(BadgeTypes.Beacon),
     ]
 );
 TownList['Spear Pillar'] = new DungeonTown(
@@ -1108,7 +1109,7 @@ TownList['Spear Pillar'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 211),
-        new GymBadgeRequirement(BadgeCase.Badge.Elite_SinnohChampion),
+        new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion),
     ]
 );
 TownList['Hall of Origin'] = new DungeonTown(
@@ -1119,19 +1120,19 @@ TownList['Hall of Origin'] = new DungeonTown(
 TownList['Fullmoon Island'] = new DungeonTown(
     'Fullmoon Island',
     GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeCase.Badge.Elite_SinnohChampion)]
+    [new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion)]
 );
 TownList['Newmoon Island'] = new DungeonTown(
     'Newmoon Island',
     GameConstants.Region.sinnoh,
-    [new GymBadgeRequirement(BadgeCase.Badge.Elite_SinnohChampion)]
+    [new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion)]
 );
 TownList['Flower Paradise'] = new DungeonTown(
     'Flower Paradise',
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 224),
-        new GymBadgeRequirement(BadgeCase.Badge.Elite_SinnohChampion),
+        new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion),
     ]
 );
 TownList['Stark Mountain'] = new DungeonTown(
@@ -1139,7 +1140,7 @@ TownList['Stark Mountain'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 227),
-        new GymBadgeRequirement(BadgeCase.Badge.Elite_SinnohChampion),
+        new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion),
     ]
 );
 TownList['Snowpoint Temple'] = new DungeonTown(
@@ -1147,7 +1148,7 @@ TownList['Snowpoint Temple'] = new DungeonTown(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 217),
-        new GymBadgeRequirement(BadgeCase.Badge.Elite_SinnohChampion),
+        new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion),
     ]
 );
 
@@ -1229,7 +1230,7 @@ TownList['Virbank City'] = new Town(
     'Virbank City',
     GameConstants.Region.unova,
     {
-        requirements: [new GymBadgeRequirement(BadgeCase.Badge.Basic)],
+        requirements: [new GymBadgeRequirement(BadgeTypes.Basic)],
         shop: VirbankCityShop,
     }
 );
@@ -1237,7 +1238,7 @@ TownList['Castelia City'] = new Town(
     'Castelia City',
     GameConstants.Region.unova,
     {
-        requirements: [new GymBadgeRequirement(BadgeCase.Badge.Toxic)],
+        requirements: [new GymBadgeRequirement(BadgeTypes.Toxic)],
         shop: CasteliaCityShop,
         dungeon: dungeonList['Castelia Sewers'],
     }
@@ -1248,7 +1249,7 @@ TownList['Nimbasa City'] = new Town(
     {
         requirements: [
             new RouteKillRequirement(10, 4),
-            new GymBadgeRequirement(BadgeCase.Badge.Insect),
+            new GymBadgeRequirement(BadgeTypes.Insect),
         ],
         shop: NimbasaCityShop,
     }
@@ -1259,7 +1260,7 @@ TownList['Driftveil City'] = new Town(
     {
         requirements: [
             new RouteKillRequirement(10,5),
-            new GymBadgeRequirement(BadgeCase.Badge.Bolt),
+            new GymBadgeRequirement(BadgeTypes.Bolt),
         ],
     }
 );
@@ -1269,7 +1270,7 @@ TownList['Mistralton City'] = new Town(
     {
         requirements: [
             new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Chargestone Cave')),
-            new GymBadgeRequirement(BadgeCase.Badge.Quake),
+            new GymBadgeRequirement(BadgeTypes.Quake),
         ],
         shop: MistraltonCityShop,
     }
@@ -1278,7 +1279,7 @@ TownList['Lentimas Town'] = new Town(
     'Lentimas Town',
     GameConstants.Region.unova,
     {
-        requirements: [new GymBadgeRequirement(BadgeCase.Badge.Jet)],
+        requirements: [new GymBadgeRequirement(BadgeTypes.Jet)],
         shop: LentimasTownShop,
     }
 );
@@ -1336,7 +1337,7 @@ TownList['Black and White Park'] = new Town(
     {
         requirements: [new OneFromManyRequirement([
             new MultiRequirement([
-                new GymBadgeRequirement(BadgeCase.Badge.Elite_UnovaChampion),
+                new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion),
                 new RouteKillRequirement(10, 14),
             ]),
             new RouteKillRequirement(10, 15),
@@ -1391,18 +1392,18 @@ TownList['Virbank Complex'] = new DungeonTown(
     'Virbank Complex',
     GameConstants.Region.unova,
     //Optional dungeon, no unique mons, safe to scrap
-    [new GymBadgeRequirement(BadgeCase.Badge.Basic)]
+    [new GymBadgeRequirement(BadgeTypes.Basic)]
 );
 TownList['Liberty Garden'] = new DungeonTown(
     'Liberty Garden',
     GameConstants.Region.unova,
     //Victini dungeon, maybe unlock later
-    [new GymBadgeRequirement(BadgeCase.Badge.Toxic)]
+    [new GymBadgeRequirement(BadgeTypes.Toxic)]
 );
 TownList['Castelia Sewers'] = new DungeonTown(
     'Castelia Sewers',
     GameConstants.Region.unova,
-    [new GymBadgeRequirement(BadgeCase.Badge.Toxic)]
+    [new GymBadgeRequirement(BadgeTypes.Toxic)]
 );
 TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
@@ -1414,7 +1415,7 @@ TownList['Desert Resort'] = new DungeonTown(
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, 4),
-        new GymBadgeRequirement(BadgeCase.Badge.Insect), // Should really be a route
+        new GymBadgeRequirement(BadgeTypes.Insect), // Should really be a route
     ]
 );
 TownList['Relic Castle'] = new DungeonTown(
@@ -1435,7 +1436,7 @@ TownList['Chargestone Cave'] = new DungeonTown(
 TownList['Mistralton Cave'] = new DungeonTown(
     'Mistralton Cave',
     GameConstants.Region.unova,
-    [new GymBadgeRequirement(BadgeCase.Badge.Quake)]
+    [new GymBadgeRequirement(BadgeTypes.Quake)]
 );
 TownList['Celestial Tower'] = new DungeonTown(
     'Celestial Tower',
@@ -1445,13 +1446,13 @@ TownList['Celestial Tower'] = new DungeonTown(
 TownList['Reversal Mountain'] = new DungeonTown(
     'Reversal Mountain',
     GameConstants.Region.unova,
-    [new GymBadgeRequirement(BadgeCase.Badge.Jet)]
+    [new GymBadgeRequirement(BadgeTypes.Jet)]
 );
 TownList['Strange House'] = new DungeonTown(
     'Strange House',
     GameConstants.Region.unova,
     // Optional dungeon, no unique mons, safe to scrap
-    [new GymBadgeRequirement(BadgeCase.Badge.Jet)]
+    [new GymBadgeRequirement(BadgeTypes.Jet)]
 );
 TownList['Undella Bay'] = new DungeonTown(
     'Undella Bay',
@@ -1464,7 +1465,7 @@ TownList['Seaside Cave'] = new DungeonTown(
     GameConstants.Region.unova,
     [
         new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Undella Bay')),
-        new GymBadgeRequirement(BadgeCase.Badge.Legend),
+        new GymBadgeRequirement(BadgeTypes.Legend),
     ]
 );
 TownList['Giant Chasm'] = new DungeonTown(
@@ -1472,7 +1473,7 @@ TownList['Giant Chasm'] = new DungeonTown(
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, 22),
-        new GymBadgeRequirement(BadgeCase.Badge.Wave),
+        new GymBadgeRequirement(BadgeTypes.Wave),
     ]
 );
 TownList['Cave of Being'] = new DungeonTown(
@@ -1499,7 +1500,7 @@ TownList['Twist Mountain'] = new DungeonTown(
     GameConstants.Region.unova,
     [new OneFromManyRequirement([
         new MultiRequirement([
-            new GymBadgeRequirement(BadgeCase.Badge.Elite_UnovaChampion),
+            new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion),
             new RouteKillRequirement(10, 7),
         ]),
         new RouteKillRequirement(10, 8),
@@ -1526,7 +1527,7 @@ TownList['Moor of Icirrus'] = new DungeonTown(
 TownList['Pinwheel Forest'] = new DungeonTown(
     'Pinwheel Forest',
     GameConstants.Region.unova,
-    [new GymBadgeRequirement(BadgeCase.Badge.Elite_UnovaChampion)]
+    [new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion)]
 );
 TownList['Wellspring Cave'] = new DungeonTown(
     'Wellspring Cave',
@@ -1571,7 +1572,7 @@ const CoumarineCityShop = new Shop([
 ]);
 const LaverreCityShop = new Shop([
     ItemList['Sachet'],
-    ItemList['Whipped Dream'],
+    ItemList['Whipped_dream'],
 ]);
 const DendemilleTownShop = new Shop([
     ItemList['Dusk_stone'],
@@ -1749,7 +1750,7 @@ TownList['Frost Cavern'] = new DungeonTown(
 TownList['Team Flare Secret HQ'] = new DungeonTown(
     'Team Flare Secret HQ',
     GameConstants.Region.kalos,
-    [new GymBadgeRequirement(BadgeCase.Badge.Psychic)]
+    [new GymBadgeRequirement(BadgeTypes.Psychic)]
 );
 TownList['Terminus Cave'] = new DungeonTown(
     'Terminus Cave',
@@ -1765,7 +1766,7 @@ TownList['Victory Road Kalos'] = new DungeonTown(
     'Victory Road Kalos',
     GameConstants.Region.kalos,
     [
-        new GymBadgeRequirement(BadgeCase.Badge.Iceberg),
+        new GymBadgeRequirement(BadgeTypes.Iceberg),
         new OneFromManyRequirement([
             new RouteKillRequirement(10, 21),
             new RouteKillRequirement(10, 22),
