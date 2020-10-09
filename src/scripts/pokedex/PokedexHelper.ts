@@ -81,7 +81,7 @@ class PokedexHelper {
             }
             
             // Event Pokemon
-            if (pokemon.id <= 0 && (!alreadyCaught || !alreadyCaughtShiny)) {
+            if (pokemon.id <= 0 && !alreadyCaught) {
                 return false;
             }
 
