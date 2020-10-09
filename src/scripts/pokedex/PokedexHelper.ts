@@ -64,7 +64,7 @@ class PokedexHelper {
         const highestDex = Math.max(highestEncountered, highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
-	    // Checks based on caught/shiny status
+            // Checks based on caught/shiny status
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
             const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
 
