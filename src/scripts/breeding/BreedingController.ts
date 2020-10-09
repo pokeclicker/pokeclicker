@@ -115,6 +115,19 @@ class BreedingController {
         return `assets/images/breeding/${eggType}.png`;
     }
 
+    public static getEggCssClass(egg: Egg): string {
+        const animationType = Settings.getSetting('eggAnimation').observableValue();
+        if (animationType === 'none') {
+            return '';
+        }
+
+        if (egg.progress() >= 100) {
+            return 'hatching';
+        }
+
+        return (animationType === 'almost' && egg.stepsRemaining() <= 50) ?  'hatchingSoon' : '';
+    }
+
     public static getEggSpots(pokemonName: string) {
         const pokemon = pokemonMap[pokemonName];
         const seed = pokemon.id * pokemon.type.reduce((a,b) => a * (b + 1), 1);
