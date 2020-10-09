@@ -27,6 +27,20 @@
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
+                      <td class="text-left">Primary Type</td>
+                      <td class="text-left tight"><code 
+                        data-bind="style: { 'color': '#' + TypeHelper.typeColorsLocked[pokemonMap[$data].type[0]],
+                          'background-color': '#' + TypeHelper.typeColors[pokemonMap[$data].type[0]]},
+                        text: PokemonType[pokemonMap[$data].type[0]] }">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Secondary Type</td>
+                      <td class="text-left tight"><code 
+                        data-bind="style: { 'color': '#' + TypeHelper.typeColorsLocked[pokemonMap[$data].type[1]],
+                          'background-color': '#' + TypeHelper.typeColors[pokemonMap[$data].type[1]]},
+                        text: PokemonType[pokemonMap[$data].type[1]] }">-</code></td>
+                    </tr>
+                    <tr>
                       <td class="text-left">Catch Rate</td>
                       <td class="text-left tight"><code data-bind="text: PokemonFactory.catchRateHelper(pokemonMap[$data].catchRate, true) + '%'">-</code></td>
                     </tr>
