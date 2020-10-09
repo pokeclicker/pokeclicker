@@ -42,7 +42,7 @@ class AchievementHandler {
             this.resetPages();
         } else if (this.getAchievementListWithIndex().length === 0 && this.navigateIndex() > 0) {
             this.calculateNumberOfTabs();
-            this.navigateIndex(this.numberOfTabs())
+            this.navigateIndex(this.numberOfTabs());
         }
     }
 
