@@ -1,11 +1,8 @@
 /// <reference path="../../scripts/badgeCase/BadgeTypes.ts"/>
-/// <reference path="../../scripts/GameConstants.ts"/>
 /// <reference path="../../scripts/ArrayOfObservables.ts"/>
 
 import { Feature } from './common/Feature';
-
-// TODO: Convert to imports after ./scripts have been converted to modules
-const GameConstants = require('../../scripts/GameConstants');
+import * as GameConstants from '../GameConstants';
 
 const emptyBadgeList = new Array(GameConstants.RegionGyms.flat().length).fill(false);
 
