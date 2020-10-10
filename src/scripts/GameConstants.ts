@@ -491,15 +491,15 @@ namespace GameConstants {
         LargeRestore: 0.5,
     };
 
-    export const KeyToDirection = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down',
-        65: 'left', //a
-        68: 'right', //d
-        83: 'down', //s
-        87: 'up', //w
+    export const KeyCodeToDirection = {
+        'ArrowUp': 'up',
+        'ArrowLeft': 'left',
+        'ArrowDown': 'down',
+        'ArrowRight': 'right',
+        'KeyW': 'up',
+        'KeyA': 'left',
+        'KeyS': 'down',
+        'KeyD': 'right',
     };
 
     export const FossilToPokemon = {
@@ -633,6 +633,10 @@ namespace GameConstants {
         UnovaGyms,
         KalosGyms,
     ];
+
+    export function getGymIndex(gym: string): number {
+        return GameConstants.RegionGyms.flat().findIndex(g => g === gym);
+    }
 
     export const KantoDungeons = [
         'Viridian Forest',
@@ -790,6 +794,10 @@ namespace GameConstants {
         KalosDungeons,
     ];
 
+    export function getDungeonIndex(dungeon: string): number {
+        return GameConstants.RegionDungeons.flat().findIndex(d => d === dungeon);
+    }
+
     export const StartingTowns = [
         'Pallet Town',
         'New Bark Town',
@@ -807,4 +815,9 @@ namespace GameConstants {
         'Castelia City',
         'Coumarine City',
     ];
+}
+
+// TODO: Remove namespace after all scripts have been moved to modules
+if (typeof module !== 'undefined') {
+    module.exports = GameConstants;
 }

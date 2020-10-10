@@ -1,4 +1,6 @@
-interface Feature extends Saveable {
+import { Saveable } from './Saveable';
+
+export interface Feature extends Saveable {
     name: string;
 
     initialize(): void;
