@@ -5,21 +5,24 @@ class Farming implements Feature {
     berryData: { [type: number]: Berry } = {};
 
     // TODO: Change this to fit all berry types
-    readonly AMOUNT_OF_BERRIES = 8;
+    readonly AMOUNT_OF_BERRIES = 67;
     readonly AMOUNT_OF_PLOTS = 25;
 
     defaults = {
         berryList: Array<number>(this.AMOUNT_OF_BERRIES).fill(0),
+        unlockedBerries: Array<boolean>(this.AMOUNT_OF_BERRIES).fill(false),
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
             return new Plot(index === 0, BerryType.None, 0);
         }),
     };
 
     berryList: ArrayOfObservables<number>;
+    unlockedBerries: ArrayOfObservables<boolean>;
     plotList: ArrayOfObservables<Plot>;
 
     constructor() {
         this.berryList = new ArrayOfObservables(this.defaults.berryList);
+        this.unlockedBerries = new ArrayOfObservables(this.defaults.unlockedBerries);
         this.plotList = new ArrayOfObservables(this.defaults.plotList);
     }
 
@@ -34,6 +37,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,900], 5, .1, 60);
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Bluk]      = new Berry(BerryType.Bluk,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Nanab]     = new Berry(BerryType.Nanab,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Wepear]    = new Berry(BerryType.Wepear,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Pinap]     = new Berry(BerryType.Pinap,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
@@ -192,6 +196,14 @@ class Farming implements Feature {
         return this.unlockedPlotCount() - 1;
     }
 
+    highestUnlockedBerry() {
+        for (let i = this.AMOUNT_OF_BERRIES - 1;i >= 0;i--) {
+            if (this.unlockedBerries[i]) {
+                return i;
+            }
+        }
+    }
+
     plant(index: number, berry: BerryType) {
         const plot = this.plotList[index];
         if (!plot.isEmpty() || !plot.isUnlocked || !this.hasBerry(berry)) {
@@ -261,6 +273,11 @@ class Farming implements Feature {
 
     gainBerry(berry: BerryType, amount = 1) {
         this.berryList[berry] += Math.floor(amount);
+
+        if (!this.unlockedBerries[berry]) {
+            // TODO: NOTIFY PLAYER?
+            this.unlockedBerries[berry] = true;
+        }
     }
 
     hasBerry(berry: BerryType) {
@@ -274,6 +291,7 @@ class Farming implements Feature {
     toJSON(): Record<string, any> {
         return {
             berryList: this.berryList.map(x => x),
+            unlockedBerries: this.unlockedBerries.map(x => x),
             plotList: this.plotList.map(plot => plot.toJSON()),
         };
     }
@@ -289,6 +307,15 @@ class Farming implements Feature {
         } else {
             (savedBerries as number[]).forEach((value: number, index: number) => {
                 this.berryList[index] = value;
+            });
+        }
+
+        const savedUnlockedBerries = json['unlockedBerries'];
+        if (this.unlockedBerries == null) {
+            this.unlockedBerries = new ArrayOfObservables(this.defaults.unlockedBerries);
+        } else {
+            (savedUnlockedBerries as boolean[]).forEach((value: boolean, index: number) => {
+                this.unlockedBerries[index] = value;
             });
         }
 

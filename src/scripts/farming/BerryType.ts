@@ -10,6 +10,7 @@ enum BerryType {
     Sitrus,
     Persim,
     Razz,
+    Bluk,
     Nanab,
     Wepear,
     Pinap,
