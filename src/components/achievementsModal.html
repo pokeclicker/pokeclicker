@@ -54,29 +54,41 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                 <button
                   class="btn btn-secondary"
                   onclick="AchievementHandler.navigateIndex(0)"
-                  data-bind="css: { disabled: AchievementHandler.navigateIndex() === 0 }"
+                  data-bind="
+                      disable: AchievementHandler.isNavigateDirectionDisabled(true),
+                      css: { disabled: AchievementHandler.isNavigateDirectionDisabled(true) }
+                  "
                 >
                   <img src="assets/images/arrow-double.svg" style="transform: scaleX(-1);" height="20">
                 </button>
                 <button
                   class="btn btn-secondary"
                   onclick="AchievementHandler.navigateLeft()"
-                  data-bind="css: { disabled: AchievementHandler.navigateIndex() === 0 }"
+                  data-bind="
+                      disable: AchievementHandler.isNavigateDirectionDisabled(true),
+                      css: { disabled: AchievementHandler.isNavigateDirectionDisabled(true) }
+                  "
                 >
                   <img src="assets/images/arrow.svg" style="transform: scaleX(-1);" height="20">
                 </button>
-                <div data-bind="text: AchievementHandler.navigateIndex()+1 + '/' + (AchievementHandler.numberOfTabs()+1)"></div>
+                <div data-bind="text: AchievementHandler.navigateIndex()+1 + '/' + AchievementHandler.numberOfTabs()"></div>
                 <button
                   class="btn btn-secondary"
                   onclick="AchievementHandler.navigateRight()"
-                  data-bind="css: { disabled: AchievementHandler.navigateIndex() ===  AchievementHandler.numberOfTabs() }"
+                  data-bind="
+                      disable: AchievementHandler.isNavigateDirectionDisabled(false),
+                      css: { disabled: AchievementHandler.isNavigateDirectionDisabled(false) }
+                  "
                 >
                   <img src="assets/images/arrow.svg" height="20">
                 </button>
                 <button
                   class="btn btn-secondary"
-                  onclick="AchievementHandler.navigateIndex(AchievementHandler.numberOfTabs())"
-                  data-bind="css: { disabled: AchievementHandler.navigateIndex() ===  AchievementHandler.numberOfTabs() }"
+                  onclick="AchievementHandler.navigateIndex(AchievementHandler.numberOfTabs() - 1)"
+                  data-bind="
+                      disable: AchievementHandler.isNavigateDirectionDisabled(false),
+                      css: { disabled: AchievementHandler.isNavigateDirectionDisabled(false) }
+                  "
                 >
                   <img src="assets/images/arrow-double.svg" height="20">
                 </button>
