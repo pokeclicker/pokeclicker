@@ -296,8 +296,20 @@ namespace GameConstants {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    export function randomElement(array: any[]): any {
+    export function randomElement<T>(array: T[]): T {
         return array[GameConstants.randomIntBetween(0, array.length - 1)];
+    }
+
+    // Return a random element from the array, with an exponential distribution
+    // The last element has a 1/ratio chance of being chosen, one before last is 1/(ratio^2), etc
+    // The logarithm is clipped up to 0, so the first two elements will have equal chance
+    export function expRandomElement<T>(array: T[], ratio: number): T {
+        const r = Math.random();
+        // Math.random() can be 0, and log(0) is NaN, so we turn it back to 0 if this happens.
+        const logr = (Math.log(r) || 0) / Math.log(ratio);
+        const n = Math.floor(logr + array.length);
+        const x = GameConstants.clipNumber(n, 0, array.length - 1);
+        return array[x];
     }
 
     export function clipNumber(num: number, min: number, max: number): number {
