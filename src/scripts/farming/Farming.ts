@@ -107,9 +107,10 @@ class Farming implements Feature {
     }
 
     unlockPlot() {
+        let index = this.unlockBerryIndex();
         if (this.canBuyPlot()) {
-            App.game.wallet.loseAmount(this.calculatePlotPrice());
-            this.plotList[this.unlockedPlotCount()].isUnlocked = true;
+            this.berryList[index] -= this.calculatePlotPrice();
+            this.plotList[index+1].isUnlocked = true;
         }
     }
 
@@ -118,19 +119,24 @@ class Farming implements Feature {
     }
 
     canBuyPlot() {
-        return !this.allPlotsUnlocked() && App.game.wallet.hasAmount(this.calculatePlotPrice());
+        return !this.allPlotsUnlocked() && App.game.farming.berryList[this.unlockBerryIndex()] > this.calculatePlotPrice();
     }
 
-    calculatePlotPrice(): Amount {
+    calculatePlotPrice(): number {
         if (this.allPlotsUnlocked()) {
-            return new Amount(Infinity, GameConstants.Currency.farmPoint);
+            return Infinity;
         }
-        const plotCount = this.unlockedPlotCount();
-        return new Amount(10 * Math.floor(Math.pow(plotCount, 2)), GameConstants.Currency.farmPoint);
+        
+        // TODO: Rebalance cost based on berry growth rate
+        return 10 * Math.floor(Math.pow(this.unlockedPlotCount(), 2));
     }
 
     unlockedPlotCount() {
         return App.game.farming.plotList.filter(plot => plot.isUnlocked).length;
+    }
+
+    unlockBerryIndex() {
+        return this.unlockedPlotCount() - 1;
     }
 
     plant(index: number, berry: BerryType) {
