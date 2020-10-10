@@ -157,11 +157,10 @@ class GameController {
                         DungeonRunner.initializeDungeon(player.town().dungeon());
                     }
                     e.preventDefault();
-                } else {
-                    if (keyCode > 48 && keyCode - 48 <= player.town().gymList().length) { //1 to 9
-                        GymRunner.startGym(player.town().gymList()[keyCode - 49]());
-                    } else if (keyCode > 96 && keyCode - 96 <= player.town().gymList().length) { //1 to 9 in numpad
-                        GymRunner.startGym(player.town().gymList()[keyCode - 97]());
+                } else if ('gymList' in player.town()) {
+                    const cap = keyCode > 48 && keyCode < 58 ? 48 : keyCode > 96 && keyCode < 106 ? 96 : -1; //1 to 9
+                    if (keyCode > cap && keyCode - cap <= player.town().gymList().length) {
+                        GymRunner.startGym(player.town().gymList()[keyCode - cap - 1]());
                     }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
