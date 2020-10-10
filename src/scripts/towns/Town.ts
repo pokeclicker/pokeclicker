@@ -145,7 +145,7 @@ TownList['Pewter City'] = new Town(
     {
         requirements: [
             new RouteKillRequirement(10, 2),
-            new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Viridian Forest')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
         shop: PewterCityShop,
     }
@@ -413,7 +413,7 @@ TownList['Blackthorn City'] = new Town(
     'Blackthorn City',
     GameConstants.Region.johto,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Ice Path'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ice Path'))],
         shop: BlackthornCityShop,
     }
 );
@@ -580,7 +580,7 @@ TownList['Rustboro City'] = new Town(
     'Rustboro City',
     GameConstants.Region.hoenn,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Petalburg Woods'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Petalburg Woods'))],
         shop: RustboroCityShop,
     }
 );
@@ -588,7 +588,7 @@ TownList['Dewford Town'] = new Town(
     'Dewford Town',
     GameConstants.Region.hoenn,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Rusturf Tunnel'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rusturf Tunnel'))],
         shop: DewfordTownShop,
     }
 );
@@ -597,7 +597,7 @@ TownList['Slateport City'] = new Town(
     GameConstants.Region.hoenn,
     {
         requirements: [
-            new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Granite Cave')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave')),
             new GymBadgeRequirement(BadgeTypes.Knuckle),
         ],
         shop: SlateportCityShop,
@@ -623,7 +623,7 @@ TownList['Lavaridge Town'] = new Town(
     'Lavaridge Town',
     GameConstants.Region.hoenn,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Jagged Pass'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Jagged Pass'))],
         shop: LavaridgeTownShop,
     }
 );
@@ -682,7 +682,7 @@ TownList['Pokemon League Hoenn'] = new Town(
     {
         requirements: [
             new RouteKillRequirement(10, 128),
-            new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Hoenn')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn')),
         ],
     }
 );
@@ -720,7 +720,7 @@ TownList['Rusturf Tunnel'] = new DungeonTown(
 TownList['Granite Cave'] = new DungeonTown(
     'Granite Cave',
     GameConstants.Region.hoenn,
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Rusturf Tunnel'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rusturf Tunnel'))]
 );
 TownList['Fiery Path'] = new DungeonTown(
     'Fiery Path',
@@ -735,12 +735,12 @@ TownList['Meteor Falls'] = new DungeonTown(
 TownList['Mt. Chimney'] = new DungeonTown(
     'Mt. Chimney',
     GameConstants.Region.hoenn,
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Meteor Falls'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Meteor Falls'))]
 );
 TownList['Jagged Pass'] = new DungeonTown(
     'Jagged Pass',
     GameConstants.Region.hoenn,
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Mt. Chimney'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mt. Chimney'))]
 );
 TownList['New Mauville'] = new DungeonTown(
     'New Mauville',
@@ -762,7 +762,7 @@ TownList['Cave of Origin'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [
         new RouteKillRequirement(10, 126),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Seafloor Cavern')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Seafloor Cavern')),
     ]
 );
 TownList['Seafloor Cavern'] = new DungeonTown(
@@ -778,7 +778,7 @@ TownList['Sky Pillar'] = new DungeonTown(
     GameConstants.Region.hoenn,
     [
         new RouteKillRequirement(10, 131),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Cave of Origin')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Cave of Origin')),
     ]
 );
 TownList['Victory Road Hoenn'] = new DungeonTown(
@@ -886,7 +886,7 @@ TownList['Oreburgh City'] = new Town(
     'Oreburgh City',
     GameConstants.Region.sinnoh,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Oreburgh Gate'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Oreburgh Gate'))],
         shop: OreburghCityShop,
     }
 );
@@ -894,14 +894,14 @@ TownList['Floaroma Town'] = new Town(
     'Floaroma Town',
     GameConstants.Region.sinnoh,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Ravaged Path'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ravaged Path'))],
     }
 );
 TownList['Eterna City'] = new Town(
     'Eterna City',
     GameConstants.Region.sinnoh,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Eterna Forest'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Eterna Forest'))],
         shop: EternaCityShop,
     }
 );
@@ -984,7 +984,7 @@ TownList['Pokemon League Sinnoh'] = new Town(
     'Pokemon League Sinnoh',
     GameConstants.Region.sinnoh,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Sinnoh'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh'))],
     }
 );
 TownList['Fight Area'] = new Town(
@@ -1115,7 +1115,7 @@ TownList['Spear Pillar'] = new DungeonTown(
 TownList['Hall of Origin'] = new DungeonTown(
     'Hall of Origin',
     GameConstants.Region.sinnoh,
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Spear Pillar'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Spear Pillar'))]
 );
 TownList['Fullmoon Island'] = new DungeonTown(
     'Fullmoon Island',
@@ -1269,7 +1269,7 @@ TownList['Mistralton City'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [
-            new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Chargestone Cave')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
             new GymBadgeRequirement(BadgeTypes.Quake),
         ],
         shop: MistraltonCityShop,
@@ -1287,7 +1287,7 @@ TownList['Undella Town'] = new Town(
     'Undella Town',
     GameConstants.Region.unova,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Reversal Mountain'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
     }
 );
 TownList['Lacunosa Town'] = new Town(
@@ -1317,7 +1317,7 @@ TownList['Pokemon League Unova'] = new Town(
     'Pokemon League Unova',
     GameConstants.Region.unova,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Unova'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova'))],
     }
 );
 TownList['Icirrus City'] = new Town(
@@ -1326,7 +1326,7 @@ TownList['Icirrus City'] = new Town(
     {
         requirements: [new OneFromManyRequirement([
             new RouteKillRequirement(10, 8),
-            new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Twist Mountain')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
         ])],
         shop: IcirrusCityShop,
     }
@@ -1349,7 +1349,7 @@ TownList['Nacrene City'] = new Town(
     'Nacrene City',
     GameConstants.Region.unova,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Pinwheel Forest'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
         shop: NacreneCityShop,
     }
 );
@@ -1408,7 +1408,7 @@ TownList['Castelia Sewers'] = new DungeonTown(
 TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
     GameConstants.Region.unova,
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Castelia Sewers'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Castelia Sewers'))]
 );
 TownList['Desert Resort'] = new DungeonTown(
     'Desert Resort',
@@ -1421,7 +1421,7 @@ TownList['Desert Resort'] = new DungeonTown(
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
     GameConstants.Region.unova,
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Desert Resort'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Desert Resort'))]
 );
 TownList['Lostlorn Forest'] = new DungeonTown(
     'Lostlorn Forest',
@@ -1458,13 +1458,13 @@ TownList['Undella Bay'] = new DungeonTown(
     'Undella Bay',
     GameConstants.Region.unova,
     // Should really be a route
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Reversal Mountain'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))]
 );
 TownList['Seaside Cave'] = new DungeonTown(
     'Seaside Cave',
     GameConstants.Region.unova,
     [
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Undella Bay')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Undella Bay')),
         new GymBadgeRequirement(BadgeTypes.Legend),
     ]
 );
@@ -1510,7 +1510,7 @@ TownList['Dragonspiral Tower'] = new DungeonTown(
     'Dragonspiral Tower',
     GameConstants.Region.unova,
     [new OneFromManyRequirement([
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Twist Mountain')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
         new RouteKillRequirement(10, 8),
     ])]
 );
@@ -1629,7 +1629,7 @@ TownList['Cyllage City'] = new Town(
     'Cyllage City',
     GameConstants.Region.kalos,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Glittering Cave'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glittering Cave'))],
     }
 );
 TownList['Geosenge Town'] = new Town(
@@ -1644,7 +1644,7 @@ TownList['Shalour City'] = new Town(
     'Shalour City',
     GameConstants.Region.kalos,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Reflection Cave'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reflection Cave'))],
         shop: ShalourCityShop,
     }
 );
@@ -1699,7 +1699,7 @@ TownList['Pokémon League Kalos'] = new Town(
     'Pokémon League Kalos',
     GameConstants.Region.kalos,
     {
-        requirements: [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Kalos'))],
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos'))],
     }
 );
 

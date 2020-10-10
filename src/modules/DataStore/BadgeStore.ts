@@ -1,31 +1,35 @@
-///<reference path="./BadgeTypes.ts"/>
+///<reference path="../../scripts/badgeCase/BadgeTypes.ts"/>
+///<reference path="../../scripts/GameConstants.ts"/>
+///<reference path="../../scripts/ArrayOfObservables.ts"/>
 
-class BadgeCase implements Feature {
+import { Feature } from './common/Feature';
+
+// TODO: Convert to imports after ./scripts have been converted to modules
+const GameConstants = require('../../scripts/GameConstants');
+
+const emptyBadgeList = new Array(GameConstants.RegionGyms.flat().length).fill(false);
+
+export default class BadgeCase implements Feature {
     name = 'Badge Case';
     saveKey = 'badgeCase';
     defaults: Record<string, any> = {};
-
-    badgeList: ArrayOfObservables<boolean> = new ArrayOfObservables(new Array(GameConstants.RegionGyms.flat().length).fill(false));
-    highestAvailableBadge: KnockoutComputed<number> = ko.pureComputed(() => {
-        const region = player.highestRegion();
-        return gymList[GameConstants.RegionGyms[region][GameConstants.RegionGyms[region].length - 1]].badgeReward;
-    });
+    badgeList: ArrayOfObservables<boolean> = new ArrayOfObservables(emptyBadgeList);
 
     constructor() {}
 
-    badgeCount() {
+    badgeCount(): number {
         return this.badgeList.reduce((a, b) => (+a) + (+b), 0);
     }
 
-    gainBadge(badge: BadgeTypes) {
+    gainBadge(badge: BadgeTypes): void {
         this.badgeList[badge] = true;
     }
 
-    hasBadge(badge: BadgeTypes) {
+    hasBadge(badge: BadgeTypes): boolean {
         if (badge == null || badge == BadgeTypes.None) {
             return true;
         }
-        return this.badgeList[badge];
+        return !!this.badgeList[badge];
     }
 
     initialize(): void {
