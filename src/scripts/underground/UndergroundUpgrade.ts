@@ -56,7 +56,7 @@ Underground.upgradeList.push(
 
 Underground.upgradeList.push(
     new UndergroundUpgrade(Underground.Upgrades.Bomb_Efficiency, 'Bomb Efficiency', 5,
-        AmountFactory.createArray(GameHelper.createArray(50, 500, 50), GameConstants.Currency.diamond),
+        AmountFactory.createArray(GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond),
         GameHelper.createArray(0, 10, 2)
     )
 );
