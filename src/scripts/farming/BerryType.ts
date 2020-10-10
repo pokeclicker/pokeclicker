@@ -7,5 +7,6 @@ enum BerryType {
     Aspear,
     Leppa,
     Oran,
-    Sitrus
+    Sitrus,
+    // TODO: Add the rest of the berry types
 }

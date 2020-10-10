@@ -4,13 +4,14 @@ class Farming implements Feature {
 
     berryData: { [type: number]: Berry } = {};
 
+    // TODO: Change this to fit all berry types
     readonly AMOUNT_OF_BERRIES = 8;
     readonly AMOUNT_OF_PLOTS = 25;
 
     defaults = {
         berryList: Array<number>(this.AMOUNT_OF_BERRIES).fill(0),
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
-            return new Plot(index === 0, false, BerryType.None, 0);
+            return new Plot(index === 0, BerryType.None, 0);
         }),
     };
 
@@ -23,33 +24,85 @@ class Farming implements Feature {
     }
 
     initialize(): void {
-        this.berryData[BerryType.Cheri] = new Berry(BerryType.Cheri, 30, 100, 6);
-        this.berryData[BerryType.Chesto] = new Berry(BerryType.Chesto, 45, 150, 8);
-        this.berryData[BerryType.Pecha] = new Berry(BerryType.Pecha, 60, 180, 10);
-        this.berryData[BerryType.Rawst] = new Berry(BerryType.Rawst, 90, 240, 14);
-        this.berryData[BerryType.Aspear] = new Berry(BerryType.Aspear, 120, 290, 18);
-        this.berryData[BerryType.Leppa] = new Berry(BerryType.Leppa, 240, 460, 30);
-        this.berryData[BerryType.Oran] = new Berry(BerryType.Oran, 300, 530, 35);
-        this.berryData[BerryType.Sitrus] = new Berry(BerryType.Sitrus, 600, 1000, 60);
+        this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16], 1, .5, 6);
+        this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5,15,25,40,120], 1, .4, 8);
+        this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10,35,50,60,140], 2, .3, 10);
+        this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15,30,45,60,180], 1, .5, 14);
+        this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10,40,50,110,210], 1, .2, 18);
+        this.berryData[BerryType.Leppa]     = new Berry(BerryType.Leppa,    [100,120,140,240,480], 3, .2, 30);
+        this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120,180,240,300,520], 5, .1, 35);
+        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,900], 5, .1, 60);
+    }
+
+    getGrowthMultiplier(): number {
+        let multiplier = 1;
+        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
+        return multiplier;
     }
 
     update(delta: number): void {
-        const timeToReduce = delta * App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck);
-        let notify = false;
+        const timeToReduce = delta * this.getGrowthMultiplier();
+
+        let notifications = [];
+
         this.plotList.forEach(plot => {
-            plot.reduceTime(timeToReduce);
-            if (!plot.isEmpty() && plot.timeLeft == 0 && !plot.notified) {
-                plot.notified = true;
-                notify = true;
+            plot.update(timeToReduce);
+            if (plot.notifications) {
+                notifications = [...notifications, ...plot.notifications];
+                plot.notifications = [];
             }
         });
-        if (notify) {
-            Notifier.notify({
-                message: 'A berry is ready to harvest!',
-                type: NotificationConstants.NotificationOption.success,
-                sound: NotificationConstants.NotificationSound.ready_to_harvest,
-                setting: NotificationConstants.NotificationSetting.ready_to_harvest,
-            });
+
+        if (notifications.length) {
+            for (let i = 0;i < notifications.length;i++) {
+                this.handleNotification(notifications[i]);
+            }
+        }
+    }
+
+    // TODO: Change details of notifier for different notifications
+    handleNotification(type: FarmNotificationType): void {
+        switch(type) {
+            case FarmNotificationType.Ripe:
+                Notifier.notify({
+                    message: 'A berry is ready to harvest!',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
+                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+                });
+                break;
+            case FarmNotificationType.Withered:
+                Notifier.notify({
+                    message: 'A berry plant has withered!',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
+                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+                });
+                break;
+            case FarmNotificationType.Mutated:
+                Notifier.notify({
+                    message: 'A berry plant has mutated!',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
+                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+                });
+                break;
+            case FarmNotificationType.Replanted:
+                Notifier.notify({
+                    message: 'A berry has been replanted!',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
+                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+                });
+                break;
+            case FarmNotificationType.Dropped:
+                Notifier.notify({
+                    message: 'A berry has been dropped!',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
+                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+                });
+                break;
         }
     }
 
@@ -88,8 +141,8 @@ class Farming implements Feature {
 
         this.berryList[berry] -= 1;
         plot.berry = berry;
-        plot.timeLeft = this.berryData[berry].harvestTime;
-        plot.notified = false;
+        plot.age = 0;
+        plot.notifications = [];
     }
 
     plantAll(berry: BerryType) {
@@ -99,52 +152,42 @@ class Farming implements Feature {
     }
 
     /**
-     * Harvest a plot at the given index, returns the amount of money gained from the harvest.
+     * Harvest a plot at the given index
      * @param index The index of the plot to harvest
-     * @param suppressNotification Suppress the notification of the amount of money gained
      */
-    harvest(index: number, suppressNotification = false): number {
+    harvest(index: number): void {
         const plot = this.plotList[index];
-        if (plot.berry === BerryType.None || plot.timeLeft > 0) {
-            return 0;
+        if (plot.berry === BerryType.None || plot.stage() != PlotStage.Berry) {
+            return;
         }
 
         App.game.wallet.gainFarmPoints(this.berryData[plot.berry].farmValue);
-        const money = App.game.wallet.gainMoney(this.berryData[plot.berry].moneyValue);
-        const amount = GameConstants.randomIntBetween(2, 3);
+        
+        let amount = plot.harvest();
+
         GameHelper.incrementObservable(App.game.statistics.totalBerriesHarvested, amount);
         GameHelper.incrementObservable(App.game.statistics.berriesHarvested[plot.berry], amount);
         this.gainBerry(plot.berry, amount);
 
-        if (!suppressNotification) {
-            Notifier.notify({
-                message: `You earned ${money} money from the harvest!`,
-                type: NotificationConstants.NotificationOption.success,
-            });
-        }
-
-        plot.berry = BerryType.None;
         App.game.oakItems.use(OakItems.OakItem.Sprayduck);
-        return money;
+
+        plot.die(true);
     }
 
     /**
-     * Try to harvest all plots, suppresses the individual notifications
+     * Try to harvest all plots
      */
     public harvestAll() {
-        let total = 0;
         this.plotList.forEach((plot, index) => {
-            total += this.harvest(index, true);
+            this.harvest(index);
         });
-
-        if (total > 0) {
-            Notifier.notify({
-                message: `You earned ${total} money from the harvest!`,
-                type: NotificationConstants.NotificationOption.success,
-            });
-        }
     }
 
+    /**
+     * Gives the player a random berry from the first 8 types
+     * @param amount Amount of berries to give. Defaults to 1.
+     * @param disableNotification Set to true to not notify the player. Defaults to false.
+     */
     gainRandomBerry(amount = 1, disableNotification = false) {
         const berry = GameHelper.getIndexFromDistribution(GameConstants.BerryDistribution);
         if (!disableNotification) {
@@ -195,7 +238,7 @@ class Farming implements Feature {
             this.plotList = new ArrayOfObservables(this.defaults.plotList);
         } else {
             (savedPlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
-                const plot: Plot = new Plot(false, false, BerryType.None, 0);
+                const plot: Plot = new Plot(false, BerryType.None, 0);
                 plot.fromJSON(value);
                 this.plotList[index] = plot;
             });

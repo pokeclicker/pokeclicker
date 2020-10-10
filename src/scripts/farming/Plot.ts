@@ -2,43 +2,110 @@ class Plot implements Saveable {
     saveKey = '';
     defaults = {
         isUnlocked: false,
-        boosted: false,
         berry: BerryType.None,
-        timeLeft: 0,
+        age: 0,
     };
 
     _isUnlocked: KnockoutObservable<boolean>;
-    _boosted: KnockoutObservable<boolean>;
     _berry: KnockoutObservable<BerryType>;
-    _timeLeft: KnockoutObservable<number>;
+    _age: KnockoutObservable<number>;
     formattedTimeLeft: KnockoutComputed<string>;
     isEmpty: KnockoutComputed<boolean>;
     stage: KnockoutComputed<number>;
-    notified: boolean;
+    notifications: FarmNotificationType[];
 
-    constructor(isUnlocked: boolean, boosted: boolean, berry: BerryType, timeLeft: number) {
+    constructor(isUnlocked: boolean, berry: BerryType, age: number) {
         this._isUnlocked = ko.observable(isUnlocked);
-        this._boosted = ko.observable(boosted);
         this._berry = ko.observable(berry);
-        this._timeLeft = ko.observable(timeLeft);
+        this._age = ko.observable(age);
 
         this.formattedTimeLeft = ko.pureComputed(function () {
-            return GameConstants.formatTime(Math.ceil(this.timeLeft) / App.game.oakItems.calculateBonus(OakItems.OakItem.Sprayduck));
+            for (let i = 0;i < 5;i++) {
+                if (this.age < App.game.farming.berryData[this.berry].growthTime[i]) {
+                    let timeLeft = Math.ceil(App.game.farming.berryData[this.berry].growthTime[i] - this.age);
+                    return GameConstants.formatTime(timeLeft / App.game.farming.getGrowthMultiplier());
+                }
+            }
         }, this);
+
         this.isEmpty = ko.pureComputed(function () {
             return this.berry == BerryType.None;
         }, this);
+
         this.stage = ko.pureComputed(function () {
-            if (this.berry === BerryType.None) {
-                return 1;
+            for (let i = 0;i < 5;i++) {
+                if (this.age < App.game.farming.berryData[this.berry].growthTime[i]) {
+                    return i;
+                }
             }
-            return 4 - Math.ceil(4 * this.timeLeft / App.game.farming.berryData[this.berry].harvestTime);
         }, this);
-        this.notified = false;
+
+        this.notifications = [];
     }
 
-    reduceTime(seconds: number) {
-        this.timeLeft = Math.max(0, this.timeLeft - seconds);
+    /**
+     * Handles updating the berry plant
+     * @param seconds Number of seconds to add to the plants age
+     */
+    update(seconds: number) {
+        if (this.berry == BerryType.None) { return; }
+
+        this.age += seconds;
+
+        if (this.age > App.game.farming.berryData[this.berry].growthTime[4]) {
+            this.die();
+        }
+    }
+
+    /**
+     * Returns how many berries will be harvested
+     */
+    harvest(): number {
+        let amount = App.game.farming.berryData[this.berry].harvestAmount;
+
+        // TODO: Add multiplier on harvest amount
+
+        return amount;
+    }
+
+    /**
+     * Handles killing the berry plant
+     * @param harvested Whether this death was due to the player harvesting manually, or by withering
+     */
+    die(harvested: boolean = false): void {
+        if (harvested) {
+            this.berry = BerryType.None;
+            this.age = 0;
+            this.notifications = [];
+        }
+        else {
+            // TODO: Determine if berry will be replanted
+            // TODO: Notify
+            // TODO: Determine if berry dropped
+            this.berry = BerryType.None;
+            this.age = 0;
+            this.notifications = [];
+        }
+    }
+
+    /**
+     * Returns the tooltip for the plot
+     */
+    toolTip(): string {
+        let formattedTime: string = this.formattedTimeLeft();
+
+        switch(this.stage()) {
+            case PlotStage.Seed:
+            case PlotStage.Sprout:
+            case PlotStage.Taller:
+                return formattedTime + ' until growth';
+            case PlotStage.Bloom:
+                return formattedTime + ' until ripe';
+            case PlotStage.Berry:
+                return formattedTime + ' until overripe';
+        }
+
+        return "";
     }
 
     fromJSON(json: Record<string, any>): void {
@@ -47,17 +114,15 @@ class Plot implements Saveable {
         }
 
         this.isUnlocked = json['isUnlocked'] ?? this.defaults.isUnlocked;
-        this.boosted = json['boosted'] ?? this.defaults.boosted;
         this.berry = json['berry'] ?? this.defaults.berry;
-        this.timeLeft = json['timeLeft'] ?? this.defaults.timeLeft;
+        this.age = json['age'] ?? this.defaults.age;
     }
 
     toJSON(): Record<string, any> {
         return {
             isUnlocked: this.isUnlocked,
-            boosted: this.boosted,
             berry: this.berry,
-            timeLeft: this.timeLeft,
+            age: this.age,
         };
     }
 
@@ -70,14 +135,6 @@ class Plot implements Saveable {
         this._isUnlocked(value);
     }
 
-    get boosted(): boolean {
-        return this._boosted();
-    }
-
-    set boosted(value: boolean) {
-        this._boosted(value);
-    }
-
     get berry(): BerryType {
         return this._berry();
     }
@@ -86,11 +143,11 @@ class Plot implements Saveable {
         this._berry(berry);
     }
 
-    get timeLeft(): number {
-        return this._timeLeft();
+    get age(): number {
+        return this._age();
     }
 
-    set timeLeft(value: number) {
-        this._timeLeft(value);
+    set age(value: number) {
+        this._age(value);
     }
 }

@@ -1,5 +1,7 @@
 class FarmController {
 
+    // TODO: Update to allow for selecting berries or mulch
+
     public static selectedBerry: BerryType = BerryType.Cheri;
 
     public static openFarmModal() {
@@ -24,11 +26,7 @@ class FarmController {
     public static getTooltipLabel(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
 
-        if (plot.timeLeft > 0) {
-            return plot.formattedTimeLeft();
-        }
-
-        return 'Ready';
+        return plot.toolTip();
     }
 
 }
