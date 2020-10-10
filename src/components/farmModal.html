@@ -21,16 +21,29 @@
                         <div class="col-sm-12">
                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint], 'currency': GameConstants.Currency.farmPoint}}"></span>
                         </div>
-                        <ul id="seedList" data-bind="foreach: App.game.farming.berryList" class="list-group"
+                        <ul id="seedList" data-bind="foreach: FarmController.getBerryListWithIndex()" class="list-group"
                             style="margin-bottom: 5px;">
                             <li class="list-group-item list-group-item-action seed-list-item"
-                                data-bind="click: function() {FarmController.selectedBerry = $index()}">
+                                data-bind="click: function() {FarmController.selectedBerry = $data}">
                                 <img src="" width="24px"
-                                     data-bind="attr:{ src: 'assets/images/items/' + BerryType[$index()] + '.png'}">
-                                <span data-bind="text: BerryType[$index()]"></span>
-                                <span class="seedAmount" data-bind="text: App.game.farming.berryList[$index()]"></span>
+                                     data-bind="attr:{ src: 'assets/images/items/' + BerryType[$data] + '.png' },
+                                     css: {'berryLocked': !App.game.farming.unlockedBerries[$data] }">
+                                <span data-bind="text: App.game.farming.unlockedBerries[$data] ? BerryType[$data] : '???'"></span>
+                                <span class="seedAmount" data-bind="text: App.game.farming.berryList[$data]"></span>
                             </li>
                         </ul>
+
+                        <div class="row justify-content-center">
+                            <button class="btn btn-secondary" onclick="FarmController.navigateLeft()"
+                                    data-bind=" css: {disabled: FarmController.navigateIndex() === 0}">
+                                <img src="assets/images/leftarrow.png">
+                            </button>
+                            <div data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
+                            <button class="btn btn-secondary" onclick="FarmController.navigateRight()"
+                                    data-bind=" css: {disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs()}">
+                                <img src="assets/images/rightarrow.png">
+                            </button>
+                        </div>
 
                         <div class="row">
                             <div class="col-lg-12 col-6">

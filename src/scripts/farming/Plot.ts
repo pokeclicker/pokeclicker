@@ -20,6 +20,7 @@ class Plot implements Saveable {
         this._age = ko.observable(age);
 
         this.formattedTimeLeft = ko.pureComputed(function () {
+            if (this.berry === BerryType.None) { return ""; }
             for (let i = 0;i < 5;i++) {
                 if (this.age < App.game.farming.berryData[this.berry].growthTime[i]) {
                     let timeLeft = Math.ceil(App.game.farming.berryData[this.berry].growthTime[i] - this.age);
@@ -50,7 +51,12 @@ class Plot implements Saveable {
     update(seconds: number) {
         if (this.berry == BerryType.None) { return; }
 
+        let oldAge = this.age;
         this.age += seconds;
+
+        if (oldAge <= App.game.farming.berryData[this.berry].growthTime[3] && this.age > App.game.farming.berryData[this.berry].growthTime[3]) {
+            this.notifications.push(FarmNotificationType.Ripe);
+        }
 
         if (this.age > App.game.farming.berryData[this.berry].growthTime[4]) {
             this.die();

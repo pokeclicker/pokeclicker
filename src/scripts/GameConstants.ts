@@ -59,6 +59,8 @@ namespace GameConstants {
     // Breeding
     export const BREEDING_ATTACK_BONUS = 25;
 
+    // Berries
+    export const AMOUNT_OF_BERRY_TYPES = 67;
     export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
 
     // Dungeons

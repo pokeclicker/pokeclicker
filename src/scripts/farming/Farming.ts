@@ -2,15 +2,13 @@ class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
 
-    berryData: { [type: number]: Berry } = {};
+    berryData: Berry[] = [];
 
-    // TODO: Change this to fit all berry types
-    readonly AMOUNT_OF_BERRIES = 67;
     readonly AMOUNT_OF_PLOTS = 25;
 
     defaults = {
-        berryList: Array<number>(this.AMOUNT_OF_BERRIES).fill(0),
-        unlockedBerries: Array<boolean>(this.AMOUNT_OF_BERRIES).fill(false),
+        berryList: Array<number>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(0),
+        unlockedBerries: Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false),
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
             return new Plot(index === 0, BerryType.None, 0);
         }),
@@ -27,6 +25,7 @@ class Farming implements Feature {
     }
 
     initialize(): void {
+        // First Generation
         this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16], 1, .5, 6);
         this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5,15,25,40,120], 1, .4, 8);
         this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10,35,50,60,140], 2, .3, 10);
@@ -35,24 +34,32 @@ class Farming implements Feature {
         this.berryData[BerryType.Leppa]     = new Berry(BerryType.Leppa,    [100,120,140,240,480], 3, .2, 30);
         this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120,180,240,300,520], 5, .1, 35);
         this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,900], 5, .1, 60);
+        
+        // Second Generation
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Bluk]      = new Berry(BerryType.Bluk,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Nanab]     = new Berry(BerryType.Nanab,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Wepear]    = new Berry(BerryType.Wepear,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Pinap]     = new Berry(BerryType.Pinap,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        
         this.berryData[BerryType.Figy]      = new Berry(BerryType.Figy,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Wiki]      = new Berry(BerryType.Wiki,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Mago]      = new Berry(BerryType.Mago,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Aquav]     = new Berry(BerryType.Aquav,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Iapapa]    = new Berry(BerryType.Iapapa,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        
         this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        
+        // Third Generation
         this.berryData[BerryType.Pomeg]     = new Berry(BerryType.Pomeg,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Kelpsy]    = new Berry(BerryType.Kelpsy,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Qualot]    = new Berry(BerryType.Qualot,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Hondew]    = new Berry(BerryType.Hondew,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Grepa]     = new Berry(BerryType.Grepa,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Tamato]    = new Berry(BerryType.Tamato,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        
+        // Fourth Generation
         this.berryData[BerryType.Cornn]     = new Berry(BerryType.Cornn,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Magost]    = new Berry(BerryType.Magost,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Rabuta]    = new Berry(BerryType.Rabuta,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
@@ -62,11 +69,28 @@ class Farming implements Feature {
         this.berryData[BerryType.Watmel]    = new Berry(BerryType.Watmel,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Durin]     = new Berry(BerryType.Durin,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Belue]     = new Berry(BerryType.Belue,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        
+        // Type Generation
         this.berryData[BerryType.Occa]      = new Berry(BerryType.Occa,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Chople]    = new Berry(BerryType.Chople,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Shuca]     = new Berry(BerryType.Shuca,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Payapa]    = new Berry(BerryType.Payapa,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Tanga]     = new Berry(BerryType.Tanga,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Colbur]    = new Berry(BerryType.Colbur,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Babiri]    = new Berry(BerryType.Babiri,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Roseli]    = new Berry(BerryType.Roseli,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+
+        // Fifth Generation
         this.berryData[BerryType.Liechi]    = new Berry(BerryType.Liechi,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Ganlon]    = new Berry(BerryType.Ganlon,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Salac]     = new Berry(BerryType.Salac,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
@@ -74,21 +98,17 @@ class Farming implements Feature {
         this.berryData[BerryType.Apicot]    = new Berry(BerryType.Apicot,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Lansat]    = new Berry(BerryType.Lansat,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Starf]     = new Berry(BerryType.Starf,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Micle]     = new Berry(BerryType.Micle,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Custap]    = new Berry(BerryType.Custap,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        
         this.berryData[BerryType.Jaboca]    = new Berry(BerryType.Jaboca,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Reseli]    = new Berry(BerryType.Reseli,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+    
+        this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+    
+        FarmController.resetPages();
     }
 
     getGrowthMultiplier(): number {
@@ -196,12 +216,13 @@ class Farming implements Feature {
         return this.unlockedPlotCount() - 1;
     }
 
-    highestUnlockedBerry() {
-        for (let i = this.AMOUNT_OF_BERRIES - 1;i >= 0;i--) {
+    highestUnlockedBerry(): number {
+        for (let i = GameConstants.AMOUNT_OF_BERRY_TYPES - 1;i >= 0;i--) {
             if (this.unlockedBerries[i]) {
                 return i;
             }
         }
+        return 0;
     }
 
     plant(index: number, berry: BerryType) {
@@ -277,6 +298,7 @@ class Farming implements Feature {
         if (!this.unlockedBerries[berry]) {
             // TODO: NOTIFY PLAYER?
             this.unlockedBerries[berry] = true;
+            FarmController.resetPages();
         }
     }
 

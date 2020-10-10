@@ -34,6 +34,7 @@ class Game {
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
         AchievementHandler.initialize();
+        FarmController.initialize();
     }
 
     load() {
