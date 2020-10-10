@@ -1,3 +1,5 @@
+///<reference path="../badgeCase/BadgeTypes.ts"/>
+
 class RoamingPokemonList {
     public static list: Partial<Record<GameConstants.Region, Array<RoamingPokemon>>> = {};
 
@@ -26,21 +28,21 @@ class RoamingPokemonList {
 RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap.Mew));
 
 // Johto
-RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon(pokemonMap.Raikou,  undefined, new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Burned Tower'))));
-RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon(pokemonMap.Entei,   undefined, new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Burned Tower'))));
-RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon(pokemonMap.Suicune, undefined, new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Burned Tower'))));
+RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon(pokemonMap.Raikou,  undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
+RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon(pokemonMap.Entei,   undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
+RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon(pokemonMap.Suicune, undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Burned Tower'))));
 
 // Hoenn
-RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Latios, undefined, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)));
-RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Latias, undefined, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)));
+RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Latios, undefined, new GymBadgeRequirement(BadgeTypes.Elite_HoennChampion)));
+RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Latias, undefined, new GymBadgeRequirement(BadgeTypes.Elite_HoennChampion)));
 // TODO: these need another way to be obtained
-RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Jirachi, undefined, new GymBadgeRequirement(BadgeCase.Badge.Elite_HoennChampion)));
+RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Jirachi, undefined, new GymBadgeRequirement(BadgeTypes.Elite_HoennChampion)));
 
 
 // Sinnoh
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Manaphy));
-RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Mesprit, undefined, new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Lake Verity'))));
-RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Cresselia, undefined, new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Fullmoon Island'))));
+RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Mesprit, undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Verity'))));
+RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Cresselia, undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Fullmoon Island'))));
 
 // Unova
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Tornadus));

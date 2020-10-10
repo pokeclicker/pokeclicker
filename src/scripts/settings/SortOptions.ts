@@ -45,7 +45,7 @@ const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.shiny]: {
         'text': 'Shiny',
-        'getValue': p => +App.game.party.shinyPokemon.includes(p.id),
+        'getValue': p => p.shiny,
         'invert': true,
     },
 
