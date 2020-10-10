@@ -491,15 +491,15 @@ namespace GameConstants {
         LargeRestore: 0.5,
     };
 
-    export const KeyToDirection = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down',
-        65: 'left', //a
-        68: 'right', //d
-        83: 'down', //s
-        87: 'up', //w
+    export const KeyCodeToDirection = {
+        'ArrowUp': 'up',
+        'ArrowLeft': 'left',
+        'ArrowDown': 'down',
+        'ArrowRight': 'right',
+        'KeyW': 'up',
+        'KeyA': 'left',
+        'KeyS': 'down',
+        'KeyD': 'right',
     };
 
     export const FossilToPokemon = {
