@@ -107,8 +107,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
     
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-    
-        FarmController.resetPages();
+
     }
 
     getGrowthMultiplier(): number {

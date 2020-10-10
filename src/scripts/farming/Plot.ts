@@ -34,6 +34,7 @@ class Plot implements Saveable {
         }, this);
 
         this.stage = ko.pureComputed(function () {
+            if (this.berry === BerryType.None) { return PlotStage.Seed; }
             for (let i = 0;i < 5;i++) {
                 if (this.age < App.game.farming.berryData[this.berry].growthTime[i]) {
                     return i;

@@ -16,6 +16,7 @@ class FarmController {
     
     public static openFarmModal() {
         if (App.game.farming.canAccess()) {
+            this.resetPages();
             $('#farmModal').modal('show');
         } else {
             Notifier.notify({
@@ -52,7 +53,6 @@ class FarmController {
     }
 
     public static calculateNumberOfTabs() {
-        console.log(App.game.farming.highestUnlockedBerry());
         this.numberOfTabs(Math.floor(App.game.farming.highestUnlockedBerry() / 8));
     }
 
@@ -62,7 +62,6 @@ class FarmController {
 
     public static resetPages() {
         this.calculateNumberOfTabs();
-        this.navigateIndex(0);
     }
 
 }
