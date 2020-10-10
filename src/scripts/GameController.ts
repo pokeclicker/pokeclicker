@@ -157,6 +157,12 @@ class GameController {
                         DungeonRunner.initializeDungeon(player.town().dungeon());
                     }
                     e.preventDefault();
+                } else {
+                    if (keyCode > 48 && keyCode - 48 <= player.town().gymList().length) { //1 to 9
+                        GymRunner.startGym(player.town().gymList()[keyCode - 49]());
+                    } else if (keyCode > 96 && keyCode - 96 <= player.town().gymList().length) { //1 to 9 in numpad
+                        GymRunner.startGym(player.town().gymList()[keyCode - 97]());
+                    }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
                 switch (keyCode) {
