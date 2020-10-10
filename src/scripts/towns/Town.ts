@@ -334,6 +334,18 @@ const BlackthornCityShop = new Shop([
     ItemList['Dragon_scale'],
 ]);
 
+// Johto NPCs
+const AzaleaOldMan = new NPC('Wise Old Man', [
+    'There is an old tale about the Guardian of Ilex Forest.',
+    'It says that the mythical pokemon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
+]);
+
+const EcruteakKimonoGirl = new NPC('Kimono Girl', [
+    'Legends say that Ho-Oh is searching for a trainer of pure heart.',
+    'To prove yourself, you must tame the three legendary beasts of Johto, and bring them to the nearby Tin Tower.',
+]);
+
+
 //Johto Towns
 TownList['New Bark Town'] = new Town(
     'New Bark Town',
@@ -366,6 +378,7 @@ TownList['Azalea Town'] = new Town(
         requirements: [new RouteKillRequirement(10, 33)],
         shop: AzaleaTownShop,
         dungeon: dungeonList['Slowpoke Well'],
+        npcs: [AzaleaOldMan],
     }
 );
 TownList['Goldenrod City'] = new Town(
@@ -383,6 +396,7 @@ TownList['Ecruteak City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 37)],
         shop: EcruteakCityShop,
+        npcs: [EcruteakKimonoGirl],
     }
 );
 TownList['Olivine City'] = new Town(
@@ -554,6 +568,13 @@ const BattleFrontierShop = new Shop([
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
 ]);
 
+//Hoenn NPCs
+const SootopolisWallace = new NPC('Gym Leader Wallace', [
+    'The creators of the lands and ocean slumber within the Cave of Origin.',
+    'However, they will only awaken when in the presence of a truly great trainer.',
+    'You will have to overcome the Pokémon League before you have any chance to encounter them.',
+]);
+
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
     'Littleroot Town',
@@ -666,6 +687,7 @@ TownList['Sootopolis City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 126), new GymBadgeRequirement(BadgeTypes.Mind)],
         shop: SootopolisCityShop,
+        npcs: [SootopolisWallace],
     }
 );
 TownList['Ever Grande City'] = new Town(
@@ -860,6 +882,29 @@ const PastoriaShop = new Shop([
     ItemList['Water_egg'],
 ]);
 
+//Sinnoh NPCs
+const FloaramaLeafeonTip = new NPC('Flower Girl', [
+    'Something amazing just happened!',
+    'My friend was taking their Eevee on a walk through Eterna Forest, and it suddenly evolved into a Leafeon!',
+    'Can you believe that?',
+]);
+
+const SnowpointGlaceonTip = new NPC('Young Girl', [
+    'Someone told me that training an Eevee in Lake Acuity will make it evolve something new.',
+    'They must be lying, how can that be true?!',
+]);
+
+const OreburghConstructionWorker = new NPC('Construction Worker', [
+    'I was doing some exploring in Mt. Coronet last week, and my Nosepass gained a lot of levels.',
+    'I had a big suprise when he reached level 20 though!',
+]);
+
+const HearthomeContestFan = new NPC('Contest Fan', [
+    'My favourite contestant had a big reveal for us this week!',
+    'Their prized Magneton had evolved into a Magnezone!',
+    'I\'m so happy for them, all of that training in Mt. Coronet must have paid off!',
+]);
+
 //Sinnoh Towns
 TownList['Twinleaf Town'] = new Town(
     'Twinleaf Town',
@@ -888,6 +933,7 @@ TownList['Oreburgh City'] = new Town(
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Oreburgh Gate'))],
         shop: OreburghCityShop,
+        npcs: [OreburghConstructionWorker],
     }
 );
 TownList['Floaroma Town'] = new Town(
@@ -895,6 +941,7 @@ TownList['Floaroma Town'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ravaged Path'))],
+        npcs: [FloaramaLeafeonTip],
     }
 );
 TownList['Eterna City'] = new Town(
@@ -911,6 +958,7 @@ TownList['Hearthome City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 208)],
         shop: HearthomeCityShop,
+        npcs: [HearthomeContestFan],
     }
 );
 TownList['Solaceon Town'] = new Town(
@@ -970,6 +1018,7 @@ TownList['Snowpoint City'] = new Town(
     GameConstants.Region.sinnoh,
     {
         requirements: [new RouteKillRequirement(10, 217)],
+        npcs: [SnowpointGlaceonTip],
     }
 );
 TownList['Sunyshore City'] = new Town(
