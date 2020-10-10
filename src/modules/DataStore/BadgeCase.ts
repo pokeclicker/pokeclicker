@@ -1,8 +1,7 @@
-/// <reference path="../../scripts/ArrayOfObservables.ts"/>
-
 import { Feature } from './common/Feature';
 import * as GameConstants from '../GameConstants';
 import BadgeEnums from '../enums/Badges';
+import getArrayOfObservables from '../utilities/getArrayOfObservables';
 
 const emptyBadgeList = new Array(GameConstants.RegionGyms.flat().length).fill(false);
 
@@ -13,7 +12,7 @@ export default class BadgeCase implements Feature {
 
     defaults: Record<string, any> = {};
 
-    badgeList: ArrayOfObservables<boolean> = new ArrayOfObservables(emptyBadgeList);
+    badgeList: Array<boolean> = getArrayOfObservables(emptyBadgeList);
 
     badgeCount(): number {
         return this.badgeList.reduce((a, b) => (+a) + (+b), 0);
