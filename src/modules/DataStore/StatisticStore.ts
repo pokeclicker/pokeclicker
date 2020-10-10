@@ -51,7 +51,7 @@ export default class Statistics implements Saveable {
     oakItemUses: Array<KnockoutObservable<number>>;
     // Farm
     berriesHarvested: Array<KnockoutObservable<number>>;
-    //Battle
+    // Battle
     routeKills: Array<KnockoutObservable<number>>;
     gymsDefeated: Array<KnockoutObservable<number>>;
     dungeonsCleared: Array<KnockoutObservable<number>>;
@@ -114,14 +114,14 @@ export default class Statistics implements Saveable {
         'shinyPokemonDefeated',
         'shinyPokemonEncountered',
         'shinyPokemonHatched',
-    ]
+    ];
 
     constructor() {
-        for (const prop of this.observables) {
+        this.observables.forEach((prop) => {
             this[prop] = ko.observable(0).extend({ numeric: 0 });
-        }
+        });
 
-        for (const array of this.arrayObservables) {
+        this.arrayObservables.forEach((array) => {
             this[array] = new Proxy([ko.observable(0).extend({ numeric: 0 })], {
                 get: (statistics, prop: string) => {
                     if (statistics[prop]) {
@@ -130,12 +130,16 @@ export default class Statistics implements Saveable {
 
                     // If it's not an int or less than zero, we do not want to set it
                     const id: number = Math.floor(+prop);
-                    if (isNaN(id) || id < 0 || id != +prop) {
-                        if (isNaN(id)) {
+                    if (Number.isNaN(id) || id < 0 || id !== +prop) {
+                        if (Number.isNaN(id)) {
+                            // eslint-disable-next-line no-console
                             console.trace(`[Statistics] [${array}] Invalid property requested:`, prop);
                         }
                         return () => 0;
                     }
+
+                    // TODO: A `get` function shouldn't be mutating and argument
+                    // eslint-disable-next-line no-param-reassign
                     statistics[id] = ko.observable(0).extend({ numeric: 0 });
                     return statistics[id];
                 },
@@ -144,43 +148,47 @@ export default class Statistics implements Saveable {
                 // This makes it so the stats observable can't be accidently changed
                 // set: () => {},
 
-                has: function (target: any, prop: string) {
-                    // This is needed for map, forEach etc to work,
-                    // because they want to check if target.hasOwnProperty("0") first.
-                    // The ko function doesn't seem to have any OwnProperties anyway, so no harm here (don't quote me)
-                    return Reflect.has(target, prop);
-                },
+                // This is needed for map, forEach etc to work,
+                // because they want to check if target.hasOwnProperty("0") first.
+                // The ko function doesn't seem to have any OwnProperties anyway,
+                // so no harm here (don't quote me)
+                // TODO: Figure out where this is being called from and fix the naming
+                // eslint-disable-next-line func-names
+                has: (target: any, prop: string) => Reflect.has(target, prop),
             });
-        }
+        });
 
-        for (const array of this.objectObservables) {
-            this[array] = new Proxy({0: ko.observable(0).extend({ numeric: 0 })}, {
+        this.objectObservables.forEach((object) => {
+            this[object] = new Proxy({ 0: ko.observable(0).extend({ numeric: 0 }) }, {
                 get: (statistics, prop: string) => {
                     if (statistics[prop]) {
                         return statistics[prop];
                     }
 
-                    switch (prop) {
-                        case 'highestID':
-                            let highestID = 0;
-                            Object.entries(statistics).forEach(([key, val]) => {
-                                if (!isNaN(+key) && +key > highestID && val() > 0) {
-                                    highestID = +key;
-                                }
-                            });
-                            return highestID;
+                    if (prop === 'highestID') {
+                        let highestID = 0;
+                        Object.entries(statistics).forEach(([key, val]: [string, () => number]) => {
+                            if (!Number.isNaN(+key) && +key > highestID && val() > 0) {
+                                highestID = +key;
+                            }
+                        });
+                        return highestID;
                     }
 
                     // If it's not an int or less than zero, we do not want to set it
                     const id: number = +prop;
-                    if (isNaN(id)) {
-                        console.trace(`[Statistics] [${array}] Invalid property requested:`, prop);
+                    if (Number.isNaN(id)) {
+                        // eslint-disable-next-line no-console
+                        console.trace(`[Statistics] [${object}] Invalid property requested:`, prop);
                         return () => 0;
                     }
 
                     return (val) => {
-                        if (!isNaN(+val)) {
-                            statistics[prop] = ko.observable(val).extend({ numeric: 0 }); return val;
+                        if (!Number.isNaN(+val)) {
+                            // TODO: A `get` function shouldn't be mutating and argument
+                            // eslint-disable-next-line no-param-reassign
+                            statistics[prop] = ko.observable(val).extend({ numeric: 0 });
+                            return val;
                         } return 0;
                     };
                 },
@@ -189,33 +197,33 @@ export default class Statistics implements Saveable {
                 // This makes it so the stats observable can't be accidently changed
                 // set: () => {},
 
-                has: function (target: any, prop: string) {
-                    // This is needed for map, forEach etc to work,
-                    // because they want to check if target.hasOwnProperty("0") first.
-                    // The ko function doesn't seem to have any OwnProperties anyway, so no harm here (don't quote me)
-                    return Reflect.has(target, prop);
-                },
+                // This is needed for map, forEach etc to work,
+                // because they want to check if target.hasOwnProperty("0") first.
+                // The ko function doesn't seem to have any OwnProperties anyway,
+                // so no harm here (don't quote me)
+                // TODO: Figure out where this is being called from and fix the naming
+                // eslint-disable-next-line func-names
+                has: (target: any, prop: string) => Reflect.has(target, prop),
             });
-        }
+        });
     }
 
     toJSON(): Record<string, any> {
         const saveObject = {};
 
-        for (const prop of this.observables) {
-            saveObject[prop] = this[prop]();
-        }
+        this.observables.forEach((prop) => { saveObject[prop] = this[prop](); });
 
-        for (const array of this.arrayObservables) {
-            saveObject[array] = this[array].map(x => x());
-        }
+        this.arrayObservables.forEach((array) => {
+            saveObject[array] = this[array].map((x) => x());
+        });
 
-        for (const object of this.objectObservables) {
+        this.objectObservables.forEach((object) => {
             saveObject[object] = {};
-            Object.entries(this[object]).forEach(([key, val]: [string, KnockoutObservable<number>]) => {
-                saveObject[object][key] = val();
-            });
-        }
+            Object.entries(this[object])
+                .forEach(([key, val]: [string, KnockoutObservable<number>]) => {
+                    saveObject[object][key] = val();
+                });
+        });
 
         return saveObject;
     }
@@ -225,28 +233,25 @@ export default class Statistics implements Saveable {
             return;
         }
 
-        for (const prop of this.observables) {
-            this[prop](json[prop] || 0);
-        }
+        this.observables.forEach((prop) => { this[prop](json[prop] || 0); });
 
-        for (const array of this.arrayObservables) {
+        this.arrayObservables.forEach((array) => {
             json[array]?.forEach((el, index) => {
                 if (this[array] && this[array][index] && +el) {
                     this[array][index](+el);
                 }
             });
-        }
+        });
 
-        for (const object of this.objectObservables) {
-            if (json[object]) {
-                Object.entries(json[object]).forEach(([key, val]) => {
-                    const num = +val;
-                    if (!isNaN(num) && num) {
-                        this[object][key](num);
-                    }
-                });
-            }
-        }
+        this.objectObservables.forEach((object) => {
+            if (!json[object]) { return; }
+
+            Object.entries(json[object]).forEach(([key, val]) => {
+                const num = +val;
+                if (!Number.isNaN(num) && num) {
+                    this[object][key](num);
+                }
+            });
+        });
     }
-
 }
