@@ -1,8 +1,8 @@
-/// <reference path="../../scripts/badgeCase/BadgeTypes.ts"/>
 /// <reference path="../../scripts/ArrayOfObservables.ts"/>
 
 import { Feature } from './common/Feature';
 import * as GameConstants from '../GameConstants';
+import BadgeEnums from '../enums/Badges';
 
 const emptyBadgeList = new Array(GameConstants.RegionGyms.flat().length).fill(false);
 
@@ -19,12 +19,12 @@ export default class BadgeCase implements Feature {
         return this.badgeList.reduce((a, b) => (+a) + (+b), 0);
     }
 
-    gainBadge(badge: BadgeTypes): void {
+    gainBadge(badge: BadgeEnums): void {
         this.badgeList[badge] = true;
     }
 
-    hasBadge(badge: BadgeTypes): boolean {
-        if (badge === null || badge === BadgeTypes.None) { return true; }
+    hasBadge(badge: BadgeEnums): boolean {
+        if (badge === null || badge === BadgeEnums.None) { return true; }
         return !!this.badgeList[badge];
     }
 

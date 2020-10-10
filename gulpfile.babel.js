@@ -158,20 +158,26 @@ gulp.task('scripts', () => {
     const osPathModulePrefix = '../src/modules'.split(path.posix.sep).join(path.sep);
 
     const generateDeclarations = base
-        .pipe(filter((vinylPath) => vinylPath.relative.startsWith(osPathModulePrefix)))
+        .pipe(filter((vinylPath) => {
+            return (
+                vinylPath.relative.startsWith(osPathModulePrefix) &&
+                // Exclude GameConstants, as we generate those manually
+                !vinylPath.relative.includes('GameConstants.d.ts')
+            );
+        }))
         .pipe(rename((vinylPath) => Object.assign(
             {},
             vinylPath,
             // Strip '../src/modules' from the start of declaration vinylPaths
             { dirname: vinylPath.dirname.replace(osPathModulePrefix, '.') }
         )))
-        // Remove exports so that ./src/scripts can use them
-        .pipe(replace(/(^|\n)export default \w+;/, '$1')) // export default variable;
-        .pipe(replace(/(^|\n)export default /, '$1')) // export default class ...
-        .pipe(replace(/(^|\n)export /, '$1declare '))
+        // Remove default exports
+        .pipe(replace(/(^|\n)export default \w+;/g, ''))
         // Replace imports with references
-        .pipe(replace(/(^|\n)import .* from '(.*)((.d)?.ts)?';/, '$1///<reference path="$2.d.ts"/>'))
-        // Fix broken declarations
+        .pipe(replace(/(^|\n)import .* from '(.*)((.d)?.ts)?';/g, '$1/// <reference path="$2.d.ts"/>'))
+        // Convert exports to declarations so that ./src/scripts can use them
+        .pipe(replace(/(^|\n)export (default )?/, '$1declare '))
+        // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
         .pipe(gulp.dest(dests.declarations));
 

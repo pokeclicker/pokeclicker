@@ -3,10 +3,12 @@
 
 import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
+import BadgeEnums from './enums/Badges';
 
 Object.assign(<any>window, {
     GameConstants,
     DataStore,
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,
+    BadgeEnums,
 });
