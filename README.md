@@ -1,11 +1,14 @@
-[![Build Status](https://img.shields.io/travis/com/pokeclicker/pokeclicker?logo=travis)](https://travis-ci.com/pokeclicker/pokeclicker)
+[![Build Status](https://img.shields.io/travis/com/pokeclicker/pokeclicker?logo=travis)](https://travis-ci.com/pokeclicker/pokeclicker)<br/>
+[![Discord](https://img.shields.io/discord/450412847017754644?color=7289DA&label=Discord&logo=discord)](https://discord.gg/a6DFe4p)
 
 # PokéClicker
 A game about catching Pokémon, defeating gym leaders, and watching numbers get bigger.
 
 NOTE: PokéClicker is still in development!
 
-You can try out the current state at https://pokeclicker.github.io/pokeclicker/
+You can try out the current state at https://www.pokeclicker.com/
+
+You can reach out on discord to discuss your ideas and how to implement them: https://discord.gg/a6DFe4p
 
 # Developer instructions
 
@@ -15,7 +18,7 @@ First make sure you have git and npm available as command-line utilities (so you
 
 Open a command line interface in the directory that contains this README file, and use the following command to install PokéClicker's other dependencies locally:
 ```cmd
-npm install
+npm clean-install
 ```
 
 Then finally, run the following command in the command line interface to start a browser running PokéClicker.
@@ -30,7 +33,7 @@ This means you don't need to compile TypeScript yourself. Gulp will do this for 
 ## Use Google cloud shell _(alternative)_
 [![Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pokeclicker/pokeclicker&git_branch=develop&page=editor&open_in_editor=README.md)
 ```cmd
-npm install
+npm clean-install
 npm start
 ```
 

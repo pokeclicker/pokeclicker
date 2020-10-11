@@ -185,7 +185,7 @@ class Mine {
                 }
             }
             if (hasMined) {
-                Underground.energy = Underground.energy - Underground.HAMMER_ENERGY;
+                Underground.energy -= Underground.HAMMER_ENERGY;
             }
         }
     }
@@ -194,20 +194,21 @@ class Mine {
         if (Mine.grid[x][y]() > 0) {
             if (Underground.energy >= Underground.CHISEL_ENERGY) {
                 this.breakTile(x, y, 2);
-                Underground.energy = Underground.energy - Underground.CHISEL_ENERGY;
+                Underground.energy -= Underground.CHISEL_ENERGY;
             }
         }
     }
 
-    private static bomb(tiles = 10) {
-        if (Underground.energy >= Underground.CHISEL_ENERGY * tiles) {
+    private static bomb() {
+        const tiles = Underground.getBombEfficiency();
+        if (Underground.energy >= Underground.BOMB_ENERGY) {
             for (let i = 1; i < tiles; i++) {
                 const x = GameConstants.randomIntBetween(1, this.sizeY - 2);
                 const y = GameConstants.randomIntBetween(1, this.sizeX - 2);
                 this.breakTile(x, y, 2);
             }
 
-            Underground.energy -= Underground.CHISEL_ENERGY * tiles;
+            Underground.energy -= Underground.BOMB_ENERGY;
         }
     }
 
@@ -252,7 +253,10 @@ class Mine {
             if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
                 Underground.gainMineItem(Mine.rewardNumbers[i]);
                 const itemName = Underground.getMineItemById(Mine.rewardNumbers[i]).name;
-                Notifier.notify({ message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`, type: GameConstants.NotificationOption.success });
+                Notifier.notify({
+                    message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
+                    type: NotificationConstants.NotificationOption.success,
+                });
                 Mine.itemsFound(Mine.itemsFound() + 1);
                 GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound);
                 Mine.rewardNumbers.splice(i, 1);
@@ -291,7 +295,10 @@ class Mine {
     }
 
     private static completed() {
-        Notifier.notify({ message: 'You dig deeper...', type: GameConstants.NotificationOption.info });
+        Notifier.notify({
+            message: 'You dig deeper...',
+            type: NotificationConstants.NotificationOption.info,
+        });
         ko.cleanNode(document.getElementById('mineBody'));
         Mine.loadMine();
         ko.applyBindings(null, document.getElementById('mineBody'));

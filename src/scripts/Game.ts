@@ -134,7 +134,11 @@ class Game {
                 this.quests.resetRefreshes();
                 this.quests.generateQuestList();
                 DailyDeal.generateDeals(Underground.getDailyDealsMax(), now);
-                Notifier.notify({ message: 'It\'s a new day! Your quests and underground deals have been updated.', type: GameConstants.NotificationOption.info, timeout: 1e4 });
+                Notifier.notify({
+                    message: 'It\'s a new day! Your quests and underground deals have been updated.',
+                    type: NotificationConstants.NotificationOption.info,
+                    timeout: 1e4,
+                });
             }
             player._lastSeen = Date.now();
             Save.store(player);
