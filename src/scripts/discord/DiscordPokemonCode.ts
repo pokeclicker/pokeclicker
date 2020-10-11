@@ -5,7 +5,11 @@ class DiscordPokemonCode extends DiscordCode {
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
             App.game.party.gainPokemonById(pokemon.id, shiny, true);
             // Notify that the code was activated successfully
-            Notifier.notify({ message: `You obtained a${shiny ? ' shiny' : ''} ${pokemon.name}!`, type: GameConstants.NotificationOption.success, timeout: 1e4 });
+            Notifier.notify({
+                message: `You obtained a${shiny ? ' shiny' : ''} ${pokemon.name}!`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+            });
             return true;
         };
         super(pokemon.name, image, price, description, claimFunction);

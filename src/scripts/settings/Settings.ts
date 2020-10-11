@@ -89,6 +89,14 @@ Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress dis
     ],
     'percentage'
 ));
+Settings.add(new MultipleChoiceSetting('shopButtons', 'Shop amount buttons:',
+    [
+        new SettingOption('+10, +100', 'original'),
+        new SettingOption('+100, +1000', 'bigplus'),
+        new SettingOption('×10, ÷10', 'multiplication'),
+    ],
+    'original'
+));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new MultipleChoiceSetting('backgroundImage', 'Background image:',
     [
@@ -98,19 +106,27 @@ Settings.add(new MultipleChoiceSetting('backgroundImage', 'Background image:',
     ],
     'background-day'
 ));
+Settings.add(new MultipleChoiceSetting('eggAnimation', 'Egg Hatching Animation:',
+    [
+        new SettingOption('None', 'none'),
+        new SettingOption('Almost & fully ready', 'almost'),
+        new SettingOption('Fully ready', 'full'),
+    ],
+    'full'
+));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 
 
 // Sound settings
-Object.values(GameConstants.NotificationSound).forEach(sound => {
+Object.values(NotificationConstants.NotificationSound).forEach(sound => {
     Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
 });
 Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 
 // Notification settings
-Object.values(GameConstants.NotificationSetting).forEach(setting => {
+Object.values(NotificationConstants.NotificationSetting).forEach(setting => {
     Settings.add(setting);
 });
 
@@ -119,7 +135,7 @@ Object.values(GameConstants.NotificationSetting).forEach(setting => {
  */
 const sortsettings = Object.keys(SortOptionConfigs).map(
     function(opt) {
-        return new SettingOption(SortOptionConfigs[opt].text, parseInt(opt));
+        return new SettingOption(SortOptionConfigs[opt].text, parseInt(opt, 10));
     }
 );
 Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',

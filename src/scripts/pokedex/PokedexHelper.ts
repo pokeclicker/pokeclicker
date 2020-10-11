@@ -71,7 +71,7 @@ class PokedexHelper {
             }
             
             // If not showing this region
-            const region: (GameConstants.Region | null) = filter['region'] ? parseInt(filter['region']) : null;
+            const region: (GameConstants.Region | null) = filter['region'] ? parseInt(filter['region'], 10) : null;
             if (region != null && region != nativeRegion) {
                 return false;
             }
@@ -92,8 +92,8 @@ class PokedexHelper {
             }
 
             // Check if either of the types match
-            const type1: (PokemonType | null) = filter['type1'] ? parseInt(filter['type1']) : null;
-            const type2: (PokemonType | null) = filter['type2'] ? parseInt(filter['type2']) : null;
+            const type1: (PokemonType | null) = filter['type1'] ? parseInt(filter['type1'], 10) : null;
+            const type2: (PokemonType | null) = filter['type2'] ? parseInt(filter['type2'], 10) : null;
             if ([type1, type2].includes(PokemonType.None)) {
                 const type = (type1 == PokemonType.None) ? type2 : type1;
                 if (!PokedexHelper.isPureType(pokemon, type)) {

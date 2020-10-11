@@ -31,6 +31,10 @@ class Underground {
         return Underground.BASE_DAILY_DEALS_MAX + this.getUpgrade(Underground.Upgrades.Daily_Deals_Max).calculateBonus();
     }
 
+    public static getBombEfficiency() {
+        return Underground.BASE_BOMB_EFFICIENCY + this.getUpgrade(Underground.Upgrades.Bomb_Efficiency).calculateBonus();
+    }
+
 
     static getUpgrade(upgrade: Underground.Upgrades) {
         for (let i = 0; i < this.upgradeList.length; i++) {
@@ -109,7 +113,13 @@ class Underground {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
             if (this.energy === this.getMaxEnergy()) {
-                Notifier.notify({ message: 'Your mining energy has reached maximum capacity!', type: GameConstants.NotificationOption.success, timeout: 1e4, sound: GameConstants.NotificationSound.underground_energy_full, setting: GameConstants.NotificationSetting.underground_energy_full });
+                Notifier.notify({
+                    message: 'Your mining energy has reached maximum capacity!',
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 1e4,
+                    sound: NotificationConstants.NotificationSound.underground_energy_full,
+                    setting: NotificationConstants.NotificationSetting.underground_energy_full,
+                });
             }
         }
     }
@@ -119,7 +129,10 @@ class Underground {
         const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
         const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
         this.energy = this.energy + gain;
-        Notifier.notify({ message: `You restored ${gain} mining energy!`, type: GameConstants.NotificationOption.success });
+        Notifier.notify({
+            message: `You restored ${gain} mining energy!`,
+            type: NotificationConstants.NotificationOption.success,
+        });
     }
 
     public static sortMineItems(prop: string, flip = true) {
@@ -200,7 +213,10 @@ class Underground {
         if (this.canAccess()) {
             $('#mineModal').modal('show');
         } else {
-            Notifier.notify({ message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: 'You need the Explorer Kit to access this location.<br/><i>Check out the shop at Cinnabar Island</i>',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
@@ -254,7 +270,7 @@ class Underground {
 
 $(document).ready(function () {
     $('body').on('click', '.mineSquare', function () {
-        Mine.click(parseInt(this.dataset.i), parseInt(this.dataset.j));
+        Mine.click(parseInt(this.dataset.i, 10), parseInt(this.dataset.j, 10));
     });
 });
 
@@ -264,7 +280,8 @@ namespace Underground {
         'Items_Max',
         'Energy_Gain',
         'Energy_Regen_Time',
-        'Daily_Deals_Max'
+        'Daily_Deals_Max',
+        'Bomb_Efficiency',
     }
 
     export const BASE_ENERGY_MAX = 50;
@@ -272,8 +289,10 @@ namespace Underground {
     export const BASE_ENERGY_GAIN = 3;
     export const BASE_ENERGY_REGEN_TIME = 60;
     export const BASE_DAILY_DEALS_MAX = 3;
+    export const BASE_BOMB_EFFICIENCY = 10;
 
-    export const HAMMER_ENERGY = 3;
     export const CHISEL_ENERGY = 1;
+    export const HAMMER_ENERGY = 3;
+    export const BOMB_ENERGY = 10;
     export const PROSPECT_ENERGY = 15;
 }

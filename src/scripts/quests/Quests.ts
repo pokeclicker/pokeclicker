@@ -43,7 +43,10 @@ class Quests implements Saveable {
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
         } else {
-            Notifier.notify({ message: 'You cannot start more quests', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot start more quests',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -53,7 +56,10 @@ class Quests implements Saveable {
         if (quest && quest.inProgress()) {
             quest.quit(shouldConfirm);
         } else {
-            Notifier.notify({ message: 'You cannot quit this quest', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot quit this quest',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -68,7 +74,10 @@ class Quests implements Saveable {
             }
         } else {
             console.trace('cannot claim quest..');
-            Notifier.notify({ message: 'You cannot claim this quest', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot claim this quest',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -81,7 +90,12 @@ class Quests implements Saveable {
 
         // Refresh the list each time a player levels up
         if (this.level() > currentLevel) {
-            Notifier.notify({ message: 'Your quest level has increased!', type: GameConstants.NotificationOption.success, timeout: 1e4, sound: GameConstants.NotificationSound.quest_level_increased });
+            Notifier.notify({
+                message: 'Your quest level has increased!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+                sound: NotificationConstants.NotificationSound.quest_level_increased,
+            });
             this.refreshQuests(true);
         }
     }
@@ -108,7 +122,10 @@ class Quests implements Saveable {
             GameHelper.incrementObservable(this.refreshes);
             this.generateQuestList();
         } else {
-            Notifier.notify({ message: 'You cannot afford to do that!', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot afford to do that!',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 

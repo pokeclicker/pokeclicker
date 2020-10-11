@@ -59,6 +59,10 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
+  &.disabled {
+    opacity: .5;
+    pointer-events: none;
+  }
   .content {
     position: absolute;
     width: 100%;
@@ -133,6 +137,11 @@
 
 #eggList {
   background-color: #aaa;
+}
+
+#middle-column .eggSlot {
+  flex-basis: 25%;
+  max-width: 25%;
 }
 
 @eggMainColors:
