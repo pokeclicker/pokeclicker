@@ -21,40 +21,62 @@
                         <div class="col-sm-12">
                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint], 'currency': GameConstants.Currency.farmPoint}}"></span>
                         </div>
-                        <ul id="seedList" data-bind="foreach: FarmController.getBerryListWithIndex()" class="list-group"
-                            style="margin-bottom: 5px;">
-                            <li class="list-group-item list-group-item-action seed-list-item"
-                                data-bind="click: function() {FarmController.selectedBerry = $data}">
-                                <img src="" width="24px"
-                                     data-bind="attr:{ src: 'assets/images/items/' + BerryType[$data] + '.png' },
-                                     css: {'berryLocked': !App.game.farming.unlockedBerries[$data] }">
-                                <span data-bind="text: App.game.farming.unlockedBerries[$data] ? BerryType[$data] : '???'"></span>
-                                <span class="seedAmount" data-bind="text: App.game.farming.berryList[$data]"></span>
-                            </li>
+
+                        <ul class="nav nav-tabs nav-fill">
+                            <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#seeds">Berries</a></li>
+                            <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#mulches">Mulch</a></li>
                         </ul>
 
-                        <div class="row justify-content-center">
-                            <button class="btn btn-secondary" onclick="FarmController.navigateLeft()"
-                                    data-bind=" css: {disabled: FarmController.navigateIndex() === 0}">
-                                <img src="assets/images/leftarrow.png">
-                            </button>
-                            <div data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
-                            <button class="btn btn-secondary" onclick="FarmController.navigateRight()"
-                                    data-bind=" css: {disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs()}">
-                                <img src="assets/images/rightarrow.png">
-                            </button>
-                        </div>
+                        <div class="tab-content">
+                            <div id="seeds" class="tab-pane active p-3">
+                                <ul id="seedList" data-bind="foreach: FarmController.getBerryListWithIndex()" class="list-group"
+                                    style="margin-bottom: 5px;">
+                                    <li class="list-group-item list-group-item-action seed-list-item"
+                                        data-bind="click: function() {FarmController.selectedBerry = $data}">
+                                        <img src="" width="24px"
+                                            data-bind="attr:{ src: 'assets/images/items/' + BerryType[$data] + '.png' },
+                                            css: {'berryLocked': !App.game.farming.unlockedBerries[$data] }">
+                                        <span data-bind="text: App.game.farming.unlockedBerries[$data] ? BerryType[$data] : '???'"></span>
+                                        <span class="seedAmount" data-bind="text: App.game.farming.berryList[$data]"></span>
+                                    </li>
+                                </ul>
 
-                        <div class="row">
-                            <div class="col-lg-12 col-6">
-                                <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">
-                                    Plant All
-                                </button>
+                                <div class="row justify-content-center">
+                                    <button class="btn btn-secondary" onclick="FarmController.navigateLeft()"
+                                            data-bind=" css: {disabled: FarmController.navigateIndex() === 0}">
+                                        <img src="assets/images/leftarrow.png">
+                                    </button>
+                                    <div data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
+                                    <button class="btn btn-secondary" onclick="FarmController.navigateRight()"
+                                            data-bind=" css: {disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs()}">
+                                        <img src="assets/images/rightarrow.png">
+                                    </button>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-12 col-6">
+                                        <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">
+                                            Plant All
+                                        </button>
+                                    </div>
+                                    <div class="col-lg-12 col-6">
+                                        <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
+                                            Harvest All
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-lg-12 col-6">
-                                <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
-                                    Harvest All
-                                </button>
+
+                            <div id="mulches" class="tab-pane p-3">
+                                
+                                <!-- TODO: Show Mulches -->
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-12 col-6">
+                                        <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch)}">
+                                            Mulch All
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -64,9 +86,10 @@
                                 <div class="plot-content">
                                     <div class="plotImage">
                                         <img style="width: 100%" src="assets/images/farm/soil.png">
+                                        <!-- TODO: Update logic to handle mulches -->
                                         <div data-bind="ifnot: $data.isEmpty()">
                                             <div class="plotButton"
-                                                 data-bind="click: function(){App.game.farming.harvest($index())}, tooltip: {title: $data.formattedTimeLeft, trigger: 'hover', animation: false}">
+                                                 data-bind="click: function(){App.game.farming.harvest($index())}, tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false}">
                                                 <img width="100%" height="100%"
                                                      style="max-width: 100%; max-height: 100%"
                                                      src=""

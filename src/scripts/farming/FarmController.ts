@@ -1,3 +1,4 @@
+///<reference path="./MulchType.ts"/>
 class FarmController {
 
     // TODO: Update to allow for selecting berries or mulch
@@ -7,6 +8,7 @@ class FarmController {
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(1);
 
     public static selectedBerry: BerryType = BerryType.Cheri;
+    public static selectedMulch: MulchType = MulchType.Boost_Mulch;
 
     public static initialize() {
         this.berryListFiltered(Array.from(Array(GameConstants.AMOUNT_OF_BERRY_TYPES).keys()));

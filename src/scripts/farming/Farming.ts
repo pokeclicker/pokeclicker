@@ -5,22 +5,26 @@ class Farming implements Feature {
     berryData: Berry[] = [];
 
     readonly AMOUNT_OF_PLOTS = 25;
+    readonly AMOUNT_OF_MULCHES = 4;
 
     defaults = {
         berryList: Array<number>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(0),
         unlockedBerries: Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false),
+        mulchList: Array<number>(this.AMOUNT_OF_MULCHES).fill(0),
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
-            return new Plot(index === 0, BerryType.None, 0);
+            return new Plot(index === 0, BerryType.None, 0, MulchType.None, 0);
         }),
     };
 
     berryList: ArrayOfObservables<number>;
     unlockedBerries: ArrayOfObservables<boolean>;
+    mulchList: ArrayOfObservables<number>;
     plotList: ArrayOfObservables<Plot>;
 
     constructor() {
         this.berryList = new ArrayOfObservables(this.defaults.berryList);
         this.unlockedBerries = new ArrayOfObservables(this.defaults.unlockedBerries);
+        this.mulchList = new ArrayOfObservables(this.defaults.mulchList);
         this.plotList = new ArrayOfObservables(this.defaults.plotList);
     }
 
@@ -117,7 +121,7 @@ class Farming implements Feature {
     }
 
     update(delta: number): void {
-        const timeToReduce = delta * this.getGrowthMultiplier();
+        const timeToReduce = delta;
 
         let notifications = [];
 
@@ -128,6 +132,8 @@ class Farming implements Feature {
                 plot.notifications = [];
             }
         });
+
+        // TODO: Handle Mutations
 
         if (notifications.length) {
             for (let i = 0;i < notifications.length;i++) {
@@ -174,6 +180,14 @@ class Farming implements Feature {
             case FarmNotificationType.Dropped:
                 Notifier.notify({
                     message: 'A berry has been dropped!',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
+                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+                });
+                break;
+            case FarmNotificationType.MulchRanOut:
+                Notifier.notify({
+                    message: 'A plot has run out of mulch!',
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.ready_to_harvest,
                     setting: NotificationConstants.NotificationSetting.ready_to_harvest,
@@ -275,6 +289,32 @@ class Farming implements Feature {
     }
 
     /**
+     * Adds mulch to a plot
+     * @param index The plot index
+     * @param mulch The MulchType to be added
+     */
+    public addMulch(index: number, mulch: MulchType) {
+        const plot = this.plotList[index];
+        if (!plot.isUnlocked || !this.hasMulch(mulch)) {
+            return;
+        }
+
+        this.mulchList[mulch] -= 1;
+        plot.mulch = mulch;
+        plot.mulchTimeLeft = GameConstants.MULCH_USE_TIME;
+    }
+
+    /**
+     * Attempts to add mulch to all plots
+     * @param mulch The MulchType to be added
+     */
+    public mulchAll(mulch: MulchType) {
+        this.plotList.forEach((plot, index) => {
+            this.addMulch(index, mulch);
+        });
+    }
+
+    /**
      * Gives the player a random berry from the first 8 types
      * @param amount Amount of berries to give. Defaults to 1.
      * @param disableNotification Set to true to not notify the player. Defaults to false.
@@ -303,6 +343,10 @@ class Farming implements Feature {
 
     hasBerry(berry: BerryType) {
         return this.berryList[berry] > 0;
+    }
+
+    hasMulch(mulch: MulchType) {
+        return this.mulchList[mulch] > 0;
     }
 
     canAccess(): boolean {
@@ -345,7 +389,7 @@ class Farming implements Feature {
             this.plotList = new ArrayOfObservables(this.defaults.plotList);
         } else {
             (savedPlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
-                const plot: Plot = new Plot(false, BerryType.None, 0);
+                const plot: Plot = new Plot(false, BerryType.None, 0, MulchType.None, 0);
                 plot.fromJSON(value);
                 this.plotList[index] = plot;
             });

@@ -3,5 +3,6 @@ enum FarmNotificationType {
     Withered,
     Mutated,
     Replanted,
-    Dropped
+    Dropped,
+    MulchRanOut,
 }
