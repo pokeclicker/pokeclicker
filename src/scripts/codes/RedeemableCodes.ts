@@ -37,7 +37,7 @@ class RedeemableCodes implements Saveable {
                 }
                 // Complete all gyms
                 GameConstants.KantoGyms.forEach(gym => {
-                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)]);
+                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym)]);
                     // Give badge
                     if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
                         App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
@@ -45,7 +45,7 @@ class RedeemableCodes implements Saveable {
                 });
                 // Complete all dungeons
                 GameConstants.KantoDungeons.forEach(dungeon => {
-                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)]);
+                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon)]);
                 });
                 // Catch all Pokemon
                 for (let id = 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto]; id++) {

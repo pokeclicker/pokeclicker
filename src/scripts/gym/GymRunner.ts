@@ -1,5 +1,6 @@
-class GymRunner {
+///<reference path="../badgeCase/BadgeTypes.ts"/>
 
+class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
@@ -87,7 +88,7 @@ class GymRunner {
         if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
             gym.firstWinReward();
         }
-        GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
+        GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);
         App.game.gameState = GameConstants.GameState.town;
     }
@@ -100,10 +101,10 @@ class GymRunner {
 
 document.addEventListener('DOMContentLoaded', function (event) {
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
-        if (GymBattle.gym.badgeReward == BadgeCase.Badge.Soul) {
+        if (GymBattle.gym.badgeReward == BadgeTypes.Soul) {
             App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket);
         }
-        if (GymBattle.gym.badgeReward == BadgeCase.Badge.Earth) {
+        if (GymBattle.gym.badgeReward == BadgeTypes.Earth) {
             App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Shard_case);
         }
     });

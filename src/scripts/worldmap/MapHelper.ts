@@ -116,7 +116,7 @@ class MapHelper {
         }
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
-                if (App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
+                if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(town)]()) {
                     return 'dungeon completedDungeon';
                 }
                 return 'dungeon unlockedDungeon';
@@ -124,7 +124,7 @@ class MapHelper {
             if (gymList.hasOwnProperty(town)) {
                 const gym = gymList[town];
                 // If defeated the previous gym, but not this one
-                const gymIndex = Statistics.getGymIndex(town);
+                const gymIndex = GameConstants.getGymIndex(town);
                 if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
                     return 'city unlockedUnfinishedTown';
                 }

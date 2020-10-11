@@ -1,7 +1,6 @@
-///<reference path="../oakItems/OakItems.ts"/>
-///<reference path="../farming/BerryType.ts"/>
-///<reference path="../pokemons/PokemonType.ts"/>
-class Statistics implements Saveable {
+import { Saveable } from './common/Saveable';
+
+export default class Statistics implements Saveable {
     saveKey = 'statistics';
 
     defaults = {};
@@ -198,14 +197,6 @@ class Statistics implements Saveable {
                 },
             });
         }
-    }
-
-    public static getGymIndex(gym: string) {
-        return GameConstants.RegionGyms.flat().findIndex(g => g == gym);
-    }
-
-    public static getDungeonIndex(dungeon: string) {
-        return GameConstants.RegionDungeons.flat().findIndex(d => d == dungeon);
     }
 
     toJSON(): Record<string, any> {
