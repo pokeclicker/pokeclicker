@@ -15,10 +15,10 @@ class SafariBattle {
 
     public static load() {
         // Stop left over keypresses
-        GameController.simulateKey(37, 'up');
-        GameController.simulateKey(38, 'up');
-        GameController.simulateKey(39, 'up');
-        GameController.simulateKey(40, 'up');
+        GameController.simulateKey('ArrowUp', 'up');
+        GameController.simulateKey('ArrowDown', 'up');
+        GameController.simulateKey('ArrowLeft', 'up');
+        GameController.simulateKey('ArrowRight', 'up');
         // Generate enemy
         SafariBattle.enemy = SafariPokemon.random();
         Safari.inBattle(true);

@@ -51,11 +51,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
-                                <label>Caught Status</label>
+                                <label>Shiny Status</label>
                                 <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
-                                    <option value="0">All</option>
-                                    <option value="1">Not Shiny</option>
-                                    <option value="2">Shiny</option>
+                                    <option value="-1">All</option>
+                                    <option value="0">Not Shiny</option>
+                                    <option value="1">Shiny</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
@@ -80,19 +80,20 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                         </div>
                         <div class="form-row collapse" id="breeding-sort">
-                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySort')">
+                            <div class="form-group col" data-bind="with: Settings.getSetting('partySort')">
                                 <label>Sort</label>
-                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                                    data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
-                                    <option data-bind="text: $data.text, value: $data.value"></option>
-                                </select>
-                            </div>
-                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySortDirection')">
-                                <label>Sort Direction</label>
-                                <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, this.value === 'true')"
-                                    data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue().toString()]">
-                                    <option data-bind="text: $data.value ? 'Descending' : 'Ascending', value: $data.value.toString()"></option>
-                                </select>
+                                <div class="input-group">
+                                    <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                                        data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                                        <option data-bind="text: $data.text, value: $data.value"></option>
+                                    </select>
+                                    <div class="input-group-append bg-primary text-light">
+                                        <label for="hatcheryPartySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                                        <input id="hatcheryPartySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                                            data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
+                                            onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

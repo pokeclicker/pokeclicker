@@ -1,4 +1,4 @@
-interface Saveable {
+export interface Saveable {
     saveKey: string;
     defaults: Record<string, any>;
 

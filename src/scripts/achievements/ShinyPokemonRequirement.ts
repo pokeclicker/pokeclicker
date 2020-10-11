@@ -6,7 +6,7 @@ class ShinyPokemonRequirement extends Requirement {
     }
 
     public getProgress() {
-        return Math.min(App.game.party.shinyPokemon.filter(id => id > 0).length, this.requiredValue);
+        return Math.min(App.game.party.caughtPokemon.filter(p => p.shiny).length, this.requiredValue);
     }
 
     public hint(): string {
