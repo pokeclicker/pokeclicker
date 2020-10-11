@@ -1,3 +1,6 @@
+// Define interface placeholders so that code doesn't crash when calling the new
+// module implementations
+
 /**
   * Knockout.js extenders
   */
