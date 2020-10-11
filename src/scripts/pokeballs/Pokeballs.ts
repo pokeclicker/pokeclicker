@@ -111,7 +111,7 @@ class Pokeballs implements Feature {
         }
 
         if (json['pokeballs'] != null) {
-            json['pokeballs'].map((amt: number, ind: number) => this.pokeballs[ind].quantity(amt));
+            json['pokeballs'].map((amt: number, type: number) => this.pokeballs[type].quantity(amt));
         }
         this.notCaughtSelection = json['notCaughtSelection'] ?? this.defaults.notCaughtSelection;
         this.notCaughtShinySelection = json['notCaughtShinySelection'] ?? this.defaults.notCaughtShinySelection;
