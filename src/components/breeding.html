@@ -80,7 +80,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                         </div>
                         <div class="form-row collapse" id="breeding-sort">
-                            <div class="form-group col-md-6 col-6" data-bind="with: Settings.getSetting('partySort')">
+                            <div class="form-group col" data-bind="with: Settings.getSetting('partySort')">
                                 <label>Sort</label>
                                 <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                                     data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
