@@ -123,22 +123,23 @@ class Farming implements Feature {
     update(delta: number): void {
         const timeToReduce = delta;
 
-        let notifications = [];
+        let notifications = new Set<FarmNotificationType>();
 
         this.plotList.forEach(plot => {
             plot.update(timeToReduce);
             if (plot.notifications) {
-                notifications = [...notifications, ...plot.notifications];
+                plot.notifications.forEach(n => notifications.add(n));
                 plot.notifications = [];
             }
         });
 
         // TODO: Handle Mutations
+        // TODO: Handle Squirtbottle Oak Item
 
-        if (notifications.length) {
-            for (let i = 0;i < notifications.length;i++) {
-                this.handleNotification(notifications[i]);
-            }
+        if (notifications.size) {
+            notifications.forEach(function(n) {
+                this.handleNotification(n);
+            }, this);
         }
     }
 

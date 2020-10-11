@@ -28,19 +28,20 @@ class Plot implements Saveable {
         this._mulchTimeLeft = ko.observable(mulchTimeLeft);
 
         this.formattedTimeLeft = ko.pureComputed(function () {
-            if (this.berry === BerryType.None) { return ""; }
+            if (this.berry === BerryType.None) { return ''; }
             for (let i = 0;i < 5;i++) {
                 if (this.age < App.game.farming.berryData[this.berry].growthTime[i]) {
                     let timeLeft = Math.ceil(App.game.farming.berryData[this.berry].growthTime[i] - this.age);
-                    return GameConstants.formatTime(timeLeft / App.game.farming.getGrowthMultiplier());
+                    let growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+                    return GameConstants.formatTime(timeLeft / growthMultiplier);
                 }
             }
         }, this);
 
         this.formattedMulchTimeLeft = ko.pureComputed(function() {
-            if (this.mulch === MulchType.None) { return ""; }
-            return GameConstants.formatTime(mulchTimeLeft);
-        })
+            if (this.mulch === MulchType.None) { return ''; }
+            return GameConstants.formatTime(this.mulchTimeLeft);
+        }, this);
 
         this.isEmpty = ko.pureComputed(function () {
             return this.berry === BerryType.None;
@@ -65,12 +66,7 @@ class Plot implements Saveable {
     update(seconds: number) {
         // Updating Berry
         if (this.berry !== BerryType.None) {
-            let growthTime = seconds * App.game.farming.getGrowthMultiplier();
-            if (this.mulch === MulchType.Boost_Mulch) {
-                growthTime *= GameConstants.BOOST_MULCH_MULTIPLIER;
-            } else if (this.mulch === MulchType.Amaze_Mulch) {
-                growthTime *= GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER;
-            }
+            let growthTime = seconds * App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
     
             let oldAge = this.age;
             this.age += growthTime;
@@ -86,7 +82,7 @@ class Plot implements Saveable {
 
         // Updating Mulch
         if (this.mulch !== MulchType.None) {
-            this.mulchTimeLeft = Math.min(this.mulchTimeLeft - seconds, 0);
+            this.mulchTimeLeft = Math.max(this.mulchTimeLeft - seconds, 0);
             if (this.mulchTimeLeft === 0) {
                 this.notifications.push(FarmNotificationType.MulchRanOut);
                 this.mulch = MulchType.None;
@@ -99,15 +95,7 @@ class Plot implements Saveable {
      * Returns how many berries will be harvested
      */
     harvest(): number {
-        let amount = App.game.farming.berryData[this.berry].harvestAmount;
-
-        if (this.mulch === MulchType.Rich_Mulch) {
-            amount *= GameConstants.RICH_MULCH_MULTIPLIER;
-        } else if (this.mulch === MulchType.Amaze_Mulch) {
-            amount *= GameConstants.AMAZE_MULCH_PRODUCE_MULTIPLIER;
-        }
-
-        return amount;
+        return App.game.farming.berryData[this.berry].harvestAmount * this.getHarvestMultiplier();
     }
 
     /**
@@ -130,6 +118,7 @@ class Plot implements Saveable {
 
             // Check if berry replants itself
             let replantChance = App.game.farming.berryData[this.berry].replantRate;
+            // TODO: Handle Sprinklotad Oak Item
             if (Math.random() < replantChance) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
@@ -144,24 +133,59 @@ class Plot implements Saveable {
     }
 
     /**
+     * Gets the growth multiplier for this plot
+     */
+    getGrowthMultiplier(): number {
+        if (this.mulch === MulchType.Boost_Mulch) {
+            return GameConstants.BOOST_MULCH_MULTIPLIER;
+        } else if (this.mulch === MulchType.Amaze_Mulch) {
+            return GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER;
+        }
+
+        return 1;
+    }
+
+    /**
+     * Gets the harvest multiplier for this plot
+     */
+    getHarvestMultiplier(): number {
+        if (this.mulch === MulchType.Rich_Mulch) {
+            return GameConstants.RICH_MULCH_MULTIPLIER;
+        } else if (this.mulch === MulchType.Amaze_Mulch) {
+            return GameConstants.AMAZE_MULCH_PRODUCE_MULTIPLIER;
+        }
+
+        return 1;
+    }
+
+    /**
      * Returns the tooltip for the plot
      */
     toolTip(): string {
-        let formattedTime: string = this.formattedTimeLeft();
-        switch(this.stage()) {
-            case PlotStage.Seed:
-            case PlotStage.Sprout:
-            case PlotStage.Taller:
-                return formattedTime + ' until growth';
-            case PlotStage.Bloom:
-                return formattedTime + ' until ripe';
-            case PlotStage.Berry:
-                return formattedTime + ' until overripe';
+
+        let tooltip: string = '';
+
+        if (this.berry !== BerryType.None) {
+            let formattedTime: string = this.formattedTimeLeft();
+            switch(this.stage()) {
+                case PlotStage.Seed:
+                case PlotStage.Sprout:
+                case PlotStage.Taller:
+                    tooltip = formattedTime + ' until growth';
+                case PlotStage.Bloom:
+                    tooltip = formattedTime + ' until ripe';
+                case PlotStage.Berry:
+                    tooltip = formattedTime + ' until overripe';
+            }
         }
 
-        // TODO: Handle showing mulch time
+        if (this.mulch !== MulchType.None) {
+            let mulchTime: string = this.formattedMulchTimeLeft();
+            if (tooltip) { tooltip += '<br/>'; }
+            tooltip += MulchType[this.mulch].replace('_Mulch','') + ' : ' + mulchTime;
+        }
 
-        return "";
+        return tooltip;
     }
 
     fromJSON(json: Record<string, any>): void {
@@ -172,6 +196,8 @@ class Plot implements Saveable {
         this.isUnlocked = json['isUnlocked'] ?? this.defaults.isUnlocked;
         this.berry = json['berry'] ?? this.defaults.berry;
         this.age = json['age'] ?? this.defaults.age;
+        this.mulch = json['mulch'] ?? this.defaults.mulch;
+        this.mulchTimeLeft = json['mulchTimeLeft'] ?? this.defaults.mulchTimeLeft;
     }
 
     toJSON(): Record<string, any> {
@@ -179,6 +205,8 @@ class Plot implements Saveable {
             isUnlocked: this.isUnlocked,
             berry: this.berry,
             age: this.age,
+            mulch: this.mulch,
+            mulchTimeLeft: this.mulchTimeLeft,
         };
     }
 
