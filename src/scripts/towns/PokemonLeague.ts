@@ -35,7 +35,7 @@ TownList['Indigo Plateau Kanto'] = new PokemonLeague(
     GameConstants.Region.kanto,
     [
         new RouteKillRequirement(10, 23),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road')),
     ],
     indigoPlateauShop,
     ['Elite Lorelei', 'Elite Bruno', 'Elite Agatha', 'Elite Lance', 'Champion Blue']
@@ -56,7 +56,7 @@ TownList['Pokemon League Hoenn'] = new PokemonLeague(
     GameConstants.Region.hoenn,
     [
         new RouteKillRequirement(10, 128),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Hoenn')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn')),
     ],
     indigoPlateauShop,
     ['Elite Sidney', 'Elite Phoebe', 'Elite Glacia', 'Elite Drake', 'Champion Wallace']
@@ -68,7 +68,7 @@ TownList['Pokemon League Sinnoh'] = new PokemonLeague(
     GameConstants.Region.sinnoh,
     [
         new RouteKillRequirement(10, 223),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Sinnoh')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh')),
     ],
     indigoPlateauShop,
     ['Elite Aaron', 'Elite Bertha', 'Elite Flint', 'Elite Lucian', 'Champion Cynthia']
@@ -80,7 +80,7 @@ TownList['Pokemon League Unova'] = new PokemonLeague(
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, 23),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Unova')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova')),
     ],
     indigoPlateauShop,
     ['Elite Shauntal', 'Elite Marshal', 'Elite Grimsley', 'Elite Caitlin', 'Champion Iris']
@@ -95,7 +95,7 @@ TownList['Pokemon League Kalos'] = new PokemonLeague(
             new RouteKillRequirement(10, 21),
             new RouteKillRequirement(10, 22),
         ]),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Kalos')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos')),
     ],
     indigoPlateauShop,
     ['Elite Malva', 'Elite Siebold', 'Elite Wikstrom', 'Elite Drasna', 'Champion Diantha']
