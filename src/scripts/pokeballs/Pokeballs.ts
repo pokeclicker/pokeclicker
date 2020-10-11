@@ -83,7 +83,7 @@ class Pokeballs implements Feature {
         return this.pokeballs[ball].catchTime;
     }
 
-    gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
+    gainPokeballs(ball: GameConstants.Pokeball, amount: number): void {
         GameHelper.incrementObservable(this.pokeballs[ball].quantity, amount);
     }
 
@@ -92,11 +92,11 @@ class Pokeballs implements Feature {
         GameHelper.incrementObservable(App.game.statistics.pokeballsUsed[ball]);
     }
 
-    getCatchBonus(ball: GameConstants.Pokeball) {
+    getCatchBonus(ball: GameConstants.Pokeball): number {
         return this.pokeballs[ball].catchBonus;
     }
 
-    getBallQuantity(ball: GameConstants.Pokeball) {
+    getBallQuantity(ball: GameConstants.Pokeball): number {
         const pokeball = this.pokeballs[ball];
         return pokeball ? pokeball.quantity() : 0;
     }
