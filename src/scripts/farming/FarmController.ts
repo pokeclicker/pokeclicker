@@ -1,8 +1,6 @@
 ///<reference path="./MulchType.ts"/>
 class FarmController {
-
-    // TODO: Update to allow for selecting berries or mulch
-
+    
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static berryListFiltered: KnockoutObservableArray<BerryType> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(1);

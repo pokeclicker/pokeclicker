@@ -120,6 +120,18 @@ class Farming implements Feature {
         return multiplier;
     }
 
+    getReplantMultiplier(): number {
+        let multiplier = 1;
+        //multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
+        return multiplier;
+    }
+
+    getMutationMultiplier(): number {
+        let multiplier = 1;
+        //multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprinklotad);
+        return multiplier;
+    }
+
     update(delta: number): void {
         const timeToReduce = delta;
 
@@ -358,6 +370,7 @@ class Farming implements Feature {
         return {
             berryList: this.berryList.map(x => x),
             unlockedBerries: this.unlockedBerries.map(x => x),
+            mulchList: this.mulchList.map(x => x),
             plotList: this.plotList.map(plot => plot.toJSON()),
         };
     }
@@ -382,6 +395,15 @@ class Farming implements Feature {
         } else {
             (savedUnlockedBerries as boolean[]).forEach((value: boolean, index: number) => {
                 this.unlockedBerries[index] = value;
+            });
+        }
+
+        const savedMulches = json['mulchList'];
+        if (savedMulches == null) {
+            this.mulchList = new ArrayOfObservables(this.defaults.mulchList);
+        } else {
+            (savedMulches as number[]).forEach((value: number, index: number) => {
+                this.mulchList[index] = value;
             });
         }
 
