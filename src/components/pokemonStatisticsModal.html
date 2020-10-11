@@ -27,18 +27,19 @@
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
-                      <td class="text-left">Primary</td>
-                      <td class="text-left tight"><code 
-                        data-bind="style: { 'color': '#' + TypeHelper.typeColorsLocked[pokemonMap[$data].type[0]],
-                          'background-color': '#' + TypeHelper.typeColors[pokemonMap[$data].type[0]]},
-                          text: PokemonType[pokemonMap[$data].type[0]]">-</code></td>
-                    </tr>
-                    <tr>
-                      <td class="text-left">Secondary</td>
-                      <td class="text-left tight"><code 
-                        data-bind="style: { 'color': '#' + TypeHelper.typeColorsLocked[pokemonMap[$data].type[1]],
-                          'background-color': '#' + TypeHelper.typeColors[pokemonMap[$data].type[1]]},
-                          text: PokemonType[pokemonMap[$data].type[1]]">-</code></td>
+                      <td class="text-left">Type</td>
+                      <td class="text-left tight">
+                        <span class="badge text-light"
+                          data-bind="visible: pokemonMap[$data].type[0] >= 0,
+                          style: { 'background-color': TypeColor[pokemonMap[$data].type[0]] }">
+                          <small><strong data-bind="text: PokemonType[pokemonMap[$data].type[0]].toUpperCase()"></strong></small>
+                        </span>
+                        <span class="badge text-light"
+                          data-bind="visible: pokemonMap[$data].type[1] >= 0,
+                          style: { 'background-color': TypeColor[pokemonMap[$data].type[1]] }">
+                          <small><strong data-bind="text: PokemonType[pokemonMap[$data].type[1]].toUpperCase()"></strong></small>
+                        </span>
+                      </td>
                     </tr>
                     <tr>
                       <td class="text-left">Catch Rate</td>
