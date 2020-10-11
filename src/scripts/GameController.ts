@@ -149,9 +149,10 @@ class GameController {
                     }
                     e.preventDefault();
                 } else if ('gymList' in player.town()) {
-                    const cap = keyCode > 48 && keyCode < 58 ? 48 : keyCode > 96 && keyCode < 106 ? 96 : -1; //1 to 9
-                    if (keyCode > cap && keyCode - cap <= player.town().gymList().length) {
-                        GymRunner.startGym(player.town().gymList()[keyCode - cap - 1]());
+                    const number = Number(e.key);
+                    // Check if a number higher than 0 and less than total Gyms was pressed
+                    if (number && number <= player.town().gymList().length) {
+                        GymRunner.startGym(player.town().gymList()[number - 1]());
                     }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
