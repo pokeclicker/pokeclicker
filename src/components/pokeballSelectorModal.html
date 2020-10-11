@@ -9,12 +9,12 @@
         </button>
       </div>
       <div class="modal-body p-0">
-        <div class="table-warning p-1" data-bind="text: App.game.pokeballs.selectedTitle"></div>
+        <div class="table-warning p-1 text-left" data-bind="text: App.game.pokeballs.selectedTitle"></div>
         <div class="card-body p-0 show table-responsive text-left">
           <table class="table table-sm m-0">
             <thead>
               <tr>
-                <th width="20%">Ball</th>
+                <th class="text-center" width="20%">Ball</th>
                 <th width="80%">Description</th>
               </tr>
             </thead>
@@ -39,11 +39,11 @@
 </div>
 
 <script type="text/html" id="pokeballSelectionTemplate">
-  <td>
+  <td class="text-center">
     <img class="pokeball-small"
       data-bind="attr: {src: 'assets/images/pokeball/' + $data.image + '.png'}, css: {'pokeball-selected': App.game.pokeballs.selectedSelection()() === $data.type}"/>
   </td>
-  <td>
+  <td class="align-middle">
     <span data-bind="text: $data.description"></span>
   </td>
 </script>
