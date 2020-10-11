@@ -4,6 +4,8 @@ class Farming implements Feature {
 
     berryData: Berry[] = [];
 
+    mutations: Mutation[] = [];
+
     readonly AMOUNT_OF_PLOTS = 25;
     readonly AMOUNT_OF_MULCHES = 4;
 
@@ -112,6 +114,12 @@ class Farming implements Feature {
     
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
 
+        
+        // Mutations
+        // TODO: Setup mutations for every berry
+        // TEMPORARY MUTATION FOR TESTING
+        this.mutations.push(new NearMutation(1, BerryType.Cheri, [{berryType: BerryType.Cheri, berryStage: PlotStage.Seed}]));
+
     }
 
     getGrowthMultiplier(): number {
@@ -142,6 +150,12 @@ class Farming implements Feature {
             if (plot.notifications) {
                 plot.notifications.forEach(n => notifications.add(n));
                 plot.notifications = [];
+            }
+        });
+
+        this.mutations.forEach(mutation => {
+            if (mutation.mutate()) {
+                notifications.add(FarmNotificationType.Mutated);
             }
         });
 

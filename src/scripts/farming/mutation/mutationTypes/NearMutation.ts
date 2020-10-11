@@ -5,43 +5,69 @@
  */
 class NearMutation extends Mutation {
 
-    berrytypes: MutationReqInterface[];
+    berryReqs: MutationReqInterface[];
 
-    constructor(mutationChance: number, berryTypes: MutationReqInterface[]) {
-        super(mutationChance);
-        this.berrytypes = berryTypes;
+    constructor(mutationChance: number, mutatedBerry: BerryType, berryReqs: MutationReqInterface[]) {
+        super(mutationChance, mutatedBerry);
+        this.berryReqs = berryReqs;
     }
 
     /**
-     * Determines whether this mutation can occur based on the status of the farm plots
+     * Determines whether this mutation can occur based on the status of the farm plots. Returns plot indices that can mutate
      */
-    checkRequirements(): boolean {
+    checkRequirements(): number[] {
+        let plots = [];
         for (let i = 0;i < App.game.farming.plotList.length;i++) {
             if (!App.game.farming.plotList[i].isUnlocked) { continue; }
-            
+            if (!App.game.farming.plotList[i].isEmpty()) { continue; }
+            let nearPlots = this.findNearPlots(i);
+            if (this.plotsFitRequirements(nearPlots)) { plots.push(i); }
         }
-        return false;
+        return plots;
     }
 
+    /**
+     * Finds the plot indices that are around the plot in a 3x3 square
+     * @param index The plot index
+     */
     findNearPlots(index: number): number[] {
         let plots = [];
 
-        plots = [ index - 6, index - 5, index - 4, index - 1, index + 2, index + 4, index + 5, index + 6 ];
+        let rowIdx = index % 5;
+        let colIdx = (index - rowIdx) / 5;
 
-        // Edge indices
-        if (index < 5 || index > 19 || index % 5 == 0 || index % 5 == 4) {
-
-        } else {
-
+        for (let r = rowIdx-1;r <= rowIdx+1;r++) {
+            for (let c = colIdx-1;c <= colIdx+1;c++) {
+                if (r < 0 || r > 5 || c < 0 || c > 5) {
+                    continue;
+                }
+                plots.push(c * 5 + r);
+            }
         }
 
         return plots;
     }
 
     /**
-     * Handles updating the farm with the mutation
+     * Determines if the plots near fit the requirements
+     * @param plots The list of nearby plots
      */
-    handleMutation(): void {
+    plotsFitRequirements(plots: number[]) {
+        return this.berryReqs.every(function(req) {
+            return plots.some(function(plot) {
+                return this.checkRequirement(plot,req);
+            }, this);
+        }, this);
+    }
 
+    /**
+     * Handles updating the farm with the mutation
+     * @param index The plot index to mutate
+     */
+    handleMutation(index: number): void {
+        const plot = App.game.farming.plotList[index];
+        plot.berry = BerryType.Cheri;
+        plot.age = 0;
+        plot.notifications = [];
     }
 }
