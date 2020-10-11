@@ -115,6 +115,19 @@ class BreedingController {
         return `assets/images/breeding/${eggType}.png`;
     }
 
+    public static getEggCssClass(egg: Egg): string {
+        const animationType = Settings.getSetting('eggAnimation').observableValue();
+        if (animationType === 'none') {
+            return '';
+        }
+
+        if (egg.progress() >= 100) {
+            return 'hatching';
+        }
+
+        return (animationType === 'almost' && egg.stepsRemaining() <= 50) ?  'hatchingSoon' : '';
+    }
+
     public static getEggSpots(pokemonName: string) {
         const pokemon = pokemonMap[pokemonName];
         const seed = pokemon.id * pokemon.type.reduce((a,b) => a * (b + 1), 1);
@@ -125,7 +138,7 @@ class BreedingController {
 
     public static filter = {
         search: ko.observable(new RegExp('', 'i')),
-        shinyStatus: ko.observable(CaughtStatus.NotCaught).extend({ numeric: 0 }),
+        shinyStatus: ko.observable(-1).extend({ numeric: 0 }),
         // All = -2
         type1: ko.observable(-2).extend({ numeric: 0 }),
         type2: ko.observable(-2).extend({ numeric: 0 }),
@@ -146,8 +159,8 @@ class BreedingController {
             }
 
             // Check based on shiny status
-            if (BreedingController.filter.shinyStatus()) {
-                if (PartyController.getCaughtStatus(partyPokemon.id) !== BreedingController.filter.shinyStatus()) {
+            if (BreedingController.filter.shinyStatus() >= 0) {
+                if (+partyPokemon.shiny !== BreedingController.filter.shinyStatus()) {
                     return false;
                 }
             }

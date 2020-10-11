@@ -218,9 +218,10 @@ class Save {
         list = list.filter(p => p.shiny);
         for (const pokemon of list) {
             const id = +pokemon.id;
-            if (!App.game.party.shinyPokemon.includes(id)) {
+            const partyPokemon = App.game.party.getPokemon(id);
+            if (partyPokemon) {
                 converted.push(pokemon.name);
-                App.game.party.shinyPokemon.push(id);
+                partyPokemon.shiny = true;
             }
         }
         if (converted.length > 0) {

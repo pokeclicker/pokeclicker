@@ -106,6 +106,14 @@ Settings.add(new MultipleChoiceSetting('backgroundImage', 'Background image:',
     ],
     'background-day'
 ));
+Settings.add(new MultipleChoiceSetting('eggAnimation', 'Egg Hatching Animation:',
+    [
+        new SettingOption('None', 'none'),
+        new SettingOption('Almost & fully ready', 'almost'),
+        new SettingOption('Fully ready', 'full'),
+    ],
+    'full'
+));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));

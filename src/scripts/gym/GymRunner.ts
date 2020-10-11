@@ -88,7 +88,7 @@ class GymRunner {
         if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
             gym.firstWinReward();
         }
-        GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
+        GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);
         App.game.gameState = GameConstants.GameState.town;
     }
