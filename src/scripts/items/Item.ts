@@ -60,12 +60,18 @@ abstract class Item {
         }
 
         if (n > this.maxAmount) {
-            Notifier.notify({ message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.name())}!`, type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: `You can only buy ${this.maxAmount} &times; ${GameConstants.humanifyString(this.name())}!`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
             n = this.maxAmount;
         }
 
         if (!this.isAvailable()) {
-            Notifier.notify({ message: `${GameConstants.humanifyString(this.name())} is sold out!`, type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: `${GameConstants.humanifyString(this.name())} is sold out!`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
             return;
         }
 
@@ -75,7 +81,10 @@ abstract class Item {
             App.game.wallet.loseAmount(new Amount(this.totalPrice(n), this.currency));
             this.gain(n);
             this.increasePriceMultiplier(n);
-            Notifier.notify({ message: `You bought ${n} ${GameConstants.humanifyString(this.name())}${multiple}`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({
+                message: `You bought ${n} ${GameConstants.humanifyString(this.name())}${multiple}`,
+                type: NotificationConstants.NotificationOption.success,
+            });
         } else {
             let curr = GameConstants.camelCaseToString(GameConstants.Currency[this.currency]);
             switch (this.currency) {
@@ -85,7 +94,10 @@ abstract class Item {
                     curr += 's';
                     break;
             }
-            Notifier.notify({ message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.name()) + multiple}`, type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: `You don't have enough ${curr} to buy ${n} ${GameConstants.humanifyString(this.name()) + multiple}`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 

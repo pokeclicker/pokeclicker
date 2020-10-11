@@ -4,7 +4,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     constructor(gymTown: string, amount: number) {
         super(amount, DefeatGymQuest.calcReward(gymTown, amount));
         this.description = DefeatGymQuest.getDescription(gymTown, amount);
-        this.focus = App.game.statistics.gymsDefeated[Statistics.getGymIndex(gymTown)];
+        this.focus = App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gymTown)];
     }
 
     private static getDescription(gymTown: string, amount: number): string {

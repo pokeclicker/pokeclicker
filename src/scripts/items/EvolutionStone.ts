@@ -45,3 +45,5 @@ ItemList['Reaper_cloth']  = new EvolutionStone(GameConstants.StoneType.Reaper_cl
 ItemList['Razor_claw']    = new EvolutionStone(GameConstants.StoneType.Razor_claw, 2500);
 ItemList['Razor_fang']    = new EvolutionStone(GameConstants.StoneType.Razor_fang, 2500);
 ItemList['Prism_scale']    = new EvolutionStone(GameConstants.StoneType.Prism_scale, 2500);
+ItemList['Sachet']         = new EvolutionStone(GameConstants.StoneType.Sachet, 2500);
+ItemList['Whipped_dream']  = new EvolutionStone(GameConstants.StoneType.Whipped_dream, 2500);

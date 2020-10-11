@@ -6,32 +6,28 @@ class PartyPokemon implements Saveable {
         attackBonus: 0,
         exp: 0,
         breeding: false,
+        shiny: false,
     };
 
-    id: number;
-    name: string;
-
-    baseAttack: number;
-    attackBonus: number;
-    exp: number;
-    _level: KnockoutObservable<number>;
-    evolutions: Evolution[];
     _breeding: KnockoutObservable<boolean>;
+    _shiny: KnockoutObservable<boolean>;
+    _level: KnockoutObservable<number>;
     _attack: KnockoutObservable<number>;
 
-    constructor(id: number, name: string, evolutions: Evolution[], baseAttack: number, attackBonus: number, exp: number, breeding = false) {
-        this.id = id;
-        this.name = name;
-        this.attackBonus = attackBonus;
-        this.exp = exp;
-        this.baseAttack = baseAttack;
+    constructor(
+        public id: number,
+        public name: string,
+        public evolutions: Evolution[],
+        public baseAttack: number,
+        public attackBonus: number,
+        public exp: number,
+        breeding = false,
+        shiny = false
+    ) {
         this._breeding = ko.observable(breeding);
-
+        this._shiny = ko.observable(shiny);
         this._level = ko.observable(1);
         this._attack = ko.observable(this.calculateAttack());
-
-        this.evolutions = evolutions;
-
     }
 
     public calculateAttack(): number {
@@ -98,9 +94,10 @@ class PartyPokemon implements Saveable {
 
         this.attackBonus = json['attackBonus'] ?? this.defaults.attackBonus;
         this.exp = json['exp'] ?? this.defaults.exp;
+        this.breeding = json['breeding'] ?? this.defaults.breeding;
+        this.shiny = json['shiny'] ?? this.defaults.shiny;
         this.level = this.calculateLevelFromExp();
         this.attack = this.calculateAttack();
-        this.breeding = json['breeding'] ?? this.defaults.breeding;
 
         if (this.evolutions != null) {
             for (const evolution of this.evolutions) {
@@ -126,6 +123,7 @@ class PartyPokemon implements Saveable {
             attackBonus: this.attackBonus,
             exp: this.exp,
             breeding: this.breeding,
+            shiny: this.shiny,
             levelEvolutionTriggered: levelEvolutionTriggered,
         };
     }
@@ -147,12 +145,19 @@ class PartyPokemon implements Saveable {
         this._attack(attack);
     }
 
-
     get breeding() {
         return this._breeding();
     }
 
     set breeding(bool: boolean) {
         this._breeding(bool);
+    }
+
+    get shiny() {
+        return this._shiny();
+    }
+
+    set shiny(bool: boolean) {
+        this._shiny(bool);
     }
 }

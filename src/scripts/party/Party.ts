@@ -9,7 +9,6 @@ class Party implements Feature {
 
     defaults = {
         caughtPokemon: [],
-        shinyPokemon: [],
     };
 
     hasMaxLevelPokemon: KnockoutComputed<boolean>;
@@ -17,8 +16,6 @@ class Party implements Feature {
 
     constructor() {
         this._caughtPokemon = ko.observableArray([]);
-        this.shinyPokemon = new ObservableArrayProxy(this.defaults.shinyPokemon);
-
 
         this.hasMaxLevelPokemon = ko.pureComputed(() => {
             for (let i = 0; i < this.caughtPokemon.length; i++) {
@@ -32,14 +29,14 @@ class Party implements Feature {
     }
 
     gainPokemonById(id: number, shiny = false, suppressNotification = false) {
-        this.gainPokemon(PokemonFactory.generatePartyPokemon(id), shiny, suppressNotification);
+        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny), suppressNotification);
     }
 
-    gainPokemon(pokemon: PartyPokemon, shiny = false, suppressNotification = false) {
+    gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
         GameHelper.incrementObservable(App.game.statistics.pokemonCaptured[pokemon.id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonCaptured);
 
-        if (shiny) {
+        if (pokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonCaptured);
             // Add all shiny catches to the log book
@@ -49,9 +46,17 @@ class Party implements Feature {
                 return;
             }
             // Notify if not already caught
-            Notifier.notify({ message: `✨ You have captured a shiny ${pokemon.name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.new_catch });
-            // Add to caught shiny list
-            this.shinyPokemon.push(pokemon.id);
+            Notifier.notify({
+                message: `✨ You have captured a shiny ${pokemon.name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.new_catch,
+            });
+
+            // Already caught (non shiny) we need to update the party pokemon directly
+            if (this.alreadyCaughtPokemon(pokemon.id, false)) {
+                this.getPokemon(pokemon.id).shiny = true;
+                return;
+            }
         }
 
         // Already caught (non shiny)
@@ -60,7 +65,11 @@ class Party implements Feature {
         }
 
         if (!suppressNotification) {
-            Notifier.notify({ message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.new_catch });
+            Notifier.notify({
+                message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.new_catch,
+            });
         }
 
         App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
@@ -151,7 +160,7 @@ class Party implements Feature {
     alreadyCaughtPokemon(id: number, shiny = false) {
         const pokemon = this.caughtPokemon.find(p => p.id == id);
         if (pokemon) {
-            return (!shiny || this.shinyPokemon.includes(id));
+            return (!shiny || pokemon.shiny);
         }
         return false;
     }
@@ -159,7 +168,7 @@ class Party implements Feature {
     calculateClickAttack(): number {
         // Base power
         // Shiny pokemon help with a 50% boost
-        let clickAttack = Math.pow(this.caughtPokemon.length + (this.shinyPokemon.length / 2) + 1, 1.4);
+        let clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
 
         clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
 
@@ -186,8 +195,6 @@ class Party implements Feature {
             partyPokemon.fromJSON(caughtPokemonSave[i]);
             this._caughtPokemon.push(partyPokemon);
         }
-
-        this.shinyPokemon = new ObservableArrayProxy<number>(json['shinyPokemon'] ?? this.defaults.shinyPokemon);
     }
 
     initialize(): void {
@@ -196,7 +203,6 @@ class Party implements Feature {
     toJSON(): Record<string, any> {
         return {
             caughtPokemon: this._caughtPokemon().map(x => x.toJSON()),
-            shinyPokemon: this.shinyPokemon.map(x => x),
         };
     }
 

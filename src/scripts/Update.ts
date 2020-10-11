@@ -250,6 +250,26 @@ class Update implements Saveable {
                 console.error('[update] v0.5.5 - Couldn\'t update player statistics..', ಠ_ಠ);
             }
         }
+        
+        if (this.isOlderVersion(this.saveVersion, '0.5.7')) {
+            try {
+                //Update shinies
+                saveData.party.shinyPokemon.forEach(name => {
+                    const id = pokemonMap[name].id;
+                    if (id) {
+                        const pokemon = saveData.party.caughtPokemon.find(p => p.id == id);
+                        if (pokemon) {
+                            pokemon.shiny = true;
+                        }
+                    }
+                });
+
+                // Update save data
+                this.setSaveData(saveData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.7 - Couldn\'t update player shinies..', ಠ_ಠ);
+            }
+        }
 
         // Notify the player that the game has updated!
         if (this.saveVersion != this.version && this.saveVersion != '0.0.0') {
@@ -269,10 +289,20 @@ class Update implements Saveable {
                 }
                 button.style.display = '';
 
-                Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`, type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+                Notifier.notify({
+                    title: `[v${this.version}] Game has been updated!`,
+                    message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`,
+                    type: NotificationConstants.NotificationOption.primary,
+                    timeout: 6e4,
+                });
             } catch (err) {
                 console.error('Error trying to convert backup save', err);
-                Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our Discord.</i>', type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+                Notifier.notify({
+                    title: `[v${this.version}] Game has been updated!`,
+                    message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our Discord.</i>',
+                    type: NotificationConstants.NotificationOption.primary,
+                    timeout: 6e4,
+                });
                 try {
                     localStorage.backupSave = JSON.stringify(backupSaveData);
                 } catch (e) {}

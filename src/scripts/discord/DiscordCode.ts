@@ -16,7 +16,7 @@ class DiscordCode {
             Notifier.notify({
                 title: `[Discord Code] ${this.name}`,
                 message: 'Already claimed!',
-                type: GameConstants.NotificationOption.warning,
+                type: NotificationConstants.NotificationOption.warning,
             });
             return;
         }
@@ -26,7 +26,7 @@ class DiscordCode {
             Notifier.notify({
                 title: `[Discord Code] ${this.name}`,
                 message: 'Successfully claimed!',
-                type: GameConstants.NotificationOption.success,
+                type: NotificationConstants.NotificationOption.success,
             });
         }
     }
