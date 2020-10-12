@@ -212,19 +212,14 @@ class Breeding implements Feature {
 
     public createTypedEgg(type: EggType): Egg {
         const hatchList = this.hatchList[type];
-        const hatchable = hatchList.slice(0, player.highestRegion() + 1);
-        let possibleHatches = [];
-        hatchable.forEach((pokemon, index) => {
-            if (!pokemon.length) {
-                return;
-            }
-            const toAdd = possibleHatches.length || 1;
-            for (let i = 0; i < toAdd; i++) {
-                possibleHatches.push(pokemon);
-            }
-        });
-        possibleHatches = possibleHatches[Math.floor(Math.random() * possibleHatches.length)];
-        const pokemon = possibleHatches[Math.floor(Math.random() * possibleHatches.length)];
+        const hatchable = hatchList.slice(0, player.highestRegion() + 1).filter(list => list.length);
+
+        // highest region has 1/ratio chance, next highest has 1/(ratio ^ 2), etc.
+        // Leftover is given to Kanto, making Kanto and Johto equal chance
+        const ratio = 2;
+        const possibleHatches = GameConstants.expRandomElement(hatchable, ratio);
+
+        const pokemon = GameConstants.randomElement(possibleHatches);
         return this.createEgg(pokemon, type);
     }
 
