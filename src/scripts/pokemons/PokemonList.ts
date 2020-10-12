@@ -12742,7 +12742,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 648.1,
-            'name': 'Meloetta (Pirouette)',
+            'name': 'Meloetta (pirouette)',
             'type': [PokemonType.Normal, PokemonType.Fighting],
             'eggCycles': 120,
             'levelType': LevelType.slow,
