@@ -72,8 +72,18 @@
                </button>
            </div>
        </div>
+       <div class="col-6"></div>
+       <div class="col-3 no-gutters">
+           <div class="list-group" data-bind="foreach: player.town().npcs()">
+                <button class="btn btn-info"
+                        data-bind="text: $data.name, click: $data.openDialog">
+                    NPC
+                </button>
+           </div>
+        </div>
 
     </div>
+    <div style="flex-grow: 1;"></div>
     <knockout data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
       <div id="dungeonPokemonList" class="card">
         <!--Display all available Pokémon in this dungeon-->

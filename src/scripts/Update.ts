@@ -42,12 +42,12 @@ class Update implements Saveable {
         }, GameConstants.HOUR * 3);
     }
 
-    // potentially newer version, check againt version
+    // potentially newer version, check against version
     isNewerVersion(version, compareVersion) {
         return compareVersion.localeCompare(version, undefined, { numeric: true }) === -1;
     }
 
-    // potentially older version, check againt version
+    // potentially older version, check against version
     isOlderVersion(version, compareVersion) {
         return compareVersion.localeCompare(version, undefined, { numeric: true }) === 1;
     }
@@ -235,26 +235,89 @@ class Update implements Saveable {
                 console.error('[update] v0.5.2 - Couldn\'t start Aerodactyl Quest line..', ಠ_ಠ);
             }
         }
+        
+        if (this.isOlderVersion(this.saveVersion, '0.5.5')) {
+            try {
+                //Correct statistics
+                saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 22, 34); // Petalburg Woods
+                saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 30, 35); // New Mauville
+                saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 56, 50); // Hall of Origin
+                saveData.statistics.dungeonsCleared = Update.moveIndex(saveData.statistics.dungeonsCleared, 33); // Sealed Chamber
+
+                // Update save data
+                this.setSaveData(saveData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.5 - Couldn\'t update player statistics..', ಠ_ಠ);
+            }
+        }
+        
+        if (this.isOlderVersion(this.saveVersion, '0.5.7')) {
+            try {
+                //Update shinies
+                saveData.party.shinyPokemon.forEach(name => {
+                    const id = pokemonMap[name].id;
+                    if (id) {
+                        const pokemon = saveData.party.caughtPokemon.find(p => p.id == id);
+                        if (pokemon) {
+                            pokemon.shiny = true;
+                        }
+                    }
+                });
+
+                // Update save data
+                this.setSaveData(saveData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.7 - Couldn\'t update player shinies..', ಠ_ಠ);
+            }
+        }
 
         // Notify the player that the game has updated!
         if (this.saveVersion != this.version && this.saveVersion != '0.0.0') {
-            const button = document.createElement('a');
-            button.className = 'btn btn-block btn-danger';
-            button.innerText = 'Click to Backup Save!';
-            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`;
-            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+            try {
+                const button = document.createElement('a');
+                button.className = 'btn btn-block btn-danger';
+                button.innerText = 'Click to Backup Save!';
+                button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`;
+                button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
 
-            // Add to body and click, triggering auto download
-            if (!settingsData.disableAutoDownloadBackupSaveOnUpdate) {
-                button.style.display = 'none';
-                document.body.appendChild(button);
-                button.click();
-                document.body.removeChild(button);
+                // Add to body and click, triggering auto download
+                if (!settingsData.disableAutoDownloadBackupSaveOnUpdate) {
+                    button.style.display = 'none';
+                    document.body.appendChild(button);
+                    button.click();
+                    document.body.removeChild(button);
+                }
+                button.style.display = '';
+
+                Notifier.notify({
+                    title: `[v${this.version}] Game has been updated!`,
+                    message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`,
+                    type: NotificationConstants.NotificationOption.primary,
+                    timeout: 6e4,
+                });
+            } catch (err) {
+                console.error('Error trying to convert backup save', err);
+                Notifier.notify({
+                    title: `[v${this.version}] Game has been updated!`,
+                    message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our Discord.</i>',
+                    type: NotificationConstants.NotificationOption.primary,
+                    timeout: 6e4,
+                });
+                try {
+                    localStorage.backupSave = JSON.stringify(backupSaveData);
+                } catch (e) {}
             }
-            button.style.display = '';
-
-            Notifier.notify({ title: `[v${this.version}] Game has been updated!`, message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`, type: GameConstants.NotificationOption.primary, timeout: 6e4 });
         }
+    }
+
+    static moveIndex = (arr, to, from = Infinity, defaultVal = 0) => {
+        let temp = arr.splice(from, 1);
+        if (!temp.length) {
+            temp = [defaultVal];
+        }
+        const end = arr.splice(to);
+        arr = [...arr, ...temp, ...end];
+        return arr;
     }
 
     getPlayerData() {

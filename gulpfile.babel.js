@@ -12,9 +12,17 @@ const gulpImport = require('gulp-html-import');
 const ejs = require('gulp-ejs');
 const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
+const filter = require('gulp-filter');
+const rename = require('gulp-rename');
+const streamToPromise = require('gulp-stream-to-promise');
+const gulpWebpack = require('webpack-stream');
+const webpack = require('webpack');
 const del = require('del');
 const fs = require('fs');
+const path = require('path');
 const version = process.env.npm_package_version || '0.0.0';
+
+const webpackConfig = require('./webpack.config');
 
 // Import our config, or log a warning if hasn't been created
 let config = {};
@@ -31,6 +39,9 @@ config = Object.assign({
     DEV_BANNER: false,
     DISCORD_CLIENT_ID: false,
     DISCORD_LOGIN_URI: false,
+    FEATURE_FLAGS: {
+        preloadUnreleasedTowns: false,
+    },
 }, config);
 
 const escapeRegExp = (string) => {
@@ -57,7 +68,7 @@ gulp.task('deploy', () => gulp.src('./dist/**/*')
 
 const srcs = {
     buildArtefacts: 'build/**/*',
-    scripts: 'src/scripts/**/*.ts',
+    scripts: ['src/scripts/**/*.ts', 'src/modules/**/*.ts'],
     html: ['src/*.html', 'src/templates/*.html', 'src/components/*.html'],
     ejsTemplates: ['src/templates/*.ejs'],
     styles: 'src/styles/**/*.less',
@@ -65,6 +76,9 @@ const srcs = {
     libs: [
         'node_modules/bootstrap/dist/js/bootstrap.min.js',
         'node_modules/bootstrap/dist/css/bootstrap.min.css',
+        'node_modules/intro.js/minified/intro.min.js',
+        'node_modules/intro.js/introjs.css',
+        'node_modules/intro.js/themes/introjs-modern.css',
         'node_modules/jquery/dist/jquery.min.js',
         'node_modules/popper.js/dist/umd/popper.min.js',
         'node_modules/knockout/build/output/knockout-latest.js',
@@ -80,6 +94,7 @@ const dests = {
     libs: 'build/libs/',
     assets: 'build/assets/',
     scripts: 'build/scripts/',
+    declarations: 'src/declarations/',
     styles: 'build/styles/',
     githubPages: 'docs/',
 };
@@ -127,6 +142,7 @@ gulp.task('compile-html', (done) => {
         .pipe(replace('$GOOGLE_ANALYTICS_ID', config.GOOGLE_ANALYTICS_ID))
         .pipe(replace('$GIT_BRANCH', process.env.GIT_BRANCH))
         .pipe(replace('$DEV_DESCRIPTION', process.env.DEV_DESCRIPTION !== undefined ? process.env.DEV_DESCRIPTION : ''))
+        .pipe(replace('$FEATURE_FLAGS', process.env.NODE_ENV === 'production' ? '{}' : JSON.stringify(config.FEATURE_FLAGS)))
         .pipe(ejs())
         .pipe(gulp.dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
@@ -134,15 +150,56 @@ gulp.task('compile-html', (done) => {
 });
 
 gulp.task('scripts', () => {
-    const tsProject = typescript.createProject('tsconfig.json');
-    return tsProject.src()
-        .pipe(replace('$VERSION', version))
-        .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
-        .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
-        .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
-        .pipe(tsProject())
-        .pipe(gulp.dest(dests.scripts))
-        .pipe(browserSync.reload({stream: true}));
+    const base = gulp.src('src/modules/index.ts')
+        .pipe(gulpWebpack(webpackConfig, webpack));
+
+    // Convert the posix path to a path that matches the current OS
+    const osPathPrefix = '../src'.split(path.posix.sep).join(path.sep);
+    const osPathModulePrefix = '../src/modules'.split(path.posix.sep).join(path.sep);
+
+    const generateDeclarations = base
+        .pipe(filter((vinylPath) => vinylPath.relative.startsWith(osPathModulePrefix)))
+        .pipe(rename((vinylPath) => Object.assign(
+            {},
+            vinylPath,
+            // Strip '../src/modules' from the start of declaration vinylPaths
+            { dirname: vinylPath.dirname.replace(osPathModulePrefix, '.') }
+        )))
+        // Remove exports so that ./src/scripts can use them
+        .pipe(replace(/(^|\n)export default \w+;/, '$1')) // export default variable;
+        .pipe(replace(/(^|\n)export default /, '$1')) // export default class ...
+        .pipe(replace(/(^|\n)export /, '$1declare '))
+        // Replace imports with references
+        .pipe(replace(/(^|\n)import .* from '(.*)((.d)?.ts)?';/, '$1///<reference path="$2.d.ts"/>'))
+        // Fix broken declarations
+        .pipe(replace('declare {};', ''))
+        .pipe(gulp.dest(dests.declarations));
+
+    const compileModules = base
+        // Exclude declaration files
+        .pipe(filter((vinylPath) => !vinylPath.relative.startsWith(osPathPrefix)))
+        .pipe(gulp.dest(dests.scripts));
+
+    // Run the tasks for the new modules
+
+    return del([dests.declarations])
+        .then(() => Promise.all([
+            streamToPromise(generateDeclarations),
+            streamToPromise(compileModules),
+        ]))
+        .then(() => {
+            // Compile the old scripts
+            const tsProject = typescript.createProject('tsconfig.json');
+            const compileScripts = tsProject.src()
+                .pipe(replace('$VERSION', version))
+                .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
+                .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
+                .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
+                .pipe(tsProject())
+                .pipe(gulp.dest(dests.scripts))
+                .pipe(browserSync.reload({stream: true}));
+            return streamToPromise(compileScripts);
+        });
 });
 
 gulp.task('styles', () => gulp.src(srcs.styles)

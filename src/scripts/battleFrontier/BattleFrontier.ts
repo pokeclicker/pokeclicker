@@ -8,7 +8,11 @@ class BattleFrontier {
 
     public static enter() {
         if (!this.canAccess()) {
-            return Notifier.notify({ title: '[Battle Frontier]', message: 'You must progress further in the "Mystery of Deoxys" quest before you can participate', type: GameConstants.NotificationOption.warning });
+            return Notifier.notify({
+                title: '[Battle Frontier]',
+                message: 'You must progress further in the "Mystery of Deoxys" quest before you can participate',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
         App.game.gameState = GameConstants.GameState.battleFrontier;
     }

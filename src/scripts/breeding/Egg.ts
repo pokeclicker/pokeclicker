@@ -13,6 +13,7 @@ class Egg implements Saveable {
     notified: boolean;
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
+    stepsRemaining: KnockoutComputed<number>;
 
     constructor(type = EggType.None, totalSteps = 0, pokemon = '', steps = 0, shinySteps = 0, notified = false) {
         this.totalSteps = totalSteps;
@@ -32,6 +33,10 @@ class Egg implements Saveable {
 
         this.progressText = ko.pureComputed(function () {
             return `${this.steps()} / ${this.totalSteps}`;
+        }, this);
+
+        this.stepsRemaining = ko.pureComputed(function () {
+            return this.totalSteps - this.steps();
         }, this);
 
         if (this.pokemon) {
@@ -61,9 +66,19 @@ class Egg implements Saveable {
         }
         if (this.canHatch()) {
             if (this.type == EggType.Pokemon) {
-                Notifier.notify({ message: `${this.pokemon} is ready to hatch!`, type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_hatch, setting: GameConstants.NotificationSetting.ready_to_hatch });
+                Notifier.notify({
+                    message: `${this.pokemon} is ready to hatch!`,
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.ready_to_hatch,
+                    setting: NotificationConstants.NotificationSetting.ready_to_hatch,
+                });
             } else {
-                Notifier.notify({ message: 'An egg is ready to hatch!', type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.ready_to_hatch, setting: GameConstants.NotificationSetting.ready_to_hatch });
+                Notifier.notify({
+                    message: 'An egg is ready to hatch!',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.ready_to_hatch,
+                    setting: NotificationConstants.NotificationSetting.ready_to_hatch,
+                });
             }
             this.notified = true;
         }
@@ -100,18 +115,30 @@ class Egg implements Saveable {
         App.game.party.gainPokemonById(pokemonID, shiny);
 
         if (shiny) {
-            Notifier.notify({ message: `✨ You hatched a shiny ${this.pokemon}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long });
+            Notifier.notify({
+                message: `✨ You hatched a shiny ${this.pokemon}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.shiny_long,
+                setting: NotificationConstants.NotificationSetting.hatched_shiny,
+            });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You hatched a shiny ${this.pokemon}!`);
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
-            Notifier.notify({ message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({
+                message: `You hatched ${GameHelper.anOrA(this.pokemon)} ${this.pokemon}!`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.hatched,
+            });
         }
 
         // Capture base form if not already caught. This helps players get Gen2 Pokemon that are base form of Gen1
         const baseForm = App.game.breeding.calculateBaseForm(this.pokemon);
         if (this.pokemon != baseForm && !App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(baseForm).id)) {
-            Notifier.notify({ message: `You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`, type: GameConstants.NotificationOption.success });
+            Notifier.notify({
+                message: `You also found ${GameHelper.anOrA(baseForm)} ${baseForm} nearby!`,
+                type: NotificationConstants.NotificationOption.success,
+            });
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(baseForm).id);
         }
 

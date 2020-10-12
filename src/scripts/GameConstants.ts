@@ -1,13 +1,8 @@
-///<reference path="./badgeCase/BadgeCase.ts" />
-///<reference path="utilities/Sound.ts"/>
-///<reference path="settings/BooleanSetting.ts"/>
-
 /**
  * Contains all game constants for easy access.
  */
 
 namespace GameConstants {
-
     // Ticks
     export const TICK_TIME = 100;
     export const BATTLE_TICK = 1000;
@@ -51,10 +46,10 @@ namespace GameConstants {
     // Shinies
     export const SHINY_CHANCE_BATTLE = 8192;
     export const SHINY_CHANCE_DUNGEON = 4096;
-    export const SHINY_CHANCE_BREEDING = 1024;
     export const SHINY_CHANCE_SHOP = 2048;
-    export const SHINY_CHANCE_STONE = 4096;
+    export const SHINY_CHANCE_STONE = 2048;
     export const SHINY_CHANCE_SAFARI = 2048;
+    export const SHINY_CHANCE_BREEDING = 1024;
 
     export const ITEM_PRICE_MULTIPLIER = 1.00045;
     export const ITEM_PRICE_DEDUCT = 1.0005;
@@ -77,40 +72,6 @@ namespace GameConstants {
         equal,
         more,
     }
-
-    export enum NotificationOption {
-        info,
-        success,
-        warning,
-        danger,
-        primary,
-        secondary,
-        dark,
-        light,
-    }
-    export const NotificationSound = {
-        ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
-        shiny_long: new Sound('shiny_long', 'Shiny Pokemon encountered/hatched'),
-        new_catch: new Sound('new_catch', 'New pokemon/shiny captured'),
-        achievement: new Sound('achievement', 'New achievement earned'),
-        battle_item_timer: new Sound('battle_item_timer', 'Battle item about to wear off'),
-        quest_ready_to_complete: new Sound('quest_ready_to_complete', 'Quest is ready to be completed'),
-        quest_level_increased: new Sound('quest_level_increased', 'Quest level increased'),
-        underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
-        ready_to_harvest: new Sound('ready_to_harvest', 'Farm ready to harvest'),
-    };
-    export const NotificationSetting = {
-        ready_to_hatch: new BooleanSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),
-        route_item_found: new BooleanSetting('notification.route_item_found', 'Item found during route battle', true),
-        dungeon_item_found: new BooleanSetting('notification.dungeon_item_found', 'Item found in dungeon chest', true),
-        battle_item_timer: new BooleanSetting('notification.battle_item_timer', 'Battle item about to wear off', true),
-        encountered_shiny: new BooleanSetting('notification.encountered_shiny', 'Encountered a shiny Pokemon', true),
-        quest_ready_to_complete: new BooleanSetting('notification.quest_ready_to_complete', 'Quest is ready to be completed', true),
-        underground_energy_full: new BooleanSetting('notification.underground_energy_full', 'Mining energy reached maximum capacity', true),
-        event_start_end: new BooleanSetting('notification.event_start_end', 'Event start/end information', true),
-        dropped_item: new BooleanSetting('notification.dropped_item', 'Enemy pokemon dropped an item', true),
-        ready_to_harvest: new BooleanSetting('notification.ready_to_harvest', 'Berry ready to harvest', true),
-    };
 
     export enum DungeonTile {
         empty,
@@ -289,21 +250,27 @@ namespace GameConstants {
     export function formatNumber(num: number): string {
         if (isNaN(+num)) {
             return '0';
-        } else if (num >= 1e9) {
-            num = Math.floor(num / 1e8);
-            num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return `${num}B`;
-        } else if (num >= 1e6) {
-            num = Math.floor(num / 1e5);
-            num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return `${num}M`;
-        } else if (num >= 1e3) {
-            num = Math.floor(num / 1e2);
-            num = num < 100 ? num / 10 : Math.floor(num / 10);
-            return `${num}K`;
-        } else {
-            return num.toString();
         }
+
+        const suffixes = ['K', 'M', 'B', 'T', 'QD', 'QT'];
+        let returnNum = num;
+        let suffixCounter = -1;
+
+        while (returnNum >= 1e3 && (suffixCounter < suffixes.length - 1)) {
+            returnNum /= 1e3;
+            suffixCounter++;
+        }
+
+        if (returnNum > 1e3) {
+            return '∞';
+        }
+
+        if (suffixCounter > -1) {
+            const returnNumString = String(Math.floor(returnNum * 10) / 10);
+            return `${returnNumString}${suffixes[suffixCounter]}`;
+        }
+
+        return num.toString();
     }
 
     export enum Region {
@@ -366,6 +333,7 @@ namespace GameConstants {
         1: new Set([40, 41, 'Slowpoke Well']),
         2: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Shoal Cave', 'Seafloor Cavern']),
         3: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
+        4: new Set(['Undella Bay', 'Humilau City']),
     };
 
     export const IceAreas = {
@@ -380,6 +348,7 @@ namespace GameConstants {
         1: new Set([36, 38, 43,  'Azalea Town', 'Ilex Forest']),
         2: new Set([119, 'Petalburg Woods']),
         3: new Set([201, 204, 'Eterna Forest', 'Eterna City', 'Fullmoon Island', 'Newmoon Island']),
+        4: new Set(['Lostlorn Forest', 'Pinwheel Forest', 'Giant Chasm', 'Pledge Grove', 'Castelia City']),
     };
 
     export const CaveAreas = {
@@ -387,6 +356,7 @@ namespace GameConstants {
         1: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
         2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
         3: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
+        4: new Set(['Mistralton Cave', 'Seaside Cave', 'Wellspring Cave', 'Twist Mountain', 'Reversal Mountain', 'Cave of Being', 'Relic Passage', 'Relica Castle', 'Victory Road Unova']),
     };
 
     export const GemCaveAreas = {
@@ -394,6 +364,7 @@ namespace GameConstants {
         1: new Set(['Blackthorn City', 'Mt Silver']),
         2: new Set(['Cave of Origin', 'Sky Pillar']),
         3: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
+        4: new Set(['Chargestone Cave', 'Driftveil City']),
     };
 
     export const PowerPlantAreas = {
@@ -401,6 +372,7 @@ namespace GameConstants {
         1: new Set(['Tin Tower']),
         2: new Set(['Mauville City']),
         3: new Set(['Sunyshore City']),
+        4: new Set(['Virbank Complex', 'Castelia Sewers', 'Nimbasa City']),
     };
 
     export const MansionAreas = {
@@ -408,6 +380,7 @@ namespace GameConstants {
         1: new Set(['Olivine City', 'Burned Tower']),
         2: new Set(['Lavaridge Town', 'Petalburg City', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
         3: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
+        4: new Set(['Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
     };
 
     export const GraveyardAreas = {
@@ -415,6 +388,7 @@ namespace GameConstants {
         1: new Set(['Ecruteak City']),
         2: new Set(['Mossdeep City', 'Mt. Pyre']),
         3: new Set(['Hearthome City']),
+        4: new Set(['Virbank City']),
     };
 
     export enum Starter {
@@ -452,6 +426,8 @@ namespace GameConstants {
         'Razor_claw',
         'Razor_fang',
         'Prism_scale',
+        'Sachet',
+        'Whipped_dream',
     }
 
     export enum BattleItemType {
@@ -515,15 +491,15 @@ namespace GameConstants {
         LargeRestore: 0.5,
     };
 
-    export const KeyToDirection = {
-        37: 'left',
-        38: 'up',
-        39: 'right',
-        40: 'down',
-        65: 'left', //a
-        68: 'right', //d
-        83: 'down', //s
-        87: 'up', //w
+    export const KeyCodeToDirection = {
+        'ArrowUp': 'up',
+        'ArrowLeft': 'left',
+        'ArrowDown': 'down',
+        'ArrowRight': 'right',
+        'KeyW': 'up',
+        'KeyA': 'left',
+        'KeyS': 'down',
+        'KeyD': 'right',
     };
 
     export const FossilToPokemon = {
@@ -534,6 +510,8 @@ namespace GameConstants {
         'Claw Fossil': 'Anorith',
         'Armor Fossil': 'Shieldon',
         'Skull Fossil': 'Cranidos',
+        'Cover Fossil': 'Tirtouga',
+        'Plume Fossil': 'Archen',
     };
 
     //Used for image name
@@ -545,6 +523,8 @@ namespace GameConstants {
         'Anorith': 'Claw Fossil',
         'Shieldon': 'Armor Fossil',
         'Cranidos': 'Skull Fossil',
+        'Tirtouga': 'Cover Fossil',
+        'Archen': 'Plume Fossil',
 
     };
 
@@ -612,13 +592,51 @@ namespace GameConstants {
         'Elite Lucian',
         'Champion Cynthia',
     ];
+    
+    export const UnovaGyms = [
+        'Aspertia City',
+        'Virbank City',
+        'Castelia City',
+        'Nimbasa City',
+        'Driftveil City',
+        'Mistralton City',
+        'Opelucid City',
+        'Humilau City',
+        'Elite Shauntal',
+        'Elite Marshal',
+        'Elite Grimsley',
+        'Elite Caitlin',
+        'Champion Iris',
+    ];
+
+    export const KalosGyms = [
+        'Santalune City',
+        'Cyllage City',
+        'Shalour City',
+        'Coumarine City',
+        'Lumiose City',
+        'Laverre City',
+        'Anistar City',
+        'Snowbelle City',
+        'Elite Malva',
+        'Elite Siebold',
+        'Elite Wikstrom',
+        'Elite Drasna',
+        'Champion Diantha',
+    ];
 
     export const RegionGyms = [
         KantoGyms,
         JohtoGyms,
         HoennGyms,
         SinnohGyms,
+        UnovaGyms,
+        KalosGyms,
     ];
+
+    export function getGymIndex(gym: string): number {
+        return GameConstants.RegionGyms.flat().findIndex(g => g === gym);
+    }
 
     export const KantoDungeons = [
         'Viridian Forest',
@@ -649,6 +667,7 @@ namespace GameConstants {
     ];
 
     export const HoennDungeons = [
+        'Petalburg Woods',
         'Rusturf Tunnel',
         'Granite Cave',
         'Jagged Pass',
@@ -656,13 +675,13 @@ namespace GameConstants {
         'Mt. Chimney',
         'Meteor Falls',
         'Mt. Pyre',
+        'New Mauville',
         'Shoal Cave',
         'Seafloor Cavern',
+        'Sealed Chamber',
         'Cave of Origin',
         'Sky Pillar',
         'Victory Road Hoenn',
-        'Petalburg Woods',
-        'New Mauville',
         // These aren't implemented anywhere yet
         /*
         "Island Cave",
@@ -671,7 +690,6 @@ namespace GameConstants {
         "Ancient Tomb",
         "Aqua Hideout",
         "Magma Hideout",
-        "Sealed Chamber",
         "Artisan Cave",
         "Desert Underpass",
         "Marine Cave",
@@ -695,7 +713,6 @@ namespace GameConstants {
     ];
 
     export const SinnohDungeons = [
-        // TODO: SINNOH
         'Oreburgh Gate',
         'Ravaged Path',
         'Eterna Forest',
@@ -710,12 +727,62 @@ namespace GameConstants {
         'Distortion World',
         'Victory Road Sinnoh',
         'Spear Pillar',
-        'Hall of Origin',
         'Fullmoon Island',
         'Newmoon Island',
         'Flower Paradise',
         'Snowpoint Temple',
         'Stark Mountain',
+        'Hall of Origin',
+    ];
+    
+    export const UnovaDungeons = [
+        'Pledge Grove',
+        'Floccesy Ranch',
+        'Virbank Complex',    //Optional dungeon, contains no unique Pokémon, safe to scrap
+        'Liberty Garden',
+        'Castelia Sewers',
+        'Relic Passage',
+        'Desert Resort',    //Should really be a route
+        'Relic Castle',
+        'Lostlorn Forest',
+        'Chargestone Cave',
+        'Mistralton Cave',
+        'Celestial Tower',
+        'Reversal Mountain',
+        'Strange House',    //Optional dungeon, contains no unique Pokémon, safe to scrap
+        'Undella Bay',    //Should really be a route
+        'Seaside Cave',
+        'Giant Chasm',
+        'Abundant Shrine',
+        'Cave of Being',    //Contains gen 4 trio only
+        'Victory Road Unova',
+        'Twist Mountain',
+        'Dragonspiral Tower',
+        'Moor of Icirrus',
+        'Pinwheel Forest',
+        'Wellspring Cave',    //Optional dungeon, contains no unique Pokémon, safe to scrap
+        'Dreamyard',
+        'P2 Laboratory',
+    ];
+
+    export const KalosDungeons = [
+        'Santalune Forest',
+        'Parfum Palace',
+        'Connecting Cave',
+        'Glittering Cave',
+        'Reflection Cave',
+        //'Tower of Mastery',
+        'Azure Bay',    //Should really be a route
+        //'Sea Spirit's Den',
+        //'Kalos Power Plant',
+        //'Pokéball Factory',
+        'Lost Hotel',
+        'Frost Cavern',
+        'Team Flare Secret HQ',
+        'Terminus Cave',
+        'Pokémon Village',
+        'Victory Road Kalos',
+        //'Unknown Dungeon',
     ];
 
     export const RegionDungeons = [
@@ -723,13 +790,21 @@ namespace GameConstants {
         JohtoDungeons,
         HoennDungeons,
         SinnohDungeons,
+        UnovaDungeons,
+        KalosDungeons,
     ];
+
+    export function getDungeonIndex(dungeon: string): number {
+        return GameConstants.RegionDungeons.flat().findIndex(d => d === dungeon);
+    }
 
     export const StartingTowns = [
         'Pallet Town',
         'New Bark Town',
         'Littleroot Town',
         'Twinleaf Town',
+        'Aspertia City',
+        'Vaniville Town',
     ];
 
     export const DockTowns = [
@@ -737,5 +812,12 @@ namespace GameConstants {
         'Olivine City',
         'Slateport City',
         'Canalave City',
+        'Castelia City',
+        'Coumarine City',
     ];
+}
+
+// TODO: Remove namespace after all scripts have been moved to modules
+if (typeof module !== 'undefined') {
+    module.exports = GameConstants;
 }

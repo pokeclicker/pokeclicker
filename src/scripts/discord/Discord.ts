@@ -46,7 +46,12 @@ class Discord implements Saveable {
                     if (data && data.id) {
                         this.ID(data.id);
                         this.username(`${data.username}#${data.discriminator}`);
-                        Notifier.notify({ title: `Welcome ${this.username()}`, message: 'Successfully logged in to Discord!', type: GameConstants.NotificationOption.success, timeout:GameConstants.MINUTE });
+                        Notifier.notify({
+                            title: `Welcome ${this.username()}`,
+                            message: 'Successfully logged in to Discord!',
+                            type: NotificationConstants.NotificationOption.success,
+                            timeout: GameConstants.MINUTE,
+                        });
                     }
                 },
                 complete: () => {
@@ -103,12 +108,18 @@ class Discord implements Saveable {
     enterCode(enteredCode: string): boolean {
         // Discord integration disabled
         if (!this.enabled) {
-            Notifier.notify({ message: 'Discord integration not enabled', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'Discord integration not enabled',
+                type: NotificationConstants.NotificationOption.danger,
+            });
             return false;
         }
         // User not logged in to Discord
-        if (!this.ID) {
-            Notifier.notify({ message: 'You must sign in to Discord before attempting this code', type: GameConstants.NotificationOption.danger });
+        if (!this.ID()) {
+            Notifier.notify({
+                message: 'You must sign in to Discord before attempting this code',
+                type: NotificationConstants.NotificationOption.danger,
+            });
             return false;
         }
 
@@ -117,7 +128,10 @@ class Discord implements Saveable {
 
         // No code found
         if (!code) {
-            Notifier.notify({ message: `Invalid code ${enteredCode}`, type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: `Invalid code ${enteredCode}`,
+                type: NotificationConstants.NotificationOption.danger,
+            });
             return false;
         }
 
@@ -148,7 +162,7 @@ class Discord implements Saveable {
     toJSON(): Record<string, any> {
         return {
             ID: this.ID(),
-            username: this.username(),
+            username: this.username()?.replace(/[^\x00-\x7F]/g, ''),
             codes: this.codes.filter(c => c.claimed),
         };
     }
