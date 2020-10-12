@@ -15,8 +15,10 @@ class FarmController {
 
     public static getImage(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
-        if (plot.stage() <= 1) {
+        if (plot.stage() === PlotStage.Seed) {
             return 'assets/images/farm/AllTreeSeedIII.png';
+        } else if (plot.stage() === PlotStage.Sprout) {
+            return 'assets/images/farm/AllTreeSproutIII.png';
         }
         return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}III.png`;
     }

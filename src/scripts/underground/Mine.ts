@@ -44,6 +44,7 @@ class Mine {
         }
         Mine.loadingNewLayer = false;
         Mine.itemsFound(0);
+        
         Underground.showMine();
     }
 
@@ -304,11 +305,7 @@ class Mine {
     }
 
     public static loadSavedMine(mine) {
-        this.grid = mine.grid.map((row) => {
-            return row.map((num) => {
-                return ko.observable(num);
-            });
-        });
+        this.grid = mine.grid.map(row => row.map(val => ko.observable(val))),
         this.rewardGrid = mine.rewardGrid;
         this.itemsFound(mine.itemsFound);
         this.itemsBuried(mine.itemsBuried);
@@ -320,9 +317,15 @@ class Mine {
         Underground.showMine();
     }
 
-    public static serialize() {
-        const mine = {
-            grid: this.grid,
+    public static save(): Record<string, any> {
+        if (this.grid == null) {
+            // This part should only get called when game saves for the first time after catching starter
+            ko.cleanNode(document.getElementById('mineBody'));
+            Mine.loadMine();
+            ko.applyBindings(null, document.getElementById('mineBody'));
+        }
+        const mineSave = {
+            grid: this.grid.map(row => row.map(val => val())),
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound(),
             itemsBuried: this.itemsBuried(),
@@ -330,8 +333,7 @@ class Mine {
             prospectResult: this.prospectResult(),
             skipsRemaining: this.skipsRemaining(),
         };
-
-        return ko.toJSON(mine);
+        return mineSave;
     }
 }
 

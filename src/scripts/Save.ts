@@ -5,7 +5,6 @@ class Save {
     public static store(player: Player) {
         const json = JSON.stringify(player);
         localStorage.setItem('player', json);
-        localStorage.setItem('mine', Mine.serialize());
         localStorage.setItem('settings', Settings.save());
         localStorage.setItem('save', JSON.stringify(this.getSaveObject()));
 
@@ -75,21 +74,11 @@ class Save {
         }
     }
 
-    public static loadMine() {
-        const mine = localStorage.getItem('mine');
-        if (mine) {
-            Mine.loadSavedMine(JSON.parse(mine));
-        } else {
-            Mine.loadMine();
-        }
-    }
-
     public static reset(): void {
         const confirmDelete = prompt('Are you sure you want reset?\nIf so, type \'DELETE\'');
 
         if (confirmDelete == 'DELETE') {
             localStorage.removeItem('player');
-            localStorage.removeItem('mine');
             localStorage.removeItem('save');
 
             location.reload();
