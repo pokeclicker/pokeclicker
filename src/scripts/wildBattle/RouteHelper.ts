@@ -13,11 +13,10 @@ class RouteHelper {
      */
     public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeHeadbutt = true): string[] {
         // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
-        if (!MapHelper.validRoute(route, region)) {
-            route = Routes.getRoutesByRegion(region)[0]?.number || 0;
+        const possiblePokemons = Routes.getRoute(region, route)?.pokemon;
+        if (!possiblePokemons) {
+            return ['Rattata'];
         }
-        const routeData = Routes.getRoute(region, route);
-        const possiblePokemons = routeData?.pokemon || new RoutePokemon({ land: ['Rattata'] });
         let pokemonList = possiblePokemons.land;
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Super_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.water);
