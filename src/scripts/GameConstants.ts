@@ -452,6 +452,7 @@ namespace GameConstants {
         'Burmy (plant)',
         'Spiritomb',
         'Cherubi',
+        'Meloetta (pirouette)',
     }
 
     export enum PokeBlockColor {
