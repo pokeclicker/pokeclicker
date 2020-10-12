@@ -5,6 +5,7 @@ import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
 import BadgeEnums from './enums/Badges';
+import PokemonType from './enums/PokemonType';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -17,6 +18,7 @@ Object.assign(<any>window, {
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,
     BadgeEnums,
+    PokemonType,
     BooleanSetting,
     RangeSetting,
     Setting,

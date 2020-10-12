@@ -1,4 +1,15 @@
 ///<reference path="upgrades/Upgrade.ts"/>
+
+/**
+ * Required modules before porting:
+ * Save.ts
+ * ObservableArrayProxy.ts
+ * upgrades/Upgrade.ts
+ * towns/Town.ts - Town, TownList
+ * worldmap/MapHelper.ts
+ * items/Item.ts - ItemList
+ */
+
 /**
  * Information about the player.
  * All player variables need to be saved.
