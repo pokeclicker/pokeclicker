@@ -1,4 +1,7 @@
+import { Observable as KnockoutObservable } from 'knockout';
 import { Saveable } from './common/Saveable';
+
+const failedSetValue = () => 0;
 
 export default class Statistics implements Saveable {
     saveKey = 'statistics';
@@ -118,11 +121,12 @@ export default class Statistics implements Saveable {
 
     constructor() {
         this.observables.forEach((prop) => {
-            this[prop] = ko.observable(0).extend({ numeric: 0 });
+            this[prop] = ko.observable<number>(0);
         });
 
         this.arrayObservables.forEach((array) => {
-            this[array] = new Proxy([ko.observable(0).extend({ numeric: 0 })], {
+            // We use a proxy to generate new array observables on the fly.
+            this[array] = new Proxy([], {
                 get: (statistics, prop: string) => {
                     if (statistics[prop]) {
                         return statistics[prop];
@@ -135,31 +139,35 @@ export default class Statistics implements Saveable {
                             // eslint-disable-next-line no-console
                             console.trace(`[Statistics] [${array}] Invalid property requested:`, prop);
                         }
-                        return () => 0;
+                        return failedSetValue;
                     }
 
-                    // TODO: A `get` function shouldn't be mutating and argument
                     // eslint-disable-next-line no-param-reassign
-                    statistics[id] = ko.observable(0).extend({ numeric: 0 });
+                    statistics[id] = ko.observable<number>(0);
                     return statistics[id];
                 },
 
-                // TODO: fixup typescript errors
                 // This makes it so the stats observable can't be accidently changed
-                // set: () => {},
+                set: (
+                    obj: Array<KnockoutObservable<number>>,
+                    prop: number,
+                    value: number,
+                ): boolean => {
+                    const result = obj[prop](value);
+                    return result === failedSetValue;
+                },
 
                 // This is needed for map, forEach etc to work,
                 // because they want to check if target.hasOwnProperty("0") first.
                 // The ko function doesn't seem to have any OwnProperties anyway,
                 // so no harm here (don't quote me)
-                // TODO: Figure out where this is being called from and fix the naming
                 // eslint-disable-next-line func-names
                 has: (target: any, prop: string) => Reflect.has(target, prop),
             });
         });
 
         this.objectObservables.forEach((object) => {
-            this[object] = new Proxy({ 0: ko.observable(0).extend({ numeric: 0 }) }, {
+            this[object] = new Proxy({}, {
                 get: (statistics, prop: string) => {
                     if (statistics[prop]) {
                         return statistics[prop];
@@ -170,7 +178,7 @@ export default class Statistics implements Saveable {
                         Object.entries(statistics).forEach(([key, val]: [string, () => number]) => {
                             const numKey = Number(key);
                             if (!Number.isNaN(numKey) && numKey > highestID && val() > 0) {
-                                highestID = +key;
+                                highestID = numKey;
                             }
                         });
                         return highestID;
@@ -186,23 +194,23 @@ export default class Statistics implements Saveable {
 
                     return (val) => {
                         if (!Number.isNaN(Number(val))) {
-                            // TODO: A `get` function shouldn't be mutating and argument
                             // eslint-disable-next-line no-param-reassign
-                            statistics[prop] = ko.observable(val).extend({ numeric: 0 });
+                            statistics[prop] = ko.observable<number>(val);
                             return val;
                         } return 0;
                     };
                 },
 
-                // TODO: fixup typescript errors
                 // This makes it so the stats observable can't be accidently changed
-                // set: () => {},
+                set: (obj: any, prop: number, value: number): boolean => {
+                    const result = obj[prop](value);
+                    return result === failedSetValue;
+                },
 
                 // This is needed for map, forEach etc to work,
                 // because they want to check if target.hasOwnProperty("0") first.
                 // The ko function doesn't seem to have any OwnProperties anyway,
                 // so no harm here (don't quote me)
-                // TODO: Figure out where this is being called from and fix the naming
                 // eslint-disable-next-line func-names
                 has: (target: any, prop: string) => Reflect.has(target, prop),
             });

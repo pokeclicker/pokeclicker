@@ -7,7 +7,6 @@ module.exports = {
   extends: ['airbnb-typescript/base'],
   globals: {
     ko: 'readonly',
-    KnockoutObservable: 'readonly',
   },
   rules: {
       indent: 'off',
