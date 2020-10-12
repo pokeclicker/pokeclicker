@@ -190,9 +190,11 @@ class Breeding implements Feature {
 
     public hatchPokemonEgg(index: number): void {
         const egg: Egg = this._eggList[index]();
-        egg.hatch();
-        this._eggList[index](new Egg());
-        this.moveEggs();
+        const hatched = egg.hatch();
+        if (hatched) {
+            this._eggList[index](new Egg());
+            this.moveEggs();
+        }
     }
 
     public moveEggs(): void {
