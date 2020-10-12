@@ -305,8 +305,7 @@ namespace GameConstants {
     // The logarithm is clipped up to 0, so the first two elements will have equal chance
     export function expRandomElement<T>(array: T[], ratio: number): T {
         const r = Math.random();
-        // Math.random() can be 0, and log(0) is NaN, so we turn it back to 0 if this happens.
-        const logr = (Math.log(r) || 0) / Math.log(ratio);
+        const logr = Math.log(r) / Math.log(ratio);
         const n = Math.floor(logr + array.length);
         const x = GameConstants.clipNumber(n, 0, array.length - 1);
         return array[x];
