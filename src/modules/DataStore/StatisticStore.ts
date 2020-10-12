@@ -129,8 +129,8 @@ export default class Statistics implements Saveable {
                     }
 
                     // If it's not an int or less than zero, we do not want to set it
-                    const id: number = Math.floor(+prop);
-                    if (Number.isNaN(id) || id < 0 || id !== +prop) {
+                    const id: number = Math.floor(Number(prop));
+                    if (Number.isNaN(id) || id < 0 || id !== Number(prop)) {
                         if (Number.isNaN(id)) {
                             // eslint-disable-next-line no-console
                             console.trace(`[Statistics] [${array}] Invalid property requested:`, prop);
@@ -168,7 +168,8 @@ export default class Statistics implements Saveable {
                     if (prop === 'highestID') {
                         let highestID = 0;
                         Object.entries(statistics).forEach(([key, val]: [string, () => number]) => {
-                            if (!Number.isNaN(+key) && +key > highestID && val() > 0) {
+                            const numKey = Number(key);
+                            if (!Number.isNaN(numKey) && numKey > highestID && val() > 0) {
                                 highestID = +key;
                             }
                         });
@@ -176,7 +177,7 @@ export default class Statistics implements Saveable {
                     }
 
                     // If it's not an int or less than zero, we do not want to set it
-                    const id: number = +prop;
+                    const id = Number(prop);
                     if (Number.isNaN(id)) {
                         // eslint-disable-next-line no-console
                         console.trace(`[Statistics] [${object}] Invalid property requested:`, prop);
@@ -184,7 +185,7 @@ export default class Statistics implements Saveable {
                     }
 
                     return (val) => {
-                        if (!Number.isNaN(+val)) {
+                        if (!Number.isNaN(Number(val))) {
                             // TODO: A `get` function shouldn't be mutating and argument
                             // eslint-disable-next-line no-param-reassign
                             statistics[prop] = ko.observable(val).extend({ numeric: 0 });
@@ -237,8 +238,8 @@ export default class Statistics implements Saveable {
 
         this.arrayObservables.forEach((array) => {
             json[array]?.forEach((el, index) => {
-                if (this[array] && this[array][index] && +el) {
-                    this[array][index](+el);
+                if (this[array] && this[array][index] && !Number.isNaN(Number(el))) {
+                    this[array][index](Number(el));
                 }
             });
         });
@@ -247,7 +248,7 @@ export default class Statistics implements Saveable {
             if (!json[object]) { return; }
 
             Object.entries(json[object]).forEach(([key, val]) => {
-                const num = +val;
+                const num = Number(val);
                 if (!Number.isNaN(num) && num) {
                     this[object][key](num);
                 }

@@ -231,7 +231,8 @@ export function formatTime(input: number | Date): string {
 }
 
 export function formatTimeShortWords(input: number): string {
-    if (Number.isNaN(+input) || input === 0) { return 'now'; }
+    // Temporarily recast to number until everything is in modules
+    if (Number.isNaN(Number(input)) || input === 0) { return 'now'; }
     const time = Math.abs(input);
 
     if (time > DAY) {
@@ -247,7 +248,7 @@ export function formatTimeShortWords(input: number): string {
 }
 
 export function formatNumber(input: number): string {
-    let num = input;
+    let num = Number(input); // Temporary cast until everything is in modules
     if (Number.isNaN(+num)) { return '0'; }
 
     if (num >= 1e9) {

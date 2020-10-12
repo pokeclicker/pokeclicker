@@ -15,7 +15,7 @@ export default class BadgeCase implements Feature {
     badgeList: Array<boolean> = getArrayOfObservables(emptyBadgeList);
 
     badgeCount(): number {
-        return this.badgeList.reduce((a, b) => (+a) + (+b), 0);
+        return this.badgeList.reduce((a, b) => Number(a) + Number(b), 0);
     }
 
     gainBadge(badge: BadgeEnums): void {
