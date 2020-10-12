@@ -285,13 +285,6 @@ namespace GameConstants {
         galar = 7,
     }
 
-    export const RegionRoute = {
-        0: [1, 25],
-        1: [26, 48],
-        2: [101, 134],
-        3: [201, 230],
-    };
-
     export function randomIntBetween(min: number, max: number): number {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
