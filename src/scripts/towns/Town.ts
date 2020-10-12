@@ -1211,7 +1211,7 @@ const AccumulaTownShop = new Shop([
     ItemList['Shiny_stone'],
 ]);
 const AnvilleTownShop = new Shop([
-    ItemList['Meloetta_(pirouette)'],
+    ItemList['Meloetta (pirouette)'],
 ]);
 
 //Unova Towns
