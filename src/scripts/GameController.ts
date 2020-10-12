@@ -148,6 +148,12 @@ class GameController {
                         DungeonRunner.initializeDungeon(player.town().dungeon());
                     }
                     e.preventDefault();
+                } else if ('gymList' in player.town()) {
+                    const number = Number(e.key);
+                    // Check if a number higher than 0 and less than total Gyms was pressed
+                    if (number && number <= player.town().gymList().length) {
+                        GymRunner.startGym(player.town().gymList()[number - 1]());
+                    }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
                 // Simpler with key because +/= share a code

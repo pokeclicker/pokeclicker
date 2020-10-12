@@ -19,8 +19,14 @@ class AchievementHandler {
         }
     }
 
+    public static isNavigateDirectionDisabled(navigateBackward: boolean): boolean {
+        return navigateBackward
+            ? this.navigateIndex() === 0
+            : this.navigateIndex() + 1 === this.numberOfTabs();
+    }
+
     public static calculateNumberOfTabs() {
-        this.numberOfTabs(Math.floor((this.achievementListFiltered().filter(a => a.region <= player.highestRegion()).length - 1) / 10));
+        this.numberOfTabs(Math.max(1, Math.ceil(this.achievementListFiltered().length / 10)));
     }
 
     public static filter = {
@@ -34,10 +40,12 @@ class AchievementHandler {
     }
 
     public static filterAchievementList() {
-        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() &&
-                                    (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
-                                    (this.filter.type()   == 'all' ? true : a.property.constructor.name == this.filter.type()) &&
-                                    (this.filter.region() == 'all' ? true : a.region == +this.filter.region())));
+        this.achievementListFiltered(this.achievementList.filter((a) => (
+            a.region <= player.highestRegion() &&
+            (this.filter.status() == 'all' || a.unlocked == JSON.parse(this.filter.status())) &&
+            (this.filter.type()   == 'all' || a.property.constructor.name == this.filter.type()) &&
+            (this.filter.region() == 'all' || a.region == +this.filter.region())
+        )));
         this.resetPages();
     }
 
