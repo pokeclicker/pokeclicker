@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class DailyDeal {
     public item1: UndergroundItem;
     public item2: UndergroundItem;

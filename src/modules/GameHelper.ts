@@ -1,14 +1,22 @@
+import {
+    Observable as KnockoutObservable,
+    Computed as KnockoutComputed,
+} from 'knockout';
+
 // For helper functions that may be needed across all files
-class GameHelper {
+// TODO: Convert this to not be a class after everything is TS modules
+export default class GameHelper {
     private static readonly MS_IN_MIN = 1000 * 60;
     private static readonly MS_IN_HOUR = GameHelper.MS_IN_MIN * 60;
     public static counter = 0;
     public static currentTime: KnockoutObservable<Date> = ko.observable(new Date());
     public static tomorrow: Date = GameHelper.getTomorrow();
-    public static msUntilTomorrow: KnockoutComputed<number> = ko.pureComputed(function () {
-        return Number(GameHelper.tomorrow) - Number(GameHelper.currentTime());
-    });
-    public static formattedTimeUntilTomorrow: KnockoutComputed<string> = ko.pureComputed(function () {
+
+    public static msUntilTomorrow: KnockoutComputed<number>
+    = ko.pureComputed(() => Number(GameHelper.tomorrow) - Number(GameHelper.currentTime()));
+
+    public static formattedTimeUntilTomorrow: KnockoutComputed<string>
+    = ko.pureComputed<string>(() => {
         let milliseconds = GameHelper.msUntilTomorrow();
         const hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
         milliseconds -= hours * GameHelper.MS_IN_HOUR;
@@ -16,7 +24,8 @@ class GameHelper {
         return `${hours}:${GameHelper.twoDigitNumber(minutes)}`;
     });
 
-    public static formattedLetterTimeUntilTomorrow: KnockoutComputed<string> = ko.pureComputed(function () {
+    public static formattedLetterTimeUntilTomorrow: KnockoutComputed<string>
+    = ko.pureComputed<string>(() => {
         let milliseconds = GameHelper.msUntilTomorrow();
         const hours = Math.floor(milliseconds / GameHelper.MS_IN_HOUR);
         milliseconds -= hours * GameHelper.MS_IN_HOUR;
@@ -24,36 +33,35 @@ class GameHelper {
         return `${hours}h${GameHelper.twoDigitNumber(minutes)}m`;
     });
 
-    public static incrementObservable(obs: KnockoutObservable<number>, amt = 1) {
-        if (typeof obs != 'function') {
-            return false;
-        }
-        if (isNaN(amt) || amt == 0) {
-            amt = 1;
-        }
-        obs(obs() + amt);
+    public static incrementObservable(obs: KnockoutObservable<number>, amt = 1): void {
+        if (typeof obs !== 'function') { return; }
+        const trueAmount = (Number.isNaN(amt) || amt === 0) ? 1 : amt;
+        obs(obs() + trueAmount);
     }
 
-    public static enumLength(enumerable): number {
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    public static enumLength(enumerable: any): number {
         return Object.keys(enumerable).length / 2;
     }
 
-    public static enumStrings(enumerable): string[] {
-        return Object.keys(enumerable).filter(k => isNaN(+k));
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    public static enumStrings(enumerable: any): string[] {
+        return Object.keys(enumerable).filter((k) => Number.isNaN(Number(k)));
     }
 
-    public static enumNumbers(enumerable): number[] {
-        return Object.keys(enumerable).filter(k => !isNaN(+k)).map(Number);
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+    public static enumNumbers(enumerable: any): number[] {
+        return Object.keys(enumerable).map(Number).filter((k) => !Number.isNaN(k));
     }
 
-    public static tick() {
+    public static tick(): void {
         this.counter = 0;
         this.updateTime();
     }
 
-    public static updateTime() {
+    public static updateTime(): void {
         const now = new Date();
-        if (now.getDate() == GameHelper.tomorrow.getDate()) {
+        if (now.getDate() === GameHelper.tomorrow.getDate()) {
             GameHelper.tomorrow = GameHelper.getTomorrow();
         }
         GameHelper.currentTime(new Date());
@@ -76,26 +84,25 @@ class GameHelper {
     }
 
     public static formatAmount(n: number): string {
-        if (n >= 1e9) {
-            return `${Math.floor(n / 1e9)}b`;
-        } else if (n >= 1e6) {
-            return `${Math.floor(n / 1e6)}m`;
-        } else if (n >= 1e3) {
-            return `${Math.floor(n / 1e3)}k`;
-        }
+        if (n >= 1e9) { return `${Math.floor(n / 1e9)}b`; }
+        if (n >= 1e6) { return `${Math.floor(n / 1e6)}m`; }
+        if (n >= 1e3) { return `${Math.floor(n / 1e3)}k`; }
         return `${n}`;
     }
 
-    public static getIndexFromDistribution(a: number[]) {
+    public static getIndexFromDistribution(a: number[]): number {
         const rand = Math.random();
-        for (let i = 0; i < a.length; i++) {
+        for (let i = 0; i < a.length; i += 1) {
             if (rand <= a[i]) {
                 return i;
             }
         }
+        // If none matched for whatever reason (should never happen) return the
+        // last index
+        return a.length - 1;
     }
 
-    public static createArray(start: number, max: number, step: number) {
+    public static createArray(start: number, max: number, step: number): Array<number> {
         const array = [];
         for (let i = start; i <= max; i += step) {
             array.push(i);

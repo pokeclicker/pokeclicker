@@ -1,4 +1,5 @@
-///<reference path="../../declarations/DataStore/common/Feature.d.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 
 import Currency = GameConstants.Currency;
 

@@ -1,4 +1,6 @@
-///<reference path="CaughtStatus.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="CaughtStatus.ts" />
+
 class Party implements Feature {
     name = 'Pokemon Party';
     saveKey = 'party';
