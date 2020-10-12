@@ -1,6 +1,7 @@
-/// <reference path="MultipleChoiceSetting.ts" />
+import Setting from './Setting';
+import SettingOption from './SettingOption';
 
-class BooleanSetting extends MultipleChoiceSetting {
+export default class BooleanSetting extends Setting {
     constructor(name: string, displayName: string, defaultValue: boolean) {
         super(
             name,
@@ -9,11 +10,11 @@ class BooleanSetting extends MultipleChoiceSetting {
                 new SettingOption('On', true),
                 new SettingOption('Off', false),
             ],
-            defaultValue
+            defaultValue,
         );
     }
 
-    toggle() {
+    toggle(): void {
         this.set(!this.value);
     }
 }

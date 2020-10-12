@@ -5,6 +5,10 @@ import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
 import BadgeEnums from './enums/Badges';
+import BooleanSetting from './settings/BooleanSetting';
+import RangeSetting from './settings/RangeSetting';
+import Setting from './settings/Setting';
+import SettingOption from './settings/SettingOption';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -13,4 +17,8 @@ Object.assign(<any>window, {
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,
     BadgeEnums,
+    BooleanSetting,
+    RangeSetting,
+    Setting,
+    SettingOption,
 });
