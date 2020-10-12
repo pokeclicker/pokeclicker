@@ -36,6 +36,8 @@ This means you don't need to compile TypeScript yourself. Gulp will do this for 
 npm clean-install
 npm start
 ```
+Click the [Web Preview](https://cloud.google.com/shell/docs/using-web-preview) Button and select port `3001` from the displayed menu.
+Cloud Shell opens the preview URL on its proxy service in a new browser window.
 
 ## Deploying a new version to Github Pages
 Before deploying, check that the game compiles and starts up without errors. Then run:

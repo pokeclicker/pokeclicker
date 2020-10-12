@@ -1,3 +1,5 @@
+///<reference path="../../declarations/DataStore/common/Feature.d.ts"/>
+
 import Currency = GameConstants.Currency;
 
 class Breeding implements Feature {

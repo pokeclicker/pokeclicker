@@ -159,7 +159,7 @@ gymList['Cinnabar Island'] = new Gym(
     BadgeTypes.Volcano,
     5000,
     'I have burned down to nothing! Not even ashes remain! You have earned the Volcano Badge.',
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Pokemon Mansion'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Mansion'))]
 );
 gymList['Viridian City'] = new Gym(
     'Giovanni',
@@ -255,7 +255,7 @@ gymList['Violet City'] = new Gym(
     BadgeTypes.Zephyr,
     250,
     '...For pity\'s sake! My dad\'s cherished bird Pokémon... But a defeat is a defeat. All right. Take this official Pokémon League Badge. This one is the Zephyr Badge.',
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Sprout Tower'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sprout Tower'))]
 );
 gymList['Azalea Town'] = new Gym(
     'Bugsy',
@@ -268,7 +268,7 @@ gymList['Azalea Town'] = new Gym(
     BadgeTypes.Hive,
     500,
     'Whoa, amazing! You\'re an expert on Pokémon! My research isn\'t complete yet. OK, you win. Take this Hive Badge.',
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Slowpoke Well'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Slowpoke Well'))]
 );
 gymList['Goldenrod City'] = new Gym(
     'Whitney',
@@ -537,7 +537,7 @@ gymList['Sootopolis City'] = new Gym(
     BadgeTypes.Rain,
     10000,
     'I realize now your authenticity and magnificence as a Pokémon Trainer. I find much joy in having met you and your Pokémon. You have proven yourself worthy of the Rain Badge. Accept it. Having that Badge assures you full obedience of all your Pokémon to every command you make.',
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Sky Pillar'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sky Pillar'))]
 );
 
 // Hoenn Elite 4
@@ -820,7 +820,7 @@ gymList['Aspertia City'] = new Gym(
     BadgeTypes.Basic,
     128000,
     'That battle has made me feel really glad you were my first challenger as a Gym Leader… I give you this in honor of the strength you and your Pokémon showed!',
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Floccesy Ranch'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Floccesy Ranch'))]
 );
 gymList['Virbank City'] = new Gym(
     'Roxie',
@@ -847,7 +847,7 @@ gymList['Castelia City'] = new Gym(
     BadgeTypes.Insect,
     128000,
     'Oh hoo… You are very strong indeed! I guess it\'s no surprise I lost. Here! Take this Insect Badge! I think it\'ll suit you!',
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Castelia Sewers'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Castelia Sewers'))]
 );
 gymList['Nimbasa City'] = new Gym(
     'Elesa',
@@ -1106,7 +1106,7 @@ gymList['Snowbelle City'] = new Gym(
     BadgeTypes.Iceberg,
     128000,
     'Impressive! Your Pokémon fought with great courage. I can tell that you\'ve trained your Pokémon well.',
-    [new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Pokémon Village'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokémon Village'))]
 );
 
 //Kalos Elite 4

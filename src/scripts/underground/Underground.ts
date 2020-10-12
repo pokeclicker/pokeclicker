@@ -31,6 +31,10 @@ class Underground {
         return Underground.BASE_DAILY_DEALS_MAX + this.getUpgrade(Underground.Upgrades.Daily_Deals_Max).calculateBonus();
     }
 
+    public static getBombEfficiency() {
+        return Underground.BASE_BOMB_EFFICIENCY + this.getUpgrade(Underground.Upgrades.Bomb_Efficiency).calculateBonus();
+    }
+
 
     static getUpgrade(upgrade: Underground.Upgrades) {
         for (let i = 0; i < this.upgradeList.length; i++) {
@@ -238,6 +242,13 @@ class Underground {
             }
         }
         this.energy = saveObject['energy'] || 0;
+
+        const mine = saveObject['mine'];
+        if (mine) {
+            Mine.loadSavedMine(mine);
+        } else {
+            Mine.loadMine();
+        }
     }
 
     public static save(): Record<string, any> {
@@ -250,6 +261,7 @@ class Underground {
         }
         undergroundSave['upgrades'] = upgradesSave;
         undergroundSave['energy'] = this.energy;
+        undergroundSave['mine'] = Mine.save();
         return undergroundSave;
     }
 
@@ -276,7 +288,8 @@ namespace Underground {
         'Items_Max',
         'Energy_Gain',
         'Energy_Regen_Time',
-        'Daily_Deals_Max'
+        'Daily_Deals_Max',
+        'Bomb_Efficiency',
     }
 
     export const BASE_ENERGY_MAX = 50;
@@ -284,8 +297,10 @@ namespace Underground {
     export const BASE_ENERGY_GAIN = 3;
     export const BASE_ENERGY_REGEN_TIME = 60;
     export const BASE_DAILY_DEALS_MAX = 3;
+    export const BASE_BOMB_EFFICIENCY = 10;
 
-    export const HAMMER_ENERGY = 3;
     export const CHISEL_ENERGY = 1;
+    export const HAMMER_ENERGY = 3;
+    export const BOMB_ENERGY = 10;
     export const PROSPECT_ENERGY = 15;
 }
