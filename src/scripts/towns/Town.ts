@@ -1259,6 +1259,9 @@ const AccumulaTownShop = new Shop([
     ItemList['Dusk_stone'],
     ItemList['Shiny_stone'],
 ]);
+const AnvilleTownShop = new Shop([
+    ItemList['Meloetta (pirouette)'],
+]);
 
 //Unova Towns
 TownList['Aspertia City'] = new Town(
@@ -1423,6 +1426,14 @@ TownList['Nuvema Town'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, 1)],
+    }
+);
+TownList['Anville Town'] = new Town(
+    'Anville Town',
+    GameConstants.Region.unova,
+    {
+        requirements: [new ObtainedPokemonRequirement(pokemonMap['Meloetta (aria)'])],
+        shop: AnvilleTownShop,
     }
 );
 
