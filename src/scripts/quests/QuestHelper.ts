@@ -93,8 +93,10 @@ class QuestHelper {
     }
 
     public static highestOneShotRoute(region: GameConstants.Region): number {
-        const [first, last] = GameConstants.RegionRoute[region];
-        const attack = Math.max(1, App.game.party.calculatePokemonAttack());
+        const routes = Routes.getRoutesByRegion(region).map(r => r.number);
+        const first = Math.min(...routes);
+        const last = Math.max(...routes);
+        const attack = Math.max(1, App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, false, region, true));
 
         for (let route = last; route >= first; route--) {
             if (PokemonFactory.routeHealth(route, region) < attack) {

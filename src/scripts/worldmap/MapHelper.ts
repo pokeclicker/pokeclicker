@@ -177,7 +177,7 @@ class MapHelper {
     }
 
     public static validRoute(route = 0, region: GameConstants.Region = 0): boolean {
-        return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];
+        return !!Routes.getRoute(region, route);
     }
 
     public static openShipModal() {
