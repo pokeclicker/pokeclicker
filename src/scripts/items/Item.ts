@@ -128,7 +128,7 @@ abstract class Item {
     }
 
     get displayName() {
-        return this._displayName;
+        return GameConstants.humanifyString(this._displayName);
     }
 }
 
