@@ -35,7 +35,7 @@
                           <small><strong data-bind="text: PokemonType[pokemonMap[$data].type[0]].toUpperCase()"></strong></small>
                         </span>
                         <span class="badge text-light"
-                          data-bind="visible: pokemonMap[$data].type[1] >= 0,
+                          data-bind="if: pokemonMap[$data].type[1] >= 0,
                           style: { 'background-color': TypeColor[pokemonMap[$data].type[1]] }">
                           <small><strong data-bind="text: PokemonType[pokemonMap[$data].type[1]].toUpperCase()"></strong></small>
                         </span>

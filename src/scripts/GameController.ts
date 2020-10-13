@@ -156,8 +156,9 @@ class GameController {
                     }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
-                // Simpler with key because +/= share a code
+                // Allow '=' to fallthrough to '+' since they share a key on many keyboards
                 switch (e.key) {
+                    case '=':
                     case '+':
                         MapHelper.moveToRoute(player.route() + 1, player.region);
                         break;
