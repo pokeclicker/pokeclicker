@@ -76,7 +76,7 @@ class Party implements Feature {
         this._caughtPokemon.push(pokemon);
 
         // Trigger sorting update of PokemonList UI
-        PartyController.getSortedList();
+        PartyController.sortList();
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
