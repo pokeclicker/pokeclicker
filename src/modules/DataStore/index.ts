@@ -1,9 +1,9 @@
-import BadgeStore from './BadgeStore';
+import BadgeCase from './BadgeCase';
 import StatisticStore from './StatisticStore';
 
 const DataStore = {
-  badge: BadgeStore,
-  statistics: StatisticStore,
+    badge: BadgeCase,
+    statistics: StatisticStore,
 };
 
 export default DataStore;
