@@ -1,5 +1,6 @@
 import { Observable as KnockoutObservable } from 'knockout';
 import { Saveable } from './common/Saveable';
+import '../koExtenders';
 
 const failedSetValue = () => 0;
 
@@ -8,7 +9,7 @@ export default class Statistics implements Saveable {
 
     defaults = {};
 
-    selectedPokemonID = ko.observable(1);
+    selectedPokemonID = ko.observable(1).extend({ numeric: 0 });
 
     /*
      * observables
@@ -121,7 +122,7 @@ export default class Statistics implements Saveable {
 
     constructor() {
         this.observables.forEach((prop) => {
-            this[prop] = ko.observable<number>(0);
+            this[prop] = ko.observable<number>(0).extend({ numeric: 0 });
         });
 
         this.arrayObservables.forEach((array) => {
@@ -143,7 +144,7 @@ export default class Statistics implements Saveable {
                     }
 
                     // eslint-disable-next-line no-param-reassign
-                    statistics[id] = ko.observable<number>(0);
+                    statistics[id] = ko.observable<number>(0).extend({ numeric: 0 });
                     return statistics[id];
                 },
 
@@ -195,7 +196,7 @@ export default class Statistics implements Saveable {
                     return (val) => {
                         if (!Number.isNaN(Number(val))) {
                             // eslint-disable-next-line no-param-reassign
-                            statistics[prop] = ko.observable<number>(val);
+                            statistics[prop] = ko.observable<number>(val).extend({ numeric: 0 });
                             return val;
                         } return 0;
                     };
