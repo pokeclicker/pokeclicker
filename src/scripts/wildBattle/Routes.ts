@@ -1464,55 +1464,55 @@ Routes.add(new RegionRoute(
     })
 ));
 Routes.add(new RegionRoute(
-    'Alola Route 1', GameConstants.Region.galar, 2,
+    'Galar Route 1', GameConstants.Region.galar, 2,
     new RoutePokemon({
         land: ['Skwovet', 'Rookidee', 'Nickit', 'Chewtle', 'Yamper'],
     })
 ));
 Routes.add(new RegionRoute(
-    'Alola Route 1', GameConstants.Region.galar, 3,
+    'Galar Route 1', GameConstants.Region.galar, 3,
     new RoutePokemon({
         land: ['Gossifleur', 'Rookidee', 'Corvisquire', 'Skwovet', 'Rolycoly', 'Sizzlipede'],
     })
 ));
 Routes.add(new RegionRoute(
-    'Alola Route 1', GameConstants.Region.galar, 4,
+    'Galar Route 1', GameConstants.Region.galar, 4,
     new RoutePokemon({
         land: ['Yamper', 'Wooloo', 'Milcery'],
     })
 ));
 Routes.add(new RegionRoute(
-    'Alola Route 1', GameConstants.Region.galar, 5,
+    'Galar Route 1', GameConstants.Region.galar, 5,
     new RoutePokemon({
         land: ['Dottler', 'Applin', 'Eldegoss'],
     })
 ));
 Routes.add(new RegionRoute(
-    'Kanto Route 1', GameConstants.Region.galar, 6,
+    'Galar Route 1', GameConstants.Region.galar, 6,
     new RoutePokemon({
         land: ['Silicobra'],
     })
 ));
 Routes.add(new RegionRoute(
-    'Kanto Route 1', GameConstants.Region.galar, 7,
+    'Galar Route 1', GameConstants.Region.galar, 7,
     new RoutePokemon({
         land: ['Thievul', 'Toxel', 'Corviknight', 'Perrserker', 'Morpeko'],
     })
 ));
 Routes.add(new RegionRoute(
-    'Kanto Route 1', GameConstants.Region.galar, 8,
+    'Galar Route 1', GameConstants.Region.galar, 8,
     new RoutePokemon({
         land: ['Sandaconda', 'Falinks'],
     })
 ));
 Routes.add(new RegionRoute(
-    'Kanto Route 1', GameConstants.Region.galar, 9,
+    'Galar Route 1', GameConstants.Region.galar, 9,
     new RoutePokemon({
         land: ['Cramorant', 'Clobbopus', 'Grapploct', 'Pincurchin'],
     })
 ));
 Routes.add(new RegionRoute(
-    'Kanto Route 1', GameConstants.Region.galar, 10,
+    'Galar Route 1', GameConstants.Region.galar, 10,
     new RoutePokemon({
         land: ['Snom', 'Duraludon', 'Stonjourner', 'Eiscue'],
     })

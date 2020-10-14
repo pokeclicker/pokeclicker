@@ -34,7 +34,7 @@ TownList['Indigo Plateau Kanto'] = new PokemonLeague(
     'Indigo Plateau Kanto',
     GameConstants.Region.kanto,
     [
-        new RouteKillRequirement(10, 23),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 23),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road')),
     ],
     indigoPlateauShop,
@@ -45,7 +45,7 @@ TownList['Indigo Plateau Kanto'] = new PokemonLeague(
 TownList['Indigo Plateau Johto'] = new PokemonLeague(
     'Indigo Plateau Johto',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, 27)],
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 27)],
     indigoPlateauShop,
     ['Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance']
 );
@@ -55,7 +55,7 @@ TownList['Pokemon League Hoenn'] = new PokemonLeague(
     'Pokemon League Hoenn',
     GameConstants.Region.hoenn,
     [
-        new RouteKillRequirement(10, 128),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 128),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn')),
     ],
     indigoPlateauShop,
@@ -67,7 +67,7 @@ TownList['Pokemon League Sinnoh'] = new PokemonLeague(
     'Pokemon League Sinnoh',
     GameConstants.Region.sinnoh,
     [
-        new RouteKillRequirement(10, 223),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 223),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh')),
     ],
     indigoPlateauShop,
@@ -79,7 +79,7 @@ TownList['Pokemon League Unova'] = new PokemonLeague(
     'Pokemon League Unova',
     GameConstants.Region.unova,
     [
-        new RouteKillRequirement(10, 23),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 23),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova')),
     ],
     indigoPlateauShop,
@@ -92,8 +92,8 @@ TownList['Pokemon League Kalos'] = new PokemonLeague(
     GameConstants.Region.kalos,
     [
         new OneFromManyRequirement([
-            new RouteKillRequirement(10, 21),
-            new RouteKillRequirement(10, 22),
+            new RouteKillRequirement(10, GameConstants.Region.kanto, 21),
+            new RouteKillRequirement(10, GameConstants.Region.kanto, 22),
         ]),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos')),
     ],
