@@ -1,6 +1,5 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="RegionRoute.ts"/>
-///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="../../scripts/GameConstants.d.ts" />
 
 class Routes {
