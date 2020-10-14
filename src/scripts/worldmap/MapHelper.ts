@@ -1,3 +1,4 @@
+/// <reference path="../../declarations/DataStore/StatisticStore.d.ts" />
 class MapHelper {
     public static returnToMap() {
         if (player.currentTown()) {
@@ -28,7 +29,7 @@ class MapHelper {
         } else {
             if (!MapHelper.routeExist(route, region)) {
                 return Notifier.notify({
-                    message: `Route ${route} does not exist in the ${GameConstants.Region[region]} region.`,
+                    message: `${Routes.getName(route, region)} does not exist in the ${GameConstants.Region[region]} region.`,
                     type: NotificationConstants.NotificationOption.warning,
                 });
             }
@@ -89,7 +90,7 @@ class MapHelper {
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
-            if (App.game.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
+            if (App.game.statistics.routeKills[Routes.normalizedNumber(route, region)]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
