@@ -1,5 +1,5 @@
+/// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="RegionRoute.ts"/>
-///<reference path="../badgeCase/BadgeTypes.ts"/>
 
 class Routes {
     public static regionRoutes = [];
@@ -56,7 +56,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 2),
-        new GymBadgeRequirement(BadgeTypes.Boulder),
+        new GymBadgeRequirement(BadgeEnums.Boulder),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -122,7 +122,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 6),
-        new GymBadgeRequirement(BadgeTypes.Cascade),
+        new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -236,7 +236,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Shellder', 'Horsea', 'Staryu'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Soul)]
+    [new GymBadgeRequirement(BadgeEnums.Soul)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kanto, 20,
@@ -256,7 +256,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Raticate', 'Tangela'],
         water: ['Magikarp', 'Poliwag', 'Goldeen', 'Tentacruel', 'Shellder', 'Horsea', 'Staryu'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Soul)]
+    [new GymBadgeRequirement(BadgeEnums.Soul)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kanto, 22,
@@ -264,7 +264,7 @@ Routes.add(new RegionRoute(
         land: ['Rattata', 'Spearow', 'Nidoran(F)', 'Nidoran(M)', 'Mankey'],
         water: ['Poliwag', 'Poliwhirl', 'Goldeen'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Earth)]
+    [new GymBadgeRequirement(BadgeEnums.Earth)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kanto, 23,
@@ -284,7 +284,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Rattata', 'Sentret', 'Hoothoot'],
         headbutt: ['Exeggcute', 'Ledyba', 'Spinarak', 'Hoothoot', 'Pineco'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Elite_KantoChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_KantoChampion)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.johto, 30,
@@ -311,7 +311,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Quagsire', 'Magikarp', 'Qwilfish'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Pineco'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Zephyr)]
+    [new GymBadgeRequirement(BadgeEnums.Zephyr)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.johto, 33,
@@ -345,7 +345,7 @@ Routes.add(new RegionRoute(
         land: ['Pidgey', 'Nidoran(M)', 'Nidoran(F)', 'Vulpix', 'Growlithe', 'Hoothoot', 'Stantler', 'Sudowoodo'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Plain)]
+    [new GymBadgeRequirement(BadgeEnums.Plain)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.johto, 37,
@@ -378,7 +378,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 39),
-        new GymBadgeRequirement(BadgeTypes.Fog),
+        new GymBadgeRequirement(BadgeEnums.Fog),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -395,7 +395,7 @@ Routes.add(new RegionRoute(
         water: ['Goldeen', 'Seaking', 'Magikarp'],
         headbutt: ['Spearow', 'Aipom', 'Heracross'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Fog)]
+    [new GymBadgeRequirement(BadgeEnums.Fog)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.johto, 43,
@@ -414,8 +414,8 @@ Routes.add(new RegionRoute(
         headbutt: ['Spearow', 'Aipom', 'Heracross'],
     }),
     [
-        new GymBadgeRequirement(BadgeTypes.Mineral),
-        new GymBadgeRequirement(BadgeTypes.Glacier),
+        new GymBadgeRequirement(BadgeEnums.Mineral),
+        new GymBadgeRequirement(BadgeEnums.Glacier),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -443,7 +443,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Seel', 'Staryu', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
         headbutt: ['Metapod', 'Butterfree', 'Kakuna', 'Beedrill', 'Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco', 'Heracross'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Mineral)]
+    [new GymBadgeRequirement(BadgeEnums.Mineral)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.johto, 48,
@@ -470,7 +470,7 @@ Routes.add(new RegionRoute(
         water: ['Tentacool', 'Tentacruel', 'Magikarp', 'Shellder', 'Chinchou', 'Lanturn'],
         headbutt: ['Exeggcute', 'Hoothoot', 'Ledyba', 'Spinarak', 'Pineco'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Rising)],
+    [new GymBadgeRequirement(BadgeEnums.Rising)],
     49
 ));
 Routes.add(new RegionRoute(
@@ -480,7 +480,7 @@ Routes.add(new RegionRoute(
         water: ['Poliwag', 'Poliwhirl', 'Magikarp'],
         headbutt: ['Natu', 'Aipom', 'Heracross'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Elite_JohtoChampion)],
+    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)],
     51
 ));
 
@@ -492,7 +492,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Wurmple', 'Poochyena', 'Zigzagoon'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Elite_JohtoChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.hoenn, 102,
@@ -524,7 +524,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Balance)],
+    [new GymBadgeRequirement(BadgeEnums.Balance)],
     115.1
 ));
 Routes.add(new RegionRoute(
@@ -571,7 +571,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Wailmer'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Balance)],
+    [new GymBadgeRequirement(BadgeEnums.Balance)],
     115.5
 ));
 Routes.add(new RegionRoute(
@@ -582,7 +582,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Granite Cave')),
-        new GymBadgeRequirement(BadgeTypes.Knuckle),
+        new GymBadgeRequirement(BadgeEnums.Knuckle),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -592,7 +592,7 @@ Routes.add(new RegionRoute(
         water: ['Marill', 'Goldeen', 'Magikarp', 'Barboach'],
         headbutt: ['Geodude'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Dynamo)]
+    [new GymBadgeRequirement(BadgeEnums.Dynamo)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.hoenn, 112,
@@ -648,7 +648,7 @@ Routes.add(new RegionRoute(
         land: ['Zigzagoon', 'Linoone', 'Wingull', 'Kecleon'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha', 'Sharpedo'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Balance)]
+    [new GymBadgeRequirement(BadgeEnums.Balance)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.hoenn, 119,
@@ -681,7 +681,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 121),
-        new GymBadgeRequirement(BadgeTypes.Feather),
+        new GymBadgeRequirement(BadgeEnums.Feather),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -784,7 +784,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Starly', 'Bidoof', 'Kricketot'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Elite_HoennChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.sinnoh, 202,
@@ -827,7 +827,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 205),
-        new GymBadgeRequirement(BadgeTypes.Forest),
+        new GymBadgeRequirement(BadgeEnums.Forest),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -856,7 +856,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 208),
-        new GymBadgeRequirement(BadgeTypes.Relic),
+        new GymBadgeRequirement(BadgeEnums.Relic),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -874,7 +874,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 213),
-        new GymBadgeRequirement(BadgeTypes.Fen),
+        new GymBadgeRequirement(BadgeEnums.Fen),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -885,7 +885,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 213),
-        new GymBadgeRequirement(BadgeTypes.Fen),
+        new GymBadgeRequirement(BadgeEnums.Fen),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -936,7 +936,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 213),
-        new GymBadgeRequirement(BadgeTypes.Fen),
+        new GymBadgeRequirement(BadgeEnums.Fen),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -946,7 +946,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 213),
-        new GymBadgeRequirement(BadgeTypes.Fen),
+        new GymBadgeRequirement(BadgeEnums.Fen),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -982,7 +982,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 222),
-        new GymBadgeRequirement(BadgeTypes.Beacon),
+        new GymBadgeRequirement(BadgeEnums.Beacon),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1004,7 +1004,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 224),
-        new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion),
+        new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1084,7 +1084,7 @@ Routes.add(new RegionRoute(
         land: ['Sandile', 'Darumaka', 'Trubbish', 'Minccino', 'Scraggy'],
         water: ['Frillish'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Toxic)]
+    [new GymBadgeRequirement(BadgeEnums.Toxic)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.unova, 5,
@@ -1093,7 +1093,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 4),
-        new GymBadgeRequirement(BadgeTypes.Insect),
+        new GymBadgeRequirement(BadgeEnums.Insect),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1104,7 +1104,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 5),
-        new GymBadgeRequirement(BadgeTypes.Bolt),
+        new GymBadgeRequirement(BadgeEnums.Bolt),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1114,7 +1114,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Chargestone Cave')),
-        new GymBadgeRequirement(BadgeTypes.Quake),
+        new GymBadgeRequirement(BadgeEnums.Quake),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1127,7 +1127,7 @@ Routes.add(new RegionRoute(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
             new MultiRequirement([
                 new RouteKillRequirement(10, 9),
-                new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion),
+                new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
             ]),
         ]),
     ]
@@ -1180,7 +1180,7 @@ Routes.add(new RegionRoute(
             new RouteKillRequirement(10, 14),
             new RouteKillRequirement(10, 16),
         ]),
-        new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion),
+        new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1190,7 +1190,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, 4),
-        new GymBadgeRequirement(BadgeTypes.Insect),
+        new GymBadgeRequirement(BadgeEnums.Insect),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1214,7 +1214,7 @@ Routes.add(new RegionRoute(
         land: ['Patrat', 'Purrloin'],
         water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.unova, 20,
@@ -1256,14 +1256,14 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Rattata'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 2,
     new RoutePokemon({
         land: ['Fletchling', 'Bunnelby', 'Scatterbug'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 3,
@@ -1277,7 +1277,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Flabébé', 'Ralts', 'Combee', 'Budew', 'Skitty'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Bug)]
+    [new GymBadgeRequirement(BadgeEnums.Bug)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 5,
@@ -1326,7 +1326,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Hariyama', 'Staravia', 'Chingling', 'Stunky', 'Throh', 'Sawk', 'Dedenne'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Cliff)]
+    [new GymBadgeRequirement(BadgeEnums.Cliff)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 12,
@@ -1334,7 +1334,7 @@ Routes.add(new RegionRoute(
         land: ['Slowpoke', 'Exeggcute', 'Pinsir', 'Tauros', 'Heracross', 'Miltank', 'Pachirisu', 'Chatot'],
         water: ['Lapras', 'Luvdisc', 'Huntail', 'Gorebyss', 'Binacle'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Rumble)]
+    [new GymBadgeRequirement(BadgeEnums.Rumble)]
     //Replace req with Tower of Mastery dungeon if implemented.
 ));
 Routes.add(new RegionRoute(
@@ -1350,7 +1350,7 @@ Routes.add(new RegionRoute(
         land: ['Weepinbell', 'Haunter', 'Quagsire', 'Skorupi', 'Carnivine', 'Karrablast', 'Shelmet', 'Goomy'],
         water: ['Stunfisk'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Voltage)]
+    [new GymBadgeRequirement(BadgeEnums.Voltage)]
 ));
 Routes.add(new RegionRoute(
     GameConstants.Region.kalos, 15,
@@ -1358,7 +1358,7 @@ Routes.add(new RegionRoute(
         land: ['Mightyena', 'Skorupi', 'Watchog', 'Liepard', 'Foongus', 'Pawniard', 'Klefki'],
         water: ['Lombre', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new GymBadgeRequirement(BadgeTypes.Fairy)]
+    [new GymBadgeRequirement(BadgeEnums.Fairy)]
     //Replace req with Pokéball Factory dungeon if implemented.
 ));
 Routes.add(new RegionRoute(

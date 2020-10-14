@@ -1,8 +1,8 @@
+/// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="DungeonBossPokemon.ts"/>
 ///<reference path="../achievements/GymBadgeRequirement.ts"/>
 ///<reference path="../achievements/MultiRequirement.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
-///<reference path="../badgeCase/BadgeTypes.ts"/>
 
 /**
  * Gym class.
@@ -185,7 +185,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Noctowl', 300000, 30),
         new DungeonBossPokemon('Beedrill', 300000, 30),
         new DungeonBossPokemon('Butterfree', 300000, 30),
-        new DungeonBossPokemon('Celebi', 600000, 50, new GymBadgeRequirement(BadgeTypes.Elite_JohtoChampion)),
+        new DungeonBossPokemon('Celebi', 600000, 50, new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)),
     ],
     4000, 34, 15
 );
@@ -346,8 +346,8 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     390000,
     [
         new DungeonBossPokemon('Exploud', 1000000, 50),
-        new DungeonBossPokemon('Kyogre', 1700000, 70, new GymBadgeRequirement(BadgeTypes.Elite_HoennChampion)),
-        new DungeonBossPokemon('Groudon', 1700000, 70, new GymBadgeRequirement(BadgeTypes.Elite_HoennChampion)),
+        new DungeonBossPokemon('Kyogre', 1700000, 70, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)),
+        new DungeonBossPokemon('Groudon', 1700000, 70, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)),
     ],
     34000, 101, 5);
 
@@ -703,7 +703,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     [
         new DungeonBossPokemon('Cacturne', 8000000, 70),
         new DungeonBossPokemon('Excadrill', 8000000, 70),
-        new DungeonBossPokemon('Heatran', 8000000, 70, new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion)),
+        new DungeonBossPokemon('Heatran', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
     ],
     96500, 201, 35);
     
@@ -747,7 +747,7 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Tangrowth', 8000000, 70),
         new DungeonBossPokemon('Audino', 8000000, 70),
         new DungeonBossPokemon('Mamoswine', 8000000, 70),
-        new DungeonBossPokemon('Kyurem', 8000000, 70, new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion)),
+        new DungeonBossPokemon('Kyurem', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
     ],
     96500, 201, 35);
     
@@ -971,7 +971,7 @@ dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
         new DungeonBossPokemon('Durant', 8000000, 70),
         new DungeonBossPokemon('Pupitar', 8000000, 70),
         new DungeonBossPokemon('Noibat', 8000000, 70),
-        new DungeonBossPokemon('Zygarde', 8000000, 70, new GymBadgeRequirement(BadgeTypes.Elite_KalosChampion)),
+        new DungeonBossPokemon('Zygarde', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)),
     ],
     96500, 201, 35);
 

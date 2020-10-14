@@ -2,7 +2,7 @@
 ///<reference path="../party/evolutions/StoneEvolution.ts"/>
 ///<reference path="../party/evolutions/TimedEvolution.ts"/>
 ///<reference path="../party/evolutions/LocationEvolution.ts"/>
-///<reference path="../GameConstants.ts"/>
+///<reference path="../GameConstants.d.ts"/>
 ///<reference path="../party/LevelType.ts"/>
 ///<reference path="PokemonType.ts"/>
 

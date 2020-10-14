@@ -1,14 +1,16 @@
+/// <reference path="../../declarations/utilities/getArrayOfObservables.d.ts"/>
+
 class Wallet implements Feature {
     name = 'Wallet';
     saveKey = 'wallet';
-    currencies: ArrayOfObservables<number>;
+    currencies: Array<number>;
 
     defaults = {
         currencies: new Array(GameHelper.enumLength(GameConstants.Currency)).fill(0),
     };
 
     constructor() {
-        this.currencies = new ArrayOfObservables(this.defaults.currencies);
+        this.currencies = getArrayOfObservables(this.defaults.currencies);
     }
 
     public gainMoney(base: number, origin?: string): number {
@@ -117,7 +119,7 @@ class Wallet implements Feature {
         }
 
         if (json['currencies'] == null) {
-            this.currencies = new ArrayOfObservables(this.defaults.currencies);
+            this.currencies = getArrayOfObservables(this.defaults.currencies);
         } else {
             const currenciesJson = json.currencies;
             currenciesJson.forEach((value, index) => {

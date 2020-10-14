@@ -2,9 +2,15 @@
 // This is only here so that the code in ../scripts can use the new functionality
 
 import DataStore from './DataStore';
+import * as GameConstants from './GameConstants';
+import BadgeEnums from './enums/Badges';
+import getArrayOfObservables from './utilities/getArrayOfObservables';
 
 Object.assign(<any>window, {
+    GameConstants,
     DataStore,
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,
+    BadgeEnums,
+    getArrayOfObservables,
 });
