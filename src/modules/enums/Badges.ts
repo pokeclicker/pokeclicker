@@ -1,4 +1,4 @@
-enum BadgeTypes {
+enum BadgeEnums {
     'None',
     // Kanto
     'Boulder',
@@ -42,7 +42,7 @@ enum BadgeTypes {
     'Elite_Glacia',
     'Elite_Drake',
     'Elite_HoennChampion',
-    //Sinnoh
+    // Sinnoh
     'Coal',
     'Forest',
     'Relic',
@@ -56,7 +56,7 @@ enum BadgeTypes {
     'Elite_Flint',
     'Elite_Lucian',
     'Elite_SinnohChampion',
-    //Unova
+    // Unova
     'Basic',
     'Toxic',
     'Insect',
@@ -70,7 +70,7 @@ enum BadgeTypes {
     'Elite_Grimsley',
     'Elite_Caitlin',
     'Elite_UnovaChampion',
-    //Kalos
+    // Kalos
     'Bug',
     'Cliff',
     'Rumble',
@@ -85,3 +85,5 @@ enum BadgeTypes {
     'Elite_Drasna',
     'Elite_KalosChampion',
 }
+
+export default BadgeEnums;
