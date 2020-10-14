@@ -336,6 +336,7 @@ export const WaterAreas = {
     2: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Shoal Cave', 'Seafloor Cavern']),
     3: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
     4: new Set(['Undella Bay', 'Humilau City']),
+    5: new Set(['Azure Bay']),
 };
 
 export const IceAreas = {
@@ -343,6 +344,8 @@ export const IceAreas = {
     1: new Set(['Mahogany Town', 'Ice Path', 'Whirl Islands']),
     2: new Set(['Sootopolis City']),
     3: new Set([216, 217, 'Lake Acuity', 'Snowpoint City']),
+    4: new Set(['Celestial Tower']),
+    5: new Set(['Frost Cavern']),
 };
 
 export const ForestAreas = {
@@ -350,7 +353,8 @@ export const ForestAreas = {
     1: new Set([36, 38, 43, 'Azalea Town', 'Ilex Forest']),
     2: new Set([119, 'Petalburg Woods']),
     3: new Set([201, 204, 'Eterna Forest', 'Eterna City', 'Fullmoon Island', 'Newmoon Island']),
-    4: new Set(['Lostlorn Forest', 'Pinwheel Forest', 'Giant Chasm', 'Pledge Grove', 'Castelia City']),
+    4: new Set(['Abundant Shrine', Floccesy Ranch', 'Lostlorn Forest', 'Pinwheel Forest', 'Moor of Icirrus', 'Giant Chasm', 'Pledge Grove', 'Castelia City']),
+    5: new Set(['Pokemon Village', 'Santalune Forest', 'Victory Road Kalos']),
 };
 
 export const CaveAreas = {
@@ -358,7 +362,8 @@ export const CaveAreas = {
     1: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
     2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
     3: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
-    4: new Set(['Mistralton Cave', 'Seaside Cave', 'Wellspring Cave', 'Twist Mountain', 'Reversal Mountain', 'Cave of Being', 'Relic Passage', 'Relica Castle', 'Victory Road Unova']),
+    4: new Set(['Mistralton Cave', 'Seaside Cave', 'Wellspring Cave', 'Twist Mountain', 'Reversal Mountain', 'Dragonspiral Tower', 'Cave of Being', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
+    5: new Set(['Connecting Cave', 'Sea Spirits Den', 'Terminus Cave']),
 };
 
 export const GemCaveAreas = {
@@ -367,6 +372,7 @@ export const GemCaveAreas = {
     2: new Set(['Cave of Origin', 'Sky Pillar']),
     3: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
     4: new Set(['Chargestone Cave', 'Driftveil City']),
+    5: new Set(['Glittering Cave', 'Reflection Cave']),
 };
 
 export const PowerPlantAreas = {
@@ -374,7 +380,8 @@ export const PowerPlantAreas = {
     1: new Set(['Tin Tower']),
     2: new Set(['Mauville City']),
     3: new Set(['Sunyshore City']),
-    4: new Set(['Virbank Complex', 'Castelia Sewers', 'Nimbasa City']),
+    4: new Set(['Virbank Complex', 'Castelia Sewers', 'P2 Laboratory', 'Nimbasa City']),
+    5: new Set(['Kalos Power Plant', 'Pokeball Factory']),
 };
 
 export const MansionAreas = {
@@ -382,7 +389,8 @@ export const MansionAreas = {
     1: new Set(['Olivine City', 'Burned Tower']),
     2: new Set(['Lavaridge Town', 'Petalburg City', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
     3: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
-    4: new Set(['Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
+    4: new Set(['Desert Resort', 'Liberty Garden', 'Dreamyard', 'Strange House', 'Mistralton City', 'Opelucid City']),
+    5: new Set(['Lost Hotel', 'Team Flare Secret HQ']),
 };
 
 export const GraveyardAreas = {
