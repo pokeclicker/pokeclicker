@@ -269,12 +269,15 @@ class Update implements Saveable {
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.5.7 - Couldn\'t update player shinies..', ಠ_ಠ);
             }
+        }
+
+        if (this.isOlderVersion(this.saveVersion, '0.5.8')) {
             try {
-                for (let s = 101; s < 134; s++) {
+                for (let s = 101; s < 134; s++){
                     saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.dungeonsCleared, s, s - 52); // Adjust Hoenn index
                 }
 
-                for (let s = 201; s < 230; s++) {
+                for (let s = 201; s < 230; s++){
                     saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.dungeonsCleared, s, s - 118); // Adjust Sinnoh index
                 }
                 // Update save data
@@ -283,6 +286,7 @@ class Update implements Saveable {
                 console.error('[update] v0.5.8 - Couldn\'t update player shinies..', ಠ_ಠ);
             }
         }
+
         // Notify the player that the game has updated!
         if (this.saveVersion != this.version && this.saveVersion != '0.0.0') {
             try {
