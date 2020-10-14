@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="RegionRoute.ts"/>
 
-///<reference path="../badgeCase/BadgeTypes.ts"/>
+///<reference path="../../declarations/enums/Badges.d.ts"/>
 /// <reference path="../../declarations/GameConstants.d.ts" />
 
 class Routes {
@@ -70,7 +70,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, GameConstants.Region.kanto, 2),
-        new GymBadgeRequirement(BadgeTypes.Boulder),
+        new GymBadgeRequirement(BadgeEnums.Boulder),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -136,7 +136,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.kanto, 6),
-        new GymBadgeRequirement(BadgeTypes.Cascade),
+        new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -393,7 +393,7 @@ Routes.add(new RegionRoute(
     [
 
         new RouteKillRequirement(10, GameConstants.Region.johto, 39),
-        new GymBadgeRequirement(BadgeTypes.Fog),
+        new GymBadgeRequirement(BadgeEnums.Fog),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -696,7 +696,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.hoenn, 121),
-        new GymBadgeRequirement(BadgeTypes.Feather),
+        new GymBadgeRequirement(BadgeEnums.Feather),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -842,7 +842,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 205),
-        new GymBadgeRequirement(BadgeTypes.Forest),
+        new GymBadgeRequirement(BadgeEnums.Forest),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -871,7 +871,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208),
-        new GymBadgeRequirement(BadgeTypes.Relic),
+        new GymBadgeRequirement(BadgeEnums.Relic),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -889,7 +889,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213),
-        new GymBadgeRequirement(BadgeTypes.Fen),
+        new GymBadgeRequirement(BadgeEnums.Fen),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -900,7 +900,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213),
-        new GymBadgeRequirement(BadgeTypes.Fen),
+        new GymBadgeRequirement(BadgeEnums.Fen),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -952,7 +952,7 @@ Routes.add(new RegionRoute(
     [
 
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213),
-        new GymBadgeRequirement(BadgeTypes.Fen),
+        new GymBadgeRequirement(BadgeEnums.Fen),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -962,7 +962,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 213),
-        new GymBadgeRequirement(BadgeTypes.Fen),
+        new GymBadgeRequirement(BadgeEnums.Fen),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -999,7 +999,7 @@ Routes.add(new RegionRoute(
     [
 
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 222),
-        new GymBadgeRequirement(BadgeTypes.Beacon),
+        new GymBadgeRequirement(BadgeEnums.Beacon),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1021,7 +1021,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.sinnoh, 224),
-        new GymBadgeRequirement(BadgeTypes.Elite_SinnohChampion),
+        new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1110,7 +1110,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeTypes.Insect),
+        new GymBadgeRequirement(BadgeEnums.Insect),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1121,7 +1121,7 @@ Routes.add(new RegionRoute(
     }),
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 5),
-        new GymBadgeRequirement(BadgeTypes.Bolt),
+        new GymBadgeRequirement(BadgeEnums.Bolt),
     ]
 ));
 Routes.add(new RegionRoute(
@@ -1144,7 +1144,7 @@ Routes.add(new RegionRoute(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
             new MultiRequirement([
                 new RouteKillRequirement(10, GameConstants.Region.unova, 9),
-                new GymBadgeRequirement(BadgeTypes.Elite_UnovaChampion),
+                new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
             ]),
         ]),
     ]
@@ -1208,7 +1208,7 @@ Routes.add(new RegionRoute(
     [
 
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeTypes.Insect),
+        new GymBadgeRequirement(BadgeEnums.Insect),
     ]
 ));
 Routes.add(new RegionRoute(
