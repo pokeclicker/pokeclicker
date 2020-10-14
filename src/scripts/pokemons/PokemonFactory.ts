@@ -155,12 +155,13 @@ class PokemonFactory {
     }
 
     private static roamingEncounter(route: number, region: GameConstants.Region): boolean {
-        const routes = GameConstants.RegionRoute[region];
+        // Map to the route numbers
+        const routes = Routes.getRoutesByRegion(region).map(r => r.number);
         const roamingPokemon = RoamingPokemonList.getRegionalRoamers(region);
-        if (!routes || !roamingPokemon || !roamingPokemon.length) {
+        if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
             return false;
         }
-        return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, routes[1], routes[0], route);
+        return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, Math.max(...routes), Math.min(...routes), route);
     }
 
     private static roamingChance(max, min, maxRoute, minRoute, curRoute) {

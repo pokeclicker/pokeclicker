@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/utilities/getArrayOfObservables.d.ts"/>
+
 class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
@@ -14,12 +16,12 @@ class Farming implements Feature {
         }),
     };
 
-    berryList: ArrayOfObservables<number>;
-    plotList: ArrayOfObservables<Plot>;
+    berryList: Array<number>;
+    plotList: Array<Plot>;
 
     constructor() {
-        this.berryList = new ArrayOfObservables(this.defaults.berryList);
-        this.plotList = new ArrayOfObservables(this.defaults.plotList);
+        this.berryList = getArrayOfObservables(this.defaults.berryList);
+        this.plotList = getArrayOfObservables(this.defaults.plotList);
     }
 
     initialize(): void {
@@ -183,7 +185,7 @@ class Farming implements Feature {
 
         const savedBerries = json['berryList'];
         if (savedBerries == null) {
-            this.berryList = new ArrayOfObservables(this.defaults.berryList);
+            this.berryList = getArrayOfObservables(this.defaults.berryList);
         } else {
             (savedBerries as number[]).forEach((value: number, index: number) => {
                 this.berryList[index] = value;
@@ -192,7 +194,7 @@ class Farming implements Feature {
 
         const savedPlots = json['plotList'];
         if (savedPlots == null) {
-            this.plotList = new ArrayOfObservables(this.defaults.plotList);
+            this.plotList = getArrayOfObservables(this.defaults.plotList);
         } else {
             (savedPlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
                 const plot: Plot = new Plot(false, false, BerryType.None, 0);

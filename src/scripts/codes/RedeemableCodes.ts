@@ -32,9 +32,9 @@ class RedeemableCodes implements Saveable {
             }),
             new RedeemableCode('complete-kanto', 750807787, false, function () {
                 // Complete all routes
-                for (let route = GameConstants.RegionRoute[GameConstants.Region.kanto][0]; route <= GameConstants.RegionRoute[GameConstants.Region.kanto][1]; route++) {
-                    GameHelper.incrementObservable(App.game.statistics.routeKills[route], 10);
-                }
+                Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
+                    GameHelper.incrementObservable(App.game.statistics.routeKills[route.number], 10);
+                });
                 // Complete all gyms
                 GameConstants.KantoGyms.forEach(gym => {
                     GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym)]);

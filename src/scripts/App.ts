@@ -1,3 +1,5 @@
+/// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
+
 class App {
 
     static readonly debug = false;
