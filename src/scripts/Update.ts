@@ -273,11 +273,11 @@ class Update implements Saveable {
 
         if (this.isOlderVersion(this.saveVersion, '0.5.8')) {
             try {
-                for (let s = 101; s < 134; s++){
+                for (let s = 101; s < 134; s++) {
                     saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.dungeonsCleared, s, s - 52); // Adjust Hoenn index
                 }
 
-                for (let s = 201; s < 230; s++){
+                for (let s = 201; s < 230; s++) {
                     saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.dungeonsCleared, s, s - 118); // Adjust Sinnoh index
                 }
                 // Update save data
