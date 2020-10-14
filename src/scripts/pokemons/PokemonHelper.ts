@@ -1,5 +1,5 @@
 ///<reference path="PokemonList.ts"/>
-///<reference path="../GameConstants.ts"/>
+///<reference path="../GameConstants.d.ts"/>
 
 enum PokemonLocationType {
     Route,
