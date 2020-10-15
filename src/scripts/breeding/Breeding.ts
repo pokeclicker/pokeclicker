@@ -1,3 +1,5 @@
+///<reference path="../../declarations/DataStore/common/Feature.d.ts"/>
+
 import Currency = GameConstants.Currency;
 
 class Breeding implements Feature {
@@ -29,36 +31,60 @@ class Breeding implements Feature {
             ['Cyndaquil', 'Slugma', 'Houndour', 'Magby'],
             ['Torchic', 'Numel'],
             ['Chimchar'],
+            ['Tepig', 'Pansear'],
+            ['Fennekin'],
+            ['Litten'],
+            ['Scorbunny'],
         ];
         this.hatchList[EggType.Water] = [
             ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
             ['Totodile', 'Wooper', 'Marill', 'Qwilfish'],
             ['Mudkip', 'Feebas', 'Clamperl'],
             ['Piplup', 'Finneon', 'Buizel'],
+            ['Oshawott', 'Panpour'],
+            ['Froakie'],
+            ['Popplio'],
+            ['Sobble'],
         ];
         this.hatchList[EggType.Grass] = [
             ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
             ['Chikorita', 'Hoppip', 'Sunkern'],
             ['Treecko', 'Tropius', 'Roselia'],
             ['Turtwig', 'Carnivine', 'Budew'],
+            ['Snivy', 'Pansage'],
+            ['Chespin'],
+            ['Rowlet'],
+            ['Grookey'],
         ];
         this.hatchList[EggType.Fighting] = [
             ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
             ['Tyrogue'],
             ['Makuhita', 'Meditite'],
             ['Riolu'],
+            ['Throh', 'Sawk'],
+            [],
+            [],
+            [],
         ];
         this.hatchList[EggType.Electric] = [
             ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
             ['Chinchou', 'Mareep', 'Elekid'],
             ['Plusle', 'Minun', 'Electrike'],
             ['Pachirisu', 'Shinx'],
+            ['Blitzle'],
+            [],
+            [],
+            [],
         ];
         this.hatchList[EggType.Dragon] = [
             ['Dratini', 'Dragonair', 'Dragonite'],
             [],
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
+            ['Deino', 'Zwellous', 'Hydreigon'],
+            [],
+            [],
+            [],
         ];
         BreedingController.initialize();
     }
@@ -151,7 +177,10 @@ class Breeding implements Feature {
 
     public gainPokemonEgg(pokemon: PartyPokemon): boolean {
         if (!this.hasFreeEggSlot()) {
-            Notifier.notify({ message: "You don't have any free egg slots", type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: "You don't have any free egg slots",
+                type: NotificationConstants.NotificationOption.warning,
+            });
             return false;
         }
         const egg = this.createEgg(pokemon.name);
@@ -161,9 +190,11 @@ class Breeding implements Feature {
 
     public hatchPokemonEgg(index: number): void {
         const egg: Egg = this._eggList[index]();
-        egg.hatch();
-        this._eggList[index](new Egg());
-        this.moveEggs();
+        const hatched = egg.hatch();
+        if (hatched) {
+            this._eggList[index](new Egg());
+            this.moveEggs();
+        }
     }
 
     public moveEggs(): void {
@@ -181,19 +212,14 @@ class Breeding implements Feature {
 
     public createTypedEgg(type: EggType): Egg {
         const hatchList = this.hatchList[type];
-        const hatchable = hatchList.slice(0, player.highestRegion() + 1);
-        let possibleHatches = [];
-        hatchable.forEach((pokemon, index) => {
-            if (!pokemon.length) {
-                return;
-            }
-            const toAdd = possibleHatches.length || 1;
-            for (let i = 0; i < toAdd; i++) {
-                possibleHatches.push(pokemon);
-            }
-        });
-        possibleHatches = possibleHatches[Math.floor(Math.random() * possibleHatches.length)];
-        const pokemon = possibleHatches[Math.floor(Math.random() * possibleHatches.length)];
+        const hatchable = hatchList.slice(0, player.highestRegion() + 1).filter(list => list.length);
+
+        // highest region has 1/ratio chance, next highest has 1/(ratio ^ 2), etc.
+        // Leftover is given to Kanto, making Kanto and Johto equal chance
+        const ratio = 2;
+        const possibleHatches = GameConstants.expRandomElement(hatchable, ratio);
+
+        const pokemon = GameConstants.randomElement(possibleHatches);
         return this.createEgg(pokemon, type);
     }
 
@@ -208,7 +234,11 @@ class Breeding implements Feature {
         const pokemonName = GameConstants.FossilToPokemon[fossil];
         const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
         if (pokemonNativeRegion > player.highestRegion()) {
-            Notifier.notify({ message: 'You must progress further before you can uncover this fossil Pokemon!', type: GameConstants.NotificationOption.warning, timeout: 5e3 });
+            Notifier.notify({
+                message: 'You must progress further before you can uncover this fossil Pokemon!',
+                type: NotificationConstants.NotificationOption.warning,
+                timeout: 5e3,
+            });
             return new Egg();
         }
         return this.createEgg(pokemonName, EggType.Fossil);

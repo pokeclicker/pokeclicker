@@ -38,7 +38,7 @@ class App {
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#8e44ad;font-weight:900;');
-            Notifier.notify({ message: 'Game loaded', type: GameConstants.NotificationOption.info });
+            Notifier.notify({ message: 'Game loaded', type: NotificationConstants.NotificationOption.info });
 
             GameController.bindToolTips();
             GameController.addKeyListeners();

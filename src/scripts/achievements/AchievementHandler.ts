@@ -19,8 +19,14 @@ class AchievementHandler {
         }
     }
 
+    public static isNavigateDirectionDisabled(navigateBackward: boolean): boolean {
+        return navigateBackward
+            ? this.navigateIndex() === 0
+            : this.navigateIndex() + 1 === this.numberOfTabs();
+    }
+
     public static calculateNumberOfTabs() {
-        this.numberOfTabs(Math.floor((this.achievementListFiltered().filter(a => a.region <= player.highestRegion()).length - 1) / 10));
+        this.numberOfTabs(Math.max(1, Math.ceil(this.achievementListFiltered().length / 10)));
     }
 
     public static filter = {
@@ -34,10 +40,12 @@ class AchievementHandler {
     }
 
     public static filterAchievementList() {
-        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() &&
-                                    (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
-                                    (this.filter.type()   == 'all' ? true : a.property.constructor.name == this.filter.type()) &&
-                                    (this.filter.region() == 'all' ? true : a.region == +this.filter.region())));
+        this.achievementListFiltered(this.achievementList.filter((a) => (
+            a.region <= player.highestRegion() &&
+            (this.filter.status() == 'all' || a.unlocked == JSON.parse(this.filter.status())) &&
+            (this.filter.type()   == 'all' || a.property.constructor.name == this.filter.type()) &&
+            (this.filter.region() == 'all' || a.region == +this.filter.region())
+        )));
         this.resetPages();
     }
 
@@ -224,24 +232,23 @@ class AchievementHandler {
          */
         GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none).forEach(region => {
             // Routes
-            if (GameConstants.RegionRoute[region]) {
-                for (let i = GameConstants.RegionRoute[region][0]; i <= GameConstants.RegionRoute[region][1]; i++) {
-                    AchievementHandler.addAchievement(`Route ${i} traveler`, `Defeat 100 Pokémon on route ${i}`, new RouteKillRequirement(100, i), 1, region);
-                    AchievementHandler.addAchievement(`Route ${i} explorer`, `Defeat 1,000 Pokémon on route ${i}`, new RouteKillRequirement(1000, i), 2, region);
-                    AchievementHandler.addAchievement(`Route ${i} conqueror`, `Defeat 10,000 Pokémon on route ${i}`, new RouteKillRequirement(10000, i), 3, region);
-                }
-            }
+            Routes.getRoutesByRegion(region).forEach(route => {
+                AchievementHandler.addAchievement(`Route ${route.number} traveler`, `Defeat 100 Pokémon on route ${route.number}`, new RouteKillRequirement(100, route.number), 1, region);
+                AchievementHandler.addAchievement(`Route ${route.number} explorer`, `Defeat 1,000 Pokémon on route ${route.number}`, new RouteKillRequirement(1000, route.number), 2, region);
+                AchievementHandler.addAchievement(`Route ${route.number} conqueror`, `Defeat 10,000 Pokémon on route ${route.number}`, new RouteKillRequirement(10000, route.number), 3, region);
+            });
             // Gyms
             GameConstants.RegionGyms[region]?.forEach(gym => {
-                AchievementHandler.addAchievement(`${gym} Gym regular`, 'Clear 10 times', new ClearGymRequirement(10, Statistics.getGymIndex(gym)), 1, region);
-                AchievementHandler.addAchievement(`${gym} Gym ruler`, 'Clear 100 times', new ClearGymRequirement( 100, Statistics.getGymIndex(gym)), 2, region);
-                AchievementHandler.addAchievement(`${gym} Gym owner`, 'Clear 1,000 times', new ClearGymRequirement(1000, Statistics.getGymIndex(gym)), 3, region);
+                const gymTitle: string = gym.includes('Elite') || gym.includes('Champion') ? gym : `${gym} Gym`;
+                AchievementHandler.addAchievement(`${gym} Gym regular`, `Clear ${gymTitle} 10 times`, new ClearGymRequirement(10, GameConstants.getGymIndex(gym)), 1, region);
+                AchievementHandler.addAchievement(`${gym} Gym ruler`, `Clear ${gymTitle} 100 times`, new ClearGymRequirement( 100, GameConstants.getGymIndex(gym)), 2, region);
+                AchievementHandler.addAchievement(`${gym} Gym owner`, `Clear ${gymTitle} 1,000 times`, new ClearGymRequirement(1000, GameConstants.getGymIndex(gym)), 3, region);
             });
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
-                AchievementHandler.addAchievement(`${dungeon} explorer`, 'Clear 10 times', new ClearDungeonRequirement(10, Statistics.getDungeonIndex(dungeon)), 1, region);
-                AchievementHandler.addAchievement(`${dungeon} expert`, 'Clear 100 times', new ClearDungeonRequirement(100, Statistics.getDungeonIndex(dungeon)), 2, region);
-                AchievementHandler.addAchievement(`${dungeon} hermit`, 'Clear 1,000 times', new ClearDungeonRequirement(1000, Statistics.getDungeonIndex(dungeon)), 3, region);
+                AchievementHandler.addAchievement(`${dungeon} explorer`, `Clear ${dungeon} 10 times`, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex(dungeon)), 1, region);
+                AchievementHandler.addAchievement(`${dungeon} expert`, `Clear ${dungeon} 100 times`, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex(dungeon)), 2, region);
+                AchievementHandler.addAchievement(`${dungeon} hermit`, `Clear ${dungeon} 1,000 times`, new ClearDungeonRequirement(1000, GameConstants.getDungeonIndex(dungeon)), 3, region);
             });
         });
 

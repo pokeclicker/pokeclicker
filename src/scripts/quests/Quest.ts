@@ -31,9 +31,15 @@ abstract class Quest {
             this.claimed(true);
             if (this.pointsReward) {
                 App.game.wallet.gainQuestPoints(this.pointsReward);
-                Notifier.notify({ message: `You have completed your quest and claimed ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success });
+                Notifier.notify({
+                    message: `You have completed your quest and claimed ${this.pointsReward} quest points!`,
+                    type: NotificationConstants.NotificationOption.success,
+                });
             } else {
-                Notifier.notify({ message: 'You have completed a quest!', type: GameConstants.NotificationOption.success });
+                Notifier.notify({
+                    message: 'You have completed a quest!',
+                    type: NotificationConstants.NotificationOption.success,
+                });
             }
             GameHelper.incrementObservable(App.game.statistics.questsCompleted);
             return true;
@@ -85,7 +91,13 @@ abstract class Quest {
         this.isCompleted = ko.computed(function() {
             const completed = this.progress() == 1;
             if (!this.autoComplete && completed && !this.notified) {
-                Notifier.notify({ message: `You can complete your quest for ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success, timeout: 5e3, sound: GameConstants.NotificationSound.quest_ready_to_complete, setting: GameConstants.NotificationSetting.quest_ready_to_complete });
+                Notifier.notify({
+                    message: `You can complete your quest for ${this.pointsReward} quest points!`,
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 5e3,
+                    sound: NotificationConstants.NotificationSound.quest_ready_to_complete,
+                    setting: NotificationConstants.NotificationSetting.quest_ready_to_complete,
+                });
                 this.notified = true;
             }
             return completed;

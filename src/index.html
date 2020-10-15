@@ -17,6 +17,7 @@
             <td data-bind="text: level">Lvl</td>
         </tr>
     </script>
+    <script>window.featureFlags = $FEATURE_FLAGS;</script>
 
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
@@ -26,6 +27,9 @@
 
     <!--Sortable-->
     <script src="libs/Sortable.min.js"></script>
+
+    <!-- New module-based code from './modules' -->
+    <script src="scripts/modules.min.js?v=$VERSION"></script>
 
     <!--Minified scripts-->
     <script src="scripts/script.min.js?v=$VERSION"></script>
@@ -507,6 +511,9 @@
 
 <!-- NPC Modal-->
 @import "npcModal.html"
+
+<!-- Pokeball Selector Modal -->
+@import "pokeballSelectorModal.html"
 
 <!-- Damage Calculator Modal -->
 @import "damageCalculatorModal.html"
