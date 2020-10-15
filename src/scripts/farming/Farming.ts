@@ -1,5 +1,3 @@
-/// <reference path="../../declarations/utilities/getArrayOfObservables.d.ts"/>
-
 class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
@@ -21,7 +19,9 @@ class Farming implements Feature {
 
     constructor() {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
-        this.plotList = getArrayOfObservables(this.defaults.plotList);
+        // TODO: Farming will mutate the default plots. We may want to generate these
+        // fresh after TS migration is completed, to avoid potential reset issues
+        this.plotList = this.defaults.plotList;
     }
 
     initialize(): void {
@@ -193,7 +193,7 @@ class Farming implements Feature {
 
         const savedPlots = json['plotList'];
         if (savedPlots == null) {
-            this.plotList = getArrayOfObservables(this.defaults.plotList);
+            this.plotList = this.defaults.plotList;
         } else {
             (savedPlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
                 const plot: Plot = new Plot(false, false, BerryType.None, 0);
