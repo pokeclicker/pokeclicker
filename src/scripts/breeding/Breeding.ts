@@ -9,7 +9,7 @@ class Breeding implements Feature {
     defaults = {
         eggList: [ko.observable(new Egg()), ko.observable(new Egg()), ko.observable(new Egg()), ko.observable(new Egg())],
         eggSlots: 1,
-        queueList: ko.observableArray([]),
+        queueList: [],
         queueSlots: 0,
     };
 
@@ -24,7 +24,7 @@ class Breeding implements Feature {
     constructor() {
         this._eggList = this.defaults.eggList;
         this._eggSlots = ko.observable(this.defaults.eggSlots);
-        this.queueList = this.defaults.queueList;
+        this.queueList = ko.observableArray(this.defaults.queueList);
         this.queueSlots = ko.observable(this.defaults.queueSlots);
 
         this._eggList.forEach((egg) => {
