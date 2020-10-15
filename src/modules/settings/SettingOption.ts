@@ -1,9 +1,3 @@
 export default class SettingOption<T> {
-    text: string;
-    value: T;
-
-    constructor(text: string, value: T) {
-        this.text = text;
-        this.value = value;
-    }
+    constructor(public text: string, public value: T) { }
 }

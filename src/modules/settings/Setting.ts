@@ -5,24 +5,16 @@ import {
 import SettingOption from './SettingOption';
 
 export default class Setting<T> {
-    name: string;
-    displayName: string;
-    options: SettingOption<T>[];
-    defaultValue: T;
     value: T;
     observableValue: KnockoutObservable<T>;
 
     // Leave options array empty to allow all options.
     constructor(
-        name: string,
-        displayName: string,
-        options: SettingOption<T>[],
-        defaultValue: T,
+        public name: string,
+        public displayName: string,
+        public options: SettingOption<T>[],
+        public defaultValue: T,
     ) {
-        this.name = name;
-        this.displayName = displayName;
-        this.options = options;
-        this.defaultValue = defaultValue;
         this.observableValue = ko.observable(this.defaultValue);
         this.set(defaultValue);
     }
