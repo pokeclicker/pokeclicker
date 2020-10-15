@@ -1,7 +1,7 @@
 import Setting from './Setting';
 import SettingOption from './SettingOption';
 
-export default class RangeSetting extends Setting {
+export default class RangeSetting extends Setting<number> {
     constructor(
         name: string,
         displayName: string,
@@ -14,8 +14,8 @@ export default class RangeSetting extends Setting {
             name,
             displayName,
             [
-                new SettingOption(minValue.toString(), minValue),
-                new SettingOption(maxValue.toString(), maxValue),
+                new SettingOption<number>(minValue.toString(), minValue),
+                new SettingOption<number>(maxValue.toString(), maxValue),
             ],
             defaultValue,
         );

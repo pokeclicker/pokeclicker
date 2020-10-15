@@ -1,9 +1,8 @@
-export default class SettingOption {
+export default class SettingOption<T> {
     text: string;
-    value: any;
+    value: T;
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    constructor(text: string, value: any) {
+    constructor(text: string, value: T) {
         this.text = text;
         this.value = value;
     }

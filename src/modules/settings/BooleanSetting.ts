@@ -1,14 +1,14 @@
 import Setting from './Setting';
 import SettingOption from './SettingOption';
 
-export default class BooleanSetting extends Setting {
+export default class BooleanSetting extends Setting<boolean> {
     constructor(name: string, displayName: string, defaultValue: boolean) {
         super(
             name,
             displayName,
             [
-                new SettingOption('On', true),
-                new SettingOption('Off', false),
+                new SettingOption<boolean>('On', true),
+                new SettingOption<boolean>('Off', false),
             ],
             defaultValue,
         );

@@ -4,21 +4,20 @@ import {
 } from 'knockout';
 import SettingOption from './SettingOption';
 
-export default class Setting {
+export default class Setting<T> {
     name: string;
     displayName: string;
-    options: SettingOption[];
-    defaultValue: any;
-    value: any;
-    observableValue: KnockoutObservable<any>;
+    options: SettingOption<T>[];
+    defaultValue: T;
+    value: T;
+    observableValue: KnockoutObservable<T>;
 
     // Leave options array empty to allow all options.
     constructor(
         name: string,
         displayName: string,
-        options: SettingOption[],
-        // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-        defaultValue: any,
+        options: SettingOption<T>[],
+        defaultValue: T,
     ) {
         this.name = name;
         this.displayName = displayName;
@@ -28,8 +27,7 @@ export default class Setting {
         this.set(defaultValue);
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    set(value: any): void {
+    set(value: T): void {
         if (this.validValue(value)) {
             this.value = value;
             this.observableValue(value);
@@ -39,8 +37,7 @@ export default class Setting {
         }
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    validValue(value: any): boolean {
+    validValue(value: T): boolean {
         if (!this.isUnlocked(value)) {
             return false;
         }
@@ -57,14 +54,12 @@ export default class Setting {
         return false;
     }
 
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-    isSelected(value: any): KnockoutComputed<boolean> {
+    isSelected(value: T): KnockoutComputed<boolean> {
         return ko.pureComputed(() => (this.observableValue() === value), this);
     }
 
-    // eslint-disable-next-line max-len
-    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types, @typescript-eslint/no-unused-vars, class-methods-use-this
-    isUnlocked(value: any): boolean {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars, class-methods-use-this
+    isUnlocked(value: T): boolean {
         return true;
     }
 }

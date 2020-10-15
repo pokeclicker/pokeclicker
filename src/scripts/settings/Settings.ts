@@ -4,10 +4,10 @@
 /// <reference path="./SortOptions.ts" />
 
 class Settings {
-    static list: Setting[] = [];
+    static list: Setting<any>[] = [];
 
 
-    static add(setting: Setting) {
+    static add(setting: Setting<any>) {
         if (!this.getSetting(setting.name)) {
             this.list.push(setting);
         }
@@ -30,7 +30,7 @@ class Settings {
 
     }
 
-    static getSetting(name: string): Setting {
+    static getSetting(name: string): Setting<any> {
         for (let i = 0; i < this.list.length; i++) {
             if (this.list[i].name == name) {
                 return this.list[i];
@@ -54,7 +54,7 @@ class Settings {
 
 //Display settings
 Settings.add(
-    new Setting('theme', 'Theme',
+    new Setting<string>('theme', 'Theme',
         [
             new SettingOption('Cerulean', 'cerulean'),
             new SettingOption('Cosmo', 'cosmo'),
@@ -81,14 +81,14 @@ Settings.add(
         'yeti'
     )
 );
-Settings.add(new Setting('breedingDisplay', 'Breeding progress display:',
+Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display:',
     [
         new SettingOption('Percentage', 'percentage'),
         new SettingOption('Step count', 'stepCount'),
     ],
     'percentage'
 ));
-Settings.add(new Setting('shopButtons', 'Shop amount buttons:',
+Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
     [
         new SettingOption('+10, +100', 'original'),
         new SettingOption('+100, +1000', 'bigplus'),
@@ -97,7 +97,7 @@ Settings.add(new Setting('shopButtons', 'Shop amount buttons:',
     'original'
 ));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
-Settings.add(new Setting('backgroundImage', 'Background image:',
+Settings.add(new Setting<string>('backgroundImage', 'Background image:',
     [
         new SettingOption('Day', 'background-day'),
         new SettingOption('Night', 'background-night'),
@@ -105,7 +105,7 @@ Settings.add(new Setting('backgroundImage', 'Background image:',
     ],
     'background-day'
 ));
-Settings.add(new Setting('eggAnimation', 'Egg Hatching Animation:',
+Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation:',
     [
         new SettingOption('None', 'none'),
         new SettingOption('Almost & fully ready', 'almost'),
@@ -113,7 +113,7 @@ Settings.add(new Setting('eggAnimation', 'Egg Hatching Animation:',
     ],
     'full'
 ));
-Settings.add(new Setting('hideHatchery', 'Hide Hatchery Modal:',
+Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
     [
         new SettingOption('Never', 'never'),
         new SettingOption('Egg Slots Full', 'egg'),
@@ -140,12 +140,10 @@ Object.values(NotificationConstants.NotificationSetting).forEach(setting => {
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
-const sortsettings = Object.keys(SortOptionConfigs).map(
-    function(opt) {
-        return new SettingOption(SortOptionConfigs[opt].text, parseInt(opt, 10));
-    }
-);
-Settings.add(new Setting('partySort', 'Sort:',
+const sortsettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('partySort', 'Sort:',
     sortsettings,
     SortOptions.id
 ));
