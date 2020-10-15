@@ -177,10 +177,13 @@ class Plot implements Saveable {
                 case PlotStage.Sprout:
                 case PlotStage.Taller:
                     tooltip = `${formattedTime} until growth`;
+                    break;
                 case PlotStage.Bloom:
                     tooltip = `${formattedTime} until ripe`;
+                    break;
                 case PlotStage.Berry:
                     tooltip = `${formattedTime} until overripe`;
+                    break;
             }
         }
 
