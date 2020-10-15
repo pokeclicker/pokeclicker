@@ -152,8 +152,8 @@ class Breeding implements Feature {
     }
 
     public hasFreeQueueSlot(): boolean {
-        const queueSize = this.queueList().length;
-        return queueSize < this.queueSlots();
+        const slots = this.queueSlots();
+        return slots && this.queueList().length < slots;
     }
 
     public gainEgg(e: Egg) {
