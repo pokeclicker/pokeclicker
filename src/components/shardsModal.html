@@ -20,7 +20,7 @@
                                         <knockout data-bind="text: PokemonType[$index()]"></knockout>
                                         <div class="float-right">
                                             <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
-                                            <knockout data-bind="text: App.game.shards.shardWallet[$index()].toLocaleString('en-US')"></knockout>
+                                            <knockout data-bind="text: App.game.shards.shardWallet[$index()]().toLocaleString('en-US')"></knockout>
                                         </div>
                                     </h3>
                                 </th>
