@@ -120,7 +120,7 @@ class Farming implements Feature {
 
         if (!suppressNotification) {
             Notifier.notify({
-                message: `You earned ${money} pokédollars from the harvest!`,
+                message: `You earned ${money} Pokédollars from the harvest!`,
                 type: NotificationConstants.NotificationOption.success,
             });
         }
