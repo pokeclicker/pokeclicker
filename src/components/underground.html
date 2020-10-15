@@ -45,15 +45,25 @@ style="cursor:default" tabindex="-1">
                     <div class='row'>
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'>Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'>Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
-                        <div class='col-12 col-md-4'>
-                            <button class='btn' data-bind="text: Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ' items found'"></button>
-                            <button id="mine-prospect-result" type="button" class="btn btn-info" data-html="true"
-                                    style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
-                                    data-bind="tooltip: { title: () => Mine.prospectResult() || 'Prospect to get more details', trigger: 'hover', placement:'left' }">
-                                ?
-                            </button>
-                        </div>
-                        <button class='col-12 col-md-4 btn btn-success' onClick='Mine.prospect()'>Prospect (<knockout data-bind="text: Underground.PROSPECT_ENERGY"></knockout> energy)</button>
+                        <button
+                            class="col-12 col-md-4 btn btn-secondary"
+                            id="#mine-prospect-result"
+                            data-bind="
+                                text: Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ' items found',
+                                tooltip: {
+                                    title: () => Mine.prospectResult() || 'Prospect to get more details',
+                                    trigger: 'hover',
+                                    placement:'top',
+                                    html: true,
+                                }
+                            "
+                        >
+                        </button>
+                        <button
+                            class='col-12 col-md-4 btn btn-success'
+                            onClick='Mine.prospect()'
+                            data-bind="disable: Mine.prospectResult() ? true : false"
+                        >Prospect (<knockout data-bind="text: Underground.PROSPECT_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.bomb()'>Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-danger' onClick='Mine.skipLayer(true)'>Skip (<knockout data-bind="text: `${Mine.skipsRemaining()} / ${Mine.maxSkips}`"></knockout>)</button>
                       </div>
