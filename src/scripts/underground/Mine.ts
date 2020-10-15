@@ -315,6 +315,8 @@ class Mine {
         this.skipsRemaining(mine.skipsRemaining ?? this.maxSkips);
 
         Underground.showMine();
+        // Check if completed in case the mine was saved after completion and before creating a new mine
+        setTimeout(Mine.checkCompleted);
     }
 
     public static save(): Record<string, any> {
