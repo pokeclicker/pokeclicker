@@ -114,6 +114,14 @@ Settings.add(new MultipleChoiceSetting('eggAnimation', 'Egg Hatching Animation:'
     ],
     'full'
 ));
+Settings.add(new MultipleChoiceSetting('hideHatchery', 'Hide Hatchery Modal:',
+    [
+        new SettingOption('Never', 'never'),
+        new SettingOption('Egg Slots Full', 'egg'),
+        new SettingOption('Queue Slots Full', 'queue'),
+    ],
+    'queue'
+));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));

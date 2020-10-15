@@ -337,20 +337,46 @@
                         <tr>
                             <!-- ko ifnot: App.game.gameState === GameConstants.GameState.battleFrontier -->
                             <td width="50%">
-                              <span style="display: inline;">Pokémon Attack:
-                                  <span data-bind="text: App.game.party.pokemonAttackObservable().toLocaleString('en-US')"></span>
-                              </span>
+                                <span style="display: inline;">
+                                    Pokémon Attack:
+                                    <span data-bind="
+                                        text: App.game.party.pokemonAttackObservable().toLocaleString('en-US'),
+                                        attr: {
+                                            title: Battle.enemyPokemon()
+                                                ? `${App.game.party.calculatePokemonAttack(
+                                                    Battle.enemyPokemon().type1,
+                                                    Battle.enemyPokemon().type2
+                                                ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
+                                                : null,
+                                        }
+                                    "></span>
+                                </span>
                             </td>
                             <td width="50%">
-                              <span style="display: inline;">Click Attack:
-                                  <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
-                              </span>
+                                <span style="display: inline;">Click Attack:
+                                    <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
+                                </span>
                             </td>
                             <!-- /ko -->
                             <!-- ko if: App.game.gameState === GameConstants.GameState.battleFrontier -->
                             <td width="100%">
-                                <span style="display: inline;">Pokémon Attack:
-                                    <span data-bind="text: App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, true).toLocaleString('en-US');"></span>
+                                <span style="display: inline;">
+                                    Pokémon Attack:
+                                    <span data-bind="
+                                        text: App.game.party.calculatePokemonAttack(
+                                            PokemonType.None,
+                                            PokemonType.None,
+                                            true,
+                                        ).toLocaleString('en-US'),
+                                        attr: {
+                                            title: Battle.enemyPokemon()
+                                                ? `${App.game.party.calculatePokemonAttack(
+                                                    Battle.enemyPokemon().type1,
+                                                    Battle.enemyPokemon().type2
+                                                ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
+                                                : null,
+                                        }
+                                    "></span>
                                 </span>
                             </td>
                             <!-- /ko -->
