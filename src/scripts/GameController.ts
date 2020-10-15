@@ -100,6 +100,23 @@ class GameController {
                 }
 
             },
+            'update': function (element, valueAccessor) {
+                const local = ko.utils.unwrapObservable(valueAccessor());
+                const options = {};
+
+                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+                ko.utils.extend(options, local);
+
+                // Update the config of the tooltip
+                const tooltipData = $(element).data('bs.tooltip');
+                tooltipData.config.title = (options as any).title;
+
+                // If the tooltip is visible, update its text
+                const tooltipInner = tooltipData.tip && tooltipData.tip.querySelector('.tooltip-inner');
+                if (tooltipInner) {
+                    tooltipInner.innerHTML = tooltipData.config.title || '';
+                }
+            },
             options: {
                 placement: 'bottom',
                 trigger: 'click',
