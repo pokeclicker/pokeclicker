@@ -316,7 +316,8 @@ class Mine {
 
         Underground.showMine();
         // Check if completed in case the mine was saved after completion and before creating a new mine
-        setTimeout(Mine.checkCompleted);
+        // TODO: Remove setTimeout after TypeScript module migration is complete. Needed so that `App.game` is available
+        setTimeout(Mine.checkCompleted, 0);
     }
 
     public static save(): Record<string, any> {
