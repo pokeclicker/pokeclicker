@@ -114,7 +114,7 @@ Settings.add(new MultipleChoiceSetting('eggAnimation', 'Egg Hatching Animation:'
     ],
     'full'
 ));
-Settings.add(new MultipleChoiceSetting('hideHatchery', 'Hide Hatchery:',
+Settings.add(new MultipleChoiceSetting('hideHatchery', 'Hide Hatchery Modal:',
     [
         new SettingOption('Never', 'never'),
         new SettingOption('Egg Slots Full', 'egg'),
