@@ -49,7 +49,9 @@ class Player {
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
             for (const key in savedPlayer._itemList) {
-                this._itemList[key] = ko.observable(savedPlayer._itemList[key]);
+                if (this._itemList[key]) {
+                    this._itemList[key](savedPlayer._itemList[key]);
+                }
             }
         }
 

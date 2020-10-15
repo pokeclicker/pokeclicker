@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/utilities/getArrayOfObservables.d.ts"/>
+
 class Shards implements Feature {
     name = 'Shards';
     saveKey = 'shards';
@@ -12,12 +14,12 @@ class Shards implements Feature {
         'shardUpgrades': Array<number>(Shards.nTypes * Shards.nEffects).fill(0),
     };
 
-    public shardWallet: ArrayOfObservables<number>;
-    public shardUpgrades: ArrayOfObservables<number>;
+    public shardWallet: Array<number>;
+    public shardUpgrades: Array<number>;
 
     constructor() {
-        this.shardWallet = new ArrayOfObservables(this.defaults.shardWallet);
-        this.shardUpgrades = new ArrayOfObservables(this.defaults.shardUpgrades);
+        this.shardWallet = getArrayOfObservables(this.defaults.shardWallet);
+        this.shardUpgrades = getArrayOfObservables(this.defaults.shardUpgrades);
     }
 
     public gainShards(amt: number, typeNum: PokemonType) {
@@ -95,8 +97,8 @@ class Shards implements Feature {
 
     fromJSON(json: Record<string, any>) {
         if (json != null) {
-            this.shardWallet = new ArrayOfObservables(json['shardWallet']);
-            this.shardUpgrades = new ArrayOfObservables(json['shardUpgrades']);
+            this.shardWallet = getArrayOfObservables(json['shardWallet']);
+            this.shardUpgrades = getArrayOfObservables(json['shardUpgrades']);
         }
     }
 

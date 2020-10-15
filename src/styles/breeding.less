@@ -35,7 +35,6 @@
   }
 }
 
-
 .breedingListItem {
   text-align: left;
   margin-bottom: 3px;
@@ -142,6 +141,23 @@
 #middle-column .eggSlot {
   flex-basis: 25%;
   max-width: 25%;
+}
+
+#hatcheryQueue {
+  overflow: hidden;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-align: left;
+  .queuePokemon {
+    border-radius: 50%;
+    border: 1px solid rgba(51, 51, 51, 0.5);
+    padding: 0px;
+    width: 23%;
+    display: inline-block;
+    img {
+      width: 100%;
+    }
+  }
 }
 
 @eggMainColors:

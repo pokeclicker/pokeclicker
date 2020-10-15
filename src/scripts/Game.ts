@@ -1,3 +1,5 @@
+/// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
+
 /**
  * Main game class.
  */
@@ -65,7 +67,6 @@ class Game {
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();
         //Safari.load();
-        Save.loadMine();
         Underground.energyTick(Underground.getEnergyRegenTime());
         DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
 

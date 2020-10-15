@@ -22,7 +22,7 @@ class QuestHelper {
         switch (type) {
             case 'DefeatPokemons':
                 region = SeededRand.intBetween(0, player.highestRegion());
-                route = SeededRand.intBetween(GameConstants.RegionRoute[region][0], GameConstants.RegionRoute[region][1]);
+                route = SeededRand.fromArray(Routes.getRoutesByRegion(region)).number;
                 amount = SeededRand.intBetween(100, 500);
                 return new DefeatPokemonsQuest(route, region, amount);
             case 'CapturePokemons':
@@ -93,8 +93,10 @@ class QuestHelper {
     }
 
     public static highestOneShotRoute(region: GameConstants.Region): number {
-        const [first, last] = GameConstants.RegionRoute[region];
-        const attack = Math.max(1, App.game.party.calculatePokemonAttack());
+        const routes = Routes.getRoutesByRegion(region).map(r => r.number);
+        const first = Math.min(...routes);
+        const last = Math.max(...routes);
+        const attack = Math.max(1, App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, false, region, true));
 
         for (let route = last; route >= first; route--) {
             if (PokemonFactory.routeHealth(route, region) < attack) {

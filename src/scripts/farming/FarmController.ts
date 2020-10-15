@@ -33,6 +33,8 @@ class FarmController {
         if (plot.berry === BerryType.None) { return ''; }
         if (plot.stage() <= 1) {
             return 'assets/images/farm/AllTreeSeedIII.png';
+        } else if (plot.stage() === PlotStage.Sprout) {
+            return 'assets/images/farm/AllTreeSproutIII.png';
         }
         return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}III.png`;
     }

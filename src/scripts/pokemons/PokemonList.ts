@@ -2,7 +2,7 @@
 ///<reference path="../party/evolutions/StoneEvolution.ts"/>
 ///<reference path="../party/evolutions/TimedEvolution.ts"/>
 ///<reference path="../party/evolutions/LocationEvolution.ts"/>
-///<reference path="../GameConstants.ts"/>
+///<reference path="../GameConstants.d.ts"/>
 ///<reference path="../party/LevelType.ts"/>
 ///<reference path="PokemonType.ts"/>
 
@@ -12725,7 +12725,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 648,
-            'name': 'Meloetta',
+            'name': 'Meloetta (aria)',
             'type': [PokemonType.Normal, PokemonType.Psychic],
             'eggCycles': 120,
             'levelType': LevelType.slow,
@@ -12742,7 +12742,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 648.1,
-            'name': 'Meloetta (Pirouette)',
+            'name': 'Meloetta (pirouette)',
             'type': [PokemonType.Normal, PokemonType.Fighting],
             'eggCycles': 120,
             'levelType': LevelType.slow,

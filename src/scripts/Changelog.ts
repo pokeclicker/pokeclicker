@@ -29,6 +29,28 @@ class Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // v0.5.7
+    new Changelog(changelogType.UPDATE, 'v0.5.7'),
+    new Changelog(changelogType.NEW, 'Added setting for Hatchery egg ready to hatch animations'),
+    new Changelog(changelogType.NEW, 'More NPCs in towns around Johto and Hoenn'),
+    new Changelog(changelogType.NEW, 'Types displayed in Pokémon statistics modal'),
+    new Changelog(changelogType.NEW, 'Underground Bomb is now upgradable'),
+    new Changelog(changelogType.NEW, 'Buttons added to achievement modal to jump to first and last pages'),
+    new Changelog(changelogType.NEW, 'Number keys (1-9) can now be used to start Pokémon League battles'),
+    new Changelog(changelogType.CHANGE, 'Pokeball selector made smaller, now makes use of a modal'),
+    new Changelog(changelogType.CHANGE, 'Add some spacing to Damage Calculator'),
+    new Changelog(changelogType.CHANGE, 'Hatchery eggs will display in a row of 4 when module is in the middle columnn'),
+    new Changelog(changelogType.CHANGE, 'Always show total levels in Oak Item tooltips'),
+    new Changelog(changelogType.CHANGE, 'Updated images for shop Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Farm images made sharper'),
+    new Changelog(changelogType.FIXED, 'Dungeons with a large amount of Pokémon will no longer hide the start button'),
+    new Changelog(changelogType.FIXED, 'Updated Hatchery sort display'),
+    new Changelog(changelogType.FIXED, 'Notification sounds normalized'),
+    new Changelog(changelogType.FIXED, 'Sprout images displayed in Farm'),
+    new Changelog(changelogType.FIXED, 'Achievement modal pages should now show the correct numbers'),
+    new Changelog(changelogType.FIXED, 'Mine data contained in save data'),
+    new Changelog(changelogType.FIXED, 'Saves should no longer have issues downloading'),
+
     // v0.5.6
     new Changelog(changelogType.UPDATE, 'v0.5.6'),
     new Changelog(changelogType.NEW, 'Added Damage Calculator to Start Menu'),
@@ -46,7 +68,7 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, 'Energy use disabled once you complete a layer in Underground until refreshed'),
     new Changelog(changelogType.CHANGE, 'Added player icon in Dungeons'),
     new Changelog(changelogType.CHANGE, 'Can see your list of eggs and fossils even if you cannot breed them'),
-    new Changelog(changelogType.CHANGE, 'Unobtained pokemon will show as white on dark themes'),
+    new Changelog(changelogType.CHANGE, 'Unobtained Pokémon will show as white on dark themes'),
     new Changelog(changelogType.FIXED, 'Underground will no longer contain multiple deals with the same items'),
     new Changelog(changelogType.FIXED, 'Shop prices should no longer overflow when too large'),
     new Changelog(changelogType.FIXED, 'Discord usernames should no longer affect saves'),
@@ -65,7 +87,7 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, '"Complete the Kanto Pokédex!" achievement now requires all 151 Kanto Pokémon'),
     new Changelog(changelogType.CHANGE, 'Regirock, Regice and Registeel no longer Roaming, now in Sealed Chamber dungeon'),
     new Changelog(changelogType.CHANGE, 'Kyogre and Groudon will only appear in their dungeon after defeating the Hoenn Elite 4'),
-    new Changelog(changelogType.CHANGE, 'If you encounter a new pokemon that is also shiny, the higher tier ball will be selected'),
+    new Changelog(changelogType.CHANGE, 'If you encounter a new Pokémon that is also shiny, the higher tier ball will be selected'),
     new Changelog(changelogType.CHANGE, 'Battle item effect timers now display upto 99 hours'),
     new Changelog(changelogType.CHANGE, 'Phione now obtained by breeding Manaphy'),
     new Changelog(changelogType.FIXED, 'Quest list should only auto refresh if all quest are claimed or it is a new day'),
