@@ -28,18 +28,22 @@ class Plot implements Saveable {
         this._mulchTimeLeft = ko.observable(mulchTimeLeft);
 
         this.formattedTimeLeft = ko.pureComputed(function () {
-            if (this.berry === BerryType.None) { return ''; }
+            if (this.berry === BerryType.None) {
+                return '';
+            }
             for (let i = 0;i < 5;i++) {
                 if (this.age < App.game.farming.berryData[this.berry].growthTime[i]) {
-                    let timeLeft = Math.ceil(App.game.farming.berryData[this.berry].growthTime[i] - this.age);
-                    let growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+                    const timeLeft = Math.ceil(App.game.farming.berryData[this.berry].growthTime[i] - this.age);
+                    const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
                     return GameConstants.formatTime(timeLeft / growthMultiplier);
                 }
             }
         }, this);
 
         this.formattedMulchTimeLeft = ko.pureComputed(function() {
-            if (this.mulch === MulchType.None) { return ''; }
+            if (this.mulch === MulchType.None) {
+                return '';
+            }
             return GameConstants.formatTime(this.mulchTimeLeft);
         }, this);
 
@@ -48,7 +52,9 @@ class Plot implements Saveable {
         }, this);
 
         this.stage = ko.pureComputed(function () {
-            if (this.berry === BerryType.None) { return PlotStage.Seed; }
+            if (this.berry === BerryType.None) {
+                return PlotStage.Seed;
+            }
             for (let i = 0;i < 5;i++) {
                 if (this.age < App.game.farming.berryData[this.berry].growthTime[i]) {
                     return i;
@@ -66,9 +72,9 @@ class Plot implements Saveable {
     update(seconds: number) {
         // Updating Berry
         if (this.berry !== BerryType.None) {
-            let growthTime = seconds * App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+            const growthTime = seconds * App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
     
-            let oldAge = this.age;
+            const oldAge = this.age;
             this.age += growthTime;
     
             if (oldAge <= App.game.farming.berryData[this.berry].growthTime[3] && this.age > App.game.farming.berryData[this.berry].growthTime[3]) {
@@ -102,27 +108,26 @@ class Plot implements Saveable {
      * Handles killing the berry plant
      * @param harvested Whether this death was due to the player harvesting manually, or by withering
      */
-    die(harvested: boolean = false): void {
+    die(harvested = false): void {
         if (harvested) {
             this.berry = BerryType.None;
             this.age = 0;
-        }
-        else {
+        } else {
 
             // Withered Berry plant drops half of the berries
-            let amount = Math.floor(this.harvest() / 2);
+            const amount = Math.floor(this.harvest() / 2);
             if (amount) {
                 App.game.farming.gainBerry(this.berry, amount);
                 this.notifications.push(FarmNotificationType.Dropped);
             }
 
             // Check if berry replants itself
-            let replantChance = App.game.farming.berryData[this.berry].replantRate;
+            const replantChance = App.game.farming.berryData[this.berry].replantRate;
             // TODO: Handle Sprinklotad Oak Item
             if (Math.random() < replantChance) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
-                return; 
+                return;
             }
 
             // Reset plant
@@ -163,26 +168,28 @@ class Plot implements Saveable {
      */
     toolTip(): string {
 
-        let tooltip: string = '';
+        let tooltip = '';
 
         if (this.berry !== BerryType.None) {
-            let formattedTime: string = this.formattedTimeLeft();
-            switch(this.stage()) {
+            const formattedTime = this.formattedTimeLeft();
+            switch (this.stage()) {
                 case PlotStage.Seed:
                 case PlotStage.Sprout:
                 case PlotStage.Taller:
-                    tooltip = formattedTime + ' until growth';
+                    tooltip = `${formattedTime} until growth`;
                 case PlotStage.Bloom:
-                    tooltip = formattedTime + ' until ripe';
+                    tooltip = `${formattedTime} until ripe`;
                 case PlotStage.Berry:
-                    tooltip = formattedTime + ' until overripe';
+                    tooltip = `${formattedTime} until overripe`;
             }
         }
 
         if (this.mulch !== MulchType.None) {
-            let mulchTime: string = this.formattedMulchTimeLeft();
-            if (tooltip) { tooltip += '<br/>'; }
-            tooltip += MulchType[this.mulch].replace('_Mulch','') + ' : ' + mulchTime;
+            const mulchTime = this.formattedMulchTimeLeft();
+            if (tooltip) {
+                tooltip += '<br/>';
+            }
+            tooltip += `${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`;
         }
 
         return tooltip;

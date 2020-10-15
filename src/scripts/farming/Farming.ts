@@ -21,14 +21,14 @@ class Farming implements Feature {
     };
 
     berryList: Array<number>;
-    unlockedBerries: ArrayOfObservables<boolean>;
-    mulchList: ArrayOfObservables<number>;
+    unlockedBerries: Array<boolean>;
+    mulchList: Array<number>;
     plotList: Array<Plot>;
 
     constructor() {
         this.berryList = getArrayOfObservables(this.defaults.berryList);
-        this.unlockedBerries = new ArrayOfObservables(this.defaults.unlockedBerries);
-        this.mulchList = new ArrayOfObservables(this.defaults.mulchList);
+        this.unlockedBerries = getArrayOfObservables(this.defaults.unlockedBerries);
+        this.mulchList = getArrayOfObservables(this.defaults.mulchList);
         this.plotList = getArrayOfObservables(this.defaults.plotList);
     }
 
@@ -67,7 +67,6 @@ class Farming implements Feature {
         this.berryData[BerryType.Grepa]     = new Berry(BerryType.Grepa,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Tamato]    = new Berry(BerryType.Tamato,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         
-        // Fourth Generation
         this.berryData[BerryType.Cornn]     = new Berry(BerryType.Cornn,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Magost]    = new Berry(BerryType.Magost,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Rabuta]    = new Berry(BerryType.Rabuta,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
@@ -78,7 +77,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Durin]     = new Berry(BerryType.Durin,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Belue]     = new Berry(BerryType.Belue,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         
-        // Type Generation
+        // Fourth Generation (Typed)
         this.berryData[BerryType.Occa]      = new Berry(BerryType.Occa,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
@@ -132,20 +131,20 @@ class Farming implements Feature {
 
     getReplantMultiplier(): number {
         let multiplier = 1;
-        //multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
+        multiplier *= 1; //App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
         return multiplier;
     }
 
     getMutationMultiplier(): number {
         let multiplier = 1;
-        //multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprinklotad);
+        multiplier *= 1; //App.game.oakItems.calculateBonus(OakItems.OakItem.Sprinklotad);
         return multiplier;
     }
 
     update(delta: number): void {
         const timeToReduce = delta;
 
-        let notifications = new Set<FarmNotificationType>();
+        const notifications = new Set<FarmNotificationType>();
 
         this.plotList.forEach(plot => {
             plot.update(timeToReduce);
@@ -173,7 +172,7 @@ class Farming implements Feature {
 
     // TODO: Change details of notifier for different notifications
     handleNotification(type: FarmNotificationType): void {
-        switch(type) {
+        switch (type) {
             case FarmNotificationType.Ripe:
                 Notifier.notify({
                     message: 'A berry is ready to harvest!',
@@ -226,10 +225,10 @@ class Farming implements Feature {
     }
 
     unlockPlot() {
-        let index = this.unlockBerryIndex();
+        const index = this.unlockBerryIndex();
         if (this.canBuyPlot()) {
             this.berryList[index] -= this.calculatePlotPrice();
-            this.plotList[index+1].isUnlocked = true;
+            this.plotList[index + 1].isUnlocked = true;
         }
     }
 
@@ -297,7 +296,7 @@ class Farming implements Feature {
 
         App.game.wallet.gainFarmPoints(this.berryData[plot.berry].farmValue);
         
-        let amount = plot.harvest();
+        const amount = plot.harvest();
 
         GameHelper.incrementObservable(App.game.statistics.totalBerriesHarvested, amount);
         GameHelper.incrementObservable(App.game.statistics.berriesHarvested[plot.berry], amount);
@@ -407,7 +406,7 @@ class Farming implements Feature {
 
         const savedUnlockedBerries = json['unlockedBerries'];
         if (this.unlockedBerries == null) {
-            this.unlockedBerries = new ArrayOfObservables(this.defaults.unlockedBerries);
+            this.unlockedBerries = getArrayOfObservables(this.defaults.unlockedBerries);
         } else {
             (savedUnlockedBerries as boolean[]).forEach((value: boolean, index: number) => {
                 this.unlockedBerries[index] = value;
@@ -416,7 +415,7 @@ class Farming implements Feature {
 
         const savedMulches = json['mulchList'];
         if (savedMulches == null) {
-            this.mulchList = new ArrayOfObservables(this.defaults.mulchList);
+            this.mulchList = getArrayOfObservables(this.defaults.mulchList);
         } else {
             (savedMulches as number[]).forEach((value: number, index: number) => {
                 this.mulchList[index] = value;

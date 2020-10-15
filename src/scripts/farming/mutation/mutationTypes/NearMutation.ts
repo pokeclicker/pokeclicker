@@ -16,12 +16,18 @@ class NearMutation extends Mutation {
      * Determines whether this mutation can occur based on the status of the farm plots. Returns plot indices that can mutate
      */
     checkRequirements(): number[] {
-        let plots = [];
+        const plots = [];
         for (let i = 0;i < App.game.farming.plotList.length;i++) {
-            if (!App.game.farming.plotList[i].isUnlocked) { continue; }
-            if (!App.game.farming.plotList[i].isEmpty()) { continue; }
-            let nearPlots = this.findNearPlots(i);
-            if (this.plotsFitRequirements(nearPlots)) { plots.push(i); }
+            if (!App.game.farming.plotList[i].isUnlocked) {
+                continue;
+            }
+            if (!App.game.farming.plotList[i].isEmpty()) {
+                continue;
+            }
+            const nearPlots = this.findNearPlots(i);
+            if (this.plotsFitRequirements(nearPlots)) {
+                plots.push(i);
+            }
         }
         return plots;
     }
@@ -31,13 +37,13 @@ class NearMutation extends Mutation {
      * @param index The plot index
      */
     findNearPlots(index: number): number[] {
-        let plots = [];
+        const plots = [];
 
-        let rowIdx = index % 5;
-        let colIdx = (index - rowIdx) / 5;
+        const rowIdx = index % 5;
+        const colIdx = (index - rowIdx) / 5;
 
-        for (let r = rowIdx-1;r <= rowIdx+1;r++) {
-            for (let c = colIdx-1;c <= colIdx+1;c++) {
+        for (let r = rowIdx - 1;r <= rowIdx + 1;r++) {
+            for (let c = colIdx - 1;c <= colIdx + 1;c++) {
                 if (r < 0 || r > 5 || c < 0 || c > 5) {
                     continue;
                 }

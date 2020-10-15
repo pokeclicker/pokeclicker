@@ -8,7 +8,7 @@ class FarmController {
     public static selectedBerry: BerryType = BerryType.Cheri;
     public static selectedMulch: MulchType = MulchType.Boost_Mulch;
 
-    public static berryListVisible: boolean = true;
+    public static berryListVisible = true;
 
     public static initialize() {
         this.berryListFiltered(Array.from(Array(GameConstants.AMOUNT_OF_BERRY_TYPES).keys()));
@@ -30,7 +30,9 @@ class FarmController {
 
     public static getImage(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
-        if (plot.berry === BerryType.None) { return ''; }
+        if (plot.berry === BerryType.None) {
+            return '';
+        }
         if (plot.stage() <= 1) {
             return 'assets/images/farm/AllTreeSeedIII.png';
         } else if (plot.stage() === PlotStage.Sprout) {
@@ -54,9 +56,8 @@ class FarmController {
             } else {
                 App.game.farming.harvest(index);
             }
-        }
         // Handle Mulches
-        else {
+        } else {
             App.game.farming.addMulch(index, this.selectedMulch);
         }
     }

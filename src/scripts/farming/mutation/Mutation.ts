@@ -26,9 +26,15 @@ abstract class Mutation {
      */
     checkRequirement(index: number, mutationRequirement: MutationReqInterface) {
         const plot = App.game.farming.plotList[index];
-        if (!plot.isUnlocked) { return false; }
-        if (plot.berry !== mutationRequirement.berryType) { return false; }
-        if (mutationRequirement.berryStage !== PlotStage.Seed && plot.stage() !== mutationRequirement.berryStage) { return false; }
+        if (!plot.isUnlocked) {
+            return false;
+        }
+        if (plot.berry !== mutationRequirement.berryType) {
+            return false;
+        }
+        if (mutationRequirement.berryStage !== PlotStage.Seed && plot.stage() !== mutationRequirement.berryStage) {
+            return false;
+        }
         return true;
     }
 
@@ -36,14 +42,18 @@ abstract class Mutation {
      * Update tag for mutations. Returns true if this mutation will occur
      */
     mutate(): boolean {
-        let plots = this.checkRequirements();
-        if (!plots.length) { return false; }
+        const plots = this.checkRequirements();
+        if (!plots.length) {
+            return false;
+        }
 
         let mutated = false;
 
         plots.forEach(function(plot) {
-            let willMutate =  Math.random() < this.mutationChance * App.game.farming.getMutationMultiplier();
-            if (!willMutate) { return; }
+            const willMutate =  Math.random() < this.mutationChance * App.game.farming.getMutationMultiplier();
+            if (!willMutate) {
+                return;
+            }
             this.handleMutation(plot);
             mutated = true;
         }, this);

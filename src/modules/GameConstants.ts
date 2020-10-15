@@ -53,7 +53,16 @@ export const PLATE_VALUE = 100;
 // Breeding
 export const BREEDING_ATTACK_BONUS = 25;
 
+export const AMOUNT_OF_BERRY_TYPES = 67;
 export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
+
+export const MULCH_USE_TIME = 300;
+export const BOOST_MULCH_MULTIPLIER = 1.5;
+export const RICH_MULCH_MULTIPLIER = 2;
+export const SURPRISE_MULCH_MULTIPLIER = 1.5;
+export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
+export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
+export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
 
 // Dungeons
 export const DUNGEON_SIZE = 5;

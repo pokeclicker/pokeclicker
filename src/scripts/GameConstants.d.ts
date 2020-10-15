@@ -47,7 +47,15 @@ namespace GameConstants {
     declare const ITEM_PRICE_DEDUCT: number;
     declare const PLATE_VALUE: number;
     declare const BREEDING_ATTACK_BONUS: number;
+    declare const AMOUNT_OF_BERRY_TYPES: number;
     declare const BerryDistribution: number[];
+    declare const MULCH_USE_TIME: number;
+    declare const BOOST_MULCH_MULTIPLIER: number;
+    declare const RICH_MULCH_MULTIPLIER: number;
+    declare const SURPRISE_MULCH_MULTIPLIER: number;
+    declare const AMAZE_MULCH_GROWTH_MULTIPLIER: number;
+    declare const AMAZE_MULCH_PRODUCE_MULTIPLIER: number;
+    declare const AMAZE_MULCH_MUTATE_MULTIPLIER: number;
     declare const DUNGEON_SIZE: number;
     declare const DUNGEON_CHEST_SHOW: number;
     declare const DUNGEON_MAP_SHOW: number;
