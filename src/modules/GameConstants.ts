@@ -29,7 +29,6 @@ export const TotalPokemonsPerRegion = [
 
 export const ITEM_USE_TIME = 30;
 
-
 export const SECOND = 1000;
 export const MINUTE = 1000 * 60;
 export const HOUR = 1000 * 60 * 60;
@@ -68,17 +67,6 @@ export enum AchievementOption {
     more,
 }
 
-export enum NotificationOption {
-    info,
-    success,
-    warning,
-    danger,
-    primary,
-    secondary,
-    dark,
-    light,
-}
-
 export enum DungeonTile {
     empty,
     enemy,
@@ -90,7 +78,7 @@ export enum DungeonTile {
 export const ROUTE_HELD_ITEM_CHANCE = 512;
 export const DUNGEON_HELD_ITEM_CHANCE = 128;
 
-//Shards from battle
+// Shards from battle
 export const DUNGEON_SHARDS = 3;
 export const DUNGEON_BOSS_SHARDS = 20;
 export const GYM_SHARDS = 5;
@@ -120,25 +108,34 @@ export const LEGAL_WALK_BLOCKS = [
 
 export const SAFARI_OUT_OF_BALLS = 'Game Over!<br>You have run out of safari balls to use.';
 
-//Quests
+// Quests
 
 // Numbers calculated by Dimava assumes ability to 1 shot on high routes and some use oak items,
 //   which are now nerfed slightly until upgraded, so those numbers may need further adjusting
 const questBase = 1; // change this to scale all quest points
-export const DEFEAT_POKEMONS_BASE_REWARD  = questBase * 1;
-export const CAPTURE_POKEMONS_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD / 0.8; // Defeat reward divided by chance to catch (guessed)
-export const GAIN_MONEY_BASE_REWARD       = questBase * 0.0017;  // Dimava
-export const GAIN_TOKENS_BASE_REWARD      = CAPTURE_POKEMONS_BASE_REWARD / 13; // <route number> tokens gained for every capture
-export const HATCH_EGGS_BASE_REWARD       = questBase * 33;      // Dimava
-export const MINE_LAYERS_BASE_REWARD      = questBase * 720;     // Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
-export const SHINY_BASE_REWARD            = questBase * 3000;    // Dimava
-export const USE_OAK_ITEM_BASE_REWARD     = DEFEAT_POKEMONS_BASE_REWARD; // not balanced at all for some oak items
+export const GAIN_MONEY_BASE_REWARD = questBase * 0.0017;
+export const HATCH_EGGS_BASE_REWARD = questBase * 33;
+export const SHINY_BASE_REWARD = questBase * 3000;
 
-export const ACTIVE_QUEST_MULTIPLIER      = 4;
+export const DEFEAT_POKEMONS_BASE_REWARD = questBase * 1;
+
+// Defeat reward divided by chance to catch (guessed)
+export const CAPTURE_POKEMONS_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD / 0.8;
+
+// <route number> tokens gained for every capture
+export const GAIN_TOKENS_BASE_REWARD = CAPTURE_POKEMONS_BASE_REWARD / 13;
+
+// Average of 1/4 squares revealed = 75 energy ~ 12 minutes ~ 720 pokemons
+export const MINE_LAYERS_BASE_REWARD = questBase * 720;
+
+// not balanced at all for some oak items
+export const USE_OAK_ITEM_BASE_REWARD = DEFEAT_POKEMONS_BASE_REWARD;
+
+export const ACTIVE_QUEST_MULTIPLIER = 4;
 
 // Some active quests may be quicker if passive pokemon attack is used instead of active clicking
 // This number is used to estimate time taken in terms of clicks, for reward calculation
-export const QUEST_CLICKS_PER_SECOND      = 5;
+export const QUEST_CLICKS_PER_SECOND = 5;
 
 export const QuestTypes = [
     'DefeatPokemons',
@@ -200,14 +197,14 @@ export enum TypeEffectiveness {
     Immune,
     NotVery,
     Normal,
-    Very
+    Very,
 }
 
 export enum TypeEffectivenessValue {
     Immune = 0,
     NotVery = 0.5,
     Normal = 1,
-    Very = 2
+    Very = 2,
 }
 
 export function humanifyString(str: string): string {
@@ -219,15 +216,13 @@ export function camelCaseToString(str: string): string {
 }
 
 export function formatDate(date: Date): string {
-    return date.toISOString().replace(/T/, ' ').replace(/.\d+Z/,'');
+    return date.toISOString().replace(/T/, ' ').replace(/.\d+Z/, '');
 }
 
-export function formatTime(time: number | Date): string {
-    if (time == 0) {
-        return 'Ready';
-    }
+export function formatTime(input: number | Date): string {
+    if (input === 0) { return 'Ready'; }
 
-    time = parseInt(`${time}`, 10); // don't forget the second param
+    const time = parseInt(`${input}`, 10); // don't forget the second param
     const hours: any = `${Math.floor(time / 3600)}`.padStart(2, '0');
     const minutes: any = `${Math.floor((time - (hours * 3600)) / 60)}`.padStart(2, '0');
     const seconds: any = `${time - (hours * 3600) - (minutes * 60)}`.padStart(2, '0');
@@ -235,42 +230,46 @@ export function formatTime(time: number | Date): string {
     return `${hours}:${minutes}:${seconds}`;
 }
 
-export function formatTimeShortWords(time: number): string {
-    if (isNaN(+time) || time == 0) {
-        return 'now';
-    }
-    time = Math.abs(time);
+export function formatTimeShortWords(input: number): string {
+    // Temporarily recast to number until everything is in modules
+    if (Number.isNaN(Number(input)) || input === 0) { return 'now'; }
+    const time = Math.abs(input);
 
     if (time > DAY) {
         const days = Math.ceil(time / DAY);
-        return `${time % DAY ? '< ' : ''}${days} day${days == 1 ? '' : 's'}`;
+        return `${time % DAY ? '< ' : ''}${days} day${days === 1 ? '' : 's'}`;
     }
     if (time > HOUR) {
         const hours = Math.ceil(time / HOUR);
-        return `${time % HOUR ? '< ' : ''}${hours} hour${hours == 1 ? '' : 's'}`;
+        return `${time % HOUR ? '< ' : ''}${hours} hour${hours === 1 ? '' : 's'}`;
     }
     const minutes = Math.ceil(time / MINUTE);
-    return `${time % MINUTE ? '< ' : ''}${minutes} min${minutes == 1 ? '' : 's'}`;
+    return `${time % MINUTE ? '< ' : ''}${minutes} min${minutes === 1 ? '' : 's'}`;
 }
 
-export function formatNumber(num: number): string {
-    if (isNaN(+num)) {
-        return '0';
-    } else if (num >= 1e9) {
+export function formatNumber(input: number): string {
+    let num = Number(input); // Temporary cast until everything is in modules
+    if (Number.isNaN(+num)) { return '0'; }
+
+    if (num >= 1e9) {
         num = Math.floor(num / 1e8);
         num = num < 100 ? num / 10 : Math.floor(num / 10);
         return `${num}B`;
-    } else if (num >= 1e6) {
+    }
+
+    if (num >= 1e6) {
         num = Math.floor(num / 1e5);
         num = num < 100 ? num / 10 : Math.floor(num / 10);
         return `${num}M`;
-    } else if (num >= 1e3) {
+    }
+
+    if (num >= 1e3) {
         num = Math.floor(num / 1e2);
         num = num < 100 ? num / 10 : Math.floor(num / 10);
         return `${num}K`;
-    } else {
-        return num.toString();
     }
+
+    return num.toString();
 }
 
 export enum Region {
@@ -285,13 +284,6 @@ export enum Region {
     galar = 7,
 }
 
-export const RegionRoute = {
-    0: [1, 25],
-    1: [26, 48],
-    2: [101, 134],
-    3: [201, 230],
-};
-
 export function randomIntBetween(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
@@ -304,6 +296,16 @@ export function clipNumber(num: number, min: number, max: number): number {
     return Math.min(Math.max(num, min), max);
 }
 
+// Return a random element from the array, with an exponential distribution
+// The last element has a 1/ratio chance of being chosen, one before last is 1/(ratio^2), etc
+// The logarithm is clipped up to 0, so the first two elements will have equal chance
+export function expRandomElement<T>(array: T[], ratio: number): T {
+    const r = Math.random();
+    const logr = Math.log(r) / Math.log(ratio);
+    const n = Math.floor(logr + array.length);
+    const x = clipNumber(n, 0, array.length - 1);
+    return array[x];
+}
 
 export const TypeColor = [
     '#A8A77A', // Normal
@@ -333,6 +335,7 @@ export const WaterAreas = {
     1: new Set([40, 41, 'Slowpoke Well']),
     2: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Shoal Cave', 'Seafloor Cavern']),
     3: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
+    4: new Set(['Undella Bay', 'Humilau City']),
 };
 
 export const IceAreas = {
@@ -344,9 +347,10 @@ export const IceAreas = {
 
 export const ForestAreas = {
     0: new Set([25, 'Fuchsia City', 'Viridian Forest']),
-    1: new Set([36, 38, 43,  'Azalea Town', 'Ilex Forest']),
+    1: new Set([36, 38, 43, 'Azalea Town', 'Ilex Forest']),
     2: new Set([119, 'Petalburg Woods']),
     3: new Set([201, 204, 'Eterna Forest', 'Eterna City', 'Fullmoon Island', 'Newmoon Island']),
+    4: new Set(['Lostlorn Forest', 'Pinwheel Forest', 'Giant Chasm', 'Pledge Grove', 'Castelia City']),
 };
 
 export const CaveAreas = {
@@ -354,6 +358,7 @@ export const CaveAreas = {
     1: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
     2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
     3: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
+    4: new Set(['Mistralton Cave', 'Seaside Cave', 'Wellspring Cave', 'Twist Mountain', 'Reversal Mountain', 'Cave of Being', 'Relic Passage', 'Relica Castle', 'Victory Road Unova']),
 };
 
 export const GemCaveAreas = {
@@ -361,6 +366,7 @@ export const GemCaveAreas = {
     1: new Set(['Blackthorn City', 'Mt Silver']),
     2: new Set(['Cave of Origin', 'Sky Pillar']),
     3: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
+    4: new Set(['Chargestone Cave', 'Driftveil City']),
 };
 
 export const PowerPlantAreas = {
@@ -368,6 +374,7 @@ export const PowerPlantAreas = {
     1: new Set(['Tin Tower']),
     2: new Set(['Mauville City']),
     3: new Set(['Sunyshore City']),
+    4: new Set(['Virbank Complex', 'Castelia Sewers', 'Nimbasa City']),
 };
 
 export const MansionAreas = {
@@ -375,6 +382,7 @@ export const MansionAreas = {
     1: new Set(['Olivine City', 'Burned Tower']),
     2: new Set(['Lavaridge Town', 'Petalburg City', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
     3: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
+    4: new Set(['Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
 };
 
 export const GraveyardAreas = {
@@ -382,6 +390,7 @@ export const GraveyardAreas = {
     1: new Set(['Ecruteak City']),
     2: new Set(['Mossdeep City', 'Mt. Pyre']),
     3: new Set(['Hearthome City']),
+    4: new Set(['Virbank City']),
 };
 
 export enum Starter {
@@ -419,6 +428,8 @@ export enum StoneType {
     'Razor_claw',
     'Razor_fang',
     'Prism_scale',
+    'Sachet',
+    'Whipped_dream',
 }
 
 export enum BattleItemType {
@@ -427,7 +438,7 @@ export enum BattleItemType {
     'Lucky_egg' = 'Lucky_egg',
     'Token_collector' = 'Token_collector',
     'Item_magnet' = 'Item_magnet',
-    'Lucky_incense' = 'Lucky_incense'
+    'Lucky_incense' = 'Lucky_incense',
 }
 
 export enum PokemonItemType {
@@ -443,6 +454,7 @@ export enum PokemonItemType {
     'Burmy (plant)',
     'Spiritomb',
     'Cherubi',
+    'Meloetta (pirouette)',
 }
 
 export enum PokeBlockColor {
@@ -451,18 +463,18 @@ export enum PokeBlockColor {
     Gold,
     Purple,
     Gray,
-    White
+    White,
 }
 
 export enum VitaminType {
     Protein,
-    RareCandy
+    RareCandy,
 }
 
 export enum EnergyRestoreSize {
     SmallRestore,
     MediumRestore,
-    LargeRestore
+    LargeRestore,
 }
 
 export enum EggItemType {
@@ -482,15 +494,15 @@ export const EnergyRestoreEffect = {
     LargeRestore: 0.5,
 };
 
-export const KeyToDirection = {
-    37: 'left',
-    38: 'up',
-    39: 'right',
-    40: 'down',
-    65: 'left', //a
-    68: 'right', //d
-    83: 'down', //s
-    87: 'up', //w
+export const KeyCodeToDirection = {
+    ArrowUp: 'up',
+    ArrowLeft: 'left',
+    ArrowDown: 'down',
+    ArrowRight: 'right',
+    KeyW: 'up',
+    KeyA: 'left',
+    KeyS: 'down',
+    KeyD: 'right',
 };
 
 export const FossilToPokemon = {
@@ -501,18 +513,21 @@ export const FossilToPokemon = {
     'Claw Fossil': 'Anorith',
     'Armor Fossil': 'Shieldon',
     'Skull Fossil': 'Cranidos',
+    'Cover Fossil': 'Tirtouga',
+    'Plume Fossil': 'Archen',
 };
 
-//Used for image name
+// Used for image name
 export const PokemonToFossil = {
-    'Omanyte': 'Helix Fossil',
-    'Kabuto': 'Dome Fossil',
-    'Aerodactyl': 'Old Amber',
-    'Lileep': 'Root Fossil',
-    'Anorith': 'Claw Fossil',
-    'Shieldon': 'Armor Fossil',
-    'Cranidos': 'Skull Fossil',
-
+    Omanyte: 'Helix Fossil',
+    Kabuto: 'Dome Fossil',
+    Aerodactyl: 'Old Amber',
+    Lileep: 'Root Fossil',
+    Anorith: 'Claw Fossil',
+    Shieldon: 'Armor Fossil',
+    Cranidos: 'Skull Fossil',
+    Tirtouga: 'Cover Fossil',
+    Archen: 'Plume Fossil',
 };
 
 // For random quest, name matches entry in gymList (created in Gym.ts)
@@ -580,12 +595,50 @@ export const SinnohGyms = [
     'Champion Cynthia',
 ];
 
+export const UnovaGyms = [
+    'Aspertia City',
+    'Virbank City',
+    'Castelia City',
+    'Nimbasa City',
+    'Driftveil City',
+    'Mistralton City',
+    'Opelucid City',
+    'Humilau City',
+    'Elite Shauntal',
+    'Elite Marshal',
+    'Elite Grimsley',
+    'Elite Caitlin',
+    'Champion Iris',
+];
+
+export const KalosGyms = [
+    'Santalune City',
+    'Cyllage City',
+    'Shalour City',
+    'Coumarine City',
+    'Lumiose City',
+    'Laverre City',
+    'Anistar City',
+    'Snowbelle City',
+    'Elite Malva',
+    'Elite Siebold',
+    'Elite Wikstrom',
+    'Elite Drasna',
+    'Champion Diantha',
+];
+
 export const RegionGyms = [
     KantoGyms,
     JohtoGyms,
     HoennGyms,
     SinnohGyms,
+    UnovaGyms,
+    KalosGyms,
 ];
+
+export function getGymIndex(gym: string): number {
+    return RegionGyms.flat().findIndex((g) => g === gym);
+}
 
 export const KantoDungeons = [
     'Viridian Forest',
@@ -684,18 +737,76 @@ export const SinnohDungeons = [
     'Hall of Origin',
 ];
 
+export const UnovaDungeons = [
+    'Pledge Grove',
+    'Floccesy Ranch',
+    'Virbank Complex', // Optional dungeon, contains no unique Pokémon, safe to scrap
+    'Liberty Garden',
+    'Castelia Sewers',
+    'Relic Passage',
+    'Desert Resort', // Should really be a route
+    'Relic Castle',
+    'Lostlorn Forest',
+    'Chargestone Cave',
+    'Mistralton Cave',
+    'Celestial Tower',
+    'Reversal Mountain',
+    'Strange House', // Optional dungeon, contains no unique Pokémon, safe to scrap
+    'Undella Bay', // Should really be a route
+    'Seaside Cave',
+    'Giant Chasm',
+    'Abundant Shrine',
+    'Cave of Being', // Contains gen 4 trio only
+    'Victory Road Unova',
+    'Twist Mountain',
+    'Dragonspiral Tower',
+    'Moor of Icirrus',
+    'Pinwheel Forest',
+    'Wellspring Cave', // Optional dungeon, contains no unique Pokémon, safe to scrap
+    'Dreamyard',
+    'P2 Laboratory',
+];
+
+export const KalosDungeons = [
+    'Santalune Forest',
+    'Parfum Palace',
+    'Connecting Cave',
+    'Glittering Cave',
+    'Reflection Cave',
+    // 'Tower of Mastery',
+    'Azure Bay', // Should really be a route
+    // 'Sea Spirit's Den',
+    // 'Kalos Power Plant',
+    // 'Pokéball Factory',
+    'Lost Hotel',
+    'Frost Cavern',
+    'Team Flare Secret HQ',
+    'Terminus Cave',
+    'Pokémon Village',
+    'Victory Road Kalos',
+    // 'Unknown Dungeon',
+];
+
 export const RegionDungeons = [
     KantoDungeons,
     JohtoDungeons,
     HoennDungeons,
     SinnohDungeons,
+    UnovaDungeons,
+    KalosDungeons,
 ];
+
+export function getDungeonIndex(dungeon: string): number {
+    return RegionDungeons.flat().findIndex((d) => d === dungeon);
+}
 
 export const StartingTowns = [
     'Pallet Town',
     'New Bark Town',
     'Littleroot Town',
     'Twinleaf Town',
+    'Aspertia City',
+    'Vaniville Town',
 ];
 
 export const DockTowns = [
@@ -703,4 +814,6 @@ export const DockTowns = [
     'Olivine City',
     'Slateport City',
     'Canalave City',
+    'Castelia City',
+    'Coumarine City',
 ];

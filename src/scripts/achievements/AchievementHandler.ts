@@ -232,13 +232,11 @@ class AchievementHandler {
          */
         GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none).forEach(region => {
             // Routes
-            if (GameConstants.RegionRoute[region]) {
-                for (let i = GameConstants.RegionRoute[region][0]; i <= GameConstants.RegionRoute[region][1]; i++) {
-                    AchievementHandler.addAchievement(`Route ${i} traveler`, `Defeat 100 Pokémon on route ${i}`, new RouteKillRequirement(100, i), 1, region);
-                    AchievementHandler.addAchievement(`Route ${i} explorer`, `Defeat 1,000 Pokémon on route ${i}`, new RouteKillRequirement(1000, i), 2, region);
-                    AchievementHandler.addAchievement(`Route ${i} conqueror`, `Defeat 10,000 Pokémon on route ${i}`, new RouteKillRequirement(10000, i), 3, region);
-                }
-            }
+            Routes.getRoutesByRegion(region).forEach(route => {
+                AchievementHandler.addAchievement(`Route ${route.number} traveler`, `Defeat 100 Pokémon on route ${route.number}`, new RouteKillRequirement(100, route.number), 1, region);
+                AchievementHandler.addAchievement(`Route ${route.number} explorer`, `Defeat 1,000 Pokémon on route ${route.number}`, new RouteKillRequirement(1000, route.number), 2, region);
+                AchievementHandler.addAchievement(`Route ${route.number} conqueror`, `Defeat 10,000 Pokémon on route ${route.number}`, new RouteKillRequirement(10000, route.number), 3, region);
+            });
             // Gyms
             GameConstants.RegionGyms[region]?.forEach(gym => {
                 const gymTitle: string = gym.includes('Elite') || gym.includes('Champion') ? gym : `${gym} Gym`;
