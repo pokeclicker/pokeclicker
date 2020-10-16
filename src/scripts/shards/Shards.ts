@@ -8,6 +8,24 @@ class Shards implements Feature {
         GameHelper.enumLength(PokemonType) - 1;
     public static readonly nEffects: number =
         GameHelper.enumLength(GameConstants.TypeEffectiveness);
+        
+    private static readonly invalidUpgrades: Map<PokemonType, Set<GameConstants.TypeEffectiveness>> =
+        
+        new Map([
+            // Immune
+            [PokemonType.Fire, new Set([GameConstants.TypeEffectiveness.Immune])],
+            [PokemonType.Water, new Set([GameConstants.TypeEffectiveness.Immune])],
+            [PokemonType.Grass, new Set([GameConstants.TypeEffectiveness.Immune])],
+            [PokemonType.Ice, new Set([GameConstants.TypeEffectiveness.Immune])],
+            [PokemonType.Flying, new Set([GameConstants.TypeEffectiveness.Immune])],
+            [PokemonType.Bug, new Set([GameConstants.TypeEffectiveness.Immune])],
+            [PokemonType.Rock, new Set([GameConstants.TypeEffectiveness.Immune])],
+            [PokemonType.Dark, new Set([GameConstants.TypeEffectiveness.Immune])],
+            [PokemonType.Steel, new Set([GameConstants.TypeEffectiveness.Immune])],
+            [PokemonType.Fairy, new Set([GameConstants.TypeEffectiveness.Immune])],
+            // Super Effective
+            [PokemonType.Normal, new Set([GameConstants.TypeEffectiveness.Very])],
+        ]);
 
     defaults = {
         'shardWallet': Array<number>(Shards.nTypes).fill(0),
@@ -70,6 +88,23 @@ class Shards implements Feature {
             this.shardUpgrades[typeNum * Shards.nEffects + effectNum] ++;
         }
     }
+    
+    private refundShardUpgrade(
+        typeNum: PokemonType,
+        effectNum: GameConstants.TypeEffectiveness
+    ) {
+        while (this.shardUpgrades[typeNum * Shards.nEffects + effectNum] > 0) {
+            this.shardUpgrades[typeNum * Shards.nEffects + effectNum]--;
+            this.gainShards(this.getShardUpgradeCost(typeNum, effectNum), typeNum);
+        }
+    }
+    
+    public isInvalidUpgrade(
+        typeNum: PokemonType,
+        effectNum: GameConstants.TypeEffectiveness
+    ) {
+        return Shards.invalidUpgrades.has(typeNum) && Shards.invalidUpgrades.get(typeNum).has(effectNum);
+    }
 
     public getShardUpgrade(
         typeNum: PokemonType,
@@ -99,6 +134,14 @@ class Shards implements Feature {
         if (json != null) {
             this.shardWallet = getArrayOfObservables(json['shardWallet']);
             this.shardUpgrades = getArrayOfObservables(json['shardUpgrades']);
+            // Refund invalid upgrades
+            for (let t = 0; t < Shards.nTypes; t += 1) {
+                for (let effect = 0; effect < Shards.nEffects; effect += 1) {
+                    if (this.isInvalidUpgrade(t, effect)) {
+                        this.refundShardUpgrade(t, effect);
+                    }
+                }
+            }
         }
     }
 
