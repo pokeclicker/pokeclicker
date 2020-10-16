@@ -1,5 +1,3 @@
-/// <reference path="../../declarations/utilities/getArrayOfObservables.d.ts"/>
-
 class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
@@ -16,12 +14,14 @@ class Farming implements Feature {
         }),
     };
 
-    berryList: Array<number>;
+    berryList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
 
     constructor() {
-        this.berryList = getArrayOfObservables(this.defaults.berryList);
-        this.plotList = getArrayOfObservables(this.defaults.plotList);
+        this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
+        // TODO: Farming will mutate the default plots. We may want to generate these
+        // fresh after TS migration is completed, to avoid potential reset issues
+        this.plotList = this.defaults.plotList;
     }
 
     initialize(): void {
@@ -88,7 +88,7 @@ class Farming implements Feature {
             return;
         }
 
-        this.berryList[berry] -= 1;
+        GameHelper.incrementObservable(this.berryList[berry], -1);
         plot.berry = berry;
         plot.timeLeft = this.berryData[berry].harvestTime;
         plot.notified = false;
@@ -120,7 +120,7 @@ class Farming implements Feature {
 
         if (!suppressNotification) {
             Notifier.notify({
-                message: `You earned ${money} money from the harvest!`,
+                message: `You earned ${money} Pokédollars from the harvest!`,
                 type: NotificationConstants.NotificationOption.success,
             });
         }
@@ -141,7 +141,7 @@ class Farming implements Feature {
 
         if (total > 0) {
             Notifier.notify({
-                message: `You earned ${total} money from the harvest!`,
+                message: `You earned ${total} Pokédollars from the harvest!`,
                 type: NotificationConstants.NotificationOption.success,
             });
         }
@@ -160,11 +160,11 @@ class Farming implements Feature {
     }
 
     gainBerry(berry: BerryType, amount = 1) {
-        this.berryList[berry] += Math.floor(amount);
+        GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
     }
 
     hasBerry(berry: BerryType) {
-        return this.berryList[berry] > 0;
+        return this.berryList[berry]() > 0;
     }
 
     canAccess(): boolean {
@@ -173,7 +173,7 @@ class Farming implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            berryList: this.berryList.map(x => x),
+            berryList: this.berryList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
         };
     }
@@ -184,17 +184,16 @@ class Farming implements Feature {
         }
 
         const savedBerries = json['berryList'];
-        if (savedBerries == null) {
-            this.berryList = getArrayOfObservables(this.defaults.berryList);
-        } else {
+        this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
+        if (savedBerries !== null) {
             (savedBerries as number[]).forEach((value: number, index: number) => {
-                this.berryList[index] = value;
+                this.berryList[index](value);
             });
         }
 
         const savedPlots = json['plotList'];
         if (savedPlots == null) {
-            this.plotList = getArrayOfObservables(this.defaults.plotList);
+            this.plotList = this.defaults.plotList;
         } else {
             (savedPlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
                 const plot: Plot = new Plot(false, false, BerryType.None, 0);

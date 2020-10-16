@@ -1,5 +1,3 @@
-/// <reference path="../../declarations/utilities/getArrayOfObservables.d.ts"/>
-
 class Shards implements Feature {
     name = 'Shards';
     saveKey = 'shards';
@@ -14,12 +12,12 @@ class Shards implements Feature {
         'shardUpgrades': Array<number>(Shards.nTypes * Shards.nEffects).fill(0),
     };
 
-    public shardWallet: Array<number>;
-    public shardUpgrades: Array<number>;
+    public shardWallet: Array<KnockoutObservable<number>>;
+    public shardUpgrades: Array<KnockoutObservable<number>>;
 
     constructor() {
-        this.shardWallet = getArrayOfObservables(this.defaults.shardWallet);
-        this.shardUpgrades = getArrayOfObservables(this.defaults.shardUpgrades);
+        this.shardWallet = this.defaults.shardWallet.map((v) => ko.observable(v));
+        this.shardUpgrades = this.defaults.shardUpgrades.map((v) => ko.observable(v));
     }
 
     public gainShards(amt: number, typeNum: PokemonType) {
@@ -30,8 +28,8 @@ class Shards implements Feature {
         if (typeNum == PokemonType.None) {
             return;
         }
-        this.shardWallet[typeNum] += amt;
         if (amt > 0) {
+            GameHelper.incrementObservable(this.shardWallet[typeNum], amt);
             GameHelper.incrementObservable(App.game.statistics.totalShardsGained, amt);
             GameHelper.incrementObservable(App.game.statistics.shardsGained[typeNum], amt);
         }
@@ -57,7 +55,7 @@ class Shards implements Feature {
         effectNum: GameConstants.TypeEffectiveness
     ): boolean {
         const lessThanMax = !this.hasMaxUpgrade(typeNum, effectNum);
-        const hasEnoughShards = this.shardWallet[typeNum] >= this.getShardUpgradeCost(typeNum, effectNum);
+        const hasEnoughShards = this.shardWallet[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
         return lessThanMax && hasEnoughShards;
     }
 
@@ -67,7 +65,7 @@ class Shards implements Feature {
     ) {
         if (this.canBuyShardUpgrade(typeNum, effectNum)) {
             this.gainShards(-this.getShardUpgradeCost(typeNum, effectNum), typeNum);
-            this.shardUpgrades[typeNum * Shards.nEffects + effectNum] ++;
+            GameHelper.incrementObservable(this.shardUpgrades[typeNum * Shards.nEffects + effectNum]);
         }
     }
 
@@ -75,7 +73,7 @@ class Shards implements Feature {
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): number {
-        return this.shardUpgrades[typeNum * Shards.nEffects + effectNum];
+        return this.shardUpgrades[typeNum * Shards.nEffects + effectNum]();
     }
 
     initialize() {
@@ -90,15 +88,19 @@ class Shards implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            'shardWallet': this.shardWallet.map(x => x),
-            'shardUpgrades': this.shardUpgrades.map(x => x),
+            'shardWallet': this.shardWallet.map(ko.unwrap),
+            'shardUpgrades': this.shardUpgrades.map(ko.unwrap),
         };
     }
 
     fromJSON(json: Record<string, any>) {
         if (json != null) {
-            this.shardWallet = getArrayOfObservables(json['shardWallet']);
-            this.shardUpgrades = getArrayOfObservables(json['shardUpgrades']);
+            json['shardWallet'].forEach((v, i) => {
+                this.shardWallet[i](v);
+            });
+            json['shardUpgrades'].forEach((v, i) => {
+                this.shardUpgrades[i](v);
+            });
         }
     }
 

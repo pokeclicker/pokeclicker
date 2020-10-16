@@ -45,15 +45,13 @@ class GymRunner {
     }
 
     private static hideGif() {
-        $('#gymCountdownView').fadeOut(300);
-        $('#gymGo').hide();
+        $('#gymCountdown').hide();
     }
 
     public static resetGif() {
-        const $img = $('#gymGo');
-        $img.show();
+        $('#gymCountdown').show();
         setTimeout(function () {
-            $img.attr('src', 'assets/gifs/go.gif');
+            $('#gymGo').attr('src', 'assets/gifs/go.gif');
         }, 0);
     }
 

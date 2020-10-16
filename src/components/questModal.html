@@ -19,7 +19,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.questPoint], 'currency': GameConstants.Currency.questPoint}}"></span>
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.questPoint](), 'currency': GameConstants.Currency.questPoint}}"></span>
                 </div>
 
             </div>
