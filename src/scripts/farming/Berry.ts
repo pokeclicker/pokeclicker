@@ -15,8 +15,8 @@ class Berry {
     public flavors: BerryFlavor[];
     public color: BerryColor;
 
-    constructor(type: BerryType, growthTime: number[], harvestAmount: number,
-        replantRate: number, farmValue: number,
+    constructor(type: BerryType, growthTime: number[],
+        harvestAmount: number, replantRate: number, farmValue: number,
         flavors: number[], color: BerryColor) {
         this.type = type;
         this.growthTime = growthTime;

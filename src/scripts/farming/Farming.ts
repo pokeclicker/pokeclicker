@@ -38,29 +38,29 @@ class Farming implements Feature {
         //#region Berry Data
 
         // First Generation
-        this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16],
-            1, .5, 6,
+        this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16], //[5,10,20,30,60] TODO: Change back after testing
+            2, .5, 6,
             [10, 0, 0, 0, 0], BerryColor.Red);
-        this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5,15,25,40,120],
-            1, .4, 8,
+        this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5,15,25,40,80],
+            3, .5, 8,
             [0, 10, 0, 0, 0], BerryColor.Purple);
-        this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10,35,50,60,140],
-            2, .3, 10,
+        this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10,35,50,60,120],
+            3, .4, 10,
             [0, 0, 10, 0, 0], BerryColor.Pink);
-        this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15,30,45,80,180],
-            1, .5, 14,
+        this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15,30,45,80,160],
+            4, .4, 14,
             [0, 0, 0, 10, 0], BerryColor.Green);
-        this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10,40,50,110,210],
-            1, .2, 18,
+        this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10,40,50,110,220],
+            4, .3, 18,
             [0, 0, 0, 0, 10], BerryColor.Yellow);
         this.berryData[BerryType.Leppa]     = new Berry(BerryType.Leppa,    [100,120,140,240,480],
-            3, .2, 30,
+            5, .3, 30,
             [10, 0, 10, 10, 10], BerryColor.Red);
-        this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120,180,240,300,520],
-            5, .1, 35,
+        this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120,180,240,300,600],
+            6, .2, 35,
             [10, 10, 0, 10, 10], BerryColor.Blue);
-        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,900],
-            5, .1, 60,
+        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,1200],
+            8, .2, 60,
             [0, 10, 10, 10, 10], BerryColor.Yellow);
         
         // Second Generation
@@ -92,7 +92,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Mago]      = new Berry(BerryType.Mago,     [5,10,15,20,40],
             1, .1, 60,
             [0, 0, 15, 0, 0], BerryColor.Pink); // TODO: Set properties
-        this.berryData[BerryType.Aquav]     = new Berry(BerryType.Aquav,    [5,10,15,20,40],
+        this.berryData[BerryType.Aguav]     = new Berry(BerryType.Aguav,    [5,10,15,20,40],
             1, .1, 60,
             [0, 0, 0, 15, 0], BerryColor.Green); // TODO: Set properties
         this.berryData[BerryType.Iapapa]    = new Berry(BerryType.Iapapa,   [5,10,15,20,40],
@@ -270,8 +270,6 @@ class Farming implements Feature {
         //#region Second Generation
 
         // Persim
-
-        /*
         this.mutations.push(new NearBerryMutation(.0001, BerryType.Persim,
             [
                 {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
@@ -325,7 +323,6 @@ class Farming implements Feature {
             [0, 0, 0, 0, 25]));
 
         // Lum
-
         this.mutations.push(new NearBerryMutation(.0001, BerryType.Lum,
             [
                 {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
@@ -337,8 +334,7 @@ class Farming implements Feature {
                 {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
             ]));
-        */
-
+        
         //#endregion
 
         //#region Third Generation
