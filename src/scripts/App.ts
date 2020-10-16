@@ -29,6 +29,7 @@ class App {
                 new OakItems([20, 50, 100]),
                 new Party(),
                 new Shards(),
+                new Underground(),
                 new Farming(),
                 new LogBook(),
                 new RedeemableCodes(),
