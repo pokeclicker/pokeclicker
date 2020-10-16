@@ -5,8 +5,9 @@ class Farming implements Feature {
     saveKey = 'farming';
 
     berryData: Berry[] = [];
-
     mutations: Mutation[] = [];
+
+    counter = 0;
 
     readonly AMOUNT_OF_PLOTS = 25;
     readonly AMOUNT_OF_MULCHES = 4;
@@ -33,11 +34,14 @@ class Farming implements Feature {
     }
 
     initialize(): void {
+
+        //#region Berry Data
+
         // First Generation
         this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16], 1, .5, 6);
         this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5,15,25,40,120], 1, .4, 8);
         this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10,35,50,60,140], 2, .3, 10);
-        this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15,30,45,60,180], 1, .5, 14);
+        this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15,30,45,80,180], 1, .5, 14);
         this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10,40,50,110,210], 1, .2, 18);
         this.berryData[BerryType.Leppa]     = new Berry(BerryType.Leppa,    [100,120,140,240,480], 3, .2, 30);
         this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120,180,240,300,520], 5, .1, 35);
@@ -114,12 +118,80 @@ class Farming implements Feature {
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
     
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-
         
-        // Mutations
+        //#endregion
+        
+        //#region Mutations
+
         // TODO: Setup mutations for every berry
         // TEMPORARY MUTATION FOR TESTING
-        this.mutations.push(new NearMutation(1, BerryType.Cheri, [{berryType: BerryType.Cheri, berryStage: PlotStage.Seed}]));
+        //this.mutations.push(new NearMutation(1, BerryType.Cheri, [{berryType: BerryType.Cheri, berryStage: PlotStage.Seed}]));
+
+        
+        //#region Second Generation
+
+        // Persim
+        this.mutations.push(new NearMutation(.0001, BerryType.Persim,
+            [
+                {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
+            ]));
+        // Razz
+        this.mutations.push(new NearMutation(.0001, BerryType.Razz,
+            [
+                {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
+            ]));
+        // Bluk
+        this.mutations.push(new NearMutation(.0001, BerryType.Bluk,
+            [
+                {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
+            ]));
+        // Nanab
+        this.mutations.push(new NearMutation(.0001, BerryType.Nanab,
+            [
+                {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
+            ]));
+        // Wepear
+        this.mutations.push(new NearMutation(.0001, BerryType.Wepear,
+            [
+                {berryType: BerryType.Rawst, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
+            ]));
+        // Pinap
+        this.mutations.push(new NearMutation(.0001, BerryType.Pinap,
+            [
+                {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
+            ]));
+
+        
+        // TODO: Flavors
+
+        // Lum
+        this.mutations.push(new NearMutation(.0001, BerryType.Lum,
+            [
+                {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Rawst, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
+            ]));
+
+        //#endregion
+
+        //#region Third Generation
+
+        
+
+        //#endregion
+
+        //#endregion
 
     }
 
@@ -154,14 +226,18 @@ class Farming implements Feature {
             }
         });
 
-        this.mutations.forEach(mutation => {
-            if (mutation.mutate()) {
-                notifications.add(FarmNotificationType.Mutated);
-            }
-        });
+        this.counter += GameConstants.TICK_TIME;
+        if (this.counter >= GameConstants.MUTATION_TICK) {
+            this.mutations.forEach(mutation => {
+                // TODO: Handle Squirtbottle Oak Item
+                if (mutation.mutate()) {
+                    notifications.add(FarmNotificationType.Mutated);
+                }
+            });
+            this.counter = 0;
+        }
 
-        // TODO: Handle Mutations
-        // TODO: Handle Squirtbottle Oak Item
+        
 
         if (notifications.size) {
             notifications.forEach(function(n) {

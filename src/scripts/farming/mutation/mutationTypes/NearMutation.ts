@@ -31,29 +31,7 @@ class NearMutation extends Mutation {
         }
         return plots;
     }
-
-    /**
-     * Finds the plot indices that are around the plot in a 3x3 square
-     * @param index The plot index
-     */
-    findNearPlots(index: number): number[] {
-        const plots = [];
-
-        const rowIdx = index % 5;
-        const colIdx = (index - rowIdx) / 5;
-
-        for (let r = rowIdx - 1;r <= rowIdx + 1;r++) {
-            for (let c = colIdx - 1;c <= colIdx + 1;c++) {
-                if (r < 0 || r > 5 || c < 0 || c > 5) {
-                    continue;
-                }
-                plots.push(c * 5 + r);
-            }
-        }
-
-        return plots;
-    }
-
+    
     /**
      * Determines if the plots near fit the requirements
      * @param plots The list of nearby plots
@@ -72,7 +50,7 @@ class NearMutation extends Mutation {
      */
     handleMutation(index: number): void {
         const plot = App.game.farming.plotList[index];
-        plot.berry = BerryType.Cheri;
+        plot.berry = this.mutatedBerry;
         plot.age = 0;
         plot.notifications = [];
     }

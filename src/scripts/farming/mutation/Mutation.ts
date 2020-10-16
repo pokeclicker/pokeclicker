@@ -61,5 +61,32 @@ abstract class Mutation {
         return mutated;
     }
 
+    /**
+     * Finds the plot indices that are around the plot in a 3x3 square
+     * @param index The plot index
+     * @param filter An optional filter callback for filtering out indices
+     */
+    findNearPlots(index: number, filter?: (n: number) => boolean): number[] {
+        const plots = [];
+
+        const rowIdx = index % 5;
+        const colIdx = (index - rowIdx) / 5;
+
+        for (let r = rowIdx - 1;r <= rowIdx + 1;r++) {
+            for (let c = colIdx - 1;c <= colIdx + 1;c++) {
+                if (r < 0 || r > 5 || c < 0 || c > 5) {
+                    continue;
+                }
+                const idx = c * 5 + r;
+                if (filter && !filter(idx)) {
+                    continue;
+                }
+                plots.push(idx);
+            }
+        }
+
+        return plots;
+    }
+
 
 }
