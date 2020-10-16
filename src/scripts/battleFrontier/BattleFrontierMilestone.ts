@@ -3,7 +3,7 @@ class BattleFrontierMilestone {
         public stage: number,
         public rewardFunction: () => void,
         public image: string = null,
-        private _description?: string,
+        private _description?: string
     ) {}
 
     gain () {

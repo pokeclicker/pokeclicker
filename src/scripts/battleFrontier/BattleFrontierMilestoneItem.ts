@@ -17,6 +17,6 @@ class BattleFrontierMilestoneItem extends BattleFrontierMilestone {
     }
 
     get description() {
-        return `${this.amount} x ${ItemList[this.itemName].displayName}`
+        return `${this.amount} x ${ItemList[this.itemName].displayName}`;
     }
 }
