@@ -37,7 +37,7 @@ class Farming implements Feature {
 
         //#region Berry Data
 
-        // First Generation
+        //#region First Generation
         this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16], //[5,10,20,30,60] TODO: Change back after testing
             2, .5, 6,
             [10, 0, 0, 0, 0], BerryColor.Red);
@@ -62,8 +62,9 @@ class Farming implements Feature {
         this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,1200],
             8, .2, 60,
             [0, 10, 10, 10, 10], BerryColor.Yellow);
+        //#endregion
         
-        // Second Generation
+        //#region Second Generation
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [2,4,6,8,16],
             1, .1, 60,
             [10, 10, 10, 0, 10], BerryColor.Pink); // TODO: Set properties
@@ -102,8 +103,9 @@ class Farming implements Feature {
         this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [5,10,15,20,40],
             1, .1, 60,
             [10, 10, 10, 10, 0], BerryColor.Green); // TODO: Set properties
-        
-        // Third Generation
+        //#endregion
+
+        //#region Third Generation
         this.berryData[BerryType.Pomeg]     = new Berry(BerryType.Pomeg,    [5,10,15,20,40],
             1, .1, 60,
             [10, 0, 10, 10, 0], BerryColor.Red); // TODO: Set properties
@@ -150,8 +152,9 @@ class Farming implements Feature {
         this.berryData[BerryType.Belue]     = new Berry(BerryType.Belue,    [5,10,15,20,40],
             1, .1, 60,
             [10, 0, 0, 0, 30], BerryColor.Purple); // TODO: Set properties
-        
-        // Fourth Generation (Typed)
+        //#endregion
+
+        //#region Fourth Generation (Typed)
         this.berryData[BerryType.Occa]      = new Berry(BerryType.Occa,     [5,10,15,20,40],
             1, .1, 60,
             [15, 0, 10, 0, 0], BerryColor.Red); // TODO: Set properties
@@ -206,8 +209,9 @@ class Farming implements Feature {
         this.berryData[BerryType.Roseli]    = new Berry(BerryType.Roseli,   [5,10,15,20,40],
             1, .1, 60,
             [0, 0, 25, 10, 0], BerryColor.Pink); // TODO: Set properties
+        //#endregion
 
-        // Fifth Generation
+        //#region Fifth Generation
         this.berryData[BerryType.Liechi]    = new Berry(BerryType.Liechi,   [5,10,15,20,40],
             1, .1, 60,
             [30, 10, 30, 0, 0], BerryColor.Red); // TODO: Set properties
@@ -252,7 +256,8 @@ class Farming implements Feature {
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40],
             1, .1, 60,
             [40, 10, 0, 0, 0], BerryColor.Purple); // TODO: Set properties
-        
+        //#endregion
+
         //#endregion
         
         //#region Mutations
@@ -339,7 +344,13 @@ class Farming implements Feature {
 
         //#region Third Generation
 
-        
+        //#endregion
+
+        //#region Fourth Generation
+
+        //#endregion
+
+        //#region Fifth Generation
 
         //#endregion
 
@@ -388,8 +399,6 @@ class Farming implements Feature {
             });
             this.counter = 0;
         }
-
-        
 
         if (notifications.size) {
             notifications.forEach(function(n) {
