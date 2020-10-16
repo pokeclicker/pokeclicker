@@ -90,7 +90,7 @@ class MapHelper {
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
-            if (App.game.statistics.routeKills[Routes.normalizedNumber(route, region)]() >= GameConstants.ROUTE_KILLS_NEEDED) {
+            if (App.game.statistics.routeKills[Routes.normalizedNumber(region, route)]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
