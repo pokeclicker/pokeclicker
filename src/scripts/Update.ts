@@ -235,7 +235,7 @@ class Update implements Saveable {
                 console.error('[update] v0.5.2 - Couldn\'t start Aerodactyl Quest line..', ಠ_ಠ);
             }
         }
-        
+
         if (this.isOlderVersion(this.saveVersion, '0.5.5')) {
             try {
                 //Correct statistics
@@ -250,7 +250,7 @@ class Update implements Saveable {
                 console.error('[update] v0.5.5 - Couldn\'t update player statistics..', ಠ_ಠ);
             }
         }
-        
+
         if (this.isOlderVersion(this.saveVersion, '0.5.7')) {
             try {
                 //Update shinies
@@ -268,6 +268,30 @@ class Update implements Saveable {
                 this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.5.7 - Couldn\'t update player shinies..', ಠ_ಠ);
+            }
+        }
+
+        //TODO: HLXII Update to add this when we release the berry overhaul
+        if (this.isOlderVersion(this.saveVersion, '0.5.8')) {
+            try {
+                //Update farms
+                console.log(saveData.farming); //TODO REMOVE
+                // Adding new properties
+                saveData.farming.unlockedBerries = Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false);
+                saveData.farming.mulchList = Array<number>(GameConstants.AMOUNT_OF_MULCHES).fill(0);
+                // Updating unlocked status
+                for (let i = 0;i < 8;i++) {
+                    if (saveData.farming.berryList[i]) {
+                        saveData.farming.unlockedBerries[i] = true;
+                    }
+                }
+
+                // Plots won't be updated, as the berries currently don't have much value anyways
+
+                // Update save data
+                this.setSaveData(saveData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.8 - Couldn\'t update player plots..', ಠ_ಠ);
             }
         }
 

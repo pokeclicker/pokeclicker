@@ -57,7 +57,7 @@ abstract class Mutation {
             this.handleMutation(plot);
             mutated = true;
         }, this);
-       
+
         return mutated;
     }
 
@@ -69,12 +69,12 @@ abstract class Mutation {
     findNearPlots(index: number, filter?: (n: number) => boolean): number[] {
         const plots = [];
 
-        const rowIdx = index % 5;
-        const colIdx = (index - rowIdx) / 5;
+        const colIdx = index % 5;
+        const rowIdx = (index - colIdx) / 5;
 
         for (let r = rowIdx - 1;r <= rowIdx + 1;r++) {
             for (let c = colIdx - 1;c <= colIdx + 1;c++) {
-                if (r < 0 || r > 5 || c < 0 || c > 5) {
+                if (r < 0 || r > 4 || c < 0 || c > 4) {
                     continue;
                 }
                 const idx = c * 5 + r;

@@ -8,12 +8,11 @@ class Farming implements Feature {
     counter = 0;
 
     readonly AMOUNT_OF_PLOTS = 25;
-    readonly AMOUNT_OF_MULCHES = 4;
 
     defaults = {
         berryList: Array<number>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(0),
         unlockedBerries: Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false),
-        mulchList: Array<number>(this.AMOUNT_OF_MULCHES).fill(0),
+        mulchList: Array<number>(GameConstants.AMOUNT_OF_MULCHES).fill(0),
         // TODO: Farming will mutate the default plots. We may want to generate these
         // fresh after TS migration is completed, to avoid potential reset issues
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
