@@ -35,7 +35,7 @@ class Mine {
         Mine.grid = tmpGrid;
         Mine.rewardGrid = tmpRewardGrid;
 
-        for (let i = 0; i < Underground.getMaxItems(); i++) {
+        for (let i = 0; i < App.game.underground.getMaxItems(); i++) {
             const item = UndergroundItem.getRandomItem();
             const x = Mine.getRandomCoord(this.sizeX, item.space[0].length);
             const y = Mine.getRandomCoord(this.sizeY, item.space.length);
@@ -110,11 +110,11 @@ class Mine {
             return;
         }
 
-        if (Underground.energy < Underground.PROSPECT_ENERGY) {
+        if (App.game.underground.energy < Underground.PROSPECT_ENERGY) {
             return;
         }
 
-        Underground.energy -= Underground.PROSPECT_ENERGY;
+        App.game.underground.energy -= Underground.PROSPECT_ENERGY;
 
         const rewards = Mine.rewardSummary();
         Mine.updateProspectResult(rewards);
@@ -173,7 +173,7 @@ class Mine {
     }
 
     private static hammer(x: number, y: number) {
-        if (Underground.energy >= Underground.HAMMER_ENERGY) {
+        if (App.game.underground.energy >= Underground.HAMMER_ENERGY) {
             if (x < 0 || y < 0) {
                 return;
             }
@@ -187,30 +187,30 @@ class Mine {
                 }
             }
             if (hasMined) {
-                Underground.energy -= Underground.HAMMER_ENERGY;
+                App.game.underground.energy -= Underground.HAMMER_ENERGY;
             }
         }
     }
 
     private static chisel(x: number, y: number) {
         if (Mine.grid[x][y]() > 0) {
-            if (Underground.energy >= Underground.CHISEL_ENERGY) {
+            if (App.game.underground.energy >= Underground.CHISEL_ENERGY) {
                 this.breakTile(x, y, 2);
-                Underground.energy -= Underground.CHISEL_ENERGY;
+                App.game.underground.energy -= Underground.CHISEL_ENERGY;
             }
         }
     }
 
     private static bomb() {
-        const tiles = Underground.getBombEfficiency();
-        if (Underground.energy >= Underground.BOMB_ENERGY) {
+        const tiles = App.game.underground.getBombEfficiency();
+        if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             for (let i = 1; i < tiles; i++) {
                 const x = GameConstants.randomIntBetween(1, this.sizeY - 2);
                 const y = GameConstants.randomIntBetween(1, this.sizeX - 2);
                 this.breakTile(x, y, 2);
             }
 
-            Underground.energy -= Underground.BOMB_ENERGY;
+            App.game.underground.energy -= Underground.BOMB_ENERGY;
         }
     }
 
