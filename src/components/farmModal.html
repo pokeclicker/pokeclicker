@@ -33,9 +33,9 @@
                                             data-bind="click: function() {FarmController.selectedBerry = $data}">
                                             <img src="" width="24px"
                                                 data-bind="attr:{ src: 'assets/images/items/' + BerryType[$data] + '.png' },
-                                                css: {'berryLocked': !App.game.farming.unlockedBerries[$data] }">
-                                            <span data-bind="text: App.game.farming.unlockedBerries[$data] ? BerryType[$data] : '???'"></span>
-                                            <span class="seedAmount" data-bind="text: App.game.farming.berryList[$data]"></span>
+                                                css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
+                                            <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : '???'"></span>
+                                            <span class="seedAmount" data-bind="text: App.game.farming.berryList[$data]()"></span>
                                         </li>
                                     </ul>
 
@@ -70,7 +70,6 @@
                                 </div>
 
                                 <div id="mulches" class="tab-pane">
-
                                     <ul id="mulchList" data-bind="foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1)" class="list-group"
                                     style="margin-bottom: 5px;">
                                         <li class="list-group-item list-group-item-action seed-list-item"
@@ -101,7 +100,8 @@
                                         style="margin-top: 10px;">
                                     <span>Unlock new plot </span>
                                     <span style="display: inline;">
-                                        <img alt="Berry" style="width: 24px; height: 24px;" data-bind="attr:{ src: 'assets/images/items/' + BerryType[App.game.farming.unlockBerryIndex()] + '.png' }"/>
+                                        <img alt="Berry" style="width: 24px; height: 24px;"
+                                            data-bind="attr:{ src: 'assets/images/items/' + BerryType[App.game.farming.unlockBerryIndex()] + '.png' },css: {'berryLocked': !App.game.farming.unlockedBerries[App.game.farming.unlockBerryIndex()]() }"/>
                                         <span data-bind="text: GameConstants.formatNumber(App.game.farming.calculatePlotPrice())">0</span>
                                     </span>
                                 </button>

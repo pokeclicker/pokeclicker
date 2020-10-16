@@ -63,7 +63,7 @@ class Farming implements Feature {
             8, .2, 60,
             [0, 10, 10, 10, 10], BerryColor.Yellow);
         //#endregion
-        
+
         //#region Second Generation
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [2,4,6,8,16],
             1, .1, 60,
@@ -83,7 +83,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Pinap]     = new Berry(BerryType.Pinap,    [5,10,15,20,40],
             1, .1, 60,
             [10, 0, 0, 0, 10], BerryColor.Yellow); // TODO: Set properties
-        
+
         this.berryData[BerryType.Figy]      = new Berry(BerryType.Figy,     [5,10,15,20,40],
             1, .1, 60,
             [15, 0, 0, 0, 0], BerryColor.Red); // TODO: Set properties
@@ -99,7 +99,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Iapapa]    = new Berry(BerryType.Iapapa,   [5,10,15,20,40],
             1, .1, 60,
             [0, 0, 0, 0, 15], BerryColor.Yellow); // TODO: Set properties
-        
+
         this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [5,10,15,20,40],
             1, .1, 60,
             [10, 10, 10, 10, 0], BerryColor.Green); // TODO: Set properties
@@ -124,7 +124,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Tamato]    = new Berry(BerryType.Tamato,   [5,10,15,20,40],
             1, .1, 60,
             [20, 10, 0, 0, 0], BerryColor.Red); // TODO: Set properties
-        
+
         this.berryData[BerryType.Cornn]     = new Berry(BerryType.Cornn,    [5,10,15,20,40],
             1, .1, 60,
             [0, 20, 10, 0, 0], BerryColor.Purple); // TODO: Set properties
@@ -239,7 +239,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Custap]    = new Berry(BerryType.Custap,   [5,10,15,20,40],
             1, .1, 60,
             [0, 0, 40, 10, 0], BerryColor.Red); // TODO: Set properties
-        
+
         this.berryData[BerryType.Jaboca]    = new Berry(BerryType.Jaboca,   [5,10,15,20,40],
             1, .1, 60,
             [0, 0, 0, 40, 10], BerryColor.Yellow); // TODO: Set properties
@@ -252,14 +252,14 @@ class Farming implements Feature {
         this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5,10,15,20,40],
             1, .1, 60,
             [10, 10, 30, 30, 10], BerryColor.Blue); // TODO: Set properties
-    
+
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40],
             1, .1, 60,
             [40, 10, 0, 0, 0], BerryColor.Purple); // TODO: Set properties
         //#endregion
 
         //#endregion
-        
+
         //#region Mutations
 
         // TODO: Setup mutations for every berry
@@ -271,7 +271,7 @@ class Farming implements Feature {
                 {berryType: BerryType.Chesto, berryStage: PlotStage.Seed},
             ]));*/
         //this.mutations.push(new FlavorMutation(1, BerryType.Persim, [15, 0, 0, 0, 0]));
-        
+
         //#region Second Generation
 
         // Persim
@@ -310,7 +310,7 @@ class Farming implements Feature {
                 {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
             ]));
-        
+
         // Figy
         this.mutations.push(new FlavorMutation(.00009, BerryType.Figy,
             [25, 0, 0, 0, 0]));
@@ -339,7 +339,7 @@ class Farming implements Feature {
                 {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
             ]));
-        
+
         //#endregion
 
         //#region Third Generation
@@ -481,7 +481,7 @@ class Farming implements Feature {
         if (this.allPlotsUnlocked()) {
             return Infinity;
         }
-        
+
         // TODO: Rebalance cost based on berry growth rate
         return 10 * Math.floor(Math.pow(this.unlockedPlotCount(), 2));
     }
@@ -496,7 +496,7 @@ class Farming implements Feature {
 
     highestUnlockedBerry(): number {
         for (let i = GameConstants.AMOUNT_OF_BERRY_TYPES - 1;i >= 0;i--) {
-            if (this.unlockedBerries[i]) {
+            if (this.unlockedBerries[i]()) {
                 return i;
             }
         }
@@ -532,7 +532,7 @@ class Farming implements Feature {
         }
 
         App.game.wallet.gainFarmPoints(this.berryData[plot.berry].farmValue);
-        
+
         const amount = plot.harvest();
 
         GameHelper.incrementObservable(App.game.statistics.totalBerriesHarvested, amount);
@@ -599,7 +599,7 @@ class Farming implements Feature {
     gainBerry(berry: BerryType, amount = 1) {
         GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
 
-        if (!this.unlockedBerries[berry]) {
+        if (!this.unlockedBerries[berry]()) {
             // TODO: NOTIFY PLAYER?
             this.unlockedBerries[berry](true);
             FarmController.resetPages();
