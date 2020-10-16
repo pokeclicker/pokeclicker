@@ -17,6 +17,6 @@ indent_style = space
 indent_size = 4
 
 # Matches the exact files, as these are using a different indentation style
-[{package.json,.tsconfig.json,tslint.json,.eslintrc.js}]
+[{package.json,tslint.json}]
 indent_style = space
 indent_size = 2

@@ -155,7 +155,7 @@ gulp.task('scripts', () => {
 
     // Convert the posix path to a path that matches the current OS
     const osPathPrefix = '../src'.split(path.posix.sep).join(path.sep);
-    const osPathModulePrefix = '../src/modules'.split(path.posix.sep).join(path.sep);
+    const osPathModulePrefix = '../src/declarations'.split(path.posix.sep).join(path.sep);
 
     const generateDeclarations = base
         .pipe(filter((vinylPath) => {
