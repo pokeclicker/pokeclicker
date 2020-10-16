@@ -1,5 +1,3 @@
-/// <reference path="../../declarations/utilities/getArrayOfObservables.d.ts"/>
-
 class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';
@@ -16,21 +14,23 @@ class Farming implements Feature {
         berryList: Array<number>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(0),
         unlockedBerries: Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false),
         mulchList: Array<number>(this.AMOUNT_OF_MULCHES).fill(0),
+        // TODO: Farming will mutate the default plots. We may want to generate these
+        // fresh after TS migration is completed, to avoid potential reset issues
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
             return new Plot(index === 0, BerryType.None, 0, MulchType.None, 0);
         }),
     };
 
-    berryList: Array<number>;
-    unlockedBerries: Array<boolean>;
-    mulchList: Array<number>;
+    berryList: KnockoutObservable<number>[];
+    unlockedBerries: KnockoutObservable<boolean>[];
+    mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
 
     constructor() {
-        this.berryList = getArrayOfObservables(this.defaults.berryList);
-        this.unlockedBerries = getArrayOfObservables(this.defaults.unlockedBerries);
-        this.mulchList = getArrayOfObservables(this.defaults.mulchList);
-        this.plotList = getArrayOfObservables(this.defaults.plotList);
+        this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
+        this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
+        this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
+        this.plotList = this.defaults.plotList;
     }
 
     initialize(): void {
@@ -464,7 +464,7 @@ class Farming implements Feature {
     unlockPlot() {
         const index = this.unlockBerryIndex();
         if (this.canBuyPlot()) {
-            this.berryList[index] -= this.calculatePlotPrice();
+            GameHelper.incrementObservable(this.berryList[index], this.calculatePlotPrice());
             this.plotList[index + 1].isUnlocked = true;
         }
     }
@@ -474,7 +474,7 @@ class Farming implements Feature {
     }
 
     canBuyPlot() {
-        return !this.allPlotsUnlocked() && App.game.farming.berryList[this.unlockBerryIndex()] > this.calculatePlotPrice();
+        return !this.allPlotsUnlocked() && App.game.farming.berryList[this.unlockBerryIndex()]() > this.calculatePlotPrice();
     }
 
     calculatePlotPrice(): number {
@@ -509,7 +509,7 @@ class Farming implements Feature {
             return;
         }
 
-        this.berryList[berry] -= 1;
+        GameHelper.incrementObservable(this.berryList[berry], -1);
         plot.berry = berry;
         plot.age = 0;
         plot.notifications = [];
@@ -564,7 +564,7 @@ class Farming implements Feature {
             return;
         }
 
-        this.mulchList[mulch] -= 1;
+        GameHelper.incrementObservable(this.mulchList[mulch], -1);
         plot.mulch = mulch;
         plot.mulchTimeLeft = GameConstants.MULCH_USE_TIME;
     }
@@ -597,21 +597,21 @@ class Farming implements Feature {
     }
 
     gainBerry(berry: BerryType, amount = 1) {
-        this.berryList[berry] += Math.floor(amount);
+        GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
 
         if (!this.unlockedBerries[berry]) {
             // TODO: NOTIFY PLAYER?
-            this.unlockedBerries[berry] = true;
+            this.unlockedBerries[berry](true);
             FarmController.resetPages();
         }
     }
 
     hasBerry(berry: BerryType) {
-        return this.berryList[berry] > 0;
+        return this.berryList[berry]() > 0;
     }
 
     hasMulch(mulch: MulchType) {
-        return this.mulchList[mulch] > 0;
+        return this.mulchList[mulch]() > 0;
     }
 
     canAccess(): boolean {
@@ -620,9 +620,9 @@ class Farming implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            berryList: this.berryList.map(x => x),
-            unlockedBerries: this.unlockedBerries.map(x => x),
-            mulchList: this.mulchList.map(x => x),
+            berryList: this.berryList.map(ko.unwrap),
+            unlockedBerries: this.unlockedBerries.map(ko.unwrap),
+            mulchList: this.mulchList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
         };
     }
@@ -634,34 +634,34 @@ class Farming implements Feature {
 
         const savedBerries = json['berryList'];
         if (savedBerries == null) {
-            this.berryList = getArrayOfObservables(this.defaults.berryList);
+            this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         } else {
             (savedBerries as number[]).forEach((value: number, index: number) => {
-                this.berryList[index] = value;
+                this.berryList[index](value);
             });
         }
 
         const savedUnlockedBerries = json['unlockedBerries'];
         if (this.unlockedBerries == null) {
-            this.unlockedBerries = getArrayOfObservables(this.defaults.unlockedBerries);
+            this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         } else {
             (savedUnlockedBerries as boolean[]).forEach((value: boolean, index: number) => {
-                this.unlockedBerries[index] = value;
+                this.unlockedBerries[index](value);
             });
         }
 
         const savedMulches = json['mulchList'];
         if (savedMulches == null) {
-            this.mulchList = getArrayOfObservables(this.defaults.mulchList);
+            this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         } else {
             (savedMulches as number[]).forEach((value: number, index: number) => {
-                this.mulchList[index] = value;
+                this.mulchList[index](value);
             });
         }
 
         const savedPlots = json['plotList'];
         if (savedPlots == null) {
-            this.plotList = getArrayOfObservables(this.defaults.plotList);
+            this.plotList = this.defaults.plotList;
         } else {
             (savedPlots as Record<string, any>[]).forEach((value: Record<string, any>, index: number) => {
                 const plot: Plot = new Plot(false, BerryType.None, 0, MulchType.None, 0);

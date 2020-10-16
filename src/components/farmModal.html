@@ -19,7 +19,7 @@
                 <div id="farmView" class="justify-content-center no-select row">
                     <div class="col-12 col-lg-4">
                         <div class="col-sm-12">
-                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint], 'currency': GameConstants.Currency.farmPoint}}"></span>
+                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
                         </div>
 
                         <ul class="nav nav-tabs nav-fill">
