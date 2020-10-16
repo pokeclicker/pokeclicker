@@ -88,8 +88,8 @@ class Shards implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            'shardWallet': this.shardWallet.map(x => x()),
-            'shardUpgrades': this.shardUpgrades.map(x => x()),
+            'shardWallet': this.shardWallet.map(ko.unwrap),
+            'shardUpgrades': this.shardUpgrades.map(ko.unwrap),
         };
     }
 

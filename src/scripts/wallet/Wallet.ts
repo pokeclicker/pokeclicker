@@ -127,7 +127,7 @@ class Wallet implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            currencies: this.currencies.map((v) => v()),
+            currencies: this.currencies.map(ko.unwrap),
         };
     }
 

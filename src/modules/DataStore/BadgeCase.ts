@@ -49,7 +49,7 @@ export default class BadgeCase implements Feature {
         // We only want to save upto the highest badge we have obtained,
         // everything else is assumed to be false
         return this.badgeList
-            .map((v) => v())
+            .map(ko.unwrap)
             .reverse()
             .filter((hasBadge) => {
                 shouldReturn = shouldReturn || hasBadge;

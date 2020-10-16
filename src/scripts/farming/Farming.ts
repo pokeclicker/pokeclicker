@@ -173,7 +173,7 @@ class Farming implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            berryList: this.berryList.map(x => x()),
+            berryList: this.berryList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
         };
     }
