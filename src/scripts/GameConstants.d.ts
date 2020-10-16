@@ -28,6 +28,7 @@ namespace GameConstants {
     declare const ACHIEVEMENT_TICK: number;
     declare const MIN_LOAD_TIME: number;
     declare const MAX_LOAD_TIME: number;
+    declare const MUTATION_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const TotalPokemonsPerRegion: number[];
     declare const ITEM_USE_TIME: number;

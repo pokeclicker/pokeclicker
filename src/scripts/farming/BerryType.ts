@@ -22,7 +22,7 @@ enum BerryType {
     Figy,
     Wiki,
     Mago,
-    Aquav,
+    Aguav,
     Iapapa,
 
     Lum,
@@ -35,7 +35,6 @@ enum BerryType {
     Grepa,
     Tamato,
 
-    // Fourth Generation
     Cornn,
     Magost,
     Rabuta,
@@ -46,7 +45,7 @@ enum BerryType {
     Durin,
     Belue,
 
-    // Type Generation
+    // Fourth Generation (Typed)
     Occa,
     Passho,
     Wacan,

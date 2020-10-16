@@ -38,86 +38,220 @@ class Farming implements Feature {
         //#region Berry Data
 
         // First Generation
-        this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16], 1, .5, 6);
-        this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5,15,25,40,120], 1, .4, 8);
-        this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10,35,50,60,140], 2, .3, 10);
-        this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15,30,45,80,180], 1, .5, 14);
-        this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10,40,50,110,210], 1, .2, 18);
-        this.berryData[BerryType.Leppa]     = new Berry(BerryType.Leppa,    [100,120,140,240,480], 3, .2, 30);
-        this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120,180,240,300,520], 5, .1, 35);
-        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,900], 5, .1, 60);
+        this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16],
+            1, .5, 6,
+            [10, 0, 0, 0, 0], BerryColor.Red);
+        this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5,15,25,40,120],
+            1, .4, 8,
+            [0, 10, 0, 0, 0], BerryColor.Purple);
+        this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10,35,50,60,140],
+            2, .3, 10,
+            [0, 0, 10, 0, 0], BerryColor.Pink);
+        this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15,30,45,80,180],
+            1, .5, 14,
+            [0, 0, 0, 10, 0], BerryColor.Green);
+        this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10,40,50,110,210],
+            1, .2, 18,
+            [0, 0, 0, 0, 10], BerryColor.Yellow);
+        this.berryData[BerryType.Leppa]     = new Berry(BerryType.Leppa,    [100,120,140,240,480],
+            3, .2, 30,
+            [10, 0, 10, 10, 10], BerryColor.Red);
+        this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120,180,240,300,520],
+            5, .1, 35,
+            [10, 10, 0, 10, 10], BerryColor.Blue);
+        this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,900],
+            5, .1, 60,
+            [0, 10, 10, 10, 10], BerryColor.Yellow);
         
         // Second Generation
-        this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Bluk]      = new Berry(BerryType.Bluk,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Nanab]     = new Berry(BerryType.Nanab,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Wepear]    = new Berry(BerryType.Wepear,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Pinap]     = new Berry(BerryType.Pinap,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [2,4,6,8,16],
+            1, .1, 60,
+            [10, 10, 10, 0, 10], BerryColor.Pink); // TODO: Set properties
+        this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [5,10,15,20,40],
+            1, .1, 60,
+            [10, 10, 0, 0, 0], BerryColor.Red); // TODO: Set properties
+        this.berryData[BerryType.Bluk]      = new Berry(BerryType.Bluk,     [5,10,15,20,40],
+            1, .1, 60,
+            [0, 10, 10, 0, 0], BerryColor.Purple); // TODO: Set properties
+        this.berryData[BerryType.Nanab]     = new Berry(BerryType.Nanab,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 10, 10, 0], BerryColor.Pink); // TODO: Set properties
+        this.berryData[BerryType.Wepear]    = new Berry(BerryType.Wepear,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 0, 10, 10], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Pinap]     = new Berry(BerryType.Pinap,    [5,10,15,20,40],
+            1, .1, 60,
+            [10, 0, 0, 0, 10], BerryColor.Yellow); // TODO: Set properties
         
-        this.berryData[BerryType.Figy]      = new Berry(BerryType.Figy,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Wiki]      = new Berry(BerryType.Wiki,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Mago]      = new Berry(BerryType.Mago,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Aquav]     = new Berry(BerryType.Aquav,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Iapapa]    = new Berry(BerryType.Iapapa,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Figy]      = new Berry(BerryType.Figy,     [5,10,15,20,40],
+            1, .1, 60,
+            [15, 0, 0, 0, 0], BerryColor.Red); // TODO: Set properties
+        this.berryData[BerryType.Wiki]      = new Berry(BerryType.Wiki,     [5,10,15,20,40],
+            1, .1, 60,
+            [0, 15, 0, 0, 0], BerryColor.Purple); // TODO: Set properties
+        this.berryData[BerryType.Mago]      = new Berry(BerryType.Mago,     [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 15, 0, 0], BerryColor.Pink); // TODO: Set properties
+        this.berryData[BerryType.Aquav]     = new Berry(BerryType.Aquav,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 0, 15, 0], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Iapapa]    = new Berry(BerryType.Iapapa,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 0, 0, 15], BerryColor.Yellow); // TODO: Set properties
         
-        this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Lum]       = new Berry(BerryType.Lum,      [5,10,15,20,40],
+            1, .1, 60,
+            [10, 10, 10, 10, 0], BerryColor.Green); // TODO: Set properties
         
         // Third Generation
-        this.berryData[BerryType.Pomeg]     = new Berry(BerryType.Pomeg,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Kelpsy]    = new Berry(BerryType.Kelpsy,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Qualot]    = new Berry(BerryType.Qualot,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Hondew]    = new Berry(BerryType.Hondew,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Grepa]     = new Berry(BerryType.Grepa,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Tamato]    = new Berry(BerryType.Tamato,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Pomeg]     = new Berry(BerryType.Pomeg,    [5,10,15,20,40],
+            1, .1, 60,
+            [10, 0, 10, 10, 0], BerryColor.Red); // TODO: Set properties
+        this.berryData[BerryType.Kelpsy]    = new Berry(BerryType.Kelpsy,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 10, 0, 10, 10], BerryColor.Blue); // TODO: Set properties
+        this.berryData[BerryType.Qualot]    = new Berry(BerryType.Qualot,   [5,10,15,20,40],
+            1, .1, 60,
+            [10, 0, 10, 0, 10], BerryColor.Yellow); // TODO: Set properties
+        this.berryData[BerryType.Hondew]    = new Berry(BerryType.Hondew,   [5,10,15,20,40],
+            1, .1, 60,
+            [10, 10, 0, 10, 0], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Grepa]     = new Berry(BerryType.Grepa,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 10, 10, 0, 10], BerryColor.Yellow); // TODO: Set properties
+        this.berryData[BerryType.Tamato]    = new Berry(BerryType.Tamato,   [5,10,15,20,40],
+            1, .1, 60,
+            [20, 10, 0, 0, 0], BerryColor.Red); // TODO: Set properties
         
-        this.berryData[BerryType.Cornn]     = new Berry(BerryType.Cornn,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Magost]    = new Berry(BerryType.Magost,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Rabuta]    = new Berry(BerryType.Rabuta,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Nomel]     = new Berry(BerryType.Nomel,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Spelon]    = new Berry(BerryType.Spelon,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Pamtre]    = new Berry(BerryType.Pamtre,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Watmel]    = new Berry(BerryType.Watmel,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Durin]     = new Berry(BerryType.Durin,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Belue]     = new Berry(BerryType.Belue,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Cornn]     = new Berry(BerryType.Cornn,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 20, 10, 0, 0], BerryColor.Purple); // TODO: Set properties
+        this.berryData[BerryType.Magost]    = new Berry(BerryType.Magost,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 20, 10, 0], BerryColor.Pink); // TODO: Set properties
+        this.berryData[BerryType.Rabuta]    = new Berry(BerryType.Rabuta,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 0, 20, 10], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Nomel]     = new Berry(BerryType.Nomel,    [5,10,15,20,40],
+            1, .1, 60,
+            [10, 0, 0, 0, 20], BerryColor.Yellow); // TODO: Set properties
+        this.berryData[BerryType.Spelon]    = new Berry(BerryType.Spelon,   [5,10,15,20,40],
+            1, .1, 60,
+            [30, 10, 0, 0, 0], BerryColor.Red); // TODO: Set properties
+        this.berryData[BerryType.Pamtre]    = new Berry(BerryType.Pamtre,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 30, 10, 0, 0], BerryColor.Purple); // TODO: Set properties
+        this.berryData[BerryType.Watmel]    = new Berry(BerryType.Watmel,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 30, 10, 0], BerryColor.Pink); // TODO: Set properties
+        this.berryData[BerryType.Durin]     = new Berry(BerryType.Durin,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 0, 30, 10], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Belue]     = new Berry(BerryType.Belue,    [5,10,15,20,40],
+            1, .1, 60,
+            [10, 0, 0, 0, 30], BerryColor.Purple); // TODO: Set properties
         
         // Fourth Generation (Typed)
-        this.berryData[BerryType.Occa]      = new Berry(BerryType.Occa,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Chople]    = new Berry(BerryType.Chople,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Shuca]     = new Berry(BerryType.Shuca,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Payapa]    = new Berry(BerryType.Payapa,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Tanga]     = new Berry(BerryType.Tanga,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Colbur]    = new Berry(BerryType.Colbur,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Babiri]    = new Berry(BerryType.Babiri,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Roseli]    = new Berry(BerryType.Roseli,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Occa]      = new Berry(BerryType.Occa,     [5,10,15,20,40],
+            1, .1, 60,
+            [15, 0, 10, 0, 0], BerryColor.Red); // TODO: Set properties
+        this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 15, 0, 10, 0], BerryColor.Blue); // TODO: Set properties
+        this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 15, 0, 10], BerryColor.Yellow); // TODO: Set properties
+        this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [5,10,15,20,40],
+            1, .1, 60,
+            [10, 0, 0, 15, 0], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 10, 0, 0, 15], BerryColor.Blue); // TODO: Set properties
+        this.berryData[BerryType.Chople]    = new Berry(BerryType.Chople,   [5,10,15,20,40],
+            1, .1, 60,
+            [15, 0, 0, 10, 0], BerryColor.Red); // TODO: Set properties
+        this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 15, 0, 0, 10], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Shuca]     = new Berry(BerryType.Shuca,    [5,10,15,20,40],
+            1, .1, 60,
+            [10, 0, 15, 0, 0], BerryColor.Yellow); // TODO: Set properties
+        this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [5,10,15,20,40],
+            1, .1, 60,
+            [0, 10, 0, 15, 0], BerryColor.Blue); // TODO: Set properties
+        this.berryData[BerryType.Payapa]    = new Berry(BerryType.Payapa,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 10, 0, 15], BerryColor.Purple); // TODO: Set properties
+        this.berryData[BerryType.Tanga]     = new Berry(BerryType.Tanga,    [5,10,15,20,40],
+            1, .1, 60,
+            [20, 0, 0, 0, 10], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [5,10,15,20,40],
+            1, .1, 60,
+            [10, 20, 0, 0, 0], BerryColor.Yellow); // TODO: Set properties
+        this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 10, 20, 0, 0], BerryColor.Purple); // TODO: Set properties
+        this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 10, 20, 0], BerryColor.Red); // TODO: Set properties
+        this.berryData[BerryType.Colbur]    = new Berry(BerryType.Colbur,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 0, 10, 20], BerryColor.Purple); // TODO: Set properties
+        this.berryData[BerryType.Babiri]    = new Berry(BerryType.Babiri,   [5,10,15,20,40],
+            1, .1, 60,
+            [25, 10, 0, 0, 0], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 25, 10, 0, 0], BerryColor.Yellow); // TODO: Set properties
+        this.berryData[BerryType.Roseli]    = new Berry(BerryType.Roseli,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 25, 10, 0], BerryColor.Pink); // TODO: Set properties
 
         // Fifth Generation
-        this.berryData[BerryType.Liechi]    = new Berry(BerryType.Liechi,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Ganlon]    = new Berry(BerryType.Ganlon,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Salac]     = new Berry(BerryType.Salac,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Petaya]    = new Berry(BerryType.Petaya,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Apicot]    = new Berry(BerryType.Apicot,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Lansat]    = new Berry(BerryType.Lansat,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Starf]     = new Berry(BerryType.Starf,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Micle]     = new Berry(BerryType.Micle,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Custap]    = new Berry(BerryType.Custap,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Liechi]    = new Berry(BerryType.Liechi,   [5,10,15,20,40],
+            1, .1, 60,
+            [30, 10, 30, 0, 0], BerryColor.Red); // TODO: Set properties
+        this.berryData[BerryType.Ganlon]    = new Berry(BerryType.Ganlon,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 30, 10, 30, 0], BerryColor.Purple); // TODO: Set properties
+        this.berryData[BerryType.Salac]     = new Berry(BerryType.Salac,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 30, 10, 30], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Petaya]    = new Berry(BerryType.Petaya,   [5,10,15,20,40],
+            1, .1, 60,
+            [30, 0, 0, 30, 10], BerryColor.Pink); // TODO: Set properties
+        this.berryData[BerryType.Apicot]    = new Berry(BerryType.Apicot,   [5,10,15,20,40],
+            1, .1, 60,
+            [10, 30, 0, 0, 30], BerryColor.Blue); // TODO: Set properties
+        this.berryData[BerryType.Lansat]    = new Berry(BerryType.Lansat,   [5,10,15,20,40],
+            1, .1, 60,
+            [30, 10, 30, 10, 30], BerryColor.Red); // TODO: Set properties
+        this.berryData[BerryType.Starf]     = new Berry(BerryType.Starf,    [5,10,15,20,40],
+            1, .1, 60,
+            [30, 10, 30, 10, 30], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Micle]     = new Berry(BerryType.Micle,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 40, 10, 0, 0], BerryColor.Green); // TODO: Set properties
+        this.berryData[BerryType.Custap]    = new Berry(BerryType.Custap,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 40, 10, 0], BerryColor.Red); // TODO: Set properties
         
-        this.berryData[BerryType.Jaboca]    = new Berry(BerryType.Jaboca,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
-        this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Jaboca]    = new Berry(BerryType.Jaboca,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 0, 40, 10], BerryColor.Yellow); // TODO: Set properties
+        this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5,10,15,20,40],
+            1, .1, 60,
+            [10, 0, 0, 0, 40], BerryColor.Blue); // TODO: Set properties
+        this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [5,10,15,20,40],
+            1, .1, 60,
+            [30, 30, 10, 10, 10], BerryColor.Yellow); // TODO: Set properties
+        this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5,10,15,20,40],
+            1, .1, 60,
+            [10, 10, 30, 30, 10], BerryColor.Blue); // TODO: Set properties
     
-        this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40], 1, .1, 60); // TODO: Set properties
+        this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40],
+            1, .1, 60,
+            [40, 10, 0, 0, 0], BerryColor.Purple); // TODO: Set properties
         
         //#endregion
         
@@ -125,53 +259,74 @@ class Farming implements Feature {
 
         // TODO: Setup mutations for every berry
         // TEMPORARY MUTATION FOR TESTING
-        //this.mutations.push(new NearMutation(1, BerryType.Cheri, [{berryType: BerryType.Cheri, berryStage: PlotStage.Seed}]));
-
+        //this.mutations.push(new NearBerryMutation(1, BerryType.Cheri, [{berryType: BerryType.Cheri, berryStage: PlotStage.Seed}]));
+        /*this.mutations.push(new NearBerryMutation(1, BerryType.Cheri,
+            [
+                {berryType: BerryType.Cheri, berryStage: PlotStage.Seed},
+                {berryType: BerryType.Chesto, berryStage: PlotStage.Seed},
+            ]));*/
+        //this.mutations.push(new FlavorMutation(1, BerryType.Persim, [15, 0, 0, 0, 0]));
         
         //#region Second Generation
 
         // Persim
-        this.mutations.push(new NearMutation(.0001, BerryType.Persim,
+
+        /*
+        this.mutations.push(new NearBerryMutation(.0001, BerryType.Persim,
             [
                 {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
             ]));
         // Razz
-        this.mutations.push(new NearMutation(.0001, BerryType.Razz,
+        this.mutations.push(new NearBerryMutation(.0001, BerryType.Razz,
             [
                 {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
             ]));
         // Bluk
-        this.mutations.push(new NearMutation(.0001, BerryType.Bluk,
+        this.mutations.push(new NearBerryMutation(.0001, BerryType.Bluk,
             [
                 {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
             ]));
         // Nanab
-        this.mutations.push(new NearMutation(.0001, BerryType.Nanab,
+        this.mutations.push(new NearBerryMutation(.0001, BerryType.Nanab,
             [
                 {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
             ]));
         // Wepear
-        this.mutations.push(new NearMutation(.0001, BerryType.Wepear,
+        this.mutations.push(new NearBerryMutation(.0001, BerryType.Wepear,
             [
                 {berryType: BerryType.Rawst, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
             ]));
         // Pinap
-        this.mutations.push(new NearMutation(.0001, BerryType.Pinap,
+        this.mutations.push(new NearBerryMutation(.0001, BerryType.Pinap,
             [
                 {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
             ]));
-
         
-        // TODO: Flavors
+        // Figy
+        this.mutations.push(new FlavorMutation(.0001, BerryType.Figy,
+            [25, 0, 0, 0, 0]));
+        // Wiki
+        this.mutations.push(new FlavorMutation(.0001, BerryType.Wiki,
+            [0, 25, 0, 0, 0]));
+        // Mago
+        this.mutations.push(new FlavorMutation(.0001, BerryType.Mago,
+            [0, 0, 25, 0, 0]));
+        // Aguav
+        this.mutations.push(new FlavorMutation(.0001, BerryType.Aguav,
+            [0, 0, 0, 25, 0]));
+        // Iapapa
+        this.mutations.push(new FlavorMutation(.0001, BerryType.Iapapa,
+            [0, 0, 0, 0, 25]));
 
         // Lum
-        this.mutations.push(new NearMutation(.0001, BerryType.Lum,
+
+        this.mutations.push(new NearBerryMutation(.0001, BerryType.Lum,
             [
                 {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
@@ -182,6 +337,7 @@ class Farming implements Feature {
                 {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
             ]));
+        */
 
         //#endregion
 

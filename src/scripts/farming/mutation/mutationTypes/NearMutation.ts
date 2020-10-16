@@ -1,19 +1,17 @@
 /// <reference path="../Mutation.ts" />
 
 /**
- * Mutation that requires specific Berry plants near an empty plot
+ * Mutation that requires specific conditions near an empty plot
  */
-class NearMutation extends Mutation {
+abstract class NearMutation extends Mutation {
 
-    berryReqs: MutationReqInterface[];
-
-    constructor(mutationChance: number, mutatedBerry: BerryType, berryReqs: MutationReqInterface[]) {
+    constructor(mutationChance: number, mutatedBerry: BerryType) {
         super(mutationChance, mutatedBerry);
-        this.berryReqs = berryReqs;
     }
 
     /**
-     * Determines whether this mutation can occur based on the status of the farm plots. Returns plot indices that can mutate
+     * Determines whether this mutation can occur based on the status of the farm plots.
+     * Returns plot indices that can mutate
      */
     checkRequirements(): number[] {
         const plots = [];
@@ -36,13 +34,7 @@ class NearMutation extends Mutation {
      * Determines if the plots near fit the requirements
      * @param plots The list of nearby plots
      */
-    plotsFitRequirements(plots: number[]) {
-        return this.berryReqs.every(function(req) {
-            return plots.some(function(plot) {
-                return this.checkRequirement(plot,req);
-            }, this);
-        }, this);
-    }
+    abstract plotsFitRequirements(plots: number[]): boolean;
 
     /**
      * Handles updating the farm with the mutation
