@@ -270,31 +270,31 @@ class Farming implements Feature {
         //#region Second Generation
 
         // Persim
-        this.mutations.push(new NearBerryMutation(.0001, BerryType.Persim,
+        this.mutations.push(new NearBerryMutation(.0005, BerryType.Persim,
             [
                 {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
             ]));
         // Razz
-        this.mutations.push(new NearBerryMutation(.0001, BerryType.Razz,
+        this.mutations.push(new NearBerryMutation(.00045, BerryType.Razz,
             [
                 {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
             ]));
         // Bluk
-        this.mutations.push(new NearBerryMutation(.0001, BerryType.Bluk,
+        this.mutations.push(new NearBerryMutation(.0004, BerryType.Bluk,
             [
                 {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
             ]));
         // Nanab
-        this.mutations.push(new NearBerryMutation(.0001, BerryType.Nanab,
+        this.mutations.push(new NearBerryMutation(.0003, BerryType.Nanab,
             [
                 {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
             ]));
         // Wepear
-        this.mutations.push(new NearBerryMutation(.0001, BerryType.Wepear,
+        this.mutations.push(new NearBerryMutation(.0002, BerryType.Wepear,
             [
                 {berryType: BerryType.Rawst, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
@@ -307,23 +307,23 @@ class Farming implements Feature {
             ]));
         
         // Figy
-        this.mutations.push(new FlavorMutation(.0001, BerryType.Figy,
+        this.mutations.push(new FlavorMutation(.00009, BerryType.Figy,
             [25, 0, 0, 0, 0]));
         // Wiki
-        this.mutations.push(new FlavorMutation(.0001, BerryType.Wiki,
+        this.mutations.push(new FlavorMutation(.00008, BerryType.Wiki,
             [0, 25, 0, 0, 0]));
         // Mago
-        this.mutations.push(new FlavorMutation(.0001, BerryType.Mago,
+        this.mutations.push(new FlavorMutation(.00007, BerryType.Mago,
             [0, 0, 25, 0, 0]));
         // Aguav
-        this.mutations.push(new FlavorMutation(.0001, BerryType.Aguav,
+        this.mutations.push(new FlavorMutation(.00006, BerryType.Aguav,
             [0, 0, 0, 25, 0]));
         // Iapapa
-        this.mutations.push(new FlavorMutation(.0001, BerryType.Iapapa,
+        this.mutations.push(new FlavorMutation(.00005, BerryType.Iapapa,
             [0, 0, 0, 0, 25]));
 
         // Lum
-        this.mutations.push(new NearBerryMutation(.0001, BerryType.Lum,
+        this.mutations.push(new NearBerryMutation(.00001, BerryType.Lum,
             [
                 {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
