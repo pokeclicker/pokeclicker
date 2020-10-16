@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="row justify-content-center" data-bind="foreach: [...new Set(ShopHandler.shopObservable().items().map(i => i.currency))]">
                     <h4 class="col-6 col-sm-4 col-lg-2">
-                        <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data], currency: $data, reduced: true }}"></span>
+                        <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data](), currency: $data, reduced: true }}"></span>
                     </h4>
                 </div>
                 <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
