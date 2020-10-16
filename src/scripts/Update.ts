@@ -271,11 +271,11 @@ class Update implements Saveable {
             }
             try {
                 for (let s = 101; s < 134; s++) {
-                    saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.dungeonsCleared, s - 52, s); // Adjust Hoenn index
+                    saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.routeKills, s - 52, s); // Adjust Hoenn index
                 }
 
                 for (let s = 201; s < 230; s++) {
-                    saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.dungeonsCleared, s - 118, s); // Adjust Sinnoh index
+                    saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.routeKills, s - 118, s); // Adjust Sinnoh index
                 }
                 // Update save data
                 this.setSaveData(saveData);
