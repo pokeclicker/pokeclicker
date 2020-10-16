@@ -2,114 +2,131 @@
      aria-labelledby="farmModalLabel">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4>Farm</h4>
-                <!-- ko ifnot: App.game.farming.allPlotsUnlocked() -->
-                <button class="btn btn-success" onclick="App.game.farming.unlockPlot()"
-                        data-bind="css: { disabled: !App.game.farming.canBuyPlot()}">
-                    <span>Unlock new plot </span>
-                    <span style="display: inline;">
-                        <img alt="Berry" style="width: 24px; height: 24px;" data-bind="attr:{ src: 'assets/images/items/' + BerryType[App.game.farming.unlockBerryIndex()] + '.png' }"/>
-                        <span data-bind="text: GameConstants.formatNumber(App.game.farming.calculatePlotPrice())">0</span>
-                    </span>
-                </button>
-                <!-- /ko -->
+            <div class="modal-header p-0">
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
+                    <!-- TODO: HLXII Add Apricorn Tab ? -->
+                    <btn class="btn btn-primary">
+                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                    </btn>
+                </ul>
             </div>
-            <div class="modal-body">
-                <div id="farmView" class="justify-content-center no-select row">
-                    <div class="col-12 col-lg-4">
-                        <div class="col-sm-12">
-                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
-                        </div>
 
-                        <ul class="nav nav-tabs nav-fill">
-                            <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#seeds" data-bind="click: function(){FarmController.berryListVisible = true;}">Berries</a></li>
-                            <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#mulches" data-bind="click: function(){FarmController.berryListVisible = false;}">Mulch</a></li>
-                        </ul>
+            <div class="modal-body tab-content p-0">
 
-                        <div class="tab-content">
-                            <div id="seeds" class="tab-pane active p-3">
-                                <ul id="seedList" data-bind="foreach: FarmController.getBerryListWithIndex()" class="list-group"
+                <div id="berryFarmView" class="tab-pane fade in active show">
+                    <div id="farmView" class="justify-content-center no-select row">
+                        <div class="col-12 col-lg-4">
+
+
+                            <ul class="nav nav-tabs nav-fill">
+                                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#seeds" data-bind="click: function(){FarmController.berryListVisible = true;}">Berries</a></li>
+                                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#mulches" data-bind="click: function(){FarmController.berryListVisible = false;}">Mulch</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="seeds" class="tab-pane active">
+                                    <ul id="seedList" data-bind="foreach: FarmController.getBerryListWithIndex()" class="list-group"
+                                        style="margin-bottom: 5px;">
+                                        <li class="list-group-item list-group-item-action seed-list-item"
+                                            data-bind="click: function() {FarmController.selectedBerry = $data}">
+                                            <img src="" width="24px"
+                                                data-bind="attr:{ src: 'assets/images/items/' + BerryType[$data] + '.png' },
+                                                css: {'berryLocked': !App.game.farming.unlockedBerries[$data] }">
+                                            <span data-bind="text: App.game.farming.unlockedBerries[$data] ? BerryType[$data] : '???'"></span>
+                                            <span class="seedAmount" data-bind="text: App.game.farming.berryList[$data]"></span>
+                                        </li>
+                                    </ul>
+
+                                    <div class="row justify-content-center">
+                                        <button class="btn btn-secondary"
+                                            onclick="FarmController.navigateLeft()"
+                                            data-bind="disable: FarmController.navigateIndex() === 0,
+                                                css: { disabled: FarmController.navigateIndex() === 0 }">
+                                        <img src="assets/images/arrow.svg" style="transform: scaleX(-1);" height="20">
+                                        </button>
+                                        <div style="width:48px;" data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
+                                        <button class="btn btn-secondary"
+                                            onclick="FarmController.navigateRight()"
+                                            data-bind="disable: FarmController.navigateIndex() ===  FarmController.numberOfTabs(),
+                                                css: { disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs() }">
+                                        <img src="assets/images/arrow.svg" height="20">
+                                        </button>
+                                    </div>
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-12 col-6">
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">
+                                                Plant All
+                                            </button>
+                                        </div>
+                                        <div class="col-lg-12 col-6">
+                                            <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
+                                                Harvest All
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="mulches" class="tab-pane">
+
+                                    <ul id="mulchList" data-bind="foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1)" class="list-group"
                                     style="margin-bottom: 5px;">
-                                    <li class="list-group-item list-group-item-action seed-list-item"
-                                        data-bind="click: function() {FarmController.selectedBerry = $data}">
-                                        <img src="" width="24px"
-                                            data-bind="attr:{ src: 'assets/images/items/' + BerryType[$data] + '.png' },
-                                            css: {'berryLocked': !App.game.farming.unlockedBerries[$data] }">
-                                        <span data-bind="text: App.game.farming.unlockedBerries[$data] ? BerryType[$data] : '???'"></span>
-                                        <span class="seedAmount" data-bind="text: App.game.farming.berryList[$data]"></span>
-                                    </li>
-                                </ul>
+                                        <li class="list-group-item list-group-item-action seed-list-item"
+                                            data-bind="click: function() {FarmController.selectedBerry = $data}">
+                                            <img src="" width="24px"
+                                                data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
+                                            <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
+                                            <span class="seedAmount" data-bind="text: App.game.farming.mulchList[$data]"></span>
+                                        </li>
+                                    </ul>
 
-                                <div class="row justify-content-center">
-                                    <button class="btn btn-secondary" onclick="FarmController.navigateLeft()"
-                                            data-bind=" css: {disabled: FarmController.navigateIndex() === 0}">
-                                        <img src="assets/images/leftarrow.png">
-                                    </button>
-                                    <div data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
-                                    <button class="btn btn-secondary" onclick="FarmController.navigateRight()"
-                                            data-bind=" css: {disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs()}">
-                                        <img src="assets/images/rightarrow.png">
-                                    </button>
-                                </div>
-
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-12 col-6">
-                                        <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">
-                                            Plant All
-                                        </button>
-                                    </div>
-                                    <div class="col-lg-12 col-6">
-                                        <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
-                                            Harvest All
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div id="mulches" class="tab-pane p-3">
-                                
-                                <ul id="mulchList" data-bind="foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1)" class="list-group"
-                                style="margin-bottom: 5px;">
-                                    <li class="list-group-item list-group-item-action seed-list-item"
-                                        data-bind="click: function() {FarmController.selectedBerry = $data}">
-                                        <img src="" width="24px"
-                                            data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
-                                        <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
-                                        <span class="seedAmount" data-bind="text: App.game.farming.mulchList[$data]"></span>
-                                    </li>
-                                </ul>
-
-                                <div class="row justify-content-center">
-                                    <div class="col-lg-12 col-6">
-                                        <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch)}">
-                                            Mulch All
-                                        </button>
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-12 col-6">
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch)}">
+                                                Mulch All
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-lg-8" style="padding-left: 0">
-                        <div id="plotList" data-bind="foreach: App.game.farming.plotList">
-                            <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked}">
-                                <div class="plot-content">
-                                    <div class="plotImage">
-                                        <!-- TODO: Update soil image with CSS class to show mulches -->
-                                        <img style="width: 100%" src="assets/images/farm/soil.png">
-                                        <div data-bind="ifnot: $data.isEmpty()">
-                                            <div class="plotButton"
-                                                 data-html=true
-                                                 data-bind="click: function(){FarmController.plotClick($index())}, tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false}">
-                                                <img width="100%" height="100%"
-                                                     style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
-                                                     src=""
-                                                     data-bind="attr:{ src: FarmController.getImage($index())}">
+
+                        <div class="col-12 col-lg-8">
+                            <!-- ko ifnot: App.game.farming.allPlotsUnlocked() -->
+                            <div class="row justify-content-center">
+                                <button class="btn btn-success" onclick="App.game.farming.unlockPlot()"
+                                        data-bind="css: { disabled: !App.game.farming.canBuyPlot()}"
+                                        style="margin-top: 10px;">
+                                    <span>Unlock new plot </span>
+                                    <span style="display: inline;">
+                                        <img alt="Berry" style="width: 24px; height: 24px;" data-bind="attr:{ src: 'assets/images/items/' + BerryType[App.game.farming.unlockBerryIndex()] + '.png' }"/>
+                                        <span data-bind="text: GameConstants.formatNumber(App.game.farming.calculatePlotPrice())">0</span>
+                                    </span>
+                                </button>
+                            </div>
+                            <!-- /ko -->
+                            <div id="plotList" data-bind="foreach: App.game.farming.plotList">
+                                <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked}">
+                                    <div class="plot-content">
+                                        <div class="plotImage">
+                                            <!-- TODO: Update soil image with CSS class to show mulches -->
+                                            <img style="width: 100%" src="assets/images/farm/soil.png">
+                                            <div data-bind="ifnot: $data.isEmpty()">
+                                                <div class="plotButton"
+                                                    data-html=true
+                                                    data-bind="click: function(){FarmController.plotClick($index())}, tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false}">
+                                                    <img width="100%" height="100%"
+                                                        style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
+                                                        src=""
+                                                        data-bind="attr:{ src: FarmController.getImage($index())}">
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div data-bind="if: $data.isEmpty()">
-                                            <div class="plotButton"
-                                                 data-bind="click: function(){FarmController.plotClick($index())}, tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false}">
+                                            <div data-bind="if: $data.isEmpty()">
+                                                <div class="plotButton"
+                                                    data-bind="click: function(){FarmController.plotClick($index())}, tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false}">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -117,6 +134,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div id="berryDexView" class="tab-pane fade">
+
                 </div>
             </div>
 
