@@ -121,7 +121,7 @@
             <!-- Battle Item container-->
             @import "battleItemContainer.html"
 
-            <!-- Pokemon List container-->
+            <!-- Pokémon List container-->
             @import "pokemonListContainer.html"
 
         </div>
@@ -198,7 +198,7 @@
                                 </knockout>
 
                                 <knockout>
-                                    <knockout data-bind="text: Battle.enemyPokemon().name">Pokemon name</knockout>
+                                    <knockout data-bind="text: Battle.enemyPokemon().name">Pokémon name</knockout>
                                     <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
                                 </knockout>
 
@@ -243,7 +243,7 @@
                             }">
                             <h2 class="pageItemTitle" style="display: block;">
                                 <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
-                                    <knockout data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</knockout>
+                                    <knockout data-bind="text: DungeonBattle.enemyPokemon().name">Pokémon name</knockout>
                                     <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
                                 </knockout>
                                 <knockout data-bind="if: !DungeonBattle.enemyPokemon() || !DungeonBattle.enemyPokemon().health()">
@@ -331,7 +331,7 @@
                 </div>
 
 
-                <!-- Display Pokemon Attack, Click Attack damge values-->
+                <!-- Display Pokémon Attack, Click Attack damge values-->
                 <div class="card-footer p-0" data-bind="hidden: App.game.gameState === GameConstants.GameState.town">
                     <table width="100%">
                         <tr>
