@@ -34,7 +34,7 @@
 
     <script type="text/html" id="selectedPokeballDisplayTemplate">
         <img class="pokeball-small clickable pokeball-selected" 
-            data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.value] + ($data.value < 0 ? '.png' : '-small.png')}, click: function() {App.game.pokeballs.selectedSelection($data.field); App.game.pokeballs.selectedTitle($data.title); $('#pokeballSelectorModal').modal('show')}"/>
+            data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.value] + '.svg'}, click: function() {App.game.pokeballs.selectedSelection($data.field); App.game.pokeballs.selectedTitle($data.title); $('#pokeballSelectorModal').modal('show')}"/>
     </script>
 
     <script type="text/html" id="selectedPokeballCountTemplate">
