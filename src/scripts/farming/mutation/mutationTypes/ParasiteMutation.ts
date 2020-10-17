@@ -17,8 +17,8 @@ class ParasiteMutation extends Mutation {
      * @param parasite The berry plant that will cause the mutation
      * @param host The berry plant types that will be turned into the mutatedBerry. If not set, will mutate any berry plants near it (besides for the mutatedBerry and itself)
      */
-    constructor(mutationChance: number, mutatedBerry: BerryType, parasite: BerryType, host?: BerryType) {
-        super(mutationChance, mutatedBerry);
+    constructor(mutationChance: number, mutatedBerry: BerryType, parasite: BerryType, host?: BerryType, hint?: string, unlockReq?: (() => boolean)) {
+        super(mutationChance, mutatedBerry, hint, unlockReq);
         this.parasite = parasite;
         this.host = host;
     }
@@ -43,7 +43,7 @@ class ParasiteMutation extends Mutation {
             if (plot.stage() !== PlotStage.Berry) {
                 continue;
             }
-            
+
             const newHosts = this.findNearPlots(i, function(i) {
                 const plot = App.game.farming.plotList[i];
                 if (!plot.isUnlocked) {
@@ -64,7 +64,7 @@ class ParasiteMutation extends Mutation {
             newHosts.forEach(function(x) {
                 hosts.add(x);
             });
-            
+
         }
         return Array.from(hosts);
     }

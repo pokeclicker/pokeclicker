@@ -310,19 +310,39 @@ class Farming implements Feature {
 
         // Figy
         this.mutations.push(new FlavorMutation(.00009, BerryType.Figy,
-            [25, 0, 0, 0, 0]));
+            [25, 0, 0, 0, 0], undefined,
+            'I\'ve heard that a berry will appear if its surroundings get too spicy!',
+            function(): boolean {
+                return App.game.farming.unlockedBerries[BerryType.Cheri]();
+            }));
         // Wiki
         this.mutations.push(new FlavorMutation(.00008, BerryType.Wiki,
-            [0, 25, 0, 0, 0]));
+            [0, 25, 0, 0, 0], undefined,
+            'I\'ve heard that a berry will appear if its surrounds get too dry!',
+            function(): boolean {
+                return App.game.farming.unlockedBerries[BerryType.Chesto]();
+            }));
         // Mago
         this.mutations.push(new FlavorMutation(.00007, BerryType.Mago,
-            [0, 0, 25, 0, 0]));
+            [0, 0, 25, 0, 0], undefined,
+            'I\'ve heard that a berry will appear if its surrounds get too sweet!',
+            function(): boolean {
+                return App.game.farming.unlockedBerries[BerryType.Pecha]();
+            }));
         // Aguav
         this.mutations.push(new FlavorMutation(.00006, BerryType.Aguav,
-            [0, 0, 0, 25, 0]));
+            [0, 0, 0, 25, 0], undefined,
+            'I\'ve heard that a berry will appear if its surrounds get too bitter!',
+            function(): boolean {
+                return App.game.farming.unlockedBerries[BerryType.Rawst]();
+            }));
         // Iapapa
         this.mutations.push(new FlavorMutation(.00005, BerryType.Iapapa,
-            [0, 0, 0, 0, 25]));
+            [0, 0, 0, 0, 25], undefined,
+            'I\'ve heard that a berry will appear if its surrounds get too sour!',
+            function(): boolean {
+                return App.game.farming.unlockedBerries[BerryType.Aspear]();
+            }));
 
         // Lum
         this.mutations.push(new NearBerryMutation(.00001, BerryType.Lum,
@@ -335,7 +355,8 @@ class Farming implements Feature {
                 {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
-            ]));
+            ],
+            'I\'ve heard that there\'s a legendary berry that only appears when fully surrounded by unique ripe berry plants!'));
 
         //#endregion
 

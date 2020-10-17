@@ -5,8 +5,8 @@
  */
 abstract class NearMutation extends Mutation {
 
-    constructor(mutationChance: number, mutatedBerry: BerryType) {
-        super(mutationChance, mutatedBerry);
+    constructor(mutationChance: number, mutatedBerry: BerryType, hint?: string, unlockReq?: (() => boolean)) {
+        super(mutationChance, mutatedBerry, hint, unlockReq);
     }
 
     /**
@@ -29,7 +29,7 @@ abstract class NearMutation extends Mutation {
         }
         return plots;
     }
-    
+
     /**
      * Determines if the plots near fit the requirements
      * @param plots The list of nearby plots

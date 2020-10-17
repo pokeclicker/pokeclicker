@@ -15,12 +15,12 @@ class FlavorMutation extends NearMutation {
      * @param flavorReqs The flavor requirements for the mutation to occur
      * @param moreOrEqual Whether we want at least the flavorReqs, or exactly. Set to 0 for more (default), Set to 1 for exact.
      */
-    constructor(mutationChance: number, mutatedBerry: BerryType, flavorReqs: number[], moreOrEqual = 0) {
-        super(mutationChance, mutatedBerry);
+    constructor(mutationChance: number, mutatedBerry: BerryType, flavorReqs: number[], moreOrEqual = 0, hint?: string, unlockReq?: (() => boolean)) {
+        super(mutationChance, mutatedBerry, hint, unlockReq);
         this.flavorReqs = flavorReqs;
         this.moreOrEqual = moreOrEqual;
     }
-    
+
     /**
      * Determines if the plots near fit the requirements
      * @param plots The list of nearby plots
@@ -50,4 +50,5 @@ class FlavorMutation extends NearMutation {
             return this.flavorReqs.every( (value, idx) => value <= nearFlavors[idx]);
         }
     }
+
 }

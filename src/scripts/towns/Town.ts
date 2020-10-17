@@ -3,6 +3,7 @@
 ///<reference path="../achievements/GymBadgeRequirement.ts"/>
 ///<reference path="../achievements/OneFromManyRequirement.ts"/>
 ///<reference path="NPC.ts"/>
+///<reference path="KantoBerryMasterNPC.ts"/>
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
@@ -135,8 +136,12 @@ const BigSpender = new NPC('Big Spender', [
     'I love shopping! When I come in, the cashiers know I want tons of items.',
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ]);
+const KantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
+    'Bah! You younglings have no appreciation of the art of Berry farming!',
+    'Come back when you are ready to learn!',
+]);
 
-  
+
 
 //Kanto Towns
 TownList['Pewter City'] = new Town(
@@ -157,6 +162,7 @@ TownList['Cerulean City'] = new Town(
         requirements: [new RouteKillRequirement(10, 4)],
         shop: CeruleanCityShop,
         dungeon: dungeonList['Cerulean Cave'],
+        npcs: [KantoBerryMaster],
     }
 );
 TownList['Vermillion City'] = new Town(

@@ -69,6 +69,7 @@ class Game {
         //Safari.load();
         Underground.energyTick(Underground.getEnergyRegenTime());
         DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
+        KantoBerryMasterNPC.generateMessage(new Date());
 
         this.gameState = GameConstants.GameState.fighting;
     }
