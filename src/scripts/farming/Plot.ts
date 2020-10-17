@@ -174,9 +174,11 @@ class Plot implements Saveable {
             const formattedTime = this.formattedTimeLeft();
             switch (this.stage()) {
                 case PlotStage.Seed:
+                    tooltip = `${formattedTime} until sprout`;
                 case PlotStage.Sprout:
-                case PlotStage.Taller:
                     tooltip = `${formattedTime} until growth`;
+                case PlotStage.Taller:
+                    tooltip = `${formattedTime} until bloom`;
                     break;
                 case PlotStage.Bloom:
                     tooltip = `${formattedTime} until ripe`;
@@ -218,6 +220,33 @@ class Plot implements Saveable {
             mulch: this.mulch,
             mulchTimeLeft: this.mulchTimeLeft,
         };
+    }
+
+    /**
+     * Finds the plot indices that are around the plot in a 3x3 square
+     * @param index The plot index
+     * @param filter An optional filter callback for filtering out indices
+     */
+    public static findNearPlots(index: number, filter?: (n: number) => boolean): number[] {
+        const plots = [];
+
+        const colIdx = index % 5;
+        const rowIdx = (index - colIdx) / 5;
+
+        for (let r = rowIdx - 1;r <= rowIdx + 1;r++) {
+            for (let c = colIdx - 1;c <= colIdx + 1;c++) {
+                if (r < 0 || r > 4 || c < 0 || c > 4) {
+                    continue;
+                }
+                const idx = c * 5 + r;
+                if (filter && !filter(idx)) {
+                    continue;
+                }
+                plots.push(idx);
+            }
+        }
+
+        return plots;
     }
 
     // Knockout getters/setters

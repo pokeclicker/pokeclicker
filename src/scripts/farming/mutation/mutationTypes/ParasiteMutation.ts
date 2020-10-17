@@ -44,7 +44,7 @@ class ParasiteMutation extends Mutation {
                 continue;
             }
 
-            const newHosts = this.findNearPlots(i, function(i) {
+            const newHosts = Plot.findNearPlots(i, function(i) {
                 const plot = App.game.farming.plotList[i];
                 if (!plot.isUnlocked) {
                     return false;

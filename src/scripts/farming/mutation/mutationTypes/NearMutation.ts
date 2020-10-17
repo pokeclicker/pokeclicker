@@ -22,7 +22,7 @@ abstract class NearMutation extends Mutation {
             if (!App.game.farming.plotList[i].isEmpty()) {
                 continue;
             }
-            const nearPlots = this.findNearPlots(i);
+            const nearPlots = Plot.findNearPlots(i);
             if (this.plotsFitRequirements(nearPlots)) {
                 plots.push(i);
             }
