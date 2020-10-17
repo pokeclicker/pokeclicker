@@ -13,7 +13,7 @@ style="cursor:default" tabindex="-1">
                         deals</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#help">Help</a></li>
                     <btn class="btn btn-primary">
-                        <span id="diamondCounter" data-bind='text: App.game.wallet.currencies[GameConstants.Currency.diamond]'>x</span>
+                        <span id="diamondCounter" data-bind='text: App.game.wallet.currencies[GameConstants.Currency.diamond]()'>x</span>
                         <img src='assets/images/underground/diamond.svg' width="20px'">
                     </btn>
                 </ul>
@@ -45,15 +45,25 @@ style="cursor:default" tabindex="-1">
                     <div class='row'>
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'>Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'>Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
-                        <div class='col-12 col-md-4'>
-                            <button class='btn' data-bind="text: Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ' items found'"></button>
-                            <button id="mine-prospect-result" type="button" class="btn btn-info" data-html="true"
-                                    style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px; padding: 4px;"
-                                    data-bind="tooltip: { title: () => Mine.prospectResult() || 'Prospect to get more details', trigger: 'hover', placement:'left' }">
-                                ?
-                            </button>
-                        </div>
-                        <button class='col-12 col-md-4 btn btn-success' onClick='Mine.prospect()'>Prospect (<knockout data-bind="text: Underground.PROSPECT_ENERGY"></knockout> energy)</button>
+                        <button
+                            class="col-12 col-md-4 btn btn-secondary"
+                            id="#mine-prospect-result"
+                            data-bind="
+                                text: Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ' items found',
+                                tooltip: {
+                                    title: () => Mine.prospectResult() || 'Prospect to get more details',
+                                    trigger: 'hover',
+                                    placement:'top',
+                                    html: true,
+                                }
+                            "
+                        >
+                        </button>
+                        <button
+                            class='col-12 col-md-4 btn btn-success'
+                            onClick='Mine.prospect()'
+                            data-bind="disable: Mine.prospectResult() ? true : false"
+                        >Prospect (<knockout data-bind="text: Underground.PROSPECT_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-warning' onClick='Mine.bomb()'>Bomb (<knockout data-bind="text: Underground.BOMB_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-danger' onClick='Mine.skipLayer(true)'>Skip (<knockout data-bind="text: `${Mine.skipsRemaining()} / ${Mine.maxSkips}`"></knockout>)</button>
                       </div>
@@ -112,7 +122,7 @@ style="cursor:default" tabindex="-1">
 
                     <h4><u>Treasures</u></h4>
                     <p>Sell your treasures for shards or diamonds!</p>
-                    <p>If you have found any fossils, you can hatch the pokemon they contain from the Treasures tab, or from the Day Care.</p>
+                    <p>If you have found any fossils, you can hatch the Pokémon they contain from the Treasures tab, or from the Day Care.</p>
 
                     <h4><u>Upgrades</u></h4>
                     <p>You can use your diamonds to buy all kinds of upgrades that will help you explore the underground even further!</p>
