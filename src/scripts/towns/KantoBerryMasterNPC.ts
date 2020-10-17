@@ -23,8 +23,6 @@ class KantoBerryMasterNPC extends NPC {
 
         const possibleMutations = App.game.farming.mutations.filter((mut) => mut.checkUnlockReq());
 
-        console.log(possibleMutations);
-
         const idx = Math.floor(possibleMutations.length * SeededRand.next());
 
         return possibleMutations[idx].getHint();

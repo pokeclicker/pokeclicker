@@ -275,8 +275,6 @@ class Update implements Saveable {
         if (this.isOlderVersion(this.saveVersion, '0.5.8')) {
             try {
                 //Update farms
-                console.log(saveData.farming); //TODO REMOVE
-                // Adding new properties
                 saveData.farming.unlockedBerries = Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false);
                 saveData.farming.mulchList = Array<number>(GameConstants.AMOUNT_OF_MULCHES).fill(0);
                 // Updating unlocked status
