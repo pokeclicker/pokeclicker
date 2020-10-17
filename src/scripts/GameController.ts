@@ -149,6 +149,8 @@ class GameController {
                     }
                     e.preventDefault();
                 } else if ('gymList' in player.town()) {
+                    // Close receiveBadgeModal before start another champion
+                    $('#receiveBadgeModal').removeClass('fade').modal('hide').addClass('fade');
                     const number = Number(e.key);
                     // Check if a number higher than 0 and less than total Gyms was pressed
                     if (number && number <= player.town().gymList().length) {
