@@ -230,7 +230,7 @@ class AchievementHandler {
         /*
          * REGIONAL
          */
-        GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none).forEach(region => {
+        GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none || r <= GameConstants.MAX_AVAILABLE_REGION).forEach(region => {
             // Routes
             Routes.getRoutesByRegion(region).forEach(route => {
                 AchievementHandler.addAchievement(`${route.routeName} traveler`, `Defeat 100 Pokémon on ${route.routeName}`, new RouteKillRequirement(100, region, route.number), 1, region);
