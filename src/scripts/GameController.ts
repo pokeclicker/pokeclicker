@@ -149,9 +149,6 @@ class GameController {
                     }
                     e.preventDefault();
                 } else if ('gymList' in player.town()) {
-                    // Close receiveBadgeModal before start another champion
-                    //$('#receiveBadgeModal').removeClass('fade').modal('hide').addClass('fade');
-
                     // Dont start if modal is show/shown
                     if (!$('#receiveBadgeModal').data('bs.modal')?._isShown) {
                         const number = Number(e.key);
