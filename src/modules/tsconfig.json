@@ -9,16 +9,8 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
+    "declarationDir": "../declarations",
     "moduleResolution": "node"
   },
-  "compileOnSave": false,
-  "include": ["src/modules/**/*"],
-  "exclude": [
-    "node",
-    "build",
-    "src/libs",
-    "src/specs",
-    "src/scripts",
-    "other"
-  ]
+  "compileOnSave": false
 }
