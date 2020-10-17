@@ -1,6 +1,6 @@
 ///<reference path="./MulchType.ts"/>
 class FarmController {
-    
+
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static berryListFiltered: KnockoutObservableArray<BerryType> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(1);
@@ -15,7 +15,7 @@ class FarmController {
         this.numberOfTabs(1);
         this.navigateIndex(0);
     }
-    
+
     public static openFarmModal() {
         if (App.game.farming.canAccess()) {
             this.resetPages();
@@ -84,6 +84,18 @@ class FarmController {
 
     public static resetPages() {
         this.calculateNumberOfTabs();
+    }
+
+    public static getUnlockedBerryList() {
+        return this.berryListFiltered().filter((berry) => berry <= App.game.farming.highestUnlockedBerry());
+    }
+
+    public static getBackgroundColor(index: number) {
+        return GameConstants.BerryColor[App.game.farming.berryData[index].color];
+    }
+
+    public static getBerryImage(index: number) {
+        return `assets/images/items/${BerryType[index]}.png`;
     }
 
 }

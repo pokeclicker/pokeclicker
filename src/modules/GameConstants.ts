@@ -67,6 +67,15 @@ export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
 export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
 
+export const BerryColor = [
+    '#EE8130', // Red
+    '#A33EA1', // Purple
+    '#D685AD', // Pink
+    '#7AC74C', // Green
+    '#F7D02C', // Yellow
+    '#6390F0', // Blue
+];
+
 // Dungeons
 export const DUNGEON_SIZE = 5;
 export const DUNGEON_CHEST_SHOW = 2;
