@@ -13,8 +13,6 @@ class Farming implements Feature {
         berryList: Array<number>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(0),
         unlockedBerries: Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false),
         mulchList: Array<number>(GameConstants.AMOUNT_OF_MULCHES).fill(0),
-        // TODO: Farming will mutate the default plots. We may want to generate these
-        // fresh after TS migration is completed, to avoid potential reset issues
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
             return new Plot(index === 0, BerryType.None, 0, MulchType.None, 0);
         }),
@@ -365,13 +363,13 @@ class Farming implements Feature {
 
     getReplantMultiplier(): number {
         let multiplier = 1;
-        multiplier *= 1; //App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
+        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
         return multiplier;
     }
 
     getMutationMultiplier(): number {
         let multiplier = 1;
-        multiplier *= 1; //App.game.oakItems.calculateBonus(OakItems.OakItem.Sprinklotad);
+        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprinklotad);
         return multiplier;
     }
 
@@ -391,7 +389,6 @@ class Farming implements Feature {
         this.counter += GameConstants.TICK_TIME;
         if (this.counter >= GameConstants.MUTATION_TICK) {
             this.mutations.forEach(mutation => {
-                // TODO: Handle Squirtbottle Oak Item
                 if (mutation.mutate()) {
                     notifications.add(FarmNotificationType.Mutated);
                 }
@@ -406,7 +403,7 @@ class Farming implements Feature {
         }
     }
 
-    // TODO: Change details of notifier for different notifications
+    // TODO: HLXII Change details of notifier for different notifications
     handleNotification(type: FarmNotificationType): void {
         switch (type) {
             case FarmNotificationType.Ripe:
@@ -481,7 +478,7 @@ class Farming implements Feature {
             return Infinity;
         }
 
-        // TODO: Rebalance cost based on berry growth rate
+        // TODO: HLXII Rebalance cost based on berry growth rate
         return 10 * Math.floor(Math.pow(this.unlockedPlotCount(), 2));
     }
 
@@ -599,7 +596,6 @@ class Farming implements Feature {
         GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
 
         if (!this.unlockedBerries[berry]()) {
-            // TODO: NOTIFY PLAYER?
             this.unlockedBerries[berry](true);
             FarmController.resetPages();
         }

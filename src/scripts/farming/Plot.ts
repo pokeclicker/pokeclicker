@@ -73,14 +73,14 @@ class Plot implements Saveable {
         // Updating Berry
         if (this.berry !== BerryType.None) {
             const growthTime = seconds * App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
-    
+
             const oldAge = this.age;
             this.age += growthTime;
-    
+
             if (oldAge <= App.game.farming.berryData[this.berry].growthTime[3] && this.age > App.game.farming.berryData[this.berry].growthTime[3]) {
                 this.notifications.push(FarmNotificationType.Ripe);
             }
-    
+
             if (this.age > App.game.farming.berryData[this.berry].growthTime[4]) {
                 this.die();
             }
@@ -122,11 +122,11 @@ class Plot implements Saveable {
             }
 
             // Check if berry replants itself
-            const replantChance = App.game.farming.berryData[this.berry].replantRate;
-            // TODO: Handle Sprinklotad Oak Item
+            const replantChance = App.game.farming.berryData[this.berry].replantRate * App.game.farming.getReplantMultiplier();
             if (Math.random() < replantChance) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
+                App.game.oakItems.use(OakItems.OakItem.Sprinklotad);
                 return;
             }
 

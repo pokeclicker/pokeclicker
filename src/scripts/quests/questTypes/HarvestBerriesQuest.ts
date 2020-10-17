@@ -7,7 +7,7 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
         this.focus = App.game.statistics.berriesHarvested[berryType];
     }
 
-    // TODO: Balance the reward amount better
+    // TODO: HLXII Balance the reward amount better
     private static calcReward(berryType: BerryType, amount: number): number {
         const harvestTime = App.game.farming.berryData[berryType].growthTime[3];
         const avgBerriesPerHarvest = 2.5;

@@ -55,6 +55,7 @@ abstract class Mutation {
                 return;
             }
             this.handleMutation(plot);
+            App.game.oakItems.use(OakItems.OakItem.Squirtbottle);
             mutated = true;
         }, this);
 
