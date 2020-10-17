@@ -35,9 +35,9 @@ class ChangelogUpdate extends Changelog {
         version: string,
         date: Date
     ) {
-        super(changelogType.UPDATE, version);
         const dateFormat: Intl.DateTimeFormatOptions = {year: 'numeric', month: 'long', day: 'numeric'};
-        this.description = `<code>${this.description}  -  ${date.toLocaleDateString(undefined, dateFormat)}</code>`;
+        const description = `<code>${version}  -  ${date.toLocaleDateString(undefined, dateFormat)}</code>`;
+        super(changelogType.UPDATE, description);
     }
 }
 
