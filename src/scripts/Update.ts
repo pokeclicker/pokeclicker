@@ -269,6 +269,9 @@ class Update implements Saveable {
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.5.7 - Couldn\'t update player shinies..', ಠ_ಠ);
             }
+        }
+
+        if (this.isOlderVersion(this.saveVersion, '0.5.8')) {
             try {
                 for (let s = 101; s < 134; s++) {
                     saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.routeKills, s - 52, s); // Adjust Hoenn index
@@ -280,7 +283,7 @@ class Update implements Saveable {
                 // Update save data
                 this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
-                console.error('[update] v0.5.7 - Couldn\'t update player statistics..', ಠ_ಠ);
+                console.error('[update] v0.5.8 - Couldn\'t update player statistics..', ಠ_ಠ);
             }
         }
 
