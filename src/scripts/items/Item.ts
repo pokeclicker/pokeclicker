@@ -52,8 +52,20 @@ abstract class Item {
         if (this.name() == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
             return Math.max(0, this.basePrice * amount);
         } else {
-            const res = (this.price() * (1 - Math.pow(this.multiplier, amount))) / (1 - this.multiplier);
-            return Math.max(0, Math.floor(res));
+            // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
+            //    (m_start) * (m^k) = 100
+            // => k = (2 - log(m_start)) / log(m)
+            const mStart = player.itemMultipliers[this.saveName];
+            const k = (mStart < 100)
+                ? Math.ceil((2 - Math.log10(mStart)) / Math.log10(this.multiplier))
+                : 0;
+            const incAmount = Math.min(k, amount);
+
+            const incCost = (this.price() * (1 - Math.pow(this.multiplier, incAmount))) / (1 - this.multiplier);
+            const maxCost = (this.basePrice * 100 * (amount - incAmount));
+            const total = incCost + maxCost;
+
+            return Math.max(0, Math.floor(total));
         }
     }
 
