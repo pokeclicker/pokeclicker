@@ -284,15 +284,16 @@ class Mine {
 
     public static checkCompleted() {
         if (Mine.itemsFound() >= Mine.itemsBuried()) {
-            // Check loadingNewLayer in case checkCompleted() is called multiple times before completed() completes
-            if (Mine.loadingNewLayer == false) {
-                Mine.loadingNewLayer = true;
-                setTimeout(Mine.completed, 1500);
-                GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
+            // Don't resolve queued up calls to checkCompleted() until completed() is finished and sets loadingNewLayer to false
+            if (Mine.loadingNewLayer == true) {
+                return;
+            }
+            Mine.loadingNewLayer = true;
+            setTimeout(Mine.completed, 1500);
+            GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
 
-                if (this.skipsRemaining() < this.maxSkips) {
-                    GameHelper.incrementObservable(this.skipsRemaining);
-                }
+            if (this.skipsRemaining() < this.maxSkips) {
+                GameHelper.incrementObservable(this.skipsRemaining);
             }
         }
     }
