@@ -153,7 +153,7 @@ class GameController {
                     //$('#receiveBadgeModal').removeClass('fade').modal('hide').addClass('fade');
 
                     // Dont start if modal is show/shown
-                    if (!$('#receiveBadgeModal').data('bs.modal') || !$('#receiveBadgeModal').data('bs.modal')._isShown) {
+                    if (!$('#receiveBadgeModal').data('bs.modal')?._isShown) {
                         const number = Number(e.key);
                         // Check if a number higher than 0 and less than total Gyms was pressed
                         if (number && number <= player.town().gymList().length) {
