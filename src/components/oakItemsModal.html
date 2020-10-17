@@ -8,8 +8,10 @@
                </button>
            </div>
            <div class="modal-body">
-              <div class="row" data-bind="foreach: App.game.oakItems.itemList">
-                  <div class="col p-0">
+              <ul class="row justify-content-center p-0"
+                data-bind="foreach: App.game.oakItems.itemList"
+                style="list-style-type: none;">
+                  <li class="col-0 p-0">
                       <button class="p-0 btn"
                           data-bind="css: {
                              'btn-primary': $data.isActive,
@@ -25,8 +27,8 @@
                                   click: function(){OakItemController.click($data.name)},
                                 }">
                         </button>
-                  </div>
-              </div>
+                    </li>
+                </ul>
           </div>
           <div class="modal-footer p-0">
               <table class="table table-bordered text-center m-0">
@@ -82,7 +84,7 @@
                   <!-- /ko -->
                   <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
                   <tr>
-                    <td colspan="2">Locked!<br/>Capture <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].unlockReq - App.game.party.caughtPokemon.length"></span> more unique Pokémon</td>
+                    <td colspan="2">Locked!<br/><span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].hint()"></span></td>
                   </tr>
                   <tr>
 

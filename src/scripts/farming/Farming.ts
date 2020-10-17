@@ -658,7 +658,7 @@ class Farming implements Feature {
         }
 
         const savedUnlockedBerries = json['unlockedBerries'];
-        if (this.unlockedBerries == null) {
+        if (savedUnlockedBerries == null) {
             this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         } else {
             (savedUnlockedBerries as boolean[]).forEach((value: boolean, index: number) => {
