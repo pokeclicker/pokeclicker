@@ -4,7 +4,7 @@ class RouteKillRequirement extends Requirement {
     public route: number;
     public region: GameConstants.Region;
 
-    constructor(value: number, route: number, region: GameConstants.Region, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+    constructor(value: number, region: GameConstants.Region, route: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, type);
         this.route = route;
         this.region = region;
