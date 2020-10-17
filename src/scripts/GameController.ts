@@ -150,11 +150,15 @@ class GameController {
                     e.preventDefault();
                 } else if ('gymList' in player.town()) {
                     // Close receiveBadgeModal before start another champion
-                    $('#receiveBadgeModal').removeClass('fade').modal('hide').addClass('fade');
-                    const number = Number(e.key);
-                    // Check if a number higher than 0 and less than total Gyms was pressed
-                    if (number && number <= player.town().gymList().length) {
-                        GymRunner.startGym(player.town().gymList()[number - 1]());
+                    //$('#receiveBadgeModal').removeClass('fade').modal('hide').addClass('fade');
+
+                    // Dont start if modal is show/shown
+                    if (!$('#receiveBadgeModal').data('bs.modal')._isShown) {
+                        const number = Number(e.key);
+                        // Check if a number higher than 0 and less than total Gyms was pressed
+                        if (number && number <= player.town().gymList().length) {
+                            GymRunner.startGym(player.town().gymList()[number - 1]());
+                        }
                     }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
