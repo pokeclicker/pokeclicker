@@ -1,4 +1,4 @@
-///<reference path="../oakItems/OakItem.ts"/>
+///<reference path="../oakItems/OakItems.ts"/>
 class BuyOakItem extends Item {
 
     item: OakItems.OakItem;

@@ -686,4 +686,13 @@ class Farming implements Feature {
             });
         }
     }
+
+    public static getGeneration(gen: number): BerryType[] {
+        const genBounds = [0, 8, 20, 35, 53, Infinity];
+        return App.game.farming.berryData.filter(berry => berry.type >= genBounds[gen] && berry.type < genBounds[gen + 1]).map(berry => berry.type);
+    }
+
+    public static getColor(color: BerryColor): BerryType[] {
+        return App.game.farming.berryData.filter(berry => berry.color === color).map(berry => berry.type);
+    }
 }

@@ -8,6 +8,7 @@
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
     shop?: Shop,
+    berryMaster?: Shop,
     dungeon?: Dungeon,
     npcs?: NPC[],
 };
@@ -18,6 +19,7 @@ class Town {
     public gym?: KnockoutObservable<Gym>;
     public requirements: (Requirement | OneFromManyRequirement)[];
     public shop?: KnockoutObservable<Shop>;
+    public berryMaster?: KnockoutObservable<Shop>;
     public dungeon?: KnockoutObservable<Dungeon>;
     public npcs?: KnockoutObservableArray<NPC>;
     public startingTown: boolean;
@@ -34,6 +36,7 @@ class Town {
         this.gym = ko.observable(gymList[name]);
         this.requirements = optional.requirements || [];
         this.shop = ko.observable(optional.shop);
+        this.berryMaster = ko.observable(optional.berryMaster);
         this.dungeon = ko.observable(optional.dungeon);
         this.npcs = ko.observableArray(optional.npcs);
         this.startingTown = GameConstants.StartingTowns.includes(this.name());
@@ -340,6 +343,15 @@ const BlackthornCityShop = new Shop([
     ItemList['Dragon_scale'],
 ]);
 
+//Johto Berry Master
+const JohtoBerryMaster = new Shop([
+    ItemList['Boost_Mulch'],
+    ItemList['Rich_Mulch'],
+    ItemList['Surprise_Mulch'],
+    ItemList['Amaze_Mulch'],
+    ItemList['Squirtbottle'],
+]);
+
 // Johto NPCs
 const AzaleaOldMan = new NPC('Wise Old Man', [
     'There is an old tale about the Guardian of Ilex Forest.',
@@ -393,6 +405,7 @@ TownList['Goldenrod City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 34)],
         shop: GoldenrodCityShop,
+        berryMaster: JohtoBerryMaster,
         npcs: [BigSpender],
     }
 );
@@ -574,6 +587,15 @@ const BattleFrontierShop = new Shop([
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
 ]);
 
+//Hoenn Berry Master
+const HoennBerryMaster = new Shop([
+    ItemList['Boost_Mulch'],
+    ItemList['Rich_Mulch'],
+    ItemList['Surprise_Mulch'],
+    ItemList['Amaze_Mulch'],
+    ItemList['Sprinklotad'],
+]);
+
 //Hoenn NPCs
 const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'The creators of the lands and ocean slumber within the Cave of Origin.',
@@ -636,6 +658,7 @@ TownList['Mauville City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 110)],
         shop: MauvilleCityShop,
+        berryMaster: HoennBerryMaster,
     }
 );
 TownList['Verdanturf Town'] = new Town(
@@ -888,6 +911,14 @@ const PastoriaShop = new Shop([
     ItemList['Water_egg'],
 ]);
 
+//Sinnoh Berry Master
+const SinnohBerryMaster = new Shop([
+    ItemList['Boost_Mulch'],
+    ItemList['Rich_Mulch'],
+    ItemList['Surprise_Mulch'],
+    ItemList['Amaze_Mulch'],
+]);
+
 //Sinnoh NPCs
 const FloaramaLeafeonTip = new NPC('Flower Girl', [
     'Something amazing just happened!',
@@ -964,6 +995,7 @@ TownList['Hearthome City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, 208)],
         shop: HearthomeCityShop,
+        berryMaster: SinnohBerryMaster,
         npcs: [HearthomeContestFan],
     }
 );
