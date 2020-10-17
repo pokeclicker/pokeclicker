@@ -1,4 +1,12 @@
 ///<reference path="../shop/ShopHandler.ts"/>
+
+interface ShopOptions {
+    saveName?: string,
+    maxAmount?: number,
+    multiplier?: number,
+    multiplierDecrease?: boolean,
+}
+
 abstract class Item {
     name: KnockoutObservable<string>;
     saveName: string;
@@ -10,39 +18,34 @@ abstract class Item {
     multiplier: number;
     multiplierDecrease: boolean;
 
+    _displayName: string;
+
     constructor(
         name: string,
         basePrice: number,
         currency: GameConstants.Currency = GameConstants.Currency.money,
-        {
-            saveName = '',
-            maxAmount = Number.MAX_SAFE_INTEGER,
-            multiplier = GameConstants.ITEM_PRICE_MULTIPLIER,
-            multiplierDecrease = true,
-        } : {
-            saveName?: string,
-            maxAmount?: number,
-            multiplier?: number,
-            multiplierDecrease?: boolean,
-        } = {
+        shopOptions: ShopOptions = {
             saveName: '',
             maxAmount: Number.MAX_SAFE_INTEGER,
             multiplier: GameConstants.ITEM_PRICE_MULTIPLIER,
             multiplierDecrease: true,
-        }) {
+        },
+        displayName?: string) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
-        this.saveName = saveName || name || `${name}|${GameConstants.Currency[currency]}`;
-        this.maxAmount = maxAmount;
+        this.saveName = shopOptions?.saveName || name || `${name}|${GameConstants.Currency[currency]}`;
+        this.maxAmount = shopOptions?.maxAmount;
         // Multiplier needs to be above 1
-        this.multiplier = Math.max(1, multiplier);
-        this.multiplierDecrease = multiplierDecrease;
+        this.multiplier = Math.max(1, shopOptions?.multiplier);
+        this.multiplierDecrease = shopOptions?.multiplierDecrease;
         if (!ItemList[this.saveName]) {
             ItemList[this.saveName] = this;
         }
+
+        this._displayName = displayName ?? name;
     }
 
     totalPrice(amount: number): number {
@@ -124,6 +127,9 @@ abstract class Item {
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 
+    get displayName() {
+        return GameConstants.humanifyString(this._displayName);
+    }
 }
 
 const ItemList: { [name: string]: Item } = {};

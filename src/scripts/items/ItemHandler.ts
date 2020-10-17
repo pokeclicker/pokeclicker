@@ -11,7 +11,7 @@ class ItemHandler {
     public static useItem(name: string) {
         if (!player.itemList[name]()) {
             return Notifier.notify({
-                message: `You don't have any ${GameConstants.humanifyString(name)}s left...`,
+                message: `You don't have any ${ItemList[name].displayName}s left...`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -46,7 +46,8 @@ class ItemHandler {
 
         if (!amountTotal) {
             return Notifier.notify({
-                message: `You don't have any ${this.stoneSelected().replace(/_/g, ' ')}s left...`,
+                // TODO: PMX - Update plural system to handle all cases
+                message: `You don't have any ${ItemList[this.stoneSelected()].displayName}s left...`,
                 type: NotificationConstants.NotificationOption.danger,
             });
         }
@@ -62,7 +63,8 @@ class ItemHandler {
         }
         const multiple = amountUsed == 1 ? '' : 's';
         Notifier.notify({
-            message: `You used ${amountUsed} ${GameConstants.humanifyString(this.stoneSelected())}${multiple}`,
+            // TODO: PMX - Update plural system to handle all cases
+            message: `You used ${amountUsed} ${ItemList[this.stoneSelected()].displayName}${multiple}`,
             type: NotificationConstants.NotificationOption.success,
         });
     }

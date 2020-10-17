@@ -95,7 +95,7 @@ class BattleFrontierRunner {
     public static pokemonLeftImages = ko.pureComputed(function () {
         let str = '';
         for (let i = 0; i < 3; i++) {
-            str += `<img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-small.png"${BattleFrontierBattle.pokemonIndex() > i ? ' style="filter: saturate(0);"' : ''}>`;
+            str += `<img class="pokeball-smallest" src="assets/images/pokeball/Pokeball.svg"${BattleFrontierBattle.pokemonIndex() > i ? ' style="filter: saturate(0);"' : ''}>`;
         }
         return str;
     })
