@@ -12,7 +12,7 @@ class QuestLineHelper {
         //Capture 1 pokemon
         const captureOne = new CapturePokemonsQuest(1);
         captureOne.pointsReward = 20;
-        captureOne.description = 'Capture 1 Pokémon. When you defeat a Pokémon, a pokeball is thrown and you have a chance to capture it.';
+        captureOne.description = 'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.';
         tutorial.addQuest(captureOne);
 
         //Kill 5 on route 2
@@ -24,7 +24,7 @@ class QuestLineHelper {
         //Buy pokeballs
         const buyPokeballs = new BuyPokeballsQuest(10, GameConstants.Pokeball.Pokeball, 50);
         buyPokeballs.pointsReward = 50;
-        buyPokeballs.description = 'Buy 10 pokeballs. You can find these in the Viridian City Shop.';
+        buyPokeballs.description = 'Buy 10 Pokéballs. You can find these in the Viridian City Shop.';
         tutorial.addQuest(buyPokeballs);
 
         //Buy Dungeon ticket
