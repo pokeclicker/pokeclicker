@@ -1,4 +1,5 @@
-/// <reference path="../../declarations/DataStore/StatisticStore.d.ts" />
+/// <reference path="../../declarations/DataStore/StatisticStore/index.d.ts" />
+
 class MapHelper {
     public static returnToMap() {
         if (player.currentTown()) {
@@ -90,7 +91,7 @@ class MapHelper {
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
-            if (App.game.statistics.routeKills[Routes.normalizedNumber(region, route)]() >= GameConstants.ROUTE_KILLS_NEEDED) {
+            if (App.game.statistics.routeKills[region][route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';

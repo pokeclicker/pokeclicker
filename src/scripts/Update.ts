@@ -273,13 +273,27 @@ class Update implements Saveable {
 
         if (this.isOlderVersion(this.saveVersion, '0.5.8')) {
             try {
-                for (let s = 101; s < 134; s++) {
-                    saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.routeKills, s - 52, s); // Adjust Hoenn index
-                }
-
-                for (let s = 201; s < 230; s++) {
-                    saveData.statistics.routeKills = Update.moveIndex(saveData.statistics.routeKills, s - 118, s); // Adjust Sinnoh index
-                }
+                // Hardcoded to allow upgrading from an older save, if we change
+                // the Routes class in the future. Values are lowest/highest route
+                // index
+                const regionRoutes = {
+                    kanto: [1, 25],
+                    johto: [26, 48],
+                    hoenn: [101, 134],
+                    sinnoh: [201, 230],
+                };
+                const result = saveData.statistics.routeKills.reduce((acc, nextValue, nextIndex) => {
+                    const [region] = Object.entries(regionRoutes).find(([, check]) => (
+                        // Find the region that contains this index
+                        check[0] <= nextIndex && nextIndex <= check[1]
+                    )) || ['none'];
+                    // Ensure the region has been prepared
+                    acc[region] = (acc[region] || {});
+                    // Track the route with its number in the statistics
+                    acc[region][nextIndex] = nextValue;
+                    return acc;
+                }, {});
+                saveData.statistics.routeKills = result;
                 // Update save data
                 this.setSaveData(saveData);
             } catch (ಠ_ಠ) {
