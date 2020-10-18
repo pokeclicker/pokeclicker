@@ -15,11 +15,13 @@ class Berry {
     public flavors: BerryFlavor[];
     public color: BerryColor;
 
+    public description: string[];
+
     public aura?: Aura;
 
     constructor(type: BerryType, growthTime: number[],
         harvestAmount: number, replantRate: number, farmValue: number,
-        flavors: number[], color: BerryColor,
+        flavors: number[], color: BerryColor, description: string[],
         aura?: Aura) {
         this.type = type;
         this.growthTime = growthTime;
@@ -31,6 +33,11 @@ class Berry {
             this.flavors.push({type: i, value: flavors[i]});
         }
         this.color = color;
+        this.description = description;
         this.aura = aura;
+    }
+
+    get descriptionHTML(): string {
+        return this.description.join('<br/>');
     }
 }

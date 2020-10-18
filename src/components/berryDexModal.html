@@ -13,6 +13,14 @@
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                     <tr class="text-light">
+                      <th class="bg-dark" colspan="2">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <td colspan="2"><span data-bind="html: App.game.farming.berryData[$data].descriptionHTML"></span></td>
+                  </tbody>
+                  <thead>
+                    <tr class="text-light">
                       <th class="text-left bg-dark">Type</th>
                       <th class="text-left bg-dark">Amount</th>
                     </tr>
@@ -34,6 +42,13 @@
                       <td class="text-left">Farm Tokens per Harvest</td>
                       <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].farmValue.toLocaleString('en-US')">-</code></td>
                     </tr>
+                  </tbody>
+                  <thead>
+                    <tr class="text-light">
+                      <th class="bg-dark" colspan="2">Properties</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                     <tr>
                       <td class="text-left">Color</td>
                       <td class="text-left tight"><code data-bind="text: BerryColor[App.game.farming.berryData[$data].color]">-</code></td>

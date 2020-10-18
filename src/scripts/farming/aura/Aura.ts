@@ -17,7 +17,6 @@ class Aura {
         if (plot.stage() < PlotStage.Taller) {
             return;
         }
-        console.log(this);
         const multiplier = this.auraMultipliers[plot.stage() - 2];
         switch (this.auraType) {
             case AuraType.Attract:
