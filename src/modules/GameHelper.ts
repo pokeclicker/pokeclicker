@@ -11,7 +11,7 @@ export default class GameHelper {
     public static tomorrow: Date = GameHelper.getTomorrow();
 
     public static msUntilTomorrow: KnockoutComputed<number>
-    = ko.pureComputed(() => Number(GameHelper.tomorrow) - Number(GameHelper.currentTime()));
+    = ko.pureComputed<number>(() => Number(GameHelper.tomorrow) - Number(GameHelper.currentTime()));
 
     public static formattedTimeUntilTomorrow: KnockoutComputed<string>
     = ko.pureComputed<string>(() => {
