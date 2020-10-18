@@ -85,9 +85,7 @@ gymList['Cerulean City'] = new Gym(
 gymList['Vermillion City'] = new Gym(
     'Lt. Surge',
     'Vermillion City',
-    [
-        new GymPokemon('Raichu', 37000, 28),
-    ],
+    [new GymPokemon('Raichu', 37000, 28)],
     BadgeEnums.Thunder,
     1000,
     'Whoa! You\'re the real deal, kid! Fine then, take the ThunderBadge!',
