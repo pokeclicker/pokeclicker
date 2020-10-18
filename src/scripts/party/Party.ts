@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
 /// <reference path="CaughtStatus.ts" />
 
 class Party implements Feature {
@@ -6,8 +7,6 @@ class Party implements Feature {
     saveKey = 'party';
 
     _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
-    shinyPokemon: ObservableArrayProxy<number>;
-
 
     defaults = {
         caughtPokemon: [],

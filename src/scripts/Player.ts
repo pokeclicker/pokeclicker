@@ -1,9 +1,8 @@
-///<reference path="upgrades/Upgrade.ts"/>
+/// <reference path="upgrades/Upgrade.ts" />
 
 /**
  * Required modules before porting:
  * Save.ts
- * ObservableArrayProxy.ts
  * upgrades/Upgrade.ts
  * towns/Town.ts - Town, TownList
  * worldmap/MapHelper.ts
@@ -69,10 +68,10 @@ class Player {
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
 
         // TODO(@Isha) move to underground classes.
-        this.mineInventory = new ObservableArrayProxy(savedPlayer.mineInventory || []);
-        for (const item of this.mineInventory) {
-            item.amount = ko.observable(item.amount);
-        }
+        const mineInventory = (savedPlayer.mineInventory || [])
+            // TODO: Convert this to object spread after we're on TS modules
+            .map((v) => Object.assign({}, v, { amount: ko.observable(v.amount) }));
+        this.mineInventory = ko.observableArray(mineInventory);
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
 
@@ -90,7 +89,7 @@ class Player {
     private _itemList: { [name: string]: KnockoutObservable<number> };
 
     // TODO(@Isha) move to underground classes.
-    public mineInventory: ObservableArrayProxy<any>;
+    public mineInventory: KnockoutObservableArray<any>;
 
     public _lastSeen: number;
 
@@ -170,8 +169,8 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public hasMineItems() {
-        for (let i = 0; i < this.mineInventory.length; i++) {
-            if (this.mineInventory[i].amount() > 0) {
+        for (let i = 0; i < this.mineInventory().length; i++) {
+            if (this.mineInventory()[i].amount() > 0) {
                 return true;
             }
         }
@@ -180,8 +179,8 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
-        for (let i = 0; i < player.mineInventory.length; i++) {
-            if (player.mineInventory[i].id === id) {
+        for (let i = 0; i < player.mineInventory().length; i++) {
+            if (player.mineInventory()[i].id === id) {
                 return i;
             }
         }
@@ -192,7 +191,7 @@ class Player {
     public getUndergroundItemAmount(id: number) {
         const index = this.mineInventoryIndex(id);
         if (index > -1) {
-            return player.mineInventory[index].amount();
+            return player.mineInventory()[index].amount();
         } else {
             return 0;
         }
