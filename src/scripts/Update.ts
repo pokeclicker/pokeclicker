@@ -287,6 +287,12 @@ class Update implements Saveable {
                         // Find the region that contains this index
                         check[0] <= nextIndex && nextIndex <= check[1]
                     )) || ['none'];
+                    // Skip over any statistics for the 'none' region that are also 0, since
+                    // these are just the gaps in the route numbers
+                    if (region === 'none' && nextValue === 0) {
+                        return acc;
+                    }
+
                     // Ensure the region has been prepared
                     acc[region] = (acc[region] || {});
                     // Track the route with its number in the statistics
