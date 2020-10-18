@@ -1,4 +1,5 @@
 ///<reference path="pokemons/PokemonFactory.ts"/>
+/// <reference path="../declarations/GameHelper.d.ts" />
 
 /**
  * Handles all logic related to battling

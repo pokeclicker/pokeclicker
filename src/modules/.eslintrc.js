@@ -31,5 +31,6 @@ module.exports = {
             tuples: 'always-multiline',
         }],
         '@typescript-eslint/lines-between-class-members': ['error', { exceptAfterSingleLine: true }],
+        '@typescript-eslint/member-ordering': ['error'],
     },
 };

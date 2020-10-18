@@ -1,5 +1,5 @@
-///<reference path="./utilities/Sound.ts"/>
-///<reference path="./settings/BooleanSetting.ts"/>
+/// <reference path="../declarations/settings/BooleanSetting.d.ts" />
+/// <reference path="./utilities/Sound.ts" />
 
 /**
  * Contains all notification constants for easy access.

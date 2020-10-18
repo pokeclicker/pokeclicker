@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 abstract class Quest {
     index: number;
     amount: number
