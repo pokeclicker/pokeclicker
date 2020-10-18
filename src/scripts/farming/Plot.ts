@@ -82,28 +82,28 @@ class Plot implements Saveable {
 
             let auraStr = '';
             if (this.auraGrowth() !== 1) {
-                auraStr += `Growth: ${this.auraGrowth()}x`;
+                auraStr += `Growth: ${this.auraGrowth().toFixed(2)}x`;
             }
 
             if (this.auraHarvest() !== 1) {
                 if (auraStr) {
                     auraStr += '<br/>';
                 }
-                auraStr += `Harvest: ${this.auraHarvest()}x`;
+                auraStr += `Harvest: ${this.auraHarvest().toFixed(2)}x`;
             }
 
             if (this.auraMutation() !== 1) {
                 if (auraStr) {
                     auraStr += '<br/>';
                 }
-                auraStr += `Mutation: ${this.auraMutation()}x`;
+                auraStr += `Mutation: ${this.auraMutation().toFixed(2)}x`;
             }
 
             if (this.auraReplant() !== 1) {
                 if (auraStr) {
                     auraStr += '<br/>';
                 }
-                auraStr += `Replant: ${this.auraReplant()}x`;
+                auraStr += `Replant: ${this.auraReplant().toFixed(2)}x`;
             }
             return auraStr;
         }, this);
