@@ -125,6 +125,7 @@
                                             </div>
                                             <div data-bind="if: $data.isEmpty()">
                                                 <div class="plotButton"
+                                                    data-html=true
                                                     data-bind="click: function(){FarmController.plotClick($index())}, tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false}">
                                                 </div>
                                             </div>

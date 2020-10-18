@@ -44,7 +44,7 @@ class FarmController {
     public static getTooltipLabel(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
 
-        return plot.toolTip();
+        return plot.tooltip();
     }
 
     public static plotClick(index: number) {

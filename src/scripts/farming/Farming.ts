@@ -5,6 +5,8 @@ class Farming implements Feature {
     berryData: Berry[] = [];
     mutations: Mutation[] = [];
 
+    externalAuras: KnockoutObservable<number>[];
+
     counter = 0;
 
     readonly AMOUNT_OF_PLOTS = 25;
@@ -28,6 +30,10 @@ class Farming implements Feature {
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         this.plotList = this.defaults.plotList;
+
+        this.externalAuras = [];
+        this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
+        this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
     }
 
     initialize(): void {
@@ -37,7 +43,7 @@ class Farming implements Feature {
         //#region First Generation
         this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16], //[5,10,20,30,60] TODO: Change back after testing
             2, .5, 6,
-            [10, 0, 0, 0, 0], BerryColor.Red);
+            [10, 0, 0, 0, 0], BerryColor.Red, new Aura(AuraType.Growth, [1.05, 1.1, 1.15]));
         this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5,15,25,40,80],
             3, .5, 8,
             [0, 10, 0, 0, 0], BerryColor.Purple);
@@ -399,8 +405,12 @@ class Farming implements Feature {
 
         const notifications = new Set<FarmNotificationType>();
 
+        let change = false;
+
         this.plotList.forEach(plot => {
-            plot.update(timeToReduce);
+            if (plot.update(timeToReduce)) {
+                change = true;
+            }
             if (plot.notifications) {
                 plot.notifications.forEach(n => notifications.add(n));
                 plot.notifications = [];
@@ -412,9 +422,14 @@ class Farming implements Feature {
             this.mutations.forEach(mutation => {
                 if (mutation.mutate()) {
                     notifications.add(FarmNotificationType.Mutated);
+                    change = true;
                 }
             });
             this.counter = 0;
+        }
+
+        if (change) {
+            this.resetAuras();
         }
 
         if (notifications.size) {
@@ -478,6 +493,14 @@ class Farming implements Feature {
         }
     }
 
+    resetAuras() {
+        this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
+        this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
+        this.plotList.forEach(plot => plot.clearAuras());
+
+        this.plotList.forEach((plot, idx) => plot.applyAura(idx));
+    }
+
     unlockPlot() {
         const index = this.unlockBerryIndex();
         if (this.canBuyPlot()) {
@@ -520,7 +543,7 @@ class Farming implements Feature {
         return 0;
     }
 
-    plant(index: number, berry: BerryType) {
+    plant(index: number, berry: BerryType, suppressResetAura = false) {
         const plot = this.plotList[index];
         if (!plot.isEmpty() || !plot.isUnlocked || !this.hasBerry(berry)) {
             return;
@@ -530,19 +553,24 @@ class Farming implements Feature {
         plot.berry = berry;
         plot.age = 0;
         plot.notifications = [];
+
+        if (!suppressResetAura) {
+            this.resetAuras();
+        }
     }
 
     plantAll(berry: BerryType) {
         this.plotList.forEach((plot, index) => {
-            this.plant(index, berry);
+            this.plant(index, berry, true);
         });
+        this.resetAuras();
     }
 
     /**
      * Harvest a plot at the given index
      * @param index The index of the plot to harvest
      */
-    harvest(index: number): void {
+    harvest(index: number, suppressResetAura = false): void {
         const plot = this.plotList[index];
         if (plot.berry === BerryType.None || plot.stage() != PlotStage.Berry) {
             return;
@@ -559,6 +587,8 @@ class Farming implements Feature {
         App.game.oakItems.use(OakItems.OakItem.Sprayduck);
 
         plot.die(true);
+
+        this.resetAuras();
     }
 
     /**
@@ -566,8 +596,9 @@ class Farming implements Feature {
      */
     public harvestAll() {
         this.plotList.forEach((plot, index) => {
-            this.harvest(index);
+            this.harvest(index, true);
         });
+        this.resetAuras();
     }
 
     /**
