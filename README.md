@@ -12,6 +12,13 @@ You can reach out on discord to discuss your ideas and how to implement them: ht
 
 # Developer instructions
 
+## Editor/IDE setup
+
+We have an [EditorConfig](https://editorconfig.org/) and linting configured, to help everyone write similar code. You will find our recommended plugins for VSCode below, however you should be able to find a plugin for other IDEs as well.
+
+* [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+* [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
 ## Building from Source
 
 First make sure you have git and npm available as command-line utilities (so you should install Git and NodeJS if you don't have them already).

@@ -48,7 +48,7 @@ SpecialEvents.newEvent('Flying Pikachu', 'Encounter Flying Pikachu for a limited
         RoamingPokemonList.remove(GameConstants.Region.kanto, 'Flying Pikachu');
     }
 );
-SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokemon roaming in Kanto.',
+SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a limited time in Cerulean Cave.<br/>Encounter clone Pokémon roaming in Kanto.',
     // Start
     new Date(new Date().getFullYear(), 6, 18, 1), () => {
         dungeonList['Cerulean Cave'].bossList.push(new DungeonBossPokemon('Armored Mewtwo', 1000000, 80));
@@ -62,7 +62,7 @@ SpecialEvents.newEvent('Mewtwo strikes back!', 'Encounter Armored Mewtwo for a l
         RoamingPokemonList.list[GameConstants.Region.kanto] = RoamingPokemonList.list[GameConstants.Region.kanto].filter(r => !['Bulbasaur (clone)', 'Charmander (clone)', 'Squirtle (clone)'].includes(r.pokemon.name));
     }
 );
-SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokemon for a limited time around Kanto, Johto and Hoenn.',
+SpecialEvents.newEvent('Halloween!', 'Encounter Spooky Pokémon for a limited time around Kanto, Johto and Hoenn.',
     // Start
     new Date(new Date().getFullYear(), 9, 30, 1), () => {
         SeededRand.seed(new Date().getFullYear());

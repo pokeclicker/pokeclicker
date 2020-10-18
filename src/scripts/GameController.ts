@@ -100,6 +100,23 @@ class GameController {
                 }
 
             },
+            'update': function (element, valueAccessor) {
+                const local = ko.utils.unwrapObservable(valueAccessor());
+                const options = {};
+
+                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+                ko.utils.extend(options, local);
+
+                // Update the config of the tooltip
+                const tooltipData = $(element).data('bs.tooltip');
+                tooltipData.config.title = (options as any).title;
+
+                // If the tooltip is visible, update its text
+                const tooltipInner = tooltipData.tip && tooltipData.tip.querySelector('.tooltip-inner');
+                if (tooltipInner) {
+                    tooltipInner.innerHTML = tooltipData.config.title || '';
+                }
+            },
             options: {
                 placement: 'bottom',
                 trigger: 'click',
@@ -149,10 +166,13 @@ class GameController {
                     }
                     e.preventDefault();
                 } else if ('gymList' in player.town()) {
-                    const number = Number(e.key);
-                    // Check if a number higher than 0 and less than total Gyms was pressed
-                    if (number && number <= player.town().gymList().length) {
-                        GymRunner.startGym(player.town().gymList()[number - 1]());
+                    // Dont start if modal is show/shown
+                    if (!$('#receiveBadgeModal').data('bs.modal')?._isShown) {
+                        const number = Number(e.key);
+                        // Check if a number higher than 0 and less than total Gyms was pressed
+                        if (number && number <= player.town().gymList().length) {
+                            GymRunner.startGym(player.town().gymList()[number - 1]());
+                        }
                     }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {

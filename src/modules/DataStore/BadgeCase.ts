@@ -1,7 +1,7 @@
+import { Observable } from 'knockout';
 import { Feature } from './common/Feature';
 import * as GameConstants from '../GameConstants';
 import BadgeEnums from '../enums/Badges';
-import getArrayOfObservables from '../utilities/getArrayOfObservables';
 
 const emptyBadgeList = new Array(GameConstants.RegionGyms.flat().length).fill(false);
 
@@ -12,19 +12,19 @@ export default class BadgeCase implements Feature {
 
     defaults: Record<string, any> = {};
 
-    badgeList: Array<boolean> = getArrayOfObservables(emptyBadgeList);
+    badgeList: Array<Observable<boolean>> = emptyBadgeList.map((v) => ko.observable(v));
 
     badgeCount(): number {
-        return this.badgeList.reduce((a, b) => Number(a) + Number(b), 0);
+        return this.badgeList.reduce((acc, b) => (acc + Number(b())), 0);
     }
 
     gainBadge(badge: BadgeEnums): void {
-        this.badgeList[badge] = true;
+        this.badgeList[badge](true);
     }
 
     hasBadge(badge: BadgeEnums): boolean {
         if (badge === null || badge === BadgeEnums.None) { return true; }
-        return !!this.badgeList[badge];
+        return !!this.badgeList[badge]();
     }
 
     // This method intentionally left blank
@@ -40,7 +40,7 @@ export default class BadgeCase implements Feature {
         }
 
         json.forEach((hasBadge, index) => {
-            this.badgeList[index] = hasBadge;
+            this.badgeList[index](hasBadge);
         });
     }
 
@@ -48,7 +48,8 @@ export default class BadgeCase implements Feature {
         let shouldReturn = false;
         // We only want to save upto the highest badge we have obtained,
         // everything else is assumed to be false
-        return [...this.badgeList]
+        return this.badgeList
+            .map(ko.unwrap)
             .reverse()
             .filter((hasBadge) => {
                 shouldReturn = shouldReturn || hasBadge;
