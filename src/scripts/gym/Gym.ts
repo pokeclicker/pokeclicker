@@ -66,7 +66,7 @@ gymList['Pewter City'] = new Gym(
     ],
     BadgeEnums.Boulder,
     250,
-    'I took you for granted. As proof of your victory, here\'s the BoulderBadge!',
+    'I took you for granted. As proof of your victory, here\'s the Boulder Badge!',
     [new RouteKillRequirement(10, 2)]
 );
 
