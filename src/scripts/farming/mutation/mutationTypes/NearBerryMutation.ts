@@ -40,6 +40,9 @@ class NearBerryMutation extends NearMutation {
         if (this.berryReqs.length === 3) {
             return `I\'ve heard that growing ${BerryType[this.berryReqs[0].berryType]}, ${BerryType[this.berryReqs[1].berryType]}, and ${BerryType[this.berryReqs[2].berryType]} Berries near each other will produce something interesting!`;
         }
+        if (this.berryReqs.length === 4) {
+            return `I\'ve heard that growing ${BerryType[this.berryReqs[0].berryType]}, ${BerryType[this.berryReqs[1].berryType]}, ${BerryType[this.berryReqs[2].berryType]}, and ${BerryType[this.berryReqs[3].berryType]} Berries near each other will produce something interesting!`;
+        }
         return super.getHint();
     }
 

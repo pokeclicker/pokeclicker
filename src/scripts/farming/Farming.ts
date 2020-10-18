@@ -208,20 +208,20 @@ class Farming implements Feature {
             [0, 15, 0, 10, 0], BerryColor.Blue,
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
-                'This Berry the fruiting of nearby Berry plants.',
-            ]); // TODO: Set properties
+                'This Berry the promotes the fruiting of nearby Berry plants.',
+            ], new Aura(AuraType.Harvest, [1.2, 1.4, 1.6])); // TODO: Set properties
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [5,10,15,20,40],
             1, .1, 60,
             [0, 0, 15, 0, 10], BerryColor.Yellow,
             [
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
                 'The same energy promotes the growth of nearby Berries.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Growth, [1.2, 1.4, 1.6])); // TODO: Set properties
         this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [5,10,15,20,40],
             1, .1, 60,
             [10, 0, 0, 15, 0], BerryColor.Green,
             [
-                'This berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
+                'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
                 'It has a tendency to expand into nearby plots.',
             ]); // TODO: Set properties
         this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [5,10,15,20,40],
@@ -230,28 +230,29 @@ class Farming implements Feature {
             [
                 'This Berry has a refreshing flavor that strikes a good balance of dryness and sourness. It tastes better chilled.',
                 'This Berry slows the growth of nearby Berries.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Growth, [0.9, 0.8, 0.7])); // TODO: Set properties
         this.berryData[BerryType.Chople]    = new Berry(BerryType.Chople,   [5,10,15,20,40],
             1, .1, 60,
             [15, 0, 0, 10, 0], BerryColor.Red,
             [
                 'This Berry contains a substance that generates heat. It can even heat up a chilly heart.',
                 'Growing these Berries will promote Egg growth.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Egg, [1.1, 1.2, 1.3])); // TODO: Set properties
         this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [5,10,15,20,40],
             1, .1, 60,
             [0, 15, 0, 0, 10], BerryColor.Green,
             [
                 'This Berry is a brilliant green on the outside. Inside, it is packed with a dry-flavored, black-colored flesh.',
                 'It has a tendency to overtake nearby plants.',
-            ]); // TODO: Set properties
+                'Due to its poisonous nature, it increases the chances of mutations near it.',
+            ], new Aura(AuraType.Mutation, [1.2, 1.4, 1.6])); // TODO: Set properties
         this.berryData[BerryType.Shuca]     = new Berry(BerryType.Shuca,    [5,10,15,20,40],
             1, .1, 60,
             [10, 0, 15, 0, 0], BerryColor.Yellow,
             [
                 'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
                 'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Replant, [1.2, 1.4, 1.6])); // TODO: Set properties
         this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [5,10,15,20,40],
             1, .1, 60,
             [0, 10, 0, 15, 0], BerryColor.Blue,
@@ -262,35 +263,35 @@ class Farming implements Feature {
             [
                 'This Berry is said to sense human emotions for the way it swells roundly when a person approaches.',
                 'The same behavior affects nearby plants, causing additional mutations.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Mutation, [1.1, 1.2, 1.3])); // TODO: Set properties
         this.berryData[BerryType.Tanga]     = new Berry(BerryType.Tanga,    [5,10,15,20,40],
             1, .1, 60,
             [20, 0, 0, 0, 10], BerryColor.Green,
             [
                 'The flower grows at the tip of this Berry. It attracts Bug Pokémon by letting its stringy petals stream out.',
                 'The attracted Bug Pokémon decreases the amount of harvestable Berries in nearby plants',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7])); // TODO: Set properties
         this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [5,10,15,20,40],
             1, .1, 60,
             [10, 20, 0, 0, 0], BerryColor.Yellow,
             [
                 'It is often used for pickles because of its very dry flavor. It can also be eaten raw for its provocative taste.',
                 'This Berry plant hardens the surrounding soil, decreasing the chances of replanting.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Replant, [0.9, 0.8, 0.7])); // TODO: Set properties
         this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [5,10,15,20,40],
             1, .1, 60,
             [0, 10, 20, 0, 0], BerryColor.Purple,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
                 'Nearby Pokémon are wary of this Berry plant.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Attract, [0.9, 0.8, 0.7])); // TODO: Set properties
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [5,10,15,20,40],
             1, .1, 60,
             [0, 0, 10, 20, 0], BerryColor.Red,
             [
                 'If a large enough volume of this Berry is boiled down, its bitterness fades away. It makes a good jam.',
                 'This Berry requires a lot of energy to grow, stealing away nutrients from nearby plots.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Growth, [0.8, 0.6, 0.5])); // TODO: Set properties
         this.berryData[BerryType.Colbur]    = new Berry(BerryType.Colbur,   [5,10,15,20,40],
             1, .1, 60,
             [0, 0, 0, 10, 20], BerryColor.Purple,
@@ -304,7 +305,7 @@ class Farming implements Feature {
             [
                 'This Berry is very tough with a strong flavor. It was used to make medicine by people in the past.',
                 'This Berry plant is very hardy and resistant, causing less mutations around it.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Mutation, [0.9, 0.8, 0.7])); // TODO: Set properties
         this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [5,10,15,20,40],
             1, .1, 60,
             [0, 25, 10, 0, 0], BerryColor.Yellow,
@@ -315,7 +316,7 @@ class Farming implements Feature {
             [
                 'This Berry is sweet with a hint of bitterness and has a lingering sweet scent. It is often dried and used to make tea.',
                 'The scent of this Berry plant attracts wild Pokémon.',
-            ]); // TODO: Set properties
+            ], new Aura(AuraType.Attract, [1.2, 1.4, 1.6])); // TODO: Set properties
         //#endregion
 
         //#region Fifth Generation
@@ -472,7 +473,7 @@ class Farming implements Feature {
             }));
 
         // Lum
-        this.mutations.push(new NearBerryMutation(.00001, BerryType.Lum,
+        this.mutations.push(new NearBerryMutation(.000015, BerryType.Lum,
             [
                 {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
@@ -554,14 +555,14 @@ class Farming implements Feature {
         this.mutations.push(new NearBerryMutation(.00003, BerryType.Nomel,
             [{berryType: BerryType.Pinap, berryStage: PlotStage.Berry}]));
         // Spelon
-        this.mutations.push(new FlavorMutation(.00003, BerryType.Spelon,
+        this.mutations.push(new FlavorMutation(.00002, BerryType.Spelon,
             [130, 0, 0, 0, 0], undefined,
             'I\'ve heard that a Berry will appear if its surroundings get extremely spicy!',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Tamato]();
             }));
         // Pamtre
-        this.mutations.push(new FlavorMutation(.00003, BerryType.Pamtre,
+        this.mutations.push(new FlavorMutation(.00002, BerryType.Pamtre,
             [0, 130, 0, 0, 0], undefined,
             'I\'ve heard that a Berry will appear if its surroundings get extremely dry!',
             function(): boolean {
@@ -571,21 +572,21 @@ class Farming implements Feature {
         this.mutations.push(new NearBerryMutation(.00004, BerryType.Pamtre,
             [{berryType: BerryType.Pamtre, berryStage: PlotStage.Berry}], undefined, undefined, false));
         // Watmel
-        this.mutations.push(new FlavorMutation(.00003, BerryType.Watmel,
+        this.mutations.push(new FlavorMutation(.00002, BerryType.Watmel,
             [0, 0, 130, 0, 0], undefined,
             'I\'ve heard that a Berry will appear if its surroundings get extremely sweet!',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Magost]();
             }));
         // Durin
-        this.mutations.push(new FlavorMutation(.00003, BerryType.Durin,
+        this.mutations.push(new FlavorMutation(.00002, BerryType.Durin,
             [0, 0, 0, 130, 0], undefined,
             'I\'ve heard that a Berry will appear if its surroundings get extremely bitter!',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Rabuta]();
             }));
         // Belue
-        this.mutations.push(new FlavorMutation(.00003, BerryType.Belue,
+        this.mutations.push(new FlavorMutation(.00002, BerryType.Belue,
             [0, 0, 0, 0, 130], undefined,
             'I\'ve heard that a Berry will appear if its surroundings get extremely sour!',
             function(): boolean {
@@ -596,9 +597,167 @@ class Farming implements Feature {
 
         //#region Fourth Generation
 
+        // Occa
+        this.mutations.push(new NearBerryMutation(.00001, BerryType.Occa,
+            [
+                {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Figy, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Tamato, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Spelon, berryStage: PlotStage.Berry},
+            ]));
+        // Occa Overgrow
+        this.mutations.push(new ParasiteMutation(.00004, BerryType.Occa,
+            BerryType.Occa, undefined, undefined, undefined, false));
+        // Passho
+        this.mutations.push(new NearBerryMutation(.00001, BerryType.Passho,
+            [
+                {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Kelpsy, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Coba, berryStage: PlotStage.Berry},
+            ]));
+        // Wacan
+        this.mutations.push(new NearBerryMutation(.00001, BerryType.Wacan,
+            [
+                {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Pinap, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Nomel, berryStage: PlotStage.Berry},
+            ]));
+        // Rindo
+        this.mutations.push(new FlavorMutation(.00001, BerryType.Rindo,
+            [10, 0, 0, 15, 0], true,
+            'I\'ve heard that a berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
+            function(): boolean {
+                return App.game.farming.unlockedBerries[BerryType.Aguav]() &&
+                App.game.farming.unlockedBerries[BerryType.Cheri]();
+            }));
+        // Rindo Overgrow
+        this.mutations.push(new NearBerryMutation(.00004, BerryType.Rindo,
+            [{berryType: BerryType.Rindo, berryStage: PlotStage.Berry}], undefined, undefined, false));
+        // Yache
+        this.mutations.push(new StrictNearMutation(.00001, BerryType.Yache, [{berryType: BerryType.Passho, berryStage: PlotStage.Berry}]));
+        // Chople
+        this.mutations.push(new EvolutionMutation(.00001, BerryType.Chople, BerryType.Spelon, function() {
+            return App.game.oakItems.isActive(OakItems.OakItem.Blaze_Cassette);
+        }, 'I\'ve heard that using the Blaze Cassette will cause Spelon Berries to change!', function() {
+            return App.game.oakItems.isUnlocked(OakItems.OakItem.Blaze_Cassette) &&
+            App.game.farming.unlockedBerries[BerryType.Figy]();
+        }));
+        // Kebia
+        this.mutations.push(new EvolutionMutation(.00001, BerryType.Kebia, BerryType.Pamtre, function() {
+            return App.game.oakItems.isActive(OakItems.OakItem.Poison_Barb);
+        }, 'I\'ve heard that using the Poison Barb will cause Pamtre Berries to change!', function() {
+            return App.game.oakItems.isUnlocked(OakItems.OakItem.Poison_Barb) &&
+            App.game.farming.unlockedBerries[BerryType.Pamtre]();
+        }));
+        // Kebia Overgrow
+        this.mutations.push(new ParasiteMutation(.00004, BerryType.Kebia,
+            BerryType.Kebia, undefined, undefined, undefined, false));
+        // Shuca
+        this.mutations.push(new EvolutionMutation(.00001, BerryType.Shuca, BerryType.Watmel, function() {
+            return App.game.oakItems.isActive(OakItems.OakItem.Sprinklotad);
+        }, 'I\'ve heard that using the Sprinklotad will cause Watmel Berries to change!', function() {
+            return App.game.oakItems.isUnlocked(OakItems.OakItem.Sprinklotad) &&
+            App.game.farming.unlockedBerries[BerryType.Watmel]();
+        }));
+        // Coba
+        this.mutations.push(new FlavorMutation(.00001, BerryType.Coba,
+            [0, 10, 0, 15, 0], true,
+            'I\'ve heard that a berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
+            function(): boolean {
+                return App.game.farming.unlockedBerries[BerryType.Chesto]() &&
+                App.game.farming.unlockedBerries[BerryType.Aguav]();
+            }));
+        // Payapa
+        this.mutations.push(new NearBerryMutation(.00001, BerryType.Payapa,
+            [
+                {berryType: BerryType.Wiki, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Bluk, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Cornn, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Pamtre, berryStage: PlotStage.Berry},
+            ]));
+        // Tanga
+        this.mutations.push(new StrictNearMutation(.00001, BerryType.Tanga, [{berryType: BerryType.Rindo, berryStage: PlotStage.Berry}]));
+        // Charti
+        this.mutations.push(new EvolutionMutation(.00001, BerryType.Charti, BerryType.Cornn, function() {
+            return App.game.oakItems.isActive(OakItems.OakItem.Cell_Battery);
+        }, 'I\'ve heard that using the Cell Battery will cause Cornn Berries to change!', function() {
+            return App.game.oakItems.isUnlocked(OakItems.OakItem.Cell_Battery) &&
+            App.game.farming.unlockedBerries[BerryType.Cornn]();
+        }));
+        // Kasib
+        // No mutation, will check withers
+        // Haban
+        this.mutations.push(new NearBerryMutation(.00001, BerryType.Haban,
+            [
+                {berryType: BerryType.Occa, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Rindo, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Passho, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Wacan, berryStage: PlotStage.Berry},
+            ]));
+        // Colbur
+        this.mutations.push(new NearBerryMutation(.00001, BerryType.Colbur,
+            [
+                {berryType: BerryType.Rabuta, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Kasib, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Payapa, berryStage: PlotStage.Berry},
+            ]));
+        // Colbur Overgrow
+        this.mutations.push(new ParasiteMutation(.00001, BerryType.Colbur,
+            BerryType.Colbur, undefined, undefined, undefined, false));
+        // Babiri
+        this.mutations.push(new StrictNearMutation(.00001, BerryType.Babiri,
+            [
+                {berryType: BerryType.Shuca, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Charti, berryStage: PlotStage.Berry},
+            ]));
+        // Chilan
+        this.mutations.push(new EvolutionMutation(.00004, BerryType.Chilan, BerryType.Chople, function() {
+            return true;
+        }, 'I\'ve heard that Chople Berries randomly turn into a new Berry type!', function() {
+            return App.game.farming.unlockedBerries[BerryType.Chople]();
+        }));
+        // Roseli
+        this.mutations.push(new NearBerryMutation(.00001, BerryType.Roseli,
+            [
+                {berryType: BerryType.Mago, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Nanab, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Magost, berryStage: PlotStage.Berry},
+                {berryType: BerryType.Watmel, berryStage: PlotStage.Berry},
+            ]));
         //#endregion
 
         //#region Fifth Generation
+
+        // Liechi
+
+        // Ganlon
+
+        // Salac
+
+        // Petaya
+
+        // Apicot
+
+        // Lansat
+
+        // Starf
+
+        // Micle
+
+        // Custap
+
+        // Jaboca
+
+        // Rowap
+
+        // Kee
+
+        // Maranga
+
+        //Enigma
+
 
         //#endregion
 

@@ -263,7 +263,7 @@ class Plot implements Saveable {
             }
 
             // Check if berry replants itself
-            const replantChance = App.game.farming.berryData[this.berry].replantRate * App.game.farming.getReplantMultiplier();
+            const replantChance = App.game.farming.berryData[this.berry].replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier();
             if (Math.random() < replantChance) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
@@ -271,8 +271,21 @@ class Plot implements Saveable {
                 return;
             }
 
-            // Reset plant
             this.notifications.push(FarmNotificationType.Withered);
+
+            // Check for Kasib replants
+            if (App.game.farming.highestUnlockedBerry() > BerryType.Occa) {
+                if (App.game.farming.plotList.every(plot => plot.berry !== BerryType.Colbur)) {
+                    if (Math.random() < 0.05) {
+                        this.notifications.push(FarmNotificationType.Mutated);
+                        this.berry = BerryType.Kasib;
+                        this.age = 0;
+                        return;
+                    }
+                }
+            }
+
+            // Reset plant
             this.berry = BerryType.None;
             this.age = 0;
         }
@@ -282,24 +295,62 @@ class Plot implements Saveable {
      * Gets the growth multiplier for this plot
      */
     getGrowthMultiplier(): number {
+        let multiplier = 1;
         if (this.mulch === MulchType.Boost_Mulch) {
-            return GameConstants.BOOST_MULCH_MULTIPLIER;
+            multiplier = GameConstants.BOOST_MULCH_MULTIPLIER;
         } else if (this.mulch === MulchType.Amaze_Mulch) {
-            return GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER;
+            multiplier =  GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER;
         }
 
-        return 1;
+        multiplier *= this._auras[AuraType.Growth]();
+
+        return multiplier;
     }
 
     /**
      * Gets the harvest multiplier for this plot
      */
     getHarvestMultiplier(): number {
+        let multiplier = 1;
         if (this.mulch === MulchType.Rich_Mulch) {
-            return GameConstants.RICH_MULCH_MULTIPLIER;
+            multiplier = GameConstants.RICH_MULCH_MULTIPLIER;
         } else if (this.mulch === MulchType.Amaze_Mulch) {
-            return GameConstants.AMAZE_MULCH_PRODUCE_MULTIPLIER;
+            multiplier = GameConstants.AMAZE_MULCH_PRODUCE_MULTIPLIER;
         }
+
+        multiplier *= this._auras[AuraType.Harvest]();
+
+        return 1;
+    }
+
+    /**
+     * Gets the replant multiplier for this plot
+     */
+    getReplantMultiplier(): number {
+        let multiplier = 1;
+        if (this.mulch === MulchType.Rich_Mulch) {
+            multiplier = GameConstants.RICH_MULCH_MULTIPLIER;
+        } else if (this.mulch === MulchType.Amaze_Mulch) {
+            multiplier = GameConstants.AMAZE_MULCH_PRODUCE_MULTIPLIER;
+        }
+
+        multiplier *= this._auras[AuraType.Replant]();
+
+        return 1;
+    }
+
+    /**
+     * Gets the mutation multiplier for this plot
+     */
+    getMutationMultiplier(): number {
+        let multiplier = 1;
+        if (this.mulch === MulchType.Surprise_Mulch) {
+            multiplier = GameConstants.SURPRISE_MULCH_MULTIPLIER;
+        } else if (this.mulch === MulchType.Amaze_Mulch) {
+            multiplier = GameConstants.AMAZE_MULCH_MUTATE_MULTIPLIER;
+        }
+
+        multiplier *= this._auras[AuraType.Mutation]();
 
         return 1;
     }
