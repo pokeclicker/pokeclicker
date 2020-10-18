@@ -79,7 +79,7 @@ gymList['Cerulean City'] = new Gym(
     ],
     BadgeEnums.Cascade,
     500,
-    'I can\'t believe I lost! All right! You can have the CascadeBadge to show you beat me!',
+    'I can\'t believe I lost! All right! You can have the Cascade Badge to show you beat me!',
     [new RouteKillRequirement(10, 4)]
 );
 gymList['Vermillion City'] = new Gym(
@@ -88,7 +88,7 @@ gymList['Vermillion City'] = new Gym(
     [new GymPokemon('Raichu', 37000, 28)],
     BadgeEnums.Thunder,
     1000,
-    'Whoa! You\'re the real deal, kid! Fine then, take the ThunderBadge!',
+    'Whoa! You\'re the real deal, kid! Fine then, take the Thunder Badge!',
     [
         new RouteKillRequirement(10, 6),
         new GymBadgeRequirement(BadgeEnums.Cascade),
@@ -104,7 +104,7 @@ gymList['Celadon City'] = new Gym(
     ],
     BadgeEnums.Rainbow,
     1500,
-    'Oh! I concede defeat. You are remarkably strong. I must confer you the RainbowBadge.',
+    'Oh! I concede defeat. You are remarkably strong. I must confer you the Rainbow Badge.',
     [new RouteKillRequirement(10, 8)]
 );
 gymList['Saffron City'] = new Gym(
@@ -117,7 +117,7 @@ gymList['Saffron City'] = new Gym(
     ],
     BadgeEnums.Marsh,
     2500,
-    'I\'m shocked! But a loss is a loss. I admit I didn\'t work hard enough to win! You earned the MarshBadge!',
+    'I\'m shocked! But a loss is a loss. I admit I didn\'t work hard enough to win! You earned the Marsh Badge!',
     [new GymBadgeRequirement(BadgeEnums.Rainbow)]
 );
 gymList['Fuchsia City'] = new Gym(
@@ -131,7 +131,7 @@ gymList['Fuchsia City'] = new Gym(
     ],
     BadgeEnums.Soul,
     3500,
-    'Humph! You have proven your worth! Here! Take the SoulBadge!',
+    'Humph! You have proven your worth! Here! Take the Soul Badge!',
     [
         new OneFromManyRequirement([
             new RouteKillRequirement(10, 18),
@@ -152,7 +152,7 @@ gymList['Cinnabar Island'] = new Gym(
     ],
     BadgeEnums.Volcano,
     5000,
-    'I\'ve burnt out! You have earned the VolcanoBadge!',
+    'I\'ve burnt out! You have earned the Volcano Badge!',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pokemon Mansion'))]
 );
 gymList['Viridian City'] = new Gym(
@@ -167,7 +167,7 @@ gymList['Viridian City'] = new Gym(
     ],
     BadgeEnums.Earth,
     6000,
-    'Ha! That was a truly intense fight! You have won! As proof, here is the EarthBadge!',
+    'Ha! That was a truly intense fight! You have won! As proof, here is the Earth Badge!',
     [
         new GymBadgeRequirement(BadgeEnums.Volcano),
         new GymBadgeRequirement(BadgeEnums.Marsh),
@@ -248,7 +248,7 @@ gymList['Violet City'] = new Gym(
     ],
     BadgeEnums.Zephyr,
     250,
-    '...Darn! My Dad\'s cherished bird Pokémon... All right. Take this. It\'s the official Pokémon League ZephyrBadge.',
+    '...Darn! My Dad\'s cherished bird Pokémon... All right. Take this. It\'s the official Pokémon League Zephyr Badge.',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Sprout Tower'))]
 );
 gymList['Azalea Town'] = new Gym(
@@ -273,7 +273,7 @@ gymList['Goldenrod City'] = new Gym(
     ],
     BadgeEnums.Plain,
     1000,
-    '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s PlainBadge.',
+    '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s Plain Badge.',
     [new RouteKillRequirement(10, 34)]
 );
 gymList['Ecruteak City'] = new Gym(
@@ -299,7 +299,7 @@ gymList['Cianwood City'] = new Gym(
     ],
     BadgeEnums.Storm,
     2500,
-    'Wha? Huh? I lost? How about that! You\'re worthy of StormBadge!',
+    'Wha? Huh? I lost? How about that! You\'re worthy of Storm Badge!',
     [new GymBadgeRequirement(BadgeEnums.Fog)]
 );
 gymList['Olivine City'] = new Gym(
@@ -339,7 +339,7 @@ gymList['Blackthorn City'] = new Gym(
     ],
     BadgeEnums.Rising,
     5000,
-    'Here, this is the RisingBadge... Hurry up! Take it!',
+    'Here, this is the Rising Badge... Hurry up! Take it!',
     [new GymBadgeRequirement(BadgeEnums.Glacier)]
 );
 
