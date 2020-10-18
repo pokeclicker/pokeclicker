@@ -21,7 +21,7 @@ class KantoBerryMasterNPC extends NPC {
     public static generateMessage(date: Date): string {
         SeededRand.seedWithDate(date);
 
-        const possibleMutations = App.game.farming.mutations.filter((mut) => mut.checkUnlockReq());
+        const possibleMutations = App.game.farming.mutations.filter((mut) => mut.checkUnlockReq(true));
 
         const idx = Math.floor(possibleMutations.length * SeededRand.next());
 

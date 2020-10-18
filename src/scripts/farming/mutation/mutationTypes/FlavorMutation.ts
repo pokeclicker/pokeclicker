@@ -6,17 +6,17 @@
 class FlavorMutation extends NearMutation {
 
     flavorReqs: number[];
-    moreOrEqual: number;
+    moreOrEqual: boolean;
 
     /**
      * Constructor for a FlavorMutation
      * @param mutationChance The chance of the mutation occuring
      * @param mutatedBerry The mutated BerryType
      * @param flavorReqs The flavor requirements for the mutation to occur
-     * @param moreOrEqual Whether we want at least the flavorReqs, or exactly. Set to 0 for more (default), Set to 1 for exact.
+     * @param moreOrEqual Whether we want at least the flavorReqs, or exactly. Set to false for more (default), Set to true for exact.
      */
-    constructor(mutationChance: number, mutatedBerry: BerryType, flavorReqs: number[], moreOrEqual = 0, hint?: string, unlockReq?: (() => boolean)) {
-        super(mutationChance, mutatedBerry, hint, unlockReq);
+    constructor(mutationChance: number, mutatedBerry: BerryType, flavorReqs: number[], moreOrEqual = false, hint?: string, unlockReq?: (() => boolean), showHint = true) {
+        super(mutationChance, mutatedBerry, hint, unlockReq, showHint);
         this.flavorReqs = flavorReqs;
         this.moreOrEqual = moreOrEqual;
     }

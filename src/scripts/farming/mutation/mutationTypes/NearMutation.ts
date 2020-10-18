@@ -5,8 +5,8 @@
  */
 abstract class NearMutation extends Mutation {
 
-    constructor(mutationChance: number, mutatedBerry: BerryType, hint?: string, unlockReq?: (() => boolean)) {
-        super(mutationChance, mutatedBerry, hint, unlockReq);
+    constructor(mutationChance: number, mutatedBerry: BerryType, hint?: string, unlockReq?: (() => boolean), showHint = true) {
+        super(mutationChance, mutatedBerry, hint, unlockReq, showHint);
     }
 
     /**

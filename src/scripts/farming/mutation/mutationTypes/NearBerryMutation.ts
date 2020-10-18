@@ -7,8 +7,8 @@ class NearBerryMutation extends NearMutation {
 
     berryReqs: MutationReqInterface[];
 
-    constructor(mutationChance: number, mutatedBerry: BerryType, berryReqs: MutationReqInterface[], hint?: string, unlockReq?: (() => boolean)) {
-        super(mutationChance, mutatedBerry, hint, unlockReq);
+    constructor(mutationChance: number, mutatedBerry: BerryType, berryReqs: MutationReqInterface[], hint?: string, unlockReq?: (() => boolean), showHint = true) {
+        super(mutationChance, mutatedBerry, hint, unlockReq, showHint);
         this.berryReqs = berryReqs;
     }
 
@@ -31,11 +31,14 @@ class NearBerryMutation extends NearMutation {
     }
 
     getHint(): string {
+        if (this.berryReqs.length === 1) {
+            return `I\'ve heard that growing ${BerryType[this.berryReqs[0].berryType]} Berries can spread a new Berry into nearby empty plots!`;
+        }
         if (this.berryReqs.length === 2) {
-            return `I\'ve heard that growing ${BerryType[this.berryReqs[0].berryType]} and ${BerryType[this.berryReqs[1].berryType]} berries near each other will produce something interesting!`;
+            return `I\'ve heard that growing ${BerryType[this.berryReqs[0].berryType]} and ${BerryType[this.berryReqs[1].berryType]} Berries near each other will produce something interesting!`;
         }
         if (this.berryReqs.length === 3) {
-            return `I\'ve heard that growing ${BerryType[this.berryReqs[0].berryType]}, ${BerryType[this.berryReqs[1].berryType]}, and ${BerryType[this.berryReqs[2].berryType]} berries near each other will produce something interesting!`;
+            return `I\'ve heard that growing ${BerryType[this.berryReqs[0].berryType]}, ${BerryType[this.berryReqs[1].berryType]}, and ${BerryType[this.berryReqs[2].berryType]} Berries near each other will produce something interesting!`;
         }
         return super.getHint();
     }

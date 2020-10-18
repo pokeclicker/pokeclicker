@@ -3,13 +3,15 @@ abstract class Mutation {
     mutationChance: number;
     mutatedBerry: BerryType;
     hint?: string;
+    showHint: boolean;
     unlockReq?: (() => boolean);
 
-    constructor(mutationChance: number, mutatedBerry: BerryType, hint?: string, unlockReq?: (() => boolean)) {
+    constructor(mutationChance: number, mutatedBerry: BerryType, hint?: string, unlockReq?: (() => boolean), showHint = true) {
         this.mutationChance = mutationChance;
         this.mutatedBerry = mutatedBerry;
         this.hint = hint;
         this.unlockReq = unlockReq;
+        this.showHint = showHint;
     }
 
     /**
@@ -26,7 +28,10 @@ abstract class Mutation {
     /**
      * Determines whether the player can even cause this mutation
      */
-    checkUnlockReq(): boolean {
+    checkUnlockReq(forHint = false): boolean {
+        if (forHint && !this.showHint) {
+            return false;
+        }
         if (!this.unlockReq) {
             console.error('Could not find unlock requirement for mutation:', this);
             return false;
