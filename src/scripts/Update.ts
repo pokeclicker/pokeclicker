@@ -235,7 +235,7 @@ class Update implements Saveable {
                 console.error('[update] v0.5.2 - Couldn\'t start Aerodactyl Quest line..', ಠ_ಠ);
             }
         }
-        
+
         if (this.isOlderVersion(this.saveVersion, '0.5.5')) {
             try {
                 //Correct statistics
@@ -250,7 +250,7 @@ class Update implements Saveable {
                 console.error('[update] v0.5.5 - Couldn\'t update player statistics..', ಠ_ಠ);
             }
         }
-        
+
         if (this.isOlderVersion(this.saveVersion, '0.5.7')) {
             try {
                 //Update shinies
@@ -302,6 +302,32 @@ class Update implements Saveable {
                 saveData.statistics.routeKills = result;
                 // Update save data
                 this.setSaveData(saveData);
+                // Migrate the achievements so we don't spam players with notifications
+                const renamedAchievements = Object.entries(playerData.achievementsCompleted)
+                    .map(([name, isCompleted]) => {
+                        const matchRoute = name.match(/^Route (\d+) (?:traveler|explorer|conqueror)/);
+                        // If the name doesn't match a route, return the old key-value pair
+                        if (matchRoute === null) {
+                            return [name, isCompleted];
+                        }
+                        const routeNumber = matchRoute ? Number(matchRoute[1]) : null;
+                        if (Number.isNaN(routeNumber)) {
+                            console.trace('[Update] Could not map region into achievement name:', name);
+                            return [name, isCompleted];
+                        }
+                        // Look up the region for the route, and rename the achievement
+                        const [region] = Object.entries(regionRoutes).find(([, check]) => (
+                            // Find the region that contains this index
+                            check[0] <= routeNumber && routeNumber <= check[1]
+                        )) || ['none'];
+                        if (region === 'none') {
+                            console.trace('[Update] Could not map region into achievement name:', name);
+                            return [name, isCompleted];
+                        }
+                        return [`${GameConstants.camelCaseToString(region)} ${name}`, isCompleted];
+                    });
+                playerData.achievementsCompleted = Object.fromEntries(renamedAchievements);
+                this.setPlayerData(playerData);
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.5.8 - Couldn\'t update player statistics..', ಠ_ಠ);
             }
