@@ -11,17 +11,11 @@
         <td>
             <div>
                 <div class="pokemonName">
-                    <span data-bind="text: name, class: name.length > 15 ? 'squeeze' : ''">Name</span>
+                    <span data-bind="text: name">Name</span>
                     <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
                 </div>
-                <div class="pokemonAttack">
-                    Atk: 
-                    <span data-bind="text: attack"></span>
-                </div>
-                <div class="pokemonLevel">
-                    Lvl: 
-                    <span data-bind="text: level"></span>
-                </div>
+                <div class="pokemonAttack" data-bind="text: attack.toLocaleString()"></div>
+                <div class="pokemonLevel" data-bind="text: level"></div>
             </div>
         </td>
     </tr>
@@ -37,6 +31,20 @@
             id="pokemonList"
             class="table table-striped table-hover table-sm m-0"
         >
+            <thead>
+                <tr>
+                    <td></td>
+                    <td>
+                        <div>
+                            <div class="pokemonName">
+                                <span>Name</span>
+                            </div>
+                            <div class="pokemonAttack">Attack</div>
+                            <div class="pokemonLevel">Level</div>
+                        </div>
+                    </td>
+                </tr>
+            </thead>
             <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: PartyController.getSortedList() }"></tbody>
         </table>
     </div>
