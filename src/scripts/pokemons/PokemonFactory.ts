@@ -156,7 +156,7 @@ class PokemonFactory {
 
     private static roamingEncounter(route: number, region: GameConstants.Region): boolean {
         // Map to the route numbers
-        const routes = Routes.getRoutesByRegion(region).map(r => r.number);
+        const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
         const roamingPokemon = RoamingPokemonList.getRegionalRoamers(region);
         if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
             return false;
