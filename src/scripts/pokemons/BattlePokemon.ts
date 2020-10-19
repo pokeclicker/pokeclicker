@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class BattlePokemon implements EnemyPokemonInterface {
 
     health: KnockoutObservable<number>;

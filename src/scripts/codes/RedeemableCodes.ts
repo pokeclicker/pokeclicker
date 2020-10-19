@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+
 class RedeemableCodes implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'redeemableCodes';
@@ -33,7 +36,7 @@ class RedeemableCodes implements Saveable {
             new RedeemableCode('complete-kanto', 750807787, false, function () {
                 // Complete all routes
                 Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
-                    GameHelper.incrementObservable(App.game.statistics.routeKills[route.number], 10);
+                    GameHelper.incrementObservable(App.game.statistics.routeKills[route.region][route.number], 10);
                 });
                 // Complete all gyms
                 GameConstants.KantoGyms.forEach(gym => {

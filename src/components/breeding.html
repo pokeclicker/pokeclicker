@@ -18,7 +18,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
        </div>
        <div class="modal-body p-0">
            <ul class="nav nav-tabs nav-fill">
-                <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab">Pokemon</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#breeding-pokemon" data-toggle="tab">Pokémon</a></li>
                 <li class="nav-item"><a class="nav-link" href="#breeding-eggs" data-toggle="tab">Eggs</a></li>
                 <li class="nav-item"><a class="nav-link" href="#breeding-fossils" data-toggle="tab">Fossils</a></li>
             </ul>
@@ -105,7 +105,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         </div>
                     </div>
                     <div>
-                        <!-- Check if the player has any level 100 Pokemon or if they have any eggs -->
+                        <!-- Check if the player has any level 100 Pokémon or if they have any eggs -->
                         <p class="bg-danger my-0" data-bind="visible: !App.game.party.hasMaxLevelPokemon()">
                             Unfortunately, you don't have any pokémon of level 100 to breed.
                         </p>
@@ -139,15 +139,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         </li>
                     </ul>
                     <!-- /ko -->
-                </div> 
+                </div>
 
                 <div class="tab-pane" id="breeding-fossils">
-                    <p class="bg-warning my-0" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length">
+                    <p class="bg-warning my-0" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length">
                         you don't have any fossils to breed.
                     </p>
 
-                    <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length -->
-                    <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false)">
+                    <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length -->
+                    <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory().find(i => i.name == f)).filter(f => f ? f.amount() : false)">
                         <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
                             <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
                             <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">

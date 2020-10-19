@@ -10,8 +10,8 @@ module.exports = {
                 loader: 'ts-loader',
                 exclude: /node_modules/,
                 options: {
-                    configFile: 'tsconfigWithModules.json',
-                },
+                    configFile: path.resolve(__dirname, 'src/modules/tsconfig.json'),
+                }
             },
         ],
     },

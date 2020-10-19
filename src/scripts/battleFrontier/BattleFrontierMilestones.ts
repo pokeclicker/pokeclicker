@@ -62,9 +62,9 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(30, 'Ultra
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(35, 'xClick', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(40, 'xAttack', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(50, 'SmallRestore', 100));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestone(100, 'Deoxys', () => {
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestone(100, () => {
     App.game.party.gainPokemonById(pokemonMap.Deoxys.id);
-}, 'assets/images/items/Premierball.png'));
+}, 'assets/images/items/Premierball.png', 'Deoxys'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(110, 'Water_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(120, 'Leaf_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(130, 'Thunder_stone', 10));

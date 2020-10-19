@@ -3,14 +3,24 @@
 
 import DataStore from './DataStore';
 import * as GameConstants from './GameConstants';
+import GameHelper from './GameHelper';
 import BadgeEnums from './enums/Badges';
-import getArrayOfObservables from './utilities/getArrayOfObservables';
+import PokemonType from './enums/PokemonType';
+import BooleanSetting from './settings/BooleanSetting';
+import RangeSetting from './settings/RangeSetting';
+import Setting from './settings/Setting';
+import SettingOption from './settings/SettingOption';
 
 Object.assign(<any>window, {
     GameConstants,
+    GameHelper,
     DataStore,
     BadgeCase: DataStore.badge,
     Statistics: DataStore.statistics,
     BadgeEnums,
-    getArrayOfObservables,
+    PokemonType,
+    BooleanSetting,
+    RangeSetting,
+    Setting,
+    SettingOption,
 });
