@@ -263,6 +263,21 @@ class Update implements Saveable {
                         }
                     }
                 });
+                // Not sure where to put this
+                // Refund invalid upgrades
+                for (let t = 0; t < Shards.nTypes; t += 1) {
+                    for (let effect = 0; effect < Shards.nEffects; effect += 1) {
+                        if (Shards.isInvalidUpgrade(t, effect)) {
+                            const k = t * Shards.nEffects + effect;
+                            while (saveData.shards.shardUpgrades[k] > 0) {
+                                saveData.shards.shardUpgrades[k]--;
+                                // Wanted to use methods from Shards.ts (e.g. gainShards)
+                                const cost = (saveData.shards.shardUpgrades[k] + 1) * Shards.SHARD_UPGRADE_COST;
+                                saveData.shards.shardWallet[t] += cost;
+                            }
+                        }
+                    }
+                }
 
                 // Update save data
                 this.setSaveData(saveData);
