@@ -34,7 +34,7 @@
  </layer>
  <layer id="5" name="Routes" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXPUOAKQCAAAEIQABAwAgOgAAAAU7Ah4fADwCHjsCID07PQI8Hj09Oz0gIT0DHx4fgKmooE0BYAITAcANdQMSABBoUAgaisAiCDCCBiJwCCICj4AioCgGoykQ720d4CknJHFwuN+3m6smhUffLDvjU+ennX/Cw1lSGaNtVO3Zq4dlM5yXD3ckTYq+efL5fzQgTZqdebGH24M46U+OBa7l4KP+WSgKmMLxz63GpTAu5Unr/gNiahCoPIn3joDnyuzeGEtULy/aq05fNfXbXE8C9dm1OmpcDznUB2da7atcH7oMkXZ0NylWhT0IYMBJrtl759EGzB+zZIF/BYxGxJDRtdZkEieV2oiGGb3jm1TfHdBC1VObFBefQvLeqsBL41qeNPeHY/xyUBltaskm093y4i1GiTlkyElYB+C/1h1Sc5drT5k0zTFeloKZ9DtQuP60H0OSO6vQsSUtIHvxi5NQd6YPDipm52XRU454S2y54XOnfDiT20QQ6IKrUxCcyVT7vYuA9UmQvnTnOR+RVifV9RLcs1gIon3vrI/pDBmhPJmHMdJkwt88vyrobEPXm+vVoAsYudrzS5vUBDfgUpl3VPyJTxxAGDaPiEcDMenf4+zMPvbDuD8g57dtUThPbRtoyw8=
+   KLUv/WDAXCUPAKQCAAAEIQABAwAgOgAAAAU7Ah4fADwCHjsCID07PQI8Hj09Oz0gPSE9AzofgKiooE0BYIISAcARdQISABBoYAgCjMAhCCiCgCFwCCICjYAiwCiMQ0GUbW8dwFNOSHLgcO9r3KpJpQebJZj3gflpzJ9o+BrbmFB+kWHRw7J1fpnZO1rSpBE4f/tnJNLkImSe93BL9v4ksFjTVfxR7AwDmxTuYIXXMikdBBOvVp402H8gUYMwy5OuPoDr5+f78xPH/pkE9fJT/ZzbNyIat6xkMq/PPoWVUsmQ8frgTBW+VZYcGhBKm3I3JYaGPQhewEnQrPfOC6qYP2bhBf4VpPuRGDKhRprbxElZO5RhYkXxTeLdXdni1V2bFBafQth7AwGUxpXypK0/nPrLkZXlukc2qXHLNLX4Tl3IkIFhHVX+ijekmi7XmjLpkIeyrAgzacJAKf0pjXmYmnUJ2PKbZS/+cRL3Tv3gg/jsvEie8ooTZcsRHnrKgDO5TUhNF9Q4ZcyZHLVVXATFPunoa3QWzUdwdZKjl5S5KBaCtN0LNdjO4BPKk9IYQprU/tDmDww6+9sj+PXxoAuUrjPzayeNxDng0mF3wv8EJA6StRuQiEcFMem4r+5sH/uhtj/vZ7ltoXEW0TbQgh8=
   </data>
  </layer>
  <layer id="6" name="Towns" width="100" height="60">
@@ -52,7 +52,4 @@
    KLUv/WDAXOUAAGgAAM0GAADOBgAAzwYAAwCZmFw+EASqf5x2gAU=
   </data>
  </layer>
- <imagelayer id="13" name="base" visible="0">
-  <image source="../../../../../Downloads/unovabase.png" width="1600" height="960"/>
- </imagelayer>
 </map>

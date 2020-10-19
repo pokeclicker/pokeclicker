@@ -31,12 +31,39 @@
         })
     %>
 
+    <!--extra Route 3 1-->
+    <%- include('templates/mapRoute',
+        { route: 3, region: 4
+        , width: 9, height: 3
+        , x: 64, y: 40
+        , rotate: true
+        , noText: true
+        })
+    %>
+
+    <!--extra Route 3 2-->
+    <%- include('templates/mapRoute',
+        { route: 3, region: 4
+        , width: 5, height: 3
+        , x: 67, y: 40
+        , noText: true
+        })
+    %>
+
     <!--Route 4-->
     <%- include('templates/mapRoute',
         { route: 4, region: 4
         , width: 12.5, height: 3
         , x: 51, y: 35
         , rotate: true
+        })
+    %>
+    <!--extra Route 4-->
+    <%- include('templates/mapRoute',
+        { route: 4, region: 4
+        , width: 10, height: 3
+        , x: 57, y: 49
+        , noText: true
         })
     %>
 
