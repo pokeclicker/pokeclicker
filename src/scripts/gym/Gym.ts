@@ -1,7 +1,7 @@
-/// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="GymPokemon.ts"/>
 ///<reference path="../pokemons/PokemonFactory.ts"/>
 ///<reference path="../achievements/OneFromManyRequirement.ts"/>
+///<reference path="../../declarations/enums/Badges.d.ts"/>
 
 /**
  * Data list that contains all gymLeaders, accessible by townName.
@@ -67,7 +67,7 @@ gymList['Pewter City'] = new Gym(
     BadgeEnums.Boulder,
     250,
     'I took you for granted. As proof of your victory, here\'s the Boulder Badge!',
-    [new RouteKillRequirement(10, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 2)]
 );
 
 gymList['Cerulean City'] = new Gym(
@@ -80,7 +80,7 @@ gymList['Cerulean City'] = new Gym(
     BadgeEnums.Cascade,
     500,
     'I can\'t believe I lost! All right! You can have the Cascade Badge to show you beat me!',
-    [new RouteKillRequirement(10, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)]
 );
 gymList['Vermillion City'] = new Gym(
     'Lt. Surge',
@@ -90,7 +90,7 @@ gymList['Vermillion City'] = new Gym(
     1000,
     'Whoa! You\'re the real deal, kid! Fine then, take the Thunder Badge!',
     [
-        new RouteKillRequirement(10, 6),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 6),
         new GymBadgeRequirement(BadgeEnums.Cascade),
     ]
 );
@@ -105,7 +105,7 @@ gymList['Celadon City'] = new Gym(
     BadgeEnums.Rainbow,
     1500,
     'Oh! I concede defeat. You are remarkably strong. I must confer you the Rainbow Badge.',
-    [new RouteKillRequirement(10, 8)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 8)]
 );
 gymList['Saffron City'] = new Gym(
     'Sabrina',
@@ -134,8 +134,8 @@ gymList['Fuchsia City'] = new Gym(
     'Humph! You have proven your worth! Here! Take the Soul Badge!',
     [
         new OneFromManyRequirement([
-            new RouteKillRequirement(10, 18),
-            new RouteKillRequirement(10, 15),
+            new RouteKillRequirement(10, GameConstants.Region.kanto, 18),
+            new RouteKillRequirement(10, GameConstants.Region.kanto, 15),
         ]),
     ],
     () => {
@@ -274,7 +274,7 @@ gymList['Goldenrod City'] = new Gym(
     BadgeEnums.Plain,
     1000,
     '...Sniff... What? What do you want? A badge? Oh, right. I forgot. Here\'s Plain Badge.',
-    [new RouteKillRequirement(10, 34)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 34)]
 );
 gymList['Ecruteak City'] = new Gym(
     'Morty',
@@ -326,7 +326,7 @@ gymList['Mahogany Town'] = new Gym(
     BadgeEnums.Glacier,
     4000,
     'Ah, I am impressed by your prowess. With your strong will, I know you will overcome all life\'s obstacles. You are worthy of this Badge!',
-    [new RouteKillRequirement(10, 43)]
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 43)]
 );
 gymList['Blackthorn City'] = new Gym(
     'Clair',
@@ -1010,7 +1010,7 @@ gymList['Santalune City'] = new Gym(
     BadgeEnums.Bug,
     128000,
     'Young Trainer, you... No, it wasn\'t you alone. You and your <Pokémon> have shown me a whole new depth of field! Fantastic! Just fantastic!',
-    [new RouteKillRequirement(10, 3)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 3)]
 );
 gymList['Cyllage City'] = new Gym(
     'Grant',
@@ -1061,7 +1061,7 @@ gymList['Lumiose City'] = new Gym(
     BadgeEnums.Voltage,
     128000,
     'Oh, Bonnie... When will you learn there\'s no shame in losing? I\'m glad whenever I get to learn something new thanks to strong challengers like you here.',
-    [new RouteKillRequirement(10, 13), new GymBadgeRequirement(BadgeEnums.Plant)]
+    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13), new GymBadgeRequirement(BadgeEnums.Plant)]
 );
 //Replace req with Kalos Power Plant dungeon if implemented.
 gymList['Laverre City'] = new Gym(
