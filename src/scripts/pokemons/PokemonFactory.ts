@@ -89,9 +89,9 @@ class PokemonFactory {
         return false;
     }
 
-    public static generatePartyPokemon(id: number): PartyPokemon {
+    public static generatePartyPokemon(id: number, shiny = false): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false, shiny);
     }
 
     /**
@@ -155,12 +155,14 @@ class PokemonFactory {
     }
 
     private static roamingEncounter(route: number, region: GameConstants.Region): boolean {
-        const routes = GameConstants.RegionRoute[region];
+        // Map to the route numbers
+        const routeNum = MapHelper.normalizeRoute(route, region);
+        const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
         const roamingPokemon = RoamingPokemonList.getRegionalRoamers(region);
-        if (!routes || !roamingPokemon || !roamingPokemon.length) {
+        if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
             return false;
         }
-        return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, routes[1], routes[0], route);
+        return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, Math.max(...routes), Math.min(...routes), routeNum);
     }
 
     private static roamingChance(max, min, maxRoute, minRoute, curRoute) {

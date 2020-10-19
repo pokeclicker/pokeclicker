@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+
 class Quests implements Saveable {
     saveKey = 'quests';
 

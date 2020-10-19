@@ -1,5 +1,7 @@
-///<reference path="../wallet/AmountFactory.ts"/>
-///<reference path="../underground/Underground.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../wallet/AmountFactory.ts" />
+/// <reference path="../underground/Underground.ts" />
+
 class UndergroundUpgrade extends Upgrade {
 
     constructor(name: Underground.Upgrades, displayName: string, maxLevel: number, costList: Amount[], bonusList: number[], increasing = true) {
@@ -51,5 +53,12 @@ Underground.upgradeList.push(
     new UndergroundUpgrade(Underground.Upgrades.Daily_Deals_Max, 'Daily deals', 2,
         AmountFactory.createArray(GameHelper.createArray(150, 300, 150), GameConstants.Currency.diamond),
         GameHelper.createArray(0, 2, 1)
+    )
+);
+
+Underground.upgradeList.push(
+    new UndergroundUpgrade(Underground.Upgrades.Bomb_Efficiency, 'Bomb Efficiency', 5,
+        AmountFactory.createArray(GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond),
+        GameHelper.createArray(0, 10, 2)
     )
 );

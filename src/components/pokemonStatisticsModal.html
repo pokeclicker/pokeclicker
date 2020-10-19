@@ -3,7 +3,7 @@
         <div class="modal-content" data-bind="with: App.game.statistics.selectedPokemonID()">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-muted" data-bind="text: `#${pokemonMap[$data].id.toString().padStart(3,0)}&nbsp;&nbsp;`"></h5>
-                <h5 class="modal-title text-light" data-bind="text: pokemonMap[$data].name">Pokemon Statistics</h5>
+                <h5 class="modal-title text-light" data-bind="text: pokemonMap[$data].name">Pokémon Statistics</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -25,6 +25,21 @@
                     <tr>
                       <td class="text-left">Current Attack</td>
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Type</td>
+                      <td class="text-left tight">
+                        <span class="badge text-light"
+                          data-bind="visible: pokemonMap[$data].type[0] >= 0,
+                          style: { 'background-color': TypeColor[pokemonMap[$data].type[0]] }">
+                          <small><strong data-bind="text: PokemonType[pokemonMap[$data].type[0]].toUpperCase()"></strong></small>
+                        </span>
+                        <span class="badge text-light"
+                          data-bind="if: pokemonMap[$data].type[1] >= 0,
+                          style: { 'background-color': TypeColor[pokemonMap[$data].type[1]] }">
+                          <small><strong data-bind="text: PokemonType[pokemonMap[$data].type[1]].toUpperCase()"></strong></small>
+                        </span>
+                      </td>
                     </tr>
                     <tr>
                       <td class="text-left">Catch Rate</td>

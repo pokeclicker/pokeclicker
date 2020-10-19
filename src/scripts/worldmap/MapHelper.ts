@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/DataStore/StatisticStore/index.d.ts" />
+
 class MapHelper {
     public static returnToMap() {
         if (player.currentTown()) {
@@ -28,7 +30,7 @@ class MapHelper {
         } else {
             if (!MapHelper.routeExist(route, region)) {
                 return Notifier.notify({
-                    message: `Route ${route} does not exist in the ${GameConstants.Region[region]} region.`,
+                    message: `${Routes.getName(route, region)} does not exist in the ${GameConstants.Region[region]} region.`,
                     type: NotificationConstants.NotificationOption.warning,
                 });
             }
@@ -89,7 +91,7 @@ class MapHelper {
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
-            if (App.game.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
+            if (App.game.statistics.routeKills[region][route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
@@ -116,7 +118,7 @@ class MapHelper {
         }
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
-                if (App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
+                if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(town)]()) {
                     return 'dungeon completedDungeon';
                 }
                 return 'dungeon unlockedDungeon';
@@ -124,7 +126,7 @@ class MapHelper {
             if (gymList.hasOwnProperty(town)) {
                 const gym = gymList[town];
                 // If defeated the previous gym, but not this one
-                const gymIndex = Statistics.getGymIndex(town);
+                const gymIndex = GameConstants.getGymIndex(town);
                 if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
                     return 'city unlockedUnfinishedTown';
                 }
@@ -177,7 +179,7 @@ class MapHelper {
     }
 
     public static validRoute(route = 0, region: GameConstants.Region = 0): boolean {
-        return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];
+        return !!Routes.getRoute(region, route);
     }
 
     public static openShipModal() {

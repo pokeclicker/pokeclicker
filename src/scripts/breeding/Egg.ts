@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+
 class Egg implements Saveable {
     saveKey = 'egg';
 
@@ -84,13 +87,13 @@ class Egg implements Saveable {
         }
     }
 
-    canHatch() {
+    canHatch(): boolean {
         return !this.isNone() && this.steps() >= this.totalSteps;
     }
 
-    hatch() {
+    hatch(): boolean {
         if (!this.canHatch()) {
-            return;
+            return false;
         }
         const shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, this.shinySteps / this.steps()));
         const shiny = PokemonFactory.generateShiny(shinyChance);
@@ -146,6 +149,7 @@ class Egg implements Saveable {
         GameHelper.incrementObservable(App.game.statistics.pokemonHatched[pokemonID]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonHatched);
         App.game.oakItems.use(OakItems.OakItem.Blaze_Cassette);
+        return true;
     }
 
     toJSON(): Record<string, any> {

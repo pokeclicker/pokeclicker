@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class Mine {
     public static sizeX = 25;
     public static sizeY = 12;
@@ -44,6 +46,7 @@ class Mine {
         }
         Mine.loadingNewLayer = false;
         Mine.itemsFound(0);
+        
         Underground.showMine();
     }
 
@@ -184,7 +187,7 @@ class Mine {
                 }
             }
             if (hasMined) {
-                Underground.energy = Underground.energy - Underground.HAMMER_ENERGY;
+                Underground.energy -= Underground.HAMMER_ENERGY;
             }
         }
     }
@@ -193,20 +196,21 @@ class Mine {
         if (Mine.grid[x][y]() > 0) {
             if (Underground.energy >= Underground.CHISEL_ENERGY) {
                 this.breakTile(x, y, 2);
-                Underground.energy = Underground.energy - Underground.CHISEL_ENERGY;
+                Underground.energy -= Underground.CHISEL_ENERGY;
             }
         }
     }
 
-    private static bomb(tiles = 10) {
-        if (Underground.energy >= Underground.CHISEL_ENERGY * tiles) {
+    private static bomb() {
+        const tiles = Underground.getBombEfficiency();
+        if (Underground.energy >= Underground.BOMB_ENERGY) {
             for (let i = 1; i < tiles; i++) {
                 const x = GameConstants.randomIntBetween(1, this.sizeY - 2);
                 const y = GameConstants.randomIntBetween(1, this.sizeX - 2);
                 this.breakTile(x, y, 2);
             }
 
-            Underground.energy -= Underground.CHISEL_ENERGY * tiles;
+            Underground.energy -= Underground.BOMB_ENERGY;
         }
     }
 
@@ -303,11 +307,7 @@ class Mine {
     }
 
     public static loadSavedMine(mine) {
-        this.grid = mine.grid.map((row) => {
-            return row.map((num) => {
-                return ko.observable(num);
-            });
-        });
+        this.grid = mine.grid.map(row => row.map(val => ko.observable(val))),
         this.rewardGrid = mine.rewardGrid;
         this.itemsFound(mine.itemsFound);
         this.itemsBuried(mine.itemsBuried);
@@ -319,9 +319,15 @@ class Mine {
         Underground.showMine();
     }
 
-    public static serialize() {
-        const mine = {
-            grid: this.grid,
+    public static save(): Record<string, any> {
+        if (this.grid == null) {
+            // This part should only get called when game saves for the first time after catching starter
+            ko.cleanNode(document.getElementById('mineBody'));
+            Mine.loadMine();
+            ko.applyBindings(null, document.getElementById('mineBody'));
+        }
+        const mineSave = {
+            grid: this.grid.map(row => row.map(val => val())),
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound(),
             itemsBuried: this.itemsBuried(),
@@ -329,8 +335,7 @@ class Mine {
             prospectResult: this.prospectResult(),
             skipsRemaining: this.skipsRemaining(),
         };
-
-        return ko.toJSON(mine);
+        return mineSave;
     }
 }
 
