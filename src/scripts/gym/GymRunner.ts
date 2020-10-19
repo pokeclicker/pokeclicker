@@ -1,4 +1,5 @@
-/// <reference path="../../declarations/enums/Badges.d.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/enums/Badges.d.ts" />
 
 class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);

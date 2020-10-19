@@ -1,4 +1,5 @@
 /// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
+/// <reference path="../declarations/GameHelper.d.ts" />
 
 /**
  * Main game class.

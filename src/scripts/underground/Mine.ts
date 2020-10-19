@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class Mine {
     public static sizeX = 25;
     public static sizeY = 12;

@@ -1,4 +1,6 @@
-interface PokemonInterface {
+import PokemonType from '../enums/PokemonType';
+
+export default interface PokemonInterface {
     name: string;
     id: number;
     type1: PokemonType;

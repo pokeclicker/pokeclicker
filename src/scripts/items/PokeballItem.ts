@@ -1,4 +1,6 @@
-///<reference path="Item.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="Item.ts" />
+
 class PokeballItem extends Item {
     type: GameConstants.Pokeball;
 

@@ -139,15 +139,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                         </li>
                     </ul>
                     <!-- /ko -->
-                </div> 
+                </div>
 
                 <div class="tab-pane" id="breeding-fossils">
-                    <p class="bg-warning my-0" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length">
+                    <p class="bg-warning my-0" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length">
                         you don't have any fossils to breed.
                     </p>
 
-                    <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory.find(i => i.name == f && i.amount())).length -->
-                    <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory.find(i => i.name == f)).filter(f => f ? f.amount() : false)">
+                    <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length -->
+                    <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory().find(i => i.name == f)).filter(f => f ? f.amount() : false)">
                         <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="class: App.game.breeding.hasFreeEggSlot() ? '' : 'disabled'">
                             <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: GameConstants.humanifyString($data.name)">fossil</span>
                             <img src="" width="80px" data-bind="attr:{ src: `assets/images/breeding/${$data.name}.png` }">
