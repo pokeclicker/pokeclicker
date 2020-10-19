@@ -136,7 +136,7 @@ const BigSpender = new NPC('Big Spender', [
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ]);
 
-  
+
 
 //Kanto Towns
 TownList['Pewter City'] = new Town(
@@ -1550,8 +1550,8 @@ TownList['Abundant Shrine'] = new DungeonTown(
         new ObtainedPokemonRequirement(pokemonMap.Thundurus),
     ]
 );
-TownList['Victory Road'] = new DungeonTown(
-    'Victory Road',
+TownList['Victory Road Unova'] = new DungeonTown(
+    'Victory Road Unova',
     GameConstants.Region.unova,
     [new RouteKillRequirement(10, GameConstants.Region.unova, 23)]
 );
