@@ -1,5 +1,6 @@
 class RegionRoute {
     constructor(
+        public routeName: string,
         public region: GameConstants.Region,
         public number: number,
         public pokemon: RoutePokemon,

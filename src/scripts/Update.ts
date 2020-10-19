@@ -271,8 +271,70 @@ class Update implements Saveable {
             }
         }
 
-        //TODO: HLXII Update to add this when we release the berry overhaul
         if (this.isOlderVersion(this.saveVersion, '0.5.8')) {
+            try {
+                // Hardcoded to allow upgrading from an older save, if we change
+                // the Routes class in the future. Values are lowest/highest route
+                // index
+                const regionRoutes = {
+                    kanto: [1, 25],
+                    johto: [26, 48],
+                    hoenn: [101, 134],
+                    sinnoh: [201, 230],
+                };
+                const result = saveData.statistics.routeKills.reduce((acc, nextValue, nextIndex) => {
+                    const [region] = Object.entries(regionRoutes).find(([, check]) => (
+                        // Find the region that contains this index
+                        check[0] <= nextIndex && nextIndex <= check[1]
+                    )) || ['none'];
+                    // Skip over any statistics for the 'none' region that are also 0, since
+                    // these are just the gaps in the route numbers
+                    if (region === 'none' && nextValue === 0) {
+                        return acc;
+                    }
+
+                    // Ensure the region has been prepared
+                    acc[region] = (acc[region] || {});
+                    // Track the route with its number in the statistics
+                    acc[region][nextIndex] = nextValue;
+                    return acc;
+                }, {});
+                saveData.statistics.routeKills = result;
+                // Update save data
+                this.setSaveData(saveData);
+                // Migrate the achievements so we don't spam players with notifications
+                const renamedAchievements = Object.entries(playerData.achievementsCompleted)
+                    .map(([name, isCompleted]) => {
+                        const matchRoute = name.match(/^Route (\d+) (?:traveler|explorer|conqueror)/);
+                        // If the name doesn't match a route, return the old key-value pair
+                        if (matchRoute === null) {
+                            return [name, isCompleted];
+                        }
+                        const routeNumber = matchRoute ? Number(matchRoute[1]) : null;
+                        if (Number.isNaN(routeNumber)) {
+                            console.trace('[Update] Could not map region into achievement name:', name);
+                            return [name, isCompleted];
+                        }
+                        // Look up the region for the route, and rename the achievement
+                        const [region] = Object.entries(regionRoutes).find(([, check]) => (
+                            // Find the region that contains this index
+                            check[0] <= routeNumber && routeNumber <= check[1]
+                        )) || ['none'];
+                        if (region === 'none') {
+                            console.trace('[Update] Could not map region into achievement name:', name);
+                            return [name, isCompleted];
+                        }
+                        return [`${GameConstants.camelCaseToString(region)} ${name}`, isCompleted];
+                    });
+                playerData.achievementsCompleted = Object.fromEntries(renamedAchievements);
+                this.setPlayerData(playerData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.8 - Couldn\'t update player statistics..', ಠ_ಠ);
+            }
+        }
+
+        //TODO: HLXII Update to add this when we release the berry overhaul
+        if (this.isOlderVersion(this.saveVersion, '0.6.0')) {
             try {
                 //Update farms
                 saveData.farming.unlockedBerries = Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false);
