@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+
 class Wallet implements Feature {
     name = 'Wallet';
     saveKey = 'wallet';
@@ -70,7 +73,7 @@ class Wallet implements Feature {
 
         this.addAmount(new Amount(points, Currency.farmPoint));
     }
-    
+
     public gainBattlePoints(base: number) {
         let bPoints = base;
 

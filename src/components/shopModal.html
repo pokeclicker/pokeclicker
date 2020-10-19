@@ -76,7 +76,7 @@
                css: { active: ShopHandler.selected() == $index() },
                attr: { disabled: !$data.isAvailable() },
                tooltip: {
-                  title: $data.description ? $data.name().replace('_', ' ') + '<br/>' + $data.description : '',
+                  title: $data.description ? $data.displayName + '<br/>' + $data.description : '',
                   trigger: 'hover',
                   placement:'bottom',
                   html: true
@@ -87,7 +87,7 @@
                    </span>
                </knockout>
                <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/[^\w.-\\(\\)]/g, '_') + '.png' }">
-               <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
+               <p data-bind="text: $data.displayName">Item Name</p>
                <div data-bind="if: $data.isAvailable()">
                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>
                 </div>
@@ -96,5 +96,4 @@
                 </div>
             </button>
         </div>
-    </div>
 </script>

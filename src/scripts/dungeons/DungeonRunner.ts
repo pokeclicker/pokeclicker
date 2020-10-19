@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class DungeonRunner {
 
     public static dungeon: Dungeon;

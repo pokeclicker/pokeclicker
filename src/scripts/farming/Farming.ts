@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+
 class Farming implements Feature {
     name = 'Farming';
     saveKey = 'farming';

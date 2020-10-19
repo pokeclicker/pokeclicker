@@ -1,10 +1,10 @@
-///<reference path="../party/evolutions/LevelEvolution.ts"/>
-///<reference path="../party/evolutions/StoneEvolution.ts"/>
-///<reference path="../party/evolutions/TimedEvolution.ts"/>
-///<reference path="../party/evolutions/LocationEvolution.ts"/>
-///<reference path="../GameConstants.d.ts"/>
-///<reference path="../party/LevelType.ts"/>
-///<reference path="PokemonType.ts"/>
+/// <reference path="../party/evolutions/LevelEvolution.ts" />
+/// <reference path="../party/evolutions/StoneEvolution.ts" />
+/// <reference path="../party/evolutions/TimedEvolution.ts" />
+/// <reference path="../party/evolutions/LocationEvolution.ts" />
+/// <reference path="../GameConstants.d.ts" />
+/// <reference path="../party/LevelType.ts" />
+/// <reference path="../../declarations/enums/PokemonType.d.ts" />
 
 const pokemonDevolutionMap: { [name: string]: string } = {};
 

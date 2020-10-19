@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class AchievementHandler {
 
     public static achievementList: Achievement[] = [];

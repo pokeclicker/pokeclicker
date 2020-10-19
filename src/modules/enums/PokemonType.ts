@@ -19,3 +19,5 @@ enum PokemonType {
     'Steel' = 16,
     'Fairy' = 17,
 }
+
+export default PokemonType;
