@@ -20,8 +20,8 @@ style="cursor:default" tabindex="-1">
             </div>
 
             <div class="modal-body tab-content p-0">
-                <div id="dig" class="tab-pane fade in active show pl-3 pr-3" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
-                    <div class="row" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
+                <div id="dig" class="tab-pane fade in active show" data-bind="class: Mine.itemsFound() === Mine.itemsBuried() ? 'disabled' : ''">
+                    <div class="row no-gutters" data-bind="foreach: ['SmallRestore','MediumRestore','LargeRestore']">
                         <button class="col-4 btn btn-secondary" data-bind="
                                                         click: function(){  ItemList[$data].use();},
                                                         css: { disabled: player._itemList[$data]() <= 0}"
@@ -31,7 +31,7 @@ style="cursor:default" tabindex="-1">
                             <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
                         </button>
                     </div>
-                    <div class='row' style="text-align:center;">
+                    <div class='row no-gutters' style="text-align:center;">
                         <div class='progress'>
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
@@ -40,9 +40,9 @@ style="cursor:default" tabindex="-1">
                             </div>
                         </div>
                     </div>
-                    <div id="mineBody" style="margin:auto">
+                    <div id="mineBody" class="container" style="margin:auto">
                     </div>
-                    <div class='row'>
+                    <div class='row no-gutters'>
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'>Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'>Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
                         <button
