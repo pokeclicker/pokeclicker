@@ -41,84 +41,84 @@ class Farming implements Feature {
         //#region Berry Data
 
         //#region First Generation
-        this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [2,4,6,8,16], //[5,10,20,30,60] TODO: Change back after testing
-            2, .5, 6,
+        this.berryData[BerryType.Cheri]     = new Berry(BerryType.Cheri,    [5,10,20,30,60],
+            2, 0.5, 5,
             [10, 0, 0, 0, 0], BerryColor.Red,
             ['This bright red Berry is very spicy and has a provocative flavor. It blooms with delicate, pretty flowers.']);
         this.berryData[BerryType.Chesto]    = new Berry(BerryType.Chesto,   [5,15,25,40,80],
-            3, .5, 8,
+            3, 0.5, 6,
             [0, 10, 0, 0, 0], BerryColor.Purple,
             ['This Berry\'s thick skin and fruit are very tough and dry tasting. However, every bit of it can be eaten.']);
         this.berryData[BerryType.Pecha]     = new Berry(BerryType.Pecha,    [10,35,50,60,120],
-            3, .4, 10,
+            3, 0.4, 7,
             [0, 0, 10, 0, 0], BerryColor.Pink,
             ['Because of its hollow inside pocket, there isn\'t a lot to eat. What can be eaten is very sweet and delicious']);
         this.berryData[BerryType.Rawst]     = new Berry(BerryType.Rawst,    [15,30,45,80,160],
-            4, .4, 14,
+            4, 0.4, 8,
             [0, 0, 0, 10, 0], BerryColor.Green,
             ['If the leaves grow longer and curlier than average, this Berry will have a somewhat-bitter taste.']);
         this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10,40,50,110,220],
-            4, .3, 18,
+            4, 0.3, 9,
             [0, 0, 0, 0, 10], BerryColor.Yellow,
             ['This Berry\'s peel is hard, but the flesh inside is very juicy. It is distinguished by its bracing sourness.']);
         this.berryData[BerryType.Leppa]     = new Berry(BerryType.Leppa,    [100,120,140,240,480],
-            5, .3, 30,
+            5, 0.3, 10,
             [10, 0, 10, 10, 10], BerryColor.Red,
             ['It takes longer to grow than Berries such as Cheri. The smaller Berries taste better.']);
         this.berryData[BerryType.Oran]      = new Berry(BerryType.Oran,     [120,180,240,300,600],
-            6, .2, 35,
+            6, 0.2, 20,
             [10, 10, 0, 10, 10], BerryColor.Blue,
             ['Nature\'s gifts came together as one in this Berry. It has a wondrous mix of flavors that spread in the mouth.']);
         this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,1200],
-            8, .2, 60,
+            8, 0.2, 30,
             [0, 10, 10, 10, 10], BerryColor.Yellow,
             ['Sitrus came from the same family as Oran. It is larget and smoother tasting than Oran.']);
         //#endregion
 
         //#region Second Generation
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [20,40,60,90,180],
-            10, .2, 50,
+            5, 0.2, 40,
             [10, 10, 10, 0, 10], BerryColor.Pink,
             ['The more this berry absorbs energy from sunlight, the more vivdly colorful it grows.']);
         this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [100,150,200,250,500],
-            15, .2, 100,
+            15, 0.2, 50,
             [10, 10, 0, 0, 0], BerryColor.Red,
             ['A small hint of spiciness lingers in the red granules surrounding this Berry. Their centers have a dry taste.']);
         this.berryData[BerryType.Bluk]      = new Berry(BerryType.Bluk,     [200,250,300,330,660],
-            20, .2, 110,
+            20, 0.2, 60,
             [0, 10, 10, 0, 0], BerryColor.Purple,
             ['Though this small, delicately skinned Berry is blue in color, it dyes the mouth black when eaten.']);
         this.berryData[BerryType.Nanab]     = new Berry(BerryType.Nanab,    [25,30,35,250,500],
-            11, .2, 120,
+            11, 0.2, 70,
             [0, 0, 10, 10, 0], BerryColor.Pink,
             ['Bitter, but with a trace of sweetness, the Nanab Berry was the seventh to be discovered in the world.']);
         this.berryData[BerryType.Wepear]    = new Berry(BerryType.Wepear,   [150,350,335,400,800],
-            18, .2, 130,
+            18, 0.2, 80,
             [0, 0, 0, 10, 10], BerryColor.Green,
             ['The potent mix of bitter and sour in this Berry seems to promote digestion. The flower is white and beautiful.']);
         this.berryData[BerryType.Pinap]     = new Berry(BerryType.Pinap,    [30,60,180,240,480],
-            9, .2, 140,
+            9, 0.2, 90,
             [10, 0, 0, 0, 10], BerryColor.Yellow,
             ['It is said that when the sour skin is peeled, this spicy Berry can be crushed to make medicine.']);
 
         this.berryData[BerryType.Figy]      = new Berry(BerryType.Figy,     [40,160,230,350,700],
-            16, .15, 150,
+            16, 0.15, 100,
             [15, 0, 0, 0, 0], BerryColor.Red,
             ['This Berry is oddly shaped, appearing as if someone took a bite out of it. It is packed full of spicy substances.']);
         this.berryData[BerryType.Wiki]      = new Berry(BerryType.Wiki,     [40,190,210,360,720],
-            17, .15, 160,
+            17, 0.15, 110,
             [0, 15, 0, 0, 0], BerryColor.Purple,
             ['It is said that this Berry grew lumps to help Pokémon grip it, allowing propagation farther afield.']);
         this.berryData[BerryType.Mago]      = new Berry(BerryType.Mago,     [40,180,240,370,740],
-            18, .15, 170,
+            18, 0.15, 120,
             [0, 0, 15, 0, 0], BerryColor.Pink,
             ['This Berry progressively curves as it grows. The curvier the Berry, the sweeter and tastier.']);
         this.berryData[BerryType.Aguav]     = new Berry(BerryType.Aguav,    [40,170,220,350,700],
-            19, .15, 180,
+            19, 0.15, 130,
             [0, 0, 0, 15, 0], BerryColor.Green,
             ['This Berry turns bitter toward the stem. The dainty flower it grows from doesn\'t absorb much sunlight.']);
         this.berryData[BerryType.Iapapa]    = new Berry(BerryType.Iapapa,   [40,200,230,380,760],
-            20, .15, 190,
+            20, 0.15, 140,
             [0, 0, 0, 0, 15], BerryColor.Yellow,
             ['This Berry is very big and sour. The juiciness of the pulp accentuates the sourness.']);
 
@@ -132,191 +132,191 @@ class Farming implements Feature {
         //#endregion
 
         //#region Third Generation
-        this.berryData[BerryType.Pomeg]     = new Berry(BerryType.Pomeg,    [5,10,15,20,40],
-            1, .1, 60,
+        this.berryData[BerryType.Pomeg]     = new Berry(BerryType.Pomeg,    [110, 510, 890, 900, 1800],
+            20, 0.1, 200,
             [10, 0, 10, 10, 0], BerryColor.Red,
-            ['When this sweetly spicy Berry\'s thick skin is peeled, many pieces of the fruit spill out.']); // TODO: Set properties
-        this.berryData[BerryType.Kelpsy]    = new Berry(BerryType.Kelpsy,   [5,10,15,20,40],
-            1, .1, 60,
+            ['When this sweetly spicy Berry\'s thick skin is peeled, many pieces of the fruit spill out.']);
+        this.berryData[BerryType.Kelpsy]    = new Berry(BerryType.Kelpsy,   [170, 710, 990, 1000, 2000],
+            29, 0.1, 250,
             [0, 10, 0, 10, 10], BerryColor.Blue,
-            ['This Berry can be eaten as is or boiled to obtain an extract that adds a dash of flavor to food.']); // TODO: Set properties
-        this.berryData[BerryType.Qualot]    = new Berry(BerryType.Qualot,   [5,10,15,20,40],
-            1, .1, 60,
+            ['This Berry can be eaten as is or boiled to obtain an extract that adds a dash of flavor to food.']);
+        this.berryData[BerryType.Qualot]    = new Berry(BerryType.Qualot,   [430, 640, 730, 1200, 2400],
+            25, 0.1, 300,
             [10, 0, 10, 0, 10], BerryColor.Yellow,
-            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.']); // TODO: Set properties
-        this.berryData[BerryType.Hondew]    = new Berry(BerryType.Hondew,   [5,10,15,20,40],
-            1, .1, 60,
+            ['Even in places of constant rain and high humidity, this Berry\'s plant grows healthy and strong.']);
+        this.berryData[BerryType.Hondew]    = new Berry(BerryType.Hondew,   [310, 3630, 4880, 5000, 10000],
+            26, 0.1, 2500,
             [10, 10, 0, 10, 0], BerryColor.Green,
-            ['This somewhat-rare Berry projects an image of luxury, so it is favored as a gift item.']); // TODO: Set properties
-        this.berryData[BerryType.Grepa]     = new Berry(BerryType.Grepa,    [5,10,15,20,40],
-            1, .1, 60,
+            ['This somewhat-rare Berry projects an image of luxury, so it is favored as a gift item.']);
+        this.berryData[BerryType.Grepa]     = new Berry(BerryType.Grepa,    [300, 450, 1190, 1300, 2600],
+            14, 0.1, 400,
             [0, 10, 10, 0, 10], BerryColor.Yellow,
-            ['One bite of this very tender Berry fills the mouth with its sweet and tangy flavor.']); // TODO: Set properties
-        this.berryData[BerryType.Tamato]    = new Berry(BerryType.Tamato,   [5,10,15,20,40],
-            1, .1, 60,
+            ['One bite of this very tender Berry fills the mouth with its sweet and tangy flavor.']);
+        this.berryData[BerryType.Tamato]    = new Berry(BerryType.Tamato,   [180, 560, 1060, 1100, 2200],
+            15, 0.1, 410,
             [20, 10, 0, 0, 0], BerryColor.Red,
-            ['This Berry is large and spicy. When eaten during the cold season, it warms the body from inside.']); // TODO: Set properties
+            ['This Berry is large and spicy. When eaten during the cold season, it warms the body from inside.']);
 
-        this.berryData[BerryType.Cornn]     = new Berry(BerryType.Cornn,    [5,10,15,20,40],
-            1, .1, 60,
+        this.berryData[BerryType.Cornn]     = new Berry(BerryType.Cornn,    [350, 780, 1300, 1800, 3600],
+            16, 0.05, 500,
             [0, 20, 10, 0, 0], BerryColor.Purple,
-            ['Its dryness is quite strong. As a result, its true deliciousness can\'t be appreciated by just eating one or two.']); // TODO: Set properties
-        this.berryData[BerryType.Magost]    = new Berry(BerryType.Magost,   [5,10,15,20,40],
-            1, .1, 60,
+            ['Its dryness is quite strong. As a result, its true deliciousness can\'t be appreciated by just eating one or two.']);
+        this.berryData[BerryType.Magost]    = new Berry(BerryType.Magost,   [460, 810, 1370, 2500, 5000],
+            17, 0.05, 550,
             [0, 0, 20, 10, 0], BerryColor.Pink,
-            ['The grown-up flavor and dreamy sweetness of this Berry make it a favorite of Pokémon everywhere.']); // TODO: Set properties
-        this.berryData[BerryType.Rabuta]    = new Berry(BerryType.Rabuta,   [5,10,15,20,40],
-            1, .1, 60,
+            ['The grown-up flavor and dreamy sweetness of this Berry make it a favorite of Pokémon everywhere.']);
+        this.berryData[BerryType.Rabuta]    = new Berry(BerryType.Rabuta,   [130, 1100, 1990, 2000, 4000],
+            18, 0.05, 600,
             [0, 0, 0, 20, 10], BerryColor.Green,
-            ['Even though it is bitter, it should be eaten peel and all. The hair on the peel cleans the stomach from the inside.']); // TODO: Set properties
-        this.berryData[BerryType.Nomel]     = new Berry(BerryType.Nomel,    [5,10,15,20,40],
-            1, .1, 60,
+            ['Even though it is bitter, it should be eaten peel and all. The hair on the peel cleans the stomach from the inside.']);
+        this.berryData[BerryType.Nomel]     = new Berry(BerryType.Nomel,    [360, 1000, 1620, 2600, 5200],
+            19, 0.05, 650,
             [10, 0, 0, 0, 20], BerryColor.Yellow,
-            ['This Berry is quite sour overall, with the sourness especially concentrated at the pointed end.']); // TODO: Set properties
-        this.berryData[BerryType.Spelon]    = new Berry(BerryType.Spelon,   [5,10,15,20,40],
-            1, .1, 60,
+            ['This Berry is quite sour overall, with the sourness especially concentrated at the pointed end.']);
+        this.berryData[BerryType.Spelon]    = new Berry(BerryType.Spelon,   [360, 980, 1610, 2300, 4600],
+            20, 0.05, 700,
             [30, 10, 0, 0, 0], BerryColor.Red,
-            ['So spicy is the Spelon Berry that, Fire type or not, Pokémon will try to breathe fire after eating a single one.']); // TODO: Set properties
-        this.berryData[BerryType.Pamtre]    = new Berry(BerryType.Pamtre,   [5,10,15,20,40],
-            1, .1, 60,
+            ['So spicy is the Spelon Berry that, Fire type or not, Pokémon will try to breathe fire after eating a single one.']);
+        this.berryData[BerryType.Pamtre]    = new Berry(BerryType.Pamtre,   [460, 1250, 2680, 3000, 6000],
+            21, 0.05, 750,
             [0, 30, 10, 0, 0], BerryColor.Purple,
-            ['This Berry drifted from a faraway sea. It is now cultivated in the Sinnoh region.']); // TODO: Set properties
-        this.berryData[BerryType.Watmel]    = new Berry(BerryType.Watmel,   [5,10,15,20,40],
-            1, .1, 60,
+            ['This Berry drifted from a faraway sea. It is now cultivated in the Sinnoh region.']);
+        this.berryData[BerryType.Watmel]    = new Berry(BerryType.Watmel,   [310, 1350, 2340, 2700, 5400],
+            22, 0.05, 800,
             [0, 0, 30, 10, 0], BerryColor.Pink,
-            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20 inches.']); // TODO: Set properties
-        this.berryData[BerryType.Durin]     = new Berry(BerryType.Durin,    [5,10,15,20,40],
-            1, .1, 60,
+            ['A bounty of nature that is exceedingly sweet. The Berry is huge, with some discovered that exceed 20 inches.']);
+        this.berryData[BerryType.Durin]     = new Berry(BerryType.Durin,    [150, 1130, 2480, 3100, 6200],
+            23, 0.05, 850,
             [0, 0, 0, 30, 10], BerryColor.Green,
-            ['This Berry is tremendously bitter. Just one bite is enough to instantly stop hiccups.']); // TODO: Set properties
-        this.berryData[BerryType.Belue]     = new Berry(BerryType.Belue,    [5,10,15,20,40],
-            1, .1, 60,
+            ['This Berry is tremendously bitter. Just one bite is enough to instantly stop hiccups.']);
+        this.berryData[BerryType.Belue]     = new Berry(BerryType.Belue,    [300, 870, 960, 2200, 4400],
+            24, 0.05, 900,
             [10, 0, 0, 0, 30], BerryColor.Purple,
-            ['This glossy and colorful Berry has a mouthwateringly delicious appearance. However, it is awfully sour.']); // TODO: Set properties
+            ['This glossy and colorful Berry has a mouthwateringly delicious appearance. However, it is awfully sour.']);
         //#endregion
 
         //#region Fourth Generation (Typed)
-        this.berryData[BerryType.Occa]      = new Berry(BerryType.Occa,     [5,10,15,20,40],
-            1, .1, 60,
+        this.berryData[BerryType.Occa]      = new Berry(BerryType.Occa,     [220, 1660, 2460, 3600, 7200],
+            12, 0.03, 950,
             [15, 0, 10, 0, 0], BerryColor.Red,
             [
                 'This Berry is said to have grown plentiful in the tropics of the past. It boasts an intensely hot spiciness.',
                 'It has a tendency to overtake nearby plants.',
-            ]); // TODO: Set properties
-        this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [5,10,15,20,40],
-            1, .1, 60,
+            ]);
+        this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [490, 2460, 4970, 6000, 12000],
+            13, 0.03, 1000,
             [0, 15, 0, 10, 0], BerryColor.Blue,
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
                 'This Berry the promotes the fruiting of nearby Berry plants.',
-            ], new Aura(AuraType.Harvest, [1.2, 1.4, 1.6])); // TODO: Set properties
-        this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Harvest, [1.2, 1.4, 1.6]));
+        this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [180, 870, 940, 1800, 3600],
+            9, 0.03, 1050,
             [0, 0, 15, 0, 10], BerryColor.Yellow,
             [
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
                 'The same energy promotes the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [1.2, 1.4, 1.6])); // TODO: Set properties
-        this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Growth, [1.2, 1.4, 1.6]));
+        this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [140, 1160, 2210, 2600, 5200],
+            15, 0.03, 1100,
             [10, 0, 0, 15, 0], BerryColor.Green,
             [
                 'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
                 'It has a tendency to expand into nearby plots.',
-            ]); // TODO: Set properties
-        this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [5,10,15,20,40],
-            1, .1, 60,
+            ]);
+        this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [680, 2700, 5280, 7000, 14000],
+            16, 0.03, 4500,
             [0, 10, 0, 0, 15], BerryColor.Blue,
             [
                 'This Berry has a refreshing flavor that strikes a good balance of dryness and sourness. It tastes better chilled.',
                 'This Berry slows the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [0.9, 0.8, 0.7])); // TODO: Set properties
-        this.berryData[BerryType.Chople]    = new Berry(BerryType.Chople,   [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Growth, [0.9, 0.8, 0.7]));
+        this.berryData[BerryType.Chople]    = new Berry(BerryType.Chople,   [350, 2640, 4130, 4200, 8400],
+            17, 0.03, 1200,
             [15, 0, 0, 10, 0], BerryColor.Red,
             [
                 'This Berry contains a substance that generates heat. It can even heat up a chilly heart.',
                 'Growing these Berries will promote Egg growth.',
-            ], new Aura(AuraType.Egg, [1.1, 1.2, 1.3])); // TODO: Set properties
-        this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Egg, [1.1, 1.2, 1.3]));
+        this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [150, 1400, 1600, 2000, 4000],
+            11, 0.03, 500,
             [0, 15, 0, 0, 10], BerryColor.Green,
             [
                 'This Berry is a brilliant green on the outside. Inside, it is packed with a dry-flavored, black-colored flesh.',
                 'It has a tendency to overtake nearby plants.',
                 'Due to its poisonous nature, it increases the chances of mutations near it.',
-            ], new Aura(AuraType.Mutation, [1.2, 1.4, 1.6])); // TODO: Set properties
-        this.berryData[BerryType.Shuca]     = new Berry(BerryType.Shuca,    [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Mutation, [1.2, 1.4, 1.6]));
+        this.berryData[BerryType.Shuca]     = new Berry(BerryType.Shuca,    [320, 3980, 6320, 8000, 16000],
+            19, 0.03, 1300,
             [10, 0, 15, 0, 0], BerryColor.Yellow,
             [
                 'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
                 'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [1.2, 1.4, 1.6])); // TODO: Set properties
-        this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Replant, [1.2, 1.4, 1.6]));
+        this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [240, 1400, 2310, 3500, 7000],
+            20, 0.03, 1350,
             [0, 10, 0, 15, 0], BerryColor.Blue,
-            ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.']); // TODO: Set properties
-        this.berryData[BerryType.Payapa]    = new Berry(BerryType.Payapa,   [5,10,15,20,40],
-            1, .1, 60,
+            ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.']);
+        this.berryData[BerryType.Payapa]    = new Berry(BerryType.Payapa,   [270, 1630, 3670, 6500, 13000],
+            21, 0.03, 1400,
             [0, 0, 10, 0, 15], BerryColor.Purple,
             [
                 'This Berry is said to sense human emotions for the way it swells roundly when a person approaches.',
                 'The same behavior affects nearby plants, causing additional mutations.',
-            ], new Aura(AuraType.Mutation, [1.1, 1.2, 1.3])); // TODO: Set properties
-        this.berryData[BerryType.Tanga]     = new Berry(BerryType.Tanga,    [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Mutation, [1.1, 1.2, 1.3]));
+        this.berryData[BerryType.Tanga]     = new Berry(BerryType.Tanga,    [420, 770, 1760, 2300, 4600],
+            16, 0.03, 1100,
             [20, 0, 0, 0, 10], BerryColor.Green,
             [
                 'The flower grows at the tip of this Berry. It attracts Bug Pokémon by letting its stringy petals stream out.',
                 'The attracted Bug Pokémon decreases the amount of harvestable Berries in nearby plants',
-            ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7])); // TODO: Set properties
-        this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]));
+        this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [490, 3660, 4550, 9000, 18000],
+            23, 0.03, 6000,
             [10, 20, 0, 0, 0], BerryColor.Yellow,
             [
                 'It is often used for pickles because of its very dry flavor. It can also be eaten raw for its provocative taste.',
                 'This Berry plant hardens the surrounding soil, decreasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [0.9, 0.8, 0.7])); // TODO: Set properties
-        this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Replant, [0.9, 0.8, 0.7]));
+        this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [1000, 6370, 8580, 11000, 22000],
+            24, 0.03, 1350,
             [0, 10, 20, 0, 0], BerryColor.Purple,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
                 'Nearby Pokémon are wary of this Berry plant.',
-            ], new Aura(AuraType.Attract, [0.9, 0.8, 0.7])); // TODO: Set properties
-        this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Attract, [0.9, 0.8, 0.7]));
+        this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [1300, 9870, 10200, 15000, 30000],
+            25, 0.03, 15000,
             [0, 0, 10, 20, 0], BerryColor.Red,
             [
                 'If a large enough volume of this Berry is boiled down, its bitterness fades away. It makes a good jam.',
                 'This Berry requires a lot of energy to grow, stealing away nutrients from nearby plots.',
-            ], new Aura(AuraType.Growth, [0.8, 0.6, 0.5])); // TODO: Set properties
-        this.berryData[BerryType.Colbur]    = new Berry(BerryType.Colbur,   [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Growth, [0.8, 0.6, 0.5]));
+        this.berryData[BerryType.Colbur]    = new Berry(BerryType.Colbur,   [380, 3790, 4650, 5500, 11000],
+            26, 0.03, 1650,
             [0, 0, 0, 10, 20], BerryColor.Purple,
             [
                 'Tiny hooks grow on the surface of this Berry. It latches on to Pokémon so it can be carried to far-off places.',
                 'It has a tendency to overtake nearby plants.',
-            ]); // TODO: Set properties
-        this.berryData[BerryType.Babiri]    = new Berry(BerryType.Babiri,   [5,10,15,20,40],
-            1, .1, 60,
+            ]);
+        this.berryData[BerryType.Babiri]    = new Berry(BerryType.Babiri,   [1210, 8630, 9410, 10000, 20000],
+            27, 0.03, 3200,
             [25, 10, 0, 0, 0], BerryColor.Green,
             [
                 'This Berry is very tough with a strong flavor. It was used to make medicine by people in the past.',
                 'This Berry plant is very hardy and resistant, causing less mutations around it.',
-            ], new Aura(AuraType.Mutation, [0.9, 0.8, 0.7])); // TODO: Set properties
-        this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [5,10,15,20,40],
-            1, .1, 60,
+            ], new Aura(AuraType.Mutation, [0.9, 0.8, 0.7]));
+        this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [240, 1430, 2970, 3200, 6400],
+            17, 0.03, 1320,
             [0, 25, 10, 0, 0], BerryColor.Yellow,
-            ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.']); // TODO: Set properties
-        this.berryData[BerryType.Roseli]    = new Berry(BerryType.Roseli,   [5,10,15,20,40],
-            1, .1, 60,
+            ['This Berry can be cored out and dried to make a whistle. Blowing through its hole makes an indescribable sound.']);
+        this.berryData[BerryType.Roseli]    = new Berry(BerryType.Roseli,   [370, 3520, 4580, 5600, 11200],
+            29, 0.03, 1800,
             [0, 0, 25, 10, 0], BerryColor.Pink,
             [
                 'This Berry is sweet with a hint of bitterness and has a lingering sweet scent. It is often dried and used to make tea.',
                 'The scent of this Berry plant attracts wild Pokémon.',
-            ], new Aura(AuraType.Attract, [1.2, 1.4, 1.6])); // TODO: Set properties
+            ], new Aura(AuraType.Attract, [1.2, 1.4, 1.6]));
         //#endregion
 
         //#region Fifth Generation
