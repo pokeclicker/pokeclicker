@@ -351,7 +351,7 @@ gymList['Elite Will'] = new Gym(
         new GymPokemon('Xatu', 245330, 40),
         new GymPokemon('Exeggutor', 248300, 41),
         new GymPokemon('Slowbro', 252000, 41),
-        new GymPokemon('Jinx', 257000, 41),
+        new GymPokemon('Jynx', 257000, 41),
         new GymPokemon('Xatu', 260250, 42),
     ],
     BadgeEnums.Elite_Will,
