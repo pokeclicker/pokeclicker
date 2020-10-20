@@ -1,12 +1,12 @@
 class BerryDeal {
     public berry: BerryType[];
-    public item: Item;
+    public item: Item | UndergroundItem;
     public berryAmount: number[];
     public itemAmount: number;
 
-    public static list: KnockoutObservableArray<BerryDeal>[] = Array<KnockoutObservableArray<BerryDeal>>(GameConstants.MAX_AVAILABLE_REGION).fill(ko.observableArray());
+    public static list: KnockoutObservableArray<BerryDeal> = ko.observableArray();
 
-    constructor(berry: BerryType[], berryAmount: number[], item: Item, itemAmount: number) {
+    constructor(berry: BerryType[], berryAmount: number[], item: Item | UndergroundItem, itemAmount: number) {
         this.berry = berry;
         this.berryAmount = berryAmount;
         this.item = item;
@@ -18,43 +18,40 @@ class BerryDeal {
     }
 
     private static randomAmount(base: number, variance: number): number {
-        return Math.max(1, base + Math.floor(variance * (SeededRand.next() - 0.5)));//Math.floor(3 * SeededRand.next()) + 1;
+        return Math.max(1, base + Math.floor(variance * (SeededRand.next() - 0.5)));
+    }
+
+    private static randomBattleItem(): Item {
+        const battleItem = Math.floor(Object.keys(BattleItems.BattleItem).length * SeededRand.next());
+        return ItemList[battleItem];
+    }
+
+    private static randomEvoItem(): Item {
+        const evoItem = Math.floor(Object.keys(EvoItems.EvoItem).length * SeededRand.next());
+        return ItemList[evoItem];
+    }
+
+    private static randomUndergroundItem(): UndergroundItem {
+        return UndergroundItem.list[Math.floor(UndergroundItem.list.length * SeededRand.next())];
     }
 
     public static generateDeals(date: Date) {
         SeededRand.seedWithDate(date);
 
         // Removing old deals
-        for (let i = 0;i < 3;i++) {
-            BerryDeal.list[i].removeAll();
-        }
+        BerryDeal.list.removeAll();
 
         this.generateJohtoDeals();
         this.generateHoennDeals();
         this.generateSinnohDeals();
-
-        /*
-        const temp = [];
-        const maxTries = maxDeals * 10;
-        let i = 0;
-        while (i < maxTries && temp.length < maxDeals) {
-            const deal = new DailyDeal();
-            if (deal.isValid(temp)) {
-                temp.push(deal);
-            }
-            i++;
-        }
-        DailyDeal.list.push(...temp);
-        */
     }
 
     private static generateJohtoDeals() {
-
-        // Battle Items
         const firstGen = Farming.getGeneration(0);
         const secondGen = Farming.getGeneration(1);
-        /*
-        BerryDeal.list[GameConstants.Region.johto].push(new BerryDeal(
+        const thirdGen = Farming.getGeneration(2);
+
+        BerryDeal.list.push(new BerryDeal(
             [
                 this.randomBerry(firstGen),
                 this.randomBerry(secondGen),
@@ -63,41 +60,96 @@ class BerryDeal {
                 this.randomAmount(50, 20),
                 this.randomAmount(20, 10),
             ],
-            ItemList['Boost_Mulch'],
-            1
+            this.randomBattleItem(),
+            this.randomAmount(5,2)
         ));
-        */
+
+        BerryDeal.list.push(new BerryDeal(
+            [
+                this.randomBerry(firstGen),
+                this.randomBerry(secondGen),
+                this.randomBerry(thirdGen),
+            ],
+            [
+                this.randomAmount(100, 30),
+                this.randomAmount(50, 20),
+                this.randomAmount(20, 10),
+            ],
+            this.randomEvoItem(),
+            this.randomAmount(2,1)
+        ));
     }
 
     private static generateHoennDeals() {
+        const thirdGen = Farming.getGeneration(2);
+        const fourthGen = Farming.getGeneration(3);
 
+        const temp = [];
+        const maxTries = 30;
+        let i = 0;
+        while (i < maxTries && temp.length < 3) {
+            const deal = new BerryDeal(
+                [
+                    this.randomBerry(thirdGen),
+                    this.randomBerry(fourthGen),
+                ],
+                [
+                    this.randomAmount(50, 20),
+                    this.randomAmount(20, 10),
+                ],
+                this.randomUndergroundItem(),
+                this.randomAmount(2,1)
+            );
+            if (temp.every(madeDeal => madeDeal.item.name !== deal.item.name)) {
+                temp.push(deal);
+            }
+            i++;
+        }
+        BerryDeal.list.push(...temp);
     }
 
     private static generateSinnohDeals() {
+        const firstGen = Farming.getGeneration(0);
+        const secondGen = Farming.getGeneration(1);
+        const thirdGen = Farming.getGeneration(2);
+        const fourthGen = Farming.getGeneration(3);
+        const fifthGen = Farming.getGeneration(4);
 
+        BerryDeal.list.push(new BerryDeal(
+            [
+                this.randomBerry(firstGen),
+                this.randomBerry(secondGen),
+                this.randomBerry(thirdGen),
+                this.randomBerry(fourthGen),
+                this.randomBerry(fifthGen),
+            ],
+            [
+                this.randomAmount(400, 100),
+                this.randomAmount(100, 30),
+                this.randomAmount(50, 20),
+                this.randomAmount(20, 10),
+                this.randomAmount(7, 3),
+            ],
+            ItemList['Masterball'],
+            1
+        ));
     }
 
     public static canUse(i: number): boolean {
-        const deal = DailyDeal.list.peek()[i];
-        const index = player.mineInventoryIndex(deal.item1.id);
-        if (index > -1) {
-            return player.mineInventory[index].amount() >= deal.amount1;
-        } else {
-            return false;
-        }
+        const deal = BerryDeal.list.peek()[i];
+        return deal.berry.every((value, idx) => App.game.farming.berryList[value]() >= deal.berryAmount[idx] );
     }
 
     public static use(i: number, tradeTimes = 1) {
-        const deal = DailyDeal.list.peek()[i];
-        const item1Index = player.mineInventoryIndex(deal.item1.id);
-        if (DailyDeal.canUse(i)) {
-            const amt = player.mineInventory[item1Index].amount();
-            const maxTrades = Math.floor(amt / deal.amount1);
-            tradeTimes = Math.min(tradeTimes, maxTrades);
-            player.mineInventory[item1Index].amount(amt - (deal.amount1 * tradeTimes));
-            Underground.gainMineItem(deal.item2.id, deal.amount2 * tradeTimes);
+        const deal = BerryDeal.list.peek()[i];
+        if (BerryDeal.canUse(i)) {
+            deal.berry.forEach((value, idx) => GameHelper.incrementObservable(App.game.farming.berryList[value], -idx * tradeTimes));
+            if (deal.item instanceof UndergroundItem) {
+                Underground.gainMineItem(deal.item.id, deal.itemAmount * tradeTimes);
+            } else {
+                deal.item.gain(deal.itemAmount * tradeTimes);
+            }
             GameHelper.incrementObservable(App.game.statistics.undergroundDailyDealTrades);
-            Underground.sortMineItems(Underground.lastPropSort, false);
         }
     }
 }

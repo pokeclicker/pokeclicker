@@ -70,6 +70,7 @@ class Game {
         //Safari.load();
         Underground.energyTick(Underground.getEnergyRegenTime());
         DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
+        BerryDeal.generateDeals(new Date());
 
         this.gameState = GameConstants.GameState.fighting;
     }
@@ -138,6 +139,7 @@ class Game {
                 this.quests.resetRefreshes();
                 this.quests.generateQuestList();
                 DailyDeal.generateDeals(Underground.getDailyDealsMax(), now);
+                BerryDeal.generateDeals(now);
                 Notifier.notify({
                     message: 'It\'s a new day! Your quests and underground deals have been updated.',
                     type: NotificationConstants.NotificationOption.info,
