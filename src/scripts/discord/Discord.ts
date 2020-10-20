@@ -6,11 +6,8 @@ class Discord implements Saveable {
         username: null,
     };
 
-    // These will be updated from our config values
-    clientID = '$DISCORD_CLIENT_ID';
-    uri = '$DISCORD_LOGIN_URI';
 
-    ID: KnockoutObservable<number> = ko.observable(null);
+    ID: KnockoutObservable<string> = ko.observable(null);
     username: KnockoutObservable<string> = ko.observable(null);
     codes: Array<DiscordCode> = [
         new DiscordPokemonCode(pokemonMap['Unown (D)'], 700, 'Alternate form of Unown'),
@@ -34,36 +31,21 @@ class Discord implements Saveable {
     constructor() {
         // Check if code provided by Discord, which means the user has logged in, and we need to get their details
         const search = new URLSearchParams(location.search);
-        const code = search.get('code');
-        if (code) {
-            $.ajax({
-                data: { code },
-                type: 'get',
-                url: this.uri,
-                crossDomain: true,
-                dataType: 'json',
-                success: data => {
-                    if (data && data.id) {
-                        this.ID(data.id);
-                        this.username(`${data.username}#${data.discriminator}`);
-                        Notifier.notify({
-                            title: `Welcome ${this.username()}`,
-                            message: 'Successfully logged in to Discord!',
-                            type: NotificationConstants.NotificationOption.success,
-                            timeout: GameConstants.MINUTE,
-                        });
-                    }
-                },
-                complete: () => {
-                    // Remove the code from the URI, no longer needed
-                    window.history.replaceState('', '', `${location.origin + location.pathname}`);
-                },
+        const discordID: string = search.get('discordID');
+        if (discordID) {
+            this.ID(discordID);
+            Notifier.notify({
+                message: 'Successfully logged in to Discord!',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: GameConstants.MINUTE,
             });
+            window.history.replaceState('', '', `${location.origin + location.pathname}`);
         }
     }
 
     login(): void {
-        location.href = `https://discord.com/oauth2/authorize?client_id=${this.clientID}&redirect_uri=${location.origin + location.pathname}&response_type=code&scope=identify&prompt=consent`;
+        // This will be updated from our config values
+        location.href = `$DISCORD_LOGIN_PROXY?action=login&redirect_uri=${encodeURIComponent(location.href.replace(location.search, ''))}`;
     }
 
     logout(): void {
