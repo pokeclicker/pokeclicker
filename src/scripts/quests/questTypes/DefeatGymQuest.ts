@@ -1,5 +1,5 @@
 /// <reference path="../Quest.ts" />
-/// <reference path="../../scripts/GameConstants.d.ts"/>
+/// <reference path="../../GameConstants.d.ts" />
 
 class DefeatGymQuest extends Quest implements QuestInterface {
     constructor(gymTown: string, amount: number, region: number) {
