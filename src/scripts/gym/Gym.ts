@@ -178,7 +178,7 @@ gymList['Viridian City'] = new Gym(
 // Kanto Elite 4
 gymList['Elite Lorelei'] = new Gym(
     'Lorelei',
-    'Elite Lorelei',
+    'Kanto Elite Lorelei',
     [
         new GymPokemon('Dewgong', 45330, 54),
         new GymPokemon('Cloyster', 48300, 53),
@@ -193,7 +193,7 @@ gymList['Elite Lorelei'] = new Gym(
 );
 gymList['Elite Bruno'] = new Gym(
     'Bruno',
-    'Elite Bruno',
+    'Kanto Elite Bruno',
     [
         new GymPokemon('Onix', 45330, 53),
         new GymPokemon('Hitmonchan', 48300, 55),
@@ -208,7 +208,7 @@ gymList['Elite Bruno'] = new Gym(
 );
 gymList['Elite Agatha'] = new Gym(
     'Agatha',
-    'Elite Agatha',
+    'Kanto Elite Agatha',
     [
         new GymPokemon('Gengar', 45330, 56),
         new GymPokemon('Golbat', 48300, 56),
@@ -223,7 +223,7 @@ gymList['Elite Agatha'] = new Gym(
 );
 gymList['Elite Lance'] = new Gym(
     'Lance',
-    'Elite Lance',
+    'Kanto Elite Lance',
     [
         new GymPokemon('Gyarados', 48300, 58),
         new GymPokemon('Dragonair', 52000, 56),
@@ -346,7 +346,7 @@ gymList['Blackthorn City'] = new Gym(
 //Johto Elite 4
 gymList['Elite Will'] = new Gym(
     'Will',
-    'Elite Will',
+    'Johto Elite Will',
     [
         new GymPokemon('Xatu', 245330, 40),
         new GymPokemon('Exeggutor', 248300, 41),
@@ -361,7 +361,7 @@ gymList['Elite Will'] = new Gym(
 );
 gymList['Elite Koga'] = new Gym(
     'Koga2',
-    'Elite Koga',
+    'Johto Elite Koga',
     [
         new GymPokemon('Ariados', 245330, 40),
         new GymPokemon('Venomoth', 248300, 41),
@@ -376,7 +376,7 @@ gymList['Elite Koga'] = new Gym(
 );
 gymList['Elite Bruno2'] = new Gym(
     'Bruno2',
-    'Elite Bruno2',
+    'Johto Elite Bruno',
     [
         new GymPokemon('Hitmontop', 245330, 42),
         new GymPokemon('Hitmonlee', 248300, 42),
@@ -391,7 +391,7 @@ gymList['Elite Bruno2'] = new Gym(
 );
 gymList['Elite Karen'] = new Gym(
     'Karen',
-    'Elite Karen',
+    'Johto Elite Karen',
     [
         new GymPokemon('Umbreon', 248300, 42),
         new GymPokemon('Vileplume', 252000, 42),
@@ -406,7 +406,7 @@ gymList['Elite Karen'] = new Gym(
 );
 gymList['Champion Lance'] = new Gym(
     'Lance2',
-    'Champion Lance',
+    'Johto Champion Lance',
     [
         new GymPokemon('Gyarados', 258300, 44),
         new GymPokemon('Dragonite', 262000, 47),
@@ -538,7 +538,7 @@ gymList['Sootopolis City'] = new Gym(
 // Hoenn Elite 4
 gymList['Elite Sidney'] = new Gym(
     'Sidney',
-    'Elite Sidney',
+    'Hoenn Elite Sidney',
     [
         new GymPokemon('Mightyena', 572000, 46),
         new GymPokemon('Shiftry', 580000, 48),
@@ -553,7 +553,7 @@ gymList['Elite Sidney'] = new Gym(
 );
 gymList['Elite Phoebe'] = new Gym(
     'Phoebe',
-    'Elite Phoebe',
+    'Hoenn Elite Phoebe',
     [
         new GymPokemon('Dusclops', 636700, 48),
         new GymPokemon('Banette', 638000, 49),
@@ -568,7 +568,7 @@ gymList['Elite Phoebe'] = new Gym(
 );
 gymList['Elite Glacia'] = new Gym(
     'Glacia',
-    'Elite Glacia',
+    'Hoenn Elite Glacia',
     [
         new GymPokemon('Sealeo', 682000, 50),
         new GymPokemon('Glalie', 672000, 50),
@@ -583,7 +583,7 @@ gymList['Elite Glacia'] = new Gym(
 );
 gymList['Elite Drake'] = new Gym(
     'Drake',
-    'Elite Drake',
+    'Hoenn Elite Drake',
     [
         new GymPokemon('Shelgon', 664000, 52),
         new GymPokemon('Altaria', 672000, 54),
@@ -598,7 +598,7 @@ gymList['Elite Drake'] = new Gym(
 );
 gymList['Champion Wallace'] = new Gym(
     'Wallace',
-    'Champion Wallace',
+    'Hoenn Champion Wallace',
     [
         new GymPokemon('Wailord', 802000, 57),
         new GymPokemon('Tentacruel', 764000, 55),
@@ -727,7 +727,7 @@ gymList['Sunyshore City'] = new Gym(
 //Sinnoh Elite 4
 gymList['Elite Aaron'] = new Gym(
     'Aaron',
-    'Elite Aaron',
+    'Sinnoh Elite Aaron',
     [
         new GymPokemon('Yanmega', 1945330, 49),
         new GymPokemon('Scizor', 1948300, 49),
@@ -742,7 +742,7 @@ gymList['Elite Aaron'] = new Gym(
 );
 gymList['Elite Bertha'] = new Gym(
     'Bertha',
-    'Elite Bertha',
+    'Sinnoh Elite Bertha',
     [
         new GymPokemon('Whiscash', 2045330, 50),
         new GymPokemon('Gliscor', 2048300, 53),
@@ -757,7 +757,7 @@ gymList['Elite Bertha'] = new Gym(
 );
 gymList['Elite Flint'] = new Gym(
     'Flint',
-    'Elite Flint',
+    'Sinnoh Elite Flint',
     [
         new GymPokemon('Houndoom', 2145330, 52),
         new GymPokemon('Flareon', 2148300, 55),
@@ -772,7 +772,7 @@ gymList['Elite Flint'] = new Gym(
 );
 gymList['Elite Lucian'] = new Gym(
     'Lucian',
-    'Elite Lucian',
+    'Sinnoh Elite Lucian',
     [
         new GymPokemon('Mr. Mime', 2248300, 53),
         new GymPokemon('Espeon', 2252000, 55),
@@ -919,7 +919,7 @@ gymList['Humilau City'] = new Gym(
 //TODO: Balancing of elite Pokemon HP & rewards.
 gymList['Elite Shauntal'] = new Gym(
     'Shauntal',
-    'Elite Shauntal',
+    'Unova Elite Shauntal',
     [
         new GymPokemon('Cofagrigus', 1945330, 49),
         new GymPokemon('Gengar', 1948300, 49),
@@ -935,7 +935,7 @@ gymList['Elite Shauntal'] = new Gym(
 );
 gymList['Elite Marshal'] = new Gym(
     'Marshal',
-    'Elite Marshal',
+    'Unova Elite Marshal',
     [
         new GymPokemon('Throh', 1945330, 49),
         new GymPokemon('Sawk', 1948300, 49),
@@ -951,7 +951,7 @@ gymList['Elite Marshal'] = new Gym(
 );
 gymList['Elite Grimsley'] = new Gym(
     'Grimsley',
-    'Elite Grimsley',
+    'Unova Elite Grimsley',
     [
         new GymPokemon('Honchkrow', 1945330, 49),
         new GymPokemon('Scrafty', 1948300, 49),
@@ -967,7 +967,7 @@ gymList['Elite Grimsley'] = new Gym(
 );
 gymList['Elite Caitlin'] = new Gym(
     'Caitlin',
-    'Elite Caitlin',
+    'Unova Elite Caitlin',
     [
         new GymPokemon('Musharna', 1945330, 49),
         new GymPokemon('Alakazam', 1948300, 49),
@@ -983,7 +983,7 @@ gymList['Elite Caitlin'] = new Gym(
 );
 gymList['Champion Iris'] = new Gym(
     'Iris',
-    'Champion Iris',
+    'Unova Champion Iris',
     [
         new GymPokemon('Hydreigon', 2458300, 58),
         new GymPokemon('Salamence', 2462000, 58),
@@ -1108,7 +1108,7 @@ gymList['Snowbelle City'] = new Gym(
 //TODO: Balancing of elite Pokemon HP & rewards.
 gymList['Elite Malva'] = new Gym(
     'Malva',
-    'Elite Malva',
+    'Kalos Elite Malva',
     [
         new GymPokemon('Pyroar', 1945330, 49),
         new GymPokemon('Torkoal', 1948300, 49),
@@ -1122,7 +1122,7 @@ gymList['Elite Malva'] = new Gym(
 );
 gymList['Elite Siebold'] = new Gym(
     'Siebold',
-    'Elite Siebold',
+    'Kalos Elite Siebold',
     [
         new GymPokemon('Clawitzer', 1945330, 49),
         new GymPokemon('Gyarados', 1948300, 49),
@@ -1136,7 +1136,7 @@ gymList['Elite Siebold'] = new Gym(
 );
 gymList['Elite Wikstrom'] = new Gym(
     'Wikstrom',
-    'Elite Wikstrom',
+    'Kalos Elite Wikstrom',
     [
         new GymPokemon('Klefki', 1945330, 49),
         new GymPokemon('Probopass', 1948300, 49),
@@ -1150,7 +1150,7 @@ gymList['Elite Wikstrom'] = new Gym(
 );
 gymList['Elite Drasna'] = new Gym(
     'Drasna',
-    'Elite Drasna',
+    'Kalos Elite Drasna',
     [
         new GymPokemon('Dragalge', 1945330, 49),
         new GymPokemon('Druddigon', 1948300, 49),
@@ -1164,7 +1164,7 @@ gymList['Elite Drasna'] = new Gym(
 );
 gymList['Champion Diantha'] = new Gym(
     'Diantha',
-    'Champion Diantha',
+    'Kalos Champion Diantha',
     [
         new GymPokemon('Hawlucha', 2458300, 58),
         new GymPokemon('Tyrantrum', 2462000, 58),

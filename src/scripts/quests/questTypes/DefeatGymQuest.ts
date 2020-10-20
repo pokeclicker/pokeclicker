@@ -1,16 +1,17 @@
 /// <reference path="../Quest.ts" />
+/// <reference path="../../scripts/GameConstants.d.ts"/>
 
 class DefeatGymQuest extends Quest implements QuestInterface {
-    constructor(gymTown: string, amount: number) {
+    constructor(gymTown: string, amount: number, region: number) {
         super(amount, DefeatGymQuest.calcReward(gymTown, amount));
-        this.description = DefeatGymQuest.getDescription(gymTown, amount);
+        this.description = DefeatGymQuest.getDescription(gymTown, amount, region);
         this.focus = App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gymTown)];
     }
 
-    private static getDescription(gymTown: string, amount: number): string {
-        let desc = `Defeat ${gymTown} `;
+    private static getDescription(gymTown: string, amount: number, region: number): string {
+        let desc = `Defeat ${gymList[gymTown].town} `;
         if (!gymTown.includes('Elite') && !gymTown.includes('Champion')) {
-            desc += 'gym ';
+            desc += `gym in ${GameConstants.Region[region]} `;
         }
         desc += `${amount.toLocaleString('en-US')} times.`;
         return desc;
