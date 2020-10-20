@@ -66,6 +66,13 @@ enum BerryType {
     Roseli,
 
     // Fifth Generation
+    Micle,
+    Custap,
+    Jaboca,
+    Rowap,
+    Kee,
+    Maranga,
+
     Liechi,
     Ganlon,
     Salac,
@@ -73,13 +80,6 @@ enum BerryType {
     Apicot,
     Lansat,
     Starf,
-    Micle,
-    Custap,
-
-    Jaboca,
-    Rowap,
-    Kee,
-    Maranga,
 
     Enigma,
 }

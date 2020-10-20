@@ -323,6 +323,34 @@ class Farming implements Feature {
         //#endregion
 
         //#region Fifth Generation
+        this.berryData[BerryType.Micle]     = new Berry(BerryType.Micle,    [5,10,15,20,40],
+            1, .1, 60,
+            [0, 40, 10, 0, 0], BerryColor.Green,
+            ['This Berry has a very dry flavor. It has the effect of making other food eaten at the same time taste sweet.']); // TODO: Set properties
+        this.berryData[BerryType.Custap]    = new Berry(BerryType.Custap,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 40, 10, 0], BerryColor.Red,
+            ['The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.']); // TODO: Set properties
+        this.berryData[BerryType.Jaboca]    = new Berry(BerryType.Jaboca,   [5,10,15,20,40],
+            1, .1, 60,
+            [0, 0, 0, 40, 10], BerryColor.Yellow,
+            [
+                'The cluster of drupelets that make up this Berry pop rhythmically if the berry is handled roughly.',
+                'The sound of these Berries attracts wild Pokémon.',
+            ]); // TODO: Set properties
+        this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5,10,15,20,40],
+            1, .1, 60,
+            [10, 0, 0, 0, 40], BerryColor.Blue,
+            ['In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.']); // TODO: Set properties
+        this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [5,10,15,20,40],
+            1, .1, 60,
+            [30, 30, 10, 10, 10], BerryColor.Yellow,
+            ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.']); // TODO: Set properties
+        this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5,10,15,20,40],
+            1, .1, 60,
+            [10, 10, 30, 30, 10], BerryColor.Blue,
+            ['This Berry resembles the Durin Berry, however its spikes are less pronounced. It is quite delicious when roasted.']); // TODO: Set properties
+
         this.berryData[BerryType.Liechi]    = new Berry(BerryType.Liechi,   [5,10,15,20,40],
             1, .1, 60,
             [30, 10, 30, 0, 0], BerryColor.Red,
@@ -351,34 +379,6 @@ class Farming implements Feature {
             1, .1, 60,
             [30, 10, 30, 10, 30], BerryColor.Green,
             ['This Berry is considered a mirage. It was said to be so strong that it had to be abandoned at the world\'s edge.']); // TODO: Set properties
-        this.berryData[BerryType.Micle]     = new Berry(BerryType.Micle,    [5,10,15,20,40],
-            1, .1, 60,
-            [0, 40, 10, 0, 0], BerryColor.Green,
-            ['This Berry has a very dry flavor. It has the effect of making other food eaten at the same time taste sweet.']); // TODO: Set properties
-        this.berryData[BerryType.Custap]    = new Berry(BerryType.Custap,   [5,10,15,20,40],
-            1, .1, 60,
-            [0, 0, 40, 10, 0], BerryColor.Red,
-            ['The flesh underneath the Custap Berry\'s tough skin is sweet and creamy soft.']); // TODO: Set properties
-
-        this.berryData[BerryType.Jaboca]    = new Berry(BerryType.Jaboca,   [5,10,15,20,40],
-            1, .1, 60,
-            [0, 0, 0, 40, 10], BerryColor.Yellow,
-            [
-                'The cluster of drupelets that make up this Berry pop rhythmically if the berry is handled roughly.',
-                'The sound of these Berries attracts wild Pokémon.',
-            ]); // TODO: Set properties
-        this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5,10,15,20,40],
-            1, .1, 60,
-            [10, 0, 0, 0, 40], BerryColor.Blue,
-            ['In days of old, people worked the top-shaped pieces of this Berry free and used them as toys.']); // TODO: Set properties
-        this.berryData[BerryType.Kee]       = new Berry(BerryType.Kee,      [5,10,15,20,40],
-            1, .1, 60,
-            [30, 30, 10, 10, 10], BerryColor.Yellow,
-            ['This Berry remains poisonous until fully ripened. Once ripe it has a spicy and sweet complex flavor.']); // TODO: Set properties
-        this.berryData[BerryType.Maranga]   = new Berry(BerryType.Maranga,  [5,10,15,20,40],
-            1, .1, 60,
-            [10, 10, 30, 30, 10], BerryColor.Blue,
-            ['This Berry resembles the Durin Berry, however its spikes are less pronounced. It is quite delicious when roasted.']); // TODO: Set properties
 
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [2,4,6,8,16],
             1, 1, 60,
@@ -734,6 +734,18 @@ class Farming implements Feature {
 
         //#region Fifth Generation
 
+        // Micle
+
+        // Custap
+
+        // Jaboca
+
+        // Rowap
+
+        // Kee
+
+        // Maranga
+
         // Liechi
 
         // Ganlon
@@ -747,18 +759,6 @@ class Farming implements Feature {
         // Lansat
 
         // Starf
-
-        // Micle
-
-        // Custap
-
-        // Jaboca
-
-        // Rowap
-
-        // Kee
-
-        // Maranga
 
         //Enigma
 
