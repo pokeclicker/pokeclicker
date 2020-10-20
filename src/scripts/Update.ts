@@ -331,6 +331,18 @@ class Update implements Saveable {
             } catch (ಠ_ಠ) {
                 console.error('[update] v0.5.8 - Couldn\'t update player statistics..', ಠ_ಠ);
             }
+            try {
+                //Update breeding queue slots
+                saveData.breeding.queueSlots = 0;
+                for (let i = 0; i < playerData.highestRegion; i++) {
+                    saveData.breeding.queueSlots += 4 * Math.pow(2, i);
+                }
+
+                // Update save data
+                this.setSaveData(saveData);
+            } catch (ಠ_ಠ) {
+                console.error('[update] v0.5.8 - Couldn\'t update player breeding queue slots..', ಠ_ಠ);
+            }
         }
 
         // Notify the player that the game has updated!
