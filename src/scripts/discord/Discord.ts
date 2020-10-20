@@ -3,12 +3,10 @@ class Discord implements Saveable {
 
     defaults: Record<string, any> = {
         ID: null,
-        username: null,
     };
 
 
     ID: KnockoutObservable<string> = ko.observable(null);
-    username: KnockoutObservable<string> = ko.observable(null);
     codes: Array<DiscordCode> = [
         new DiscordPokemonCode(pokemonMap['Unown (D)'], 700, 'Alternate form of Unown'),
         new DiscordPokemonCode(pokemonMap['Unown (I)'], 700, 'Alternate form of Unown'),
@@ -50,7 +48,6 @@ class Discord implements Saveable {
 
     logout(): void {
         this.ID(this.defaults.id);
-        this.username(this.defaults.username);
     }
 
     calcCode(code) {
@@ -137,14 +134,12 @@ class Discord implements Saveable {
         }
         
         this.ID(json.ID || this.defaults.ID);
-        this.username(json.username || this.defaults.username);
         this.loadCodes(json.codes || []);
     }
 
     toJSON(): Record<string, any> {
         return {
             ID: this.ID(),
-            username: this.username()?.replace(/[^\x00-\x7F]/g, ''),
             codes: this.codes.filter(c => c.claimed),
         };
     }
