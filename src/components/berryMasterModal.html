@@ -17,7 +17,57 @@
                     <span data-bind="template: { name: 'shopBodyTemplate' }"></span>
                 </div>
                 <div id="berryMasterTrade" class="tab-pane fade">
-                    <span>TODO: HLXII</span>
+                    <div class="table-responsive" id="dailyDealsBody">
+                        <table class="table table-sm table-hover table-striped m-0 text-left">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Inv</th>
+                                    <th></th>
+                                    <th>Berries</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind='foreach: BerryDeal.getDeals(player.region)'>
+                                <tr>
+                                    <td>
+                                        <div data-bind='foreach: berries'>
+                                            <div data-bind="text: App.game.farming.berryList[$data.berryType]()"></div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-bind='foreach: berries' style="display:flex; flex-direction: column;">
+                                            <img width="24px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }"></img>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div data-bind='foreach: berries'>
+                                            <div data-bind='text: amount + " x " + BerryType[berryType]'></div>
+                                        </div>
+                                    </td>
+                                    <td class='vertical-middle'>→</td>
+                                    <td class='vertical-middle'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/" + $data.item.itemType.name +".png"}'>
+                                    </td>
+                                    <td class='vertical-middle' data-bind='text: $data.item.amount + " × " + $data.item.itemType.displayName'></td>
+                                    <td class='vertical-middle'>
+                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use($index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse($index()) }'>
+                                                Trade
+                                            </button>
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse($index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </button>
+                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
+                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
