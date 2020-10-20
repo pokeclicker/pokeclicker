@@ -787,7 +787,7 @@ gymList['Elite Lucian'] = new Gym(
 );
 gymList['Champion Cynthia'] = new Gym(
     'Cynthia',
-    'Champion Cynthia',
+    'Sinnoh Champion Cynthia',
     [
         new GymPokemon('Spiritomb', 2458300, 58),
         new GymPokemon('Roserade', 2462000, 58),

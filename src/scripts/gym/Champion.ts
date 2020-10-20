@@ -47,7 +47,7 @@ class Champion extends Gym {
 
 gymList['Champion Blue'] = new Champion(
     'Blue',
-    'Champion Blue',
+    'Kant0 Champion Blue',
     [],
     BadgeEnums.Elite_KantoChampion,
     10000,

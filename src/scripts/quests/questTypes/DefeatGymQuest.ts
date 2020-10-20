@@ -11,7 +11,7 @@ class DefeatGymQuest extends Quest implements QuestInterface {
     private static getDescription(gymTown: string, amount: number, region: number): string {
         let desc = `Defeat ${gymList[gymTown].town} `;
         if (!gymTown.includes('Elite') && !gymTown.includes('Champion')) {
-            desc += `gym in ${GameConstants.Region[region]} `;
+            desc += `Gym in ${GameConstants.Region[region].charAt(0).toUpperCase() + GameConstants.Region[region].slice(1)} `;
         }
         desc += `${amount.toLocaleString('en-US')} times.`;
         return desc;
