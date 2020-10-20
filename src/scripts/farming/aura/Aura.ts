@@ -35,4 +35,34 @@ class Aura {
         }
     }
 
+    getLabel(stage: PlotStage): string {
+        if (stage < PlotStage.Taller) {
+            return '';
+        }
+        let label = '';
+        switch (this.auraType) {
+            case AuraType.Attract:
+                label = 'Attract: ';
+                break;
+            case AuraType.Egg:
+                label = 'Egg: ';
+                break;
+            case AuraType.Growth:
+                label = 'Growth: ';
+                break;
+            case AuraType.Harvest:
+                label = 'Harvest: ';
+                break;
+            case AuraType.Mutation:
+                label = 'Mutation: ';
+                break;
+            case AuraType.Replant:
+                label = 'Replant: ';
+                break;
+        }
+
+        label += `${this.auraMultipliers[stage - 2].toFixed(2)}x`;
+        return label;
+    }
+
 }

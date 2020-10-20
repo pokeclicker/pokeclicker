@@ -50,8 +50,8 @@ class Plot implements Saveable {
                 return '';
             }
             for (let i = 0;i < 5;i++) {
-                if (this.age < App.game.farming.berryData[this.berry].growthTime[i]) {
-                    const timeLeft = Math.ceil(App.game.farming.berryData[this.berry].growthTime[i] - this.age);
+                if (this.age < this.berryData.growthTime[i]) {
+                    const timeLeft = Math.ceil(this.berryData.growthTime[i] - this.age);
                     const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
                     return GameConstants.formatTime(timeLeft / growthMultiplier);
                 }
@@ -117,7 +117,7 @@ class Plot implements Saveable {
                 return PlotStage.Seed;
             }
             for (let i = 0;i < 5;i++) {
-                if (this.age < App.game.farming.berryData[this.berry].growthTime[i]) {
+                if (this.age < this.berryData.growthTime[i]) {
                     return i;
                 }
             }
@@ -128,24 +128,42 @@ class Plot implements Saveable {
             let tooltip = '';
 
             if (this.berry !== BerryType.None) {
+
+                tooltip = `<u>${BerryType[this.berry]}</u><br/>`;
+
                 const formattedTime = this.formattedTimeLeft();
                 switch (this.stage()) {
                     case PlotStage.Seed:
-                        tooltip = `${formattedTime} until sprout`;
+                        tooltip += `${formattedTime} until sprout`;
                         break;
                     case PlotStage.Sprout:
-                        tooltip = `${formattedTime} until growth`;
+                        tooltip += `${formattedTime} until grown`;
                         break;
                     case PlotStage.Taller:
-                        tooltip = `${formattedTime} until bloom`;
+                        tooltip += `${formattedTime} until bloom`;
                         break;
                     case PlotStage.Bloom:
-                        tooltip = `${formattedTime} until ripe`;
+                        tooltip += `${formattedTime} until ripe`;
                         break;
                     case PlotStage.Berry:
-                        tooltip = `${formattedTime} until overripe`;
+                        tooltip += `${formattedTime} until death`;
                         break;
                 }
+            }
+
+            if (this.stage() >= PlotStage.Taller && this.berryData.aura) {
+                if (tooltip) {
+                    tooltip += '<br/>';
+                }
+                tooltip += `<u>Aura Emitted:</u></br>${this.berryData.aura.getLabel(this.stage())}`;
+            }
+
+            const auraStr = this.formattedAuras();
+            if (auraStr) {
+                if (tooltip) {
+                    tooltip += '<br/>';
+                }
+                tooltip += `<u>Aura Received:</u></br>${auraStr}`;
             }
 
             if (this.mulch !== MulchType.None) {
@@ -153,16 +171,7 @@ class Plot implements Saveable {
                 if (tooltip) {
                     tooltip += '<br/>';
                 }
-                tooltip += `${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`;
-            }
-
-            const auraStr = this.formattedAuras();
-
-            if (auraStr) {
-                if (tooltip) {
-                    tooltip += '<br/>';
-                }
-                tooltip += auraStr;
+                tooltip += `<u>Mulch</u><br/>${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`;
             }
 
             return tooltip;
@@ -198,7 +207,7 @@ class Plot implements Saveable {
                 change = true;
             }
 
-            if (this.age > App.game.farming.berryData[this.berry].growthTime[4]) {
+            if (this.age > this.berryData.growthTime[4]) {
                 this.die();
                 change = true;
             }
@@ -217,7 +226,7 @@ class Plot implements Saveable {
     }
 
     private stageUpdated(oldAge: number, newAge: number): PlotStage {
-        const growthStages = App.game.farming.berryData[this.berry].growthTime;
+        const growthStages = this.berryData.growthTime;
         let oldStage = PlotStage.Seed;
         for (let i = 0;i < 5;i++) {
             if (oldAge <= growthStages[i]) {
@@ -242,7 +251,7 @@ class Plot implements Saveable {
      * Returns how many berries will be harvested
      */
     harvest(): number {
-        return App.game.farming.berryData[this.berry].harvestAmount * this.getHarvestMultiplier();
+        return this.berryData.harvestAmount * this.getHarvestMultiplier();
     }
 
     /**
@@ -263,7 +272,7 @@ class Plot implements Saveable {
             }
 
             // Check if berry replants itself
-            const replantChance = App.game.farming.berryData[this.berry].replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier();
+            const replantChance = this.berryData.replantRate * App.game.farming.getReplantMultiplier() * this.getReplantMultiplier();
             if (Math.random() < replantChance) {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
@@ -371,7 +380,7 @@ class Plot implements Saveable {
         if (this.berry === BerryType.None) {
             return;
         }
-        App.game.farming.berryData[this.berry].aura?.applyAura(index);
+        this.berryData.aura?.applyAura(index);
     }
 
     /**
@@ -475,7 +484,11 @@ class Plot implements Saveable {
         return plots;
     }
 
-    // Knockout getters/setters
+    get berryData(): Berry {
+        return App.game.farming.berryData[this.berry];
+    }
+
+    // Knockout getters
     get isUnlocked(): boolean {
         return this._isUnlocked();
     }
@@ -500,11 +513,11 @@ class Plot implements Saveable {
         this._age(value);
     }
 
-    get mulch(): number {
+    get mulch(): MulchType {
         return this._mulch();
     }
 
-    set mulch(value: number) {
+    set mulch(value: MulchType) {
         this._mulch(value);
     }
 
@@ -519,4 +532,5 @@ class Plot implements Saveable {
     get auras(): number[] {
         return this._auras.map(aura => aura());
     }
+
 }

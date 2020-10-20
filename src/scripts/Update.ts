@@ -334,7 +334,7 @@ class Update implements Saveable {
         }
 
         //TODO: HLXII Update to add this when we release the berry overhaul
-        if (this.isOlderVersion(this.saveVersion, '0.6.0')) {
+        if (this.isOlderVersion(this.saveVersion, '0.5.8')) {
             try {
                 //Update farms
                 saveData.farming.unlockedBerries = Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false);

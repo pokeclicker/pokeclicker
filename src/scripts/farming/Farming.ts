@@ -380,10 +380,11 @@ class Farming implements Feature {
             [10, 10, 30, 30, 10], BerryColor.Blue,
             ['This Berry resembles the Durin Berry, however its spikes are less pronounced. It is quite delicious when roasted.']); // TODO: Set properties
 
-        this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [5,10,15,20,40],
-            1, .1, 60,
+        this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [2,4,6,8,16],
+            1, 1, 60,
             [40, 10, 0, 0, 0], BerryColor.Purple,
-            ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.']); // TODO: Set properties
+            ['A completely enigmatic Berry. It apparently has the power of the stars that fill the night sky.'],
+            new Aura(AuraType.Harvest, [1.23, 1.252, 1.566])); // TODO: Set properties
         //#endregion
 
         //#endregion
@@ -997,10 +998,13 @@ class Farming implements Feature {
         if (!plot.isUnlocked || !this.hasMulch(mulch)) {
             return;
         }
+        if (plot.mulch !== MulchType.None && plot.mulch !== mulch) {
+            return;
+        }
 
         GameHelper.incrementObservable(this.mulchList[mulch], -1);
         plot.mulch = mulch;
-        plot.mulchTimeLeft = GameConstants.MULCH_USE_TIME;
+        plot.mulchTimeLeft += GameConstants.MULCH_USE_TIME;
     }
 
     /**

@@ -45,17 +45,29 @@
                   </tbody>
                   <thead>
                     <tr class="text-light">
-                      <th class="bg-dark" colspan="2">Properties</th>
+                      <th class="bg-dark" colspan="2">Flavor</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td class="text-left">Color</td>
-                      <td class="text-left tight"><code data-bind="text: BerryColor[App.game.farming.berryData[$data].color]">-</code></td>
-                    </tr>
-                    <tr>
-                      <td class="text-left">Flavor</td>
-                      <td class="text-left tight"><code data-bind="">TODO: HLXII</code></td>
+                      <td colspan="2" style="padding: 0px;">
+                          <table style="width: 100%;">
+                              <tr>
+                                  <td>Spicy</td>
+                                  <td>Dry</td>
+                                  <td>Sweet</td>
+                                  <td>Bitter</td>
+                                  <td>Sour</td>
+                              </tr>
+                              <tr>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[0].value">Spicy</td>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[1].value">Dry</td>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[2].value">Sweet</td>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[3].value">Bitter</td>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[4].value">Sour</td>
+                            </tr>
+                          </table>
+                      </td>
                       </tr>
                   </tbody>
                   <thead>
