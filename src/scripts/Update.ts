@@ -237,60 +237,18 @@ class Update implements Saveable {
         return compareVersion.localeCompare(version, undefined, { numeric: true }) === 1;
     }
 
-    backup() {
+    check() {
         if (this.saveVersion === this.version || this.saveVersion === '0.0.0') {
             return;
         }
-
-        const playerData = this.getPlayerData();
-        const saveData = this.getSaveData();
-        const settingsData = this.getSettingsData();
-        const backupSaveData = { player: playerData, save: saveData };
-
-        try {
-            const button = document.createElement('a');
-            button.className = 'btn btn-block btn-danger';
-            button.innerText = 'Click to Backup Save!';
-            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(JSON.stringify(backupSaveData)))}`;
-            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
-
-            // Add to body and click, triggering auto download
-            if (!settingsData?.disableAutoDownloadBackupSaveOnUpdate) {
-                button.style.display = 'none';
-                document.body.appendChild(button);
-                button.click();
-                document.body.removeChild(button);
-            }
-            button.style.display = '';
-
-            Notifier.notify({
-                title: `[v${this.version}] Game has been updated!`,
-                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`,
-                type: NotificationConstants.NotificationOption.primary,
-                timeout: 6e4,
-            });
-        } catch (err) {
-            console.error('Error trying to convert backup save', err);
-            Notifier.notify({
-                title: `[v${this.version}] Game has been updated!`,
-                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our Discord.</i>',
-                type: NotificationConstants.NotificationOption.primary,
-                timeout: 6e4,
-            });
-            try {
-                localStorage.backupSave = JSON.stringify(backupSaveData);
-            } catch (e) {}
-        }
-    }
-
-    check() {
-        // Try to create a backup. It will shortcircuit if we don't need to
-        this.backup();
 
         // Must modify these object when updating
         const playerData = this.getPlayerData();
         const saveData = this.getSaveData();
         const settingsData = this.getSettingsData();
+
+        // Save the data by stringifying it, so that it isn't mutated during update
+        const backupSaveData = JSON.stringify({ playerData, saveData });
 
         if (!playerData || !saveData || !settingsData) {
             return;
@@ -321,10 +279,45 @@ class Update implements Saveable {
                 }
             }, { playerData, saveData, settingsData });
 
+        try {
+            const button = document.createElement('a');
+            button.className = 'btn btn-block btn-danger';
+            button.innerText = 'Click to Backup Save!';
+            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
+            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+
+            // Add to body and click, triggering auto download
+            if (!settingsData?.disableAutoDownloadBackupSaveOnUpdate) {
+                button.style.display = 'none';
+                document.body.appendChild(button);
+                button.click();
+                document.body.removeChild(button);
+            }
+            button.style.display = '';
+
+            Notifier.notify({
+                title: `[v${this.version}] Game has been updated!`,
+                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`,
+                type: NotificationConstants.NotificationOption.primary,
+                timeout: 6e4,
+            });
+        } catch (err) {
+            console.error('Error trying to convert backup save', err);
+            Notifier.notify({
+                title: `[v${this.version}] Game has been updated!`,
+                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our Discord.</i>',
+                type: NotificationConstants.NotificationOption.primary,
+                timeout: 6e4,
+            });
+            try {
+                localStorage.backupSave = backupSaveData;
+            } catch (e) {}
+            throw err;
+        }
+
         this.setPlayerData(updateResult.playerData);
         this.setSaveData(updateResult.saveData);
         this.setSettingsData(updateResult.settingsData);
-        console.log(JSON.parse(JSON.stringify(updateResult)));
     }
 
     static moveIndex = (arr, to, from = Infinity, defaultVal = 0) => {
