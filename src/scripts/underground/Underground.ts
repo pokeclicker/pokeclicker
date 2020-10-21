@@ -13,7 +13,7 @@ class Underground implements Feature {
     public static counter = 0;
 
     public static sortDirection = -1;
-    public static lastPropSort = 'none';    
+    public static lastPropSort = 'none';
     
     constructor() {
         this.upgradeList = [];
@@ -57,7 +57,7 @@ class Underground implements Feature {
                 AmountFactory.createArray(
                     GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond),
                 GameHelper.createArray(0, 10, 2)
-            )
+            ),
         ];
     }
 

@@ -3,7 +3,7 @@
 class UndergroundUpgrade extends Upgrade {
 
     constructor(
-        name: UndergroundUpgrade.Upgrades, displayName: string, maxLevel: number, 
+        name: UndergroundUpgrade.Upgrades, displayName: string, maxLevel: number,
         costList: Amount[], bonusList: number[], increasing = true
     ) {
         super(name, displayName, maxLevel, costList, bonusList, increasing);
@@ -25,4 +25,4 @@ namespace UndergroundUpgrade {
         'Daily_Deals_Max',
         'Bomb_Efficiency',
     }
-};
+}
