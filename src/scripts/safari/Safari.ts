@@ -327,7 +327,7 @@ class Safari {
         pokemon.element.style.left = `${offset.left}px`;
         document.getElementById('safariBody').appendChild(pokemon.element);
 
-        pokemon.steps = 40 + Math.floor(Math.random() * 21);
+        pokemon.steps = this.sizeX() + this.sizeY() + Math.floor(Math.random() * 21);
         this.pokemonGrid[y][x] = pokemon;
     }
 
