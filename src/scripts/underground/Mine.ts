@@ -46,7 +46,7 @@ class Mine {
         }
         Mine.loadingNewLayer = false;
         Mine.itemsFound(0);
-        
+
         Underground.showMine();
     }
 
