@@ -247,7 +247,7 @@ class Update implements Saveable {
         const backupSaveData = JSON.stringify({ playerData, saveData });
 
         const button = document.createElement('a');
-        button.className = 'btn btn-block btn-danger';
+        button.className = 'btn btn-block btn-warning';
         button.innerText = 'Click to Backup Save!';
         button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
         button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
@@ -255,8 +255,7 @@ class Update implements Saveable {
         return [button, backupSaveData];
     }
 
-    automaticallyDownloadBackup(button) {
-        const settingsData = this.getSettingsData();
+    automaticallyDownloadBackup(button, settingsData) {
         // Add to body and click, triggering auto download
         if (!settingsData?.disableAutoDownloadBackupSaveOnUpdate) {
             button.style.display = 'none';
@@ -296,20 +295,44 @@ class Update implements Saveable {
                     updateData.saveData.update.version = version;
                     return updateData;
                 } catch (e) {
+                    try {
+                        localStorage.backupSave = backupSaveData;
+                    } catch (e) {}
+
+                    const resetButton = document.createElement('a');
+                    resetButton.className = 'btn btn-block btn-danger';
+                    resetButton.innerText = 'Reset your save - This is not reversible';
+                    resetButton.id = 'failedUpdateResetButton';
+
                     console.error(`Caught error while applying update v${version}`, e, { beforeUpdate, updateData });
                     Notifier.notify({
                         title: `Failed to update to v${this.version}!`,
-                        message: `Please check the console for errors, and report them on our Discord along with your save file.<br /><br />${backupButton.outerHTML}`,
+                        message: `Please check the console for errors, and report them on our Discord along with your save file.<br /><br />${backupButton.outerHTML}<br />${resetButton.outerHTML}`,
                         type: NotificationConstants.NotificationOption.primary,
                         timeout: GameConstants.DAY,
                     });
+
+                    // On the next tick, set the reset button click handler
+                    setTimeout(() => {
+                        document.getElementById('failedUpdateResetButton').onclick = () => {
+                            if (window.confirm('Are you sure you want to reset your save? This cannot be undone, so please make sure you have a backup first!')) {
+                                // Force an autodownload of the backup when resetting the save
+                                this.automaticallyDownloadBackup(backupButton, { disableAutoDownloadBackupSaveOnUpdate: false });
+                                localStorage.removeItem('player');
+                                localStorage.removeItem('save');
+                                localStorage.removeItem('settings');
+                                location.reload();
+                            }
+                        };
+                    }, 0);
+
                     // Rethrow the error to prevent the game from corrupting the save
                     throw e;
                 }
             }, { playerData, saveData, settingsData });
 
         try {
-            this.automaticallyDownloadBackup(backupButton);
+            this.automaticallyDownloadBackup(backupButton, settingsData);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
                 message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${backupButton.outerHTML}`,
