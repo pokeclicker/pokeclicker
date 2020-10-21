@@ -2,9 +2,11 @@
 
 class Safari {
     static grid: Array<Array<number>>;
+    static pokemonGrid: Array<Array<SafariPokemon>>;
     static player: Point = new Point(12, 20);
     static lastDirection = 'up';
     static nextDirection: string;
+    static steps = 0;
     static walking = false;
     static isMoving = false;
     static queue: Array<string> = [];
@@ -25,6 +27,7 @@ class Safari {
 
     public static load() {
         Safari.grid = [];
+        Safari.pokemonGrid = [];
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
         Safari.lastDirection = 'up';
@@ -32,8 +35,10 @@ class Safari {
         Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());
         for ( let i = 0; i < this.sizeY(); i++) {
-            const row = [...Array(this.sizeX())].map(Number.prototype.valueOf, 0);
+            const row = [...Array(this.sizeX())].fill(0);
             Safari.grid.push(row);
+            const pokemonRow: Array<null> = [...Array(this.sizeX())].fill(null);
+            Safari.pokemonGrid.push(pokemonRow);
         }
 
         Safari.addRandomBody(new FenceBody());
@@ -270,6 +275,8 @@ class Safari {
                 }
             });
             App.game.breeding.progressEggs(1);
+            this.spawnPokemonCheck();
+            this.despawnPokemonCheck();
         } else {
             $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
             setTimeout(function() {
@@ -282,6 +289,46 @@ class Safari {
                 }
             }, 250);
         }
+    }
+
+    public static spawnPokemonCheck() {
+        this.steps++;
+        if (this.steps % 10 === 0 && Math.round(Math.random())) {
+            this.spawnRandomPokemon();
+        }
+    }
+
+    public static despawnPokemonCheck() {
+        this.pokemonGrid = this.pokemonGrid.map(column => column.map(pokemon => {
+            if (pokemon && --pokemon.steps <= 0) {
+                pokemon.element?.remove();
+                pokemon = null;
+            }
+            return pokemon;
+        }));
+    }
+
+    private static spawnRandomPokemon() {
+        const y = Math.floor(Math.random() * this.sizeY());
+        const x = Math.floor(Math.random() * this.sizeX());
+        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid[y][x]) {
+            return;
+        }
+        const pokemon = SafariPokemon.random();
+        
+        const offset = {
+            top: 32 * y - 8,
+            left: 32 * x - 4,
+        };
+        pokemon.element = document.createElement('div');
+        pokemon.element.classList.value = `pokemonSprite walkDown ${pokemon.shiny ? 'shiny' : ''}`;
+        pokemon.element.style.backgroundImage = `url('assets/images/dynamic-background/pokemon/${pokemon.id.toString().padStart(3, '0')}${pokemon.shiny ? 's' : ''}.png')`;
+        pokemon.element.style.top = `${offset.top}px`;
+        pokemon.element.style.left = `${offset.left}px`;
+        document.getElementById('safariBody').appendChild(pokemon.element);
+
+        pokemon.steps = 40 + Math.floor(Math.random() * 21);
+        this.pokemonGrid[y][x] = pokemon;
     }
 
     private static directionToXY(dir: string) {
@@ -331,13 +378,21 @@ class Safari {
     }
 
     private static checkBattle(): boolean {
-        let battle = false;
-        if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
-            battle = Math.random() * GameConstants.SAFARI_BATTLE_CHANCE <= 1;
+        if (Safari.inBattle()) {
+            return false;
         }
-        if (battle && !Safari.inBattle()) {
-            SafariBattle.load();
+        const pokemonOnPlayer = Safari.pokemonGrid[Safari.playerXY.y][Safari.playerXY.x];
+        if (pokemonOnPlayer) {
+            SafariBattle.load(pokemonOnPlayer);
+            Safari.pokemonGrid[Safari.playerXY.y][Safari.playerXY.x] = null;
+            pokemonOnPlayer.element?.remove();
             return true;
+        }
+        if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
+            if (Math.random() * GameConstants.SAFARI_BATTLE_CHANCE < 1) {
+                SafariBattle.load();
+                return true;
+            }
         }
         return false;
     }

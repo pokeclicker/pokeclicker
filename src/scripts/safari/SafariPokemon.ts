@@ -6,6 +6,8 @@ class SafariPokemon implements PokemonInterface {
     shiny: boolean;
     baseCatchFactor: number;
     baseEscapeFactor: number;
+    steps = 0;
+    element: HTMLElement = null;
     private _angry: KnockoutObservable<number>;
     private _eating: KnockoutObservable<number>;
 
@@ -106,7 +108,7 @@ class SafariPokemon implements PokemonInterface {
     public static random() {
         const rand = Math.random() * SafariPokemon.listWeight();
         let i = 0;
-        const pokemon = SafariPokemon.list.find(p => (i += this.calcPokemonWeight(pokemon)) && rand < i);
+        const pokemon = SafariPokemon.list.find(p => (i += this.calcPokemonWeight(p)) && rand < i);
         return new SafariPokemon(pokemon.name);
     }
 }
