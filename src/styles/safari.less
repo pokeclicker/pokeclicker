@@ -15,6 +15,10 @@
     max-width: 180px;
     font-size: 40px;
   }
+
+  .modal-body {
+    overflow: hidden;
+  }
 }
 
 #sprite {
@@ -106,6 +110,12 @@
     position: absolute;
     width: 40px;
     height: 40px;
+    &.shiny::before {
+      content: '✨';
+      top: -4px;
+      right: -4px;
+      position: absolute;
+    }
   }
 }
 
