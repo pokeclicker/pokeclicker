@@ -30,11 +30,15 @@ class SafariPokemon implements PokemonInterface {
         { name: 'Tangela', weight: 4 },
     ];
 
-    static public listWeight(): number {
+    public static listWeight(): number {
         return SafariPokemon.list.reduce((sum: number, pokemon) => {
             // double the chance if pokemon has not been captured yet
-            return sum += pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
+            return sum += this.calcPokemonWeight(pokemon);
         }, 0);
+    }
+
+    public static calcPokemonWeight(pokemon): number {
+        return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
     }
 
     constructor(name: string) {
@@ -102,7 +106,7 @@ class SafariPokemon implements PokemonInterface {
     public static random() {
         const rand = Math.random() * SafariPokemon.listWeight();
         let i = 0;
-        const pokemon = SafariPokemon.list.find(p => (i += p.weight) && rand < i);
+        const pokemon = SafariPokemon.list.find(p => (i += this.calcPokemonWeight(pokemon)) && rand < i);
         return new SafariPokemon(pokemon.name);
     }
 }
