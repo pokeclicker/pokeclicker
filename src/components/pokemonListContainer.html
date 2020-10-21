@@ -1,3 +1,32 @@
+<script type="text/html" id="PartySortSettingTemplate">
+    <div class="row no-gutters" style="align-items: center">
+        <div class="input-group">
+            <select
+                class="custom-select"
+                onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                data-bind="foreach: $data.options, attr: {name}"
+            >
+                <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
+            </select>
+            <div class="input-group-append bg-primary text-light">
+                <label
+                    for="partySortDirection"
+                    class="clickable m-0 pl-2 pr-2"
+                    style="font-size: 22px;"
+                    data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'"
+                >⥂</label>
+                <input
+                    id="partySortDirection"
+                    style="vertical-align: middle"
+                    class="hidden"
+                    type="checkbox"
+                    data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
+                    onchange="Settings.setSettingByName('partySortDirection', this.checked)"
+                />
+            </div>
+        </div>
+    </div>
+</script>
 <script type="text/html" id="pokemonListTemplate">
     <tr>
         <td>
@@ -48,20 +77,4 @@
             <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: PartyController.getSortedList() }"></tbody>
         </table>
     </div>
-
-    <script type="text/html" id="PartySortSettingTemplate">
-        <div class="row no-gutters" style="align-items: center">
-            <div class="col-2">Sort:</div>
-            <select class="col-9" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                    data-bind="foreach: $data.options, attr: {name}">
-                <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
-            </select>
-            <div class="col-1">
-                <label for="partySortDirection" class="clickable" style="font-size: 24px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
-                <input id="partySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
-                       data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
-                       onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
-            </div>
-        </div>
-    </script>
 </div>

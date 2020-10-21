@@ -241,6 +241,9 @@ body:hover {
   // Fill the line when we're in small mode
   .pokemonName { width: 100%; }
 
+  // Hide the name header when we're in small mode
+  .col-lg-3 & thead .pokemonName { display: none; }
+
   // Name should grow faster than attack and level
   .pokemonName { flex-grow: 10; }
   .pokemonAttack, .pokemonLevel {
