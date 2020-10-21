@@ -1,3 +1,5 @@
+/// <reference path="./GameConstants.d.ts" />
+
 class Update implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'update';
@@ -237,18 +239,45 @@ class Update implements Saveable {
         return compareVersion.localeCompare(version, undefined, { numeric: true }) === 1;
     }
 
+    getBackupButton(): [HTMLElement, string] {
+        const playerData = this.getPlayerData();
+        const saveData = this.getSaveData();
+
+        // Save the data by stringifying it, so that it isn't mutated during update
+        const backupSaveData = JSON.stringify({ playerData, saveData });
+
+        const button = document.createElement('a');
+        button.className = 'btn btn-block btn-danger';
+        button.innerText = 'Click to Backup Save!';
+        button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
+        button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
+
+        return [button, backupSaveData];
+    }
+
+    automaticallyDownloadBackup(button) {
+        const settingsData = this.getSettingsData();
+        // Add to body and click, triggering auto download
+        if (!settingsData?.disableAutoDownloadBackupSaveOnUpdate) {
+            button.style.display = 'none';
+            document.body.appendChild(button);
+            button.click();
+            document.body.removeChild(button);
+        }
+        button.style.display = '';
+    }
+
     check() {
         if (this.saveVersion === this.version || this.saveVersion === '0.0.0') {
             return;
         }
 
+        const [backupButton, backupSaveData] = this.getBackupButton();
+
         // Must modify these object when updating
         const playerData = this.getPlayerData();
         const saveData = this.getSaveData();
         const settingsData = this.getSettingsData();
-
-        // Save the data by stringifying it, so that it isn't mutated during update
-        const backupSaveData = JSON.stringify({ playerData, saveData });
 
         if (!playerData || !saveData || !settingsData) {
             return;
@@ -270,9 +299,9 @@ class Update implements Saveable {
                     console.error(`Caught error while applying update v${version}`, e, { beforeUpdate, updateData });
                     Notifier.notify({
                         title: `Failed to update to v${this.version}!`,
-                        message: 'Please check the console for errors, and report them on our Discord.',
-                        type: NotificationConstants.NotificationOption.danger,
-                        timeout: 6e4,
+                        message: `Please check the console for errors, and report them on our Discord along with your save file.<br /><br />${backupButton.outerHTML}`,
+                        type: NotificationConstants.NotificationOption.primary,
+                        timeout: GameConstants.DAY,
                     });
                     // Rethrow the error to prevent the game from corrupting the save
                     throw e;
@@ -280,24 +309,10 @@ class Update implements Saveable {
             }, { playerData, saveData, settingsData });
 
         try {
-            const button = document.createElement('a');
-            button.className = 'btn btn-block btn-danger';
-            button.innerText = 'Click to Backup Save!';
-            button.href = `data:text/plain;charset=utf-8,${encodeURIComponent(btoa(backupSaveData))}`;
-            button.setAttribute('download', `[v${this.saveVersion}] Poke Clicker Backup Save.txt`);
-
-            // Add to body and click, triggering auto download
-            if (!settingsData?.disableAutoDownloadBackupSaveOnUpdate) {
-                button.style.display = 'none';
-                document.body.appendChild(button);
-                button.click();
-                document.body.removeChild(button);
-            }
-            button.style.display = '';
-
+            this.automaticallyDownloadBackup(backupButton);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${button.outerHTML}`,
+                message: `Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/>${backupButton.outerHTML}`,
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });
