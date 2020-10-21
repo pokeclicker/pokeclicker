@@ -11,7 +11,7 @@ class FarmController {
     public static berryListVisible = true;
 
     public static initialize() {
-        this.berryListFiltered(Array.from(Array(GameConstants.AMOUNT_OF_BERRY_TYPES).keys()));
+        this.berryListFiltered(Array.from(Array(GameHelper.enumLength(BerryType) - 1).keys()));
         this.numberOfTabs(1);
         this.navigateIndex(0);
     }
@@ -33,7 +33,7 @@ class FarmController {
         if (plot.berry === BerryType.None) {
             return '';
         }
-        if (plot.stage() <= 1) {
+        if (plot.stage() <= PlotStage.Sprout) {
             return 'assets/images/farm/AllTreeSeedIII.png';
         } else if (plot.stage() === PlotStage.Sprout) {
             return 'assets/images/farm/AllTreeSproutIII.png';

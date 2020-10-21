@@ -15,9 +15,9 @@ class Farming implements Feature {
     readonly AMOUNT_OF_PLOTS = 25;
 
     defaults = {
-        berryList: Array<number>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(0),
-        unlockedBerries: Array<boolean>(GameConstants.AMOUNT_OF_BERRY_TYPES).fill(false),
-        mulchList: Array<number>(GameConstants.AMOUNT_OF_MULCHES).fill(0),
+        berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
+        unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
+        mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
             return new Plot(index === 0, BerryType.None, 0, MulchType.None, 0);
         }),
@@ -891,7 +891,7 @@ class Farming implements Feature {
     unlockPlot() {
         const index = this.unlockBerryIndex();
         if (this.canBuyPlot()) {
-            GameHelper.incrementObservable(this.berryList[index], this.calculatePlotPrice());
+            GameHelper.incrementObservable(this.berryList[index], -this.calculatePlotPrice());
             this.plotList[index + 1].isUnlocked = true;
         }
     }
@@ -922,7 +922,7 @@ class Farming implements Feature {
     }
 
     highestUnlockedBerry(): number {
-        for (let i = GameConstants.AMOUNT_OF_BERRY_TYPES - 1;i >= 0;i--) {
+        for (let i = GameHelper.enumLength(BerryType) - 2;i >= 0;i--) {
             if (this.unlockedBerries[i]()) {
                 return i;
             }

@@ -21,17 +21,17 @@ class BerryDeal {
     }
 
     private static randomBattleItem(): Item {
-        const battleItem = Math.floor(Object.keys(BattleItems.BattleItem).length / 2 * SeededRand.next());
+        const battleItem = SeededRand.fromEnum(BattleItems.BattleItem);
         return ItemList[BattleItems.BattleItem[battleItem]];
     }
 
     private static randomEvoItem(): Item {
-        const evoItem = Math.floor(Object.keys(EvoItems.EvoItem).length / 2 * SeededRand.next());
+        const evoItem = SeededRand.fromEnum(EvoItems.EvoItem);
         return ItemList[EvoItems.EvoItem[evoItem]];
     }
 
     private static randomUndergroundItem(): UndergroundItem {
-        return UndergroundItem.list[Math.floor(UndergroundItem.list.length * SeededRand.next())];
+        return SeededRand.fromArray(UndergroundItem.list);
     }
 
     public static getDeals(region: GameConstants.Region) {
