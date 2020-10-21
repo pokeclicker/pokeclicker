@@ -79,6 +79,7 @@ class DynamicBackground {
         pokeElement.style.backgroundImage = `url('assets/images/dynamic-background/pokemon/${id.toString().padStart(3, 0)}${shiny ? 's' : ''}.png')`;
         pokeElement.classList.add('pokemonSprite');
         pokeElement.classList.add('walkLeft');
+        pokeElement.classList.add('moveLeft');
         document.getElementById('dynamic-background').appendChild(pokeElement);
         setTimeout(() => {
             document.getElementById('dynamic-background').removeChild(pokeElement);

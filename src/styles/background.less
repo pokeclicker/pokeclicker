@@ -318,5 +318,14 @@ body.background-dynamic {
         width: 4vh;
         z-index: 0;
         left: -4vh;
+        
+        &.moveLeft {
+            background-position: 0.00000% 33.3333%;
+            animation: moveLeft 60s linear;
+        }
+        @keyframes moveLeft {
+            0%   { left: 4000px; }
+            100% { left: -1000px; }
+        }
     }
 }
