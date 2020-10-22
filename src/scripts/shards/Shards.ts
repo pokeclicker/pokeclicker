@@ -73,7 +73,7 @@ class Shards implements Feature {
     public buyShardUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
-    ) {
+    ): void {
         if (this.canBuyShardUpgrade(typeNum, effectNum)) {
             this.gainShards(-this.getShardUpgradeCost(typeNum, effectNum), typeNum);
             GameHelper.incrementObservable(this.shardUpgrades[typeNum * Shards.nEffects + effectNum]);
@@ -83,8 +83,8 @@ class Shards implements Feature {
     public isValidUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
-    ) {
-        return this.validUpgrades[typeNum]?.[effectNum];
+    ): boolean {
+        return !!this.validUpgrades[typeNum]?.[effectNum];
     }
 
     public getShardUpgrade(
