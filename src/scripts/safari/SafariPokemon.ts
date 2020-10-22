@@ -6,11 +6,15 @@ class SafariPokemon implements PokemonInterface {
     shiny: boolean;
     baseCatchFactor: number;
     baseEscapeFactor: number;
+
+    // Used for overworld sprites
+    x = 0;
+    y = 0;
     steps = 0;
-    element: HTMLElement = null;
+
+    // Affects catch/flee chance
     private _angry: KnockoutObservable<number>;
     private _eating: KnockoutObservable<number>;
-
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
     static readonly list = [
