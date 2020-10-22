@@ -17,9 +17,18 @@ class Shards implements Feature {
     public shardWallet: Array<KnockoutObservable<number>>;
     public shardUpgrades: Array<KnockoutObservable<number>>;
 
+    public validUpgrades = {};
+
     constructor() {
         this.shardWallet = this.defaults.shardWallet.map((v) => ko.observable(v));
         this.shardUpgrades = this.defaults.shardUpgrades.map((v) => ko.observable(v));
+        GameHelper.enumNumbers(PokemonType).map(type => {
+            this.validUpgrades[type] = {};
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(0);
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.NotVery] = !!TypeHelper.typeMatrix[type]?.includes(0.5);
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.Normal] = !!TypeHelper.typeMatrix[type]?.includes(1);
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.Very] = !!TypeHelper.typeMatrix[type]?.includes(2);
+        });
     }
 
     public gainShards(amt: number, typeNum: PokemonType) {
@@ -71,20 +80,11 @@ class Shards implements Feature {
         }
     }
     
-    public static isInvalidUpgrade(
+    public isValidUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ) {
-        // Check type for Immune
-        if (effectNum === GameConstants.TypeEffectiveness.Immune) {
-            return !TypeHelper.typeMatrix[typeNum].includes(0);
-        }
-        // Check for Very (Super effective)
-        if (effectNum === GameConstants.TypeEffectiveness.Very) {
-            return !TypeHelper.typeMatrix[typeNum].includes(2);
-        }
-        // Otherwise, ugprade is valid.
-        return false;
+        return this.validUpgrades[typeNum]?.[effectNum];
     }
 
     public getShardUpgrade(
