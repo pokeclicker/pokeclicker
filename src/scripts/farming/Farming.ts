@@ -28,6 +28,8 @@ class Farming implements Feature {
     mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
 
+    highestUnlockedBerry: KnockoutComputed<number>;
+
     constructor() {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
@@ -37,6 +39,15 @@ class Farming implements Feature {
         this.externalAuras = [];
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
         this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
+
+        this.highestUnlockedBerry = ko.pureComputed(() => {
+            for (let i = GameHelper.enumLength(BerryType) - 2;i >= 0;i--) {
+                if (this.unlockedBerries[i]()) {
+                    return i;
+                }
+            }
+            return 0;
+        });
     }
 
     initialize(): void {
@@ -75,14 +86,14 @@ class Farming implements Feature {
         this.berryData[BerryType.Sitrus]    = new Berry(BerryType.Sitrus,   [150,300,450,600,1200],
             8, 0.2, 30,
             [0, 10, 10, 10, 10], BerryColor.Yellow,
-            ['Sitrus came from the same family as Oran. It is larget and smoother tasting than Oran.']);
+            ['Sitrus came from the same family as Oran. It is larger and smoother tasting than Oran.']);
         //#endregion
 
         //#region Second Generation
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [20,40,60,90,180],
             5, 0.2, 40,
             [10, 10, 10, 0, 10], BerryColor.Pink,
-            ['The more this berry absorbs energy from sunlight, the more vivdly colorful it grows.']);
+            ['The more this Berry absorbs energy from sunlight, the more vivdly colorful it grows.']);
         this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [100,150,200,250,500],
             15, 0.2, 50,
             [10, 10, 0, 0, 0], BerryColor.Red,
@@ -129,7 +140,7 @@ class Farming implements Feature {
             2, 0, 750,
             [10, 10, 10, 10, 0], BerryColor.Green,
             [
-                'This Berry\'s gradual process of storing nutrients beneficial to Pokémon heath causes it to mature slowly.',
+                'This Berry\'s gradual process of storing nutrients beneficial to Pokémon health causes it to mature slowly.',
                 'This Berry minorly promotes the growth of Berry plants around it.',
             ], new Aura(AuraType.Growth, [1.01, 1.02, 1.03]));
         //#endregion
@@ -211,7 +222,7 @@ class Farming implements Feature {
             [0, 15, 0, 10, 0], BerryColor.Blue,
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
-                'This Berry the promotes the fruiting of nearby Berry plants.',
+                'This Berry promotes the fruiting of nearby Berry plants.',
             ], new Aura(AuraType.Harvest, [1.2, 1.4, 1.6]));
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [180, 870, 940, 1800, 3600],
             9, 0.03, 1050,
@@ -335,7 +346,7 @@ class Farming implements Feature {
             1, .1, 60,
             [0, 0, 0, 40, 10], BerryColor.Yellow,
             [
-                'The cluster of drupelets that make up this Berry pop rhythmically if the berry is handled roughly.',
+                'The cluster of drupelets that make up this Berry pop rhythmically if the Berry is handled roughly.',
                 'The sound of these Berries attracts wild Pokémon.',
             ]); // TODO: Set properties
         this.berryData[BerryType.Rowap]     = new Berry(BerryType.Rowap,    [5,10,15,20,40],
@@ -443,35 +454,35 @@ class Farming implements Feature {
         // Figy
         this.mutations.push(new FlavorMutation(.00009, BerryType.Figy,
             [25, 0, 0, 0, 0], undefined,
-            'I\'ve heard that a berry will appear if its surroundings get too spicy!',
+            'I\'ve heard that a Berry will appear if its surroundings get too spicy!',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Cheri]();
             }));
         // Wiki
         this.mutations.push(new FlavorMutation(.00008, BerryType.Wiki,
             [0, 25, 0, 0, 0], undefined,
-            'I\'ve heard that a berry will appear if its surrounds get too dry!',
+            'I\'ve heard that a Berry will appear if its surroundings get too dry!',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Chesto]();
             }));
         // Mago
         this.mutations.push(new FlavorMutation(.00007, BerryType.Mago,
             [0, 0, 25, 0, 0], undefined,
-            'I\'ve heard that a berry will appear if its surrounds get too sweet!',
+            'I\'ve heard that a Berry will appear if its surroundings get too sweet!',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Pecha]();
             }));
         // Aguav
         this.mutations.push(new FlavorMutation(.00006, BerryType.Aguav,
             [0, 0, 0, 25, 0], undefined,
-            'I\'ve heard that a berry will appear if its surrounds get too bitter!',
+            'I\'ve heard that a Berry will appear if its surroundings get too bitter!',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Rawst]();
             }));
         // Iapapa
         this.mutations.push(new FlavorMutation(.00005, BerryType.Iapapa,
             [0, 0, 0, 0, 25], undefined,
-            'I\'ve heard that a berry will appear if its surrounds get too sour!',
+            'I\'ve heard that a Berry will appear if its surroundings get too sour!',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Aspear]();
             }));
@@ -488,7 +499,7 @@ class Farming implements Feature {
                 {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
                 {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
             ],
-            'I\'ve heard that there\'s a legendary berry that only appears when fully surrounded by unique ripe berry plants!'));
+            'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by unique ripe Berry plants!'));
 
         //#endregion
 
@@ -509,7 +520,7 @@ class Farming implements Feature {
         // Qualot
         this.mutations.push(new FlavorMutation(.00005, BerryType.Qualot,
             [10, 0, 10, 0, 10], true,
-            'I\'ve heard that a berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy, a little sweet, and a little sour at the same time.',
+            'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy, a little sweet, and a little sour at the same time.',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
                 App.game.farming.unlockedBerries[BerryType.Pecha]() &&
@@ -518,7 +529,7 @@ class Farming implements Feature {
         // Hondew
         this.mutations.push(new FlavorMutation(.00004, BerryType.Hondew,
             [10, 10, 0, 10, 10], true,
-            'I\'ve heard that a berry will appear if its surroundings match its flavor profile! If I recall, it tasted like a little bit of everything except sweet.',
+            'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted like a little bit of everything except sweet.',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
                 App.game.farming.unlockedBerries[BerryType.Chesto]() &&
@@ -631,7 +642,7 @@ class Farming implements Feature {
         // Rindo
         this.mutations.push(new FlavorMutation(.00001, BerryType.Rindo,
             [10, 0, 0, 15, 0], true,
-            'I\'ve heard that a berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
+            'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Aguav]() &&
                 App.game.farming.unlockedBerries[BerryType.Cheri]();
@@ -668,7 +679,7 @@ class Farming implements Feature {
         // Coba
         this.mutations.push(new FlavorMutation(.00001, BerryType.Coba,
             [0, 10, 0, 15, 0], true,
-            'I\'ve heard that a berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
+            'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
             function(): boolean {
                 return App.game.farming.unlockedBerries[BerryType.Chesto]() &&
                 App.game.farming.unlockedBerries[BerryType.Aguav]();
@@ -820,9 +831,7 @@ class Farming implements Feature {
         }
 
         if (notifications.size) {
-            notifications.forEach(function(n) {
-                this.handleNotification(n);
-            }, this);
+            notifications.forEach((n) => this.handleNotification(n), this);
         }
     }
 
@@ -831,7 +840,7 @@ class Farming implements Feature {
         switch (type) {
             case FarmNotificationType.Ripe:
                 Notifier.notify({
-                    message: 'A berry is ready to harvest!',
+                    message: 'A Berry is ready to harvest!',
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.ready_to_harvest,
                     setting: NotificationConstants.NotificationSetting.ready_to_harvest,
@@ -839,7 +848,7 @@ class Farming implements Feature {
                 break;
             case FarmNotificationType.Withered:
                 Notifier.notify({
-                    message: 'A berry plant has withered!',
+                    message: 'A Berry plant has withered!',
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.ready_to_harvest,
                     setting: NotificationConstants.NotificationSetting.ready_to_harvest,
@@ -847,7 +856,7 @@ class Farming implements Feature {
                 break;
             case FarmNotificationType.Mutated:
                 Notifier.notify({
-                    message: 'A berry plant has mutated!',
+                    message: 'A Berry plant has mutated!',
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.ready_to_harvest,
                     setting: NotificationConstants.NotificationSetting.ready_to_harvest,
@@ -855,7 +864,7 @@ class Farming implements Feature {
                 break;
             case FarmNotificationType.Replanted:
                 Notifier.notify({
-                    message: 'A berry has been replanted!',
+                    message: 'A Berry has been replanted!',
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.ready_to_harvest,
                     setting: NotificationConstants.NotificationSetting.ready_to_harvest,
@@ -863,7 +872,7 @@ class Farming implements Feature {
                 break;
             case FarmNotificationType.Dropped:
                 Notifier.notify({
-                    message: 'A berry has been dropped!',
+                    message: 'A Berry has been dropped!',
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.ready_to_harvest,
                     setting: NotificationConstants.NotificationSetting.ready_to_harvest,
@@ -909,7 +918,7 @@ class Farming implements Feature {
             return Infinity;
         }
 
-        // TODO: HLXII Rebalance cost based on berry growth rate
+        // TODO: HLXII Rebalance cost based on Berry growth rate
         return 10 * Math.floor(Math.pow(this.unlockedPlotCount(), 2));
     }
 
@@ -919,15 +928,6 @@ class Farming implements Feature {
 
     unlockBerryIndex() {
         return this.unlockedPlotCount() - 1;
-    }
-
-    highestUnlockedBerry(): number {
-        for (let i = GameHelper.enumLength(BerryType) - 2;i >= 0;i--) {
-            if (this.unlockedBerries[i]()) {
-                return i;
-            }
-        }
-        return 0;
     }
 
     plant(index: number, berry: BerryType, suppressResetAura = false) {
@@ -975,7 +975,9 @@ class Farming implements Feature {
 
         plot.die(true);
 
-        this.resetAuras();
+        if (!suppressResetAura) {
+            this.resetAuras();
+        }
     }
 
     /**
@@ -1018,7 +1020,7 @@ class Farming implements Feature {
     }
 
     /**
-     * Gives the player a random berry from the first 8 types
+     * Gives the player a random Berry from the first 8 types
      * @param amount Amount of berries to give. Defaults to 1.
      * @param disableNotification Set to true to not notify the player. Defaults to false.
      */
@@ -1036,11 +1038,6 @@ class Farming implements Feature {
 
     gainBerry(berry: BerryType, amount = 1) {
         GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
-
-        if (!this.unlockedBerries[berry]()) {
-            this.unlockedBerries[berry](true);
-            FarmController.resetPages();
-        }
     }
 
     hasBerry(berry: BerryType) {

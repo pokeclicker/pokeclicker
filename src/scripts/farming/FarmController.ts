@@ -3,22 +3,27 @@ class FarmController {
 
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static berryListFiltered: KnockoutObservableArray<BerryType> = ko.observableArray([]);
-    public static numberOfTabs: KnockoutObservable<number> = ko.observable(1);
+    public static numberOfTabs: KnockoutComputed<number>;
 
     public static selectedBerry: BerryType = BerryType.Cheri;
     public static selectedMulch: MulchType = MulchType.Boost_Mulch;
 
     public static berryListVisible = true;
 
+    static readonly BERRIES_PER_PAGE = 8;
+
     public static initialize() {
         this.berryListFiltered(Array.from(Array(GameHelper.enumLength(BerryType) - 1).keys()));
-        this.numberOfTabs(1);
+
+        this.numberOfTabs = ko.pureComputed(() => {
+            return Math.floor(App.game.farming.highestUnlockedBerry() / this.BERRIES_PER_PAGE);
+        });
+
         this.navigateIndex(0);
     }
 
     public static openFarmModal() {
         if (App.game.farming.canAccess()) {
-            this.resetPages();
             $('#farmModal').modal('show');
         } else {
             Notifier.notify({
@@ -74,16 +79,8 @@ class FarmController {
         }
     }
 
-    public static calculateNumberOfTabs() {
-        this.numberOfTabs(Math.floor(App.game.farming.highestUnlockedBerry() / 8));
-    }
-
     public static getBerryListWithIndex() {
-        return this.berryListFiltered().slice(this.navigateIndex() * 8, (this.navigateIndex() * 8) + 8);
-    }
-
-    public static resetPages() {
-        this.calculateNumberOfTabs();
+        return this.berryListFiltered().slice(this.navigateIndex() * this.BERRIES_PER_PAGE, (this.navigateIndex() * this.BERRIES_PER_PAGE) + this.BERRIES_PER_PAGE);
     }
 
     public static getUnlockedBerryList() {

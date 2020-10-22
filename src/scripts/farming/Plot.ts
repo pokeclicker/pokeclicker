@@ -49,13 +49,10 @@ class Plot implements Saveable {
             if (this.berry === BerryType.None) {
                 return '';
             }
-            for (let i = 0;i < 5;i++) {
-                if (this.age < this.berryData.growthTime[i]) {
-                    const timeLeft = Math.ceil(this.berryData.growthTime[i] - this.age);
-                    const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
-                    return GameConstants.formatTime(timeLeft / growthMultiplier);
-                }
-            }
+            const growthTime = this.berryData.growthTime.find(t => this.age < t);
+            const timeLeft = Math.ceil(growthTime - this.age);
+            const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+            return GameConstants.formatTime(timeLeft / growthMultiplier);
         }, this);
 
         this.formattedMulchTimeLeft = ko.pureComputed(function() {
@@ -79,33 +76,23 @@ class Plot implements Saveable {
         }, this);
 
         this.formattedAuras = ko.pureComputed(function() {
-
-            let auraStr = '';
+            const auraStr = [];
             if (this.auraGrowth() !== 1) {
-                auraStr += `Growth: ${this.auraGrowth().toFixed(2)}x`;
+                auraStr.push(`Growth: ${this.auraGrowth().toFixed(2)}x`);
             }
 
             if (this.auraHarvest() !== 1) {
-                if (auraStr) {
-                    auraStr += '<br/>';
-                }
-                auraStr += `Harvest: ${this.auraHarvest().toFixed(2)}x`;
+                auraStr.push(`Harvest: ${this.auraHarvest().toFixed(2)}x`);
             }
 
             if (this.auraMutation() !== 1) {
-                if (auraStr) {
-                    auraStr += '<br/>';
-                }
-                auraStr += `Mutation: ${this.auraMutation().toFixed(2)}x`;
+                auraStr.push(`Mutation: ${this.auraMutation().toFixed(2)}x`);
             }
 
             if (this.auraReplant() !== 1) {
-                if (auraStr) {
-                    auraStr += '<br/>';
-                }
-                auraStr += `Replant: ${this.auraReplant().toFixed(2)}x`;
+                auraStr.push(`Replant: ${this.auraReplant().toFixed(2)}x`);
             }
-            return auraStr;
+            return auraStr.join('<br/>');
         }, this);
 
         this.isEmpty = ko.pureComputed(function () {
@@ -116,65 +103,55 @@ class Plot implements Saveable {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;
             }
-            for (let i = 0;i < 5;i++) {
-                if (this.age < this.berryData.growthTime[i]) {
-                    return i;
-                }
-            }
+            return this.berryData.growthTime.findIndex(t => this.age < t);
         }, this);
 
         this.tooltip = ko.pureComputed(function() {
 
-            let tooltip = '';
+            const tooltip = [];
 
             if (this.berry !== BerryType.None) {
 
-                tooltip = `<u>${BerryType[this.berry]}</u><br/>`;
+                tooltip.push(`<u>${BerryType[this.berry]}</u>`);
 
                 const formattedTime = this.formattedTimeLeft();
                 switch (this.stage()) {
                     case PlotStage.Seed:
-                        tooltip += `${formattedTime} until sprout`;
+                        tooltip.push(`${formattedTime} until sprout`);
                         break;
                     case PlotStage.Sprout:
-                        tooltip += `${formattedTime} until grown`;
+                        tooltip.push(`${formattedTime} until grown`);
                         break;
                     case PlotStage.Taller:
-                        tooltip += `${formattedTime} until bloom`;
+                        tooltip.push(`${formattedTime} until bloom`);
                         break;
                     case PlotStage.Bloom:
-                        tooltip += `${formattedTime} until ripe`;
+                        tooltip.push(`${formattedTime} until ripe`);
                         break;
                     case PlotStage.Berry:
-                        tooltip += `${formattedTime} until death`;
+                        tooltip.push(`${formattedTime} until death`);
                         break;
                 }
             }
 
             if (this.stage() >= PlotStage.Taller && this.berryData.aura) {
-                if (tooltip) {
-                    tooltip += '<br/>';
-                }
-                tooltip += `<u>Aura Emitted:</u></br>${this.berryData.aura.getLabel(this.stage())}`;
+                tooltip.push('<u>Aura Emitted:</u>');
+                tooltip.push(`${this.berryData.aura.getLabel(this.stage())}`);
             }
 
             const auraStr = this.formattedAuras();
             if (auraStr) {
-                if (tooltip) {
-                    tooltip += '<br/>';
-                }
-                tooltip += `<u>Aura Received:</u></br>${auraStr}`;
+                tooltip.push( '<u>Aura Received:</u>');
+                tooltip.push(auraStr);
             }
 
             if (this.mulch !== MulchType.None) {
                 const mulchTime = this.formattedMulchTimeLeft();
-                if (tooltip) {
-                    tooltip += '<br/>';
-                }
-                tooltip += `<u>Mulch</u><br/>${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`;
+                tooltip.push('<u>Mulch</u>');
+                tooltip.push(`${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`);
             }
 
-            return tooltip;
+            return tooltip.join('<br/>');
         }, this);
 
         this.notifications = [];
@@ -226,21 +203,8 @@ class Plot implements Saveable {
     }
 
     private stageUpdated(oldAge: number, newAge: number): PlotStage {
-        const growthStages = this.berryData.growthTime;
-        let oldStage = PlotStage.Seed;
-        for (let i = 0;i < 5;i++) {
-            if (oldAge <= growthStages[i]) {
-                oldStage = i;
-                break;
-            }
-        }
-        let newStage = PlotStage.Seed;
-        for (let i = 0;i < 5;i++) {
-            if (newAge <= growthStages[i]) {
-                newStage = i;
-                break;
-            }
-        }
+        const oldStage = this.berryData.growthTime.findIndex(t => oldAge < t);
+        const newStage = this.berryData.growthTime.findIndex(t => newAge < t);
         if (oldStage !== newStage) {
             return newStage;
         }

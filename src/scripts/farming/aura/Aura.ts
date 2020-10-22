@@ -1,19 +1,15 @@
 class Aura {
 
-    auraType: AuraType;
-    auraMultipliers: number[];
-
-    constructor(auraType: AuraType, auraMultipliers: number[]) {
-        this.auraType = auraType;
-        this.auraMultipliers = auraMultipliers;
-    }
+    constructor(
+        public auraType: AuraType,
+        public auraMultipliers: number[]
+    ) { }
 
     /**
      * Handles applying the berry's Aura to its neighbors
      */
     applyAura(index: number): void {
         const plot = App.game.farming.plotList[index];
-        console.log(index, plot, plot.stage());
         if (plot.stage() < PlotStage.Taller) {
             return;
         }
@@ -26,7 +22,6 @@ class Aura {
                 break;
             default:
                 const plots = Plot.findNearPlots(index);
-                console.log(plots);
                 for (const nearIdx of plots) {
                     const nearPlot = App.game.farming.plotList[nearIdx];
                     nearPlot.addAura(this.auraType, multiplier);
@@ -36,31 +31,10 @@ class Aura {
     }
 
     getLabel(stage: PlotStage): string {
-        if (stage < PlotStage.Taller) {
+        if (!stage || stage < PlotStage.Taller) {
             return '';
         }
-        let label = '';
-        switch (this.auraType) {
-            case AuraType.Attract:
-                label = 'Attract: ';
-                break;
-            case AuraType.Egg:
-                label = 'Egg: ';
-                break;
-            case AuraType.Growth:
-                label = 'Growth: ';
-                break;
-            case AuraType.Harvest:
-                label = 'Harvest: ';
-                break;
-            case AuraType.Mutation:
-                label = 'Mutation: ';
-                break;
-            case AuraType.Replant:
-                label = 'Replant: ';
-                break;
-        }
-
+        let label = `${AuraType[this.auraType]}: `;
         label += `${this.auraMultipliers[stage - 2].toFixed(2)}x`;
         return label;
     }
