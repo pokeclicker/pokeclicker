@@ -38,12 +38,12 @@ class FarmController {
         if (plot.berry === BerryType.None) {
             return '';
         }
-        if (plot.stage() <= PlotStage.Sprout) {
-            return 'assets/images/farm/AllTreeSeedIII.png';
+        if (plot.stage() === PlotStage.Seed) {
+            return 'assets/images/farm/AllTreeSeed.png';
         } else if (plot.stage() === PlotStage.Sprout) {
-            return 'assets/images/farm/AllTreeSproutIII.png';
+            return 'assets/images/farm/AllTreeSprout.png';
         }
-        return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}III.png`;
+        return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}.png`;
     }
 
     public static getTooltipLabel(index: number) {
