@@ -35,7 +35,7 @@ class FlavorMutation extends NearMutation {
             if (plot.isEmpty()) {
                 continue;
             }
-            if (plot.stage() === PlotStage.Seed) {
+            if (plot.stage() < PlotStage.Taller) {
                 continue;
             }
             const berryFlavors = App.game.farming.berryData[plot.berry].flavors.map(x => x.value);
