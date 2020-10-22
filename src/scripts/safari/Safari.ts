@@ -2,7 +2,7 @@
 
 class Safari {
     static grid: Array<Array<number>>;
-    static pokemonGrid: Array<Array<SafariPokemon>>;
+    static pokemonGrid: KnockoutObservableArray<KnockoutObservableArray<SafariPokemon>> = ko.observableArray([]);
     static player: Point = new Point(12, 20);
     static lastDirection = 'up';
     static nextDirection: string;
@@ -27,7 +27,7 @@ class Safari {
 
     public static load() {
         Safari.grid = [];
-        Safari.pokemonGrid = [];
+        Safari.pokemonGrid([]);
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
         Safari.lastDirection = 'up';
@@ -35,10 +35,8 @@ class Safari {
         Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());
         for ( let i = 0; i < this.sizeY(); i++) {
-            const row = [...Array(this.sizeX())].fill(0);
-            Safari.grid.push(row);
-            const pokemonRow: Array<null> = [...Array(this.sizeX())].fill(null);
-            Safari.pokemonGrid.push(pokemonRow);
+            Safari.grid.push(Array(this.sizeX()).fill(0));
+            Safari.pokemonGrid.push(ko.observableArray(Array(this.sizeX()).fill(null)));
         }
 
         Safari.addRandomBody(new FenceBody());
@@ -299,19 +297,19 @@ class Safari {
     }
 
     public static despawnPokemonCheck() {
-        this.pokemonGrid = this.pokemonGrid.map(column => column.map(pokemon => {
+        this.pokemonGrid().forEach(column => column(column().map(pokemon => {
             if (pokemon && --pokemon.steps <= 0) {
                 pokemon.element?.remove();
                 pokemon = null;
             }
             return pokemon;
-        }));
+        })));
     }
 
     private static spawnRandomPokemon() {
         const y = Math.floor(Math.random() * this.sizeY());
         const x = Math.floor(Math.random() * this.sizeX());
-        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid[y][x]) {
+        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid()[y]()[x]) {
             return;
         }
         const pokemon = SafariPokemon.random();
@@ -328,7 +326,7 @@ class Safari {
         document.getElementById('safariBody').appendChild(pokemon.element);
 
         pokemon.steps = this.sizeX() + this.sizeY() + Math.floor(Math.random() * 21);
-        this.pokemonGrid[y][x] = pokemon;
+        this.pokemonGrid()[y]()[x] = pokemon;
     }
 
     private static directionToXY(dir: string) {
@@ -381,10 +379,10 @@ class Safari {
         if (Safari.inBattle()) {
             return false;
         }
-        const pokemonOnPlayer = Safari.pokemonGrid[Safari.playerXY.y][Safari.playerXY.x];
+        const pokemonOnPlayer = Safari.pokemonGrid()[Safari.playerXY.y]()[Safari.playerXY.x];
         if (pokemonOnPlayer) {
             SafariBattle.load(pokemonOnPlayer);
-            Safari.pokemonGrid[Safari.playerXY.y][Safari.playerXY.x] = null;
+            Safari.pokemonGrid()[Safari.playerXY.y]()[Safari.playerXY.x] = null;
             pokemonOnPlayer.element?.remove();
             return true;
         }

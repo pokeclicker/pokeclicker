@@ -59,6 +59,13 @@
                                 class='container-fluid'
                                 data-bind="visible: Safari.inProgress()">
                             </div>
+                            <!-- ko foreach: Safari.pokemonGrid -->
+                                <!-- ko foreach: $data -->
+                                    <!-- ko if: $data -->
+                                        <div class="pokemonSprite" data-bind="attr: {test: $data.name}"></div>
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
                         </div>
                     </div>
 
