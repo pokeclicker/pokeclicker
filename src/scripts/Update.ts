@@ -207,8 +207,8 @@ class Update implements Saveable {
                 17: 0,
             };
             Object.entries(invalidUpgrades).forEach(([type, effectiveness]) => {
-                const k = +type * 4 + effectiveness;
-                let level = saveData.shards.shardUpgrades[k];
+                const index = +type * 4 + effectiveness;
+                let level = saveData.shards.shardUpgrades[index];
                 // Refund each level of upgrade purchased
                 while (level-- > 0) {
                     const cost = (level + 1) * 500;
