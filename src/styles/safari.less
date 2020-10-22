@@ -15,6 +15,52 @@
     max-width: 180px;
     font-size: 40px;
   }
+
+  .modal-body {
+    overflow: hidden;
+  }
+
+  .pokemonSprite {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    &.shiny::before {
+      content: '✨';
+      top: -4px;
+      right: -4px;
+      position: absolute;
+      animation: spinIn 0.6s ease-out, pulse 1s ease-in-out infinite;
+    }
+
+    @keyframes spinIn {
+      0% {
+        transform: rotate(-540deg) scale(0);
+        opacity: 0;
+      }
+      100% {
+        transform: rotate(0) scale(1);
+        opacity: 1;
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+      }
+      25% {
+        transform: scale(0.92);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      75% {
+        transform: scale(0.85);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+  }
 }
 
 #sprite {
