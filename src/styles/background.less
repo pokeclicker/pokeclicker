@@ -319,9 +319,9 @@ body.background-dynamic {
         z-index: 0;
         left: -4vh;
         
-        &.moveLeft {
+        &.walkLeft.moveLeft {
             background-position: 0.00000% 33.3333%;
-            animation: moveLeft 60s linear;
+            animation: walkLeft 0.4s steps(3) infinite, moveLeft 60s linear;
         }
         @keyframes moveLeft {
             0%   { left: 4000px; }
