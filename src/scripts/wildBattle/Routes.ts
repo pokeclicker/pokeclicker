@@ -34,8 +34,8 @@ class Routes {
         return this.regionRoutes.find(routeData => routeData.region == region && routeData.number == route).routeName;
     }
 
-    public static getRouteNumberFromName(name: string, region: number) {
-        return this.regionRoutes.find(routeData => routeData.routeName == name && routeData.region == region).number;
+    public static unnormalizeRoute(normalizedRoute: number) {
+        return this.regionRoutes[normalizedRoute - 1].number;
     }
     public static normalizedNumber(region: GameConstants.Region, route: number): number {
         if (region == GameConstants.Region.none) {
