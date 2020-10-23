@@ -12,5 +12,18 @@ class RoutePokemon {
         this.land = land;
         this.water = water;
         this.headbutt = headbutt;
+        this.checkPokemon();
+    }
+
+    checkPokemon(): void {
+        [
+            ...this.land,
+            ...this.water,
+            ...this.headbutt,
+        ].forEach(p => {
+            if (pokemonMap[p].id == 0) {
+                console.error('Invalid route pokemon specified:', p);
+            }
+        });
     }
 }

@@ -19,9 +19,9 @@ class PokemonFactory {
             const possible = RoamingPokemonList.getRegionalRoamers(region);
             name = possible[Math.floor(Math.random() * possible.length)].pokemon.name;
         } else {
-            const pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
-            const rand: number = Math.floor(Math.random() * pokemonList.length);
-            name = pokemonList[rand];
+            const availablePokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
+            const rand: number = Math.floor(Math.random() * availablePokemonList.length);
+            name = availablePokemonList[rand];
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;

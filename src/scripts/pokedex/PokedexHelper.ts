@@ -99,7 +99,7 @@ class PokedexHelper {
                 if (!PokedexHelper.isPureType(pokemon, type)) {
                     return false;
                 }
-            } else if ((type1 != null && !pokemon.type.includes(type1)) || (type2 != null && !pokemon.type.includes(type2))) {
+            } else if ((type1 != null && !(pokemon as PokemonListData).type.includes(type1)) || (type2 != null && !(pokemon as PokemonListData).type.includes(type2))) {
                 return false;
             }
 
@@ -133,7 +133,7 @@ class PokedexHelper {
             }
 
             // Only pokemon with a hold item
-            if (filter['held-item'] && !ItemList[pokemon.heldItem]) {
+            if (filter['held-item'] && !ItemList[(pokemon as PokemonListData).heldItem]) {
                 return false;
             }
 
