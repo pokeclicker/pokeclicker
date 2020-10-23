@@ -56,7 +56,7 @@ ItemList['Burmy (plant)']        = new PokemonItem(GameConstants.PokemonItemType
 ItemList['Cherubi']              = new PokemonItem(GameConstants.PokemonItemType.Cherubi, 5000);
 ItemList['Spiritomb']            = new PokemonItem(GameConstants.PokemonItemType.Spiritomb, 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem(GameConstants.PokemonItemType['Meloetta (pirouette)'], 50000);
-
-ItemList['Deoxys (attack)']      = new PokemonItem(GameConstants.PokemonItemType['Deoxys (attack)'], 500, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
-ItemList['Deoxys (defense)']     = new PokemonItem(GameConstants.PokemonItemType['Deoxys (defense)'], 500, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
-ItemList['Deoxys (speed)']       = new PokemonItem(GameConstants.PokemonItemType['Deoxys (speed)'], 500, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
+// Battle Frontier
+ItemList['Deoxys (attack)']  = new PokemonItem(GameConstants.PokemonItemType['Deoxys (attack)'], 1000, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
+ItemList['Deoxys (defense)'] = new PokemonItem(GameConstants.PokemonItemType['Deoxys (defense)'], 1000, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
+ItemList['Deoxys (speed)']   = new PokemonItem(GameConstants.PokemonItemType['Deoxys (speed)'], 1000, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
