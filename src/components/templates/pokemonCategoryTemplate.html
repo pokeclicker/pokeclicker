@@ -7,14 +7,27 @@
         height: 16px;
         border: 1px #333 solid;
         border-radius: 50%;
+        overflow: hidden;
         "
         data-bind="
         style: {
             background: PokemonCategories.categories[$data.category].color,
         }
         ">
+        <select data-bind="foreach: PokemonCategories.categories"
+            style="
+            width: auto;
+            height: 22px;
+            left: -4px;
+            top: -2px;
+            position: absolute;
+            background: transparent;
+            color: transparent;
+            ">
+            <option data-bind="text: $data.name, attr: { value: $index } , style: { background:$data.color, color: 'whitesmoke' }"></option>
+        </select>
     </div>
 </script>
 
 <!-- Example usage -->
-<!-- <span data-bind="template: { name: 'pokemonCategoryTemplate', data: {category: Pokemon.category}}"></span> -->
+<!-- <span data-bind="template: { name: 'pokemonCategoryTemplate', data: {category: Pokemon.category, pokemon: pokemon}}"></span> -->
