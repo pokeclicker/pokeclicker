@@ -1,0 +1,20 @@
+<script type="text/html" id="pokemonCategoryTemplate">
+    <div style="
+        position: absolute;
+        left: 2px;
+        top: 2px;
+        width: 16px;
+        height: 16px;
+        border: 1px #333 solid;
+        border-radius: 50%;
+        "
+        data-bind="
+        style: {
+            background: PokemonCategories.categories[$data.category].color,
+        }
+        ">
+    </div>
+</script>
+
+<!-- Example usage -->
+<!-- <span data-bind="template: { name: 'pokemonCategoryTemplate', data: {category: Pokemon.category}}"></span> -->
