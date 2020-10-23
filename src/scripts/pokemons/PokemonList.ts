@@ -17824,7 +17824,7 @@ pokemonList.forEach(p => {
 });
 
 const pokemonMap: any = new Proxy(pokemonList, {
-    get: (pokemon, prop: string) => {
+    get: (pokemon, prop: PokemonNameType) => {
         if (!isNaN(+prop)) {
             const id: number = +prop;
             const pokemonByID = pokemon.find(p => p.id == id);
@@ -17832,18 +17832,6 @@ const pokemonMap: any = new Proxy(pokemonList, {
                 return pokemonByID;
             }
         }
-        switch (prop) {
-            case 'random':
-                return (_max = 0, _min = 0) => {
-                    // minimum 0
-                    const min = Math.max(0, Math.min(_min, _max));
-                    // maximum is same as however many pokemon are available
-                    const max = Math.min(pokemon.length, Math.max(_min, _max));
-                    const random = Math.floor(Math.random() * (max ? max : pokemon.length) + min);
-                    return pokemon[random];
-                };
-            default:
-                return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
-        }
+        return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
     },
 });
