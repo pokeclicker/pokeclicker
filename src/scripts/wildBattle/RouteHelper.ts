@@ -37,11 +37,11 @@ class RouteHelper {
      */
 
     public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean, includeHeadbutt = true): boolean {
-        const possiblePokemon: string[] = RouteHelper.getAvailablePokemonList(route, region, includeHeadbutt);
+        const possiblePokemon: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region, includeHeadbutt);
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 
-    public static listCompleted(possiblePokemon: string[], includeShiny: boolean) {
+    public static listCompleted(possiblePokemon: PokemonNameType[], includeShiny: boolean) {
         for (let i = 0; i < possiblePokemon.length; i++) {
             if (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(possiblePokemon[i]).id)) {
                 return false;

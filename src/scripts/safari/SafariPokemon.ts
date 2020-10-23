@@ -50,7 +50,7 @@ class SafariPokemon implements PokemonInterface {
         return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
     }
 
-    constructor(name: string) {
+    constructor(name: PokemonNameType) {
         const data = PokemonHelper.getPokemonByName(name);
 
         this.name = data.name;

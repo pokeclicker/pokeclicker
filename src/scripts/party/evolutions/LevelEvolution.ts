@@ -20,7 +20,7 @@ class LevelEvolution extends Evolution {
     isSatisfied(): boolean {
         return super.isSatisfied()
             // Check high enough level
-            && App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon).id).level >= this.level;
+            && App.game.party.getPokemon(PokemonHelper.getPokemonByName(this.basePokemon as PokemonNameType).id).level >= this.level;
     }
 
     evolve(): boolean {

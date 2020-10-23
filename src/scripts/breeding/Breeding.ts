@@ -314,7 +314,7 @@ class Breeding implements Feature {
         }
     }
 
-    public calculateBaseForm(pokemonName: string): string {
+    public calculateBaseForm(pokemonName: PokemonNameType): PokemonNameType {
         const devolution = pokemonDevolutionMap[pokemonName];
         // Base form of Pokemon depends on which regions players unlocked
         if (!devolution || PokemonHelper.calcNativeRegion(devolution) > player.highestRegion()) {
@@ -388,7 +388,7 @@ class Breeding implements Feature {
 
         const hatchable = hatchList.slice(0, player.highestRegion() + 1).flat();
 
-        return hatchable.reduce((status: CaughtStatus, pname: string) => {
+        return hatchable.reduce((status: CaughtStatus, pname: PokemonNameType) => {
             return Math.min(status, PartyController.getCaughtStatusByName(pname));
         }, CaughtStatus.CaughtShiny);
     }

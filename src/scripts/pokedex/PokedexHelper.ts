@@ -1,7 +1,7 @@
 import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
-    public static getBackgroundColors(name: string): string {
+    public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
 
         if (!this.pokemonSeen(pokemon.id)()) {

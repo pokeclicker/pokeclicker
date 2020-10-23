@@ -46,7 +46,7 @@ class PokemonHelper {
         return this.getPokemonByName(pokemonMap[id].name);
     }
 
-    public static getPokemonByName(name: string): DataPokemon {
+    public static getPokemonByName(name: PokemonNameType): DataPokemon {
         const basePokemon = pokemonMap[name];
         if (!basePokemon) {
             console.warn('Could not find pokemon', name);

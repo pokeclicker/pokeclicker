@@ -12,7 +12,7 @@ class EvolutionStone extends Item {
         player.gainItem(GameConstants.StoneType[this.type], n);
     }
 
-    public use(pokemon?: string) {
+    public use(pokemon?: PokemonNameType) {
         const partyPokemon: PartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id);
         const shiny = partyPokemon.useStone(this.type);
         return shiny;

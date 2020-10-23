@@ -9,7 +9,7 @@
  */
 class Dungeon {
     public name: KnockoutObservable<string>;
-    allPokemonNames: string[];
+    allPokemonNames: PokemonNameType[];
 
     constructor(
         name: string,
@@ -37,7 +37,7 @@ class Dungeon {
         return true;
     }
 
-    public calculateAllPokemonNames() {
+    public calculateAllPokemonNames(): void {
         const pokemonNameSet = new Set(this.pokemonList);
         this.availableBosses().forEach(boss => {
             pokemonNameSet.add(boss.name);
