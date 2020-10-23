@@ -4,10 +4,10 @@ class TypeHelper {
     /*eslint-disable */
 
     public static typeMatrix: Array<Array<number>> = (()=>{
-        const II = GameConstants.TypeEffectivenessValue.Immune;
-        const VV = GameConstants.TypeEffectivenessValue.NotVery;
-        const NN = GameConstants.TypeEffectivenessValue.Normal;
-        const AA = GameConstants.TypeEffectivenessValue.Very;
+        const imm = GameConstants.TypeEffectivenessValue.Immune;
+        const not = GameConstants.TypeEffectivenessValue.NotVery;
+        const nrm = GameConstants.TypeEffectivenessValue.Normal;
+        const vry = GameConstants.TypeEffectivenessValue.Very;
         return [
             //                 E              F
             //                 L              I                   P
@@ -17,24 +17,24 @@ class TypeHelper {
             //  M    I    T    R    A    I    I    S    U    I    H    B    O    O    G    A    E    I   Attack type
             //  A    R    E    I    S    C    N    O    N    N    I    U    C    S    O    R    E    R        |
             //  L    E    R    C    S    E    G    N    D    G    C    G    K    T    N    K    L    Y        v
-            [  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  VV,  II,  NN,  NN,  VV,  NN], // NORMAL
-            [  NN,  VV,  VV,  NN,  AA,  AA,  NN,  NN,  NN,  NN,  NN,  AA,  VV,  NN,  VV,  NN,  AA,  NN], // FIRE
-            [  NN,  AA,  VV,  NN,  VV,  NN,  NN,  NN,  AA,  NN,  NN,  NN,  AA,  NN,  VV,  NN,  NN,  NN], // WATER
-            [  NN,  NN,  AA,  VV,  VV,  NN,  NN,  NN,  II,  AA,  NN,  NN,  NN,  NN,  VV,  NN,  NN,  NN], // ELECTRIC
-            [  NN,  VV,  AA,  NN,  VV,  NN,  NN,  VV,  AA,  VV,  NN,  VV,  AA,  NN,  VV,  NN,  VV,  NN], // GRASS
-            [  NN,  VV,  VV,  NN,  AA,  VV,  NN,  NN,  AA,  AA,  NN,  NN,  NN,  NN,  AA,  NN,  VV,  NN], // ICE
-            [  AA,  NN,  NN,  NN,  NN,  AA,  NN,  VV,  NN,  VV,  VV,  VV,  AA,  II,  NN,  AA,  AA,  VV], // FIGHTING
-            [  NN,  NN,  NN,  NN,  AA,  NN,  NN,  VV,  VV,  NN,  NN,  NN,  VV,  VV,  NN,  NN,  II,  AA], // POISON
-            [  NN,  AA,  NN,  AA,  VV,  NN,  NN,  AA,  NN,  II,  NN,  VV,  AA,  NN,  NN,  NN,  AA,  NN], // GROUND
-            [  NN,  NN,  NN,  VV,  AA,  NN,  AA,  NN,  NN,  NN,  NN,  AA,  VV,  NN,  NN,  NN,  VV,  NN], // FLYING
-            [  NN,  NN,  NN,  NN,  NN,  NN,  AA,  AA,  NN,  NN,  VV,  NN,  NN,  NN,  NN,  II,  VV,  NN], // PSYCHIC
-            [  NN,  VV,  NN,  NN,  AA,  NN,  VV,  VV,  NN,  VV,  AA,  NN,  NN,  VV,  NN,  AA,  VV,  VV], // BUG
-            [  NN,  AA,  NN,  NN,  NN,  AA,  VV,  NN,  VV,  AA,  NN,  AA,  NN,  NN,  NN,  NN,  VV,  NN], // ROCK
-            [  II,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  AA,  NN,  NN,  AA,  NN,  VV,  NN,  NN], // GHOST
-            [  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  AA,  NN,  VV,  II], // DRAGON
-            [  NN,  NN,  NN,  NN,  NN,  NN,  VV,  NN,  NN,  NN,  AA,  NN,  NN,  AA,  NN,  VV,  NN,  VV], // DARK
-            [  NN,  VV,  VV,  VV,  NN,  AA,  NN,  NN,  NN,  NN,  NN,  NN,  AA,  NN,  NN,  NN,  VV,  AA], // STEEL
-            [  NN,  VV,  NN,  NN,  NN,  NN,  AA,  VV,  NN,  NN,  NN,  NN,  NN,  NN,  AA,  AA,  VV,  NN], // FAIRY
+            [ nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, not, imm, nrm, nrm, not, nrm], // NORMAL
+            [ nrm, not, not, nrm, vry, vry, nrm, nrm, nrm, nrm, nrm, vry, not, nrm, not, nrm, vry, nrm], // FIRE
+            [ nrm, vry, not, nrm, not, nrm, nrm, nrm, vry, nrm, nrm, nrm, vry, nrm, not, nrm, nrm, nrm], // WATER
+            [ nrm, nrm, vry, not, not, nrm, nrm, nrm, imm, vry, nrm, nrm, nrm, nrm, not, nrm, nrm, nrm], // ELECTRIC
+            [ nrm, not, vry, nrm, not, nrm, nrm, not, vry, not, nrm, not, vry, nrm, not, nrm, not, nrm], // GRASS
+            [ nrm, not, not, nrm, vry, not, nrm, nrm, vry, vry, nrm, nrm, nrm, nrm, vry, nrm, not, nrm], // ICE
+            [ vry, nrm, nrm, nrm, nrm, vry, nrm, not, nrm, not, not, not, vry, imm, nrm, vry, vry, not], // FIGHTING
+            [ nrm, nrm, nrm, nrm, vry, nrm, nrm, not, not, nrm, nrm, nrm, not, not, nrm, nrm, imm, vry], // POISON
+            [ nrm, vry, nrm, vry, not, nrm, nrm, vry, nrm, imm, nrm, not, vry, nrm, nrm, nrm, vry, nrm], // GROUND
+            [ nrm, nrm, nrm, not, vry, nrm, vry, nrm, nrm, nrm, nrm, vry, not, nrm, nrm, nrm, not, nrm], // FLYING
+            [ nrm, nrm, nrm, nrm, nrm, nrm, vry, vry, nrm, nrm, not, nrm, nrm, nrm, nrm, imm, not, nrm], // PSYCHIC
+            [ nrm, not, nrm, nrm, vry, nrm, not, not, nrm, not, vry, nrm, nrm, not, nrm, vry, not, not], // BUG
+            [ nrm, vry, nrm, nrm, nrm, vry, not, nrm, not, vry, nrm, vry, nrm, nrm, nrm, nrm, not, nrm], // ROCK
+            [ imm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, vry, nrm, nrm, vry, nrm, not, nrm, nrm], // GHOST
+            [ nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, vry, nrm, not, imm], // DRAGON
+            [ nrm, nrm, nrm, nrm, nrm, nrm, not, nrm, nrm, nrm, vry, nrm, nrm, vry, nrm, not, nrm, not], // DARK
+            [ nrm, not, not, not, nrm, vry, nrm, nrm, nrm, nrm, nrm, nrm, vry, nrm, nrm, nrm, not, vry], // STEEL
+            [ nrm, not, nrm, nrm, nrm, nrm, vry, not, nrm, nrm, nrm, nrm, nrm, nrm, vry, vry, not, nrm], // FAIRY
         ]
     })();
     //@formatter:on
@@ -104,7 +104,7 @@ class TypeHelper {
         '8c424a', // Dragon
         '4a6b84', // Dark
         '737373', // Steel
-        'd694ce',  // Fairy
+        'd694ce', // Fairy
     ];
 
     public static readonly typeColorsLocked = [
@@ -125,6 +125,6 @@ class TypeHelper {
         'e7b1b1', // Dragon
         'bcccdc', // Dark
         'cccccc', // Steel
-        'ffc6e7',  // Fairy
+        'ffc6e7', // Fairy
     ];
 }
