@@ -207,6 +207,11 @@ class MapHelper {
                     openModal();
                     return;
                 }
+            case 4:
+                if (TownList['Castelia City'].isUnlocked()) {
+                    openModal();
+                    return;
+                }
         }
         Notifier.notify({
             message: 'You cannot access this dock yet',

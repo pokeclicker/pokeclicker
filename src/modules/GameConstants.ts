@@ -14,7 +14,7 @@ export const ACHIEVEMENT_TICK = 1000;
 export const MIN_LOAD_TIME = 500; // 0.5 Seconds
 export const MAX_LOAD_TIME = 20000; // 20 Seconds
 
-export const MAX_AVAILABLE_REGION = 3; // Sinnoh
+export const MAX_AVAILABLE_REGION = 4; // Unova
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto

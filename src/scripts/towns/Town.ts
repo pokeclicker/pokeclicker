@@ -1290,7 +1290,6 @@ TownList['Castelia City'] = new Town(
     'Castelia City',
     GameConstants.Region.unova,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.Toxic)],
         shop: CasteliaCityShop,
         dungeon: dungeonList['Castelia Sewers'],
     }
