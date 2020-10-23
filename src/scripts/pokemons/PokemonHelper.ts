@@ -124,7 +124,7 @@ class PokemonHelper {
         return regionRoutes;
     }
 
-    public static getPokemonDungeons(pokemonName: string): Array<string> {
+    public static getPokemonDungeons(pokemonName: PokemonNameType): Array<string> {
         const dungeons = [];
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // Dungeon Grunt
@@ -151,7 +151,7 @@ class PokemonHelper {
         return dungeons;
     }
 
-    public static getPokemonEggs(pokemonName: string): Array<string> {
+    public static getPokemonEggs(pokemonName: PokemonNameType): Array<string> {
         const eggTypes = [];
         Object.entries(App.game.breeding.hatchList).forEach(([eggType, pokemonArr]) => {
             if (pokemonArr.flat().includes(pokemonName)) {
@@ -216,8 +216,8 @@ class PokemonHelper {
 
     public static getPokemonPrevolution(pokemonName: string): Array<Evolution> {
         const evolutions = [];
-        const prevolutionPokemon = pokemonList.filter(p => p.evolutions ? p.evolutions.find(e => e.getEvolvedPokemon() == pokemonName) : false);
-        prevolutionPokemon.forEach(p => p.evolutions.forEach(e => {
+        const prevolutionPokemon = pokemonList.filter((p: PokemonListData) => p.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName));
+        prevolutionPokemon.forEach((p: PokemonListData) => p.evolutions.forEach(e => {
             if (e.getEvolvedPokemon() == pokemonName) {
                 evolutions.push(e);
             }
@@ -226,16 +226,16 @@ class PokemonHelper {
     }
 
     public static getPokemonLevelPrevolution(pokemonName: string): Evolution {
-        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e.type.includes(EvolutionType.Level) && e.getEvolvedPokemon() == pokemonName) : null);
-        return evolutionPokemon ? evolutionPokemon.evolutions.find(e => e.getEvolvedPokemon() == pokemonName) : undefined;
+        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => e.type.includes(EvolutionType.Level) && e.getEvolvedPokemon() == pokemonName));
+        return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName);
     }
 
     public static getPokemonStonePrevolution(pokemonName: string): Evolution {
-        const evolutionPokemon = pokemonList.find(p => p.evolutions ? p.evolutions.find(e => e.type.includes(EvolutionType.Stone) && e.getEvolvedPokemon() == pokemonName) : null);
-        return evolutionPokemon ? evolutionPokemon.evolutions.find(e => e.getEvolvedPokemon() == pokemonName) : undefined;
+        const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => e.type.includes(EvolutionType.Stone) && e.getEvolvedPokemon() == pokemonName));
+        return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName);
     }
     
-    public static getPokemonLocations = (pokemonName: string) => {
+    public static getPokemonLocations = (pokemonName: PokemonNameType) => {
         const encounterTypes = {};
         // Routes
         const regionRoutes = PokemonHelper.getPokemonRegionRoutes(pokemonName);
