@@ -17,7 +17,10 @@ class SafariPokemon implements PokemonInterface {
     private _eating: KnockoutObservable<number>;
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
-    static readonly list = [
+    static readonly list: {
+        name: PokemonNameType,
+        weight: number
+    }[] = [
         { name: 'Nidoran(F)', weight: 15 },
         { name: 'Nidorina', weight: 10 },
         { name: 'Nidoran(M)', weight: 25 },
