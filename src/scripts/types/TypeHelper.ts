@@ -3,34 +3,40 @@ class TypeHelper {
     //@formatter:off
     /*eslint-disable */
 
-    public static typeMatrix: Array<Array<number>> = [
-        //                E              F
-        //                L              I                   P
-        // N              E              G    P    G    F    S                   D
-        // O         W    C    G         H    O    R    L    Y              G    R         S    F  <- Defending type
-        // R    F    A    T    R         T    I    O    Y    C         R    H    A    D    T    A
-        // M    I    T    R    A    I    I    S    U    I    H    B    O    O    G    A    E    I   Attack type
-        // A    R    E    I    S    C    N    O    N    N    I    U    C    S    O    R    E    R        |
-        // L    E    R    C    S    E    G    N    D    G    C    G    K    T    N    K    L    Y        v
-        [  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1, 0.5,   0,   1,   1, 0.5,   1], // NORMAL
-        [  1, 0.5, 0.5,   1,   2,   2,   1,   1,   1,   1,   1,   2, 0.5,   1, 0.5,   1,   2,   1], // FIRE
-        [  1,   2, 0.5,   1, 0.5,   1,   1,   1,   2,   1,   1,   1,   2,   1, 0.5,   1,   1,   1], // WATER
-        [  1,   1,   2, 0.5, 0.5,   1,   1,   1,   0,   2,   1,   1,   1,   1, 0.5,   1,   1,   1], // ELECTRIC
-        [  1, 0.5,   2,   1, 0.5,   1,   1, 0.5,   2, 0.5,   1, 0.5,   2,   1, 0.5,   1, 0.5,   1], // GRASS
-        [  1, 0.5, 0.5,   1,   2, 0.5,   1,   1,   2,   2,   1,   1,   1,   1,   2,   1, 0.5,   1], // ICE
-        [  2,   1,   1,   1,   1,   2,   1, 0.5,   1, 0.5, 0.5, 0.5,   2,   0,   1,   2,   2, 0.5], // FIGHTING
-        [  1,   1,   1,   1,   2,   1,   1, 0.5, 0.5,   1,   1,   1, 0.5, 0.5,   1,   1,   0,   2], // POISON
-        [  1,   2,   1,   2, 0.5,   1,   1,   2,   1,   0,   1, 0.5,   2,   1,   1,   1,   2,   1], // GROUND
-        [  1,   1,   1, 0.5,   2,   1,   2,   1,   1,   1,   1,   2, 0.5,   1,   1,   1, 0.5,   1], // FLYING
-        [  1,   1,   1,   1,   1,   1,   2,   2,   1,   1, 0.5,   1,   1,   1,   1,   0, 0.5,   1], // PSYCHIC
-        [  1, 0.5,   1,   1,   2,   1, 0.5, 0.5,   1, 0.5,   2,   1,   1, 0.5,   1,   2, 0.5, 0.5], // BUG
-        [  1,   2,   1,   1,   1,   2, 0.5,   1, 0.5,   2,   1,   2,   1,   1,   1,   1, 0.5,   1], // ROCK
-        [  0,   1,   1,   1,   1,   1,   1,   1,   1,   1,   2,   1,   1,   2,   1, 0.5,   1,   1], // GHOST
-        [  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   2,   1, 0.5,   0], // DRAGON
-        [  1,   1,   1,   1,   1,   1, 0.5,   1,   1,   1,   2,   1,   1,   2,   1, 0.5,   1, 0.5], // DARK
-        [  1, 0.5, 0.5, 0.5,   1,   2,   1,   1,   1,   1,   1,   1,   2,   1,   1,   1, 0.5,   2], // STEEL
-        [  1, 0.5,   1,   1,   1,   1,   2, 0.5,   1,   1,   1,   1,   1,   1,   2,   2, 0.5,   1], // FAIRY
-    ];
+    public static typeMatrix: Array<Array<number>> = (()=>{
+        const ΞΞ = GameConstants.TypeEffectivenessValue.Immune;
+        const VV = GameConstants.TypeEffectivenessValue.NotVery;
+        const ʘʘ = GameConstants.TypeEffectivenessValue.Normal;
+        const ΛΛ = GameConstants.TypeEffectivenessValue.Very;
+        return [
+            //                 E              F
+            //                 L              I                   P
+            //  N              E              G    P    G    F    S                   D
+            //  O         W    C    G         H    O    R    L    Y              G    R         S    F  <- Defending type
+            //  R    F    A    T    R         T    I    O    Y    C         R    H    A    D    T    A
+            //  M    I    T    R    A    I    I    S    U    I    H    B    O    O    G    A    E    I   Attack type
+            //  A    R    E    I    S    C    N    O    N    N    I    U    C    S    O    R    E    R        |
+            //  L    E    R    C    S    E    G    N    D    G    C    G    K    T    N    K    L    Y        v
+            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ΞΞ,  ʘʘ,  ʘʘ,  VV,  ʘʘ], // NORMAL
+            [  ʘʘ,  VV,  VV,  ʘʘ,  ΛΛ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  VV,  ʘʘ,  ΛΛ,  ʘʘ], // FIRE
+            [  ʘʘ,  ΛΛ,  VV,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ], // WATER
+            [  ʘʘ,  ʘʘ,  ΛΛ,  VV,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ΞΞ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ], // ELECTRIC
+            [  ʘʘ,  VV,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  VV,  ΛΛ,  VV,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  VV,  ʘʘ], // GRASS
+            [  ʘʘ,  VV,  VV,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  ʘʘ,  ΛΛ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ], // ICE
+            [  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  VV,  VV,  VV,  ΛΛ,  ΞΞ,  ʘʘ,  ΛΛ,  ΛΛ,  VV], // FIGHTING
+            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  VV,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  VV,  ʘʘ,  ʘʘ,  ΞΞ,  ΛΛ], // POISON
+            [  ʘʘ,  ΛΛ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ΞΞ,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ], // GROUND
+            [  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ʘʘ], // FLYING
+            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ΛΛ,  ʘʘ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΞΞ,  VV,  ʘʘ], // PSYCHIC
+            [  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  VV,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  ʘʘ,  VV,  ʘʘ,  ΛΛ,  VV,  VV], // BUG
+            [  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ʘʘ], // ROCK
+            [  ΞΞ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  ʘʘ], // GHOST
+            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ΞΞ], // DRAGON
+            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  VV], // DARK
+            [  ʘʘ,  VV,  VV,  VV,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ΛΛ], // STEEL
+            [  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ΛΛ,  VV,  ʘʘ], // FAIRY
+        ]
+    })();
     //@formatter:on
     /*eslint-enable */
 
