@@ -17,7 +17,7 @@ class PokemonCategories implements Saveable {
 
     toJSON() {
         return {
-            categories: ko.toJSON(PokemonCategories.categories),
+            categories: ko.toJS(PokemonCategories.categories),
         };
     }
 
