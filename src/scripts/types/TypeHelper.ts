@@ -4,10 +4,10 @@ class TypeHelper {
     /*eslint-disable */
 
     public static typeMatrix: Array<Array<number>> = (()=>{
-        const ΞΞ = GameConstants.TypeEffectivenessValue.Immune;
+        const II = GameConstants.TypeEffectivenessValue.Immune;
         const VV = GameConstants.TypeEffectivenessValue.NotVery;
-        const ʘʘ = GameConstants.TypeEffectivenessValue.Normal;
-        const ΛΛ = GameConstants.TypeEffectivenessValue.Very;
+        const NN = GameConstants.TypeEffectivenessValue.Normal;
+        const AA = GameConstants.TypeEffectivenessValue.Very;
         return [
             //                 E              F
             //                 L              I                   P
@@ -17,24 +17,24 @@ class TypeHelper {
             //  M    I    T    R    A    I    I    S    U    I    H    B    O    O    G    A    E    I   Attack type
             //  A    R    E    I    S    C    N    O    N    N    I    U    C    S    O    R    E    R        |
             //  L    E    R    C    S    E    G    N    D    G    C    G    K    T    N    K    L    Y        v
-            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ΞΞ,  ʘʘ,  ʘʘ,  VV,  ʘʘ], // NORMAL
-            [  ʘʘ,  VV,  VV,  ʘʘ,  ΛΛ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  VV,  ʘʘ,  ΛΛ,  ʘʘ], // FIRE
-            [  ʘʘ,  ΛΛ,  VV,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ], // WATER
-            [  ʘʘ,  ʘʘ,  ΛΛ,  VV,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ΞΞ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ], // ELECTRIC
-            [  ʘʘ,  VV,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  VV,  ΛΛ,  VV,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  VV,  ʘʘ], // GRASS
-            [  ʘʘ,  VV,  VV,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  ʘʘ,  ΛΛ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ], // ICE
-            [  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  VV,  VV,  VV,  ΛΛ,  ΞΞ,  ʘʘ,  ΛΛ,  ΛΛ,  VV], // FIGHTING
-            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  VV,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  VV,  ʘʘ,  ʘʘ,  ΞΞ,  ΛΛ], // POISON
-            [  ʘʘ,  ΛΛ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ΞΞ,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ], // GROUND
-            [  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ʘʘ], // FLYING
-            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ΛΛ,  ʘʘ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΞΞ,  VV,  ʘʘ], // PSYCHIC
-            [  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  VV,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  ʘʘ,  VV,  ʘʘ,  ΛΛ,  VV,  VV], // BUG
-            [  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  VV,  ΛΛ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ʘʘ], // ROCK
-            [  ΞΞ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  ʘʘ], // GHOST
-            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ΞΞ], // DRAGON
-            [  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  VV,  ʘʘ,  VV], // DARK
-            [  ʘʘ,  VV,  VV,  VV,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ʘʘ,  ʘʘ,  ʘʘ,  VV,  ΛΛ], // STEEL
-            [  ʘʘ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  VV,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ʘʘ,  ΛΛ,  ΛΛ,  VV,  ʘʘ], // FAIRY
+            [  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  VV,  II,  NN,  NN,  VV,  NN], // NORMAL
+            [  NN,  VV,  VV,  NN,  AA,  AA,  NN,  NN,  NN,  NN,  NN,  AA,  VV,  NN,  VV,  NN,  AA,  NN], // FIRE
+            [  NN,  AA,  VV,  NN,  VV,  NN,  NN,  NN,  AA,  NN,  NN,  NN,  AA,  NN,  VV,  NN,  NN,  NN], // WATER
+            [  NN,  NN,  AA,  VV,  VV,  NN,  NN,  NN,  II,  AA,  NN,  NN,  NN,  NN,  VV,  NN,  NN,  NN], // ELECTRIC
+            [  NN,  VV,  AA,  NN,  VV,  NN,  NN,  VV,  AA,  VV,  NN,  VV,  AA,  NN,  VV,  NN,  VV,  NN], // GRASS
+            [  NN,  VV,  VV,  NN,  AA,  VV,  NN,  NN,  AA,  AA,  NN,  NN,  NN,  NN,  AA,  NN,  VV,  NN], // ICE
+            [  AA,  NN,  NN,  NN,  NN,  AA,  NN,  VV,  NN,  VV,  VV,  VV,  AA,  II,  NN,  AA,  AA,  VV], // FIGHTING
+            [  NN,  NN,  NN,  NN,  AA,  NN,  NN,  VV,  VV,  NN,  NN,  NN,  VV,  VV,  NN,  NN,  II,  AA], // POISON
+            [  NN,  AA,  NN,  AA,  VV,  NN,  NN,  AA,  NN,  II,  NN,  VV,  AA,  NN,  NN,  NN,  AA,  NN], // GROUND
+            [  NN,  NN,  NN,  VV,  AA,  NN,  AA,  NN,  NN,  NN,  NN,  AA,  VV,  NN,  NN,  NN,  VV,  NN], // FLYING
+            [  NN,  NN,  NN,  NN,  NN,  NN,  AA,  AA,  NN,  NN,  VV,  NN,  NN,  NN,  NN,  II,  VV,  NN], // PSYCHIC
+            [  NN,  VV,  NN,  NN,  AA,  NN,  VV,  VV,  NN,  VV,  AA,  NN,  NN,  VV,  NN,  AA,  VV,  VV], // BUG
+            [  NN,  AA,  NN,  NN,  NN,  AA,  VV,  NN,  VV,  AA,  NN,  AA,  NN,  NN,  NN,  NN,  VV,  NN], // ROCK
+            [  II,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  AA,  NN,  NN,  AA,  NN,  VV,  NN,  NN], // GHOST
+            [  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  NN,  AA,  NN,  VV,  II], // DRAGON
+            [  NN,  NN,  NN,  NN,  NN,  NN,  VV,  NN,  NN,  NN,  AA,  NN,  NN,  AA,  NN,  VV,  NN,  VV], // DARK
+            [  NN,  VV,  VV,  VV,  NN,  AA,  NN,  NN,  NN,  NN,  NN,  NN,  AA,  NN,  NN,  NN,  VV,  AA], // STEEL
+            [  NN,  VV,  NN,  NN,  NN,  NN,  AA,  VV,  NN,  NN,  NN,  NN,  NN,  NN,  AA,  AA,  VV,  NN], // FAIRY
         ]
     })();
     //@formatter:on
