@@ -17,7 +17,6 @@ class App {
             // Needs to be loaded first so save data can be updated (specifically "player" data)
             const update = new Update();
 
-            UndergroundItem.initialize();
             player = Save.load();
             App.game = new Game(
                 update,
