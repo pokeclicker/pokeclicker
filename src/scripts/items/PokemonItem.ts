@@ -3,10 +3,15 @@
 class PokemonItem extends CaughtIndicatingItem {
 
     type: GameConstants.PokemonItemType;
+    unlockRequirement: Requirement;
 
-    constructor(pokemon: GameConstants.PokemonItemType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
+    constructor(pokemon: GameConstants.PokemonItemType,
+        basePrice: number,
+        currency: GameConstants.Currency = GameConstants.Currency.questPoint,
+        unlockRequirement?: Requirement) {
         super(GameConstants.PokemonItemType[pokemon], basePrice, currency);
         this.type = pokemon;
+        this.unlockRequirement = unlockRequirement;
     }
 
     gain() {
@@ -24,17 +29,9 @@ class PokemonItem extends CaughtIndicatingItem {
     use() {
     }
 
-    // TODO: Rework to have items support Requirements
-    // TODO: Ensure there's an appropriate tooltip
     isAvailable(): boolean {
-        if (
-            this.type === GameConstants.PokemonItemType['Deoxys (attack)']
-            ||
-            this.type === GameConstants.PokemonItemType['Deoxys (defense)']
-            ||
-            this.type === GameConstants.PokemonItemType['Deoxys (speed)']
-        ) {
-            return App.game.party.alreadyCaughtPokemonByName('Deoxys');
+        if (!!this.unlockRequirement) {
+            return this.unlockRequirement.isCompleted();
         } else {
             return true;
         }
@@ -60,6 +57,6 @@ ItemList['Cherubi']              = new PokemonItem(GameConstants.PokemonItemType
 ItemList['Spiritomb']            = new PokemonItem(GameConstants.PokemonItemType.Spiritomb, 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem(GameConstants.PokemonItemType['Meloetta (pirouette)'], 50000);
 
-ItemList['Deoxys (attack)']      = new PokemonItem(GameConstants.PokemonItemType['Deoxys (attack)'], 500, GameConstants.Currency.battlePoint);
-ItemList['Deoxys (defense)']     = new PokemonItem(GameConstants.PokemonItemType['Deoxys (defense)'], 500, GameConstants.Currency.battlePoint);
-ItemList['Deoxys (speed)']       = new PokemonItem(GameConstants.PokemonItemType['Deoxys (speed)'], 500, GameConstants.Currency.battlePoint);
+ItemList['Deoxys (attack)']      = new PokemonItem(GameConstants.PokemonItemType['Deoxys (attack)'], 500, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
+ItemList['Deoxys (defense)']     = new PokemonItem(GameConstants.PokemonItemType['Deoxys (defense)'], 500, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
+ItemList['Deoxys (speed)']       = new PokemonItem(GameConstants.PokemonItemType['Deoxys (speed)'], 500, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
