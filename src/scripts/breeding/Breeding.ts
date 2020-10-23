@@ -20,7 +20,7 @@ class Breeding implements Feature {
     private queueList: KnockoutObservableArray<string>;
     private queueSlots: KnockoutObservable<number>;
 
-    public hatchList: { [name: number]: string[][] } = {};
+    public hatchList: { [name: number]: PokemonNameType[][] } = {};
 
     constructor() {
         this._eggList = this.defaults.eggList;
@@ -89,7 +89,7 @@ class Breeding implements Feature {
             [],
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
-            ['Deino', 'Zwellous', 'Hydreigon'],
+            ['Deino', 'Zweilous', 'Hydreigon'],
             [],
             [],
             [],
