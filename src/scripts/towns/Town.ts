@@ -566,6 +566,9 @@ const BattleFrontierShop = new Shop([
     new EnergyRestore(GameConstants.EnergyRestoreSize.SmallRestore, 10, GameConstants.Currency.battlePoint),
     new EnergyRestore(GameConstants.EnergyRestoreSize.MediumRestore, 20, GameConstants.Currency.battlePoint),
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
+    ItemList['Deoxys (attack)'],
+    ItemList['Deoxys (defense)'],
+    ItemList['Deoxys (speed)'],
 ]);
 
 //Hoenn NPCs

@@ -24,6 +24,22 @@ class PokemonItem extends CaughtIndicatingItem {
     use() {
     }
 
+    // TODO: Rework to have items support Requirements
+    // TODO: Ensure there's an appropriate tooltip
+    isAvailable(): boolean {
+        if (
+            this.type === GameConstants.PokemonItemType['Deoxys (attack)']
+            ||
+            this.type === GameConstants.PokemonItemType['Deoxys (defense)']
+            ||
+            this.type === GameConstants.PokemonItemType['Deoxys (speed)']
+        ) {
+            return App.game.party.alreadyCaughtPokemonByName('Deoxys');
+        } else {
+            return true;
+        }
+    }
+
     getCaughtStatus(): CaughtStatus {
         return PartyController.getCaughtStatusByName(this.name());
     }
@@ -43,3 +59,7 @@ ItemList['Burmy (plant)']        = new PokemonItem(GameConstants.PokemonItemType
 ItemList['Cherubi']              = new PokemonItem(GameConstants.PokemonItemType.Cherubi, 5000);
 ItemList['Spiritomb']            = new PokemonItem(GameConstants.PokemonItemType.Spiritomb, 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem(GameConstants.PokemonItemType['Meloetta (pirouette)'], 50000);
+
+ItemList['Deoxys (attack)']      = new PokemonItem(GameConstants.PokemonItemType['Deoxys (attack)'], 500, GameConstants.Currency.battlePoint);
+ItemList['Deoxys (defense)']     = new PokemonItem(GameConstants.PokemonItemType['Deoxys (defense)'], 500, GameConstants.Currency.battlePoint);
+ItemList['Deoxys (speed)']       = new PokemonItem(GameConstants.PokemonItemType['Deoxys (speed)'], 500, GameConstants.Currency.battlePoint);
