@@ -1,33 +1,26 @@
 <script type="text/html" id="pokemonCategoryTemplate">
-    <div style="
+    <div class="dropdown" style="
         position: absolute;
         left: 2px;
-        top: 2px;
-        width: 16px;
-        height: 16px;
-        border: 1px #333 solid;
-        border-radius: 50%;
-        overflow: hidden;
-        "
-        data-bind="
-        style: {
-            background: PokemonCategories.categories[$data.category].color,
-        }
+        top: -2px;
         ">
-        <select data-bind="foreach: PokemonCategories.categories"
-            style="
-            width: auto;
-            height: 22px;
-            left: -3px;
-            top: -4px;
-            position: absolute;
-            background: transparent;
-            color: transparent;
+        <button data-toggle="dropdown" style="
+            width: 16px;
+            height: 16px;
+            border: 1px #333 solid;
+            border-radius: 50%;
+            "
+            data-bind="
+            style: {
+                background: PokemonCategories.categories[$data.category].color,
+            }
             ">
-            <option data-bind="text: $data.name, attr: { value: $index } , style: { background:$data.color, color: 'whitesmoke' }"></option>
-        </select>
+        </button>
+        <div class="dropdown-menu p-0" data-bind="foreach: PokemonCategories.categories">
+            <a class="dropdown-item" href="#" data-bind="text: $data.name, style: { background: $data.color, color: 'whitesmoke' }, click: () => { $parent.category = $index() }">Category</a>
+        </div>
     </div>
 </script>
 
 <!-- Example usage -->
-<!-- <span data-bind="template: { name: 'pokemonCategoryTemplate', data: {category: Pokemon.category, pokemon: pokemon}}"></span> -->
+<!-- <span data-bind="template: { name: 'pokemonCategoryTemplate', data: pokemon}"></span> -->
