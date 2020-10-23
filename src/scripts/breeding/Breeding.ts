@@ -17,7 +17,7 @@ class Breeding implements Feature {
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private queueList: KnockoutObservableArray<string>;
+    private queueList: KnockoutObservableArray<PokemonNameType>;
     private queueSlots: KnockoutObservable<number>;
 
     public hatchList: { [name: number]: PokemonNameType[][] } = {};
@@ -267,7 +267,7 @@ class Breeding implements Feature {
         });
     }
 
-    public createEgg(pokemonName: string, type = EggType.Pokemon): Egg {
+    public createEgg(pokemonName: PokemonNameType, type = EggType.Pokemon): Egg {
         const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
         return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonName);
     }
@@ -293,7 +293,7 @@ class Breeding implements Feature {
     }
 
     public createFossilEgg(fossil: string): Egg {
-        const pokemonName = GameConstants.FossilToPokemon[fossil];
+        const pokemonName: PokemonNameType = GameConstants.FossilToPokemon[fossil];
         const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
         if (pokemonNativeRegion > player.highestRegion()) {
             Notifier.notify({

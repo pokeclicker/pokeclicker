@@ -6,7 +6,7 @@
 /// <reference path="../party/LevelType.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 
-const pokemonDevolutionMap: { [name: string]: string } = {};
+const pokemonDevolutionMap: { [name: string]: PokemonNameType } = {};
 
 type PokemonListData = {
   id: number;
@@ -17817,7 +17817,7 @@ pokemonList.forEach(p => {
 
     (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if ((p as PokemonListData).baby) {
-        (p as PokemonListData).evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon);
+        (p as PokemonListData).evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType);
     }
     (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= p.id);
     pokemonNameIndex[p.name.toLowerCase()] = p;

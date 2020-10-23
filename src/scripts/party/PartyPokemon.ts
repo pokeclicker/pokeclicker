@@ -16,7 +16,7 @@ class PartyPokemon implements Saveable {
 
     constructor(
         public id: number,
-        public name: string,
+        public name: PokemonNameType,
         public evolutions: Evolution[],
         public baseAttack: number,
         public attackBonus: number,
