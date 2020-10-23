@@ -37,6 +37,9 @@ Parameters:
 <% if (locals.rotate) { %>
     transform="rotate(90 ,<%= locals.x * 16 %>, <%= locals.y * 16 %>)"
 <% } %>
+<% if (locals.routeNumber) { %>
+    data-bind="click:function(){ MapHelper.moveToRoute(<%= locals.route %>, <%= locals.region %>, <%= locals.routeName %>); } ">
+<% } %>
     data-bind="click:function(){ MapHelper.moveToRoute(<%= locals.route %>, <%= locals.region %>); } ">
     <rect data-route='<%= locals.route %>'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(<%= locals.route %>, <%= locals.region %>) }"

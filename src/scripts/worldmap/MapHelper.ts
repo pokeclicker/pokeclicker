@@ -10,7 +10,10 @@ class MapHelper {
         }
     }
 
-    public static moveToRoute = function (route: number, region: GameConstants.Region) {
+    public static moveToRoute = function (route: number, region: GameConstants.Region, routeName?: string) {
+        if (routeName) {
+            route = Routes.getRouteNumberFromName(routeName, region);
+        }
         if (isNaN(route)) {
             return;
         }
