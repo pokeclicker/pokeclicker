@@ -1,5 +1,5 @@
 class SafariPokemon implements PokemonInterface {
-    name: string;
+    name: PokemonNameType;
     id: number;
     type1: PokemonType;
     type2: PokemonType;
