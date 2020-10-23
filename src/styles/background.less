@@ -312,57 +312,20 @@ body.background-dynamic {
     /*
     POKEMON ANIMATIONS
     */
-    .pokemon {
-        background-size: 400% 400%;
+    .pokemonSprite {
         position: fixed;
         height: 4vh;
         width: 4vh;
         z-index: 0;
         left: -4vh;
-    }
-
-    .walkDown {
-        background-position: 0.00000% 0.00000%;
-        animation: walkDown 0.4s steps(3) infinite, moveDown 60s linear;
-    }
-    @keyframes walkDown {
-        100% { background-position: 100.000% 0.00000%; }
-    }
-    @keyframes moveDown {
-        0%   { bottom: 4000px; }
-        100% { bottom: -1000px; }
-    }
-    .walkLeft {
-        background-position: 0.00000% 33.3333%;
-        animation: walkLeft 0.4s steps(3) infinite, moveLeft 60s linear;
-    }
-    @keyframes walkLeft {
-        100% { background-position: 100.000% 33.3333%; }
-    }
-    @keyframes moveLeft {
-        0%   { left: 4000px; }
-        100% { left: -1000px; }
-    }
-    .walkRight {
-        background-position: 0.00000% 66.6666%;
-        animation: walkRight 0.4s steps(3) infinite, moveRight 60s linear;
-    }
-    @keyframes walkRight {
-        100% { background-position: 100.000% 66.6666%; }
-    }
-    @keyframes moveRight {
-        0%   { right: 4000px; }
-        100% { right: -1000px; }
-    }
-    .walkUp {
-        background-position: 0.00000% 100.000%;
-        animation: walkUp 0.4s steps(3) infinite, moveUp 60s linear;
-    }
-    @keyframes walkUp {
-        100% { background-position: 100.000% 100.000%; }
-    }
-    @keyframes moveUp {
-        0%   { top: 4000px; }
-        100% { top: -1000px; }
+        
+        &.walkLeft.moveLeft {
+            background-position: 0.00000% 33.3333%;
+            animation: walkLeft 0.4s steps(3) infinite, moveLeft 60s linear;
+        }
+        @keyframes moveLeft {
+            0%   { left: 4000px; }
+            100% { left: -1000px; }
+        }
     }
 }

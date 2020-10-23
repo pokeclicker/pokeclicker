@@ -190,6 +190,31 @@ class Update implements Saveable {
                     return [`${GameConstants.camelCaseToString(region)} ${name}`, isCompleted];
                 });
             playerData.achievementsCompleted = Object.fromEntries(renamedAchievements);
+
+            // Refund any shards spent on shard upgrades that have no effect
+            // Using magic number incase any of these values change in the future
+            const invalidUpgrades = {
+                0: 3,
+                1: 0,
+                2: 0,
+                4: 0,
+                5: 0,
+                9: 0,
+                11: 0,
+                12: 0,
+                15: 0,
+                16: 0,
+                17: 0,
+            };
+            Object.entries(invalidUpgrades).forEach(([type, effectiveness]) => {
+                const index = +type * 4 + effectiveness;
+                let level = saveData.shards.shardUpgrades[index];
+                // Refund each level of upgrade purchased
+                while (level-- > 0) {
+                    const cost = (level + 1) * 500;
+                    saveData.shards.shardWallet[type] += cost;
+                }
+            });
         },
     };
 
