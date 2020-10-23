@@ -38,10 +38,17 @@ class PokemonCategories implements Saveable {
     }
 }
 
-PokemonCategories.addCategory('default', '#333');
-PokemonCategories.addCategory('red', '#e74c3c');
-PokemonCategories.addCategory('red2', '#c0392b');
-PokemonCategories.addCategory('blue', '#3498db');
-PokemonCategories.addCategory('blue2', '#2980b9');
-PokemonCategories.addCategory('green', '#2ecc71');
-PokemonCategories.addCategory('green2', '#27ae60');
+PokemonCategories.addCategory('Default', '#333');
+PokemonCategories.addCategory('Red', '#e74c3c');
+PokemonCategories.addCategory('Red 2', '#c0392b');
+PokemonCategories.addCategory('Blue', '#3498db');
+PokemonCategories.addCategory('Blue 2', '#2980b9');
+PokemonCategories.addCategory('Green', '#2ecc71');
+PokemonCategories.addCategory('Green 2', '#27ae60');
+PokemonCategories.addCategory('Purple', '#9b59b6');
+PokemonCategories.addCategory('Purple 2', '#8e44ad');
+PokemonCategories.addCategory('Orange', '#e67e22');
+PokemonCategories.addCategory('Orange 2', '#d35400');
+PokemonCategories.addCategory('Yellow', '#f1c40f');
+PokemonCategories.addCategory('Turquoise', '#1abc9c');
+PokemonCategories.addCategory('Turquoise 2', '#16a085');
