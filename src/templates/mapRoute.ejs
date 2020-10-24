@@ -34,12 +34,13 @@ Parameters:
 <% */ %>
 
 <g
+<% const value = typeof locals.route === 'string' ? `"${locals.route}"` : locals.route; %
 <% if (locals.rotate) { %>
     transform="rotate(90 ,<%= locals.x * 16 %>, <%= locals.y * 16 %>)"
 <% } %>
-    data-bind="click:function(){ MapHelper.moveToRoute(<%= locals.route %>, <%= locals.region %>); } ">
+    data-bind="click:function(){ MapHelper.moveToRoute(<%= value %>, <%= locals.region %>); } ">
     <rect data-route='<%= locals.route %>'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(<%= locals.route %>, <%= locals.region %>) }"
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(<%= value %>, <%= locals.region %>) }"
         height="<%= locals.height * 16 %>"
         width="<%= locals.width * 16 %>"
         x="<%= locals.x * 16 %>" y="<%= locals.y * 16 - (locals.rotate ? locals.height * 16 : 0 ) %>">
