@@ -232,12 +232,12 @@ class AchievementHandler {
         /*
          * REGIONAL
          */
-        GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none).forEach(region => {
+        GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none && r <= GameConstants.MAX_AVAILABLE_REGION).forEach(region => {
             // Routes
             Routes.getRoutesByRegion(region).forEach(route => {
-                AchievementHandler.addAchievement(`Route ${route.number} traveler`, `Defeat 100 Pokémon on route ${route.number}`, new RouteKillRequirement(100, route.number), 1, region);
-                AchievementHandler.addAchievement(`Route ${route.number} explorer`, `Defeat 1,000 Pokémon on route ${route.number}`, new RouteKillRequirement(1000, route.number), 2, region);
-                AchievementHandler.addAchievement(`Route ${route.number} conqueror`, `Defeat 10,000 Pokémon on route ${route.number}`, new RouteKillRequirement(10000, route.number), 3, region);
+                AchievementHandler.addAchievement(`${route.routeName} traveler`, `Defeat 100 Pokémon on ${route.routeName}`, new RouteKillRequirement(100, region, route.number), 1, region);
+                AchievementHandler.addAchievement(`${route.routeName} explorer`, `Defeat 1,000 Pokémon on ${route.routeName}`, new RouteKillRequirement(1000, region, route.number), 2, region);
+                AchievementHandler.addAchievement(`${route.routeName} conqueror`, `Defeat 10,000 Pokémon on ${route.routeName}`, new RouteKillRequirement(10000, region, route.number), 3, region);
             });
             // Gyms
             GameConstants.RegionGyms[region]?.forEach(gym => {

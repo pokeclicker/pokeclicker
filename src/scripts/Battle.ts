@@ -71,7 +71,7 @@ class Battle {
         const enemyPokemon = this.enemyPokemon();
         enemyPokemon.defeat();
 
-        GameHelper.incrementObservable(App.game.statistics.routeKills[player.route()]);
+        GameHelper.incrementObservable(App.game.statistics.routeKills[player.region][player.route()]);
 
         App.game.breeding.progressEggsBattle(player.route(), player.region);
         const isShiny: boolean = enemyPokemon.shiny;
