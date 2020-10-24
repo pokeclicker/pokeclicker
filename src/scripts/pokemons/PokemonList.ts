@@ -11165,6 +11165,7 @@ const pokemonList: PokemonListData[] =
             'exp': 66,
             'catchRate': 75,
             'evolutions': [new LevelEvolution('Zorua', 'Zoroark', 30)],
+            'baby': true,
             'base': {
                 'hitpoints': 40,
                 'attack': 65,
@@ -12425,6 +12426,7 @@ const pokemonList: PokemonListData[] =
             'exp': 72,
             'catchRate': 45,
             'evolutions': [new LevelEvolution('Larvesta', 'Volcarona', 59)],
+            'baby': true,
             'base': {
                 'hitpoints': 55,
                 'attack': 85,

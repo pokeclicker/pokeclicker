@@ -9,7 +9,6 @@ class Shards implements Feature {
         GameHelper.enumLength(PokemonType) - 1;
     public static readonly nEffects: number =
         GameHelper.enumLength(GameConstants.TypeEffectiveness);
-
     defaults = {
         'shardWallet': Array<number>(Shards.nTypes).fill(0),
         'shardUpgrades': Array<number>(Shards.nTypes * Shards.nEffects).fill(0),
@@ -18,9 +17,18 @@ class Shards implements Feature {
     public shardWallet: Array<KnockoutObservable<number>>;
     public shardUpgrades: Array<KnockoutObservable<number>>;
 
+    public validUpgrades = {};
+
     constructor() {
         this.shardWallet = this.defaults.shardWallet.map((v) => ko.observable(v));
         this.shardUpgrades = this.defaults.shardUpgrades.map((v) => ko.observable(v));
+        GameHelper.enumNumbers(PokemonType).map(type => {
+            this.validUpgrades[type] = {};
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Immune);
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.NotVery] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.NotVery);
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.Normal] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Normal);
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.Very] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Very);
+        });
     }
 
     public gainShards(amt: number, typeNum: PokemonType) {
@@ -31,8 +39,10 @@ class Shards implements Feature {
         if (typeNum == PokemonType.None) {
             return;
         }
+
+        GameHelper.incrementObservable(this.shardWallet[typeNum], amt);
+
         if (amt > 0) {
-            GameHelper.incrementObservable(this.shardWallet[typeNum], amt);
             GameHelper.incrementObservable(App.game.statistics.totalShardsGained, amt);
             GameHelper.incrementObservable(App.game.statistics.shardsGained[typeNum], amt);
         }
@@ -65,11 +75,18 @@ class Shards implements Feature {
     public buyShardUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
-    ) {
+    ): void {
         if (this.canBuyShardUpgrade(typeNum, effectNum)) {
             this.gainShards(-this.getShardUpgradeCost(typeNum, effectNum), typeNum);
             GameHelper.incrementObservable(this.shardUpgrades[typeNum * Shards.nEffects + effectNum]);
         }
+    }
+
+    public isValidUpgrade(
+        typeNum: PokemonType,
+        effectNum: GameConstants.TypeEffectiveness
+    ): boolean {
+        return !!this.validUpgrades[typeNum]?.[effectNum];
     }
 
     public getShardUpgrade(
