@@ -100,7 +100,7 @@ class Egg implements Saveable {
 
         const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
         // If the party pokemon exist, increase it's damage output
-        if (partyPokemon) {
+        if (partyPokemon && partyPokemon.breeding) {
             if (partyPokemon.evolutions !== undefined) {
                 partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
             }
