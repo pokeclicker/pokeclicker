@@ -597,7 +597,7 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
 // Unova
 // TODO: Balancing of dungeon Pokemon HP & rewards.
 dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
-    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Spring)'],
+    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [new DungeonBossPokemon('Keldeo (Resolute)', 8000000, 70)],
@@ -734,13 +734,13 @@ dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Electrike', 8000000, 70),
+        new DungeonBossPokemon('Eelektrik', 8000000, 70),
         new DungeonBossPokemon('Crustle', 8000000, 70),
     ],
     96500, 201, 35);
     
 dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
-    ['Clefairy', 'Poliwag', 'Seel', 'Tangela', 'Delibird', 'Sneasel', 'Piloswine', 'Pelipper', 'Lunatone', 'Solrock', 'Vanillish', 'Basculin (Red-Striped)', 'Ditto', 'Metang'],
+    ['Clefairy', 'Poliwag', 'Seel', 'Tangela', 'Delibird', 'Sneasel', 'Piloswine', 'Pelipper', 'Lunatone', 'Solrock', 'Vanillish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Ditto', 'Metang'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -763,7 +763,7 @@ dungeonList['Cave of Being'] = new Dungeon('Cave of Being',
     96500, 201, 35);
     
 dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
-    ['Vulpix', 'Golduck', 'Marill', 'Azumarill', 'Swablu', 'Bronzor', 'Cottonee', 'Petilil', 'Goldeen', 'Basculin (Red-Striped)'],
+    ['Vulpix', 'Golduck', 'Marill', 'Azumarill', 'Swablu', 'Bronzor', 'Cottonee', 'Petilil', 'Goldeen', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -774,7 +774,7 @@ dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
     96500, 201, 35);
     
 dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
-    ['Poliwag', 'Onix', 'Marill', 'Roselia', 'Altaria', 'Banette', 'Buizel', 'Basculin (Red-Striped)', 'Boldore', 'Cottonee', 'Petilil', 'Tranquill', 'Unfezant', 'Gurdurr'],
+    ['Poliwag', 'Onix', 'Marill', 'Roselia', 'Altaria', 'Banette', 'Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Cottonee', 'Petilil', 'Tranquill', 'Unfezant', 'Gurdurr'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -798,7 +798,7 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
     96500, 201, 35);
     
 dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
-    ['Dratini', 'Tranquill', 'Basculin (Red-Striped)', 'Vanillish', 'Sawsbuck (Spring)', 'Beartic', 'Mienfoo', 'Mienshao', 'Golett', 'Golurk'],
+    ['Dratini', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)', 'Beartic', 'Mienfoo', 'Mienshao', 'Golett', 'Golurk'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -821,7 +821,7 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     96500, 201, 35);
     
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
-    ['Goldeen', 'Marill', 'Yanma', 'Vigoroth', 'Toxicroak', 'Gurdurr', 'Palpitoad', 'Swadloon', 'Whirlipede', 'Cottonee', 'Petilil', 'Basculin (Red-Striped)'],
+    ['Goldeen', 'Marill', 'Yanma', 'Vigoroth', 'Toxicroak', 'Gurdurr', 'Palpitoad', 'Swadloon', 'Whirlipede', 'Cottonee', 'Petilil', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -832,7 +832,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     96500, 201, 35);
     
 dungeonList['Wellspring Cave'] = new Dungeon('Wellspring Cave',
-    ['Poliwag', 'Basculin (Red-Striped)', 'Boldore', 'Woobat'],
+    ['Poliwag', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Woobat'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
