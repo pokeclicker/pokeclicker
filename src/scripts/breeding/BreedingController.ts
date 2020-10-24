@@ -213,6 +213,7 @@ class BreedingController {
             case 'attackBonus': return `Attack Bonus: ${Math.floor(pokemon.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100)).toLocaleString('en-US')}`;
             case 'baseAttack': return `Base Attack: ${pokemon.baseAttack.toLocaleString('en-US')}`;
             case 'eggSteps': return `Egg Steps: ${App.game.breeding.getSteps(pokemonData.eggCycles).toLocaleString('en-US')}`;
+            case 'timesHatched': return `Hatches: ${App.game.statistics.pokemonHatched[pokemonData.id]() || 0}`;
         }
     }
 }
