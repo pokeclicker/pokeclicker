@@ -658,12 +658,12 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
     96500, 201, 35);
     
 dungeonList['Lostlorn Forest'] = new Dungeon('Lostlorn Forest',
-    ['Pinsir', 'Roselia', 'Combee', 'Sewaddle', 'Venipede', 'Cottonee', 'Petilil'],
+    ['Roselia', 'Combee', 'Sewaddle', 'Venipede', 'Cottonee', 'Petilil'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
         new DungeonBossPokemon('Heracross', 8000000, 70),
-        new DungeonBossPokemon('Zoroark', 8000000, 70),
+        new DungeonBossPokemon('Pinsir', 8000000, 70),
         new DungeonBossPokemon('Emolga', 8000000, 70),
     ],
     96500, 201, 35);
