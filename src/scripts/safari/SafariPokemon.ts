@@ -6,9 +6,15 @@ class SafariPokemon implements PokemonInterface {
     shiny: boolean;
     baseCatchFactor: number;
     baseEscapeFactor: number;
+
+    // Used for overworld sprites
+    x = 0;
+    y = 0;
+    steps = 0;
+
+    // Affects catch/flee chance
     private _angry: KnockoutObservable<number>;
     private _eating: KnockoutObservable<number>;
-
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
     static readonly list = [
@@ -30,9 +36,16 @@ class SafariPokemon implements PokemonInterface {
         { name: 'Tangela', weight: 4 },
     ];
 
-    static readonly listWeight = SafariPokemon.list.reduce((sum: number, pokemon) => {
-        return sum += pokemon.weight;
-    }, 0);
+    public static listWeight(): number {
+        return SafariPokemon.list.reduce((sum: number, pokemon) => {
+            // double the chance if pokemon has not been captured yet
+            return sum += this.calcPokemonWeight(pokemon);
+        }, 0);
+    }
+
+    public static calcPokemonWeight(pokemon): number {
+        return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
+    }
 
     constructor(name: string) {
         const data = PokemonHelper.getPokemonByName(name);
@@ -97,13 +110,9 @@ class SafariPokemon implements PokemonInterface {
     }
 
     public static random() {
-        const rand = Math.random() * SafariPokemon.listWeight;
+        const rand = Math.random() * SafariPokemon.listWeight();
         let i = 0;
-        for (const pokemon of SafariPokemon.list) {
-            i += pokemon.weight;
-            if (rand < i) {
-                return new SafariPokemon(pokemon.name);
-            }
-        }
+        const pokemon = SafariPokemon.list.find(p => (i += this.calcPokemonWeight(p)) && rand < i);
+        return new SafariPokemon(pokemon.name);
     }
 }
