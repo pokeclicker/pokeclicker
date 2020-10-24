@@ -3,15 +3,12 @@
 class PokemonItem extends CaughtIndicatingItem {
 
     type: GameConstants.PokemonItemType;
-    unlockRequirement: Requirement;
 
     constructor(pokemon: GameConstants.PokemonItemType,
         basePrice: number,
-        currency: GameConstants.Currency = GameConstants.Currency.questPoint,
-        unlockRequirement?: Requirement) {
+        currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
         super(GameConstants.PokemonItemType[pokemon], basePrice, currency);
         this.type = pokemon;
-        this.unlockRequirement = unlockRequirement;
     }
 
     gain() {
@@ -27,14 +24,6 @@ class PokemonItem extends CaughtIndicatingItem {
     }
 
     use() {
-    }
-
-    isAvailable(): boolean {
-        if (!!this.unlockRequirement) {
-            return this.unlockRequirement.isCompleted();
-        } else {
-            return true;
-        }
     }
 
     getCaughtStatus(): CaughtStatus {
@@ -57,6 +46,5 @@ ItemList['Cherubi']              = new PokemonItem(GameConstants.PokemonItemType
 ItemList['Spiritomb']            = new PokemonItem(GameConstants.PokemonItemType.Spiritomb, 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem(GameConstants.PokemonItemType['Meloetta (pirouette)'], 50000);
 
-ItemList['Deoxys (attack)']      = new PokemonItem(GameConstants.PokemonItemType['Deoxys (attack)'], 500, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
-ItemList['Deoxys (defense)']     = new PokemonItem(GameConstants.PokemonItemType['Deoxys (defense)'], 500, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
-ItemList['Deoxys (speed)']       = new PokemonItem(GameConstants.PokemonItemType['Deoxys (speed)'], 500, GameConstants.Currency.battlePoint, new ObtainedPokemonRequirement(pokemonMap.Deoxys));
+// Battle Frontier
+ItemList['Jirachi']          = new PokemonItem(GameConstants.PokemonItemType.Jirachi, 1000, GameConstants.Currency.battlePoint);
