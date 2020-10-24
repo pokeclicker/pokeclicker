@@ -14,7 +14,7 @@ export const ACHIEVEMENT_TICK = 1000;
 export const MIN_LOAD_TIME = 500; // 0.5 Seconds
 export const MAX_LOAD_TIME = 20000; // 20 Seconds
 
-export const MAX_AVAILABLE_REGION = 3; // Sinnoh
+export const MAX_AVAILABLE_REGION = 4; // Sinnoh
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
@@ -343,6 +343,7 @@ export const IceAreas = {
     1: new Set(['Mahogany Town', 'Ice Path', 'Whirl Islands']),
     2: new Set(['Sootopolis City']),
     3: new Set([216, 217, 'Lake Acuity', 'Snowpoint City']),
+    4: new Set([1]),
 };
 
 export const ForestAreas = {
