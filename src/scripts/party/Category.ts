@@ -12,26 +12,15 @@ class PokemonCategories implements Saveable {
     constructor() {}
 
     public static initialize() {
-        this.addCategory('None', '#333');           // dark grey
-        this.addCategory('Red', '#e74c3c');         // red
-        this.addCategory('Red 2', '#c0392b');       // dark red
-        this.addCategory('Blue', '#3498db');        // blue
-        this.addCategory('Blue 2', '#2980b9');      // dark blue
-        this.addCategory('Green', '#2ecc71');       // green
-        this.addCategory('Green 2', '#27ae60');     // dark green
-        this.addCategory('Purple', '#9b59b6');      // purple
-        this.addCategory('Purple 2', '#8e44ad');    // dark purple
-        this.addCategory('Yellow', '#f1c40f');      // yellow
-        this.addCategory('Yellow 2', '#f39c12');      // yellow
-        this.addCategory('Orange', '#e67e22');      // orange
-        this.addCategory('Orange 2', '#d35400');    // dark orange
-        this.addCategory('Turquoise', '#1abc9c');   // turquoise
-        this.addCategory('Turquoise 2', '#16a085'); // dark turquoise
+        this.addCategory('None', '#333');        // dark grey
+        this.addCategory('Favorite', '#e74c3c'); // red
     }
 
     public static reset() {
         App.game.party.caughtPokemon.forEach(p => {
-            p.category = 0;
+            if (p.category) {
+                p.category = 0;
+            }
         });
         this.categories([]);
         this.initialize();
