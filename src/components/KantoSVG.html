@@ -525,7 +525,7 @@
         { name: "Underground Entrance"
         , x: 72, y: 31
         , width: 3, height: 4
-        , databind: "click:function(){Underground.openUndergroundModal()}, attr: { class: Underground.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
         })
      %>
 
