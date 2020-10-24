@@ -8437,7 +8437,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Bonsly', 'Sudowoodo', GameConstants.StoneType.None)],
+        'evolutions': [new LevelEvolution('Bonsly', 'Sudowoodo', 17)],
         'baby': true,
         'base': {
             'hitpoints': 50,
@@ -8456,7 +8456,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 62,
         'catchRate': 145,
-        'evolutions': [new StoneEvolution('Mime Jr.', 'Mr. Mime', GameConstants.StoneType.None)],
+        'evolutions': [new LevelEvolution('Mime Jr.', 'Mr. Mime', 18)],
         'baby': true,
         'base': {
             'hitpoints': 20,
@@ -11202,7 +11202,7 @@ const pokemonList = createPokemonArray(
         'levelType': 4,
         'exp': 60,
         'catchRate': 255,
-        'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 55,
             'attack': 50,
@@ -11939,7 +11939,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 130,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 60,
             'attack': 40,
@@ -12428,6 +12428,7 @@ const pokemonList = createPokemonArray(
         'exp': 72,
         'catchRate': 45,
         'evolutions': [new LevelEvolution('Larvesta', 'Volcarona', 59)],
+        'baby': true,
         'base': {
             'hitpoints': 55,
             'attack': 85,
@@ -13138,7 +13139,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Floette', 'Florges', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Floette', 'Florges', GameConstants.StoneType.Shiny_stone)],
         'base': {
             'hitpoints': 54,
             'attack': 45,
@@ -13313,7 +13314,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 157,
         'catchRate': 90,
-        'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.None)],
+        'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.Dusk_stone)],
         'base': {
             'hitpoints': 59,
             'attack': 110,
@@ -14744,7 +14745,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 102,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Steenee', 'Tsareena', GameConstants.StoneType.None)],
+        'evolutions': [new LevelEvolution('Steenee', 'Tsareena', 28)],
         'base': {
             'hitpoints': 52,
             'attack': 40,
