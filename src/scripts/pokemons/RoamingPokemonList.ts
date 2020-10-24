@@ -35,9 +35,6 @@ RoamingPokemonList.add(GameConstants.Region.johto, new RoamingPokemon(pokemonMap
 // Hoenn
 RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Latios, undefined, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
 RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Latias, undefined, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
-// TODO: these need another way to be obtained
-RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Jirachi, undefined, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
-
 
 // Sinnoh
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Manaphy));

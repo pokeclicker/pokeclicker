@@ -455,6 +455,7 @@ export enum PokemonItemType {
     'Spiritomb',
     'Cherubi',
     'Meloetta (pirouette)',
+    'Jirachi',
 }
 
 export enum PokeBlockColor {
