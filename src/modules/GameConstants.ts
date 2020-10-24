@@ -455,9 +455,7 @@ export enum PokemonItemType {
     'Spiritomb',
     'Cherubi',
     'Meloetta (pirouette)',
-    'Deoxys (attack)',
-    'Deoxys (defense)',
-    'Deoxys (speed)',
+    'Jirachi',
 }
 
 export enum PokeBlockColor {

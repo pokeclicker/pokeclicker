@@ -215,6 +215,18 @@ class Update implements Saveable {
                     saveData.shards.shardWallet[type] += cost;
                 }
             });
+
+            // Award Deoxys forms for completed Battle Frontier milestones
+            const maxBattleFrontierStage = saveData.statistics.battleFrontierHighestStageCompleted;
+            if (maxBattleFrontierStage > 125) {
+                addPokemonToSaveData(saveData, 386.1); // Deoxys (attack)
+            }
+            if (maxBattleFrontierStage > 151) {
+                addPokemonToSaveData(saveData, 386.2); // Deoxys (defense)
+            }
+            if (maxBattleFrontierStage > 175) {
+                addPokemonToSaveData(saveData, 386.3); // Deoxys (speed)
+            }
         },
     };
 
@@ -391,6 +403,21 @@ class Update implements Saveable {
         const end = arr.splice(to);
         arr = [...arr, ...temp, ...end];
         return arr;
+    }
+
+    static addPokemonToSaveData = (saveData, pokemonId) => {
+        const pokemon: PartyPokemon = PokemonFactory.generatePartyPokemon(pokemonId, false);
+        saveData.statistics.pokemonCaptured[pokemonId] = 1;
+        saveData.statistics.totalPokemonCaptured++;
+        saveData.logbook.unshift({
+            date: Date.now(),
+            description: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
+            type: {
+                display: 'success',
+                label: 'CAUGHT',
+            },
+        });
+        saveData.party.caughtPokemon.push(pokemon);
     }
 
     getPlayerData() {
