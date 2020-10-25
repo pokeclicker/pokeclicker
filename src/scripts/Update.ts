@@ -136,7 +136,7 @@ class Update implements Saveable {
             });
         },
 
-        '0.5.8': ({ playerData, saveData }) => {
+        '0.6.0': ({ playerData, saveData }) => {
             // Hardcoded to allow upgrading from an older save, if we change
             // the Routes class in the future. Values are lowest/highest route
             // index
@@ -146,6 +146,8 @@ class Update implements Saveable {
                 hoenn: [101, 134],
                 sinnoh: [201, 230],
             };
+
+            // Re-map route kill statistics
             const result = saveData.statistics.routeKills.reduce((acc, nextValue, nextIndex) => {
                 const [region] = Object.entries(regionRoutes).find(([, check]) => (
                     // Find the region that contains this index
