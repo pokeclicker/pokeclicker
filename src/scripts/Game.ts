@@ -1,3 +1,6 @@
+/// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
+/// <reference path="../declarations/GameHelper.d.ts" />
+
 /**
  * Main game class.
  */
@@ -22,6 +25,7 @@ class Game {
         public oakItems: OakItems,
         public party: Party,
         public shards: Shards,
+        public underground: Underground,
         public farming: Farming,
         public logbook: LogBook,
         public redeemableCodes: RedeemableCodes,
@@ -57,6 +61,7 @@ class Game {
         this.pokeballs.initialize();
         this.keyItems.initialize();
         this.oakItems.initialize();
+        this.underground.initialize();
         this.farming.initialize();
         this.specialEvents.initialize();
         this.load();
@@ -64,8 +69,8 @@ class Game {
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();
         //Safari.load();
-        Underground.energyTick(Underground.getEnergyRegenTime());
-        DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());
+        Underground.energyTick(this.underground.getEnergyRegenTime());
+        DailyDeal.generateDeals(this.underground.getDailyDealsMax(), new Date());
 
         this.gameState = GameConstants.GameState.fighting;
     }
@@ -133,7 +138,7 @@ class Game {
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
                 this.quests.resetRefreshes();
                 this.quests.generateQuestList();
-                DailyDeal.generateDeals(Underground.getDailyDealsMax(), now);
+                DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 Notifier.notify({
                     message: 'It\'s a new day! Your quests and underground deals have been updated.',
                     type: NotificationConstants.NotificationOption.info,
@@ -151,8 +156,8 @@ class Game {
             if (Underground.energyTick() == 0) {
                 // Check completed in case mine is locked out
                 Mine.checkCompleted();
-                Underground.gainEnergy();
-                Underground.energyTick(Underground.getEnergyRegenTime());
+                this.underground.gainEnergy();
+                Underground.energyTick(this.underground.getEnergyRegenTime());
             }
             Underground.counter = 0;
         }

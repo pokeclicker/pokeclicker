@@ -21,7 +21,7 @@
                         <img class="pokeball-smallest"
                             data-bind='attr:{
                                 title:"You have captured all of the Safari Pokémon" + (Safari.completed(true) ? " shiny" : "") + "!",
-                                src:"assets/images/pokeball/Pokeball" + (Safari.completed(true) ? "-shiny" : "") + "-small.png"
+                                src:"assets/images/pokeball/Pokeball" + (Safari.completed(true) ? "-shiny" : "") + ".svg"
                             }'
                         />
                     </span>
@@ -55,9 +55,19 @@
                                 <img class='fit-width' src="assets/images/safari/area1.png" />
                             </div>
 
-                            <div id="safariBody"
-                                class='container-fluid'
-                                data-bind="visible: Safari.inProgress()">
+                            <div style="position: relative;">
+                                <div id="safariBody"
+                                    class='container-fluid'
+                                    data-bind="visible: Safari.inProgress()">
+                                </div>
+                                <!-- ko foreach: Safari.pokemonGrid -->
+                                    <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
+                                    style: {
+                                        backgroundImage: `url('assets/images/dynamic-background/pokemon/${$data.id.toString().padStart(3, '0')}${$data.shiny ? 's' : ''}.png')`,
+                                        top: `${32 * $data.y - 8}px`,
+                                        left: `${32 * $data.x - 4}px`,
+                                    }"></div>
+                                <!-- /ko -->
                             </div>
                         </div>
                     </div>
@@ -72,14 +82,14 @@
                                 <p>
                                     When you have encountered a Pokémon, you will be given 4 options:
                                     <ul>
-                                        <li>Ball: This will throw a pokeball and give you a chance of capturing the Pokémon</li>
+                                        <li>Ball: This will throw a Pokéball and give you a chance of capturing the Pokémon</li>
                                         <li>Rock: Throwing a rock will make the Pokémon more likely to flee, but easier to catch</li>
                                         <li>Bait: Throwing bait will make the Pokémon less likely to flee, but harder to catch</li>
                                         <li>Run: This will end the encounter</li>
                                     </ul>
                                 </p>
                                 <p>After your turn of the encounter, if it did not result in the encounter ending, the wild Pokémon will have a chance of running away.</p>
-                                <p>Your safari exploration will end when you have run out of pokeballs.</p>
+                                <p>Your safari exploration will end when you have run out of Pokéballs.</p>
                             </div>
                         </div>
                     </div>

@@ -2,9 +2,11 @@
 
 class Safari {
     static grid: Array<Array<number>>;
+    static pokemonGrid: KnockoutObservableArray<SafariPokemon> = ko.observableArray([]);
     static player: Point = new Point(12, 20);
     static lastDirection = 'up';
     static nextDirection: string;
+    static steps = 0;
     static walking = false;
     static isMoving = false;
     static queue: Array<string> = [];
@@ -25,6 +27,7 @@ class Safari {
 
     public static load() {
         Safari.grid = [];
+        Safari.pokemonGrid([]);
         Safari.playerXY.x = 0;
         Safari.playerXY.y = 0;
         Safari.lastDirection = 'up';
@@ -32,8 +35,7 @@ class Safari {
         Safari.inProgress(true);
         Safari.balls(this.calculateStartPokeballs());
         for ( let i = 0; i < this.sizeY(); i++) {
-            const row = [...Array(this.sizeX())].map(Number.prototype.valueOf, 0);
-            Safari.grid.push(row);
+            Safari.grid.push(Array(this.sizeX()).fill(0));
         }
 
         Safari.addRandomBody(new FenceBody());
@@ -270,6 +272,8 @@ class Safari {
                 }
             });
             App.game.breeding.progressEggs(1);
+            this.spawnPokemonCheck();
+            this.despawnPokemonCheck();
         } else {
             $('#sprite').css('background', `url('assets/images/safari/walk${direction}.png')`);
             setTimeout(function() {
@@ -282,6 +286,36 @@ class Safari {
                 }
             }, 250);
         }
+    }
+
+    public static spawnPokemonCheck() {
+        this.steps++;
+        if (this.steps % 10 === 0 && Math.round(Math.random())) {
+            this.spawnRandomPokemon();
+        }
+    }
+
+    public static despawnPokemonCheck() {
+        let index = this.pokemonGrid().length;
+        while (index-- > 0) {
+            if (--this.pokemonGrid()[index].steps <= 0) {
+                this.pokemonGrid.splice(index, 1);
+            }
+        }
+    }
+
+    private static spawnRandomPokemon() {
+        const y = Math.floor(Math.random() * this.sizeY());
+        const x = Math.floor(Math.random() * this.sizeX());
+        if (!this.canMove(x, y) || (x == this.playerXY.x && y == this.playerXY.y) || this.pokemonGrid().find(p => p.x === x && p.y === y)) {
+            return;
+        }
+        const pokemon = SafariPokemon.random();
+
+        pokemon.x = x;
+        pokemon.y = y;
+        pokemon.steps = this.sizeX() + this.sizeY() + Math.floor(Math.random() * 21);
+        this.pokemonGrid.push(pokemon);
     }
 
     private static directionToXY(dir: string) {
@@ -331,13 +365,20 @@ class Safari {
     }
 
     private static checkBattle(): boolean {
-        let battle = false;
-        if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
-            battle = Math.random() * GameConstants.SAFARI_BATTLE_CHANCE <= 1;
+        if (Safari.inBattle()) {
+            return false;
         }
-        if (battle && !Safari.inBattle()) {
-            SafariBattle.load();
+        const pokemonOnPlayer = this.pokemonGrid().findIndex(p => p.x === Safari.playerXY.x && p.y === Safari.playerXY.y);
+        if (pokemonOnPlayer >= 0) {
+            SafariBattle.load(this.pokemonGrid()[pokemonOnPlayer]);
+            Safari.pokemonGrid.splice(pokemonOnPlayer, 1);
             return true;
+        }
+        if (Safari.grid[Safari.playerXY.y][Safari.playerXY.x] === 10) {
+            if (Math.random() * GameConstants.SAFARI_BATTLE_CHANCE < 1) {
+                SafariBattle.load();
+                return true;
+            }
         }
         return false;
     }

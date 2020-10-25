@@ -1,4 +1,5 @@
-///<reference path="Pokeball.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="Pokeball.ts" />
 
 class Pokeballs implements Feature {
     name = 'Pokeballs';
