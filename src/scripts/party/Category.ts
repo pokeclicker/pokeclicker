@@ -1,6 +1,7 @@
 type PokemonCategory = {
     name: KnockoutObservable<string>,
     color: KnockoutObservable<string>,
+    subscriber?: KnockoutSubscription,
 }
 
 class PokemonCategories implements Saveable {
@@ -28,11 +29,20 @@ class PokemonCategories implements Saveable {
 
     public static addCategory(name: string, color: string): void {
         this.categories.push({ name: ko.observable(name), color: ko.observable(color) });
+ 
+        // Subscribe to color change event
+        const root = document.documentElement;
+        const index = this.categories().length - 1;
+        this.categories()[index].subscriber = this.categories()[index].color.subscribe(value => {
+            root.style.setProperty(`--pokemon-category-${index + 1}` , value);
+        });
+        // Update the color now
+        this.categories()[index].color.valueHasMutated();
     }
 
-    public static removeCategory(index: number): void {
+    public static removeCategory(index: number, force = false): void {
         // Cannot remove None category
-        if (!index || !this.categories()[index]) {
+        if ((!force && !index) || !this.categories()[index]) {
             return;
         }
 
@@ -44,6 +54,9 @@ class PokemonCategories implements Saveable {
                 p.category--;
             }
         });
+        // Remove subscriber
+        this.categories()[index].subscriber?.dispose();
+        // Remove category
         PokemonCategories.categories.splice(index, 1);
     }
 
@@ -64,7 +77,7 @@ class PokemonCategories implements Saveable {
                 cat.name(category.name);
                 cat.color(category.color);
             } else {
-                PokemonCategories.categories()[index] = { name: ko.observable(category.name), color: ko.observable(category.color) };
+                PokemonCategories.addCategory(category.name, category.color);
             }
         });
     }

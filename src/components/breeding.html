@@ -128,14 +128,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                 <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); BreedingController.filterBreedableList(); App.game.breeding.checkCloseModal();}"></a>
                                 <div class="pokemonCategory dropdown">
-                                    <button data-toggle="dropdown" 
-                                        data-bind="style: {
-                                            background: PokemonCategories.categories()[$data.category].color
-                                        }">
-                                    </button>
+                                    <button data-toggle="dropdown" data-bind="class: `category-${$data.category + 1}`"></button>
                                     <div class="dropdown-menu p-0">
                                         <!-- ko foreach: PokemonCategories.categories -->
-                                        <a class="dropdown-item" href="#" data-bind="text: $data.name, style: { background: $data.color }, click: () => { $parent.category = $index() }">Category</a>
+                                        <a class="dropdown-item category" href="#" data-bind="text: $data.name, click: () => { $parent.category = $index() }">Category</a>
                                         <!-- /ko -->
                                         <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
                                     </div>
