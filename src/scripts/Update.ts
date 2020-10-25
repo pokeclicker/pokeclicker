@@ -148,24 +148,31 @@ class Update implements Saveable {
             };
 
             // Re-map route kill statistics
-            const result = saveData.statistics.routeKills.reduce((acc, nextValue, nextIndex) => {
-                const [region] = Object.entries(regionRoutes).find(([, check]) => (
-                    // Find the region that contains this index
-                    check[0] <= nextIndex && nextIndex <= check[1]
-                )) || ['none'];
-                // Skip over any statistics for the 'none' region that are also 0, since
-                // these are just the gaps in the route numbers
-                if (region === 'none' && nextValue === 0) {
-                    return acc;
-                }
+            if (
+                typeof saveData.statistics.routeKills === 'object' &&
+                Array.isArray(saveData.statistics.routeKills) === false
+            ) {
+                console.log('Skipping 0.6.0 statistics routeKills update because it is already an object');
+            } else {
+                const result = (saveData.statistics.routeKills || []).reduce((acc, nextValue, nextIndex) => {
+                    const [region] = Object.entries(regionRoutes).find(([, check]) => (
+                        // Find the region that contains this index
+                        check[0] <= nextIndex && nextIndex <= check[1]
+                    )) || ['none'];
+                    // Skip over any statistics for the 'none' region that are also 0, since
+                    // these are just the gaps in the route numbers
+                    if (region === 'none' && nextValue === 0) {
+                        return acc;
+                    }
 
-                // Ensure the region has been prepared
-                acc[region] = (acc[region] || {});
-                // Track the route with its number in the statistics
-                acc[region][nextIndex] = nextValue;
-                return acc;
-            }, {});
-            saveData.statistics.routeKills = result;
+                    // Ensure the region has been prepared
+                    acc[region] = (acc[region] || {});
+                    // Track the route with its number in the statistics
+                    acc[region][nextIndex] = nextValue;
+                    return acc;
+                }, {});
+                saveData.statistics.routeKills = result;
+            }
 
             // Migrate the achievements so we don't spam players with notifications
             const renamedAchievements = Object.entries(playerData.achievementsCompleted)
