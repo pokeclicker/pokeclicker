@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="row justify-content-center" data-bind="foreach: [...new Set(ShopHandler.shopObservable().items().map(i => i.currency))]">
                     <h4 class="col-6 col-sm-4 col-lg-2">
-                        <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data], currency: $data, reduced: true }}"></span>
+                        <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data](), currency: $data, reduced: true }}"></span>
                     </h4>
                 </div>
                 <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
@@ -19,7 +19,7 @@
                            css: { active: ShopHandler.selected() == $index() },
                            attr: { disabled: !$data.isAvailable() },
                            tooltip: {
-                              title: $data.description ? $data.name().replace('_', ' ') + '<br/>' + $data.description : '',
+                              title: $data.description ? $data.displayName + '<br/>' + $data.description : '',
                               trigger: 'hover',
                               placement:'bottom',
                               html: true
@@ -30,7 +30,7 @@
                                </span>
                            </knockout>
                            <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/[^\w.-\\(\\)]/g, '_') + '.png' }">
-                           <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
+                           <p data-bind="text: $data.displayName">Item Name</p>
                            <div data-bind="if: $data.isAvailable()">
                                 <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>
                             </div>

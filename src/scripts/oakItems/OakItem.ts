@@ -1,4 +1,6 @@
-///<reference path="../upgrades/ExpUpgrade.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../upgrades/ExpUpgrade.ts" />
+
 class OakItem extends ExpUpgrade {
     defaults = {
         level: 0,

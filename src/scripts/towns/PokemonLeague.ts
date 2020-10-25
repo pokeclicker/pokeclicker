@@ -34,8 +34,8 @@ TownList['Indigo Plateau Kanto'] = new PokemonLeague(
     'Indigo Plateau Kanto',
     GameConstants.Region.kanto,
     [
-        new RouteKillRequirement(10, 23),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road')),
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 23),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road')),
     ],
     indigoPlateauShop,
     ['Elite Lorelei', 'Elite Bruno', 'Elite Agatha', 'Elite Lance', 'Champion Blue']
@@ -45,7 +45,7 @@ TownList['Indigo Plateau Kanto'] = new PokemonLeague(
 TownList['Indigo Plateau Johto'] = new PokemonLeague(
     'Indigo Plateau Johto',
     GameConstants.Region.johto,
-    [new RouteKillRequirement(10, 27)],
+    [new RouteKillRequirement(10, GameConstants.Region.johto, 27)],
     indigoPlateauShop,
     ['Elite Will', 'Elite Koga', 'Elite Bruno2', 'Elite Karen', 'Champion Lance']
 );
@@ -55,8 +55,8 @@ TownList['Pokemon League Hoenn'] = new PokemonLeague(
     'Pokemon League Hoenn',
     GameConstants.Region.hoenn,
     [
-        new RouteKillRequirement(10, 128),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Hoenn')),
+        new RouteKillRequirement(10, GameConstants.Region.hoenn, 128),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Hoenn')),
     ],
     indigoPlateauShop,
     ['Elite Sidney', 'Elite Phoebe', 'Elite Glacia', 'Elite Drake', 'Champion Wallace']
@@ -67,8 +67,8 @@ TownList['Pokemon League Sinnoh'] = new PokemonLeague(
     'Pokemon League Sinnoh',
     GameConstants.Region.sinnoh,
     [
-        new RouteKillRequirement(10, 223),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Sinnoh')),
+        new RouteKillRequirement(10, GameConstants.Region.sinnoh, 223),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Sinnoh')),
     ],
     indigoPlateauShop,
     ['Elite Aaron', 'Elite Bertha', 'Elite Flint', 'Elite Lucian', 'Champion Cynthia']
@@ -79,8 +79,8 @@ TownList['Pokemon League Unova'] = new PokemonLeague(
     'Pokemon League Unova',
     GameConstants.Region.unova,
     [
-        new RouteKillRequirement(10, 23),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Unova')),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 23),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Unova')),
     ],
     indigoPlateauShop,
     ['Elite Shauntal', 'Elite Marshal', 'Elite Grimsley', 'Elite Caitlin', 'Champion Iris']
@@ -92,10 +92,10 @@ TownList['Pokemon League Kalos'] = new PokemonLeague(
     GameConstants.Region.kalos,
     [
         new OneFromManyRequirement([
-            new RouteKillRequirement(10, 21),
-            new RouteKillRequirement(10, 22),
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 21),
+            new RouteKillRequirement(10, GameConstants.Region.kalos, 22),
         ]),
-        new ClearDungeonRequirement(1, Statistics.getDungeonIndex('Victory Road Kalos')),
+        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos')),
     ],
     indigoPlateauShop,
     ['Elite Malva', 'Elite Siebold', 'Elite Wikstrom', 'Elite Drasna', 'Champion Diantha']

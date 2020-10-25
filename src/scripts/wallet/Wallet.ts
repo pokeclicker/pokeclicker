@@ -1,14 +1,17 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+
 class Wallet implements Feature {
     name = 'Wallet';
     saveKey = 'wallet';
-    currencies: ArrayOfObservables<number>;
+    currencies: Array<KnockoutObservable<number>>;
 
     defaults = {
         currencies: new Array(GameHelper.enumLength(GameConstants.Currency)).fill(0),
     };
 
     constructor() {
-        this.currencies = new ArrayOfObservables(this.defaults.currencies);
+        this.currencies = this.defaults.currencies.map((v) => ko.observable(v));
     }
 
     public gainMoney(base: number, origin?: string): number {
@@ -70,7 +73,7 @@ class Wallet implements Feature {
 
         this.addAmount(new Amount(points, Currency.farmPoint));
     }
-    
+
     public gainBattlePoints(base: number) {
         let bPoints = base;
 
@@ -87,11 +90,11 @@ class Wallet implements Feature {
             amount.amount = 1;
         }
 
-        this.currencies[amount.currency] += amount.amount;
+        GameHelper.incrementObservable(this.currencies[amount.currency], amount.amount);
     }
 
     public hasAmount(amount: Amount) {
-        return this.currencies[amount.currency] >= amount.amount;
+        return this.currencies[amount.currency]() >= amount.amount;
     }
 
     public loseAmount(amount: Amount) {
@@ -100,7 +103,7 @@ class Wallet implements Feature {
             amount.amount = 1;
         }
 
-        this.currencies[amount.currency] -= amount.amount;
+        GameHelper.incrementObservable(this.currencies[amount.currency], -amount.amount);
     }
 
 
@@ -116,19 +119,18 @@ class Wallet implements Feature {
             return;
         }
 
-        if (json['currencies'] == null) {
-            this.currencies = new ArrayOfObservables(this.defaults.currencies);
-        } else {
+        this.currencies = this.defaults.currencies.map((v) => ko.observable(v));
+        if (json['currencies'] !== null) {
             const currenciesJson = json.currencies;
             currenciesJson.forEach((value, index) => {
-                this.currencies[index] = value;
+                this.currencies[index](value || 0);
             });
         }
     }
 
     toJSON(): Record<string, any> {
         return {
-            currencies: [...this.currencies],
+            currencies: this.currencies.map(ko.unwrap),
         };
     }
 

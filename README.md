@@ -12,13 +12,20 @@ You can reach out on discord to discuss your ideas and how to implement them: ht
 
 # Developer instructions
 
+## Editor/IDE setup
+
+We have an [EditorConfig](https://editorconfig.org/) and linting configured, to help everyone write similar code. You will find our recommended plugins for VSCode below, however you should be able to find a plugin for other IDEs as well.
+
+* [EditorConfig](https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig)
+* [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
 ## Building from Source
 
 First make sure you have git and npm available as command-line utilities (so you should install Git and NodeJS if you don't have them already).
 
 Open a command line interface in the directory that contains this README file, and use the following command to install PokéClicker's other dependencies locally:
 ```cmd
-npm install
+npm clean-install
 ```
 
 Then finally, run the following command in the command line interface to start a browser running PokéClicker.
@@ -33,9 +40,11 @@ This means you don't need to compile TypeScript yourself. Gulp will do this for 
 ## Use Google cloud shell _(alternative)_
 [![Google Cloud Shell](https://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/pokeclicker/pokeclicker&git_branch=develop&page=editor&open_in_editor=README.md)
 ```cmd
-npm install
+npm clean-install
 npm start
 ```
+Click the [Web Preview](https://cloud.google.com/shell/docs/using-web-preview) Button and select port `3001` from the displayed menu.
+Cloud Shell opens the preview URL on its proxy service in a new browser window.
 
 ## Deploying a new version to Github Pages
 Before deploying, check that the game compiles and starts up without errors. Then run:

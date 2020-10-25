@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class Mine {
     public static sizeX = 25;
     public static sizeY = 12;
@@ -33,7 +35,7 @@ class Mine {
         Mine.grid = tmpGrid;
         Mine.rewardGrid = tmpRewardGrid;
 
-        for (let i = 0; i < Underground.getMaxItems(); i++) {
+        for (let i = 0; i < App.game.underground.getMaxItems(); i++) {
             const item = UndergroundItem.getRandomItem();
             const x = Mine.getRandomCoord(this.sizeX, item.space[0].length);
             const y = Mine.getRandomCoord(this.sizeY, item.space.length);
@@ -44,6 +46,7 @@ class Mine {
         }
         Mine.loadingNewLayer = false;
         Mine.itemsFound(0);
+
         Underground.showMine();
     }
 
@@ -107,11 +110,11 @@ class Mine {
             return;
         }
 
-        if (Underground.energy < Underground.PROSPECT_ENERGY) {
+        if (App.game.underground.energy < Underground.PROSPECT_ENERGY) {
             return;
         }
 
-        Underground.energy -= Underground.PROSPECT_ENERGY;
+        App.game.underground.energy -= Underground.PROSPECT_ENERGY;
 
         const rewards = Mine.rewardSummary();
         Mine.updateProspectResult(rewards);
@@ -170,7 +173,7 @@ class Mine {
     }
 
     private static hammer(x: number, y: number) {
-        if (Underground.energy >= Underground.HAMMER_ENERGY) {
+        if (App.game.underground.energy >= Underground.HAMMER_ENERGY) {
             if (x < 0 || y < 0) {
                 return;
             }
@@ -184,29 +187,30 @@ class Mine {
                 }
             }
             if (hasMined) {
-                Underground.energy = Underground.energy - Underground.HAMMER_ENERGY;
+                App.game.underground.energy -= Underground.HAMMER_ENERGY;
             }
         }
     }
 
     private static chisel(x: number, y: number) {
         if (Mine.grid[x][y]() > 0) {
-            if (Underground.energy >= Underground.CHISEL_ENERGY) {
+            if (App.game.underground.energy >= Underground.CHISEL_ENERGY) {
                 this.breakTile(x, y, 2);
-                Underground.energy = Underground.energy - Underground.CHISEL_ENERGY;
+                App.game.underground.energy -= Underground.CHISEL_ENERGY;
             }
         }
     }
 
-    private static bomb(tiles = 10) {
-        if (Underground.energy >= Underground.CHISEL_ENERGY * tiles) {
+    private static bomb() {
+        const tiles = App.game.underground.getBombEfficiency();
+        if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             for (let i = 1; i < tiles; i++) {
                 const x = GameConstants.randomIntBetween(1, this.sizeY - 2);
                 const y = GameConstants.randomIntBetween(1, this.sizeX - 2);
                 this.breakTile(x, y, 2);
             }
 
-            Underground.energy -= Underground.CHISEL_ENERGY * tiles;
+            App.game.underground.energy -= Underground.BOMB_ENERGY;
         }
     }
 
@@ -280,10 +284,14 @@ class Mine {
         return true;
     }
 
-    private static checkCompleted() {
+    public static checkCompleted() {
         if (Mine.itemsFound() >= Mine.itemsBuried()) {
-            setTimeout(Mine.completed, 1500);
+            // Don't resolve queued up calls to checkCompleted() until completed() is finished and sets loadingNewLayer to false
+            if (Mine.loadingNewLayer == true) {
+                return;
+            }
             Mine.loadingNewLayer = true;
+            setTimeout(Mine.completed, 1500);
             GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
 
             if (this.skipsRemaining() < this.maxSkips) {
@@ -303,11 +311,7 @@ class Mine {
     }
 
     public static loadSavedMine(mine) {
-        this.grid = mine.grid.map((row) => {
-            return row.map((num) => {
-                return ko.observable(num);
-            });
-        });
+        this.grid = mine.grid.map(row => row.map(val => ko.observable(val))),
         this.rewardGrid = mine.rewardGrid;
         this.itemsFound(mine.itemsFound);
         this.itemsBuried(mine.itemsBuried);
@@ -317,11 +321,17 @@ class Mine {
         this.skipsRemaining(mine.skipsRemaining ?? this.maxSkips);
 
         Underground.showMine();
+        // Check if completed in case the mine was saved after completion and before creating a new mine
+        // TODO: Remove setTimeout after TypeScript module migration is complete. Needed so that `App.game` is available
+        setTimeout(Mine.checkCompleted, 0);
     }
 
-    public static serialize() {
-        const mine = {
-            grid: this.grid,
+    public static save(): Record<string, any> {
+        if (this.grid == null) {
+            Mine.loadMine();
+        }
+        const mineSave = {
+            grid: this.grid.map(row => row.map(val => val())),
             rewardGrid: this.rewardGrid,
             itemsFound: this.itemsFound(),
             itemsBuried: this.itemsBuried(),
@@ -329,8 +339,7 @@ class Mine {
             prospectResult: this.prospectResult(),
             skipsRemaining: this.skipsRemaining(),
         };
-
-        return ko.toJSON(mine);
+        return mineSave;
     }
 }
 

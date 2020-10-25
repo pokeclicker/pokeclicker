@@ -1,5 +1,7 @@
-class GymRunner {
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/enums/Badges.d.ts" />
 
+class GymRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
 
@@ -44,15 +46,13 @@ class GymRunner {
     }
 
     private static hideGif() {
-        $('#gymCountdownView').fadeOut(300);
-        $('#gymGo').hide();
+        $('#gymCountdown').hide();
     }
 
     public static resetGif() {
-        const $img = $('#gymGo');
-        $img.show();
+        $('#gymCountdown').show();
         setTimeout(function () {
-            $img.attr('src', 'assets/gifs/go.gif');
+            $('#gymGo').attr('src', 'assets/gifs/go.gif');
         }, 0);
     }
 
@@ -87,7 +87,7 @@ class GymRunner {
         if (!App.game.badgeCase.hasBadge(gym.badgeReward)) {
             gym.firstWinReward();
         }
-        GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym.town)]);
+        GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym.town)]);
         player.town(TownList[gym.town]);
         App.game.gameState = GameConstants.GameState.town;
     }
@@ -100,10 +100,10 @@ class GymRunner {
 
 document.addEventListener('DOMContentLoaded', function (event) {
     $('#receiveBadgeModal').on('hidden.bs.modal', function () {
-        if (GymBattle.gym.badgeReward == BadgeCase.Badge.Soul) {
+        if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
             App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket);
         }
-        if (GymBattle.gym.badgeReward == BadgeCase.Badge.Earth) {
+        if (GymBattle.gym.badgeReward == BadgeEnums.Earth) {
             App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Shard_case);
         }
     });
