@@ -216,7 +216,6 @@ class Update implements Saveable {
                 }
             });
 
-            // TODO: Test this update
             // Award Deoxys forms for completed Battle Frontier milestones
             const maxBattleFrontierStage = saveData.statistics.battleFrontierHighestStageCompleted;
             if (maxBattleFrontierStage > 125) {
@@ -407,10 +406,14 @@ class Update implements Saveable {
     }
 
     static addPokemonToSaveData = (saveData, pokemonId) => {
+        if (saveData.party.caughtPokemon.filter(p => p.id === pokemonId).length > 0) {
+            return;
+        }
+
         const pokemon: PartyPokemon = PokemonFactory.generatePartyPokemon(pokemonId, false);
         saveData.statistics.pokemonCaptured[pokemonId] = 1;
         saveData.statistics.totalPokemonCaptured++;
-        saveData.logbook.unshift({
+        saveData.logbook.logs.unshift({
             date: Date.now(),
             description: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
             type: {
