@@ -43,7 +43,7 @@ class AchievementHandler {
 
     public static filterAchievementList(retainPage?: boolean) {
         this.achievementListFiltered(this.achievementList.filter((a) => (
-              a.region <= player.highestRegion() &&
+            a.region <= player.highestRegion() &&
               (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
               (this.filter.type()   == 'all' ? true : a.property.constructor.name == this.filter.type()) &&
               (this.filter.region() == 'all' ? true : a.region == +this.filter.region())
