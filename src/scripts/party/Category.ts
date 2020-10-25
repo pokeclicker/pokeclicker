@@ -23,7 +23,10 @@ class PokemonCategories implements Saveable {
                 p.category = 0;
             }
         });
-        this.categories([]);
+        let categoryIndex = this.categories().length;
+        while (categoryIndex-- > 0) {
+            this.removeCategory(categoryIndex, true);
+        }
         this.initialize();
     }
 
