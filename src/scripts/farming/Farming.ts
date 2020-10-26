@@ -796,6 +796,7 @@ class Farming implements Feature {
 
         let change = false;
 
+        // Updating Berries
         this.plotList.forEach(plot => {
             if (plot.update(timeToReduce)) {
                 change = true;
@@ -806,6 +807,7 @@ class Farming implements Feature {
             }
         });
 
+        // Running Mutations
         this.counter += GameConstants.TICK_TIME;
         if (this.counter >= GameConstants.MUTATION_TICK) {
             this.mutations.forEach(mutation => {
@@ -815,6 +817,21 @@ class Farming implements Feature {
                 }
             });
             this.counter = 0;
+        }
+
+        // Wandering Pokemon
+        this.counter += GameConstants.TICK_TIME;
+        let wanderPokemon = undefined;
+        if (this.counter >= GameConstants.WANDER_TICK) {
+            for (let i = 0;i < App.game.farming.plotList.length;i++) {
+                const plot = App.game.farming.plotList[i];
+                const pokemon = plot.generateWanderPokemon();
+                if (pokemon) {
+                    notifications.add(FarmNotificationType.Wander);
+                    wanderPokemon = pokemon;
+                    break;
+                }
+            }
         }
 
         if (change) {

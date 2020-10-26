@@ -264,6 +264,14 @@ class Plot implements Saveable {
         }
     }
 
+    generateWanderPokemon(): string | undefined {
+        if (Math.random() < GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]()) {
+            // TODO: HLXII Generate wandering pokemon
+            return 'POKEMON';
+        }
+        return undefined;
+    }
+
     /**
      * Gets the growth multiplier for this plot
      */

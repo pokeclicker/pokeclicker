@@ -14,6 +14,7 @@ export const ACHIEVEMENT_TICK = 1000;
 export const MIN_LOAD_TIME = 500; // 0.5 Seconds
 export const MAX_LOAD_TIME = 20000; // 20 Seconds
 export const MUTATION_TICK = 1000;
+export const WANDER_TICK = 1500;
 
 export const MAX_AVAILABLE_REGION = 3; // Sinnoh
 
@@ -64,6 +65,8 @@ export const SURPRISE_MULCH_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
 export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
+
+export const WANDER_RATE = 0.00001;
 
 export const BerryColor = [
     '#EE8130', // Red

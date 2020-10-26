@@ -5,4 +5,5 @@ enum FarmNotificationType {
     Replanted,
     Dropped,
     MulchRanOut,
+    Wander,
 }
