@@ -19,12 +19,13 @@ class KantoBerryMasterNPC extends NPC {
     }
 
     public static generateMessage(date: Date): string {
+        if (App.game.farming.unlockedBerries.every(berry => berry())) {
+            return 'The disciple has surpassed the master. I have nothing more to teach you.';
+        }
+
         SeededRand.seedWithDate(date);
-
-        const possibleMutations = App.game.farming.mutations.filter((mut) => mut.unlocked && mut.showHint);
-
+        const possibleMutations = App.game.farming.mutations.filter((mut) => mut.unlocked && mut.showHint && !App.game.farming.unlockedBerries[mut.mutatedBerry]());
         const idx = Math.floor(possibleMutations.length * SeededRand.next());
-
         return possibleMutations[idx].hint;
     }
 

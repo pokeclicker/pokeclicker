@@ -737,12 +737,13 @@ class Farming implements Feature {
 
         // Maranga
 
+
         // Liechi
-
+        this.mutations.push(new FieldMutation(.000001, BerryType.Liechi, BerryType.Passho));
         // Ganlon
-
+        this.mutations.push(new FieldMutation(.000001, BerryType.Ganlon, BerryType.Shuca));
         // Salac
-
+        this.mutations.push(new FieldMutation(.000001, BerryType.Salac, BerryType.Coba));
         // Petaya
 
         // Apicot
@@ -751,7 +752,7 @@ class Farming implements Feature {
 
         // Starf
 
-        //Enigma
+        // Enigma
 
 
         //#endregion
@@ -1014,13 +1015,11 @@ class Farming implements Feature {
             });
         }
         this.gainBerry(berry, amount);
-        this.unlockBerry(berry);
     }
 
     gainBerry(berry: BerryType, amount = 1) {
         GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
-
-
+        this.unlockBerry(berry);
     }
 
     hasBerry(berry: BerryType) {

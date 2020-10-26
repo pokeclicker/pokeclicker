@@ -31,7 +31,7 @@
                                         style="margin-bottom: 5px;">
                                         <li class="list-group-item list-group-item-action seed-list-item"
                                             data-bind="click: function() {FarmController.selectedBerry = $data}">
-                                            <img src="" width="24px"
+                                            <img src="" height="24px"
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
                                                 css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
                                             <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : '???'"></span>
