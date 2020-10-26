@@ -756,6 +756,14 @@ class Farming implements Feature {
 
         // Enigma
         this.mutations.push(new EnigmaMutation(.00001));
+        // Enigma Mutations
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Liechi, BerryType.Passho, [BerryType.Enigma], { showHint: false }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Ganlon, BerryType.Shuca, [BerryType.Enigma], { showHint: false }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Salac, BerryType.Coba, [BerryType.Enigma], { showHint: false }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Petaya, BerryType.Payapa, [BerryType.Enigma], { showHint: false }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Apicot, BerryType.Chilan, [BerryType.Enigma], { showHint: false }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Lansat, BerryType.Roseli, [BerryType.Enigma], { showHint: false }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Starf, BerryType.Babiri, [BerryType.Enigma], { showHint: false }));
 
         //#endregion
 
