@@ -135,14 +135,17 @@ class Game {
         Save.counter += GameConstants.TICK_TIME;
         if (Save.counter > GameConstants.SAVE_TICK) {
             const now = new Date();
+            // Check if it's a new day
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
-                this.quests.resetRefreshes();
-                this.quests.generateQuestList();
+                // Give the player a free quest refresh
+                this.quests.freeRefresh(true);
+                //Refresh the Underground deals
                 DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 Notifier.notify({
-                    message: 'It\'s a new day! Your quests and underground deals have been updated.',
+                    title: 'It\'s a new day!',
+                    message: 'Your Underground deals have been updated.<br/>You can refresh your Quest list for free.',
                     type: NotificationConstants.NotificationOption.info,
-                    timeout: 1e4,
+                    timeout: 3e4,
                 });
             }
             player._lastSeen = Date.now();
