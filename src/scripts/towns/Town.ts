@@ -1254,6 +1254,9 @@ const NimbasaCityShop = new Shop([
     ItemList['Grass_egg'],
     ItemList['Electric_egg'],
 ]);
+const DriftveilCityShop = new Shop([
+    ItemList['Zorua'],
+]);
 const MistraltonCityShop = new Shop([
     ItemList['Ultraball'],
     ItemList['Thunder_stone'],
@@ -1352,6 +1355,7 @@ TownList['Driftveil City'] = new Town(
             new RouteKillRequirement(10, GameConstants.Region.unova,5),
             new GymBadgeRequirement(BadgeEnums.Bolt),
         ],
+        shop: DriftveilCityShop,
     }
 );
 TownList['Mistralton City'] = new Town(

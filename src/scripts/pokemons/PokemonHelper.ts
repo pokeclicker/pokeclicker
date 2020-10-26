@@ -211,7 +211,7 @@ class PokemonHelper {
 
     public static getPokemonSafariChance(pokemonName: string): number {
         const safariPokemon = SafariPokemon.list.find(p => p.name == pokemonName);
-        return safariPokemon ? +((safariPokemon.weight / SafariPokemon.listWeight) * 100).toFixed(2) : 0;
+        return safariPokemon ? +((SafariPokemon.calcPokemonWeight(safariPokemon) / SafariPokemon.listWeight()) * 100).toFixed(2) : 0;
     }
 
     public static getPokemonPrevolution(pokemonName: string): Array<Evolution> {
