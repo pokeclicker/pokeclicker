@@ -31,7 +31,13 @@ class ShopHandler {
 
     public static increaseAmount(n: number) {
         const input = $("input[name='amountOfItems']");
-        const newVal = (parseInt(input.val().toString()) || 0) + n;
+        const newVal = (parseInt(input.val().toString(), 10) || 0) + n;
+        input.val(newVal > 1 ? newVal : 1).change();
+    }
+
+    public static multiplyAmount(n: number) {
+        const input = $("input[name='amountOfItems']");
+        const newVal = (parseInt(input.val().toString(), 10) || 0) * n;
         input.val(newVal > 1 ? newVal : 1).change();
     }
 

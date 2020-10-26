@@ -1,15 +1,15 @@
-///<reference path="CaughtStatus.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+/// <reference path="CaughtStatus.ts" />
+
 class Party implements Feature {
     name = 'Pokemon Party';
     saveKey = 'party';
 
     _caughtPokemon: KnockoutObservableArray<PartyPokemon>;
-    shinyPokemon: ObservableArrayProxy<number>;
-
 
     defaults = {
         caughtPokemon: [],
-        shinyPokemon: [],
     };
 
     hasMaxLevelPokemon: KnockoutComputed<boolean>;
@@ -17,8 +17,6 @@ class Party implements Feature {
 
     constructor() {
         this._caughtPokemon = ko.observableArray([]);
-        this.shinyPokemon = new ObservableArrayProxy(this.defaults.shinyPokemon);
-
 
         this.hasMaxLevelPokemon = ko.pureComputed(() => {
             for (let i = 0; i < this.caughtPokemon.length; i++) {
@@ -32,14 +30,14 @@ class Party implements Feature {
     }
 
     gainPokemonById(id: number, shiny = false, suppressNotification = false) {
-        this.gainPokemon(PokemonFactory.generatePartyPokemon(id), shiny, suppressNotification);
+        this.gainPokemon(PokemonFactory.generatePartyPokemon(id, shiny), suppressNotification);
     }
 
-    gainPokemon(pokemon: PartyPokemon, shiny = false, suppressNotification = false) {
+    gainPokemon(pokemon: PartyPokemon, suppressNotification = false) {
         GameHelper.incrementObservable(App.game.statistics.pokemonCaptured[pokemon.id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonCaptured);
 
-        if (shiny) {
+        if (pokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonCaptured[pokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonCaptured);
             // Add all shiny catches to the log book
@@ -49,9 +47,17 @@ class Party implements Feature {
                 return;
             }
             // Notify if not already caught
-            Notifier.notify({ message: `✨ You have captured a shiny ${pokemon.name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.new_catch });
-            // Add to caught shiny list
-            this.shinyPokemon.push(pokemon.id);
+            Notifier.notify({
+                message: `✨ You have captured a shiny ${pokemon.name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.new_catch,
+            });
+
+            // Already caught (non shiny) we need to update the party pokemon directly
+            if (this.alreadyCaughtPokemon(pokemon.id, false)) {
+                this.getPokemon(pokemon.id).shiny = true;
+                return;
+            }
         }
 
         // Already caught (non shiny)
@@ -60,7 +66,11 @@ class Party implements Feature {
         }
 
         if (!suppressNotification) {
-            Notifier.notify({ message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`, type: GameConstants.NotificationOption.success, sound: GameConstants.NotificationSound.new_catch });
+            Notifier.notify({
+                message: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.new_catch,
+            });
         }
 
         App.game.logbook.newLog(LogBookTypes.CAUGHT, `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`);
@@ -94,23 +104,10 @@ class Party implements Feature {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false): number {
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
-            let multiplier = 1;
-            const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
-            if (!ignoreRegionMultiplier && nativeRegion != player.region && nativeRegion != GameConstants.Region.none) {
-                // Pokemon only retain a % of their total damage in other regions based on highest region.
-                multiplier = this.getRegionAttackMultiplier();
-            }
-            if (!pokemon.breeding) {
-                if (Battle.enemyPokemon() == null || type1 == PokemonType.None) {
-                    attack += pokemon.attack * multiplier;
-                } else {
-                    const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-                    attack += pokemon.attack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, Battle.enemyPokemon().type1, Battle.enemyPokemon().type2) * multiplier;
-                }
-            }
+            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack);
         }
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xAttack)()) {
@@ -118,6 +115,26 @@ class Party implements Feature {
         }
 
         return Math.round(attack);
+    }
+
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false): number {
+        let multiplier = 1, attack = 0;
+        const pAttack = useBaseAttack ? pokemon.baseAttack : pokemon.attack;
+        const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+        if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
+            // Pokemon only retain a % of their total damage in other regions based on highest region.
+            multiplier = this.getRegionAttackMultiplier();
+        }
+        if (includeBreeding || !pokemon.breeding) {
+            if (type1 == PokemonType.None) {
+                attack = pAttack * multiplier;
+            } else {
+                const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+                attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
+            }
+        }
+
+        return attack;
     }
 
     public getRegionAttackMultiplier(highestRegion = player.highestRegion()): number {
@@ -144,7 +161,7 @@ class Party implements Feature {
     alreadyCaughtPokemon(id: number, shiny = false) {
         const pokemon = this.caughtPokemon.find(p => p.id == id);
         if (pokemon) {
-            return (!shiny || this.shinyPokemon.includes(id));
+            return (!shiny || pokemon.shiny);
         }
         return false;
     }
@@ -152,7 +169,7 @@ class Party implements Feature {
     calculateClickAttack(): number {
         // Base power
         // Shiny pokemon help with a 50% boost
-        let clickAttack = Math.pow(this.caughtPokemon.length + (this.shinyPokemon.length / 2) + 1, 1.4);
+        let clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
 
         clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
 
@@ -179,8 +196,6 @@ class Party implements Feature {
             partyPokemon.fromJSON(caughtPokemonSave[i]);
             this._caughtPokemon.push(partyPokemon);
         }
-
-        this.shinyPokemon = new ObservableArrayProxy<number>(json['shinyPokemon'] ?? this.defaults.shinyPokemon);
     }
 
     initialize(): void {
@@ -189,7 +204,6 @@ class Party implements Feature {
     toJSON(): Record<string, any> {
         return {
             caughtPokemon: this._caughtPokemon().map(x => x.toJSON()),
-            shinyPokemon: this.shinyPokemon.map(x => x),
         };
     }
 

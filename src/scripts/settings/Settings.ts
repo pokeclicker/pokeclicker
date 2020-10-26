@@ -1,14 +1,13 @@
-/// <reference path="Setting.ts" />
-/// <reference path="BooleanSetting.ts"/>
-/// <reference path="MultipleChoiceSetting.ts"/>
-/// <reference path="RangeSetting.ts"/>
-/// <reference path="SortOptions.ts"/>
+/// <reference path="../../declarations/settings/Setting.d.ts" />
+/// <reference path="../../declarations/settings/BooleanSetting.d.ts" />
+/// <reference path="../../declarations/settings/RangeSetting.d.ts" />
+/// <reference path="./SortOptions.ts" />
 
 class Settings {
-    static list: Setting[] = [];
+    static list: Setting<any>[] = [];
 
 
-    static add(setting: Setting) {
+    static add(setting: Setting<any>) {
         if (!this.getSetting(setting.name)) {
             this.list.push(setting);
         }
@@ -31,7 +30,7 @@ class Settings {
 
     }
 
-    static getSetting(name: string): Setting {
+    static getSetting(name: string): Setting<any> {
         for (let i = 0; i < this.list.length; i++) {
             if (this.list[i].name == name) {
                 return this.list[i];
@@ -55,7 +54,7 @@ class Settings {
 
 //Display settings
 Settings.add(
-    new MultipleChoiceSetting('theme', 'Theme',
+    new Setting<string>('theme', 'Theme',
         [
             new SettingOption('Cerulean', 'cerulean'),
             new SettingOption('Cosmo', 'cosmo'),
@@ -82,40 +81,77 @@ Settings.add(
         'yeti'
     )
 );
-Settings.add(new MultipleChoiceSetting('breedingDisplay', 'Breeding progress display:',
+Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display:',
     [
         new SettingOption('Percentage', 'percentage'),
         new SettingOption('Step count', 'stepCount'),
     ],
     'percentage'
 ));
+Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
+    [
+        new SettingOption('+10, +100', 'original'),
+        new SettingOption('+100, +1000', 'bigplus'),
+        new SettingOption('×10, ÷10', 'multiplication'),
+    ],
+    'original'
+));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
+Settings.add(new Setting<string>('backgroundImage', 'Background image:',
+    [
+        new SettingOption('Day', 'background-day'),
+        new SettingOption('Night', 'background-night'),
+        new SettingOption('Dynamic', 'background-dynamic'),
+    ],
+    'background-day'
+));
+Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation:',
+    [
+        new SettingOption('None', 'none'),
+        new SettingOption('Almost & fully ready', 'almost'),
+        new SettingOption('Fully ready', 'full'),
+    ],
+    'full'
+));
+Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
+    [
+        new SettingOption('Never', 'never'),
+        new SettingOption('Egg Slots Full', 'egg'),
+        new SettingOption('Queue Slots Full', 'queue'),
+    ],
+    'queue'
+));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 
 
 // Sound settings
-Object.values(GameConstants.NotificationSound).forEach(sound => {
+Object.values(NotificationConstants.NotificationSound).forEach(sound => {
     Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
 });
 Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 
 // Notification settings
-Object.values(GameConstants.NotificationSetting).forEach(setting => {
+Object.values(NotificationConstants.NotificationSetting).forEach(setting => {
     Settings.add(setting);
 });
 
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
-const sortsettings = Object.keys(SortOptionConfigs).map(
-    function(opt) {
-        return new SettingOption(SortOptionConfigs[opt].text, parseInt(opt));
-    }
-);
-Settings.add(new MultipleChoiceSetting('partySort', 'Sort:',
+const sortsettings = Object.keys(SortOptionConfigs).map((opt) => (
+    new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
+));
+Settings.add(new Setting<number>('partySort', 'Sort:',
     sortsettings,
     SortOptions.id
 ));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
+
+/*
+ * SUBSCRIBERS
+ */
+Settings.getSetting('backgroundImage').observableValue.subscribe(newValue => {
+    newValue == 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
+});

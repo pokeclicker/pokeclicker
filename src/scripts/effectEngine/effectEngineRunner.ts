@@ -11,7 +11,12 @@ class EffectEngineRunner {
                 this.updateFormattedTimeLeft(itemName);
             }
             if (player.effectList[itemName]() == 5) {
-                Notifier.notify({ message: `The ${GameConstants.humanifyString(itemName)}s effect is about to wear off!`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.battle_item_timer, setting: GameConstants.NotificationSetting.battle_item_timer });
+                Notifier.notify({
+                    message: `The ${GameConstants.humanifyString(itemName)}s effect is about to wear off!`,
+                    type: NotificationConstants.NotificationOption.warning,
+                    sound: NotificationConstants.NotificationSound.battle_item_timer,
+                    setting: NotificationConstants.NotificationSetting.battle_item_timer,
+                });
             }
         }
     }
@@ -30,8 +35,10 @@ class EffectEngineRunner {
 
     public static updateFormattedTimeLeft(itemName: string) {
         const times = GameConstants.formatTime(player.effectList[itemName]()).split(':');
-        if (+times[0] > 0) {
-            return player.effectTimer[itemName]('60:00+');
+        if (+times[0] > 99) {
+            return player.effectTimer[itemName]('99h+');
+        } else if (+times[0] > 0) {
+            return player.effectTimer[itemName](`${+times[0]}h`);
         }
         times.shift();
         player.effectTimer[itemName](times.join(':'));

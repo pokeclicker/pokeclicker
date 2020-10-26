@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <div class="row justify-content-center" data-bind="foreach: [...new Set(ShopHandler.shopObservable().items().map(i => i.currency))]">
                     <h4 class="col-6 col-sm-4 col-lg-2">
-                        <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data], currency: $data, reduced: true }}"></span>
+                        <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data](), currency: $data, reduced: true }}"></span>
                     </h4>
                 </div>
                 <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
@@ -17,16 +17,22 @@
                        <button class="shopItem clickable btn btn-block btn-secondary"
                            data-bind="click: function() {ShopHandler.setSelected($index())},
                            css: { active: ShopHandler.selected() == $index() },
-                           attr: { disabled: !$data.isAvailable() }">
+                           attr: { disabled: !$data.isAvailable() },
+                           tooltip: {
+                              title: $data.description ? $data.displayName + '<br/>' + $data.description : '',
+                              trigger: 'hover',
+                              placement:'bottom',
+                              html: true
+                            }">
                            <knockout data-bind="if: ($data instanceof CaughtIndicatingItem)">
                                <span style="position: absolute; top: 15px; right: 20px;" 
                                      data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
                                </span>
                            </knockout>
                            <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/[^\w.-\\(\\)]/g, '_') + '.png' }">
-                           <p data-bind="text: GameConstants.humanifyString(name())">Item Name</p>
+                           <p data-bind="text: $data.displayName">Item Name</p>
                            <div data-bind="if: $data.isAvailable()">
-                                <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency}}"></span>
+                                <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>
                             </div>
                             <div data-bind="ifnot: $data.isAvailable()">
                                 <span>Sold Out</span>
@@ -45,15 +51,33 @@
                         </div>
                         <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
                                 value="1" min="1" required name="amountOfItems"
-                                oninput="ShopHandler.amount(parseInt($(this).val().toString()) || 0);"
-                                onchange="ShopHandler.amount(parseInt($(this).val().toString()) || 0);" title=""/>
+                                oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
+                                onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
                         <div class="input-group-append">
-                            <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
-                                +10
-                            </button>
-                            <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
-                                +100
-                            </button>
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
+                                    +10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
+                                    +100
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(10)">
+                                    &times;10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(0.1)">
+                                    &div;10
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
+                                    +100
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(1000)">
+                                    +1000
+                                </button>
+                            <!-- /ko -->
                             <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
                                 Max
                             </button>

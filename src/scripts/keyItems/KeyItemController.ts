@@ -6,7 +6,10 @@ class KeyItemController {
     static showGainModal(item: KeyItems.KeyItem) {
         this.latestGainedItem = item;
         $('.modal').modal('hide');
-        $('#keyItemModal').modal('show');
+        $('#keyItemModal').modal({
+            backdrop: 'static',
+            keyboard: false,
+        });
     }
 
     public static hover(item: KeyItems.KeyItem) {

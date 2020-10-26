@@ -10,6 +10,7 @@ class UndergroundLayersMinedRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `${this.requiredValue} layers need to be mined in the Underground.`;
+        const suffix = (this.requiredValue > 1) ? 's' : '';
+        return `${this.requiredValue} layer${suffix} need to be mined in the Underground.`;
     }
 }

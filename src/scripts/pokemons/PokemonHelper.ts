@@ -1,5 +1,5 @@
 ///<reference path="PokemonList.ts"/>
-///<reference path="../GameConstants.ts"/>
+///<reference path="../GameConstants.d.ts"/>
 
 enum PokemonLocationType {
     Route,
@@ -100,6 +100,14 @@ class PokemonHelper {
         return region >= 0 ? region : GameConstants.Region.none;
     }
 
+    public static calcUniquePokemonsByRegion(region: GameConstants.Region) {
+        if (region != 0) {
+            return GameConstants.TotalPokemonsPerRegion[region] - Number(GameConstants.TotalPokemonsPerRegion[region - 1]);
+        } else {
+            return GameConstants.TotalPokemonsPerRegion[region];
+        }
+    }
+
     public static getPokemonRegionRoutes(pokemonName: string) {
         const regionRoutes = {};
         Routes.regionRoutes.forEach(routeData => {
@@ -131,9 +139,13 @@ class PokemonHelper {
         const dungeons = [];
         Object.entries(dungeonList).forEach(([dungeonName, dungeon]) => {
             // Dungeon Boss
-            const isBoss = dungeon.bossList.find(boss => boss.name == pokemonName);
-            if (isBoss) {
-                dungeons.push(dungeonName);
+            const boss = dungeon.bossList.find(boss => boss.name == pokemonName);
+            if (boss) {
+                const data = {
+                    dungeon: dungeonName,
+                    requirements: boss.requirement?.hint(),
+                };
+                dungeons.push(data);
             }
         });
         return dungeons;
@@ -165,8 +177,13 @@ class PokemonHelper {
     public static getPokemonRoamingRegions(pokemonName: string): Array<string> {
         const regions = [];
         Object.entries(RoamingPokemonList.list).forEach(([region, pokemonArr]) => {
-            if (pokemonArr.find(r => r.pokemon.name == pokemonName)) {
-                regions.push(+region);
+            const pokemon = pokemonArr.find(r => r.pokemon.name == pokemonName);
+            if (pokemon) {
+                const data = {
+                    region: +region,
+                    requirements: pokemon.unlockRequirement?.hint(),
+                };
+                regions.push(data);
             }
         });
         return regions;
@@ -194,7 +211,7 @@ class PokemonHelper {
 
     public static getPokemonSafariChance(pokemonName: string): number {
         const safariPokemon = SafariPokemon.list.find(p => p.name == pokemonName);
-        return safariPokemon ? +((safariPokemon.weight / SafariPokemon.listWeight) * 100).toFixed(2) : 0;
+        return safariPokemon ? +((SafariPokemon.calcPokemonWeight(safariPokemon) / SafariPokemon.listWeight()) * 100).toFixed(2) : 0;
     }
 
     public static getPokemonPrevolution(pokemonName: string): Array<Evolution> {

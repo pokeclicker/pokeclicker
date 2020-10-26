@@ -2,14 +2,18 @@ class KeyItem {
     private _name: KnockoutObservable<KeyItems.KeyItem>;
     private _description: KnockoutObservable<string>;
     private _isUnlocked: KnockoutObservable<boolean>;
+    private _displayName: string;
 
     public unlockReq: KnockoutComputed<boolean>;
     public unlocker: KnockoutSubscription;
+    public unlockReward: () => void;
 
-    constructor(name: KeyItems.KeyItem, description: string, unlockReq?, isUnlocked?: boolean) {
+    constructor(name: KeyItems.KeyItem, description: string, unlockReq?: () => boolean, isUnlocked = false, unlockReward = () => {}, displayName?: string) {
         this._name = ko.observable(name);
         this._description = ko.observable(description);
+        this._displayName = displayName;
         this._isUnlocked = ko.observable(isUnlocked ?? false);
+        this.unlockReward = unlockReward;
 
         if (this.isUnlocked || unlockReq == undefined) {
             this.unlockReq = null;
@@ -32,7 +36,7 @@ class KeyItem {
     }
 
     get displayName() {
-        return GameConstants.humanifyString(KeyItems.KeyItem[this.name]);
+        return this._displayName ?? GameConstants.humanifyString(KeyItems.KeyItem[this.name]);
     }
 
     get name() {
