@@ -103,7 +103,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Kanto Route 5', GameConstants.Region.kanto, 5,
     new RoutePokemon({
-        land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Mewoth', 'Abra'],
+        land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Jigglypuff', 'Meowth', 'Abra'],
     }),
     [
         // Need to reach bills house
