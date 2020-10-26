@@ -101,18 +101,21 @@ class Egg implements Saveable {
         const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
         // If the party pokemon exist, increase it's damage output
         if (partyPokemon) {
-            if (partyPokemon.evolutions !== undefined) {
-                partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
-            }
+            // Increase attack
+            partyPokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
+            partyPokemon.attack = partyPokemon.calculateAttack();
+
+            // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {
+                if (partyPokemon.evolutions !== undefined) {
+                    partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
+                }
                 partyPokemon.exp = 0;
                 partyPokemon.level = 1;
                 partyPokemon.breeding = false;
+                partyPokemon.level = partyPokemon.calculateLevelFromExp();
+                partyPokemon.checkForLevelEvolution();
             }
-            partyPokemon.level = partyPokemon.calculateLevelFromExp();
-            partyPokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
-            partyPokemon.attack = partyPokemon.calculateAttack();
-            partyPokemon.checkForLevelEvolution();
         }
 
         const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
