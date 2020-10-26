@@ -14,6 +14,8 @@ class Farming implements Feature {
 
     readonly AMOUNT_OF_PLOTS = 25;
 
+    static readonly PLOT_WIDTH = 5;
+
     defaults = {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
@@ -753,7 +755,7 @@ class Farming implements Feature {
         // Starf
 
         // Enigma
-
+        this.mutations.push(new EnigmaMutation(.00001));
 
         //#endregion
 

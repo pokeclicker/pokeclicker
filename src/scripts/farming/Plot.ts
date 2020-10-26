@@ -426,18 +426,18 @@ class Plot implements Saveable {
     public static findNearPlots(index: number, filter?: (n: number) => boolean): number[] {
         const plots = [];
 
-        const colIdx = index % 5;
-        const rowIdx = (index - colIdx) / 5;
+        const colIdx = index % Farming.PLOT_WIDTH;
+        const rowIdx = (index - colIdx) / Farming.PLOT_WIDTH;
 
         for (let r = rowIdx - 1;r <= rowIdx + 1;r++) {
             for (let c = colIdx - 1;c <= colIdx + 1;c++) {
-                if (r < 0 || r > 4 || c < 0 || c > 4) {
+                if (r < 0 || r > Farming.PLOT_WIDTH - 1 || c < 0 || c >  Farming.PLOT_WIDTH - 1) {
                     continue;
                 }
                 if (r === rowIdx && c === colIdx) {
                     continue;
                 }
-                const idx = r * 5 + c;
+                const idx = r * Farming.PLOT_WIDTH + c;
                 if (filter && !filter(idx)) {
                     continue;
                 }
@@ -446,6 +446,32 @@ class Plot implements Saveable {
         }
 
         return plots;
+    }
+
+    /**
+     * Finds the plot indices that are directly next to the plot (aka a plus sign)
+     * @param index The plot index
+     * @param filter An optional filter callback for filtering out indices
+     */
+    public static findPlusPlots(index: number, filter?: (n: number) => boolean): number[] {
+        const plots = [];
+
+        const colIdx = index % Farming.PLOT_WIDTH;
+        const rowIdx = (index - colIdx) / Farming.PLOT_WIDTH;
+
+        const possiblePlots = [[rowIdx - 1, colIdx], [rowIdx, colIdx - 1], [rowIdx, colIdx + 1], [rowIdx + 1, colIdx]];
+
+        return possiblePlots.filter(plot => {
+            const [r, c] = plot;
+            if (r < 0 || r > Farming.PLOT_WIDTH - 1 || c < 0 || c >  Farming.PLOT_WIDTH - 1) {
+                return false;
+            }
+            const idx = r * Farming.PLOT_WIDTH + c;
+            if (filter && !filter(idx)) {
+                return false;
+            }
+            return true;
+        }).map(plot => plot[0] * Farming.PLOT_WIDTH + plot[1]);
     }
 
     get berryData(): Berry {
