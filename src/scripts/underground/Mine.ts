@@ -284,10 +284,14 @@ class Mine {
         return true;
     }
 
-    private static checkCompleted() {
+    public static checkCompleted() {
         if (Mine.itemsFound() >= Mine.itemsBuried()) {
-            setTimeout(Mine.completed, 1500);
+            // Don't resolve queued up calls to checkCompleted() until completed() is finished and sets loadingNewLayer to false
+            if (Mine.loadingNewLayer == true) {
+                return;
+            }
             Mine.loadingNewLayer = true;
+            setTimeout(Mine.completed, 1500);
             GameHelper.incrementObservable(App.game.statistics.undergroundLayersMined);
 
             if (this.skipsRemaining() < this.maxSkips) {
@@ -317,6 +321,9 @@ class Mine {
         this.skipsRemaining(mine.skipsRemaining ?? this.maxSkips);
 
         Underground.showMine();
+        // Check if completed in case the mine was saved after completion and before creating a new mine
+        // TODO: Remove setTimeout after TypeScript module migration is complete. Needed so that `App.game` is available
+        setTimeout(Mine.checkCompleted, 0);
     }
 
     public static save(): Record<string, any> {
