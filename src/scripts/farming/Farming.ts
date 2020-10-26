@@ -415,197 +415,195 @@ class Farming implements Feature {
         //#region Second Generation
 
         // Persim
-        this.mutations.push(new NearBerryMutation(.001, BerryType.Persim,
+        this.mutations.push(new GrowNearBerryMutation(.001, BerryType.Persim,
             [
-                {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
+                BerryType.Pecha,
+                BerryType.Oran,
             ]));
         // Razz
-        this.mutations.push(new NearBerryMutation(.0009, BerryType.Razz,
+        this.mutations.push(new GrowNearBerryMutation(.0009, BerryType.Razz,
             [
-                {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
+                BerryType.Cheri,
+                BerryType.Leppa,
             ]));
         // Bluk
-        this.mutations.push(new NearBerryMutation(.0008, BerryType.Bluk,
+        this.mutations.push(new GrowNearBerryMutation(.0008, BerryType.Bluk,
             [
-                {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
+                BerryType.Chesto,
+                BerryType.Leppa,
             ]));
         // Nanab
-        this.mutations.push(new NearBerryMutation(.0007, BerryType.Nanab,
+        this.mutations.push(new GrowNearBerryMutation(.0007, BerryType.Nanab,
             [
-                {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
+                BerryType.Pecha,
+                BerryType.Aspear,
             ]));
         // Wepear
-        this.mutations.push(new NearBerryMutation(.0006, BerryType.Wepear,
+        this.mutations.push(new GrowNearBerryMutation(.0006, BerryType.Wepear,
             [
-                {berryType: BerryType.Rawst, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
+                BerryType.Rawst,
+                BerryType.Oran,
             ]));
         // Pinap
-        this.mutations.push(new NearBerryMutation(.0005, BerryType.Pinap,
+        this.mutations.push(new GrowNearBerryMutation(.0005, BerryType.Pinap,
             [
-                {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
+                BerryType.Sitrus,
+                BerryType.Aspear,
             ]));
 
         // Figy
-        this.mutations.push(new FlavorMutation(.0009, BerryType.Figy,
-            [25, 0, 0, 0, 0], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get too spicy!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Cheri]();
-            }));
+        this.mutations.push(new GrowNearFlavorMutation(.0009, BerryType.Figy,
+            [25, 0, 0, 0, 0], 0.5, {
+                hint: 'I\'ve heard that a Berry will appear if its surroundings get too spicy!',
+                unlockReq: function(): boolean {
+                    return App.game.farming.unlockedBerries[BerryType.Cheri]();
+                },
+            }
+        ));
         // Wiki
-        this.mutations.push(new FlavorMutation(.0008, BerryType.Wiki,
-            [0, 25, 0, 0, 0], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get too dry!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Chesto]();
-            }));
+        this.mutations.push(new GrowNearFlavorMutation(.0008, BerryType.Wiki,
+            [0, 25, 0, 0, 0], 0.5, {
+                hint: 'I\'ve heard that a Berry will appear if its surroundings get too dry!',
+                unlockReq: function(): boolean {
+                    return App.game.farming.unlockedBerries[BerryType.Cheri]();
+                },
+            }
+        ));
         // Mago
-        this.mutations.push(new FlavorMutation(.0007, BerryType.Mago,
-            [0, 0, 25, 0, 0], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get too sweet!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Pecha]();
-            }));
+        this.mutations.push(new GrowNearFlavorMutation(.0007, BerryType.Mago,
+            [0, 0, 25, 0, 0], 0.5, {
+                hint: 'I\'ve heard that a Berry will appear if its surroundings get too sweet!',
+                unlockReq: function(): boolean {
+                    return App.game.farming.unlockedBerries[BerryType.Pecha]();
+                },
+            }
+        ));
         // Aguav
-        this.mutations.push(new FlavorMutation(.0006, BerryType.Aguav,
-            [0, 0, 0, 25, 0], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get too bitter!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Rawst]();
-            }));
+        this.mutations.push(new GrowNearFlavorMutation(.0006, BerryType.Aguav,
+            [0, 0, 0, 25, 0], 0.5, {
+                hint: 'I\'ve heard that a Berry will appear if its surroundings get too bitter!',
+                unlockReq: function(): boolean {
+                    return App.game.farming.unlockedBerries[BerryType.Rawst]();
+                },
+            }
+        ));
         // Iapapa
-        this.mutations.push(new FlavorMutation(.0005, BerryType.Iapapa,
-            [0, 0, 0, 0, 25], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get too sour!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Aspear]();
-            }));
+        this.mutations.push(new GrowNearFlavorMutation(.0005, BerryType.Iapapa,
+            [0, 0, 0, 0, 25], 0.5, {
+                hint: 'I\'ve heard that a Berry will appear if its surroundings get too sour!',
+                unlockReq: function(): boolean {
+                    return App.game.farming.unlockedBerries[BerryType.Aspear]();
+                },
+            }
+        ));
 
         // Lum
-        this.mutations.push(new NearBerryMutation(.0001, BerryType.Lum,
+        this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Lum,
             [
-                {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Rawst, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
-            ],
-            'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by unique ripe Berry plants!'));
+                BerryType.Cheri,
+                BerryType.Chesto,
+                BerryType.Pecha,
+                BerryType.Rawst,
+                BerryType.Aspear,
+                BerryType.Leppa,
+                BerryType.Oran,
+                BerryType.Sitrus,
+            ], {
+                hint: 'I\'ve heard that there\'s a legendary Berry that only appears when fully surrounded by unique ripe Berry plants!',
+            }));
 
         //#endregion
 
         //#region Third Generation
 
         // Pomeg
-        this.mutations.push(new NearBerryMutation(.00005, BerryType.Pomeg,
+        this.mutations.push(new GrowNearBerryMutation(.00005, BerryType.Pomeg,
             [
-                {berryType: BerryType.Iapapa, berryStage: PlotStage.Bloom},
-                {berryType: BerryType.Mago, berryStage: PlotStage.Bloom},
+                BerryType.Iapapa,
+                BerryType.Mago,
             ]));
         // Kelpsy
-        this.mutations.push(new NearBerryMutation(.00005, BerryType.Kelpsy,
+        this.mutations.push(new GrowNearBerryMutation(.00005, BerryType.Kelpsy,
             [
-                {berryType: BerryType.Chesto, berryStage: PlotStage.Bloom},
-                {berryType: BerryType.Persim, berryStage: PlotStage.Bloom},
+                BerryType.Chesto,
+                BerryType.Persim,
             ]));
         // Qualot
-        this.mutations.push(new FlavorMutation(.00005, BerryType.Qualot,
-            [10, 0, 10, 0, 10], true,
-            'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy, a little sweet, and a little sour at the same time.',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
-                App.game.farming.unlockedBerries[BerryType.Pecha]() &&
-                App.game.farming.unlockedBerries[BerryType.Aspear]();
+        this.mutations.push(new GrowNearFlavorMutation(.00005, BerryType.Qualot,
+            [10, 0, 10, 0, 10], 0, {
+                hint: 'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy, a little sweet, and a little sour at the same time.',
+                unlockReq: function(): boolean {
+                    return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
+                    App.game.farming.unlockedBerries[BerryType.Pecha]() &&
+                    App.game.farming.unlockedBerries[BerryType.Aspear]();
+                },
             }));
         // Hondew
-        this.mutations.push(new FlavorMutation(.00004, BerryType.Hondew,
-            [10, 10, 0, 10, 10], true,
-            'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted like a little bit of everything except sweet.',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
-                App.game.farming.unlockedBerries[BerryType.Chesto]() &&
-                App.game.farming.unlockedBerries[BerryType.Rawst]() &&
-                App.game.farming.unlockedBerries[BerryType.Aspear]();
+        this.mutations.push(new GrowNearFlavorMutation(.00004, BerryType.Hondew,
+            [10, 10, 0, 10, 10], 0, {
+                hint: 'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted like a little bit of everything except sweet.',
+                unlockReq: function(): boolean {
+                    return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
+                    App.game.farming.unlockedBerries[BerryType.Chesto]() &&
+                    App.game.farming.unlockedBerries[BerryType.Rawst]() &&
+                    App.game.farming.unlockedBerries[BerryType.Aspear]();
+                },
             }));
         // Grepa
-        this.mutations.push(new NearBerryMutation(.00005, BerryType.Grepa,
+        this.mutations.push(new GrowNearBerryMutation(.00005, BerryType.Grepa,
             [
-                {berryType: BerryType.Aguav, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Figy, berryStage: PlotStage.Berry},
+                BerryType.Aguav,
+                BerryType.Figy,
             ]));
         // Tamato
-        this.mutations.push(new ParasiteMutation(.00005, BerryType.Tamato,
-            BerryType.Lum, BerryType.Sitrus,
-            'I\'ve heard that if you grow a Lum Berry plant near a Sitrus one, the Lum has a chance of transforming the Sitrus plant into something new!'));
+        this.mutations.push(new EvolveNearBerryMutation(.00005, BerryType.Tamato, BerryType.Sitrus, [BerryType.Lum]));
 
         // Cornn
-        this.mutations.push(new NearBerryMutation(.00003, BerryType.Cornn,
+        this.mutations.push(new GrowNearBerryMutation(.00003, BerryType.Cornn,
             [
-                {berryType: BerryType.Leppa, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Bluk, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Wiki, berryStage: PlotStage.Berry},
+                BerryType.Leppa,
+                BerryType.Bluk,
+                BerryType.Wiki,
             ]));
-
         // Magost
-        this.mutations.push(new NearBerryMutation(.00003, BerryType.Magost,
+        this.mutations.push(new GrowNearBerryMutation(.00003, BerryType.Magost,
             [
-                {berryType: BerryType.Pecha, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Nanab, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Mago, berryStage: PlotStage.Berry},
+                BerryType.Pecha,
+                BerryType.Nanab,
+                BerryType.Mago,
             ]));
         // Rabuta
-        this.mutations.push(new ParasiteMutation(.00003, BerryType.Rabuta,
-            BerryType.Aguav, BerryType.Aspear,
-            'I\'ve heard that if you grow a Aguav Berry plant near a Aspear one, the Aguav has a chance of transforming the Aspear plant into something new!'));
+        this.mutations.push(new EvolveNearBerryMutation(.00003, BerryType.Rabuta, BerryType.Aspear, [BerryType.Aguav]));
         // Nomel
-        this.mutations.push(new NearBerryMutation(.00003, BerryType.Nomel,
-            [{berryType: BerryType.Pinap, berryStage: PlotStage.Berry}]));
+        this.mutations.push(new GrowNearBerryMutation(.00003, BerryType.Nomel,
+            [BerryType.Pinap]));
         // Spelon
-        this.mutations.push(new FlavorMutation(.00002, BerryType.Spelon,
-            [130, 0, 0, 0, 0], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get extremely spicy!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Tamato]();
+        this.mutations.push(new EvolveNearFlavorMutation(.00002, BerryType.Spelon, BerryType.Tamato,
+            [130, 0, 0, 0, 0], 0.2, {
+                hint: 'I\'ve heard that a Tamato berry will change if its surroundings get extremely spicy!',
             }));
         // Pamtre
-        this.mutations.push(new FlavorMutation(.00002, BerryType.Pamtre,
-            [0, 130, 0, 0, 0], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get extremely dry!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Cornn]();
+        this.mutations.push(new EvolveNearFlavorMutation(.00002, BerryType.Pamtre, BerryType.Cornn,
+            [0, 130, 0, 0, 0], 0.2, {
+                hint: 'I\'ve heard that a Cornn berry will change if its surroundings get extremely dry!',
             }));
         // Pamtre Overgrow
-        this.mutations.push(new NearBerryMutation(.00004, BerryType.Pamtre,
-            [{berryType: BerryType.Pamtre, berryStage: PlotStage.Berry}], undefined, undefined, false));
+        this.mutations.push(new GrowNearBerryMutation(.00004, BerryType.Pamtre,
+            [BerryType.Pamtre], { showHint: false }));
         // Watmel
-        this.mutations.push(new FlavorMutation(.00002, BerryType.Watmel,
-            [0, 0, 130, 0, 0], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get extremely sweet!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Magost]();
+        this.mutations.push(new EvolveNearFlavorMutation(.00002, BerryType.Watmel, BerryType.Magost,
+            [0, 0, 130, 0, 0], 0.2, {
+                hint: 'I\'ve heard that a Magost berry will change if its surroundings get extremely sweet!',
             }));
         // Durin
-        this.mutations.push(new FlavorMutation(.00002, BerryType.Durin,
-            [0, 0, 0, 130, 0], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get extremely bitter!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Rabuta]();
+        this.mutations.push(new EvolveNearFlavorMutation(.00002, BerryType.Durin, BerryType.Rabuta,
+            [0, 0, 0, 130, 0], 0.2, {
+                hint: 'I\'ve heard that a a Rabuta berry will change if its surroundings get extremely bitter!',
             }));
         // Belue
-        this.mutations.push(new FlavorMutation(.00002, BerryType.Belue,
-            [0, 0, 0, 0, 130], undefined,
-            'I\'ve heard that a Berry will appear if its surroundings get extremely sour!',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Nomel]();
+        this.mutations.push(new EvolveNearFlavorMutation(.00002, BerryType.Belue, BerryType.Nomel,
+            [0, 0, 0, 0, 130], 0.2, {
+                hint: 'I\'ve heard that a Nomel berry will change if its surroundings get extremely sour!',
             }));
 
         //#endregion
@@ -613,133 +611,115 @@ class Farming implements Feature {
         //#region Fourth Generation
 
         // Occa
-        this.mutations.push(new NearBerryMutation(.00001, BerryType.Occa,
+        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Occa,
             [
-                {berryType: BerryType.Cheri, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Figy, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Tamato, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Spelon, berryStage: PlotStage.Berry},
+                BerryType.Cheri,
+                BerryType.Figy,
+                BerryType.Tamato,
+                BerryType.Spelon,
             ]));
         // Occa Overgrow
-        this.mutations.push(new ParasiteMutation(.00004, BerryType.Occa,
-            BerryType.Occa, undefined, undefined, undefined, false));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Occa, undefined, [BerryType.Occa], { showHint: false }));
         // Passho
-        this.mutations.push(new NearBerryMutation(.00001, BerryType.Passho,
+        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Passho,
             [
-                {berryType: BerryType.Oran, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Chesto, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Kelpsy, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Coba, berryStage: PlotStage.Berry},
+                BerryType.Oran,
+                BerryType.Chesto,
+                BerryType.Kelpsy,
+                BerryType.Coba,
             ]));
         // Wacan
-        this.mutations.push(new NearBerryMutation(.00001, BerryType.Wacan,
+        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Wacan,
             [
-                {berryType: BerryType.Aspear, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Sitrus, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Pinap, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Nomel, berryStage: PlotStage.Berry},
+                BerryType.Aspear,
+                BerryType.Sitrus,
+                BerryType.Pinap,
+                BerryType.Nomel,
             ]));
         // Rindo
-        this.mutations.push(new FlavorMutation(.00001, BerryType.Rindo,
-            [10, 0, 0, 15, 0], true,
-            'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Aguav]() &&
-                App.game.farming.unlockedBerries[BerryType.Cheri]();
+        this.mutations.push(new GrowNearFlavorMutation(.00001, BerryType.Rindo,
+            [10, 0, 0, 15, 0], 0, {
+                hint: 'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
+                unlockReq: function(): boolean {
+                    return App.game.farming.unlockedBerries[BerryType.Aguav]() &&
+                    App.game.farming.unlockedBerries[BerryType.Cheri]();
+                },
             }));
         // Rindo Overgrow
-        this.mutations.push(new NearBerryMutation(.00004, BerryType.Rindo,
-            [{berryType: BerryType.Rindo, berryStage: PlotStage.Berry}], undefined, undefined, false));
+        this.mutations.push(new GrowNearBerryMutation(.00004, BerryType.Rindo,
+            [BerryType.Rindo], {showHint: false }));
         // Yache
-        this.mutations.push(new StrictNearMutation(.00001, BerryType.Yache, [{berryType: BerryType.Passho, berryStage: PlotStage.Berry}]));
+        this.mutations.push(new EvolveNearBerryStrictMutation(.00001, BerryType.Yache, BerryType.Passho, {}, {
+            hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
+        }));
         // Chople
-        this.mutations.push(new EvolutionMutation(.00001, BerryType.Chople, BerryType.Spelon, function() {
-            return App.game.oakItems.isActive(OakItems.OakItem.Blaze_Cassette);
-        }, 'I\'ve heard that using the Blaze Cassette will cause Spelon Berries to change!', function() {
-            return App.game.oakItems.isUnlocked(OakItems.OakItem.Blaze_Cassette) &&
-            App.game.farming.unlockedBerries[BerryType.Figy]();
-        }));
+        this.mutations.push(new OakMutation(.00001, BerryType.Chople, BerryType.Spelon, OakItems.OakItem.Blaze_Cassette));
         // Kebia
-        this.mutations.push(new EvolutionMutation(.00001, BerryType.Kebia, BerryType.Pamtre, function() {
-            return App.game.oakItems.isActive(OakItems.OakItem.Poison_Barb);
-        }, 'I\'ve heard that using the Poison Barb will cause Pamtre Berries to change!', function() {
-            return App.game.oakItems.isUnlocked(OakItems.OakItem.Poison_Barb) &&
-            App.game.farming.unlockedBerries[BerryType.Pamtre]();
-        }));
+        this.mutations.push(new OakMutation(.00001, BerryType.Kebia, BerryType.Pamtre, OakItems.OakItem.Poison_Barb));
         // Kebia Overgrow
-        this.mutations.push(new ParasiteMutation(.00004, BerryType.Kebia,
-            BerryType.Kebia, undefined, undefined, undefined, false));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Kebia, undefined, [BerryType.Kebia], { showHint: false }));
         // Shuca
-        this.mutations.push(new EvolutionMutation(.00001, BerryType.Shuca, BerryType.Watmel, function() {
-            return App.game.oakItems.isActive(OakItems.OakItem.Sprinklotad);
-        }, 'I\'ve heard that using the Sprinklotad will cause Watmel Berries to change!', function() {
-            return App.game.oakItems.isUnlocked(OakItems.OakItem.Sprinklotad) &&
-            App.game.farming.unlockedBerries[BerryType.Watmel]();
-        }));
+        this.mutations.push(new OakMutation(.00001, BerryType.Shuca, BerryType.Watmel, OakItems.OakItem.Sprinklotad));
         // Coba
-        this.mutations.push(new FlavorMutation(.00001, BerryType.Coba,
-            [0, 10, 0, 15, 0], true,
-            'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
-            function(): boolean {
-                return App.game.farming.unlockedBerries[BerryType.Chesto]() &&
-                App.game.farming.unlockedBerries[BerryType.Aguav]();
+        this.mutations.push(new GrowNearFlavorMutation(.00001, BerryType.Coba,
+            [0, 10, 0, 15, 0], 0, {
+                hint: 'I\'ve heard that a Berry will appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
+                unlockReq: function(): boolean {
+                    return App.game.farming.unlockedBerries[BerryType.Chesto]() &&
+                    App.game.farming.unlockedBerries[BerryType.Aguav]();
+                },
             }));
         // Payapa
-        this.mutations.push(new NearBerryMutation(.00001, BerryType.Payapa,
+        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Payapa,
             [
-                {berryType: BerryType.Wiki, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Bluk, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Cornn, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Pamtre, berryStage: PlotStage.Berry},
+                BerryType.Wiki,
+                BerryType.Bluk,
+                BerryType.Cornn,
+                BerryType.Pamtre,
             ]));
         // Tanga
-        this.mutations.push(new StrictNearMutation(.00001, BerryType.Tanga, [{berryType: BerryType.Rindo, berryStage: PlotStage.Berry}]));
-        // Charti
-        this.mutations.push(new EvolutionMutation(.00001, BerryType.Charti, BerryType.Cornn, function() {
-            return App.game.oakItems.isActive(OakItems.OakItem.Cell_Battery);
-        }, 'I\'ve heard that using the Cell Battery will cause Cornn Berries to change!', function() {
-            return App.game.oakItems.isUnlocked(OakItems.OakItem.Cell_Battery) &&
-            App.game.farming.unlockedBerries[BerryType.Cornn]();
+        let test = {};
+        test[BerryType.Rindo] = 8;
+        this.mutations.push(new GrowNearBerryStrictMutation(.00001, BerryType.Tanga, test, {
+            hint: 'I\'ve heard that a Berry will appear after being surrounded by Ringo Berries!',
         }));
+        // Charti
+        this.mutations.push(new OakMutation(.00001, BerryType.Charti, BerryType.Cornn, OakItems.OakItem.Cell_Battery));
         // Kasib
         // No mutation, will check withers
         // Haban
-        this.mutations.push(new NearBerryMutation(.00001, BerryType.Haban,
+        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Haban,
             [
-                {berryType: BerryType.Occa, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Rindo, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Passho, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Wacan, berryStage: PlotStage.Berry},
+                BerryType.Occa,
+                BerryType.Rindo,
+                BerryType.Passho,
+                BerryType.Wacan,
             ]));
         // Colbur
-        this.mutations.push(new NearBerryMutation(.00001, BerryType.Colbur,
+        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Colbur,
             [
-                {berryType: BerryType.Rabuta, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Kasib, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Payapa, berryStage: PlotStage.Berry},
+                BerryType.Rabuta,
+                BerryType.Kasib,
+                BerryType.Payapa,
             ]));
         // Colbur Overgrow
-        this.mutations.push(new ParasiteMutation(.00001, BerryType.Colbur,
-            BerryType.Colbur, undefined, undefined, undefined, false));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Colbur, undefined, [BerryType.Colbur], { showHint: false }));
         // Babiri
-        this.mutations.push(new StrictNearMutation(.00001, BerryType.Babiri,
-            [
-                {berryType: BerryType.Shuca, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Charti, berryStage: PlotStage.Berry},
-            ]));
-        // Chilan
-        this.mutations.push(new EvolutionMutation(.00004, BerryType.Chilan, BerryType.Chople, function() {
-            return true;
-        }, 'I\'ve heard that Chople Berries randomly turn into a new Berry type!', function() {
-            return App.game.farming.unlockedBerries[BerryType.Chople]();
+        test = {};
+        test[BerryType.Shuca] = 4;
+        test[BerryType.Charti] = 4;
+        this.mutations.push(new GrowNearBerryStrictMutation(.00001, BerryType.Babiri, test, {
+            hint: 'I\'ve heard that a Berry will appear after being surrounded by Shuca and Charti Berries!',
         }));
+        // Chilan
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Chilan, BerryType.Chople, []));
         // Roseli
-        this.mutations.push(new NearBerryMutation(.00001, BerryType.Roseli,
+        this.mutations.push(new GrowNearBerryMutation(.00001, BerryType.Roseli,
             [
-                {berryType: BerryType.Mago, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Nanab, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Magost, berryStage: PlotStage.Berry},
-                {berryType: BerryType.Watmel, berryStage: PlotStage.Berry},
+                BerryType.Mago,
+                BerryType.Nanab,
+                BerryType.Magost,
+                BerryType.Watmel,
             ]));
         //#endregion
 
@@ -1034,14 +1014,13 @@ class Farming implements Feature {
             });
         }
         this.gainBerry(berry, amount);
+        this.unlockBerry(berry);
     }
 
     gainBerry(berry: BerryType, amount = 1) {
         GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
 
-        if (!this.unlockedBerries[berry]()) {
-            this.unlockBerryIndex[berry](true);
-        }
+
     }
 
     hasBerry(berry: BerryType) {
@@ -1054,6 +1033,12 @@ class Farming implements Feature {
 
     canAccess(): boolean {
         return MapHelper.accessToRoute(14, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Wailmer_pail);
+    }
+
+    unlockBerry(berry: BerryType) {
+        if (!this.unlockedBerries[berry]()) {
+            this.unlockedBerries[berry](true);
+        }
     }
 
     toJSON(): Record<string, any> {

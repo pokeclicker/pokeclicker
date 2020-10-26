@@ -1,23 +1,31 @@
+
+interface MutationOptions {
+    hint?: string,
+    unlockReq?: () => boolean,
+    showHint?: boolean,
+}
+
 abstract class Mutation {
 
     mutationChance: number;
     mutatedBerry: BerryType;
-    hint?: string;
+    _hint?: string;
     showHint: boolean;
-    unlockReq?: (() => boolean);
+    _unlockReq?: (() => boolean);
 
-    constructor(mutationChance: number, mutatedBerry: BerryType, hint?: string, unlockReq?: (() => boolean), showHint = true) {
+    constructor(mutationChance: number, mutatedBerry: BerryType, options?: MutationOptions) {
         this.mutationChance = mutationChance;
         this.mutatedBerry = mutatedBerry;
-        this.hint = hint;
-        this.unlockReq = unlockReq;
-        this.showHint = showHint;
+        this._hint = options?.hint;
+        this._unlockReq = options?.unlockReq;
+        this.showHint = options?.showHint ?? true;
     }
 
     /**
-     * Determines whether this mutation can occur based on the status of the farm plots. Returns plot indices that fit requirements
+     * Determines which plots can mutate
+     * @return The plot indices that can mutate
      */
-    abstract checkRequirements(): number[];
+    abstract getMutationPlots(): number[];
 
     /**
      * Handles updating the farm with the mutation
@@ -28,60 +36,40 @@ abstract class Mutation {
     /**
      * Determines whether the player can even cause this mutation
      */
-    checkUnlockReq(forHint = false): boolean {
-        if (forHint && !this.showHint) {
-            return false;
+    get unlocked(): boolean {
+        if (!this._unlockReq) {
+            return true;
         }
-        if (!this.unlockReq) {
-            console.error('Could not find unlock requirement for mutation:', this);
-            return false;
-        }
-        return this.unlockReq();
+        return this._unlockReq();
     }
 
     /**
      * Handles getting the hint for this mutation for the Kanto Berry Master
      */
-    getHint(): string {
-        if (!this.hint) {
-            console.error('Could not find hint for mutation:', this);
+    get hint(): string {
+        if (!this.showHint) {
+            return '';
         }
-        return this.hint ?? '';
-    }
-
-    /**
-     * Checks an individual plot for a MutationRequirement
-     */
-    checkRequirement(index: number, mutationRequirement: MutationReqInterface) {
-        const plot = App.game.farming.plotList[index];
-        if (!plot.isUnlocked) {
-            return false;
+        if (this._hint) {
+            return this._hint;
         }
-        if (plot.berry !== mutationRequirement.berryType) {
-            return false;
-        }
-        if (mutationRequirement.berryStage !== PlotStage.Seed && plot.stage() !== mutationRequirement.berryStage) {
-            return false;
-        }
-        return true;
+        return '';
     }
 
     /**
      * Update tag for mutations. Returns true if this mutation will occur
      */
     mutate(): boolean {
-        if (!this.checkUnlockReq()) {
+        if (!this.unlocked) {
             return false;
         }
 
-        const plots = this.checkRequirements();
+        const plots = this.getMutationPlots();
         if (!plots.length) {
             return false;
         }
 
         let mutated = false;
-
-        console.log(this, plots);
 
         plots.forEach(function(idx) {
             const willMutate =  Math.random() < this.mutationChance * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier();

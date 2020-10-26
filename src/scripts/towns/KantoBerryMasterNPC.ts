@@ -21,11 +21,11 @@ class KantoBerryMasterNPC extends NPC {
     public static generateMessage(date: Date): string {
         SeededRand.seedWithDate(date);
 
-        const possibleMutations = App.game.farming.mutations.filter((mut) => mut.checkUnlockReq(true));
+        const possibleMutations = App.game.farming.mutations.filter((mut) => mut.unlocked && mut.showHint);
 
         const idx = Math.floor(possibleMutations.length * SeededRand.next());
 
-        return possibleMutations[idx].getHint();
+        return possibleMutations[idx].hint;
     }
 
 }
