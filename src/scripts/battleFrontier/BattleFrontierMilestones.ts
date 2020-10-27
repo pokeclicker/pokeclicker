@@ -65,14 +65,12 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(50, 'Small
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(100, 'Deoxys', 'assets/images/items/Premierball.png'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(110, 'Water_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(120, 'Leaf_stone', 10));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(125, 'Deoxys (attack)', 'assets/images/items/Premierball.png'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(130, 'Thunder_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(140, 'Fire_stone', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(150, 'MediumRestore', 200));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(151, 'Deoxys (defense)', 'assets/images/items/Premierball.png'));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(151, 'Deoxys (attack)', 'assets/images/items/Premierball.png'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(160, 'Lucky_egg', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(170, 'Lucky_incense', 100));
-BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(175, 'Deoxys (speed)', 'assets/images/items/Premierball.png'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(180, 'Item_magnet', 100));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(190, 'Mystery_egg', 10));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(200, 'LargeRestore', 100));
@@ -81,4 +79,6 @@ BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(220, 'Leaf
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(230, 'Thunder_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(240, 'Moon_stone', 40));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(250, 'Ultraball', 6400));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(251, 'Deoxys (defense)', 'assets/images/items/Premierball.png'));
 BattleFrontierMilestones.addMilestone(new BattleFrontierMilestoneItem(300, 'Trade_stone', 100));
+BattleFrontierMilestones.addMilestone(new BattleFrontierMilestonePokemon(386, 'Deoxys (speed)', 'assets/images/items/Premierball.png'));
