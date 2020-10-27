@@ -26,7 +26,7 @@ const LogBookTypes: Record<string, LogBookType> = {
     },
     ACHIEVEMENT: {
         display: 'success',
-        label: '\'CHIEVE',
+        label: 'ACHIEVE',
     },
     QUEST_COMPLETE: {
         display: 'success',
