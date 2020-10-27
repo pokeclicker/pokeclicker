@@ -44,6 +44,3 @@ ItemList['Cherubi']              = new PokemonItem(GameConstants.PokemonItemType
 ItemList['Spiritomb']            = new PokemonItem(GameConstants.PokemonItemType.Spiritomb, 5000);
 ItemList['Zorua']                = new PokemonItem(GameConstants.PokemonItemType.Zorua, 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem(GameConstants.PokemonItemType['Meloetta (pirouette)'], 50000);
-
-// Battle Frontier
-ItemList['Jirachi']              = new PokemonItem(GameConstants.PokemonItemType.Jirachi, 1000, GameConstants.Currency.battlePoint);
