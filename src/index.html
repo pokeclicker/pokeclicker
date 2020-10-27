@@ -5,18 +5,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8"/>
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
-    <script type="text/html" id="pokemonListTemplate">
-        <tr data-bind='ifnot: $data.breeding'>
-            <td class="text-nowrap">
-                <img class="smallImage"
-                     data-bind="attr:{ src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"
-                     src=""/>
-                <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
-            </td>
-            <td data-bind="text: attack">Atk</td>
-            <td data-bind="text: level">Lvl</td>
-        </tr>
-    </script>
+    <script>window.featureFlags = $FEATURE_FLAGS;</script>
 
     <!--jQuery-->
     <script src="libs/jquery.min.js"></script>
@@ -26,6 +15,9 @@
 
     <!--Sortable-->
     <script src="libs/Sortable.min.js"></script>
+
+    <!-- New module-based code from './modules' -->
+    <script src="scripts/modules.min.js?v=$VERSION"></script>
 
     <!--Minified scripts-->
     <script src="scripts/script.min.js?v=$VERSION"></script>
@@ -43,6 +35,11 @@
     <!--Motio-->
     <script src="libs/motio.js"></script>
 
+    <!--Intro.js-->
+    <script src="libs/intro.min.js"></script>
+    <link href="libs/introjs.css" rel="stylesheet">
+    <link href="libs/introjs-modern.css" rel="stylesheet">
+
     <!--Minified styles-->
     <link href="styles/styles.min.css?v=$VERSION" rel="stylesheet">
 
@@ -53,22 +50,25 @@
         .loader {
             position: fixed;
             top: 0;
-            height: 100%;
-            width: 100%;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
             background-color: #79c9fa;
             background-size: cover;
             z-index: 9999;
         }
 
         .loader-wrapper {
-            height: 100%;
-            width: 100%;
+            height: 100vh;
+            width: 100vw;
             position: relative;
         }
     </style>
 
 </head>
-<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue()">
+<body class="no-select" data-bind="class: 'no-select ' + Settings.getSetting('theme').observableValue() + ' ' + Settings.getSetting('backgroundImage').observableValue() ">
+@import "dynamicBackground.html"
+
 <div id="toaster"></div>
 <link href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
 
@@ -109,13 +109,18 @@
             <!-- Battle Item container-->
             @import "battleItemContainer.html"
 
-            <!-- Pokemon List container-->
+            <!-- Pokémon List container-->
             @import "pokemonListContainer.html"
 
         </div>
 
         <!--Middle column-->
         <div id="middle-column" class="col-lg-6 col-md-12 order-md-first">
+            <div id="middle-top-sort-column">
+                <!-- Achievement Tracker -->
+                @import "achievementTrackerContainer.html"
+            </div>
+
             <div id="battleContainer" class="card sortable-disabled border-secondary mb-3">
 
                 <div class="card-header p-0" data-bind="visible: (App.game.gameState === GameConstants.GameState.fighting ||
@@ -129,20 +134,20 @@
                         <tr>
                             <td width="33.33%">
                                 <span style="display: inline;">
-                                    <img title="Money" src="assets/images/currency/money.png" height="25px">
-                                    <span id="playerMoney" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money].toLocaleString('en-US')">0</span>
+                                    <img title="Money" src="assets/images/currency/money.svg" height="25px">
+                                    <span id="playerMoney" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.money]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline;">
-                                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.png" height="25px">
-                                    <span id="playerMoneyDungeon" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken].toLocaleString('en-US')">0</span>
+                                    <img title="Dungeon Tokens&#013;&#010;Gained by capturing Pokémon" src="assets/images/currency/dungeonToken.svg" height="25px">
+                                    <span id="playerMoneyDungeon" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.dungeonToken]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                             <td width="33.33%">
                                 <span style="display: inline;">
-                                    <img title="Quest points" src="assets/images/currency/questPoint.png" height="25px">
-                                    <span id="playerMoneyQuest" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint].toLocaleString('en-US')">0</span>
+                                    <img title="Quest points" src="assets/images/currency/questPoint.svg" height="25px">
+                                    <span id="playerMoneyQuest" data-bind="text: App.game.wallet.currencies[GameConstants.Currency.questPoint]().toLocaleString('en-US')">0</span>
                                 </span>
                             </td>
                         </tr>
@@ -161,27 +166,27 @@
                         <div class="col no-gutters clickable" data-bind="click: function() {Battle.clickAttack()}" style="height: 220px; display: block;">
                             <h2 class="pageItemTitle" style="display: block;">
 
-                                <!-- ko if: App.game.statistics.routeKills[player.route()]() < GameConstants.ROUTE_KILLS_NEEDED -->
-                                <knockout class="right" data-bind="text: App.game.statistics.routeKills[player.route()]() + ' / ' + GameConstants.ROUTE_KILLS_NEEDED">0/10</knockout>
+                                <!-- ko if: App.game.statistics.routeKills[player.region][player.route()]() < GameConstants.ROUTE_KILLS_NEEDED -->
+                                <knockout class="right" data-bind="text: App.game.statistics.routeKills[player.region][player.route()]() + ' / ' + GameConstants.ROUTE_KILLS_NEEDED">0/10</knockout>
                                 <!-- /ko -->
 
                                 <knockout class="left">
-                                    Route <knockout data-bind="text: player.route">number</knockout>
+                                    <knockout data-bind="text: Routes.getName(player.route(), player.region)"></knockout>
                                     <!--If all Pokémon on the route are caught-->
                                     <knockout data-bind="if: (!RouteHelper.routeCompleted(player.route(), player.region, true) && RouteHelper.routeCompleted(player.route(), player.region, false))">
                                         <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
-                                             src="assets/images/pokeball/Pokeball-small.png"/>
+                                             src="assets/images/pokeball/Pokeball.svg"/>
                                     </knockout>
 
                                     <!--If all Pokémon on the route are caught shiny-->
                                     <knockout data-bind="if: RouteHelper.routeCompleted(player.route(), player.region, true)">
                                         <img title="You have captured all Pokémon shiny on this route!" class="pokeball-smallest"
-                                             src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                                             src="assets/images/pokeball/Pokeball-shiny.svg"/>
                                     </knockout>
                                 </knockout>
 
                                 <knockout>
-                                    <knockout data-bind="text: Battle.enemyPokemon().name">Pokemon name</knockout>
+                                    <knockout data-bind="text: Battle.enemyPokemon().name">Pokémon name</knockout>
                                     <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(Battle.enemyPokemon().id)}}"></knockout>
                                 </knockout>
 
@@ -195,7 +200,7 @@
                                 </div>
                                 <div data-bind="if: Battle.catching" class="catchChance">
                                     <img class="pokeball-animated"
-                                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.png' }"
+                                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg' }"
                                          src=""/>
                                     <br>
                                     Catch Chance:
@@ -226,7 +231,7 @@
                             }">
                             <h2 class="pageItemTitle" style="display: block;">
                                 <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
-                                    <knockout data-bind="text: DungeonBattle.enemyPokemon().name">Pokemon name</knockout>
+                                    <knockout data-bind="text: DungeonBattle.enemyPokemon().name">Pokémon name</knockout>
                                     <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
                                 </knockout>
                                 <knockout data-bind="if: !DungeonBattle.enemyPokemon() || !DungeonBattle.enemyPokemon().health()">
@@ -239,14 +244,14 @@
                                     <!--If all Pokémon in the dungeon are caught-->
                                     <knockout data-bind="if: (!DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true) && DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, false))">
                                         <img title="You have captured all Pokémon on this route!" class="pokeball-smallest"
-                                             src="assets/images/pokeball/Pokeball-small.png"/>
+                                             src="assets/images/pokeball/Pokeball.svg"/>
                                     </knockout>
 
                                     <!--If all Pokémon in the dungeon are caught shiny-->
                                     <knockout data-bind="if: DungeonRunner.dungeonCompleted(DungeonRunner.dungeon, true)">
                                         <img title="You have captured all Pokémon shiny on this route!"
                                              class="pokeball-smallest"
-                                             src="assets/images/pokeball/Pokeball-shiny-small.png"/>
+                                             src="assets/images/pokeball/Pokeball-shiny.svg"/>
                                     </knockout>
                                 </knockout>
 
@@ -274,7 +279,7 @@
                                     </div>
                                     <div data-bind="if: DungeonBattle.catching" class="catchChance">
                                         <img class="pokeball-animated"
-                                             data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.png' }"
+                                             data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[DungeonBattle.pokeball()] + '.svg' }"
                                              src=""/>
                                         <br>
                                         Catch Chance:
@@ -314,26 +319,54 @@
                 </div>
 
 
-                <!-- Display Pokemon Attack, Click Attack damge values-->
+                <!-- Display Pokémon Attack, Click Attack damge values-->
                 <div class="card-footer p-0" data-bind="hidden: App.game.gameState === GameConstants.GameState.town">
                     <table width="100%">
                         <tr>
                             <!-- ko ifnot: App.game.gameState === GameConstants.GameState.battleFrontier -->
                             <td width="50%">
-                              <span style="display: inline;">Pokémon Attack:
-                                  <span data-bind="text: App.game.party.pokemonAttackObservable().toLocaleString('en-US')"></span>
-                              </span>
+                                <span style="display: inline;">
+                                    Pokémon Attack:
+                                    <span data-bind="
+                                        text: App.game.party.pokemonAttackObservable().toLocaleString('en-US'),
+                                        tooltip: {
+                                            title: Battle.enemyPokemon()
+                                                ? `${App.game.party.calculatePokemonAttack(
+                                                    Battle.enemyPokemon().type1,
+                                                    Battle.enemyPokemon().type2
+                                                ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
+                                                : null,
+                                            trigger: 'hover',
+                                        }
+                                    "></span>
+                                </span>
                             </td>
                             <td width="50%">
-                              <span style="display: inline;">Click Attack:
-                                  <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
-                              </span>
+                                <span style="display: inline;">Click Attack:
+                                    <span data-bind="text: App.game.party.calculateClickAttack().toLocaleString('en-US')"></span>
+                                </span>
                             </td>
                             <!-- /ko -->
                             <!-- ko if: App.game.gameState === GameConstants.GameState.battleFrontier -->
                             <td width="100%">
-                                <span style="display: inline;">Pokémon Attack:
-                                    <span data-bind="text: App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, true).toLocaleString('en-US');"></span>
+                                <span style="display: inline;">
+                                    Pokémon Attack:
+                                    <span data-bind="
+                                        text: App.game.party.calculatePokemonAttack(
+                                            PokemonType.None,
+                                            PokemonType.None,
+                                            true,
+                                        ).toLocaleString('en-US'),
+                                        tooltip: {
+                                            title: Battle.enemyPokemon()
+                                                ? `${App.game.party.calculatePokemonAttack(
+                                                    Battle.enemyPokemon().type1,
+                                                    Battle.enemyPokemon().type2
+                                                ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
+                                                : null,
+                                            trigger: 'hover',
+                                        }
+                                    "></span>
                                 </span>
                             </td>
                             <!-- /ko -->
@@ -362,7 +395,7 @@
             <!-- Battle Frontier Information Container  -->
             @import "battleFrontierInfo.html"
 
-            <div id="middle-sort-column">
+            <div id="middle-bottom-sort-column">
                 <div id="townMap" class="card sortable border-secondary mb-3" data-bind="visible: App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Town_map) && (App.game.gameState === GameConstants.GameState.fighting || App.game.gameState === GameConstants.GameState.gym || App.game.gameState === GameConstants.GameState.town||
                     App.game.gameState === GameConstants.GameState.shop || App.game.gameState === GameConstants.GameState.farm || App.game.gameState === GameConstants.GameState.paused)">
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
@@ -491,6 +524,15 @@
 
 <!-- Safari Modal -->
 @import "safariBattleModal.html"
+
+<!-- NPC Modal-->
+@import "npcModal.html"
+
+<!-- Pokeball Selector Modal -->
+@import "pokeballSelectorModal.html"
+
+<!-- Damage Calculator Modal -->
+@import "damageCalculatorModal.html"
 
 </body>
 </html>

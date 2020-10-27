@@ -1,4 +1,6 @@
-///<reference path="../upgrades/ExpUpgrade.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../upgrades/ExpUpgrade.ts" />
+
 class OakItem extends ExpUpgrade {
     defaults = {
         level: 0,
@@ -70,6 +72,6 @@ class OakItem extends ExpUpgrade {
     }
 
     tooltip = ko.pureComputed(() => {
-        return `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}</strong><br/>Bonus: <strong>${this.calculateBonusIfActive()}${this.displayName != 'Magic Ball' ? '×' : '%'}</strong>`;
+        return `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}/${this.maxLevel}</strong><br/>Bonus: <strong>${this.calculateBonusIfActive()}${this.displayName != 'Magic Ball' ? '×' : '%'}</strong>`;
     });
 }

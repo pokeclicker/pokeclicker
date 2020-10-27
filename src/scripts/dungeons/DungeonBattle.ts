@@ -1,27 +1,30 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class DungeonBattle extends Battle {
 
     /**
      * Award the player with money and exp, and throw a Pokéball if applicable
      */
     public static defeatPokemon() {
+        const enemyPokemon: BattlePokemon = this.enemyPokemon();
         DungeonRunner.fighting(false);
         if (DungeonRunner.fightingBoss()) {
             DungeonRunner.fightingBoss(false);
             DungeonRunner.defeatedBoss(true);
         }
-        this.enemyPokemon().defeat();
+        enemyPokemon.defeat();
         App.game.breeding.progressEggsBattle(DungeonRunner.dungeon.difficultyRoute, player.region);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
 
-        const isShiny: boolean = this.enemyPokemon().shiny;
-        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(this.enemyPokemon().id, isShiny);
+        const isShiny: boolean = enemyPokemon.shiny;
+        const pokeBall: GameConstants.Pokeball = App.game.pokeballs.calculatePokeballToUse(enemyPokemon.id, isShiny);
 
         if (pokeBall !== GameConstants.Pokeball.None) {
-            this.prepareCatch(pokeBall);
+            this.prepareCatch(enemyPokemon, pokeBall);
             setTimeout(
                 () => {
-                    this.attemptCatch();
+                    this.attemptCatch(enemyPokemon);
                     if (DungeonRunner.defeatedBoss()) {
                         DungeonRunner.dungeonWon();
                     }
@@ -38,7 +41,7 @@ class DungeonBattle extends Battle {
         this.counter = 0;
         this.enemyPokemon(PokemonFactory.generateDungeonPokemon(DungeonRunner.dungeon.pokemonList, DungeonRunner.chestsOpened, DungeonRunner.dungeon.baseHealth, DungeonRunner.dungeon.level));
 
-        const enemyPokemon = this.enemyPokemon();
+        const enemyPokemon: BattlePokemon = this.enemyPokemon();
         GameHelper.incrementObservable(App.game.statistics.pokemonEncountered[enemyPokemon.id]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonEncountered);
         if (enemyPokemon.shiny) {

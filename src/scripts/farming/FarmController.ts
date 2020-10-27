@@ -6,14 +6,19 @@ class FarmController {
         if (App.game.farming.canAccess()) {
             $('#farmModal').modal('show');
         } else {
-            Notifier.notify({ message: `You need the ${GameConstants.humanifyString(KeyItems.KeyItem[KeyItems.KeyItem.Wailmer_pail])} to access this location`, type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: `You need the ${GameConstants.humanifyString(KeyItems.KeyItem[KeyItems.KeyItem.Wailmer_pail])} to access this location`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
     public static getImage(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
-        if (plot.stage() <= 1) {
+        if (plot.stage() === PlotStage.Seed) {
             return 'assets/images/farm/AllTreeSeedIII.png';
+        } else if (plot.stage() === PlotStage.Sprout) {
+            return 'assets/images/farm/AllTreeSproutIII.png';
         }
         return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}III.png`;
     }

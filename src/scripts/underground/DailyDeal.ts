@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class DailyDeal {
     public item1: UndergroundItem;
     public item2: UndergroundItem;
@@ -23,7 +25,7 @@ class DailyDeal {
 
     public static generateDeals(maxDeals: number, date: Date) {
         SeededRand.seedWithDate(date);
-        
+
         DailyDeal.list.removeAll();
         const temp = [];
         const maxTries = maxDeals * 10;
@@ -39,7 +41,35 @@ class DailyDeal {
     }
 
     private isValid(dealList: Array<DailyDeal>): boolean {
-        return ( (this.item1.name !== this.item2.name) && !DailyDeal.reverseDealExists(this.item1.name, this.item2.name, dealList) && !this.item1.isStone() );
+        const item1Name = this.item1.name;
+        const item2Name = this.item2.name;
+
+        if (item1Name == item2Name) {
+            return false;
+        }
+
+        if (this.item1.isStone()) {
+            return false;
+        }
+
+        if (DailyDeal.sameDealExists(item1Name, item2Name, dealList)) {
+            return false;
+        }
+
+        if (DailyDeal.reverseDealExists(item1Name, item2Name, dealList)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private static sameDealExists(name1: string, name2: string, dealList: Array<DailyDeal>): boolean {
+        for (const deal of dealList) {
+            if (deal.item1.name == name1 && deal.item2.name == name2) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static reverseDealExists(name1: string, name2: string, dealList: Array<DailyDeal>): boolean {
@@ -59,7 +89,7 @@ class DailyDeal {
         const deal = DailyDeal.list.peek()[i];
         const index = player.mineInventoryIndex(deal.item1.id);
         if (index > -1) {
-            return player.mineInventory[index].amount() >= deal.amount1;
+            return player.mineInventory()[index].amount() >= deal.amount1;
         } else {
             return false;
         }
@@ -69,12 +99,13 @@ class DailyDeal {
         const deal = DailyDeal.list.peek()[i];
         const item1Index = player.mineInventoryIndex(deal.item1.id);
         if (DailyDeal.canUse(i)) {
-            const amt = player.mineInventory[item1Index].amount();
+            const amt = player.mineInventory()[item1Index].amount();
             const maxTrades = Math.floor(amt / deal.amount1);
             tradeTimes = Math.min(tradeTimes, maxTrades);
-            player.mineInventory[item1Index].amount(amt - (deal.amount1 * tradeTimes));
+            player.mineInventory()[item1Index].amount(amt - (deal.amount1 * tradeTimes));
             Underground.gainMineItem(deal.item2.id, deal.amount2 * tradeTimes);
             GameHelper.incrementObservable(App.game.statistics.undergroundDailyDealTrades);
+            Underground.sortMineItems(Underground.lastPropSort, false);
         }
     }
 }

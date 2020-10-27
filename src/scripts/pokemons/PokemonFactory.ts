@@ -36,13 +36,18 @@ class PokemonFactory {
         const money: number = this.routeMoney(route,region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         if (shiny) {
-            Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
+            Notifier.notify({
+                message: `✨ You encountered a shiny ${name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.shiny_long,
+                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+            });
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, 1, heldItem);
     }
 
     public static routeLevel(route: number, region: GameConstants.Region): number {
-        return route * 2;
+        return Math.floor(MapHelper.normalizeRoute(route, region) * 2 + 20 * Math.pow(region, 2.3));
     }
 
     public static routeHealth(route: number, region: GameConstants.Region): number {
@@ -62,7 +67,7 @@ class PokemonFactory {
     public static routeDungeonTokens(route: number, region: GameConstants.Region): number {
         route = MapHelper.normalizeRoute(route, region);
 
-        const tokens = Math.max(1, 6 * Math.pow(this.routeLevel(route,region) / (3 / Math.round(1 + region / 3)), 1.05));
+        const tokens = Math.max(1, 6 * Math.pow(route * 2 / (3 / Math.round(1 + region / 3)), 1.05));
 
         return tokens;
     }
@@ -84,9 +89,9 @@ class PokemonFactory {
         return false;
     }
 
-    public static generatePartyPokemon(id: number): PartyPokemon {
+    public static generatePartyPokemon(id: number, shiny = false): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false, shiny);
     }
 
     /**
@@ -115,9 +120,14 @@ class PokemonFactory {
         const exp: number = basePokemon.exp;
         const money = 0;
         const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_CHANCE);
-        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
-            Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
+            Notifier.notify({
+                message: `✨ You encountered a shiny ${name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.shiny_long,
+                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+            });
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, GameConstants.DUNGEON_SHARDS, heldItem);
     }
@@ -132,20 +142,27 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
-        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
+        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
-            Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
+            Notifier.notify({
+                message: `✨ You encountered a shiny ${name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.shiny_long,
+                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+            });
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, money, shiny, GameConstants.DUNGEON_BOSS_SHARDS);
     }
 
     private static roamingEncounter(route: number, region: GameConstants.Region): boolean {
-        const routes = GameConstants.RegionRoute[region];
+        // Map to the route numbers
+        const routeNum = MapHelper.normalizeRoute(route, region);
+        const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
         const roamingPokemon = RoamingPokemonList.getRegionalRoamers(region);
-        if (!routes || !roamingPokemon || !roamingPokemon.length) {
+        if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
             return false;
         }
-        return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, routes[1], routes[0], route);
+        return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, Math.max(...routes), Math.min(...routes), routeNum);
     }
 
     private static roamingChance(max, min, maxRoute, minRoute, curRoute) {

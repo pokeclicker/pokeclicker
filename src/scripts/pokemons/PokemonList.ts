@@ -1,10 +1,10 @@
-///<reference path="../party/evolutions/LevelEvolution.ts"/>
-///<reference path="../party/evolutions/StoneEvolution.ts"/>
-///<reference path="../party/evolutions/TimedEvolution.ts"/>
-///<reference path="../party/evolutions/LocationEvolution.ts"/>
-///<reference path="../GameConstants.ts"/>
-///<reference path="../party/LevelType.ts"/>
-///<reference path="PokemonType.ts"/>
+/// <reference path="../party/evolutions/LevelEvolution.ts" />
+/// <reference path="../party/evolutions/StoneEvolution.ts" />
+/// <reference path="../party/evolutions/TimedEvolution.ts" />
+/// <reference path="../party/evolutions/LocationEvolution.ts" />
+/// <reference path="../GameConstants.d.ts" />
+/// <reference path="../party/LevelType.ts" />
+/// <reference path="../../declarations/enums/PokemonType.d.ts" />
 
 const pokemonDevolutionMap: { [name: string]: string } = {};
 
@@ -8434,7 +8434,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumfast,
             'exp': 58,
             'catchRate': 255,
-            'evolutions': [new StoneEvolution('Bonsly', 'Sudowoodo', GameConstants.StoneType.None)],
+            'evolutions': [new LevelEvolution('Bonsly', 'Sudowoodo', 17)],
             'baby': true,
             'base': {
                 'hitpoints': 50,
@@ -8453,7 +8453,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumfast,
             'exp': 62,
             'catchRate': 145,
-            'evolutions': [new StoneEvolution('Mime Jr.', 'Mr. Mime', GameConstants.StoneType.None)],
+            'evolutions': [new LevelEvolution('Mime Jr.', 'Mr. Mime', 18)],
             'baby': true,
             'base': {
                 'hitpoints': 20,
@@ -9420,6 +9420,9 @@ const pokemonList: PokemonListData[] =
             'eggCycles': 40,
             'levelType': LevelType.slow,
             'exp': 216,
+            // 69420 to prevent evolution ingame, evolution needed for baby form to be obtainable
+            'evolutions': [new LevelEvolution('Phione', 'Manaphy', 69420)],
+            'baby': true,
             'catchRate': 30,
             'base': {
                 'hitpoints': 80,
@@ -9437,7 +9440,6 @@ const pokemonList: PokemonListData[] =
             'eggCycles': 10,
             'levelType': LevelType.slow,
             'exp': 270,
-            'evolutions': [new LevelEvolution('Manaphy', 'Phione', 100)],
             'catchRate': 3,
             'base': {
                 'hitpoints': 100,
@@ -10790,7 +10792,24 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 550,
-            'name': 'Basculin',
+            'name': 'Basculin (Red-Striped)',
+            'type': [PokemonType.Water],
+            'eggCycles': 40,
+            'levelType': LevelType.mediumfast,
+            'exp': 161,
+            'catchRate': 25,
+            'base': {
+                'hitpoints': 70,
+                'attack': 92,
+                'specialAttack': 80,
+                'defense': 65,
+                'specialDefense': 55,
+                'speed': 98,
+            },
+        },
+        {
+            'id': 550.01,
+            'name': 'Basculin (Blue-Striped)',
             'type': [PokemonType.Water],
             'eggCycles': 40,
             'levelType': LevelType.mediumfast,
@@ -11180,7 +11199,7 @@ const pokemonList: PokemonListData[] =
             'levelType': 4,
             'exp': 60,
             'catchRate': 255,
-            'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.None)],
+            'evolutions': [new StoneEvolution('Minccino', 'Cinccino', GameConstants.StoneType.Shiny_stone)],
             'base': {
                 'hitpoints': 55,
                 'attack': 50,
@@ -11403,13 +11422,67 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 585,
-            'name': 'Deerling',
+            'name': 'Deerling (Spring)',
             'type': [PokemonType.Normal, PokemonType.Grass],
             'eggCycles': 20,
             'levelType': LevelType.mediumfast,
             'exp': 67,
             'catchRate': 190,
-            'evolutions': [new LevelEvolution('Deerling', 'Sawsbuck', 34)],
+            'evolutions': [new LevelEvolution('Deerling (Spring)', 'Sawsbuck (Spring)', 34)],
+            'base': {
+                'hitpoints': 60,
+                'attack': 60,
+                'specialAttack': 40,
+                'defense': 50,
+                'specialDefense': 50,
+                'speed': 75,
+            },
+        },
+        {
+            'id': 585.01,
+            'name': 'Deerling (Summer)',
+            'type': [PokemonType.Normal, PokemonType.Grass],
+            'eggCycles': 20,
+            'levelType': LevelType.mediumfast,
+            'exp': 67,
+            'catchRate': 190,
+            'evolutions': [new LevelEvolution('Deerling (Summer)', 'Sawsbuck (Summer)', 34)],
+            'base': {
+                'hitpoints': 60,
+                'attack': 60,
+                'specialAttack': 40,
+                'defense': 50,
+                'specialDefense': 50,
+                'speed': 75,
+            },
+        },
+        {
+            'id': 585.02,
+            'name': 'Deerling (Autumn)',
+            'type': [PokemonType.Normal, PokemonType.Grass],
+            'eggCycles': 20,
+            'levelType': LevelType.mediumfast,
+            'exp': 67,
+            'catchRate': 190,
+            'evolutions': [new LevelEvolution('Deerling (Autumn)', 'Sawsbuck (Autumn)', 34)],
+            'base': {
+                'hitpoints': 60,
+                'attack': 60,
+                'specialAttack': 40,
+                'defense': 50,
+                'specialDefense': 50,
+                'speed': 75,
+            },
+        },
+        {
+            'id': 585.03,
+            'name': 'Deerling (Winter)',
+            'type': [PokemonType.Normal, PokemonType.Grass],
+            'eggCycles': 20,
+            'levelType': LevelType.mediumfast,
+            'exp': 67,
+            'catchRate': 190,
+            'evolutions': [new LevelEvolution('Deerling (Winter)', 'Sawsbuck (Winter)', 34)],
             'base': {
                 'hitpoints': 60,
                 'attack': 60,
@@ -11421,7 +11494,58 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 586,
-            'name': 'Sawsbuck',
+            'name': 'Sawsbuck (Spring)',
+            'type': [PokemonType.Normal, PokemonType.Grass],
+            'eggCycles': 20,
+            'levelType': LevelType.mediumfast,
+            'exp': 166,
+            'catchRate': 75,
+            'base': {
+                'hitpoints': 80,
+                'attack': 100,
+                'specialAttack': 60,
+                'defense': 70,
+                'specialDefense': 70,
+                'speed': 95,
+            },
+        },
+        {
+            'id': 586.01,
+            'name': 'Sawsbuck (Summer)',
+            'type': [PokemonType.Normal, PokemonType.Grass],
+            'eggCycles': 20,
+            'levelType': LevelType.mediumfast,
+            'exp': 166,
+            'catchRate': 75,
+            'base': {
+                'hitpoints': 80,
+                'attack': 100,
+                'specialAttack': 60,
+                'defense': 70,
+                'specialDefense': 70,
+                'speed': 95,
+            },
+        },
+        {
+            'id': 586.02,
+            'name': 'Sawsbuck (Autumn)',
+            'type': [PokemonType.Normal, PokemonType.Grass],
+            'eggCycles': 20,
+            'levelType': LevelType.mediumfast,
+            'exp': 166,
+            'catchRate': 75,
+            'base': {
+                'hitpoints': 80,
+                'attack': 100,
+                'specialAttack': 60,
+                'defense': 70,
+                'specialDefense': 70,
+                'speed': 95,
+            },
+        },
+        {
+            'id': 586.03,
+            'name': 'Sawsbuck (Winter)',
             'type': [PokemonType.Normal, PokemonType.Grass],
             'eggCycles': 20,
             'levelType': LevelType.mediumfast,
@@ -11812,7 +11936,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumslow,
             'exp': 130,
             'catchRate': 90,
-            'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.None)],
+            'evolutions': [new StoneEvolution('Lampent', 'Chandelure', GameConstants.StoneType.Dusk_stone)],
             'base': {
                 'hitpoints': 60,
                 'attack': 40,
@@ -12301,6 +12425,7 @@ const pokemonList: PokemonListData[] =
             'exp': 72,
             'catchRate': 45,
             'evolutions': [new LevelEvolution('Larvesta', 'Volcarona', 59)],
+            'baby': true,
             'base': {
                 'hitpoints': 55,
                 'attack': 85,
@@ -12601,7 +12726,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 648,
-            'name': 'Meloetta',
+            'name': 'Meloetta (aria)',
             'type': [PokemonType.Normal, PokemonType.Psychic],
             'eggCycles': 120,
             'levelType': LevelType.slow,
@@ -12618,7 +12743,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 648.1,
-            'name': 'Meloetta (Pirouette)',
+            'name': 'Meloetta (pirouette)',
             'type': [PokemonType.Normal, PokemonType.Fighting],
             'eggCycles': 120,
             'levelType': LevelType.slow,
@@ -13011,7 +13136,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumfast,
             'exp': 130,
             'catchRate': 120,
-            'evolutions': [new StoneEvolution('Floette', 'Florges', GameConstants.StoneType.None)],
+            'evolutions': [new StoneEvolution('Floette', 'Florges', GameConstants.StoneType.Shiny_stone)],
             'base': {
                 'hitpoints': 54,
                 'attack': 45,
@@ -13186,7 +13311,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumfast,
             'exp': 157,
             'catchRate': 90,
-            'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.None)],
+            'evolutions': [new StoneEvolution('Doublade', 'Aegislash', GameConstants.StoneType.Dusk_stone)],
             'base': {
                 'hitpoints': 59,
                 'attack': 110,
@@ -13221,7 +13346,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumfast,
             'exp': 68,
             'catchRate': 200,
-            'evolutions': [new StoneEvolution('Spritzee', 'Aromatisse', GameConstants.StoneType.Trade_stone)],
+            'evolutions': [new StoneEvolution('Spritzee', 'Aromatisse', GameConstants.StoneType.Sachet)],
             'base': {
                 'hitpoints': 78,
                 'attack': 52,
@@ -13256,7 +13381,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumfast,
             'exp': 68,
             'catchRate': 200,
-            'evolutions': [new StoneEvolution('Swirlix', 'Slurpuff', GameConstants.StoneType.Trade_stone)],
+            'evolutions': [new StoneEvolution('Swirlix', 'Slurpuff', GameConstants.StoneType.Whipped_dream)],
             'base': {
                 'hitpoints': 62,
                 'attack': 48,
@@ -14617,7 +14742,7 @@ const pokemonList: PokemonListData[] =
             'levelType': LevelType.mediumslow,
             'exp': 102,
             'catchRate': 120,
-            'evolutions': [new StoneEvolution('Steenee', 'Tsareena', GameConstants.StoneType.None)],
+            'evolutions': [new LevelEvolution('Steenee', 'Tsareena', 28)],
             'base': {
                 'hitpoints': 52,
                 'attack': 40,

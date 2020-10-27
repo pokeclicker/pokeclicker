@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="Pokeball.ts" />
+
 class Pokeballs implements Feature {
     name = 'Pokeballs';
     saveKey = 'pokeballs';
@@ -10,26 +13,31 @@ class Pokeballs implements Feature {
         'notCaughtShinySelection': GameConstants.Pokeball.Pokeball,
     };
 
-    private pokeballCatchBonus: number[];
-    private pokeballCatchTime: number[];
-
-    public pokeballs: ArrayOfObservables<number>;
+    public pokeballs: Pokeball[];
     private _alreadyCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _alreadyCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
     private _notCaughtSelection: KnockoutObservable<GameConstants.Pokeball>;
     private _notCaughtShinySelection: KnockoutObservable<GameConstants.Pokeball>;
 
+    public selectedSelection: KnockoutObservable<KnockoutObservable<GameConstants.Pokeball>>;
+    public selectedTitle: KnockoutObservable<string>;
+
     constructor() {
-        this.pokeballs = new ArrayOfObservables(this.defaults.pokeballs);
+        this.pokeballs = [
+            new Pokeball(GameConstants.Pokeball.Pokeball, 0, 1250, 'A standard Pokéball', 25),
+            new Pokeball(GameConstants.Pokeball.Greatball, 5, 1000, '+5% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Ultraball, 10, 750, '+10% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Masterball, 100, 500, '100% chance to catch'),
+        ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
         this._notCaughtSelection = ko.observable(this.defaults.notCaughtSelection);
         this._notCaughtShinySelection = ko.observable(this.defaults.notCaughtShinySelection);
+        this.selectedTitle = ko.observable('');
+        this.selectedSelection = ko.observable(this._alreadyCaughtSelection);
     }
 
     initialize(): void {
-        this.pokeballCatchBonus = [0, 5, 10, 100];
-        this.pokeballCatchTime = [1250, 1000, 750, 500];
     }
 
     /**
@@ -46,9 +54,11 @@ class Pokeballs implements Feature {
         // just check against alreadyCaughtShiny as this returns false when you don't have the pokemon yet.
         if (isShiny) {
             if (!alreadyCaughtShiny) {
-                pref = this.notCaughtShinySelection;
+                // if the pokemon is also not caught, use the higher selection since a notCaughtShiny is also a notCaught pokemon
+                pref = !alreadyCaught ? Math.max(this.notCaughtSelection, this.notCaughtShinySelection) : this.notCaughtShinySelection;
             } else {
-                pref = this.alreadyCaughtShinySelection;
+                // if the shiny is already caught, use the higher selection since the pokemon is also a caught pokemon
+                pref = Math.max(this.alreadyCaughtSelection, this.alreadyCaughtShinySelection);
             }
         } else {
             if (!alreadyCaught) {
@@ -62,7 +72,7 @@ class Pokeballs implements Feature {
 
         // Check which Pokeballs we have in stock that are of equal or lesser than selection
         for (let i: number = pref; i >= 0; i--) {
-            if (this.pokeballs[i] > 0) {
+            if (this.pokeballs[i].quantity() > 0) {
                 use = i;
                 break;
             }
@@ -71,20 +81,25 @@ class Pokeballs implements Feature {
     }
 
     calculateCatchTime(ball: GameConstants.Pokeball): number {
-        return this.pokeballCatchTime[ball];
+        return this.pokeballs[ball].catchTime;
     }
 
-    gainPokeballs(ball: GameConstants.Pokeball, amount: number) {
-        this.pokeballs[ball] += amount;
+    gainPokeballs(ball: GameConstants.Pokeball, amount: number): void {
+        GameHelper.incrementObservable(this.pokeballs[ball].quantity, amount);
     }
 
     usePokeball(ball: GameConstants.Pokeball): void {
-        this.pokeballs[ball] -= 1;
+        GameHelper.incrementObservable(this.pokeballs[ball].quantity, -1);
         GameHelper.incrementObservable(App.game.statistics.pokeballsUsed[ball]);
     }
 
-    getCatchBonus(ball: GameConstants.Pokeball) {
-        return this.pokeballCatchBonus[ball];
+    getCatchBonus(ball: GameConstants.Pokeball): number {
+        return this.pokeballs[ball].catchBonus;
+    }
+
+    getBallQuantity(ball: GameConstants.Pokeball): number {
+        const pokeball = this.pokeballs[ball];
+        return pokeball ? pokeball.quantity() : 0;
     }
 
     canAccess(): boolean {
@@ -96,16 +111,8 @@ class Pokeballs implements Feature {
             return;
         }
 
-        if (json['pokeballs'] == null) {
-            this.pokeballs = new ArrayOfObservables(this.defaults.pokeballs);
-        } else {
-            const pokeballsJson = json['pokeballs'];
-            this.pokeballs = new ArrayOfObservables([
-                pokeballsJson[GameConstants.Pokeball.Pokeball],
-                pokeballsJson[GameConstants.Pokeball.Greatball],
-                pokeballsJson[GameConstants.Pokeball.Ultraball],
-                pokeballsJson[GameConstants.Pokeball.Masterball],
-            ]);
+        if (json['pokeballs'] != null) {
+            json['pokeballs'].map((amt: number, type: number) => this.pokeballs[type].quantity(amt));
         }
         this.notCaughtSelection = json['notCaughtSelection'] ?? this.defaults.notCaughtSelection;
         this.notCaughtShinySelection = json['notCaughtShinySelection'] ?? this.defaults.notCaughtShinySelection;
@@ -115,12 +122,7 @@ class Pokeballs implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            'pokeballs': [
-                this.pokeballs[GameConstants.Pokeball.Pokeball],
-                this.pokeballs[GameConstants.Pokeball.Greatball],
-                this.pokeballs[GameConstants.Pokeball.Ultraball],
-                this.pokeballs[GameConstants.Pokeball.Masterball],
-            ],
+            'pokeballs': this.pokeballs.map(p => p.quantity()),
             'notCaughtSelection': this.notCaughtSelection,
             'notCaughtShinySelection': this.notCaughtShinySelection,
             'alreadyCaughtSelection': this.alreadyCaughtSelection,

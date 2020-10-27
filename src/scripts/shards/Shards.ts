@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+
 class Shards implements Feature {
     name = 'Shards';
     saveKey = 'shards';
@@ -6,18 +9,26 @@ class Shards implements Feature {
         GameHelper.enumLength(PokemonType) - 1;
     public static readonly nEffects: number =
         GameHelper.enumLength(GameConstants.TypeEffectiveness);
-
     defaults = {
         'shardWallet': Array<number>(Shards.nTypes).fill(0),
         'shardUpgrades': Array<number>(Shards.nTypes * Shards.nEffects).fill(0),
     };
 
-    public shardWallet: ArrayOfObservables<number>;
-    public shardUpgrades: ArrayOfObservables<number>;
+    public shardWallet: Array<KnockoutObservable<number>>;
+    public shardUpgrades: Array<KnockoutObservable<number>>;
+
+    public validUpgrades = {};
 
     constructor() {
-        this.shardWallet = new ArrayOfObservables(this.defaults.shardWallet);
-        this.shardUpgrades = new ArrayOfObservables(this.defaults.shardUpgrades);
+        this.shardWallet = this.defaults.shardWallet.map((v) => ko.observable(v));
+        this.shardUpgrades = this.defaults.shardUpgrades.map((v) => ko.observable(v));
+        GameHelper.enumNumbers(PokemonType).map(type => {
+            this.validUpgrades[type] = {};
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.Immune] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Immune);
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.NotVery] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.NotVery);
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.Normal] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Normal);
+            this.validUpgrades[type][GameConstants.TypeEffectiveness.Very] = !!TypeHelper.typeMatrix[type]?.includes(GameConstants.TypeEffectivenessValue.Very);
+        });
     }
 
     public gainShards(amt: number, typeNum: PokemonType) {
@@ -28,7 +39,9 @@ class Shards implements Feature {
         if (typeNum == PokemonType.None) {
             return;
         }
-        this.shardWallet[typeNum] += amt;
+
+        GameHelper.incrementObservable(this.shardWallet[typeNum], amt);
+
         if (amt > 0) {
             GameHelper.incrementObservable(App.game.statistics.totalShardsGained, amt);
             GameHelper.incrementObservable(App.game.statistics.shardsGained[typeNum], amt);
@@ -55,25 +68,32 @@ class Shards implements Feature {
         effectNum: GameConstants.TypeEffectiveness
     ): boolean {
         const lessThanMax = !this.hasMaxUpgrade(typeNum, effectNum);
-        const hasEnoughShards = this.shardWallet[typeNum] >= this.getShardUpgradeCost(typeNum, effectNum);
+        const hasEnoughShards = this.shardWallet[typeNum]() >= this.getShardUpgradeCost(typeNum, effectNum);
         return lessThanMax && hasEnoughShards;
     }
 
     public buyShardUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
-    ) {
+    ): void {
         if (this.canBuyShardUpgrade(typeNum, effectNum)) {
             this.gainShards(-this.getShardUpgradeCost(typeNum, effectNum), typeNum);
-            this.shardUpgrades[typeNum * Shards.nEffects + effectNum] ++;
+            GameHelper.incrementObservable(this.shardUpgrades[typeNum * Shards.nEffects + effectNum]);
         }
+    }
+
+    public isValidUpgrade(
+        typeNum: PokemonType,
+        effectNum: GameConstants.TypeEffectiveness
+    ): boolean {
+        return !!this.validUpgrades[typeNum]?.[effectNum];
     }
 
     public getShardUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
     ): number {
-        return this.shardUpgrades[typeNum * Shards.nEffects + effectNum];
+        return this.shardUpgrades[typeNum * Shards.nEffects + effectNum]();
     }
 
     initialize() {
@@ -88,15 +108,19 @@ class Shards implements Feature {
 
     toJSON(): Record<string, any> {
         return {
-            'shardWallet': this.shardWallet.map(x => x),
-            'shardUpgrades': this.shardUpgrades.map(x => x),
+            'shardWallet': this.shardWallet.map(ko.unwrap),
+            'shardUpgrades': this.shardUpgrades.map(ko.unwrap),
         };
     }
 
     fromJSON(json: Record<string, any>) {
         if (json != null) {
-            this.shardWallet = new ArrayOfObservables(json['shardWallet']);
-            this.shardUpgrades = new ArrayOfObservables(json['shardUpgrades']);
+            json['shardWallet'].forEach((v, i) => {
+                this.shardWallet[i](v);
+            });
+            json['shardUpgrades'].forEach((v, i) => {
+                this.shardUpgrades[i](v);
+            });
         }
     }
 
@@ -104,7 +128,10 @@ class Shards implements Feature {
         if (this.canAccess()) {
             $('#shardModal').modal('show');
         } else {
-            Notifier.notify({ message: 'You do not have the Shard Case', type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: 'You do not have the Shard Case',
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 }

@@ -33,4 +33,8 @@ class Achievement {
         const max = AchievementHandler.maxBonus()[this.region] ;
         return (this.bonus / max * 100).toFixed(2);
     }
+
+    public getProgressText: KnockoutComputed<string> = ko.pureComputed(() => {
+        return `${this.getProgress()}/${this.property.requiredValue}`;
+    })
 }
