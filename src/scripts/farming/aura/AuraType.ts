@@ -5,4 +5,5 @@ enum AuraType {
     Harvest,
     Egg,
     Attract,
+    Shiny,
 }

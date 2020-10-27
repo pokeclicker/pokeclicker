@@ -212,6 +212,16 @@ class Plot implements Saveable {
     }
 
     /**
+     * Handles planting a berry on the plot
+     * @param berry The BerryType
+     */
+    plant(berry: BerryType): void {
+        this.berry = berry;
+        this.age = 0;
+        this.notifications = [];
+    }
+
+    /**
      * Returns how many berries will be harvested
      */
     harvest(): number {
@@ -264,11 +274,25 @@ class Plot implements Saveable {
         }
     }
 
-    generateWanderPokemon(): string {
+    generateWanderPokemon(): any {
         if (Math.random() < GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]()) {
-            return this.berryData.wander[Math.floor(Math.random() * this.berryData.wander.length)];
+            // TODO: HLXII Filter region pokemon
+            const availablePokemon = this.berryData.wander.filter(pokemon => true);
+            const wanderPokemon = availablePokemon[Math.floor(Math.random() * availablePokemon.length)];
+
+            const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
+            App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(wanderPokemon).id, shiny, true);
+
+            // Check for Starf generation
+            if (shiny && App.game.farming.highestUnlockedBerry() > BerryType.Salac) {
+                const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
+                const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
+                chosenPlot.plant(BerryType.Starf);
+            }
+
+            return {pokemon: wanderPokemon, shiny: shiny};
         }
-        return '';
+        return undefined;
     }
 
     /**

@@ -17,6 +17,7 @@ class Aura {
         switch (this.auraType) {
             case AuraType.Attract:
             case AuraType.Egg:
+            case AuraType.Shiny:
                 const currentMultiplier = App.game.farming.externalAuras[this.auraType]();
                 App.game.farming.externalAuras[this.auraType](currentMultiplier * multiplier);
                 break;

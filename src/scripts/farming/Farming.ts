@@ -41,6 +41,7 @@ class Farming implements Feature {
         this.externalAuras = [];
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
         this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
+        this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2;i >= 0;i--) {
@@ -395,7 +396,7 @@ class Farming implements Feature {
             1, .1, 60,
             [30, 10, 30, 10, 30], BerryColor.Green,
             ['This Berry is considered a mirage. It was said to be so strong that it had to be abandoned at the world\'s edge.'],
-            undefined, ['Jirachi']); // TODO: Set properties
+            new Aura(AuraType.Shiny, [1.01, 1.02, 1.03]), ['Jirachi']); // TODO: Set properties
 
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [2,4,6,8,16],
             1, 1, 60,
@@ -852,15 +853,13 @@ class Farming implements Feature {
 
         // Wandering Pokemon
         this.counter += GameConstants.TICK_TIME;
-        let wanderPokemon = '';
+        let wanderPokemon: any;
         if (this.counter >= GameConstants.WANDER_TICK) {
             for (let i = 0;i < App.game.farming.plotList.length;i++) {
                 const plot = App.game.farming.plotList[i];
                 wanderPokemon = plot.generateWanderPokemon();
-                // TODO: HLXII Handle actually gaining the pokemon
-                // TODO: HLXII Handle Shiny
-                // TODO: HLXII Handle other bonus (DT?)
-                if (wanderPokemon !== '') {
+                if (wanderPokemon !== undefined) {
+                    // TODO: HLXII Handle other bonus (DT?)
                     notifications.add(FarmNotificationType.Wander);
                     break;
                 }
@@ -877,7 +876,7 @@ class Farming implements Feature {
     }
 
     // TODO: HLXII Change details of notifier for different notifications
-    handleNotification(type: FarmNotificationType, wander?: string): void {
+    handleNotification(type: FarmNotificationType, wander?: any): void {
         switch (type) {
             case FarmNotificationType.Ripe:
                 Notifier.notify({
@@ -928,9 +927,11 @@ class Farming implements Feature {
                 });
                 break;
             case FarmNotificationType.Wander:
+                const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
+                const type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 Notifier.notify({
-                    message: `A ${wander} has wandered onto the farm!`,
-                    type: NotificationConstants.NotificationOption.success,
+                    message: `A ${pokemon} has wandered onto the farm!`,
+                    type: type,
                     sound: NotificationConstants.NotificationSound.ready_to_harvest,
                     setting: NotificationConstants.NotificationSetting.ready_to_harvest,
                 });
@@ -939,8 +940,9 @@ class Farming implements Feature {
     }
 
     resetAuras() {
-        this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
-        this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
+        this.externalAuras[AuraType.Attract](1);
+        this.externalAuras[AuraType.Egg](1);
+        this.externalAuras[AuraType.Shiny](1);
         this.plotList.forEach(plot => plot.clearAuras());
 
         this.plotList.forEach((plot, idx) => plot.applyAura(idx));
@@ -968,6 +970,7 @@ class Farming implements Feature {
         }
 
         // TODO: HLXII Rebalance cost based on Berry growth rate
+        // Will probably have to be manually set, rather than using a formula
         return 10 * Math.floor(Math.pow(this.unlockedPlotCount(), 2));
     }
 
@@ -986,9 +989,7 @@ class Farming implements Feature {
         }
 
         GameHelper.incrementObservable(this.berryList[berry], -1);
-        plot.berry = berry;
-        plot.age = 0;
-        plot.notifications = [];
+        plot.plant(berry);
 
         if (!suppressResetAura) {
             this.resetAuras();
