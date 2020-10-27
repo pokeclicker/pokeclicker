@@ -264,12 +264,11 @@ class Plot implements Saveable {
         }
     }
 
-    generateWanderPokemon(): string | undefined {
+    generateWanderPokemon(): string {
         if (Math.random() < GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]()) {
-            // TODO: HLXII Generate wandering pokemon
-            return 'POKEMON';
+            return this.berryData.wander[Math.floor(Math.random() * this.berryData.wander.length)];
         }
-        return undefined;
+        return '';
     }
 
     /**

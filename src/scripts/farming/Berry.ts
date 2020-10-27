@@ -19,10 +19,19 @@ class Berry {
 
     public aura?: Aura;
 
+    public wander: string[];
+
+    private static baseWander = [
+        'Butterfree', 'Weedle', 'Tangela', 'Scyther',
+        'Ledyba', 'Pineco', 'Heracross',
+        'Wurmple', 'Volbeat', 'Illumise',
+        'Burmy (plant)', 'Combee', 'Cherubi', 'Munchlax',
+    ];
+
     constructor(type: BerryType, growthTime: number[],
         harvestAmount: number, replantRate: number, farmValue: number,
         flavors: number[], color: BerryColor, description: string[],
-        aura?: Aura) {
+        aura?: Aura, wander?: string[]) {
         this.type = type;
         this.growthTime = growthTime;
         this.harvestAmount = harvestAmount;
@@ -35,6 +44,7 @@ class Berry {
         this.color = color;
         this.description = description;
         this.aura = aura;
+        this.wander = Berry.baseWander.concat(wander);
     }
 
     get descriptionHTML(): string {

@@ -218,42 +218,42 @@ class Farming implements Feature {
             [
                 'This Berry is said to have grown plentiful in the tropics of the past. It boasts an intensely hot spiciness.',
                 'It has a tendency to overtake nearby plants.',
-            ]);
+            ], undefined, ['Charmander']);
         this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [490, 2460, 4970, 6000, 12000],
             13, 0.03, 1000,
             [0, 15, 0, 10, 0], BerryColor.Blue,
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
                 'This Berry promotes the fruiting of nearby Berry plants.',
-            ], new Aura(AuraType.Harvest, [1.2, 1.4, 1.6]));
+            ], new Aura(AuraType.Harvest, [1.2, 1.4, 1.6]), ['Totodile']);
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [180, 870, 940, 1800, 3600],
             9, 0.03, 1050,
             [0, 0, 15, 0, 10], BerryColor.Yellow,
             [
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
                 'The same energy promotes the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [1.2, 1.4, 1.6]));
+            ], new Aura(AuraType.Growth, [1.2, 1.4, 1.6]), ['Pikachu']);
         this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [140, 1160, 2210, 2600, 5200],
             15, 0.03, 1100,
             [10, 0, 0, 15, 0], BerryColor.Green,
             [
                 'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
                 'It has a tendency to expand into nearby plots.',
-            ]);
+            ], undefined, ['Treeko']);
         this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [680, 2700, 5280, 7000, 14000],
             16, 0.03, 4500,
             [0, 10, 0, 0, 15], BerryColor.Blue,
             [
                 'This Berry has a refreshing flavor that strikes a good balance of dryness and sourness. It tastes better chilled.',
                 'This Berry slows the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [0.9, 0.8, 0.7]));
+            ], new Aura(AuraType.Growth, [0.9, 0.8, 0.7]), ['Snover']);
         this.berryData[BerryType.Chople]    = new Berry(BerryType.Chople,   [350, 2640, 4130, 4200, 8400],
             17, 0.03, 1200,
             [15, 0, 0, 10, 0], BerryColor.Red,
             [
                 'This Berry contains a substance that generates heat. It can even heat up a chilly heart.',
                 'Growing these Berries will promote Egg growth.',
-            ], new Aura(AuraType.Egg, [1.1, 1.2, 1.3]));
+            ], new Aura(AuraType.Egg, [1.1, 1.2, 1.3]), ['Riolu']);
         this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [150, 1400, 1600, 2000, 4000],
             11, 0.03, 500,
             [0, 15, 0, 0, 10], BerryColor.Green,
@@ -261,67 +261,68 @@ class Farming implements Feature {
                 'This Berry is a brilliant green on the outside. Inside, it is packed with a dry-flavored, black-colored flesh.',
                 'It has a tendency to overtake nearby plants.',
                 'Due to its poisonous nature, it increases the chances of mutations near it.',
-            ], new Aura(AuraType.Mutation, [1.2, 1.4, 1.6]));
+            ], new Aura(AuraType.Mutation, [1.2, 1.4, 1.6]), ['Gulpin']);
         this.berryData[BerryType.Shuca]     = new Berry(BerryType.Shuca,    [320, 3980, 6320, 8000, 16000],
             19, 0.03, 1300,
             [10, 0, 15, 0, 0], BerryColor.Yellow,
             [
                 'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
                 'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [1.2, 1.4, 1.6]));
+            ], new Aura(AuraType.Replant, [1.2, 1.4, 1.6]), ['Larvitar']);
         this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [240, 1400, 2310, 3500, 7000],
             20, 0.03, 1350,
             [0, 10, 0, 15, 0], BerryColor.Blue,
-            ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.']);
+            ['This Berry is said to be a new kind that is a cross of two Berries brought together by winds from far away.'],
+            undefined, ['Tropius']);
         this.berryData[BerryType.Payapa]    = new Berry(BerryType.Payapa,   [270, 1630, 3670, 6500, 13000],
             21, 0.03, 1400,
             [0, 0, 10, 0, 15], BerryColor.Purple,
             [
                 'This Berry is said to sense human emotions for the way it swells roundly when a person approaches.',
                 'The same behavior affects nearby plants, causing additional mutations.',
-            ], new Aura(AuraType.Mutation, [1.1, 1.2, 1.3]));
+            ], new Aura(AuraType.Mutation, [1.1, 1.2, 1.3]), ['Natu']);
         this.berryData[BerryType.Tanga]     = new Berry(BerryType.Tanga,    [420, 770, 1760, 2300, 4600],
             16, 0.03, 1100,
             [20, 0, 0, 0, 10], BerryColor.Green,
             [
                 'The flower grows at the tip of this Berry. It attracts Bug Pokémon by letting its stringy petals stream out.',
                 'The attracted Bug Pokémon decreases the amount of harvestable Berries in nearby plants',
-            ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]));
+            ], new Aura(AuraType.Harvest, [0.9, 0.8, 0.7]), ['Nincada']);
         this.berryData[BerryType.Charti]    = new Berry(BerryType.Charti,   [490, 3660, 4550, 9000, 18000],
             23, 0.03, 6000,
             [10, 20, 0, 0, 0], BerryColor.Yellow,
             [
                 'It is often used for pickles because of its very dry flavor. It can also be eaten raw for its provocative taste.',
                 'This Berry plant hardens the surrounding soil, decreasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [0.9, 0.8, 0.7]));
+            ], new Aura(AuraType.Replant, [0.9, 0.8, 0.7]), ['Sudowoodo']);
         this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [1000, 6370, 8580, 11000, 22000],
             24, 0.03, 1350,
             [0, 10, 20, 0, 0], BerryColor.Purple,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
                 'Nearby Pokémon are wary of this Berry plant.',
-            ], new Aura(AuraType.Attract, [0.9, 0.8, 0.7]));
+            ], new Aura(AuraType.Attract, [0.9, 0.8, 0.7]), ['Shedinja']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [1300, 9870, 10200, 15000, 30000],
             25, 0.03, 15000,
             [0, 0, 10, 20, 0], BerryColor.Red,
             [
                 'If a large enough volume of this Berry is boiled down, its bitterness fades away. It makes a good jam.',
                 'This Berry requires a lot of energy to grow, stealing away nutrients from nearby plots.',
-            ], new Aura(AuraType.Growth, [0.8, 0.6, 0.5]));
+            ], new Aura(AuraType.Growth, [0.8, 0.6, 0.5]), ['Bagon']);
         this.berryData[BerryType.Colbur]    = new Berry(BerryType.Colbur,   [380, 3790, 4650, 5500, 11000],
             26, 0.03, 1650,
             [0, 0, 0, 10, 20], BerryColor.Purple,
             [
                 'Tiny hooks grow on the surface of this Berry. It latches on to Pokémon so it can be carried to far-off places.',
                 'It has a tendency to overtake nearby plants.',
-            ]);
+            ], undefined, ['Absol']);
         this.berryData[BerryType.Babiri]    = new Berry(BerryType.Babiri,   [1210, 8630, 9410, 10000, 20000],
             27, 0.03, 3200,
             [25, 10, 0, 0, 0], BerryColor.Green,
             [
                 'This Berry is very tough with a strong flavor. It was used to make medicine by people in the past.',
                 'This Berry plant is very hardy and resistant, causing less mutations around it.',
-            ], new Aura(AuraType.Mutation, [0.9, 0.8, 0.7]));
+            ], new Aura(AuraType.Mutation, [0.9, 0.8, 0.7]), ['Skarmory']);
         this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [240, 1430, 2970, 3200, 6400],
             17, 0.03, 1320,
             [0, 25, 10, 0, 0], BerryColor.Yellow,
@@ -332,7 +333,7 @@ class Farming implements Feature {
             [
                 'This Berry is sweet with a hint of bitterness and has a lingering sweet scent. It is often dried and used to make tea.',
                 'The scent of this Berry plant attracts wild Pokémon.',
-            ], new Aura(AuraType.Attract, [1.2, 1.4, 1.6]));
+            ], new Aura(AuraType.Attract, [1.2, 1.4, 1.6]), ['Togepi']);
         //#endregion
 
         //#region Fifth Generation
@@ -367,7 +368,8 @@ class Farming implements Feature {
         this.berryData[BerryType.Liechi]    = new Berry(BerryType.Liechi,   [5,10,15,20,40],
             1, .1, 60,
             [30, 10, 30, 0, 0], BerryColor.Red,
-            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sea.']); // TODO: Set properties
+            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of the sea.'],
+            undefined, ['Manaphy']); // TODO: Set properties
         this.berryData[BerryType.Ganlon]    = new Berry(BerryType.Ganlon,   [5,10,15,20,40],
             1, .1, 60,
             [0, 30, 10, 30, 0], BerryColor.Purple,
@@ -379,7 +381,8 @@ class Farming implements Feature {
         this.berryData[BerryType.Petaya]    = new Berry(BerryType.Petaya,   [5,10,15,20,40],
             1, .1, 60,
             [30, 0, 0, 30, 10], BerryColor.Pink,
-            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.']); // TODO: Set properties
+            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.'],
+            undefined, ['Mew']); // TODO: Set properties
         this.berryData[BerryType.Apicot]    = new Berry(BerryType.Apicot,   [5,10,15,20,40],
             1, .1, 60,
             [10, 30, 0, 0, 30], BerryColor.Blue,
@@ -391,7 +394,8 @@ class Farming implements Feature {
         this.berryData[BerryType.Starf]     = new Berry(BerryType.Starf,    [5,10,15,20,40],
             1, .1, 60,
             [30, 10, 30, 10, 30], BerryColor.Green,
-            ['This Berry is considered a mirage. It was said to be so strong that it had to be abandoned at the world\'s edge.']); // TODO: Set properties
+            ['This Berry is considered a mirage. It was said to be so strong that it had to be abandoned at the world\'s edge.'],
+            undefined, ['Jirachi']); // TODO: Set properties
 
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [2,4,6,8,16],
             1, 1, 60,
@@ -741,11 +745,17 @@ class Farming implements Feature {
 
 
         // Liechi
-        this.mutations.push(new FieldMutation(.000001, BerryType.Liechi, BerryType.Passho));
+        this.mutations.push(new FieldMutation(.000001, BerryType.Liechi, BerryType.Passho, undefined, {
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[pokemonMap.Kyogre](),
+        }));
         // Ganlon
-        this.mutations.push(new FieldMutation(.000001, BerryType.Ganlon, BerryType.Shuca));
+        this.mutations.push(new FieldMutation(.000001, BerryType.Ganlon, BerryType.Shuca, undefined, {
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[pokemonMap.Groudon](),
+        }));
         // Salac
-        this.mutations.push(new FieldMutation(.000001, BerryType.Salac, BerryType.Coba));
+        this.mutations.push(new FieldMutation(.000001, BerryType.Salac, BerryType.Coba, undefined, {
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[pokemonMap.Rayquaza](),
+        }));
         // Petaya
 
         // Apicot
@@ -753,17 +763,38 @@ class Farming implements Feature {
         // Lansat
 
         // Starf
-
+        // No mutation, obtained by wandering shiny pokemon
         // Enigma
         this.mutations.push(new EnigmaMutation(.00001));
         // Enigma Mutations
-        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Liechi, BerryType.Passho, [BerryType.Enigma], { showHint: false }));
-        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Ganlon, BerryType.Shuca, [BerryType.Enigma], { showHint: false }));
-        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Salac, BerryType.Coba, [BerryType.Enigma], { showHint: false }));
-        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Petaya, BerryType.Payapa, [BerryType.Enigma], { showHint: false }));
-        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Apicot, BerryType.Chilan, [BerryType.Enigma], { showHint: false }));
-        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Lansat, BerryType.Roseli, [BerryType.Enigma], { showHint: false }));
-        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Starf, BerryType.Babiri, [BerryType.Enigma], { showHint: false }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Liechi, BerryType.Passho, [BerryType.Enigma], {
+            showHint: false,
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Liechi](),
+        }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Ganlon, BerryType.Shuca, [BerryType.Enigma], {
+            showHint: false,
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Ganlon](),
+        }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Salac, BerryType.Coba, [BerryType.Enigma], {
+            showHint: false,
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Salac](),
+        }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Petaya, BerryType.Payapa, [BerryType.Enigma], {
+            showHint: false,
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Petaya](),
+        }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Apicot, BerryType.Chilan, [BerryType.Enigma], {
+            showHint: false,
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Apicot](),
+        }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Lansat, BerryType.Roseli, [BerryType.Enigma], {
+            showHint: false,
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Lansat](),
+        }));
+        this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Starf, BerryType.Babiri, [BerryType.Enigma], {
+            showHint: false,
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Starf](),
+        }));
 
         //#endregion
 
@@ -821,14 +852,16 @@ class Farming implements Feature {
 
         // Wandering Pokemon
         this.counter += GameConstants.TICK_TIME;
-        let wanderPokemon = undefined;
+        let wanderPokemon = '';
         if (this.counter >= GameConstants.WANDER_TICK) {
             for (let i = 0;i < App.game.farming.plotList.length;i++) {
                 const plot = App.game.farming.plotList[i];
-                const pokemon = plot.generateWanderPokemon();
-                if (pokemon) {
+                wanderPokemon = plot.generateWanderPokemon();
+                // TODO: HLXII Handle actually gaining the pokemon
+                // TODO: HLXII Handle Shiny
+                // TODO: HLXII Handle other bonus (DT?)
+                if (wanderPokemon !== '') {
                     notifications.add(FarmNotificationType.Wander);
-                    wanderPokemon = pokemon;
                     break;
                 }
             }
@@ -839,12 +872,12 @@ class Farming implements Feature {
         }
 
         if (notifications.size) {
-            notifications.forEach((n) => this.handleNotification(n), this);
+            notifications.forEach((n) => this.handleNotification(n, wanderPokemon), this);
         }
     }
 
     // TODO: HLXII Change details of notifier for different notifications
-    handleNotification(type: FarmNotificationType): void {
+    handleNotification(type: FarmNotificationType, wander?: string): void {
         switch (type) {
             case FarmNotificationType.Ripe:
                 Notifier.notify({
@@ -889,6 +922,14 @@ class Farming implements Feature {
             case FarmNotificationType.MulchRanOut:
                 Notifier.notify({
                     message: 'A plot has run out of mulch!',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
+                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+                });
+                break;
+            case FarmNotificationType.Wander:
+                Notifier.notify({
+                    message: `A ${wander} has wandered onto the farm!`,
                     type: NotificationConstants.NotificationOption.success,
                     sound: NotificationConstants.NotificationSound.ready_to_harvest,
                     setting: NotificationConstants.NotificationSetting.ready_to_harvest,
