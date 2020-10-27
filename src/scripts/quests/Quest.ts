@@ -37,11 +37,17 @@ abstract class Quest {
                     message: `You have completed your quest and claimed ${this.pointsReward} quest points!`,
                     type: NotificationConstants.NotificationOption.success,
                 });
+                App.game.logbook.newLog(
+                    LogBookTypes.QUEST_COMPLETE,
+                    `Completed \"${this.description}\" for <img title=\"Quest point rewards\" src=\"assets/images/currency/questPoint.png\" height=\"25px\"> ${this.pointsReward}!`);
             } else {
                 Notifier.notify({
                     message: 'You have completed a quest!',
                     type: NotificationConstants.NotificationOption.success,
                 });
+                App.game.logbook.newLog(
+                    LogBookTypes.QUEST_COMPLETE,
+                    `Completed \"${this.description}\"!`);
             }
             GameHelper.incrementObservable(App.game.statistics.questsCompleted);
             return true;
