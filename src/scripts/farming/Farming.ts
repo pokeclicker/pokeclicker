@@ -733,17 +733,37 @@ class Farming implements Feature {
         //#region Fifth Generation
 
         // Micle
-
+        this.mutations.push(new FieldFlavorMutation(.00003, BerryType.Micle, [0, 600, 0, 0, 0], {
+            hint: 'I\'ve heard of a Berry that only appears in the driest of fields.',
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Pamtre](),
+        }));
         // Custap
-
+        this.mutations.push(new FieldFlavorMutation(.00003, BerryType.Custap, [0, 0, 600, 0, 0], {
+            hint: 'I\'ve heard of a Berry that only appears in the sweetest of fields.',
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Watmel](),
+        }));
         // Jaboca
-
+        this.mutations.push(new FieldFlavorMutation(.00003, BerryType.Jaboca, [0, 0, 0, 600, 0], {
+            hint: 'I\'ve heard of a Berry that only appears in the most bitter of fields.',
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Durin](),
+        }));
         // Rowap
-
+        this.mutations.push(new FieldFlavorMutation(.00003, BerryType.Rowap, [0, 0, 0, 0, 600], {
+            hint: 'I\'ve heard of a Berry that only appears in the most sour of fields.',
+            unlockReq: () => App.game.farming.unlockedBerries[BerryType.Belue](),
+        }));
         // Kee
-
+        this.mutations.push(new GrowNearBerryMutation(.00003, BerryType.Kee,
+            [
+                BerryType.Liechi,
+                BerryType.Ganlon,
+            ]));
         // Maranga
-
+        this.mutations.push(new GrowNearBerryMutation(.00003, BerryType.Kee,
+            [
+                BerryType.Salac,
+                BerryType.Petaya,
+            ]));
 
         // Liechi
         this.mutations.push(new FieldMutation(.000001, BerryType.Liechi, BerryType.Passho, undefined, {
@@ -758,7 +778,7 @@ class Farming implements Feature {
             unlockReq: () => App.game?.statistics?.pokemonCaptured[pokemonMap.Rayquaza](),
         }));
         // Petaya
-
+        this.mutations.push(new PetayaMutation(.000001));
         // Apicot
 
         // Lansat
