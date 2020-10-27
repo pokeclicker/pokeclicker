@@ -24,4 +24,12 @@ const LogBookTypes: Record<string, LogBookType> = {
         display: 'primary',
         label: 'FOUND',
     },
+    ACHIEVEMENT: {
+        display: 'success',
+        label: '\'CHIEVE'',
+    },
+    QUEST_COMPLETE: {
+        display: 'success',
+        label: 'COMPLETED',
+    },
 };
