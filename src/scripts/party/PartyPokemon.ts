@@ -89,7 +89,7 @@ class PartyPokemon implements Saveable {
     }
 
     public useProtein() {
-        if (this.proteinsUsed() >= player.highestRegion() * 10) {
+        if (!this.canUseProtein()) {
             Notifier.notify({
                 message: 'This Pokemon cannot increase it\'s power any higher!',
                 type: NotificationConstants.NotificationOption.warning,
@@ -100,6 +100,10 @@ class PartyPokemon implements Saveable {
             GameHelper.incrementObservable(this.proteinsUsed);
         }
     }
+
+    canUseProtein = ko.pureComputed(() => {
+        return this.proteinsUsed() < player.highestRegion() * 10;
+    });
 
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {

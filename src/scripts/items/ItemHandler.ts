@@ -29,6 +29,10 @@ class ItemHandler {
         return result == undefined ? true : result;
     }
 
+    public static hasItem(name: string): boolean {
+        return player.itemList[name] ? !!player.itemList[name]() : false;
+    }
+
     public static resetAmount() {
         const input = $("input[name='amountOfStones']");
         input.val(1).change();
