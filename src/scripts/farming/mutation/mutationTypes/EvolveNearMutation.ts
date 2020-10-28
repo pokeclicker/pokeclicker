@@ -17,12 +17,8 @@ abstract class EvolveNearMutation extends EvolveMutation {
         const plots = super.getMutationPlots();
 
         return plots.filter((idx) => {
-            const plot = App.game.farming.plotList[idx];
-
             const nearPlots = Plot.findNearPlots(idx);
-            if (this.nearPlotsFitRequirements(nearPlots)) {
-                plots.push(idx);
-            }
+            return this.nearPlotsFitRequirements(nearPlots);
         }, this);
     }
 

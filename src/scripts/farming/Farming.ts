@@ -461,7 +461,7 @@ class Farming implements Feature {
             [0, 25, 0, 0, 0], 0.5, {
                 hint: 'I\'ve heard that a Berry will appear if its surroundings get too dry!',
                 unlockReq: function(): boolean {
-                    return App.game.farming.unlockedBerries[BerryType.Cheri]();
+                    return App.game.farming.unlockedBerries[BerryType.Chesto]();
                 },
             }
         ));

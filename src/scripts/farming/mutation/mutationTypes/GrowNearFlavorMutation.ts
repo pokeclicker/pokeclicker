@@ -51,7 +51,13 @@ class GrowNearFlavorMutation extends GrowNearMutation {
         }, this);
 
         const reqMatched = this.flavorReqs.every((value, idx) => value <= nearFlavors[idx]);
-        const errorMatched = this.flavorReqs.map((req, idx) => Math.pow(req - nearFlavors[idx], 2)).reduce((a, b) => a + b, 0) <= this.error;
+
+        // Normalizing flavors
+        const reqSum = this.flavorReqs.reduce((a,b) => a + b, 0);
+        const normReqs = this.flavorReqs.map(f => f / reqSum);
+        const nearSum = nearFlavors.reduce((a,b) => a + b, 0);
+        const normNear = nearFlavors.map(f => f / nearSum);
+        const errorMatched = normReqs.map((req, idx) => Math.pow(req - normNear[idx], 2)).reduce((a, b) => a + b, 0) <= this.error;
 
         return reqMatched && errorMatched;
     }
