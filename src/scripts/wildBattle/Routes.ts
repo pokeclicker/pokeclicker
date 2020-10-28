@@ -1633,7 +1633,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.BadgeEnums.Elite_AlolaChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 ));
 Routes.add(new RegionRoute(
     'Alola Poni Plains', GameConstants.Region.alola, 25,
