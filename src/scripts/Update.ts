@@ -215,6 +215,12 @@ class Update implements Saveable {
                     saveData.shards.shardWallet[type] += cost;
                 }
             });
+
+            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+                p.attackBonusPercent = p.attackBonus;
+                delete p.attackBonus;
+                return p;
+            });
         },
     };
 

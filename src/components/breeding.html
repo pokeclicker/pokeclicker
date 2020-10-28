@@ -118,6 +118,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                 <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); BreedingController.filterBreedableList(); App.game.breeding.checkCloseModal();}"></a>
+                                <a class="useProtein" href="#useProtein" data-bind="click: function() { $data.useProtein(); }"><img class="p-0" src="assets/images/items/Protein.png" width="100%" height="100%"/></a>
                             </li>
                         </ul>
                         <!-- /ko -->

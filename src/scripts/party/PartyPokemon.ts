@@ -15,6 +15,7 @@ class PartyPokemon implements Saveable {
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attack: KnockoutObservable<number>;
+    proteinsUsed: KnockoutObservable<number>;
 
     constructor(
         public id: number,
@@ -23,11 +24,12 @@ class PartyPokemon implements Saveable {
         public baseAttack: number,
         public attackBonusPercent: number = 0,
         public attackBonusAmount: number = 0,
-        public proteinsUsed: number = 0,
+        proteinsUsed,
         public exp: number = 0,
         breeding = false,
         shiny = false
     ) {
+        this.proteinsUsed = ko.observable(proteinsUsed);
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
         this._level = ko.observable(1);
@@ -37,7 +39,7 @@ class PartyPokemon implements Saveable {
     public calculateAttack(): number {
         const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = this.level / 100;
-        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusPercent) * levelMultiplier));
+        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
     }
 
     calculateLevelFromExp() {
@@ -87,7 +89,7 @@ class PartyPokemon implements Saveable {
     }
 
     public useProtein() {
-        if (this.proteinsUsed >= player.highestRegion() * 10) {
+        if (this.proteinsUsed() >= player.highestRegion() * 10) {
             Notifier.notify({
                 message: 'This Pokemon cannot increase it\'s power any higher!',
                 type: NotificationConstants.NotificationOption.warning,
@@ -95,7 +97,7 @@ class PartyPokemon implements Saveable {
             return;
         }
         if (ItemHandler.useItem('Protein')) {
-            this.proteinsUsed++;
+            GameHelper.incrementObservable(this.proteinsUsed);
         }
     }
 
@@ -110,7 +112,7 @@ class PartyPokemon implements Saveable {
 
         this.attackBonusPercent = json['attackBonusPercent'] ?? this.defaults.attackBonusPercent;
         this.attackBonusAmount = json['attackBonusAmount'] ?? this.defaults.attackBonusAmount;
-        this.proteinsUsed = json['proteinsUsed'] ?? this.defaults.proteinsUsed;
+        this.proteinsUsed = ko.observable(json['proteinsUsed'] ?? this.defaults.proteinsUsed);
         this.exp = json['exp'] ?? this.defaults.exp;
         this.breeding = json['breeding'] ?? this.defaults.breeding;
         this.shiny = json['shiny'] ?? this.defaults.shiny;
@@ -140,7 +142,7 @@ class PartyPokemon implements Saveable {
             id: this.id,
             attackBonusPercent: this.attackBonusPercent,
             attackBonusAmount: this.attackBonusAmount,
-            proteinsUsed: this.proteinsUsed,
+            proteinsUsed: this.proteinsUsed(),
             exp: this.exp,
             breeding: this.breeding,
             shiny: this.shiny,
