@@ -1468,98 +1468,98 @@ Routes.add(new RegionRoute(
     'Alola Route 1', GameConstants.Region.alola, 1,
     new RoutePokemon({
         land: ['Pikipek', 'Yungoos', 'Grubbin'],
-    })
+    }),
     [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 1 Hao\'oli Outskirts', GameConstants.Region.alola, 2,
     new RoutePokemon({
         land: ['Pikipek', 'Yungoos', 'Grubbin'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 2', GameConstants.Region.alola, 3,
     new RoutePokemon({
         land: ['Cutiefly', 'Rockruff', 'Oricorio', 'Crabrawler'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 3', GameConstants.Region.alola, 4,
     new RoutePokemon({
         land: ['Mudbray', 'Dewpider', 'Salandit', 'Stufful'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Verdant Cavern'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 4', GameConstants.Region.alola, 5,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 5', GameConstants.Region.alola, 6,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Paniola Ranch'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 6', GameConstants.Region.alola, 7,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 7', GameConstants.Region.alola, 8,
     new RoutePokemon({
         land: ['Pikipek', 'Yungoos', 'Grubbin'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 7)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 8', GameConstants.Region.alola, 9,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Wela Volcano Park'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 9', GameConstants.Region.alola, 10,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Diglett\'s Tunnel'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Akala Outskirts', GameConstants.Region.alola, 11,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Memorial Hill'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 10', GameConstants.Region.alola, 12,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 11', GameConstants.Region.alola, 13,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Malie Garden'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 12', GameConstants.Region.alola, 14,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 13),
         new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hokulani Observatory')),
@@ -1569,91 +1569,91 @@ Routes.add(new RegionRoute(
     'Alola Route 13', GameConstants.Region.alola, 15,
     new RoutePokemon({
         land: ['Pikipek', 'Yungoos', 'Grubbin'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 14)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 14', GameConstants.Region.alola, 16,
     new RoutePokemon({
         land: ['Pikipek', 'Yungoos', 'Grubbin'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)]
 ));
 Routes.add(new RegionRoute(
     'Alola Haina Desert', GameConstants.Region.alola, 17,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thifty Megamart'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 15', GameConstants.Region.alola, 18,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Thifty Megamart'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 16', GameConstants.Region.alola, 19,
     new RoutePokemon({
         land: ['Pikipek', 'Yungoos', 'Grubbin'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 17)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 17', GameConstants.Region.alola, 20,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Ula\'ula Meadow'))]
 ));
 Routes.add(new RegionRoute(
     'Alola Poni Wilds', GameConstants.Region.alola, 21,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)] //replace with Aether Paradise if implemented
 ));
 Routes.add(new RegionRoute(
     'Alola Ancient Poni Path', GameConstants.Region.alola, 22,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 21)]
 ));
 Routes.add(new RegionRoute(
     'Alola Poni Breaker Coas', GameConstants.Region.alola, 23,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 22)]
 ));
 Routes.add(new RegionRoute(
     'Alola Poni Grove', GameConstants.Region.alola, 24,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new GymBadgeRequirement(BadgeEnums.BadgeEnums.Elite_AlolaChampion)]
 ));
 Routes.add(new RegionRoute(
     'Alola Poni Plains', GameConstants.Region.alola, 25,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 24)]
 ));
 Routes.add(new RegionRoute(
     'Alola Poni Coast', GameConstants.Region.alola, 26,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 25)]
 ));
 Routes.add(new RegionRoute(
     'Alola Poni Gauntlet', GameConstants.Region.alola, 27,
     new RoutePokemon({
         land: ['Turtonator', 'Togedemaru', 'Mimikyu'],
-    })
+    }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 26)]
 ));
 
