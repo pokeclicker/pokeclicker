@@ -1113,7 +1113,7 @@ const pokemonList: PokemonListData[] =
                 'speed': 90,
             },
         },
-                {
+        {
             'id': 52.01,
             'name': 'Meowth (Alolan)',
             'catchRate': 255,

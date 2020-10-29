@@ -105,7 +105,7 @@ TownList['Pokemon League Kalos'] = new PokemonLeague(
 TownList['Pokemon League Alola'] = new PokemonLeague(
     'Pokemon League Alola',
     GameConstants.Region.alola,
-        [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanikala'))],
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanikala'))],
     indigoPlateauShop,
     ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
 );
