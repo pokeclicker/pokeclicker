@@ -430,6 +430,7 @@ export enum StoneType {
     'Prism_scale',
     'Sachet',
     'Whipped_dream',
+    'Ice_stone',
 }
 
 export enum BattleItemType {
