@@ -1178,3 +1178,68 @@ gymList['Champion Diantha'] = new Gym(
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
 );
+
+//Alola Elite 4
+//TODO: Balancing of elite Pokemon HP & rewards.
+gymList['Elite Molayne'] = new Gym(
+    'Molayne',
+    'Elite Molayne',
+    [
+        new GymPokemon('Klefki', 1945330, 56),
+        new GymPokemon('Bisharp', 1948300, 56),
+        new GymPokemon('Magnezone', 1952000, 56),
+        new GymPokemon('Metagross', 1957000, 56),
+        new GymPokemon('Dugtrio (Alolan)', 1957000, 57),
+    ],
+    BadgeEnums.Elite_Molayne,
+    64000,
+    'That Kukui... He certainly found an interesting Trainer for me to face!',
+    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+);
+gymList['Elite Olivia'] = new Gym(
+    'Olivia',
+    'Elite Olivia',
+    [
+        new GymPokemon('Armaldo', 1945330, 56),
+        new GymPokemon('Cradily', 1948300, 56),
+        new GymPokemon('Gigalith', 1952000, 56),
+        new GymPokemon('Probopass', 1957000, 56),
+        new GymPokemon('Lycanroc (Midnight)', 1957000, 57),
+    ],
+    BadgeEnums.Elite_Olivia,
+    64000,
+    'I don\'t see the same look in your eyes that I saw when we first met on Akala Island. Have you had some experiences that you\'ll carry with you in your heart forever? Well, it\'s time for you to move on.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Molayne)]
+);
+gymList['Elite Acerola'] = new Gym(
+    'Acerola',
+    'Elite Acerola',
+    [
+        new GymPokemon('Banette', 1945330, 56),
+        new GymPokemon('Drifblim', 1948300, 56),
+        new GymPokemon('Dhelmise', 1952000, 56),
+        new GymPokemon('Froslass', 1957000, 56),
+        new GymPokemon('Palossand', 1957000, 57),
+    ],
+    BadgeEnums.Elite_Acerola,
+    64000,
+    'I\'m...I\'m speechless! You\'ve done me in!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Olivia)]
+);
+gymList['Elite Kahili'] = new Gym(
+    'Kahili',
+    'Elite Kahili',
+    [
+        new GymPokemon('Braviary', 1945330, 56),
+        new GymPokemon('Hawlucha', 1948300, 56),
+        new GymPokemon('Oricorio (Baile)', 1952000, 56),
+        new GymPokemon('Mandibuzz', 1957000, 56),
+        new GymPokemon('Toucannon', 1957000, 57),
+    ],
+    BadgeEnums.Elite_Kahili,
+    64000,
+    'It\'s frustrating to me as a member of the Elite Four, but it seems your strength is the real deal.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Acerola)]
+);
+
+//TODO: Hao champion battle, team depends on starter
