@@ -2016,7 +2016,7 @@ TownList['Ruins of Hope'] = new DungeonTown(
     GameConstants.Region.alola,
     [
         new RouteKillRequirement(10, GameConstants.Region.alola, 26),
-        new GymBadgeRequirement(BadgeEnums..Elite_AlolaChampion),
+        new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
     ]
 );
 TownList['Poni Meadow'] = new DungeonTown(
