@@ -1490,12 +1490,6 @@ TownList['Floccesy Ranch'] = new DungeonTown(
     GameConstants.Region.unova,
     [new RouteKillRequirement(10, GameConstants.Region.unova, 20)]
 );
-TownList['Virbank Complex'] = new DungeonTown(
-    'Virbank Complex',
-    GameConstants.Region.unova,
-    //Optional dungeon, no unique mons, safe to scrap
-    [new GymBadgeRequirement(BadgeEnums.Basic)]
-);
 TownList['Liberty Garden'] = new DungeonTown(
     'Liberty Garden',
     GameConstants.Region.unova,
@@ -1511,14 +1505,6 @@ TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
     GameConstants.Region.unova,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Castelia Sewers'))]
-);
-TownList['Desert Resort'] = new DungeonTown(
-    'Desert Resort',
-    GameConstants.Region.unova,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect), // Should really be a route
-    ]
 );
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
@@ -1549,18 +1535,6 @@ TownList['Reversal Mountain'] = new DungeonTown(
     'Reversal Mountain',
     GameConstants.Region.unova,
     [new GymBadgeRequirement(BadgeEnums.Jet)]
-);
-TownList['Strange House'] = new DungeonTown(
-    'Strange House',
-    GameConstants.Region.unova,
-    // Optional dungeon, no unique mons, safe to scrap
-    [new GymBadgeRequirement(BadgeEnums.Jet)]
-);
-TownList['Undella Bay'] = new DungeonTown(
-    'Undella Bay',
-    GameConstants.Region.unova,
-    // Should really be a route
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))]
 );
 TownList['Seaside Cave'] = new DungeonTown(
     'Seaside Cave',
@@ -1630,12 +1604,6 @@ TownList['Pinwheel Forest'] = new DungeonTown(
     'Pinwheel Forest',
     GameConstants.Region.unova,
     [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
-);
-TownList['Wellspring Cave'] = new DungeonTown(
-    'Wellspring Cave',
-    GameConstants.Region.unova,
-    // Optional dungeon, no unique mons, safe to scrap
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 3)]
 );
 TownList['Dreamyard'] = new DungeonTown(
     'Dreamyard',
