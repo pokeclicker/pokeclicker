@@ -1857,6 +1857,13 @@ TownList['Malie City'] = new Town(
         requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)], //Replace with Ather Paradise 1 if implemented
     }
 );
+TownList['Aether Paradise'] = new Town(
+    'Aether Paradise',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
+    }
+);
 TownList['Tapu Village'] = new Town(
     'Tapu Village',
     GameConstants.Region.alola,
