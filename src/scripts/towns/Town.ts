@@ -1861,7 +1861,7 @@ TownList['Tapu Village'] = new Town(
     'Tapu Village',
     GameConstants.Region.alola,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 17)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
     }
 );
 TownList['Seafolk Village'] = new Town(
@@ -1967,4 +1967,65 @@ TownList['Hokulani Observatory'] = new DungeonTown(
     'Hokulani Observatory',
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 15)]
+);
+TownList['Thrifty Megamart'] = new DungeonTown(
+    'Thrifty Megamart',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 19)]
+);
+TownList['Ula\'ula Meadow'] = new DungeonTown(
+    'Ula\'ula Meadow',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 22)]
+);
+TownList['Po Town'] = new DungeonTown(
+    'Po Town',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 23)]
+);
+TownList['Mount Lanikala'] = new DungeonTown(
+    'Mount Lanikala',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.BadgeEnums.GroundiumZ)]
+);
+TownList['Ruins of Abundance'] = new DungeonTown(
+    'Ruins of Abundance',
+    GameConstants.Region.alola,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.alola, 20),
+        new GymBadgeRequirement(BadgeEnums.BadgeEnums.Elite_AlolaChampion),
+    ]
+);
+TownList['Exeggutor Island'] = new DungeonTown(
+    'Exeggutor Island',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 25)]
+);
+TownList['Vast Poni Canyon'] = new DungeonTown(
+    'Vast Poni Canyon',
+    GameConstants.Region.alola,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island'))]
+);
+TownList['Nebby'] = new DungeonTown(
+    'Nebby',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.BadgeEnums.Elite_UltraNecrozma)]
+);
+TownList['Ruins of Hope'] = new DungeonTown(
+    'Ruins of Hope',
+    GameConstants.Region.alola,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.alola, 26),
+        new GymBadgeRequirement(BadgeEnums.BadgeEnums.Elite_AlolaChampion),
+    ]
+);
+TownList['Poni Meadow'] = new DungeonTown(
+    'Poni Meadow',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 28)]
+);
+TownList['Resolution Cave'] = new DungeonTown(
+    'Resolution Cave',
+    GameConstants.Region.alola,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
 );
