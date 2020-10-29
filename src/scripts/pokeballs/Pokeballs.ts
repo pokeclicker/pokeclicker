@@ -70,14 +70,21 @@ class Pokeballs implements Feature {
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
 
-        // Check which Pokeballs we have in stock that are of equal or lesser than selection
-        for (let i: number = pref; i >= 0; i--) {
-            if (this.pokeballs[i].quantity() > 0) {
-                use = i;
-                break;
+        if (this.pokeballs[pref]?.quantity()) {
+            return pref;
+        } else if (pref <= GameConstants.Pokeball.Masterball) {
+            // Check which Pokeballs we have in stock that are of equal or lesser than selection (upto Masterball)
+            for (let i: number = pref; i >= 0; i--) {
+                if (this.pokeballs[i].quantity() > 0) {
+                    use = i;
+                    break;
+                }
             }
+            return use;
+        } else {
+            // Use a normal Pokeball or None if we don't have Pokeballs in stock
+            return this.pokeballs[GameConstants.Pokeball.Pokeball].quantity() ? GameConstants.Pokeball.Pokeball : GameConstants.Pokeball.None;
         }
-        return use;
     }
 
     calculateCatchTime(ball: GameConstants.Pokeball): number {
