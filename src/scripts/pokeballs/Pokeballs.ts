@@ -24,10 +24,11 @@ class Pokeballs implements Feature {
 
     constructor() {
         this.pokeballs = [
-            new Pokeball(GameConstants.Pokeball.Pokeball, 0, 1250, 'A standard Pokéball', 25),
-            new Pokeball(GameConstants.Pokeball.Greatball, 5, 1000, '+5% chance to catch'),
-            new Pokeball(GameConstants.Pokeball.Ultraball, 10, 750, '+10% chance to catch'),
-            new Pokeball(GameConstants.Pokeball.Masterball, 100, 500, '100% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Pokeball, () => 0, 1250, 'A standard Pokéball', 25),
+            new Pokeball(GameConstants.Pokeball.Greatball, () => 5, 1000, '+5% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Ultraball, () => 10, 750, '+10% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Masterball, () => 100, 500, '100% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Fastball, () => 0, 500, 'Reduced catch time'),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
@@ -94,7 +95,7 @@ class Pokeballs implements Feature {
     }
 
     getCatchBonus(ball: GameConstants.Pokeball): number {
-        return this.pokeballs[ball].catchBonus;
+        return this.pokeballs[ball].catchBonus();
     }
 
     getBallQuantity(ball: GameConstants.Pokeball): number {

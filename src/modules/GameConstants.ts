@@ -182,6 +182,7 @@ export enum Pokeball {
     'Greatball' = 1,
     'Ultraball' = 2,
     'Masterball' = 3,
+    'Fastball' = 4,
 }
 
 export enum Currency {
