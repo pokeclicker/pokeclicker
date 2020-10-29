@@ -2,7 +2,7 @@ class BerryDeal {
     public berries: { berryType: BerryType, amount: number}[];
     public item: { itemType: Item | UndergroundItem, amount: number};
 
-    public static list: KnockoutObservableArray<BerryDeal> = ko.observableArray();
+    public static list: Record<GameConstants.Region, KnockoutObservableArray<BerryDeal>> = {};
 
     constructor(berry: BerryType[], berryAmount: number[], item: Item | UndergroundItem, itemAmount: number) {
         this.berries = [];
@@ -14,10 +14,6 @@ class BerryDeal {
 
     private static randomBerry(berryList: BerryType[]): BerryType {
         return berryList[Math.floor(berryList.length * SeededRand.next())];
-    }
-
-    private static randomAmount(base: number, variance: number): number {
-        return Math.max(1, base + Math.floor(variance * (SeededRand.next() - 0.5)));
     }
 
     private static randomBattleItem(): Item {
@@ -35,26 +31,26 @@ class BerryDeal {
     }
 
     public static getDeals(region: GameConstants.Region) {
-        switch (region) {
-            case GameConstants.Region.johto:
-                return BerryDeal.list.slice(0,2);
-            case GameConstants.Region.hoenn:
-                return BerryDeal.list.slice(2,5);
-            case GameConstants.Region.sinnoh:
-                return BerryDeal.list.slice(5);
-        }
-        return [];
+        return BerryDeal.list[region];
     }
 
     public static generateDeals(date: Date) {
         SeededRand.seedWithDate(date);
 
-        // Removing old deals
-        BerryDeal.list.removeAll();
+        const berryMasterRegions = [GameConstants.Region.johto, GameConstants.Region.hoenn, GameConstants.Region.sinnoh];
 
-        this.generateJohtoDeals();
-        this.generateHoennDeals();
-        this.generateSinnohDeals();
+        // Removing old deals
+        for (const region of berryMasterRegions) {
+            if (!BerryDeal.list[region]) {
+                BerryDeal.list[region] = ko.observableArray();
+            } else {
+                BerryDeal.list[region].removeAll();
+            }
+        }
+
+        BerryDeal.list[GameConstants.Region.johto].push(...this.generateJohtoDeals());
+        BerryDeal.list[GameConstants.Region.hoenn].push(...this.generateHoennDeals());
+        BerryDeal.list[GameConstants.Region.sinnoh].push(...this.generateSinnohDeals());
     }
 
     private static generateJohtoDeals() {
@@ -62,33 +58,37 @@ class BerryDeal {
         const secondGen = Farming.getGeneration(1);
         const thirdGen = Farming.getGeneration(2);
 
-        BerryDeal.list.push(new BerryDeal(
+        const list = [];
+
+        list.push(new BerryDeal(
             [
                 this.randomBerry(firstGen),
                 this.randomBerry(secondGen),
             ],
             [
-                this.randomAmount(50, 20),
-                this.randomAmount(20, 10),
+                SeededRand.intBetween(30, 70),
+                SeededRand.intBetween(10, 30),
             ],
             this.randomBattleItem(),
-            this.randomAmount(5,2)
+            SeededRand.intBetween(3, 7)
         ));
 
-        BerryDeal.list.push(new BerryDeal(
+        list.push(new BerryDeal(
             [
                 this.randomBerry(firstGen),
                 this.randomBerry(secondGen),
                 this.randomBerry(thirdGen),
             ],
             [
-                this.randomAmount(100, 30),
-                this.randomAmount(50, 20),
-                this.randomAmount(20, 10),
+                SeededRand.intBetween(70, 130),
+                SeededRand.intBetween(30, 70),
+                SeededRand.intBetween(10, 30),
             ],
             this.randomEvoItem(),
-            this.randomAmount(2,1)
+            SeededRand.intBetween(1, 3)
         ));
+
+        return list;
     }
 
     private static generateHoennDeals() {
@@ -105,18 +105,18 @@ class BerryDeal {
                     this.randomBerry(fourthGen),
                 ],
                 [
-                    this.randomAmount(50, 20),
-                    this.randomAmount(20, 10),
+                    SeededRand.intBetween(30, 70),
+                    SeededRand.intBetween(10, 30),
                 ],
                 this.randomUndergroundItem(),
-                this.randomAmount(2,1)
+                SeededRand.intBetween(1, 3)
             );
             if (temp.every(madeDeal => madeDeal.item.name !== deal.item.itemType.name)) {
                 temp.push(deal);
             }
             i++;
         }
-        BerryDeal.list.push(...temp);
+        return temp;
     }
 
     private static generateSinnohDeals() {
@@ -126,7 +126,9 @@ class BerryDeal {
         const fourthGen = Farming.getGeneration(3);
         const fifthGen = Farming.getGeneration(4);
 
-        BerryDeal.list.push(new BerryDeal(
+        const list = [];
+
+        list.push(new BerryDeal(
             [
                 this.randomBerry(firstGen),
                 this.randomBerry(secondGen),
@@ -135,32 +137,34 @@ class BerryDeal {
                 this.randomBerry(fifthGen),
             ],
             [
-                this.randomAmount(400, 100),
-                this.randomAmount(100, 30),
-                this.randomAmount(50, 20),
-                this.randomAmount(20, 10),
-                this.randomAmount(7, 3),
+                SeededRand.intBetween(300, 500),
+                SeededRand.intBetween(70, 130),
+                SeededRand.intBetween(30, 70),
+                SeededRand.intBetween(10, 30),
+                SeededRand.intBetween(4, 11),
             ],
             ItemList['Masterball'],
             1
         ));
+
+        return list;
     }
 
-    public static canUse(i: number): boolean {
-        const deal = BerryDeal.list.peek()[i];
+    public static canUse(region: GameConstants.Region, i: number): boolean {
+        const deal = BerryDeal.list[region].peek()[i];
         return deal.berries.every((value) => App.game.farming.berryList[value.berryType]() >= value.amount );
     }
 
-    public static use(i: number, tradeTimes = 1) {
-        const deal = BerryDeal.list.peek()[i];
-        if (BerryDeal.canUse(i)) {
+    public static use(region: GameConstants.Region, i: number, tradeTimes = 1) {
+        const deal = BerryDeal.list[region].peek()[i];
+        if (BerryDeal.canUse(region, i)) {
             deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * tradeTimes));
             if (deal.item.itemType instanceof UndergroundItem) {
                 Underground.gainMineItem(deal.item.itemType.id, deal.item.amount * tradeTimes);
             } else {
                 deal.item.itemType.gain(deal.item.amount * tradeTimes);
             }
-            GameHelper.incrementObservable(App.game.statistics.undergroundDailyDealTrades);
+            GameHelper.incrementObservable(App.game.statistics.berryDailyDealTrades);
         }
     }
 }

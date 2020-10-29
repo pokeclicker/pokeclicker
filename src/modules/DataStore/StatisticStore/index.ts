@@ -44,6 +44,7 @@ export default class Statistics implements Saveable {
     undergroundDailyDealTrades: KnockoutObservable<number>;
     // Farm
     totalBerriesHarvested: KnockoutObservable<number>;
+    berryDailyDealTrades: KnockoutObservable<number>;
     // Battle Frontier
     battleFrontierTotalStagesCompleted: KnockoutObservable<number>;
     battleFrontierHighestStageCompleted: KnockoutObservable<number>;
@@ -98,6 +99,7 @@ export default class Statistics implements Saveable {
         'undergroundLayersMined',
         'undergroundDailyDealTrades',
         'totalBerriesHarvested',
+        'berryDailyDealTrades',
         'battleFrontierTotalStagesCompleted',
         'battleFrontierHighestStageCompleted',
     ];

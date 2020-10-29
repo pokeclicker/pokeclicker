@@ -54,10 +54,10 @@
                                     <td class='vertical-middle' data-bind='text: $data.item.amount + " × " + $data.item.itemType.displayName'></td>
                                     <td class='vertical-middle'>
                                         <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
-                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use($index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse($index()) }'>
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(player.region, $index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(player.region, $index()) }'>
                                                 Trade
                                             </button>
-                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse($index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(player.region, $index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             </button>
                                             <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
                                                 <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
