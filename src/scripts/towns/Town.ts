@@ -1806,3 +1806,165 @@ TownList['Victory Road Kalos'] = new DungeonTown(
     ]
 );
 //Unknown Cave?
+
+//Alola Towns
+TownList['Iki Town'] = new Town(
+    'Iki Town',
+    GameConstants.Region.alola,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
+    }
+);
+TownList['Hau\'oli City'] = new Town(
+    'Hau\'oli City',
+    GameConstants.Region.alola,
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Trainers\' School'))],
+    }
+);
+TownList['Heahea City'] = new Town(
+    'Heahea City',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+    }
+);
+TownList['Paniola Town'] = new Town(
+    'Paniola Town',
+    GameConstants.Region.alola,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 7)],
+    }
+);
+TownList['Royal Avenue'] = new Town(
+    'Royal Avenue',
+    GameConstants.Region.alola,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
+    }
+);
+TownList['Konikoni City'] = new Town(
+    'Konikoni City',
+    GameConstants.Region.alola,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 12)],
+    }
+);
+TownList['Malie City'] = new Town(
+    'Malie City',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)], //Replace with Ather Paradise 1 if implemented
+    }
+);
+TownList['Tapu Village'] = new Town(
+    'Tapu Village',
+    GameConstants.Region.alola,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 17)],
+    }
+);
+TownList['Seafolk Village'] = new Town(
+    'Seafolk Village',
+    GameConstants.Region.alola,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)], //Replace with Ather Paradise 2 if implemented
+    }
+);
+TownList['Altar of the Sunne and Moone'] = new Town(
+    'Altar of the Sunne and Moone',
+    GameConstants.Region.alola,
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Vast Poni Canyon'))],
+    }
+);
+
+//Alola Dungeons
+TownList['Trainers\' School'] = new DungeonTown(
+    'Trainers\' School',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)]
+);
+TownList['Hau\'oli Cemetery'] = new DungeonTown(
+    'Hau\'oli Cemetery',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 3)]
+);
+TownList['Verdant Cavern'] = new DungeonTown(
+    'Verdant Cavern',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 3)]
+);
+TownList['Melemele Meadow'] = new DungeonTown(
+    'Melemele Meadow',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)]
+);
+TownList['Seaward Cave'] = new DungeonTown(
+    'Seaward Cave',
+    GameConstants.Region.alola,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+);
+TownList['Ten Carat Hill'] = new DungeonTown(
+    'Ten Carat Hill',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
+);
+TownList['Ruins of Conflict'] = new DungeonTown(
+    'Ruins of Conflict',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.BadgeEnums.Elite_AlolaChampion)]
+);
+TownList['Pikachu Valley'] = new DungeonTown(
+    'Pikachu Valley',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 7)]
+);
+TownList['Paniola Ranch'] = new DungeonTown(
+    'Paniola Ranch',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 7)]
+);
+TownList['Brooklet Kill'] = new DungeonTown(
+    'Brooklet Kill',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 8)]
+);
+TownList['Wela Volcano Park'] = new DungeonTown(
+    'Wela Volcano Park',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 10)]
+);
+TownList['Lush Jungle'] = new DungeonTown(
+    'Lush Jungle',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 11)]
+);
+TownList['Diglett\'s Tunnel'] = new DungeonTown(
+    'Diglett\'s Tunnel',
+    GameConstants.Region.alola,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lush Jungle'))]
+);
+TownList['Memorial Hill'] = new DungeonTown(
+    'Memorial Hill',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 12)]
+);
+TownList['Ruins of Life'] = new DungeonTown(
+    'Ruins of Life',
+    GameConstants.Region.alola,
+    [
+        new RouteKillRequirement(10, GameConstants.Region.alola, 13),
+        new GymBadgeRequirement(BadgeEnums.BadgeEnums.Elite_AlolaChampion),
+    ]
+);
+TownList['Malie Garden'] = new DungeonTown(
+    'Malie Garden',
+    GameConstants.Region.alola,
+    [new GymBadgeRequirement(BadgeEnums.BadgeEnums.RockiumZ)] //Replace with Ather Paradise 1 if implemented
+);
+TownList['Hokulani Observatory'] = new DungeonTown(
+    'Hokulani Observatory',
+    GameConstants.Region.alola,
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 15)]
+);
