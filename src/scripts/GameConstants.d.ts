@@ -235,6 +235,7 @@ namespace GameConstants {
         'Prism_scale',
         'Sachet',
         'Whipped_dream'
+        'Ice_stone'
     }
     declare enum BattleItemType {
         'xAttack' = '',
