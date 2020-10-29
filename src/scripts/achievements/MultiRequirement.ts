@@ -1,7 +1,7 @@
 ///<reference path="Requirement.ts"/>
 
 class MultiRequirement {
-    constructor(public requirements: Requirement[]) {}
+    constructor(public requirements: Requirement[] = []) {}
 
     public isCompleted() {
         return this.requirements.every(requirement => {

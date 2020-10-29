@@ -26,7 +26,8 @@
               <!-- ko foreach: App.game.pokeballs.pokeballs -->
               <tr class="clickable"
                 data-bind="template: { name: 'pokeballSelectionTemplate', data: $data},
-                  click: function(){App.game.pokeballs.selectedSelection()($data.type)}"></tr>
+                  click: function(){App.game.pokeballs.selectedSelection()($data.type)},
+                  visible: $data.unlocked()"></tr>
               <!-- /ko -->
             </tbody>
           </table>
