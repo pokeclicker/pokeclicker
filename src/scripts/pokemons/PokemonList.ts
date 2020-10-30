@@ -15367,7 +15367,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 774,
-            'name': 'Minior',
+            'name': 'Minior (Meteor)',
             'type': [PokemonType.Rock, PokemonType.Flying],
             'eggCycles': 25,
             'levelType': LevelType.mediumslow,
