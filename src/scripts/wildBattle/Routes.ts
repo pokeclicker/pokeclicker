@@ -1496,7 +1496,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Melemele Sea', GameConstants.Region.alola, 5,
     new RoutePokemon({
-        Water: ['Tentacool', 'Magikarp', 'Corsola', 'Remoraid', 'Wingull', 'Clamperl', 'Luvdisc', 'Mantyke', 'Finneon', 'Wishiwashi (Solo)'],
+        water: ['Tentacool', 'Magikarp', 'Corsola', 'Remoraid', 'Wingull', 'Clamperl', 'Luvdisc', 'Mantyke', 'Finneon', 'Wishiwashi (Solo)'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Brooklet Hill'))]
 ));
@@ -1535,7 +1535,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 7', GameConstants.Region.alola, 10,
     new RoutePokemon({
-        Water: ['Tentacool', 'Staruy', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)'],
+        water: ['Tentacool', 'Staruy', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 9)]
 ));
