@@ -1210,7 +1210,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Frillish', 'Alomomola'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 1)]
+    [new RouteKillRequirement(1, GameConstants.Region.unova, 1)]
 ));
 Routes.add(new RegionRoute(
     'Unova Route 18', GameConstants.Region.unova, 18,

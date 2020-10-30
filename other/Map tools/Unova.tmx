@@ -49,7 +49,7 @@
  </layer>
  <layer id="12" name="Decor" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXCUCAAQCAABwDwAAcW4PAHgPAAB5gA8AAIF0zQYAAM4GAADPBgAKILCC3R2ZmOQDQahez84H4CR1z9U+FR5rP6hxrj4PfMEC
+   KLUv/WDAXN0CALQCAABwDwAAcXIPAHgPAAB5eoAPAACBDwAAfA8AAIJueXTNBgAAzgYAAM8GAA4g4IKWcwyZmOQDQahez8gH4KR6XwOReoyk8hU4i6TqA06q2N3nB+XWfZPdhzY=
   </data>
  </layer>
 </map>
