@@ -745,15 +745,13 @@ export const UnovaDungeons = [
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
-    'Desert Resort', // Should really be a route
     'Relic Castle',
     'Lostlorn Forest',
     'Chargestone Cave',
     'Mistralton Cave',
     'Celestial Tower',
     'Reversal Mountain',
-    'Strange House', // Optional dungeon, contains no unique Pokémon, safe to scrap
-    'Undella Bay', // Should really be a route
+    'Strange House', // Optional dungeon, contains no unique Pokémon, safe to scrap// Should really be a route
     'Seaside Cave',
     'Giant Chasm',
     'Abundant Shrine',

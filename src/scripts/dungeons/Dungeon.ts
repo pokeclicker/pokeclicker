@@ -602,14 +602,14 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
     2203000,
     [new DungeonBossPokemon('Keldeo (Resolute)', 8000000, 70)],
     96500, 201, 35);
-    
+
 dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     ['Psyduck', 'Mareep', 'Azurill', 'Patrat', 'Lillipup', 'Pidove'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [new DungeonBossPokemon('Riolu', 8000000, 70)],
     96500, 201, 35);
-    
+
 dungeonList['Virbank Complex'] = new Dungeon('Virbank Complex',
     ['Magnemite', 'Koffing', 'Patrat', 'Pidove', 'Lillipup', 'Pidove'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -619,14 +619,14 @@ dungeonList['Virbank Complex'] = new Dungeon('Virbank Complex',
         new DungeonBossPokemon('Magby', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
     ['Rattata', 'Zubat', 'Grimer', 'Trubbish'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [new DungeonBossPokemon('Muk', 8000000, 70)],
     96500, 201, 35);
-    
+
 dungeonList['Relic Passage'] = new Dungeon('Relic Passage',
     ['Rattata', 'Raticate', 'Roggenrola', 'Woobat', 'Timburr'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -637,16 +637,6 @@ dungeonList['Relic Passage'] = new Dungeon('Relic Passage',
     ],
     96500, 201, 35);
 
-dungeonList['Desert Resort'] = new Dungeon('Desert Resort',
-    ['Sandshrew', 'Trapinch', 'Sandile', 'Darumaka', 'Dwebble', 'Scraggy'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Maractus', 8000000, 70),
-        new DungeonBossPokemon('Sigilyph', 8000000, 70),
-    ],
-    96500, 201, 35);
-    
 dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
     ['Sandshrew', 'Sandslash', 'Sandile', 'Korokrok', 'Yamask'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -656,7 +646,7 @@ dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
         new DungeonBossPokemon('Volcarona', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Lostlorn Forest'] = new Dungeon('Lostlorn Forest',
     ['Pinsir', 'Roselia', 'Combee', 'Sewaddle', 'Venipede', 'Cottonee', 'Petilil'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -677,7 +667,7 @@ dungeonList['Chargestone Cave'] = new Dungeon('Chargestone Cave',
         new DungeonBossPokemon('Tynamo', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Mistralton Cave'] = new Dungeon('Mistralton Cave',
     ['Boldore', 'Woobat', 'Aron', 'Lairon'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -688,7 +678,7 @@ dungeonList['Mistralton Cave'] = new Dungeon('Mistralton Cave',
         new DungeonBossPokemon('Cobalion', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Celestial Tower'] = new Dungeon('Celestial Tower',
     ['Golbat', 'Elgyem', 'Misdreavus', 'Haunter'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -706,7 +696,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
         new DungeonBossPokemon('Heatran', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Strange House'] = new Dungeon('Strange House',
     ['Raticate', 'Golbat', 'Banette', 'Gothita', 'Solosis'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -717,18 +707,7 @@ dungeonList['Strange House'] = new Dungeon('Strange House',
         new DungeonBossPokemon('Litwick', 8000000, 70),
     ],
     96500, 201, 35);
-    
-dungeonList['Undella Bay'] = new Dungeon ('Undella Bay',
-    ['Wingull', 'Mantyke', 'Spheal', 'Remoraid', 'Shellder', 'Luvdisc', 'Ducklet'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Mantine', 8000000, 70),
-        new DungeonBossPokemon('Walrein', 8000000, 70),
-        new DungeonBossPokemon('Wailord', 8000000, 70),
-    ],
-    96500, 201, 35);
-    
+
 dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     ['Golduck', 'Seel', 'Shellder', 'Luvdisc', 'Boldore', 'Woobat', 'Tynamo', 'Frillish'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -738,7 +717,7 @@ dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
         new DungeonBossPokemon('Crustle', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
     ['Clefairy', 'Poliwag', 'Seel', 'Tangela', 'Delibird', 'Sneasel', 'Piloswine', 'Pelipper', 'Lunatone', 'Solrock', 'Vanillish', 'Basculin', 'Ditto', 'Metang'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -750,7 +729,7 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Kyurem', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Cave of Being'] = new Dungeon('Cave of Being',
     ['Kadabra', 'Golbat', 'Woobat', 'Gurdurr', 'Graveler', 'Onix'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -761,7 +740,7 @@ dungeonList['Cave of Being'] = new Dungeon('Cave of Being',
         new DungeonBossPokemon('Azelf', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
     ['Vulpix', 'Golduck', 'Marill', 'Azumarill', 'Swablu', 'Bronzor', 'Cottonee', 'Petilil', 'Goldeen', 'Basculin'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -772,7 +751,7 @@ dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
         new DungeonBossPokemon('Landorus', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
     ['Poliwag', 'Onix', 'Marill', 'Roselia', 'Altaria', 'Banette', 'Buizel', 'Basculin', 'Boldore', 'Cottonee', 'Petilil', 'Tranquill', 'Unfezant', 'Gurdurr'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -784,7 +763,7 @@ dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
         new DungeonBossPokemon('Druddigon', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
     ['Onix', 'Boldore', 'Woobat', 'Gurdurr', 'Beartic'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -796,7 +775,7 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
         new DungeonBossPokemon('Regigigas', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
     ['Dratini', 'Tranquill', 'Basculin', 'Vanillish', 'Sawsbuck', 'Beartic', 'Mienfoo', 'Mienshao', 'Golett', 'Golurk'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -808,7 +787,7 @@ dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
         new DungeonBossPokemon('Zekrom', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     ['Croagunk', 'Palpitoad', 'Karrablast', 'Shelmet', 'Stunfisk', 'Barboach'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -819,7 +798,7 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
         new DungeonBossPokemon('Whiscash', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
     ['Goldeen', 'Marill', 'Yanma', 'Vigoroth', 'Toxicroak', 'Gurdurr', 'Palpitoad', 'Swadloon', 'Whirlipede', 'Cottonee', 'Petilil', 'Basculin'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -830,7 +809,7 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
         new DungeonBossPokemon('Virizion', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Wellspring Cave'] = new Dungeon('Wellspring Cave',
     ['Poliwag', 'Basculin', 'Boldore', 'Woobat'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -840,7 +819,7 @@ dungeonList['Wellspring Cave'] = new Dungeon('Wellspring Cave',
         new DungeonBossPokemon('Poliwhirl', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
     ['Raticate', 'Jigglypuff', 'Golbat', 'Watchog', 'Liepard', 'Munna'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -852,7 +831,7 @@ dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
         new DungeonBossPokemon('Latios', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
     ['Magneton', 'Rotom', 'Beheeyem', 'Klinklang', 'Porygon2', 'Electrode', 'Metang'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -910,7 +889,7 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
         new DungeonBossPokemon('Carbink', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 //Tower of Mastery?
 
 dungeonList['Azure bay'] = new Dungeon('Azure bay',
@@ -996,5 +975,5 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
         new DungeonBossPokemon('Noibat', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 //Unknown Dungeon? Contains Mewtwo.

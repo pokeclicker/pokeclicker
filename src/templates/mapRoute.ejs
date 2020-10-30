@@ -34,18 +34,17 @@ Parameters:
 <% */ %>
 
 <g
-<% const value = typeof locals.route === 'string' ? `"${locals.route}"` : locals.route; %>
 <% if (locals.rotate) { %>
     transform="rotate(90 ,<%= locals.x * 16 %>, <%= locals.y * 16 %>)"
 <% } %>
-    data-bind="click:function(){ MapHelper.moveToRoute(<%= value %>, <%= locals.region %>); } ">
+    data-bind="click:function(){ MapHelper.moveToRoute(<%= locals.route %>, <%= locals.region %>); } ">
     <rect data-route='<%= locals.route %>'
-        data-bind="attr: { class: MapHelper.calculateRouteCssClass(<%= value %>, <%= locals.region %>) }"
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(<%= locals.route %>, <%= locals.region %>) }"
         height="<%= locals.height * 16 %>"
         width="<%= locals.width * 16 %>"
         x="<%= locals.x * 16 %>" y="<%= locals.y * 16 - (locals.rotate ? locals.height * 16 : 0 ) %>">
     </rect>
 <% if (!locals.noText) { %>
-    <text style="font-size: 32px" x="<%= (locals.x * 16 + (locals.width * 16) / 2 - (locals.route.toString().length * 8)) + (locals.textX || 0) %>" y="<%= (locals.y * 16 + (locals.height * 16) / 2 + (locals.rotate ? -38 : 10)) + (locals.textY || 0) %>"><%= locals.route %></text>
+    <text style="font-size: 32px" x="<%= (locals.x * 16 + (locals.width * 16) / 2 - ((locals.name || locals.route).toString().length * 8)) + (locals.textX || 0) %>" y="<%= (locals.y * 16 + (locals.height * 16) / 2 + (locals.rotate ? -38 : 10)) + (locals.textY || 0) %>"><%= locals.route || locals.name %></text>
 <% } %>
 </g>
