@@ -44,3 +44,6 @@ ItemList['Cherubi']              = new PokemonItem(GameConstants.PokemonItemType
 ItemList['Spiritomb']            = new PokemonItem(GameConstants.PokemonItemType.Spiritomb, 5000);
 ItemList['Zorua']                = new PokemonItem(GameConstants.PokemonItemType.Zorua, 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem(GameConstants.PokemonItemType['Meloetta (pirouette)'], 50000);
+ItemList['Type null']            = new PokemonItem(GameConstants.PokemonItemType['Type: Null'], 5000);
+ItemList['Poipole']              = new PokemonItem(GameConstants.PokemonItemType['Poipole'], 5000);
+
