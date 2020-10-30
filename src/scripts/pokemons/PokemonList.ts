@@ -375,6 +375,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 19.01,
             'name': 'Rattata (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Dark, PokemonType.Normal],
             'levelType': LevelType.mediumfast,
@@ -410,6 +411,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 20.01,
             'name': 'Raticate (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 127,
             'type': [PokemonType.Dark, PokemonType.Normal],
             'levelType': LevelType.mediumfast,
@@ -533,6 +535,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 26.01,
             'name': 'Raichu (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 75,
             'type': [PokemonType.Electric, PokemonType.Psychic],
             'levelType': LevelType.mediumfast,
@@ -568,6 +571,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 27.01,
             'name': 'Sandshrew (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Ice, PokemonType.Steel],
             'levelType': LevelType.mediumfast,
@@ -603,6 +607,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 28.01,
             'name': 'Sandslash (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 90,
             'type': [PokemonType.Ice, PokemonType.Steel],
             'levelType': LevelType.mediumfast,
@@ -779,6 +784,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 37.01,
             'name': 'Vulpix (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 190,
             'type': [PokemonType.Ice],
             'levelType': LevelType.mediumfast,
@@ -814,6 +820,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 38.01,
             'name': 'Ninetales (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 75,
             'type': [PokemonType.Fire],
             'levelType': LevelType.mediumfast,
@@ -1046,6 +1053,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 50.01,
             'name': 'Diglett (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Ground, PokemonType.Steel],
             'levelType': LevelType.mediumfast,
@@ -1081,6 +1089,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 51.01,
             'name': 'Dugtrio (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 50,
             'type': [PokemonType.Ground, PokemonType.Steel],
             'levelType': LevelType.mediumfast,
@@ -1116,6 +1125,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 52.01,
             'name': 'Meowth (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Dark],
             'levelType': LevelType.mediumfast,
@@ -1151,6 +1161,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 53.01,
             'name': 'Persian (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 90,
             'type': [PokemonType.Dark],
             'levelType': LevelType.mediumfast,
@@ -1538,6 +1549,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 74.01,
             'name': 'Geodude (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Rock, PokemonType.Electric],
             'levelType': LevelType.mediumslow,
@@ -1574,6 +1586,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 75.01,
             'name': 'Graveler (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 120,
             'type': [PokemonType.Rock, PokemonType.Electric],
             'levelType': LevelType.mediumslow,
@@ -1609,6 +1622,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 76.01,
             'name': 'Golem (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 45,
             'type': [PokemonType.Rock, PokemonType.Electric],
             'levelType': LevelType.mediumslow,
@@ -1841,6 +1855,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 88.01,
             'name': 'Grimer (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 190,
             'type': [PokemonType.Poison, PokemonType.Dark],
             'levelType': LevelType.mediumfast,
@@ -1876,6 +1891,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 89.01,
             'name': 'Muk (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 75,
             'type': [PokemonType.Poison, PokemonType.Dark],
             'levelType': LevelType.mediumfast,
@@ -2140,6 +2156,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 103.01,
             'name': 'Exeggutor (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 45,
             'type': [PokemonType.Grass, PokemonType.Dragon],
             'levelType': LevelType.slow,
@@ -2193,6 +2210,7 @@ const pokemonList: PokemonListData[] =
         {
             'id': 105.01,
             'name': 'Marowak (Alolan)',
+            'nativeRegion': GameConstants.Region.alola,
             'catchRate': 75,
             'type': [PokemonType.Fire, PokemonType.Ghost],
             'levelType': LevelType.mediumfast,
