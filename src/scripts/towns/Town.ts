@@ -1878,6 +1878,13 @@ TownList['Seafolk Village'] = new Town(
         requirements: [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)], //Replace with Ather Paradise 2 if implemented
     }
 );
+TownList['Exeggutor Island'] = new Town(
+    'Exeggutor Island',
+    GameConstants.Region.alola,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
+    }
+);
 TownList['Altar of the Sunne and Moone'] = new Town(
     'Altar of the Sunne and Moone',
     GameConstants.Region.alola,
