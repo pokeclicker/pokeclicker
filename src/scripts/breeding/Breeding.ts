@@ -81,7 +81,7 @@ class Breeding implements Feature {
             ['Pachirisu', 'Shinx'],
             ['Blitzle'],
             [],
-            ['Togedemaru'],
+            [],
             [],
         ];
         this.hatchList[EggType.Dragon] = [
