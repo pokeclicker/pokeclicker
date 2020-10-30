@@ -55,7 +55,7 @@ abstract class Item {
             // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
             //    (m_start) * (m^k) = 100
             // => k = (2 - log(m_start)) / log(m)
-            const mStart = player.itemMultipliers[this.saveName];
+            const mStart = Math.max(player.itemMultipliers[this.saveName] || 1, 1);
             const k = (mStart < 100)
                 ? Math.ceil((2 - Math.log10(mStart)) / Math.log10(this.multiplier))
                 : 0;
