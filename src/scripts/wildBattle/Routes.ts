@@ -1535,7 +1535,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Alola Route 7', GameConstants.Region.alola, 10,
     new RoutePokemon({
-        water: ['Tentacool', 'Staruy', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)'],
+        water: ['Tentacool', 'Staruy', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)', 'Pyukumuku'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 9)]
 ));

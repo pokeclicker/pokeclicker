@@ -51,7 +51,7 @@ class Breeding implements Feature {
             ['Piplup', 'Finneon', 'Buizel'],
             ['Oshawott', 'Panpour'],
             ['Froakie'],
-            ['Popplio', 'Pyukumuku'],
+            ['Popplio', 'Wimpod'],
             ['Sobble'],
         ];
         this.hatchList[EggType.Grass] = [
