@@ -179,10 +179,12 @@ export enum GameState {
 export enum Pokeball {
     'None' = -1,
     'Pokeball' = 0,
-    'Greatball' = 1,
-    'Ultraball' = 2,
-    'Masterball' = 3,
-    'Fastball' = 4,
+    'Greatball',
+    'Ultraball',
+    'Masterball',
+    'Fastball',
+    'Quickball',
+    'Timerball',
 }
 
 export enum Currency {

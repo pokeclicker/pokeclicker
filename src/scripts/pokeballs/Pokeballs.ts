@@ -28,6 +28,22 @@ class Pokeballs implements Feature {
             new Pokeball(GameConstants.Pokeball.Ultraball, () => 10, 750, '+10% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Masterball, () => 100, 500, '100% chance to catch'),
             new Pokeball(GameConstants.Pokeball.Fastball, () => 0, 500, 'Reduced catch time', new RouteKillRequirement(Infinity, GameConstants.Region.none, 0)),
+            new Pokeball(GameConstants.Pokeball.Quickball, () => {
+                if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
+                    const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route()]?.() || 0;
+                    // between 15 (0 kills) → 0 (4012 kills)
+                    return Math.min(15, Math.max(0, Math.pow(16, 1 - Math.pow(kills - 10, 0.6) / 145) - 1));
+                }
+                return 0;
+            }, 1000, 'Increased catch rate on routes with less defeats', new RouteKillRequirement(Infinity, GameConstants.Region.none, 0)),
+            new Pokeball(GameConstants.Pokeball.Timerball, () => {
+                if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
+                    const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route()]?.() || 0;
+                    // between 0 (0 kills) → 15 (9920 kills)
+                    return Math.min(15, Math.max(0, Math.pow(16, Math.pow(kills, 0.6) / 250) - 1));
+                }
+                return 0;
+            }, 1000, 'Increased catch rate on routes with more defeats', new RouteKillRequirement(Infinity, GameConstants.Region.none, 0)),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
