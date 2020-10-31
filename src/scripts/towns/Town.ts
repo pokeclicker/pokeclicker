@@ -1471,7 +1471,7 @@ TownList['Relic Passage'] = new DungeonTown(
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
     GameConstants.Region.unova,
-    [new RouteKillRequirement(25, GameConstants.Region.unova, 20)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 25)]
 );
 TownList['Lostlorn Forest'] = new DungeonTown(
     'Lostlorn Forest',
@@ -1502,7 +1502,7 @@ TownList['Seaside Cave'] = new DungeonTown(
     'Seaside Cave',
     GameConstants.Region.unova,
     [
-        new RouteKillRequirement(24, GameConstants.Region.unova, 20),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 24),
         new GymBadgeRequirement(BadgeEnums.Legend),
     ]
 );
