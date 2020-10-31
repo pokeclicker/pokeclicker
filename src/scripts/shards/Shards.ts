@@ -39,8 +39,10 @@ class Shards implements Feature {
         if (typeNum == PokemonType.None) {
             return;
         }
+
+        GameHelper.incrementObservable(this.shardWallet[typeNum], amt);
+
         if (amt > 0) {
-            GameHelper.incrementObservable(this.shardWallet[typeNum], amt);
             GameHelper.incrementObservable(App.game.statistics.totalShardsGained, amt);
             GameHelper.incrementObservable(App.game.statistics.shardsGained[typeNum], amt);
         }
@@ -79,7 +81,7 @@ class Shards implements Feature {
             GameHelper.incrementObservable(this.shardUpgrades[typeNum * Shards.nEffects + effectNum]);
         }
     }
-    
+
     public isValidUpgrade(
         typeNum: PokemonType,
         effectNum: GameConstants.TypeEffectiveness
