@@ -14721,7 +14721,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 741.01,
-            'name': 'Oricorio (Pom-Pom)',
+            'name': 'Oricorio (Pom-pom)',
             'type': [PokemonType.Electric, PokemonType.Flying],
             'eggCycles': 20,
             'levelType': LevelType.mediumfast,

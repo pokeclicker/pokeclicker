@@ -1939,8 +1939,8 @@ TownList['Paniola Ranch'] = new DungeonTown(
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 7)]
 );
-TownList['Brooklet Kill'] = new DungeonTown(
-    'Brooklet Kill',
+TownList['Brooklet Hill'] = new DungeonTown(
+    'Brooklet Hill',
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 8)]
 );
