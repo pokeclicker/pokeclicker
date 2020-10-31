@@ -1032,6 +1032,8 @@ class Farming implements Feature {
 
         App.game.oakItems.use(OakItems.OakItem.Sprayduck);
 
+        player.lowerItemMultipliers(MultiplierDecreaser.Berry);
+
         plot.die(true);
 
         if (!suppressResetAura) {
