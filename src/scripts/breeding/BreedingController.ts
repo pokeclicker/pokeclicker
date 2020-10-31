@@ -135,6 +135,7 @@ class BreedingController {
 
     public static filter = {
         search: ko.observable(new RegExp('', 'i')),
+        category: ko.observable(-1).extend({ numeric: 0 }),
         shinyStatus: ko.observable(-1).extend({ numeric: 0 }),
         // All = -2
         type1: ko.observable(-2).extend({ numeric: 0 }),
@@ -151,6 +152,13 @@ class BreedingController {
 
             if (!BreedingController.filter.search().test(partyPokemon.name)) {
                 return false;
+            }
+
+            // Check based on category
+            if (BreedingController.filter.category() >= 0) {
+                if (partyPokemon.category !== BreedingController.filter.category()) {
+                    return false;
+                }
             }
 
             // Check based on shiny status

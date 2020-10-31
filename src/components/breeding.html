@@ -38,7 +38,7 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <label>Search</label>
                                 <input autocomplete="off" class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
                             </div>
-                            <div class="form-group col-md-6 col-6">
+                            <div class="form-group col-md-3 col-6">
                                 <label>Display Value</label>
                                 <select autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value)">
                                     <option value="attack" selected>Attack</option>
@@ -46,6 +46,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                     <option value="baseAttack">Base Attack</option>
                                     <option value="eggSteps">Egg Steps</option>
                                     <option value="timesHatched">Times Hatched</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3 col-6">
+                                <label>Category</label>
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(this.value)">
+                                    <option value="-1">All</option>
+                                    <!-- ko foreach: PokemonCategories.categories -->
+                                    <option style="color: whitesmoke" data-bind="attr: { value: $index }, text: $data.name, style: { background: $data.color }">Category</option>
+                                    <!-- /ko -->
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
@@ -118,6 +127,15 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
                                 <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
+                                <div class="pokemonCategory dropdown">
+                                    <button data-toggle="dropdown" data-bind="class: `category-${$data.category + 1}`"></button>
+                                    <div class="dropdown-menu p-0">
+                                        <!-- ko foreach: PokemonCategories.categories -->
+                                        <a class="dropdown-item category" href="#" data-bind="text: $data.name, click: () => { $parent.category = $index() }">Category</a>
+                                        <!-- /ko -->
+                                        <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                         <!-- /ko -->
