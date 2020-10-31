@@ -1409,8 +1409,8 @@ TownList['Nacrene City'] = new Town(
         shop: NacreneCityShop,
     }
 );
-TownList['Striatorn City'] = new Town(
-    'Striatorn City',
+TownList['Striaton City'] = new Town(
+    'Striaton City',
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 3)],
@@ -1524,6 +1524,7 @@ TownList['Abundant Shrine'] = new DungeonTown(
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 23),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 14),
         new ObtainedPokemonRequirement(pokemonMap.Tornadus),
         new ObtainedPokemonRequirement(pokemonMap.Thundurus),
     ]
