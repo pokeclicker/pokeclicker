@@ -42,4 +42,5 @@ ItemList['Combee']               = new PokemonItem(GameConstants.PokemonItemType
 ItemList['Burmy (plant)']        = new PokemonItem(GameConstants.PokemonItemType['Burmy (plant)'], 5000);
 ItemList['Cherubi']              = new PokemonItem(GameConstants.PokemonItemType.Cherubi, 5000);
 ItemList['Spiritomb']            = new PokemonItem(GameConstants.PokemonItemType.Spiritomb, 5000);
+ItemList['Zorua']                = new PokemonItem(GameConstants.PokemonItemType.Zorua, 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem(GameConstants.PokemonItemType['Meloetta (pirouette)'], 50000);
