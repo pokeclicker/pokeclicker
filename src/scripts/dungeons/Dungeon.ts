@@ -639,7 +639,7 @@ dungeonList['Relic Passage'] = new Dungeon('Relic Passage',
     96500, 201, 35);
 
 dungeonList['Relic Castle'] = new Dungeon('Relic Castle',
-    ['Sandshrew', 'Sandslash', 'Sandile', 'Korokrok', 'Yamask'],
+    ['Sandshrew', 'Sandslash', 'Sandile', 'Krokorok', 'Yamask'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
