@@ -688,7 +688,7 @@ dungeonList['Celestial Tower'] = new Dungeon('Celestial Tower',
     96500, 201, 35);
 
 dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
-    ['Skarmory', 'Numel', 'Camerupt', 'Spionk', 'Grumpig', 'Trapinch', 'Drifblim', 'Skorupi', 'Boldore', 'Woobat'],
+    ['Skarmory', 'Numel', 'Camerupt', 'Spoink', 'Grumpig', 'Trapinch', 'Drifblim', 'Skorupi', 'Boldore', 'Woobat'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
