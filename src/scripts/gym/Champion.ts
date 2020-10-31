@@ -1,12 +1,12 @@
+/// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="Gym.ts"/>
-///<reference path="../badgeCase/BadgeTypes.ts"/>
 
 class Champion extends Gym {
     constructor(
         leaderName: string,
         town: string,
         pokemons: GymPokemon[],
-        badgeReward: BadgeTypes,
+        badgeReward: BadgeEnums,
         moneyReward: number,
         rewardMessage: string,
         requirements: Requirement[] = []
@@ -49,8 +49,8 @@ gymList['Champion Blue'] = new Champion(
     'Blue',
     'Champion Blue',
     [],
-    BadgeTypes.Elite_KantoChampion,
+    BadgeEnums.Elite_KantoChampion,
     10000,
     'Why? Why did I lose? I never made any mistakes raising my Pokémon… Darn it! You\'re the new Pokémon League Champion! Although I don\'t like to admit it…',
-    [new GymBadgeRequirement(BadgeTypes.Elite_Lance)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_Lance)]
 );

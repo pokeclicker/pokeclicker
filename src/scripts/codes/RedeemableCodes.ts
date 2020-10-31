@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+
 class RedeemableCodes implements Saveable {
     defaults: Record<string, any>;
     saveKey = 'redeemableCodes';
@@ -32,12 +35,12 @@ class RedeemableCodes implements Saveable {
             }),
             new RedeemableCode('complete-kanto', 750807787, false, function () {
                 // Complete all routes
-                for (let route = GameConstants.RegionRoute[GameConstants.Region.kanto][0]; route <= GameConstants.RegionRoute[GameConstants.Region.kanto][1]; route++) {
-                    GameHelper.incrementObservable(App.game.statistics.routeKills[route], 10);
-                }
+                Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
+                    GameHelper.incrementObservable(App.game.statistics.routeKills[route.region][route.number], 10);
+                });
                 // Complete all gyms
                 GameConstants.KantoGyms.forEach(gym => {
-                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[Statistics.getGymIndex(gym)]);
+                    GameHelper.incrementObservable(App.game.statistics.gymsDefeated[GameConstants.getGymIndex(gym)]);
                     // Give badge
                     if (!App.game.badgeCase.hasBadge(gymList[gym].badgeReward)) {
                         App.game.badgeCase.gainBadge(gymList[gym].badgeReward);
@@ -45,7 +48,7 @@ class RedeemableCodes implements Saveable {
                 });
                 // Complete all dungeons
                 GameConstants.KantoDungeons.forEach(dungeon => {
-                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(dungeon)]);
+                    GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(dungeon)]);
                 });
                 // Catch all Pokemon
                 for (let id = 1; id <= GameConstants.TotalPokemonsPerRegion[GameConstants.Region.kanto]; id++) {

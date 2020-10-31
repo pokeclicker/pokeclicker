@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+
 class Egg implements Saveable {
     saveKey = 'egg';
 
@@ -84,13 +87,13 @@ class Egg implements Saveable {
         }
     }
 
-    canHatch() {
+    canHatch(): boolean {
         return !this.isNone() && this.steps() >= this.totalSteps;
     }
 
-    hatch() {
+    hatch(): boolean {
         if (!this.canHatch()) {
-            return;
+            return false;
         }
         const shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, this.shinySteps / this.steps()));
         const shiny = PokemonFactory.generateShiny(shinyChance);
@@ -98,16 +101,21 @@ class Egg implements Saveable {
         const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
         // If the party pokemon exist, increase it's damage output
         if (partyPokemon) {
-            if (partyPokemon.evolutions !== undefined) {
-                partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
-            }
-            partyPokemon.exp = 0;
-            partyPokemon.level = 1;
-            partyPokemon.breeding = false;
-            partyPokemon.level = partyPokemon.calculateLevelFromExp();
+            // Increase attack
             partyPokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
             partyPokemon.attack = partyPokemon.calculateAttack();
-            partyPokemon.checkForLevelEvolution();
+
+            // If breeding (not store egg), reset level, reset evolution check
+            if (partyPokemon.breeding) {
+                if (partyPokemon.evolutions !== undefined) {
+                    partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
+                }
+                partyPokemon.exp = 0;
+                partyPokemon.level = 1;
+                partyPokemon.breeding = false;
+                partyPokemon.level = partyPokemon.calculateLevelFromExp();
+                partyPokemon.checkForLevelEvolution();
+            }
         }
 
         const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
@@ -146,6 +154,7 @@ class Egg implements Saveable {
         GameHelper.incrementObservable(App.game.statistics.pokemonHatched[pokemonID]);
         GameHelper.incrementObservable(App.game.statistics.totalPokemonHatched);
         App.game.oakItems.use(OakItems.OakItem.Blaze_Cassette);
+        return true;
     }
 
     toJSON(): Record<string, any> {
