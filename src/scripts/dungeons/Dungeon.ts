@@ -703,7 +703,7 @@ dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Elektrik', 8000000, 70),
+        new DungeonBossPokemon('Eelektrik', 8000000, 70),
         new DungeonBossPokemon('Crustle', 8000000, 70),
     ],
     96500, 201, 35);
