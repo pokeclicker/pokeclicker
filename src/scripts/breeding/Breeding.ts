@@ -360,8 +360,12 @@ class Breeding implements Feature {
         this.eggSlots += 1;
     }
 
-    public gainQueueSlot(): void {
-        GameHelper.incrementObservable(this.queueSlots);
+    public gainQueueSlot(amt = 1): void {
+        GameHelper.incrementObservable(this.queueSlots, amt);
+    }
+
+    public queueSlotsGainedFromRegion(region: GameConstants.Region): number {
+        return Math.max(4, 4 * Math.pow(2, region - 1));
     }
 
     get eggList(): Array<KnockoutObservable<Egg>> {
