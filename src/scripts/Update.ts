@@ -215,6 +215,12 @@ class Update implements Saveable {
                     saveData.shards.shardWallet[type] += cost;
                 }
             });
+          
+            // Give breeding slots based on highest region
+            saveData.breeding.queueSlots = 0;
+            for (let region = 0; region < playerData.highestRegion; region++) {
+                saveData.breeding.queueSlots += Math.max(4, 4 * Math.pow(2, region - 1));
+            }
         },
     };
 
