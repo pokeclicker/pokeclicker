@@ -454,6 +454,7 @@ export enum PokemonItemType {
     'Burmy (plant)',
     'Spiritomb',
     'Cherubi',
+    'Zorua',
     'Meloetta (pirouette)',
 }
 
