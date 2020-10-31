@@ -42,6 +42,10 @@ class UndergroundItem {
         return this.name;
     }
 
+    get imagePath() {
+        return `assets/images/underground/${this.id}.png`;
+    }
+
 }
 
 UndergroundItem.addItem('Helix Fossil', 1, [[0,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,0]], 0, 'Mine Egg');

@@ -142,6 +142,10 @@ abstract class Item {
     get displayName() {
         return GameConstants.humanifyString(this._displayName);
     }
+
+    get imagePath() {
+        return `assets/images/items/${this.name()}.png`;
+    }
 }
 
 const ItemList: { [name: string]: Item } = {};

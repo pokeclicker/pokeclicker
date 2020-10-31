@@ -158,11 +158,17 @@ class BerryDeal {
     public static use(region: GameConstants.Region, i: number, tradeTimes = 1) {
         const deal = BerryDeal.list[region].peek()[i];
         if (BerryDeal.canUse(region, i)) {
-            deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * tradeTimes));
+            const trades = deal.berries.map(berry => {
+                const amt = App.game.farming.berryList[berry.berryType]();
+                const maxTrades = Math.floor(amt / berry.amount);
+                return maxTrades;
+            }, this);
+            const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
+            deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * maxTrades));
             if (deal.item.itemType instanceof UndergroundItem) {
-                Underground.gainMineItem(deal.item.itemType.id, deal.item.amount * tradeTimes);
+                Underground.gainMineItem(deal.item.itemType.id, deal.item.amount * maxTrades);
             } else {
-                deal.item.itemType.gain(deal.item.amount * tradeTimes);
+                deal.item.itemType.gain(deal.item.amount * maxTrades);
             }
             GameHelper.incrementObservable(App.game.statistics.berryDailyDealTrades);
         }
