@@ -5,6 +5,8 @@ class SafariBattle {
     static escapeAttempts = 0;
     static particle;
 
+    static disableButtons = false;
+
     public static get enemy(): SafariPokemon {
         return SafariBattle._enemy();
     }
@@ -158,7 +160,7 @@ class SafariBattle {
             const enemy = $('#safariBattleModal .enemy').offset();
             enemy.left += 30;
             enemy.top += 70;
-            SafariBattle.dropParticle('<img src="assets/images/safari/bait.png">', $('#safariBattleModal .pageItemFooter').offset(), enemy, 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
+            SafariBattle.dropParticle(`<img width=16px src="${bait.imagePath}">`, $('#safariBattleModal .pageItemFooter').offset(), enemy, 1000, 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
             setTimeout(SafariBattle.enemyTurn, 1500);
         }
     }
@@ -233,10 +235,12 @@ class SafariBattle {
     }
 
     private static lockButtons() {
+        SafariBattle.disableButtons = true;
         $('#safariBattleModal .modal-footer button').attr('disabled', 'true');
     }
 
     private static unlockButtons() {
+        SafariBattle.disableButtons = false;
         $('#safariBattleModal .modal-footer button').attr('disabled', null);
     }
 
