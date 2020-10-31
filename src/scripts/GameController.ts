@@ -124,11 +124,57 @@ class GameController {
         };
     }
 
+    // Store keys for multi-key combinations
+    static keyFlags = {}
     static addKeyListeners() {
         $(document).on('keydown', function (e) {
             // Ignore any of our controls if focused on an input element
             if (document.activeElement.localName == 'input') {
                 return;
+            }
+
+            // Toggle modal for Oak Items
+            const $oakItemsModal = $('#oakItemsModal');
+            const oakItems = App.game.oakItems;
+            switch (e.code) {
+                case 'KeyO':
+                    // Open oak items with 'O'
+                    if (oakItems.canAccess()) {
+                        $oakItemsModal.modal('toggle');
+                    }
+                    break;
+                case 'KeyP':
+                    // Set flag for 'P' pressed
+                    GameController.keyFlags[e.code] = true;
+                    break;
+                default:
+                    // Toggle oak item using 1-8 if modal is open
+                    if ($oakItemsModal.data('bs.modal')?._isShown) {
+                        for (let i = 0; i < oakItems.itemList.length; i++) {
+                            if (e.code === `Digit${i + 1}` && oakItems.isUnlocked(i)) {
+                                if (oakItems.isActive(i)) {
+                                    oakItems.deactivate(i);
+                                } else {
+                                    oakItems.activate(i);
+                                }
+                            }
+                        }
+                    }
+                    // Scroll through pokeballs using P + (1-4) for each condition
+                    const pokeballSelectOptions = 4;
+                    const pokeballProps = ['alreadyCaught', 'alreadyCaughtShiny', 'notCaught', 'notCaughtShiny'];
+                    const numPokeballs = App.game.pokeballs.pokeballs.length;
+                    if (GameController.keyFlags['KeyP']) {
+                        for (let i = 0; i < pokeballSelectOptions; i++) {
+                            if (e.code === `Digit${i + 1}`) {
+                                const k = `${pokeballProps[i]}Selection`;
+                                App.game.pokeballs[k]++;
+                                if (App.game.pokeballs[k] === numPokeballs) {
+                                    App.game.pokeballs[k] = -1;
+                                }
+                            }
+                        }
+                    }
             }
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {
@@ -193,6 +239,7 @@ class GameController {
 
         });
 
+        // Why is this in a separate event handler?
         $(document).on('keydown', function (e) {
             if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyCodeToDirection[e.code];
@@ -207,6 +254,11 @@ class GameController {
         });
 
         $(document).on('keyup', function (e) {
+            switch (e.code) {
+                case 'KeyP':
+                    delete GameController.keyFlags[e.code];
+                    break;
+            }
             if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyCodeToDirection[e.code];
                 if (dir) {
