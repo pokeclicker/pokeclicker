@@ -709,7 +709,7 @@ dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     96500, 201, 35);
 
 dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
-    ['Clefairy', 'Poliwag', 'Seel', 'Tangela', 'Delibird', 'Sneasel', 'Piloswine', 'Pelipper', 'Lunatone', 'Solrock', 'Vanillish', 'Basculin', 'Ditto', 'Metang'],
+    ['Clefairy', 'Poliwag', 'Seel', 'Tangela', 'Delibird', 'Sneasel', 'Piloswine', 'Pelipper', 'Lunatone', 'Solrock', 'Vanillish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Ditto', 'Metang'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -732,7 +732,7 @@ dungeonList['Cave of Being'] = new Dungeon('Cave of Being',
     96500, 201, 35);
 
 dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
-    ['Vulpix', 'Golduck', 'Marill', 'Azumarill', 'Swablu', 'Bronzor', 'Cottonee', 'Petilil', 'Goldeen', 'Basculin'],
+    ['Vulpix', 'Golduck', 'Marill', 'Azumarill', 'Swablu', 'Bronzor', 'Cottonee', 'Petilil', 'Goldeen', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -743,7 +743,7 @@ dungeonList['Abundant Shrine'] = new Dungeon('Abundant Shrine',
     96500, 201, 35);
 
 dungeonList['Victory Road Unova'] = new Dungeon('Victory Road Unova',
-    ['Poliwag', 'Onix', 'Marill', 'Roselia', 'Altaria', 'Banette', 'Buizel', 'Basculin', 'Boldore', 'Cottonee', 'Petilil', 'Tranquill', 'Unfezant', 'Gurdurr'],
+    ['Poliwag', 'Onix', 'Marill', 'Roselia', 'Altaria', 'Banette', 'Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Cottonee', 'Petilil', 'Tranquill', 'Unfezant', 'Gurdurr'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -767,7 +767,7 @@ dungeonList['Twist Mountain'] = new Dungeon('Twist Mountain',
     96500, 201, 35);
 
 dungeonList['Dragonspiral Tower'] = new Dungeon('Dragonspiral Tower',
-    ['Dratini', 'Tranquill', 'Basculin', 'Vanillish', 'Sawsbuck', 'Beartic', 'Mienfoo', 'Mienshao', 'Golett', 'Golurk'],
+    ['Dratini', 'Tranquill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Vanillish', 'Sawsbuck', 'Beartic', 'Mienfoo', 'Mienshao', 'Golett', 'Golurk'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -790,7 +790,7 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     96500, 201, 35);
 
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
-    ['Goldeen', 'Marill', 'Yanma', 'Vigoroth', 'Toxicroak', 'Gurdurr', 'Palpitoad', 'Swadloon', 'Whirlipede', 'Cottonee', 'Petilil', 'Basculin'],
+    ['Goldeen', 'Marill', 'Yanma', 'Vigoroth', 'Toxicroak', 'Gurdurr', 'Palpitoad', 'Swadloon', 'Whirlipede', 'Cottonee', 'Petilil', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
