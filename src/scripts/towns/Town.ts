@@ -349,6 +349,7 @@ const JohtoBerryMaster = new Shop([
     ItemList['Rich_Mulch'],
     ItemList['Surprise_Mulch'],
     ItemList['Amaze_Mulch'],
+    ItemList['Berry_Shovel'],
     ItemList['Squirtbottle'],
 ]);
 
@@ -593,6 +594,7 @@ const HoennBerryMaster = new Shop([
     ItemList['Rich_Mulch'],
     ItemList['Surprise_Mulch'],
     ItemList['Amaze_Mulch'],
+    ItemList['Berry_Shovel'],
     ItemList['Sprinklotad'],
 ]);
 
@@ -917,6 +919,7 @@ const SinnohBerryMaster = new Shop([
     ItemList['Rich_Mulch'],
     ItemList['Surprise_Mulch'],
     ItemList['Amaze_Mulch'],
+    ItemList['Berry_Shovel'],
 ]);
 
 //Sinnoh NPCs

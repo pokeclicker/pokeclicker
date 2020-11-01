@@ -133,6 +133,24 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row justify-content-around" style="margin-bottom: 5px;">
+                                <div class="col-6">
+                                    <ul id="shovelList" class="list-group">
+                                        <li class="list-group-item list-group-item-action seed-list-item"
+                                            data-bind="click: function() {}">
+                                            <img src="" height="24px"
+                                                data-bind="attr:{ src: ItemList['Berry_Shovel'].imagePath }">
+                                            <span>Berry Shovel</span>
+                                            <span class="seedAmount" data-bind="text: App.game.farming.shovelAmt()"></span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-6">
+                                    <button class="btn btn-primary btn-block" style="height:100%;" data-bind="click: function(){}">
+                                        Shovel All
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -23,12 +23,14 @@ class Farming implements Feature {
         plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
             return new Plot(index === 0, BerryType.None, 0, MulchType.None, 0);
         }),
+        shovelAmt: 0,
     };
 
     berryList: KnockoutObservable<number>[];
     unlockedBerries: KnockoutObservable<boolean>[];
     mulchList: KnockoutObservable<number>[];
     plotList: Array<Plot>;
+    shovelAmt: KnockoutObservable<number>;
 
     highestUnlockedBerry: KnockoutComputed<number>;
 
@@ -37,6 +39,7 @@ class Farming implements Feature {
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
         this.plotList = this.defaults.plotList;
+        this.shovelAmt = ko.observable(this.defaults.shovelAmt);
 
         this.externalAuras = [];
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
@@ -1126,6 +1129,7 @@ class Farming implements Feature {
             unlockedBerries: this.unlockedBerries.map(ko.unwrap),
             mulchList: this.mulchList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
+            shovelAmt: this.shovelAmt(),
         };
     }
 
@@ -1170,6 +1174,13 @@ class Farming implements Feature {
                 plot.fromJSON(value);
                 this.plotList[index] = plot;
             });
+        }
+
+        const shovelAmt = json['shovelAmt'];
+        if (shovelAmt == null) {
+            this.shovelAmt = ko.observable(this.defaults.shovelAmt);
+        } else {
+            this.shovelAmt(shovelAmt);
         }
     }
 
