@@ -6,7 +6,7 @@
 /// <reference path="../party/LevelType.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 
-const pokemonDevolutionMap: { [name: string]: string } = {};
+const pokemonDevolutionMap: { [name: string]: PokemonNameType } = {};
 
 type PokemonListData = {
   id: number;
@@ -18381,6 +18381,7 @@ const pokemonList: PokemonListData[] =
         // },
     ];
 
+type PokemonNameType = typeof pokemonList[number]['name'];
 
 const pokemonNameIndex = {};
 
@@ -18390,16 +18391,16 @@ pokemonList.forEach(p => {
     const baseDefense = 2 * Math.round(Math.sqrt(p.base.defense * p.base.specialDefense) + Math.sqrt(p.base.speed));
     const baseStamina = 2 * p.base.hitpoints;
 
-    p.attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
-    if (p.baby) {
-        p.evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon);
+    (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
+    if ((p as PokemonListData).baby) {
+        (p as PokemonListData).evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType);
     }
-    p.nativeRegion = p.nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= p.id);
+    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= p.id);
     pokemonNameIndex[p.name.toLowerCase()] = p;
 });
 
 const pokemonMap: any = new Proxy(pokemonList, {
-    get: (pokemon, prop: string) => {
+    get: (pokemon, prop: PokemonNameType) => {
         if (!isNaN(+prop)) {
             const id: number = +prop;
             const pokemonByID = pokemon.find(p => p.id == id);
@@ -18407,18 +18408,6 @@ const pokemonMap: any = new Proxy(pokemonList, {
                 return pokemonByID;
             }
         }
-        switch (prop) {
-            case 'random':
-                return (_max = 0, _min = 0) => {
-                    // minimum 0
-                    const min = Math.max(0, Math.min(_min, _max));
-                    // maximum is same as however many pokemon are available
-                    const max = Math.min(pokemon.length, Math.max(_min, _max));
-                    const random = Math.floor(Math.random() * (max ? max : pokemon.length) + min);
-                    return pokemon[random];
-                };
-            default:
-                return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
-        }
+        return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
     },
 });
