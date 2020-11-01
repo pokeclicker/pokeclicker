@@ -374,14 +374,14 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 19.01,
-            'name': 'Rattata (Alolan)',
+            'name': 'Alolan Rattata',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Dark, PokemonType.Normal],
             'levelType': LevelType.mediumfast,
             'exp': 51,
             'eggCycles': 15,
-            'evolutions': [new LevelEvolution('Rattata (Alolan)', 'Raticate (Alolan)', 20)],
+            'evolutions': [new LevelEvolution('Alolan Rattata', 'Alolan Raticate', 20)],
             'base': {
                 'hitpoints': 30,
                 'attack': 56,
@@ -410,7 +410,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 20.01,
-            'name': 'Raticate (Alolan)',
+            'name': 'Alolan Raticate',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 127,
             'type': [PokemonType.Dark, PokemonType.Normal],
@@ -505,7 +505,7 @@ const pokemonList: PokemonListData[] =
             'exp': 112,
             'eggCycles': 10,
             'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-            //TODO add Alola-only evolution into Raichu (Alolan) using Thunderstone
+            //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
             'base': {
                 'hitpoints': 35,
                 'attack': 55,
@@ -534,7 +534,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 26.01,
-            'name': 'Raichu (Alolan)',
+            'name': 'Alolan Raichu',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 75,
             'type': [PokemonType.Electric, PokemonType.Psychic],
@@ -570,14 +570,14 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 27.01,
-            'name': 'Sandshrew (Alolan)',
+            'name': 'Alolan Sandshrew',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Ice, PokemonType.Steel],
             'levelType': LevelType.mediumfast,
             'exp': 60,
             'eggCycles': 20,
-            'evolutions': [new StoneEvolution('Sandshrew (Alolan)', 'Sandslash(Alolan)', GameConstants.StoneType.Ice_stone)],
+            'evolutions': [new StoneEvolution('Alolan Sandshrew', 'Alolan Sandslash', GameConstants.StoneType.Ice_stone)],
             'base': {
                 'hitpoints': 50,
                 'attack': 75,
@@ -606,7 +606,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 28.01,
-            'name': 'Sandslash (Alolan)',
+            'name': 'Alolan Sandslash',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 90,
             'type': [PokemonType.Ice, PokemonType.Steel],
@@ -783,14 +783,14 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 37.01,
-            'name': 'Vulpix (Alolan)',
+            'name': 'Alolan Vulpix',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 190,
             'type': [PokemonType.Ice],
             'levelType': LevelType.mediumfast,
             'exp': 60,
             'eggCycles': 20,
-            'evolutions': [new StoneEvolution('Vulpix (Alolan)', 'Ninetales (Alolan)', GameConstants.StoneType.Ice_stone)],
+            'evolutions': [new StoneEvolution('Alolan Vulpix', 'Alolan Ninetales', GameConstants.StoneType.Ice_stone)],
             'base': {
                 'hitpoints': 38,
                 'attack': 41,
@@ -819,7 +819,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 38.01,
-            'name': 'Ninetales (Alolan)',
+            'name': 'Alolan Ninetales',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 75,
             'type': [PokemonType.Fire],
@@ -1052,14 +1052,14 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 50.01,
-            'name': 'Diglett (Alolan)',
+            'name': 'Alolan Diglett',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Ground, PokemonType.Steel],
             'levelType': LevelType.mediumfast,
             'exp': 53,
             'eggCycles': 20,
-            'evolutions': [new LevelEvolution('Diglett (Alolan)', 'Dugtrio (Alolan)', 26)],
+            'evolutions': [new LevelEvolution('Alolan Diglett', 'Alolan Dugtrio', 26)],
             'base': {
                 'hitpoints': 10,
                 'attack': 55,
@@ -1088,7 +1088,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 51.01,
-            'name': 'Dugtrio (Alolan)',
+            'name': 'Alolan Dugtrio',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 50,
             'type': [PokemonType.Ground, PokemonType.Steel],
@@ -1124,14 +1124,14 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 52.01,
-            'name': 'Meowth (Alolan)',
+            'name': 'Alolan Meowth',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Dark],
             'levelType': LevelType.mediumfast,
             'exp': 58,
             'eggCycles': 20,
-            'evolutions': [new StoneEvolution('Meowth (Alolan)', 'Persian (Alolan)', GameConstants.StoneType.Soothe_bell)],
+            'evolutions': [new StoneEvolution('Alolan Meowth', 'Alolan Persian', GameConstants.StoneType.Soothe_bell)],
             'base': {
                 'hitpoints': 40,
                 'attack': 35,
@@ -1160,7 +1160,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 53.01,
-            'name': 'Persian (Alolan)',
+            'name': 'Alolan Persian',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 90,
             'type': [PokemonType.Dark],
@@ -1548,14 +1548,14 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 74.01,
-            'name': 'Geodude (Alolan)',
+            'name': 'Alolan Geodude',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 255,
             'type': [PokemonType.Rock, PokemonType.Electric],
             'levelType': LevelType.mediumslow,
             'exp': 60,
             'eggCycles': 15,
-            'evolutions': [new LevelEvolution('Geodude (Alolan)', 'Graveler (Alolan)', 25)],
+            'evolutions': [new LevelEvolution('Alolan Geodude', 'Alolan Graveler', 25)],
             'base': {
                 'hitpoints': 40,
                 'attack': 80,
@@ -1585,14 +1585,14 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 75.01,
-            'name': 'Graveler (Alolan)',
+            'name': 'Alolan Graveler',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 120,
             'type': [PokemonType.Rock, PokemonType.Electric],
             'levelType': LevelType.mediumslow,
             'exp': 137,
             'eggCycles': 15,
-            'evolutions': [new StoneEvolution('Graveler (Alolan)', 'Golem (Alolan)', GameConstants.StoneType.Trade_stone)],
+            'evolutions': [new StoneEvolution('Alolan Graveler', 'Alolan Golem', GameConstants.StoneType.Trade_stone)],
             'base': {
                 'hitpoints': 55,
                 'attack': 95,
@@ -1621,7 +1621,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 76.01,
-            'name': 'Golem (Alolan)',
+            'name': 'Alolan Golem',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 45,
             'type': [PokemonType.Rock, PokemonType.Electric],
@@ -1854,14 +1854,14 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 88.01,
-            'name': 'Grimer (Alolan)',
+            'name': 'Alolan Grimer',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 190,
             'type': [PokemonType.Poison, PokemonType.Dark],
             'levelType': LevelType.mediumfast,
             'exp': 65,
             'eggCycles': 20,
-            'evolutions': [new LevelEvolution('Grimer (Alolan)', 'Muk (Alolan)', 38)],
+            'evolutions': [new LevelEvolution('Alolan Grimer', 'Alolan Muk', 38)],
             'base': {
                 'hitpoints': 80,
                 'attack': 80,
@@ -1890,7 +1890,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 89.01,
-            'name': 'Muk (Alolan)',
+            'name': 'Alolan Muk',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 75,
             'type': [PokemonType.Poison, PokemonType.Dark],
@@ -2126,7 +2126,7 @@ const pokemonList: PokemonListData[] =
             'exp': 65,
             'eggCycles': 20,
             'evolutions': [new StoneEvolution('Exeggcute', 'Exeggutor', GameConstants.StoneType.Leaf_stone)],
-            //TODO add Alola-only evolution into Exeggutor (Alolan) using Leafstone
+            //TODO add Alola-only evolution into Alolan Exeggutor using Leafstone
             'base': {
                 'hitpoints': 60,
                 'attack': 40,
@@ -2155,7 +2155,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 103.01,
-            'name': 'Exeggutor (Alolan)',
+            'name': 'Alolan Exeggutor',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 45,
             'type': [PokemonType.Grass, PokemonType.Dragon],
@@ -2180,7 +2180,7 @@ const pokemonList: PokemonListData[] =
             'exp': 64,
             'eggCycles': 20,
             'evolutions': [new LevelEvolution('Cubone', 'Marowak', 28)],
-            //TODO add Alola-only evolution into Marowak (Alolan) at night at level 28
+            //TODO add Alola-only evolution into Alolan Marowak at night at level 28
             'base': {
                 'hitpoints': 50,
                 'attack': 50,
@@ -2209,7 +2209,7 @@ const pokemonList: PokemonListData[] =
         },
         {
             'id': 105.01,
-            'name': 'Marowak (Alolan)',
+            'name': 'Alolan Marowak',
             'nativeRegion': GameConstants.Region.alola,
             'catchRate': 75,
             'type': [PokemonType.Fire, PokemonType.Ghost],

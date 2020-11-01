@@ -961,11 +961,11 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
 // Kalos
 // TODO: Balancing of dungeon Pokemon HP & rewards.
 dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
-    ['Meowth (Alolan)', 'Abra', 'Magnemite', 'Wingull', 'Mime Jr.', 'Zorua'],
+    ['Alolan Meowth', 'Abra', 'Magnemite', 'Wingull', 'Mime Jr.', 'Zorua'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Grimer (Alolan)', 8000000, 70),
+        new DungeonBossPokemon('Alolan Grimer', 8000000, 70),
         new DungeonBossPokemon('Furfrou', 8000000, 70),
     ],
     96500, 201, 35);
@@ -981,11 +981,11 @@ dungeonList['Hau\'oli Cemetery'] = new Dungeon('Hau\'oli Cemetery',
     96500, 201, 35);
 
 dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
-    ['Zubat', 'Diglett (Alolan)', 'Noibat', 'Rattata (Alolan)', 'Yungoos'],
+    ['Zubat', 'Alolan Diglett', 'Noibat', 'Alolan Rattata', 'Yungoos'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Raticate (Alolan)', 8000000, 70),
+        new DungeonBossPokemon('Alolan Raticate', 8000000, 70),
         new DungeonBossPokemon('Gumshoos', 8000000, 70),
     ],
     96500, 201, 35);
@@ -1066,7 +1066,7 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Marowak (Alolan)', 8000000, 70),
+        new DungeonBossPokemon('Alolan Marowak', 8000000, 70),
     ],
     96500, 201, 35);
 
@@ -1080,7 +1080,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     96500, 201, 35);
 
 dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
-    ['Zubat', 'Diglett (Alolan)'],
+    ['Zubat', 'Alolan Diglett'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1109,7 +1109,7 @@ dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
     96500, 201, 35);
 
 dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
-    ['Meowth (Alolan)', 'Psyduck', 'Poliwhirl', 'Goldeen', 'Magikarp', 'Gyarados', 'Ledian', 'Ariados', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Cottonee', 'Petilil'],
+    ['Alolan Meowth', 'Psyduck', 'Poliwhirl', 'Goldeen', 'Magikarp', 'Gyarados', 'Ledian', 'Ariados', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Cottonee', 'Petilil'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1148,7 +1148,7 @@ dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
     96500, 201, 35);
 
 dungeonList['Po Town'] = new Dungeon('Po Town',
-    ['Rattata (Alolan)', 'Raticate (Alolan)', 'Ekans', 'Drowzee', 'Golbat', 'Grimer (Alolan)', 'Spinarak', 'Houndour', 'Trubbish', 'Scraggy', 'Fomantis', 'Manearie'],
+    ['Alolan Rattata', 'Alolan Raticate', 'Ekans', 'Drowzee', 'Golbat', 'Alolan Grimer', 'Spinarak', 'Houndour', 'Trubbish', 'Scraggy', 'Fomantis', 'Manearie'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1160,7 +1160,7 @@ dungeonList['Po Town'] = new Dungeon('Po Town',
     96500, 201, 35);
 
 dungeonList['Mount Lanikala'] = new Dungeon('Mount Lanikala',
-    ['Raticate (Alolan)', 'Sandshrew (Alolan)', 'Vulpix (Alolan)', 'Sneasel', 'Snorunt', 'Gumshoos'],
+    ['Alolan Raticate', 'Alolan Sandshrew', 'Alolan Vulpix', 'Sneasel', 'Snorunt', 'Gumshoos'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1193,7 +1193,7 @@ dungeonList['Exeggutor Island'] = new Dungeon('Exeggutor Island',
     96500, 201, 35);
 
 dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
-    ['Golbat', 'Dugtrio (Alolan)', 'Machoke', 'Golbat', 'Magikarp', 'Skarmory', 'Barboach', 'Corphish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Mienfoo', 'Carbink', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Jangmo-o', 'Hakamo-o'],
+    ['Golbat', 'Alolan Dugtrio', 'Machoke', 'Golbat', 'Magikarp', 'Skarmory', 'Barboach', 'Corphish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Mienfoo', 'Carbink', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Jangmo-o', 'Hakamo-o'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1233,7 +1233,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     96500, 201, 35);
 
 dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
-    ['Golbat', 'Dugtrio (Alolan)', 'Druddigon'],
+    ['Golbat', 'Alolan Dugtrio', 'Druddigon'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [

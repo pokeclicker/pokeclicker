@@ -1189,7 +1189,7 @@ gymList['Elite Molayne'] = new Gym(
         new GymPokemon('Bisharp', 1948300, 56),
         new GymPokemon('Magnezone', 1952000, 56),
         new GymPokemon('Metagross', 1957000, 56),
-        new GymPokemon('Dugtrio (Alolan)', 1957000, 57),
+        new GymPokemon('Alolan Dugtrio', 1957000, 57),
     ],
     BadgeEnums.Elite_Molayne,
     64000,
