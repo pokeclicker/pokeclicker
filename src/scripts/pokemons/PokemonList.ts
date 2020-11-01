@@ -31,6 +31,10 @@ type PokemonListData = {
   heldItem?: string;
 }
 
+function createPokemonArray<T extends readonly PokemonListData[] & Array<{name: V}>, V extends string>(...args: T) {
+    return args;
+}
+
 /**
  * Datalist that contains all Pokémon data
  */
