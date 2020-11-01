@@ -154,7 +154,7 @@ class Party implements Feature {
         }
     }
 
-    alreadyCaughtPokemonByName(name: string, shiny = false) {
+    alreadyCaughtPokemonByName(name: PokemonNameType, shiny = false) {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
 

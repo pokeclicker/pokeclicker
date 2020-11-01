@@ -23,6 +23,7 @@ class Game {
         public keyItems: KeyItems,
         public badgeCase: BadgeCase,
         public oakItems: OakItems,
+        public categories: PokemonCategories,
         public party: Party,
         public shards: Shards,
         public underground: Underground,

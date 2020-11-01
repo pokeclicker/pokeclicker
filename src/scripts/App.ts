@@ -26,6 +26,7 @@ class App {
                 new KeyItems(),
                 new BadgeCase(),
                 new OakItems([20, 50, 100]),
+                new PokemonCategories(),
                 new Party(),
                 new Shards(),
                 new Underground(),
