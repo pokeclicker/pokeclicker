@@ -40,8 +40,8 @@ class Dungeon {
 
     public calculateAllPokemonNames(): void {
         // Put the names into a Set to filter out any duplicate values
-        this.allPokemonNames = [...new Set([...this.pokemonList, ...this.bossList.map(b => b.name)])];
-        this.allAvailablePokemonNames = [...new Set([...this.pokemonList, ...this.availableBosses().map(b => b.name)])];
+        this.allPokemonNames = [...new Set([...this.pokemonList, ...this.bossList.map(b => b.name)])] as PokemonNameType[];
+        this.allAvailablePokemonNames = [...new Set([...this.pokemonList, ...this.availableBosses().map(b => b.name)])] as PokemonNameType[];
     }
 
     public availableBosses(): DungeonBossPokemon[] {
