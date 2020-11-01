@@ -1033,11 +1033,17 @@ dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
     96500, 201, 35);
 
 dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
-    ['Pikachu'],
+    ['Pikachu', 'Pichu'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Pikachu', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Original cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Hoenn cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Sinnoh cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Unova cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Kalos cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Alola cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Partner cap)', 8000000, 70),
     ],
     96500, 201, 35);
  
