@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class DungeonRunner {
 
     public static dungeon: Dungeon;
@@ -125,7 +127,7 @@ class DungeonRunner {
     })
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
-        const possiblePokemon: string[] = dungeon.allPokemonNames;
+        const possiblePokemon: PokemonNameType[] = dungeon.allAvailablePokemonNames;
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 

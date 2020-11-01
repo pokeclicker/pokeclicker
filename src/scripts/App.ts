@@ -1,3 +1,5 @@
+/// <reference path="../declarations/DataStore/BadgeCase.d.ts" />
+
 class App {
 
     static readonly debug = false;
@@ -15,7 +17,6 @@ class App {
             // Needs to be loaded first so save data can be updated (specifically "player" data)
             const update = new Update();
 
-            UndergroundItem.initialize();
             player = Save.load();
             App.game = new Game(
                 update,
@@ -25,8 +26,10 @@ class App {
                 new KeyItems(),
                 new BadgeCase(),
                 new OakItems([20, 50, 100]),
+                new PokemonCategories(),
                 new Party(),
                 new Shards(),
+                new Underground(),
                 new Farming(),
                 new LogBook(),
                 new RedeemableCodes(),

@@ -1,4 +1,12 @@
 ///<reference path="../shop/ShopHandler.ts"/>
+
+interface ShopOptions {
+    saveName?: string,
+    maxAmount?: number,
+    multiplier?: number,
+    multiplierDecrease?: boolean,
+}
+
 abstract class Item {
     name: KnockoutObservable<string>;
     saveName: string;
@@ -10,47 +18,54 @@ abstract class Item {
     multiplier: number;
     multiplierDecrease: boolean;
 
+    _displayName: string;
+
     constructor(
         name: string,
         basePrice: number,
         currency: GameConstants.Currency = GameConstants.Currency.money,
-        {
-            saveName = '',
-            maxAmount = Number.MAX_SAFE_INTEGER,
-            multiplier = GameConstants.ITEM_PRICE_MULTIPLIER,
-            multiplierDecrease = true,
-        } : {
-            saveName?: string,
-            maxAmount?: number,
-            multiplier?: number,
-            multiplierDecrease?: boolean,
-        } = {
+        shopOptions: ShopOptions = {
             saveName: '',
             maxAmount: Number.MAX_SAFE_INTEGER,
             multiplier: GameConstants.ITEM_PRICE_MULTIPLIER,
             multiplierDecrease: true,
-        }) {
+        },
+        displayName?: string) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
-        this.saveName = saveName || name || `${name}|${GameConstants.Currency[currency]}`;
-        this.maxAmount = maxAmount;
+        this.saveName = shopOptions?.saveName || name || `${name}|${GameConstants.Currency[currency]}`;
+        this.maxAmount = shopOptions?.maxAmount;
         // Multiplier needs to be above 1
-        this.multiplier = Math.max(1, multiplier);
-        this.multiplierDecrease = multiplierDecrease;
+        this.multiplier = Math.max(1, shopOptions?.multiplier);
+        this.multiplierDecrease = shopOptions?.multiplierDecrease;
         if (!ItemList[this.saveName]) {
             ItemList[this.saveName] = this;
         }
+
+        this._displayName = displayName ?? name;
     }
 
     totalPrice(amount: number): number {
         if (this.name() == GameConstants.Pokeball[GameConstants.Pokeball.Pokeball]) {
             return Math.max(0, this.basePrice * amount);
         } else {
-            const res = (this.price() * (1 - Math.pow(this.multiplier, amount))) / (1 - this.multiplier);
-            return Math.max(0, Math.floor(res));
+            // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
+            //    (m_start) * (m^k) = 100
+            // => k = (2 - log(m_start)) / log(m)
+            const mStart = Math.max(player.itemMultipliers[this.saveName] || 1, 1);
+            const k = (mStart < 100)
+                ? Math.ceil((2 - Math.log10(mStart)) / Math.log10(this.multiplier))
+                : 0;
+            const incAmount = Math.min(k, amount);
+
+            const incCost = (this.price() * (1 - Math.pow(this.multiplier, incAmount))) / (1 - this.multiplier);
+            const maxCost = (this.basePrice * 100 * (amount - incAmount));
+            const total = incCost + maxCost;
+
+            return Math.max(0, Math.floor(total));
         }
     }
 
@@ -124,6 +139,9 @@ abstract class Item {
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 
+    get displayName() {
+        return GameConstants.humanifyString(this._displayName);
+    }
 }
 
 const ItemList: { [name: string]: Item } = {};

@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/DataStore/StatisticStore/index.d.ts" />
+
 class MapHelper {
     public static returnToMap() {
         if (player.currentTown()) {
@@ -28,7 +30,7 @@ class MapHelper {
         } else {
             if (!MapHelper.routeExist(route, region)) {
                 return Notifier.notify({
-                    message: `Route ${route} does not exist in the ${GameConstants.Region[region]} region.`,
+                    message: `${Routes.getName(route, region)} does not exist in the ${GameConstants.Region[region]} region.`,
                     type: NotificationConstants.NotificationOption.warning,
                 });
             }
@@ -89,7 +91,7 @@ class MapHelper {
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
-            if (App.game.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
+            if (App.game.statistics.routeKills[region][route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
@@ -218,7 +220,9 @@ class MapHelper {
 
     public static travelToNextRegion() {
         if (MapHelper.ableToTravel()) {
-            player.highestRegion(player.highestRegion() + 1);
+            // Gain queue slots based on highest region
+            App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()));
+            GameHelper.incrementObservable(player.highestRegion);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
         }

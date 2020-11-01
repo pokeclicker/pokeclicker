@@ -1,6 +1,6 @@
 class PartyController {
 
-    static getCaughtStatusByName(name: string): CaughtStatus {
+    static getCaughtStatusByName(name: PokemonNameType): CaughtStatus {
         return this.getCaughtStatus(PokemonHelper.getPokemonByName(name).id);
     }
 
@@ -22,7 +22,7 @@ class PartyController {
         if (pokemon) {
             for (const evolution of pokemon.evolutions) {
                 if (evolution instanceof StoneEvolution && evolution.stone == evoType && evolution.isSatisfied()) {
-                    const pStatus = this.getCaughtStatusByName(evolution.getEvolvedPokemon());
+                    const pStatus = this.getCaughtStatusByName(evolution.getEvolvedPokemon() as PokemonNameType);
                     if (pStatus < status) {
                         status = pStatus;
                     }
