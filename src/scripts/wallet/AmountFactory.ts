@@ -1,4 +1,4 @@
-///<reference path="../GameConstants.ts"/>
+///<reference path="../GameConstants.d.ts"/>
 ///<reference path="Amount.ts"/>
 
 abstract class AmountFactory {

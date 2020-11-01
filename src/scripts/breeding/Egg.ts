@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+
 class Egg implements Saveable {
     saveKey = 'egg';
 
@@ -98,16 +101,21 @@ class Egg implements Saveable {
         const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
         // If the party pokemon exist, increase it's damage output
         if (partyPokemon) {
-            if (partyPokemon.evolutions !== undefined) {
-                partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
-            }
-            partyPokemon.exp = 0;
-            partyPokemon.level = 1;
-            partyPokemon.breeding = false;
-            partyPokemon.level = partyPokemon.calculateLevelFromExp();
+            // Increase attack
             partyPokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
             partyPokemon.attack = partyPokemon.calculateAttack();
-            partyPokemon.checkForLevelEvolution();
+
+            // If breeding (not store egg), reset level, reset evolution check
+            if (partyPokemon.breeding) {
+                if (partyPokemon.evolutions !== undefined) {
+                    partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
+                }
+                partyPokemon.exp = 0;
+                partyPokemon.level = 1;
+                partyPokemon.breeding = false;
+                partyPokemon.level = partyPokemon.calculateLevelFromExp();
+                partyPokemon.checkForLevelEvolution();
+            }
         }
 
         const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;

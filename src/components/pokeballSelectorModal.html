@@ -3,7 +3,7 @@
   <div class="modal-dialog modal-dialog-scrollable modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="pokeballSelectorModalLabel">Pokeball Selection</h5>
+        <h5 class="modal-title" id="pokeballSelectorModalLabel">Pokéball Selection</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,7 +15,8 @@
             <thead>
               <tr>
                 <th class="text-center" width="20%">Ball</th>
-                <th width="80%">Description</th>
+                <th>Description</th>
+                <th class="text-center">Qty</th>
               </tr>
             </thead>
             <tbody>
@@ -41,9 +42,12 @@
 <script type="text/html" id="pokeballSelectionTemplate">
   <td class="text-center">
     <img class="pokeball-small"
-      data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.type] + ($data.type < 0 ? '.png' : '-small.png')}, css: {'pokeball-selected': App.game.pokeballs.selectedSelection()() === $data.type}"/>
+      data-bind="attr: {src: 'assets/images/pokeball/' + GameConstants.Pokeball[$data.type] + '.svg'}, css: {'pokeball-selected': App.game.pokeballs.selectedSelection()() === $data.type}"/>
   </td>
   <td class="align-middle">
     <span data-bind="text: $data.description"></span>
+  </td>
+  <td class="text-center align-middle">
+    <span data-bind="text: $data.quantity && $data.quantity() ? GameConstants.formatNumber($data.quantity()) : '-', tooltip: $data.quantity && {title: $data.quantity().toLocaleString('en-US'), trigger: 'hover', animation: false, placement: 'left'}"></span>
   </td>
 </script>

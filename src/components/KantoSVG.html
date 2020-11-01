@@ -445,14 +445,14 @@
         })
      %>
 
-    <!--Pokemon Tower-->
+    <!--Pokémon Tower-->
     <%- include('templates/mapDungeon',
         { name: "Pokemon Tower"
         , x: 80, y: 17
         , width: 4, height: 8
         })
     %>
-    <!--Pokemon Tower Extension-->
+    <!--Pokémon Tower Extension-->
     <%- include('templates/mapDungeon',
         { name: "Pokemon Tower"
         , x: 81, y: 16
@@ -467,7 +467,7 @@
         })
      %>
 
-    <!--Pokemon Mansion-->
+    <!--Pokémon Mansion-->
     <%- include('templates/mapDungeon',
         { name: "Pokemon Mansion"
         , x: 13, y: 50
@@ -525,7 +525,7 @@
         { name: "Underground Entrance"
         , x: 72, y: 31
         , width: 3, height: 4
-        , databind: "click:function(){Underground.openUndergroundModal()}, attr: { class: Underground.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
         })
      %>
 

@@ -37,8 +37,7 @@ config = Object.assign({
     GOOGLE_ANALYTICS_INIT: false,
     GOOGLE_ANALYTICS_ID: false,
     DEV_BANNER: false,
-    DISCORD_CLIENT_ID: false,
-    DISCORD_LOGIN_URI: false,
+    DISCORD_LOGIN_PROXY: false,
     FEATURE_FLAGS: {
         preloadUnreleasedTowns: false,
     },
@@ -155,23 +154,29 @@ gulp.task('scripts', () => {
 
     // Convert the posix path to a path that matches the current OS
     const osPathPrefix = '../src'.split(path.posix.sep).join(path.sep);
-    const osPathModulePrefix = '../src/modules'.split(path.posix.sep).join(path.sep);
+    const osPathModulePrefix = '../src/declarations'.split(path.posix.sep).join(path.sep);
 
     const generateDeclarations = base
-        .pipe(filter((vinylPath) => vinylPath.relative.startsWith(osPathModulePrefix)))
+        .pipe(filter((vinylPath) => {
+            return (
+                vinylPath.relative.startsWith(osPathModulePrefix) &&
+                // Exclude GameConstants, as we generate those manually
+                !vinylPath.relative.includes('GameConstants.d.ts')
+            );
+        }))
         .pipe(rename((vinylPath) => Object.assign(
             {},
             vinylPath,
             // Strip '../src/modules' from the start of declaration vinylPaths
             { dirname: vinylPath.dirname.replace(osPathModulePrefix, '.') }
         )))
-        // Remove exports so that ./src/scripts can use them
-        .pipe(replace(/(^|\n)export default \w+;/, '$1')) // export default variable;
-        .pipe(replace(/(^|\n)export default /, '$1')) // export default class ...
-        .pipe(replace(/(^|\n)export /, '$1declare '))
+        // Remove default exports
+        .pipe(replace(/(^|\n)export default \w+;/g, ''))
         // Replace imports with references
-        .pipe(replace(/(^|\n)import .* from '(.*)((.d)?.ts)?';/, '$1///<reference path="$2.d.ts"/>'))
-        // Fix broken declarations
+        .pipe(replace(/(^|\n)import (.* from )?'(.*)((.d)?.ts)?';/g, '$1/// <reference path="$3.d.ts"/>'))
+        // Convert exports to declarations so that ./src/scripts can use them
+        .pipe(replace(/(^|\n)export (default )?/, '$1declare '))
+        // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
         .pipe(gulp.dest(dests.declarations));
 
@@ -192,9 +197,8 @@ gulp.task('scripts', () => {
             const tsProject = typescript.createProject('tsconfig.json');
             const compileScripts = tsProject.src()
                 .pipe(replace('$VERSION', version))
-                .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
-                .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
-                .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
+                .pipe(replace('$DISCORD_ENABLED', !!config.DISCORD_LOGIN_PROXY))
+                .pipe(replace('$DISCORD_LOGIN_PROXY', config.DISCORD_LOGIN_PROXY))
                 .pipe(tsProject())
                 .pipe(gulp.dest(dests.scripts))
                 .pipe(browserSync.reload({stream: true}));

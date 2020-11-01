@@ -1,9 +1,11 @@
+/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+
 class LogBook implements Feature {
     name = 'Log Book';
     saveKey = 'logbook';
     defaults: Record<string, any>;
 
-    public logs: ObservableArrayProxy<LogBookLog> = new ObservableArrayProxy([]);
+    public logs: KnockoutObservableArray<LogBookLog> = ko.observableArray([]);
 
     newLog(type: LogBookType, message: string) {
         const length = this.logs.unshift(new LogBookLog(type, message));
