@@ -275,9 +275,17 @@ class Plot implements Saveable {
     }
 
     generateWanderPokemon(): any {
+        if (!this.isUnlocked) {
+            return undefined;
+        }
+        if (this.berry === BerryType.None) {
+            return undefined;
+        }
+        if (this.stage() !== PlotStage.Berry) {
+            return undefined;
+        }
         if (Math.random() < GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]()) {
-            // TODO: HLXII Filter region pokemon
-            const availablePokemon = this.berryData.wander.filter(pokemon => true);
+            const availablePokemon = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
             const wanderPokemon = availablePokemon[Math.floor(Math.random() * availablePokemon.length)];
 
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);

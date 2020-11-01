@@ -10,7 +10,8 @@ class Farming implements Feature {
 
     externalAuras: KnockoutObservable<number>[];
 
-    counter = 0;
+    mutationCounter = 0;
+    wanderCounter = 0;
 
     readonly AMOUNT_OF_PLOTS = 25;
 
@@ -852,21 +853,21 @@ class Farming implements Feature {
         });
 
         // Running Mutations
-        this.counter += GameConstants.TICK_TIME;
-        if (this.counter >= GameConstants.MUTATION_TICK) {
+        this.mutationCounter += GameConstants.TICK_TIME;
+        if (this.mutationCounter >= GameConstants.MUTATION_TICK) {
             this.mutations.forEach(mutation => {
                 if (mutation.mutate()) {
                     notifications.add(FarmNotificationType.Mutated);
                     change = true;
                 }
             });
-            this.counter = 0;
+            this.mutationCounter = 0;
         }
 
         // Wandering Pokemon
-        this.counter += GameConstants.TICK_TIME;
+        this.wanderCounter += GameConstants.TICK_TIME;
         let wanderPokemon: any;
-        if (this.counter >= GameConstants.WANDER_TICK) {
+        if (this.wanderCounter >= GameConstants.WANDER_TICK) {
             for (let i = 0;i < App.game.farming.plotList.length;i++) {
                 const plot = App.game.farming.plotList[i];
                 wanderPokemon = plot.generateWanderPokemon();
@@ -876,6 +877,8 @@ class Farming implements Feature {
                     break;
                 }
             }
+            this.wanderCounter = 0;
+
         }
 
         if (change) {

@@ -44,7 +44,7 @@ class Berry {
         this.color = color;
         this.description = description;
         this.aura = aura;
-        this.wander = Berry.baseWander.concat(wander);
+        this.wander = wander ? Berry.baseWander.concat(wander) : Berry.baseWander;
     }
 
     get descriptionHTML(): string {
