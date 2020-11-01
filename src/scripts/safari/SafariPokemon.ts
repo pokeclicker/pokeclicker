@@ -1,5 +1,5 @@
 class SafariPokemon implements PokemonInterface {
-    name: string;
+    name: PokemonNameType;
     id: number;
     type1: PokemonType;
     type2: PokemonType;
@@ -18,7 +18,10 @@ class SafariPokemon implements PokemonInterface {
     private _eatingBait: KnockoutObservable<BaitType>;
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
-    static readonly list = [
+    static readonly list: {
+        name: PokemonNameType,
+        weight: number
+    }[] = [
         { name: 'Nidoran(F)', weight: 15 },
         { name: 'Nidorina', weight: 10 },
         { name: 'Nidoran(M)', weight: 25 },
@@ -48,7 +51,7 @@ class SafariPokemon implements PokemonInterface {
         return pokemon.weight * (App.game.party.alreadyCaughtPokemonByName(pokemon.name) ? 1 : 2);
     }
 
-    constructor(name: string) {
+    constructor(name: PokemonNameType) {
         const data = PokemonHelper.getPokemonByName(name);
 
         this.name = data.name;

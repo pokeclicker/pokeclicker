@@ -216,7 +216,15 @@ class Update implements Saveable {
                 }
             });
 
-            //TODO: HLXII Update to add this when we release the berry overhaul
+            // Give breeding slots based on highest region
+            saveData.breeding.queueSlots = 0;
+            for (let region = 0; region < playerData.highestRegion; region++) {
+                saveData.breeding.queueSlots += Math.max(4, 4 * Math.pow(2, region - 1));
+            }
+        },
+
+        //TODO: HLXII Update to add this when we release the berry overhaul
+        '0.5.9': ({ playerData, saveData }) => {
             //Update farms
             saveData.farming.unlockedBerries = Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false);
             saveData.farming.mulchList = Array<number>(GameHelper.enumLength(MulchType)).fill(0);
@@ -227,8 +235,8 @@ class Update implements Saveable {
                 }
             }
             // Plots won't be updated, as the berries currently don't have much value anyways
-
         },
+
     };
 
     constructor() {

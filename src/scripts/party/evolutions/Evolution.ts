@@ -9,13 +9,13 @@ abstract class Evolution {
 
     isSatisfied(): boolean {
         // Check that evolution is within reached regions
-        return PokemonHelper.calcNativeRegion(this.getEvolvedPokemon()) <= player.highestRegion();
+        return PokemonHelper.calcNativeRegion(this.getEvolvedPokemon() as PokemonNameType) <= player.highestRegion();
     }
 
     abstract getEvolvedPokemon(): string
 
     evolve(notification = false): boolean {
-        const evolvedPokemon = this.getEvolvedPokemon();
+        const evolvedPokemon = this.getEvolvedPokemon() as PokemonNameType;
 
         // This Pokemon is from a region we haven't reached yet
         if (PokemonHelper.calcNativeRegion(evolvedPokemon) > player.highestRegion()) {
