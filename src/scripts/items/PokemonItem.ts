@@ -2,16 +2,16 @@
 
 class PokemonItem extends CaughtIndicatingItem {
 
-    type: GameConstants.PokemonItemType;
+    type: PokemonNameType;
 
-    constructor(pokemon: GameConstants.PokemonItemType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
-        super(GameConstants.PokemonItemType[pokemon], basePrice, currency);
+    constructor(pokemon: PokemonNameType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
+        super(pokemon, basePrice, currency);
         this.type = pokemon;
     }
 
     gain() {
         const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_SHOP);
-        const pokemonName = this.name();
+        const pokemonName = this.name() as PokemonNameType;
         if (shiny) {
             Notifier.notify({
                 message: `✨ You obtained a shiny ${pokemonName}! ✨`,
@@ -25,7 +25,7 @@ class PokemonItem extends CaughtIndicatingItem {
     }
 
     getCaughtStatus(): CaughtStatus {
-        return PartyController.getCaughtStatusByName(this.name());
+        return PartyController.getCaughtStatusByName(this.name() as PokemonNameType);
     }
 
 }
