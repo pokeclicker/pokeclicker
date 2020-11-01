@@ -41,7 +41,7 @@ class Breeding implements Feature {
             ['Chimchar'],
             ['Tepig', 'Pansear'],
             ['Fennekin'],
-            ['Litten', 'Salandit'],
+            ['Litten'],
             ['Scorbunny'],
         ];
         this.hatchList[EggType.Water] = [

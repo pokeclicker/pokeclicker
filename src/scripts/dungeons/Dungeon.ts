@@ -1062,11 +1062,12 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
     96500, 201, 35);
 
 dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
-    ['Cubone', 'Kangaskhan', 'Magby', 'Magmar', 'Fletchling'],
+    ['Cubone', 'Kangaskhan', 'Magby', 'Magmar', 'Fletchling', 'Salandit'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
         new DungeonBossPokemon('Alolan Marowak', 8000000, 70),
+        new DungeonBossPokemon('Salazzle', 8000000, 70),
     ],
     96500, 201, 35);
 
