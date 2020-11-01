@@ -12,20 +12,20 @@ class EvolutionStone extends CaughtIndicatingItem {
         player.gainItem(GameConstants.StoneType[this.type], n);
     }
 
-    public use(pokemon?: string) {
+    public use(pokemon?: PokemonNameType) {
         const partyPokemon: PartyPokemon = App.game.party.getPokemon(PokemonHelper.getPokemonByName(pokemon).id);
         const shiny = partyPokemon.useStone(this.type);
         return shiny;
     }
 
     getCaughtStatus(): CaughtStatus {
-        const unlockedEvolutions = pokemonList.filter(p => p.evolutions)
-            .map(p => p.evolutions.find(e => e.type.includes(EvolutionType.Stone) && (e as StoneEvolution).stone === this.type))
+        const unlockedEvolutions = pokemonList.filter((p: PokemonListData) => p.evolutions)
+            .map((p: PokemonListData) => p.evolutions.find(e => e.type.includes(EvolutionType.Stone) && (e as StoneEvolution).stone === this.type))
             .filter(evolution => evolution)
-            .filter(evolution => PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon()) <= player.highestRegion())
+            .filter(evolution => PokemonHelper.calcNativeRegion(evolution.getEvolvedPokemon() as PokemonNameType) <= player.highestRegion())
             .map(evolution => evolution.getEvolvedPokemon());
 
-        return unlockedEvolutions.reduce((status: CaughtStatus, pokemonName: string) => {
+        return unlockedEvolutions.reduce((status: CaughtStatus, pokemonName: PokemonNameType) => {
             return Math.min(status, PartyController.getCaughtStatusByName(pokemonName));
         }, CaughtStatus.CaughtShiny);
     }

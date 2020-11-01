@@ -11,7 +11,7 @@ class RouteHelper {
      * @param includeHeadbutt
      * @returns {string[]} list of all Pokémons that can be caught
      */
-    public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeHeadbutt = true): string[] {
+    public static getAvailablePokemonList(route: number, region: GameConstants.Region, includeHeadbutt = true): PokemonNameType[] {
         // If the route is somehow higher than allowed, use the first route to generateWildPokemon Pokémon
         const possiblePokemons = Routes.getRoute(region, route)?.pokemon;
         if (!possiblePokemons) {
@@ -37,11 +37,11 @@ class RouteHelper {
      */
 
     public static routeCompleted(route: number, region: GameConstants.Region, includeShiny: boolean, includeHeadbutt = true): boolean {
-        const possiblePokemon: string[] = RouteHelper.getAvailablePokemonList(route, region, includeHeadbutt);
+        const possiblePokemon: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region, includeHeadbutt);
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 
-    public static listCompleted(possiblePokemon: string[], includeShiny: boolean) {
+    public static listCompleted(possiblePokemon: PokemonNameType[], includeShiny: boolean) {
         for (let i = 0; i < possiblePokemon.length; i++) {
             if (!App.game.party.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(possiblePokemon[i]).id)) {
                 return false;
