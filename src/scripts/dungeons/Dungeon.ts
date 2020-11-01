@@ -789,7 +789,7 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     96500, 201, 35);
 
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
-    ['Goldeen', 'Marill', 'Yanma', 'Vigoroth', 'Toxicroak', 'Gurdurr', 'Palpitoad', 'Swadloon', 'Whirlipede', 'Cottonee', 'Petilil', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+    ['Goldeen', 'Marill', 'Yanma', 'Vigoroth', 'Toxicroak', 'Gurdurr', 'Tympole', 'Palpitoad', 'Swadloon', 'Whirlipede', 'Cottonee', 'Petilil', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [

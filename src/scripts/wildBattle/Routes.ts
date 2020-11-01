@@ -1110,7 +1110,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 6', GameConstants.Region.unova, 6,
     new RoutePokemon({
-        land: ['Marill', 'Deerling (Spring)', 'Deerling (Autumn)', 'Karrablast', 'Tranquill', 'Foongus', 'Swadloon', 'Shelmet'],
+        land: ['Marill', 'Deerling (Spring)', 'Deerling (Autumn)', 'Karrablast', 'Tranquill', 'Foongus', 'Swadloon', 'Vanillite', 'Shelmet'],
         water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
     [
@@ -1131,7 +1131,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Unova Route 8', GameConstants.Region.unova, 8,
     new RoutePokemon({
-        land: ['Croagunk', 'Palpitoad', 'Karrablast', 'Shelmet', 'Stunfisk'],
+        land: ['Croagunk', 'Tympole', 'Palpitoad', 'Karrablast', 'Shelmet', 'Stunfisk'],
     }),
     [
         new OneFromManyRequirement([
@@ -1263,7 +1263,7 @@ Routes.add(new RegionRoute(
     'Undella Bay', GameConstants.Region.unova, 24,
     new RoutePokemon({
         land: [],
-        water: ['Frillish', 'Mantyke', 'Spheal', 'Remoraid', 'Jellicent', 'Wailmer', 'Chinchou'],
+        water: ['Frillish', 'Mantyke', 'Spheal', 'Remoraid', 'Jellicent', 'Wailmer', 'Chinchou', 'Ducklett'],
     }),
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))], 14
 ));
