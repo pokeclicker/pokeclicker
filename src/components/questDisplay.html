@@ -50,11 +50,7 @@
                     <td colspan="2">
                         <div class="card-header">
                             <knockout data-bind="text: $data.name"></knockout>
-                            <button type="button" class="btn btn-info"
-                            style="position: absolute; right: 0px; top: 0px; width: auto; height: 47px; padding: 4px;"
-                            data-bind="tooltip: { title: $data.description, trigger: 'hover', placement:'left' }">
-                            ?
-                            </button>
+                            <knockout class="info text-primary" data-bind="tooltip: { title: $data.description, trigger: 'hover', placement:'left' }">ⓘ</knockout>
                         </div>
                     </td>
                 </tr>
