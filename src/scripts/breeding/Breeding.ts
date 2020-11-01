@@ -184,12 +184,14 @@ class Breeding implements Feature {
         amount *= App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette);
 
         amount = Math.round(amount);
-        this.eggList.forEach((egg, index) => {
-            egg().addSteps(amount);
-            if (this.queueList().length && egg().progress() >= 100) {
+        let index =  this.eggList.length;
+        while (index-- > 0) {
+            const egg = this.eggList[index]();
+            egg.addSteps(amount);
+            if (this.queueList().length && egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
             }
-        });
+        }
     }
 
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {
