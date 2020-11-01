@@ -1050,8 +1050,36 @@ class Farming implements Feature {
     public harvestAll() {
         this.plotList.forEach((plot, index) => {
             this.harvest(index, true);
-        });
+        }, this);
         this.resetAuras();
+    }
+
+    /**
+     * Handles using the Berry Shovel to remove a Berry plant
+     * @param index The plot index
+     */
+    public shovel(index: number): void {
+        const plot = this.plotList[index];
+        if (!plot.isUnlocked) {
+            return;
+        }
+        if (plot.isEmpty()) {
+            return;
+        }
+        if (this.shovelAmt() <= 0) {
+            return;
+        }
+        plot.die(true);
+        GameHelper.incrementObservable(this.shovelAmt, -1);
+    }
+
+    /**
+     * Tries to use the Berry Shovel on all plots
+     */
+    public shovelAll() {
+        this.plotList.forEach((plot, index) => {
+            this.shovel(index);
+        }, this);
     }
 
     /**

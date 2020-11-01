@@ -1,5 +1,6 @@
 <div class="modal fade noselect" id="farmModal" tabindex="-1" role="dialog"
-     aria-labelledby="farmModalLabel">
+     aria-labelledby="farmModalLabel"
+     style="cursor:default">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header p-0">
@@ -21,8 +22,8 @@
 
 
                             <ul class="nav nav-tabs nav-fill">
-                                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#seeds" data-bind="click: function(){FarmController.berryListVisible = true;}">Berries</a></li>
-                                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#mulches" data-bind="click: function(){FarmController.berryListVisible = false;}">Mulch</a></li>
+                                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#seeds" data-bind="click: function(){FarmController.berryListVisible(true);}">Berries</a></li>
+                                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#mulches" data-bind="click: function(){FarmController.berryListVisible(false);}">Mulch</a></li>
                             </ul>
 
                             <div class="tab-content">
@@ -30,7 +31,7 @@
                                     <ul id="seedList" data-bind="foreach: FarmController.getBerryListWithIndex()" class="list-group"
                                         style="margin-bottom: 5px;">
                                         <li class="list-group-item list-group-item-action seed-list-item"
-                                            data-bind="click: function() {FarmController.selectedBerry = $data}">
+                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
                                             <img src="" height="24px"
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
                                                 css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
@@ -57,7 +58,7 @@
 
                                     <div class="row justify-content-center">
                                         <div class="col-lg-12 col-6">
-                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry())}">
                                                 Plant All
                                             </button>
                                         </div>
@@ -73,7 +74,7 @@
                                     <ul id="mulchList" data-bind="foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1)" class="list-group"
                                     style="margin-bottom: 5px;">
                                         <li class="list-group-item list-group-item-action seed-list-item"
-                                            data-bind="click: function() {FarmController.selectedMulch = $data}">
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() }">
                                             <img src="" width="24px"
                                                 data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
@@ -83,7 +84,7 @@
 
                                     <div class="row justify-content-center">
                                         <div class="col-lg-12 col-6">
-                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch)}">
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch())}">
                                                 Mulch All
                                             </button>
                                         </div>
@@ -108,8 +109,8 @@
                             </div>
                             <!-- /ko -->
                             <div id="plotList" data-bind="foreach: App.game.farming.plotList">
-                                <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked}">
-                                    <div class="plot-content">
+                                <div class="plot" data-bind="css: { plotLocked : !$data.isUnlocked }">
+                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
                                         <div class="plotImage">
                                             <!-- TODO: HLXII Update soil image with CSS class to show mulches -->
                                             <img style="width: 100%" src="assets/images/farm/soil.png">
@@ -137,7 +138,7 @@
                                 <div class="col-6">
                                     <ul id="shovelList" class="list-group">
                                         <li class="list-group-item list-group-item-action seed-list-item"
-                                            data-bind="click: function() {}">
+                                            data-bind="click: function() {FarmController.selectedShovel(true);}, css: { 'active': FarmController.selectedShovel() }">
                                             <img src="" height="24px"
                                                 data-bind="attr:{ src: ItemList['Berry_Shovel'].imagePath }">
                                             <span>Berry Shovel</span>
@@ -146,7 +147,7 @@
                                     </ul>
                                 </div>
                                 <div class="col-6">
-                                    <button class="btn btn-primary btn-block" style="height:100%;" data-bind="click: function(){}">
+                                    <button class="btn btn-primary btn-block" style="height:100%;" data-bind="click: function(){App.game.farming.shovelAll();}">
                                         Shovel All
                                     </button>
                                 </div>

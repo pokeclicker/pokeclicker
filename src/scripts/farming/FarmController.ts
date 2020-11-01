@@ -5,10 +5,11 @@ class FarmController {
     public static berryListFiltered: KnockoutObservableArray<BerryType> = ko.observableArray([]);
     public static numberOfTabs: KnockoutComputed<number>;
 
-    public static selectedBerry: BerryType = BerryType.Cheri;
-    public static selectedMulch: MulchType = MulchType.Boost_Mulch;
+    public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
+    public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);
+    public static selectedShovel: KnockoutObservable<boolean> = ko.observable(false);
 
-    public static berryListVisible = true;
+    public static berryListVisible: KnockoutObservable<boolean> = ko.observable(true);
 
     static readonly BERRIES_PER_PAGE = 8;
 
@@ -52,18 +53,31 @@ class FarmController {
         return plot.tooltip();
     }
 
+    public static calculateCssClass() {
+        if (this.selectedShovel()) {
+            return 'ShovelSelected';
+        }
+        if (this.berryListVisible()) {
+            return 'BerrySelected';
+        }
+        return 'MulchSelected';
+    }
+
     public static plotClick(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
+        // Handle Shovel
+        if (this.selectedShovel()) {
+            App.game.farming.shovel(index);
         // Handle Berries
-        if (this.berryListVisible) {
+        } else if (this.berryListVisible()) {
             if (plot.isEmpty()) {
-                App.game.farming.plant(index, this.selectedBerry);
+                App.game.farming.plant(index, this.selectedBerry());
             } else {
                 App.game.farming.harvest(index);
             }
         // Handle Mulches
         } else {
-            App.game.farming.addMulch(index, this.selectedMulch);
+            App.game.farming.addMulch(index, this.selectedMulch());
         }
     }
 
@@ -98,19 +112,23 @@ class FarmController {
 }
 document.addEventListener('DOMContentLoaded', function (event) {
     $('#farmModal').on('show.bs.modal', function () {
+        /*
         const seedList = $('#seedList');
         seedList.children().get(FarmController.selectedBerry).className += ' active';
         seedList.find('li').click(function () {
             $(this).parent().children().removeClass('active');
             $(this).addClass('active');
         });
+        */
 
+        /*
         const mulchList = $('#mulchList');
         mulchList.children().get(FarmController.selectedMulch).className += ' active';
         mulchList.find('li').click(function () {
             $(this).parent().children().removeClass('active');
             $(this).addClass('active');
         });
+        */
     });
 });
 
