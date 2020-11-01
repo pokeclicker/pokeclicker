@@ -3,16 +3,16 @@
 ///<reference path="../../scripts/GameConstants.d.ts" />
 
 class Routes {
-    public static regionRoutes = [];
+    public static regionRoutes: RegionRoute[] = [];
     constructor() {}
 
-    public static add(route: RegionRoute) {
+    public static add(route: RegionRoute): void {
         this.regionRoutes.push(route);
         // Sort the routes so we can normalize the route number
         this.sortRegionRoutes();
     }
 
-    public static sortRegionRoutes() {
+    public static sortRegionRoutes(): void {
         this.regionRoutes
             .sort((routeA, routeB) => routeA.orderNumber - routeB.orderNumber)
             .sort((routeA, routeB) => routeA.region - routeB.region);
@@ -22,19 +22,19 @@ class Routes {
         return this.regionRoutes.find(routeData => routeData.region == region && routeData.number == route);
     }
 
-    public static getRoutesByRegion(region: GameConstants.Region) {
+    public static getRoutesByRegion(region: GameConstants.Region): RegionRoute[] {
         return this.regionRoutes.filter(routeData => routeData.region == region);
     }
 
-    public static getRegionByRoute(route: number) {
+    public static getRegionByRoute(route: number): GameConstants.Region {
         return this.regionRoutes.find(routeData => routeData.number == route).region;
     }
 
-    public static getName(route: number, region: number) {
+    public static getName(route: number, region: number): string {
         return this.regionRoutes.find(routeData => routeData.region == region && routeData.number == route).routeName;
     }
 
-    public static unnormalizeRoute(normalizedRoute: number) {
+    public static unnormalizeRoute(normalizedRoute: number): number {
         return this.regionRoutes[normalizedRoute - 1].number;
     }
     public static normalizedNumber(region: GameConstants.Region, route: number): number {
@@ -875,7 +875,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Sinnoh Route 210', GameConstants.Region.sinnoh, 210,
     new RoutePokemon({
-        land: ['Geodude', 'Ponyta', 'Chansey', 'Scyther', 'Hoothoot', 'Noctowl', 'Roselia', 'Staravia', 'Kricketune', 'Bonsly', 'Mime jr.', 'Machop', 'Machoke', 'Meditite', 'Swablu', 'Bibarel'],
+        land: ['Geodude', 'Ponyta', 'Chansey', 'Scyther', 'Hoothoot', 'Noctowl', 'Roselia', 'Staravia', 'Kricketune', 'Bonsly', 'Mime Jr.', 'Machop', 'Machoke', 'Meditite', 'Swablu', 'Bibarel'],
         water: ['Psyduck', 'Golduck', 'Magikarp', 'Barboach', 'Whiscash', 'Gyarados'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 209)]
