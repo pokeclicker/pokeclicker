@@ -64,6 +64,10 @@ class PokedexHelper {
         const highestDex = Math.max(highestEncountered, highestDefeated, highestCaught);
 
         return pokemonList.filter(function (pokemon) {
+            // Checks based on caught/shiny status
+            const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
+            const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
+
             // If the Pokemon shouldn't be unlocked yet
             const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
             if (nativeRegion > GameConstants.MAX_AVAILABLE_REGION || nativeRegion == GameConstants.Region.none) {
@@ -77,7 +81,7 @@ class PokedexHelper {
             }
             
             // Event Pokemon
-            if (pokemon.id <= 0) {
+            if (pokemon.id <= 0 && !alreadyCaught) {
                 return false;
             }
 
@@ -102,10 +106,6 @@ class PokedexHelper {
             } else if ((type1 != null && !(pokemon as PokemonListData).type.includes(type1)) || (type2 != null && !(pokemon as PokemonListData).type.includes(type2))) {
                 return false;
             }
-
-            // Checks based on caught/shiny status
-            const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
-            const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
 
             // Alternate forms that we haven't caught yet
             if (!alreadyCaught && pokemon.id != Math.floor(pokemon.id)) {

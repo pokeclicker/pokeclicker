@@ -67,7 +67,7 @@ class PokemonFactory {
     public static routeDungeonTokens(route: number, region: GameConstants.Region): number {
         route = MapHelper.normalizeRoute(route, region);
 
-        const tokens = Math.max(1, 6 * Math.pow(route * 2 / (3 / Math.round(1 + region / 3)), 1.05));
+        const tokens = Math.max(1, 6 * Math.pow(route * 2 / (2.8 / (1 + region / 3)), 1.08));
 
         return tokens;
     }
