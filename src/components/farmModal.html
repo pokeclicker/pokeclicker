@@ -113,8 +113,9 @@
                                 <div class="plot" data-bind="css: { plotLocked : !$data.isUnlocked }">
                                     <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
                                         <div class="plotImage">
-                                            <!-- TODO: HLXII Update soil image with CSS class to show mulches -->
-                                            <img style="width: 100%" src="assets/images/farm/soil.png">
+                                            <img style="width: 100%"
+                                            data-bind="class: FarmController.calcMulchClass($data)"
+                                            src="assets/images/farm/soil.png">
                                             <div data-bind="ifnot: $data.isEmpty()">
                                                 <div class="plotButton"
                                                     data-html=true

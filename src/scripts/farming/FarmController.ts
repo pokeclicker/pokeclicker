@@ -63,6 +63,13 @@ class FarmController {
         return 'MulchSelected';
     }
 
+    public static calcMulchClass(plot: Plot) {
+        if (plot.mulch === MulchType.None) {
+            return '';
+        }
+        return MulchType[plot.mulch];
+    }
+
     public static plotClick(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
         // Handle Shovel
