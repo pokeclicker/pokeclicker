@@ -87,12 +87,16 @@
     <knockout data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
       <div id="dungeonPokemonList" class="card">
         <!--Display all available Pokémon in this dungeon-->
-        <ul class="list-inline"
-          data-bind="foreach: player.town().dungeon().allPokemonNames">
+        <ul class="list-inline" data-bind="foreach: player.town().dungeon().allPokemonNames">
           <li class="list-inline-item">
-            <img class="dungeon-pokemon-preview" src=""
-                data-bind="attr:{ src: 'assets/images/' + (App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png' }, css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data) }"/>
-            <sup style="float:right; top:10px;" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
+            <img class="dungeon-pokemon-preview" src="" data-bind="attr:{
+                src: 'assets/images/' + (App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png'
+            },
+            css: {
+                'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data)
+            }"/>
+            <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: player.town().dungeon().allAvailablePokemonNames.includes($data)">
           </li>
         </ul>
       </div>

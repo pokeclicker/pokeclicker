@@ -10,6 +10,7 @@
 class Dungeon {
     public name: KnockoutObservable<string>;
     allPokemonNames: string[];
+    allAvailablePokemonNames: string[];
 
     constructor(
         name: string,
@@ -38,11 +39,9 @@ class Dungeon {
     }
 
     public calculateAllPokemonNames() {
-        const pokemonNameSet = new Set(this.pokemonList);
-        this.availableBosses().forEach(boss => {
-            pokemonNameSet.add(boss.name);
-        });
-        this.allPokemonNames = [...pokemonNameSet];
+        // Put the names into a Set to filter out any duplicate values
+        this.allPokemonNames = [...new Set([...this.pokemonList, ...this.bossList.map(b => b.name)])];
+        this.allAvailablePokemonNames = [...new Set([...this.pokemonList, ...this.availableBosses().map(b => b.name)])];
     }
 
     public availableBosses(): DungeonBossPokemon[] {
