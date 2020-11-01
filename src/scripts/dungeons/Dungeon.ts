@@ -1080,27 +1080,21 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Lurantis', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Lurantis', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     ['Zubat', 'Alolan Diglett'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Larvitar', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Larvitar', 8000000, 70)],
     96500, 201, 35);
     
 dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
     ['Zubat', 'Gastly'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Phantump', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Phantump', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
@@ -1138,9 +1132,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Klefki'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Mimikyu', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Mimikyu', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
@@ -1154,7 +1146,7 @@ dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
     96500, 201, 35);
 
 dungeonList['Po Town'] = new Dungeon('Po Town',
-    ['Alolan Rattata', 'Alolan Raticate', 'Ekans', 'Drowzee', 'Golbat', 'Alolan Grimer', 'Spinarak', 'Houndour', 'Trubbish', 'Scraggy', 'Fomantis', 'Manearie'],
+    ['Alolan Rattata', 'Alolan Raticate', 'Ekans', 'Drowzee', 'Golbat', 'Alolan Grimer', 'Spinarak', 'Houndour', 'Trubbish', 'Scraggy', 'Fomantis', 'Mareanie'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1202,9 +1194,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
     ['Golbat', 'Alolan Dugtrio', 'Machoke', 'Golbat', 'Magikarp', 'Skarmory', 'Barboach', 'Corphish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Mienfoo', 'Carbink', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Jangmo-o', 'Hakamo-o'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Kommo-o', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Kommo-o', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Nebby'] = new Dungeon('Nebby',
