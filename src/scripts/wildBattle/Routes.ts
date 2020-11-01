@@ -1516,7 +1516,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Rattata', 'Eevee', 'Igglybuff', 'Lillipup', 'Pikipek', 'Yungoos', 'Grubbin', 'Mudbray'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
+    [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 5', GameConstants.Region.alola, 8,
@@ -1642,7 +1642,7 @@ Routes.add(new RegionRoute(
         land: ['Granbull', 'Pelipper', 'Gastrodon (east)', 'Furfrou', 'Inkay'],
         water: ['Dhelmise'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)] //replace with Aether Paradise 2 if implemented
+    [new GymBadgeRequirement(BadgeEnums.UlaulaKahuna)] //replace with Aether Paradise 2 if implemented
 ));
 Routes.add(new RegionRoute(
     'Ancient Poni Path', GameConstants.Region.alola, 25,

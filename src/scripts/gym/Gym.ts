@@ -1194,7 +1194,7 @@ gymList['Elite Molayne'] = new Gym(
     BadgeEnums.Elite_Molayne,
     64000,
     'That Kukui... He certainly found an interesting Trainer for me to face!',
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+    [new GymBadgeRequirement(BadgeEnums.PoniKahuna)]
 );
 gymList['Elite Olivia'] = new Gym(
     'Olivia',

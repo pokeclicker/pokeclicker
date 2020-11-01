@@ -86,16 +86,16 @@ enum BadgeEnums {
     'Elite_KalosChampion',
     // Alola
     // TODO: these are unordered and some may be missing
-    'FightiniumZ',
-    'RockiumZ',
-    'GroundiumZ',
-    'DarkiniumZ',
+    'MelemeleKahuna',
+    'AkalaKahuna',
+    'UlaulaKahuna',
+    'PoniKahuna',
+    'Elite_UltraNecrozma',
     'Elite_Olivia',
     'Elite_Acerola',
     'Elite_Molayne',
     'Elite_Kahili',
     'Elite_AlolaChampion',
-    'Elite_UltraNecrozma',
 }
 
 export default BadgeEnums;

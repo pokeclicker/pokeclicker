@@ -1826,7 +1826,7 @@ TownList['Heahea City'] = new Town(
     'Heahea City',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.FightiniumZ)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)],
     }
 );
 TownList['Paniola Town'] = new Town(
@@ -1854,14 +1854,14 @@ TownList['Malie City'] = new Town(
     'Malie City',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)], //Replace with Ather Paradise 1 if implemented
+        requirements: [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)], //Replace with Ather Paradise 1 if implemented
     }
 );
 TownList['Aether Paradise'] = new Town(
     'Aether Paradise',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.RockiumZ)],
+        requirements: [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)],
     }
 );
 TownList['Tapu Village'] = new Town(
@@ -1875,7 +1875,7 @@ TownList['Seafolk Village'] = new Town(
     'Seafolk Village',
     GameConstants.Region.alola,
     {
-        requirements: [new GymBadgeRequirement(BadgeEnums.DarkiniumZ)], //Replace with Ather Paradise 2 if implemented
+        requirements: [new GymBadgeRequirement(BadgeEnums.UlaulaKahuna)], //Replace with Ather Paradise 2 if implemented
     }
 );
 TownList['Exeggutor Island'] = new Town(
@@ -1922,7 +1922,7 @@ TownList['Seaward Cave'] = new DungeonTown(
 TownList['Ten Carat Hill'] = new DungeonTown(
     'Ten Carat Hill',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.FightiniumZ)]
+    [new GymBadgeRequirement(BadgeEnums.MelemeleKahuna)]
 );
 TownList['Ruins of Conflict'] = new DungeonTown(
     'Ruins of Conflict',
@@ -1975,7 +1975,7 @@ TownList['Ruins of Life'] = new DungeonTown(
 TownList['Malie Garden'] = new DungeonTown(
     'Malie Garden',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.RockiumZ)] //Replace with Ather Paradise 1 if implemented
+    [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)] //Replace with Ather Paradise 1 if implemented
 );
 TownList['Hokulani Observatory'] = new DungeonTown(
     'Hokulani Observatory',
@@ -2000,7 +2000,7 @@ TownList['Po Town'] = new DungeonTown(
 TownList['Mount Lanikala'] = new DungeonTown(
     'Mount Lanikala',
     GameConstants.Region.alola,
-    [new GymBadgeRequirement(BadgeEnums.GroundiumZ)]
+    [new GymBadgeRequirement(BadgeEnums.PoniKahuna)]
 );
 TownList['Ruins of Abundance'] = new DungeonTown(
     'Ruins of Abundance',
