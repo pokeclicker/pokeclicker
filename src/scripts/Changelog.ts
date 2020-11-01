@@ -49,8 +49,39 @@ class ChangelogUpdate extends Changelog {
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
 const changelogItems = [
+    // note that month is 0 indexed
+    // v0.5.8
+    new ChangelogUpdate('v0.5.8', new Date(2020, 10, 1)),
+    new Changelog(changelogType.NEW, 'Queue functionality added to Hatchery'),
+    new Changelog(changelogType.NEW, 'Can add Pokémon to custom Categories, and sort/filter by those'),
+    new Changelog(changelogType.NEW, 'Safari Zone Pokémon can now appear as overworld sprites'),
+    new Changelog(changelogType.NEW, 'Completed Quest and Achievements will show in the Log Book'),
+    new Changelog(changelogType.NEW, 'See Pokémon Attack after calculations by hovering Pokémon Attack value'),
+    new Changelog(changelogType.NEW, 'Add sparkle to shiny overworld sprites for Dynamic Background and Safari Zone'),
+    new Changelog(changelogType.NEW, 'Can sort Pokémon by Times Hatched'),
+    new Changelog(changelogType.CHANGE, 'Boost Dungeon Tokens gained slightly'),
+    new Changelog(changelogType.CHANGE, 'Updated images, Use svg images for Currency and Pokéballs'),
+    new Changelog(changelogType.CHANGE, 'Evolution Stones will show a caught indicator in shops'),
+    new Changelog(changelogType.CHANGE, 'Display date in changelog when updates occured'),
+    new Changelog(changelogType.CHANGE, 'Update Gyms Pokémon and defeated text'),
+    new Changelog(changelogType.CHANGE, 'Update Kanto Pokémon encounters to be based on Pokémon Yellow version'),
+    new Changelog(changelogType.CHANGE, 'Updated layout of Pokémon List'),
+    new Changelog(changelogType.CHANGE, 'Show event Pokémon in the Pokédex'),
+    new Changelog(changelogType.CHANGE, 'Can no longer upgrade shard effectiveness where there is no usage'),
+    new Changelog(changelogType.CHANGE, 'Roaming Pokémon chance of appearing is now based on route difficulty'),
+    new Changelog(changelogType.CHANGE, 'Doubled the chance of encountering uncaught Pokémon in the Safari Zone'),
+    new Changelog(changelogType.CHANGE, 'Display Pokéball amount in selector modal'),
+    new Changelog(changelogType.FIXED, 'Can no longer start a new Pokémon League battle if modal open'),
+    new Changelog(changelogType.FIXED, 'Shop cost will no longer go above 100× the base cost'),
+    new Changelog(changelogType.FIXED, 'Underground hammer will display red box when on edge tiles'),
+    new Changelog(changelogType.FIXED, 'Mine should no longer soft lock players'),
+    new Changelog(changelogType.FIXED, 'Alternate Form Pokémon statistics shown correctly'),
+    new Changelog(changelogType.FIXED, 'When hatching shop eggs, the Pokémons level will no longer be reset'),
+    new Changelog(changelogType.FIXED, 'Underground daily trades statistic will increment correctly when doing multiple trades'),
+    new Changelog(changelogType.FIXED, 'Minor display and text fixes'),
+
     // v0.5.7
-    new ChangelogUpdate('v0.5.7', new Date(2020,9,13)),
+    new ChangelogUpdate('v0.5.7', new Date(2020, 9, 13)),
     new Changelog(changelogType.NEW, 'Added setting for Hatchery egg ready to hatch animations'),
     new Changelog(changelogType.NEW, 'More NPCs in towns around Johto and Hoenn'),
     new Changelog(changelogType.NEW, 'Types displayed in Pokémon statistics modal'),
