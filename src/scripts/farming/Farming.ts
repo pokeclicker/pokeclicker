@@ -244,7 +244,7 @@ class Farming implements Feature {
             [
                 'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
                 'It has a tendency to expand into nearby plots.',
-            ], undefined, ['Treeko']);
+            ], undefined, ['Treecko']);
         this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [3600, 14400, 28800, 43200, 86400],
             25, 0.05, 1500,
             [0, 10, 0, 0, 15], BerryColor.Blue,

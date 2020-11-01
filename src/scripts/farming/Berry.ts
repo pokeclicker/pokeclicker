@@ -19,9 +19,9 @@ class Berry {
 
     public aura?: Aura;
 
-    public wander: string[];
+    public wander: PokemonNameType[];
 
-    private static baseWander = [
+    private static baseWander: PokemonNameType[] = [
         'Butterfree', 'Weedle', 'Tangela', 'Scyther',
         'Ledyba', 'Pineco', 'Heracross',
         'Wurmple', 'Volbeat', 'Illumise',
@@ -31,7 +31,7 @@ class Berry {
     constructor(type: BerryType, growthTime: number[],
         harvestAmount: number, replantRate: number, farmValue: number,
         flavors: number[], color: BerryColor, description: string[],
-        aura?: Aura, wander?: string[]) {
+        aura?: Aura, wander?: PokemonNameType[]) {
         this.type = type;
         this.growthTime = growthTime;
         this.harvestAmount = harvestAmount;
