@@ -87,9 +87,7 @@ class QuestHelper {
                 return new UseOakItemQuest(oakItem, amount);
             case 'HarvestBerriesQuest':
                 // Getting Berries that can be grown in less than half a day
-                console.log(App.game.farming);
                 const berryTypes = GameHelper.enumNumbers(BerryType).filter(berry => berry > BerryType.None).filter(berry => App.game.farming.berryData[berry].growthTime[3] < 12 * 60 * 60);
-                console.log(berryTypes);
                 const berryType = SeededRand.fromArray(berryTypes);
                 // Calculating balanced amount based on BerryType
                 // Hard limits are between 10 and 300

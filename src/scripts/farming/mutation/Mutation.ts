@@ -71,9 +71,6 @@ abstract class Mutation {
 
         let mutated = false;
 
-        // TODO: HLXII remove after testing
-        console.log(plots, this);
-
         plots.forEach(function(idx) {
             const willMutate =  Math.random() < this.mutationChance * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier();
             if (!willMutate) {
