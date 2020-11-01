@@ -2,8 +2,8 @@
 aria-labelledby="breedingModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
    <div class="modal-content">
-       <div class="modal-header">
-            <h5 class="modal-title" id="breedingModalLabel" data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'right' }">Day Care <span class="text-primary">ⓘ</span></h5>
+       <div class="modal-header justify-content-start align-items-center">
+            <h5 class="modal-title" id="breedingModalLabel">Day Care</h5>
             <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
                     data-target="#breeding-filter" aria-expanded="false" aria-controls="breeding-filter">
                 Filters
@@ -12,8 +12,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     data-target="#breeding-sort" aria-expanded="false" aria-controls="breeding-sort">
                 Sort
             </button>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+            <button type="button" class="btn btn-info"
+            style="position: absolute; right: 0px; top: 0px; width: auto; height: 69px; padding: 10px;"
+            data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
+            ?
             </button>
        </div>
        <div class="modal-body p-0">
