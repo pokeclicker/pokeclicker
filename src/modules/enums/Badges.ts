@@ -84,6 +84,18 @@ enum BadgeEnums {
     'Elite_Wikstrom',
     'Elite_Drasna',
     'Elite_KalosChampion',
+    // Alola
+    // TODO: these are unordered and some may be missing
+    'FightiniumZ',
+    'RockiumZ',
+    'GroundiumZ',
+    'DarkiniumZ',
+    'Elite_Olivia',
+    'Elite_Acerola',
+    'Elite_Molayne',
+    'Elite_Kahili',
+    'Elite_AlolaChampion',
+    'Elite_UltraNecrozma',
 }
 
 export default BadgeEnums;
