@@ -1,9 +1,9 @@
 class GymPokemon {
-    name: string;
+    name: PokemonNameType;
     maxHealth: number;
     level: number;
 
-    constructor(name: string, maxHealth: number, level: number) {
+    constructor(name: PokemonNameType, maxHealth: number, level: number) {
         this.name = name;
         this.maxHealth = maxHealth;
         this.level = level;
