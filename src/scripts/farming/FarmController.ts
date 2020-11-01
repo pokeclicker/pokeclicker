@@ -84,12 +84,14 @@ class FarmController {
     public static navigateRight() {
         if (FarmController.navigateIndex() < FarmController.numberOfTabs()) {
             FarmController.navigateIndex(FarmController.navigateIndex() + 1);
+            this.selectedBerry(this.getBerryListWithIndex()[0]);
         }
     }
 
     public static navigateLeft() {
         if (FarmController.navigateIndex() > 0) {
             FarmController.navigateIndex(FarmController.navigateIndex() - 1);
+            this.selectedBerry(this.getBerryListWithIndex()[0]);
         }
     }
 
@@ -110,25 +112,4 @@ class FarmController {
     }
 
 }
-document.addEventListener('DOMContentLoaded', function (event) {
-    $('#farmModal').on('show.bs.modal', function () {
-        /*
-        const seedList = $('#seedList');
-        seedList.children().get(FarmController.selectedBerry).className += ' active';
-        seedList.find('li').click(function () {
-            $(this).parent().children().removeClass('active');
-            $(this).addClass('active');
-        });
-        */
-
-        /*
-        const mulchList = $('#mulchList');
-        mulchList.children().get(FarmController.selectedMulch).className += ' active';
-        mulchList.find('li').click(function () {
-            $(this).parent().children().removeClass('active');
-            $(this).addClass('active');
-        });
-        */
-    });
-});
 

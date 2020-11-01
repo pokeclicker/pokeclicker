@@ -7,6 +7,7 @@
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
                     <!-- TODO: HLXII Add Apricorn Tab ? -->
                     <btn class="btn btn-primary">
                         <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
@@ -172,6 +173,33 @@
                             </li>
                         </ul>
                     </div>
+                </div>
+
+                <div id="helpView" class="tab-pane fade">
+                    <h4><u>Farm</u></h4>
+                    <p>In the farm you can plant and harvest Berries.</p>
+                    <p>Each Berry type takes a certain amount of time to grow. Once fully grown, the Berry plant can be clicked to harvest the Berries.</p>
+                    <p>Farm Tokens can be gained by harvesting Berries.</p>
+                    <p>After a while, the Berry plant will wither, dropping only a fraction of the Berries.</p>
+                    <p>Additional plots can be unlocked by spending Berries.</p>
+
+                    <h4><u>Mutations</u></h4>
+                    <p>Berries have the chance to mutate into other Berries based on certain conditions.</p>
+                    <p>The Kanto Berry Master will give you daily hints to what these conditions may be.</p>
+
+                    <h4><u>Mulches</u></h4>
+                    <p>Mulches can be bought in later regions from Berry Masters. They can be used on plots for different effects:</p>
+                    <p>Moost Mulch increases the growth rate of Berry plants.</p>
+                    <p>Rich Mulch increases the number of Berries harvested.</p>
+                    <p>Surprise Mulch increases the chances of mutations</p>
+                    <p>Amaze Mulch has a weaker version of all three affects.</p>
+
+                    <h4><u>Berry Shovel</u></h4>
+                    <p>If you want to remove a Berry plant before it is fully grown, you can use a Berry Shovel to uproot it.</p>
+                    <p>Berry Shovels can be bought in later regions from Berry Masters.</p>
+
+                    <h4><u>Berry Trades</u></h4>
+                    <p>Berries can be traded with Berry Masters for other items</p>
                 </div>
             </div>
 
