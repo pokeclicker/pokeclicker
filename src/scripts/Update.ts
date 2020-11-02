@@ -215,7 +215,16 @@ class Update implements Saveable {
                     saveData.shards.shardWallet[type] += cost;
                 }
             });
+          
+            // Give breeding slots based on highest region
+            saveData.breeding.queueSlots = 0;
+            for (let region = 0; region < playerData.highestRegion; region++) {
+                saveData.breeding.queueSlots += Math.max(4, 4 * Math.pow(2, region - 1));
+            }
+        },
 
+        '0.5.9': ({ playerData, saveData }) => {
+            // Update the attack bonus percentages
             saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
                 p.attackBonusPercent = p.attackBonus;
                 delete p.attackBonus;
@@ -275,7 +284,7 @@ class Update implements Saveable {
         const saveData = this.getSaveData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
-        const backupSaveData = JSON.stringify({ playerData, saveData });
+        const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
 
         const button = document.createElement('a');
         button.className = 'btn btn-block btn-warning';
