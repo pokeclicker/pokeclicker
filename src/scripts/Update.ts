@@ -215,7 +215,9 @@ class Update implements Saveable {
                     saveData.shards.shardWallet[type] += cost;
                 }
             });
+        },
 
+        '0.5.9': ({ saveData }) => {
             // Award Deoxys forms for completed Battle Frontier milestones
             const maxBattleFrontierStage = saveData.statistics.battleFrontierHighestStageCompleted;
             if (maxBattleFrontierStage > 151) {
