@@ -275,7 +275,7 @@ class Update implements Saveable {
         const saveData = this.getSaveData();
 
         // Save the data by stringifying it, so that it isn't mutated during update
-        const backupSaveData = JSON.stringify({ playerData, saveData });
+        const backupSaveData = JSON.stringify({ player: playerData, save: saveData });
 
         const button = document.createElement('a');
         button.className = 'btn btn-block btn-warning';
