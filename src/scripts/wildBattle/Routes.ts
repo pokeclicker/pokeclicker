@@ -1576,7 +1576,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Mount Hokulani', GameConstants.Region.alola, 22,
     new RoutePokemon({
-        land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)'],
+        land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue-core)', 'Minior (Green-core)', 'Minior (Indigo-core)', 'Minior (Orange-core)', 'Minior (Red-core)', 'Minior (Violet-core)', 'Minior (Yellow-core)'],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
     10.1
