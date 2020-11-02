@@ -88,9 +88,11 @@ enum BadgeEnums {
     // TODO: these are unordered and some may be missing
     'MelemeleKahuna',
     'AkalaKahuna',
+    'Elite_Nihilego',
     'UlaulaKahuna',
-    'PoniKahuna',
     'Elite_UltraNecrozma',
+    'MinaTrail',
+    'PoniKahuna',
     'Elite_Olivia',
     'Elite_Acerola',
     'Elite_Molayne',

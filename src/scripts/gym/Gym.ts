@@ -1179,6 +1179,93 @@ gymList['Champion Diantha'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
 );
 
+//Alola Gyms
+//TODO: Balancing of gym Pokemon HP & rewards.
+gymList['Iki Town'] = new Gym(
+    'Hala',
+    'Iki Town',
+    [
+        new GymPokemon('Machop', 2458300, 15),
+        new GymPokemon('Makuhita', 2462000, 15),
+        new GymPokemon('Crabrawler', 2462000, 16),
+    ],
+    BadgeEnums.MelemeleKahuna,
+    128000,
+    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+);
+gymList['Konikoni City'] = new Gym(
+    'Olivia',
+    'Konikoni City',
+    [
+        new GymPokemon('Anorith', 2458300, 27),
+        new GymPokemon('Lileep', 2462000, 27),
+        new GymPokemon('Lycanroc (Midnight)', 2462000, 28),
+    ],
+    BadgeEnums.AkalaKahuna,
+    128000,
+    'How lovely.',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 9)]
+);
+gymList['Aether Foundation'] = new Gym(
+    'Ultra Wormhole',
+    'Aether Foundation',
+    [new GymPokemon('???', 2458300, 27)],
+    BadgeEnums.Elite_Nihilego,
+    128000,
+    'The creature escaped back into the ultra wormhole.',
+    [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)]
+);
+gymList['Malie City'] = new Gym(
+    'Nanu',
+    'Malie City',
+    [
+        new GymPokemon('Sableye', 2458300, 43),
+        new GymPokemon('Krokorok', 2462000, 43),
+        new GymPokemon('Alolan Persian', 2462000, 44),
+    ],
+    BadgeEnums.UlaulaKahuna,
+    128000,
+    'Hmph...',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
+);
+gymList['Altar of the Sunne and Moone'] = new Gym(
+    'Ultra Megalopolis',
+    'Altar of the Sunne and Moone',
+    [new GymPokemon('Necrozma (Ultra)', 2458300, 60)],
+    BadgeEnums.Elite_Nihilego,
+    128000,
+    'Necrozma fled. It left something behind.',
+    [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)]
+);
+gymList['Seafolk Village'] = new Gym(
+    'Mina',
+    'Seafolk Village',
+    [
+        new GymPokemon('Mawile', 2458300, 51),
+        new GymPokemon('Granbull', 2462000, 51),
+        new GymPokemon('Ribombee', 2462000, 51),
+    ],
+    BadgeEnums.MinaTrail,
+    128000,
+    'Woah! I\'m shocked at your strength!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Nebby'))]
+);
+gymList['Exeggutor Island'] = new Gym(
+    'Hapu',
+    'Exeggutor Island',
+    [
+        new GymPokemon('Golurk', 2458300, 53),
+        new GymPokemon('Gastrodon (east)', 2462000, 53),
+        new GymPokemon('Flygon', 2462000, 53),
+        new GymPokemon('Mudsdale', 2462000, 54),
+    ],
+    BadgeEnums.PoniKahuna,
+    128000,
+    'You have succeeded in your final grand trial!',
+    [new GymBadgeRequirement(BadgeEnums.MinaTrail)]
+);
+
 //Alola Elite 4
 //TODO: Balancing of elite Pokemon HP & rewards.
 gymList['Elite Molayne'] = new Gym(

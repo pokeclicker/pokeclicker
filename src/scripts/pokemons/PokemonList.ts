@@ -15852,7 +15852,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Rock, PokemonType.Poison],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 257,
         'catchRate': 45,
         'base': {
             'hitpoints': 109,
@@ -15971,7 +15971,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Psychic],
         'eggCycles': 120,
         'levelType': LevelType.slow,
-        'exp': null,
+        'exp': 270,
         'catchRate': 255,
         'base': {
             'hitpoints': 97,
@@ -15980,6 +15980,23 @@ const pokemonList = createPokemonArray(
             'defense': 101,
             'specialDefense': 89,
             'speed': 79,
+        },
+    },
+    {
+        'id': 800.03,
+        'name': 'Necrozma (Ultra)',
+        'type': [PokemonType.Psychic],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 270,
+        'catchRate': 255,
+        'base': {
+            'hitpoints': 97,
+            'attack': 167,
+            'specialAttack': 167,
+            'defense': 97,
+            'specialDefense': 97,
+            'speed': 129,
         },
     },
     {
@@ -18342,6 +18359,23 @@ const pokemonList = createPokemonArray(
             'defense': 100,
             'specialDefense': 100,
             'speed': 115,
+        },
+    },
+    {
+        'id': -793,
+        'name': '???',
+        'type': [PokemonType.Rock, PokemonType.Poison],
+        'eggCycles': 120,
+        'levelType': LevelType.slow,
+        'exp': 257,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 109,
+            'attack': 53,
+            'specialAttack': 127,
+            'defense': 47,
+            'specialDefense': 131,
+            'speed': 103,
         },
     }
     // {
