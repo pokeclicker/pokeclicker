@@ -1271,7 +1271,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Desert Resort', GameConstants.Region.unova, 25,
     new RoutePokemon({
-        land: ['Sandshrew', 'Maractus', 'Darumaka', 'Dwebble', 'Scraggy', 'Sandile'],
+        land: ['Sandshrew', 'Trapinch', 'Maractus', 'Darumaka', 'Dwebble', 'Scraggy', 'Sigilyph', 'Sandile'],
         water: [],
     }),
     [
