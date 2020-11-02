@@ -37,7 +37,7 @@ abstract class Item {
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
         this.saveName = shopOptions?.saveName || name || `${name}|${GameConstants.Currency[currency]}`;
-        this.maxAmount = shopOptions?.maxAmount;
+        this.maxAmount = shopOptions?.maxAmount || Number.MAX_SAFE_INTEGER;
         // Multiplier needs to be above 1
         this.multiplier = Math.max(1, shopOptions?.multiplier);
         this.multiplierDecrease = shopOptions?.multiplierDecrease;
