@@ -44,9 +44,9 @@ class AchievementHandler {
     public static filterAchievementList(retainPage = false) {
         this.achievementListFiltered(this.achievementList.filter((a) => (
             a.region <= player.highestRegion() &&
-              (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
-              (this.filter.type()   == 'all' ? true : a.property.constructor.name == this.filter.type()) &&
-              (this.filter.region() == 'all' ? true : a.region == +this.filter.region())
+              (this.filter.status() == 'all' || a.unlocked == JSON.parse(this.filter.status())) &&
+              (this.filter.type()   == 'all' || a.property.constructor.name == this.filter.type()) &&
+              (this.filter.region() == 'all' || a.region == +this.filter.region())
         )));
         if (!retainPage) {
             this.resetPages();
