@@ -41,14 +41,19 @@ class AchievementHandler {
         return this.achievementListFiltered().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
     }
 
-    public static filterAchievementList() {
+    public static filterAchievementList(retainPage = false) {
         this.achievementListFiltered(this.achievementList.filter((a) => (
             a.region <= player.highestRegion() &&
             (this.filter.status() == 'all' || a.unlocked == JSON.parse(this.filter.status())) &&
             (this.filter.type()   == 'all' || a.property.constructor.name == this.filter.type()) &&
             (this.filter.region() == 'all' || a.region == +this.filter.region())
         )));
-        this.resetPages();
+        if (!retainPage) {
+            this.resetPages();
+        } else if (this.getAchievementListWithIndex().length === 0 && this.navigateIndex() > 0) {
+            this.calculateNumberOfTabs();
+            this.navigateIndex(this.numberOfTabs()  - 1);
+        }
     }
 
     public static resetPages() {
