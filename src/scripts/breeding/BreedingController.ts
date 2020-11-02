@@ -125,7 +125,7 @@ class BreedingController {
         return (animationType === 'almost' && egg.stepsRemaining() <= 50) ?  'hatchingSoon' : '';
     }
 
-    public static getEggSpots(pokemonName: string) {
+    public static getEggSpots(pokemonName: PokemonNameType) {
         const pokemon = pokemonMap[pokemonName];
         const seed = pokemon.id * pokemon.type.reduce((a,b) => a * (b + 1), 1);
         SeededRand.seed(seed);
