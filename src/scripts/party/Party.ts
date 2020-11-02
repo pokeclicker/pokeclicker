@@ -77,7 +77,7 @@ class Party implements Feature {
         this._caughtPokemon.push(pokemon);
 
         // Trigger sorting update of PokemonList UI
-        PartyController.getSortedList();
+        PartyController.sortList();
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
@@ -154,7 +154,7 @@ class Party implements Feature {
         }
     }
 
-    alreadyCaughtPokemonByName(name: string, shiny = false) {
+    alreadyCaughtPokemonByName(name: PokemonNameType, shiny = false) {
         return this.alreadyCaughtPokemon(PokemonHelper.getPokemonByName(name).id, shiny);
     }
 
