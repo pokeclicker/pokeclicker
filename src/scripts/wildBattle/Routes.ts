@@ -161,7 +161,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Vulpix', 'Jigglypuff', 'Meowth', 'Abra'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 8)],
     10.2
 ));
 Routes.add(new RegionRoute(
