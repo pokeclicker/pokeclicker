@@ -103,6 +103,7 @@ namespace GameConstants {
         'Fastball',
         'Quickball',
         'Timerball',
+        'Luxuryball',
     }
     declare enum Currency {
         money,

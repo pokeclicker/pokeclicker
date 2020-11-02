@@ -185,6 +185,7 @@ export enum Pokeball {
     'Fastball',
     'Quickball',
     'Timerball',
+    'Luxuryball',
 }
 
 export enum Currency {
