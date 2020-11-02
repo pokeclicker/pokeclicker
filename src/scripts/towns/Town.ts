@@ -1833,21 +1833,21 @@ TownList['Paniola Town'] = new Town(
     'Paniola Town',
     GameConstants.Region.alola,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 7)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 4)],
     }
 );
 TownList['Royal Avenue'] = new Town(
     'Royal Avenue',
     GameConstants.Region.alola,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 6)],
     }
 );
 TownList['Konikoni City'] = new Town(
     'Konikoni City',
     GameConstants.Region.alola,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 12)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 9)],
     }
 );
 TownList['Malie City'] = new Town(
@@ -1868,7 +1868,7 @@ TownList['Tapu Village'] = new Town(
     'Tapu Village',
     GameConstants.Region.alola,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 18)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 13)],
     }
 );
 TownList['Seafolk Village'] = new Town(
@@ -1897,22 +1897,22 @@ TownList['Altar of the Sunne and Moone'] = new Town(
 TownList['Trainers\' School'] = new DungeonTown(
     'Trainers\' School',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 18)]
 );
 TownList['Hau\'oli Cemetery'] = new DungeonTown(
     'Hau\'oli Cemetery',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 3)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)]
 );
 TownList['Verdant Cavern'] = new DungeonTown(
     'Verdant Cavern',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 3)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 2)]
 );
 TownList['Melemele Meadow'] = new DungeonTown(
     'Melemele Meadow',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 3)]
 );
 TownList['Seaward Cave'] = new DungeonTown(
     'Seaward Cave',
@@ -1932,27 +1932,27 @@ TownList['Ruins of Conflict'] = new DungeonTown(
 TownList['Pikachu Valley'] = new DungeonTown(
     'Pikachu Valley',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 7)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)]
 );
 TownList['Paniola Ranch'] = new DungeonTown(
     'Paniola Ranch',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 7)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 4)]
 );
 TownList['Brooklet Hill'] = new DungeonTown(
     'Brooklet Hill',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 8)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 5)]
 );
 TownList['Wela Volcano Park'] = new DungeonTown(
     'Wela Volcano Park',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 10)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 7)]
 );
 TownList['Lush Jungle'] = new DungeonTown(
     'Lush Jungle',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 11)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 8)]
 );
 TownList['Diglett\'s Tunnel'] = new DungeonTown(
     'Diglett\'s Tunnel',
@@ -1962,13 +1962,13 @@ TownList['Diglett\'s Tunnel'] = new DungeonTown(
 TownList['Memorial Hill'] = new DungeonTown(
     'Memorial Hill',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 12)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 9)]
 );
 TownList['Ruins of Life'] = new DungeonTown(
     'Ruins of Life',
     GameConstants.Region.alola,
     [
-        new RouteKillRequirement(10, GameConstants.Region.alola, 13),
+        new RouteKillRequirement(10, GameConstants.Region.alola, 21),
         new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
     ]
 );
@@ -1980,22 +1980,22 @@ TownList['Malie Garden'] = new DungeonTown(
 TownList['Hokulani Observatory'] = new DungeonTown(
     'Hokulani Observatory',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 15)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 22)]
 );
 TownList['Thrifty Megamart'] = new DungeonTown(
     'Thrifty Megamart',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 19)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 14)]
 );
 TownList['Ula\'ula Meadow'] = new DungeonTown(
     'Ula\'ula Meadow',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 22)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 16)]
 );
 TownList['Po Town'] = new DungeonTown(
     'Po Town',
     GameConstants.Region.alola,
-    [new RouteKillRequirement(10, GameConstants.Region.alola, 23)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 17)]
 );
 TownList['Mount Lanikala'] = new DungeonTown(
     'Mount Lanikala',
@@ -2006,7 +2006,7 @@ TownList['Ruins of Abundance'] = new DungeonTown(
     'Ruins of Abundance',
     GameConstants.Region.alola,
     [
-        new RouteKillRequirement(10, GameConstants.Region.alola, 20),
+        new RouteKillRequirement(10, GameConstants.Region.alola, 23),
         new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
     ]
 );
