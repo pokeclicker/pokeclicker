@@ -149,7 +149,7 @@ Routes.add(new RegionRoute(
     ]
 ));
 Routes.add(new RegionRoute(
-    'Kanto Route 7', GameConstants.Region.kanto, 7,
+    'Kanto Route 8', GameConstants.Region.kanto, 8,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Vulpix', 'Jigglypuff', 'Meowth', 'Abra', 'Kadabra'],
     }),
@@ -157,11 +157,11 @@ Routes.add(new RegionRoute(
     10.1
 ));
 Routes.add(new RegionRoute(
-    'Kanto Route 8', GameConstants.Region.kanto, 8,
+    'Kanto Route 7', GameConstants.Region.kanto, 7,
     new RoutePokemon({
         land: ['Pidgey', 'Pidgeotto', 'Rattata', 'Vulpix', 'Jigglypuff', 'Meowth', 'Abra'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 8)],
     10.2
 ));
 Routes.add(new RegionRoute(
