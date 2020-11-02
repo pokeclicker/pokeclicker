@@ -596,7 +596,7 @@ dungeonList['Stark Mountain'] = new Dungeon('Stark Mountain',
 // Unova
 // TODO: Balancing of dungeon Pokemon HP & rewards.
 dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
-    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Spring)', 'Sawsbuck (Summer)'],
+    ['Fearow', 'Furret', 'Ledian', 'Sudowoodo', 'Stantler', 'Breloom', 'Unfezant', 'Sawsbuck (Autumn)', 'Sawsbuck (Winter)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [new DungeonBossPokemon('Keldeo (Resolute)', 8000000, 70)],
