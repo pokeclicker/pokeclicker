@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /// <reference path="./koExtenders.d.ts" />
 
 // Only numeric values allowed - usage: ko.observable(0).extend({ numeric: 0 });
@@ -29,4 +30,20 @@ ko.extenders.numeric = (target: ko.Subscribable, precision: number) => {
 
     // return the new computed observable
     return result;
+};
+
+ko.bindingHandlers.contentEditable = {
+    init: (element: HTMLElement, valueAccessor) => {
+        const value = valueAccessor();
+
+        function onBlur() {
+            if (ko.isWriteableObservable(value)) {
+                value(this.textContent);
+            }
+        }
+
+        element.textContent = value();
+        element.contentEditable = 'true';
+        element.addEventListener('blur', onBlur);
+    },
 };
