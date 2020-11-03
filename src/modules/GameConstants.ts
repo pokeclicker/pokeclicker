@@ -30,9 +30,10 @@ export const TotalPokemonsPerRegion = [
 export const ITEM_USE_TIME = 30;
 
 export const SECOND = 1000;
-export const MINUTE = 1000 * 60;
-export const HOUR = 1000 * 60 * 60;
-export const DAY = 1000 * 60 * 60 * 24;
+export const MINUTE = SECOND * 60;
+export const HOUR = MINUTE * 60;
+export const DAY = HOUR * 24;
+export const WEEK = DAY * 7;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
@@ -245,6 +246,39 @@ export function formatTimeShortWords(input: number): string {
     }
     const minutes = Math.ceil(time / MINUTE);
     return `${time % MINUTE ? '< ' : ''}${minutes} min${minutes === 1 ? '' : 's'}`;
+}
+
+export function formatSecondsToTime(input: number): string {
+    // Temporarily recast to number until everything is in modules
+    if (Number.isNaN(Number(input)) || input === 0) { return '-'; }
+    let time = Math.abs(input * 1000);
+    const times = [];
+
+    if (time >= WEEK) {
+        const weeks = Math.floor(time / WEEK);
+        times.push(`${weeks} week${weeks === 1 ? '' : 's'}`);
+        time %= WEEK;
+    }
+    if (time >= DAY) {
+        const days = Math.ceil(time / DAY);
+        times.push(`${days} day${days === 1 ? '' : 's'}`);
+        time %= DAY;
+    }
+    if (time >= HOUR) {
+        const hours = Math.ceil(time / HOUR);
+        times.push(`${hours} hour${hours === 1 ? '' : 's'}`);
+        time %= HOUR;
+    }
+    if (time >= MINUTE) {
+        const minutes = Math.ceil(time / MINUTE);
+        times.push(`${minutes} min${minutes === 1 ? '' : 's'}`);
+        time %= MINUTE;
+    }
+    if (time >= SECOND) {
+        const seconds = Math.ceil(time / SECOND);
+        times.push(`${seconds} sec${seconds === 1 ? '' : 's'}`);
+    }
+    return times.join('</br>');
 }
 
 export function formatNumber(input: number): string {
