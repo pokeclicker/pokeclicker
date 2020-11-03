@@ -226,13 +226,13 @@ class Update implements Saveable {
         '0.5.9': ({ saveData }) => {
             // Award Deoxys forms for completed Battle Frontier milestones
             const maxBattleFrontierStage = saveData.statistics.battleFrontierHighestStageCompleted;
-            if (maxBattleFrontierStage > 151) {
+            if (maxBattleFrontierStage >= 151) {
                 Update.addPokemonToSaveData(saveData, 386.1); // Deoxys (attack)
             }
-            if (maxBattleFrontierStage > 251) {
+            if (maxBattleFrontierStage >= 251) {
                 Update.addPokemonToSaveData(saveData, 386.2); // Deoxys (defense)
             }
-            if (maxBattleFrontierStage > 386) {
+            if (maxBattleFrontierStage >= 386) {
                 Update.addPokemonToSaveData(saveData, 386.3); // Deoxys (speed)
             }
         },
