@@ -11,6 +11,7 @@ class Berry {
     public harvestAmount: number;
     public replantRate: number;
     public farmValue: number;
+    public exp: number;
 
     public flavors: BerryFlavor[];
     public color: BerryColor;
@@ -29,7 +30,7 @@ class Berry {
     ];
 
     constructor(type: BerryType, growthTime: number[],
-        harvestAmount: number, replantRate: number, farmValue: number,
+        harvestAmount: number, replantRate: number, farmValue: number, exp: number,
         flavors: number[], color: BerryColor, description: string[],
         aura?: Aura, wander?: PokemonNameType[]) {
         this.type = type;
@@ -37,6 +38,7 @@ class Berry {
         this.harvestAmount = harvestAmount;
         this.replantRate = replantRate;
         this.farmValue = farmValue;
+        this.exp = exp;
         this.flavors = [];
         for (let i = 0;i < 5;i++) {
             this.flavors.push({type: i, value: flavors[i]});

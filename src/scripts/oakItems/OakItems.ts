@@ -62,11 +62,11 @@ class OakItems implements Feature {
         return this.itemList[item].isUnlocked();
     }
 
-    use(item: OakItems.OakItem) {
+    use(item: OakItems.OakItem, scale = 1) {
         if (!this.isUnlocked(item)) {
             return;
         }
-        this.itemList[item].use();
+        this.itemList[item].use(undefined, scale);
     }
 
     maxActiveCount() {

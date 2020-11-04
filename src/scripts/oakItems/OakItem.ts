@@ -27,12 +27,12 @@ class OakItem extends ExpUpgrade {
         this.expGain = expGain;
     }
 
-    use(exp: number = this.expGain) {
+    use(exp: number = this.expGain, scale = 1) {
         if (!this.isActive) {
             return;
         }
         if (!this.isMaxLevel()) {
-            this.gainExp(exp);
+            this.gainExp(exp * scale);
         }
         GameHelper.incrementObservable(App.game.statistics.oakItemUses[this.name]);
     }
