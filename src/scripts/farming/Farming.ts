@@ -824,13 +824,13 @@ class Farming implements Feature {
 
     getReplantMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
+        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprinklotad);
         return multiplier;
     }
 
     getMutationMultiplier(): number {
         let multiplier = 1;
-        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Sprinklotad);
+        multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
         return multiplier;
     }
 
