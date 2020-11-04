@@ -29,8 +29,8 @@
 
                             <div class="tab-content">
                                 <div id="seeds" class="tab-pane active">
-                                    <ul id="seedList" data-bind="foreach: FarmController.getBerryListWithIndex()" class="list-group"
-                                        style="margin-bottom: 5px;">
+                                    <ul id="seedList" class="list-group p-0">
+                                        <!-- ko foreach: FarmController.getBerryListWithIndex() -->
                                         <li class="list-group-item list-group-item-action seed-list-item"
                                             data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
                                             <img src="" height="24px"
@@ -39,6 +39,7 @@
                                             <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : '???'"></span>
                                             <span class="float-right" data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></span>
                                         </li>
+                                        <!-- /ko -->
                                     </ul>
 
                                     <div class="row justify-content-center align-items-center p-1">
@@ -72,8 +73,8 @@
                                 </div>
 
                                 <div id="mulches" class="tab-pane">
-                                    <ul id="mulchList" data-bind="foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1)" class="list-group"
-                                    style="margin-bottom: 5px;">
+                                    <ul id="mulchList" class="list-group p-0">
+                                        <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
                                         <li class="list-group-item list-group-item-action seed-list-item"
                                             data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() }">
                                             <img src="" width="24px"
@@ -81,10 +82,11 @@
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
                                             <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
                                         </li>
+                                        <!-- /ko -->
                                     </ul>
 
                                     <div class="row justify-content-center p-1">
-                                        <div class="col-lg-12 col-6">
+                                        <div class="col-12">
                                             <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch())}">
                                                 Mulch All
                                             </button>
@@ -97,10 +99,10 @@
                                 <li class="list-group-item list-group-item-action seed-list-item"
                                     data-bind="click: function() {FarmController.selectedShovel(true);},
                                     css: { 'active': FarmController.selectedShovel() },
-                                    tooltip: {title: 'Removes an unripe Berry Plant.', trigger: 'hover', animation: false}">
+                                    tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
                                     <img src="" height="24px"
                                         data-bind="attr:{ src: ItemList['Berry_Shovel'].imagePath }">
-                                    <span>Berry Shovel</span>
+                                    <span>Shovel</span>
                                     <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
                                 </li>
                             </ul>
