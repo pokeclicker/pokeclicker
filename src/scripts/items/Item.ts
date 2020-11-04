@@ -27,14 +27,6 @@ abstract class Item {
 
     _displayName: string;
 
-    defaultShopOptions: ShopOptions = {
-        saveName: '',
-        maxAmount: Number.MAX_SAFE_INTEGER,
-        multiplier: GameConstants.ITEM_PRICE_MULTIPLIER,
-        multiplierDecrease: true,
-        multiplierDecreaser: MultiplierDecreaser.Battle,
-    };
-
     constructor(
         name: string,
         basePrice: number,
@@ -44,6 +36,7 @@ abstract class Item {
             maxAmount = Number.MAX_SAFE_INTEGER,
             multiplier = GameConstants.ITEM_PRICE_MULTIPLIER,
             multiplierDecrease = true,
+            multiplierDecreaser = MultiplierDecreaser.Battle,
         } : ShopOptions = {},
         displayName?: string) {
         this.name = ko.observable(name);
@@ -56,6 +49,7 @@ abstract class Item {
         // Multiplier needs to be above 1
         this.multiplier = Math.max(1, multiplier || GameConstants.ITEM_PRICE_MULTIPLIER);
         this.multiplierDecrease = multiplierDecrease;
+        this.multiplierDecreaser = multiplierDecreaser || MultiplierDecreaser.Battle;
         if (!ItemList[this.saveName]) {
             ItemList[this.saveName] = this;
         }
