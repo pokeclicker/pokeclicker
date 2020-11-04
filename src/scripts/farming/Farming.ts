@@ -976,7 +976,7 @@ class Farming implements Feature {
     }
 
     canBuyPlot() {
-        return !this.allPlotsUnlocked() && App.game.farming.berryList[this.unlockBerryIndex()]() > this.calculatePlotPrice();
+        return !this.allPlotsUnlocked() && App.game.farming.berryList[this.unlockBerryIndex()]() >= this.calculatePlotPrice();
     }
 
     calculatePlotPrice(): number {
