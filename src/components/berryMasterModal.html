@@ -34,7 +34,7 @@
                                 <!-- ko foreach: berries -->
                                 <tr>
                                     <td data-bind="text: App.game.farming.berryList[$data.berryType]()"></td>
-                                    <td><img width="24px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }"></img></td>
+                                    <td><img height="24px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }"></img></td>
                                     <td data-bind='text: amount + " x " + BerryType[berryType]'></td>
                                     <!-- ko if: $index() === 0 -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">→</td>

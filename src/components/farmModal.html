@@ -41,7 +41,7 @@
                                         </li>
                                     </ul>
 
-                                    <div class="row justify-content-center">
+                                    <div class="row justify-content-center align-items-center p-1">
                                         <button class="btn btn-secondary"
                                             onclick="FarmController.navigateLeft()"
                                             data-bind="disable: FarmController.navigateIndex() === 0,
@@ -57,7 +57,7 @@
                                         </button>
                                     </div>
 
-                                    <div class="row justify-content-center">
+                                    <div class="row justify-content-center p-1">
                                         <div class="col-lg-12 col-6">
                                             <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry())}">
                                                 Plant All
@@ -83,7 +83,7 @@
                                         </li>
                                     </ul>
 
-                                    <div class="row justify-content-center">
+                                    <div class="row justify-content-center p-1">
                                         <div class="col-lg-12 col-6">
                                             <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch())}">
                                                 Mulch All
@@ -92,6 +92,18 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <ul id="shovelList" class="list-group">
+                                <li class="list-group-item list-group-item-action seed-list-item"
+                                    data-bind="click: function() {FarmController.selectedShovel(true);},
+                                    css: { 'active': FarmController.selectedShovel() },
+                                    tooltip: {title: 'Removes an unripe Berry Plant.', trigger: 'hover', animation: false}">
+                                    <img src="" height="24px"
+                                        data-bind="attr:{ src: ItemList['Berry_Shovel'].imagePath }">
+                                    <span>Berry Shovel</span>
+                                    <span class="seedAmount" data-bind="text: App.game.farming.shovelAmt()"></span>
+                                </li>
+                            </ul>
                         </div>
 
                         <div class="col-12 col-lg-8">
@@ -136,24 +148,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-around" style="margin-bottom: 5px;">
-                                <div class="col-6">
-                                    <ul id="shovelList" class="list-group">
-                                        <li class="list-group-item list-group-item-action seed-list-item"
-                                            data-bind="click: function() {FarmController.selectedShovel(true);}, css: { 'active': FarmController.selectedShovel() }">
-                                            <img src="" height="24px"
-                                                data-bind="attr:{ src: ItemList['Berry_Shovel'].imagePath }">
-                                            <span>Berry Shovel</span>
-                                            <span class="seedAmount" data-bind="text: App.game.farming.shovelAmt()"></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-6">
-                                    <button class="btn btn-primary btn-block" style="height:100%;" data-bind="click: function(){App.game.farming.shovelAll();}">
-                                        Shovel All
-                                    </button>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -165,7 +159,7 @@
                             <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
                             data-bind="style:{background: FarmController.getBackgroundColor($data)}">
                                  <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + '').padStart(2, 0)">number</span>
-                                     <img src="" width="80px" style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
+                                     <img src="" height="120px" style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                      <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
                                      <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
                                      <a class="overlay" href="#berryDexModal" data-toggle="modal"
@@ -190,11 +184,24 @@
 
                     <h4><u>Mulches</u></h4>
                     <p>Mulches can be bought in later regions from Berry Masters. They can be used on plots for different effects:</p>
-                    <p>Moost Mulch increases the growth rate of Berry plants.</p>
-                    <p>Rich Mulch increases the number of Berries harvested.</p>
-                    <p>Surprise Mulch increases the chances of mutations</p>
-                    <p>Amaze Mulch has a weaker version of all three affects.</p>
-
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>Boost Mulch</td>
+                            <td>Increases the growth rate of Berry plants.</td>
+                        </tr>
+                        <tr>
+                            <td>Rich Mulch</td>
+                            <td>Increases the number of Berries harvested.</td>
+                        </tr>
+                        <tr>
+                            <td>Surprise Mulch</td>
+                            <td>Increases the chances of mutations.</td>
+                        </tr>
+                        <tr>
+                            <td>Amaze Mulch</td>
+                            <td>A weaker version of all three affects.</td>
+                        </tr>
+                    </table>
                     <h4><u>Berry Shovel</u></h4>
                     <p>If you want to remove a Berry plant before it is fully grown, you can use a Berry Shovel to uproot it.</p>
                     <p>Berry Shovels can be bought in later regions from Berry Masters.</p>

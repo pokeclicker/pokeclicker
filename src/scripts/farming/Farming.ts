@@ -1150,6 +1150,11 @@ class Farming implements Feature {
 
     unlockBerry(berry: BerryType) {
         if (!this.unlockedBerries[berry]()) {
+            Notifier.notify({
+                message: `You've discovered a ${BerryType[berry]} Berry!`,
+                type: NotificationConstants.NotificationOption.success,
+                setting: NotificationConstants.NotificationSetting.route_item_found,
+            });
             this.unlockedBerries[berry](true);
         }
     }
