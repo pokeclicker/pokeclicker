@@ -63,7 +63,6 @@ abstract class EvolveMutation extends Mutation {
         if (this.originalBerry && !App.game.farming.unlockedBerries[this.originalBerry]()) {
             return false;
         }
-        console.log('test', this);
         return super.unlocked;
     }
 
