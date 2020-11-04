@@ -10,8 +10,8 @@ class BoughtOakItem extends OakItem {
         shopName: string,
         increasing: boolean,
         bonusList: number[],
-        inactiveBonus: number,
-        expGain: number,
+        inactiveBonus = 1,
+        expGain = 1,
         expList: number[] = [500, 1000, 2500, 5000, 10000],
         maxLevel = 5,
         costList: Amount[] = AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money)
