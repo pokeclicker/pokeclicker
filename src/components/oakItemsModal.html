@@ -7,17 +7,20 @@
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
-           <div class="modal-body">
-              <ul class="row justify-content-center p-0"
+           <div class="modal-body py-0">
+              <ul class="row justify-content-center p-0 my-0"
                 data-bind="foreach: App.game.oakItems.itemList"
                 style="list-style-type: none;">
-                  <li class="col-0 p-0" style="margin: 1px">
+                  <!-- ko if: $index() % 5 == 0 -->
+                  <div class="w-100"></div>
+                  <!-- /ko -->
+                  <li class="col-2 p-1">
                       <button class="p-0 btn"
                           data-bind="css: {
                              'btn-primary': $data.isActive,
                              'btn-outline-secondary': !$data.isActive
                            }">
-                          <img class="clickable" style="height: 32px;" src=""
+                          <img class="clickable" style="width: 100%;" src=""
                                data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
                                 css: {
                                   'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
