@@ -35,7 +35,7 @@ class EvolveNearBerryStrictMutation extends EvolveNearMutation {
             } else {
                 currentReqs[plot.berry] += 1;
             }
-        }, this);
+        });
 
         return currentReqs === this.berryReqs;
     }

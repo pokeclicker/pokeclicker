@@ -8,7 +8,7 @@ class BerryDeal {
         this.berries = [];
         berry.forEach((berry, idx) => {
             this.berries.push({berryType: berry, amount: berryAmount[idx]});
-        }, this);
+        });
         this.item = {itemType: item, amount: itemAmount};
     }
 
@@ -162,7 +162,7 @@ class BerryDeal {
                 const amt = App.game.farming.berryList[berry.berryType]();
                 const maxTrades = Math.floor(amt / berry.amount);
                 return maxTrades;
-            }, this);
+            });
             const maxTrades = trades.reduce((a,b) => Math.min(a,b), tradeTimes);
             deal.berries.forEach((value) => GameHelper.incrementObservable(App.game.farming.berryList[value.berryType], -value.amount * maxTrades));
             if (deal.item.itemType instanceof UndergroundItem) {

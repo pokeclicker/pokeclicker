@@ -35,7 +35,7 @@ class Aura {
         if (!stage || stage < PlotStage.Taller) {
             return '';
         }
-        return `${AuraType[this.auraType]}: ${this.auraMultipliers[stage - 2].toFixed(2)}x`;
+        return `${AuraType[this.auraType]}: ${this.auraMultipliers[stage - 2]}x`;
     }
 
 }

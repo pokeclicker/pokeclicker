@@ -19,7 +19,7 @@ abstract class EvolveNearMutation extends EvolveMutation {
         return plots.filter((idx) => {
             const nearPlots = Plot.findNearPlots(idx);
             return this.nearPlotsFitRequirements(nearPlots);
-        }, this);
+        });
     }
 
     /**

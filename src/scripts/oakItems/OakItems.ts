@@ -98,11 +98,11 @@ class OakItems implements Feature {
         }
 
         // Loading OakItems
-        GameHelper.enumStrings(OakItems.OakItem).forEach(function(oakItem) {
+        GameHelper.enumStrings(OakItems.OakItem).forEach((oakItem) => {
             if (json.hasOwnProperty(oakItem)) {
                 this.itemList[OakItems.OakItem[oakItem]].fromJSON(json[oakItem]);
             }
-        }, this);
+        });
 
         // Loading purchaseList for BoughtOakItems
         const purchaseList = json['purchaseList'];

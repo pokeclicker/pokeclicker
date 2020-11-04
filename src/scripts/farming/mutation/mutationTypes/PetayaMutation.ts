@@ -31,7 +31,7 @@ class PetayaMutation extends GrowMutation {
             } else {
                 fieldPlots[plot.berry] += 1;
             }
-        }, this);
+        });
 
         const requiredBerries = Farming.getGeneration(3);
 

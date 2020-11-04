@@ -21,7 +21,7 @@ class OakMutation extends EvolveMutation {
         return plots.filter((idx) => {
             const plot = App.game.farming.plotList[idx];
             return this.plotFitRequirements(plot, idx);
-        }, this);
+        });
     }
 
     /**

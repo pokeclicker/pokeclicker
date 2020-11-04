@@ -19,7 +19,7 @@ abstract class GrowNearMutation extends GrowMutation {
         return plots.filter((idx) => {
             const nearPlots = Plot.findNearPlots(idx);
             return this.nearPlotsFitRequirements(nearPlots);
-        }, this);
+        });
     }
 
     /**

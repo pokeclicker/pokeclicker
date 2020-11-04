@@ -71,7 +71,7 @@ abstract class Mutation {
 
         let mutated = false;
 
-        plots.forEach(function(idx) {
+        plots.forEach((idx) => {
             const willMutate =  Math.random() < this.mutationChance * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier();
             if (!willMutate) {
                 return;
@@ -79,7 +79,7 @@ abstract class Mutation {
             this.handleMutation(idx);
             App.game.oakItems.use(OakItems.OakItem.Squirtbottle);
             mutated = true;
-        }, this);
+        });
 
         return mutated;
     }

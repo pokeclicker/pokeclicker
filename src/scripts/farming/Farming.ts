@@ -48,7 +48,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
-            for (let i = GameHelper.enumLength(BerryType) - 2;i >= 0;i--) {
+            for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
                 if (this.unlockedBerries[i]()) {
                     return i;
                 }
@@ -886,7 +886,7 @@ class Farming implements Feature {
         }
 
         if (notifications.size) {
-            notifications.forEach((n) => this.handleNotification(n, wanderPokemon), this);
+            notifications.forEach((n) => this.handleNotification(n, wanderPokemon));
         }
     }
 
@@ -945,7 +945,7 @@ class Farming implements Feature {
                 const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
                 const type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 Notifier.notify({
-                    message: `A ${pokemon} has wandered onto the farm!`,
+                    message: `A wild ${pokemon} has wandered onto the farm!`,
                     type: type,
                     sound: NotificationConstants.NotificationSound.ready_to_harvest,
                     setting: NotificationConstants.NotificationSetting.ready_to_harvest,
@@ -1053,7 +1053,7 @@ class Farming implements Feature {
     public harvestAll() {
         this.plotList.forEach((plot, index) => {
             this.harvest(index, true);
-        }, this);
+        });
         this.resetAuras();
     }
 
@@ -1074,15 +1074,6 @@ class Farming implements Feature {
         }
         plot.die(true);
         GameHelper.incrementObservable(this.shovelAmt, -1);
-    }
-
-    /**
-     * Tries to use the Berry Shovel on all plots
-     */
-    public shovelAll() {
-        this.plotList.forEach((plot, index) => {
-            this.shovel(index);
-        }, this);
     }
 
     /**

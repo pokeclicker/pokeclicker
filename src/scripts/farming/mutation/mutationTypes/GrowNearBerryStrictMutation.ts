@@ -40,7 +40,7 @@ class GrowNearBerryStrictMutation extends GrowNearMutation {
             } else {
                 currentReqs[plot.berry] += 1;
             }
-        }, this);
+        });
 
         return currentReqs === this.berryReqs;
     }

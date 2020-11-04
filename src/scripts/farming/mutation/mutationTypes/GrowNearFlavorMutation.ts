@@ -48,7 +48,7 @@ class GrowNearFlavorMutation extends GrowNearMutation {
             for (let j = 0;j < 5;j++) {
                 nearFlavors[j] += berryFlavors[j];
             }
-        }, this);
+        });
 
         const reqMatched = this.flavorReqs.every((value, idx) => value <= nearFlavors[idx]);
 

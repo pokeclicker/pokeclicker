@@ -33,7 +33,7 @@ abstract class EvolveMutation extends Mutation {
                 return;
             }
             plots.push(idx);
-        }, this);
+        });
         return plots;
     }
 

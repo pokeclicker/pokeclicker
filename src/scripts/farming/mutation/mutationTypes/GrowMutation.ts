@@ -23,7 +23,7 @@ abstract class GrowMutation extends Mutation {
                 return;
             }
             plots.push(idx);
-        }, this);
+        });
         return plots;
     }
 

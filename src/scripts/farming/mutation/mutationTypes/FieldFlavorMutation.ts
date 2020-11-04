@@ -35,7 +35,7 @@ class FieldFlavorMutation extends GrowMutation {
             for (let j = 0;j < 5;j++) {
                 nearFlavors[j] += berryFlavors[j];
             }
-        }, this);
+        });
 
         const reqMatched = this.fieldFlavor.every((value, idx) => value <= nearFlavors[idx]);
         if (reqMatched) {

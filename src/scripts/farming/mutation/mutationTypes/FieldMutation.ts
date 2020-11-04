@@ -31,7 +31,7 @@ class FieldMutation extends GrowMutation {
             if (plot.berry === this.fieldBerry && plot.stage() === PlotStage.Berry) {
                 fieldPlots += 1;
             }
-        }, this);
+        });
 
         if (fieldPlots > this.fieldAmount) {
             return emptyPlots;

@@ -45,8 +45,8 @@ class EnigmaMutation extends GrowMutation {
                     return false;
                 }
                 return true;
-            }, this);
-        }, this);
+            });
+        });
     }
 
     /**

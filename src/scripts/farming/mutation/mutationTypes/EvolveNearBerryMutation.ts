@@ -18,11 +18,11 @@ class EvolveNearBerryMutation extends EvolveNearMutation {
      * @param plots The list of nearby plots
      */
     nearPlotsFitRequirements(plots: number[]) {
-        return this.berryReqs.every(function(req) {
-            return plots.some(function(plot) {
+        return this.berryReqs.every((req) => {
+            return plots.some((plot) => {
                 return this.checkRequirement(plot,req);
-            }, this);
-        }, this);
+            });
+        });
     }
 
     /**
