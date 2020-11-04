@@ -39,19 +39,25 @@ abstract class Item {
         name: string,
         basePrice: number,
         currency: GameConstants.Currency = GameConstants.Currency.money,
-        shopOptions?: ShopOptions,
+        {
+            saveName = '',
+            maxAmount = Number.MAX_SAFE_INTEGER,
+            multiplier = GameConstants.ITEM_PRICE_MULTIPLIER,
+            multiplierDecrease = true,
+            multiplierDecreaser = MultiplierDecreaser.Battle,
+        } : ShopOptions = {},
         displayName?: string) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
-        this.saveName = shopOptions?.saveName || name || `${name}|${GameConstants.Currency[currency]}`;
-        this.maxAmount = shopOptions?.maxAmount ?? this.defaultShopOptions.maxAmount;
+        this.saveName = saveName || name || `${name}|${GameConstants.Currency[currency]}`;
+        this.maxAmount = maxAmount || Number.MAX_SAFE_INTEGER;
         // Multiplier needs to be above 1
-        this.multiplier = Math.max(1, shopOptions?.multiplier ?? this.defaultShopOptions.multiplier);
-        this.multiplierDecrease = shopOptions?.multiplierDecrease ?? this.defaultShopOptions.multiplierDecrease;
-        this.multiplierDecreaser = shopOptions?.multiplierDecreaser ?? this.defaultShopOptions.multiplierDecreaser;
+        this.multiplier = Math.max(1, multiplier || GameConstants.ITEM_PRICE_MULTIPLIER);
+        this.multiplierDecrease = multiplierDecrease;
+        this.multiplierDecreaser = multiplierDecreaser || this.defaultShopOptions.multiplierDecreaser;
         if (!ItemList[this.saveName]) {
             ItemList[this.saveName] = this;
         }
