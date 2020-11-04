@@ -678,9 +678,9 @@ class Farming implements Feature {
                 BerryType.Pamtre,
             ]));
         // Tanga
-        let test = {};
-        test[BerryType.Rindo] = 8;
-        this.mutations.push(new GrowNearBerryStrictMutation(.00001, BerryType.Tanga, test, {
+        let berryReqs = {};
+        berryReqs[BerryType.Rindo] = 8;
+        this.mutations.push(new GrowNearBerryStrictMutation(.00001, BerryType.Tanga, berryReqs, {
             hint: 'I\'ve heard that a Berry will appear after being surrounded by Ringo Berries!',
         }));
         // Charti
@@ -705,10 +705,10 @@ class Farming implements Feature {
         // Colbur Overgrow
         this.mutations.push(new EvolveNearBerryMutation(.00004, BerryType.Colbur, undefined, [BerryType.Colbur], { showHint: false }));
         // Babiri
-        test = {};
-        test[BerryType.Shuca] = 4;
-        test[BerryType.Charti] = 4;
-        this.mutations.push(new GrowNearBerryStrictMutation(.00001, BerryType.Babiri, test, {
+        berryReqs = {};
+        berryReqs[BerryType.Shuca] = 4;
+        berryReqs[BerryType.Charti] = 4;
+        this.mutations.push(new GrowNearBerryStrictMutation(.00001, BerryType.Babiri, berryReqs, {
             hint: 'I\'ve heard that a Berry will appear after being surrounded by Shuca and Charti Berries!',
         }));
         // Chilan
