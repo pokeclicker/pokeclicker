@@ -45,7 +45,7 @@ class Plot implements Saveable {
         this._auras[AuraType.Mutation] = ko.observable(1);
         this._auras[AuraType.Replant] = ko.observable(1);
 
-        this.formattedTimeLeft = ko.pureComputed(function () {
+        this.formattedTimeLeft = ko.pureComputed(() => {
             if (this.berry === BerryType.None) {
                 return '';
             }
@@ -53,29 +53,29 @@ class Plot implements Saveable {
             const timeLeft = Math.ceil(growthTime - this.age);
             const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
             return GameConstants.formatTime(timeLeft / growthMultiplier);
-        }, this);
+        });
 
-        this.formattedMulchTimeLeft = ko.pureComputed(function() {
+        this.formattedMulchTimeLeft = ko.pureComputed(() => {
             if (this.mulch === MulchType.None) {
                 return '';
             }
             return GameConstants.formatTime(this.mulchTimeLeft);
-        }, this);
+        });
 
-        this.auraGrowth = ko.pureComputed(function() {
-            return this.auras[AuraType.Growth];
-        }, this);
-        this.auraHarvest = ko.pureComputed(function() {
-            return this.auras[AuraType.Harvest];
-        }, this);
-        this.auraMutation = ko.pureComputed(function() {
-            return this.auras[AuraType.Mutation];
-        }, this);
-        this.auraReplant = ko.pureComputed(function() {
-            return this.auras[AuraType.Replant];
-        }, this);
+        this.auraGrowth = ko.pureComputed(() => {
+            return this._auras[AuraType.Growth]();
+        });
+        this.auraHarvest = ko.pureComputed(() => {
+            return this._auras[AuraType.Harvest]();
+        });
+        this.auraMutation = ko.pureComputed(() => {
+            return this._auras[AuraType.Mutation]();
+        });
+        this.auraReplant = ko.pureComputed(() => {
+            return this._auras[AuraType.Replant]();
+        });
 
-        this.formattedAuras = ko.pureComputed(function() {
+        this.formattedAuras = ko.pureComputed(() => {
             const auraStr = [];
             if (this.auraGrowth() !== 1) {
                 auraStr.push(`Growth: ${this.auraGrowth().toFixed(2)}x`);
@@ -93,18 +93,18 @@ class Plot implements Saveable {
                 auraStr.push(`Replant: ${this.auraReplant().toFixed(2)}x`);
             }
             return auraStr.join('<br/>');
-        }, this);
+        });
 
-        this.isEmpty = ko.pureComputed(function () {
+        this.isEmpty = ko.pureComputed(() => {
             return this.berry === BerryType.None;
-        }, this);
+        });
 
-        this.stage = ko.pureComputed(function () {
+        this.stage = ko.pureComputed(() => {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;
             }
             return this.berryData.growthTime.findIndex(t => this.age < t);
-        }, this);
+        });
 
         this.tooltip = ko.pureComputed(() => {
             const tooltip = [];
@@ -140,7 +140,7 @@ class Plot implements Saveable {
 
             const auraStr = this.formattedAuras();
             if (auraStr) {
-                tooltip.push( '<u>Aura Received:</u>');
+                tooltip.push('<u>Aura Received:</u>');
                 tooltip.push(auraStr);
             }
 
