@@ -28,7 +28,7 @@
                   <tbody>
                     <tr>
                       <td class="text-left">Growth Time</td>
-                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].growthTime[3].toLocaleString('en-US')">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].growthTime[3].toLocaleString('en-US') + 's'">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Harvest Amount</td>
@@ -36,7 +36,7 @@
                     </tr>
                     <tr>
                       <td class="text-left">Replant Rate</td>
-                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].replantRate">-</code></td>
+                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].replantRate.toLocaleString('en-US', { style: 'percent' })">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Farm Tokens per Harvest</td>
