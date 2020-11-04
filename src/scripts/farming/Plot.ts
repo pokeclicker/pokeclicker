@@ -328,7 +328,7 @@ class Plot implements Saveable {
 
         multiplier *= this._auras[AuraType.Harvest]();
 
-        return 1;
+        return multiplier;
     }
 
     /**
@@ -344,7 +344,7 @@ class Plot implements Saveable {
 
         multiplier *= this._auras[AuraType.Replant]();
 
-        return 1;
+        return multiplier;
     }
 
     /**
@@ -360,7 +360,7 @@ class Plot implements Saveable {
 
         multiplier *= this._auras[AuraType.Mutation]();
 
-        return 1;
+        return multiplier;
     }
 
     addAura(auraType: AuraType, multiplier: number): void {
