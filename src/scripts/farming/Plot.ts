@@ -232,11 +232,7 @@ class Plot implements Saveable {
      * @param harvested Whether this death was due to the player harvesting manually, or by withering
      */
     die(harvested = false): void {
-        if (harvested) {
-            this.berry = BerryType.None;
-            this.age = 0;
-        } else {
-
+        if (!harvested) {
             // Withered Berry plant drops half of the berries
             const amount = Math.floor(this.harvestAmount() / 2);
             if (amount) {
@@ -255,7 +251,7 @@ class Plot implements Saveable {
 
             this.notifications.push(FarmNotificationType.Withered);
 
-            // Check for Kasib replants
+            // Check for Kasib berry mutation/replant chance
             if (App.game.farming.highestUnlockedBerry() > BerryType.Occa) {
                 if (App.game.farming.plotList.every(plot => plot.berry !== BerryType.Colbur)) {
                     if (Math.random() < 0.05) {
@@ -266,11 +262,11 @@ class Plot implements Saveable {
                     }
                 }
             }
-
-            // Reset plant
-            this.berry = BerryType.None;
-            this.age = 0;
         }
+
+        // Reset plant
+        this.berry = BerryType.None;
+        this.age = 0;
     }
 
     generateWanderPokemon(): any {
