@@ -35,9 +35,7 @@ class Aura {
         if (!stage || stage < PlotStage.Taller) {
             return '';
         }
-        let label = `${AuraType[this.auraType]}: `;
-        label += `${this.auraMultipliers[stage - 2].toFixed(2)}x`;
-        return label;
+        return `${AuraType[this.auraType]}: ${this.auraMultipliers[stage - 2].toFixed(2)}x`;
     }
 
 }
