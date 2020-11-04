@@ -106,8 +106,7 @@ class Plot implements Saveable {
             return this.berryData.growthTime.findIndex(t => this.age < t);
         }, this);
 
-        this.tooltip = ko.pureComputed(function() {
-
+        this.tooltip = ko.pureComputed(() => {
             const tooltip = [];
 
             if (this.berry !== BerryType.None) {
@@ -152,7 +151,7 @@ class Plot implements Saveable {
             }
 
             return tooltip.join('<br/>');
-        }, this);
+        });
 
         this.notifications = [];
     }
@@ -275,23 +274,20 @@ class Plot implements Saveable {
     }
 
     generateWanderPokemon(): any {
-        if (!this.isUnlocked) {
+        // Check if plot is eligible for wandering Pokemon
+        if (!this.isUnlocked || this.berry === BerryType.None || this.stage() !== PlotStage.Berry) {
             return undefined;
         }
-        if (this.berry === BerryType.None) {
-            return undefined;
-        }
-        if (this.stage() !== PlotStage.Berry) {
-            return undefined;
-        }
+        // Chance to generate wandering Pokemon
         if (Math.random() < GameConstants.WANDER_RATE * App.game.farming.externalAuras[AuraType.Attract]()) {
+            // Get a random Pokemon from the list of possible encounters
             const availablePokemon = this.berryData.wander.filter(pokemon => PokemonHelper.calcNativeRegion(pokemon) <= player.highestRegion());
             const wanderPokemon = availablePokemon[Math.floor(Math.random() * availablePokemon.length)];
 
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(wanderPokemon).id, shiny, true);
 
-            // Check for Starf generation
+            // Check for Starf berry generation
             if (shiny && App.game.farming.highestUnlockedBerry() > BerryType.Salac) {
                 const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
                 const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
@@ -373,10 +369,7 @@ class Plot implements Saveable {
     }
 
     clearAuras(): void {
-        this._auras[AuraType.Growth](1);
-        this._auras[AuraType.Harvest](1);
-        this._auras[AuraType.Mutation](1);
-        this._auras[AuraType.Replant](1);
+        this._auras.forEach(aura => aura(1));
     }
 
     applyAura(index: number): void {
@@ -390,49 +383,42 @@ class Plot implements Saveable {
      * Returns the tooltip for the plot
      */
     toolTip(): string {
-
-        let tooltip = '';
+        const tooltip = [];
 
         if (this.berry !== BerryType.None) {
             const formattedTime = this.formattedTimeLeft();
             switch (this.stage()) {
                 case PlotStage.Seed:
-                    tooltip = `${formattedTime} until sprout`;
+                    tooltip.push(`${formattedTime} until sprout`);
                     break;
                 case PlotStage.Sprout:
-                    tooltip = `${formattedTime} until growth`;
+                    tooltip.push(`${formattedTime} until growth`);
                     break;
                 case PlotStage.Taller:
-                    tooltip = `${formattedTime} until bloom`;
+                    tooltip.push(`${formattedTime} until bloom`);
                     break;
                 case PlotStage.Bloom:
-                    tooltip = `${formattedTime} until ripe`;
+                    tooltip.push(`${formattedTime} until ripe`);
                     break;
                 case PlotStage.Berry:
-                    tooltip = `${formattedTime} until overripe`;
+                    tooltip.push(`${formattedTime} until overripe`);
                     break;
             }
         }
 
         if (this.mulch !== MulchType.None) {
             const mulchTime = this.formattedMulchTimeLeft();
-            if (tooltip) {
-                tooltip += '<br/>';
-            }
-            tooltip += `${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`;
+            tooltip.push(`${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`);
         }
 
-        this._auras.forEach(function(aura: KnockoutObservable<number>, idx: number) {
+        this._auras.forEach((aura: KnockoutObservable<number>, index: number) => {
             if (aura() === 1) {
                 return;
             }
-            if (tooltip) {
-                tooltip += '<br/>';
-            }
-            tooltip += `${AuraType[idx]}: ${aura()}x`;
-        }, this);
+            tooltip.push(`${AuraType[index]}: ${aura()}x`);
+        });
 
-        return tooltip;
+        return tooltip.join('<br/>');
     }
 
     fromJSON(json: Record<string, any>): void {
@@ -460,27 +446,23 @@ class Plot implements Saveable {
     /**
      * Finds the plot indices that are around the plot in a 3x3 square
      * @param index The plot index
-     * @param filter An optional filter callback for filtering out indices
      */
-    public static findNearPlots(index: number, filter?: (n: number) => boolean): number[] {
+    public static findNearPlots(index: number): number[] {
         const plots = [];
 
-        const colIdx = index % Farming.PLOT_WIDTH;
-        const rowIdx = (index - colIdx) / Farming.PLOT_WIDTH;
+        const posX = index % Farming.PLOT_WIDTH;
+        const posY = (index - posX) / Farming.PLOT_WIDTH;
 
-        for (let r = rowIdx - 1;r <= rowIdx + 1;r++) {
-            for (let c = colIdx - 1;c <= colIdx + 1;c++) {
-                if (r < 0 || r > Farming.PLOT_WIDTH - 1 || c < 0 || c >  Farming.PLOT_WIDTH - 1) {
+        for (let y = posY - 1; y <= posY + 1; y++) {
+            for (let x = posX - 1; x <= posX + 1; x++) {
+                if (y < 0 || y > Farming.PLOT_WIDTH - 1 || x < 0 || x >  Farming.PLOT_WIDTH - 1) {
                     continue;
                 }
-                if (r === rowIdx && c === colIdx) {
+                if (y === posY && x === posX) {
                     continue;
                 }
-                const idx = r * Farming.PLOT_WIDTH + c;
-                if (filter && !filter(idx)) {
-                    continue;
-                }
-                plots.push(idx);
+                const id = y * Farming.PLOT_WIDTH + x;
+                plots.push(id);
             }
         }
 
@@ -490,27 +472,16 @@ class Plot implements Saveable {
     /**
      * Finds the plot indices that are directly next to the plot (aka a plus sign)
      * @param index The plot index
-     * @param filter An optional filter callback for filtering out indices
      */
     public static findPlusPlots(index: number, filter?: (n: number) => boolean): number[] {
-        const plots = [];
+        const posX = index % Farming.PLOT_WIDTH;
+        const posY = (index - posX) / Farming.PLOT_WIDTH;
 
-        const colIdx = index % Farming.PLOT_WIDTH;
-        const rowIdx = (index - colIdx) / Farming.PLOT_WIDTH;
+        const possiblePlots = [[posY - 1, posX], [posY, posX - 1], [posY, posX + 1], [posY + 1, posX]];
 
-        const possiblePlots = [[rowIdx - 1, colIdx], [rowIdx, colIdx - 1], [rowIdx, colIdx + 1], [rowIdx + 1, colIdx]];
-
-        return possiblePlots.filter(plot => {
-            const [r, c] = plot;
-            if (r < 0 || r > Farming.PLOT_WIDTH - 1 || c < 0 || c >  Farming.PLOT_WIDTH - 1) {
-                return false;
-            }
-            const idx = r * Farming.PLOT_WIDTH + c;
-            if (filter && !filter(idx)) {
-                return false;
-            }
-            return true;
-        }).map(plot => plot[0] * Farming.PLOT_WIDTH + plot[1]);
+        return possiblePlots.filter(([y, x]) => {
+            return y >= 0 && y < Farming.PLOT_WIDTH && x >= 0 && x < Farming.PLOT_WIDTH;
+        }).map(([y, x]) => y * Farming.PLOT_WIDTH + x);
     }
 
     get berryData(): Berry {
