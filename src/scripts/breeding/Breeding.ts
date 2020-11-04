@@ -181,7 +181,7 @@ class Breeding implements Feature {
     }
 
     public progressEggs(amount: number) {
-        amount *= this.getEggMultiplier();
+        amount *= this.getStepMultiplier();
 
         amount = Math.round(amount);
         let index =  this.eggList.length;
@@ -194,7 +194,7 @@ class Breeding implements Feature {
         }
     }
 
-    private getEggMultiplier() {
+    private getStepMultiplier() {
         return App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette) * App.game.farming.externalAuras[AuraType.Egg]();
     }
 
