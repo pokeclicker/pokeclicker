@@ -32,7 +32,7 @@ class OakItems implements Feature {
             new OakItem(OakItems.OakItem.Exp_Share, 'EXP Share', 'Gain more exp from battling',
                 true, [1.15, 1.18, 1.21, 1.24, 1.27, 1.30], 1, 50, 1),
             new OakItem(OakItems.OakItem.Sprayduck, 'Sprayduck', 'Makes your berries grow faster',
-                false, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 60, 3),
+                false, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 60, 1),
             new OakItem(OakItems.OakItem.Shiny_Charm, 'Shiny Charm', 'Encounter shinies more often',
                 true, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 70, 150),
             new OakItem(OakItems.OakItem.Blaze_Cassette, 'Blaze Cassette', 'Hatch eggs faster',
