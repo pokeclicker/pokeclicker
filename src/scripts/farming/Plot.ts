@@ -375,48 +375,6 @@ class Plot implements Saveable {
         this.berryData.aura?.applyAura(index);
     }
 
-    /**
-     * Returns the tooltip for the plot
-     */
-    toolTip(): string {
-        const tooltip = [];
-
-        if (this.berry !== BerryType.None) {
-            const formattedTime = this.formattedTimeLeft();
-            switch (this.stage()) {
-                case PlotStage.Seed:
-                    tooltip.push(`${formattedTime} until sprout`);
-                    break;
-                case PlotStage.Sprout:
-                    tooltip.push(`${formattedTime} until growth`);
-                    break;
-                case PlotStage.Taller:
-                    tooltip.push(`${formattedTime} until bloom`);
-                    break;
-                case PlotStage.Bloom:
-                    tooltip.push(`${formattedTime} until ripe`);
-                    break;
-                case PlotStage.Berry:
-                    tooltip.push(`${formattedTime} until overripe`);
-                    break;
-            }
-        }
-
-        if (this.mulch !== MulchType.None) {
-            const mulchTime = this.formattedMulchTimeLeft();
-            tooltip.push(`${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`);
-        }
-
-        this._auras.forEach((aura: KnockoutObservable<number>, index: number) => {
-            if (aura() === 1) {
-                return;
-            }
-            tooltip.push(`${AuraType[index]}: ${aura()}x`);
-        });
-
-        return tooltip.join('<br/>');
-    }
-
     fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
