@@ -163,7 +163,7 @@ class Player {
     public lowerItemMultipliers(multiplierDecreaser: MultiplierDecreaser) {
         for (const obj in ItemList) {
             const item = ItemList[obj];
-            item.decreasePriceMultiplier(undefined, multiplierDecreaser);
+            item.decreasePriceMultiplier(1, multiplierDecreaser);
         }
     }
 
