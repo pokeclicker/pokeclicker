@@ -45,7 +45,7 @@ class Champion extends Gym {
 
 }
 
-gymList['Champion Blue'] = new Champion(
+gymList['Kanto Champion Blue'] = new Champion(
     'Blue',
     'Kanto Champion Blue',
     [],
