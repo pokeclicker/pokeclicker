@@ -223,7 +223,7 @@ class Plot implements Saveable {
     /**
      * Returns how many berries will be harvested
      */
-    harvest(): number {
+    harvestAmount(): number {
         return this.berryData.harvestAmount * this.getHarvestMultiplier();
     }
 
@@ -238,7 +238,7 @@ class Plot implements Saveable {
         } else {
 
             // Withered Berry plant drops half of the berries
-            const amount = Math.floor(this.harvest() / 2);
+            const amount = Math.floor(this.harvestAmount() / 2);
             if (amount) {
                 App.game.farming.gainBerry(this.berry, amount);
                 this.notifications.push(FarmNotificationType.Dropped);
