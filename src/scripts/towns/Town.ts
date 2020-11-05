@@ -171,7 +171,7 @@ TownList['Celadon City'] = new Town(
     'Celadon City',
     GameConstants.Region.kanto,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 8)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
         shop: CeladonCityShop,
         npcs: [BigSpender],
     }
@@ -335,6 +335,13 @@ const BlackthornCityShop = new Shop([
 ]);
 
 // Johto NPCs
+
+const CherrygroveMrPokemon = new NPC('Mr Pokémon', [
+    'Welcome to Johto! This is where the first ever Pokémon egg was found long ago.',
+    'Astounding breakthroughs have been made since then. We can now store Pokémon eggs for longer and queue them up for breeding.',
+    'This new technology only allows up to four stored eggs, for now.',
+]);
+
 const AzaleaOldMan = new NPC('Wise Old Man', [
     'There is an old tale about the Guardian of Ilex Forest.',
     'It says that the mythical Pokémon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
@@ -360,6 +367,7 @@ TownList['Cherrygrove City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 29)],
         shop: CherrygroveCityShop,
+        npcs: [CherrygroveMrPokemon],
     }
 );
 TownList['Violet City'] = new Town(
@@ -569,6 +577,12 @@ const BattleFrontierShop = new Shop([
 ]);
 
 //Hoenn NPCs
+const LittlerootAide = new NPC('Professor Birch\'s Aide', [
+    'We have received word from Mr. Pokémon in Johto! He has made another breakthrough.',
+    'You can now store an additional four eggs in the queue! His research has really gained speed.',
+    'He wants you to know that he will have an additional eight slots ready by the time you reach Sinnoh.',
+]);
+
 const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'The creators of the lands and ocean slumber within the Cave of Origin.',
     'However, they will only awaken when in the presence of a truly great trainer.',
@@ -581,6 +595,7 @@ TownList['Littleroot Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         shop: LittleRootTownShop,
+        npcs: [LittlerootAide],
     }
 );
 TownList['Oldale Town'] = new Town(
