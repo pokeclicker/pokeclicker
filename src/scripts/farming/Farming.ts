@@ -890,68 +890,44 @@ class Farming implements Feature {
         }
     }
 
-    // TODO: HLXII Change details of notifier for different notifications
-    handleNotification(type: FarmNotificationType, wander?: any): void {
-        switch (type) {
+    handleNotification(farmNotiType: FarmNotificationType, wander?: any): void {
+        let message = '';
+        let type = NotificationConstants.NotificationOption.success;
+
+        switch (farmNotiType) {
             case FarmNotificationType.Ripe:
-                Notifier.notify({
-                    message: 'A Berry is ready to harvest!',
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
-                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
-                });
+                message = 'A Berry is ready to harvest!';
                 break;
             case FarmNotificationType.Withered:
-                Notifier.notify({
-                    message: 'A Berry plant has withered!',
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
-                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
-                });
+                message = 'A Berry plant has withered!';
+                type = NotificationConstants.NotificationOption.warning;
                 break;
             case FarmNotificationType.Mutated:
-                Notifier.notify({
-                    message: 'A Berry plant has mutated!',
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
-                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
-                });
+                message = 'A Berry plant has mutated!';
                 break;
             case FarmNotificationType.Replanted:
-                Notifier.notify({
-                    message: 'A Berry has been replanted!',
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
-                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
-                });
+                message = 'A Berry has been replanted!';
                 break;
             case FarmNotificationType.Dropped:
-                Notifier.notify({
-                    message: 'A Berry has been dropped!',
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
-                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
-                });
+                message = 'A Berry has been dropped!';
                 break;
             case FarmNotificationType.MulchRanOut:
-                Notifier.notify({
-                    message: 'A plot has run out of mulch!',
-                    type: NotificationConstants.NotificationOption.success,
-                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
-                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
-                });
+                message = 'A plot has run out of mulch!';
+                type = NotificationConstants.NotificationOption.warning;
                 break;
             case FarmNotificationType.Wander:
                 const pokemon = wander?.shiny ? `shiny ${wander?.pokemon}` : wander?.pokemon;
-                const type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
-                Notifier.notify({
-                    message: `A wild ${pokemon} has wandered onto the farm!`,
-                    type: type,
-                    sound: NotificationConstants.NotificationSound.ready_to_harvest,
-                    setting: NotificationConstants.NotificationSetting.ready_to_harvest,
-                });
+                message = `A wild ${pokemon} has wandered onto the farm!`;
+                type = wander?.shiny ? NotificationConstants.NotificationOption.warning : NotificationConstants.NotificationOption.success;
                 break;
         }
+
+        Notifier.notify({
+            message,
+            type,
+            sound: NotificationConstants.NotificationSound.ready_to_harvest,
+            setting: NotificationConstants.NotificationSetting.ready_to_harvest,
+        });
     }
 
     resetAuras() {
