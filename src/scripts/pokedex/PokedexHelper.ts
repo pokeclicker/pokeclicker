@@ -182,7 +182,6 @@ class PokedexHelper {
     private static isPureType(pokemon: PokemonListData, type: (PokemonType | null)): boolean {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
-
 }
 
 $(document).ready(function () {
