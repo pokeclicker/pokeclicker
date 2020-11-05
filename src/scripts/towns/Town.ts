@@ -588,6 +588,10 @@ const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'However, they will only awaken when in the presence of a truly great trainer.',
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
 ]);
+const Weatherman = new NPC('Weatherman', [
+    'Castform is a very finnicky pokemon',
+    'The weather can majorly impact its appearance, so watch out.',
+]);
 
 //Hoenn Towns
 TownList['Littleroot Town'] = new Town(
@@ -677,6 +681,7 @@ TownList['Fortree City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
         shop: FortreeCityShop,
+        npcs: [Weatherman],
     }
 );
 TownList['LilyCove City'] = new Town(
