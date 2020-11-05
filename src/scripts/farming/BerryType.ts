@@ -1,6 +1,5 @@
 enum BerryType {
     None = -1,
-
     // First generation
     Cheri,
     Chesto,
@@ -10,7 +9,6 @@ enum BerryType {
     Leppa,
     Oran,
     Sitrus,
-
     // Second generation
     Persim,
     Razz,
@@ -18,15 +16,12 @@ enum BerryType {
     Nanab,
     Wepear,
     Pinap,
-
     Figy,
     Wiki,
     Mago,
     Aguav,
     Iapapa,
-
     Lum,
-
     //Third Generation
     Pomeg,
     Kelpsy,
@@ -34,7 +29,6 @@ enum BerryType {
     Hondew,
     Grepa,
     Tamato,
-
     Cornn,
     Magost,
     Rabuta,
@@ -44,7 +38,6 @@ enum BerryType {
     Watmel,
     Durin,
     Belue,
-
     // Fourth Generation (Typed)
     Occa,
     Passho,
@@ -64,7 +57,6 @@ enum BerryType {
     Babiri,
     Chilan,
     Roseli,
-
     // Fifth Generation
     Micle,
     Custap,
@@ -72,7 +64,6 @@ enum BerryType {
     Rowap,
     Kee,
     Maranga,
-
     Liechi,
     Ganlon,
     Salac,
@@ -80,6 +71,5 @@ enum BerryType {
     Apicot,
     Lansat,
     Starf,
-
     Enigma,
 }
