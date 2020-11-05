@@ -27,5 +27,5 @@ class BuyOakItem extends Item {
     }
 }
 
-ItemList['Squirtbottle'] = new BuyOakItem(OakItems.OakItem.Squirtbottle, 2000, Currency.farmPoint);
-ItemList['Sprinklotad'] = new BuyOakItem(OakItems.OakItem.Sprinklotad, 4000, Currency.farmPoint);
+ItemList['Squirtbottle'] = new BuyOakItem(OakItems.OakItem.Squirtbottle, 5000, Currency.farmPoint);
+ItemList['Sprinklotad'] = new BuyOakItem(OakItems.OakItem.Sprinklotad, 10000, Currency.farmPoint);

@@ -40,9 +40,9 @@ class OakItems implements Feature {
             new OakItem(OakItems.OakItem.Cell_Battery, 'Cell Battery', 'More passive mining energy regen',
                 false, [1.5, 1.6, 1.7, 1.8, 1.9, 2], 1, 90, 20),
             new BoughtOakItem(OakItems.OakItem.Squirtbottle, 'Squirtbottle', 'Increases the chance of berry mutations', 'Johto Berry Master',
-                true, [1.5, 1.75, 2, 2.25, 2.5], 1, 10, undefined, undefined, AmountFactory.createArray([1000, 2000, 5000, 10000, 20000], GameConstants.Currency.farmPoint)),
+                true, [1.25, 1.5, 1.75, 2, 2.25, 2.5], 1, 10, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], GameConstants.Currency.farmPoint)),
             new BoughtOakItem(OakItems.OakItem.Sprinklotad, 'Sprinklotad', 'Increases the chance of berry replants', 'Hoenn Berry Master',
-                true, [1.15, 1.3, 1.45, 1.6, 1.75], 1, 2, undefined, undefined, AmountFactory.createArray([1000, 2000, 5000, 10000, 20000], GameConstants.Currency.farmPoint)),
+                true, [1.15, 1.3, 1.45, 1.6, 1.75, 1.9], 1, 2, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], GameConstants.Currency.farmPoint)),
         ];
     }
 
