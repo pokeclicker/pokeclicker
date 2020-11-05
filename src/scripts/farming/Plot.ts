@@ -405,17 +405,17 @@ class Plot implements Saveable {
         const plots = [];
 
         const posX = index % Farming.PLOT_WIDTH;
-        const posY = (index - posX) / Farming.PLOT_WIDTH;
+        const posY = (index - posX) / Farming.PLOT_HEIGHT;
 
         for (let y = posY - 1; y <= posY + 1; y++) {
             for (let x = posX - 1; x <= posX + 1; x++) {
-                if (y < 0 || y > Farming.PLOT_WIDTH - 1 || x < 0 || x >  Farming.PLOT_WIDTH - 1) {
+                if (y < 0 || y > Farming.PLOT_HEIGHT - 1 || x < 0 || x >  Farming.PLOT_WIDTH - 1) {
                     continue;
                 }
                 if (y === posY && x === posX) {
                     continue;
                 }
-                const id = y * Farming.PLOT_WIDTH + x;
+                const id = y * Farming.PLOT_HEIGHT + x;
                 plots.push(id);
             }
         }
@@ -429,13 +429,13 @@ class Plot implements Saveable {
      */
     public static findPlusPlots(index: number, filter?: (n: number) => boolean): number[] {
         const posX = index % Farming.PLOT_WIDTH;
-        const posY = (index - posX) / Farming.PLOT_WIDTH;
+        const posY = (index - posX) / Farming.PLOT_HEIGHT;
 
         const possiblePlots = [[posY - 1, posX], [posY, posX - 1], [posY, posX + 1], [posY + 1, posX]];
 
         return possiblePlots.filter(([y, x]) => {
-            return y >= 0 && y < Farming.PLOT_WIDTH && x >= 0 && x < Farming.PLOT_WIDTH;
-        }).map(([y, x]) => y * Farming.PLOT_WIDTH + x);
+            return y >= 0 && y < Farming.PLOT_HEIGHT && x >= 0 && x < Farming.PLOT_WIDTH;
+        }).map(([y, x]) => y * Farming.PLOT_HEIGHT + x);
     }
 
     get berryData(): Berry {

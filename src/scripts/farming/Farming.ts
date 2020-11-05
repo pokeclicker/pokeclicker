@@ -13,15 +13,14 @@ class Farming implements Feature {
     mutationCounter = 0;
     wanderCounter = 0;
 
-    readonly AMOUNT_OF_PLOTS = 25;
-
     static readonly PLOT_WIDTH = 5;
+    static readonly PLOT_HEIGHT = 5;
 
     defaults = {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
         mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
-        plotList: new Array(this.AMOUNT_OF_PLOTS).fill(null).map(function (value, index) {
+        plotList: new Array(Farming.PLOT_WIDTH * Farming.PLOT_HEIGHT).fill(null).map(function (value, index) {
             return new Plot(index === 0, BerryType.None, 0, MulchType.None, 0);
         }),
         shovelAmt: 0,
