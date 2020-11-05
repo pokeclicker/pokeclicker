@@ -31,7 +31,7 @@
                                 <div id="seeds" class="tab-pane active">
                                     <ul id="seedList" class="list-group p-0">
                                         <!-- ko foreach: FarmController.getBerryListWithIndex() -->
-                                        <li class="list-group-item list-group-item-action seed-list-item"
+                                        <li class="list-group-item list-group-item-action seed-list-item p-2"
                                             data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
                                             <img src="" height="24px"
                                                 data-bind="attr:{ src: FarmController.getBerryImage($data) },
@@ -42,7 +42,7 @@
                                         <!-- /ko -->
                                     </ul>
 
-                                    <div class="row justify-content-center align-items-center p-1">
+                                    <div class="row justify-content-center align-items-center py-1">
                                         <button class="btn btn-secondary"
                                             onclick="FarmController.navigateLeft()"
                                             data-bind="disable: FarmController.navigateIndex() === 0,
@@ -58,13 +58,13 @@
                                         </button>
                                     </div>
 
-                                    <div class="row justify-content-center p-1">
-                                        <div class="col-lg-12 col-6">
+                                    <div class="row justify-content-center py-1">
+                                        <div class="col-6">
                                             <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry())}">
                                                 Plant All
                                             </button>
                                         </div>
-                                        <div class="col-lg-12 col-6">
+                                        <div class="col-6">
                                             <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
                                                 Harvest All
                                             </button>
@@ -75,7 +75,7 @@
                                 <div id="mulches" class="tab-pane">
                                     <ul id="mulchList" class="list-group p-0">
                                         <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
-                                        <li class="list-group-item list-group-item-action seed-list-item"
+                                        <li class="list-group-item list-group-item-action seed-list-item p-2"
                                             data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() }">
                                             <img src="" width="24px"
                                                 data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
@@ -85,7 +85,7 @@
                                         <!-- /ko -->
                                     </ul>
 
-                                    <div class="row justify-content-center p-1">
+                                    <div class="row justify-content-center py-1">
                                         <div class="col-12">
                                             <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch())}">
                                                 Mulch All
@@ -96,7 +96,7 @@
                             </div>
 
                             <ul id="shovelList" class="list-group">
-                                <li class="list-group-item list-group-item-action seed-list-item"
+                                <li class="list-group-item list-group-item-action seed-list-item p-2"
                                     data-bind="click: function() {FarmController.selectedShovel(true);},
                                     css: { 'active': FarmController.selectedShovel() },
                                     tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
