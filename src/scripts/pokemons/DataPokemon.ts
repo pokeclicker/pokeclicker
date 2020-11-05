@@ -3,7 +3,7 @@ class DataPokemon implements PokemonInterface {
 
     constructor(
         public id: number,
-        public name: string,
+        public name: PokemonNameType,
         public catchRate: number,
         public evolutions: Evolution[],
         public type1: PokemonType,

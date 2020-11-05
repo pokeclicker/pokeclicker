@@ -101,16 +101,16 @@
     <!--Route 7-->
     <%- include('templates/mapRoute',
         { route: 7, region: 0
-        , width: 13, height: 3
-        , x: 63, y: 22
+        , width: 9, height: 3
+        , x: 50, y: 22
         })
      %>
 
     <!--Route 8-->
     <%- include('templates/mapRoute',
         { route: 8, region: 0
-        , width: 9, height: 3
-        , x: 50, y: 22
+        , width: 13, height: 3
+        , x: 63, y: 22
         })
      %>
 
@@ -525,7 +525,7 @@
         { name: "Underground Entrance"
         , x: 72, y: 31
         , width: 3, height: 4
-        , databind: "click:function(){Underground.openUndergroundModal()}, attr: { class: Underground.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
         })
      %>
 

@@ -2,8 +2,8 @@
 aria-labelledby="breedingModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
    <div class="modal-content">
-       <div class="modal-header">
-            <h5 class="modal-title" id="breedingModalLabel" data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'right' }">Day Care <span class="text-primary">ⓘ</span></h5>
+       <div class="modal-header justify-content-start align-items-center">
+            <h5 class="modal-title" id="breedingModalLabel">Day Care</h5>
             <button class="btn btn-secondary" type="button" data-toggle="collapse" style="margin-left: 25px;"
                     data-target="#breeding-filter" aria-expanded="false" aria-controls="breeding-filter">
                 Filters
@@ -12,8 +12,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                     data-target="#breeding-sort" aria-expanded="false" aria-controls="breeding-sort">
                 Sort
             </button>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+            <button type="button" class="btn btn-info"
+            style="position: absolute; right: 0px; top: 0px; width: auto; height: 69px; padding: 10px;"
+            data-bind="tooltip: { title: `You can trade your level 100 pokémon for an egg of the same pokémon. Hatched pokémon will gain a ${GameConstants.BREEDING_ATTACK_BONUS}% bonus of their base attack and have a higher chance of becoming shiny!`, trigger: 'hover', placement:'left' }">
+            ?
             </button>
        </div>
        <div class="modal-body p-0">
@@ -38,13 +40,23 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                 <label>Search</label>
                                 <input autocomplete="off" class="form-control" oninput="BreedingController.filter.search(new RegExp(`(${this.value})`, 'i'))" placeholder="search here"/>
                             </div>
-                            <div class="form-group col-md-6 col-6">
+                            <div class="form-group col-md-3 col-6">
                                 <label>Display Value</label>
                                 <select autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value)">
                                     <option value="attack" selected>Attack</option>
                                     <option value="attackBonus">Attack Bonus</option>
                                     <option value="baseAttack">Base Attack</option>
                                     <option value="eggSteps">Egg Steps</option>
+                                    <option value="timesHatched">Times Hatched</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-3 col-6">
+                                <label>Category</label>
+                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(this.value)">
+                                    <option value="-1">All</option>
+                                    <!-- ko foreach: PokemonCategories.categories -->
+                                    <option style="color: whitesmoke" data-bind="attr: { value: $index }, text: $data.name, style: { background: $data.color }">Category</option>
+                                    <!-- /ko -->
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
@@ -110,13 +122,22 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             Unfortunately, you don't have any pokémon of level 100 to breed.
                         </p>
                         <!-- ko if: App.game.party.hasMaxLevelPokemon() -->
-                        <ul class="row justify-content-center p-0" data-bind="foreach: BreedingController.breedableList()">
-                            <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
+                        <ul class="row justify-content-center p-0" data-bind="foreach: App.game.party.caughtPokemon">
+                            <li class="eggSlot col-sm-4 col-md-3 col-lg-2 pokedexEntry text-nowrap" data-bind="visible: BreedingController.visible($data), style:{background: PokedexHelper.getBackgroundColors($data.name)}, class: App.game.breeding.hasFreeEggSlot() || App.game.breeding.hasFreeQueueSlot() ? '' : 'disabled'">
                                 <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
                                 <div data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)" style="position: absolute;right: 0px;top: 0px;">✨</div>
                                 <img src="" width="80px" data-bind="attr:{ src: PokedexHelper.getImage($data.id)}">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BreedingController.getDisplayValue($data)">value</span>
-                                <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); BreedingController.filterBreedableList(); App.game.breeding.checkCloseModal();}"></a>
+                                <a class="overlay" href="#breed" data-bind="click: function() { App.game.breeding.addPokemonToHatchery($data); App.game.breeding.checkCloseModal();}"></a>
+                                <div class="pokemonCategory dropdown">
+                                    <button data-toggle="dropdown" data-bind="class: `category-${$data.category + 1}`"></button>
+                                    <div class="dropdown-menu p-0">
+                                        <!-- ko foreach: PokemonCategories.categories -->
+                                        <a class="dropdown-item category" href="#" data-bind="text: $data.name, click: () => { $parent.category = $index() }">Category</a>
+                                        <!-- /ko -->
+                                        <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                         <!-- /ko -->

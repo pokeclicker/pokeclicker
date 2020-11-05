@@ -5,18 +5,6 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta charset="utf-8"/>
     <link href="assets/images/favicon.ico" rel="icon" type="image/x-icon"/>
-    <script type="text/html" id="pokemonListTemplate">
-        <tr data-bind='ifnot: $data.breeding'>
-            <td class="text-nowrap">
-                <img class="smallImage"
-                     data-bind="attr:{ src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"
-                     src=""/>
-                <span data-bind="text: name">Name</span><sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
-            </td>
-            <td data-bind="text: attack">Atk</td>
-            <td data-bind="text: level">Lvl</td>
-        </tr>
-    </script>
     <script>window.featureFlags = $FEATURE_FLAGS;</script>
 
     <!--jQuery-->
@@ -347,7 +335,7 @@
                                                     Battle.enemyPokemon().type1,
                                                     Battle.enemyPokemon().type2
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
-                                                : null,
+                                                : '',
                                             trigger: 'hover',
                                         }
                                     "></span>
@@ -375,7 +363,7 @@
                                                     Battle.enemyPokemon().type1,
                                                     Battle.enemyPokemon().type2
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
-                                                : null,
+                                                : '',
                                             trigger: 'hover',
                                         }
                                     "></span>
@@ -545,6 +533,9 @@
 
 <!-- Damage Calculator Modal -->
 @import "damageCalculatorModal.html"
+
+<!-- Category Modal -->
+@import "categoryModal.html"
 
 </body>
 </html>

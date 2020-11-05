@@ -55,9 +55,19 @@
                                 <img class='fit-width' src="assets/images/safari/area1.png" />
                             </div>
 
-                            <div id="safariBody"
-                                class='container-fluid'
-                                data-bind="visible: Safari.inProgress()">
+                            <div style="position: relative;">
+                                <div id="safariBody"
+                                    class='container-fluid'
+                                    data-bind="visible: Safari.inProgress()">
+                                </div>
+                                <!-- ko foreach: Safari.pokemonGrid -->
+                                    <div class="pokemonSprite walkDown" data-bind="css: { shiny: $data.shiny },
+                                    style: {
+                                        backgroundImage: `${$data.shiny ? 'url(\'assets/images/dynamic-background/pokemon/sparkle.png\'), ' : ''}url('assets/images/dynamic-background/pokemon/${$data.id.toString().padStart(3, '0')}${$data.shiny ? 's' : ''}.png')`,
+                                        top: `${32 * $data.y - 8}px`,
+                                        left: `${32 * $data.x - 4}px`,
+                                    }"></div>
+                                <!-- /ko -->
                             </div>
                         </div>
                     </div>

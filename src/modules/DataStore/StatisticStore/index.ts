@@ -10,7 +10,7 @@ export default class Statistics implements Saveable {
 
     defaults = {};
 
-    selectedPokemonID = ko.observable(1).extend({ numeric: 0 });
+    selectedPokemonID = ko.observable(1);
 
     /*
      * observables
@@ -133,7 +133,7 @@ export default class Statistics implements Saveable {
             // We use a proxy to generate new array observables on the fly.
             this[array] = new Proxy([], {
                 get: (statistics, prop: string) => {
-                    if (statistics[prop]) {
+                    if (typeof statistics[prop] !== 'undefined') {
                         return statistics[prop];
                     }
 
@@ -174,7 +174,7 @@ export default class Statistics implements Saveable {
         this.objectObservables.forEach((object) => {
             this[object] = new Proxy({}, {
                 get: (statistics, prop: string) => {
-                    if (statistics[prop]) {
+                    if (typeof statistics[prop] !== 'undefined') {
                         return statistics[prop];
                     }
 

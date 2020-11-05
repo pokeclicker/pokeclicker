@@ -257,7 +257,8 @@ namespace GameConstants {
         'Burmy (plant)',
         'Spiritomb',
         'Cherubi',
-        'Meloetta (pirouette)'
+        'Zorua',
+        'Meloetta (pirouette)',
     }
     declare enum PokeBlockColor {
         Black,
