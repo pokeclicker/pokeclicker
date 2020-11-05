@@ -236,17 +236,25 @@ class Update implements Saveable {
                 Update.addPokemonToSaveData(saveData, 386.3); // Deoxys (speed)
             }
 
-            //TODO: HLXII Update to add this when we release the berry overhaul
-            //Update farms
-            saveData.farming.unlockedBerries = Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false);
-            saveData.farming.mulchList = Array<number>(GameHelper.enumLength(MulchType)).fill(0);
-            // Updating unlocked status
-            for (let i = 0;i < 8;i++) {
-                if (saveData.farming.berryList[i]) {
-                    saveData.farming.unlockedBerries[i] = true;
-                }
+            // Update Farm data
+
+            // Refund Farm Points for current berries
+            for (let i = 0; i < 8; i++) {
+                const amount = 100 / i;
+                const refundTokens = Math.floor(saveData.farming.berryList[i] / amount);
+                saveData.wallet.currencies[4] += refundTokens;
+                saveData.farming.berryList[i] = 0;
             }
-            // Plots won't be updated, as the berries currently don't have much value anyways
+
+            // Unlock & Give 5 Cheri berries to start off with
+            saveData.farming.unlockedBerries = [true];
+            saveData.farming.berryList[0] = 5;
+
+            // Refund Farm Points for plots previously unlocked
+            saveData.wallet.currencies[4] += saveData.farming.plotList.map((p, i) => p.isUnlocked ? 10 * Math.floor(Math.pow(i, 2)) : 0).reduce((s, a) => s + a, 0);
+
+            // Reset all plots
+            delete saveData.farming.plotList;
         },
     };
 
