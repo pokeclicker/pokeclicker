@@ -43,19 +43,23 @@
                                     </ul>
 
                                     <div class="row justify-content-center align-items-center py-1">
-                                        <button class="btn btn-secondary"
-                                            onclick="FarmController.navigateLeft()"
-                                            data-bind="disable: FarmController.navigateIndex() === 0,
-                                                css: { disabled: FarmController.navigateIndex() === 0 }">
-                                        <img src="assets/images/arrow.svg" style="transform: scaleX(-1);" height="20">
-                                        </button>
-                                        <div style="width:48px;" data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
-                                        <button class="btn btn-secondary"
-                                            onclick="FarmController.navigateRight()"
-                                            data-bind="disable: FarmController.navigateIndex() ===  FarmController.numberOfTabs(),
-                                                css: { disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs() }">
-                                        <img src="assets/images/arrow.svg" height="20">
-                                        </button>
+                                        <div class="col-4 pr-0">
+                                            <button class="btn btn-block btn-secondary"
+                                                onclick="FarmController.navigateLeft()"
+                                                data-bind="disable: FarmController.navigateIndex() === 0,
+                                                    css: { disabled: FarmController.navigateIndex() === 0 }">
+                                                <img src="assets/images/arrow.svg" style="transform: scaleX(-1);" height="20">
+                                            </button>
+                                        </div>
+                                        <div class="col-4" data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
+                                        <div class="col-4 pl-0">
+                                            <button class="btn btn-block btn-secondary"
+                                                onclick="FarmController.navigateRight()"
+                                                data-bind="disable: FarmController.navigateIndex() ===  FarmController.numberOfTabs(),
+                                                    css: { disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs() }">
+                                                <img src="assets/images/arrow.svg" height="20">
+                                            </button>
+                                        </div>
                                     </div>
 
                                     <div class="row justify-content-center py-1">
