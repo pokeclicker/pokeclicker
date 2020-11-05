@@ -47,11 +47,13 @@ class EvolveNearBerryMutation extends EvolveNearMutation {
             return super.hint;
         }
 
+        const berryType = this.originalBerry !== undefined ? BerryType[this.originalBerry] : 'some';
+
         if (this.berryReqs.length === 0) {
-            return `I've heard that ${BerryType[this.originalBerry]} Berries can spontaneously change!`;
+            return `I've heard that ${berryType} Berries can spontaneously change!`;
         }
 
-        let str = `I've heard that growing ${BerryType[this.originalBerry]} Berries`;
+        let str = `I've heard that growing ${berryType} Berries`;
         str += ` near ${this.berryReqs.map(b => BerryType[b]).join(', ').replace(/, ([\w\s]+)$/, ' and $1')} Berries`;
         str += ' can cause it to change!';
         return str;
