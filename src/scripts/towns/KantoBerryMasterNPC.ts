@@ -27,11 +27,10 @@ class KantoBerryMasterNPC extends NPC {
         const possibleMutations = App.game.farming.mutations.filter((mut) => mut.unlocked && mut.showHint && !App.game.farming.unlockedBerries[mut.mutatedBerry]());
 
         if (possibleMutations.length === 0) {
-            return 'It seems as though you have hit a roadblock in your Berry progress. Focus on other areas before returning';
+            return 'It seems as though you have hit a roadblock in your Berry progress. Focus on other areas before returning..';
         }
 
-        const idx = Math.floor(possibleMutations.length * SeededRand.next());
-        return possibleMutations[idx].hint;
+        return SeededRand.fromArray(possibleMutations).hint;
     }
 
 }
