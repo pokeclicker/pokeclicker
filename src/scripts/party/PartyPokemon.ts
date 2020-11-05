@@ -7,27 +7,31 @@ class PartyPokemon implements Saveable {
         exp: 0,
         breeding: false,
         shiny: false,
+        category: 0,
     };
 
     _breeding: KnockoutObservable<boolean>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attack: KnockoutObservable<number>;
+    _category: KnockoutObservable<number>;
 
     constructor(
         public id: number,
-        public name: string,
+        public name: PokemonNameType,
         public evolutions: Evolution[],
         public baseAttack: number,
         public attackBonus: number,
         public exp: number,
         breeding = false,
-        shiny = false
+        shiny = false,
+        category = 0
     ) {
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
         this._level = ko.observable(1);
         this._attack = ko.observable(this.calculateAttack());
+        this._category = ko.observable(category);
     }
 
     public calculateAttack(): number {
@@ -96,6 +100,7 @@ class PartyPokemon implements Saveable {
         this.exp = json['exp'] ?? this.defaults.exp;
         this.breeding = json['breeding'] ?? this.defaults.breeding;
         this.shiny = json['shiny'] ?? this.defaults.shiny;
+        this.category = json['category'] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
         this.attack = this.calculateAttack();
 
@@ -125,11 +130,12 @@ class PartyPokemon implements Saveable {
             breeding: this.breeding,
             shiny: this.shiny,
             levelEvolutionTriggered: levelEvolutionTriggered,
+            category: this.category,
         };
     }
 
     // Knockout getters/setter
-    get level() {
+    get level(): number {
         return this._level();
     }
 
@@ -137,7 +143,7 @@ class PartyPokemon implements Saveable {
         this._level(level);
     }
 
-    get attack() {
+    get attack(): number {
         return this._attack();
     }
 
@@ -145,7 +151,7 @@ class PartyPokemon implements Saveable {
         this._attack(attack);
     }
 
-    get breeding() {
+    get breeding(): boolean {
         return this._breeding();
     }
 
@@ -153,11 +159,19 @@ class PartyPokemon implements Saveable {
         this._breeding(bool);
     }
 
-    get shiny() {
+    get shiny(): boolean {
         return this._shiny();
     }
 
     set shiny(bool: boolean) {
         this._shiny(bool);
+    }
+
+    get category(): number {
+        return this._category();
+    }
+
+    set category(index: number) {
+        this._category(index);
     }
 }
