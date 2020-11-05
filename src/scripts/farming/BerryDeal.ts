@@ -137,11 +137,11 @@ class BerryDeal {
                 this.randomBerry(fifthGen),
             ],
             [
-                SeededRand.intBetween(300, 500),
-                SeededRand.intBetween(70, 130),
-                SeededRand.intBetween(30, 70),
-                SeededRand.intBetween(10, 30),
-                SeededRand.intBetween(4, 11),
+                SeededRand.intBetween(500, 1000),
+                SeededRand.intBetween(200, 500),
+                SeededRand.intBetween(100, 200),
+                SeededRand.intBetween(50, 100),
+                SeededRand.intBetween(10, 50),
             ],
             ItemList['Masterball'],
             1
