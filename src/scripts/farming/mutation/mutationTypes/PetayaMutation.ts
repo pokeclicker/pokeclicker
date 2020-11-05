@@ -60,7 +60,7 @@ class PetayaMutation extends GrowMutation {
         if (super.hint) {
             return super.hint;
         }
-        return 'Legends tell of a mysterious Berry that only appears surrounded by all types of Berries.';
+        return 'Legends tell of a mysterious Berry that only appears while surrounded by all types of Berries.';
     }
 
 }

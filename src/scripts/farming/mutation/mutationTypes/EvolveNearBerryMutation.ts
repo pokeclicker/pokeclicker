@@ -47,27 +47,14 @@ class EvolveNearBerryMutation extends EvolveNearMutation {
             return super.hint;
         }
 
-        const str = [];
-        str.push('I\'ve heard that growing');
-        str.push(`${BerryType[this.originalBerry]} Berries`);
-
         if (this.berryReqs.length === 0) {
-            return `I've heard that ${BerryType[this.originalBerry]} Berries will spontaneously change!`;
+            return `I've heard that ${BerryType[this.originalBerry]} Berries can spontaneously change!`;
         }
-        if (this.berryReqs.length === 1) {
-            str.push(`near ${BerryType[this.berryReqs[0]]} Berries`);
-        }
-        if (this.berryReqs.length === 2) {
-            str.push(`near ${BerryType[this.berryReqs[0]]} and ${BerryType[this.berryReqs[1]]} Berries`);
-        }
-        if (this.berryReqs.length === 3) {
-            str.push(`near ${BerryType[this.berryReqs[0]]}, ${BerryType[this.berryReqs[1]]}, and ${BerryType[this.berryReqs[2]]} Berries`);
-        }
-        if (this.berryReqs.length === 4) {
-            str.push(`near ${BerryType[this.berryReqs[0]]}, ${BerryType[this.berryReqs[1]]}, ${BerryType[this.berryReqs[2]]}, and ${BerryType[this.berryReqs[3]]} Berries`);
-        }
-        str.push('will cause it to change!');
-        return str.join(' ');
+
+        let str = `I've heard that growing ${BerryType[this.originalBerry]} Berries`;
+        str += ` near ${this.berryReqs.map(b => BerryType[b]).join(', ').replace(/, (\w\s+)$/, 'and $1')} Berries`;
+        str += ' can cause it to change!';
+        return str;
     }
 
     /**

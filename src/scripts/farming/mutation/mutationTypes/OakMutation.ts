@@ -57,6 +57,6 @@ class OakMutation extends EvolveMutation {
         if (super.hint) {
             return super.hint;
         }
-        return `I've heard that using the ${App.game.oakItems.itemList[this.oakItem].displayName} will cause ${BerryType[this.originalBerry]} Berries to change!`;
+        return `I've heard that using the ${App.game.oakItems.itemList[this.oakItem].displayName} can cause ${BerryType[this.originalBerry]} Berries to change!`;
     }
 }

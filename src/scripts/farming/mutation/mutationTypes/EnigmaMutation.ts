@@ -63,7 +63,7 @@ class EnigmaMutation extends GrowMutation {
      */
     get hint(): string {
         if (App.game.discord.ID === null) {
-            return 'There is a Berry that requires a certain amount of <u>Discord</u> to appear...';
+            return 'There is a Berry that requires a linked <u>Discord</u> account to appear...';
         }
         SeededRand.seedWithDate(new Date());
 
