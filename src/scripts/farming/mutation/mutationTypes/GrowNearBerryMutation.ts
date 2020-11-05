@@ -53,7 +53,7 @@ class GrowNearBerryMutation extends GrowNearMutation {
             return `I've heard that growing ${BerryType[this.berryReqs[0]]} Berries can spread a new Berry into nearby empty plots!`;
         }
         if (this.berryReqs.length >= 2) {
-            return `I've heard that growing ${this.berryReqs.map(b => BerryType[b]).join(', ').replace(/, (\w\s+)$/, 'and $1')} Berries near each other will produce something interesting!`;
+            return `I've heard that growing ${this.berryReqs.map(b => BerryType[b]).join(', ').replace(/, ([\w\s]+)$/, ' and $1')} Berries near each other will produce something interesting!`;
         }
         return '';
     }

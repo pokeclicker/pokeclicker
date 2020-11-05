@@ -52,7 +52,7 @@ class EvolveNearBerryMutation extends EvolveNearMutation {
         }
 
         let str = `I've heard that growing ${BerryType[this.originalBerry]} Berries`;
-        str += ` near ${this.berryReqs.map(b => BerryType[b]).join(', ').replace(/, (\w\s+)$/, 'and $1')} Berries`;
+        str += ` near ${this.berryReqs.map(b => BerryType[b]).join(', ').replace(/, ([\w\s]+)$/, ' and $1')} Berries`;
         str += ' can cause it to change!';
         return str;
     }
