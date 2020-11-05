@@ -113,9 +113,34 @@
                         </div>
 
                         <div class="col-12 col-lg-8">
+                            <div id="plotList" class="row" data-bind="foreach: App.game.farming.plotList">
+                                <!-- ko if: $index() % 5 == 0 -->
+                                <div class="w-100"></div>
+                                <!-- /ko -->
+                                <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
+                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
+                                        <div class="plotImage">
+                                            <img style="width: 100%" src="assets/images/farm/soil.png"
+                                                data-bind="class: FarmController.calcMulchClass($data)">
+                                            <div>
+                                                <div class="plotButton"
+                                                    data-html=true
+                                                    data-bind="
+                                                    click: function(){FarmController.plotClick($index())},
+                                                    tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false},
+                                                    ifnot: $data.isEmpty()">
+                                                    <img width="100%" height="100%" src=""
+                                                        style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
+                                                        data-bind="attr:{ src: FarmController.getImage($index())}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <!-- ko ifnot: App.game.farming.allPlotsUnlocked() -->
-                            <div class="row justify-content-center">
-                                <button class="btn btn-success" onclick="App.game.farming.unlockPlot()"
+                            <div class="col-12 justify-content-center">
+                                <button class="btn btn-success btn-block mt-0 mb-2" onclick="App.game.farming.unlockPlot()"
                                         data-bind="css: { disabled: !App.game.farming.canBuyPlot()}"
                                         style="margin-top: 10px;">
                                     <span>Unlock new plot </span>
@@ -127,33 +152,6 @@
                                 </button>
                             </div>
                             <!-- /ko -->
-                            <div id="plotList" data-bind="foreach: App.game.farming.plotList">
-                                <div class="plot" data-bind="css: { plotLocked : !$data.isUnlocked }">
-                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
-                                        <div class="plotImage">
-                                            <img style="width: 100%"
-                                            data-bind="class: FarmController.calcMulchClass($data)"
-                                            src="assets/images/farm/soil.png">
-                                            <div data-bind="ifnot: $data.isEmpty()">
-                                                <div class="plotButton"
-                                                    data-html=true
-                                                    data-bind="click: function(){FarmController.plotClick($index())}, tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false}">
-                                                    <img width="100%" height="100%"
-                                                        style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
-                                                        src=""
-                                                        data-bind="attr:{ src: FarmController.getImage($index())}">
-                                                </div>
-                                            </div>
-                                            <div data-bind="if: $data.isEmpty()">
-                                                <div class="plotButton"
-                                                    data-html=true
-                                                    data-bind="click: function(){FarmController.plotClick($index())}, tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false}">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
