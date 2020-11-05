@@ -21,14 +21,3 @@ ItemList['Lucky_egg']       = new BattleItem(GameConstants.BattleItemType.Lucky_
 ItemList['Token_collector'] = new BattleItem(GameConstants.BattleItemType.Token_collector, '+50% Bonus to dungeon tokens gained', 1000, undefined, 'Token Collector');
 ItemList['Item_magnet']     = new BattleItem(GameConstants.BattleItemType.Item_magnet, '+50% Chance of gaining an extra item', 1500, undefined, 'Item Magnet');
 ItemList['Lucky_incense']   = new BattleItem(GameConstants.BattleItemType.Lucky_incense, '+50% Bonus to money gained', 2000, undefined, 'Lucky Incense');
-
-namespace BattleItems {
-    export enum BattleItem {
-        'xAttack' = 0,
-        'xClick',
-        'Lucky_egg',
-        'Token_collector',
-        'Item_magnet',
-        'Lucky_incense',
-    }
-}

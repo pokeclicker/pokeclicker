@@ -59,35 +59,3 @@ ItemList['Razor_fang']    = new EvolutionStone(GameConstants.StoneType.Razor_fan
 ItemList['Prism_scale']    = new EvolutionStone(GameConstants.StoneType.Prism_scale, 2500, undefined , 'Prism Scale');
 ItemList['Sachet']         = new EvolutionStone(GameConstants.StoneType.Sachet, 2500, undefined , 'Sachet');
 ItemList['Whipped_dream']  = new EvolutionStone(GameConstants.StoneType.Whipped_dream, 2500, undefined , 'Whipped Dream');
-
-namespace EvoItems {
-    export enum EvoItem {
-        'Fire_stone' = 0,
-        'Water_stone',
-        'Thunder_stone',
-        'Leaf_stone',
-        'Moon_stone',
-        'Sun_stone',
-        'Trade_stone',
-        'Dragon_scale',
-        'Metal_coat',
-        'Kings_rock',
-        'Upgrade',
-        'Soothe_bell',
-        'Deepsea_tooth',
-        'Deepsea_scale',
-        'Dawn_stone',
-        'Dusk_stone',
-        'Shiny_stone',
-        'Dubious_disc',
-        'Electirizer',
-        'Magmarizer',
-        'Protector',
-        'Reaper_cloth',
-        'Razor_claw',
-        'Razor_fang',
-        'Prism_scale',
-        'Sachet',
-        'Whipped_dream',
-    }
-}

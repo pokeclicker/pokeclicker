@@ -17,13 +17,13 @@ class BerryDeal {
     }
 
     private static randomBattleItem(): Item {
-        const battleItem = SeededRand.fromEnum(BattleItems.BattleItem);
-        return ItemList[BattleItems.BattleItem[battleItem]];
+        const battleItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.BattleItemType));
+        return ItemList[battleItem];
     }
 
     private static randomEvoItem(): Item {
-        const evoItem = SeededRand.fromEnum(EvoItems.EvoItem);
-        return ItemList[EvoItems.EvoItem[evoItem]];
+        const evoItem = SeededRand.fromArray(GameHelper.enumStrings(GameConstants.StoneType).filter(name => name != 'None'));
+        return ItemList[evoItem];
     }
 
     private static randomUndergroundItem(): UndergroundItem {

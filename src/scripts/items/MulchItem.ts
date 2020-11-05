@@ -17,8 +17,7 @@ class MulchItem extends Item {
     }
 }
 
-// TODO: HLXII - Balance cost based on highest yield strategy
-ItemList['Boost_Mulch']   = new MulchItem(MulchType.Boost_Mulch, 200, 'Boost Mulch');
-ItemList['Rich_Mulch']  = new MulchItem(MulchType.Rich_Mulch, 300, 'Rich Mulch');
-ItemList['Surprise_Mulch']  = new MulchItem(MulchType.Surprise_Mulch, 400, 'Surprise Mulch');
-ItemList['Amaze_Mulch'] = new MulchItem(MulchType.Amaze_Mulch, 500, 'Amaze Mulch');
+ItemList['Boost_Mulch']   = new MulchItem(MulchType.Boost_Mulch, 50, 'Boost Mulch');
+ItemList['Rich_Mulch']  = new MulchItem(MulchType.Rich_Mulch, 100, 'Rich Mulch');
+ItemList['Surprise_Mulch']  = new MulchItem(MulchType.Surprise_Mulch, 150, 'Surprise Mulch');
+ItemList['Amaze_Mulch'] = new MulchItem(MulchType.Amaze_Mulch, 200, 'Amaze Mulch');

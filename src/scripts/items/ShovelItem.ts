@@ -14,5 +14,4 @@ class ShovelItem extends Item {
     }
 }
 
-// TODO: HLXII - Balance cost based on highest yield strategy
-ItemList['Berry_Shovel']   = new ShovelItem(500, 'Berry Shovel');
+ItemList['Berry_Shovel']   = new ShovelItem(400, 'Berry Shovel');
