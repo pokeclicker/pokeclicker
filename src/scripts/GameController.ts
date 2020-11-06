@@ -82,6 +82,9 @@ class GameController {
 
                 $(element).tooltip(options);
 
+                $(element).mouseover(function() {
+                    $(element).tooltip('show');
+                });
 
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     $(element).tooltip('dispose');
@@ -102,6 +105,11 @@ class GameController {
                 const tooltipInner = tooltipData.tip && tooltipData.tip.querySelector('.tooltip-inner');
                 if (tooltipInner) {
                     tooltipInner.innerHTML = tooltipData.config.title || '';
+                }
+                if (tooltipData && tooltipData.config) {
+                    if (tooltipData.config.title === '') {
+                        $(element).tooltip('hide');
+                    }
                 }
             },
             options: {
