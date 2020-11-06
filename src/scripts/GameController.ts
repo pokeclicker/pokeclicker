@@ -86,19 +86,6 @@ class GameController {
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     $(element).tooltip('dispose');
                 });
-
-                if (bindingContext.$data instanceof Plot) {
-                    $(element).hover(function () {
-                        $(this).data('to', setInterval(function () {
-                            $(element).tooltip('hide')
-                                .attr('data-original-title', FarmController.getTooltipLabel(bindingContext.$index()))
-                                .tooltip('show');
-                        }, 100));
-                    }, function () {
-                        clearInterval($(this).data('to'));
-                    });
-                }
-
             },
             'update': function (element, valueAccessor) {
                 const local = ko.utils.unwrapObservable(valueAccessor());
