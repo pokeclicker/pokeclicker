@@ -1037,6 +1037,7 @@ class Farming implements Feature {
         if (!suppressResetAura) {
             this.resetAuras();
         }
+        $(`#plot-${index}`).tooltip('hide');
     }
 
     /**
@@ -1066,6 +1067,7 @@ class Farming implements Feature {
         }
         plot.die(true);
         GameHelper.incrementObservable(this.shovelAmt, -1);
+        $(`#plot-${index}`).tooltip('hide');
     }
 
     /**

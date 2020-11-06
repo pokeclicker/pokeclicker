@@ -140,7 +140,8 @@
                                             <div class="plotButton"
                                                 data-bind="ifnot: $data.isEmpty(),
                                                 click: function(){FarmController.plotClick($index())},
-                                                tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
+                                                tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true},
+                                                attr: { id: `plot-${$index()}`}">
                                                 <img width="100%" height="100%" src=""
                                                     style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
                                                     data-bind="attr:{ src: FarmController.getImage($index())}">
