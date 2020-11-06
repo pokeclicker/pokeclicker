@@ -47,12 +47,6 @@ class FarmController {
         return `assets/images/farm/${BerryType[plot.berry]}Tree${PlotStage[plot.stage()]}.png`;
     }
 
-    public static getTooltipLabel(index: number) {
-        const plot: Plot = App.game.farming.plotList[index];
-
-        return plot.tooltip();
-    }
-
     public static calculateCssClass() {
         if (this.selectedShovel()) {
             return 'ShovelSelected';
