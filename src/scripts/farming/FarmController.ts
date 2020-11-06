@@ -72,8 +72,11 @@ class FarmController {
 
     public static plotClick(index: number) {
         const plot: Plot = App.game.farming.plotList[index];
+        // Unlocking Plot
+        if (!plot.isUnlocked) {
+            App.game.farming.unlockPlot(index);
         // Handle Shovel
-        if (this.selectedShovel()) {
+        } else if (this.selectedShovel()) {
             App.game.farming.shovel(index);
         // Handle Berries
         } else if (this.berryListVisible()) {

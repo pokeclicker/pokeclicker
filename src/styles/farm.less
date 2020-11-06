@@ -72,14 +72,22 @@
       filter: brightness(95%);
       -webkit-filter: brightness(95%);
       cursor: pointer;
+
+      .plotLockHover {
+          display: flex;
+      }
     }
   }
 
   .plotLocked {
     opacity: 0.7;
-    :hover {
-      cursor: not-allowed;
-    }
+  }
+
+  .plotLockHover {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
   }
 
   .plotButton {

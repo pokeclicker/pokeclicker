@@ -122,36 +122,35 @@
                                         <div class="plotImage">
                                             <img style="width: 100%" src="assets/images/farm/soil.png"
                                                 data-bind="class: FarmController.calcMulchClass($data)">
-                                            <div>
-                                                <div class="plotButton"
-                                                    data-html=true
-                                                    data-bind="
-                                                    click: function(){FarmController.plotClick($index())},
-                                                    tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false},
-                                                    ifnot: $data.isEmpty()">
-                                                    <img width="100%" height="100%" src=""
-                                                        style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
-                                                        data-bind="attr:{ src: FarmController.getImage($index())}">
+                                            <!-- ko if: !$data.isUnlocked -->
+                                            <div class="plotButton plotLockHover">
+                                                <div>
+                                                    <span style="display: inline;">
+                                                        <img alt="Berry" style="height: 24px;"
+                                                            data-bind="attr:{ src: FarmController.getBerryImage(App.game.farming.plotBerryCost($index()).type) },
+                                                            css: {'berryLocked': !App.game.farming.unlockedBerries[App.game.farming.plotBerryCost($index()).type]() }"/>
+                                                        <span data-bind="text: GameConstants.formatNumber(App.game.farming.plotBerryCost($index()).amount)">0</span>
+                                                    </span>
                                                 </div>
+                                                <div>
+                                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFTCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                                                </div>
+                                            </div>
+                                            <!-- /ko -->
+                                            <div class="plotButton"
+                                                data-html=true
+                                                data-bind="
+                                                click: function(){FarmController.plotClick($index())},
+                                                tooltip: {title: FarmController.getTooltipLabel($index()), trigger: 'hover', animation: false},
+                                                ifnot: $data.isEmpty()">
+                                                <img width="100%" height="100%" src=""
+                                                    style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
+                                                    data-bind="attr:{ src: FarmController.getImage($index())}">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <!-- ko ifnot: App.game.farming.allPlotsUnlocked() -->
-                            <div class="col-12 justify-content-center">
-                                <button class="btn btn-success btn-block mt-0 mb-2" onclick="App.game.farming.unlockPlot()"
-                                        data-bind="css: { disabled: !App.game.farming.canBuyPlot()}"
-                                        style="margin-top: 10px;">
-                                    <span>Unlock new plot </span>
-                                    <span style="display: inline;">
-                                        <img alt="Berry" style="height: 24px;"
-                                            data-bind="attr:{ src: FarmController.getBerryImage(App.game.farming.unlockBerryIndex()) },css: {'berryLocked': !App.game.farming.unlockedBerries[App.game.farming.unlockBerryIndex()]() }"/>
-                                        <span data-bind="text: GameConstants.formatNumber(App.game.farming.calculatePlotPrice())">0</span>
-                                    </span>
-                                </button>
-                            </div>
-                            <!-- /ko -->
                         </div>
                     </div>
                 </div>

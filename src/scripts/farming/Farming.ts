@@ -21,7 +21,7 @@ class Farming implements Feature {
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
         mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
         plotList: new Array(Farming.PLOT_WIDTH * Farming.PLOT_HEIGHT).fill(null).map(function (value, index) {
-            return new Plot(index === 0, BerryType.None, 0, MulchType.None, 0);
+            return new Plot(index === 12, BerryType.None, 0, MulchType.None, 0);    // NOTE: This value will have to change if the dimensions of the plots change
         }),
         shovelAmt: 0,
     };
@@ -938,39 +938,56 @@ class Farming implements Feature {
         this.plotList.forEach((plot, idx) => plot.applyAura(idx));
     }
 
-    unlockPlot() {
-        const index = this.unlockBerryIndex();
-        if (this.canBuyPlot()) {
-            GameHelper.incrementObservable(this.berryList[index], -this.calculatePlotPrice());
-            this.plotList[index + 1].isUnlocked = true;
+    //#region Plot Unlocking
+
+    static unlockMatrix = [
+        BerryType.Kelpsy, BerryType.Mago, BerryType.Persim, BerryType.Wepear, BerryType.Qualot,
+        BerryType.Wiki, BerryType.Aspear, BerryType.Cheri, BerryType.Leppa, BerryType.Aguav,
+        BerryType.Nanab, BerryType.Rawst, BerryType.None, BerryType.Chesto, BerryType.Razz,
+        BerryType.Pomeg, BerryType.Sitrus, BerryType.Pecha, BerryType.Oran, BerryType.Pinap,
+        BerryType.Grepa, BerryType.Figy, BerryType.Bluk, BerryType.Iapapa, BerryType.Hondew,
+    ]
+
+    unlockPlot(index: number) {
+        if (this.allPlotsUnlocked()) {
+            return;
+        }
+        if (this.canBuyPlot(index)) {
+            const berryData = this.plotBerryCost(index);
+            GameHelper.incrementObservable(this.berryList[berryData.type], -berryData.amount);
+            const cost = this.plotFTCost(index);
+            App.game.wallet.loseAmount(new Amount(cost, GameConstants.Currency.farmPoint));
+            this.plotList[index].isUnlocked = true;
         }
     }
 
     allPlotsUnlocked() {
-        return this.plotList[this.plotList.length - 1].isUnlocked;
+        return this.plotList.every(plot => plot.isUnlocked);
     }
 
-    canBuyPlot() {
-        return !this.allPlotsUnlocked() && App.game.farming.berryList[this.unlockBerryIndex()]() >= this.calculatePlotPrice();
-    }
-
-    calculatePlotPrice(): number {
-        if (this.allPlotsUnlocked()) {
-            return Infinity;
+    canBuyPlot(index: number): boolean {
+        const berryData = this.plotBerryCost(index);
+        if (App.game.farming.berryList[berryData.type]() < berryData.amount) {
+            return false;
         }
-
-        // TODO: HLXII Rebalance cost based on Berry growth rate
-        // Will probably have to be manually set, rather than using a formula
-        return 10 * Math.floor(Math.pow(this.unlockedPlotCount(), 2));
+        const cost = this.plotFTCost(index);
+        if (!App.game.wallet.hasAmount(new Amount(cost, GameConstants.Currency.farmPoint))) {
+            return false;
+        }
+        return true;
     }
 
-    unlockedPlotCount() {
-        return App.game.farming.plotList.filter(plot => plot.isUnlocked).length;
+    plotFTCost(index: number): number {
+        const berryType = Farming.unlockMatrix[index];
+        return 10 * Math.floor(Math.pow(berryType + 1, 2));
     }
 
-    unlockBerryIndex() {
-        return this.unlockedPlotCount() - 1;
+    plotBerryCost(index: number): {type: BerryType, amount: number} {
+        const berryType = Farming.unlockMatrix[index];
+        return { type: berryType, amount: 10 * (berryType + 1) };
     }
+
+    //#endregion
 
     plant(index: number, berry: BerryType, suppressResetAura = false) {
         const plot = this.plotList[index];
