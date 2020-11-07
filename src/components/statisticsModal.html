@@ -1,5 +1,5 @@
 <div class="modal noselect fade" id="statisticsModal" tabindex="-1" role="dialog" aria-labelledby="statisticsModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Statistics</h5>
@@ -15,11 +15,17 @@
                         <th>Amount</th>
                       </tr>
                     </thead>
-                    <tbody data-bind="foreach: App.game.statistics.observables">
+                    <tbody>
+                      <tr>
+                        <td class="text-left">Time Played</td>
+                        <td class="text-left tight text-muted" data-bind="html: GameConstants.formatSecondsToTime(App.game.statistics['secondsPlayed']())">-</td>
+                      </tr>
+                      <!-- ko foreach: App.game.statistics.observables -->
                       <tr>
                         <td class="text-left" data-bind="text: GameConstants.camelCaseToString($data)">-</td>
-                        <td class="text-left tight"><code data-bind="text:App.game.statistics[$data]().toLocaleString('en-US')">-</code></td>
+                        <td class="text-left tight text-muted" data-bind="text: App.game.statistics[$data]().toLocaleString('en-US')">-</td>
                       </tr>
+                      <!-- /ko -->
                     </tbody>
                 </table>
             </div>
