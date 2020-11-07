@@ -55,6 +55,15 @@ Routes.add(new RegionRoute(
     })
 ));
 Routes.add(new RegionRoute(
+    'Kanto Route 22', GameConstants.Region.kanto, 22,
+    new RoutePokemon({
+        land: ['Rattata', 'Spearow', 'Nidoran(F)', 'Nidoran(M)', 'Mankey'],
+        water: ['Magikarp', 'Poliwag', 'Poliwhirl', 'Goldeen'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 1)],
+    1.1
+));
+Routes.add(new RegionRoute(
     'Kanto Route 2', GameConstants.Region.kanto, 2,
     new RoutePokemon({
         land: ['Pidgey', 'Rattata', 'Nidoran(F)', 'Nidoran(M)'],
@@ -271,20 +280,15 @@ Routes.add(new RegionRoute(
     [new GymBadgeRequirement(BadgeEnums.Soul)]
 ));
 Routes.add(new RegionRoute(
-    'Kanto Route 22', GameConstants.Region.kanto, 22,
-    new RoutePokemon({
-        land: ['Rattata', 'Spearow', 'Nidoran(F)', 'Nidoran(M)', 'Mankey'],
-        water: ['Magikarp', 'Poliwag', 'Poliwhirl', 'Goldeen'],
-    }),
-    [new GymBadgeRequirement(BadgeEnums.Earth)]
-));
-Routes.add(new RegionRoute(
     'Kanto Route 23', GameConstants.Region.kanto, 23,
     new RoutePokemon({
         land: ['Fearow', 'Nidorina', 'Nidorino', 'Mankey', 'Primeape'],
         water: ['Magikarp', 'Poliwag', 'Goldeen', 'Poliwhirl'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 22)]
+    [
+        new RouteKillRequirement(10, GameConstants.Region.kanto, 22),
+        new GymBadgeRequirement(BadgeEnums.Earth),
+    ]
 ));
 
 /*
