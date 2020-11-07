@@ -124,7 +124,7 @@ class Battle {
     }
 
     protected static prepareCatch(enemyPokemon: BattlePokemon, pokeBall: GameConstants.Pokeball) {
-        this.pokeball = ko.observable(pokeBall);
+        this.pokeball(pokeBall);
         this.catching(true);
         this.catchRateActual(this.calculateActualCatchRate(enemyPokemon, pokeBall));
         App.game.pokeballs.usePokeball(pokeBall);
