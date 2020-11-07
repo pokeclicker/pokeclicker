@@ -1073,26 +1073,20 @@ Routes.add(new RegionRoute(
 UNOVA
 */
 Routes.add(new RegionRoute(
-    'Unova Route 1', GameConstants.Region.unova, 1,
+    'Unova Route 19', GameConstants.Region.unova, 19,
     new RoutePokemon({
-        land: ['Jigglypuff', 'Watchog', 'Herdier', 'Scrafty'],
+        land: ['Patrat', 'Purrloin'],
         water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 2)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
 ));
 Routes.add(new RegionRoute(
-    'Unova Route 2', GameConstants.Region.unova, 2,
+    'Unova Route 20', GameConstants.Region.unova, 20,
     new RoutePokemon({
-        land: ['Jigglypuff', 'Lickitung', 'Watchog', 'Herdier', 'Liepard'],
+        land: ['Sunkern', 'Pidove', 'Venipede', 'Patrat', 'Purrloin', 'Sewaddle'],
+        water: ['Azurill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 3)]
-));
-Routes.add(new RegionRoute(
-    'Unova Route 3', GameConstants.Region.unova, 3,
-    new RoutePokemon({
-        land: ['Yanma', 'Watchog', 'Herdier', 'Purrloin', 'Tranquill'],
-    }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 19)]
 ));
 Routes.add(new RegionRoute(
     'Unova Route 4', GameConstants.Region.unova, 4,
@@ -1103,6 +1097,20 @@ Routes.add(new RegionRoute(
     [new GymBadgeRequirement(BadgeEnums.Toxic)]
 ));
 Routes.add(new RegionRoute(
+    'Desert Resort', GameConstants.Region.unova, 25,
+    new RoutePokemon({
+        land: ['Sandshrew', 'Trapinch', 'Maractus', 'Darumaka', 'Dwebble', 'Scraggy', 'Sigilyph', 'Sandile'],
+        water: [],
+    }),
+    [
+        new MultiRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.unova, 4),
+            new GymBadgeRequirement(BadgeEnums.Insect),
+        ]),
+    ],
+    4
+));
+Routes.add(new RegionRoute(
     'Unova Route 5', GameConstants.Region.unova, 5,
     new RoutePokemon({
         land: ['Gothita', 'Minccino', 'Trubbish', 'Liepard', 'Solosis'],
@@ -1111,6 +1119,18 @@ Routes.add(new RegionRoute(
         new RouteKillRequirement(10, GameConstants.Region.unova, 4),
         new GymBadgeRequirement(BadgeEnums.Insect),
     ]
+));
+Routes.add(new RegionRoute(
+    'Unova Route 16', GameConstants.Region.unova, 16,
+    new RoutePokemon({
+        land: ['Gothita', 'Minccino', 'Trubbish', 'Liepard', 'Solosis'],
+    }),
+    [
+
+        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
+        new GymBadgeRequirement(BadgeEnums.Insect),
+    ],
+    5
 ));
 Routes.add(new RegionRoute(
     'Unova Route 6', GameConstants.Region.unova, 6,
@@ -1134,43 +1154,6 @@ Routes.add(new RegionRoute(
     ]
 ));
 Routes.add(new RegionRoute(
-    'Unova Route 8', GameConstants.Region.unova, 8,
-    new RoutePokemon({
-        land: ['Croagunk', 'Tympole', 'Palpitoad', 'Karrablast', 'Shelmet', 'Stunfisk'],
-    }),
-    [
-        new OneFromManyRequirement([
-            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
-            new MultiRequirement([
-                new RouteKillRequirement(10, GameConstants.Region.unova, 9),
-                new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
-            ]),
-        ]),
-    ]
-));
-Routes.add(new RegionRoute(
-    'Unova Route 9', GameConstants.Region.unova, 9,
-    new RoutePokemon({
-        land: ['Muk', 'Liepard', 'Garbodor', 'Minccino', 'Gothorita', 'Duosion', 'Pawniard'],
-    }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 11)]
-));
-Routes.add(new RegionRoute(
-    'Unova Route 11', GameConstants.Region.unova, 11,
-    new RoutePokemon({
-        land: ['Golduck', 'Marill', 'Gligar', 'Zangoose', 'Seviper', 'Karrablast', 'Amoonguss', 'Shelmet'],
-        water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
-    }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 12)]
-));
-Routes.add(new RegionRoute(
-    'Unova Route 12', GameConstants.Region.unova, 12,
-    new RoutePokemon({
-        land: ['Pinsir', 'Heracross', 'Roselia', 'Combee', 'Tranquill', 'Sewaddle'],
-    }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 13)]
-));
-Routes.add(new RegionRoute(
     'Unova Route 13', GameConstants.Region.unova, 13,
     new RoutePokemon({
         land: ['Tangela', 'Pelipper', 'Drifblim', 'Absol', 'Lunatone', 'Solrock'],
@@ -1179,67 +1162,47 @@ Routes.add(new RegionRoute(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))]
 ));
 Routes.add(new RegionRoute(
+    'Undella Bay', GameConstants.Region.unova, 24,
+    new RoutePokemon({
+        land: [],
+        water: ['Frillish', 'Mantyke', 'Spheal', 'Remoraid', 'Jellicent', 'Wailmer', 'Chinchou', 'Ducklett'],
+    }),
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
+    13
+));
+Routes.add(new RegionRoute(
     'Unova Route 14', GameConstants.Region.unova, 14,
     new RoutePokemon({
         land: ['Golduck', 'Swablu', 'Mienfoo', 'Drifblim', 'Absol', 'Altaria'],
         water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))],
+    13
 ));
 Routes.add(new RegionRoute(
-    'Unova Route 15', GameConstants.Region.unova, 15,
+    'Unova Route 12', GameConstants.Region.unova, 12,
     new RoutePokemon({
-        land: ['Sandslash', 'Gligar', 'Pupitar'],
+        land: ['Pinsir', 'Heracross', 'Roselia', 'Combee', 'Tranquill', 'Sewaddle'],
     }),
-    [
-        new OneFromManyRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.unova, 14),
-            new RouteKillRequirement(10, GameConstants.Region.unova, 16),
-        ]),
-        new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
-    ]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 13)],
+    13.1
 ));
 Routes.add(new RegionRoute(
-    'Unova Route 16', GameConstants.Region.unova, 16,
+    'Unova Route 11', GameConstants.Region.unova, 11,
     new RoutePokemon({
-        land: ['Gothita', 'Minccino', 'Trubbish', 'Liepard', 'Solosis'],
+        land: ['Golduck', 'Marill', 'Gligar', 'Zangoose', 'Seviper', 'Karrablast', 'Amoonguss', 'Shelmet'],
+        water: ['Buizel', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [
-
-        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect),
-    ]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 12)],
+    13.2
 ));
 Routes.add(new RegionRoute(
-    'Unova Route 17', GameConstants.Region.unova, 17,
+    'Unova Route 9', GameConstants.Region.unova, 9,
     new RoutePokemon({
-        land: ['Frillish', 'Alomomola'],
+        land: ['Muk', 'Liepard', 'Garbodor', 'Minccino', 'Gothorita', 'Duosion', 'Pawniard'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 1)]
-));
-Routes.add(new RegionRoute(
-    'Unova Route 18', GameConstants.Region.unova, 18,
-    new RoutePokemon({
-        land: ['Tropius', 'Carnivine', 'Watchog', 'Crustle', 'Scrafty'],
-        water: ['Frillish', 'Alomomola'],
-    }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 17)]
-));
-Routes.add(new RegionRoute(
-    'Unova Route 19', GameConstants.Region.unova, 19,
-    new RoutePokemon({
-        land: ['Patrat', 'Purrloin'],
-        water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
-    }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
-));
-Routes.add(new RegionRoute(
-    'Unova Route 20', GameConstants.Region.unova, 20,
-    new RoutePokemon({
-        land: ['Sunkern', 'Pidove', 'Venipede', 'Patrat', 'Purrloin', 'Sewaddle'],
-        water: ['Azurill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
-    }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 19)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 11)],
+    13.3
 ));
 Routes.add(new RegionRoute(
     'Unova Route 21', GameConstants.Region.unova, 21,
@@ -1265,26 +1228,76 @@ Routes.add(new RegionRoute(
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Giant Chasm'))]
 ));
 Routes.add(new RegionRoute(
-    'Undella Bay', GameConstants.Region.unova, 24,
+    'Unova Route 8', GameConstants.Region.unova, 8,
     new RoutePokemon({
-        land: [],
-        water: ['Frillish', 'Mantyke', 'Spheal', 'Remoraid', 'Jellicent', 'Wailmer', 'Chinchou', 'Ducklett'],
-    }),
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))], 14
-));
-
-Routes.add(new RegionRoute(
-    'Desert Resort', GameConstants.Region.unova, 25,
-    new RoutePokemon({
-        land: ['Sandshrew', 'Trapinch', 'Maractus', 'Darumaka', 'Dwebble', 'Scraggy', 'Sigilyph', 'Sandile'],
-        water: [],
+        land: ['Croagunk', 'Tympole', 'Palpitoad', 'Karrablast', 'Shelmet', 'Stunfisk'],
     }),
     [
-        new MultiRequirement([
-            new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-            new GymBadgeRequirement(BadgeEnums.Insect),
+        new OneFromManyRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Twist Mountain')),
+            new MultiRequirement([
+                new RouteKillRequirement(10, GameConstants.Region.unova, 9),
+                new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+            ]),
         ]),
-    ], 4
+    ],
+    23.1
+));
+Routes.add(new RegionRoute(
+    'Unova Route 15', GameConstants.Region.unova, 15,
+    new RoutePokemon({
+        land: ['Sandslash', 'Gligar', 'Pupitar'],
+    }),
+    [
+        new OneFromManyRequirement([
+            new RouteKillRequirement(10, GameConstants.Region.unova, 14),
+            new RouteKillRequirement(10, GameConstants.Region.unova, 16),
+        ]),
+        new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion),
+    ],
+    23.1
+));
+Routes.add(new RegionRoute(
+    'Unova Route 3', GameConstants.Region.unova, 3,
+    new RoutePokemon({
+        land: ['Yanma', 'Watchog', 'Herdier', 'Purrloin', 'Tranquill'],
+    }),
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Pinwheel Forest'))],
+    23.1
+));
+Routes.add(new RegionRoute(
+    'Unova Route 2', GameConstants.Region.unova, 2,
+    new RoutePokemon({
+        land: ['Jigglypuff', 'Lickitung', 'Watchog', 'Herdier', 'Liepard'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 3)],
+    23.2
+));
+Routes.add(new RegionRoute(
+    'Unova Route 1', GameConstants.Region.unova, 1,
+    new RoutePokemon({
+        land: ['Jigglypuff', 'Watchog', 'Herdier', 'Scrafty'],
+        water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 2)],
+    23.3
+));
+Routes.add(new RegionRoute(
+    'Unova Route 17', GameConstants.Region.unova, 17,
+    new RoutePokemon({
+        land: ['Frillish', 'Alomomola'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 1)],
+    23.4
+));
+Routes.add(new RegionRoute(
+    'Unova Route 18', GameConstants.Region.unova, 18,
+    new RoutePokemon({
+        land: ['Tropius', 'Carnivine', 'Watchog', 'Crustle', 'Scrafty'],
+        water: ['Frillish', 'Alomomola'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 17)],
+    23.5
 ));
 
 /*
