@@ -1078,7 +1078,8 @@ Routes.add(new RegionRoute(
         land: ['Patrat', 'Purrloin'],
         water: ['Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)]
+    [new GymBadgeRequirement(BadgeEnums.Elite_SinnohChampion)],
+    0.1
 ));
 Routes.add(new RegionRoute(
     'Unova Route 20', GameConstants.Region.unova, 20,
@@ -1086,7 +1087,8 @@ Routes.add(new RegionRoute(
         land: ['Sunkern', 'Pidove', 'Venipede', 'Patrat', 'Purrloin', 'Sewaddle'],
         water: ['Azurill', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 19)]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 19)],
+    0.2
 ));
 Routes.add(new RegionRoute(
     'Unova Route 4', GameConstants.Region.unova, 4,
