@@ -1,7 +1,7 @@
 class DungeonBossPokemon {
 
     constructor(
-        public name: string,
+        public name: PokemonNameType,
         public baseHealth: number,
         public level: number,
         public requirement?: MultiRequirement | OneFromManyRequirement | Requirement

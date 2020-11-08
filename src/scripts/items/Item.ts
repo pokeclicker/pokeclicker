@@ -17,6 +17,7 @@ abstract class Item {
     maxAmount: number;
     multiplier: number;
     multiplierDecrease: boolean;
+    description?: string;
 
     _displayName: string;
 
@@ -24,23 +25,23 @@ abstract class Item {
         name: string,
         basePrice: number,
         currency: GameConstants.Currency = GameConstants.Currency.money,
-        shopOptions: ShopOptions = {
-            saveName: '',
-            maxAmount: Number.MAX_SAFE_INTEGER,
-            multiplier: GameConstants.ITEM_PRICE_MULTIPLIER,
-            multiplierDecrease: true,
-        },
+        {
+            saveName = '',
+            maxAmount = Number.MAX_SAFE_INTEGER,
+            multiplier = GameConstants.ITEM_PRICE_MULTIPLIER,
+            multiplierDecrease = true,
+        } : ShopOptions = {},
         displayName?: string) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
         this.price = ko.observable(this.basePrice);
         // If no custom save name specified, default to item name
-        this.saveName = shopOptions?.saveName || name || `${name}|${GameConstants.Currency[currency]}`;
-        this.maxAmount = shopOptions?.maxAmount;
+        this.saveName = saveName || name || `${name}|${GameConstants.Currency[currency]}`;
+        this.maxAmount = maxAmount || Number.MAX_SAFE_INTEGER;
         // Multiplier needs to be above 1
-        this.multiplier = Math.max(1, shopOptions?.multiplier);
-        this.multiplierDecrease = shopOptions?.multiplierDecrease;
+        this.multiplier = Math.max(1, multiplier || GameConstants.ITEM_PRICE_MULTIPLIER);
+        this.multiplierDecrease = multiplierDecrease;
         if (!ItemList[this.saveName]) {
             ItemList[this.saveName] = this;
         }
@@ -55,7 +56,7 @@ abstract class Item {
             // multiplier should be capped at 100, so work out how many to buy at increasing price and how many at max
             //    (m_start) * (m^k) = 100
             // => k = (2 - log(m_start)) / log(m)
-            const mStart = player.itemMultipliers[this.saveName];
+            const mStart = Math.max(player.itemMultipliers[this.saveName] || 1, 1);
             const k = (mStart < 100)
                 ? Math.ceil((2 - Math.log10(mStart)) / Math.log10(this.multiplier))
                 : 0;

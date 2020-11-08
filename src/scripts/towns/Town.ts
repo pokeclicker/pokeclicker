@@ -171,7 +171,7 @@ TownList['Celadon City'] = new Town(
     'Celadon City',
     GameConstants.Region.kanto,
     {
-        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 8)],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)],
         shop: CeladonCityShop,
         npcs: [BigSpender],
     }
@@ -335,6 +335,13 @@ const BlackthornCityShop = new Shop([
 ]);
 
 // Johto NPCs
+
+const CherrygroveMrPokemon = new NPC('Mr Pokémon', [
+    'Welcome to Johto! This is where the first ever Pokémon egg was found long ago.',
+    'Astounding breakthroughs have been made since then. We can now store Pokémon eggs for longer and queue them up for breeding.',
+    'This new technology only allows up to four stored eggs, for now.',
+]);
+
 const AzaleaOldMan = new NPC('Wise Old Man', [
     'There is an old tale about the Guardian of Ilex Forest.',
     'It says that the mythical Pokémon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
@@ -360,6 +367,7 @@ TownList['Cherrygrove City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 29)],
         shop: CherrygroveCityShop,
+        npcs: [CherrygroveMrPokemon],
     }
 );
 TownList['Violet City'] = new Town(
@@ -569,10 +577,20 @@ const BattleFrontierShop = new Shop([
 ]);
 
 //Hoenn NPCs
+const LittlerootAide = new NPC('Professor Birch\'s Aide', [
+    'We have received word from Mr. Pokémon in Johto! He has made another breakthrough.',
+    'You can now store an additional four eggs in the queue! His research has really gained speed.',
+    'He wants you to know that he will have an additional eight slots ready by the time you reach Sinnoh.',
+]);
+
 const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'The creators of the lands and ocean slumber within the Cave of Origin.',
     'However, they will only awaken when in the presence of a truly great trainer.',
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
+]);
+const Weatherman = new NPC('Weatherman', [
+    'Castform is a very finnicky pokemon',
+    'The weather can majorly impact its appearance, so watch out.',
 ]);
 
 //Hoenn Towns
@@ -581,6 +599,7 @@ TownList['Littleroot Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         shop: LittleRootTownShop,
+        npcs: [LittlerootAide],
     }
 );
 TownList['Oldale Town'] = new Town(
@@ -662,6 +681,7 @@ TownList['Fortree City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
         shop: FortreeCityShop,
+        npcs: [Weatherman],
     }
 );
 TownList['LilyCove City'] = new Town(
@@ -1452,12 +1472,6 @@ TownList['Floccesy Ranch'] = new DungeonTown(
     GameConstants.Region.unova,
     [new RouteKillRequirement(10, GameConstants.Region.unova, 20)]
 );
-TownList['Virbank Complex'] = new DungeonTown(
-    'Virbank Complex',
-    GameConstants.Region.unova,
-    //Optional dungeon, no unique mons, safe to scrap
-    [new GymBadgeRequirement(BadgeEnums.Basic)]
-);
 TownList['Liberty Garden'] = new DungeonTown(
     'Liberty Garden',
     GameConstants.Region.unova,
@@ -1473,14 +1487,6 @@ TownList['Relic Passage'] = new DungeonTown(
     'Relic Passage',
     GameConstants.Region.unova,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Castelia Sewers'))]
-);
-TownList['Desert Resort'] = new DungeonTown(
-    'Desert Resort',
-    GameConstants.Region.unova,
-    [
-        new RouteKillRequirement(10, GameConstants.Region.unova, 4),
-        new GymBadgeRequirement(BadgeEnums.Insect), // Should really be a route
-    ]
 );
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
@@ -1511,18 +1517,6 @@ TownList['Reversal Mountain'] = new DungeonTown(
     'Reversal Mountain',
     GameConstants.Region.unova,
     [new GymBadgeRequirement(BadgeEnums.Jet)]
-);
-TownList['Strange House'] = new DungeonTown(
-    'Strange House',
-    GameConstants.Region.unova,
-    // Optional dungeon, no unique mons, safe to scrap
-    [new GymBadgeRequirement(BadgeEnums.Jet)]
-);
-TownList['Undella Bay'] = new DungeonTown(
-    'Undella Bay',
-    GameConstants.Region.unova,
-    // Should really be a route
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Reversal Mountain'))]
 );
 TownList['Seaside Cave'] = new DungeonTown(
     'Seaside Cave',
@@ -1592,12 +1586,6 @@ TownList['Pinwheel Forest'] = new DungeonTown(
     'Pinwheel Forest',
     GameConstants.Region.unova,
     [new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)]
-);
-TownList['Wellspring Cave'] = new DungeonTown(
-    'Wellspring Cave',
-    GameConstants.Region.unova,
-    // Optional dungeon, no unique mons, safe to scrap
-    [new RouteKillRequirement(10, GameConstants.Region.unova, 3)]
 );
 TownList['Dreamyard'] = new DungeonTown(
     'Dreamyard',

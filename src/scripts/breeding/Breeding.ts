@@ -17,10 +17,10 @@ class Breeding implements Feature {
     private _eggList: Array<KnockoutObservable<Egg>>;
     private _eggSlots: KnockoutObservable<number>;
 
-    private queueList: KnockoutObservableArray<string>;
+    private queueList: KnockoutObservableArray<PokemonNameType>;
     private queueSlots: KnockoutObservable<number>;
 
-    public hatchList: { [name: number]: string[][] } = {};
+    public hatchList: { [name: number]: PokemonNameType[][] } = {};
 
     constructor() {
         this._eggList = this.defaults.eggList;
@@ -89,7 +89,7 @@ class Breeding implements Feature {
             [],
             ['Bagon', 'Shelgon', 'Salamence'],
             ['Gible', 'Gabite', 'Garchomp'],
-            ['Deino', 'Zwellous', 'Hydreigon'],
+            ['Deino', 'Zweilous', 'Hydreigon'],
             [],
             [],
             [],
@@ -184,12 +184,14 @@ class Breeding implements Feature {
         amount *= App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette);
 
         amount = Math.round(amount);
-        this.eggList.forEach((egg, index) => {
-            egg().addSteps(amount);
-            if (this.queueList().length && egg().progress() >= 100) {
+        let index =  this.eggList.length;
+        while (index-- > 0) {
+            const egg = this.eggList[index]();
+            egg.addSteps(amount);
+            if (this.queueList().length && egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
             }
-        });
+        }
     }
 
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {
@@ -267,7 +269,7 @@ class Breeding implements Feature {
         });
     }
 
-    public createEgg(pokemonName: string, type = EggType.Pokemon): Egg {
+    public createEgg(pokemonName: PokemonNameType, type = EggType.Pokemon): Egg {
         const dataPokemon: DataPokemon = PokemonHelper.getPokemonByName(pokemonName);
         return new Egg(type, this.getSteps(dataPokemon.eggCycles), pokemonName);
     }
@@ -293,7 +295,7 @@ class Breeding implements Feature {
     }
 
     public createFossilEgg(fossil: string): Egg {
-        const pokemonName = GameConstants.FossilToPokemon[fossil];
+        const pokemonName: PokemonNameType = GameConstants.FossilToPokemon[fossil];
         const pokemonNativeRegion = PokemonHelper.calcNativeRegion(pokemonName);
         if (pokemonNativeRegion > player.highestRegion()) {
             Notifier.notify({
@@ -314,7 +316,7 @@ class Breeding implements Feature {
         }
     }
 
-    public calculateBaseForm(pokemonName: string): string {
+    public calculateBaseForm(pokemonName: PokemonNameType): PokemonNameType {
         const devolution = pokemonDevolutionMap[pokemonName];
         // Base form of Pokemon depends on which regions players unlocked
         if (!devolution || PokemonHelper.calcNativeRegion(devolution) > player.highestRegion()) {
@@ -360,8 +362,12 @@ class Breeding implements Feature {
         this.eggSlots += 1;
     }
 
-    public gainQueueSlot(): void {
-        GameHelper.incrementObservable(this.queueSlots);
+    public gainQueueSlot(amt = 1): void {
+        GameHelper.incrementObservable(this.queueSlots, amt);
+    }
+
+    public queueSlotsGainedFromRegion(region: GameConstants.Region): number {
+        return Math.max(4, 4 * Math.pow(2, region - 1));
     }
 
     get eggList(): Array<KnockoutObservable<Egg>> {
@@ -388,7 +394,7 @@ class Breeding implements Feature {
 
         const hatchable = hatchList.slice(0, player.highestRegion() + 1).flat();
 
-        return hatchable.reduce((status: CaughtStatus, pname: string) => {
+        return hatchable.reduce((status: CaughtStatus, pname: PokemonNameType) => {
             return Math.min(status, PartyController.getCaughtStatusByName(pname));
         }, CaughtStatus.CaughtShiny);
     }

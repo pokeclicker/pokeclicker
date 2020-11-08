@@ -30,9 +30,10 @@ export const TotalPokemonsPerRegion = [
 export const ITEM_USE_TIME = 30;
 
 export const SECOND = 1000;
-export const MINUTE = 1000 * 60;
-export const HOUR = 1000 * 60 * 60;
-export const DAY = 1000 * 60 * 60 * 24;
+export const MINUTE = SECOND * 60;
+export const HOUR = MINUTE * 60;
+export const DAY = HOUR * 24;
+export const WEEK = DAY * 7;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
@@ -247,6 +248,39 @@ export function formatTimeShortWords(input: number): string {
     return `${time % MINUTE ? '< ' : ''}${minutes} min${minutes === 1 ? '' : 's'}`;
 }
 
+export function formatSecondsToTime(input: number): string {
+    // Temporarily recast to number until everything is in modules
+    if (Number.isNaN(Number(input)) || input === 0) { return '-'; }
+    let time = Math.abs(input * 1000);
+    const times = [];
+
+    if (time >= WEEK) {
+        const weeks = Math.floor(time / WEEK);
+        times.push(`${weeks} week${weeks === 1 ? '' : 's'}`);
+        time %= WEEK;
+    }
+    if (time >= DAY) {
+        const days = Math.ceil(time / DAY);
+        times.push(`${days} day${days === 1 ? '' : 's'}`);
+        time %= DAY;
+    }
+    if (time >= HOUR) {
+        const hours = Math.ceil(time / HOUR);
+        times.push(`${hours} hour${hours === 1 ? '' : 's'}`);
+        time %= HOUR;
+    }
+    if (time >= MINUTE) {
+        const minutes = Math.ceil(time / MINUTE);
+        times.push(`${minutes} min${minutes === 1 ? '' : 's'}`);
+        time %= MINUTE;
+    }
+    if (time >= SECOND) {
+        const seconds = Math.ceil(time / SECOND);
+        times.push(`${seconds} sec${seconds === 1 ? '' : 's'}`);
+    }
+    return times.join('</br>');
+}
+
 export function formatNumber(input: number): string {
     let num = Number(input); // Temporary cast until everything is in modules
     if (Number.isNaN(+num)) { return '0'; }
@@ -335,7 +369,7 @@ export const WaterAreas = {
     1: new Set([40, 41, 'Slowpoke Well']),
     2: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Shoal Cave', 'Seafloor Cavern']),
     3: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
-    4: new Set(['Undella Bay', 'Humilau City']),
+    4: new Set(['Humilau City']),
 };
 
 export const IceAreas = {
@@ -358,7 +392,7 @@ export const CaveAreas = {
     1: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
     2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
     3: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
-    4: new Set(['Mistralton Cave', 'Seaside Cave', 'Wellspring Cave', 'Twist Mountain', 'Reversal Mountain', 'Cave of Being', 'Relic Passage', 'Relica Castle', 'Victory Road Unova']),
+    4: new Set(['Mistralton Cave', 'Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Cave of Being', 'Relic Passage', 'Relica Castle', 'Victory Road Unova']),
 };
 
 export const GemCaveAreas = {
@@ -374,7 +408,7 @@ export const PowerPlantAreas = {
     1: new Set(['Tin Tower']),
     2: new Set(['Mauville City']),
     3: new Set(['Sunyshore City']),
-    4: new Set(['Virbank Complex', 'Castelia Sewers', 'Nimbasa City']),
+    4: new Set(['Castelia Sewers', 'Nimbasa City']),
 };
 
 export const MansionAreas = {
@@ -454,6 +488,7 @@ export enum PokemonItemType {
     'Burmy (plant)',
     'Spiritomb',
     'Cherubi',
+    'Zorua',
     'Meloetta (pirouette)',
 }
 
@@ -740,19 +775,15 @@ export const SinnohDungeons = [
 export const UnovaDungeons = [
     'Pledge Grove',
     'Floccesy Ranch',
-    'Virbank Complex', // Optional dungeon, contains no unique Pokémon, safe to scrap
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
-    'Desert Resort', // Should really be a route
     'Relic Castle',
     'Lostlorn Forest',
     'Chargestone Cave',
     'Mistralton Cave',
     'Celestial Tower',
     'Reversal Mountain',
-    'Strange House', // Optional dungeon, contains no unique Pokémon, safe to scrap
-    'Undella Bay', // Should really be a route
     'Seaside Cave',
     'Giant Chasm',
     'Abundant Shrine',
@@ -762,7 +793,6 @@ export const UnovaDungeons = [
     'Dragonspiral Tower',
     'Moor of Icirrus',
     'Pinwheel Forest',
-    'Wellspring Cave', // Optional dungeon, contains no unique Pokémon, safe to scrap
     'Dreamyard',
     'P2 Laboratory',
 ];

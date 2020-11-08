@@ -9,7 +9,7 @@ class Egg implements Saveable {
     totalSteps: number;
     steps: KnockoutObservable<number>;
     shinySteps: number;
-    pokemon: string;
+    pokemon: PokemonNameType;
     type: EggType;
     pokemonType1: PokemonType;
     pokemonType2: PokemonType;
@@ -18,7 +18,7 @@ class Egg implements Saveable {
     progressText: KnockoutComputed<string>;
     stepsRemaining: KnockoutComputed<number>;
 
-    constructor(type = EggType.None, totalSteps = 0, pokemon = '', steps = 0, shinySteps = 0, notified = false) {
+    constructor(type = EggType.None, totalSteps = 0, pokemon: PokemonNameType = 'MissingNo.', steps = 0, shinySteps = 0, notified = false) {
         this.totalSteps = totalSteps;
         this.steps = ko.observable(steps);
         this.shinySteps = shinySteps;
@@ -101,16 +101,22 @@ class Egg implements Saveable {
         const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
         // If the party pokemon exist, increase it's damage output
         if (partyPokemon) {
-            if (partyPokemon.evolutions !== undefined) {
-                partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
-            }
-            partyPokemon.exp = 0;
-            partyPokemon.level = 1;
-            partyPokemon.breeding = false;
-            partyPokemon.level = partyPokemon.calculateLevelFromExp();
-            partyPokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
+            // Increase attack
+            partyPokemon.attackBonusPercent += GameConstants.BREEDING_ATTACK_BONUS;
+            partyPokemon.attackBonusAmount += partyPokemon.proteinsUsed();
             partyPokemon.attack = partyPokemon.calculateAttack();
-            partyPokemon.checkForLevelEvolution();
+
+            // If breeding (not store egg), reset level, reset evolution check
+            if (partyPokemon.breeding) {
+                if (partyPokemon.evolutions !== undefined) {
+                    partyPokemon.evolutions.forEach(evo => evo instanceof LevelEvolution ? evo.triggered = false : undefined);
+                }
+                partyPokemon.exp = 0;
+                partyPokemon.level = 1;
+                partyPokemon.breeding = false;
+                partyPokemon.level = partyPokemon.calculateLevelFromExp();
+                partyPokemon.checkForLevelEvolution();
+            }
         }
 
         const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
