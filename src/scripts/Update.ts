@@ -240,8 +240,9 @@ class Update implements Saveable {
             for (const pokemon of saveData.party.caughtPokemon) {
                 if (pokemon.breeding) {
                     pokemon.location = PartyLocation.Hatchery;
+                } else {
+                    pokemon.location = PartyLocation.Battle;
                 }
-                pokemon.location = PartyLocation.Battle;
                 delete pokemon.breeding;
             }
         },
