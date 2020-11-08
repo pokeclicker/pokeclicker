@@ -229,6 +229,7 @@ class Quests implements Saveable {
             xp: this.xp(),
             refreshes: this.refreshes(),
             lastRefresh: this.lastRefresh,
+            freeRefresh: this.freeRefresh(),
             questList: this.questList(),
             questLines: this.questLines(),
         };
