@@ -215,12 +215,53 @@ class Update implements Saveable {
                     saveData.shards.shardWallet[type] += cost;
                 }
             });
-          
+
             // Give breeding slots based on highest region
             saveData.breeding.queueSlots = 0;
             for (let region = 0; region < playerData.highestRegion; region++) {
                 saveData.breeding.queueSlots += Math.max(4, 4 * Math.pow(2, region - 1));
             }
+        },
+
+        '0.5.9': ({ saveData }) => {
+            // Award Deoxys forms for completed Battle Frontier milestones
+            const maxBattleFrontierStage = saveData.statistics.battleFrontierHighestStageCompleted;
+            if (maxBattleFrontierStage >= 151) {
+                Update.addPokemonToSaveData(saveData, 386.1); // Deoxys (attack)
+            }
+            if (maxBattleFrontierStage >= 251) {
+                Update.addPokemonToSaveData(saveData, 386.2); // Deoxys (defense)
+            }
+            if (maxBattleFrontierStage >= 386) {
+                Update.addPokemonToSaveData(saveData, 386.3); // Deoxys (speed)
+            }
+          
+            // Update the attack bonus percentages
+            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+                p.attackBonusPercent = p.attackBonus;
+                delete p.attackBonus;
+                return p;
+            });
+
+            // Update Farm data
+
+            // Refund Farm Points for current berries
+            for (let i = 0; i < 8; i++) {
+                const amount = 100 / i;
+                const refundTokens = Math.floor(saveData.farming.berryList[i] / amount);
+                saveData.wallet.currencies[4] += refundTokens;
+                saveData.farming.berryList[i] = 0;
+            }
+
+            // Unlock & Give 5 Cheri berries to start off with
+            saveData.farming.unlockedBerries = [true];
+            saveData.farming.berryList[0] = 5;
+
+            // Refund Farm Points for plots previously unlocked
+            saveData.wallet.currencies[4] += saveData.farming.plotList.map((p, i) => p.isUnlocked ? 10 * Math.floor(Math.pow(i, 2)) : 0).reduce((s, a) => s + a, 0);
+
+            // Reset all plots
+            delete saveData.farming.plotList;
         },
     };
 
@@ -397,6 +438,25 @@ class Update implements Saveable {
         const end = arr.splice(to);
         arr = [...arr, ...temp, ...end];
         return arr;
+    }
+
+    static addPokemonToSaveData = (saveData, pokemonId) => {
+        if (saveData.party.caughtPokemon.filter(p => p.id === pokemonId).length > 0) {
+            return;
+        }
+
+        const pokemon: PartyPokemon = PokemonFactory.generatePartyPokemon(pokemonId, false);
+        saveData.statistics.pokemonCaptured[pokemonId] = 1;
+        saveData.statistics.totalPokemonCaptured++;
+        saveData.logbook.logs.unshift({
+            date: Date.now(),
+            description: `You have captured ${GameHelper.anOrA(pokemon.name)} ${pokemon.name}!`,
+            type: {
+                display: 'success',
+                label: 'CAUGHT',
+            },
+        });
+        saveData.party.caughtPokemon.push(pokemon);
     }
 
     getPlayerData() {

@@ -28,6 +28,8 @@ namespace GameConstants {
     declare const ACHIEVEMENT_TICK: number;
     declare const MIN_LOAD_TIME: number;
     declare const MAX_LOAD_TIME: number;
+    declare const MUTATION_TICK: number;
+    declare const WANDER_TICK: number;
     declare const MAX_AVAILABLE_REGION: number;
     declare const TotalPokemonsPerRegion: number[];
     declare const ITEM_USE_TIME: number;
@@ -43,11 +45,21 @@ namespace GameConstants {
     declare const SHINY_CHANCE_STONE: number;
     declare const SHINY_CHANCE_SAFARI: number;
     declare const SHINY_CHANCE_BREEDING: number;
+    declare const SHINY_CHANCE_FARM: number;
     declare const ITEM_PRICE_MULTIPLIER: number;
     declare const ITEM_PRICE_DEDUCT: number;
     declare const PLATE_VALUE: number;
     declare const BREEDING_ATTACK_BONUS: number;
     declare const BerryDistribution: number[];
+    declare const MULCH_USE_TIME: number;
+    declare const BOOST_MULCH_MULTIPLIER: number;
+    declare const RICH_MULCH_MULTIPLIER: number;
+    declare const SURPRISE_MULCH_MULTIPLIER: number;
+    declare const AMAZE_MULCH_GROWTH_MULTIPLIER: number;
+    declare const AMAZE_MULCH_PRODUCE_MULTIPLIER: number;
+    declare const AMAZE_MULCH_MUTATE_MULTIPLIER: number;
+    declare const WANDER_RATE: number;
+    declare const BerryColor: string[];
     declare const DUNGEON_SIZE: number;
     declare const DUNGEON_CHEST_SHOW: number;
     declare const DUNGEON_MAP_SHOW: number;
@@ -262,7 +274,7 @@ namespace GameConstants {
         'Spiritomb',
         'Cherubi',
         'Zorua',
-        'Meloetta (pirouette)'
+        'Meloetta (pirouette)',
     }
     declare enum PokeBlockColor {
         Black,

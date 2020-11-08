@@ -60,6 +60,7 @@ abstract class Quest {
             return false;
         }
         this.initial(null);
+        this.isCompleted?.dispose?.();
         return true;
     }
 
@@ -77,27 +78,27 @@ abstract class Quest {
     }
 
     protected createProgressObservables() {
-        this.progress = ko.pureComputed(function() {
+        this.progress = ko.pureComputed(() => {
             if (this.initial() !== null) {
                 return Math.min(1, ( this.focus() - this.initial()) / this.amount);
             } else {
                 return 0;
             }
-        }, this);
+        });
 
-        this.progressText = ko.pureComputed(function() {
+        this.progressText = ko.pureComputed(() => {
             if (this.initial() !== null) {
                 return `${Math.min((this.focus() - this.initial()), this.amount)} / ${this.amount}`;
             } else {
                 return `0 / ${this.amount}`;
             }
-        }, this);
+        });
 
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
         // This will only be a problem if we make it subscribe to a function which lives longer than itself
         // Since it is only subscribing to observables on `this`, and the function is being kept on `this`, we shouldn't have a problem
-        this.isCompleted = ko.computed(function() {
-            const completed = this.progress() == 1;
+        this.isCompleted = ko.computed(() => {
+            const completed = this.progress() == 1 || this.claimed();
             if (!this.autoComplete && completed && !this.notified) {
                 Notifier.notify({
                     message: `You can complete your quest for ${this.pointsReward} quest points!`,
@@ -109,7 +110,7 @@ abstract class Quest {
                 this.notified = true;
             }
             return completed;
-        }, this);
+        });
     }
 
     complete() {
