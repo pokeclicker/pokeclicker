@@ -82,23 +82,13 @@ class GameController {
 
                 $(element).tooltip(options);
 
+                $(element).mouseover(function() {
+                    $(element).tooltip('show');
+                });
 
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     $(element).tooltip('dispose');
                 });
-
-                if (bindingContext.$data instanceof Plot) {
-                    $(element).hover(function () {
-                        $(this).data('to', setInterval(function () {
-                            $(element).tooltip('hide')
-                                .attr('data-original-title', FarmController.getTooltipLabel(bindingContext.$index()))
-                                .tooltip('show');
-                        }, 100));
-                    }, function () {
-                        clearInterval($(this).data('to'));
-                    });
-                }
-
             },
             'update': function (element, valueAccessor) {
                 const local = ko.utils.unwrapObservable(valueAccessor());
@@ -115,6 +105,11 @@ class GameController {
                 const tooltipInner = tooltipData.tip && tooltipData.tip.querySelector('.tooltip-inner');
                 if (tooltipInner) {
                     tooltipInner.innerHTML = tooltipData.config.title || '';
+                }
+                if (tooltipData && tooltipData.config) {
+                    if (tooltipData.config.title === '') {
+                        $(element).tooltip('hide');
+                    }
                 }
             },
             options: {

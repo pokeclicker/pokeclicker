@@ -59,7 +59,7 @@ const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.breedingEfficiency]: {
         'text': 'Breeding Efficiency',
-        'getValue': p => (p.baseAttack / pokemonMap[p.name].eggCycles),
+        'getValue': p => ((p.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) / pokemonMap[p.name].eggCycles),
         'invert': true,
     },
 
