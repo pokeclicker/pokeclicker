@@ -64,7 +64,15 @@ class Research implements Saveable {
     }
 
     availableWorkerList() {
-        // TODO: HLXII - Filter available pokemon by workerFilter
+        return App.game.party.caughtPokemon.filter(pokemon =>  {
+            if (pokemon.location !== PartyLocation.Battle) {
+                return false;
+            }
+            if (this.workerFilter) {
+                return this.workerFilter.filter(pokemon);
+            }
+            return true;
+        });
     }
 
     toJSON(): Record<string, any> {
