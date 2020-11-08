@@ -21,7 +21,8 @@ class Farming implements Feature {
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
         mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
         plotList: new Array(Farming.PLOT_WIDTH * Farming.PLOT_HEIGHT).fill(null).map(function (value, index) {
-            return new Plot(index === 12, BerryType.None, 0, MulchType.None, 0);    // NOTE: This value will have to change if the dimensions of the plots change
+            const middle = Math.floor(Farming.PLOT_HEIGHT / 2) * Farming.PLOT_WIDTH + Math.floor(Farming.PLOT_WIDTH / 2);
+            return new Plot(index === middle, BerryType.None, 0, MulchType.None, 0);
         }),
         shovelAmt: 0,
     };
