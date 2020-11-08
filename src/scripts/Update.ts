@@ -215,7 +215,7 @@ class Update implements Saveable {
                     saveData.shards.shardWallet[type] += cost;
                 }
             });
-          
+
             // Give breeding slots based on highest region
             saveData.breeding.queueSlots = 0;
             for (let region = 0; region < playerData.highestRegion; region++) {
@@ -234,6 +234,15 @@ class Update implements Saveable {
             }
             if (maxBattleFrontierStage >= 386) {
                 Update.addPokemonToSaveData(saveData, 386.3); // Deoxys (speed)
+            }
+
+            // TODO: HLXII - Move this to the version it'll be released in
+            for (const pokemon of saveData.party.caughtPokemon) {
+                if (pokemon.breeding) {
+                    pokemon.location = PartyLocation.Hatchery;
+                }
+                pokemon.location = PartyLocation.Battle;
+                delete pokemon.breeding;
             }
         },
     };

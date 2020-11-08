@@ -5,12 +5,12 @@ class PartyPokemon implements Saveable {
         evolved: false,
         attackBonus: 0,
         exp: 0,
-        breeding: false,
+        location: PartyLocation.Battle,
         shiny: false,
         category: 0,
     };
 
-    _breeding: KnockoutObservable<boolean>;
+    _location: KnockoutObservable<PartyLocation>;
     _shiny: KnockoutObservable<boolean>;
     _level: KnockoutObservable<number>;
     _attack: KnockoutObservable<number>;
@@ -23,11 +23,11 @@ class PartyPokemon implements Saveable {
         public baseAttack: number,
         public attackBonus: number,
         public exp: number,
-        breeding = false,
+        location = PartyLocation.Battle,
         shiny = false,
         category = 0
     ) {
-        this._breeding = ko.observable(breeding);
+        this._location = ko.observable(location);
         this._shiny = ko.observable(shiny);
         this._level = ko.observable(1);
         this._attack = ko.observable(this.calculateAttack());
@@ -63,7 +63,7 @@ class PartyPokemon implements Saveable {
     }
 
     public checkForLevelEvolution() {
-        if (this.breeding || this.evolutions == null || this.evolutions.length == 0) {
+        if (this.location !== PartyLocation.Battle || this.evolutions == null || this.evolutions.length == 0) {
             return;
         }
 
@@ -98,7 +98,7 @@ class PartyPokemon implements Saveable {
 
         this.attackBonus = json['attackBonus'] ?? this.defaults.attackBonus;
         this.exp = json['exp'] ?? this.defaults.exp;
-        this.breeding = json['breeding'] ?? this.defaults.breeding;
+        this.location = json['location'] ?? this.defaults.location;
         this.shiny = json['shiny'] ?? this.defaults.shiny;
         this.category = json['category'] ?? this.defaults.category;
         this.level = this.calculateLevelFromExp();
@@ -127,7 +127,7 @@ class PartyPokemon implements Saveable {
             id: this.id,
             attackBonus: this.attackBonus,
             exp: this.exp,
-            breeding: this.breeding,
+            location: this.location,
             shiny: this.shiny,
             levelEvolutionTriggered: levelEvolutionTriggered,
             category: this.category,
@@ -151,12 +151,12 @@ class PartyPokemon implements Saveable {
         this._attack(attack);
     }
 
-    get breeding(): boolean {
-        return this._breeding();
+    get location(): PartyLocation {
+        return this._location();
     }
 
-    set breeding(bool: boolean) {
-        this._breeding(bool);
+    set location(value: PartyLocation) {
+        this._location(value);
     }
 
     get shiny(): boolean {
