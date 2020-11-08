@@ -151,7 +151,8 @@ class Quests implements Saveable {
     public getRefreshCost(): Amount {
         // If we have a free refersh, just assume all the quest are completed
         const notComplete = this.freeRefresh() ? 0 : this.incompleteQuests().length;
-        return new Amount(Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)), GameConstants.Currency.money);
+        const cost = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)) / 1000) * 1000;
+        return new Amount(Math.max(0, Math.min(1e6, cost)), GameConstants.Currency.money);
     }
 
     public canStartNewQuest(): boolean {
