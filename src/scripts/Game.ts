@@ -34,7 +34,8 @@ class Game {
         public quests: Quests,
         public specialEvents: SpecialEvents,
         public discord: Discord,
-        public achievementTracker: AchievementTracker
+        public achievementTracker: AchievementTracker,
+        public lab: Lab
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
@@ -65,6 +66,7 @@ class Game {
         this.underground.initialize();
         this.farming.initialize();
         this.specialEvents.initialize();
+        this.lab.initialize();
         this.load();
 
         // TODO refactor to proper initialization methods
@@ -165,6 +167,9 @@ class Game {
 
         // Farm
         this.farming.update(GameConstants.TICK_TIME / GameConstants.SECOND);
+
+        // Lab
+        this.lab.update(GameConstants.TICK_TIME / GameConstants.SECOND);
 
         // Effect Engine (battle items)
         EffectEngineRunner.counter += GameConstants.TICK_TIME;

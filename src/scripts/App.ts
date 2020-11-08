@@ -37,7 +37,8 @@ class App {
                 new Quests(),
                 new SpecialEvents(),
                 new Discord(),
-                new AchievementTracker()
+                new AchievementTracker(),
+                new Lab()
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#8e44ad;font-weight:900;');
