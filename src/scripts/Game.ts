@@ -40,6 +40,7 @@ class Game {
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
         AchievementHandler.initialize();
+        ResearchHandler.initialize();
     }
 
     load() {

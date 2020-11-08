@@ -13,5 +13,13 @@ class LabController {
             */
         }
     }
+
+    public static openResearchListModal() {
+        if (ResearchHandler.researchList.length === 0) {
+            ResearchHandler.researchList = App.game.lab.researchList.map(research => research.id);
+            ResearchHandler.filterResearchList();
+        }
+        $('#researchListModal').modal('show');
+    }
 }
 

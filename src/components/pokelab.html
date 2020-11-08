@@ -15,7 +15,49 @@ style="cursor:default" tabindex="-1">
                     TODO: HLXII - Setup Lab tab
                 </div>
                 <div id="research" class="tab-pane fade">
-                    TODO: HLXII - Setup Research tab
+                    <div class="row no-gutters justify-content-around">
+                        <button class="col-12 btn btn-primary m-1" onclick="LabController.openResearchListModal()">
+                            Research List
+                        </button>
+                    </div>
+                    <!-- ko foreach: App.game.lab.currentResearch() -->
+                    <div class="row no-gutters">
+                        <div class="col-8 text-left p-2">
+                            <span data-bind="text: $data.research.name">Name</span>
+                            <br>
+                            <small><span data-bind="text: $data.research.description">Description</span></small>
+                            <br>
+                            <span>TODO: HLXII - Add current researching rate</span>
+                        </div>
+                        <div class="col-4 p-1">
+                            <button class="btn btn-block btn-primary">
+                                Add Workers
+                            </button>
+                            <button class="btn btn-block btn-danger" data-bind="click: function() { App.game.lab.cancelResearch($data.research); }">
+                                Cancel Research
+                            </button>
+                        </div>
+                        <!-- ko if: $data.workers.length -->
+                        <div id="researchQueue" class="card-footer p-1" data-bind="foreach: $data.workers">
+                            <div class="queuePokemon clickable bg-primary" data-bind="click: function(){ $parent.removeWorker($index()) }">
+                            <img src="" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data], App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true)) }">
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                        <div class="col-12 progress">
+                            <!-- TODO: HLXII - Setup Progress updating -->
+                            <div class="progress-bar" role="progressbar" data-bind="attr: { style: 'width:50%' }"
+                            aria-valuemin="0" aria-valuemax="100">
+                                <span data-bind="text: $data.progress">Progress</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <div data-bind="visible:  App.game.lab.currentResearch().length === 0">
+                        <p class="bg-success my-0">
+                            Open the Research List to start researching.
+                        </p>
+                    </div>
                 </div>
                 <div id="labHelp" class="tab-pane fade">
                     TODO: HLXII - Add help text
