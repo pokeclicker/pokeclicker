@@ -17,6 +17,7 @@ abstract class Item {
     maxAmount: number;
     multiplier: number;
     multiplierDecrease: boolean;
+    description?: string;
 
     _displayName: string;
 
