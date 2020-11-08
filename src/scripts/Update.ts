@@ -235,6 +235,13 @@ class Update implements Saveable {
             if (maxBattleFrontierStage >= 386) {
                 Update.addPokemonToSaveData(saveData, 386.3); // Deoxys (speed)
             }
+
+            // Update the attack bonus percentages
+            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+                p.attackBonusPercent = p.attackBonus;
+                delete p.attackBonus;
+                return p;
+            });
         },
     };
 

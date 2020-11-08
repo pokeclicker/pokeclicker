@@ -19,7 +19,7 @@
                            css: { active: ShopHandler.selected() == $index() },
                            attr: { disabled: !$data.isAvailable() },
                            tooltip: {
-                              title: $data.description ? $data.displayName + '<br/>' + $data.description : '',
+                              title: $data.description ? `<u>${$data.displayName}:</u><br/>${$data.description}` : '',
                               trigger: 'hover',
                               placement:'bottom',
                               html: true

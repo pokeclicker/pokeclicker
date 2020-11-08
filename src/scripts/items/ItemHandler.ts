@@ -8,12 +8,13 @@ class ItemHandler {
     public static multipliers = ['×1', '×10', '×100', '×1000', 'All'];
     public static multIndex = ko.observable(0);
 
-    public static useItem(name: string) {
+    public static useItem(name: string): boolean {
         if (!player.itemList[name]()) {
-            return Notifier.notify({
+            Notifier.notify({
                 message: `You don't have any ${ItemList[name].displayName}s left...`,
                 type: NotificationConstants.NotificationOption.danger,
             });
+            return false;
         }
         // Either the digits specified, or All (Infinity)
         const amountSelected = Number(this.multipliers[this.multIndex()].replace(/\D/g, '')) || Infinity;
@@ -21,7 +22,15 @@ class ItemHandler {
         this.amountToUse = Math.min(player.itemList[name](), amountSelected);
 
         player.itemList[name](player.itemList[name]() - this.amountToUse);
-        return ItemList[name].use();
+
+        // run the function
+        const result = ItemList[name].use();
+        // If the function returned nothing assume it went fine
+        return result == undefined ? true : result;
+    }
+
+    public static hasItem(name: string): boolean {
+        return player.itemList[name] ? !!player.itemList[name]() : false;
     }
 
     public static resetAmount() {
