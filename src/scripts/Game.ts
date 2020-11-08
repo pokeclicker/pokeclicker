@@ -144,7 +144,7 @@ class Game {
                 DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
                 Notifier.notify({
                     title: 'It\'s a new day!',
-                    message: 'Your Underground deals have been updated.<br/>You can refresh your Quest list for free.',
+                    message: 'Your Underground deals have been updated.<br/><i>You have a free quest refresh.</i>',
                     type: NotificationConstants.NotificationOption.info,
                     timeout: 3e4,
                 });

@@ -97,7 +97,7 @@ class Quests implements Saveable {
         // Refresh the list each time a player levels up
         if (this.level() > currentLevel) {
             Notifier.notify({
-                message: 'Your quest level has increased!',
+                message: 'Your quest level has increased!<br/><i>You have a free quest refresh.</i>',
                 type: NotificationConstants.NotificationOption.success,
                 timeout: 1e4,
                 sound: NotificationConstants.NotificationSound.quest_level_increased,
