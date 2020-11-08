@@ -25,6 +25,7 @@ abstract class Item {
     multiplierDecrease: boolean;
     multiplierDecreaser: MultiplierDecreaser;
 
+    description?: string;
     _displayName: string;
 
     constructor(

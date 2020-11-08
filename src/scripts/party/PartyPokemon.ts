@@ -3,7 +3,9 @@ class PartyPokemon implements Saveable {
 
     defaults = {
         evolved: false,
-        attackBonus: 0,
+        attackBonusPercent: 0,
+        attackBonusAmount: 0,
+        proteinsUsed: 0,
         exp: 0,
         breeding: false,
         shiny: false,
@@ -15,18 +17,22 @@ class PartyPokemon implements Saveable {
     _level: KnockoutObservable<number>;
     _attack: KnockoutObservable<number>;
     _category: KnockoutObservable<number>;
+    proteinsUsed: KnockoutObservable<number>;
 
     constructor(
         public id: number,
         public name: PokemonNameType,
         public evolutions: Evolution[],
         public baseAttack: number,
-        public attackBonus: number,
-        public exp: number,
+        public attackBonusPercent: number = 0,
+        public attackBonusAmount: number = 0,
+        proteinsUsed,
+        public exp: number = 0,
         breeding = false,
         shiny = false,
         category = 0
     ) {
+        this.proteinsUsed = ko.observable(proteinsUsed);
         this._breeding = ko.observable(breeding);
         this._shiny = ko.observable(shiny);
         this._level = ko.observable(1);
@@ -35,11 +41,10 @@ class PartyPokemon implements Saveable {
     }
 
     public calculateAttack(): number {
-        const attackBonusMultiplier = 1 + (this.attackBonus / 100);
+        const attackBonusMultiplier = 1 + (this.attackBonusPercent / 100);
         const levelMultiplier = this.level / 100;
-        return Math.max(1, Math.floor(this.baseAttack * attackBonusMultiplier * levelMultiplier));
+        return Math.max(1, Math.floor((this.baseAttack * attackBonusMultiplier + this.attackBonusAmount) * levelMultiplier));
     }
-
 
     calculateLevelFromExp() {
         const levelType = PokemonHelper.getPokemonByName(this.name).levelType;
@@ -87,6 +92,24 @@ class PartyPokemon implements Saveable {
         return false;
     }
 
+    public useProtein() {
+        if (!this.canUseProtein()) {
+            Notifier.notify({
+                message: 'This Pokemon cannot increase it\'s power any higher!',
+                type: NotificationConstants.NotificationOption.warning,
+            });
+            return;
+        }
+        if (ItemHandler.useItem('Protein')) {
+            GameHelper.incrementObservable(this.proteinsUsed);
+        }
+    }
+
+    canUseProtein = ko.pureComputed(() => {
+        // Allow 10 for every region visited (including Kanto)
+        return this.proteinsUsed() < (player.highestRegion() + 1) * 10;
+    });
+
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
             return;
@@ -96,7 +119,9 @@ class PartyPokemon implements Saveable {
             return;
         }
 
-        this.attackBonus = json['attackBonus'] ?? this.defaults.attackBonus;
+        this.attackBonusPercent = json['attackBonusPercent'] ?? this.defaults.attackBonusPercent;
+        this.attackBonusAmount = json['attackBonusAmount'] ?? this.defaults.attackBonusAmount;
+        this.proteinsUsed = ko.observable(json['proteinsUsed'] ?? this.defaults.proteinsUsed);
         this.exp = json['exp'] ?? this.defaults.exp;
         this.breeding = json['breeding'] ?? this.defaults.breeding;
         this.shiny = json['shiny'] ?? this.defaults.shiny;
@@ -125,7 +150,9 @@ class PartyPokemon implements Saveable {
         }
         return {
             id: this.id,
-            attackBonus: this.attackBonus,
+            attackBonusPercent: this.attackBonusPercent,
+            attackBonusAmount: this.attackBonusAmount,
+            proteinsUsed: this.proteinsUsed(),
             exp: this.exp,
             breeding: this.breeding,
             shiny: this.shiny,
