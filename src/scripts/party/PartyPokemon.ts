@@ -106,7 +106,8 @@ class PartyPokemon implements Saveable {
     }
 
     canUseProtein = ko.pureComputed(() => {
-        return this.proteinsUsed() < player.highestRegion() * 10;
+        // Allow 10 for every region visited (including Kanto)
+        return this.proteinsUsed() < (player.highestRegion() + 1) * 10;
     });
 
     public fromJSON(json: Record<string, any>): void {
