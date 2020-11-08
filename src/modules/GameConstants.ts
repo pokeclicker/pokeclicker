@@ -13,6 +13,8 @@ export const GYM_TICK = 10;
 export const ACHIEVEMENT_TICK = 1000;
 export const MIN_LOAD_TIME = 500; // 0.5 Seconds
 export const MAX_LOAD_TIME = 20000; // 20 Seconds
+export const MUTATION_TICK = 1000;
+export const WANDER_TICK = 1500;
 
 export const MAX_AVAILABLE_REGION = 3; // Sinnoh
 
@@ -45,6 +47,7 @@ export const SHINY_CHANCE_SHOP = 2048;
 export const SHINY_CHANCE_STONE = 2048;
 export const SHINY_CHANCE_SAFARI = 2048;
 export const SHINY_CHANCE_BREEDING = 1024;
+export const SHINY_CHANCE_FARM = 2048;
 
 export const ITEM_PRICE_MULTIPLIER = 1.00045;
 export const ITEM_PRICE_DEDUCT = 1.0005;
@@ -54,7 +57,27 @@ export const PLATE_VALUE = 100;
 // Breeding
 export const BREEDING_ATTACK_BONUS = 25;
 
+// Farming
 export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
+
+export const MULCH_USE_TIME = 300;
+export const BOOST_MULCH_MULTIPLIER = 1.5;
+export const RICH_MULCH_MULTIPLIER = 2;
+export const SURPRISE_MULCH_MULTIPLIER = 1.5;
+export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
+export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
+export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
+
+export const WANDER_RATE = 0.00001;
+
+export const BerryColor = [
+    '#EE8130', // Red
+    '#A33EA1', // Purple
+    '#D685AD', // Pink
+    '#7AC74C', // Green
+    '#F7D02C', // Yellow
+    '#6390F0', // Blue
+];
 
 // Dungeons
 export const DUNGEON_SIZE = 5;

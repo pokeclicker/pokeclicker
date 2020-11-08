@@ -15,6 +15,7 @@ class SafariPokemon implements PokemonInterface {
     // Affects catch/flee chance
     private _angry: KnockoutObservable<number>;
     private _eating: KnockoutObservable<number>;
+    private _eatingBait: KnockoutObservable<BaitType>;
 
     // Lower weighted pokemon will appear less frequently, equally weighted are equally likely to appear
     static readonly list: {
@@ -70,6 +71,7 @@ class SafariPokemon implements PokemonInterface {
         this.baseEscapeFactor = 30;
         this._angry = ko.observable(0);
         this._eating = ko.observable(0);
+        this._eatingBait = ko.observable(BaitType.Bait);
     }
 
     public get catchFactor(): number {
@@ -81,19 +83,26 @@ class SafariPokemon implements PokemonInterface {
         if (this.angry > 0) {
             catchF *= 2;
         }
+        if (this.eatingBait === BaitType.Nanab) {
+            catchF *= 1.5;
+        }
 
         return Math.min(100, catchF);
     }
 
     public get escapeFactor(): number {
+        let escapeF = this.baseEscapeFactor;
         if (this.eating > 0) {
-            return this.baseEscapeFactor / 4;
+            escapeF /= 4;
         }
         if (this.angry > 0) {
-            return this.baseEscapeFactor * 2;
+            escapeF *= 2;
+        }
+        if (this.eatingBait === BaitType.Razz) {
+            escapeF /= 1.5;
         }
 
-        return this.baseEscapeFactor;
+        return escapeF;
     }
 
     public get angry(): number {
@@ -110,6 +119,14 @@ class SafariPokemon implements PokemonInterface {
 
     public set eating(value: number) {
         this._eating(value);
+    }
+
+    public get eatingBait(): BaitType {
+        return this._eatingBait();
+    }
+
+    public set eatingBait(value: BaitType) {
+        this._eatingBait(value);
     }
 
     public static random() {

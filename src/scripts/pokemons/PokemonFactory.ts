@@ -79,6 +79,7 @@ class PokemonFactory {
      */
     public static generateShiny(chance: number): boolean {
         chance /= App.game.oakItems.calculateBonus(OakItems.OakItem.Shiny_Charm);
+        chance /= App.game.farming.externalAuras[AuraType.Shiny]();
 
         const rand: number = Math.floor(Math.random() * chance) + 1;
 

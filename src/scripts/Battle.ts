@@ -94,7 +94,7 @@ class Battle {
             this.generateNewEnemy();
         }
         this.gainItem();
-        player.lowerItemMultipliers();
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
 
     /**

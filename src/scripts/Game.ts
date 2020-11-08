@@ -39,6 +39,7 @@ class Game {
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
         AchievementHandler.initialize();
+        FarmController.initialize();
     }
 
     load() {
@@ -72,6 +73,7 @@ class Game {
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), new Date());
+        BerryDeal.generateDeals(new Date());
 
         this.gameState = GameConstants.GameState.fighting;
     }
@@ -142,6 +144,7 @@ class Game {
                 this.quests.freeRefresh(true);
                 //Refresh the Underground deals
                 DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
+                BerryDeal.generateDeals(now);
                 Notifier.notify({
                     title: 'It\'s a new day!',
                     message: 'Your Underground deals have been updated.<br/><i>You have a free quest refresh.</i>',
