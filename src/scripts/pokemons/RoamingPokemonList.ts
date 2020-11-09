@@ -38,7 +38,6 @@ RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap
 // TODO: these need another way to be obtained
 RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Jirachi, undefined, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
 
-
 // Sinnoh
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Manaphy));
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Mesprit, undefined, new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Lake Verity'))));

@@ -181,7 +181,7 @@ class Breeding implements Feature {
     }
 
     public progressEggs(amount: number) {
-        amount *= App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette);
+        amount *= this.getStepMultiplier();
 
         amount = Math.round(amount);
         let index =  this.eggList.length;
@@ -192,6 +192,10 @@ class Breeding implements Feature {
                 this.hatchPokemonEgg(index);
             }
         }
+    }
+
+    private getStepMultiplier() {
+        return App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette) * App.game.farming.externalAuras[AuraType.Egg]();
     }
 
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {

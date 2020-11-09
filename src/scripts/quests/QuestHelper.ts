@@ -86,8 +86,20 @@ class QuestHelper {
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
             case 'HarvestBerriesQuest':
-                const berryType = SeededRand.fromEnum(BerryType);
-                amount = SeededRand.intBetween(30, 300);
+                // Getting Berries that can be grown in less than half a day
+                const berryTypes = GameHelper.enumNumbers(BerryType).filter(berry => berry > BerryType.None).filter(berry => App.game.farming.berryData[berry].growthTime[3] < 12 * 60 * 60);
+                const berryType = SeededRand.fromArray(berryTypes);
+                // Calculating balanced amount based on BerryType
+                // Hard limits are between 10 and 300
+                // Additional limits based on growing on all 25 plots non-stop in 6 hours
+                const minAmt = 30;
+                let maxAmt = 300;
+
+                const totalGrowths = Math.floor((6 * 60 * 60 * 25) / App.game.farming.berryData[berryType].growthTime[3]);
+                const totalBerries = totalGrowths * App.game.farming.berryData[berryType].harvestAmount;
+                maxAmt = Math.min(maxAmt, totalBerries);
+
+                amount = SeededRand.intBetween(minAmt, maxAmt);
                 return new HarvestBerriesQuest(berryType, amount);
         }
     }

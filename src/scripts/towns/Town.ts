@@ -3,10 +3,12 @@
 ///<reference path="../achievements/OneFromManyRequirement.ts"/>
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="NPC.ts"/>
+///<reference path="KantoBerryMasterNPC.ts"/>
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
     shop?: Shop,
+    berryMaster?: Shop,
     dungeon?: Dungeon,
     npcs?: NPC[],
 };
@@ -17,6 +19,7 @@ class Town {
     public gym?: KnockoutObservable<Gym>;
     public requirements: (Requirement | OneFromManyRequirement)[];
     public shop?: KnockoutObservable<Shop>;
+    public berryMaster?: KnockoutObservable<Shop>;
     public dungeon?: KnockoutObservable<Dungeon>;
     public npcs?: KnockoutObservableArray<NPC>;
     public startingTown: boolean;
@@ -33,6 +36,7 @@ class Town {
         this.gym = ko.observable(gymList[name]);
         this.requirements = optional.requirements || [];
         this.shop = ko.observable(optional.shop);
+        this.berryMaster = ko.observable(optional.berryMaster);
         this.dungeon = ko.observable(optional.dungeon);
         this.npcs = ko.observableArray(optional.npcs);
         this.startingTown = GameConstants.StartingTowns.includes(this.name());
@@ -135,6 +139,10 @@ const BigSpender = new NPC('Big Spender', [
     'I love shopping! When I come in, the cashiers know I want tons of items.',
     'You can use the Shop Amount Button settings to make it easy for big purchases, too!',
 ]);
+const KantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
+    'Bah! You younglings have no appreciation of the art of Berry farming!',
+    'Come back when you are ready to learn!',
+]);
 
 
 
@@ -157,6 +165,7 @@ TownList['Cerulean City'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)],
         shop: CeruleanCityShop,
         dungeon: dungeonList['Cerulean Cave'],
+        npcs: [KantoBerryMaster],
     }
 );
 TownList['Vermillion City'] = new Town(
@@ -334,7 +343,24 @@ const BlackthornCityShop = new Shop([
     ItemList['Dragon_scale'],
 ]);
 
+//Johto Berry Master
+const JohtoBerryMaster = new Shop([
+    ItemList['Boost_Mulch'],
+    ItemList['Rich_Mulch'],
+    ItemList['Surprise_Mulch'],
+    ItemList['Amaze_Mulch'],
+    ItemList['Berry_Shovel'],
+    ItemList['Squirtbottle'],
+]);
+
 // Johto NPCs
+
+const CherrygroveMrPokemon = new NPC('Mr Pokémon', [
+    'Welcome to Johto! This is where the first ever Pokémon egg was found long ago.',
+    'Astounding breakthroughs have been made since then. We can now store Pokémon eggs for longer and queue them up for breeding.',
+    'This new technology only allows up to four stored eggs, for now.',
+]);
+
 const AzaleaOldMan = new NPC('Wise Old Man', [
     'There is an old tale about the Guardian of Ilex Forest.',
     'It says that the mythical Pokémon Celebi will appear before anyone who has proven they are a Champion Pokémon Trainer.',
@@ -360,6 +386,7 @@ TownList['Cherrygrove City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 29)],
         shop: CherrygroveCityShop,
+        npcs: [CherrygroveMrPokemon],
     }
 );
 TownList['Violet City'] = new Town(
@@ -387,6 +414,7 @@ TownList['Goldenrod City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.johto, 34)],
         shop: GoldenrodCityShop,
+        berryMaster: JohtoBerryMaster,
         npcs: [BigSpender],
     }
 );
@@ -568,11 +596,31 @@ const BattleFrontierShop = new Shop([
     new EnergyRestore(GameConstants.EnergyRestoreSize.LargeRestore, 40, GameConstants.Currency.battlePoint),
 ]);
 
+//Hoenn Berry Master
+const HoennBerryMaster = new Shop([
+    ItemList['Boost_Mulch'],
+    ItemList['Rich_Mulch'],
+    ItemList['Surprise_Mulch'],
+    ItemList['Amaze_Mulch'],
+    ItemList['Berry_Shovel'],
+    ItemList['Sprinklotad'],
+]);
+
 //Hoenn NPCs
+const LittlerootAide = new NPC('Professor Birch\'s Aide', [
+    'We have received word from Mr. Pokémon in Johto! He has made another breakthrough.',
+    'You can now store an additional four eggs in the queue! His research has really gained speed.',
+    'He wants you to know that he will have an additional eight slots ready by the time you reach Sinnoh.',
+]);
+
 const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'The creators of the lands and ocean slumber within the Cave of Origin.',
     'However, they will only awaken when in the presence of a truly great trainer.',
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
+]);
+const Weatherman = new NPC('Weatherman', [
+    'Castform is a very finnicky pokemon',
+    'The weather can majorly impact its appearance, so watch out.',
 ]);
 
 //Hoenn Towns
@@ -581,6 +629,7 @@ TownList['Littleroot Town'] = new Town(
     GameConstants.Region.hoenn,
     {
         shop: LittleRootTownShop,
+        npcs: [LittlerootAide],
     }
 );
 TownList['Oldale Town'] = new Town(
@@ -630,6 +679,7 @@ TownList['Mauville City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 110)],
         shop: MauvilleCityShop,
+        berryMaster: HoennBerryMaster,
     }
 );
 TownList['Verdanturf Town'] = new Town(
@@ -662,6 +712,7 @@ TownList['Fortree City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.hoenn, 119)],
         shop: FortreeCityShop,
+        npcs: [Weatherman],
     }
 );
 TownList['LilyCove City'] = new Town(
@@ -882,6 +933,15 @@ const PastoriaShop = new Shop([
     ItemList['Water_egg'],
 ]);
 
+//Sinnoh Berry Master
+const SinnohBerryMaster = new Shop([
+    ItemList['Boost_Mulch'],
+    ItemList['Rich_Mulch'],
+    ItemList['Surprise_Mulch'],
+    ItemList['Amaze_Mulch'],
+    ItemList['Berry_Shovel'],
+]);
+
 //Sinnoh NPCs
 const FloaramaLeafeonTip = new NPC('Flower Girl', [
     'Something amazing just happened!',
@@ -958,6 +1018,7 @@ TownList['Hearthome City'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.sinnoh, 208)],
         shop: HearthomeCityShop,
+        berryMaster: SinnohBerryMaster,
         npcs: [HearthomeContestFan],
     }
 );
