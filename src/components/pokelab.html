@@ -30,7 +30,7 @@ style="cursor:default" tabindex="-1">
                             <span>TODO: HLXII - Add current researching rate</span>
                         </div>
                         <div class="col-4 p-1">
-                            <button class="btn btn-block btn-primary">
+                            <button class="btn btn-block btn-primary" data-bind="click: function() { LabController.openPartyListModal($index()); }">
                                 Add Workers
                             </button>
                             <button class="btn btn-block btn-danger" data-bind="click: function() { App.game.lab.cancelResearch($data.research); }">
@@ -38,9 +38,11 @@ style="cursor:default" tabindex="-1">
                             </button>
                         </div>
                         <!-- ko if: $data.workers.length -->
-                        <div id="researchQueue" class="card-footer p-1" data-bind="foreach: $data.workers">
-                            <div class="queuePokemon clickable bg-primary" data-bind="click: function(){ $parent.removeWorker($index()) }">
-                            <img src="" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data], App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true)) }">
+                        <div class="col-12">
+                            <div id="hatcheryQueue" class="card-footer p-1" data-bind="foreach: $data.workers">
+                                <div class="queuePokemon clickable bg-primary" style="width: 8%" data-bind="click: function(){ $parent.removeWorker($index()) }">
+                                <img src="" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data], App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true)) }">
+                                </div>
                             </div>
                         </div>
                         <!-- /ko -->

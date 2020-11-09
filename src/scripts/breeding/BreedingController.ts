@@ -143,6 +143,49 @@ class BreedingController {
         region: ko.observable(-2).extend({ numeric: 0 }),
     }
 
+    public static applyFilter(partyPokemon: PartyPokemon): boolean {
+        if (!BreedingController.filter.search().test(partyPokemon.name)) {
+            return false;
+        }
+
+        // Check based on category
+        if (BreedingController.filter.category() >= 0) {
+            if (partyPokemon.category !== BreedingController.filter.category()) {
+                return false;
+            }
+        }
+
+        // Check based on shiny status
+        if (BreedingController.filter.shinyStatus() >= 0) {
+            if (+partyPokemon.shiny !== BreedingController.filter.shinyStatus()) {
+                return false;
+            }
+        }
+
+        // Check based on native region
+        if (BreedingController.filter.region() > -2) {
+            if (PokemonHelper.calcNativeRegion(partyPokemon.name) !== BreedingController.filter.region()) {
+                return false;
+            }
+        }
+
+        // Check if either of the types match
+        const type1: (PokemonType | null) = BreedingController.filter.type1() > -2 ? BreedingController.filter.type1() : null;
+        const type2: (PokemonType | null) = BreedingController.filter.type2() > -2 ? BreedingController.filter.type2() : null;
+        if (type1 !== null || type2 !== null) {
+            const { type: types } = pokemonMap[partyPokemon.name];
+            if ([type1, type2].includes(PokemonType.None)) {
+                const type = (type1 == PokemonType.None) ? type2 : type1;
+                if (!BreedingController.isPureType(partyPokemon, type)) {
+                    return false;
+                }
+            } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static visible(partyPokemon: PartyPokemon) {
         return ko.pureComputed(() => {
             // Only breedable Pokemon
@@ -150,46 +193,7 @@ class BreedingController {
                 return false;
             }
 
-            if (!BreedingController.filter.search().test(partyPokemon.name)) {
-                return false;
-            }
-
-            // Check based on category
-            if (BreedingController.filter.category() >= 0) {
-                if (partyPokemon.category !== BreedingController.filter.category()) {
-                    return false;
-                }
-            }
-
-            // Check based on shiny status
-            if (BreedingController.filter.shinyStatus() >= 0) {
-                if (+partyPokemon.shiny !== BreedingController.filter.shinyStatus()) {
-                    return false;
-                }
-            }
-
-            // Check based on native region
-            if (BreedingController.filter.region() > -2) {
-                if (PokemonHelper.calcNativeRegion(partyPokemon.name) !== BreedingController.filter.region()) {
-                    return false;
-                }
-            }
-
-            // Check if either of the types match
-            const type1: (PokemonType | null) = BreedingController.filter.type1() > -2 ? BreedingController.filter.type1() : null;
-            const type2: (PokemonType | null) = BreedingController.filter.type2() > -2 ? BreedingController.filter.type2() : null;
-            if (type1 !== null || type2 !== null) {
-                const { type: types } = pokemonMap[partyPokemon.name];
-                if ([type1, type2].includes(PokemonType.None)) {
-                    const type = (type1 == PokemonType.None) ? type2 : type1;
-                    if (!BreedingController.isPureType(partyPokemon, type)) {
-                        return false;
-                    }
-                } else if ((type1 !== null && !types.includes(type1)) || (type2 !== null && !types.includes(type2))) {
-                    return false;
-                }
-            }
-            return true;
+            return BreedingController.applyFilter(partyPokemon);
         });
     }
 

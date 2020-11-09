@@ -48,11 +48,11 @@ class ResearchHandler {
             if (this.filter.status() != 'all') {
                 switch (this.filter.status()) {
                     case 'locked':
-                        return !research.canResearch();
+                        return research.state() === ResearchState.Locked || research.state() === ResearchState.NotPurchased;
                     case 'incomplete':
-                        return research.canResearch() && !research.completed;
+                        return research.state() === ResearchState.Ready || research.state() === ResearchState.Researching;
                     case 'completed':
-                        return research.completed;
+                        return research.state() === ResearchState.Completed;
                     default:
                         return false;
                 }
@@ -158,6 +158,12 @@ class ResearchHandler {
             research.purchase();
         } else if (research.state() === ResearchState.Ready) {
             App.game.lab.beginResearch(research);
+        }
+        this.filterResearchList(true);
+
+        // Checking closing modal
+        if (App.game.lab.currentResearch().length === App.game.lab.unlockedResearchSlots()) {
+            $('#researchListModal').modal('hide');
         }
     }
 

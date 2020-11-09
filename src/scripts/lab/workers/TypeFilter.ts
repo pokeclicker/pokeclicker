@@ -7,10 +7,8 @@ class TypeFilter extends WorkerFilter {
     constructor(types: PokemonType[]) {
         super((pokemon: PartyPokemon) => {
             const pokemonData = PokemonHelper.getPokemonById(pokemon.id);
-            if (types.includes(pokemonData.type1) || types.includes(pokemonData.type2)) {
-                return true;
-            }
-        }, 'Only ');
+            return types.includes(pokemonData.type1) || types.includes(pokemonData.type2);
+        }, undefined);
         this.types = types;
     }
 

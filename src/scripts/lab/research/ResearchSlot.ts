@@ -7,28 +7,53 @@ class ResearchSlot implements Saveable {
     }
 
     public research?: Research
+    private _maxWorkers: KnockoutComputed<number>;
     private _workers: KnockoutObservableArray<PokemonNameType>;
 
     constructor(research: Research, workers: PokemonNameType[]) {
         this.research = research;
         this._workers = ko.observableArray(workers);
+
+        this._maxWorkers = ko.pureComputed(function() {
+            // TODO: HLXII - Update to depend on research. Will also need to determine which slot this is
+            return 1;
+        });
     }
 
     update() {
-        // Handle updating research progress
+        // TODO: HLXII - Handle updating research progress
     }
 
-    addWorker(pokemon: PartyPokemon) {
-        // TODO: HLXII -  Handle adding worker
+    get workerRate(): number {
+        // TODO: HLXII - Find research rate based on workers
+        return 1;
     }
 
-    removeWorker(pokemon: PartyPokemon) {
-        // TODO: HLXII - Handle removing worker
+    addWorker(pokemon: PartyPokemon): boolean {
+        const queueSize = this._workers().length;
+        if (queueSize < this._maxWorkers()) {
+            pokemon.location = PartyLocation.Research;
+            this._workers.push(pokemon.name);
+            return true;
+        }
+        return false;
+    }
+
+    removeWorker(index: number): boolean {
+        const queueSize = this._workers().length;
+        if (queueSize > index) {
+            const pokemonName = this._workers.splice(index, 1)[0];
+            App.game.party._caughtPokemon().find(p => p.name == pokemonName).location = PartyLocation.Battle;
+            return true;
+        }
+        return false;
     }
 
     clear() {
         // Emptying workers
-        // TODO: HLXII - Empty workers
+        for (let i = this._workers().length - 1;i >= 0;i--) {
+            this.removeWorker(i);
+        }
 
         // Resetting research
         this.research.inProgress = false;
@@ -48,6 +73,14 @@ class ResearchSlot implements Saveable {
 
     get workers(): PokemonNameType[] {
         return this._workers();
+    }
+
+    get maxWorkers(): number {
+        return this._maxWorkers();
+    }
+
+    set maxWorkers(value: number) {
+        this._maxWorkers(value);
     }
 
 }
