@@ -42,7 +42,7 @@ class Lab implements Feature {
                 1000),
             new Research(Researches.Research.research_slot2, ResearchType.Research_Slot,
                 'Research Slot II', 'Unlocks a third Research Slot.',
-                1000),
+                1000, { requirements: [new ResearchedRequirement(Researches.Research.research_slot1)] }),
             new TypeBoosterResearch(Researches.Research.type_boost_normal, PokemonType.Normal, 100),
             new TypeBoosterResearch(Researches.Research.type_boost_fire, PokemonType.Fire, 100),
             new TypeBoosterResearch(Researches.Research.type_boost_water, PokemonType.Water, 100),
