@@ -133,9 +133,12 @@ class GameController {
                 return;
             }
 
-            // Toggle modal for Oak Items
+            // Oak Items
             const $oakItemsModal = $('#oakItemsModal');
             const oakItems = App.game.oakItems;
+            // Pokeball Selector
+            const $pokeballSelector = $('#pokeballSelectorModal');
+            const pokeballs = App.game.pokeballs;
             switch (e.code) {
                 case 'KeyO':
                     // Open oak items with 'O'
@@ -160,17 +163,27 @@ class GameController {
                             }
                         }
                     }
-                    // Scroll through pokeballs using P + (1-4) for each condition
-                    const pokeballSelectOptions = 4;
+                    // Select Pokeball from pokeball selector
+                    // Feels a bit messy to use these hard-coded values. I think adding this data to
+                    // `Pokeballs.ts` and making it dynamic is a better solution.
                     const pokeballProps = ['alreadyCaught', 'alreadyCaughtShiny', 'notCaught', 'notCaughtShiny'];
-                    const numPokeballs = App.game.pokeballs.pokeballs.length;
+                    const titles = ['Already Caught Pokémon', 'Already Caught Shiny Pokémon', 'New Pokémon', 'New Shiny Pokémon'];
+                    const numPokeballs = pokeballs.pokeballs.length + 1;
+                    if ($pokeballSelector.data('bs.modal')?._isShown) {
+                        for (let i = 0; i < numPokeballs; i++) {
+                            if (e.code === `Digit${i + 1}` || e.code === `Numpad${i + 1}`) {
+                                pokeballs.selectedSelection()(i - 1);
+                            }
+                        }
+                    }
+                    // Open pokeball selector modal using P + (1-4) for each condition
                     if (GameController.keyFlags['KeyP']) {
-                        for (let i = 0; i < pokeballSelectOptions; i++) {
-                            if (e.code === `Digit${i + 1}`) {
-                                const k = `${pokeballProps[i]}Selection`;
-                                App.game.pokeballs[k]++;
-                                if (App.game.pokeballs[k] === numPokeballs) {
-                                    App.game.pokeballs[k] = -1;
+                        for (let i = 0; i < pokeballProps.length; i++) {
+                            if (e.code === `Digit${i + 1}` || e.code === `Numpad${i + 1}`) {
+                                if (!($pokeballSelector.data('bs.modal')?._isShown)) {
+                                    pokeballs.selectedSelection(pokeballs[`_${pokeballProps[i]}Selection`]);
+                                    pokeballs.selectedTitle(titles[i]);
+                                    $pokeballSelector.modal('toggle');
                                 }
                             }
                         }
