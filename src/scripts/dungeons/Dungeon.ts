@@ -957,7 +957,7 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
     
 //Unknown Dungeon? Contains Mewtwo.
 
-// Kalos
+// Alola
 // TODO: Balancing of dungeon Pokemon HP & rewards.
 dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
     ['Alolan Meowth', 'Abra', 'Magnemite', 'Wingull', 'Mime Jr.', 'Zorua'],
