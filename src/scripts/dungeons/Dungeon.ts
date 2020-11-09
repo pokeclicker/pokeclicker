@@ -986,6 +986,8 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
     [
         new DungeonBossPokemon('Alolan Raticate', 8000000, 70),
         new DungeonBossPokemon('Gumshoos', 8000000, 70),
+        new DungeonBossPokemon('Totem Alolan Raticate', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Gumshoos', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
     ],
     96500, 201, 35);
 
@@ -1063,6 +1065,8 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
     [
         new DungeonBossPokemon('Wishiwashi (School)', 8000000, 70),
         new DungeonBossPokemon('Araquanid', 8000000, 70),
+        new DungeonBossPokemon('Totem Wishiwashi (School)', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Araquanid', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
     ],
     96500, 201, 35);
 
@@ -1073,6 +1077,8 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
         new DungeonBossPokemon('Alolan Marowak', 8000000, 70),
         new DungeonBossPokemon('Salazzle', 8000000, 70),
+        new DungeonBossPokemon('Totem Alolan Marowak', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Salazzle', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
     ],
     96500, 201, 35);
 
@@ -1080,7 +1086,10 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [new DungeonBossPokemon('Lurantis', 8000000, 70)],
+    [
+        new DungeonBossPokemon('Lurantis', 8000000, 70),
+        new DungeonBossPokemon('Totem Lurantis', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
     96500, 201, 35);
 
 dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
@@ -1119,20 +1128,25 @@ dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
     96500, 201, 35);
 
 dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
-    ['Grubbin', 'Charjabug', 'Elekid', 'Electabuzz'],
+    ['Grubbin', 'Charjabug', 'Elekid', 'Electabuzz', 'Skarmory', 'Dedenne'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
         new DungeonBossPokemon('Vikavolt', 8000000, 70),
         new DungeonBossPokemon('Togedemaru', 8000000, 70),
+        new DungeonBossPokemon('Totem Vikavolt', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Togedemaru', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
     ],
     96500, 201, 35);
 
 dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
-    ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Klefki'],
+    ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [new DungeonBossPokemon('Mimikyu', 8000000, 70)],
+    [
+        new DungeonBossPokemon('Mimikyu', 8000000, 70),
+        new DungeonBossPokemon('Totem Mimikyu', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
     96500, 201, 35);
 
 dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
@@ -1194,7 +1208,10 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
     ['Golbat', 'Alolan Dugtrio', 'Machoke', 'Golbat', 'Magikarp', 'Skarmory', 'Barboach', 'Corphish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Mienfoo', 'Carbink', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Jangmo-o', 'Hakamo-o'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [new DungeonBossPokemon('Kommo-o', 8000000, 70)],
+    [
+        new DungeonBossPokemon('Kommo-o', 8000000, 70),
+        new DungeonBossPokemon('Totem Kommo-o', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
     96500, 201, 35);
 
 dungeonList['Nebby'] = new Dungeon('Nebby',
