@@ -39,10 +39,10 @@ class Lab implements Feature {
         this.researchList = [
             new Research(Researches.Research.research_slot1, ResearchType.Research_Slot,
                 'Research Slot I', 'Unlocks a second Research Slot.',
-                1),
+                1000),
             new Research(Researches.Research.research_slot2, ResearchType.Research_Slot,
                 'Research Slot II', 'Unlocks a third Research Slot.',
-                1),
+                1000),
             new TypeBoosterResearch(Researches.Research.type_boost_normal, PokemonType.Normal, 100),
             new TypeBoosterResearch(Researches.Research.type_boost_fire, PokemonType.Fire, 100),
             new TypeBoosterResearch(Researches.Research.type_boost_water, PokemonType.Water, 100),
@@ -75,7 +75,17 @@ class Lab implements Feature {
     }
 
     update(delta: number) {
-        // TODO: HLXII - Handle updating research progress
+        this.currentResearch().forEach(res => {
+            const complete = res.update(delta);
+            if (complete) {
+                // TODO: HLXII - Update notification properties
+                Notifier.notify({
+                    message: 'Some Research has been completed!',
+                    type: NotificationConstants.NotificationOption.success,
+                    sound: NotificationConstants.NotificationSound.achievement,
+                });
+            }
+        });
     }
 
     canAccess(): boolean {
@@ -91,10 +101,18 @@ class Lab implements Feature {
         }
     }
 
-    cancelResearch(research: Research) {
+    cancelResearch(research: Research, shouldConfirm = false) {
+        if (shouldConfirm && !confirm('Are you sure you want to cancel this research? All progress will be lost.')) {
+            return;
+        }
         const researchSlot = this.currentResearch().find(slot => slot.research.id === research.id);
         researchSlot.clear();
         this.currentResearch.remove(researchSlot);
+    }
+
+    completeResearch(research: Research) {
+        research.completed = true;
+        this.cancelResearch(research);
     }
 
     fromJSON(json: Record<string, any>): void {

@@ -27,15 +27,22 @@ style="cursor:default" tabindex="-1">
                             <br>
                             <small><span data-bind="text: $data.research.description">Description</span></small>
                             <br>
-                            <span>TODO: HLXII - Add current researching rate</span>
+                            <span data-bind="text: 'Research Rate: ' + $data.workerRate">Research Rate</span>
                         </div>
                         <div class="col-4 p-1">
                             <button class="btn btn-block btn-primary" data-bind="click: function() { LabController.openPartyListModal($index()); }">
                                 Add Workers
                             </button>
-                            <button class="btn btn-block btn-danger" data-bind="click: function() { App.game.lab.cancelResearch($data.research); }">
+                            <!-- ko if: $data.research.progress !== $data.research.points -->
+                            <button class="btn btn-block btn-danger" data-bind="click: function() { App.game.lab.cancelResearch($data.research, true); }">
                                 Cancel Research
                             </button>
+                            <!-- /ko -->
+                            <!-- ko if: $data.research.progress === $data.research.points -->
+                            <button class="btn btn-block btn-success" data-bind="click: function() { App.game.lab.completeResearch($data.research); }">
+                                Complete Research
+                            </button>
+                            <!-- /ko -->
                         </div>
                         <!-- ko if: $data.workers.length -->
                         <div class="col-12">
@@ -47,10 +54,9 @@ style="cursor:default" tabindex="-1">
                         </div>
                         <!-- /ko -->
                         <div class="col-12 progress">
-                            <!-- TODO: HLXII - Setup Progress updating -->
-                            <div class="progress-bar" role="progressbar" data-bind="attr: { style: 'width:50%' }"
+                            <div class="progress-bar" role="progressbar" data-bind="attr: { style: 'width:' + $data.research.progressPercent + '%' }"
                             aria-valuemin="0" aria-valuemax="100">
-                                <span data-bind="text: $data.progress">Progress</span>
+                                <span data-bind="text: $data.research.progressString">Progress</span>
                             </div>
                         </div>
                     </div>

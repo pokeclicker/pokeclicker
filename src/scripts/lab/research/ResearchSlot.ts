@@ -10,9 +10,13 @@ class ResearchSlot implements Saveable {
     private _maxWorkers: KnockoutComputed<number>;
     private _workers: KnockoutObservableArray<PokemonNameType>;
 
+    public notification: boolean;
+
     constructor(research: Research, workers: PokemonNameType[]) {
         this.research = research;
         this._workers = ko.observableArray(workers);
+
+        this.notification = false;
 
         this._maxWorkers = ko.pureComputed(function() {
             // TODO: HLXII - Update to depend on research. Will also need to determine which slot this is
@@ -20,13 +24,20 @@ class ResearchSlot implements Saveable {
         });
     }
 
-    update() {
-        // TODO: HLXII - Handle updating research progress
+    update(delta: number): boolean {
+        this.research.progress = Math.min(this.research.points, this.research.progress + delta * this.workerRate);
+
+        // Complete research
+        if (this.research.progress >= this.research.points && !this.notification) {
+            this.notification = true;
+            return true;
+        }
+        return false;
     }
 
     get workerRate(): number {
         // TODO: HLXII - Find research rate based on workers
-        return 1;
+        return 10;
     }
 
     addWorker(pokemon: PartyPokemon): boolean {

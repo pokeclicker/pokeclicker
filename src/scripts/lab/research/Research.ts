@@ -42,7 +42,7 @@ class Research implements Saveable {
         this.state = ko.pureComputed(function () {
             if (!this.canResearch()) {
                 return ResearchState.Locked;
-            } else if (this._progress() >= this.points) {
+            } else if (this._completed()) {
                 return ResearchState.Completed;
             } else if (!this._inProgress()) {
                 return ResearchState.Ready;
@@ -112,6 +112,14 @@ class Research implements Saveable {
 
     set progress(value: number) {
         this._progress(value);
+    }
+
+    get progressPercent() {
+        return (this.progress / this.points) * 100;
+    }
+
+    get progressString() {
+        return `${this.progress.toFixed(0)}/${this.points}`;
     }
 
     get workerFilter() {

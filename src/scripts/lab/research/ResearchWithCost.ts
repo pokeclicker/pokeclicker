@@ -21,7 +21,7 @@ class ResearchWithCost extends Research {
                 return ResearchState.Locked;
             } else if (!this._purchased()) {
                 return ResearchState.NotPurchased;
-            } else if (this._progress() === this.points) {
+            } else if (this._completed()) {
                 return ResearchState.Completed;
             } else if (this._progress() === 0) {
                 return ResearchState.Ready;
