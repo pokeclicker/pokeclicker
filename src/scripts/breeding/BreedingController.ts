@@ -146,7 +146,7 @@ class BreedingController {
     public static visible(partyPokemon: PartyPokemon) {
         return ko.pureComputed(() => {
             // Only breedable Pokemon
-            if (partyPokemon.breeding || partyPokemon.level < 100) {
+            if (partyPokemon.location !== PartyLocation.Battle || partyPokemon.level < 100) {
                 return false;
             }
 
