@@ -24,7 +24,7 @@ export const TotalPokemonsPerRegion = [
     649, // 156 - Unova
     721, // 72 - Kalos
     809, // 88 - Alola
-    893, // 84 - Galar
+    898, // 89 - Galar
 ];
 
 export const ITEM_USE_TIME = 30;
@@ -336,6 +336,7 @@ export const WaterAreas = {
     2: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Shoal Cave', 'Seafloor Cavern']),
     3: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
     4: new Set(['Undella Bay', 'Humilau City']),
+    7: new Set(['Hulbury', 12, 13, 'Lake of Outrage', 'South Lake Miloch', 'North Lake Miloch', 'East Lake Axwell', 'West Lake Axwell']),
 };
 
 export const IceAreas = {
@@ -343,6 +344,7 @@ export const IceAreas = {
     1: new Set(['Mahogany Town', 'Ice Path', 'Whirl Islands']),
     2: new Set(['Sootopolis City']),
     3: new Set([216, 217, 'Lake Acuity', 'Snowpoint City']),
+    7: new Set(['Circhester', 11, 15, 16, 'The Crown Tundra', 'Freezington Ruins']),
 };
 
 export const ForestAreas = {
@@ -351,6 +353,7 @@ export const ForestAreas = {
     2: new Set([119, 'Petalburg Woods']),
     3: new Set([201, 204, 'Eterna Forest', 'Eterna City', 'Fullmoon Island', 'Newmoon Island']),
     4: new Set(['Lostlorn Forest', 'Pinwheel Forest', 'Giant Chasm', 'Pledge Grove', 'Castelia City']),
+    7: new Set(['Dappled Grove', 'Glimwood Tangle', 'Slumbering Weald', 'Inner Slumbering Weald', 'Ballonlea']),
 };
 
 export const CaveAreas = {
@@ -359,6 +362,7 @@ export const CaveAreas = {
     2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
     3: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
     4: new Set(['Mistralton Cave', 'Seaside Cave', 'Wellspring Cave', 'Twist Mountain', 'Reversal Mountain', 'Cave of Being', 'Relic Passage', 'Relica Castle', 'Victory Road Unova']),
+    7: new Set(['Split-Decision Ruins']),
 };
 
 export const GemCaveAreas = {
@@ -367,6 +371,7 @@ export const GemCaveAreas = {
     2: new Set(['Cave of Origin', 'Sky Pillar']),
     3: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
     4: new Set(['Chargestone Cave', 'Driftveil City']),
+    7: new Set(['Galar Mine', 'Galar Mine No. 2']),
 };
 
 export const PowerPlantAreas = {
@@ -375,6 +380,7 @@ export const PowerPlantAreas = {
     2: new Set(['Mauville City']),
     3: new Set(['Sunyshore City']),
     4: new Set(['Virbank Complex', 'Castelia Sewers', 'Nimbasa City']),
+    7: new Set(['Motostoke', 'Spikemuth']),
 };
 
 export const MansionAreas = {
@@ -383,6 +389,7 @@ export const MansionAreas = {
     2: new Set(['Lavaridge Town', 'Petalburg City', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
     3: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
     4: new Set(['Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
+    7: new Set(['Hammerlocke', 'Rose Tower', 'Tower of Two Fists']),
 };
 
 export const GraveyardAreas = {
@@ -391,6 +398,7 @@ export const GraveyardAreas = {
     2: new Set(['Mossdeep City', 'Mt. Pyre']),
     3: new Set(['Hearthome City']),
     4: new Set(['Virbank City']),
+    7: new Set(['Watchtower Ruins']),
 };
 
 export enum Starter {
@@ -627,6 +635,21 @@ export const KalosGyms = [
     'Champion Diantha',
 ];
 
+export const GalarGyms = [
+    'Turffield',
+    'Hulbury',
+    'Motostoke',
+    'Stow-on-Side',
+    'Ballonlea',
+    'Circhester',
+    'Spikemuth',
+    'Hammerlocke',
+    'Trainer Marnie',
+    'Trainer Hop',
+    'Trainer Bede',
+    'Champion Leon',
+];
+
 export const RegionGyms = [
     KantoGyms,
     JohtoGyms,
@@ -634,6 +657,7 @@ export const RegionGyms = [
     SinnohGyms,
     UnovaGyms,
     KalosGyms,
+    GalarGyms,
 ];
 
 export function getGymIndex(gym: string): number {
@@ -787,6 +811,35 @@ export const KalosDungeons = [
     // 'Unknown Dungeon',
 ];
 
+export const GalarDungeons = [
+    'Slumbering Weald',
+    'Inner Slumbering Weald',
+    'Galar Mine',
+    'Galar Mine No. 2',
+    'Glimwood Tangle',
+    'Rose Tower',
+    'Watchtower Ruins',
+    'West Lake Axwell',
+    'East Lake Axwell',
+    'North Lake Miloch',
+    'South Lake Miloch',
+    'Dappled Grove',
+    'Rolling Fields',
+    'Giant\'s Seat',
+    'Hammerlocke Hills',
+    'Giant\'s Cap',
+    'Dusty Bowl',
+    'Stony Wilderness',
+    'Bridge Field',
+    'Motostoke Riverbank',
+    'Lake of Outrage',
+    'Giant\'s Mirror',
+    'Tower of Two Fists',
+    'Split-Decision Ruins',
+    'The Crown Tundra',
+    'Freezington Ruins',
+];
+
 export const RegionDungeons = [
     KantoDungeons,
     JohtoDungeons,
@@ -794,6 +847,7 @@ export const RegionDungeons = [
     SinnohDungeons,
     UnovaDungeons,
     KalosDungeons,
+    GalarDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {
@@ -807,6 +861,7 @@ export const StartingTowns = [
     'Twinleaf Town',
     'Aspertia City',
     'Vaniville Town',
+    'Postwick',
 ];
 
 export const DockTowns = [
@@ -816,4 +871,5 @@ export const DockTowns = [
     'Canalave City',
     'Castelia City',
     'Coumarine City',
+    'Hulbury',
 ];

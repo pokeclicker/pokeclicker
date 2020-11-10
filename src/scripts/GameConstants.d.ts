@@ -234,7 +234,13 @@ namespace GameConstants {
         'Razor_fang',
         'Prism_scale',
         'Sachet',
-        'Whipped_dream'
+        'Whipped_dream',
+        'Ice_stone',
+        'Tart_apple',
+        'Sweet_apple',
+        'Chipped_pot',
+        'Strawberry_sweet',
+        'Reins_of_unity',
     }
     declare enum BattleItemType {
         'xAttack' = '',
@@ -257,7 +263,8 @@ namespace GameConstants {
         'Burmy (plant)',
         'Spiritomb',
         'Cherubi',
-        'Meloetta (pirouette)'
+        'Meloetta (pirouette)',
+        'Toxel',
     }
     declare enum PokeBlockColor {
         Black,
@@ -329,6 +336,7 @@ namespace GameConstants {
     declare const SinnohGyms: string[];
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
+    declare const GalarGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
     declare const KantoDungeons: string[];
@@ -337,6 +345,7 @@ namespace GameConstants {
     declare const SinnohDungeons: string[];
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
+    declare const GalarDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
     declare const StartingTowns: string[];

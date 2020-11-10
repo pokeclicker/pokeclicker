@@ -101,3 +101,12 @@ TownList['Pokemon League Kalos'] = new PokemonLeague(
     ['Elite Malva', 'Elite Siebold', 'Elite Wikstrom', 'Elite Drasna', 'Champion Diantha']
 );
 (<PokemonLeague>TownList['Pokemon League Kalos']).setupGymTowns();
+
+TownList['Wyndon Stadium'] = new PokemonLeague(
+    'Wyndon Stadium',
+    GameConstants.Region.galar,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
+    indigoPlateauShop,
+    ['Elite Marnie', 'Elite Hop', 'Elite Bede', 'Champion Leon']
+);
+(<PokemonLeague>TownList['Wyndon Stadium']).setupGymTowns();

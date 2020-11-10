@@ -1839,3 +1839,317 @@ TownList['Victory Road Kalos'] = new DungeonTown(
     ]
 );
 //Unknown Cave?
+
+
+//Galar Shops
+
+
+const PostwickShop = new Shop([
+    ItemList['Pokeball'],
+]);
+const WedgehurstShop = new Shop([
+    ItemList['Greatball'],
+    ItemList['Mystery_egg'],
+]);
+const CirchesterShop = new Shop([
+    ItemList['Ice_stone'],
+]);
+const TurffieldShop = new Shop([
+    ItemList['Grass_egg'],
+    ItemList['Tart_apple'],
+    ItemList['Sweet_apple'],
+]);
+const HulburyShop = new Shop([
+    ItemList['Water_egg'],
+    ItemList['Toxel'],
+]);
+const MotostokeShop = new Shop([
+    ItemList['Fire_egg'],
+    ItemList['Strawberry_sweet'],
+]);
+const HammerlockeShop = new Shop([
+    ItemList['Dragon_egg'],
+]);
+const StowonSideShop: Shop = new Shop([
+    ItemList['Fighting_egg'],
+    ItemList['Chipped_pot'],
+]);
+const SpikemuthShop = new Shop([
+    ItemList['Electric_egg'],
+]);
+const FreezingtonShop = new Shop([
+    ItemList['Reins_of_unity'],
+]);
+const WyndonShop = new Shop([
+    ItemList['Pokeball'],
+    ItemList['Greatball'],
+    ItemList['Ultraball'],
+    ItemList['SmallRestore'],
+    ItemList['MediumRestore'],
+    ItemList['LargeRestore'],
+    ItemList['xAttack'],
+    ItemList['xClick'],
+    ItemList['Lucky_egg'],
+    ItemList['Token_collector'],
+    ItemList['Item_magnet'],
+    ItemList['Lucky_incense'],
+]);
+
+
+//Galar NPC
+
+
+const Mom = new NPC('Mom', [
+    'Don\'t go too far into the Slumbering Weald.',
+    'I\'ve heard there are some very strong Pokemon in there.',
+    'Only those who beat the champion are strong enough to face them!',
+]);
+const AdventurerPeony = new NPC('Adventurer Peony', [
+    'There are some islands in the oceans around Galar.',
+    'One is sparsely populated, but the other is teeming with Pokemon.',
+    'There are plenty of unique, powerful ones there, too!',
+]);
+
+
+//Galar towns
+
+TownList['Postwick'] = new Town(
+    'Postwick',
+    GameConstants.Region.galar,
+    {
+        shop: PostwickShop,
+        npcs: [Mom],
+    }
+);
+TownList['Wedgehurst'] = new Town(
+    'Wedgehurst',
+    GameConstants.Region.galar,
+    {
+        shop: WedgehurstShop,
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
+    }
+);
+TownList['Motostoke'] = new Town(
+    'Motostoke',
+    GameConstants.Region.galar,
+    {
+        shop: MotostokeShop,
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('East Lake Axwell'))],
+    }
+);
+TownList['Turffield'] = new Town(
+    'Turffield',
+    GameConstants.Region.galar,
+    {
+        shop: TurffieldShop,
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 4)],
+    }
+);
+TownList['Hulbury'] = new Town(
+    'Hulbury',
+    GameConstants.Region.galar,
+    {
+        shop: HulburyShop,
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 5)],
+    }
+);
+TownList['Stow-on-Side'] = new Town(
+    'Stow-on-Side',
+    GameConstants.Region.galar,
+    {
+        shop: StowonSideShop,
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 6)],
+    }
+);
+TownList['Ballonlea'] = new Town(
+    'Ballonlea',
+    GameConstants.Region.galar,
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))],
+    }
+);
+TownList['Hammerlocke'] = new Town(
+    'Hammerlocke',
+    GameConstants.Region.galar,
+    {
+        shop: HammerlockeShop,
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Hammerlocke Hills'))],
+    }
+);
+TownList['Circhester'] = new Town(
+    'Circhester',
+    GameConstants.Region.galar,
+    {
+        shop: CirchesterShop,
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 10)],
+    }
+);
+TownList['Spikemuth'] = new Town(
+    'Spikemuth',
+    GameConstants.Region.galar,
+    {
+        shop: SpikemuthShop,
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 14)],
+    }
+);
+TownList['Wyndon'] = new Town(
+    'Wyndon',
+    GameConstants.Region.galar,
+    {
+        shop: WyndonShop,
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 16)],
+        dungeon: dungeonList['Rose Tower'],
+    }
+);
+TownList['Wyndon Stadium'] = new Town(
+    'Wyndon Stadium',
+    GameConstants.Region.galar,
+    {
+        requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
+    }
+);
+TownList['Freezington'] = new Town(
+    'Freezington',
+    GameConstants.Region.galar,
+    {
+        shop: FreezingtonShop,
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
+        npcs: [AdventurerPeony],
+        dungeon: dungeonList['Freezington Ruins'],
+    }
+);
+
+
+//Galar Dungeons
+
+
+TownList['Slumbering Weald'] = new DungeonTown(
+    'Slumbering Weald',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)] //TODO change to alola champion
+);
+TownList['Inner Slumbering Weald'] = new DungeonTown(
+    'Inner Slumbering Weald',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
+TownList['Galar Mine'] = new DungeonTown(
+    'Galar Mine',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 3)]
+);
+TownList['Galar Mine No. 2'] = new DungeonTown(
+    'Galar Mine No. 2',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Galar_Water)]
+);
+TownList['Glimwood Tangle'] = new DungeonTown(
+    'Glimwood Tangle',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fighting)]
+);
+TownList['Rose Tower'] = new DungeonTown(
+    'Rose Tower',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 16)]
+);
+TownList['Watchtower Ruins'] = new DungeonTown(
+    'Watchtower Ruins',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+);
+TownList['East Lake Axwell'] = new DungeonTown(
+    'East Lake Axwell',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+);
+TownList['West Lake Axwell'] = new DungeonTown(
+    'West Lake Axwell',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+);
+TownList['North Lake Miloch'] = new DungeonTown(
+    'North Lake Miloch',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+);
+TownList['Dappled Grove'] = new DungeonTown(
+    'Dappled Grove',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+);
+TownList['Rolling Fields'] = new DungeonTown(
+    'Rolling Fields',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+);
+TownList['South Lake Miloch'] = new DungeonTown(
+    'South Lake Miloch',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+);
+TownList['Giant\'s Seat'] = new DungeonTown(
+    'Giant\'s Seat',
+    GameConstants.Region.galar,
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+);
+TownList['Hammerlocke Hills'] = new DungeonTown(
+    'Hammerlocke Hills',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+);
+TownList['Giant\'s Cap'] = new DungeonTown(
+    'Giant\'s Cap',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+);
+TownList['Dusty Bowl'] = new DungeonTown(
+    'Dusty Bowl',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+);
+TownList['Giant\'s Mirror'] = new DungeonTown(
+    'Giant\'s Mirror',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+);
+TownList['Stony Wilderness'] = new DungeonTown(
+    'Stony Wilderness',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+);
+TownList['Bridge Field'] = new DungeonTown(
+    'Bridge Field',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+);
+TownList['Motostoke Riverbank'] = new DungeonTown(
+    'Motostoke Riverbank',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+);
+TownList['Lake of Outrage'] = new DungeonTown(
+    'Lake of Outrage',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
+TownList['Towers of Two Fists'] = new DungeonTown(
+    'Towers of Two Fists',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
+TownList['Split-Decision Ruins'] = new DungeonTown(
+    'Split-Decision Ruins',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
+TownList['The Crown Tundra'] = new DungeonTown(
+    'The Crown Tundra',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
+TownList['Freezington Ruins'] = new DungeonTown(
+    'Freezington Ruins',
+    GameConstants.Region.galar,
+    [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)]
+);
