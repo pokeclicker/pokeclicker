@@ -13,14 +13,14 @@ class SafariBattle {
         SafariBattle._enemy(pokemon);
     }
 
-    public static load() {
+    public static load(enemy = SafariPokemon.random()) {
         // Stop left over keypresses
         GameController.simulateKey('ArrowUp', 'up');
         GameController.simulateKey('ArrowDown', 'up');
         GameController.simulateKey('ArrowLeft', 'up');
         GameController.simulateKey('ArrowRight', 'up');
         // Generate enemy
-        SafariBattle.enemy = SafariPokemon.random();
+        SafariBattle.enemy = enemy;
         Safari.inBattle(true);
         SafariBattle.text('What will you do?');
         SafariBattle.unlockButtons();

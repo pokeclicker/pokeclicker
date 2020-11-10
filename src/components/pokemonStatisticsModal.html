@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content" data-bind="with: App.game.statistics.selectedPokemonID()">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
-                <h5 class="modal-title text-muted" data-bind="text: `#${pokemonMap[$data].id.toString().padStart(3,0)}&nbsp;&nbsp;`"></h5>
+                <h5 class="modal-title text-muted" data-bind="text: `#${pokemonMap[$data].id <= 0 ? '???' : Math.floor(pokemonMap[$data].id).toString().padStart(3,0)}&nbsp;&nbsp;`"></h5>
                 <h5 class="modal-title text-light" data-bind="text: pokemonMap[$data].name">Pokémon Statistics</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

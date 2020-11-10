@@ -28,15 +28,15 @@ style="cursor:default" tabindex="-1">
                         >
                             <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
                             <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
-                            <span data-bind="text: ' +' + Underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
+                            <span data-bind="text: ' +' + App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
                         </button>
                     </div>
                     <div class='row no-gutters' style="text-align:center;">
                         <div class='progress'>
                             <div id='mineEnergyBar' class='progress-bar bg-warning' role='progressbar'
                                 aria-valuemin='0' aria-valuemax='100'
-                                data-bind="style: { width: Math.floor(Underground.energy/Underground.getMaxEnergy()*100) + '%' }">
-                                <span data-bind="text: 'Energy: ' + Math.floor(Underground.energy) + ' / ' + Underground.getMaxEnergy() + (Math.floor(Underground.energy) < Underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
+                                data-bind="style: { width: Math.floor(App.game.underground.energy/App.game.underground.getMaxEnergy()*100) + '%' }">
+                                <span data-bind="text: 'Energy: ' + Math.floor(App.game.underground.energy) + ' / ' + App.game.underground.getMaxEnergy() + (Math.floor(App.game.underground.energy) < App.game.underground.getMaxEnergy() ? ' (' + Underground.energyTick() + 's)' : '')"></span>
                             </div>
                         </div>
                     </div>
@@ -99,17 +99,17 @@ style="cursor:default" tabindex="-1">
                         </thead>
                         <tbody>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': Underground.getMaxEnergy(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Max)}}"></tr>
+                                'data': {'totalBonus': App.game.underground.getMaxEnergy(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Max)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': Underground.getMaxItems(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Items_Max)}}"></tr>
+                                'data': {'totalBonus': App.game.underground.getMaxItems(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': Underground.getEnergyGain(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Gain)}}"></tr>
+                                'data': {'totalBonus': App.game.underground.getEnergyGain(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': Underground.getEnergyRegenTime(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Energy_Regen_Time)}}"></tr>
+                                'data': {'totalBonus': App.game.underground.getEnergyRegenTime(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': Underground.getDailyDealsMax(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Daily_Deals_Max)}}"></tr>
+                                'data': {'totalBonus': App.game.underground.getDailyDealsMax(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Daily_Deals_Max)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus': Underground.getBombEfficiency(), 'upgrade': Underground.getUpgrade(Underground.Upgrades.Bomb_Efficiency)}}"></tr>
+                                'data': {'totalBonus': App.game.underground.getBombEfficiency(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Bomb_Efficiency)}}"></tr>
                         </tbody>
                     </table>
                 </div>
@@ -192,7 +192,7 @@ style="cursor:default" tabindex="-1">
                 <button class='btn btn-success btn-block'
                         data-bind='css: { disabled: !upgrade.canBuy() },
                                 text: upgrade.isMaxLevel() ? "Max" : "Upgrade",
-                                click: function(){upgrade.buy(); DailyDeal.generateDeals(Underground.getDailyDealsMax(), new Date());}'>
+                                click: function(){upgrade.buy(); DailyDeal.generateDeals(App.game.underground.getDailyDealsMax(), new Date());}'>
                 </button>
             </td>
     </script>

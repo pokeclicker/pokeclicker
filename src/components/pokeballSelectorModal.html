@@ -15,7 +15,8 @@
             <thead>
               <tr>
                 <th class="text-center" width="20%">Ball</th>
-                <th width="80%">Description</th>
+                <th>Description</th>
+                <th class="text-center">Qty</th>
               </tr>
             </thead>
             <tbody>
@@ -45,5 +46,8 @@
   </td>
   <td class="align-middle">
     <span data-bind="text: $data.description"></span>
+  </td>
+  <td class="text-center align-middle">
+    <span data-bind="text: $data.quantity && $data.quantity() ? GameConstants.formatNumber($data.quantity()) : '-', tooltip: $data.quantity && {title: $data.quantity().toLocaleString('en-US'), trigger: 'hover', animation: false, placement: 'left'}"></span>
   </td>
 </script>

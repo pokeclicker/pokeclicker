@@ -15,9 +15,6 @@ class Save {
     public static getSaveObject() {
         const saveObject = {};
 
-        // TODO: Make the Underground a game Feature
-        saveObject[Underground.saveKey] = Underground.save();
-
         Object.keys(App.game).filter(key => App.game[key].saveKey).forEach(key => {
             saveObject[App.game[key].saveKey] = App.game[key].toJSON();
         });
@@ -30,13 +27,6 @@ class Save {
 
         const settings = localStorage.getItem('settings');
         Settings.load(JSON.parse(settings));
-
-
-        const saveJSON = localStorage.getItem('save');
-        if (saveJSON !== null) {
-            const saveObject = JSON.parse(saveJSON);
-            Underground.load(saveObject[Underground.saveKey]);
-        }
 
         if (saved !== 'null') {
             return new Player(JSON.parse(saved));

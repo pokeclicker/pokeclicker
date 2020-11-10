@@ -224,23 +224,39 @@ body:hover {
 #pokemonList {
   span {
     vertical-align: middle;
-  }
-  td {
-    vertical-align: middle;
-    padding: 0 @tablePaddingWidth;
+    line-height: inherit;
   }
 
-  td:first-child {
-    min-width: 60%;
-    text-align: left;
-  }
-  th:first-child {
-    text-align: left;
-  }
-  th {
-    text-align: center;
-    //padding: 0 @tablePaddingWidth;
+  td {
     vertical-align: middle;
+    // Use the width as the height padding as well
+    padding: @tablePaddingWidth;
+
+    > div {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  // Fill the line when we're in small mode
+  .pokemonName { width: 100%; }
+
+  // Hide the name header when we're in small mode
+  .col-lg-3 & thead .pokemonName { display: none; }
+
+  // Name should grow faster than attack and level
+  .pokemonName { flex-grow: 10; }
+  .pokemonAttack, .pokemonLevel {
+    flex-grow: 1;
+    min-width: 60px;
+  }
+
+  .pokemonAttack { text-align: left; }
+  .pokemonLevel { text-align: right; }
+
+  .col-lg-6 & {
+    .pokemonName { width: auto; }
+    .pokemonAttack { text-align: right; }
   }
 }
 

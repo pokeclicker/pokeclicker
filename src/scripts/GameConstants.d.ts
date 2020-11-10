@@ -263,6 +263,7 @@ namespace GameConstants {
         'Burmy (plant)',
         'Spiritomb',
         'Cherubi',
+        'Zorua',
         'Meloetta (pirouette)',
         'Toxel',
     }

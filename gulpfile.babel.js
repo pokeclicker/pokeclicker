@@ -37,8 +37,7 @@ config = Object.assign({
     GOOGLE_ANALYTICS_INIT: false,
     GOOGLE_ANALYTICS_ID: false,
     DEV_BANNER: false,
-    DISCORD_CLIENT_ID: false,
-    DISCORD_LOGIN_URI: false,
+    DISCORD_LOGIN_PROXY: false,
     FEATURE_FLAGS: {
         preloadUnreleasedTowns: false,
     },
@@ -198,9 +197,8 @@ gulp.task('scripts', () => {
             const tsProject = typescript.createProject('tsconfig.json');
             const compileScripts = tsProject.src()
                 .pipe(replace('$VERSION', version))
-                .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
-                .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
-                .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
+                .pipe(replace('$DISCORD_ENABLED', !!config.DISCORD_LOGIN_PROXY))
+                .pipe(replace('$DISCORD_LOGIN_PROXY', config.DISCORD_LOGIN_PROXY))
                 .pipe(tsProject())
                 .pipe(gulp.dest(dests.scripts))
                 .pipe(browserSync.reload({stream: true}));

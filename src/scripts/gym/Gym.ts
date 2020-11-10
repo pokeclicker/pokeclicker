@@ -105,7 +105,7 @@ gymList['Celadon City'] = new Gym(
     BadgeEnums.Rainbow,
     1500,
     'Oh! I concede defeat. You are remarkably strong. I must confer you the Rainbow Badge.',
-    [new RouteKillRequirement(10, GameConstants.Region.kanto, 8)]
+    [new RouteKillRequirement(10, GameConstants.Region.kanto, 7)]
 );
 gymList['Saffron City'] = new Gym(
     'Sabrina',

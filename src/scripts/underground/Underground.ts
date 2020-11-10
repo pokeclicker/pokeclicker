@@ -1,5 +1,12 @@
-class Underground {
-    public static saveKey = 'underground';
+/// <reference path="../../declarations/GameHelper.d.ts" />
+///<reference path="../underground/UndergroundUpgrade.ts"/>
+class Underground implements Feature {
+    name = 'Underground';
+    saveKey = 'underground';
+
+    upgradeList: Array<Upgrade>;
+    defaults: Record<string, any>;
+    private _energy: KnockoutObservable<number> = ko.observable(0);
 
     public static itemSelected;
     public static energyTick: KnockoutObservable<number> = ko.observable(60);
@@ -8,35 +15,80 @@ class Underground {
     public static sortDirection = -1;
     public static lastPropSort = 'none';
 
-    private static _energy: KnockoutObservable<number> = ko.observable(0);
-    public static upgradeList: Array<Upgrade> = [];
-
-    public static getMaxEnergy() {
-        return Underground.BASE_ENERGY_MAX + this.getUpgrade(Underground.Upgrades.Energy_Max).calculateBonus();
+    constructor() {
+        this.upgradeList = [];
     }
 
-    public static getMaxItems() {
-        return Underground.BASE_ITEMS_MAX + this.getUpgrade(Underground.Upgrades.Items_Max).calculateBonus();
+    initialize() {
+        this.upgradeList = [
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Energy_Max, 'Max Energy', 10,
+                AmountFactory.createArray(
+                    GameHelper.createArray(50, 500, 50), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 100, 10)
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Items_Max, 'Max items', 4,
+                AmountFactory.createArray(
+                    GameHelper.createArray(200, 800, 200), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 4, 1)
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Energy_Gain, 'Energy restored', 17,
+                AmountFactory.createArray(
+                    GameHelper.createArray(100, 1700, 100), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 17, 1)
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Energy_Regen_Time, 'Energy regen time', 20,
+                AmountFactory.createArray(
+                    GameHelper.createArray(20, 400, 20), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 20, 1),
+                false
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Daily_Deals_Max, 'Daily deals', 2,
+                AmountFactory.createArray(
+                    GameHelper.createArray(150, 300, 150), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 2, 1)
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Bomb_Efficiency, 'Bomb Efficiency', 5,
+                AmountFactory.createArray(
+                    GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 10, 2)
+            ),
+        ];
     }
 
-    public static getEnergyGain() {
-        return Underground.BASE_ENERGY_GAIN + this.getUpgrade(Underground.Upgrades.Energy_Gain).calculateBonus();
+    update(delta: number) {
     }
 
-    public static getEnergyRegenTime() {
-        return Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(Underground.Upgrades.Energy_Regen_Time).calculateBonus();
+    getMaxEnergy() {
+        return Underground.BASE_ENERGY_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Max).calculateBonus();
     }
 
-    public static getDailyDealsMax() {
-        return Underground.BASE_DAILY_DEALS_MAX + this.getUpgrade(Underground.Upgrades.Daily_Deals_Max).calculateBonus();
+    getMaxItems() {
+        return Underground.BASE_ITEMS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max).calculateBonus();
     }
 
-    public static getBombEfficiency() {
-        return Underground.BASE_BOMB_EFFICIENCY + this.getUpgrade(Underground.Upgrades.Bomb_Efficiency).calculateBonus();
+    getEnergyGain() {
+        return Underground.BASE_ENERGY_GAIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Gain).calculateBonus();
     }
 
+    getEnergyRegenTime() {
+        return Underground.BASE_ENERGY_REGEN_TIME - this.getUpgrade(UndergroundUpgrade.Upgrades.Energy_Regen_Time).calculateBonus();
+    }
 
-    static getUpgrade(upgrade: Underground.Upgrades) {
+    getDailyDealsMax() {
+        return Underground.BASE_DAILY_DEALS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Daily_Deals_Max).calculateBonus();
+    }
+
+    getBombEfficiency() {
+        return Underground.BASE_BOMB_EFFICIENCY + this.getUpgrade(UndergroundUpgrade.Upgrades.Bomb_Efficiency).calculateBonus();
+    }
+
+    getUpgrade(upgrade: UndergroundUpgrade.Upgrades) {
         for (let i = 0; i < this.upgradeList.length; i++) {
             if (this.upgradeList[i].name == upgrade) {
                 return this.upgradeList[i];
@@ -78,7 +130,7 @@ class Underground {
         const item = Underground.getMineItemById(id);
 
         if (item.isStone()) {
-            const evostone: EvolutionStone = ItemList[item.valueType];
+            const evostone: EvolutionStone = (ItemList[item.valueType] as EvolutionStone);
             evostone.gain(num);
             return;
         }
@@ -108,7 +160,7 @@ class Underground {
         }
     }
 
-    public static gainEnergy() {
+    gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
             this.energy = Math.min(this.getMaxEnergy(), this.energy + (oakMultiplier * this.getEnergyGain()));
@@ -124,7 +176,7 @@ class Underground {
         }
     }
 
-    public static gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
+    gainEnergyThroughItem(item: GameConstants.EnergyRestoreSize) {
         // Restore a percentage of maximum energy
         const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
         const gain = Math.min(this.getMaxEnergy() - this.energy, effect * this.getMaxEnergy());
@@ -209,7 +261,7 @@ class Underground {
         return success;
     }
 
-    public static openUndergroundModal() {
+    openUndergroundModal() {
         if (this.canAccess()) {
             $('#mineModal').modal('show');
         } else {
@@ -220,30 +272,30 @@ class Underground {
         }
     }
 
-    private static canAccess() {
+    canAccess() {
         return MapHelper.accessToRoute(11, 0) && App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Explorer_kit);
     }
 
-    public static calculateItemEffect(item: GameConstants.EnergyRestoreSize) {
+    calculateItemEffect(item: GameConstants.EnergyRestoreSize) {
         const effect: number = GameConstants.EnergyRestoreEffect[GameConstants.EnergyRestoreSize[item]];
         return effect * this.getMaxEnergy();
     }
 
-    public static load(saveObject: Record<string, any>): void {
-        if (!saveObject) {
+    fromJSON(json: Record<string, any>): void {
+        if (!json) {
             console.warn('Underground not loaded.');
             return;
         }
 
-        const upgrades = saveObject['upgrades'];
-        for (const item in Underground.Upgrades) {
+        const upgrades = json['upgrades'];
+        for (const item in UndergroundUpgrade.Upgrades) {
             if (isNaN(Number(item))) {
-                Underground.getUpgrade((<any>Underground.Upgrades)[item]).level = upgrades[item] || 0;
+                this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]).level = upgrades[item] || 0;
             }
         }
-        this.energy = saveObject['energy'] || 0;
+        this.energy = json['energy'] || 0;
 
-        const mine = saveObject['mine'];
+        const mine = json['mine'];
         if (mine) {
             Mine.loadSavedMine(mine);
         } else {
@@ -251,12 +303,12 @@ class Underground {
         }
     }
 
-    public static save(): Record<string, any> {
+    toJSON(): Record<string, any> {
         const undergroundSave = {};
         const upgradesSave = {};
-        for (const item in Underground.Upgrades) {
+        for (const item in UndergroundUpgrade.Upgrades) {
             if (isNaN(Number(item))) {
-                upgradesSave[item] = Underground.getUpgrade((<any>Underground.Upgrades)[item]).level;
+                upgradesSave[item] = this.getUpgrade((<any>UndergroundUpgrade.Upgrades)[item]).level;
             }
         }
         undergroundSave['upgrades'] = upgradesSave;
@@ -266,11 +318,11 @@ class Underground {
     }
 
     // Knockout getters/setters
-    static get energy(): number {
+    get energy(): number {
         return this._energy();
     }
 
-    static set energy(value) {
+    set energy(value) {
         this._energy(value);
     }
 
@@ -283,15 +335,6 @@ $(document).ready(function () {
 });
 
 namespace Underground {
-    export enum Upgrades {
-        'Energy_Max',
-        'Items_Max',
-        'Energy_Gain',
-        'Energy_Regen_Time',
-        'Daily_Deals_Max',
-        'Bomb_Efficiency',
-    }
-
     export const BASE_ENERGY_MAX = 50;
     export const BASE_ITEMS_MAX = 3;
     export const BASE_ENERGY_GAIN = 3;

@@ -335,8 +335,8 @@ export const WaterAreas = {
     1: new Set([40, 41, 'Slowpoke Well']),
     2: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Shoal Cave', 'Seafloor Cavern']),
     3: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
-    4: new Set(['Undella Bay', 'Humilau City']),
-    7: new Set(['Hulbury', 12, 13, 'Lake of Outrage', 'South Lake Miloch', 'North Lake Miloch', 'East Lake Axwell', 'West Lake Axwell']),
+    4: new Set(['Humilau City']),
+    7: new Set(['Hulbury', 11, 13, 14]),
 };
 
 export const IceAreas = {
@@ -361,8 +361,7 @@ export const CaveAreas = {
     1: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
     2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
     3: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
-    4: new Set(['Mistralton Cave', 'Seaside Cave', 'Wellspring Cave', 'Twist Mountain', 'Reversal Mountain', 'Cave of Being', 'Relic Passage', 'Relica Castle', 'Victory Road Unova']),
-    7: new Set(['Split-Decision Ruins']),
+    4: new Set(['Mistralton Cave', 'Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Cave of Being', 'Relic Passage', 'Relica Castle', 'Victory Road Unova']),
 };
 
 export const GemCaveAreas = {
@@ -379,7 +378,7 @@ export const PowerPlantAreas = {
     1: new Set(['Tin Tower']),
     2: new Set(['Mauville City']),
     3: new Set(['Sunyshore City']),
-    4: new Set(['Virbank Complex', 'Castelia Sewers', 'Nimbasa City']),
+    4: new Set(['Castelia Sewers', 'Nimbasa City']),
     7: new Set(['Motostoke', 'Spikemuth']),
 };
 
@@ -462,6 +461,7 @@ export enum PokemonItemType {
     'Burmy (plant)',
     'Spiritomb',
     'Cherubi',
+    'Zorua',
     'Meloetta (pirouette)',
 }
 
@@ -764,19 +764,15 @@ export const SinnohDungeons = [
 export const UnovaDungeons = [
     'Pledge Grove',
     'Floccesy Ranch',
-    'Virbank Complex', // Optional dungeon, contains no unique Pokémon, safe to scrap
     'Liberty Garden',
     'Castelia Sewers',
     'Relic Passage',
-    'Desert Resort', // Should really be a route
     'Relic Castle',
     'Lostlorn Forest',
     'Chargestone Cave',
     'Mistralton Cave',
     'Celestial Tower',
     'Reversal Mountain',
-    'Strange House', // Optional dungeon, contains no unique Pokémon, safe to scrap
-    'Undella Bay', // Should really be a route
     'Seaside Cave',
     'Giant Chasm',
     'Abundant Shrine',
@@ -786,7 +782,6 @@ export const UnovaDungeons = [
     'Dragonspiral Tower',
     'Moor of Icirrus',
     'Pinwheel Forest',
-    'Wellspring Cave', // Optional dungeon, contains no unique Pokémon, safe to scrap
     'Dreamyard',
     'P2 Laboratory',
 ];

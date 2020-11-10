@@ -28,7 +28,7 @@
                         </thead>
                         <tbody class="collapse show" data-bind="attr: { id: 'collapse-shard-' + $index() }">
                             <!-- ko foreach: Array(Shards.nEffects) -->
-                                <tr>
+                                <tr data-bind='if: App.game.shards.isValidUpgrade($parentContext.$index(), $index())'>
                                     <td data-bind='text: GameConstants.TypeEffectiveness[$index()]'></td>
                                     <td width='50%'>
                                         <div class="progress"
