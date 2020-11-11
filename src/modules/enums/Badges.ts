@@ -84,6 +84,19 @@ enum BadgeEnums {
     'Elite_Wikstrom',
     'Elite_Drasna',
     'Elite_KalosChampion',
+    // Galar
+    'Galar_Grass',
+    'Galar_Water',
+    'Galar_Fire',
+    'Galar_Fighting',
+    'Galar_Fairy',
+    'Galar_Rock',
+    'Galar_Dark',
+    'Galar_Dragon',
+    'Elite_Marnie',
+    'Elite_Hop',
+    'Elite_Bede',
+    'Elite_GalarChampion',
 }
 
 export default BadgeEnums;

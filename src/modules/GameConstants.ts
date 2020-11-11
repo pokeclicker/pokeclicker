@@ -26,7 +26,7 @@ export const TotalPokemonsPerRegion = [
     649, // 156 - Unova
     721, // 72 - Kalos
     809, // 88 - Alola
-    893, // 84 - Galar
+    898, // 89 - Galar
 ];
 
 export const ITEM_USE_TIME = 30;
@@ -487,6 +487,12 @@ export enum StoneType {
     'Prism_scale',
     'Sachet',
     'Whipped_dream',
+    'Chipped_pot',
+    'Strawberry_sweet',
+    'Ice_stone',
+    'Tart_apple',
+    'Sweet_apple',
+    'Unity_reins',
 }
 
 export enum BattleItemType {

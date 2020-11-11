@@ -246,7 +246,13 @@ namespace GameConstants {
         'Razor_fang',
         'Prism_scale',
         'Sachet',
-        'Whipped_dream'
+        'Whipped_dream',
+        'Strawberry_sweet',
+        'Chipped_pot',
+        'Tart_apple',
+        'Sweet_apple',
+        'Unity_reins',
+        'Ice_stone'
     }
     declare enum BattleItemType {
         'xAttack' = '',

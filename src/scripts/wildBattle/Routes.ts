@@ -1537,14 +1537,56 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 4', GameConstants.Region.galar, 4,
     new RoutePokemon({
-        land: ['Yamper', 'Wooloo', 'Milcery'],
-    })
+        land: ['Yamper', 'Wooloo', 'Milcery', 'Meowth (Galar)', 'Budew', 'Cutiefly', 'Ferroseed', 'Joltik', 'Pikachu', 'Eevee', 'Electrike', 'Pumpkaboo', 'Diglett'],
+        water: ['Magikarp', 'Goldeen', 'Chewtle'],
+    }),
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine'))]
 ));
 Routes.add(new RegionRoute(
     'Galar Route 5', GameConstants.Region.galar, 5,
     new RoutePokemon({
-        land: ['Dottler', 'Applin', 'Eldegoss'],
-    })
+        land: ['Dottler', 'Applin', 'Eldegoss', "Farfetch'd (Galar)", 'Wobbuffet', 'Drifloon', 'Minccino', 'Spritzee', 'Swirlix', 'Stufful', 'Espurr', 'Nincada', 'Dewpider', 'Nuzleaf', 'Lombre'],
+        water: ['Magikarp', 'Chewtle', 'Goldeen'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Galar_Grass)]
+));
+Routes.add(new RegionRoute(
+    'Motostoke Outskirts', GameConstants.Region.galar, 6,
+    new RoutePokemon({
+        land: ['Impidimp', 'Chewtle', 'Koffing', 'Hatenna', 'Noctowl', 'Throh', 'Sawk', 'Sudowoodo', 'Salandit', 'Pawniard', 'Scraggy', 'Croagunk', 'Roggenrola'],
+    }),
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Galar Mine No. 2'))]
+));
+Routes.add(new RegionRoute(
+    'Galar Route 6', GameConstants.Region.galar, 7,
+    new RoutePokemon({
+        land: ['Silicobra', 'Torkoal', 'Duskull', 'Hippopotas', 'Skorupi', 'Heatmor', 'Durant', 'Hawlucha', 'Dugtrio', 'Trapinch', 'Axew', 'Maractus', 'Yamask (Galar)', 'Helioptile'],
+        water: ['Goldeen', 'Magikarp', 'Drednaw'],
+        headbutt: ['Greedent'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fire)]
+));
+Routes.add(new RegionRoute(
+    'Galar Route 7', GameConstants.Region.galar, 8,
+    new RoutePokemon({
+        land: ['Thievul', 'Corviknight', 'Perrserker', 'Morpeko', 'Liepard', 'Seismitoad', 'Karrablast', 'Shelmet', 'Meowstic', 'Corviknight', 'Galvantula', 'Inkay', 'Thievul', 'Perrserker', 'Morpeko'],
+        headbutt: ['Greedent'],
+    }),
+    [new GymBadgeRequirement(BadgeEnums.Galar_Fairy)]
+));
+Routes.add(new RegionRoute(
+    'Galar Route 8', GameConstants.Region.galar, 9,
+    new RoutePokemon({
+        land: ['Sandaconda', 'Haunter', 'Rhyhorn', 'Dusclops', 'Bronzong', 'Hippowdon', 'Drapion', 'Solrock', 'Lunatone', 'Boldore', 'Gurdurr', 'Golett', 'Pawniard', 'Rufflet','Vullaby', 'Togedemaru', 'Crustle'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 8)]
+));
+Routes.add(new RegionRoute(
+    'Steamdrift Way', GameConstants.Region.galar, 10,
+    new RoutePokemon({
+        land: ['Sneasel', 'Delibird', 'Snover', 'Darumaka (Galar)', 'Snorunt', 'Snom', 'Throh', 'Sawk', 'Vanillish'],
+    }),
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 9)]
 ));
 Routes.add(new RegionRoute(
     'Galar Route 6', GameConstants.Region.galar, 6,

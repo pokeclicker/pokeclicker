@@ -1178,3 +1178,178 @@ gymList['Champion Diantha'] = new Gym(
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
 );
+
+
+//Galar Leaders
+//TODO  Balancing of levels, rewards, and hp
+
+
+gymList['Turffield'] = new Gym(
+    'Milo',
+    'Turffield',
+    [
+        new GymPokemon('Gossifleur', 2458300, 19),
+        new GymPokemon('Eldegoss', 2462000, 20),
+    ],
+    BadgeEnums.Galar_Grass,
+    128000,
+    'The power of Grass has wilted... What an incredible Gym Challenger!',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 4)]
+);
+gymList['Hulbury'] = new Gym(
+    'Nessa',
+    'Hulbury',
+    [
+        new GymPokemon('Goldeen', 2458300, 22),
+        new GymPokemon('Arrokuda', 2462000, 23),
+        new GymPokemon('Drednaw', 2458300, 24),
+    ],
+    BadgeEnums.Galar_Water,
+    128000,
+    'I may proudly be the strongest member of this Gym, but I was totally washed away!',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 5)]
+);
+gymList['Motostoke'] = new Gym(
+    'Kabu',
+    'Motostoke',
+    [
+        new GymPokemon('Ninetales', 2458300, 25),
+        new GymPokemon('Arcanine', 2462000, 25),
+        new GymPokemon('Centiskorch', 2458300, 27),
+    ],
+    BadgeEnums.Galar_Fire,
+    128000,
+    'I\'m often regarded as the first real roadblock of the Gym Challenge, and yet you defeated me! Clearly, your talent surpassed my many years of experience. I still have much to learn!',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 6)]
+);
+gymList['Stow-on-Side'] = new Gym(
+    'Bea',
+    'Stow-on-Side',
+    [
+        new GymPokemon('Hitmontop', 2458300, 34),
+        new GymPokemon('Pangoro', 2462000, 34),
+        new GymPokemon("Sirfetch'd", 2458300, 35),
+        new GymPokemon('Machamp', 2458300, 36),
+    ],
+    BadgeEnums.Galar_Fighting,
+    128000,
+    'Your strength nearly made me want to turn and run in my bare feet!',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 7)]
+);
+gymList['Ballonlea'] = new Gym(
+    'Opal',
+    'Ballonlea',
+    [
+        new GymPokemon('Weezing (Galar)', 2458300, 36),
+        new GymPokemon('Mawile', 2462000, 36),
+        new GymPokemon('Togekiss', 2458300, 37),
+        new GymPokemon('Alcremie', 2458300, 38),
+    ],
+    BadgeEnums.Galar_Fairy,
+    128000,
+    'Your pink is still lacking, but you\'re an excellent Trainer with some excellent Pokémon.',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Glimwood Tangle'))]
+);
+gymList['Circhester'] = new Gym(
+    'Gordie',
+    'Circhester',
+    [
+        new GymPokemon('Barbaracle', 2458300, 40),
+        new GymPokemon('Shuckle', 2462000, 40),
+        new GymPokemon('Stonjourner', 2458300, 41),
+        new GymPokemon('Coalossal', 2458300, 42),
+    ],
+    BadgeEnums.Galar_Rock,
+    128000,
+    'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 10)]
+);
+gymList['Spikemuth'] = new Gym(
+    'Piers',
+    'Spikemuth',
+    [
+        new GymPokemon('Scrafty', 2458300, 44),
+        new GymPokemon('Malamar', 2462000, 45),
+        new GymPokemon('Skuntank', 2458300, 45),
+        new GymPokemon('Obstagoon', 2458300, 46),
+    ],
+    BadgeEnums.Galar_Dark,
+    128000,
+    'Me an\' my team gave it our best. Let\'s meet up again for a battle some time...',
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 14)]
+);
+gymList['Hammerlocke'] = new Gym(
+    'Raihan',
+    'Hammerlocke',
+    [
+        new GymPokemon('Gigalith', 2458300, 46),
+        new GymPokemon('Flygon', 2462000, 47),
+        new GymPokemon('Sandaconda', 2458300, 46),
+        new GymPokemon('Duraludon', 2458300, 48),
+    ],
+    BadgeEnums.Galar_Dragon,
+    128000,
+    'I might have lost, but I still look good. Maybe I should snap a quick selfie...',
+    [new GymBadgeRequirement(BadgeEnums.Galar_Dark)]
+);
+gymList['Trainer Marnie'] = new Gym(
+    'Marnie',
+    'Trainer Marnie',
+    [
+        new GymPokemon('Liepard', 1945330, 49),
+        new GymPokemon('Toxicroak', 1948300, 49),
+        new GymPokemon('Scrafty', 1952000, 50),
+        new GymPokemon('Morpeko', 1957000, 51),
+        new GymPokemon('Grimmsnarl', 1945330, 50),
+    ],
+    BadgeEnums.Elite_Marnie,
+    64000,
+    'I mean, If you\'re gonna win, you could at least win in a way that makes me look good, right?',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))]
+);
+gymList['Trainer Hop'] = new Gym(
+    'Hop',
+    'Trainer Hop',
+    [
+        new GymPokemon('Dubwool', 1945330, 49),
+        new GymPokemon('Corviknight', 1948300, 49),
+        new GymPokemon('Pincurchin', 1952000, 50),
+        new GymPokemon('Snorlax', 1957000, 51),
+        new GymPokemon('Cramorant', 1945330, 50),
+    ],
+    BadgeEnums.Elite_Hop,
+    64000,
+    'Thanks, mate. I\'m really glad you were the one here with me.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)]
+);
+gymList['Trainer Bede'] = new Gym(
+    'Bede',
+    'Trainer Bede',
+    [
+        new GymPokemon('Mawile', 1945330, 49),
+        new GymPokemon('Gardevoir', 1948300, 49),
+        new GymPokemon('Rapidash (Galar)', 1952000, 50),
+        new GymPokemon('Sylveon', 1957000, 51),
+        new GymPokemon('Hatterene', 1945330, 50),
+    ],
+    BadgeEnums.Elite_Bede,
+    64000,
+    'I couldn\'t win, but at least I was able to show everyone how great Fairy types are.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Hop)]
+);
+gymList['Champion Leon'] = new Gym(
+    'Leon',
+    'Champion Leon',
+    [
+        new GymPokemon('Aegislash', 1945330, 49),
+        new GymPokemon('Dragapult', 1948300, 49),
+        new GymPokemon('Haxorus', 1952000, 50),
+        new GymPokemon('Seismitoad', 1957000, 51),
+        new GymPokemon('Mr. Rime', 1945330, 60),
+        new GymPokemon('Charizard', 1945330, 50),
+    ],
+    BadgeEnums.Elite_GalarChampion,
+    64000,
+    'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Bede)]
+);
