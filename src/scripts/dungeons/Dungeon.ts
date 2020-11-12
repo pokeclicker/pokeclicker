@@ -616,6 +616,12 @@ dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
     2203000,
     [new DungeonBossPokemon('Muk', 8000000, 70)],
     96500, 201, 35);
+dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
+    ['Patrat', 'Sandile', 'Scraggy'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Victini', 8000000, 70)],
+    96500, 201, 35);
 
 dungeonList['Relic Passage'] = new Dungeon('Relic Passage',
     ['Rattata', 'Raticate', 'Roggenrola', 'Woobat', 'Timburr'],
