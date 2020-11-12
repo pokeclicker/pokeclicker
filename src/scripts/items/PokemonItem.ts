@@ -44,3 +44,5 @@ ItemList['Cherubi']              = new PokemonItem('Cherubi', 5000);
 ItemList['Spiritomb']            = new PokemonItem('Spiritomb', 5000);
 ItemList['Zorua']                = new PokemonItem('Zorua', 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem('Meloetta (pirouette)', 50000);
+ItemList['Eternatus']            = new PokemonItem('Eternatus', 10000);
+ItemList['Toxel']                = new PokemonItem('Toxel', 5000);
