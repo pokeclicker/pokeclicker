@@ -1897,6 +1897,9 @@ const MotostokeShop = new Shop([
 ]);
 const HammerlockeShop = new Shop([
     ItemList['Dragon_egg'],
+    ItemList['Rusted_sword'],
+    ItemList['Rusted_shield'],
+    ItemList['Eternatus'],
 ]);
 const StowonSideShop: Shop = new Shop([
     ItemList['Fighting_egg'],
