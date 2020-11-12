@@ -157,6 +157,8 @@ Object.values(NotificationConstants.NotificationSetting).forEach(setting => {
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
+
+// Party Sorting
 const sortsettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
@@ -166,25 +168,29 @@ Settings.add(new Setting<number>('partySort', 'Sort:',
 ));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 
-/*
- * THESE SETTINGS ARE SUPPOSED TO BE IN THE BREEDING FILTER MENU
- */
+// Breeding Filters
 Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter',
-    [new SettingOption('All', '-2')].concat(
-        Settings.arrayToSettingOptionArray(GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none')))
-        .concat([new SettingOption('None', '-1')]),
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.arrayToSettingOptionArray(GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none')),
+        new SettingOption('None', '-1'),
+    ],
     '-2'
 ));
 Settings.add(new Setting<string>('breedingTypeFilter1', 'breedingTypeFilter1',
-    [new SettingOption('All', '-2')].concat(
-        Settings.arrayToSettingOptionArray(GameHelper.enumStrings(PokemonType).filter(t => t != 'None')))
-        .concat([new SettingOption('None', '-1')]),
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.arrayToSettingOptionArray(GameHelper.enumStrings(PokemonType).filter(t => t != 'None')),
+        new SettingOption('None', '-1'),
+    ],
     '-2'
 ));
 Settings.add(new Setting<string>('breedingTypeFilter2', 'breedingTypeFilter2',
-    [new SettingOption('All', '-2')].concat(
-        Settings.arrayToSettingOptionArray(GameHelper.enumStrings(PokemonType).filter(t => t != 'None')))
-        .concat([new SettingOption('None', '-1')]),
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.arrayToSettingOptionArray(GameHelper.enumStrings(PokemonType).filter(t => t != 'None')),
+        new SettingOption('None', '-1'),
+    ],
     '-2'
 ));
 Settings.add(new Setting<string>('breedingShinyFilter', 'breedingShinyFilter',
