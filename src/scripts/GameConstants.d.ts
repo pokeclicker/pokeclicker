@@ -261,6 +261,8 @@ namespace GameConstants {
         'Sweet_apple',
         'Unity_reins',
         'Ice_stone',
+        'Rusted_sword',
+        'Rusted_shield'
     }
     declare enum BattleItemType {
         'xAttack' = '',

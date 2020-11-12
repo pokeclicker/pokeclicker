@@ -975,8 +975,8 @@ dungeonList['Inner Slumbering Weald'] = new Dungeon('Inner Slumbering Weald',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Zamazenta', 8000000, 70),
-        new DungeonBossPokemon('Zacian', 8000000, 70),
+        new DungeonBossPokemon('Zamazenta (Battle Hero)', 8000000, 70),
+        new DungeonBossPokemon('Zacian (Battle Hero)', 8000000, 70),
     ],
     96500, 201, 35);
 

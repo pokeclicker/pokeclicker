@@ -493,6 +493,8 @@ export enum StoneType {
     'Tart_apple',
     'Sweet_apple',
     'Unity_reins',
+    'Rusted_sword',
+    'Rusted_shield',
 }
 
 export enum BattleItemType {
