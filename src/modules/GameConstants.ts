@@ -691,6 +691,21 @@ export const KalosGyms = [
     'Champion Diantha',
 ];
 
+export const GalarGyms = [
+    'Turffield',
+    'Hulbury',
+    'Motostoke',
+    'Stow-On-Side',
+    'Ballonlea',
+    'Circhester',
+    'Spikemuth',
+    'Hammerlocke',
+    'Trainer Marnie',
+    'Trainer Hop',
+    'Trainer Bede',
+    'Champion Leon',
+];
+
 export const RegionGyms = [
     KantoGyms,
     JohtoGyms,
@@ -698,6 +713,7 @@ export const RegionGyms = [
     SinnohGyms,
     UnovaGyms,
     KalosGyms,
+    GalarGyms,
 ];
 
 export function getGymIndex(gym: string): number {
