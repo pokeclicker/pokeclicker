@@ -39,6 +39,7 @@ class Game {
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
         AchievementHandler.initialize();
+        FarmController.initialize();
     }
 
     load() {
@@ -72,6 +73,7 @@ class Game {
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), new Date());
+        BerryDeal.generateDeals(new Date());
 
         this.gameState = GameConstants.GameState.fighting;
     }
@@ -136,14 +138,18 @@ class Game {
         Save.counter += GameConstants.TICK_TIME;
         if (Save.counter > GameConstants.SAVE_TICK) {
             const now = new Date();
+            // Check if it's a new day
             if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
-                this.quests.resetRefreshes();
-                this.quests.generateQuestList();
+                // Give the player a free quest refresh
+                this.quests.freeRefresh(true);
+                //Refresh the Underground deals
                 DailyDeal.generateDeals(this.underground.getDailyDealsMax(), now);
+                BerryDeal.generateDeals(now);
                 Notifier.notify({
-                    message: 'It\'s a new day! Your quests and underground deals have been updated.',
+                    title: 'It\'s a new day!',
+                    message: 'Your Underground deals have been updated.<br/><i>You have a free quest refresh.</i>',
                     type: NotificationConstants.NotificationOption.info,
-                    timeout: 1e4,
+                    timeout: 3e4,
                 });
             }
             player._lastSeen = Date.now();
