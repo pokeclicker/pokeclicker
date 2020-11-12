@@ -47,3 +47,8 @@ RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMa
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Tornadus));
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap.Thundurus));
 RoamingPokemonList.add(GameConstants.Region.unova, new RoamingPokemon(pokemonMap['Meloetta (aria)'], undefined, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)));
+
+//Galar
+RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon(pokemonMap.Zarude, undefined, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon(pokemonMap.Spectrier, undefined, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));
+RoamingPokemonList.add(GameConstants.Region.galar, new RoamingPokemon(pokemonMap.Glastrier, undefined, new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)));

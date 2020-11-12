@@ -162,12 +162,14 @@ namespace GameConstants {
         2: Set<string | number>;
         3: Set<string | number>;
         4: Set<string>;
+        7: Set<string>;
     };
     declare const IceAreas: {
         0: Set<string>;
         1: Set<string>;
         2: Set<string>;
         3: Set<string | number>;
+        7: Set<string>;
     };
     declare const ForestAreas: {
         0: Set<string | number>;
@@ -175,6 +177,7 @@ namespace GameConstants {
         2: Set<string | number>;
         3: Set<string | number>;
         4: Set<string>;
+        7: Set<string>;
     };
     declare const CaveAreas: {
         0: Set<string>;
@@ -182,6 +185,7 @@ namespace GameConstants {
         2: Set<string>;
         3: Set<string>;
         4: Set<string>;
+        7: Set<string>;
     };
     declare const GemCaveAreas: {
         0: Set<string>;
@@ -189,6 +193,7 @@ namespace GameConstants {
         2: Set<string>;
         3: Set<string>;
         4: Set<string>;
+        7: Set<string>;
     };
     declare const PowerPlantAreas: {
         0: Set<string>;
@@ -196,6 +201,7 @@ namespace GameConstants {
         2: Set<string>;
         3: Set<string>;
         4: Set<string>;
+        7: Set<string>;
     };
     declare const MansionAreas: {
         0: Set<string>;
@@ -203,6 +209,7 @@ namespace GameConstants {
         2: Set<string>;
         3: Set<string>;
         4: Set<string>;
+        7: Set<string>;
     };
     declare const GraveyardAreas: {
         0: Set<string>;
@@ -210,6 +217,7 @@ namespace GameConstants {
         2: Set<string>;
         3: Set<string>;
         4: Set<string>;
+        7: Set<string>;
     };
     declare enum Starter {
         'None' = '',
@@ -252,7 +260,7 @@ namespace GameConstants {
         'Tart_apple',
         'Sweet_apple',
         'Unity_reins',
-        'Ice_stone'
+        'Ice_stone',
     }
     declare enum BattleItemType {
         'xAttack' = '',
@@ -348,6 +356,7 @@ namespace GameConstants {
     declare const SinnohGyms: string[];
     declare const UnovaGyms: string[];
     declare const KalosGyms: string[];
+    declare const GalarGyms: string[];
     declare const RegionGyms: string[][];
     declare function getGymIndex(gym: string): number;
     declare const KantoDungeons: string[];
@@ -356,6 +365,7 @@ namespace GameConstants {
     declare const SinnohDungeons: string[];
     declare const UnovaDungeons: string[];
     declare const KalosDungeons: string[];
+    declare const GalarDungeons: string[];
     declare const RegionDungeons: string[][];
     declare function getDungeonIndex(dungeon: string): number;
     declare const StartingTowns: string[];

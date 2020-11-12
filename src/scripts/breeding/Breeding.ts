@@ -42,7 +42,7 @@ class Breeding implements Feature {
             ['Tepig', 'Pansear'],
             ['Fennekin'],
             ['Litten'],
-            ['Scorbunny'],
+            ['Scorbunny', 'Sizzlipede'],
         ];
         this.hatchList[EggType.Water] = [
             ['Squirtle', 'Lapras', 'Staryu', 'Psyduck'],
@@ -52,7 +52,7 @@ class Breeding implements Feature {
             ['Oshawott', 'Panpour'],
             ['Froakie'],
             ['Popplio'],
-            ['Sobble'],
+            ['Sobble', 'Chewtle'],
         ];
         this.hatchList[EggType.Grass] = [
             ['Bulbasaur', 'Oddish', 'Tangela', 'Bellsprout'],
@@ -62,7 +62,7 @@ class Breeding implements Feature {
             ['Snivy', 'Pansage'],
             ['Chespin'],
             ['Rowlet'],
-            ['Grookey'],
+            ['Grookey', 'Gossifleur'],
         ];
         this.hatchList[EggType.Fighting] = [
             ['Hitmonlee', 'Hitmonchan', 'Machop', 'Mankey'],
@@ -72,7 +72,7 @@ class Breeding implements Feature {
             ['Throh', 'Sawk'],
             [],
             [],
-            [],
+            ['Falinks'],
         ];
         this.hatchList[EggType.Electric] = [
             ['Magnemite', 'Pikachu', 'Voltorb', 'Electabuzz'],
@@ -82,7 +82,7 @@ class Breeding implements Feature {
             ['Blitzle'],
             [],
             [],
-            [],
+            ['Toxel', 'Pincurchin'],
         ];
         this.hatchList[EggType.Dragon] = [
             ['Dratini', 'Dragonair', 'Dragonite'],
@@ -92,7 +92,7 @@ class Breeding implements Feature {
             ['Deino', 'Zweilous', 'Hydreigon'],
             [],
             [],
-            [],
+            ['Dreepy', 'Drakloak', 'Dragapult'],
         ];
         BreedingController.initialize();
     }

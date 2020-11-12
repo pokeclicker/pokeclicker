@@ -519,6 +519,7 @@ export enum PokemonItemType {
     'Cherubi',
     'Zorua',
     'Meloetta (pirouette)',
+    'Toxel',
 }
 
 export enum PokeBlockColor {
@@ -862,6 +863,35 @@ export const KalosDungeons = [
     // 'Unknown Dungeon',
 ];
 
+export const GalarDungeons = [
+    'Slumbering Weald',
+    'Inner Slumbering Weald',
+    'Galar Mine',
+    'Galar Mine No. 2',
+    'Glimwood Tangle',
+    'Rose Tower',
+    'Watchtower Ruins',
+    'West Lake Axwell',
+    'East Lake Axwell',
+    'North Lake Miloch',
+    'South Lake Miloch',
+    'Dappled Grove',
+    'Rolling Fields',
+    'Giant\'s Seat',
+    'Hammerlocke Hills',
+    'Giant\'s Cap',
+    'Dusty Bowl',
+    'Stony Wilderness',
+    'Bridge Field',
+    'Motostoke Riverbank',
+    'Lake of Outrage',
+    'Giant\'s Mirror',
+    'Tower of Two Fists',
+    'Split-Decision Ruins',
+    'The Crown Tundra',
+    'Freezington Ruins',
+];
+
 export const RegionDungeons = [
     KantoDungeons,
     JohtoDungeons,
@@ -869,6 +899,7 @@ export const RegionDungeons = [
     SinnohDungeons,
     UnovaDungeons,
     KalosDungeons,
+    GalarDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {
@@ -882,6 +913,7 @@ export const StartingTowns = [
     'Twinleaf Town',
     'Aspertia City',
     'Vaniville Town',
+    'Postwick',
 ];
 
 export const DockTowns = [
@@ -891,4 +923,5 @@ export const DockTowns = [
     'Canalave City',
     'Castelia City',
     'Coumarine City',
+    'Hulbury',
 ];
