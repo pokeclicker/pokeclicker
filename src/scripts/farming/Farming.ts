@@ -857,6 +857,7 @@ class Farming implements Feature {
         if (this.mutationCounter >= GameConstants.MUTATION_TICK) {
             this.mutations.forEach(mutation => {
                 if (mutation.mutate()) {
+                    GameHelper.incrementObservable(App.game.statistics.totalBerriesMutated, 1);
                     notifications.add(FarmNotificationType.Mutated);
                     change = true;
                 }
