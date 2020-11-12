@@ -287,6 +287,8 @@ namespace GameConstants {
         'Cherubi',
         'Zorua',
         'Meloetta (pirouette)',
+        'Toxel',
+        'Eternatus',
     }
     declare enum PokeBlockColor {
         Black,

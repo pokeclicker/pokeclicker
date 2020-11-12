@@ -522,6 +522,7 @@ export enum PokemonItemType {
     'Zorua',
     'Meloetta (pirouette)',
     'Toxel',
+    'Eternatus',
 }
 
 export enum PokeBlockColor {
