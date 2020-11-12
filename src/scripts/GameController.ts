@@ -125,65 +125,59 @@ class GameController {
     }
 
     // Store keys for multi-key combinations
-    static keyFlags = {}
+    static keyHeld = {}
     static addKeyListeners() {
-        $(document).on('keydown', function (e) {
+        // Oak Items
+        const $oakItemsModal = $('#oakItemsModal');
+        const oakItems = App.game.oakItems;
+        // Pokeball Selector
+        const $pokeballSelector = $('#pokeballSelectorModal');
+        const pokeballs = App.game.pokeballs;
+
+        $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
             if (document.activeElement.localName == 'input') {
                 return;
             }
 
-            // Oak Items
-            const $oakItemsModal = $('#oakItemsModal');
-            const oakItems = App.game.oakItems;
-            // Pokeball Selector
-            const $pokeballSelector = $('#pokeballSelectorModal');
-            const pokeballs = App.game.pokeballs;
+            // Set flags for any key currently pressed down (used to check if key held down currently)
+            GameController.keyHeld[e.code] = true;
+
             switch (e.code) {
                 case 'KeyO':
                     // Open oak items with 'O'
                     if (oakItems.canAccess()) {
+                        $('.modal').modal('hide');
                         $oakItemsModal.modal('toggle');
                     }
                     break;
-                case 'KeyP':
-                    // Set flag for 'P' pressed
-                    GameController.keyFlags[e.code] = true;
-                    break;
                 default:
-                    // Toggle oak item using 1-8 if modal is open
-                    if ($oakItemsModal.data('bs.modal')?._isShown) {
-                        for (let i = 0; i < oakItems.itemList.length; i++) {
-                            if (e.code === `Digit${i + 1}` && oakItems.isUnlocked(i)) {
-                                if (oakItems.isActive(i)) {
-                                    oakItems.deactivate(i);
+                    let numKey = +e.key;
+                    // Check for a number key being pressed
+                    if (!isNaN(numKey)) {
+                        // Make our number keys 1 indexed instead of 0
+                        numKey -= 1;
+
+                        if (GameController.keyHeld['KeyP']) {
+                            // Open pokeball selector modal using P + (1-4) for each condition
+                            if (!($pokeballSelector.data('bs.modal')?._isShown)) {
+                                $('.modal').modal('hide');
+                            }
+                            $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numKey)?.trigger('click');
+
+                        } else if ($pokeballSelector.data('bs.modal')?._isShown) {
+                            // Select Pokeball from pokeball selector (0 = none)
+                            if (numKey < App.game.pokeballs.pokeballs.length) {
+                                pokeballs.selectedSelection()(numKey);
+                            }
+
+                        } else if ($oakItemsModal.data('bs.modal')?._isShown) {
+                            // Toggle oak items
+                            if (oakItems.isUnlocked(numKey)) {
+                                if (oakItems.isActive(numKey)) {
+                                    oakItems.deactivate(numKey);
                                 } else {
-                                    oakItems.activate(i);
-                                }
-                            }
-                        }
-                    }
-                    // Select Pokeball from pokeball selector
-                    // Feels a bit messy to use these hard-coded values. I think adding this data to
-                    // `Pokeballs.ts` and making it dynamic is a better solution.
-                    const pokeballProps = ['alreadyCaught', 'alreadyCaughtShiny', 'notCaught', 'notCaughtShiny'];
-                    const titles = ['Already Caught Pokémon', 'Already Caught Shiny Pokémon', 'New Pokémon', 'New Shiny Pokémon'];
-                    const numPokeballs = pokeballs.pokeballs.length + 1;
-                    if ($pokeballSelector.data('bs.modal')?._isShown) {
-                        for (let i = 0; i < numPokeballs; i++) {
-                            if (e.code === `Digit${i + 1}` || e.code === `Numpad${i + 1}`) {
-                                pokeballs.selectedSelection()(i - 1);
-                            }
-                        }
-                    }
-                    // Open pokeball selector modal using P + (1-4) for each condition
-                    if (GameController.keyFlags['KeyP']) {
-                        for (let i = 0; i < pokeballProps.length; i++) {
-                            if (e.code === `Digit${i + 1}` || e.code === `Numpad${i + 1}`) {
-                                if (!($pokeballSelector.data('bs.modal')?._isShown)) {
-                                    pokeballs.selectedSelection(pokeballs[`_${pokeballProps[i]}Selection`]);
-                                    pokeballs.selectedTitle(titles[i]);
-                                    $pokeballSelector.modal('toggle');
+                                    oakItems.activate(numKey);
                                 }
                             }
                         }
@@ -248,13 +242,7 @@ class GameController {
                         return;
                 }
                 e.preventDefault();
-            }
-
-        });
-
-        // Why is this in a separate event handler?
-        $(document).on('keydown', function (e) {
-            if (App.game.gameState === GameConstants.GameState.safari) {
+            } else if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyCodeToDirection[e.code];
                 if (dir) {
                     e.preventDefault();
@@ -266,12 +254,15 @@ class GameController {
             }
         });
 
-        $(document).on('keyup', function (e) {
-            switch (e.code) {
-                case 'KeyP':
-                    delete GameController.keyFlags[e.code];
-                    break;
+        $(document).on('keyup', e => {
+            // Ignore any of our controls if focused on an input element
+            if (document.activeElement.localName == 'input') {
+                return;
             }
+
+            // Our key is no longer being held down
+            delete GameController.keyHeld[e.code];
+
             if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyCodeToDirection[e.code];
                 if (dir) {
