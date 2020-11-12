@@ -146,6 +146,18 @@ class BerryDeal {
             ItemList['Masterball'],
             1
         ));
+        list.push(new BerryDeal(
+            [
+                this.randomBerry(fourthGen),
+                this.randomBerry(fifthGen),
+            ],
+            [
+                SeededRand.intBetween(20, 40),
+                SeededRand.intBetween(5, 20),
+            ],
+            ItemList['Protein'],
+            1
+        ));
 
         return list;
     }
