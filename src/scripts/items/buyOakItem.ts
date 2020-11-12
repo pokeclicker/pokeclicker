@@ -16,14 +16,19 @@ class BuyOakItem extends Item {
     }
 
     gain(amt: number) {
-        App.game.oakItems.purchaseList[this.item](true);
+        const oakItem = App.game.oakItems.itemList[this.item];
+        if (oakItem instanceof BoughtOakItem) {
+            oakItem.purchased = true;
+        }
     }
 
     use() {
     }
 
     isAvailable(): boolean {
-        return super.isAvailable() && !App.game.oakItems.purchaseList[this.item]();
+        const oakItem = App.game.oakItems.itemList[this.item];
+        const purchased = (oakItem instanceof BoughtOakItem) ? oakItem.purchased : true;
+        return super.isAvailable() && !purchased;
     }
 }
 

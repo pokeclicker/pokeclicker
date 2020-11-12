@@ -3,6 +3,8 @@ class BoughtOakItem extends OakItem {
 
     shopName: string;
 
+    private _purchased: KnockoutObservable<boolean>;
+
     constructor(
         name: any,
         displayName: string,
@@ -18,14 +20,34 @@ class BoughtOakItem extends OakItem {
     ) {
         super(name, displayName, description, increasing, bonusList, inactiveBonus, -1,  expGain, expList, maxLevel, costList);
         this.shopName = shopName;
+        this._purchased = ko.observable(false);
     }
 
     isUnlocked(): boolean {
-        return App.game.oakItems.purchaseList[this.name]();
+        return this.purchased;
     }
 
     hint = ko.pureComputed(() => {
         return `Purchase from the ${this.shopName}`;
     });
+
+    toJSON(): Record<string, any> {
+        const json = super.toJSON();
+        json['purchased'] = this.purchased;
+        return json;
+    }
+
+    fromJSON(json: Record<string, any>): void {
+        super.fromJSON(json);
+        this.isActive = json['purchased'] ?? false;
+    }
+
+    get purchased(): boolean {
+        return this._purchased();
+    }
+
+    set purchased(bool: boolean) {
+        this._purchased(bool);
+    }
 
 }
