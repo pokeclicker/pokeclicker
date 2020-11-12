@@ -17674,7 +17674,7 @@ const pokemonList = createPokemonArray(
         'exp': 335,
     },
     {
-        'id': 898.1,
+        'id': 898.01,
         'name': 'Ice Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ice],
         'base': {
@@ -17691,7 +17691,7 @@ const pokemonList = createPokemonArray(
         'exp': 335,
     },
     {
-        'id': 898.2,
+        'id': 898.02,
         'name': 'Ghost Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'base': {
