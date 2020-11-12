@@ -4,11 +4,19 @@
  * If you ever need to use this list, request changes in RouteHelper instead.
  */
 class RoutePokemon {
-    public land: string[];
-    public water: string[];
-    public headbutt: string[];
+    public land: PokemonNameType[];
+    public water: PokemonNameType[];
+    public headbutt: PokemonNameType[];
 
-    constructor({ land = [], water = [], headbutt = []}) {
+    constructor({
+        land = [],
+        water = [],
+        headbutt = [],
+    }: {
+        land?: PokemonNameType[],
+        water?: PokemonNameType[],
+        headbutt?: PokemonNameType[],
+    }) {
         this.land = land;
         this.water = water;
         this.headbutt = headbutt;

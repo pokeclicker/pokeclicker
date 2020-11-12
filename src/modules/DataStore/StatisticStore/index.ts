@@ -10,7 +10,9 @@ export default class Statistics implements Saveable {
 
     defaults = {};
 
-    selectedPokemonID = ko.observable(1).extend({ numeric: 0 });
+    selectedPokemonID = ko.observable(1);
+
+    selectedBerryID = ko.observable(0).extend({ numeric: 0 });
 
     /*
      * observables
@@ -42,6 +44,7 @@ export default class Statistics implements Saveable {
     undergroundDailyDealTrades: KnockoutObservable<number>;
     // Farm
     totalBerriesHarvested: KnockoutObservable<number>;
+    berryDailyDealTrades: KnockoutObservable<number>;
     // Battle Frontier
     battleFrontierTotalStagesCompleted: KnockoutObservable<number>;
     battleFrontierHighestStageCompleted: KnockoutObservable<number>;
@@ -96,6 +99,7 @@ export default class Statistics implements Saveable {
         'undergroundLayersMined',
         'undergroundDailyDealTrades',
         'totalBerriesHarvested',
+        'berryDailyDealTrades',
         'battleFrontierTotalStagesCompleted',
         'battleFrontierHighestStageCompleted',
     ];

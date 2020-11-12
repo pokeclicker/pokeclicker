@@ -1,19 +1,20 @@
 class ItemHandler {
 
     public static stoneSelected: KnockoutObservable<string> = ko.observable('Fire_stone');
-    public static pokemonSelected: KnockoutObservable<string> = ko.observable('Vulpix');
+    public static pokemonSelected: KnockoutObservable<PokemonNameType> = ko.observable('Vulpix');
     public static amountSelected: KnockoutObservable<number> = ko.observable(1);
     static amount: KnockoutObservable<number> = ko.observable(1);
     public static amountToUse = 1;
     public static multipliers = ['×1', '×10', '×100', '×1000', 'All'];
     public static multIndex = ko.observable(0);
 
-    public static useItem(name: string) {
+    public static useItem(name: string): boolean {
         if (!player.itemList[name]()) {
-            return Notifier.notify({
+            Notifier.notify({
                 message: `You don't have any ${ItemList[name].displayName}s left...`,
                 type: NotificationConstants.NotificationOption.danger,
             });
+            return false;
         }
         // Either the digits specified, or All (Infinity)
         const amountSelected = Number(this.multipliers[this.multIndex()].replace(/\D/g, '')) || Infinity;
@@ -21,7 +22,15 @@ class ItemHandler {
         this.amountToUse = Math.min(player.itemList[name](), amountSelected);
 
         player.itemList[name](player.itemList[name]() - this.amountToUse);
-        return ItemList[name].use();
+
+        // run the function
+        const result = ItemList[name].use();
+        // If the function returned nothing assume it went fine
+        return result == undefined ? true : result;
+    }
+
+    public static hasItem(name: string): boolean {
+        return player.itemList[name] ? !!player.itemList[name]() : false;
     }
 
     public static resetAmount() {
@@ -36,7 +45,7 @@ class ItemHandler {
     }
 
     public static useStones() {
-        if (this.pokemonSelected() == '') {
+        if (this.pokemonSelected()) {
             return Notifier.notify({
                 message: 'No Pokémon selected',
                 type: NotificationConstants.NotificationOption.danger,
@@ -56,7 +65,7 @@ class ItemHandler {
         for (let i = 0; i < amountTotal; i++) {
             player.itemList[this.stoneSelected()](player.itemList[this.stoneSelected()]() - 1);
             amountUsed++;
-            if ((ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected())) {
+            if ((ItemList[this.stoneSelected()] as EvolutionStone).use(this.pokemonSelected() as PokemonNameType)) {
                 // Stop when a shiny is encountered
                 break;
             }

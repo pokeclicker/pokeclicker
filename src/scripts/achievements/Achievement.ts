@@ -22,6 +22,7 @@ class Achievement {
                 `Earned "${this.name}".`);
             player.achievementsCompleted[this.name] = true;
             this.unlocked = true;
+            AchievementHandler.filterAchievementList(true);
         }
     }
 

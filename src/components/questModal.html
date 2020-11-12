@@ -35,12 +35,12 @@
                     <tbody data-bind="foreach: App.game.quests.questList" >
                     <tr>
                         <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
-                        <td class="align-middle" style="text-align:left">
+                        <td class="align-middle py-0" style="text-align:left">
                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle py-0">
                             <button class='btn btn-primary btn-sm btn-block'
-                                data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted(),
+                                data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
                                 click: function(){
                                     App.game.quests.beginQuest($data.index);
                                     if (!App.game.quests.canStartNewQuest()) {$("#QuestModal").modal("hide");}
@@ -61,11 +61,19 @@
 
             <div class="modal-footer">
                 <div id='refreshQuests'>
+                    <!-- ko if: App.game.quests.freeRefresh() -->
+                    <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)">Free Refresh</button>
+                    <!-- /ko -->
+                    <!-- ko if: !App.game.quests.freeRefresh() -->
                     <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)"
-                            data-bind="enable: App.game.quests.canAffordRefresh(), tooltip: { title: `Daily refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`, trigger: 'hover', placement:'top' }">
+                        data-bind="enable: App.game.quests.canAffordRefresh(),
+                            tooltip: {
+                                title: App.game.quests.freeRefresh() ? '' : `Daily free refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`,
+                                trigger: 'hover', placement:'top'
+                            }">
                         <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
-                        </span>
                     </button>
+                    <!-- /ko -->
                     
                 </div>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
