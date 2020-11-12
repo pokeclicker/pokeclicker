@@ -3,34 +3,40 @@ class TypeHelper {
     //@formatter:off
     /*eslint-disable */
 
-    public static typeMatrix: Array<Array<number>> = [
-        //                E              F
-        //                L              I                   P
-        // N              E              G    P    G    F    S                   D
-        // O         W    C    G         H    O    R    L    Y              G    R         S    F  <- Defending type
-        // R    F    A    T    R         T    I    O    Y    C         R    H    A    D    T    A
-        // M    I    T    R    A    I    I    S    U    I    H    B    O    O    G    A    E    I   Attack type
-        // A    R    E    I    S    C    N    O    N    N    I    U    C    S    O    R    E    R        |
-        // L    E    R    C    S    E    G    N    D    G    C    G    K    T    N    K    L    Y        v
-        [  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1, 0.5,   0,   1,   1, 0.5,   1], // NORMAL
-        [  1, 0.5, 0.5,   1,   2,   2,   1,   1,   1,   1,   1,   2, 0.5,   1, 0.5,   1,   2,   1], // FIRE
-        [  1,   2, 0.5,   1, 0.5,   1,   1,   1,   2,   1,   1,   1,   2,   1, 0.5,   1,   1,   1], // WATER
-        [  1,   1,   2, 0.5, 0.5,   1,   1,   1,   0,   2,   1,   1,   1,   1, 0.5,   1,   1,   1], // ELECTRIC
-        [  1, 0.5,   2,   1, 0.5,   1,   1, 0.5,   2, 0.5,   1, 0.5,   2,   1, 0.5,   1, 0.5,   1], // GRASS
-        [  1, 0.5, 0.5,   1,   2, 0.5,   1,   1,   2,   2,   1,   1,   1,   1,   2,   1, 0.5,   1], // ICE
-        [  2,   1,   1,   1,   1,   2,   1, 0.5,   1, 0.5, 0.5, 0.5,   2,   0,   1,   2,   2, 0.5], // FIGHTING
-        [  1,   1,   1,   1,   2,   1,   1, 0.5, 0.5,   1,   1,   1, 0.5, 0.5,   1,   1,   0,   2], // POISON
-        [  1,   2,   1,   2, 0.5,   1,   1,   2,   1,   0,   1, 0.5,   2,   1,   1,   1,   2,   1], // GROUND
-        [  1,   1,   1, 0.5,   2,   1,   2,   1,   1,   1,   1,   2, 0.5,   1,   1,   1, 0.5,   1], // FLYING
-        [  1,   1,   1,   1,   1,   1,   2,   2,   1,   1, 0.5,   1,   1,   1,   1,   0, 0.5,   1], // PSYCHIC
-        [  1, 0.5,   1,   1,   2,   1, 0.5, 0.5,   1, 0.5,   2,   1,   1, 0.5,   1,   2, 0.5, 0.5], // BUG
-        [  1,   2,   1,   1,   1,   2, 0.5,   1, 0.5,   2,   1,   2,   1,   1,   1,   1, 0.5,   1], // ROCK
-        [  0,   1,   1,   1,   1,   1,   1,   1,   1,   1,   2,   1,   1,   2,   1, 0.5,   1,   1], // GHOST
-        [  1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   1,   2,   1, 0.5,   0], // DRAGON
-        [  1,   1,   1,   1,   1,   1, 0.5,   1,   1,   1,   2,   1,   1,   2,   1, 0.5,   1, 0.5], // DARK
-        [  1, 0.5, 0.5, 0.5,   1,   2,   1,   1,   1,   1,   1,   1,   2,   1,   1,   1, 0.5,   2], // STEEL
-        [  1, 0.5,   1,   1,   1,   1,   2, 0.5,   1,   1,   1,   1,   1,   1,   2,   2, 0.5,   1], // FAIRY
-    ];
+    public static typeMatrix: Array<Array<number>> = (()=>{
+        const imm = GameConstants.TypeEffectivenessValue.Immune;
+        const not = GameConstants.TypeEffectivenessValue.NotVery;
+        const nrm = GameConstants.TypeEffectivenessValue.Normal;
+        const vry = GameConstants.TypeEffectivenessValue.Very;
+        return [
+            //                 E              F
+            //                 L              I                   P
+            //  N              E              G    P    G    F    S                   D
+            //  O         W    C    G         H    O    R    L    Y              G    R         S    F  <- Defending type
+            //  R    F    A    T    R         T    I    O    Y    C         R    H    A    D    T    A
+            //  M    I    T    R    A    I    I    S    U    I    H    B    O    O    G    A    E    I   Attack type
+            //  A    R    E    I    S    C    N    O    N    N    I    U    C    S    O    R    E    R        |
+            //  L    E    R    C    S    E    G    N    D    G    C    G    K    T    N    K    L    Y        v
+            [ nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, not, imm, nrm, nrm, not, nrm], // NORMAL
+            [ nrm, not, not, nrm, vry, vry, nrm, nrm, nrm, nrm, nrm, vry, not, nrm, not, nrm, vry, nrm], // FIRE
+            [ nrm, vry, not, nrm, not, nrm, nrm, nrm, vry, nrm, nrm, nrm, vry, nrm, not, nrm, nrm, nrm], // WATER
+            [ nrm, nrm, vry, not, not, nrm, nrm, nrm, imm, vry, nrm, nrm, nrm, nrm, not, nrm, nrm, nrm], // ELECTRIC
+            [ nrm, not, vry, nrm, not, nrm, nrm, not, vry, not, nrm, not, vry, nrm, not, nrm, not, nrm], // GRASS
+            [ nrm, not, not, nrm, vry, not, nrm, nrm, vry, vry, nrm, nrm, nrm, nrm, vry, nrm, not, nrm], // ICE
+            [ vry, nrm, nrm, nrm, nrm, vry, nrm, not, nrm, not, not, not, vry, imm, nrm, vry, vry, not], // FIGHTING
+            [ nrm, nrm, nrm, nrm, vry, nrm, nrm, not, not, nrm, nrm, nrm, not, not, nrm, nrm, imm, vry], // POISON
+            [ nrm, vry, nrm, vry, not, nrm, nrm, vry, nrm, imm, nrm, not, vry, nrm, nrm, nrm, vry, nrm], // GROUND
+            [ nrm, nrm, nrm, not, vry, nrm, vry, nrm, nrm, nrm, nrm, vry, not, nrm, nrm, nrm, not, nrm], // FLYING
+            [ nrm, nrm, nrm, nrm, nrm, nrm, vry, vry, nrm, nrm, not, nrm, nrm, nrm, nrm, imm, not, nrm], // PSYCHIC
+            [ nrm, not, nrm, nrm, vry, nrm, not, not, nrm, not, vry, nrm, nrm, not, nrm, vry, not, not], // BUG
+            [ nrm, vry, nrm, nrm, nrm, vry, not, nrm, not, vry, nrm, vry, nrm, nrm, nrm, nrm, not, nrm], // ROCK
+            [ imm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, vry, nrm, nrm, vry, nrm, not, nrm, nrm], // GHOST
+            [ nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, nrm, vry, nrm, not, imm], // DRAGON
+            [ nrm, nrm, nrm, nrm, nrm, nrm, not, nrm, nrm, nrm, vry, nrm, nrm, vry, nrm, not, nrm, not], // DARK
+            [ nrm, not, not, not, nrm, vry, nrm, nrm, nrm, nrm, nrm, nrm, vry, nrm, nrm, nrm, not, vry], // STEEL
+            [ nrm, not, nrm, nrm, nrm, nrm, vry, not, nrm, nrm, nrm, nrm, nrm, nrm, vry, vry, not, nrm], // FAIRY
+        ]
+    })();
     //@formatter:on
     /*eslint-enable */
 
@@ -40,27 +46,24 @@ class TypeHelper {
             return 1;
         }
 
+        // Apply second type as the first type when None
+        a2 = a2 != PokemonType.None ? a2 : a1;
+        d2 = d2 != PokemonType.None ? d2 : d1;
+
         //TODO factor in shard value
         let m1 = TypeHelper.typeMatrix[a1][d1];
         m1 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m1)) * Shards.SHARD_UPGRADE_STEP);
 
-        let m2 = 1, m3 = 1, m4 = 1;
-        if (d2 != PokemonType.None) {
-            m2 = TypeHelper.typeMatrix[a1][d2];
-            m2 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m2)) * Shards.SHARD_UPGRADE_STEP);
-        }
+        let m2 = TypeHelper.typeMatrix[a1][d2];
+        m2 += (App.game.shards.getShardUpgrade(a1, this.valueToType(m2)) * Shards.SHARD_UPGRADE_STEP);
 
-        if (a2 != PokemonType.None) {
-            m3 = TypeHelper.typeMatrix[a2][d1];
-            m3 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m3)) * Shards.SHARD_UPGRADE_STEP);
-        }
+        let m3 = TypeHelper.typeMatrix[a2][d1];
+        m3 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m3)) * Shards.SHARD_UPGRADE_STEP);
 
-        if (a2 != PokemonType.None && d2 != PokemonType.None) {
-            m4 = TypeHelper.typeMatrix[a2][d2];
-            m4 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m4)) * Shards.SHARD_UPGRADE_STEP);
-        }
+        let m4 = TypeHelper.typeMatrix[a2][d2];
+        m4 += (App.game.shards.getShardUpgrade(a2, this.valueToType(m4)) * Shards.SHARD_UPGRADE_STEP);
 
-        return m1 * m2 * m3 * m4;
+        return Math.max(m1 * m2, m3 * m4);
     }
 
     public static typeToValue(type: GameConstants.TypeEffectiveness): GameConstants.TypeEffectivenessValue {
@@ -98,7 +101,7 @@ class TypeHelper {
         '8c424a', // Dragon
         '4a6b84', // Dark
         '737373', // Steel
-        'd694ce',  // Fairy
+        'd694ce', // Fairy
     ];
 
     public static readonly typeColorsLocked = [
@@ -119,6 +122,6 @@ class TypeHelper {
         'e7b1b1', // Dragon
         'bcccdc', // Dark
         'cccccc', // Steel
-        'ffc6e7',  // Fairy
+        'ffc6e7', // Fairy
     ];
 }

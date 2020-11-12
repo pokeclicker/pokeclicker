@@ -13,15 +13,15 @@ class PokemonFactory {
         if (!MapHelper.validRoute(route, region)) {
             return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
-        let name: string;
+        let name: PokemonNameType;
 
         if (PokemonFactory.roamingEncounter(route, region)) {
             const possible = RoamingPokemonList.getRegionalRoamers(region);
             name = possible[Math.floor(Math.random() * possible.length)].pokemon.name;
         } else {
-            const pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
-            const rand: number = Math.floor(Math.random() * pokemonList.length);
-            name = pokemonList[rand];
+            const availablePokemonList: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
+            const rand: number = Math.floor(Math.random() * availablePokemonList.length);
+            name = availablePokemonList[rand];
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
@@ -67,7 +67,7 @@ class PokemonFactory {
     public static routeDungeonTokens(route: number, region: GameConstants.Region): number {
         route = MapHelper.normalizeRoute(route, region);
 
-        const tokens = Math.max(1, 6 * Math.pow(route * 2 / (3 / Math.round(1 + region / 3)), 1.05));
+        const tokens = Math.max(1, 6 * Math.pow(route * 2 / (2.8 / (1 + region / 3)), 1.08));
 
         return tokens;
     }
@@ -79,6 +79,7 @@ class PokemonFactory {
      */
     public static generateShiny(chance: number): boolean {
         chance /= App.game.oakItems.calculateBonus(OakItems.OakItem.Shiny_Charm);
+        chance /= App.game.farming.externalAuras[AuraType.Shiny]();
 
         const rand: number = Math.floor(Math.random() * chance) + 1;
 
@@ -91,7 +92,7 @@ class PokemonFactory {
 
     public static generatePartyPokemon(id: number, shiny = false): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false, shiny);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, 0, 0, false, shiny);
     }
 
     /**
@@ -110,9 +111,9 @@ class PokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny, GameConstants.GYM_SHARDS);
     }
 
-    public static generateDungeonPokemon(pokemonList: string[], chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
+    public static generateDungeonPokemon(pokemonList: PokemonNameType[], chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
         const random: number = GameConstants.randomIntBetween(0, pokemonList.length - 1);
-        const name = pokemonList[random];
+        const name: PokemonNameType = pokemonList[random];
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
         const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
@@ -135,7 +136,7 @@ class PokemonFactory {
     public static generateDungeonBoss(bossPokemonList: DungeonBossPokemon[], chestsOpened: number): BattlePokemon {
         const random: number = GameConstants.randomIntBetween(0, bossPokemonList.length - 1);
         const bossPokemon = bossPokemonList[random];
-        const name: string = bossPokemon.name;
+        const name: PokemonNameType = bossPokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
         const maxHealth: number = Math.floor(bossPokemon.baseHealth * (1 + (chestsOpened / 5)));

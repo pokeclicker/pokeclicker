@@ -231,7 +231,9 @@ class MapHelper {
 
     public static travelToNextRegion() {
         if (MapHelper.ableToTravel()) {
-            player.highestRegion(player.highestRegion() + 1);
+            // Gain queue slots based on highest region
+            App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()));
+            GameHelper.incrementObservable(player.highestRegion);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
         }

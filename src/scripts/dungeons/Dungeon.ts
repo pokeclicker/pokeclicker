@@ -9,11 +9,12 @@
  */
 class Dungeon {
     public name: KnockoutObservable<string>;
-    allPokemonNames: string[];
+    allPokemonNames: PokemonNameType[];
+    allAvailablePokemonNames: PokemonNameType[];
 
     constructor(
         name: string,
-        public pokemonList: string[],
+        public pokemonList: PokemonNameType[],
         public itemList: GameConstants.BattleItemType[],
         public baseHealth: number,
         public bossList: DungeonBossPokemon[],
@@ -37,12 +38,10 @@ class Dungeon {
         return true;
     }
 
-    public calculateAllPokemonNames() {
-        const pokemonNameSet = new Set(this.pokemonList);
-        this.availableBosses().forEach(boss => {
-            pokemonNameSet.add(boss.name);
-        });
-        this.allPokemonNames = [...pokemonNameSet];
+    public calculateAllPokemonNames(): void {
+        // Put the names into a Set to filter out any duplicate values
+        this.allPokemonNames = [...new Set([...this.pokemonList, ...this.bossList.map(b => b.name)])] as PokemonNameType[];
+        this.allAvailablePokemonNames = [...new Set([...this.pokemonList, ...this.availableBosses().map(b => b.name)])] as PokemonNameType[];
     }
 
     public availableBosses(): DungeonBossPokemon[] {
@@ -784,7 +783,7 @@ dungeonList['Moor of Icirrus'] = new Dungeon('Moor of Icirrus',
     96500, 201, 35);
 
 dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
-    ['Goldeen', 'Marill', 'Yanma', 'Vigoroth', 'Toxicroak', 'Gurdurr', 'Palpitoad', 'Swadloon', 'Whirlipede', 'Cottonee', 'Petilil', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
+    ['Goldeen', 'Marill', 'Yanma', 'Vigoroth', 'Toxicroak', 'Gurdurr', 'Tympole', 'Palpitoad', 'Swadloon', 'Whirlipede', 'Cottonee', 'Petilil', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -928,7 +927,7 @@ dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
     96500, 201, 35);
 
 dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
-    ['Jigglypuff', 'Poliwhirl', 'Noctowl', 'Lombre', 'Gothorita', 'Amooonguss'],
+    ['Jigglypuff', 'Poliwhirl', 'Noctowl', 'Lombre', 'Gothorita', 'Amoonguss'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [

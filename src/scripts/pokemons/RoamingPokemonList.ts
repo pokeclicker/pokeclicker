@@ -12,7 +12,7 @@ class RoamingPokemonList {
         RoamingPokemonList.list[region].push(roamer);
     }
 
-    public static remove(region: GameConstants.Region, pokemonName: string): void {
+    public static remove(region: GameConstants.Region, pokemonName: PokemonNameType): void {
         const index = RoamingPokemonList.list[region].findIndex(r => r.pokemon.name == pokemonName);
         if (index >= 0) {
             RoamingPokemonList.list[region].splice(index, 1);
@@ -37,7 +37,6 @@ RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap
 RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Latias, undefined, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
 // TODO: these need another way to be obtained
 RoamingPokemonList.add(GameConstants.Region.hoenn, new RoamingPokemon(pokemonMap.Jirachi, undefined, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)));
-
 
 // Sinnoh
 RoamingPokemonList.add(GameConstants.Region.sinnoh, new RoamingPokemon(pokemonMap.Manaphy));

@@ -10,7 +10,7 @@ class Battle {
     static counter = 0;
     static catching: KnockoutObservable<boolean> = ko.observable(false);
     static catchRateActual: KnockoutObservable<number> = ko.observable(null);
-    static pokeball: KnockoutObservable<GameConstants.Pokeball>;
+    static pokeball: KnockoutObservable<GameConstants.Pokeball> = ko.observable(GameConstants.Pokeball.Pokeball);
     static lastPokemonAttack = Date.now();
     static lastClickAttack = Date.now();
 
@@ -94,7 +94,7 @@ class Battle {
             this.generateNewEnemy();
         }
         this.gainItem();
-        player.lowerItemMultipliers();
+        player.lowerItemMultipliers(MultiplierDecreaser.Battle);
     }
 
     /**
@@ -124,7 +124,7 @@ class Battle {
     }
 
     protected static prepareCatch(enemyPokemon: BattlePokemon, pokeBall: GameConstants.Pokeball) {
-        this.pokeball = ko.observable(pokeBall);
+        this.pokeball(pokeBall);
         this.catching(true);
         this.catchRateActual(this.calculateActualCatchRate(enemyPokemon, pokeBall));
         App.game.pokeballs.usePokeball(pokeBall);

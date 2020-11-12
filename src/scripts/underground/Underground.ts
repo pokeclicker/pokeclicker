@@ -14,7 +14,7 @@ class Underground implements Feature {
 
     public static sortDirection = -1;
     public static lastPropSort = 'none';
-    
+
     constructor() {
         this.upgradeList = [];
     }
@@ -130,7 +130,7 @@ class Underground implements Feature {
         const item = Underground.getMineItemById(id);
 
         if (item.isStone()) {
-            const evostone: EvolutionStone = ItemList[item.valueType];
+            const evostone: EvolutionStone = (ItemList[item.valueType] as EvolutionStone);
             evostone.gain(num);
             return;
         }

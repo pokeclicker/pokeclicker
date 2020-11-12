@@ -27,28 +27,6 @@
         </div>
     </div>
 </script>
-<script type="text/html" id="pokemonListTemplate">
-    <tr>
-        <td>
-            <img
-                class="smallImage"
-                data-bind="attr: { src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"
-                src=""
-                alt=""
-            />
-        </td>
-        <td>
-            <div>
-                <div class="pokemonName">
-                    <span data-bind="text: name">Name</span>
-                    <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
-                </div>
-                <div class="pokemonAttack" data-bind="text: attack.toLocaleString()"></div>
-                <div class="pokemonLevel" data-bind="text: level"></div>
-            </div>
-        </td>
-    </tr>
-</script>
 <div id="pokemonListContainer" class="card sortable border-secondary mb-3" data-bind="visible: player.starter != GameConstants.Starter.None">
     <div class="card-header p-0" data-toggle="collapse" href="#pokemonListBody">
         <span>Pokémon List</span>
@@ -74,7 +52,28 @@
                     </td>
                 </tr>
             </thead>
-            <tbody data-bind="template: { name: 'pokemonListTemplate', foreach: PartyController.getSortedList() }"></tbody>
+            <tbody data-bind="foreach: PartyController.getSortedList()">
+                <tr data-bind="hidden: $data.breeding">
+                    <td>
+                        <img
+                            class="smallImage"
+                            data-bind="attr: { src: PokemonHelper.getImage($data, App.game.party.alreadyCaughtPokemon($data.id, true)) }"
+                            src=""
+                            alt=""
+                        />
+                    </td>
+                    <td>
+                        <div>
+                            <div class="pokemonName">
+                                <span data-bind="text: name">Name</span>
+                                <sup data-bind="visible: App.game.party.alreadyCaughtPokemon($data.id, true)">✨</sup>
+                            </div>
+                            <div class="pokemonAttack" data-bind="text: attack.toLocaleString()"></div>
+                            <div class="pokemonLevel" data-bind="text: level"></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>

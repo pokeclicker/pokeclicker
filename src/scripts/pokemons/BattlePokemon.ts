@@ -22,7 +22,7 @@ class BattlePokemon implements EnemyPokemonInterface {
      */
 
     constructor(
-        public name: string,
+        public name: PokemonNameType,
         public id: number,
         public type1: PokemonType = PokemonType.None,
         public type2: PokemonType = PokemonType.None,

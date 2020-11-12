@@ -9,7 +9,7 @@ class Egg implements Saveable {
     totalSteps: number;
     steps: KnockoutObservable<number>;
     shinySteps: number;
-    pokemon: string;
+    pokemon: PokemonNameType;
     type: EggType;
     pokemonType1: PokemonType;
     pokemonType2: PokemonType;
@@ -18,7 +18,7 @@ class Egg implements Saveable {
     progressText: KnockoutComputed<string>;
     stepsRemaining: KnockoutComputed<number>;
 
-    constructor(type = EggType.None, totalSteps = 0, pokemon = '', steps = 0, shinySteps = 0, notified = false) {
+    constructor(type = EggType.None, totalSteps = 0, pokemon: PokemonNameType = 'MissingNo.', steps = 0, shinySteps = 0, notified = false) {
         this.totalSteps = totalSteps;
         this.steps = ko.observable(steps);
         this.shinySteps = shinySteps;
@@ -102,7 +102,8 @@ class Egg implements Saveable {
         // If the party pokemon exist, increase it's damage output
         if (partyPokemon) {
             // Increase attack
-            partyPokemon.attackBonus += GameConstants.BREEDING_ATTACK_BONUS;
+            partyPokemon.attackBonusPercent += GameConstants.BREEDING_ATTACK_BONUS;
+            partyPokemon.attackBonusAmount += partyPokemon.proteinsUsed();
             partyPokemon.attack = partyPokemon.calculateAttack();
 
             // If breeding (not store egg), reset level, reset evolution check

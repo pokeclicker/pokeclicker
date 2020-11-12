@@ -193,14 +193,14 @@
                             </h2>
 
                             <div>
-                                <div data-bind="ifnot: Battle.catching">
+                                <div data-bind="visible: !Battle.catching()">
                                     <img class="enemy"
                                          data-bind="attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
                                          src=""/>
                                 </div>
-                                <div data-bind="if: Battle.catching" class="catchChance">
+                                <div data-bind="visible: Battle.catching()" class="catchChance">
                                     <img class="pokeball-animated"
-                                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg' }"
+                                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg'}"
                                          src=""/>
                                     <br>
                                     Catch Chance:
@@ -335,7 +335,7 @@
                                                     Battle.enemyPokemon().type1,
                                                     Battle.enemyPokemon().type2
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
-                                                : null,
+                                                : '',
                                             trigger: 'hover',
                                         }
                                     "></span>
@@ -363,7 +363,7 @@
                                                     Battle.enemyPokemon().type1,
                                                     Battle.enemyPokemon().type2
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
-                                                : null,
+                                                : '',
                                             trigger: 'hover',
                                         }
                                     "></span>
@@ -517,6 +517,12 @@
 <!-- Farm Modal-->
 @import "farmModal.html"
 
+<!-- Berrydex Modal-->
+@import "berryDexModal.html"
+
+<!-- Berry Master Modal-->
+@import "berryMasterModal.html"
+
 <!-- Ship Modal-->
 @import "shipModal.html"
 
@@ -534,6 +540,9 @@
 
 <!-- Damage Calculator Modal -->
 @import "damageCalculatorModal.html"
+
+<!-- Category Modal -->
+@import "categoryModal.html"
 
 </body>
 </html>

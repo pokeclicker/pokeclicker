@@ -13,6 +13,8 @@ export const GYM_TICK = 10;
 export const ACHIEVEMENT_TICK = 1000;
 export const MIN_LOAD_TIME = 500; // 0.5 Seconds
 export const MAX_LOAD_TIME = 20000; // 20 Seconds
+export const MUTATION_TICK = 1000;
+export const WANDER_TICK = 1500;
 
 export const MAX_AVAILABLE_REGION = 4; // Sinnoh
 
@@ -30,9 +32,10 @@ export const TotalPokemonsPerRegion = [
 export const ITEM_USE_TIME = 30;
 
 export const SECOND = 1000;
-export const MINUTE = 1000 * 60;
-export const HOUR = 1000 * 60 * 60;
-export const DAY = 1000 * 60 * 60 * 24;
+export const MINUTE = SECOND * 60;
+export const HOUR = MINUTE * 60;
+export const DAY = HOUR * 24;
+export const WEEK = DAY * 7;
 
 export const ROAMING_MIN_CHANCE = 8192;
 export const ROAMING_MAX_CHANCE = 4096;
@@ -44,6 +47,7 @@ export const SHINY_CHANCE_SHOP = 2048;
 export const SHINY_CHANCE_STONE = 2048;
 export const SHINY_CHANCE_SAFARI = 2048;
 export const SHINY_CHANCE_BREEDING = 1024;
+export const SHINY_CHANCE_FARM = 2048;
 
 export const ITEM_PRICE_MULTIPLIER = 1.00045;
 export const ITEM_PRICE_DEDUCT = 1.0005;
@@ -53,7 +57,27 @@ export const PLATE_VALUE = 100;
 // Breeding
 export const BREEDING_ATTACK_BONUS = 25;
 
+// Farming
 export const BerryDistribution = [0.39, 0.63, 0.78, 0.87, 0.93, 0.96, 0.98, 1];
+
+export const MULCH_USE_TIME = 300;
+export const BOOST_MULCH_MULTIPLIER = 1.5;
+export const RICH_MULCH_MULTIPLIER = 2;
+export const SURPRISE_MULCH_MULTIPLIER = 1.5;
+export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
+export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
+export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
+
+export const WANDER_RATE = 0.00001;
+
+export const BerryColor = [
+    '#EE8130', // Red
+    '#A33EA1', // Purple
+    '#D685AD', // Pink
+    '#7AC74C', // Green
+    '#F7D02C', // Yellow
+    '#6390F0', // Blue
+];
 
 // Dungeons
 export const DUNGEON_SIZE = 5;
@@ -245,6 +269,39 @@ export function formatTimeShortWords(input: number): string {
     }
     const minutes = Math.ceil(time / MINUTE);
     return `${time % MINUTE ? '< ' : ''}${minutes} min${minutes === 1 ? '' : 's'}`;
+}
+
+export function formatSecondsToTime(input: number): string {
+    // Temporarily recast to number until everything is in modules
+    if (Number.isNaN(Number(input)) || input === 0) { return '-'; }
+    let time = Math.abs(input * 1000);
+    const times = [];
+
+    if (time >= WEEK) {
+        const weeks = Math.floor(time / WEEK);
+        times.push(`${weeks} week${weeks === 1 ? '' : 's'}`);
+        time %= WEEK;
+    }
+    if (time >= DAY) {
+        const days = Math.ceil(time / DAY);
+        times.push(`${days} day${days === 1 ? '' : 's'}`);
+        time %= DAY;
+    }
+    if (time >= HOUR) {
+        const hours = Math.ceil(time / HOUR);
+        times.push(`${hours} hour${hours === 1 ? '' : 's'}`);
+        time %= HOUR;
+    }
+    if (time >= MINUTE) {
+        const minutes = Math.ceil(time / MINUTE);
+        times.push(`${minutes} min${minutes === 1 ? '' : 's'}`);
+        time %= MINUTE;
+    }
+    if (time >= SECOND) {
+        const seconds = Math.ceil(time / SECOND);
+        times.push(`${seconds} sec${seconds === 1 ? '' : 's'}`);
+    }
+    return times.join('</br>');
 }
 
 export function formatNumber(input: number): string {
