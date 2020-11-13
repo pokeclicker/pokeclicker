@@ -61,7 +61,7 @@ class FarmController {
     }
 
     public static calcMulchClass(plot: Plot) {
-        if (plot.mulch === MulchType.None) {
+        if (plot.mulch == MulchType.None) {
             return '';
         }
         return MulchType[plot.mulch];

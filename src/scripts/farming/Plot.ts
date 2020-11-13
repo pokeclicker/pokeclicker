@@ -56,7 +56,7 @@ class Plot implements Saveable {
         });
 
         this.formattedMulchTimeLeft = ko.pureComputed(() => {
-            if (this.mulch === MulchType.None) {
+            if (this.mulch == MulchType.None) {
                 return '';
             }
             return GameConstants.formatTime(this.mulchTimeLeft);
@@ -144,7 +144,7 @@ class Plot implements Saveable {
                 tooltip.push(auraStr);
             }
 
-            if (this.mulch !== MulchType.None) {
+            if (this.mulch != MulchType.None) {
                 const mulchTime = this.formattedMulchTimeLeft();
                 tooltip.push('<u>Mulch</u>');
                 tooltip.push(`${MulchType[this.mulch].replace('_Mulch','')} : ${mulchTime}`);
@@ -190,7 +190,7 @@ class Plot implements Saveable {
         }
 
         // Updating Mulch
-        if (this.mulch !== MulchType.None) {
+        if (this.mulch != MulchType.None) {
             this.mulchTimeLeft = Math.max(this.mulchTimeLeft - seconds, 0);
             if (this.mulchTimeLeft === 0) {
                 this.notifications.push(FarmNotificationType.MulchRanOut);
@@ -301,9 +301,9 @@ class Plot implements Saveable {
      */
     getGrowthMultiplier(): number {
         let multiplier = 1;
-        if (this.mulch === MulchType.Boost_Mulch) {
+        if (this.mulch == MulchType.Boost_Mulch) {
             multiplier = GameConstants.BOOST_MULCH_MULTIPLIER;
-        } else if (this.mulch === MulchType.Amaze_Mulch) {
+        } else if (this.mulch == MulchType.Amaze_Mulch) {
             multiplier =  GameConstants.AMAZE_MULCH_GROWTH_MULTIPLIER;
         }
 
@@ -317,9 +317,9 @@ class Plot implements Saveable {
      */
     getHarvestMultiplier(): number {
         let multiplier = 1;
-        if (this.mulch === MulchType.Rich_Mulch) {
+        if (this.mulch == MulchType.Rich_Mulch) {
             multiplier = GameConstants.RICH_MULCH_MULTIPLIER;
-        } else if (this.mulch === MulchType.Amaze_Mulch) {
+        } else if (this.mulch == MulchType.Amaze_Mulch) {
             multiplier = GameConstants.AMAZE_MULCH_PRODUCE_MULTIPLIER;
         }
 
@@ -333,9 +333,9 @@ class Plot implements Saveable {
      */
     getReplantMultiplier(): number {
         let multiplier = 1;
-        if (this.mulch === MulchType.Rich_Mulch) {
+        if (this.mulch == MulchType.Rich_Mulch) {
             multiplier = GameConstants.RICH_MULCH_MULTIPLIER;
-        } else if (this.mulch === MulchType.Amaze_Mulch) {
+        } else if (this.mulch == MulchType.Amaze_Mulch) {
             multiplier = GameConstants.AMAZE_MULCH_PRODUCE_MULTIPLIER;
         }
 
@@ -349,9 +349,9 @@ class Plot implements Saveable {
      */
     getMutationMultiplier(): number {
         let multiplier = 1;
-        if (this.mulch === MulchType.Surprise_Mulch) {
+        if (this.mulch == MulchType.Surprise_Mulch) {
             multiplier = GameConstants.SURPRISE_MULCH_MULTIPLIER;
-        } else if (this.mulch === MulchType.Amaze_Mulch) {
+        } else if (this.mulch == MulchType.Amaze_Mulch) {
             multiplier = GameConstants.AMAZE_MULCH_MUTATE_MULTIPLIER;
         }
 
