@@ -1026,8 +1026,6 @@ class Farming implements Feature {
 
         const amount = plot.harvestAmount();
 
-        GameHelper.incrementObservable(App.game.statistics.totalBerriesHarvested, amount);
-        GameHelper.incrementObservable(App.game.statistics.berriesHarvested[plot.berry], amount);
         this.gainBerry(plot.berry, amount);
 
         App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.berryData[plot.berry].exp);
@@ -1139,6 +1137,9 @@ class Farming implements Feature {
     gainBerry(berry: BerryType, amount = 1) {
         GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
         this.unlockBerry(berry);
+
+        GameHelper.incrementObservable(App.game.statistics.totalBerriesHarvested, amount);
+        GameHelper.incrementObservable(App.game.statistics.berriesHarvested[berry], amount);
     }
 
     hasBerry(berry: BerryType) {
