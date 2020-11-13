@@ -1084,7 +1084,7 @@ class Farming implements Feature {
 
         amount = Math.min(this.mulchList[mulch](), amount);
         GameHelper.incrementObservable(this.mulchList[mulch], -amount);
-        plot.mulch = mulch;
+        plot.mulch = +mulch;
         plot.mulchTimeLeft += GameConstants.MULCH_USE_TIME * amount;
     }
 
