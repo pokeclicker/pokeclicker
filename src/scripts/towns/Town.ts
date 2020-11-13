@@ -911,7 +911,6 @@ const CanalaveCityShop = new Shop ([
 const PalParkShop = new Shop([
     ItemList['Razor_claw'],
     ItemList['Razor_fang'],
-    ItemList['Combee'],
     ItemList['Burmy (plant)'],
     ItemList['Cherubi'],
 ]);
