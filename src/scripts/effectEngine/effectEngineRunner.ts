@@ -1,5 +1,12 @@
 class EffectEngineRunner {
     public static counter = 0;
+    public static multipliers = ['×1', '×10', '×100', '×1000', 'All'];
+    public static multIndex = ko.observable(0);
+
+    public static amountToUse = ko.pureComputed(() => {
+        // Either the digits specified, or All (Infinity)
+        return Number(EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()].replace(/\D/g, '')) || Infinity;
+    })
 
     public static tick() {
         this.counter = 0;
@@ -19,6 +26,14 @@ class EffectEngineRunner {
                 });
             }
         }
+    }
+
+    public static incrementMultiplier() {
+        this.multIndex((this.multIndex() + 1) % this.multipliers.length);
+    }
+
+    public static decrementMultiplier() {
+        this.multIndex((this.multIndex() + this.multipliers.length - 1) % this.multipliers.length);
     }
 
     public static getEffect(itemName: string) {
