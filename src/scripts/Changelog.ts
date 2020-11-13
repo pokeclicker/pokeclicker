@@ -57,7 +57,6 @@ const changelogItems = [
     new Changelog(changelogType.NEW, 'Added multiple button to Mulch in Farm'),
     new Changelog(changelogType.FIXED, 'Fix Pokemon not appearing in Battle Frontier'),
     new Changelog(changelogType.FIXED, 'Evolution Stones not working'),
-    new Changelog(changelogType.FIXED, 'Evolution Stones not working'),
 
     // v0.6.0
     new ChangelogUpdate('v0.6.0', new Date(2020, 10, 13)),
