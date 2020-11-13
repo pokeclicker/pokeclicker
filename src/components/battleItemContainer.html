@@ -4,9 +4,9 @@
     </div>
     <button type="button" class="btn btn-sm btn-primary" 
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" 
-            data-bind="text: ItemHandler.multipliers[ItemHandler.multIndex()]"
-            onclick="ItemHandler.incrementMultiplier()"
-            oncontextmenu="ItemHandler.decrementMultiplier(); return false"
+            data-bind="text: EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()]"
+            onclick="EffectEngineRunner.incrementMultiplier()"
+            oncontextmenu="EffectEngineRunner.decrementMultiplier(); return false"
             title="Controls"
             data-toggle="popover"
             data-html="true"
@@ -30,7 +30,7 @@
                                 'bg-secondary': !EffectEngineRunner.isActive($data)()
                             },
                             event: {
-                                click: function(){ItemHandler.useItem($data)}
+                                click: function(){ItemHandler.useItem($data, EffectEngineRunner.amountToUse())}
                             },
                             tooltip: {
                               title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description,
