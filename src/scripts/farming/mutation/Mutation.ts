@@ -5,7 +5,11 @@ interface MutationOptions {
     showHint?: boolean,
 }
 
-abstract class Mutation {
+abstract class Mutation implements Saveable {
+
+    saveKey: string;
+
+    defaults: Record<string, any>;
 
     mutationChance: number;
     mutatedBerry: BerryType;
@@ -13,12 +17,25 @@ abstract class Mutation {
     showHint: boolean;
     _unlockReq?: (() => boolean);
 
+    _hintSeen: KnockoutObservable<boolean>;
+
     constructor(mutationChance: number, mutatedBerry: BerryType, options?: MutationOptions) {
         this.mutationChance = mutationChance;
         this.mutatedBerry = mutatedBerry;
         this._hint = options?.hint;
         this._unlockReq = options?.unlockReq;
         this.showHint = options?.showHint ?? true;
+
+        this._hintSeen = ko.observable(false);
+    }
+
+    toJSON(): Record<string, any> {
+        return {
+            hintSeen: this.hintSeen,
+        };
+    }
+    fromJSON(json: Record<string, any>): void {
+        this.hintSeen = json['hintSeen'] ?? false;
     }
 
     /**
@@ -82,6 +99,14 @@ abstract class Mutation {
         });
 
         return mutated;
+    }
+
+    get hintSeen() {
+        return this._hintSeen();
+    }
+
+    set hintSeen(bool: boolean) {
+        this._hintSeen(bool);
     }
 
 }

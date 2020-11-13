@@ -169,7 +169,10 @@
                         <ul class="row justify-content-center p-0" data-bind="foreach: FarmController.getUnlockedBerryList()"
                             style="max-width: 100%; padding:0; margin:0;">
                             <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
-                            data-bind="style:{background: FarmController.getBackgroundColor($data)}">
+                            data-bind="style:{background: FarmController.getBackgroundColor($data)},
+                                    tooltip: { title: FarmController.getHint($data,true,true),
+                                    trigger: 'hover',
+                                    placement:'top' }">
                                  <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + '').padStart(2, 0)">number</span>
                                      <img src="" height="120px" style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                      <!-- ko if: App.game.farming.unlockedBerries[$data]() -->

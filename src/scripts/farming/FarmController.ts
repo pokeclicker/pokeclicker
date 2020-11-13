@@ -5,6 +5,8 @@ class FarmController {
     public static berryListFiltered: KnockoutObservableArray<BerryType> = ko.observableArray([]);
     public static numberOfTabs: KnockoutComputed<number>;
 
+    public static berryListEnd: KnockoutComputed<number>;
+
     public static selectedBerry: KnockoutObservable<BerryType> = ko.observable(BerryType.Cheri);
     public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);
     public static selectedShovel: KnockoutObservable<boolean> = ko.observable(false);
@@ -21,6 +23,12 @@ class FarmController {
 
         this.numberOfTabs = ko.pureComputed(() => {
             return Math.floor(App.game.farming.highestUnlockedBerry() / this.BERRIES_PER_PAGE);
+        });
+
+        this.berryListEnd = ko.pureComputed(() => {
+            const highestMutation = App.game.farming.mutations.slice().reverse().find(mut => mut._hintSeen() && !App.game.farming.unlockedBerries[mut.mutatedBerry]());
+            const highestMutationHint = highestMutation?.mutatedBerry ?? 0;
+            return Math.max(App.game.farming.highestUnlockedBerry(), highestMutationHint);
         });
 
         this.navigateIndex(0);
@@ -111,7 +119,7 @@ class FarmController {
     }
 
     public static getUnlockedBerryList() {
-        return this.berryListFiltered().filter((berry) => berry <= App.game.farming.highestUnlockedBerry());
+        return this.berryListFiltered().filter((berry) => berry <= this.berryListEnd());
     }
 
     private static getAmount() {
@@ -127,11 +135,33 @@ class FarmController {
     }
 
     public static getBackgroundColor(index: number) {
-        return GameConstants.BerryColor[App.game.farming.berryData[index].color];
+        if (App.game.farming.unlockedBerries[index]()) {
+            return GameConstants.BerryColor[App.game.farming.berryData[index].color];
+        } else if (FarmController.getHint(index, true) !== '') {
+            return GameConstants.BerryColor[6];
+        } else {
+            return GameConstants.BerryColor[7];
+        }
+
     }
 
     public static getBerryImage(index: number) {
         return `assets/images/items/${BerryType[index]}.png`;
     }
 
+    public static getHint(index: number, checkSeen = false, checkUnlocked = false) {
+        if (checkUnlocked && App.game.farming.unlockedBerries[index]()) {
+            return '';
+        }
+        const mutation = App.game.farming.mutations.find(mutation => mutation.mutatedBerry === index && mutation.showHint);
+        if (mutation) {
+            if (checkSeen && !mutation.hintSeen) {
+                return '';
+            }
+            return mutation.hint;
+        }
+        return '';
+    }
+
 }
+
