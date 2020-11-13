@@ -11,6 +11,9 @@ class FarmController {
 
     public static berryListVisible: KnockoutObservable<boolean> = ko.observable(true);
 
+    public static multipliers = ['×1', '×10', '×100', '×1000', 'All'];
+    public static multIndex: KnockoutObservable<number> = ko.observable(0);
+
     static readonly BERRIES_PER_PAGE = 8;
 
     public static initialize() {
@@ -81,8 +84,12 @@ class FarmController {
             }
         // Handle Mulches
         } else {
-            App.game.farming.addMulch(index, this.selectedMulch());
+            App.game.farming.addMulch(index, this.selectedMulch(), this.getAmount());
         }
+    }
+
+    public static mulchAll() {
+        App.game.farming.mulchAll(FarmController.selectedMulch(), this.getAmount());
     }
 
     public static navigateRight() {
@@ -105,6 +112,18 @@ class FarmController {
 
     public static getUnlockedBerryList() {
         return this.berryListFiltered().filter((berry) => berry <= App.game.farming.highestUnlockedBerry());
+    }
+
+    private static getAmount() {
+        return Number(this.multipliers[this.multIndex()].replace(/\D/g, '')) || Infinity;
+    }
+
+    public static incrementMultiplier() {
+        this.multIndex((this.multIndex() + 1) % this.multipliers.length);
+    }
+
+    public static decrementMultiplier() {
+        this.multIndex((((this.multIndex() - 1) % this.multipliers.length) + this.multipliers.length) % this.multipliers.length);
     }
 
     public static getBackgroundColor(index: number) {

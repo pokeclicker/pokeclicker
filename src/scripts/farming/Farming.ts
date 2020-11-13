@@ -1074,29 +1074,49 @@ class Farming implements Feature {
      * Adds mulch to a plot
      * @param index The plot index
      * @param mulch The MulchType to be added
+     * @param amount The amount of mulch to apply. Defaults to 1
      */
-    public addMulch(index: number, mulch: MulchType) {
+    public addMulch(index: number, mulch: MulchType, amount = 1) {
         const plot = this.plotList[index];
-        if (!plot.isUnlocked || !this.hasMulch(mulch)) {
-            return;
-        }
-        if (plot.mulch !== MulchType.None && plot.mulch !== mulch) {
+        if (!this.canMulch(index, mulch)) {
             return;
         }
 
-        GameHelper.incrementObservable(this.mulchList[mulch], -1);
+        amount = Math.min(this.mulchList[mulch](), amount);
+        GameHelper.incrementObservable(this.mulchList[mulch], -amount);
         plot.mulch = mulch;
-        plot.mulchTimeLeft += GameConstants.MULCH_USE_TIME;
+        plot.mulchTimeLeft += GameConstants.MULCH_USE_TIME * amount;
     }
 
     /**
      * Attempts to add mulch to all plots
      * @param mulch The MulchType to be added
+     * @param amount The amount of mulch to apply to each plot. Defaults to 1
      */
-    public mulchAll(mulch: MulchType) {
-        this.plotList.forEach((plot, index) => {
-            this.addMulch(index, mulch);
+    public mulchAll(mulch: MulchType, amount = 1) {
+        const mulchPlots = this.plotList.filter((_, index) => this.canMulch(index, mulch));
+        amount *= mulchPlots.length;
+        amount = Math.min(this.mulchList[mulch](), amount);
+
+        const sharedMulch = Math.floor(amount / mulchPlots.length);
+        if (sharedMulch <= 0) {
+            return;
+        }
+
+        this.plotList.forEach((_, index) => {
+            this.addMulch(index, mulch, sharedMulch);
         });
+    }
+
+    private canMulch(index: number, mulch: MulchType) {
+        const plot = this.plotList[index];
+        if (!plot.isUnlocked || !this.hasMulch(mulch)) {
+            return false;
+        }
+        if (plot.mulch !== MulchType.None && plot.mulch !== mulch) {
+            return false;
+        }
+        return true;
     }
 
     /**
