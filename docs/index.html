@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.5.8"></script>
+    <script src="scripts/modules.min.js?v=0.6.0"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.5.8"></script>
+    <script src="scripts/script.min.js?v=0.6.0"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.5.8" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.6.0" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -754,14 +754,14 @@
                             </h2>
 
                             <div>
-                                <div data-bind="ifnot: Battle.catching">
+                                <div data-bind="visible: !Battle.catching()">
                                     <img class="enemy"
                                          data-bind="attr:{ src: PokemonHelper.getImage(Battle.enemyPokemon(), Battle.enemyPokemon().shiny) }"
                                          src=""/>
                                 </div>
-                                <div data-bind="if: Battle.catching" class="catchChance">
+                                <div data-bind="visible: Battle.catching()" class="catchChance">
                                     <img class="pokeball-animated"
-                                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg' }"
+                                         data-bind="attr:{ src: 'assets/images/pokeball/' + GameConstants.Pokeball[Battle.pokeball()] + '.svg'}"
                                          src=""/>
                                     <br>
                                     Catch Chance:
@@ -1020,6 +1020,7 @@
                    Gym
                </button>
                <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
+               <a class="btn btn-secondary" href="#berryMasterModal" data-bind="visible: player.town().berryMaster" data-toggle="modal" onclick="ShopHandler.showShop(player.town().berryMaster())">Berry Master</a>
                <button class="btn btn-warning"
                        href="#nextRegionModal" data-toggle="modal"
                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name()), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
@@ -1061,12 +1062,16 @@
     <knockout data-bind="if: (player.town().dungeon() && player.town() instanceof DungeonTown)">
       <div id="dungeonPokemonList" class="card">
         <!--Display all available Pokémon in this dungeon-->
-        <ul class="list-inline"
-          data-bind="foreach: player.town().dungeon().allPokemonNames">
+        <ul class="list-inline" data-bind="foreach: player.town().dungeon().allPokemonNames">
           <li class="list-inline-item">
-            <img class="dungeon-pokemon-preview" src=""
-                data-bind="attr:{ src: 'assets/images/' + (App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png' }, css: { 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data) }"/>
-            <sup style="float:right; top:10px;" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
+            <img class="dungeon-pokemon-preview" src="" data-bind="attr:{
+                src: 'assets/images/' + (App.game.party.alreadyCaughtPokemonByName($data, true) ? 'shiny' : '') + 'pokemon/' + pokemonMap[$data].id + '.png'
+            },
+            css: {
+                'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data)
+            }"/>
+            <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: player.town().dungeon().allAvailablePokemonNames.includes($data)">
           </li>
         </ul>
       </div>
@@ -1093,7 +1098,7 @@
                                                     Battle.enemyPokemon().type1,
                                                     Battle.enemyPokemon().type2
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
-                                                : null,
+                                                : '',
                                             trigger: 'hover',
                                         }
                                     "></span>
@@ -1121,7 +1126,7 @@
                                                     Battle.enemyPokemon().type1,
                                                     Battle.enemyPokemon().type2
                                                 ).toLocaleString('en-US')} against ${Battle.enemyPokemon().name}`
-                                                : null,
+                                                : '',
                                             trigger: 'hover',
                                         }
                                     "></span>
@@ -1427,11 +1432,11 @@
     <rect data-route='7'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(7, 0) }"
         height="48"
-        width="208"
-        x="1008" y="352">
+        width="144"
+        x="800" y="352">
     </rect>
 
-    <text style="font-size: 32px" x="1104" y="386">7</text>
+    <text style="font-size: 32px" x="864" y="386">7</text>
 
 </g>
 
@@ -1445,11 +1450,11 @@
     <rect data-route='8'
         data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 0) }"
         height="48"
-        width="144"
-        x="800" y="352">
+        width="208"
+        x="1008" y="352">
     </rect>
 
-    <text style="font-size: 32px" x="864" y="386">8</text>
+    <text style="font-size: 32px" x="1104" y="386">8</text>
 
 </g>
 
@@ -6717,38 +6722,8 @@
                 <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="row justify-content-center" data-bind="foreach: [...new Set(ShopHandler.shopObservable().items().map(i => i.currency))]">
-                    <h4 class="col-6 col-sm-4 col-lg-2">
-                        <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data](), currency: $data, reduced: true }}"></span>
-                    </h4>
-                </div>
-                <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
-                    <div class="col-6 col-sm-4 col-lg-3">
-                       <button class="shopItem clickable btn btn-block btn-secondary"
-                           data-bind="click: function() {ShopHandler.setSelected($index())},
-                           css: { active: ShopHandler.selected() == $index() },
-                           attr: { disabled: !$data.isAvailable() },
-                           tooltip: {
-                              title: $data.description ? $data.displayName + '<br/>' + $data.description : '',
-                              trigger: 'hover',
-                              placement:'bottom',
-                              html: true
-                            }">
-                           <knockout data-bind="if: ($data instanceof CaughtIndicatingItem)">
-                               <span style="position: absolute; top: 15px; right: 20px;" 
-                                     data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
-                               </span>
-                           </knockout>
-                           <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/[^\w.-\\(\\)]/g, '_') + '.png' }">
-                           <p data-bind="text: $data.displayName">Item Name</p>
-                           <div data-bind="if: $data.isAvailable()">
-                                <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>
-                            </div>
-                            <div data-bind="ifnot: $data.isAvailable()">
-                                <span>Sold Out</span>
-                            </div>
-                        </button>
-                    </div>
+                <div>
+                    <span data-bind="template: { name: 'shopBodyTemplate' }"></span>
                 </div>
             </div>
             <div class="modal-footer">
@@ -6801,6 +6776,42 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/html" id="shopBodyTemplate">
+    <div class="row justify-content-center" data-bind="foreach: [...new Set(ShopHandler.shopObservable().items().map(i => i.currency))]">
+        <h4 class="col-6 col-sm-4 col-lg-2">
+            <span data-bind="template: { name: 'currencyTemplate', data: { amount: App.game.wallet.currencies[$data](), currency: $data, reduced: true }}"></span>
+        </h4>
+    </div>
+    <div class="row justify-content-center" data-bind="foreach: ShopHandler.shopObservable().items">
+        <div class="col-6 col-sm-4 col-lg-3">
+           <button class="shopItem clickable btn btn-block btn-secondary"
+               data-bind="click: function() {ShopHandler.setSelected($index())},
+               css: { active: ShopHandler.selected() == $index() },
+               attr: { disabled: !$data.isAvailable() },
+               tooltip: {
+                  title: $data.description ? `<u>${$data.displayName}:</u><br/>${$data.description}` : '',
+                  trigger: 'hover',
+                  placement:'bottom',
+                  html: true
+                }">
+               <knockout data-bind="if: ($data instanceof CaughtIndicatingItem)">
+                   <span style="position: absolute; top: 15px; right: 20px;"
+                         data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
+                   </span>
+               </knockout>
+               <img src="" height="36px" data-bind="attr:{ src: 'assets/images/items/' + name().replace(/[^\w.-\\(\\)]/g, '_') + '.png' }">
+               <p data-bind="text: $data.displayName">Item Name</p>
+               <div data-bind="if: $data.isAvailable()">
+                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>
+                </div>
+                <div data-bind="ifnot: $data.isAvailable()">
+                    <span>Sold Out</span>
+                </div>
+            </button>
+        </div>
+</script>
 
 
 <!-- Receive gym badge Modal -->
@@ -6971,26 +6982,31 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
-           <div class="modal-body">
-              <div class="row" data-bind="foreach: App.game.oakItems.itemList">
-                  <div class="col p-0">
+           <div class="modal-body py-1">
+              <ul class="row justify-content-center p-0 my-0"
+                data-bind="foreach: App.game.oakItems.itemList"
+                style="list-style-type: none;">
+                  <!-- ko if: $index() % 5 == 0 -->
+                  <div class="w-100"></div>
+                  <!-- /ko -->
+                  <li class="col p-1">
                       <button class="p-0 btn"
                           data-bind="css: {
                              'btn-primary': $data.isActive,
                              'btn-outline-secondary': !$data.isActive
                            }">
-                          <img class="clickable" style="height: 32px;" src=""
+                          <img class="clickable" style="width: 80%;" src=""
                                data-bind="attr:{ src: 'assets/images/oakitems/' + OakItems.OakItem[$data.name] + '.png'},
                                 css: {
                                   'oak-item-locked': !App.game.oakItems.isUnlocked($data.name)
                                 },
                                 event: {
                                   mouseover: function(){OakItemController.hover($data.name)},
-                                  click: function(){OakItemController.click($data.name)},
+                                  click: function(){OakItemController.click($data.name);},
                                 }">
                         </button>
-                  </div>
-              </div>
+                    </li>
+                </ul>
           </div>
           <div class="modal-footer p-0">
               <table class="table table-bordered text-center m-0">
@@ -7046,7 +7062,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                   <!-- /ko -->
                   <!-- ko ifnot: App.game.oakItems.isUnlocked(OakItemController.inspectedItem) -->
                   <tr>
-                    <td colspan="2">Locked!<br/>Capture <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].unlockReq - App.game.party.caughtPokemon.length"></span> more unique Pokémon</td>
+                    <td colspan="2">Locked!<br/><span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].hint()"></span></td>
                   </tr>
                   <tr>
 
@@ -7062,7 +7078,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
 
 <!-- Statistics Modal-->
 <div class="modal noselect fade" id="statisticsModal" tabindex="-1" role="dialog" aria-labelledby="statisticsModal">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-md" role="document">
         <div class="modal-content">
             <div class="modal-header" style='justify-content: space-around;'>
                 <h5 class="modal-title">Statistics</h5>
@@ -7078,11 +7094,17 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                         <th>Amount</th>
                       </tr>
                     </thead>
-                    <tbody data-bind="foreach: App.game.statistics.observables">
+                    <tbody>
+                      <tr>
+                        <td class="text-left">Time Played</td>
+                        <td class="text-left tight text-muted" data-bind="html: GameConstants.formatSecondsToTime(App.game.statistics['secondsPlayed']())">-</td>
+                      </tr>
+                      <!-- ko foreach: App.game.statistics.observables -->
                       <tr>
                         <td class="text-left" data-bind="text: GameConstants.camelCaseToString($data)">-</td>
-                        <td class="text-left tight"><code data-bind="text:App.game.statistics[$data]().toLocaleString('en-US')">-</code></td>
+                        <td class="text-left tight text-muted" data-bind="text: App.game.statistics[$data]().toLocaleString('en-US')">-</td>
                       </tr>
+                      <!-- /ko -->
                     </tbody>
                 </table>
             </div>
@@ -7611,12 +7633,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Display Value</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value)">
-                                    <option value="attack" selected>Attack</option>
-                                    <option value="attackBonus">Attack Bonus</option>
-                                    <option value="baseAttack">Base Attack</option>
-                                    <option value="eggSteps">Egg Steps</option>
-                                    <option value="timesHatched">Times Hatched</option>
+                                <select name="breedingDisplayFilter" autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingDisplayFilter').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingDisplayFilter').value === $data.value }, text: $data.text">Type</option>
+                                    <!-- /ko -->
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
@@ -7630,40 +7650,34 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Region</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.region(+this.value)">
-                                    <option value="-2">All</option>
-                                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
-                                    <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
+                                <select name="breedingRegionFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.region(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionFilter').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
-                                    <option value="-1">None</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Shiny Status</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
-                                    <option value="-1">All</option>
-                                    <option value="0">Not Shiny</option>
-                                    <option value="1">Shiny</option>
+                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <option value="-1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '-1' }">All</option>
+                                    <option value="0" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '0' }">Not Shiny</option>
+                                    <option value="1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '1' }">Shiny</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.type1(+this.value)">
-                                    <option value="-2">All</option>
-                                    <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
-                                    <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingController.filter.type1(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter1').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
-                                    <option value="-1">None</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.type2(+this.value)">
-                                    <option value="-2">All</option>
-                                    <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
-                                    <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingController.filter.type2(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter2').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
-                                    <option value="-1">None</option>
                                 </select>
                             </div>
                         </div>
@@ -7706,6 +7720,11 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                         <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
                                     </div>
+                                </div>
+                                <div class="sidebar">
+                                    <a class="useProtein" href="#useProtein" data-bind="class: ItemHandler.hasItem('Protein') && $data.canUseProtein() ? '' : 'disabled', click: function() { $data.useProtein(); }">
+                                        <img class="p-0" src="assets/images/items/Protein.png" width="100%" height="100%"/>
+                                    </a>
                                 </div>
                             </li>
                         </ul>
@@ -8145,6 +8164,10 @@ aria-labelledby="pokedexModalLabel">
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
+                      <td class="text-left">Proteins Used</td>
+                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).proteinsUsed() : 0).toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
                       <td class="text-left">Type</td>
                       <td class="text-left tight">
                         <span class="badge text-light"
@@ -8355,12 +8378,12 @@ aria-labelledby="badgeCaseModalLabel">
                     <tbody data-bind="foreach: App.game.quests.questList" >
                     <tr>
                         <td class="align-middle" style="text-align:left" data-bind='text: description'></td>
-                        <td class="align-middle" style="text-align:left">
+                        <td class="align-middle py-0" style="text-align:left">
                             <span data-bind="template: { name: 'currencyTemplate', data: {'amount':  pointsReward, 'currency': GameConstants.Currency.questPoint}}"></span>
                         </td>
-                        <td class="align-middle">
+                        <td class="align-middle py-0">
                             <button class='btn btn-primary btn-sm btn-block'
-                                data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted(),
+                                data-bind='visible: App.game.quests.canStartNewQuest() && !$data.inProgress() && !$data.isCompleted() && !$data.claimed(),
                                 click: function(){
                                     App.game.quests.beginQuest($data.index);
                                     if (!App.game.quests.canStartNewQuest()) {$("#QuestModal").modal("hide");}
@@ -8381,11 +8404,19 @@ aria-labelledby="badgeCaseModalLabel">
 
             <div class="modal-footer">
                 <div id='refreshQuests'>
+                    <!-- ko if: App.game.quests.freeRefresh() -->
+                    <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)">Free Refresh</button>
+                    <!-- /ko -->
+                    <!-- ko if: !App.game.quests.freeRefresh() -->
                     <button class="btn btn-primary" onclick="App.game.quests.refreshQuests(false, true)"
-                            data-bind="enable: App.game.quests.canAffordRefresh(), tooltip: { title: `Daily refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`, trigger: 'hover', placement:'top' }">
+                        data-bind="enable: App.game.quests.canAffordRefresh(),
+                            tooltip: {
+                                title: App.game.quests.freeRefresh() ? '' : `Daily free refresh in: ${GameHelper.formattedLetterTimeUntilTomorrow()}`,
+                                trigger: 'hover', placement:'top'
+                            }">
                         <span data-bind="template: { name: 'amountTemplate', data: App.game.quests.getRefreshCost() }"></span> - Refresh
-                        </span>
                     </button>
+                    <!-- /ko -->
                     
                 </div>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -8397,67 +8428,151 @@ aria-labelledby="badgeCaseModalLabel">
 
 <!-- Farm Modal-->
 <div class="modal fade noselect" id="farmModal" tabindex="-1" role="dialog"
-     aria-labelledby="farmModalLabel">
+     aria-labelledby="farmModalLabel"
+     style="cursor:default">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4>Farm</h4>
-                <!-- ko ifnot: App.game.farming.allPlotsUnlocked() -->
-                <button class="btn btn-success" onclick="App.game.farming.unlockPlot()"
-                        data-bind="css: { disabled: !App.game.farming.canBuyPlot()}">
-                    <span>Unlock new plot </span>
-                    <span data-bind="template: { name: 'amountTemplate', data: App.game.farming.calculatePlotPrice()}"></span>
-                </button>
-                <!-- /ko -->
+            <div class="modal-header p-0">
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
+                    <!-- TODO: HLXII Add Apricorn Tab ? -->
+                    <btn class="btn btn-primary">
+                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                    </btn>
+                </ul>
             </div>
-            <div class="modal-body">
-                <div id="farmView" class="justify-content-center no-select row">
-                    <div class="col-12 col-lg-4">
-                        <div class="col-sm-12">
-                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
-                        </div>
-                        <ul id="seedList" data-bind="foreach: App.game.farming.berryList" class="list-group"
-                            style="margin-bottom: 5px;">
-                            <li class="list-group-item list-group-item-action seed-list-item"
-                                data-bind="click: function() {FarmController.selectedBerry = $index()}">
-                                <img src="" width="24px"
-                                     data-bind="attr:{ src: 'assets/images/items/' + BerryType[$index()] + '.png'}">
-                                <span data-bind="text: BerryType[$index()]"></span>
-                                <span class="seedAmount" data-bind="text: App.game.farming.berryList[$index()]"></span>
-                            </li>
-                        </ul>
 
-                        <div class="row">
-                            <div class="col-lg-12 col-6">
-                                <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">
-                                    Plant All
-                                </button>
-                            </div>
-                            <div class="col-lg-12 col-6">
-                                <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
-                                    Harvest All
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-8" style="padding-left: 0">
-                        <div id="plotList" data-bind="foreach: App.game.farming.plotList">
-                            <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked}">
-                                <div class="plot-content">
-                                    <div class="plotImage">
-                                        <img style="width: 100%" src="assets/images/farm/soil.png">
-                                        <div data-bind="ifnot: $data.isEmpty()">
-                                            <div class="plotButton"
-                                                 data-bind="click: function(){App.game.farming.harvest($index())}, tooltip: {title: $data.formattedTimeLeft, trigger: 'hover', animation: false}">
-                                                <img width="100%" height="100%"
-                                                     style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
-                                                     src=""
-                                                     data-bind="attr:{ src: FarmController.getImage($index())}">
-                                            </div>
+            <div class="modal-body tab-content p-0">
+
+                <div id="berryFarmView" class="tab-pane fade in active show">
+                    <div id="farmView" class="justify-content-center no-select row">
+                        <div class="col-12 col-lg-4">
+
+
+                            <ul class="nav nav-tabs nav-fill">
+                                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#seeds" data-bind="click: function(){FarmController.berryListVisible(true);}">Berries</a></li>
+                                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#mulches" data-bind="click: function(){FarmController.berryListVisible(false);}">Mulch</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="seeds" class="tab-pane active">
+                                    <ul id="seedList" class="list-group p-0">
+                                        <!-- ko foreach: FarmController.getBerryListWithIndex() -->
+                                        <li class="list-group-item list-group-item-action seed-list-item p-2"
+                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
+                                            <img src="" height="24px"
+                                                data-bind="attr:{ src: FarmController.getBerryImage($data) },
+                                                css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
+                                            <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : '???'"></span>
+                                            <span class="float-right" data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></span>
+                                        </li>
+                                        <!-- /ko -->
+                                    </ul>
+
+                                    <div class="row justify-content-center align-items-center py-1">
+                                        <div class="col-4 pr-0">
+                                            <button class="btn btn-block btn-secondary"
+                                                onclick="FarmController.navigateLeft()"
+                                                data-bind="disable: FarmController.navigateIndex() === 0,
+                                                    css: { disabled: FarmController.navigateIndex() === 0 }">
+                                                <img src="assets/images/arrow.svg" style="transform: scaleX(-1);" height="20">
+                                            </button>
                                         </div>
-                                        <div data-bind="if: $data.isEmpty()">
+                                        <div class="col-4" data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
+                                        <div class="col-4 pl-0">
+                                            <button class="btn btn-block btn-secondary"
+                                                onclick="FarmController.navigateRight()"
+                                                data-bind="disable: FarmController.navigateIndex() ===  FarmController.numberOfTabs(),
+                                                    css: { disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs() }">
+                                                <img src="assets/images/arrow.svg" height="20">
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row justify-content-center py-1">
+                                        <div class="col-6 pr-0">
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry())}">
+                                                Plant All
+                                            </button>
+                                        </div>
+                                        <div class="col-6 pl-0">
+                                            <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
+                                                Harvest All
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="mulches" class="tab-pane">
+                                    <ul id="mulchList" class="list-group p-0">
+                                        <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
+                                        <li class="list-group-item list-group-item-action seed-list-item p-2"
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() }">
+                                            <img src="" width="24px"
+                                                data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
+                                            <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
+                                            <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
+                                        </li>
+                                        <!-- /ko -->
+                                    </ul>
+
+                                    <div class="row justify-content-center py-1">
+                                        <div class="col-12">
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch())}">
+                                                Mulch All
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ul id="shovelList" class="list-group">
+                                <li class="list-group-item list-group-item-action seed-list-item p-2"
+                                    data-bind="click: function() {FarmController.selectedShovel(true);},
+                                    css: { 'active': FarmController.selectedShovel() },
+                                    tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
+                                    <img src="" height="24px"
+                                        data-bind="attr:{ src: ItemList['Berry_Shovel'].imagePath }">
+                                    <span>Shovel</span>
+                                    <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-12 col-lg-8">
+                            <div id="plotList" class="row" data-bind="foreach: App.game.farming.plotList">
+                                <!-- ko if: $index() % Farming.PLOT_WIDTH == 0 -->
+                                <div class="w-100"></div>
+                                <!-- /ko -->
+                                <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
+                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
+                                        <div class="plotImage">
+                                            <img style="width: 100%" src="assets/images/farm/soil.png"
+                                                data-bind="class: FarmController.calcMulchClass($data)">
+                                            <!-- ko if: !$data.isUnlocked -->
+                                            <div class="plotButton plotLockHover">
+                                                <div>
+                                                    <span style="display: inline;">
+                                                        <img alt="Berry" style="height: 24px;"
+                                                            data-bind="attr:{ src: FarmController.getBerryImage(App.game.farming.plotBerryCost($index()).type) },
+                                                            css: {'berryLocked': !App.game.farming.unlockedBerries[App.game.farming.plotBerryCost($index()).type]() }"/>
+                                                        <span data-bind="text: GameConstants.formatNumber(App.game.farming.plotBerryCost($index()).amount)">0</span>
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFTCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                                                </div>
+                                            </div>
+                                            <!-- /ko -->
                                             <div class="plotButton"
-                                                 data-bind="click: function(){App.game.farming.plant($index(), FarmController.selectedBerry)}">
+                                                data-bind="ifnot: $data.isEmpty(),
+                                                click: function(){FarmController.plotClick($index())},
+                                                tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
+                                                <img width="100%" height="100%" src=""
+                                                    style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
+                                                    data-bind="attr:{ src: FarmController.getImage($index())}">
                                             </div>
                                         </div>
                                     </div>
@@ -8466,10 +8581,290 @@ aria-labelledby="badgeCaseModalLabel">
                         </div>
                     </div>
                 </div>
+
+                <div id="berryDexView" class="tab-pane fade">
+                    <div>
+                        <ul class="row justify-content-center p-0" data-bind="foreach: FarmController.getUnlockedBerryList()"
+                            style="max-width: 100%; padding:0; margin:0;">
+                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
+                            data-bind="style:{background: FarmController.getBackgroundColor($data)}">
+                                 <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + '').padStart(2, 0)">number</span>
+                                     <img src="" height="120px" style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
+                                     <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
+                                     <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
+                                     <a class="overlay" href="#berryDexModal" data-toggle="modal"
+                                        data-bind="click: ()=>{App.game.statistics.selectedBerryID($data)}"></a>
+                                     <!-- /ko -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="helpView" class="tab-pane fade col-10 offset-1">
+                    <h4><u>Farm</u></h4>
+                    <p>In the farm you can plant and harvest Berries.</p>
+
+                    <p>Each Berry type takes a different amount of time to grow,
+                    <br/>Once fully grown, the Berry plant can be clicked to manually harvest the Berries and gain some Farm Points.</p>
+
+                    <p>Otherwise after some time being fully grown, the Berry plant will wither away,
+                    dropping only a fraction of the Berries but may also be re-planted automatically.
+                    <br/><i>(Farm Points are only gained by manually harvesting Berries)</i><p>
+
+                    <p>Additional plots can be unlocked by spending Berries.</p>
+
+                    <h4><u>Mutations</u></h4>
+                    <p>Berries have the chance to mutate into other Berries based on certain conditions.
+                    <br/><i>(the Berry Master in Kanto will give you daily hints to what these conditions may be)</i></p>
+
+                    <h4><u>Mulches</u></h4>
+                    <p>Mulches can be bought in later regions from Berry Masters,
+                    <br/>They can be used on plots for different effects:</p>
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>Boost Mulch</td>
+                            <td>Increases the growth rate of Berry plants.</td>
+                        </tr>
+                        <tr>
+                            <td>Rich Mulch</td>
+                            <td>Increases the number of Berries harvested.</td>
+                        </tr>
+                        <tr>
+                            <td>Surprise Mulch</td>
+                            <td>Increases the chances of mutations.</td>
+                        </tr>
+                        <tr>
+                            <td>Amaze Mulch</td>
+                            <td>A weaker version of all three affects.</td>
+                        </tr>
+                    </table>
+
+                    <h4><u>Shovel</u></h4>
+                    <p>If you want to remove a Berry plant before it is fully grown,
+                    <br/>you can use a Shovel to uproot it.
+                    <br/><i>(shovels can be purchased in later regions from Berry Masters)</i></p>
+
+                    <h4><u>Trades</u></h4>
+                    <p>Berries can be traded with Berry Masters in later regions for other useful items</p>
+                </div>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Berrydex Modal-->
+<div class="modal noselect fade" id="berryDexModal" tabindex="-1" role="dialog" aria-labelledby="berryDexModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content" data-bind="with: App.game.statistics.selectedBerryID()+''">
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-muted" data-bind="text: `#${$data.toString().padStart(2,0)}&nbsp;&nbsp;`"></h5>
+                <h5 class="modal-title text-light" data-bind="text: BerryType[$data]">Berry Statistics</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <img data-bind="attr:{ src: FarmController.getBerryImage($data) }" src=""/>
+                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                  <thead>
+                    <tr class="text-light">
+                      <th class="bg-dark" colspan="2">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <td colspan="2"><span data-bind="html: App.game.farming.berryData[$data].descriptionHTML"></span></td>
+                  </tbody>
+                  <thead>
+                    <tr class="text-light">
+                      <th class="text-left bg-dark">Type</th>
+                      <th class="text-left bg-dark">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-left">Growth Time</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].growthTime[3].toLocaleString('en-US') + 's'">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Harvest Amount</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].harvestAmount.toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Replant Rate</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].replantRate.toLocaleString('en-US', { style: 'percent' })">-</code></td>
+                    </tr>
+                    <tr>
+                      <td class="text-left">Farm Tokens per Harvest</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].farmValue.toLocaleString('en-US')">-</code></td>
+                    </tr>
+                  </tbody>
+                  <thead>
+                    <tr class="text-light">
+                      <th class="bg-dark" colspan="2">Flavor</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="2" style="padding: 0px;">
+                          <table style="width: 100%;">
+                              <tr>
+                                  <td>Spicy</td>
+                                  <td>Dry</td>
+                                  <td>Sweet</td>
+                                  <td>Bitter</td>
+                                  <td>Sour</td>
+                              </tr>
+                              <tr>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[0].value">Spicy</td>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[1].value">Dry</td>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[2].value">Sweet</td>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[3].value">Bitter</td>
+                                <td data-bind="text: App.game.farming.berryData[$data].flavors[4].value">Sour</td>
+                            </tr>
+                          </table>
+                      </td>
+                      </tr>
+                  </tbody>
+                  <thead>
+                    <tr class="text-light">
+                      <th class="text-left bg-dark">Statistic</th>
+                      <th class="text-left bg-dark">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="text-left">Harvested</td>
+                      <td class="text-left tight"><code data-bind="text: App.game.statistics.berriesHarvested[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Berry Master Modal-->
+<div class="modal fade noselect" id="berryMasterModal" tabindex="-1" role="dialog"
+     aria-labelledby="berryMasterModalLabel">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+        <div class="modal-content" data-bind="let: { shopVisible: ko.observable(true) }">
+            <div class="modal-header text-center">
+                <h4>Berry Master</h4>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">&times;</button>
+            </div>
+            <div>
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryMasterShop" data-bind="click: function(){shopVisible(true);}">Shop</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryMasterTrade" data-bind="click: function(){shopVisible(false);}">Trades</a></li>
+                </ul>
+            </div>
+            <div class="modal-body tab-content">
+                <div id="berryMasterShop" class="tab-pane fade in active show">
+                    <span data-bind="template: { name: 'shopBodyTemplate' }"></span>
+                </div>
+                <div id="berryMasterTrade" class="tab-pane fade">
+                    <div class="table-responsive" id="dailyDealsBody">
+                        <table class="table table-sm table-hover table-striped m-0 text-left">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Inv</th>
+                                    <th></th>
+                                    <th>Berries</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>Item</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind='foreach: BerryDeal.getDeals(player.region)'>
+                                <!-- ko foreach: berries -->
+                                <tr>
+                                    <td data-bind="text: App.game.farming.berryList[$data.berryType]()"></td>
+                                    <td><img height="24px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }"></img></td>
+                                    <td data-bind='text: amount + " x " + BerryType[berryType]'></td>
+                                    <!-- ko if: $index() === 0 -->
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">→</td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
+                                        <img class='mineInventoryItem' data-bind='attr: {src: $parent.item.itemType.imagePath}'>
+                                    </td>
+                                    <td class='vertical-middle' data-bind='attr: { rowspan: $parent.berries.length }, text: $parent.item.amount + " × " + $parent.item.itemType.displayName'></td>
+                                    <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
+                                        <div class="btn-group btn-block" data-bind="let: { tradeAmount: ko.observable(1) }">
+                                            <button class='btn btn-success btn-block' data-bind='click: function(){BerryDeal.use(player.region, $parentContext.$index(), tradeAmount())}, css: { disabled: !BerryDeal.canUse(player.region, $parentContext.$index()) }'>
+                                                Trade
+                                            </button>
+                                            <button type="button" data-bind="text: tradeAmount() + '&nbsp;', css: { disabled: !BerryDeal.canUse(player.region, $parentContext.$index()) }" class="btn btn-success dropdown-toggle dropdown-toggle-split active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            </button>
+                                            <div class="dropdown-menu" data-bind="foreach: [1, 10, 100, 1000, Infinity]">
+                                                <button class="dropdown-item" type="button" data-bind="click: function(){tradeAmount($data)}, text: $data"></button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!-- /ko -->
+                                </tr>
+                                <!-- /ko -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <!-- ko if: shopVisible() -->
+                <div class="row justify-content-center">
+                    <div class="input-group m-0" style="margin-bottom: 6px; margin-top: 6px">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-warning btn-outline-dark smallButton smallFont" onclick="ShopHandler.resetAmount()">
+                                Reset
+                            </button>
+                        </div>
+                        <input id="amountOfItems" type="number" class="outline-dark form-control form-control-number"
+                                value="1" min="1" required name="amountOfItems"
+                                oninput="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);"
+                                onchange="ShopHandler.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
+                        <div class="input-group-append">
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(10)">
+                                    +10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
+                                    +100
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(10)">
+                                    &times;10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.multiplyAmount(0.1)">
+                                    &div;10
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(100)">
+                                    +100
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="ShopHandler.increaseAmount(1000)">
+                                    +1000
+                                </button>
+                            <!-- /ko -->
+                            <button class="btn btn-primary smallButton smallFont" type="button" onclick="ShopHandler.maxAmount()">
+                                Max
+                            </button>
+                            <button class="btn-outline-dark" data-bind="attr: {class: ShopHandler.calculateButtonCss()}" onclick="ShopHandler.buyItem()">
+                                Buy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: !shopVisible() -->
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <!-- /ko -->
             </div>
         </div>
     </div>
@@ -8652,14 +9047,25 @@ aria-labelledby="badgeCaseModalLabel">
                 <div class="message" data-bind='html: SafariBattle.text'></div>
                 <div class="row" style="width: 100%;">
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBall()" data-bind='text: "Ball (" + Safari.balls() + ")"'>Ball (30)</button>
-                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBait()">Bait</button>
-                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwRock()">Rock</button>
+                    <div class="btn-group btn-block col-6 m-0 dropup" style="padding:0px;" data-bind="let: { baitType: ko.observable(BaitType.Bait) }">
+                        <button type="button" class='btn btn-primary btn-block' onclick="this.blur();SafariBattle.lockButtons();" data-bind='{ click: function(){SafariBattle.throwBait(baitType());}, enable: BaitList[BaitType[baitType()]].amount() !== 0 && !SafariBattle.disableButtons }'>
+                            <div style="display:inline"><img width=16px data-bind="attr: { src: BaitList[BaitType[baitType()]].imagePath }"></div>
+                            <span data-bind="text: BaitList[BaitType[baitType()]].btnName">Bait (∞)</span>
+                        </button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active" data-bind="text: '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" data-bind="foreach: GameHelper.enumNumbers(BaitType)">
+                            <button class="dropdown-item" type="button" data-bind="click: function(){baitType($data)}, text: BaitList[BaitType[$data]].btnName"></button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwRock()">Rock (∞)</button>
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.run()">Run</button>
                 </div>
            </div>
        </div>
     </div>
 </div>
+
 
 <!-- NPC Modal-->
 <div class="modal fade noselect" id="npc-modal" role="dialog" tabindex="-1">

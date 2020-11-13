@@ -50,8 +50,8 @@ class ChangelogUpdate extends Changelog {
  */
 const changelogItems = [
     // note that month is 0 indexed
-    // v0.5.9
-    new ChangelogUpdate('v0.5.9', new Date(2020, 10, 13)),
+    // v0.6.0
+    new ChangelogUpdate('v0.6.0', new Date(2020, 10, 13)),
     new Changelog(changelogType.NEW, 'Complete Farm overhaul'),
     new Changelog(changelogType.NEW, 'Hotkeys added for oak items modal (O to open, number keys to toggle items)'),
     new Changelog(changelogType.NEW, 'Hotkeys added for pokeball selector modal (P + number to open, number keys to toggle items)'),
