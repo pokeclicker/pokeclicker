@@ -3,8 +3,8 @@ class BuyOakItem extends Item {
 
     item: OakItems.OakItem;
 
-    constructor(item: OakItems.OakItem, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, options = {}) {
-        super(OakItems.OakItem[item], basePrice, currency, { maxAmount: 1, ...options });
+    constructor(item: OakItems.OakItem, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
+        super(OakItems.OakItem[item], basePrice, currency, { maxAmount: 1 }, undefined, 'Purchase to unlock this Oak Item');
         this.item = item;
     }
 
