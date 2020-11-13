@@ -39,7 +39,7 @@ class BoughtOakItem extends OakItem {
 
     fromJSON(json: Record<string, any>): void {
         super.fromJSON(json);
-        this.isActive = json['purchased'] ?? false;
+        this.purchased = json['purchased'] ?? false;
     }
 
     get purchased(): boolean {
