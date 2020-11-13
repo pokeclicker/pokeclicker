@@ -159,7 +159,7 @@ class BerryDeal {
             1
         ));
 
-        return list;
+        return [SeededRand.fromArray(list)];
     }
 
     public static canUse(region: GameConstants.Region, i: number): boolean {
