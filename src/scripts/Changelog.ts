@@ -50,6 +50,32 @@ class ChangelogUpdate extends Changelog {
  */
 const changelogItems = [
     // note that month is 0 indexed
+    // v0.5.9
+    new ChangelogUpdate('v0.5.9', new Date(2020, 10, 13)),
+    new Changelog(changelogType.NEW, 'Complete Farm overhaul'),
+    new Changelog(changelogType.NEW, 'Hotkeys added for oak items modal (O to open, number keys to toggle items)'),
+    new Changelog(changelogType.NEW, 'Hotkeys added for pokeball selector modal (P + number to open, number keys to toggle items)'),
+    new Changelog(changelogType.NEW, 'More NPCs added around the regions'),
+    new Changelog(changelogType.NEW, 'Other Deoxys forms obtainable in the Battle Frontier'),
+    new Changelog(changelogType.NEW, 'Protein item now has a use, buy from Pokemon League, use in Hatchery'),
+    new Changelog(changelogType.NEW, 'Free quest refreshes'),
+    new Changelog(changelogType.NEW, 'Hatchery filters are now saved upon reload'),
+    new Changelog(changelogType.CHANGE, 'Damage output modified, dual types nerfed, single types buffed'),
+    new Changelog(changelogType.CHANGE, 'Unlock Kanto route 22 earlier in the game'),
+    new Changelog(changelogType.CHANGE, 'Show currently locked Dungeon Bosses'),
+    new Changelog(changelogType.CHANGE, 'Modified Sinnoh route difficulty'),
+    new Changelog(changelogType.CHANGE, 'Display time played as a readable value'),
+    new Changelog(changelogType.CHANGE, 'Quests list not auto refreshed on new day or level up'),
+    new Changelog(changelogType.CHANGE, 'Update Masterball image'),
+    new Changelog(changelogType.FIXED, 'All eggs will auto hatch when steps reached if Pokemon still in the queue'),
+    new Changelog(changelogType.FIXED, 'Backup save data corrected'),
+    new Changelog(changelogType.FIXED, 'Pokemon List resorted when new Pokemon obtained'),
+    new Changelog(changelogType.FIXED, 'Attack display error'),
+    new Changelog(changelogType.FIXED, 'Acheivements re-filter once acheivement completed'),
+    new Changelog(changelogType.FIXED, 'Swapped Kanto routes 7 and 8'),
+    new Changelog(changelogType.FIXED, 'Reduce svg image sizes, fix some lag'),
+    new Changelog(changelogType.FIXED, 'Reduce screen movement on mobile battle view'),
+
     // v0.5.8
     new ChangelogUpdate('v0.5.8', new Date(2020, 10, 1)),
     new Changelog(changelogType.NEW, 'Queue functionality added to Hatchery'),
