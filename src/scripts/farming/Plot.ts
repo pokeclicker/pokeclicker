@@ -34,10 +34,10 @@ class Plot implements Saveable {
 
     constructor(isUnlocked: boolean, berry: BerryType, age: number, mulch: MulchType, mulchTimeLeft: number) {
         this._isUnlocked = ko.observable(isUnlocked);
-        this._berry = ko.observable(berry);
-        this._age = ko.observable(age);
-        this._mulch = ko.observable(mulch);
-        this._mulchTimeLeft = ko.observable(mulchTimeLeft);
+        this._berry = ko.observable(berry).extend({ numeric: 0 });
+        this._age = ko.observable(age).extend({ numeric: 3 });
+        this._mulch = ko.observable(mulch).extend({ numeric: 0 });
+        this._mulchTimeLeft = ko.observable(mulchTimeLeft).extend({ numeric: 3 });
 
         this._auras = [];
         this._auras[AuraType.Growth] = ko.observable(1);
