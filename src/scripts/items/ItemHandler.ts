@@ -45,7 +45,7 @@ class ItemHandler {
     }
 
     public static useStones() {
-        if (this.pokemonSelected()) {
+        if (!this.pokemonSelected()) {
             return Notifier.notify({
                 message: 'No Pokémon selected',
                 type: NotificationConstants.NotificationOption.danger,
