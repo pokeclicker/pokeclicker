@@ -152,8 +152,8 @@ class BerryDeal {
                 this.randomBerry(fifthGen),
             ],
             [
-                SeededRand.intBetween(20, 40),
-                SeededRand.intBetween(5, 20),
+                SeededRand.intBetween(50, 100),
+                SeededRand.intBetween(10, 50),
             ],
             ItemList['Protein'],
             1
