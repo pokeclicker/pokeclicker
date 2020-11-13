@@ -123,7 +123,7 @@ class FarmController {
     }
 
     public static decrementMultiplier() {
-        this.multIndex((((this.multIndex() - 1) % this.multipliers.length) + this.multipliers.length) % this.multipliers.length);
+        this.multIndex((this.multIndex() + this.multipliers.length - 1) % this.multipliers.length);
     }
 
     public static getBackgroundColor(index: number) {
@@ -135,4 +135,3 @@ class FarmController {
     }
 
 }
-
