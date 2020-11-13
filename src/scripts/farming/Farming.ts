@@ -752,7 +752,7 @@ class Farming implements Feature {
                 BerryType.Ganlon,
             ]));
         // Maranga
-        this.mutations.push(new GrowNearBerryMutation(.0003, BerryType.Kee,
+        this.mutations.push(new GrowNearBerryMutation(.0003, BerryType.Maranga,
             [
                 BerryType.Salac,
                 BerryType.Petaya,
