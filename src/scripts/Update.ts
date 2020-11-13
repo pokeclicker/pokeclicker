@@ -223,7 +223,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.5.9': ({ saveData }) => {
+        '0.6.0': ({ saveData }) => {
             // Award Deoxys forms for completed Battle Frontier milestones
             const maxBattleFrontierStage = saveData.statistics.battleFrontierHighestStageCompleted;
             if (maxBattleFrontierStage >= 151) {
