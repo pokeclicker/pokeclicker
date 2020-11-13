@@ -88,14 +88,25 @@
                                         </li>
                                         <!-- /ko -->
                                     </ul>
-
-                                    <div class="row justify-content-center py-1">
-                                        <div class="col-12">
-                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch())}">
+                                    <div class="justify-content-center py-1">
+                                        <div class="btn-group btn-block">
+                                            <button type="button" class="btn btn-sm btn-secondary"
+                                            data-bind="text: FarmController.multipliers[FarmController.multIndex()]"
+                                            onclick="FarmController.incrementMultiplier()"
+                                            oncontextmenu="FarmController.decrementMultiplier(); return false"
+                                            title="Multiplier"
+                                            data-toggle="popover"
+                                            data-html="true"
+                                            data-content="Left/right click to cycle amount<br/>Applies to single and Mulch All"
+                                            data-placement="right"
+                                            data-trigger="hover">
+                                            </button>
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){ FarmController.mulchAll(); }">
                                                 Mulch All
                                             </button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
 

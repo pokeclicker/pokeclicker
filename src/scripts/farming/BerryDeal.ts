@@ -146,8 +146,20 @@ class BerryDeal {
             ItemList['Masterball'],
             1
         ));
+        list.push(new BerryDeal(
+            [
+                this.randomBerry(fourthGen),
+                this.randomBerry(fifthGen),
+            ],
+            [
+                SeededRand.intBetween(50, 100),
+                SeededRand.intBetween(10, 50),
+            ],
+            ItemList['Protein'],
+            1
+        ));
 
-        return list;
+        return [SeededRand.fromArray(list)];
     }
 
     public static canUse(region: GameConstants.Region, i: number): boolean {

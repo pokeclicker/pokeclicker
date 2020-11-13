@@ -246,6 +246,7 @@ class Plot implements Saveable {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
                 App.game.oakItems.use(OakItems.OakItem.Sprinklotad);
+                GameHelper.incrementObservable(App.game.statistics.totalBerriesReplanted, 1);
                 return;
             }
 
