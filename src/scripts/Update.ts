@@ -267,10 +267,10 @@ class Update implements Saveable {
         '0.6.1': ({ saveData }) => {
             if (saveData.oakItems.purchaseList) {
                 if (saveData.oakItems.purchaseList[OakItems.OakItem.Squirtbottle]) {
-                    saveData.oakItems[OakItems.OakItem.Squirtbottle]['purchased'] = true;
+                    saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Squirtbottle]]['purchased'] = true;
                 }
                 if (saveData.oakItems.purchaseList[OakItems.OakItem.Sprinklotad]) {
-                    saveData.oakItems[OakItems.OakItem.Sprinklotad]['purchased'] = true;
+                    saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Sprinklotad]]['purchased'] = true;
                 }
             }
         },
