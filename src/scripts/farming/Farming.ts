@@ -1110,7 +1110,7 @@ class Farming implements Feature {
         if (!plot.isUnlocked || !this.hasMulch(mulch)) {
             return false;
         }
-        if (plot.mulch !== MulchType.None && plot.mulch !== mulch) {
+        if (plot.mulch != MulchType.None && plot.mulch != mulch) {
             return false;
         }
         return true;
