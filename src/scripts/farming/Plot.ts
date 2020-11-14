@@ -103,7 +103,7 @@ class Plot implements Saveable {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;
             }
-            return this.berryData.growthTime.findIndex(t => this.age < t);
+            return this.berryData.growthTime.findIndex(t => this.age <= t);
         });
 
         this.tooltip = ko.pureComputed(() => {

@@ -453,7 +453,7 @@ class Farming implements Feature {
 
         // Figy
         this.mutations.push(new GrowNearFlavorMutation(.009, BerryType.Figy,
-            [25, 0, 0, 0, 0], 0.5, {
+            [[25, 50], [0, 5], [0, 5], [0, 5], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too spicy!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Cheri]();
@@ -462,7 +462,7 @@ class Farming implements Feature {
         ));
         // Wiki
         this.mutations.push(new GrowNearFlavorMutation(.008, BerryType.Wiki,
-            [0, 25, 0, 0, 0], 0.5, {
+            [[0, 5], [25, 50], [0, 5], [0, 5], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too dry!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Chesto]();
@@ -471,7 +471,7 @@ class Farming implements Feature {
         ));
         // Mago
         this.mutations.push(new GrowNearFlavorMutation(.007, BerryType.Mago,
-            [0, 0, 25, 0, 0], 0.5, {
+            [[0, 5], [0, 5], [25, 50], [0, 5], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sweet!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Pecha]();
@@ -480,7 +480,7 @@ class Farming implements Feature {
         ));
         // Aguav
         this.mutations.push(new GrowNearFlavorMutation(.006, BerryType.Aguav,
-            [0, 0, 0, 25, 0], 0.5, {
+            [[0, 5], [0, 5], [0, 5], [25, 50], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too bitter!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Rawst]();
@@ -489,7 +489,7 @@ class Farming implements Feature {
         ));
         // Iapapa
         this.mutations.push(new GrowNearFlavorMutation(.005, BerryType.Iapapa,
-            [0, 0, 0, 0, 25], 0.5, {
+            [[0, 5], [0, 5], [0, 5], [0, 5], [25, 50]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sour!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Aspear]();
@@ -530,7 +530,7 @@ class Farming implements Feature {
             ]));
         // Qualot
         this.mutations.push(new GrowNearFlavorMutation(.0005, BerryType.Qualot,
-            [10, 0, 10, 0, 10], 0, {
+            [[10, 15], [0, 0], [10, 15], [0, 0], [10, 15]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy, a little sweet, and a little sour at the same time.',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
@@ -540,7 +540,7 @@ class Farming implements Feature {
             }));
         // Hondew
         this.mutations.push(new GrowNearFlavorMutation(.0004, BerryType.Hondew,
-            [10, 10, 0, 10, 10], 0, {
+            [[10, 15], [10, 15], [0, 0], [10, 15], [10, 15]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted like a little bit of everything except sweet.',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
@@ -579,12 +579,12 @@ class Farming implements Feature {
             [BerryType.Pinap]));
         // Spelon
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Spelon, BerryType.Tamato,
-            [130, 0, 0, 0, 0], 0.2, {
+            [[130, 160], [0, 10], [0, 10], [0, 10], [0, 10]], {
                 hint: 'I\'ve heard that a Tamato berry will change if its surroundings get extremely spicy!',
             }));
         // Pamtre
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Pamtre, BerryType.Cornn,
-            [0, 130, 0, 0, 0], 0.2, {
+            [[0, 10], [130, 160], [0, 10], [0, 10], [0, 10]], {
                 hint: 'I\'ve heard that a Cornn berry will change if its surroundings get extremely dry!',
             }));
         // Pamtre Overgrow
@@ -592,17 +592,17 @@ class Farming implements Feature {
             [BerryType.Pamtre], { showHint: false }));
         // Watmel
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Watmel, BerryType.Magost,
-            [0, 0, 130, 0, 0], 0.2, {
+            [[0, 10], [0, 10], [130, 160], [0, 10], [0, 10]], {
                 hint: 'I\'ve heard that a Magost berry will change if its surroundings get extremely sweet!',
             }));
         // Durin
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Durin, BerryType.Rabuta,
-            [0, 0, 0, 130, 0], 0.2, {
+            [[0, 10], [0, 10], [0, 10], [130, 160], [0, 10]], {
                 hint: 'I\'ve heard that a Rabuta berry will change if its surroundings get extremely bitter!',
             }));
         // Belue
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Belue, BerryType.Nomel,
-            [0, 0, 0, 0, 130], 0.2, {
+            [[0, 10], [0, 10], [0, 10], [0, 10], [130, 160]], {
                 hint: 'I\'ve heard that a Nomel berry will change if its surroundings get extremely sour!',
             }));
 
@@ -638,7 +638,7 @@ class Farming implements Feature {
             ]));
         // Rindo
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Rindo,
-            [10, 0, 0, 15, 0], 0, {
+            [[10, 15], [0, 0], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Aguav]() &&
@@ -662,7 +662,7 @@ class Farming implements Feature {
         this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItems.OakItem.Sprinklotad));
         // Coba
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Coba,
-            [0, 10, 0, 15, 0], 0, {
+            [[0, 0], [10, 15], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Chesto]() &&
