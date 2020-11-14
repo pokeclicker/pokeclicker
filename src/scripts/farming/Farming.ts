@@ -415,37 +415,37 @@ class Farming implements Feature {
         //#region Second Generation
 
         // Persim
-        this.mutations.push(new GrowNearBerryMutation(.01, BerryType.Persim,
+        this.mutations.push(new GrowNearBerryMutation(.02, BerryType.Persim,
             [
                 BerryType.Pecha,
                 BerryType.Oran,
             ]));
         // Razz
-        this.mutations.push(new GrowNearBerryMutation(.009, BerryType.Razz,
+        this.mutations.push(new GrowNearBerryMutation(.019, BerryType.Razz,
             [
                 BerryType.Cheri,
                 BerryType.Leppa,
             ]));
         // Bluk
-        this.mutations.push(new GrowNearBerryMutation(.008, BerryType.Bluk,
+        this.mutations.push(new GrowNearBerryMutation(.018, BerryType.Bluk,
             [
                 BerryType.Chesto,
                 BerryType.Leppa,
             ]));
         // Nanab
-        this.mutations.push(new GrowNearBerryMutation(.007, BerryType.Nanab,
+        this.mutations.push(new GrowNearBerryMutation(.017, BerryType.Nanab,
             [
                 BerryType.Pecha,
                 BerryType.Aspear,
             ]));
         // Wepear
-        this.mutations.push(new GrowNearBerryMutation(.006, BerryType.Wepear,
+        this.mutations.push(new GrowNearBerryMutation(.016, BerryType.Wepear,
             [
                 BerryType.Rawst,
                 BerryType.Oran,
             ]));
         // Pinap
-        this.mutations.push(new GrowNearBerryMutation(.005, BerryType.Pinap,
+        this.mutations.push(new GrowNearBerryMutation(.015, BerryType.Pinap,
             [
                 BerryType.Sitrus,
                 BerryType.Aspear,
@@ -557,7 +557,6 @@ class Farming implements Feature {
             ]));
         // Tamato
         this.mutations.push(new EvolveNearBerryMutation(.0005, BerryType.Tamato, BerryType.Sitrus, [BerryType.Lum]));
-
         // Cornn
         this.mutations.push(new GrowNearBerryMutation(.0003, BerryType.Cornn,
             [
