@@ -2304,7 +2304,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Water],
         'levelType': LevelType.slow,
         'exp': 40,
-        'eggCycles': 60,
+        'eggCycles': 40,
         'evolutions': [new LevelEvolution('Magikarp', 'Gyarados', 20)],
         'base': {
             'hitpoints': 20,
@@ -2322,7 +2322,7 @@ const pokemonList = createPokemonArray(
         'type': [PokemonType.Water, PokemonType.Flying],
         'levelType': LevelType.slow,
         'exp': 189,
-        'eggCycles': 80,
+        'eggCycles': 60,
         'base': {
             'hitpoints': 95,
             'attack': 125,
