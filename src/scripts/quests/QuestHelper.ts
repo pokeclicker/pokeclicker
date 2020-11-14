@@ -86,12 +86,13 @@ class QuestHelper {
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
             case 'HarvestBerriesQuest':
+                const berryRegionBound = Farming.genBounds[Math.min(player.highestRegion() + 1, 5)];
                 // Getting Berries that can be grown in less than half a day
                 const berryTypes = GameHelper.enumNumbers(BerryType).filter(berry => {
                     if (berry <= BerryType.None) {
                         return false;
                     }
-                    if (!App.game.farming.unlockedBerries[berry]()) {
+                    if (berry >= berryRegionBound) {
                         return false;
                     }
                     if (App.game.farming.berryData[berry].growthTime[3] >= 6 * 60 * 60) {
