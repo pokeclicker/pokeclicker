@@ -759,15 +759,15 @@ class Farming implements Feature {
 
         // Liechi
         this.mutations.push(new FieldMutation(.00001, BerryType.Liechi, BerryType.Passho, undefined, {
-            unlockReq: () => App.game?.statistics?.pokemonCaptured[pokemonMap.Kyogre](),
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Kyogre').id](),
         }));
         // Ganlon
         this.mutations.push(new FieldMutation(.00001, BerryType.Ganlon, BerryType.Shuca, undefined, {
-            unlockReq: () => App.game?.statistics?.pokemonCaptured[pokemonMap.Groudon](),
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Groudon').id](),
         }));
         // Salac
         this.mutations.push(new FieldMutation(.00001, BerryType.Salac, BerryType.Coba, undefined, {
-            unlockReq: () => App.game?.statistics?.pokemonCaptured[pokemonMap.Rayquaza](),
+            unlockReq: () => App.game?.statistics?.pokemonCaptured[PokemonHelper.getPokemonByName('Rayquaza').id](),
         }));
         // Petaya
         this.mutations.push(new PetayaMutation(.00001));

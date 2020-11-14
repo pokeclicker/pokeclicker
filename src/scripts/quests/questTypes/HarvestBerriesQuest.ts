@@ -10,6 +10,10 @@ class HarvestBerriesQuest extends Quest implements QuestInterface {
     private static calcReward(berryType: BerryType, amount: number): number {
         const harvestTime = App.game.farming.berryData[berryType].growthTime[3];
         const harvestAmt = App.game.farming.berryData[berryType].harvestAmount;
-        return Math.ceil((amount / harvestAmt) * harvestTime / 50);
+        const plantAmt = amount / harvestAmt;
+        const plantCycles = plantAmt / App.game.farming.plotList.filter(plot => plot.isUnlocked).length;
+        const totalPlantTime = plantCycles * harvestTime;
+        const scaled = totalPlantTime * 10 / (berryType + 1);
+        return Math.ceil(scaled);
     }
 }
