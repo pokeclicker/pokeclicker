@@ -113,7 +113,7 @@ class Farming implements Feature {
             11, 0.4, 25, 2,
             [0, 0, 10, 10, 0], BerryColor.Pink,
             ['Bitter, but with a trace of sweetness, the Nanab Berry was the seventh to be discovered in the world.']);
-        this.berryData[BerryType.Wepear]    = new Berry(BerryType.Wepear,   [150, 350, 335, 400, 800],
+        this.berryData[BerryType.Wepear]    = new Berry(BerryType.Wepear,   [150, 350, 375, 400, 800],
             12, 0.4, 30, 2,
             [0, 0, 0, 10, 10], BerryColor.Green,
             ['The potent mix of bitter and sour in this Berry seems to promote digestion. The flower is white and beautiful.']);
