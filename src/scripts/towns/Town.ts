@@ -1314,7 +1314,7 @@ const BlackAndWhiteParkShop = new Shop([
 const NacreneCityShop = new Shop([
     ItemList['Soothe_bell'],
 ]);
-const StriatornCityShop = new Shop([
+const StriatonCityShop = new Shop([
     ItemList['Leaf_stone'],
     ItemList['Water_stone'],
     ItemList['Fire_stone'],
@@ -1470,12 +1470,12 @@ TownList['Nacrene City'] = new Town(
         shop: NacreneCityShop,
     }
 );
-TownList['Striatorn City'] = new Town(
-    'Striatorn City',
+TownList['Striaton City'] = new Town(
+    'Striaton City',
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 3)],
-        shop: StriatornCityShop,
+        shop: StriatonCityShop,
     }
 );
 TownList['Accumula Town'] = new Town(
