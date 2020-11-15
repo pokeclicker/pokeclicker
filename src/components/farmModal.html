@@ -80,7 +80,9 @@
                                     <ul id="mulchList" class="list-group p-0">
                                         <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() }">
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);},
+                                                css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
+                                                tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
                                                 data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
