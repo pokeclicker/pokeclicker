@@ -31,6 +31,11 @@ class Breeding implements Feature {
         this._eggList.forEach((egg) => {
             egg.extend({deferred: true});
         });
+        BreedingController.filter.region(Settings.getSetting('breedingRegionFilter').value);
+        BreedingController.filter.type1(Settings.getSetting('breedingTypeFilter1').value);
+        BreedingController.filter.type2(Settings.getSetting('breedingTypeFilter2').value);
+        BreedingController.filter.shinyStatus(Settings.getSetting('breedingShinyFilter').value);
+        BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
     }
 
     initialize(): void {
