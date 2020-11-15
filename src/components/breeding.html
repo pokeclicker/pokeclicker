@@ -42,12 +42,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Display Value</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value)">
-                                    <option value="attack" selected>Attack</option>
-                                    <option value="attackBonus">Attack Bonus</option>
-                                    <option value="baseAttack">Base Attack</option>
-                                    <option value="eggSteps">Egg Steps</option>
-                                    <option value="timesHatched">Times Hatched</option>
+                                <select name="breedingDisplayFilter" autocomplete="off" class="custom-select" onchange="BreedingController.displayValue(this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingDisplayFilter').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingDisplayFilter').value === $data.value }, text: $data.text">Type</option>
+                                    <!-- /ko -->
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
@@ -61,40 +59,34 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Region</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.region(+this.value)">
-                                    <option value="-2">All</option>
-                                    <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none' && GameConstants.Region[r] <= player.highestRegion()) -->
-                                    <option data-bind="attr: { value: GameConstants.Region[$data] }, text: GameConstants.camelCaseToString($data)">Region</option>
+                                <select name="breedingRegionFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.region(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingRegionFilter').options.filter(r => r.value <= player.highestRegion()) -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingRegionFilter').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
-                                    <option value="-1">None</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Shiny Status</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value)">
-                                    <option value="-1">All</option>
-                                    <option value="0">Not Shiny</option>
-                                    <option value="1">Shiny</option>
+                                <select name="breedingShinyFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.shinyStatus(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <option value="-1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '-1' }">All</option>
+                                    <option value="0" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '0' }">Not Shiny</option>
+                                    <option value="1" data-bind="attr: { selected: Settings.getSetting('breedingShinyFilter').value === '1' }">Shiny</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.type1(+this.value)">
-                                    <option value="-2">All</option>
-                                    <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
-                                    <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                <select name="breedingTypeFilter1" autocomplete="off" class="custom-select" onchange="BreedingController.filter.type1(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter1').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter1').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
-                                    <option value="-1">None</option>
                                 </select>
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Type</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.type2(+this.value)">
-                                    <option value="-2">All</option>
-                                    <!-- ko foreach: GameHelper.enumStrings(PokemonType).filter(t => t != 'None') -->
-                                    <option data-bind="attr: { value: PokemonType[$data] }, text: $data">Type</option>
+                                <select name="breedingTypeFilter2" autocomplete="off" class="custom-select" onchange="BreedingController.filter.type2(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingTypeFilter2').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingTypeFilter2').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
-                                    <option value="-1">None</option>
                                 </select>
                             </div>
                         </div>
