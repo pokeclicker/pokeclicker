@@ -56,10 +56,11 @@ abstract class Quest {
     }
 
     quit(shouldConfirm = false) {
-        if (shouldConfirm && !confirm('Are you sure you want to quit this quest?!')) {
+        if (shouldConfirm && !confirm('Are you sure? You can restart the quest later but you will lose all progress!')) {
             return false;
         }
         this.initial(null);
+        this.isCompleted?.dispose?.();
         return true;
     }
 

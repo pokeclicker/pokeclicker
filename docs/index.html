@@ -530,16 +530,14 @@
 
 </div>
 
-
-            <!-- Pokémon List container-->
-            <script type="text/html" id="PartySortSettingTemplate">
+<!-- Pokémon List container-->
+<script type="text/html" id="PartySortSettingTemplate">
     <div class="row no-gutters" style="align-items: center">
         <div class="input-group">
             <select
                 class="custom-select"
                 onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
-                data-bind="foreach: $data.options, attr: {name}"
-            >
+                data-bind="foreach: $data.options, attr: {name}">
                 <option data-bind="text: $data.text, value: $data.value, attr:{ selected: $parent.observableValue() == $data.value}"></option>
             </select>
             <div class="input-group-append bg-primary text-light">
