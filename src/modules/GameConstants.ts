@@ -400,7 +400,7 @@ export const WaterAreas = {
 export const IceAreas = {
     0: new Set(['Seafoam Islands']),
     1: new Set(['Mahogany Town', 'Ice Path', 'Whirl Islands']),
-    2: new Set(['Sootopolis City']),
+    2: new Set(['Shoal Cave', 'Sootopolis City']),
     3: new Set([216, 217, 'Lake Acuity', 'Snowpoint City']),
     4: new Set(['Giant Chasm']),
 };
