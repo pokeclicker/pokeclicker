@@ -48,6 +48,7 @@ export default class Statistics implements Saveable {
     totalBerriesReplanted: KnockoutObservable<number>;
     totalBerriesMutated: KnockoutObservable<number>;
     totalMulchesUsed: KnockoutObservable<number>;
+    totalShovelsUsed: KnockoutObservable<number>;
     berryDailyDealTrades: KnockoutObservable<number>;
     // Battle Frontier
     battleFrontierTotalStagesCompleted: KnockoutObservable<number>;
@@ -108,6 +109,7 @@ export default class Statistics implements Saveable {
         'totalBerriesReplanted',
         'totalBerriesMutated',
         'totalMulchesUsed',
+        'totalShovelsUsed',
         'berryDailyDealTrades',
         'battleFrontierTotalStagesCompleted',
         'battleFrontierHighestStageCompleted',
