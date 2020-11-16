@@ -1028,6 +1028,7 @@ class Farming implements Feature {
         this.gainBerry(plot.berry, amount);
 
         App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.berryData[plot.berry].exp);
+        GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
 
         player.lowerItemMultipliers(MultiplierDecreaser.Berry);
 
@@ -1080,7 +1081,11 @@ class Farming implements Feature {
         }
 
         amount = Math.min(this.mulchList[mulch](), amount);
+
         GameHelper.incrementObservable(this.mulchList[mulch], -amount);
+        GameHelper.incrementObservable(App.game.statistics.totalMulchesUsed, amount);
+        GameHelper.incrementObservable(App.game.statistics.mulchesUsed[+mulch], amount);
+
         plot.mulch = +mulch;
         plot.mulchTimeLeft += GameConstants.MULCH_USE_TIME * amount;
     }
