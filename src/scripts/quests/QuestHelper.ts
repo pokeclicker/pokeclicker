@@ -89,12 +89,12 @@ class QuestHelper {
                 const berryRegionBound = Farming.genBounds[Math.min(player.highestRegion(), GameConstants.Region.unova)];
                 // Getting Berries that can be grown in less than half a day
                 const berryTypes = GameHelper.enumNumbers(BerryType).filter(berry => {
-					// Needs to be a berry that can be planted
-                    return berry != BerryType.None 
-                    	// Need to be able obtain within our highest region
-                    	&& berry < berryRegionBound
-                    	// Needs to take less than 6 hours to fully grow
-                    	&& App.game.farming.berryData[berry].growthTime[3] < 6 * 60 * 60;
+                    // Needs to be a berry that can be planted
+                    return berry != BerryType.None
+                    // Need to be able obtain within our highest region
+                    && berry < berryRegionBound
+                    // Needs to take less than 6 hours to fully grow
+                    && App.game.farming.berryData[berry].growthTime[3] < 6 * 60 * 60;
                 });
 
                 const berryType = SeededRand.fromArray(berryTypes);
