@@ -578,12 +578,12 @@ class Farming implements Feature {
             [BerryType.Pinap]));
         // Spelon
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Spelon, BerryType.Tamato,
-            [[130, 160], [0, 10], [0, 10], [0, 10], [0, 10]], {
+            [[130, 160], [0, 80], [0, 80], [0, 80], [0, 80]], {
                 hint: 'I\'ve heard that a Tamato berry will change if its surroundings get extremely spicy!',
             }));
         // Pamtre
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Pamtre, BerryType.Cornn,
-            [[0, 10], [130, 160], [0, 10], [0, 10], [0, 10]], {
+            [[0, 80], [130, 160], [0, 80], [0, 80], [0, 80]], {
                 hint: 'I\'ve heard that a Cornn berry will change if its surroundings get extremely dry!',
             }));
         // Pamtre Overgrow
@@ -591,17 +591,17 @@ class Farming implements Feature {
             [BerryType.Pamtre], { showHint: false }));
         // Watmel
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Watmel, BerryType.Magost,
-            [[0, 10], [0, 10], [130, 160], [0, 10], [0, 10]], {
+            [[0, 80], [0, 80], [130, 160], [0, 80], [0, 80]], {
                 hint: 'I\'ve heard that a Magost berry will change if its surroundings get extremely sweet!',
             }));
         // Durin
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Durin, BerryType.Rabuta,
-            [[0, 10], [0, 10], [0, 10], [130, 160], [0, 10]], {
+            [[0, 80], [0, 80], [0, 80], [130, 160], [0, 80]], {
                 hint: 'I\'ve heard that a Rabuta berry will change if its surroundings get extremely bitter!',
             }));
         // Belue
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Belue, BerryType.Nomel,
-            [[0, 10], [0, 10], [0, 10], [0, 10], [130, 160]], {
+            [[0, 80], [0, 80], [0, 80], [0, 80], [130, 160]], {
                 hint: 'I\'ve heard that a Nomel berry will change if its surroundings get extremely sour!',
             }));
 
