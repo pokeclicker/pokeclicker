@@ -60,7 +60,6 @@ abstract class Quest {
             return false;
         }
         this.initial(null);
-        this.isCompleted?.dispose?.();
         return true;
     }
 
