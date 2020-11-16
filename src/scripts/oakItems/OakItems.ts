@@ -5,17 +5,12 @@ class OakItems implements Feature {
     itemList: OakItem[];
     unlockRequirements: number[];
 
-    purchaseList: KnockoutObservable<boolean>[];
-
-    defaults = {
-        purchaseList: Array<boolean>(GameHelper.enumNumbers(OakItems.OakItem).length).fill(false),
-    };
-
     constructor(unlockRequirements: number[]) {
         this.itemList = [];
         this.unlockRequirements = unlockRequirements;
-        this.purchaseList = this.defaults.purchaseList.map((v) => ko.observable<boolean>(v));
     }
+
+    defaults: Record<string, any>;
 
     canAccess(): boolean {
         return App.game.party.caughtPokemon.length >= 20;
@@ -103,16 +98,6 @@ class OakItems implements Feature {
                 this.itemList[OakItems.OakItem[oakItem]].fromJSON(json[oakItem]);
             }
         });
-
-        // Loading purchaseList for BoughtOakItems
-        const purchaseList = json['purchaseList'];
-        if (purchaseList == null) {
-            this.purchaseList = this.defaults.purchaseList.map((v) => ko.observable<boolean>(v));
-        } else {
-            (purchaseList as boolean[]).forEach((value: boolean, index: number) => {
-                this.purchaseList[index](value);
-            });
-        }
     }
 
     toJSON(): Record<string, any> {
@@ -120,8 +105,6 @@ class OakItems implements Feature {
         for (let i = 0; i < this.itemList.length; i++) {
             save[OakItems.OakItem[this.itemList[i].name]] = this.itemList[i].toJSON();
         }
-
-        save['purchaseList'] = this.purchaseList.map(ko.unwrap);
 
         return save;
     }

@@ -50,6 +50,21 @@ class ChangelogUpdate extends Changelog {
  */
 const changelogItems = [
     // note that month is 0 indexed
+    // v0.6.3
+    new ChangelogUpdate('v0.6.3', new Date(2020, 10, 13)),
+    new Changelog(changelogType.CHANGE, 'Show Berry hints in BerryDex'),
+    new Changelog(changelogType.FIXED, 'Farm mulch should work correctly now'),
+    new Changelog(changelogType.FIXED, 'Update Pokemon native regions'),
+    new Changelog(changelogType.FIXED, 'Proteins used not based on Battle Item multiplier'),
+
+    // v0.6.1
+    new ChangelogUpdate('v0.6.1', new Date(2020, 10, 13)),
+    new Changelog(changelogType.NEW, 'More Farm statistics'),
+    new Changelog(changelogType.NEW, 'Added Protein trade to Sinnoh Berry Master'),
+    new Changelog(changelogType.NEW, 'Added multiple button to Mulch in Farm'),
+    new Changelog(changelogType.FIXED, 'Fix Pokemon not appearing in Battle Frontier'),
+    new Changelog(changelogType.FIXED, 'Evolution Stones not working'),
+
     // v0.6.0
     new ChangelogUpdate('v0.6.0', new Date(2020, 10, 13)),
     new Changelog(changelogType.NEW, 'Complete Farm overhaul'),

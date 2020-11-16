@@ -235,7 +235,7 @@ class Update implements Saveable {
             if (maxBattleFrontierStage >= 386) {
                 Update.addPokemonToSaveData(saveData, 386.3); // Deoxys (speed)
             }
-          
+
             // Update the attack bonus percentages
             saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
                 p.attackBonusPercent = p.attackBonus;
@@ -262,6 +262,17 @@ class Update implements Saveable {
 
             // Reset all plots
             delete saveData.farming.plotList;
+        },
+
+        '0.6.1': ({ saveData }) => {
+            if (saveData.oakItems.purchaseList) {
+                if (saveData.oakItems.purchaseList[OakItems.OakItem.Squirtbottle]) {
+                    saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Squirtbottle]]['purchased'] = true;
+                }
+                if (saveData.oakItems.purchaseList[OakItems.OakItem.Sprinklotad]) {
+                    saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Sprinklotad]]['purchased'] = true;
+                }
+            }
         },
     };
 

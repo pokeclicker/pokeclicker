@@ -59,7 +59,7 @@
                               <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString" style="font-size: 15px;"></span>
                               <!-- /ko -->
                               <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                              <span class="clickable" data-bind="html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/money.svg height=18px/>)',
+                              <span class="clickable" data-bind="html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().currency] + '.svg height=18px/>)',
                                 click: function(){ App.game.oakItems.itemList[OakItemController.inspectedItem].buy(); }" style="font-size: 15px;">
                                 Upgrade
                               </span>

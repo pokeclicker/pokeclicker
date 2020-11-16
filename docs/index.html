@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.6.0"></script>
+    <script src="scripts/modules.min.js?v=0.6.3"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.6.0"></script>
+    <script src="scripts/script.min.js?v=0.6.3"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.6.0" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.6.3" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -479,9 +479,9 @@
     </div>
     <button type="button" class="btn btn-sm btn-primary" 
             style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;" 
-            data-bind="text: ItemHandler.multipliers[ItemHandler.multIndex()]"
-            onclick="ItemHandler.incrementMultiplier()"
-            oncontextmenu="ItemHandler.decrementMultiplier(); return false"
+            data-bind="text: EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()]"
+            onclick="EffectEngineRunner.incrementMultiplier()"
+            oncontextmenu="EffectEngineRunner.decrementMultiplier(); return false"
             title="Controls"
             data-toggle="popover"
             data-html="true"
@@ -505,7 +505,7 @@
                                 'bg-secondary': !EffectEngineRunner.isActive($data)()
                             },
                             event: {
-                                click: function(){ItemHandler.useItem($data)}
+                                click: function(){ItemHandler.useItem($data, EffectEngineRunner.amountToUse())}
                             },
                             tooltip: {
                               title: ItemList[$data].displayName + '<br/>' + ItemList[$data].description,
@@ -8517,14 +8517,25 @@ aria-labelledby="badgeCaseModalLabel">
                                         </li>
                                         <!-- /ko -->
                                     </ul>
-
-                                    <div class="row justify-content-center py-1">
-                                        <div class="col-12">
-                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.mulchAll(FarmController.selectedMulch())}">
+                                    <div class="justify-content-center py-1">
+                                        <div class="btn-group btn-block">
+                                            <button type="button" class="btn btn-sm btn-secondary"
+                                            data-bind="text: FarmController.multipliers[FarmController.multIndex()]"
+                                            onclick="FarmController.incrementMultiplier()"
+                                            oncontextmenu="FarmController.decrementMultiplier(); return false"
+                                            title="Multiplier"
+                                            data-toggle="popover"
+                                            data-html="true"
+                                            data-content="Left/right click to cycle amount<br/>Applies to single and Mulch All"
+                                            data-placement="right"
+                                            data-trigger="hover">
+                                            </button>
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){ FarmController.mulchAll(); }">
                                                 Mulch All
                                             </button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
 
@@ -8587,7 +8598,10 @@ aria-labelledby="badgeCaseModalLabel">
                         <ul class="row justify-content-center p-0" data-bind="foreach: FarmController.getUnlockedBerryList()"
                             style="max-width: 100%; padding:0; margin:0;">
                             <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
-                            data-bind="style:{background: FarmController.getBackgroundColor($data)}">
+                            data-bind="style:{background: FarmController.getBackgroundColor($data)},
+                                    tooltip: { title: FarmController.getHint($data,true,true),
+                                    trigger: 'hover',
+                                    placement:'top' }">
                                  <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + '').padStart(2, 0)">number</span>
                                      <img src="" height="120px" style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                      <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
@@ -8635,7 +8649,7 @@ aria-labelledby="badgeCaseModalLabel">
                         </tr>
                         <tr>
                             <td>Amaze Mulch</td>
-                            <td>A weaker version of all three affects.</td>
+                            <td>A weaker version of all three effects.</td>
                         </tr>
                     </table>
 
@@ -8730,6 +8744,16 @@ aria-labelledby="badgeCaseModalLabel">
                       </td>
                       </tr>
                   </tbody>
+                  <!-- ko if: FarmController.getHint(+$data) !== ""-->
+                  <thead>
+                    <tr class="text-light">
+                      <th class="bg-dark" colspan="2">Hint</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td colspan="2"><span data-bind="text: FarmController.getHint(+$data)"></span></td>
+                  </tbody>
+                  <!-- /ko -->
                   <thead>
                     <tr class="text-light">
                       <th class="text-left bg-dark">Statistic</th>

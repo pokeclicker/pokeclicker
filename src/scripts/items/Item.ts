@@ -39,7 +39,8 @@ abstract class Item {
             multiplierDecrease = true,
             multiplierDecreaser = MultiplierDecreaser.Battle,
         } : ShopOptions = {},
-        displayName?: string) {
+        displayName?: string,
+        description?: string) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
@@ -56,6 +57,7 @@ abstract class Item {
         }
 
         this._displayName = displayName ?? name;
+        this.description = description;
     }
 
     totalPrice(amount: number): number {

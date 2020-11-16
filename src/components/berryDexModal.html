@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content" data-bind="with: App.game.statistics.selectedBerryID()+''">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
-                <h5 class="modal-title text-muted" data-bind="text: `#${$data.toString().padStart(2,0)}&nbsp;&nbsp;`"></h5>
+                <h5 class="modal-title text-muted" data-bind="text: `#${(Number($data) + 1).toString().padStart(2,0)}&nbsp;&nbsp;`"></h5>
                 <h5 class="modal-title text-light" data-bind="text: BerryType[$data]">Berry Statistics</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -70,6 +70,16 @@
                       </td>
                       </tr>
                   </tbody>
+                  <!-- ko if: FarmController.getHint(+$data) !== ""-->
+                  <thead>
+                    <tr class="text-light">
+                      <th class="bg-dark" colspan="2">Hint</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <td colspan="2"><span data-bind="text: FarmController.getHint(+$data)"></span></td>
+                  </tbody>
+                  <!-- /ko -->
                   <thead>
                     <tr class="text-light">
                       <th class="text-left bg-dark">Statistic</th>
