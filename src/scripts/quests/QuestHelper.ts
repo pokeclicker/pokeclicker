@@ -100,7 +100,7 @@ class QuestHelper {
                 const berryType = SeededRand.fromArray(berryTypes);
                 // Calculating balanced amount based on BerryType
                 // Hard limits are between 10 and 300
-                // Additional limits based on growing on all 25 plots non-stop in 6 hours
+                // Additional limits based on growing on all 25 plots non-stop in 3 hours
                 const minAmt = 30;
                 let maxAmt = 300;
 
