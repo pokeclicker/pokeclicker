@@ -17820,7 +17820,7 @@ pokemonList.forEach(p => {
     if ((p as PokemonListData).baby) {
         (p as PokemonListData).evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType);
     }
-    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= p.id);
+    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
     pokemonNameIndex[p.name.toLowerCase()] = p;
 });
 

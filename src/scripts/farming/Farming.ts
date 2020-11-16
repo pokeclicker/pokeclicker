@@ -598,7 +598,7 @@ class Farming implements Feature {
         // Durin
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Durin, BerryType.Rabuta,
             [0, 0, 0, 130, 0], 0.2, {
-                hint: 'I\'ve heard that a a Rabuta berry will change if its surroundings get extremely bitter!',
+                hint: 'I\'ve heard that a Rabuta berry will change if its surroundings get extremely bitter!',
             }));
         // Belue
         this.mutations.push(new EvolveNearFlavorMutation(.0002, BerryType.Belue, BerryType.Nomel,
@@ -1084,7 +1084,7 @@ class Farming implements Feature {
 
         amount = Math.min(this.mulchList[mulch](), amount);
         GameHelper.incrementObservable(this.mulchList[mulch], -amount);
-        plot.mulch = mulch;
+        plot.mulch = +mulch;
         plot.mulchTimeLeft += GameConstants.MULCH_USE_TIME * amount;
     }
 
@@ -1171,6 +1171,7 @@ class Farming implements Feature {
             mulchList: this.mulchList.map(ko.unwrap),
             plotList: this.plotList.map(plot => plot.toJSON()),
             shovelAmt: this.shovelAmt(),
+            mutations: this.mutations.map(mutation => mutation.toJSON()),
         };
     }
 
@@ -1222,6 +1223,13 @@ class Farming implements Feature {
             this.shovelAmt = ko.observable(this.defaults.shovelAmt);
         } else {
             this.shovelAmt(shovelAmt);
+        }
+
+        const mutations = json['mutations'];
+        if (mutations == null) {
+            this.mutations.forEach(mutation => mutation.fromJSON({}));
+        } else {
+            this.mutations.forEach((mutation, i) => mutation.fromJSON(mutations[i]));
         }
     }
 

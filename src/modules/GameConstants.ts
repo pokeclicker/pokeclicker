@@ -77,6 +77,8 @@ export const BerryColor = [
     '#7AC74C', // Green
     '#F7D02C', // Yellow
     '#6390F0', // Blue
+    '#B7B7CE', // Hinted
+    '#1C1C1C', // Locked
 ];
 
 // Dungeons

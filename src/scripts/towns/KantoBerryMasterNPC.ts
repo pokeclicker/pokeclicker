@@ -30,7 +30,10 @@ class KantoBerryMasterNPC extends NPC {
             return 'It seems as though you have hit a roadblock in your Berry progress. Focus on other areas before returning..';
         }
 
-        return SeededRand.fromArray(possibleMutations).hint;
+        const mutationToShow = SeededRand.fromArray(possibleMutations);
+        mutationToShow.hintSeen = true;
+
+        return mutationToShow.hint;
     }
 
 }
