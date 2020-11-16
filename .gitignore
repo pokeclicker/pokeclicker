@@ -4,3 +4,7 @@ build/
 *.db
 config.js
 src/declarations/
+.vs/
+.vscode/
+*.sln
+Web.config
