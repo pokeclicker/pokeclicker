@@ -1233,7 +1233,7 @@ class Farming implements Feature {
         }
     }
 
-    public static genBounds = [0, 8, 20, 35, 53, Infinity];
+    public static genBounds = [8, 20, 35, 53, Infinity];
     public static getGeneration(gen: number): BerryType[] {
         const genBounds = Farming.genBounds;
         return App.game.farming.berryData.filter(berry => berry.type >= genBounds[gen] && berry.type < genBounds[gen + 1]).map(berry => berry.type);
