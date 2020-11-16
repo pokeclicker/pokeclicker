@@ -11,8 +11,6 @@ class FarmController {
     public static selectedMulch: KnockoutObservable<MulchType> = ko.observable(MulchType.Boost_Mulch);
     public static selectedShovel: KnockoutObservable<boolean> = ko.observable(false);
 
-    public static farmViewVisible: KnockoutObservable<boolean> = ko.observable(true);
-
     public static berryListVisible: KnockoutObservable<boolean> = ko.observable(true);
 
     public static multipliers = ['×1', '×10', '×100', '×1000', 'All'];

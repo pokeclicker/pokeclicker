@@ -5,9 +5,9 @@
         <div class="modal-content">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryFarmView" data-bind="click: function(){FarmController.farmViewVisible(true);}">Farm</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryDexView" data-bind="click: function(){FarmController.farmViewVisible(false);}">Berrydex</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#helpView" data-bind="click: function(){FarmController.farmViewVisible(false);}">Help</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
                     <!-- TODO: HLXII Add Apricorn Tab ? -->
                     <btn class="btn btn-primary">
                         <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
@@ -152,16 +152,12 @@
                                             <!-- /ko -->
                                             <div class="plotButton"
                                                 data-bind="ifnot: $data.isEmpty(),
-                                                click: function(){FarmController.plotClick($index())}">
+                                                click: function(){FarmController.plotClick($index())},
+                                                tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
                                                 <img width="100%" height="100%" src=""
                                                     style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
                                                     data-bind="attr:{ src: FarmController.getImage($index())}">
                                             </div>
-                                            <!-- ko if: FarmController.farmViewVisible() -->
-                                            <div class="plotButton"
-                                                data-bind="tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true, boundary: 'window'}">
-                                            </div>
-                                            <!-- /ko -->
                                         </div>
                                     </div>
                                 </div>
