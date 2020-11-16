@@ -150,14 +150,16 @@
                                                 </div>
                                             </div>
                                             <!-- /ko -->
-                                            <!-- ko if: FarmController.farmViewVisible() -->
                                             <div class="plotButton"
                                                 data-bind="ifnot: $data.isEmpty(),
-                                                click: function(){FarmController.plotClick($index())},
-                                                tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
+                                                click: function(){FarmController.plotClick($index())}">
                                                 <img width="100%" height="100%" src=""
                                                     style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
                                                     data-bind="attr:{ src: FarmController.getImage($index())}">
+                                            </div>
+                                            <!-- ko if: FarmController.farmViewVisible() -->
+                                            <div class="plotButton"
+                                                data-bind="tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true, boundary: 'window'}">
                                             </div>
                                             <!-- /ko -->
                                         </div>
