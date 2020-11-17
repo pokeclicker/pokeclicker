@@ -306,7 +306,7 @@ class Farming implements Feature {
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
                 'Nearby Pokémon are wary of this Berry plant.',
-            ], new Aura(AuraType.Attract, [0.9, 0.8, 0.7]), ['Shedinja']);
+            ], new Aura(AuraType.Attract, [0.99, 0.98, 0.97]), ['Shedinja']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [10800, 21600, 43200, 86400, 172800],
             34, 0, 4000, 15,
             [0, 0, 10, 20, 0], BerryColor.Red,
@@ -338,7 +338,7 @@ class Farming implements Feature {
             [
                 'This Berry is sweet with a hint of bitterness and has a lingering sweet scent. It is often dried and used to make tea.',
                 'The scent of this Berry plant attracts wild Pokémon.',
-            ], new Aura(AuraType.Attract, [1.2, 1.4, 1.6]), ['Togepi']);
+            ], new Aura(AuraType.Attract, [1.01, 1.02, 1.03]), ['Togepi']);
         //#endregion
 
         //#region Fifth Generation
