@@ -70,18 +70,7 @@
                     <div id="itemBag" class="tab-pane p-3">
                         <div class="row justify-content-sm-center">
                             <div class="row col-10">
-                                <div class="btn btn-primary col-2" data-bind="with: 'Protein', click: () => $('#pokemonSelectorModal').modal('show')">
-                                    <div data-container="body" data-bind="tooltip: {
-                                        title: ItemList[$data] ? `<u>${ItemList[$data].displayName}</u><br/>${ItemList[$data].description || ''}` : '',
-                                        trigger: 'hover',
-                                        placement:'top',
-                                        html: true,
-                                        boundary: document.getElementById('showItemsModal'),
-                                    }">
-                                        <img data-bind="attr: {src: 'assets/images/items/' + ItemList[$data].name() + '.png'}" style="max-width: 32px;">
-                                        <div data-bind="text: player._itemList[$data]()"></div>
-                                    </div>
-                                </div>
+                                <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
                             </div>
                         </div>
                     </div>
@@ -132,3 +121,16 @@
         </div>
     </div>
 </div>
+
+<script type="text/html" id="otherItemTemplate">
+    <div data-container="body" data-bind="tooltip: {
+        title: ItemList[$data] ? `<u>${ItemList[$data].displayName}</u><br/>${ItemList[$data].description || ''}` : '',
+        trigger: 'hover',
+        placement:'top',
+        html: true,
+        boundary: document.getElementById('showItemsModal'),
+    }">
+        <img data-bind="attr: {src: 'assets/images/items/' + ItemList[$data].name() + '.png'}" style="max-width: 32px;">
+        <div data-bind="text: player._itemList[$data]()"></div>
+    </div>
+</script>
