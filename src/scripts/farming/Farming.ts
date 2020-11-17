@@ -230,14 +230,14 @@ class Farming implements Feature {
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
                 'This Berry promotes the fruiting of nearby Berry plants.',
-            ], new Aura(AuraType.Harvest, [1.2, 1.4, 1.6]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup']);
+            ], new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup']);
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [10, 180, 900, 1800, 3600],
             2, 0.05, 250, 1,
             [0, 0, 15, 0, 10], BerryColor.Yellow,
             [
                 'Energy from lightning strikes is drawn into the plant, making the Berries grow big and rich.',
                 'The same energy promotes the growth of nearby Berries.',
-            ], new Aura(AuraType.Growth, [1.2, 1.4, 1.6]), ['Pikachu']);
+            ], new Aura(AuraType.Growth, [1.1, 1.2, 1.3]), ['Pikachu']);
         this.berryData[BerryType.Rindo]     = new Berry(BerryType.Rindo,    [3600, 7200, 16200, 28800, 57600],
             24, 0.05, 1400, 15,
             [10, 0, 0, 15, 0], BerryColor.Green,
@@ -258,7 +258,7 @@ class Farming implements Feature {
             [
                 'This Berry contains a substance that generates heat. It can even heat up a chilly heart.',
                 'Growing these Berries will promote Egg growth.',
-            ], new Aura(AuraType.Egg, [1.1, 1.2, 1.3]), ['Riolu']);
+            ], new Aura(AuraType.Egg, [1.01, 1.02, 1.03]), ['Riolu']);
         this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [100, 200, 400, 600, 86400],
             1, 1, 50, 1,
             [0, 15, 0, 0, 10], BerryColor.Green,
@@ -273,7 +273,7 @@ class Farming implements Feature {
             [
                 'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
                 'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [1.2, 1.4, 1.6]), ['Larvitar']);
+            ], new Aura(AuraType.Replant, [1.1, 1.2, 1.3]), ['Larvitar']);
         this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [9000, 12600, 16200, 19800, 39600],
             29, 0.05, 1800, 15,
             [0, 10, 0, 15, 0], BerryColor.Blue,
@@ -338,7 +338,7 @@ class Farming implements Feature {
             [
                 'This Berry is sweet with a hint of bitterness and has a lingering sweet scent. It is often dried and used to make tea.',
                 'The scent of this Berry plant attracts wild Pokémon.',
-            ], new Aura(AuraType.Attract, [1.2, 1.4, 1.6]), ['Togepi']);
+            ], new Aura(AuraType.Attract, [1.1, 1.2, 1.3]), ['Togepi']);
         //#endregion
 
         //#region Fifth Generation
