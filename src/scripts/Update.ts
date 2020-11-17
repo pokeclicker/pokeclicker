@@ -274,6 +274,23 @@ class Update implements Saveable {
                 }
             }
         },
+
+        '0.6.5': ({ playerData, saveData }) => {
+            // nerf amount of proteins used per Pokemon
+            const maxProteins = (playerData.highestRegion + 1) * 5;
+            let proteinsToRefund = 0;
+
+            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+                if (p.proteinsUsed <= maxProteins) {
+                    return p;
+                }
+                proteinsToRefund += p.proteinsUsed - maxProteins;
+                p.proteinsUsed = maxProteins;
+                return p;
+            });
+
+            playerData._itemList.Protein += proteinsToRefund;
+        },
     };
 
     constructor() {

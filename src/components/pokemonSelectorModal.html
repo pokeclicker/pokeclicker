@@ -1,0 +1,47 @@
+<div class="modal noselect fade" id="pokemonSelectorModal" tabindex="-1" role="dialog" aria-labelledby="pokemonSelectorModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <img src="assets/images/items/Protein.png" width="40%"/>
+                <br/>
+                <div class="sticky-top">
+                  <span class="btn btn-block btn-primary" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></span>
+                  <div class="input-group" data-bind="with: Settings.getSetting('partySort')">
+                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                          data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                          <option data-bind="text: $data.text, value: $data.value"></option>
+                      </select>
+                      <div class="input-group-append bg-primary text-light">
+                          <label for="hatcheryPartySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <input id="hatcheryPartySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
+                              onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
+                      </div>
+                  </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                  <thead>
+                    <tr class="text-light">
+                      <th class="text-left bg-dark align-middle">Pokemon</th>
+                      <th class="text-center bg-dark align-middle">Proteins Used</th>
+                      <th class="text-center bg-dark align-middle">Attack Bonus</th>
+                    </tr>
+                  </thead>
+                  <tbody data-bind="foreach: App.game.party.caughtPokemon">
+                    <tr class="clickable" data-bind="click: () => $data.useProtein(), hidden: $data.breeding">
+                      <td class="text-left" data-bind="text: $data.name"></td>
+                      <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
+                      <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
