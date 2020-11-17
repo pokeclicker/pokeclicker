@@ -540,7 +540,7 @@ class Farming implements Feature {
             }));
         // Hondew
         this.mutations.push(new GrowNearFlavorMutation(.0004, BerryType.Hondew,
-            [[10, 15], [10, 15], [0, 0], [10, 15], [10, 15]], {
+            [[10, 15], [10, 15], [0, 0], [10, 15], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted like a little bit of everything except sweet.',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
