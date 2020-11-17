@@ -69,19 +69,19 @@
 
                     <div id="itemBag" class="tab-pane p-3">
                         <div class="row justify-content-sm-center">
-                            <div class="row col-10" data-bind="foreach: Object.keys(player.itemList)">
-                                <!-- ko if: player._itemList[$data] -->
-                                <div class="col-2" data-bind="
-                                tooltip: {
-                                   title: ItemList[$data] ? `<u>${ItemList[$data].displayName}</u><br/>${ItemList[$data].description || ''}` : '',
-                                   trigger: 'hover',
-                                   placement:'bottom',
-                                   html: true
-                                 }">
-                                    <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}" style="max-width: 32px;">
-                                    <div data-bind="text: player._itemList[$data]()"></div>
+                            <div class="row col-10">
+                                <div class="btn btn-primary col-2" data-bind="with: 'Protein', click: () => $('#pokemonSelectorModal').modal('show')">
+                                    <div data-container="body" data-bind="tooltip: {
+                                        title: ItemList[$data] ? `<u>${ItemList[$data].displayName}</u><br/>${ItemList[$data].description || ''}` : '',
+                                        trigger: 'hover',
+                                        placement:'top',
+                                        html: true,
+                                        boundary: document.getElementById('showItemsModal'),
+                                    }">
+                                        <img data-bind="attr: {src: 'assets/images/items/' + ItemList[$data].name() + '.png'}" style="max-width: 32px;">
+                                        <div data-bind="text: player._itemList[$data]()"></div>
+                                    </div>
                                 </div>
-                                <!-- /ko -->
                             </div>
                         </div>
                     </div>
@@ -131,5 +131,4 @@
             </div>
         </div>
     </div>
-
 </div>
