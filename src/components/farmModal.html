@@ -80,7 +80,9 @@
                                     <ul id="mulchList" class="list-group p-0">
                                         <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() }">
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);},
+                                                css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
+                                                tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
                                                 data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
@@ -173,7 +175,7 @@
                                     tooltip: { title: FarmController.getHint($data,true,true),
                                     trigger: 'hover',
                                     placement:'top' }">
-                                 <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + '').padStart(2, 0)">number</span>
+                                 <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
                                      <img src="" height="120px" style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                      <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
                                      <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
@@ -193,13 +195,13 @@
                     <br/>Once fully grown, the Berry plant can be clicked to manually harvest the Berries and gain some Farm Points.</p>
 
                     <p>Otherwise after some time being fully grown, the Berry plant will wither away,
-                    dropping only a fraction of the Berries but may also be re-planted automatically.
+                    dropping half of the expected Berries but may also be re-planted automatically.
                     <br/><i>(Farm Points are only gained by manually harvesting Berries)</i><p>
 
                     <p>Additional plots can be unlocked by spending Berries.</p>
 
                     <h4><u>Mutations</u></h4>
-                    <p>Berries have the chance to mutate into other Berries based on certain conditions.
+                    <p>Berries have the chance to cause mutations and create new Berry species in empty plots based on certain conditions.
                     <br/><i>(the Berry Master in Kanto will give you daily hints to what these conditions may be)</i></p>
 
                     <h4><u>Mulches</u></h4>
@@ -231,6 +233,9 @@
 
                     <h4><u>Trades</u></h4>
                     <p>Berries can be traded with Berry Masters in later regions for other useful items</p>
+
+                    <h4><u>Wandering Pokémon</u></h4>
+                    <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
                 </div>
             </div>
 

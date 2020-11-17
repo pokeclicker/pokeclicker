@@ -47,7 +47,7 @@ export const SHINY_CHANCE_SHOP = 2048;
 export const SHINY_CHANCE_STONE = 2048;
 export const SHINY_CHANCE_SAFARI = 2048;
 export const SHINY_CHANCE_BREEDING = 1024;
-export const SHINY_CHANCE_FARM = 2048;
+export const SHINY_CHANCE_FARM = 1024;
 
 export const ITEM_PRICE_MULTIPLIER = 1.00045;
 export const ITEM_PRICE_DEDUCT = 1.0005;
@@ -205,9 +205,13 @@ export enum GameState {
 export enum Pokeball {
     'None' = -1,
     'Pokeball' = 0,
-    'Greatball' = 1,
-    'Ultraball' = 2,
-    'Masterball' = 3,
+    'Greatball',
+    'Ultraball',
+    'Masterball',
+    'Fastball',
+    'Quickball',
+    'Timerball',
+    'Luxuryball',
 }
 
 export enum Currency {

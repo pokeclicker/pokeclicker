@@ -11,7 +11,7 @@ abstract class Mutation implements Saveable {
 
     defaults: Record<string, any>;
 
-    mutationChance: number;
+    _mutationChance: number;
     mutatedBerry: BerryType;
     _hint?: string;
     showHint: boolean;
@@ -20,7 +20,7 @@ abstract class Mutation implements Saveable {
     _hintSeen: KnockoutObservable<boolean>;
 
     constructor(mutationChance: number, mutatedBerry: BerryType, options?: MutationOptions) {
-        this.mutationChance = mutationChance;
+        this._mutationChance = mutationChance;
         this.mutatedBerry = mutatedBerry;
         this._hint = options?.hint;
         this._unlockReq = options?.unlockReq;
@@ -74,6 +74,14 @@ abstract class Mutation implements Saveable {
     }
 
     /**
+     * Handles getting the mutation chance
+     * @param idx The plot index
+     */
+    mutationChance(idx: number): number {
+        return this._mutationChance;
+    }
+
+    /**
      * Update tag for mutations. Returns true if this mutation will occur
      */
     mutate(): boolean {
@@ -89,7 +97,7 @@ abstract class Mutation implements Saveable {
         let mutated = false;
 
         plots.forEach((idx) => {
-            const willMutate =  Math.random() < this.mutationChance * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier();
+            const willMutate =  Math.random() < this.mutationChance(idx) * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier();
             if (!willMutate) {
                 return;
             }

@@ -50,11 +50,23 @@ class ChangelogUpdate extends Changelog {
  */
 const changelogItems = [
     // note that month is 0 indexed
+    // v0.6.4
+    new ChangelogUpdate('v0.6.4', new Date(2020, 10, 17)),
+    new Changelog(changelogType.NEW, 'More Farm statistics'),
+    new Changelog(changelogType.CHANGE, 'UI/text changes'),
+    new Changelog(changelogType.CHANGE, 'Farm flavor mutations are more strict and less invasive'),
+    new Changelog(changelogType.CHANGE, 'Hide locked berries in trade window'),
+    new Changelog(changelogType.FIXED, 'Quest not completing if restarted after being quit'),
+    new Changelog(changelogType.FIXED, 'Farm mulches can now be applied multiple times per plot'),
+    new Changelog(changelogType.FIXED, 'Oak items upgraded currency shows correct currency'),
+    new Changelog(changelogType.FIXED, 'Berry hints updating correctly each day'),
+    new Changelog(changelogType.FIXED, 'Fixed some lag'),
+
     // v0.6.3
     new ChangelogUpdate('v0.6.3', new Date(2020, 10, 13)),
     new Changelog(changelogType.CHANGE, 'Show Berry hints in BerryDex'),
     new Changelog(changelogType.FIXED, 'Farm mulch should work correctly now'),
-    new Changelog(changelogType.FIXED, 'Update Pokemon native regions'),
+    new Changelog(changelogType.FIXED, 'Update Pokémon native regions'),
     new Changelog(changelogType.FIXED, 'Proteins used not based on Battle Item multiplier'),
 
     // v0.6.1
@@ -62,17 +74,17 @@ const changelogItems = [
     new Changelog(changelogType.NEW, 'More Farm statistics'),
     new Changelog(changelogType.NEW, 'Added Protein trade to Sinnoh Berry Master'),
     new Changelog(changelogType.NEW, 'Added multiple button to Mulch in Farm'),
-    new Changelog(changelogType.FIXED, 'Fix Pokemon not appearing in Battle Frontier'),
+    new Changelog(changelogType.FIXED, 'Fix Pokémon not appearing in Battle Frontier'),
     new Changelog(changelogType.FIXED, 'Evolution Stones not working'),
 
     // v0.6.0
     new ChangelogUpdate('v0.6.0', new Date(2020, 10, 13)),
     new Changelog(changelogType.NEW, 'Complete Farm overhaul'),
     new Changelog(changelogType.NEW, 'Hotkeys added for oak items modal (O to open, number keys to toggle items)'),
-    new Changelog(changelogType.NEW, 'Hotkeys added for pokeball selector modal (P + number to open, number keys to toggle items)'),
+    new Changelog(changelogType.NEW, 'Hotkeys added for Pokéball selector modal (P + number to open, number keys to toggle items)'),
     new Changelog(changelogType.NEW, 'More NPCs added around the regions'),
     new Changelog(changelogType.NEW, 'Other Deoxys forms obtainable in the Battle Frontier'),
-    new Changelog(changelogType.NEW, 'Protein item now has a use, buy from Pokemon League, use in Hatchery'),
+    new Changelog(changelogType.NEW, 'Protein item now has a use, buy from Pokémon League, use in Hatchery'),
     new Changelog(changelogType.NEW, 'Free quest refreshes'),
     new Changelog(changelogType.NEW, 'Hatchery filters are now saved upon reload'),
     new Changelog(changelogType.CHANGE, 'Damage output modified, dual types nerfed, single types buffed'),
@@ -82,9 +94,9 @@ const changelogItems = [
     new Changelog(changelogType.CHANGE, 'Display time played as a readable value'),
     new Changelog(changelogType.CHANGE, 'Quests list not auto refreshed on new day or level up'),
     new Changelog(changelogType.CHANGE, 'Update Masterball image'),
-    new Changelog(changelogType.FIXED, 'All eggs will auto hatch when steps reached if Pokemon still in the queue'),
+    new Changelog(changelogType.FIXED, 'All eggs will auto hatch when steps reached if Pokémon still in the queue'),
     new Changelog(changelogType.FIXED, 'Backup save data corrected'),
-    new Changelog(changelogType.FIXED, 'Pokemon List resorted when new Pokemon obtained'),
+    new Changelog(changelogType.FIXED, 'Pokémon List resorted when new Pokémon obtained'),
     new Changelog(changelogType.FIXED, 'Attack display error'),
     new Changelog(changelogType.FIXED, 'Acheivements re-filter once acheivement completed'),
     new Changelog(changelogType.FIXED, 'Swapped Kanto routes 7 and 8'),

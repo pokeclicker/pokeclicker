@@ -23,15 +23,22 @@ class KantoBerryMasterNPC extends NPC {
             return 'The disciple has surpassed the master. I have nothing more to teach you.';
         }
 
-        SeededRand.seedWithDate(date);
         const possibleMutations = App.game.farming.mutations.filter((mut) => mut.unlocked && mut.showHint && !App.game.farming.unlockedBerries[mut.mutatedBerry]());
 
         if (possibleMutations.length === 0) {
             return 'It seems as though you have hit a roadblock in your Berry progress. Focus on other areas before returning..';
         }
 
+        SeededRand.seedWithDate(date);
         const mutationToShow = SeededRand.fromArray(possibleMutations);
         mutationToShow.hintSeen = true;
+
+        if (mutationToShow instanceof EnigmaMutation) {
+            if (App.game.discord.ID !== null) {
+                mutationToShow.hintsSeen[mutationToShow.hintIndex](true);
+            }
+            return mutationToShow.partialHint;
+        }
 
         return mutationToShow.hint;
     }
