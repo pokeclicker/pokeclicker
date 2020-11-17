@@ -453,7 +453,7 @@ class Farming implements Feature {
 
         // Figy
         this.mutations.push(new GrowNearFlavorMutation(.009, BerryType.Figy,
-            [[25, 50], [0, 5], [0, 5], [0, 5], [0, 5]], {
+            [[25, 80], [0, 5], [0, 5], [0, 5], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too spicy!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Cheri]();
@@ -462,7 +462,7 @@ class Farming implements Feature {
         ));
         // Wiki
         this.mutations.push(new GrowNearFlavorMutation(.008, BerryType.Wiki,
-            [[0, 5], [25, 50], [0, 5], [0, 5], [0, 5]], {
+            [[0, 5], [25, 80], [0, 5], [0, 5], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too dry!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Chesto]();
@@ -471,7 +471,7 @@ class Farming implements Feature {
         ));
         // Mago
         this.mutations.push(new GrowNearFlavorMutation(.007, BerryType.Mago,
-            [[0, 5], [0, 5], [25, 50], [0, 5], [0, 5]], {
+            [[0, 5], [0, 5], [25, 80], [0, 5], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sweet!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Pecha]();
@@ -480,7 +480,7 @@ class Farming implements Feature {
         ));
         // Aguav
         this.mutations.push(new GrowNearFlavorMutation(.006, BerryType.Aguav,
-            [[0, 5], [0, 5], [0, 5], [25, 50], [0, 5]], {
+            [[0, 5], [0, 5], [0, 5], [25, 80], [0, 5]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too bitter!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Rawst]();
@@ -489,7 +489,7 @@ class Farming implements Feature {
         ));
         // Iapapa
         this.mutations.push(new GrowNearFlavorMutation(.005, BerryType.Iapapa,
-            [[0, 5], [0, 5], [0, 5], [0, 5], [25, 50]], {
+            [[0, 5], [0, 5], [0, 5], [0, 5], [25, 80]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings get too sour!',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Aspear]();
@@ -555,7 +555,7 @@ class Farming implements Feature {
                 BerryType.Figy,
             ]));
         // Tamato
-        this.mutations.push(new EvolveNearBerryMutation(.0005, BerryType.Tamato, BerryType.Sitrus, [BerryType.Lum]));
+        this.mutations.push(new EvolveNearBerryMutation(.0005, BerryType.Tamato, BerryType.Razz, [BerryType.Pomeg]));
         // Cornn
         this.mutations.push(new GrowNearBerryMutation(.0003, BerryType.Cornn,
             [
@@ -611,7 +611,7 @@ class Farming implements Feature {
         // Occa
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Occa,
             [
-                BerryType.Cheri,
+                BerryType.Razz,
                 BerryType.Figy,
                 BerryType.Tamato,
                 BerryType.Spelon,
@@ -635,6 +635,7 @@ class Farming implements Feature {
                 BerryType.Nomel,
             ]));
         // Rindo
+        // TODO: HLXII - Change mutation to grow spontaneously when Grass pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Rindo,
             [[10, 15], [0, 0], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little spicy and fairly bitter at the same time.',
@@ -659,6 +660,7 @@ class Farming implements Feature {
         // Shuca
         this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItems.OakItem.Sprinklotad));
         // Coba
+        // TODO: HLXII - Change mutation to grow spontaneously when Flying pokemon in party
         this.mutations.push(new GrowNearFlavorMutation(.0001, BerryType.Coba,
             [[0, 0], [10, 15], [0, 0], [15, 20], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted a little dry and fairly bitter at the same time.',
@@ -773,7 +775,7 @@ class Farming implements Feature {
         // Apicot
 
         // Lansat
-
+        // TODO: HLXII - Add Mutation to evolve Payapa when Milotic, Gardevoir, Blissey, and Togekiss in party.
         // Starf
         // No mutation, obtained by wandering shiny pokemon
         // Enigma
