@@ -57,7 +57,7 @@ class GrowNearFlavorMutation extends GrowNearMutation {
         const sameBerries = Plot.findNearPlots(idx).filter(plotIndex => {
             return App.game.farming.plotList[plotIndex].berry === this.mutatedBerry;
         }).length;
-        return super.mutationChance(idx) * Math.pow(10, -sameBerries);
+        return super.mutationChance(idx) * Math.pow(4, -sameBerries);
     }
 
 }
