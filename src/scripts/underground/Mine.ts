@@ -51,7 +51,7 @@ class Mine {
     }
 
     private static getRandomCoord(max: number, size: number): number {
-        return Math.floor(Math.random() * (max - size - 1)) + 1;
+        return Math.floor(Math.random() * (max - size));
     }
 
     private static canAddReward(x: number, y: number, reward: UndergroundItem): boolean {
@@ -205,8 +205,8 @@ class Mine {
         const tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             for (let i = 1; i < tiles; i++) {
-                const x = GameConstants.randomIntBetween(1, this.sizeY - 2);
-                const y = GameConstants.randomIntBetween(1, this.sizeX - 2);
+                const x = GameConstants.randomIntBetween(0, this.sizeY - 1);
+                const y = GameConstants.randomIntBetween(0, this.sizeX - 1);
                 this.breakTile(x, y, 2);
             }
 
