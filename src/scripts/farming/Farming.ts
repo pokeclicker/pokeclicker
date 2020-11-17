@@ -78,7 +78,7 @@ class Farming implements Feature {
             5, 0.5, 8, 4,
             [0, 0, 0, 10, 0], BerryColor.Green,
             ['If the leaves grow longer and curlier than average, this Berry will have a somewhat-bitter taste.']);
-        this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10, 40, 60, 120, 220],
+        this.berryData[BerryType.Aspear]    = new Berry(BerryType.Aspear,   [10, 40, 60, 120, 240],
             6, 0.5, 9, 5,
             [0, 0, 0, 0, 10], BerryColor.Yellow,
             ['This Berry\'s peel is hard, but the flesh inside is very juicy. It is distinguished by its bracing sourness.']);
