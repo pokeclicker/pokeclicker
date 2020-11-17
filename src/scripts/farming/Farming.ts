@@ -400,7 +400,7 @@ class Farming implements Feature {
             0.5, 0, 15000, 20,
             [30, 10, 30, 10, 30], BerryColor.Green,
             ['This Berry is considered a mirage. It was said to be so strong that it had to be abandoned at the world\'s edge.'],
-            new Aura(AuraType.Shiny, [1.01, 1.02, 1.03]), ['Jirachi']);
+            new Aura(AuraType.Shiny, [1.005, 1.01, 1.015]), ['Jirachi']);
 
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [10800, 21600, 43200, 86400, 604800],
             0.5, 0, 15000, 20,

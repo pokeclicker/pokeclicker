@@ -59,6 +59,7 @@ const changelogItems = [
     new Changelog(changelogType.FIXED, 'Quest not completing if restarted after being quit'),
     new Changelog(changelogType.FIXED, 'Farm mulches can now be applied multiple times per plot'),
     new Changelog(changelogType.FIXED, 'Oak items upgraded currency shows correct currency'),
+    new Changelog(changelogType.FIXED, 'Berry hints updating correctly each day'),
     new Changelog(changelogType.FIXED, 'Fixed some lag'),
 
     // v0.6.3
