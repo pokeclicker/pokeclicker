@@ -56,7 +56,7 @@ class GrowNearFlavorMutation extends GrowNearMutation {
     mutationChance(idx: number): number {
         const plots = Plot.findNearPlots(idx);
         if (!plots.length) {
-            return 0;
+            return super.mutationChance(idx);
         }
         let sameBerries = 0;
         plots.forEach(idx => {
