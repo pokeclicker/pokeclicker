@@ -44,8 +44,8 @@ class Pokeballs implements Feature {
                 }
                 return 0;
             }, 1000, 'Increased catch rate on routes with more Pokémon defeated', new RouteKillRequirement(Infinity, GameConstants.Region.none, 0)),
-            // TODO: this needs some sort of bonus?
-            new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Pokéball', new RouteKillRequirement(0, GameConstants.Region.none, 0)),
+            // TODO: this needs some sort of bonus, possibly extra dungeon tokens
+            new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Pokéball', new RouteKillRequirement(Infinity, GameConstants.Region.none, 0)),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);

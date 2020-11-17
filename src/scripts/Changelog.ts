@@ -50,6 +50,14 @@ class ChangelogUpdate extends Changelog {
  */
 const changelogItems = [
     // note that month is 0 indexed
+    // v0.6.5
+    new ChangelogUpdate('v0.6.5', new Date(2020, 10, 18)),
+    new Changelog(changelogType.CHANGE, 'Misc Farm changes'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.CHANGE, 'Berries are less likely to create mutations of themselves'),
+    new Changelog(changelogType.CHANGE, 'Nerfed some of the Berry Auras'),
+    new Changelog(changelogType.CHANGE, 'Increase Farm wondering Pokémon shiny chance'),
+
     // v0.6.4
     new ChangelogUpdate('v0.6.4', new Date(2020, 10, 17)),
     new Changelog(changelogType.NEW, 'More Farm statistics'),
