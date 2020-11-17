@@ -1,14 +1,15 @@
 enum SortOptions {
-    'id' = 0,
-    'name' = 1,
-    'attack' = 2,
-    'level' = 3,
-    'shiny' = 4,
-    'baseAttack' = 5,
-    'breedingEfficiency' = 6,
-    'eggCycles' = 7,
-    'timesHatched' = 8,
-    'category' = 9,
+    id = 0,
+    name = 1,
+    attack = 2,
+    level = 3,
+    shiny = 4,
+    baseAttack = 5,
+    breedingEfficiency = 6,
+    eggCycles = 7,
+    timesHatched = 8,
+    category = 9,
+    proteinsUsed = 10,
 }
 
 type SortOptionConfig = {
@@ -76,5 +77,10 @@ const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
     [SortOptions.category]: {
         'text': 'Category',
         'getValue': p => p.category,
+    },
+
+    [SortOptions.proteinsUsed]: {
+        'text': 'Proteins Used',
+        'getValue': p => p.proteinsUsed() || 0,
     },
 };
