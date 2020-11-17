@@ -12,14 +12,16 @@
 
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#items">Evolution Stones</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones">Evolution Stones</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#itemBag">Item Bag</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div id="items" class="tab-pane active p-3">
+                    <div id="evoStones" class="tab-pane active p-3">
                         <h3 data-bind="text: ItemList[ItemHandler.stoneSelected()].displayName"></h3>
+
                         <div class="row justify-content-sm-center">
-                            <div class="row col-lg-6 col-sm-10" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
+                            <div class="row col-10" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
@@ -29,6 +31,7 @@
                             </div>
                         </div>
 
+                        <hr/>
 
                         <div class="row justify-content-sm-center" >
                             <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0"
@@ -47,6 +50,7 @@
                             </div>
                         </div>
 
+                        <hr/>
 
                         <div class="row justify-content-center"
                              data-bind="template: { name:'multiOptionTemplate',
@@ -59,6 +63,25 @@
                         <div class="row no-gutters justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="itemBag" class="tab-pane p-3">
+                        <div class="row justify-content-sm-center">
+                            <div class="row col-10" data-bind="foreach: Object.keys(player.itemList)">
+                                <!-- ko if: player._itemList[$data] -->
+                                <div class="col-2" data-bind="
+                                tooltip: {
+                                   title: ItemList[$data] ? `<u>${ItemList[$data].displayName}</u><br/>${ItemList[$data].description || ''}` : '',
+                                   trigger: 'hover',
+                                   placement:'bottom',
+                                   html: true
+                                 }">
+                                    <img data-bind="attr: {src: 'assets/images/items/' + $data + '.png'}" style="max-width: 32px;">
+                                    <div data-bind="text: player._itemList[$data]()"></div>
+                                </div>
+                                <!-- /ko -->
                             </div>
                         </div>
                     </div>
