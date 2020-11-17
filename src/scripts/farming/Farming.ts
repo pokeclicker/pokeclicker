@@ -258,7 +258,7 @@ class Farming implements Feature {
             [
                 'This Berry contains a substance that generates heat. It can even heat up a chilly heart.',
                 'Growing these Berries will promote Egg growth.',
-            ], new Aura(AuraType.Egg, [1.1, 1.2, 1.3]), ['Riolu']);
+            ], new Aura(AuraType.Egg, [1.01, 1.02, 1.03]), ['Riolu']);
         this.berryData[BerryType.Kebia]     = new Berry(BerryType.Kebia,    [100, 200, 400, 600, 86400],
             1, 1, 50, 1,
             [0, 15, 0, 0, 10], BerryColor.Green,
@@ -400,7 +400,7 @@ class Farming implements Feature {
             0.5, 0, 15000, 20,
             [30, 10, 30, 10, 30], BerryColor.Green,
             ['This Berry is considered a mirage. It was said to be so strong that it had to be abandoned at the world\'s edge.'],
-            new Aura(AuraType.Shiny, [1.01, 1.02, 1.03]), ['Jirachi']);
+            new Aura(AuraType.Shiny, [1.005, 1.01, 1.015]), ['Jirachi']);
 
         this.berryData[BerryType.Enigma]    = new Berry(BerryType.Enigma,   [10800, 21600, 43200, 86400, 604800],
             0.5, 0, 15000, 20,
