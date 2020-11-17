@@ -273,7 +273,7 @@ class Farming implements Feature {
             [
                 'The sweetness-laden pulp has just the hint of a hard-edged and fragrant bite to it.',
                 'Growing these Berries will soften the ground around it, increasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [1.1, 1.2, 1.3]), ['Larvitar']);
+            ], new Aura(AuraType.Replant, [1.01, 1.02, 1.03]), ['Larvitar']);
         this.berryData[BerryType.Coba]      = new Berry(BerryType.Coba,     [9000, 12600, 16200, 19800, 39600],
             29, 0.05, 1800, 15,
             [0, 10, 0, 15, 0], BerryColor.Blue,
@@ -299,14 +299,14 @@ class Farming implements Feature {
             [
                 'It is often used for pickles because of its very dry flavor. It can also be eaten raw for its provocative taste.',
                 'This Berry plant hardens the surrounding soil, decreasing the chances of replanting.',
-            ], new Aura(AuraType.Replant, [0.9, 0.8, 0.7]), ['Sudowoodo']);
+            ], new Aura(AuraType.Replant, [0.99, 0.98, 0.97]), ['Sudowoodo']);
         this.berryData[BerryType.Kasib]     = new Berry(BerryType.Kasib,    [30, 60, 120, 300, 86400],
             1, 1, 25, 1,
             [0, 10, 20, 0, 0], BerryColor.Purple,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
                 'Nearby Pokémon are wary of this Berry plant.',
-            ], new Aura(AuraType.Attract, [0.9, 0.8, 0.7]), ['Shedinja']);
+            ], new Aura(AuraType.Attract, [0.99, 0.98, 0.97]), ['Shedinja']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [10800, 21600, 43200, 86400, 172800],
             34, 0, 4000, 15,
             [0, 0, 10, 20, 0], BerryColor.Red,
@@ -338,7 +338,7 @@ class Farming implements Feature {
             [
                 'This Berry is sweet with a hint of bitterness and has a lingering sweet scent. It is often dried and used to make tea.',
                 'The scent of this Berry plant attracts wild Pokémon.',
-            ], new Aura(AuraType.Attract, [1.1, 1.2, 1.3]), ['Togepi']);
+            ], new Aura(AuraType.Attract, [1.01, 1.02, 1.03]), ['Togepi']);
         //#endregion
 
         //#region Fifth Generation
