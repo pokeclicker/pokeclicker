@@ -29,6 +29,65 @@ class BerryDeal {
     private static randomUndergroundItem(): UndergroundItem {
         return SeededRand.fromArray(UndergroundItem.list);
     }
+    
+    private static randomPokeballDeal(): BerryDeal {
+        const firstGen = Farming.getGeneration(0);
+        const secondGen = Farming.getGeneration(1);
+        const thirdGen = Farming.getGeneration(2);
+
+        return SeededRand.fromArray([
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                ],
+                [
+                    SeededRand.intBetween(30, 70),
+                    SeededRand.intBetween(10, 30),
+                ],
+                ItemList.Fastball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                ],
+                [
+                    SeededRand.intBetween(30, 70),
+                    SeededRand.intBetween(10, 30),
+                ],
+                ItemList.Quickball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                ],
+                [
+                    SeededRand.intBetween(30, 70),
+                    SeededRand.intBetween(10, 30),
+                ],
+                ItemList.Timerball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
+                    this.randomBerry(thirdGen),
+                ],
+                [
+                    SeededRand.intBetween(60, 100),
+                    SeededRand.intBetween(30, 60),
+                    SeededRand.intBetween(10, 30),
+                ],
+                ItemList.Luxuryball,
+                1
+            ),
+        ]);
+    }
 
     public static getDeals(region: GameConstants.Region) {
         return BerryDeal.list[region];
@@ -87,6 +146,8 @@ class BerryDeal {
             this.randomEvoItem(),
             SeededRand.intBetween(1, 3)
         ));
+
+        list.push(this.randomPokeballDeal());
 
         return list;
     }
