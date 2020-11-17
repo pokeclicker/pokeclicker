@@ -540,8 +540,8 @@ class Farming implements Feature {
             }));
         // Hondew
         this.mutations.push(new GrowNearFlavorMutation(.0004, BerryType.Hondew,
-            [[10, 15], [10, 15], [0, 0], [10, 15], [0, 0]], {
-                hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted like a little bit of everything except sweet.',
+            [[15, 15], [15, 15], [0, 0], [15, 15], [0, 0]], {
+                hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted fairly spicy, dry, and bitter at the same time.',
                 unlockReq: function(): boolean {
                     return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
                     App.game.farming.unlockedBerries[BerryType.Chesto]() &&
@@ -680,7 +680,7 @@ class Farming implements Feature {
         let berryReqs = {};
         berryReqs[BerryType.Rindo] = 8;
         this.mutations.push(new GrowNearBerryStrictMutation(.0001, BerryType.Tanga, berryReqs, {
-            hint: 'I\'ve heard that a special Berry can appear after being surrounded by Ringo Berries!',
+            hint: 'I\'ve heard that a special Berry can appear after being surrounded by Rindo Berries!',
         }));
         // Charti
         this.mutations.push(new OakMutation(.0001, BerryType.Charti, BerryType.Cornn, OakItems.OakItem.Cell_Battery));
@@ -830,7 +830,7 @@ class Farming implements Feature {
     getMutationMultiplier(): number {
         let multiplier = 1;
         multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
-        return multiplier;
+        return multiplier * 100;
     }
 
     update(delta: number): void {
