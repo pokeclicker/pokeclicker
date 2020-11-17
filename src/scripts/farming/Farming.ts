@@ -829,7 +829,7 @@ class Farming implements Feature {
     getMutationMultiplier(): number {
         let multiplier = 1;
         multiplier *= App.game.oakItems.calculateBonus(OakItems.OakItem.Squirtbottle);
-        return multiplier * 100;
+        return multiplier;
     }
 
     update(delta: number): void {
