@@ -207,7 +207,8 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Attack Bonus', 'attackBonus'),
         new SettingOption('Base Attack', 'baseAttack'),
         new SettingOption('Egg Steps', 'eggSteps'),
-        new SettingOption('Breeding Effeciency', 'breedingEffeciency'),
+        new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
+        new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
     ],
     'attack'
 ));
