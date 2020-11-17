@@ -2,13 +2,11 @@
 
 /**
  * Mutation that requires specific flavored Berry plants near an empty plot
- * Will check the surround plots for the flavors of the nearby Berry plants. Must be greater or equal to the required flavorReqs.
- * Must also be less than the error given. The error is calculated as the sum of squared residuals.
+ * Will check the surround plots for the flavors of the nearby Berry plants. Must be in the range of the flavorReqs
  */
 class GrowNearFlavorMutation extends GrowNearMutation {
 
-    flavorReqs: number[];
-    error: number;
+    flavorReqs: number[][];
 
     readonly flavorRatio = [0.5, 0.75, 1];  // Determines how much flavor a Berry plant has before fully mature.
 
@@ -17,14 +15,11 @@ class GrowNearFlavorMutation extends GrowNearMutation {
      * @param mutationChance The chance of the mutation occuring
      * @param mutatedBerry The mutated BerryType
      * @param flavorReqs The flavor requirements for the mutation to occur
-     * @param error The max error of the residual between the required flavorReqs and the surrounding plots.
-     * Set to 1 if we only care about being above the flavorReqs. Set to 0 to match the requirements exactly.
      * @param options The additional MutationOptions
      */
-    constructor(mutationChance: number, mutatedBerry: BerryType, flavorReqs: number[], error = 1, options?: MutationOptions) {
+    constructor(mutationChance: number, mutatedBerry: BerryType, flavorReqs: number[][], options?: MutationOptions) {
         super(mutationChance, mutatedBerry, options);
         this.flavorReqs = flavorReqs;
-        this.error = error;
     }
 
     /**
@@ -50,16 +45,19 @@ class GrowNearFlavorMutation extends GrowNearMutation {
             }
         });
 
-        const reqMatched = this.flavorReqs.every((value, idx) => value <= nearFlavors[idx]);
+        return this.flavorReqs.every((value, idx) => value[0] <= nearFlavors[idx] && nearFlavors[idx] <= value[1]);
+    }
 
-        // Normalizing flavors
-        const reqSum = this.flavorReqs.reduce((a,b) => a + b, 0);
-        const normReqs = this.flavorReqs.map(f => f / reqSum);
-        const nearSum = nearFlavors.reduce((a,b) => a + b, 0);
-        const normNear = nearFlavors.map(f => f / nearSum);
-        const errorMatched = normReqs.map((req, idx) => Math.pow(req - normNear[idx], 2)).reduce((a, b) => a + b, 0) <= this.error;
-
-        return reqMatched && errorMatched;
+    /**
+     * Handles getting the mutation chance.
+     * Will decrease the mutation chance if the mutatedBerry already exists around this one.
+     * @param idx The plot index
+     */
+    mutationChance(idx: number): number {
+        const sameBerries = Plot.findNearPlots(idx).filter(plotIndex => {
+            return App.game.farming.plotList[plotIndex].berry === this.mutatedBerry;
+        }).length;
+        return super.mutationChance(idx) * Math.pow(4, -sameBerries);
     }
 
 }

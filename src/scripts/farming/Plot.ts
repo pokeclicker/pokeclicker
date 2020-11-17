@@ -103,7 +103,7 @@ class Plot implements Saveable {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;
             }
-            return this.berryData.growthTime.findIndex(t => this.age < t);
+            return this.berryData.growthTime.findIndex(t => this.age <= t);
         });
 
         this.tooltip = ko.pureComputed(() => {
@@ -285,7 +285,7 @@ class Plot implements Saveable {
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(wanderPokemon).id, shiny, true);
 
             // Check for Starf berry generation
-            if (shiny && App.game.farming.highestUnlockedBerry() > BerryType.Salac) {
+            if (shiny) {
                 const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
                 const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
                 chosenPlot.plant(BerryType.Starf);

@@ -82,10 +82,6 @@ class GameController {
 
                 $(element).tooltip(options);
 
-                $(element).mouseover(function() {
-                    $(element).tooltip('show');
-                });
-
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     $(element).tooltip('dispose');
                 });
