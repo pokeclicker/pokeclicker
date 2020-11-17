@@ -5,12 +5,12 @@ class OakItems implements Feature {
     itemList: OakItem[];
     unlockRequirements: number[];
 
-    defaults: Record<string, any>;
-
     constructor(unlockRequirements: number[]) {
         this.itemList = [];
         this.unlockRequirements = unlockRequirements;
     }
+
+    defaults: Record<string, any>;
 
     canAccess(): boolean {
         return App.game.party.caughtPokemon.length >= 20;
@@ -18,14 +18,26 @@ class OakItems implements Feature {
 
     initialize() {
         this.itemList = [
-            new OakItem(OakItems.OakItem.Magic_Ball, 'Magic Ball', [5, 6, 7, 8, 9, 10], 0, true, 20, 'Gives a bonus to your catchrate', 2),
-            new OakItem(OakItems.OakItem.Amulet_Coin, 'Amulet Coin', [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, true, 30, 'Gain more coins from battling', 1),
-            new OakItem(OakItems.OakItem.Poison_Barb, 'Poison Barb', [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, true, 40, 'Clicks do more damage', 3),
-            new OakItem(OakItems.OakItem.Exp_Share, 'Exp Share', [1.15, 1.18, 1.21, 1.24, 1.27, 1.30], 1, true, 50, 'Gain more exp from battling', 1),
-            new OakItem(OakItems.OakItem.Sprayduck, 'Sprayduck', [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, false, 60, 'Makes your berries grow faster', 3),
-            new OakItem(OakItems.OakItem.Shiny_Charm, 'Shiny Charm', [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, true, 70, 'Encounter shinies more often', 150),
-            new OakItem(OakItems.OakItem.Blaze_Cassette, 'Blaze Cassette', [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, false, 80, 'Hatch eggs faster', 10),
-            new OakItem(OakItems.OakItem.Cell_Battery, 'Cell Battery', [1.5, 1.6, 1.7, 1.8, 1.9, 2], 1, false, 90, 'More passive mining energy regen', 20),
+            new OakItem(OakItems.OakItem.Magic_Ball, 'Magic Ball', 'Gives a bonus to your catchrate',
+                true, [5, 6, 7, 8, 9, 10], 0, 20, 2),
+            new OakItem(OakItems.OakItem.Amulet_Coin, 'Amulet Coin', 'Gain more coins from battling',
+                true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 30, 1),
+            new OakItem(OakItems.OakItem.Poison_Barb, 'Poison Barb', 'Clicks do more damage',
+                true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 40, 3),
+            new OakItem(OakItems.OakItem.Exp_Share, 'EXP Share', 'Gain more exp from battling',
+                true, [1.15, 1.18, 1.21, 1.24, 1.27, 1.30], 1, 50, 1),
+            new OakItem(OakItems.OakItem.Sprayduck, 'Sprayduck', 'Makes your berries grow faster',
+                false, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 60, 1),
+            new OakItem(OakItems.OakItem.Shiny_Charm, 'Shiny Charm', 'Encounter shinies more often',
+                true, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 70, 150),
+            new OakItem(OakItems.OakItem.Blaze_Cassette, 'Blaze Cassette', 'Hatch eggs faster',
+                false, [1.50, 1.60, 1.70, 1.80, 1.90, 2.00], 1, 80, 10),
+            new OakItem(OakItems.OakItem.Cell_Battery, 'Cell Battery', 'More passive mining energy regen',
+                false, [1.5, 1.6, 1.7, 1.8, 1.9, 2], 1, 90, 20),
+            new BoughtOakItem(OakItems.OakItem.Squirtbottle, 'Squirtbottle', 'Increases the chance of berry mutations', 'Johto Berry Master',
+                true, [1.25, 1.5, 1.75, 2, 2.25, 2.5], 1, 10, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], GameConstants.Currency.farmPoint)),
+            new BoughtOakItem(OakItems.OakItem.Sprinklotad, 'Sprinklotad', 'Increases the chance of berry replants', 'Hoenn Berry Master',
+                true, [1.15, 1.3, 1.45, 1.6, 1.75, 1.9], 1, 2, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], GameConstants.Currency.farmPoint)),
         ];
     }
 
@@ -42,14 +54,14 @@ class OakItems implements Feature {
         if (this.itemList[item] == undefined) {
             return false;
         }
-        return App.game.party.caughtPokemon.length >= this.itemList[item].unlockReq;
+        return this.itemList[item].isUnlocked();
     }
 
-    use(item: OakItems.OakItem) {
+    use(item: OakItems.OakItem, scale = 1) {
         if (!this.isUnlocked(item)) {
             return;
         }
-        this.itemList[item].use();
+        this.itemList[item].use(undefined, scale);
     }
 
     maxActiveCount() {
@@ -76,11 +88,16 @@ class OakItems implements Feature {
     }
 
     fromJSON(json: Record<string, any>): void {
-        for (const key in json) {
-            if (json.hasOwnProperty(key)) {
-                this.itemList[OakItems.OakItem[key]].fromJSON(json[key]);
-            }
+        if (json == null) {
+            return;
         }
+
+        // Loading OakItems
+        GameHelper.enumStrings(OakItems.OakItem).forEach((oakItem) => {
+            if (json.hasOwnProperty(oakItem)) {
+                this.itemList[OakItems.OakItem[oakItem]].fromJSON(json[oakItem]);
+            }
+        });
     }
 
     toJSON(): Record<string, any> {
@@ -88,6 +105,7 @@ class OakItems implements Feature {
         for (let i = 0; i < this.itemList.length; i++) {
             save[OakItems.OakItem[this.itemList[i].name]] = this.itemList[i].toJSON();
         }
+
         return save;
     }
 
@@ -139,5 +157,7 @@ namespace OakItems {
         'Shiny_Charm',
         'Blaze_Cassette',
         'Cell_Battery',
+        'Squirtbottle',
+        'Sprinklotad',
     }
 }

@@ -30,6 +30,10 @@
                       <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).attack : 0).toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
+                      <td class="text-left">Proteins Used</td>
+                      <td class="text-left tight"><code data-bind="text: (App.game.party.getPokemon($data) ? App.game.party.getPokemon($data).proteinsUsed() : 0).toLocaleString('en-US')">-</code></td>
+                    </tr>
+                    <tr>
                       <td class="text-left">Type</td>
                       <td class="text-left tight">
                         <span class="badge text-light"

@@ -31,6 +31,11 @@ class Breeding implements Feature {
         this._eggList.forEach((egg) => {
             egg.extend({deferred: true});
         });
+        BreedingController.filter.region(Settings.getSetting('breedingRegionFilter').value);
+        BreedingController.filter.type1(Settings.getSetting('breedingTypeFilter1').value);
+        BreedingController.filter.type2(Settings.getSetting('breedingTypeFilter2').value);
+        BreedingController.filter.shinyStatus(Settings.getSetting('breedingShinyFilter').value);
+        BreedingController.displayValue(Settings.getSetting('breedingDisplayFilter').value);
     }
 
     initialize(): void {
@@ -181,7 +186,7 @@ class Breeding implements Feature {
     }
 
     public progressEggs(amount: number) {
-        amount *= App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette);
+        amount *= this.getStepMultiplier();
 
         amount = Math.round(amount);
         let index =  this.eggList.length;
@@ -192,6 +197,10 @@ class Breeding implements Feature {
                 this.hatchPokemonEgg(index);
             }
         }
+    }
+
+    private getStepMultiplier() {
+        return App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette) * App.game.farming.externalAuras[AuraType.Egg]();
     }
 
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {

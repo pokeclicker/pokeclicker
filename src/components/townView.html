@@ -46,6 +46,7 @@
                    Gym
                </button>
                <a class="btn btn-secondary" href="#shopModal" data-bind="visible: player.town().shop" data-toggle="modal" onclick="ShopHandler.showShop(player.town().shop())">Shop</a>
+               <a class="btn btn-secondary" href="#berryMasterModal" data-bind="visible: player.town().berryMaster" data-toggle="modal" onclick="ShopHandler.showShop(player.town().berryMaster())">Berry Master</a>
                <button class="btn btn-warning"
                        href="#nextRegionModal" data-toggle="modal"
                        data-bind="visible: MapHelper.ableToTravel() && GameConstants.StartingTowns.includes(player.town().name()), text: `Travel to ${GameConstants.camelCaseToString(GameConstants.Region[player.highestRegion() + 1])}`">
@@ -96,7 +97,7 @@
                 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data)
             }"/>
             <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
-            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: player.town().dungeon().allAvailablePokemonNames.includes($data)">
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: player.town().dungeon() && player.town().dungeon().allAvailablePokemonNames.includes($data)">
           </li>
         </ul>
       </div>

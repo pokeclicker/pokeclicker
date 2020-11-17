@@ -82,23 +82,9 @@ class GameController {
 
                 $(element).tooltip(options);
 
-
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     $(element).tooltip('dispose');
                 });
-
-                if (bindingContext.$data instanceof Plot) {
-                    $(element).hover(function () {
-                        $(this).data('to', setInterval(function () {
-                            $(element).tooltip('hide')
-                                .attr('data-original-title', FarmController.getTooltipLabel(bindingContext.$index()))
-                                .tooltip('show');
-                        }, 100));
-                    }, function () {
-                        clearInterval($(this).data('to'));
-                    });
-                }
-
             },
             'update': function (element, valueAccessor) {
                 const local = ko.utils.unwrapObservable(valueAccessor());
@@ -116,6 +102,11 @@ class GameController {
                 if (tooltipInner) {
                     tooltipInner.innerHTML = tooltipData.config.title || '';
                 }
+                if (tooltipData && tooltipData.config) {
+                    if (tooltipData.config.title === '') {
+                        $(element).tooltip('hide');
+                    }
+                }
             },
             options: {
                 placement: 'bottom',
@@ -124,11 +115,64 @@ class GameController {
         };
     }
 
+    // Store keys for multi-key combinations
+    static keyHeld = {}
     static addKeyListeners() {
-        $(document).on('keydown', function (e) {
+        // Oak Items
+        const $oakItemsModal = $('#oakItemsModal');
+        const oakItems = App.game.oakItems;
+        // Pokeball Selector
+        const $pokeballSelector = $('#pokeballSelectorModal');
+        const pokeballs = App.game.pokeballs;
+
+        $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
             if (document.activeElement.localName == 'input') {
                 return;
+            }
+
+            // Set flags for any key currently pressed down (used to check if key held down currently)
+            GameController.keyHeld[e.code] = true;
+
+            switch (e.code) {
+                case 'KeyO':
+                    // Open oak items with 'O'
+                    if (oakItems.canAccess()) {
+                        $('.modal').modal('hide');
+                        $oakItemsModal.modal('toggle');
+                    }
+                    break;
+                default:
+                    let numKey = +e.key;
+                    // Check for a number key being pressed
+                    if (!isNaN(numKey)) {
+                        // Make our number keys 1 indexed instead of 0
+                        numKey -= 1;
+
+                        if (GameController.keyHeld['KeyP']) {
+                            // Open pokeball selector modal using P + (1-4) for each condition
+                            if (!($pokeballSelector.data('bs.modal')?._isShown)) {
+                                $('.modal').modal('hide');
+                            }
+                            $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numKey)?.trigger('click');
+
+                        } else if ($pokeballSelector.data('bs.modal')?._isShown) {
+                            // Select Pokeball from pokeball selector (0 = none)
+                            if (numKey < App.game.pokeballs.pokeballs.length) {
+                                pokeballs.selectedSelection()(numKey);
+                            }
+
+                        } else if ($oakItemsModal.data('bs.modal')?._isShown) {
+                            // Toggle oak items
+                            if (oakItems.isUnlocked(numKey)) {
+                                if (oakItems.isActive(numKey)) {
+                                    oakItems.deactivate(numKey);
+                                } else {
+                                    oakItems.activate(numKey);
+                                }
+                            }
+                        }
+                    }
             }
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {
@@ -189,12 +233,7 @@ class GameController {
                         return;
                 }
                 e.preventDefault();
-            }
-
-        });
-
-        $(document).on('keydown', function (e) {
-            if (App.game.gameState === GameConstants.GameState.safari) {
+            } else if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyCodeToDirection[e.code];
                 if (dir) {
                     e.preventDefault();
@@ -206,7 +245,15 @@ class GameController {
             }
         });
 
-        $(document).on('keyup', function (e) {
+        $(document).on('keyup', e => {
+            // Ignore any of our controls if focused on an input element
+            if (document.activeElement.localName == 'input') {
+                return;
+            }
+
+            // Our key is no longer being held down
+            delete GameController.keyHeld[e.code];
+
             if (App.game.gameState === GameConstants.GameState.safari) {
                 const dir = GameConstants.KeyCodeToDirection[e.code];
                 if (dir) {
