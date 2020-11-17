@@ -58,7 +58,7 @@ class EnigmaMutation extends GrowMutation {
      */
     static getReqs(): BerryType[] {
         SeededRand.seed(+App.game.discord.ID());
-        const berryTypes = Array.from({length: GameHelper.enumLength(BerryType) - 1}, (_, i) => i + 1);
+        const berryTypes = Farming.getGeneration(2).concat(Farming.getGeneration(3));
         return [...new Array(4)].map((_) => SeededRand.fromArray(berryTypes));
     }
 

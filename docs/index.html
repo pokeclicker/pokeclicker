@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.6.3"></script>
+    <script src="scripts/modules.min.js?v=0.6.4"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.6.3"></script>
+    <script src="scripts/script.min.js?v=0.6.4"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.6.3" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.6.4" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -441,7 +441,7 @@
             <thead>
                 <tr>
                     <th width="20%" data-toggle="tooltip" title="Previously captured Pokémon will use this ball selection">Caught</th>
-                    <th width="20%" data-toggle="tooltip" title="Previously captured Shiny Pokémon will use this ball selection">✨</th>
+                    <th width="20%" data-toggle="tooltip" title="Previously captured Shiny Pokémon will use this ball selection" style="filter: grayscale(80%);">✨</th>
                     <th width="20%" data-toggle="tooltip" title="Uncaptured Pokémon will use this ball selection">New</th>
                     <th width="20%" data-toggle="tooltip" title="Uncaptured Shiny Pokémon will use this ball selection">✨</th>
                 </tr>
@@ -1071,7 +1071,7 @@
                 'dungeon-pokemon-locked': !App.game.party.alreadyCaughtPokemonByName($data)
             }"/>
             <sup class="shiny" data-bind="visible: App.game.party.alreadyCaughtPokemonByName($data, true)">✨</sup>
-            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: player.town().dungeon().allAvailablePokemonNames.includes($data)">
+            <img class="lock" src="assets/images/breeding/lock.svg" data-bind="hidden: player.town().dungeon() && player.town().dungeon().allAvailablePokemonNames.includes($data)">
           </li>
         </ul>
       </div>
@@ -6500,7 +6500,7 @@
                       <span data-bind="text: $data.progressString" style="font-size: 15px;"></span>
                       <!-- /ko -->
                       <!-- ko if: $data.hasEnoughExp() && !$data.isMaxLevel() -->
-                      <span class="clickable" data-bind="html: 'Upgrade (' + $data.calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/money.svg height=18px/>)',
+                      <span class="clickable" data-bind="html: 'Upgrade (' + $data.calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[$data.calculateCost().currency] + '.svg height=18px/>)',
                         click: function(){ $data.buy(); }" style="font-size: 15px;">
                         Upgrade
                       </span>
@@ -6524,7 +6524,6 @@
         <!-- /ko -->
       </table>
     </div>
-
 </div>
 
 
@@ -7034,7 +7033,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                               <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].progressString" style="font-size: 15px;"></span>
                               <!-- /ko -->
                               <!-- ko if: App.game.oakItems.itemList[OakItemController.inspectedItem].hasEnoughExp() && !App.game.oakItems.itemList[OakItemController.inspectedItem].isMaxLevel() -->
-                              <span class="clickable" data-bind="html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/money.svg height=18px/>)',
+                              <span class="clickable" data-bind="html: 'Upgrade (' + App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[App.game.oakItems.itemList[OakItemController.inspectedItem].calculateCost().currency] + '.svg height=18px/>)',
                                 click: function(){ App.game.oakItems.itemList[OakItemController.inspectedItem].buy(); }" style="font-size: 15px;">
                                 Upgrade
                               </span>
@@ -8509,7 +8508,9 @@ aria-labelledby="badgeCaseModalLabel">
                                     <ul id="mulchList" class="list-group p-0">
                                         <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
                                         <li class="list-group-item list-group-item-action seed-list-item p-2"
-                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() }">
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);},
+                                                css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
+                                                tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
                                                 data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
@@ -8602,7 +8603,7 @@ aria-labelledby="badgeCaseModalLabel">
                                     tooltip: { title: FarmController.getHint($data,true,true),
                                     trigger: 'hover',
                                     placement:'top' }">
-                                 <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + '').padStart(2, 0)">number</span>
+                                 <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
                                      <img src="" height="120px" style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
                                      <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
                                      <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
@@ -8676,7 +8677,7 @@ aria-labelledby="badgeCaseModalLabel">
     <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
         <div class="modal-content" data-bind="with: App.game.statistics.selectedBerryID()+''">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
-                <h5 class="modal-title text-muted" data-bind="text: `#${$data.toString().padStart(2,0)}&nbsp;&nbsp;`"></h5>
+                <h5 class="modal-title text-muted" data-bind="text: `#${(Number($data) + 1).toString().padStart(2,0)}&nbsp;&nbsp;`"></h5>
                 <h5 class="modal-title text-light" data-bind="text: BerryType[$data]">Berry Statistics</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -8810,8 +8811,8 @@ aria-labelledby="badgeCaseModalLabel">
                                 <!-- ko foreach: berries -->
                                 <tr>
                                     <td data-bind="text: App.game.farming.berryList[$data.berryType]()"></td>
-                                    <td><img height="24px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }"></img></td>
-                                    <td data-bind='text: amount + " x " + BerryType[berryType]'></td>
+                                    <td><img height="24px" data-bind="attr: {src: FarmController.getBerryImage($data.berryType) }, css: {'berryLocked': !App.game.farming.unlockedBerries[$data.berryType]() }"></img></td>
+                                    <td data-bind="text: amount + ' x ' + (App.game.farming.unlockedBerries[$data.berryType]() ? BerryType[$data.berryType] : '???')"></td>
                                     <!-- ko if: $index() === 0 -->
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">→</td>
                                     <td class='vertical-middle' data-bind="attr: { rowspan: $parent.berries.length }">
