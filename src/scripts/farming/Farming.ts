@@ -543,10 +543,9 @@ class Farming implements Feature {
             [[15, 15], [15, 15], [0, 0], [15, 15], [0, 0]], {
                 hint: 'I\'ve heard that a special Berry can appear if its surroundings match its flavor profile! If I recall, it tasted fairly spicy, dry, and bitter at the same time.',
                 unlockReq: function(): boolean {
-                    return App.game.farming.unlockedBerries[BerryType.Cheri]() &&
-                    App.game.farming.unlockedBerries[BerryType.Chesto]() &&
-                    App.game.farming.unlockedBerries[BerryType.Rawst]() &&
-                    App.game.farming.unlockedBerries[BerryType.Aspear]();
+                    return App.game.farming.unlockedBerries[BerryType.Figy]() &&
+                    App.game.farming.unlockedBerries[BerryType.Wiki]() &&
+                    App.game.farming.unlockedBerries[BerryType.Aguav]();
                 },
             }));
         // Grepa
