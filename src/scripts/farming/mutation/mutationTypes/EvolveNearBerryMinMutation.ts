@@ -21,12 +21,6 @@ class EvolveNearBerryMinMutation extends EvolveNearMutation {
 
         plots.forEach((idx) => {
             const plot = App.game.farming.plotList[idx];
-            if (!plot.isUnlocked) {
-                return;
-            }
-            if (plot.isEmpty()) {
-                return;
-            }
             if (plot.stage() !== PlotStage.Berry) {
                 return;
             }
