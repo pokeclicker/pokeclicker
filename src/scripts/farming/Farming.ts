@@ -877,7 +877,7 @@ class Farming implements Feature {
         this.wanderCounter += GameConstants.TICK_TIME;
         let wanderPokemon: any;
         if (this.wanderCounter >= GameConstants.WANDER_TICK) {
-            for (let i = 0;i < App.game.farming.plotList.length;i++) {
+            for (let i = 0; i < App.game.farming.plotList.length; i++) {
                 const plot = App.game.farming.plotList[i];
                 wanderPokemon = plot.generateWanderPokemon();
                 if (wanderPokemon !== undefined) {

@@ -49,7 +49,7 @@ class PokedexHelper {
         });
 
         options = $('#pokedex-filter-region');
-        for (let i = 0;i <= GameConstants.MAX_AVAILABLE_REGION;i++) {
+        for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
             options.append($('<option />').val(i).text(GameConstants.camelCaseToString(GameConstants.Region[i])));
         }
     }

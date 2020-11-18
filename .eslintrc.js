@@ -32,7 +32,7 @@ module.exports = {
         'comma-dangle': ['error', { 'arrays': 'always-multiline', 'objects': 'always-multiline', 'imports': 'always-multiline', 'exports': 'always-multiline' }],
         'quotes': ['error', 'single', { 'avoidEscape': true }],
         'no-useless-concat': 'error',
-        'prefer-template': 'warn',
+        'prefer-template': 'error',
         'template-curly-spacing': ['error', 'never'],
         'curly': 'error',
         'brace-style': 'error',
@@ -43,5 +43,6 @@ module.exports = {
         'array-bracket-spacing': ['error', 'never'],
         'space-infix-ops': ['error'],
         'arrow-spacing': ['error'],
+        'semi-spacing': 'error',
     },
 };

@@ -322,10 +322,10 @@ class Safari {
         let x = 0;
         let y = 0;
         switch (dir) {
-            case 'left': x = -1;break;
-            case 'up': y = -1;break;
-            case 'right': x = 1;break;
-            case 'down': y = 1;break;
+            case 'left': x = -1; break;
+            case 'up': y = -1; break;
+            case 'right': x = 1; break;
+            case 'down': y = 1; break;
         }
         return {x: x, y: y};
     }
