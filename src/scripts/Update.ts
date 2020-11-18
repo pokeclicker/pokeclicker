@@ -288,8 +288,8 @@ class Update implements Saveable {
                 p.proteinsUsed = maxProteins;
                 return p;
             });
-
-            playerData._itemList.Protein += proteinsToRefund;
+            
+            playerData._itemList.Protein += proteinsToRefund || 0;
         },
     };
 
