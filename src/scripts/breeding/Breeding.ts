@@ -234,7 +234,6 @@ class Breeding implements Feature {
     }
 
     public removeFromQueue(index: number): boolean {
-        console.log('remove from queue:', index);
         const queueSize = this.queueList().length;
         if (queueSize > index) {
             const pokemonName = this.queueList.splice(index, 1)[0];

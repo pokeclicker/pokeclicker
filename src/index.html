@@ -204,7 +204,7 @@
                                          src=""/>
                                     <br>
                                     Catch Chance:
-                                    <knockout data-bind="text: Battle.catchRateActual() + '%'">Catch Rate</knockout>
+                                    <knockout data-bind="text: Math.floor(Battle.catchRateActual()) + '%'">Catch Rate</knockout>
                                 </div>
                             </div>
                             <div class="progress hitpoints" style="height: 20px;">
@@ -283,7 +283,7 @@
                                              src=""/>
                                         <br>
                                         Catch Chance:
-                                        <knockout data-bind="text: DungeonBattle.catchRateActual() + '%'">Catch Rate</knockout>
+                                        <knockout data-bind="text: Math.floor(DungeonBattle.catchRateActual()) + '%'">Catch Rate</knockout>
                                     </div>
                                 </div>
                                 <div class="progress hitpoints" style="height: 20px;">
@@ -503,6 +503,9 @@
 
 <!-- Statistics Modal-->
 @import "pokemonStatisticsModal.html"
+
+<!-- Pokemon Selector Modal-->
+@import "pokemonSelectorModal.html"
 
 <!-- Badge Case Modal-->
 @import "badgeCase.html"

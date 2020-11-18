@@ -1,15 +1,18 @@
 class Pokeball {
-    public type: GameConstants.Pokeball;
-    public catchBonus: number;
-    public catchTime: number;
     public quantity: KnockoutObservable<number>;
-    public description: string;
 
-    constructor(type: GameConstants.Pokeball, catchBonus: number, catchTime: number, description: string, quantity = 0) {
-        this.type = type;
-        this.catchBonus = catchBonus;
-        this.catchTime = catchTime;
-        this.description = description;
+    constructor(
+        public type: GameConstants.Pokeball,
+        public catchBonus: () => number,
+        public catchTime: number,
+        public description: string,
+        public unlockRequirement: Requirement | MultiRequirement = new MultiRequirement(),
+        quantity = 0
+    ) {
         this.quantity = ko.observable(quantity);
+    }
+
+    public unlocked() {
+        return this.unlockRequirement.isCompleted();
     }
 }

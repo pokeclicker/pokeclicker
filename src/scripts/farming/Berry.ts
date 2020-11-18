@@ -10,9 +10,9 @@ class Berry {
     public wander: PokemonNameType[];
 
     private static baseWander: PokemonNameType[] = [
-        'Butterfree', 'Weedle', 'Tangela', 'Scyther',
-        'Ledyba', 'Pineco', 'Heracross',
-        'Wurmple', 'Volbeat', 'Illumise',
+        'Tangela', 'Scyther',
+        'Pineco', 'Heracross',
+        'Volbeat', 'Illumise',
         'Burmy (plant)', 'Combee', 'Cherubi', 'Munchlax',
     ];
 

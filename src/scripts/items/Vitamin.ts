@@ -1,5 +1,4 @@
 class Vitamin extends Item {
-
     type: GameConstants.VitaminType;
 
     constructor(type: GameConstants.VitaminType, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money, options?: ShopOptions, displayName?: string) {

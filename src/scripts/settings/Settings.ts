@@ -138,6 +138,13 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
     ],
     'queue'
 ));
+Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
+    [
+        new SettingOption('To Next Stage', 'nextStage'),
+        new SettingOption('Ripe/Death', 'ripeDeath'),
+    ],
+    'nextStage'
+));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
@@ -208,6 +215,8 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Base Attack', 'baseAttack'),
         new SettingOption('Egg Steps', 'eggSteps'),
         new SettingOption('Times Hatched', 'timesHatched'),
+        new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
+        new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
     ],
     'attack'
 ));

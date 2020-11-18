@@ -82,10 +82,6 @@ class GameController {
 
                 $(element).tooltip(options);
 
-                $(element).mouseover(function() {
-                    $(element).tooltip('show');
-                });
-
                 ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
                     $(element).tooltip('dispose');
                 });
@@ -119,6 +115,14 @@ class GameController {
         };
     }
 
+    static focusedOnEditableElement(): boolean {
+        const activeEl = document.activeElement as HTMLElement;
+        const localName: string = activeEl.localName.toLowerCase();
+        const editables = ['textarea', 'input', 'select'];
+    
+        return (editables.includes(localName) || activeEl.isContentEditable);
+    }
+
     // Store keys for multi-key combinations
     static keyHeld = {}
     static addKeyListeners() {
@@ -131,7 +135,7 @@ class GameController {
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
-            if (document.activeElement.localName == 'input') {
+            if (this.focusedOnEditableElement()) {
                 return;
             }
 
@@ -251,7 +255,7 @@ class GameController {
 
         $(document).on('keyup', e => {
             // Ignore any of our controls if focused on an input element
-            if (document.activeElement.localName == 'input') {
+            if (this.focusedOnEditableElement()) {
                 return;
             }
 

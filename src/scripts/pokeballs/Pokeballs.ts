@@ -6,11 +6,10 @@ class Pokeballs implements Feature {
     saveKey = 'pokeballs';
 
     defaults = {
-        'pokeballs': [25, 0, 0, 0],
-        'alreadyCaughtSelection': GameConstants.Pokeball.None,
-        'alreadyCaughtShinySelection': GameConstants.Pokeball.Pokeball,
-        'notCaughtSelection': GameConstants.Pokeball.Pokeball,
-        'notCaughtShinySelection': GameConstants.Pokeball.Pokeball,
+        alreadyCaughtSelection: GameConstants.Pokeball.None,
+        alreadyCaughtShinySelection: GameConstants.Pokeball.Pokeball,
+        notCaughtSelection: GameConstants.Pokeball.Pokeball,
+        notCaughtShinySelection: GameConstants.Pokeball.Pokeball,
     };
 
     public pokeballs: Pokeball[];
@@ -24,10 +23,37 @@ class Pokeballs implements Feature {
 
     constructor() {
         this.pokeballs = [
-            new Pokeball(GameConstants.Pokeball.Pokeball, 0, 1250, 'A standard Pokéball', 25),
-            new Pokeball(GameConstants.Pokeball.Greatball, 5, 1000, '+5% chance to catch'),
-            new Pokeball(GameConstants.Pokeball.Ultraball, 10, 750, '+10% chance to catch'),
-            new Pokeball(GameConstants.Pokeball.Masterball, 100, 500, '100% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Pokeball, () => 0, 1250, 'A standard Pokéball', undefined, 25),
+            new Pokeball(GameConstants.Pokeball.Greatball, () => 5, 1000, '+5% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Ultraball, () => 10, 750, '+10% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Masterball, () => 100, 500, '100% chance to catch'),
+            new Pokeball(GameConstants.Pokeball.Fastball, () => 0, 500, 'Reduced catch time', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            new Pokeball(GameConstants.Pokeball.Quickball, () => {
+                if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
+                    const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route()]?.() || 0;
+                    // between 15 (0 kills) → 0 (4012 kills)
+                    return Math.min(15, Math.max(0, Math.pow(16, 1 - Math.pow(kills - 10, 0.6) / 145) - 1));
+                }
+                return 0;
+            }, 1000, 'Increased catch rate on routes with less Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            new Pokeball(GameConstants.Pokeball.Timerball, () => {
+                if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
+                    const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route()]?.() || 0;
+                    // between 0 (0 kills) → 15 (9920 kills)
+                    return Math.min(15, Math.max(0, Math.pow(16, Math.pow(kills, 0.6) / 250) - 1));
+                }
+                return 0;
+            }, 1000, 'Increased catch rate on routes with more Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            new Pokeball(GameConstants.Pokeball.Duskball, () => {
+                const now = new Date();
+                // If player in a dungeon or it's night time
+                if (App.game.gameState == GameConstants.GameState.dungeon || now.getHours() >= 18 || now.getHours() < 6) {
+                    return 15;
+                }
+                return 0;
+            }, 1000, 'Increased catch rate at night time or in dungeons', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
+            // TODO: this needs some sort of bonus, possibly extra dungeon tokens
+            new Pokeball(GameConstants.Pokeball.Luxuryball, () => 0, 1250, 'A Luxury Pokéball', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),
         ];
         this._alreadyCaughtSelection = ko.observable(this.defaults.alreadyCaughtSelection);
         this._alreadyCaughtShinySelection = ko.observable(this.defaults.alreadyCaughtShinySelection);
@@ -70,14 +96,21 @@ class Pokeballs implements Feature {
 
         let use: GameConstants.Pokeball = GameConstants.Pokeball.None;
 
-        // Check which Pokeballs we have in stock that are of equal or lesser than selection
-        for (let i: number = pref; i >= 0; i--) {
-            if (this.pokeballs[i].quantity() > 0) {
-                use = i;
-                break;
+        if (this.pokeballs[pref]?.quantity()) {
+            return pref;
+        } else if (pref <= GameConstants.Pokeball.Masterball) {
+            // Check which Pokeballs we have in stock that are of equal or lesser than selection (upto Masterball)
+            for (let i: number = pref; i >= 0; i--) {
+                if (this.pokeballs[i].quantity() > 0) {
+                    use = i;
+                    break;
+                }
             }
+            return use;
+        } else {
+            // Use a normal Pokeball or None if we don't have Pokeballs in stock
+            return this.pokeballs[GameConstants.Pokeball.Pokeball].quantity() ? GameConstants.Pokeball.Pokeball : GameConstants.Pokeball.None;
         }
-        return use;
     }
 
     calculateCatchTime(ball: GameConstants.Pokeball): number {
@@ -94,7 +127,7 @@ class Pokeballs implements Feature {
     }
 
     getCatchBonus(ball: GameConstants.Pokeball): number {
-        return this.pokeballs[ball].catchBonus;
+        return this.pokeballs[ball].catchBonus();
     }
 
     getBallQuantity(ball: GameConstants.Pokeball): number {
