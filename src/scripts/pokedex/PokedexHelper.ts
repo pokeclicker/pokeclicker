@@ -66,7 +66,7 @@ class PokedexHelper {
         const highestCaught = App.game.statistics.pokemonCaptured.highestID;
         const highestDex = Math.max(highestEncountered, highestDefeated, highestCaught);
 
-        return pokemonList.filter(function (pokemon) {
+        return pokemonList.filter((pokemon) => {
             // Checks based on caught/shiny status
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
             const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
@@ -184,8 +184,8 @@ class PokedexHelper {
     }
 }
 
-$(document).ready(function () {
-    $('#pokemonStatisticsModal').on('hidden.bs.modal', function () {
+$(document).ready(() => {
+    $('#pokemonStatisticsModal').on('hidden.bs.modal', () => {
         PokedexHelper.toggleStatisticShiny(true);
     });
 });

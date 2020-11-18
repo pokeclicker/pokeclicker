@@ -90,11 +90,11 @@ class BattleFrontierRunner {
         this.end();
     }
 
-    public static timeLeftSeconds = ko.pureComputed(function () {
+    public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(BattleFrontierRunner.timeLeft() / 10) / 10).toFixed(1);
     })
 
-    public static pokemonLeftImages = ko.pureComputed(function () {
+    public static pokemonLeftImages = ko.pureComputed(() => {
         let str = '';
         for (let i = 0; i < 3; i++) {
             str += `<img class="pokeball-smallest" src="assets/images/pokeball/Pokeball.svg"${BattleFrontierBattle.pokemonIndex() > i ? ' style="filter: saturate(0);"' : ''}>`;

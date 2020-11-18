@@ -36,7 +36,7 @@ class DungeonRunner {
         DungeonRunner.pokemonDefeated = 0;
         DungeonRunner.chestsOpened = 0;
         DungeonRunner.loot = [];
-        DungeonRunner.currentTileType = ko.pureComputed(function () {
+        DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
         DungeonRunner.fightingBoss(false);
@@ -122,7 +122,7 @@ class DungeonRunner {
         }
     }
 
-    public static timeLeftSeconds = ko.pureComputed(function () {
+    public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
     })
 

@@ -111,7 +111,7 @@ class SafariBattle {
             if (random * 100 < SafariBattle.enemy.catchFactor) {
                 SafariBattle.capturePokemon();
                 $('#safariBall').css('filter', 'brightness(0.4) grayscale(100%)');
-                setTimeout(function () {
+                setTimeout(() => {
                     SafariBattle.particle.remove();
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.endBattle();
                 }, 1.7 * SafariBattle.Speed.enemyTransition);
@@ -120,7 +120,7 @@ class SafariBattle {
                 $('#safariBattleModal .enemy').removeClass('safariCapture');
                 SafariBattle.text(SafariBattle.CATCH_MESSAGES[index]);
                 SafariBattle.particle.remove();
-                setTimeout(function () {
+                setTimeout(() => {
                     isgameOver ? SafariBattle.gameOver() : SafariBattle.enemyTurn();
                 }, 1 * SafariBattle.Speed.enemyTransition);
             }
@@ -132,7 +132,7 @@ class SafariBattle {
             n--;
         }
         $('#safariBall').addClass('safari-roll-left');
-        setTimeout(function () {
+        setTimeout(() => {
             SafariBattle.safariRoll(n - 1);
         }, 1200);
     }
@@ -140,7 +140,7 @@ class SafariBattle {
     private static safariRoll = function (n) {
         if (n != 0) {
             $('#safariBall').toggleClass('safari-roll-left').toggleClass('safari-roll-right');
-            setTimeout(function () {
+            setTimeout(() => {
                 SafariBattle.safariRoll(n - 1);
             }, 1200);
         }
@@ -175,13 +175,13 @@ class SafariBattle {
             enemy.left += 40;
             enemy.top += 10;
             SafariBattle.dropParticle('<img src="assets/images/safari/rock.png">', $('#safariBattleModal .pageItemFooter').offset(), enemy, 800, 'cubic-bezier(0,0,0.4,1)').css('z-index', 9999);
-            setTimeout(function () {
+            setTimeout(() => {
                 const hitSplash = $('<ptcl>').html('<img src="assets/images/safari/hit.png">').children().appendTo('#safariBattleModal');
                 hitSplash.offset(enemy).css({'opacity': 0.8, 'z-index': 9998});
-                hitSplash.fadeOut(400, function () {
+                hitSplash.fadeOut(400, () => {
                     hitSplash.remove();
                 });
-                setTimeout(function () {
+                setTimeout(() => {
                     const newOffset = {
                         top: enemy.top + 4,
                         left: enemy.left - 20,
@@ -190,11 +190,11 @@ class SafariBattle {
                     ang.css('position', 'absolute').css('z-index', 9999);
                     ang.offset(newOffset);
                     ang.addClass('pulse');
-                    setTimeout(function () {
+                    setTimeout(() => {
                         newOffset.top -= 10;
                         newOffset.left += 60;
                         ang.offset(newOffset);
-                        setTimeout(function () {
+                        setTimeout(() => {
                             ang.remove();
                         }, 350);
                     }, 350);
@@ -227,7 +227,7 @@ class SafariBattle {
         }
         SafariBattle.enemy.eating = Math.max(0, SafariBattle.enemy.eating - 1);
         SafariBattle.enemy.angry = Math.max(0, SafariBattle.enemy.angry - 1);
-        setTimeout(function () {
+        setTimeout(() => {
             SafariBattle.text('What will you do?');
             SafariBattle.busy = false;
             SafariBattle.unlockButtons();
@@ -253,7 +253,7 @@ class SafariBattle {
 
     private static gameOver() {
         SafariBattle.text(GameConstants.SAFARI_OUT_OF_BALLS);
-        setTimeout(function () {
+        setTimeout(() => {
             Safari.inBattle(false);
             Safari.inProgress(false);
             SafariBattle.busy = false;
@@ -272,10 +272,10 @@ class SafariBattle {
         p[0].style.transition = `left ${time}ms linear, top ${time}ms ${top}`;
         p.offset(target);
         if (!persistentParticle) {
-            setTimeout(function () {
+            setTimeout(() => {
                 p.fadeOut();
             }, time - 200);
-            setTimeout(function () {
+            setTimeout(() => {
                 p.remove();
             }, time);
         }

@@ -45,5 +45,6 @@ module.exports = {
         'arrow-spacing': ['error'],
         'semi-spacing': 'error',
         'quotes': ['error', 'single'],
+        'prefer-arrow-callback': 'error',
     },
 };
