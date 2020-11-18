@@ -138,6 +138,13 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
     ],
     'queue'
 ));
+Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
+    [
+        new SettingOption('To Next Stage', 'nextStage'),
+        new SettingOption('Ripe/Death', 'ripeDeath'),
+    ],
+    'nextStage'
+));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
