@@ -99,7 +99,7 @@ class Underground implements Feature {
     public static showMine() {
         let html = '';
         for (let i = 0; i < Mine.grid.length; i++) {
-            html += "<div class='row'>";
+            html += '<div class="row">';
             for (let j = 0; j < Mine.grid[0].length; j++) {
                 html += Underground.mineSquare(Mine.grid[i][j](), i, j);
             }

@@ -44,5 +44,6 @@ module.exports = {
         'space-infix-ops': ['error'],
         'arrow-spacing': ['error'],
         'semi-spacing': 'error',
+        'quotes': ['error', 'single'],
     },
 };

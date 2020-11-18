@@ -166,7 +166,7 @@ class Safari {
         let html = '';
 
         for (let i = 0; i < Safari.grid.length; i++) {
-            html += "<div class='row flex-nowrap'>";
+            html += '<div class="row flex-nowrap">';
             for (let j = 0; j < Safari.grid[0].length; j++) {
                 html += Safari.square(i, j);
             }
@@ -192,7 +192,7 @@ class Safari {
             top: 32 * j + topLeft.top,
             left: 32 * i + topLeft.left,
         };
-        $('#safariBody').append("<div id='sprite'></div>");
+        $('#safariBody').append('<div id="sprite"></div>');
         $('#sprite').css('background',  `url('assets/images/safari/walk${Safari.lastDirection}.png')`);
         $('#sprite').css('position', 'absolute');
         $('#sprite').offset( offset );
