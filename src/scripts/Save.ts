@@ -102,7 +102,7 @@ class Save {
     public static initializeItemlist(): { [name: string]: KnockoutObservable<number> } {
         const res = {};
         for (const obj in ItemList) {
-            res[obj] = ko.observable(0);
+            res[obj] = ko.observable(0).extend({ numeric: 0 });
         }
         return res;
     }
