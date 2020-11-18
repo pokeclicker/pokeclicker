@@ -290,22 +290,22 @@ export function formatSecondsToTime(input: number): string {
         time %= WEEK;
     }
     if (time >= DAY) {
-        const days = Math.ceil(time / DAY);
+        const days = Math.floor(time / DAY);
         times.push(`${days} day${days === 1 ? '' : 's'}`);
         time %= DAY;
     }
     if (time >= HOUR) {
-        const hours = Math.ceil(time / HOUR);
+        const hours = Math.floor(time / HOUR);
         times.push(`${hours} hour${hours === 1 ? '' : 's'}`);
         time %= HOUR;
     }
     if (time >= MINUTE) {
-        const minutes = Math.ceil(time / MINUTE);
+        const minutes = Math.floor(time / MINUTE);
         times.push(`${minutes} min${minutes === 1 ? '' : 's'}`);
         time %= MINUTE;
     }
     if (time >= SECOND) {
-        const seconds = Math.ceil(time / SECOND);
+        const seconds = Math.floor(time / SECOND);
         times.push(`${seconds} sec${seconds === 1 ? '' : 's'}`);
     }
     return times.join('</br>');
