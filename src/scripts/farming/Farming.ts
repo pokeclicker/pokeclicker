@@ -412,6 +412,10 @@ class Farming implements Feature {
 
         //#region Mutations
 
+        /**
+         * NOTE: ONLY ADD NEW MUTATIONS AT THE END OF THE LIST. MUTATION INDEX IS USED TO STORE HINT SEEN DATA
+         */
+
         //#region Second Generation
 
         // Persim
@@ -712,7 +716,11 @@ class Farming implements Feature {
             hint: 'I\'ve heard that a special Berry can appear after being surrounded by Shuca and Charti Berries!',
         }));
         // Chilan
-        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Chilan, BerryType.Chople, []));
+        berryReqs = {};
+        berryReqs[BerryType.Chople] = 3;
+        this.mutations.push(new EvolveNearBerryMinMutation(.0001, BerryType.Chilan, BerryType.Chople, berryReqs, {
+            hint: 'I\'ve heard that Chople Berries will turn into a different Berry if surrounded by more than two of its own kind',
+        }));
         // Roseli
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Roseli,
             [

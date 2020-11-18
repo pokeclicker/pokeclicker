@@ -17,6 +17,7 @@ class Plot implements Saveable {
 
     _auras: KnockoutObservable<number>[];
 
+    formattedStageTimeLeft: KnockoutComputed<string>;
     formattedTimeLeft: KnockoutComputed<string>;
     formattedMulchTimeLeft: KnockoutComputed<string>;
     formattedAuras: KnockoutComputed<string>;
@@ -45,12 +46,26 @@ class Plot implements Saveable {
         this._auras[AuraType.Mutation] = ko.observable(1);
         this._auras[AuraType.Replant] = ko.observable(1);
 
-        this.formattedTimeLeft = ko.pureComputed(() => {
+        this.formattedStageTimeLeft = ko.pureComputed(() => {
             if (this.berry === BerryType.None) {
                 return '';
             }
             const growthTime = this.berryData.growthTime.find(t => this.age < t);
             const timeLeft = Math.ceil(growthTime - this.age);
+            const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+            return GameConstants.formatTime(timeLeft / growthMultiplier);
+        });
+
+        this.formattedTimeLeft = ko.pureComputed(() => {
+            if (this.berry === BerryType.None) {
+                return '';
+            }
+            let timeLeft = 0;
+            if (this.age < this.berryData.growthTime[3]) {
+                timeLeft = Math.ceil(this.berryData.growthTime[3] - this.age);
+            } else {
+                timeLeft = Math.ceil(this.berryData.growthTime[4] - this.age);
+            }
             const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
             return GameConstants.formatTime(timeLeft / growthMultiplier);
         });
@@ -113,24 +128,42 @@ class Plot implements Saveable {
 
                 tooltip.push(`<u>${BerryType[this.berry]}</u>`);
 
-                const formattedTime = this.formattedTimeLeft();
-                switch (this.stage()) {
-                    case PlotStage.Seed:
-                        tooltip.push(`${formattedTime} until sprout`);
-                        break;
-                    case PlotStage.Sprout:
-                        tooltip.push(`${formattedTime} until grown`);
-                        break;
-                    case PlotStage.Taller:
-                        tooltip.push(`${formattedTime} until bloom`);
-                        break;
-                    case PlotStage.Bloom:
-                        tooltip.push(`${formattedTime} until ripe`);
-                        break;
-                    case PlotStage.Berry:
-                        tooltip.push(`${formattedTime} until death`);
-                        break;
+                const timeType = Settings.getSetting('farmDisplay').observableValue();
+                if (timeType === 'nextStage') {
+                    const formattedTime = this.formattedStageTimeLeft();
+                    switch (this.stage()) {
+                        case PlotStage.Seed:
+                            tooltip.push(`${formattedTime} until sprout`);
+                            break;
+                        case PlotStage.Sprout:
+                            tooltip.push(`${formattedTime} until grown`);
+                            break;
+                        case PlotStage.Taller:
+                            tooltip.push(`${formattedTime} until bloom`);
+                            break;
+                        case PlotStage.Bloom:
+                            tooltip.push(`${formattedTime} until ripe`);
+                            break;
+                        case PlotStage.Berry:
+                            tooltip.push(`${formattedTime} until death`);
+                            break;
+                    }
+                } else {
+                    const formattedTime = this.formattedTimeLeft();
+                    switch (this.stage()) {
+                        case PlotStage.Seed:
+                        case PlotStage.Sprout:
+                        case PlotStage.Taller:
+                        case PlotStage.Bloom:
+                            tooltip.push(`${formattedTime} until ripe`);
+                            break;
+                        case PlotStage.Berry:
+                            tooltip.push(`${formattedTime} until death`);
+                            break;
+                    }
                 }
+
+
             }
 
             if (this.stage() >= PlotStage.Taller && this.berryData.aura) {
