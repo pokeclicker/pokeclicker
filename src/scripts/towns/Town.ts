@@ -1894,6 +1894,12 @@ const HulburyShop = new Shop([
 const MotostokeShop = new Shop([
     ItemList['Fire_egg'],
     ItemList['Strawberry_sweet'],
+    ItemList['Berry_sweet'],
+    ItemList['Love_sweet'],
+    ItemList['Star_sweet'],
+    ItemList['Clover_sweet'],
+    ItemList['Flower_sweet'],
+    ItemList['Ribbon_sweet'],
 ]);
 const HammerlockeShop = new Shop([
     ItemList['Dragon_egg'],
