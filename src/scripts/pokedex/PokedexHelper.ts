@@ -1,7 +1,7 @@
 import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
-    public static toggleStatisticShiny = ko.observable(true);
+    public static toggleStatisticShiny = ko.observable(false);
     public static toggleAllShiny = ko.observable(false);
 
     public static getBackgroundColors(name: PokemonNameType): string {
