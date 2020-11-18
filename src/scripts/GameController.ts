@@ -119,7 +119,7 @@ class GameController {
         const activeEl = document.activeElement as HTMLElement;
         const localName: string = activeEl.localName.toLowerCase();
         const editables = ['textarea', 'input', 'select'];
-    
+
         return (editables.includes(localName) || activeEl.isContentEditable);
     }
 

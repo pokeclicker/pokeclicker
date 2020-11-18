@@ -21,7 +21,7 @@ class Notifier {
             if (sound) {
                 sound.play();
             }
-            
+
             // Check if this type of notification is disabled
             if (setting && !Settings.getSetting(setting.name).value) {
                 return;

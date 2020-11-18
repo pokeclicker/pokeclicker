@@ -601,14 +601,14 @@ dungeonList['Pledge Grove'] = new Dungeon('Pledge Grove',
     2203000,
     [new DungeonBossPokemon('Keldeo (Resolute)', 8000000, 70)],
     96500, 201, 35);
-    
+
 dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     ['Psyduck', 'Mareep', 'Azurill', 'Patrat', 'Lillipup', 'Pidove'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [new DungeonBossPokemon('Riolu', 8000000, 70)],
     96500, 201, 35);
-    
+
 dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
     ['Vulpix', 'Sunflora', 'Abra', 'Wingull', 'Pidove', 'Sentret'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -619,7 +619,7 @@ dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
         new DungeonBossPokemon('Alakazam', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
     ['Rattata', 'Zubat', 'Grimer', 'Trubbish'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -868,7 +868,7 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
         new DungeonBossPokemon('Carbink', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 //Tower of Mastery?
 
 dungeonList['Azure bay'] = new Dungeon('Azure bay',
@@ -954,5 +954,5 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
         new DungeonBossPokemon('Noibat', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 //Unknown Dungeon? Contains Mewtwo.
