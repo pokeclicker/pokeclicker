@@ -76,6 +76,18 @@ class BerryDeal {
                 [
                     this.randomBerry(firstGen),
                     this.randomBerry(secondGen),
+                ],
+                [
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
+                ],
+                ItemList.Duskball,
+                1
+            ),
+            new BerryDeal(
+                [
+                    this.randomBerry(firstGen),
+                    this.randomBerry(secondGen),
                     this.randomBerry(thirdGen),
                 ],
                 [

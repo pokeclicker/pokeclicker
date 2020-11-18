@@ -211,6 +211,7 @@ export enum Pokeball {
     'Fastball',
     'Quickball',
     'Timerball',
+    'Duskball',
     'Luxuryball',
 }
 
