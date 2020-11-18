@@ -22,3 +22,8 @@ ItemList['Pokeball']   = new PokeballItem(GameConstants.Pokeball.Pokeball, 100, 
 ItemList['Greatball']  = new PokeballItem(GameConstants.Pokeball.Greatball, 500);
 ItemList['Ultraball']  = new PokeballItem(GameConstants.Pokeball.Ultraball, 2000);
 ItemList['Masterball'] = new PokeballItem(GameConstants.Pokeball.Masterball, 2500, GameConstants.Currency.questPoint);
+// Not sold in shops
+ItemList['Fastball'] = new PokeballItem(GameConstants.Pokeball.Fastball, Infinity, GameConstants.Currency.farmPoint);
+ItemList['Quickball'] = new PokeballItem(GameConstants.Pokeball.Quickball, Infinity, GameConstants.Currency.farmPoint);
+ItemList['Timerball'] = new PokeballItem(GameConstants.Pokeball.Timerball, Infinity, GameConstants.Currency.farmPoint);
+ItemList['Luxuryball'] = new PokeballItem(GameConstants.Pokeball.Luxuryball, Infinity, GameConstants.Currency.farmPoint);
