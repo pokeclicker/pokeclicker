@@ -1,8 +1,8 @@
 import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
-    public static toggleStatisticShiny = ko.observable(false);
-    public static toggleAllShiny = ko.observable(false);
+    public static toggleStatisticShiny = ko.observable(true);
+    public static toggleAllShiny = ko.observable(true);
 
     public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
@@ -163,7 +163,7 @@ class PokedexHelper {
 
     private static getImage(id: number, name: string) {
         let src = 'assets/images/';
-        if (App.game.party.alreadyCaughtPokemon(id, true) && !this.toggleAllShiny()) {
+        if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleAllShiny()) {
             src += 'shiny';
         }
         src += `pokemon/${id}.png`;
