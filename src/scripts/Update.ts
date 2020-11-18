@@ -276,6 +276,9 @@ class Update implements Saveable {
         },
 
         '0.6.5': ({ playerData, saveData }) => {
+            // check if playeData have Protein
+            playerData._itemList.Protein ? null : playerData._itemList['Protein'] = ko.observable(0);
+
             // nerf amount of proteins used per Pokemon
             const maxProteins = (playerData.highestRegion + 1) * 5;
             let proteinsToRefund = 0;
