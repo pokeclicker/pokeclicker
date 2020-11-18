@@ -42,8 +42,8 @@ class BerryDeal {
                     this.randomBerry(secondGen),
                 ],
                 [
-                    SeededRand.intBetween(30, 70),
-                    SeededRand.intBetween(10, 30),
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
                 ],
                 ItemList.Fastball,
                 1
@@ -54,8 +54,8 @@ class BerryDeal {
                     this.randomBerry(secondGen),
                 ],
                 [
-                    SeededRand.intBetween(30, 70),
-                    SeededRand.intBetween(10, 30),
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
                 ],
                 ItemList.Quickball,
                 1
@@ -66,8 +66,8 @@ class BerryDeal {
                     this.randomBerry(secondGen),
                 ],
                 [
-                    SeededRand.intBetween(30, 70),
-                    SeededRand.intBetween(10, 30),
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
                 ],
                 ItemList.Timerball,
                 1
@@ -79,9 +79,9 @@ class BerryDeal {
                     this.randomBerry(thirdGen),
                 ],
                 [
-                    SeededRand.intBetween(60, 100),
-                    SeededRand.intBetween(30, 60),
-                    SeededRand.intBetween(10, 30),
+                    SeededRand.intBetween(20, 40),
+                    SeededRand.intBetween(5, 15),
+                    SeededRand.intBetween(5, 10),
                 ],
                 ItemList.Luxuryball,
                 1
