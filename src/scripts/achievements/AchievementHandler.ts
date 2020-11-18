@@ -48,10 +48,10 @@ class AchievementHandler {
             (this.filter.type()   == 'all' || a.property.constructor.name == this.filter.type()) &&
             (this.filter.region() == 'all' || a.region == +this.filter.region())
         )));
+        this.calculateNumberOfTabs();
         if (!retainPage) {
             this.resetPages();
         } else if (this.getAchievementListWithIndex().length === 0 && this.navigateIndex() > 0) {
-            this.calculateNumberOfTabs();
             this.navigateIndex(this.numberOfTabs()  - 1);
         }
     }
