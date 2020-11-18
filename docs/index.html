@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.6.4"></script>
+    <script src="scripts/modules.min.js?v=0.6.5"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.6.4"></script>
+    <script src="scripts/script.min.js?v=0.6.5"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.6.4" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.6.5" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -234,14 +234,16 @@
 
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#items">Evolution Stones</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#evoStones">Evolution Stones</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#itemBag">Item Bag</a></li>
                     <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#keyItems">Key Items</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div id="items" class="tab-pane active p-3">
+                    <div id="evoStones" class="tab-pane active p-3">
                         <h3 data-bind="text: ItemList[ItemHandler.stoneSelected()].displayName"></h3>
+
                         <div class="row justify-content-sm-center">
-                            <div class="row col-lg-6 col-sm-10" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
+                            <div class="row col-10" data-bind="foreach: Object.keys(GameConstants.StoneType).filter(stone => isNaN(stone) && stone !== 'None')">
                                 <div class="col-2" style="cursor: pointer"
                                         data-bind="css:{'item-selected': ItemHandler.stoneSelected() === $data},
                                             click: function(){ ItemHandler.stoneSelected($data); ItemHandler.pokemonSelected('')}">
@@ -251,6 +253,7 @@
                             </div>
                         </div>
 
+                        <hr/>
 
                         <div class="row justify-content-sm-center" >
                             <div class="row col-lg-10 col-md-12 offset-md-0 col-sm-12 offset-sm-0"
@@ -269,6 +272,7 @@
                             </div>
                         </div>
 
+                        <hr/>
 
                         <div class="row justify-content-center"
                              data-bind="template: { name:'multiOptionTemplate',
@@ -281,6 +285,14 @@
                         <div class="row no-gutters justify-content-sm-center">
                             <div class="row justify-content-center" style="padding:15px;">
                                 <button data-bind="click: function(){ItemHandler.useStones()}" class="btn btn-lg btn-success">Use evolution stones!</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="itemBag" class="tab-pane p-3">
+                        <div class="row justify-content-sm-center">
+                            <div class="row col-10">
+                                <div class="btn btn-primary col-2" data-bind="template: { name: 'otherItemTemplate', data: 'Protein'}, click: () => $('#pokemonSelectorModal').modal('show')"></div>
                             </div>
                         </div>
                     </div>
@@ -330,9 +342,20 @@
             </div>
         </div>
     </div>
-
 </div>
 
+<script type="text/html" id="otherItemTemplate">
+    <div data-container="body" data-bind="tooltip: {
+        title: ItemList[$data] ? `<u>${ItemList[$data].displayName}</u><br/>${ItemList[$data].description || ''}` : '',
+        trigger: 'hover',
+        placement:'top',
+        html: true,
+        boundary: document.getElementById('showItemsModal'),
+    }">
+        <img data-bind="attr: {src: 'assets/images/items/' + ItemList[$data].name() + '.png'}" style="max-width: 32px;">
+        <div data-bind="text: player._itemList[$data]()"></div>
+    </div>
+</script>
 
 <!--Templates -->
 <script type="text/html" id="currencyTemplate">
@@ -765,7 +788,7 @@
                                          src=""/>
                                     <br>
                                     Catch Chance:
-                                    <knockout data-bind="text: Battle.catchRateActual() + '%'">Catch Rate</knockout>
+                                    <knockout data-bind="text: Math.floor(Battle.catchRateActual()) + '%'">Catch Rate</knockout>
                                 </div>
                             </div>
                             <div class="progress hitpoints" style="height: 20px;">
@@ -844,7 +867,7 @@
                                              src=""/>
                                         <br>
                                         Catch Chance:
-                                        <knockout data-bind="text: DungeonBattle.catchRateActual() + '%'">Catch Rate</knockout>
+                                        <knockout data-bind="text: Math.floor(DungeonBattle.catchRateActual()) + '%'">Catch Rate</knockout>
                                     </div>
                                 </div>
                                 <div class="progress hitpoints" style="height: 20px;">
@@ -7160,7 +7183,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            
+
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
@@ -7186,6 +7209,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
                             </tbody>
                         </table>
                     </div>
@@ -7197,7 +7221,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                               <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
 
                     <div class="tab-pane" id="settings-notifications">
                         <table class="table table-striped table-hover m-0">
@@ -7205,7 +7229,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
 
                     <div class="tab-pane" id="settings-other">
                         <table class="table table-striped table-hover m-0">
@@ -7213,7 +7237,7 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
                 </div>
             </div>
 
@@ -7720,11 +7744,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
                                     </div>
                                 </div>
-                                <div class="sidebar">
-                                    <a class="useProtein" href="#useProtein" data-bind="class: ItemHandler.hasItem('Protein') && $data.canUseProtein() ? '' : 'disabled', click: function() { $data.useProtein(); }">
-                                        <img class="p-0" src="assets/images/items/Protein.png" width="100%" height="100%"/>
-                                    </a>
-                                </div>
                             </li>
                         </ul>
                         <!-- /ko -->
@@ -8097,6 +8116,13 @@ aria-labelledby="pokedexModalLabel">
                                       value="false" onclick="PokedexHelper.updateList()"> Rare Hold Item
                            </label>
                        </div>
+                       <!--Hide shiny images-->
+                       <div class="col-sm-2">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
+                                   value="false" checked onclick="PokedexHelper.toggleAllShiny(!PokedexHelper.toggleAllShiny())"> Hide shiny image
+                        </label>
+                    </div>
 
                    </div>
 
@@ -8139,13 +8165,16 @@ aria-labelledby="pokedexModalLabel">
         <div class="modal-content" data-bind="with: App.game.statistics.selectedPokemonID()">
             <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
                 <h5 class="modal-title text-muted" data-bind="text: `#${pokemonMap[$data].id <= 0 ? '???' : Math.floor(pokemonMap[$data].id).toString().padStart(3,0)}&nbsp;&nbsp;`"></h5>
-                <h5 class="modal-title text-light" data-bind="text: pokemonMap[$data].name">Pokémon Statistics</h5>
+                <h5 class="modal-title text-light" data-bind="text: pokemonMap[$data].name">Pokémon Statistics</h5>&nbsp;
+                <h5 class="modal-title text-light">
+                    <img width="18px" src="" data-bind="attr: { src: `assets/images/pokeball/Pokeball${App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true) && PokedexHelper.toggleStatisticShiny() ? '-shiny' : ''}.svg`}, click: () => PokedexHelper.toggleStatisticShiny(!PokedexHelper.toggleStatisticShiny())"/>
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body p-0">
-                <img data-bind="attr:{ src: 'assets/images/' + (App.game.party.alreadyCaughtPokemon($data, true) ? 'shiny' : '') + 'pokemon/' + $data + '.png' }" src=""/>
+                <img data-bind="attr:{ src: PokedexHelper.getImageStatistics(pokemonMap[$data].id) }" src=""/>
                 <table class="table table-striped table-hover table-bordered table-sm m-0">
                   <thead>
                     <tr class="text-light">
@@ -8232,6 +8261,56 @@ aria-labelledby="pokedexModalLabel">
                     <tr>
                       <td class="text-left">Shinies Hatched</td>
                       <td class="text-left tight"><code data-bind="text: App.game.statistics.shinyPokemonHatched[$data]().toLocaleString('en-US')">-</code></td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Pokemon Selector Modal-->
+<div class="modal noselect fade" id="pokemonSelectorModal" tabindex="-1" role="dialog" aria-labelledby="pokemonSelectorModal">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-light" style='justify-content: space-around;'>
+                <h5 class="modal-title text-light">Select a Pokémon</h5>&nbsp;
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body p-0">
+                <img src="assets/images/items/Protein.png" width="40%"/>
+                <br/>
+                <div class="sticky-top">
+                  <span class="btn btn-block btn-primary" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></span>
+                  <div class="input-group" data-bind="with: Settings.getSetting('partySort')">
+                      <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
+                          data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
+                          <option data-bind="text: $data.text, value: $data.value"></option>
+                      </select>
+                      <div class="input-group-append bg-primary text-light">
+                          <label for="hatcheryPartySortDirection" class="clickable m-0 pl-2 pr-2" style="font-size: 22px;" data-bind="text: Settings.getSetting('partySortDirection').observableValue() ? '⥄' : '⥂'">⥂</label>
+                          <input id="hatcheryPartySortDirection" style="vertical-align: middle" class="hidden" type='checkbox'
+                              data-bind="checked: Settings.getSetting('partySortDirection').observableValue()"
+                              onchange="Settings.setSettingByName('partySortDirection', this.checked)"/>
+                      </div>
+                  </div>
+                </div>
+                <table class="table table-striped table-hover table-bordered table-sm m-0">
+                  <thead>
+                    <tr class="text-light">
+                      <th class="text-left bg-dark align-middle">Pokemon</th>
+                      <th class="text-center bg-dark align-middle">Proteins Used</th>
+                      <th class="text-center bg-dark align-middle">Attack Bonus</th>
+                    </tr>
+                  </thead>
+                  <tbody data-bind="foreach: App.game.party.caughtPokemon">
+                    <tr class="clickable" data-bind="click: () => $data.useProtein(), hidden: $data.breeding">
+                      <td class="text-left" data-bind="text: $data.name"></td>
+                      <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
+                      <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
                     </tr>
                   </tbody>
                 </table>
@@ -8623,13 +8702,13 @@ aria-labelledby="badgeCaseModalLabel">
                     <br/>Once fully grown, the Berry plant can be clicked to manually harvest the Berries and gain some Farm Points.</p>
 
                     <p>Otherwise after some time being fully grown, the Berry plant will wither away,
-                    dropping only a fraction of the Berries but may also be re-planted automatically.
+                    dropping half of the expected Berries but may also be re-planted automatically.
                     <br/><i>(Farm Points are only gained by manually harvesting Berries)</i><p>
 
                     <p>Additional plots can be unlocked by spending Berries.</p>
 
                     <h4><u>Mutations</u></h4>
-                    <p>Berries have the chance to mutate into other Berries based on certain conditions.
+                    <p>Berries have the chance to cause mutations and create new Berry species in empty plots based on certain conditions.
                     <br/><i>(the Berry Master in Kanto will give you daily hints to what these conditions may be)</i></p>
 
                     <h4><u>Mulches</u></h4>
@@ -8661,6 +8740,9 @@ aria-labelledby="badgeCaseModalLabel">
 
                     <h4><u>Trades</u></h4>
                     <p>Berries can be traded with Berry Masters in later regions for other useful items</p>
+
+                    <h4><u>Wandering Pokémon</u></h4>
+                    <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
                 </div>
             </div>
 
@@ -8702,8 +8784,8 @@ aria-labelledby="badgeCaseModalLabel">
                   </thead>
                   <tbody>
                     <tr>
-                      <td class="text-left">Growth Time</td>
-                      <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].growthTime[3].toLocaleString('en-US') + 's'">-</code></td>
+                      <td class="text-left">Total Growth Time</td>
+                      <td class="text-left tight"><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
                     </tr>
                     <tr>
                       <td class="text-left">Harvest Amount</td>
@@ -8717,16 +8799,39 @@ aria-labelledby="badgeCaseModalLabel">
                       <td class="text-left">Farm Tokens per Harvest</td>
                       <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].farmValue.toLocaleString('en-US')">-</code></td>
                     </tr>
-                  </tbody>
-                  <thead>
-                    <tr class="text-light">
-                      <th class="bg-dark" colspan="2">Flavor</th>
-                    </tr>
-                  </thead>
-                  <tbody>
                     <tr>
-                      <td colspan="2" style="padding: 0px;">
+                      <td class="p-0" colspan="2">
+                        <table class="table table-striped table-hover table-bordered table-sm m-0">
+                          <tr class="text-light">
+                            <th class="bg-dark" colspan="4">Growth Stages</th>
+                          </tr>
+                          <tr>
+                            <td>Sprout</td>
+                            <td>Taller</td>
+                            <td>Bloom</td>
+                            <td>Berry</td>
+                          </tr>
+                          <tr>
+                            <td><img src="assets/images/farm/AllTreeSprout.png"/></td>
+                            <td><img src="" data-bind="attr: { src: `assets/images/farm/${BerryType[$data]}Tree${PlotStage[PlotStage.Taller]}.png` }"/></td>
+                            <td><img src="" data-bind="attr: { src: `assets/images/farm/${BerryType[$data]}Tree${PlotStage[PlotStage.Bloom]}.png` }"/></td>
+                            <td><img src="" data-bind="attr: { src: `assets/images/farm/${BerryType[$data]}Tree${PlotStage[PlotStage.Berry]}.png` }"/></td>
+                          </tr>
+                          <tr>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[0].toLocaleString('en-US'))">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[1].toLocaleString('en-US'))">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[2].toLocaleString('en-US'))">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3].toLocaleString('en-US'))">-</code></td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="p-0" colspan="2">
                           <table style="width: 100%;">
+                              <tr class="text-light">
+                                <th class="bg-dark" colspan="5">Flavor</th>
+                              </tr>
                               <tr>
                                   <td>Spicy</td>
                                   <td>Dry</td>
@@ -9135,7 +9240,8 @@ aria-labelledby="badgeCaseModalLabel">
               <!-- ko foreach: App.game.pokeballs.pokeballs -->
               <tr class="clickable"
                 data-bind="template: { name: 'pokeballSelectionTemplate', data: $data},
-                  click: function(){App.game.pokeballs.selectedSelection()($data.type)}"></tr>
+                  click: function(){App.game.pokeballs.selectedSelection()($data.type)},
+                  visible: $data.unlocked()"></tr>
               <!-- /ko -->
             </tbody>
           </table>
