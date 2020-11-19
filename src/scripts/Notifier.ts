@@ -16,12 +16,12 @@ class Notifier {
         sound?: Sound,
         setting?: BooleanSetting,
     }) {
-        $(document).ready(function() {
+        $(document).ready(() => {
             // If we have sounds enabled for this, play it now
             if (sound) {
                 sound.play();
             }
-            
+
             // Check if this type of notification is disabled
             if (setting && !Settings.getSetting(setting.name).value) {
                 return;

@@ -230,6 +230,7 @@ class Quests implements Saveable {
             xp: this.xp(),
             refreshes: this.refreshes(),
             lastRefresh: this.lastRefresh,
+            lastRefreshLevel: this.lastRefreshLevel,
             freeRefresh: this.freeRefresh(),
             questList: this.questList(),
             questLines: this.questLines(),
@@ -246,9 +247,9 @@ class Quests implements Saveable {
         }
 
         this.xp(json.xp || this.defaults.xp);
+        this.refreshes(json.refreshes || this.defaults.refreshes);
         this.lastRefresh = json.lastRefresh ? new Date(json.lastRefresh) : new Date();
         this.lastRefreshLevel = json.lastRefreshLevel || this.level();
-        this.refreshes(json.refreshes || this.defaults.refreshes);
         if (this.lastRefresh.toDateString() != new Date().toDateString()) {
             this.freeRefresh(true);
         } else {

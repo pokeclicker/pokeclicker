@@ -47,9 +47,9 @@ class Battle {
      */
     public static clickAttack() {
         // TODO: figure out a better way of handling this
-        // Limit click attack speed, Only allow 1 attack per 20ms (50 per second)
+        // Limit click attack speed, Only allow 1 attack per 50ms (20 per second)
         const now = Date.now();
-        if (this.lastClickAttack > now - 20) {
+        if (this.lastClickAttack > now - 50) {
             return;
         }
         this.lastClickAttack = now;
@@ -110,7 +110,7 @@ class Battle {
         if (enemyPokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${enemyPokemon.name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a wild shiny ${enemyPokemon.name} on route ${player.route()}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id)) {
             App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${enemyPokemon.name} on route ${player.route()}.`);
         }

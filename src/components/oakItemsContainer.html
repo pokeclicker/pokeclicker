@@ -34,7 +34,7 @@
                       <span data-bind="text: $data.progressString" style="font-size: 15px;"></span>
                       <!-- /ko -->
                       <!-- ko if: $data.hasEnoughExp() && !$data.isMaxLevel() -->
-                      <span class="clickable" data-bind="html: 'Upgrade (' + $data.calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/money.svg height=18px/>)',
+                      <span class="clickable" data-bind="html: 'Upgrade (' + $data.calculateCost().amount.toLocaleString('en-US') + ' <img src=assets/images/currency/' + GameConstants.Currency[$data.calculateCost().currency] + '.svg height=18px/>)',
                         click: function(){ $data.buy(); }" style="font-size: 15px;">
                         Upgrade
                       </span>
@@ -58,5 +58,4 @@
         <!-- /ko -->
       </table>
     </div>
-
 </div>

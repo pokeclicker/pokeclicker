@@ -51,7 +51,7 @@ class GymRunner {
 
     public static resetGif() {
         $('#gymCountdown').show();
-        setTimeout(function () {
+        setTimeout(() => {
             $('#gymGo').attr('src', 'assets/gifs/go.gif');
         }, 0);
     }
@@ -92,14 +92,14 @@ class GymRunner {
         App.game.gameState = GameConstants.GameState.town;
     }
 
-    public static timeLeftSeconds = ko.pureComputed(function () {
+    public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(GymRunner.timeLeft() / 10) / 10).toFixed(1);
     })
 
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-    $('#receiveBadgeModal').on('hidden.bs.modal', function () {
+document.addEventListener('DOMContentLoaded', () => {
+    $('#receiveBadgeModal').on('hidden.bs.modal', () => {
         if (GymBattle.gym.badgeReward == BadgeEnums.Soul) {
             App.game.keyItems.gainKeyItem(KeyItems.KeyItem.Safari_ticket);
         }

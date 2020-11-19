@@ -46,6 +46,10 @@ class Settings {
         }
         return JSON.stringify(dict);
     }
+
+    static enumToSettingOptionArray(obj: any, filter = (v) => true) {
+        return GameHelper.enumStrings(obj).filter(filter).map(val => new SettingOption(GameConstants.camelCaseToString(val), `${obj[val]}`));
+    }
 }
 
 /*
@@ -121,6 +125,13 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
     ],
     'queue'
 ));
+Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
+    [
+        new SettingOption('To Next Stage', 'nextStage'),
+        new SettingOption('Ripe/Death', 'ripeDeath'),
+    ],
+    'nextStage'
+));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
@@ -140,6 +151,8 @@ Object.values(NotificationConstants.NotificationSetting).forEach(setting => {
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */
+
+// Party Sorting
 const sortsettings = Object.keys(SortOptionConfigs).map((opt) => (
     new SettingOption<number>(SortOptionConfigs[opt].text, parseInt(opt, 10))
 ));
@@ -148,6 +161,56 @@ Settings.add(new Setting<number>('partySort', 'Sort:',
     SortOptions.id
 ));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
+
+// Breeding Filters
+Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
+    [],
+    '-1'
+));
+Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter',
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.enumToSettingOptionArray(GameConstants.Region, r => r != 'none'),
+        new SettingOption('None', '-1'),
+    ],
+    '-2'
+));
+Settings.add(new Setting<string>('breedingTypeFilter1', 'breedingTypeFilter1',
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.enumToSettingOptionArray(PokemonType, t => t != 'None'),
+        new SettingOption('None', '-1'),
+    ],
+    '-2'
+));
+Settings.add(new Setting<string>('breedingTypeFilter2', 'breedingTypeFilter2',
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.enumToSettingOptionArray(PokemonType, t => t != 'None'),
+        new SettingOption('None', '-1'),
+    ],
+    '-2'
+));
+Settings.add(new Setting<string>('breedingShinyFilter', 'breedingShinyFilter',
+    [
+        new SettingOption('All', '-1'),
+        new SettingOption('Not Shiny', '0'),
+        new SettingOption('Shiny', '1'),
+    ],
+    '-1'
+));
+Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
+    [
+        new SettingOption('Attack', 'attack'),
+        new SettingOption('Attack Bonus', 'attackBonus'),
+        new SettingOption('Base Attack', 'baseAttack'),
+        new SettingOption('Egg Steps', 'eggSteps'),
+        new SettingOption('Times Hatched', 'timesHatched'),
+        new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
+        new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
+    ],
+    'attack'
+));
 
 /*
  * SUBSCRIBERS

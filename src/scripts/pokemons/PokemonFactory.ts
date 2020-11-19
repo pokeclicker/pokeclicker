@@ -16,8 +16,7 @@ class PokemonFactory {
         let name: PokemonNameType;
 
         if (PokemonFactory.roamingEncounter(route, region)) {
-            const possible = RoamingPokemonList.getRegionalRoamers(region);
-            name = possible[Math.floor(Math.random() * possible.length)].pokemon.name;
+            name = PokemonFactory.generateRoamingEncounter(route, region);
         } else {
             const availablePokemonList: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
             const rand: number = Math.floor(Math.random() * availablePokemonList.length);
@@ -154,16 +153,38 @@ class PokemonFactory {
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, money, shiny, GameConstants.DUNGEON_BOSS_SHARDS);
     }
+    private static generateRoamingEncounter(route: number, region: GameConstants.Region): PokemonNameType {
+        const possible = RoamingPokemonList.getRegionalRoamers(region);
+
+        // Double the chance of encountering a roaming Pokemon you have not yet caught
+        possible.forEach(r => {
+            if (!App.game.party.alreadyCaughtPokemonByName(r.pokemon.name)) {
+                possible.push(r);
+            }
+        });
+
+        return possible[Math.floor(Math.random() * possible.length)].pokemon.name;
+    }
 
     private static roamingEncounter(route: number, region: GameConstants.Region): boolean {
         // Map to the route numbers
         const routeNum = MapHelper.normalizeRoute(route, region);
         const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
+
+        // Check if the dice rolls in their favor
+        const encounter = PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, Math.max(...routes), Math.min(...routes), routeNum);
+        if (!encounter) {
+            return false;
+        }
+
+        // There is likely to be a roamer available, so we can check this last
         const roamingPokemon = RoamingPokemonList.getRegionalRoamers(region);
         if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
             return false;
         }
-        return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, Math.max(...routes), Math.min(...routes), routeNum);
+
+        // Roaming encounter
+        return true;
     }
 
     private static roamingChance(max, min, maxRoute, minRoute, curRoute) {

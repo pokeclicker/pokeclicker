@@ -10,9 +10,9 @@ class Berry {
     public wander: PokemonNameType[];
 
     private static baseWander: PokemonNameType[] = [
-        'Butterfree', 'Weedle', 'Tangela', 'Scyther',
-        'Ledyba', 'Pineco', 'Heracross',
-        'Wurmple', 'Volbeat', 'Illumise',
+        'Tangela', 'Scyther',
+        'Pineco', 'Heracross',
+        'Volbeat', 'Illumise',
         'Burmy (plant)', 'Combee', 'Cherubi', 'Munchlax',
     ];
 
@@ -30,7 +30,7 @@ class Berry {
         wander?: PokemonNameType[]
     ) {
         this.flavors = [];
-        for (let i = 0;i < 5;i++) {
+        for (let i = 0; i < 5; i++) {
             this.flavors.push({type: i, value: flavors[i]});
         }
         this.wander = wander ? Berry.baseWander.concat(wander) : Berry.baseWander;

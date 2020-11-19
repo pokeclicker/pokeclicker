@@ -3,8 +3,8 @@ class BuyOakItem extends Item {
 
     item: OakItems.OakItem;
 
-    constructor(item: OakItems.OakItem, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint, options = {}) {
-        super(OakItems.OakItem[item], basePrice, currency, { maxAmount: 1, ...options });
+    constructor(item: OakItems.OakItem, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.questPoint) {
+        super(OakItems.OakItem[item], basePrice, currency, { maxAmount: 1 }, undefined, 'Purchase to unlock this Oak Item');
         this.item = item;
     }
 
@@ -16,14 +16,19 @@ class BuyOakItem extends Item {
     }
 
     gain(amt: number) {
-        App.game.oakItems.purchaseList[this.item](true);
+        const oakItem = App.game.oakItems.itemList[this.item];
+        if (oakItem instanceof BoughtOakItem) {
+            oakItem.purchased = true;
+        }
     }
 
     use() {
     }
 
     isAvailable(): boolean {
-        return super.isAvailable() && !App.game.oakItems.purchaseList[this.item]();
+        const oakItem = App.game.oakItems.itemList[this.item];
+        const purchased = (oakItem instanceof BoughtOakItem) ? oakItem.purchased : true;
+        return super.isAvailable() && !purchased;
     }
 }
 

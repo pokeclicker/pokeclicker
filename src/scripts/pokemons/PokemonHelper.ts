@@ -96,7 +96,7 @@ class PokemonHelper {
             return pokemon.nativeRegion;
         }
         const id = pokemon.id;
-        const region = GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= id);
+        const region = GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(id));
         return region >= 0 ? region : GameConstants.Region.none;
     }
 
@@ -234,7 +234,7 @@ class PokemonHelper {
         const evolutionPokemon = pokemonList.find((p: PokemonListData) => p.evolutions?.find(e => e.type.includes(EvolutionType.Stone) && e.getEvolvedPokemon() == pokemonName));
         return (evolutionPokemon as PokemonListData)?.evolutions?.find(e => e.getEvolvedPokemon() == pokemonName);
     }
-    
+
     public static getPokemonLocations = (pokemonName: PokemonNameType) => {
         const encounterTypes = {};
         // Routes
