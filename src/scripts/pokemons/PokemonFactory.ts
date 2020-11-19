@@ -182,6 +182,9 @@ class PokemonFactory {
         if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
             return false;
         }
+
+        // Roaming encounter
+        return true;
     }
 
     private static roamingChance(max, min, maxRoute, minRoute, curRoute) {
