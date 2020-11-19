@@ -1000,7 +1000,7 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
         new DungeonBossPokemon('Drednaw', 8000000, 70),
     ],
     96500, 201, 35);
- 
+
 dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
     ['Cufant', 'Bronzong', 'Klang', 'Mawile', 'Steelix', 'Stunfisk (Galar)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
