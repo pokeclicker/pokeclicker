@@ -32,7 +32,7 @@ class Pokeballs implements Feature {
                 if (App.game.gameState == GameConstants.GameState.fighting && player.route()) {
                     const kills = App.game.statistics.routeKills[GameConstants.Region[player.region]]?.[player.route()]?.() || 0;
                     // between 15 (0 kills) → 0 (4012 kills)
-                    return Math.min(15, Math.max(0, Math.pow(16, 1 - Math.pow(kills - 10, 0.6) / 145) - 1));
+                    return Math.min(15, Math.max(0, Math.pow(16, 1 - Math.pow(Math.max(0, kills - 10), 0.6) / 145) - 1));
                 }
                 return 0;
             }, 1000, 'Increased catch rate on routes with less Pokémon defeated', new RouteKillRequirement(10, GameConstants.Region.johto, 34)),

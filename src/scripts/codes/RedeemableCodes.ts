@@ -9,7 +9,7 @@ class RedeemableCodes implements Saveable {
 
     constructor() {
         this.codeList = [
-            new RedeemableCode('farming-quick-start', -83143881, false, function () {
+            new RedeemableCode('farming-quick-start', -83143881, false, () => {
                 // Give the player 10k farming points, 100 Cheri berries
                 App.game.wallet.gainFarmPoints(10000);
                 App.game.farming.gainBerry(BerryType.Cheri, 100);
@@ -21,7 +21,7 @@ class RedeemableCodes implements Saveable {
                     timeout: 1e4,
                 });
             }),
-            new RedeemableCode('shiny-charmer', -318017456, false, function () {
+            new RedeemableCode('shiny-charmer', -318017456, false, () => {
                 // Select a random Pokemon to give the player as a shiny
                 const pokemon = pokemonMap.random(GameConstants.TotalPokemonsPerRegion[player.highestRegion()]);
                 App.game.party.gainPokemonById(pokemon.id, true, true);
@@ -33,7 +33,7 @@ class RedeemableCodes implements Saveable {
                     timeout: 1e4,
                 });
             }),
-            new RedeemableCode('complete-kanto', 750807787, false, function () {
+            new RedeemableCode('complete-kanto', 750807787, false, () => {
                 // Complete all routes
                 Routes.getRoutesByRegion(GameConstants.Region.kanto).forEach(route => {
                     GameHelper.incrementObservable(App.game.statistics.routeKills[route.region][route.number], 10);
@@ -129,7 +129,7 @@ class RedeemableCodes implements Saveable {
     }
 
     toJSON(): Record<string, any> {
-        return this.codeList.reduce(function (res: string[], code: RedeemableCode) {
+        return this.codeList.reduce((res: string[], code: RedeemableCode) => {
             if (code.isRedeemed) {
                 res.push(code.name);
             }

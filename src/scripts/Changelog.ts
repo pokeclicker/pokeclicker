@@ -50,12 +50,21 @@ class ChangelogUpdate extends Changelog {
  */
 const changelogItems = [
     // note that month is 0 indexed
+    // v0.6.6
+    new ChangelogUpdate('v0.6.6', new Date(2020, 10, 18)),
+    new Changelog(changelogType.CHANGE, 'Show shiny symbol for Pokémon in Protein modal'),
+    new Changelog(changelogType.FIXED, 'Achievement pages being empty after completing last item on page'),
+    new Changelog(changelogType.FIXED, 'Start menu visible while loading screen shown'),
+    new Changelog(changelogType.FIXED, 'Save update from older versions'),
+    new Changelog(changelogType.FIXED, 'Time displayed in BerryDex'),
+    new Changelog(changelogType.FIXED, 'Pokédex hide shiny images toggle correctly reflects current state'),
+
     // v0.6.5
     new ChangelogUpdate('v0.6.5', new Date(2020, 10, 18)),
-    new Changelog(changelogType.NEW, 'Added toggle to hide shiny images in Pokedex'),
+    new Changelog(changelogType.NEW, 'Added toggle to hide shiny images in Pokédex'),
     new Changelog(changelogType.NEW, 'New display options added to Hatchery'),
-    new Changelog(changelogType.NEW, 'Can sort Pokemon list by total proteins used'),
-    new Changelog(changelogType.NEW, 'New Pokeball types added, Can be obtained by trading with the Johto Berry Master'),
+    new Changelog(changelogType.NEW, 'Can sort Pokémon list by total proteins used'),
+    new Changelog(changelogType.NEW, 'New Pokéball types added, Can be obtained by trading with the Johto Berry Master'),
     new Changelog(changelogType.NEW, 'Add setting to switch between different growth timers in the Farm'),
     new Changelog(changelogType.CHANGE, 'Nerfed Protein, only 5 can be used per region visited'),
     new Changelog(changelogType.CHANGE, 'Protein is now used from the Items menu'),
