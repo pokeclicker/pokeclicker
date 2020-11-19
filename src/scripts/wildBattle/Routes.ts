@@ -1549,7 +1549,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Galar Route 5', GameConstants.Region.galar, 5,
     new RoutePokemon({
-        land: ['Dottler', 'Applin', 'Eldegoss', "Farfetch'd (Galar)", 'Wobbuffet', 'Drifloon', 'Minccino', 'Spritzee', 'Swirlix', 'Stufful', 'Espurr', 'Nincada', 'Dewpider', 'Nuzleaf', 'Lombre'],
+        land: ['Dottler', 'Applin', 'Eldegoss', 'Farfetch\'d (Galar)', 'Wobbuffet', 'Drifloon', 'Minccino', 'Spritzee', 'Swirlix', 'Stufful', 'Espurr', 'Nincada', 'Dewpider', 'Nuzleaf', 'Lombre'],
         water: ['Magikarp', 'Chewtle', 'Goldeen'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Grass)]

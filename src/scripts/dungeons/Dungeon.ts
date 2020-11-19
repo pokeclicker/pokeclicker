@@ -1000,7 +1000,7 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
         new DungeonBossPokemon('Drednaw', 8000000, 70),
     ],
     96500, 201, 35);
-   
+ 
 dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
     ['Cufant', 'Bronzong', 'Klang', 'Mawile', 'Steelix', 'Stunfisk (Galar)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -1013,7 +1013,7 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
         new DungeonBossPokemon('Garbodor', 8000000, 70),
     ],
     96500, 201, 35);
-    
+
 dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
     ['Ponyta (Galar)', 'Spritzee', 'Swirlix', 'Phantump', 'Oranguru', 'Passimian', 'Sinistea'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],

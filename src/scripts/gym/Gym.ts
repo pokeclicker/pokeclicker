@@ -1228,7 +1228,7 @@ gymList['Stow-on-Side'] = new Gym(
     [
         new GymPokemon('Hitmontop', 2458300, 34),
         new GymPokemon('Pangoro', 2462000, 34),
-        new GymPokemon("Sirfetch'd", 2458300, 35),
+        new GymPokemon('Sirfetch\'d', 2458300, 35),
         new GymPokemon('Machamp', 2458300, 36),
     ],
     BadgeEnums.Galar_Fighting,
