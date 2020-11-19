@@ -175,6 +175,27 @@ class GameController {
                     }
             }
 
+            if (App.game.underground.energy < App.game.underground.getMaxEnergy())
+            {
+                if ($('#mineModal').hasClass('show'))
+                {
+                    switch (e.code) {
+                        case 'Digit1':
+                            ItemList['SmallRestore'].use();
+                            break;
+                        case 'Digit2':
+                            ItemList['MediumRestore'].use();
+                            break;
+                        case 'Digit3':
+                            ItemList['LargeRestore'].use();
+                            break;
+                        default: // any other key (ignore)
+                            return;
+                    }
+                    e.preventDefault();
+                }
+            }
+
             if (App.game.gameState === GameConstants.GameState.dungeon) {
                 switch (e.code) {
                     case 'ArrowUp':
