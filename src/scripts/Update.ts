@@ -265,31 +265,37 @@ class Update implements Saveable {
         },
 
         '0.6.1': ({ saveData }) => {
-            if (saveData.oakItems.purchaseList) {
-                if (saveData.oakItems.purchaseList[OakItems.OakItem.Squirtbottle]) {
-                    saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Squirtbottle]]['purchased'] = true;
-                }
-                if (saveData.oakItems.purchaseList[OakItems.OakItem.Sprinklotad]) {
-                    saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Sprinklotad]]['purchased'] = true;
+            // Only update if save is from v0.6.0+
+            if (this.minUpdateVersion('0.6.0', saveData)) {
+                if (saveData.oakItems.purchaseList) {
+                    if (saveData.oakItems.purchaseList[OakItems.OakItem.Squirtbottle]) {
+                        saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Squirtbottle]]['purchased'] = true;
+                    }
+                    if (saveData.oakItems.purchaseList[OakItems.OakItem.Sprinklotad]) {
+                        saveData.oakItems[OakItems.OakItem[OakItems.OakItem.Sprinklotad]]['purchased'] = true;
+                    }
                 }
             }
         },
 
         '0.6.5': ({ playerData, saveData }) => {
-            // nerf amount of proteins used per Pokemon
-            const maxProteins = (playerData.highestRegion + 1) * 5;
-            let proteinsToRefund = 0;
+            // Only update if save is from v0.6.0+
+            if (this.minUpdateVersion('0.6.0', saveData)) {
+                // nerf amount of proteins used per Pokemon
+                const maxProteins = (playerData.highestRegion + 1) * 5;
+                let proteinsToRefund = 0;
 
-            saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
-                if (p.proteinsUsed <= maxProteins) {
+                saveData.party.caughtPokemon = saveData.party.caughtPokemon.map(p => {
+                    if (!p.proteinsUsed || p.proteinsUsed <= maxProteins) {
+                        return p;
+                    }
+                    proteinsToRefund += p.proteinsUsed - maxProteins;
+                    p.proteinsUsed = maxProteins;
                     return p;
-                }
-                proteinsToRefund += p.proteinsUsed - maxProteins;
-                p.proteinsUsed = maxProteins;
-                return p;
-            });
+                });
 
-            playerData._itemList.Protein += proteinsToRefund || 0;
+                playerData._itemList.Protein += proteinsToRefund || 0;
+            }
         },
     };
 
@@ -329,13 +335,18 @@ class Update implements Saveable {
         }, GameConstants.HOUR * 3);
     }
 
-    // potentially newer version, check against version
-    isNewerVersion(version, compareVersion) {
+    // check if save version is newer or equal to version
+    minUpdateVersion(version, saveData): boolean {
+        return !this.isOlderVersion(saveData.update.version, version);
+    }
+
+    // potentially newer version > check against version
+    isNewerVersion(version, compareVersion): boolean {
         return compareVersion.localeCompare(version, undefined, { numeric: true }) === -1;
     }
 
-    // potentially older version, check against version
-    isOlderVersion(version, compareVersion) {
+    // potentially older version < check against version
+    isOlderVersion(version, compareVersion): boolean {
         return compareVersion.localeCompare(version, undefined, { numeric: true }) === 1;
     }
 
@@ -392,7 +403,6 @@ class Update implements Saveable {
                 try {
                     console.info(`Applying update v${version}`);
                     callback(updateData);
-                    updateData.saveData.update.version = version;
                     return updateData;
                 } catch (e) {
                     try {
@@ -407,7 +417,7 @@ class Update implements Saveable {
                     console.error(`Caught error while applying update v${version}`, e, { beforeUpdate, updateData });
                     Notifier.notify({
                         title: `Failed to update to v${this.version}!`,
-                        message: `Please check the console for errors, and report them on our Discord along with your save file.<br /><br />${backupButton.outerHTML}<br />${resetButton.outerHTML}`,
+                        message: `Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a> along with your save file.<br /><br />${backupButton.outerHTML}<br />${resetButton.outerHTML}`,
                         type: NotificationConstants.NotificationOption.primary,
                         timeout: GameConstants.DAY,
                     });
@@ -443,7 +453,7 @@ class Update implements Saveable {
             console.error('Error trying to convert backup save', err);
             Notifier.notify({
                 title: `[v${this.version}] Game has been updated!`,
-                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our Discord.</i>',
+                message: 'Check the <a class="text-light" href="#changelogModal" data-toggle="modal"><u>changelog</u></a> for details!<br/><br/><i>Failed to download old save, Please check the console for errors, and report them on our <a class="text-light" href="https://discord.gg/a6DFe4p"><u>Discord</u></a>.</i>',
                 type: NotificationConstants.NotificationOption.primary,
                 timeout: 6e4,
             });
@@ -452,6 +462,9 @@ class Update implements Saveable {
             } catch (e) {}
             throw err;
         }
+
+        // Update the save data version to our current version
+        updateResult.saveData.update.version = this.version;
 
         this.setPlayerData(updateResult.playerData);
         this.setSaveData(updateResult.saveData);
