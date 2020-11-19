@@ -500,9 +500,10 @@ export enum StoneType {
     'Ice_stone',
     'Tart_apple',
     'Sweet_apple',
-    'Unity_reins',
     'Rusted_sword',
     'Rusted_shield',
+    'Galarica_cuff',
+    'Galarica_wreath',
 }
 
 export enum BattleItemType {

@@ -270,10 +270,11 @@ namespace GameConstants {
         'Chipped_pot',
         'Tart_apple',
         'Sweet_apple',
-        'Unity_reins',
         'Ice_stone',
         'Rusted_sword',
-        'Rusted_shield'
+        'Rusted_shield',
+        'Galarica_cuff',
+        'Galarica_wreath'
     }
     declare enum BattleItemType {
         'xAttack' = '',

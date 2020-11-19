@@ -1474,7 +1474,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Slowpoke', 'Slowbro', 37), new StoneEvolution('Slowpoke', 'Slowking', GameConstants.StoneType.Kings_rock)],
+        'evolutions': [
+            new LevelEvolution('Slowpoke', 'Slowbro', 37),
+            new StoneEvolution('Slowpoke', 'Slowking', GameConstants.StoneType.Kings_rock),
+        ],
         'base': {
             'hitpoints': 90,
             'attack': 65,
@@ -1492,7 +1495,10 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 63,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Slowpoke (Galar)', 'Slowbro (Galar)', 69420), new LevelEvolution('Slowpoke (Galar)', 'Slowking (Galar)', 69420)],
+        'evolutions': [
+            new StoneEvolution('Slowpoke (Galar)', 'Slowbro (Galar)', GameConstants.StoneType.Galarica_cuff),
+            new StoneEvolution('Slowpoke (Galar)', 'Slowking (Galar)', GameConstants.StoneType.Galarica_wreath),
+        ],
         'base': {
             'hitpoints': 90,
             'attack': 65,
@@ -1596,13 +1602,13 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 83.1,
-        'name': "Farfetch'd (Galar)",
+        'name': 'Farfetch\'d (Galar)',
         'catchRate': 45,
         'type': [PokemonType.Fighting],
         'levelType': LevelType.mediumfast,
         'exp': 132,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution("Farfetch'd (Galar)", "Sirfetch'd", 20)],
+        'evolutions': [new LevelEvolution('Farfetch\'d (Galar)', 'Sirfetch\'d', 20)],
         'base': {
             'hitpoints': 52,
             'attack': 95,

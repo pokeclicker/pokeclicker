@@ -1915,7 +1915,8 @@ const SpikemuthShop = new Shop([
     ItemList['Electric_egg'],
 ]);
 const FreezingtonShop = new Shop([
-    ItemList['Reins_of_unity'],
+    ItemList['Galarica_wreath'],
+    ItemList['Galarica_cuff'],
 ]);
 const WyndonShop = new Shop([
     ItemList['Pokeball'],
