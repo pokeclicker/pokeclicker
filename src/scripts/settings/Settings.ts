@@ -163,6 +163,13 @@ Settings.add(new Setting<number>('partySort', 'Sort:',
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 
 // Breeding Filters
+Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
+    [
+        new SettingOption('All', '-1'),
+        ...PokemonCategories.categories().map((c, index) => new SettingOption(c.name(), `${index}`)),
+    ],
+    '-1'
+));
 Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter',
     [
         new SettingOption('All', '-2'),

@@ -50,10 +50,9 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Category</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(this.value)">
-                                    <option value="-1">All</option>
-                                    <!-- ko foreach: PokemonCategories.categories -->
-                                    <option style="color: whitesmoke" data-bind="attr: { value: $index }, text: $data.name, style: { background: $data.color }">Category</option>
+                                <select name="breedingCategoryFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(+this.value), Settings.setSettingByName(this.name, this.value)">
+                                    <!-- ko foreach: Settings.getSetting('breedingCategoryFilter').options -->
+                                    <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('breedingCategoryFilter').value === $data.value }, text: $data.text">Type</option>
                                     <!-- /ko -->
                                 </select>
                             </div>
