@@ -9,7 +9,6 @@ class GameController {
                 const tooltip = $('#mapTooltip');
                 tooltip.text(id);
                 tooltip.css('visibility', 'visible');
-
             }
         }, () => {
             const tooltip = $('#mapTooltip');
@@ -46,9 +45,9 @@ class GameController {
             top: 10,
             opacity: 0,
         }, 200 * Math.log(amount) + 1000, 'linear',
-        function () {
-            $(this).remove();
-        });
+            function () {
+                $(this).remove();
+            });
     }
 
     static simulateKey(code: string, type = 'keydown', modifiers = {}) {
@@ -56,7 +55,7 @@ class GameController {
 
         const event = document.createEvent('HTMLEvents') as KeyboardEvent;
         Object.defineProperties(event, {
-            code: {value: code},
+            code: { value: code },
         });
         event.initEvent(evtName, true, false);
 
@@ -183,10 +182,8 @@ class GameController {
                     }
             }
 
-            if (App.game.underground.energy < App.game.underground.getMaxEnergy())
-            {
-                if ($('#mineModal').hasClass('show'))
-                {
+            if (App.game.underground.energy < App.game.underground.getMaxEnergy()) {
+                if ($('#mineModal').hasClass('show')) {
                     switch (e.code) {
                         case 'Digit1':
                             ItemList['SmallRestore'].use();
