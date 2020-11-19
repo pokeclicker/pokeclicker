@@ -58,6 +58,30 @@ class Underground implements Feature {
                     GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond),
                 GameHelper.createArray(0, 10, 2)
             ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.SurveyCharge_Cost, 'Survey Charge Cost', 5,
+                AmountFactory.createArray(
+                    GameHelper.createArray(50, 250, 50), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 5, 1)
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.SurveyCharge_Efficiency, 'Survey Charge Efficiency', 4,
+                AmountFactory.createArray(
+                    GameHelper.createArray(100, 400, 100), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 4, 1)
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.NewYLayer, 'Larger underground, +1 Max Item', 1,
+                AmountFactory.createArray(
+                    GameHelper.createArray(3000, 3000, 3000), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 1, 1)
+            ),
+            new UndergroundUpgrade(
+                UndergroundUpgrade.Upgrades.Items_Min, 'Min Items', 4,
+                AmountFactory.createArray(
+                    GameHelper.createArray(2000, 5000, 1000), GameConstants.Currency.diamond),
+                GameHelper.createArray(0, 4, 1)
+            ),
         ];
     }
 
@@ -69,7 +93,7 @@ class Underground implements Feature {
     }
 
     getMaxItems() {
-        return Underground.BASE_ITEMS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max).calculateBonus();
+        return Underground.BASE_ITEMS_MAX + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Max).calculateBonus() + this.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer).calculateBonus();
     }
 
     getEnergyGain() {
@@ -86,6 +110,22 @@ class Underground implements Feature {
 
     getBombEfficiency() {
         return Underground.BASE_BOMB_EFFICIENCY + this.getUpgrade(UndergroundUpgrade.Upgrades.Bomb_Efficiency).calculateBonus();
+    }
+
+    getSurveyCharge_Cost() {
+        return Underground.PROSPECT_ENERGY - this.getUpgrade(UndergroundUpgrade.Upgrades.SurveyCharge_Cost).calculateBonus();
+    }
+
+    getSurveyCharge_Efficiency() {
+        return Underground.BASE_SURVEY_CHARGE_EFFICIENCY + this.getUpgrade(UndergroundUpgrade.Upgrades.SurveyCharge_Efficiency).calculateBonus();
+    }
+
+    getNewYLayer() {
+        return Underground.sizeY + this.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer).calculateBonus();
+    }
+
+    getMinItems() {
+        return Underground.BASE_ITEMS_MIN + this.getUpgrade(UndergroundUpgrade.Upgrades.Items_Min).calculateBonus();
     }
 
     getUpgrade(upgrade: UndergroundUpgrade.Upgrades) {
@@ -337,10 +377,15 @@ $(document).ready(() => {
 namespace Underground {
     export const BASE_ENERGY_MAX = 50;
     export const BASE_ITEMS_MAX = 3;
+    export const BASE_ITEMS_MIN = 1;
     export const BASE_ENERGY_GAIN = 3;
     export const BASE_ENERGY_REGEN_TIME = 60;
     export const BASE_DAILY_DEALS_MAX = 3;
     export const BASE_BOMB_EFFICIENCY = 10;
+    export const BASE_SURVEY_CHARGE_EFFICIENCY = 2; //1
+
+    export const sizeX = 25;
+    export const sizeY = 12;
 
     export const CHISEL_ENERGY = 1;
     export const HAMMER_ENERGY = 3;

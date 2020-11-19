@@ -1,8 +1,6 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 
 class Mine {
-    public static sizeX = 25;
-    public static sizeY = 12;
     public static maxSkips = 5;
     public static grid: Array<Array<KnockoutObservable<number>>>;
     public static rewardGrid: Array<Array<any>>;
@@ -14,7 +12,7 @@ class Mine {
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
     public static toolSelected: KnockoutObservable<Mine.Tool> = ko.observable(0);
-    private static loadingNewLayer = true
+    private static loadingNewLayer = true;
 
     public static loadMine() {
         const tmpGrid = [];
@@ -22,10 +20,10 @@ class Mine {
         Mine.rewardNumbers = [];
         Mine.itemsBuried(0);
         Mine.prospectResult(null);
-        for (let i = 0; i < this.sizeY; i++) {
+        for (let i = 0; i < App.game.underground.getNewYLayer(); i++) {
             const row = [];
             const rewardRow = [];
-            for (let j = 0; j < this.sizeX; j++) {
+            for (let j = 0; j < Underground.sizeX; j++) {
                 row.push(ko.observable(Math.min(5, Math.max(1, Math.floor(Math.random() * 2 + Math.random() * 3) + 1))));
                 rewardRow.push(0);
             }
@@ -35,30 +33,60 @@ class Mine {
         Mine.grid = tmpGrid;
         Mine.rewardGrid = tmpRewardGrid;
 
+        var Diff = 0;
+        var Added = 0;
         for (let i = 0; i < App.game.underground.getMaxItems(); i++) {
             const item = UndergroundItem.getRandomItem();
-            const x = Mine.getRandomCoord(this.sizeX, item.space[0].length);
-            const y = Mine.getRandomCoord(this.sizeY, item.space.length);
+            const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
+            const y = Mine.getRandomCoord(App.game.underground.getNewYLayer(), item.space.length);
             const res = Mine.canAddReward(x, y, item);
             if (res) {
                 Mine.addReward(x, y, item);
+                Added = Added + 1;
             }
         }
+
+        if (App.game.underground.getMaxItems() < App.game.underground.getMinItems()) {
+            Diff = App.game.underground.getMinItems() - App.game.underground.getMaxItems();
+            //Late-Game players might do some cheesy shit and upgrade min to be above their max. This makes sure it deducts the difference.
+        }
+        for (Added; Added < App.game.underground.getMinItems() - Diff;) {
+            const item = UndergroundItem.getRandomItem();
+            const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
+            const y = Mine.getRandomCoord(App.game.underground.getNewYLayer(), item.space.length);
+            const res = Mine.canAddReward(x, y, item);
+            if (res) {
+                Mine.addReward(x, y, item);
+                Added = Added + 1;
+                //This should loop until it's added.
+            }
+        }
+
         Mine.loadingNewLayer = false;
         Mine.itemsFound(0);
 
         Underground.showMine();
+
+        //Check if Explosive_Charge is equipped.
+        if (App.game.oakItems.isActive(OakItems.OakItem.Explosive_Charge)) {
+            const tiles = App.game.oakItems.calculateBonus(OakItems.OakItem.Explosive_Charge);
+            for (let i = 1; i < tiles; i++) {
+                const x = GameConstants.randomIntBetween(0, App.game.underground.getNewYLayer() - 1);
+                const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
+                this.breakTile(x, y, 1);
+            }
+        }
     }
 
     private static getRandomCoord(max: number, size: number): number {
-        return Math.floor(Math.random() * (max - size - 1)) + 1;
+        return Math.floor(Math.random() * (max - size));
     }
 
     private static canAddReward(x: number, y: number, reward: UndergroundItem): boolean {
         if (Mine.alreadyHasRewardId(reward.id)) {
             return false;
         }
-        if (y + reward.space.length >= this.sizeY || x + reward.space[0].length >= this.sizeX) {
+        if (y + reward.space.length >= App.game.underground.getNewYLayer() || x + reward.space[0].length >= Underground.sizeX) {
             return false;
         }
         for (let i = 0; i < reward.space.length; i++) {
@@ -103,19 +131,25 @@ class Mine {
         Mine.rewardNumbers.push(reward.id);
     }
 
+    //Survey Charge
     public static prospect() {
         if (Mine.prospectResult()) {
             $('#mine-prospect-result').tooltip('show');
-            setTimeout(() => $('#mine-prospect-result').tooltip('hide'), 4000);
             return;
         }
 
-        if (App.game.underground.energy < Underground.PROSPECT_ENERGY) {
-            return;
+        const tiles = App.game.underground.getSurveyCharge_Efficiency();
+        for (let i = 1; i < tiles; i++) {
+            const x = GameConstants.randomIntBetween(0, App.game.underground.getNewYLayer() - 1);
+            const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
+            this.breakTile(x, y, 5);
         }
 
-        App.game.underground.energy -= Underground.PROSPECT_ENERGY;
-
+        const ProspectCost = App.game.underground.getSurveyCharge_Cost();
+        if (App.game.underground.energy < ProspectCost) {
+            return;
+        }
+        App.game.underground.energy -= ProspectCost;
         const rewards = Mine.rewardSummary();
         Mine.updateProspectResult(rewards);
     }
@@ -141,7 +175,6 @@ class Mine {
                     }
                 }
             }
-
             return res;
         }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0});
     }
@@ -161,7 +194,6 @@ class Mine {
 
         Mine.prospectResult(text.join('<br>'));
         $('#mine-prospect-result').tooltip('show');
-        setTimeout(() => $('#mine-prospect-result').tooltip('hide'), 2000);
     }
 
     public static click(i: number, j: number) {
@@ -205,11 +237,10 @@ class Mine {
         const tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             for (let i = 1; i < tiles; i++) {
-                const x = GameConstants.randomIntBetween(1, this.sizeY - 2);
-                const y = GameConstants.randomIntBetween(1, this.sizeX - 2);
+                const x = GameConstants.randomIntBetween(0, App.game.underground.getNewYLayer() - 1);
+                const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
                 this.breakTile(x, y, 2);
             }
-
             App.game.underground.energy -= Underground.BOMB_ENERGY;
         }
     }
@@ -243,22 +274,37 @@ class Mine {
     }
 
     private static normalizeX(x: number): number {
-        return Math.min(this.sizeX - 1, Math.max(0, x));
+        return Math.min(Underground.sizeX - 1, Math.max(0, x));
     }
 
     private static normalizeY(y: number): number {
-        return Math.min(this.sizeY - 1, Math.max(0, y));
+        return Math.min(App.game.underground.getNewYLayer() - 1, Math.max(0, y));
     }
 
     public static checkItemsRevealed() {
         for (let i = 0; i < Mine.rewardNumbers.length; i++) {
-            if (Mine.checkItemRevealed(Mine.rewardNumbers[i])) {
+            if (Mine.checkItemRevealed(Mine.rewardNumbers[i]))
+            {
                 Underground.gainMineItem(Mine.rewardNumbers[i]);
                 const itemName = Underground.getMineItemById(Mine.rewardNumbers[i]).name;
                 Notifier.notify({
                     message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)}`,
                     type: NotificationConstants.NotificationOption.success,
                 });
+
+                if (App.game.oakItems.isActive(OakItems.OakItem.Treasure_Scanner)) {
+                    var GiveDouble = App.game.oakItems.calculateBonus(OakItems.OakItem.Treasure_Scanner);
+                    var Random = Math.random()
+                    if (GiveDouble >= Random) {
+                        Underground.gainMineItem(Mine.rewardNumbers[i]);
+                        Notifier.notify({
+                            message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)} AGAIN!`,
+                            type: NotificationConstants.NotificationOption.success,
+                        });
+                    }
+                }
+
+                App.game.oakItems.use(OakItems.OakItem.Treasure_Scanner);
                 Mine.itemsFound(Mine.itemsFound() + 1);
                 GameHelper.incrementObservable(App.game.statistics.undergroundItemsFound);
                 Mine.rewardNumbers.splice(i, 1);
@@ -269,8 +315,8 @@ class Mine {
     }
 
     public static checkItemRevealed(id: number) {
-        for (let i = 0; i < this.sizeX; i++) {
-            for (let j = 0; j < this.sizeY; j++) {
+        for (let i = 0; i < Underground.sizeX; i++) {
+            for (let j = 0; j < App.game.underground.getNewYLayer(); j++) {
                 if (Mine.rewardGrid[j][i] != 0) {
                     if (Mine.rewardGrid[j][i].value == id) {
                         if (Mine.rewardGrid[j][i].revealed === 0) {
@@ -306,6 +352,7 @@ class Mine {
             type: NotificationConstants.NotificationOption.info,
         });
         ko.cleanNode(document.getElementById('mineBody'));
+        App.game.oakItems.use(OakItems.OakItem.Explosive_Charge);
         Mine.loadMine();
         ko.applyBindings(null, document.getElementById('mineBody'));
     }

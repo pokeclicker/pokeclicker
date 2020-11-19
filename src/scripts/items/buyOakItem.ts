@@ -34,3 +34,5 @@ class BuyOakItem extends Item {
 
 ItemList['Squirtbottle'] = new BuyOakItem(OakItems.OakItem.Squirtbottle, 5000, Currency.farmPoint);
 ItemList['Sprinklotad'] = new BuyOakItem(OakItems.OakItem.Sprinklotad, 10000, Currency.farmPoint);
+ItemList['Explosive_Charge'] = new BuyOakItem(OakItems.OakItem.Explosive_Charge, 3000, Currency.questPoint);
+ItemList['Treasure_Scanner'] = new BuyOakItem(OakItems.OakItem.Treasure_Scanner, 3000, Currency.questPoint);
