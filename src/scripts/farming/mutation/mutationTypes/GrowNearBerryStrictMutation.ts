@@ -42,7 +42,7 @@ class GrowNearBerryStrictMutation extends GrowNearMutation {
             }
         });
 
-        return currentReqs === this.berryReqs;
+        return Object.keys(this.berryReqs).every(key => currentReqs[key] !== undefined && currentReqs[key] === this.berryReqs[key]);
     }
 
     /**
