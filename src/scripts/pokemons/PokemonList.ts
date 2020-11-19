@@ -17294,6 +17294,23 @@ const pokemonList = createPokemonArray(
         'catchRate': 60,
     },
     {
+        'id': 875.1,
+        'name': 'Eiscue (noice)',
+        'type': [PokemonType.Ice],
+        'base': {
+            'hitpoints': 75,
+            'attack': 80,
+            'specialAttack': 65,
+            'defense': 70,
+            'specialDefense': 50,
+            'speed': 130,
+        },
+        'eggCycles': 25,
+        'levelType': LevelType.slow,
+        'exp': 165,
+        'catchRate': 60,
+    },
+    {
         'id': 876,
         'name': 'Indeedee',
         'type': [
@@ -17316,6 +17333,26 @@ const pokemonList = createPokemonArray(
     {
         'id': 877,
         'name': 'Morpeko',
+        'type': [
+            PokemonType.Electric,
+            PokemonType.Dark,
+        ],
+        'base': {
+            'hitpoints': 58,
+            'attack': 95,
+            'specialAttack': 70,
+            'defense': 58,
+            'specialDefense': 58,
+            'speed': 97,
+        },
+        'eggCycles': 10,
+        'levelType': LevelType.mediumfast,
+        'exp': 153,
+        'catchRate': 180,
+    },
+    {
+        'id': 877.1,
+        'name': 'Morpeko (hangry)',
         'type': [
             PokemonType.Electric,
             PokemonType.Dark,
@@ -17549,7 +17586,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 10,
     },
     {
-        'id': 888.01,
+        'id': 888.1,
         'name': 'Zacian (Crowned Sword)',
         'type': [PokemonType.Fairy, PokemonType.Steel],
         'base': {
@@ -17584,7 +17621,7 @@ const pokemonList = createPokemonArray(
         'catchRate': 10,
     },
     {
-        'id': 889.01,
+        'id': 889.1,
         'name': 'Zamazenta (Crowned Shield)',
         'type': [PokemonType.Fighting, PokemonType.Steel],
         'base': {
@@ -17784,7 +17821,7 @@ const pokemonList = createPokemonArray(
         'exp': 335,
     },
     {
-        'id': 898.01,
+        'id': 898.1,
         'name': 'Ice Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ice],
         'base': {
@@ -17801,7 +17838,7 @@ const pokemonList = createPokemonArray(
         'exp': 335,
     },
     {
-        'id': 898.02,
+        'id': 898.2,
         'name': 'Ghost Rider Calyrex',
         'type': [PokemonType.Psychic, PokemonType.Ghost],
         'base': {
