@@ -18,7 +18,7 @@ class ResearchSlot implements Saveable {
 
         this.notification = false;
 
-        this._maxWorkers = ko.pureComputed(function() {
+        this._maxWorkers = ko.pureComputed(() => {
             // TODO: HLXII - Update to depend on research. Will also need to determine which slot this is
             return 1;
         });
@@ -62,7 +62,7 @@ class ResearchSlot implements Saveable {
 
     clear() {
         // Emptying workers
-        for (let i = this._workers().length - 1;i >= 0;i--) {
+        for (let i = this._workers().length - 1; i >= 0; i--) {
             this.removeWorker(i);
         }
 

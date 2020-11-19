@@ -32,7 +32,7 @@ class PartyController {
         return status;
     }
 
-    static getSortedList = ko.pureComputed(function() {
+    static getSortedList = ko.pureComputed(() => {
         return App.game.party._caughtPokemon.sort(PartyController.compareBy(Settings.getSetting('partySort').observableValue(), Settings.getSetting('partySortDirection').observableValue()));
     }).extend({ rateLimit: 500 });
 

@@ -20,7 +20,7 @@ class Lab implements Feature {
         this.researchList = this.defaults.researchList;
         this.currentResearch = ko.observableArray(this.defaults.currentResearch);
 
-        this.unlockedResearchSlots = ko.pureComputed(function () {
+        this.unlockedResearchSlots = ko.pureComputed(() => {
             if (App.game.lab.researchList[Researches.Research.research_slot2].completed) {
                 return 3;
             }
