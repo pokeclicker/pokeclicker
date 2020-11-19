@@ -31,25 +31,6 @@
         })
     %>
 
-    <!--extra Route 3 1-->
-    <%- include('templates/mapRoute',
-        { route: 3, region: 4
-        , width: 9, height: 3
-        , x: 64, y: 40
-        , rotate: true
-        , noText: true
-        })
-    %>
-
-    <!--extra Route 3 2-->
-    <%- include('templates/mapRoute',
-        { route: 3, region: 4
-        , width: 5, height: 3
-        , x: 67, y: 40
-        , noText: true
-        })
-    %>
-
     <!--Route 4-->
     <%- include('templates/mapRoute',
         { route: 4, region: 4
@@ -61,8 +42,8 @@
     <!--extra Route 4-->
     <%- include('templates/mapRoute',
         { route: 4, region: 4
-        , width: 10, height: 3
-        , x: 57, y: 49
+        , width: 1, height: 0.5
+        , x: 53, y: 48.5
         , noText: true
         })
     %>
@@ -165,8 +146,24 @@
     <!--Extra bit of Route 13-->
     <%- include('templates/mapRoute',
         { route: 13, region: 4
-        , width: 9, height: 3
+        , width: 9, height: 2.5
         , x: 78, y: 17
+        , noText: true
+        })
+    %>
+    <!--Extra bit of Route 13-->
+    <%- include('templates/mapRoute',
+        { route: 13, region: 4
+        , width: 1, height: 0.5
+        , x: 78, y: 19.5
+        , noText: true
+        })
+    %>
+    <!--Extra bit of Route 13-->
+    <%- include('templates/mapRoute',
+        { route: 13, region: 4
+        , width: 3, height: 0.5
+        , x: 84, y: 19.5
         , noText: true
         })
     %>
@@ -218,11 +215,19 @@
         , x: 70, y: 55
         })
     %>
-     <!--Extra bit of Route 17-->
+    <!--Extra bit of Route 17-->
     <%- include('templates/mapRoute',
         { route: 17, region: 4
-        , width: 5, height: 3
+        , width: 4, height: 3
         , x: 82, y: 52
+        , noText: true
+        })
+    %>
+    <!--Extra bit of Route 17-->
+    <%- include('templates/mapRoute',
+        { route: 17, region: 4
+        , width: 1, height: 2
+        , x: 86, y: 52
         , noText: true
         })
     %>
@@ -314,6 +319,14 @@
         { route: 23, region: 4
         , width: 5, height: 3
         , x: 74, y: 7
+        , noText: true
+        })
+    %>
+    <!--Extra bit of Route 23-->
+    <%- include('templates/mapRoute',
+        { route: 23, region: 4
+        , width: 0.5, height: 3
+        , x: 65.5, y: 2
         , noText: true
         })
     %>
@@ -742,4 +755,38 @@
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Castelia City') }"
         })
      %>
+     
+    <!--bridge-->
+    <%- include('templates/mapPOI',
+        { name: "Skyarrow Bridge"
+        , width: 10, height: 3
+        , x: 57, y: 49
+        , databind: `attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'What a lovely view'});
+            }`
+        })
+    %>
+    <!--bridge-->
+    <%- include('templates/mapPOI',
+        { name: "Skyarrow Bridge"
+        , width: 3, height: 9
+        , x: 64, y: 40
+        , databind: `attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'What a lovely view'});
+            }`
+        })
+    %>
+    <!--bridge-->
+    <%- include('templates/mapPOI',
+        { name: "Skyarrow Bridge"
+        , width: 5, height: 3
+        , x: 67, y: 40
+        , databind: `attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? 'unlockedRoute' : 'lockedRoute' },
+            click: () => {
+                Notifier.notify({message: 'What a lovely view'});
+            }`
+        })
+    %>
 </g>
