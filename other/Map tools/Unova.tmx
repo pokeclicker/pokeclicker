@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.1" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="2">
+<map version="1.4" tiledversion="2020.10.30" orientation="orthogonal" renderorder="right-down" width="100" height="60" tilewidth="16" tileheight="16" infinite="0" nextlayerid="14" nextobjectid="2">
  <tileset firstgid="1" source="tiles_FRLG.tsx"/>
  <tileset firstgid="1317" source="tiles_Advanced.tsx"/>
  <layer id="1" name="Water Dark" width="100" height="60" tintcolor="#c8c8c8">
@@ -39,7 +39,7 @@
  </layer>
  <layer id="6" name="Towns" width="100" height="60">
   <data encoding="base64" compression="zstd">
-   KLUv/WDAXLURACbeRTHg8gggAPNJ0VdIAKSAA8AhvBMWDRQkUAAUJIS8VlVVzv/V/kMzMAMzMAMrJfBHNGoHNAA5ADgAN/Nk3oQn4W08jTd6ohfhQYh5MO/lPXgOXoPH4C14Cl6Ch+BcXstjeQeegVfgEXihB3qfA8nj1HHi0Hk5D+dteBpehofhjTyRF/JABJwCnACcMm6ezat5F56F9/E8XsfjeBUehbRx0jiNTiKaATOXTIwH4714I56IF+KBeCtP5aU8lNAJdPqcBpSJq8QVc8FcLz2P5+28D8/D6/A4vJNn8koeyccBReJyuVoullq5VK6UC6VOLpOr5CKpkUvkCrlAXFwtrp6L59phca24dK6cC0fFleK6uWyuGhTXiYvmCoCAqEEHyM9QGA0HUINEBSx0ABKgEPwJAoXgjxAMIqhQiINB6L0BFU+rUG/leqFp+YPuvHYaXgrhVWqq6vSm2vJHdhf9yvQmETJspXqsTG+oD7ItCthx3nE4UuaHGbuk5ajjMAJhTrm8btlbHigO/0GM2cbK7Jzy+Lo5MC7vwEkgsAQNIKEAU2H4IHJqthvhaZkPIKEPXNhNOVCW3ZGkGAIXdJwcKGF3JCvGwAU3lANdQ9kLvzcHyqI7ZrhmoGP60bbWtl1tkMrcwjP22kSNT88tPGDUhupEOrfwCWdtmkekcwsfeGrjdqZ84a44tbmY1ReSgMl3M5/izDe5RVySpwAoK0W2PmDKYgRFseJBkVZRULQUsslSL2a/bZo/
+   KLUv/WDAXI0TAFYiUTCw2FIQANR16a9Jri1+9ShzRLn0k3yammG59PM8n/KjWdj+////////D+F0+G57CDw/AEAAQwAVTiefTD6VfCIBej/P51F4E97JM3klj+RJeBF6Hs/beRDeg+fgNXgM3oKn4CU4nZfzcB6Cd+AZeAXeyBN5IQcH4n14Hl6HN/NkXsyDWfmk8inlE4rRK3pEj8Pb8DS8DO/lubyWxzLgk4BPAT4BGHpCL+hheBfeylN5KQ/lWXgBSlcS0nV0GV1FF5GLq8U1dAldQSkuFBfQ9XP58Hg7no5H4o14Il6Id/NsXs2jGfkk8inkE4E6cZm4ei6ea2fpKb2kAUE2Adn0Y5OPTT1MOTbh2HRjk41NNUw0Ns3YJGMT0qajGDA2vWhisWKTiipx6Vw5F07dXDZXzUVTM5fMFXPB1MvlcrVcLDauGtfSFYCCqBEDQIA8s7A1HECDiQpY6AASoBDsIBggEAj+iGCQoCIJUJZj3ht17OgpW8X1VqwDiyyTFz2vJFY47d3l6U1dyuQP/wzlYeUcCXz27/UuSGV6swg4XGndrkxv1gfZcAXsOO84HJdRYaIlaXlwHI4W5pS/1y16y2PG4TkcI/vYmp1Tjl63BtqXN2AJC2hCgUlo4BQKH4SQmm2Z8I7MAybhBS7A0zlQ9u5IqZiBC2BIDpSkOxIsRuACHZIDJbHshcIrB0q1O1quZqBTYtUGibZk20xduYUXBbURPT4vt/DOoTaixvPkFt45aiN3fF5u4Z1DbUQN7i9Q10VtLvj1BSUQ8jnKB4LyTZYiTvJKAMWSxtYUAGWFoKJYm6DSlSOoVxWyyVAX076VLD8=
   </data>
  </layer>
  <layer id="7" name="Dungeons" width="100" height="60">
