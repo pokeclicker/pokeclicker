@@ -9,7 +9,6 @@ class GameController {
                 const tooltip = $('#mapTooltip');
                 tooltip.text(id);
                 tooltip.css('visibility', 'visible');
-
             }
         }, () => {
             const tooltip = $('#mapTooltip');
@@ -183,10 +182,8 @@ class GameController {
                     }
             }
 
-            if (App.game.underground.energy < App.game.underground.getMaxEnergy())
-            {
-                if ($('#mineModal').hasClass('show'))
-                {
+            if (App.game.underground.energy < App.game.underground.getMaxEnergy()) {
+                if ($('#mineModal').hasClass('show')) {
                     switch (e.code) {
                         case 'Digit1':
                             ItemList['SmallRestore'].use();
