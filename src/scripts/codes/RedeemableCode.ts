@@ -20,7 +20,7 @@ class RedeemableCode {
             });
             return;
         }
-        
+
         // If nothing returned, assume it was redeemed fine
         if (this.rewardFunction() == undefined) {
             this.isRedeemed = true;

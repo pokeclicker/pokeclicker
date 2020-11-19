@@ -7,6 +7,6 @@ let player;
 /**
  * Start the application when all html elements are loaded.
  */
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', () => {
     App.start();
 });

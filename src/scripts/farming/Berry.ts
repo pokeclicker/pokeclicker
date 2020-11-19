@@ -30,7 +30,7 @@ class Berry {
         wander?: PokemonNameType[]
     ) {
         this.flavors = [];
-        for (let i = 0;i < 5;i++) {
+        for (let i = 0; i < 5; i++) {
             this.flavors.push({type: i, value: flavors[i]});
         }
         this.wander = wander ? Berry.baseWander.concat(wander) : Berry.baseWander;

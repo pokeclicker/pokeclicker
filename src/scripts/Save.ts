@@ -152,7 +152,7 @@ class Save {
         const fr = new FileReader();
         fr.readAsText(fileToRead);
 
-        setTimeout(function () {
+        setTimeout(() => {
             try {
                 const decoded = atob(fr.result as string);
                 console.debug('decoded:', decoded);
@@ -218,8 +218,8 @@ class Save {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-    $('#saveModal').on('show.bs.modal', function () {
+document.addEventListener('DOMContentLoaded', () => {
+    $('#saveModal').on('show.bs.modal', () => {
         $('#saveTextArea').text(JSON.stringify(player));
     });
 });

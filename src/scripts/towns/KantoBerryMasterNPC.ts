@@ -30,6 +30,7 @@ class KantoBerryMasterNPC extends NPC {
         }
 
         SeededRand.seedWithDate(date);
+        possibleMutations.forEach(b => SeededRand.boolean());
         const mutationToShow = SeededRand.fromArray(possibleMutations);
         mutationToShow.hintSeen = true;
 

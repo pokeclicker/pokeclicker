@@ -104,7 +104,6 @@ class Egg implements Saveable {
             // Increase attack
             partyPokemon.attackBonusPercent += GameConstants.BREEDING_ATTACK_BONUS;
             partyPokemon.attackBonusAmount += partyPokemon.proteinsUsed();
-            partyPokemon.attack = partyPokemon.calculateAttack();
 
             // If breeding (not store egg), reset level, reset evolution check
             if (partyPokemon.breeding) {
@@ -117,6 +116,9 @@ class Egg implements Saveable {
                 partyPokemon.level = partyPokemon.calculateLevelFromExp();
                 partyPokemon.checkForLevelEvolution();
             }
+
+            // Recalculate current attack
+            partyPokemon.attack = partyPokemon.calculateAttack();
         }
 
         const pokemonID = PokemonHelper.getPokemonByName(this.pokemon).id;
