@@ -532,6 +532,7 @@ export enum PokemonItemType {
     'Meloetta (pirouette)',
     'Toxel',
     'Eternatus',
+    'Slowpoke (Galar)'
 }
 
 export enum PokeBlockColor {
