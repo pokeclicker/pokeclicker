@@ -358,7 +358,7 @@ class Mine {
 
     public static loadSavedMine(mine) {
         this.grid = mine.grid.map(row => row.map(val => ko.observable(val))),
-            this.rewardGrid = mine.rewardGrid;
+        this.rewardGrid = mine.rewardGrid;
         this.itemsFound(mine.itemsFound);
         this.itemsBuried(mine.itemsBuried);
         this.rewardNumbers = mine.rewardNumbers;

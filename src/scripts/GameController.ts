@@ -45,9 +45,9 @@ class GameController {
             top: 10,
             opacity: 0,
         }, 200 * Math.log(amount) + 1000, 'linear',
-            function () {
-                $(this).remove();
-            });
+        function () {
+            $(this).remove();
+        });
     }
 
     static simulateKey(code: string, type = 'keydown', modifiers = {}) {
