@@ -37,7 +37,7 @@ class EvolveNearBerryStrictMutation extends EvolveNearMutation {
             }
         });
 
-        return Object.keys(this.berryReqs).every(key => currentReqs[key] !== undefined && currentReqs[key] === this.berryReqs[key]);
+        return JSON.stringify(this.berryReqs) === JSON.stringify(currentReqs);
     }
 
     /**
