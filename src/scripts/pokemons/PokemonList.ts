@@ -1585,7 +1585,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 83,
-        'name': "Farfetch'd",
+        'name': 'Farfetch\'d',
         'catchRate': 45,
         'type': [PokemonType.Normal, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
@@ -16990,7 +16990,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 865,
-        'name': "Sirfetch'd",
+        'name': 'Sirfetch\'d',
         'type': [PokemonType.Fighting],
         'base': {
             'hitpoints': 62,

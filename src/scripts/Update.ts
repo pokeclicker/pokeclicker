@@ -289,7 +289,7 @@ class Update implements Saveable {
                 return p;
             });
 
-            playerData._itemList.Protein += proteinsToRefund;
+            playerData._itemList.Protein += proteinsToRefund || 0;
         },
     };
 

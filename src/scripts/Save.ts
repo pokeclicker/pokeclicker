@@ -102,7 +102,7 @@ class Save {
     public static initializeItemlist(): { [name: string]: KnockoutObservable<number> } {
         const res = {};
         for (const obj in ItemList) {
-            res[obj] = ko.observable(0);
+            res[obj] = ko.observable(0).extend({ numeric: 0 });
         }
         return res;
     }
@@ -152,7 +152,7 @@ class Save {
         const fr = new FileReader();
         fr.readAsText(fileToRead);
 
-        setTimeout(function () {
+        setTimeout(() => {
             try {
                 const decoded = atob(fr.result as string);
                 console.debug('decoded:', decoded);
@@ -218,8 +218,8 @@ class Save {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-    $('#saveModal').on('show.bs.modal', function () {
+document.addEventListener('DOMContentLoaded', () => {
+    $('#saveModal').on('show.bs.modal', () => {
         $('#saveTextArea').text(JSON.stringify(player));
     });
 });

@@ -30,12 +30,12 @@ class ItemHandler {
     }
 
     public static resetAmount() {
-        const input = $("input[name='amountOfStones']");
+        const input = $('input[name="amountOfStones"]');
         input.val(1).change();
     }
 
     public static increaseAmount(n: number) {
-        const input = $("input[name='amountOfItems']");
+        const input = $('input[name="amountOfItems"]');
         const newVal = (parseInt(input.val().toString(), 10) || 0) + n;
         input.val(newVal > 1 ? newVal : 1).change();
     }

@@ -2,7 +2,7 @@ import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
     public static toggleStatisticShiny = ko.observable(true);
-    public static toggleAllShiny = ko.observable(false);
+    public static toggleAllShiny = ko.observable(true);
 
     public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
@@ -49,7 +49,7 @@ class PokedexHelper {
         });
 
         options = $('#pokedex-filter-region');
-        for (let i = 0;i <= GameConstants.MAX_AVAILABLE_REGION;i++) {
+        for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
             options.append($('<option />').val(i).text(GameConstants.camelCaseToString(GameConstants.Region[i])));
         }
     }
@@ -66,7 +66,7 @@ class PokedexHelper {
         const highestCaught = App.game.statistics.pokemonCaptured.highestID;
         const highestDex = Math.max(highestEncountered, highestDefeated, highestCaught);
 
-        return pokemonList.filter(function (pokemon) {
+        return pokemonList.filter((pokemon) => {
             // Checks based on caught/shiny status
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
             const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
@@ -163,7 +163,7 @@ class PokedexHelper {
 
     private static getImage(id: number, name: string) {
         let src = 'assets/images/';
-        if (App.game.party.alreadyCaughtPokemon(id, true) && !this.toggleAllShiny()) {
+        if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleAllShiny()) {
             src += 'shiny';
         }
         src += `pokemon/${id}.png`;
@@ -184,8 +184,8 @@ class PokedexHelper {
     }
 }
 
-$(document).ready(function () {
-    $('#pokemonStatisticsModal').on('hidden.bs.modal', function () {
+$(document).ready(() => {
+    $('#pokemonStatisticsModal').on('hidden.bs.modal', () => {
         PokedexHelper.toggleStatisticShiny(true);
     });
 });

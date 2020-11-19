@@ -29,7 +29,7 @@ class BerryDeal {
     private static randomUndergroundItem(): UndergroundItem {
         return SeededRand.fromArray(UndergroundItem.list);
     }
-    
+
     private static randomPokeballDeal(): BerryDeal {
         const firstGen = Farming.getGeneration(0);
         const secondGen = Farming.getGeneration(1);

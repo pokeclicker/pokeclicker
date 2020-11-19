@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.6.5"></script>
+    <script src="scripts/modules.min.js?v=0.6.6"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.6.5"></script>
+    <script src="scripts/script.min.js?v=0.6.6"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.6.5" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.6.6" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -69,7 +69,8 @@
             width: 100vw;
             background-color: #79c9fa;
             background-size: cover;
-            z-index: 9999;
+            z-index: 99;
+            overflow: hidden;
         }
 
         .loader-wrapper {
@@ -8120,7 +8121,7 @@ aria-labelledby="pokedexModalLabel">
                        <div class="col-sm-2">
                         <label class="form-check-label">
                             <input class="form-check-input" type="checkbox" id="pokedex-filter-held-item"
-                                   value="false" checked onclick="PokedexHelper.toggleAllShiny(!PokedexHelper.toggleAllShiny())"> Hide shiny image
+                                   value="false" onclick="PokedexHelper.toggleAllShiny(!PokedexHelper.toggleAllShiny())"> Hide shiny image
                         </label>
                     </div>
 
@@ -8308,7 +8309,7 @@ aria-labelledby="pokedexModalLabel">
                   </thead>
                   <tbody data-bind="foreach: App.game.party.caughtPokemon">
                     <tr class="clickable" data-bind="click: () => $data.useProtein(), hidden: $data.breeding">
-                      <td class="text-left" data-bind="text: $data.name"></td>
+                      <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
                     </tr>

@@ -99,7 +99,7 @@ class Underground implements Feature {
     public static showMine() {
         let html = '';
         for (let i = 0; i < Mine.grid.length; i++) {
-            html += "<div class='row'>";
+            html += '<div class="row">';
             for (let j = 0; j < Mine.grid[0].length; j++) {
                 html += Underground.mineSquare(Mine.grid[i][j](), i, j);
             }
@@ -121,7 +121,7 @@ class Underground implements Feature {
         return `col-sm-1 rock${Math.max(Mine.grid[i][j](), 0)} mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
     }
 
-    private static rewardCssClass: KnockoutComputed<string> = ko.pureComputed(function () {
+    private static rewardCssClass: KnockoutComputed<string> = ko.pureComputed(() => {
         return `col-sm-1 mineReward mineSquare ${Mine.Tool[Mine.toolSelected()]}Selected`;
     });
 
@@ -328,7 +328,7 @@ class Underground implements Feature {
 
 }
 
-$(document).ready(function () {
+$(document).ready(() => {
     $('body').on('click', '.mineSquare', function () {
         Mine.click(parseInt(this.dataset.i, 10), parseInt(this.dataset.j, 10));
     });

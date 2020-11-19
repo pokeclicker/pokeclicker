@@ -132,7 +132,7 @@ class Discord implements Saveable {
         if (!json || !json.ID) {
             return;
         }
-        
+
         this.ID(json.ID || this.defaults.ID);
         this.loadCodes(json.codes || []);
     }
