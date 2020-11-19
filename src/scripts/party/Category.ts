@@ -9,7 +9,7 @@ class PokemonCategories implements Saveable {
     defaults = {};
 
     public static categories: KnockoutObservableArray<PokemonCategory> = ko.observableArray([]);
-    
+
     constructor() {}
 
     public static initialize() {
@@ -32,7 +32,7 @@ class PokemonCategories implements Saveable {
 
     public static addCategory(name: string, color: string): void {
         this.categories.push({ name: ko.observable(name), color: ko.observable(color) });
- 
+
         // Subscribe to color change event
         const root = document.documentElement;
         const index = this.categories().length - 1;

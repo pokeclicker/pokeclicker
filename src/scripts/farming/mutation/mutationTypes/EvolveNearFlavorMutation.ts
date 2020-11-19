@@ -40,7 +40,7 @@ class EvolveNearFlavorMutation extends EvolveNearMutation {
                 return;
             }
             const berryFlavors = App.game.farming.berryData[plot.berry].flavors.map(x => x.value * this.flavorRatio[plot.stage() - 2]);
-            for (let j = 0;j < 5;j++) {
+            for (let j = 0; j < 5; j++) {
                 nearFlavors[j] += berryFlavors[j];
             }
         });
