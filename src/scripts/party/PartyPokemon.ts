@@ -95,7 +95,7 @@ class PartyPokemon implements Saveable {
     public useProtein() {
         if (!this.canUseProtein()) {
             Notifier.notify({
-                message: 'This Pokemon cannot increase it\'s power any higher!',
+                message: 'This Pokémon cannot increase their power any higher!',
                 type: NotificationConstants.NotificationOption.warning,
             });
             return;
