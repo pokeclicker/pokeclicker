@@ -110,7 +110,7 @@ class Battle {
         if (enemyPokemon.shiny) {
             GameHelper.incrementObservable(App.game.statistics.shinyPokemonEncountered[enemyPokemon.id]);
             GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonEncountered);
-            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a Shiny ${enemyPokemon.name} on route ${player.route()}.`);
+            App.game.logbook.newLog(LogBookTypes.SHINY, `You encountered a wild shiny ${enemyPokemon.name} on route ${player.route()}.`);
         } else if (!App.game.party.alreadyCaughtPokemon(Battle.enemyPokemon().id)) {
             App.game.logbook.newLog(LogBookTypes.NEW, `You encountered a wild ${enemyPokemon.name} on route ${player.route()}.`);
         }
