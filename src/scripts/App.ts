@@ -25,7 +25,7 @@ class App {
                 new Wallet(),
                 new KeyItems(),
                 new BadgeCase(),
-                new OakItems([20, 50, 100]),
+                new OakItems([20, 50, 100, 300, 450]),
                 new PokemonCategories(),
                 new Party(),
                 new Shards(),
