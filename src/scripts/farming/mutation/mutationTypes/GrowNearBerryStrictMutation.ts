@@ -42,7 +42,7 @@ class GrowNearBerryStrictMutation extends GrowNearMutation {
             }
         });
 
-        return JSON.stringify(this.berryReqs) === JSON.stringify(currentReqs);
+        return GameHelper.shallowEqual(this.berryReqs,currentReqs);
     }
 
     /**
