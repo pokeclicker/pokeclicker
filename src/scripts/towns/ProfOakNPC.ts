@@ -2,7 +2,7 @@ class ProfOakNPC extends NPC {
 
     constructor(
         public name: string,
-        public dialog: string[],
+        public dialog: string[]
     ) {
         super(name, dialog);
     }
