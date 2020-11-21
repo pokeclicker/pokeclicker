@@ -2,8 +2,10 @@
 /// <reference path="../party/evolutions/StoneEvolution.ts" />
 /// <reference path="../party/evolutions/TimedEvolution.ts" />
 /// <reference path="../party/evolutions/LocationEvolution.ts" />
+/// <reference path="../party/evolutions/WeatherEvolution.ts" />
 /// <reference path="../GameConstants.d.ts" />
 /// <reference path="../party/LevelType.ts" />
+/// <reference path="../weather/WeatherType.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 
 const pokemonDevolutionMap: { [name: string]: PokemonNameType } = {};
@@ -8067,10 +8069,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 55,
         'catchRate': 190,
-        'evolutions': [
-            new LevelEvolution('Cherubi', 'Cherrim (overcast)', 25),
-            new LevelEvolution('Cherubi', 'Cherrim (sunshine)', 25),
-        ],
+        'evolutions': [new LevelEvolution('Cherubi', 'Cherrim (overcast)', 25)],
         'base': {
             'hitpoints': 45,
             'attack': 35,
@@ -8088,6 +8087,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
+        'evolutions': [new WeatherEvolution('Cherrim', 'Cherrim (sunshine)', WeatherType.Sunlight)],
         'base': {
             'hitpoints': 70,
             'attack': 60,
