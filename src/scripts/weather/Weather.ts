@@ -1,4 +1,5 @@
 /// <reference path="./WeatherType.ts" />
+/// <reference path="./WeatherCondition.ts" />
 
 class Weather {
 
@@ -9,53 +10,41 @@ class Weather {
     });
 
     public static color: KnockoutComputed<string> = ko.pureComputed(() => {
-        return Weather.weatherColor[Weather.weather()];
+        return Weather.weatherConditions[Weather.weather()].color;
     });
 
     public static tooltip: KnockoutComputed<string> = ko.pureComputed(() => {
-        switch (Weather.weather()) {
-            case WeatherType.Clear:
-                return 'The weather is clear and pleasant.';
-            case WeatherType.Cloudy:
-                return 'Clouds fill the skies.';
-            case WeatherType.Rain:
-                return 'It\'s rainy and humid.';
-            case WeatherType.Thunderstorm:
-                return 'It\'s currently raining heavily with thunder.';
-            case WeatherType.Snow:
-                return 'It\'s cold and snowing.';
-            case WeatherType.Hail:
-                return 'It\'s cold and hailing.';
-            case WeatherType.Blizzard:
-                return 'A howling blizzard blows.';
-            case WeatherType.Sunlight:
-                return 'The sunlight is strong.';
-            case WeatherType.Sandstorm:
-                return 'A sandstorm is raging.';
-            case WeatherType.Fog:
-                return 'The fog is deep...';
-            case WeatherType.Shadow:
-                return 'A shadowy aura fills the sky.';
-            case WeatherType.Winds:
-                return 'Mysterious strong winds blow.';
-        }
+        return Weather.weatherConditions[Weather.weather()].tooltip;
     });
 
-    public static weatherColor: { [weather in WeatherType]?: string } = {
-        [WeatherType.Clear]:            '#ffe57a',
-        [WeatherType.Cloudy]:           '#bed8ff',
-        [WeatherType.Rain]:             '#9db7f5',
-        [WeatherType.Thunderstorm]:     '#a19288',
-        [WeatherType.Snow]:             '#bbe6e6',
-        [WeatherType.Hail]:             '#74e6e6',
-        [WeatherType.Blizzard]:         '#98d8d8',
-        [WeatherType.Sunlight]:         '#f5ac78',
-        [WeatherType.Sandstorm]:        '#d1c07d',
-        [WeatherType.Fog]:              '#d2c2ef',
-        [WeatherType.Shadow]:           '#776991',
-        [WeatherType.Winds]:            '#81c4ca',
-    };
+    public static weatherConditions: { [weather in WeatherType]?: WeatherCondition } = {
+        [WeatherType.Clear]:            new WeatherCondition(WeatherType.Clear, '#ffe57a', 'The weather is clear and pleasant.'),
+        [WeatherType.Cloudy]:           new WeatherCondition(WeatherType.Cloudy, '#bed8ff', 'Clouds fill the skies.'),
+        [WeatherType.Rain]:             new WeatherCondition(WeatherType.Rain, '#9db7f5', 'It\'s rainy and humid.',
+            [{type: PokemonType.Water, multiplier: 1.1}]),
+        [WeatherType.Thunderstorm]:     new WeatherCondition(WeatherType.Thunderstorm, '#a19288', 'It\'s currently raining heavily with thunder.',
+            [{type: PokemonType.Electric, multiplier: 1.1}, {type: PokemonType.Water, multiplier: 1.1}]),
+        [WeatherType.Snow]:             new WeatherCondition(WeatherType.Snow, '#bbe6e6', 'It\'s cold and snowing.',
+            [{type: PokemonType.Ice, multiplier: 1.05}]),
+        [WeatherType.Hail]:             new WeatherCondition(WeatherType.Hail, '#74e6e6', 'It\'s cold and hailing.',
+            [{type: PokemonType.Ice, multiplier: 1.1}]),
+        [WeatherType.Blizzard]:         new WeatherCondition(WeatherType.Blizzard, '#98d8d8', 'A howling blizzard blows.',
+            [{type: PokemonType.Ice, multiplier: 1.2}, {type: PokemonType.Fire, multiplier: 0.9}, {type: PokemonType.Grass, multiplier: 0.9}]),
+        [WeatherType.Sunlight]:         new WeatherCondition(WeatherType.Sunlight, '#f5ac78', 'The sunlight is strong.',
+            [{type: PokemonType.Fire, multiplier: 1.1}, {type: PokemonType.Grass, multiplier: 1.1}]),
+        [WeatherType.Sandstorm]:        new WeatherCondition(WeatherType.Sandstorm, '#d1c07d', 'A sandstorm is raging.',
+            [{type: PokemonType.Rock, multiplier: 1.1}, {type: PokemonType.Ground, multiplier: 1.1}, {type: PokemonType.Steel, multiplier: 1.1}]),
+        [WeatherType.Fog]:              new WeatherCondition(WeatherType.Fog, '#d2c2ef', 'The fog is deep...',
+            [{type: PokemonType.Ghost, multiplier: 1.1}]),
+        [WeatherType.Shadow]:           new WeatherCondition(WeatherType.Shadow, '#776991', 'A shadowy aura fills the sky.',
+            [{type: PokemonType.Dark, multiplier: 1.2}]),
+        [WeatherType.Winds]:            new WeatherCondition(WeatherType.Winds, '#81c4ca', 'Mysterious strong winds blow.',
+            [{type: PokemonType.Flying, multiplier: 1.2}, {type: PokemonType.Dragon, multiplier: 1.1}]),
+    }
 
+    /**
+     * The probability distribution for Weather conditions
+     */
     public static weatherDistribution: { [weather in WeatherType]?: number } = {
         [WeatherType.Clear]:            0.3,
         [WeatherType.Cloudy]:           0.4,
@@ -71,8 +60,15 @@ class Weather {
         [WeatherType.Winds]:            1.0,
     };
 
+    /**
+     * The period for Weather changes (in hours)
+     */
     public static period = 4;
 
+    /**
+     * Generates the current Weather condition
+     * @param date The current date
+     */
     public static generateWeather(date: Date): void {
 
         // Updating date to weather period increments
