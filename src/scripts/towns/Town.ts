@@ -149,7 +149,7 @@ const ProfOak = new ProfOakNPC('Prof. Oak', [
     'Come visit me when you complete your Pokédex!',
 ]);
 const BattleItemRival = new NPC('Battle Item Master', [
-    'Hey kid, you look new! Let me offer some advice, Battle Items like x-attack can be acquired along Routes, inside Dungeons and in Shops!',
+    'Hey kid, you look new! Let me offer some advice, Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
     'Use them to help you out whenever you feel like time is against you!',
 ]);
 const BattleItemRival2 = new NPC('Battle Item Master', [
