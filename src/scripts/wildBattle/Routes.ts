@@ -1,6 +1,8 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="RegionRoute.ts"/>
 ///<reference path="../../scripts/GameConstants.d.ts" />
+/// <reference path="../weather/WeatherType.ts"/>
+/// <reference path="../achievements/WeatherRequirement.ts"/>
 
 class Routes {
     public static regionRoutes: RegionRoute[] = [];
@@ -670,8 +672,15 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Hoenn Route 119', GameConstants.Region.hoenn, 119,
     new RoutePokemon({
-        land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon', 'Castform', 'Castform (sunny)', 'Castform (rainy)', 'Castform (snowy)'],
+        land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha'],
+        specialReq:
+        [
+            {pokemon: ['Castform'], req: [new WeatherRequirement([WeatherType.Clear])] },
+            {pokemon: ['Castform (sunny)'], req: [new WeatherRequirement([WeatherType.Sunlight])] },
+            {pokemon: ['Castform (rainy)'], req: [new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])] },
+            {pokemon: ['Castform (snowy)'], req: [new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard])] },
+        ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 118)]
 ));

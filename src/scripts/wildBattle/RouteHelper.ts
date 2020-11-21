@@ -24,6 +24,16 @@ class RouteHelper {
         if (includeHeadbutt) {
             pokemonList = pokemonList.concat(possiblePokemons.headbutt);
         }
+
+        // Handling special requirement Pokemon
+        if (possiblePokemons.specialReq) {
+            possiblePokemons.specialReq.forEach(req => {
+                if (req.req.every(requirement => requirement.isCompleted())) {
+                    pokemonList = pokemonList.concat(req.pokemon);
+                }
+            });
+        }
+
         return pokemonList;
     }
 
