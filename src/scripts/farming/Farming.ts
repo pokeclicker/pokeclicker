@@ -965,7 +965,7 @@ class Farming implements Feature {
         if (this.canBuyPlot(index)) {
             const berryData = this.plotBerryCost(index);
             GameHelper.incrementObservable(this.berryList[berryData.type], -berryData.amount);
-            const cost = this.plotFTCost(index);
+            const cost = this.plotFPCost(index);
             App.game.wallet.loseAmount(new Amount(cost, GameConstants.Currency.farmPoint));
             this.plotList[index].isUnlocked = true;
         }
@@ -980,14 +980,14 @@ class Farming implements Feature {
         if (App.game.farming.berryList[berryData.type]() < berryData.amount) {
             return false;
         }
-        const cost = this.plotFTCost(index);
+        const cost = this.plotFPCost(index);
         if (!App.game.wallet.hasAmount(new Amount(cost, GameConstants.Currency.farmPoint))) {
             return false;
         }
         return true;
     }
 
-    plotFTCost(index: number): number {
+    plotFPCost(index: number): number {
         const berryType = Farming.unlockMatrix[index];
         return 10 * Math.floor(Math.pow(berryType + 1, 2));
     }
