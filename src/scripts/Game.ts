@@ -74,6 +74,7 @@ class Game {
         Underground.energyTick(this.underground.getEnergyRegenTime());
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), new Date());
         BerryDeal.generateDeals(new Date());
+        Weather.generateWeather(new Date());
 
         this.gameState = GameConstants.GameState.fighting;
     }
@@ -151,6 +152,10 @@ class Game {
                     type: NotificationConstants.NotificationOption.info,
                     timeout: 3e4,
                 });
+            }
+            // Check if weather changed
+            if (new Date(player._lastSeen).getHours() !== now.getHours()) {
+                Weather.generateWeather(now);
             }
             player._lastSeen = Date.now();
             Save.store(player);
