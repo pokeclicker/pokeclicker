@@ -35,7 +35,7 @@ class ProfOakNPC extends NPC {
                     <p>Your journey isn't over yet, a whole world awaits you! Onwards to Johto!</p>`;
         }
 
-        if (App.game.badgeCase.badgeCount() >= 12) {
+        if (App.game.badgeCase.badgeCount() >= 13) {
             return `<p>Hello, new Champion, you've come a long way!</p>
                     <p>If you complete your Pokédex I can arrange for you to travel to Johto!</p>`;
         }
