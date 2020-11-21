@@ -100,7 +100,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [20, 40, 50, 90, 180],
             5, 0.4, 10, 2,
             [10, 10, 10, 0, 10], BerryColor.Pink,
-            ['The more this Berry absorbs energy from sunlight, the more vivdly colorful it grows.']);
+            ['The more this Berry absorbs energy from sunlight, the more vividly colorful it grows.']);
         this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [100, 150, 200, 250, 500],
             7, 0.4, 15, 2,
             [10, 10, 0, 0, 0], BerryColor.Red,
