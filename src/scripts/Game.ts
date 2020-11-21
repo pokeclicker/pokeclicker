@@ -138,9 +138,10 @@ class Game {
         // Auto Save
         Save.counter += GameConstants.TICK_TIME;
         if (Save.counter > GameConstants.SAVE_TICK) {
+            const old = new Date(player._lastSeen);
             const now = new Date();
             // Check if it's a new day
-            if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
+            if (old.toLocaleDateString() !== now.toLocaleDateString()) {
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
                 //Refresh the Underground deals
@@ -154,7 +155,7 @@ class Game {
                 });
             }
             // Check if weather changed
-            if (new Date(player._lastSeen).getHours() !== now.getHours()) {
+            if (Math.floor(old.getHours() / Weather.period) !== Math.floor(now.getHours() / Weather.period)) {
                 Weather.generateWeather(now);
             }
             player._lastSeen = Date.now();

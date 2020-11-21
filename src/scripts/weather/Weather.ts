@@ -71,9 +71,16 @@ class Weather {
         [WeatherType.Winds]:            1.0,
     };
 
-    public static generateWeather(date: Date): void {
-        SeededRand.seedWithDate(date, true);
+    public static period = 4;
 
+    public static generateWeather(date: Date): void {
+
+        // Updating date to weather period increments
+        const hours = date.getHours();
+        const newHours = Math.floor(hours / this.period) * this.period;
+        date.setHours(newHours);
+
+        SeededRand.seedWithDate(date, true);
         const rand = SeededRand.next();
         for (let i = 0; i < GameHelper.enumLength(WeatherType); i += 1) {
             if (rand <= this.weatherDistribution[i]) {
