@@ -18,9 +18,9 @@ abstract class Machine implements Saveable {
     }
 
     /**
-     * Handles updating the machine
+     * Creates an empty MachineState for PlacedMachines
      */
-    abstract update(delta: number): void;
+    abstract createState(json?: any): MachineState;
 
     toJSON(): Record<string, any> {
         return {
@@ -33,6 +33,16 @@ abstract class Machine implements Saveable {
 
     get image(): string {
         return `assets/images/lab/machines/${this.name}.png`;
+    }
+
+    cells(x: number, y: number): number[][] {
+        const cells = [];
+        for (let i = 0; i < this.width; i++) {
+            for (let j = 0; j < this.height; j++) {
+                cells.push([x + i, y + j]);
+            }
+        }
+        return cells;
     }
 
     get amount(): number {

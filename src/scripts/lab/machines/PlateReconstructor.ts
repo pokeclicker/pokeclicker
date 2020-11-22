@@ -5,8 +5,10 @@
  */
 class PlateReconstructor extends Machine {
 
-    update(delta: number): void {
-        return;
+    createState(json?: any): MachineState {
+        const state = new GeneralMachineState();
+        state.fromJSON(json);
+        return state;
     }
 
 }

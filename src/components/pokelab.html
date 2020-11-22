@@ -15,11 +15,18 @@ style="cursor:default" tabindex="-1">
                     <div style="position: relative;">
                         <img style="width: 100%" src="assets/images/lab/Lab.png">
                         <!-- ko foreach: App.game.lab.placedMachines -->
-                        <div style="position: absolute">
-                            <img src="assets/images/lab/machines/Fabricator.png">
+                        <div id="machineHover" style="position: absolute;"
+                            data-bind="style: {
+                                width: $data.machineWidth(),
+                                height: $data.machineHeight(),
+                                top: $data.machineTop(),
+                                left: $data.machineLeft(),
+                            },
+                            tooltip: { title: $data.machine.name, trigger: 'hover', placement: 'left' }">
+                            <img width="100%" height="100%" style="image-rendering: pixelated;" src="" data-bind="attr: { src: $data.machine.image }">
                         </div>
                         <!-- /ko -->
-                        <div id="labGrid" style="position: absolute;" data-bind="attr: { 'pointer-events': LabController.selectedMachine() !== undefined ? 'auto' : 'none' }">
+                        <div id="labGrid" style="position: absolute;" data-bind="visible: LabController.selectedMachine() !== undefined">
                             <table style="width:100%;height:100%;">
                                 <tbody data-bind="foreach: { data: new Array(LabController.labRows()), as: 'y'}">
                                     <tr data-bind="foreach: { data: new Array(LabController.labColumns()), as: 'x'}">
@@ -44,9 +51,18 @@ style="cursor:default" tabindex="-1">
                     </div>
 
                     <div class="row no-gutters justify-content-around">
+                        <!-- ko if: LabController.selectedMachine() === undefined -->
                         <button class="col-6 btn btn-primary m-1" onclick="LabController.openMachineListModal()">
                             Add Machine
                         </button>
+                        <!-- /ko -->
+                        <!-- ko if: LabController.selectedMachine() !== undefined -->
+                        <button class="col-6 btn btn-danger m-1"
+                            data-bind="click: function() { LabController.selectedMachine(undefined); },
+                            text: 'Cancel Add Machine ' + '(' + LabController.selectedMachine().amount + ' left)'">
+                            Cancel Add Machine
+                        </button>
+                        <!-- /ko -->
                     </div>
                 </div>
 

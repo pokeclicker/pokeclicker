@@ -148,11 +148,62 @@ class LabController {
         LabController.cursorOnGrid(false);
     }
 
+    public static getBlockedCells(): number[][] {
+        const cells = [];
+
+        // Remove blocked cells
+        App.game.lab.placedMachines().forEach(placedMachine => {
+            placedMachine.cells().forEach(cell => cells.push(cell));
+        });
+
+        return cells;
+    }
+
+    public static placeMachine(x: number, y: number) {
+        console.log(`Attempt place machine on ${x}, ${y}`);
+
+        // Sanity checks
+        const machine = LabController.selectedMachine();
+        if (!machine) {
+            return;
+        }
+        if (!machine.amount) {
+            return;
+        }
+        if (y + machine.height > LabController.labRows()) {
+            return;
+        }
+        if (x + machine.width > LabController.labColumns()) {
+            return;
+        }
+
+        // Check placement
+        const cells = machine.cells(x, y);
+        const blockedCells = LabController.getBlockedCells();
+        const blocked = cells.some(cell => {
+            return blockedCells.findIndex(blockedCell => GameHelper.arrayEquals(blockedCell,cell)) != -1;
+        });
+        if (blocked) {
+            return;
+        }
+
+        console.log(`Placing machine ${machine} on ${x}, ${y}`);
+
+        // Adding machine
+        App.game.lab.placedMachines.push(new PlacedMachine(machine, x, y));
+        machine.amount -= 1;
+
+        // Canceling add if no machines left
+        if (machine.amount == 0) {
+            LabController.selectedMachine(undefined);
+        }
+    }
+
     public static openMachineListModal() {
         if (MachineHandler.machineList.length === 0) {
             MachineHandler.machineList = App.game.lab.machines;
-            MachineHandler.filterMachineList();
         }
+        MachineHandler.filterMachineList();
         $('#machineListModal').modal('show');
     }
 
