@@ -10,7 +10,9 @@ abstract class Machine implements Saveable {
     constructor(
         public id: Lab.Machine,
         public name: string,
-        public description: string
+        public description: string,
+        public width: number,
+        public height: number
     ) {
         this._amount = ko.observable<number>(0);
     }
@@ -27,6 +29,10 @@ abstract class Machine implements Saveable {
     }
     fromJSON(json: Record<string, any>): void {
         this.amount = json.hasOwnProperty('amount') ? json['amount'] : this.defaults.amount;
+    }
+
+    get image(): string {
+        return `assets/images/lab/machines/${this.name}.png`;
     }
 
     get amount(): number {

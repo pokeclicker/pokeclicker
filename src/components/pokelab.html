@@ -12,14 +12,44 @@ style="cursor:default" tabindex="-1">
 
             <div class="modal-body tab-content p-0">
                 <div id="lab" class="tab-pane fade in active show">
-                    <div class="plotImage">
+                    <div style="position: relative;">
                         <img style="width: 100%" src="assets/images/lab/Lab.png">
+                        <!-- ko foreach: App.game.lab.placedMachines -->
+                        <div style="position: absolute">
+                            <img src="assets/images/lab/machines/Fabricator.png">
+                        </div>
+                        <!-- /ko -->
+                        <div id="labGrid" style="position: absolute;" data-bind="attr: { 'pointer-events': LabController.selectedMachine() !== undefined ? 'auto' : 'none' }">
+                            <table style="width:100%;height:100%;">
+                                <tbody data-bind="foreach: { data: new Array(LabController.labRows()), as: 'y'}">
+                                    <tr data-bind="foreach: { data: new Array(LabController.labColumns()), as: 'x'}">
+                                        <td data-bind="click: function() {LabController.placeMachine(xIndex(),yIndex());},
+                                            event: { mouseover: function() {LabController.updateHover(xIndex(),yIndex());}, mouseout: function() {LabController.clearHover();}}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ko if: LabController.selectedMachine() !== undefined -->
+                        <div id="machineHover" style="position: absolute; pointer-events: none;"
+                            data-bind="visible: LabController.selectedMachineVisible(),
+                            style: {
+                                width: LabController.machineWidth(),
+                                height: LabController.machineHeight(),
+                                top: LabController.hoverTopMargin(),
+                                left: LabController.hoverLeftMargin(),
+                            }">
+                            <img width="100%" height="100%" style="image-rendering: pixelated;" src="" data-bind="attr: { src: LabController.selectedMachine().image }">
+                        </div>
+                        <!-- /ko -->
                     </div>
-                    <!-- TODO: HLXII - Handle machines -->
-                    <div>
-                        <img src="assets/images/lab/machines/Fabricator.png">
+
+                    <div class="row no-gutters justify-content-around">
+                        <button class="col-6 btn btn-primary m-1" onclick="LabController.openMachineListModal()">
+                            Add Machine
+                        </button>
                     </div>
                 </div>
+
                 <div id="research" class="tab-pane fade">
                     <div class="row no-gutters justify-content-around">
                         <button class="col-12 btn btn-primary m-1" onclick="LabController.openResearchListModal()">

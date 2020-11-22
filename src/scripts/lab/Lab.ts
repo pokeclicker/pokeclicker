@@ -20,6 +20,21 @@ class Lab implements Feature {
      */
     public unlockedResearchSlots: KnockoutComputed<number>;
 
+    /**
+     * Determines the size of the lab. Will depend on region progression.
+     */
+    public labLevel: KnockoutComputed<number>;
+
+    /**
+     * The set lab dimensions based on lab level.
+     */
+    public static labSizes: Record<number, {x: number, y: number}> = {
+        1: {x: 6, y: 7},
+        2: {x: 8, y: 9},
+        3: {x: 10, y: 11},
+        4: {x: 12, y: 13},
+    };
+
     constructor() {
         this.researchList = this.defaults.researchList;
         this.currentResearch = ko.observableArray(this.defaults.currentResearch);
@@ -29,6 +44,21 @@ class Lab implements Feature {
                 return 3;
             }
             if (App.game.lab.researchList[Lab.Research.research_slot1].completed) {
+                return 2;
+            }
+            return 1;
+        });
+
+        this.labLevel = ko.pureComputed(() => {
+            return 1;
+            // TODO: HLXII - Use this logic when lab size is implemented
+            if (MapHelper.accessToTown('Sunyshore City')) {
+                return 4;
+            }
+            if (MapHelper.accessToTown('Mauville City')) {
+                return 3;
+            }
+            if (MapHelper.accessToTown('New Bark Town')) {
                 return 2;
             }
             return 1;
@@ -87,9 +117,9 @@ class Lab implements Feature {
 
         // TODO: HLXII - Machines
         this.machines = [
-            new Fabricator(Lab.Machine.fabricator, 'Fabricator', 'Creates new machines and items.'),
-            new PlateDeconstructor(Lab.Machine.plate_deconstructor, 'Plate Deconstructor', 'Deconstruct plates into shards.'),
-            new PlateReconstructor(Lab.Machine.plate_reconstructor, 'Plate Reconstructor', 'Reconstruct plates from shards.'),
+            new Fabricator(Lab.Machine.fabricator, 'Fabricator', 'Creates new machines and items.', 2, 3),
+            new PlateDeconstructor(Lab.Machine.plate_deconstructor, 'Plate Deconstructor', 'Deconstruct plates into shards.', 1, 2),
+            new PlateReconstructor(Lab.Machine.plate_reconstructor, 'Plate Reconstructor', 'Reconstruct plates from shards.', 1, 2),
         ];
 
         //#endregion
