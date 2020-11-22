@@ -50,6 +50,48 @@ class ChangelogUpdate extends Changelog {
  */
 const changelogItems = [
     // note that month is 0 indexed
+    // v0.6.7
+    new ChangelogUpdate('v0.6.7', new Date(2020, 10, 22)),
+    new Changelog(changelogType.CHANGE, 'Added some more NPC around Kanto'),
+    new Changelog(changelogType.CHANGE, 'Doubled the chance of encountering uncaught Roaming Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Save category filter in Hatchery upon reloading'),
+    new Changelog(changelogType.CHANGE, 'Decreased the Shovel cost'),
+    new Changelog(changelogType.CHANGE, 'Farm items cost decreases faster based on berry type harvested'),
+    new Changelog(changelogType.FIXED, 'Minor text fixes'),
+    new Changelog(changelogType.FIXED, 'Recalculate Pokémon attack upon hatch'),
+    new Changelog(changelogType.FIXED, 'Fixed some Farm mutations'),
+    new Changelog(changelogType.FIXED, 'Fixed larger BerryDex timers'),
+    new Changelog(changelogType.FIXED, 'Fixed quests auto refreshing if you gain a level then refreshed the page'),
+    new Changelog(changelogType.FIXED, 'Fix Quickball on routes with less than 10 kills'),
+
+    // v0.6.6
+    new ChangelogUpdate('v0.6.6', new Date(2020, 10, 18)),
+    new Changelog(changelogType.CHANGE, 'Show shiny symbol for Pokémon in Protein modal'),
+    new Changelog(changelogType.FIXED, 'Achievement pages being empty after completing last item on page'),
+    new Changelog(changelogType.FIXED, 'Start menu visible while loading screen shown'),
+    new Changelog(changelogType.FIXED, 'Save update from older versions'),
+    new Changelog(changelogType.FIXED, 'Time displayed in BerryDex'),
+    new Changelog(changelogType.FIXED, 'Pokédex hide shiny images toggle correctly reflects current state'),
+
+    // v0.6.5
+    new ChangelogUpdate('v0.6.5', new Date(2020, 10, 18)),
+    new Changelog(changelogType.NEW, 'Added toggle to hide shiny images in Pokédex'),
+    new Changelog(changelogType.NEW, 'New display options added to Hatchery'),
+    new Changelog(changelogType.NEW, 'Can sort Pokémon list by total proteins used'),
+    new Changelog(changelogType.NEW, 'New Pokéball types added, Can be obtained by trading with the Johto Berry Master'),
+    new Changelog(changelogType.NEW, 'Add setting to switch between different growth timers in the Farm'),
+    new Changelog(changelogType.CHANGE, 'Nerfed Protein, only 5 can be used per region visited'),
+    new Changelog(changelogType.CHANGE, 'Protein is now used from the Items menu'),
+    new Changelog(changelogType.CHANGE, 'Updated BerryDex to show more readable time format'),
+    new Changelog(changelogType.CHANGE, 'Berries are less likely to mutate nearby plots to themselves'),
+    new Changelog(changelogType.CHANGE, 'Berries are less likely to create mutations of themselves'),
+    new Changelog(changelogType.CHANGE, 'Nerfed some of the Berry Auras'),
+    new Changelog(changelogType.CHANGE, 'Increase Farm wondering Pokémon shiny chance'),
+    new Changelog(changelogType.CHANGE, 'Misc Farm changes'),
+    new Changelog(changelogType.CHANGE, 'Misc text changes'),
+    new Changelog(changelogType.FIXED, 'Hotkeys will no longer activate while focused on inputs'),
+    new Changelog(changelogType.FIXED, 'Category list no longer cut off in Hacthery'),
+
     // v0.6.4
     new ChangelogUpdate('v0.6.4', new Date(2020, 10, 17)),
     new Changelog(changelogType.NEW, 'More Farm statistics'),

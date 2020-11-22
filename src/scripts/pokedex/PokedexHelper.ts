@@ -1,6 +1,9 @@
 import TypeColor = GameConstants.TypeColor;
 
 class PokedexHelper {
+    public static toggleStatisticShiny = ko.observable(true);
+    public static toggleAllShiny = ko.observable(true);
+
     public static getBackgroundColors(name: PokemonNameType): string {
         const pokemon = PokemonHelper.getPokemonByName(name);
 
@@ -44,9 +47,9 @@ class PokedexHelper {
                 options.append($('<option />').val(PokemonType[this]).text(this));
             }
         });
-        
+
         options = $('#pokedex-filter-region');
-        for (let i = 0;i <= GameConstants.MAX_AVAILABLE_REGION;i++) {
+        for (let i = 0; i <= GameConstants.MAX_AVAILABLE_REGION; i++) {
             options.append($('<option />').val(i).text(GameConstants.camelCaseToString(GameConstants.Region[i])));
         }
     }
@@ -63,7 +66,7 @@ class PokedexHelper {
         const highestCaught = App.game.statistics.pokemonCaptured.highestID;
         const highestDex = Math.max(highestEncountered, highestDefeated, highestCaught);
 
-        return pokemonList.filter(function (pokemon) {
+        return pokemonList.filter((pokemon) => {
             // Checks based on caught/shiny status
             const alreadyCaught = App.game.party.alreadyCaughtPokemon(pokemon.id);
             const alreadyCaughtShiny = App.game.party.alreadyCaughtPokemon(pokemon.id, true);
@@ -73,13 +76,13 @@ class PokedexHelper {
             if (nativeRegion > GameConstants.MAX_AVAILABLE_REGION || nativeRegion == GameConstants.Region.none) {
                 return false;
             }
-            
+
             // If not showing this region
             const region: (GameConstants.Region | null) = filter['region'] ? parseInt(filter['region'], 10) : null;
             if (region != null && region != nativeRegion) {
                 return false;
             }
-            
+
             // Event Pokemon
             if (pokemon.id <= 0 && !alreadyCaught) {
                 return false;
@@ -160,7 +163,16 @@ class PokedexHelper {
 
     private static getImage(id: number, name: string) {
         let src = 'assets/images/';
-        if (App.game.party.alreadyCaughtPokemon(id, true)) {
+        if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleAllShiny()) {
+            src += 'shiny';
+        }
+        src += `pokemon/${id}.png`;
+        return src;
+    }
+
+    private static getImageStatistics(id: number) {
+        let src = 'assets/images/';
+        if (App.game.party.alreadyCaughtPokemon(id, true) && this.toggleStatisticShiny()) {
             src += 'shiny';
         }
         src += `pokemon/${id}.png`;
@@ -171,3 +183,9 @@ class PokedexHelper {
         return (pokemon.type.length === 1 && (type == null || pokemon.type[0] === type));
     }
 }
+
+$(document).ready(() => {
+    $('#pokemonStatisticsModal').on('hidden.bs.modal', () => {
+        PokedexHelper.toggleStatisticShiny(true);
+    });
+});

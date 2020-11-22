@@ -11,7 +11,7 @@ class GameController {
                 tooltip.css('visibility', 'visible');
 
             }
-        }, function () {
+        }, () => {
             const tooltip = $('#mapTooltip');
             tooltip.text('');
             tooltip.css('visibility', 'hidden');
@@ -82,7 +82,7 @@ class GameController {
 
                 $(element).tooltip(options);
 
-                ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                ko.utils.domNodeDisposal.addDisposeCallback(element, () => {
                     $(element).tooltip('dispose');
                 });
             },
@@ -115,6 +115,14 @@ class GameController {
         };
     }
 
+    static focusedOnEditableElement(): boolean {
+        const activeEl = document.activeElement as HTMLElement;
+        const localName: string = activeEl.localName.toLowerCase();
+        const editables = ['textarea', 'input', 'select'];
+
+        return (editables.includes(localName) || activeEl.isContentEditable);
+    }
+
     // Store keys for multi-key combinations
     static keyHeld = {}
     static addKeyListeners() {
@@ -127,7 +135,7 @@ class GameController {
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
-            if (document.activeElement.localName == 'input') {
+            if (this.focusedOnEditableElement()) {
                 return;
             }
 
@@ -247,7 +255,7 @@ class GameController {
 
         $(document).on('keyup', e => {
             // Ignore any of our controls if focused on an input element
-            if (document.activeElement.localName == 'input') {
+            if (this.focusedOnEditableElement()) {
                 return;
             }
 
@@ -267,11 +275,11 @@ class GameController {
     }
 }
 
-$(document).ready(function () {
+$(document).ready(() => {
     $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList);
 });
 
 // when stacking modals allow scrolling after top modal hidden
-$(document).on('hidden.bs.modal', '.modal', function () {
+$(document).on('hidden.bs.modal', '.modal', () => {
     $('.modal:visible').length && $(document.body).addClass('modal-open');
 });

@@ -609,17 +609,22 @@ dungeonList['Floccesy Ranch'] = new Dungeon('Floccesy Ranch',
     [new DungeonBossPokemon('Riolu', 8000000, 70)],
     96500, 201, 35);
 
+dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
+    ['Vulpix', 'Sunflora', 'Abra', 'Wingull', 'Pidove', 'Sentret'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Victini', 8000000, 70),
+        new DungeonBossPokemon('Ninetales', 8000000, 70),
+        new DungeonBossPokemon('Alakazam', 8000000, 70),
+    ],
+    96500, 201, 35);
+
 dungeonList['Castelia Sewers'] = new Dungeon('Castelia Sewers',
     ['Rattata', 'Zubat', 'Grimer', 'Trubbish'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [new DungeonBossPokemon('Muk', 8000000, 70)],
-    96500, 201, 35);
-dungeonList['Liberty Garden'] = new Dungeon('Liberty Garden',
-    ['Patrat', 'Sandile', 'Scraggy'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [new DungeonBossPokemon('Victini', 8000000, 70)],
     96500, 201, 35);
 
 dungeonList['Relic Passage'] = new Dungeon('Relic Passage',

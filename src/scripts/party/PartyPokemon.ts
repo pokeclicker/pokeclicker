@@ -95,23 +95,19 @@ class PartyPokemon implements Saveable {
     public useProtein() {
         if (!this.canUseProtein()) {
             Notifier.notify({
-                message: 'This Pokemon cannot increase it\'s power any higher!',
+                message: 'This Pokémon cannot increase their power any higher!',
                 type: NotificationConstants.NotificationOption.warning,
             });
             return;
         }
         if (ItemHandler.useItem('Protein')) {
             GameHelper.incrementObservable(this.proteinsUsed);
-            Notifier.notify({
-                message: `Used 1 × Protein on ${this.name}<br/>Total used: ${this.proteinsUsed().toLocaleString('en-US')}`,
-                type: NotificationConstants.NotificationOption.info,
-            });
         }
     }
 
     canUseProtein = ko.pureComputed(() => {
-        // Allow 10 for every region visited (including Kanto)
-        return this.proteinsUsed() < (player.highestRegion() + 1) * 10;
+        // Allow 5 for every region visited (including Kanto)
+        return this.proteinsUsed() < (player.highestRegion() + 1) * 5;
     });
 
     public fromJSON(json: Record<string, any>): void {

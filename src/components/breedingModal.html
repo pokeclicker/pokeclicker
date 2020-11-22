@@ -50,10 +50,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Category</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(this.value)">
+                                <select name="breedingCategoryFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <option value="-1">All</option>
                                     <!-- ko foreach: PokemonCategories.categories -->
-                                    <option style="color: whitesmoke" data-bind="attr: { value: $index }, text: $data.name, style: { background: $data.color }">Category</option>
+                                    <option style="color: whitesmoke" data-bind="attr: { value: $index, selected: Settings.getSetting('breedingCategoryFilter').value == $index() }, text: $data.name, style: { background: $data.color }">Category</option>
                                     <!-- /ko -->
                                 </select>
                             </div>
@@ -129,11 +129,6 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                                         <!-- /ko -->
                                         <a class="dropdown-item bg-dark py-1" href="#categoryModal" data-toggle="modal"><i>Edit</i></a>
                                     </div>
-                                </div>
-                                <div class="sidebar">
-                                    <a class="useProtein" href="#useProtein" data-bind="class: ItemHandler.hasItem('Protein') && $data.canUseProtein() ? '' : 'disabled', click: function() { $data.useProtein(); }">
-                                        <img class="p-0" src="assets/images/items/Protein.png" width="100%" height="100%"/>
-                                    </a>
                                 </div>
                             </li>
                         </ul>

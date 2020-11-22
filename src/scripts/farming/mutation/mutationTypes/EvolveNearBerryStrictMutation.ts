@@ -37,7 +37,7 @@ class EvolveNearBerryStrictMutation extends EvolveNearMutation {
             }
         });
 
-        return currentReqs === this.berryReqs;
+        return GameHelper.shallowEqual(this.berryReqs,currentReqs);
     }
 
     /**

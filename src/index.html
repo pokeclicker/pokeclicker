@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Pokéclicker</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -55,7 +55,8 @@
             width: 100vw;
             background-color: #79c9fa;
             background-size: cover;
-            z-index: 9999;
+            z-index: 99;
+            overflow: hidden;
         }
 
         .loader-wrapper {
@@ -494,7 +495,7 @@
 @import "shardsModal.html"
 
 <!-- Breeding Modal-->
-@import "breeding.html"
+@import "breedingModal.html"
 
 <!-- Underground Modal -->
 @import "underground.html"
@@ -504,6 +505,9 @@
 
 <!-- Statistics Modal-->
 @import "pokemonStatisticsModal.html"
+
+<!-- Pokemon Selector Modal-->
+@import "pokemonSelectorModal.html"
 
 <!-- Badge Case Modal-->
 @import "badgeCase.html"

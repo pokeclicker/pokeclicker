@@ -31,6 +31,7 @@ class Breeding implements Feature {
         this._eggList.forEach((egg) => {
             egg.extend({deferred: true});
         });
+        BreedingController.filter.category(Settings.getSetting('breedingCategoryFilter').value);
         BreedingController.filter.region(Settings.getSetting('breedingRegionFilter').value);
         BreedingController.filter.type1(Settings.getSetting('breedingTypeFilter1').value);
         BreedingController.filter.type2(Settings.getSetting('breedingTypeFilter2').value);
@@ -212,7 +213,7 @@ class Breeding implements Feature {
         if (this.hasFreeQueueSlot()) {
             return this.addToQueue(pokemon);
         }
-        let message = "You don't have any free egg slots";
+        let message = 'You don\'t have any free egg slots';
         if (this.queueSlots()) {
             message += '<br/>Your queue is full';
         }
@@ -234,7 +235,6 @@ class Breeding implements Feature {
     }
 
     public removeFromQueue(index: number): boolean {
-        console.log('remove from queue:', index);
         const queueSize = this.queueList().length;
         if (queueSize > index) {
             const pokemonName = this.queueList.splice(index, 1)[0];
@@ -247,7 +247,7 @@ class Breeding implements Feature {
     public gainPokemonEgg(pokemon: PartyPokemon): boolean {
         if (!this.hasFreeEggSlot()) {
             Notifier.notify({
-                message: "You don't have any free egg slots",
+                message: 'You don\'t have any free egg slots',
                 type: NotificationConstants.NotificationOption.warning,
             });
             return false;

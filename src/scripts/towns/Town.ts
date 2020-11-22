@@ -4,6 +4,7 @@
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
+///<reference path="ProfOakNPC.ts"/>
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
@@ -143,6 +144,18 @@ const KantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
     'Come back when you are ready to learn!',
 ]);
+const ProfOak = new ProfOakNPC('Prof. Oak', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+]);
+const BattleItemRival = new NPC('Battle Item Master', [
+    'Hey kid, you look new! Let me offer some advice, Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
+    'Use them to help you out whenever you feel like time is against you!',
+]);
+const BattleItemRival2 = new NPC('Battle Item Master', [
+    'Do I know you? Wait... Have you met my worthless rival? Ha! Let me guess, he gave you some unwanted advice?',
+    'I bet he forget to tell you that although all Battle Items only last for 30 seconds they can stack and last for days! Now scram!',
+]);
 
 
 
@@ -156,6 +169,7 @@ TownList['Pewter City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
         shop: PewterCityShop,
+        npcs: [BattleItemRival],
     }
 );
 TownList['Cerulean City'] = new Town(
@@ -191,6 +205,7 @@ TownList['Saffron City'] = new Town(
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
         shop: SaffronCityShop,
+        npcs: [BattleItemRival2],
     }
 );
 TownList['Fuchsia City'] = new Town(
@@ -226,7 +241,13 @@ TownList['Viridian City'] = new Town(
         npcs: [ViridianCityOldMan],
     }
 );
-TownList['Pallet Town'] = new Town('Pallet Town', GameConstants.Region.kanto);
+TownList['Pallet Town'] = new Town(
+    'Pallet Town',
+    GameConstants.Region.kanto,
+    {
+        npcs: [ProfOak],
+    }
+);
 TownList['Lavender Town'] = new Town(
     'Lavender Town',
     GameConstants.Region.kanto,

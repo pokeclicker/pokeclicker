@@ -47,21 +47,8 @@ class Settings {
         return JSON.stringify(dict);
     }
 
-    static arrayToSettingOptionArray(array: Array<any>) {
-        const soa = [];
-        array.forEach((value, index) => soa.push(new SettingOption(GameConstants.camelCaseToString(value), this.stringToValue(value))));
-        return soa;
-    }
-
-    // Turns a string to the respective constant value (only applied to breeding now)
-    static stringToValue(value: any) {
-        if (GameConstants.Region[value] || GameConstants.Region[value as string] == 0) {
-            return GameConstants.Region[value].toString();
-        } else if (PokemonType[value] || PokemonType[value as string] == 0) {
-            return PokemonType[value].toString();
-        } else {
-            return null;
-        }
+    static enumToSettingOptionArray(obj: any, filter = (v) => true) {
+        return GameHelper.enumStrings(obj).filter(filter).map(val => new SettingOption(GameConstants.camelCaseToString(val), `${obj[val]}`));
     }
 }
 
@@ -138,6 +125,13 @@ Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
     ],
     'queue'
 ));
+Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
+    [
+        new SettingOption('To Next Stage', 'nextStage'),
+        new SettingOption('Ripe/Death', 'ripeDeath'),
+    ],
+    'nextStage'
+));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
@@ -169,10 +163,14 @@ Settings.add(new Setting<number>('partySort', 'Sort:',
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 
 // Breeding Filters
+Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
+    [],
+    '-1'
+));
 Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter',
     [
         new SettingOption('All', '-2'),
-        ...Settings.arrayToSettingOptionArray(GameHelper.enumStrings(GameConstants.Region).filter(r => r != 'none')),
+        ...Settings.enumToSettingOptionArray(GameConstants.Region, r => r != 'none'),
         new SettingOption('None', '-1'),
     ],
     '-2'
@@ -180,7 +178,7 @@ Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter',
 Settings.add(new Setting<string>('breedingTypeFilter1', 'breedingTypeFilter1',
     [
         new SettingOption('All', '-2'),
-        ...Settings.arrayToSettingOptionArray(GameHelper.enumStrings(PokemonType).filter(t => t != 'None')),
+        ...Settings.enumToSettingOptionArray(PokemonType, t => t != 'None'),
         new SettingOption('None', '-1'),
     ],
     '-2'
@@ -188,7 +186,7 @@ Settings.add(new Setting<string>('breedingTypeFilter1', 'breedingTypeFilter1',
 Settings.add(new Setting<string>('breedingTypeFilter2', 'breedingTypeFilter2',
     [
         new SettingOption('All', '-2'),
-        ...Settings.arrayToSettingOptionArray(GameHelper.enumStrings(PokemonType).filter(t => t != 'None')),
+        ...Settings.enumToSettingOptionArray(PokemonType, t => t != 'None'),
         new SettingOption('None', '-1'),
     ],
     '-2'
@@ -208,6 +206,8 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Base Attack', 'baseAttack'),
         new SettingOption('Egg Steps', 'eggSteps'),
         new SettingOption('Times Hatched', 'timesHatched'),
+        new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
+        new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
     ],
     'attack'
 ));

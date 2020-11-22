@@ -20,7 +20,7 @@ class Farming implements Feature {
         berryList: Array<number>(GameHelper.enumLength(BerryType) - 1).fill(0),
         unlockedBerries: Array<boolean>(GameHelper.enumLength(BerryType) - 1).fill(false),
         mulchList: Array<number>(GameHelper.enumLength(MulchType)).fill(0),
-        plotList: new Array(Farming.PLOT_WIDTH * Farming.PLOT_HEIGHT).fill(null).map(function (value, index) {
+        plotList: new Array(Farming.PLOT_WIDTH * Farming.PLOT_HEIGHT).fill(null).map((value, index) => {
             const middle = Math.floor(Farming.PLOT_HEIGHT / 2) * Farming.PLOT_WIDTH + Math.floor(Farming.PLOT_WIDTH / 2);
             return new Plot(index === middle, BerryType.None, 0, MulchType.None, 0);
         }),
@@ -100,7 +100,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [20, 40, 50, 90, 180],
             5, 0.4, 10, 2,
             [10, 10, 10, 0, 10], BerryColor.Pink,
-            ['The more this Berry absorbs energy from sunlight, the more vivdly colorful it grows.']);
+            ['The more this Berry absorbs energy from sunlight, the more vividly colorful it grows.']);
         this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [100, 150, 200, 250, 500],
             7, 0.4, 15, 2,
             [10, 10, 0, 0, 0], BerryColor.Red,
@@ -412,6 +412,10 @@ class Farming implements Feature {
 
         //#region Mutations
 
+        /**
+         * NOTE: ONLY ADD NEW MUTATIONS AT THE END OF THE LIST. MUTATION INDEX IS USED TO STORE HINT SEEN DATA
+         */
+
         //#region Second Generation
 
         // Persim
@@ -712,7 +716,11 @@ class Farming implements Feature {
             hint: 'I\'ve heard that a special Berry can appear after being surrounded by Shuca and Charti Berries!',
         }));
         // Chilan
-        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Chilan, BerryType.Chople, []));
+        berryReqs = {};
+        berryReqs[BerryType.Chople] = 3;
+        this.mutations.push(new EvolveNearBerryMinMutation(.0001, BerryType.Chilan, BerryType.Chople, berryReqs, {
+            hint: 'I\'ve heard that Chople Berries will turn into a different Berry if surrounded by more than two of its own kind',
+        }));
         // Roseli
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Roseli,
             [
@@ -869,7 +877,7 @@ class Farming implements Feature {
         this.wanderCounter += GameConstants.TICK_TIME;
         let wanderPokemon: any;
         if (this.wanderCounter >= GameConstants.WANDER_TICK) {
-            for (let i = 0;i < App.game.farming.plotList.length;i++) {
+            for (let i = 0; i < App.game.farming.plotList.length; i++) {
                 const plot = App.game.farming.plotList[i];
                 wanderPokemon = plot.generateWanderPokemon();
                 if (wanderPokemon !== undefined) {
@@ -957,7 +965,7 @@ class Farming implements Feature {
         if (this.canBuyPlot(index)) {
             const berryData = this.plotBerryCost(index);
             GameHelper.incrementObservable(this.berryList[berryData.type], -berryData.amount);
-            const cost = this.plotFTCost(index);
+            const cost = this.plotFPCost(index);
             App.game.wallet.loseAmount(new Amount(cost, GameConstants.Currency.farmPoint));
             this.plotList[index].isUnlocked = true;
         }
@@ -972,14 +980,14 @@ class Farming implements Feature {
         if (App.game.farming.berryList[berryData.type]() < berryData.amount) {
             return false;
         }
-        const cost = this.plotFTCost(index);
+        const cost = this.plotFPCost(index);
         if (!App.game.wallet.hasAmount(new Amount(cost, GameConstants.Currency.farmPoint))) {
             return false;
         }
         return true;
     }
 
-    plotFTCost(index: number): number {
+    plotFPCost(index: number): number {
         const berryType = Farming.unlockMatrix[index];
         return 10 * Math.floor(Math.pow(berryType + 1, 2));
     }
@@ -1031,7 +1039,7 @@ class Farming implements Feature {
         App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.berryData[plot.berry].exp);
         GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
 
-        player.lowerItemMultipliers(MultiplierDecreaser.Berry);
+        player.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berryData[plot.berry].exp);
 
         plot.die(true);
 

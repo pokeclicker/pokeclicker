@@ -35,7 +35,7 @@ class Sound {
             });
         });
     }
-    
+
     play () {
         if (this.initialized && this.canPlay()) {
             this.sound.play();
