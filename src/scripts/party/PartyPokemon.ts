@@ -76,9 +76,6 @@ class PartyPokemon implements Saveable {
             if (evolution instanceof LevelEvolution && evolution.isSatisfied()) {
                 evolution.evolve();
             }
-            if (evolution instanceof WeatherEvolution && evolution.isSatisfied()) {
-                evolution.evolve();
-            }
         }
     }
 
