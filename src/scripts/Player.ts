@@ -160,10 +160,10 @@ class Player {
         this._itemList[itemName](this._itemList[itemName]() - amount);
     }
 
-    public lowerItemMultipliers(multiplierDecreaser: MultiplierDecreaser, n = 1) {
+    public lowerItemMultipliers(multiplierDecreaser: MultiplierDecreaser, amount = 1) {
         for (const obj in ItemList) {
             const item = ItemList[obj];
-            item.decreasePriceMultiplier(n, multiplierDecreaser);
+            item.decreasePriceMultiplier(amount, multiplierDecreaser);
         }
     }
 
