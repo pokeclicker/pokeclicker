@@ -6,6 +6,7 @@ class WeatherCondition {
         public type: WeatherType,
         public color: string,
         public description: string,
+        public weight: number,
         public multipliers?: {type: PokemonType, multiplier: number}[]
     ) { }
 
