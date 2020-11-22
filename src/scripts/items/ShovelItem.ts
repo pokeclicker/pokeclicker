@@ -14,4 +14,4 @@ class ShovelItem extends Item {
     }
 }
 
-ItemList['Berry_Shovel']   = new ShovelItem(400, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
+ItemList['Berry_Shovel']   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
