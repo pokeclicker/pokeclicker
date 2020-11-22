@@ -1243,7 +1243,7 @@ gymList['Ballonlea'] = new Gym(
         new GymPokemon('Weezing (Galar)', 2458300, 36),
         new GymPokemon('Mawile', 2462000, 36),
         new GymPokemon('Togekiss', 2458300, 37),
-        new GymPokemon('Alcremie (Strawberry)', 2458300, 38),
+        new GymPokemon('Alcremie (Strawberry Vanilla)', 2458300, 38),
     ],
     BadgeEnums.Galar_Fairy,
     128000,

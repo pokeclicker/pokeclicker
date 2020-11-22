@@ -1900,6 +1900,14 @@ const MotostokeShop = new Shop([
     ItemList['Clover_sweet'],
     ItemList['Flower_sweet'],
     ItemList['Ribbon_sweet'],
+    ItemList['Lemon_cream'],
+    ItemList['Salted_cream'],
+    ItemList['Ruby_cream'],
+    ItemList['Mint_cream'],
+    ItemList['Matcha_cream'],
+    ItemList['Caramel_swirl'],
+    ItemList['Rainbow_swirl'],
+    ItemList['Ruby_swirl'],
 ]);
 const HammerlockeShop = new Shop([
     ItemList['Dragon_egg'],

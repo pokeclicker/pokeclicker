@@ -274,7 +274,15 @@ namespace GameConstants {
         'Rusted_sword',
         'Rusted_shield',
         'Galarica_cuff',
-        'Galarica_wreath'
+        'Galarica_wreath',
+        'Lemon_cream',
+        'Mint_cream',
+        'Matcha_cream',
+        'Ruby_cream',
+        'Salted_cream',
+        'Rainbow_swirl',
+        'Caramel_swirl',
+        'Ruby_swirl'
     }
     declare enum BattleItemType {
         'xAttack' = '',
