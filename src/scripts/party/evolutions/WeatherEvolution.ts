@@ -21,7 +21,7 @@ class WeatherEvolution extends Evolution {
         console.log(this);
         return super.isSatisfied()
             // Check Weather conditions
-            && Weather.weather() === this.weather;
+            && Weather.currentWeather() === this.weather;
     }
 
     evolve(): boolean {

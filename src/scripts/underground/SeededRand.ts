@@ -9,11 +9,12 @@ class SeededRand {
         return this.state / this.MOD;
     }
 
-    public static seedWithDate(d: Date, includeHour = false) {
-        this.state = Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
-        if (includeHour) {
-            this.state += 1000000 * d.getHours();
-        }
+    public static seedWithDate(d: Date) {
+        this.state = this.getDateSeed(d);
+    }
+
+    public static getDateSeed(d: Date): number {
+        return  Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
     }
 
     public static seed(state: number) {

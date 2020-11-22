@@ -1,20 +1,31 @@
 /// <reference path="./WeatherType.ts" />
 /// <reference path="./WeatherCondition.ts" />
 
+type WeatherDistribution = { [weather in WeatherType]?: number };
+
 class Weather {
 
-    public static weather: KnockoutObservable<WeatherType> = ko.observable(WeatherType.Clear);
+    public static weather: KnockoutObservable<WeatherType>[] = Array<WeatherType>(GameHelper.enumLength(GameConstants.Region)).fill(WeatherType.Clear).map(v => ko.observable<WeatherType>(v));
+
+    public static currentWeather: KnockoutComputed<WeatherType> = ko.pureComputed(() => {
+
+        const weather = Weather.weather[player.region]();
+
+        // TODO: HLXII - Add weather overrides
+
+        return weather;
+    });
 
     public static image: KnockoutComputed<string> = ko.pureComputed(() => {
-        return `assets/images/weather/${WeatherType[Weather.weather()]}.png`;
+        return `assets/images/weather/${WeatherType[Weather.currentWeather()]}.png`;
     });
 
     public static color: KnockoutComputed<string> = ko.pureComputed(() => {
-        return Weather.weatherConditions[Weather.weather()].color;
+        return Weather.weatherConditions[Weather.currentWeather()].color;
     });
 
     public static tooltip: KnockoutComputed<string> = ko.pureComputed(() => {
-        return Weather.weatherConditions[Weather.weather()].tooltip;
+        return Weather.weatherConditions[Weather.currentWeather()].tooltip;
     });
 
     public static weatherConditions: { [weather in WeatherType]?: WeatherCondition } = {
@@ -45,20 +56,60 @@ class Weather {
     /**
      * The probability distribution for Weather conditions
      */
-    public static weatherDistribution: { [weather in WeatherType]?: number } = {
-        [WeatherType.Clear]:            0.3,
-        [WeatherType.Cloudy]:           0.4,
-        [WeatherType.Rain]:             0.45,
-        [WeatherType.Thunderstorm]:     0.5,
-        [WeatherType.Snow]:             0.54,
-        [WeatherType.Hail]:             0.57,
-        [WeatherType.Blizzard]:         0.6,
-        [WeatherType.Sunlight]:         0.7,
-        [WeatherType.Sandstorm]:        0.8,
-        [WeatherType.Fog]:              0.9,
-        [WeatherType.Shadow]:           1.0,
-        [WeatherType.Winds]:            1.0,
-    };
+    public static weatherDistribution: { [region in GameConstants.Region]?: WeatherDistribution } = {
+        [GameConstants.Region.kanto]: {
+            [WeatherType.Clear]:            0.3,
+            [WeatherType.Cloudy]:           0.4,
+            [WeatherType.Rain]:             0.45,
+            [WeatherType.Thunderstorm]:     0.5,
+            [WeatherType.Snow]:             0.54,
+            [WeatherType.Hail]:             0.57,
+            [WeatherType.Blizzard]:         0.6,
+            [WeatherType.Sunlight]:         0.7,
+            [WeatherType.Sandstorm]:        0.8,
+            [WeatherType.Fog]:              0.9,
+            [WeatherType.Shadow]:           1.0,
+        },
+        [GameConstants.Region.johto]: {
+            [WeatherType.Clear]:            0.3,
+            [WeatherType.Cloudy]:           0.4,
+            [WeatherType.Rain]:             0.45,
+            [WeatherType.Thunderstorm]:     0.5,
+            [WeatherType.Snow]:             0.54,
+            [WeatherType.Hail]:             0.57,
+            [WeatherType.Blizzard]:         0.6,
+            [WeatherType.Sunlight]:         0.7,
+            [WeatherType.Sandstorm]:        0.8,
+            [WeatherType.Fog]:              0.9,
+            [WeatherType.Shadow]:           1.0,
+        },
+        [GameConstants.Region.hoenn]: {
+            [WeatherType.Clear]:            0.3,
+            [WeatherType.Cloudy]:           0.4,
+            [WeatherType.Rain]:             0.45,
+            [WeatherType.Thunderstorm]:     0.5,
+            [WeatherType.Snow]:             0.54,
+            [WeatherType.Hail]:             0.57,
+            [WeatherType.Blizzard]:         0.6,
+            [WeatherType.Sunlight]:         0.7,
+            [WeatherType.Sandstorm]:        0.8,
+            [WeatherType.Fog]:              0.9,
+            [WeatherType.Shadow]:           1.0,
+        },
+        [GameConstants.Region.sinnoh]: {
+            [WeatherType.Clear]:            0.3,
+            [WeatherType.Cloudy]:           0.4,
+            [WeatherType.Rain]:             0.45,
+            [WeatherType.Thunderstorm]:     0.5,
+            [WeatherType.Snow]:             0.54,
+            [WeatherType.Hail]:             0.57,
+            [WeatherType.Blizzard]:         0.6,
+            [WeatherType.Sunlight]:         0.7,
+            [WeatherType.Sandstorm]:        0.8,
+            [WeatherType.Fog]:              0.9,
+            [WeatherType.Shadow]:           1.0,
+        },
+    }
 
     /**
      * The period for Weather changes (in hours)
@@ -71,21 +122,28 @@ class Weather {
      */
     public static generateWeather(date: Date): void {
 
-        // Updating date to weather period increments
-        const hours = date.getHours();
-        const newHours = Math.floor(hours / this.period) * this.period;
-        date.setHours(newHours);
+        // Calculating seed
+        let seed = SeededRand.getDateSeed(date);
+        // Adding hours
+        const newHours = Math.floor(date.getHours() / this.period) * this.period;
+        seed += 1000000 * newHours;
 
-        SeededRand.seedWithDate(date, true);
-        const rand = SeededRand.next();
-        for (let i = 0; i < GameHelper.enumLength(WeatherType); i += 1) {
-            if (rand <= this.weatherDistribution[i]) {
-                this.weather(i);
+        SeededRand.seed(seed);
+
+        Weather.weather.forEach((weather, index) => {
+            const rand = SeededRand.next();
+            if (!Weather.weatherDistribution[index]) {
+                weather(WeatherType.Clear);
                 return;
             }
-        }
-
-        // Set Clear if failed
-        this.weather(WeatherType.Clear);
+            for (let i = 0; i < GameHelper.enumLength(WeatherType); i += 1) {
+                if (rand <= Weather.weatherDistribution[index][i]) {
+                    weather(i);
+                    return;
+                }
+            }
+            // Set Clear if failed
+            weather(WeatherType.Clear);
+        });
     }
 }

@@ -135,7 +135,7 @@ class Party implements Feature {
         }
 
         if (includeWeather) {
-            const weather = Weather.weatherConditions[Weather.weather()];
+            const weather = Weather.weatherConditions[Weather.currentWeather()];
             const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
             if (weather.multipliers) {
                 weather.multipliers.forEach(value => {
