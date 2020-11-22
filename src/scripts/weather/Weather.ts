@@ -47,8 +47,6 @@ class Weather {
             [{type: PokemonType.Rock, multiplier: 1.1}, {type: PokemonType.Ground, multiplier: 1.1}, {type: PokemonType.Steel, multiplier: 1.1}]),
         [WeatherType.Fog]:              new WeatherCondition(WeatherType.Fog, '#d2c2ef', 'The fog is deep...', 10,
             [{type: PokemonType.Ghost, multiplier: 1.1}]),
-        [WeatherType.Shadow]:           new WeatherCondition(WeatherType.Shadow, '#776991', 'A shadowy aura fills the sky.', 10,
-            [{type: PokemonType.Dark, multiplier: 1.2}]),
         [WeatherType.Winds]:            new WeatherCondition(WeatherType.Winds, '#81c4ca', 'Mysterious strong winds blow.', 0,
             [{type: PokemonType.Flying, multiplier: 1.2}, {type: PokemonType.Dragon, multiplier: 1.1}]),
     }

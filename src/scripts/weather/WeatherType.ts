@@ -9,6 +9,5 @@ enum WeatherType {
     Sunlight,
     Sandstorm,
     Fog,
-    Shadow,
     Winds,
 }
