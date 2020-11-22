@@ -11,7 +11,7 @@ class Research implements Saveable {
         completed: false,
     };
 
-    public id: Researches.Research;
+    public id: Lab.Research;
     public type: ResearchType;
     public name: string;
     private _description: string;
@@ -26,7 +26,7 @@ class Research implements Saveable {
 
     state: KnockoutComputed<ResearchState>;
 
-    constructor(id: Researches.Research, type: ResearchType, name: string, description: string, points: number, option?: ResearchOption) {
+    constructor(id: Lab.Research, type: ResearchType, name: string, description: string, points: number, option?: ResearchOption) {
         this.id = id;
         this.type = type;
         this.name = name;

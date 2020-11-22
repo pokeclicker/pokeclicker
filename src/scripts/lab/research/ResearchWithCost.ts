@@ -10,7 +10,7 @@ class ResearchWithCost extends Research {
 
     private _purchased: KnockoutObservable<boolean>;
 
-    constructor(id: Researches.Research, type: ResearchType, name: string, description: string, points: number, costs: ItemCost[], option?: ResearchOption) {
+    constructor(id: Lab.Research, type: ResearchType, name: string, description: string, points: number, costs: ItemCost[], option?: ResearchOption) {
         super(id, type, name, description, points, option);
         this._costs = costs;
 

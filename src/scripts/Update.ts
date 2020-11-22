@@ -262,16 +262,6 @@ class Update implements Saveable {
 
             // Reset all plots
             delete saveData.farming.plotList;
-
-            // TODO: HLXII - Move this to the version it'll be released in
-            for (const pokemon of saveData.party.caughtPokemon) {
-                if (pokemon.breeding) {
-                    pokemon.location = PartyLocation.Hatchery;
-                } else {
-                    pokemon.location = PartyLocation.Battle;
-                }
-                delete pokemon.breeding;
-            }
         },
 
         '0.6.1': ({ saveData }) => {
@@ -305,6 +295,18 @@ class Update implements Saveable {
                 });
 
                 playerData._itemList.Protein += proteinsToRefund || 0;
+            }
+        },
+
+        '0.6.7': ({ playerData, saveData }) => {
+            // TODO: HLXII - Move this to the version it'll be released in
+            for (const pokemon of saveData.party.caughtPokemon) {
+                if (pokemon.breeding) {
+                    pokemon.location = PartyLocation.Hatchery;
+                } else {
+                    pokemon.location = PartyLocation.Battle;
+                }
+                delete pokemon.breeding;
             }
         },
     };

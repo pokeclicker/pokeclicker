@@ -4,7 +4,7 @@ class TypeBoosterResearch extends ResearchWithCost {
 
     private _pokemonType: PokemonType;
 
-    constructor(id: Researches.Research, pokemonType: PokemonType, points: number, option?: ResearchOption) {
+    constructor(id: Lab.Research, pokemonType: PokemonType, points: number, option?: ResearchOption) {
         option = option ?? {};
         option.workerFilter = option.workerFilter ?? new TypeFilter([pokemonType]);
         option.requirements = []; // TODO: HLXII - Setup requirement for Typed BF stages

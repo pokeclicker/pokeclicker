@@ -6,6 +6,10 @@ class Lab implements Feature {
 
     currentResearch: KnockoutObservableArray<ResearchSlot>;
 
+    //machines: Machine[];
+
+    //activeMachines: KnockoutObservableArray<ActiveMachine>;
+
     defaults = {
         researchList: [],
         currentResearch: [],
@@ -21,10 +25,10 @@ class Lab implements Feature {
         this.currentResearch = ko.observableArray(this.defaults.currentResearch);
 
         this.unlockedResearchSlots = ko.pureComputed(() => {
-            if (App.game.lab.researchList[Researches.Research.research_slot2].completed) {
+            if (App.game.lab.researchList[Lab.Research.research_slot2].completed) {
                 return 3;
             }
-            if (App.game.lab.researchList[Researches.Research.research_slot1].completed) {
+            if (App.game.lab.researchList[Lab.Research.research_slot1].completed) {
                 return 2;
             }
             return 1;
@@ -36,33 +40,35 @@ class Lab implements Feature {
     initialize() {
         // TODO: HLXII - Add all Researches
         // TODO: HLXII - Balance research point cost
+        //#region Research
+
         this.researchList = [
-            new Research(Researches.Research.research_slot1, ResearchType.Research_Slot,
+            new Research(Lab.Research.research_slot1, ResearchType.Research_Slot,
                 'Research Slot I', 'Unlocks a second Research Slot.',
                 1000),
-            new Research(Researches.Research.research_slot2, ResearchType.Research_Slot,
+            new Research(Lab.Research.research_slot2, ResearchType.Research_Slot,
                 'Research Slot II', 'Unlocks a third Research Slot.',
-                1000, { requirements: [new ResearchedRequirement(Researches.Research.research_slot1)] }),
-            new TypeBoosterResearch(Researches.Research.type_boost_normal, PokemonType.Normal, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_fire, PokemonType.Fire, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_water, PokemonType.Water, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_electric, PokemonType.Electric, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_grass, PokemonType.Grass, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_ice, PokemonType.Ice, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_fighting, PokemonType.Fighting, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_poison, PokemonType.Poison, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_ground, PokemonType.Ground, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_flying, PokemonType.Flying, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_psychic, PokemonType.Psychic, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_bug, PokemonType.Bug, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_rock, PokemonType.Rock, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_ghost, PokemonType.Ghost, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_dragon, PokemonType.Dragon, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_dark, PokemonType.Dark, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_steel, PokemonType.Steel, 100),
-            new TypeBoosterResearch(Researches.Research.type_boost_fairy, PokemonType.Fairy, 100),
+                1000, { requirements: [new ResearchedRequirement(Lab.Research.research_slot1)] }),
+            new TypeBoosterResearch(Lab.Research.type_boost_normal, PokemonType.Normal, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_fire, PokemonType.Fire, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_water, PokemonType.Water, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_electric, PokemonType.Electric, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_grass, PokemonType.Grass, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_ice, PokemonType.Ice, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_fighting, PokemonType.Fighting, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_poison, PokemonType.Poison, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_ground, PokemonType.Ground, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_flying, PokemonType.Flying, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_psychic, PokemonType.Psychic, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_bug, PokemonType.Bug, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_rock, PokemonType.Rock, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_ghost, PokemonType.Ghost, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_dragon, PokemonType.Dragon, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_dark, PokemonType.Dark, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_steel, PokemonType.Steel, 100),
+            new TypeBoosterResearch(Lab.Research.type_boost_fairy, PokemonType.Fairy, 100),
 
-            new Research(Researches.Research.time_machine, ResearchType.Machine,
+            new Research(Lab.Research.time_machine, ResearchType.Machine,
                 'Time Machine', 'Unlocks the Time Machine',
                 100,
                 {
@@ -72,6 +78,12 @@ class Lab implements Feature {
                     }, 'Only Time Pokemon can work on this Research'),
                 }),
         ];
+
+        //#endregion
+
+        //#region Machines
+        // TODO: HLXII - Machines
+        //#endregion
     }
 
     update(delta: number) {
@@ -86,6 +98,8 @@ class Lab implements Feature {
                 });
             }
         });
+
+        // TODO: HLXII - Handle Machines
     }
 
     canAccess(): boolean {
@@ -124,7 +138,7 @@ class Lab implements Feature {
         if (json.hasOwnProperty('researchList')) {
             for (const key in json['researchList']) {
                 if (json['researchList'].hasOwnProperty(key)) {
-                    this.researchList[key].fromJSON(json['researchList'][key]);
+                    this.researchList[Lab.Research[key]].fromJSON(json['researchList'][key]);
                 }
             }
         }
@@ -145,7 +159,7 @@ class Lab implements Feature {
 
         save['researchList'] = {};
         for (let i = 0; i < this.researchList.length; i++) {
-            save['researchList'][this.researchList[i].id] = this.researchList[i].toJSON();
+            save['researchList'][Lab.Research[this.researchList[i].id]] = this.researchList[i].toJSON();
         }
 
         save['currentResearch'] = this.currentResearch().map(res => res.toJSON());
@@ -155,8 +169,9 @@ class Lab implements Feature {
 
 }
 
-// TODO: HLXII - Add all Researches
-namespace Researches {
+
+namespace Lab {
+    // TODO: HLXII - Add all Researches
     export enum Research {
         'research_slot1' = 0,
         'research_slot2',
@@ -179,5 +194,10 @@ namespace Researches {
         'type_boost_steel',
         'type_boost_fairy',
         'time_machine',
+    }
+
+    // TODO: HLXII - Add all Machines
+    export enum Machine {
+
     }
 }

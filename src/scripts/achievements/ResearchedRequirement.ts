@@ -1,9 +1,9 @@
 ///<reference path="Requirement.ts"/>
 
 class ResearchedRequirement extends Requirement {
-    public research: Researches.Research;
+    public research: Lab.Research;
     constructor(
-        research: Researches.Research,
+        research: Lab.Research,
         type: GameConstants.AchievementOption = GameConstants.AchievementOption.more
     ) {
         super(1, type);

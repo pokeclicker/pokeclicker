@@ -1,9 +1,9 @@
 class ResearchHandler {
 
-    public static researchList: Researches.Research[] = [];
+    public static researchList: Lab.Research[] = [];
     public static researchTypes: KnockoutObservableArray<string> = ko.observableArray([]);
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
-    public static researchListFiltered: KnockoutObservableArray<Researches.Research> = ko.observableArray([]);
+    public static researchListFiltered: KnockoutObservableArray<Lab.Research> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
 
     public static initialize() {
