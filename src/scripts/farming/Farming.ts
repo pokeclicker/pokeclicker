@@ -100,7 +100,7 @@ class Farming implements Feature {
         this.berryData[BerryType.Persim]    = new Berry(BerryType.Persim,   [20, 40, 50, 90, 180],
             5, 0.4, 10, 2,
             [10, 10, 10, 0, 10], BerryColor.Pink,
-            ['The more this Berry absorbs energy from sunlight, the more vivdly colorful it grows.']);
+            ['The more this Berry absorbs energy from sunlight, the more vividly colorful it grows.']);
         this.berryData[BerryType.Razz]      = new Berry(BerryType.Razz,     [100, 150, 200, 250, 500],
             7, 0.4, 15, 2,
             [10, 10, 0, 0, 0], BerryColor.Red,
@@ -965,7 +965,7 @@ class Farming implements Feature {
         if (this.canBuyPlot(index)) {
             const berryData = this.plotBerryCost(index);
             GameHelper.incrementObservable(this.berryList[berryData.type], -berryData.amount);
-            const cost = this.plotFTCost(index);
+            const cost = this.plotFPCost(index);
             App.game.wallet.loseAmount(new Amount(cost, GameConstants.Currency.farmPoint));
             this.plotList[index].isUnlocked = true;
         }
@@ -980,14 +980,14 @@ class Farming implements Feature {
         if (App.game.farming.berryList[berryData.type]() < berryData.amount) {
             return false;
         }
-        const cost = this.plotFTCost(index);
+        const cost = this.plotFPCost(index);
         if (!App.game.wallet.hasAmount(new Amount(cost, GameConstants.Currency.farmPoint))) {
             return false;
         }
         return true;
     }
 
-    plotFTCost(index: number): number {
+    plotFPCost(index: number): number {
         const berryType = Farming.unlockMatrix[index];
         return 10 * Math.floor(Math.pow(berryType + 1, 2));
     }
@@ -1039,7 +1039,7 @@ class Farming implements Feature {
         App.game.oakItems.use(OakItems.OakItem.Sprayduck, this.berryData[plot.berry].exp);
         GameHelper.incrementObservable(App.game.statistics.totalManualHarvests, 1);
 
-        player.lowerItemMultipliers(MultiplierDecreaser.Berry);
+        player.lowerItemMultipliers(MultiplierDecreaser.Berry, this.berryData[plot.berry].exp);
 
         plot.die(true);
 
