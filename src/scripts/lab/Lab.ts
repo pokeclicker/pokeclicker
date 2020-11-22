@@ -3,16 +3,16 @@ class Lab implements Feature {
     saveKey = 'lab';
 
     researchList: Research[];
-
     currentResearch: KnockoutObservableArray<ResearchSlot>;
 
-    //machines: Machine[];
-
-    //activeMachines: KnockoutObservableArray<ActiveMachine>;
+    machines: Machine[];
+    placedMachines: KnockoutObservableArray<PlacedMachine>;
 
     defaults = {
         researchList: [],
         currentResearch: [],
+        machines: [],
+        placedMachines: [],
     }
 
     /**
@@ -34,6 +34,8 @@ class Lab implements Feature {
             return 1;
         });
 
+        this.machines = this.defaults.machines;
+        this.placedMachines = ko.observableArray(this.defaults.placedMachines);
 
     }
 
@@ -82,7 +84,14 @@ class Lab implements Feature {
         //#endregion
 
         //#region Machines
+
         // TODO: HLXII - Machines
+        this.machines = [
+            new Fabricator(Lab.Machine.fabricator, 'Fabricator', 'Creates new machines and items.'),
+            new PlateDeconstructor(Lab.Machine.plate_deconstructor, 'Plate Deconstructor', 'Deconstruct plates into shards.'),
+            new PlateReconstructor(Lab.Machine.plate_reconstructor, 'Plate Reconstructor', 'Reconstruct plates from shards.'),
+        ];
+
         //#endregion
     }
 
@@ -152,6 +161,24 @@ class Lab implements Feature {
         } else {
             this.currentResearch(this.defaults.currentResearch);
         }
+
+        if (json.hasOwnProperty('machines')) {
+            for (const key in json['machines']) {
+                if (json['machines'].hasOwnProperty(key)) {
+                    this.machines[Lab.Machine[key]].fromJSON(json['machines'][key]);
+                }
+            }
+        }
+
+        if (json.hasOwnProperty('placedMachines')) {
+            json['placedMachines'].forEach(res => {
+                const machine = new PlacedMachine();
+                machine.fromJSON(res);
+                this.placedMachines.push(machine);
+            });
+        } else {
+            this.placedMachines(this.defaults.placedMachines);
+        }
     }
 
     toJSON(): Record<string, any> {
@@ -163,6 +190,13 @@ class Lab implements Feature {
         }
 
         save['currentResearch'] = this.currentResearch().map(res => res.toJSON());
+
+        save['machines'] = {};
+        for (let i = 0; i < this.machines.length; i++) {
+            save['machines'][Lab.Machine[this.machines[i].id]] = this.machines[i].toJSON();
+        }
+
+        save['placedMachines'] = this.placedMachines().map(res => res.toJSON());
 
         return save;
     }
@@ -198,6 +232,8 @@ namespace Lab {
 
     // TODO: HLXII - Add all Machines
     export enum Machine {
-
+        'fabricator' = 0,
+        'plate_deconstructor',
+        'plate_reconstructor',
     }
 }
