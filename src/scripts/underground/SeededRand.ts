@@ -13,8 +13,8 @@ class SeededRand {
         this.state = this.getDateSeed(d);
     }
 
-    public static getDateSeed(d: Date): number {
-        return  Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
+    public static getSeedFromDate(d: Date): number {
+        return Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
     }
 
     public static seed(state: number) {
