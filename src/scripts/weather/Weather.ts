@@ -109,7 +109,7 @@ class Weather {
     public static generateWeather(date: Date): void {
 
         // Calculating seed
-        let seed = SeededRand.getDateSeed(date);
+        let seed = SeededRand.getSeedFromDate(date);
         // Adding hours
         const newHours = Math.floor(date.getHours() / this.period) * this.period;
         seed += 1000000 * newHours;

@@ -10,7 +10,7 @@ class SeededRand {
     }
 
     public static seedWithDate(d: Date) {
-        this.state = this.getDateSeed(d);
+        this.state = this.getSeedFromDate(d);
     }
 
     public static getSeedFromDate(d: Date): number {
