@@ -652,7 +652,7 @@ class Farming implements Feature {
         this.mutations.push(new GrowNearBerryMutation(.0004, BerryType.Rindo,
             [BerryType.Rindo], {showHint: false }));
         // Yache
-        this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Yache, BerryType.Passho, {}, {
+        this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Yache, BerryType.Passho, {}, PlotStage.Seed, {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
         }));
         // Chople
