@@ -677,7 +677,7 @@ Routes.add(new RegionRoute(
         specialReq:
         [
             {pokemon: ['Castform'], req: [new WeatherRequirement([WeatherType.Clear])] },
-            {pokemon: ['Castform (sunny)'], req: [new WeatherRequirement([WeatherType.Sunlight])] },
+            {pokemon: ['Castform (sunny)'], req: [new WeatherRequirement([WeatherType.Sunny])] },
             {pokemon: ['Castform (rainy)'], req: [new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])] },
             {pokemon: ['Castform (snowy)'], req: [new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard])] },
         ],

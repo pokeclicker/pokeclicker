@@ -8087,7 +8087,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
-        'evolutions': [new WeatherEvolution('Cherrim', 'Cherrim (sunshine)', WeatherType.Sunlight)],
+        'evolutions': [new WeatherEvolution('Cherrim', 'Cherrim (sunshine)', WeatherType.Sunny)],
         'base': {
             'hitpoints': 70,
             'attack': 60,

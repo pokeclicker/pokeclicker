@@ -1,13 +1,13 @@
 enum WeatherType {
     Clear = 0,
-    Cloudy,
+    Overcast,
     Rain,
     Thunderstorm,
     Snow,
     Hail,
     Blizzard,
-    Sunlight,
+    Sunny,
     Sandstorm,
     Fog,
-    Winds,
+    Windy,
 }
