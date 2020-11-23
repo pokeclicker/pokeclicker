@@ -51,7 +51,7 @@ class ChangelogUpdate extends Changelog {
 const changelogItems = [
     // note that month is 0 indexed
     // v0.6.7
-    new ChangelogUpdate('v0.6.7', new Date(2020, 10, 18)),
+    new ChangelogUpdate('v0.6.7', new Date(2020, 10, 22)),
     new Changelog(changelogType.CHANGE, 'Added some more NPC around Kanto'),
     new Changelog(changelogType.CHANGE, 'Doubled the chance of encountering uncaught Roaming Pokémon'),
     new Changelog(changelogType.CHANGE, 'Save category filter in Hatchery upon reloading'),
