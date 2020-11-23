@@ -633,10 +633,10 @@ class Farming implements Feature {
         // Wacan
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Wacan,
             [
-                BerryType.Aspear,
-                BerryType.Sitrus,
                 BerryType.Pinap,
-                BerryType.Nomel,
+                BerryType.Iapapa,
+                BerryType.Qualot,
+                BerryType.Grepa,
             ]));
         // Rindo
         // TODO: HLXII - Change mutation to grow spontaneously when Grass pokemon in party
