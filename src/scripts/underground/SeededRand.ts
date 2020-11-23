@@ -10,11 +10,15 @@ class SeededRand {
     }
 
     public static seedWithDate(d: Date) {
-        this.state = this.getSeedFromDate(d);
+        this.state = Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
     }
 
-    public static getSeedFromDate(d: Date): number {
-        return Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
+    // hours specifies how many hours the seed should remain the same
+    public static seedWithDateHour(d: Date, hours = 1) {
+        this.seedWithDate(d);
+        const time = d.getTime();
+        const newHours = new Date(time - time % (GameConstants.HOUR * hours)).getHours();
+        this.state += 1000000 * newHours;
     }
 
     public static seed(state: number) {

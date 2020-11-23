@@ -107,14 +107,7 @@ class Weather {
      * @param date The current date
      */
     public static generateWeather(date: Date): void {
-
-        // Calculating seed
-        let seed = SeededRand.getSeedFromDate(date);
-        // Adding hours
-        const newHours = Math.floor(date.getHours() / this.period) * this.period;
-        seed += 1000000 * newHours;
-
-        SeededRand.seed(seed);
+        SeededRand.seedWithDateHour(date, this.period);
 
         Weather.weather.forEach((weather, index) => {
             const rand = SeededRand.next();
