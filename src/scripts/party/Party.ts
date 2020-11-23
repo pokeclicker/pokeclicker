@@ -170,7 +170,7 @@ class Party implements Feature {
         // Base power
         // Shiny pokemon help with a 50% boost
         let clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
-
+        clickAttack = clickAttack + (clickAttack * AchievementHandler.achievementBonus());
         clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
 
         // Apply battle item bonus
