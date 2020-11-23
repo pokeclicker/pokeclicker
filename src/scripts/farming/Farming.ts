@@ -1076,6 +1076,8 @@ class Farming implements Feature {
         plot.die(true);
         GameHelper.incrementObservable(this.shovelAmt, -1);
         GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
+
+        this.resetAuras();
     }
 
     /**

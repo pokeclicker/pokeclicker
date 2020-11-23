@@ -70,6 +70,7 @@ class Game {
 
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();
+        this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), new Date());
