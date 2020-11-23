@@ -140,6 +140,7 @@ class Game {
         if (Save.counter > GameConstants.SAVE_TICK) {
             const old = new Date(player._lastSeen);
             const now = new Date();
+
             // Check if it's a new day
             if (old.toLocaleDateString() !== now.toLocaleDateString()) {
                 // Give the player a free quest refresh
@@ -154,10 +155,13 @@ class Game {
                     timeout: 3e4,
                 });
             }
-            // Check if weather changed
-            if (Math.floor(old.getHours() / Weather.period) !== Math.floor(now.getHours() / Weather.period)) {
+
+            // Check if it's a new hour
+            if (old.getHours() !== now.getHours()) {
                 Weather.generateWeather(now);
             }
+
+            // Save the game
             player._lastSeen = Date.now();
             Save.store(player);
         }
