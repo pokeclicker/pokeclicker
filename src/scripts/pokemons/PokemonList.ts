@@ -9420,7 +9420,7 @@ const pokemonList = createPokemonArray(
         'id': 489,
         'name': 'Phione',
         'type': [PokemonType.Water],
-        'eggCycles': 80,
+        'eggCycles': 40,
         'levelType': LevelType.slow,
         'exp': 216,
         // 69420 to prevent evolution ingame, evolution needed for baby form to be obtainable
@@ -9440,7 +9440,7 @@ const pokemonList = createPokemonArray(
         'id': 490,
         'name': 'Manaphy',
         'type': [PokemonType.Water],
-        'eggCycles': 80,
+        'eggCycles': 10,
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
