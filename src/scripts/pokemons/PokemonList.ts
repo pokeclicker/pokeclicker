@@ -2,8 +2,10 @@
 /// <reference path="../party/evolutions/StoneEvolution.ts" />
 /// <reference path="../party/evolutions/TimedEvolution.ts" />
 /// <reference path="../party/evolutions/LocationEvolution.ts" />
+/// <reference path="../party/evolutions/WeatherRestrictedLevelEvolution.ts" />
 /// <reference path="../GameConstants.d.ts" />
 /// <reference path="../party/LevelType.ts" />
+/// <reference path="../weather/WeatherType.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 
 const pokemonDevolutionMap: { [name: string]: PokemonNameType } = {};
@@ -8067,10 +8069,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 55,
         'catchRate': 190,
-        'evolutions': [
-            new LevelEvolution('Cherubi', 'Cherrim (overcast)', 25),
-            new LevelEvolution('Cherubi', 'Cherrim (sunshine)', 25),
-        ],
+        'evolutions': [new LevelEvolution('Cherubi', 'Cherrim (overcast)', 25)],
         'base': {
             'hitpoints': 45,
             'attack': 35,
@@ -8088,6 +8087,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
+        'evolutions': [new WeatherRestrictedLevelEvolution('Cherrim (overcast)', 'Cherrim (sunshine)', 1, [WeatherType.Sunny])],
         'base': {
             'hitpoints': 70,
             'attack': 60,
@@ -13750,7 +13750,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 158,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Sliggoo', 'Goodra', 50)],
+        'evolutions': [new WeatherRestrictedLevelEvolution('Sliggoo', 'Goodra', 50, [WeatherType.Rain, WeatherType.Fog])],
         'base': {
             'hitpoints': 68,
             'attack': 75,
