@@ -9335,7 +9335,7 @@ const pokemonList = createPokemonArray(
         'id': 485,
         'name': 'Heatran',
         'type': [PokemonType.Fire, PokemonType.Steel],
-        'eggCycles': 10,
+        'eggCycles': 80,
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
