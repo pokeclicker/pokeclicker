@@ -15,10 +15,16 @@ class SeededRand {
 
     // hours specifies how many hours the seed should remain the same
     public static seedWithDateHour(d: Date, hours = 1) {
-        this.seedWithDate(d);
+        // Adjust date for timezone offset and hours rounded
         const time = d.getTime();
-        const newHours = new Date(time - time % (GameConstants.HOUR * hours)).getHours();
-        this.state += 1000000 * newHours;
+        const offset = -(d.getTimezoneOffset() * (GameConstants.MINUTE));
+        const offsetTime = time + offset;
+        const newDate = new Date(time - offsetTime % (GameConstants.HOUR * hours));
+        const newHour = newDate.getHours();
+        // Set state based on adjusted date
+        this.seedWithDate(newDate);
+        // Update state based on current hour
+        this.state += 1000000 * newHour;
     }
 
     public static seed(state: number) {
