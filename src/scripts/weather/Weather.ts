@@ -5,11 +5,11 @@ type WeatherDistribution = { [weather in WeatherType]?: number };
 
 class Weather {
 
-    public static weather: KnockoutObservable<WeatherType>[] = Array<WeatherType>(GameHelper.enumLength(GameConstants.Region)).fill(WeatherType.Clear).map(v => ko.observable<WeatherType>(v));
+    public static regionalWeather: KnockoutObservable<WeatherType>[] = Array<WeatherType>(GameHelper.enumLength(GameConstants.Region)).fill(WeatherType.Clear).map(v => ko.observable<WeatherType>(v));
 
     public static currentWeather: KnockoutComputed<WeatherType> = ko.pureComputed(() => {
 
-        const weather = Weather.weather[player.region]();
+        const weather = Weather.regionalWeather[player.region]();
 
         // TODO: HLXII - Add weather overrides
 
@@ -109,26 +109,15 @@ class Weather {
     public static generateWeather(date: Date): void {
         SeededRand.seedWithDateHour(date, this.period);
 
-        Weather.weather.forEach((weather, index) => {
-            const rand = SeededRand.next();
-            if (!Weather.weatherDistribution[index]) {
-                weather(WeatherType.Clear);
-                return;
-            }
-            // Creating distribution
-            const totalWeight = Weather.weatherDistribution[index].map(weather => Weather.weatherConditions[weather].weight).reduce((a, b) => a + b, 0);
-            const weights = Weather.weatherDistribution[index].map(weather => Weather.weatherConditions[weather].weight / totalWeight);
-            const cumulativeSum = (sum => value => sum += value)(0);
-            const distribution = weights.map(cumulativeSum);
+        Weather.regionalWeather.forEach((weather, region) => {
+            // If no distribution set, assume all weather available
+            const dist = Weather.weatherDistribution[region] || GameHelper.enumNumbers(WeatherType);
 
-            for (let i = 0; i < distribution.length; i += 1) {
-                if (rand <= distribution[i]) {
-                    weather(Weather.weatherDistribution[index][i]);
-                    return;
-                }
-            }
-            // Set Clear if failed
-            weather(WeatherType.Clear);
+            // Select weather based on weighted odds
+            const selectedWeather = SeededRand.fromWeightedArray(dist, dist.map(w => Weather.weatherConditions[w].weight));
+
+            // Set selected weather or Clear if failed
+            weather(selectedWeather || WeatherType.Clear);
         });
     }
 }
