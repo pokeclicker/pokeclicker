@@ -633,10 +633,10 @@ class Farming implements Feature {
         // Wacan
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Wacan,
             [
-                BerryType.Aspear,
-                BerryType.Sitrus,
                 BerryType.Pinap,
-                BerryType.Nomel,
+                BerryType.Iapapa,
+                BerryType.Qualot,
+                BerryType.Grepa,
             ]));
         // Rindo
         // TODO: HLXII - Change mutation to grow spontaneously when Grass pokemon in party
@@ -1076,6 +1076,8 @@ class Farming implements Feature {
         plot.die(true);
         GameHelper.incrementObservable(this.shovelAmt, -1);
         GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
+
+        this.resetAuras();
     }
 
     /**
