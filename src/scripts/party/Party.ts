@@ -121,10 +121,13 @@ class Party implements Feature {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : pokemon.attack;
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
             // Pokemon only retain a % of their total damage in other regions based on highest region.
             multiplier = this.getRegionAttackMultiplier();
         }
+
+        // Check if the Pokemon is currently breeding (no attack)
         if (includeBreeding || !pokemon.breeding) {
             if (type1 == PokemonType.None) {
                 attack = pAttack * multiplier;
@@ -134,19 +137,18 @@ class Party implements Feature {
             }
         }
 
+        // Should we take weather boost into account
         if (includeWeather) {
             const weather = Weather.weatherConditions[Weather.currentWeather()];
             const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
-            if (weather.multipliers) {
-                weather.multipliers.forEach(value => {
-                    if (value.type == dataPokemon.type1) {
-                        attack *= value.multiplier;
-                    }
-                    if (value.type == dataPokemon.type2) {
-                        attack *= value.multiplier;
-                    }
-                });
-            }
+            weather.multipliers?.forEach(value => {
+                if (value.type == dataPokemon.type1) {
+                    attack *= value.multiplier;
+                }
+                if (value.type == dataPokemon.type2) {
+                    attack *= value.multiplier;
+                }
+            });
         }
 
         return attack;
