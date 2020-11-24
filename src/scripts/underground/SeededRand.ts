@@ -9,12 +9,12 @@ class SeededRand {
         return this.state / this.MOD;
     }
 
-    public static seedWithDate(d: Date) {
+    public static seedWithDate(d: Date): void {
         this.state = Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
     }
 
     // hours specifies how many hours the seed should remain the same
-    public static seedWithDateHour(d: Date, hours = 1) {
+    public static seedWithDateHour(d: Date, hours = 1): void {
         // Adjust date for timezone offset and hours rounded
         const time = d.getTime();
         const offset = -(d.getTimezoneOffset() * (GameConstants.MINUTE));
@@ -27,7 +27,7 @@ class SeededRand {
         this.state += 1000000 * newHour;
     }
 
-    public static seed(state: number) {
+    public static seed(state: number): void {
         this.state = Math.abs(state);
     }
 
