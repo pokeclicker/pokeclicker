@@ -4,32 +4,37 @@
  * If you ever need to use this list, request changes in RouteHelper instead.
  */
 
-interface SpecialReqPokemon {
-    pokemon: PokemonNameType[],
-    req: (OneFromManyRequirement | Requirement)[],
+class SpecialRoutePokemon {
+    constructor (
+        public pokemon: PokemonNameType,
+        public req: (OneFromManyRequirement | Requirement)[]
+    ) {}
+
+    isAvailable(): boolean {
+        return this.req.every(r => r.isCompleted());
+    }
 }
 
 class RoutePokemon {
     public land: PokemonNameType[];
     public water: PokemonNameType[];
     public headbutt: PokemonNameType[];
-
-    public specialReq: SpecialReqPokemon[];
+    public special: SpecialRoutePokemon[];
 
     constructor({
         land = [],
         water = [],
         headbutt = [],
-        specialReq,
+        special = [],
     }: {
         land?: PokemonNameType[],
         water?: PokemonNameType[],
         headbutt?: PokemonNameType[],
-        specialReq?: SpecialReqPokemon[],
+        special?: SpecialRoutePokemon[],
     }) {
         this.land = land;
         this.water = water;
         this.headbutt = headbutt;
-        this.specialReq = specialReq;
+        this.special = special;
     }
 }

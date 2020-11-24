@@ -9,8 +9,8 @@ class WeatherRequirement extends Requirement {
         this.weather = weather;
     }
 
-    public getProgress() {
-        return (this.weather.includes(Weather.currentWeather())) ? 1 : 0;
+    public getProgress(): number {
+        return +this.weather.includes(Weather.currentWeather());
     }
 
     public hint(): string {

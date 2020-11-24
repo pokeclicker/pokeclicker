@@ -17,22 +17,22 @@ class RouteHelper {
         if (!possiblePokemons) {
             return ['Rattata'];
         }
+
+        // Land Pokémon
         let pokemonList = possiblePokemons.land;
+
+        // Water Pokémon
         if (App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Super_rod) || possiblePokemons.land.length == 0) {
             pokemonList = pokemonList.concat(possiblePokemons.water);
         }
+
+        // Headbutt Pokémon
         if (includeHeadbutt) {
             pokemonList = pokemonList.concat(possiblePokemons.headbutt);
         }
 
-        // Handling special requirement Pokemon
-        if (possiblePokemons.specialReq) {
-            possiblePokemons.specialReq.forEach(req => {
-                if (req.req.every(requirement => requirement.isCompleted())) {
-                    pokemonList = pokemonList.concat(req.pokemon);
-                }
-            });
-        }
+        // Special requirement Pokémon
+        pokemonList = pokemonList.concat(possiblePokemons.special.filter(p => p.isAvailable()).map(p => p.pokemon));
 
         return pokemonList;
     }

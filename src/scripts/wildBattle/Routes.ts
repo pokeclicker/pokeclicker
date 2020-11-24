@@ -674,12 +674,12 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Zigzagoon', 'Linoone', 'Oddish', 'Tropius', 'Kecleon'],
         water: ['Tentacool', 'Wingull', 'Pelipper', 'Magikarp', 'Carvanha'],
-        specialReq:
+        special:
         [
-            {pokemon: ['Castform'], req: [new WeatherRequirement([WeatherType.Clear])] },
-            {pokemon: ['Castform (sunny)'], req: [new WeatherRequirement([WeatherType.Sunny])] },
-            {pokemon: ['Castform (rainy)'], req: [new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])] },
-            {pokemon: ['Castform (snowy)'], req: [new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard])] },
+            new SpecialRoutePokemon('Castform', [new WeatherRequirement([WeatherType.Clear, WeatherType.Overcast, WeatherType.Sandstorm, WeatherType.Windy])]),
+            new SpecialRoutePokemon('Castform (sunny)', [new WeatherRequirement([WeatherType.Sunny])]),
+            new SpecialRoutePokemon('Castform (rainy)', [new WeatherRequirement([WeatherType.Rain, WeatherType.Thunderstorm])]),
+            new SpecialRoutePokemon('Castform (snowy)', [new WeatherRequirement([WeatherType.Snow, WeatherType.Blizzard, WeatherType.Hail, WeatherType.Fog])]),
         ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.hoenn, 118)]
