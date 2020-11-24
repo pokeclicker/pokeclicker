@@ -124,6 +124,10 @@ class Shards implements Feature {
         }
     }
 
+    public static image(type: number): string {
+        return `assets/images/shards/${type}.png`;
+    }
+
     public openShardModal() {
         if (this.canAccess()) {
             $('#shardModal').modal('show');

@@ -45,7 +45,17 @@ class PlacedMachine implements Saveable {
      * Handles removing the machine from the Lab
      */
     remove() {
+        // Handle clearing MachineState
         this.state.remove();
+
+        // Add Machine back to inventory
+        this.machine.amount += 1;
+
+        // Closing modal
+        this.machine.closeModal();
+
+        // Handle removing machine from placed machines
+        App.game.lab.placedMachines.remove(this);
     }
 
     toJSON(): Record<string, any> {

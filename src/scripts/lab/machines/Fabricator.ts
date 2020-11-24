@@ -26,6 +26,10 @@ class FabricatorState extends MachineState {
         this._selectedItem = ko.observable();
     }
 
+    toggleState() {
+        return;
+    }
+
     update(delta: number) {
         return;
     }

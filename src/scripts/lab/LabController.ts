@@ -1,3 +1,5 @@
+/// <reference path="./machines/PlacedMachine.ts" />
+
 class LabController {
 
     public static openLabModal() {
@@ -70,6 +72,8 @@ class LabController {
     //#endregion
 
     //#region Machines
+
+    public static openedMachine: KnockoutObservable<PlacedMachine> = ko.observable(new PlacedMachine());
 
     public static selectedMachine: KnockoutObservable<Machine | undefined> = ko.observable(undefined);
 
@@ -197,6 +201,11 @@ class LabController {
         if (machine.amount == 0) {
             LabController.selectedMachine(undefined);
         }
+    }
+
+    public static handleMachineClick(placedMachine: PlacedMachine) {
+        LabController.openedMachine(placedMachine);
+        placedMachine.machine.openModal();
     }
 
     public static openMachineListModal() {

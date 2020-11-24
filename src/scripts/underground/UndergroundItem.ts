@@ -24,6 +24,39 @@ class UndergroundItem {
         return UndergroundItem.list[i] || UndergroundItem.list[0];
     }
 
+    /**
+     * Gets the Plate Underground Item ID for the Pokemon type. If no plate associated, returns the Splash Plate.
+     * @param type The Pokemon type
+     */
+    public static getPlateIDByType(type: PokemonType): number {
+        const mapping: {[key in PokemonType]: number} = {
+            [PokemonType.Dragon]: 29,
+            [PokemonType.Dark]: 30,
+            [PokemonType.Ground]: 31,
+            [PokemonType.Fighting]: 32,
+            [PokemonType.Fire]: 33,
+            [PokemonType.Ice]: 34,
+            [PokemonType.Bug]: 35,
+            [PokemonType.Steel]: 36,
+            [PokemonType.Grass]: 37,
+            [PokemonType.Psychic]: 38,
+            [PokemonType.Flying]: 39,
+            [PokemonType.Water]: 40,
+            [PokemonType.Ghost]: 41,
+            [PokemonType.Rock]: 42,
+            [PokemonType.Poison]: 43,
+            [PokemonType.Electric]: 44,
+            [PokemonType.Fairy]: 45,
+            [PokemonType.Normal]: 40,
+            [PokemonType.None]: 40,
+        };
+        return mapping[type];
+    }
+
+    public static getPlateTypes(): PokemonType[] {
+        return GameHelper.enumNumbers(PokemonType).filter(val => val != PokemonType.None && val != PokemonType.Normal);
+    }
+
     public isStone(): boolean {
         return ItemList[this.valueType] instanceof EvolutionStone;
     }

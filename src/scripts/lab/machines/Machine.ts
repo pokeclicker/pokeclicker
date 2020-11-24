@@ -45,6 +45,16 @@ abstract class Machine implements Saveable {
         return cells;
     }
 
+    private get modalName(): string {
+        return `#${this.name.replace(' ','')}Modal`;
+    }
+    openModal(): void {
+        $(this.modalName).modal('show');
+    }
+    closeModal(): void {
+        $(this.modalName).modal('hide');
+    }
+
     get amount(): number {
         return this._amount();
     }

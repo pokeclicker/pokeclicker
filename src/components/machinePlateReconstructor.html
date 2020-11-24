@@ -1,0 +1,53 @@
+<div class="modal  fade" id="PlateReconstructorModal" tabindex="-1" role="dialog"
+aria-labelledby="PlateReconstructorModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <!-- ko if: LabController.openedMachine().state !== undefined -->
+        <div class="modal-content" style="overflow: initial" data-bind="with: LabController.openedMachine().state, as: 'state'">
+            <div class="modal-header">
+                <h5>Plate Reconstructor</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body p-0 position-static">
+                <div class="row no-gutters">
+                    <div class="btn-group btn-block col-6 m-0 dropdown">
+                        <button type="button" class='btn btn-primary btn-block'>
+                            <div style="display:inline"><img data-bind='attr: { src: Shards.image(state.plateType) }'/></div>
+                            <span data-bind="text: Underground.getMineItemById(UndergroundItem.getPlateIDByType(state.plateType)).name">Plate Name</span>
+                        </button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active"
+                            data-boundary="viewport" data-bind="text: '&nbsp;', enable: !state.active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" data-bind="foreach: UndergroundItem.getPlateTypes()">
+                            <button class="dropdown-item" type="button"
+                                data-bind="text: Underground.getMineItemById(UndergroundItem.getPlateIDByType($data)).name,
+                                click: function() {state.plateType = $data;}"></button>
+                        </div>
+                    </div>
+                    <div class="col-6">
+
+                    </div>
+                </div>
+                <div class="col-12 progress">
+                    <div class="progress-bar" role="progressbar" data-bind="attr: { style: 'width:' + state.progressPercent + '%' }"
+                    aria-valuemin="0" aria-valuemax="100">
+                        <span data-bind="text: state.progressString">Progress</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn mr-auto"
+                    data-bind="css: { 'btn-danger': state.active, 'btn-success': !state.active },
+                    text: state.active ? 'Deactivate Machine' : 'Activate Machine',
+                    click: function() { state.toggleState(); }">Toggle State</button>
+                <button type="button" class="btn btn-danger"
+                    data-bind="click: function() { LabController.openedMachine().remove(); }">Remove Machine</button>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+

@@ -22,7 +22,8 @@ style="cursor:default" tabindex="-1">
                                 top: $data.machineTop(),
                                 left: $data.machineLeft(),
                             },
-                            tooltip: { title: $data.machine.name, trigger: 'hover', placement: 'left' }">
+                            tooltip: { title: $data.machine.name, trigger: 'hover', placement: 'left' },
+                            click: function() { LabController.handleMachineClick($data); }">
                             <img width="100%" height="100%" style="image-rendering: pixelated;" src="" data-bind="attr: { src: $data.machine.image }">
                         </div>
                         <!-- /ko -->
