@@ -9,14 +9,29 @@ class SeededRand {
         return this.state / this.MOD;
     }
 
-    public static seedWithDate(d: Date) {
+    public static seedWithDate(d: Date): void {
         this.state = Number((d.getFullYear() - 1900) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
     }
 
-    public static seed(state: number) {
+    // hours specifies how many hours the seed should remain the same
+    public static seedWithDateHour(d: Date, hours = 1): void {
+        // Adjust date for timezone offset and hours rounded
+        const time = d.getTime();
+        const offset = -(d.getTimezoneOffset() * (GameConstants.MINUTE));
+        const offsetTime = time + offset;
+        const newDate = new Date(time - offsetTime % (GameConstants.HOUR * hours));
+        const newHour = newDate.getHours();
+        // Set state based on adjusted date
+        this.seedWithDate(newDate);
+        // Update state based on current hour
+        this.state += 1000000 * newHour;
+    }
+
+    public static seed(state: number): void {
         this.state = Math.abs(state);
     }
 
+    // get a number between min and max (both inclusive)
     public static intBetween(min: number, max: number): number {
         return Math.floor( (max - min + 1) * SeededRand.next() + min );
     }
@@ -27,6 +42,12 @@ class SeededRand {
 
     public static fromArray<T>(arr: Array<T>): T {
         return arr[SeededRand.intBetween(0, arr.length - 1)];
+    }
+
+    public static fromWeightedArray<T>(arr: Array<T>, weights: Array<number>): T {
+        const max = weights.reduce((acc, weight) => acc + weight, 0);
+        let rand = this.intBetween(1, max);
+        return arr.find((e, i) => (rand -= weights[i]) <= 0) || arr[0];
     }
 
     public static fromEnum(arr): number {

@@ -213,7 +213,9 @@ class Safari {
     }
 
     public static move(dir: string) {
-        if (!Safari.walking && !Safari.isMoving && !Safari.inBattle()) {
+        if (!Safari.inProgress()) {
+            return;
+        } else if (!Safari.walking && !Safari.isMoving && !Safari.inBattle()) {
             Safari.queue = [];
             Safari.walking = true;
             Safari.queue.unshift(dir);
@@ -331,6 +333,9 @@ class Safari {
     }
 
     private static canMove(x: number, y: number): boolean {
+        if (!Safari.inProgress()) {
+            return false;
+        }
         for (let i = 0; i < GameConstants.LEGAL_WALK_BLOCKS.length; i++) {
             if (Safari.grid[y] && Safari.grid[y][x] === GameConstants.LEGAL_WALK_BLOCKS[i]) {
                 return true;
