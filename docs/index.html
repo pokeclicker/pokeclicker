@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Pokéclicker</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.6.6"></script>
+    <script src="scripts/modules.min.js?v=0.6.7"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.6.6"></script>
+    <script src="scripts/script.min.js?v=0.6.7"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.6.6" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.6.7" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -7665,10 +7665,10 @@ aria-labelledby="breedingModalLabel" aria-hidden="true">
                             </div>
                             <div class="form-group col-md-3 col-6">
                                 <label>Category</label>
-                                <select autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(this.value)">
+                                <select name="breedingCategoryFilter" autocomplete="off" class="custom-select" onchange="BreedingController.filter.category(+this.value), Settings.setSettingByName(this.name, this.value)">
                                     <option value="-1">All</option>
                                     <!-- ko foreach: PokemonCategories.categories -->
-                                    <option style="color: whitesmoke" data-bind="attr: { value: $index }, text: $data.name, style: { background: $data.color }">Category</option>
+                                    <option style="color: whitesmoke" data-bind="attr: { value: $index, selected: Settings.getSetting('breedingCategoryFilter').value == $index() }, text: $data.name, style: { background: $data.color }">Category</option>
                                     <!-- /ko -->
                                 </select>
                             </div>
@@ -8654,7 +8654,7 @@ aria-labelledby="badgeCaseModalLabel">
                                                     </span>
                                                 </div>
                                                 <div>
-                                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFTCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFPCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
                                                 </div>
                                             </div>
                                             <!-- /ko -->
@@ -8797,7 +8797,7 @@ aria-labelledby="badgeCaseModalLabel">
                       <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].replantRate.toLocaleString('en-US', { style: 'percent' })">-</code></td>
                     </tr>
                     <tr>
-                      <td class="text-left">Farm Tokens per Harvest</td>
+                      <td class="text-left">Farm Points per Harvest</td>
                       <td class="text-left tight"><code data-bind="text: App.game.farming.berryData[$data].farmValue.toLocaleString('en-US')">-</code></td>
                     </tr>
                     <tr>
@@ -8819,10 +8819,10 @@ aria-labelledby="badgeCaseModalLabel">
                             <td><img src="" data-bind="attr: { src: `assets/images/farm/${BerryType[$data]}Tree${PlotStage[PlotStage.Berry]}.png` }"/></td>
                           </tr>
                           <tr>
-                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[0].toLocaleString('en-US'))">-</code></td>
-                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[1].toLocaleString('en-US'))">-</code></td>
-                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[2].toLocaleString('en-US'))">-</code></td>
-                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3].toLocaleString('en-US'))">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[0])">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[1])">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[2])">-</code></td>
+                            <td><code data-bind="html: GameConstants.formatSecondsToTime(App.game.farming.berryData[$data].growthTime[3])">-</code></td>
                           </tr>
                         </table>
                       </td>
