@@ -45,6 +45,14 @@ abstract class Machine implements Saveable {
         return cells;
     }
 
+    /**
+     * Determines whether the machine has a modal that can be opened
+     * Defaults to yes.
+     */
+    hasModal(): boolean {
+        return true;
+    }
+
     private get modalName(): string {
         return `#${this.name.replace(' ','')}Modal`;
     }

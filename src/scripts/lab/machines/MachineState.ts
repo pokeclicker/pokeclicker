@@ -44,6 +44,13 @@ abstract class MachineState implements Saveable {
     abstract update(delta: number);
 
     /**
+     * Handles removing the machine from the lab
+     */
+    remove(): void {
+        this.handleDeactivate();
+    }
+
+    /**
      * Handler for activating the machine
      */
     abstract handleActivate(): void;

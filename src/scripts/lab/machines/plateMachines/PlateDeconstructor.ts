@@ -4,9 +4,11 @@
  */
 class PlateDeconstructor extends PlateMachine {
 
+    // TODO: HLXII - Balance base values
     public static baseShardProfit = 500;
     public static progressAmount = 10;
 
+    // TODO: HLXII - Handle Research upgrades
     public static shardProfit: KnockoutComputed<number> = ko.pureComputed(() => {
         return PlateDeconstructor.baseShardProfit;
     });
@@ -61,6 +63,7 @@ class PlateDeconstructorState extends PlateMachineState {
                 }
             }
             case MachineStage.active: {
+                // TODO: HLXII - Handle Research Upgrades (?)
                 this.progress += delta;
                 // Checking deconstruction completion
                 if (this.progress >= PlateDeconstructor.progressAmount) {

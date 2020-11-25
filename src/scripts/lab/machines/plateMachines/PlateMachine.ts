@@ -56,6 +56,7 @@ abstract class PlateMachineState extends MachineState {
         }
     }
 
+    // TODO: HLXII - Handle progress a bit better
     get progressPercent() {
         return (this.progress / PlateReconstructor.progressAmount) * 100;
     }

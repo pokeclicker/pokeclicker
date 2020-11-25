@@ -120,6 +120,7 @@ class Lab implements Feature {
             new Fabricator(Lab.Machine.fabricator, 'Fabricator', 'Creates new machines and items.', 2, 3),
             new PlateDeconstructor(Lab.Machine.plate_deconstructor, 'Plate Deconstructor', 'Deconstruct plates into shards.', 1, 2),
             new PlateReconstructor(Lab.Machine.plate_reconstructor, 'Plate Reconstructor', 'Reconstruct plates from shards.', 1, 2),
+            new Incubator(Lab.Machine.incubator, 'Incubator', 'Increases the total Hatchery queue slots when placed.', 2, 3),
         ];
 
         //#endregion
@@ -267,5 +268,6 @@ namespace Lab {
         'fabricator' = 0,
         'plate_deconstructor',
         'plate_reconstructor',
+        'incubator',
     }
 }

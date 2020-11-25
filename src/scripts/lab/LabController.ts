@@ -204,8 +204,10 @@ class LabController {
     }
 
     public static handleMachineClick(placedMachine: PlacedMachine) {
-        LabController.openedMachine(placedMachine);
-        placedMachine.machine.openModal();
+        if (placedMachine.machine.hasModal()) {
+            LabController.openedMachine(placedMachine);
+            placedMachine.machine.openModal();
+        }
     }
 
     public static openMachineListModal() {

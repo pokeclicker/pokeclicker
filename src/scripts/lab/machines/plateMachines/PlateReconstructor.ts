@@ -4,9 +4,11 @@
  */
 class PlateReconstructor extends PlateMachine {
 
+    // TODO: HLXII - Balance base values
     public static baseShardCost = 500;
     public static progressAmount = 10;
 
+    // TODO: HLXII - Handle Research Upgrades
     public static shardCost: KnockoutComputed<number> = ko.pureComputed(() => {
         return PlateReconstructor.baseShardCost;
     });
@@ -61,6 +63,7 @@ class PlateReconstructorState extends PlateMachineState {
                 }
             }
             case MachineStage.active: {
+                // TODO: HLXII - Handle Research Upgrades (?)
                 this.progress += delta;
                 // Checking Plate completion
                 if (this.progress >= PlateReconstructor.progressAmount) {
