@@ -19,6 +19,8 @@ class PlacedMachine implements Saveable {
     public machineWidth: KnockoutComputed<string>;
     public machineHeight: KnockoutComputed<string>;
 
+    public tooltip: KnockoutComputed<string>;
+
     constructor(machine?: Machine, x?: number, y?: number) {
         this._machine = ko.observable<Machine>(machine);
         if (machine) {
@@ -38,6 +40,13 @@ class PlacedMachine implements Saveable {
         });
         this.machineHeight = ko.pureComputed(() => {
             return `${LabController.cellHeight() * (this.machine ? this.machine.height : 0)}%`;
+        });
+
+        this.tooltip = ko.pureComputed(() => {
+            const tooltip = [];
+            tooltip.push(`<u>${this.machine.name}</u>`);
+            tooltip.push(this.state.tooltip());
+            return tooltip.join('<br>');
         });
     }
 
@@ -70,7 +79,7 @@ class PlacedMachine implements Saveable {
         this.machine = App.game.lab.machines.find(machine => machine.id == json['machine']);
         this.x = json.hasOwnProperty('x') ? json['x'] : this.defaults.x;
         this.y = json.hasOwnProperty('y') ? json['y'] : this.defaults.y;
-        this.state = this.machine.createState(json);
+        this.state = this.machine.createState(json['state']);
     }
 
     cells(): number[][] {
@@ -92,7 +101,6 @@ class PlacedMachine implements Saveable {
     set y(value: number) {
         this._y(value);
     }
-
 
     get machine(): Machine {
         return this._machine();

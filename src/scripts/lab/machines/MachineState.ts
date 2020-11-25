@@ -16,6 +16,8 @@ abstract class MachineState implements Saveable {
 
     private _progress: KnockoutObservable<number>;
 
+    public tooltip: KnockoutComputed<string>;
+
     constructor() {
         this._active = ko.observable(false);
         this._stage = ko.observable(MachineStage.disabled);

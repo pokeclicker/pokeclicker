@@ -138,7 +138,9 @@ class Lab implements Feature {
             }
         });
 
-        // TODO: HLXII - Handle Machines
+        this.placedMachines().forEach(placedMachine => {
+            placedMachine.state.update(delta);
+        });
     }
 
     canAccess(): boolean {

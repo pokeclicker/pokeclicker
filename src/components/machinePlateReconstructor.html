@@ -10,11 +10,24 @@ aria-labelledby="PlateReconstructorModalLabel" aria-hidden="true">
                 </button>
             </div>
 
-            <div class="modal-body p-0 position-static">
+            <div class="modal-body position-static">
+                <div class="row justify-content-center">
+                    <h4 class="col-6 col-sm-4 col-lg-2">
+                        <span style="display: inline;">
+                            <img alt="Shards" style="height: 24px" data-bind="attr: { src: Shards.image(state.plateType) }"/>
+                            <span data-bind="text: GameConstants.formatNumber(App.game.shards.shardWallet[state.plateType]())">0</span>
+                        </span>
+                    </h4>
+                    <h4 class="col-6 col-sm-4 col-lg-2">
+                        <span style="display: inline;">
+                            <img alt="Plates" style="height: 24px" data-bind="attr: { src: Underground.getMineItemById(UndergroundItem.getPlateIDByType(state.plateType)).imagePath }"/>
+                            <span data-bind="text: GameConstants.formatNumber(PlateReconstructor.getPlateAmount(state.plateType))">0</span>
+                        </span>                    </h4>
+                </div>
                 <div class="row no-gutters">
-                    <div class="btn-group btn-block col-6 m-0 dropdown">
-                        <button type="button" class='btn btn-primary btn-block'>
-                            <div style="display:inline"><img data-bind='attr: { src: Shards.image(state.plateType) }'/></div>
+                    <div class="btn-group btn-block col-6 dropdown">
+                        <button type="button" class='btn btn-primary btn-block p-0'>
+                            <div style="display:inline"><img style="height: 24px" data-bind='attr: { src: Underground.getMineItemById(UndergroundItem.getPlateIDByType(state.plateType)).imagePath }'/></div>
                             <span data-bind="text: Underground.getMineItemById(UndergroundItem.getPlateIDByType(state.plateType)).name">Plate Name</span>
                         </button>
                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active"
@@ -27,10 +40,19 @@ aria-labelledby="PlateReconstructorModalLabel" aria-hidden="true">
                         </div>
                     </div>
                     <div class="col-6">
-
+                        <div class="input-group">
+                            <input id="queueInput" type="number" class="outline-dark form-control form-control-number"
+                            value="0" min="0" required name="queueInput"
+                            data-bind="textInput: state.queueInput, enable: !state.active"/>
+                            <div class="input-group-append">
+                                <button class="btn btn-primary smallButton smallFont" type="button" data-bind="click: function() { state.setMaxQueue(); }, enable: !state.active">
+                                    Max
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-12 progress">
+                <div class="progress">
                     <div class="progress-bar" role="progressbar" data-bind="attr: { style: 'width:' + state.progressPercent + '%' }"
                     aria-valuemin="0" aria-valuemax="100">
                         <span data-bind="text: state.progressString">Progress</span>
