@@ -55,7 +55,7 @@ class PlacedMachine implements Saveable {
      */
     remove() {
         // Handle clearing MachineState
-        this.state.remove();
+        this.state.handleDeactivate();
 
         // Add Machine back to inventory
         this.machine.amount += 1;

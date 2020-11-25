@@ -1,8 +1,8 @@
-/// <reference path="./Machine.ts" />
+/// <reference path="./PlateMachine.ts" />
 /**
  * The Plate Reconstructor machine is used to reconstruct plates from shards.
  */
-class PlateReconstructor extends Machine {
+class PlateReconstructor extends PlateMachine {
 
     public static baseShardCost = 500;
     public static progressAmount = 10;
@@ -17,27 +17,12 @@ class PlateReconstructor extends Machine {
         return state;
     }
 
-    public static getPlateAmount(type: PokemonType): number {
-        const plateID = UndergroundItem.getPlateIDByType(type);
-        const plateIndex = player.mineInventoryIndex(plateID);
-        return player.mineInventory()[plateIndex].amount();
-    }
-
 }
 
-class PlateReconstructorState extends MachineState {
-
-    private _plateType: KnockoutObservable<PokemonType>;
-
-    private _queue: KnockoutObservable<number>;
-
-    public queueInput: KnockoutObservable<string>;
+class PlateReconstructorState extends PlateMachineState {
 
     constructor() {
         super();
-        this._plateType = ko.observable(PokemonType.Water);
-        this._queue = ko.observable(0);
-        this.queueInput = ko.observable('0');
 
         this.tooltip = ko.pureComputed(() => {
             switch (this.stage) {
@@ -55,18 +40,6 @@ class PlateReconstructorState extends MachineState {
                 }
             }
         });
-    }
-
-    toggleState() {
-        if (this.active) {
-            this.active = false;
-            this.handleCancel();
-        } else {
-            this.active = true;
-            this.stage = MachineStage.idle;
-            // Handling queueInput
-            this.queue = !isNaN(Number(this.queueInput())) ? Number(this.queueInput()) : 0;
-        }
     }
 
     update(delta: number) {
@@ -91,74 +64,28 @@ class PlateReconstructorState extends MachineState {
                 this.progress += delta;
                 // Checking Plate completion
                 if (this.progress >= PlateReconstructor.progressAmount) {
-                    const plateID = UndergroundItem.getPlateIDByType(this.plateType);
-                    const plateIndex = player.mineInventoryIndex(plateID);
-                    GameHelper.incrementObservable(player.mineInventory()[plateIndex].amount, 1);
                     this.stage = MachineStage.idle;
+                    const plateAmount = PlateReconstructor.getPlateAmount(this.plateType);
+                    GameHelper.incrementObservable(plateAmount, 1);
                     this.progress = 0;
                 }
             }
         }
     }
 
-    handleCancel() {
+    handleDeactivate() {
         if (this.stage === MachineStage.active) {
             this.progress = 0;
             // Returning Shards
             App.game.shards.gainShards(PlateReconstructor.shardCost(), this.plateType);
+            this.queue += 1;
         }
         this.stage = MachineStage.disabled;
-    }
-
-    remove() {
-        this.handleCancel();
     }
 
     setMaxQueue(): void {
         const max = Math.floor(App.game.shards.shardWallet[this.plateType]() / PlateReconstructor.shardCost());
         this.queueInput(max.toString());
-    }
-
-    toJSON(): Record<string, any> {
-        const json = super.toJSON();
-        json['plateType'] = this.plateType;
-        json['queue'] = this.queue;
-        return json;
-    }
-    fromJSON(json: Record<string, any>): void {
-        super.fromJSON(json);
-        if (!json) {
-            this.plateType = PokemonType.Water;
-            this.queue = 0;
-        } else {
-            this.plateType = json.hasOwnProperty('plateType') ? json['plateType'] : PokemonType.Water;
-            this.queue = json.hasOwnProperty('queue') ? json['queue'] : 0;
-        }
-    }
-
-    get progressPercent() {
-        return (this.progress / PlateReconstructor.progressAmount) * 100;
-    }
-
-    get progressString() {
-        return `${this.progress.toFixed(0)}/${PlateReconstructor.progressAmount}`;
-    }
-
-    get plateType(): PokemonType {
-        return this._plateType();
-    }
-
-    set plateType(value: PokemonType) {
-        this._plateType(value);
-    }
-
-    get queue(): number {
-        return this._queue();
-    }
-
-    set queue(value: number) {
-        this._queue(value);
-        this.queueInput(this._queue().toString());
     }
 
 }

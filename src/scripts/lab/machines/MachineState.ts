@@ -27,7 +27,15 @@ abstract class MachineState implements Saveable {
     /**
      * Toggles the active state
      */
-    abstract toggleState();
+    toggleState() {
+        if (this.active) {
+            this.active = false;
+            this.handleDeactivate();
+        } else {
+            this.active = true;
+            this.handleActivate();
+        }
+    }
 
     /**
      * Handles updating the machine state
@@ -36,9 +44,14 @@ abstract class MachineState implements Saveable {
     abstract update(delta: number);
 
     /**
-     * Handles removing the machine from the lab
+     * Handler for activating the machine
      */
-    abstract remove();
+    abstract handleActivate(): void;
+
+    /**
+     * Handler for deactivating the machine
+     */
+    abstract handleDeactivate(): void;
 
     toJSON(): Record<string, any> {
         return {

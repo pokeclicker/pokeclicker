@@ -1,10 +1,10 @@
-<div class="modal  fade" id="PlateReconstructorModal" tabindex="-1" role="dialog"
-aria-labelledby="PlateReconstructorModalLabel" aria-hidden="true">
+<div class="modal  fade" id="PlateDeconstructorModal" tabindex="-1" role="dialog"
+aria-labelledby="PlateDeconstructorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
         <!-- ko if: LabController.openedMachine().state !== undefined -->
         <div class="modal-content" style="overflow: initial" data-bind="with: LabController.openedMachine().state, as: 'state'">
             <div class="modal-header">
-                <h5>Plate Reconstructor</h5>
+                <h5>Plate Deconstructor</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,14 +14,14 @@ aria-labelledby="PlateReconstructorModalLabel" aria-hidden="true">
                 <div class="row justify-content-center">
                     <h4 class="col-6 col-sm-4 col-lg-2">
                         <span style="display: inline;">
-                            <img alt="Shards" style="height: 24px" data-bind="attr: { src: Shards.image(state.plateType) }"/>
-                            <span data-bind="text: GameConstants.formatNumber(App.game.shards.shardWallet[state.plateType]())">0</span>
+                            <img alt="Plates" style="height: 24px" data-bind="attr: { src: Underground.getMineItemById(UndergroundItem.getPlateIDByType(state.plateType)).imagePath }"/>
+                            <span data-bind="text: GameConstants.formatNumber(PlateReconstructor.getPlateAmount(state.plateType)())">0</span>
                         </span>
                     </h4>
                     <h4 class="col-6 col-sm-4 col-lg-2">
                         <span style="display: inline;">
-                            <img alt="Plates" style="height: 24px" data-bind="attr: { src: Underground.getMineItemById(UndergroundItem.getPlateIDByType(state.plateType)).imagePath }"/>
-                            <span data-bind="text: GameConstants.formatNumber(PlateReconstructor.getPlateAmount(state.plateType)())">0</span>
+                            <img alt="Shards" style="height: 24px" data-bind="attr: { src: Shards.image(state.plateType) }"/>
+                            <span data-bind="text: GameConstants.formatNumber(App.game.shards.shardWallet[state.plateType]())">0</span>
                         </span>
                     </h4>
                 </div>
