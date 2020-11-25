@@ -17,11 +17,20 @@ abstract class MachineState implements Saveable {
     private _progress: KnockoutObservable<number>;
 
     public tooltip: KnockoutComputed<string>;
+    public progressAmount: KnockoutComputed<number>;
 
     constructor() {
         this._active = ko.observable(false);
         this._stage = ko.observable(MachineStage.disabled);
         this._progress = ko.observable(0);
+
+        // Will be overrided by child classes
+        this.tooltip = ko.pureComputed(() => {
+            return 'Machine Tooltip';
+        });
+        this.progressAmount = ko.pureComputed(() => {
+            return 1000;
+        });
     }
 
     /**
@@ -44,13 +53,6 @@ abstract class MachineState implements Saveable {
     abstract update(delta: number);
 
     /**
-     * Handles removing the machine from the lab
-     */
-    remove(): void {
-        this.handleDeactivate();
-    }
-
-    /**
      * Handler for activating the machine
      */
     abstract handleActivate(): void;
@@ -59,6 +61,13 @@ abstract class MachineState implements Saveable {
      * Handler for deactivating the machine
      */
     abstract handleDeactivate(): void;
+
+    /**
+     * Handles removing the machine from the lab
+     */
+    remove(): void {
+        this.handleDeactivate();
+    }
 
     toJSON(): Record<string, any> {
         return {
@@ -98,5 +107,15 @@ abstract class MachineState implements Saveable {
 
     set progress(value: number) {
         this._progress(value);
+    }
+
+    // TODO: HLXII - Handle progress a bit better
+    get progressPercent() {
+        return (this.progress / this.progressAmount()) * 100;
+    }
+
+    // TODO: HLXII - Possibly handle different progress string types (percent, total amount, time, etc);
+    get progressString() {
+        return `${this.progress.toFixed(0)}/${this.progressAmount()}`;
     }
 }

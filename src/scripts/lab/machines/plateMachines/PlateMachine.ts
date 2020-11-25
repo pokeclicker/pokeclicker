@@ -56,15 +56,6 @@ abstract class PlateMachineState extends MachineState {
         }
     }
 
-    // TODO: HLXII - Handle progress a bit better
-    get progressPercent() {
-        return (this.progress / PlateReconstructor.progressAmount) * 100;
-    }
-
-    get progressString() {
-        return `${this.progress.toFixed(0)}/${PlateReconstructor.progressAmount}`;
-    }
-
     get plateType(): PokemonType {
         return this._plateType();
     }

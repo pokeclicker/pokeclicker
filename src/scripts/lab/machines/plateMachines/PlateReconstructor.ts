@@ -42,6 +42,9 @@ class PlateReconstructorState extends PlateMachineState {
                 }
             }
         });
+        this.progressAmount = ko.pureComputed(() => {
+            return PlateReconstructor.progressAmount;
+        });
     }
 
     update(delta: number) {
@@ -61,24 +64,33 @@ class PlateReconstructorState extends PlateMachineState {
                     this.progress = 0;
                     this.queue -= 1;
                 }
+                return;
             }
             case MachineStage.active: {
                 // TODO: HLXII - Handle Research Upgrades (?)
                 this.progress += delta;
                 // Checking Plate completion
-                if (this.progress >= PlateReconstructor.progressAmount) {
-                    this.stage = MachineStage.idle;
+                if (this.progress >= this.progressAmount()) {
+                    // Gain plate
                     const plateAmount = PlateReconstructor.getPlateAmount(this.plateType);
                     GameHelper.incrementObservable(plateAmount, 1);
+                    // Checking queue
+                    if (this.queue > 0 && App.game.shards.shardWallet[this.plateType]() >= PlateReconstructor.shardCost()) {
+                        App.game.shards.gainShards(-PlateReconstructor.shardCost(), this.plateType);
+                        this.queue -= 1;
+                    } else {
+                        this.stage = MachineStage.idle;
+                    }
                     this.progress = 0;
                 }
+                return;
             }
         }
     }
 
     handleDeactivate() {
+        this.progress = 0;
         if (this.stage === MachineStage.active) {
-            this.progress = 0;
             // Returning Shards
             App.game.shards.gainShards(PlateReconstructor.shardCost(), this.plateType);
             this.queue += 1;

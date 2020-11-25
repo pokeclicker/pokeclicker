@@ -1,7 +1,7 @@
 <div class="modal  fade" id="PlateReconstructorModal" tabindex="-1" role="dialog"
 aria-labelledby="PlateReconstructorModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <!-- ko if: LabController.openedMachine().state !== undefined -->
+        <!-- ko if: LabController.openedMachine().state instanceof PlateReconstructorState -->
         <div class="modal-content" style="overflow: initial" data-bind="with: LabController.openedMachine().state, as: 'state'">
             <div class="modal-header">
                 <h5>Plate Reconstructor</h5>

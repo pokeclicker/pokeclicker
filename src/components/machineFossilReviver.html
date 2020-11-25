@@ -1,0 +1,69 @@
+<div class="modal  fade" id="FossilReviverModal" tabindex="-1" role="dialog"
+aria-labelledby="FossilReviverModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <!-- ko if: LabController.openedMachine().state instanceof FossilReviverState -->
+        <div class="modal-content" style="overflow: initial" data-bind="with: LabController.openedMachine().state, as: 'state'">
+            <div class="modal-header">
+                <h5>Fossil Reviver</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body position-static">
+                <div class="row no-gutters justify-content-center">
+                    <div class="col-3 eggSlot">
+                        <div class="content">
+                            <!-- ko if: state.fossil -->
+                            <div style="margin-top: 20px;">
+                                <img data-bind="attr: { src: FossilReviver.getImage(state.fossil) }"/>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        data-bind="attr: { style: 'width:' + state.progressPercent + '%' }"
+                                        aria-valuemin="0" aria-valuemax="100">
+                                        <span data-bind="text: state.progressString"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- ko if: state.queue.length > 0 -->
+                    <div class="col-12">
+                        <div id="hatcheryQueue" class="card-footer p-1" data-bind="foreach: state.queue">
+                            <div class="queuePokemon clickable bg-primary" style="width: 8%" data-bind="click: function(){ state.removeFromQueue($index()) }">
+                            <img src="" data-bind="attr: { src: FossilReviver.getImage($data) }">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+                <p class="bg-warning my-0" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length">
+                    you don't have any fossils to breed.
+                </p>
+
+                <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length -->
+                <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory().find(i => i.name == f)).filter(f => f ? f.amount() : false)">
+                    <li class="eggSlot col-3 col-md-3 pokedexEntry text-nowrap" data-bind="class: state.queue.length < FossilReviver.queueSlots() ? '' : 'disabled'">
+                        <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">fossil</span>
+                        <img src="" width="80px" data-bind="attr:{ src: FossilReviver.getImage($data.name) }">
+                        <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount()">amount</span>
+                        <a class="overlay" href="#revive" data-bind="click: function() { state.addToQueue($data); }"></a>
+                    </li>
+                </ul>
+                <!-- /ko -->
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn mr-auto"
+                    data-bind="css: { 'btn-danger': state.active, 'btn-success': !state.active },
+                    text: state.active ? 'Deactivate Machine' : 'Activate Machine',
+                    click: function() { state.toggleState(); }">Toggle State</button>
+                <button type="button" class="btn btn-danger"
+                    data-bind="click: function() { LabController.openedMachine().remove(); }">Remove Machine</button>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
