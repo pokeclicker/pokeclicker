@@ -39,7 +39,7 @@ aria-labelledby="FossilReviverModalLabel" aria-hidden="true">
                     <!-- /ko -->
                 </div>
                 <p class="bg-warning my-0" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length">
-                    you don't have any fossils to breed.
+                    you don't have any fossils to revive.
                 </p>
 
                 <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length -->

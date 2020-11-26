@@ -122,6 +122,7 @@ class Lab implements Feature {
             new PlateReconstructor(Lab.Machine.plate_reconstructor, 'Plate Reconstructor', 'Reconstruct plates from shards.', 1, 2),
             new Incubator(Lab.Machine.incubator, 'Incubator', 'Increases the total Hatchery queue slots when placed.', 2, 3),
             new FossilReviver(Lab.Machine.fossil_reviver, 'Fossil Reviver', 'Revives Fossil Pokemon', 5, 2),
+            new Generator(Lab.Machine.generator, 'Generator', 'Increases Machine speed when placed.', 4, 6),
         ];
 
         //#endregion
@@ -271,5 +272,6 @@ namespace Lab {
         'plate_reconstructor',
         'incubator',
         'fossil_reviver',
+        'generator',
     }
 }
