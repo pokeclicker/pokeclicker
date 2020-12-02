@@ -1553,7 +1553,7 @@ TownList['Relic Passage'] = new DungeonTown(
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
     GameConstants.Region.unova,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Desert Resort'))]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 25)]
 );
 TownList['Lostlorn Forest'] = new DungeonTown(
     'Lostlorn Forest',
@@ -1584,7 +1584,7 @@ TownList['Seaside Cave'] = new DungeonTown(
     'Seaside Cave',
     GameConstants.Region.unova,
     [
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Undella Bay')),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 24),
         new GymBadgeRequirement(BadgeEnums.Legend),
     ]
 );
@@ -1606,6 +1606,7 @@ TownList['Abundant Shrine'] = new DungeonTown(
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 23),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 14),
         new ObtainedPokemonRequirement(pokemonMap.Tornadus),
         new ObtainedPokemonRequirement(pokemonMap.Thundurus),
     ]
