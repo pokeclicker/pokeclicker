@@ -21,7 +21,8 @@ class DamageCalculator {
             ignoreRegionMultiplier,
             DamageCalculator.region(),
             DamageCalculator.includeBreeding(),
-            DamageCalculator.baseAttackOnly()
+            DamageCalculator.baseAttackOnly(),
+            false
         );
     }
 

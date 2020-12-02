@@ -633,10 +633,10 @@ class Farming implements Feature {
         // Wacan
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Wacan,
             [
-                BerryType.Aspear,
-                BerryType.Sitrus,
                 BerryType.Pinap,
-                BerryType.Nomel,
+                BerryType.Iapapa,
+                BerryType.Qualot,
+                BerryType.Grepa,
             ]));
         // Rindo
         // TODO: HLXII - Change mutation to grow spontaneously when Grass pokemon in party
@@ -652,7 +652,7 @@ class Farming implements Feature {
         this.mutations.push(new GrowNearBerryMutation(.0004, BerryType.Rindo,
             [BerryType.Rindo], {showHint: false }));
         // Yache
-        this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Yache, BerryType.Passho, {}, {
+        this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Yache, BerryType.Passho, {}, PlotStage.Seed, {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
         }));
         // Chople
@@ -1076,6 +1076,8 @@ class Farming implements Feature {
         plot.die(true);
         GameHelper.incrementObservable(this.shovelAmt, -1);
         GameHelper.incrementObservable(App.game.statistics.totalShovelsUsed, 1);
+
+        this.resetAuras();
     }
 
     /**

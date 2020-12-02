@@ -117,7 +117,7 @@ class QuestHelper {
         const routes = Routes.getRoutesByRegion(region).map(r => r.number);
         const first = Math.min(...routes);
         const last = Math.max(...routes);
-        const attack = Math.max(1, App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, false, region, true));
+        const attack = Math.max(1, App.game.party.calculatePokemonAttack(PokemonType.None, PokemonType.None, false, region, true, false, false));
 
         for (let route = last; route >= first; route--) {
             if (PokemonFactory.routeHealth(route, region) < attack) {
