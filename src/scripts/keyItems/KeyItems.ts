@@ -57,7 +57,7 @@ class KeyItems implements Feature {
             new KeyItem(KeyItems.KeyItem.Event_calendar, 'This calendar will keep you up to date on the latest events', undefined, undefined, undefined, 'Event Calender'),
             new KeyItem(KeyItems.KeyItem.Shard_case, 'A case specifically designed for holding shards', undefined, undefined, undefined, 'Shard Case'),
             new KeyItem(KeyItems.KeyItem.DNA_splicers, 'A splicer that fuses certain Pokémon.', () => {
-                return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() >0;
+                return App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex('Giant Chasm')]() > 0;
             }, undefined, undefined, 'DNA Splicers'),
         ];
     }
