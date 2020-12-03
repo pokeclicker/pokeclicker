@@ -179,22 +179,12 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
-        for (let i = 0; i < player.mineInventory().length; i++) {
-            if (player.mineInventory()[i].id === id) {
-                return i;
-            }
-        }
-        return -1;
+        return player.mineInventory().findIndex(i => i.id == id);
     }
 
     // TODO(@Isha) move to underground classes.
     public getUndergroundItemAmount(id: number) {
-        const index = this.mineInventoryIndex(id);
-        if (index > -1) {
-            return player.mineInventory()[index].amount();
-        } else {
-            return 0;
-        }
+        return player.mineInventory().find(i => i.id == id)?.amount() || 0;
     }
 
     public toJSON() {
