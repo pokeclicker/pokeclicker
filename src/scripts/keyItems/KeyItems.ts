@@ -128,7 +128,7 @@ namespace KeyItems {
         'Wailmer_pail',
         'Explorer_kit',
         'Event_calendar',
-        'Shard_case'
+        'Shard_case',
         'DNA_splicers'
     }
 }
