@@ -960,6 +960,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 52.2,
         'name': 'Meowth (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 255,
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
@@ -1418,6 +1419,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 77.1,
         'name': 'Ponyta (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 190,
         'type': [PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
@@ -1492,6 +1494,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 79.1,
         'name': 'Slowpoke (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 190,
         'type': [PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
@@ -1531,6 +1534,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 80.1,
         'name': 'Slowbro (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 75,
         'type': [PokemonType.Poison, PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
@@ -1605,6 +1609,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 83.1,
         'name': 'Farfetch\'d (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 45,
         'type': [PokemonType.Fighting],
         'levelType': LevelType.mediumfast,
@@ -2326,6 +2331,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 122.1,
         'name': 'Mr. Mime (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 45,
         'type': [PokemonType.Psychic, PokemonType.Ice],
         'levelType': LevelType.mediumfast,
@@ -2734,6 +2740,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 144.1,
         'name': 'Articuno (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 3,
         'type': [PokemonType.Psychic, PokemonType.Flying],
         'levelType': LevelType.slow,
@@ -2768,6 +2775,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 145.1,
         'name': 'Zapdos (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 3,
         'type': [PokemonType.Fighting, PokemonType.Flying],
         'levelType': LevelType.slow,
@@ -2802,6 +2810,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 146.1,
         'name': 'Moltres (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 3,
         'type': [PokemonType.Dark, PokemonType.Flying],
         'levelType': LevelType.slow,
@@ -3753,6 +3762,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 199.1,
         'name': 'Slowking (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 70,
         'type': [PokemonType.Poison, PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
@@ -4629,6 +4639,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 222.1,
         'name': 'Corsola (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'catchRate': 60,
         'type': [PokemonType.Ghost],
         'levelType': LevelType.fast,
@@ -5371,6 +5382,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 263.1,
         'name': 'Zigzagoon (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Normal, PokemonType.Dark],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
@@ -5406,6 +5418,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 264.1,
         'name': 'Linoone (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Normal, PokemonType.Dark],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
@@ -11170,6 +11183,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 554.1,
         'name': 'Darumaka (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ice],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
@@ -11224,6 +11238,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 555.2,
         'name': 'Darmanitan (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ice],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
@@ -11241,6 +11256,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 555.3,
         'name': 'Darmanitan (Galar)(Zen)',
+        'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Fire, PokemonType.Ice],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
@@ -11382,6 +11398,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 562.1,
         'name': 'Yamask (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ghost, PokemonType.Ground],
         'eggCycles': 25,
         'levelType': LevelType.mediumfast,
@@ -12486,6 +12503,7 @@ const pokemonList = createPokemonArray(
     {
         'id': 618.1,
         'name': 'Stunfisk (Galar)',
+        'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ground, PokemonType.Steel],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
