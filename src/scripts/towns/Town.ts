@@ -1845,11 +1845,11 @@ TownList['Reflection Cave'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)]
 );
 //Tower of Mastery?
-TownList['Azure bay'] = new DungeonTown(
-    'Azure bay',
-    GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)]
-);
+// TownList['Azure bay'] = new DungeonTown(
+//     'Azure bay',
+//     GameConstants.Region.kalos,
+//     [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)]
+// );
 //Sea Spirit's Den?
 //Kalos Power Plant?
 TownList['Lost Hotel'] = new DungeonTown(
