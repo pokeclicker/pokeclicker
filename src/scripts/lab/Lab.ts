@@ -125,6 +125,8 @@ class Lab implements Feature {
             new Generator(Lab.Machine.generator, 'Generator', 'Increases Machine speed when placed.', 4, 6),
         ];
 
+        Generator.initialize();
+
         //#endregion
     }
 
@@ -171,6 +173,10 @@ class Lab implements Feature {
     completeResearch(research: Research) {
         research.completed = true;
         this.cancelResearch(research);
+    }
+
+    isResearched(research: Lab.Research): boolean {
+        return this.researchList.find(res => res.id === research).completed;
     }
 
     fromJSON(json: Record<string, any>): void {
@@ -237,7 +243,6 @@ class Lab implements Feature {
     }
 
 }
-
 
 namespace Lab {
     // TODO: HLXII - Add all Researches

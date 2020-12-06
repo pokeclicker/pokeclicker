@@ -6,6 +6,10 @@
  */
 class Generator extends Machine {
 
+    constructor(id: Lab.Machine, name: string, description: string, width: number, height: number) {
+        super(id, name, description, width, height);
+    }
+
     createState(json?: any): MachineState {
         const state = new GeneratorState();
         state.fromJSON(json);
@@ -17,13 +21,20 @@ class Generator extends Machine {
     /**
      * Possible Fuels that can be used in the Generator
      */
-    public static fuelTypes: GeneratorFuel[] = [
-        new GeneratorFuel(GeneratorFuelType.fire_shard, PokemonType.Fire, 0.1),
-        new GeneratorFuel(GeneratorFuelType.fire_stone, ItemList['Fire_stone'], 10),
-        new GeneratorFuel(GeneratorFuelType.flame_plate, UndergroundItem.list.find(item => item.name == 'Flame Plate'), 10),
-        new GeneratorFuel(GeneratorFuelType.occa_berry, App.game.farming.berryData[BerryType.Occa], 10),
-        new GeneratorFuel(GeneratorFuelType.magmarizer, ItemList['Magmarizer'], 10),
-    ];
+    public static fuelTypes: GeneratorFuel[];
+    public static initialize() {
+        this.fuelTypes = [
+            new GeneratorFuel(GeneratorFuelType.fire_shard, 'Fire Shard', PokemonType.Fire, 0.1),
+            new GeneratorFuel(GeneratorFuelType.fire_stone, 'Fire Stone', ItemList['Fire_stone'], 20),
+            new GeneratorFuel(GeneratorFuelType.flame_plate, 'Flame Plate', UndergroundItem.list.find(item => item.name == 'Flame Plate'), 10),
+            new GeneratorFuel(GeneratorFuelType.occa_berry, 'Occa Berry', App.game.farming.berryData[BerryType.Occa], 0.2),
+            new GeneratorFuel(GeneratorFuelType.magmarizer, 'Magmarizer', ItemList['Magmarizer'], 25),
+        ];
+    }
+
+    public static getAvailableFuels(): GeneratorFuel[] {
+        return this.fuelTypes.filter(fuel => !fuel.research || App.game.lab.isResearched(fuel.research));
+    }
 
     // TODO: HLXII - Add Research Upgrades
     /**
@@ -58,11 +69,15 @@ class GeneratorState extends MachineState {
 
         this.tooltip = ko.pureComputed(() => {
             const tooltip = [];
-            tooltip.push(`Increasing Machine speed by ${this.effect()}x.`);
+            if (this.active) {
+                tooltip.push(`Increasing Machine speed by ${this.effect().toFixed(2)}x.`);
+            } else {
+                tooltip.push('Disabled');
+            }
             if (this.fuel <= 0) {
                 tooltip.push('No fuel remaining');
             } else {
-                tooltip.push(`${this.fuel} fuel remaining.`);
+                tooltip.push(`${this.fuel.toFixed(1)} fuel remaining.`);
             }
             return tooltip.join('<br>');
         });

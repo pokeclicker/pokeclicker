@@ -11,6 +11,7 @@ class GeneratorFuel {
     public itemAmount: KnockoutComputed<number>;
 
     constructor(public id: GeneratorFuelType,
+        public name: string,
         public item: PokemonType | UndergroundItem | Berry | Item,
         public fuelAmount: number,
         public research?: Lab.Research) {
