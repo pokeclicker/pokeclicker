@@ -174,6 +174,7 @@ namespace GameConstants {
         1: Set<string>;
         2: Set<string>;
         3: Set<string | number>;
+        4: Set<string>;
         7: Set<string>;
     };
     declare const ForestAreas: {
