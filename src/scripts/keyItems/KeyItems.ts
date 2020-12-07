@@ -13,7 +13,7 @@ class KeyItems implements Feature {
     initialize() {
         this.itemList = [
             new KeyItem(KeyItems.KeyItem.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS', null, true, undefined, 'Teachy TV'),
-            new KeyItem(KeyItems.KeyItem.Coin_case, 'A case for holding money. It can hold up to 1,000,000 coins', null, true, undefined, 'Coin Case'),
+            new KeyItem(KeyItems.KeyItem.Coin_case, 'A case for holding money. It can hold up to 100,000,000,000 coins', null, true, undefined, 'Coin Case'), //can also be changed to "an infinite amount of coins"
             new KeyItem(KeyItems.KeyItem.Pokeball_bag, 'A tiny bag that can hold up to 4 different types of PokéBalls', null, true, undefined, 'Pokéball Bag'),
             new KeyItem(KeyItems.KeyItem.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kanto][1]() >= GameConstants.ROUTE_KILLS_NEEDED;
