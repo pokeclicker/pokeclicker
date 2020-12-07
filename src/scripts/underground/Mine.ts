@@ -246,14 +246,14 @@ class Mine {
     }
 
     private static skipLayer(shouldConfirm = true): boolean {
-        //if (!this.skipsRemaining()) {
-        //    return false;
-        //}
+        if (!this.skipsRemaining()) {
+            return false;
+        }
 
         if (!shouldConfirm || confirm('Skip this mine layer?')) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
-            //GameHelper.incrementObservable(this.skipsRemaining, -1);
+            GameHelper.incrementObservable(this.skipsRemaining, -1);
             return true;
         }
     }
