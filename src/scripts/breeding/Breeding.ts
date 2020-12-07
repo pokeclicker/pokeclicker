@@ -266,7 +266,7 @@ class Breeding implements Feature {
             if (this.queueList().length) {
                 const nextEgg = this.createEgg(this.queueList.shift());
                 this.gainEgg(nextEgg);
-                if ((this.queueSlots() - this.queueList().length) === this.queueSlots()) {
+                if (!this.queueList().length) {
                     Notifier.notify({
                         message: 'Hatchery queue is empty',
                         type: NotificationConstants.NotificationOption.success,
