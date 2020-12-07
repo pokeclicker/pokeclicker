@@ -36,7 +36,7 @@ class Notifier {
                     <button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>
                   </div>` : ''}
                   <div class="toast-body text-light">
-                    ${message}
+                    ${message.replace(/\n/g, '<br/>')}
                     ${title ? '' : '<button type="button" class="ml-2 mb-1 close" data-dismiss="toast">×</button>'}
                   </div>
                 </div>`;
