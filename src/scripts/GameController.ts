@@ -131,6 +131,8 @@ class GameController {
         // Pokeball Selector
         const $pokeballSelector = $('#pokeballSelectorModal');
         const pokeballs = App.game.pokeballs;
+        // Underground
+        const $undergroundModal = $('#mineModal');
 
         $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
@@ -178,27 +180,16 @@ class GameController {
                                     oakItems.activate(numKey);
                                 }
                             }
+                        } else if ($undergroundModal.data('bs.modal')?._isShown) {
+                            if (numKey == 0) {
+                                ItemList['SmallRestore'].use();
+                            } else if (numKey == 1) {
+                                ItemList['MediumRestore'].use();
+                            } else if (numKey == 2) {
+                                ItemList['LargeRestore'].use();
+                            }
                         }
                     }
-            }
-
-            if (App.game.underground.energy < App.game.underground.getMaxEnergy()) {
-                if ($('#mineModal').hasClass('show')) {
-                    switch (e.code) {
-                        case 'Digit1':
-                            ItemList['SmallRestore'].use();
-                            break;
-                        case 'Digit2':
-                            ItemList['MediumRestore'].use();
-                            break;
-                        case 'Digit3':
-                            ItemList['LargeRestore'].use();
-                            break;
-                        default: // any other key (ignore)
-                            return;
-                    }
-                    e.preventDefault();
-                }
             }
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {

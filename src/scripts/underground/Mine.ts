@@ -7,7 +7,7 @@ class Mine {
     public static itemsFound: KnockoutObservable<number> = ko.observable(0);
     public static itemsBuried: KnockoutObservable<number> = ko.observable(0);
     public static rewardNumbers: Array<number>;
-    public static prospectResult = ko.observable(null);
+    public static surveyResult = ko.observable(null);
     public static skipsRemaining = ko.observable(Mine.maxSkips)
 
     // 0 represents the Mine.Tool.Chisel but it's not loaded here yet.
@@ -19,7 +19,7 @@ class Mine {
         const tmpRewardGrid = [];
         Mine.rewardNumbers = [];
         Mine.itemsBuried(0);
-        Mine.prospectResult(null);
+        Mine.surveyResult(null);
         for (let i = 0; i < App.game.underground.getNewYLayer(); i++) {
             const row = [];
             const rewardRow = [];
@@ -131,27 +131,27 @@ class Mine {
         Mine.rewardNumbers.push(reward.id);
     }
 
-    //Survey Charge
-    public static prospect() {
-        if (Mine.prospectResult()) {
-            $('#mine-prospect-result').tooltip('show');
+    public static survey() {
+        if (Mine.surveyResult()) {
+            $('#mine-survey-result').tooltip('show');
             return;
         }
 
-        const tiles = App.game.underground.getSurveyCharge_Efficiency();
-        for (let i = 1; i < tiles; i++) {
+        const SurveyCost = App.game.underground.getSurvey_Cost();
+        if (App.game.underground.energy < SurveyCost) {
+            return;
+        }
+
+        const tiles = App.game.underground.getSurvey_Efficiency();
+        for (let i = 0; i < tiles; i++) {
             const x = GameConstants.randomIntBetween(0, App.game.underground.getNewYLayer() - 1);
             const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
             this.breakTile(x, y, 5);
         }
 
-        const ProspectCost = App.game.underground.getSurveyCharge_Cost();
-        if (App.game.underground.energy < ProspectCost) {
-            return;
-        }
-        App.game.underground.energy -= ProspectCost;
+        App.game.underground.energy -= SurveyCost;
         const rewards = Mine.rewardSummary();
-        Mine.updateProspectResult(rewards);
+        Mine.updatesurveyResult(rewards);
     }
 
     private static rewardSummary() {
@@ -179,7 +179,7 @@ class Mine {
         }, {fossils: 0, plates: 0, evoItems: 0, totalValue: 0});
     }
 
-    private static updateProspectResult(summary) {
+    private static updatesurveyResult(summary) {
         const text = [];
         if (summary.fossils) {
             text.push(`Fossils: ${summary.fossils}`);
@@ -192,8 +192,8 @@ class Mine {
         }
         text.push(`Diamond Value: ${summary.totalValue}`);
 
-        Mine.prospectResult(text.join('<br>'));
-        $('#mine-prospect-result').tooltip('show');
+        Mine.surveyResult(text.join('<br>'));
+        $('#mine-survey-result').tooltip('show');
     }
 
     public static click(i: number, j: number) {
@@ -246,14 +246,14 @@ class Mine {
     }
 
     private static skipLayer(shouldConfirm = true): boolean {
-        if (!this.skipsRemaining()) {
-            return false;
-        }
+        //if (!this.skipsRemaining()) {
+        //    return false;
+        //}
 
         if (!shouldConfirm || confirm('Skip this mine layer?')) {
             setTimeout(Mine.completed, 1500);
             Mine.loadingNewLayer = true;
-            GameHelper.incrementObservable(this.skipsRemaining, -1);
+            //GameHelper.incrementObservable(this.skipsRemaining, -1);
             return true;
         }
     }
@@ -363,7 +363,7 @@ class Mine {
         this.itemsBuried(mine.itemsBuried);
         this.rewardNumbers = mine.rewardNumbers;
         this.loadingNewLayer = false;
-        this.prospectResult(mine.prospectResult ?? this.prospectResult());
+        this.surveyResult(mine.surveyResult ?? this.surveyResult());
         this.skipsRemaining(mine.skipsRemaining ?? this.maxSkips);
 
         Underground.showMine();
@@ -382,7 +382,7 @@ class Mine {
             itemsFound: this.itemsFound(),
             itemsBuried: this.itemsBuried(),
             rewardNumbers: this.rewardNumbers,
-            prospectResult: this.prospectResult(),
+            surveyResult: this.surveyResult(),
             skipsRemaining: this.skipsRemaining(),
         };
         return mineSave;
