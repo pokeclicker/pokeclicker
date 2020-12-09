@@ -13,8 +13,8 @@ class KeyItems implements Feature {
     initialize() {
         this.itemList = [
             new KeyItem(KeyItems.KeyItem.Teachy_tv, 'A television set that is tuned to a program with useful tips for novice TRAINERS', null, true, undefined, 'Teachy TV'),
-            new KeyItem(KeyItems.KeyItem.Coin_case, 'A case for holding money. It can hold up to 1,000,000 coins', null, true, undefined, 'Coin Case'),
-            new KeyItem(KeyItems.KeyItem.Pokeball_bag, 'A tiny bag that can hold up to 4 different types of PokéBalls', null, true, undefined, 'Pokéball Bag'),
+            new KeyItem(KeyItems.KeyItem.Coin_case, 'A case for holding money', null, true, undefined, 'Coin Case'),
+            new KeyItem(KeyItems.KeyItem.Pokeball_bag, 'A small bag that can hold many different types of PokéBalls', null, true, undefined, 'Pokéball Bag'),
             new KeyItem(KeyItems.KeyItem.Town_map, 'A very convenient map that can be viewed anytime. It even shows you your present location in the region', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kanto][1]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, false, () => {
@@ -29,7 +29,7 @@ class KeyItems implements Feature {
             }, 'Town Map'),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Factory_key, 'This pass serves as an ID card for gaining access to the Pokéball factory that lies along Route 13', undefined, undefined, undefined, 'Factory Key'),
-            new KeyItem(KeyItems.KeyItem.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon', null, false, () => {
+            new KeyItem(KeyItems.KeyItem.Dungeon_ticket, 'This ticket grants access to all dungeons in the Kanto region and beyond,<br/><strong>Tip:</strong> You gain Dungeon Tokens by capturing Pokémon', null, false, () => {
                 Information.show({
                     steps: [
                         {
@@ -44,11 +44,11 @@ class KeyItems implements Feature {
             }, undefined, undefined, 'Super Rod'),
             // TODO obtain somewhere at the start
             new KeyItem(KeyItems.KeyItem.Holo_caster, 'A device that allows users to receive and view hologram clips at any time. It’s also used to chat with others', undefined, undefined, undefined, 'Holo Caster'),
-            new KeyItem(KeyItems.KeyItem.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack, some baby Pokémon can only be found through breeding too!', () => {
+            new KeyItem(KeyItems.KeyItem.Mystery_egg, 'A mysterious Egg obtained from Mr. Pokémon. This allows you to use the Pokémon Day Care to help improve your Pokémons attack; some baby Pokémon can only be found through breeding too!', () => {
                 return App.game.statistics.routeKills[GameConstants.Region.kanto][5]() >= GameConstants.ROUTE_KILLS_NEEDED;
             }, undefined, undefined, 'Mystery Egg'),
-            new KeyItem(KeyItems.KeyItem.Safari_ticket, 'This ticket grants access to the Safari Zone in Fuchsia City'),
-            new KeyItem(KeyItems.KeyItem.Wailmer_pail, 'This is a tool for watering Berries you planted to make them grow more quickly', () => {
+            new KeyItem(KeyItems.KeyItem.Safari_ticket, 'This ticket grants access to the Safari Zone right outside Fuchsia City'),
+            new KeyItem(KeyItems.KeyItem.Wailmer_pail, 'This is a tool for watering Berries to allow you to operate the farm.', () => {
                 return MapHelper.accessToRoute(14, GameConstants.Region.kanto);
             }, undefined, undefined, 'Wailmer Pail'),
 
