@@ -3,6 +3,7 @@
 /// <reference path="../party/evolutions/TimedEvolution.ts" />
 /// <reference path="../party/evolutions/LocationEvolution.ts" />
 /// <reference path="../party/evolutions/WeatherRestrictedLevelEvolution.ts" />
+/// <reference path="../party/evolutions/EnvironmentEvolution.ts" />
 /// <reference path="../GameConstants.d.ts" />
 /// <reference path="../party/LevelType.ts" />
 /// <reference path="../weather/WeatherType.ts" />
