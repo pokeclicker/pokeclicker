@@ -59,9 +59,10 @@ class EnigmaMutation extends GrowMutation {
     static getReqs(): BerryType[] {
         SeededRand.seed(+App.game.discord.ID());
         // Getting possible Berries
-        // Only Gen 3 and 4 Berries
+        // Only Gen 3 and 4 Berries so there isn't as big of a growth discrepancy (e.g. Cheri and Haban)
         let berryTypes = Farming.getGeneration(2).concat(Farming.getGeneration(3));
-        // Remove parasite Berries
+        // Remove parasite Berries, as having four sides for mutation requirements means parasite
+        // mutations can make it difficult to have all four plants fully grown.
         berryTypes = berryTypes.filter(berry => {
             return ![BerryType.Occa, BerryType.Kebia, BerryType.Colbur].includes(berry);
         });
