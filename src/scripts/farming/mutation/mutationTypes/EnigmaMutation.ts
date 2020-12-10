@@ -63,16 +63,7 @@ class EnigmaMutation extends GrowMutation {
         let berryTypes = Farming.getGeneration(2).concat(Farming.getGeneration(3));
         // Remove parasite Berries
         berryTypes = berryTypes.filter(berry => {
-            if (berry == BerryType.Occa) {
-                return false;
-            }
-            if (berry == BerryType.Kebia) {
-                return false;
-            }
-            if (berry == BerryType.Colbur) {
-                return false;
-            }
-            return true;
+            return ![BerryType.Occa, BerryType.Kebia, BerryType.Colbur].includes(berry);
         });
         return [...new Array(4)].map((_) => SeededRand.fromArray(berryTypes));
     }
