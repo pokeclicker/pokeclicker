@@ -26,5 +26,3 @@ type EnvironmentRestrictedT<T extends Constructor<any>> =
 function EnvironmentRestricted<T extends Constructor<any>>(Base: T): EnvironmentRestrictedT<T> {
     return LocationRestricted(ByEnvironment(Base));
 }
-
-const EnvironmentRestrictedLevelEvolution = EnvironmentRestricted(LevelEvolution);
