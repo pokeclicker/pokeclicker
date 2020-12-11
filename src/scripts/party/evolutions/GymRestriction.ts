@@ -29,4 +29,4 @@ function GymRestricted<T extends Constructor<any>>(Base: T): GymRestrictedT<T> {
     return LocationRestricted(ByGym(Base));
 }
 
-const AnyGymRestricted = locationEvoHelper(() => App.game.gameState == GameConstants.GameState.gym);
+const AnyGymRestricted = restrictEvoWith(() => App.game.gameState == GameConstants.GameState.gym, EvolutionType.Location);

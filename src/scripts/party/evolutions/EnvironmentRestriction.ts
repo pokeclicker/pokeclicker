@@ -1,7 +1,7 @@
 /// <reference path="../../GameConstants.d.ts" />
 
-function ByEnvironment<EvoClass extends MinimalEvo>(Base: EvoClass) {
-    return class extends Base implements LocationRestricted {
+function EnvironmentRestricted<T extends Constructor<any> & MinimalEvo>(Base: T): EnvironmentRestrictedT<T> {
+    const Mixin = class extends Base {
         environment: GameConstants.Environment
 
         constructor(...args: any[]) {
@@ -11,10 +11,13 @@ function ByEnvironment<EvoClass extends MinimalEvo>(Base: EvoClass) {
             this.type.push(EvolutionType.Environment);
         }
 
-        atLocation(): boolean {
-            return MapHelper.getCurrentEnvironment() == this.environment;
+        isSatisfied(): boolean {
+            return MapHelper.getCurrentEnvironment() == this.environment
+                && super.isSatisfied();
         }
     };
+
+    return Mixin;
 }
 
 type EnvironmentRestrictedT<T extends Constructor<any>> =
@@ -22,7 +25,3 @@ type EnvironmentRestrictedT<T extends Constructor<any>> =
          ...rest: ConstructorParameters<T>
         )
     => InstanceType<T>
-
-function EnvironmentRestricted<T extends Constructor<any>>(Base: T): EnvironmentRestrictedT<T> {
-    return LocationRestricted(ByEnvironment(Base));
-}

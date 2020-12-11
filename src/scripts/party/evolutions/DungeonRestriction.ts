@@ -29,4 +29,4 @@ function DungeonRestricted<T extends Constructor<any>>(Base: T): DungeonRestrict
     return LocationRestricted(ByDungeon(Base));
 }
 
-const AnyDungeonRestricted = locationEvoHelper(() => App.game.gameState == GameConstants.GameState.dungeon);
+const AnyDungeonRestricted = restrictEvoWith(() => App.game.gameState == GameConstants.GameState.dungeon, EvolutionType.Location);
