@@ -77,6 +77,8 @@ class Quests implements Saveable {
             // Once the player completes every available quest, refresh the list for free
             if (this.allQuestClaimed()) {
                 this.refreshQuests(true);
+                // Give player a free refresh
+                this.freeRefresh(true);
             }
         } else {
             console.trace('cannot claim quest..');

@@ -19,6 +19,7 @@ namespace NotificationConstants {
 
     export const NotificationSound = {
         ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
+        empty_queue: new Sound('empty_queue', 'Hatchery queue is empty'),
         shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched'),
         new_catch: new Sound('new_catch', 'New Pokémon/shiny captured'),
         achievement: new Sound('achievement', 'New achievement earned'),
@@ -32,6 +33,7 @@ namespace NotificationConstants {
         ready_to_hatch: new BooleanSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),
         hatched: new BooleanSetting('notification.hatched', 'Egg hatched', true),
         hatched_shiny: new BooleanSetting('notification.hatched_shiny', 'Egg hatched a shiny', true),
+        empty_queue: new BooleanSetting('empty_queue', 'Hatchery queue is empty', true),
         route_item_found: new BooleanSetting('notification.route_item_found', 'Item found during route battle', true),
         dungeon_item_found: new BooleanSetting('notification.dungeon_item_found', 'Item found in dungeon chest', true),
         battle_item_timer: new BooleanSetting('notification.battle_item_timer', 'Battle item about to wear off', true),
