@@ -11224,8 +11224,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 189,
         'catchRate': 60,
-        'evolutions': [new LevelEvolution('Darmanitan (Zen)', 'Darmanitan', 69420)],
-        'baby': true,
         'base': {
             'hitpoints': 105,
             'attack': 30,
@@ -11255,15 +11253,13 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 555.3,
-        'name': 'Darmanitan (Galar)(Zen)',
+        'name': 'Darmanitan (Zen Galar)',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Fire, PokemonType.Ice],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 189,
         'catchRate': 60,
-        'evolutions': [new LevelEvolution('Darmanitan (Galar)(Zen)', 'Darmanitan (Galar)', 69420)],
-        'baby': true,
         'base': {
             'hitpoints': 105,
             'attack': 160,
