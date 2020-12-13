@@ -1312,10 +1312,10 @@ gymList['Trainer Hop'] = new Gym(
     'Trainer Hop',
     [
         new GymPokemon('Dubwool', 1945330, 49),
-        new GymPokemon('Corviknight', 1948300, 49),
+        new GymPokemon('Cramorant', 1948300, 49),
         new GymPokemon('Pincurchin', 1952000, 50),
         new GymPokemon('Snorlax', 1957000, 51),
-        new GymPokemon('Cramorant', 1945330, 50),
+        new GymPokemon('Corviknight', 1945330, 50),
     ],
     BadgeEnums.Elite_Hop,
     64000,
@@ -1352,4 +1352,70 @@ gymList['Champion Leon'] = new Gym(
     64000,
     'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Bede)]
+);
+gymList['Gym Leader Klara'] = new Gym(
+    'Klara',
+    'Gym Leader Klara',
+    [
+        new GymPokemon('Slowking (Galar)', 1948300, 49),
+        new GymPokemon('Weezing (Galar)', 1952000, 50),
+        new GymPokemon('Drapion', 1957000, 51),
+        new GymPokemon('Scolipede', 1945330, 60),
+        new GymPokemon('Slowbro (Galar)', 1945330, 50),
+    ],
+    BadgeEnums.Elite_PoisonBadge,
+    64000,
+    'Aww, come on! What a drag! But...I guess it was also kinda fun!',
+    [
+        new MultiRequirement([
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Darkness')),
+            new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Tower of Water')),
+        ]),
+    ]
+);
+gymList['Gym Leader Avery'] = new Gym(
+    'Avery',
+    'Gym Leader Avery',
+    [
+        new GymPokemon('Slowbro (Galar)', 1948300, 49),
+        new GymPokemon('Rapidash (Galar)', 1952000, 50),
+        new GymPokemon('Swoobat', 1957000, 51),
+        new GymPokemon('Alakazam', 1945330, 60),
+        new GymPokemon('Slowking (Galar)', 1945330, 50),
+    ],
+    BadgeEnums.Elite_PsychicBadge,
+    64000,
+    'More! I require more! Show me your Stored Power!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_PoisonBadge)]
+);
+gymList['Dojo Master Mustard'] = new Gym(
+    'Mustard',
+    'Dojo Master Mustard',
+    [
+        new GymPokemon('Luxray', 1945330, 49),
+        new GymPokemon('Corviknight', 1948300, 49),
+        new GymPokemon('Lycanrock (Midday)', 1952000, 50),
+        new GymPokemon('Kommo-o', 1957000, 51),
+        new GymPokemon('Urshifu (Single Strike)', 1945330, 60),
+        new GymPokemon('Urshifu (Rapid Strike)', 1945330, 50),
+    ],
+    BadgeEnums.Elite_ArmorChampion,
+    64000,
+    'That strength of yours doesn\'t bend easily!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_PsychicBadge)]
+);
+gymList['Trainer Peony'] = new Gym(
+    'Peony',
+    'Trainer Peony',
+    [
+        new GymPokemon('Perrserker', 1948300, 49),
+        new GymPokemon('Bronzong', 1952000, 50),
+        new GymPokemon('Scizor', 1957000, 51),
+        new GymPokemon('Aggron', 1945330, 60),
+        new GymPokemon('Copperajah', 1945330, 50),
+    ],
+    BadgeEnums.Elite_CrownChampion,
+    64000,
+    'Gone and got stronger again, have you? Ah well! Hats off to you-in more ways than one!',
+    [new ObtainedPokemonRequirement(pokemonMap.Calyrex)]
 );

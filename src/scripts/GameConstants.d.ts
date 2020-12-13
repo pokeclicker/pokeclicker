@@ -153,7 +153,9 @@ namespace GameConstants {
         unova,
         kalos,
         alola,
-        galar
+        galar,
+        armor,
+        crown
     }
     declare function randomIntBetween(min: number, max: number): number;
     declare function randomElement(array: any[]): any;
