@@ -19,6 +19,15 @@ module.exports = {
     },
     rules: {
         indent: 'off',
+        'max-len': [
+            'error', 200, 2, {
+                ignoreUrls: true,
+                ignoreComments: false,
+                ignoreRegExpLiterals: true,
+                ignoreStrings: true,
+                ignoreTemplateLiterals: true,
+            },
+        ],
         '@typescript-eslint/indent': ['error', 4, { SwitchCase: 1 }],
         '@typescript-eslint/comma-dangle': ['error', {
             arrays: 'always-multiline',
