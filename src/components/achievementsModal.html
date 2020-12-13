@@ -17,26 +17,26 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                                 <div class="form-group col-md-4 col-4">
                                     <label>Status</label>
                                     <select class="custom-select" onchange="AchievementHandler.filter.status(this.value)">
-                                        <option value="all" selected>All</option>
-                                        <option value="false">Incomplete</option>
-                                        <option value="true">Completed</option>
+                                        <option data-bind="attr: { selected: AchievementHandler.filter.status() === 'all' }" value="all">All</option>
+                                        <option data-bind="attr: { selected: AchievementHandler.filter.status() === 'false' }" value="false">Incomplete</option>
+                                        <option data-bind="attr: { selected: AchievementHandler.filter.status() === 'true' }" value="true">Completed</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4 col-4">
                                     <label>Type</label>
                                     <select class="custom-select" onchange="AchievementHandler.filter.type(this.value)">
-                                        <option value="all" selected>All</option>
+                                        <option data-bind="attr: { selected: AchievementHandler.filter.type() === 'all' }" value="all">All</option>
                                         <!-- ko foreach: AchievementHandler.achievementTypes() -->
-                                        <option data-bind="value: $data, text: GameConstants.camelCaseToString($data.replace(/Requirement$/i, ''))">Type</option>
+                                        <option data-bind="attr: { value: $data, selected: AchievementHandler.filter.type() === $data }, text: GameConstants.camelCaseToString($data.replace(/Requirement$/i, ''))">Type</option>
                                         <!-- /ko -->
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4 col-4">
                                     <label>Region</label>
                                     <select class="custom-select" onchange="AchievementHandler.filter.region(this.value)">
-                                        <option value="all" selected>All</option>
+                                        <option data-bind="attr: { selected: AchievementHandler.filter.region() === 'all' }" value="all">All</option>
                                         <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => GameConstants.Region[r] <= player.highestRegion()) -->
-                                        <option data-bind="value: GameConstants.Region[$data], text: GameConstants.camelCaseToString($data)">Region</option>
+                                        <option data-bind="attr: { value: GameConstants.Region[$data], selected: GameConstants.Region[AchievementHandler.filter.region()] === $data }, text: GameConstants.camelCaseToString($data)">Region</option>
                                         <!-- /ko -->
                                     </select>
                                 </div>

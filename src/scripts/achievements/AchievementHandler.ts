@@ -281,15 +281,14 @@ class AchievementHandler {
 
     static load() {
         const dict = JSON.parse(localStorage.getItem('achievements'));
-        console.log(dict);
         if (dict === undefined || dict === null) {
             return;
         }
         if (dict.filter !== undefined) {
-            this.filter.region(dict.filter.region);
-            this.filter.status(dict.filter.status);
-            this.filter.type(dict.filter.type);
+            AchievementHandler.filter.region(dict.filter.region);
+            AchievementHandler.filter.status(dict.filter.status);
+            AchievementHandler.filter.type(dict.filter.type);
         }
-        this.navigateIndex(dict.page || 0);
+        AchievementHandler.navigateIndex(dict.page || 0);
     }
 }
