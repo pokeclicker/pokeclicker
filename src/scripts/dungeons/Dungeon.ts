@@ -1219,13 +1219,32 @@ dungeonList['Motostoke Riverbank'] = new Dungeon('Motostoke Riverbank',
     ],
     96500, 201, 35);
 
-dungeonList['Towers of Two Fists'] = new Dungeon('Towers of Two Fists',
-    ['Psyduck', 'Krabby', 'Marill', 'Poliwhirl', 'Zorua', 'Scraggy', 'Inkay', 'Krokorok'],
+
+
+//Isle of Armor
+dungeonList['Master Dojo'] = new Dungeon('Master Dojo',
+    ['Mienfoo', 'Shinx', 'Kadabra', 'Whirlipede'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [new DungeonBossPokemon('Kubfu', 8000000, 70)],
     96500, 201, 35);
 
+dungeonList['Tower of Darkness'] = new Dungeon('Tower of Darkness',
+    ['Zorua', 'Scraggy', 'Inkay', 'Krokorok'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Kubfu', 8000000, 70)],
+    96500, 201, 35);
+
+dungeonList['Tower of Water'] = new Dungeon('Tower of Water',
+    ['Psyduck', 'Krabby', 'Marill', 'Poliwhirl'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Kubfu', 8000000, 70)],
+    96500, 201, 35);
+
+
+//Crown Tundra
 dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     ['Golurk', 'Electivire', 'Dragapult', 'Araquanid', 'Cryogonal', 'Bronzong', 'Claydol', 'Absol', 'Galvantula', 'Audino'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -1236,17 +1255,14 @@ dungeonList['Split-Decision Ruins'] = new Dungeon('Split-Decision Ruins',
     ],
     96500, 201, 35);
 
-dungeonList['The Crown Tundra'] = new Dungeon('The Crown Tundra',
+dungeonList['Dyna Tree Hill'] = new Dungeon('Dyna Tree Hill',
     ['Magmar', 'Absol', 'Beartic', 'Cryogonal', 'Dubwool', 'Glalie', 'Clefable'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
-    [
-        new DungeonBossPokemon('Zapdos (Galar)', 8000000, 70),
-        new DungeonBossPokemon('Articuno (Galar)', 8000000, 70),
-        new DungeonBossPokemon('Moltres (Galar)', 8000000, 70),
-    ],
+    [new DungeonBossPokemon('Greedent', 8000000, 70)],
     96500, 201, 35);
-dungeonList['Freezington Ruins'] = new Dungeon('Freezington Ruins',
+
+dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
     ['Snom', 'Hatenna', 'Solosis', 'Jynx', 'Piloswine', 'Dubwool'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,

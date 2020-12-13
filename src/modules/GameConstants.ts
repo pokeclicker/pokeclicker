@@ -26,7 +26,10 @@ export const TotalPokemonsPerRegion = [
     649, // 156 - Unova
     721, // 72 - Kalos
     809, // 88 - Alola
-    898, // 89 - Galar
+    890, // 81 - Galar
+    893, // 3 - Armor
+    898, // 5 - Crown
+
 ];
 
 export const ITEM_USE_TIME = 30;
@@ -346,6 +349,8 @@ export enum Region {
     kalos = 5,
     alola = 6,
     galar = 7,
+    armor = 8,
+    crown = 9,
 }
 
 export function randomIntBetween(min: number, max: number): number {
