@@ -264,5 +264,32 @@ class AchievementHandler {
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion()));
         this.resetPages();
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
+        this.load();
+    }
+
+    static save() {
+        const dict = {
+            filter: {
+                status: this.filter.status(),
+                type:   this.filter.type(),
+                region: this.filter.region(),
+            },
+            page: this.navigateIndex(),
+        };
+        return JSON.stringify(dict);
+    }
+
+    static load() {
+        const dict = JSON.parse(localStorage.getItem('achievements'));
+        console.log(dict);
+        if (dict === undefined || dict === null) {
+            return;
+        }
+        if (dict.filter !== undefined) {
+            this.filter.region(dict.filter.region);
+            this.filter.status(dict.filter.status);
+            this.filter.type(dict.filter.type);
+        }
+        this.navigateIndex(dict.page || 0);
     }
 }

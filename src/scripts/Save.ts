@@ -7,6 +7,7 @@ class Save {
         localStorage.setItem('player', json);
         localStorage.setItem('settings', Settings.save());
         localStorage.setItem('save', JSON.stringify(this.getSaveObject()));
+        localStorage.setItem('achievements', AchievementHandler.save());
 
         this.counter = 0;
         console.log('%cGame saved', 'color:#3498db;font-weight:900;');
