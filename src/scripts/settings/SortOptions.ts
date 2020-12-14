@@ -60,7 +60,7 @@ const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.breedingEfficiency]: {
         'text': 'Breeding Efficiency',
-        'getValue': p => ((p.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + p.proteinsUsed()) / pokemonMap[p.name].eggCycles),
+        'getValue': p => (p.calculateBonusAttack() / pokemonMap[p.name].eggCycles),
         'invert': true,
     },
 
@@ -71,7 +71,7 @@ const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.timesHatched]: {
         'text': 'Times Hatched',
-        'getValue': p => App.game.statistics.pokemonHatched[p.id]() || 0,
+        'getValue': p => p.timesHatched() || 0,
     },
 
     [SortOptions.category]: {
