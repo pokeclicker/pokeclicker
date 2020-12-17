@@ -210,9 +210,6 @@ class Plot implements Saveable {
             const oldAge = this.age;
             this.age += growthTime;
 
-            // Checking for Kasib
-            // TODO: HLXII
-
             // Checking for Petaya Berries
             if (App.game.farming.berryInFarm(BerryType.Petaya) && this.berry !== BerryType.Petaya) {
                 this.age = Math.min(this.age, this.berryData.growthTime[3] + 1);
@@ -356,6 +353,11 @@ class Plot implements Saveable {
         }
 
         multiplier *= this._auras[AuraType.Growth]();
+
+        // Handle Kasib Effect
+        if (this.stage() == PlotStage.Berry && this.berry != BerryType.Kasib && App.game.farming.berryInFarm(BerryType.Kasib)) {
+            multiplier *= 5;
+        }
 
         return multiplier;
     }

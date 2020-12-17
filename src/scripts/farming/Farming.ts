@@ -305,8 +305,8 @@ class Farming implements Feature {
             [0, 10, 20, 0, 0], BerryColor.Purple,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
-                'Nearby Pokémon are wary of this Berry plant.',
-            ], new Aura(AuraType.Attract, [0.99, 0.98, 0.97]), ['Shedinja']);
+                'This Berry causes other Berries to wither away faster.',
+            ], undefined, ['Shedinja']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [10800, 21600, 43200, 86400, 172800],
             34, 0, 4000, 15,
             [0, 0, 10, 20, 0], BerryColor.Red,
