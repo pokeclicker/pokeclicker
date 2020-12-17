@@ -333,8 +333,8 @@ class Farming implements Feature {
             [25, 10, 0, 0, 0], BerryColor.Green,
             [
                 'This Berry is very tough with a strong flavor. It was used to make medicine by people in the past.',
-                'This Berry plant is very hardy and resistant, causing less mutations around it.',
-            ], new Aura(AuraType.Mutation, [0.9, 0.8, 0.7]), ['Skarmory']);
+                'This Berry plant is very hardy and resistant, making it resistant to mutations, and also decreasing the chance of mutations around it.',
+            ], new Aura(AuraType.Mutation, [0.5, 0.25, 0.0]), ['Skarmory']);
         this.berryData[BerryType.Chilan]    = new Berry(BerryType.Chilan,   [240, 1430, 2970, 7200, 14400],
             10, 0.05, 500, 15,
             [0, 25, 10, 0, 0], BerryColor.Yellow,
@@ -820,7 +820,7 @@ class Farming implements Feature {
             showHint: false,
             unlockReq: () => App.game.farming.unlockedBerries[BerryType.Lansat](),
         }));
-        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Starf, BerryType.Babiri, [BerryType.Enigma], {
+        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Starf, BerryType.Haban, [BerryType.Enigma], {
             showHint: false,
             unlockReq: () => App.game.farming.unlockedBerries[BerryType.Starf](),
         }));
