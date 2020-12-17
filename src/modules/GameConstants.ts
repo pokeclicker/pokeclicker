@@ -68,7 +68,7 @@ export const AMAZE_MULCH_GROWTH_MULTIPLIER = 1.25;
 export const AMAZE_MULCH_PRODUCE_MULTIPLIER = 1.5;
 export const AMAZE_MULCH_MUTATE_MULTIPLIER = 1.25;
 
-export const WANDER_RATE = 0.00001;
+export const WANDER_RATE = 0.0005;
 
 export const BerryColor = [
     '#EE8130', // Red
@@ -397,14 +397,14 @@ export const ROUTE_KILLS_NEEDED = 10;
 export const WaterAreas = {
     0: new Set(['Cerulean City', 19, 20, 21, 24]),
     1: new Set([40, 41, 'Slowpoke Well']),
-    2: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 'Shoal Cave', 'Seafloor Cavern']),
+    2: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134]),
     3: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
     4: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
 };
 
 export const IceAreas = {
     0: new Set(['Seafoam Islands']),
-    1: new Set(['Mahogany Town', 'Ice Path', 'Whirl Islands']),
+    1: new Set(['Mahogany Town', 'Ice Path']),
     2: new Set(['Shoal Cave', 'Sootopolis City']),
     3: new Set([216, 217, 'Lake Acuity', 'Snowpoint City']),
     4: new Set(['Giant Chasm']),
@@ -421,17 +421,17 @@ export const ForestAreas = {
 export const CaveAreas = {
     0: new Set(['Pewter City', 'Digletts Cave', 'Mt. Moon', 'Rock Tunnel', 'Victory Road']),
     1: new Set(['Cianwood City', 'Ruins of Alph', 'Union Cave', 'Mt Mortar', 'Dark Cave']),
-    2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn']),
+    2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn', 'Seafloor Cavern']),
     3: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
-    4: new Set(['Mistralton Cave', 'Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Cave of Being', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
+    4: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
 };
 
 export const GemCaveAreas = {
     0: new Set(['Viridian City', 'Cerulean Cave']),
-    1: new Set(['Blackthorn City', 'Mt Silver']),
-    2: new Set(['Cave of Origin', 'Sky Pillar']),
+    1: new Set(['Blackthorn City', 'Mt Silver', 'Whirl Islands']),
+    2: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber']),
     3: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
-    4: new Set(['Chargestone Cave']),
+    4: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
 };
 
 export const PowerPlantAreas = {
