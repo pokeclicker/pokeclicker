@@ -13,6 +13,13 @@ class Farming implements Feature {
     mutationCounter = 0;
     wanderCounter = 0;
 
+    // You may be wondering why this is necessary.
+    // It turns out for some reason the plot age doesn't update in time in the same tick.
+    // This means that if we attempt to reset the auras in the same tick, the plant that changed stages
+    // will still act like it's in the previous stage, which means the wrong aura is applied.
+    // Queueing an aura reset in the next tick fixes this issue, and is barely noticable to the player.
+    queuedAuraReset = false;
+
     static readonly PLOT_WIDTH = 5;
     static readonly PLOT_HEIGHT = 5;
 
@@ -849,6 +856,12 @@ class Farming implements Feature {
 
         let change = false;
 
+        // Handle updating auras
+        if (this.queuedAuraReset) {
+            this.resetAuras();
+            this.queuedAuraReset = false;
+        }
+
         // Updating Berries
         this.plotList.forEach(plot => {
             if (plot.update(timeToReduce)) {
@@ -890,8 +903,9 @@ class Farming implements Feature {
 
         }
 
+        // Handle queueing aura reset
         if (change) {
-            this.resetAuras();
+            this.queuedAuraReset = true;
         }
 
         if (notifications.size) {
