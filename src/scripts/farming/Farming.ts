@@ -386,7 +386,10 @@ class Farming implements Feature {
         this.berryData[BerryType.Petaya]    = new Berry(BerryType.Petaya,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [30, 0, 0, 30, 10], BerryColor.Pink,
-            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.'],
+            [
+                'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
+                'This power keeps other Berries alive for longer.',
+            ],
             undefined, ['Mew']);
         this.berryData[BerryType.Apicot]    = new Berry(BerryType.Apicot,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
@@ -1179,6 +1182,15 @@ class Farming implements Feature {
             });
             this.unlockedBerries[berry](true);
         }
+    }
+
+    /**
+     * Checks whether a Berry plant exists on the farm
+     * @param berry The Berry type
+     * @param stage The stage of the Berry plant. Defaults to PlotStage.Berry
+     */
+    berryInFarm(berry: BerryType, stage = PlotStage.Berry) {
+        return this.plotList.some(plot => plot.berry == berry && plot.stage() >= stage);
     }
 
     toJSON(): Record<string, any> {
