@@ -1983,7 +1983,7 @@ const Mom = new NPC('Mom', [
     'I\'ve heard there are some very strong Pokemon in there.',
     'Only those who beat the champion are strong enough to face them!',
 ]);
-const AdventurerPeony = new NPC('Adventurer Peony', [
+const TrainStationGuy = new NPC('Train Station Guy', [
     'There are some islands in the oceans around Galar.',
     'One is sparsely populated, but the other is teeming with Pokemon.',
     'There are plenty of unique, powerful ones there, too!',
@@ -2006,6 +2006,7 @@ TownList['Wedgehurst'] = new Town(
     {
         shop: WedgehurstShop,
         requirements: [new RouteKillRequirement(10, GameConstants.Region.galar, 1)],
+        npcs: [TrainStationGuy],
     }
 );
 TownList['Motostoke'] = new Town(
@@ -2087,14 +2088,25 @@ TownList['Wyndon Stadium'] = new Town(
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))],
     }
 );
+//Isle of Armor towns
+
+TownList['Master Dojo'] = new Town(
+    'Master Dojo',
+    GameConstants.Region.armor,
+    {
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.armor, 1)],
+        dungeon: dungeonList['Master Dojo'],
+    }
+);
+
+//Crown Tundra Towns
 TownList['Freezington'] = new Town(
     'Freezington',
-    GameConstants.Region.galar,
+    GameConstants.Region.crown,
     {
         shop: FreezingtonShop,
-        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_GalarChampion)],
-        npcs: [AdventurerPeony],
-        dungeon: dungeonList['Freezington Ruins'],
+        requirements: [new RouteKillRequirement(10, GameConstants.Region.crown, 1)],
+        npcs: [TrainStationGuy],
     }
 );
 
