@@ -110,6 +110,16 @@ export default class GameHelper {
         return keys1.every((key) => object1[key] === object2[key]);
     }
 
+    // Find the largest integer between min and max that does not return true when passed to testTooHigh, using a binary search
+    public static binarySearch(testTooHigh: (guess: number) => boolean, min: number, max: number): number {
+        if (max - min <= 1) return min;
+
+        const mid = Math.floor((max + min) / 2);
+        const [newMin, newMax] = testTooHigh(mid) ? [min, mid] : [mid, max];
+
+        return this.binarySearch(testTooHigh, newMin, newMax);
+    }
+
     private static getTomorrow() {
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
