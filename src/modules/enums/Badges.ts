@@ -97,6 +97,12 @@ enum BadgeEnums {
     'Elite_Hop',
     'Elite_Bede',
     'Elite_GalarChampion',
+    // Armor
+    'Elite_PoisonBadge',
+    'Elite_PsychicBadge',
+    'Elite_ArmorChampion',
+    // Crown
+    'Elite_CrownChampion',
 }
 
 export default BadgeEnums;
