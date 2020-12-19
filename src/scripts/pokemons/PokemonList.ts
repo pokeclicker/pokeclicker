@@ -13295,7 +13295,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 670.05,
-        'name': 'Flabble',
+        'name': 'Floette (Eternal)',
         'type': [PokemonType.Fairy],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
