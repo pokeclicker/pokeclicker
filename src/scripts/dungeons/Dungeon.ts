@@ -1045,7 +1045,7 @@ dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
         new DungeonBossPokemon('Pikachu (Partner cap)', 8000000, 70),
     ],
     96500, 201, 35);
- 
+
 dungeonList['Paniola Ranch'] = new Dungeon('Paniola Ranch',
     ['Mareep', 'Lillipup', 'Mudbray'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -1096,7 +1096,7 @@ dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
     2203000,
     [new DungeonBossPokemon('Larvitar', 8000000, 70)],
     96500, 201, 35);
-    
+
 dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
     ['Zubat', 'Gastly'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],

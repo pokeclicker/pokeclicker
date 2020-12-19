@@ -9,7 +9,7 @@ class QuestLineRequirement extends Requirement {
     }
 
     public getProgress() {
-        
+
         return +(App.game.quests.getQuestLine(this.questLineName).state() == QuestLineState.ended);
     }
 
