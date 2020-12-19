@@ -1023,8 +1023,6 @@ dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
     ],
     96500, 201, 35);
 
-//South Wild Area
-
 dungeonList['Watchtower Ruins'] = new Dungeon('Watchtower Ruins',
     ['Gastly', 'Noibat', 'Purrloin', 'Duskull', 'Woobat', 'Haunter', 'Shuckle', 'Ralts', 'Golett', 'Electrike', 'Snorunt'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -1036,92 +1034,6 @@ dungeonList['Watchtower Ruins'] = new Dungeon('Watchtower Ruins',
         new DungeonBossPokemon('Glalie', 8000000, 70),
     ],
     96500, 201, 35);
-
-dungeonList['East Lake Axwell'] = new Dungeon('East Lake Axwell',
-    ['Butterfree', 'Pancham', 'Quagsire', 'Xatu', 'Baltoy', 'Shellder', 'Oddish', 'Grubbin', 'Mudbray', 'Onix', 'Frillish'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Weezing (Galar)', 8000000, 70),
-        new DungeonBossPokemon('Vanilluxe', 8000000, 70),
-        new DungeonBossPokemon('Jellicent', 8000000, 70),
-        new DungeonBossPokemon('Gyarados', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['West Lake Axwell'] = new Dungeon('West Lake Axwell',
-    ['Dwebble', 'Wishiwashi', 'Bunnelby', 'Tympole', 'Palpitoad', 'Remoraid', 'Budew', 'Lotad', 'Krabby', 'Delibird', 'Joltik'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Grapploct', 8000000, 70),
-        new DungeonBossPokemon('Drednaw', 8000000, 70),
-        new DungeonBossPokemon('Diggersby', 8000000, 70),
-        new DungeonBossPokemon('Lapras', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['North Lake Miloch'] = new Dungeon('North Lake Miloch',
-    ['Machop', 'Lucario', 'Stunky', 'Snover', 'Pidove', 'Barboach', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Gloom', 'Goldeen', 'Skuntank'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Boltund', 8000000, 70),
-        new DungeonBossPokemon('Pelipper', 8000000, 70),
-        new DungeonBossPokemon('Seismitoad', 8000000, 70),
-        new DungeonBossPokemon('Liepard', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['Dappled Grove'] = new Dungeon('Dappled Grove',
-    ['Seedot', 'Bounsweet', 'Skwovet', 'Hoothoot', 'Tyrogue', 'Lombre', 'Nuzleaf', 'Vanillite', 'Cherubi', 'Vanillish', 'Claydol'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Orbeetle', 8000000, 70),
-        new DungeonBossPokemon('Vileplume', 8000000, 70),
-        new DungeonBossPokemon('Bewear', 8000000, 70),
-        new DungeonBossPokemon('Ludicolo', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['Rolling Fields'] = new Dungeon('Rolling Fields',
-    ['Metapod', 'Swinub', 'Minccino', 'Combee', 'Diglett', 'Roggenrola', 'Kirlia', 'Vespiquen', 'Manectric', 'Ninjask', 'Piloswine'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Gardevoir', 8000000, 70),
-        new DungeonBossPokemon('Mudsdale', 8000000, 70),
-        new DungeonBossPokemon('Crustle', 8000000, 70),
-        new DungeonBossPokemon('Dubwool', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['South Lake Miloch'] = new Dungeon('South Lake Miloch',
-    ['Nincada', 'Roselia', 'Corphish', 'Pyukumuku', 'Bronzor', 'Galvantula', 'Thievul', 'Machoke', 'Whiscash', 'Octillery', 'Wingull'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Jellicent', 8000000, 70),
-        new DungeonBossPokemon('Lanturn', 8000000, 70),
-        new DungeonBossPokemon('Milotic', 8000000, 70),
-        new DungeonBossPokemon('Seaking', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['Giant\s Seat'] = new Dungeon('Giant\'s Seat',
-    ['Tranquill', 'Greedent', 'Abomasnow', 'Dusclops', 'Rhydon', 'Bronzong', 'Musharna', 'Vikavolt', 'Natu', 'Wooper', 'Munna'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Steelix', 8000000, 70),
-        new DungeonBossPokemon('Duraludon', 8000000, 70),
-        new DungeonBossPokemon('Bronzong', 8000000, 70),
-        new DungeonBossPokemon('Bisharp', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-//North Wild Area
 
 dungeonList['Lake of Outrage'] = new Dungeon('Lake of Outrage',
     ['Stonjourner', 'Cramorant', 'Mr. Mime (Galar)', 'Morpeko', 'Coalossal', 'Sandaconda', 'Stunfisk (Galar)', 'Copperajah', 'Indeedee', 'Obstagoon', 'Grimmsnarl'],
@@ -1135,30 +1047,6 @@ dungeonList['Lake of Outrage'] = new Dungeon('Lake of Outrage',
     ],
     96500, 201, 35);
 
-dungeonList['Hammerlocke Hills'] = new Dungeon('Hammerlocke Hills',
-    ['Dugtrio', 'Drilbur', 'Karrablast', 'Shelmet', 'Espurr', 'Honedge', 'Inkay', 'Charjabug', 'Corvisquire', 'Roserade', 'Hatenna'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Hawlucha', 8000000, 70),
-        new DungeonBossPokemon('Sudowoodo', 8000000, 70),
-        new DungeonBossPokemon('Maractus', 8000000, 70),
-        new DungeonBossPokemon('Wobbuffet', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['Giant\s Cap'] = new Dungeon('Giant\'s Cap',
-    ['Shellos (east)', 'Pawniard', 'Dottler', 'Eldegoss', 'Clefairy', 'Noctowl', 'Quagsire', 'Sneasel', 'Linoone (Galar)', 'Torkoal', 'Riolu'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Gengar', 8000000, 70),
-        new DungeonBossPokemon('Golisopod', 8000000, 70),
-        new DungeonBossPokemon('Excadrill', 8000000, 70),
-        new DungeonBossPokemon('Beartic', 8000000, 70),
-    ],
-    96500, 201, 35);
-
 dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
     ['Gurdurr', 'Ferrothorn', 'Klang', 'Meowstic', 'Barbaracle', 'Applin', 'Hattrem', 'Qwilfish', 'Hitmonlee', 'Hitmonchan', 'Koffing'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -1168,54 +1056,6 @@ dungeonList['Dusty Bowl'] = new Dungeon('Dusty Bowl',
         new DungeonBossPokemon('Flygon', 8000000, 70),
         new DungeonBossPokemon('Sigilyph', 8000000, 70),
         new DungeonBossPokemon('Tyranitar', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['Giant\'s Mirror'] = new Dungeon('Giant\'s Mirror',
-    ['Hippowdon', 'Skorupi', 'Cubchoo', 'Mimikyu', 'Milcery', 'Mareanie', 'Impidimp', 'Qwilfish', 'Hitmonlee', 'Hitmonchan', 'Koffing'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Machamp', 8000000, 70),
-        new DungeonBossPokemon('Unfezant', 8000000, 70),
-        new DungeonBossPokemon('Gastrodon (east)', 8000000, 70),
-        new DungeonBossPokemon('Corsola (Galar)', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['Stony Wilderness'] = new Dungeon('Stony Wilderness',
-    ['Pikachu', 'Rhyhorn', 'Togetic', 'Boldore', 'Cottonee', 'Spritzee', 'Swirlix', 'Carkol', 'Croagunk', 'Bonsly', 'Dewpider'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Ribombee', 8000000, 70),
-        new DungeonBossPokemon('Ninjask', 8000000, 70),
-        new DungeonBossPokemon('Toxicroak', 8000000, 70),
-        new DungeonBossPokemon('Dusknoir', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['Bridge Field'] = new Dungeon('Bridge Field',
-    ['Togepi', 'Mawile', 'Ferroseed', 'Elgyem', 'Litwick', 'Rufflet', 'Vullaby', 'Binacle', 'Zigzagoon (Galar)', 'Scraggy', 'Cutiefly'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Garbodor', 8000000, 70),
-        new DungeonBossPokemon('Drapion', 8000000, 70),
-        new DungeonBossPokemon('Beheeyem', 8000000, 70),
-        new DungeonBossPokemon('Noivern', 8000000, 70),
-    ],
-    96500, 201, 35);
-
-dungeonList['Motostoke Riverbank'] = new Dungeon('Motostoke Riverbank',
-    ['Wimpod', 'Arrokuda', 'Munchlax', 'Throh', 'Sawk', 'Salandit', 'Rookidee', 'Gossifleur', 'Wooloo', 'Chewtle', 'Yamper'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Clefable', 8000000, 70),
-        new DungeonBossPokemon('Snorlax', 8000000, 70),
-        new DungeonBossPokemon('Conkeldurr', 8000000, 70),
-        new DungeonBossPokemon('Wailmer', 8000000, 70),
     ],
     96500, 201, 35);
 

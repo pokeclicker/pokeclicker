@@ -46,4 +46,3 @@ ItemList['Zorua']                = new PokemonItem('Zorua', 5000);
 ItemList['Meloetta (pirouette)'] = new PokemonItem('Meloetta (pirouette)', 150000);
 ItemList['Eternatus']            = new PokemonItem('Eternatus', 10000);
 ItemList['Toxel']                = new PokemonItem('Toxel', 5000);
-ItemList['Slowpoke (Galar)']             = new PokemonItem('Slowpoke (Galar)', 5000);
