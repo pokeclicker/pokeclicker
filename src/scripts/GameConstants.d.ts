@@ -163,70 +163,19 @@ namespace GameConstants {
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
     declare const ROUTE_KILLS_NEEDED: number;
-    declare const WaterAreas: {
-        0: Set<string | number>;
-        1: Set<string | number>;
-        2: Set<string | number>;
-        3: Set<string | number>;
-        4: Set<string>;
-        7: Set<string>;
+    declare type EnvironmentData = Partial<Record<number, Set<string | number>>>
+    declare const Environments: {
+        Water: EnvironmentData,
+        Ice: EnvironmentData,
+        Forest: EnvironmentData,
+        Cave: EnvironmentData,
+        GemCave: EnvironmentData,
+        PowerPlant: EnvironmentData,
+        Mansion: EnvironmentData,
+        Graveyard: EnvironmentData,
     };
-    declare const IceAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string | number>;
-        4: Set<string>;
-        7: Set<string>;
-    };
-    declare const ForestAreas: {
-        0: Set<string | number>;
-        1: Set<string | number>;
-        2: Set<string | number>;
-        3: Set<string | number>;
-        4: Set<string>;
-        7: Set<string>;
-    };
-    declare const CaveAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-        7: Set<string>;
-    };
-    declare const GemCaveAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-        7: Set<string>;
-    };
-    declare const PowerPlantAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-        7: Set<string>;
-    };
-    declare const MansionAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-        7: Set<string>;
-    };
-    declare const GraveyardAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-        7: Set<string>;
-    };
+    declare type Environment = keyof typeof Environments;
+    declare const EnvironmentCssClass:Record<Environment, string>;
     declare enum Starter {
         'None' = '',
         'Bulbasaur',
