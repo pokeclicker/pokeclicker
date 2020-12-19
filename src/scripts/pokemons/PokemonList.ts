@@ -5,7 +5,7 @@
 /// <reference path="../weather/WeatherType.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 
-const pokemonDevolutionMap: { [name: string]: PokemonNameType } = {};
+const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
 type PokemonListData = {
   id: number;
@@ -18035,6 +18035,7 @@ const pokemonList = createPokemonArray(
 type PokemonNameType = typeof pokemonList[number]['name'];
 
 const pokemonNameIndex = {};
+const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
 
 // TODO move to its own initialize method that gets called on game start.
 pokemonList.forEach(p => {
@@ -18044,7 +18045,16 @@ pokemonList.forEach(p => {
 
     (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if ((p as PokemonListData).baby) {
-        (p as PokemonListData).evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType);
+        (p as PokemonListData).evolutions?.forEach(evo => {
+            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType;
+            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+            p.eggCycles = Math.round(poke.eggCycles * 0.8);
+        });
+    } else {
+        (p as PokemonListData).evolutions?.forEach(evo => {
+            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+            poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
+        });
     }
     (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
     pokemonNameIndex[p.name.toLowerCase()] = p;
