@@ -6,7 +6,7 @@
 
 class SpecialRoutePokemon {
     constructor (
-        public pokemon: PokemonNameType,
+        public pokemon: PokemonNameType[],
         public req: (OneFromManyRequirement | Requirement)[]
     ) {}
 
