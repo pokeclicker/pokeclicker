@@ -35,7 +35,7 @@ abstract class Mutation implements Saveable {
         };
     }
     fromJSON(json: Record<string, any>): void {
-        this.hintSeen = json['hintSeen'] ?? false;
+        this.hintSeen = json.hasOwnProperty('hintSeen') ? json['hintSeen'] : false;
     }
 
     /**

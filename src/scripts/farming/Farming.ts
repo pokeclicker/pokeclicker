@@ -13,6 +13,13 @@ class Farming implements Feature {
     mutationCounter = 0;
     wanderCounter = 0;
 
+    // You may be wondering why this is necessary.
+    // It turns out for some reason the plot age doesn't update in time in the same tick.
+    // This means that if we attempt to reset the auras in the same tick, the plant that changed stages
+    // will still act like it's in the previous stage, which means the wrong aura is applied.
+    // Queueing an aura reset in the next tick fixes this issue, and is barely noticable to the player.
+    queuedAuraReset = false;
+
     static readonly PLOT_WIDTH = 5;
     static readonly PLOT_HEIGHT = 5;
 
@@ -305,8 +312,8 @@ class Farming implements Feature {
             [0, 10, 20, 0, 0], BerryColor.Purple,
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
-                'Nearby Pokémon are wary of this Berry plant.',
-            ], new Aura(AuraType.Attract, [0.99, 0.98, 0.97]), ['Shedinja']);
+                'This Berry causes other Berries to wither away faster.',
+            ], undefined, ['Shedinja']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [10800, 21600, 43200, 86400, 172800],
             34, 0, 4000, 15,
             [0, 0, 10, 20, 0], BerryColor.Red,
@@ -386,7 +393,10 @@ class Farming implements Feature {
         this.berryData[BerryType.Petaya]    = new Berry(BerryType.Petaya,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
             [30, 0, 0, 30, 10], BerryColor.Pink,
-            ['This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.'],
+            [
+                'This Berry is surrounded by mystery. It is rumored to be imbued with the power of all living things.',
+                'This power keeps other Berries alive for longer.',
+            ],
             undefined, ['Mew']);
         this.berryData[BerryType.Apicot]    = new Berry(BerryType.Apicot,   [10800, 21600, 43200, 86400, 432000],
             0.5, 0, 15000, 20,
@@ -818,6 +828,22 @@ class Farming implements Feature {
             unlockReq: () => App.game.farming.unlockedBerries[BerryType.Starf](),
         }));
 
+        // Empty Mutations for hints
+
+        // Kasib
+        this.mutations.push(new BlankMutation(0, BerryType.Kasib,
+            {
+                hint: 'I\'ve heard of a Berry that only appears after a Berry plant has withered, but is repelled by Colbur Plants.',
+                unlockReq: () => App.game.farming.highestUnlockedBerry() > BerryType.Occa,
+            }));
+
+        // Starf
+        this.mutations.push(new BlankMutation(0, BerryType.Starf,
+            {
+                hint: 'I\'ve heard of a Berry that only appears after a Shiny Pokémon wanders near open soil.',
+                unlockReq: () => App.game.farming.highestUnlockedBerry() > BerryType.Occa,
+            }));
+
         //#endregion
 
         //#endregion
@@ -848,6 +874,12 @@ class Farming implements Feature {
         const notifications = new Set<FarmNotificationType>();
 
         let change = false;
+
+        // Handle updating auras
+        if (this.queuedAuraReset) {
+            this.resetAuras();
+            this.queuedAuraReset = false;
+        }
 
         // Updating Berries
         this.plotList.forEach(plot => {
@@ -890,8 +922,9 @@ class Farming implements Feature {
 
         }
 
+        // Handle queueing aura reset
         if (change) {
-            this.resetAuras();
+            this.queuedAuraReset = true;
         }
 
         if (notifications.size) {
@@ -1183,6 +1216,15 @@ class Farming implements Feature {
             });
             this.unlockedBerries[berry](true);
         }
+    }
+
+    /**
+     * Checks whether a Berry plant exists on the farm
+     * @param berry The Berry type
+     * @param stage The stage of the Berry plant. Defaults to PlotStage.Berry
+     */
+    berryInFarm(berry: BerryType, stage = PlotStage.Berry) {
+        return this.plotList.some(plot => plot.berry == berry && plot.stage() >= stage);
     }
 
     toJSON(): Record<string, any> {
