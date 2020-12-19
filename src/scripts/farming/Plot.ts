@@ -124,59 +124,65 @@ class Plot implements Saveable {
         this.tooltip = ko.pureComputed(() => {
             const tooltip = [];
 
+            // Time
             if (this.berry !== BerryType.None) {
 
                 tooltip.push(`<u>${BerryType[this.berry]}</u>`);
 
-                const timeType = Settings.getSetting('farmDisplay').observableValue();
-                if (timeType === 'nextStage') {
-                    const formattedTime = this.formattedStageTimeLeft();
-                    switch (this.stage()) {
-                        case PlotStage.Seed:
-                            tooltip.push(`${formattedTime} until sprout`);
-                            break;
-                        case PlotStage.Sprout:
-                            tooltip.push(`${formattedTime} until grown`);
-                            break;
-                        case PlotStage.Taller:
-                            tooltip.push(`${formattedTime} until bloom`);
-                            break;
-                        case PlotStage.Bloom:
-                            tooltip.push(`${formattedTime} until ripe`);
-                            break;
-                        case PlotStage.Berry:
-                            tooltip.push(`${formattedTime} until death`);
-                            break;
-                    }
+                // Petaya Effect
+                if (App.game.farming.berryInFarm(BerryType.Petaya) && this.berry !== BerryType.Petaya && this.stage() == PlotStage.Berry) {
+                    tooltip.push('∞ until death');
+                // Normal Time
                 } else {
-                    const formattedTime = this.formattedTimeLeft();
-                    switch (this.stage()) {
-                        case PlotStage.Seed:
-                        case PlotStage.Sprout:
-                        case PlotStage.Taller:
-                        case PlotStage.Bloom:
-                            tooltip.push(`${formattedTime} until ripe`);
-                            break;
-                        case PlotStage.Berry:
-                            tooltip.push(`${formattedTime} until death`);
-                            break;
+                    const timeType = Settings.getSetting('farmDisplay').observableValue();
+                    if (timeType === 'nextStage') {
+                        const formattedTime = this.formattedStageTimeLeft();
+                        switch (this.stage()) {
+                            case PlotStage.Seed:
+                                tooltip.push(`${formattedTime} until sprout`);
+                                break;
+                            case PlotStage.Sprout:
+                                tooltip.push(`${formattedTime} until grown`);
+                                break;
+                            case PlotStage.Taller:
+                                tooltip.push(`${formattedTime} until bloom`);
+                                break;
+                            case PlotStage.Bloom:
+                                tooltip.push(`${formattedTime} until ripe`);
+                                break;
+                            case PlotStage.Berry:
+                                tooltip.push(`${formattedTime} until death`);
+                                break;
+                        }
+                    } else {
+                        const formattedTime = this.formattedTimeLeft();
+                        switch (this.stage()) {
+                            case PlotStage.Seed:
+                            case PlotStage.Sprout:
+                            case PlotStage.Taller:
+                            case PlotStage.Bloom:
+                                tooltip.push(`${formattedTime} until ripe`);
+                                break;
+                            case PlotStage.Berry:
+                                tooltip.push(`${formattedTime} until death`);
+                                break;
+                        }
                     }
                 }
-
-
             }
 
+            // Aura
             if (this.stage() >= PlotStage.Taller && this.berryData.aura) {
                 tooltip.push('<u>Aura Emitted:</u>');
                 tooltip.push(`${this.berryData.aura.getLabel(this.stage())}`);
             }
-
             const auraStr = this.formattedAuras();
             if (auraStr) {
                 tooltip.push('<u>Aura Received:</u>');
                 tooltip.push(auraStr);
             }
 
+            // Mulch
             if (this.mulch !== MulchType.None) {
                 const mulchTime = this.formattedMulchTimeLeft();
                 tooltip.push('<u>Mulch</u>');
@@ -204,6 +210,10 @@ class Plot implements Saveable {
             const oldAge = this.age;
             this.age += growthTime;
 
+            // Checking for Petaya Berries
+            if (App.game.farming.berryInFarm(BerryType.Petaya) && this.berry !== BerryType.Petaya) {
+                this.age = Math.min(this.age, this.berryData.growthTime[3] + 1);
+            }
 
             const updatedStage = this.stageUpdated(oldAge, this.age);
 
@@ -287,11 +297,12 @@ class Plot implements Saveable {
 
             // Check for Kasib berry mutation/replant chance
             if (App.game.farming.highestUnlockedBerry() > BerryType.Occa) {
-                if (App.game.farming.plotList.every(plot => plot.berry !== BerryType.Colbur)) {
+                if (!App.game.farming.berryInFarm(BerryType.Colbur)) {
                     if (Math.random() < 0.05) {
                         this.notifications.push(FarmNotificationType.Mutated);
                         this.berry = BerryType.Kasib;
                         this.age = 0;
+                        App.game.farming.unlockBerry(BerryType.Kasib);
                         return;
                     }
                 }
@@ -322,6 +333,7 @@ class Plot implements Saveable {
                 const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
                 const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
                 chosenPlot.plant(BerryType.Starf);
+                App.game.farming.unlockBerry(BerryType.Starf);
             }
 
             return {pokemon: wanderPokemon, shiny: shiny};
@@ -341,6 +353,11 @@ class Plot implements Saveable {
         }
 
         multiplier *= this._auras[AuraType.Growth]();
+
+        // Handle Kasib Effect
+        if (this.stage() == PlotStage.Berry && this.berry != BerryType.Kasib && App.game.farming.berryInFarm(BerryType.Kasib)) {
+            multiplier *= 5;
+        }
 
         return multiplier;
     }
