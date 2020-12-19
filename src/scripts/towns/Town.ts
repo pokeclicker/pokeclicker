@@ -1957,7 +1957,6 @@ const SpikemuthShop = new Shop([
 const FreezingtonShop = new Shop([
     ItemList['Galarica_wreath'],
     ItemList['Galarica_cuff'],
-    ItemList['Slowpoke (Galar)'],
 ]);
 const WyndonShop = new Shop([
     ItemList['Pokeball'],
