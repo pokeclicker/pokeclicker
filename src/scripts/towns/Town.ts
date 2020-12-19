@@ -640,8 +640,9 @@ const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
 ]);
 const Weatherman = new NPC('Weatherman', [
-    'Castform is a very finnicky pokemon',
-    'The weather can majorly impact its appearance, so watch out.',
+    'Castform is a very finnicky pokemon.',
+    'It changes forms when the weather is drastically different.',
+    'If you want to collect them all, wait for the weather to change.',
 ]);
 
 //Hoenn Towns
