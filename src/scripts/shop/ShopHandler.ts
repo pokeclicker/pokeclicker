@@ -48,9 +48,11 @@ class ShopHandler {
         if (!item || !item.isAvailable()) {
             return input.val(0).change();
         }
-        let amt = 1;
-        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)) && amt <= item.maxAmount && amt <= 1e6; amt++) {}
-        input.val(--amt).change();
+
+        const tooMany = (amt: number) => amt > item.maxAmount || !App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency));
+        const amt = GameHelper.binarySearch(tooMany, 0, Number.MAX_SAFE_INTEGER);
+
+        input.val(amt).change();
     }
 
     public static calculateCss(i: number): string {

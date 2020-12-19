@@ -38,3 +38,20 @@ abstract class Evolution {
 }
 
 type MinimalEvo = ConstructorImplementing<Evolution, 'getEvolvedPokemon'>
+
+function restrictEvoWith(restrictionTest: () => boolean, type: EvolutionType = null) {
+    return function<T extends MinimalEvo>(Base: T): T {
+        return class extends Base {
+            constructor(...args: any[]) {
+                super(...args);
+                if (type !== null) {
+                    this.type.push(type);
+                }
+            }
+
+            isSatisfied(): boolean {
+                return restrictionTest() && super.isSatisfied();
+            }
+        };
+    };
+}
