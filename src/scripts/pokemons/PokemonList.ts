@@ -17815,7 +17815,13 @@ pokemonList.forEach(p => {
 
     (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if ((p as PokemonListData).baby) {
+        p.eggCycles = Math.round(p.eggCycles / 1.5);
         (p as PokemonListData).evolutions?.forEach(evo => pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType);
+    } else {
+        (p as PokemonListData).evolutions?.forEach(evo => {
+            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+            poke.eggCycles = Math.round(p.eggCycles * 1.5);
+        });
     }
     (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
     pokemonNameIndex[p.name.toLowerCase()] = p;
