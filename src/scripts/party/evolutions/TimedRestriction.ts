@@ -35,9 +35,3 @@ function DayTimeRestricted<EvoClass extends MinimalEvo>(Base: EvoClass) {
 function NightTimeRestricted<EvoClass extends MinimalEvo>(Base: EvoClass) {
     return TimeRestricted(18, 6, Base);
 }
-
-const DayTimedLevelEvolution = DayTimeRestricted(LevelEvolution);
-const NightTimedLevelEvolution = NightTimeRestricted(LevelEvolution);
-
-const DayTimedStoneEvolution = DayTimeRestricted(StoneEvolution);
-const NightTimedStoneEvolution = NightTimeRestricted(StoneEvolution);

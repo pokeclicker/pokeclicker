@@ -4,6 +4,7 @@
 ///<reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="NPC.ts"/>
 ///<reference path="KantoBerryMasterNPC.ts"/>
+///<reference path="ProfOakNPC.ts"/>
 
 type TownOptionalArgument = {
     requirements?: (Requirement | OneFromManyRequirement)[],
@@ -143,6 +144,18 @@ const KantoBerryMaster = new KantoBerryMasterNPC('Berry Master', [
     'Bah! You younglings have no appreciation of the art of Berry farming!',
     'Come back when you are ready to learn!',
 ]);
+const ProfOak = new ProfOakNPC('Prof. Oak', [
+    'Good luck on your journey!',
+    'Come visit me when you complete your Pokédex!',
+]);
+const BattleItemRival = new NPC('Battle Item Master', [
+    'Hey kid, you look new! Let me offer some advice, Battle Items like xAttack can be acquired along Routes, inside Dungeons and in Shops!',
+    'Use them to help you out whenever you feel like time is against you!',
+]);
+const BattleItemRival2 = new NPC('Battle Item Master', [
+    'Do I know you? Wait... Have you met my worthless rival? Ha! Let me guess, he gave you some unwanted advice?',
+    'I bet he forget to tell you that although all Battle Items only last for 30 seconds they can stack and last for days! Now scram!',
+]);
 
 
 
@@ -156,6 +169,7 @@ TownList['Pewter City'] = new Town(
             new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Viridian Forest')),
         ],
         shop: PewterCityShop,
+        npcs: [BattleItemRival],
     }
 );
 TownList['Cerulean City'] = new Town(
@@ -191,6 +205,7 @@ TownList['Saffron City'] = new Town(
     {
         requirements: [new GymBadgeRequirement(BadgeEnums.Rainbow)],
         shop: SaffronCityShop,
+        npcs: [BattleItemRival2],
     }
 );
 TownList['Fuchsia City'] = new Town(
@@ -226,7 +241,13 @@ TownList['Viridian City'] = new Town(
         npcs: [ViridianCityOldMan],
     }
 );
-TownList['Pallet Town'] = new Town('Pallet Town', GameConstants.Region.kanto);
+TownList['Pallet Town'] = new Town(
+    'Pallet Town',
+    GameConstants.Region.kanto,
+    {
+        npcs: [ProfOak],
+    }
+);
 TownList['Lavender Town'] = new Town(
     'Lavender Town',
     GameConstants.Region.kanto,
@@ -619,8 +640,9 @@ const SootopolisWallace = new NPC('Gym Leader Wallace', [
     'You will have to overcome the Pokémon League before you have any chance to encounter them.',
 ]);
 const Weatherman = new NPC('Weatherman', [
-    'Castform is a very finnicky pokemon',
-    'The weather can majorly impact its appearance, so watch out.',
+    'Castform is a very finnicky pokemon.',
+    'It changes forms when the weather is drastically different.',
+    'If you want to collect them all, wait for the weather to change.',
 ]);
 
 //Hoenn Towns
@@ -1327,6 +1349,14 @@ const AnvilleTownShop = new Shop([
     ItemList['Meloetta (pirouette)'],
 ]);
 
+//Unova NPCs
+const ExcitedChild = new NPC('Professor Birch\'s Aide', [
+    'Did you hear? Did you see? It was on TV!',
+    'I was just watching my favorite show, The National Gymquirer. It was a live segment! Some hot shot trainer from Kanto defeated Drayden! It was amazing! That trainer is so cool! Drayden is like unbeatable.',
+    'Then my programme got interrupted by an emergency broadcast. A report on the first confirmed sightings of Tornadus and Thundurus in over twenty-five years! I\'ve read so much about them, they are my favorites.',
+    'Last time they were spotted they just roamed around, causing all kinds of mischief. According to my books anyway. I\'m sure that amazing trainer from the TV will want to catch these mighty forces of nature.',
+]);
+
 //Unova Towns
 TownList['Aspertia City'] = new Town(
     'Aspertia City',
@@ -1428,6 +1458,7 @@ TownList['Humilau City'] = new Town(
     GameConstants.Region.unova,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.unova, 21)],
+        npcs: [ExcitedChild],
     }
 );
 TownList['Pokemon League Unova'] = new Town(
@@ -1532,7 +1563,7 @@ TownList['Relic Passage'] = new DungeonTown(
 TownList['Relic Castle'] = new DungeonTown(
     'Relic Castle',
     GameConstants.Region.unova,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Desert Resort'))]
+    [new RouteKillRequirement(10, GameConstants.Region.unova, 25)]
 );
 TownList['Lostlorn Forest'] = new DungeonTown(
     'Lostlorn Forest',
@@ -1563,7 +1594,7 @@ TownList['Seaside Cave'] = new DungeonTown(
     'Seaside Cave',
     GameConstants.Region.unova,
     [
-        new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Undella Bay')),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 24),
         new GymBadgeRequirement(BadgeEnums.Legend),
     ]
 );
@@ -1585,6 +1616,7 @@ TownList['Abundant Shrine'] = new DungeonTown(
     GameConstants.Region.unova,
     [
         new RouteKillRequirement(10, GameConstants.Region.unova, 23),
+        new RouteKillRequirement(10, GameConstants.Region.unova, 14),
         new ObtainedPokemonRequirement(pokemonMap.Tornadus),
         new ObtainedPokemonRequirement(pokemonMap.Thundurus),
     ]

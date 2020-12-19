@@ -696,7 +696,6 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
         new DungeonBossPokemon('Heatran', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
     ],
     96500, 201, 35);
-
 dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
     ['Golduck', 'Seel', 'Shellder', 'Luvdisc', 'Boldore', 'Woobat', 'Tynamo', 'Frillish'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
@@ -798,7 +797,6 @@ dungeonList['Pinwheel Forest'] = new Dungeon('Pinwheel Forest',
         new DungeonBossPokemon('Virizion', 8000000, 70),
     ],
     96500, 201, 35);
-
 dungeonList['Dreamyard'] = new Dungeon('Dreamyard',
     ['Raticate', 'Jigglypuff', 'Golbat', 'Watchog', 'Liepard', 'Munna'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],

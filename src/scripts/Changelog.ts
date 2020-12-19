@@ -50,6 +50,30 @@ class ChangelogUpdate extends Changelog {
  */
 const changelogItems = [
     // note that month is 0 indexed
+    // v0.6.8
+    new ChangelogUpdate('v0.6.8', new Date(2020, 11, 9)),
+    new Changelog(changelogType.NEW, 'Added weather to the regions'),
+    new Changelog(changelogType.NEW, 'Empty Hatchery queue notification added'),
+    new Changelog(changelogType.CHANGE, 'Nerfed Heatran'),
+    new Changelog(changelogType.FIXED, 'Minor text fixes'),
+    new Changelog(changelogType.FIXED, 'Fixed some Farm mutations'),
+    new Changelog(changelogType.FIXED, 'Fixed Farm auras not updating'),
+    new Changelog(changelogType.FIXED, 'Can no longer move around the Safari Zone before paying'),
+
+    // v0.6.7
+    new ChangelogUpdate('v0.6.7', new Date(2020, 10, 22)),
+    new Changelog(changelogType.CHANGE, 'Added some more NPC around Kanto'),
+    new Changelog(changelogType.CHANGE, 'Doubled the chance of encountering uncaught Roaming Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Save category filter in Hatchery upon reloading'),
+    new Changelog(changelogType.CHANGE, 'Decreased the Shovel cost'),
+    new Changelog(changelogType.CHANGE, 'Farm items cost decreases faster based on berry type harvested'),
+    new Changelog(changelogType.FIXED, 'Minor text fixes'),
+    new Changelog(changelogType.FIXED, 'Recalculate Pokémon attack upon hatch'),
+    new Changelog(changelogType.FIXED, 'Fixed some Farm mutations'),
+    new Changelog(changelogType.FIXED, 'Fixed larger BerryDex timers'),
+    new Changelog(changelogType.FIXED, 'Fixed quests auto refreshing if you gain a level then refreshed the page'),
+    new Changelog(changelogType.FIXED, 'Fix Quickball on routes with less than 10 kills'),
+
     // v0.6.6
     new ChangelogUpdate('v0.6.6', new Date(2020, 10, 18)),
     new Changelog(changelogType.CHANGE, 'Show shiny symbol for Pokémon in Protein modal'),

@@ -104,10 +104,10 @@ class Party implements Feature {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeNonBattle = false, useBaseAttack = false): number {
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeNonBattle = false, useBaseAttack = false, includeWeather = true): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
-            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeNonBattle, useBaseAttack);
+            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeNonBattle, useBaseAttack, includeWeather);
         }
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xAttack)()) {
@@ -117,14 +117,16 @@ class Party implements Feature {
         return Math.round(attack);
     }
 
-    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeNonBattle = false, useBaseAttack = false): number {
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeNonBattle = false, useBaseAttack = false, includeWeather = true): number {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : pokemon.attack;
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
             // Pokemon only retain a % of their total damage in other regions based on highest region.
             multiplier = this.getRegionAttackMultiplier();
         }
+        // Check for pokemon in battle
         if (includeNonBattle || pokemon.location === PartyLocation.Battle) {
             if (type1 == PokemonType.None) {
                 attack = pAttack * multiplier;
@@ -132,6 +134,20 @@ class Party implements Feature {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
             }
+        }
+
+        // Should we take weather boost into account
+        if (includeWeather) {
+            const weather = Weather.weatherConditions[Weather.currentWeather()];
+            const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+            weather.multipliers?.forEach(value => {
+                if (value.type == dataPokemon.type1) {
+                    attack *= value.multiplier;
+                }
+                if (value.type == dataPokemon.type2) {
+                    attack *= value.multiplier;
+                }
+            });
         }
 
         return attack;

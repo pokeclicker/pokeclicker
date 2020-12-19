@@ -6,10 +6,12 @@
 class EvolveNearBerryStrictMutation extends EvolveNearMutation {
 
     berryReqs: StrictBerryReq;
+    neighborStageReq: PlotStage;
 
-    constructor(mutationChance: number, mutatedBerry: BerryType, originalBerry: BerryType, berryReqs: StrictBerryReq, options?: MutationOptions) {
+    constructor(mutationChance: number, mutatedBerry: BerryType, originalBerry: BerryType, berryReqs: StrictBerryReq, neighborStageReq: PlotStage, options?: MutationOptions) {
         super(mutationChance, mutatedBerry, originalBerry, options);
         this.berryReqs = berryReqs;
+        this.neighborStageReq = neighborStageReq;
     }
 
     /**
@@ -27,7 +29,7 @@ class EvolveNearBerryStrictMutation extends EvolveNearMutation {
             if (plot.isEmpty()) {
                 return;
             }
-            if (plot.stage() !== PlotStage.Berry) {
+            if (plot.stage() < this.neighborStageReq) {
                 return;
             }
             if (!currentReqs[plot.berry]) {
@@ -37,7 +39,7 @@ class EvolveNearBerryStrictMutation extends EvolveNearMutation {
             }
         });
 
-        return Object.keys(this.berryReqs).every(key => currentReqs[key] !== undefined && currentReqs[key] === this.berryReqs[key]);
+        return GameHelper.shallowEqual(this.berryReqs,currentReqs);
     }
 
     /**
