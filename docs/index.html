@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.6.7"></script>
+    <script src="scripts/modules.min.js?v=0.6.8"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.6.7"></script>
+    <script src="scripts/script.min.js?v=0.6.8"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.6.7" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.6.8" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -1231,6 +1231,16 @@
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
+                    <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+                    data-bind='style: { background: Weather.color() },
+                        tooltip: {
+                            title: Weather.tooltip(),
+                            html: true,
+                            placement: "bottom",
+                            trigger: "hover"
+                        }'>
+                        <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
+                    </button>
                     <div id="mapBody" class="card-body p-0 show">
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                         <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
@@ -6474,6 +6484,1489 @@
     height="64"
     width="48"
     data-bind="click: function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Canalave City&#39;) }">
+</rect>
+</g>
+
+                            <g data-bind='if: player.region == GameConstants.Region.unova'>
+    <image width="100%" xlink:href="assets/images/unova.png"></image>
+
+    <!-- ------ -->
+    <!-- ROUTES -->
+    <!-- ------ -->
+
+    <!--Route 1-->
+    
+
+<g
+
+    transform="rotate(90 ,1392, 816)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(1, 4); } ">
+    <rect data-route='1'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(1, 4) }"
+        height="48"
+        width="48"
+        x="1392" y="768">
+    </rect>
+
+    <text style="font-size: 32px" x="1408" y="802">1</text>
+
+</g>
+
+
+    <!--Route 2-->
+    
+
+<g
+
+    transform="rotate(90 ,1392, 688)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(2, 4); } ">
+    <rect data-route='2'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(2, 4) }"
+        height="48"
+        width="64"
+        x="1392" y="640">
+    </rect>
+
+    <text style="font-size: 32px" x="1416" y="674">2</text>
+
+</g>
+
+
+    <!--Route 3-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(3, 4); } ">
+    <rect data-route='3'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(3, 4) }"
+        height="48"
+        width="96"
+        x="1280" y="640">
+    </rect>
+
+    <text style="font-size: 32px" x="1320" y="674">3</text>
+
+</g>
+
+
+    <!--Route 4-->
+    
+
+<g
+
+    transform="rotate(90 ,816, 560)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(4, 4); } ">
+    <rect data-route='4'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(4, 4) }"
+        height="48"
+        width="216"
+        x="816" y="512">
+    </rect>
+
+    <text style="font-size: 32px" x="916" y="546">4</text>
+
+</g>
+
+    <!--extra Route 4-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(4, 4); } ">
+    <rect data-route='4'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(4, 4) }"
+        height="8"
+        width="16"
+        x="848" y="776">
+    </rect>
+
+</g>
+
+
+    <!--Desert Resort-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(25, 4); } ">
+    <rect data-route='25'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(25, 4) }"
+        height="48"
+        width="64"
+        x="752" y="608">
+    </rect>
+
+    <text style="font-size: 32px" x="752" y="642">D.R.</text>
+
+</g>
+
+
+    <!--Route 5-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(5, 4); } ">
+    <rect data-route='5'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(5, 4) }"
+        height="48"
+        width="208"
+        x="544" y="512">
+    </rect>
+
+    <text style="font-size: 32px" x="640" y="546">5</text>
+
+</g>
+
+
+    <!--Route 6-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(6, 4); } ">
+    <rect data-route='6'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 4) }"
+        height="48"
+        width="112"
+        x="288" y="464">
+    </rect>
+
+    <text style="font-size: 32px" x="336" y="498">6</text>
+
+</g>
+
+    <!--Extra bit of Route 6-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(6, 4); } ">
+    <rect data-route='6'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(6, 4) }"
+        height="48"
+        width="48"
+        x="352" y="512">
+    </rect>
+
+</g>
+
+
+    <!--Route 7-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(7, 4); } ">
+    <rect data-route='7'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(7, 4) }"
+        height="48"
+        width="96"
+        x="288" y="256">
+    </rect>
+
+    <text style="font-size: 32px" x="328" y="290">7</text>
+
+</g>
+
+     <!--Extra bit of Route 7-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(7, 4); } ">
+    <rect data-route='7'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(7, 4) }"
+        height="48"
+        width="48"
+        x="288" y="304">
+    </rect>
+
+</g>
+
+
+    <!--Route 8-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(8, 4); } ">
+    <rect data-route='8'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(8, 4) }"
+        height="48"
+        width="112"
+        x="544" y="208">
+    </rect>
+
+    <text style="font-size: 32px" x="592" y="242">8</text>
+
+</g>
+
+
+    <!--Route 9-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(9, 4); } ">
+    <rect data-route='9'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(9, 4) }"
+        height="48"
+        width="96"
+        x="656" y="208">
+    </rect>
+
+    <text style="font-size: 32px" x="696" y="242">9</text>
+
+</g>
+
+
+    <!--Route 11-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(11, 4); } ">
+    <rect data-route='11'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(11, 4) }"
+        height="48"
+        width="112"
+        x="896" y="208">
+    </rect>
+
+    <text style="font-size: 32px" x="936" y="242">11</text>
+
+</g>
+
+
+    <!--Route 12-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(12, 4); } ">
+    <rect data-route='12'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(12, 4) }"
+        height="48"
+        width="112"
+        x="1008" y="208">
+    </rect>
+
+    <text style="font-size: 32px" x="1048" y="242">12</text>
+
+</g>
+
+
+    <!--Route 13-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 4); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 4) }"
+        height="48"
+        width="112"
+        x="1184" y="208">
+    </rect>
+
+    <text style="font-size: 32px" x="1224" y="242">13</text>
+
+</g>
+
+    <!--Extra bit of Route 13-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 4); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 4) }"
+        height="16"
+        width="48"
+        x="1248" y="256">
+    </rect>
+
+</g>
+
+    <!--Extra bit of Route 13-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 4); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 4) }"
+        height="40"
+        width="144"
+        x="1248" y="272">
+    </rect>
+
+</g>
+
+    <!--Extra bit of Route 13-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 4); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 4) }"
+        height="8"
+        width="16"
+        x="1248" y="312">
+    </rect>
+
+</g>
+
+    <!--Extra bit of Route 13-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(13, 4); } ">
+    <rect data-route='13'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(13, 4) }"
+        height="8"
+        width="48"
+        x="1344" y="312">
+    </rect>
+
+</g>
+
+
+    <!--Route 14-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 4); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 4) }"
+        height="48"
+        width="208"
+        x="1184" y="400">
+    </rect>
+
+    <text style="font-size: 32px" x="1272" y="434">14</text>
+
+</g>
+
+    <!--Extra bit of Route 14-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 4); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 4) }"
+        height="16"
+        width="48"
+        x="1344" y="384">
+    </rect>
+
+</g>
+
+    <!--Extra bit of Route 14-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(14, 4); } ">
+    <rect data-route='14'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(14, 4) }"
+        height="48"
+        width="48"
+        x="1184" y="448">
+    </rect>
+
+</g>
+
+
+    <!--Route 15-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(15, 4); } ">
+    <rect data-route='15'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(15, 4) }"
+        height="48"
+        width="96"
+        x="992" y="512">
+    </rect>
+
+    <text style="font-size: 32px" x="1024" y="546">15</text>
+
+</g>
+
+
+    <!--Route 16-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(16, 4); } ">
+    <rect data-route='16'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(16, 4) }"
+        height="48"
+        width="96"
+        x="896" y="512">
+    </rect>
+
+    <text style="font-size: 32px" x="928" y="546">16</text>
+
+</g>
+
+
+    <!--Route 17-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 4); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 4) }"
+        height="48"
+        width="240"
+        x="1120" y="880">
+    </rect>
+
+    <text style="font-size: 32px" x="1224" y="914">17</text>
+
+</g>
+
+    <!--Extra bit of Route 17-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 4); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 4) }"
+        height="48"
+        width="64"
+        x="1312" y="832">
+    </rect>
+
+</g>
+
+    <!--Extra bit of Route 17-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(17, 4); } ">
+    <rect data-route='17'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(17, 4) }"
+        height="32"
+        width="16"
+        x="1376" y="832">
+    </rect>
+
+</g>
+
+
+    <!--Route 18-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(18, 4); } ">
+    <rect data-route='18'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(18, 4) }"
+        height="48"
+        width="128"
+        x="1120" y="832">
+    </rect>
+
+    <text style="font-size: 32px" x="1168" y="866">18</text>
+
+</g>
+
+
+    <!--Route 19-->
+    
+
+<g
+
+    transform="rotate(90 ,112, 688)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 4); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 4) }"
+        height="48"
+        width="136"
+        x="112" y="640">
+    </rect>
+
+    <text style="font-size: 32px" x="164" y="674">19</text>
+
+</g>
+
+     <!--Extra bit of Route 19-->
+     
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(19, 4); } ">
+    <rect data-route='19'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(19, 4) }"
+        height="48"
+        width="16"
+        x="160" y="688">
+    </rect>
+
+</g>
+
+
+    <!--Route 20-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(20, 4); } ">
+    <rect data-route='20'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(20, 4) }"
+        height="48"
+        width="208"
+        x="240" y="688">
+    </rect>
+
+    <text style="font-size: 32px" x="328" y="722">20</text>
+
+</g>
+
+
+    <!--Route 21-->
+    
+
+<g
+
+    transform="rotate(90 ,1456, 160)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(21, 4); } ">
+    <rect data-route='21'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(21, 4) }"
+        height="48"
+        width="96"
+        x="1456" y="112">
+    </rect>
+
+    <text style="font-size: 32px" x="1488" y="146">21</text>
+
+</g>
+
+
+    <!--Undella Bay-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 4); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 4) }"
+        height="48"
+        width="96"
+        x="1408" y="336">
+    </rect>
+
+    <text style="font-size: 32px" x="1424" y="370">U.B.</text>
+
+</g>
+
+
+    <!--Undella Bay extension-->
+    
+
+<g
+
+    transform="rotate(90 ,1456, 256)"
+
+    data-bind="click:function(){ MapHelper.moveToRoute(24, 4); } ">
+    <rect data-route='24'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(24, 4) }"
+        height="48"
+        width="80"
+        x="1456" y="208">
+    </rect>
+
+</g>
+
+
+     <!--Route 22-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(22, 4); } ">
+    <rect data-route='22'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(22, 4) }"
+        height="48"
+        width="112"
+        x="1328" y="112">
+    </rect>
+
+    <text style="font-size: 32px" x="1368" y="146">22</text>
+
+</g>
+
+
+    <!--Route 23-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 4); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 4) }"
+        height="32"
+        width="48"
+        x="1184" y="80">
+    </rect>
+
+    <text style="font-size: 32px" x="1192" y="106">23</text>
+
+</g>
+
+    <!--Extra bit of Route 23-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 4); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 4) }"
+        height="48"
+        width="112"
+        x="1120" y="32">
+    </rect>
+
+</g>
+
+    <!--Extra bit of Route 23-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 4); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 4) }"
+        height="48"
+        width="80"
+        x="1184" y="112">
+    </rect>
+
+</g>
+
+    <!--Extra bit of Route 23-->
+    
+
+<g
+
+    data-bind="click:function(){ MapHelper.moveToRoute(23, 4); } ">
+    <rect data-route='23'
+        data-bind="attr: { class: MapHelper.calculateRouteCssClass(23, 4) }"
+        height="48"
+        width="8"
+        x="1048" y="32">
+    </rect>
+
+</g>
+
+
+
+    <!-- ----- -->
+    <!-- TOWNS -->
+    <!-- ----- -->
+
+    <!--Nuvema Town-->
+    
+
+<rect class="city"
+    data-town="Nuvema Town" 
+    x="1376"
+    y="864"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Nuvema Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Nuvema Town') },
+        ">
+</rect>
+
+    <!--Accumula Town-->
+    
+
+<rect class="city"
+    data-town="Accumula Town" 
+    x="1376"
+    y="752"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Accumula Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Accumula Town') },
+        ">
+</rect>
+
+    <!--Striaton City-->
+    
+
+<rect class="city"
+    data-town="Striaton City" 
+    x="1376"
+    y="624"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Striaton City')},
+        attr: { class: MapHelper.calculateTownCssClass('Striaton City') },
+        ">
+</rect>
+
+    <!--Nacrene City-->
+    
+
+<rect class="city"
+    data-town="Nacrene City" 
+    x="1216"
+    y="624"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Nacrene City')},
+        attr: { class: MapHelper.calculateTownCssClass('Nacrene City') },
+        ">
+</rect>
+
+    <!--Castelia City-->
+    
+
+<rect class="city"
+    data-town="Castelia City" 
+    x="768"
+    y="776"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Castelia City')},
+        attr: { class: MapHelper.calculateTownCssClass('Castelia City') },
+        ">
+</rect>
+    <!--Castelia City Extension-->
+    
+
+<rect class="city"
+    data-town="Castelia City" 
+    x="848"
+    y="784"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Castelia City')},
+        attr: { class: MapHelper.calculateTownCssClass('Castelia City') },
+        ">
+</rect>
+
+    <!--Nimbasa City-->
+    
+
+<rect class="city"
+    data-town="Nimbasa City" 
+    x="752"
+    y="488"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Nimbasa City')},
+        attr: { class: MapHelper.calculateTownCssClass('Nimbasa City') },
+        ">
+</rect>
+    <!--Nimbasa City Extension-->
+    
+
+<rect class="city"
+    data-town="Nimbasa City" 
+    x="832"
+    y="496"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Nimbasa City')},
+        attr: { class: MapHelper.calculateTownCssClass('Nimbasa City') },
+        ">
+</rect>
+
+    <!--Driftveil City-->
+    
+
+<rect class="city"
+    data-town="Driftveil City" 
+    x="400"
+    y="488"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Driftveil City')},
+        attr: { class: MapHelper.calculateTownCssClass('Driftveil City') },
+        ">
+</rect>
+    <!--Driftveil City Extension-->
+    
+
+<rect class="city"
+    data-town="Driftveil City" 
+    x="480"
+    y="496"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Driftveil City')},
+        attr: { class: MapHelper.calculateTownCssClass('Driftveil City') },
+        ">
+</rect>
+
+    <!--Mistralton City-->
+    
+
+<rect class="city"
+    data-town="Mistralton City" 
+    x="192"
+    y="344"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Mistralton City')},
+        attr: { class: MapHelper.calculateTownCssClass('Mistralton City') },
+        ">
+</rect>
+    <!--Mistralton City Extension-->
+    
+
+<rect class="city"
+    data-town="Mistralton City" 
+    x="272"
+    y="352"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Mistralton City')},
+        attr: { class: MapHelper.calculateTownCssClass('Mistralton City') },
+        ">
+</rect>
+
+    <!--Icirrus City-->
+    
+
+<rect class="city"
+    data-town="Icirrus City" 
+    x="400"
+    y="184"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Icirrus City')},
+        attr: { class: MapHelper.calculateTownCssClass('Icirrus City') },
+        ">
+</rect>
+    <!--Icirrus City Extension-->
+    
+
+<rect class="city"
+    data-town="Icirrus City" 
+    x="480"
+    y="192"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Icirrus City')},
+        attr: { class: MapHelper.calculateTownCssClass('Icirrus City') },
+        ">
+</rect>
+
+    <!--Opelucid City-->
+    
+
+<rect class="city"
+    data-town="Opelucid City" 
+    x="752"
+    y="184"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Opelucid City')},
+        attr: { class: MapHelper.calculateTownCssClass('Opelucid City') },
+        ">
+</rect>
+    <!--Opelucid City Extension-->
+    
+
+<rect class="city"
+    data-town="Opelucid City" 
+    x="832"
+    y="192"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Opelucid City')},
+        attr: { class: MapHelper.calculateTownCssClass('Opelucid City') },
+        ">
+</rect>
+
+    <!--Lacunosa Town-->
+    
+
+<rect class="city"
+    data-town="Lacunosa Town" 
+    x="1120"
+    y="192"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Lacunosa Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Lacunosa Town') },
+        ">
+</rect>
+
+    <!--Undella Town-->
+    
+
+<rect class="city"
+    data-town="Undella Town" 
+    x="1264"
+    y="312"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Undella Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Undella Town') },
+        ">
+</rect>
+    <!--Undella Town Extension-->
+    
+
+<rect class="city"
+    data-town="Undella Town" 
+    x="1344"
+    y="320"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Undella Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Undella Town') },
+        ">
+</rect>
+
+    <!--Lentimas Town-->
+    
+
+<rect class="city"
+    data-town="Lentimas Town" 
+    x="1072"
+    y="320"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Lentimas Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Lentimas Town') },
+        ">
+</rect>
+
+    <!--Black and White Park-->
+    
+
+<rect class="city"
+    data-town="Black and White Park" 
+    x="1088"
+    y="488"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Black and White Park')},
+        attr: { class: MapHelper.calculateTownCssClass('Black and White Park') },
+        ">
+</rect>
+    <!--Black and White Park-->
+    
+
+<rect class="city"
+    data-town="Black and White Park" 
+    x="1168"
+    y="496"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Black and White Park')},
+        attr: { class: MapHelper.calculateTownCssClass('Black and White Park') },
+        ">
+</rect>
+
+    <!--Humilau City-->
+    
+
+<rect class="city"
+    data-town="Humilau City" 
+    x="1440"
+    y="88"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Humilau City')},
+        attr: { class: MapHelper.calculateTownCssClass('Humilau City') },
+        ">
+</rect>
+
+    <!--Aspertia City-->
+    
+
+<rect class="city"
+    data-town="Aspertia City" 
+    x="96"
+    y="824"
+    height="72"
+    width="80"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Aspertia City')},
+        attr: { class: MapHelper.calculateTownCssClass('Aspertia City') },
+        ">
+</rect>
+
+    <!--Floccesy Town-->
+    
+
+<rect class="city"
+    data-town="Floccesy Town" 
+    x="176"
+    y="672"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Floccesy Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Floccesy Town') },
+        ">
+</rect>
+
+    <!--Virbank City-->
+    
+
+<rect class="city"
+    data-town="Virbank City" 
+    x="448"
+    y="672"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Virbank City')},
+        attr: { class: MapHelper.calculateTownCssClass('Virbank City') },
+        ">
+</rect>
+
+    <!--Anville Town-->
+    
+
+<rect class="city"
+    data-town="Anville Town" 
+    x="128"
+    y="48"
+    height="64"
+    width="64"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Anville Town')},
+        attr: { class: MapHelper.calculateTownCssClass('Anville Town') },
+        ">
+</rect>
+
+    <!--Pokemon League Unova-->
+    
+
+<rect class="city"
+    data-town="Pokemon League Unova" 
+    x="888"
+    y="4"
+    height="108"
+    width="160"
+    data-bind="
+        click:function(){MapHelper.moveToTown('Pokemon League Unova')},
+        attr: { class: MapHelper.calculateTownCssClass('Pokemon League Unova') },
+        ">
+</rect>
+
+    <!-- -------- -->
+    <!-- DUNGEONS -->
+    <!-- -------- -->
+
+    <!--P2 Laboratory-->
+    
+
+<rect class="city"
+    data-town="P2 Laboratory" 
+    x="1248"
+    y="832"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('P2 Laboratory')},
+        attr: { class: MapHelper.calculateTownCssClass('P2 Laboratory') }">
+</rect>
+
+    <!--Seaside Cave-->
+    
+
+<rect class="city"
+    data-town="Seaside Cave" 
+    x="1504"
+    y="288"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Seaside Cave')},
+        attr: { class: MapHelper.calculateTownCssClass('Seaside Cave') }">
+</rect>
+
+    <!--Dreamyard-->
+    
+
+<rect class="city"
+    data-town="Dreamyard" 
+    x="1440"
+    y="640"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Dreamyard')},
+        attr: { class: MapHelper.calculateTownCssClass('Dreamyard') }">
+</rect>
+
+    <!--Pinwheel Forest-->
+    
+
+<rect class="city"
+    data-town="Pinwheel Forest" 
+    x="1152"
+    y="640"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Pinwheel Forest')},
+        attr: { class: MapHelper.calculateTownCssClass('Pinwheel Forest') }">
+</rect>
+
+    <!--Castelia Sewers-->
+    
+
+<rect class="city"
+    data-town="Castelia Sewers" 
+    x="896"
+    y="832"
+    height="16"
+    width="16"
+    data-bind="click:function(){MapHelper.moveToTown('Castelia City')},
+        attr: { class: MapHelper.calculateTownCssClass('Castelia Sewers') }">
+</rect>
+
+    <!-- Desert Resort
+    
+
+<rect class="city"
+    data-town="Desert Resort" 
+    x="752"
+    y="656"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Desert Resort')},
+        attr: { class: MapHelper.calculateTownCssClass('Desert Resort') }">
+</rect> -->
+
+    <!--Relic Castle-->
+    
+
+<rect class="city"
+    data-town="Relic Castle" 
+    x="688"
+    y="608"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Relic Castle')},
+        attr: { class: MapHelper.calculateTownCssClass('Relic Castle') }">
+</rect>
+
+    <!--Relic Passage-->
+    
+
+<rect class="city"
+    data-town="Relic Passage" 
+    x="592"
+    y="640"
+    height="48"
+    width="96"
+    data-bind="click:function(){MapHelper.moveToTown('Relic Passage')},
+        attr: { class: MapHelper.calculateTownCssClass('Relic Passage') }">
+</rect>
+
+    <!--Mistralton Cave-->
+    
+
+<rect class="city"
+    data-town="Mistralton Cave" 
+    x="368"
+    y="416"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Mistralton Cave')},
+        attr: { class: MapHelper.calculateTownCssClass('Mistralton Cave') }">
+</rect>
+
+    <!--Chargestone Cave-->
+    
+
+<rect class="city"
+    data-town="Chargestone Cave" 
+    x="272"
+    y="416"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Chargestone Cave')},
+        attr: { class: MapHelper.calculateTownCssClass('Chargestone Cave') }">
+</rect>
+
+    <!--Celestial Tower-->
+    
+
+<rect class="city"
+    data-town="Celestial Tower" 
+    x="272"
+    y="208"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Celestial Tower')},
+        attr: { class: MapHelper.calculateTownCssClass('Celestial Tower') }">
+</rect>
+
+    <!--Twist Mountain-->
+    
+
+<rect class="city"
+    data-town="Twist Mountain" 
+    x="336"
+    y="208"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Twist Mountain')},
+        attr: { class: MapHelper.calculateTownCssClass('Twist Mountain') }">
+</rect>
+
+    <!--Dragonspiral Tower-->
+    
+
+<rect class="city"
+    data-town="Dragonspiral Tower" 
+    x="416"
+    y="128"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Dragonspiral Tower')},
+        attr: { class: MapHelper.calculateTownCssClass('Dragonspiral Tower') }">
+</rect>
+
+    <!--Moor of Icirrus-->
+    
+
+<rect class="city"
+    data-town="Moor of Icirrus" 
+    x="544"
+    y="160"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Moor of Icirrus')},
+        attr: { class: MapHelper.calculateTownCssClass('Moor of Icirrus') }">
+</rect>
+
+    <!--Reversal Mountain-->
+    
+
+<rect class="city"
+    data-town="Reversal Mountain" 
+    x="1184"
+    y="320"
+    height="80"
+    width="80"
+    data-bind="click:function(){MapHelper.moveToTown('Reversal Mountain')},
+        attr: { class: MapHelper.calculateTownCssClass('Reversal Mountain') }">
+</rect>
+
+    <!--Reversal Mountain extra-->
+    
+
+<rect class="city"
+    data-town="Reversal Mountain" 
+    x="1136"
+    y="336"
+    height="48"
+    width="48"
+    data-bind="click:function(){MapHelper.moveToTown('Reversal Mountain')},
+        attr: { class: MapHelper.calculateTownCssClass('Reversal Mountain') }">
+</rect>
+
+    <!--Abundant Shrine-->
+    
+
+<rect class="city"
+    data-town="Abundant Shrine" 
+    x="1120"
+    y="400"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Abundant Shrine')},
+        attr: { class: MapHelper.calculateTownCssClass('Abundant Shrine') }">
+</rect>
+
+    <!--Lostlorn Forest-->
+    
+
+<rect class="city"
+    data-town="Lostlorn Forest" 
+    x="944"
+    y="464"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Lostlorn Forest')},
+        attr: { class: MapHelper.calculateTownCssClass('Lostlorn Forest') }">
+</rect>
+
+    <!--Floccesy Ranch-->
+    
+
+<rect class="city"
+    data-town="Floccesy Ranch" 
+    x="272"
+    y="640"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Floccesy Ranch')},
+        attr: { class: MapHelper.calculateTownCssClass('Floccesy Ranch') }">
+</rect>
+
+    <!--Cave of Being-->
+    
+
+<rect class="city"
+    data-town="Cave of Being" 
+    x="272"
+    y="736"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Cave of Being')},
+        attr: { class: MapHelper.calculateTownCssClass('Cave of Being') }">
+</rect>
+
+    <!--Liberty Garden-->
+    
+
+<rect class="city"
+    data-town="Liberty Garden" 
+    x="448"
+    y="832"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Liberty Garden')},
+        attr: { class: MapHelper.calculateTownCssClass('Liberty Garden') }">
+</rect>
+
+    <!--Giant Chasm-->
+    
+
+<rect class="city"
+    data-town="Giant Chasm" 
+    x="1264"
+    y="112"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Giant Chasm')},
+        attr: { class: MapHelper.calculateTownCssClass('Giant Chasm') }">
+</rect>
+
+    <!--Victory Road Unova-->
+    
+
+<rect class="city"
+    data-town="Victory Road Unova" 
+    x="1056"
+    y="32"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Victory Road Unova')},
+        attr: { class: MapHelper.calculateTownCssClass('Victory Road Unova') }">
+</rect>
+
+    <!--Pledge Grove-->
+    
+
+<rect class="city"
+    data-town="Pledge Grove" 
+    x="176"
+    y="624"
+    height="48"
+    width="64"
+    data-bind="click:function(){MapHelper.moveToTown('Pledge Grove')},
+        attr: { class: MapHelper.calculateTownCssClass('Pledge Grove') }">
+</rect>
+
+    <!-- ------------------ -->
+    <!-- PLACES OF INTEREST -->
+    <!-- ------------------ -->
+    
+
+<rect class="city"
+    data-town="Dock" 
+    x="784"
+    y="848"
+    height="112"
+    width="48"
+    data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Castelia City&#39;) }">
+</rect>
+     
+    <!--bridge-->
+    
+
+<rect class="city"
+    data-town="Skyarrow Bridge" 
+    x="912"
+    y="784"
+    height="48"
+    width="160"
+    data-bind="attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? &#39;unlockedRoute&#39; : &#39;lockedRoute&#39; },
+            click: () =&gt; {
+                Notifier.notify({message: &#39;What a lovely view&#39;});
+            }">
+</rect>
+    <!--bridge-->
+    
+
+<rect class="city"
+    data-town="Skyarrow Bridge" 
+    x="1024"
+    y="640"
+    height="144"
+    width="48"
+    data-bind="attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? &#39;unlockedRoute&#39; : &#39;lockedRoute&#39; },
+            click: () =&gt; {
+                Notifier.notify({message: &#39;What a lovely view&#39;});
+            }">
+</rect>
+    <!--bridge-->
+    
+
+<rect class="city"
+    data-town="Skyarrow Bridge" 
+    x="1072"
+    y="640"
+    height="48"
+    width="80"
+    data-bind="attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? &#39;unlockedRoute&#39; : &#39;lockedRoute&#39; },
+            click: () =&gt; {
+                Notifier.notify({message: &#39;What a lovely view&#39;});
+            }">
 </rect>
 </g>
 

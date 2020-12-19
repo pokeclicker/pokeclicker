@@ -24,11 +24,22 @@ class Player {
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
+    private _timeTraveller = false;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0;
+        this._timeTraveller = savedPlayer._timeTraveller || false;
+        if (this._lastSeen > Date.now()) {
+            Notifier.notify({
+                title: 'Welcome Time Traveller!',
+                message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokemon you may have obtained in the future could cease to exist which could corrupt your save file!',
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: GameConstants.HOUR,
+            });
+            this._timeTraveller = true;
+        }
         this._region = ko.observable(savedPlayer._region);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
             this._route = ko.observable(savedPlayer._route);
@@ -200,6 +211,7 @@ class Player {
             '_mineLayersCleared',
             'achievementsCompleted',
             '_lastSeen',
+            '_timeTraveller',
             'gymDefeats',
             'achievementsCompleted',
             'effectList',
