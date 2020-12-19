@@ -869,18 +869,6 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
 
 //Tower of Mastery?
 
-// dungeonList['Azure bay'] = new Dungeon('Azure bay',
-//     ['Tentacool', 'Slowpoke', 'Exeggcute', 'Chinchou', 'Remoraid', 'Wingull', 'Chatot', 'Mantyke'],
-//     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-//     2203000,
-//     [
-//         new DungeonBossPokemon('Lapras', 8000000, 100),
-//         new DungeonBossPokemon('Luvdisc', 8000000, 100),
-//         new DungeonBossPokemon('Inkay', 8000000, 100),
-//     ],
-//     96500, 230, 100);
-//Should really be a route
-
 //Sea Spirit's Den? Releases Articuno, Zapdos, Moltres roamers.
 
 //Kalos Power Plant?

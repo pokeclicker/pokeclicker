@@ -851,7 +851,6 @@ export const KalosDungeons = [
     'Glittering Cave',
     'Reflection Cave',
     // 'Tower of Mastery',
-    // 'Azure Bay', Should really be a route
     // 'Sea Spirit's Den',
     // 'Kalos Power Plant',
     // 'Pokéball Factory',
