@@ -81,6 +81,8 @@ class Lab implements Feature {
             new Research(Lab.Research.research_slot2, ResearchType.Research_Slot,
                 'Research Slot II', 'Unlocks a third Research Slot.',
                 1000, { requirements: [new ResearchedRequirement(Lab.Research.research_slot1)] }),
+            // TODO: HLXII - Implement after Typed BF is implemented
+            /*
             new TypeBoosterResearch(Lab.Research.type_boost_normal, PokemonType.Normal, 100),
             new TypeBoosterResearch(Lab.Research.type_boost_fire, PokemonType.Fire, 100),
             new TypeBoosterResearch(Lab.Research.type_boost_water, PokemonType.Water, 100),
@@ -99,7 +101,9 @@ class Lab implements Feature {
             new TypeBoosterResearch(Lab.Research.type_boost_dark, PokemonType.Dark, 100),
             new TypeBoosterResearch(Lab.Research.type_boost_steel, PokemonType.Steel, 100),
             new TypeBoosterResearch(Lab.Research.type_boost_fairy, PokemonType.Fairy, 100),
-
+            */
+            // TODO: HLXII - Implement one day
+            /*
             new Research(Lab.Research.time_machine, ResearchType.Machine,
                 'Time Machine', 'Unlocks the Time Machine',
                 100,
@@ -109,6 +113,7 @@ class Lab implements Feature {
                         return pokemon.name == 'Dialga' || pokemon.name == 'Celebi';
                     }, 'Only Time Pokemon can work on this Research'),
                 }),
+            */
         ];
 
         //#endregion
@@ -172,6 +177,10 @@ class Lab implements Feature {
 
     completeResearch(research: Research) {
         research.completed = true;
+        // Handle complete delegate
+        if (research.completeDelegate) {
+            research.completeDelegate();
+        }
         this.cancelResearch(research);
     }
 

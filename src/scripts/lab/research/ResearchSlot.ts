@@ -25,7 +25,9 @@ class ResearchSlot implements Saveable {
     }
 
     update(delta: number): boolean {
-        this.research.progress = Math.min(this.research.points, this.research.progress + delta * this.workerRate);
+        // TODO: HLXII - Research Booster / Research Upgrades
+        delta  *= this.workerRate;
+        this.research.progress = Math.min(this.research.points, this.research.progress + delta);
 
         // Complete research
         if (this.research.progress >= this.research.points && !this.notification) {
@@ -36,8 +38,10 @@ class ResearchSlot implements Saveable {
     }
 
     get workerRate(): number {
-        // TODO: HLXII - Find research rate based on workers
-        return 10;
+        const pokemon = this.workers.map(worker => App.game.party._caughtPokemon().find(p => p.name == worker));
+        const pokemonAttack = pokemon.map(pokemon => App.game.party.calculateOnePokemonAttack(pokemon, undefined, undefined, undefined, true, true));
+        const scaledRate = pokemonAttack.map(attack => Math.log10(attack));
+        return scaledRate.reduce((a, b) => a + b, 0);
     }
 
     addWorker(pokemon: PartyPokemon): boolean {

@@ -1,6 +1,7 @@
 interface ResearchOption {
     requirements?: (Requirement | MultiRequirement | OneFromManyRequirement)[],
     workerFilter?: WorkerFilter;
+    completeDelegate?: () => void;
 }
 class Research implements Saveable {
 
@@ -19,6 +20,7 @@ class Research implements Saveable {
 
     private _requirements?: (Requirement | MultiRequirement | OneFromManyRequirement)[];
     private _workerFilter?: WorkerFilter;
+    public completeDelegate: () => void | undefined;
 
     private _progress: KnockoutObservable<number>
     private _inProgress: KnockoutObservable<boolean>
@@ -34,6 +36,7 @@ class Research implements Saveable {
         this.points = points;
         this._requirements = option?.requirements;
         this._workerFilter = option?.workerFilter;
+        this.completeDelegate = option?.completeDelegate;
 
         this._progress = ko.observable(this.defaults.progress);
         this._inProgress = ko.observable(this.defaults.inProgress);
