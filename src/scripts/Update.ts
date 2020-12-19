@@ -298,7 +298,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.6.8': ({ saveData, playerData }) => {
+        '0.6.9': ({ saveData, playerData }) => {
             // Update underground item IDs
             const itemMap = (id) => {
                 if (id <= 7) { // fossils
@@ -317,7 +317,8 @@ class Update implements Saveable {
                 i.id = itemMap(i.id);
                 return i;
             }) || [];
-            if (saveData.underground && saveData.underground.mine) {
+            if (saveData.underground?.mine) {
+                // Reset the mine
                 delete saveData.underground.mine;
             }
         },
