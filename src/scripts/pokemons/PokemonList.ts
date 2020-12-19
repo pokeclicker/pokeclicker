@@ -1,9 +1,8 @@
-/// <reference path="../party/evolutions/LevelEvolution.ts" />
-/// <reference path="../party/evolutions/StoneEvolution.ts" />
-/// <reference path="../party/evolutions/TimedEvolution.ts" />
-/// <reference path="../party/evolutions/LocationEvolution.ts" />
+/// <reference path="../party/evolutions/EvolutionMethods.ts" />
+/// <reference path="../party/evolutions/WeatherRestrictedLevelEvolution.ts" />
 /// <reference path="../GameConstants.d.ts" />
 /// <reference path="../party/LevelType.ts" />
+/// <reference path="../weather/WeatherType.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 
 const pokemonDevolutionMap: { [name: string]: PokemonNameType } = {};
@@ -1903,7 +1902,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 83,
-        'name': "Farfetch'd",
+        'name': 'Farfetch\'d',
         'catchRate': 45,
         'type': [PokemonType.Normal, PokemonType.Flying],
         'levelType': LevelType.mediumfast,
@@ -8571,10 +8570,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 55,
         'catchRate': 190,
-        'evolutions': [
-            new LevelEvolution('Cherubi', 'Cherrim (overcast)', 25),
-            new LevelEvolution('Cherubi', 'Cherrim (sunshine)', 25),
-        ],
+        'evolutions': [new LevelEvolution('Cherubi', 'Cherrim (overcast)', 25)],
         'base': {
             'hitpoints': 45,
             'attack': 35,
@@ -8592,6 +8588,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 158,
         'catchRate': 75,
+        'evolutions': [new WeatherRestrictedLevelEvolution('Cherrim (overcast)', 'Cherrim (sunshine)', 1, [WeatherType.Sunny])],
         'base': {
             'hitpoints': 70,
             'attack': 60,
@@ -9839,7 +9836,7 @@ const pokemonList = createPokemonArray(
         'id': 485,
         'name': 'Heatran',
         'type': [PokemonType.Fire, PokemonType.Steel],
-        'eggCycles': 10,
+        'eggCycles': 80,
         'levelType': LevelType.slow,
         'exp': 270,
         'catchRate': 3,
@@ -14254,7 +14251,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.slow,
         'exp': 158,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Sliggoo', 'Goodra', 50)],
+        'evolutions': [new WeatherRestrictedLevelEvolution('Sliggoo', 'Goodra', 50, [WeatherType.Rain, WeatherType.Fog])],
         'base': {
             'hitpoints': 68,
             'attack': 75,
@@ -17485,7 +17482,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 865,
-        'name': "Sirfetch'd",
+        'name': 'Sirfetch\'d',
         'type': [PokemonType.Fighting],
         'base': {
             'hitpoints': 62,
@@ -18736,12 +18733,12 @@ pokemonList.forEach(p => {
     if ((p as PokemonListData).baby) {
         (p as PokemonListData).evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType);
     }
-    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= p.id);
+    (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
     pokemonNameIndex[p.name.toLowerCase()] = p;
 });
 
 const pokemonMap: any = new Proxy(pokemonList, {
-    get: (pokemon, prop: PokemonNameType) => {
+    get: (pokemon, prop: PokemonNameType | 'random') => {
         if (!isNaN(+prop)) {
             const id: number = +prop;
             const pokemonByID = pokemon.find(p => p.id == id);
@@ -18749,6 +18746,18 @@ const pokemonMap: any = new Proxy(pokemonList, {
                 return pokemonByID;
             }
         }
-        return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
+        switch (prop) {
+            case 'random':
+                return (_max = 0, _min = 0) => {
+                    // minimum 0
+                    const min = Math.max(0, Math.min(_min, _max));
+                    // maximum is same as however many pokemon are available
+                    const max = Math.min(pokemon.length, Math.max(_min, _max));
+                    const random = Math.floor(Math.random() * (max ? max : pokemon.length) + min);
+                    return pokemon[random];
+                };
+            default:
+                return pokemonNameIndex[prop.toLowerCase()] || pokemon[prop] || pokemon.find(p => p.id == 0);
+        }
     },
 });

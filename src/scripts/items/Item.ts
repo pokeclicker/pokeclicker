@@ -39,7 +39,8 @@ abstract class Item {
             multiplierDecrease = true,
             multiplierDecreaser = MultiplierDecreaser.Battle,
         } : ShopOptions = {},
-        displayName?: string) {
+        displayName?: string,
+        description?: string) {
         this.name = ko.observable(name);
         this.basePrice = basePrice;
         this.currency = currency;
@@ -56,6 +57,7 @@ abstract class Item {
         }
 
         this._displayName = displayName ?? name;
+        this.description = description;
     }
 
     totalPrice(amount: number): number {
@@ -136,19 +138,19 @@ abstract class Item {
         return true;
     }
 
-    increasePriceMultiplier(n = 1) {
-        player.itemMultipliers[this.saveName] = Math.min(100, (player.itemMultipliers[this.saveName] || 1) * Math.pow(this.multiplier, n));
+    increasePriceMultiplier(amount = 1) {
+        player.itemMultipliers[this.saveName] = Math.min(100, (player.itemMultipliers[this.saveName] || 1) * Math.pow(this.multiplier, amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 
-    decreasePriceMultiplier(n = 1, multiplierDecreaser: MultiplierDecreaser) {
+    decreasePriceMultiplier(amount = 1, multiplierDecreaser: MultiplierDecreaser) {
         if (!this.multiplierDecrease) {
             return;
         }
         if (this.multiplierDecreaser !== multiplierDecreaser) {
             return;
         }
-        player.itemMultipliers[this.saveName] = Math.max(1, (player.itemMultipliers[this.saveName] || 1) / Math.pow(this.multiplier, n));
+        player.itemMultipliers[this.saveName] = Math.max(1, (player.itemMultipliers[this.saveName] || 1) / Math.pow(this.multiplier, amount));
         this.price(Math.round(this.basePrice * player.itemMultipliers[this.saveName]));
     }
 

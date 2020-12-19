@@ -2,12 +2,10 @@
 class BattleItem extends Item {
 
     type: GameConstants.BattleItemType;
-    description: string;
 
     constructor(type: GameConstants.BattleItemType, description: string, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money, displayName?: string) {
-        super(GameConstants.BattleItemType[type], basePrice, currency, undefined, displayName);
+        super(GameConstants.BattleItemType[type], basePrice, currency, undefined, displayName, description);
         this.type = type;
-        this.description = description;
     }
 
     use() {

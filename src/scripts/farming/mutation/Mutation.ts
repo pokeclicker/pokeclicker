@@ -5,20 +5,37 @@ interface MutationOptions {
     showHint?: boolean,
 }
 
-abstract class Mutation {
+abstract class Mutation implements Saveable {
 
-    mutationChance: number;
+    saveKey: string;
+
+    defaults: Record<string, any>;
+
+    _mutationChance: number;
     mutatedBerry: BerryType;
     _hint?: string;
     showHint: boolean;
     _unlockReq?: (() => boolean);
 
+    _hintSeen: KnockoutObservable<boolean>;
+
     constructor(mutationChance: number, mutatedBerry: BerryType, options?: MutationOptions) {
-        this.mutationChance = mutationChance;
+        this._mutationChance = mutationChance;
         this.mutatedBerry = mutatedBerry;
         this._hint = options?.hint;
         this._unlockReq = options?.unlockReq;
         this.showHint = options?.showHint ?? true;
+
+        this._hintSeen = ko.observable(false);
+    }
+
+    toJSON(): Record<string, any> {
+        return {
+            hintSeen: this.hintSeen,
+        };
+    }
+    fromJSON(json: Record<string, any>): void {
+        this.hintSeen = json.hasOwnProperty('hintSeen') ? json['hintSeen'] : false;
     }
 
     /**
@@ -57,6 +74,14 @@ abstract class Mutation {
     }
 
     /**
+     * Handles getting the mutation chance
+     * @param idx The plot index
+     */
+    mutationChance(idx: number): number {
+        return this._mutationChance;
+    }
+
+    /**
      * Update tag for mutations. Returns true if this mutation will occur
      */
     mutate(): boolean {
@@ -72,7 +97,7 @@ abstract class Mutation {
         let mutated = false;
 
         plots.forEach((idx) => {
-            const willMutate =  Math.random() < this.mutationChance * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier();
+            const willMutate =  Math.random() < this.mutationChance(idx) * App.game.farming.getMutationMultiplier() * App.game.farming.plotList[idx].getMutationMultiplier();
             if (!willMutate) {
                 return;
             }
@@ -82,6 +107,14 @@ abstract class Mutation {
         });
 
         return mutated;
+    }
+
+    get hintSeen() {
+        return this._hintSeen();
+    }
+
+    set hintSeen(bool: boolean) {
+        this._hintSeen(bool);
     }
 
 }

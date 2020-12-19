@@ -77,6 +77,8 @@ class Quests implements Saveable {
             // Once the player completes every available quest, refresh the list for free
             if (this.allQuestClaimed()) {
                 this.refreshQuests(true);
+                // Give player a free refresh
+                this.freeRefresh(true);
             }
         } else {
             console.trace('cannot claim quest..');
@@ -230,6 +232,7 @@ class Quests implements Saveable {
             xp: this.xp(),
             refreshes: this.refreshes(),
             lastRefresh: this.lastRefresh,
+            lastRefreshLevel: this.lastRefreshLevel,
             freeRefresh: this.freeRefresh(),
             questList: this.questList(),
             questLines: this.questLines(),
@@ -246,9 +249,9 @@ class Quests implements Saveable {
         }
 
         this.xp(json.xp || this.defaults.xp);
+        this.refreshes(json.refreshes || this.defaults.refreshes);
         this.lastRefresh = json.lastRefresh ? new Date(json.lastRefresh) : new Date();
         this.lastRefreshLevel = json.lastRefreshLevel || this.level();
-        this.refreshes(json.refreshes || this.defaults.refreshes);
         if (this.lastRefresh.toDateString() != new Date().toDateString()) {
             this.freeRefresh(true);
         } else {

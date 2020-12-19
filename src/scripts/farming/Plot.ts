@@ -17,6 +17,7 @@ class Plot implements Saveable {
 
     _auras: KnockoutObservable<number>[];
 
+    formattedStageTimeLeft: KnockoutComputed<string>;
     formattedTimeLeft: KnockoutComputed<string>;
     formattedMulchTimeLeft: KnockoutComputed<string>;
     formattedAuras: KnockoutComputed<string>;
@@ -34,10 +35,10 @@ class Plot implements Saveable {
 
     constructor(isUnlocked: boolean, berry: BerryType, age: number, mulch: MulchType, mulchTimeLeft: number) {
         this._isUnlocked = ko.observable(isUnlocked);
-        this._berry = ko.observable(berry);
-        this._age = ko.observable(age);
-        this._mulch = ko.observable(mulch);
-        this._mulchTimeLeft = ko.observable(mulchTimeLeft);
+        this._berry = ko.observable(berry).extend({ numeric: 0 });
+        this._age = ko.observable(age).extend({ numeric: 3 });
+        this._mulch = ko.observable(mulch).extend({ numeric: 0 });
+        this._mulchTimeLeft = ko.observable(mulchTimeLeft).extend({ numeric: 3 });
 
         this._auras = [];
         this._auras[AuraType.Growth] = ko.observable(1);
@@ -45,12 +46,26 @@ class Plot implements Saveable {
         this._auras[AuraType.Mutation] = ko.observable(1);
         this._auras[AuraType.Replant] = ko.observable(1);
 
-        this.formattedTimeLeft = ko.pureComputed(() => {
+        this.formattedStageTimeLeft = ko.pureComputed(() => {
             if (this.berry === BerryType.None) {
                 return '';
             }
             const growthTime = this.berryData.growthTime.find(t => this.age < t);
             const timeLeft = Math.ceil(growthTime - this.age);
+            const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
+            return GameConstants.formatTime(timeLeft / growthMultiplier);
+        });
+
+        this.formattedTimeLeft = ko.pureComputed(() => {
+            if (this.berry === BerryType.None) {
+                return '';
+            }
+            let timeLeft = 0;
+            if (this.age < this.berryData.growthTime[3]) {
+                timeLeft = Math.ceil(this.berryData.growthTime[3] - this.age);
+            } else {
+                timeLeft = Math.ceil(this.berryData.growthTime[4] - this.age);
+            }
             const growthMultiplier = App.game.farming.getGrowthMultiplier() * this.getGrowthMultiplier();
             return GameConstants.formatTime(timeLeft / growthMultiplier);
         });
@@ -103,47 +118,71 @@ class Plot implements Saveable {
             if (this.berry === BerryType.None) {
                 return PlotStage.Seed;
             }
-            return this.berryData.growthTime.findIndex(t => this.age < t);
+            return this.berryData.growthTime.findIndex(t => this.age <= t);
         });
 
         this.tooltip = ko.pureComputed(() => {
             const tooltip = [];
 
+            // Time
             if (this.berry !== BerryType.None) {
 
                 tooltip.push(`<u>${BerryType[this.berry]}</u>`);
 
-                const formattedTime = this.formattedTimeLeft();
-                switch (this.stage()) {
-                    case PlotStage.Seed:
-                        tooltip.push(`${formattedTime} until sprout`);
-                        break;
-                    case PlotStage.Sprout:
-                        tooltip.push(`${formattedTime} until grown`);
-                        break;
-                    case PlotStage.Taller:
-                        tooltip.push(`${formattedTime} until bloom`);
-                        break;
-                    case PlotStage.Bloom:
-                        tooltip.push(`${formattedTime} until ripe`);
-                        break;
-                    case PlotStage.Berry:
-                        tooltip.push(`${formattedTime} until death`);
-                        break;
+                // Petaya Effect
+                if (App.game.farming.berryInFarm(BerryType.Petaya) && this.berry !== BerryType.Petaya && this.stage() == PlotStage.Berry) {
+                    tooltip.push('∞ until death');
+                // Normal Time
+                } else {
+                    const timeType = Settings.getSetting('farmDisplay').observableValue();
+                    if (timeType === 'nextStage') {
+                        const formattedTime = this.formattedStageTimeLeft();
+                        switch (this.stage()) {
+                            case PlotStage.Seed:
+                                tooltip.push(`${formattedTime} until sprout`);
+                                break;
+                            case PlotStage.Sprout:
+                                tooltip.push(`${formattedTime} until grown`);
+                                break;
+                            case PlotStage.Taller:
+                                tooltip.push(`${formattedTime} until bloom`);
+                                break;
+                            case PlotStage.Bloom:
+                                tooltip.push(`${formattedTime} until ripe`);
+                                break;
+                            case PlotStage.Berry:
+                                tooltip.push(`${formattedTime} until death`);
+                                break;
+                        }
+                    } else {
+                        const formattedTime = this.formattedTimeLeft();
+                        switch (this.stage()) {
+                            case PlotStage.Seed:
+                            case PlotStage.Sprout:
+                            case PlotStage.Taller:
+                            case PlotStage.Bloom:
+                                tooltip.push(`${formattedTime} until ripe`);
+                                break;
+                            case PlotStage.Berry:
+                                tooltip.push(`${formattedTime} until death`);
+                                break;
+                        }
+                    }
                 }
             }
 
+            // Aura
             if (this.stage() >= PlotStage.Taller && this.berryData.aura) {
                 tooltip.push('<u>Aura Emitted:</u>');
                 tooltip.push(`${this.berryData.aura.getLabel(this.stage())}`);
             }
-
             const auraStr = this.formattedAuras();
             if (auraStr) {
                 tooltip.push('<u>Aura Received:</u>');
                 tooltip.push(auraStr);
             }
 
+            // Mulch
             if (this.mulch !== MulchType.None) {
                 const mulchTime = this.formattedMulchTimeLeft();
                 tooltip.push('<u>Mulch</u>');
@@ -171,6 +210,10 @@ class Plot implements Saveable {
             const oldAge = this.age;
             this.age += growthTime;
 
+            // Checking for Petaya Berries
+            if (App.game.farming.berryInFarm(BerryType.Petaya) && this.berry !== BerryType.Petaya) {
+                this.age = Math.min(this.age, this.berryData.growthTime[3] + 1);
+            }
 
             const updatedStage = this.stageUpdated(oldAge, this.age);
 
@@ -246,6 +289,7 @@ class Plot implements Saveable {
                 this.age = 0;
                 this.notifications.push(FarmNotificationType.Replanted);
                 App.game.oakItems.use(OakItems.OakItem.Sprinklotad);
+                GameHelper.incrementObservable(App.game.statistics.totalBerriesReplanted, 1);
                 return;
             }
 
@@ -253,11 +297,12 @@ class Plot implements Saveable {
 
             // Check for Kasib berry mutation/replant chance
             if (App.game.farming.highestUnlockedBerry() > BerryType.Occa) {
-                if (App.game.farming.plotList.every(plot => plot.berry !== BerryType.Colbur)) {
+                if (!App.game.farming.berryInFarm(BerryType.Colbur)) {
                     if (Math.random() < 0.05) {
                         this.notifications.push(FarmNotificationType.Mutated);
                         this.berry = BerryType.Kasib;
                         this.age = 0;
+                        App.game.farming.unlockBerry(BerryType.Kasib);
                         return;
                     }
                 }
@@ -284,10 +329,11 @@ class Plot implements Saveable {
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(wanderPokemon).id, shiny, true);
 
             // Check for Starf berry generation
-            if (shiny && App.game.farming.highestUnlockedBerry() > BerryType.Salac) {
+            if (shiny) {
                 const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
                 const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
                 chosenPlot.plant(BerryType.Starf);
+                App.game.farming.unlockBerry(BerryType.Starf);
             }
 
             return {pokemon: wanderPokemon, shiny: shiny};
@@ -307,6 +353,11 @@ class Plot implements Saveable {
         }
 
         multiplier *= this._auras[AuraType.Growth]();
+
+        // Handle Kasib Effect
+        if (this.stage() == PlotStage.Berry && this.berry != BerryType.Kasib && App.game.farming.berryInFarm(BerryType.Kasib)) {
+            multiplier *= 5;
+        }
 
         return multiplier;
     }

@@ -39,7 +39,7 @@ class Achievement {
     })
 
     public getBonus() {
-        const max = AchievementHandler.maxBonus()[this.region] ;
+        const max = AchievementHandler.maxBonus()[this.region];
         return (this.bonus / max * 100).toFixed(2);
     }
 

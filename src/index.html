@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Pokéclicker</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -55,7 +55,8 @@
             width: 100vw;
             background-color: #79c9fa;
             background-size: cover;
-            z-index: 9999;
+            z-index: 99;
+            overflow: hidden;
         }
 
         .loader-wrapper {
@@ -204,7 +205,7 @@
                                          src=""/>
                                     <br>
                                     Catch Chance:
-                                    <knockout data-bind="text: Battle.catchRateActual() + '%'">Catch Rate</knockout>
+                                    <knockout data-bind="text: Math.floor(Battle.catchRateActual()) + '%'">Catch Rate</knockout>
                                 </div>
                             </div>
                             <div class="progress hitpoints" style="height: 20px;">
@@ -283,7 +284,7 @@
                                              src=""/>
                                         <br>
                                         Catch Chance:
-                                        <knockout data-bind="text: DungeonBattle.catchRateActual() + '%'">Catch Rate</knockout>
+                                        <knockout data-bind="text: Math.floor(DungeonBattle.catchRateActual()) + '%'">Catch Rate</knockout>
                                     </div>
                                 </div>
                                 <div class="progress hitpoints" style="height: 20px;">
@@ -401,6 +402,16 @@
                     <div class="card-header p-0" data-toggle="collapse" href="#mapBody">
                         <span data-bind="text: `Town Map (${GameConstants.camelCaseToString(GameConstants.Region[player.region])})`">Town Map</span>
                     </div>
+                    <button class='btn btn-sm' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
+                    data-bind='style: { background: Weather.color() },
+                        tooltip: {
+                            title: Weather.tooltip(),
+                            html: true,
+                            placement: "bottom",
+                            trigger: "hover"
+                        }'>
+                        <img width=30px src="" data-bind="attr: { src: Weather.image() }"/>
+                    </button>
                     <div id="mapBody" class="card-body p-0 show">
                         <p id="mapTooltip" class="btn btn-secondary" style="visibility: hidden;"></p>
                         <svg id="map" viewBox="0 0 1600 960" preserveAspectRatio="xMaxYMax meet">
@@ -421,6 +432,7 @@
                             @import "JohtoSVG.html"
                             @import "HoennSVG.html"
                             @import "SinnohSVG.html"
+                            @import "UnovaSVG.html"
 
                         </svg>
                     </div>
@@ -493,7 +505,7 @@
 @import "shardsModal.html"
 
 <!-- Breeding Modal-->
-@import "breeding.html"
+@import "breedingModal.html"
 
 <!-- Underground Modal -->
 @import "underground.html"
@@ -503,6 +515,9 @@
 
 <!-- Statistics Modal-->
 @import "pokemonStatisticsModal.html"
+
+<!-- Pokemon Selector Modal-->
+@import "pokemonSelectorModal.html"
 
 <!-- Badge Case Modal-->
 @import "badgeCase.html"

@@ -7,7 +7,7 @@ abstract class Requirement {
         this.type = type;
     }
 
-    abstract getProgress();
+    abstract getProgress(): number;
     abstract hint(): string;
 
     public getProgressPercentage() {

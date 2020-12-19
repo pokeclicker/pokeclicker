@@ -70,10 +70,12 @@ class Game {
 
         // TODO refactor to proper initialization methods
         Battle.generateNewEnemy();
+        this.farming.resetAuras();
         //Safari.load();
         Underground.energyTick(this.underground.getEnergyRegenTime());
         DailyDeal.generateDeals(this.underground.getDailyDealsMax(), new Date());
         BerryDeal.generateDeals(new Date());
+        Weather.generateWeather(new Date());
 
         this.gameState = GameConstants.GameState.fighting;
     }
@@ -137,9 +139,11 @@ class Game {
         // Auto Save
         Save.counter += GameConstants.TICK_TIME;
         if (Save.counter > GameConstants.SAVE_TICK) {
+            const old = new Date(player._lastSeen);
             const now = new Date();
+
             // Check if it's a new day
-            if (new Date(player._lastSeen).toLocaleDateString() !== now.toLocaleDateString()) {
+            if (old.toLocaleDateString() !== now.toLocaleDateString()) {
                 // Give the player a free quest refresh
                 this.quests.freeRefresh(true);
                 //Refresh the Underground deals
@@ -152,6 +156,13 @@ class Game {
                     timeout: 3e4,
                 });
             }
+
+            // Check if it's a new hour
+            if (old.getHours() !== now.getHours()) {
+                Weather.generateWeather(now);
+            }
+
+            // Save the game
             player._lastSeen = Date.now();
             Save.store(player);
         }
