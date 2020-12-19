@@ -1894,7 +1894,7 @@ Routes.add(new RegionRoute(
         special:
         [
             new SpecialRoutePokemon(['Chansey', 'Woobat', 'Wimpod'], [new WeatherRequirement([WeatherType.Clear])]),
-            new SpecialRoutePokemon('Chansey',  [new WeatherRequirement([WeatherType.Overcast])]),
+            new SpecialRoutePokemon(['Chansey'],  [new WeatherRequirement([WeatherType.Overcast])]),
             new SpecialRoutePokemon(['Chansey', 'Woobat', 'Wimpod'], [new WeatherRequirement([WeatherType.Rain])]),
             new SpecialRoutePokemon(['Chansey', 'Woobat', 'Wimpod'], [new WeatherRequirement([WeatherType.Thunderstorm])]),
             new SpecialRoutePokemon(['Chansey', 'Woobat', 'Wimpod'], [new WeatherRequirement([WeatherType.Sunny])]),
@@ -1966,13 +1966,13 @@ Routes.add(new RegionRoute(
         land: ['Sandshrew', 'Cubone', 'Torkoal', 'Kangaskhan'],
         special:
         [
-            new SpecialRoutePokemon('Chansey', [new WeatherRequirement([WeatherType.Clear])]),
-            new SpecialRoutePokemon('Chansey', [new WeatherRequirement([WeatherType.Overcast])]),
-            new SpecialRoutePokemon('Chansey', [new WeatherRequirement([WeatherType.Rain])]),
-            new SpecialRoutePokemon('Chansey', [new WeatherRequirement([WeatherType.Thunderstorm])]),
-            new SpecialRoutePokemon('Chansey', [new WeatherRequirement([WeatherType.Sunny])]),
-            new SpecialRoutePokemon('Chansey', [new WeatherRequirement([WeatherType.Sandstorm])]),
-            new SpecialRoutePokemon('Blissey', [new WeatherRequirement([WeatherType.Fog])]),
+            new SpecialRoutePokemon(['Chansey'], [new WeatherRequirement([WeatherType.Clear])]),
+            new SpecialRoutePokemon(['Chansey'], [new WeatherRequirement([WeatherType.Overcast])]),
+            new SpecialRoutePokemon(['Chansey'], [new WeatherRequirement([WeatherType.Rain])]),
+            new SpecialRoutePokemon(['Chansey'], [new WeatherRequirement([WeatherType.Thunderstorm])]),
+            new SpecialRoutePokemon(['Chansey'], [new WeatherRequirement([WeatherType.Sunny])]),
+            new SpecialRoutePokemon(['Chansey'], [new WeatherRequirement([WeatherType.Sandstorm])]),
+            new SpecialRoutePokemon(['Blissey'], [new WeatherRequirement([WeatherType.Fog])]),
         ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.armor, 7)]
@@ -2260,8 +2260,8 @@ Routes.add(new RegionRoute(
         land: ['Zubat', 'Carbink', 'Piloswine', 'Deino', 'Larvitar', 'Riolu', 'Audino', 'Lucario', 'Golbat', 'Hydreigon', 'Tyranitar', 'Omastar', 'Kabutops', 'Barboach', 'Basculin(Red-Striped)', 'Basculin(Blue-Striped)', 'Magikarp', 'Omanyte', 'Kabuto', 'Feebas'],
         special:
         [
-            new SpecialRoutePokemon('Vanillish',  [new WeatherRequirement([WeatherType.Snow])]),
-            new SpecialRoutePokemon('Vanillish',  [new WeatherRequirement([WeatherType.Blizzard])]),
+            new SpecialRoutePokemon(['Vanillish'],  [new WeatherRequirement([WeatherType.Snow])]),
+            new SpecialRoutePokemon(['Vanillish'],  [new WeatherRequirement([WeatherType.Blizzard])]),
         ],
     }),
     [new RouteKillRequirement(10, GameConstants.Region.crown, 5)]
