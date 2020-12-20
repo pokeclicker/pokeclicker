@@ -3,5 +3,6 @@ enum EvolutionType {
     Stone,
     Timed,
     Location,
+    Environment,
     Other
 }

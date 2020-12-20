@@ -50,6 +50,22 @@ class ChangelogUpdate extends Changelog {
  */
 const changelogItems = [
     // note that month is 0 indexed
+    // v0.6.9
+    new ChangelogUpdate('v0.6.9', new Date(2020, 11, 20)),
+    new Changelog(changelogType.CHANGE, 'Give free quest refresh on all quests completed'),
+    new Changelog(changelogType.CHANGE, 'Updated some environments'),
+    new Changelog(changelogType.CHANGE, 'Buffed Babiri berry effect'),
+    new Changelog(changelogType.CHANGE, 'Buffed Enigma berry'),
+    new Changelog(changelogType.CHANGE, 'Buffed Farm wondering Pokémon rate'),
+    new Changelog(changelogType.CHANGE, 'Updated Petaya berry effect'),
+    new Changelog(changelogType.CHANGE, 'Updated Kasib berry effect'),
+    new Changelog(changelogType.CHANGE, 'Added hints for more berries'),
+    new Changelog(changelogType.CHANGE, 'Updated some NPC text'),
+    new Changelog(changelogType.CHANGE, 'Buffed egg steps for baby Pokémon'),
+    new Changelog(changelogType.CHANGE, 'Nerfed egg steps for evolved Pokémon forms'),
+    new Changelog(changelogType.FIXED, 'Fixed Farm auras not updating'),
+    new Changelog(changelogType.FIXED, 'Modals locking game if clicked too fast'),
+
     // v0.6.8
     new ChangelogUpdate('v0.6.8', new Date(2020, 11, 9)),
     new Changelog(changelogType.NEW, 'Added weather to the regions'),

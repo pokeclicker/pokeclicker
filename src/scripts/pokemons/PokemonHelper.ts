@@ -191,7 +191,7 @@ class PokemonHelper {
 
     public static getPokemonParents(pokemonName: PokemonNameType): Array<string> {
         const parents = [];
-        Object.entries(pokemonDevolutionMap).forEach(([parent, baby]) => {
+        Object.entries(pokemonBabyPrevolutionMap).forEach(([parent, baby]) => {
             if (baby == pokemonName) {
                 parents.push(parent);
             }
