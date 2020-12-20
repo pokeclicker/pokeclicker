@@ -1233,7 +1233,7 @@ gymList['Altar of the Sunne and Moone'] = new Gym(
     'Ultra Megalopolis',
     'Altar of the Sunne and Moone',
     [new GymPokemon('Necrozma (Ultra)', 2458300, 60)],
-    BadgeEnums.Elite_Nihilego,
+    BadgeEnums.Elite_UltraNecrozma,
     128000,
     'Necrozma fled. It left something behind.',
     [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)]
