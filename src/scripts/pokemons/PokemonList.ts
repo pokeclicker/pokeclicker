@@ -543,8 +543,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-        //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -562,8 +560,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-        //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -581,8 +577,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-        //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -600,8 +594,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-        //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -619,8 +611,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-        //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -638,8 +628,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-        //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
         'base': {
             'hitpoints': 35,
             'attack': 55,
@@ -657,8 +645,6 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 112,
         'eggCycles': 10,
-        'evolutions': [new StoneEvolution('Pikachu', 'Raichu', GameConstants.StoneType.Thunder_stone)],
-        //TODO add Alola-only evolution into Alolan Raichu using Thunderstone
         'base': {
             'hitpoints': 35,
             'attack': 55,
