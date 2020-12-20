@@ -1975,6 +1975,7 @@ TownList['Exeggutor Island'] = new Town(
     'Exeggutor Island',
     GameConstants.Region.alola,
     {
+        dungeon: dungeonList['Exeggutor Island Hill'],
         requirements: [new RouteKillRequirement(10, GameConstants.Region.alola, 25)],
     }
 );
@@ -2103,15 +2104,15 @@ TownList['Ruins of Abundance'] = new DungeonTown(
         new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion),
     ]
 );
-TownList['Exeggutor Island'] = new DungeonTown(
-    'Exeggutor Island',
+TownList['Exeggutor Island Hill'] = new DungeonTown(
+    'Exeggutor Island Hill',
     GameConstants.Region.alola,
     [new RouteKillRequirement(10, GameConstants.Region.alola, 25)]
 );
 TownList['Vast Poni Canyon'] = new DungeonTown(
     'Vast Poni Canyon',
     GameConstants.Region.alola,
-    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island'))]
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Exeggutor Island Hill'))]
 );
 TownList['Nebby'] = new DungeonTown(
     'Nebby',

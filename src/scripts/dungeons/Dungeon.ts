@@ -1192,7 +1192,7 @@ dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
     ],
     96500, 201, 35);
 
-dungeonList['Exeggutor Island'] = new Dungeon('Exeggutor Island',
+dungeonList['Exeggutor Island Hill'] = new Dungeon('Exeggutor Island Hill',
     ['Exeggcute', 'Pelipper', 'Gastrodon (east)'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
