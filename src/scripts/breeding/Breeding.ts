@@ -335,7 +335,7 @@ class Breeding implements Feature {
     }
 
     public calculateBaseForm(pokemonName: PokemonNameType): PokemonNameType {
-        const devolution = pokemonDevolutionMap[pokemonName];
+        const devolution = pokemonBabyPrevolutionMap[pokemonName];
         // Base form of Pokemon depends on which regions players unlocked
         if (!devolution || PokemonHelper.calcNativeRegion(devolution) > player.highestRegion()) {
             // No devolutions at all

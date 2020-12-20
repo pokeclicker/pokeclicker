@@ -5,7 +5,7 @@
 /// <reference path="../weather/WeatherType.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 
-const pokemonDevolutionMap: { [name: string]: PokemonNameType } = {};
+const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
 type PokemonListData = {
   id: number;
@@ -13602,13 +13602,85 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 669,
-        'name': 'Flabébé',
+        'name': 'Flabébé (Red)',
         'type': [PokemonType.Fairy],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 225,
-        'evolutions': [new LevelEvolution('Flabébé', 'Floette', 19)],
+        'evolutions': [new LevelEvolution('Flabébé (Red)', 'Floette (Red)', 19)],
+        'base': {
+            'hitpoints': 44,
+            'attack': 38,
+            'specialAttack': 61,
+            'defense': 39,
+            'specialDefense': 79,
+            'speed': 42,
+        },
+    },
+    {
+        'id': 669.01,
+        'name': 'Flabébé (Yellow)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 61,
+        'catchRate': 225,
+        'evolutions': [new LevelEvolution('Flabébé (Yellow)', 'Floette (Yellow)', 19)],
+        'base': {
+            'hitpoints': 44,
+            'attack': 38,
+            'specialAttack': 61,
+            'defense': 39,
+            'specialDefense': 79,
+            'speed': 42,
+        },
+    },
+    {
+        'id': 669.02,
+        'name': 'Flabébé (Blue)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 61,
+        'catchRate': 225,
+        'evolutions': [new LevelEvolution('Flabébé (Blue)', 'Floette (Blue)', 19)],
+        'base': {
+            'hitpoints': 44,
+            'attack': 38,
+            'specialAttack': 61,
+            'defense': 39,
+            'specialDefense': 79,
+            'speed': 42,
+        },
+    },
+    {
+        'id': 669.03,
+        'name': 'Flabébé (Orange)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 61,
+        'catchRate': 225,
+        'evolutions': [new LevelEvolution('Flabébé (Orange)', 'Floette (Orange)', 19)],
+        'base': {
+            'hitpoints': 44,
+            'attack': 38,
+            'specialAttack': 61,
+            'defense': 39,
+            'specialDefense': 79,
+            'speed': 42,
+        },
+    },
+    {
+        'id': 669.04,
+        'name': 'Flabébé (White)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 61,
+        'catchRate': 225,
+        'evolutions': [new LevelEvolution('Flabébé (White)', 'Floette (White)', 19)],
         'base': {
             'hitpoints': 44,
             'attack': 38,
@@ -13620,13 +13692,102 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 670,
-        'name': 'Floette',
+        'name': 'Floette (Red)',
         'type': [PokemonType.Fairy],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
         'exp': 130,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Floette', 'Florges', GameConstants.StoneType.Shiny_stone)],
+        'evolutions': [new StoneEvolution('Floette (Red)', 'Florges (Red)', GameConstants.StoneType.Shiny_stone)],
+        'base': {
+            'hitpoints': 54,
+            'attack': 45,
+            'specialAttack': 75,
+            'defense': 47,
+            'specialDefense': 98,
+            'speed': 52,
+        },
+    },
+    {
+        'id': 670.01,
+        'name': 'Floette (Yellow)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 130,
+        'catchRate': 120,
+        'evolutions': [new StoneEvolution('Floette (Yellow)', 'Florges (Yellow)', GameConstants.StoneType.Shiny_stone)],
+        'base': {
+            'hitpoints': 54,
+            'attack': 45,
+            'specialAttack': 75,
+            'defense': 47,
+            'specialDefense': 98,
+            'speed': 52,
+        },
+    },
+    {
+        'id': 670.02,
+        'name': 'Floette (Blue)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 130,
+        'catchRate': 120,
+        'evolutions': [new StoneEvolution('Floette (Blue)', 'Florges (Blue)', GameConstants.StoneType.Shiny_stone)],
+        'base': {
+            'hitpoints': 54,
+            'attack': 45,
+            'specialAttack': 75,
+            'defense': 47,
+            'specialDefense': 98,
+            'speed': 52,
+        },
+    },
+    {
+        'id': 670.03,
+        'name': 'Floette (Orange)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 130,
+        'catchRate': 120,
+        'evolutions': [new StoneEvolution('Floette (Orange)', 'Florges (Orange)', GameConstants.StoneType.Shiny_stone)],
+        'base': {
+            'hitpoints': 54,
+            'attack': 45,
+            'specialAttack': 75,
+            'defense': 47,
+            'specialDefense': 98,
+            'speed': 52,
+        },
+    },
+    {
+        'id': 670.04,
+        'name': 'Floette (White)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 130,
+        'catchRate': 120,
+        'evolutions': [new StoneEvolution('Floette (White)', 'Florges (White)', GameConstants.StoneType.Shiny_stone)],
+        'base': {
+            'hitpoints': 54,
+            'attack': 45,
+            'specialAttack': 75,
+            'defense': 47,
+            'specialDefense': 98,
+            'speed': 52,
+        },
+    },
+    {
+        'id': 670.05,
+        'name': 'Floette (Eternal)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 130,
+        'catchRate': 120,
         'base': {
             'hitpoints': 54,
             'attack': 45,
@@ -13638,7 +13799,75 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 671,
-        'name': 'Florges',
+        'name': 'Florges (Red)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 248,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 78,
+            'attack': 65,
+            'specialAttack': 112,
+            'defense': 68,
+            'specialDefense': 154,
+            'speed': 75,
+        },
+    },
+    {
+        'id': 671.01,
+        'name': 'Florges (Yellow)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 248,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 78,
+            'attack': 65,
+            'specialAttack': 112,
+            'defense': 68,
+            'specialDefense': 154,
+            'speed': 75,
+        },
+    },
+    {
+        'id': 671.02,
+        'name': 'Florges (Blue)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 248,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 78,
+            'attack': 65,
+            'specialAttack': 112,
+            'defense': 68,
+            'specialDefense': 154,
+            'speed': 75,
+        },
+    },
+    {
+        'id': 671.03,
+        'name': 'Florges (Orange)',
+        'type': [PokemonType.Fairy],
+        'eggCycles': 20,
+        'levelType': LevelType.mediumfast,
+        'exp': 248,
+        'catchRate': 45,
+        'base': {
+            'hitpoints': 78,
+            'attack': 65,
+            'specialAttack': 112,
+            'defense': 68,
+            'specialDefense': 154,
+            'speed': 75,
+        },
+    },
+    {
+        'id': 671.04,
+        'name': 'Florges (White)',
         'type': [PokemonType.Fairy],
         'eggCycles': 20,
         'levelType': LevelType.mediumfast,
@@ -18708,6 +18937,7 @@ const pokemonList = createPokemonArray(
 type PokemonNameType = typeof pokemonList[number]['name'];
 
 const pokemonNameIndex = {};
+const maxEggCycles = Math.max(...pokemonList.map(p => p.eggCycles));
 
 // TODO move to its own initialize method that gets called on game start.
 pokemonList.forEach(p => {
@@ -18717,7 +18947,16 @@ pokemonList.forEach(p => {
 
     (p as PokemonListData).attack = Math.max(10, Math.floor(Math.sqrt(baseDefense * baseStamina) * baseOffense / 250));
     if ((p as PokemonListData).baby) {
-        (p as PokemonListData).evolutions?.forEach(evo => pokemonDevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType);
+        (p as PokemonListData).evolutions?.forEach(evo => {
+            pokemonBabyPrevolutionMap[evo.getEvolvedPokemon()] = evo.basePokemon as PokemonNameType;
+            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+            p.eggCycles = Math.round(poke.eggCycles * 0.8);
+        });
+    } else {
+        (p as PokemonListData).evolutions?.forEach(evo => {
+            const poke = pokemonList.find(_p => _p.name == evo.getEvolvedPokemon());
+            poke.eggCycles = Math.min(maxEggCycles, Math.round(p.eggCycles * 1.5));
+        });
     }
     (p as PokemonListData).nativeRegion = (p as PokemonListData).nativeRegion || GameConstants.TotalPokemonsPerRegion.findIndex(maxRegionID => maxRegionID >= Math.floor(p.id));
     pokemonNameIndex[p.name.toLowerCase()] = p;
