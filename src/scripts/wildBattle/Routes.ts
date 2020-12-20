@@ -1512,7 +1512,7 @@ Routes.add(new RegionRoute(
         land: ['Slowpoke', 'Wingull', 'Inkay'],
         water: ['Tentacool', 'Mantyke', 'Finneon'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 1)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 1)],
     1.1
 ));
 Routes.add(new RegionRoute(
@@ -1575,7 +1575,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Tentacool', 'Staryu', 'Magikarp', 'Wingull', 'Finneon', 'Wishiwashi (Solo)', 'Pyukumuku'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 6)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 6)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 8', GameConstants.Region.alola, 8,
@@ -1613,7 +1613,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Fearow', 'Ditto', 'Cleffa', 'Skarmory', 'Elekid', 'Beldum', 'Elgyem', 'Minior (Meteor)', 'Minior (Blue-core)', 'Minior (Green-core)', 'Minior (Indigo-core)', 'Minior (Orange-core)', 'Minior (Red-core)', 'Minior (Violet-core)', 'Minior (Yellow-core)'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 10)],
     10.1
 ));
 Routes.add(new RegionRoute(
@@ -1638,14 +1638,14 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         water: ['Magikarp', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 12)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 14', GameConstants.Region.alola, 14,
     new RoutePokemon({
         water: ['Tentacruel', 'Magikarp', 'Pelipper', 'Finneon', 'Frillish', 'Wishiwashi (Solo)', 'Bruxish'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 13)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 13)]
 ));
 Routes.add(new RegionRoute(
     'Alola Haina Desert', GameConstants.Region.alola, 23,
@@ -1667,7 +1667,7 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Raticate', 'Slowpoke', 'Pelipper', 'Scraggy', 'Gumshoos'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 15)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 15)]
 ));
 Routes.add(new RegionRoute(
     'Alola Route 17', GameConstants.Region.alola, 17,
@@ -1689,14 +1689,14 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Granbull', 'Pelipper', 'Gastrodon (east)', 'Furfrou', 'Inkay'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 24)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 24)]
 ));
 Routes.add(new RegionRoute(
     'Poni Breaker Coast', GameConstants.Region.alola, 26,
     new RoutePokemon({
         water: ['Tentacruel', 'Lapras', 'Magikarp', 'Pelipper', 'Carvanha', 'Wailmer', 'Relicanth', 'Gastrodon (east)', 'Lumineon'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 25)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 25)]
 ));
 Routes.add(new RegionRoute(
     'Poni Grove', GameConstants.Region.alola, 27,
@@ -1710,14 +1710,14 @@ Routes.add(new RegionRoute(
     new RoutePokemon({
         land: ['Alolan Raticate', 'Fearow', 'Hypno', 'Tauros', 'Miltank', 'Pelipper', 'Hariyama', 'Cottonee', 'Petilil', 'Trumbeak', 'Gumshoos', 'Mudsdale'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 27)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 27)]
 ));
 Routes.add(new RegionRoute(
     'Poni Coast', GameConstants.Region.alola, 29,
     new RoutePokemon({
         land: ['Alolan Dugtrio'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 28)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 28)]
 ));
 Routes.add(new RegionRoute(
     'Poni Gauntlet', GameConstants.Region.alola, 30,
@@ -1725,7 +1725,7 @@ Routes.add(new RegionRoute(
         land: ['Pelipper', 'Lickitung', 'Golduck', 'Granbull', 'Inkay', 'Bewear'],
         water: ['Magikarp', 'Dratini', 'Barboach'],
     }),
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 29)]
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 29)]
 ));
 
 /*
