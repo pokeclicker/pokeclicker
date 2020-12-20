@@ -15016,11 +15016,11 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 56,
         'catchRate': 190,
-        //'evolutions': [
-        //    new DayTimedLevelEvolution('Rockruff', 'Lycanrock (Midday)', 25),
-        //    new NightTimedLevelEvolution('Rockruff', 'Lycanrock (Midnight)', 25),
-        //    new DuskTimedLevelEvolution('Rockruff', 'Lycanrock (Dusk)', 25),
-        //],
+        'evolutions': [
+            TimeRestrictedLevelEvolution(6, 16, 'Rockruff', 'Lycanrock (Midday)', 25),
+            TimeRestrictedLevelEvolution(16, 20, 'Rockruff', 'Lycanrock (Dusk)', 25),
+            TimeRestrictedLevelEvolution(20, 6, 'Rockruff', 'Lycanrock (Midnight)', 25),
+        ],
         'base': {
             'hitpoints': 45,
             'attack': 65,
