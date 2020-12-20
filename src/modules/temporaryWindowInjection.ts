@@ -10,6 +10,9 @@ import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
+import WeatherType from './weather/WeatherType';
+import Weather from './weather/Weather';
+import SeededRand from './utilities/SeededRand';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -23,4 +26,7 @@ Object.assign(<any>window, {
     RangeSetting,
     Setting,
     SettingOption,
+    WeatherType,
+    Weather,
+    SeededRand,
 });

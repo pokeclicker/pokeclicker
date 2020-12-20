@@ -11,3 +11,5 @@ enum WeatherType {
     Fog,
     Windy,
 }
+
+export default WeatherType;
