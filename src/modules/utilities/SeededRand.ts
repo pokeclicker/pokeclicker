@@ -1,4 +1,6 @@
-class SeededRand {
+import { MINUTE, HOUR } from '../GameConstants';
+
+export default class SeededRand {
     private static state = 12345;
     private static readonly MOD: number = 233280;
     private static readonly OFFSET: number = 49297;
@@ -17,9 +19,9 @@ class SeededRand {
     public static seedWithDateHour(d: Date, hours = 1): void {
         // Adjust date for timezone offset and hours rounded
         const time = d.getTime();
-        const offset = -(d.getTimezoneOffset() * (GameConstants.MINUTE));
+        const offset = -(d.getTimezoneOffset() * (MINUTE));
         const offsetTime = time + offset;
-        const newDate = new Date(time - offsetTime % (GameConstants.HOUR * hours));
+        const newDate = new Date(time - (offsetTime % (HOUR * hours)));
         const newHour = newDate.getHours();
         // Set state based on adjusted date
         this.seedWithDate(newDate);
@@ -33,7 +35,7 @@ class SeededRand {
 
     // get a number between min and max (both inclusive)
     public static intBetween(min: number, max: number): number {
-        return Math.floor( (max - min + 1) * SeededRand.next() + min );
+        return Math.floor((max - min + 1) * SeededRand.next() + min);
     }
 
     public static boolean(): boolean {
@@ -47,11 +49,11 @@ class SeededRand {
     public static fromWeightedArray<T>(arr: Array<T>, weights: Array<number>): T {
         const max = weights.reduce((acc, weight) => acc + weight, 0);
         let rand = this.intBetween(1, max);
-        return arr.find((e, i) => (rand -= weights[i]) <= 0) || arr[0];
+        return arr.find((_e, i) => (rand -= weights[i]) <= 0) || arr[0];
     }
 
-    public static fromEnum(arr): number {
-        arr = Object.keys(arr).map(Number).filter(item => item >= 0);
+    public static fromEnum(_enum): number {
+        const arr = Object.keys(_enum).map(Number).filter((item) => item >= 0);
         return this.fromArray(arr);
     }
 }

@@ -1,7 +1,7 @@
 /// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="RegionRoute.ts"/>
 ///<reference path="../../scripts/GameConstants.d.ts" />
-/// <reference path="../weather/WeatherType.ts"/>
+/// <reference path="../../declarations/weather/WeatherType.d.ts"/>
 /// <reference path="../achievements/WeatherRequirement.ts"/>
 
 class Routes {
