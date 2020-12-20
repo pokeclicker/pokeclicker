@@ -1,6 +1,7 @@
+/// <reference path="../party/PartyListController.ts" />
 /// <reference path="./machines/PlacedMachine.ts" />
 
-class LabController {
+class LabController extends PartyListController {
 
     public static openLabModal() {
         if (App.game.lab.canAccess()) {
@@ -32,29 +33,38 @@ class LabController {
                 return false;
             }
 
-            return BreedingController.applyFilter(partyPokemon);
+            return LabController.applyFilters(partyPokemon);
         });
     }
 
-    public static handleClick(partyPokemon: PartyPokemon) {
-        const research = App.game.lab.currentResearch()[LabController.selectedResearchSlot()];
+    private static canAddWorkers(researchSlotIndex: number) {
+        const research = App.game.lab.currentResearch()[researchSlotIndex];
         if (!research) {
+            return false;
+        }
+        return research.workers.length < research.maxWorkers;
+    }
+
+    public static disabled(partyPokemon: PartyPokemon) {
+        return !this.canAddWorkers(LabController.selectedResearchSlot());
+    }
+
+    public static handleClick(partyPokemon: PartyPokemon) {
+        if (!this.canAddWorkers(LabController.selectedResearchSlot())) {
             return;
         }
-        if (research.workers.length === research?.maxWorkers) {
-            return;
-        }
+        const research = App.game.lab.currentResearch()[LabController.selectedResearchSlot()];
         research.addWorker(partyPokemon);
 
         // Check if close Modal
         if (research.workers.length === research.maxWorkers) {
-            $('#partyListModal').modal('hide');
+            $('#researchWorkerModal').modal('hide');
         }
     }
 
     public static openPartyListModal(index: number) {
         LabController.selectedResearchSlot(index);
-        $('#partyListModal').modal('show');
+        $('#researchWorkerModal').modal('show');
     }
 
     //#endregion
