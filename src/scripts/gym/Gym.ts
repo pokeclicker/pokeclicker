@@ -1328,5 +1328,3 @@ gymList['Elite Kahili'] = new Gym(
     'It\'s frustrating to me as a member of the Elite Four, but it seems your strength is the real deal.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Acerola)]
 );
-
-//TODO: Hao champion battle, team depends on starter
