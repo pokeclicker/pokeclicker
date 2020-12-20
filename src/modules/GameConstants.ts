@@ -402,6 +402,9 @@ export const Environments: Record<string, EnvironmentData> = {
         2: new Set([105, 106, 107, 108, 109, 118, 122, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134]),
         3: new Set([218, 219, 220, 223, 230, 'Lake Verity', 'Lake Valor', 'Pastoria City']),
         4: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
+        5: new Set(),
+        6: new Set(),
+        7: new Set(),
     },
 
     Ice: {
@@ -410,6 +413,9 @@ export const Environments: Record<string, EnvironmentData> = {
         2: new Set(['Shoal Cave', 'Sootopolis City']),
         3: new Set([216, 217, 'Lake Acuity', 'Snowpoint City']),
         4: new Set(['Giant Chasm']),
+        5: new Set(),
+        6: new Set(),
+        7: new Set(),
     },
 
     Forest: {
@@ -418,6 +424,9 @@ export const Environments: Record<string, EnvironmentData> = {
         2: new Set([119, 'Petalburg Woods']),
         3: new Set([201, 204, 'Eterna Forest', 'Eterna City', 'Fullmoon Island', 'Newmoon Island']),
         4: new Set([6, 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove', 'Floccesy Town']),
+        5: new Set(),
+        6: new Set(),
+        7: new Set(),
     },
 
     Cave: {
@@ -426,6 +435,9 @@ export const Environments: Record<string, EnvironmentData> = {
         2: new Set(['Rustboro City', 'Dewford Town', 'Rusturf Tunnel', 'Granite Cave', 'New Mauville', 'Meteor Falls', 'Victory Road Hoenn', 'Seafloor Cavern']),
         3: new Set(['Oreburgh Gate', 'Oreburgh City', 'Ravaged Path', 'Wayward Cave', 'Mt. Coronet South', 'Iron Island', 'Mt. Coronet North', 'Victory Road Sinnoh']),
         4: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
+        5: new Set(),
+        6: new Set(),
+        7: new Set(),
     },
 
     GemCave: {
@@ -434,6 +446,9 @@ export const Environments: Record<string, EnvironmentData> = {
         2: new Set(['Cave of Origin', 'Sky Pillar', 'Sealed Chamber']),
         3: new Set(['Spear Pillar', 'Hall of Origin', 'Stark Mountain']),
         4: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
+        5: new Set(),
+        6: new Set(),
+        7: new Set(),
     },
 
     PowerPlant: {
@@ -442,6 +457,9 @@ export const Environments: Record<string, EnvironmentData> = {
         2: new Set(['Mauville City']),
         3: new Set(['Sunyshore City']),
         4: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
+        5: new Set(),
+        6: new Set(),
+        7: new Set(),
     },
 
     Mansion: {
@@ -450,6 +468,9 @@ export const Environments: Record<string, EnvironmentData> = {
         2: new Set(['Lavaridge Town', 'Petalburg City', 'Jagged Pass', 'Fiery Path', 'Mt. Chimney']),
         3: new Set(['Old Chateau', 'Veilstone City', 'Canalave City', 'Snowpoint Temple']),
         4: new Set(['Castelia City', 'Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
+        5: new Set(),
+        6: new Set(),
+        7: new Set(),
     },
 
     Graveyard: {
@@ -458,6 +479,9 @@ export const Environments: Record<string, EnvironmentData> = {
         2: new Set(['Mossdeep City', 'Mt. Pyre']),
         3: new Set(['Hearthome City']),
         4: new Set(['Celestial Tower']),
+        5: new Set(),
+        6: new Set(),
+        7: new Set(),
     },
 };
 
