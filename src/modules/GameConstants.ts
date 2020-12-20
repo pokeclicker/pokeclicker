@@ -891,6 +891,37 @@ export const KalosDungeons = [
     // 'Unknown Dungeon',
 ];
 
+export const AlolaDungeons = [
+    'Exeggutor Island',
+    'Trainers\' School',
+    'Hau\'oli Cemetery',
+    'Verdant Cavern',
+    'Melemele Meadow',
+    'Seaward Cave',
+    'Ten Carat Hill',
+    'Ruins of Conflict',
+    'Pikachu Valley',
+    'Paniola Ranch',
+    'Brooklet Hill',
+    'Wela Volcano Park',
+    'Lush Jungle',
+    'Diglett\'s Tunnel',
+    'Memorial Hill',
+    'Ruins of Life',
+    'Malie Garden',
+    'Hokulani Observatory',
+    'Thrifty Megamart',
+    'Ula\'ula Meadow',
+    'Po Town',
+    'Mount Lanikala',
+    'Ruins of Abundance',
+    'Vast Poni Canyon',
+    'Nebby',
+    'Ruins of Hope',
+    'Poni Meadow',
+    'Resolution Cave',
+];
+
 export const RegionDungeons = [
     KantoDungeons,
     JohtoDungeons,
@@ -898,6 +929,7 @@ export const RegionDungeons = [
     SinnohDungeons,
     UnovaDungeons,
     KalosDungeons,
+    AlolaDungeons,
 ];
 
 export function getDungeonIndex(dungeon: string): number {
@@ -911,6 +943,7 @@ export const StartingTowns = [
     'Twinleaf Town',
     'Aspertia City',
     'Vaniville Town',
+    '',
 ];
 
 export const DockTowns = [
@@ -920,4 +953,5 @@ export const DockTowns = [
     'Canalave City',
     'Castelia City',
     'Coumarine City',
+    '',
 ];
