@@ -1,9 +1,9 @@
-interface LogBookType {
+export type LogBookType = {
     display: string;
     label: string;
-}
+};
 
-const LogBookTypes: Record<string, LogBookType> = {
+export const LogBookTypes: Record<string, LogBookType> = {
     NEW: {
         display: 'primary',
         label: 'NEW',

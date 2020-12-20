@@ -1,4 +1,6 @@
-class LogBookLog {
+import { LogBookType } from './LogBookTypes';
+
+export default class LogBookLog {
     public type: LogBookType;
     public description: string;
     public date: number;
