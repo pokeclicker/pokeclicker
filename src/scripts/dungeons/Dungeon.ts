@@ -994,7 +994,7 @@ dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Flabébé', 8000000, 70),
+        new DungeonBossPokemon('Flabébé (Red)', 8000000, 70),
         new DungeonBossPokemon('Oricorio (Pom-pom)', 8000000, 70),
     ],
     96500, 201, 35);
@@ -1021,7 +1021,7 @@ dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
     96500, 201, 35);
 
 dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
-    ['Florges', 'Comfey', 'Dedenne', 'Ampharos', 'Electivire'],
+    ['Florges (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electivire'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1105,7 +1105,7 @@ dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
     96500, 201, 35);
 
 dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
-    ['Florges', 'Comfey', 'Gardevoir', 'Chimecho', 'Musharna'],
+    ['Florges (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Musharna'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1152,7 +1152,7 @@ dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Floette', 8000000, 70),
+        new DungeonBossPokemon('Floette (Red)', 8000000, 70),
         new DungeonBossPokemon('Oricorio (Baile)', 8000000, 70),
     ],
     96500, 201, 35);
@@ -1182,7 +1182,7 @@ dungeonList['Mount Lanikala'] = new Dungeon('Mount Lanikala',
     96500, 201, 35);
 
 dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
-    ['Florges', 'Comfey', 'Whimsicott', 'Bellossom', 'Lilligant'],
+    ['Florges (Red)', 'Comfey', 'Whimsicott', 'Bellossom', 'Lilligant'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1223,7 +1223,7 @@ dungeonList['Nebby'] = new Dungeon('Nebby',
     96500, 201, 35);
 
 dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
-    ['Florges', 'Comfey', 'Azumarill', 'Politoed', 'Gorebyss'],
+    ['Florges (Red)', 'Comfey', 'Azumarill', 'Politoed', 'Gorebyss'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1239,7 +1239,7 @@ dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
     2203000,
     [
         new DungeonBossPokemon('Oricorio (Sensu)', 8000000, 70),
-        new DungeonBossPokemon('Floette', 8000000, 70),
+        new DungeonBossPokemon('Floette (Red)', 8000000, 70),
     ],
     96500, 201, 35);
 
