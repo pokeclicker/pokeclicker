@@ -130,8 +130,7 @@ export default class Weather {
 
             // Select weather based on weighted odds
             const selectedWeather = SeededRand.fromWeightedArray(dist, dist.map((w) => Weather.weatherConditions[w].weight));
-            // eslint-disable-next-line no-console
-            console.log(selectedWeather);
+
             // Set selected weather or Clear if failed
             weather(selectedWeather || WeatherType.Clear);
         });
