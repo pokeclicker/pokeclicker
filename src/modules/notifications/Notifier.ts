@@ -1,7 +1,12 @@
-class Notifier {
+import NotificationOption from './NotificationOption';
+import Sound from '../utilities/Sound';
+import BooleanSetting from '../settings/BooleanSetting';
+import Settings from '../settings/Settings';
+
+export default class Notifier {
     public static notify({
         message,
-        type = NotificationConstants.NotificationOption.primary,
+        type = NotificationOption.primary,
         title = '',
         timeout = 3000,
         time = 'just now',
@@ -9,7 +14,7 @@ class Notifier {
         setting = null,
     }: {
         message: string;
-        type?: NotificationConstants.NotificationOption;
+        type?: NotificationOption;
         title?: string;
         timeout?: number;
         time?: string,
@@ -29,7 +34,7 @@ class Notifier {
 
             // Get the notification ready to display
             const toastID = Math.random().toString(36).substr(2, 9);
-            const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationConstants.NotificationOption[type]}" data-autohide="false">
+            const toastHTML = `<div id="${toastID}" class="toast bg-${NotificationOption[type]}" data-autohide="false">
                   ${title ? `<div class="toast-header">
                     <strong class="mr-auto text-primary">${title || ''}</strong>
                     <small class="text-muted">${time}</small>
@@ -43,10 +48,10 @@ class Notifier {
             $('#toaster').prepend(toastHTML);
 
             // Show the notification
-            $('.toast').toast('show');
+            $('.toast')?.toast('show');
 
             // Once the notification is shown, hide it after specified timeout
-            $(`#${toastID}`).on('shown.bs.toast', (el) => {
+            $(`#${toastID}`).on('shown.bs.toast', () => {
                 setTimeout(() => {
                     $(`#${toastID}`).toast('hide');
                 }, timeout);

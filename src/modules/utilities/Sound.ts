@@ -1,9 +1,11 @@
-class Sound {
+import Settings from '../settings/Settings';
+
+export default class Sound {
     public sound = document.createElement('audio');
     public name: string;
     public initialized = false;
 
-    constructor (fileName: string, soundName: string) {
+    constructor(fileName: string, soundName: string) {
         const src = `assets/sounds/${fileName}.mp3`;
         this.name = soundName;
         this.sound.setAttribute('preload', 'auto');
@@ -36,19 +38,19 @@ class Sound {
         });
     }
 
-    play () {
+    play() {
         if (this.initialized && this.canPlay()) {
             this.sound.play();
         }
     }
 
-    stop () {
+    stop() {
         if (this.initialized) {
             this.sound.pause();
         }
     }
 
-    remove () {
+    remove() {
         if (this.initialized) {
             this.sound.remove();
         }
