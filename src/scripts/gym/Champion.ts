@@ -5,7 +5,7 @@ class Champion extends Gym {
     constructor(
         leaderName: string,
         town: string,
-        pokemons: GymPokemon[],
+        public basePokemon: GymPokemon[],
         badgeReward: BadgeEnums,
         moneyReward: number,
         rewardMessage: string,
@@ -14,10 +14,11 @@ class Champion extends Gym {
         public alternativePokemon2: GymPokemon[],
         public alternativePokemon3: GymPokemon[]
     ) {
-        super(leaderName, town, pokemons, badgeReward, moneyReward, rewardMessage, requirements);
+        super(leaderName, town, basePokemon, badgeReward, moneyReward, rewardMessage, requirements);
     }
 
     public setPokemon(starter: GameConstants.Starter) {
+        this.pokemons = this.basePokemon;
         switch (starter) {
             case GameConstants.Starter.Bulbasaur: {
                 this.pokemons.push(...this.alternativePokemon1);
@@ -74,7 +75,7 @@ gymList['Champion Hao'] = new Champion(
     'Hao',
     'Champion Hao',
     [
-        new GymPokemon('Raichu', 2015330, 59),
+        new GymPokemon('Alolan Raichu', 2015330, 59),
         new GymPokemon('Tauros', 2015330, 58),
         new GymPokemon('Noivern', 2015330, 58),
         new GymPokemon('Crabominable', 2015330, 59),
