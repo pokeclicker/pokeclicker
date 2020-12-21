@@ -154,8 +154,7 @@ class Lab implements Feature {
     }
 
     canAccess(): boolean {
-        // TODO: HLXII - Figure out how to access this.
-        return true;
+        return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Laboratory_key);
     }
 
     beginResearch(research: Research) {
