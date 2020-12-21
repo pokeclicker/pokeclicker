@@ -13,6 +13,8 @@ import SettingOption from './settings/SettingOption';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import SeededRand from './utilities/SeededRand';
+import LogBook from './logbook/LogBook';
+import { LogBookTypes } from './logbook/LogBookTypes';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -29,4 +31,6 @@ Object.assign(<any>window, {
     WeatherType,
     Weather,
     SeededRand,
+    LogBook,
+    LogBookTypes,
 });
