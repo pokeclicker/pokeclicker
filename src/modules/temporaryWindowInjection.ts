@@ -13,6 +13,10 @@ import SettingOption from './settings/SettingOption';
 import WeatherType from './weather/WeatherType';
 import Weather from './weather/Weather';
 import SeededRand from './utilities/SeededRand';
+import Settings from './settings/index';
+import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
+import NotificationConstants from './notifications/NotificationConstants';
+import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
 import { LogBookTypes } from './logbook/LogBookTypes';
 
@@ -31,6 +35,11 @@ Object.assign(<any>window, {
     WeatherType,
     Weather,
     SeededRand,
+    Settings,
+    NotificationConstants,
+    Notifier,
+    SortOptionConfigs,
+    SortOptions,
     LogBook,
     LogBookTypes,
 });

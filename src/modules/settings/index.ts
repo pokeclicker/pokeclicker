@@ -1,62 +1,21 @@
-/// <reference path="../../declarations/settings/Setting.d.ts" />
-/// <reference path="../../declarations/settings/BooleanSetting.d.ts" />
-/// <reference path="../../declarations/settings/RangeSetting.d.ts" />
-/// <reference path="./SortOptions.ts" />
+import Settings from './Settings';
+import Setting from './Setting';
+import SettingOption from './SettingOption';
+import BooleanSetting from './BooleanSetting';
+import RangeSetting from './RangeSetting';
+import PokemonType from '../enums/PokemonType';
+import NotificationConstants from '../notifications/NotificationConstants';
+import DynamicBackground from '../background/DynamicBackground';
+import { SortOptionConfigs, SortOptions } from './SortOptions';
+import { Region } from '../GameConstants';
 
-class Settings {
-    static list: Setting<any>[] = [];
-
-
-    static add(setting: Setting<any>) {
-        if (!this.getSetting(setting.name)) {
-            this.list.push(setting);
-        }
-    }
-
-    static load(dict) {
-        for (const name in dict) {
-            const value = dict[name];
-            this.setSettingByName(name, value);
-        }
-    }
-
-    static setSettingByName(name: string, value: any) {
-        const setting = this.getSetting(name);
-        if (setting) {
-            setting.set(value);
-        } else {
-            console.warn(`Setting ${name} does not exist`);
-        }
-
-    }
-
-    static getSetting(name: string): Setting<any> {
-        for (let i = 0; i < this.list.length; i++) {
-            if (this.list[i].name == name) {
-                return this.list[i];
-            }
-        }
-        return null;
-    }
-
-    static save() {
-        const dict = {};
-        for (let i = 0; i < this.list.length; i++) {
-            dict[this.list[i].name] = this.list[i].value;
-        }
-        return JSON.stringify(dict);
-    }
-
-    static enumToSettingOptionArray(obj: any, filter = (v) => true) {
-        return GameHelper.enumStrings(obj).filter(filter).map(val => new SettingOption(GameConstants.camelCaseToString(val), `${obj[val]}`));
-    }
-}
+export default Settings;
 
 /*
  * THESE SETTINGS SHOULD ALL BE PUT IN SETTINGS MENU
  */
 
-//Display settings
+// Display settings
 Settings.add(
     new Setting<string>('theme', 'Theme',
         [
@@ -82,24 +41,21 @@ Settings.add(
             new SettingOption('United', 'united'),
             new SettingOption('Yeti (default)', 'yeti'),
         ],
-        'yeti'
-    )
+        'yeti'),
 );
 Settings.add(new Setting<string>('breedingDisplay', 'Breeding progress display:',
     [
         new SettingOption('Percentage', 'percentage'),
         new SettingOption('Step count', 'stepCount'),
     ],
-    'percentage'
-));
+    'percentage'));
 Settings.add(new Setting<string>('shopButtons', 'Shop amount buttons:',
     [
         new SettingOption('+10, +100', 'original'),
         new SettingOption('+100, +1000', 'bigplus'),
         new SettingOption('×10, ÷10', 'multiplication'),
     ],
-    'original'
-));
+    'original'));
 Settings.add(new BooleanSetting('showCurrencyGainedAnimation', 'Show currency gained animation', true));
 Settings.add(new Setting<string>('backgroundImage', 'Background image:',
     [
@@ -107,44 +63,39 @@ Settings.add(new Setting<string>('backgroundImage', 'Background image:',
         new SettingOption('Night', 'background-night'),
         new SettingOption('Dynamic', 'background-dynamic'),
     ],
-    'background-day'
-));
+    'background-day'));
 Settings.add(new Setting<string>('eggAnimation', 'Egg Hatching Animation:',
     [
         new SettingOption('None', 'none'),
         new SettingOption('Almost & fully ready', 'almost'),
         new SettingOption('Fully ready', 'full'),
     ],
-    'full'
-));
+    'full'));
 Settings.add(new Setting<string>('hideHatchery', 'Hide Hatchery Modal:',
     [
         new SettingOption('Never', 'never'),
         new SettingOption('Egg Slots Full', 'egg'),
         new SettingOption('Queue Slots Full', 'queue'),
     ],
-    'queue'
-));
+    'queue'));
 Settings.add(new Setting<string>('farmDisplay', 'Farm timer display:',
     [
         new SettingOption('To Next Stage', 'nextStage'),
         new SettingOption('Ripe/Death', 'ripeDeath'),
     ],
-    'nextStage'
-));
+    'nextStage'));
 
 // Other settings
 Settings.add(new BooleanSetting('disableAutoDownloadBackupSaveOnUpdate', 'Disable automatic backup save downloading when game updates', false));
 
-
 // Sound settings
-Object.values(NotificationConstants.NotificationSound).forEach(sound => {
+Object.values(NotificationConstants.NotificationSound).forEach((sound) => {
     Settings.add(new BooleanSetting(`sound.${sound.name}`, sound.name, true));
 });
 Settings.add(new RangeSetting('sound.volume', 'Volume', 0, 100, 1, 100));
 
 // Notification settings
-Object.values(NotificationConstants.NotificationSetting).forEach(setting => {
+Object.values(NotificationConstants.NotificationSetting).forEach((setting) => {
     Settings.add(setting);
 });
 
@@ -158,47 +109,41 @@ const sortsettings = Object.keys(SortOptionConfigs).map((opt) => (
 ));
 Settings.add(new Setting<number>('partySort', 'Sort:',
     sortsettings,
-    SortOptions.id
-));
+    SortOptions.id));
 Settings.add(new BooleanSetting('partySortDirection', 'reverse', false));
 
 // Breeding Filters
 Settings.add(new Setting<string>('breedingCategoryFilter', 'breedingCategoryFilter',
     [],
-    '-1'
-));
+    '-1'));
 Settings.add(new Setting<string>('breedingRegionFilter', 'breedingRegionFilter',
     [
         new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(GameConstants.Region, r => r != 'none'),
+        ...Settings.enumToSettingOptionArray(Region, (r) => r !== 'none'),
         new SettingOption('None', '-1'),
     ],
-    '-2'
-));
+    '-2'));
 Settings.add(new Setting<string>('breedingTypeFilter1', 'breedingTypeFilter1',
     [
         new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(PokemonType, t => t != 'None'),
+        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
         new SettingOption('None', '-1'),
     ],
-    '-2'
-));
+    '-2'));
 Settings.add(new Setting<string>('breedingTypeFilter2', 'breedingTypeFilter2',
     [
         new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(PokemonType, t => t != 'None'),
+        ...Settings.enumToSettingOptionArray(PokemonType, (t) => t !== 'None'),
         new SettingOption('None', '-1'),
     ],
-    '-2'
-));
+    '-2'));
 Settings.add(new Setting<string>('breedingShinyFilter', 'breedingShinyFilter',
     [
         new SettingOption('All', '-1'),
         new SettingOption('Not Shiny', '0'),
         new SettingOption('Shiny', '1'),
     ],
-    '-1'
-));
+    '-1'));
 Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter',
     [
         new SettingOption('Attack', 'attack'),
@@ -209,12 +154,12 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Breeding Efficiency', 'breedingEfficiency'),
         new SettingOption('Steps per Attack Bonus', 'stepsPerAttack'),
     ],
-    'attack'
-));
+    'attack'));
 
 /*
  * SUBSCRIBERS
  */
-Settings.getSetting('backgroundImage').observableValue.subscribe(newValue => {
-    newValue == 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
+Settings.getSetting('backgroundImage').observableValue.subscribe((newValue) => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    newValue === 'background-dynamic' ? DynamicBackground.startScene() : DynamicBackground.stopScene();
 });
