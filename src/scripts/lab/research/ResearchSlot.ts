@@ -19,8 +19,19 @@ class ResearchSlot implements Saveable {
         this.notification = false;
 
         this._maxWorkers = ko.pureComputed(() => {
-            // TODO: HLXII - Update to depend on research. Will also need to determine which slot this is
-            return 1;
+            if (App.game.lab.researchList[Lab.Research.research_workers4].completed) {
+                return 20;
+            }
+            if (App.game.lab.researchList[Lab.Research.research_workers3].completed) {
+                return 16;
+            }
+            if (App.game.lab.researchList[Lab.Research.research_workers2].completed) {
+                return 12;
+            }
+            if (App.game.lab.researchList[Lab.Research.research_workers1].completed) {
+                return 8;
+            }
+            return 4;
         });
     }
 

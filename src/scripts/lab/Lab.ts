@@ -73,12 +73,27 @@ class Lab implements Feature {
         //#region Research
 
         this.researchList = [
+            // Research Slots
             new Research(Lab.Research.research_slot1, ResearchType.Research_Slot,
                 'Research Slot I', 'Unlocks a second Research Slot.',
-                1000),
+                10000),
             new Research(Lab.Research.research_slot2, ResearchType.Research_Slot,
                 'Research Slot II', 'Unlocks a third Research Slot.',
-                1000, { requirements: [new ResearchedRequirement(Lab.Research.research_slot1)] }),
+                30000, { requirements: [new ResearchedRequirement(Lab.Research.research_slot1)] }),
+
+            // Research Slot Workers
+            new Research(Lab.Research.research_workers1, ResearchType.Research_Slot,
+                'Research Workers I', 'Increases max research workers to 8.',
+                1000),
+            new Research(Lab.Research.research_workers2, ResearchType.Research_Slot,
+                'Research Workers II', 'Increases max research workers to 12.',
+                4000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers1)] }),
+            new Research(Lab.Research.research_workers3, ResearchType.Research_Slot,
+                'Research Workers III', 'Increases max research workers to 16.',
+                16000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers2)] }),
+            new Research(Lab.Research.research_workers4, ResearchType.Research_Slot,
+                'Research Workers IV', 'Increases max research workers to 20.',
+                64000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers3)] }),
             // TODO: HLXII - Implement after Typed BF is implemented
             /*
             new TypeBoosterResearch(Lab.Research.type_boost_normal, PokemonType.Normal, 100),
@@ -255,6 +270,10 @@ namespace Lab {
     export enum Research {
         'research_slot1' = 0,
         'research_slot2',
+        'research_workers1',
+        'research_workers2',
+        'research_workers3',
+        'research_workers4',
         'type_boost_normal',
         'type_boost_fire',
         'type_boost_water',
