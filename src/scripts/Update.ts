@@ -298,7 +298,7 @@ class Update implements Saveable {
             }
         },
 
-        '0.6.7': ({ playerData, saveData }) => {
+        '0.6.9': ({ playerData, saveData }) => {
             // TODO: HLXII - Move this to the version it'll be released in
             for (const pokemon of saveData.party.caughtPokemon) {
                 if (pokemon.breeding) {

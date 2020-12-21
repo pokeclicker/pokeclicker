@@ -128,6 +128,10 @@ class LabController extends PartyListController {
         return true;
     });
 
+    public static getLabImage(): string {
+        return `assets/images/lab/Lab${App.game.lab.labLevel()}.png`;
+    }
+
     public static setupGrid() {
         const grid = $('#labGrid');
 

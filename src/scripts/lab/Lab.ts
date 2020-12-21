@@ -30,9 +30,9 @@ class Lab implements Feature {
      */
     public static labSizes: Record<number, {x: number, y: number}> = {
         1: {x: 6, y: 7},
-        2: {x: 8, y: 9},
-        3: {x: 10, y: 11},
-        4: {x: 12, y: 13},
+        2: {x: 7, y: 8},
+        3: {x: 8, y: 9},
+        4: {x: 9, y: 10},
     };
 
     constructor() {
@@ -50,8 +50,6 @@ class Lab implements Feature {
         });
 
         this.labLevel = ko.pureComputed(() => {
-            return 1;
-            // TODO: HLXII - Use this logic when lab size is implemented
             if (MapHelper.accessToTown('Sunyshore City')) {
                 return 4;
             }
