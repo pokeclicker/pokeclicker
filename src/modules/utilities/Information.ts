@@ -1,4 +1,6 @@
-class Information {
+import introJs from '../../../node_modules/intro.js';
+
+export default class Information {
     static defaultOptions = {
         showStepNumbers: false, // Hide the red step number on element
         hideNext: true, // Hide next button on last step
@@ -6,8 +8,6 @@ class Information {
         exitOnOverlayClick: false, // Disable this, incase user clicking intensely
         showBullets: false,
     };
-
-    constructor() {}
 
     static show(options = {}) {
         return introJs().setOptions({
