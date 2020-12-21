@@ -17,6 +17,8 @@ import Settings from './settings/index';
 import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
 import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
+import LogBook from './logbook/LogBook';
+import { LogBookTypes } from './logbook/LogBookTypes';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -38,4 +40,6 @@ Object.assign(<any>window, {
     Notifier,
     SortOptionConfigs,
     SortOptions,
+    LogBook,
+    LogBookTypes,
 });
