@@ -1,3 +1,5 @@
+import Changelog from './Changelog';
+
 enum ChangeLogType {
     DEFAULT,
     UPDATE,
@@ -11,7 +13,7 @@ enum ChangeLogType {
 type ChangelogConfig = {
     display: string,
     label: string,
-}
+};
 
 const changelogType: Record<keyof typeof ChangeLogType, ChangelogConfig> = {
     UPDATE: { display: 'dark', label: 'UPDATE' },
@@ -23,19 +25,12 @@ const changelogType: Record<keyof typeof ChangeLogType, ChangelogConfig> = {
     DEFAULT: { display: 'default', label: '-' }, // unused - can be changed
 };
 
-class Changelog {
-    constructor(
-        public type: ChangelogConfig = changelogType.DEFAULT,
-        public description: string
-    ) {}
-}
-
-class ChangelogUpdate extends Changelog {
+export default class ChangelogUpdate extends Changelog {
     constructor(
         version: string,
-        date: Date
+        date: Date,
     ) {
-        const dateFormat: Intl.DateTimeFormatOptions = {year: 'numeric', month: 'long', day: 'numeric'};
+        const dateFormat: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
         const description = `<code>${version}  -  ${date.toLocaleDateString(undefined, dateFormat)}</code>`;
         super(changelogType.UPDATE, description);
     }
@@ -48,7 +43,7 @@ class ChangelogUpdate extends Changelog {
  * MINOR - Will increment for each feature refactor or large changes to a feature
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
-const changelogItems = [
+export const changelogItems = [
     // note that month is 0 indexed
     // v0.6.9
     new ChangelogUpdate('v0.6.9', new Date(2020, 11, 20)),

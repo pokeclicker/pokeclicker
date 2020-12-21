@@ -19,6 +19,8 @@ import NotificationConstants from './notifications/NotificationConstants';
 import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
 import { LogBookTypes } from './logbook/LogBookTypes';
+import changelog from './changelog/Changelog';
+import { changelogItems } from './changelog/ChangelogType';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -42,4 +44,6 @@ Object.assign(<any>window, {
     SortOptions,
     LogBook,
     LogBookTypes,
+    changelog,
+    changelogItems,
 });
