@@ -10,6 +10,15 @@ import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
+import WeatherType from './weather/WeatherType';
+import Weather from './weather/Weather';
+import SeededRand from './utilities/SeededRand';
+import Settings from './settings/index';
+import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
+import NotificationConstants from './notifications/NotificationConstants';
+import Notifier from './notifications/Notifier';
+import LogBook from './logbook/LogBook';
+import { LogBookTypes } from './logbook/LogBookTypes';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -23,4 +32,14 @@ Object.assign(<any>window, {
     RangeSetting,
     Setting,
     SettingOption,
+    WeatherType,
+    Weather,
+    SeededRand,
+    Settings,
+    NotificationConstants,
+    Notifier,
+    SortOptionConfigs,
+    SortOptions,
+    LogBook,
+    LogBookTypes,
 });

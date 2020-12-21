@@ -1,23 +1,14 @@
-/// <reference path="../declarations/settings/BooleanSetting.d.ts" />
-/// <reference path="./utilities/Sound.ts" />
+import BooleanSetting from '../settings/BooleanSetting';
+import Sound from '../utilities/Sound';
+import NotificationOption from './NotificationOption';
 
 /**
  * Contains all notification constants for easy access.
  */
 
-namespace NotificationConstants {
-    export enum NotificationOption {
-        info,
-        success,
-        warning,
-        danger,
-        primary,
-        secondary,
-        dark,
-        light,
-    }
-
-    export const NotificationSound = {
+const NotificationConstants = {
+    NotificationOption,
+    NotificationSound: {
         ready_to_hatch: new Sound('ready_to_hatch', 'Egg ready to hatch'),
         empty_queue: new Sound('empty_queue', 'Hatchery queue is empty'),
         shiny_long: new Sound('shiny_long', 'Shiny Pokémon encountered/hatched'),
@@ -28,8 +19,8 @@ namespace NotificationConstants {
         quest_level_increased: new Sound('quest_level_increased', 'Quest level increased'),
         underground_energy_full: new Sound('underground_energy_full', 'Mining energy reached maximum capacity'),
         ready_to_harvest: new Sound('ready_to_harvest', 'Farm ready to harvest'),
-    };
-    export const NotificationSetting = {
+    },
+    NotificationSetting: {
         ready_to_hatch: new BooleanSetting('notification.ready_to_hatch', 'Egg ready to hatch', true),
         hatched: new BooleanSetting('notification.hatched', 'Egg hatched', true),
         hatched_shiny: new BooleanSetting('notification.hatched_shiny', 'Egg hatched a shiny', true),
@@ -44,5 +35,7 @@ namespace NotificationConstants {
         dropped_item: new BooleanSetting('notification.dropped_item', 'Enemy Pokémon dropped an item', true),
         ready_to_harvest: new BooleanSetting('notification.ready_to_harvest', 'Berry ready to harvest', true),
         gym_won: new BooleanSetting('notification.gym_won', 'Gym leader defeated', true),
-    };
-}
+    },
+};
+
+export default NotificationConstants;

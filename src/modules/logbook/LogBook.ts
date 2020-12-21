@@ -1,11 +1,15 @@
-/// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+/* eslint-disable class-methods-use-this */
+import { ObservableArray } from 'knockout';
+import { Feature } from '../DataStore/common/Feature';
+import LogBookLog from './LogBookLog';
+import { LogBookType } from './LogBookTypes';
 
-class LogBook implements Feature {
+export default class LogBook implements Feature {
     name = 'Log Book';
     saveKey = 'logbook';
     defaults: Record<string, any>;
 
-    public logs: KnockoutObservableArray<LogBookLog> = ko.observableArray([]);
+    public logs: ObservableArray<LogBookLog> = ko.observableArray([]);
 
     newLog(type: LogBookType, message: string) {
         const length = this.logs.unshift(new LogBookLog(type, message));
@@ -19,7 +23,7 @@ class LogBook implements Feature {
             return;
         }
 
-        json.logs.forEach(entry => {
+        json.logs.forEach((entry) => {
             this.logs.push(new LogBookLog(entry.type, entry.description, entry.date));
         });
     }
@@ -36,5 +40,5 @@ class LogBook implements Feature {
         return true;
     }
 
-    update(delta: number): void {}  // This method intentionally left blank
+    update(): void {} // This method intentionally left blank
 }
