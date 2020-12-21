@@ -82,7 +82,7 @@ gymList['Champion Hao'] = new Champion(
     ],
     BadgeEnums.Elite_AlolaChampion,
     100000,
-    'Why? Why did I lose? I never made any mistakes raising my Pokémon… Darn it! You\'re the new Pokémon League Champion! Although I don\'t like to admit it…',
+    'We\'re gonna keep moving forward, by staying at full power all the time!',
     [new GymBadgeRequirement(BadgeEnums.Elite_Kahili)],
     // Bulbasaur
     [
