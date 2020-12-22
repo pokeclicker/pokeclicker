@@ -1,4 +1,5 @@
-enum ChangeLogType {
+/* eslint-disable max-classes-per-file */
+export enum ChangeLogType {
     DEFAULT,
     UPDATE,
     NEW,
@@ -8,7 +9,7 @@ enum ChangeLogType {
     EVENT,
 }
 
-type ChangelogConfig = {
+export type ChangelogConfig = {
     display: string,
     label: string,
 };

@@ -1,40 +1,5 @@
-import Changelog from './Changelog';
-
-enum ChangeLogType {
-    DEFAULT,
-    UPDATE,
-    NEW,
-    CHANGE,
-    FIXED,
-    REMOVED,
-    EVENT,
-}
-
-type ChangelogConfig = {
-    display: string,
-    label: string,
-};
-
-const changelogType: Record<keyof typeof ChangeLogType, ChangelogConfig> = {
-    UPDATE: { display: 'dark', label: 'UPDATE' },
-    NEW: { display: 'success', label: 'NEW' },
-    CHANGE: { display: 'primary', label: 'CHANGE' },
-    FIXED: { display: 'warning', label: 'FIXED' },
-    REMOVED: { display: 'danger', label: 'REMOVED' },
-    EVENT: { display: 'info', label: 'EVENT' },
-    DEFAULT: { display: 'default', label: '-' }, // unused - can be changed
-};
-
-export default class ChangelogUpdate extends Changelog {
-    constructor(
-        version: string,
-        date: Date,
-    ) {
-        const dateFormat: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-        const description = `<code>${version}  -  ${date.toLocaleDateString(undefined, dateFormat)}</code>`;
-        super(changelogType.UPDATE, description);
-    }
-}
+import Changelog, { changelogType } from './Changelog';
+import ChangelogUpdate from './ChangelogUpdate';
 
 /**
  * Add your changes to the top of the changelog. Please do not increase the version number.
@@ -43,7 +8,7 @@ export default class ChangelogUpdate extends Changelog {
  * MINOR - Will increment for each feature refactor or large changes to a feature
  * PATCH - Increment for small changes, bugfixes, UI changes.
  */
-export const changelogItems = [
+const ChangelogItems = [
     // note that month is 0 indexed
     // v0.6.9
     new ChangelogUpdate('v0.6.9', new Date(2020, 11, 20)),
@@ -615,3 +580,5 @@ export const changelogItems = [
     new ChangelogUpdate('v0.0.1', new Date(2019, 11, 16)),
     new Changelog(changelogType.NEW, 'Add battle items'),
 ];
+
+export default ChangelogItems;
