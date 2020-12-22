@@ -17537,7 +17537,7 @@ const pokemonList = createPokemonArray(
         'id': -9,
         'name': 'Lets go Eevee',
         'nativeRegion': GameConstants.Region.kanto,
-        'catchRate': 255,
+        'catchRate': 50,
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
         'exp': 65,
