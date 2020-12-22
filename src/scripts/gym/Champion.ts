@@ -18,7 +18,7 @@ class Champion extends Gym {
     }
 
     public setPokemon(starter: GameConstants.Starter) {
-        this.pokemons = this.basePokemon;
+        this.pokemons = [...this.basePokemon];
         switch (starter) {
             case GameConstants.Starter.Bulbasaur: {
                 this.pokemons.push(...this.alternativePokemon1);
