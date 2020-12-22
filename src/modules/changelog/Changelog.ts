@@ -1,4 +1,3 @@
-/* eslint-disable max-classes-per-file */
 export enum ChangeLogType {
     DEFAULT,
     UPDATE,
