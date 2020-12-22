@@ -937,21 +937,23 @@ export function getDungeonIndex(dungeon: string): number {
 }
 
 export const StartingTowns = [
-    'Pallet Town',
-    'New Bark Town',
-    'Littleroot Town',
-    'Twinleaf Town',
-    'Aspertia City',
-    'Vaniville Town',
-    '',
+    'Pallet Town', // Kanto
+    'New Bark Town', // Johto
+    'Littleroot Town', // Hoenn
+    'Twinleaf Town', // Sinnoh
+    'Aspertia City', // Unova
+    'Vaniville Town', // Kalos
+    '', // Alola
+    '', // Galar
 ];
 
 export const DockTowns = [
-    'Vermillion City',
-    'Olivine City',
-    'Slateport City',
-    'Canalave City',
-    'Castelia City',
-    'Coumarine City',
-    '',
+    'Vermillion City', // Kanto
+    'Olivine City', // Johto
+    'Slateport City', // Hoenn
+    'Canalave City', // Sinnoh
+    'Castelia City', // Unova
+    'Coumarine City', // Kalos
+    '', // Alola
+    '', // Galar
 ];
