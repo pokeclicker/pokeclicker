@@ -12,8 +12,8 @@ export default class Settings {
         }
     }
 
-    static load(dict = {}) {
-        Object.entries(dict)?.forEach(([name, value]) => this.setSettingByName(name, value));
+    static load(dict) {
+        Object.entries(dict || {})?.forEach(([name, value]) => this.setSettingByName(name, value));
     }
 
     static setSettingByName(name: string, value: any) {
