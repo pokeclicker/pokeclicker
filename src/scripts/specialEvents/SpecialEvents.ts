@@ -42,19 +42,6 @@ class SpecialEvents implements Feature {
 /*
  *  ONE TIME/TEMP EVENTS
  */
-// Temp as event date has just passed
-SpecialEvents.newEvent('Lets GO!', 'Encounter special Eevee and Pikachu roaming in the Kanto region.',
-    // Start
-    new Date(new Date().getFullYear(), 11, 14, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Lets go Pikachu']));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Lets go Eevee']));
-    },
-    // End
-    new Date(new Date().getFullYear(), 11, 21, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Lets go Pikachu');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Lets go Eevee');
-    }
-);
 
 /*
  *  YEARLY EVENTS
