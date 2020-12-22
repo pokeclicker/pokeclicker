@@ -57,7 +57,7 @@ class ResearchHandler {
                         return false;
                 }
             }
-            if (this.filter.type() != 'all' && ResearchType[research.type] !== this.filter.type()) {
+            if (this.filter.type() != 'all' && !research.type.includes(ResearchType[this.filter.type()])) {
                 return false;
             }
             return true;

@@ -13,7 +13,7 @@ class Research implements Saveable {
     };
 
     public id: Lab.Research;
-    public type: ResearchType;
+    public type: ResearchType[];
     public name: string;
     private _description: string;
     public points: number;
@@ -28,9 +28,9 @@ class Research implements Saveable {
 
     state: KnockoutComputed<ResearchState>;
 
-    constructor(id: Lab.Research, type: ResearchType, name: string, description: string, points: number, option?: ResearchOption) {
+    constructor(id: Lab.Research, type: ResearchType | ResearchType[], name: string, description: string, points: number, option?: ResearchOption) {
         this.id = id;
-        this.type = type;
+        this.type = Array.isArray(type) ? type : [type];
         this.name = name;
         this._description = description;
         this.points = points;

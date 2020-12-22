@@ -40,10 +40,10 @@ class Lab implements Feature {
         this.currentResearch = ko.observableArray(this.defaults.currentResearch);
 
         this.unlockedResearchSlots = ko.pureComputed(() => {
-            if (App.game.lab.researchList[Lab.Research.research_slot2].completed) {
+            if (this.isResearched(Lab.Research.research_slot2)) {
                 return 3;
             }
-            if (App.game.lab.researchList[Lab.Research.research_slot1].completed) {
+            if (this.isResearched(Lab.Research.research_slot1)) {
                 return 2;
             }
             return 1;
@@ -73,6 +73,9 @@ class Lab implements Feature {
         //#region Research
 
         this.researchList = [
+
+            //#region Research
+
             // Research Slots
             new Research(Lab.Research.research_slot1, ResearchType.Research_Slot,
                 'Research Slot I', 'Unlocks a second Research Slot.',
@@ -94,6 +97,112 @@ class Lab implements Feature {
             new Research(Lab.Research.research_workers4, ResearchType.Research_Slot,
                 'Research Workers IV', 'Increases max research workers to 20.',
                 64000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers3)] }),
+
+            //#endregion
+
+            //#region Machines
+
+            // Fabricator
+            new Research(Lab.Research.fabricator, ResearchType.Machine,
+                'Fabricator', 'Unlocks the Fabricator machine.',
+                1000, {
+                    completeDelegate: () => {
+                        App.game.lab.machines[Lab.Machine.fabricator].amount = 1;
+                    },
+                }),
+            new Research(Lab.Research.fabricator_speed1, ResearchType.Machine,
+                'Fabricator Speed I', 'Increases fabrication speed by 25%.',
+                5000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator)] }),
+            new Research(Lab.Research.fabricator_speed2, ResearchType.Machine,
+                'Fabricator Speed II', 'Increases fabrication speed by 50%.',
+                15000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed1)] }),
+            new Research(Lab.Research.fabricator_speed3, ResearchType.Machine,
+                'Fabricator Speed III', 'Increases fabrication speed by 75%.',
+                45000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed2)] }),
+            new Research(Lab.Research.fabricator_speed4, ResearchType.Machine,
+                'Fabricator Speed IV', 'Increases fabrication speed by 100%.',
+                135000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed3)] }),
+            new Research(Lab.Research.fabricator_eff_1, ResearchType.Machine,
+                'Fabricator Efficiency I', 'Increases amount of shards gained from plate deconstruction by 25%.',
+                5000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator)] }),
+            new Research(Lab.Research.fabricator_eff_2, ResearchType.Machine,
+                'Fabricator Efficiency I', 'Increases amount of shards gained from plate deconstruction by 50%.',
+                25000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_eff_1)] }),
+            new Research(Lab.Research.fabricator_eff_3, ResearchType.Machine,
+                'Fabricator Efficiency I', 'Increases amount of shards gained from plate deconstruction by 75%.',
+                125000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_eff_2)] }),
+
+            // Plate Deconstructor
+            new Research(Lab.Research.plate_deconstructor, ResearchType.Machine,
+                'Plate Deconstructor', 'Unlocks the Plate Deconstructor Machine.',
+                2000, {
+                    completeDelegate: () => {
+                        App.game.lab.machines[Lab.Machine.plate_deconstructor].amount = 1;
+                    },
+                }),
+            new Research(Lab.Research.plate_deconstructor_speed1, ResearchType.Machine,
+                'Plate Deconstructor Speed I', 'Increases plate deconstruction speed by 25%.',
+                3000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor)] }),
+            new Research(Lab.Research.plate_deconstructor_speed2, ResearchType.Machine,
+                'Plate Deconstructor Speed II', 'Increases plate deconstruction speed by 50%.',
+                9000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed1)] }),
+            new Research(Lab.Research.plate_deconstructor_speed3, ResearchType.Machine,
+                'Plate Deconstructor Speed III', 'Increases plate deconstruction speed by 75%.',
+                27000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed2)] }),
+            new Research(Lab.Research.plate_deconstructor_speed4, ResearchType.Machine,
+                'Plate Deconstructor Speed IV', 'Increases plate deconstruction speed by 100%.',
+                81000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed3)] }),
+            new Research(Lab.Research.plate_deconstructor_eff1, ResearchType.Machine,
+                'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 25%.',
+                4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor)] }),
+            new Research(Lab.Research.plate_deconstructor_eff2, ResearchType.Machine,
+                'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 50%.',
+                12000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_eff1)] }),
+            new Research(Lab.Research.plate_deconstructor_eff3, ResearchType.Machine,
+                'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 75%.',
+                36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_eff2)] }),
+
+            // Plate Reconstructor
+            new Research(Lab.Research.plate_reconstructor, ResearchType.Machine,
+                'Plate Reconstructor', 'Unlocks the Plate Reconstructor Machine.',
+                2000, {
+                    completeDelegate: () => {
+                        App.game.lab.machines[Lab.Machine.plate_reconstructor].amount = 1;
+                    },
+                }),
+            new Research(Lab.Research.plate_reconstructor_speed1, ResearchType.Machine,
+                'Plate Reconstructor Speed I', 'Increases plate reconstruction speed by 25%.',
+                3000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor)] }),
+            new Research(Lab.Research.plate_reconstructor_speed2, ResearchType.Machine,
+                'Plate Reconstructor Speed II', 'Increases plate reconstruction speed by 50%.',
+                9000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed1)] }),
+            new Research(Lab.Research.plate_reconstructor_speed3, ResearchType.Machine,
+                'Plate Reconstructor Speed III', 'Increases plate reconstruction speed by 75%.',
+                27000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed2)] }),
+            new Research(Lab.Research.plate_reconstructor_speed4, ResearchType.Machine,
+                'Plate Reconstructor Speed IV', 'Increases plate reconstruction speed by 100%.',
+                81000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed3)] }),
+            new Research(Lab.Research.plate_reconstructor_eff1, ResearchType.Machine,
+                'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 12.5%.',
+                4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor)] }),
+            new Research(Lab.Research.plate_reconstructor_eff2, ResearchType.Machine,
+                'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 25%.',
+                12000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff1)] }),
+            new Research(Lab.Research.plate_reconstructor_eff3, ResearchType.Machine,
+                'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 50%.',
+                36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff2)] }),
+
+            // Incubator
+
+            // Fossil Reviver
+
+            // Generator
+
+            // Research Booster
+
+            // Pokeball Factory
+
+            // Type Boosters
             // TODO: HLXII - Implement after Typed BF is implemented
             /*
             new TypeBoosterResearch(Lab.Research.type_boost_normal, PokemonType.Normal, 100),
@@ -115,6 +224,10 @@ class Lab implements Feature {
             new TypeBoosterResearch(Lab.Research.type_boost_steel, PokemonType.Steel, 100),
             new TypeBoosterResearch(Lab.Research.type_boost_fairy, PokemonType.Fairy, 100),
             */
+
+            // Weather Controller
+
+            // Time Machine
             // TODO: HLXII - Implement one day
             /*
             new Research(Lab.Research.time_machine, ResearchType.Machine,
@@ -127,6 +240,9 @@ class Lab implements Feature {
                     }, 'Only Time Pokemon can work on this Research'),
                 }),
             */
+
+            //#endregion
+
         ];
 
         //#endregion
@@ -197,7 +313,7 @@ class Lab implements Feature {
     }
 
     isResearched(research: Lab.Research): boolean {
-        return this.researchList.find(res => res.id === research).completed;
+        return this.researchList[research].completed;
     }
 
     fromJSON(json: Record<string, any>): void {
@@ -274,6 +390,30 @@ namespace Lab {
         'research_workers2',
         'research_workers3',
         'research_workers4',
+        'fabricator',
+        'fabricator_speed1',
+        'fabricator_speed2',
+        'fabricator_speed3',
+        'fabricator_speed4',
+        'fabricator_eff_1',
+        'fabricator_eff_2',
+        'fabricator_eff_3',
+        'plate_deconstructor',
+        'plate_deconstructor_speed1',
+        'plate_deconstructor_speed2',
+        'plate_deconstructor_speed3',
+        'plate_deconstructor_speed4',
+        'plate_deconstructor_eff1',
+        'plate_deconstructor_eff2',
+        'plate_deconstructor_eff3',
+        'plate_reconstructor',
+        'plate_reconstructor_speed1',
+        'plate_reconstructor_speed2',
+        'plate_reconstructor_speed3',
+        'plate_reconstructor_speed4',
+        'plate_reconstructor_eff1',
+        'plate_reconstructor_eff2',
+        'plate_reconstructor_eff3',
         'type_boost_normal',
         'type_boost_fire',
         'type_boost_water',

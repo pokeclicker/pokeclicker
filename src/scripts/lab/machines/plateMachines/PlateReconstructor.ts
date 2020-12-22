@@ -5,12 +5,19 @@
 class PlateReconstructor extends PlateMachine {
 
     // TODO: HLXII - Balance base values
-    public static baseShardCost = 500;
+    public static baseShardCost = 1000;
     public static progressAmount = 10;
 
-    // TODO: HLXII - Handle Research Upgrades
     public static shardCost: KnockoutComputed<number> = ko.pureComputed(() => {
-        return PlateReconstructor.baseShardCost;
+        let multiplier = 1;
+        if (App.game.lab.isResearched(Lab.Research.plate_reconstructor_eff3)) {
+            multiplier = 0.875;
+        } else if (App.game.lab.isResearched(Lab.Research.plate_reconstructor_eff2)) {
+            multiplier = 0.75;
+        } else if (App.game.lab.isResearched(Lab.Research.plate_reconstructor_eff1)) {
+            multiplier = 0.5;
+        }
+        return PlateReconstructor.baseShardCost * multiplier;
     });
 
     createState(json?: any): MachineState {
