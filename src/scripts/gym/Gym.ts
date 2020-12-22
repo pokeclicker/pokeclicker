@@ -1178,3 +1178,153 @@ gymList['Champion Diantha'] = new Gym(
     'Witnessing the noble spirits of you and your Pokémon in battle has really touched my heart...',
     [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
 );
+
+//Alola Gyms
+//TODO: Balancing of gym Pokemon HP & rewards.
+gymList['Iki Town'] = new Gym(
+    'Hala',
+    'Iki Town',
+    [
+        new GymPokemon('Machop', 2458300, 15),
+        new GymPokemon('Makuhita', 2462000, 15),
+        new GymPokemon('Crabrawler', 2462000, 16),
+    ],
+    BadgeEnums.MelemeleKahuna,
+    128000,
+    'The results come as no surprise to me. What a fine Trainer...and what fine Pokémon, too!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Melemele Meadow'))]
+);
+gymList['Konikoni City'] = new Gym(
+    'Olivia',
+    'Konikoni City',
+    [
+        new GymPokemon('Anorith', 2458300, 27),
+        new GymPokemon('Lileep', 2462000, 27),
+        new GymPokemon('Lycanroc (Midnight)', 2462000, 28),
+    ],
+    BadgeEnums.AkalaKahuna,
+    128000,
+    'How lovely.',
+    [new RouteKillRequirement(10, GameConstants.Region.alola, 9)]
+);
+gymList['Aether Foundation'] = new Gym(
+    'Ultra Wormhole',
+    'Aether Foundation',
+    [new GymPokemon('???', 2458300, 27)],
+    BadgeEnums.Elite_Nihilego,
+    128000,
+    'The creature escaped back into the ultra wormhole.',
+    [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)]
+);
+gymList['Malie City'] = new Gym(
+    'Nanu',
+    'Malie City',
+    [
+        new GymPokemon('Sableye', 2458300, 43),
+        new GymPokemon('Krokorok', 2462000, 43),
+        new GymPokemon('Alolan Persian', 2462000, 44),
+    ],
+    BadgeEnums.UlaulaKahuna,
+    128000,
+    'Hmph...',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Po Town'))]
+);
+gymList['Altar of the Sunne and Moone'] = new Gym(
+    'Ultra Megalopolis',
+    'Altar of the Sunne and Moone',
+    [new GymPokemon('Necrozma (Ultra)', 2458300, 60)],
+    BadgeEnums.Elite_UltraNecrozma,
+    128000,
+    'Necrozma fled. It left something behind.',
+    [new GymBadgeRequirement(BadgeEnums.AkalaKahuna)]
+);
+gymList['Seafolk Village'] = new Gym(
+    'Mina',
+    'Seafolk Village',
+    [
+        new GymPokemon('Mawile', 2458300, 51),
+        new GymPokemon('Granbull', 2462000, 51),
+        new GymPokemon('Ribombee', 2462000, 51),
+    ],
+    BadgeEnums.MinaTrail,
+    128000,
+    'Woah! I\'m shocked at your strength!',
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Nebby'))]
+);
+gymList['Exeggutor Island'] = new Gym(
+    'Hapu',
+    'Exeggutor Island',
+    [
+        new GymPokemon('Golurk', 2458300, 53),
+        new GymPokemon('Gastrodon (east)', 2462000, 53),
+        new GymPokemon('Flygon', 2462000, 53),
+        new GymPokemon('Mudsdale', 2462000, 54),
+    ],
+    BadgeEnums.PoniKahuna,
+    128000,
+    'You have succeeded in your final grand trial!',
+    [new GymBadgeRequirement(BadgeEnums.MinaTrail)]
+);
+
+//Alola Elite 4
+//TODO: Balancing of elite Pokemon HP & rewards.
+gymList['Elite Molayne'] = new Gym(
+    'Molayne',
+    'Elite Molayne',
+    [
+        new GymPokemon('Klefki', 1945330, 56),
+        new GymPokemon('Bisharp', 1948300, 56),
+        new GymPokemon('Magnezone', 1952000, 56),
+        new GymPokemon('Metagross', 1957000, 56),
+        new GymPokemon('Alolan Dugtrio', 1957000, 57),
+    ],
+    BadgeEnums.Elite_Molayne,
+    64000,
+    'That Kukui... He certainly found an interesting Trainer for me to face!',
+    [new GymBadgeRequirement(BadgeEnums.PoniKahuna)]
+);
+gymList['Elite Olivia'] = new Gym(
+    'Olivia',
+    'Elite Olivia',
+    [
+        new GymPokemon('Armaldo', 1945330, 56),
+        new GymPokemon('Cradily', 1948300, 56),
+        new GymPokemon('Gigalith', 1952000, 56),
+        new GymPokemon('Probopass', 1957000, 56),
+        new GymPokemon('Lycanroc (Midnight)', 1957000, 57),
+    ],
+    BadgeEnums.Elite_Olivia,
+    64000,
+    'I don\'t see the same look in your eyes that I saw when we first met on Akala Island. Have you had some experiences that you\'ll carry with you in your heart forever? Well, it\'s time for you to move on.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Molayne)]
+);
+gymList['Elite Acerola'] = new Gym(
+    'Acerola',
+    'Elite Acerola',
+    [
+        new GymPokemon('Banette', 1945330, 56),
+        new GymPokemon('Drifblim', 1948300, 56),
+        new GymPokemon('Dhelmise', 1952000, 56),
+        new GymPokemon('Froslass', 1957000, 56),
+        new GymPokemon('Palossand', 1957000, 57),
+    ],
+    BadgeEnums.Elite_Acerola,
+    64000,
+    'I\'m...I\'m speechless! You\'ve done me in!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Olivia)]
+);
+gymList['Elite Kahili'] = new Gym(
+    'Kahili',
+    'Elite Kahili',
+    [
+        new GymPokemon('Braviary', 1945330, 56),
+        new GymPokemon('Hawlucha', 1948300, 56),
+        new GymPokemon('Oricorio (Baile)', 1952000, 56),
+        new GymPokemon('Mandibuzz', 1957000, 56),
+        new GymPokemon('Toucannon', 1957000, 57),
+    ],
+    BadgeEnums.Elite_Kahili,
+    64000,
+    'It\'s frustrating to me as a member of the Elite Four, but it seems your strength is the real deal.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Acerola)]
+);
