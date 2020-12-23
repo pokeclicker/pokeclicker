@@ -23,6 +23,6 @@ Parameters:
     y="<%= locals.y * 16 %>"
     height="<%= (locals.height || 3) * 16 %>"
     width="<%= (locals.width || 4) * 16 %>"
-    data-bind="click:function(){MapHelper.moveToTown('<%= (locals.moveToTown) ? locals.moveToTown : locals.name %>')},
-        attr: { class: MapHelper.calculateTownCssClass('<%= locals.name %>') }">
+    data-bind="click:function(){MapHelper.moveToTown('<%= (locals.moveToTown) ? locals.moveToTown.replace(/'/g, '\\\'') : locals.name.replace(/'/g, '\\\'') %>')},
+        attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') }">
 </rect>

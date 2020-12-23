@@ -100,3 +100,12 @@ TownList['Pokemon League Kalos'] = new PokemonLeague(
     ['Elite Malva', 'Elite Siebold', 'Elite Wikstrom', 'Elite Drasna', 'Champion Diantha']
 );
 (<PokemonLeague>TownList['Pokemon League Kalos']).setupGymTowns();
+
+TownList['Pokemon League Alola'] = new PokemonLeague(
+    'Pokemon League Alola',
+    GameConstants.Region.alola,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanikala'))],
+    indigoPlateauShop,
+    ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
+);
+(<PokemonLeague>TownList['Pokemon League Alola']).setupGymTowns();
