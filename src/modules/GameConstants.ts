@@ -736,6 +736,21 @@ export const KalosGyms = [
     'Champion Diantha',
 ];
 
+export const AlolaGyms = [
+    'Iki Town',
+    'Konikoni City',
+    'Aether Foundation',
+    'Malie City',
+    'Altar of the Sunne and Moone',
+    'Seafolk Village',
+    'Exeggutor Island',
+    'Elite Molayne',
+    'Elite Olivia',
+    'Elite Acerola',
+    'Elite Kahili',
+    'Champion Hao',
+];
+
 export const RegionGyms = [
     KantoGyms,
     JohtoGyms,
@@ -743,6 +758,7 @@ export const RegionGyms = [
     SinnohGyms,
     UnovaGyms,
     KalosGyms,
+    AlolaGyms,
 ];
 
 export function getGymIndex(gym: string): number {
