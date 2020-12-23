@@ -5,6 +5,16 @@
 /// <reference path="./TimedRestriction.ts" />
 /// <reference path="./EnvironmentRestriction.ts" />
 
+// Used for custom time ranges
+function TimeRestrictedBase<T extends MinimalEvo>(Base: T) {
+    return function (start: number, end: number, ...rest: ConstructorParameters<T>) {
+        const tmpClass = TimeRestricted(start, end, Base);
+        return new tmpClass(...rest);
+    };
+}
+// new TimeRestrictedLevelEvolution(start: number, end: number, basePokemon: string, evolvedPokemon: string, level: number)
+const TimeRestrictedLevelEvolution = TimeRestrictedBase(LevelEvolution);
+
 // new DayTimedLevelEvolution(basePokemon: string, evolvedPokemon: string, level: number)
 const DayTimedLevelEvolution = DayTimeRestricted(LevelEvolution);
 // new NightTimedLevelEvolution(basePokemon: string, evolvedPokemon: string, level: number)

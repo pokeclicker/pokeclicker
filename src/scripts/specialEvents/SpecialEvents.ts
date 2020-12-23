@@ -42,19 +42,6 @@ class SpecialEvents implements Feature {
 /*
  *  ONE TIME/TEMP EVENTS
  */
-// Temp as event date has just passed
-SpecialEvents.newEvent('Lets GO!', 'Encounter special Eevee and Pikachu roaming in the Kanto region.',
-    // Start
-    new Date(new Date().getFullYear(), 11, 14, 1), () => {
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Lets go Pikachu']));
-        RoamingPokemonList.add(GameConstants.Region.kanto, new RoamingPokemon(pokemonMap['Lets go Eevee']));
-    },
-    // End
-    new Date(new Date().getFullYear(), 11, 21, 23), () => {
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Lets go Pikachu');
-        RoamingPokemonList.remove(GameConstants.Region.kanto, 'Lets go Eevee');
-    }
-);
 
 /*
  *  YEARLY EVENTS
@@ -126,19 +113,19 @@ SpecialEvents.newEvent('Lets GO!', 'Encounter special Eevee and Pikachu roaming 
     }
 );
 // Christmas
-SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Dragonite for a limited time roaming around Kanto, Johto and Hoenn.',
+SpecialEvents.newEvent('Merry Christmas!', 'Encounter Santa Snorlax for a limited time roaming around Kanto, Johto and Hoenn.',
     // Start
     new Date(new Date().getFullYear(), 11, 24, 1), () => {
         // Add to every region excluding None
         GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.add(region, new RoamingPokemon(pokemonMap['Santa Dragonite']));
+            RoamingPokemonList.add(region, new RoamingPokemon(pokemonMap['Santa Snorlax']));
         });
     },
     // End
     new Date(new Date().getFullYear(), 11, 30, 23), () => {
         // Remove from every region excluding None
         GameHelper.enumNumbers(GameConstants.Region).filter(i => i != GameConstants.Region.none).forEach(region => {
-            RoamingPokemonList.remove(region, 'Santa Dragonite');
+            RoamingPokemonList.remove(region, 'Santa Snorlax');
         });
     }
 );

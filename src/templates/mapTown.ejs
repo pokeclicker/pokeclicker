@@ -31,8 +31,8 @@ Parameters:
     height="<%= (locals.height || 4) * 16 %>"
     width="<%= (locals.width || 4) * 16 %>"
     data-bind="
-        click:function(){MapHelper.moveToTown('<%= locals.name %>')},
-        attr: { class: MapHelper.calculateTownCssClass('<%= locals.name %>') },
+        click:function(){MapHelper.moveToTown('<%= locals.name.replace(/'/g, '\\\'') %>')},
+        attr: { class: MapHelper.calculateTownCssClass('<%= locals.name.replace(/'/g, '\\\'') %>') },
         <% if (locals.home) { %>
             css: { flash: MapHelper.ableToTravel() }
         <% } %>">

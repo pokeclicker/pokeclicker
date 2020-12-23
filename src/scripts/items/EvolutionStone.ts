@@ -82,3 +82,4 @@ ItemList['Rusted_sword']      = new EvolutionStone(GameConstants.StoneType.Ruste
 ItemList['Rusted_shield']     = new EvolutionStone(GameConstants.StoneType.Rusted_shield, 10000, undefined , 'Rusted Shield');
 ItemList['Galarica_cuff']     = new EvolutionStone(GameConstants.StoneType.Galarica_cuff, 2500, undefined , 'Galarica Cuff');
 ItemList['Galarica_wreath']   = new EvolutionStone(GameConstants.StoneType.Galarica_wreath, 2500, undefined , 'Galarica Wreath');
+ItemList['Ice_stone']         = new EvolutionStone(GameConstants.StoneType.Ice_stone, 2500, undefined , 'Ice Stone');

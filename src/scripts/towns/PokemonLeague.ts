@@ -102,6 +102,14 @@ TownList['Pokemon League Kalos'] = new PokemonLeague(
 );
 (<PokemonLeague>TownList['Pokemon League Kalos']).setupGymTowns();
 
+TownList['Pokemon League Alola'] = new PokemonLeague(
+    'Pokemon League Alola',
+    GameConstants.Region.alola,
+    [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Mount Lanikala'))],
+    indigoPlateauShop,
+    ['Elite Molayne', 'Elite Olivia', 'Elite Acerola', 'Elite Kahili', 'Champion Hao']
+);
+(<PokemonLeague>TownList['Pokemon League Alola']).setupGymTowns();
 
 TownList['Wyndon Stadium'] = new PokemonLeague(
     'Wyndon Stadium',
@@ -111,7 +119,6 @@ TownList['Wyndon Stadium'] = new PokemonLeague(
     ['Elite Marnie', 'Elite Hop', 'Elite Bede', 'Champion Leon']
 );
 (<PokemonLeague>TownList['Wyndon Stadium']).setupGymTowns();
-
 
 TownList['Master Dojo Battlefield'] = new PokemonLeague(
     'Master Dojo Battlefield',

@@ -1,9 +1,9 @@
 import { Observable } from 'knockout';
 import { Feature } from './common/Feature';
-import * as GameConstants from '../GameConstants';
 import BadgeEnums from '../enums/Badges';
+import GameHelper from '../GameHelper';
 
-const emptyBadgeList = new Array(GameConstants.RegionGyms.flat().length).fill(false);
+const emptyBadgeList = new Array(GameHelper.enumLength(BadgeEnums)).fill(false);
 
 export default class BadgeCase implements Feature {
     name = 'Badge Case';

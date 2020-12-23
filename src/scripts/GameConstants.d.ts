@@ -212,6 +212,7 @@ namespace GameConstants {
         'Prism_scale',
         'Sachet',
         'Whipped_dream',
+        'Ice_stone',
         'Strawberry_sweet',
         'Berry_sweet',
         'Love_sweet',
@@ -235,6 +236,7 @@ namespace GameConstants {
         'Rainbow_swirl',
         'Caramel_swirl',
         'Ruby_swirl'
+        
     }
     declare enum BattleItemType {
         'xAttack' = '',

@@ -84,6 +84,20 @@ enum BadgeEnums {
     'Elite_Wikstrom',
     'Elite_Drasna',
     'Elite_KalosChampion',
+    // Alola
+    // TODO: these are unordered and some may be missing
+    'MelemeleKahuna',
+    'AkalaKahuna',
+    'Elite_Nihilego',
+    'UlaulaKahuna',
+    'Elite_UltraNecrozma',
+    'MinaTrail',
+    'PoniKahuna',
+    'Elite_Olivia',
+    'Elite_Acerola',
+    'Elite_Molayne',
+    'Elite_Kahili',
+    'Elite_AlolaChampion',
     // Galar
     'Galar_Grass',
     'Galar_Water',
