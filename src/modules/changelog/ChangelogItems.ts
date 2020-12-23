@@ -11,7 +11,7 @@ import ChangelogUpdate from './ChangelogUpdate';
 const ChangelogItems = [
     // note that month is 0 indexed
     // v0.7.0
-    new ChangelogUpdate('v0.7.0 - Unova', new Date(2020, 11, 20)),
+    new ChangelogUpdate('v0.7.0 - Unova', new Date(2020, 11, 23)),
     new Changelog(changelogType.NEW, 'The Unova region is now available!'),
     new Changelog(changelogType.NEW, 'Added notification for when Berry about to wither'),
     new Changelog(changelogType.CHANGE, 'Minor text fixes'),
