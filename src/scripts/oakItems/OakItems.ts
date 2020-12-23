@@ -1,3 +1,4 @@
+///<reference path="../../declarations/wallet/AmountFactory.d.ts"/>
 class OakItems implements Feature {
     name = 'Oak Items';
     saveKey = 'oakItems';
