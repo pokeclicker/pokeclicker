@@ -16,7 +16,7 @@ export const MAX_LOAD_TIME = 20000; // 20 Seconds
 export const MUTATION_TICK = 1000;
 export const WANDER_TICK = 1500;
 
-export const MAX_AVAILABLE_REGION = 3; // Sinnoh
+export const MAX_AVAILABLE_REGION = 4; // Unova
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
