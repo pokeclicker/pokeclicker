@@ -942,3 +942,302 @@ dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
     96500, 230, 100);
 
 //Unknown Dungeon? Contains Mewtwo.
+
+// Alola
+// TODO: Balancing of dungeon Pokemon HP & rewards.
+dungeonList['Trainers\' School'] = new Dungeon('Trainers\' School',
+    ['Alolan Meowth', 'Abra', 'Magnemite', 'Wingull', 'Mime Jr.', 'Zorua'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Alolan Grimer', 8000000, 70),
+        new DungeonBossPokemon('Furfrou', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Hau\'oli Cemetery'] = new Dungeon('Hau\'oli Cemetery',
+    ['Zubat', 'Gastly', 'Misdreavus'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Drifloon', 8000000, 70),
+        new DungeonBossPokemon('Litwick', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
+    ['Zubat', 'Alolan Diglett', 'Noibat', 'Alolan Rattata', 'Yungoos'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Alolan Raticate', 8000000, 70),
+        new DungeonBossPokemon('Gumshoos', 8000000, 70),
+        new DungeonBossPokemon('Totem Alolan Raticate', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Gumshoos', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
+    96500, 201, 35);
+
+dungeonList['Melemele Meadow'] = new Dungeon('Melemele Meadow',
+    ['Caterpie', 'Metapod', 'Butterfree', 'Cottonee', 'Petilil', 'Cutiefly'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Flabébé (Red)', 8000000, 70),
+        new DungeonBossPokemon('Oricorio (Pom-pom)', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Seaward Cave'] = new Dungeon('Seaward Cave',
+    ['Zubat', 'Psyduck', 'Seel', 'Magikarp', 'Smoochum'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Delibird', 8000000, 70),
+        new DungeonBossPokemon('Barboach', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Ten Carat Hill'] = new Dungeon('Ten Carat Hill',
+    ['Zubat', 'Machop', 'Psyduck', 'Mawile', 'Roggenrola'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Spinda', 8000000, 70),
+        new DungeonBossPokemon('Carbink', 8000000, 70),
+        new DungeonBossPokemon('Rockruff', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Ruins of Conflict'] = new Dungeon('Ruins of Conflict',
+    ['Florges (Red)', 'Comfey', 'Dedenne', 'Ampharos', 'Electivire'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Jolteon', 8000000, 70),
+        new DungeonBossPokemon('Sylveon', 8000000, 70),
+        new DungeonBossPokemon('Tapu Koko', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Pikachu Valley'] = new Dungeon('Pikachu Valley',
+    ['Pikachu', 'Pichu'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Pikachu (Original cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Hoenn cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Sinnoh cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Unova cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Kalos cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Alola cap)', 8000000, 70),
+        new DungeonBossPokemon('Pikachu (Partner cap)', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Paniola Ranch'] = new Dungeon('Paniola Ranch',
+    ['Mareep', 'Lillipup', 'Mudbray'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Tauros', 8000000, 70),
+        new DungeonBossPokemon('Miltank', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
+    ['Paras', 'Psyduck', 'Poliwag', 'Tentacool', 'Goldeen', 'Magikarp', 'Wingull', 'Surskit', 'Feebas', 'Finneon', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Alomomola', 'Dewpider'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Wishiwashi (School)', 8000000, 70),
+        new DungeonBossPokemon('Araquanid', 8000000, 70),
+        new DungeonBossPokemon('Totem Wishiwashi (School)', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Araquanid', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
+    96500, 201, 35);
+
+dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
+    ['Cubone', 'Kangaskhan', 'Magby', 'Magmar', 'Fletchling', 'Salandit'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Alolan Marowak', 8000000, 70),
+        new DungeonBossPokemon('Salazzle', 8000000, 70),
+        new DungeonBossPokemon('Totem Alolan Marowak', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Salazzle', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
+    96500, 201, 35);
+
+dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
+    ['Metapod', 'Paras', 'Pinsir', 'Hoothoot', 'Bonsly', 'Trumbeak', 'Fomantis', 'Steenee', 'Comfey', 'Oranguru', 'Passimian'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Lurantis', 8000000, 70),
+        new DungeonBossPokemon('Totem Lurantis', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
+    96500, 201, 35);
+
+dungeonList['Diglett\'s Tunnel'] = new Dungeon('Diglett\'s Tunnel',
+    ['Zubat', 'Alolan Diglett'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Larvitar', 8000000, 70)],
+    96500, 201, 35);
+
+dungeonList['Memorial Hill'] = new Dungeon('Memorial Hill',
+    ['Zubat', 'Gastly'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [new DungeonBossPokemon('Phantump', 8000000, 70)],
+    96500, 201, 35);
+
+dungeonList['Ruins of Life'] = new Dungeon('Ruins of Life',
+    ['Florges (Red)', 'Comfey', 'Gardevoir', 'Chimecho', 'Musharna'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Espeon', 8000000, 70),
+        new DungeonBossPokemon('Sylveon', 8000000, 70),
+        new DungeonBossPokemon('Tapu Lele', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Malie Garden'] = new Dungeon('Malie Garden',
+    ['Alolan Meowth', 'Psyduck', 'Poliwhirl', 'Goldeen', 'Magikarp', 'Gyarados', 'Ledian', 'Ariados', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Cottonee', 'Petilil'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Masquerain', 8000000, 70),
+        new DungeonBossPokemon('Araquanid', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
+    ['Grubbin', 'Charjabug', 'Elekid', 'Electabuzz', 'Skarmory', 'Dedenne'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Vikavolt', 8000000, 70),
+        new DungeonBossPokemon('Togedemaru', 8000000, 70),
+        new DungeonBossPokemon('Totem Vikavolt', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Togedemaru', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
+    96500, 201, 35);
+
+dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
+    ['Golbat', 'Gastly', 'Haunter', 'Gengar', 'Shuppet', 'Banette', 'Jellicent', 'Klefki'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Mimikyu', 8000000, 70),
+        new DungeonBossPokemon('Totem Mimikyu', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
+    96500, 201, 35);
+
+dungeonList['Ula\'ula Meadow'] = new Dungeon('Ula\'ula Meadow',
+    ['Ledian', 'Ariados', 'Cottonee', 'Petilil', 'Ribombee'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Floette (Red)', 8000000, 70),
+        new DungeonBossPokemon('Oricorio (Baile)', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Po Town'] = new Dungeon('Po Town',
+    ['Alolan Rattata', 'Alolan Raticate', 'Ekans', 'Drowzee', 'Golbat', 'Alolan Grimer', 'Spinarak', 'Houndour', 'Trubbish', 'Scraggy', 'Fomantis', 'Mareanie'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Pawniard', 8000000, 70),
+        new DungeonBossPokemon('Masquerain', 8000000, 70),
+        new DungeonBossPokemon('Pinsir', 8000000, 70),
+        new DungeonBossPokemon('Haunter', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Mount Lanikala'] = new Dungeon('Mount Lanikala',
+    ['Alolan Raticate', 'Alolan Sandshrew', 'Alolan Vulpix', 'Sneasel', 'Snorunt', 'Gumshoos'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Absol', 8000000, 70),
+        new DungeonBossPokemon('Glalie', 8000000, 70),
+        new DungeonBossPokemon('Vanilluxe', 8000000, 70),
+        new DungeonBossPokemon('Necrozma', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Ruins of Abundance'] = new Dungeon('Ruins of Abundance',
+    ['Florges (Red)', 'Comfey', 'Whimsicott', 'Bellossom', 'Lilligant'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Leafeon', 8000000, 70),
+        new DungeonBossPokemon('Sylveon', 8000000, 70),
+        new DungeonBossPokemon('Tapu Bulu', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Exeggutor Island Hill'] = new Dungeon('Exeggutor Island Hill',
+    ['Exeggcute', 'Pelipper', 'Gastrodon (east)'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Pinsir', 8000000, 70),
+        new DungeonBossPokemon('Tropius', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
+    ['Golbat', 'Alolan Dugtrio', 'Machoke', 'Golbat', 'Magikarp', 'Skarmory', 'Barboach', 'Corphish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Mienfoo', 'Carbink', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Jangmo-o', 'Hakamo-o'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Kommo-o', 8000000, 70),
+        new DungeonBossPokemon('Totem Kommo-o', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+    ],
+    96500, 201, 35);
+
+dungeonList['Nebby'] = new Dungeon('Nebby',
+    ['Clefable', 'Delcatty', 'Sunflora', 'Heliolisk', 'Lunatone', 'Solrock'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Lunala', 8000000, 70),
+        new DungeonBossPokemon('Solgaleo', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Ruins of Hope'] = new Dungeon('Ruins of Hope',
+    ['Florges (Red)', 'Comfey', 'Azumarill', 'Politoed', 'Gorebyss'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Vaporeon', 8000000, 70),
+        new DungeonBossPokemon('Sylveon', 8000000, 70),
+        new DungeonBossPokemon('Tapu Fini', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Poni Meadow'] = new Dungeon('Poni Meadow',
+    ['Magikarp', 'Dratini', 'Cottonee', 'Petilil', 'Ribombee', 'Misdreavus', 'Barboach'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Oricorio (Sensu)', 8000000, 70),
+        new DungeonBossPokemon('Floette (Red)', 8000000, 70),
+    ],
+    96500, 201, 35);
+
+dungeonList['Resolution Cave'] = new Dungeon('Resolution Cave',
+    ['Golbat', 'Alolan Dugtrio', 'Druddigon'],
+    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
+    2203000,
+    [
+        new DungeonBossPokemon('Crobat', 8000000, 70),
+        new DungeonBossPokemon('Noivern', 8000000, 70),
+        new DungeonBossPokemon('Guzzlord', 8000000, 70),
+    ],
+    96500, 201, 35);
