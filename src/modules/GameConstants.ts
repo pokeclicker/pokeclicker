@@ -452,7 +452,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     PowerPlant: {
-        [Region.kanto]: new Set(['vermilion City', 'Power Plant']),
+        [Region.kanto]: new Set(['Vermilion City', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower']),
         [Region.hoenn]: new Set(['Mauville City']),
         [Region.sinnoh]: new Set(['Sunyshore City']),
@@ -643,7 +643,7 @@ export const PokemonToFossil = {
 export const KantoGyms = [
     'Pewter City',
     'Cerulean City',
-    'vermilion City',
+    'Vermilion City',
     'Celadon City',
     'Saffron City',
     'Fuchsia City',
@@ -963,7 +963,7 @@ export const StartingTowns = [
 ];
 
 export const DockTowns = [
-    'vermilion City', // Kanto
+    'Vermilion City', // Kanto
     'Olivine City', // Johto
     'Slateport City', // Hoenn
     'Canalave City', // Sinnoh
