@@ -83,7 +83,7 @@ const CeruleanCityShop = new Shop([
     ItemList['xAttack'],
     ItemList['Water_egg'],
 ]);
-const VermillionCityShop = new Shop([
+const VermilionCityShop = new Shop([
     ItemList['Thunder_stone'],
     ItemList['Lucky_egg'],
     ItemList['Electric_egg'],
@@ -182,12 +182,12 @@ TownList['Cerulean City'] = new Town(
         npcs: [KantoBerryMaster],
     }
 );
-TownList['Vermillion City'] = new Town(
-    'Vermillion City',
+TownList['Vermilion City'] = new Town(
+    'Vermilion City',
     GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
-        shop: VermillionCityShop,
+        shop: VermilionCityShop,
     }
 );
 TownList['Celadon City'] = new Town(
@@ -1855,11 +1855,6 @@ TownList['Reflection Cave'] = new DungeonTown(
     [new RouteKillRequirement(10, GameConstants.Region.kalos, 11)]
 );
 //Tower of Mastery?
-TownList['Azure bay'] = new DungeonTown(
-    'Azure bay',
-    GameConstants.Region.kalos,
-    [new RouteKillRequirement(10, GameConstants.Region.kalos, 12)]
-);
 //Sea Spirit's Den?
 //Kalos Power Plant?
 TownList['Lost Hotel'] = new DungeonTown(

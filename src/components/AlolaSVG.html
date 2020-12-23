@@ -533,4 +533,17 @@
         , width: 4, height: 4
         })
     %>
+
+    <!-- ------------------ -->
+    <!-- PLACES OF INTEREST -->
+    <!-- ------------------ -->
+
+    <%- include('templates/mapPOI',
+        { name: "Dock"
+        , x: 96, y: 0
+        , width: 4, height: 4
+        , databind: "click:function(){MapHelper.openShipModal()}"
+        })
+    %>
+
 </g>
