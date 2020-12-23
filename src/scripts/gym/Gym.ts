@@ -1544,7 +1544,7 @@ gymList['Dojo Master Mustard'] = new Gym(
     [
         new GymPokemon('Luxray', 1945330, 49),
         new GymPokemon('Corviknight', 1948300, 49),
-        new GymPokemon('Lycanroc', 1952000, 50),
+        new GymPokemon('Lycanroc (Midday)', 1952000, 50),
         new GymPokemon('Kommo-o', 1957000, 51),
         new GymPokemon('Urshifu (Single Strike)', 1945330, 60),
         new GymPokemon('Urshifu (Rapid Strike)', 1945330, 50),
