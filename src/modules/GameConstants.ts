@@ -788,6 +788,7 @@ export const GalarGyms = [
     'Trainer Hop',
     'Trainer Bede',
     'Champion Leon',
+    ];
 
 export const RegionGyms = [
     KantoGyms,
