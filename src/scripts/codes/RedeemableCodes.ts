@@ -1,5 +1,6 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+/// <reference path="../../declarations/codes/RedeemableCode.d.ts" />
 
 class RedeemableCodes implements Saveable {
     defaults: Record<string, any>;
