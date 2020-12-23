@@ -83,7 +83,7 @@ const CeruleanCityShop = new Shop([
     ItemList['xAttack'],
     ItemList['Water_egg'],
 ]);
-const VermillionCityShop = new Shop([
+const vermilionCityShop = new Shop([
     ItemList['Thunder_stone'],
     ItemList['Lucky_egg'],
     ItemList['Electric_egg'],
@@ -182,12 +182,12 @@ TownList['Cerulean City'] = new Town(
         npcs: [KantoBerryMaster],
     }
 );
-TownList['Vermillion City'] = new Town(
-    'Vermillion City',
+TownList['vermilion City'] = new Town(
+    'vermilion City',
     GameConstants.Region.kanto,
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kanto, 6)],
-        shop: VermillionCityShop,
+        shop: vermilionCityShop,
     }
 );
 TownList['Celadon City'] = new Town(

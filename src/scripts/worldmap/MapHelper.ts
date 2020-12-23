@@ -183,7 +183,7 @@ class MapHelper {
         };
         switch (player.region) {
             case 0:
-                if (TownList['Vermillion City'].isUnlocked() && player.highestRegion() > 0) {
+                if (TownList['vermilion City'].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
                     return;
                 }
