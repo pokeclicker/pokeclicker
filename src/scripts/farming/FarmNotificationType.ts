@@ -1,5 +1,6 @@
 enum FarmNotificationType {
     Ripe,
+    AboutToWither,
     Withered,
     Mutated,
     Replanted,

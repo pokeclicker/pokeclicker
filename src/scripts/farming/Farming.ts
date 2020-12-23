@@ -940,6 +940,10 @@ class Farming implements Feature {
             case FarmNotificationType.Ripe:
                 message = 'A Berry is ready to harvest!';
                 break;
+            case FarmNotificationType.AboutToWither:
+                message = 'A Berry plant is about to wither!';
+                type = NotificationConstants.NotificationOption.warning;
+                break;
             case FarmNotificationType.Withered:
                 message = 'A Berry plant has withered!';
                 type = NotificationConstants.NotificationOption.warning;
