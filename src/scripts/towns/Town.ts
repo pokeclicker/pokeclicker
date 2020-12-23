@@ -2136,7 +2136,7 @@ TownList['Resolution Cave'] = new DungeonTown(
     'Resolution Cave',
     GameConstants.Region.alola,
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Poni Meadow'))]
-
+);
 //Galar Shops
 
 

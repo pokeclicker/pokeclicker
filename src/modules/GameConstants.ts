@@ -540,7 +540,6 @@ export enum StoneType {
     'Prism_scale',
     'Sachet',
     'Whipped_dream',
-    'Ice_stone',
     'Chipped_pot',
     'Strawberry_sweet',
     'Ice_stone',
@@ -973,6 +972,7 @@ export const GalarDungeons = [
     'Watchtower Ruins',
     'Dusty Bowl',
     'Lake of Outrage',
+];
 
 export const RegionDungeons = [
     KantoDungeons,

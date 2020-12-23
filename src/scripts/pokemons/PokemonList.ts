@@ -1294,6 +1294,8 @@ const pokemonList = createPokemonArray(
             'defense': 55,
             'specialDefense': 40,
             'speed': 50,
+        },
+    },
     {
         'id': 53,
         'name': 'Persian',

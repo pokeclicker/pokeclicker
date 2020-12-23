@@ -236,7 +236,6 @@ namespace GameConstants {
         'Rainbow_swirl',
         'Caramel_swirl',
         'Ruby_swirl'
-        
     }
     declare enum BattleItemType {
         'xAttack' = '',

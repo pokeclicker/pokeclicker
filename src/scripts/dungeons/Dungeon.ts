@@ -1412,3 +1412,5 @@ dungeonList['Crown Shrine'] = new Dungeon('Crown Shrine',
             new ObtainedPokemonRequirement(pokemonMap.Spectrier),
             new ObtainedPokemonRequirement(pokemonMap.Glastrier),
         ])),
+    ],
+    96500, 201, 35);

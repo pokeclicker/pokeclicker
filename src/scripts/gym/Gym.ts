@@ -1568,3 +1568,4 @@ gymList['Trainer Peony'] = new Gym(
     64000,
     'Gone and got stronger again, have you? Ah well! Hats off to you-in more ways than one!',
     [new ObtainedPokemonRequirement(pokemonMap.Calyrex)]
+);

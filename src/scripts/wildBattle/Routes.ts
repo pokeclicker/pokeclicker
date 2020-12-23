@@ -1790,7 +1790,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'West Lake Axwell', GameConstants.Region.galar, 5,
     new RoutePokemon({
-        water: ['Goldeen', 'Magikarp', 'Remoraid', 'Wishiwashi', 'Drednaw', 'Gyarados'],
+        water: ['Goldeen', 'Magikarp', 'Remoraid', 'Wishiwashi (Solo)', 'Drednaw', 'Gyarados'],
         special:
         [
             new SpecialRoutePokemon(['Krabby', 'Wooper', 'Wingull', 'Bounsweet', 'Purrloin', 'Tympole', 'Frillish', 'Kingler', 'Quagsire', 'Pelipper', 'Grapploct', 'Cloyster', 'Lapras', 'Seaking'], [new WeatherRequirement([WeatherType.Clear])]),
@@ -1810,7 +1810,7 @@ Routes.add(new RegionRoute(
     'East Lake Axwell', GameConstants.Region.galar, 6,
     new RoutePokemon({
         land: ['Stufful', 'Butterfree', 'Pidove'],
-        water: ['Shellder', 'Magikarp', 'Goldeen', 'Wishiwashi', 'Gyarados', 'Wingull'],
+        water: ['Shellder', 'Magikarp', 'Goldeen', 'Wishiwashi (Solo)', 'Gyarados', 'Wingull'],
         special:
         [
             new SpecialRoutePokemon(['Oddish', 'Bounsweet', 'Bunnelby', 'Frillish', 'Xatu', 'Garbodor', 'Jellicent', 'Seaking', 'Pelipper', 'Lanturn', 'Cloyster'], [new WeatherRequirement([WeatherType.Clear])]),
@@ -1978,7 +1978,7 @@ Routes.add(new RegionRoute(
     'Galar Route 9', GameConstants.Region.galar, 20,
     new RoutePokemon({
         land: ['Cramorant', 'Octillery', 'Kingler', 'Pyukumuku', 'Gastrodon (east)', 'Jellicent', 'Mareanie', 'Glalie'],
-        water: ['Wishiwashi', 'Qwilfish', 'Mantyke'],
+        water: ['Wishiwashi (Solo)', 'Qwilfish', 'Mantyke'],
     }),
     [new GymBadgeRequirement(BadgeEnums.Galar_Rock)]
 ));
@@ -2092,7 +2092,7 @@ Routes.add(new RegionRoute(
     'Challenge Beach', GameConstants.Region.armor, 4,
     new RoutePokemon({
         land: ['Magnemite', 'Psyduck', 'Dedenne', 'Morpeko', 'Blipbug', 'Buneary', 'Jigglypuff', 'Happiny'],
-        water: ['Magikarp', 'Wishiwashi', 'Dhelmise', 'Staryu', 'Pelipper', 'Tentacool', 'Wingull'],
+        water: ['Magikarp', 'Wishiwashi (Solo)', 'Dhelmise', 'Staryu', 'Pelipper', 'Tentacool', 'Wingull'],
         special:
         [
             new SpecialRoutePokemon(['Chansey', 'Lopunny', 'Comfey', 'Drednaw', 'Marill', 'Cramorant', 'Kingler', 'Starmie', 'Tentacruel', 'Gyarados', 'Octillery', 'Barraskewda'], [new WeatherRequirement([WeatherType.Clear])]),
@@ -2297,7 +2297,7 @@ Routes.add(new RegionRoute(
     'Stepping-Stone Sea', GameConstants.Region.armor, 13,
     new RoutePokemon({
         land: ['Blipbug', 'Exeggcute', 'Happiny', 'Wingull'],
-        water: ['Magikarp', 'Wishiwashi', 'Sharpedo', 'Tentacool', 'Frillish', 'Gyarados', 'Clauncher', 'Skrelp', 'Clawitzer', 'Dragalge'],
+        water: ['Magikarp', 'Wishiwashi (Solo)', 'Sharpedo', 'Tentacool', 'Frillish', 'Gyarados', 'Clauncher', 'Skrelp', 'Clawitzer', 'Dragalge'],
         special:
         [
             new SpecialRoutePokemon(['Chansey', 'Mantyke'], [new WeatherRequirement([WeatherType.Clear])]),
@@ -2324,7 +2324,7 @@ Routes.add(new RegionRoute(
     'Insular Sea', GameConstants.Region.armor, 14,
     new RoutePokemon({
         land: ['Blipbug', 'Wingull', 'Exeggcute', 'Happiny'],
-        water: ['Magikarp', 'Wishiwashi', 'Sharpedo', 'Tentacool', 'Horsea', 'Gyarados', 'Clauncher', 'Skrelp', 'Clawitzer', 'Dragalge'],
+        water: ['Magikarp', 'Wishiwashi (Solo)', 'Sharpedo', 'Tentacool', 'Horsea', 'Gyarados', 'Clauncher', 'Skrelp', 'Clawitzer', 'Dragalge'],
         special:
         [
             new SpecialRoutePokemon(['Exeggutor', 'Mantyke'], [new WeatherRequirement([WeatherType.Clear])]),
@@ -2347,7 +2347,7 @@ Routes.add(new RegionRoute(
 Routes.add(new RegionRoute(
     'Honeycalm Sea', GameConstants.Region.armor, 15,
     new RoutePokemon({
-        water: ['Tentacool', 'Magikarp', 'Wishiwashi', 'Sharpedo', 'Wingull', 'Wailmer', 'Clauncher', 'Skrelp', 'Gyarados', 'Clawitzer', 'Dragalge'],
+        water: ['Tentacool', 'Magikarp', 'Wishiwashi (Solo)', 'Sharpedo', 'Wingull', 'Wailmer', 'Clauncher', 'Skrelp', 'Gyarados', 'Clawitzer', 'Dragalge'],
         special:
         [
             new SpecialRoutePokemon(['Mantyke', 'Seadra'], [new WeatherRequirement([WeatherType.Clear])]),
@@ -2372,7 +2372,7 @@ Routes.add(new RegionRoute(
     'Honeycalm Island', GameConstants.Region.armor, 16,
     new RoutePokemon({
         land: ['Blipbug', 'Combee', 'Petilil', 'Happiny'],
-        water: ['Magikarp', 'Wishiwashi', 'Wingull', 'Tentacool', 'Wailmer', 'Gyarados', 'Clauncher', 'Skrelp', 'Clawitzer', 'Dragalge'],
+        water: ['Magikarp', 'Wishiwashi (Solo)', 'Wingull', 'Tentacool', 'Wailmer', 'Gyarados', 'Clauncher', 'Skrelp', 'Clawitzer', 'Dragalge'],
         special:
         [
             new SpecialRoutePokemon(['Chansey', 'Lilligant', 'Mantyke'], [new WeatherRequirement([WeatherType.Clear])]),
