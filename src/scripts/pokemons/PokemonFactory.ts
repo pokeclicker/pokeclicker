@@ -30,7 +30,7 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
-        const heldItem: string = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_CHANCE);
+        const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_CHANCE);
 
         const money: number = this.routeMoney(route,region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
@@ -197,8 +197,8 @@ class PokemonFactory {
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
     }
 
-    private static generateHeldItem(item: string, chance: number): string | null {
-        if (!item || !ItemList[item]) {
+    private static generateHeldItem(item: BagItem, chance: number): BagItem | null {
+        if (!item || !BagHandler.displayName(item)) {
             return null;
         }
 

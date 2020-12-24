@@ -1,13 +1,3 @@
-
-enum ItemType {
-    item = 1,
-    underground,
-    berry,
-    shard,
-}
-
-type BagItem = {type: ItemType, id: string | number }
-
 /**
  * Static class as an API for handling items.
  */
@@ -18,6 +8,9 @@ class BagHandler {
      * @param item The item identifier
      */
     public static displayName(item: BagItem): string {
+        if (!item) {
+            return '';
+        }
         switch (item.type) {
             case ItemType.item:
                 return this.getItem(item.id).displayName;
@@ -35,6 +28,9 @@ class BagHandler {
      * @param item The item identifier
      */
     public static image(item: BagItem): string {
+        if (!item) {
+            return '';
+        }
         switch (item.type) {
             case ItemType.item:
                 return this.getItem(item.id).imagePath;
@@ -53,6 +49,9 @@ class BagHandler {
      * @param item The item identifier
      */
     public static amount(item: BagItem): KnockoutObservable<number> {
+        if (!item) {
+            return null;
+        }
         switch (item.type) {
             case ItemType.item:
                 return player.itemList[this.getItem(item.id).name()];
@@ -72,6 +71,9 @@ class BagHandler {
      * @param amount The amount to be added to the Bag. Defaults to 1.
      */
     public static gainItem(item: BagItem, amount = 1): void {
+        if (!item) {
+            return;
+        }
         switch (item.type) {
             case ItemType.item:
                 this.getItem(item.id).gain(amount);
