@@ -961,7 +961,7 @@ const pokemonList = createPokemonArray(
         'name': 'Alolan Ninetales',
         'nativeRegion': GameConstants.Region.alola,
         'catchRate': 75,
-        'type': [PokemonType.Fire],
+        'type': [PokemonType.Ice, PokemonType.Fairy],
         'levelType': LevelType.mediumfast,
         'exp': 177,
         'eggCycles': 20,
