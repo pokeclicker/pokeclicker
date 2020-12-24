@@ -8,7 +8,7 @@ class TypeBoosterResearch extends ResearchWithCost {
         option = option ?? {};
         option.workerFilter = option.workerFilter ?? new TypeFilter([pokemonType]);
         option.requirements = []; // TODO: HLXII - Setup requirement for Typed BF stages
-        super(id, ResearchType.Type_Booster, `Type Booster - ${PokemonType[pokemonType]}`, undefined, points, [{type: pokemonType, amount: 5000}], option);
+        super(id, ResearchType.Type_Booster, `Type Booster - ${PokemonType[pokemonType]}`, undefined, points, [{item: {type: ItemType.shard, id: pokemonType}, amount: 5000}], option);
         this._pokemonType = pokemonType;
     }
 

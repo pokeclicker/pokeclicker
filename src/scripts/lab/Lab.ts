@@ -72,6 +72,17 @@ class Lab implements Feature {
         // TODO: HLXII - Balance research point cost
         //#region Research
 
+        /**
+         * NOTE: We store the research save data in the JSON using the enum string value.
+         * This will make things a bit easier down the line, as when loading saves, we can use the enum string value,
+         * and thus adding new research in between existing ones can be done without additional save manipulation
+         *
+         * However, the index of the researchList must match the enum number value, as we index by the enum in
+         * isResearched(). Adding new research in between older ones works, however the order in the enum must match.
+         * We don't have to worry about the actual enum number values (aka shifting when adding new ones), since
+         * We store research save data by the enum string value, which won't change.
+         */
+
         this.researchList = [
 
             //#region Research
@@ -122,24 +133,12 @@ class Lab implements Feature {
             new Research(Lab.Research.fabricator_speed4, ResearchType.Machine,
                 'Fabricator Speed IV', 'Increases fabrication speed by 100%.',
                 135000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed3)] }),
-            new Research(Lab.Research.fabricator_eff_1, ResearchType.Machine,
-                'Fabricator Efficiency I', 'Increases amount of shards gained from plate deconstruction by 25%.',
-                5000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator)] }),
-            new Research(Lab.Research.fabricator_eff_2, ResearchType.Machine,
-                'Fabricator Efficiency I', 'Increases amount of shards gained from plate deconstruction by 50%.',
-                25000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_eff_1)] }),
-            new Research(Lab.Research.fabricator_eff_3, ResearchType.Machine,
-                'Fabricator Efficiency I', 'Increases amount of shards gained from plate deconstruction by 75%.',
-                125000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_eff_2)] }),
 
             // Plate Deconstructor
             new Research(Lab.Research.plate_deconstructor, ResearchType.Machine,
                 'Plate Deconstructor', 'Unlocks the Plate Deconstructor Machine.',
-                2000, {
-                    completeDelegate: () => {
-                        App.game.lab.machines[Lab.Machine.plate_deconstructor].amount = 1;
-                    },
-                }),
+                2000),
+
             new Research(Lab.Research.plate_deconstructor_speed1, ResearchType.Machine,
                 'Plate Deconstructor Speed I', 'Increases plate deconstruction speed by 25%.',
                 3000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor)] }),
@@ -152,6 +151,7 @@ class Lab implements Feature {
             new Research(Lab.Research.plate_deconstructor_speed4, ResearchType.Machine,
                 'Plate Deconstructor Speed IV', 'Increases plate deconstruction speed by 100%.',
                 81000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed3)] }),
+
             new Research(Lab.Research.plate_deconstructor_eff1, ResearchType.Machine,
                 'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 25%.',
                 4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor)] }),
@@ -165,11 +165,8 @@ class Lab implements Feature {
             // Plate Reconstructor
             new Research(Lab.Research.plate_reconstructor, ResearchType.Machine,
                 'Plate Reconstructor', 'Unlocks the Plate Reconstructor Machine.',
-                2000, {
-                    completeDelegate: () => {
-                        App.game.lab.machines[Lab.Machine.plate_reconstructor].amount = 1;
-                    },
-                }),
+                2000),
+
             new Research(Lab.Research.plate_reconstructor_speed1, ResearchType.Machine,
                 'Plate Reconstructor Speed I', 'Increases plate reconstruction speed by 25%.',
                 3000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor)] }),
@@ -182,6 +179,7 @@ class Lab implements Feature {
             new Research(Lab.Research.plate_reconstructor_speed4, ResearchType.Machine,
                 'Plate Reconstructor Speed IV', 'Increases plate reconstruction speed by 100%.',
                 81000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed3)] }),
+
             new Research(Lab.Research.plate_reconstructor_eff1, ResearchType.Machine,
                 'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 12.5%.',
                 4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor)] }),
@@ -193,15 +191,99 @@ class Lab implements Feature {
                 36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff2)] }),
 
             // Incubator
+            /*
+            'incubator',
+            'incubator_capacity1',
+            'incubator_capacity2',
+            'incubator_capacity3',
+            'incubator_capacity4',
+            'incubator_fuel',
+            'incubator_fuel_flame_plate',
+            'incubator_fuel_fire_stone',
+            'incubator_fuel_occa',
+            'incubator_fuel_magmarizer',
+            'incubator_fuel_eff1',
+            'incubator_fuel_eff2',
+            'incubator_fuel_eff3',
+            */
+            // Generator
+            new Research(Lab.Research.generator, ResearchType.Machine,
+                'Generator', 'Unlocks the Generator Machine.',
+                9000),
+
+            new Research(Lab.Research.generator_power1, ResearchType.Machine,
+                'Generator Power I', 'Increases generator effect by 25%.',
+                10000, { requirements: [new ResearchedRequirement(Lab.Research.generator)] }),
+            new Research(Lab.Research.generator_power2, ResearchType.Machine,
+                'Generator Power II', 'Increases generator effect by 50%.',
+                30000, { requirements: [new ResearchedRequirement(Lab.Research.generator_power1)] }),
+            new Research(Lab.Research.generator_power3, ResearchType.Machine,
+                'Generator Power III', 'Increases generator effect by 75%.',
+                90000, { requirements: [new ResearchedRequirement(Lab.Research.generator_power2)] }),
+
+            new Research(Lab.Research.generator_fuel, ResearchType.Machine,
+                'Generator Fuel', 'Upgrades Generators to allow for fuel.',
+                15000, { requirements: [new ResearchedRequirement(Lab.Research.generator)] }),
+            new ResearchWithCost(Lab.Research.generator_fuel_zap_plate, ResearchType.Machine,
+                'Generator Fuel - Zap Plate', 'Configures Generators to use Zap Plates for fuel.',
+                20000, [{item: {type: ItemType.underground, id: 'Zap Plate'}, amount: 10}], { requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)] }),
+            new ResearchWithCost(Lab.Research.generator_fuel_thunder_stone, ResearchType.Machine,
+                'Generator Fuel - Thunder Stone', 'Configures Generators to use Thunder Stones for fuel.',
+                20000, [{item: {type: ItemType.item, id: 'Thunder_stone'}, amount: 10}], { requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)] }),
+            new ResearchWithCost(Lab.Research.generator_fuel_wacan, ResearchType.Machine,
+                'Generator Fuel - Wacan Berry', 'Configures Generators to use Wacan Berries for fuel.',
+                20000, [{item: {type: ItemType.berry, id: BerryType.Wacan}, amount: 10}], { requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)] }),
+            new ResearchWithCost(Lab.Research.generator_fuel_electirizer, ResearchType.Machine,
+                'Generator Fuel - Electirizer', 'Configures Generators to use Electirizers for fuel.',
+                20000, [{item: {type: ItemType.item, id: 'Electirizer'}, amount: 10}], { requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)] }),
+
+            new Research(Lab.Research.generator_fuel_eff1, ResearchType.Machine,
+                'Generator Efficiency I', 'Increases generator fuel efficiency by 25%.',
+                10000, { requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)] }),
+            new Research(Lab.Research.generator_fuel_eff2, ResearchType.Machine,
+                'Generator Efficiency II', 'Increases generator fuel efficiency by 50%.',
+                30000, { requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_eff2)] }),
+            new Research(Lab.Research.generator_fuel_eff3, ResearchType.Machine,
+                'Generator Efficiency III', 'Increases generator fuel efficiency by 75%.',
+                90000, { requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_eff3)] }),
 
             // Fossil Reviver
-
-            // Generator
-
+            /*
+            'fossil_reviver',
+            'fossil_reviver_speed1',
+            'fossil_reviver_speed2',
+            'fossil_reviver_speed3',
+            'fossil_reviver_queue',
+            'fossil_reviver_queue1',
+            'fossil_reviver_queue2',
+            'fossil_reviver_queue3',
+            'fossil_reviver_queue4',
+            'fossil_helix',
+            'fossil_dome',
+            'fossil_old_amber',
+            'fossil_root',
+            'fossil_claw',
+            'fossil_skull',
+            'fossil_armor',
+            'fossil_cover',
+            'fossil_plume',
+            'fossil_jaw',
+            'fossil_sail',
+            */
             // Research Booster
 
             // Pokeball Factory
-
+            /*
+            'pokeball_factory',
+            'pokeball_factory_speed1',
+            'pokeball_factory_speed2',
+            'pokeball_factory_speed3',
+            'fastball',
+            'quickball',
+            'timerball',
+            'duskball',
+            'luxuryball',
+            */
             // Type Boosters
             // TODO: HLXII - Implement after Typed BF is implemented
             /*
@@ -241,6 +323,60 @@ class Lab implements Feature {
                 }),
             */
 
+            //#endregion
+
+
+
+            //#region Fabricator Item Blueprints
+            /*
+            'fire_stone',
+            'water_stone',
+            'thunder_stone',
+            'leaf_stone',
+            'moon_stone',
+            'sun_stone',
+            'dragon_scale',
+            'metal_coat',
+            'upgrade',
+            'dubious_disc',
+            'electirizer',
+            'magmarizer',
+            'protector',
+            'reaper_cloth',
+            */
+            //#endregion
+
+            //#region Genesect
+            /*
+            'drive_burner',
+            'shock_drive',
+            'burn_drive',
+            'chill_drive',
+            'douse_drive',
+            */
+            //#endregion
+
+            //#region Arceus
+            /*
+            'legendary_plate',
+            'legendary_draco_plate',
+            'legendary_dread_plate',
+            'legendary_earth_plate',
+            'legendary_fist_plate',
+            'legendary_flame_plate',
+            'legendary_icicle_plate',
+            'legendary_insect_plate',
+            'legendary_iron_plate',
+            'legendary_meadow_plate',
+            'legendary_mind_plate',
+            'legendary_sky_plate',
+            'legendary_splash_plate',
+            'legendary_spooky_plate',
+            'legendary_stone_plate',
+            'legendary_toxic_plate',
+            'legendary_zap_plate',
+            'legendary_pixie_plate',
+            */
             //#endregion
 
         ];
@@ -384,20 +520,20 @@ class Lab implements Feature {
 namespace Lab {
     // TODO: HLXII - Add all Researches
     export enum Research {
+        // Research
         'research_slot1' = 0,
         'research_slot2',
         'research_workers1',
         'research_workers2',
         'research_workers3',
         'research_workers4',
+        // Fabricator
         'fabricator',
         'fabricator_speed1',
         'fabricator_speed2',
         'fabricator_speed3',
         'fabricator_speed4',
-        'fabricator_eff_1',
-        'fabricator_eff_2',
-        'fabricator_eff_3',
+        // Plate Deconstructor
         'plate_deconstructor',
         'plate_deconstructor_speed1',
         'plate_deconstructor_speed2',
@@ -406,6 +542,7 @@ namespace Lab {
         'plate_deconstructor_eff1',
         'plate_deconstructor_eff2',
         'plate_deconstructor_eff3',
+        // Plate Reconstructor
         'plate_reconstructor',
         'plate_reconstructor_speed1',
         'plate_reconstructor_speed2',
@@ -414,6 +551,72 @@ namespace Lab {
         'plate_reconstructor_eff1',
         'plate_reconstructor_eff2',
         'plate_reconstructor_eff3',
+        // Incubator
+        /*
+        'incubator',
+        'incubator_capacity1',
+        'incubator_capacity2',
+        'incubator_capacity3',
+        'incubator_capacity4',
+        'incubator_fuel',
+        'incubator_fuel_flame_plate',
+        'incubator_fuel_fire_stone',
+        'incubator_fuel_occa',
+        'incubator_fuel_magmarizer',
+        'incubator_fuel_eff1',
+        'incubator_fuel_eff2',
+        'incubator_fuel_eff3',
+        */
+        // Generator
+        'generator',
+        'generator_power1',
+        'generator_power2',
+        'generator_power3',
+        'generator_fuel',
+        'generator_fuel_zap_plate',
+        'generator_fuel_thunder_stone',
+        'generator_fuel_wacan',
+        'generator_fuel_electirizer',
+        'generator_fuel_eff1',
+        'generator_fuel_eff2',
+        'generator_fuel_eff3',
+        // Fossil Reviver
+        'fossil_reviver',
+        'fossil_reviver_speed1',
+        'fossil_reviver_speed2',
+        'fossil_reviver_speed3',
+        'fossil_reviver_queue',
+        'fossil_reviver_queue1',
+        'fossil_reviver_queue2',
+        'fossil_reviver_queue3',
+        'fossil_reviver_queue4',
+        'fossil_helix',
+        'fossil_dome',
+        'fossil_old_amber',
+        'fossil_root',
+        'fossil_claw',
+        'fossil_skull',
+        'fossil_armor',
+        'fossil_cover',
+        'fossil_plume',
+        'fossil_jaw',
+        'fossil_sail',
+        // TODO: HLXII - Add VIII fossils
+        // Research Booster
+
+        // Pokeball Factory
+        'pokeball_factory',
+        'pokeball_factory_speed1',
+        'pokeball_factory_speed2',
+        'pokeball_factory_speed3',
+        'fastball',
+        'quickball',
+        'timerball',
+        'duskball',
+        'luxuryball',
+        // Type Booster
+        /*
+        'type_boost',
         'type_boost_normal',
         'type_boost_fire',
         'type_boost_water',
@@ -432,7 +635,51 @@ namespace Lab {
         'type_boost_dark',
         'type_boost_steel',
         'type_boost_fairy',
-        'time_machine',
+        */
+        // Weather Controller
+
+        // Time Machine
+        //'time_machine',
+        // Fabricator Item Blueprints
+        'fire_stone',
+        'water_stone',
+        'thunder_stone',
+        'leaf_stone',
+        'moon_stone',
+        'sun_stone',
+        'dragon_scale',
+        'metal_coat',
+        'upgrade',
+        'dubious_disc',
+        'electirizer',
+        'magmarizer',
+        'protector',
+        'reaper_cloth',
+        // Genesect
+        'drive_burner',
+        'shock_drive',
+        'burn_drive',
+        'chill_drive',
+        'douse_drive',
+        // Arceus
+        'legendary_plate',
+        'legendary_draco_plate',
+        'legendary_dread_plate',
+        'legendary_earth_plate',
+        'legendary_fist_plate',
+        'legendary_flame_plate',
+        'legendary_icicle_plate',
+        'legendary_insect_plate',
+        'legendary_iron_plate',
+        'legendary_meadow_plate',
+        'legendary_mind_plate',
+        'legendary_sky_plate',
+        'legendary_splash_plate',
+        'legendary_spooky_plate',
+        'legendary_stone_plate',
+        'legendary_toxic_plate',
+        'legendary_zap_plate',
+        'legendary_pixie_plate',
     }
 
     // TODO: HLXII - Add all Machines

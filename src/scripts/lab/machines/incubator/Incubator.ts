@@ -1,5 +1,5 @@
-/// <reference path="./Machine.ts" />
-/// <reference path="./MachineState.ts" />
+/// <reference path="../Machine.ts" />
+/// <reference path="../MachineState.ts" />
 /**
  * The Incubator will increase the number of queue slots in the Hatchery when placed in the Lab.
  */

@@ -1,5 +1,5 @@
-/// <reference path="./Machine.ts" />
-/// <reference path="./MachineState.ts" />
+/// <reference path="../Machine.ts" />
+/// <reference path="../MachineState.ts" />
 
 /**
  * The Fabricator machine is used to create new machines as well as other items.
@@ -11,6 +11,8 @@ class Fabricator extends Machine {
         state.fromJSON(json);
         return state;
     }
+
+    // Handle research upgrades
 
 }
 

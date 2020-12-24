@@ -11,16 +11,16 @@ aria-labelledby="GeneratorModalLabel" aria-hidden="true">
             </div>
 
             <div class="modal-body">
+                <!-- ko if: App.game.lab.isResearched(Lab.Research.generator_fuel) -->
                 <div class="row no-gutters justify-content-center">
                     <h4>
                         <span data-bind="text: 'Fuel: ' + state.fuel.toFixed(1) + '/' + Generator.fuelCapacity()">Fuel</span>
                     </h4>
                 </div>
-                <!-- ko if: Generator.getAvailableFuels().length -->
                 <ul class="row justify-content-center p-0" data-bind="foreach: Generator.getAvailableFuels()">
                     <li class="eggSlot col-3 col-md-3 pokedexEntry text-nowrap" data-bind="class: ''">
                         <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">name</span>
-                        <img src="" width="80px" data-bind="attr:{ src: FossilReviver.getImage($data.id) }">
+                        <img src="" width="80px" data-bind="attr:{ src: BagHandler.image($data.type, $data.itemId) }">
                         <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.itemAmount()">amount</span>
                         <a class="overlay" href="#fuel" data-bind="click: function() { state.addToQueue($data); }"></a>
                     </li>

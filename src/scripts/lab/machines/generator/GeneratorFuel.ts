@@ -1,9 +1,9 @@
 enum GeneratorFuelType {
-    'fire_shard' = 0,
-    'flame_plate',
-    'occa_berry',
-    'fire_stone',
-    'magmarizer',
+    'electric_shard' = 0,
+    'zap_plate',
+    'wacan_berry',
+    'thunder_stone',
+    'electirizer',
 }
 
 class GeneratorFuel {
@@ -11,22 +11,10 @@ class GeneratorFuel {
     public itemAmount: KnockoutComputed<number>;
 
     constructor(public id: GeneratorFuelType,
-        public name: string,
-        public item: PokemonType | UndergroundItem | Berry | Item,
+        public itemId: string | number,
+        public type: ItemType,
         public fuelAmount: number,
         public research?: Lab.Research) {
-
-        this.itemAmount = ko.pureComputed(() => {
-            if (item instanceof Item) {
-                return player.itemList[item.name()]();
-            } else if (item instanceof UndergroundItem) {
-                return player.mineInventory()[player.mineInventoryIndex(item.id)].amount();
-            } else if (item instanceof Berry) {
-                return App.game.farming.berryList[item.type]();
-            } else {
-                return App.game.shards.shardWallet[item]();
-            }
-        });
 
     }
 

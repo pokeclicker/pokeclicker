@@ -1,7 +1,6 @@
 interface ItemCost {
-    item?: UndergroundItem | Berry | Item,
-    type?: PokemonType,
-    amount: number
+    item: BagItem,
+    amount: number,
 }
 
 class ResearchWithCost extends Research {
@@ -38,17 +37,7 @@ class ResearchWithCost extends Research {
             return false;
         }
         this._costs.forEach(itemCost => {
-            if (itemCost.item instanceof Item) {
-                player.loseItem(itemCost.item.name, itemCost.amount);
-            } else if (itemCost.item instanceof UndergroundItem) {
-                const itemIndex = player.mineInventoryIndex(itemCost.item.id);
-                const amt = player.mineInventory()[itemIndex].amount();
-                player.mineInventory()[itemIndex].amount(amt - (itemCost.amount));
-            } else if (itemCost.item instanceof Berry) {
-                GameHelper.incrementObservable(App.game.farming.berryList[itemCost.item.type], -itemCost.amount);
-            } else if (itemCost.type !== undefined) {
-                App.game.shards.gainShards(-itemCost.amount, itemCost.type);
-            }
+            BagHandler.gainItem(itemCost.item, -itemCost.amount);
         });
         this.purchased = true;
         return true;
@@ -56,18 +45,7 @@ class ResearchWithCost extends Research {
 
     get canPurchase(): boolean {
         return this._costs.every(itemCost => {
-            if (itemCost.item instanceof Item) {
-                return player.hasItem(itemCost.item.name) >= itemCost.amount;
-            } else if (itemCost.item instanceof UndergroundItem) {
-                const itemIndex = player.mineInventoryIndex(itemCost.item.id);
-                return player.mineInventory()[itemIndex].amount() >= itemCost.amount;
-            } else if (itemCost.item instanceof Berry) {
-                return App.game.farming.berryList[itemCost.item.type]() >= itemCost.amount;
-            } else if (itemCost.type !== undefined) {
-                return App.game.shards.shardWallet[itemCost.type]() >= itemCost.amount;
-            } else {
-                return false;
-            }
+            BagHandler.amount(itemCost.item)() >= itemCost.amount;
         });
     }
 
@@ -78,15 +56,7 @@ class ResearchWithCost extends Research {
      */
     get costTooltip(): string {
         return this._costs.map(itemCost => {
-            if (itemCost.item instanceof Item) {
-                return `${itemCost.item.displayName}: ${itemCost.amount}`;
-            } else if (itemCost.item instanceof UndergroundItem) {
-                return `${itemCost.item.name}: ${itemCost.amount}`;
-            } else if (itemCost.item instanceof Berry) {
-                return `${BerryType[itemCost.item.type]} Berries: ${itemCost.amount}`;
-            } else if (itemCost.type !== undefined) {
-                return `${PokemonType[itemCost.type]} Shards: ${itemCost.amount}`;
-            }
+            return `${BagHandler.displayName(itemCost.item)}: ${itemCost.amount}`;
         }).join('<br>');
     }
 

@@ -24,11 +24,11 @@ class Generator extends Machine {
     public static fuelTypes: GeneratorFuel[];
     public static initialize() {
         this.fuelTypes = [
-            new GeneratorFuel(GeneratorFuelType.fire_shard, 'Fire Shard', PokemonType.Fire, 0.1),
-            new GeneratorFuel(GeneratorFuelType.fire_stone, 'Fire Stone', ItemList['Fire_stone'], 20),
-            new GeneratorFuel(GeneratorFuelType.flame_plate, 'Flame Plate', UndergroundItem.list.find(item => item.name == 'Flame Plate'), 10),
-            new GeneratorFuel(GeneratorFuelType.occa_berry, 'Occa Berry', App.game.farming.berryData[BerryType.Occa], 0.2),
-            new GeneratorFuel(GeneratorFuelType.magmarizer, 'Magmarizer', ItemList['Magmarizer'], 25),
+            new GeneratorFuel(GeneratorFuelType.electric_shard, PokemonType.Electric, ItemType.shard, 0.1, Lab.Research.generator_fuel),
+            new GeneratorFuel(GeneratorFuelType.zap_plate, 'Zap Plate', ItemType.underground, 10, Lab.Research.generator_fuel_zap_plate),
+            new GeneratorFuel(GeneratorFuelType.wacan_berry, BerryType.Wacan, ItemType.berry, 0.2, Lab.Research.generator_fuel_wacan),
+            new GeneratorFuel(GeneratorFuelType.thunder_stone, 'Thunder_stone', ItemType.item, 20, Lab.Research.generator_fuel_thunder_stone),
+            new GeneratorFuel(GeneratorFuelType.electirizer, 'Electirizer', ItemType.item, 25, Lab.Research.generator_fuel_electirizer),
         ];
     }
 

@@ -160,6 +160,14 @@ class Underground implements Feature {
         }
     }
 
+    public static getMineItemByName(name: string): UndergroundItem {
+        for (const item of UndergroundItem.list) {
+            if (item.name == name) {
+                return item;
+            }
+        }
+    }
+
     gainEnergy() {
         if (this.energy < this.getMaxEnergy()) {
             const oakMultiplier = App.game.oakItems.calculateBonus(OakItems.OakItem.Cell_Battery);
