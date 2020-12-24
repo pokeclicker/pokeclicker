@@ -5,6 +5,7 @@
 /// <reference path="../../declarations/weather/WeatherType.d.ts" />
 /// <reference path="../../declarations/enums/PokemonType.d.ts" />
 /// <reference path="../../declarations/interfaces/BagItem.d.ts" />
+/// <reference path="../farming/BerryType.ts" />
 
 const pokemonBabyPrevolutionMap: { [name: string]: PokemonNameType } = {};
 
@@ -1689,6 +1690,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 30,
             'speed': 20,
         },
+        'heldItem': {type: ItemType.underground, id: 'Everstone'},
     },
     {
         'id': 74.01,
@@ -1726,6 +1728,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 35,
         },
+        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
         'id': 75.01,
@@ -1762,6 +1765,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 45,
         },
+        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
         'id': 76.01,
@@ -2158,6 +2162,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 45,
             'speed': 70,
         },
+        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
         'id': 96,
@@ -2530,6 +2535,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 50,
         },
+        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
     },
     {
         'id': 114,
@@ -3206,6 +3212,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
+        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
     },
     {
         'id': 152,
@@ -4917,6 +4924,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 95,
             'speed': 35,
         },
+        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
         'id': 223,
@@ -5433,6 +5441,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
+        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
     },
     {
         'id': 252,
@@ -6292,6 +6301,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 90,
             'speed': 30,
         },
+        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
         'id': 300,
@@ -6361,6 +6371,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 55,
             'speed': 50,
         },
+        'heldItem': {type: ItemType.underground, id: 'Iron Ball'},
     },
     {
         'id': 304,
@@ -6379,6 +6390,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 30,
         },
+        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
         'id': 305,
@@ -6397,6 +6409,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 40,
         },
+        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
         'id': 306,
@@ -6414,6 +6427,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 60,
             'speed': 50,
         },
+        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
         'id': 307,
@@ -7593,6 +7607,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 97,
         },
+        'heldItem': {type: ItemType.underground, id: 'Heart Scale'},
     },
     {
         'id': 371,
@@ -9012,6 +9027,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 65,
             'speed': 30,
         },
+        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
     },
     {
         'id': 441,
@@ -9639,6 +9655,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 150,
             'speed': 40,
         },
+        'heldItem': {type: ItemType.underground, id: 'Hard Stone'},
     },
     {
         'id': 477,
@@ -10016,6 +10033,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
+        'heldItem': {type: ItemType.berry, id: BerryType.Lum},
     },
     {
         'id': 492.1,
@@ -10884,6 +10902,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 25,
             'speed': 15,
         },
+        'heldItem': {type: ItemType.underground, id: 'Everstone'},
     },
     {
         'id': 525,
@@ -10902,6 +10921,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 40,
             'speed': 20,
         },
+        'heldItem': {type: ItemType.underground, id: 'Everstone'},
     },
     {
         'id': 526,
@@ -10919,6 +10939,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 25,
         },
+        'heldItem': {type: ItemType.underground, id: 'Everstone'},
     },
     {
         'id': 527,
@@ -11481,6 +11502,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 35,
             'speed': 55,
         },
+        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
     },
     {
         'id': 558,
@@ -11498,6 +11520,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 75,
             'speed': 45,
         },
+        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
     },
     {
         'id': 559,
@@ -16259,7 +16282,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 105,
             'speed': 85,
         },
-
+        'heldItem': {type: ItemType.item, id: 'Razor_claw'},
     },
     {
         'id': 784.01,
