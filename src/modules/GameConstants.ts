@@ -16,7 +16,7 @@ export const MAX_LOAD_TIME = 20000; // 20 Seconds
 export const MUTATION_TICK = 1000;
 export const WANDER_TICK = 1500;
 
-export const MAX_AVAILABLE_REGION = 3; // Sinnoh
+export const MAX_AVAILABLE_REGION = 4; // Unova
 
 export const TotalPokemonsPerRegion = [
     151, // 151 - Kanto
@@ -452,7 +452,7 @@ export const Environments: Record<string, EnvironmentData> = {
     },
 
     PowerPlant: {
-        [Region.kanto]: new Set(['vermilion City', 'Power Plant']),
+        [Region.kanto]: new Set(['Vermilion City', 'Power Plant']),
         [Region.johto]: new Set(['Tin Tower']),
         [Region.hoenn]: new Set(['Mauville City']),
         [Region.sinnoh]: new Set(['Sunyshore City']),
@@ -643,7 +643,7 @@ export const PokemonToFossil = {
 export const KantoGyms = [
     'Pewter City',
     'Cerulean City',
-    'vermilion City',
+    'Vermilion City',
     'Celadon City',
     'Saffron City',
     'Fuchsia City',
@@ -894,7 +894,6 @@ export const KalosDungeons = [
     'Glittering Cave',
     'Reflection Cave',
     // 'Tower of Mastery',
-    'Azure Bay', // Should really be a route
     // 'Sea Spirit's Den',
     // 'Kalos Power Plant',
     // 'Pokéball Factory',
@@ -964,7 +963,7 @@ export const StartingTowns = [
 ];
 
 export const DockTowns = [
-    'vermilion City', // Kanto
+    'Vermilion City', // Kanto
     'Olivine City', // Johto
     'Slateport City', // Hoenn
     'Canalave City', // Sinnoh
