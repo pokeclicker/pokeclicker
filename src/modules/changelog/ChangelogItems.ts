@@ -10,6 +10,15 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.7.0
+    new ChangelogUpdate('v0.7.0 - Unova', new Date(2020, 11, 23)),
+    new Changelog(changelogType.NEW, 'The Unova region is now available!'),
+    new Changelog(changelogType.NEW, 'Added notification for when Berry about to wither'),
+    new Changelog(changelogType.CHANGE, 'Minor text fixes'),
+    new Changelog(changelogType.CHANGE, 'Route HP slightly buffed'),
+    new Changelog(changelogType.CHANGE, 'Some Gyms and Dungeons HP buffed'),
+    new Changelog(changelogType.FIXED, 'Babiri berry removed from Enigma pool'),
+
     // v0.6.9
     new ChangelogUpdate('v0.6.9', new Date(2020, 11, 20)),
     new Changelog(changelogType.CHANGE, 'Give free quest refresh on all quests completed'),
