@@ -2341,6 +2341,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 50,
             'speed': 35,
         },
+        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
     },
     {
         'id': 105,
@@ -2358,6 +2359,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 80,
             'speed': 45,
         },
+        'heldItem': {type: ItemType.underground, id: 'Rare Bone'},
     },
     {
         'id': 105.01,
@@ -5286,6 +5288,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 135,
             'speed': 55,
         },
+        'heldItem': {type: ItemType.underground, id: 'Oval Stone'},
     },
     {
         'id': 243,
@@ -5654,6 +5657,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 41,
             'speed': 60,
         },
+        'heldItem': {type: ItemType.underground, id: 'Revive'},
     },
     {
         'id': 264,
@@ -5671,6 +5675,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 61,
             'speed': 100,
         },
+        'heldItem': {type: ItemType.underground, id: 'Max Revive'},
     },
     {
         'id': 265,
@@ -7873,6 +7878,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 100,
         },
+        'heldItem': {type: ItemType.underground, id: 'Star Piece'},
     },
     {
         'id': 386,
@@ -13298,6 +13304,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 128,
             'speed': 90,
         },
+        'heldItem': {type: ItemType.underground, id: 'Star Piece'},
     },
     {
         'id': 648.1,
@@ -15954,6 +15961,7 @@ const pokemonList = createPokemonArray(
             'specialDefense': 100,
             'speed': 60,
         },
+        'heldItem': {type: ItemType.underground, id: 'Star Piece'},
     },
     {
         'id': 774.01,
