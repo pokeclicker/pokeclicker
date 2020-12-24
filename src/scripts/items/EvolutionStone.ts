@@ -59,3 +59,4 @@ ItemList['Razor_fang']    = new EvolutionStone(GameConstants.StoneType.Razor_fan
 ItemList['Prism_scale']    = new EvolutionStone(GameConstants.StoneType.Prism_scale, 2500, undefined , 'Prism Scale');
 ItemList['Sachet']         = new EvolutionStone(GameConstants.StoneType.Sachet, 2500, undefined , 'Sachet');
 ItemList['Whipped_dream']  = new EvolutionStone(GameConstants.StoneType.Whipped_dream, 2500, undefined , 'Whipped Dream');
+ItemList['Ice_stone']      = new EvolutionStone(GameConstants.StoneType.Ice_stone, 2500, undefined , 'Ice Stone');

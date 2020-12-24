@@ -17,6 +17,8 @@ class Plot implements Saveable {
 
     _auras: KnockoutObservable<number>[];
 
+    _hasWarnedAboutToWither: boolean;
+
     formattedStageTimeLeft: KnockoutComputed<string>;
     formattedTimeLeft: KnockoutComputed<string>;
     formattedMulchTimeLeft: KnockoutComputed<string>;
@@ -226,6 +228,11 @@ class Plot implements Saveable {
                 change = true;
             }
 
+            if (!this._hasWarnedAboutToWither && this.age + 15 > this.berryData.growthTime[4]) {
+                this.notifications.push(FarmNotificationType.AboutToWither);
+                this._hasWarnedAboutToWither = true;
+            }
+
             if (this.age > this.berryData.growthTime[4]) {
                 this.die();
                 change = true;
@@ -261,6 +268,7 @@ class Plot implements Saveable {
         this.berry = berry;
         this.age = 0;
         this.notifications = [];
+        this._hasWarnedAboutToWither = false;
     }
 
     /**
