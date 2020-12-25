@@ -821,7 +821,6 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
         new DungeonBossPokemon('Porygon', 62000000, 100),
         new DungeonBossPokemon('Audino', 62000000, 100),
         new DungeonBossPokemon('Mawile', 62000000, 100),
-        new DungeonBossPokemon('Arceus (steel)', 62000000, 100),
         new DungeonBossPokemon('Sableye', 62000000, 100),
     ],
     396500, 230, 100);
