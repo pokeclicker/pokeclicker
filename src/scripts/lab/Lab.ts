@@ -401,6 +401,8 @@ class Lab implements Feature {
     }
 
     update(delta: number) {
+
+        // Update Research Slots
         this.currentResearch().forEach(res => {
             const complete = res.update(delta);
             if (complete) {
@@ -413,9 +415,27 @@ class Lab implements Feature {
             }
         });
 
+        // Update Machines
         this.placedMachines().forEach(placedMachine => {
             placedMachine.state.update(delta);
         });
+
+        // Handle unlocked Research
+        let notify = false;
+        this.researchList.forEach(research => {
+            if (research.canResearch() && !research.notified) {
+                research.notified = true;
+                notify = true;
+            }
+        });
+        if (notify) {
+            // TODO: HLXII - Update notification properties
+            Notifier.notify({
+                message: 'New Research is available!',
+                type: NotificationConstants.NotificationOption.success,
+                sound: NotificationConstants.NotificationSound.achievement,
+            });
+        }
     }
 
     canAccess(): boolean {

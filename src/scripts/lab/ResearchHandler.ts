@@ -48,7 +48,7 @@ class ResearchHandler {
             if (this.filter.status() != 'all') {
                 switch (this.filter.status()) {
                     case 'locked':
-                        return research.state() === ResearchState.Locked || research.state() === ResearchState.NotPurchased;
+                        return research.state() === ResearchState.NotPurchased;
                     case 'incomplete':
                         return research.state() === ResearchState.Ready || research.state() === ResearchState.Researching;
                     case 'completed':
@@ -56,6 +56,8 @@ class ResearchHandler {
                     default:
                         return false;
                 }
+            } else if (research.state() === ResearchState.Locked) {
+                return false;
             }
             if (this.filter.type() != 'all' && !research.type.includes(ResearchType[this.filter.type()])) {
                 return false;

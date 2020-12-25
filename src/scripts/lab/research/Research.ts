@@ -10,6 +10,7 @@ class Research implements Saveable {
         progress: 0,
         inProgress: false,
         completed: false,
+        notified: false,
     };
 
     public id: Lab.Research;
@@ -27,6 +28,8 @@ class Research implements Saveable {
     private _completed: KnockoutObservable<boolean>;
 
     state: KnockoutComputed<ResearchState>;
+
+    private _notified: KnockoutObservable<boolean>;
 
     constructor(id: Lab.Research, type: ResearchType | ResearchType[], name: string, description: string, points: number, option?: ResearchOption) {
         this.id = id;
@@ -54,6 +57,8 @@ class Research implements Saveable {
             }
             return ResearchState.Locked;
         }, this);
+
+        this._notified = ko.observable(this.defaults.notified);
     }
 
     /**
@@ -83,13 +88,15 @@ class Research implements Saveable {
             completed: this.completed,
             inProgress: this.inProgress,
             progress: this.progress,
+            notified: this.notified,
         };
         return json;
     }
     fromJSON(json: Record<string, any>): void {
-        this.completed = json['completed'] ?? this.defaults.completed;
-        this.inProgress = json['inProgress'] ?? this.defaults.inProgress;
-        this.progress = json['progress'] ?? this.defaults.progress;
+        this.completed = json.hasOwnProperty('completed') ? json['completed'] : this.defaults.completed;
+        this.inProgress = json.hasOwnProperty('inProgress') ? json['inProgress'] : this.defaults.inProgress;
+        this.progress = json.hasOwnProperty('progress') ? json['progress'] : this.defaults.progress;
+        this.notified = json.hasOwnProperty('notified') ? json['notified'] : this.defaults.notified;
     }
 
 
@@ -141,6 +148,14 @@ class Research implements Saveable {
             return '';
         }
         return this._requirements.map(req => req.hint()).join(' and ');
+    }
+
+    get notified() {
+        return this._notified();
+    }
+
+    set notified(bool: boolean) {
+        this._notified(bool);
     }
 
 }
