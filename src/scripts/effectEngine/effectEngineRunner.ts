@@ -1,11 +1,17 @@
 class EffectEngineRunner {
     public static counter = 0;
     public static multipliers = ['×1', '×10', '×100', '×1000', 'All'];
+    public static pmultipliers = ['x1', 'x5', 'x10'];
     public static multIndex = ko.observable(0);
 
     public static amountToUse = ko.pureComputed(() => {
         // Either the digits specified, or All (Infinity)
         return Number(EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()].replace(/\D/g, '')) || Infinity;
+    })
+
+    public static pamountToUse = ko.pureComputed(() => {
+        // Either the digits specified, or All (Infinity)
+        return Number(EffectEngineRunner.pmultipliers[EffectEngineRunner.multIndex()].replace(/\D/g, ''));
     })
 
     public static tick() {
@@ -34,6 +40,14 @@ class EffectEngineRunner {
 
     public static decrementMultiplier() {
         this.multIndex((this.multIndex() + this.multipliers.length - 1) % this.multipliers.length);
+    }
+
+    public static pIncrementMultiplier() {
+        this.multIndex((this.multIndex() + 1) % this.pmultipliers.length);
+    }
+
+    public static pDecrementMultiplier() {
+        this.multIndex((this.multIndex() + this.pmultipliers.length - 1) % this.pmultipliers.length);
     }
 
     public static getEffect(itemName: string) {
