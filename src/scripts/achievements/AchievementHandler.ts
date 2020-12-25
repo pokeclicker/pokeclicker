@@ -117,7 +117,7 @@ class AchievementHandler {
         return AchievementHandler.achievementList.find((achievement) => achievement.name === name);
     }
 
-    public static initialize() {
+    public static initialize(multiplier: Multiplier) {
 
         /*
          * GENERAL
@@ -264,5 +264,7 @@ class AchievementHandler {
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion()));
         this.resetPages();
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
+
+        multiplier.addBonus('exp', () => 1 + this.achievementBonus());
     }
 }

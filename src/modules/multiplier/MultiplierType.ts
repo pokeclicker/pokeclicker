@@ -1,5 +1,7 @@
 enum MultiplierType {
-    attack,
+    pokemonAttack,
+    clickAttack,
+    exp,
 }
 
 export default MultiplierType;
