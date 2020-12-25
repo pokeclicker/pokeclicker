@@ -105,10 +105,6 @@ class AchievementHandler {
         return sum;
     }
 
-    public static getMoneyMultiplier() {
-        return 1 + this.achievementBonus();
-    }
-
     public static achievementBonusPercent(): string {
         return `${(100 * AchievementHandler.achievementBonus()).toFixed(2)}%`;
     }
@@ -266,5 +262,6 @@ class AchievementHandler {
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
 
         multiplier.addBonus('exp', () => 1 + this.achievementBonus());
+        multiplier.addBonus('money', () => 1 + this.achievementBonus());
     }
 }

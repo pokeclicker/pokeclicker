@@ -10,19 +10,13 @@ class Wallet implements Feature {
         currencies: new Array(GameHelper.enumLength(GameConstants.Currency)).fill(0),
     };
 
-    constructor() {
+    constructor(private multiplier: Multiplier) {
         this.currencies = this.defaults.currencies.map((v) => ko.observable(v));
     }
 
     public gainMoney(base: number, origin?: string): number {
-        App.game.oakItems.use(OakItems.OakItem.Amulet_Coin);
-
-        let money = base;
-        money *= App.game.oakItems.calculateBonus(OakItems.OakItem.Amulet_Coin);
-        money *= AchievementHandler.getMoneyMultiplier();
-        money *= EffectEngineRunner.getMoneyMultiplier();
-
-        money = Math.floor(money);
+        const bonus = this.multiplier.getBonus('money');
+        const money = Math.floor(base * bonus);
 
         GameHelper.incrementObservable(App.game.statistics.totalMoney, money);
         GameController.animateCurrency(money, 'playerMoney');
