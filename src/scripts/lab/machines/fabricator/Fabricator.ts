@@ -21,11 +21,11 @@ class Fabricator extends Machine {
  */
 class FabricatorState extends MachineState {
 
-    private _selectedItem: KnockoutObservable<Lab.Machine | Item | UndergroundItem>;
+    private _selectedBlueprint: KnockoutObservable<BlueprintType>;
 
     constructor() {
         super();
-        this._selectedItem = ko.observable();
+        this._selectedBlueprint = ko.observable();
     }
 
     update(delta: number) {
