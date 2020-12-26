@@ -20,6 +20,7 @@ import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
 import { LogBookTypes } from './logbook/LogBookTypes';
 import ChangelogItems from './changelog/ChangelogItems';
+import RedeemableCode from './codes/RedeemableCode';
 import EggType from './breeding/EggType';
 
 Object.assign(<any>window, {
@@ -45,5 +46,6 @@ Object.assign(<any>window, {
     LogBook,
     LogBookTypes,
     ChangelogItems,
+    RedeemableCode,
     EggType,
 });
