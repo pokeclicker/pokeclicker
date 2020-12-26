@@ -92,8 +92,8 @@ class PartyPokemon implements Saveable {
         return false;
     }
 
-    public useProtein(amount: number) {
-        if (!this.canUseProtein(amount)) {
+    public useProtein(amount = this.getAmount) {
+        if (!this.canUseProtein(amount())) {
             Notifier.notify({
                 message: 'This Pokémon cannot increase their power any higher!',
                 type: NotificationConstants.NotificationOption.warning,
@@ -101,8 +101,12 @@ class PartyPokemon implements Saveable {
             return;
         }
         if (ItemHandler.useItem('Protein'), amount) {
-            GameHelper.incrementObservable(this.proteinsUsed, amount);
+            GameHelper.incrementObservable(this.proteinsUsed, amount());
         }
+    }
+
+    private getAmount() {
+        return Number(VitaminController.vitaminMultipliers[VitaminController.vitaminIndex()].replace(/\D/g, ''));
     }
 
     canUseProtein = (amount: number) => {
