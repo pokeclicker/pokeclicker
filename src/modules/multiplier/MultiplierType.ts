@@ -5,6 +5,7 @@ enum MultiplierType {
     money,
     dungeonToken,
     shiny,
+    eggStep,
 }
 
 export default MultiplierType;

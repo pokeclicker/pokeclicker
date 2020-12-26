@@ -55,6 +55,7 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
 
         this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny]());
+        this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg]());
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {

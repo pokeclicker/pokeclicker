@@ -202,7 +202,7 @@ class Breeding implements Feature {
     }
 
     private getStepMultiplier() {
-        return App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette) * App.game.farming.externalAuras[AuraType.Egg]();
+        return this.multiplier.getBonus('eggStep');
     }
 
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {
