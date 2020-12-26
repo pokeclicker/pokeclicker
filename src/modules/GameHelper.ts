@@ -34,11 +34,10 @@ export default class GameHelper {
     private static readonly MS_IN_MIN = 1000 * 60;
     private static readonly MS_IN_HOUR = GameHelper.MS_IN_MIN * 60;
 
-    public static incrementObservable(obs: KnockoutObservable<number>, amt = 1, peek = true): void {
+    public static incrementObservable(obs: KnockoutObservable<number>, amt = 1): void {
         if (typeof obs !== 'function') { return; }
         const trueAmount = (Number.isNaN(amt) || amt === 0) ? 1 : amt;
-        const current = peek ? obs.peek() : obs();
-        obs(current + trueAmount);
+        obs(obs() + trueAmount);
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types

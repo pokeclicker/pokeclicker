@@ -15,7 +15,7 @@ class Wallet implements Feature {
     }
 
     public gainMoney(base: number, origin?: string): number {
-        const bonus = this.multiplier.getBonus('money');
+        const bonus = this.multiplier.getBonus('money', true);
         const money = Math.floor(base * bonus);
 
         GameHelper.incrementObservable(App.game.statistics.totalMoney, money);
@@ -26,10 +26,8 @@ class Wallet implements Feature {
     }
 
     public gainDungeonTokens(base: number, origin?: string) {
-        let tokens = base;
-        tokens *= EffectEngineRunner.getDungeonTokenMultiplier();
-
-        tokens = Math.floor(tokens);
+        const bonus = this.multiplier.getBonus('dungeonToken', true);
+        const tokens = Math.floor(base * bonus);
 
         GameHelper.incrementObservable(App.game.statistics.totalDungeonTokens, tokens);
         GameController.animateCurrency(tokens, 'playerMoneyDungeon');
