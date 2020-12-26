@@ -41,6 +41,7 @@ class Game {
 
         AchievementHandler.initialize(multiplier);
         FarmController.initialize();
+        EffectEngineRunner.initialize(multiplier);
     }
 
     load() {
