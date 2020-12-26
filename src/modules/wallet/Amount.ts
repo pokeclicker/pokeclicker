@@ -5,4 +5,7 @@ export default class Amount {
         public amount: number,
         public currency:Currency,
     ) {}
+    public toString() {
+        return `Amount(${this.amount}, ${Currency[this.currency]})`;
+    }
 }
