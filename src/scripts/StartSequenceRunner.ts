@@ -1,3 +1,5 @@
+/// <reference path="../declarations/utilities/Information.d.ts" />
+
 class StartSequenceRunner {
 
     public static starterPicked: GameConstants.Starter = GameConstants.Starter.None
