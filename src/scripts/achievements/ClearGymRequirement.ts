@@ -3,8 +3,8 @@
 class ClearGymRequirement extends Requirement {
     public gymIndex: number; // Gym name index in array GameConstants.Gyms
 
-    constructor(value: number, gymIndex: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, type);
+    constructor(value: number, gymIndex: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(value, option, GameConstants.AchievementType['Clear Gym']);
         this.gymIndex = gymIndex;
     }
 

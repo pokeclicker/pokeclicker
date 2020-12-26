@@ -5,9 +5,9 @@ class RouteKillRequirement extends Requirement {
         value: number,
         public region: GameConstants.Region,
         public route: number,
-        type: GameConstants.AchievementOption = GameConstants.AchievementOption.more
+        option: GameConstants.AchievementOption = GameConstants.AchievementOption.more
     ) {
-        super(value, type);
+        super(value, option, GameConstants.AchievementType['Route Kill']);
     }
 
     public getProgress() {
