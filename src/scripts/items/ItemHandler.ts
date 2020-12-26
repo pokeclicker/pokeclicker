@@ -26,7 +26,7 @@ class ItemHandler {
     }
 
     private static getAmount() {
-        return Number(VitaminController.vitaminmultipliers[VitaminController.vitaminIndex()].replace(/\D/g, ''));
+        return Number(VitaminController.vitaminMultipliers[VitaminController.vitaminIndex()].replace(/\D/g, ''));
     }
 
     public static hasItem(name: string): boolean {
