@@ -21,6 +21,7 @@ import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
 import { LogBookTypes } from './logbook/LogBookTypes';
 import ChangelogItems from './changelog/ChangelogItems';
+import EggType from './breeding/EggType';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -46,4 +47,5 @@ Object.assign(<any>window, {
     LogBook,
     LogBookTypes,
     ChangelogItems,
+    EggType,
 });

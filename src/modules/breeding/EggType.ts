@@ -10,3 +10,4 @@ enum EggType {
     Mystery,
     Fossil,
 }
+export default EggType;
