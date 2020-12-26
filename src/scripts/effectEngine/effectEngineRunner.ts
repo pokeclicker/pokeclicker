@@ -68,10 +68,6 @@ class EffectEngineRunner {
         player.effectTimer[itemName](times.join(':'));
     }
 
-    public static getMoneyMultiplier() {
-        return this.isActive(GameConstants.BattleItemType.Lucky_incense)() ? 1.5 : 1;
-    }
-
     public static getDungeonTokenMultiplier() {
         return this.isActive(GameConstants.BattleItemType.Token_collector)() ? 1.5 : 1;
     }

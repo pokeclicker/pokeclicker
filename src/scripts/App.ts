@@ -23,7 +23,7 @@ class App {
                 update,
                 new Breeding(),
                 new Pokeballs(),
-                new Wallet(),
+                new Wallet(multiplier),
                 new KeyItems(),
                 new BadgeCase(),
                 new OakItems([20, 50, 100], multiplier),

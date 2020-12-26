@@ -3,6 +3,7 @@ enum MultiplierType {
     clickAttack,
     exp,
     money,
+    dungeonToken,
 }
 
 export default MultiplierType;

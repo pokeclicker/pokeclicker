@@ -81,7 +81,7 @@ class Party implements Feature {
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
-        const multBonus = this.multiplier.getBonus('exp');
+        const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;
         const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
 
@@ -176,7 +176,7 @@ class Party implements Feature {
         return false;
     }
 
-    calculateClickAttack(): number {
+    calculateClickAttack(useItem = false): number {
         // Base power
         // Shiny pokemon help with a 50% boost
         const clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
