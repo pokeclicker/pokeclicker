@@ -82,9 +82,9 @@ gymList['Cerulean City'] = new Gym(
     'I can\'t believe I lost! All right! You can have the Cascade Badge to show you beat me!',
     [new RouteKillRequirement(10, GameConstants.Region.kanto, 4)]
 );
-gymList['vermilion City'] = new Gym(
+gymList['Vermilion City'] = new Gym(
     'Lt. Surge',
-    'vermilion City',
+    'Vermilion City',
     [new GymPokemon('Raichu', 37000, 28)],
     BadgeEnums.Thunder,
     1000,
