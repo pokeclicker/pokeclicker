@@ -1,5 +1,5 @@
 class VitaminController {
-    public static vitaminMultipliers = ['×1', '×5', 'x10', 'Max'];
+    public static vitaminMultipliers = ['×1', '×5', 'x10'];
     public static vitaminIndex = ko.observable(0);
 
     public static vitaminIncrease() {
