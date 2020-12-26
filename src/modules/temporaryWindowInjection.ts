@@ -22,6 +22,8 @@ import { LogBookTypes } from './logbook/LogBookTypes';
 import ChangelogItems from './changelog/ChangelogItems';
 import Amount from './wallet/Amount';
 import AmountFactory from './wallet/AmountFactory';
+import RedeemableCode from './codes/RedeemableCode';
+import EggType from './breeding/EggType';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -48,4 +50,6 @@ Object.assign(<any>window, {
     ChangelogItems,
     Amount,
     AmountFactory,
+    RedeemableCode,
+    EggType,
 });
