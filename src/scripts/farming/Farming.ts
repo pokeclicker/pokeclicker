@@ -42,7 +42,7 @@ class Farming implements Feature {
 
     highestUnlockedBerry: KnockoutComputed<number>;
 
-    constructor() {
+    constructor(private multiplier: Multiplier) {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
@@ -53,6 +53,8 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
         this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
         this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
+
+        this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny]());
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {

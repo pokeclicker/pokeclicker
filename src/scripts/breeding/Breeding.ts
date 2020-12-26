@@ -23,7 +23,7 @@ class Breeding implements Feature {
 
     public hatchList: { [name: number]: PokemonNameType[][] } = {};
 
-    constructor() {
+    constructor(private multiplier: Multiplier) {
         this._eggList = this.defaults.eggList;
         this._eggSlots = ko.observable(this.defaults.eggSlots);
         this.queueList = ko.observableArray(this.defaults.queueList);
@@ -194,7 +194,7 @@ class Breeding implements Feature {
         let index =  this.eggList.length;
         while (index-- > 0) {
             const egg = this.eggList[index]();
-            egg.addSteps(amount);
+            egg.addSteps(amount, this.multiplier);
             if (this.queueList().length && egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
             }

@@ -21,7 +21,7 @@ class App {
             player = Save.load();
             App.game = new Game(
                 update,
-                new Breeding(),
+                new Breeding(multiplier),
                 new Pokeballs(),
                 new Wallet(multiplier),
                 new KeyItems(),
@@ -31,7 +31,7 @@ class App {
                 new Party(multiplier),
                 new Shards(),
                 new Underground(),
-                new Farming(),
+                new Farming(multiplier),
                 new LogBook(),
                 new RedeemableCodes(),
                 new Statistics(),

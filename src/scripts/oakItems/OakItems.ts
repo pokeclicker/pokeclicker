@@ -43,6 +43,7 @@ class OakItems implements Feature {
         this.addMultiplier('clickAttack', OakItems.OakItem.Poison_Barb);
         this.addMultiplier('exp', OakItems.OakItem.Exp_Share);
         this.addMultiplier('money', OakItems.OakItem.Amulet_Coin);
+        this.addMultiplier('shiny', OakItems.OakItem.Shiny_Charm);
     }
 
     private addMultiplier(type: keyof typeof MultiplierType, item: OakItems.OakItem) {
