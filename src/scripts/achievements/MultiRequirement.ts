@@ -1,4 +1,4 @@
-///<reference path="Requirement.ts"/>
+/// <reference path="../../declarations/achievements/Requirement.d.ts" />
 
 class MultiRequirement {
     constructor(public requirements: Requirement[] = []) {}

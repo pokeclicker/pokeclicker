@@ -1,4 +1,4 @@
-///<reference path="Requirement.ts"/>
+/// <reference path="../../declarations/achievements/Requirement.d.ts" />
 
 class PokeballRequirement extends Requirement {
     private pokeball: GameConstants.Pokeball;

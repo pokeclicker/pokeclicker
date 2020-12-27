@@ -1,4 +1,4 @@
-///<reference path="Requirement.ts"/>
+/// <reference path="../../declarations/achievements/Requirement.d.ts" />
 
 class ClearGymRequirement extends Requirement {
     public gymIndex: number; // Gym name index in array GameConstants.Gyms

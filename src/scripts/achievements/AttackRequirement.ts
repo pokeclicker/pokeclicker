@@ -1,4 +1,4 @@
-///<reference path="Requirement.ts"/>
+/// <reference path="../../declarations/achievements/Requirement.d.ts" />
 
 class AttackRequirement extends Requirement {
     constructor( value: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
