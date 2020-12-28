@@ -13,12 +13,12 @@ export default abstract class Requirement {
     }
     public isCompleted() {
         switch (this.type) {
-            default: case AchievementOption.less:
-                return this.getProgress() < this.requiredValue;
             case AchievementOption.equal:
                 return this.getProgress() === this.requiredValue;
             case AchievementOption.more:
                 return this.getProgress() >= this.requiredValue;
+            default: case AchievementOption.less:
+                return this.getProgress() < this.requiredValue;
         }
     }
     abstract getProgress(): number;
