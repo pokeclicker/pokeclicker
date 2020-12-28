@@ -6,7 +6,7 @@ class ItemHandler {
     static amount: KnockoutObservable<number> = ko.observable(1);
     public static amountToUse = 1;
 
-    public static useItem(name: string, amount = this.getAmount()): boolean {
+    public static useItem(name: string, amount = 1): boolean {
         if (!player.itemList[name]()) {
             Notifier.notify({
                 message: `You don't have any ${ItemList[name].displayName}s left...`,
@@ -23,10 +23,6 @@ class ItemHandler {
         const result = ItemList[name].use();
         // If the function returned nothing assume it went fine
         return result == undefined ? true : result;
-    }
-
-    private static getAmount() {
-        return Number(VitaminController.vitaminMultipliers[VitaminController.vitaminIndex()].replace(/\D/g, ''));
     }
 
     public static hasItem(name: string): boolean {
