@@ -1,4 +1,5 @@
 ///<reference path="../party/CaughtStatus.ts"/>
+/// <reference path="../../declarations/breeding/EggType.d.ts" />
 
 class BreedingController {
     public static spotTypes = [
