@@ -2346,7 +2346,7 @@ TownList['Freezington'] = new Town(
 TownList['Slumbering Weald'] = new DungeonTown(
     'Slumbering Weald',
     GameConstants.Region.galar,
-    [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)] //TODO change to alola champion
+    [new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)]
 );
 TownList['Inner Slumbering Weald'] = new DungeonTown(
     'Inner Slumbering Weald',
