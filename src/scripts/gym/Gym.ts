@@ -1555,7 +1555,7 @@ gymList['Dojo Master Mustard'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_PsychicBadge)]
 );
 gymList['Trainer Peony'] = new Gym(
-    'Peony',
+    'Freezington',
     'Trainer Peony',
     [
         new GymPokemon('Perrserker', 1948300, 49),
