@@ -17205,7 +17205,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumslow,
         'exp': 147,
         'catchRate': 45,
-        'evolutions': [new LevelEvolution('Drizzile', 'Inteleom', 35)],
+        'evolutions': [new LevelEvolution('Drizzile', 'Inteleon', 35)],
     },
     {
         'id': 818,
@@ -17390,7 +17390,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.fast,
         'exp': 49,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Nickit', 'Theivul', 18)],
+        'evolutions': [new LevelEvolution('Nickit', 'Thievul', 18)],
     },
     {
         'id': 828,
