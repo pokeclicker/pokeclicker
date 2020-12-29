@@ -1,9 +1,11 @@
-class RedeemableCode {
+import Notifier from '../notifications/Notifier';
+import NotificationConstants from '../notifications/NotificationConstants';
+
+export default class RedeemableCode {
     name: string;
     hash: number;
     isRedeemed: boolean;
     private readonly rewardFunction: () => void;
-
 
     constructor(name: string, hash: number, isRedeemed: boolean, rewardFunction: () => void) {
         this.name = name;
@@ -22,7 +24,7 @@ class RedeemableCode {
         }
 
         // If nothing returned, assume it was redeemed fine
-        if (this.rewardFunction() == undefined) {
+        if (this.rewardFunction() === undefined) {
             this.isRedeemed = true;
         }
     }
