@@ -298,7 +298,11 @@ class Update implements Saveable {
             }
         },
 
-        '0.6.9': ({ saveData, playerData }) => {
+        '0.7.0': ({ playerData, saveData }) => {
+            $('#developmentModal').modal('show');
+        },
+
+        '0.7.1': ({ saveData, playerData }) => {
             // Update underground item IDs
             const itemMap = (id) => {
                 if (id <= 7) { // fossils

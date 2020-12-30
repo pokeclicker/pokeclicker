@@ -63,8 +63,9 @@ class EnigmaMutation extends GrowMutation {
         let berryTypes = Farming.getGeneration(2).concat(Farming.getGeneration(3));
         // Remove parasite Berries, as having four sides for mutation requirements means parasite
         // mutations can make it difficult to have all four plants fully grown.
+        // Also remove Babiri since they'll stop mutations
         berryTypes = berryTypes.filter(berry => {
-            return ![BerryType.Occa, BerryType.Kebia, BerryType.Colbur].includes(berry);
+            return ![BerryType.Occa, BerryType.Kebia, BerryType.Colbur, BerryType.Babiri].includes(berry);
         });
         return [...new Array(4)].map((_) => SeededRand.fromArray(berryTypes));
     }

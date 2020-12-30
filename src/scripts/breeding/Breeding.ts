@@ -1,5 +1,6 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+/// <reference path="../../declarations/breeding/EggType.d.ts" />
 
 import Currency = GameConstants.Currency;
 
@@ -57,7 +58,7 @@ class Breeding implements Feature {
             ['Piplup', 'Finneon', 'Buizel'],
             ['Oshawott', 'Panpour'],
             ['Froakie'],
-            ['Popplio'],
+            ['Popplio', 'Wimpod'],
             ['Sobble'],
         ];
         this.hatchList[EggType.Grass] = [
@@ -67,7 +68,7 @@ class Breeding implements Feature {
             ['Turtwig', 'Carnivine', 'Budew'],
             ['Snivy', 'Pansage'],
             ['Chespin'],
-            ['Rowlet'],
+            ['Rowlet', 'Morelull'],
             ['Grookey'],
         ];
         this.hatchList[EggType.Fighting] = [
@@ -77,7 +78,7 @@ class Breeding implements Feature {
             ['Riolu'],
             ['Throh', 'Sawk'],
             [],
-            [],
+            ['Crabrawler'],
             [],
         ];
         this.hatchList[EggType.Electric] = [
@@ -97,7 +98,7 @@ class Breeding implements Feature {
             ['Gible', 'Gabite', 'Garchomp'],
             ['Deino', 'Zweilous', 'Hydreigon'],
             [],
-            [],
+            ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
             [],
         ];
         BreedingController.initialize();
@@ -335,7 +336,7 @@ class Breeding implements Feature {
     }
 
     public calculateBaseForm(pokemonName: PokemonNameType): PokemonNameType {
-        const devolution = pokemonDevolutionMap[pokemonName];
+        const devolution = pokemonBabyPrevolutionMap[pokemonName];
         // Base form of Pokemon depends on which regions players unlocked
         if (!devolution || PokemonHelper.calcNativeRegion(devolution) > player.highestRegion()) {
             // No devolutions at all
