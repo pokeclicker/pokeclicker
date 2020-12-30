@@ -1,10 +1,10 @@
 abstract class Requirement {
     public requiredValue: number;
-    public type: GameConstants.AchievementOption;
+    public option: GameConstants.AchievementOption;
 
-    constructor(requiredValue: number, type: GameConstants.AchievementOption) {
+    constructor(requiredValue: number, option: GameConstants.AchievementOption) {
         this.requiredValue = requiredValue;
-        this.type = type;
+        this.option = option;
     }
 
     abstract getProgress(): number;
@@ -15,7 +15,7 @@ abstract class Requirement {
     }
 
     public isCompleted() {
-        switch (this.type) {
+        switch (this.option) {
             case GameConstants.AchievementOption.less:
                 return this.getProgress() < this.requiredValue;
             case GameConstants.AchievementOption.equal:

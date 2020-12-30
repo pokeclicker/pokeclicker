@@ -307,6 +307,29 @@ class Update implements Saveable {
                 egg.shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps));
                 return egg;
             });
+
+            // Update underground item IDs
+            const itemMap = (id) => {
+                if (id <= 7) { // fossils
+                    return id + 199;
+                } else if (id <= 16) { // Diamond Items
+                    return id - 7;
+                } else if (id <= 22) { // Evolution Stones
+                    return id + 283;
+                } else if (id <= 28) { // Diamond Items
+                    return id - 13;
+                } else { // Shard Plates
+                    return id + 71;
+                }
+            };
+            playerData.mineInventory = playerData.mineInventory?.map(i => {
+                i.id = itemMap(i.id);
+                return i;
+            }) || [];
+            if (saveData.underground?.mine) {
+                // Reset the mine
+                delete saveData.underground.mine;
+            }
         },
     };
 

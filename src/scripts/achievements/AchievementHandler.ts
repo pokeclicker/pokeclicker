@@ -3,22 +3,25 @@
 class AchievementHandler {
 
     public static achievementList: Achievement[] = [];
-    public static achievementTypes: KnockoutObservableArray<string> = ko.observableArray([]);
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static maxBonus: KnockoutObservableArray<number> = ko.observableArray([]);
     public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
 
-    public static navigateRight() {
-        if (AchievementHandler.navigateIndex() < AchievementHandler.numberOfTabs()) {
-            AchievementHandler.navigateIndex(AchievementHandler.navigateIndex() + 1);
+    public static setNavigateIndex(index: number): void {
+        if (index < 0 || index >= AchievementHandler.numberOfTabs()) {
+            return;
         }
+        AchievementHandler.navigateIndex(index);
+        Settings.setSettingByName('achievementsPage', index);
+    }
+
+    public static navigateRight() {
+        this.setNavigateIndex(AchievementHandler.navigateIndex() + 1);
     }
 
     public static navigateLeft() {
-        if (AchievementHandler.navigateIndex() > 0) {
-            AchievementHandler.navigateIndex(AchievementHandler.navigateIndex() - 1);
-        }
+        this.setNavigateIndex(AchievementHandler.navigateIndex() - 1);
     }
 
     public static isNavigateDirectionDisabled(navigateBackward: boolean): boolean {
@@ -32,9 +35,9 @@ class AchievementHandler {
     }
 
     public static filter = {
-        status: ko.observable('all'),
-        type:   ko.observable('all'),
-        region: ko.observable('all'),
+        status: ko.observable(-2).extend({ numeric: 0 }),
+        type:   ko.observable(-2).extend({ numeric: 0 }),
+        region: ko.observable(-2).extend({ numeric: 0 }),
     }
 
     public static getAchievementListWithIndex() {
@@ -44,21 +47,16 @@ class AchievementHandler {
     public static filterAchievementList(retainPage = false) {
         this.achievementListFiltered(this.achievementList.filter((a) => (
             a.region <= player.highestRegion() &&
-            (this.filter.status() == 'all' || a.unlocked == JSON.parse(this.filter.status())) &&
-            (this.filter.type()   == 'all' || a.property.constructor.name == this.filter.type()) &&
-            (this.filter.region() == 'all' || a.region == +this.filter.region())
+            (this.filter.status() == -2 || a.unlocked === !!this.filter.status()) &&
+            (this.filter.type()   == -2 || a.property.achievementType === this.filter.type()) &&
+            (this.filter.region() == -2 || a.region === this.filter.region())
         )));
         this.calculateNumberOfTabs();
         if (!retainPage) {
-            this.resetPages();
+            this.setNavigateIndex(0);
         } else if (this.getAchievementListWithIndex().length === 0 && this.navigateIndex() > 0) {
-            this.navigateIndex(this.numberOfTabs()  - 1);
+            this.setNavigateIndex(this.numberOfTabs() - 1);
         }
-    }
-
-    public static resetPages() {
-        this.calculateNumberOfTabs();
-        this.navigateIndex(0);
     }
 
     public static checkAchievements() {
@@ -69,7 +67,7 @@ class AchievementHandler {
         }
     }
 
-    public static addAchievement(name: string, description: string, property: Requirement, bonus: number, region = GameConstants.Region.none) {
+    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, region = GameConstants.Region.none) {
         const unlocked: boolean = player.achievementsCompleted[name];
         AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked));
     }
@@ -78,12 +76,6 @@ class AchievementHandler {
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
             AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region).reduce((sum, a) => sum + a.bonus, 0);
         });
-    }
-
-    public static calculateAchievementTypes() {
-        const types = [];
-        AchievementHandler.achievementList.forEach(a => types.push(a.property?.constructor.name));
-        AchievementHandler.achievementTypes([...new Set(types)]);
     }
 
     public static bonusUnlocked(): number {
@@ -256,12 +248,24 @@ class AchievementHandler {
         });
 
         AchievementHandler.calculateMaxBonus();
-        AchievementHandler.calculateAchievementTypes();
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion()));
-        this.resetPages();
+
+        // load filters, filter the list & calculate number of tabs
+        this.load();
+        this.filterAchievementList(true);
+        this.calculateNumberOfTabs();
+
+        // subscribe to filters so that when the player changes a filter it automatically refilters the list
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
 
         multiplier.addBonus('exp', () => 1 + this.achievementBonus());
         multiplier.addBonus('money', () => 1 + this.achievementBonus());
+    }
+
+    static load() {
+        AchievementHandler.navigateIndex(Settings.getSetting('achievementsPage').value);
+        AchievementHandler.filter.status(Settings.getSetting('achievementsStatus').value);
+        AchievementHandler.filter.type(Settings.getSetting('achievementsType').value);
+        AchievementHandler.filter.region(Settings.getSetting('achievementsRegion').value);
     }
 }
