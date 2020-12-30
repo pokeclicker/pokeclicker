@@ -301,6 +301,31 @@ class Update implements Saveable {
         '0.7.0': ({ playerData, saveData }) => {
             $('#developmentModal').modal('show');
         },
+
+        '0.7.1': ({ saveData, playerData }) => {
+            // Update underground item IDs
+            const itemMap = (id) => {
+                if (id <= 7) { // fossils
+                    return id + 199;
+                } else if (id <= 16) { // Diamond Items
+                    return id - 7;
+                } else if (id <= 22) { // Evolution Stones
+                    return id + 283;
+                } else if (id <= 28) { // Diamond Items
+                    return id - 13;
+                } else { // Shard Plates
+                    return id + 71;
+                }
+            };
+            playerData.mineInventory = playerData.mineInventory?.map(i => {
+                i.id = itemMap(i.id);
+                return i;
+            }) || [];
+            if (saveData.underground?.mine) {
+                // Reset the mine
+                delete saveData.underground.mine;
+            }
+        },
     };
 
     constructor() {
