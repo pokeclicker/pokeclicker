@@ -35,9 +35,9 @@ class AchievementHandler {
     }
 
     public static filter = {
-        status: ko.observable('-2'),
-        type:   ko.observable('-2'),
-        region: ko.observable('-2'),
+        status: ko.observable(-2).extend({ numeric: 0 }),
+        type:   ko.observable(-2).extend({ numeric: 0 }),
+        region: ko.observable(-2).extend({ numeric: 0 }),
     }
 
     public static getAchievementListWithIndex() {
@@ -45,14 +45,11 @@ class AchievementHandler {
     }
 
     public static filterAchievementList(retainPage = false) {
-        console.log(this.filter.status());
-        console.log(this.filter.type());
-        console.log(this.filter.region());
         this.achievementListFiltered(this.achievementList.filter((a) => (
             a.region <= player.highestRegion() &&
-            (this.filter.status() == '-2' || a.unlocked === !!+this.filter.status()) &&
-            (this.filter.type()   == '-2' || a.property.achievementType === +this.filter.type()) &&
-            (this.filter.region() == '-2' || a.region === +this.filter.region())
+            (this.filter.status() == -2 || a.unlocked === !!this.filter.status()) &&
+            (this.filter.type()   == -2 || a.property.achievementType === this.filter.type()) &&
+            (this.filter.region() == -2 || a.region === this.filter.region())
         )));
         this.calculateNumberOfTabs();
         if (!retainPage) {

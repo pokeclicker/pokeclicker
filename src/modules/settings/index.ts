@@ -169,14 +169,13 @@ Settings.add(new Setting<string>('achievementsStatus', 'achievementsStatus',
 Settings.add(new Setting<string>('achievementsType', 'achievementsType',
     [
         new SettingOption('All', '-2'),
-        ...Settings.enumToSettingOptionArray(AchievementType),
+        ...Settings.enumToSettingOptionArray(AchievementType, (a) => a !== 'None'),
     ],
     '-2'));
 Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
     [
         new SettingOption('All', '-2'),
-        new SettingOption('None', '-1'),
-        ...Settings.enumToSettingOptionArray(Region, (r) => r !== 'none'),
+        ...Settings.enumToSettingOptionArray(Region),
     ],
     '-2'));
 
