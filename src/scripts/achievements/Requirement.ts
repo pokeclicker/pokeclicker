@@ -1,12 +1,10 @@
 abstract class Requirement {
     public requiredValue: number;
     public option: GameConstants.AchievementOption;
-    public achievementType: GameConstants.AchievementType;
 
-    constructor(requiredValue: number, option: GameConstants.AchievementOption, achievementType: GameConstants.AchievementType = GameConstants.AchievementType.None) {
+    constructor(requiredValue: number, option: GameConstants.AchievementOption) {
         this.requiredValue = requiredValue;
         this.option = option;
-        this.achievementType = achievementType;
     }
 
     abstract getProgress(): number;

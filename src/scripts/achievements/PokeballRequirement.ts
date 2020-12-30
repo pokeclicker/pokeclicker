@@ -1,6 +1,6 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class PokeballRequirement extends Requirement {
+class PokeballRequirement extends AchievementRequirement {
     private pokeball: GameConstants.Pokeball;
 
     constructor(value: number, pokeball: GameConstants.Pokeball, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {

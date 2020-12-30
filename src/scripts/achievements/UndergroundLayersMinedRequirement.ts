@@ -1,6 +1,6 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class UndergroundLayersMinedRequirement extends Requirement {
+class UndergroundLayersMinedRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, option, GameConstants.AchievementType['Underground Layers Mined']);
     }

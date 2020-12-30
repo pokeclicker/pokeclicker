@@ -1,6 +1,6 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class RouteKillRequirement extends Requirement {
+class RouteKillRequirement extends AchievementRequirement {
     constructor(
         value: number,
         public region: GameConstants.Region,

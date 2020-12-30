@@ -1,6 +1,6 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class ClearGymRequirement extends Requirement {
+class ClearGymRequirement extends AchievementRequirement {
     public gymIndex: number; // Gym name index in array GameConstants.Gyms
 
     constructor(value: number, gymIndex: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {

@@ -1,6 +1,6 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class MaxLevelOakItemRequirement extends Requirement {
+class MaxLevelOakItemRequirement extends AchievementRequirement {
     constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
         super(value, option, GameConstants.AchievementType['Max Level Oak Item']);
     }

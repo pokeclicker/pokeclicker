@@ -67,7 +67,7 @@ class AchievementHandler {
         }
     }
 
-    public static addAchievement(name: string, description: string, property: Requirement, bonus: number, region = GameConstants.Region.none) {
+    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, region = GameConstants.Region.none) {
         const unlocked: boolean = player.achievementsCompleted[name];
         AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked));
     }
