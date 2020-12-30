@@ -969,6 +969,6 @@ export const DockTowns = [
     'Canalave City', // Sinnoh
     'Castelia City', // Unova
     'Coumarine City', // Kalos
-    '', // Alola
+    'Hau\'oli City', // Alola
     '', // Galar
 ];
