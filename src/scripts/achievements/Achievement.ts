@@ -2,7 +2,7 @@ class Achievement {
     constructor(
         public name: string,
         public description: string,
-        public property: Requirement,
+        public property: AchievementRequirement,
         public bonus: number,
         public region: GameConstants.Region,
         public unlocked = false

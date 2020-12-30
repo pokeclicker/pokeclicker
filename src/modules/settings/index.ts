@@ -7,7 +7,7 @@ import PokemonType from '../enums/PokemonType';
 import NotificationConstants from '../notifications/NotificationConstants';
 import DynamicBackground from '../background/DynamicBackground';
 import { SortOptionConfigs, SortOptions } from './SortOptions';
-import { Region } from '../GameConstants';
+import { Region, AchievementType } from '../GameConstants';
 
 export default Settings;
 
@@ -156,6 +156,28 @@ Settings.add(new Setting<string>('breedingDisplayFilter', 'breedingDisplayFilter
         new SettingOption('Pokedex ID', 'dexId'),
     ],
     'attack'));
+
+// Achievements Filters
+Settings.add(new Setting<number>('achievementsPage', 'achievementsPage', [], 0));
+Settings.add(new Setting<string>('achievementsStatus', 'achievementsStatus',
+    [
+        new SettingOption('All', '-2'),
+        new SettingOption('Incomplete', '0'),
+        new SettingOption('Completed', '1'),
+    ],
+    '-2'));
+Settings.add(new Setting<string>('achievementsType', 'achievementsType',
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.enumToSettingOptionArray(AchievementType, (a) => a !== 'None'),
+    ],
+    '-2'));
+Settings.add(new Setting<string>('achievementsRegion', 'achievementsRegion',
+    [
+        new SettingOption('All', '-2'),
+        ...Settings.enumToSettingOptionArray(Region),
+    ],
+    '-2'));
 
 /*
  * SUBSCRIBERS
