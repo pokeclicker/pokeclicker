@@ -3,7 +3,7 @@ abstract class Requirement {
     public option: GameConstants.AchievementOption;
     public achievementType: GameConstants.AchievementType;
 
-    constructor(requiredValue: number, option: GameConstants.AchievementOption, achievementType: GameConstants.AchievementType) {
+    constructor(requiredValue: number, option: GameConstants.AchievementOption, achievementType: GameConstants.AchievementType = GameConstants.AchievementType.None) {
         this.requiredValue = requiredValue;
         this.option = option;
         this.achievementType = achievementType;

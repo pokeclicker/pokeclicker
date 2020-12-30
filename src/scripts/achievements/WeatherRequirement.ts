@@ -4,7 +4,7 @@ class WeatherRequirement extends Requirement {
     private weather: WeatherType[];
 
     constructor(weather: WeatherType[], option: GameConstants.AchievementOption = GameConstants.AchievementOption.equal) {
-        super(1, option, GameConstants.AchievementType.None);
+        super(1, option);
         this.weather = weather;
     }
 

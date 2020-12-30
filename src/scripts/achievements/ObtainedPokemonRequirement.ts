@@ -4,7 +4,7 @@ class ObtainedPokemonRequirement extends Requirement {
     public pokemonID: number;
 
     constructor(pokemon: DataPokemon, value = 1, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, option, GameConstants.AchievementType.None);
+        super(value, option);
         this.pokemonID = pokemon.id;
     }
 

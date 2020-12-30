@@ -4,7 +4,7 @@ class QuestLineRequirement extends Requirement {
     private questLineName: string;
 
     constructor(questLineName: string, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(1, option, GameConstants.AchievementType.None);
+        super(1, option);
         this.questLineName = questLineName;
     }
 
