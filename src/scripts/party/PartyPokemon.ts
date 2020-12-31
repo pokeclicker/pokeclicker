@@ -93,7 +93,10 @@ class PartyPokemon implements Saveable {
     }
 
     public useProtein(amount: number): void {
-        if (!this.canUseProtein(amount())) {
+        const usesRemaining = this.proteinUsesRemaining();
+
+        // If no more proteins can be used on this Pokemon
+        if (!usesRemaining) {
             Notifier.notify({
                 message: 'This Pokémon cannot increase their power any higher!',
                 type: NotificationConstants.NotificationOption.warning,
@@ -109,9 +112,9 @@ class PartyPokemon implements Saveable {
         return Number(VitaminController.multiplier[VitaminController.multiplierIndex()].replace(/\D/g, '')) || Infinity;
     }
 
-    canUseProtein = (amount: number) => {
+    proteinUsesRemaining = (): number => {
         // Allow 5 for every region visited (including Kanto)
-        return this.proteinsUsed() + amount <= (player.highestRegion() + 1) * 5;
+        return (player.highestRegion() + 1) * 5 - this.proteinsUsed();
     };
 
     public fromJSON(json: Record<string, any>): void {
