@@ -451,240 +451,88 @@
     <!-- DUNGEONS -->
     <!-- -------- -->
 
-    <!--P2 Laboratory-->
+    <!--Slumbering Weald-->
     <%- include('templates/mapDungeon',
-        { name: "P2 Laboratory"
-        , x: 78, y: 52
+        { name: "Slumbering Weald"
+        , x: 36, y: 57
         , width: 4, height: 3
         })
     %>
 
-    <!--Seaside Cave-->
+    <!--Inner Slumbering Weald-->
     <%- include('templates/mapDungeon',
-        { name: "Seaside Cave"
-        , x: 94, y: 18
+        { name: "Inner Slumbering Weald"
+        , x: 36, y: 54
         , width: 4, height: 3
         })
     %>
 
-    <!--Dreamyard-->
+    <!--Watchtower Ruins-->
     <%- include('templates/mapDungeon',
-        { name: "Dreamyard"
-        , x: 90, y: 40
+        { name: "Watchtower Ruins"
+        , x: 38, y: 40
         , width: 4, height: 3
         })
     %>
 
-    <!--Pinwheel Forest-->
+    <!--Galar Mine-->
     <%- include('templates/mapDungeon',
-        { name: "Pinwheel Forest"
-        , x: 72, y: 40
+        { name: "Galar Mine"
+        , x: 35, y: 35
         , width: 4, height: 3
         })
     %>
 
-    <!--Castelia Sewers-->
+    <!--Galar Mine No. 2-->
     <%- include('templates/mapDungeon',
-        { name: "Castelia Sewers"
-        , moveToTown: "Castelia City"
-        , x: 56, y: 52
+        { name: "Galar Mine No. 2"
+        , x: 55, y: 33
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Dusty Bowl-->
+    <%- include('templates/mapDungeon',
+        { name: "Dusty Bowl"
+        , x: 50, y: 32
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Lake of Outrage-->
+    <%- include('templates/mapDungeon',
+        { name: "Lake of Outrage"
+        , x: 43, y: 32
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Glimwood Tangle-->
+    <%- include('templates/mapDungeon',
+        { name: "Glimwood Tangle"
+        , x: 36, y: 15
+        , width: 4, height: 3
+        })
+    %>
+
+    <!--Rose Tower-->
+    <%- include('templates/mapDungeon',
+        { name: "Rose Tower"
+        , x: 50, y: 5
+        , moveToTown: "Wyndon"
         , width: 1, height: 1
-        })
-    %>
-
-    <!-- Desert Resort
-    <%- include('templates/mapDungeon',
-        { name: "Desert Resort"
-        , x: 47, y: 41
-        , width: 4, height: 3
-        })
-    %> -->
-
-    <!--Relic Castle-->
-    <%- include('templates/mapDungeon',
-        { name: "Relic Castle"
-        , x: 43, y: 38
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Relic Passage-->
-    <%- include('templates/mapDungeon',
-        { name: "Relic Passage"
-        , x: 37, y: 40
-        , width: 6, height: 3
-        })
-    %>
-
-    <!--Mistralton Cave-->
-    <%- include('templates/mapDungeon',
-        { name: "Mistralton Cave"
-        , x: 23, y: 26
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Chargestone Cave-->
-    <%- include('templates/mapDungeon',
-        { name: "Chargestone Cave"
-        , x: 17, y: 26
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Celestial Tower-->
-    <%- include('templates/mapDungeon',
-        { name: "Celestial Tower"
-        , x: 17, y: 13
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Twist Mountain-->
-    <%- include('templates/mapDungeon',
-        { name: "Twist Mountain"
-        , x: 21, y: 13
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Dragonspiral Tower-->
-    <%- include('templates/mapDungeon',
-        { name: "Dragonspiral Tower"
-        , x: 26, y: 8
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Moor of Icirrus-->
-    <%- include('templates/mapDungeon',
-        { name: "Moor of Icirrus"
-        , x: 34, y: 10
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Reversal Mountain-->
-    <%- include('templates/mapDungeon',
-        { name: "Reversal Mountain"
-        , x: 74, y: 20
-        , width: 5, height: 5
-        })
-    %>
-
-    <!--Reversal Mountain extra-->
-    <%- include('templates/mapDungeon',
-        { name: "Reversal Mountain"
-        , x: 71, y: 21
-        , width: 3, height: 3
-        })
-    %>
-
-    <!--Abundant Shrine-->
-    <%- include('templates/mapDungeon',
-        { name: "Abundant Shrine"
-        , x: 70, y: 25
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Lostlorn Forest-->
-    <%- include('templates/mapDungeon',
-        { name: "Lostlorn Forest"
-        , x: 59, y: 29
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Floccesy Ranch-->
-    <%- include('templates/mapDungeon',
-        { name: "Floccesy Ranch"
-        , x: 17, y: 40
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Cave of Being-->
-    <%- include('templates/mapDungeon',
-        { name: "Cave of Being"
-        , x: 17, y: 46
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Liberty Garden-->
-    <%- include('templates/mapDungeon',
-        { name: "Liberty Garden"
-        , x: 28, y: 52
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Giant Chasm-->
-    <%- include('templates/mapDungeon',
-        { name: "Giant Chasm"
-        , x: 79, y: 7
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Victory Road Unova-->
-    <%- include('templates/mapDungeon',
-        { name: "Victory Road Unova"
-        , x: 66, y: 2
-        , width: 4, height: 3
-        })
-    %>
-
-    <!--Pledge Grove-->
-    <%- include('templates/mapDungeon',
-        { name: "Pledge Grove"
-        , x: 11, y: 39
         })
     %>
 
     <!-- ------------------ -->
     <!-- PLACES OF INTEREST -->
+
     <!-- ------------------ -->
     <%- include('templates/mapPOI',
         { name: "Dock"
-        , x: 49, y: 53
-        , width: 3, height: 7
-        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Castelia City') }"
+        , x: 60, y: 33
+        , width: 2, height: 3
+        , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Hulbury') }"
         })
      %>
-     
-    <!--bridge-->
-    <%- include('templates/mapPOI',
-        { name: "Skyarrow Bridge"
-        , width: 10, height: 3
-        , x: 57, y: 49
-        , databind: `attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? 'unlockedRoute' : 'lockedRoute' },
-            click: () => {
-                Notifier.notify({message: 'What a lovely view'});
-            }`
-        })
-    %>
-    <!--bridge-->
-    <%- include('templates/mapPOI',
-        { name: "Skyarrow Bridge"
-        , width: 3, height: 9
-        , x: 64, y: 40
-        , databind: `attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? 'unlockedRoute' : 'lockedRoute' },
-            click: () => {
-                Notifier.notify({message: 'What a lovely view'});
-            }`
-        })
-    %>
-    <!--bridge-->
-    <%- include('templates/mapPOI',
-        { name: "Skyarrow Bridge"
-        , width: 5, height: 3
-        , x: 67, y: 40
-        , databind: `attr: { class: MapHelper.accessToRoute(4, GameConstants.Region.unova) ? 'unlockedRoute' : 'lockedRoute' },
-            click: () => {
-                Notifier.notify({message: 'What a lovely view'});
-            }`
-        })
-    %>
 </g>

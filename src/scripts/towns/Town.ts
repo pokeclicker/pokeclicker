@@ -2356,7 +2356,7 @@ TownList['Inner Slumbering Weald'] = new DungeonTown(
 TownList['Galar Mine'] = new DungeonTown(
     'Galar Mine',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 3)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 10)]
 );
 TownList['Galar Mine No. 2'] = new DungeonTown(
     'Galar Mine No. 2',
@@ -2371,12 +2371,12 @@ TownList['Glimwood Tangle'] = new DungeonTown(
 TownList['Rose Tower'] = new DungeonTown(
     'Rose Tower',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 16)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 24)]
 );
 TownList['Watchtower Ruins'] = new DungeonTown(
     'Watchtower Ruins',
     GameConstants.Region.galar,
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 2)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 4)]
 );
 TownList['Dusty Bowl'] = new DungeonTown(
     'Dusty Bowl',
