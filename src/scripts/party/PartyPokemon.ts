@@ -103,13 +103,14 @@ class PartyPokemon implements Saveable {
             });
             return;
         }
-        if (ItemHandler.useItem('Protein', amount())) {
-            GameHelper.incrementObservable(this.proteinsUsed, amount());
-        }
-    }
 
-    private getAmount() {
-        return Number(VitaminController.multiplier[VitaminController.multiplierIndex()].replace(/\D/g, '')) || Infinity;
+        // The lowest number of amount they want to use, total in inventory, uses remaining for this Pokemon
+        amount = Math.min(amount, player.itemList.Protein(), usesRemaining);
+
+        // Apply the proteins
+        if (ItemHandler.useItem('Protein', amount)) {
+            GameHelper.incrementObservable(this.proteinsUsed, amount);
+        }
     }
 
     proteinUsesRemaining = (): number => {
