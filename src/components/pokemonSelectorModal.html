@@ -14,9 +14,9 @@
                   <span class="btn btn-block btn-primary" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></span>
                   <button type="button" class="btn btn-sm btn-primary"
                     style="position: absolute; right: 0px; top: 0px; width: 42px; height: 41px;"
-                    data-bind="text: VitaminController.vitaminMultipliers[VitaminController.vitaminIndex()]"
-                    onclick="VitaminController.vitaminIncrease()"
-                    oncontextmenu="VitaminController.vitaminDecrease(); return false"
+                    data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
+                    onclick="VitaminController.incrementMultiplier()"
+                    oncontextmenu="VitaminController.decrementMultiplier(); return false"
                     title="Multiplier"
                     data-toggle="popover"
                     data-html="true"

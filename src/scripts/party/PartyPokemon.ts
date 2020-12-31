@@ -106,7 +106,7 @@ class PartyPokemon implements Saveable {
     }
 
     private getAmount() {
-        return Number(VitaminController.vitaminMultipliers[VitaminController.vitaminIndex()].replace(/\D/g, '')) || Infinity;
+        return Number(VitaminController.multiplier[VitaminController.multiplierIndex()].replace(/\D/g, '')) || Infinity;
     }
 
     canUseProtein = (amount: number) => {

@@ -1,12 +1,12 @@
 class VitaminController {
-    public static vitaminMultipliers = ['×1', '×5', 'x10', 'Max'];
-    public static vitaminIndex = ko.observable(0);
+    public static multiplier = ['×1', '×5', 'x10', 'Max'];
+    public static multiplierIndex = ko.observable(0);
 
-    public static vitaminIncrease() {
-        this.vitaminIndex((this.vitaminIndex() + 1) % this.vitaminMultipliers.length);
+    public static incrementMultiplier() {
+        this.multiplierIndex((this.multiplierIndex() + 1) % this.multiplier.length);
     }
 
-    public static vitaminDecrease() {
-        this.vitaminIndex((this.vitaminIndex() + this.vitaminMultipliers.length - 1) % this.vitaminMultipliers.length);
+    public static decrementMultiplier() {
+        this.multiplierIndex((this.multiplierIndex() + this.multiplier.length - 1) % this.multiplier.length);
     }
 }
