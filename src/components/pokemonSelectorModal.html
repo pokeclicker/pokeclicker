@@ -46,7 +46,7 @@
                     </tr>
                   </thead>
                   <tbody data-bind="foreach: App.game.party.caughtPokemon">
-                    <tr class="clickable" data-bind="click: () => $data.useProtein(), hidden: $data.breeding">
+                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.breeding">
                       <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>

@@ -9,4 +9,8 @@ class VitaminController {
     public static decrementMultiplier() {
         this.multiplierIndex((this.multiplierIndex() + this.multiplier.length - 1) % this.multiplier.length);
     }
+
+    public static getMultiplier() {
+        return Number(VitaminController.multiplier[VitaminController.multiplierIndex()].replace(/\D/g, '')) || Infinity;
+    }
 }

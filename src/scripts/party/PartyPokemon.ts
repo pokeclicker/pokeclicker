@@ -92,7 +92,7 @@ class PartyPokemon implements Saveable {
         return false;
     }
 
-    public useProtein(amount = this.getAmount) {
+    public useProtein(amount: number): void {
         if (!this.canUseProtein(amount())) {
             Notifier.notify({
                 message: 'This Pokémon cannot increase their power any higher!',
