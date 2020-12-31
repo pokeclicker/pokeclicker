@@ -298,10 +298,6 @@ class Update implements Saveable {
             }
         },
 
-        '0.7.0': ({ playerData, saveData }) => {
-            $('#developmentModal').modal('show');
-        },
-
         '0.7.1': ({ playerData, saveData}) => {
             saveData.breeding.eggList.map((egg) => {
                 egg.shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps));
