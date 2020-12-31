@@ -302,7 +302,12 @@ class Update implements Saveable {
             $('#developmentModal').modal('show');
         },
 
-        '0.7.1': ({ saveData, playerData }) => {
+        '0.7.1': ({ playerData, saveData}) => {
+            saveData.breeding.eggList.map((egg) => {
+                egg.shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, egg.shinySteps / egg.steps));
+                return egg;
+            });
+
             // Update underground item IDs
             const itemMap = (id) => {
                 if (id <= 7) { // fossils

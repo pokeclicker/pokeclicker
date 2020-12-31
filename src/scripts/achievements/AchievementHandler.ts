@@ -97,10 +97,6 @@ class AchievementHandler {
         return sum;
     }
 
-    public static getMoneyMultiplier() {
-        return 1 + this.achievementBonus();
-    }
-
     public static achievementBonusPercent(): string {
         return `${(100 * AchievementHandler.achievementBonus()).toFixed(2)}%`;
     }
@@ -109,7 +105,7 @@ class AchievementHandler {
         return AchievementHandler.achievementList.find((achievement) => achievement.name === name);
     }
 
-    public static initialize() {
+    public static initialize(multiplier: Multiplier) {
 
         /*
          * GENERAL
@@ -261,6 +257,9 @@ class AchievementHandler {
 
         // subscribe to filters so that when the player changes a filter it automatically refilters the list
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
+
+        multiplier.addBonus('exp', () => 1 + this.achievementBonus());
+        multiplier.addBonus('money', () => 1 + this.achievementBonus());
     }
 
     static load() {
