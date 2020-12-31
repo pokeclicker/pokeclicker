@@ -1279,14 +1279,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 52.2,
-        'name': 'Meowth (Galar)',
+        'name': ' Galarian Meowth',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 255,
         'type': [PokemonType.Normal],
         'levelType': LevelType.mediumfast,
         'exp': 58,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Meowth (Galar)', 'Perrserker', 28)],
+        'evolutions': [new LevelEvolution('Galarian Meowth', 'Perrserker', 28)],
         'base': {
             'hitpoints': 50,
             'attack': 65,
@@ -1812,14 +1812,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 77.1,
-        'name': 'Ponyta (Galar)',
+        'name': 'Galarian Ponyta',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 190,
         'type': [PokemonType.Psychic],
         'levelType': LevelType.mediumfast,
         'exp': 82,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Ponyta (Galar)', 'Rapidash (Galar)', 40)],
+        'evolutions': [new LevelEvolution('Galarian Ponyta', 'Galarian Rapidash', 40)],
         'base': {
             'hitpoints': 50,
             'attack': 85,
@@ -1848,7 +1848,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 78.1,
-        'name': 'Rapidash (Galar)',
+        'name': 'Galarian Rapidash',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 60,
         'type': [PokemonType.Psychic, PokemonType.Fairy],
@@ -1887,7 +1887,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 79.1,
-        'name': 'Slowpoke (Galar)',
+        'name': 'Galarian Slowpoke',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 190,
         'type': [PokemonType.Psychic],
@@ -1895,8 +1895,8 @@ const pokemonList = createPokemonArray(
         'exp': 63,
         'eggCycles': 20,
         'evolutions': [
-            new StoneEvolution('Slowpoke (Galar)', 'Slowbro (Galar)', GameConstants.StoneType.Galarica_cuff),
-            new StoneEvolution('Slowpoke (Galar)', 'Slowking (Galar)', GameConstants.StoneType.Galarica_wreath),
+            new StoneEvolution('Galarian Slowpoke', 'Galarian Slowbro', GameConstants.StoneType.Galarica_cuff),
+            new StoneEvolution('Galarian Slowpoke', 'Galarian Slowking', GameConstants.StoneType.Galarica_wreath),
         ],
         'base': {
             'hitpoints': 90,
@@ -1927,7 +1927,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 80.1,
-        'name': 'Slowbro (Galar)',
+        'name': 'Galarian Slowbro',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 75,
         'type': [PokemonType.Poison, PokemonType.Psychic],
@@ -2002,14 +2002,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 83.1,
-        'name': 'Farfetch\'d (Galar)',
+        'name': 'Galarian Farfetch\'d',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 45,
         'type': [PokemonType.Fighting],
         'levelType': LevelType.mediumfast,
         'exp': 132,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Farfetch\'d (Galar)', 'Sirfetch\'d', 20)],
+        'evolutions': [new LevelEvolution('Galarian Farfetch\'d', 'Sirfetch\'d', 20)],
         'base': {
             'hitpoints': 52,
             'attack': 95,
@@ -2558,7 +2558,7 @@ const pokemonList = createPokemonArray(
         'levelType': LevelType.mediumfast,
         'exp': 68,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Koffing', 'Weezing', 35), new LevelEvolution('Koffing', 'Weezing (Galar)', 35)],
+        'evolutions': [new LevelEvolution('Koffing', 'Weezing', 35), new LevelEvolution('Koffing', 'Galarian Weezing', 35)],
         'base': {
             'hitpoints': 40,
             'attack': 65,
@@ -2587,7 +2587,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 110.1,
-        'name': 'Weezing (Galar)',
+        'name': 'Galarian Weezing',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 60,
         'type': [PokemonType.Poison, PokemonType.Fairy],
@@ -2817,14 +2817,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 122.1,
-        'name': 'Mr. Mime (Galar)',
+        'name': 'Galarian Mr. Mime',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 45,
         'type': [PokemonType.Psychic, PokemonType.Ice],
         'levelType': LevelType.mediumfast,
         'exp': 161,
         'eggCycles': 25,
-        'evolutions': [new LevelEvolution('Mr. Mime (Galar)', 'Mr. Rime', 42)],
+        'evolutions': [new LevelEvolution('Galarian Mr. Mime', 'Mr. Rime', 42)],
         'base': {
             'hitpoints': 50,
             'attack': 65,
@@ -3226,7 +3226,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 144.1,
-        'name': 'Articuno (Galar)',
+        'name': 'Galarian Articuno',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 3,
         'type': [PokemonType.Psychic, PokemonType.Flying],
@@ -3261,7 +3261,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 145.1,
-        'name': 'Zapdos (Galar)',
+        'name': 'Galarian Zapdos',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 3,
         'type': [PokemonType.Fighting, PokemonType.Flying],
@@ -3296,7 +3296,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 146.1,
-        'name': 'Moltres (Galar)',
+        'name': 'Galarian Moltres',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 3,
         'type': [PokemonType.Dark, PokemonType.Flying],
@@ -4248,7 +4248,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 199.1,
-        'name': 'Slowking (Galar)',
+        'name': 'Galarian Slowking',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 70,
         'type': [PokemonType.Poison, PokemonType.Psychic],
@@ -5125,14 +5125,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 222.1,
-        'name': 'Corsola (Galar)',
+        'name': 'Galarian Corsola',
         'nativeRegion': GameConstants.Region.galar,
         'catchRate': 60,
         'type': [PokemonType.Ghost],
         'levelType': LevelType.fast,
         'exp': 144,
         'eggCycles': 20,
-        'evolutions': [new LevelEvolution('Corsola (Galar)', 'Cursola', 38)],
+        'evolutions': [new LevelEvolution('Galarian Corsola', 'Cursola', 38)],
         'base': {
             'hitpoints': 60,
             'attack': 55,
@@ -5868,14 +5868,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 263.1,
-        'name': 'Zigzagoon (Galar)',
+        'name': 'Galarian Zigzagoon',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Normal, PokemonType.Dark],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 56,
         'catchRate': 255,
-        'evolutions': [new LevelEvolution('Zigzagoon (Galar)', 'Linoone (Galar)', 20)],
+        'evolutions': [new LevelEvolution('Galarian Zigzagoon', 'Galarian Linoone', 20)],
         'base': {
             'hitpoints': 38,
             'attack': 30,
@@ -5904,14 +5904,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 264.1,
-        'name': 'Linoone (Galar)',
+        'name': 'Galarian Linoone',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Normal, PokemonType.Dark],
         'eggCycles': 15,
         'levelType': LevelType.mediumfast,
         'exp': 147,
         'catchRate': 90,
-        'evolutions': [new LevelEvolution('Linoone (Galar)', 'Obstagoon', 35)],
+        'evolutions': [new LevelEvolution('Galarian Linoone', 'Obstagoon', 35)],
         'base': {
             'hitpoints': 78,
             'attack': 70,
@@ -11669,14 +11669,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 554.1,
-        'name': 'Darumaka (Galar)',
+        'name': 'Galarian Darumaka',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ice],
         'eggCycles': 20,
         'levelType': LevelType.mediumslow,
         'exp': 63,
         'catchRate': 120,
-        'evolutions': [new StoneEvolution('Darumaka (Galar)', 'Darmanitan (Galar)', GameConstants.StoneType.Ice_stone)],
+        'evolutions': [new StoneEvolution('Galarian Darumaka', 'Galarian Darmanitan', GameConstants.StoneType.Ice_stone)],
         'base': {
             'hitpoints': 70,
             'attack': 90,
@@ -11722,7 +11722,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 555.2,
-        'name': 'Darmanitan (Galar)',
+        'name': 'Galarian Darmanitan',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ice],
         'eggCycles': 20,
@@ -11740,7 +11740,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 555.3,
-        'name': 'Darmanitan (Zen Galar)',
+        'name': 'Galarian Darmanitan (Zen)',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Fire, PokemonType.Ice],
         'eggCycles': 20,
@@ -11880,14 +11880,14 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 562.1,
-        'name': 'Yamask (Galar)',
+        'name': 'Galarian Yamask',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ghost, PokemonType.Ground],
         'eggCycles': 25,
         'levelType': LevelType.mediumfast,
         'exp': 61,
         'catchRate': 190,
-        'evolutions': [new DungeonRestrictedLevelEvolution('Dusty Bowl', 'Yamask (Galar)', 'Runerigus', 34)],
+        'evolutions': [new DungeonRestrictedLevelEvolution('Dusty Bowl', 'Galarian Yamask', 'Runerigus', 34)],
         'base': {
             'hitpoints': 38,
             'attack': 55,
@@ -12985,7 +12985,7 @@ const pokemonList = createPokemonArray(
     },
     {
         'id': 618.1,
-        'name': 'Stunfisk (Galar)',
+        'name': 'Galarian Stunfisk',
         'nativeRegion': GameConstants.Region.galar,
         'type': [PokemonType.Ground, PokemonType.Steel],
         'eggCycles': 20,

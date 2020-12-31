@@ -1261,7 +1261,7 @@ dungeonList['Slumbering Weald'] = new Dungeon('Slumbering Weald',
     96500, 201, 35);
 
 dungeonList['Inner Slumbering Weald'] = new Dungeon('Inner Slumbering Weald',
-    ['Weezing (Galar)', 'Corviknight', 'Stunfisk (Galar)', 'Munna', 'Butterfree', 'Orbeetle'],
+    ['Galarian Weezing', 'Corviknight', 'Galarian Stunfisk', 'Munna', 'Butterfree', 'Orbeetle'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1285,14 +1285,14 @@ dungeonList['Galar Mine No. 2'] = new Dungeon('Galar Mine No. 2',
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
-        new DungeonBossPokemon('Stunfisk (Galar)', 8000000, 70),
+        new DungeonBossPokemon('Galarian Stunfisk', 8000000, 70),
         new DungeonBossPokemon('Gastrodon (east)', 8000000, 70),
         new DungeonBossPokemon('Drednaw', 8000000, 70),
     ],
     96500, 201, 35);
 
 dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
-    ['Cufant', 'Bronzong', 'Klang', 'Mawile', 'Steelix', 'Stunfisk (Galar)'],
+    ['Cufant', 'Bronzong', 'Klang', 'Mawile', 'Steelix', 'Galarian Stunfisk'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1305,7 +1305,7 @@ dungeonList['Rose Tower'] = new Dungeon('Rose Tower',
     96500, 201, 35);
 
 dungeonList['Glimwood Tangle'] = new Dungeon('Glimwood Tangle',
-    ['Ponyta (Galar)', 'Spritzee', 'Swirlix', 'Phantump', 'Oranguru', 'Passimian', 'Sinistea'],
+    ['Galarian Ponyta', 'Spritzee', 'Swirlix', 'Phantump', 'Oranguru', 'Passimian', 'Sinistea'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
@@ -1328,7 +1328,7 @@ dungeonList['Watchtower Ruins'] = new Dungeon('Watchtower Ruins',
     96500, 201, 35);
 
 dungeonList['Lake of Outrage'] = new Dungeon('Lake of Outrage',
-    ['Stonjourner', 'Cramorant', 'Mr. Mime (Galar)', 'Morpeko', 'Coalossal', 'Sandaconda', 'Stunfisk (Galar)', 'Copperajah', 'Indeedee', 'Obstagoon', 'Grimmsnarl'],
+    ['Stonjourner', 'Cramorant', 'Galarian Mr. Mime', 'Morpeko', 'Coalossal', 'Sandaconda', 'Galarian Stunfisk', 'Copperajah', 'Indeedee', 'Obstagoon', 'Grimmsnarl'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
