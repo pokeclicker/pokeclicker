@@ -1,8 +1,8 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class CapturedRequirement extends Requirement {
-    constructor( value: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, type);
+class CapturedRequirement extends AchievementRequirement {
+    constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(value, option, GameConstants.AchievementType['Captured']);
     }
 
     public getProgress() {

@@ -68,6 +68,28 @@ namespace GameConstants {
         equal,
         more,
     }
+
+    declare enum AchievementType {
+        'None',
+        'Money',
+        'Token',
+        'Attack',
+        'Diamond',
+        'Underground Items Found',
+        'Underground Layers Mined',
+        'Max Level Oak Item',
+        'Captured',
+        'Defeated',
+        'Caught Pokemon',
+        'Caught Unique Pokemons By Region',
+        'Shiny Pokemon',
+        'Hatch',
+        'Pokeball',
+        'Click',
+        'Route Kill',
+        'Clear Gym',
+        'Clear Dungeon',
+    }
     declare enum DungeonTile {
         empty,
         enemy,
