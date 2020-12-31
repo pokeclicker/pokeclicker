@@ -3,6 +3,15 @@ class EffectEngineRunner {
     public static multipliers = ['×1', '×10', '×100', '×1000', 'All'];
     public static multIndex = ko.observable(0);
 
+    public static initialize(multiplier: Multiplier) {
+        GameHelper.enumStrings(GameConstants.BattleItemType).forEach((itemName) => {
+            const item = (ItemList[itemName] as BattleItem);
+            if (item.multiplierType) {
+                multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? item.multiplyBy : 1);
+            }
+        });
+    }
+
     public static amountToUse = ko.pureComputed(() => {
         // Either the digits specified, or All (Infinity)
         return Number(EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()].replace(/\D/g, '')) || Infinity;
@@ -57,10 +66,6 @@ class EffectEngineRunner {
         }
         times.shift();
         player.effectTimer[itemName](times.join(':'));
-    }
-
-    public static getMoneyMultiplier() {
-        return this.isActive(GameConstants.BattleItemType.Lucky_incense)() ? 1.5 : 1;
     }
 
     public static getDungeonTokenMultiplier() {

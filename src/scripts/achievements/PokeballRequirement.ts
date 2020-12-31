@@ -1,10 +1,10 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class PokeballRequirement extends Requirement {
+class PokeballRequirement extends AchievementRequirement {
     private pokeball: GameConstants.Pokeball;
 
-    constructor(value: number, pokeball: GameConstants.Pokeball, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, type);
+    constructor(value: number, pokeball: GameConstants.Pokeball, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(value, option, GameConstants.AchievementType['Pokeball']);
         this.pokeball = pokeball;
     }
 

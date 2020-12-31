@@ -1,13 +1,13 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class RouteKillRequirement extends Requirement {
+class RouteKillRequirement extends AchievementRequirement {
     constructor(
         value: number,
         public region: GameConstants.Region,
         public route: number,
-        type: GameConstants.AchievementOption = GameConstants.AchievementOption.more
+        option: GameConstants.AchievementOption = GameConstants.AchievementOption.more
     ) {
-        super(value, type);
+        super(value, option, GameConstants.AchievementType['Route Kill']);
     }
 
     public getProgress() {

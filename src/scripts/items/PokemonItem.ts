@@ -43,4 +43,6 @@ ItemList['Burmy (plant)']        = new PokemonItem('Burmy (plant)', 5000);
 ItemList['Cherubi']              = new PokemonItem('Cherubi', 5000);
 ItemList['Spiritomb']            = new PokemonItem('Spiritomb', 5000);
 ItemList['Zorua']                = new PokemonItem('Zorua', 5000);
-ItemList['Meloetta (pirouette)'] = new PokemonItem('Meloetta (pirouette)', 50000);
+ItemList['Meloetta (pirouette)'] = new PokemonItem('Meloetta (pirouette)', 150000);
+ItemList['Type null']            = new PokemonItem('Type: Null', 5000);
+ItemList['Poipole']              = new PokemonItem('Poipole', 5000);

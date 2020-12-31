@@ -1,5 +1,6 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Feature.d.ts" />
+/// <reference path="../../declarations/breeding/EggType.d.ts" />
 
 import Currency = GameConstants.Currency;
 
@@ -22,7 +23,7 @@ class Breeding implements Feature {
 
     public hatchList: { [name: number]: PokemonNameType[][] } = {};
 
-    constructor() {
+    constructor(private multiplier: Multiplier) {
         this._eggList = this.defaults.eggList;
         this._eggSlots = ko.observable(this.defaults.eggSlots);
         this.queueList = ko.observableArray(this.defaults.queueList);
@@ -57,7 +58,7 @@ class Breeding implements Feature {
             ['Piplup', 'Finneon', 'Buizel'],
             ['Oshawott', 'Panpour'],
             ['Froakie'],
-            ['Popplio'],
+            ['Popplio', 'Wimpod'],
             ['Sobble'],
         ];
         this.hatchList[EggType.Grass] = [
@@ -67,7 +68,7 @@ class Breeding implements Feature {
             ['Turtwig', 'Carnivine', 'Budew'],
             ['Snivy', 'Pansage'],
             ['Chespin'],
-            ['Rowlet'],
+            ['Rowlet', 'Morelull'],
             ['Grookey'],
         ];
         this.hatchList[EggType.Fighting] = [
@@ -77,7 +78,7 @@ class Breeding implements Feature {
             ['Riolu'],
             ['Throh', 'Sawk'],
             [],
-            [],
+            ['Crabrawler'],
             [],
         ];
         this.hatchList[EggType.Electric] = [
@@ -97,7 +98,7 @@ class Breeding implements Feature {
             ['Gible', 'Gabite', 'Garchomp'],
             ['Deino', 'Zweilous', 'Hydreigon'],
             [],
-            [],
+            ['Turtonator', 'Drampa', 'Jangmo-o', 'Hakamo-o', 'Kommo-o'],
             [],
         ];
         BreedingController.initialize();
@@ -193,7 +194,7 @@ class Breeding implements Feature {
         let index =  this.eggList.length;
         while (index-- > 0) {
             const egg = this.eggList[index]();
-            egg.addSteps(amount);
+            egg.addSteps(amount, this.multiplier);
             if (this.queueList().length && egg.progress() >= 100) {
                 this.hatchPokemonEgg(index);
             }
@@ -201,7 +202,7 @@ class Breeding implements Feature {
     }
 
     private getStepMultiplier() {
-        return App.game.oakItems.calculateBonus(OakItems.OakItem.Blaze_Cassette) * App.game.farming.externalAuras[AuraType.Egg]();
+        return this.multiplier.getBonus('eggStep');
     }
 
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {
@@ -266,6 +267,15 @@ class Breeding implements Feature {
             if (this.queueList().length) {
                 const nextEgg = this.createEgg(this.queueList.shift());
                 this.gainEgg(nextEgg);
+                if (!this.queueList().length) {
+                    Notifier.notify({
+                        message: 'Hatchery queue is empty',
+                        type: NotificationConstants.NotificationOption.success,
+                        timeout: 1e4,
+                        sound: NotificationConstants.NotificationSound.empty_queue,
+                        setting: NotificationConstants.NotificationSetting.empty_queue,
+                    });
+                }
             }
         }
     }
@@ -326,7 +336,7 @@ class Breeding implements Feature {
     }
 
     public calculateBaseForm(pokemonName: PokemonNameType): PokemonNameType {
-        const devolution = pokemonDevolutionMap[pokemonName];
+        const devolution = pokemonBabyPrevolutionMap[pokemonName];
         // Base form of Pokemon depends on which regions players unlocked
         if (!devolution || PokemonHelper.calcNativeRegion(devolution) > player.highestRegion()) {
             // No devolutions at all

@@ -176,7 +176,6 @@ class Underground implements Feature {
         }
 
         if (index == -1) {
-
             const tempItem = {
                 name: item.name,
                 amount: ko.observable(num),

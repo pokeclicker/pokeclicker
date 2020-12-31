@@ -121,7 +121,7 @@ class Mine {
                         sizeY: reward.space.length,
                         x: j,
                         y: i,
-                        value: reward.space[i][j],
+                        value: reward.space[i][j] ? reward.id : 0,
                         revealed: 0,
                     };
                 }

@@ -5,7 +5,7 @@ class OakItems implements Feature {
     itemList: OakItem[];
     unlockRequirements: number[];
 
-    constructor(unlockRequirements: number[]) {
+    constructor(unlockRequirements: number[], private multiplier: Multiplier) {
         this.itemList = [];
         this.unlockRequirements = unlockRequirements;
     }
@@ -43,14 +43,33 @@ class OakItems implements Feature {
             new BoughtOakItem(OakItems.OakItem.Treasure_Scanner, 'Treasure Scanner', 'Chance to double all mining rewards', 'Cinnabar Island Shop',
                 true, [0.04, 0.07, 0.1, 0.13, 0.16, 0.20], 1, 20, undefined, undefined, AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money)),
         ];
+
+        this.addMultiplier('clickAttack', OakItems.OakItem.Poison_Barb);
+        this.addMultiplier('exp', OakItems.OakItem.Exp_Share);
+        this.addMultiplier('money', OakItems.OakItem.Amulet_Coin);
+        this.addMultiplier('shiny', OakItems.OakItem.Shiny_Charm);
+        this.addMultiplier('eggStep', OakItems.OakItem.Blaze_Cassette);
     }
 
-    calculateBonus(item: OakItems.OakItem) {
+    private addMultiplier(type: keyof typeof MultiplierType, item: OakItems.OakItem) {
+        this.multiplier.addBonus(type, this.createMultiplierFunction(item));
+    }
+
+    private createMultiplierFunction(item: OakItems.OakItem): GetMultiplierFunction {
+        return (useBonus: boolean) => this.calculateBonus(item, useBonus);
+    }
+
+    calculateBonus(item: OakItems.OakItem, useItem = false): number {
         const oakItem = this.itemList[item];
         if (oakItem == undefined) {
             console.error('Could not find oakItem', item, 'This could have unintended consequences');
             return 1;
         }
+
+        if (useItem) {
+            oakItem.use();
+        }
+
         return oakItem.calculateBonus();
     }
 
