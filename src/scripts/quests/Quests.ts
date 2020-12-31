@@ -14,6 +14,7 @@ class Quests implements Saveable {
     public refreshes = ko.observable(0);
     public lastRefresh = new Date();
     public lastRefreshLevel = 0;
+    public lastRefreshRegion = 0;
     public freeRefresh = ko.observable(false);
     public questList: KnockoutObservableArray<Quest> = ko.observableArray();
     public questLines: KnockoutObservableArray<QuestLine> = ko.observableArray();
@@ -114,6 +115,7 @@ class Quests implements Saveable {
         }
         this.lastRefresh = date;
         this.lastRefreshLevel = level;
+        this.lastRefreshRegion = player.highestRegion();
         this.currentQuests().forEach(quest => quest.quit());
         this.questList(QuestHelper.generateQuestList(this.generateSeed(date, level), GameConstants.QUESTS_PER_SET));
     }
@@ -233,6 +235,7 @@ class Quests implements Saveable {
             refreshes: this.refreshes(),
             lastRefresh: this.lastRefresh,
             lastRefreshLevel: this.lastRefreshLevel,
+            lastRefreshRegion: this.lastRefreshRegion,
             freeRefresh: this.freeRefresh(),
             questList: this.questList(),
             questLines: this.questLines(),
@@ -252,6 +255,7 @@ class Quests implements Saveable {
         this.refreshes(json.refreshes || this.defaults.refreshes);
         this.lastRefresh = json.lastRefresh ? new Date(json.lastRefresh) : new Date();
         this.lastRefreshLevel = json.lastRefreshLevel || this.level();
+        this.lastRefreshRegion = json.lastRefreshRegion || player.highestRegion();
         if (this.lastRefresh.toDateString() != new Date().toDateString()) {
             this.freeRefresh(true);
         } else {

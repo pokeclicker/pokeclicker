@@ -93,6 +93,28 @@ export enum AchievementOption {
     more,
 }
 
+export enum AchievementType {
+    'None' = -1,
+    'Money' = 0,
+    'Token' = 1,
+    'Attack' = 2,
+    'Diamond' = 3,
+    'Underground Items Found' = 4,
+    'Underground Layers Mined' = 5,
+    'Max Level Oak Item' = 6,
+    'Captured' = 7,
+    'Defeated' = 8,
+    'Caught Pokemon' = 9,
+    'Caught Unique Pokemons By Region' = 10,
+    'Shiny Pokemon' = 11,
+    'Hatch' = 12,
+    'Pokeball' = 13,
+    'Click' = 14,
+    'Route Kill' = 15,
+    'Clear Gym' = 16,
+    'Clear Dungeon' = 17,
+}
+
 export enum DungeonTile {
     empty,
     enemy,
@@ -969,6 +991,6 @@ export const DockTowns = [
     'Canalave City', // Sinnoh
     'Castelia City', // Unova
     'Coumarine City', // Kalos
-    '', // Alola
+    'Hau\'oli City', // Alola
     '', // Galar
 ];
