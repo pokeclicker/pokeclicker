@@ -1,9 +1,9 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class CaughtUniquePokemonsByRegionRequirement extends Requirement {
+class CaughtUniquePokemonsByRegionRequirement extends AchievementRequirement {
     private region: GameConstants.Region;
-    constructor(region: GameConstants.Region, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(PokemonHelper.calcUniquePokemonsByRegion(region), type);
+    constructor(region: GameConstants.Region, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(PokemonHelper.calcUniquePokemonsByRegion(region), option, GameConstants.AchievementType['Caught Unique Pokemons By Region']);
         this.region = region;
     }
 
