@@ -100,13 +100,13 @@ class PartyPokemon implements Saveable {
             });
             return;
         }
-        if (ItemHandler.useItem('Protein'), amount) {
+        if (ItemHandler.useItem('Protein', amount())) {
             GameHelper.incrementObservable(this.proteinsUsed, amount());
         }
     }
 
     private getAmount() {
-        return Number(VitaminController.vitaminMultipliers[VitaminController.vitaminIndex()].replace(/\D/g, ''));
+        return Number(VitaminController.vitaminMultipliers[VitaminController.vitaminIndex()].replace(/\D/g, '')) || Infinity;
     }
 
     canUseProtein = (amount: number) => {
