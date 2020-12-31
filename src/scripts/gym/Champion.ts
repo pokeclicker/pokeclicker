@@ -100,3 +100,49 @@ gymList['Champion Hao'] = new Champion(
         new GymPokemon('Incineroar', 2015330, 60),
     ]
 );
+
+//TODO: rewards/hp rebalance
+gymList['Champion Leon'] = new Champion(
+    'Leon',
+    'Champion Leon',
+    [
+        new GymPokemon('Aegislash', 2015330, 59),
+        new GymPokemon('Dragapult', 2015330, 58),
+        new GymPokemon('Haxorus', 2015330, 58),
+        new GymPokemon('Seismitoad', 2015330, 59),
+        new GymPokemon('Charizard', 2015330, 59),
+    ],
+    BadgeEnums.Elite_GalarChampion,
+    100000,
+    'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Bede)],
+    // Bulbasaur
+    [new GymPokemon('Cinderace', 2015330, 60)],
+    // Charmander
+    [new GymPokemon('Inteleon', 2015330, 60)],
+    // Squirtle/Pikachu
+    [new GymPokemon('Rillaboom', 2015330, 60)]
+);
+
+//TODO: rewards/hp rebalance
+gymList['Trainer Hop'] = new Champion(
+    'Hop',
+    'Trainer Hop',
+    [
+        new GymPokemon('Dubwool', 1945330, 49),
+        new GymPokemon('Cramorant', 1948300, 49),
+        new GymPokemon('Pincurchin', 1952000, 50),
+        new GymPokemon('Snorlax', 1957000, 51),
+        new GymPokemon('Corviknight', 1945330, 50),
+    ],
+    BadgeEnums.Elite_Hop,
+    100000,
+    'Thanks, mate. I\'m really glad you were the one here with me.',
+    [new GymBadgeRequirement(BadgeEnums.Elite_Bede)],
+    // Bulbasaur
+    [new GymPokemon('Inteleon', 2015330, 60)],
+    // Charmander
+    [new GymPokemon('Rillaboom', 2015330, 60)],
+    // Squirtle/Pikachu
+    [new GymPokemon('Cinderace', 2015330, 60)]
+);

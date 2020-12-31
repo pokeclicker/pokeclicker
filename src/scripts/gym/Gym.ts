@@ -1457,21 +1457,6 @@ gymList['Trainer Marnie'] = new Gym(
     'I mean, If you\'re gonna win, you could at least win in a way that makes me look good, right?',
     [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Rose Tower'))]
 );
-gymList['Trainer Hop'] = new Gym(
-    'Hop',
-    'Trainer Hop',
-    [
-        new GymPokemon('Dubwool', 1945330, 49),
-        new GymPokemon('Cramorant', 1948300, 49),
-        new GymPokemon('Pincurchin', 1952000, 50),
-        new GymPokemon('Snorlax', 1957000, 51),
-        new GymPokemon('Corviknight', 1945330, 50),
-    ],
-    BadgeEnums.Elite_Hop,
-    64000,
-    'Thanks, mate. I\'m really glad you were the one here with me.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)]
-);
 gymList['Trainer Bede'] = new Gym(
     'Bede',
     'Trainer Bede',
@@ -1487,22 +1472,8 @@ gymList['Trainer Bede'] = new Gym(
     'I couldn\'t win, but at least I was able to show everyone how great Fairy types are.',
     [new GymBadgeRequirement(BadgeEnums.Elite_Hop)]
 );
-gymList['Champion Leon'] = new Gym(
-    'Leon',
-    'Champion Leon',
-    [
-        new GymPokemon('Aegislash', 1945330, 49),
-        new GymPokemon('Dragapult', 1948300, 49),
-        new GymPokemon('Haxorus', 1952000, 50),
-        new GymPokemon('Seismitoad', 1957000, 51),
-        new GymPokemon('Mr. Rime', 1945330, 60),
-        new GymPokemon('Charizard', 1945330, 50),
-    ],
-    BadgeEnums.Elite_GalarChampion,
-    64000,
-    'My time as Champion is over... But what a champion time it\'s been! Thank you for the greatest battle I\'ve ever had!',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Bede)]
-);
+
+// Armor + crown gyms
 gymList['Gym Leader Klara'] = new Gym(
     'Klara',
     'Gym Leader Klara',
