@@ -55,6 +55,11 @@ export default class GameHelper {
         return Object.keys(enumerable).map(Number).filter((k) => !Number.isNaN(k));
     }
 
+    // default value as a function so objects/arrays as defaults creates a new one for each key
+    public static objectFromEnumStrings<T extends {}, V>(enumerable: T, defaultValue: () => V): Record<keyof T, V> {
+        return (this.enumStrings(enumerable).reduce((keys, type) => ({ ...keys, [type]: defaultValue() }), {}) as Record<keyof T, V>);
+    }
+
     public static tick(): void {
         this.counter = 0;
         this.updateTime();

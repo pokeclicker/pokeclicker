@@ -34,12 +34,14 @@ class Game {
         public quests: Quests,
         public specialEvents: SpecialEvents,
         public discord: Discord,
-        public achievementTracker: AchievementTracker
+        public achievementTracker: AchievementTracker,
+        public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
-        AchievementHandler.initialize();
+        AchievementHandler.initialize(multiplier);
         FarmController.initialize();
+        EffectEngineRunner.initialize(multiplier);
     }
 
     load() {

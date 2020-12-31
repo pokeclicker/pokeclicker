@@ -15,7 +15,7 @@ class Party implements Feature {
     hasMaxLevelPokemon: KnockoutComputed<boolean>;
 
 
-    constructor() {
+    constructor(private multiplier: Multiplier) {
         this._caughtPokemon = ko.observableArray([]);
 
         this.hasMaxLevelPokemon = ko.pureComputed(() => {
@@ -81,14 +81,9 @@ class Party implements Feature {
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
-        App.game.oakItems.use(OakItems.OakItem.Exp_Share);
+        const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;
-        const oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
-        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
-
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Lucky_egg)()) {
-            expTotal *= 1.5;
-        }
+        const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
 
         const maxLevel = (App.game.badgeCase.badgeCount() + 2) * 10;
         for (const pokemon of this.caughtPokemon) {
@@ -110,11 +105,9 @@ class Party implements Feature {
             attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, includeWeather);
         }
 
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xAttack)()) {
-            attack *= 1.5;
-        }
+        const bonus = this.multiplier.getBonus('pokemonAttack');
 
-        return Math.round(attack);
+        return Math.round(attack * bonus);
     }
 
     public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, includeWeather = true): number {
@@ -183,19 +176,13 @@ class Party implements Feature {
         return false;
     }
 
-    calculateClickAttack(): number {
+    calculateClickAttack(useItem = false): number {
         // Base power
         // Shiny pokemon help with a 50% boost
-        let clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
+        const clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
+        const bonus = this.multiplier.getBonus('clickAttack');
 
-        clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
-
-        // Apply battle item bonus
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()) {
-            clickAttack *= 1.5;
-        }
-
-        return Math.floor(clickAttack);
+        return Math.floor(clickAttack * bonus);
     }
 
     canAccess(): boolean {
