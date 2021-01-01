@@ -21,6 +21,10 @@ import Notifier from './notifications/Notifier';
 import LogBook from './logbook/LogBook';
 import { LogBookTypes } from './logbook/LogBookTypes';
 import ChangelogItems from './changelog/ChangelogItems';
+import RedeemableCode from './codes/RedeemableCode';
+import EggType from './breeding/EggType';
+import Multiplier from './multiplier/Multiplier';
+import MultiplierType from './multiplier/MultiplierType';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -46,4 +50,8 @@ Object.assign(<any>window, {
     LogBook,
     LogBookTypes,
     ChangelogItems,
+    RedeemableCode,
+    EggType,
+    Multiplier,
+    MultiplierType,
 });

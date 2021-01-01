@@ -35,13 +35,15 @@ class Game {
         public specialEvents: SpecialEvents,
         public discord: Discord,
         public achievementTracker: AchievementTracker,
-        public lab: Lab
+        public lab: Lab,
+        public multiplier: Multiplier
     ) {
         this._gameState = ko.observable(GameConstants.GameState.paused);
 
-        AchievementHandler.initialize();
+        AchievementHandler.initialize(multiplier);
         ResearchHandler.initialize();
         FarmController.initialize();
+        EffectEngineRunner.initialize(multiplier);
     }
 
     load() {

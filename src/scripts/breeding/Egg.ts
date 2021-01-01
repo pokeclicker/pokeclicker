@@ -1,31 +1,28 @@
 /// <reference path="../../declarations/GameHelper.d.ts" />
 /// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+/// <reference path="../../declarations/breeding/EggType.d.ts" />
 
 class Egg implements Saveable {
     saveKey = 'egg';
 
     defaults = {};
 
-    totalSteps: number;
     steps: KnockoutObservable<number>;
-    shinySteps: number;
-    pokemon: PokemonNameType;
-    type: EggType;
     pokemonType1: PokemonType;
     pokemonType2: PokemonType;
-    notified: boolean;
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
     stepsRemaining: KnockoutComputed<number>;
 
-    constructor(type = EggType.None, totalSteps = 0, pokemon: PokemonNameType = 'MissingNo.', steps = 0, shinySteps = 0, notified = false) {
-        this.totalSteps = totalSteps;
+    constructor(
+        public type = EggType.None,
+        public totalSteps = 0,
+        public pokemon: PokemonNameType = 'MissingNo.',
+        steps = 0,
+        public shinyChance = GameConstants.SHINY_CHANCE_BREEDING,
+        public notified = false
+    ) {
         this.steps = ko.observable(steps);
-        this.shinySteps = shinySteps;
-        this.pokemon = pokemon;
-        this.type = type;
-        this.notified = notified;
-
         this.init();
     }
 
@@ -56,17 +53,22 @@ class Egg implements Saveable {
         return this.type === EggType.None;
     }
 
-    addSteps(amount: number) {
+    updateShinyChance(steps: number, multiplier) {
+        const stepsChance = GameConstants.SHINY_CHANCE_BREEDING / multiplier.getBonus('shiny');
+        const newChance = ((this.shinyChance * this.steps()) + (stepsChance * steps)) / (this.steps() + steps);
+
+        this.shinyChance = newChance;
+    }
+
+    addSteps(amount: number, multiplier: Multiplier) {
         if (this.isNone() || this.notified) {
             return;
         }
         if (!+amount) {
             amount = 1;
         }
+        this.updateShinyChance(amount, multiplier);
         this.steps(this.steps() + amount);
-        if (App.game.oakItems.isActive(OakItems.OakItem.Shiny_Charm)) {
-            this.shinySteps += amount;
-        }
         if (this.canHatch()) {
             if (this.type == EggType.Pokemon) {
                 Notifier.notify({
@@ -95,8 +97,7 @@ class Egg implements Saveable {
         if (!this.canHatch()) {
             return false;
         }
-        const shinyChance = GameConstants.SHINY_CHANCE_BREEDING - (0.5 * GameConstants.SHINY_CHANCE_BREEDING * Math.min(1, this.shinySteps / this.steps()));
-        const shiny = PokemonFactory.generateShiny(shinyChance);
+        const shiny = PokemonFactory.generateShiny(this.shinyChance, true);
 
         const partyPokemon = App.game.party.caughtPokemon.find(p => p.name == this.pokemon);
         // If the party pokemon exist, increase it's damage output
@@ -164,7 +165,7 @@ class Egg implements Saveable {
         return {
             totalSteps: this.totalSteps,
             steps: this.steps(),
-            shinySteps: this.shinySteps,
+            shinyChance: this.shinyChance,
             pokemon: this.pokemon,
             type: this.type,
             notified: this.notified,
@@ -175,7 +176,7 @@ class Egg implements Saveable {
     fromJSON(json: Record<string, any>): void {
         this.totalSteps = json['totalSteps'];
         this.steps = ko.observable(json['steps']);
-        this.shinySteps = json['shinySteps'];
+        this.shinyChance = json['shinyChance'];
         this.pokemon = json['pokemon'];
         this.type = json['type'];
         this.notified = json['notified'];

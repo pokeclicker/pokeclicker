@@ -1,5 +1,5 @@
 class QuestHelper {
-    public static generateQuestList(seed: number, amount = 10, uniqueQuestTypes = true) {
+    public static generateQuestList(seed: number, amount = 10, uniqueQuestTypes = true, region: GameConstants.Region = player.highestRegion()) {
         const quests = [];
 
         SeededRand.seed(+seed);
@@ -10,18 +10,18 @@ class QuestHelper {
             if (uniqueQuestTypes) {
                 QuestTypes.delete(type);
             }
-            const quest = QuestHelper.random(type);
+            const quest = QuestHelper.random(type, region);
             quest.index = i;
             quests.push(quest);
         }
         return quests;
     }
 
-    public static random(type: string) {
+    public static random(type: string, highestRegion: GameConstants.Region) {
         let amount, route, region;
         switch (type) {
             case 'DefeatPokemons':
-                region = SeededRand.intBetween(0, player.highestRegion());
+                region = SeededRand.intBetween(0, highestRegion);
                 route = SeededRand.fromArray(Routes.getRoutesByRegion(region)).number;
                 amount = SeededRand.intBetween(100, 500);
                 return new DefeatPokemonsQuest(route, region, amount);
@@ -56,13 +56,13 @@ class QuestHelper {
             case 'CatchShinies':
                 return new CatchShiniesQuest(1);
             case 'DefeatGym':
-                region = SeededRand.intBetween(0, player.highestRegion());
+                region = SeededRand.intBetween(0, highestRegion);
                 const gymTown = SeededRand.fromArray(GameConstants.RegionGyms[region]);
                 amount = SeededRand.intBetween(5, 20);
                 return new DefeatGymQuest(gymTown, amount);
             case 'DefeatDungeon':
                 // Allow upto highest region
-                region = SeededRand.intBetween(0, player.highestRegion());
+                region = SeededRand.intBetween(0, highestRegion);
                 const dungeon = SeededRand.fromArray(GameConstants.RegionDungeons[region]);
                 amount = SeededRand.intBetween(5, 20);
                 return new DefeatDungeonQuest(dungeon, amount);
@@ -86,7 +86,7 @@ class QuestHelper {
                 amount = SeededRand.intBetween(100, 500);
                 return new UseOakItemQuest(oakItem, amount);
             case 'HarvestBerriesQuest':
-                const berryRegionBound = Farming.genBounds[Math.min(player.highestRegion(), GameConstants.Region.unova)];
+                const berryRegionBound = Farming.genBounds[Math.min(highestRegion, GameConstants.Region.unova)];
                 // Getting Berries that can be grown in less than half a day
                 const berryTypes = GameHelper.enumNumbers(BerryType).filter(berry => {
                     // Needs to be a berry that can be planted

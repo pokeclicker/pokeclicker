@@ -92,23 +92,31 @@ class PartyPokemon implements Saveable {
         return false;
     }
 
-    public useProtein() {
-        if (!this.canUseProtein()) {
+    public useProtein(amount: number): void {
+        const usesRemaining = this.proteinUsesRemaining();
+
+        // If no more proteins can be used on this Pokemon
+        if (!usesRemaining) {
             Notifier.notify({
                 message: 'This Pokémon cannot increase their power any higher!',
                 type: NotificationConstants.NotificationOption.warning,
             });
             return;
         }
-        if (ItemHandler.useItem('Protein')) {
-            GameHelper.incrementObservable(this.proteinsUsed);
+
+        // The lowest number of amount they want to use, total in inventory, uses remaining for this Pokemon
+        amount = Math.min(amount, player.itemList.Protein(), usesRemaining);
+
+        // Apply the proteins
+        if (ItemHandler.useItem('Protein', amount)) {
+            GameHelper.incrementObservable(this.proteinsUsed, amount);
         }
     }
 
-    canUseProtein = ko.pureComputed(() => {
+    proteinUsesRemaining = (): number => {
         // Allow 5 for every region visited (including Kanto)
-        return this.proteinsUsed() < (player.highestRegion() + 1) * 5;
-    });
+        return (player.highestRegion() + 1) * 5 - this.proteinsUsed();
+    };
 
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {

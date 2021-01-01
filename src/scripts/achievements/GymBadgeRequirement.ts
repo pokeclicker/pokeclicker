@@ -3,8 +3,8 @@
 
 class GymBadgeRequirement extends Requirement {
     public badge: BadgeEnums;
-    constructor(badge: BadgeEnums, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(1, type);
+    constructor(badge: BadgeEnums, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(1, option);
         this.badge = badge;
     }
 

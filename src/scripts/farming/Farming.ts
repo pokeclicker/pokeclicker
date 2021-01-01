@@ -42,7 +42,7 @@ class Farming implements Feature {
 
     highestUnlockedBerry: KnockoutComputed<number>;
 
-    constructor() {
+    constructor(private multiplier: Multiplier) {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
@@ -53,6 +53,9 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
         this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
         this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
+
+        this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny]());
+        this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg]());
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -630,8 +633,8 @@ class Farming implements Feature {
                 BerryType.Tamato,
                 BerryType.Spelon,
             ]));
-        // Occa Overgrow
-        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Occa, undefined, [BerryType.Occa], { showHint: false }));
+        // Occa Parasite
+        this.mutations.push(new ParasiteMutation(.0004, BerryType.Occa));
         // Passho
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Passho,
             [
@@ -659,8 +662,7 @@ class Farming implements Feature {
                 },
             }));
         // Rindo Overgrow
-        this.mutations.push(new GrowNearBerryMutation(.0004, BerryType.Rindo,
-            [BerryType.Rindo], {showHint: false }));
+        this.mutations.push(new GrowNearBerryMutation(.0004, BerryType.Rindo, [BerryType.Rindo], {showHint: false }));
         // Yache
         this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Yache, BerryType.Passho, {}, PlotStage.Seed, {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
@@ -669,8 +671,8 @@ class Farming implements Feature {
         this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItems.OakItem.Blaze_Cassette));
         // Kebia
         this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItems.OakItem.Poison_Barb));
-        // Kebia Overgrow
-        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Kebia, undefined, [BerryType.Kebia], { showHint: false }));
+        // Kebia Parasite
+        this.mutations.push(new ParasiteMutation(.0004, BerryType.Kebia));
         // Shuca
         this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItems.OakItem.Sprinklotad));
         // Coba
@@ -716,8 +718,8 @@ class Farming implements Feature {
                 BerryType.Kasib,
                 BerryType.Payapa,
             ]));
-        // Colbur Overgrow
-        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Colbur, undefined, [BerryType.Colbur], { showHint: false }));
+        // Colbur Parasite
+        this.mutations.push(new ParasiteMutation(.0004, BerryType.Colbur));
         // Babiri
         berryReqs = {};
         berryReqs[BerryType.Shuca] = 4;

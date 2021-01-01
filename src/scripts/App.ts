@@ -16,21 +16,22 @@ class App {
             console.log(`[${GameConstants.formatDate(new Date())}] %cLoading Game Data..`, 'color:#8e44ad;font-weight:900;');
             // Needs to be loaded first so save data can be updated (specifically "player" data)
             const update = new Update();
+            const multiplier = new Multiplier();
 
             player = Save.load();
             App.game = new Game(
                 update,
-                new Breeding(),
+                new Breeding(multiplier),
                 new Pokeballs(),
-                new Wallet(),
+                new Wallet(multiplier),
                 new KeyItems(),
                 new BadgeCase(),
-                new OakItems([20, 50, 100]),
+                new OakItems([20, 50, 100], multiplier),
                 new PokemonCategories(),
-                new Party(),
+                new Party(multiplier),
                 new Shards(),
                 new Underground(),
-                new Farming(),
+                new Farming(multiplier),
                 new LogBook(),
                 new RedeemableCodes(),
                 new Statistics(),
@@ -38,7 +39,8 @@ class App {
                 new SpecialEvents(),
                 new Discord(),
                 new AchievementTracker(),
-                new Lab()
+                new Lab(),
+                multiplier
             );
 
             console.log(`[${GameConstants.formatDate(new Date())}] %cGame loaded`, 'color:#8e44ad;font-weight:900;');
