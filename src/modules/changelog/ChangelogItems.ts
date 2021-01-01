@@ -10,6 +10,18 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.7.1
+    new ChangelogUpdate('v0.7.1', new Date(2021, 0, 1)),
+    new Changelog(changelogType.NEW, 'Unova Fossils now available in the Underground'),
+    new Changelog(changelogType.NEW, 'Add option to display Pokedex ID in hatchery'),
+    new Changelog(changelogType.NEW, 'Save achievement filters'),
+    new Changelog(changelogType.NEW, 'Use multiple Protein at once'),
+    new Changelog(changelogType.CHANGE, 'Buff P2 Lab, increase boss pool'),
+    new Changelog(changelogType.FIXED, 'Fixed some parasitic Farm mutations'),
+    new Changelog(changelogType.FIXED, 'Fixed shiny chance when hatching and using Shiny Charm'),
+    new Changelog(changelogType.FIXED, 'Vermilion City image & name'),
+    new Changelog(changelogType.FIXED, 'Quest changing when traveling to a new region'),
+
     // v0.7.0
     new ChangelogUpdate('v0.7.0 - Unova', new Date(2020, 11, 23)),
     new Changelog(changelogType.NEW, 'The Unova region is now available!'),
