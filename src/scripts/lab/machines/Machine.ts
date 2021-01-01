@@ -5,7 +5,7 @@ abstract class Machine implements Saveable {
         amount: 0,
     }
 
-    private _amount: KnockoutObservable<number>;
+    public _amount: KnockoutObservable<number>;
 
     constructor(
         public id: Lab.Machine,

@@ -45,7 +45,7 @@ class ResearchWithCost extends Research {
 
     get canPurchase(): boolean {
         return this._costs.every(itemCost => {
-            BagHandler.amount(itemCost.item)() >= itemCost.amount;
+            return BagHandler.amount(itemCost.item)() >= itemCost.amount;
         });
     }
 

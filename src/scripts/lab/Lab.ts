@@ -328,22 +328,103 @@ class Lab implements Feature {
 
 
             //#region Fabricator Item Blueprints
-            /*
-            'fire_stone',
-            'water_stone',
-            'thunder_stone',
-            'leaf_stone',
-            'moon_stone',
-            'sun_stone',
-            'dragon_scale',
-            'metal_coat',
-            'upgrade',
-            'dubious_disc',
-            'electirizer',
-            'magmarizer',
-            'protector',
-            'reaper_cloth',
-            */
+
+            new ResearchWithCost(Lab.Research.fire_stone, ResearchType.Blueprint,
+                'Fire Stone Blueprint', 'Unlocks the Fire Stone Fabricator Blueprint',
+                7000, [{item: {type: ItemType.item, id: 'Fire_stone'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new ResearchWithCost(Lab.Research.water_stone, ResearchType.Blueprint,
+                'Water Stone Blueprint', 'Unlocks the Water Stone Fabricator Blueprint',
+                7000, [{item: {type: ItemType.item, id: 'Water_stone'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Water]),
+                }),
+            new ResearchWithCost(Lab.Research.thunder_stone, ResearchType.Blueprint,
+                'Thunder Stone Blueprint', 'Unlocks the Thunder Stone Fabricator Blueprint',
+                7000, [{item: {type: ItemType.item, id: 'Thunder_stone'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Electric]),
+                }),
+            new ResearchWithCost(Lab.Research.leaf_stone, ResearchType.Blueprint,
+                'Leaf Stone Blueprint', 'Unlocks the Leaf Stone Fabricator Blueprint',
+                7000, [{item: {type: ItemType.item, id: 'Leaf_stone'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Grass]),
+                }),
+            new ResearchWithCost(Lab.Research.moon_stone, ResearchType.Blueprint,
+                'Moon Stone Blueprint', 'Unlocks the Moon Stone Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Moon_stone'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Fairy]),
+                }),
+            new ResearchWithCost(Lab.Research.sun_stone, ResearchType.Blueprint,
+                'Sun Stone Blueprint', 'Unlocks the Sun Stone Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Sun_stone'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new ResearchWithCost(Lab.Research.dragon_scale, ResearchType.Blueprint,
+                'Dragon Scale Blueprint', 'Unlocks the Dragon Scale Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Dragon_scale'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Dragon]),
+                }),
+            new ResearchWithCost(Lab.Research.metal_coat, ResearchType.Blueprint,
+                'Metal Coat Blueprint', 'Unlocks the Metal Coat Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Metal_coat'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Steel]),
+                }),
+            new ResearchWithCost(Lab.Research.upgrade, ResearchType.Blueprint,
+                'Upgrade Blueprint', 'Unlocks the Upgrade Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Upgrade'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                }),
+            new ResearchWithCost(Lab.Research.dubious_disc, ResearchType.Blueprint,
+                'Dubious Disk Blueprint', 'Unlocks the Dubious Disk Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Dubious_disc'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                }),
+            new ResearchWithCost(Lab.Research.electirizer, ResearchType.Blueprint,
+                'Electirizer Blueprint', 'Unlocks the Electirizer Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Electirizer'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Electric]),
+                }),
+            new ResearchWithCost(Lab.Research.magmarizer, ResearchType.Blueprint,
+                'Magmarizer Blueprint', 'Unlocks the Magmarizer Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Magmarizer'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new ResearchWithCost(Lab.Research.protector, ResearchType.Blueprint,
+                'Protector Blueprint', 'Unlocks the Protector Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Protector'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                }),
+            new ResearchWithCost(Lab.Research.reaper_cloth, ResearchType.Blueprint,
+                'Reaper Cloth Blueprint', 'Unlocks the Reaper Cloth Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Reaper_cloth'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Ghost]),
+                }),
+
             //#endregion
 
             //#region Genesect
@@ -386,15 +467,15 @@ class Lab implements Feature {
         //#region Machines
 
         // TODO: HLXII - Machines
-        this.machines = [
-            new Fabricator(Lab.Machine.fabricator, 'Fabricator', 'Creates new machines and items.', 2, 3),
-            new PlateDeconstructor(Lab.Machine.plate_deconstructor, 'Plate Deconstructor', 'Deconstruct plates into shards.', 1, 2),
-            new PlateReconstructor(Lab.Machine.plate_reconstructor, 'Plate Reconstructor', 'Reconstruct plates from shards.', 1, 2),
-            new Incubator(Lab.Machine.incubator, 'Incubator', 'Increases the total Hatchery queue slots when placed.', 2, 3),
-            new FossilReviver(Lab.Machine.fossil_reviver, 'Fossil Reviver', 'Revives Fossil Pokemon', 5, 2),
-            new Generator(Lab.Machine.generator, 'Generator', 'Increases Machine speed when placed.', 4, 6),
-        ];
+        this.machines = [];
+        this.machines[Lab.Machine.fabricator]           = new Fabricator(Lab.Machine.fabricator, 'Fabricator', 'Creates new machines and items.', 2, 3),
+        this.machines[Lab.Machine.plate_deconstructor]  = new PlateDeconstructor(Lab.Machine.plate_deconstructor, 'Plate Deconstructor', 'Deconstruct plates into shards.', 1, 2),
+        this.machines[Lab.Machine.plate_reconstructor]  = new PlateReconstructor(Lab.Machine.plate_reconstructor, 'Plate Reconstructor', 'Reconstruct plates from shards.', 1, 2),
+        this.machines[Lab.Machine.incubator]            = new Incubator(Lab.Machine.incubator, 'Incubator', 'Increases the total Hatchery queue slots when placed.', 2, 3),
+        this.machines[Lab.Machine.fossil_reviver]       = new FossilReviver(Lab.Machine.fossil_reviver, 'Fossil Reviver', 'Revives Fossil Pokemon', 5, 2),
+        this.machines[Lab.Machine.generator]            = new Generator(Lab.Machine.generator, 'Generator', 'Increases Machine speed when placed.', 4, 6),
 
+        Fabricator.initialize();
         Generator.initialize();
 
         //#endregion
@@ -435,6 +516,8 @@ class Lab implements Feature {
                 type: NotificationConstants.NotificationOption.success,
                 sound: NotificationConstants.NotificationSound.achievement,
             });
+            // Handle updating Research List UI with new Research
+            ResearchHandler.filterResearchList(true);
         }
     }
 
@@ -469,7 +552,12 @@ class Lab implements Feature {
     }
 
     isResearched(research: Lab.Research): boolean {
-        return this.researchList[research].completed;
+        const res = this.researchList[research];
+        if (!res) {
+            console.error(`Error: Could not find Research ${research} - ${Lab.Research[research]}`);
+            return false;
+        }
+        return res.completed;
     }
 
     fromJSON(json: Record<string, any>): void {
@@ -601,6 +689,7 @@ namespace Lab {
         'generator_fuel_eff2',
         'generator_fuel_eff3',
         // Fossil Reviver
+        /*
         'fossil_reviver',
         'fossil_reviver_speed1',
         'fossil_reviver_speed2',
@@ -621,10 +710,12 @@ namespace Lab {
         'fossil_plume',
         'fossil_jaw',
         'fossil_sail',
+        */
         // TODO: HLXII - Add VIII fossils
         // Research Booster
 
         // Pokeball Factory
+        /*
         'pokeball_factory',
         'pokeball_factory_speed1',
         'pokeball_factory_speed2',
@@ -634,6 +725,7 @@ namespace Lab {
         'timerball',
         'duskball',
         'luxuryball',
+        */
         // Type Booster
         /*
         'type_boost',
@@ -676,12 +768,15 @@ namespace Lab {
         'protector',
         'reaper_cloth',
         // Genesect
+        /*
         'drive_burner',
         'shock_drive',
         'burn_drive',
         'chill_drive',
         'douse_drive',
+        */
         // Arceus
+        /*
         'legendary_plate',
         'legendary_draco_plate',
         'legendary_dread_plate',
@@ -700,6 +795,7 @@ namespace Lab {
         'legendary_toxic_plate',
         'legendary_zap_plate',
         'legendary_pixie_plate',
+        */
     }
 
     // TODO: HLXII - Add all Machines
