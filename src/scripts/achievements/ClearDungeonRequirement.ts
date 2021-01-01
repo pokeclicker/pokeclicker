@@ -1,10 +1,10 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class ClearDungeonRequirement extends Requirement {
+class ClearDungeonRequirement extends AchievementRequirement {
     public dungeonIndex: number; // Gym name index in array GameConstants.Gyms
 
-    constructor(value: number, dungeonIndex: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, type);
+    constructor(value: number, dungeonIndex: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(value, option, GameConstants.AchievementType['Clear Dungeon']);
         this.dungeonIndex = dungeonIndex;
     }
 
