@@ -4,10 +4,12 @@
  */
 class PlateReconstructor extends PlateMachine {
 
-    // TODO: HLXII - Balance base values
     public static baseShardCost = 1000;
-    public static progressAmount = 10;
+    public static progressAmount = 86400;
 
+    /**
+     * The amount of shards used during reconstruction, based on the research upgrades.
+     */
     public static shardCost: KnockoutComputed<number> = ko.pureComputed(() => {
         let multiplier = 1;
         if (App.game.lab.isResearched(Lab.Research.plate_reconstructor_eff3)) {
@@ -18,6 +20,22 @@ class PlateReconstructor extends PlateMachine {
             multiplier = 0.5;
         }
         return PlateReconstructor.baseShardCost * multiplier;
+    });
+
+    /**
+     * The progress multiplier, based on research upgrades.
+     */
+    public static progressSpeed: KnockoutComputed<number> = ko.pureComputed(() => {
+        if (App.game.lab.isResearched(Lab.Research.plate_reconstructor_speed4)) {
+            return 2;
+        } else if (App.game.lab.isResearched(Lab.Research.plate_reconstructor_speed3)) {
+            return 1.75;
+        } else if (App.game.lab.isResearched(Lab.Research.plate_reconstructor_speed2)) {
+            return 1.50;
+        } else if (App.game.lab.isResearched(Lab.Research.plate_reconstructor_speed1)) {
+            return 1.25;
+        }
+        return 1;
     });
 
     createState(json?: any): MachineState {
@@ -74,8 +92,7 @@ class PlateReconstructorState extends PlateMachineState {
                 return;
             }
             case MachineStage.active: {
-                // TODO: HLXII - Handle Research Upgrades (?)
-                this.progress += delta;
+                this.progress += delta * PlateReconstructor.progressSpeed();
                 // Checking Plate completion
                 if (this.progress >= this.progressAmount()) {
                     // Gain plate

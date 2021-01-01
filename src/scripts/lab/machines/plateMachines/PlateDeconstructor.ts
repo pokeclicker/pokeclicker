@@ -4,9 +4,8 @@
  */
 class PlateDeconstructor extends PlateMachine {
 
-    // TODO: HLXII - Balance base values
     public static baseShardProfit = 200;
-    public static progressAmount = 86400;
+    public static progressAmount = 3600;
 
     /**
      * The amount of shards gained from deconstruction, based on the research upgrades.

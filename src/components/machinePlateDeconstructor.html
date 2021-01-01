@@ -14,29 +14,29 @@ aria-labelledby="PlateDeconstructorModalLabel" aria-hidden="true">
                 <div class="row justify-content-center">
                     <h4 class="col-6 col-sm-4 col-lg-2">
                         <span style="display: inline;">
-                            <img alt="Plates" style="height: 24px" data-bind="attr: { src: Underground.getMineItemById(UndergroundItem.getPlateIDByType(state.plateType)).imagePath }"/>
-                            <span data-bind="text: GameConstants.formatNumber(PlateDeconstructor.getPlateAmount(state.plateType)())">0</span>
+                            <img alt="Plates" style="height: 24px" data-bind="attr: { src: BagHandler.image({type: ItemType.underground, id: UndergroundItem.getPlateIDByType(state.plateType)}) }"/>
+                            <span data-bind="text: GameConstants.formatNumber(BagHandler.amount({type: ItemType.underground, id: UndergroundItem.getPlateIDByType(state.plateType)})())">0</span>
                         </span>
                     </h4>
                     <h4 class="col-6 col-sm-4 col-lg-2">
                         <span style="display: inline;">
-                            <img alt="Shards" style="height: 24px" data-bind="attr: { src: Shards.image(state.plateType) }"/>
-                            <span data-bind="text: GameConstants.formatNumber(App.game.shards.shardWallet[state.plateType]())">0</span>
+                            <img alt="Shards" style="height: 24px" data-bind="attr: { src: BagHandler.image({type: ItemType.shard, id: state.plateType}) }"/>
+                            <span data-bind="text: GameConstants.formatNumber(BagHandler.amount({type: ItemType.shard, id: state.plateType})())">0</span>
                         </span>
                     </h4>
                 </div>
                 <div class="row no-gutters">
                     <div class="btn-group btn-block col-6 dropdown">
                         <button type="button" class='btn btn-primary btn-block p-0'>
-                            <div style="display:inline"><img style="height: 24px" data-bind='attr: { src: Underground.getMineItemById(UndergroundItem.getPlateIDByType(state.plateType)).imagePath }'/></div>
-                            <span data-bind="text: Underground.getMineItemById(UndergroundItem.getPlateIDByType(state.plateType)).name">Plate Name</span>
+                            <div style="display:inline"><img style="height: 24px" data-bind='attr: { src: BagHandler.image({type: ItemType.underground, id: UndergroundItem.getPlateIDByType(state.plateType)}) }'/></div>
+                            <span data-bind="text: BagHandler.displayName({type: ItemType.underground, id: UndergroundItem.getPlateIDByType(state.plateType)})">Plate Name</span>
                         </button>
                         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active"
                             data-boundary="viewport" data-bind="text: '&nbsp;', enable: !state.active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" data-bind="foreach: UndergroundItem.getPlateTypes()">
                             <button class="dropdown-item" type="button"
-                                data-bind="text: Underground.getMineItemById(UndergroundItem.getPlateIDByType($data)).name,
+                                data-bind="text: BagHandler.displayName({type: ItemType.underground, id: UndergroundItem.getPlateIDByType($data)}),
                                 click: function() {state.plateType = $data;}"></button>
                         </div>
                     </div>
