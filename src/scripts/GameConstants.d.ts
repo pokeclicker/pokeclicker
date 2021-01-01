@@ -96,8 +96,10 @@ namespace GameConstants {
         chest,
         boss
     }
-    declare const ROUTE_HELD_ITEM_CHANCE: number;
-    declare const DUNGEON_HELD_ITEM_CHANCE: number;
+    declare const ROUTE_HELD_ITEM_MODIFIER: number;
+    declare const DUNGEON_HELD_ITEM_MODIFER: number;
+    declare const HELD_ITEM_CHANCE: number;
+    declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
     declare const DUNGEON_SHARDS: number;
     declare const DUNGEON_BOSS_SHARDS: number;
     declare const GYM_SHARDS: number;
