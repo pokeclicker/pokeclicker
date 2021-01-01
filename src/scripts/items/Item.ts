@@ -132,8 +132,8 @@ class Item {
         player.gainItem(this.name(), n);
     }
 
-    use() {
-        return;
+    use(): boolean {
+        return true;
     }
 
     isAvailable(): boolean {
