@@ -124,7 +124,7 @@ export enum DungeonTile {
 
 // Held item chance
 export const ROUTE_HELD_ITEM_MODIFIER = 1;
-export const DUNGEON_HELD_ITEM_MODIFER = 4;
+export const DUNGEON_HELD_ITEM_MODIFIER = 4;
 export const HELD_ITEM_CHANCE = 512;
 export const HELD_UNDERGROUND_ITEM_CHANCE = 2048;
 
