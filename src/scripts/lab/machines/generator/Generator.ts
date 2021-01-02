@@ -16,42 +16,72 @@ class Generator extends Machine {
         return state;
     }
 
-    // TODO: HLXII - Balance fuelAmounts
-    // TODO: HLXII - Add Research Upgrades for fuel
     /**
      * Possible Fuels that can be used in the Generator
      */
-    public static fuelTypes: GeneratorFuel[];
+    public static fuelTypes: GeneratorFuel[] = [];
     public static initialize() {
-        this.fuelTypes = [
-            new GeneratorFuel(GeneratorFuelType.electric_shard, PokemonType.Electric, ItemType.shard, 0.1, Lab.Research.generator_fuel),
-            new GeneratorFuel(GeneratorFuelType.zap_plate, 'Zap Plate', ItemType.underground, 10, Lab.Research.generator_fuel_zap_plate),
-            new GeneratorFuel(GeneratorFuelType.wacan_berry, BerryType.Wacan, ItemType.berry, 0.2, Lab.Research.generator_fuel_wacan),
-            new GeneratorFuel(GeneratorFuelType.thunder_stone, 'Thunder_stone', ItemType.item, 20, Lab.Research.generator_fuel_thunder_stone),
-            new GeneratorFuel(GeneratorFuelType.electirizer, 'Electirizer', ItemType.item, 25, Lab.Research.generator_fuel_electirizer),
-        ];
+        this.fuelTypes[GeneratorFuelType.electric_shard]    = new GeneratorFuel(GeneratorFuelType.electric_shard, {type: ItemType.shard, id: PokemonType.Electric}, 1, Lab.Research.generator_fuel);
+        this.fuelTypes[GeneratorFuelType.zap_plate]         = new GeneratorFuel(GeneratorFuelType.zap_plate, {type: ItemType.underground, id: 'Zap Plate'} , 1000, Lab.Research.generator_fuel_zap_plate);
+        this.fuelTypes[GeneratorFuelType.wacan_berry]       = new GeneratorFuel(GeneratorFuelType.wacan_berry, {type: ItemType.berry, id: BerryType.Wacan} , 500, Lab.Research.generator_fuel_wacan);
+        this.fuelTypes[GeneratorFuelType.thunder_stone]     = new GeneratorFuel(GeneratorFuelType.thunder_stone, {type: ItemType.item, id: 'Thunder_stone'}, 20000, Lab.Research.generator_fuel_thunder_stone);
+        this.fuelTypes[GeneratorFuelType.electirizer]       = new GeneratorFuel(GeneratorFuelType.electirizer, {type: ItemType.item, id: 'Electirizer'}, 100000, Lab.Research.generator_fuel_electirizer);
     }
 
     public static getAvailableFuels(): GeneratorFuel[] {
         return this.fuelTypes.filter(fuel => !fuel.research || App.game.lab.isResearched(fuel.research));
     }
 
-    // TODO: HLXII - Add Research Upgrades
+    /**
+     * Determines the total base speed multiplier this Generator will produce.
+     * Dependent on Research Upgrades
+     */
+    public static baseEffect: KnockoutComputed<number> = ko.pureComputed(() => {
+        if (App.game.lab.isResearched(Lab.Research.generator_power3)) {
+            return 1.3;
+        } else if (App.game.lab.isResearched(Lab.Research.generator_power2)) {
+            return 1.2;
+        } else if (App.game.lab.isResearched(Lab.Research.generator_power1)) {
+            return 1.1;
+        } else {
+            return 1.05;
+        }
+    });
+
     /**
      * Determines the max fuel that can be added to the Generator.
      * Dependent on Research Upgrades
      */
     public static fuelCapacity: KnockoutComputed<number> = ko.pureComputed(() => {
-        return 100;
+        if (App.game.lab.isResearched(Lab.Research.generator_fuel_cap5)) {
+            return 1000000;
+        } else if (App.game.lab.isResearched(Lab.Research.generator_fuel_cap4)) {
+            return 100000;
+        } else if (App.game.lab.isResearched(Lab.Research.generator_fuel_cap3)) {
+            return 50000;
+        } else if (App.game.lab.isResearched(Lab.Research.generator_fuel_cap2)) {
+            return 10000;
+        } else if (App.game.lab.isResearched(Lab.Research.generator_fuel_cap1)) {
+            return 5000;
+        } else {
+            return 1000;
+        }
     });
 
-    // TODO: HLXII - Add Research Upgrades
     /**
-     * Determines the total base multiplier this Generator will produce.
+     * Determines the fuel efficiency multiplier for the Generator
      * Dependent on Research Upgrades
      */
-    public static baseEffect: KnockoutComputed<number> = ko.pureComputed(() => {
-        return 1.05;
+    public static fuelEfficiency: KnockoutComputed<number> = ko.pureComputed(() => {
+        if (App.game.lab.isResearched(Lab.Research.generator_fuel_eff3)) {
+            return 1.75;
+        } else if (App.game.lab.isResearched(Lab.Research.generator_fuel_eff2)) {
+            return 1.50;
+        } else if (App.game.lab.isResearched(Lab.Research.generator_fuel_eff1)) {
+            return 1.25;
+        } else {
+            return 1;
+        }
     });
 
 }
@@ -62,10 +92,13 @@ class GeneratorState extends MachineState {
 
     public effect: KnockoutComputed<number>;
 
+    private _selectedFuel: KnockoutObservable<GeneratorFuelType>;
+
     constructor() {
         super();
 
         this._fuel = ko.observable(0);
+        this._selectedFuel = ko.observable(GeneratorFuelType.electric_shard);
 
         this.tooltip = ko.pureComputed(() => {
             const tooltip = [];
@@ -74,10 +107,12 @@ class GeneratorState extends MachineState {
             } else {
                 tooltip.push('Disabled');
             }
-            if (this.fuel <= 0) {
-                tooltip.push('No fuel remaining');
-            } else {
-                tooltip.push(`${this.fuel.toFixed(1)} fuel remaining.`);
+            if (App.game.lab.isResearched(Lab.Research.generator_fuel)) {
+                if (this.fuel <= 0) {
+                    tooltip.push('No fuel remaining');
+                } else {
+                    tooltip.push(`${this.fuel.toFixed(1)} fuel remaining.`);
+                }
             }
             return tooltip.join('<br>');
         });
@@ -85,7 +120,6 @@ class GeneratorState extends MachineState {
         this.effect = ko.pureComputed(() => {
             let multiplier = Generator.baseEffect();
             if (this.stage === MachineStage.active) {
-                // TODO: HLXII - Update number? or dependent on Research Upgrades?
                 multiplier *= 1.5;
             }
             return multiplier;

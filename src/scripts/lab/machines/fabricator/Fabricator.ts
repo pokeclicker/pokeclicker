@@ -18,7 +18,9 @@ class Fabricator extends Machine {
     public static blueprints: Blueprint[];
     public static initialize() {
         this.blueprints = [];
-        // Items
+
+        //#region Items
+
         this.blueprints[BlueprintType.fire_stone] = new Blueprint('Fire Stone', BlueprintType.fire_stone, 1000,
             [{item: {type: ItemType.shard, id: PokemonType.Fire}, amount: 10000}],
             {type: ItemType.item, id: 'Fire_stone'}, Lab.Research.fire_stone);
@@ -99,7 +101,10 @@ class Fabricator extends Machine {
             [{item: {type: ItemType.shard, id: PokemonType.Ghost}, amount: 10000}],
             {type: ItemType.item, id: 'Reaper_cloth'}, Lab.Research.reaper_cloth);
 
-        // Machines
+        //#endregion
+
+        //#region Machines
+
         this.blueprints[BlueprintType.fabricator] = new Blueprint('Fabricator', BlueprintType.fabricator, 50000,
             [{item: {type: ItemType.shard, id: PokemonType.Normal}, amount: 500000}],
             {type: ItemType.machine, id: Lab.Machine.fabricator}, Lab.Research.fabricator);
@@ -118,10 +123,13 @@ class Fabricator extends Machine {
             ],
             {type: ItemType.machine, id: Lab.Machine.plate_reconstructor}, Lab.Research.plate_reconstructor);
 
+
         //this.blueprints[BlueprintType.incubator] = new Blueprint(BlueprintType.incubator, 1000, [], Lab.Research);
         //this.blueprints[BlueprintType.generator] = new Blueprint('Generator', BlueprintType.generator, 1000, [], Lab.Research.generator);
         //this.blueprints[BlueprintType.fossil_reviver] = new Blueprint('Fossil Reviver', BlueprintType.fossil_reviver, 1000, [], Lab.Research.fossil_reviver);
         //this.blueprints[BlueprintType.pokeball_factory] = new Blueprint('Pokéball Factory', BlueprintType.pokeball_factory, 1000, [], Lab.Research.pokeball_factory);
+
+        //#endregion
     }
 
     /**
