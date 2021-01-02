@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.7.1"></script>
+    <script src="scripts/modules.min.js?v=0.7.2"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.7.1"></script>
+    <script src="scripts/script.min.js?v=0.7.2"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.7.1" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.7.2" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -1257,7 +1257,7 @@
                                 </lineargradient>
                             </defs>
 
-                            <g data-bind='if: player.region == GameConstants.Region.kanto'>
+                            <g data-bind='visible: player.region == GameConstants.Region.kanto'>
     <image width="100%" xlink:href="assets/images/kanto.png"></image>
 
     <!-- ------ -->
@@ -2320,7 +2320,7 @@
 </rect>
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.johto'>
+                            <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="100%" xlink:href="assets/images/johto.png"></image>
 
     <!-- ------ -->
@@ -3435,7 +3435,7 @@
 
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.hoenn'>
+                            <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="100%" xlink:href="assets/images/hoenn.png"></image>
 
     <!-- ------ -->
@@ -4942,7 +4942,7 @@
 
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.sinnoh'>
+                            <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="100%" xlink:href="assets/images/sinnoh.png"></image>
 
     <!-- ------ -->
@@ -6487,7 +6487,7 @@
 </rect>
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.unova'>
+                            <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="100%" xlink:href="assets/images/unova.png"></image>
 
     <!-- ------ -->
@@ -7925,7 +7925,7 @@
     width="48"
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Castelia City&#39;) }">
 </rect>
-     
+
     <!--bridge-->
     
 
@@ -7970,7 +7970,7 @@
 </rect>
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.kalos'>
+                            <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="100%" xlink:href="assets/images/background.png"></image>
 
     <!-- ------ -->
@@ -8842,7 +8842,7 @@
 
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.alola'>
+                            <g data-bind='visible: player.region == GameConstants.Region.alola'>
     <image width="100%" xlink:href="assets/images/background.png"></image>
 
     <!-- ------ -->
