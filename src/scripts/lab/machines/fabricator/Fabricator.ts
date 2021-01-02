@@ -119,13 +119,18 @@ class Fabricator extends Machine {
         this.blueprints[BlueprintType.plate_reconstructor] = new Blueprint('Plate Reconstructor', BlueprintType.plate_reconstructor, 40000,
             [
                 {item: {type: ItemType.shard, id: PokemonType.Normal}, amount: 100000},
-                {item: {type: ItemType.underground, id: 'Upgrade'}, amount: 10},
+                {item: {type: ItemType.item, id: 'Upgrade'}, amount: 10},
             ],
             {type: ItemType.machine, id: Lab.Machine.plate_reconstructor}, Lab.Research.plate_reconstructor);
 
 
         //this.blueprints[BlueprintType.incubator] = new Blueprint(BlueprintType.incubator, 1000, [], Lab.Research);
-        //this.blueprints[BlueprintType.generator] = new Blueprint('Generator', BlueprintType.generator, 1000, [], Lab.Research.generator);
+        this.blueprints[BlueprintType.generator] = new Blueprint('Generator', BlueprintType.generator, 1000,
+            [
+                {item: {type: ItemType.item, id: 'Metal_coat'}, amount: 10},
+                {item: {type: ItemType.item, id: 'Electirizer'}, amount: 10},
+            ],
+            {type: ItemType.machine, id: Lab.Machine.generator}, Lab.Research.generator);
         //this.blueprints[BlueprintType.fossil_reviver] = new Blueprint('Fossil Reviver', BlueprintType.fossil_reviver, 1000, [], Lab.Research.fossil_reviver);
         //this.blueprints[BlueprintType.pokeball_factory] = new Blueprint('Pokéball Factory', BlueprintType.pokeball_factory, 1000, [], Lab.Research.pokeball_factory);
 
@@ -221,7 +226,7 @@ class FabricatorState extends MachineState {
                 // Checking blueprint completion
                 if (this.progress >= this.progressAmount()) {
                     // Gain Blueprint
-                    Fabricator.blueprints[this.blueprint].fabricate();
+                    BagHandler.gainItem(Fabricator.blueprints[this.blueprint].fabrication);
                     // Checking queue
                     if (this.queue > 0 && Fabricator.blueprints[this.blueprint].canFabricate) {
                         this.queue -= 1;

@@ -1,6 +1,8 @@
 /// <reference path="../Machine.ts" />
 /// <reference path="../MachineState.ts" />
 /// <reference path="./GeneratorFuel.ts" />
+/// <reference path="./GeneratorFuelType.ts" />
+
 /**
  * The Generator will increase the speed of machines when placed in the Lab.
  */
@@ -16,21 +18,7 @@ class Generator extends Machine {
         return state;
     }
 
-    /**
-     * Possible Fuels that can be used in the Generator
-     */
-    public static fuelTypes: GeneratorFuel[] = [];
-    public static initialize() {
-        this.fuelTypes[GeneratorFuelType.electric_shard]    = new GeneratorFuel(GeneratorFuelType.electric_shard, {type: ItemType.shard, id: PokemonType.Electric}, 1, Lab.Research.generator_fuel);
-        this.fuelTypes[GeneratorFuelType.zap_plate]         = new GeneratorFuel(GeneratorFuelType.zap_plate, {type: ItemType.underground, id: 'Zap Plate'} , 1000, Lab.Research.generator_fuel_zap_plate);
-        this.fuelTypes[GeneratorFuelType.wacan_berry]       = new GeneratorFuel(GeneratorFuelType.wacan_berry, {type: ItemType.berry, id: BerryType.Wacan} , 500, Lab.Research.generator_fuel_wacan);
-        this.fuelTypes[GeneratorFuelType.thunder_stone]     = new GeneratorFuel(GeneratorFuelType.thunder_stone, {type: ItemType.item, id: 'Thunder_stone'}, 20000, Lab.Research.generator_fuel_thunder_stone);
-        this.fuelTypes[GeneratorFuelType.electirizer]       = new GeneratorFuel(GeneratorFuelType.electirizer, {type: ItemType.item, id: 'Electirizer'}, 100000, Lab.Research.generator_fuel_electirizer);
-    }
-
-    public static getAvailableFuels(): GeneratorFuel[] {
-        return this.fuelTypes.filter(fuel => !fuel.research || App.game.lab.isResearched(fuel.research));
-    }
+    //#region Research Multipliers
 
     /**
      * Determines the total base speed multiplier this Generator will produce.
@@ -84,6 +72,66 @@ class Generator extends Machine {
         }
     });
 
+    //#endregion
+
+    /**
+     * Possible Fuels that can be used in the Generator
+     */
+    public static fuelTypes: GeneratorFuel[] = [];
+    public static initialize() {
+        this.fuelTypes[GeneratorFuelType.electric_shard]    = new GeneratorFuel(GeneratorFuelType.electric_shard, {type: ItemType.shard, id: PokemonType.Electric}, 1, Lab.Research.generator_fuel);
+        this.fuelTypes[GeneratorFuelType.zap_plate]         = new GeneratorFuel(GeneratorFuelType.zap_plate, {type: ItemType.underground, id: 'Zap Plate'} , 1000, Lab.Research.generator_fuel_zap_plate);
+        this.fuelTypes[GeneratorFuelType.wacan_berry]       = new GeneratorFuel(GeneratorFuelType.wacan_berry, {type: ItemType.berry, id: BerryType.Wacan} , 500, Lab.Research.generator_fuel_wacan);
+        this.fuelTypes[GeneratorFuelType.thunder_stone]     = new GeneratorFuel(GeneratorFuelType.thunder_stone, {type: ItemType.item, id: 'Thunder_stone'}, 20000, Lab.Research.generator_fuel_thunder_stone);
+        this.fuelTypes[GeneratorFuelType.electirizer]       = new GeneratorFuel(GeneratorFuelType.electirizer, {type: ItemType.item, id: 'Electirizer'}, 100000, Lab.Research.generator_fuel_electirizer);
+    }
+
+    public static getAvailableFuels(): GeneratorFuel[] {
+        return this.fuelTypes.filter(fuel => !fuel.research || App.game.lab.isResearched(fuel.research));
+    }
+
+    public static getFuelAmount(fuel: GeneratorFuel): number {
+        return fuel.fuelAmount * this.fuelEfficiency();
+    }
+
+    //#region Fueling Handling
+
+    public static selectedFuel: KnockoutObservable<GeneratorFuelType> = ko.observable(GeneratorFuelType.electric_shard);
+    public static amount: KnockoutObservable<number> = ko.observable(1);
+
+    public static getFuelTotalAmount(fuel: GeneratorFuel): number {
+        return this.getFuelAmount(fuel) * this.amount();
+    }
+
+    public static resetAmount() {
+        const input = $('input[name="amountOfFuel"]');
+        input.val(1).change();
+    }
+
+    public static increaseAmount(n: number) {
+        const input = $('input[name="amountOfFuel"]');
+        const newVal = (parseInt(input.val().toString(), 10) || 0) + n;
+        input.val(newVal > 1 ? newVal : 1).change();
+    }
+
+    public static multiplyAmount(n: number) {
+        const input = $('input[name="amountOfFuel"]');
+        const newVal = (parseInt(input.val().toString(), 10) || 0) * n;
+        input.val(newVal > 1 ? newVal : 1).change();
+    }
+
+    public static maxAmount(state: GeneratorState) {
+        const fuel: GeneratorFuel = Generator.fuelTypes[Generator.selectedFuel()];
+        const input = $('input[name="amountOfFuel"]');
+
+        // Use all of inventory, or max to fill tank
+        const amount = Math.min(BagHandler.amount(fuel.item)(), state.getMaxFillAmount(fuel));
+
+        input.val(amount).change();
+    }
+
+    //#endregion
+
 }
 
 class GeneratorState extends MachineState {
@@ -92,13 +140,10 @@ class GeneratorState extends MachineState {
 
     public effect: KnockoutComputed<number>;
 
-    private _selectedFuel: KnockoutObservable<GeneratorFuelType>;
-
     constructor() {
         super();
 
         this._fuel = ko.observable(0);
-        this._selectedFuel = ko.observable(GeneratorFuelType.electric_shard);
 
         this.tooltip = ko.pureComputed(() => {
             const tooltip = [];
@@ -146,6 +191,36 @@ class GeneratorState extends MachineState {
                 return;
             }
         }
+    }
+
+    /**
+     * Based on the current fuel status, determine how much of a given Fuel type is
+     * required to completely fuel the Generator.
+     * @param fuel The Generator Fuel to be used
+     */
+    getMaxFillAmount(fuel: GeneratorFuel) {
+        const emptyFuel = Generator.fuelCapacity() - this.fuel;
+        return Math.ceil(emptyFuel / Generator.getFuelAmount(fuel));
+    }
+
+    /**
+     * Handles fueling the Generator
+     */
+    addFuel() {
+        const fuel: GeneratorFuel = Generator.fuelTypes[Generator.selectedFuel()];
+        let amount = Generator.amount();
+        // Use only what's available
+        amount = Math.min(amount, BagHandler.amount(fuel.item)());
+        // Don't waste fuel
+        amount = Math.min(amount, this.getMaxFillAmount(fuel));
+
+        // Handle fueling
+        BagHandler.gainItem(fuel.item, -amount);
+        this.fuel += amount * Generator.getFuelAmount(fuel);
+        // Sanity check
+        this.fuel = Math.min(this.fuel, Generator.fuelCapacity());
+
+        Generator.resetAmount();
     }
 
     handleActivate(): void {

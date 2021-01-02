@@ -17,14 +17,76 @@ aria-labelledby="GeneratorModalLabel" aria-hidden="true">
                         <span data-bind="text: 'Fuel: ' + state.fuel.toFixed(1) + '/' + Generator.fuelCapacity()">Fuel</span>
                     </h4>
                 </div>
-                <ul class="row justify-content-center p-0" data-bind="foreach: Generator.getAvailableFuels()">
-                    <li class="eggSlot col-3 col-md-3 pokedexEntry text-nowrap" data-bind="class: ''">
-                        <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: BagHandler.displayName($data.item)">name</span>
-                        <img src="" width="80px" data-bind="attr:{ src: BagHandler.image($data.item) }">
-                        <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + BagHandler.amount($data.item)()">amount</span>
-                        <a class="overlay" href="#fuel" data-bind="click: function() { state.addToQueue($data); }"></a>
-                    </li>
-                </ul>
+                <div class="row justify-content-center" data-bind="foreach: Generator.getAvailableFuels()">
+                    <div class="col-6 col-sm-4 col-lg-3">
+                       <button class="shopItem clickable btn btn-block btn-secondary"
+                            data-bind="click: function() {Generator.selectedFuel($data.id);},
+                            css: { active: Generator.selectedFuel() == $data.id },
+                            attr: { disabled: BagHandler.amount($data.item)() <= 0 }">
+                            <img src="" height="36px" data-bind="attr:{ src: BagHandler.image($data.item) }">
+                            <p data-bind="text: BagHandler.displayName($data.item)">Fuel Name</p>
+                            <div>
+                                <small>
+                                    <span class="" data-bind="text: 'Amount: ' + BagHandler.amount($data.item)()">
+                                        Amount:
+                                    </span>
+                                </small>
+                            </div>
+                            <div>
+                                <small>
+                                    <span class="" data-bind="text: 'Fuel: ' + Generator.getFuelTotalAmount($data).toFixed(1)">
+                                        Fuel:
+                                    </span>
+                                </small>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                <div class="justify-content-center">
+                    <div class="input-group m-0" style="margin-bottom: 6px; margin-top: 6px">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-warning btn-outline-dark smallButton smallFont" onclick="Generator.resetAmount()">
+                                Reset
+                            </button>
+                        </div>
+                        <input id="amountOfFuel" type="number" class="outline-dark form-control form-control-number"
+                                value="1" min="1" required name="amountOfFuel"
+                                oninput="Generator.amount(parseInt($(this).val().toString(), 10) || 0);"
+                                onchange="Generator.amount(parseInt($(this).val().toString(), 10) || 0);" title=""/>
+                        <div class="input-group-append">
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'original' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="Generator.increaseAmount(10)">
+                                    +10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="Generator.increaseAmount(100)">
+                                    +100
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'multiplication' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="Generator.multiplyAmount(10)">
+                                    &times;10
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="Generator.multiplyAmount(0.1)">
+                                    &div;10
+                                </button>
+                            <!-- /ko -->
+                            <!-- ko if: Settings.getSetting('shopButtons').observableValue() == 'bigplus' -->
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="Generator.increaseAmount(100)">
+                                    +100
+                                </button>
+                                <button class="btn btn-secondary smallButton smallFont" type="button" onclick="Generator.increaseAmount(1000)">
+                                    +1000
+                                </button>
+                            <!-- /ko -->
+                            <button class="btn btn-primary smallButton smallFont" type="button" data-bind="click: function() { Generator.maxAmount(state); }">
+                                Max
+                            </button>
+                            <button class="btn-outline-dark btn btn-success smallButton smallFont" data-bind="click: function() {state.addFuel();}">
+                                Fuel
+                            </button>
+                        </div>
+                    </div>
+                </div>
                 <!-- /ko -->
             </div>
 

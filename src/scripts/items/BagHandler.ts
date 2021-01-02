@@ -95,6 +95,7 @@ class BagHandler {
                 return;
             case ItemType.machine:
                 this.getMachine(item.id).amount += amount;
+                return;
         }
     }
 

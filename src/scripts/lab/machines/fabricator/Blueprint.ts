@@ -21,12 +21,4 @@ class Blueprint {
         }).join('<br>');
     }
 
-    fabricate(): boolean {
-        if (!this.canFabricate) {
-            return false;
-        }
-        BagHandler.gainItem(this.fabrication, 1);
-        return true;
-    }
-
 }
