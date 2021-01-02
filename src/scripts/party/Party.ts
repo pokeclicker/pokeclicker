@@ -179,7 +179,7 @@ class Party implements Feature {
         // Base power
         // Shiny pokemon help with a 50% boost
         const clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
-        const bonus = this.multiplier.getBonus('clickAttack');
+        const bonus = this.multiplier.getBonus('clickAttack', useItem);
 
         return Math.floor(clickAttack * bonus);
     }
