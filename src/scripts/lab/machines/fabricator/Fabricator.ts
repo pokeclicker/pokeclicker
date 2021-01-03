@@ -124,8 +124,13 @@ class Fabricator extends Machine {
             {type: ItemType.machine, id: Lab.Machine.plate_reconstructor}, Lab.Research.plate_reconstructor);
 
 
-        //this.blueprints[BlueprintType.incubator] = new Blueprint(BlueprintType.incubator, 1000, [], Lab.Research);
-        this.blueprints[BlueprintType.generator] = new Blueprint('Generator', BlueprintType.generator, 1000,
+        this.blueprints[BlueprintType.incubator] = new Blueprint('Incubator', BlueprintType.incubator, 30000,
+            [
+                {item: {type: ItemType.item, id: 'Metal_coat'}, amount: 10},
+                {item: {type: ItemType.item, id: 'Magmarizer'}, amount: 10},
+            ],
+            {type: ItemType.machine, id: Lab.Machine.incubator}, Lab.Research.incubator);
+        this.blueprints[BlueprintType.generator] = new Blueprint('Generator', BlueprintType.generator, 30000,
             [
                 {item: {type: ItemType.item, id: 'Metal_coat'}, amount: 10},
                 {item: {type: ItemType.item, id: 'Electirizer'}, amount: 10},

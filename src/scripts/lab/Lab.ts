@@ -190,35 +190,172 @@ class Lab implements Feature {
                 'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 50%.',
                 36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff2)] }),
 
-            // Incubator
+            //#region Incubator
+
+            new Research(Lab.Research.incubator, ResearchType.Machine,
+                'Incubator', 'Unlocks the Incubator Machine.',
+                9000),
+
+            new Research(Lab.Research.incubator_fuel, ResearchType.Machine,
+                'Incubator Fuel', 'Upgrades Incubators to allow for fuel.',
+                15000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new ResearchWithCost(Lab.Research.incubator_fuel_flame_plate, ResearchType.Machine,
+                'Incubator Fuel - Flame Plate', 'Configures Incubators to use Flame Plates for fuel.',
+                20000, [{item: {type: ItemType.underground, id: 'Flame Plate'}, amount: 10}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new ResearchWithCost(Lab.Research.incubator_fuel_fire_stone, ResearchType.Machine,
+                'Incubator Fuel - Fire Stone', 'Configures Incubators to use Fire Stones for fuel.',
+                20000, [{item: {type: ItemType.item, id: 'Fire_stone'}, amount: 10}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new ResearchWithCost(Lab.Research.incubator_fuel_chople, ResearchType.Machine,
+                'Incubator Fuel - Chople Berry', 'Configures Incubators to use Chople Berries for fuel.',
+                20000, [{item: {type: ItemType.berry, id: BerryType.Chople}, amount: 10}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new ResearchWithCost(Lab.Research.incubator_fuel_magmarizer, ResearchType.Machine,
+                'Incubator Fuel - Magmarizer', 'Configures Incubators to use Magmarizer for fuel.',
+                20000, [{item: {type: ItemType.item, id: 'Magmarizer'}, amount: 10}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+
+            new Research(Lab.Research.incubator_power1, ResearchType.Machine,
+                'Incubator Power I', 'Increases incubator effect to 1.02x.',
+                10000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)] }),
+            new Research(Lab.Research.incubator_power2, ResearchType.Machine,
+                'Incubator Power II', 'Increases incubator effect to 1.03x.',
+                30000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_power1)] }),
+            new Research(Lab.Research.incubator_power3, ResearchType.Machine,
+                'Incubator Power III', 'Increases incubator effect to 1.05x.',
+                90000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_power2)] }),
+
+            new Research(Lab.Research.incubator_fuel_eff1, ResearchType.Machine,
+                'Incubator Efficiency I', 'Increases Incubator fuel efficiency by 25%.',
+                10000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new Research(Lab.Research.incubator_fuel_eff2, ResearchType.Machine,
+                'Incubator Efficiency II', 'Increases Incubator fuel efficiency by 50%.',
+                30000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_eff2)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new Research(Lab.Research.incubator_fuel_eff3, ResearchType.Machine,
+                'Incubator Efficiency III', 'Increases Incubator fuel efficiency by 75%.',
+                90000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_eff3)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+
+            new Research(Lab.Research.incubator_fuel_cap1, ResearchType.Machine,
+                'Incubator Fuel Capacity I', 'Increases Incubator fuel capacity to 5000.',
+                4000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new Research(Lab.Research.incubator_fuel_cap2, ResearchType.Machine,
+                'Incubator Fuel Capacity II', 'Increases Incubator fuel capacity to 10000.',
+                8000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap1)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new Research(Lab.Research.incubator_fuel_cap3, ResearchType.Machine,
+                'Incubator Fuel Capacity III', 'Increases Incubator fuel capacity to 50000.',
+                16000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap2)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new Research(Lab.Research.incubator_fuel_cap4, ResearchType.Machine,
+                'Incubator Fuel Capacity IV', 'Increases Incubator fuel capacity to 100000.',
+                32000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap3)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+            new Research(Lab.Research.incubator_fuel_cap5, ResearchType.Machine,
+                'Incubator Fuel Capacity V', 'Increases Incubator fuel capacity to 1000000.',
+                64000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap4)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                }),
+
+            new Research(Lab.Research.incubator_slot1, ResearchType.Machine,
+                'Incubator Queue Slot I', 'Increases the number of queue slots to 2.',
+                10000, { requirements: [new ResearchedRequirement(Lab.Research.incubator)] }),
+            new Research(Lab.Research.incubator_slot2, ResearchType.Machine,
+                'Incubator Queue Slot II', 'Increases the number of queue slots to 3.',
+                50000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_slot1)] }),
+            new Research(Lab.Research.incubator_slot3, ResearchType.Machine,
+                'Incubator Queue Slot III', 'Increases the number of queue slots to 4.',
+                100000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_slot2)] }),
+            new Research(Lab.Research.incubator_slot4, ResearchType.Machine,
+                'Incubator Queue Slot IV', 'Increases the number of queue slots to 5.',
+                200000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_slot3)] }),
+
+            //#endregion
+
+            //#region Fossil Reviver
+
             /*
-            'incubator',
-            'incubator_capacity1',
-            'incubator_capacity2',
-            'incubator_capacity3',
-            'incubator_capacity4',
-            'incubator_fuel',
-            'incubator_fuel_flame_plate',
-            'incubator_fuel_fire_stone',
-            'incubator_fuel_occa',
-            'incubator_fuel_magmarizer',
-            'incubator_fuel_eff1',
-            'incubator_fuel_eff2',
-            'incubator_fuel_eff3',
+            'fossil_reviver',
+            'fossil_reviver_speed1',
+            'fossil_reviver_speed2',
+            'fossil_reviver_speed3',
+            'fossil_reviver_queue',
+            'fossil_reviver_queue1',
+            'fossil_reviver_queue2',
+            'fossil_reviver_queue3',
+            'fossil_reviver_queue4',
+            'fossil_helix',
+            'fossil_dome',
+            'fossil_old_amber',
+            'fossil_root',
+            'fossil_claw',
+            'fossil_skull',
+            'fossil_armor',
+            'fossil_cover',
+            'fossil_plume',
+            'fossil_jaw',
+            'fossil_sail',
             */
-            // Generator
+
+            //#endregion
+
+            //#region Generator
+
             new Research(Lab.Research.generator, ResearchType.Machine,
                 'Generator', 'Unlocks the Generator Machine.',
                 9000),
 
             new Research(Lab.Research.generator_power1, ResearchType.Machine,
-                'Generator Power I', 'Increases generator effect to 1.1x.',
+                'Generator Power I', 'Increases Generator effect to 1.1x.',
                 10000, { requirements: [new ResearchedRequirement(Lab.Research.generator)] }),
             new Research(Lab.Research.generator_power2, ResearchType.Machine,
-                'Generator Power II', 'Increases generator effect to 1.2x.',
+                'Generator Power II', 'Increases Generator effect to 1.2x.',
                 30000, { requirements: [new ResearchedRequirement(Lab.Research.generator_power1)] }),
             new Research(Lab.Research.generator_power3, ResearchType.Machine,
-                'Generator Power III', 'Increases generator effect to 1.3x.',
+                'Generator Power III', 'Increases Generator effect to 1.3x.',
                 90000, { requirements: [new ResearchedRequirement(Lab.Research.generator_power2)] }),
 
             new Research(Lab.Research.generator_fuel, ResearchType.Machine,
@@ -258,21 +395,21 @@ class Lab implements Feature {
                 }),
 
             new Research(Lab.Research.generator_fuel_eff1, ResearchType.Machine,
-                'Generator Efficiency I', 'Increases generator fuel efficiency by 25%.',
+                'Generator Efficiency I', 'Increases Generator fuel efficiency by 25%.',
                 10000,
                 {
                     requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
                     workerFilter: new TypeFilter([PokemonType.Electric]),
                 }),
             new Research(Lab.Research.generator_fuel_eff2, ResearchType.Machine,
-                'Generator Efficiency II', 'Increases generator fuel efficiency by 50%.',
+                'Generator Efficiency II', 'Increases Generator fuel efficiency by 50%.',
                 30000,
                 {
                     requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_eff2)],
                     workerFilter: new TypeFilter([PokemonType.Electric]),
                 }),
             new Research(Lab.Research.generator_fuel_eff3, ResearchType.Machine,
-                'Generator Efficiency III', 'Increases generator fuel efficiency by 75%.',
+                'Generator Efficiency III', 'Increases Generator fuel efficiency by 75%.',
                 90000,
                 {
                     requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_eff3)],
@@ -280,64 +417,43 @@ class Lab implements Feature {
                 }),
 
             new Research(Lab.Research.generator_fuel_cap1, ResearchType.Machine,
-                'Generator Fuel Capacity I', 'Increases generator fuel capactity to 5000.',
+                'Generator Fuel Capacity I', 'Increases Generator fuel capacity to 5000.',
                 4000,
                 {
                     requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
                     workerFilter: new TypeFilter([PokemonType.Electric]),
                 }),
             new Research(Lab.Research.generator_fuel_cap2, ResearchType.Machine,
-                'Generator Fuel Capacity II', 'Increases generator fuel capactity to 10000.',
+                'Generator Fuel Capacity II', 'Increases Generator fuel capacity to 10000.',
                 8000,
                 {
                     requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap1)],
                     workerFilter: new TypeFilter([PokemonType.Electric]),
                 }),
             new Research(Lab.Research.generator_fuel_cap3, ResearchType.Machine,
-                'Generator Fuel Capacity III', 'Increases generator fuel capactity to 50000.',
+                'Generator Fuel Capacity III', 'Increases Generator fuel capacity to 50000.',
                 16000,
                 {
                     requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap2)],
                     workerFilter: new TypeFilter([PokemonType.Electric]),
                 }),
             new Research(Lab.Research.generator_fuel_cap4, ResearchType.Machine,
-                'Generator Fuel Capacity IV', 'Increases generator fuel capactity to 100000.',
+                'Generator Fuel Capacity IV', 'Increases Generator fuel capacity to 100000.',
                 32000,
                 {
                     requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap3)],
                     workerFilter: new TypeFilter([PokemonType.Electric]),
                 }),
             new Research(Lab.Research.generator_fuel_cap5, ResearchType.Machine,
-                'Generator Fuel Capacity V', 'Increases generator fuel capactity to 1000000.',
+                'Generator Fuel Capacity V', 'Increases Generator fuel capacity to 1000000.',
                 64000,
                 {
                     requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap4)],
                     workerFilter: new TypeFilter([PokemonType.Electric]),
                 }),
 
-            // Fossil Reviver
-            /*
-            'fossil_reviver',
-            'fossil_reviver_speed1',
-            'fossil_reviver_speed2',
-            'fossil_reviver_speed3',
-            'fossil_reviver_queue',
-            'fossil_reviver_queue1',
-            'fossil_reviver_queue2',
-            'fossil_reviver_queue3',
-            'fossil_reviver_queue4',
-            'fossil_helix',
-            'fossil_dome',
-            'fossil_old_amber',
-            'fossil_root',
-            'fossil_claw',
-            'fossil_skull',
-            'fossil_armor',
-            'fossil_cover',
-            'fossil_plume',
-            'fossil_jaw',
-            'fossil_sail',
-            */
+            //#endregion
+
             // Research Booster
 
             // Pokeball Factory
@@ -544,6 +660,7 @@ class Lab implements Feature {
         this.machines[Lab.Machine.generator]            = new Generator(Lab.Machine.generator, 'Generator', 'Increases Machine speed when placed.', 4, 6),
 
         Fabricator.initialize();
+        Incubator.initialize();
         Generator.initialize();
 
         //#endregion
@@ -728,39 +845,27 @@ namespace Lab {
         'plate_reconstructor_eff2',
         'plate_reconstructor_eff3',
         // Incubator
-        /*
-        'incubator',
-        'incubator_capacity1',
-        'incubator_capacity2',
-        'incubator_capacity3',
-        'incubator_capacity4',
-        'incubator_fuel',
-        'incubator_fuel_flame_plate',
-        'incubator_fuel_fire_stone',
-        'incubator_fuel_occa',
-        'incubator_fuel_magmarizer',
-        'incubator_fuel_eff1',
-        'incubator_fuel_eff2',
-        'incubator_fuel_eff3',
-        */
-        // Generator
-        'generator',
-        'generator_power1',
-        'generator_power2',
-        'generator_power3',
-        'generator_fuel',
-        'generator_fuel_zap_plate',
-        'generator_fuel_thunder_stone',
-        'generator_fuel_wacan',
-        'generator_fuel_electirizer',
-        'generator_fuel_eff1',
-        'generator_fuel_eff2',
-        'generator_fuel_eff3',
-        'generator_fuel_cap1',
-        'generator_fuel_cap2',
-        'generator_fuel_cap3',
-        'generator_fuel_cap4',
-        'generator_fuel_cap5',
+       'incubator',
+       'incubator_fuel',
+       'incubator_fuel_flame_plate',
+       'incubator_fuel_fire_stone',
+       'incubator_fuel_chople',
+       'incubator_fuel_magmarizer',
+       'incubator_power1',
+       'incubator_power2',
+       'incubator_power3',
+       'incubator_fuel_eff1',
+       'incubator_fuel_eff2',
+       'incubator_fuel_eff3',
+       'incubator_fuel_cap1',
+       'incubator_fuel_cap2',
+       'incubator_fuel_cap3',
+       'incubator_fuel_cap4',
+       'incubator_fuel_cap5',
+       'incubator_slot1',
+       'incubator_slot2',
+       'incubator_slot3',
+       'incubator_slot4',
         // Fossil Reviver
         /*
         'fossil_reviver',
@@ -785,6 +890,24 @@ namespace Lab {
         'fossil_sail',
         */
         // TODO: HLXII - Add VIII fossils
+        // Generator
+        'generator',
+        'generator_power1',
+        'generator_power2',
+        'generator_power3',
+        'generator_fuel',
+        'generator_fuel_zap_plate',
+        'generator_fuel_thunder_stone',
+        'generator_fuel_wacan',
+        'generator_fuel_electirizer',
+        'generator_fuel_eff1',
+        'generator_fuel_eff2',
+        'generator_fuel_eff3',
+        'generator_fuel_cap1',
+        'generator_fuel_cap2',
+        'generator_fuel_cap3',
+        'generator_fuel_cap4',
+        'generator_fuel_cap5',
         // Research Booster
 
         // Pokeball Factory

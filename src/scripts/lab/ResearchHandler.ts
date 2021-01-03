@@ -48,11 +48,20 @@ class ResearchHandler {
             if (this.filter.status() != 'all') {
                 switch (this.filter.status()) {
                     case 'locked':
-                        return research.state() === ResearchState.NotPurchased;
+                        if (research.state() !== ResearchState.NotPurchased) {
+                            return false;
+                        }
+                        break;
                     case 'incomplete':
-                        return research.state() === ResearchState.Ready || research.state() === ResearchState.Researching;
+                        if (research.state() !== ResearchState.Ready && research.state() !== ResearchState.Researching) {
+                            return false;
+                        }
+                        break;
                     case 'completed':
-                        return research.state() === ResearchState.Completed;
+                        if (research.state() !== ResearchState.Completed) {
+                            return false;
+                        }
+                        break;
                     default:
                         return false;
                 }
