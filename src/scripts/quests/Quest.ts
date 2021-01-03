@@ -8,6 +8,7 @@ abstract class Quest {
     xpReward: number;
     progress: KnockoutComputed<number>;
     progressText: KnockoutComputed<string>;
+    inProgress: KnockoutComputed<boolean>;
     isCompleted: KnockoutComputed<boolean>;
     claimed: KnockoutObservable<boolean>;
     private _focus: KnockoutObservable<any>;
@@ -26,6 +27,8 @@ abstract class Quest {
         this.initial = ko.observable(null);
         this.notified = false;
     }
+
+    //#region Quest Status
 
     claim() {
         if (this.isCompleted() && !this.claimed()) {
@@ -93,6 +96,10 @@ abstract class Quest {
             }
         });
 
+        this.inProgress = ko.pureComputed(() => {
+            return this.initial() !== null && !this.claimed();
+        });
+
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
         // This will only be a problem if we make it subscribe to a function which lives longer than itself
         // Since it is only subscribing to observables on `this`, and the function is being kept on `this`, we shouldn't have a problem
@@ -126,9 +133,7 @@ abstract class Quest {
         });
     }
 
-    inProgress = ko.pureComputed(() => {
-        return this.initial() !== null && !this.claimed();
-    });
+    //#endregion
 
     toJSON() {
         return {
