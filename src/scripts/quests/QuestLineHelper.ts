@@ -125,7 +125,7 @@ class QuestLineHelper {
         // Mine 5 layers in the Unerground
         const OldAmberReward = () => {
             // Gain an Old Amber
-            Underground.gainMineItem(202);
+            Underground.gainMineItem(3);
             Notifier.notify({
                 title: undergroundQuestLine.name,
                 message: 'You have gained an Old Amber fossil!<br/><i>You can breed this in the hatchery.</i>',
