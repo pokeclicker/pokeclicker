@@ -1,4 +1,8 @@
+/**
+ * Static class used to handle Quest Lines
+ */
 class QuestLineHelper {
+
     public static createTutorial() {
         const tutorial = new QuestLine('Tutorial Quests', 'A short set of quests to get you going');
 
@@ -53,11 +57,6 @@ class QuestLineHelper {
         tutorial.addQuest(pewter);
 
         App.game.quests.questLines().push(tutorial);
-    }
-
-    // Need to check if tutorial is completed before showing the other quests stuff
-    public static isTutorialCompleted() {
-        return App.game.quests.getQuestLine('Tutorial Quests')?.state() == QuestLineState.ended;
     }
 
     public static createDeoxysQuestLine() {
@@ -137,6 +136,10 @@ class QuestLineHelper {
         undergroundQuestLine.addQuest(mineLayers);
 
         App.game.quests.questLines().push(undergroundQuestLine);
+    }
+
+    public static isQuestLineCompleted(name: string) {
+        return App.game.quests.getQuestLine(name)?.state() == QuestLineState.ended;
     }
 
     public static loadQuestLines() {
