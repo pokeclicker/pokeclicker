@@ -1856,7 +1856,16 @@ TownList['Reflection Cave'] = new DungeonTown(
 );
 //Tower of Mastery?
 //Sea Spirit's Den?
-//Kalos Power Plant?
+TownList['Kalos Power Plant'] = new DungeonTown(
+    'Kalos Power Plant',
+    GameConstants.Region.kalos,
+    [new GymBadgeRequirement(BadgeEnums.Plant)]
+);
+TownList['Pokeball Factory'] = new DungeonTown(
+    'Pokeball Factory',
+    GameConstants.Region.kalos,
+    [new GymBadgeRequirement(BadgeEnums.Fairy)]
+);
 TownList['Lost Hotel'] = new DungeonTown(
     'Lost Hotel',
     GameConstants.Region.kalos,
