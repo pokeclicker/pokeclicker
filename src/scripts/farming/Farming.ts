@@ -316,7 +316,7 @@ class Farming implements Feature {
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
                 'This Berry causes other Berries to wither away faster.',
-            ], undefined, ['Shedinja']);
+            ], new Aura(AuraType.Death, [1.25, 1.5, 2.0]), ['Shedinja']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [10800, 21600, 43200, 86400, 172800],
             34, 0, 4000, 15,
             [0, 0, 10, 20, 0], BerryColor.Red,
@@ -981,7 +981,6 @@ class Farming implements Feature {
     }
 
     resetAuras() {
-        console.log('resetting auras');
         this.externalAuras[AuraType.Attract](1);
         this.externalAuras[AuraType.Egg](1);
         this.externalAuras[AuraType.Shiny](1);
