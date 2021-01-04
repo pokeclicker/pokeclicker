@@ -185,22 +185,6 @@ export const ACTIVE_QUEST_MULTIPLIER = 4;
 // This number is used to estimate time taken in terms of clicks, for reward calculation
 export const QUEST_CLICKS_PER_SECOND = 5;
 
-export const QuestTypes = [
-    'DefeatPokemons',
-    'CapturePokemons',
-    'GainMoney',
-    'GainTokens',
-    'GainShards',
-    'HatchEggs',
-    'MineLayers',
-    'CatchShinies',
-    'DefeatGym',
-    'DefeatDungeon',
-    'UsePokeball',
-    'UseOakItem',
-    'HarvestBerriesQuest',
-];
-
 export const QUESTS_PER_SET = 10;
 
 /**

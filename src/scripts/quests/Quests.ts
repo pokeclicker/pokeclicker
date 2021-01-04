@@ -113,6 +113,7 @@ class Quests implements Saveable {
     }
 
     generateQuestList(date = new Date(), level = this.level()) {
+        console.log('generating quests');
         if (this.lastRefresh.toDateString() != date.toDateString()) {
             this.refreshes(0);
         }
@@ -216,13 +217,17 @@ class Quests implements Saveable {
     }
 
     loadQuestList(questList) {
-        questList.forEach(quest => {
-            if (quest.initial === null) {
-                return;
+        // Sanity Check
+        this.questList.removeAll();
+        console.log('loading quests', questList);
+        questList.forEach(questData => {
+            if (questData.hasOwnProperty('name')) {
+                const quest = QuestHelper.createQuest(questData.name, questData.data);
+                quest.fromJSON(questData);
+                this.questList.push(quest);
+            } else {
+                this.questList.push(new CapturePokemonsQuest(1, 0));
             }
-            this.questList()[quest.index].notified = quest.notified;
-            this.questList()[quest.index].claimed(quest.claimed);
-            this.questList()[quest.index].initial(quest.initial);
         });
     }
 
@@ -249,7 +254,7 @@ class Quests implements Saveable {
             lastRefreshLevel: this.lastRefreshLevel,
             lastRefreshRegion: this.lastRefreshRegion,
             freeRefresh: this.freeRefresh(),
-            questList: this.questList(),
+            questList: this.questList().map(quest => quest.toJSON()),
             questLines: this.questLines(),
         };
     }
@@ -274,10 +279,11 @@ class Quests implements Saveable {
             this.freeRefresh(json.freeRefresh || this.defaults.freeRefresh);
         }
 
-        // Generate quest list
-        this.generateQuestList(this.lastRefresh, this.lastRefreshLevel);
-        // Load our current quest list
-        if (json.questList) {
+        if (!json.hasOwnProperty('questList') || !json.questList.length) {
+            // Generate new quest list
+            this.generateQuestList(this.lastRefresh, this.lastRefreshLevel);
+        } else {
+            // Load saved quests
             this.loadQuestList(json.questList);
         }
 

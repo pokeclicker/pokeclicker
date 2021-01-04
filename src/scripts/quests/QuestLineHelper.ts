@@ -7,28 +7,24 @@ class QuestLineHelper {
         const tutorial = new QuestLine('Tutorial Quests', 'A short set of quests to get you going');
 
         //Defeat Starter
-        const defeatStarter = new CapturePokemonsQuest(1);
+        const defeatStarter = new CapturePokemonsQuest(1, 10);
         //Capture pokemon because start sequence resets route 1 kills to 0, making this quest think it is incomplete
-        defeatStarter.pointsReward = 10;
-        defeatStarter.description = 'Defeat the Pokémon. Click to deal damage';
+        defeatStarter.customDescription = 'Defeat the Pokémon. Click to deal damage';
         tutorial.addQuest(defeatStarter);
 
         //Capture 1 pokemon
-        const captureOne = new CapturePokemonsQuest(1);
-        captureOne.pointsReward = 20;
-        captureOne.description = 'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.';
+        const captureOne = new CapturePokemonsQuest(1, 20);
+        captureOne.customDescription = 'Capture 1 Pokémon. When you defeat a Pokémon, a Pokéball is thrown and you have a chance to capture it.';
         tutorial.addQuest(captureOne);
 
         //Kill 5 on route 2
-        const routeTwo = new DefeatPokemonsQuest(2, GameConstants.Region.kanto, 10);
-        routeTwo.pointsReward = 20;
-        routeTwo.description = 'Defeat 10 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.';
+        const routeTwo = new DefeatPokemonsQuest(10, 20, 2, GameConstants.Region.kanto);
+        routeTwo.customDescription = 'Defeat 10 Pokémon on route 2. Click route 2 on the map to move there and begin fighting.';
         tutorial.addQuest(routeTwo);
 
         //Buy pokeballs
-        const buyPokeballs = new BuyPokeballsQuest(10, GameConstants.Pokeball.Pokeball, 50);
-        buyPokeballs.pointsReward = 50;
-        buyPokeballs.description = 'Buy 10 Pokéballs. You can find these in the Viridian City Shop.';
+        const buyPokeballs = new BuyPokeballsQuest(10, 50, GameConstants.Pokeball.Pokeball);
+        buyPokeballs.customDescription = 'Buy 10 Pokéballs. You can find these in the Viridian City Shop.';
         tutorial.addQuest(buyPokeballs);
 
         //Buy Dungeon ticket
@@ -36,9 +32,8 @@ class QuestLineHelper {
         tutorial.addQuest(buyDungeonTicket);
 
         //Clear Viridian Forest
-        const clearMtMoon = new DefeatDungeonQuest('Viridian Forest', 1);
-        clearMtMoon.pointsReward = 50;
-        clearMtMoon.description = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
+        const clearMtMoon = new DefeatDungeonQuest(1, 50, 'Viridian Forest');
+        clearMtMoon.customDescription = 'Gather 50 Dungeon tokens by (re)capturing Pokémon, then clear the Viridian Forest dungeon.';
         tutorial.addQuest(clearMtMoon);
 
         //Defeat Pewter Gym
@@ -63,8 +58,7 @@ class QuestLineHelper {
         const deoxysQuestLine = new QuestLine('Mystery of Deoxys', 'Discover the mystery of Deoxys');
 
         // Defeat 50 Pokemon on route 129
-        const route129 = new DefeatPokemonsQuest(129, GameConstants.Region.hoenn, 50);
-        route129.pointsReward = 0;
+        const route129 = new DefeatPokemonsQuest(50, 0, 129, GameConstants.Region.hoenn);
         deoxysQuestLine.addQuest(route129);
 
         // Defeat 500 Psychic type Pokemon
