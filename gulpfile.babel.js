@@ -12,9 +12,17 @@ const gulpImport = require('gulp-html-import');
 const ejs = require('gulp-ejs');
 const plumber = require('gulp-plumber');
 const replace = require('gulp-replace');
+const filter = require('gulp-filter');
+const rename = require('gulp-rename');
+const streamToPromise = require('gulp-stream-to-promise');
+const gulpWebpack = require('webpack-stream');
+const webpack = require('webpack');
 const del = require('del');
 const fs = require('fs');
+const path = require('path');
 const version = process.env.npm_package_version || '0.0.0';
+
+const webpackConfig = require('./webpack.config');
 
 // Import our config, or log a warning if hasn't been created
 let config = {};
@@ -29,8 +37,10 @@ config = Object.assign({
     GOOGLE_ANALYTICS_INIT: false,
     GOOGLE_ANALYTICS_ID: false,
     DEV_BANNER: false,
-    DISCORD_CLIENT_ID: false,
-    DISCORD_LOGIN_URI: false,
+    DISCORD_LOGIN_PROXY: false,
+    FEATURE_FLAGS: {
+        preloadUnreleasedTowns: false,
+    },
 }, config);
 
 const escapeRegExp = (string) => {
@@ -57,7 +67,7 @@ gulp.task('deploy', () => gulp.src('./dist/**/*')
 
 const srcs = {
     buildArtefacts: 'build/**/*',
-    scripts: 'src/scripts/**/*.ts',
+    scripts: ['src/scripts/**/*.ts', 'src/modules/**/*.ts'],
     html: ['src/*.html', 'src/templates/*.html', 'src/components/*.html'],
     ejsTemplates: ['src/templates/*.ejs'],
     styles: 'src/styles/**/*.less',
@@ -83,6 +93,7 @@ const dests = {
     libs: 'build/libs/',
     assets: 'build/assets/',
     scripts: 'build/scripts/',
+    declarations: 'src/declarations/',
     styles: 'build/styles/',
     githubPages: 'docs/',
 };
@@ -130,6 +141,7 @@ gulp.task('compile-html', (done) => {
         .pipe(replace('$GOOGLE_ANALYTICS_ID', config.GOOGLE_ANALYTICS_ID))
         .pipe(replace('$GIT_BRANCH', process.env.GIT_BRANCH))
         .pipe(replace('$DEV_DESCRIPTION', process.env.DEV_DESCRIPTION !== undefined ? process.env.DEV_DESCRIPTION : ''))
+        .pipe(replace('$FEATURE_FLAGS', process.env.NODE_ENV === 'production' ? '{}' : JSON.stringify(config.FEATURE_FLAGS)))
         .pipe(ejs())
         .pipe(gulp.dest(htmlDest))
         .pipe(browserSync.reload({stream: true}));
@@ -137,15 +149,63 @@ gulp.task('compile-html', (done) => {
 });
 
 gulp.task('scripts', () => {
-    const tsProject = typescript.createProject('tsconfig.json');
-    return tsProject.src()
-        .pipe(replace('$VERSION', version))
-        .pipe(replace('$DISCORD_ENABLED', !!(config.DISCORD_CLIENT_ID && config.DISCORD_LOGIN_URI)))
-        .pipe(replace('$DISCORD_CLIENT_ID', config.DISCORD_CLIENT_ID))
-        .pipe(replace('$DISCORD_LOGIN_URI', config.DISCORD_LOGIN_URI))
-        .pipe(tsProject())
-        .pipe(gulp.dest(dests.scripts))
-        .pipe(browserSync.reload({stream: true}));
+    const base = gulp.src('src/modules/index.ts')
+        .pipe(gulpWebpack(webpackConfig, webpack));
+
+    // Convert the posix path to a path that matches the current OS
+    const osPathPrefix = '../src'.split(path.posix.sep).join(path.sep);
+    const osPathModulePrefix = '../src/declarations'.split(path.posix.sep).join(path.sep);
+
+    const generateDeclarations = base
+        .pipe(filter((vinylPath) => {
+            return (
+                vinylPath.relative.startsWith(osPathModulePrefix) &&
+                // Exclude GameConstants, as we generate those manually
+                !vinylPath.relative.includes('GameConstants.d.ts')
+            );
+        }))
+        .pipe(rename((vinylPath) => Object.assign(
+            {},
+            vinylPath,
+            // Strip '../src/modules' from the start of declaration vinylPaths
+            { dirname: vinylPath.dirname.replace(osPathModulePrefix, '.') }
+        )))
+        // Remove default exports
+        .pipe(replace(/(^|\n)export default \w+;/g, ''))
+        // Replace imports with references
+        .pipe(replace(/(^|\n)import (.* from )?'(.*)((.d)?.ts)?';/g, '$1/// <reference path="$3.d.ts"/>'))
+        // Convert exports to declarations so that ./src/scripts can use them
+        .pipe(replace(/(^|\n)export (?!declare)(default )?/, '$1declare '))
+        // Remove any remaining 'export'
+        .pipe(replace(/(^|\n)export/g, ''))
+        // Fix broken declarations for things like temporaryWindowInjection
+        .pipe(replace('declare {};', ''))
+        .pipe(gulp.dest(dests.declarations));
+
+    const compileModules = base
+        // Exclude declaration files
+        .pipe(filter((vinylPath) => !vinylPath.relative.startsWith(osPathPrefix)))
+        .pipe(gulp.dest(dests.scripts));
+
+    // Run the tasks for the new modules
+
+    return del([dests.declarations])
+        .then(() => Promise.all([
+            streamToPromise(generateDeclarations),
+            streamToPromise(compileModules),
+        ]))
+        .then(() => {
+            // Compile the old scripts
+            const tsProject = typescript.createProject('tsconfig.json');
+            const compileScripts = tsProject.src()
+                .pipe(replace('$VERSION', version))
+                .pipe(replace('$DISCORD_ENABLED', !!config.DISCORD_LOGIN_PROXY))
+                .pipe(replace('$DISCORD_LOGIN_PROXY', config.DISCORD_LOGIN_PROXY))
+                .pipe(tsProject())
+                .pipe(gulp.dest(dests.scripts))
+                .pipe(browserSync.reload({stream: true}));
+            return streamToPromise(compileScripts);
+        });
 });
 
 gulp.task('styles', () => gulp.src(srcs.styles)

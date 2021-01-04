@@ -1,5 +1,21 @@
 class EffectEngineRunner {
     public static counter = 0;
+    public static multipliers = ['×1', '×10', '×100', '×1000', 'All'];
+    public static multIndex = ko.observable(0);
+
+    public static initialize(multiplier: Multiplier) {
+        GameHelper.enumStrings(GameConstants.BattleItemType).forEach((itemName) => {
+            const item = (ItemList[itemName] as BattleItem);
+            if (item.multiplierType) {
+                multiplier.addBonus(item.multiplierType, () => this.isActive(itemName)() ? item.multiplyBy : 1);
+            }
+        });
+    }
+
+    public static amountToUse = ko.pureComputed(() => {
+        // Either the digits specified, or All (Infinity)
+        return Number(EffectEngineRunner.multipliers[EffectEngineRunner.multIndex()].replace(/\D/g, '')) || Infinity;
+    })
 
     public static tick() {
         this.counter = 0;
@@ -11,9 +27,22 @@ class EffectEngineRunner {
                 this.updateFormattedTimeLeft(itemName);
             }
             if (player.effectList[itemName]() == 5) {
-                Notifier.notify({ message: `The ${GameConstants.humanifyString(itemName)}s effect is about to wear off!`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.battle_item_timer, setting: GameConstants.NotificationSetting.battle_item_timer });
+                Notifier.notify({
+                    message: `The ${GameConstants.humanifyString(itemName)}s effect is about to wear off!`,
+                    type: NotificationConstants.NotificationOption.warning,
+                    sound: NotificationConstants.NotificationSound.battle_item_timer,
+                    setting: NotificationConstants.NotificationSetting.battle_item_timer,
+                });
             }
         }
+    }
+
+    public static incrementMultiplier() {
+        this.multIndex((this.multIndex() + 1) % this.multipliers.length);
+    }
+
+    public static decrementMultiplier() {
+        this.multIndex((this.multIndex() + this.multipliers.length - 1) % this.multipliers.length);
     }
 
     public static getEffect(itemName: string) {
@@ -37,10 +66,6 @@ class EffectEngineRunner {
         }
         times.shift();
         player.effectTimer[itemName](times.join(':'));
-    }
-
-    public static getMoneyMultiplier() {
-        return this.isActive(GameConstants.BattleItemType.Lucky_incense)() ? 1.5 : 1;
     }
 
     public static getDungeonTokenMultiplier() {

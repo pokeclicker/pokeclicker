@@ -3,7 +3,7 @@ class PokeBlock extends Item {
     type: GameConstants.PokeBlockColor;
 
     constructor(color: GameConstants.PokeBlockColor, basePrice: number, currency: GameConstants.Currency = GameConstants.Currency.money) {
-        super(name, basePrice, currency);
+        super(`PokeBlock_${GameConstants.PokeBlockColor[color]}`, basePrice, currency);
         this.type = color;
     }
 
@@ -12,9 +12,9 @@ class PokeBlock extends Item {
 
 }
 
-ItemList['Black']  = new PokeBlock(GameConstants.PokeBlockColor.Black, Infinity);
-ItemList['Red']    = new PokeBlock(GameConstants.PokeBlockColor.Red, Infinity);
-ItemList['Gold']   = new PokeBlock(GameConstants.PokeBlockColor.Gold, Infinity);
-ItemList['Purple'] = new PokeBlock(GameConstants.PokeBlockColor.Purple, Infinity);
-ItemList['Gray']   = new PokeBlock(GameConstants.PokeBlockColor.Gray, Infinity);
-ItemList['White']  = new PokeBlock(GameConstants.PokeBlockColor.White, Infinity);
+ItemList['PokeBlock_Black']  = new PokeBlock(GameConstants.PokeBlockColor.Black, Infinity);
+ItemList['PokeBlock_Red']    = new PokeBlock(GameConstants.PokeBlockColor.Red, Infinity);
+ItemList['PokeBlock_Gold']   = new PokeBlock(GameConstants.PokeBlockColor.Gold, Infinity);
+ItemList['PokeBlock_Purple'] = new PokeBlock(GameConstants.PokeBlockColor.Purple, Infinity);
+ItemList['PokeBlock_Gray']   = new PokeBlock(GameConstants.PokeBlockColor.Gray, Infinity);
+ItemList['PokeBlock_White']  = new PokeBlock(GameConstants.PokeBlockColor.White, Infinity);

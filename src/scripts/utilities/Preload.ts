@@ -68,7 +68,10 @@ class Preload {
                     Preload.minimumTime(),
                 ]).then(() => {
                     clearTimeout(forceLoad);
-                    resolve();
+                    // Give the progress bar a little bit of time to finish the animation
+                    setTimeout(() => {
+                        resolve();
+                    }, 600);
                 }).catch((reason => {
                     console.log(`[${GameConstants.formatDate(new Date())}] %cPreload images failed..`, 'color:#c0392b;font-weight:900;');
                     console.error('Preload images failed:', reason);
@@ -82,6 +85,13 @@ class Preload {
     private static loadTowns() {
         const p = Array<Promise<number>>();
         for (const name in TownList) {
+            // Skip unreleased towns unless a feature flag has enabled them
+            if (
+                !(<any>window).featureFlags?.preloadUnreleasedTowns && TownList[name].region() > GameConstants.MAX_AVAILABLE_REGION
+            ) {
+                continue;
+            }
+            // Skip fake towns that exist for the Elite
             if (name.includes('Elite') || name.includes('Champion')) {
                 continue;
             }

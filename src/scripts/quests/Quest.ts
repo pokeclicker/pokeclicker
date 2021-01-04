@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 abstract class Quest {
     index: number;
     amount: number
@@ -31,9 +33,21 @@ abstract class Quest {
             this.claimed(true);
             if (this.pointsReward) {
                 App.game.wallet.gainQuestPoints(this.pointsReward);
-                Notifier.notify({ message: `You have completed your quest and claimed ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success });
+                Notifier.notify({
+                    message: `You have completed your quest and claimed ${this.pointsReward} quest points!`,
+                    type: NotificationConstants.NotificationOption.success,
+                });
+                App.game.logbook.newLog(
+                    LogBookTypes.QUEST_COMPLETE,
+                    `Completed "${this.description}" for ${this.pointsReward} quest points.`);
             } else {
-                Notifier.notify({ message: 'You have completed a quest!', type: GameConstants.NotificationOption.success });
+                Notifier.notify({
+                    message: 'You have completed a quest!',
+                    type: NotificationConstants.NotificationOption.success,
+                });
+                App.game.logbook.newLog(
+                    LogBookTypes.QUEST_COMPLETE,
+                    `Completed "${this.description}".`);
             }
             GameHelper.incrementObservable(App.game.statistics.questsCompleted);
             return true;
@@ -42,7 +56,7 @@ abstract class Quest {
     }
 
     quit(shouldConfirm = false) {
-        if (shouldConfirm && !confirm('Are you sure you want to quit this quest?!')) {
+        if (shouldConfirm && !confirm('Are you sure?\nYou can start the quest again later but you will lose all progress!')) {
             return false;
         }
         this.initial(null);
@@ -63,33 +77,39 @@ abstract class Quest {
     }
 
     protected createProgressObservables() {
-        this.progress = ko.pureComputed(function() {
+        this.progress = ko.pureComputed(() => {
             if (this.initial() !== null) {
                 return Math.min(1, ( this.focus() - this.initial()) / this.amount);
             } else {
                 return 0;
             }
-        }, this);
+        });
 
-        this.progressText = ko.pureComputed(function() {
+        this.progressText = ko.pureComputed(() => {
             if (this.initial() !== null) {
                 return `${Math.min((this.focus() - this.initial()), this.amount)} / ${this.amount}`;
             } else {
                 return `0 / ${this.amount}`;
             }
-        }, this);
+        });
 
         // This computed has a side effect - creating a notification - so we cannot safely make it a pureComputed
         // This will only be a problem if we make it subscribe to a function which lives longer than itself
         // Since it is only subscribing to observables on `this`, and the function is being kept on `this`, we shouldn't have a problem
-        this.isCompleted = ko.computed(function() {
-            const completed = this.progress() == 1;
+        this.isCompleted = ko.computed(() => {
+            const completed = this.progress() == 1 || this.claimed();
             if (!this.autoComplete && completed && !this.notified) {
-                Notifier.notify({ message: `You can complete your quest for ${this.pointsReward} quest points!`, type: GameConstants.NotificationOption.success, timeout: 5e3, sound: GameConstants.NotificationSound.quest_ready_to_complete, setting: GameConstants.NotificationSetting.quest_ready_to_complete });
+                Notifier.notify({
+                    message: `You can complete your quest for ${this.pointsReward} quest points!`,
+                    type: NotificationConstants.NotificationOption.success,
+                    timeout: 5e3,
+                    sound: NotificationConstants.NotificationSound.quest_ready_to_complete,
+                    setting: NotificationConstants.NotificationSetting.quest_ready_to_complete,
+                });
                 this.notified = true;
             }
             return completed;
-        }, this);
+        });
     }
 
     complete() {
@@ -112,15 +132,9 @@ abstract class Quest {
 
     toJSON() {
         return {
-            amount: this.amount,
             initial: this.initial(),
-            description: this.description,
             index: this.index || 0,
             notified: this.notified,
-            pointsReward: this.pointsReward,
-            xpReward: this.xpReward,
-            inProgress: this.inProgress(),
-            isCompleted: this.isCompleted(),
             claimed: this.claimed(),
         };
     }

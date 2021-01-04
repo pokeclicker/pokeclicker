@@ -1,8 +1,8 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class DiamondRequirement extends Requirement {
-    constructor( value: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, type);
+class DiamondRequirement extends AchievementRequirement {
+    constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(value, option, GameConstants.AchievementType['Diamond']);
     }
 
     public getProgress() {

@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class DungeonRunner {
 
     public static dungeon: Dungeon;
@@ -21,7 +23,10 @@ class DungeonRunner {
         DungeonRunner.dungeon = dungeon;
 
         if (!DungeonRunner.hasEnoughTokens()) {
-            Notifier.notify({ message: "You don't have enough dungeon tokens", type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You don\'t have enough dungeon tokens',
+                type: NotificationConstants.NotificationOption.danger,
+            });
             return false;
         }
         App.game.wallet.loseAmount(new Amount(DungeonRunner.dungeon.tokenCost, GameConstants.Currency.dungeonToken));
@@ -31,7 +36,7 @@ class DungeonRunner {
         DungeonRunner.pokemonDefeated = 0;
         DungeonRunner.chestsOpened = 0;
         DungeonRunner.loot = [];
-        DungeonRunner.currentTileType = ko.pureComputed(function () {
+        DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });
         DungeonRunner.fightingBoss(false);
@@ -66,7 +71,11 @@ class DungeonRunner {
                 amount += 1;
             }
         }
-        Notifier.notify({ message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`, type: GameConstants.NotificationOption.success, setting: GameConstants.NotificationSetting.dungeon_item_found });
+        Notifier.notify({
+            message: `Found ${amount} ${GameConstants.humanifyString(input)} in a dungeon chest`,
+            type: NotificationConstants.NotificationOption.success,
+            setting: NotificationConstants.NotificationSetting.dungeon_item_found,
+        });
         player.gainItem(input, amount);
         DungeonRunner.map.currentTile().type(GameConstants.DungeonTile.empty);
         DungeonRunner.map.currentTile().calculateCssClass();
@@ -93,26 +102,32 @@ class DungeonRunner {
             DungeonRunner.fighting(false);
             DungeonRunner.fightingBoss(false);
             MapHelper.moveToTown(DungeonRunner.dungeon.name());
-            Notifier.notify({ message: 'You could not complete the dungeon in time', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You could not complete the dungeon in time',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
     public static dungeonWon() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);
-            GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(DungeonRunner.dungeon.name())]);
+            GameHelper.incrementObservable(App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(DungeonRunner.dungeon.name())]);
             MapHelper.moveToTown(DungeonRunner.dungeon.name());
             // TODO award loot with a special screen
-            Notifier.notify({ message: 'You have successfully completed the dungeon', type: GameConstants.NotificationOption.success });
+            Notifier.notify({
+                message: 'You have successfully completed the dungeon',
+                type: NotificationConstants.NotificationOption.success,
+            });
         }
     }
 
-    public static timeLeftSeconds = ko.pureComputed(function () {
+    public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(DungeonRunner.timeLeft() / 10) / 10).toFixed(1);
     })
 
     public static dungeonCompleted(dungeon: Dungeon, includeShiny: boolean) {
-        const possiblePokemon: string[] = dungeon.allPokemonNames;
+        const possiblePokemon: PokemonNameType[] = dungeon.allAvailablePokemonNames;
         return RouteHelper.listCompleted(possiblePokemon, includeShiny);
     }
 

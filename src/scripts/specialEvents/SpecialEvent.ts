@@ -56,9 +56,16 @@ class SpecialEvent {
         return this.status == SpecialEventStatus.ended;
     }
 
-    notify(time: string, timeout: number, type = GameConstants.NotificationOption.info) {
+    notify(time: string, timeout: number, type = NotificationConstants.NotificationOption.info) {
         timeout -= 1000;
-        Notifier.notify({ title: `[EVENT] ${this.title}`, message: `${this.description}<br/><br/><strong>Start time:</strong> ${this.startTime.toLocaleString()}<br/><strong>End time:</strong> ${this.endTime.toLocaleString()}`, type, time, timeout, setting: GameConstants.NotificationSetting.event_start_end });
+        Notifier.notify({
+            title: `[EVENT] ${this.title}`,
+            message: `${this.description}<br/><br/><strong>Start time:</strong> ${this.startTime.toLocaleString()}<br/><strong>End time:</strong> ${this.endTime.toLocaleString()}`,
+            type,
+            time,
+            timeout,
+            setting: NotificationConstants.NotificationSetting.event_start_end,
+        });
     }
 
     checkStart() {
@@ -117,7 +124,7 @@ class SpecialEvent {
 
         // We only wan't the notification displayed for 1 hour, or until the event is over
         const timeTillEventEnd = this.timeTillEnd();
-        this.notify('on now!', Math.min(1 * GameConstants.HOUR, timeTillEventEnd), GameConstants.NotificationOption.success);
+        this.notify('on now!', Math.min(1 * GameConstants.HOUR, timeTillEventEnd), NotificationConstants.NotificationOption.success);
 
         this.startFunction();
         // Start checking when the event should be ending
@@ -143,7 +150,7 @@ class SpecialEvent {
             const sendNotificationTimeout = Math.max(timeTillEventEnd - 1 * GameConstants.HOUR, 0);
             const notificationTimeout = sendNotificationTimeout ? 1 * GameConstants.HOUR : timeTillEventEnd;
             setTimeout(() => {
-                this.notify(`ends in ${GameConstants.formatTimeShortWords(notificationTimeout)}!`, notificationTimeout, GameConstants.NotificationOption.warning);
+                this.notify(`ends in ${GameConstants.formatTimeShortWords(notificationTimeout)}!`, notificationTimeout, NotificationConstants.NotificationOption.warning);
             }, sendNotificationTimeout);
         }
 
@@ -156,7 +163,7 @@ class SpecialEvent {
     end() {
         // Update event status
         this.status = SpecialEventStatus.ended;
-        this.notify('just ended!', 1 * GameConstants.HOUR, GameConstants.NotificationOption.danger);
+        this.notify('just ended!', 1 * GameConstants.HOUR, NotificationConstants.NotificationOption.danger);
         this.endFunction();
     }
 }

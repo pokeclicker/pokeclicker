@@ -1,4 +1,14 @@
-///<reference path="upgrades/Upgrade.ts"/>
+/// <reference path="upgrades/Upgrade.ts" />
+
+/**
+ * Required modules before porting:
+ * Save.ts
+ * upgrades/Upgrade.ts
+ * towns/Town.ts - Town, TownList
+ * worldmap/MapHelper.ts
+ * items/Item.ts - ItemList
+ */
+
 /**
  * Information about the player.
  * All player variables need to be saved.
@@ -14,11 +24,22 @@ class Player {
     private _town: KnockoutObservable<Town>;
     private _currentTown: KnockoutObservable<string>;
     private _starter: GameConstants.Starter;
+    private _timeTraveller = false;
 
     constructor(savedPlayer?) {
         const saved: boolean = (savedPlayer != null);
         savedPlayer = savedPlayer || {};
         this._lastSeen = savedPlayer._lastSeen || 0;
+        this._timeTraveller = savedPlayer._timeTraveller || false;
+        if (this._lastSeen > Date.now()) {
+            Notifier.notify({
+                title: 'Welcome Time Traveller!',
+                message: 'Please ensure you keep a backup of your old save as travelling through time can cause some serious problems.\n\nAny Pokemon you may have obtained in the future could cease to exist which could corrupt your save file!',
+                type: NotificationConstants.NotificationOption.danger,
+                timeout: GameConstants.HOUR,
+            });
+            this._timeTraveller = true;
+        }
         this._region = ko.observable(savedPlayer._region);
         if (MapHelper.validRoute(savedPlayer._route, savedPlayer._region)) {
             this._route = ko.observable(savedPlayer._route);
@@ -49,17 +70,19 @@ class Player {
         this._itemList = Save.initializeItemlist();
         if (savedPlayer._itemList) {
             for (const key in savedPlayer._itemList) {
-                this._itemList[key] = ko.observable(savedPlayer._itemList[key]);
+                if (this._itemList[key]) {
+                    this._itemList[key](savedPlayer._itemList[key]);
+                }
             }
         }
 
         this._itemMultipliers = savedPlayer._itemMultipliers || Save.initializeMultipliers();
 
         // TODO(@Isha) move to underground classes.
-        this.mineInventory = new ObservableArrayProxy(savedPlayer.mineInventory || []);
-        for (const item of this.mineInventory) {
-            item.amount = ko.observable(item.amount);
-        }
+        const mineInventory = (savedPlayer.mineInventory || [])
+            // TODO: Convert this to object spread after we're on TS modules
+            .map((v) => Object.assign({}, v, { amount: ko.observable(v.amount) }));
+        this.mineInventory = ko.observableArray(mineInventory);
 
         this.achievementsCompleted = savedPlayer.achievementsCompleted || {};
 
@@ -77,7 +100,7 @@ class Player {
     private _itemList: { [name: string]: KnockoutObservable<number> };
 
     // TODO(@Isha) move to underground classes.
-    public mineInventory: ObservableArrayProxy<any>;
+    public mineInventory: KnockoutObservableArray<any>;
 
     public _lastSeen: number;
 
@@ -148,17 +171,17 @@ class Player {
         this._itemList[itemName](this._itemList[itemName]() - amount);
     }
 
-    public lowerItemMultipliers() {
+    public lowerItemMultipliers(multiplierDecreaser: MultiplierDecreaser, amount = 1) {
         for (const obj in ItemList) {
             const item = ItemList[obj];
-            item.decreasePriceMultiplier();
+            item.decreasePriceMultiplier(amount, multiplierDecreaser);
         }
     }
 
     // TODO(@Isha) move to underground classes.
     public hasMineItems() {
-        for (let i = 0; i < this.mineInventory.length; i++) {
-            if (this.mineInventory[i].amount() > 0) {
+        for (let i = 0; i < this.mineInventory().length; i++) {
+            if (this.mineInventory()[i].amount() > 0) {
                 return true;
             }
         }
@@ -167,22 +190,12 @@ class Player {
 
     // TODO(@Isha) move to underground classes.
     public mineInventoryIndex(id: number): number {
-        for (let i = 0; i < player.mineInventory.length; i++) {
-            if (player.mineInventory[i].id === id) {
-                return i;
-            }
-        }
-        return -1;
+        return player.mineInventory().findIndex(i => i.id == id);
     }
 
     // TODO(@Isha) move to underground classes.
     public getUndergroundItemAmount(id: number) {
-        const index = this.mineInventoryIndex(id);
-        if (index > -1) {
-            return player.mineInventory[index].amount();
-        } else {
-            return 0;
-        }
+        return player.mineInventory().find(i => i.id == id)?.amount() || 0;
     }
 
     public toJSON() {
@@ -198,6 +211,7 @@ class Player {
             '_mineLayersCleared',
             'achievementsCompleted',
             '_lastSeen',
+            '_timeTraveller',
             'gymDefeats',
             'achievementsCompleted',
             'effectList',

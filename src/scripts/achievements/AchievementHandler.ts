@@ -1,49 +1,62 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class AchievementHandler {
 
     public static achievementList: Achievement[] = [];
-    public static achievementTypes: KnockoutObservableArray<string> = ko.observableArray([]);
     public static navigateIndex: KnockoutObservable<number> = ko.observable(0);
     public static maxBonus: KnockoutObservableArray<number> = ko.observableArray([]);
     public static achievementListFiltered: KnockoutObservableArray<Achievement> = ko.observableArray([]);
     public static numberOfTabs: KnockoutObservable<number> = ko.observable(0);
 
-    public static navigateRight() {
-        if (AchievementHandler.navigateIndex() < AchievementHandler.numberOfTabs()) {
-            AchievementHandler.navigateIndex(AchievementHandler.navigateIndex() + 1);
+    public static setNavigateIndex(index: number): void {
+        if (index < 0 || index >= AchievementHandler.numberOfTabs()) {
+            return;
         }
+        AchievementHandler.navigateIndex(index);
+        Settings.setSettingByName('achievementsPage', index);
+    }
+
+    public static navigateRight() {
+        this.setNavigateIndex(AchievementHandler.navigateIndex() + 1);
     }
 
     public static navigateLeft() {
-        if (AchievementHandler.navigateIndex() > 0) {
-            AchievementHandler.navigateIndex(AchievementHandler.navigateIndex() - 1);
-        }
+        this.setNavigateIndex(AchievementHandler.navigateIndex() - 1);
+    }
+
+    public static isNavigateDirectionDisabled(navigateBackward: boolean): boolean {
+        return navigateBackward
+            ? this.navigateIndex() === 0
+            : this.navigateIndex() + 1 === this.numberOfTabs();
     }
 
     public static calculateNumberOfTabs() {
-        this.numberOfTabs(Math.floor((this.achievementListFiltered().filter(a => a.region <= player.highestRegion()).length - 1) / 10));
+        this.numberOfTabs(Math.max(1, Math.ceil(this.achievementListFiltered().length / 10)));
     }
 
     public static filter = {
-        status: ko.observable('all'),
-        type:   ko.observable('all'),
-        region: ko.observable('all'),
+        status: ko.observable(-2).extend({ numeric: 0 }),
+        type:   ko.observable(-2).extend({ numeric: 0 }),
+        region: ko.observable(-2).extend({ numeric: 0 }),
     }
 
     public static getAchievementListWithIndex() {
         return this.achievementListFiltered().slice(this.navigateIndex() * 10, (this.navigateIndex() * 10) + 10);
     }
 
-    public static filterAchievementList() {
-        this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion() &&
-                                    (this.filter.status() == 'all' ? true : a.unlocked == JSON.parse(this.filter.status())) &&
-                                    (this.filter.type()   == 'all' ? true : a.property.constructor.name == this.filter.type()) &&
-                                    (this.filter.region() == 'all' ? true : a.region == +this.filter.region())));
-        this.resetPages();
-    }
-
-    public static resetPages() {
+    public static filterAchievementList(retainPage = false) {
+        this.achievementListFiltered(this.achievementList.filter((a) => (
+            a.region <= player.highestRegion() &&
+            (this.filter.status() == -2 || a.unlocked === !!this.filter.status()) &&
+            (this.filter.type()   == -2 || a.property.achievementType === this.filter.type()) &&
+            (this.filter.region() == -2 || a.region === this.filter.region())
+        )));
         this.calculateNumberOfTabs();
-        this.navigateIndex(0);
+        if (!retainPage) {
+            this.setNavigateIndex(0);
+        } else if (this.getAchievementListWithIndex().length === 0 && this.navigateIndex() > 0) {
+            this.setNavigateIndex(this.numberOfTabs() - 1);
+        }
     }
 
     public static checkAchievements() {
@@ -54,7 +67,7 @@ class AchievementHandler {
         }
     }
 
-    public static addAchievement(name: string, description: string, property: Requirement, bonus: number, region = GameConstants.Region.none) {
+    public static addAchievement(name: string, description: string, property: AchievementRequirement, bonus: number, region = GameConstants.Region.none) {
         const unlocked: boolean = player.achievementsCompleted[name];
         AchievementHandler.achievementList.push(new Achievement(name, description, property, bonus, region, unlocked));
     }
@@ -63,12 +76,6 @@ class AchievementHandler {
         GameHelper.enumNumbers(GameConstants.Region).forEach(region => {
             AchievementHandler.maxBonus()[region] = AchievementHandler.achievementList.filter(a => a.region == region).reduce((sum, a) => sum + a.bonus, 0);
         });
-    }
-
-    public static calculateAchievementTypes() {
-        const types = [];
-        AchievementHandler.achievementList.forEach(a => types.push(a.property?.constructor.name));
-        AchievementHandler.achievementTypes([...new Set(types)]);
     }
 
     public static bonusUnlocked(): number {
@@ -90,10 +97,6 @@ class AchievementHandler {
         return sum;
     }
 
-    public static getMoneyMultiplier() {
-        return 1 + this.achievementBonus();
-    }
-
     public static achievementBonusPercent(): string {
         return `${(100 * AchievementHandler.achievementBonus()).toFixed(2)}%`;
     }
@@ -102,7 +105,7 @@ class AchievementHandler {
         return AchievementHandler.achievementList.find((achievement) => achievement.name === name);
     }
 
-    public static initialize() {
+    public static initialize(multiplier: Multiplier) {
 
         /*
          * GENERAL
@@ -111,7 +114,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('I Should Buy a PokéMart', 'Obtain 1,000 Pokédollars', new MoneyRequirement(1000), 0.10);
         AchievementHandler.addAchievement('A Small Fortune', 'Obtain 10,000 Pokédollars', new MoneyRequirement(10000), 0.15);
         AchievementHandler.addAchievement('Annual Wage', 'Obtain 100,000 Pokédollars', new MoneyRequirement(100000), 0.20);
-        AchievementHandler.addAchievement("Pfft, I Don't Need a Bike Voucher", 'Obtain 1,000,000 Pokédollars', new MoneyRequirement(1000000), 0.25);
+        AchievementHandler.addAchievement('Pfft, I Don\'t Need a Bike Voucher', 'Obtain 1,000,000 Pokédollars', new MoneyRequirement(1000000), 0.25);
         AchievementHandler.addAchievement('A billion Poképennies', 'Obtain 10,000,000 Pokédollars', new MoneyRequirement(10000000), 0.5);
 
         AchievementHandler.addAchievement('Dungeon Time', 'Obtain 100 Dungeon Tokens', new TokenRequirement(100), 0.05);
@@ -132,21 +135,21 @@ class AchievementHandler {
 
         AchievementHandler.addAchievement('Bling', 'Obtain 100 Diamonds', new DiamondRequirement(100), 0.05);
         AchievementHandler.addAchievement('Bling x10!', 'Obtain 1000 Diamonds', new DiamondRequirement(1000), 0.15);
-        AchievementHandler.addAchievement("If you like it, you should've put a ring on it.", 'Obtain 10,000 Diamonds', new DiamondRequirement(10000), 0.25);
+        AchievementHandler.addAchievement('If you like it, you should\'ve put a ring on it.', 'Obtain 10,000 Diamonds', new DiamondRequirement(10000), 0.25);
 
         AchievementHandler.addAchievement('Is my thumb green yet?', 'Dig up 1 item', new UndergroundItemsFoundRequirement(1), 0.01);
         AchievementHandler.addAchievement('My shovel is starting to crack', 'Dig up 10 items', new UndergroundItemsFoundRequirement(10), 0.01);
-        AchievementHandler.addAchievement("Why can't I make a diamond shovel?", 'Dig up 100 items', new UndergroundItemsFoundRequirement(100), 0.01);
+        AchievementHandler.addAchievement('Why can\'t I make a diamond shovel?', 'Dig up 100 items', new UndergroundItemsFoundRequirement(100), 0.01);
         AchievementHandler.addAchievement('This is definitely not Minecraft', 'Dig up 1,000 items', new UndergroundItemsFoundRequirement(1000), 0.01);
         AchievementHandler.addAchievement('I wonder how much is down there...', 'Dig up 10,000 items', new UndergroundItemsFoundRequirement(10000), 0.01);
 
         AchievementHandler.addAchievement('The earth is like unions', 'Dig deeper 1 time', new UndergroundLayersMinedRequirement(1), 0.01);
         AchievementHandler.addAchievement('This takes foreverrrrrrr', 'Dig deeper 10 times', new UndergroundLayersMinedRequirement(10), 0.01);
-        AchievementHandler.addAchievement("DigDug ain't got nothin on me", 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.01);
-        AchievementHandler.addAchievement("Both my thumbs are green! This can't be healthy", 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.01);
+        AchievementHandler.addAchievement('DigDug ain\'t got nothin on me', 'Dig deeper 100 times', new UndergroundLayersMinedRequirement(100), 0.01);
+        AchievementHandler.addAchievement('Both my thumbs are green! This can\'t be healthy', 'Dig deeper 1000 times', new UndergroundLayersMinedRequirement(1000), 0.01);
 
         AchievementHandler.addAchievement('Is that how I use this?', 'Level 1 Oak Item to the maximum level', new MaxLevelOakItemRequirement(1), 0.05);
-        AchievementHandler.addAchievement("I've got my hands full with all of these", 'Level 3 Oak Items to the maximum level', new MaxLevelOakItemRequirement(3), 0.1);
+        AchievementHandler.addAchievement('I\'ve got my hands full with all of these', 'Level 3 Oak Items to the maximum level', new MaxLevelOakItemRequirement(3), 0.1);
         AchievementHandler.addAchievement('Prepared for anything!', 'Level 8 Oak Items to the maximum level', new MaxLevelOakItemRequirement(8), 0.15);
 
         AchievementHandler.addAchievement('First Team', 'Capture 100 Pokémon', new CapturedRequirement(100), 0.05);
@@ -161,7 +164,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('The Cake is a Lie, but the Grind is real', 'Defeat 100,000 Pokémon', new DefeatedRequirement(100000), 0.25);
         AchievementHandler.addAchievement('Are there any left?', 'Defeat 1,000,000 Pokémon', new DefeatedRequirement(1000000), 0.50);
 
-        AchievementHandler.addAchievement("Startin' Out", 'Capture your first Pokémon', new CaughtPokemonRequirement(1), 0.01);
+        AchievementHandler.addAchievement('Startin\' Out', 'Capture your first Pokémon', new CaughtPokemonRequirement(1), 0.01);
         AchievementHandler.addAchievement('Like Ants in a PC', 'Capture 10 unique Pokémons', new CaughtPokemonRequirement(10), 0.02);
         AchievementHandler.addAchievement('Better Than Season 1 Ash', 'Capture 20 unique Pokémons', new CaughtPokemonRequirement(20), 0.03);
         AchievementHandler.addAchievement('More Pokémon than Patrick', 'Capture 30 unique Pokémons', new CaughtPokemonRequirement(30), 0.04);
@@ -172,7 +175,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('I Wanna be The Very Best', 'Capture 100 unique Pokémons', new CaughtPokemonRequirement(100), 0.20);
         AchievementHandler.addAchievement('I Should Probably Take a Break', 'Complete the Kanto Pokédex!', new CaughtUniquePokemonsByRegionRequirement(GameConstants.Region.kanto), 0.50);
 
-        AchievementHandler.addAchievement("I'd rather be shiny", 'Capture your first Shiny', new ShinyPokemonRequirement(1), 0.03);
+        AchievementHandler.addAchievement('I\'d rather be shiny', 'Capture your first Shiny', new ShinyPokemonRequirement(1), 0.03);
         AchievementHandler.addAchievement('These pokémon must be sick', 'Capture 10 unique Shinies', new ShinyPokemonRequirement(10), 0.06);
         AchievementHandler.addAchievement('Why Am I Doing This?', 'Capture 20 unique Shinies', new ShinyPokemonRequirement(20), 0.09);
         AchievementHandler.addAchievement('Why Am I Still Doing This?!', 'Capture 30 unique Shinies', new ShinyPokemonRequirement(30), 0.12);
@@ -180,7 +183,7 @@ class AchievementHandler {
         AchievementHandler.addAchievement('Where Did All The Shiny Pokémon Go?', 'Capture 50 unique Shinies', new ShinyPokemonRequirement(50), 0.30);
         AchievementHandler.addAchievement('Nvm, found some more', 'Capture 75 unique Shinies', new ShinyPokemonRequirement(75), 0.45);
         AchievementHandler.addAchievement('Just keep swimming just keep swimming -- oooo shiny!', 'Capture 100 unique Shinies', new ShinyPokemonRequirement(100), 0.60);
-        AchievementHandler.addAchievement("I don't know if I can handle the next batch of shinies.", 'Capture 151 unique Shinies!', new ShinyPokemonRequirement(151), 1.50);
+        AchievementHandler.addAchievement('I don\'t know if I can handle the next batch of shinies.', 'Capture 151 unique Shinies!', new ShinyPokemonRequirement(151), 1.50);
 
         AchievementHandler.addAchievement('Pokémon Nursery', 'Hatch 1 egg', new HatchRequirement(1), 0.01);
         AchievementHandler.addAchievement('A Lot of Running', 'Hatch 10 eggs', new HatchRequirement(10), 0.01);
@@ -222,33 +225,47 @@ class AchievementHandler {
         /*
          * REGIONAL
          */
-        GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none).forEach(region => {
+        GameHelper.enumNumbers(GameConstants.Region).filter(r => r != GameConstants.Region.none && r <= GameConstants.MAX_AVAILABLE_REGION).forEach(region => {
             // Routes
-            if (GameConstants.RegionRoute[region]) {
-                for (let i = GameConstants.RegionRoute[region][0]; i <= GameConstants.RegionRoute[region][1]; i++) {
-                    AchievementHandler.addAchievement(`Route ${i} traveler`, `Defeat 100 Pokémon on route ${i}`, new RouteKillRequirement(100, i), 1, region);
-                    AchievementHandler.addAchievement(`Route ${i} explorer`, `Defeat 1,000 Pokémon on route ${i}`, new RouteKillRequirement(1000, i), 2, region);
-                    AchievementHandler.addAchievement(`Route ${i} conqueror`, `Defeat 10,000 Pokémon on route ${i}`, new RouteKillRequirement(10000, i), 3, region);
-                }
-            }
+            Routes.getRoutesByRegion(region).forEach(route => {
+                AchievementHandler.addAchievement(`${route.routeName} traveler`, `Defeat 100 Pokémon on ${route.routeName}`, new RouteKillRequirement(100, region, route.number), 1, region);
+                AchievementHandler.addAchievement(`${route.routeName} explorer`, `Defeat 1,000 Pokémon on ${route.routeName}`, new RouteKillRequirement(1000, region, route.number), 2, region);
+                AchievementHandler.addAchievement(`${route.routeName} conqueror`, `Defeat 10,000 Pokémon on ${route.routeName}`, new RouteKillRequirement(10000, region, route.number), 3, region);
+            });
             // Gyms
             GameConstants.RegionGyms[region]?.forEach(gym => {
-                AchievementHandler.addAchievement(`${gym} Gym regular`, 'Clear 10 times', new ClearGymRequirement(10, Statistics.getGymIndex(gym)), 1, region);
-                AchievementHandler.addAchievement(`${gym} Gym ruler`, 'Clear 100 times', new ClearGymRequirement( 100, Statistics.getGymIndex(gym)), 2, region);
-                AchievementHandler.addAchievement(`${gym} Gym owner`, 'Clear 1,000 times', new ClearGymRequirement(1000, Statistics.getGymIndex(gym)), 3, region);
+                const gymTitle: string = gym.includes('Elite') || gym.includes('Champion') ? gym : `${gym} Gym`;
+                AchievementHandler.addAchievement(`${gym} Gym regular`, `Clear ${gymTitle} 10 times`, new ClearGymRequirement(10, GameConstants.getGymIndex(gym)), 1, region);
+                AchievementHandler.addAchievement(`${gym} Gym ruler`, `Clear ${gymTitle} 100 times`, new ClearGymRequirement( 100, GameConstants.getGymIndex(gym)), 2, region);
+                AchievementHandler.addAchievement(`${gym} Gym owner`, `Clear ${gymTitle} 1,000 times`, new ClearGymRequirement(1000, GameConstants.getGymIndex(gym)), 3, region);
             });
             // Dungeons
             GameConstants.RegionDungeons[region]?.forEach(dungeon => {
-                AchievementHandler.addAchievement(`${dungeon} explorer`, 'Clear 10 times', new ClearDungeonRequirement(10, Statistics.getDungeonIndex(dungeon)), 1, region);
-                AchievementHandler.addAchievement(`${dungeon} expert`, 'Clear 100 times', new ClearDungeonRequirement(100, Statistics.getDungeonIndex(dungeon)), 2, region);
-                AchievementHandler.addAchievement(`${dungeon} hermit`, 'Clear 1,000 times', new ClearDungeonRequirement(1000, Statistics.getDungeonIndex(dungeon)), 3, region);
+                AchievementHandler.addAchievement(`${dungeon} explorer`, `Clear ${dungeon} 10 times`, new ClearDungeonRequirement(10, GameConstants.getDungeonIndex(dungeon)), 1, region);
+                AchievementHandler.addAchievement(`${dungeon} expert`, `Clear ${dungeon} 100 times`, new ClearDungeonRequirement(100, GameConstants.getDungeonIndex(dungeon)), 2, region);
+                AchievementHandler.addAchievement(`${dungeon} hermit`, `Clear ${dungeon} 1,000 times`, new ClearDungeonRequirement(1000, GameConstants.getDungeonIndex(dungeon)), 3, region);
             });
         });
 
         AchievementHandler.calculateMaxBonus();
-        AchievementHandler.calculateAchievementTypes();
         this.achievementListFiltered(this.achievementList.filter(a => a.region <= player.highestRegion()));
-        this.resetPages();
+
+        // load filters, filter the list & calculate number of tabs
+        this.load();
+        this.filterAchievementList(true);
+        this.calculateNumberOfTabs();
+
+        // subscribe to filters so that when the player changes a filter it automatically refilters the list
         Object.keys(this.filter).forEach(e => (<KnockoutObservable<any>> this.filter[e]).subscribe(() => this.filterAchievementList()));
+
+        multiplier.addBonus('exp', () => 1 + this.achievementBonus());
+        multiplier.addBonus('money', () => 1 + this.achievementBonus());
+    }
+
+    static load() {
+        AchievementHandler.navigateIndex(Settings.getSetting('achievementsPage').value);
+        AchievementHandler.filter.status(Settings.getSetting('achievementsStatus').value);
+        AchievementHandler.filter.type(Settings.getSetting('achievementsType').value);
+        AchievementHandler.filter.region(Settings.getSetting('achievementsRegion').value);
     }
 }

@@ -13,15 +13,14 @@ class PokemonFactory {
         if (!MapHelper.validRoute(route, region)) {
             return new BattlePokemon('Rattata', 19, PokemonType.Psychic, PokemonType.None, 10000, 1, 0, 0, 0, false, 1);
         }
-        let name: string;
+        let name: PokemonNameType;
 
         if (PokemonFactory.roamingEncounter(route, region)) {
-            const possible = RoamingPokemonList.getRegionalRoamers(region);
-            name = possible[Math.floor(Math.random() * possible.length)].pokemon.name;
+            name = PokemonFactory.generateRoamingEncounter(route, region);
         } else {
-            const pokemonList: string[] = RouteHelper.getAvailablePokemonList(route, region);
-            const rand: number = Math.floor(Math.random() * pokemonList.length);
-            name = pokemonList[rand];
+            const availablePokemonList: PokemonNameType[] = RouteHelper.getAvailablePokemonList(route, region);
+            const rand: number = Math.floor(Math.random() * availablePokemonList.length);
+            name = availablePokemonList[rand];
         }
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
@@ -36,7 +35,12 @@ class PokemonFactory {
         const money: number = this.routeMoney(route,region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
         if (shiny) {
-            Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
+            Notifier.notify({
+                message: `✨ You encountered a shiny ${name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.shiny_long,
+                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+            });
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, 1, heldItem);
     }
@@ -47,7 +51,7 @@ class PokemonFactory {
 
     public static routeHealth(route: number, region: GameConstants.Region): number {
         route = MapHelper.normalizeRoute(route, region);
-        const health: number = Math.max(20, Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15))) || 20;
+        const health: number = Math.max(20, Math.floor(Math.pow((100 * Math.pow(route, 2.2) / 12), 1.15) * (1 + region / 20))) || 20;
         return health;
     }
 
@@ -62,7 +66,7 @@ class PokemonFactory {
     public static routeDungeonTokens(route: number, region: GameConstants.Region): number {
         route = MapHelper.normalizeRoute(route, region);
 
-        const tokens = Math.max(1, 6 * Math.pow(route * 2 / (3 / Math.round(1 + region / 3)), 1.05));
+        const tokens = Math.max(1, 6 * Math.pow(route * 2 / (2.8 / (1 + region / 3)), 1.08));
 
         return tokens;
     }
@@ -72,10 +76,10 @@ class PokemonFactory {
      * @param chance Base chance, should be from GameConstants.SHINY_CHANCE.*
      * @returns {boolean}
      */
-    public static generateShiny(chance: number): boolean {
-        chance /= App.game.oakItems.calculateBonus(OakItems.OakItem.Shiny_Charm);
+    public static generateShiny(chance: number, skipBonus = false): boolean {
+        const bonus = skipBonus ? 1 : App.game.multiplier.getBonus('shiny');
 
-        const rand: number = Math.floor(Math.random() * chance) + 1;
+        const rand: number = Math.floor(Math.random() * chance / bonus) + 1;
 
         if (rand <= 1) {
             App.game.oakItems.use(OakItems.OakItem.Shiny_Charm);
@@ -84,9 +88,9 @@ class PokemonFactory {
         return false;
     }
 
-    public static generatePartyPokemon(id: number): PartyPokemon {
+    public static generatePartyPokemon(id: number, shiny = false): PartyPokemon {
         const dataPokemon = PokemonHelper.getPokemonById(id);
-        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, false);
+        return new PartyPokemon(dataPokemon.id, dataPokemon.name, dataPokemon.evolutions, dataPokemon.attack, 0, 0, 0, 0, false, shiny);
     }
 
     /**
@@ -105,9 +109,9 @@ class PokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny, GameConstants.GYM_SHARDS);
     }
 
-    public static generateDungeonPokemon(pokemonList: string[], chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
+    public static generateDungeonPokemon(pokemonList: PokemonNameType[], chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
         const random: number = GameConstants.randomIntBetween(0, pokemonList.length - 1);
-        const name = pokemonList[random];
+        const name: PokemonNameType = pokemonList[random];
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
         const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
@@ -117,7 +121,12 @@ class PokemonFactory {
         const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_CHANCE);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
-            Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
+            Notifier.notify({
+                message: `✨ You encountered a shiny ${name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.shiny_long,
+                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+            });
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, GameConstants.DUNGEON_SHARDS, heldItem);
     }
@@ -125,7 +134,7 @@ class PokemonFactory {
     public static generateDungeonBoss(bossPokemonList: DungeonBossPokemon[], chestsOpened: number): BattlePokemon {
         const random: number = GameConstants.randomIntBetween(0, bossPokemonList.length - 1);
         const bossPokemon = bossPokemonList[random];
-        const name: string = bossPokemon.name;
+        const name: PokemonNameType = bossPokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
         const maxHealth: number = Math.floor(bossPokemon.baseHealth * (1 + (chestsOpened / 5)));
@@ -134,18 +143,47 @@ class PokemonFactory {
         const money = 0;
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
-            Notifier.notify({ message: `✨ You encountered a shiny ${name}! ✨`, type: GameConstants.NotificationOption.warning, sound: GameConstants.NotificationSound.shiny_long, setting: GameConstants.NotificationSetting.encountered_shiny });
+            Notifier.notify({
+                message: `✨ You encountered a shiny ${name}! ✨`,
+                type: NotificationConstants.NotificationOption.warning,
+                sound: NotificationConstants.NotificationSound.shiny_long,
+                setting: NotificationConstants.NotificationSetting.encountered_shiny,
+            });
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, bossPokemon.level, catchRate, exp, money, shiny, GameConstants.DUNGEON_BOSS_SHARDS);
     }
+    private static generateRoamingEncounter(route: number, region: GameConstants.Region): PokemonNameType {
+        const possible = RoamingPokemonList.getRegionalRoamers(region);
+
+        // Double the chance of encountering a roaming Pokemon you have not yet caught
+        possible.forEach(r => {
+            if (!App.game.party.alreadyCaughtPokemonByName(r.pokemon.name)) {
+                possible.push(r);
+            }
+        });
+
+        return possible[Math.floor(Math.random() * possible.length)].pokemon.name;
+    }
 
     private static roamingEncounter(route: number, region: GameConstants.Region): boolean {
-        const routes = GameConstants.RegionRoute[region];
-        const roamingPokemon = RoamingPokemonList.getRegionalRoamers(region);
-        if (!routes || !roamingPokemon || !roamingPokemon.length) {
+        // Map to the route numbers
+        const routeNum = MapHelper.normalizeRoute(route, region);
+        const routes = Routes.getRoutesByRegion(region).map(r => MapHelper.normalizeRoute(r.number, region));
+
+        // Check if the dice rolls in their favor
+        const encounter = PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, Math.max(...routes), Math.min(...routes), routeNum);
+        if (!encounter) {
             return false;
         }
-        return PokemonFactory.roamingChance(GameConstants.ROAMING_MAX_CHANCE, GameConstants.ROAMING_MIN_CHANCE, routes[1], routes[0], route);
+
+        // There is likely to be a roamer available, so we can check this last
+        const roamingPokemon = RoamingPokemonList.getRegionalRoamers(region);
+        if (!routes || !routes.length || !roamingPokemon || !roamingPokemon.length) {
+            return false;
+        }
+
+        // Roaming encounter
+        return true;
     }
 
     private static roamingChance(max, min, maxRoute, minRoute, curRoute) {

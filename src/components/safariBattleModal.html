@@ -11,7 +11,7 @@
                           </knockout>
 
                           <knockout>
-                              <knockout data-bind="text: SafariBattle.enemy.name">Pokemon name</knockout>
+                              <knockout data-bind="text: SafariBattle.enemy.name">Pokémon name</knockout>
                               <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(SafariBattle.enemy.id)}}"></knockout>
                           </knockout>
 
@@ -40,8 +40,18 @@
                 <div class="message" data-bind='html: SafariBattle.text'></div>
                 <div class="row" style="width: 100%;">
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBall()" data-bind='text: "Ball (" + Safari.balls() + ")"'>Ball (30)</button>
-                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwBait()">Bait</button>
-                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwRock()">Rock</button>
+                    <div class="btn-group btn-block col-6 m-0 dropup" style="padding:0px;" data-bind="let: { baitType: ko.observable(BaitType.Bait) }">
+                        <button type="button" class='btn btn-primary btn-block' onclick="this.blur();SafariBattle.lockButtons();" data-bind='{ click: function(){SafariBattle.throwBait(baitType());}, enable: BaitList[BaitType[baitType()]].amount() !== 0 && !SafariBattle.disableButtons }'>
+                            <div style="display:inline"><img width=16px data-bind="attr: { src: BaitList[BaitType[baitType()]].imagePath }"></div>
+                            <span data-bind="text: BaitList[BaitType[baitType()]].btnName">Bait (∞)</span>
+                        </button>
+                        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split active" data-bind="text: '&nbsp;'" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" data-bind="foreach: GameHelper.enumNumbers(BaitType)">
+                            <button class="dropdown-item" type="button" data-bind="click: function(){baitType($data)}, text: BaitList[BaitType[$data]].btnName"></button>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.throwRock()">Rock (∞)</button>
                     <button type="button" class="btn btn-primary btn-block col-6 m-0" onclick="this.blur();SafariBattle.lockButtons();SafariBattle.run()">Run</button>
                 </div>
            </div>

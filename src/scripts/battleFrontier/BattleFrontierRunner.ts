@@ -1,3 +1,5 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+
 class BattleFrontierRunner {
     public static timeLeft: KnockoutObservable<number> = ko.observable(GameConstants.GYM_TIME);
     public static timeLeftPercentage: KnockoutObservable<number> = ko.observable(100);
@@ -42,7 +44,7 @@ class BattleFrontierRunner {
         GameHelper.incrementObservable(App.game.statistics.battleFrontierTotalStagesCompleted);
         BattleFrontierRunner.timeLeft(GameConstants.GYM_TIME);
         BattleFrontierRunner.timeLeftPercentage(100);
-        
+
     }
 
     public static end() {
@@ -59,7 +61,12 @@ class BattleFrontierRunner {
         const battlePointsEarned = Math.round(stageBeaten * battleMultiplier);
         const moneyEarned = stageBeaten * 100 * battleMultiplier;
 
-        Notifier.notify({ title: 'Battle Frontier', message: `You managed to beat stage ${stageBeaten}.<br/>You received ${battlePointsEarned} BP`, type: GameConstants.NotificationOption.success, timeout: 5 * GameConstants.MINUTE });
+        Notifier.notify({
+            title: 'Battle Frontier',
+            message: `You managed to beat stage ${stageBeaten}.<br/>You received ${battlePointsEarned} BP`,
+            type: NotificationConstants.NotificationOption.success,
+            timeout: 5 * GameConstants.MINUTE,
+        });
 
         // Award battle points
         App.game.wallet.gainBattlePoints(battlePointsEarned);
@@ -73,19 +80,24 @@ class BattleFrontierRunner {
             return;
         }
         // Don't give any points, user quit the challenge
-        Notifier.notify({ title: 'Battle Frontier', message: `You made it to stage ${this.stage()}`, type: GameConstants.NotificationOption.info, timeout: 5 * GameConstants.MINUTE });
+        Notifier.notify({
+            title: 'Battle Frontier',
+            message: `You made it to stage ${this.stage()}`,
+            type: NotificationConstants.NotificationOption.info,
+            timeout: 5 * GameConstants.MINUTE,
+        });
 
         this.end();
     }
 
-    public static timeLeftSeconds = ko.pureComputed(function () {
+    public static timeLeftSeconds = ko.pureComputed(() => {
         return (Math.ceil(BattleFrontierRunner.timeLeft() / 10) / 10).toFixed(1);
     })
 
-    public static pokemonLeftImages = ko.pureComputed(function () {
+    public static pokemonLeftImages = ko.pureComputed(() => {
         let str = '';
         for (let i = 0; i < 3; i++) {
-            str += `<img class="pokeball-smallest" src="assets/images/pokeball/Pokeball-small.png"${BattleFrontierBattle.pokemonIndex() > i ? ' style="filter: saturate(0);"' : ''}>`;
+            str += `<img class="pokeball-smallest" src="assets/images/pokeball/Pokeball.svg"${BattleFrontierBattle.pokemonIndex() > i ? ' style="filter: saturate(0);"' : ''}>`;
         }
         return str;
     })

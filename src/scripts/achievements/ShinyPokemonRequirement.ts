@@ -1,12 +1,12 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class ShinyPokemonRequirement extends Requirement {
-    constructor(value: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(value, type);
+class ShinyPokemonRequirement extends AchievementRequirement {
+    constructor(value: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(value, option, GameConstants.AchievementType['Shiny Pokemon']);
     }
 
     public getProgress() {
-        return Math.min(App.game.party.shinyPokemon.filter(id => id > 0).length, this.requiredValue);
+        return Math.min(App.game.party.caughtPokemon.filter(p => p.shiny).length, this.requiredValue);
     }
 
     public hint(): string {

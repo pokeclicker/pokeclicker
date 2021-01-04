@@ -3,9 +3,8 @@ class BattleFrontierMilestoneItem extends BattleFrontierMilestone {
     amount: number;
 
     constructor (stage: number, itemName: string, amount: number ) {
-        const description = `${amount} × ${GameConstants.humanifyString(itemName)}`;
         const image = `assets/images/items/${itemName.replace(/[^\w.-\\(\\)]/g, '_')}.png`;
-        super(stage, description, () => {}, image);
+        super(stage, () => {}, image);
 
         this.itemName = itemName;
         this.amount = amount;
@@ -15,5 +14,9 @@ class BattleFrontierMilestoneItem extends BattleFrontierMilestone {
         if (ItemList[this.itemName]) {
             ItemList[this.itemName].gain(this.amount);
         }
+    }
+
+    get description() {
+        return `${this.amount} x ${ItemList[this.itemName].displayName}`;
     }
 }

@@ -1,9 +1,11 @@
-///<reference path="../Battle.ts"/>
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../Battle.ts" />
+
 class BattleFrontierBattle extends Battle {
     static alternateAttack = false;
     static pokemonIndex: KnockoutObservable<number> = ko.observable(0);
     static totalPokemons: KnockoutObservable<number> = ko.observable(3);
-    
+
     // Looks like we don't need this, unless we want to put a random trainer name or similar
     static trainer: KnockoutObservable<number> = ko.observable(0);
 

@@ -11,7 +11,7 @@ class GameController {
                 tooltip.css('visibility', 'visible');
 
             }
-        }, function () {
+        }, () => {
             const tooltip = $('#mapTooltip');
             tooltip.text('');
             tooltip.css('visibility', 'hidden');
@@ -51,12 +51,12 @@ class GameController {
         });
     }
 
-    static simulateKey(keyCode: number, type = 'keydown', modifiers = {}) {
+    static simulateKey(code: string, type = 'keydown', modifiers = {}) {
         const evtName = type.startsWith('key') ? type : `key${type}`;
 
         const event = document.createEvent('HTMLEvents') as KeyboardEvent;
         Object.defineProperties(event, {
-            keyCode: {value: keyCode},
+            code: {value: code},
         });
         event.initEvent(evtName, true, false);
 
@@ -65,13 +65,6 @@ class GameController {
         }
 
         document.dispatchEvent(event);
-    }
-
-    static simulateKeyPress(keyCode: number, modifiers = {}) {
-        this.simulateKey(keyCode, 'down', modifiers);
-        setTimeout(() => {
-            this.simulateKey(keyCode, 'up', modifiers);
-        }, 20);
     }
 
     static bindToolTips() {
@@ -89,23 +82,31 @@ class GameController {
 
                 $(element).tooltip(options);
 
-
-                ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                ko.utils.domNodeDisposal.addDisposeCallback(element, () => {
                     $(element).tooltip('dispose');
                 });
+            },
+            'update': function (element, valueAccessor) {
+                const local = ko.utils.unwrapObservable(valueAccessor());
+                const options = {};
 
-                if (bindingContext.$data instanceof Plot) {
-                    $(element).hover(function () {
-                        $(this).data('to', setInterval(function () {
-                            $(element).tooltip('hide')
-                                .attr('data-original-title', FarmController.getTooltipLabel(bindingContext.$index()))
-                                .tooltip('show');
-                        }, 100));
-                    }, function () {
-                        clearInterval($(this).data('to'));
-                    });
+                ko.utils.extend(options, ko.bindingHandlers.tooltip.options);
+                ko.utils.extend(options, local);
+
+                // Update the config of the tooltip
+                const tooltipData = $(element).data('bs.tooltip');
+                tooltipData.config.title = (options as any).title;
+
+                // If the tooltip is visible, update its text
+                const tooltipInner = tooltipData.tip && tooltipData.tip.querySelector('.tooltip-inner');
+                if (tooltipInner) {
+                    tooltipInner.innerHTML = tooltipData.config.title || '';
                 }
-
+                if (tooltipData && tooltipData.config) {
+                    if (tooltipData.config.title === '') {
+                        $(element).tooltip('hide');
+                    }
+                }
             },
             options: {
                 placement: 'bottom',
@@ -114,34 +115,93 @@ class GameController {
         };
     }
 
+    static focusedOnEditableElement(): boolean {
+        const activeEl = document.activeElement as HTMLElement;
+        const localName: string = activeEl.localName.toLowerCase();
+        const editables = ['textarea', 'input', 'select'];
+
+        return (editables.includes(localName) || activeEl.isContentEditable);
+    }
+
+    // Store keys for multi-key combinations
+    static keyHeld = {}
     static addKeyListeners() {
-        $(document).on('keydown', function (e) {
+        // Oak Items
+        const $oakItemsModal = $('#oakItemsModal');
+        const oakItems = App.game.oakItems;
+        // Pokeball Selector
+        const $pokeballSelector = $('#pokeballSelectorModal');
+        const pokeballs = App.game.pokeballs;
+
+        $(document).on('keydown', e => {
             // Ignore any of our controls if focused on an input element
-            if (document.activeElement.localName == 'input') {
+            if (this.focusedOnEditableElement()) {
                 return;
             }
 
-            const keyCode = e.keyCode;
+            // Set flags for any key currently pressed down (used to check if key held down currently)
+            GameController.keyHeld[e.code] = true;
+
+            switch (e.code) {
+                case 'KeyO':
+                    // Open oak items with 'O'
+                    if (oakItems.canAccess()) {
+                        $('.modal').modal('hide');
+                        $oakItemsModal.modal('toggle');
+                    }
+                    break;
+                default:
+                    let numKey = +e.key;
+                    // Check for a number key being pressed
+                    if (!isNaN(numKey)) {
+                        // Make our number keys 1 indexed instead of 0
+                        numKey -= 1;
+
+                        if (GameController.keyHeld['KeyP']) {
+                            // Open pokeball selector modal using P + (1-4) for each condition
+                            if (!($pokeballSelector.data('bs.modal')?._isShown)) {
+                                $('.modal').modal('hide');
+                            }
+                            $('#pokeballSelectorBody .clickable.pokeball-selected').eq(numKey)?.trigger('click');
+
+                        } else if ($pokeballSelector.data('bs.modal')?._isShown) {
+                            // Select Pokeball from pokeball selector (0 = none)
+                            if (numKey < App.game.pokeballs.pokeballs.length) {
+                                pokeballs.selectedSelection()(numKey);
+                            }
+
+                        } else if ($oakItemsModal.data('bs.modal')?._isShown) {
+                            // Toggle oak items
+                            if (oakItems.isUnlocked(numKey)) {
+                                if (oakItems.isActive(numKey)) {
+                                    oakItems.deactivate(numKey);
+                                } else {
+                                    oakItems.activate(numKey);
+                                }
+                            }
+                        }
+                    }
+            }
 
             if (App.game.gameState === GameConstants.GameState.dungeon) {
-                switch (keyCode) {
-                    case 38: // up
-                    case 87: // w
+                switch (e.code) {
+                    case 'ArrowUp':
+                    case 'KeyW':
                         DungeonRunner.map.moveUp();
                         break;
-                    case 37: // left
-                    case 65: // a
+                    case 'ArrowLeft':
+                    case 'KeyA':
                         DungeonRunner.map.moveLeft();
                         break;
-                    case 40: // down
-                    case 83: // s
+                    case 'ArrowDown':
+                    case 'KeyS':
                         DungeonRunner.map.moveDown();
                         break;
-                    case 39: // right
-                    case 68: // d
+                    case 'ArrowRight':
+                    case 'KeyD':
                         DungeonRunner.map.moveRight();
                         break;
-                    case 32: // space
+                    case 'Space':
                         DungeonRunner.openChest();
                         DungeonRunner.startBossFight();
                         break;
@@ -150,54 +210,64 @@ class GameController {
                 }
                 e.preventDefault();
             } else if (App.game.gameState === GameConstants.GameState.town) {
-                if (keyCode == 32) { // space
+                if (e.code === 'Space') {
                     if (player.town().gym()) {
                         GymRunner.startGym(player.town().gym());
                     } else if (player.town().dungeon()) {
                         DungeonRunner.initializeDungeon(player.town().dungeon());
                     }
                     e.preventDefault();
+                } else if ('gymList' in player.town()) {
+                    // Dont start if modal is show/shown
+                    if (!$('#receiveBadgeModal').data('bs.modal')?._isShown) {
+                        const number = Number(e.key);
+                        // Check if a number higher than 0 and less than total Gyms was pressed
+                        if (number && number <= player.town().gymList().length) {
+                            GymRunner.startGym(player.town().gymList()[number - 1]());
+                        }
+                    }
                 }
             } else if (App.game.gameState === GameConstants.GameState.fighting) {
-                switch (keyCode) {
-                    case 187: // plus
-                    case 107: // plus (numpad)
+                // Allow '=' to fallthrough to '+' since they share a key on many keyboards
+                switch (e.key) {
+                    case '=':
+                    case '+':
                         MapHelper.moveToRoute(player.route() + 1, player.region);
                         break;
-                    case 189: // minus
-                    case 109: // minus (numpad)
+                    case '-':
                         MapHelper.moveToRoute(player.route() - 1, player.region);
                         break;
                     default: // any other key (ignore)
                         return;
                 }
                 e.preventDefault();
-            }
-
-        });
-
-        $(document).on('keydown', function (e) {
-            const keyCode = e.keyCode;
-            if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyToDirection[keyCode];
+            } else if (App.game.gameState === GameConstants.GameState.safari) {
+                const dir = GameConstants.KeyCodeToDirection[e.code];
                 if (dir) {
                     e.preventDefault();
                     Safari.move(dir);
                 }
-                if (keyCode == 32) { // space
+                if (e.code === 'Space') {
                     e.preventDefault();
                 }
             }
         });
 
-        $(document).on('keyup', function (e) {
-            const keyCode = e.keyCode;
+        $(document).on('keyup', e => {
+            // Ignore any of our controls if focused on an input element
+            if (this.focusedOnEditableElement()) {
+                return;
+            }
+
+            // Our key is no longer being held down
+            delete GameController.keyHeld[e.code];
+
             if (App.game.gameState === GameConstants.GameState.safari) {
-                const dir = GameConstants.KeyToDirection[keyCode];
+                const dir = GameConstants.KeyCodeToDirection[e.code];
                 if (dir) {
                     e.preventDefault();
                     Safari.stop(dir);
-                } else if (keyCode == 32) { // space
+                } else if (e.code === 'Space') {
                     e.preventDefault();
                 }
             }
@@ -205,11 +275,11 @@ class GameController {
     }
 }
 
-$(document).ready(function () {
+$(document).ready(() => {
     $('#pokedexModal').on('show.bs.modal', PokedexHelper.updateList);
 });
 
 // when stacking modals allow scrolling after top modal hidden
-$(document).on('hidden.bs.modal', '.modal', function () {
+$(document).on('hidden.bs.modal', '.modal', () => {
     $('.modal:visible').length && $(document.body).addClass('modal-open');
 });

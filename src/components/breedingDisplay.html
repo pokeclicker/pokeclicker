@@ -3,7 +3,7 @@
         <span>Hatchery</span>
     </div>
     <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
-            data-bind='click: function(){ BreedingController.openBreedingModal(); BreedingController.filterBreedableList() }'>
+            data-bind='click: function(){ BreedingController.openBreedingModal(); }'>
         List
     </button>
     <div id='eggList' class="card-body p-0 show">
@@ -16,7 +16,7 @@
                   <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.breeding.nextEggSlotCost().amount, 'currency': GameConstants.Currency.questPoint}}"></span>
                 </p>
                 <button class='btn btn-primary' onclick='App.game.breeding.buyEggSlot()'
-                        data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint] <= App.game.breeding.nextEggSlotCost().amount}'>Unlock</button>
+                        data-bind='css: {disabled: App.game.wallet.currencies[GameConstants.Currency.questPoint]() <= App.game.breeding.nextEggSlotCost().amount}'>Unlock</button>
             </div>
             <div data-bind="visible: $index() > App.game.breeding.eggSlots" style="margin-top: 20px;">
                 <img src="assets/images/breeding/lock.svg">
@@ -24,10 +24,10 @@
             <!-- ko ifnot: $data.isNone() -->
             <div style="margin-top: 20px;" class="clickable" data-bind="click: function(){ if (progress() >= 100) App.game.breeding.hatchPokemonEgg($index()) }">
                 <!-- ko if: $data.type == EggType.Fossil -->
-                <img data-bind="attr: {src: BreedingController.getEggImage($data)}, class: progress() >= 100 ? 'hatching' : (stepsRemaining() <= 50 ? 'hatchingSoon' : '')"/>
+                <img data-bind="attr: {src: BreedingController.getEggImage($data)}, class: BreedingController.getEggCssClass($data)"/>
                 <!-- /ko -->
                 <!-- ko ifnot: $data.type == EggType.Fossil -->
-                <div data-bind="template: { name: 'eggSVGTemplate', data: $data}, class: progress() >= 100 ? 'hatching' : (stepsRemaining() <= 50 ? 'hatchingSoon' : '')"></div>
+                <div data-bind="template: { name: 'eggSVGTemplate', data: $data}, class: BreedingController.getEggCssClass($data)"></div>
                 <!-- /ko -->
 
                 <div class="progress" data-bind='visible: progress() < 100'>
@@ -54,4 +54,11 @@
         </div>
       </div>
     </div>
+    <!-- ko if: App.game.breeding.queueList().length -->
+    <div id="hatcheryQueue" class="card-footer p-1" data-bind="foreach: App.game.breeding.queueList()">
+      <div class="queuePokemon clickable bg-primary" data-bind="click: function(){ App.game.breeding.removeFromQueue($index()) }">
+        <img src="" data-bind="attr: { src: PokemonHelper.getImage(pokemonMap[$data], App.game.party.alreadyCaughtPokemon(pokemonMap[$data].id, true)) }">
+      </div>
+    </div>
+    <!-- /ko -->
 </div>

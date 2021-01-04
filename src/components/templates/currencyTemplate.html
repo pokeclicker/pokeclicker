@@ -1,22 +1,22 @@
 <script type="text/html" id="currencyTemplate">
     <span style="display: inline;">
         <!-- ko if: $data.currency == GameConstants.Currency.money -->
-        <img alt="Money" src="assets/images/currency/money.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
+        <img alt="Money" src="assets/images/currency/money.svg" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
         <!-- ko if: $data.currency == GameConstants.Currency.dungeonToken -->
-        <img alt="Dungeon Tokens" src="assets/images/currency/dungeonToken.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
+        <img alt="Dungeon Tokens" src="assets/images/currency/dungeonToken.svg" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
         <!-- ko if: $data.currency == GameConstants.Currency.questPoint -->
-        <img alt="Quest Points" src="assets/images/currency/questPoint.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
+        <img alt="Quest Points" src="assets/images/currency/questPoint.svg" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
         <!-- ko if: $data.currency == GameConstants.Currency.diamond -->
         <img alt="Diamonds" src="assets/images/underground/diamond.svg" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
         <!-- ko if: $data.currency == GameConstants.Currency.farmPoint -->
-        <img alt="Farm Points" src="assets/images/currency/farmPoint.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
+        <img alt="Farm Points" src="assets/images/currency/farmPoint.svg" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
         <!-- ko if: $data.currency == GameConstants.Currency.battlePoint -->
-        <img alt="Battle Points" src="assets/images/currency/battlePoint.png" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
+        <img alt="Battle Points" src="assets/images/currency/battlePoint.svg" data-bind="style: {height: $data.height || '24px', width: $data.width || $data.height || '24px'}"/>
         <!-- /ko -->
 
         <span data-bind="text: ($data.reduced || ($data.amount > $data.reducedThreshold)) ? GameConstants.formatNumber($data.amount) : $data.amount.toLocaleString('en-US')">0</span>

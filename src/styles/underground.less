@@ -49,7 +49,7 @@
     padding-top:100% !important;
     /*
     CODE TO GENERATE THE MINE CSS:
-    
+
     let makeMine = (x, y) => {
         str = [`    &.size-${x}-${y} {`];
         for (ix = 0; ix < x; ix++){
@@ -606,7 +606,7 @@
 
 .ChiselSelected {
     cursor: url('../assets/images/underground/chissel.png'), auto;
-            
+
     &.mineSquare:after {
         content: "";
         position: absolute;
@@ -634,8 +634,10 @@
 }
 
 #mineBody {
-    .row:not(:first-child):not(:last-child) {
-        .HammerSelected:not(:first-child):not(:last-child) {
+    overflow: hidden;
+
+    .row {
+        .HammerSelected {
 
             &.mineSquare:after {
                 content: "";

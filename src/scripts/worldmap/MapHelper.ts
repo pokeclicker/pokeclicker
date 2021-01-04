@@ -1,3 +1,6 @@
+/// <reference path="../../declarations/DataStore/StatisticStore/index.d.ts" />
+/// <reference path="../GameConstants.d.ts" />
+
 class MapHelper {
     public static returnToMap() {
         if (player.currentTown()) {
@@ -24,10 +27,12 @@ class MapHelper {
                 Battle.generateNewEnemy();
             }
             App.game.gameState = GameConstants.GameState.fighting;
-            GameController.applyRouteBindings();
         } else {
             if (!MapHelper.routeExist(route, region)) {
-                return Notifier.notify({ message: `Route ${route} does not exist in the ${GameConstants.Region[region]} region.`, type: GameConstants.NotificationOption.warning });
+                return Notifier.notify({
+                    message: `${Routes.getName(route, region)} does not exist in the ${GameConstants.Region[region]} region.`,
+                    type: NotificationConstants.NotificationOption.warning,
+                });
             }
 
             const routeData = Routes.getRoute(region, route);
@@ -39,7 +44,10 @@ class MapHelper {
                 }
             });
 
-            Notifier.notify({ message: `You don't have access to that route yet.<br/>${reqsList.join('<br/>')}`, type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: `You don't have access to that route yet.<br/>${reqsList.join('<br/>')}`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     };
 
@@ -55,26 +63,20 @@ class MapHelper {
         return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked();
     };
 
-    public static calculateBattleCssClass(): string {
+    public static getCurrentEnvironment(): GameConstants.Environment {
         const area = player.route() || player.town()?.name() || undefined;
 
-        if (GameConstants.WaterAreas[player.region].has(area)) {
-            return 'water';
-        } else if (GameConstants.IceAreas[player.region].has(area)) {
-            return 'ice';
-        } else if (GameConstants.ForestAreas[player.region].has(area)) {
-            return 'forest';
-        } else if (GameConstants.CaveAreas[player.region].has(area)) {
-            return 'cave';
-        } else if (GameConstants.GemCaveAreas[player.region].has(area)) {
-            return 'cave-gem';
-        } else if (GameConstants.PowerPlantAreas[player.region].has(area)) {
-            return 'power-plant';
-        } else if (GameConstants.MansionAreas[player.region].has(area)) {
-            return 'mansion';
-        } else if (GameConstants.GraveyardAreas[player.region].has(area)) {
-            return 'graveyard';
-        }
+        const [env] = Object.entries(GameConstants.Environments).find(
+            ([, regions]) => Object.values(regions).find(
+                region => region.has(area)
+            )
+        ) || [];
+
+        return (env as GameConstants.Environment);
+    }
+
+    public static calculateBattleCssClass(): string {
+        return GameConstants.EnvironmentCssClass[this.getCurrentEnvironment()];
     }
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
@@ -83,7 +85,7 @@ class MapHelper {
         if (player.route() == route && player.region == region) {
             cls = 'currentRoute';
         } else if (MapHelper.accessToRoute(route, region)) {
-            if (App.game.statistics.routeKills[route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
+            if (App.game.statistics.routeKills[region][route]() >= GameConstants.ROUTE_KILLS_NEEDED) {
                 cls = 'unlockedRoute';
             } else {
                 cls = 'unlockedUnfinishedRoute';
@@ -93,7 +95,7 @@ class MapHelper {
         }
 
         // Water routes
-        if (GameConstants.WaterAreas[region].has(route)) {
+        if (GameConstants.Environments.Water[region]?.has(route)) {
             cls = `${cls} waterRoute`;
         }
 
@@ -110,7 +112,7 @@ class MapHelper {
         }
         if (MapHelper.accessToTown(town)) {
             if (dungeonList.hasOwnProperty(town)) {
-                if (App.game.statistics.dungeonsCleared[Statistics.getDungeonIndex(town)]()) {
+                if (App.game.statistics.dungeonsCleared[GameConstants.getDungeonIndex(town)]()) {
                     return 'dungeon completedDungeon';
                 }
                 return 'dungeon unlockedDungeon';
@@ -118,7 +120,7 @@ class MapHelper {
             if (gymList.hasOwnProperty(town)) {
                 const gym = gymList[town];
                 // If defeated the previous gym, but not this one
-                const gymIndex = Statistics.getGymIndex(town);
+                const gymIndex = GameConstants.getGymIndex(town);
                 if (Gym.isUnlocked(gym) && !App.game.badgeCase.hasBadge(gym.badgeReward)) {
                     return 'city unlockedUnfinishedTown';
                 }
@@ -152,7 +154,6 @@ class MapHelper {
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
-            GameController.applyRouteBindings();
         } else {
             const town = TownList[townName];
             const reqsList = [];
@@ -163,12 +164,15 @@ class MapHelper {
                 }
             });
 
-            Notifier.notify({ message: `You don't have access to that location yet.<br/>${reqsList.join('<br/>')}`, type: GameConstants.NotificationOption.warning });
+            Notifier.notify({
+                message: `You don't have access to that location yet.<br/>${reqsList.join('<br/>')}`,
+                type: NotificationConstants.NotificationOption.warning,
+            });
         }
     }
 
     public static validRoute(route = 0, region: GameConstants.Region = 0): boolean {
-        return route >= GameConstants.RegionRoute[region][0] && route <= GameConstants.RegionRoute[region][1];
+        return !!Routes.getRoute(region, route);
     }
 
     public static openShipModal() {
@@ -177,7 +181,7 @@ class MapHelper {
         };
         switch (player.region) {
             case 0:
-                if (TownList['Vermillion City'].isUnlocked() && player.highestRegion() > 0) {
+                if (TownList['Vermilion City'].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
                     return;
                 }
@@ -196,8 +200,22 @@ class MapHelper {
                     openModal();
                     return;
                 }
+            case 4:
+                if (TownList['Castelia City'].isUnlocked()) {
+                    openModal();
+                    return;
+                }
+            case 5:
+                if (TownList['Coumarine City'].isUnlocked()) {
+                    openModal();
+                    return;
+                }
         }
-        Notifier.notify({ message: 'You cannot access this dock yet', type: GameConstants.NotificationOption.warning });
+
+        Notifier.notify({
+            message: 'You cannot access this dock yet',
+            type: NotificationConstants.NotificationOption.warning,
+        });
     }
 
     public static ableToTravel() {
@@ -206,7 +224,9 @@ class MapHelper {
 
     public static travelToNextRegion() {
         if (MapHelper.ableToTravel()) {
-            player.highestRegion(player.highestRegion() + 1);
+            // Gain queue slots based on highest region
+            App.game.breeding.gainQueueSlot(App.game.breeding.queueSlotsGainedFromRegion(player.highestRegion()));
+            GameHelper.incrementObservable(player.highestRegion);
             MapHelper.moveToTown(GameConstants.StartingTowns[player.highestRegion()]);
             player.region = player.highestRegion();
         }

@@ -1,4 +1,4 @@
-<g data-bind='if: player.region == GameConstants.Region.kanto'>
+<g data-bind='visible: player.region == GameConstants.Region.kanto'>
     <image width="100%" xlink:href="assets/images/kanto.png"></image>
 
     <!-- ------ -->
@@ -101,16 +101,16 @@
     <!--Route 7-->
     <%- include('templates/mapRoute',
         { route: 7, region: 0
-        , width: 13, height: 3
-        , x: 63, y: 22
+        , width: 9, height: 3
+        , x: 50, y: 22
         })
      %>
 
     <!--Route 8-->
     <%- include('templates/mapRoute',
         { route: 8, region: 0
-        , width: 9, height: 3
-        , x: 50, y: 22
+        , width: 13, height: 3
+        , x: 63, y: 22
         })
      %>
 
@@ -352,9 +352,9 @@
          })
       %>
 
-    <!--Vermillion City-->
+    <!--Vermilion City-->
     <%- include('templates/mapTown',
-        { name: "Vermillion City"
+        { name: "Vermilion City"
         , x: 59, y: 32
         })
      %>
@@ -445,14 +445,14 @@
         })
      %>
 
-    <!--Pokemon Tower-->
+    <!--Pokémon Tower-->
     <%- include('templates/mapDungeon',
         { name: "Pokemon Tower"
         , x: 80, y: 17
         , width: 4, height: 8
         })
     %>
-    <!--Pokemon Tower Extension-->
+    <!--Pokémon Tower Extension-->
     <%- include('templates/mapDungeon',
         { name: "Pokemon Tower"
         , x: 81, y: 16
@@ -467,7 +467,7 @@
         })
      %>
 
-    <!--Pokemon Mansion-->
+    <!--Pokémon Mansion-->
     <%- include('templates/mapDungeon',
         { name: "Pokemon Mansion"
         , x: 13, y: 50
@@ -525,7 +525,7 @@
         { name: "Underground Entrance"
         , x: 72, y: 31
         , width: 3, height: 4
-        , databind: "click:function(){Underground.openUndergroundModal()}, attr: { class: Underground.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
+        , databind: "click:function(){App.game.underground.openUndergroundModal()}, attr: { class: App.game.underground.canAccess() ? 'city unlockedTown' : 'city lockedTown' }"
         })
      %>
 

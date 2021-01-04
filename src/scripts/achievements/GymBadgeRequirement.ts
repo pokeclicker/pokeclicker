@@ -1,9 +1,10 @@
+/// <reference path="../../declarations/enums/Badges.d.ts"/>
 ///<reference path="ClearGymRequirement.ts"/>
 
 class GymBadgeRequirement extends Requirement {
-    public badge: BadgeCase.Badge;
-    constructor(badge: BadgeCase.Badge, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(1, type);
+    public badge: BadgeEnums;
+    constructor(badge: BadgeEnums, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(1, option);
         this.badge = badge;
     }
 
@@ -12,6 +13,6 @@ class GymBadgeRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `Requires the ${GameConstants.camelCaseToString(BadgeCase.Badge[this.badge])} badge.`;
+        return `Requires the ${GameConstants.camelCaseToString(BadgeEnums[this.badge])} badge.`;
     }
 }

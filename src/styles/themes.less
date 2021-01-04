@@ -1,4 +1,25 @@
 // Any changes needed for specific bootswatch themes should be put in here
+
+.cyborg {
+  .text-light {
+    color: whitesmoke !important;
+  }
+
+  img[src="assets/images/pokeball/None.svg"] {
+    filter: invert(1) brightness(90%);
+  }
+}
+
+.darkly {
+  .text-primary, .text-light {
+    color: whitesmoke !important;
+  }
+
+  img[src="assets/images/pokeball/None.svg"] {
+    filter: invert(1) brightness(90%);
+  }
+}
+
 .sketchy {
   // Fix double close button
   #toaster .toast-body, .text-light {
@@ -32,15 +53,21 @@
   }
 }
 
-.darkly {
-  .text-primary, .text-light {
-    color: whitesmoke !important;
+.slate {
+  #toaster, #achievementsModal {
+    .text-primary {
+      color: whitesmoke !important;
+    }
+  }
+
+  img[src="assets/images/pokeball/None.svg"] {
+    filter: invert(1) brightness(90%);
   }
 }
 
-.slate {
-  #toaster .text-primary {
-    color: whitesmoke !important;
+.solar {
+  .seed-list-item.active {
+    background: rgba(255, 255, 255, 0.2);
   }
 }
 
@@ -48,10 +75,8 @@
   .text-light {
     color: whitesmoke !important;
   }
-}
 
-.cyborg {
-  .text-light {
-    color: whitesmoke !important;
+  img[src="assets/images/pokeball/None.svg"] {
+    filter: invert(1) brightness(90%);
   }
 }

@@ -1,65 +1,162 @@
 <div class="modal fade noselect" id="farmModal" tabindex="-1" role="dialog"
-     aria-labelledby="farmModalLabel">
+     aria-labelledby="farmModalLabel"
+     style="cursor:default">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h4>Farm</h4>
-                <!-- ko ifnot: App.game.farming.allPlotsUnlocked() -->
-                <button class="btn btn-success" onclick="App.game.farming.unlockPlot()"
-                        data-bind="css: { disabled: !App.game.farming.canBuyPlot()}">
-                    <span>Unlock new plot </span>
-                    <span data-bind="template: { name: 'amountTemplate', data: App.game.farming.calculatePlotPrice()}"></span>
-                </button>
-                <!-- /ko -->
+            <div class="modal-header p-0">
+                <ul class="nav nav-tabs nav-fill">
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#berryFarmView">Farm</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#berryDexView">Berrydex</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#helpView">Help</a></li>
+                    <!-- TODO: HLXII Add Apricorn Tab ? -->
+                    <btn class="btn btn-primary">
+                        <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint](), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                    </btn>
+                </ul>
             </div>
-            <div class="modal-body">
-                <div id="farmView" class="justify-content-center no-select row">
-                    <div class="col-12 col-lg-4">
-                        <div class="col-sm-12">
-                            <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.wallet.currencies[GameConstants.Currency.farmPoint], 'currency': GameConstants.Currency.farmPoint}}"></span>
-                        </div>
-                        <ul id="seedList" data-bind="foreach: App.game.farming.berryList" class="list-group"
-                            style="margin-bottom: 5px;">
-                            <li class="list-group-item list-group-item-action seed-list-item"
-                                data-bind="click: function() {FarmController.selectedBerry = $index()}">
-                                <img src="" width="24px"
-                                     data-bind="attr:{ src: 'assets/images/items/' + BerryType[$index()] + '.png'}">
-                                <span data-bind="text: BerryType[$index()]"></span>
-                                <span class="seedAmount" data-bind="text: App.game.farming.berryList[$index()]"></span>
-                            </li>
-                        </ul>
 
-                        <div class="row">
-                            <div class="col-lg-12 col-6">
-                                <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry)}">
-                                    Plant All
-                                </button>
-                            </div>
-                            <div class="col-lg-12 col-6">
-                                <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
-                                    Harvest All
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-8" style="padding-left: 0">
-                        <div id="plotList" data-bind="foreach: App.game.farming.plotList">
-                            <div class="plot" data-bind="css :{plotLocked : !$data.isUnlocked}">
-                                <div class="plot-content">
-                                    <div class="plotImage">
-                                        <img style="width: 100%" src="assets/images/farm/soil.png">
-                                        <div data-bind="ifnot: $data.isEmpty()">
-                                            <div class="plotButton"
-                                                 data-bind="click: function(){App.game.farming.harvest($index())}, tooltip: {title: $data.formattedTimeLeft, trigger: 'hover', animation: false}">
-                                                <img width="100%" height="100%"
-                                                     style="max-width: 100%; max-height: 100%"
-                                                     src=""
-                                                     data-bind="attr:{ src: FarmController.getImage($index())}">
-                                            </div>
+            <div class="modal-body tab-content p-0">
+
+                <div id="berryFarmView" class="tab-pane fade in active show">
+                    <div id="farmView" class="justify-content-center no-select row">
+                        <div class="col-12 col-lg-4">
+
+
+                            <ul class="nav nav-tabs nav-fill">
+                                <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#seeds" data-bind="click: function(){FarmController.berryListVisible(true);}">Berries</a></li>
+                                <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#mulches" data-bind="click: function(){FarmController.berryListVisible(false);}">Mulch</a></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div id="seeds" class="tab-pane active">
+                                    <ul id="seedList" class="list-group p-0">
+                                        <!-- ko foreach: FarmController.getBerryListWithIndex() -->
+                                        <li class="list-group-item list-group-item-action seed-list-item p-2"
+                                            data-bind="click: function() {FarmController.selectedBerry($data);FarmController.selectedShovel(false);}, css: { 'active': FarmController.selectedBerry() === $data && !FarmController.selectedShovel() }">
+                                            <img src="" height="24px"
+                                                data-bind="attr:{ src: FarmController.getBerryImage($data) },
+                                                css: {'berryLocked': !App.game.farming.unlockedBerries[$data]() }">
+                                            <span data-bind="text: App.game.farming.unlockedBerries[$data]() ? BerryType[$data] : '???'"></span>
+                                            <span class="float-right" data-bind="text: App.game.farming.berryList[$data]().toLocaleString('en-US')"></span>
+                                        </li>
+                                        <!-- /ko -->
+                                    </ul>
+
+                                    <div class="row justify-content-center align-items-center py-1">
+                                        <div class="col-4 pr-0">
+                                            <button class="btn btn-block btn-secondary"
+                                                onclick="FarmController.navigateLeft()"
+                                                data-bind="disable: FarmController.navigateIndex() === 0,
+                                                    css: { disabled: FarmController.navigateIndex() === 0 }">
+                                                <img src="assets/images/arrow.svg" style="transform: scaleX(-1);" height="20">
+                                            </button>
                                         </div>
-                                        <div data-bind="if: $data.isEmpty()">
+                                        <div class="col-4" data-bind="text: FarmController.navigateIndex()+1 + '/' + (FarmController.numberOfTabs()+1)"></div>
+                                        <div class="col-4 pl-0">
+                                            <button class="btn btn-block btn-secondary"
+                                                onclick="FarmController.navigateRight()"
+                                                data-bind="disable: FarmController.navigateIndex() ===  FarmController.numberOfTabs(),
+                                                    css: { disabled: FarmController.navigateIndex() ===  FarmController.numberOfTabs() }">
+                                                <img src="assets/images/arrow.svg" height="20">
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row justify-content-center py-1">
+                                        <div class="col-6 pr-0">
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){App.game.farming.plantAll(FarmController.selectedBerry())}">
+                                                Plant All
+                                            </button>
+                                        </div>
+                                        <div class="col-6 pl-0">
+                                            <button class="btn btn-success btn-block" data-bind="click: function(){App.game.farming.harvestAll()}">
+                                                Harvest All
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="mulches" class="tab-pane">
+                                    <ul id="mulchList" class="list-group p-0">
+                                        <!-- ko foreach: Object.keys(MulchType).filter(value => !isNaN(value) && value != -1) -->
+                                        <li class="list-group-item list-group-item-action seed-list-item p-2"
+                                            data-bind="click: function() {FarmController.selectedMulch($data);FarmController.selectedShovel(false);},
+                                                css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
+                                                tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
+                                            <img src="" width="24px"
+                                                data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
+                                            <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
+                                            <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
+                                        </li>
+                                        <!-- /ko -->
+                                    </ul>
+                                    <div class="justify-content-center py-1">
+                                        <div class="btn-group btn-block">
+                                            <button type="button" class="btn btn-sm btn-secondary"
+                                            data-bind="text: FarmController.multipliers[FarmController.multIndex()]"
+                                            onclick="FarmController.incrementMultiplier()"
+                                            oncontextmenu="FarmController.decrementMultiplier(); return false"
+                                            title="Multiplier"
+                                            data-toggle="popover"
+                                            data-html="true"
+                                            data-content="Left/right click to cycle amount<br/>Applies to single and Mulch All"
+                                            data-placement="right"
+                                            data-trigger="hover">
+                                            </button>
+                                            <button class="btn btn-primary btn-block" data-bind="click: function(){ FarmController.mulchAll(); }">
+                                                Mulch All
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <ul id="shovelList" class="list-group">
+                                <li class="list-group-item list-group-item-action seed-list-item p-2"
+                                    data-bind="click: function() {FarmController.selectedShovel(true);},
+                                    css: { 'active': FarmController.selectedShovel() },
+                                    tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
+                                    <img src="" height="24px"
+                                        data-bind="attr:{ src: ItemList['Berry_Shovel'].imagePath }">
+                                    <span>Shovel</span>
+                                    <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="col-12 col-lg-8">
+                            <div id="plotList" class="row" data-bind="foreach: App.game.farming.plotList">
+                                <!-- ko if: $index() % Farming.PLOT_WIDTH == 0 -->
+                                <div class="w-100"></div>
+                                <!-- /ko -->
+                                <div class="plot col" data-bind="css: { plotLocked : !$data.isUnlocked }">
+                                    <div class="plot-content" data-bind="class: FarmController.calculateCssClass()">
+                                        <div class="plotImage">
+                                            <img style="width: 100%" src="assets/images/farm/soil.png"
+                                                data-bind="class: FarmController.calcMulchClass($data)">
+                                            <!-- ko if: !$data.isUnlocked -->
+                                            <div class="plotButton plotLockHover">
+                                                <div>
+                                                    <span style="display: inline;">
+                                                        <img alt="Berry" style="height: 24px;"
+                                                            data-bind="attr:{ src: FarmController.getBerryImage(App.game.farming.plotBerryCost($index()).type) },
+                                                            css: {'berryLocked': !App.game.farming.unlockedBerries[App.game.farming.plotBerryCost($index()).type]() }"/>
+                                                        <span data-bind="text: GameConstants.formatNumber(App.game.farming.plotBerryCost($index()).amount)">0</span>
+                                                    </span>
+                                                </div>
+                                                <div>
+                                                    <span data-bind="template: { name: 'currencyTemplate', data: {'amount': App.game.farming.plotFPCost($index()), 'currency': GameConstants.Currency.farmPoint}}"></span>
+                                                </div>
+                                            </div>
+                                            <!-- /ko -->
                                             <div class="plotButton"
-                                                 data-bind="click: function(){App.game.farming.plant($index(), FarmController.selectedBerry)}">
+                                                data-bind="ifnot: $data.isEmpty(),
+                                                click: function(){FarmController.plotClick($index())},
+                                                tooltip: {title: $data.tooltip(), trigger: 'hover', animation: false, html: true}">
+                                                <img width="100%" height="100%" src=""
+                                                    style="width: 68.75%; max-height: 100%; image-rendering: pixelated;"
+                                                    data-bind="attr:{ src: FarmController.getImage($index())}">
                                             </div>
                                         </div>
                                     </div>
@@ -67,6 +164,78 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div id="berryDexView" class="tab-pane fade">
+                    <div>
+                        <ul class="row justify-content-center p-0" data-bind="foreach: FarmController.getUnlockedBerryList()"
+                            style="max-width: 100%; padding:0; margin:0;">
+                            <li class="col-sm-4 col-md-3 col-lg-2 pokedexEntry"
+                            data-bind="style:{background: FarmController.getBackgroundColor($data)},
+                                    tooltip: { title: FarmController.getHint($data,true,true),
+                                    trigger: 'hover',
+                                    placement:'top' }">
+                                 <span class="id" style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: ($data + 1 + '').padStart(2, 0)">number</span>
+                                     <img src="" height="120px" style="padding: 20px 0px;" data-bind="css: { 'pokemon-not-seen': !App.game.farming.unlockedBerries[$data]() }, attr:{ src: FarmController.getBerryImage($data)}">
+                                     <!-- ko if: App.game.farming.unlockedBerries[$data]() -->
+                                     <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: BerryType[$data]">name</span>
+                                     <a class="overlay" href="#berryDexModal" data-toggle="modal"
+                                        data-bind="click: ()=>{App.game.statistics.selectedBerryID($data)}"></a>
+                                     <!-- /ko -->
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="helpView" class="tab-pane fade col-10 offset-1">
+                    <h4><u>Farm</u></h4>
+                    <p>In the farm you can plant and harvest Berries.</p>
+
+                    <p>Each Berry type takes a different amount of time to grow,
+                    <br/>Once fully grown, the Berry plant can be clicked to manually harvest the Berries and gain some Farm Points.</p>
+
+                    <p>Otherwise after some time being fully grown, the Berry plant will wither away,
+                    dropping half of the expected Berries but may also be re-planted automatically.
+                    <br/><i>(Farm Points are only gained by manually harvesting Berries)</i><p>
+
+                    <p>Additional plots can be unlocked by spending Berries.</p>
+
+                    <h4><u>Mutations</u></h4>
+                    <p>Berries have the chance to cause mutations and create new Berry species in empty plots based on certain conditions.
+                    <br/><i>(the Berry Master in Kanto will give you daily hints to what these conditions may be)</i></p>
+
+                    <h4><u>Mulches</u></h4>
+                    <p>Mulches can be bought in later regions from Berry Masters,
+                    <br/>They can be used on plots for different effects:</p>
+                    <table class="table table-bordered table-striped">
+                        <tr>
+                            <td>Boost Mulch</td>
+                            <td>Increases the growth rate of Berry plants.</td>
+                        </tr>
+                        <tr>
+                            <td>Rich Mulch</td>
+                            <td>Increases the number of Berries harvested.</td>
+                        </tr>
+                        <tr>
+                            <td>Surprise Mulch</td>
+                            <td>Increases the chances of mutations.</td>
+                        </tr>
+                        <tr>
+                            <td>Amaze Mulch</td>
+                            <td>A weaker version of all three effects.</td>
+                        </tr>
+                    </table>
+
+                    <h4><u>Shovel</u></h4>
+                    <p>If you want to remove a Berry plant before it is fully grown,
+                    <br/>you can use a Shovel to uproot it.
+                    <br/><i>(shovels can be purchased in later regions from Berry Masters)</i></p>
+
+                    <h4><u>Trades</u></h4>
+                    <p>Berries can be traded with Berry Masters in later regions for other useful items</p>
+
+                    <h4><u>Wandering Pokémon</u></h4>
+                    <p>Ripe Berry plants may attract wild Pokémon that will join your party. Some Pokémon can only be found using certain Berry species.</p>
                 </div>
             </div>
 

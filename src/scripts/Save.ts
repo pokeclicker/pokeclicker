@@ -5,7 +5,6 @@ class Save {
     public static store(player: Player) {
         const json = JSON.stringify(player);
         localStorage.setItem('player', json);
-        localStorage.setItem('mine', Mine.serialize());
         localStorage.setItem('settings', Settings.save());
         localStorage.setItem('save', JSON.stringify(this.getSaveObject()));
 
@@ -15,9 +14,6 @@ class Save {
 
     public static getSaveObject() {
         const saveObject = {};
-
-        // TODO: Make the Underground a game Feature
-        saveObject[Underground.saveKey] = Underground.save();
 
         Object.keys(App.game).filter(key => App.game[key].saveKey).forEach(key => {
             saveObject[App.game[key].saveKey] = App.game[key].toJSON();
@@ -31,13 +27,6 @@ class Save {
 
         const settings = localStorage.getItem('settings');
         Settings.load(JSON.parse(settings));
-
-
-        const saveJSON = localStorage.getItem('save');
-        if (saveJSON !== null) {
-            const saveObject = JSON.parse(saveJSON);
-            Underground.load(saveObject[Underground.saveKey]);
-        }
 
         if (saved !== 'null') {
             return new Player(JSON.parse(saved));
@@ -63,19 +52,15 @@ class Save {
             document.body.removeChild(element);
         } catch (err) {
             console.error('Error trying to download save', err);
-            Notifier.notify({ title: 'Failed to download save data', message: 'Please check the console for errors, and report them on our Discord.', type: GameConstants.NotificationOption.primary, timeout: 6e4 });
+            Notifier.notify({
+                title: 'Failed to download save data',
+                message: 'Please check the console for errors, and report them on our Discord.',
+                type: NotificationConstants.NotificationOption.primary,
+                timeout: 6e4,
+            });
             try {
                 localStorage.backupSave = JSON.stringify(backupSaveData);
             } catch (e) {}
-        }
-    }
-
-    public static loadMine() {
-        const mine = localStorage.getItem('mine');
-        if (mine) {
-            Mine.loadSavedMine(JSON.parse(mine));
-        } else {
-            Mine.loadMine();
         }
     }
 
@@ -84,7 +69,6 @@ class Save {
 
         if (confirmDelete == 'DELETE') {
             localStorage.removeItem('player');
-            localStorage.removeItem('mine');
             localStorage.removeItem('save');
 
             location.reload();
@@ -118,7 +102,7 @@ class Save {
     public static initializeItemlist(): { [name: string]: KnockoutObservable<number> } {
         const res = {};
         for (const obj in ItemList) {
-            res[obj] = ko.observable(0);
+            res[obj] = ko.observable(0).extend({ numeric: 0 });
         }
         return res;
     }
@@ -168,7 +152,7 @@ class Save {
         const fr = new FileReader();
         fr.readAsText(fileToRead);
 
-        setTimeout(function () {
+        setTimeout(() => {
             try {
                 const decoded = atob(fr.result as string);
                 console.debug('decoded:', decoded);
@@ -179,10 +163,16 @@ class Save {
                     localStorage.setItem('save', JSON.stringify(json.save));
                     location.reload();
                 } else {
-                    Notifier.notify({ message: 'This is not a valid decoded savefile', type: GameConstants.NotificationOption.danger });
+                    Notifier.notify({
+                        message: 'This is not a valid decoded savefile',
+                        type: NotificationConstants.NotificationOption.danger,
+                    });
                 }
             } catch (err) {
-                Notifier.notify({ message: 'This is not a valid savefile', type: GameConstants.NotificationOption.danger });
+                Notifier.notify({
+                    message: 'This is not a valid savefile',
+                    type: NotificationConstants.NotificationOption.danger,
+                });
             }
         }, 1000);
     }
@@ -195,7 +185,10 @@ class Save {
             Save.convertShinies(p.caughtPokemonList);
             $('#saveModal').modal('hide');
         } catch (e) {
-            Notifier.notify({ message: 'Invalid save data.', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'Invalid save data.',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -204,21 +197,29 @@ class Save {
         list = list.filter(p => p.shiny);
         for (const pokemon of list) {
             const id = +pokemon.id;
-            if (!App.game.party.shinyPokemon.includes(id)) {
+            const partyPokemon = App.game.party.getPokemon(id);
+            if (partyPokemon) {
                 converted.push(pokemon.name);
-                App.game.party.shinyPokemon.push(id);
+                partyPokemon.shiny = true;
             }
         }
         if (converted.length > 0) {
-            Notifier.notify({ message: `You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`, type: GameConstants.NotificationOption.success, timeout: 1e4 });
+            Notifier.notify({
+                message: `You have gained the following shiny Pokémon:</br>${converted.join(',</br>')}`,
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+            });
         } else {
-            Notifier.notify({ message: 'No new shiny Pokémon to import.', type: GameConstants.NotificationOption.info });
+            Notifier.notify({
+                message: 'No new shiny Pokémon to import.',
+                type: NotificationConstants.NotificationOption.info,
+            });
         }
     }
 }
 
-document.addEventListener('DOMContentLoaded', function (event) {
-    $('#saveModal').on('show.bs.modal', function () {
+document.addEventListener('DOMContentLoaded', () => {
+    $('#saveModal').on('show.bs.modal', () => {
         $('#saveTextArea').text(JSON.stringify(player));
     });
 });

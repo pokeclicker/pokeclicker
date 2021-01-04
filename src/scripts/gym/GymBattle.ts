@@ -29,11 +29,11 @@ class GymBattle extends Battle {
         this.enemyPokemon(PokemonFactory.generateTrainerPokemon(this.gym.town, this.index()));
     }
 
-    public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(function () {
+    public static pokemonsDefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
         return GymBattle.index();
     });
 
-    public static pokemonsUndefeatedComputable: KnockoutComputed<number> = ko.pureComputed(function () {
+    public static pokemonsUndefeatedComputable: KnockoutComputed<number> = ko.pureComputed(() => {
         return GymBattle.totalPokemons() - GymBattle.index();
     })
 }

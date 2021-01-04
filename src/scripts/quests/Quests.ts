@@ -1,14 +1,21 @@
+/// <reference path="../../declarations/GameHelper.d.ts" />
+/// <reference path="../../declarations/DataStore/common/Saveable.d.ts" />
+
 class Quests implements Saveable {
     saveKey = 'quests';
 
     defaults = {
         xp: 0,
         refreshes: 0,
+        freeRefresh: false,
     };
 
     public xp = ko.observable(0).extend({ numeric: 0 });
     public refreshes = ko.observable(0);
     public lastRefresh = new Date();
+    public lastRefreshLevel = 0;
+    public lastRefreshRegion = 0;
+    public freeRefresh = ko.observable(false);
     public questList: KnockoutObservableArray<Quest> = ko.observableArray();
     public questLines: KnockoutObservableArray<QuestLine> = ko.observableArray();
     public level: KnockoutComputed<number> = ko.pureComputed((): number => {
@@ -43,7 +50,10 @@ class Quests implements Saveable {
         if (this.canStartNewQuest() && quest && !quest.inProgress() && !quest.isCompleted()) {
             quest.begin();
         } else {
-            Notifier.notify({ message: 'You cannot start more quests', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot start more quests',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -53,7 +63,10 @@ class Quests implements Saveable {
         if (quest && quest.inProgress()) {
             quest.quit(shouldConfirm);
         } else {
-            Notifier.notify({ message: 'You cannot quit this quest', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot quit this quest',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -65,10 +78,15 @@ class Quests implements Saveable {
             // Once the player completes every available quest, refresh the list for free
             if (this.allQuestClaimed()) {
                 this.refreshQuests(true);
+                // Give player a free refresh
+                this.freeRefresh(true);
             }
         } else {
             console.trace('cannot claim quest..');
-            Notifier.notify({ message: 'You cannot claim this quest', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot claim this quest',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -81,23 +99,32 @@ class Quests implements Saveable {
 
         // Refresh the list each time a player levels up
         if (this.level() > currentLevel) {
-            Notifier.notify({ message: 'Your quest level has increased!', type: GameConstants.NotificationOption.success, timeout: 1e4, sound: GameConstants.NotificationSound.quest_level_increased });
-            this.refreshQuests(true);
+            Notifier.notify({
+                message: 'Your quest level has increased!<br/><i>You have a free quest refresh.</i>',
+                type: NotificationConstants.NotificationOption.success,
+                timeout: 1e4,
+                sound: NotificationConstants.NotificationSound.quest_level_increased,
+            });
+            this.freeRefresh(true);
         }
     }
 
-    generateQuestList() {
-        this.lastRefresh = new Date();
+    generateQuestList(date = new Date(), level = this.level()) {
+        if (this.lastRefresh.toDateString() != date.toDateString()) {
+            this.refreshes(0);
+        }
+        this.lastRefresh = date;
+        this.lastRefreshLevel = level;
+        this.lastRefreshRegion = player.highestRegion();
         this.currentQuests().forEach(quest => quest.quit());
-        this.questList(QuestHelper.generateQuestList(this.generateSeed(), GameConstants.QUESTS_PER_SET));
+        this.questList(QuestHelper.generateQuestList(this.generateSeed(date, level), GameConstants.QUESTS_PER_SET));
     }
 
-    private generateSeed() {
-        const d = new Date();
-        return Number(this.level() * (d.getFullYear() + this.refreshes() * 10) * d.getDate() + 1000 * d.getMonth() + 100000 * d.getDate());
+    private generateSeed(date = new Date(), level = this.level()): number {
+        return Number(level * (date.getFullYear() + this.refreshes() * 10) * date.getDate() + 1000 * date.getMonth() + 100000 * date.getDate());
     }
 
-    public refreshQuests(free = false, shouldConfirm = false) {
+    public refreshQuests(free = this.freeRefresh(), shouldConfirm = false) {
         if (free || this.canAffordRefresh()) {
             if (!free) {
                 if (shouldConfirm && !confirm('Are you sure you want to refresh the quest list?!')) {
@@ -105,10 +132,14 @@ class Quests implements Saveable {
                 }
                 App.game.wallet.loseAmount(this.getRefreshCost());
             }
+            this.freeRefresh(false);
             GameHelper.incrementObservable(this.refreshes);
             this.generateQuestList();
         } else {
-            Notifier.notify({ message: 'You cannot afford to do that!', type: GameConstants.NotificationOption.danger });
+            Notifier.notify({
+                message: 'You cannot afford to do that!',
+                type: NotificationConstants.NotificationOption.danger,
+            });
         }
     }
 
@@ -122,8 +153,10 @@ class Quests implements Saveable {
 
     // Returns 0 when all quests are complete, ~1 million when none are
     public getRefreshCost(): Amount {
-        const notComplete = this.incompleteQuests().length;
-        return new Amount(Math.floor(250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)), GameConstants.Currency.money);
+        // If we have a free refersh, just assume all the quest are completed
+        const notComplete = this.freeRefresh() ? 0 : this.incompleteQuests().length;
+        const cost = Math.floor((250000 * Math.LOG10E * Math.log(Math.pow(notComplete, 4) + 1)) / 1000) * 1000;
+        return new Amount(Math.max(0, Math.min(1e6, cost)), GameConstants.Currency.money);
     }
 
     public canStartNewQuest(): boolean {
@@ -201,6 +234,9 @@ class Quests implements Saveable {
             xp: this.xp(),
             refreshes: this.refreshes(),
             lastRefresh: this.lastRefresh,
+            lastRefreshLevel: this.lastRefreshLevel,
+            lastRefreshRegion: this.lastRefreshRegion,
+            freeRefresh: this.freeRefresh(),
             questList: this.questList(),
             questLines: this.questLines(),
         };
@@ -216,27 +252,26 @@ class Quests implements Saveable {
         }
 
         this.xp(json.xp || this.defaults.xp);
-        const lastRefresh = json.lastRefresh ? new Date(json.lastRefresh) : new Date();
-        if (lastRefresh.toDateString() != new Date().toDateString()) {
-            this.refreshes(0);
-            // we don't want to load old quest data
-            delete json.questList;
+        this.refreshes(json.refreshes || this.defaults.refreshes);
+        this.lastRefresh = json.lastRefresh ? new Date(json.lastRefresh) : new Date();
+        this.lastRefreshLevel = json.lastRefreshLevel || this.level();
+        this.lastRefreshRegion = json.lastRefreshRegion || player.highestRegion();
+        if (this.lastRefresh.toDateString() != new Date().toDateString()) {
+            this.freeRefresh(true);
         } else {
-            this.refreshes(json.refreshes || this.defaults.refreshes);
+            this.freeRefresh(json.freeRefresh || this.defaults.freeRefresh);
         }
 
-        // Generate the questList
-        this.generateQuestList();
-
-        // Load any completed/inprogress quest
+        // Generate quest list
+        this.generateQuestList(this.lastRefresh, this.lastRefreshLevel);
+        // Load our current quest list
         if (json.questList) {
             this.loadQuestList(json.questList);
         }
 
         // Generate the questLines
         QuestLineHelper.loadQuestLines();
-
-        // Load any quest line quest
+        // Load our quest line quest
         if (json.questLines) {
             this.loadQuestLines(json.questLines);
         }

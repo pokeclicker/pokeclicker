@@ -25,32 +25,34 @@ class ShopHandler {
     }
 
     public static resetAmount() {
-        const input = $("input[name='amountOfItems']");
+        const input = $('input[name="amountOfItems"]');
         input.val(1).change();
     }
 
     public static increaseAmount(n: number) {
-        const input = $("input[name='amountOfItems']");
+        const input = $('input[name="amountOfItems"]');
         const newVal = (parseInt(input.val().toString(), 10) || 0) + n;
         input.val(newVal > 1 ? newVal : 1).change();
     }
 
     public static multiplyAmount(n: number) {
-        const input = $("input[name='amountOfItems']");
+        const input = $('input[name="amountOfItems"]');
         const newVal = (parseInt(input.val().toString(), 10) || 0) * n;
         input.val(newVal > 1 ? newVal : 1).change();
     }
 
     public static maxAmount(n: number) {
         const item: Item = this.shopObservable().items()[ShopHandler.selected()];
-        const input = $("input[name='amountOfItems']");
+        const input = $('input[name="amountOfItems"]');
 
         if (!item || !item.isAvailable()) {
             return input.val(0).change();
         }
-        let amt = 1;
-        for (amt; App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency)) && amt <= item.maxAmount && amt <= 1e6; amt++) {}
-        input.val(--amt).change();
+
+        const tooMany = (amt: number) => amt > item.maxAmount || !App.game.wallet.hasAmount(new Amount(item.totalPrice(amt), item.currency));
+        const amt = GameHelper.binarySearch(tooMany, 0, Number.MAX_SAFE_INTEGER);
+
+        input.val(amt).change();
     }
 
     public static calculateCss(i: number): string {

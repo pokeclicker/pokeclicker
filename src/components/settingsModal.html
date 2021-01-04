@@ -7,7 +7,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            
+
             <div class="modal-body p-0">
                 <ul class="nav nav-tabs nav-fill">
                     <li class="nav-item"><a class="nav-link active" href="#settings-display" data-toggle="tab">Display</a></li>
@@ -30,7 +30,10 @@
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('backgroundImage')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('breedingDisplay')}"></tr>
                                 <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('shopButtons')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('eggAnimation')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('hideHatchery')}"></tr>
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('showCurrencyGainedAnimation')}"></tr>
+                                <tr data-bind="template: { name: 'MultipleChoiceSettingTemplate', data: Settings.getSetting('farmDisplay')}"></tr>
                             </tbody>
                         </table>
                     </div>
@@ -38,19 +41,19 @@
                     <div class="tab-pane" id="settings-sound">
                         <div data-bind="template: {name: 'RangeSettingTemplate', data: Settings.getSetting('sound.volume')}"></div>
                         <table class="table table-striped table-hover m-0">
-                            <tbody data-bind="foreach: Object.values(GameConstants.NotificationSound)">
+                            <tbody data-bind="foreach: Object.values(NotificationConstants.NotificationSound)">
                               <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting(`sound.${$data.name}`)}"></tr>
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
 
                     <div class="tab-pane" id="settings-notifications">
                         <table class="table table-striped table-hover m-0">
-                            <tbody data-bind="foreach: Object.values(GameConstants.NotificationSetting)">
+                            <tbody data-bind="foreach: Object.values(NotificationConstants.NotificationSetting)">
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: $data}"></tr>
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
 
                     <div class="tab-pane" id="settings-other">
                         <table class="table table-striped table-hover m-0">
@@ -58,7 +61,7 @@
                                 <tr data-bind="template: { name: 'BooleanSettingTemplate', data: Settings.getSetting('disableAutoDownloadBackupSaveOnUpdate')}"></tr>
                             </tbody>
                         </table>
-                    </div> 
+                    </div>
                 </div>
             </div>
 
