@@ -2,6 +2,10 @@
     <div class="card-header p-0" data-toggle="collapse" href="#eggList">
         <span>Hatchery</span>
     </div>
+    <button class='btn btn-sm btn-primary' style="position: absolute; left: 0px; top: 0px; width: auto; height: 41px;"
+            data-bind='click: function(){ App.game.breeding.fillHatcheryQueue(); }'>
+        Fill Queue
+    </button>
     <button class='btn btn-sm btn-primary' style="position: absolute; right: 0px; top: 0px; width: auto; height: 41px;"
             data-bind='click: function(){ BreedingController.openBreedingModal(); }'>
         List

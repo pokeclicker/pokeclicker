@@ -205,6 +205,17 @@ class Breeding implements Feature {
         return this.multiplier.getBonus('eggStep');
     }
 
+    public fillHatcheryQueue() {
+        let index = 0;
+        while (this.hasFreeQueueSlot() && index < App.game.party.caughtPokemon.length) {
+            const pokemon: PartyPokemon = App.game.party.caughtPokemon[index];
+            if (BreedingController.visible(pokemon)()) {
+                this.addPokemonToHatchery(pokemon);
+            }
+            index++;
+        }
+    }
+
     public addPokemonToHatchery(pokemon: PartyPokemon): boolean {
         // If they have a free eggslot, add the pokemon to the egg now
         if (this.hasFreeEggSlot()) {
