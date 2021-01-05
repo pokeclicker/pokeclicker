@@ -875,27 +875,7 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
 
 //Sea Spirit's Den? Releases Articuno, Zapdos, Moltres roamers.
 
-dungeonList['Pokeball Factory'] = new Dungeon('Pokeball Factory',
-    ['Toxicroak', 'Mightyena', 'Golbat', 'Scraggy', 'Swalot'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Scraggy', 8000000, 100),
-        new DungeonBossPokemon('Houndoom', 8000000, 100),
-        new DungeonBossPokemon('Manectric', 8000000, 100),
-        new DungeonBossPokemon('Liepard', 8000000, 100),
-    ],
-    96500, 230, 100);
-
-dungeonList['Kalos Power Plant'] = new Dungeon('Kalos Power Plant',
-    ['Scraggy', 'Croagunk', 'Golbat', 'Swalot', 'Liepard', 'Mightyena'],
-    [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [
-        new DungeonBossPokemon('Mightyena', 8000000, 100),
-        new DungeonBossPokemon('Houndoom', 8000000, 100),
-    ],
-    96500, 230, 100);
+//Pokeball Factory/Power Plant IF trainers come
 
 dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
     ['Magneton', 'Electrode', 'Litwick', 'Pawniard'],
