@@ -38,16 +38,18 @@ aria-labelledby="FossilReviverModalLabel" aria-hidden="true">
                     </div>
                     <!-- /ko -->
                 </div>
-                <p class="bg-warning my-0" data-bind="visible: !Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length">
-                    you don't have any fossils to revive.
+                <p class="bg-warning my-0" data-bind="visible: !FossilReviver.getAvailableFossils().length">
+                    You don't have any fossils to revive.
                 </p>
 
-                <!-- ko if: Object.keys(GameConstants.FossilToPokemon).filter(f => player.mineInventory().find(i => i.name == f && i.amount())).length -->
-                <ul class="row justify-content-center p-0" data-bind="foreach: Object.keys(GameConstants.FossilToPokemon).map(f => player.mineInventory().find(i => i.name == f)).filter(f => f ? f.amount() : false)">
-                    <li class="eggSlot col-3 col-md-3 pokedexEntry text-nowrap" data-bind="class: state.queue.length < FossilReviver.queueSlots() ? '' : 'disabled'">
-                        <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data.name">fossil</span>
-                        <img src="" width="80px" data-bind="attr:{ src: FossilReviver.getImage($data.name) }">
-                        <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + $data.amount()">amount</span>
+                <!-- ko if: FossilReviver.getAvailableFossils().length -->
+                <ul class="row justify-content-center p-0" data-bind="foreach: FossilReviver.getAvailableFossils()">
+                    <li class="eggSlot col-3 col-md-3 pokedexEntry text-nowrap"
+                        data-bind="css: { 'disabled': FossilReviver.isDisabled(state, $data) }">
+                        <span style="top: 0; border-top-left-radius: 6px; border-top-right-radius: 6px;" data-bind="text: $data">fossil</span>
+                        <img src="" width="80px" data-bind="attr:{ src: FossilReviver.getImage($data) }">
+                        <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
+                        data-bind="text: 'Amount: ' + BagHandler.amount({type: ItemType.underground, id: $data })()">Amount</span>
                         <a class="overlay" href="#revive" data-bind="click: function() { state.addToQueue($data); }"></a>
                     </li>
                 </ul>

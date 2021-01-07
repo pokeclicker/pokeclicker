@@ -151,7 +151,7 @@ class Lab implements Feature {
             // Plate Deconstructor
             new Research(Lab.Research.plate_deconstructor, ResearchType.Machine,
                 'Plate Deconstructor', 'Unlocks the Plate Deconstructor Machine.',
-                2000),
+                2000, {requirements: [new QuestLineRequirement('Mining Expedition')] } ),
 
             new Research(Lab.Research.plate_deconstructor_speed1, ResearchType.Machine,
                 'Plate Deconstructor Speed I', 'Increases plate deconstruction speed by 25%.',
@@ -179,7 +179,7 @@ class Lab implements Feature {
             // Plate Reconstructor
             new Research(Lab.Research.plate_reconstructor, ResearchType.Machine,
                 'Plate Reconstructor', 'Unlocks the Plate Reconstructor Machine.',
-                2000),
+                2000, {requirements: [new QuestLineRequirement('Mining Expedition')] }),
 
             new Research(Lab.Research.plate_reconstructor_speed1, ResearchType.Machine,
                 'Plate Reconstructor Speed I', 'Increases plate reconstruction speed by 25%.',
@@ -331,28 +331,154 @@ class Lab implements Feature {
 
             //#region Fossil Reviver
 
-            /*
-            'fossil_reviver',
-            'fossil_reviver_speed1',
-            'fossil_reviver_speed2',
-            'fossil_reviver_speed3',
-            'fossil_reviver_queue',
-            'fossil_reviver_queue1',
-            'fossil_reviver_queue2',
-            'fossil_reviver_queue3',
-            'fossil_reviver_queue4',
-            'fossil_helix',
-            'fossil_dome',
-            'fossil_old_amber',
-            'fossil_root',
-            'fossil_claw',
-            'fossil_skull',
-            'fossil_armor',
-            'fossil_cover',
-            'fossil_plume',
-            'fossil_jaw',
-            'fossil_sail',
-            */
+            new Research(Lab.Research.fossil_reviver, ResearchType.Machine,
+                'Fossil Reviver', 'Unlocks the Fossil Reviver Machine.',
+                2000,
+                {
+                    requirements: [new QuestLineRequirement('Mining Expedition')],
+                    completeDelegate: () => {
+                        App.game.lab.machines[Lab.Machine.fossil_reviver].amount = 1;
+                    },
+                }),
+
+            // Fossil Speed
+            new Research(Lab.Research.fossil_reviver_speed1, ResearchType.Machine,
+                'Fossil Reviver Speed I', 'Increases revival speed by 25%.',
+                2000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_reviver_speed2, ResearchType.Machine,
+                'Fossil Reviver Speed II', 'Increases revival speed by 50%.',
+                3000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_speed1)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_reviver_speed3, ResearchType.Machine,
+                'Fossil Reviver Speed III', 'Increases revival speed by 75%.',
+                4000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_speed2)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+
+            // Fossil Queue
+            new Research(Lab.Research.fossil_reviver_queue, ResearchType.Machine,
+                'Fossil Reviver Queue', 'Unlocks a queue for fossil revival.',
+                2000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_reviver_queue1, ResearchType.Machine,
+                'Fossil Reviver Queue I', 'Increases revival queue slots to 8.',
+                3000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_reviver_queue2, ResearchType.Machine,
+                'Fossil Reviver Queue II', 'Increases revival queue slots to 16.',
+                4000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue1)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_reviver_queue3, ResearchType.Machine,
+                'Fossil Reviver Queue I', 'Increases revival queue slots to 32.',
+                5000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue2)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_reviver_queue4, ResearchType.Machine,
+                'Fossil Reviver Queue II', 'Increases revival queue slots to 64.',
+                6000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue3)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+
+            // Fossil Research
+            new Research(Lab.Research.fossil_helix, ResearchType.Fossil,
+                'Fossil Reviver - Helix', 'Unlocks the Helix fossil for revival.',
+                2000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_dome, ResearchType.Fossil,
+                'Fossil Reviver - Dome', 'Unlocks the Dome fossil for revival.',
+                2000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_old_amber, ResearchType.Fossil,
+                'Fossil Reviver - Old Amber', 'Unlocks the Old Amber for revival.',
+                2000,
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_root, ResearchType.Fossil,
+                'Fossil Reviver - Root', 'Unlocks the Root fossil for revival.',
+                3000,
+                {
+                    requirements: [new RegionRequirement(GameConstants.Region.hoenn), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_claw, ResearchType.Fossil,
+                'Fossil Reviver - Claw', 'Unlocks the Claw fossil for revival.',
+                3000,
+                {
+                    requirements: [new RegionRequirement(GameConstants.Region.hoenn), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_skull, ResearchType.Fossil,
+                'Fossil Reviver - Skull', 'Unlocks the Skull fossil for revival.',
+                4000,
+                {
+                    requirements: [new RegionRequirement(GameConstants.Region.sinnoh), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_armor, ResearchType.Fossil,
+                'Fossil Reviver - Armor', 'Unlocks the Armor fossil for revival.',
+                4000,
+                {
+                    requirements: [new RegionRequirement(GameConstants.Region.sinnoh), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_cover, ResearchType.Fossil,
+                'Fossil Reviver - Cover', 'Unlocks the Cover fossil for revival.',
+                5000,
+                {
+                    requirements: [new RegionRequirement(GameConstants.Region.unova), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_plume, ResearchType.Fossil,
+                'Fossil Reviver - Plume', 'Unlocks the Plume fossil for revival.',
+                5000,
+                {
+                    requirements: [new RegionRequirement(GameConstants.Region.unova), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_jaw, ResearchType.Fossil,
+                'Fossil Reviver - Jaw', 'Unlocks the Jaw fossil for revival.',
+                5000,
+                {
+                    requirements: [new RegionRequirement(GameConstants.Region.kalos), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
+            new Research(Lab.Research.fossil_sail, ResearchType.Fossil,
+                'Fossil Reviver - Sail', 'Unlocks the Sail fossil for revival.',
+                5000,
+                {
+                    requirements: [new RegionRequirement(GameConstants.Region.kalos), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+                }),
 
             //#endregion
 
@@ -932,7 +1058,6 @@ namespace Lab {
        'incubator_slot3',
        'incubator_slot4',
         // Fossil Reviver
-        /*
         'fossil_reviver',
         'fossil_reviver_speed1',
         'fossil_reviver_speed2',
@@ -953,7 +1078,6 @@ namespace Lab {
         'fossil_plume',
         'fossil_jaw',
         'fossil_sail',
-        */
         // TODO: HLXII - Add VIII fossils
         // Generator
         'generator',

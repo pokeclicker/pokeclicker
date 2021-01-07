@@ -3,4 +3,5 @@ enum ResearchType {
     'Type_Booster',
     'Machine',
     'Blueprint',
+    'Fossil',
 }
