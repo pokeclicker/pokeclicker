@@ -174,7 +174,7 @@ class GeneratorState extends MachineState {
         });
     }
 
-    update(delta: number): MachineUpdateInfo {
+    update(delta: number, _multiplier: Multiplier): MachineUpdateInfo {
         const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {

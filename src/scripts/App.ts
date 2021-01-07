@@ -39,7 +39,7 @@ class App {
                 new SpecialEvents(),
                 new Discord(),
                 new AchievementTracker(),
-                new Lab(),
+                new Lab(multiplier),
                 multiplier
             );
 

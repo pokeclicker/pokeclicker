@@ -40,7 +40,7 @@ class Lab implements Feature {
         4: {x: 9, y: 10},
     };
 
-    constructor() {
+    constructor(private multiplier: Multiplier) {
         this.researchList = this.defaults.researchList;
         this.currentResearch = ko.observableArray(this.defaults.currentResearch);
 
@@ -77,6 +77,8 @@ class Lab implements Feature {
 
         this.queuedResetEffects = 0;
 
+        this.multiplier.addBonus('machine', () => this.machineEffects['Machine Speed']());
+        this.multiplier.addBonus('eggStep', () => this.machineEffects['Egg Step Gain']());
     }
 
     initialize() {
@@ -703,7 +705,7 @@ class Lab implements Feature {
 
         // Update Machines
         this.placedMachines().forEach(placedMachine => {
-            const updateInfo = placedMachine.state.update(delta);
+            const updateInfo = placedMachine.state.update(delta, this.multiplier);
             if (updateInfo.resetEffects) {
                 this.queuedResetEffects = this.resetTickAmount;
             }

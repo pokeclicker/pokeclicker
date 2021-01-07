@@ -59,7 +59,7 @@ class FossilReviverState extends MachineState {
         });
     }
 
-    update(delta: number): MachineUpdateInfo {
+    update(delta: number, multiplier: Multiplier): MachineUpdateInfo {
         const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
@@ -83,7 +83,7 @@ class FossilReviverState extends MachineState {
             }
             case MachineStage.active: {
                 // TODO: HLXII - Handle Research Upgrades (?)
-                this.progress += delta;
+                this.progress += delta * multiplier.getBonus('machine');
                 // Checking Completion
                 if (this.progress >= this.progressAmount()) {
                     // Reviving Fossil

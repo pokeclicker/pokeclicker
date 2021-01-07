@@ -72,7 +72,7 @@ class PlateDeconstructorState extends PlateMachineState {
         });
     }
 
-    update(delta: number): MachineUpdateInfo {
+    update(delta: number, multiplier: Multiplier): MachineUpdateInfo {
         const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
@@ -93,7 +93,7 @@ class PlateDeconstructorState extends PlateMachineState {
                 break;
             }
             case MachineStage.active: {
-                this.progress += delta * PlateDeconstructor.progressSpeed();
+                this.progress += delta * PlateDeconstructor.progressSpeed() * multiplier.getBonus('machine');
                 // Checking deconstruction completion
                 if (this.progress >= this.progressAmount()) {
                     // Gain shards

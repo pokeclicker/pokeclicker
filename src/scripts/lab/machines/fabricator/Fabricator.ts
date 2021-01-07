@@ -204,7 +204,7 @@ class FabricatorState extends MachineState {
         });
     }
 
-    update(delta: number): MachineUpdateInfo {
+    update(delta: number, multiplier: Multiplier): MachineUpdateInfo {
         const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
@@ -228,7 +228,7 @@ class FabricatorState extends MachineState {
                 break;
             }
             case MachineStage.active: {
-                this.progress += delta * Fabricator.progressSpeed();
+                this.progress += delta * Fabricator.progressSpeed() * multiplier.getBonus('machine');
                 // Checking blueprint completion
                 if (this.progress >= this.progressAmount()) {
                     // Gain Blueprint

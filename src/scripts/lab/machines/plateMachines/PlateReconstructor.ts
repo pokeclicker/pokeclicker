@@ -72,7 +72,7 @@ class PlateReconstructorState extends PlateMachineState {
         });
     }
 
-    update(delta: number): MachineUpdateInfo {
+    update(delta: number, multiplier: Multiplier): MachineUpdateInfo {
         const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
@@ -93,7 +93,7 @@ class PlateReconstructorState extends PlateMachineState {
                 break;
             }
             case MachineStage.active: {
-                this.progress += delta * PlateReconstructor.progressSpeed();
+                this.progress += delta * PlateReconstructor.progressSpeed() * multiplier.getBonus('machine');
                 // Checking Plate completion
                 if (this.progress >= this.progressAmount()) {
                     // Gain plate
