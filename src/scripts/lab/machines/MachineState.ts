@@ -50,7 +50,7 @@ abstract class MachineState implements Saveable {
      * Handles updating the machine state
      * @param delta The seconds passed
      */
-    abstract update(delta: number);
+    abstract update(delta: number): MachineUpdateInfo;
 
     /**
      * Handler for activating the machine

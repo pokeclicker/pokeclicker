@@ -330,6 +330,7 @@ class Update implements Saveable {
 
         '0.8.0': ({ playerData, saveData }) => {
             // TODO: HLXII - Move this to the version it'll be released in
+            // Switch to new PartyLocation system
             for (const pokemon of saveData.party.caughtPokemon) {
                 if (pokemon.breeding) {
                     pokemon.location = PartyLocation.Hatchery;

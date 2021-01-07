@@ -204,15 +204,16 @@ class FabricatorState extends MachineState {
         });
     }
 
-    update(delta: number) {
+    update(delta: number): MachineUpdateInfo {
+        const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
-                return;
+                break;
             }
             case MachineStage.idle: {
                 // Checking queue
                 if (this.queue <= 0) {
-                    return;
+                    break;
                 }
                 // Checking if blueprint can be fabricated
                 if (Fabricator.blueprints[this.blueprint].canFabricate) {
@@ -224,7 +225,7 @@ class FabricatorState extends MachineState {
                     this.progress = 0;
                     this.queue -= 1;
                 }
-                return;
+                break;
             }
             case MachineStage.active: {
                 this.progress += delta * Fabricator.progressSpeed();
@@ -244,9 +245,10 @@ class FabricatorState extends MachineState {
                     }
                     this.progress = 0;
                 }
-                return;
+                break;
             }
         }
+        return info;
     }
 
     handleActivate() {

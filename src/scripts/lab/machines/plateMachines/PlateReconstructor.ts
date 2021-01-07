@@ -72,15 +72,16 @@ class PlateReconstructorState extends PlateMachineState {
         });
     }
 
-    update(delta: number) {
+    update(delta: number): MachineUpdateInfo {
+        const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
-                return;
+                break;
             }
             case MachineStage.idle: {
                 // Checking queue
                 if (this.queue <= 0) {
-                    return;
+                    break;
                 }
                 // Checking if enough shards to begin reconstruction
                 if (App.game.shards.shardWallet[this.plateType]() >= PlateReconstructor.shardCost()) {
@@ -89,7 +90,7 @@ class PlateReconstructorState extends PlateMachineState {
                     this.progress = 0;
                     this.queue -= 1;
                 }
-                return;
+                break;
             }
             case MachineStage.active: {
                 this.progress += delta * PlateReconstructor.progressSpeed();
@@ -107,9 +108,10 @@ class PlateReconstructorState extends PlateMachineState {
                     }
                     this.progress = 0;
                 }
-                return;
+                break;
             }
         }
+        return info;
     }
 
     handleDeactivate() {

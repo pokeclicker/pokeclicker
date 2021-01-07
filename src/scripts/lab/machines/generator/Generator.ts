@@ -163,6 +163,9 @@ class GeneratorState extends MachineState {
         });
 
         this.effect = ko.pureComputed(() => {
+            if (!this.active) {
+                return 1;
+            }
             let multiplier = Generator.baseEffect();
             if (this.stage === MachineStage.active) {
                 multiplier *= 1.5;
@@ -171,26 +174,30 @@ class GeneratorState extends MachineState {
         });
     }
 
-    update(delta: number) {
+    update(delta: number): MachineUpdateInfo {
+        const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
-                return;
+                break;
             }
             case MachineStage.idle: {
                 if (this.fuel) {
                     this.stage = MachineStage.active;
+                    info.resetEffects = true;
                 }
-                return;
+                break;
             }
             case MachineStage.active: {
                 this.fuel = Math.max(this.fuel - delta, 0);
                 // Run out of fuel
                 if (this.fuel == 0) {
                     this.stage = MachineStage.idle;
+                    info.resetEffects = true;
                 }
-                return;
+                break;
             }
         }
+        return info;
     }
 
     /**
@@ -229,9 +236,13 @@ class GeneratorState extends MachineState {
         } else {
             this.stage = MachineStage.idle;
         }
+        // Handle updating multipliers
+        App.game.lab.resetEffects();
     }
     handleDeactivate(): void {
         this.stage = MachineStage.disabled;
+        // Handle updating multipliers
+        App.game.lab.resetEffects();
     }
 
     toJSON(): Record<string, any> {

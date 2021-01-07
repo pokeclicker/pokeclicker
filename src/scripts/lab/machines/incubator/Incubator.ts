@@ -156,6 +156,9 @@ class IncubatorState extends MachineState {
 
     private _fuel: KnockoutObservable<number>;
 
+    public effect: KnockoutComputed<number>;
+    public queueSlots: KnockoutComputed<number>;
+
     constructor() {
         super();
 
@@ -169,39 +172,59 @@ class IncubatorState extends MachineState {
                 tooltip.push('Disabled');
             }
             if (App.game.lab.isResearched(Lab.Research.incubator_fuel)) {
+                if (this.stage === MachineStage.active) {
+                    tooltip.push(`Increasing step gain by ${Incubator.stepGain().toFixed(2)}x.`);
+                }
                 if (this.fuel <= 0) {
                     tooltip.push('No fuel remaining');
                 } else {
-                    if (this.active) {
-                        tooltip.push(`Increasing step gain by ${Incubator.stepGain().toFixed(2)}x.`);
-                    }
                     tooltip.push(`${this.fuel.toFixed(1)} fuel remaining.`);
                 }
             }
             return tooltip.join('<br>');
         });
+
+        this.effect = ko.pureComputed(() => {
+            if (this.stage === MachineStage.active) {
+                return Incubator.stepGain();
+            } else {
+                return 1;
+            }
+        });
+
+        this.queueSlots = ko.pureComputed(() => {
+            if (this.active) {
+                return Incubator.queueSlotGain();
+            } else {
+                return 0;
+            }
+        });
     }
 
-    update(delta: number) {
+    update(delta: number): MachineUpdateInfo {
+        const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
-                return;
+                break;
             }
             case MachineStage.idle: {
                 if (this.fuel) {
                     this.stage = MachineStage.active;
+                    info.resetEffects = true;
                 }
-                return;
+                break;
             }
             case MachineStage.active: {
                 this.fuel = Math.max(this.fuel - delta, 0);
                 // Run out of fuel
                 if (this.fuel == 0) {
                     this.stage = MachineStage.idle;
+                    info.resetEffects = true;
                 }
-                return;
+                break;
             }
         }
+        return info;
     }
 
     /**
@@ -240,9 +263,13 @@ class IncubatorState extends MachineState {
         } else {
             this.stage = MachineStage.idle;
         }
+        // Handle updating multipliers
+        App.game.lab.resetEffects();
     }
     handleDeactivate(): void {
         this.stage = MachineStage.disabled;
+        // Handle updating multipliers
+        App.game.lab.resetEffects();
     }
 
     toJSON(): Record<string, any> {

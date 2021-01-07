@@ -72,15 +72,16 @@ class PlateDeconstructorState extends PlateMachineState {
         });
     }
 
-    update(delta: number) {
+    update(delta: number): MachineUpdateInfo {
+        const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
-                return;
+                break;
             }
             case MachineStage.idle: {
                 // Checking queue
                 if (this.queue <= 0) {
-                    return;
+                    break;
                 }
                 // Checking if there are plates to deconstruct
                 if (PlateDeconstructor.getPlateAmount(this.plateType)() > 0) {
@@ -89,7 +90,7 @@ class PlateDeconstructorState extends PlateMachineState {
                     this.progress = 0;
                     this.queue -= 1;
                 }
-                return;
+                break;
             }
             case MachineStage.active: {
                 this.progress += delta * PlateDeconstructor.progressSpeed();
@@ -106,9 +107,10 @@ class PlateDeconstructorState extends PlateMachineState {
                     }
                     this.progress = 0;
                 }
-                return;
+                break;
             }
         }
+        return info;
     }
 
     handleDeactivate() {

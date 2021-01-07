@@ -59,26 +59,27 @@ class FossilReviverState extends MachineState {
         });
     }
 
-    update(delta: number) {
+    update(delta: number): MachineUpdateInfo {
+        const info: MachineUpdateInfo = {};
         switch (this.stage) {
             case MachineStage.disabled: {
-                return;
+                break;
             }
             case MachineStage.idle: {
                 // Fossil added
                 if (this.fossil) {
                     this.stage = MachineStage.active;
                     this.progress = 0;
-                    return;
+                    break;
                 }
                 // Reviving fossil from queue
                 if (this.queue.length > 0) {
                     this.stage = MachineStage.active;
                     this.fossil = this._queue.shift();
                     this.progress = 0;
-                    return;
+                    break;
                 }
-                return;
+                break;
             }
             case MachineStage.active: {
                 // TODO: HLXII - Handle Research Upgrades (?)
@@ -99,9 +100,10 @@ class FossilReviverState extends MachineState {
                     }
                     this.progress = 0;
                 }
-                return;
+                break;
             }
         }
+        return info;
     }
 
     handleActivate(): void {

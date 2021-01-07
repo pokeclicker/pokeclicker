@@ -8,6 +8,11 @@ class Lab implements Feature {
     machines: Machine[];
     placedMachines: KnockoutObservableArray<PlacedMachine>;
 
+    machineEffects: Record<string,KnockoutObservable<number>>;
+
+    queuedResetEffects: number;
+    readonly resetTickAmount = 2;
+
     defaults = {
         researchList: [],
         currentResearch: [],
@@ -64,6 +69,13 @@ class Lab implements Feature {
 
         this.machines = this.defaults.machines;
         this.placedMachines = ko.observableArray(this.defaults.placedMachines);
+
+        this.machineEffects = {};
+        this.machineEffects['Machine Speed'] = ko.observable(1);
+        this.machineEffects['Egg Step Gain'] = ko.observable(1);
+        this.machineEffects['Egg Queue Slots'] = ko.observable(0);
+
+        this.queuedResetEffects = 0;
 
     }
 
@@ -681,9 +693,20 @@ class Lab implements Feature {
             }
         });
 
+        // Handling queued multiplier reset
+        if (this.queuedResetEffects > 0) {
+            this.queuedResetEffects -= 1;
+            if (!this.queuedResetEffects) {
+                this.resetEffects();
+            }
+        }
+
         // Update Machines
         this.placedMachines().forEach(placedMachine => {
-            placedMachine.state.update(delta);
+            const updateInfo = placedMachine.state.update(delta);
+            if (updateInfo.resetEffects) {
+                this.queuedResetEffects = this.resetTickAmount;
+            }
         });
 
         // Handle unlocked Research
@@ -708,6 +731,46 @@ class Lab implements Feature {
 
     canAccess(): boolean {
         return App.game.keyItems.hasKeyItem(KeyItems.KeyItem.Laboratory_key);
+    }
+
+    /**
+     * Handles caching the current effects from the placed machines in the Lab
+     */
+    resetEffects(): void {
+        // Setting up Queue Slots
+        const originalSlots = this.machineEffects['Egg Queue Slots']();
+        let newSlots = 0;
+
+        // Resetting values
+        this.machineEffects['Machine Speed'](1);
+        this.machineEffects['Egg Step Gain'](1);
+        // Check for relevent machines placed
+        this.placedMachines().forEach(machine => {
+            // Handle Generators
+            if (machine.machine.id === Lab.Machine.generator) {
+                const state: GeneratorState = (machine.state as GeneratorState);
+                const currentMultiplier = this.machineEffects['Machine Speed']();
+                this.machineEffects['Machine Speed'](currentMultiplier * state.effect());
+                return;
+            }
+            // Handle Incubators
+            if (machine.machine.id === Lab.Machine.incubator) {
+                const state: IncubatorState = (machine.state as IncubatorState);
+                const currentMultiplier = this.machineEffects['Egg Step Gain']();
+                this.machineEffects['Egg Step Gain'](currentMultiplier * state.effect());
+                newSlots += state.queueSlots();
+            }
+        });
+
+        // Handling queue slots
+        if (newSlots < originalSlots) {
+            const currentSlotNum = App.game.breeding.queueSlots();
+            // Removing extra pokemon from queue if necessary
+            for (let i = 0; i < originalSlots - newSlots; i++) {
+                App.game.breeding.removeFromQueue(currentSlotNum - 1 - i);
+            }
+        }
+        this.machineEffects['Egg Queue Slots'](newSlots);
     }
 
     beginResearch(research: Research) {

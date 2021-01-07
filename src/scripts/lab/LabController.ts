@@ -146,8 +146,6 @@ class LabController extends PartyListController {
     }
 
     public static updateHover(x: number, y:number) {
-        console.log(`Update hover on ${x}, ${y}`);
-
         // Show machine hover
         LabController.cursorOnGrid(true);
 
@@ -157,8 +155,6 @@ class LabController extends PartyListController {
     }
 
     public static clearHover() {
-        console.log('Clear hover');
-
         // Hide machine hover
         LabController.cursorOnGrid(false);
     }
@@ -175,8 +171,6 @@ class LabController extends PartyListController {
     }
 
     public static placeMachine(x: number, y: number) {
-        console.log(`Attempt place machine on ${x}, ${y}`);
-
         // Sanity checks
         const machine = LabController.selectedMachine();
         if (!machine) {
@@ -202,8 +196,6 @@ class LabController extends PartyListController {
             return;
         }
 
-        console.log(`Placing machine ${machine} on ${x}, ${y}`);
-
         // Adding machine
         App.game.lab.placedMachines.push(new PlacedMachine(machine, x, y));
         machine.amount -= 1;
@@ -213,6 +205,32 @@ class LabController extends PartyListController {
             LabController.selectedMachine(undefined);
         }
     }
+
+    public static additionalInfoTooltip: KnockoutComputed<string> = ko.pureComputed(() => {
+        const tooltip = [];
+
+        // Multipliers
+        for (const [key, value] of Object.entries(App.game.lab.machineEffects)) {
+            if (typeof value === 'undefined') {
+                continue;
+            }
+
+            if (key == 'Egg Queue Slots') {
+                if (value() >= 1) {
+                    tooltip.push(`${key}: ${value().toFixed(0)}`);
+                }
+            } else if (value() !== 1) {
+                tooltip.push(`${key}: ${value().toFixed(2)}x`);
+            }
+        }
+
+        // Adding header if necessary
+        if (tooltip.length) {
+            tooltip.unshift('<u>Effects:</u>');
+        }
+
+        return tooltip.join('<br>');
+    });
 
     public static handleMachineClick(placedMachine: PlacedMachine) {
         if (placedMachine.machine.hasModal()) {

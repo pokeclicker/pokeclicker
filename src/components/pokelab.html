@@ -129,6 +129,14 @@ style="cursor:default" tabindex="-1">
             </div>
 
             <div class="modal-footer">
+                <button type="button" class="btn mr-auto"
+                    data-bind="visible: LabController.additionalInfoTooltip().length !== 0,
+                    tooltip: {
+                        title: LabController.additionalInfoTooltip(),
+                        trigger: 'hover',
+                        placement:'top',
+                        html: true,
+                    }">ⓘ</button>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>
