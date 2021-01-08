@@ -233,14 +233,14 @@ class Farming implements Feature {
             [
                 'This Berry is said to have grown plentiful in the tropics of the past. It boasts an intensely hot spiciness.',
                 'It has a tendency to overtake nearby plants.',
-            ], undefined, ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar']);
+            ], undefined, ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig']);
         this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [490, 3600, 10800, 21600, 43200],
             22, 0.05, 1300, 15,
             [0, 15, 0, 10, 0], BerryColor.Blue,
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
                 'This Berry promotes the fruiting of nearby Berry plants.',
-            ], new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup']);
+            ], new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott']);
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [10, 180, 900, 1800, 3600],
             2, 0.05, 250, 1,
             [0, 0, 15, 0, 10], BerryColor.Yellow,
@@ -254,7 +254,7 @@ class Farming implements Feature {
             [
                 'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
                 'It has a tendency to expand into nearby plots.',
-            ], undefined, ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig']);
+            ], undefined, ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy']);
         this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [3600, 14400, 28800, 43200, 86400],
             25, 0.05, 1500, 15,
             [0, 10, 0, 0, 15], BerryColor.Blue,
