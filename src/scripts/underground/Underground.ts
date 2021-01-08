@@ -111,7 +111,8 @@ class Underground implements Feature {
     private static mineSquare(amount: number, i: number, j: number): string {
         if (Mine.rewardGrid[i][j] != 0 && Mine.grid[i][j]() === 0) {
             Mine.rewardGrid[i][j].revealed = 1;
-            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y}" style="background-image: url('assets/images/underground/${Mine.rewardGrid[i][j].value}.png');"></div></div>`;
+            const image = Underground.getMineItemById(Mine.rewardGrid[i][j].value).underGroundImage;
+            return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'><div class="mineReward size-${Mine.rewardGrid[i][j].sizeX}-${Mine.rewardGrid[i][j].sizeY} pos-${Mine.rewardGrid[i][j].x}-${Mine.rewardGrid[i][j].y}" style="background-image: url('${image}');"></div></div>`;
         } else {
             return `<div data-bind='css: Underground.calculateCssClass(${i},${j})' data-i='${i}' data-j='${j}'></div>`;
         }

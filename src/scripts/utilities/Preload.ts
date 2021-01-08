@@ -151,7 +151,7 @@ class Preload {
                     console.warn('Failed to load image for Underground item:', item.name);
                     resolve();
                 };
-                img.src = `assets/images/underground/${item.id}.png`;
+                img.src = item.underGroundImage;
             }));
         });
         return Promise.all(p);
