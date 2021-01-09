@@ -95,774 +95,878 @@ class Lab implements Feature {
          * We store research save data by the enum string value, which won't change.
          */
 
-        this.researchList = [
-
-            //#region Research
-
-            // Research Slots
-            new Research(Lab.Research.research_slot1, ResearchType.Research_Slot,
-                'Research Slot I', 'Unlocks a second Research Slot.',
-                10000),
-            new Research(Lab.Research.research_slot2, ResearchType.Research_Slot,
-                'Research Slot II', 'Unlocks a third Research Slot.',
-                30000, { requirements: [new ResearchedRequirement(Lab.Research.research_slot1)] }),
-
-            // Research Slot Workers
-            new Research(Lab.Research.research_workers1, ResearchType.Research_Slot,
-                'Research Workers I', 'Increases max research workers to 8.',
-                1000),
-            new Research(Lab.Research.research_workers2, ResearchType.Research_Slot,
-                'Research Workers II', 'Increases max research workers to 12.',
-                4000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers1)] }),
-            new Research(Lab.Research.research_workers3, ResearchType.Research_Slot,
-                'Research Workers III', 'Increases max research workers to 16.',
-                16000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers2)] }),
-            new Research(Lab.Research.research_workers4, ResearchType.Research_Slot,
-                'Research Workers IV', 'Increases max research workers to 20.',
-                64000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers3)] }),
-
-            //#endregion
-
-            //#region Machines
-
-            // Fabricator
-            new Research(Lab.Research.fabricator, ResearchType.Machine,
-                'Fabricator', 'Unlocks the Fabricator machine.',
-                1000, {
-                    completeDelegate: () => {
-                        App.game.lab.machines[Lab.Machine.fabricator].amount = 1;
-                    },
-                }),
-            new Research(Lab.Research.fabricator_speed1, ResearchType.Machine,
-                'Fabricator Speed I', 'Increases fabrication speed by 25%.',
-                5000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator)] }),
-            new Research(Lab.Research.fabricator_speed2, ResearchType.Machine,
-                'Fabricator Speed II', 'Increases fabrication speed by 50%.',
-                15000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed1)] }),
-            new Research(Lab.Research.fabricator_speed3, ResearchType.Machine,
-                'Fabricator Speed III', 'Increases fabrication speed by 75%.',
-                45000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed2)] }),
-            new Research(Lab.Research.fabricator_speed4, ResearchType.Machine,
-                'Fabricator Speed IV', 'Increases fabrication speed by 100%.',
-                135000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed3)] }),
-
-            // Plate Deconstructor
-            new Research(Lab.Research.plate_deconstructor, ResearchType.Machine,
-                'Plate Deconstructor', 'Unlocks the Plate Deconstructor Machine.',
-                2000, {requirements: [new QuestLineRequirement('Mining Expedition')] } ),
-
-            new Research(Lab.Research.plate_deconstructor_speed1, ResearchType.Machine,
-                'Plate Deconstructor Speed I', 'Increases plate deconstruction speed by 25%.',
-                3000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor)] }),
-            new Research(Lab.Research.plate_deconstructor_speed2, ResearchType.Machine,
-                'Plate Deconstructor Speed II', 'Increases plate deconstruction speed by 50%.',
-                9000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed1)] }),
-            new Research(Lab.Research.plate_deconstructor_speed3, ResearchType.Machine,
-                'Plate Deconstructor Speed III', 'Increases plate deconstruction speed by 75%.',
-                27000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed2)] }),
-            new Research(Lab.Research.plate_deconstructor_speed4, ResearchType.Machine,
-                'Plate Deconstructor Speed IV', 'Increases plate deconstruction speed by 100%.',
-                81000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed3)] }),
-
-            new Research(Lab.Research.plate_deconstructor_eff1, ResearchType.Machine,
-                'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 25%.',
-                4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor)] }),
-            new Research(Lab.Research.plate_deconstructor_eff2, ResearchType.Machine,
-                'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 50%.',
-                12000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_eff1)] }),
-            new Research(Lab.Research.plate_deconstructor_eff3, ResearchType.Machine,
-                'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 75%.',
-                36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_eff2)] }),
-
-            // Plate Reconstructor
-            new Research(Lab.Research.plate_reconstructor, ResearchType.Machine,
-                'Plate Reconstructor', 'Unlocks the Plate Reconstructor Machine.',
-                2000, {requirements: [new QuestLineRequirement('Mining Expedition')] }),
-
-            new Research(Lab.Research.plate_reconstructor_speed1, ResearchType.Machine,
-                'Plate Reconstructor Speed I', 'Increases plate reconstruction speed by 25%.',
-                3000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor)] }),
-            new Research(Lab.Research.plate_reconstructor_speed2, ResearchType.Machine,
-                'Plate Reconstructor Speed II', 'Increases plate reconstruction speed by 50%.',
-                9000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed1)] }),
-            new Research(Lab.Research.plate_reconstructor_speed3, ResearchType.Machine,
-                'Plate Reconstructor Speed III', 'Increases plate reconstruction speed by 75%.',
-                27000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed2)] }),
-            new Research(Lab.Research.plate_reconstructor_speed4, ResearchType.Machine,
-                'Plate Reconstructor Speed IV', 'Increases plate reconstruction speed by 100%.',
-                81000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed3)] }),
-
-            new Research(Lab.Research.plate_reconstructor_eff1, ResearchType.Machine,
-                'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 12.5%.',
-                4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor)] }),
-            new Research(Lab.Research.plate_reconstructor_eff2, ResearchType.Machine,
-                'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 25%.',
-                12000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff1)] }),
-            new Research(Lab.Research.plate_reconstructor_eff3, ResearchType.Machine,
-                'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 50%.',
-                36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff2)] }),
-
-            //#region Incubator
-
-            new Research(Lab.Research.incubator, ResearchType.Machine,
-                'Incubator', 'Unlocks the Incubator Machine.',
-                9000),
-
-            new Research(Lab.Research.incubator_fuel, ResearchType.Machine,
-                'Incubator Fuel', 'Upgrades Incubators to allow for fuel.',
-                15000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new ResearchWithCost(Lab.Research.incubator_fuel_flame_plate, ResearchType.Machine,
-                'Incubator Fuel - Flame Plate', 'Configures Incubators to use Flame Plates for fuel.',
-                20000, [{item: {type: ItemType.underground, id: 'Flame Plate'}, amount: 10}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new ResearchWithCost(Lab.Research.incubator_fuel_fire_stone, ResearchType.Machine,
-                'Incubator Fuel - Fire Stone', 'Configures Incubators to use Fire Stones for fuel.',
-                20000, [{item: {type: ItemType.item, id: 'Fire_stone'}, amount: 10}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new ResearchWithCost(Lab.Research.incubator_fuel_chople, ResearchType.Machine,
-                'Incubator Fuel - Chople Berry', 'Configures Incubators to use Chople Berries for fuel.',
-                20000, [{item: {type: ItemType.berry, id: BerryType.Chople}, amount: 10}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new ResearchWithCost(Lab.Research.incubator_fuel_magmarizer, ResearchType.Machine,
-                'Incubator Fuel - Magmarizer', 'Configures Incubators to use Magmarizer for fuel.',
-                20000, [{item: {type: ItemType.item, id: 'Magmarizer'}, amount: 10}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-
-            new Research(Lab.Research.incubator_power1, ResearchType.Machine,
-                'Incubator Power I', 'Increases incubator effect to 1.02x.',
-                10000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)] }),
-            new Research(Lab.Research.incubator_power2, ResearchType.Machine,
-                'Incubator Power II', 'Increases incubator effect to 1.03x.',
-                30000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_power1)] }),
-            new Research(Lab.Research.incubator_power3, ResearchType.Machine,
-                'Incubator Power III', 'Increases incubator effect to 1.05x.',
-                90000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_power2)] }),
-
-            new Research(Lab.Research.incubator_fuel_eff1, ResearchType.Machine,
-                'Incubator Efficiency I', 'Increases Incubator fuel efficiency by 25%.',
-                10000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new Research(Lab.Research.incubator_fuel_eff2, ResearchType.Machine,
-                'Incubator Efficiency II', 'Increases Incubator fuel efficiency by 50%.',
-                30000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_eff2)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new Research(Lab.Research.incubator_fuel_eff3, ResearchType.Machine,
-                'Incubator Efficiency III', 'Increases Incubator fuel efficiency by 75%.',
-                90000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_eff3)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-
-            new Research(Lab.Research.incubator_fuel_cap1, ResearchType.Machine,
-                'Incubator Fuel Capacity I', 'Increases Incubator fuel capacity to 5000.',
-                4000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new Research(Lab.Research.incubator_fuel_cap2, ResearchType.Machine,
-                'Incubator Fuel Capacity II', 'Increases Incubator fuel capacity to 10000.',
-                8000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap1)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new Research(Lab.Research.incubator_fuel_cap3, ResearchType.Machine,
-                'Incubator Fuel Capacity III', 'Increases Incubator fuel capacity to 50000.',
-                16000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap2)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new Research(Lab.Research.incubator_fuel_cap4, ResearchType.Machine,
-                'Incubator Fuel Capacity IV', 'Increases Incubator fuel capacity to 100000.',
-                32000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap3)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new Research(Lab.Research.incubator_fuel_cap5, ResearchType.Machine,
-                'Incubator Fuel Capacity V', 'Increases Incubator fuel capacity to 1000000.',
-                64000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap4)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-
-            new Research(Lab.Research.incubator_slot1, ResearchType.Machine,
-                'Incubator Queue Slot I', 'Increases the number of queue slots to 2.',
-                10000, { requirements: [new ResearchedRequirement(Lab.Research.incubator)] }),
-            new Research(Lab.Research.incubator_slot2, ResearchType.Machine,
-                'Incubator Queue Slot II', 'Increases the number of queue slots to 3.',
-                50000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_slot1)] }),
-            new Research(Lab.Research.incubator_slot3, ResearchType.Machine,
-                'Incubator Queue Slot III', 'Increases the number of queue slots to 4.',
-                100000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_slot2)] }),
-            new Research(Lab.Research.incubator_slot4, ResearchType.Machine,
-                'Incubator Queue Slot IV', 'Increases the number of queue slots to 5.',
-                200000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_slot3)] }),
-
-            //#endregion
-
-            //#region Fossil Reviver
-
-            new Research(Lab.Research.fossil_reviver, ResearchType.Machine,
-                'Fossil Reviver', 'Unlocks the Fossil Reviver Machine.',
-                2000,
-                {
-                    requirements: [new QuestLineRequirement('Mining Expedition')],
-                    completeDelegate: () => {
-                        App.game.lab.machines[Lab.Machine.fossil_reviver].amount = 1;
-                    },
-                }),
-
-            // Fossil Speed
-            new Research(Lab.Research.fossil_reviver_speed1, ResearchType.Machine,
-                'Fossil Reviver Speed I', 'Increases revival speed by 25%.',
-                2000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_reviver_speed2, ResearchType.Machine,
-                'Fossil Reviver Speed II', 'Increases revival speed by 50%.',
-                3000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_speed1)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_reviver_speed3, ResearchType.Machine,
-                'Fossil Reviver Speed III', 'Increases revival speed by 75%.',
-                4000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_speed2)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-
-            // Fossil Queue
-            new Research(Lab.Research.fossil_reviver_queue, ResearchType.Machine,
-                'Fossil Reviver Queue', 'Unlocks a queue for fossil revival.',
-                2000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_reviver_queue1, ResearchType.Machine,
-                'Fossil Reviver Queue I', 'Increases revival queue slots to 8.',
-                3000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_reviver_queue2, ResearchType.Machine,
-                'Fossil Reviver Queue II', 'Increases revival queue slots to 16.',
-                4000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue1)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_reviver_queue3, ResearchType.Machine,
-                'Fossil Reviver Queue I', 'Increases revival queue slots to 32.',
-                5000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue2)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_reviver_queue4, ResearchType.Machine,
-                'Fossil Reviver Queue II', 'Increases revival queue slots to 64.',
-                6000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue3)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-
-            // Fossil Research
-            new Research(Lab.Research.fossil_helix, ResearchType.Fossil,
-                'Fossil Reviver - Helix', 'Unlocks the Helix fossil for revival.',
-                2000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_dome, ResearchType.Fossil,
-                'Fossil Reviver - Dome', 'Unlocks the Dome fossil for revival.',
-                2000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_old_amber, ResearchType.Fossil,
-                'Fossil Reviver - Old Amber', 'Unlocks the Old Amber for revival.',
-                2000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_root, ResearchType.Fossil,
-                'Fossil Reviver - Root', 'Unlocks the Root fossil for revival.',
-                3000,
-                {
-                    requirements: [new RegionRequirement(GameConstants.Region.hoenn), new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_claw, ResearchType.Fossil,
-                'Fossil Reviver - Claw', 'Unlocks the Claw fossil for revival.',
-                3000,
-                {
-                    requirements: [new RegionRequirement(GameConstants.Region.hoenn), new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_skull, ResearchType.Fossil,
-                'Fossil Reviver - Skull', 'Unlocks the Skull fossil for revival.',
-                4000,
-                {
-                    requirements: [new RegionRequirement(GameConstants.Region.sinnoh), new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_armor, ResearchType.Fossil,
-                'Fossil Reviver - Armor', 'Unlocks the Armor fossil for revival.',
-                4000,
-                {
-                    requirements: [new RegionRequirement(GameConstants.Region.sinnoh), new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_cover, ResearchType.Fossil,
-                'Fossil Reviver - Cover', 'Unlocks the Cover fossil for revival.',
-                5000,
-                {
-                    requirements: [new RegionRequirement(GameConstants.Region.unova), new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_plume, ResearchType.Fossil,
-                'Fossil Reviver - Plume', 'Unlocks the Plume fossil for revival.',
-                5000,
-                {
-                    requirements: [new RegionRequirement(GameConstants.Region.unova), new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_jaw, ResearchType.Fossil,
-                'Fossil Reviver - Jaw', 'Unlocks the Jaw fossil for revival.',
-                5000,
-                {
-                    requirements: [new RegionRequirement(GameConstants.Region.kalos), new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-            new Research(Lab.Research.fossil_sail, ResearchType.Fossil,
-                'Fossil Reviver - Sail', 'Unlocks the Sail fossil for revival.',
-                5000,
-                {
-                    requirements: [new RegionRequirement(GameConstants.Region.kalos), new ResearchedRequirement(Lab.Research.fossil_reviver)],
-                    workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
-                }),
-
-            //#endregion
-
-            //#region Generator
-
-            new Research(Lab.Research.generator, ResearchType.Machine,
-                'Generator', 'Unlocks the Generator Machine.',
-                9000),
-
-            new Research(Lab.Research.generator_power1, ResearchType.Machine,
-                'Generator Power I', 'Increases Generator effect to 1.1x.',
-                10000, { requirements: [new ResearchedRequirement(Lab.Research.generator)] }),
-            new Research(Lab.Research.generator_power2, ResearchType.Machine,
-                'Generator Power II', 'Increases Generator effect to 1.2x.',
-                30000, { requirements: [new ResearchedRequirement(Lab.Research.generator_power1)] }),
-            new Research(Lab.Research.generator_power3, ResearchType.Machine,
-                'Generator Power III', 'Increases Generator effect to 1.3x.',
-                90000, { requirements: [new ResearchedRequirement(Lab.Research.generator_power2)] }),
-
-            new Research(Lab.Research.generator_fuel, ResearchType.Machine,
-                'Generator Fuel', 'Upgrades Generators to allow for fuel.',
-                15000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new ResearchWithCost(Lab.Research.generator_fuel_zap_plate, ResearchType.Machine,
-                'Generator Fuel - Zap Plate', 'Configures Generators to use Zap Plates for fuel.',
-                20000, [{item: {type: ItemType.underground, id: 'Zap Plate'}, amount: 10}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new ResearchWithCost(Lab.Research.generator_fuel_thunder_stone, ResearchType.Machine,
-                'Generator Fuel - Thunder Stone', 'Configures Generators to use Thunder Stones for fuel.',
-                20000, [{item: {type: ItemType.item, id: 'Thunder_stone'}, amount: 10}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new ResearchWithCost(Lab.Research.generator_fuel_wacan, ResearchType.Machine,
-                'Generator Fuel - Wacan Berry', 'Configures Generators to use Wacan Berries for fuel.',
-                20000, [{item: {type: ItemType.berry, id: BerryType.Wacan}, amount: 10}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new ResearchWithCost(Lab.Research.generator_fuel_electirizer, ResearchType.Machine,
-                'Generator Fuel - Electirizer', 'Configures Generators to use Electirizers for fuel.',
-                20000, [{item: {type: ItemType.item, id: 'Electirizer'}, amount: 10}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-
-            new Research(Lab.Research.generator_fuel_eff1, ResearchType.Machine,
-                'Generator Efficiency I', 'Increases Generator fuel efficiency by 25%.',
-                10000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new Research(Lab.Research.generator_fuel_eff2, ResearchType.Machine,
-                'Generator Efficiency II', 'Increases Generator fuel efficiency by 50%.',
-                30000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_eff2)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new Research(Lab.Research.generator_fuel_eff3, ResearchType.Machine,
-                'Generator Efficiency III', 'Increases Generator fuel efficiency by 75%.',
-                90000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_eff3)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-
-            new Research(Lab.Research.generator_fuel_cap1, ResearchType.Machine,
-                'Generator Fuel Capacity I', 'Increases Generator fuel capacity to 5000.',
-                4000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new Research(Lab.Research.generator_fuel_cap2, ResearchType.Machine,
-                'Generator Fuel Capacity II', 'Increases Generator fuel capacity to 10000.',
-                8000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap1)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new Research(Lab.Research.generator_fuel_cap3, ResearchType.Machine,
-                'Generator Fuel Capacity III', 'Increases Generator fuel capacity to 50000.',
-                16000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap2)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new Research(Lab.Research.generator_fuel_cap4, ResearchType.Machine,
-                'Generator Fuel Capacity IV', 'Increases Generator fuel capacity to 100000.',
-                32000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap3)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new Research(Lab.Research.generator_fuel_cap5, ResearchType.Machine,
-                'Generator Fuel Capacity V', 'Increases Generator fuel capacity to 1000000.',
-                64000,
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap4)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-
-            //#endregion
-
-            // Research Booster
-            // TODO: HLXII - Not sure if we need a Research Booster
-
-            // Pokeball Factory
-            // TODO: HLXII - Implement Pokeball Factory
-            /*
-            'pokeball_factory',
-            'pokeball_factory_speed1',
-            'pokeball_factory_speed2',
-            'pokeball_factory_speed3',
-            'fastball',
-            'quickball',
-            'timerball',
-            'duskball',
-            'luxuryball',
-            */
-
-            // Type Boosters
-            // TODO: HLXII - Implement Type Boosters after Typed BF is implemented
-            /*
-            new TypeBoosterResearch(Lab.Research.type_boost_normal, PokemonType.Normal, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_fire, PokemonType.Fire, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_water, PokemonType.Water, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_electric, PokemonType.Electric, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_grass, PokemonType.Grass, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_ice, PokemonType.Ice, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_fighting, PokemonType.Fighting, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_poison, PokemonType.Poison, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_ground, PokemonType.Ground, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_flying, PokemonType.Flying, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_psychic, PokemonType.Psychic, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_bug, PokemonType.Bug, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_rock, PokemonType.Rock, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_ghost, PokemonType.Ghost, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_dragon, PokemonType.Dragon, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_dark, PokemonType.Dark, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_steel, PokemonType.Steel, 100),
-            new TypeBoosterResearch(Lab.Research.type_boost_fairy, PokemonType.Fairy, 100),
-            */
-
-            // Weather Controller
-            // TODO: HLXII - Implement Weather Controller with Weather Institute in Hoenn
-
-            // Time Machine
-            // TODO: HLXII - Implement Time Machine one day
-            /*
-            new Research(Lab.Research.time_machine, ResearchType.Machine,
-                'Time Machine', 'Unlocks the Time Machine',
-                100,
-                {
-                    requirements: [new ObtainedPokemonRequirement(pokemonMap.Celebi)],
-                    workerFilter: new WorkerFilter((pokemon: PartyPokemon) => {
-                        return pokemon.name == 'Dialga' || pokemon.name == 'Celebi';
-                    }, 'Only Time Pokemon can work on this Research'),
-                }),
-            */
-
-            //#endregion
+        this.researchList = [];
 
 
+        //#region Research
 
-            //#region Fabricator Item Blueprints
+        // Research Slots
+        this.researchList[Lab.Research.research_slot1] = new Research(
+            Lab.Research.research_slot1, ResearchType.Research_Slot,
+            'Research Slot I', 'Unlocks a second Research Slot.',
+            10000),
+        this.researchList[Lab.Research.research_slot2] = new Research(
+            Lab.Research.research_slot2, ResearchType.Research_Slot,
+            'Research Slot II', 'Unlocks a third Research Slot.',
+            30000, { requirements: [new ResearchedRequirement(Lab.Research.research_slot1)] }),
 
-            new ResearchWithCost(Lab.Research.fire_stone, ResearchType.Blueprint,
-                'Fire Stone Blueprint', 'Unlocks the Fire Stone Fabricator Blueprint',
-                7000, [{item: {type: ItemType.item, id: 'Fire_stone'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new ResearchWithCost(Lab.Research.water_stone, ResearchType.Blueprint,
-                'Water Stone Blueprint', 'Unlocks the Water Stone Fabricator Blueprint',
-                7000, [{item: {type: ItemType.item, id: 'Water_stone'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Water]),
-                }),
-            new ResearchWithCost(Lab.Research.thunder_stone, ResearchType.Blueprint,
-                'Thunder Stone Blueprint', 'Unlocks the Thunder Stone Fabricator Blueprint',
-                7000, [{item: {type: ItemType.item, id: 'Thunder_stone'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new ResearchWithCost(Lab.Research.leaf_stone, ResearchType.Blueprint,
-                'Leaf Stone Blueprint', 'Unlocks the Leaf Stone Fabricator Blueprint',
-                7000, [{item: {type: ItemType.item, id: 'Leaf_stone'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Grass]),
-                }),
-            new ResearchWithCost(Lab.Research.moon_stone, ResearchType.Blueprint,
-                'Moon Stone Blueprint', 'Unlocks the Moon Stone Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Moon_stone'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Fairy]),
-                }),
-            new ResearchWithCost(Lab.Research.sun_stone, ResearchType.Blueprint,
-                'Sun Stone Blueprint', 'Unlocks the Sun Stone Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Sun_stone'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new ResearchWithCost(Lab.Research.dragon_scale, ResearchType.Blueprint,
-                'Dragon Scale Blueprint', 'Unlocks the Dragon Scale Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Dragon_scale'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Dragon]),
-                }),
-            new ResearchWithCost(Lab.Research.metal_coat, ResearchType.Blueprint,
-                'Metal Coat Blueprint', 'Unlocks the Metal Coat Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Metal_coat'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Steel]),
-                }),
-            new ResearchWithCost(Lab.Research.upgrade, ResearchType.Blueprint,
-                'Upgrade Blueprint', 'Unlocks the Upgrade Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Upgrade'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                }),
-            new ResearchWithCost(Lab.Research.dubious_disc, ResearchType.Blueprint,
-                'Dubious Disk Blueprint', 'Unlocks the Dubious Disk Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Dubious_disc'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                }),
-            new ResearchWithCost(Lab.Research.electirizer, ResearchType.Blueprint,
-                'Electirizer Blueprint', 'Unlocks the Electirizer Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Electirizer'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                }),
-            new ResearchWithCost(Lab.Research.magmarizer, ResearchType.Blueprint,
-                'Magmarizer Blueprint', 'Unlocks the Magmarizer Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Magmarizer'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                }),
-            new ResearchWithCost(Lab.Research.protector, ResearchType.Blueprint,
-                'Protector Blueprint', 'Unlocks the Protector Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Protector'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                }),
-            new ResearchWithCost(Lab.Research.reaper_cloth, ResearchType.Blueprint,
-                'Reaper Cloth Blueprint', 'Unlocks the Reaper Cloth Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Reaper_cloth'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Ghost]),
-                }),
-            new ResearchWithCost(Lab.Research.ice_stone, ResearchType.Blueprint,
-                'Ice Stone Blueprint', 'Unlocks the Ice Stone Fabricator Blueprint.',
-                7000,  [{item: {type: ItemType.item, id: 'Ice_stone'}, amount: 5}],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
-                    workerFilter: new TypeFilter([PokemonType.Ice]),
-                }),
+        // Research Slot Workers
+        this.researchList[Lab.Research.research_workers1] = new Research(
+            Lab.Research.research_workers1, ResearchType.Research_Slot,
+            'Research Workers I', 'Increases max research workers to 8.',
+            1000),
+        this.researchList[Lab.Research.research_workers2] = new Research(
+            Lab.Research.research_workers2, ResearchType.Research_Slot,
+            'Research Workers II', 'Increases max research workers to 12.',
+            4000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers1)] }),
+        this.researchList[Lab.Research.research_workers3] = new Research(
+            Lab.Research.research_workers3, ResearchType.Research_Slot,
+            'Research Workers III', 'Increases max research workers to 16.',
+            16000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers2)] }),
+        this.researchList[Lab.Research.research_workers4] = new Research(
+            Lab.Research.research_workers4, ResearchType.Research_Slot,
+            'Research Workers IV', 'Increases max research workers to 20.',
+            64000, { requirements: [new ResearchedRequirement(Lab.Research.research_workers3)] }),
 
-            //#endregion
+        //#endregion
 
-            //#region Genesect
-            // TODO: HLXII - Implement Genesect Research
-            /*
-            new ResearchWithCost(Lab.Research.drive_burner, ResearchType.Misc,
-                'Drive Burner', 'Investigate construction process for Drives.',
-                10000,
-                [
-                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
-                    {item: {type: ItemType.item, id: 'Dubious_disc'}, amount: 100},
-                ],
-                { requirements: [new ObtainedPokemonRequirement(pokemonMap.Genesect)] }),
-            new ResearchWithCost(Lab.Research.shock_drive, ResearchType.Misc,
-                'Shock Drive', 'Investigate Shock Drive construction.',
-                20000,
-                [
-                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
-                    {item: {type: ItemType.item, id: 'Thunder_stone'}, amount: 100},
-                    {item: {type: ItemType.underground, id: 'Smooth Rock'}, amount: 100},
-                    {item: {type: ItemType.berry, id: BerryType.Wacan}, amount: 5000},
-                ],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
-                    workerFilter: new TypeFilter([PokemonType.Electric]),
-                    completeDelegate: () => {
-                        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (electric)').id);
-                    },
-                }),
-            new ResearchWithCost(Lab.Research.burn_drive, ResearchType.Misc,
-                'Burn Drive', 'Investigate Burn Drive construction.',
-                20000,
-                [
-                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
-                    {item: {type: ItemType.item, id: 'Fire_stone'}, amount: 100},
-                    {item: {type: ItemType.underground, id: 'Heat Rock'}, amount: 100},
-                    {item: {type: ItemType.berry, id: BerryType.Occa}, amount: 5000},
-                ],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
-                    workerFilter: new TypeFilter([PokemonType.Fire]),
-                    completeDelegate: () => {
-                        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (fire)').id);
-                    },
-                }),
-            new ResearchWithCost(Lab.Research.chill_drive, ResearchType.Misc,
-                'Chill Drive', 'Investigate Chill Drive construction.',
-                20000,
-                [
-                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
-                    {item: {type: ItemType.item, id: 'Ice_stone'}, amount: 100},
-                    {item: {type: ItemType.underground, id: 'Icy Rock'}, amount: 100},
-                    {item: {type: ItemType.berry, id: BerryType.Yache}, amount: 5000},
-                ],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
-                    workerFilter: new TypeFilter([PokemonType.Ice]),
-                    completeDelegate: () => {
-                        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (ice)').id);
-                    },
-                }),
-            new ResearchWithCost(Lab.Research.douse_drive, ResearchType.Misc,
-                'Douse Drive', 'Investigate Douse Drive construction.',
-                20000,
-                [
-                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
-                    {item: {type: ItemType.item, id: 'Water_stone'}, amount: 100},
-                    {item: {type: ItemType.underground, id: 'Damk Rock'}, amount: 100},
-                    {item: {type: ItemType.berry, id: BerryType.Passho}, amount: 5000},
-                ],
-                {
-                    requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
-                    workerFilter: new TypeFilter([PokemonType.Water]),
-                    completeDelegate: () => {
-                        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (water)').id);
-                    },
-                }),
-            */
-            //#endregion
 
-            //#region Arceus
-            // TODO: HLXII - Implement Arceus Plates, not sure what unlock condition should be
-            /*
-            'legendary_plate',
-            'legendary_draco_plate',
-            'legendary_dread_plate',
-            'legendary_earth_plate',
-            'legendary_fist_plate',
-            'legendary_flame_plate',
-            'legendary_icicle_plate',
-            'legendary_insect_plate',
-            'legendary_iron_plate',
-            'legendary_meadow_plate',
-            'legendary_mind_plate',
-            'legendary_sky_plate',
-            'legendary_splash_plate',
-            'legendary_spooky_plate',
-            'legendary_stone_plate',
-            'legendary_toxic_plate',
-            'legendary_zap_plate',
-            'legendary_pixie_plate',
-            */
-            //#endregion
+        //#region Machines
 
-        ];
+        // Fabricator
+        this.researchList[Lab.Research.fabricator] = new Research(
+            Lab.Research.fabricator, ResearchType.Machine,
+            'Fabricator', 'Unlocks the Fabricator machine.',
+            1000, {
+                completeDelegate: () => {
+                    App.game.lab.machines[Lab.Machine.fabricator].amount = 1;
+                },
+            }),
+        this.researchList[Lab.Research.fabricator_speed1] = new Research(
+            Lab.Research.fabricator_speed1, ResearchType.Machine,
+            'Fabricator Speed I', 'Increases fabrication speed by 25%.',
+            5000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator)] }),
+        this.researchList[Lab.Research.fabricator_speed2] = new Research(
+            Lab.Research.fabricator_speed2, ResearchType.Machine,
+            'Fabricator Speed II', 'Increases fabrication speed by 50%.',
+            15000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed1)] }),
+        this.researchList[Lab.Research.fabricator_speed3] = new Research(
+            Lab.Research.fabricator_speed3, ResearchType.Machine,
+            'Fabricator Speed III', 'Increases fabrication speed by 75%.',
+            45000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed2)] }),
+        this.researchList[Lab.Research.fabricator_speed4] = new Research(
+            Lab.Research.fabricator_speed4, ResearchType.Machine,
+            'Fabricator Speed IV', 'Increases fabrication speed by 100%.',
+            135000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed3)] }),
+
+        // Plate Deconstructor
+        this.researchList[Lab.Research.plate_deconstructor] = new Research(
+            Lab.Research.plate_deconstructor, ResearchType.Machine,
+            'Plate Deconstructor', 'Unlocks the Plate Deconstructor Machine.',
+            2000, {requirements: [new QuestLineRequirement('Mining Expedition')] } ),
+
+        this.researchList[Lab.Research.plate_deconstructor_speed1] = new Research(
+            Lab.Research.plate_deconstructor_speed1, ResearchType.Machine,
+            'Plate Deconstructor Speed I', 'Increases plate deconstruction speed by 25%.',
+            3000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor)] }),
+        this.researchList[Lab.Research.plate_deconstructor_speed2] = new Research(
+            Lab.Research.plate_deconstructor_speed2, ResearchType.Machine,
+            'Plate Deconstructor Speed II', 'Increases plate deconstruction speed by 50%.',
+            9000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed1)] }),
+        this.researchList[Lab.Research.plate_deconstructor_speed3] = new Research(
+            Lab.Research.plate_deconstructor_speed3, ResearchType.Machine,
+            'Plate Deconstructor Speed III', 'Increases plate deconstruction speed by 75%.',
+            27000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed2)] }),
+        this.researchList[Lab.Research.plate_deconstructor_speed4] = new Research(
+            Lab.Research.plate_deconstructor_speed4, ResearchType.Machine,
+            'Plate Deconstructor Speed IV', 'Increases plate deconstruction speed by 100%.',
+            81000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_speed3)] }),
+
+        this.researchList[Lab.Research.plate_deconstructor_eff1] = new Research(
+            Lab.Research.plate_deconstructor_eff1, ResearchType.Machine,
+            'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 25%.',
+            4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor)] }),
+        this.researchList[Lab.Research.plate_deconstructor_eff2] = new Research(
+            Lab.Research.plate_deconstructor_eff2, ResearchType.Machine,
+            'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 50%.',
+            12000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_eff1)] }),
+        this.researchList[Lab.Research.plate_deconstructor_eff3] = new Research(
+            Lab.Research.plate_deconstructor_eff3, ResearchType.Machine,
+            'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 75%.',
+            36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_eff2)] }),
+
+        // Plate Reconstructor
+        this.researchList[Lab.Research.plate_reconstructor] = new Research(
+            Lab.Research.plate_reconstructor, ResearchType.Machine,
+            'Plate Reconstructor', 'Unlocks the Plate Reconstructor Machine.',
+            2000, {requirements: [new QuestLineRequirement('Mining Expedition')] }),
+
+        this.researchList[Lab.Research.plate_reconstructor_speed1] = new Research(
+            Lab.Research.plate_reconstructor_speed1, ResearchType.Machine,
+            'Plate Reconstructor Speed I', 'Increases plate reconstruction speed by 25%.',
+            3000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor)] }),
+        this.researchList[Lab.Research.plate_reconstructor_speed2] = new Research(
+            Lab.Research.plate_reconstructor_speed2, ResearchType.Machine,
+            'Plate Reconstructor Speed II', 'Increases plate reconstruction speed by 50%.',
+            9000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed1)] }),
+        this.researchList[Lab.Research.plate_reconstructor_speed3] = new Research(
+            Lab.Research.plate_reconstructor_speed3, ResearchType.Machine,
+            'Plate Reconstructor Speed III', 'Increases plate reconstruction speed by 75%.',
+            27000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed2)] }),
+        this.researchList[Lab.Research.plate_reconstructor_speed4] = new Research(
+            Lab.Research.plate_reconstructor_speed4, ResearchType.Machine,
+            'Plate Reconstructor Speed IV', 'Increases plate reconstruction speed by 100%.',
+            81000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_speed3)] }),
+
+        this.researchList[Lab.Research.plate_reconstructor_eff1] = new Research(
+            Lab.Research.plate_reconstructor_eff1, ResearchType.Machine,
+            'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 12.5%.',
+            4000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor)] }),
+        this.researchList[Lab.Research.plate_reconstructor_eff2] = new Research(
+            Lab.Research.plate_reconstructor_eff2, ResearchType.Machine,
+            'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 25%.',
+            12000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff1)] }),
+        this.researchList[Lab.Research.plate_reconstructor_eff3] = new Research(
+            Lab.Research.plate_reconstructor_eff3, ResearchType.Machine,
+            'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 50%.',
+            36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff2)] }),
+
+        //#region Incubator
+
+        this.researchList[Lab.Research.incubator] = new Research(
+            Lab.Research.incubator, ResearchType.Machine,
+            'Incubator', 'Unlocks the Incubator Machine.',
+            9000),
+
+        this.researchList[Lab.Research.incubator_fuel] = new Research(
+            Lab.Research.incubator_fuel, ResearchType.Machine,
+            'Incubator Fuel', 'Upgrades Incubators to allow for fuel.',
+            15000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_flame_plate] = new ResearchWithCost(
+            Lab.Research.incubator_fuel_flame_plate, ResearchType.Machine,
+            'Incubator Fuel - Flame Plate', 'Configures Incubators to use Flame Plates for fuel.',
+            20000, [{item: {type: ItemType.underground, id: 'Flame Plate'}, amount: 10}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_fire_stone] = new ResearchWithCost(
+            Lab.Research.incubator_fuel_fire_stone, ResearchType.Machine,
+            'Incubator Fuel - Fire Stone', 'Configures Incubators to use Fire Stones for fuel.',
+            20000, [{item: {type: ItemType.item, id: 'Fire_stone'}, amount: 10}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_chople] = new ResearchWithCost(
+            Lab.Research.incubator_fuel_chople, ResearchType.Machine,
+            'Incubator Fuel - Chople Berry', 'Configures Incubators to use Chople Berries for fuel.',
+            20000, [{item: {type: ItemType.berry, id: BerryType.Chople}, amount: 10}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_magmarizer] = new ResearchWithCost(
+            Lab.Research.incubator_fuel_magmarizer, ResearchType.Machine,
+            'Incubator Fuel - Magmarizer', 'Configures Incubators to use Magmarizer for fuel.',
+            20000, [{item: {type: ItemType.item, id: 'Magmarizer'}, amount: 10}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+
+        this.researchList[Lab.Research.incubator_power1] = new Research(
+            Lab.Research.incubator_power1, ResearchType.Machine,
+            'Incubator Power I', 'Increases incubator effect to 1.02x.',
+            10000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)] }),
+        this.researchList[Lab.Research.incubator_power2] = new Research(
+            Lab.Research.incubator_power2, ResearchType.Machine,
+            'Incubator Power II', 'Increases incubator effect to 1.03x.',
+            30000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_power1)] }),
+        this.researchList[Lab.Research.incubator_power3] = new Research(
+            Lab.Research.incubator_power3, ResearchType.Machine,
+            'Incubator Power III', 'Increases incubator effect to 1.05x.',
+            90000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_power2)] }),
+
+        this.researchList[Lab.Research.incubator_fuel_eff1] = new Research(
+            Lab.Research.incubator_fuel_eff1, ResearchType.Machine,
+            'Incubator Efficiency I', 'Increases Incubator fuel efficiency by 25%.',
+            10000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_eff2] = new Research(
+            Lab.Research.incubator_fuel_eff2, ResearchType.Machine,
+            'Incubator Efficiency II', 'Increases Incubator fuel efficiency by 50%.',
+            30000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_eff2)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_eff3] = new Research(
+            Lab.Research.incubator_fuel_eff3, ResearchType.Machine,
+            'Incubator Efficiency III', 'Increases Incubator fuel efficiency by 75%.',
+            90000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_eff3)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+
+        this.researchList[Lab.Research.incubator_fuel_cap1] = new Research(
+            Lab.Research.incubator_fuel_cap1, ResearchType.Machine,
+            'Incubator Fuel Capacity I', 'Increases Incubator fuel capacity to 5000.',
+            4000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_cap2] = new Research(
+            Lab.Research.incubator_fuel_cap2, ResearchType.Machine,
+            'Incubator Fuel Capacity II', 'Increases Incubator fuel capacity to 10000.',
+            8000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap1)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_cap3] = new Research(
+            Lab.Research.incubator_fuel_cap3, ResearchType.Machine,
+            'Incubator Fuel Capacity III', 'Increases Incubator fuel capacity to 50000.',
+            16000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap2)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_cap4] = new Research(
+            Lab.Research.incubator_fuel_cap4, ResearchType.Machine,
+            'Incubator Fuel Capacity IV', 'Increases Incubator fuel capacity to 100000.',
+            32000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap3)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.incubator_fuel_cap5] = new Research(
+            Lab.Research.incubator_fuel_cap5, ResearchType.Machine,
+            'Incubator Fuel Capacity V', 'Increases Incubator fuel capacity to 1000000.',
+            64000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.incubator_fuel_cap4)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+
+        this.researchList[Lab.Research.incubator_slot1] = new Research(
+            Lab.Research.incubator_slot1, ResearchType.Machine,
+            'Incubator Queue Slot I', 'Increases the number of queue slots to 2.',
+            10000, { requirements: [new ResearchedRequirement(Lab.Research.incubator)] }),
+        this.researchList[Lab.Research.incubator_slot2] = new Research(
+            Lab.Research.incubator_slot2, ResearchType.Machine,
+            'Incubator Queue Slot II', 'Increases the number of queue slots to 3.',
+            50000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_slot1)] }),
+        this.researchList[Lab.Research.incubator_slot3] = new Research(
+            Lab.Research.incubator_slot3, ResearchType.Machine,
+            'Incubator Queue Slot III', 'Increases the number of queue slots to 4.',
+            100000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_slot2)] }),
+        this.researchList[Lab.Research.incubator_slot4] = new Research(
+            Lab.Research.incubator_slot4, ResearchType.Machine,
+            'Incubator Queue Slot IV', 'Increases the number of queue slots to 5.',
+            200000, { requirements: [new ResearchedRequirement(Lab.Research.incubator_slot3)] }),
+
+        //#endregion
+
+        //#region Fossil Reviver
+
+        this.researchList[Lab.Research.fossil_reviver] = new Research(
+            Lab.Research.fossil_reviver, ResearchType.Machine,
+            'Fossil Reviver', 'Unlocks the Fossil Reviver Machine.',
+            2000,
+            {
+                requirements: [new QuestLineRequirement('Mining Expedition')],
+                completeDelegate: () => {
+                    App.game.lab.machines[Lab.Machine.fossil_reviver].amount = 1;
+                },
+            }),
+
+        // Fossil Speed
+        this.researchList[Lab.Research.fossil_reviver_speed1] = new Research(
+            Lab.Research.fossil_reviver_speed1, ResearchType.Machine,
+            'Fossil Reviver Speed I', 'Increases revival speed by 25%.',
+            2000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_reviver_speed2] = new Research(
+            Lab.Research.fossil_reviver_speed2, ResearchType.Machine,
+            'Fossil Reviver Speed II', 'Increases revival speed by 50%.',
+            3000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_speed1)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_reviver_speed3] = new Research(
+            Lab.Research.fossil_reviver_speed3, ResearchType.Machine,
+            'Fossil Reviver Speed III', 'Increases revival speed by 75%.',
+            4000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_speed2)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+
+        // Fossil Queue
+        this.researchList[Lab.Research.fossil_reviver_queue] = new Research(
+            Lab.Research.fossil_reviver_queue, ResearchType.Machine,
+            'Fossil Reviver Queue', 'Unlocks a queue for fossil revival.',
+            2000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_reviver_queue1] = new Research(
+            Lab.Research.fossil_reviver_queue1, ResearchType.Machine,
+            'Fossil Reviver Queue I', 'Increases revival queue slots to 8.',
+            3000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_reviver_queue2] = new Research(
+            Lab.Research.fossil_reviver_queue2, ResearchType.Machine,
+            'Fossil Reviver Queue II', 'Increases revival queue slots to 16.',
+            4000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue1)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_reviver_queue3] = new Research(
+            Lab.Research.fossil_reviver_queue3, ResearchType.Machine,
+            'Fossil Reviver Queue I', 'Increases revival queue slots to 32.',
+            5000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue2)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_reviver_queue4] = new Research(
+            Lab.Research.fossil_reviver_queue4, ResearchType.Machine,
+            'Fossil Reviver Queue II', 'Increases revival queue slots to 64.',
+            6000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver_queue3)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+
+        // Fossil Research
+        this.researchList[Lab.Research.fossil_helix] = new Research(
+            Lab.Research.fossil_helix, ResearchType.Fossil,
+            'Fossil Reviver - Helix', 'Unlocks the Helix fossil for revival.',
+            2000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_dome] = new Research(
+            Lab.Research.fossil_dome, ResearchType.Fossil,
+            'Fossil Reviver - Dome', 'Unlocks the Dome fossil for revival.',
+            2000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_old_amber] = new Research(
+            Lab.Research.fossil_old_amber, ResearchType.Fossil,
+            'Fossil Reviver - Old Amber', 'Unlocks the Old Amber for revival.',
+            2000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_root] = new Research(
+            Lab.Research.fossil_root, ResearchType.Fossil,
+            'Fossil Reviver - Root', 'Unlocks the Root fossil for revival.',
+            3000,
+            {
+                requirements: [new RegionRequirement(GameConstants.Region.hoenn), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_claw] = new Research(
+            Lab.Research.fossil_claw, ResearchType.Fossil,
+            'Fossil Reviver - Claw', 'Unlocks the Claw fossil for revival.',
+            3000,
+            {
+                requirements: [new RegionRequirement(GameConstants.Region.hoenn), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_skull] = new Research(
+            Lab.Research.fossil_skull, ResearchType.Fossil,
+            'Fossil Reviver - Skull', 'Unlocks the Skull fossil for revival.',
+            4000,
+            {
+                requirements: [new RegionRequirement(GameConstants.Region.sinnoh), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_armor] = new Research(
+            Lab.Research.fossil_armor, ResearchType.Fossil,
+            'Fossil Reviver - Armor', 'Unlocks the Armor fossil for revival.',
+            4000,
+            {
+                requirements: [new RegionRequirement(GameConstants.Region.sinnoh), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_cover] = new Research(
+            Lab.Research.fossil_cover, ResearchType.Fossil,
+            'Fossil Reviver - Cover', 'Unlocks the Cover fossil for revival.',
+            5000,
+            {
+                requirements: [new RegionRequirement(GameConstants.Region.unova), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_plume] = new Research(
+            Lab.Research.fossil_plume, ResearchType.Fossil,
+            'Fossil Reviver - Plume', 'Unlocks the Plume fossil for revival.',
+            5000,
+            {
+                requirements: [new RegionRequirement(GameConstants.Region.unova), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_jaw] = new Research(
+            Lab.Research.fossil_jaw, ResearchType.Fossil,
+            'Fossil Reviver - Jaw', 'Unlocks the Jaw fossil for revival.',
+            5000,
+            {
+                requirements: [new RegionRequirement(GameConstants.Region.kalos), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.fossil_sail] = new Research(
+            Lab.Research.fossil_sail, ResearchType.Fossil,
+            'Fossil Reviver - Sail', 'Unlocks the Sail fossil for revival.',
+            5000,
+            {
+                requirements: [new RegionRequirement(GameConstants.Region.kalos), new ResearchedRequirement(Lab.Research.fossil_reviver)],
+                workerFilter: new TypeFilter([PokemonType.Rock, PokemonType.Ground, PokemonType.Steel]),
+            }),
+
+        //#endregion
+
+        //#region Generator
+
+        this.researchList[Lab.Research.generator] = new Research(
+            Lab.Research.generator, ResearchType.Machine,
+            'Generator', 'Unlocks the Generator Machine.',
+            9000),
+
+        this.researchList[Lab.Research.generator_power1] = new Research(
+            Lab.Research.generator_power1, ResearchType.Machine,
+            'Generator Power I', 'Increases Generator effect to 1.1x.',
+            10000, { requirements: [new ResearchedRequirement(Lab.Research.generator)] }),
+        this.researchList[Lab.Research.generator_power2] = new Research(
+            Lab.Research.generator_power2, ResearchType.Machine,
+            'Generator Power II', 'Increases Generator effect to 1.2x.',
+            30000, { requirements: [new ResearchedRequirement(Lab.Research.generator_power1)] }),
+        this.researchList[Lab.Research.generator_power3] = new Research(
+            Lab.Research.generator_power3, ResearchType.Machine,
+            'Generator Power III', 'Increases Generator effect to 1.3x.',
+            90000, { requirements: [new ResearchedRequirement(Lab.Research.generator_power2)] }),
+
+        this.researchList[Lab.Research.generator_fuel] = new Research(
+            Lab.Research.generator_fuel, ResearchType.Machine,
+            'Generator Fuel', 'Upgrades Generators to allow for fuel.',
+            15000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_zap_plate] = new ResearchWithCost(
+            Lab.Research.generator_fuel_zap_plate, ResearchType.Machine,
+            'Generator Fuel - Zap Plate', 'Configures Generators to use Zap Plates for fuel.',
+            20000, [{item: {type: ItemType.underground, id: 'Zap Plate'}, amount: 10}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_thunder_stone] = new ResearchWithCost(
+            Lab.Research.generator_fuel_thunder_stone, ResearchType.Machine,
+            'Generator Fuel - Thunder Stone', 'Configures Generators to use Thunder Stones for fuel.',
+            20000, [{item: {type: ItemType.item, id: 'Thunder_stone'}, amount: 10}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_wacan] = new ResearchWithCost(
+            Lab.Research.generator_fuel_wacan, ResearchType.Machine,
+            'Generator Fuel - Wacan Berry', 'Configures Generators to use Wacan Berries for fuel.',
+            20000, [{item: {type: ItemType.berry, id: BerryType.Wacan}, amount: 10}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_electirizer] = new ResearchWithCost(
+            Lab.Research.generator_fuel_electirizer, ResearchType.Machine,
+            'Generator Fuel - Electirizer', 'Configures Generators to use Electirizers for fuel.',
+            20000, [{item: {type: ItemType.item, id: 'Electirizer'}, amount: 10}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+
+        this.researchList[Lab.Research.generator_fuel_eff1] = new Research(
+            Lab.Research.generator_fuel_eff1, ResearchType.Machine,
+            'Generator Efficiency I', 'Increases Generator fuel efficiency by 25%.',
+            10000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_eff2] = new Research(
+            Lab.Research.generator_fuel_eff2, ResearchType.Machine,
+            'Generator Efficiency II', 'Increases Generator fuel efficiency by 50%.',
+            30000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_eff2)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_eff3] = new Research(
+            Lab.Research.generator_fuel_eff3, ResearchType.Machine,
+            'Generator Efficiency III', 'Increases Generator fuel efficiency by 75%.',
+            90000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_eff3)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+
+        this.researchList[Lab.Research.generator_fuel_cap1] = new Research(
+            Lab.Research.generator_fuel_cap1, ResearchType.Machine,
+            'Generator Fuel Capacity I', 'Increases Generator fuel capacity to 5000.',
+            4000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_cap2] = new Research(
+            Lab.Research.generator_fuel_cap2, ResearchType.Machine,
+            'Generator Fuel Capacity II', 'Increases Generator fuel capacity to 10000.',
+            8000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap1)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_cap3] = new Research(
+            Lab.Research.generator_fuel_cap3, ResearchType.Machine,
+            'Generator Fuel Capacity III', 'Increases Generator fuel capacity to 50000.',
+            16000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap2)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_cap4] = new Research(
+            Lab.Research.generator_fuel_cap4, ResearchType.Machine,
+            'Generator Fuel Capacity IV', 'Increases Generator fuel capacity to 100000.',
+            32000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap3)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.generator_fuel_cap5] = new Research(
+            Lab.Research.generator_fuel_cap5, ResearchType.Machine,
+            'Generator Fuel Capacity V', 'Increases Generator fuel capacity to 1000000.',
+            64000,
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.generator_fuel_cap4)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+
+        //#endregion
+
+        // Research Booster
+        // TODO: HLXII - Not sure if we need a Research Booster
+
+        // Pokeball Factory
+        // TODO: HLXII - Implement Pokeball Factory
+        /*
+        'pokeball_factory',
+        'pokeball_factory_speed1',
+        'pokeball_factory_speed2',
+        'pokeball_factory_speed3',
+        'fastball',
+        'quickball',
+        'timerball',
+        'duskball',
+        'luxuryball',
+        */
+
+        // Type Boosters
+        // TODO: HLXII - Implement Type Boosters after Typed BF is implemented
+        /*
+        new TypeBoosterResearch(Lab.Research.type_boost_normal, PokemonType.Normal, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_fire, PokemonType.Fire, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_water, PokemonType.Water, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_electric, PokemonType.Electric, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_grass, PokemonType.Grass, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_ice, PokemonType.Ice, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_fighting, PokemonType.Fighting, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_poison, PokemonType.Poison, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_ground, PokemonType.Ground, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_flying, PokemonType.Flying, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_psychic, PokemonType.Psychic, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_bug, PokemonType.Bug, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_rock, PokemonType.Rock, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_ghost, PokemonType.Ghost, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_dragon, PokemonType.Dragon, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_dark, PokemonType.Dark, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_steel, PokemonType.Steel, 100),
+        new TypeBoosterResearch(Lab.Research.type_boost_fairy, PokemonType.Fairy, 100),
+        */
+
+        // Weather Controller
+        // TODO: HLXII - Implement Weather Controller with Weather Institute in Hoenn
+
+        // Time Machine
+        // TODO: HLXII - Implement Time Machine one day
+        /*
+        new Research(Lab.Research.time_machine, ResearchType.Machine,
+            'Time Machine', 'Unlocks the Time Machine',
+            100,
+            {
+                requirements: [new ObtainedPokemonRequirement(pokemonMap.Celebi)],
+                workerFilter: new WorkerFilter((pokemon: PartyPokemon) => {
+                    return pokemon.name == 'Dialga' || pokemon.name == 'Celebi';
+                }, 'Only Time Pokemon can work on this Research'),
+            }),
+        */
+
+        //#endregion
+
+        //#region Fabricator Item Blueprints
+
+        this.researchList[Lab.Research.fire_stone] = new ResearchWithCost(
+            Lab.Research.fire_stone, ResearchType.Blueprint,
+            'Fire Stone Blueprint', 'Unlocks the Fire Stone Fabricator Blueprint',
+            7000, [{item: {type: ItemType.item, id: 'Fire_stone'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.water_stone] = new ResearchWithCost(
+            Lab.Research.water_stone, ResearchType.Blueprint,
+            'Water Stone Blueprint', 'Unlocks the Water Stone Fabricator Blueprint',
+            7000, [{item: {type: ItemType.item, id: 'Water_stone'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Water]),
+            }),
+        this.researchList[Lab.Research.thunder_stone] = new ResearchWithCost(
+            Lab.Research.thunder_stone, ResearchType.Blueprint,
+            'Thunder Stone Blueprint', 'Unlocks the Thunder Stone Fabricator Blueprint',
+            7000, [{item: {type: ItemType.item, id: 'Thunder_stone'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.leaf_stone] = new ResearchWithCost(
+            Lab.Research.leaf_stone, ResearchType.Blueprint,
+            'Leaf Stone Blueprint', 'Unlocks the Leaf Stone Fabricator Blueprint',
+            7000, [{item: {type: ItemType.item, id: 'Leaf_stone'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Grass]),
+            }),
+        this.researchList[Lab.Research.moon_stone] = new ResearchWithCost(
+            Lab.Research.moon_stone, ResearchType.Blueprint,
+            'Moon Stone Blueprint', 'Unlocks the Moon Stone Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Moon_stone'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Fairy]),
+            }),
+        this.researchList[Lab.Research.sun_stone] = new ResearchWithCost(
+            Lab.Research.sun_stone, ResearchType.Blueprint,
+            'Sun Stone Blueprint', 'Unlocks the Sun Stone Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Sun_stone'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.dragon_scale] = new ResearchWithCost(
+            Lab.Research.dragon_scale, ResearchType.Blueprint,
+            'Dragon Scale Blueprint', 'Unlocks the Dragon Scale Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Dragon_scale'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Dragon]),
+            }),
+        this.researchList[Lab.Research.metal_coat] = new ResearchWithCost(
+            Lab.Research.metal_coat, ResearchType.Blueprint,
+            'Metal Coat Blueprint', 'Unlocks the Metal Coat Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Metal_coat'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Steel]),
+            }),
+        this.researchList[Lab.Research.upgrade] = new ResearchWithCost(
+            Lab.Research.upgrade, ResearchType.Blueprint,
+            'Upgrade Blueprint', 'Unlocks the Upgrade Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Upgrade'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+            }),
+        this.researchList[Lab.Research.dubious_disc] = new ResearchWithCost(
+            Lab.Research.dubious_disc, ResearchType.Blueprint,
+            'Dubious Disk Blueprint', 'Unlocks the Dubious Disk Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Dubious_disc'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+            }),
+        this.researchList[Lab.Research.electirizer] = new ResearchWithCost(
+            Lab.Research.electirizer, ResearchType.Blueprint,
+            'Electirizer Blueprint', 'Unlocks the Electirizer Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Electirizer'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+            }),
+        this.researchList[Lab.Research.magmarizer] = new ResearchWithCost(
+            Lab.Research.magmarizer, ResearchType.Blueprint,
+            'Magmarizer Blueprint', 'Unlocks the Magmarizer Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Magmarizer'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+            }),
+        this.researchList[Lab.Research.protector] = new ResearchWithCost(
+            Lab.Research.protector, ResearchType.Blueprint,
+            'Protector Blueprint', 'Unlocks the Protector Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Protector'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+            }),
+        this.researchList[Lab.Research.reaper_cloth] = new ResearchWithCost(
+            Lab.Research.reaper_cloth, ResearchType.Blueprint,
+            'Reaper Cloth Blueprint', 'Unlocks the Reaper Cloth Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Reaper_cloth'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Ghost]),
+            }),
+        this.researchList[Lab.Research.ice_stone] = new ResearchWithCost(
+            Lab.Research.ice_stone, ResearchType.Blueprint,
+            'Ice Stone Blueprint', 'Unlocks the Ice Stone Fabricator Blueprint.',
+            7000,  [{item: {type: ItemType.item, id: 'Ice_stone'}, amount: 5}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                workerFilter: new TypeFilter([PokemonType.Ice]),
+            }),
+
+        //#endregion
+
+        //#region Genesect
+        // TODO: HLXII - Implement Genesect Research when Genesect forms are added
+        /*
+        this.researchList[Lab.Research.drive_burner] = new ResearchWithCost(
+            Lab.Research.drive_burner, ResearchType.Misc,
+            'Drive Burner', 'Investigate construction process for Drives.',
+            10000,
+            [
+                {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                {item: {type: ItemType.item, id: 'Dubious_disc'}, amount: 100},
+            ],
+            { requirements: [new ObtainedPokemonRequirement(pokemonMap.Genesect)] }),
+        this.researchList[Lab.Research.shock_drive] = new ResearchWithCost(
+            Lab.Research.shock_drive, ResearchType.Misc,
+            'Shock Drive', 'Investigate Shock Drive construction.',
+            20000,
+            [
+                {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                {item: {type: ItemType.item, id: 'Thunder_stone'}, amount: 100},
+                {item: {type: ItemType.underground, id: 'Smooth Rock'}, amount: 100},
+                {item: {type: ItemType.berry, id: BerryType.Wacan}, amount: 5000},
+            ],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (electric)').id);
+                },
+            }),
+        this.researchList[Lab.Research.burn_drive] = new ResearchWithCost(
+            Lab.Research.burn_drive, ResearchType.Misc,
+            'Burn Drive', 'Investigate Burn Drive construction.',
+            20000,
+            [
+                {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                {item: {type: ItemType.item, id: 'Fire_stone'}, amount: 100},
+                {item: {type: ItemType.underground, id: 'Heat Rock'}, amount: 100},
+                {item: {type: ItemType.berry, id: BerryType.Occa}, amount: 5000},
+            ],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (fire)').id);
+                },
+            }),
+        this.researchList[Lab.Research.chill_drive] = new ResearchWithCost(
+            Lab.Research.chill_drive, ResearchType.Misc,
+            'Chill Drive', 'Investigate Chill Drive construction.',
+            20000,
+            [
+                {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                {item: {type: ItemType.item, id: 'Ice_stone'}, amount: 100},
+                {item: {type: ItemType.underground, id: 'Icy Rock'}, amount: 100},
+                {item: {type: ItemType.berry, id: BerryType.Yache}, amount: 5000},
+            ],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
+                workerFilter: new TypeFilter([PokemonType.Ice]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (ice)').id);
+                },
+            }),
+        this.researchList[Lab.Research.douse_drive] = new ResearchWithCost(
+            Lab.Research.douse_drive, ResearchType.Misc,
+            'Douse Drive', 'Investigate Douse Drive construction.',
+            20000,
+            [
+                {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                {item: {type: ItemType.item, id: 'Water_stone'}, amount: 100},
+                {item: {type: ItemType.underground, id: 'Damk Rock'}, amount: 100},
+                {item: {type: ItemType.berry, id: BerryType.Passho}, amount: 5000},
+            ],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
+                workerFilter: new TypeFilter([PokemonType.Water]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (water)').id);
+                },
+            }),
+        */
+        //#endregion
+
+
+        //#region Arceus
+        // TODO: HLXII - Implement Arceus Plates, not sure what unlock condition should be
+        /*
+        'legendary_plate',
+        'legendary_draco_plate',
+        'legendary_dread_plate',
+        'legendary_earth_plate',
+        'legendary_fist_plate',
+        'legendary_flame_plate',
+        'legendary_icicle_plate',
+        'legendary_insect_plate',
+        'legendary_iron_plate',
+        'legendary_meadow_plate',
+        'legendary_mind_plate',
+        'legendary_sky_plate',
+        'legendary_splash_plate',
+        'legendary_spooky_plate',
+        'legendary_stone_plate',
+        'legendary_toxic_plate',
+        'legendary_zap_plate',
+        'legendary_pixie_plate',
+        */
+        //#endregion
 
         //#endregion
 
