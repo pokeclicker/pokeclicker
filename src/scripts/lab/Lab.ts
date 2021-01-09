@@ -750,6 +750,13 @@ class Lab implements Feature {
                     requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
                     workerFilter: new TypeFilter([PokemonType.Ghost]),
                 }),
+            new ResearchWithCost(Lab.Research.ice_stone, ResearchType.Blueprint,
+                'Ice Stone Blueprint', 'Unlocks the Ice Stone Fabricator Blueprint.',
+                7000,  [{item: {type: ItemType.item, id: 'Ice_stone'}, amount: 5}],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.fabricator)],
+                    workerFilter: new TypeFilter([PokemonType.Ice]),
+                }),
 
             //#endregion
 
@@ -1223,6 +1230,7 @@ namespace Lab {
         'magmarizer',
         'protector',
         'reaper_cloth',
+        'ice_stone',
         // Genesect
         /*
         'drive_burner',
