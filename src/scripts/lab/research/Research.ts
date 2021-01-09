@@ -128,6 +128,7 @@ class Research implements Saveable {
         return (this.progress / this.points) * 100;
     }
 
+    // TODO: HLXII - Possibly handle different display types
     get progressString() {
         return `${this.progress.toFixed(0)}/${this.points}`;
     }
