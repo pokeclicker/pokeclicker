@@ -12,22 +12,24 @@ aria-labelledby="FossilReviverModalLabel" aria-hidden="true">
 
             <div class="modal-body position-static">
                 <div class="row no-gutters justify-content-center">
+                    <!-- ko foreach: state._fossils -->
                     <div class="col-3 eggSlot">
                         <div class="content">
-                            <!-- ko if: state.fossil -->
                             <div style="margin-top: 20px;">
-                                <img data-bind="attr: { src: FossilReviver.getImage(state.fossil) }"/>
+                                <!-- ko if: $data.fossil -->
+                                <img data-bind="attr: { src: FossilReviver.getImage($data.data.name) }"/>
                                 <div class="progress">
                                     <div class="progress-bar bg-success" role="progressbar"
-                                        data-bind="attr: { style: 'width:' + state.progressPercent + '%' }"
+                                        data-bind="attr: { style: 'width:' + $data.progressPercent + '%' }"
                                         aria-valuemin="0" aria-valuemax="100">
-                                        <span data-bind="text: state.progressString"></span>
+                                        <span data-bind="text: $data.progressString"></span>
                                     </div>
                                 </div>
+                                <!-- /ko -->
                             </div>
-                            <!-- /ko -->
                         </div>
                     </div>
+                    <!-- /ko -->
                     <!-- ko if: state.queue.length > 0 -->
                     <div class="col-12">
                         <div id="hatcheryQueue" class="card-footer p-1" data-bind="foreach: state.queue">
@@ -50,7 +52,7 @@ aria-labelledby="FossilReviverModalLabel" aria-hidden="true">
                         <img src="" width="80px" data-bind="attr:{ src: FossilReviver.getImage($data) }">
                         <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px"
                         data-bind="text: 'Amount: ' + BagHandler.amount({type: ItemType.underground, id: $data })()">Amount</span>
-                        <a class="overlay" href="#revive" data-bind="click: function() { state.addToQueue($data); }"></a>
+                        <a class="overlay" href="#revive" data-bind="click: function() { state.addToMachine($data); }"></a>
                     </li>
                 </ul>
                 <!-- /ko -->

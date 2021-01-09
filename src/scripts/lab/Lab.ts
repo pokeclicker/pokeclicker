@@ -82,8 +82,6 @@ class Lab implements Feature {
     }
 
     initialize() {
-        // TODO: HLXII - Add all Researches
-        // TODO: HLXII - Balance research point cost
         //#region Research
 
         /**
@@ -595,8 +593,10 @@ class Lab implements Feature {
             //#endregion
 
             // Research Booster
+            // TODO: HLXII - Not sure if we need a Research Booster
 
             // Pokeball Factory
+            // TODO: HLXII - Implement Pokeball Factory
             /*
             'pokeball_factory',
             'pokeball_factory_speed1',
@@ -608,8 +608,9 @@ class Lab implements Feature {
             'duskball',
             'luxuryball',
             */
+
             // Type Boosters
-            // TODO: HLXII - Implement after Typed BF is implemented
+            // TODO: HLXII - Implement Type Boosters after Typed BF is implemented
             /*
             new TypeBoosterResearch(Lab.Research.type_boost_normal, PokemonType.Normal, 100),
             new TypeBoosterResearch(Lab.Research.type_boost_fire, PokemonType.Fire, 100),
@@ -632,9 +633,10 @@ class Lab implements Feature {
             */
 
             // Weather Controller
+            // TODO: HLXII - Implement Weather Controller with Weather Institute in Hoenn
 
             // Time Machine
-            // TODO: HLXII - Implement one day
+            // TODO: HLXII - Implement Time Machine one day
             /*
             new Research(Lab.Research.time_machine, ResearchType.Machine,
                 'Time Machine', 'Unlocks the Time Machine',
@@ -752,6 +754,7 @@ class Lab implements Feature {
             //#endregion
 
             //#region Genesect
+            // TODO: HLXII - Implement Genesect Research
             /*
             'drive_burner',
             'shock_drive',
@@ -762,6 +765,7 @@ class Lab implements Feature {
             //#endregion
 
             //#region Arceus
+            // TODO: HLXII - Implement Arceus Plates, not sure what unlock condition should be
             /*
             'legendary_plate',
             'legendary_draco_plate',
@@ -853,7 +857,7 @@ class Lab implements Feature {
                 sound: NotificationConstants.NotificationSound.achievement,
             });
             // Handle updating Research List UI with new Research
-            ResearchHandler.filterResearchList(true);
+            ResearchHandler.filterResearchList();
         }
     }
 
