@@ -756,11 +756,78 @@ class Lab implements Feature {
             //#region Genesect
             // TODO: HLXII - Implement Genesect Research
             /*
-            'drive_burner',
-            'shock_drive',
-            'burn_drive',
-            'chill_drive',
-            'douse_drive',
+            new ResearchWithCost(Lab.Research.drive_burner, ResearchType.Misc,
+                'Drive Burner', 'Investigate construction process for Drives.',
+                10000,
+                [
+                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                    {item: {type: ItemType.item, id: 'Dubious_disc'}, amount: 100},
+                ],
+                { requirements: [new ObtainedPokemonRequirement(pokemonMap.Genesect)] }),
+            new ResearchWithCost(Lab.Research.shock_drive, ResearchType.Misc,
+                'Shock Drive', 'Investigate Shock Drive construction.',
+                20000,
+                [
+                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                    {item: {type: ItemType.item, id: 'Thunder_stone'}, amount: 100},
+                    {item: {type: ItemType.underground, id: 'Smooth Rock'}, amount: 100},
+                    {item: {type: ItemType.berry, id: BerryType.Wacan}, amount: 5000},
+                ],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
+                    workerFilter: new TypeFilter([PokemonType.Electric]),
+                    completeDelegate: () => {
+                        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (electric)').id);
+                    },
+                }),
+            new ResearchWithCost(Lab.Research.burn_drive, ResearchType.Misc,
+                'Burn Drive', 'Investigate Burn Drive construction.',
+                20000,
+                [
+                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                    {item: {type: ItemType.item, id: 'Fire_stone'}, amount: 100},
+                    {item: {type: ItemType.underground, id: 'Heat Rock'}, amount: 100},
+                    {item: {type: ItemType.berry, id: BerryType.Occa}, amount: 5000},
+                ],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
+                    workerFilter: new TypeFilter([PokemonType.Fire]),
+                    completeDelegate: () => {
+                        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (fire)').id);
+                    },
+                }),
+            new ResearchWithCost(Lab.Research.chill_drive, ResearchType.Misc,
+                'Chill Drive', 'Investigate Chill Drive construction.',
+                20000,
+                [
+                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                    {item: {type: ItemType.item, id: 'Ice_stone'}, amount: 100},
+                    {item: {type: ItemType.underground, id: 'Icy Rock'}, amount: 100},
+                    {item: {type: ItemType.berry, id: BerryType.Yache}, amount: 5000},
+                ],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
+                    workerFilter: new TypeFilter([PokemonType.Ice]),
+                    completeDelegate: () => {
+                        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (ice)').id);
+                    },
+                }),
+            new ResearchWithCost(Lab.Research.douse_drive, ResearchType.Misc,
+                'Douse Drive', 'Investigate Douse Drive construction.',
+                20000,
+                [
+                    {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
+                    {item: {type: ItemType.item, id: 'Water_stone'}, amount: 100},
+                    {item: {type: ItemType.underground, id: 'Damk Rock'}, amount: 100},
+                    {item: {type: ItemType.berry, id: BerryType.Passho}, amount: 5000},
+                ],
+                {
+                    requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
+                    workerFilter: new TypeFilter([PokemonType.Water]),
+                    completeDelegate: () => {
+                        App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (water)').id);
+                    },
+                }),
             */
             //#endregion
 
