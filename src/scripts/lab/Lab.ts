@@ -928,7 +928,7 @@ class Lab implements Feature {
             [
                 {item: {type: ItemType.item, id: 'Upgrade'}, amount: 100},
                 {item: {type: ItemType.item, id: 'Water_stone'}, amount: 100},
-                {item: {type: ItemType.underground, id: 'Damk Rock'}, amount: 100},
+                {item: {type: ItemType.underground, id: 'Damp Rock'}, amount: 100},
                 {item: {type: ItemType.berry, id: BerryType.Passho}, amount: 5000},
             ],
             {
