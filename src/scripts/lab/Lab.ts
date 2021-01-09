@@ -861,8 +861,6 @@ class Lab implements Feature {
         //#endregion
 
         //#region Genesect
-        // TODO: HLXII - Implement Genesect Research when Genesect forms are added
-        /*
         this.researchList[Lab.Research.drive_burner] = new ResearchWithCost(
             Lab.Research.drive_burner, ResearchType.Misc,
             'Drive Burner', 'Investigate construction process for Drives.',
@@ -886,7 +884,7 @@ class Lab implements Feature {
                 requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
                 workerFilter: new TypeFilter([PokemonType.Electric]),
                 completeDelegate: () => {
-                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (electric)').id);
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (shock)').id);
                 },
             }),
         this.researchList[Lab.Research.burn_drive] = new ResearchWithCost(
@@ -903,7 +901,7 @@ class Lab implements Feature {
                 requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
                 workerFilter: new TypeFilter([PokemonType.Fire]),
                 completeDelegate: () => {
-                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (fire)').id);
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (burn)').id);
                 },
             }),
         this.researchList[Lab.Research.chill_drive] = new ResearchWithCost(
@@ -920,7 +918,7 @@ class Lab implements Feature {
                 requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
                 workerFilter: new TypeFilter([PokemonType.Ice]),
                 completeDelegate: () => {
-                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (ice)').id);
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (chill)').id);
                 },
             }),
         this.researchList[Lab.Research.douse_drive] = new ResearchWithCost(
@@ -937,10 +935,9 @@ class Lab implements Feature {
                 requirements: [new ResearchedRequirement(Lab.Research.drive_burner)],
                 workerFilter: new TypeFilter([PokemonType.Water]),
                 completeDelegate: () => {
-                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (water)').id);
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Genesect (douse)').id);
                 },
             }),
-        */
         //#endregion
 
 
@@ -1524,13 +1521,11 @@ namespace Lab {
         'reaper_cloth',
         'ice_stone',
         // Genesect
-        /*
         'drive_burner',
         'shock_drive',
         'burn_drive',
         'chill_drive',
         'douse_drive',
-        */
         // Arceus
         'legendary_plate',
         'legendary_draco_plate',
