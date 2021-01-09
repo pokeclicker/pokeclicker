@@ -138,7 +138,7 @@ gymList['Trainer Hop'] = new Champion(
     BadgeEnums.Elite_Hop,
     100000,
     'Thanks, mate. I\'m really glad you were the one here with me.',
-    [new GymBadgeRequirement(BadgeEnums.Elite_Bede)],
+    [new GymBadgeRequirement(BadgeEnums.Elite_Marnie)],
     // Bulbasaur
     [new GymPokemon('Inteleon', 2015330, 60)],
     // Charmander

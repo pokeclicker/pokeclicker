@@ -1370,7 +1370,7 @@ gymList['Motostoke'] = new Gym(
     BadgeEnums.Galar_Fire,
     128000,
     'I\'m often regarded as the first real roadblock of the Gym Challenge, and yet you defeated me! Clearly, your talent surpassed my many years of experience. I still have much to learn!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 6)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 13)]
 );
 gymList['Stow-on-Side'] = new Gym(
     'Bea',
@@ -1384,7 +1384,7 @@ gymList['Stow-on-Side'] = new Gym(
     BadgeEnums.Galar_Fighting,
     128000,
     'Your strength nearly made me want to turn and run in my bare feet!',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 7)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 15)]
 );
 gymList['Ballonlea'] = new Gym(
     'Opal',
@@ -1412,7 +1412,7 @@ gymList['Circhester'] = new Gym(
     BadgeEnums.Galar_Rock,
     128000,
     'I just want to climb into a hole... Well, I guess it\'d be more like falling from here.',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 10)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 18)]
 );
 gymList['Spikemuth'] = new Gym(
     'Piers',
@@ -1426,7 +1426,7 @@ gymList['Spikemuth'] = new Gym(
     BadgeEnums.Galar_Dark,
     128000,
     'Me an\' my team gave it our best. Let\'s meet up again for a battle some time...',
-    [new RouteKillRequirement(10, GameConstants.Region.galar, 14)]
+    [new RouteKillRequirement(10, GameConstants.Region.galar, 22)]
 );
 gymList['Hammerlocke'] = new Gym(
     'Raihan',
@@ -1440,7 +1440,10 @@ gymList['Hammerlocke'] = new Gym(
     BadgeEnums.Galar_Dragon,
     128000,
     'I might have lost, but I still look good. Maybe I should snap a quick selfie...',
-    [new GymBadgeRequirement(BadgeEnums.Galar_Dark)]
+    [
+        new RouteKillRequirement(20, GameConstants.Region.galar, 22),
+        new GymBadgeRequirement(BadgeEnums.Galar_Dark),
+    ]
 );
 gymList['Trainer Marnie'] = new Gym(
     'Marnie',
