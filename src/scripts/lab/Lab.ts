@@ -945,27 +945,215 @@ class Lab implements Feature {
 
 
         //#region Arceus
-        // TODO: HLXII - Implement Arceus Plates, not sure what unlock condition should be
-        /*
-        'legendary_plate',
-        'legendary_draco_plate',
-        'legendary_dread_plate',
-        'legendary_earth_plate',
-        'legendary_fist_plate',
-        'legendary_flame_plate',
-        'legendary_icicle_plate',
-        'legendary_insect_plate',
-        'legendary_iron_plate',
-        'legendary_meadow_plate',
-        'legendary_mind_plate',
-        'legendary_sky_plate',
-        'legendary_splash_plate',
-        'legendary_spooky_plate',
-        'legendary_stone_plate',
-        'legendary_toxic_plate',
-        'legendary_zap_plate',
-        'legendary_pixie_plate',
-        */
+        this.researchList[Lab.Research.legendary_plate] = new Research(
+            Lab.Research.legendary_plate, ResearchType.Plate,
+            'Legendary Plates', 'Investigate construction process for Legendary Plates.',
+            10000, { requirements: [new ObtainedPokemonRequirement(pokemonMap['Arceus (normal)'])] }),
+
+        this.researchList[Lab.Research.legendary_draco_plate] = new ResearchWithCost(
+            Lab.Research.legendary_draco_plate, ResearchType.Plate,
+            'Legendary Draco Plate', 'Investigate Legendary Draco Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Draco Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Dragon]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (dragon)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_dread_plate] = new ResearchWithCost(
+            Lab.Research.legendary_dread_plate, ResearchType.Plate,
+            'Legendary Dread Plate', 'Investigate Legendary Dread Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Dread Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Dark]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (dark)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_earth_plate] = new ResearchWithCost(
+            Lab.Research.legendary_earth_plate, ResearchType.Plate,
+            'Legendary Earth Plate', 'Investigate Legendary Earth Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Earth Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Ground]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (ground)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_fist_plate] = new ResearchWithCost(
+            Lab.Research.legendary_fist_plate, ResearchType.Plate,
+            'Legendary Fist Plate', 'Investigate Legendary Fist Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Fist Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Fighting]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (fighting)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_flame_plate] = new ResearchWithCost(
+            Lab.Research.legendary_flame_plate, ResearchType.Plate,
+            'Legendary Flame Plate', 'Investigate Legendary Flame Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Flame Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Fire]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (fire)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_icicle_plate] = new ResearchWithCost(
+            Lab.Research.legendary_icicle_plate, ResearchType.Plate,
+            'Legendary Icicle Plate', 'Investigate Legendary Icicle Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Icicle Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Ice]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (ice)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_insect_plate] = new ResearchWithCost(
+            Lab.Research.legendary_insect_plate, ResearchType.Plate,
+            'Legendary Insect Plate', 'Investigate Legendary Insect Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Insect Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Bug]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (bug)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_iron_plate] = new ResearchWithCost(
+            Lab.Research.legendary_iron_plate, ResearchType.Plate,
+            'Legendary Iron Plate', 'Investigate Legendary Iron Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Iron Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Steel]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (steel)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_meadow_plate] = new ResearchWithCost(
+            Lab.Research.legendary_meadow_plate, ResearchType.Plate,
+            'Legendary Meadow Plate', 'Investigate Legendary Meadow Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Meadow Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Grass]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (grass)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_mind_plate] = new ResearchWithCost(
+            Lab.Research.legendary_mind_plate, ResearchType.Plate,
+            'Legendary Mind Plate', 'Investigate Legendary Mind Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Mind Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Psychic]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (psychic)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_sky_plate] = new ResearchWithCost(
+            Lab.Research.legendary_sky_plate, ResearchType.Plate,
+            'Legendary Sky Plate', 'Investigate Legendary Sky Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Sky Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Flying]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (flying)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_splash_plate] = new ResearchWithCost(
+            Lab.Research.legendary_splash_plate, ResearchType.Plate,
+            'Legendary Splash Plate', 'Investigate Legendary Splash Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Splash Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Water]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (water)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_spooky_plate] = new ResearchWithCost(
+            Lab.Research.legendary_spooky_plate, ResearchType.Plate,
+            'Legendary Spooky Plate', 'Investigate Legendary Spooky Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Spooky Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Ghost]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (ghost)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_stone_plate] = new ResearchWithCost(
+            Lab.Research.legendary_stone_plate, ResearchType.Plate,
+            'Legendary Stone Plate', 'Investigate Legendary Stone Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Stone Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Rock]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (rock)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_toxic_plate] = new ResearchWithCost(
+            Lab.Research.legendary_toxic_plate, ResearchType.Plate,
+            'Legendary Toxic Plate', 'Investigate Legendary Toxic Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Toxic Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Poison]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (poison)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_zap_plate] = new ResearchWithCost(
+            Lab.Research.legendary_zap_plate, ResearchType.Plate,
+            'Legendary Zap Plate', 'Investigate Legendary Zap Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Zap Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Electric]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (electric)').id);
+                },
+            }),
+        this.researchList[Lab.Research.legendary_pixie_plate] = new ResearchWithCost(
+            Lab.Research.legendary_pixie_plate, ResearchType.Plate,
+            'Legendary Pixie Plate', 'Investigate Legendary Pixie Plate construction.',
+            20000,
+            [{item: {type: ItemType.underground, id: 'Pixie Plate'}, amount: 1000}],
+            {
+                requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
+                workerFilter: new TypeFilter([PokemonType.Fairy]),
+                completeDelegate: () => {
+                    App.game.party.gainPokemonById(PokemonHelper.getPokemonByName('Arceus (fairy)').id);
+                },
+            }),
         //#endregion
 
         //#endregion
@@ -1344,7 +1532,6 @@ namespace Lab {
         'douse_drive',
         */
         // Arceus
-        /*
         'legendary_plate',
         'legendary_draco_plate',
         'legendary_dread_plate',
@@ -1363,7 +1550,6 @@ namespace Lab {
         'legendary_toxic_plate',
         'legendary_zap_plate',
         'legendary_pixie_plate',
-        */
     }
 
     // TODO: HLXII - Add all Machines
