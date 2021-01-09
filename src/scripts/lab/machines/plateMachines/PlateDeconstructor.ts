@@ -98,6 +98,11 @@ class PlateDeconstructorState extends PlateMachineState {
                 if (this.progress >= this.progressAmount()) {
                     // Gain shards
                     App.game.shards.gainShards(PlateDeconstructor.shardProfit(), this.plateType);
+
+                    // Handle Statistics
+                    GameHelper.incrementObservable(App.game.statistics.totalPlatesDeconstructed);
+                    GameHelper.incrementObservable(App.game.statistics.platesDeconstructed[this.plateType]);
+
                     // Checking queue
                     if (this.queue > 0 && PlateDeconstructor.getPlateAmount(this.plateType)() > 0) {
                         this.queue -= 1;

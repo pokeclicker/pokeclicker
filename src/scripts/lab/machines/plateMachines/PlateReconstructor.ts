@@ -98,6 +98,11 @@ class PlateReconstructorState extends PlateMachineState {
                 if (this.progress >= this.progressAmount()) {
                     // Gain plate
                     const plateAmount = PlateReconstructor.getPlateAmount(this.plateType);
+
+                    // Handle Statistics
+                    GameHelper.incrementObservable(App.game.statistics.totalPlatesReconstructed);
+                    GameHelper.incrementObservable(App.game.statistics.platesReconstructed[this.plateType]);
+
                     GameHelper.incrementObservable(plateAmount, 1);
                     // Checking queue
                     if (this.queue > 0 && App.game.shards.shardWallet[this.plateType]() >= PlateReconstructor.shardCost()) {

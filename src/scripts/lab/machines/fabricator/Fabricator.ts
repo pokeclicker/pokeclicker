@@ -233,6 +233,11 @@ class FabricatorState extends MachineState {
                 if (this.progress >= this.progressAmount()) {
                     // Gain Blueprint
                     BagHandler.gainItem(Fabricator.blueprints[this.blueprint].fabrication);
+
+                    // Handle Statistics
+                    GameHelper.incrementObservable(App.game.statistics.totalFabrications);
+                    GameHelper.incrementObservable(App.game.statistics.blueprintsFabricated[this.blueprint]);
+
                     // Checking queue
                     if (this.queue > 0 && Fabricator.blueprints[this.blueprint].canFabricate) {
                         this.queue -= 1;

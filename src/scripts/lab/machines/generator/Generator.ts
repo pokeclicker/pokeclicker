@@ -223,7 +223,14 @@ class GeneratorState extends MachineState {
 
         // Handle fueling
         BagHandler.gainItem(fuel.item, -amount);
-        this.fuel += amount * Generator.getFuelAmount(fuel);
+        const fuelCost = amount * Generator.getFuelAmount(fuel);
+        this.fuel += fuelCost;
+
+        // Handle Statistics
+        GameHelper.incrementObservable(App.game.statistics.totalIncubatorFuelItemsUsed, amount);
+        GameHelper.incrementObservable(App.game.statistics.totalIncubatorFuelUsed, fuelCost);
+        GameHelper.incrementObservable(App.game.statistics.incubatorFuelItemUsed[Generator.selectedFuel()], amount);
+
         // Sanity check
         this.fuel = Math.min(this.fuel, Generator.fuelCapacity());
 

@@ -217,7 +217,7 @@ class FossilReviverState extends MachineState {
             }
             case MachineStage.active: {
                 // Updating fossils
-                const progress = delta * FossilReviver.revivalSpeed() * multiplier.getBonus('machine') * 100; // TODO: HLXII TEMPORARY
+                const progress = delta * FossilReviver.revivalSpeed() * multiplier.getBonus('machine');
                 this._fossils.reverse().forEach((fossil, idx) => {
                     if (!fossil().fossil) {
                         return;
@@ -417,9 +417,8 @@ class FossilReviverState extends MachineState {
         }
 
         // Update statistics
-        //TODO: HLXII - Handle Fossil Statistics
-        //GameHelper.incrementObservable(App.game.statistics.pokemonHatched[pokemonID]);
-        //GameHelper.incrementObservable(App.game.statistics.totalPokemonHatched);
+        GameHelper.incrementObservable(App.game.statistics.totalFossilsRevived);
+        GameHelper.incrementObservable(App.game.statistics.fossilsRevived[fossil]);
     }
 
     toJSON(): Record<string, any> {

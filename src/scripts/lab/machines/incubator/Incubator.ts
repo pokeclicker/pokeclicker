@@ -250,7 +250,14 @@ class IncubatorState extends MachineState {
 
         // Handle fueling
         BagHandler.gainItem(fuel.item, -amount);
-        this.fuel += amount * Incubator.getFuelAmount(fuel);
+        const fuelCost = amount * Incubator.getFuelAmount(fuel);
+        this.fuel += fuelCost;
+
+        // Handle Statistics
+        GameHelper.incrementObservable(App.game.statistics.totalIncubatorFuelItemsUsed, amount);
+        GameHelper.incrementObservable(App.game.statistics.totalIncubatorFuelUsed, fuelCost);
+        GameHelper.incrementObservable(App.game.statistics.incubatorFuelItemUsed[Incubator.selectedFuel()], amount);
+
         // Sanity check
         this.fuel = Math.min(this.fuel, Incubator.fuelCapacity());
 
