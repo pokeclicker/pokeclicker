@@ -21,6 +21,7 @@ enum BlueprintType {
     magmarizer,
     protector,
     reaper_cloth,
+    ice_stone,
     // Machines
     fabricator,
     plate_deconstructor,

@@ -101,6 +101,10 @@ class Fabricator extends Machine {
             [{item: {type: ItemType.shard, id: PokemonType.Ghost}, amount: 10000}],
             {type: ItemType.item, id: 'Reaper_cloth'}, Lab.Research.reaper_cloth);
 
+        this.blueprints[BlueprintType.ice_stone] = new Blueprint('Ice Stone', BlueprintType.ice_stone, 1000,
+            [{item: {type: ItemType.shard, id: PokemonType.Ice}, amount: 10000}],
+            {type: ItemType.item, id: 'Ice_stone'}, Lab.Research.ice_stone);
+
         //#endregion
 
         //#region Machines
