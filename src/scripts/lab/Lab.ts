@@ -130,10 +130,10 @@ class Lab implements Feature {
 
         //#endregion
 
-
         //#region Machines
 
-        // Fabricator
+        //#region Fabricator
+
         this.researchList[Lab.Research.fabricator] = new Research(
             Lab.Research.fabricator, ResearchType.Machine,
             'Fabricator', 'Unlocks the Fabricator machine.',
@@ -159,7 +159,10 @@ class Lab implements Feature {
             'Fabricator Speed IV', 'Increases fabrication speed by 100%.',
             135000, { requirements: [new ResearchedRequirement(Lab.Research.fabricator_speed3)] }),
 
-        // Plate Deconstructor
+        //#endregion
+
+        //#region Plate Deconstructor
+
         this.researchList[Lab.Research.plate_deconstructor] = new Research(
             Lab.Research.plate_deconstructor, ResearchType.Machine,
             'Plate Deconstructor', 'Unlocks the Plate Deconstructor Machine.',
@@ -195,7 +198,10 @@ class Lab implements Feature {
             'Plate Deconstructor Efficiency I', 'Increases amount of shards gained from plate deconstruction by 75%.',
             36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_deconstructor_eff2)] }),
 
-        // Plate Reconstructor
+        //#endregion
+
+        //#region Plate Reconstructor
+
         this.researchList[Lab.Research.plate_reconstructor] = new Research(
             Lab.Research.plate_reconstructor, ResearchType.Machine,
             'Plate Reconstructor', 'Unlocks the Plate Reconstructor Machine.',
@@ -230,6 +236,8 @@ class Lab implements Feature {
             Lab.Research.plate_reconstructor_eff3, ResearchType.Machine,
             'Plate Reconstructor Efficiency I', 'Decreases amount of shards required for plate reconstruction by 50%.',
             36000, { requirements: [new ResearchedRequirement(Lab.Research.plate_reconstructor_eff2)] }),
+
+        //#endregion
 
         //#region Incubator
 
@@ -689,13 +697,16 @@ class Lab implements Feature {
         'pokeball_factory_speed1',
         'pokeball_factory_speed2',
         'pokeball_factory_speed3',
+        'pokeball_factory_eff1',
+        'pokeball_factory_eff2',
+        'pokeball_facotry_eff3',
         'fastball',
         'quickball',
         'timerball',
         'duskball',
         'luxuryball',
         */
-
+        // TODO: HLXII - Add Apricorn pokeball blueprints if those are implemented
         // Type Boosters
         // TODO: HLXII - Implement Type Boosters after Typed BF is implemented
         /*
@@ -939,7 +950,6 @@ class Lab implements Feature {
                 },
             }),
         //#endregion
-
 
         //#region Arceus
         this.researchList[Lab.Research.legendary_plate] = new Research(

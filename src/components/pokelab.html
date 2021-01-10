@@ -50,21 +50,6 @@ style="cursor:default" tabindex="-1">
                         </div>
                         <!-- /ko -->
                     </div>
-
-                    <div class="row no-gutters justify-content-around">
-                        <!-- ko if: LabController.selectedMachine() === undefined -->
-                        <button class="col-6 btn btn-primary m-1" onclick="LabController.openMachineListModal()">
-                            Add Machine
-                        </button>
-                        <!-- /ko -->
-                        <!-- ko if: LabController.selectedMachine() !== undefined -->
-                        <button class="col-6 btn btn-danger m-1"
-                            data-bind="click: function() { LabController.selectedMachine(undefined); },
-                            text: 'Cancel Add Machine ' + '(' + LabController.selectedMachine().amount + ' left)'">
-                            Cancel Add Machine
-                        </button>
-                        <!-- /ko -->
-                    </div>
                 </div>
 
                 <div id="research" class="tab-pane fade">
@@ -128,15 +113,27 @@ style="cursor:default" tabindex="-1">
                 </div>
             </div>
 
-            <div class="modal-footer">
-                <button type="button" class="btn mr-auto"
-                    data-bind="visible: LabController.additionalInfoTooltip().length !== 0,
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn"
+                    data-bind="enable: LabController.additionalInfoTooltip().length !== 0,
                     tooltip: {
                         title: LabController.additionalInfoTooltip(),
                         trigger: 'hover',
                         placement:'top',
                         html: true,
                     }">ⓘ</button>
+                    <!-- ko if: LabController.selectedMachine() === undefined -->
+                    <button class="col-6 btn btn-primary m-1" onclick="LabController.openMachineListModal()">
+                        Add Machine
+                    </button>
+                    <!-- /ko -->
+                    <!-- ko if: LabController.selectedMachine() !== undefined -->
+                    <button class="col-6 btn btn-danger m-1"
+                        data-bind="click: function() { LabController.selectedMachine(undefined); },
+                        text: 'Cancel Add Machine ' + '(' + LabController.selectedMachine().amount + ' left)'">
+                        Cancel Add Machine
+                    </button>
+                    <!-- /ko -->
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
         </div>

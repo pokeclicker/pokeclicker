@@ -65,6 +65,9 @@ class PlacedMachine implements Saveable {
 
         // Handle removing machine from placed machines
         App.game.lab.placedMachines.remove(this);
+
+        // Reset machine effects
+        App.game.lab.resetEffects();
     }
 
     toJSON(): Record<string, any> {
