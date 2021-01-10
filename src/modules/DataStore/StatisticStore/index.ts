@@ -153,7 +153,6 @@ export default class Statistics implements Saveable {
         'platesDeconstructed',
         'incubatorFuelItemUsed',
         'generatorFuelItemUsed',
-        'fossilsRevived',
     ];
     // These will allow negative values (special events etc)
     objectObservables = [
