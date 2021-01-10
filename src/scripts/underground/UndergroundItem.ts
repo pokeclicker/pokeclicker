@@ -55,7 +55,7 @@ class UndergroundItem {
         }
     }
 
-    get underGroundImage() {
+    get undergroundImage() {
         return `assets/images/underground/${this.name}.png`;
     }
 
