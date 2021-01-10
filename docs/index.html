@@ -17,10 +17,10 @@
     <script src="libs/Sortable.min.js"></script>
 
     <!-- New module-based code from './modules' -->
-    <script src="scripts/modules.min.js?v=0.7.0"></script>
+    <script src="scripts/modules.min.js?v=0.7.2"></script>
 
     <!--Minified scripts-->
-    <script src="scripts/script.min.js?v=0.7.0"></script>
+    <script src="scripts/script.min.js?v=0.7.2"></script>
 
     <!--Popper.js-->
     <script src="libs/popper.min.js"></script>
@@ -41,7 +41,7 @@
     <link href="libs/introjs-modern.css" rel="stylesheet">
 
     <!--Minified styles-->
-    <link href="styles/styles.min.css?v=0.7.0" rel="stylesheet">
+    <link href="styles/styles.min.css?v=0.7.2" rel="stylesheet">
 
     <!-- Google Analytics-->
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -109,43 +109,6 @@
 <link href="https://bootswatch.com/4/yeti/bootstrap.min.css" rel="stylesheet" data-bind="attr: {href: 'https://bootswatch.com/4/' + Settings.getSetting('theme').observableValue() + '/bootstrap.min.css'}">
 
 <!--$DEV_BANNER-->
-<div class="modal" data-keyboard="false" data-backdrop="static" id="developmentModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-info">
-                <h5 class="modal-title">Unova is here!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body text-left">
-                <p>The Unova region is now able to be visited,<br/>
-                Some things may still not quite be right, so please help us out by checking the following:<br/>
-                <ul>
-                    <li>Dungeons, Gyms, Towns and Routes all have the appropriate background</li>
-                    <li>Correct spelling for Towns, Gym Leaders etc.</li>
-                    <li>Dungeons and Gyms HP is high/low enough</li>
-                </ul>
-                </p>
-                <i class="text-warning">Note: The Unova Fossil Pokemon are not able to be obtained currently</i>
-                <hr/>
-                <p>Please submit any issues you find on <a href="https://discord.gg/a6DFe4p" target="_blank">Discord</a>
-                    or <a href="https://github.com/pokeclicker/pokeclicker/issues" target="_blank">GitHub</a>.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Lets GO!</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function checkDevModal(event) {
-        //$('#developmentModal').modal('show');
-    });
-</script>
-
-
 <div class="loader" id="loader">
     <br>
     <div class="loader-wrapper">
@@ -1294,7 +1257,7 @@
                                 </lineargradient>
                             </defs>
 
-                            <g data-bind='if: player.region == GameConstants.Region.kanto'>
+                            <g data-bind='visible: player.region == GameConstants.Region.kanto'>
     <image width="100%" xlink:href="assets/images/kanto.png"></image>
 
     <!-- ------ -->
@@ -2028,18 +1991,18 @@
         ">
 </rect>
 
-    <!--vermilion City-->
+    <!--Vermilion City-->
     
 
 <rect class="city"
-    data-town="vermilion City" 
+    data-town="Vermilion City" 
     x="944"
     y="512"
     height="64"
     width="64"
     data-bind="
-        click:function(){MapHelper.moveToTown('vermilion City')},
-        attr: { class: MapHelper.calculateTownCssClass('vermilion City') },
+        click:function(){MapHelper.moveToTown('Vermilion City')},
+        attr: { class: MapHelper.calculateTownCssClass('Vermilion City') },
         ">
 </rect>
 
@@ -2357,7 +2320,7 @@
 </rect>
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.johto'>
+                            <g data-bind='visible: player.region == GameConstants.Region.johto'>
     <image width="100%" xlink:href="assets/images/johto.png"></image>
 
     <!-- ------ -->
@@ -3472,7 +3435,7 @@
 
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.hoenn'>
+                            <g data-bind='visible: player.region == GameConstants.Region.hoenn'>
     <image width="100%" xlink:href="assets/images/hoenn.png"></image>
 
     <!-- ------ -->
@@ -4979,7 +4942,7 @@
 
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.sinnoh'>
+                            <g data-bind='visible: player.region == GameConstants.Region.sinnoh'>
     <image width="100%" xlink:href="assets/images/sinnoh.png"></image>
 
     <!-- ------ -->
@@ -6524,7 +6487,7 @@
 </rect>
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.unova'>
+                            <g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="100%" xlink:href="assets/images/unova.png"></image>
 
     <!-- ------ -->
@@ -7962,7 +7925,7 @@
     width="48"
     data-bind="click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass(&#39;Castelia City&#39;) }">
 </rect>
-     
+
     <!--bridge-->
     
 
@@ -8007,7 +7970,7 @@
 </rect>
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.kalos'>
+                            <g data-bind='visible: player.region == GameConstants.Region.kalos'>
     <image width="100%" xlink:href="assets/images/background.png"></image>
 
     <!-- ------ -->
@@ -8879,7 +8842,7 @@
 
 </g>
 
-                            <g data-bind='if: player.region == GameConstants.Region.alola'>
+                            <g data-bind='visible: player.region == GameConstants.Region.alola'>
     <image width="100%" xlink:href="assets/images/background.png"></image>
 
     <!-- ------ -->
@@ -10410,27 +10373,25 @@ aria-labelledby="AchievementsModalLabel" aria-hidden="true">
                             <div class="form-row">
                                 <div class="form-group col-md-4 col-4">
                                     <label>Status</label>
-                                    <select class="custom-select" onchange="AchievementHandler.filter.status(this.value)">
-                                        <option value="all" selected>All</option>
-                                        <option value="false">Incomplete</option>
-                                        <option value="true">Completed</option>
+                                    <select name="achievementsStatus" class="custom-select" onchange="AchievementHandler.filter.status(this.value), Settings.setSettingByName(this.name, this.value)">
+                                        <!-- ko foreach: Settings.getSetting('achievementsStatus').options -->
+                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsStatus').value === $data.value }, text: $data.text">Status</option>
+                                        <!-- /ko -->
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4 col-4">
                                     <label>Type</label>
-                                    <select class="custom-select" onchange="AchievementHandler.filter.type(this.value)">
-                                        <option value="all" selected>All</option>
-                                        <!-- ko foreach: AchievementHandler.achievementTypes() -->
-                                        <option data-bind="value: $data, text: GameConstants.camelCaseToString($data.replace(/Requirement$/i, ''))">Type</option>
+                                    <select name="achievementsType" class="custom-select" onchange="AchievementHandler.filter.type(this.value), Settings.setSettingByName(this.name, this.value)">
+                                        <!-- ko foreach: Settings.getSetting('achievementsType').options.filter(r => r.value !== -1) -->
+                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsType').value === $data.value }, text: $data.text">Type</option>
                                         <!-- /ko -->
                                     </select>
                                 </div>
                                 <div class="form-group col-md-4 col-4">
                                     <label>Region</label>
-                                    <select class="custom-select" onchange="AchievementHandler.filter.region(this.value)">
-                                        <option value="all" selected>All</option>
-                                        <!-- ko foreach: GameHelper.enumStrings(GameConstants.Region).filter(r => GameConstants.Region[r] <= player.highestRegion()) -->
-                                        <option data-bind="value: GameConstants.Region[$data], text: GameConstants.camelCaseToString($data)">Region</option>
+                                    <select name="achievementsRegion" class="custom-select" onchange="AchievementHandler.filter.region(this.value), Settings.setSettingByName(this.name, this.value)">
+                                        <!-- ko foreach: Settings.getSetting('achievementsRegion').options.filter(r => r.value <= player.highestRegion()) -->
+                                        <option data-bind="attr: { value: $data.value, selected: Settings.getSetting('achievementsRegion').value === $data.value }, text: $data.text">Region</option>
                                         <!-- /ko -->
                                     </select>
                                 </div>
@@ -11799,7 +11760,19 @@ aria-labelledby="pokedexModalLabel">
                 <img src="assets/images/items/Protein.png" width="40%"/>
                 <br/>
                 <div class="sticky-top">
-                  <span class="btn btn-block btn-primary" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></span>
+                  <span class="btn btn-block btn-secondary btn-static" data-bind="text: 'Proteins: ' + player.itemList.Protein().toLocaleString('en-US')"></span>
+                  <button type="button" class="btn btn-sm btn-primary"
+                    style="position: absolute; right: 0px; top: 0px; width: 42px; height: 41px;"
+                    data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
+                    onclick="VitaminController.incrementMultiplier()"
+                    oncontextmenu="VitaminController.decrementMultiplier(); return false"
+                    title="Multiplier"
+                    data-toggle="popover"
+                    data-html="true"
+                    data-content="Left/right click to cycle amount<br/>Click on pokemon to use"
+                    data-placement="right"
+                    data-trigger="hover">
+                  </button>
                   <div class="input-group" data-bind="with: Settings.getSetting('partySort')">
                       <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
@@ -11822,7 +11795,7 @@ aria-labelledby="pokedexModalLabel">
                     </tr>
                   </thead>
                   <tbody data-bind="foreach: App.game.party.caughtPokemon">
-                    <tr class="clickable" data-bind="click: () => $data.useProtein(), hidden: $data.breeding">
+                    <tr class="clickable" data-bind="click: () => $data.useProtein(VitaminController.getMultiplier()), hidden: $data.breeding">
                       <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.proteinsUsed().toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: Math.floor($data.baseAttack * (GameConstants.BREEDING_ATTACK_BONUS / 100) + $data.proteinsUsed()).toLocaleString('en-US')">-</td>
