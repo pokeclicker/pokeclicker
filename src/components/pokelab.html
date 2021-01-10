@@ -1,58 +1,18 @@
 <div aria-labelledby="myModalLabel" class="modal fade noselect" id="labModal" role="dialog"
 style="cursor:default" tabindex="-1">
     <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content" data-bind="let: { labVisible: ko.observable(false) }">
             <div class="modal-header p-0">
                 <ul class="nav nav-tabs nav-fill w-100">
-                    <li class="nav-item"><a data-toggle='tab' class='nav-link active' href="#lab">Lab</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#research">Research</a></li>
-                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#labHelp">Help</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link active' href="#research" data-bind="click: function(){labVisible(false);}">Research</a></li>
+                    <li class="nav-item"><a data-toggle='tab' class='nav-link' href="#lab" data-bind="click: function(){labVisible(true);}">Lab</a></li>
+                    <li class='nav-item'><a data-toggle='tab' class='nav-link' href="#labHelp" data-bind="click: function(){labVisible(false);}">Help</a></li>
                 </ul>
             </div>
 
             <div class="modal-body tab-content p-0">
-                <div id="lab" class="tab-pane fade in active show">
-                    <div style="position: relative;">
-                        <img style="width: 100%" data-bind="attr: { src: LabController.getLabImage() }">
-                        <!-- ko foreach: App.game.lab.placedMachines -->
-                        <div id="machineHover" style="position: absolute;"
-                            data-bind="style: {
-                                width: $data.machineWidth(),
-                                height: $data.machineHeight(),
-                                top: $data.machineTop(),
-                                left: $data.machineLeft(),
-                            },
-                            tooltip: { title: $data.tooltip(), trigger: 'hover', placement: 'left', html: true },
-                            click: function() { LabController.handleMachineClick($data); }">
-                            <img width="100%" height="100%" style="image-rendering: pixelated;" src="" data-bind="attr: { src: $data.machine.image }">
-                        </div>
-                        <!-- /ko -->
-                        <div id="labGrid" style="position: absolute;" data-bind="visible: LabController.selectedMachine() !== undefined">
-                            <table style="width:100%;height:100%;">
-                                <tbody data-bind="foreach: { data: new Array(LabController.labRows()), as: 'y'}">
-                                    <tr data-bind="foreach: { data: new Array(LabController.labColumns()), as: 'x'}">
-                                        <td data-bind="click: function() {LabController.placeMachine(xIndex(),yIndex());},
-                                            event: { mouseover: function() {LabController.updateHover(xIndex(),yIndex());}, mouseout: function() {LabController.clearHover();}}"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- ko if: LabController.selectedMachine() !== undefined -->
-                        <div id="machineHover" style="position: absolute; pointer-events: none;"
-                            data-bind="visible: LabController.selectedMachineVisible(),
-                            style: {
-                                width: LabController.machineWidth(),
-                                height: LabController.machineHeight(),
-                                top: LabController.hoverTopMargin(),
-                                left: LabController.hoverLeftMargin(),
-                            }">
-                            <img width="100%" height="100%" style="image-rendering: pixelated;" src="" data-bind="attr: { src: LabController.selectedMachine().image }">
-                        </div>
-                        <!-- /ko -->
-                    </div>
-                </div>
 
-                <div id="research" class="tab-pane fade">
+                <div id="research" class="tab-pane fade in active show">
                     <div class="row no-gutters justify-content-around">
                         <button class="col-12 btn btn-primary m-1" onclick="LabController.openResearchListModal()">
                             Research List
@@ -108,6 +68,48 @@ style="cursor:default" tabindex="-1">
                         </p>
                     </div>
                 </div>
+
+                <div id="lab" class="tab-pane fade">
+                    <div style="position: relative;">
+                        <img style="width: 100%" data-bind="attr: { src: LabController.getLabImage() }">
+                        <!-- ko foreach: App.game.lab.placedMachines -->
+                        <div id="machineHover" style="position: absolute;"
+                            data-bind="style: {
+                                width: $data.machineWidth(),
+                                height: $data.machineHeight(),
+                                top: $data.machineTop(),
+                                left: $data.machineLeft(),
+                            },
+                            tooltip: { title: $data.tooltip(), trigger: 'hover', placement: 'left', html: true },
+                            click: function() { LabController.handleMachineClick($data); }">
+                            <img width="100%" height="100%" style="image-rendering: pixelated;" src="" data-bind="attr: { src: $data.machine.image }">
+                        </div>
+                        <!-- /ko -->
+                        <div id="labGrid" style="position: absolute;" data-bind="visible: LabController.selectedMachine() !== undefined">
+                            <table style="width:100%;height:100%;">
+                                <tbody data-bind="foreach: { data: new Array(LabController.labRows()), as: 'y'}">
+                                    <tr data-bind="foreach: { data: new Array(LabController.labColumns()), as: 'x'}">
+                                        <td data-bind="click: function() {LabController.placeMachine(xIndex(),yIndex());},
+                                            event: { mouseover: function() {LabController.updateHover(xIndex(),yIndex());}, mouseout: function() {LabController.clearHover();}}"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- ko if: LabController.selectedMachine() !== undefined -->
+                        <div id="machineHover" style="position: absolute; pointer-events: none;"
+                            data-bind="visible: LabController.selectedMachineVisible(),
+                            style: {
+                                width: LabController.machineWidth(),
+                                height: LabController.machineHeight(),
+                                top: LabController.hoverTopMargin(),
+                                left: LabController.hoverLeftMargin(),
+                            }">
+                            <img width="100%" height="100%" style="image-rendering: pixelated;" src="" data-bind="attr: { src: LabController.selectedMachine().image }">
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
                 <div id="labHelp" class="tab-pane fade">
                     <h4><u>Laboratory</u></h4>
                     <p>In the Laboratory you can use Machines and Research various topics</p>
@@ -132,6 +134,7 @@ style="cursor:default" tabindex="-1">
                         placement:'top',
                         html: true,
                     }">ⓘ</button>
+                    <!-- ko if: labVisible -->
                     <!-- ko if: LabController.selectedMachine() === undefined -->
                     <button class="col-6 btn btn-primary m-1" onclick="LabController.openMachineListModal()">
                         Add Machine
@@ -143,6 +146,7 @@ style="cursor:default" tabindex="-1">
                         text: 'Cancel Add Machine ' + '(' + LabController.selectedMachine().amount + ' left)'">
                         Cancel Add Machine
                     </button>
+                    <!-- /ko -->
                     <!-- /ko -->
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
             </div>
