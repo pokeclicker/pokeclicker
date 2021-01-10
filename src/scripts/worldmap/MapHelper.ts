@@ -27,7 +27,6 @@ class MapHelper {
                 Battle.generateNewEnemy();
             }
             App.game.gameState = GameConstants.GameState.fighting;
-            GameController.applyRouteBindings();
         } else {
             if (!MapHelper.routeExist(route, region)) {
                 return Notifier.notify({
@@ -155,7 +154,6 @@ class MapHelper {
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
-            GameController.applyRouteBindings();
         } else {
             const town = TownList[townName];
             const reqsList = [];
