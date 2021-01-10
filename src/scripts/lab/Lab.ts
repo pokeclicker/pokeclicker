@@ -166,7 +166,13 @@ class Lab implements Feature {
         this.researchList[Lab.Research.plate_deconstructor] = new Research(
             Lab.Research.plate_deconstructor, ResearchType.Machine,
             'Plate Deconstructor', 'Unlocks the Plate Deconstructor Machine.',
-            2000, {requirements: [new QuestLineRequirement('Mining Expedition')] } ),
+            2000,
+            {
+                requirements: [new QuestLineRequirement('Mining Expedition')],
+                completeDelegate: () => {
+                    App.game.lab.machines[Lab.Machine.plate_deconstructor].amount = 1;
+                },
+            } ),
 
         this.researchList[Lab.Research.plate_deconstructor_speed1] = new Research(
             Lab.Research.plate_deconstructor_speed1, ResearchType.Machine,
@@ -205,7 +211,13 @@ class Lab implements Feature {
         this.researchList[Lab.Research.plate_reconstructor] = new Research(
             Lab.Research.plate_reconstructor, ResearchType.Machine,
             'Plate Reconstructor', 'Unlocks the Plate Reconstructor Machine.',
-            2000, {requirements: [new QuestLineRequirement('Mining Expedition')] }),
+            2000,
+            {
+                requirements: [new QuestLineRequirement('Mining Expedition')],
+                completeDelegate: () => {
+                    App.game.lab.machines[Lab.Machine.plate_reconstructor].amount = 1;
+                },
+            }),
 
         this.researchList[Lab.Research.plate_reconstructor_speed1] = new Research(
             Lab.Research.plate_reconstructor_speed1, ResearchType.Machine,
@@ -244,7 +256,12 @@ class Lab implements Feature {
         this.researchList[Lab.Research.incubator] = new Research(
             Lab.Research.incubator, ResearchType.Machine,
             'Incubator', 'Unlocks the Incubator Machine.',
-            9000),
+            9000,
+            {
+                completeDelegate: () => {
+                    App.game.lab.machines[Lab.Machine.incubator].amount = 1;
+                },
+            }),
 
         this.researchList[Lab.Research.incubator_fuel] = new Research(
             Lab.Research.incubator_fuel, ResearchType.Machine,
@@ -563,7 +580,12 @@ class Lab implements Feature {
         this.researchList[Lab.Research.generator] = new Research(
             Lab.Research.generator, ResearchType.Machine,
             'Generator', 'Unlocks the Generator Machine.',
-            9000),
+            9000,
+            {
+                completeDelegate: () => {
+                    App.game.lab.machines[Lab.Machine.generator].amount = 1;
+                },
+            }),
 
         this.researchList[Lab.Research.generator_power1] = new Research(
             Lab.Research.generator_power1, ResearchType.Machine,
@@ -1291,6 +1313,10 @@ class Lab implements Feature {
             return;
         }
         const researchSlot = this.currentResearch().find(slot => slot.research.id === research.id);
+        if (!researchSlot) {
+            console.error(`Error: Completed research ${research.name} when not in slot.`);
+            return;
+        }
         researchSlot.clear();
         this.currentResearch.remove(researchSlot);
     }
