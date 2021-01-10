@@ -152,6 +152,10 @@ class Underground implements Feature {
         }
     }
 
+    public static getMineItemByName(name: string): UndergroundItem {
+        return UndergroundItem.list.find(i => i.name == name);
+    }
+
     public static getMineItemById(id: number): UndergroundItem {
         for (const item of UndergroundItem.list) {
             if (item.id == id) {
