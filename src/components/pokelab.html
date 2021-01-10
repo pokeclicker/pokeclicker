@@ -115,7 +115,7 @@ style="cursor:default" tabindex="-1">
 
             <div class="modal-footer justify-content-between">
                 <button type="button" class="btn"
-                    data-bind="enable: LabController.additionalInfoTooltip().length !== 0,
+                    data-bind="style: { opacity: LabController.additionalInfoTooltip().length !== 0 ? '' : '0%' },
                     tooltip: {
                         title: LabController.additionalInfoTooltip(),
                         trigger: 'hover',
