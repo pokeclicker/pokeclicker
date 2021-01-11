@@ -125,7 +125,7 @@ class Shards implements Feature {
     }
 
     public static image(type: number): string {
-        return `assets/images/shards/${type}.png`;
+        return `assets/images/shards/${PokemonType[type]} Shard.png`;
     }
 
     public openShardModal() {
