@@ -1952,7 +1952,6 @@ const pokemonList = createPokemonArray(
             'specialDefense': 70,
             'speed': 30,
         },
-        'heldItem': 'Kings_rock',
     },
     {
         'id': 81,
