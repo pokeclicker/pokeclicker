@@ -433,7 +433,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([17, 18, 21, 24, 'Undella Town', 'Humilau City']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Hulbury', 5, 6, 8, 9, 19, 21]),
     },
 
     Ice: {
@@ -444,7 +444,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Giant Chasm']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Circhester', 20, 23, 24]),
     },
 
     Forest: {
@@ -455,7 +455,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set([6, 'Lostlorn Forest', 'Pinwheel Forest', 'Pledge Grove', 'Floccesy Town']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Slumbering Weald', 'Inner Slumbering Weald', 'Glimwood Tangle', 'Ballonlea', 4]),
     },
 
     Cave: {
@@ -466,7 +466,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Seaside Cave', 'Twist Mountain', 'Reversal Mountain', 'Relic Passage', 'Relic Castle', 'Victory Road Unova']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Watchtower Ruins']),
     },
 
     GemCave: {
@@ -477,7 +477,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Chargestone Cave', 'Mistralton Cave', 'Cave of Being']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Galar Mine', 'Galar Mine No. 2']),
     },
 
     PowerPlant: {
@@ -488,7 +488,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Castelia Sewers', 'Virbank City', 'Nimbasa City']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Motostoke', 'Spikemuth']),
     },
 
     Mansion: {
@@ -499,7 +499,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.unova]: new Set(['Castelia City', 'Liberty Garden', 'Dreamyard', 'Mistralton City', 'Opelucid City']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
-        [Region.galar]: new Set(),
+        [Region.galar]: new Set(['Rose Tower', 'Hammerlocke', 'Stow-on-Side']),
     },
 
     Graveyard: {
