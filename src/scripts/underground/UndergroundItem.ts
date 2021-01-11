@@ -43,7 +43,20 @@ class UndergroundItem {
     }
 
     get imagePath() {
-        return `assets/images/underground/${this.id}.png`;
+        // Have to add extra logic here since images are all over the place in location and naming standards
+        // Maybe one day we refactor the item system to be cleaner
+        if (this.isStone()) {
+            const evostone: EvolutionStone = (ItemList[this.valueType] as EvolutionStone);
+            return evostone.imagePath;
+        } else if (this.valueType == 'Mine Egg') {
+            return `assets/images/breeding/${this.name}.png`;
+        } else {
+            return `assets/images/items/${this.name}.png`;
+        }
+    }
+
+    get undergroundImage() {
+        return `assets/images/underground/${this.name}.png`;
     }
 
 }
@@ -59,10 +72,10 @@ UndergroundItem.addItem('Light Clay',   7, [[1,0,1,0], [1,1,1,0], [1,1,1,1], [0,
 UndergroundItem.addItem('Odd Keystone', 8, [[1,1,1,1], [1,1,1,1], [1,1,1,1], [1,1,1,1]], 6);
 UndergroundItem.addItem('Hard Stone',   9, [[1,1],[1,1]], 4);
 UndergroundItem.addItem('Oval Stone',   10, [[1,1,1], [1,1,1], [1,1,1]], 3);
-UndergroundItem.addItem('Everstone',    11, [[1,1,1], [1,1,1]], 3);
-UndergroundItem.addItem('Smooth Rock',  12, [[1,1,1], [1,1,1], [1,1,1]], 2);
-UndergroundItem.addItem('Heat Rock',    13, [[1,1,1], [1,1,1]], 2);
-UndergroundItem.addItem('Icy Rock',     14, [[1,1,1], [1,1,1], [1,1,1]], 2);
+UndergroundItem.addItem('Everstone',    11, [[1,1,1,1], [1,1,1,1]], 3);
+UndergroundItem.addItem('Smooth Rock',  12, [[0,0,1,0], [1,1,1,0], [0,1,1,1], [0,1,0,0]], 2);
+UndergroundItem.addItem('Heat Rock',    13, [[1,0,1,0], [1,1,1,1], [1,1,1,1]], 2);
+UndergroundItem.addItem('Icy Rock',     14, [[0,1,1,0], [1,1,1,1], [1,1,1,1], [1,0,0,1]], 2);
 UndergroundItem.addItem('Damp Rock',    15, [[1,1,1], [1,1,1], [1,0,1]], 2);
 
 // Shard Plates
@@ -92,15 +105,15 @@ UndergroundItem.addItem('Root Fossil',  203, [[0,0,1,1,1], [0,0,1,1,1], [1,0,0,1
 UndergroundItem.addItem('Claw Fossil',  204, [[1,1,1,0,0], [1,1,1,1,0], [0,1,1,1,1], [0,0,0,1,1]], 0, 'Mine Egg');
 UndergroundItem.addItem('Armor Fossil', 205, [[0,1,1,1,0], [0,1,1,1,0], [1,1,1,1,1], [0,1,1,1,0]], 0, 'Mine Egg');
 UndergroundItem.addItem('Skull Fossil', 206, [[1,1,1,1], [1,1,1,1], [1,1,1,1], [0,1,1,0]], 0, 'Mine Egg');
-UndergroundItem.addItem('Cover Fossil', 207, [[1,1,1], [1,1,1], [1,1,1]], 0, 'Mine Egg');
-UndergroundItem.addItem('Plume Fossil', 208, [[1,1,1], [1,1,1], [1,1,1]], 0, 'Mine Egg');
+UndergroundItem.addItem('Cover Fossil', 207, [[1,1,1,1,0], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [0,1,1,1,1]], 0, 'Mine Egg');
+UndergroundItem.addItem('Plume Fossil', 208, [[0,0,1,1,1], [1,1,1,1,1], [1,1,1,1,1], [1,1,1,1,0], [1,1,0,0,0]], 0, 'Mine Egg');
 // UndergroundItem.addItem('Jaw Fossil',   209, [[1,1,1], [1,1,1], [1,1,1]], 0, 'Mine Egg');
 // UndergroundItem.addItem('Sail Fossil',  210, [[1,1,1], [1,1,1], [1,1,1]], 0, 'Mine Egg');
 
 // Evolution Stones
 UndergroundItem.addItem('Fire Stone',    300, [[1,1,1], [1,1,1], [1,1,1]], 1, 'Fire_stone');
-UndergroundItem.addItem('Water Stone',   301, [[1,1,1], [1,1,1], [1,1,1]], 1, 'Water_stone');
-UndergroundItem.addItem('Thunder Stone', 302, [[1,1,1], [1,1,1], [1,1,1]], 1, 'Thunder_stone');
-UndergroundItem.addItem('Leaf Stone',    303, [[1,1,1], [1,1,1], [1,1,1]], 1, 'Leaf_stone');
-UndergroundItem.addItem('Moon Stone',    304, [[1,1,1], [1,1,1], [1,1,1]], 1, 'Moon_stone');
-UndergroundItem.addItem('Sun Stone',     305, [[1,1,1], [1,1,1], [1,1,1]], 1, 'Sun_stone');
+UndergroundItem.addItem('Water Stone',   301, [[1,1,1], [1,1,1], [1,1,0]], 1, 'Water_stone');
+UndergroundItem.addItem('Thunder Stone', 302, [[0,1,1], [1,1,1], [1,1,0]], 1, 'Thunder_stone');
+UndergroundItem.addItem('Leaf Stone',    303, [[0,1,0], [1,1,1], [1,1,1], [0,1,0]], 1, 'Leaf_stone');
+UndergroundItem.addItem('Moon Stone',    304, [[0,1,1,1], [1,1,1,0]], 1, 'Moon_stone');
+UndergroundItem.addItem('Sun Stone',     305, [[0,1,0], [1,1,1], [1,1,1]], 1, 'Sun_stone');
