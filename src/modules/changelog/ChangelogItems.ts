@@ -10,6 +10,11 @@ import ChangelogUpdate from './ChangelogUpdate';
  */
 const ChangelogItems = [
     // note that month is 0 indexed
+    // v0.7.2
+    new ChangelogUpdate('v0.7.2', new Date(2021, 0, 3)),
+    new Changelog(changelogType.FIXED, 'Poison Barb not gaining experience'),
+    new Changelog(changelogType.FIXED, 'Map tooltips not always showing'),
+
     // v0.7.1
     new ChangelogUpdate('v0.7.1', new Date(2021, 0, 1)),
     new Changelog(changelogType.NEW, 'Unova Fossils now available in the Underground'),
