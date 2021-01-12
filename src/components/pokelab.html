@@ -25,8 +25,7 @@ style="cursor:default" tabindex="-1">
                             <br>
                             <small><span data-bind="text: $data.research.description">Description</span></small>
                             <br>
-                            <!-- TODO: HLXII - Update with better formatting -->
-                            <span data-bind="text: 'Research Rate: ' + $data.workerRate">Research Rate</span>
+                            <span data-bind="text: 'Research Rate: ' + $data.workerRate.toFixed(1)">Research Rate</span>
                         </div>
                         <div class="col-4 p-1">
                             <button class="btn btn-block btn-primary"
