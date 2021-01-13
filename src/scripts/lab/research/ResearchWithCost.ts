@@ -52,7 +52,6 @@ class ResearchWithCost extends Research {
     /**
      * Returns the tooltip to be displayed for the unlock button.
      * Displays all the items required for unlocking the research
-     * TODO: HLXII - Add images?
      */
     get costTooltip(): string {
         return this._costs.map(itemCost => {

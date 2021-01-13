@@ -712,22 +712,54 @@ class Lab implements Feature {
         // Research Booster
         // TODO: HLXII - Not sure if we need a Research Booster
 
-        // Pokeball Factory
-        // TODO: HLXII - Implement Pokeball Factory
-        /*
-        'pokeball_factory',
-        'pokeball_factory_speed1',
-        'pokeball_factory_speed2',
-        'pokeball_factory_speed3',
-        'pokeball_factory_eff1',
-        'pokeball_factory_eff2',
-        'pokeball_facotry_eff3',
-        'fastball',
-        'quickball',
-        'timerball',
-        'duskball',
-        'luxuryball',
-        */
+        //#region Pokeball Factory
+
+        this.researchList[Lab.Research.pokeball_factory] = new Research(
+            Lab.Research.pokeball_factory, ResearchType.Machine,
+            'Pokéball Factory', 'Unlocks the Pokéball Factory Machine.',
+            1000,
+            {
+                completeDelegate: () => {
+                    App.game.lab.machines[Lab.Machine.pokeball_factory].amount = 1;
+                },
+            }),
+
+        this.researchList[Lab.Research.pokeball_factory_speed1] = new Research(
+            Lab.Research.pokeball_factory_speed1, ResearchType.Machine,
+            'Pokéball Factory Speed I', 'Increases Pokéball production speed by 1.25x.',
+            4000, { requirements: [new ResearchedRequirement(Lab.Research.pokeball_factory)] }),
+        this.researchList[Lab.Research.pokeball_factory_speed2] = new Research(
+            Lab.Research.pokeball_factory_speed2, ResearchType.Machine,
+            'Pokéball Factory Speed II', 'Increases Pokéball production speed by 1.5x.',
+            16000, { requirements: [new ResearchedRequirement(Lab.Research.pokeball_factory_speed1)] }),
+        this.researchList[Lab.Research.pokeball_factory_speed3] = new Research(
+            Lab.Research.pokeball_factory_speed3, ResearchType.Machine,
+            'Pokéball Factory Speed III', 'Increases Pokéball production speed by 1.75x.',
+            64000, { requirements: [new ResearchedRequirement(Lab.Research.pokeball_factory_speed2)] }),
+
+        this.researchList[Lab.Research.fastball] = new Research(
+            Lab.Research.fastball, ResearchType.Machine,
+            'Pokéball Factory - Fastball', 'Unlocks the Fastball in the Pokéball Factory.',
+            5000, { requirements: [new ResearchedRequirement(Lab.Research.pokeball_factory)] }),
+        this.researchList[Lab.Research.quickball] = new Research(
+            Lab.Research.quickball, ResearchType.Machine,
+            'Pokéball Factory - Quickball', 'Unlocks the Quickball in the Pokéball Factory.',
+            5000, { requirements: [new ResearchedRequirement(Lab.Research.pokeball_factory)] }),
+        this.researchList[Lab.Research.timerball] = new Research(
+            Lab.Research.timerball, ResearchType.Machine,
+            'Pokéball Factory - Timerball', 'Unlocks the Timerball in the Pokéball Factory.',
+            5000, { requirements: [new ResearchedRequirement(Lab.Research.pokeball_factory)] }),
+        this.researchList[Lab.Research.duskball] = new Research(
+            Lab.Research.duskball, ResearchType.Machine,
+            'Pokéball Factory - Duskball', 'Unlocks the Duskball in the Pokéball Factory.',
+            5000, { requirements: [new ResearchedRequirement(Lab.Research.pokeball_factory)] }),
+        this.researchList[Lab.Research.luxuryball] = new Research(
+            Lab.Research.luxuryball, ResearchType.Machine,
+            'Pokéball Factory - Luxuryball', 'Unlocks the Luxuryball in the Pokéball Factory.',
+            5000, { requirements: [new ResearchedRequirement(Lab.Research.pokeball_factory)] }),
+
+        //#endregion
+
         // TODO: HLXII - Add Apricorn pokeball blueprints if those are implemented
         // Type Boosters
         // TODO: HLXII - Implement Type Boosters after Typed BF is implemented
@@ -1189,7 +1221,6 @@ class Lab implements Feature {
 
         //#region Machines
 
-        // TODO: HLXII - Machines
         this.machines = [];
         this.machines[Lab.Machine.fabricator]           = new Fabricator(Lab.Machine.fabricator, 'Fabricator', 'Creates new machines and items.', 2, 3),
         this.machines[Lab.Machine.plate_deconstructor]  = new PlateDeconstructor(Lab.Machine.plate_deconstructor, 'Plate Deconstructor', 'Deconstruct plates into shards.', 1, 2),
@@ -1197,10 +1228,12 @@ class Lab implements Feature {
         this.machines[Lab.Machine.incubator]            = new Incubator(Lab.Machine.incubator, 'Incubator', 'Increases the total Hatchery queue slots when placed.', 2, 3),
         this.machines[Lab.Machine.fossil_reviver]       = new FossilReviver(Lab.Machine.fossil_reviver, 'Fossil Reviver', 'Revives Fossil Pokemon', 5, 2),
         this.machines[Lab.Machine.generator]            = new Generator(Lab.Machine.generator, 'Generator', 'Increases Machine speed when placed.', 4, 6),
+        this.machines[Lab.Machine.pokeball_factory]     = new PokeballFactory(Lab.Machine.pokeball_factory, 'Pokéball Factory', 'Creates Pokéballs.', 2, 4);
 
         Fabricator.initialize();
         Incubator.initialize();
         Generator.initialize();
+        PokeballFactory.initialize();
 
         //#endregion
     }
@@ -1405,7 +1438,6 @@ class Lab implements Feature {
 }
 
 namespace Lab {
-    // TODO: HLXII - Add all Researches
     export enum Research {
         // Research
         'research_slot1' = 0,
@@ -1503,7 +1535,6 @@ namespace Lab {
         // Research Booster
 
         // Pokeball Factory
-        /*
         'pokeball_factory',
         'pokeball_factory_speed1',
         'pokeball_factory_speed2',
@@ -1513,6 +1544,13 @@ namespace Lab {
         'timerball',
         'duskball',
         'luxuryball',
+        // TODO: HLXII - Add after Apricorns implemented
+        /*
+        fastball_apricorn,
+        quickball_apricorn,
+        timerball_apricorn,
+        duskball_apricorn,
+        luxuryball_apricorn,
         */
         // Type Booster
         /*
@@ -1583,7 +1621,6 @@ namespace Lab {
         'legendary_pixie_plate',
     }
 
-    // TODO: HLXII - Add all Machines
     export enum Machine {
         'fabricator' = 0,
         'plate_deconstructor',
@@ -1591,5 +1628,6 @@ namespace Lab {
         'incubator',
         'fossil_reviver',
         'generator',
+        'pokeball_factory',
     }
 }

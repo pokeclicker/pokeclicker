@@ -59,6 +59,7 @@ export default class Statistics implements Saveable {
     totalGeneratorItemsFuelUsed: KnockoutObservable<number>;
     totalGeneratorFuelUsed: KnockoutObservable<number>;
     totalFossilsRevived: KnockoutObservable<number>;
+    totalPokeballsProduced: KnockoutObservable<number>;
     // Battle Frontier
     battleFrontierTotalStagesCompleted: KnockoutObservable<number>;
     battleFrontierHighestStageCompleted: KnockoutObservable<number>;
@@ -84,6 +85,7 @@ export default class Statistics implements Saveable {
     platesDeconstructed: Array<KnockoutObservable<number>>;
     incubatorFuelItemUsed: Array<KnockoutObservable<number>>;
     generatorFuelItemUsed: Array<KnockoutObservable<number>>;
+    pokeballsProduced: Array<KnockoutObservable<number>>;
 
     /*
      * objectObservables
@@ -136,6 +138,7 @@ export default class Statistics implements Saveable {
         'totalGeneratorItemsFuelUsed',
         'totalGeneratorFuelUsed',
         'totalFossilsRevived',
+        'totalPokeballsProduced',
         'battleFrontierTotalStagesCompleted',
         'battleFrontierHighestStageCompleted',
     ];
@@ -153,6 +156,7 @@ export default class Statistics implements Saveable {
         'platesDeconstructed',
         'incubatorFuelItemUsed',
         'generatorFuelItemUsed',
+        'pokeballsProduced',
     ];
     // These will allow negative values (special events etc)
     objectObservables = [
