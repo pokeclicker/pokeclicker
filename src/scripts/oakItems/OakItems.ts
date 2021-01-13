@@ -45,6 +45,16 @@ class OakItems implements Feature {
         this.addMultiplier('money', OakItems.OakItem.Amulet_Coin);
         this.addMultiplier('shiny', OakItems.OakItem.Shiny_Charm);
         this.addMultiplier('eggStep', OakItems.OakItem.Blaze_Cassette);
+
+        Settings.getSetting('challenges.disableOakItems').observableValue.subscribe(value => {
+            if (value) {
+                this.itemList.forEach(oakItem => {
+                    if (this.isActive(oakItem.name)) {
+                        this.deactivate(oakItem.name);
+                    }
+                });
+            }
+        });
     }
 
     private addMultiplier(type: keyof typeof MultiplierType, item: OakItems.OakItem) {

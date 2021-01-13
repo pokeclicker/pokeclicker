@@ -11,6 +11,9 @@
 
             </div>
             <div class="modal-body p-0">
+                <p data-bind="visible: Settings.getSetting('challenges.disableShards').observableValue" class="bg-danger my-0">
+                    Shard bonuses are currently disabled in the settings.
+                </p>
                 <table class='table table-sm table-hover m-0'>
                     <!-- ko foreach: Array(Shards.nTypes) -->
                         <thead>

@@ -7,6 +7,9 @@
                    <span aria-hidden="true">&times;</span>
                </button>
            </div>
+           <div data-bind="visible: Settings.getSetting('challenges.disableOakItems').observableValue" class="modal-body bg-danger my-0 py-0">
+              Oak Items are currently disabled in the settings.
+           </div>
            <div class="modal-body py-1">
               <ul class="row justify-content-center p-0 my-0"
                 data-bind="foreach: App.game.oakItems.itemList"

@@ -64,6 +64,23 @@ class Pokeballs implements Feature {
     }
 
     initialize(): void {
+        // hook Masterball setting
+        Settings.getSetting('challenges.disableMasterballs').observableValue.subscribe(value => {
+            if (value) {
+                // check all available selections
+                ([
+                    this._alreadyCaughtSelection,
+                    this._alreadyCaughtShinySelection,
+                    this._notCaughtSelection,
+                    this._notCaughtShinySelection,
+                ]).forEach(selection => {
+                    // switch to Ultraball if Masterball is selected
+                    if (selection() === GameConstants.Pokeball.Masterball) {
+                        selection(GameConstants.Pokeball.Ultraball);
+                    }
+                });
+            }
+        });
     }
 
     /**

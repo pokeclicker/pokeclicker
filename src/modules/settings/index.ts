@@ -99,6 +99,13 @@ Object.values(NotificationConstants.NotificationSetting).forEach((setting) => {
     Settings.add(setting);
 });
 
+// Challenge settings
+Settings.add(new BooleanSetting('challenges.disableClickAttack', 'Disable the ability to attack a Pokémon using mouse clicks or taps', false));
+Settings.add(new BooleanSetting('challenges.disableShards', 'Disables the damage bonus from shards', false));
+Settings.add(new BooleanSetting('challenges.disableMasterballs', 'Disables the ability to select Masterballs', false));
+Settings.add(new BooleanSetting('challenges.disableOakItems', 'Disables the ability to equip Oak Items', false));
+Settings.add(new BooleanSetting('challenges.disableBattleItems', 'Disables the ability to use Battle Items', false));
+
 /*
  * THESE SETTINGS ARE NOT SUPPOSED TO BE IN THE SETTINGS MENU
  */

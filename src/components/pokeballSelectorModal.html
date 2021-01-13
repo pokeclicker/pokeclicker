@@ -27,7 +27,7 @@
               <tr class="clickable"
                 data-bind="template: { name: 'pokeballSelectionTemplate', data: $data},
                   click: function(){App.game.pokeballs.selectedSelection()($data.type)},
-                  visible: $data.unlocked()"></tr>
+                  visible: $data.unlocked() && !($data.type === GameConstants.Pokeball.Masterball && Settings.getSetting('challenges.disableMasterballs').observableValue())"></tr>
               <!-- /ko -->
             </tbody>
           </table>

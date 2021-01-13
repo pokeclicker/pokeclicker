@@ -14,6 +14,15 @@ class ItemHandler {
             });
             return false;
         }
+
+        if (ItemList[name] instanceof BattleItem && Settings.getSetting('challenges.disableBattleItems').observableValue()) {
+            Notifier.notify({
+                message: 'You can\'t use Battle Items...',
+                type: NotificationConstants.NotificationOption.danger,
+            });
+            return false;
+        }
+
         // Only allow the player to use the amount they have maximum
         this.amountToUse = Math.min(player.itemList[name](), amount);
 

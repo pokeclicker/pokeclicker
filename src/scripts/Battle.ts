@@ -56,6 +56,9 @@ class Battle {
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
+        if (Settings.getSetting('challenges.disableClickAttack').value && App.game.statistics.totalPokemonCaptured()) { //click attacks disabled and we already beat the starter
+            return;
+        }
         GameHelper.incrementObservable(App.game.statistics.clickAttacks);
         this.enemyPokemon().damage(App.game.party.calculateClickAttack(true));
         if (!this.enemyPokemon().isAlive()) {
