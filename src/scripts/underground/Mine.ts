@@ -268,7 +268,8 @@ class Mine {
         const reward = Mine.rewardGrid[x][y];
         if (newlayer == 0 && reward != 0 && reward.revealed != 1) {
             reward.revealed = 1;
-            $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y}" style="background-image: url('assets/images/underground/${reward.value}.png');"></div>`);
+            const image = Underground.getMineItemById(reward.value).undergroundImage;
+            $(`div[data-i=${x}][data-j=${y}]`).html(`<div class="mineReward size-${reward.sizeX}-${reward.sizeY} pos-${reward.x}-${reward.y}" style="background-image: url('${image}');"></div>`);
             Mine.checkItemsRevealed();
         }
     }
