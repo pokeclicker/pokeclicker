@@ -454,6 +454,18 @@ dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
     ],
     60500, 201, 20);
 
+dungeonList['Solaceon Ruins'] = new Dungeon('Solaceon Ruins',
+    ['Zubat', 'Geodude', 'Natu', 'Bronzor', 'Hippopotas'],
+    [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
+    960000,
+    [
+        new DungeonBossPokemon('Unown (E)', 4100000, 30),
+        new DungeonBossPokemon('Unown (L)', 4100000, 30),
+        new DungeonBossPokemon('Unown (N)', 4100000, 30),
+        new DungeonBossPokemon('Unown (O)', 4100000, 30),
+    ],
+    62500, 209, 100);
+
 dungeonList['Iron Island'] = new Dungeon('Iron Island',
     ['Tentacool', 'Wingull', 'Tentacruel', 'Pelipper', 'Finneon', 'Zubat', 'Geodude', 'Onix', 'Golbat', 'Graveler'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
