@@ -16,6 +16,7 @@ module.exports = {
     extends: ['airbnb-typescript/base'],
     globals: {
         ko: 'readonly',
+        $: 'readonly',
     },
     rules: {
         indent: 'off',
@@ -28,6 +29,8 @@ module.exports = {
                 ignoreTemplateLiterals: true,
             },
         ],
+        'no-return-assign': ['error', 'except-parens'],
+        'no-console': ['error', { allow: ['warn', 'error'] }],
         '@typescript-eslint/indent': ['error', 4, { SwitchCase: 1 }],
         '@typescript-eslint/comma-dangle': ['error', {
             arrays: 'always-multiline',

@@ -297,6 +297,10 @@ class Update implements Saveable {
                 playerData._itemList.Protein += proteinsToRefund || 0;
             }
         },
+
+        '0.7.0': ({ playerData, saveData }) => {
+            $('#developmentModal').modal('show');
+        },
     };
 
     constructor() {
