@@ -61,17 +61,13 @@ export const SortOptionConfigs: Record<SortOptions, SortOptionConfig> = {
 
     [SortOptions.breedingEfficiency]: {
         text: 'Breeding Efficiency',
-        // @ts-ignore
-        // eslint-disable-next-line no-undef
-        getValue: (p) => (p.calculateBonusAttack() / pokemonMap[p.name].eggCycles),
+        getValue: (p) => p.calculateBreedingEfficiency(),
         invert: true,
     },
 
     [SortOptions.eggCycles]: {
         text: 'Egg Steps',
-        // @ts-ignore
-        // eslint-disable-next-line no-undef
-        getValue: (p) => pokemonMap[p.name].eggCycles,
+        getValue: (p) => p.eggCycles,
     },
 
     [SortOptions.timesHatched]: {

@@ -51,7 +51,7 @@ class PartyPokemon implements Saveable {
         speed: number,
         breeding = false,
         shiny = false,
-        private eggsteps: number
+        public eggCycles: number
     ) {
         this._hitpoints = hp;
         this._attack = atk;
@@ -73,14 +73,6 @@ class PartyPokemon implements Saveable {
         this._category = ko.observable(0);
     }
 
-    private calcEggstepsBonus(): number {
-        return Math.max(0.25, Math.sqrt(this.eggsteps / 25));
-    }
-
-    private calcStatBonus(baseStat: number, buffsUsed: number): number {
-        return baseStat * ((GameConstants.BREEDING_ATTACK_BONUS + buffsUsed) / 100);
-    }
-
     public calculateAttack(): number {
         const levelMultiplier: number = this.level / 100;
         const attackBonus: number = this.calculateBonusAttack() * this.timesHatched();
@@ -88,14 +80,18 @@ class PartyPokemon implements Saveable {
     }
 
     public calculateBonusAttack(): number {
-        const hp: number = this.calcStatBonus(this._hitpoints, this.hpUpsUsed());
-        const atk: number = this.calcStatBonus(this._attack, this.proteinsUsed());
-        const def: number = this.calcStatBonus(this._defense, this.ironsUsed());
-        const spAtk: number = this.calcStatBonus(this._specialAttack, this.calciumsUsed());
-        const spDef: number = this.calcStatBonus(this._specialDefense, this.zincsUsed());
-        const speed: number = this.calcStatBonus(this._speed, this.carbosUsed());
+        const hp: number = calcStatBonus(this._hitpoints, this.hpUpsUsed());
+        const atk: number = calcStatBonus(this._attack, this.proteinsUsed());
+        const def: number = calcStatBonus(this._defense, this.ironsUsed());
+        const spAtk: number = calcStatBonus(this._specialAttack, this.calciumsUsed());
+        const spDef: number = calcStatBonus(this._specialDefense, this.zincsUsed());
+        const speed: number = calcStatBonus(this._speed, this.carbosUsed());
 
-        return (calculateBaseAttack(hp, atk, def, spAtk, spDef, speed) + this.rareCandiesUsed()) * this.calcEggstepsBonus();
+        return (calculateBaseAttack(hp, atk, def, spAtk, spDef, speed) + this.rareCandiesUsed()) * calcEggstepsBonus(this.eggCycles);
+    }
+
+    public calculateBreedingEfficiency(): number {
+        return this.calculateBonusAttack() / this.eggCycles;
     }
 
     calculateLevelFromExp(): number {
@@ -325,4 +321,12 @@ class PartyPokemon implements Saveable {
     set category(index: number) {
         this._category(index);
     }
+}
+
+function calcEggstepsBonus(eggCycles: number): number {
+    return Math.max(0.25, Math.sqrt(eggCycles / 25));
+}
+
+function calcStatBonus(baseStat: number, buffsUsed: number): number {
+    return baseStat * ((GameConstants.BREEDING_ATTACK_BONUS + buffsUsed) / 100);
 }
