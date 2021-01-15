@@ -238,9 +238,9 @@ gymList['Elite Lance'] = new Gym(
 );
 //TODO make champion Gym
 //Ash Ketchum gym, to be used in Ash Greninja quest, to be balanced for post Kalos-champ
-gymList['Indigo League'] = new Gym(
-    'Ash',
-    'Ash Ketchum',
+gymList['Pallet Town'] = new Gym(
+    'Ash Ketchum 1',
+    'Pallet Town',
     [
         new GymPokemon('Pikachu', 48300, 58),
         new GymPokemon('Pidgeot', 52000, 56),
@@ -438,9 +438,9 @@ gymList['Champion Lance'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Karen)]
 );
 //Ash Ketchum gym, to be used in Ash Greninja quest, to be balanced for post Kalos-champ
-gymList['Master Quest'] = new Gym(
-    'Ash',
-    'Ash Ketchum',
+gymList['Cherrygrove  City'] = new Gym(
+    'Ash Ketchum 2',
+    'Cherrygrove City',
     [
         new GymPokemon('Pikachu', 48300, 58),
         new GymPokemon('Heracross', 52000, 56),
@@ -650,9 +650,9 @@ gymList['Champion Wallace'] = new Gym(
     }
 );
 //Ash Ketchum gym, to be used in Ash Greninja quest, to be balanced for post Kalos-champ
-gymList['Advanced Challenge'] = new Gym(
-    'Ash',
-    'Ash Ketchum',
+gymList['Lilycove City'] = new Gym(
+    'Ash Ketchum 3',
+    'Lilycove City',
     [
         new GymPokemon('Pikachu', 48300, 58),
         new GymPokemon('Swellow', 52000, 56),
@@ -853,9 +853,9 @@ gymList['Champion Cynthia'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Lucian)]
 );
 //Ash Ketchum gym, to be used in Ash Greninja quest, to be balanced for post Kalos-champ
-gymList['Battle Dimension'] = new Gym(
-    'Ash',
-    'Ash Ketchum',
+gymList['Survival Area'] = new Gym(
+    'Ash Ketchum 4',
+    'Survival Area',
     [
         new GymPokemon('Pikachu', 48300, 58),
         new GymPokemon('Staraptor', 52000, 56),
@@ -1064,9 +1064,9 @@ gymList['Champion Iris'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Caitlin)]
 );
 //Ash Ketchum gym, to be used in Ash Greninja quest, to be balanced for post Kalos-champ
-gymList['Rival Destinies'] = new Gym(
-    'Ash',
-    'Ash Ketchum',
+gymList['Icirrus City'] = new Gym(
+    'Ash Ketchum 5',
+    'Icirrus City',
     [
         new GymPokemon('Pikachu', 48300, 58),
         new GymPokemon('Unfezant', 52000, 56),
@@ -1262,9 +1262,9 @@ gymList['Champion Diantha'] = new Gym(
     [new GymBadgeRequirement(BadgeEnums.Elite_Drasna)]
 );
 //Ash Ketchum gym, to be used in Ash Greninja quest, to be balanced for post Kalos-champ
-gymList['XYZ'] = new Gym(
-    'Ash',
-    'Ash Ketchum',
+gymList['Kiloude City'] = new Gym(
+    'Ash Ketchum 6',
+    'Kiloude City',
     [
         new GymPokemon('Pikachu', 48300, 58),
         new GymPokemon('Talonflame', 52000, 56),

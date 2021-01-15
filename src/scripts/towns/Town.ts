@@ -1827,6 +1827,13 @@ TownList['Pokémon League Kalos'] = new Town(
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos'))],
     }
 );
+TownList['Kiloude City'] = new Town(
+    'Kiloude City',
+    GameConstants.Region.kalos,
+    {
+        requirements: [new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)],
+    }
+);
 
 //Kalos Dungeons
 TownList['Santalune Forest'] = new DungeonTown(
