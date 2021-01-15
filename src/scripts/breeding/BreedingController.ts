@@ -211,6 +211,7 @@ class BreedingController {
             case 'timesHatched': return `Hatches: ${pokemon.timesHatched()}`;
             case 'breedingEfficiency': return `Efficiency: ${pokemon.calculateBreedingEfficiency().toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
             case 'stepsPerAttack': return `Steps/Att: ${(App.game.breeding.getSteps(pokemon.eggCycles) / pokemon.calculateBonusAttack()).toLocaleString('en-US', { maximumSignificantDigits: 2 })}`;
+            case 'dexId': return `#${pokemon.id <= 0 ? '???' : Math.floor(pokemon.id).toString().padStart(3,'0')}`;
         }
     }
 }

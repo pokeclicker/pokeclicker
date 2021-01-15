@@ -12,6 +12,18 @@
                 <br/>
                 <div class="sticky-top">
                   <span class="btn btn-block btn-primary" data-bind="text: `${getVitaminNameByType(App.game.statistics.selectedVitaminId())}: ${player.itemList[getVitaminNameByType(App.game.statistics.selectedVitaminId())]().toLocaleString('en-US')}`"></span>
+                  <button type="button" class="btn btn-sm btn-primary"
+                    style="position: absolute; right: 0px; top: 0px; width: 42px; height: 41px;"
+                    data-bind="text: VitaminController.multiplier[VitaminController.multiplierIndex()]"
+                    onclick="VitaminController.incrementMultiplier()"
+                    oncontextmenu="VitaminController.decrementMultiplier(); return false"
+                    title="Multiplier"
+                    data-toggle="popover"
+                    data-html="true"
+                    data-content="Left/right click to cycle amount<br/>Click on pokemon to use"
+                    data-placement="right"
+                    data-trigger="hover">
+                  </button>
                   <div class="input-group" data-bind="with: Settings.getSetting('partySort')">
                       <select autocomplete="off" class="custom-select" onchange="Settings.setSettingByName(this.name, SortOptions[SortOptions[this.value]])"
                           data-bind="foreach: $data.options, attr: {name}, selectedOptions: [$data.observableValue()]">
@@ -34,7 +46,7 @@
                     </tr>
                   </thead>
                   <tbody data-bind="foreach: App.game.party.caughtPokemon">
-                    <tr class="clickable" data-bind="click: () => $data.useVitamin(App.game.statistics.selectedVitaminId()), hidden: $data.breeding">
+                    <tr class="clickable" data-bind="click: () => $data.useVitamin(App.game.statistics.selectedVitaminId(), VitaminController.getMultiplier()), hidden: $data.breeding">
                       <td class="text-left"><knockout data-bind="text: $data.name"></knockout><sup data-bind="visible: $data.shiny">✨</sup></td>
                       <td class="text-center tight" data-bind="text: $data.vitaminsUsed(App.game.statistics.selectedVitaminId()).toLocaleString('en-US')">-</td>
                       <td class="text-center tight" data-bind="text: $data.calculateBonusAttack().toLocaleString('en-US', { maximumSignificantDigits: 2 })">-</td>

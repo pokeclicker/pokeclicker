@@ -20,7 +20,7 @@ class DataPokemon implements PokemonInterface {
         public levelType: LevelType,
         public exp: number,
         public eggCycles: number,
-        public heldItem: string | null
+        public heldItem: BagItem | null
     ) {
         this.shiny = false;
     }

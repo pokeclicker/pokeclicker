@@ -33,7 +33,7 @@ class BattlePokemon implements EnemyPokemonInterface {
         public money: number,
         public shiny: boolean,
         public shardReward = 1,
-        public heldItem?: string
+        public heldItem?: BagItem
     ) {
         this.health = ko.observable(maxHealth);
         this.maxHealth = ko.observable(maxHealth);
@@ -65,10 +65,9 @@ class BattlePokemon implements EnemyPokemonInterface {
             App.game.wallet.gainMoney(this.money);
         }
 
-        if (this.heldItem && ItemList[this.heldItem]) {
-            const item = ItemList[this.heldItem];
-            const name = GameConstants.humanifyString(item.name());
-            item.gain(1);
+        if (this.heldItem) {
+            const name = BagHandler.displayName(this.heldItem);
+            BagHandler.gainItem(this.heldItem);
             const msg = `${this.name} dropped ${GameHelper.anOrA(name)} ${name}!`;
             Notifier.notify({
                 message: `The enemy ${msg}`,

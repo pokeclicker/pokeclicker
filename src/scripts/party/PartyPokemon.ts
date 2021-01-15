@@ -175,50 +175,54 @@ class PartyPokemon implements Saveable {
         return vu === undefined ? 0 : vu();
     }
 
-    public useVitamin(type: GameConstants.VitaminType) {
-        if (!this.canUseVitamin(type)) {
+    public useVitamin(type: GameConstants.VitaminType, amount = 1) {
+        const vitaminsUsed = this.getVitaminsUsedByType(type);
+        if (vitaminsUsed === undefined) {
+            return;
+        }
+
+        const usesRemaining = vitaminUsesRemaining(vitaminsUsed());
+
+        if (!usesRemaining) {
             Notifier.notify({
                 message: 'This Pokémon cannot increase their power any higher!',
                 type: NotificationConstants.NotificationOption.warning,
             });
             return;
         }
-        const vu = this.getVitaminsUsedByType(type);
-        if (vu === undefined) {
-            return;
-        }
-        if (ItemHandler.useItem(getVitaminNameByType(type))) {
-            GameHelper.incrementObservable(vu);
+
+        // The lowest number of amount they want to use, total in inventory, uses remaining for this Pokemon
+        amount = Math.min(amount, player.itemList[getVitaminNameByType(type)](), usesRemaining);
+        if (ItemHandler.useItem(getVitaminNameByType(type), amount)) {
+            GameHelper.incrementObservable(vitaminsUsed, amount);
         }
     }
 
-    public useProtein() {
-        if (!this.canUseProtein()) {
+    public useProtein(amount: number): void {
+        const usesRemaining = this.proteinUsesRemaining();
+
+        // If no more proteins can be used on this Pokemon
+        if (!usesRemaining) {
             Notifier.notify({
                 message: 'This Pokémon cannot increase their power any higher!',
                 type: NotificationConstants.NotificationOption.warning,
             });
             return;
         }
-        if (ItemHandler.useItem('Protein')) {
-            GameHelper.incrementObservable(this.proteinsUsed);
+
+        // The lowest number of amount they want to use, total in inventory, uses remaining for this Pokemon
+        amount = Math.min(amount, player.itemList.Protein(), usesRemaining);
+
+        // Apply the proteins
+        if (ItemHandler.useItem('Protein', amount)) {
+            GameHelper.incrementObservable(this.proteinsUsed, amount);
         }
     }
 
-    canUseVitamin(type: GameConstants.VitaminType) {
-        const vu = this.getVitaminsUsedByType(type);
-        if (vu === undefined) {
-            return false;
-        }
-        const vitaminsUsed: number = vu();
+    proteinUsesRemaining = (): number => {
         // Allow 5 for every region visited (including Kanto)
-        return vitaminsUsed < (player.highestRegion() + 1) * 5;
-    }
-
-    canUseProtein = ko.pureComputed(() => {
-        // Allow 5 for every region visited (including Kanto)
-        return this.proteinsUsed() < (player.highestRegion() + 1) * 5;
-    });
+        return (player.highestRegion() + 1) * 5 - this.proteinsUsed();
+    };
 
     public fromJSON(json: Record<string, any>): void {
         if (json == null) {
@@ -329,4 +333,9 @@ function calcEggstepsBonus(eggCycles: number): number {
 
 function calcStatBonus(baseStat: number, buffsUsed: number): number {
     return baseStat * ((GameConstants.BREEDING_ATTACK_BONUS + buffsUsed) / 100);
+}
+
+function vitaminUsesRemaining(vitaminsUsed: number): number {
+    // Allow 5 for every region visited (including Kanto)
+    return (player.highestRegion() + 1) * 5 - vitaminsUsed;
 }
