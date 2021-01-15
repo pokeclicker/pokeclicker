@@ -678,6 +678,7 @@ export const KantoGyms = [
     'Elite Agatha',
     'Elite Lance',
     'Champion Blue',
+    'Pallet Town',
 ];
 
 export const JohtoGyms = [
@@ -694,6 +695,7 @@ export const JohtoGyms = [
     'Elite Bruno2',
     'Elite Karen',
     'Champion Lance',
+    'Cherrygrove City',
 ];
 
 export const HoennGyms = [
@@ -710,6 +712,7 @@ export const HoennGyms = [
     'Elite Glacia',
     'Elite Drake',
     'Champion Wallace',
+    'Lilycove City',
 ];
 
 export const SinnohGyms = [
@@ -726,6 +729,7 @@ export const SinnohGyms = [
     'Elite Flint',
     'Elite Lucian',
     'Champion Cynthia',
+    'Survival Area',
 ];
 
 export const UnovaGyms = [
@@ -742,6 +746,7 @@ export const UnovaGyms = [
     'Elite Grimsley',
     'Elite Caitlin',
     'Champion Iris',
+    'Icirrus City',
 ];
 
 export const KalosGyms = [
@@ -758,6 +763,7 @@ export const KalosGyms = [
     'Elite Wikstrom',
     'Elite Drasna',
     'Champion Diantha',
+    'Kiloude City',
 ];
 
 export const AlolaGyms = [
