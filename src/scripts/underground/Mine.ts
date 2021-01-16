@@ -134,8 +134,8 @@ class Mine {
             return;
         }
 
-        const SurveyCost = App.game.underground.getSurvey_Cost();
-        if (App.game.underground.energy < SurveyCost) {
+        const surveyCost = App.game.underground.getSurveyCost();
+        if (App.game.underground.energy < surveyCost) {
             return;
         }
 
