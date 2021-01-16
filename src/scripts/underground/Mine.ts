@@ -291,13 +291,37 @@ class Mine {
 
                 if (App.game.oakItems.isActive(OakItems.OakItem.Treasure_Scanner)) {
                     const GiveDouble = App.game.oakItems.calculateBonus(OakItems.OakItem.Treasure_Scanner);
-                    const Random = Math.random();
+                    let Random = Math.random();
                     if (GiveDouble >= Random) {
                         Underground.gainMineItem(Mine.rewardNumbers[i]);
                         Notifier.notify({
                             message: `You found an extra ${GameConstants.humanifyString(itemName)} in the Mine!`,
                             type: NotificationConstants.NotificationOption.success,
+                            title: "Lucky! x2",
+                            timeout: 4000,
                         });
+
+                        Random = Math.random();
+                        if (GiveDouble >= Random) {
+                            Underground.gainMineItem(Mine.rewardNumbers[i]);
+                            Notifier.notify({
+                                message: `Lucky! You found another ${GameConstants.humanifyString(itemName)}!`,
+                                type: NotificationConstants.NotificationOption.success,
+                                title: "Lucky! x3",
+                                timeout: 6000,
+                            });
+
+                            Random = Math.random();
+                            if (GiveDouble >= Random) {
+                                Underground.gainMineItem(Mine.rewardNumbers[i]);
+                                Notifier.notify({
+                                    message: `YOU HIT THE JACKPOT! 4x TOTAL ${GameConstants.humanifyString(itemName).toUpperCase()}!`,
+                                    type: NotificationConstants.NotificationOption.success,
+                                    title: "!! Jackpot x4 !!",
+                                    timeout: 8000,
+                                });
+                            }
+                        }
                     }
                 }
 

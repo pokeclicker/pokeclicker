@@ -40,8 +40,8 @@ class OakItems implements Feature {
                 true, [1.15, 1.3, 1.45, 1.6, 1.75, 1.9], 1, 2, undefined, undefined, AmountFactory.createArray([2000, 5000, 10000, 20000, 50000], GameConstants.Currency.farmPoint)),
             new BoughtOakItem(OakItems.OakItem.Explosive_Charge, 'Explosive Charge', 'All new mining layers start with damaged tiles', 'Cinnabar Island Shop',
                 true, [2, 4, 7, 11, 15, 20], 1, 50, undefined, undefined, AmountFactory.createArray([50000, 100000, 400000, 1000000, 2000000], GameConstants.Currency.money)),
-            new BoughtOakItem(OakItems.OakItem.Treasure_Scanner, 'Treasure Scanner', 'Chance to double all mining rewards', 'Cinnabar Island Shop',
-                true, [0.04, 0.07, 0.1, 0.13, 0.16, 0.20], 1, 20, undefined, undefined, AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money)),
+            new BoughtOakItem(OakItems.OakItem.Treasure_Scanner, 'Treasure Scanner', 'Chance to multiply mining rewards', 'Cinnabar Island Shop',
+                true, [0.05, 0.1, 0.14, 0.18, 0.22, 0.25], 1, 20, undefined, undefined, AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money)),
         ];
 
         this.addMultiplier('clickAttack', OakItems.OakItem.Poison_Barb);
