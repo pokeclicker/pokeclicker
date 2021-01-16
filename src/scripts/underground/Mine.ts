@@ -33,8 +33,7 @@ class Mine {
         Mine.grid = tmpGrid;
         Mine.rewardGrid = tmpRewardGrid;
 
-        let Diff = 0;
-        let Added = 0;
+        let added = 0;
         for (let i = 0; i < App.game.underground.getMaxItems(); i++) {
             const item = UndergroundItem.getRandomItem();
             const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
@@ -42,7 +41,7 @@ class Mine {
             const res = Mine.canAddReward(x, y, item);
             if (res) {
                 Mine.addReward(x, y, item);
-                Added = Added + 1;
+                added = added + 1;
             }
         }
 
@@ -55,7 +54,7 @@ class Mine {
             const res = Mine.canAddReward(x, y, item);
             if (res) {
                 Mine.addReward(x, y, item);
-                Added = Added + 1;
+                added = added + 1;
                 //This should loop until it's added.
             }
         }
