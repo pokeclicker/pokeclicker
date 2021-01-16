@@ -297,7 +297,7 @@ class Mine {
                         Notifier.notify({
                             message: `You found an extra ${GameConstants.humanifyString(itemName)} in the Mine!`,
                             type: NotificationConstants.NotificationOption.success,
-                            title: "Lucky! x2",
+                            title: `Lucky! x2`,
                             timeout: 4000,
                         });
 
@@ -307,7 +307,7 @@ class Mine {
                             Notifier.notify({
                                 message: `Lucky! You found another ${GameConstants.humanifyString(itemName)}!`,
                                 type: NotificationConstants.NotificationOption.success,
-                                title: "Lucky! x3",
+                                title: `Lucky! x3`,
                                 timeout: 6000,
                             });
 
@@ -317,7 +317,7 @@ class Mine {
                                 Notifier.notify({
                                     message: `YOU HIT THE JACKPOT! 4x TOTAL ${GameConstants.humanifyString(itemName).toUpperCase()}!`,
                                     type: NotificationConstants.NotificationOption.success,
-                                    title: "!! Jackpot x4 !!",
+                                    title: `!! Jackpot x4 !!`,
                                     timeout: 8000,
                                 });
                             }
