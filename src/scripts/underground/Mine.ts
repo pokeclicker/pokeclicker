@@ -295,7 +295,7 @@ class Mine {
                     if (GiveDouble >= Random) {
                         Underground.gainMineItem(Mine.rewardNumbers[i]);
                         Notifier.notify({
-                            message: `You found ${GameHelper.anOrA(itemName)} ${GameConstants.humanifyString(itemName)} AGAIN!`,
+                            message: `You found an extra ${GameConstants.humanifyString(itemName)} in the Mine!`,
                             type: NotificationConstants.NotificationOption.success,
                         });
                     }
