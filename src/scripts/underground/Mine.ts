@@ -148,7 +148,7 @@ class Mine {
 
         App.game.underground.energy -= SurveyCost;
         const rewards = Mine.rewardSummary();
-        Mine.updatesurveyResult(rewards);
+        Mine.updateSurveyResult(rewards);
     }
 
     private static rewardSummary() {
