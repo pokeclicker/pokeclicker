@@ -242,19 +242,4 @@
             </td>
         </tr>
     </script>
-
-    <script type="text/html" id="FullListTemplate">
-        <tr>
-            <td class='vertical-middle'>
-                <img class='mineInventoryItem' data-bind='attr:{ src: "assets/images/underground/"+id+".png" }'>
-            </td>
-            <td class='vertical-middle' data-bind='text: name'></td>
-            <!-- ko if: valueType == "Mine Egg" -->
-            <td></td>
-            <!-- /ko -->
-            <!-- ko ifnot: valueType == "Mine Egg" -->
-            <td class='vertical-middle' data-bind='text: value + " " + UndergroundItem.getFullResourceName(valueType, value)'></td>
-            <!-- /ko -->
-        </tr>
-    </script>
 </div>
