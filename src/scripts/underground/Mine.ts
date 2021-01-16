@@ -139,7 +139,7 @@ class Mine {
             return;
         }
 
-        const tiles = App.game.underground.getSurvey_Efficiency();
+        const tiles = App.game.underground.getSurveyEfficiency();
         for (let i = 0; i < tiles; i++) {
             const x = GameConstants.randomIntBetween(0, App.game.underground.getNewYLayer() - 1);
             const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
