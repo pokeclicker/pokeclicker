@@ -46,11 +46,9 @@ class Mine {
             }
         }
 
-        if (App.game.underground.getMaxItems() < App.game.underground.getMinItems()) {
-            Diff = App.game.underground.getMinItems() - App.game.underground.getMaxItems();
-            //Late-Game players might do some cheesy shit and upgrade min to be above their max. This makes sure it deducts the difference.
-        }
-        for (Added; Added < App.game.underground.getMinItems() - Diff;) {
+        // Check in case player upgrade min above max
+        const min = Math.min(App.game.underground.getMinItems(), App.game.underground.getMaxItems());
+        while (added < min) {
             const item = UndergroundItem.getRandomItem();
             const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
             const y = Mine.getRandomCoord(App.game.underground.getNewYLayer(), item.space.length);
