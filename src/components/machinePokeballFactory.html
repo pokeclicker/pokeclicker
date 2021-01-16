@@ -28,13 +28,11 @@ aria-labelledby="PokéballFactoryModalLabel" aria-hidden="true">
                                 <span style="bottom: 0; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px" data-bind="text: 'Amount: ' + BagHandler.amount(PokeballFactory.blueprints[state.blueprint].item)()">Amount</span>
                         </li>
                     </div>
-                    <div class="row justify-content-center" data-bind="foreach: PokeballFactory.blueprints[state.blueprint].cost">
-                        <h4 class="col-6 col-sm-4 col-lg-2">
-                            <span style="display: inline;">
-                                <img style="height: 24px" data-bind="attr: { src: BagHandler.image($data.item) },
-                                tooltip: { title: BagHandler.displayName($data.item), trigger: 'hover', placement: 'top' }"/>
-                                <span data-bind="text: GameConstants.formatNumber($data.amount) + '/' + GameConstants.formatNumber(BagHandler.amount($data.item)())">0</span>
-                            </span>
+                    <div class="row justify-content-around" data-bind="foreach: PokeballFactory.blueprints[state.blueprint].cost">
+                        <h4 class="col-6">
+                            <img style="height: 24px" data-bind="attr: { src: BagHandler.image($data.item) },
+                            tooltip: { title: BagHandler.displayName($data.item), trigger: 'hover', placement: 'top' }"/>
+                            <span data-bind="text: GameConstants.formatNumber($data.amount) + '/' + GameConstants.formatNumber(BagHandler.amount($data.item)())">0</span>
                         </h4>
                     </div>
                     <div class="row no-gutters">
