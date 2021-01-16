@@ -188,6 +188,14 @@ class PokeballFactoryState extends MachineState {
                         this.stage = MachineStage.idle;
                     }
                     this.progress = 0;
+
+                    // Notify queue empty
+                    Notifier.notify({
+                        message: 'A Pokéball Factory has emptied its queue.',
+                        type: NotificationConstants.NotificationOption.warning,
+                        sound: NotificationConstants.NotificationSound.empty_queue,
+                        setting: NotificationConstants.NotificationSetting.pokeball_factory,
+                    });
                 }
                 break;
             }

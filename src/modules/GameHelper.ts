@@ -100,8 +100,11 @@ export default class GameHelper {
         return array;
     }
 
-    public static anOrA(name: string): string {
-        return ['a', 'e', 'i', 'o', 'u'].includes(name[0].toLowerCase()) ? 'an' : 'a';
+    public static anOrA(name: string, capitalize = false): string {
+        if (['a', 'e', 'i', 'o', 'u'].includes(name[0].toLowerCase())) {
+            return capitalize ? 'An' : 'an';
+        }
+        return capitalize ? 'A' : 'a';
     }
 
     public static shallowEqual(object1, object2) {

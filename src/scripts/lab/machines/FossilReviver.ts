@@ -241,6 +241,14 @@ class FossilReviverState extends MachineState {
                 // Checking if switch to idle
                 if (!this.hasRevivingFossils()) {
                     this.stage = MachineStage.idle;
+
+                    // Notify queue empty
+                    Notifier.notify({
+                        message: 'A Fossil Reviver has emptied its queue.',
+                        type: NotificationConstants.NotificationOption.warning,
+                        sound: NotificationConstants.NotificationSound.empty_queue,
+                        setting: NotificationConstants.NotificationSetting.fossil_reviver,
+                    });
                 }
                 break;
             }
@@ -405,9 +413,6 @@ class FossilReviverState extends MachineState {
                 setting: NotificationConstants.NotificationSetting.hatched_shiny,
             });
             App.game.logbook.newLog(LogBookTypes.SHINY, `You revived a shiny ${pokemonName}!`);
-            // TODO: HLXII - Does there need to be statistics for fossils specifically?
-            //GameHelper.incrementObservable(App.game.statistics.shinyPokemonHatched[pokemonID]);
-            //GameHelper.incrementObservable(App.game.statistics.totalShinyPokemonHatched);
         } else {
             Notifier.notify({
                 message: `You revived ${GameHelper.anOrA(pokemonName)} ${pokemonName}!`,

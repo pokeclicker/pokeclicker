@@ -1239,6 +1239,10 @@ class Lab implements Feature {
     }
 
     update(delta: number) {
+        // Don't run until unlocked
+        if (!this.canAccess()) {
+            return;
+        }
 
         // Update Research Slots
         this.currentResearch().forEach(res => {

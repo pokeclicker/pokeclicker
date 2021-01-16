@@ -220,6 +220,14 @@ class IncubatorState extends MachineState {
                 if (this.fuel == 0) {
                     this.stage = MachineStage.idle;
                     info.resetEffects = true;
+
+                    // Notify completion
+                    Notifier.notify({
+                        message: 'An Incubator has run out of fuel.',
+                        type: NotificationConstants.NotificationOption.warning,
+                        sound: NotificationConstants.NotificationSound.empty_queue,
+                        setting: NotificationConstants.NotificationSetting.incubator,
+                    });
                 }
                 break;
             }

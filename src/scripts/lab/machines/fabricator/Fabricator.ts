@@ -242,6 +242,14 @@ class FabricatorState extends MachineState {
                     GameHelper.incrementObservable(App.game.statistics.totalFabrications);
                     GameHelper.incrementObservable(App.game.statistics.blueprintsFabricated[this.blueprint]);
 
+                    // Notify completion
+                    const name = Fabricator.blueprints[this.blueprint].name;
+                    Notifier.notify({
+                        message: `${GameHelper.anOrA(name, true)} ${name} has been fabricated.`,
+                        type: NotificationConstants.NotificationOption.success,
+                        setting: NotificationConstants.NotificationSetting.fabricator,
+                    });
+
                     // Checking queue
                     if (this.queue > 0 && Fabricator.blueprints[this.blueprint].canFabricate) {
                         this.queue -= 1;
@@ -251,6 +259,14 @@ class FabricatorState extends MachineState {
                         });
                     } else {
                         this.stage = MachineStage.idle;
+
+                        // Notify queue empty
+                        Notifier.notify({
+                            message: 'A Fabricator has emptied its queue.',
+                            type: NotificationConstants.NotificationOption.warning,
+                            sound: NotificationConstants.NotificationSound.empty_queue,
+                            setting: NotificationConstants.NotificationSetting.fabricator,
+                        });
                     }
                     this.progress = 0;
                 }

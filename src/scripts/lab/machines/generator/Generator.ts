@@ -193,6 +193,14 @@ class GeneratorState extends MachineState {
                 if (this.fuel == 0) {
                     this.stage = MachineStage.idle;
                     info.resetEffects = true;
+
+                    // Notify completion
+                    Notifier.notify({
+                        message: 'A Generator has run out of fuel.',
+                        type: NotificationConstants.NotificationOption.warning,
+                        sound: NotificationConstants.NotificationSound.empty_queue,
+                        setting: NotificationConstants.NotificationSetting.generator,
+                    });
                 }
                 break;
             }

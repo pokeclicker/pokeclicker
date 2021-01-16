@@ -103,6 +103,15 @@ class PlateReconstructorState extends PlateMachineState {
                     GameHelper.incrementObservable(App.game.statistics.totalPlatesReconstructed);
                     GameHelper.incrementObservable(App.game.statistics.platesReconstructed[this.plateType]);
 
+                    // Notify completion
+                    const name = Underground.getMineItemById(UndergroundItem.getPlateIDByType(this.plateType)).name;
+                    Notifier.notify({
+                        message: `${GameHelper.anOrA(name, true)} ${name} has been reconstructed.`,
+                        type: NotificationConstants.NotificationOption.success,
+                        sound: NotificationConstants.NotificationSound.achievement,
+                        setting: NotificationConstants.NotificationSetting.plate_reconstructor,
+                    });
+
                     GameHelper.incrementObservable(plateAmount, 1);
                     // Checking queue
                     if (this.queue > 0 && App.game.shards.shardWallet[this.plateType]() >= PlateReconstructor.shardCost()) {
@@ -110,6 +119,14 @@ class PlateReconstructorState extends PlateMachineState {
                         this.queue -= 1;
                     } else {
                         this.stage = MachineStage.idle;
+
+                        // Notify queue empty
+                        Notifier.notify({
+                            message: 'A Plate Reconstructor has emptied its queue.',
+                            type: NotificationConstants.NotificationOption.warning,
+                            sound: NotificationConstants.NotificationSound.empty_queue,
+                            setting: NotificationConstants.NotificationSetting.plate_reconstructor,
+                        });
                     }
                     this.progress = 0;
                 }

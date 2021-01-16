@@ -103,12 +103,28 @@ class PlateDeconstructorState extends PlateMachineState {
                     GameHelper.incrementObservable(App.game.statistics.totalPlatesDeconstructed);
                     GameHelper.incrementObservable(App.game.statistics.platesDeconstructed[this.plateType]);
 
+                    // Notify completion
+                    const name = Underground.getMineItemById(UndergroundItem.getPlateIDByType(this.plateType)).name;
+                    Notifier.notify({
+                        message: `${GameHelper.anOrA(name, true)} ${name} has been deconstructed.`,
+                        type: NotificationConstants.NotificationOption.success,
+                        setting: NotificationConstants.NotificationSetting.plate_deconstructor,
+                    });
+
                     // Checking queue
                     if (this.queue > 0 && PlateDeconstructor.getPlateAmount(this.plateType)() > 0) {
                         this.queue -= 1;
                         GameHelper.incrementObservable(PlateDeconstructor.getPlateAmount(this.plateType), -1);
                     } else {
                         this.stage = MachineStage.idle;
+
+                        // Notify queue empty
+                        Notifier.notify({
+                            message: 'A Plate Deconstructor has emptied its queue.',
+                            type: NotificationConstants.NotificationOption.warning,
+                            sound: NotificationConstants.NotificationSound.empty_queue,
+                            setting: NotificationConstants.NotificationSetting.plate_deconstructor,
+                        });
                     }
                     this.progress = 0;
                 }
