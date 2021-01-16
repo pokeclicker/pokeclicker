@@ -69,7 +69,7 @@ const pokeMartShop = new Shop([
     ItemList['SmallRestore'],
     ItemList['MediumRestore'],
     ItemList['LargeRestore'],
-]);
+], 'Poké Mart');
 
 //Kanto Shops
 const PewterCityShop = new Shop([
