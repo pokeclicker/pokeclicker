@@ -120,7 +120,7 @@ class Underground implements Feature {
         return Underground.BASE_SURVEY_CHARGE_EFFICIENCY + this.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Efficiency).calculateBonus();
     }
 
-    getNewYLayer() {
+    getYLayers() {
         return Underground.sizeY + this.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer).calculateBonus();
     }
 
