@@ -20,7 +20,7 @@ class Mine {
         Mine.rewardNumbers = [];
         Mine.itemsBuried(0);
         Mine.surveyResult(null);
-        for (let i = 0; i < App.game.underground.getNewYLayer(); i++) {
+        for (let i = 0; i < App.game.underground.getYLayers(); i++) {
             const row = [];
             const rewardRow = [];
             for (let j = 0; j < Underground.sizeX; j++) {
@@ -37,7 +37,7 @@ class Mine {
         for (let i = 0; i < App.game.underground.getMaxItems(); i++) {
             const item = UndergroundItem.getRandomItem();
             const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
-            const y = Mine.getRandomCoord(App.game.underground.getNewYLayer(), item.space.length);
+            const y = Mine.getRandomCoord(App.game.underground.getYLayers(), item.space.length);
             const res = Mine.canAddReward(x, y, item);
             if (res) {
                 Mine.addReward(x, y, item);
@@ -50,7 +50,7 @@ class Mine {
         while (added < min) {
             const item = UndergroundItem.getRandomItem();
             const x = Mine.getRandomCoord(Underground.sizeX, item.space[0].length);
-            const y = Mine.getRandomCoord(App.game.underground.getNewYLayer(), item.space.length);
+            const y = Mine.getRandomCoord(App.game.underground.getYLayers(), item.space.length);
             const res = Mine.canAddReward(x, y, item);
             if (res) {
                 Mine.addReward(x, y, item);
@@ -68,7 +68,7 @@ class Mine {
         if (App.game.oakItems.isActive(OakItems.OakItem.Explosive_Charge)) {
             const tiles = App.game.oakItems.calculateBonus(OakItems.OakItem.Explosive_Charge);
             for (let i = 1; i < tiles; i++) {
-                const x = GameConstants.randomIntBetween(0, App.game.underground.getNewYLayer() - 1);
+                const x = GameConstants.randomIntBetween(0, App.game.underground.getYLayers() - 1);
                 const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
                 this.breakTile(x, y, 1);
             }
@@ -83,7 +83,7 @@ class Mine {
         if (Mine.alreadyHasRewardId(reward.id)) {
             return false;
         }
-        if (y + reward.space.length >= App.game.underground.getNewYLayer() || x + reward.space[0].length >= Underground.sizeX) {
+        if (y + reward.space.length >= App.game.underground.getYLayers() || x + reward.space[0].length >= Underground.sizeX) {
             return false;
         }
         for (let i = 0; i < reward.space.length; i++) {
@@ -134,21 +134,21 @@ class Mine {
             return;
         }
 
-        const surveyCost = App.game.underground.getSurveyCost();
+        const surveyCost = App.game.underground.getSurvey_Cost();
         if (App.game.underground.energy < surveyCost) {
             return;
         }
 
-        const tiles = App.game.underground.getSurveyEfficiency();
+        const tiles = App.game.underground.getSurvey_Efficiency();
         for (let i = 0; i < tiles; i++) {
-            const x = GameConstants.randomIntBetween(0, App.game.underground.getNewYLayer() - 1);
+            const x = GameConstants.randomIntBetween(0, App.game.underground.getYLayers() - 1);
             const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
             this.breakTile(x, y, 5);
         }
 
-        App.game.underground.energy -= SurveyCost;
+        App.game.underground.energy -= surveyCost;
         const rewards = Mine.rewardSummary();
-        Mine.updateSurveyResult(rewards);
+        Mine.updatesurveyResult(rewards);
     }
 
     private static rewardSummary() {
@@ -234,7 +234,7 @@ class Mine {
         const tiles = App.game.underground.getBombEfficiency();
         if (App.game.underground.energy >= Underground.BOMB_ENERGY) {
             for (let i = 1; i < tiles; i++) {
-                const x = GameConstants.randomIntBetween(0, App.game.underground.getNewYLayer() - 1);
+                const x = GameConstants.randomIntBetween(0, App.game.underground.getYLayers() - 1);
                 const y = GameConstants.randomIntBetween(0, Underground.sizeX - 1);
                 this.breakTile(x, y, 2);
             }
@@ -276,7 +276,7 @@ class Mine {
     }
 
     private static normalizeY(y: number): number {
-        return Math.min(App.game.underground.getNewYLayer() - 1, Math.max(0, y));
+        return Math.min(App.game.underground.getYLayers() - 1, Math.max(0, y));
     }
 
     public static checkItemsRevealed() {
@@ -313,7 +313,7 @@ class Mine {
 
     public static checkItemRevealed(id: number) {
         for (let i = 0; i < Underground.sizeX; i++) {
-            for (let j = 0; j < App.game.underground.getNewYLayer(); j++) {
+            for (let j = 0; j < App.game.underground.getYLayers(); j++) {
                 if (Mine.rewardGrid[j][i] != 0) {
                     if (Mine.rewardGrid[j][i].value == id) {
                         if (Mine.rewardGrid[j][i].revealed === 0) {
