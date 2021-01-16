@@ -5,7 +5,7 @@
 class PlateReconstructor extends PlateMachine {
 
     public static baseShardCost = 1000;
-    public static progressAmount = 86400;
+    public static progressAmount = 21600;
 
     /**
      * The amount of shards used during reconstruction, based on the research upgrades.

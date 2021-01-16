@@ -1015,7 +1015,7 @@ class Lab implements Feature {
             Lab.Research.legendary_draco_plate, ResearchType.Plate,
             'Legendary Draco Plate', 'Investigate Legendary Draco Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Draco Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Draco Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Dragon]),
@@ -1027,7 +1027,7 @@ class Lab implements Feature {
             Lab.Research.legendary_dread_plate, ResearchType.Plate,
             'Legendary Dread Plate', 'Investigate Legendary Dread Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Dread Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Dread Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Dark]),
@@ -1039,7 +1039,7 @@ class Lab implements Feature {
             Lab.Research.legendary_earth_plate, ResearchType.Plate,
             'Legendary Earth Plate', 'Investigate Legendary Earth Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Earth Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Earth Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Ground]),
@@ -1051,7 +1051,7 @@ class Lab implements Feature {
             Lab.Research.legendary_fist_plate, ResearchType.Plate,
             'Legendary Fist Plate', 'Investigate Legendary Fist Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Fist Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Fist Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Fighting]),
@@ -1063,7 +1063,7 @@ class Lab implements Feature {
             Lab.Research.legendary_flame_plate, ResearchType.Plate,
             'Legendary Flame Plate', 'Investigate Legendary Flame Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Flame Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Flame Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Fire]),
@@ -1075,7 +1075,7 @@ class Lab implements Feature {
             Lab.Research.legendary_icicle_plate, ResearchType.Plate,
             'Legendary Icicle Plate', 'Investigate Legendary Icicle Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Icicle Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Icicle Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Ice]),
@@ -1087,7 +1087,7 @@ class Lab implements Feature {
             Lab.Research.legendary_insect_plate, ResearchType.Plate,
             'Legendary Insect Plate', 'Investigate Legendary Insect Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Insect Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Insect Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Bug]),
@@ -1099,7 +1099,7 @@ class Lab implements Feature {
             Lab.Research.legendary_iron_plate, ResearchType.Plate,
             'Legendary Iron Plate', 'Investigate Legendary Iron Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Iron Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Iron Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Steel]),
@@ -1111,7 +1111,7 @@ class Lab implements Feature {
             Lab.Research.legendary_meadow_plate, ResearchType.Plate,
             'Legendary Meadow Plate', 'Investigate Legendary Meadow Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Meadow Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Meadow Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Grass]),
@@ -1123,7 +1123,7 @@ class Lab implements Feature {
             Lab.Research.legendary_mind_plate, ResearchType.Plate,
             'Legendary Mind Plate', 'Investigate Legendary Mind Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Mind Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Mind Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Psychic]),
@@ -1135,7 +1135,7 @@ class Lab implements Feature {
             Lab.Research.legendary_sky_plate, ResearchType.Plate,
             'Legendary Sky Plate', 'Investigate Legendary Sky Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Sky Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Sky Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Flying]),
@@ -1147,7 +1147,7 @@ class Lab implements Feature {
             Lab.Research.legendary_splash_plate, ResearchType.Plate,
             'Legendary Splash Plate', 'Investigate Legendary Splash Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Splash Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Splash Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Water]),
@@ -1159,7 +1159,7 @@ class Lab implements Feature {
             Lab.Research.legendary_spooky_plate, ResearchType.Plate,
             'Legendary Spooky Plate', 'Investigate Legendary Spooky Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Spooky Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Spooky Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Ghost]),
@@ -1171,7 +1171,7 @@ class Lab implements Feature {
             Lab.Research.legendary_stone_plate, ResearchType.Plate,
             'Legendary Stone Plate', 'Investigate Legendary Stone Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Stone Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Stone Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Rock]),
@@ -1183,7 +1183,7 @@ class Lab implements Feature {
             Lab.Research.legendary_toxic_plate, ResearchType.Plate,
             'Legendary Toxic Plate', 'Investigate Legendary Toxic Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Toxic Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Toxic Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Poison]),
@@ -1195,7 +1195,7 @@ class Lab implements Feature {
             Lab.Research.legendary_zap_plate, ResearchType.Plate,
             'Legendary Zap Plate', 'Investigate Legendary Zap Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Zap Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Zap Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Electric]),
@@ -1207,7 +1207,7 @@ class Lab implements Feature {
             Lab.Research.legendary_pixie_plate, ResearchType.Plate,
             'Legendary Pixie Plate', 'Investigate Legendary Pixie Plate construction.',
             20000,
-            [{item: {type: ItemType.underground, id: 'Pixie Plate'}, amount: 1000}],
+            [{item: {type: ItemType.underground, id: 'Pixie Plate'}, amount: 777}],
             {
                 requirements: [new ResearchedRequirement(Lab.Research.legendary_plate)],
                 workerFilter: new TypeFilter([PokemonType.Fairy]),
