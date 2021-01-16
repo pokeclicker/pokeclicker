@@ -64,7 +64,7 @@ class MapHelper {
     };
 
     public static getCurrentEnvironment(): GameConstants.Environment {
-        const area = player.route() || player.town()?.name() || undefined;
+        const area = player.route() || player.town()?.name || undefined;
 
         const [env] = Object.entries(GameConstants.Environments).find(
             ([, regions]) => Object.values(regions).find(
@@ -147,7 +147,7 @@ class MapHelper {
             player.route(0);
             const town = TownList[townName];
             if (town instanceof DungeonTown) {
-                town.dungeon().calculateAllPokemonNames();
+                town.dungeon.calculateAllPokemonNames();
             }
             player.town(town);
             player.currentTown(townName);

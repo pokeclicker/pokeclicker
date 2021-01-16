@@ -211,10 +211,10 @@ class GameController {
                 e.preventDefault();
             } else if (App.game.gameState === GameConstants.GameState.town) {
                 if (e.code === 'Space') {
-                    if (player.town().gym()) {
-                        GymRunner.startGym(player.town().gym());
-                    } else if (player.town().dungeon()) {
-                        DungeonRunner.initializeDungeon(player.town().dungeon());
+                    if (player.town().gym) {
+                        GymRunner.startGym(player.town().gym);
+                    } else if (player.town().dungeon) {
+                        DungeonRunner.initializeDungeon(player.town().dungeon);
                     }
                     e.preventDefault();
                 } else if ('gymList' in player.town()) {

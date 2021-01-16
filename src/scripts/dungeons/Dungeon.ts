@@ -8,12 +8,11 @@
  * Gym class.
  */
 class Dungeon {
-    public name: KnockoutObservable<string>;
     allPokemonNames: PokemonNameType[];
     allAvailablePokemonNames: PokemonNameType[];
 
     constructor(
-        name: string,
+        public name: string,
         public pokemonList: PokemonNameType[],
         public itemList: GameConstants.BattleItemType[],
         public baseHealth: number,
@@ -22,7 +21,6 @@ class Dungeon {
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
         public level: number
     ) {
-        this.name = ko.observable(name);
         this.calculateAllPokemonNames();
     }
 

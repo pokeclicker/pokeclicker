@@ -12,7 +12,7 @@ function ByDungeon<EvoClass extends MinimalEvo>(Base: EvoClass) {
 
         atLocation(): boolean {
             return App.game.gameState == GameConstants.GameState.dungeon
-                && DungeonRunner.dungeon.name() == this.dungeon;
+                && DungeonRunner.dungeon.name == this.dungeon;
         }
     };
 }

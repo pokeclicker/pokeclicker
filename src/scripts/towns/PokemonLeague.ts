@@ -1,20 +1,20 @@
 /* eslint-disable array-bracket-newline */
 ///<reference path="Town.ts"/>
 class PokemonLeague extends Town {
-    public gymList: KnockoutObservableArray<KnockoutObservable<Gym>>;
+    public gymList: Gym[];
 
     constructor(name: string, region: GameConstants.Region, requirements: Array<Requirement | OneFromManyRequirement>, shop: Shop, gyms: string[]) {
         super(name, region, { requirements, shop });
-        this.gym(null);
-        this.gymList = ko.observableArray<KnockoutObservable<Gym>>();
+        this.gym = null;
+        this.gymList = [];
         for (const gym of gyms) {
-            this.gymList.push(ko.observable(gymList[gym]));
+            this.gymList.push(gymList[gym]);
         }
     }
 
     public setupGymTowns() {
-        for (const gym of this.gymList()) {
-            TownList[gym().town] = TownList[this.name()];
+        for (const gym of this.gymList) {
+            TownList[gym.town] = TownList[this.name];
         }
     }
 }
