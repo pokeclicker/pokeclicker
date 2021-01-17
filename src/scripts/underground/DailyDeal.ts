@@ -87,12 +87,8 @@ class DailyDeal {
 
     public static canUse(i: number): boolean {
         const deal = DailyDeal.list.peek()[i];
-        const index = player.mineInventoryIndex(deal.item1.id);
-        if (index > -1) {
-            return player.mineInventory()[index].amount() >= deal.amount1;
-        } else {
-            return false;
-        }
+        const amount = player.getUndergroundItemAmount(deal.item1.id);
+        return amount >= deal.amount1;
     }
 
     public static use(i: number, tradeTimes = 1) {

@@ -17,8 +17,8 @@ class Farming implements Feature {
     // It turns out for some reason the plot age doesn't update in time in the same tick.
     // This means that if we attempt to reset the auras in the same tick, the plant that changed stages
     // will still act like it's in the previous stage, which means the wrong aura is applied.
-    // Queueing an aura reset in the next tick fixes this issue, and is barely noticable to the player.
-    queuedAuraReset = false;
+    // Queueing an aura reset in later ticks fixes this issue, and is barely noticable to the player.
+    queuedAuraReset = -1;
 
     static readonly PLOT_WIDTH = 5;
     static readonly PLOT_HEIGHT = 5;
@@ -42,7 +42,7 @@ class Farming implements Feature {
 
     highestUnlockedBerry: KnockoutComputed<number>;
 
-    constructor() {
+    constructor(private multiplier: Multiplier) {
         this.berryList = this.defaults.berryList.map((v) => ko.observable<number>(v));
         this.unlockedBerries = this.defaults.unlockedBerries.map((v) => ko.observable<boolean>(v));
         this.mulchList = this.defaults.mulchList.map((v) => ko.observable<number>(v));
@@ -53,6 +53,9 @@ class Farming implements Feature {
         this.externalAuras[AuraType.Attract] = ko.observable<number>(1);
         this.externalAuras[AuraType.Egg] = ko.observable<number>(1);
         this.externalAuras[AuraType.Shiny] = ko.observable<number>(1);
+
+        this.multiplier.addBonus('shiny', () => this.externalAuras[AuraType.Shiny]());
+        this.multiplier.addBonus('eggStep', () => this.externalAuras[AuraType.Egg]());
 
         this.highestUnlockedBerry = ko.pureComputed(() => {
             for (let i = GameHelper.enumLength(BerryType) - 2; i >= 0; i--) {
@@ -230,14 +233,14 @@ class Farming implements Feature {
             [
                 'This Berry is said to have grown plentiful in the tropics of the past. It boasts an intensely hot spiciness.',
                 'It has a tendency to overtake nearby plants.',
-            ], undefined, ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar']);
+            ], undefined, ['Charmander', 'Cyndaquil', 'Torchic', 'Chimchar', 'Tepig']);
         this.berryData[BerryType.Passho]    = new Berry(BerryType.Passho,   [490, 3600, 10800, 21600, 43200],
             22, 0.05, 1300, 15,
             [0, 15, 0, 10, 0], BerryColor.Blue,
             [
                 'This Berry\'s flesh is dotted with countless tiny bubbles of air that keep it afloat in water.',
                 'This Berry promotes the fruiting of nearby Berry plants.',
-            ], new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup']);
+            ], new Aura(AuraType.Harvest, [1.1, 1.2, 1.3]), ['Squirtle', 'Totodile', 'Mudkip', 'Piplup', 'Oshawott']);
         this.berryData[BerryType.Wacan]     = new Berry(BerryType.Wacan,    [10, 180, 900, 1800, 3600],
             2, 0.05, 250, 1,
             [0, 0, 15, 0, 10], BerryColor.Yellow,
@@ -251,7 +254,7 @@ class Farming implements Feature {
             [
                 'This Berry has a disagreeable "green" flavor and scent typical of vegetables. It is rich in health-promoting fiber.',
                 'It has a tendency to expand into nearby plots.',
-            ], undefined, ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig']);
+            ], undefined, ['Bulbasaur', 'Chikorita', 'Treecko', 'Turtwig', 'Snivy']);
         this.berryData[BerryType.Yache]     = new Berry(BerryType.Yache,    [3600, 14400, 28800, 43200, 86400],
             25, 0.05, 1500, 15,
             [0, 10, 0, 0, 15], BerryColor.Blue,
@@ -313,7 +316,7 @@ class Farming implements Feature {
             [
                 'Considered to have a special power from the olden days, this Berry is sometimes dried and used as a good-luck charm.',
                 'This Berry causes other Berries to wither away faster.',
-            ], undefined, ['Shedinja']);
+            ], new Aura(AuraType.Death, [1.25, 1.5, 2.0]), ['Shedinja']);
         this.berryData[BerryType.Haban]     = new Berry(BerryType.Haban,    [10800, 21600, 43200, 86400, 172800],
             34, 0, 4000, 15,
             [0, 0, 10, 20, 0], BerryColor.Red,
@@ -630,8 +633,8 @@ class Farming implements Feature {
                 BerryType.Tamato,
                 BerryType.Spelon,
             ]));
-        // Occa Overgrow
-        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Occa, undefined, [BerryType.Occa], { showHint: false }));
+        // Occa Parasite
+        this.mutations.push(new ParasiteMutation(.0004, BerryType.Occa));
         // Passho
         this.mutations.push(new GrowNearBerryMutation(.0001, BerryType.Passho,
             [
@@ -659,8 +662,7 @@ class Farming implements Feature {
                 },
             }));
         // Rindo Overgrow
-        this.mutations.push(new GrowNearBerryMutation(.0004, BerryType.Rindo,
-            [BerryType.Rindo], {showHint: false }));
+        this.mutations.push(new GrowNearBerryMutation(.0004, BerryType.Rindo, [BerryType.Rindo], {showHint: false }));
         // Yache
         this.mutations.push(new EvolveNearBerryStrictMutation(.0001, BerryType.Yache, BerryType.Passho, {}, PlotStage.Seed, {
             hint: 'I\'ve heard that growing a Passho Berry alone will cause it to change!',
@@ -669,8 +671,8 @@ class Farming implements Feature {
         this.mutations.push(new OakMutation(.0001, BerryType.Chople, BerryType.Spelon, OakItems.OakItem.Blaze_Cassette));
         // Kebia
         this.mutations.push(new OakMutation(.0001, BerryType.Kebia, BerryType.Pamtre, OakItems.OakItem.Poison_Barb));
-        // Kebia Overgrow
-        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Kebia, undefined, [BerryType.Kebia], { showHint: false }));
+        // Kebia Parasite
+        this.mutations.push(new ParasiteMutation(.0004, BerryType.Kebia));
         // Shuca
         this.mutations.push(new OakMutation(.0001, BerryType.Shuca, BerryType.Watmel, OakItems.OakItem.Sprinklotad));
         // Coba
@@ -716,8 +718,8 @@ class Farming implements Feature {
                 BerryType.Kasib,
                 BerryType.Payapa,
             ]));
-        // Colbur Overgrow
-        this.mutations.push(new EvolveNearBerryMutation(.0004, BerryType.Colbur, undefined, [BerryType.Colbur], { showHint: false }));
+        // Colbur Parasite
+        this.mutations.push(new ParasiteMutation(.0004, BerryType.Colbur));
         // Babiri
         berryReqs = {};
         berryReqs[BerryType.Shuca] = 4;
@@ -876,9 +878,11 @@ class Farming implements Feature {
         let change = false;
 
         // Handle updating auras
-        if (this.queuedAuraReset) {
-            this.resetAuras();
-            this.queuedAuraReset = false;
+        if (this.queuedAuraReset >= 0) {
+            this.queuedAuraReset -= 1;
+            if (this.queuedAuraReset === 0) {
+                this.resetAuras();
+            }
         }
 
         // Updating Berries
@@ -924,7 +928,7 @@ class Farming implements Feature {
 
         // Handle queueing aura reset
         if (change) {
-            this.queuedAuraReset = true;
+            this.queuedAuraReset = 2;
         }
 
         if (notifications.size) {
@@ -1189,10 +1193,12 @@ class Farming implements Feature {
 
     gainBerry(berry: BerryType, amount = 1) {
         GameHelper.incrementObservable(this.berryList[berry], Math.floor(amount));
-        this.unlockBerry(berry);
 
-        GameHelper.incrementObservable(App.game.statistics.totalBerriesHarvested, amount);
-        GameHelper.incrementObservable(App.game.statistics.berriesHarvested[berry], amount);
+        if (amount > 0) {
+            this.unlockBerry(berry);
+            GameHelper.incrementObservable(App.game.statistics.totalBerriesHarvested, amount);
+            GameHelper.incrementObservable(App.game.statistics.berriesHarvested[berry], amount);
+        }
     }
 
     hasBerry(berry: BerryType) {

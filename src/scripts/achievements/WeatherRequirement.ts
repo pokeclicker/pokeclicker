@@ -1,11 +1,10 @@
 ///<reference path="Requirement.ts"/>
 
 class WeatherRequirement extends Requirement {
-
     private weather: WeatherType[];
 
-    constructor(weather: WeatherType[], type: GameConstants.AchievementOption = GameConstants.AchievementOption.equal) {
-        super(1, type);
+    constructor(weather: WeatherType[], option: GameConstants.AchievementOption = GameConstants.AchievementOption.equal) {
+        super(1, option);
         this.weather = weather;
     }
 
@@ -14,6 +13,6 @@ class WeatherRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `The weather needs to be ${WeatherType[this.requiredValue]}.`;
+        return `The weather needs to be ${this.weather.map(weather => WeatherType[weather]).join(' or ')}`;
     }
 }

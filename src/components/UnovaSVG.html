@@ -1,4 +1,4 @@
-<g data-bind='if: player.region == GameConstants.Region.unova'>
+<g data-bind='visible: player.region == GameConstants.Region.unova'>
     <image width="100%" xlink:href="assets/images/unova.png"></image>
 
     <!-- ------ -->
@@ -741,7 +741,7 @@
         , databind: "click:function(){MapHelper.openShipModal()}, attr: { class: MapHelper.calculateTownCssClass('Castelia City') }"
         })
      %>
-     
+
     <!--bridge-->
     <%- include('templates/mapPOI',
         { name: "Skyarrow Bridge"

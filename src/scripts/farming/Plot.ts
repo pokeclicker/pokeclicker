@@ -28,6 +28,7 @@ class Plot implements Saveable {
     auraHarvest: KnockoutComputed<number>;
     auraMutation: KnockoutComputed<number>;
     auraReplant: KnockoutComputed<number>;
+    auraDeath: KnockoutComputed<number>;
 
     isEmpty: KnockoutComputed<boolean>;
     isMulched: KnockoutComputed<boolean>;
@@ -47,6 +48,7 @@ class Plot implements Saveable {
         this._auras[AuraType.Harvest] = ko.observable(1);
         this._auras[AuraType.Mutation] = ko.observable(1);
         this._auras[AuraType.Replant] = ko.observable(1);
+        this._auras[AuraType.Death] = ko.observable(1);
 
         this.formattedStageTimeLeft = ko.pureComputed(() => {
             if (this.berry === BerryType.None) {
@@ -91,6 +93,9 @@ class Plot implements Saveable {
         this.auraReplant = ko.pureComputed(() => {
             return this._auras[AuraType.Replant]();
         });
+        this.auraDeath = ko.pureComputed(() => {
+            return this._auras[AuraType.Death]();
+        });
 
         this.formattedAuras = ko.pureComputed(() => {
             const auraStr = [];
@@ -108,6 +113,10 @@ class Plot implements Saveable {
 
             if (this.auraReplant() !== 1) {
                 auraStr.push(`Replant: ${this.auraReplant().toFixed(2)}x`);
+            }
+
+            if (this.auraDeath() !== 1) {
+                auraStr.push(`Death: ${this.auraDeath().toFixed(2)}x`);
             }
             return auraStr.join('<br/>');
         });
@@ -362,9 +371,9 @@ class Plot implements Saveable {
 
         multiplier *= this._auras[AuraType.Growth]();
 
-        // Handle Kasib Effect
-        if (this.stage() == PlotStage.Berry && this.berry != BerryType.Kasib && App.game.farming.berryInFarm(BerryType.Kasib)) {
-            multiplier *= 5;
+        // Handle Death Aura
+        if (this.stage() == PlotStage.Berry && this.berry != BerryType.Kasib) {
+            multiplier *= this._auras[AuraType.Death]();
         }
 
         return multiplier;

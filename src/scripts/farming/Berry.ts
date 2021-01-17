@@ -14,6 +14,7 @@ class Berry {
         'Pineco', 'Heracross',
         'Volbeat', 'Illumise',
         'Burmy (plant)', 'Combee', 'Cherubi', 'Munchlax',
+        'Sewaddle', 'Karrablast',
     ];
 
     constructor(
