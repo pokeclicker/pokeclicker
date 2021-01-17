@@ -297,7 +297,7 @@ class Mine {
                         Notifier.notify({
                             message: `You found an extra ${GameConstants.humanifyString(itemName)} in the Mine!`,
                             type: NotificationConstants.NotificationOption.success,
-                            title: 'Lucky! x2',
+                            title: 'Treasure Scanner',
                             timeout: 4000,
                         });
 
@@ -307,7 +307,7 @@ class Mine {
                             Notifier.notify({
                                 message: `Lucky! You found another ${GameConstants.humanifyString(itemName)}!`,
                                 type: NotificationConstants.NotificationOption.success,
-                                title: 'Lucky! x3',
+                                title: 'Treasure Scanner',
                                 timeout: 6000,
                             });
 
@@ -315,9 +315,9 @@ class Mine {
                             if (GiveDouble >= Random) {
                                 Underground.gainMineItem(Mine.rewardNumbers[i]);
                                 Notifier.notify({
-                                    message: `YOU HIT THE JACKPOT! 4x TOTAL ${GameConstants.humanifyString(itemName).toUpperCase()}!`,
+                                    message: `Jackpot! You found another ${GameConstants.humanifyString(itemName).toUpperCase()}!`,
                                     type: NotificationConstants.NotificationOption.success,
-                                    title: '!! Jackpot x4 !!',
+                                    title: 'Treasure Scanner',
                                     timeout: 8000,
                                 });
                             }
