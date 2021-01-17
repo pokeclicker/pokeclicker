@@ -1,25 +1,23 @@
 ///<reference path="./OakItem.ts"/>
 class BoughtOakItem extends OakItem {
 
-    shopName: string;
-
     private _purchased: KnockoutObservable<boolean>;
 
     constructor(
         name: any,
         displayName: string,
         description: string,
-        shopName: string,
+        public shopName: string,
         increasing: boolean,
         bonusList: number[],
         inactiveBonus = 1,
         expGain = 1,
         expList: number[] = [500, 1000, 2500, 5000, 10000],
         maxLevel = 5,
-        costList: Amount[] = AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money)
+        costList: Amount[] = AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money),
+        bonusSymbol = '×'
     ) {
-        super(name, displayName, description, increasing, bonusList, inactiveBonus, -1,  expGain, expList, maxLevel, costList);
-        this.shopName = shopName;
+        super(name, displayName, description, increasing, bonusList, inactiveBonus, -1,  expGain, expList, maxLevel, costList, bonusSymbol);
         this._purchased = ko.observable(false);
     }
 

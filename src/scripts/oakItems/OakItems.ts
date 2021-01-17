@@ -19,7 +19,7 @@ class OakItems implements Feature {
     initialize() {
         this.itemList = [
             new OakItem(OakItems.OakItem.Magic_Ball, 'Magic Ball', 'Gives a bonus to your catchrate',
-                true, [5, 6, 7, 8, 9, 10], 0, 20, 2),
+                true, [5, 6, 7, 8, 9, 10], 0, 20, 2, undefined, undefined, undefined, '%'),
             new OakItem(OakItems.OakItem.Amulet_Coin, 'Amulet Coin', 'Gain more coins from battling',
                 true, [1.25, 1.30, 1.35, 1.40, 1.45, 1.50], 1, 30, 1),
             new OakItem(OakItems.OakItem.Poison_Barb, 'Poison Barb', 'Clicks do more damage',
@@ -41,7 +41,7 @@ class OakItems implements Feature {
             new BoughtOakItem(OakItems.OakItem.Explosive_Charge, 'Explosive Charge', 'All new mining layers start with damaged tiles', 'Cinnabar Island Shop',
                 true, [2, 4, 7, 11, 15, 20], 1, 50, undefined, undefined, AmountFactory.createArray([50000, 100000, 400000, 1000000, 2000000], GameConstants.Currency.money)),
             new BoughtOakItem(OakItems.OakItem.Treasure_Scanner, 'Treasure Scanner', 'Chance to multiply mining rewards', 'Cinnabar Island Shop',
-                true, [4, 8, 12, 16, 20, 24], 1, 20, undefined, undefined, AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money)),
+                true, [4, 8, 12, 16, 20, 24], 1, 20, undefined, undefined, AmountFactory.createArray([50000, 100000, 250000, 500000, 1000000], GameConstants.Currency.money), '%'),
         ];
 
         this.addMultiplier('clickAttack', OakItems.OakItem.Poison_Barb);
