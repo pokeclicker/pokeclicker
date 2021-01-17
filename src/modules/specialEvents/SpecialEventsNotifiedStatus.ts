@@ -6,3 +6,4 @@ enum SpecialEventNotifiedStatus {
     Ending,
     Ended,
 }
+export default SpecialEventNotifiedStatus;
