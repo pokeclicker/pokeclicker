@@ -53,6 +53,19 @@ class DungeonRunner {
         this.timeLeftPercentage(Math.floor(this.timeLeft() / GameConstants.DUNGEON_TIME * 100));
     }
 
+    /**
+     * Handles the click event in the dungeon view
+     */
+    public static handleClick() {
+        if (DungeonRunner.fighting() && !DungeonBattle.catching()) {
+            DungeonBattle.clickAttack();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+            DungeonRunner.openChest();
+        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+            DungeonRunner.startBossFight();
+        }
+    }
+
     public static openChest() {
         if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.chest) {
             return;
