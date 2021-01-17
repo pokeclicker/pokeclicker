@@ -8,7 +8,7 @@
 
 interface EnemyOptions {
     weight?: number,
-    requirement?: Requirement
+    requirement?: MultiRequirement | OneFromManyRequirement | Requirement
 }
 
 interface DetailedPokemon {
@@ -18,13 +18,7 @@ interface DetailedPokemon {
 
 type Enemy = PokemonNameType | DetailedPokemon | DungeonTrainer;
 
-interface DungeonOptions {
-    trainerRatio?: number,
-}
-
-interface Array<T> {
-    filter<U extends T>(pred: (a: T) => a is U): U[];
-}
+type Boss = DungeonBossPokemon | DungeonTrainer;
 
 /**
  * Gym class.
@@ -34,25 +28,18 @@ class Dungeon {
     allPokemonNames: PokemonNameType[];
     allAvailablePokemonNames: PokemonNameType[];
 
-    private static baseOptions: DungeonOptions = {
-        trainerRatio: 0,
-    }
-
     constructor(
         name: string,
         public enemyList: Enemy[],
         public itemList: GameConstants.BattleItemType[],
         public baseHealth: number,
-        public bossList: DungeonBossPokemon[],
+        public bossList: Boss[],
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
-        public level: number,
-        public options: DungeonOptions = {}
+        public level: number
     ) {
         this.name = ko.observable(name);
         this.calculateAllPokemonNames();
-        // Setting up base options
-        this.options.trainerRatio = this.options.trainerRatio ?? Dungeon.baseOptions.trainerRatio;
     }
 
     public isUnlocked(): boolean {
@@ -69,12 +56,23 @@ class Dungeon {
 
     public calculateAllPokemonNames(): void {
         // Put the names into a Set to filter out any duplicate values
-        this.allPokemonNames = [...new Set([...this.pokemonList, ...this.bossList.map(b => b.name)])] as PokemonNameType[];
+        this.allPokemonNames = [...new Set([...this.pokemonList, ...this.availableBosses(true).map(b => b.name)])] as PokemonNameType[];
         this.allAvailablePokemonNames = [...new Set([...this.pokemonList, ...this.availableBosses().map(b => b.name)])] as PokemonNameType[];
     }
 
-    public availableBosses(): DungeonBossPokemon[] {
-        return this.bossList.filter(b => b.isUnlocked());
+    public availableBosses(ignoreRequirement = false): DungeonBossPokemon[] {
+        // TODO: HLXII - We need this check as this method is called somewhere during initialization when App isn't initialized yet
+        // the requirement.isCompleted call can sometimes use the App object, which will cause this to crash
+        // Once App is moved to modules, this check might be able to be removed.
+        if (!App.game) {
+            return [];
+        }
+        return this.bossList.filter(b => {
+            if (b instanceof DungeonBossPokemon) {
+                return (!ignoreRequirement && b.options?.requirement) ? b.options.requirement.isCompleted() : true;
+            }
+            return false;
+        }).map(b => <DungeonBossPokemon>b);
     }
 
     private static isPokemon(arg: any): arg is PokemonNameType {
@@ -114,10 +112,19 @@ class Dungeon {
             if (typeof enemy === 'string') {
                 return 1;
             } else if (enemy.hasOwnProperty('pokemon')) {
-                return (<DetailedPokemon>enemy).options.weight;
+                return (<DetailedPokemon>enemy).options.weight ?? 1;
             } else {
-                return (<DungeonTrainer>enemy).weight;
+                return (<DungeonTrainer>enemy).options?.weight ?? 1;
             }
+        });
+    }
+
+    /**
+     * Retreives the weights for all the possible bosses
+     */
+    get bossWeightList(): number[] {
+        return this.bossList.map((boss) => {
+            return boss.options?.weight ?? 1;
         });
     }
 }
@@ -139,11 +146,19 @@ dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
             [
                 new GymPokemon('Rattata', 200, 5),
                 new GymPokemon('Raticate', 210, 7),
-            ], 1, 100),
+            ], 1, { weight: 100 }),
     ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     102,
-    [new DungeonBossPokemon('Pikachu', 510, 7)],
+    //[new DungeonBossPokemon('Pikachu', 510, 7)], // TODO: HLXII - PUT THIS BACK AFTER TESTING
+    [
+        new DungeonBossPokemon('Pikachu', 510, 7),
+        new DungeonTrainer('Joey',
+            [
+                new GymPokemon('Mew', 520, 7),
+                new GymPokemon('Mewtwo', 620, 8),
+            ], 2, { weight: 100 }),
+    ],
     50, 1, 5
 );
 
@@ -266,7 +281,7 @@ dungeonList['Ilex Forest'] = new Dungeon('Ilex Forest',
         new DungeonBossPokemon('Noctowl', 340000, 30),
         new DungeonBossPokemon('Beedrill', 340000, 30),
         new DungeonBossPokemon('Butterfree', 340000, 30),
-        new DungeonBossPokemon('Celebi', 800000, 50, new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)),
+        new DungeonBossPokemon('Celebi', 800000, 50, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_JohtoChampion)}),
     ],
     4000, 34, 15
 );
@@ -286,11 +301,11 @@ dungeonList['Tin Tower'] = new Dungeon('Tin Tower',
     [
         new DungeonBossPokemon('Raticate', 380000, 35),
         new DungeonBossPokemon('Haunter', 380000, 35),
-        new DungeonBossPokemon('Ho-Oh', 1410000, 100, new MultiRequirement([
+        new DungeonBossPokemon('Ho-Oh', 1410000, 100, {requirement: new MultiRequirement([
             new ObtainedPokemonRequirement(pokemonMap.Raikou),
             new ObtainedPokemonRequirement(pokemonMap.Entei),
             new ObtainedPokemonRequirement(pokemonMap.Suicune),
-        ])),
+        ])}),
     ],
     4500, 37, 20
 );
@@ -427,8 +442,8 @@ dungeonList['Cave of Origin'] = new Dungeon('Cave of Origin',
     590000,
     [
         new DungeonBossPokemon('Exploud', 2000000, 50),
-        new DungeonBossPokemon('Kyogre', 4700000, 100, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)),
-        new DungeonBossPokemon('Groudon', 4700000, 100, new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)),
+        new DungeonBossPokemon('Kyogre', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
+        new DungeonBossPokemon('Groudon', 4700000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_HoennChampion)}),
     ],
     34000, 101, 5);
 
@@ -510,11 +525,11 @@ dungeonList['Old Chateau'] = new Dungeon('Old Chateau',
     853000,
     [
         new DungeonBossPokemon('Rotom', 4200000, 100),
-        new DungeonBossPokemon('Rotom (heat)', 4300000, 100, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
-        new DungeonBossPokemon('Rotom (wash)', 4300000, 100, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
-        new DungeonBossPokemon('Rotom (frost)', 4300000, 100, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
-        new DungeonBossPokemon('Rotom (fan)', 4300000, 100, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
-        new DungeonBossPokemon('Rotom (mow)', 4300000, 100, new ObtainedPokemonRequirement(pokemonMap.Rotom)),
+        new DungeonBossPokemon('Rotom (heat)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
+        new DungeonBossPokemon('Rotom (wash)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
+        new DungeonBossPokemon('Rotom (frost)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
+        new DungeonBossPokemon('Rotom (fan)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
+        new DungeonBossPokemon('Rotom (mow)', 4300000, 100, {requirement: new ObtainedPokemonRequirement(pokemonMap.Rotom)}),
     ],
     52500, 230, 100);
 
@@ -775,7 +790,7 @@ dungeonList['Reversal Mountain'] = new Dungeon('Reversal Mountain',
     [
         new DungeonBossPokemon('Cacturne', 24000000, 100),
         new DungeonBossPokemon('Excadrill', 26000000, 100),
-        new DungeonBossPokemon('Heatran', 8000000, 100, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
+        new DungeonBossPokemon('Heatran', 8000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
     ],
     226500, 230, 100);
 dungeonList['Seaside Cave'] = new Dungeon('Seaside Cave',
@@ -796,7 +811,7 @@ dungeonList['Giant Chasm'] = new Dungeon('Giant Chasm',
         new DungeonBossPokemon('Tangrowth', 30000000, 100),
         new DungeonBossPokemon('Audino', 32000000, 100),
         new DungeonBossPokemon('Mamoswine', 32000000, 100),
-        new DungeonBossPokemon('Kyurem', 8000000, 100, new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)),
+        new DungeonBossPokemon('Kyurem', 8000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_UnovaChampion)}),
     ],
     266500, 230, 100);
 
@@ -1001,7 +1016,7 @@ dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
         new DungeonBossPokemon('Durant', 8000000, 100),
         new DungeonBossPokemon('Pupitar', 8000000, 100),
         new DungeonBossPokemon('Noibat', 8000000, 100),
-        new DungeonBossPokemon('Zygarde', 8000000, 100, new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)),
+        new DungeonBossPokemon('Zygarde', 8000000, 100, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)}),
     ],
     96500, 230, 100);
 
@@ -1058,8 +1073,8 @@ dungeonList['Verdant Cavern'] = new Dungeon('Verdant Cavern',
     [
         new DungeonBossPokemon('Alolan Raticate', 8000000, 70),
         new DungeonBossPokemon('Gumshoos', 8000000, 70),
-        new DungeonBossPokemon('Totem Alolan Raticate', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
-        new DungeonBossPokemon('Totem Gumshoos', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Alolan Raticate', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Gumshoos', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     96500, 201, 35);
 
@@ -1137,8 +1152,8 @@ dungeonList['Brooklet Hill'] = new Dungeon('Brooklet Hill',
     [
         new DungeonBossPokemon('Wishiwashi (School)', 8000000, 70),
         new DungeonBossPokemon('Araquanid', 8000000, 70),
-        new DungeonBossPokemon('Totem Wishiwashi (School)', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
-        new DungeonBossPokemon('Totem Araquanid', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Wishiwashi (School)', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Araquanid', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     96500, 201, 35);
 
@@ -1149,8 +1164,8 @@ dungeonList['Wela Volcano Park'] = new Dungeon('Wela Volcano Park',
     [
         new DungeonBossPokemon('Alolan Marowak', 8000000, 70),
         new DungeonBossPokemon('Salazzle', 8000000, 70),
-        new DungeonBossPokemon('Totem Alolan Marowak', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
-        new DungeonBossPokemon('Totem Salazzle', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Alolan Marowak', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Salazzle', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     96500, 201, 35);
 
@@ -1160,7 +1175,7 @@ dungeonList['Lush Jungle'] = new Dungeon('Lush Jungle',
     2203000,
     [
         new DungeonBossPokemon('Lurantis', 8000000, 70),
-        new DungeonBossPokemon('Totem Lurantis', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Lurantis', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     96500, 201, 35);
 
@@ -1206,8 +1221,8 @@ dungeonList['Hokulani Observatory'] = new Dungeon('Hokulani Observatory',
     [
         new DungeonBossPokemon('Vikavolt', 8000000, 70),
         new DungeonBossPokemon('Togedemaru', 8000000, 70),
-        new DungeonBossPokemon('Totem Vikavolt', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
-        new DungeonBossPokemon('Totem Togedemaru', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Vikavolt', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
+        new DungeonBossPokemon('Totem Togedemaru', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     96500, 201, 35);
 
@@ -1217,7 +1232,7 @@ dungeonList['Thrifty Megamart'] = new Dungeon('Thrifty Megamart',
     2203000,
     [
         new DungeonBossPokemon('Mimikyu', 8000000, 70),
-        new DungeonBossPokemon('Totem Mimikyu', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Mimikyu', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     96500, 201, 35);
 
@@ -1282,7 +1297,7 @@ dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
     2203000,
     [
         new DungeonBossPokemon('Kommo-o', 8000000, 70),
-        new DungeonBossPokemon('Totem Kommo-o', 8000000, 70, new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)),
+        new DungeonBossPokemon('Totem Kommo-o', 8000000, 70, {requirement: new GymBadgeRequirement(BadgeEnums.Elite_AlolaChampion)}),
     ],
     96500, 201, 35);
 

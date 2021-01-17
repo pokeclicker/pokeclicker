@@ -139,9 +139,7 @@ class PokemonFactory {
         return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, 0, exp, 0, shiny, GameConstants.DUNGEON_SHARDS);
     }
 
-    public static generateDungeonBoss(bossPokemonList: DungeonBossPokemon[], chestsOpened: number): BattlePokemon {
-        const random: number = GameConstants.randomIntBetween(0, bossPokemonList.length - 1);
-        const bossPokemon = bossPokemonList[random];
+    public static generateDungeonBoss(bossPokemon: DungeonBossPokemon, chestsOpened: number): BattlePokemon {
         const name: PokemonNameType = bossPokemon.name;
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;

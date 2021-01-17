@@ -6,7 +6,7 @@ class DungeonTrainer extends Trainer {
         name: string,
         team: GymPokemon[],
         public reward: number,
-        public weight = 1) {
+        public options?: EnemyOptions) {
         super(name, team);
     }
 
