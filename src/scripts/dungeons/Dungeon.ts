@@ -526,7 +526,7 @@ dungeonList['Wayward Cave'] = new Dungeon('Wayward Cave',
     56500, 230, 100);
 
 dungeonList['Mt. Coronet South'] = new Dungeon('Mt. Coronet South',
-    ['Clefairy', 'Zubat', 'Machop', 'Geodude', 'Nosepass', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach', 'Clefairy', 'Noctowl'],
+    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Nosepass', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach', 'Noctowl'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     951500,
     [
@@ -544,7 +544,7 @@ dungeonList['Iron Island'] = new Dungeon('Iron Island',
     66500, 230, 100);
 
 dungeonList['Mt. Coronet North'] = new Dungeon('Mt. Coronet North',
-    ['Clefairy', 'Zubat', 'Machop', 'Geodude', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach', 'Clefairy', 'Noctowl', 'Snover'],
+    [{pokemon: 'Clefairy', options: { weight: 2 }}, 'Zubat', 'Machop', 'Geodude', 'Meditite', 'Chingling', 'Bronzor', 'Magikarp', 'Barboach', 'Noctowl', 'Snover'],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     1015000,
     [
@@ -1277,7 +1277,7 @@ dungeonList['Exeggutor Island Hill'] = new Dungeon('Exeggutor Island Hill',
     96500, 201, 35);
 
 dungeonList['Vast Poni Canyon'] = new Dungeon('Vast Poni Canyon',
-    ['Golbat', 'Alolan Dugtrio', 'Machoke', 'Golbat', 'Magikarp', 'Skarmory', 'Barboach', 'Corphish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Mienfoo', 'Carbink', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Jangmo-o', 'Hakamo-o'],
+    [{pokemon: 'Golbat', options: { weight: 2 }}, 'Alolan Dugtrio', 'Machoke', 'Magikarp', 'Skarmory', 'Barboach', 'Corphish', 'Basculin (Red-Striped)', 'Basculin (Blue-Striped)', 'Boldore', 'Mienfoo', 'Carbink', 'Lycanroc (Midday)', 'Lycanroc (Midnight)', 'Jangmo-o', 'Hakamo-o'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
     2203000,
     [
