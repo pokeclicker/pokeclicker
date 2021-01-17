@@ -132,15 +132,9 @@ abstract class Quest {
 
     toJSON() {
         return {
-            amount: this.amount,
             initial: this.initial(),
-            description: this.description,
             index: this.index || 0,
             notified: this.notified,
-            pointsReward: this.pointsReward,
-            xpReward: this.xpReward,
-            inProgress: this.inProgress(),
-            isCompleted: this.isCompleted(),
             claimed: this.claimed(),
         };
     }

@@ -6,10 +6,26 @@ import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
 import BadgeEnums from './enums/Badges';
 import PokemonType from './enums/PokemonType';
+import ItemType from './enums/ItemType';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
 import SettingOption from './settings/SettingOption';
+import WeatherType from './weather/WeatherType';
+import Weather from './weather/Weather';
+import SeededRand from './utilities/SeededRand';
+import Settings from './settings/index';
+import { SortOptionConfigs, SortOptions } from './settings/SortOptions';
+import NotificationConstants from './notifications/NotificationConstants';
+import Notifier from './notifications/Notifier';
+import LogBook from './logbook/LogBook';
+import { LogBookTypes } from './logbook/LogBookTypes';
+import ChangelogItems from './changelog/ChangelogItems';
+import RedeemableCode from './codes/RedeemableCode';
+import EggType from './breeding/EggType';
+import Multiplier from './multiplier/Multiplier';
+import MultiplierType from './multiplier/MultiplierType';
+import SpecialEvent from './specialEvents/SpecialEvent';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -19,8 +35,25 @@ Object.assign(<any>window, {
     Statistics: DataStore.statistics,
     BadgeEnums,
     PokemonType,
+    ItemType,
     BooleanSetting,
     RangeSetting,
     Setting,
     SettingOption,
+    WeatherType,
+    Weather,
+    SeededRand,
+    Settings,
+    NotificationConstants,
+    Notifier,
+    SortOptionConfigs,
+    SortOptions,
+    LogBook,
+    LogBookTypes,
+    ChangelogItems,
+    RedeemableCode,
+    EggType,
+    Multiplier,
+    MultiplierType,
+    SpecialEvent,
 });

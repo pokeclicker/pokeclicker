@@ -55,6 +55,11 @@ export default class GameHelper {
         return Object.keys(enumerable).map(Number).filter((k) => !Number.isNaN(k));
     }
 
+    // default value as a function so objects/arrays as defaults creates a new one for each key
+    public static objectFromEnumStrings<T extends {}, V>(enumerable: T, defaultValue: () => V): Record<keyof T, V> {
+        return (this.enumStrings(enumerable).reduce((keys, type) => ({ ...keys, [type]: defaultValue() }), {}) as Record<keyof T, V>);
+    }
+
     public static tick(): void {
         this.counter = 0;
         this.updateTime();
@@ -97,6 +102,27 @@ export default class GameHelper {
 
     public static anOrA(name: string): string {
         return ['a', 'e', 'i', 'o', 'u'].includes(name[0].toLowerCase()) ? 'an' : 'a';
+    }
+
+    public static shallowEqual(object1, object2) {
+        const keys1 = Object.keys(object1);
+        const keys2 = Object.keys(object2);
+
+        if (keys1.length !== keys2.length) {
+            return false;
+        }
+
+        return keys1.every((key) => object1[key] === object2[key]);
+    }
+
+    // Find the largest integer between min and max that does not return true when passed to testTooHigh, using a binary search
+    public static binarySearch(testTooHigh: (guess: number) => boolean, min: number, max: number): number {
+        if (max - min <= 1) return min;
+
+        const mid = Math.floor((max + min) / 2);
+        const [newMin, newMax] = testTooHigh(mid) ? [min, mid] : [mid, max];
+
+        return this.binarySearch(testTooHigh, newMin, newMax);
     }
 
     private static getTomorrow() {

@@ -1,13 +1,13 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class RouteKillRequirement extends Requirement {
+class RouteKillRequirement extends AchievementRequirement {
     constructor(
         value: number,
         public region: GameConstants.Region,
         public route: number,
-        type: GameConstants.AchievementOption = GameConstants.AchievementOption.more
+        option: GameConstants.AchievementOption = GameConstants.AchievementOption.more
     ) {
-        super(value, type);
+        super(value, option, GameConstants.AchievementType['Route Kill']);
     }
 
     public getProgress() {
@@ -17,9 +17,9 @@ class RouteKillRequirement extends Requirement {
 
     public hint(): string {
         if (this.requiredValue != GameConstants.ROUTE_KILLS_NEEDED) {
-            return `${this.requiredValue} Pokémon need to be defeated on Route ${this.route}.`;
+            return `${this.requiredValue} Pokémon need to be defeated on ${Routes.getName(this.route, this.region)}.`;
         } else {
-            return `Route ${this.route} still needs to be completed.`;
+            return `${Routes.getName(this.route, this.region)} still needs to be completed.`;
         }
     }
 }

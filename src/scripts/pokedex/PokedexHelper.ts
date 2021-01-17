@@ -136,7 +136,7 @@ class PokedexHelper {
             }
 
             // Only pokemon with a hold item
-            if (filter['held-item'] && !ItemList[(pokemon as PokemonListData).heldItem]) {
+            if (filter['held-item'] && !BagHandler.displayName((pokemon as PokemonListData).heldItem)) {
                 return false;
             }
 

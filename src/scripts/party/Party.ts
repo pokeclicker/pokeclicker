@@ -15,7 +15,7 @@ class Party implements Feature {
     hasMaxLevelPokemon: KnockoutComputed<boolean>;
 
 
-    constructor() {
+    constructor(private multiplier: Multiplier) {
         this._caughtPokemon = ko.observableArray([]);
 
         this.hasMaxLevelPokemon = ko.pureComputed(() => {
@@ -81,14 +81,9 @@ class Party implements Feature {
     }
 
     public gainExp(exp = 0, level = 1, trainer = false) {
-        App.game.oakItems.use(OakItems.OakItem.Exp_Share);
+        const multBonus = this.multiplier.getBonus('exp', true);
         const trainerBonus = trainer ? 1.5 : 1;
-        const oakItemBonus = App.game.oakItems.calculateBonus(OakItems.OakItem.Exp_Share);
-        let expTotal = Math.floor(exp * level * trainerBonus * oakItemBonus * (1 + AchievementHandler.achievementBonus()) / 9);
-
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Lucky_egg)()) {
-            expTotal *= 1.5;
-        }
+        const expTotal = Math.floor(exp * level * trainerBonus * multBonus / 9);
 
         const maxLevel = (App.game.badgeCase.badgeCount() + 2) * 10;
         for (const pokemon of this.caughtPokemon) {
@@ -104,27 +99,28 @@ class Party implements Feature {
      * @param type2 types of the enemy we're calculating damage against.
      * @returns {number} damage to be done.
      */
-    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false): number {
+    public calculatePokemonAttack(type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, ignoreRegionMultiplier = false, region: GameConstants.Region = player.region, includeBreeding = false, useBaseAttack = false, includeWeather = true): number {
         let attack = 0;
         for (const pokemon of this.caughtPokemon) {
-            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack);
+            attack += this.calculateOnePokemonAttack(pokemon, type1, type2, region, ignoreRegionMultiplier, includeBreeding, useBaseAttack, includeWeather);
         }
 
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xAttack)()) {
-            attack *= 1.5;
-        }
+        const bonus = this.multiplier.getBonus('pokemonAttack');
 
-        return Math.round(attack);
+        return Math.round(attack * bonus);
     }
 
-    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false): number {
+    public calculateOnePokemonAttack(pokemon: PartyPokemon, type1: PokemonType = PokemonType.None, type2: PokemonType = PokemonType.None, region: GameConstants.Region = player.region, ignoreRegionMultiplier = false, includeBreeding = false, useBaseAttack = false, includeWeather = true): number {
         let multiplier = 1, attack = 0;
         const pAttack = useBaseAttack ? pokemon.baseAttack : pokemon.attack;
         const nativeRegion = PokemonHelper.calcNativeRegion(pokemon.name);
+
         if (!ignoreRegionMultiplier && nativeRegion != region && nativeRegion != GameConstants.Region.none) {
             // Pokemon only retain a % of their total damage in other regions based on highest region.
             multiplier = this.getRegionAttackMultiplier();
         }
+
+        // Check if the Pokemon is currently breeding (no attack)
         if (includeBreeding || !pokemon.breeding) {
             if (type1 == PokemonType.None) {
                 attack = pAttack * multiplier;
@@ -132,6 +128,20 @@ class Party implements Feature {
                 const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
                 attack = pAttack * TypeHelper.getAttackModifier(dataPokemon.type1, dataPokemon.type2, type1, type2) * multiplier;
             }
+        }
+
+        // Should we take weather boost into account
+        if (includeWeather) {
+            const weather = Weather.weatherConditions[Weather.currentWeather()];
+            const dataPokemon = PokemonHelper.getPokemonByName(pokemon.name);
+            weather.multipliers?.forEach(value => {
+                if (value.type == dataPokemon.type1) {
+                    attack *= value.multiplier;
+                }
+                if (value.type == dataPokemon.type2) {
+                    attack *= value.multiplier;
+                }
+            });
         }
 
         return attack;
@@ -166,19 +176,13 @@ class Party implements Feature {
         return false;
     }
 
-    calculateClickAttack(): number {
+    calculateClickAttack(useItem = false): number {
         // Base power
         // Shiny pokemon help with a 50% boost
-        let clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
+        const clickAttack = Math.pow(this.caughtPokemon.length + (this.caughtPokemon.filter(p => p.shiny).length / 2) + 1, 1.4);
+        const bonus = this.multiplier.getBonus('clickAttack', useItem);
 
-        clickAttack *= App.game.oakItems.calculateBonus(OakItems.OakItem.Poison_Barb);
-
-        // Apply battle item bonus
-        if (EffectEngineRunner.isActive(GameConstants.BattleItemType.xClick)()) {
-            clickAttack *= 1.5;
-        }
-
-        return Math.floor(clickAttack);
+        return Math.floor(clickAttack * bonus);
     }
 
     canAccess(): boolean {

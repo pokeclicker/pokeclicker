@@ -56,9 +56,8 @@ class Battle {
         if (!this.enemyPokemon()?.isAlive()) {
             return;
         }
-        App.game.oakItems.use(OakItems.OakItem.Poison_Barb);
         GameHelper.incrementObservable(App.game.statistics.clickAttacks);
-        this.enemyPokemon().damage(App.game.party.calculateClickAttack());
+        this.enemyPokemon().damage(App.game.party.calculateClickAttack(true));
         if (!this.enemyPokemon().isAlive()) {
             this.defeatPokemon();
         }

@@ -175,7 +175,9 @@ gulp.task('scripts', () => {
         // Replace imports with references
         .pipe(replace(/(^|\n)import (.* from )?'(.*)((.d)?.ts)?';/g, '$1/// <reference path="$3.d.ts"/>'))
         // Convert exports to declarations so that ./src/scripts can use them
-        .pipe(replace(/(^|\n)export (default )?/, '$1declare '))
+        .pipe(replace(/(^|\n)export (?!declare)(default )?/, '$1declare '))
+        // Remove any remaining 'export'
+        .pipe(replace(/(^|\n)export/g, ''))
         // Fix broken declarations for things like temporaryWindowInjection
         .pipe(replace('declare {};', ''))
         .pipe(gulp.dest(dests.declarations));

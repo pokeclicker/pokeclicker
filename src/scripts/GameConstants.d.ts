@@ -68,14 +68,38 @@ namespace GameConstants {
         equal,
         more,
     }
+
+    declare enum AchievementType {
+        'None',
+        'Money',
+        'Token',
+        'Attack',
+        'Diamond',
+        'Underground Items Found',
+        'Underground Layers Mined',
+        'Max Level Oak Item',
+        'Captured',
+        'Defeated',
+        'Caught Pokemon',
+        'Caught Unique Pokemons By Region',
+        'Shiny Pokemon',
+        'Hatch',
+        'Pokeball',
+        'Click',
+        'Route Kill',
+        'Clear Gym',
+        'Clear Dungeon',
+    }
     declare enum DungeonTile {
         empty,
         enemy,
         chest,
         boss
     }
-    declare const ROUTE_HELD_ITEM_CHANCE: number;
-    declare const DUNGEON_HELD_ITEM_CHANCE: number;
+    declare const ROUTE_HELD_ITEM_MODIFIER: number;
+    declare const DUNGEON_HELD_ITEM_MODIFIER: number;
+    declare const HELD_ITEM_CHANCE: number;
+    declare const HELD_UNDERGROUND_ITEM_CHANCE: number;
     declare const DUNGEON_SHARDS: number;
     declare const DUNGEON_BOSS_SHARDS: number;
     declare const GYM_SHARDS: number;
@@ -161,61 +185,19 @@ namespace GameConstants {
     declare function expRandomElement<T>(array: T[], ratio: number): T;
     declare const TypeColor: string[];
     declare const ROUTE_KILLS_NEEDED: number;
-    declare const WaterAreas: {
-        0: Set<string | number>;
-        1: Set<string | number>;
-        2: Set<string | number>;
-        3: Set<string | number>;
-        4: Set<string>;
+    declare type EnvironmentData = Partial<Record<number, Set<string | number>>>
+    declare const Environments: {
+        Water: EnvironmentData,
+        Ice: EnvironmentData,
+        Forest: EnvironmentData,
+        Cave: EnvironmentData,
+        GemCave: EnvironmentData,
+        PowerPlant: EnvironmentData,
+        Mansion: EnvironmentData,
+        Graveyard: EnvironmentData,
     };
-    declare const IceAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string | number>;
-    };
-    declare const ForestAreas: {
-        0: Set<string | number>;
-        1: Set<string | number>;
-        2: Set<string | number>;
-        3: Set<string | number>;
-        4: Set<string>;
-    };
-    declare const CaveAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-    };
-    declare const GemCaveAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-    };
-    declare const PowerPlantAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-    };
-    declare const MansionAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-    };
-    declare const GraveyardAreas: {
-        0: Set<string>;
-        1: Set<string>;
-        2: Set<string>;
-        3: Set<string>;
-        4: Set<string>;
-    };
+    declare type Environment = keyof typeof Environments;
+    declare const EnvironmentCssClass:Record<Environment, string>;
     declare enum Starter {
         'None' = '',
         'Bulbasaur',
@@ -251,7 +233,8 @@ namespace GameConstants {
         'Razor_fang',
         'Prism_scale',
         'Sachet',
-        'Whipped_dream'
+        'Whipped_dream',
+        'Ice_stone',
     }
     declare enum BattleItemType {
         'xAttack' = '',

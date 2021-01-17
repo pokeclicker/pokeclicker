@@ -1,4 +1,5 @@
 /// <reference path="../../declarations/DataStore/StatisticStore/index.d.ts" />
+/// <reference path="../GameConstants.d.ts" />
 
 class MapHelper {
     public static returnToMap() {
@@ -26,7 +27,6 @@ class MapHelper {
                 Battle.generateNewEnemy();
             }
             App.game.gameState = GameConstants.GameState.fighting;
-            GameController.applyRouteBindings();
         } else {
             if (!MapHelper.routeExist(route, region)) {
                 return Notifier.notify({
@@ -63,26 +63,20 @@ class MapHelper {
         return this.routeExist(route, region) && Routes.getRoute(region, route).isUnlocked();
     };
 
-    public static calculateBattleCssClass(): string {
+    public static getCurrentEnvironment(): GameConstants.Environment {
         const area = player.route() || player.town()?.name() || undefined;
 
-        if (GameConstants.WaterAreas[player.region].has(area)) {
-            return 'water';
-        } else if (GameConstants.IceAreas[player.region].has(area)) {
-            return 'ice';
-        } else if (GameConstants.ForestAreas[player.region].has(area)) {
-            return 'forest';
-        } else if (GameConstants.CaveAreas[player.region].has(area)) {
-            return 'cave';
-        } else if (GameConstants.GemCaveAreas[player.region].has(area)) {
-            return 'cave-gem';
-        } else if (GameConstants.PowerPlantAreas[player.region].has(area)) {
-            return 'power-plant';
-        } else if (GameConstants.MansionAreas[player.region].has(area)) {
-            return 'mansion';
-        } else if (GameConstants.GraveyardAreas[player.region].has(area)) {
-            return 'graveyard';
-        }
+        const [env] = Object.entries(GameConstants.Environments).find(
+            ([, regions]) => Object.values(regions).find(
+                region => region.has(area)
+            )
+        ) || [];
+
+        return (env as GameConstants.Environment);
+    }
+
+    public static calculateBattleCssClass(): string {
+        return GameConstants.EnvironmentCssClass[this.getCurrentEnvironment()];
     }
 
     public static calculateRouteCssClass(route: number, region: GameConstants.Region): string {
@@ -101,7 +95,7 @@ class MapHelper {
         }
 
         // Water routes
-        if (GameConstants.WaterAreas[region].has(route)) {
+        if (GameConstants.Environments.Water[region]?.has(route)) {
             cls = `${cls} waterRoute`;
         }
 
@@ -160,7 +154,6 @@ class MapHelper {
             Battle.enemyPokemon(null);
             //this should happen last, so all the values all set beforehand
             App.game.gameState = GameConstants.GameState.town;
-            GameController.applyRouteBindings();
         } else {
             const town = TownList[townName];
             const reqsList = [];
@@ -188,7 +181,7 @@ class MapHelper {
         };
         switch (player.region) {
             case 0:
-                if (TownList['Vermillion City'].isUnlocked() && player.highestRegion() > 0) {
+                if (TownList['Vermilion City'].isUnlocked() && player.highestRegion() > 0) {
                     openModal();
                     return;
                 }
@@ -207,7 +200,18 @@ class MapHelper {
                     openModal();
                     return;
                 }
+            case 4:
+                if (TownList['Castelia City'].isUnlocked()) {
+                    openModal();
+                    return;
+                }
+            case 5:
+                if (TownList['Coumarine City'].isUnlocked()) {
+                    openModal();
+                    return;
+                }
         }
+
         Notifier.notify({
             message: 'You cannot access this dock yet',
             type: NotificationConstants.NotificationOption.warning,
