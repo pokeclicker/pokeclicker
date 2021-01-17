@@ -13,6 +13,6 @@ class WeatherRequirement extends Requirement {
     }
 
     public hint(): string {
-        return `The weather needs to be ${WeatherType[this.requiredValue]}.`;
+        return `The weather needs to be ${this.weather.map(weather => WeatherType[weather]).join(' or ')}`;
     }
 }
