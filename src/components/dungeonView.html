@@ -4,7 +4,9 @@
         <h2 class="pageItemTitle" style="display: block;">
             <knockout data-bind="if: DungeonBattle.enemyPokemon() && DungeonBattle.enemyPokemon().health()">
                 <knockout data-bind="text: DungeonBattle.enemyPokemon().name">Pokémon name</knockout>
-                <knockout data-bind="if: !DungeonBattle.trainer(), template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
+                <!-- ko if: !DungeonBattle.trainer() -->
+                <knockout data-bind="template: { name: 'caughtStatusTemplate', data: {'status': PartyController.getCaughtStatus(DungeonBattle.enemyPokemon().id)}}"></knockout>
+                <!-- /ko -->
             </knockout>
             <knockout data-bind="if: !DungeonBattle.enemyPokemon() || !DungeonBattle.enemyPokemon().health()">
                 &nbsp;
