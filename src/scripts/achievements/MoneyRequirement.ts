@@ -1,8 +1,8 @@
-///<reference path="Requirement.ts"/>
+///<reference path="AchievementRequirement.ts"/>
 
-class MoneyRequirement extends Requirement {
-    constructor( requiredValue: number, type: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
-        super(requiredValue, type);
+class MoneyRequirement extends AchievementRequirement {
+    constructor(requiredValue: number, option: GameConstants.AchievementOption = GameConstants.AchievementOption.more) {
+        super(requiredValue, option, GameConstants.AchievementType['Money']);
     }
 
     public getProgress() {

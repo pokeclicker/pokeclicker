@@ -8,3 +8,4 @@ src/declarations/
 .vscode/
 *.sln
 Web.config
+report.*.json
