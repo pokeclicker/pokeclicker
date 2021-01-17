@@ -94,12 +94,12 @@ class PokemonFactory {
     }
 
     /**
-     * Generate a trainer pokemon based on gymName, index and the dataList.
+     * Generate a Gym trainer pokemon based on gymName, index and the dataList.
      * @param gymName name of the gym that the player is fighting.
      * @param index index of the pokémon that is being generated.
      * @returns {any}
      */
-    public static generateTrainerPokemon(gymName: string, index: number): BattlePokemon {
+    public static generateGymPokemon(gymName: string, index: number): BattlePokemon {
         const gym = gymList[gymName];
         const pokemon = gym.pokemons[index];
         const basePokemon = PokemonHelper.getPokemonByName(pokemon.name);
@@ -109,9 +109,7 @@ class PokemonFactory {
         return new BattlePokemon(pokemon.name, basePokemon.id, basePokemon.type1, basePokemon.type2, pokemon.maxHealth, pokemon.level, 0, exp, 0, shiny, GameConstants.GYM_SHARDS);
     }
 
-    public static generateDungeonPokemon(pokemonList: PokemonNameType[], chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
-        const random: number = GameConstants.randomIntBetween(0, pokemonList.length - 1);
-        const name: PokemonNameType = pokemonList[random];
+    public static generateDungeonPokemon(name: PokemonNameType, chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
         const basePokemon = PokemonHelper.getPokemonByName(name);
         const id = basePokemon.id;
         const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
@@ -129,6 +127,16 @@ class PokemonFactory {
             });
         }
         return new BattlePokemon(name, id, basePokemon.type1, basePokemon.type2, maxHealth, level, catchRate, exp, money, shiny, GameConstants.DUNGEON_SHARDS, heldItem);
+    }
+
+    public static generateDungeonTrainerPokemon(pokemon: GymPokemon, chestsOpened: number, baseHealth: number, level: number): BattlePokemon {
+        // TODO: HLXII - Will Dungeon Trainer pokemon health be handled differently?
+        const name = pokemon.name;
+        const basePokemon = PokemonHelper.getPokemonByName(name);
+        const maxHealth: number = Math.floor(baseHealth * (1 + (chestsOpened / 5)));
+        const exp: number = basePokemon.exp;
+        const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
+        return new BattlePokemon(name, basePokemon.id, basePokemon.type1, basePokemon.type2, maxHealth, level, 0, exp, 0, shiny, GameConstants.DUNGEON_SHARDS);
     }
 
     public static generateDungeonBoss(bossPokemonList: DungeonBossPokemon[], chestsOpened: number): BattlePokemon {

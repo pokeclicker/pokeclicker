@@ -256,10 +256,21 @@
                                     </knockout>
                                 </knockout>
 
+                                <!-- ko ifnot: DungeonBattle.trainer() -->
                                 <knockout class="right" data-bind="css: { 'text-danger': DungeonRunner.timeLeftSeconds() < 20, 'text-primary': DungeonRunner.timeLeftSeconds() >= 20 }">
                                     <h4><strong data-bind="text: DungeonRunner.timeLeftSeconds() + 's'"></strong></h4>
                                 </knockout>
-
+                                <!-- /ko -->
+                                <!-- ko if: DungeonBattle.trainer() -->
+                                <knockout class="right">
+                                    <span data-bind="foreach: new Array(DungeonBattle.defeatedTrainerPokemon())">
+                                        <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest pokeball-defeated"/>
+                                    </span>
+                                    <span data-bind="foreach: new Array(DungeonBattle.remainingTrainerPokemon())">
+                                        <img src="assets/images/pokeball/Pokeball.svg" class="pokeball-smallest"/>
+                                    </span>
+                                </knockout>
+                                <!-- /ko -->
                                 <div class="progress timer">
                                     <div class="progress-bar bg-danger" role="progressbar"
                                          data-bind="attr:{ style: 'width:' + DungeonRunner.timeLeftPercentage() + '%' },
@@ -272,6 +283,9 @@
 
                             <!-- ko if: (DungeonRunner.fighting() || DungeonBattle.catching)  -->
                             <div data-bind="if: DungeonBattle.enemyPokemon">
+                                <div style="position:absolute; left:65%;" data-bind="if: DungeonBattle.trainer()">
+                                    <img data-bind="attr:{ src: 'assets/images/trainers/Joey.png' }"/>
+                                </div>
                                 <div>
                                     <div data-bind="ifnot: DungeonBattle.catching">
                                         <img class="enemy"

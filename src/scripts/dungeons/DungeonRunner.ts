@@ -8,9 +8,7 @@ class DungeonRunner {
 
     public static fighting: KnockoutObservable<boolean> = ko.observable(false);
     public static map: DungeonMap;
-    public static pokemonDefeated: number;
     public static chestsOpened: number;
-    public static loot: string[];
     public static currentTileType;
     public static fightingBoss: KnockoutObservable<boolean> = ko.observable(false);
     public static defeatedBoss: KnockoutObservable<boolean> = ko.observable(false);
@@ -33,9 +31,7 @@ class DungeonRunner {
 
         DungeonRunner.timeLeft(GameConstants.DUNGEON_TIME);
         DungeonRunner.map = new DungeonMap(GameConstants.DUNGEON_SIZE + player.region);
-        DungeonRunner.pokemonDefeated = 0;
         DungeonRunner.chestsOpened = 0;
-        DungeonRunner.loot = [];
         DungeonRunner.currentTileType = ko.pureComputed(() => {
             return DungeonRunner.map.currentTile().type;
         });

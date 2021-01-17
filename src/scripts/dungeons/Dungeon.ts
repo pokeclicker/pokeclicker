@@ -3,6 +3,28 @@
 ///<reference path="../achievements/GymBadgeRequirement.ts"/>
 ///<reference path="../achievements/MultiRequirement.ts"/>
 ///<reference path="../achievements/ObtainedPokemonRequirement.ts"/>
+///<reference path="./DungeonTrainer.ts"/>
+///<reference path="../gym/GymPokemon.ts"/>
+
+interface EnemyOptions {
+    weight?: number,
+    requirement?: Requirement
+}
+
+interface DetailedPokemon {
+    pokemon: PokemonNameType,
+    options: EnemyOptions
+}
+
+type Enemy = PokemonNameType | DetailedPokemon | DungeonTrainer;
+
+interface DungeonOptions {
+    trainerRatio?: number,
+}
+
+interface Array<T> {
+    filter<U extends T>(pred: (a: T) => a is U): U[];
+}
 
 /**
  * Gym class.
@@ -12,18 +34,25 @@ class Dungeon {
     allPokemonNames: PokemonNameType[];
     allAvailablePokemonNames: PokemonNameType[];
 
+    private static baseOptions: DungeonOptions = {
+        trainerRatio: 0,
+    }
+
     constructor(
         name: string,
-        public pokemonList: PokemonNameType[],
+        public enemyList: Enemy[],
         public itemList: GameConstants.BattleItemType[],
         public baseHealth: number,
         public bossList: DungeonBossPokemon[],
         public tokenCost: number,
         public difficultyRoute: number, // Closest route in terms of difficulty, used for egg steps, dungeon tokens etc.
-        public level: number
+        public level: number,
+        public options: DungeonOptions = {}
     ) {
         this.name = ko.observable(name);
         this.calculateAllPokemonNames();
+        // Setting up base options
+        this.options.trainerRatio = this.options.trainerRatio ?? Dungeon.baseOptions.trainerRatio;
     }
 
     public isUnlocked(): boolean {
@@ -47,6 +76,50 @@ class Dungeon {
     public availableBosses(): DungeonBossPokemon[] {
         return this.bossList.filter(b => b.isUnlocked());
     }
+
+    private static isPokemon(arg: any): arg is PokemonNameType {
+        if (pokemonMap[arg].id) {
+            return true;
+        }
+        if (arg.hasOwnProperty('options')) {
+
+        }
+    }
+
+    /**
+     * Returns the possible Pokemon in the dungeon.
+     * Filters out Trainers and collapses DetailedPokemon
+     */
+    get pokemonList(): PokemonNameType[] {
+        // Filtering out Trainers
+        const list = this.enemyList.filter((enemy) => {
+            return !enemy.hasOwnProperty('name');
+        }).map((enemy) => {
+            // Collapsing DetailedPokemon
+            if (typeof enemy === 'string') {
+                return enemy;
+            } else if (enemy.hasOwnProperty('pokemon')) {
+                return (<DetailedPokemon>enemy).pokemon;
+            }
+        });
+
+        return list.filter(Dungeon.isPokemon);
+    }
+
+    /**
+     * Retreives the weights for all the possible enemies
+     */
+    get weightList(): number[] {
+        return this.enemyList.map((enemy) => {
+            if (typeof enemy === 'string') {
+                return 1;
+            } else if (enemy.hasOwnProperty('pokemon')) {
+                return (<DetailedPokemon>enemy).options.weight;
+            } else {
+                return (<DungeonTrainer>enemy).weight;
+            }
+        });
+    }
 }
 
 /**
@@ -58,7 +131,16 @@ const dungeonList: { [dungeonName: string]: Dungeon } = {};
 // Kanto Dungeons
 
 dungeonList['Viridian Forest'] = new Dungeon('Viridian Forest',
-    ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Pidgeotto'],
+    // ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Pidgey', 'Pidgeotto'], // TODO: HLXII - PUT THIS BACK AFTER TESTING
+    [
+        'Caterpie',
+        {pokemon: 'Bulbasaur', options: { weight: 2 }},
+        new DungeonTrainer('Joey',
+            [
+                new GymPokemon('Rattata', 200, 5),
+                new GymPokemon('Raticate', 210, 7),
+            ], 1, 100),
+    ],
     [GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.xAttack, GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Lucky_incense],
     102,
     [new DungeonBossPokemon('Pikachu', 510, 7)],
