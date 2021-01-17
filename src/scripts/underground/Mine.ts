@@ -290,9 +290,9 @@ class Mine {
                 });
 
                 if (App.game.oakItems.isActive(OakItems.OakItem.Treasure_Scanner)) {
-                    const GiveDouble = App.game.oakItems.calculateBonus(OakItems.OakItem.Treasure_Scanner) / 100;
-                    let Random = Math.random();
-                    if (GiveDouble >= Random) {
+                    const giveDouble = App.game.oakItems.calculateBonus(OakItems.OakItem.Treasure_Scanner) / 100;
+                    let random = Math.random();
+                    if (giveDouble >= random) {
                         Underground.gainMineItem(Mine.rewardNumbers[i]);
                         Notifier.notify({
                             message: `You found an extra ${GameConstants.humanifyString(itemName)} in the Mine!`,
@@ -301,8 +301,8 @@ class Mine {
                             timeout: 4000,
                         });
 
-                        Random = Math.random();
-                        if (GiveDouble >= Random) {
+                        random = Math.random();
+                        if (giveDouble >= random) {
                             Underground.gainMineItem(Mine.rewardNumbers[i]);
                             Notifier.notify({
                                 message: `Lucky! You found another ${GameConstants.humanifyString(itemName)}!`,
@@ -311,8 +311,8 @@ class Mine {
                                 timeout: 6000,
                             });
 
-                            Random = Math.random();
-                            if (GiveDouble >= Random) {
+                            random = Math.random();
+                            if (giveDouble >= random) {
                                 Underground.gainMineItem(Mine.rewardNumbers[i]);
                                 Notifier.notify({
                                     message: `Jackpot! You found another ${GameConstants.humanifyString(itemName)}!`,
