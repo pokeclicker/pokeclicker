@@ -18,7 +18,7 @@
       <table class="table table-bordered m-0">
         <tbody>
           <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
-            <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]())"></td>
+            <td class="amount p-0" data-bind="text: GameHelper.formatAmount(player.itemList[$data]()),tooltip:{title:player.itemList[$data](),trigger:'hover',placement:'top',animation:false}"></td>
           </tr>
           <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
             <td class="p-0" data-bind="attr: {
@@ -45,7 +45,7 @@
           <tr data-bind="foreach: Object.keys(ItemList).filter(i=>ItemList[i].constructor.name == 'BattleItem')">
             <td class="text-light p-0">
               <!-- ko if: EffectEngineRunner.getEffect($data) > 0 -->
-                <code data-bind="text: player.effectTimer[$data]()"></code>
+                <code data-bind="text: player.effectTimer[$data](),tooltip: {title:GameConstants.formatSecondsToTime(player.effectList[$data]()),trigger:'hover',placement:'bottom',html:true}"></code>
               <!-- /ko -->
             </td>
           </tr>
