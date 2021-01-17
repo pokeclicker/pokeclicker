@@ -30,7 +30,7 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const level: number = this.routeLevel(route, region);
-        const heldItem: string = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_CHANCE);
+        const heldItem: BagItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.ROUTE_HELD_ITEM_MODIFIER);
 
         const money: number = this.routeMoney(route,region);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_BATTLE);
@@ -118,7 +118,7 @@ class PokemonFactory {
         const catchRate: number = this.catchRateHelper(basePokemon.catchRate);
         const exp: number = basePokemon.exp;
         const money = 0;
-        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_CHANCE);
+        const heldItem = this.generateHeldItem(basePokemon.heldItem, GameConstants.DUNGEON_HELD_ITEM_MODIFIER);
         const shiny: boolean = this.generateShiny(GameConstants.SHINY_CHANCE_DUNGEON);
         if (shiny) {
             Notifier.notify({
@@ -196,10 +196,21 @@ class PokemonFactory {
         return GameConstants.clipNumber(catchRateRaw, 0, 100);
     }
 
-    private static generateHeldItem(item: string, chance: number): string | null {
-        if (!item || !ItemList[item]) {
+    private static generateHeldItem(item: BagItem, modifier: number): BagItem | null {
+        if (!item || !BagHandler.displayName(item)) {
             return null;
         }
+
+        let chance = GameConstants.HELD_ITEM_CHANCE;
+        switch (item.type) {
+            case ItemType.underground:
+                chance = GameConstants.HELD_UNDERGROUND_ITEM_CHANCE;
+                break;
+            default:
+                chance = GameConstants.HELD_ITEM_CHANCE;
+                break;
+        }
+        chance /= modifier;
 
         if (EffectEngineRunner.isActive(GameConstants.BattleItemType.Item_magnet)()) {
             chance /= 1.5;

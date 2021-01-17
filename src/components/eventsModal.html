@@ -22,7 +22,7 @@
                      <!-- ko if: Date.now() < endTime -->
                      <tr>
                        <td data-bind="text: title"></td>
-                       <td class="text-left" data-bind="text: description"></td>
+                       <td class="text-left" data-bind="html: description"></td>
                        <td class="text-left"><code data-bind="text: startTime.toLocaleString()">-</code></td>
                        <td class="text-left"><code data-bind="text: endTime.toLocaleString()">-</code></td>
                      </tr>

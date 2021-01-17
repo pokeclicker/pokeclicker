@@ -19,7 +19,7 @@
                                     <h3>
                                         <knockout data-bind="text: PokemonType[$index()]"></knockout>
                                         <div class="float-right">
-                                            <img data-bind='attr: { src: "assets/images/shards/" + $index() + ".png" }'/>
+                                            <img width=20px data-bind='attr: { src: Shards.image($index()) }'/>
                                             <knockout data-bind="text: App.game.shards.shardWallet[$index()]().toLocaleString('en-US')"></knockout>
                                         </div>
                                     </h3>
@@ -43,7 +43,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]] 
+                                    <td data-bind='text: (GameConstants.TypeEffectivenessValue[GameConstants.TypeEffectiveness[$index()]]
                                         + (App.game.shards.getShardUpgrade($parentContext.$index(), $index()) * Shards.SHARD_UPGRADE_STEP)).toFixed(1) + "x"'></td>
                                     <td>
                                         <button class='btn btn-block btn-primary'

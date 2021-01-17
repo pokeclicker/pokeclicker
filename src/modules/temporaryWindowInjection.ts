@@ -6,6 +6,7 @@ import * as GameConstants from './GameConstants';
 import GameHelper from './GameHelper';
 import BadgeEnums from './enums/Badges';
 import PokemonType from './enums/PokemonType';
+import ItemType from './enums/ItemType';
 import BooleanSetting from './settings/BooleanSetting';
 import RangeSetting from './settings/RangeSetting';
 import Setting from './settings/Setting';
@@ -24,6 +25,7 @@ import RedeemableCode from './codes/RedeemableCode';
 import EggType from './breeding/EggType';
 import Multiplier from './multiplier/Multiplier';
 import MultiplierType from './multiplier/MultiplierType';
+import SpecialEvent from './specialEvents/SpecialEvent';
 
 Object.assign(<any>window, {
     GameConstants,
@@ -33,6 +35,7 @@ Object.assign(<any>window, {
     Statistics: DataStore.statistics,
     BadgeEnums,
     PokemonType,
+    ItemType,
     BooleanSetting,
     RangeSetting,
     Setting,
@@ -52,4 +55,5 @@ Object.assign(<any>window, {
     EggType,
     Multiplier,
     MultiplierType,
+    SpecialEvent,
 });

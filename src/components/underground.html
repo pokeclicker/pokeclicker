@@ -149,12 +149,12 @@ style="cursor:default" tabindex="-1">
                                 <tr>
                                     <td class='vertical-middle text-center' data-bind='text: player.getUndergroundItemAmount(item1.id)'></td>
                                     <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item1.id+".png"}'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: item1.imagePath }'>
                                     </td>
                                     <td class='vertical-middle' data-bind='text: amount1 + " × " + item1.name'></td>
                                     <td class='vertical-middle'>→</td>
                                     <td class='vertical-middle'>
-                                        <img class='mineInventoryItem' data-bind='attr: {src: "assets/images/underground/"+item2.id+".png"}'>
+                                        <img class='mineInventoryItem' data-bind='attr: {src: item2.imagePath }'>
                                     </td>
                                     <td class='vertical-middle' data-bind='text: amount2 + " × " + item2.name'></td>
                                     <td class='vertical-middle'>
@@ -200,7 +200,7 @@ style="cursor:default" tabindex="-1">
     <script type="text/html" id="treasureListTemplate">
         <tr data-bind='if: amount() > 0'>
             <td class='vertical-middle'>
-                <img class='mineInventoryItem' data-bind='attr:{ src: "assets/images/underground/"+id+".png" }'>
+                <img class='mineInventoryItem' data-bind='attr:{ src: Underground.getMineItemById(id).imagePath }'>
                 <span data-bind='text: "("+$data.amount()+")"'></span>
             </td>
             <td class='vertical-middle' data-bind='text: name'></td>
