@@ -76,12 +76,17 @@
                       Level: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].level"></span>
                     </td>
                     <td class="table-dark" style="width: 50%">
-                      <!-- ko if: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
-                      Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>%
-                      <!-- /ko -->
-                      <!-- ko ifnot: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
-                      Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>x
-                      <!-- /ko -->
+                        <!-- ko if: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
+                        Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>%
+                        <!-- /ko -->
+                        <!-- ko if: OakItemController.inspectedItem === OakItems.OakItem.Treasure_Scanner -->
+                        Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>%
+                        <!-- /ko -->
+                        <!-- ko ifnot: OakItemController.inspectedItem === OakItems.OakItem.Magic_Ball -->
+                            <!-- ko ifnot: OakItemController.inspectedItem === OakItems.OakItem.Treasure_Scanner-->
+                            Bonus: <span data-bind="text: App.game.oakItems.itemList[OakItemController.inspectedItem].calculateBonusIfActive()"></span>x
+                            <!-- /ko -->
+                        <!-- /ko -->
                     </td>
                   </tr>
                   <!-- /ko -->

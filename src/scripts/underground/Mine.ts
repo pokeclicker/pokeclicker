@@ -290,7 +290,8 @@ class Mine {
                 });
 
                 if (App.game.oakItems.isActive(OakItems.OakItem.Treasure_Scanner)) {
-                    const GiveDouble = App.game.oakItems.calculateBonus(OakItems.OakItem.Treasure_Scanner);
+                    const GiveDouble = App.game.oakItems.calculateBonus(OakItems.OakItem.Treasure_Scanner) / 100;
+                    console.log("GiveDouble = " + GiveDouble);
                     let Random = Math.random();
                     if (GiveDouble >= Random) {
                         Underground.gainMineItem(Mine.rewardNumbers[i]);
@@ -315,7 +316,7 @@ class Mine {
                             if (GiveDouble >= Random) {
                                 Underground.gainMineItem(Mine.rewardNumbers[i]);
                                 Notifier.notify({
-                                    message: `Jackpot! You found another ${GameConstants.humanifyString(itemName).toUpperCase()}!`,
+                                    message: `Jackpot! You found another ${GameConstants.humanifyString(itemName)}!`,
                                     type: NotificationConstants.NotificationOption.success,
                                     title: 'Treasure Scanner',
                                     timeout: 8000,

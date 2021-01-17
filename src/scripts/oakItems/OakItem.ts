@@ -96,6 +96,6 @@ class OakItem extends ExpUpgrade {
     }
 
     tooltip = ko.pureComputed(() => {
-        return `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}/${this.maxLevel}</strong><br/>Bonus: <strong>${this.calculateBonusIfActive()}${this.displayName != 'Magic Ball' ? '×' : '%'}</strong>`;
+        return `<u>${this.displayName}</u><br/><p>${this.description}</p>Level: <strong>${this.level}/${this.maxLevel}</strong><br/>Bonus: <strong>${this.calculateBonusIfActive()}${this.displayName != 'Magic Ball' && this.displayName != 'Treasure Scanner' ? '×' : '%' }</strong>`;
     });
 }
