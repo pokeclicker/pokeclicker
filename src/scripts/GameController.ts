@@ -202,8 +202,13 @@ class GameController {
                         DungeonRunner.map.moveRight();
                         break;
                     case 'Space':
-                        DungeonRunner.openChest();
-                        DungeonRunner.startBossFight();
+                        if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.entrance) {
+                            DungeonRunner.dungeonLeave();
+                        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.chest) {
+                            DungeonRunner.openChest();
+                        } else if (DungeonRunner.map.currentTile().type() === GameConstants.DungeonTile.boss && !DungeonRunner.fightingBoss()) {
+                            DungeonRunner.startBossFight();
+                        }
                         break;
                     default: // any other key (ignore)
                         return;
