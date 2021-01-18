@@ -96,6 +96,17 @@ class DungeonRunner {
         DungeonBattle.generateNewBoss();
     }
 
+    public static dungeonLeave() {
+        if (DungeonRunner.map.currentTile().type() !== GameConstants.DungeonTile.entrance || DungeonRunner.dungeonFinished()) {
+            return;
+        }
+
+        DungeonRunner.dungeonFinished(true);
+        DungeonRunner.fighting(false);
+        DungeonRunner.fightingBoss(false);
+        MapHelper.moveToTown(DungeonRunner.dungeon.name());
+    }
+
     private static dungeonLost() {
         if (!DungeonRunner.dungeonFinished()) {
             DungeonRunner.dungeonFinished(true);

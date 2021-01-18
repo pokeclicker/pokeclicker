@@ -112,6 +112,8 @@ const CinnabarIslandShop = new Shop([
     ItemList['Fire_egg'],
     ItemList['SmallRestore'],
     ItemList['Explorer_kit'],
+    ItemList['Explosive_Charge'],
+    ItemList['Treasure_Scanner'],
 ]);
 const ViridianCityShop = new Shop([
     ItemList['Pokeball'],
