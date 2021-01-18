@@ -92,9 +92,10 @@ namespace GameConstants {
     }
     declare enum DungeonTile {
         empty,
+        entrance,
         enemy,
         chest,
-        boss
+        boss,
     }
     declare const ROUTE_HELD_ITEM_MODIFIER: number;
     declare const DUNGEON_HELD_ITEM_MODIFIER: number;
