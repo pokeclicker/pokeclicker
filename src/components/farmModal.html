@@ -84,7 +84,7 @@
                                                 css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
                                                 tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
-                                                data-bind="attr:{ src: 'assets/images/items/' + MulchType[$data] + '.png' }">
+                                                data-bind="attr:{ src: ItemList[MulchType[$data]].imagePath }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
                                             <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
                                         </li>

@@ -15,6 +15,10 @@ class MulchItem extends Item {
 
     use() {
     }
+
+    get imagePath() {
+        return `assets/images/items/farm/${this.name()}.png`;
+    }
 }
 
 ItemList['Boost_Mulch']   = new MulchItem(MulchType.Boost_Mulch, 50, 'Boost Mulch', 'Increases Berry growth rate.');

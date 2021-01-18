@@ -51,7 +51,7 @@ class UndergroundItem {
         } else if (this.valueType == 'Mine Egg') {
             return `assets/images/breeding/${this.name}.png`;
         } else {
-            return `assets/images/items/${this.name}.png`;
+            return `assets/images/items/underground/${this.name}.png`;
         }
     }
 

@@ -29,6 +29,10 @@ class EvolutionStone extends CaughtIndicatingItem {
             return Math.min(status, PartyController.getCaughtStatusByName(pokemonName));
         }, CaughtStatus.CaughtShiny);
     }
+
+    get imagePath() {
+        return `assets/images/items/evolution/${this.name()}.png`;
+    }
 }
 
 // TODO: Set prices for different kinds of stones

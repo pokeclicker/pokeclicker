@@ -28,6 +28,10 @@ class PokemonItem extends CaughtIndicatingItem {
         return PartyController.getCaughtStatusByName(this.name() as PokemonNameType);
     }
 
+    get imagePath() {
+        return `assets/images/items/pokemonItem/${this.name()}.png`;
+    }
+
 }
 
 ItemList['Eevee']                = new PokemonItem('Eevee', 5000);

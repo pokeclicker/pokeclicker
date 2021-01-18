@@ -16,6 +16,10 @@ class PokeballItem extends Item {
 
     use() {
     }
+
+    get imagePath() {
+        return `assets/images/items/pokeball/${this.name()}.png`;
+    }
 }
 
 ItemList['Pokeball']   = new PokeballItem(GameConstants.Pokeball.Pokeball, 100, undefined, undefined, 'Pokéball');

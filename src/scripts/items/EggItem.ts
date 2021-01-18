@@ -44,6 +44,10 @@ class EggItem extends CaughtIndicatingItem {
             }
         }
     }
+
+    get imagePath() {
+        return `assets/images/items/egg/${this.name()}.png`;
+    }
 }
 
 

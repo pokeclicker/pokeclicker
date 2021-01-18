@@ -19,6 +19,10 @@ class BattleItem extends Item {
     use() {
         EffectEngineRunner.addEffect(this.name(), ItemHandler.amountToUse);
     }
+
+    get imagePath() {
+        return `assets/images/items/battleItem/${this.name()}.png`;
+    }
 }
 
 ItemList['xAttack']         = new BattleItem(GameConstants.BattleItemType.xAttack, '+50% Bonus to Pokémon attack', 600, undefined, undefined, 'pokemonAttack', 1.5);

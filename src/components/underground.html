@@ -30,7 +30,7 @@
                                 click: function(){ ItemList[$data].use();},
                                 css: { disabled: player._itemList[$data]() <= 0}">
                             <span data-bind="text: '(' + player._itemList[$data]() + ')'">(?)</span>
-                            <img class="restore-item" data-bind="attr: { src: 'assets/images/items/' + $data + '.png'}">
+                            <img class="restore-item" data-bind="attr: { src: ItemList[$data].imagePath }">
                             <span data-bind="text: ' +' + App.game.underground.calculateItemEffect(GameConstants.EnergyRestoreSize[$data])">&nbsp;+? energy</span>
                         </button>
                     </div>

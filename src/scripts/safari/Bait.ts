@@ -33,7 +33,7 @@ BaitList['Bait'] = new Bait(BaitType.Bait, 'Bait', 'some bait', 'assets/images/s
         pokemon.angry = 0;
 
     });
-BaitList['Razz'] = new Bait(BaitType.Razz, 'Razz Berry', 'a Razz Berry', 'assets/images/items/Razz.png',
+BaitList['Razz'] = new Bait(BaitType.Razz, 'Razz Berry', 'a Razz Berry', FarmController.getBerryImage(BerryType.Razz),
     () => App.game.farming.berryList[BerryType.Razz](),
     (pokemon: SafariPokemon) => {
         GameHelper.incrementObservable(App.game.farming.berryList[BerryType.Razz], -1);
@@ -41,7 +41,7 @@ BaitList['Razz'] = new Bait(BaitType.Razz, 'Razz Berry', 'a Razz Berry', 'assets
         pokemon.eating = Math.max(pokemon.eating, Math.floor(Math.random() * 6 + 2));
         pokemon.angry = 0;
     });
-BaitList['Nanab'] = new Bait(BaitType.Nanab, 'Nanab Berry', 'a Nanab Berry', 'assets/images/items/Nanab.png',
+BaitList['Nanab'] = new Bait(BaitType.Nanab, 'Nanab Berry', 'a Nanab Berry', FarmController.getBerryImage(BerryType.Nanab),
     () => App.game.farming.berryList[BerryType.Nanab](),
     (pokemon: SafariPokemon) => {
         GameHelper.incrementObservable(App.game.farming.berryList[BerryType.Nanab], -1);

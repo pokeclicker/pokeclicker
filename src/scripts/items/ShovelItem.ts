@@ -12,6 +12,10 @@ class ShovelItem extends Item {
 
     use() {
     }
+
+    get imagePath() {
+        return `assets/images/items/farm/${this.name()}.png`;
+    }
 }
 
 ItemList['Berry_Shovel']   = new ShovelItem(300, 'Berry Shovel', 'Removes Berry Plants in the Farm.');
