@@ -49,17 +49,16 @@
                         <button class='col-12 col-md-4 btn btn-primary' onClick='Mine.toolSelected(Mine.Tool.Hammer)'>Hammer (<knockout data-bind="text: Underground.HAMMER_ENERGY"></knockout> energy)</button>
                         <button class='col-12 col-md-4 btn btn-info' onClick='Mine.toolSelected(Mine.Tool.Chisel)'>Chisel (<knockout data-bind="text: Underground.CHISEL_ENERGY"></knockout> energy)</button>
                         <button class="col-12 col-md-4 btn btn-secondary"
-                                id="#mine-survey-result"
-                                data-bind="
+                            id="mine-survey-result"
+                            data-bind="
                                 text: Mine.itemsFound() + ' / ' + Mine.itemsBuried() + ' items found' ,
                                 tooltip: {
-                                title: ()=>
-                            Mine.surveyResult() || 'Conduct a Survey to get more details',
-                            trigger: 'hover',
-                            placement:'top',
-                            html: true,
-                            }
-                            "
+                                    title: () =>
+                                        Mine.surveyResult() || 'Conduct a Survey to get more details',
+                                        trigger: 'hover',
+                                        placement:'top',
+                                        html: true,
+                                }"
                             >
                         </button>
                         <button class='col-12 col-md-4 btn btn-success'
@@ -120,7 +119,7 @@
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
                                 'data': {'totalBonus': App.game.underground.getSurvey_Efficiency(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Efficiency)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus' : App.game.underground.getYLayers() - 12, 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer)}}"></tr>
+                                'data': {'totalBonus' : App.game.underground.getSizeY() - Underground.sizeY, 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer)}}"></tr>
                         </tbody>
                     </table>
                 </div>
