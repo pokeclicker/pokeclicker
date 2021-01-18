@@ -30,7 +30,7 @@ class EvolutionStone extends CaughtIndicatingItem {
         }, CaughtStatus.CaughtShiny);
     }
 
-    get imagePath() {
+    get image() {
         return `assets/images/items/evolution/${this.name()}.png`;
     }
 }

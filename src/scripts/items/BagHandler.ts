@@ -33,9 +33,9 @@ class BagHandler {
         }
         switch (item.type) {
             case ItemType.item:
-                return this.getItem(item.id).imagePath;
+                return this.getItem(item.id).image;
             case ItemType.underground:
-                return this.getUndergroundItem(item.id).imagePath;
+                return this.getUndergroundItem(item.id).image;
             case ItemType.berry:
                 return FarmController.getBerryImage(this.getBerry(item.id));
             case ItemType.shard:

@@ -42,12 +42,12 @@ class UndergroundItem {
         return this.name;
     }
 
-    get imagePath() {
+    get image() {
         // Have to add extra logic here since images are all over the place in location and naming standards
         // Maybe one day we refactor the item system to be cleaner
         if (this.isStone()) {
             const evostone: EvolutionStone = (ItemList[this.valueType] as EvolutionStone);
-            return evostone.imagePath;
+            return evostone.image;
         } else if (this.valueType == 'Mine Egg') {
             return `assets/images/breeding/${this.name}.png`;
         } else {

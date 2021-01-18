@@ -28,7 +28,7 @@ class PokemonItem extends CaughtIndicatingItem {
         return PartyController.getCaughtStatusByName(this.name() as PokemonNameType);
     }
 
-    get imagePath() {
+    get image() {
         return `assets/images/items/pokemonItem/${this.name()}.png`;
     }
 

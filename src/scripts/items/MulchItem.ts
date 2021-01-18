@@ -16,7 +16,7 @@ class MulchItem extends Item {
     use() {
     }
 
-    get imagePath() {
+    get image() {
         return `assets/images/items/farm/${this.name()}.png`;
     }
 }

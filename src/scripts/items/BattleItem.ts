@@ -20,7 +20,7 @@ class BattleItem extends Item {
         EffectEngineRunner.addEffect(this.name(), ItemHandler.amountToUse);
     }
 
-    get imagePath() {
+    get image() {
         return `assets/images/items/battleItem/${this.name()}.png`;
     }
 }

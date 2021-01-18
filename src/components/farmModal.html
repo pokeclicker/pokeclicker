@@ -84,7 +84,7 @@
                                                 css: { 'active': FarmController.selectedMulch() == $data && !FarmController.selectedShovel() },
                                                 tooltip: {title: ItemList[MulchType[$data]].description, trigger: 'hover', animation: false}">
                                             <img src="" width="24px"
-                                                data-bind="attr:{ src: ItemList[MulchType[$data]].imagePath }">
+                                                data-bind="attr:{ src: ItemList[MulchType[$data]].image }">
                                             <span data-bind="text: MulchType[$data].replace('_', ' ')"></span>
                                             <span class="float-right" data-bind="text: App.game.farming.mulchList[$data]().toLocaleString('en-US')"></span>
                                         </li>
@@ -118,7 +118,7 @@
                                     css: { 'active': FarmController.selectedShovel() },
                                     tooltip: {title: 'Clear a Plant from a plot.', trigger: 'hover', animation: false}">
                                     <img src="" height="24px"
-                                        data-bind="attr:{ src: ItemList['Berry_Shovel'].imagePath }">
+                                        data-bind="attr:{ src: ItemList['Berry_Shovel'].image }">
                                     <span>Shovel</span>
                                     <span class="float-right" data-bind="text: App.game.farming.shovelAmt().toLocaleString('en-US')"></span>
                                 </li>

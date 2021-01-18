@@ -158,7 +158,7 @@ abstract class Item {
         return GameConstants.humanifyString(this._displayName);
     }
 
-    get imagePath() {
+    get image() {
         return `assets/images/items/${this.name()}.png`;
     }
 }

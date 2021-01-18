@@ -86,7 +86,7 @@
                          data-bind="template: { name: 'caughtStatusTemplate', data: {'status': $data.getCaughtStatus()}}">
                    </span>
                </knockout>
-               <img src="" height="36px" data-bind="attr:{ src: $data.imagePath }">
+               <img src="" height="36px" data-bind="attr:{ src: $data.image }">
                <p data-bind="text: $data.displayName">Item Name</p>
                <div data-bind="if: $data.isAvailable()">
                     <span data-bind="template: { name: 'currencyTemplate', data: {'amount': totalPrice(ShopHandler.amount()), 'currency': currency, 'reducedThreshold': 1e10}}"></span>

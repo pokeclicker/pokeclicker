@@ -2,7 +2,7 @@ class BattleFrontierMilestone {
     constructor (
         public stage: number,
         public rewardFunction: () => void,
-        public _imagePath?: string,
+        public _image?: string,
         private _description?: string
     ) {}
 
@@ -10,8 +10,8 @@ class BattleFrontierMilestone {
         this.rewardFunction();
     }
 
-    get imagePath() {
-        return this._imagePath;
+    get image() {
+        return this._image;
     }
 
     get description() {

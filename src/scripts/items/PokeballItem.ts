@@ -17,7 +17,7 @@ class PokeballItem extends Item {
     use() {
     }
 
-    get imagePath() {
+    get image() {
         return `assets/images/items/pokeball/${this.name()}.png`;
     }
 }

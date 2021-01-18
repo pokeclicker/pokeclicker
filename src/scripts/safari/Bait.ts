@@ -11,7 +11,7 @@ class Bait {
         public type: BaitType,
         public name: string,
         public useName: string,
-        public imagePath: string,
+        public image: string,
         public amount: () => string | number,
         public use: (pokemon: SafariPokemon) => void
     ) { }

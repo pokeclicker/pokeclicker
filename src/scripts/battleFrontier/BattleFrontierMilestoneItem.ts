@@ -15,8 +15,8 @@ class BattleFrontierMilestoneItem extends BattleFrontierMilestone {
         }
     }
 
-    get imagePath() {
-        return ItemList[this.itemName].imagePath;
+    get image() {
+        return ItemList[this.itemName].image;
     }
 
     get description() {
