@@ -119,7 +119,7 @@
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
                                 'data': {'totalBonus': App.game.underground.getSurvey_Efficiency(), 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.Survey_Efficiency)}}"></tr>
                             <tr data-bind="template: { name: 'undergroundUpgradeTemplate',
-                                'data': {'totalBonus' : App.game.underground.getSizeY() - 12, 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer)}}"></tr>
+                                'data': {'totalBonus' : App.game.underground.getSizeY() - Underground.sizeY, 'upgrade': App.game.underground.getUpgrade(UndergroundUpgrade.Upgrades.NewYLayer)}}"></tr>
                         </tbody>
                     </table>
                 </div>
