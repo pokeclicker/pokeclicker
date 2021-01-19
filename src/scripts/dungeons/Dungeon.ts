@@ -830,44 +830,44 @@ dungeonList['P2 Laboratory'] = new Dungeon('P2 Laboratory',
 dungeonList['Santalune Forest'] = new Dungeon('Santalune Forest',
     ['Caterpie', 'Metapod', 'Weedle', 'Kakuna', 'Fletchling'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
+    5303000,
     [
-        new DungeonBossPokemon('Pikachu', 8000000, 100),
-        new DungeonBossPokemon('Scatterbug', 8000000, 100),
+        new DungeonBossPokemon('Pikachu', 62000000, 100),
+        new DungeonBossPokemon('Scatterbug', 62000000, 100),
     ],
     96500, 230, 100);
 
 dungeonList['Parfum Palace'] = new Dungeon('Parfum Palace',
     ['Goldeen', 'Seaking', 'Magikarp', 'Gyarados', 'Corphish', 'Crawdaunt'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [new DungeonBossPokemon('Furfrou', 8000000, 100)],
+    6003000,
+    [new DungeonBossPokemon('Furfrou', 70000000, 100)],
     96500, 230, 100);
 
 dungeonList['Connecting Cave'] = new Dungeon('Connecting Cave',
     ['Zubat', 'Whismur', 'Meditite'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
-    [new DungeonBossPokemon('Axew', 8000000, 100)],
+    6503000,
+    [new DungeonBossPokemon('Axew', 72500000, 100)],
     96500, 230, 100);
 
 dungeonList['Glittering Cave'] = new Dungeon('Glittering Cave',
     ['Machop', 'Onix', 'Cubone', 'Rhyhorn', 'Lunatone', 'Solrock'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
+    7003000,
     [
-        new DungeonBossPokemon('Kangaskhan', 8000000, 100),
-        new DungeonBossPokemon('Mawile', 8000000, 100),
+        new DungeonBossPokemon('Kangaskhan', 80000000, 100),
+        new DungeonBossPokemon('Mawile', 77500000, 100),
     ],
     96500, 230, 100);
 
 dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
     ['Mr. Mime', 'Sableye', 'Chingling', 'Roggenrola', 'Solosis'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
+    7653000,
     [
-        new DungeonBossPokemon('Wobbuffet', 8000000, 100),
-        new DungeonBossPokemon('Carbink', 8000000, 100),
+        new DungeonBossPokemon('Wobbuffet', 83000000, 100),
+        new DungeonBossPokemon('Carbink', 83000000, 100),
     ],
     96500, 230, 100);
 
@@ -880,66 +880,66 @@ dungeonList['Reflection Cave'] = new Dungeon('Reflection Cave',
 dungeonList['Lost Hotel'] = new Dungeon('Lost Hotel',
     ['Magneton', 'Electrode', 'Litwick', 'Pawniard'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
+    8003000,
     [
-        new DungeonBossPokemon('Trubbish', 8000000, 100),
-        new DungeonBossPokemon('Rotom', 8000000, 100),
-        new DungeonBossPokemon('Klefki', 8000000, 100),
+        new DungeonBossPokemon('Trubbish', 90000000, 100),
+        new DungeonBossPokemon('Rotom', 90000000, 100),
+        new DungeonBossPokemon('Klefki', 92500000, 100),
     ],
     96500, 230, 100);
 
 dungeonList['Frost Cavern'] = new Dungeon('Frost Cavern',
     ['Poliwhirl', 'Haunter', 'Piloswine', 'Floatzel', 'Bergmite'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
+    8253000,
     [
-        new DungeonBossPokemon('Jynx', 8000000, 100),
-        new DungeonBossPokemon('Beartic', 8000000, 100),
-        new DungeonBossPokemon('Cryogonal', 8000000, 100),
+        new DungeonBossPokemon('Jynx', 92000000, 100),
+        new DungeonBossPokemon('Beartic', 92000000, 100),
+        new DungeonBossPokemon('Cryogonal', 92000000, 100),
     ],
     96500, 230, 100);
 
 dungeonList['Team Flare Secret HQ'] = new Dungeon('Team Flare Secret HQ',
     ['Golbat', 'Gyarados', 'Houndoom', 'Mightyena', 'Manectric', 'Swalot', 'Toxicroak', 'Honchkrow', 'Liepard', 'Scrafty', 'Mienshao', 'Pyroar'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
+    9003000,
     [
-        new DungeonBossPokemon('Xerneas', 8000000, 100),
-        new DungeonBossPokemon('Yveltal', 8000000, 100),
+        new DungeonBossPokemon('Xerneas', 115000000, 100),
+        new DungeonBossPokemon('Yveltal', 115000000, 100),
     ],
     96500, 230, 100);
 
 dungeonList['Terminus Cave'] = new Dungeon('Terminus Cave',
     ['Sandslash', 'Graveler', 'Lairon', 'Shuckle', 'Ariados'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
+    8753000,
     [
-        new DungeonBossPokemon('Durant', 8000000, 100),
-        new DungeonBossPokemon('Pupitar', 8000000, 100),
-        new DungeonBossPokemon('Noibat', 8000000, 100),
-        new DungeonBossPokemon('Zygarde', 8000000, 100, new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)),
+        new DungeonBossPokemon('Durant', 102000000, 100),
+        new DungeonBossPokemon('Pupitar', 102000000, 100),
+        new DungeonBossPokemon('Noibat', 102000000, 100),
+        new DungeonBossPokemon('Zygarde', 110000000, 100, new GymBadgeRequirement(BadgeEnums.Elite_KalosChampion)),
     ],
     96500, 230, 100);
 
 dungeonList['Pokémon Village'] = new Dungeon('Pokémon Village',
     ['Jigglypuff', 'Poliwhirl', 'Noctowl', 'Lombre', 'Gothorita', 'Amoonguss'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
+    8503000,
     [
-        new DungeonBossPokemon('Ditto', 8000000, 100),
-        new DungeonBossPokemon('Zoroark', 8000000, 100),
+        new DungeonBossPokemon('Ditto', 90000000, 100),
+        new DungeonBossPokemon('Zoroark', 90000000, 100),
     ],
     96500, 230, 100);
 
 dungeonList['Victory Road Kalos'] = new Dungeon('Victory Road Kalos',
     ['Graveler', 'Haunter', 'Gurdurr', 'Druddigon', 'Ariados'],
     [GameConstants.BattleItemType.xClick, GameConstants.BattleItemType.Item_magnet],
-    2203000,
+    9003000,
     [
-        new DungeonBossPokemon('Lickitung', 8000000, 100),
-        new DungeonBossPokemon('Skarmory', 8000000, 100),
-        new DungeonBossPokemon('Zweilous', 8000000, 100),
-        new DungeonBossPokemon('Noibat', 8000000, 100),
+        new DungeonBossPokemon('Lickitung', 95000000, 100),
+        new DungeonBossPokemon('Skarmory', 95000000, 100),
+        new DungeonBossPokemon('Zweilous', 95000000, 100),
+        new DungeonBossPokemon('Noibat', 95000000, 100),
     ],
     96500, 230, 100);
 
