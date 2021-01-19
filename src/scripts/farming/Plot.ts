@@ -343,14 +343,23 @@ class Plot implements Saveable {
             const wanderPokemon = availablePokemon[Math.floor(Math.random() * availablePokemon.length)];
 
             const shiny = PokemonFactory.generateShiny(GameConstants.SHINY_CHANCE_FARM);
+
+            // Add to log book
+            const pokemonStr = shiny ? `shiny ${wanderPokemon}` : wanderPokemon;
+            App.game.logbook.newLog(LogBookTypes.WANDER, `A wild ${pokemonStr} has wandered onto the farm!`);
+
+            // Gain Pokemon
             App.game.party.gainPokemonById(PokemonHelper.getPokemonByName(wanderPokemon).id, shiny, true);
 
             // Check for Starf berry generation
             if (shiny) {
                 const emptyPlots = App.game.farming.plotList.filter(plot => plot.isUnlocked && plot.isEmpty());
-                const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
-                chosenPlot.plant(BerryType.Starf);
-                App.game.farming.unlockBerry(BerryType.Starf);
+                // No Starf generation if no empty plots :(
+                if (emptyPlots.length) {
+                    const chosenPlot = emptyPlots[Math.floor(Math.random() * emptyPlots.length)];
+                    chosenPlot.plant(BerryType.Starf);
+                    App.game.farming.unlockBerry(BerryType.Starf);
+                }
             }
 
             return {pokemon: wanderPokemon, shiny: shiny};
