@@ -1765,6 +1765,7 @@ TownList['Geosenge Town'] = new Town(
     {
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 10)],
         shop: GeosengeTownShop,
+        dungeon: dungeonList['Team Flare Secret HQ'],
     }
 );
 TownList['Shalour City'] = new Town(
@@ -1822,8 +1823,8 @@ TownList['Snowbelle City'] = new Town(
         requirements: [new RouteKillRequirement(10, GameConstants.Region.kalos, 19)],
     }
 );
-TownList['Pokémon League Kalos'] = new Town(
-    'Pokémon League Kalos',
+TownList['Pokemon League Kalos'] = new Town(
+    'Pokemon League Kalos',
     GameConstants.Region.kalos,
     {
         requirements: [new ClearDungeonRequirement(1, GameConstants.getDungeonIndex('Victory Road Kalos'))],
