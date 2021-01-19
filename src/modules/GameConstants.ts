@@ -502,7 +502,7 @@ export const Environments: Record<string, EnvironmentData> = {
         [Region.kanto]: new Set(['Saffron City', 'Pokemon Tower']),
         [Region.johto]: new Set(['Ecruteak City']),
         [Region.hoenn]: new Set(['Mossdeep City', 'Mt. Pyre']),
-        [Region.sinnoh]: new Set(['Hearthome City']),
+        [Region.sinnoh]: new Set(['Hearthome City', 'Distortion World']),
         [Region.unova]: new Set(['Celestial Tower']),
         [Region.kalos]: new Set(),
         [Region.alola]: new Set(),
